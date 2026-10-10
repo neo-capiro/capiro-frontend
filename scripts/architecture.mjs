@@ -10,6 +10,7 @@ const slash = value => value.split(path.sep).join('/');
 export function inspectSources(files, publicExports = new Set(['@capiro/ui/button', '@capiro/ui/prompt-input', '@capiro/meri-contracts', '@capiro/meri-contracts/browser', '@capiro/meri-contracts/metadata', '@capiro/meri-ui-stream/protocol'])) {
   const errors = [], signals = [], graph = new Map();
   const feature = name => name.match(/\/features\/([^/]+)\//)?.[1];
+  const owner = name => name.match(/^(?:apps|packages)\/[^/]+(?=\/)/)?.[0];
   for (const [name, source] of files) {
     if (!/\.(ts|tsx|mjs|mts)$/.test(name)) continue;
     if (/\/features\/(portfolio|modules|settings)\//.test(name)) errors.push(`${name}: future feature implementation not allocated`);
@@ -37,6 +38,7 @@ export function inspectSources(files, publicExports = new Set(['@capiro/ui/butto
       const base = path.posix.normalize(path.posix.join(path.posix.dirname(name), specifier)).replace(/\.js$/, '');
       const resolved = extensions.map(extension => base + extension).find(candidate => files.has(candidate));
       if (!resolved) { errors.push(`${name}: unresolved or outside-app import ${specifier}`); continue; }
+      if (!owner(name) || owner(name) !== owner(resolved)) errors.push(`${name}: private cross-owner import ${resolved}; use an approved public package export`);
       if (feature(name) && feature(resolved) && feature(name) !== feature(resolved)) errors.push(`${name}: private cross-feature import ${resolved}`);
       edges.push(resolved);
     }

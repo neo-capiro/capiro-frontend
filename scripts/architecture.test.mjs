@@ -28,3 +28,26 @@ test('browser client resolves emitted JS imports and refuses server or Node cont
   assert.equal(errors.filter(value => value.includes('non-public package')).length, 2);
   assert.ok(errors.some(value => value.includes('unresolved or outside-app')));
 });
+
+test('resolved relative imports cannot cross application and package ownership in either direction', () => {
+  const app = 'apps/web/src/app/page.tsx', client = 'packages/meri-client/src/projection.ts';
+  for (const [from, to, specifier] of [[app, client, '../../../../packages/meri-client/src/projection.js'], [client, app, '../../../apps/web/src/app/page']]) {
+    for (const source of [`import '${specifier}';`, `export * from '${specifier}';`, `void import('${specifier}');`]) {
+      const result = inspectSources(new Map([[from, source], [to, 'export const fixture = 1;']]));
+      assert.deepEqual(result.errors, [`${from}: private cross-owner import ${to}; use an approved public package export`]);
+    }
+  }
+});
+
+test('same-owner relative edges and explicitly approved public package imports stay valid', () => {
+  const files = new Map([
+    ['apps/web/src/app/page.tsx', "import '@capiro/meri-client/projection'; import '../features/meri/Home';"],
+    ['apps/web/src/features/meri/Home.tsx', 'export const Home = 1;'],
+    ['packages/meri-client/src/transport.ts', "import './projection.js';"],
+    ['packages/meri-client/src/projection.ts', 'export const projection = 1;'],
+  ]);
+  const result = inspectSources(files, new Set(['@capiro/meri-client/projection']));
+  assert.deepEqual(result.errors, []);
+  assert.deepEqual(result.graph['apps/web/src/app/page.tsx'], ['apps/web/src/features/meri/Home.tsx']);
+  assert.deepEqual(result.graph['packages/meri-client/src/transport.ts'], ['packages/meri-client/src/projection.ts']);
+});

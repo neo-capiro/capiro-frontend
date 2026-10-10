@@ -3,14 +3,25 @@ import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+const ordinaryRecord = value => value !== null && typeof value === 'object'
+  && [Object.prototype, null].includes(Object.getPrototypeOf(value));
+
 /** Byte binding only. Source review and authorization are separate decisions. */
 export function verifyPackageInputs(manifest, readArtifact) {
-  if (manifest?.schema !== 'capiro-public-package-inputs/1' || !Array.isArray(manifest.artifacts) || !manifest.artifacts.length) throw Error('Invalid public package manifest');
+  if (!ordinaryRecord(manifest) || manifest.schema !== 'capiro-public-package-inputs/1' || !Array.isArray(manifest.artifacts) || !manifest.artifacts.length) throw Error('Invalid public package manifest');
   const seen = new Set();
-  return manifest.artifacts.map(record => {
-    if (!/^[a-z0-9][a-z0-9.-]*\.tgz$/.test(record.file) || seen.has(record.file)) throw Error('Invalid or duplicate artifact filename');
-    if (!/^[a-f0-9]{40}$/.test(record.sourceCommit) || !/^[a-f0-9]{64}$/.test(record.sha256) || !Number.isSafeInteger(record.bytes) || record.bytes < 1) throw Error('Invalid public package binding');
-    seen.add(record.file);
+  const records = manifest.artifacts.map(record => {
+    if (!ordinaryRecord(record) || ['file', 'sourceCommit', 'sha256', 'bytes'].some(key => {
+      const field = Object.getOwnPropertyDescriptor(record, key);
+      return !field || !Object.hasOwn(field, 'value');
+    })) throw Error('Invalid public package binding');
+    const { file, sourceCommit, sha256, bytes } = record;
+    if (typeof file !== 'string' || !/^[a-z0-9][a-z0-9.-]*\.tgz$/.test(file) || seen.has(file)) throw Error('Invalid or duplicate artifact filename');
+    if (typeof sourceCommit !== 'string' || typeof sha256 !== 'string' || !/^[a-f0-9]{40}$/.test(sourceCommit) || !/^[a-f0-9]{64}$/.test(sha256) || !Number.isSafeInteger(bytes) || bytes < 1) throw Error('Invalid public package binding');
+    seen.add(file);
+    return { file, sourceCommit, sha256, bytes };
+  });
+  return records.map(record => {
     const raw = readArtifact(record.file);
     if (raw.length !== record.bytes || createHash('sha256').update(raw).digest('hex') !== record.sha256) throw Error(`Public package drift: ${record.file}`);
     return { file: record.file, bytes: raw.length, sha256: record.sha256, sourceCommit: record.sourceCommit };
