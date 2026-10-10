@@ -28,7 +28,7 @@ test('all nineteen exact design assets are local, nonempty, hash-bound and retai
 });
 
 test('no application source retains temporary Figma asset URLs or screenshot implementation imagery', () => {
-  for (const relative of ['shared/shell/Header.tsx', 'shared/shell/Sidebar.tsx', 'shared/shell/DesignIcon.tsx', 'features/meri/MeriHome.tsx', 'features/meri/MeriComposer.tsx', 'features/meri/Suggestions.tsx']) {
+  for (const relative of ['shared/shell/Header.tsx', 'shared/shell/Sidebar.tsx', 'shared/shell/DesignIcon.tsx', 'features/meri/MeriHome.tsx', 'features/meri/MeriComposer.tsx', 'features/meri/MeriSuggestions.tsx']) {
     const source = readFileSync(new URL(`../src/${relative}`, import.meta.url), 'utf8');
     assert.ok(!source.includes('figma.com/api/mcp/asset/')); assert.ok(!source.includes('home-442-81437.png'));
   }

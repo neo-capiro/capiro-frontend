@@ -23,6 +23,7 @@
 .sparkleSlot { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; }
 .card h2 { font-size: 14px; line-height: 1.45; font-weight: 500; letter-spacing: -.07px; }
 .card p { font-size: 12px; line-height: 1.4; color: var(--muted-foreground); }
-.moreSuggestions { display: flex; justify-content: center; gap: 8px; }
+.moreSuggestions { display: flex; width: 469px; max-width: 100%; align-self: center; gap: 8px; }
+.moreSuggestions .start { flex-shrink: 0; white-space: nowrap; }
 @media (max-width: 1100px) { .welcomeGroup { margin-top: 110px; } .welcome h1 { font-size: 34px; } .moreSuggestions { flex-wrap: wrap; } }
 @media (max-width: 680px) { .home { padding: 24px 16px; } .welcomeGroup { margin-top: 80px; } .welcome h1 { font-size: 30px; } .welcome p { font-size: 19px; } .composerFooter { width: 100%; flex-wrap: wrap; } .send { margin-left: auto; } .suggestions { grid-template-columns: 1fr; } }

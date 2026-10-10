@@ -16,6 +16,24 @@
     "bytes": 83894,
     "sha256": "bfee0bfb07f6be853c09ae6a982aec41be0e5812fe21ff8af4a0145ecb8d8378"
   },
+  "finalHomeReference": {
+    "nodeId": "442:81437",
+    "addedControl": {"nodeId": "733:148128", "label": "Browse workflows", "availability": "disabled-until-workflow-library-implemented"},
+    "context": {
+      "path": "C:/dev/main/capiro-frontend-worktrees/workspace-integration/.task-inputs/CODEX-FRONTEND-figma-final-1/context.txt",
+      "bytes": 37892,
+      "sha256": "6376ae15cd63b517b180c598a61a1e96742c7a6fb0ddd4353583be9019713616"
+    },
+    "screenshot": {
+      "path": "C:/dev/main/capiro-frontend-worktrees/workspace-integration/.task-inputs/CODEX-FRONTEND-figma-final-1/home-442-81437.png",
+      "bytes": 58731,
+      "sha256": "2e6568cf812d6a062d7bb2e38eb7cd6533dd48cc186ff0bf8473d7ce250c7e65",
+      "renderWidth": 1024,
+      "renderHeight": 740
+    },
+    "assetDisposition": "All19 original asset records and25 rendered slots retained; final context adds no asset.",
+    "limitations": "Later non-atomic live reference; immutable Figma revision unavailable. Screenshot is evidence only. Home-only amendment, no other screen or live behavior acceptance."
+  },
   "assets": [
     {
       "constant": "imgIconSparkle",
