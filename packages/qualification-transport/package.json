@@ -1,0 +1,16 @@
+{
+  "name": "@capiro/qualification-transport",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Offline actual SDK producer/client public-interface qualification",
+  "scripts": { "test": "node --test qualification.test.mjs" },
+  "dependencies": {
+    "@capiro/meri-client": "file:../meri-client",
+    "@capiro/meri-contracts": "file:../../vendor/capiro-meri-contracts-0.1.0.tgz",
+    "@capiro/meri-ui-stream": "file:../../vendor/capiro-meri-ui-stream-0.1.0.tgz",
+    "@ai-sdk/react": "4.0.140", "ai": "7.0.137", "react": "19.3.0", "zod": "4.6.5"
+  },
+  "overrides": { "uuid": "14.0.2" },
+  "engines": { "node": ">=24 <25" }
+}

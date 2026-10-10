@@ -1,0 +1,5 @@
+# Public UI transport qualification
+
+Run `npm test` after building @capiro/meri-client. This package uses only public contracts, trusted producer and client exports plus the real qualified AI SDK. The test blocks global fetch and injects synthetic web Responses. It starts no server/browser/provider. The old19 assertions survive with the historical mock /api/chat endpoint supplied explicitly; two additional controls verify missing configuration fails before fetch and actual browser validation guards the composed stream.
+
+`transport-migration.json` maps all12 original backend qualification files and all19 original case names. Only implementation/config import layout and documented endpoint configuration change; duplicate wire types and obsolete qualification metadata are retired. Git preserves historical original bytes; there is no competing copied implementation. The separate Elements package retains its15-case fixture. None of this proves live identity, policy, network isolation, durable resume or deployment readiness.

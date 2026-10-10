@@ -1,0 +1,24 @@
+{
+  "name": "@capiro/meri-client",
+  "version": "0.1.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "description": "Guarded Meri browser subscription and conversation projection",
+  "type": "module",
+  "files": ["dist", "README.md"],
+  "exports": {
+    ".": { "types": "./dist/guarded-transport.d.ts", "default": "./dist/guarded-transport.js" },
+    "./projection": { "types": "./dist/projection.d.ts", "default": "./dist/projection.js" },
+    "./react": { "types": "./dist/client-facade.d.ts", "default": "./dist/client-facade.js" }
+  },
+  "scripts": { "build": "tsc -p tsconfig.json", "typecheck": "tsc -p tsconfig.json --noEmit" },
+  "peerDependencies": { "@capiro/meri-contracts": "0.1.0", "@capiro/meri-ui-stream": "0.1.0", "@ai-sdk/react": "4.0.140", "ai": "7.0.137", "react": "19.3.0" },
+  "devDependencies": {
+    "@capiro/meri-contracts": "file:../../vendor/capiro-meri-contracts-0.1.0.tgz",
+    "@capiro/meri-ui-stream": "file:../../vendor/capiro-meri-ui-stream-0.1.0.tgz",
+    "@ai-sdk/react": "4.0.140", "ai": "7.0.137", "react": "19.3.0",
+    "@types/react": "19.3.0", "typescript": "5.9.3"
+  },
+  "overrides": { "uuid": "14.0.2" },
+  "engines": { "node": ">=24 <25" }
+}

@@ -1,0 +1,23 @@
+{
+  "schema": "capiro-public-package-inputs/1",
+  "artifacts": [
+    {
+      "file": "capiro-meri-contracts-0.1.0.tgz",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "0dc9ce423947fc7814d7f8ad8de2f633c187c6d8",
+      "bytes": 48823,
+      "sha256": "2f15ade9458cbffe960b7cc36c6fb77cb54cc2a0eca4bc7c0f918b77cfacd4ee",
+      "regularEntryCount": 11,
+      "status": "candidate-pending-independent-review"
+    },
+    {
+      "file": "capiro-meri-ui-stream-0.1.0.tgz",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "12289a434be6f589bbff9c741367b8cfb77f2616",
+      "bytes": 2280,
+      "sha256": "7ce24acd465dca4c5e90c1c98dba383318aab024dbce5170fa1f1daf3bce83ab",
+      "regularEntryCount": 6,
+      "status": "candidate-pending-independent-review"
+    }
+  ]
+}

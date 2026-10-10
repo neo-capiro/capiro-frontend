@@ -1,0 +1,11 @@
+# Meri browser client
+
+This package owns browser subscription guarding, immutable conversation projection and the React facade. Trusted source access, authentication, authorization, publication fences and durable state remain in the separate Meri backend.
+
+Import `createMeriChat`, `MeriGuardedTransport` or `guardUiChunk` from the root; projection and safe error rendering from `/projection`; `useMeriChat` and `detachMeriView` from `/react`. The React entry is explicitly a client component. Private source imports are unsupported. Canonical wire types/validators are supplied by public @capiro/meri-contracts0.1.0; the separate backend stream adapter owns SDK transport protocol names. There is no mirrored event DTO authority here.
+
+The caller supplies an explicit approved `api` endpoint, authenticated fetch and a validator that returns a canonical UIEvent or throws. The migration intentionally removes the qualification's guessed `/api/chat` default; missing/blank endpoints fail before Chat allocation or fetch. Offline fixtures supply that historical mock route explicitly. Offline qualification injects the canonical Node validator; a browser integration must use the public browser validator at this same boundary. A browser view is an intended subscription scope, never proof of authorization. The server must establish trusted context and recheck current authority. Every event is validated before synchronous projection admission. Immutable conflict or cross-view binding aborts the subscription before the offending event reaches observers. Reconnect uses the accepted contiguous cursor, never a caller-supplied sequence.
+
+`detachMeriView` disposes only the subscription. It does not cancel a run. Stream finish, HTTP204 and hook readiness do not prove run completion; only authoritative run.status does. Browser durable storage, live session binding, revocation and hydrated behavior remain later gates.
+
+Standalone development: `npm ci --ignore-scripts`, then `npm run build`. Compile actual JS/declarations before packing; installed packages must not rely on Node stripping TypeScript. The frontend qualification package preserves the19 original composed behavior cases using public exports. The web fixture is still disconnected and does not instantiate this client against a guessed endpoint.

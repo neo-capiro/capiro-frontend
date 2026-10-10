@@ -1,0 +1,166 @@
+{
+  "schema": "meri-ui-transport-migration/1",
+  "status": "candidate-pending-independent-review",
+  "sourceFileCount": 12,
+  "sourceCommit": "089533104eb567899e79cddf7b400460395e6de0",
+  "originalNineteenTestNames": [
+    "all ten frozen variants compose through the real factory + external Chat and project exactly once in order",
+    "split SSE / UTF-8 byte boundaries do not corrupt frames (real factory path)",
+    "duplicate replay of the same eventId and payload is idempotent",
+    "immutable eventId conflict aborts the subscription and preserves the last contiguous cursor",
+    "duplicate sequence bound to a different eventId aborts the subscription",
+    "a gap pauses the cursor and is repaired by the missing event (real factory path)",
+    "multiple runs and attempts share one conversation-wide sequence (real factory path)",
+    "malformed custom data is rejected on the guard boundary before onData/admission",
+    "the dataPartSchemas runtime/type key mismatch is reproduced at this exact pin",
+    "unexpected native reasoning/tool/text frames are rejected (real factory path)",
+    "run.error is rendered by approved code or generic text, never the raw message",
+    "HTTP 204 reconnect via chat.resumeStream uses the authorized conversation URL and cursor header",
+    "incremental reconnect via chat.resumeStream requests the last accepted sequence and appends",
+    "stop/dispose on a held-open pending stream admit nothing, issue no durable cancel, and leave run status unchanged",
+    "projection snapshots inputs: mutating raw/nested input cannot rewrite accepted history",
+    "projection snapshots committed inputs and nested payloads; factory path is immune to later mutation",
+    "a completed stream outcome does not mark the run complete without an authoritative run.status",
+    "prototype-looking run error codes use only the generic safe string",
+    "mutating factory view input cannot change send or reconnect conversation identity"
+  ],
+  "preservedCases": 19,
+  "addedCases": [
+    "missing endpoint fails before subscription allocation or fetch",
+    "public browser validator guards the actual composed SDK stream and rejects nested extras"
+  ],
+  "records": [
+    {
+      "source": "apps/ui/qualification/.gitignore",
+      "sourceCommit": "089533104eb567899e79cddf7b400460395e6de0",
+      "sourceBytes": 99,
+      "sourceSha256": "b398b65b2e0bc4352b4735607e9afd2d7b243ef0f456db9df767f6b13b2e30d5",
+      "destination": {
+        "disposition": "obsolete qualification-only metadata retired; original remains in immutable source commit; replacement public package metadata, locks, README and generated pin records own current layout"
+      }
+    },
+    {
+      "source": "apps/ui/qualification/README.md",
+      "sourceCommit": "089533104eb567899e79cddf7b400460395e6de0",
+      "sourceBytes": 5364,
+      "sourceSha256": "61cf6f6abd6615230ffec6047d3ed76749bf8cf0b9df29f79bb75fbc724a7617",
+      "destination": {
+        "disposition": "obsolete qualification-only metadata retired; original remains in immutable source commit; replacement public package metadata, locks, README and generated pin records own current layout"
+      }
+    },
+    {
+      "source": "apps/ui/qualification/client-facade.tsx",
+      "sourceCommit": "089533104eb567899e79cddf7b400460395e6de0",
+      "sourceBytes": 1662,
+      "sourceSha256": "193a37231f01d804dad91aeffe2100b5b2d17052e782e7e666a86d81e6e6a459",
+      "destination": {
+        "repository": "capiro-frontend",
+        "path": "packages/meri-client/src/client-facade.tsx",
+        "bytes": 1682,
+        "sha256": "7c2854745cc55c578bf9530c551ea45a0ee050de3c8ac814c61afa89043b1c8f",
+        "disposition": "explicit client directive/public protocol; hook/disposal preserved"
+      }
+    },
+    {
+      "source": "apps/ui/qualification/component-pins.json",
+      "sourceCommit": "089533104eb567899e79cddf7b400460395e6de0",
+      "sourceBytes": 5407,
+      "sourceSha256": "eb9dfd171de38262ba7b187d3aef24166b4715a9ee376526edc70cdfa3726fa0",
+      "destination": {
+        "disposition": "obsolete qualification-only metadata retired; original remains in immutable source commit; replacement public package metadata, locks, README and generated pin records own current layout"
+      }
+    },
+    {
+      "source": "apps/ui/qualification/guarded-transport.ts",
+      "sourceCommit": "089533104eb567899e79cddf7b400460395e6de0",
+      "sourceBytes": 9395,
+      "sourceSha256": "7430e3b6703d09e79a3c95b01f41fdd4f2a0979689eb838f0a181d837bbb5c35",
+      "destination": {
+        "repository": "capiro-frontend",
+        "path": "packages/meri-client/src/guarded-transport.ts",
+        "bytes": 9683,
+        "sha256": "1c9ec9128ad333db214aff636bb1745ccb0a306c3920ccc39643f39e8fafc04c",
+        "disposition": "public imports; JS extension; explicit endpoint required before allocation"
+      }
+    },
+    {
+      "source": "apps/ui/qualification/package-lock.json",
+      "sourceCommit": "089533104eb567899e79cddf7b400460395e6de0",
+      "sourceBytes": 12094,
+      "sourceSha256": "37aa7a3e12d786f32ddd16b073843f4ac37a907e8828c9dbec6df67ff2c2fef8",
+      "destination": {
+        "disposition": "obsolete qualification-only metadata retired; original remains in immutable source commit; replacement public package metadata, locks, README and generated pin records own current layout"
+      }
+    },
+    {
+      "source": "apps/ui/qualification/package.json",
+      "sourceCommit": "089533104eb567899e79cddf7b400460395e6de0",
+      "sourceBytes": 759,
+      "sourceSha256": "f4ed0a3c621ca1db50c49f01e42e460c31d80fb8d77d48453cddd243a6bafb45",
+      "destination": {
+        "disposition": "obsolete qualification-only metadata retired; original remains in immutable source commit; replacement public package metadata, locks, README and generated pin records own current layout"
+      }
+    },
+    {
+      "source": "apps/ui/qualification/producer.ts",
+      "sourceCommit": "089533104eb567899e79cddf7b400460395e6de0",
+      "sourceBytes": 2136,
+      "sourceSha256": "3316a1917cf84db72d9381181cc110b2435c2732ebab0661a494eaab0705a88f",
+      "destination": {
+        "repository": "meri-greenfield",
+        "path": "packages/ui-stream/src/producer.ts",
+        "bytes": 2188,
+        "sha256": "2283d4649c0e8b654a8d1466904f74666aee32cf6e219eb84cab36b21c59aabc",
+        "disposition": "import-only extraction; public protocol/types; algorithm unchanged"
+      }
+    },
+    {
+      "source": "apps/ui/qualification/projection.ts",
+      "sourceCommit": "089533104eb567899e79cddf7b400460395e6de0",
+      "sourceBytes": 9078,
+      "sourceSha256": "c033749d22220efa848f751bc35e6895958cbd4bbfc502aa50533bf69a316b1a",
+      "destination": {
+        "repository": "capiro-frontend",
+        "path": "packages/meri-client/src/projection.ts",
+        "bytes": 9078,
+        "sha256": "b96088b5ca96ff7d5b206fa7d5d459f4a9773b1acf39ffc82df71a859b14d165",
+        "disposition": "public generated types; JS extension; behavior unchanged"
+      }
+    },
+    {
+      "source": "apps/ui/qualification/qualification.test.mjs",
+      "sourceCommit": "089533104eb567899e79cddf7b400460395e6de0",
+      "sourceBytes": 22526,
+      "sourceSha256": "acb6eb7709029016e39458e9fbd1f8892d000b74d174ed5fc7c5f71b87453492",
+      "destination": {
+        "repository": "capiro-frontend",
+        "path": "packages/qualification-transport/qualification.test.mjs",
+        "bytes": 24494,
+        "sha256": "74531c453feb5696f1941e681d3e357025b42d76fe8744cf767e5417f5702fd4",
+        "disposition": "nineteen cases/assertions preserved; public imports; explicit historical mock route; two added boundary controls"
+      }
+    },
+    {
+      "source": "apps/ui/qualification/tsconfig.json",
+      "sourceCommit": "089533104eb567899e79cddf7b400460395e6de0",
+      "sourceBytes": 672,
+      "sourceSha256": "1e70a6426fe21656a72f2f3102dee9c488b95682810e4e254d8ec9a5e9aadaff",
+      "destination": {
+        "disposition": "obsolete qualification-only metadata retired; original remains in immutable source commit; replacement public package metadata, locks, README and generated pin records own current layout"
+      }
+    },
+    {
+      "source": "apps/ui/qualification/types.ts",
+      "sourceCommit": "089533104eb567899e79cddf7b400460395e6de0",
+      "sourceBytes": 4522,
+      "sourceSha256": "4093aff45b8eae7a47a616ea552f82f53299b1e7dba4202aca94fae0775a1512",
+      "destination": {
+        "repository": "meri-greenfield",
+        "path": "packages/contracts/dist/contracts.d.ts",
+        "bytes": 4090,
+        "sha256": "e0366e2f5a668e9e14f09e90c175dce53cbec176125aa98a58c878b44fd74fbd",
+        "disposition": "mirrored wire DTOs retired; generated canonical types, SDK message type in public ui-stream/protocol"
+      }
+    }
+  ]
+}
