@@ -1,0 +1,46 @@
+{
+  "name": "@capiro/ui",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Canonical adopted Capiro presentation primitives. TS source exports; no model/control/qualification runtime.",
+  "license": "Apache-2.0 AND MIT",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "exports": {
+    "./button": "./src/shadcn/button.tsx",
+    "./conversation": "./src/ai-elements/conversation.tsx",
+    "./message": "./src/ai-elements/message.tsx",
+    "./prompt-input": "./src/ai-elements/prompt-input.tsx"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@streamdown/cjk": "1.0.4",
+    "@streamdown/code": "1.1.1",
+    "@streamdown/math": "1.0.3",
+    "@streamdown/mermaid": "1.0.3",
+    "ai": "7.0.137",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "cmdk": "1.1.1",
+    "lucide-react": "0.577.0",
+    "nanoid": "5.1.16",
+    "radix-ui": "1.7.0",
+    "streamdown": "2.7.0",
+    "tailwind-merge": "3.7.0",
+    "use-stick-to-bottom": "1.1.6",
+    "zod": "4.6.5"
+  },
+  "peerDependencies": {
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "typescript": "5.9.3"
+  }
+}
