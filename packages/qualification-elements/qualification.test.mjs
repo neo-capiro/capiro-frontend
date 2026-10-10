@@ -205,7 +205,12 @@ function inspectClosure(sourceMap) {
     writeFileSync(join(clone, 'fixture.tsx'), Buffer.concat([read('fixture.tsx'), Buffer.from(' ')]));
     assert.throws(() => verifySSRReceipt({ receiptPath, expectedSha256, packageRoot: clone }));
     unlinkSync(join(clone, 'fixture.tsx'));
-    assert.throws(() => verifySSRReceipt({ receiptPath, expectedSha256, packageRoot: clone }), /ENOENT/);
+    assert.equal(existsSync(join(clone, 'fixture.tsx')), false, 'missing-source control is physically absent');
+    assert.throws(() => verifySSRReceipt({ receiptPath, expectedSha256, packageRoot: clone }), error => {
+      assert.equal(error.code, 'ERR_ASSERTION');
+      assert.ok(error.message.startsWith('complete actual split-package source pins\n'), 'complete source inventory refuses before input mapping');
+      return true;
+    });
     const child = spawnSync(process.execPath, [join(HERE, 'ssr-runtime.mjs'), receiptPath, '0'.repeat(64)], {
       cwd: HERE, env: { SystemRoot: process.env.SystemRoot ?? '', NODE_DISABLE_COMPILE_CACHE: '1' }, timeout: 25000, maxBuffer: 512 * 1024, encoding: 'utf8', shell: false,
     });
