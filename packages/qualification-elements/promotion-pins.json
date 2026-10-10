@@ -9,6 +9,7 @@
     "packages/qualification-elements/baseline/package-lock.json",
     "packages/qualification-elements/fixture.tsx",
     "packages/qualification-elements/generate-pins.mjs",
+    "packages/qualification-elements/migration-map.json",
     "packages/qualification-elements/package.json",
     "packages/qualification-elements/promotion-pins.json",
     "packages/qualification-elements/qualification.test.mjs",
@@ -81,6 +82,11 @@
       "path": "packages/qualification-elements/generate-pins.mjs",
       "bytes": 1018,
       "sha256": "56be82e1828e6f274f7c552842a60c5a121194f305d49d0953d76f9811bcdb89"
+    },
+    {
+      "path": "packages/qualification-elements/migration-map.json",
+      "bytes": 14376,
+      "sha256": "1185e741cc6b7a4c91490c2d493915d023e5f8e70ffd3815897d00b3c3eb2caa"
     },
     {
       "path": "packages/qualification-elements/package.json",
