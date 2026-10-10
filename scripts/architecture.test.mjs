@@ -19,3 +19,12 @@ test('size and function thresholds require explicit review instead of silent exc
   const source = `export function oversized(){\n${'void 0;\n'.repeat(401)}}`;
   assert.equal(inspectSources(new Map([['apps/web/src/features/meri/large.ts', source]])).signals.length, 2);
 });
+
+test('browser client resolves emitted JS imports and refuses server or Node contract entries', () => {
+  const good = new Map([['packages/meri-client/src/transport.ts', "import type {UIEvent} from '@capiro/meri-contracts'; import './projection.js';"], ['packages/meri-client/src/projection.ts', 'export const projection = 1;']]);
+  assert.deepEqual(inspectSources(good).errors, []);
+  good.set('packages/meri-client/src/transport.ts', "import '@capiro/meri-contracts/node'; import '@capiro/meri-ui-stream'; import '../../ui/src/private';");
+  const errors = inspectSources(good).errors;
+  assert.equal(errors.filter(value => value.includes('non-public package')).length, 2);
+  assert.ok(errors.some(value => value.includes('unresolved or outside-app')));
+});

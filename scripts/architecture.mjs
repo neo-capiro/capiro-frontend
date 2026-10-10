@@ -7,7 +7,7 @@ const extensions = ['', '.ts', '.tsx', '.mjs', '.mts', '.css', '.json', '/index.
 const slash = value => value.split(path.sep).join('/');
 
 /** Inspect authored application sources, never execute application/vendor code. */
-export function inspectSources(files, publicExports = new Set(['@capiro/ui/button', '@capiro/ui/prompt-input'])) {
+export function inspectSources(files, publicExports = new Set(['@capiro/ui/button', '@capiro/ui/prompt-input', '@capiro/meri-contracts', '@capiro/meri-contracts/browser', '@capiro/meri-contracts/metadata', '@capiro/meri-ui-stream/protocol'])) {
   const errors = [], signals = [], graph = new Map();
   const feature = name => name.match(/\/features\/([^/]+)\//)?.[1];
   for (const [name, source] of files) {
@@ -34,7 +34,7 @@ export function inspectSources(files, publicExports = new Set(['@capiro/ui/butto
       if (/meri-greenfield|capirov2|^https?:|^node:/.test(specifier)) errors.push(`${name}: restricted runtime/repository import ${specifier}`);
       if (specifier.startsWith('@capiro/') && !publicExports.has(specifier)) errors.push(`${name}: non-public package import ${specifier}`);
       if (!specifier.startsWith('.')) continue;
-      const base = path.posix.normalize(path.posix.join(path.posix.dirname(name), specifier));
+      const base = path.posix.normalize(path.posix.join(path.posix.dirname(name), specifier)).replace(/\.js$/, '');
       const resolved = extensions.map(extension => base + extension).find(candidate => files.has(candidate));
       if (!resolved) { errors.push(`${name}: unresolved or outside-app import ${specifier}`); continue; }
       if (feature(name) && feature(resolved) && feature(name) !== feature(resolved)) errors.push(`${name}: private cross-feature import ${resolved}`);
@@ -67,6 +67,7 @@ export function discover(root) {
     }
   }
   walk(path.join(root, 'apps/web/src'));
+  walk(path.join(root, 'packages/meri-client/src'));
   return files;
 }
 
