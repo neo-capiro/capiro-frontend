@@ -1,0 +1,160 @@
+{
+  "schema": "capiro-web-dependency-observations/1",
+  "recordedAt": "2026-10-10T17:11:07.302927+00:00",
+  "packages": [
+    {
+      "name": "next",
+      "version": "16.4.0",
+      "license": "MIT",
+      "officialMetadataUrl": "https://registry.npmjs.org/next/16.4.0",
+      "retainedMetadata": {
+        "path": ".task-inputs/CODEX-MERI-FRONTEND-FOUNDATION-1/next_16.4.0.json",
+        "bytes": 3960,
+        "sha256": "05a4c7fa7f621867bdfc933adb804ee54fb615627f4a78d535f74b50dba237b6"
+      },
+      "installedPackageMetadata": {
+        "path": "node_modules/next/package.json",
+        "bytes": 3188,
+        "sha256": "440efba874450dc997b2c3bf9efa4c3c4835abbc40d65442e94a7c69f4bad031"
+      }
+    },
+    {
+      "name": "react",
+      "version": "19.3.0",
+      "license": "MIT",
+      "officialMetadataUrl": "https://registry.npmjs.org/react/19.3.0",
+      "retainedMetadata": {
+        "path": ".task-inputs/CODEX-MERI-FRONTEND-FOUNDATION-1/react_19.3.0.json",
+        "bytes": 2765,
+        "sha256": "1286b6786795173ea924f3fe55549dcbc45019726d1fa417ea708fff6230c5c3"
+      },
+      "installedPackageMetadata": {
+        "path": "node_modules/react/package.json",
+        "bytes": 1242,
+        "sha256": "6e003e4e9ed25afa7fdd55613f8aa877cefa9b359d9c13f81ee704030248e24e"
+      }
+    },
+    {
+      "name": "react-dom",
+      "version": "19.3.0",
+      "license": "MIT",
+      "officialMetadataUrl": "https://registry.npmjs.org/react-dom/19.3.0",
+      "retainedMetadata": {
+        "path": ".task-inputs/CODEX-MERI-FRONTEND-FOUNDATION-1/react-dom_19.3.0.json",
+        "bytes": 4459,
+        "sha256": "1a88cc70f53b2d4d793ee264b65857e3f8b1d9169ecaf1a99143a4344ee55d88"
+      },
+      "installedPackageMetadata": {
+        "path": "node_modules/react-dom/package.json",
+        "bytes": 3054,
+        "sha256": "136d4af63de473392ea79d6a21932b0ed9eb37fe518ce70f4621250f3d79e9bb"
+      }
+    },
+    {
+      "name": "typescript",
+      "version": "5.9.3",
+      "license": "Apache-2.0",
+      "officialMetadataUrl": "https://registry.npmjs.org/typescript/5.9.3",
+      "retainedMetadata": {
+        "path": ".task-inputs/CODEX-MERI-FRONTEND-FOUNDATION-1/typescript_5.9.3.json",
+        "bytes": 5000,
+        "sha256": "b915bb8023bbd9beb59cfb823a9ee7dfa626fd91a8cda6aa786b43ea2ba01779"
+      },
+      "installedPackageMetadata": {
+        "path": "node_modules/typescript/package.json",
+        "bytes": 3620,
+        "sha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6"
+      }
+    },
+    {
+      "name": "geist",
+      "version": "1.7.2",
+      "license": "SIL OPEN FONT LICENSE",
+      "officialMetadataUrl": "https://registry.npmjs.org/geist/1.7.2",
+      "retainedMetadata": {
+        "path": ".task-inputs/CODEX-MERI-FRONTEND-FOUNDATION-1/geist_latest.json",
+        "bytes": 3287,
+        "sha256": "97ac4c2a98fb4ed116905ef7744050294bbb79808630982f4f9921f3abda911f"
+      },
+      "installedPackageMetadata": {
+        "path": "node_modules/geist/package.json",
+        "bytes": 1534,
+        "sha256": "3f70d925be91925b77cdb76cddbcc48a0393f2bb942675b22a16faf163e465ec"
+      }
+    },
+    {
+      "name": "@types/node",
+      "version": "24.0.0",
+      "license": "MIT",
+      "officialMetadataUrl": "https://registry.npmjs.org/@types%2fnode/24.0.0",
+      "retainedMetadata": {
+        "path": ".task-inputs/CODEX-MERI-FRONTEND-FOUNDATION-1/types_node_24.0.0.json",
+        "bytes": 6925,
+        "sha256": "b03f913c7031b71519ebb75ccd20ad8460a4bfa7f9dd5a1882f4167c540383fd"
+      },
+      "installedPackageMetadata": {
+        "path": "node_modules/@types/node/package.json",
+        "bytes": 6848,
+        "sha256": "54803cf67a79a623d61e39bf214cab803243c14353110064d26ecc5664f70c5f"
+      }
+    },
+    {
+      "name": "@types/react",
+      "version": "19.3.0",
+      "license": "MIT",
+      "officialMetadataUrl": "https://registry.npmjs.org/@types%2freact/19.3.0",
+      "retainedMetadata": {
+        "path": ".task-inputs/CODEX-MERI-FRONTEND-FOUNDATION-1/types_react_latest.json",
+        "bytes": 6511,
+        "sha256": "950926666bd9b6bbed8fce4e9c74ce2a1bccfa49125e13daa4dd0d1acfffb160"
+      },
+      "installedPackageMetadata": {
+        "path": "node_modules/@types/react/package.json",
+        "bytes": 6108,
+        "sha256": "505c0df4cd73d6a02c946bd9b81451584bd9c83ea72d75cff9b826efceaa19c2"
+      }
+    },
+    {
+      "name": "@types/react-dom",
+      "version": "19.3.0",
+      "license": "MIT",
+      "officialMetadataUrl": "https://registry.npmjs.org/@types%2freact-dom/19.3.0",
+      "retainedMetadata": {
+        "path": ".task-inputs/CODEX-MERI-FRONTEND-FOUNDATION-1/types_react-dom_latest.json",
+        "bytes": 4146,
+        "sha256": "4f23513faf0cecb42628b59aeb7109a72dbfade0ad15e437cb7e549082afa4cf"
+      },
+      "installedPackageMetadata": {
+        "path": "node_modules/@types/react-dom/package.json",
+        "bytes": 3383,
+        "sha256": "4a2052bb362c34f1d39cfe0818b6fe01a9f988b609e8b7e4832aff7dbf2f7180"
+      }
+    }
+  ],
+  "fontInputs": [
+    {
+      "path": "node_modules/geist/dist/sans.js",
+      "bytes": 187,
+      "sha256": "0c7ab7d557642e7bda3cf4ee7dc9b50a62f25890efa60c33d7981e1b28560da5"
+    },
+    {
+      "path": "node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2",
+      "bytes": 69652,
+      "sha256": "a369fcf5628ea2aa4e1b9e2ec6a5b3624e365bda588e1f0f2f12b564f728fbb8"
+    },
+    {
+      "path": "node_modules/geist/LICENSE.txt",
+      "bytes": 4368,
+      "sha256": "930853ee1daa68554d9e35c8a9175affb74f699fad9a5da6ee5ebe76379d9137"
+    }
+  ],
+  "nodeVersion": "24.19.0",
+  "npmVersion": "11.17.0",
+  "lock": {
+    "path": "package-lock.json",
+    "bytes": 243434,
+    "sha256": "5acf8eabbaf763f400fe705968a31f98d4ef33b3f68d8033afa34bc834200a7e"
+  },
+  "uuidOverride": "14.0.2",
+  "limits": "Registry responses were parsed and reserialized as JSON; these are retained response hashes, not raw HTTP body hashes. Direct package metadata and font bytes are observed here; the complete runtime resolver metadata closure is separately checked by the canonical UI package qualification. Npm lock integrity/resolution is not a malicious-registry or installed-full-code proof. No lifecycle scripts were run at install. Seven low audit advisories remain unresolved."
+}

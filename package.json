@@ -1,0 +1,18 @@
+{
+  "name": "capiro-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": ["apps/*", "packages/*"],
+  "engines": {"node": ">=24 <25"},
+  "scripts": {
+    "dev": "npm run dev --workspace @capiro/web --",
+    "build": "npm run build --workspace @capiro/web",
+    "start": "npm run start --workspace @capiro/web --",
+    "typecheck": "npm run typecheck --workspace @capiro/web",
+    "test": "node --test scripts/architecture.test.mjs apps/web/test/*.test.mjs",
+    "architecture": "node scripts/architecture.mjs"
+  },
+  "devDependencies": {"@types/node": "24.0.0", "@types/react": "19.3.0", "@types/react-dom": "19.3.0", "typescript": "5.9.3"},
+  "overrides": {"uuid": "14.0.2"}
+}
