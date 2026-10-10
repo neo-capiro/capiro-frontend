@@ -4,7 +4,7 @@ Independent product frontend for Meri and the future Portfolio, Modules and Sett
 
 Read [the architecture](docs/ARCHITECTURE.md) and [implementation standards](docs/IMPLEMENTATION-STANDARDS.md) before changes. `apps/web` composes the shared shell and Meri Home; `packages/ui` owns reusable presentation, and `packages/meri-client` owns the public browser transport/projection adapter. Portfolio, Modules and Settings remain disabled destinations until their cohesive feature implementations are available.
 
-The current `/` entry and `/meri` screen are a disclosed, disconnected synthetic fixture. They contain no authenticated service connection. Home responsive repair and final comparison with the updated Figma reference remain open; local build success does not establish deployment readiness.
+The current `/` entry and `/meri` screen are a disclosed, disconnected synthetic fixture. Home responsive repair and comparison with the finalized Figma Home reference are [independently accepted](docs/coordination/CODEX-MERI-HOME-FINAL-ACCEPTANCE.md). Browse workflows is visibly unavailable until its library is implemented. Authentication, other Figma screens, live service integration and deployment remain open.
 
 Use Node24 and install from the repository root with `npm ci --ignore-scripts --no-audit --fund=false --update-notifier=false`. The root lock is the sole active workspace lock. `npm run dev` starts the local web app; `npm run check` verifies public artifact bytes, all declared workspace typechecks, focused tests, architecture and the21-case composed transport qualification. `npm run build` compiles the public client before building the web app.
 
