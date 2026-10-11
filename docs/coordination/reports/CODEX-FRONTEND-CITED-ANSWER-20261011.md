@@ -13,6 +13,7 @@ Date: 2026-10-11 UTC. Owner: Codex. Base: `neo-capiro/capiro-frontend@28c300093c
 
 - Pinned Node `v24.19.0`: production `npm run build` passed; `/`, `/meri`, and `/meri/fixture/cited-answer` statically generated.
 - `npm test`: 15/15 passed. `npm run architecture`: zero errors and zero signals.
+- After the implementation commit, the full `npm run check` pipeline passed, including public package pin checks, all workspace type checks, the 15 frontend tests, architecture, and 21 transport tests.
 - Recomputed SHA256 and byte length for all 22 local cited-answer assets against the manifest: all match.
 - Browser inspection against the Figma screenshot (SHA256 `cfd71647bd291eb6ba448ef58ce45d6a42d0ba363e635790b672fcc2d4b85627`) at 1440×1040 and 390×844: title, shell, sections, table and composer align with the design; no document-wide horizontal overflow at the narrow viewport, and the table scrolls within its own frame.
 - Browser interactions: source 1 opens the labelled sample-source panel; Draft a task updates and focuses the local composer; Copy reports success; root entry opens the cited-answer route; New conversation returns to the blank Home route. Send, Attach, Retry, Fork and Helpful remain unavailable.
