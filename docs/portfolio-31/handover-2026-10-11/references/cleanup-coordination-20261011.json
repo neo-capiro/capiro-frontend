@@ -1,0 +1,61 @@
+{
+  "date_utc": "2026-10-11",
+  "source": "Direct Cleanup owner coordination reply received during Portfolio plan preparation",
+  "thread": {
+    "title": "Finish CAPIRO Cleanup1",
+    "id": "01a12af6-cc9b-74d0-b6ff-21607fcea5f1",
+    "host": "local"
+  },
+  "previous_owner": {
+    "title": "Resume CAPIRO cleanup work",
+    "id": "01a126f0-caf3-7903-a852-d763ea724816",
+    "host": "local"
+  },
+  "ownership_redirect": "Previous owner explicitly redirected after Neo confirmed C1 resumed in the new session. Planning-only coordination message sent to successor; fresh readback required. No ownership/source/runtime/cloud mutations performed here.",
+  "reference_packet": "C:\\Users\\Administrator\\Documents\\Codex\\2026-10-10\\run-this-with-mutple-codex-sessions\\outputs\\cleanup1-handoff-20261011",
+  "reference_hashes": [
+    {
+      "path": "C:\\Users\\Administrator\\Documents\\Codex\\2026-10-10\\run-this-with-mutple-codex-sessions\\outputs\\cleanup1-handoff-20261011\\README.md",
+      "sha256": "ad614c4ac7cb6cff1af87e5e9425f83582ef42d7a7819703bf1a822529db6d79"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Documents\\Codex\\2026-10-10\\run-this-with-mutple-codex-sessions\\outputs\\cleanup1-handoff-20261011\\resume.json",
+      "sha256": "a53a805a9061b92b864074a8c612b364fa96c28207c194065c1204421d09be0e"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Documents\\Codex\\2026-10-10\\run-this-with-mutple-codex-sessions\\outputs\\cleanup1-handoff-20261011\\REFERENCE-INDEX.json",
+      "sha256": "2517cd5c20a10d22b130d953c21d5c3eda40c1420624da1cc6871a93841ca8fd"
+    }
+  ],
+  "verification_scope": "Only three reference-file hashes independently checked here. Owner reported 748 copied/746 local references verified; final factual audit in progress. Portfolio has not requalified Cleanup gates.",
+  "reported_heads": {
+    "source": {
+      "sha": "d5a4e0ac82f8a313ae44c6b8f6b199adc71f1ed7",
+      "pr": 2390
+    },
+    "runtime": {
+      "sha": "8f52dcaf0b18da79681d02a8f208a3b28deeae98",
+      "pr": 2389
+    },
+    "native_carrier": {
+      "sha": "952272ec657937da47ada998534c382fb73955d2",
+      "pr": 2391
+    },
+    "local_visual_carrier": {
+      "sha": "a6c5312005f04d9c34d21dac4268caf19526ca41",
+      "published": false
+    }
+  },
+  "gate_state": "No phase acceptance/ownership transfer. Full d5 gate and 3x visual not run. Previous116 native6278471a FAILED; previous116 visual3x PASS is historical only. Disabled D5 and visual review gates remain held.",
+  "reservations": [
+    "Preserve C:/dev/c1-* checkouts, C:/dev/cleanup-nameproof-private and C:/dev/cleanup-handoff-20261010-root1471.",
+    "Preserve all original348 baseline PNGs, test assertions/optional identities, peers containers/volumes and six shared BuildKit containers.",
+    "C: free about12.23GB. No heavy local install/build/Docker allocation without fresh coordination.",
+    "Local about16GiB Docker cannot qualify the32GiB-engine/24GiB-parent proof recipe.",
+    "Shared lockfiles, workflows, API/Web test configuration and tested source changes require coordination/rebinding.",
+    "Primary C:/dev/capirov2 contains unrelated dirty work; do not clean/reset it.",
+    "Fresh Meri/frontend release owner and integration window required before Cleanup merge/deploy.",
+    "Private Cleanup packet/diagnostics remain outside Git. Portfolio Hermes authorization does not change C1 Codex-only operation."
+  ],
+  "next_action": "Read current successor/reference and refresh reservations before Portfolio allocation/integration; this readback grants no shared deployment or resource change."
+}

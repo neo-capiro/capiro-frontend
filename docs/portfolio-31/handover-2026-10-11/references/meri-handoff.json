@@ -1,0 +1,14 @@
+{
+  "result": "BLOCKED: compliant contextual starter and selected-file handoff need native owner contract",
+  "backend_source": "fd8765ec01d292013758606204f2c9d886cd31c1",
+  "coordination_thread": {"id": "01a0e551-c148-70c3-ac99-586bba4569b0", "title": "Complete the entire file", "status": "paused older reliability goal; current greenfield successor not identified"},
+  "owner_checkout": {"path": "C:/dev/cap-meri-fixture-hardening", "head": "723735ed1f5c562ab10e6077c67261285ea102fd", "qualification": "Owner-reported; existing dirty files preserved; findings use fetched current main, not this old head"},
+  "independent_root_readback": "Root git show origin/main inspected exact native route effect, launch type, Files action and strategy assistant on2026-10-11. No code/runtime changes or model sends.",
+  "findings": [
+    {"ids": ["CORE-122", "PROS-018"], "path": "apps/web/src/vnext/meri/VNextMeriWorkspace.tsx:1052", "fact": "Research Portfolio context stages a draft; ordinary client/prospect prompt context invokes sendMessage automatically.", "required_contract": "Validated client/prospect context must populate editable composer and wait for explicit Send; no invented cross-origin event/query or prompt autosend. Plain/client-only supported native destinations remain separately available."},
+    {"ids": ["CORE-097", "CORE-119"], "paths": ["apps/web/src/components/chat/meri-window.ts", "apps/web/src/vnext/pages/client-crm/tabs/FilesTab.tsx:879"], "fact": "Public context has prompt/clientId/prospectId/researchPortfolioId only. Files Create with Meri passes a text prompt and clientId; selected file IDs/attachments/objective context are absent.", "required_contract": "Canonical selected-file references with authorization/readiness and editable intent, plus approved preview-only profile creation/apply behavior; file names in prompt do not establish attachment handoff."},
+    {"ids": ["OBJ-14", "OBJ-15", "OBJ-16", "OBJ-20", "OBJ-21", "OBJ-26"], "path": "apps/web/src/vnext/pages/strategies/strategies-api.ts:527", "fact": "Draft job submission and native strategy routes exist; ordinary assistant mutates authoritative plan and approval is not uniformly required. Agent proposals have separate review. No arbitrary objectiveId URL contract verified.", "required_contract": "Strategy/Objectives owner must define objective lineage, reviewed generation/activation and approval semantics. Keep existing Strategy editor; do not promise an approval gate from an old overlay comment."}
+  ],
+  "side_effects": "None: no messages to customers, provider calls, deployment, routing, auth or changes to owner's checkout.",
+  "live_runtime": "NOT RUN"
+}

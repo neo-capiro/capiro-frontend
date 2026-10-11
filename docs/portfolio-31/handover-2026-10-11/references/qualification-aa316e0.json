@@ -1,0 +1,96 @@
+{
+  "source": "aa316e0a83ea83556a2ab2b9faa9c449b6ae68e2",
+  "finalSource": "aa316e0a83ea83556a2ab2b9faa9c449b6ae68e2",
+  "dirty": "",
+  "runtime": "v24.19.0",
+  "checks": [
+    {
+      "name": "type",
+      "exitCode": 0,
+      "signal": null,
+      "startedAt": "2026-10-11T12:09:27.707Z",
+      "finishedAt": "2026-10-11T12:09:45.282Z",
+      "command": [
+        "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit",
+        "--incremental",
+        "false"
+      ]
+    },
+    {
+      "name": "lint",
+      "exitCode": 0,
+      "signal": null,
+      "startedAt": "2026-10-11T12:09:27.720Z",
+      "finishedAt": "2026-10-11T12:09:50.337Z",
+      "command": [
+        "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        "node_modules/eslint/bin/eslint.js",
+        "src",
+        "tests"
+      ]
+    },
+    {
+      "name": "format",
+      "exitCode": 0,
+      "signal": null,
+      "startedAt": "2026-10-11T12:09:27.728Z",
+      "finishedAt": "2026-10-11T12:09:39.114Z",
+      "command": [
+        "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        "node_modules/prettier/bin/prettier.cjs",
+        "--check",
+        "src",
+        "tests",
+        "*.json",
+        "*.ts",
+        "*.mjs"
+      ]
+    },
+    {
+      "name": "architecture",
+      "exitCode": 0,
+      "signal": null,
+      "startedAt": "2026-10-11T12:09:27.736Z",
+      "finishedAt": "2026-10-11T12:09:32.791Z",
+      "command": [
+        "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        "scripts/architecture.mjs"
+      ]
+    },
+    {
+      "name": "unit",
+      "exitCode": 0,
+      "signal": null,
+      "startedAt": "2026-10-11T12:09:27.744Z",
+      "finishedAt": "2026-10-11T12:09:32.848Z",
+      "command": [
+        "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        "node_modules/vitest/vitest.mjs",
+        "run",
+        "--reporter=json",
+        "--outputFile=C:\\Users\\Administrator\\Documents\\Codex\\2026-10-10\\implement-capiro-3-1-portfolio-in\\outputs\\evidence\\portfolio-integrated-20261011\\affected-aa316e0/unit-results.json"
+      ]
+    },
+    {
+      "name": "browser",
+      "exitCode": 0,
+      "signal": null,
+      "startedAt": "2026-10-11T12:09:27.752Z",
+      "finishedAt": "2026-10-11T12:10:27.134Z",
+      "command": [
+        "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        "node_modules/playwright/cli.js",
+        "test",
+        "billing-summary.spec.ts",
+        "billing-summary-integration.spec.ts",
+        "manual-debrief.spec.ts",
+        "calendar-preparation.spec.ts",
+        "meeting-review.spec.ts"
+      ]
+    }
+  ],
+  "build": "NOT RUN: Cleanup evidence recovery disk reserve; prior preview still bbf25e6 on5190",
+  "live": "NOT RUN: synthetic intercepted component checks only"
+}

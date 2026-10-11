@@ -1,0 +1,470 @@
+{
+  "verdict": "PASS: read-only source discovery; protocol PROPOSED, implementation/activation BLOCKED pending owner allocation",
+  "canonicalMain": "fd8765ec01d292013758606204f2c9d886cd31c1",
+  "candidateFrozen": "372ea02d7484f7698fb04264580a138f6fe3750a",
+  "policy": "b32b4803933760dc0a93fffdcd8fba30a89c3aac",
+  "machineMapMtime": "2026-09-30T00:21:48.2698715Z",
+  "coverage": "Tracked canonical runtime sources for all billing/status/quantity field names and SQL aliases, provider mutation calls, production client insert/upsert/delete statements and service callers; test/seed scripts separated. External database/provider operators and deployed settings cannot be exhaustively enumerated from repository code.",
+  "writers": [
+    {
+      "file": "apps/onboard-api/src/billing/billing.service.ts",
+      "line": 217,
+      "method": "syncSubscription",
+      "behavior": "Publishes customer/subscription association, billingStatus, clientSlots, period, first price lock and canceledAt. Uses delivered subscription object without current provider readback; comped guard preserves status only."
+    },
+    {
+      "file": "apps/onboard-api/src/billing/billing.service.ts",
+      "line": 289,
+      "method": "setComped",
+      "behavior": "Staff changes billingStatus to comped/none and immediately clears lockedAt when comping. Must invalidate pending payment policy, not be overwritten by deferred sync."
+    },
+    {
+      "file": "apps/onboard-api/src/billing/billing.service.ts",
+      "line": 171,
+      "method": "ensureCustomer",
+      "behavior": "Provider customer creation and persisted tenant customer association."
+    },
+    {
+      "file": "apps/onboard-api/src/billing/billing.service.ts",
+      "line": 94,
+      "method": "createCheckoutSession",
+      "behavior": "Issues hosted subscription-creation capability; future callback retrieves subscription and syncs it."
+    },
+    {
+      "file": "apps/onboard-api/src/billing/billing.service.ts",
+      "line": 152,
+      "method": "createPortalSession",
+      "behavior": "Issues provider portal capability with default provider configuration, no persisted session/fence. Existing session can remain outside canonical lock."
+    },
+    {
+      "file": "apps/onboard-api/src/billing/stripe-webhook.service.ts",
+      "line": 28,
+      "method": "handle/dispatch",
+      "behavior": "Event ledger claims then dispatches outside its transaction. Subscription created/updated/deleted passes event snapshot directly to sync; Checkout completion retrieves then syncs; invoice.payment_failed only logs. No settled invoice/SCA reconciliation handler."
+    },
+    {
+      "file": "apps/onboard-api/src/lifecycle/lifecycle.service.ts",
+      "line": 83,
+      "method": "convertDueTrials",
+      "behavior": "Reads trialing/null-subscription tenants, creates provider subscription and syncs it. No shared claim before provider call."
+    },
+    {
+      "file": "apps/onboard-api/src/lifecycle/lifecycle.service.ts",
+      "line": 221,
+      "method": "runNeverStartedBackstop",
+      "behavior": "Writes canceled status and canceledAt after preselected trial eligibility."
+    },
+    {
+      "file": "apps/onboard-api/src/lifecycle/lifecycle.service.ts",
+      "line": 287,
+      "method": "runLockouts",
+      "behavior": "Reads billingStatus and billing events, writes/clears lockedAt. Must not apply delinquency from candidate provisional status."
+    },
+    {
+      "file": "apps/api/src/internal-onboarding/internal-onboarding.service.ts",
+      "line": 93,
+      "method": "provisionTenant",
+      "behavior": "Upsert sets slots on both create and update; initial status trialing/none, optional customer association. Retry/upsert is a real existing-tenant overlap."
+    },
+    {
+      "file": "apps/onboard-api/src/funnel/provisioning.service.ts",
+      "line": 111,
+      "method": "provision/finalizeProvision",
+      "behavior": "Calls Core tenant upsert; stamps provider subscription metadata and retrieves/syncs subscription at lines230-240."
+    },
+    {
+      "file": "apps/onboard-api/src/funnel/funnel.service.ts",
+      "line": 478,
+      "method": "subscribe/paidStatus",
+      "behavior": "Pretenant subscription create/cancel and session quantity/ID persistence; advances ACH on processing or wire invoice issuance by existing policy. Must not import that weaker admission into inline paid receipt."
+    },
+    {
+      "file": "apps/onboard-api/src/setup/setup.service.ts",
+      "line": 335,
+      "method": "completeSetup",
+      "behavior": "Stamps trialEndsAt on trialing tenants, affects lifecycle eligibility."
+    },
+    {
+      "file": "apps/onboard-api/scripts/comp-existing-tenants.ts",
+      "line": 56,
+      "method": "one-time ops script --commit",
+      "behavior": "Bulk none-to-comped update bypasses service; maintenance must participate in fence or be explicitly quiesced."
+    },
+    {
+      "file": "apps/api/src/capiro-admin/capiro-admin.service.ts",
+      "line": 192,
+      "method": "admin tenant provisioning",
+      "behavior": "Initial tenant upsert uses schema defaults none/0; does not directly overwrite existing billing fields."
+    },
+    {
+      "file": "apps/api/src/capiro-admin/capiro-admin.service.ts",
+      "line": 258,
+      "method": "deleteTenant",
+      "behavior": "Destructive S3/Clerk/tenant cascade; must consult unresolved financial operation before first external purge."
+    },
+    {
+      "file": "apps/api/src/internal-onboarding/internal-onboarding.service.ts",
+      "line": 263,
+      "method": "hardDeleteExpiredTenant",
+      "behavior": "Retention eligibility uses canceled status/date, then Clerk/tenant deletion; needs same unresolved-operation hold."
+    }
+  ],
+  "consumers": [
+    {
+      "file": "apps/api/src/billing/billing.service.ts",
+      "line": 47,
+      "method": "getState/getSummary/adminListCustomers",
+      "behavior": "Published status/quantity/lock/period drive role-safe state, billing summary, usage allowance and admin metrics."
+    },
+    {
+      "file": "apps/api/src/clients/clients.service.ts",
+      "line": 1174,
+      "method": "createInTransaction",
+      "behavior": "Count+insert inside transaction without tenant-wide lock; manual create and Meri delegation and two conversion branches. BILLING_ENFORCED and comped/trial semantics retained."
+    },
+    {
+      "file": "apps/api/src/clients/clients.service.ts",
+      "line": 1261,
+      "method": "bulkImport",
+      "behavior": "Reads slot budget before per-row separate insert transactions; not serialized against other requests."
+    },
+    {
+      "file": "apps/api/src/clients/clients.service.ts",
+      "line": 1415,
+      "method": "update/archive",
+      "behavior": "PUT may change status including archived-to-active without capacity check; archive delegates to same update."
+    },
+    {
+      "file": "apps/api/src/intelligence/firm-onboarding.service.ts",
+      "line": 181,
+      "method": "importClients",
+      "behavior": "Reads slotLimit before loop; per-row LDA identity advisory lock and count do not serialize different LDA IDs or manual/CSV creates."
+    },
+    {
+      "file": "apps/api/src/business-development/business-development.service.ts",
+      "line": 927,
+      "method": "convert",
+      "behavior": "Locks prospect then selected client, calls createInTransaction at997/1016; no tenant capacity serialization. Existing-client link does not consume a new slot."
+    },
+    {
+      "file": "apps/api/src/meri/meri-tools.service.ts",
+      "line": 9111,
+      "method": "createClient tool",
+      "behavior": "Delegates actual insertion to ClientsService.create at9234; inherit capacity fence there without rebuilding Meri."
+    },
+    {
+      "file": "apps/onboard-api/src/setup/setup.service.ts",
+      "line": 115,
+      "method": "getState",
+      "behavior": "Trial/paid label, imported count and effectiveClientSlots selection cap."
+    },
+    {
+      "file": "apps/onboard-api/src/lifecycle/lifecycle.service.ts",
+      "line": 61,
+      "method": "daily lifecycle",
+      "behavior": "Trial conversion/reminders/backstop/delinquency lockout/retention selection depend on published status and quantity."
+    },
+    {
+      "file": "apps/onboard-api/src/billing/billing-overage.service.ts",
+      "line": 53,
+      "method": "reportOverageForAllTenants",
+      "behavior": "Published status, slots and period affect monetary overage reports and external meterEvents.create; not just presentation."
+    },
+    {
+      "file": "apps/onboard-api/src/tasks/task-runner.ts",
+      "line": 73,
+      "method": "diag-billing-state",
+      "behavior": "Diagnostic status/quantity/lock/association read."
+    },
+    {
+      "file": "packages/shared/src/index.ts",
+      "line": 642,
+      "method": "effectiveClientSlots/isBillingEntitled",
+      "behavior": "Existing minimum trial allowance and status entitlement definitions; retain approved definitions."
+    },
+    {
+      "file": "apps/web/src/lib/billing.ts",
+      "line": 20,
+      "method": "useBillingState/useBilling",
+      "behavior": "Role-safe state and privileged summary, Checkout/Portal admission hooks."
+    },
+    {
+      "file": "apps/web/src/App.tsx",
+      "line": 551,
+      "method": "BillingGate",
+      "behavior": "Legacy paywall/locked access state."
+    },
+    {
+      "file": "apps/web/src/components/onboarding/OnboardingGates.tsx",
+      "line": 58,
+      "method": "legacy onboarding/lockout gates",
+      "behavior": "Status/lock consumer."
+    },
+    {
+      "file": "apps/web/src/vnext/app/onboarding/VNextOnboardingGates.tsx",
+      "line": 53,
+      "method": "current onboarding/lockout gates",
+      "behavior": "Status/lock consumer."
+    },
+    {
+      "file": "apps/web/src/components/onboarding/TrialBanner.tsx",
+      "line": 18,
+      "method": "legacy trial banner",
+      "behavior": "Trial status and used/available slots."
+    },
+    {
+      "file": "apps/web/src/vnext/app/onboarding/VNextTrialBanner.tsx",
+      "line": 16,
+      "method": "current trial banner",
+      "behavior": "Trial status and used/available slots."
+    },
+    {
+      "file": "apps/web/src/pages/admin/BillingPage.tsx",
+      "line": 19,
+      "method": "legacy billing summary",
+      "behavior": "Published quantity/status/allowance display; provider portal admission."
+    },
+    {
+      "file": "apps/web/src/vnext/pages/settings/VNextBillingPage.tsx",
+      "line": 27,
+      "method": "current billing summary",
+      "behavior": "Published quantity/status/allowance display; provider portal admission."
+    },
+    {
+      "file": "apps/web/src/pages/onboarding/SubscribePage.tsx",
+      "line": 39,
+      "method": "subscribe return",
+      "behavior": "Refetches summary and leaves paywall from status entitlement, not exact invoice receipt."
+    }
+  ],
+  "unchangedExcluded": [
+    "apps/api/src/tenant-admin/tenant-admin.service.ts:381/415 writes branding/contact settings only; no billing publication.",
+    "apps/api/src/webhooks/clerk-webhook.service.ts has membership writes, no tenant billing publication matched.",
+    "apps/onboard-api/scripts/setup-stripe.ts configures provider product/price/meter, not tenant quantity publication; no invocation or shared config change.",
+    "apps/api/scripts/business-development-phase1-postgres-acceptance.ts and seed-meriv2-phase19-browser-fixtures.ts; scripts/wave5-database-qualification.mjs are test/seed writers, not runtime billing writers; never run against shared fixtures.",
+    "Onboard mirrored Client model is read-only by existing architecture; no direct onboard client-create statement found."
+  ],
+  "protocol": [
+    "Owner-approved durable operation fence per tenant, explicit operation/version and provider-account namespace; it remains active through uncertain dispatch, SCA, paid-but-unconsumed and compensation. Tenant row lock is the common serialization boundary, not a prospect or LDA-ID lock.",
+    "Lock order tenant -> operation -> prospect -> client. Recheck current member/role/tenant/client authority and actual capacity inside the transaction. Preserve existing standard_user create/convert and user_admin update/LDA roles; payment still requires BillingActorGuard. Receipt actor delegation is absent and must not be invented.",
+    "Use a separate persisted dispatch-intent journal for prepare/confirm/compensate with exact request hash, stable key and before-provider CAS. The existing immutable confirmationAuthorization is consent, never proof of dispatch. No DB transaction spans provider I/O. A worker lease expiring cannot release a may-have-dispatched operation or authorize a different-key replay.",
+    "Publication requires a monotonic database revision/CAS, durable authoritative observation and current operation validation after network readback. Delivered event snapshots and event.created are not ordering authority. Reuse signature verification and stripe_events; use database operation/receipt CAS for duplicates, different event IDs and crash replay.",
+    "Withhold candidate provisional quantity/status from canonical entitlements. Do not blanket-freeze unrelated cancellation/delinquency or comp overrides: invalidate/hold the operation and publish authoritative negative/admin policy using existing rules. Ambiguous provenance stays blocked for owner reconciliation; do not infer the cause from status alone.",
+    "Onboard alone verifies provider settlement and publishes paid quantity plus an exact prospect-bound reservation atomically under tenant lock. Core alone owns client insert/prospect link and consumes that reservation in the same Core database transaction. Ordinary manual/Meri/CSV/LDA/reactivation must not spend reserved capacity. Paid attempt remains immutable; separate operation reservation/consumption state survives it.",
+    "Core conversion retry returns the same consumed client and receipt identity without consuming twice. New client insertion failure rolls back reservation consumption and link, retaining paid reservation for retry; no Stripe call occurs in Core transaction. Existing-client link uses no new slot and cannot silently consume a paid reservation.",
+    "Before preparation recovery, use persisted exact target subscription/item/customer, request key/hash and authoritative paged provider object discovery. If IDs/correlation are missing or multiple candidates match, keep unresolved and require operator handling. Before confirmation recovery, exact saved invoice/intent/authorization readback is necessary. Do not replay just because a timestamp/lease expired.",
+    "Compensation is a separately recorded owner-approved action with exact unpaid invoice/subscription readback, its own stable key and journal. Do not void a settled payment, blindly restore a previous quantity over an external update, calculate credits or auto-refund. Release fence only after independently verified compensation or exact consumption.",
+    "Admission checks for new Checkout/Portal/lifecycle/provisioning operations must participate. Previously issued URLs/provider dashboard/automation cannot be fenced by the database. Verify actual provider configuration and exclusive mutation policy before activation; a fingerprint preflight is not an atomic provider compare-and-swap."
+  ],
+  "owners": {
+    "billing": "onboard-api billing/lifecycle/webhook owner, coordinated by root",
+    "core": "Core clients + business-development + LDA owners",
+    "database": "schema/grants/retention owner",
+    "cleanup": "coordinate overlapping canonical source/module architecture before integration",
+    "meri": "existing createClient delegation inherits Core enforcement; no Meri rebuild",
+    "hosting": "provider Portal/Checkout/dashboard capability configuration owner"
+  },
+  "proposedPaths": {
+    "new": [
+      "packages/shared/src/billing/billing-fence.contract.ts: typed cross-service operation/publication/reservation interface only, no Prisma/feature dependency",
+      "apps/onboard-api/src/billing/billing-fence.store.ts: transaction/tenant lock, operation CAS and dispatch intent persistence",
+      "apps/onboard-api/src/billing/subscription-publication.service.ts: verified publication and authoritative-status cause handling",
+      "apps/onboard-api/src/billing/billing-recovery.service.ts: exact provider readback and held uncertainty, approved compensation adapter port",
+      "apps/api/src/clients/client-capacity.service.ts: canonical caller-transaction capacity/reservation enforcement shared by manual/CSV/LDA/reactivation/conversion",
+      "apps/api/src/business-development/prospect-paid-conversion.service.ts: focused paid-reservation consumption inside existing conversion transaction, if extraction is warranted",
+      "docs/portfolio-inline-billing/UNALLOCATED-fence-proposal.sql: owner-reviewed unallocated operation/dispatch/consumption persistence proposal only"
+    ],
+    "changed": [
+      "apps/onboard-api/src/billing/{billing.service.ts,stripe-webhook.service.ts,portfolio-billing-service.ts,portfolio-billing-store.ts,portfolio-billing-stripe.ts,billing.module.ts}",
+      "apps/onboard-api/src/lifecycle/lifecycle.service.ts",
+      "apps/onboard-api/src/funnel/{funnel.service.ts,provisioning.service.ts}",
+      "apps/onboard-api/scripts/comp-existing-tenants.ts",
+      "apps/api/src/internal-onboarding/internal-onboarding.service.ts",
+      "apps/api/src/clients/{clients.service.ts,clients.module.ts}",
+      "apps/api/src/intelligence/firm-onboarding.service.ts",
+      "apps/api/src/business-development/{business-development.service.ts,business-development.module.ts}",
+      "apps/api/src/capiro-admin/capiro-admin.service.ts",
+      "apps/api/src/billing/billing.service.ts and role-safe public type projection when pending/reserved fields are approved",
+      "apps/onboard-api/src/billing/billing-overage.service.ts and lifecycle consumers: use only safe published state/approved pending policy",
+      "packages/shared/src/index.ts or package exports only for the focused public contract",
+      "apps/api/prisma/schema.prisma and apps/onboard-api/prisma/schema.prisma only after database/schema owner approval; no migration number allocated"
+    ],
+    "unchanged": [
+      "existing Meri orchestration/tools insertion delegation",
+      "auth/CORS/Clerk/global middleware",
+      "provider account/configuration without owner agreement",
+      "migration ledger until allocation",
+      "pricing/allowance calculations and definitions"
+    ]
+  },
+  "requiredTests": [
+    "RED then candidate SQL concurrency: one remaining slot across simultaneous manual/Meri/CSV/different-LDA/different-prospect/reactivation requests; same-prospect/client lock must not be the sole race case.",
+    "All capacity writers acquire tenant-first lock, including archived->active; CSV preserves per-row errors and LDA duplicate-idempotence without spending reserved capacity.",
+    "Pending prepare/SCA/unknown confirmation/paid-unconsumed never yields an unreserved new slot or provisional delinquency lockout/overage allowance change; exact legitimate cancellation and comp override still use authoritative policy.",
+    "Delayed/out-of-order snapshots, equal-second events, duplicate same/different event IDs, two webhook workers, crash after database publication before event processedAt, old subscription ID/foreign customer, missing provider fields and readback version drift fail closed/idempotently.",
+    "Dispatch intent persistence failure invokes no provider; crash before/after provider request, response loss, lease expiration and keys beyond provider retention never trigger blind new-key mutation.",
+    "Provider receipt reservation validates authorization, invoice/intent/customer/subscription/account/amount/currency/quantity; consumption is unique tenant/prospect/attempt/invoice and current actor/role bound.",
+    "Core client create/link/consume transaction failure rolls back all three; lost response retry returns same client/consumption; unrelated prospect/create cannot consume reservation; existing active client link does not spend paid slot; archived identity cannot silently activate.",
+    "Compensation refusal on paid/processing/unknown or externally changed invoice/subscription; failed/ambiguous compensation retains fence; verified approved compensation releases exactly once.",
+    "Lifecycle/admin/provisioning/retention/ops script overlap: policy invalidation and pending financial hold happen before provider calls or destructive purge; no stale lifecycle selection overwrites current comp/paid state.",
+    "Actual two-connection PostgreSQL rollback/deadlock/lock-order/CAS tests are required; disposable PGlite tests alone do not establish multi-worker scheduling. Sandbox/provider and real integration remain separate owner-authorized gates."
+  ],
+  "primaryReferences": [
+    {
+      "url": "https://docs.stripe.com/api/idempotent_requests",
+      "claim": "Same key can return cached500; provider can prune keys at24h, so database uncertainty cannot expire into replay."
+    },
+    {
+      "url": "https://docs.stripe.com/webhooks",
+      "claim": "Delivery ordering not guaranteed; events can share second timestamp; use IDs and authoritative retrieval plus local CAS."
+    },
+    {
+      "url": "https://docs.stripe.com/api/subscriptions/update?api-version=2025-02-24.acacia",
+      "claim": "default_incomplete can set past_due awaiting confirmation; partial pending update is not a free replacement for exact-invoice consent."
+    },
+    {
+      "url": "https://docs.stripe.com/api/customer_portal/sessions/create",
+      "claim": "Portal session is an external URL governed by provider configuration."
+    }
+  ],
+  "notRun": [
+    "SQL/database tests during this discovery",
+    "provider/customer/account calls",
+    "build/install",
+    "deployment/schema/migrations",
+    "live flags/provider Portal settings"
+  ],
+  "sideEffects": "Read-only repository/policy/docs inspection; this small report artifact only. Candidate tracked source unchanged.",
+  "sources": [
+    {
+      "file": "apps/onboard-api/src/billing/billing.service.ts",
+      "sha256": "5ce1534d7cc803321a11375b1a97291ff9d8ce84ae40d49dcc060292cde0297f",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/onboard-api/src/billing/stripe-webhook.service.ts",
+      "sha256": "ed9d22b3a3e9a1c43a9d1113a5a4a4f413b33943ac0b4e2b7b335c80010428a2",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/onboard-api/src/lifecycle/lifecycle.service.ts",
+      "sha256": "5bc9a523ec2a71861370f411b2c45399233e098b75043096f42c027263b8c182",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/api/src/internal-onboarding/internal-onboarding.service.ts",
+      "sha256": "491b53e081c58b62fd96b65ace2d327bde7f4e001f83f31fdd3bd022da82734a",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/onboard-api/src/funnel/provisioning.service.ts",
+      "sha256": "86ec06a625a9ba183ae16c84c599e2ff253d5c9c0652a453c3c69ffb5ea10032",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/onboard-api/src/funnel/funnel.service.ts",
+      "sha256": "2c1c703371bfa106e9ad463a469c46b54cf12dbfa467103957df9188dea233ee",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/onboard-api/src/setup/setup.service.ts",
+      "sha256": "fbbe2e5a7a0262264473586ff0786bb5aad2cd21e8d1400476ce48ca7389c9ce",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/onboard-api/scripts/comp-existing-tenants.ts",
+      "sha256": "7d8ced04208c2c151249db520ab1905c435a477ed0c7d0f80447f4a771446357",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/api/src/capiro-admin/capiro-admin.service.ts",
+      "sha256": "5d70e226bbecdcc541cd8245089a47a12fcdff23fed3d4e08229c2630ab115cc",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/api/src/billing/billing.service.ts",
+      "sha256": "b0798aa44e24ef0ce2d1052422633551ef842c65a29c5d2b84998a68fac4c799",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/api/src/clients/clients.service.ts",
+      "sha256": "0b04f5e819b86c68993627520cf41dd03524b7f66c3c4dd3751f537c630f352b",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/api/src/intelligence/firm-onboarding.service.ts",
+      "sha256": "11918e3aef2a796b6fa27577e52dd776163ca20956b62c658221b6d2f7fefed3",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/api/src/business-development/business-development.service.ts",
+      "sha256": "40ed9816f134c43f6ce2abb1c0525bfd87228a669aad86ffdcd397693efa36ba",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/api/src/meri/meri-tools.service.ts",
+      "sha256": "53d9d5b7ed8ba55a1086062812b3aaaf3cc225db485e4542c4ffc5836ea8e194",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/onboard-api/src/billing/billing-overage.service.ts",
+      "sha256": "4dd6b8db038fb87ec31f94d3cdc9f4880e5295173d14c5e58a6b91678f80878a",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/onboard-api/src/tasks/task-runner.ts",
+      "sha256": "6b82d0259cf3a2230a1ecab2be12ab813a5511f690af15656caaaed6efb6d00b",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "packages/shared/src/index.ts",
+      "sha256": "1a713331de044768f7bd8631db4762a08a3c3541a1bbc064c67bbff46fc9a75f",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/web/src/lib/billing.ts",
+      "sha256": "351c3e322f6d41416fd140d6116d0fae0d594051763245f7be7fc555713ae214",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/web/src/App.tsx",
+      "sha256": "a7b1ff2a7cb9945af55ba58c5849cfe18cf5f89a47c195d99e7edac1fcbfe2cc",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/web/src/components/onboarding/OnboardingGates.tsx",
+      "sha256": "ca2182844690b534161259fc70da8302d19361b1cd6f5dd5e1a324201c95e3b1",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/web/src/vnext/app/onboarding/VNextOnboardingGates.tsx",
+      "sha256": "81c23d3dc27e4450ffba6071aee3ab30d74340c14e9391aad5943a53abacb878",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/web/src/components/onboarding/TrialBanner.tsx",
+      "sha256": "bb6de69cc9e46a802fa49893c90e1934ccf0df27e851f5020413aab64b008d34",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/web/src/vnext/app/onboarding/VNextTrialBanner.tsx",
+      "sha256": "2f128cbda681237cfd8591175a71b94f3d89c6e22f6aec001b23043c26434be4",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/web/src/pages/admin/BillingPage.tsx",
+      "sha256": "b0b90137c295814033860fd9998fd8ab14c01a4e76e288b11ad10f4f62673f29",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/web/src/vnext/pages/settings/VNextBillingPage.tsx",
+      "sha256": "b2c561b507f5dd6a7b9749dcae86b198d4524a88b5316b9967063d5c7ed9272c",
+      "byteExactCurrentMain": true
+    },
+    {
+      "file": "apps/web/src/pages/onboarding/SubscribePage.tsx",
+      "sha256": "6076f6605c7417fd0951d70d4cefbedf7367f0c65bdb8daa38a1a9c88fd02a5a",
+      "byteExactCurrentMain": true
+    }
+  ]
+}

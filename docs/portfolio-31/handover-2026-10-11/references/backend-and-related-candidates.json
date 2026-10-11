@@ -1,0 +1,92 @@
+{
+  "backend_candidate": {
+    "repository": "neo-capiro/capirov2",
+    "branch": "codex/portfolio-objectives-31-20261011",
+    "starting_commit": "fd8765ec01d292013758606204f2c9d886cd31c1",
+    "commit": "72bfea4c5f574c2d9dba63c6bbc63dac1c7e377e",
+    "draft_pr": "https://github.com/neo-capiro/capirov2/pull/2362",
+    "migration": "20281011010000_client_objectives — UNAPPLIED",
+    "state": "Root128 local checks PASS; canonical memory wall applied. No atomic revocation fence, owner/migration/live acceptance or deployment.",
+    "evidence": "outputs/evidence/portfolio-objectives-authorization-20261011/root/root-qualification.json"
+  },
+  "mail_guard_candidate": {
+    "repository": "neo-capiro/capirov2",
+    "commit": "4b3c67257",
+    "draft_pr": "https://github.com/neo-capiro/capirov2/pull/2364",
+    "state": "11 focused checks, API primary TypeScript and Nest build PASS; unmerged, not deployed"
+  },
+  "prospect_stage_candidate": {
+    "draft_pr": "https://github.com/neo-capiro/capirov2/pull/2365",
+    "commit": "fd6ed6c01",
+    "state": "230 focused backend checks PASS; unapplied migration, owner integration and legacy mapping pending"
+  },
+  "sessionstore_candidate": {
+    "draft_pr": "https://github.com/neo-capiro/meri-greenfield/pull/2",
+    "commit": "65d9c750639e0d370985827983f24019a3f585ab",
+    "worktree": "C:\\dev\\meri-greenfield-sessionstore-20261011",
+    "state": "Root independently reran 128/128 focused/static PASS; seven deterministic evals and21 native checks PASS. Broad303/304 FAILED: unchanged image-inventory scanner temporary-ancestor setup issue; standalone scanner25PASS. Native capture ancestor race fixed. Durable transport/Fargate recovery/owner review NOT RUN; not G1 pass."
+  },
+  "prospect_contacts_candidate": {
+    "commit": "6c6f88e9e5ba077452716f3a0db0dd3bbea2963f",
+    "draft_pr": "https://github.com/neo-capiro/capirov2/pull/2371",
+    "state": "Root independently reran11/11 PGlite/DTO/guard checks PASS; frontend6unit/6browser PASS. Unregistered module, unallocated/unapplied DDL; live integration and conversion carry-over NOT RUN."
+  },
+  "inline_billing_candidate": {
+    "commit": "372ea02d7484f7698fb04264580a138f6fe3750a",
+    "draft_pr": "https://github.com/neo-capiro/capirov2/pull/2370",
+    "state": "Root59 service/domain/provider +22 actual-DDL/store checks PASS; original confirmation22fail and SQL7fail/15pass preserved. Immutable actual-invoice consent prerequisite implemented. Disabled/unregistered/unallocated/unapplied. Durable publication fence across all writers/consumers, unknown preparation/dispatch recovery, invoice compensation, SCA/webhook ledger, single-use paid conversion receipt/capacity reservation, owner/native/grants/migration and Stripe sandbox acceptance required. No charges run.",
+    "product_decision": "Human approved inline quote, charge and receipt via new contract. Exact invoice preparation/cancellation semantics await clarification.",
+    "evidence": "outputs/evidence/portfolio-billing-confirmation-20261011/root-final/root-qualification.json",
+    "published_readback": "outputs/evidence/portfolio-billing-confirmation-20261011/root-final/published-pr-readback.json",
+    "fence_discovery": "outputs/portfolio-billing-fence-discovery-20261011.json",
+    "pending_updates_review": "outputs/portfolio-billing-pending-updates-20261011.json"
+  },
+  "geocode_cas_candidate": {
+    "commit": "6e5774a14c73ea04f0a77650a5bbd33173bcc9b3",
+    "draft_pr": "https://github.com/neo-capiro/capirov2/pull/2373",
+    "state": "Root final96/96 PGlite/regression PASS at6e5774a on Node24.19.0; strict extractedPrisma/Nest types and formatting PASS. No migration/provider/deploy. Cleanup combined-source review and native HTTP/Postgres acceptance remain open."
+  },
+  "brief_refresh_candidate": {
+    "commit": "87de0da25ff950fc7b7af12e0bd51ad268fba07b",
+    "draft_pr": "https://github.com/neo-capiro/capirov2/pull/2378",
+    "state": "Root final18/18 PGlite tests using actual pinned Phase4 migration PASS on Node24.19.0; focused type/format PASS. Immutable actor/base/identity-bound proposal apply and version-specific citations. Unregistered/unallocated/unapplied; owner/retention/native/live acceptance pending."
+  },
+  "outbound_attachment_acl_candidate": {
+    "repository": "neo-capiro/capirov2",
+    "commit": "171ec869ed3928c96172c8790a9aeb3b4de901ae",
+    "draft_pr": "https://github.com/neo-capiro/capirov2/pull/2381",
+    "state": "Root independently48/48 scoped actual-service tests PASS; strict helpers/format/diff PASS. Exact original service fails10/19 guard cases. Broader service typing retains37 identical baseline dependency diagnostics; not full API build acceptance. No live calls. Separate batch/intent ACL, concurrent writer fence and owner integration remain dependencies.",
+    "evidence": "outputs/evidence/outbound-attachment-acl-20261011/root-qualification.json"
+  },
+  "client_completion_preview_candidate": {
+    "commit": "d39471218cd4e73c64ef5bafd296d5194fc2bd7e",
+    "draft_pr": "https://github.com/neo-capiro/capirov2/pull/2382",
+    "state": "Root110/110 tests, strict helper/format/diff PASS; original4 writer regressions fail. Broader typing44 inherited diagnostics. Strict routes503; old-worker drain/upgrade/recovery and owner agreement required. No activation.",
+    "evidence": "outputs/evidence/portfolio-client-completion-preview-20261011/root/root-qualification.json"
+  },
+  "meeting_pdf_candidate": {
+    "commit": "320878e63835334d6babf1b59a77e7dffbbf2d5d",
+    "draft_pr": "https://github.com/neo-capiro/capirov2/pull/2383",
+    "state": "Root47/47 tests, strict8 files/format/diff PASS. Renderer fidelity plus unregistered reviewed-operation candidate; proposedSQL unapplied/unallocated. Native source/RLS/grants/publication fence/adapters/live acceptance required.",
+    "evidence": "outputs/evidence/portfolio-meeting-pdf-backend/root-ddl-review/root-qualification.json"
+  },
+  "client_activity_acl_candidate": {
+    "commit": "d75b3c767c14d1d2d666d843c8d7efecad58215e",
+    "draft_pr": "https://github.com/neo-capiro/capirov2/pull/2384",
+    "state": "Root78 PASS; exact original40/51fail;37 byte-identical inherited type diagnostics, touched0. Canonical wall helper reused. No atomic grant/write fence or CAS; no owner/native/live integration.",
+    "evidence": "outputs/evidence/client-activity-acl-20261011/root/root-qualification.json"
+  },
+  "saved_layout_candidate": {
+    "commit": "46937ce53506657658fd85d9e6ef840abb842013",
+    "draft_pr": "https://github.com/neo-capiro/capirov2/pull/2385",
+    "state": "Root55 actual-contract/SQL checks and strict types PASS. Unregistered, unallocated/unapplied; no atomic catalog/membership fence or live acceptance.",
+    "evidence": "outputs/evidence/portfolio-saved-layouts-20261011/root/root-qualification.json"
+  },
+  "calendar_sync_operation_candidate": {
+    "commit": "3883306fd14aa2bf7072b023873762174231d0f3",
+    "draft_pr": "https://github.com/neo-capiro/capirov2/pull/2386",
+    "state": "Root58 Jest/actual proposed-SQL PGlite checks and strict types/format PASS. Disabled/unregistered; SQL unallocated/unapplied. Native active-membership/RLS/provider adapters and shared manual/scheduler/webhook/lifecycle cursor-state writer fence, recovery, owner agreement and live provider acceptance required. No shared cursor race or full-reload frontend recovery claimed fixed.",
+    "evidence": "outputs/evidence/portfolio-calendar-sync-ops-20261011/root/root-qualification.json",
+    "published_readback": "outputs/evidence/portfolio-calendar-sync-ops-20261011/root/published-pr-readback.json"
+  }
+}

@@ -1,0 +1,252 @@
+{
+  "status": "READ-ONLY DISCOVERY COMPLETE; no activation or implementation approval implied",
+  "policy": "b32b4803933760dc0a93fffdcd8fba30a89c3aac",
+  "candidateCommit": "372ea02d7484f7698fb04264580a138f6fe3750a",
+  "canonicalMain": "fd8765ec01d292013758606204f2c9d886cd31c1",
+  "node": "v24.19.0",
+  "candidateStatus": "?? work/",
+  "stripe": {
+    "installed": "17.7.0",
+    "typedAndRuntimeDefaultApi": "2025-02-24.acacia",
+    "evidence": [
+      "C:/dev/capirov2/apps/onboard-api/node_modules/stripe/package.json:3",
+      "C:/dev/capirov2/apps/onboard-api/node_modules/stripe/types/lib.d.ts:30",
+      "C:/dev/capirov2/apps/onboard-api/node_modules/stripe/cjs/apiVersion.js:5",
+      "C:/dev/capirov2/apps/onboard-api/node_modules/stripe/cjs/stripe.core.js:83",
+      "C:/dev/capirov2/apps/onboard-api/node_modules/stripe/types/SubscriptionsResource.d.ts:990",
+      "C:/dev/capirov2/apps/onboard-api/node_modules/stripe/types/Events.d.ts:95"
+    ],
+    "caveat": "StripeClient comment claims dashboard-default tracking; installed runtime actually uses SDK API default when no apiVersion supplied. Webhook snapshot version is separate. No client was instantiated or called."
+  },
+  "recommendation": "Retain exact saved actual-invoice consent and leave charge admission disabled until the owner implements durable operation/recovery, authoritative publication and Core capacity reservation/consumption. Do not swap only payment_behavior to pending_if_incomplete.",
+  "documentedNativeBehavior": [
+    {
+      "claim": "Pending updates ordinarily apply the requested quantity only after payment; always_invoice attempts payment inside the subscription update. Decline/SCA can leave changes pending.",
+      "source": "https://docs.stripe.com/billing/subscriptions/pending-updates"
+    },
+    {
+      "claim": "Pinned proration_date is supported. Pending updates require charge_automatically and supported payment methods; current unversioned method list is not proof of every Acacia deployment capability.",
+      "source": "https://docs.stripe.com/billing/subscriptions/pending-updates"
+    },
+    {
+      "claim": "Expiry voids the invoice/discards changes; earlier billing boundaries and conflicting later updates can remove it. A replacement can create a different invoice.",
+      "source": "https://docs.stripe.com/billing/subscriptions/pending-updates"
+    },
+    {
+      "claim": "Outstanding metered usage can be included and discarded if the pending update expires. Schedules/thresholds require explicit handling.",
+      "source": "https://docs.stripe.com/billing/subscriptions/pending-updates"
+    },
+    {
+      "claim": "default_incomplete explicitly awaits invoice PaymentIntent confirmation; always_invoice ordinarily attempts collection. API supports the installed payment_behavior union.",
+      "source": "https://docs.stripe.com/api/subscriptions/update?api-version=2025-02-24.acacia"
+    },
+    {
+      "claim": "A preview is not a saved payable invoice. Matching proration_date matches proration; exchange rates can change. This does not establish an atomic total-amount guard.",
+      "source": "https://docs.stripe.com/api/invoices/upcoming?api-version=2025-02-24.acacia"
+    },
+    {
+      "claim": "auto_advance=false stops automatic invoice advancement/retries. Setting it after a pending subscription update cannot precede that update's immediate payment attempt (inference from operation ordering).",
+      "source": "https://docs.stripe.com/api/invoices/update?api-version=2025-02-24.acacia"
+    },
+    {
+      "claim": "No portal configuration parameter means default configuration. Repository code does not establish its deployed features.",
+      "source": "https://docs.stripe.com/api/customer_portal/sessions/create"
+    },
+    {
+      "claim": "Webhook delivery can be duplicated/out of order, including events sharing a second; retrieve authoritative objects and track event IDs.",
+      "source": "https://docs.stripe.com/webhooks"
+    },
+    {
+      "claim": "V1 idempotency can cache a 500; keys can be pruned after at least 24 hours. Expiry is not evidence an unknown dispatch never occurred.",
+      "source": "https://docs.stripe.com/api/idempotent_requests"
+    }
+  ],
+  "incompatibilities": [
+    {
+      "file": "apps/onboard-api/src/billing/portfolio-billing-stripe.ts",
+      "lines": [
+        80,
+        86,
+        87,
+        94,
+        98,
+        107,
+        128
+      ],
+      "detail": "prepare currently obtains an open unpaid frozen invoice/PI. confirm uses that exact ID/fingerprint. Native pending update can already have charged or require SCA before prepare returns, violating these states."
+    },
+    {
+      "file": "apps/onboard-api/src/billing/portfolio-billing-service.ts",
+      "lines": [
+        109,
+        150,
+        255
+      ],
+      "detail": "372 consent proof binds actual invoice/PI before explicit confirmation. Paid/SCA/processing without proof is quarantined. Never synthesize the proof retrospectively after native collection."
+    },
+    {
+      "file": "apps/onboard-api/src/billing/portfolio-billing-stripe.ts",
+      "lines": [
+        34,
+        59,
+        94,
+        145
+      ],
+      "detail": "Strict invoice policy refuses credits/tax/discounts/mixed or non-pinned-period lines. Native charging before actual validation can charge a subsequently refused invoice. Full preview alone is not a provider-side amount cap."
+    },
+    {
+      "file": "apps/onboard-api/src/billing/billing.service.ts",
+      "lines": [
+        107,
+        152,
+        166,
+        217,
+        249
+      ],
+      "detail": "Canonical subscriptions can include the metered overage price; Portal uses default config. sync publishes delivered status/quantity without authoritative refresh, fence or publication revision. Native pending quantity helps provisional provider state but does not repair publisher ordering or external writers."
+    },
+    {
+      "file": "apps/onboard-api/src/billing/stripe-webhook.service.ts",
+      "lines": [
+        28,
+        66,
+        75,
+        78
+      ],
+      "detail": "Existing handler covers subscription create/update/delete, Checkout and payment_failed log. Pending applied/expired, invoice paid/action-required recovery and durable operation correlation are absent; event ledger alone is not a publication CAS."
+    },
+    {
+      "file": "apps/onboard-api/src/lifecycle/lifecycle.service.ts",
+      "lines": [
+        83,
+        112,
+        131,
+        243,
+        287,
+        369
+      ],
+      "detail": "Trial conversion creates subscriptions and syncs; lockout/cancellation/retention policies consume published state. Native updates only address existing eligible subscriptions; preserve canonical admin/negative lifecycle decisions instead of hiding them indiscriminately."
+    }
+  ],
+  "externalWriters": {
+    "finding": "Portal, already-issued Checkout/Portal URLs, Dashboard operators and other billing/lifecycle writers do not acquire a candidate DB lock. Native pending_update is not an exclusive lock or provider CAS.",
+    "minimumOwnerAgreement": "Inventory and explicitly control quantity/cancel writers and issued capabilities; verify deployed Portal features with its owner. Reconcile authoritative invoice/PI/subscription and suspend conversion on drift. Disabling new Portal creation alone cannot establish existing-session or Dashboard exclusion.",
+    "prohibitedShortcut": "Do not claim read fingerprint + update is provider CAS, or automatically reissue a removed pending update under a fresh idempotency key."
+  },
+  "singleUseCapacity": {
+    "finding": "Payment and provider-applied quantity do not reserve a slot for one prospect. Current manual/Meri create, CSV, LDA and reactivation can compete; prospect row lock does not serialize tenant capacity.",
+    "dependencies": [
+      "apps/api/src/clients/clients.service.ts:createInTransaction (1174), bulkImport (1261), update status/reactivation (1415)",
+      "apps/api/src/intelligence/firm-onboarding.service.ts:importClients (181; per-LDA-ID lock251, create268)",
+      "apps/api/src/business-development/business-development.service.ts:convert (927; prospect lock937; shared client create997/1016)"
+    ],
+    "ownerContract": "Core transaction must lock tenant capacity, reserve exactly the paid attempt/prospect/invoice entitlement and consume it uniquely with client insert + prospect link + audit. All capacity writers/reactivation must honor reservations. Existing-client linking must not consume a new slot; idempotent retry returns the same client. Onboard settlement/publication and Core consumption need explicit cross-service ownership using shared DB atomicity, not two unrelated commits."
+  },
+  "smallestCoherentNextChange": {
+    "scope": "Owner-allocated durable fence/recovery + capacity prerequisite, keeping current consent semantics. The broader writer/consumer map is outputs/portfolio-billing-fence-discovery-20261011.json.",
+    "proposedPaths": [
+      "NEW apps/onboard-api/src/billing/portfolio-billing-isolation.ts",
+      "NEW apps/onboard-api/src/billing/portfolio-billing-recovery.ts",
+      "apps/onboard-api/src/billing/{billing.service.ts,stripe-webhook.service.ts,portfolio-billing-contract.ts,portfolio-billing-service.ts,portfolio-billing-stripe.ts}",
+      "apps/onboard-api/src/lifecycle/lifecycle.service.ts + canonical provisioning/Checkout/Portal/admin overlap from writer map",
+      "NEW apps/api/src/clients/client-capacity.ts + canonical create/bulk/LDA/reactivation and prospect conversion callers",
+      "Owner-allocated durable operation/dispatch/publication revision/reservation/consumption SQL; no migration number allocated"
+    ],
+    "requirements": [
+      "Persist immutable exact request and authorization plus separate dispatch intent before network; maintain ownership through SCA/unknown/paid-unconsumed states. No DB transaction across network.",
+      "Use authoritative invoice/PI/subscription reads and local monotonic publication CAS; verified paid settlement only, unique capacity reservation and receipt consumption; concurrent canonical writers participate.",
+      "Handle disappearance/replacement/void/cancel, mismatched amounts/customer/sub/quantity, and ambiguous update/confirm without replay. Separate approved compensation, never blind quantity rollback/refund.",
+      "Native pending mode remains a separately reviewed alternative: it would authorize an auto-collecting update before actual invoice exists and requires a proven exact-amount guarantee/change of consent contract. No such atomic amount limit/exclusivity primitive was established here."
+    ]
+  },
+  "verificationRequiredBeforeActivation": [
+    "Preserve 59 service/domain and22 actual-SQL/store tests at372; add original RED for publication and capacity races before changing source.",
+    "Deterministic provider-port contract cases: immediate paid before prepare receipt, decline, SCA, unknown update/confirm, pending expiry/replacement, mismatched actual total, mixed metered invoice, paused/canceled/unsupported methods.",
+    "Webhook applied/expired/paid/action-required + duplicate/out-of-order/same-second delivery, external changes, late callback and stale publisher CAS.",
+    "Real two-connection disposable PostgreSQL concurrency across paid convert/manual/Meri/CSV/LDA/reactivation; rollback/one-time consumption/existing-client link. PGlite alone cannot establish this guarantee.",
+    "Owner-authorized Stripe sandbox test of installed Acacia request/response and SCA/expiry/Portal behavior; not run in this read-only task."
+  ],
+  "limits": "No provider reads/writes, sandbox charge, SQL execution, tests/build/install/deployment, source/SQL edits or candidate modification. Current unversioned Stripe guide is newer than installed Acacia contract; enum/type/version source verified, deployed account/payment/Portal/webhook settings unverified. Failed versioned detailed-doc opens and one corrected rg quoting error do not establish missing capability.",
+  "sources": [
+    {
+      "file": "apps/onboard-api/src/billing/billing.service.ts",
+      "sha256": "5ce1534d7cc803321a11375b1a97291ff9d8ce84ae40d49dcc060292cde0297f",
+      "bytes": 12788,
+      "byteExactCanonicalMain": true
+    },
+    {
+      "file": "apps/onboard-api/src/billing/stripe-webhook.service.ts",
+      "sha256": "ed9d22b3a3e9a1c43a9d1113a5a4a4f413b33943ac0b4e2b7b335c80010428a2",
+      "bytes": 3218,
+      "byteExactCanonicalMain": true
+    },
+    {
+      "file": "apps/onboard-api/src/billing/stripe.client.ts",
+      "sha256": "e073bffe3903a0e05bce860f0dcb3113263a32150420b331a4bcdc42f83732ba",
+      "bytes": 1722,
+      "byteExactCanonicalMain": true
+    },
+    {
+      "file": "apps/onboard-api/src/lifecycle/lifecycle.service.ts",
+      "sha256": "5bc9a523ec2a71861370f411b2c45399233e098b75043096f42c027263b8c182",
+      "bytes": 16869,
+      "byteExactCanonicalMain": true
+    },
+    {
+      "file": "apps/onboard-api/src/funnel/funnel.service.ts",
+      "sha256": "2c1c703371bfa106e9ad463a469c46b54cf12dbfa467103957df9188dea233ee",
+      "bytes": 34653,
+      "byteExactCanonicalMain": true
+    },
+    {
+      "file": "apps/onboard-api/src/funnel/provisioning.service.ts",
+      "sha256": "86ec06a625a9ba183ae16c84c599e2ff253d5c9c0652a453c3c69ffb5ea10032",
+      "bytes": 15870,
+      "byteExactCanonicalMain": true
+    },
+    {
+      "file": "apps/onboard-api/src/billing/billing-overage.service.ts",
+      "sha256": "4dd6b8db038fb87ec31f94d3cdc9f4880e5295173d14c5e58a6b91678f80878a",
+      "bytes": 5381,
+      "byteExactCanonicalMain": true
+    },
+    {
+      "file": "apps/api/src/clients/clients.service.ts",
+      "sha256": "0b04f5e819b86c68993627520cf41dd03524b7f66c3c4dd3751f537c630f352b",
+      "bytes": 69882,
+      "byteExactCanonicalMain": true
+    },
+    {
+      "file": "apps/api/src/intelligence/firm-onboarding.service.ts",
+      "sha256": "11918e3aef2a796b6fa27577e52dd776163ca20956b62c658221b6d2f7fefed3",
+      "bytes": 13943,
+      "byteExactCanonicalMain": true
+    },
+    {
+      "file": "apps/api/src/business-development/business-development.service.ts",
+      "sha256": "40ed9816f134c43f6ce2abb1c0525bfd87228a669aad86ffdcd397693efa36ba",
+      "bytes": 56595,
+      "byteExactCanonicalMain": true
+    },
+    {
+      "file": "apps/onboard-api/src/billing/portfolio-billing-stripe.ts",
+      "sha256": "59a68c14eb71fb071bae55981898044b96bd5ff4b59f684f06bc6ffe3f97f865",
+      "bytes": 11641
+    },
+    {
+      "file": "apps/onboard-api/src/billing/portfolio-billing-service.ts",
+      "sha256": "6bc22f0c15d124991bcfa679e4a70063a156df1c4963a13acf7f6c01daddb8bb",
+      "bytes": 10508
+    },
+    {
+      "file": "apps/onboard-api/src/billing/portfolio-billing-contract.ts",
+      "sha256": "451a8be71f1d42586f06c5e17adf87326fff67177a56ea15a8dffda1bfa9bf42",
+      "bytes": 4488
+    },
+    {
+      "file": "apps/onboard-api/src/billing/portfolio-billing-domain.ts",
+      "sha256": "6295de4ad39c1a70d5a25e4548b4593aaed20bca7f502be7809cd8b6a5d73ad1",
+      "bytes": 9006
+    }
+  ]
+}

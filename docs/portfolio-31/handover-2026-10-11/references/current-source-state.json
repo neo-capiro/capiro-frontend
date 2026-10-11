@@ -1,0 +1,52 @@
+{
+  "snapshot_date": "2026-10-11",
+  "qualified_source": "aa316e0a83ea83556a2ab2b9faa9c449b6ae68e2",
+  "published_pr_head_at_handover": "7dbf8e1ee7e2ded8c6f7b0e3d3b9bc557cdca1a3",
+  "frontend_checkout": "C:\\dev\\meri-greenfield-portfolio-31",
+  "frontend_branch": "codex/portfolio-31-20261010",
+  "pending_documentation_paths": [
+    "apps/portfolio-web/README.md",
+    "docs/portfolio-31/IMPLEMENTATION-CHECKPOINT.md"
+  ],
+  "backend_main_last_verified": "fd8765ec01d292013758606204f2c9d886cd31c1",
+  "preview": {
+    "url": "http://localhost:5190",
+    "built_source": "bbf25e6ab4931886f5a382ee3362593e573c19de",
+    "current_source_build": "NOT RUN"
+  },
+  "policy": {
+    "head": "b32b4803933760dc0a93fffdcd8fba30a89c3aac",
+    "remote": "b2b0ce8c2bf03817b81e671d968b7892985b8d06",
+    "local_ahead": 3,
+    "machine_map_revision": "2026-09-30T00:21:48.2698715Z"
+  },
+  "cleanup_thread": {
+    "title": "Finish CAPIRO Cleanup1",
+    "id": "01a12af6-cc9b-74d0-b6ff-21607fcea5f1",
+    "host": "local",
+    "fresh_coordination": "Previous owner readback and explicit successor redirect received; planning-only successor message sent. See cleanup-coordination-20261011.json. Refresh constraints at takeover; no heavy allocation/integration clearance."
+  },
+  "meri_thread": {
+    "id": "01a0e551-c148-70c3-ac99-586bba4569b0",
+    "title": "Complete the entire file",
+    "owner_status": "previous reliability goal paused; active successor unconfirmed"
+  },
+  "profile_request_candidate": {
+    "checkout": "C:/dev/cap-profile-requests-20261011",
+    "branch": "codex/portfolio-profile-requests-20261011",
+    "state": "owner finishing candidate;54tests/strict types claimed, not independently accepted at packet preparation; preserve ownership",
+    "target": "tenant_client_slot",
+    "approval": "BILLING_CONTRACT_UNAVAILABLE"
+  },
+  "hermes": {
+    "exe": "C:/ProgramData/Hermes/bin/hermes.exe",
+    "chat_help_verified": true,
+    "workers_launched_for_plan": false,
+    "parallelism": "up to3 subject to Cleanup/resource limits",
+    "profiles": "existing profiles/gateways occupied; coordinator must allocate an approved profile without modifying/stopping others",
+    "oneshot_help_verified": true,
+    "codex_validation": "Mandatory after every Hermes session and every integrated workstream; independent source/evidence/check receipt.",
+    "closure": "Checkpoint and verified exit/closure at every terminal condition; zero dormant open workers, no history deletion or shared gateway shutdown."
+  },
+  "scope": "Portfolio Hermes authorization only; no G0/G1/Cleanup changes, merge, deployment or shared migration authority"
+}
