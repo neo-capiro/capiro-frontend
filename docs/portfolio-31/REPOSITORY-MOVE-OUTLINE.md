@@ -2,6 +2,12 @@
 
 2026-10-11. The owner confirmed the destination map: **Meri, Portfolio and Modules frontend code in `neo-capiro/capiro-frontend`; Meri backend services in `neo-capiro/meri-greenfield`; Portfolio and Modules backend services in `neo-capiro/capirov2`**. The owner requested copying Portfolio here and deleting it from Meri. This is a source-ownership correction, not final Portfolio acceptance or approval to change existing production routing.
 
+## Transfer result
+
+- [Frontend PR #2](https://github.com/neo-capiro/capiro-frontend/pull/2) merged at `8e8e6999c385beccd245e94e8f32a8a3120e8131`; its Portfolio app and documentation are on `capiro-frontend/main`.
+- [Meri removal PR #6](https://github.com/neo-capiro/meri-greenfield/pull/6) merged afterward at `8b123bea4c90794dc2d766814b6ddbdbfe0928bc`. It removed exactly the 726 transferred app/docs files from `meri-greenfield/main` and left backend services/contracts intact.
+- Root/frontend/Portfolio checks and 459/459 browser tests passed in the moved source. The isolated AWS preview is still running the earlier immutable image built from `meri-greenfield`; replacing that image and consolidating the shared shell are future work. See the [portable handover](./handover-2026-10-11/HANDOVER.md) for evidence and remaining phases.
+
 ## Starting state and overlap
 
 - `capiro-frontend@28c300093c0886018c49df8764a8e6fac44819eb` owns `apps/web`, a shared Meri shell and `packages/ui`; its Portfolio mode is disabled and it has no Portfolio feature screens.
@@ -9,6 +15,8 @@
 - The duplicate responsibility is the separate Next app, header/mode switcher, shell, style tokens, dialog primitive and dependency lock. Portfolio business features have no counterpart in the target repository yet. The existing AWS preview image was built from the old repository and remains immutable while source moves.
 
 ## Bounded move
+
+Steps 1–3 below are complete at the commits above. Step 4 is the next implementation phase.
 
 1. Copy the Portfolio application and its current documentation into this frontend repository on an isolated branch; preserve source bytes and test history. Keep its separate app entry during this transfer so behavior and the isolated preview build can be verified against the moved tree. Do not invent a fake merged Meri/Portfolio shell or silently weaken auth to force it into the current disconnected `apps/web` fixture.
 2. Verify the copied app with its own static checks, tests, production build and exact file inventory. The root workspace lock includes the transferred app; its original nested lock remains temporarily active for the standalone preview Docker build. Review deployment paths before a new image build. The repository's existing `apps/web` and `packages/*` remain untouched unless required for the transfer.
