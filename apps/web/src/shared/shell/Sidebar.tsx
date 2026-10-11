@@ -4,7 +4,7 @@ import { Button } from '@capiro/ui/button';
 import { DesignIcon } from './DesignIcon';
 import styles from './shell.module.css';
 
-const destinations = [{ label: 'Conversations', icon: 'conversations', current: true }, { label: 'Files', icon: 'files' }, { label: 'Runs', icon: 'runs' }, { label: 'Approvals · 2', icon: 'approvals' }, { label: 'Memory', icon: 'memory' }, { label: 'Schedules', icon: 'calendar' }, { label: 'Data access', icon: 'data-access' }];
+const destinations = [{ label: 'Conversations', icon: 'conversations', current: true }, { label: 'Files', icon: 'files' }, { label: 'Runs', icon: 'runs' }, { label: 'Approvals · 2', icon: 'approvals' }, { label: 'Memory', icon: 'memory' }, { label: 'Routines', icon: 'routines' }, { label: 'Data access', icon: 'data-access' }];
 const recents = ['Anduril meeting brief', 'FY27 funding landscape', 'Weekly client updates'];
 
 export function Sidebar() {
