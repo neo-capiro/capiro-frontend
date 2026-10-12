@@ -1,0 +1,50 @@
+{
+  "fileKey": "Zc2dEN5aLU47dVdsewDmiJ",
+  "nodes": [
+    "411:55825",
+    "411:86453"
+  ],
+  "versionId": null,
+  "versionNote": "get_design_context response did not provide a Figma version ID; timestamps are local raw capture file-save timestamps, not an asserted design edit time.",
+  "preservation": "Current raw responses/screenshots/context text are local only. Original assessment GitHub evidence is separate historical evidence. Root must copy this snapshot into the successor evidence commit for durable publication.",
+  "assets": "Raw context includes Figma asset URLs for the surrounding page. Owned divided rows and compact list use text, CSS divider/chip geometry only; no new image asset dependency. Existing adopted shared page assets remain unchanged.",
+  "remainingLiveDependencies": "None for implementation of these two bounded facets; saved contexts and screenshots are sufficient. Any future scope beyond these nodes requires a fresh explicitly identified read.",
+  "files": [
+    {
+      "path": "/tmp/capiro-remaining-capabilities-evidence/figma/411-55825.json",
+      "bytes": 236470,
+      "sha256": "ac789b76de2b34428760f8863e2945c62be42549910a21aeb5673718b2227e7e",
+      "savedAtUtc": "2026-10-12T19:21:58.287837+00:00"
+    },
+    {
+      "path": "/tmp/capiro-remaining-capabilities-evidence/figma/411-55825.png",
+      "bytes": 120838,
+      "sha256": "a5470dac4556dc77247e3123aa6745ccb0d5ca08f786640af103f9108a6ae2eb",
+      "savedAtUtc": "2026-10-12T19:21:58.786968+00:00"
+    },
+    {
+      "path": "/tmp/capiro-remaining-capabilities-evidence/figma/411-55825.txt",
+      "bytes": 72938,
+      "sha256": "40bd5c3dc4cfe99037d7ef1d8779037efda5abaa5b2d7e8e2cae7b229946ad18",
+      "savedAtUtc": "2026-10-12T19:21:58.787043+00:00"
+    },
+    {
+      "path": "/tmp/capiro-remaining-capabilities-evidence/figma/411-86453.json",
+      "bytes": 109812,
+      "sha256": "5bedca585250265be31a0963be6f5d28ffe4f9ba083fb9c3ba05c4a54ee2ae58",
+      "savedAtUtc": "2026-10-12T19:21:58.623848+00:00"
+    },
+    {
+      "path": "/tmp/capiro-remaining-capabilities-evidence/figma/411-86453.png",
+      "bytes": 58906,
+      "sha256": "a344bddde8b470e43af5bfd5adafe1fbb5306f9090697f18c200e181d0cbd096",
+      "savedAtUtc": "2026-10-12T19:21:58.785487+00:00"
+    },
+    {
+      "path": "/tmp/capiro-remaining-capabilities-evidence/figma/411-86453.txt",
+      "bytes": 30110,
+      "sha256": "4733ff213d051efa1676b15cb61bad94215467e7f42ce4771349949067942ad2",
+      "savedAtUtc": "2026-10-12T19:21:58.785553+00:00"
+    }
+  ]
+}

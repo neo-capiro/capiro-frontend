@@ -1,0 +1,191 @@
+{
+  "fileKey": "Zc2dEN5aLU47dVdsewDmiJ",
+  "immutableFigmaVersionId": null,
+  "versionNote": "Tool responses supply original file/node IDs but no immutable version ID. Initial raw contexts with inline screenshots and embedded styles/tokens preserved before source changes.",
+  "githubStatus": "Fresh captures local only pending evidence publication; original assessment/PR14 snapshots remain preserved in Git.",
+  "liveGaps": [
+    "Returned SVG asset URLs could not be downloaded: curl HTTP403. Raw URLs are preserved. Existing exact local asset reuse remains under review. No required layout context/screenshot remains missing."
+  ],
+  "files": [
+    {
+      "path": "assets-411-47740.json",
+      "bytes": 1251,
+      "sha256": "f9be98d3bc384e8cb338baaba598cf4e638f3940a63236be730fc66baf760ffb",
+      "savedUTC": "2026-10-12T19:27:14.338391+00:00"
+    },
+    {
+      "path": "context-411-47010.json",
+      "bytes": 66299,
+      "sha256": "541050f16114a4669fa7b87802ab6cc216344715f7df67ea662b4b1295ffcd85",
+      "savedUTC": "2026-10-12T19:21:21.562601+00:00"
+    },
+    {
+      "path": "context-411-47010.xml",
+      "bytes": 58983,
+      "sha256": "09b4955206b226cb2c79b4b2ac21414c9023845dc134a3319550b058dd4dc688",
+      "savedUTC": "2026-10-12T19:21:36.297835+00:00"
+    },
+    {
+      "path": "context-411-47030.json",
+      "bytes": 19119,
+      "sha256": "68e11e0ed7771bed9b4b71b414b61758f15d87532e65a4d48903dac54982ced1",
+      "savedUTC": "2026-10-12T19:22:18.692515+00:00"
+    },
+    {
+      "path": "context-411-47030.png",
+      "bytes": 9733,
+      "sha256": "94aa1972145ca954b9eccfa64ad2dd72aeff5e9198a8bcf59bb7d07e5a6e9723",
+      "savedUTC": "2026-10-12T19:22:43.035079+00:00"
+    },
+    {
+      "path": "context-411-47030.tsx",
+      "bytes": 3721,
+      "sha256": "a9fdc294e8f4bfc870588fd6b41a2182ebe536e65a7eb6206f1a1e0c578f27e5",
+      "savedUTC": "2026-10-12T19:22:43.035025+00:00"
+    },
+    {
+      "path": "context-411-47063.json",
+      "bytes": 15894,
+      "sha256": "bef4f16fb6743ef2b1258a26b83c52ce686f423688c5255bd669c40a4f90d131",
+      "savedUTC": "2026-10-12T19:22:18.360504+00:00"
+    },
+    {
+      "path": "context-411-47063.png",
+      "bytes": 8234,
+      "sha256": "66f7ac63ab5f38be759e0764aaac60909aa6d586476a065a78d7ac9af58393bd",
+      "savedUTC": "2026-10-12T19:22:43.035370+00:00"
+    },
+    {
+      "path": "context-411-47063.tsx",
+      "bytes": 2534,
+      "sha256": "40eba4730c5f03f38e6b15a5a840eea532a5b1a8cca2384969e71c68f51996bf",
+      "savedUTC": "2026-10-12T19:22:43.035333+00:00"
+    },
+    {
+      "path": "context-411-47482.json",
+      "bytes": 114915,
+      "sha256": "f8126fb81578ca77c273cddaf3cf1f2ecb0e497e4fc4224112385a9d8ab529dc",
+      "savedUTC": "2026-10-12T19:21:21.910613+00:00"
+    },
+    {
+      "path": "context-411-47482.png",
+      "bytes": 67361,
+      "sha256": "cff8330d7b3d079903a374dfd68d922ad2bd2ec6ec829b70da5401f41720d694",
+      "savedUTC": "2026-10-12T19:21:36.297482+00:00"
+    },
+    {
+      "path": "context-411-47482.tsx",
+      "bytes": 21201,
+      "sha256": "a15bc1a3c6f9cc33a00ad1e6772f6e94021b6c1b09378731947d80f3ef13d110",
+      "savedUTC": "2026-10-12T19:21:36.297307+00:00"
+    },
+    {
+      "path": "context-411-47736.json",
+      "bytes": 138044,
+      "sha256": "74384a3aad445b6cb0bbf49bbb745c5baf5120fd8aaa440fc2fbc2dbe5081d4b",
+      "savedUTC": "2026-10-12T19:21:22.286625+00:00"
+    },
+    {
+      "path": "context-411-47736.png",
+      "bytes": 81606,
+      "sha256": "2ea9b4b6ccef77296335e12a554b0a982f880b3bb06ffe77d7d50051e820dd31",
+      "savedUTC": "2026-10-12T19:21:36.296868+00:00"
+    },
+    {
+      "path": "context-411-47736.tsx",
+      "bytes": 25580,
+      "sha256": "463cbeec5ae1ed5c32e0fe572be2e0be79ae1d9f67210adbee9d0216e79a0468",
+      "savedUTC": "2026-10-12T19:21:36.296697+00:00"
+    },
+    {
+      "path": "context-411-51801.json",
+      "bytes": 277793,
+      "sha256": "f9917009f64eb9c521cc99a871c36002f5066c710949e5694e959472e7af3092",
+      "savedUTC": "2026-10-12T19:21:22.982649+00:00"
+    },
+    {
+      "path": "context-411-51801.png",
+      "bytes": 124895,
+      "sha256": "41d18173c9d8bdffe69d6d615c3bf9f4c29d6319aea0123bffda45a78e338bd0",
+      "savedUTC": "2026-10-12T19:21:36.295263+00:00"
+    },
+    {
+      "path": "context-411-51801.tsx",
+      "bytes": 102395,
+      "sha256": "5e920913781b736136dd036472bdcc6b36c67412b384cb25e4cf041f70501b07",
+      "savedUTC": "2026-10-12T19:21:36.294788+00:00"
+    },
+    {
+      "path": "context-517-121532.json",
+      "bytes": 154624,
+      "sha256": "37ccc642cb7bcd3c43c33b9636232777c3bc9b549a8692f8621383dcc16143bc",
+      "savedUTC": "2026-10-12T19:21:23.686673+00:00"
+    },
+    {
+      "path": "context-517-121532.png",
+      "bytes": 67284,
+      "sha256": "36a3e5f218434f95f4b7716761ccaf5755cd70cb43eeab98755776300052ae8d",
+      "savedUTC": "2026-10-12T19:21:36.292265+00:00"
+    },
+    {
+      "path": "context-517-121532.tsx",
+      "bytes": 57759,
+      "sha256": "0960b6942ad236b82f973e9bf6d937820d2c967ab12c92cbe7bade8444fb9c9c",
+      "savedUTC": "2026-10-12T19:21:36.291668+00:00"
+    },
+    {
+      "path": "context-517-121876.json",
+      "bytes": 150343,
+      "sha256": "53d03006abbf0ba2ca8f0ff8dd8744f75f310f46655106543de61e5dd969c912",
+      "savedUTC": "2026-10-12T19:21:22.630637+00:00"
+    },
+    {
+      "path": "context-517-121876.png",
+      "bytes": 63900,
+      "sha256": "8613d59aaf56bd6bfee7ddb8921949eea57d8a3f71c602da5c23ae608524ad14",
+      "savedUTC": "2026-10-12T19:21:36.296166+00:00"
+    },
+    {
+      "path": "context-517-121876.tsx",
+      "bytes": 57982,
+      "sha256": "c976fe54bd1dc4f77df307b78464972532890fad732e9ddddef72f98f53bf718",
+      "savedUTC": "2026-10-12T19:21:36.295971+00:00"
+    },
+    {
+      "path": "context-517-122239.json",
+      "bytes": 160190,
+      "sha256": "809004d25b18afba34b7c9e989093b35a2604a1f7772eef1c1b39f5ce4d50000",
+      "savedUTC": "2026-10-12T19:21:23.338661+00:00"
+    },
+    {
+      "path": "context-517-122239.png",
+      "bytes": 71100,
+      "sha256": "68c2b931a273230e811a0e345c58b15eb3220472f0e93a7c6409530417e1a80c",
+      "savedUTC": "2026-10-12T19:21:36.293420+00:00"
+    },
+    {
+      "path": "context-517-122239.tsx",
+      "bytes": 58229,
+      "sha256": "332efcab63ede13640f0080c6b70458a431412053d834519a2bfdcfdd71dfbc5",
+      "savedUTC": "2026-10-12T19:21:36.293228+00:00"
+    },
+    {
+      "path": "screenshot-411-47010-inline.json",
+      "bytes": 383183,
+      "sha256": "2edd2fdcb3ec37d320cba187558f7e69d99568d8f97953758b1d156c6201c64b",
+      "savedUTC": "2026-10-12T19:27:19.690569+00:00"
+    },
+    {
+      "path": "screenshot-411-47010.json",
+      "bytes": 602,
+      "sha256": "9dbee2bf637c9ee5b670f25b48b1a4d46842094b050218eb5f3bd936e04ffbf1",
+      "savedUTC": "2026-10-12T19:22:11.824288+00:00"
+    },
+    {
+      "path": "screenshot-411-47010.png",
+      "bytes": 286823,
+      "sha256": "afe6c5f560991d8be220e9eb4fb5bd1c59cfaf76558de881f69f272a2a73cab3",
+      "savedUTC": "2026-10-12T19:28:42.789634+00:00"
+    }
+  ]
+}
