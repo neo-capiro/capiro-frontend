@@ -9,6 +9,7 @@ const publicEntry = name => /\/(?:public|[^/]+-public)\.ts$/.test(name);
 
 export const publicExports = new Set([
   '@capiro/ui/button', '@capiro/ui/dialog', '@capiro/ui/prompt-input',
+  '@capiro/ui/conversation', '@capiro/ui/message', '@capiro/meri-client/projection',
   '@capiro/meri-contracts', '@capiro/meri-contracts/browser',
   '@capiro/meri-contracts/metadata', '@capiro/meri-ui-stream/protocol',
 ]);

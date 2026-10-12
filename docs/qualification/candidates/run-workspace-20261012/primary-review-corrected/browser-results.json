@@ -1,0 +1,382 @@
+{
+  "origin": "http://127.0.0.1:34902",
+  "previewOnly": true,
+  "groups": [
+    {
+      "name": "all8 run states, safe error, accessible log/status and disabled boundaries",
+      "pass": true
+    },
+    {
+      "name": "incremental fixture, canonical replay, escaped text, unmatched tool, keyboard reference disclosure and exact IDs",
+      "pass": true
+    },
+    {
+      "name": "actual adopted scroll-to-latest, local PromptInput draft and keyboard focus",
+      "pass": true
+    },
+    {
+      "name": "two runs and two attempts isolate colliding tool/message IDs",
+      "pass": true
+    },
+    {
+      "name": "desktop geometry,390px mobile overflow including disclosures and three labelled toggles",
+      "pass": true
+    },
+    {
+      "name": "original Home/reset/Routines/suggestion and cited-answer interactions preserved",
+      "pass": true
+    },
+    {
+      "name": "zero page errors, zero external requests, no command writes",
+      "pass": true
+    }
+  ],
+  "pageErrors": [],
+  "externalRequests": [],
+  "requests": [
+    {
+      "path": "/meri/fixture/run-activity",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/wordmark.png",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/mode-meri.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/mode-portfolio.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/18932pv-ebku5.css",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/3c8111r58lhhk.css",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/mode-modules.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/quick-log.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/calendar.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/search.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/updates.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/profile.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/plus.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/10vdv64yk0odn.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/1oizlhl9fdqt_.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/3yblqtx37r6a_.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/03no82x0zivgj.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/turbopack-2c3mg3r-05n1w.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/30g0jo299pr8e.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/1hapxxfk6y3-n.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/122ty20geyjtv.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/0-re41fkrty2f.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/01_slawtlo3d-.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/0knge03tyejx7.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/2nv20vw7-5-jy.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/15tab1gkjfx-x.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/30g8cqk-kopt_.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/2jqhz6703xcdo.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/2vby4mm2vg09b.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/1xeqfj3tybhu4.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/109bq5gj3m3_h.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/0u0_dl0v9_1iu.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/2vy7vc7ts1p6k.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/145tcfy9mfb5c.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/3yqp2lutyhz3l.js",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/conversations.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/files.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/runs.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/approvals.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/memory.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/routines.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/data-access.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/chevron.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/send.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/meri-wordmark.png",
+      "method": "GET"
+    },
+    {
+      "path": "/meri?_rsc=zyDS1ua2pQ4IPdZn",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/1devn-7_hwlf1.js",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/sparkle.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/meri/fixture/cited-answer",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/wordmark.png",
+      "method": "GET"
+    },
+    {
+      "path": "/design/cited-answer/mode-meri.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/cited-answer/mode-portfolio.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/18932pv-ebku5.css",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/3c8111r58lhhk.css",
+      "method": "GET"
+    },
+    {
+      "path": "/design/cited-answer/mode-modules.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/cited-answer/quick-log.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/cited-answer/calendar.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/cited-answer/search.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/cited-answer/updates.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/cited-answer/profile.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/cited-answer/plus.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/10vdv64yk0odn.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/1oizlhl9fdqt_.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/3yblqtx37r6a_.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/03no82x0zivgj.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/turbopack-2c3mg3r-05n1w.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/30g0jo299pr8e.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/300p222q_qb27.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/2jqhz6703xcdo.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/15tab1gkjfx-x.js",
+      "method": "GET"
+    },
+    {
+      "path": "/design/cited-answer/conversations.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/cited-answer/files.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/cited-answer/runs.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/cited-answer/approvals.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/cited-answer/memory.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/cited-answer/routines.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/cited-answer/data-access.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/cited-answer/assistant-sparkle.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/cited-answer/external.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/cited-answer/plus-secondary.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/cited-answer/chevron.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/cited-answer/send.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/cited-answer/meri-ink.png",
+      "method": "GET"
+    }
+  ],
+  "screenshots": [
+    "workspace-desktop.png",
+    "workspace-mobile.png"
+  ]
+}

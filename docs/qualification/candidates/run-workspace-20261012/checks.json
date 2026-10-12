@@ -1,0 +1,38 @@
+{
+  "node": "v24.19.0",
+  "offlineSupportedCiEnvironment": {
+    "CI": "true",
+    "__NEXT_AGENT_UPGRADE": "security",
+    "NEXT_TELEMETRY_DISABLED": "1",
+    "NEXT_IGNORE_INCORRECT_LOCKFILE": "1",
+    "NPM_CONFIG_OFFLINE": "true"
+  },
+  "lockOrDependencyVersionsModified": false,
+  "cleanBuild": true,
+  "commands": [
+    {
+      "label": "full check final exact source after label repair",
+      "argv": [
+        "npm",
+        "run",
+        "check"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 15.623,
+      "bytes": 12084,
+      "sha256": "1a80482041a6f84643906805d6c6f7082aebaa482eb0a90f87c9febb474dcf24"
+    },
+    {
+      "label": "clean build after explicit select-label association",
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 6.85,
+      "bytes": 1240,
+      "sha256": "c59a17dc85929ddc1f2e2e30a4d6f78e381dc6e556af04c7d810824e7cec9858"
+    }
+  ]
+}

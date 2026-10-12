@@ -1,0 +1,51 @@
+{
+  "sourceCommit": "0068c58613f1e2d5ed13e68f9a9d18c8b9a7ef88",
+  "records": [
+    {
+      "label": "view-and-architecture",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--test",
+        "scripts/architecture.test.mjs",
+        "apps/web/test/run-workspace.test.mjs"
+      ],
+      "cwd": "/workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012",
+      "exitCode": 0,
+      "startedAt": 1791765666.9147694,
+      "endedAt": 1791765667.4437225,
+      "stdout": {
+        "path": "view-and-architecture.stdout.bin",
+        "bytes": 1739,
+        "sha256": "7e10044384869a109ee37eb31ce37e5afcdf6517d9d5ea44c9b3f335c23ed808"
+      },
+      "stderr": {
+        "path": "view-and-architecture.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "ownedProcessGroupAbsent": true
+    },
+    {
+      "label": "actual-browser-seven-groups",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "/workspace/scratch/853fba62b1f1/capiro-run-workspace-primary-review-20261012/docs/qualification/candidates/run-workspace-20261012/primary-review-corrected/browser-check.mjs"
+      ],
+      "cwd": "/workspace/scratch/853fba62b1f1/capiro-run-workspace-primary-review-20261012",
+      "exitCode": 0,
+      "startedAt": 1791765668.2730863,
+      "endedAt": 1791765672.880175,
+      "stdout": {
+        "path": "actual-browser-seven-groups.stdout.bin",
+        "bytes": 765,
+        "sha256": "b2e7921beff30fdebc4c481c07be0f5d3520bbc0e85e740989b5cc1aa2874569"
+      },
+      "stderr": {
+        "path": "actual-browser-seven-groups.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "ownedProcessGroupAbsent": true
+    }
+  ]
+}

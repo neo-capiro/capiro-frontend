@@ -1,0 +1,19 @@
+{
+  "baseCommit": "3cc4645de01046c402af96ac381c16cfd5721e9e",
+  "baseTree": "9fb3ef9aa72010e87a173378e4d04150be41d6d3",
+  "baseTrackedBlobs": 1015,
+  "unchangedBlobs": 1013,
+  "changedExistingBlobs": [
+    {
+      "path": "scripts/architecture.mjs",
+      "baseGitBlob": "04fc5536ce75a237b39080ca7a27ac75ac70ce46",
+      "currentGitBlob": "74f256a37166088baff609b53d71bfdfa92d5ec5"
+    },
+    {
+      "path": "scripts/architecture.test.mjs",
+      "baseGitBlob": "16650e8d85b82d8b0b87fe4a8c47c40f64688bb6",
+      "currentGitBlob": "5ce72d775c15c093f8bc47135eb9336f5a216d3b"
+    }
+  ],
+  "sharedShellHomeCitedPortfolioPackagesLocksPublic01Unchanged": true
+}

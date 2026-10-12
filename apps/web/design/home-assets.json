@@ -34,6 +34,79 @@
     "assetDisposition": "All19 original asset records and25 rendered slots retained; final context adds no asset.",
     "limitations": "Later non-atomic live reference; immutable Figma revision unavailable. Screenshot is evidence only. Home-only amendment, no other screen or live behavior acceptance."
   },
+  "homeReference20261011": {
+    "capturedUtc": "2026-10-11T20:28:53.165194+00:00",
+    "nodeId": "442:81437",
+    "wordmarkNodeId": "777:149110",
+    "suggestionsNodeId": "442:81627",
+    "changes": [
+      "Meri wordmark in scope row",
+      "Routines sidebar label and exact icon",
+      "Start action in card top row",
+      "Centered625px lower suggestion row",
+      "White New conversation plus"
+    ],
+    "assets": [
+      {
+        "constant": "imgInk",
+        "file": "meri-wordmark.png",
+        "origin": "Figma original image.getBytesAsync; native imageHash a2c4b2bbfff406a5145b9e7a8e2ed2ac13dcace9 at I777:149110;773:149100",
+        "mime": "image/png",
+        "bytes": 23234,
+        "sha256": "1b9fc833853d4d9169e14d0a1746f491b1d9a574816ddef3156c83a24809fe49",
+        "sourceWidth": 1024,
+        "sourceHeight": 340,
+        "expectedRenderedWidth": 62,
+        "expectedRenderedHeight": 20,
+        "expectedRenderedSlots": 1,
+        "usage": "foreground-colored alpha mask"
+      },
+      {
+        "file": "routines.svg",
+        "origin": "Exact Figma native SVG exportAsync of I442:81539;12:383; no redraw or path extraction",
+        "mime": "image/svg+xml",
+        "bytes": 525,
+        "sha256": "96f455607f2078282d76db28fa17dabc3c7028bf2efb159f26b18760791914e1",
+        "svgRoot": {
+          "width": "16",
+          "height": "16",
+          "viewBox": "0 0 16 16"
+        },
+        "expectedRenderedSlots": 1,
+        "usage": "Sidebar Routines icon"
+      }
+    ],
+    "limitations": "Fresh non-atomic Figma context and screenshot; no immutable Figma revision. Earlier reference and original19 asset records retained. URL downloads returned HTML; exact raw image acquired through supported native Figma read.",
+    "routinesNodeId": "I442:81539;12:383",
+    "renderedSlotDispositions": {
+      "calendar.svg": {
+        "historicalSlots": 2,
+        "currentSlots": 1,
+        "remainingSlot": "Shared header Master calendar"
+      },
+      "routines.svg": {
+        "currentSlots": 1,
+        "newSlot": "Sidebar Routines"
+      },
+      "meri-wordmark.png": {
+        "currentSlots": 1,
+        "newSlot": "Scope row alpha mask"
+      },
+      "plus.svg": {
+        "historicalSlots": 2,
+        "currentSlots": 2,
+        "colorChange": "Only New conversation uses a CSS white filter; raw asset unchanged"
+      }
+    },
+    "verificationReference": {
+      "screenshotPath": ".task-inputs/figma-refresh-20261011/figma-home-442-81437.png",
+      "screenshotBytes": 85124,
+      "screenshotSha256": "179a1d908675e7fd7cf6c4f28bcac1015d93c1cb9a06b07a7d91f019667c17b3",
+      "renderWidth": 1440,
+      "renderHeight": 1040,
+      "suggestionsContextPath": ".task-inputs/figma-refresh-20261011/suggestions-context.txt"
+    }
+  },
   "assets": [
     {
       "constant": "imgIconSparkle",

@@ -1,0 +1,29 @@
+{
+  "sourceCommit": "0068c58613f1e2d5ed13e68f9a9d18c8b9a7ef88",
+  "records": [
+    {
+      "label": "view-and-architecture",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "--test",
+        "scripts/architecture.test.mjs",
+        "apps/web/test/run-workspace.test.mjs"
+      ],
+      "cwd": "/workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012",
+      "exitCode": 0,
+      "startedAt": 1791765645.8160913,
+      "endedAt": 1791765646.311212,
+      "stdout": {
+        "path": "view-and-architecture.stdout.bin",
+        "bytes": 1737,
+        "sha256": "20f795fcbd566d0f3c34bd4a040b490dc1fb97f5e2d4a9f6dce86343c2f3ced2"
+      },
+      "stderr": {
+        "path": "view-and-architecture.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "ownedProcessGroupAbsent": true
+    }
+  ]
+}

@@ -9,7 +9,7 @@ test('all nineteen exact design assets are local, nonempty, hash-bound and retai
   assert.equal(manifest.baseline, 'fresh-header-quick-log-and-master-calendar');
   assert.equal(manifest.assets.length, 19);
   const directory = new URL('../public/design/home/', import.meta.url);
-  assert.deepEqual(readdirSync(directory).sort(), manifest.assets.map(asset => asset.file).sort());
+  assert.deepEqual(readdirSync(directory).sort(), [...manifest.assets, ...manifest.homeReference20261011.assets].map(asset => asset.file).sort());
   for (const asset of manifest.assets) {
     assert.match(asset.file, /^[a-z-]+\.(svg|png)$/);
     const file = new URL(asset.file, directory);
@@ -25,6 +25,42 @@ test('all nineteen exact design assets are local, nonempty, hash-bound and retai
       assert.equal(asset.svgRoot.height, asset.svgRoot.width);
     } else { assert.equal(asset.mime, 'image/png'); assert.equal(body.subarray(0, 8).toString('hex'), '89504e470d0a1a0a'); }
   }
+});
+
+test('the new Meri wordmark is separately provenanced, local and uses its exact alpha-mask bytes', () => {
+  const manifest = JSON.parse(readFileSync(new URL('../design/home-assets.json', import.meta.url), 'utf8'));
+  const reference = manifest.homeReference20261011;
+  assert.equal(reference.nodeId, '442:81437');
+  assert.equal(reference.wordmarkNodeId, '777:149110');
+  assert.equal(reference.assets.length, 2);
+  const [asset] = reference.assets;
+  assert.equal(asset.file, 'meri-wordmark.png');
+  assert.equal(asset.usage, 'foreground-colored alpha mask');
+  assert.equal(asset.expectedRenderedWidth, 62); assert.equal(asset.expectedRenderedHeight, 20);
+  const file = new URL(`../public/design/home/${asset.file}`, import.meta.url);
+  assert.ok(lstatSync(file).isFile()); assert.ok(!lstatSync(file).isSymbolicLink());
+  const body = readFileSync(file);
+  assert.equal(body.length, asset.bytes); assert.ok(body.length > 0);
+  assert.equal(createHash('sha256').update(body).digest('hex'), asset.sha256);
+  assert.equal(body.subarray(0, 8).toString('hex'), '89504e470d0a1a0a');
+});
+
+test('Routines adopts the separately exported exact SVG and preserves its intrinsic dimensions', () => {
+  const manifest = JSON.parse(readFileSync(new URL('../design/home-assets.json', import.meta.url), 'utf8'));
+  const reference = manifest.homeReference20261011;
+  assert.equal(reference.routinesNodeId, 'I442:81539;12:383');
+  assert.deepEqual(reference.renderedSlotDispositions['calendar.svg'], { historicalSlots: 2, currentSlots: 1, remainingSlot: 'Shared header Master calendar' });
+  const asset = reference.assets.find(item => item.file === 'routines.svg');
+  assert.ok(asset);
+  const file = new URL(`../public/design/home/${asset.file}`, import.meta.url);
+  assert.ok(lstatSync(file).isFile()); assert.ok(!lstatSync(file).isSymbolicLink());
+  const body = readFileSync(file);
+  assert.equal(body.length, asset.bytes); assert.ok(body.length > 0);
+  assert.equal(createHash('sha256').update(body).digest('hex'), asset.sha256);
+  const root = body.subarray(0, 2048).toString().match(/<svg\b[^>]*>/)?.[0];
+  assert.ok(root);
+  for (const [name, value] of Object.entries(asset.svgRoot)) assert.ok(root.includes(`${name}="${value}"`));
+  assert.equal(asset.svgRoot.width, '16'); assert.equal(asset.svgRoot.height, '16');
 });
 
 test('no application source retains temporary Figma asset URLs or screenshot implementation imagery', () => {
