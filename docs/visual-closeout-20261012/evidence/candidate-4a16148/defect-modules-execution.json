@@ -1,0 +1,19 @@
+{
+  "head": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "tree": "16c0b62901859aa4ff3f2ea01856aa13e13c65cd",
+  "statusAtStart": "",
+  "command": [
+    "env",
+    "CAPIRO_QA_CHROMIUM_EXECUTABLE=/usr/bin/chromium",
+    "npx",
+    "playwright",
+    "test",
+    "--config=/tmp/capiro-visual-closeout/modules/playwright.config.ts"
+  ],
+  "startedAt": "2026-10-12T11:50:25.604317+00:00",
+  "state": "finished",
+  "exitCode": 0,
+  "finishedAt": "2026-10-12T11:50:36.134434+00:00",
+  "headAtFinish": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "statusAtFinish": ""
+}

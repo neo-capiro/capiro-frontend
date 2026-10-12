@@ -1,0 +1,46 @@
+{
+  "archivedAt": "2026-10-12T12:24:23.827668+00:00",
+  "head": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "tree": "16c0b62901859aa4ff3f2ea01856aa13e13c65cd",
+  "srcTree": "46cebca97ccfc1facc1c1a939beb6f4d7730685b",
+  "requiredGates": [
+    "clean-install-writable-cache",
+    "check",
+    "build",
+    "elements",
+    "production",
+    "meri-actual-server",
+    "preservation",
+    "defect-portfolio",
+    "defect-modules",
+    "reviewer-positive",
+    "reviewer-reopen",
+    "objective-baseline-candidate-paths",
+    "calendar-nested-escape",
+    "portfolio-browser",
+    "modules-browser"
+  ],
+  "browserStats": {
+    "portfolio": {
+      "startTime": "2026-10-12T11:51:13.070Z",
+      "duration": 1972871.003,
+      "expected": 934,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "modules": {
+      "startTime": "2026-10-12T11:51:50.086Z",
+      "duration": 461857.36,
+      "expected": 121,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "retainedNonqualifyingAttempts": [
+    "clean-install (default cache unavailable)",
+    "objective-baseline-green (old absolute imports load a second Playwright instance)"
+  ],
+  "acceptance": "Exact-source author offline qualification. Independent review remains separately attributed. All 337 Portfolio rows retain full/native acceptance requirements. No image/cloud/live action."
+}

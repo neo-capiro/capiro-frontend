@@ -1,0 +1,22 @@
+{
+  "head": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "tree": "16c0b62901859aa4ff3f2ea01856aa13e13c65cd",
+  "statusAtStart": "",
+  "command": [
+    "env",
+    "CAPIRO_QA_CHROMIUM_EXECUTABLE=/usr/bin/chromium",
+    "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+    "node",
+    "/tmp/review-r3-controls/run-review-control.mjs",
+    "/workspace/capiro-visual-closeout",
+    "/tmp/capiro-candidate-4a16148/calendar-nested-escape.spec.ts",
+    "/tmp/capiro-candidate-4a16148/calendar-nested-control",
+    "modules"
+  ],
+  "startedAt": "2026-10-12T12:01:59.091031+00:00",
+  "state": "finished",
+  "exitCode": 0,
+  "finishedAt": "2026-10-12T12:02:08.900376+00:00",
+  "headAtFinish": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "statusAtFinish": ""
+}

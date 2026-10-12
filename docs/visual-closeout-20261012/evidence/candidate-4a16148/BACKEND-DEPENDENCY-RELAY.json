@@ -1,0 +1,16 @@
+{
+  "recordedAt": "2026-10-12T11:56:22.739518+00:00",
+  "source": "Coordinator message in delegated thread",
+  "priorCompatibilityPin": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+  "formattingOnlyDraft": {
+    "pr": 2407,
+    "head": "f1e83a3f194a8ebd972e370ff6e5b5f559888b29",
+    "tree": "60033662b40ba380dae4a032fca7b02251479cba",
+    "changedSourceFiles": 2,
+    "semanticEquivalence": "independently verified per coordinator",
+    "coreTests": "127/127 per coordinator",
+    "workspaceTests": "172/172 per coordinator"
+  },
+  "frontendContractRepinRequired": false,
+  "open": "Backend source-only Cleanup gaps remain under its owner; native acceptance and original unpublished reporting remain open. This frontend task did not execute backend checks or modify its repositories."
+}

@@ -1,0 +1,3 @@
+import {defineConfig} from '@playwright/test';
+import original from "/workspace/capiro-visual-closeout/apps/web/test/browser/playwright.config";
+export default defineConfig({...original,testDir:"/tmp/capiro-candidate-4a16148/calendar-nested-control",testMatch:'control.spec.ts',grep:undefined,outputDir:"/tmp/capiro-candidate-4a16148/calendar-nested-control/artifacts",reporter:[['list'],['json',{outputFile:"/tmp/capiro-candidate-4a16148/calendar-nested-control/results.json"}]],webServer:{...original.webServer,command:"\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" \"/workspace/capiro-visual-closeout/apps/web/test/browser/server.mjs\""}});

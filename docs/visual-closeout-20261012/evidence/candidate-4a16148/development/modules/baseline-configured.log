@@ -1,0 +1,47 @@
+[WebServer] (node:368352) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:368379) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 ../../../../tmp/capiro-visual-closeout/modules/control.spec.ts:4:1 › VD06 Modules Calendar uses its compact authored shell (1.3s)
+
+
+  1) ../../../../tmp/capiro-visual-closeout/modules/control.spec.ts:4:1 › VD06 Modules Calendar uses its compact authored shell 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 264
+    Received: 296
+
+       6 |  await page.screenshot({path:info.outputPath('calendar-before.png')});
+       7 |  const card=page.getByRole('table').locator('..');const bounds=await page.getByRole('heading',{name:'Master calendar',exact:true}).boundingBox();
+    >  8 |  expect(bounds!.x).toBe(264);expect(bounds!.y).toBeLessThan(150);
+         |                    ^
+       9 |  const toolbar=await page.getByRole('button',{name:'Today',exact:true}).boundingBox();expect(toolbar!.y).toBeLessThan(220);
+      10 | });
+      11 |
+        at /tmp/capiro-visual-closeout/modules/control.spec.ts:8:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-visual-closeout/modules/artifacts/control-VD06-Modules-Calen-4b44d--its-compact-authored-shell/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-visual-closeout/modules/artifacts/control-VD06-Modules-Calen-4b44d--its-compact-authored-shell/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-visual-closeout/modules/artifacts/control-VD06-Modules-Calen-4b44d--its-compact-authored-shell/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-visual-closeout/modules/artifacts/control-VD06-Modules-Calen-4b44d--its-compact-authored-shell/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    ../../../../tmp/capiro-visual-closeout/modules/control.spec.ts:4:1 › VD06 Modules Calendar uses its compact authored shell 
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

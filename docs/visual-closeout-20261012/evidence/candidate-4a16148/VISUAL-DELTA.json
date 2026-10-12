@@ -1,0 +1,90 @@
+{
+  "recordedAt": "2026-10-12T12:01:16.174612+00:00",
+  "priorLedger": "docs/integration-contracts-20261012/PORTFOLIO-337-ACTIVE-LEDGER.json",
+  "priorLedgerSha256": "65388420199ce49010276e97eae96c167fcc82732f3d77e8202bb58696418ee8",
+  "scope": "Finite seven findings, eight direct row IDs; original 345 rows/337 in-scope and eight exclusions retained. No full/native row accepted.",
+  "findings": [
+    {
+      "finding": "VD-01",
+      "rowIds": [
+        "CORE-099"
+      ],
+      "title": "Owner order editor uses an unrelated team form instead of owner cards",
+      "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+      "status": "AUTHOR_OFFLINE_QUALIFIED; immutable regression and complete combined gates pass; independent visual review pending",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "native": "NOT_RUN_NATIVE"
+    },
+    {
+      "finding": "VD-02",
+      "rowIds": [
+        "CORE-098"
+      ],
+      "title": "Ordering guidance claims saving when the ordering feature is unavailable",
+      "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+      "status": "AUTHOR_OFFLINE_QUALIFIED; immutable regression and complete combined gates pass; independent visual review pending",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "native": "NOT_RUN_NATIVE"
+    },
+    {
+      "finding": "VD-03",
+      "rowIds": [
+        "CORE-086",
+        "CORE-098"
+      ],
+      "title": "Portfolio overview lacks the designed Customize entry and toolbar hierarchy",
+      "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+      "status": "AUTHOR_OFFLINE_QUALIFIED; immutable regression and complete combined gates pass; independent visual review pending",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "native": "NOT_RUN_NATIVE"
+    },
+    {
+      "finding": "VD-04",
+      "rowIds": [
+        "CAP-02"
+      ],
+      "title": "New capability omits required marker and dropdown affordances",
+      "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+      "status": "AUTHOR_OFFLINE_QUALIFIED; immutable regression and complete combined gates pass; independent visual review pending",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "native": "NOT_RUN_NATIVE"
+    },
+    {
+      "finding": "VD-05",
+      "rowIds": [
+        "BILL-01",
+        "BILL-02"
+      ],
+      "title": "Bill Tracker title and results framing differ from the authored hierarchy",
+      "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+      "status": "AUTHOR_OFFLINE_QUALIFIED; immutable regression and complete combined gates pass; independent visual review pending",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "native": "NOT_RUN_NATIVE"
+    },
+    {
+      "finding": "VD-06",
+      "rowIds": [
+        "MCAL-001",
+        "MCAL-003"
+      ],
+      "title": "Modules Master Calendar has excessive header and horizontal inset",
+      "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+      "status": "AUTHOR_OFFLINE_QUALIFIED; immutable regression and complete combined gates pass; independent visual review pending",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "native": "NOT_RUN_NATIVE"
+    },
+    {
+      "finding": "VD-07",
+      "rowIds": [
+        "CAP-02"
+      ],
+      "title": "Portfolio modal backdrop blurs the page unlike the reference",
+      "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+      "status": "AUTHOR_OFFLINE_QUALIFIED; immutable regression and complete combined gates pass; independent visual review pending",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "native": "NOT_RUN_NATIVE"
+    }
+  ],
+  "qualifiedAt": "2026-10-12T12:24:23.336691+00:00",
+  "independentReview": "PENDING_SEPARATE_REVIEW_RECEIPT"
+}

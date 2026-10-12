@@ -1,0 +1,22 @@
+{
+  "head": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "tree": "16c0b62901859aa4ff3f2ea01856aa13e13c65cd",
+  "statusAtStart": "",
+  "command": [
+    "env",
+    "CAPIRO_QA_CHROMIUM_EXECUTABLE=/usr/bin/chromium",
+    "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+    "node",
+    "/tmp/capiro-candidate-4a16148/run-review-control.mjs",
+    "/workspace/capiro-visual-closeout",
+    "/tmp/objective-next-contracts/baseline-objective-work.spec.ts",
+    "/tmp/capiro-candidate-4a16148/objective-feature-control-candidate-paths",
+    "modules"
+  ],
+  "startedAt": "2026-10-12T11:51:25.786619+00:00",
+  "state": "finished",
+  "exitCode": 0,
+  "finishedAt": "2026-10-12T11:51:47.075337+00:00",
+  "headAtFinish": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "statusAtFinish": ""
+}

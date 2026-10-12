@@ -1,0 +1,257 @@
+[WebServer] (node:367403) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 1 worker
+
+(node:367449) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:5:5 › VD01 dedicated Owners dialog presents ordered cards (4.7s)
+(node:367592) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:12:5 › VD02 unavailable ordering never promises drag or saved layout (7.7s)
+(node:367729) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:18:5 › VD03 Portfolio title toolbar contains Owner and Customize (7.8s)
+(node:367859) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  4 ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:24:5 › VD04 capability create marks required name and retains editable choices (8.8s)
+(node:368038) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  5 ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:31:5 › VD05 Bill Tracker has compact heading and an inner results frame (7.6s)
+(node:368182) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  6 ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:36:5 › VD07 Portfolio modal scrim does not blur the underlying page (9.3s)
+
+
+  1) ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:5:5 › VD01 dedicated Owners dialog presents ordered cards 
+
+    TimeoutError: locator.click: Timeout 2000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Manage owners', exact: true })
+
+
+       6 |  await installProfileCurrentState(page);await page.goto('/profile-current-state.html?mode=team');
+       7 |  await page.screenshot({path:info.outputPath('owners-before.png')});
+    >  8 |  await page.getByRole('button',{name:'Manage owners',exact:true}).click({timeout:2000});
+         |                                                                   ^
+       9 |  await expect(page.getByRole('dialog',{name:'Owners',exact:true})).toBeVisible();
+      10 |  await expect(page.getByRole('list',{name:'Ordered account owners'})).toBeVisible();
+      11 | });
+        at /tmp/capiro-visual-closeout/portfolio/control.spec.ts:8:67
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD01-dedicated-Owners-dialog-presents-ordered-cards/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD01-dedicated-Owners-dialog-presents-ordered-cards/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD01-dedicated-Owners-dialog-presents-ordered-cards/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD01-dedicated-Owners-dialog-presents-ordered-cards/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:12:5 › VD02 unavailable ordering never promises drag or saved layout 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByText('Drag any card to rearrange · your layout is saved to your profile', { exact: true })
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByText('Drag any card to rearrange · your layout is saved to your profile', { exact: true })
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      14 |  await expect(page.getByText('Saved profile ordering is unavailable',{exact:false})).toBeVisible();
+      15 |  await page.screenshot({path:info.outputPath('index-unavailable-before.png')});
+    > 16 |  await expect(page.getByText('Drag any card to rearrange · your layout is saved to your profile',{exact:true})).toHaveCount(0);
+         |                                                                                                                 ^
+      17 | });
+      18 | test("VD03 Portfolio title toolbar contains Owner and Customize",async({page},info)=>{
+      19 |  await installFixtures(page);await page.goto('/portfolio');await page.screenshot({path:info.outputPath('index-before.png')});
+        at /tmp/capiro-visual-closeout/portfolio/control.spec.ts:16:113
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD02-unavailable-o-ff8d0-omises-drag-or-saved-layout/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD02-unavailable-o-ff8d0-omises-drag-or-saved-layout/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD02-unavailable-o-ff8d0-omises-drag-or-saved-layout/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD02-unavailable-o-ff8d0-omises-drag-or-saved-layout/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:18:5 › VD03 Portfolio title toolbar contains Owner and Customize 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('header').filter({ has: getByRole('heading', { name: /Portfolio/ }) }).getByRole('button', { name: 'Customize', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('header').filter({ has: getByRole('heading', { name: /Portfolio/ }) }).getByRole('button', { name: 'Customize', exact: true })
+
+
+      19 |  await installFixtures(page);await page.goto('/portfolio');await page.screenshot({path:info.outputPath('index-before.png')});
+      20 |  const header=page.locator('header').filter({has:page.getByRole('heading',{name:/Portfolio/})});
+    > 21 |  await expect(header.getByRole('button',{name:'Customize',exact:true})).toBeVisible();
+         |                                                                         ^
+      22 |  await expect(header.getByLabel('Account owner',{exact:true})).toBeVisible();
+      23 | });
+      24 | test("VD04 capability create marks required name and retains editable choices",async({page},info)=>{
+        at /tmp/capiro-visual-closeout/portfolio/control.spec.ts:21:73
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD03-Portfolio-tit-1d14a-ontains-Owner-and-Customize/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD03-Portfolio-tit-1d14a-ontains-Owner-and-Customize/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD03-Portfolio-tit-1d14a-ontains-Owner-and-Customize/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD03-Portfolio-tit-1d14a-ontains-Owner-and-Customize/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:24:5 › VD04 capability create marks required name and retains editable choices 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('dialog', { name: 'New capability' }).locator('label').filter({ has: getByRole('dialog', { name: 'New capability' }).locator('input[name=name]') })
+    Expected substring: "*"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'New capability' }).locator('label').filter({ has: getByRole('dialog', { name: 'New capability' }).locator('input[name=name]') })
+
+
+      25 |  await installCapabilityPresentation(page);await page.goto(`/portfolio/${clientId}/capabilities`);await page.getByRole('button',{name:'Add capability',exact:true}).click();
+      26 |  const dialog=page.getByRole('dialog',{name:'New capability'});await page.screenshot({path:info.outputPath('capability-before.png')});
+    > 27 |  await expect(dialog.locator('label').filter({has:dialog.locator('input[name=name]')})).toContainText('*');
+         |                                                                                         ^
+      28 |  await expect(dialog.getByLabel('Type',{exact:true})).toHaveAttribute('list',/.+/);
+      29 |  await expect(dialog.getByLabel('Sector',{exact:true})).toHaveAttribute('list',/.+/);
+      30 | });
+        at /tmp/capiro-visual-closeout/portfolio/control.spec.ts:27:89
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD04-capability-cr-c6088-nd-retains-editable-choices/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD04-capability-cr-c6088-nd-retains-editable-choices/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD04-capability-cr-c6088-nd-retains-editable-choices/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD04-capability-cr-c6088-nd-retains-editable-choices/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:31:5 › VD05 Bill Tracker has compact heading and an inner results frame 
+
+    Error: expect(locator).toHaveCSS(expected) failed
+
+    Locator:  getByRole('heading', { name: 'Bill Tracker', exact: true })
+    Expected: "20px"
+    Received: "30px"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCSS" with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'Bill Tracker', exact: true })
+        14 × locator resolved to <h1>Bill Tracker</h1>
+           - unexpected value "30px"
+
+
+      31 | test("VD05 Bill Tracker has compact heading and an inner results frame",async({page},info)=>{
+      32 |  await installFixtures(page);await page.goto(`/portfolio/${clientId}/bills`);await page.screenshot({path:info.outputPath('bills-before.png')});
+    > 33 |  await expect(page.getByRole('heading',{name:'Bill Tracker',exact:true})).toHaveCSS('font-size','20px');
+         |                                                                           ^
+      34 |  await expect(page.getByRole('region',{name:'Tracked bill results',exact:true})).toBeVisible();
+      35 | });
+      36 | test("VD07 Portfolio modal scrim does not blur the underlying page",async({page},info)=>{
+        at /tmp/capiro-visual-closeout/portfolio/control.spec.ts:33:75
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD05-Bill-Tracker--39a54--and-an-inner-results-frame/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD05-Bill-Tracker--39a54--and-an-inner-results-frame/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD05-Bill-Tracker--39a54--and-an-inner-results-frame/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD05-Bill-Tracker--39a54--and-an-inner-results-frame/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:36:5 › VD07 Portfolio modal scrim does not blur the underlying page 
+
+    Error: expect(locator).toHaveCSS(expected) failed
+
+    Locator:  locator('[data-slot=dialog-overlay]')
+    Expected: "none"
+    Received: "blur(2px)"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCSS" with timeout 5000ms
+      - waiting for locator('[data-slot=dialog-overlay]')
+        14 × locator resolved to <div data-state="open" aria-hidden="true" data-aria-hidden="true" data-slot="dialog-overlay" class="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50"></div>
+           - unexpected value "blur(2px)"
+
+
+      37 |  await installCapabilityPresentation(page);await page.goto(`/portfolio/${clientId}/capabilities`);await page.getByRole('button',{name:'Add capability',exact:true}).click();
+      38 |  await page.screenshot({path:info.outputPath('scrim-before.png')});
+    > 39 |  await expect(page.locator('[data-slot=dialog-overlay]')).toHaveCSS('backdrop-filter','none');
+         |                                                           ^
+      40 | });
+      41 |
+        at /tmp/capiro-visual-closeout/portfolio/control.spec.ts:39:59
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD07-Portfolio-mod-018ab-ot-blur-the-underlying-page/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD07-Portfolio-mod-018ab-ot-blur-the-underlying-page/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD07-Portfolio-mod-018ab-ot-blur-the-underlying-page/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-visual-closeout/portfolio/artifacts/control-VD07-Portfolio-mod-018ab-ot-blur-the-underlying-page/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6 failed
+    ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:5:5 › VD01 dedicated Owners dialog presents ordered cards 
+    ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:12:5 › VD02 unavailable ordering never promises drag or saved layout 
+    ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:18:5 › VD03 Portfolio title toolbar contains Owner and Customize 
+    ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:24:5 › VD04 capability create marks required name and retains editable choices 
+    ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:31:5 › VD05 Bill Tracker has compact heading and an inner results frame 
+    ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:36:5 › VD07 Portfolio modal scrim does not blur the underlying page 
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
