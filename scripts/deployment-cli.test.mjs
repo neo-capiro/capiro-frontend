@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
-import { existsSync } from 'node:fs';
+import { existsSync, mkdtempSync, rmSync, symlinkSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { resolve } from 'node:path';
+import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import test from 'node:test';
 
@@ -34,4 +34,32 @@ test('container smoke documents exits and rejects invalid input before Docker al
   run('bash', [smoke], 2);
   run('bash', [smoke, '--bad'], 2);
   run('bash', [smoke, 'one', 'two'], 2);
+});
+
+test('Docker context regression is import-safe and refuses invalid or reused outputs before allocation', () => {
+  const script = 'scripts/docker-context-regression.mjs';
+  const imported = run(process.execPath, ['--input-type=module', '-e', `await import('./${script}')`], 0);
+  assert.equal(imported.stdout, '');
+  assert.equal(imported.stderr, '');
+  assert.match(run(process.execPath, [script, '--help'], 0).stdout, /context\/build failure/);
+  run(process.execPath, [script], 2);
+  run(process.execPath, [script, '--artifacts'], 2);
+  run(process.execPath, [script, '--artifacts', '--help'], 2);
+  const inside = resolve(`docker-context-refused-output-${process.pid}`);
+  assert.equal(existsSync(inside), false);
+  assert.match(run(process.execPath, [script, '--artifacts', inside], 1).stderr, /outside checkout/);
+  assert.equal(existsSync(inside), false);
+  assert.match(run(process.execPath, [script, '--artifacts', tmpdir()], 1).stderr, /must be new/);
+  for (const invalidOption of ['toString', 'constructor', '__proto__']) {
+    run(process.execPath, [script, '--artifacts', inside, invalidOption, 'unused'], 2);
+  }
+  const temporary = mkdtempSync(join(tmpdir(), 'docker-context-symlink-control-'));
+  try {
+    const alias = join(temporary, 'checkout');
+    symlinkSync(process.cwd(), alias, 'dir');
+    assert.match(run(process.execPath, [script, '--artifacts', join(alias, 'symlink-refused-output')], 1).stderr, /outside checkout/);
+    assert.equal(existsSync(resolve('symlink-refused-output')), false);
+  } finally {
+    rmSync(temporary, { recursive: true, force: true });
+  }
 });
