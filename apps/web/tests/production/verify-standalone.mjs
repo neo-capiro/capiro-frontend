@@ -19,6 +19,7 @@ for (const [path, status, text] of [
   ["/", 200, "Portfolio setup required"],
   ["/modules", 200, "Connection setup required"],
   ["/settings", 307, ""],
+  ["/settings?clientId=10000000-0000-4000-8000-000000000001", 307, ""],
   ["/settings/personal", 200, "Connection setup required"],
   ["/api/capiro/me.read", 503, ""],
 ]) {
@@ -27,8 +28,11 @@ for (const [path, status, text] of [
     signal: AbortSignal.timeout(10_000),
   });
   assert.equal(response.status, status, path);
-  if (path === "/settings")
-    assert.equal(response.headers.get("location"), "/settings/personal");
+  if (new URL(origin + path).pathname === "/settings")
+    assert.equal(
+      response.headers.get("location"),
+      `/settings/personal${new URL(origin + path).search}`,
+    );
   assert.ok((await response.text()).includes(text), path);
   assert.equal(response.headers.get("x-content-type-options"), "nosniff", path);
   assert.equal(response.headers.get("x-frame-options"), "DENY", path);

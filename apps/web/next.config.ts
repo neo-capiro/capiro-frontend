@@ -7,6 +7,16 @@ const config: NextConfig = {
   transpilePackages: ["@capiro/ui"],
   poweredByHeader: false,
   turbopack: { root: fileURLToPath(new URL("../..", import.meta.url)) },
+  redirects() {
+    // Resolve before the request-time root streams; retain the 307 and query hint.
+    return [
+      {
+        source: "/settings",
+        destination: "/settings/personal",
+        permanent: false,
+      },
+    ];
+  },
   async headers() {
     return [
       {

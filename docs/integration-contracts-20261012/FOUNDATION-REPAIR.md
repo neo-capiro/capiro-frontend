@@ -39,3 +39,12 @@ wrapper now captures the opening element and restores it when still connected,
 unless the caller prevented its close-focus event. The original callback is
 preserved. The final combined focused run passed 36/36 (24 original layout cases
 and 12 nested/uncertain-send cases). No provider message was sent.
+
+The 7b1cc5d repository checks and production build passed. Its new artifact
+regression passed, but the actual server correctly failed the unchanged /settings
+307 assertion: request-time streaming exposed the page redirect as a 200 response.
+The follow-up moves the same thin redirect into the canonical Next configuration,
+which the installed guide specifies runs before rendering and preserves query
+values. The superseded five-line settings/page.tsx is removed; the Settings
+section routes and product implementation remain unchanged. This preserves
+compatibility and client-selection hints without weakening the status gate.
