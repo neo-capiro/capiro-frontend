@@ -48,3 +48,11 @@ which the installed guide specifies runs before rendering and preserves query
 values. The superseded five-line settings/page.tsx is removed; the Settings
 section routes and product implementation remain unchanged. This preserves
 compatibility and client-selection hints without weakening the status gate.
+
+The intermediate config redirect restored 307 but this installed Next build did
+not retain the existing security headers on that early response. The unchanged
+header assertion failed and is preserved. The final redirect therefore belongs
+to the existing Proxy entry, before rendering; it preserves the relative target,
+query hint and all three existing headers via one shared response-policy constant.
+The destination still traverses the unchanged Clerk middleware. No header value
+or authentication policy is weakened. The obsolete config redirect is removed.
