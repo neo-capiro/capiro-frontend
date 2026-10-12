@@ -409,3 +409,73 @@
     font-size: 9px;
   }
 }
+
+.ownerFilter {
+  width: 190px;
+  flex-shrink: 0;
+}
+.ownerFilter select {
+  width: 100%;
+  min-height: 36px;
+  padding: 7px 12px;
+  font-size: 13px;
+}
+.headerActions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.secondaryActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+.secondaryActions > button,
+.tools > summary {
+  font-size: 12px;
+  padding: 6px 10px;
+}
+.tools {
+  position: relative;
+}
+.tools > summary {
+  cursor: pointer;
+  list-style: none;
+}
+.tools > summary::-webkit-details-marker {
+  display: none;
+}
+.toolsPanel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 10;
+  width: min(460px, calc(100vw - 48px));
+  background: var(--card);
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+.toolsPanel .filters {
+  margin: 0;
+}
+@media (max-width: 900px) {
+  .headerActions {
+    justify-content: flex-start;
+  }
+  .ownerFilter {
+    flex: 1;
+  }
+}
+@media (max-width: 680px) {
+  .secondaryActions {
+    margin-left: 0;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .ownerFilter {
+    width: 100%;
+    flex-basis: 100%;
+  }
+}

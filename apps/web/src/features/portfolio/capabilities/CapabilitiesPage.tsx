@@ -109,6 +109,7 @@ export function CapabilitiesPage({
           key={`${clientId}:${selected}`}
           clientId={clientId}
           capability={capability}
+          choices={records}
           open={selected === "new" || Boolean(capability)}
           onClose={() => open(null)}
         />

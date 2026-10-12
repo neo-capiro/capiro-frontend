@@ -7,6 +7,8 @@ import { PortfolioLayoutEditor, usePortfolioLayout } from "./layout/public";
 /** Mounted after the canonical client catalog loads; filters never become saved subsets. */
 export function PortfolioProfiles({
   catalog,
+  customizing,
+  onFinishCustomizing,
   rows,
   state,
   filtered,
@@ -14,6 +16,8 @@ export function PortfolioProfiles({
   onRefreshCatalog,
 }: {
   catalog: Client[];
+  customizing: boolean;
+  onFinishCustomizing: () => void;
   rows: Client[];
   state: PortfolioIndexState;
   filtered: boolean;
@@ -40,6 +44,8 @@ export function PortfolioProfiles({
         <PortfolioLayoutEditor
           cards={catalog.map(({ id, name }) => ({ id, name }))}
           layout={layout}
+          editing={customizing}
+          onFinish={onFinishCustomizing}
           renderCard={(id) => {
             const client = byId.get(id);
             return client ? (

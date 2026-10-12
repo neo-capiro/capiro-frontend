@@ -258,3 +258,25 @@
     height: 36px;
   }
 }
+
+.choiceField {
+  position: relative;
+  display: block;
+}
+.choiceField input {
+  width: 100%;
+}
+.editableChoice input {
+  padding-right: 30px;
+}
+.editableChoice > span {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 10px;
+}
+.editableChoice input::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}

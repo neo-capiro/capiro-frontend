@@ -11,10 +11,14 @@ export function PortfolioLayoutEditor({
   cards,
   renderCard,
   layout,
+  editing = true,
+  onFinish,
 }: {
   cards: readonly PortfolioLayoutCard[];
   renderCard: (id: string) => ReactNode;
   layout: PortfolioLayoutState;
+  editing?: boolean;
+  onFinish?: () => void;
 }) {
   return (
     <EditorSession
@@ -22,6 +26,8 @@ export function PortfolioLayoutEditor({
       cards={cards}
       renderCard={renderCard}
       layout={layout}
+      editing={editing}
+      onFinish={onFinish}
     />
   );
 }
@@ -29,10 +35,14 @@ function EditorSession({
   cards,
   renderCard,
   layout,
+  editing,
+  onFinish,
 }: {
   cards: readonly PortfolioLayoutCard[];
   renderCard: (id: string) => ReactNode;
   layout: PortfolioLayoutState;
+  editing: boolean;
+  onFinish?: () => void;
 }) {
   const [draft, setDraft] = useState<{ scope: string; ids: string[] } | null>(
     null,
@@ -43,7 +53,11 @@ function EditorSession({
   const changed =
     draft?.scope === layout.scope && !sameOrder(draft.ids, layout.orderedIds);
   const blocked =
-    !layout.allowed || layout.saving || layout.uncertain || layout.conflict;
+    !editing ||
+    !layout.allowed ||
+    layout.saving ||
+    layout.uncertain ||
+    layout.conflict;
   const move = (id: string, position: number) => {
     if (blocked) return;
     setDraft({ scope: layout.scope, ids: moveClient(ids, id, position) });
@@ -96,48 +110,64 @@ function EditorSession({
               }}
             >
               {renderCard(id)}
-              <div className={styles.controls}>
-                <button
-                  className="button ghost"
-                  aria-label={`Drag ${name} to rearrange`}
-                  draggable={!blocked}
-                  disabled={blocked}
-                  onDragStart={(event) => {
-                    setDragged(id);
-                    event.dataTransfer.setData("text/plain", id);
-                    event.dataTransfer.effectAllowed = "move";
-                  }}
-                  onDragEnd={() => setDragged(null)}
-                >
-                  <GripVertical size={14} aria-hidden="true" />
-                </button>
-                <span className="muted">
-                  {index + 1} of {ids.length}
-                </span>
-                <button
-                  className="button ghost"
-                  aria-label={`Move ${name} earlier`}
-                  disabled={blocked || index === 0}
-                  onClick={() => move(id, index - 1)}
-                >
-                  <ArrowLeft size={14} aria-hidden="true" />
-                </button>
-                <button
-                  className="button ghost"
-                  aria-label={`Move ${name} later`}
-                  disabled={blocked || index === ids.length - 1}
-                  onClick={() => move(id, index + 1)}
-                >
-                  <ArrowRight size={14} aria-hidden="true" />
-                </button>
-              </div>
+              {editing && (
+                <div className={styles.controls}>
+                  <button
+                    className="button ghost"
+                    aria-label={`Drag ${name} to rearrange`}
+                    draggable={!blocked}
+                    disabled={blocked}
+                    onDragStart={(event) => {
+                      setDragged(id);
+                      event.dataTransfer.setData("text/plain", id);
+                      event.dataTransfer.effectAllowed = "move";
+                    }}
+                    onDragEnd={() => setDragged(null)}
+                  >
+                    <GripVertical size={14} aria-hidden="true" />
+                  </button>
+                  <span className="muted">
+                    {index + 1} of {ids.length}
+                  </span>
+                  <button
+                    className="button ghost"
+                    aria-label={`Move ${name} earlier`}
+                    disabled={blocked || index === 0}
+                    onClick={() => move(id, index - 1)}
+                  >
+                    <ArrowLeft size={14} aria-hidden="true" />
+                  </button>
+                  <button
+                    className="button ghost"
+                    aria-label={`Move ${name} later`}
+                    disabled={blocked || index === ids.length - 1}
+                    onClick={() => move(id, index + 1)}
+                  >
+                    <ArrowRight size={14} aria-hidden="true" />
+                  </button>
+                </div>
+              )}
             </div>
           );
         })}
       </div>
-      <p className={styles.hint}>
-        Drag any card to rearrange · your layout is saved to your profile
-      </p>
+      {editing && !blocked && (
+        <p className={styles.hint}>
+          Drag a handle or use the arrow buttons to rearrange. Changes stay
+          local until you select Save order.
+        </p>
+      )}
+      {editing && onFinish && (
+        <button
+          className="button"
+          disabled={Boolean(
+            changed || layout.saving || layout.uncertain || layout.conflict,
+          )}
+          onClick={onFinish}
+        >
+          Done customizing
+        </button>
+      )}
       <p className="srOnly" role="status" aria-live="polite">
         {announcement}
       </p>

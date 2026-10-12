@@ -43,6 +43,7 @@ test("four ranked owners require a deliberate save and preserve exact order", as
     return json(route, state.owners);
   };
   await page.goto("/profile-current-state.html?mode=team");
+  await page.getByRole("button", { name: "Manage owners" }).click();
   for (let index = 0; index < 4; index++)
     await page
       .getByRole("combobox", {
@@ -51,7 +52,7 @@ test("four ranked owners require a deliberate save and preserve exact order", as
       })
       .selectOption(members[index]!.id);
   expect(state.writes).toEqual([]);
-  await page.getByRole("button", { name: "Save owner order" }).click();
+  await page.getByRole("button", { name: "Save owners" }).click();
   await expect(
     page.getByText("Owner order saved. Account team is refreshing."),
   ).toBeVisible();
@@ -63,7 +64,7 @@ test("four ranked owners require a deliberate save and preserve exact order", as
     },
   ]);
   await page.setViewportSize({ width: 390, height: 844 });
-  const fieldset = page.getByRole("group", { name: "Ordered account owners" });
+  const fieldset = page.getByRole("list", { name: "Ordered account owners" });
   await fieldset.scrollIntoViewIfNeeded();
   expect(
     await fieldset.evaluate(
@@ -85,10 +86,11 @@ test("clearing Primary preserves later positions and blocks an implicit promotio
   const { state } = await installProfileCurrentState(page);
   state.owners = receipt([members[0]!.id, members[1]!.id], 7);
   await page.goto("/profile-current-state.html?mode=team");
+  await page.getByRole("button", { name: "Manage owners" }).click();
   await page
     .getByRole("combobox", { name: "Primary owner", exact: true })
     .selectOption("");
-  await page.getByRole("button", { name: "Save owner order" }).click();
+  await page.getByRole("button", { name: "Save owners" }).click();
   await expect(
     page.getByText(/clearing a position does not promote/i),
   ).toBeVisible();
@@ -125,6 +127,13 @@ test("unavailable historical owners keep their rank and ranked members have no r
   }));
   await page.goto("/profile-current-state.html?mode=team");
   await expect(
+    page
+      .getByRole("listitem")
+      .filter({ hasText: "Terry Team" })
+      .getByRole("button", { name: "Remove" }),
+  ).toHaveCount(0);
+  await page.getByRole("button", { name: "Manage owners" }).click();
+  await expect(
     page.getByRole("combobox", { name: "Primary owner", exact: true }),
   ).toHaveValue(members[0]!.id);
   await expect(
@@ -133,12 +142,6 @@ test("unavailable historical owners keep their rank and ranked members have no r
   await expect(
     page.getByRole("combobox", { name: "Secondary owner", exact: true }),
   ).toHaveValue(members[1]!.id);
-  await expect(
-    page
-      .getByRole("listitem")
-      .filter({ hasText: "Terry Team" })
-      .getByRole("button", { name: "Remove" }),
-  ).toHaveCount(0);
   expect(state.writes).toEqual([]);
   expect(unexpected).toEqual([]);
 });
@@ -149,15 +152,16 @@ test("409 requires read-back and a fresh deliberate versioned save, never automa
   state.write = (route) =>
     json(route, { message: "owner_version_changed" }, 409);
   await page.goto("/profile-current-state.html?mode=team");
+  await page.getByRole("button", { name: "Manage owners" }).click();
   await page
     .getByRole("combobox", { name: "Primary owner", exact: true })
     .selectOption(members[2]!.id);
-  await page.getByRole("button", { name: "Save owner order" }).click();
+  await page.getByRole("button", { name: "Save owners" }).click();
   await expect(
     page.getByText(/owner change result needs review/i),
   ).toBeVisible();
   await expect(
-    page.getByRole("button", { name: "Save owner order" }),
+    page.getByRole("button", { name: "Save owners" }),
   ).toBeDisabled();
   state.owners = receipt([members[1]!.id], 9);
   await page.getByRole("button", { name: "Read current owners" }).click();
@@ -167,7 +171,7 @@ test("409 requires read-back and a fresh deliberate versioned save, never automa
   ).toHaveValue(members[2]!.id);
   expect(state.writes).toHaveLength(1);
   state.write = (route) => json(route, receipt([members[2]!.id], 10));
-  await page.getByRole("button", { name: "Save owner order" }).click();
+  await page.getByRole("button", { name: "Save owners" }).click();
   await expect(page.getByText(/owner order saved/i)).toBeVisible();
   expect(state.writes.map((write) => write.body)).toEqual([
     { expectedVersion: 3, userIds: [members[2]!.id] },
@@ -187,10 +191,11 @@ test("an interrupted PUT remains fenced after reopening and matching read-back s
     await json(route, state.owners).catch(() => undefined);
   };
   await page.goto("/profile-current-state.html?mode=team");
+  await page.getByRole("button", { name: "Manage owners" }).click();
   await page
     .getByRole("combobox", { name: "Primary owner", exact: true })
     .selectOption(members[2]!.id);
-  await page.getByRole("button", { name: "Save owner order" }).click();
+  await page.getByRole("button", { name: "Save owners" }).click();
   await expect.poll(() => state.writes.length).toBe(1);
   await profileEvent(page, "unmount");
   await expect(
@@ -199,11 +204,12 @@ test("an interrupted PUT remains fenced after reopening and matching read-back s
   state.owners = receipt([members[2]!.id], 4);
   release();
   await profileEvent(page, "open");
+  await page.getByRole("button", { name: "Manage owners" }).click();
   await expect(
     page.getByText(/owner change result needs review/i),
   ).toBeVisible();
   await expect(
-    page.getByRole("button", { name: "Save owner order" }),
+    page.getByRole("button", { name: "Save owners" }),
   ).toBeDisabled();
   await page.getByRole("button", { name: "Read current owners" }).click();
   await expect(
@@ -216,6 +222,7 @@ test("background read cannot silently rebase a draft, and replacing the actor cl
 }) => {
   const { state } = await installProfileCurrentState(page);
   await page.goto("/profile-current-state.html?mode=team");
+  await page.getByRole("button", { name: "Manage owners" }).click();
   await page
     .getByRole("combobox", { name: "Primary owner", exact: true })
     .selectOption(members[2]!.id);
@@ -223,7 +230,7 @@ test("background read cannot silently rebase a draft, and replacing the actor cl
   await profileEvent(page, "refresh");
   await expect(page.getByText(/saved owner source changed/i)).toBeVisible();
   await expect(
-    page.getByRole("button", { name: "Save owner order" }),
+    page.getByRole("button", { name: "Save owners" }),
   ).toBeDisabled();
   await expect(
     page.getByRole("combobox", { name: "Primary owner", exact: true }),
@@ -232,6 +239,10 @@ test("background read cannot silently rebase a draft, and replacing the actor cl
     ...profileIdentity,
     role: "standard_user",
   });
+  await expect(
+    page.getByRole("dialog", { name: "Owners", exact: true }),
+  ).toHaveCount(0);
+  await page.getByRole("button", { name: "Manage owners" }).click();
   await expect(
     page.getByRole("combobox", { name: "Primary owner", exact: true }),
   ).toHaveValue(members[1]!.id);

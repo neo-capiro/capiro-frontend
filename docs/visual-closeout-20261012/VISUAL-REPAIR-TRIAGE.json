@@ -1,0 +1,466 @@
+{
+  "title": "Finite visual repair triage for the frozen shared frontend",
+  "assessedAt": "2026-10-12T11:14:54.478329+00:00",
+  "qualifiedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+  "sourceTree": "d7986d01b5f5aca3a8e4c824556315a82b692e92",
+  "applicationSourceTree": "faf8af48ba71d9152cbd2e2010ddb950fd8e2bfb",
+  "evidencePublication": "a397d45c461b24eb741afcd3b7cf28ca354d1e96",
+  "method": "Read-only manual comparison of actual saved Figma exports and exact-candidate screenshots, with static source/test corroboration. No fresh app execution, new screenshots, source edits, backend/provider/cloud actions or additional acceptance claims. Reused qualified test results are identified as existing evidence.",
+  "priorityMeaning": {
+    "P1": "First presentation repairs: misleading state or central owner interaction mismatch; not a new security/runtime gate failure.",
+    "P2": "Confirmed layout/control differences in ordinary use.",
+    "P3": "Lower-impact visual polish."
+  },
+  "counts": {
+    "confirmedRepairItems": 7,
+    "P1": 2,
+    "P2": 4,
+    "P3": 1,
+    "distinctDirectRowIds": 8
+  },
+  "findings": [
+    {
+      "id": "VD-01",
+      "priority": "P1",
+      "rowIds": [
+        "CORE-099"
+      ],
+      "title": "Owner order editor uses an unrelated team form instead of owner cards",
+      "classification": "CONFIRMED_PRESENTATION_DEFECT",
+      "expected": "Figma411:41685 shows an Owners dialog with ordered avatar/name/role cards, rank badges, reorder handles, a bounded Add owner row and a Cancel/Save owners footer.",
+      "observed": "The current owner UI is a browser-default fieldset inside the Team dialog, with four select controls below Add team member. It has no designed owner-card/reorder presentation. The phone screenshot is scrolled to this fieldset, so its absent top-of-dialog title is not treated as clipping.",
+      "userImpact": "Ownership order is harder to scan and ownership editing is mixed with team membership.",
+      "proposedRepairBoundary": "Present the existing ordered-owner contract in the authored dialog/card structure. Preserve current versioned save, available/unavailable members, explicit placement and no implicit promotion. Provide keyboard reorder controls alongside any pointer drag interaction.",
+      "futureAcceptance": [
+        "Compare the same populated desktop state with411:41685 and check phone layout/focus.",
+        "Retain the existing exact-order, conflict, unavailable-member and clear-without-promotion assertions.",
+        "Cancel must cause zero writes; reorder remains local until explicit save."
+      ],
+      "evidenceIds": [
+        "owners-target",
+        "owners-actual",
+        "owner-fields",
+        "owner-tests"
+      ],
+      "nativeDependency": "No native/backend action is required to assess or repair this presentation difference.",
+      "repairExecuted": false
+    },
+    {
+      "id": "VD-02",
+      "priority": "P1",
+      "rowIds": [
+        "CORE-098"
+      ],
+      "title": "Ordering guidance claims saving when the ordering feature is unavailable",
+      "classification": "CONFIRMED_PRESENTATION_DEFECT",
+      "expected": "The visible guidance must describe the current capability and explicit save semantics.",
+      "observed": "The exact unavailable capture simultaneously says saved ordering is unavailable and Drag any card to rearrange \u00b7 your layout is saved to your profile. PortfolioLayoutEditor renders the latter unconditionally. Controls are actually disabled and the existing unavailable tests refuse writes.",
+      "userImpact": "Users are told an unavailable action works and may infer their layout has already been saved.",
+      "proposedRepairBoundary": "Make the hint reflect unavailable, unauthorized, editing, pending and uncertain states. Preserve the existing disable/write fences; do not unlock anything or claim automatic persistence.",
+      "futureAcceptance": [
+        "In403/404/501/unavailable and permission-denied states, no copy promises drag/save availability.",
+        "In an editable state, guidance says changes need the existing explicit Save.",
+        "Existing zero-write and uncertain-save recovery cases still pass."
+      ],
+      "evidenceIds": [
+        "index-unavailable",
+        "index-ready",
+        "layout-editor",
+        "layout-tests"
+      ],
+      "nativeDependency": "No native/backend action is required to assess or repair this presentation difference.",
+      "repairExecuted": false
+    },
+    {
+      "id": "VD-03",
+      "priority": "P2",
+      "rowIds": [
+        "CORE-086",
+        "CORE-098"
+      ],
+      "title": "Portfolio overview lacks the designed Customize entry and toolbar hierarchy",
+      "classification": "CONFIRMED_PRESENTATION_DEFECT",
+      "expected": "Figma411:41421 groups Owner, Search, Customize and Add profile beside the title; profile tabs sit directly below the pulse band.",
+      "observed": "The current header has Search, New objective and Add profile. Owner is in an additional full filter row below the pulse, Customize is absent, and reorder controls are always exposed below cards. This persists in the successful saved-order capture, so it is not just an unavailable-fixture effect.",
+      "userImpact": "The primary customization entry is missing and the additional rows reduce the number of visible cards.",
+      "proposedRepairBoundary": "Restore the authored Owner/Customize hierarchy using existing filter and layout capabilities. Retain sector/status/sort/list controls and New objective through a deliberate compact placement; do not delete working product scope to match a screenshot.",
+      "futureAcceptance": [
+        "At1440px, compare title toolbar, pulse-to-tabs spacing and card start position with the reference.",
+        "Customize exposes the existing local edit/save/cancel flow; keyboard controls remain available.",
+        "Owner/filter/sort/query retention and phone fit continue to pass."
+      ],
+      "evidenceIds": [
+        "index-target",
+        "index-ready",
+        "index-mobile",
+        "index-component",
+        "layout-editor"
+      ],
+      "nativeDependency": "No native/backend action is required to assess or repair this presentation difference.",
+      "repairExecuted": false
+    },
+    {
+      "id": "VD-04",
+      "priority": "P2",
+      "rowIds": [
+        "CAP-02"
+      ],
+      "title": "New capability omits required marker and dropdown affordances",
+      "classification": "CONFIRMED_PRESENTATION_DEFECT",
+      "expected": "Figma411:55155 labels Name* and shows Type and Sector dropdown controls.",
+      "observed": "The create form says Name without the marker despite required validation, and renders Type/Sector as plain text inputs without dropdown affordances. The later999:51328 frame explicitly supports the saved editor Details fields and the new Additional details extension; those are not defects.",
+      "userImpact": "Required input is less discoverable and users cannot discover the designed choices.",
+      "proposedRepairBoundary": "Restore the create-form required indicator and authored selection affordances without changing the free-string wire contract or discarding saved legacy values. The frames show examples, not a complete option catalog: do not invent a restrictive enum. Preserve the later Details variant.",
+      "futureAcceptance": [
+        "Visually compare the create controls with411:55155 and the retained Details controls with999:51328.",
+        "Required-name focus, keyboard selection and arbitrary existing values survive.",
+        "No endpoint/contract or automatic save is introduced."
+      ],
+      "evidenceIds": [
+        "capability-target",
+        "capability-actual",
+        "capability-later-target",
+        "capability-fields",
+        "capability-contract"
+      ],
+      "nativeDependency": "The missing marker is immediately repairable. A fixed option catalog is not established by the reference or current contract; resolve that UI choice while preserving free-string values, without live backend actions.",
+      "repairExecuted": false
+    },
+    {
+      "id": "VD-05",
+      "priority": "P2",
+      "rowIds": [
+        "BILL-01",
+        "BILL-02"
+      ],
+      "title": "Bill Tracker title and results framing differ from the authored hierarchy",
+      "classification": "CONFIRMED_PRESENTATION_DEFECT",
+      "expected": "Figma411:56471 uses a compact page title and an inner Tracked bills panel with its Board view control, header row and footer.",
+      "observed": "The current title is visibly larger and the inner titled results frame is absent. Filter/Table view/Board view are a separate full row above a standalone table. These are static component differences confirmed by source; the empty fixture is not used to judge populated rows.",
+      "userImpact": "The table/board control is detached from its results and the screen hierarchy differs even before data is loaded.",
+      "proposedRepairBoundary": "Match the compact title and inner results/header/footer structure while retaining the working filter, pagination and table/board behavior. Do not fabricate counts, pass probabilities or missing metrics.",
+      "futureAcceptance": [
+        "Compare title, panel boundaries and view-switcher placement using matched table and board states.",
+        "Retain query state, selection invalidation, keyboard opening and pagination tests.",
+        "Use available synthetic populated fixtures for future visual comparison; no real records required."
+      ],
+      "evidenceIds": [
+        "bills-target",
+        "bills-actual",
+        "bill-page"
+      ],
+      "nativeDependency": "No native/backend action is required to assess or repair this presentation difference.",
+      "repairExecuted": false
+    },
+    {
+      "id": "VD-06",
+      "priority": "P2",
+      "rowIds": [
+        "MCAL-001",
+        "MCAL-003"
+      ],
+      "title": "Modules Master Calendar has excessive header and horizontal inset",
+      "classification": "CONFIRMED_PRESENTATION_DEFECT",
+      "expected": "Figma460:90798 starts the main content32px after the sidebar and places the calendar card near y169 with a compact heading/scope/action row.",
+      "observed": "The same1440px Modules capture starts content64px after the sidebar and the card near y285. The extra breadcrumb, descriptive header and92px minimum header height shift the calendar down. CSS confirms the64px shell inset and92px local header minimum. Coordinates are manual approximate screenshot observations, not new browser measurements.",
+      "userImpact": "The agenda loses substantial space above and beside its first event.",
+      "proposedRepairBoundary": "Adjust this screen composition to the target without globally changing other Modules screens. Keep source switches, scope, existing accessible navigation, search and provenance/coverage disclosures. Do not broaden New meeting into unsupported event creation.",
+      "futureAcceptance": [
+        "Compare the same Modules Master Agenda at1440px for left edge, title/actions and card top.",
+        "Recheck phone stacking and keyboard access.",
+        "Preserve all five independently governed sources, partial-failure and effective-civil-date assertions."
+      ],
+      "evidenceIds": [
+        "calendar-target",
+        "calendar-actual",
+        "calendar-controls",
+        "calendar-css",
+        "module-shell-css"
+      ],
+      "nativeDependency": "No native/backend action is required to assess or repair this presentation difference.",
+      "repairExecuted": false
+    },
+    {
+      "id": "VD-07",
+      "priority": "P3",
+      "rowIds": [
+        "CAP-02"
+      ],
+      "title": "Portfolio modal backdrop blurs the page unlike the reference",
+      "classification": "CONFIRMED_PRESENTATION_DEFECT",
+      "expected": "The New capability target dims the underlying page while its labels and edges remain sharp.",
+      "observed": "The candidate visibly blurs the background; scoped Portfolio overlay CSS explicitly applies backdrop-filter:blur(2px). The uncovered strip below a full-page screenshot is not counted as an overlay-coverage defect.",
+      "userImpact": "Low-impact visual mismatch across Portfolio modal surfaces.",
+      "proposedRepairBoundary": "Remove or align the backdrop blur for the authored Portfolio surface while preserving dimming, modal semantics, portalled controls, z-order, outside-click dismissal and focus return.",
+      "futureAcceptance": [
+        "Compare a like-for-like capability modal capture with411:55155.",
+        "Existing shared dialog overlay coverage, focus, escape/outside-click and nested-control tests must remain intact."
+      ],
+      "evidenceIds": [
+        "capability-target",
+        "capability-actual",
+        "portfolio-css",
+        "dialog-tests"
+      ],
+      "nativeDependency": "No native/backend action is required to assess or repair this presentation difference.",
+      "repairExecuted": false
+    }
+  ],
+  "separateProductGaps": [
+    {
+      "rows": [
+        "OBJ-22",
+        "OBJ-27",
+        "OBJ-28",
+        "OBJ-29"
+      ],
+      "evidenceIds": [
+        "objective-target",
+        "objective-actual"
+      ],
+      "finding": "The authored clarification card, cycle preview, attachment/client-context area and semantic rewording are missing or unavailable. These are product/contract capabilities, not a request to add decorative fake panels. Their native/owner contracts need separate assessment.",
+      "priority": "Scope/contract decision after the bounded visual repairs; no live action authorized."
+    },
+    {
+      "rows": [
+        "OBJ-13"
+      ],
+      "evidenceIds": [
+        "objective-target",
+        "objective-actual"
+      ],
+      "finding": "The filled target includes a concise generated/descriptive objective title; current create heading remains New objective. The source of that title is not established by this screenshot. Do not mechanically paste the full outcome as a title."
+    },
+    {
+      "rows": [
+        "PROS-004",
+        "PROS-014",
+        "PROS-037"
+      ],
+      "evidenceIds": [
+        "prospect-target",
+        "prospect-actual"
+      ],
+      "finding": "Prospect Company details/Overview and Quick add/Meri action slots, research presentation and rich company/activity criteria require a capability/navigation inventory. The current explicit saved brief, Files and Workspace extensions are not removed merely because absent from the base frame. Shared firm notes do not satisfy private-note semantics."
+    }
+  ],
+  "notVisualDefectsOrNotProven": [
+    {
+      "topic": "Native/live acceptance",
+      "disposition": "RLS, roles, migration deployment, MVCC/grant ordering, real identity and provider outcomes remain unrun. They do not turn every row into a visual defect."
+    },
+    {
+      "topic": "Fixture data and unavailable metrics",
+      "disposition": "Profile names/counts, empty bill rows, unavailable rollups, absent Contacts in a deliberate unavailable fixture and actual-only activity kind tabs are not evidence of styling defects. The Bill Tracker reference itself uses dashes for Material changes and Watchlist coverage."
+    },
+    {
+      "topic": "Portfolio/calendar versus Modules Master Calendar",
+      "disposition": "Do not infer that the separate Portfolio/calendar layout must equal Modules460:90798 solely from the two captures. Its own route/state references must be mapped before assigning that mismatch as a repair."
+    },
+    {
+      "topic": "Objective footer",
+      "disposition": "The saved target image ends before the footer; the earlier broad note about differing bottom action arrangement is not a sufficiently supported repair finding from this reference."
+    },
+    {
+      "topic": "Capability Details",
+      "disposition": "Later authored999:51328 validates the added saved/new Details sections. Do not remove them to match only the old base dialog."
+    },
+    {
+      "topic": "Read-only Objective destinations",
+      "disposition": "The new Strategy/Planner/Workspace observation views are contract extensions; ordinary editor screenshots are not their pixel acceptance specification."
+    },
+    {
+      "topic": "Synthetic fixture badge",
+      "disposition": "Fixed badge overlap in long phone captures is a test-evidence presentation limitation, not a production defect. Any later capture refinement must retain visible synthetic disclosure."
+    },
+    {
+      "topic": "Unassessed targets",
+      "disposition": "This finite queue covers inspected evidence, not an assertion that remaining screens have no defects. Unassessed frames are assessment tasks, not presumed failures."
+    }
+  ],
+  "preservedScopedPasses": [
+    "Requested phone acknowledgement component: BILL-11/BILL-12, provider acceptance separate.",
+    "Workspace document subsection desktop table/phone cards: WORK-08/WORK-09, native identity/opening separate.",
+    "Saved submissions authored component: CORE-128, actual removal/concurrency separate."
+  ],
+  "recommendedRepairBatches": [
+    {
+      "batch": "A",
+      "items": [
+        "VD-01",
+        "VD-02"
+      ],
+      "purpose": "Correct owner editing presentation and misleading ordering state."
+    },
+    {
+      "batch": "B",
+      "items": [
+        "VD-03",
+        "VD-04",
+        "VD-05",
+        "VD-06"
+      ],
+      "purpose": "Restore screen/control hierarchy without dropping supported workflows."
+    },
+    {
+      "batch": "C",
+      "items": [
+        "VD-07"
+      ],
+      "purpose": "Align shared modal backdrop after the higher-impact changes."
+    }
+  ],
+  "nextCandidateRule": "No repair has been applied. Any repair must receive a distinct source candidate identity, retain failing regressions for the concrete finding, preserve prior qualified source/evidence, and rerun appropriate affected and combined gates before replacing qualification. No shipment action is authorized here.",
+  "evidence": {
+    "owners-target": {
+      "repositoryPath": "docs/integration-contracts-20261012/evidence/visual-2d50edd/figma-411-41685.png",
+      "sha256": "aeca5b4153f7725830149715898eecf312bc4c15fd23d821897e3e016c65a148",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/docs/integration-contracts-20261012/evidence/visual-2d50edd/figma-411-41685.png"
+    },
+    "owners-actual": {
+      "repositoryPath": "docs/integration-contracts-20261012/evidence/visual-2d50edd/candidate-captures/V07-Portfolio-ordered-owners-mobile.png",
+      "sha256": "c853b7dcf2c806317b9d6190b7ec2ec6cba0157dbadf6babcd1a6ac7b2dfe268",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/docs/integration-contracts-20261012/evidence/visual-2d50edd/candidate-captures/V07-Portfolio-ordered-owners-mobile.png"
+    },
+    "index-target": {
+      "repositoryPath": "docs/integration-contracts-20261012/evidence/visual-2d50edd/figma-411-41421.png",
+      "sha256": "f68acc02667f5454d6738d0a58e5871fb245613b9e7a2abd9a86ef3fd81cf861",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/docs/integration-contracts-20261012/evidence/visual-2d50edd/figma-411-41421.png"
+    },
+    "index-unavailable": {
+      "repositoryPath": "docs/integration-contracts-20261012/evidence/visual-2d50edd/candidate-captures/V01-Portfolio-index-desktop.png",
+      "sha256": "f05e3d426c3822a68a0ade524fbe32b4f04aeea0c92c5921815edaa14699f88b",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/docs/integration-contracts-20261012/evidence/visual-2d50edd/candidate-captures/V01-Portfolio-index-desktop.png"
+    },
+    "index-ready": {
+      "repositoryPath": "docs/integration-contracts-20261012/evidence/candidate-2d50edd/portfolio-browser-artifacts/portfolio-layout-integrati-0c394-nd-restores-it-after-reload/portfolio-saved-order-desktop.png",
+      "sha256": "420cbe084200f3a8e288963aaee337d4495a68c6f32704c55a65a74c415c272f",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/docs/integration-contracts-20261012/evidence/candidate-2d50edd/portfolio-browser-artifacts/portfolio-layout-integrati-0c394-nd-restores-it-after-reload/portfolio-saved-order-desktop.png"
+    },
+    "index-mobile": {
+      "repositoryPath": "docs/integration-contracts-20261012/evidence/candidate-2d50edd/portfolio-browser-artifacts/portfolio-layout-integrati-0c394-nd-restores-it-after-reload/portfolio-saved-order-mobile-dark.png",
+      "sha256": "3b897f1d89f9ea79b3f1295d71b30178e4d62e27c0a3c2737430690f1c43e578",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/docs/integration-contracts-20261012/evidence/candidate-2d50edd/portfolio-browser-artifacts/portfolio-layout-integrati-0c394-nd-restores-it-after-reload/portfolio-saved-order-mobile-dark.png"
+    },
+    "capability-target": {
+      "repositoryPath": "docs/integration-contracts-20261012/evidence/visual-2d50edd/figma-411-55155.png",
+      "sha256": "f8756017d52f7c3beeb841d6ae0a0da0e582e6d28b5c32c9a039bc835413864f",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/docs/integration-contracts-20261012/evidence/visual-2d50edd/figma-411-55155.png"
+    },
+    "capability-actual": {
+      "repositoryPath": "docs/integration-contracts-20261012/evidence/visual-2d50edd/candidate-captures/V05-Portfolio-capability-create-desktop-light.png",
+      "sha256": "75d60e085dd24715d6a9d80af87dbbb7efe7d71e15943827c6416487a705c996",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/docs/integration-contracts-20261012/evidence/visual-2d50edd/candidate-captures/V05-Portfolio-capability-create-desktop-light.png"
+    },
+    "capability-later-target": {
+      "repositoryPath": "docs/integration-contracts-20261012/evidence/visual-2d50edd/figma-999-51328.png",
+      "sha256": "9f10ed5dead6df182e8bb1262c42954befc6b6a89ec5210dbd8e8747adf9ddfe",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/docs/integration-contracts-20261012/evidence/visual-2d50edd/figma-999-51328.png"
+    },
+    "bills-target": {
+      "repositoryPath": "docs/integration-contracts-20261012/evidence/visual-2d50edd/figma-411-56471.png",
+      "sha256": "02bbc60129ff02d98d8381bb508756e5192a0b13ec47472ed992965e27f7d746",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/docs/integration-contracts-20261012/evidence/visual-2d50edd/figma-411-56471.png"
+    },
+    "bills-actual": {
+      "repositoryPath": "docs/integration-contracts-20261012/evidence/visual-2d50edd/candidate-captures/V09-Portfolio-bills-desktop.png",
+      "sha256": "e68523d722917875d03abe8132e557f731fb8afe81c6aef13ce52b82a1187ead",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/docs/integration-contracts-20261012/evidence/visual-2d50edd/candidate-captures/V09-Portfolio-bills-desktop.png"
+    },
+    "calendar-target": {
+      "repositoryPath": "docs/integration-contracts-20261012/evidence/visual-2d50edd/figma-460-90798.png",
+      "sha256": "570a3984dc02c946c4d763b8f11dd9d83b319f019065bef84d823afa29a9b303",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/docs/integration-contracts-20261012/evidence/visual-2d50edd/figma-460-90798.png"
+    },
+    "calendar-actual": {
+      "repositoryPath": "docs/integration-contracts-20261012/evidence/visual-2d50edd/candidate-captures/V10-Modules-modules-effective-date-desktop.png",
+      "sha256": "fdb41a75c7d96d1c21779459cfc285ecc375b616bac3f9545af8b37c0c3a3c75",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/docs/integration-contracts-20261012/evidence/visual-2d50edd/candidate-captures/V10-Modules-modules-effective-date-desktop.png"
+    },
+    "objective-target": {
+      "repositoryPath": "docs/integration-contracts-20261012/evidence/visual-2d50edd/figma-411-60728.png",
+      "sha256": "98ac5c3fad8f05bafd560907b46d46dcf4eeaa396d242172ace22157f82432f6",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/docs/integration-contracts-20261012/evidence/visual-2d50edd/figma-411-60728.png"
+    },
+    "objective-actual": {
+      "repositoryPath": "docs/integration-contracts-20261012/evidence/visual-2d50edd/candidate-captures/V02-Work-objective-intake-desktop-filled.png",
+      "sha256": "6d12e71b8b5aebd8f3cefa2d5d52387e678600940f0bd0a71bf74826861a8211",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/docs/integration-contracts-20261012/evidence/visual-2d50edd/candidate-captures/V02-Work-objective-intake-desktop-filled.png"
+    },
+    "prospect-target": {
+      "repositoryPath": "docs/integration-contracts-20261012/evidence/visual-2d50edd/figma-411-64863.png",
+      "sha256": "1b5921a1e9580bbc04e9d2fab00b036f5db4cf477fa5d6005970bb87199ecad7",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/docs/integration-contracts-20261012/evidence/visual-2d50edd/figma-411-64863.png"
+    },
+    "prospect-actual": {
+      "repositoryPath": "docs/integration-contracts-20261012/evidence/visual-2d50edd/candidate-captures/V08-Portfolio-prospect-overview-desktop.png",
+      "sha256": "edf0f3588738efec4d6516b11c9aeba5d53f68f63bd6a87a44984429d4171630",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/docs/integration-contracts-20261012/evidence/visual-2d50edd/candidate-captures/V08-Portfolio-prospect-overview-desktop.png"
+    },
+    "owner-fields": {
+      "repositoryPath": "apps/web/src/features/portfolio/client-profile/OrderedOwnerFields.tsx",
+      "sha256": "d2b2ff0ee09e625efdcf11dc088d8f365801dd96aa52e7304b112d9c8616f014",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/apps/web/src/features/portfolio/client-profile/OrderedOwnerFields.tsx"
+    },
+    "layout-editor": {
+      "repositoryPath": "apps/web/src/features/portfolio/index/layout/PortfolioLayoutEditor.tsx",
+      "sha256": "64e0cea68fe33278c4c3b54889d7f88213756f646abb9b9eb0d82b0e2c536359",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/apps/web/src/features/portfolio/index/layout/PortfolioLayoutEditor.tsx"
+    },
+    "index-component": {
+      "repositoryPath": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
+      "sha256": "52b0879a5b3a83a353cbeb217525c35d47384aaed319de648dbc04c56405582a",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/apps/web/src/features/portfolio/index/PortfolioIndex.tsx"
+    },
+    "capability-fields": {
+      "repositoryPath": "apps/web/src/features/portfolio/capabilities/CapabilityFields.tsx",
+      "sha256": "bfd951c6d27c3ada1f6438401fbc9964acd882fb5dfe90103b3acd4e53e18798",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/apps/web/src/features/portfolio/capabilities/CapabilityFields.tsx"
+    },
+    "capability-contract": {
+      "repositoryPath": "apps/web/src/features/portfolio/capabilities/contracts.ts",
+      "sha256": "a2109a5d7c1a526d1eecc9cb554e01af84bb84a7f4e5681f7218f2885ab6ed99",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/apps/web/src/features/portfolio/capabilities/contracts.ts"
+    },
+    "bill-page": {
+      "repositoryPath": "apps/web/src/features/portfolio/bill-tracker/BillTrackerPage.tsx",
+      "sha256": "6ce947c0c2d1ba13b3bf0a6c45001ef71348475bce30584a432495a3bba4aaee",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/apps/web/src/features/portfolio/bill-tracker/BillTrackerPage.tsx"
+    },
+    "calendar-controls": {
+      "repositoryPath": "apps/web/src/features/modules/calendar/CalendarControls.tsx",
+      "sha256": "9dec94ff507a18a30d33613202ea4e4f6e652c424466a4ea0f61d8c5f00cff55",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/apps/web/src/features/modules/calendar/CalendarControls.tsx"
+    },
+    "calendar-css": {
+      "repositoryPath": "apps/web/src/features/modules/calendar/calendar.module.css",
+      "sha256": "6637757fb2c74f5113915485c5c615cd259f14e7bd391d413270ca1ca801469c",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/apps/web/src/features/modules/calendar/calendar.module.css"
+    },
+    "module-shell-css": {
+      "repositoryPath": "apps/web/src/shared/shell/module-shell.module.css",
+      "sha256": "049e5e18492747418c8ca1dbdbdde6b37181de39f1ac1da570ddff8da6cc2835",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/apps/web/src/shared/shell/module-shell.module.css"
+    },
+    "portfolio-css": {
+      "repositoryPath": "apps/web/src/shared/portfolio/styles.css",
+      "sha256": "6fbd78348a962efc6deb9b2fa4f756bac400804e384f7e3658933a77c816f38f",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/apps/web/src/shared/portfolio/styles.css"
+    },
+    "layout-tests": {
+      "repositoryPath": "apps/web/tests/browser/portfolio-layout.spec.ts",
+      "sha256": "5e85b00f31e596199525772ea311816f2b886f82973eac0e99fea4e7d45c726a",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/apps/web/tests/browser/portfolio-layout.spec.ts"
+    },
+    "owner-tests": {
+      "repositoryPath": "apps/web/tests/browser/ordered-owners.spec.ts",
+      "sha256": "23ce912be82fdac57ca32a0de07b5107f02030fbea6b460258ae125c6f456ca5",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/apps/web/tests/browser/ordered-owners.spec.ts"
+    },
+    "dialog-tests": {
+      "repositoryPath": "apps/web/tests/browser/shared-dialog-layout.spec.ts",
+      "sha256": "1908dcd7446c40aceabf63a8b0f7eb85313334ab84ffd49ec6d6327cfa370de7",
+      "url": "https://github.com/neo-capiro/capiro-frontend/blob/a397d45c461b24eb741afcd3b7cf28ca354d1e96/apps/web/tests/browser/shared-dialog-layout.spec.ts"
+    }
+  }
+}

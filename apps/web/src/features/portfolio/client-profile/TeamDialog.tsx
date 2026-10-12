@@ -16,10 +16,12 @@ import { ownerLabels } from "./ordered-owners";
 
 export function TeamDialog({
   clientId,
+  clientName,
   open,
   onOpenChange,
 }: {
   clientId: string;
+  clientName?: string;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
@@ -36,6 +38,7 @@ export function TeamDialog({
         <ProfileTeamEditor
           key={`${clientId}:${profileActorKey(actor)}`}
           clientId={clientId}
+          clientName={clientName}
           actor={actor}
         />
       )}
@@ -49,9 +52,11 @@ export function TeamDialog({
 }
 function ProfileTeamEditor({
   clientId,
+  clientName,
   actor,
 }: {
   clientId: string;
+  clientName?: string;
   actor: ProfileActor | undefined;
 }) {
   const editor = useProfileTeamEditor(clientId, actor);
@@ -127,8 +132,15 @@ function ProfileTeamEditor({
       )}
       <OrderedOwnerFields
         clientId={clientId}
+        clientName={clientName}
         actor={actor}
         blocked={!editor.team.source || editor.pending || editor.unknown}
+        roles={Object.fromEntries(
+          (editor.team.data ?? []).map((member) => [
+            member.userId,
+            member.role,
+          ]),
+        )}
       />
       <QueryState error={editor.error} />
       {editor.unknown && (

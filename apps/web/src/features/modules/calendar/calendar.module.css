@@ -5,16 +5,16 @@
 }
 .pageHeader {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   gap: 24px;
-  min-height: 92px;
+  min-height: 48px;
 }
 .pageHeader h1 {
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1.2;
-  font-weight: 600;
-  letter-spacing: -0.44px;
+  font-weight: 500;
+  letter-spacing: -0.3px;
 }
 .pageHeader p {
   margin-top: 8px;
@@ -369,4 +369,34 @@
     font-size: 16px;
     min-width: 0;
   }
+}
+
+.moduleNavigation {
+  position: relative;
+  margin-bottom: 8px;
+  color: var(--muted-foreground);
+}
+.moduleNavigation summary {
+  width: fit-content;
+  cursor: pointer;
+  font-size: 11px;
+  line-height: 1.3;
+  letter-spacing: 0.66px;
+  text-transform: uppercase;
+}
+.moduleNavigation summary::marker {
+  font-size: 8px;
+}
+.moduleNavigation > nav {
+  position: absolute;
+  top: 24px;
+  left: 0;
+  z-index: 10;
+  padding: 12px;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  white-space: nowrap;
 }

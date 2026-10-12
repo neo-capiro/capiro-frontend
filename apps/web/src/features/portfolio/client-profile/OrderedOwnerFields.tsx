@@ -1,76 +1,80 @@
 "use client";
-import { memberName } from "@/features/portfolio/index/public";
+import { useState } from "react";
+import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import type { ProfileActor } from "./profile-access";
-import { ownerLabels } from "./ordered-owners";
 import { useOrderedOwners } from "./useOrderedOwners";
+import { OwnerCards } from "./OwnerCards";
+import styles from "./owners.module.css";
 
-export function OrderedOwnerFields({
+type OwnerProps = {
+  clientId: string;
+  clientName?: string;
+  actor: ProfileActor | undefined;
+  blocked: boolean;
+  roles: Readonly<Record<string, string | null>>;
+};
+export function OrderedOwnerFields(props: OwnerProps) {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <button className="button" onClick={() => setOpen(true)}>
+        Manage owners
+      </button>
+      <Dialog
+        open={open}
+        onOpenChange={setOpen}
+        title={props.clientName ? `Owners · ${props.clientName}` : "Owners"}
+        className={styles.dialog}
+      >
+        {open && <OwnerEditor {...props} onCancel={() => setOpen(false)} />}
+      </Dialog>
+    </>
+  );
+}
+function OwnerEditor({
   clientId,
   actor,
   blocked,
-}: {
-  clientId: string;
-  actor: ProfileActor | undefined;
-  blocked: boolean;
-}) {
+  roles,
+  onCancel,
+}: OwnerProps & { onCancel: () => void }) {
   const editor = useOrderedOwners(clientId, actor);
   return (
-    <fieldset className="stack" aria-label="Ordered account owners">
-      <legend>Account owners</legend>
-      <p>
-        Up to four owners, in order. Ownership does not grant access to this
-        client.
-      </p>
-      <QueryState pending={editor.loading} error={editor.error} />
-      {ownerLabels.map((label, index) => {
-        const value = editor.slots[index] ?? "";
-        const available = editor.options.data?.some(
-          (member) => member.id === value,
-        );
-        return (
-          <label key={label}>
-            {label} owner
-            <select
-              value={value}
-              disabled={blocked || !editor.editable}
-              onChange={(event) => editor.edit(index, event.target.value)}
-            >
-              <option value="">Unassigned</option>
-              {value && !available && (
-                <option value={value} disabled>
-                  Unavailable owner · {value}
-                </option>
-              )}
-              {editor.options.data?.map((member) => (
-                <option key={member.id} value={member.id}>
-                  {memberName(member)}
-                </option>
-              ))}
-            </select>
-          </label>
-        );
-      })}
-      {editor.attempt && (
-        <p role="status">
-          Owner change result needs review. Read current owners and compare the
-          complete order before another save.
+    <>
+      <div className={styles.body}>
+        <QueryState pending={editor.loading} error={editor.error} />
+        <OwnerCards editor={editor} blocked={blocked} roles={roles} />
+        {editor.attempt && (
+          <p role="status">
+            Owner change result needs review. Read current owners and compare
+            the complete order before another save.
+          </p>
+        )}
+        {editor.stale && !editor.attempt && (
+          <p role="status">
+            The saved owner source changed. Read current owners before saving
+            this retained draft.
+          </p>
+        )}
+        {editor.message && <p role="status">{editor.message}</p>}
+        {(editor.attempt || editor.stale || editor.error) && (
+          <button
+            className="button"
+            disabled={editor.pending || editor.loading}
+            onClick={() => void editor.review()}
+          >
+            Read current owners
+          </button>
+        )}
+        <p className={styles.access}>
+          Ownership does not grant access to this client.
         </p>
-      )}
-      {editor.stale && !editor.attempt && (
-        <p role="status">
-          The saved owner source changed. Read current owners before saving this
-          retained draft.
-        </p>
-      )}
-      {editor.message && <p role="status">{editor.message}</p>}
-      <div className="formActions">
-        <button
-          className="button"
-          disabled={editor.pending || editor.loading}
-          onClick={() => void editor.review()}
-        >
-          Read current owners
+      </div>
+      <footer className={styles.footer}>
+        <span>Changes apply to this client only</span>
+        <button className="button" onClick={onCancel}>
+          Cancel
         </button>
         <button
           className="button primary"
@@ -79,9 +83,9 @@ export function OrderedOwnerFields({
           }
           onClick={() => void editor.save()}
         >
-          {editor.pending ? "Saving owners…" : "Save owner order"}
+          {editor.pending ? "Saving owners…" : "Save owners"}
         </button>
-      </div>
-    </fieldset>
+      </footer>
+    </>
   );
 }

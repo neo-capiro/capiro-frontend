@@ -71,6 +71,7 @@ test("deep links restore combined filters and legacy layout; clearing preserves 
   await page.goto(
     "/portfolio?layout=list&q=sam%20owner&status=ACTIVE&sector=Aerospace&owner=owner-1&type=CLIENT&sort=name",
   );
+  await page.getByText("Filters and view", { exact: true }).click();
   const table = page.getByRole("table", { name: "Portfolio profiles" });
   await expect(table.getByRole("row")).toHaveCount(2);
   await expect(table).toContainText("Zephyr Aerospace");
@@ -96,6 +97,7 @@ test("deep links restore combined filters and legacy layout; clearing preserves 
   });
   await page.reload();
   await expect(table.getByRole("row").nth(1)).toContainText("Alpha Energy");
+  await page.getByText("Filters and view", { exact: true }).click();
   await page.getByRole("button", { name: "Card view" }).click();
   await expect(page).toHaveURL(/sort=name&view=cards$/);
   await expect(page.getByRole("article").first()).toContainText("Alpha Energy");
@@ -124,6 +126,7 @@ test("real fields drive search/status/sector/known unassigned; no matching resul
 }) => {
   const unexpected = await indexFixtures(page);
   await page.goto("/portfolio");
+  await page.getByText("Filters and view", { exact: true }).click();
   await page.getByLabel("Search profiles").fill("Energy");
   await page.getByLabel("Sector", { exact: true }).selectOption("ENERGY");
   await page

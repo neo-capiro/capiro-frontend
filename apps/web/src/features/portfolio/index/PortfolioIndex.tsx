@@ -17,13 +17,13 @@ import {
 } from "./filter";
 import { CreateProfileDialog } from "./CreateProfileDialog";
 import { PortfolioProfiles } from "./PortfolioProfiles";
-import { IndexFilters } from "./IndexFilters";
+import { IndexOwnerFilter } from "./IndexOwnerFilter";
+import { IndexNavigation } from "./IndexNavigation";
 import { PortfolioPulse } from "./PortfolioPulse";
 import { GlobalQuickLog } from "./GlobalQuickLog";
 import { PortfolioAttention } from "./attention/public";
 import { GlobalObjectiveClientPicker } from "@/features/portfolio/objectives/global-create/public";
 import styles from "./portfolio.module.css";
-import objectiveEntryStyles from "./objective-entry.module.css";
 
 export function PortfolioIndex({
   destinations,
@@ -39,7 +39,9 @@ export function PortfolioIndex({
   const router = useRouter();
   const pathname = usePathname();
   const [creating, setCreating] = useState(false);
+  const [customizing, setCustomizing] = useState(false);
   const objectiveTrigger = useRef<HTMLButtonElement>(null);
+  const customizeTrigger = useRef<HTMLButtonElement>(null);
   const state = readPortfolioState(params);
   const permitted =
     !identity.error &&
@@ -79,9 +81,13 @@ export function PortfolioIndex({
               Portfolio <span>{records?.length ?? "—"}</span>
             </h1>
           </div>
-          <div
-            className={`${styles.headerActions} ${objectiveEntryStyles.actions}`}
-          >
+          <div className={styles.headerActions}>
+            <IndexOwnerFilter
+              state={state}
+              owners={owners.error ? undefined : owners.data}
+              ownerPending={owners.isPending}
+              set={set}
+            />
             <label className={styles.search}>
               <Search size={16} aria-hidden="true" />
               <input
@@ -93,12 +99,12 @@ export function PortfolioIndex({
               />
             </label>
             <button
-              ref={objectiveTrigger}
               className="button"
-              disabled={!permitted}
-              onClick={() => set("new", "objective")}
+              ref={customizeTrigger}
+              aria-expanded={customizing}
+              onClick={() => setCustomizing(true)}
             >
-              New objective
+              Customize
             </button>
             <button
               className="button primary"
@@ -118,14 +124,6 @@ export function PortfolioIndex({
           <p className="muted">Your role does not allow creating profiles.</p>
         )}
         <PortfolioPulse clients={records} />
-        <IndexFilters
-          state={state}
-          clients={records}
-          owners={owners.error ? undefined : owners.data}
-          ownerPending={owners.isPending}
-          set={set}
-          clear={clear}
-        />
         {state.unsupportedSort && (
           <p className="status" role="status">
             This sort is unavailable. Showing most recently added profiles.{" "}
@@ -151,40 +149,19 @@ export function PortfolioIndex({
             retry={() => void owners.refetch()}
           />
         )}
-        {records && (
-          <>
-            <div className={styles.columns}>
-              <section className="stack" aria-label="Portfolio profiles">
-                <nav className={styles.tabs} aria-label="Profile type">
-                  {[
-                    ["All", ""],
-                    ["Clients", "CLIENT"],
-                  ].map(([label, value]) => (
-                    <button
-                      key={label}
-                      className={`button ${state.type === value ? "primary" : ""}`}
-                      aria-pressed={state.type === value}
-                      onClick={() => set("type", value ?? "")}
-                    >
-                      {label}{" "}
-                      <small>
-                        {value
-                          ? records.filter((c) => c.profileType === value)
-                              .length
-                          : records.length}
-                      </small>
-                    </button>
-                  ))}
-                  <Link className="button" href="/portfolio/prospects">
-                    Prospects
-                  </Link>
-                  <Link
-                    className="button"
-                    href="/portfolio/prospects?pipeline=1"
-                  >
-                    Pipeline
-                  </Link>
-                </nav>
+        <div className={styles.columns}>
+          <section className="stack" aria-label="Portfolio profiles">
+            <IndexNavigation
+              records={records}
+              state={state}
+              permitted={permitted}
+              objectiveTrigger={objectiveTrigger}
+              onObjective={() => set("new", "objective")}
+              set={set}
+              clear={clear}
+            />
+            {records && (
+              <>
                 {ownerFilterWaiting ? (
                   <div className="status" role="status">
                     {owners.isPending
@@ -193,13 +170,21 @@ export function PortfolioIndex({
                   </div>
                 ) : (
                   <>
-                    <p className={styles.resultCount} role="status">
+                    <p
+                      className={activeFilters ? styles.resultCount : "srOnly"}
+                      role="status"
+                    >
                       {rows.length} {rows.length === 1 ? "profile" : "profiles"}
                       {activeFilters ? ` of ${records.length}` : ""}
                     </p>
                     {rows.length ? (
                       <PortfolioProfiles
                         catalog={records}
+                        customizing={customizing}
+                        onFinishCustomizing={() => {
+                          setCustomizing(false);
+                          customizeTrigger.current?.focus();
+                        }}
                         rows={rows}
                         state={state}
                         filtered={activeFilters}
@@ -252,12 +237,12 @@ export function PortfolioIndex({
                     + Add profile
                   </button>
                 )}
-              </section>
-              <PortfolioAttention clients={records} />
-            </div>
-            <GlobalQuickLog clients={records} />
-          </>
-        )}
+              </>
+            )}
+          </section>
+          {records && <PortfolioAttention clients={records} />}
+        </div>
+        {records && <GlobalQuickLog clients={records} />}
         <CreateProfileDialog
           open={creating}
           onOpenChange={setCreating}
