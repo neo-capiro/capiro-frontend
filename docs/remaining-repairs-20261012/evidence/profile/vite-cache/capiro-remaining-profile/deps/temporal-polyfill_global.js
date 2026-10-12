@@ -1,0 +1,4 @@
+import { a as n, i as toTemporalInstant, n as Xn, t as Un } from "./classApi-NsJHiTfK.js";
+//#region capiro-followup/node_modules/temporal-polyfill/global.esm.js
+Object.defineProperties(globalThis, n({ Temporal: Un })), Object.defineProperties(Intl, n({ DateTimeFormat: Xn })), Object.defineProperties(Date.prototype, n({ toTemporalInstant }));
+//#endregion

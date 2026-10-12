@@ -1,0 +1,74 @@
+
+Running 2 tests using 1 worker
+
+(node:763907) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 apps/web/tests/browser/files-view-contrast.spec.ts:5:7 › selected Files view keeps readable text while hovered at 1440px (2.5s)
+(node:764052) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 apps/web/tests/browser/files-view-contrast.spec.ts:5:7 › selected Files view keeps readable text while hovered at 360px (2.4s)
+
+
+  1) apps/web/tests/browser/files-view-contrast.spec.ts:5:7 › selected Files view keeps readable text while hovered at 1440px 
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 4.5
+    Received:    1.1491398126989472
+
+      39 |       );
+      40 |     });
+    > 41 |     expect(contrast).toBeGreaterThanOrEqual(4.5);
+         |                      ^
+      42 |     expect(unexpected).toEqual([]);
+      43 |   });
+      44 |
+        at /workspace/capiro-remaining-profile/apps/web/tests/browser/files-view-contrast.spec.ts:41:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/files-contrast-red/contrast-selected-Files-vi-8ce0a-ext-while-hovered-at-1440px/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-profile-evidence/files-contrast-red/contrast-selected-Files-vi-8ce0a-ext-while-hovered-at-1440px/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/files-contrast-red/contrast-selected-Files-vi-8ce0a-ext-while-hovered-at-1440px/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-profile-evidence/files-contrast-red/contrast-selected-Files-vi-8ce0a-ext-while-hovered-at-1440px/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) apps/web/tests/browser/files-view-contrast.spec.ts:5:7 › selected Files view keeps readable text while hovered at 360px 
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 4.5
+    Received:    1.1491398126989472
+
+      39 |       );
+      40 |     });
+    > 41 |     expect(contrast).toBeGreaterThanOrEqual(4.5);
+         |                      ^
+      42 |     expect(unexpected).toEqual([]);
+      43 |   });
+      44 |
+        at /workspace/capiro-remaining-profile/apps/web/tests/browser/files-view-contrast.spec.ts:41:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/files-contrast-red/contrast-selected-Files-vi-15109-text-while-hovered-at-360px/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-profile-evidence/files-contrast-red/contrast-selected-Files-vi-15109-text-while-hovered-at-360px/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/files-contrast-red/contrast-selected-Files-vi-15109-text-while-hovered-at-360px/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-profile-evidence/files-contrast-red/contrast-selected-Files-vi-15109-text-while-hovered-at-360px/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    apps/web/tests/browser/files-view-contrast.spec.ts:5:7 › selected Files view keeps readable text while hovered at 1440px 
+    apps/web/tests/browser/files-view-contrast.spec.ts:5:7 › selected Files view keeps readable text while hovered at 360px 

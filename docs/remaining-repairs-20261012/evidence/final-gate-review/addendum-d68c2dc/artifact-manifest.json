@@ -1,0 +1,27 @@
+{
+  "schema": "capiro-independent-review-artifacts/1",
+  "sealedAtUTC": "2026-10-12T22:00:59.930880+00:00",
+  "source": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+  "files": [
+    {
+      "path": "audit.py",
+      "bytes": 19386,
+      "sha256": "0832030a688d45f346534ee7e5857d5eb02eb087a19799c393f94ab327726117"
+    },
+    {
+      "path": "inherited-findings-and-warnings.json",
+      "bytes": 28736,
+      "sha256": "a4e76da95fb420c6abcbe7d2e0f2c5f6e06a790fbde8ac332bd27450be55696a"
+    },
+    {
+      "path": "report.json",
+      "bytes": 262971,
+      "sha256": "43058d652adddce750ebade88c9843f4e64aa9082f027061bcda27dc768b83d9"
+    },
+    {
+      "path": "report.md",
+      "bytes": 8533,
+      "sha256": "a80d349d01bab2cdf026cbf321879a9bad25ccb25e67085c5885dba354b32f6b"
+    }
+  ]
+}

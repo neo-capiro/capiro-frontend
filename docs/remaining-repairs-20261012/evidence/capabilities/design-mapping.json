@@ -1,0 +1,83 @@
+{
+  "fileKey": "Zc2dEN5aLU47dVdsewDmiJ",
+  "snapshotManifest": "figma-baseline-manifest.json",
+  "facets": [
+    {
+      "finding": "OWI-F03",
+      "row": "CAP-08",
+      "frame": "411:55825",
+      "nodes": {
+        "dialog": "411:55944",
+        "header": "411:55945",
+        "body": "411:55951",
+        "firstRow": "411:55953",
+        "firstLabel": "411:55954",
+        "firstValue": "411:55955"
+      },
+      "suppliedGeometry": {
+        "desktopWidth": 680,
+        "desktopTop": 60,
+        "cornerRadius": 14,
+        "bodyHorizontalPadding": 28,
+        "bodyVerticalPadding": 18,
+        "rowVerticalPadding": 10,
+        "labelWidth": 170,
+        "columnGap": 16,
+        "rowGap": 16,
+        "divider": 1,
+        "labelFontSize": 11,
+        "valueFontSize": 13
+      },
+      "adaptation": "Values use the remaining flexible column (instead of clipping to 420px). At phone widths the label/value columns shrink 2:3 and long data wraps; desktop Figma has no phone registration state. Existing accessible Close control, eight native-backed read fields, permission and edit controls are retained. The 24px header close-button geometry reuses the already adopted capability editor pattern while preserving the Dialog primitive and label."
+    },
+    {
+      "finding": "OWI-F04",
+      "row": "CAP-01",
+      "frame": "411:86453",
+      "nodes": {
+        "group": "411:86480",
+        "header": "411:86481",
+        "firstRow": "411:86483",
+        "name": "411:86485",
+        "badge": "411:86486",
+        "program": "411:86488"
+      },
+      "suppliedGeometry": {
+        "phoneWidth": 390,
+        "groupWidth": 358,
+        "groupRadius": 12,
+        "headerPadding": "12px 16px",
+        "rowPadding": "12px 16px",
+        "rowGap": 6,
+        "nameFontSize": 14,
+        "programFontSize": 13,
+        "badgeFontSize": 12,
+        "badgePadding": "3px 8px",
+        "badgeRadius": 6,
+        "prototypeResearchWidth": 80
+      },
+      "adaptation": "Same existing semantic button becomes a compact row only below existing 680px responsive breakpoint. Name and data may wrap; no truncation/fabrication. Supplied fallback/legacy peNumber retained. Desktop cards unchanged."
+    }
+  ],
+  "tokens": {
+    "card": "existing --card",
+    "foreground": "existing --foreground",
+    "border": "existing --border",
+    "muted": "existing --muted",
+    "mutedForeground": "existing --muted-foreground",
+    "success": "existing --success (project light/dark palette; Figma light literal #3d6b4f differs from project #42634b)",
+    "warningSubtle": "existing optional --warning-subtle with Figma fallback #f3eee2; dark --muted",
+    "warningText": "existing optional --warning-text with Figma fallback #6c5226, adopted dark fallback #d6b274",
+    "sans": "existing --font-geist-sans",
+    "programMono": "existing --font-geist-mono"
+  },
+  "assets": {
+    "newDownloadedAssets": [],
+    "reason": "Owned row/list geometry consists of native text, CSS borders and chips. Existing shared header assets/modal close icon are reused. Raw original Figma responses preserve surrounding-page asset URLs without new live dependency."
+  },
+  "scopeLimits": [
+    "No full-page pixel equivalence claimed.",
+    "No mobile registration frame was supplied; wrapping is a bounded responsive adaptation.",
+    "No native/backend acceptance from intercepted browser evidence."
+  ]
+}

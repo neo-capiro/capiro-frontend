@@ -1,0 +1,83 @@
+{
+  "classification": "TEST_SYNCHRONIZATION_RACE_CONFIRMED_BY_TRACE_AND_INSTALLED_SELECT_SOURCE",
+  "sourceBindings": [
+    {
+      "path": "apps/web/test/browser/remaining-modules.spec.ts",
+      "sha256": "c86ad251ee3eb115e5e6edeb0309192aebd9b3fd38fc6f85fdf19e89deaea78f",
+      "adbcEqualsD68": true
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
+      "sha256": "0ba080a47173133c48a42f63f406e937586a6a810b9b7f48715deea9c159af23",
+      "adbcEqualsD68": true
+    },
+    {
+      "path": "apps/web/src/shared/module-ui/SelectInput.tsx",
+      "sha256": "efe002de583889133257c0c7971c342a401969eeb474bffbd90784cea8530e9b",
+      "adbcEqualsD68": true
+    },
+    {
+      "path": "packages/ui/src/shadcn/select.tsx",
+      "sha256": "23e46864ece159592bc70c18901c3f366b56438457c8715715c391c255107b67",
+      "adbcEqualsD68": true
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "93b3dd0484180ade603daf74a32f75fc16a9bf0bda1694966a6e68100e2a6802",
+      "adbcEqualsD68": true
+    }
+  ],
+  "installedRadixVersion": "2.3.8",
+  "installedRadix": {
+    "path": "/workspace/capiro-remaining/node_modules/@radix-ui/react-select/dist/index.mjs",
+    "bytes": 53929,
+    "sha256": "0c9d7b63e95cdc7548e99e250678f7ad4a70854954b52c65f1dfbada69e5e1f9"
+  },
+  "causalSource": [
+    {
+      "path": "/workspace/capiro-remaining/node_modules/@radix-ui/react-select/dist/index.mjs",
+      "line": 522,
+      "meaning": "Arrow navigation schedules focusFirst via setTimeout."
+    },
+    {
+      "path": "/workspace/capiro-remaining/node_modules/@radix-ui/react-select/dist/index.mjs",
+      "line": 864,
+      "meaning": "data-highlighted reflects isFocused; aria-selected combines isSelected and focus."
+    },
+    {
+      "path": "apps/web/src/shared/module-ui/SelectInput.tsx",
+      "line": 31,
+      "meaning": "Delegates controlled value and change callback to canonical adopted Select; no custom keyboard handler."
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
+      "line": 255,
+      "meaning": "Group by uses existing controlled local state and Client/None options."
+    }
+  ],
+  "proposedScope": "apps/web/test/browser/remaining-modules.spec.ts keyboard case only",
+  "proposedAssertions": [
+    "After focusing each combobox, assert it is focused.",
+    "After opening with Enter, assert expanded/listbox visible and exact currently selected option focused.",
+    "After ArrowDown, assert exact next option focused before final Enter.",
+    "Keep the original selected client, visible task, None value, one table, regroup and phone screenshot checks unchanged."
+  ],
+  "prohibitedSubstitutions": [
+    "No click selection in the keyboard sequence.",
+    "No arbitrary wait, retry, timeout increase, assertion removal or changed expected value.",
+    "No shared Select or application runtime edits."
+  ],
+  "nearbyAudit": {
+    "paths": [
+      "apps/web/test/browser/remaining*.spec.ts",
+      "apps/web/test/browser/next*.spec.ts"
+    ],
+    "samePattern": [
+      "remaining-modules.spec.ts:286-288 scope sequence",
+      "remaining-modules.spec.ts:298-300 Group by sequence"
+    ],
+    "otherKeyAction": "next-modules-task-links.spec.ts uses Escape followed by URL assertion; it does not repeat this ArrowDown/Enter pattern."
+  },
+  "runtimeValidation": "NOT_RUN; awaiting root authorization and focused browser lease",
+  "productDefectEstablished": false
+}

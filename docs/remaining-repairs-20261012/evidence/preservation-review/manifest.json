@@ -1,0 +1,53 @@
+{
+  "at": "2026-10-12T21:26:30.983346+00:00",
+  "scope": "Immutable independent helper-review packet. This manifest excludes itself. Final committed archive verification is separate.",
+  "records": [
+    {
+      "path": "REPORT.md",
+      "bytes": 4898,
+      "sha256": "77ca6186b9468c05a1227bc8832d88fef63f2554a89232c2b458b1ce8cae6af4"
+    },
+    {
+      "path": "bounded-sensitive-file-check.json",
+      "bytes": 2131,
+      "sha256": "9ae61f687484590d443d85b915c1fc2afda10d107b8f061470d02eaaacf2f9eb"
+    },
+    {
+      "path": "helper-binding.json",
+      "bytes": 1539,
+      "sha256": "703ce3f34a596751af3bff80a6639c0ff283cf3f23c419a99b312a911a2e535b"
+    },
+    {
+      "path": "initial-inventory.json",
+      "bytes": 5412,
+      "sha256": "d97c682488636ff1409b2b64b641ddbecb0cefe061f2128eabd0fa3b82fa2099"
+    },
+    {
+      "path": "initial-observed-helpers/preserve-evidence.py",
+      "bytes": 4535,
+      "sha256": "c4f3f28c40b6b43fe528f1cad11500a4b561d201e7759c9dfa851315f06717f6"
+    },
+    {
+      "path": "initial-observed-helpers/stage-evidence.py",
+      "bytes": 4687,
+      "sha256": "33a504ba4c8ef71012beb1c3e5cfb08dbc4e90d4fe4225b0a673fe75f2013912"
+    },
+    {
+      "path": "review.json",
+      "bytes": 1622,
+      "sha256": "efd97ae5e8ebf69cdaba9ea27c7be33b2a7eb85a6c518b8e29ffee7da16d4ed5"
+    },
+    {
+      "path": "reviewed-helpers/preserve-evidence.py",
+      "bytes": 4535,
+      "sha256": "c4f3f28c40b6b43fe528f1cad11500a4b561d201e7759c9dfa851315f06717f6"
+    },
+    {
+      "path": "reviewed-helpers/stage-evidence.py",
+      "bytes": 4687,
+      "sha256": "33a504ba4c8ef71012beb1c3e5cfb08dbc4e90d4fe4225b0a673fe75f2013912"
+    }
+  ],
+  "files": 9,
+  "bytes": 34046
+}

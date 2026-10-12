@@ -1,0 +1,61 @@
+[
+  {
+    "path": "apps/web/tests/browser/email-compose.spec.ts",
+    "baselineValueAssertions": 8,
+    "adaptedValueAssertions": 8,
+    "expectedExpressionsIdentical": true,
+    "entireTestASTEquivalentAfterOnlyRepresentationAdapter": true,
+    "expectedExpressions": [
+      "\"Draft retained for explicit review.\"",
+      "\"Retained draft\"",
+      "\"Draft retained for explicit review.\"",
+      "\"Draft retained for explicit review.\"",
+      "\"Draft retained for explicit review.\"",
+      "\"Draft retained for explicit review.\"",
+      "\"Draft retained for explicit review.\"",
+      "\"Prepared document for your review.\""
+    ]
+  },
+  {
+    "path": "apps/web/tests/browser/mail-local-draft.spec.ts",
+    "baselineValueAssertions": 7,
+    "adaptedValueAssertions": 7,
+    "expectedExpressionsIdentical": true,
+    "entireTestASTEquivalentAfterOnlyRepresentationAdapter": true,
+    "expectedExpressions": [
+      "\"Verified rewritten draft.\"",
+      "original",
+      "\"Newer manual work.\"",
+      "\"Second verified revision.\"",
+      "\"Verified rewritten draft.\"",
+      "original",
+      "original"
+    ]
+  },
+  {
+    "path": "apps/web/tests/browser/mail-rewrite.spec.ts",
+    "baselineValueAssertions": 9,
+    "adaptedValueAssertions": 9,
+    "expectedExpressionsIdentical": true,
+    "entireTestASTEquivalentAfterOnlyRepresentationAdapter": true,
+    "expectedExpressions": [
+      "\"Reviewed first.\\nReviewed second.\"",
+      "original",
+      "\"New manual draft.\"",
+      "\"Current reviewed draft.\"",
+      "original",
+      "\"Reopened manual draft.\"",
+      "original",
+      "original",
+      "original"
+    ]
+  },
+  {
+    "path": "apps/web/tests/browser/client-header.spec.ts",
+    "entireTestASTEquivalentAfterOnlyRoleAdaptation": true,
+    "adaptations": [
+      "menu -> named Client views listbox",
+      "Objectives menuitem -> Objectives option"
+    ]
+  }
+]

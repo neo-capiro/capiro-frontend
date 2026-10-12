@@ -1,0 +1,56 @@
+269: // Phase 2 §d — per-artifact sharing (ENGAGEMENT_ARTIFACT_SHARING_V2). 'note' is
+270: // deliberately singular (one artifact reference), unlike the plural 'notes' used
+271: // by ArtifactKind / MeetingLibraryQueryDto.artifactType elsewhere in this file.
+272: class ArtifactRefDto {
+273:   @IsIn(['prep', 'note', 'debrief', 'attachment'])
+274:   type!: 'prep' | 'note' | 'debrief' | 'attachment';
+275: 
+276:   @IsUUID()
+277:   id!: string;
+278: }
+279: 
+280: class ShareArtifactsDto {
+281:   @IsArray()
+282:   @ArrayMinSize(1)
+283:   @ArrayMaxSize(50)
+284:   @ValidateNested({ each: true })
+285:   @Type(() => ArtifactRefDto)
+286:   artifacts!: ArtifactRefDto[];
+2085:   // Per-artifact sharing (Phase 2 §d, ENGAGEMENT_ARTIFACT_SHARING_V2). Requires
+2086:   // each target artifact to already be approved; the legacy whole-meeting
+2087:   // share/unshare above keep working unchanged while the flag is off, and
+2088:   // shareMeeting() is refused once it's on (see the service).
+2089:   @Post('meetings/:id/artifacts/share')
+2090:   shareArtifacts(
+2091:     @CurrentTenant() ctx: TenantContext,
+2092:     @Param('id') meetingId: string,
+2093:     @Body() body: ShareArtifactsDto,
+2094:   ) {
+2095:     return this.service.shareArtifacts(ctx, meetingId, body.artifacts);
+2096:   }
+2097: 
+2098:   @Post('meetings/:id/artifacts/unshare')
+2099:   unshareArtifacts(
+2100:     @CurrentTenant() ctx: TenantContext,
+2101:     @Param('id') meetingId: string,
+2102:     @Body() body: ShareArtifactsDto,
+2103:   ) {
+2104:     return this.service.unshareArtifacts(ctx, meetingId, body.artifacts);
+2105:   }
+2106: 
+2107:   @Post('meetings/:id/notes')
+2108:   createNote(
+2109:     @CurrentTenant() ctx: TenantContext,
+2110:     @Param('id') meetingId: string,
+2377:   }
+2378: 
+2379:   // Shared meeting records for a client's Documents tab (Meetings v2 §8). Tenant-
+2380:   // scoped (shared material is org-visible), NOT owner-scoped — mirrors the
+2381:   // client-scoped debriefs feed above. Query-param client scoping matches the
+2382:   // existing /engagement/attachments?clientId= and /engagement/debriefs?clientId= idiom.
+2383:   @Get('shared-meetings')
+2384:   sharedMeetings(@CurrentTenant() ctx: TenantContext, @Query('clientId') clientId: string) {
+2385:     return this.service.listSharedMeetingsForClient(ctx, clientId);
+2386:   }
+2387: 
+2388:   @Get('outreach')

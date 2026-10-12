@@ -1,0 +1,81 @@
+from pathlib import Path
+import json,subprocess,hashlib,datetime,copy
+root=Path('/workspace/capiro-remaining');out=Path('/tmp/capiro-remaining-final-ledger-review/addendum-d68c2dc');prior=out.parent;ev=Path('/tmp/capiro-remaining-root-evidence');source='d68c2dc6b80c400b8ce9b07837f7a14cabb5d616';old='adbc84b2251fe6b06cb7f75030026fba5b4ff498';base='7aca86e7d64cfdb85d09d424a07e6186339fc24c'
+def git(*args,input=None):return subprocess.check_output(['git',*args],cwd=root,input=input)
+def sha(b):return hashlib.sha256(b).hexdigest()
+def obj(path):return json.loads(Path(path).read_text())
+def blob(commit,path):return git('show',commit+':'+path)
+def paths(*args):return [x.decode() for x in git(*args).split(b'\0') if x]
+def save(name,d):
+ target=out/name;assert not target.exists();target.write_text(json.dumps(d,indent=2)+'\n')
+assert git('rev-parse','HEAD').decode().strip()==source
+mapping=obj(ev/'integration-map-final-d68c2dc.json');receipt=obj(ev/'FROZEN-SOURCE-RECEIPT-d68c2dc.json')
+identity={k:git('rev-parse',ref).decode().strip() for k,ref in [('source','HEAD'),('rootTree',source+'^{tree}'),('applicationTree',source+':apps/web'),('srcTree',source+':apps/web/src')]}
+assert all(receipt[k]==v for k,v in identity.items())
+record_checks=[]
+for row in receipt['records']:
+ raw=blob(source,row['path']);oid=git('rev-parse',source+':'+row['path']).decode().strip();assert row['gitBlob']==oid and row['sha256']==sha(raw) and row['bytes']==len(raw)
+ assert raw==(root/row['path']).read_bytes()
+ record_checks.append({**row,'gitAndWorkingBytesVerified':True})
+changed=paths('diff','--name-only','-z',base,source)
+source_paths=[p for p in changed if p.startswith(('apps/','packages/','scripts/')) or p in ['package.json','package-lock.json','.dockerignore','docs/architecture-size-reviews.json']]
+assert set(source_paths)=={x['path'] for x in record_checks}
+mapchecks=[];latest={}
+for row in mapping['mapping']:
+ assert subprocess.run(['git','merge-base','--is-ancestor',row['integration'],source],cwd=root).returncode==0
+ patchids=[]
+ for c in [row['source'],row['integration']]:patchids.append(git('patch-id','--stable',input=git('show','--pretty=format:','--binary',c)).decode().split()[0])
+ assert patchids[0]==patchids[1]
+ ps=paths('diff-tree','--no-commit-id','--name-only','-r','-z',row['integration'])
+ mapchecks.append({**row,'stablePatchId':patchids[0],'patchIdentical':True,'integratedAncestor':True,'paths':ps})
+ for p in ps:latest[p]=row
+latest_checks=[]
+for p,row in sorted(latest.items()):
+ raw=blob(source,p);expected=blob(row['source'],p);assert raw==expected
+ latest_checks.append({'path':p,'owner':row['owner'],'ownerSource':row['source'],'integration':row['integration'],'sha256':sha(raw),'identical':True})
+assert not(set(source_paths)-set(latest))
+oldmap=obj(ev/'integration-map-final-adbc84b.json');assert mapping['mapping'][:len(oldmap['mapping'])]==oldmap['mapping']
+assert mapping['excludedHistoricalCommit']==oldmap['excludedHistoricalCommit'];assert mapping['sourcePins']==oldmap['sourcePins']
+excluded=mapping['excludedHistoricalCommit'];assert subprocess.run(['git','merge-base','--is-ancestor',excluded,source],cwd=root).returncode==1
+packets=[]
+for folder,key in [(prior,'outputs'),(prior/'addendum-adbc84b','files')]:
+ m=obj(folder/'MANIFEST.json');checks=[]
+ for row in m[key]:
+  p=Path(row['path']);p=p if p.is_absolute() else folder/p;raw=p.read_bytes();assert len(raw)==row['bytes'] and sha(raw)==row['sha256'];checks.append(str(p))
+ packets.append({'manifest':str(folder/'MANIFEST.json'),'manifestSha256':sha((folder/'MANIFEST.json').read_bytes()),'payloadFilesVerified':len(checks)})
+original=obj(prior/'ORIGINAL-REMAINING-18.json');audit=obj(prior/'FINAL-18-FINDING-ROW-AUDIT.json');restored=copy.deepcopy(audit);restored.pop('finalSourceAudit')
+for f in restored['findings']:f.pop('deliveredFacetReview')
+assert restored==original
+roworiginal=obj(prior/'ORIGINAL-UNCHANGED-ROW-STATUS-REFERENCE.json');rowaudit=obj(prior/'ROW-345-PRESERVATION-AUDIT.json')
+assert [{k:v for k,v in row.items() if k!='remaining18Review'} for row in rowaudit['rows']]==roworiginal['rows']
+inscope=[r for r in roworiginal['rows'] if r['scope']=='IN_SCOPE'];excludedrows=[r for r in roworiginal['rows'] if r['scope']!='IN_SCOPE'];assert len(inscope)==337 and len(excludedrows)==8
+assert all(r['fullRowAcceptance']=='OPEN_FINAL_ACCEPTANCE' for r in inscope)
+originalbindings=[]
+for b in obj(prior/'VALIDATION.json')['originalBindings']:
+ p=b['git'].split(':',1)[1];current=blob(source,p);baseline=blob(base,p);assert current==baseline and sha(current)==b['sha256'];originalbindings.append({'path':p,'sha256':sha(current),'unchanged':True})
+old_scope=['docs/remaining-assessment-20261012','docs/followup-20261012','docs/successor-p1-20261012']
+assert not git('diff','--name-only',base,source,'--',*old_scope)
+delta=paths('diff','--name-only','-z',old,source)
+expected_delta={'apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx','apps/web/tests/browser/portfolio.spec.ts','apps/web/tests/browser/relationships.spec.ts','docs/remaining-repairs-20261012/STRUCTURE-REVIEW.md','scripts/architecture/reviewed-size-findings.json'};assert set(delta)==expected_delta
+runtime_delta=paths('diff','--name-only','-z',old,source,'--','apps/web/src');assert runtime_delta==['apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx']
+before=blob(old,runtime_delta[0]);after=blob(source,runtime_delta[0]);assert before.replace(b' · Latest 500 items available from this history feed'.decode().encode(),b' · latest 500 items available from this history feed'.decode().encode())==after
+policies=paths('ls-tree','-r','--name-only','-z',source,'scripts/architecture');policychecks=[]
+for p in policies:
+ if p=='scripts/architecture/reviewed-size-findings.json':continue
+ assert blob(base,p)==blob(source,p);policychecks.append({'path':p,'sha256':sha(blob(source,p))})
+regbefore=json.loads(blob(old,'scripts/architecture/reviewed-size-findings.json'));regafter=json.loads(blob(source,'scripts/architecture/reviewed-size-findings.json'));regdiff=[{'before':a,'after':b} for a,b in zip(regbefore,regafter) if a!=b];assert len(regbefore)==len(regafter) and len(regdiff)==1
+assert regdiff[0]['after']['symbol']=='ActivityTimeline';assert regdiff[0]['after']['fingerprint']=='e38624c07720d44683be7da80f6f5608be5ae6f5c2cf5d1b04b707614167bd43'
+inventory=obj(ev/'final-correction-all-test-source-size-findings.json');testpaths=sorted(p for p in source_paths if p.endswith(('.ts','.tsx')) and (p.startswith('apps/web/test/') or p.startswith('apps/web/tests/')));assert sorted(inventory['paths'])==testpaths and len(testpaths)==28
+suite=obj('/tmp/capiro-remaining-qualification/final-adbc84b/portfolio-browser-results.json');exitreceipt=obj('/tmp/capiro-remaining-qualification/final-adbc84b/portfolio-browser-exit.json');failures=[];attempts=[]
+def walk(s):
+ for sub in s.get('suites',[]):walk(sub)
+ for spec in s.get('specs',[]):
+  for t in spec['tests']:
+   attempts.extend(t['results'])
+   if t['status']!='expected':failures.append({'file':spec['file'],'title':spec['title'],'status':t['status'],'resultStatuses':[r['status'] for r in t['results']]})
+walk(suite);assert suite['stats']['expected']==1115 and suite['stats']['unexpected']==3 and suite['stats']['skipped']==0 and suite['stats']['flaky']==0
+assert exitreceipt['sourceChanged']==False and exitreceipt['exitCode']==1 and all(r.get('retry',0)==0 for r in attempts)
+d5='d5dd0be9bf5ad7800e648ff1421ce047523288b3';d5trees={p:git('rev-parse',d5+suffix).decode().strip() for p,suffix in [('rootTree','^{tree}'),('apps/web',':apps/web'),('apps/web/src',':apps/web/src')]};assert d5trees['rootTree']=='7448658084841f7773144ce5d8714a19103e4ddd'
+result={'at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'verdict':'PASS_SOURCE_AND_LEDGER_ADDENDUM','identity':identity,'priorSource':old,'baseSource':base,'sourceRecordCount':len(record_checks),'sourceRecords':record_checks,'mappingCount':len(mapchecks),'mappingChecks':mapchecks,'latestMappedPaths':latest_checks,'unmappedChangedSourcePaths':[],'excludedHistoricalCommit':excluded,'excludedHistoricalCommitIsAncestor':False,'sourcePinsUnchanged':mapping['sourcePins'],'preservedPackets':packets,'deltaFromAdbc84b':[{'path':p,'beforeSha256':sha(blob(old,p)),'afterSha256':sha(blob(source,p))} for p in delta],'runtimeDelta':runtime_delta,'architecturePolicyFilesUnchanged':policychecks,'architectureRegistryDelta':regdiff,'originalBindingsUnchanged':originalbindings,'historicalDocumentationTreesUnchanged':old_scope,'frozenD5Identity':d5trees,'testInventory':{'paths':testpaths,'files':28,'reportedSignals':inventory['findings']},'originalStatuses':{'findings':len(original['findings']),'inScopeRows':len(inscope),'excludedRows':len(excludedrows),'allInScopeOpenFinalAcceptance':True,'mappedUniqueRows':len({r['auditId'] for f in original['findings'] for r in f['rows']}),'newlyAcceptedRows':0,'originalFindingAndRowObjectsUnchanged':True},'adbc84bPortfolio':{'statistics':suite['stats'],'exitCode':exitreceipt['exitCode'],'sourceChanged':exitreceipt['sourceChanged'],'retryResults':sum(r.get('retry',0)>0 for r in attempts),'failures':failures},'currentCombinedQualification':'NOT_CLAIMED_RUNNING_ROOT_OWNED','repositoryStatus':git('status','--porcelain=v1').decode()}
+save('SOURCE-LEDGER-VERIFICATION.json',result)
+print(json.dumps({k:result[k] for k in ['verdict','identity','sourceRecordCount','mappingCount','originalStatuses','adbc84bPortfolio','currentCombinedQualification']},indent=2))

@@ -1,0 +1,29 @@
+{
+  "checkedAt": "2026-10-12T19:59:18.148255+00:00",
+  "integratedHead": "8daaf2822f282fa1f764cf795a2bdb5668928beb",
+  "mapping": [
+    {
+      "owner": "objectives_work_intel_review",
+      "source": "e3d1cbb91a31cadff90898fcf2143ff5ce17318e",
+      "integration": "b46a1379ffa37c4e6f8676f286768552294e3060"
+    },
+    {
+      "owner": "prospects_review",
+      "source": "685e55039d5d3945c76085513cde8bc6c33cb55d",
+      "integration": "ceed53a8c49e07c88eef064bc821a2d60a7af71d"
+    },
+    {
+      "owner": "core_intake_review",
+      "source": "ced1d1b428f57a5cd8628ece6222924c0ebcf0f2",
+      "integration": "8daaf2822f282fa1f764cf795a2bdb5668928beb"
+    }
+  ],
+  "excludedHistoricalCommit": "24ac231749b9e8dc9b778cf318f3f94e74d168ad",
+  "excludedReason": "Superseded cross-lane callback; timeline will reuse existing URL intent and canonical QuickLog owner",
+  "sourcePins": {
+    "main": "02c02d95bdf3949662b9123f425271c6491ffdab",
+    "portfolio": "c330cebbd021eb984b4bf64ae13dbb991ae6b1c0",
+    "meri": "3cc30ff3182e8050d563516607866cf07efe2aef",
+    "modules": "50155cbbf0e4df1eecba22cbfc9b2c35bff87e0a"
+  }
+}

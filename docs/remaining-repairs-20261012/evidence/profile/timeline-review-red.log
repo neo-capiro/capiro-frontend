@@ -1,0 +1,176 @@
+
+Running 4 tests using 1 worker
+
+(node:752870) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:26:7 › uncertain activity stays fenced through expand and return (8.5s)
+(node:753051) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:26:7 › uncertain activity stays fenced through native pinned regrouping (8.5s)
+(node:753265) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:87:5 › pending activity stays fenced while its response is held across expand and return (8.1s)
+(node:753405) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  4 apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:138:5 › expanded Log activity reuses the existing Quick log uncertain creation owner (7.9s)
+
+
+  1) apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:26:7 › uncertain activity stays fenced through expand and return 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('button', { name: 'Review latest activity', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('button', { name: 'Review latest activity', exact: true })
+
+
+      70 |         exact: true,
+      71 |       }),
+    > 72 |     ).toBeVisible();
+         |       ^
+      73 |     await timeline
+      74 |       .getByRole("button", {
+      75 |         name: `Activity actions: ${note.title}`,
+        at /workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:72:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-uncertain--0362b-d-through-expand-and-return/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-uncertain--0362b-d-through-expand-and-return/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-uncertain--0362b-d-through-expand-and-return/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-uncertain--0362b-d-through-expand-and-return/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:26:7 › uncertain activity stays fenced through native pinned regrouping 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  getByRole('menuitem', { name: /^Pin note$|^Unpin note$/ })
+    Expected: ""
+    Received: serializes to the same string
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for getByRole('menuitem', { name: /^Pin note$|^Unpin note$/ })
+        14 × locator resolved to <div tabindex="-1" role="menuitem" data-orientation="vertical" data-radix-collection-item="">Unpin note</div>
+           - unexpected value "null"
+
+
+      79 |     await expect(
+      80 |       page.getByRole("menuitem", { name: /^Pin note$|^Unpin note$/ }),
+    > 81 |     ).toHaveAttribute("data-disabled", "");
+         |       ^
+      82 |     await page.keyboard.press("Escape");
+      83 |     expect(writes).toBe(1);
+      84 |     expect(unexpected).toEqual([]);
+        at /workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:81:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-uncertain--2c97e-gh-native-pinned-regrouping/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-uncertain--2c97e-gh-native-pinned-regrouping/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-uncertain--2c97e-gh-native-pinned-regrouping/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-uncertain--2c97e-gh-native-pinned-regrouping/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:87:5 › pending activity stays fenced while its response is held across expand and return 
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator:  getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('button', { name: 'Activity actions: Uncertain timeline note', exact: true })
+    Expected: disabled
+    Received: enabled
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeDisabled" with timeout 5000ms
+      - waiting for getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('button', { name: 'Activity actions: Uncertain timeline note', exact: true })
+        14 × locator resolved to <button type="button" id="radix-_r_20_" data-state="closed" aria-haspopup="menu" aria-expanded="false" class="_trigger_7mgmu_7" aria-label="Activity actions: Uncertain timeline note">⋯</button>
+           - unexpected value "enabled"
+
+
+      122 |       .getByRole("button", { name: "Return to profile", exact: true })
+      123 |       .click();
+    > 124 |     await expect(action).toBeDisabled();
+          |                          ^
+      125 |   } finally {
+      126 |     release();
+      127 |   }
+        at /workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:124:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-pending-ac-55be0-ld-across-expand-and-return/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-pending-ac-55be0-ld-across-expand-and-return/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-pending-ac-55be0-ld-across-expand-and-return/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-pending-ac-55be0-ld-across-expand-and-return/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:138:5 › expanded Log activity reuses the existing Quick log uncertain creation owner 
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator:  getByRole('dialog', { name: 'Quick log', exact: true }).getByRole('button', { name: 'Save activity', exact: true })
+    Expected: disabled
+    Received: enabled
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeDisabled" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Quick log', exact: true }).getByRole('button', { name: 'Save activity', exact: true })
+        14 × locator resolved to <button class="button primary">Save activity</button>
+           - unexpected value "enabled"
+
+
+      167 |   await expect(
+      168 |     log.getByRole("button", { name: "Save activity", exact: true }),
+    > 169 |   ).toBeDisabled();
+          |     ^
+      170 |   await expect(log.getByText(/save result is uncertain/i)).toBeVisible();
+      171 |   expect(new URL(page.url()).searchParams.get("context")).toBe("preserved");
+      172 |   expect(new URL(page.url()).searchParams.get("log")).toBe("1");
+        at /workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:169:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-expanded-L-ea6ed-og-uncertain-creation-owner/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-expanded-L-ea6ed-og-uncertain-creation-owner/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-expanded-L-ea6ed-og-uncertain-creation-owner/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-expanded-L-ea6ed-og-uncertain-creation-owner/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:26:7 › uncertain activity stays fenced through expand and return 
+    apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:26:7 › uncertain activity stays fenced through native pinned regrouping 
+    apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:87:5 › pending activity stays fenced while its response is held across expand and return 
+    apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:138:5 › expanded Log activity reuses the existing Quick log uncertain creation owner 

@@ -1,0 +1,41 @@
+
+Running 1 test using 1 worker
+
+
+(node:735377) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/1] apps/web/tests/browser/remaining-intake.spec.ts:335:1 › CI-02 narrow dark view switcher keeps keyboard selection visible
+  1) apps/web/tests/browser/remaining-intake.spec.ts:335:1 › CI-02 narrow dark view switcher keeps keyboard selection visible 
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 120
+    Received:    78
+
+      357 |     .boundingBox();
+      358 |   const popupBox = await page.getByRole("dialog").boundingBox();
+    > 359 |   expect(inputBox!.y).toBeGreaterThanOrEqual(popupBox!.y);
+          |                       ^
+      360 |   expect(inputBox!.y + inputBox!.height).toBeLessThanOrEqual(listBox!.y);
+      361 |   await page.screenshot({
+      362 |     path: info.outputPath("view-switcher-mobile-dark.png"),
+        at /workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts:359:23
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-intake-evidence/popup-red-output/remaining-intake-CI-02-nar-9048e--keyboard-selection-visible/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-intake-evidence/popup-red-output/remaining-intake-CI-02-nar-9048e--keyboard-selection-visible/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-intake-evidence/popup-red-output/remaining-intake-CI-02-nar-9048e--keyboard-selection-visible/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-intake-evidence/popup-red-output/remaining-intake-CI-02-nar-9048e--keyboard-selection-visible/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    apps/web/tests/browser/remaining-intake.spec.ts:335:1 › CI-02 narrow dark view switcher keeps keyboard selection visible 

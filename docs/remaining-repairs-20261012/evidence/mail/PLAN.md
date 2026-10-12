@@ -1,0 +1,11 @@
+# CR-10 bounded implementation plan
+
+Base7aca86e7d64cfdb85d09d424a07e6186339fc24c. Relationships owns local rich mail content; canonical authority, send, signature, attachment and rewrite transport remain in their current owners. No endpoint or dependency additions.
+
+- Add feature-owned RichMailEditor using installed Tiptap3.31.4 and adopted Settings controlled-editor pattern. Bold/italic/underline/bullet list only; safe paste strips active markup/remote resources. Reuse canonical button classes and Figma toolbar/body tokens. Existing attachment picker remains canonical; pass a ref for the toolbar trigger if needed without duplicating upload logic.
+- Atomic MailBody text+HTML value owns the two representations. Initialization and verified plain rewrite use existing escaped plainMailHtml semantics. The rewrite hook captures/restores the whole value for Meri Undo. Formatting-only edits invalidate pending/previous rewrite exactly like typing. Source/session lifetimes stay authoritative; no new persistence or authority layer.
+- Review snapshots sanitized editor HTML and displays the same safe subset; send uses frozen reviewed HTML through existing bodyHtml contract. Saved signature remains separate and current-read gated, backend appends it. Enforce existing8000 plain-character intent and40000 transport bound with explicit error; never silently truncate text.
+- Backend read-only pin4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace renderer allows strong/em/u/ul/li. No native call or delivery acceptance implied.
+- Verify red on untouched base, then formatting/send/review, safe paste, rich Undo, formatting during held rewrite, failed/unverified result, local history/source replacement, empty/limits, keyboard/mobile and all65 existing Mail browser controls. Existing Message value assertions need contenteditable semantic-text adapter; preserve expected content and all other assertions. Unit codec tests, TypeScript/lint/format and architecture report. Root owns registry/build/full gates.
+
+Original Figma435:82802/435:82147 refs unchanged. High-fidelity child435:82309 available; composer screenshots1x1 due ancestor clipping. Current local raw evidence and hashes in figma-baseline-manifest.json; no claim of full pixel acceptance.

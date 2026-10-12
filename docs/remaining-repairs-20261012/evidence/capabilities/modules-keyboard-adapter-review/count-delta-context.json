@@ -1,0 +1,40 @@
+{
+  "file": "apps/web/tests/browser/relationships.spec.ts",
+  "before": [
+    {
+      "file": "apps/web/tests/browser/relationships.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 560,
+      "fingerprint": "7b4825672a1ee0a88fcd508d46ef94ef3219c96786914a592a8cde09797a032b"
+    },
+    {
+      "file": "apps/web/tests/browser/relationships.spec.ts",
+      "kind": "function",
+      "symbol": "<anonymous> #2",
+      "line": 37,
+      "nonblank": 81,
+      "fingerprint": "c9dffe417d395d9f749bb79d5102a12bbcb0f92ecc4c9cf3a1ff07e6c38713be"
+    }
+  ],
+  "after": [
+    {
+      "file": "apps/web/tests/browser/relationships.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 560,
+      "fingerprint": "e98b8a1b5376c8157fae08bfd731dc878b3afcc9a2314e105bc0820bbeceddb8"
+    },
+    {
+      "file": "apps/web/tests/browser/relationships.spec.ts",
+      "kind": "function",
+      "symbol": "<anonymous> #2",
+      "line": 37,
+      "nonblank": 81,
+      "fingerprint": "c9dffe417d395d9f749bb79d5102a12bbcb0f92ecc4c9cf3a1ff07e6c38713be"
+    }
+  ],
+  "diff": "diff --git a/apps/web/tests/browser/relationships.spec.ts b/apps/web/tests/browser/relationships.spec.ts\nindex 7fe9387..e97534c 100644\n--- a/apps/web/tests/browser/relationships.spec.ts\n+++ b/apps/web/tests/browser/relationships.spec.ts\n@@ -508,7 +508,7 @@ test(\"person-linked QuickLog retains its failed note and existing email provider\n   await confirmation\n     .getByRole(\"button\", { name: \"Close\", exact: true })\n     .click();\n-  await expect(mail.getByLabel(\"Message\", { exact: true })).toHaveValue(\n+  await expect(mail.getByLabel(\"Message\", { exact: true })).toHaveText(\n     \"Synthetic message\",\n   );\n   await expect(mail.getByText(\"Email sent.\", { exact: true })).toHaveCount(0);\n"
+}

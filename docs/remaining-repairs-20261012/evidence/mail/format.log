@@ -1,0 +1,10 @@
+apps/web/src/features/portfolio/relationships/MailCompose.tsx 103ms
+apps/web/src/features/portfolio/relationships/email.ts 20ms (unchanged)
+apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts 17ms (unchanged)
+apps/web/src/features/portfolio/relationships/email/mail-body.ts 8ms (unchanged)
+apps/web/src/features/portfolio/relationships/email/mail-body-html.ts 2ms (unchanged)
+apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx 15ms
+apps/web/src/features/portfolio/relationships/email/AttachmentFields.tsx 8ms (unchanged)
+apps/web/src/features/portfolio/relationships/email/email.module.css 23ms
+apps/web/tests/mail-body.test.ts 5ms
+apps/web/tests/browser/mail-rich-compose.spec.ts 44ms

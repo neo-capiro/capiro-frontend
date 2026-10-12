@@ -1,0 +1,57 @@
+{
+  "at": "2026-10-12T22:54:07.207175+00:00",
+  "reason": "Preserve prior archives and free workspace for final evidence publication after the browser runner completed",
+  "sourceBytesUnchanged": true,
+  "moves": [
+    {
+      "oldPath": "/workspace/capiro-source-archives/source-adbc84b",
+      "storagePath": "/tmp/capiro-archived-source-storage/source-adbc84b",
+      "oldPathRetainedAsSymlink": true,
+      "verifiedFiles": [
+        {
+          "path": "SOURCE-ARCHIVE-RECEIPT.json",
+          "bytes": 2990063,
+          "sha256": "0203dbbdd17a0812be3fefd3f6a0c3aa907b322bd3b61ae007c836bf87c277ed",
+          "mode": 384
+        },
+        {
+          "path": "initial-mode-verification-failure.json",
+          "bytes": 390,
+          "sha256": "27ff4ae8e70db1195b0c3041448c75a5df9252f4a825e22aeabd366d454a61b5",
+          "mode": 384
+        },
+        {
+          "path": "source-adbc84b.zip",
+          "bytes": 841124429,
+          "sha256": "5a631ef2f6d7500c947fafa85ed22731214b37bc2f587da29db6f1b272f0784a",
+          "mode": 384
+        }
+      ]
+    },
+    {
+      "oldPath": "/workspace/capiro-source-archives/source-d5dd0be",
+      "storagePath": "/tmp/capiro-archived-source-storage/source-d5dd0be",
+      "oldPathRetainedAsSymlink": true,
+      "verifiedFiles": [
+        {
+          "path": "SOURCE-ARCHIVE-RECEIPT.json",
+          "bytes": 1586973,
+          "sha256": "5fcbdf8819003e3eb51a9d8395eb70db0a10c728efb7aaf6b8c301afa0210cd9",
+          "mode": 384
+        },
+        {
+          "path": "create.log",
+          "bytes": 326,
+          "sha256": "daaf02550c453b93e3d51f894e31a3a840e00a61b9e1ac91ddf54abcfb269c37",
+          "mode": 384
+        },
+        {
+          "path": "source-d5dd0be.zip",
+          "bytes": 498171732,
+          "sha256": "971c9116e1b9e7d4fc11da434ba26110a401b85e210650322e7b5a14b918cfc7",
+          "mode": 384
+        }
+      ]
+    }
+  ]
+}

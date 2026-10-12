@@ -1,0 +1,116 @@
+commit 3195ffab57584054a714ff5bd025063fba363929
+Author:     NEO MARTINEZ <neo@capiro.ai>
+AuthorDate: Mon Oct 12 20:15:41 2026 +0000
+Commit:     NEO MARTINEZ <neo@capiro.ai>
+CommitDate: Mon Oct 12 20:15:41 2026 +0000
+
+    Await old Calendar sharing attempt before zero-write assertion
+
+diff --git a/apps/web/tests/browser/calendar-sharing-harness.tsx b/apps/web/tests/browser/calendar-sharing-harness.tsx
+index cc6311e..6ac0e04 100644
+--- a/apps/web/tests/browser/calendar-sharing-harness.tsx
++++ b/apps/web/tests/browser/calendar-sharing-harness.tsx
+@@ -3,6 +3,11 @@ import { createRoot } from "react-dom/client";
+ import { useQueryClient } from "@tanstack/react-query";
+ import { DataProvider } from "@/shared/portfolio/api/provider";
+ import { CalendarPage } from "@/features/portfolio/calendar/CalendarPage";
++import {
++  sharingAttemptKey,
++  type SharingAttempt,
++} from "@/features/portfolio/calendar/sharing/fence";
++import { sharingMeeting } from "../calendar-sharing-fixtures";
+ import "@/app/globals.css";
+ import "@/shared/portfolio/styles.css";
+ import "./test-font.css";
+@@ -11,6 +16,13 @@ function Harness() {
+   useEffect(() => {
+     Object.assign(window, {
+       __sharingTest: {
++        originalSharingAttempt: () =>
++          cache.getQueryData<SharingAttempt>(
++            sharingAttemptKey(sharingMeeting, {
++              userId: "user-test",
++              tenantId: "tenant-test",
++            }),
++          )?.status,
+         replaceActor: () =>
+           cache.setQueryData(["identity"], {
+             user: {
+diff --git a/apps/web/tests/browser/calendar-sharing.spec.ts b/apps/web/tests/browser/calendar-sharing.spec.ts
+index 6a2c905..ba1abf4 100644
+--- a/apps/web/tests/browser/calendar-sharing.spec.ts
++++ b/apps/web/tests/browser/calendar-sharing.spec.ts
+@@ -246,25 +246,72 @@ test("changed selected preparation is refused before sharing", async ({
+ });
+ test("actor replacement during held preflight produces zero writes", async ({
+   page,
+-}) => {
++}, testInfo) => {
+   const { state } = await setup(page);
+   await openSharing(page);
+   const dialog = await choosePrepAndFile(page);
+   const pause = held();
+   const before = state.reads;
+   state.readHold = pause.promise;
++  const requested = page.waitForRequest(
++    (request) =>
++      request.method() === "GET" &&
++      new URL(request.url()).pathname.endsWith(
++        `/engagement/meetings/${sharingMeeting.id}`,
++      ),
++  );
+   await dialog
+     .getByRole("button", { name: "Confirm: Share selected artifacts" })
+     .click();
++  const preflight = await requested;
+   await expect.poll(() => state.reads).toBeGreaterThan(before);
++  await page.waitForFunction(
++    () =>
++      (
++        window as unknown as {
++          __sharingTest: { originalSharingAttempt: () => string | undefined };
++        }
++      ).__sharingTest.originalSharingAttempt() === "pending",
++  );
+   await page.evaluate(() =>
+     (
+       window as unknown as { __sharingTest: { replaceActor: () => void } }
+     ).__sharingTest.replaceActor(),
+   );
+   pause.release();
++  // Actor replacement can abort this exact GET instead of delivering its body.
++  // Observe both its network outcome and the original action's terminal state;
++  // dialog removal alone only proves that the replacement workspace mounted.
++  const response = await preflight.response();
++  const completionError = response
++    ? await response.finished()
++    : preflight.failure();
++  if (completionError)
++    expect(
++      "errorText" in completionError
++        ? completionError.errorText
++        : completionError.message,
++    ).toContain("ERR_ABORTED");
++  else expect(response).not.toBeNull();
++  await page.waitForFunction(
++    () =>
++      (
++        window as unknown as {
++          __sharingTest: { originalSharingAttempt: () => string | undefined };
++        }
++      ).__sharingTest.originalSharingAttempt() === "refused",
++  );
+   await expect(dialog).toHaveCount(0);
+   expect(state.writes).toEqual([]);
++  await testInfo.attach("preflight-completion.json", {
++    body: JSON.stringify({
++      url: preflight.url(),
++      network: completionError ? "aborted" : "finished",
++      originalAttempt: "refused",
++      writes: state.writes,
++    }),
++    contentType: "application/json",
++  });
+ });
+ test("client shared feed lists only server-shared metadata without opening owner details or invented downloads", async ({
+   page,

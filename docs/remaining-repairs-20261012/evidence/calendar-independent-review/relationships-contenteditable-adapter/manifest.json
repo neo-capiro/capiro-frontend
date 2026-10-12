@@ -1,0 +1,36 @@
+{
+  "acceptedCommit": "850da33808dab050d2396a26233d3d3881d2fecf",
+  "result": "bounded source PASS; runtime NOT_RUN",
+  "files": [
+    {
+      "path": "REPORT.md",
+      "sha256": "59658d4c09698c262a042fac6ffecf00f0cd990dbe739cbdbba35c3a08b8890c",
+      "bytes": 2496
+    },
+    {
+      "path": "accepted-relationships.spec.ts.txt",
+      "sha256": "ad299c87f68dee52a5123e2cc215415de3879cc5d65a6c1f252ac1e83a6662ec",
+      "bytes": 20710
+    },
+    {
+      "path": "ast-preservation.json",
+      "sha256": "4e85c397bd783856b47cfc76ff524ff085e7b9b78e809a919a041ee94038f2ec",
+      "bytes": 14591
+    },
+    {
+      "path": "compare-ast.cjs",
+      "sha256": "70c38a2542a380945408df52be22ddc07eba54a295074f49cf1964689fbe8b1d",
+      "bytes": 3664
+    },
+    {
+      "path": "frozen-error-context.md",
+      "sha256": "ab08826eda614e732a311269756900433e855fef8e54adde70c42ad7e60439d7",
+      "bytes": 18053
+    },
+    {
+      "path": "review.json",
+      "sha256": "f1859c0ba248a476c3444b8dcffe79d317be1ea39278fa2e3134dbb47cc312ee",
+      "bytes": 2986
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+# Production artifact addendum — 1585438
+
+No new defect found within the captured configuration-required Portfolio surface and recorded navigation contract. This read-only addendum binds root-produced artifacts to `1585438295776604f23a5cb5ab592729f7c468ca` and preserves the sealed d68 review unchanged.
+
+All four production PNGs are byte-identical to the previously opened and visually inspected d68 captures: 1440×1040 and 390×844 in light and dark themes. Their complete hashes match, so this review explicitly reuses that prior visual inspection; no new image opening is claimed. The source contract remains the configuration fallback with readable heading, explanatory text, issue list and wordmark. These captures do not show loaded Portfolio, Modules or Settings work screens and do not establish Figma parity.
+
+All 18 previously reviewed runtime/producer source files match both exact commits and the prior review hashes. The entire application runtime source tree remains `fa4ca7b5ca126f7bcdc1cf816584fa0303d61704`. The only d68→1585438 changes are the bounded keyboard test adapter and its structure review. Host build and actual standalone server receipts both exit 0 with clean, identical before/after source bindings. Build identity `5gHD80mUbuwxCPBarQvGL` matches both available actual BUILD_ID files. These are inspected root-produced gate results, not reviewer executions or combined release approval.
+
+The production result JSON is byte-identical to d68 and preserves 11 HTTP/header records, four viewport/theme renders, two desktop history flows and no pageerror. Full mode back/forward history remains desktop-only; phone evidence covers Portfolio header entry and return. The producer’s `clientNavigation` field describes client-side routing, not selected-client or tenant authority. The separate default Portfolio root smoke result is also identical.
+
+Accessibility evidence stays limited to visible legibility/wrapping, source semantics, named link discovery and horizontal-fit assertions. Keyboard/focus, screen-reader, automated accessibility, formal contrast, zoom/reflow and authenticated forms/dialogs remain unrun here. Native services, live sign-in, providers, Meri runtime, deployment and full design acceptance remain unverified; all 337 native rows remain unaccepted. No PR16 newsletter evidence is mixed in.
+
+No browser, server, build, typecheck, network or source mutation was performed by this reviewer. Root retains the runtime lease and combined qualification ownership. Exact hashes, source/gate bindings and reused inspection scope are recorded in the accompanying JSON files.

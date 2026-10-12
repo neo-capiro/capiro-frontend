@@ -1,0 +1,161 @@
+
+Running 4 tests using 1 worker
+
+(node:737179) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/browser/calendar-lifecycle.spec.ts:111:1 › client agenda filters native lifecycle status without requests or approval inference (5.8s)
+(node:737317) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 tests/browser/calendar-lifecycle.spec.ts:192:3 › upcoming opens Preparation and retains identity across all meeting tabs (5.7s)
+(node:737456) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 tests/browser/calendar-sharing.spec.ts:123:1 › approved prep and attachment share and selected unshare preserve other shared notes (20.1s)
+(node:737706) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  4 tests/browser/calendar-sharing.spec.ts:270:1 › client shared feed lists only server-shared metadata without opening owner details or invented downloads (20.2s)
+
+
+  1) tests/browser/calendar-lifecycle.spec.ts:111:1 › client agenda filters native lifecycle status without requests or approval inference 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('columnheader', { name: 'Prep', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('columnheader', { name: 'Prep', exact: true })
+
+
+      122 |   await expect(
+      123 |     page.getByRole("columnheader", { name: "Prep", exact: true }),
+    > 124 |   ).toBeVisible();
+          |     ^
+      125 |   const prepared = page.getByRole("row", { name: /Synthetic prepared/ });
+      126 |   await expect(prepared).toContainText("Generated");
+      127 |   await expect(prepared).not.toContainText("Approved");
+        at /workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-lifecycle.spec.ts:124:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-lifecycle-client--271be-uests-or-approval-inference/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-lifecycle-client--271be-uests-or-approval-inference/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-lifecycle-client--271be-uests-or-approval-inference/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-lifecycle-client--271be-uests-or-approval-inference/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/browser/calendar-lifecycle.spec.ts:192:3 › upcoming opens Preparation and retains identity across all meeting tabs 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator: getByRole('dialog', { name: 'Synthetic upcoming', exact: true }).getByRole('button', { name: 'Preparation', exact: true })
+    Expected: "true"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Synthetic upcoming', exact: true }).getByRole('button', { name: 'Preparation', exact: true })
+
+
+      201 |     await expect(
+      202 |       detail.getByRole("button", { name: tab, exact: true }),
+    > 203 |     ).toHaveAttribute("aria-pressed", "true");
+          |       ^
+      204 |     for (const name of ["Information", "Preparation", "Notes", "Debriefs"]) {
+      205 |       await detail.getByRole("button", { name, exact: true }).click();
+      206 |       const identity = detail.getByRole("region", { name: "Meeting identity" });
+        at /workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-lifecycle.spec.ts:203:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-lifecycle-upcomin-42dbc-ity-across-all-meeting-tabs/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-lifecycle-upcomin-42dbc-ity-across-all-meeting-tabs/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-lifecycle-upcomin-42dbc-ity-across-all-meeting-tabs/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-lifecycle-upcomin-42dbc-ity-across-all-meeting-tabs/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/browser/calendar-sharing.spec.ts:123:1 › approved prep and attachment share and selected unshare preserve other shared notes 
+
+    Test timeout of 20000ms exceeded.
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Share artifacts', exact: true })
+
+
+      101 |   await page
+      102 |     .getByRole("button", { name: "Share artifacts", exact: true })
+    > 103 |     .click();
+          |      ^
+      104 |   const dialog = page.getByRole("dialog", {
+      105 |     name: "Share artifacts with your organization?",
+      106 |     exact: true,
+        at openSharing (/workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-sharing.spec.ts:103:6)
+        at /workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-sharing.spec.ts:131:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-sharing-approved--5df75-preserve-other-shared-notes/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-sharing-approved--5df75-preserve-other-shared-notes/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-sharing-approved--5df75-preserve-other-shared-notes/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-sharing-approved--5df75-preserve-other-shared-notes/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/browser/calendar-sharing.spec.ts:270:1 › client shared feed lists only server-shared metadata without opening owner details or invented downloads 
+
+    Test timeout of 20000ms exceeded.
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Shared meetings', exact: true })
+
+
+      275 |   await page
+      276 |     .getByRole("button", { name: "Shared meetings", exact: true })
+    > 277 |     .click();
+          |      ^
+      278 |   const feed = page.getByRole("region", { name: "Client shared meetings" });
+      279 |   await expect(
+      280 |     feed.getByRole("heading", { name: sharingMeeting.subject }),
+        at /workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-sharing.spec.ts:277:6
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-sharing-client-sh-820c5-tails-or-invented-downloads/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-sharing-client-sh-820c5-tails-or-invented-downloads/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-sharing-client-sh-820c5-tails-or-invented-downloads/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-remaining-calendar-evidence/baseline-artifacts/calendar-sharing-client-sh-820c5-tails-or-invented-downloads/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    tests/browser/calendar-lifecycle.spec.ts:111:1 › client agenda filters native lifecycle status without requests or approval inference 
+    tests/browser/calendar-lifecycle.spec.ts:192:3 › upcoming opens Preparation and retains identity across all meeting tabs 
+    tests/browser/calendar-sharing.spec.ts:123:1 › approved prep and attachment share and selected unshare preserve other shared notes 
+    tests/browser/calendar-sharing.spec.ts:270:1 › client shared feed lists only server-shared metadata without opening owner details or invented downloads 

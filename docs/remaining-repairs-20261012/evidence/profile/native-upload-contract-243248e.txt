@@ -1,0 +1,63 @@
+class AttachmentContextReadDto {
+  @IsUUID()
+  clientId!: string;
+}
+
+class AttachmentUploadDto {
+  @IsOptional()
+  @IsUUID()
+  prospectId?: string;
+
+  @IsOptional()
+  @IsUUID()
+  requestId?: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(64, 64)
+  checksumSha256?: string;
+  @IsOptional()
+  @IsUUID()
+  clientId?: string;
+
+  @IsOptional()
+  @IsUUID()
+  meetingId?: string;
+
+  @IsOptional()
+  @IsUUID()
+  mailMessageId?: string;
+
+  @IsString()
+  @Length(1, 240)
+  fileName!: string;
+
+  @IsString()
+  @Length(1, 160)
+  contentType!: string;
+
+  @IsInt()
+  @Min(1)
+  @Max(25 * 1024 * 1024)
+  contentLength!: number;
+}
+
+class ConfirmAttachmentDto {
+  @IsOptional()
+  @IsUUID()
+  prospectId?: string;
+  @IsOptional()
+  @IsUUID()
+  clientId?: string;
+
+  @IsOptional()
+  @IsUUID()
+  meetingId?: string;
+
+  @IsOptional()
+  @IsUUID()
+  mailMessageId?: string;
+
+  @IsString()
+  @Length(1, 240)
+  fileName!: string;

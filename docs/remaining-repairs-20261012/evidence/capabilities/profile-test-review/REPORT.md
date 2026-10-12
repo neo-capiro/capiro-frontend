@@ -1,0 +1,13 @@
+# Frozen Profile and final test review
+
+No new blocking finding was found. Review is bound to frozen source `104495d4cdc8251640b922aea431fa0e169fe935`, application tree `ad282f731750e1984790de2ec266ff9e311581c9`, source tree `57fad76b58a59f8d3c2f35155201e7524d713539`, against baseline `7aca86e7d64cfdb85d09d424a07e6186339fc24c`.
+
+The source-only scan derives **11 size signals across 25 changed test source files**: 6 new, 2 changed file signals, and 3 inherited unchanged Mail functions. Earlier cohesion records remain valid, including the corrected Calendar469 file fingerprint. Every final signal has its exact source hash and individual rationale in `review.json`; the full scan is `all-changed-test-signals.json`.
+
+Profile adds only one signal: `profile-presentation.spec.ts`, anonymous callback #2 at line144, **86 nonblank lines**, fingerprint `1c508c602e828888ac134de2a107888123abe08a7a89834a75febe61a48d8897`; file SHA256 `80db7a4c935fd13cea0cd5d6b4a82e5c6ae202b5a5a01e445248ac723a69819d`. It is one sequential timeline presentation/filter/expand/Quick log/focus flow, with independent visible expectations and no copied grouping or writer algorithm. No count-driven split is warranted.
+
+All seven Profile test files match owner `ecf34dfac16e36b22df1a1da9b6e86b785699dbb` and the frozen integrated source exactly. The two modified existing suites preserve their complete ASTs after only 18 contextual locator changes: nine facility dialog names and nine dialog-scoped save-button names. All **22 existing test definitions** (12 current-state,10 write-lifetime), expected values, authority/receipt uncertainty assertions, write counts and unexpected-request checks survive. Page-level Add facility entry controls stay unchanged. Object formatting and trailing commas account for the nonidentical printed text; the full AST comparison passes.
+
+The new facility recovery cases require explicit review/adoption of authoritative records without discarding local draft evidence. Timeline cases retain pending/uncertain writer fences across expansion and pinned regrouping and preserve the canonical Quick log owner. Date-unit expectations are literal across DST/year boundaries; selected Files hover contrast measures computed rendering rather than copying CSS. These controls supplement, rather than replace, the preserved authority tests.
+
+No browser, tests, server, install, TypeScript/build or source/registry edits were performed by this reviewer. During root's clean install, the audit read the existing isolated TypeScript dependency and a byte-identical scanner; `tooling-binding.json` records it. Synthetic fixture results remain local/frontend evidence, not native backend or live session acceptance. Root owns combined qualification and publication.

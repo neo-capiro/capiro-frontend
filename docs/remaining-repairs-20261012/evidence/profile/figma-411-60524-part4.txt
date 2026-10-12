@@ -1,0 +1,16 @@
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## v2/Button
+**Node ID:** 12:388
+
+shadcn/ui <Button> (new-york v4). h-9 px-3.5 rounded-\[10px\] text-sm font-medium. Primary | Outline (shadow-xs) | Ghost. Chevron = <Select> trigger look.
+
+## icon/search
+**Node ID:** 4:13
+
+Lucide-style search icon. Recolor via the vector stroke.
+
+## v2/Timeline event · coss icon vertical
+**Node ID:** 284:31060
+
+Compact vertical activity timeline adapted from coss.com/origin/timeline comp-535. Connected icon rail with editable title, detail, type and source/date. Use in the Anduril engagement timeline modal.

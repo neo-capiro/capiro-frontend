@@ -1,0 +1,45 @@
+{
+  "recordedAt": "2026-10-12T20:25:04.279176+00:00",
+  "source": "ecf34dfac16e36b22df1a1da9b6e86b785699dbb",
+  "typecheck": {
+    "command": "node --max-old-space-size=2048 node_modules/typescript/bin/tsc --noEmit --incremental false -p apps/web/tsconfig.json",
+    "exitCode": 0,
+    "log": "final-typecheck.log"
+  },
+  "narrowLint": {
+    "exitCode": 0,
+    "logs": [
+      "final-pinned-lint.log",
+      "contrast-final-lint.log"
+    ]
+  },
+  "format": {
+    "exitCode": 0,
+    "log": "contrast-final-format.log"
+  },
+  "unit": {
+    "passed": 104,
+    "files": 8,
+    "log": "correction-unit-green.log"
+  },
+  "browser": {
+    "finalPassed": 16,
+    "priorSourcePreservationPassed": 67,
+    "priorSource": "a5202a066d0a0bd29fd5158b1d8380d4a5736768",
+    "difference": "one CSS selector specificity plus two contrast tests"
+  },
+  "architecture": {
+    "dependencyErrors": [],
+    "sizeReviewRequired": 7,
+    "source": "a5202a066d0a0bd29fd5158b1d8380d4a5736768",
+    "finalReviewedFunctionBytesUnchanged": true
+  },
+  "serverReleased": {
+    "at": "2026-10-12T20:21:35.817170+00:00",
+    "serverPid": 758344,
+    "connect_ex": 111,
+    "browserComplete": true
+  },
+  "nativeRowsAccepted": 0,
+  "independentReview": "/tmp/capiro-remaining-modules-evidence/independent-profile-final-review.json"
+}

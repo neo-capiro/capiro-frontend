@@ -1,0 +1,40 @@
+commit 3c64057d3a436a728cd35f05b805ce6e7e7e8577
+Author:     NEO MARTINEZ <neo@capiro.ai>
+AuthorDate: Mon Oct 12 20:42:45 2026 +0000
+Commit:     NEO MARTINEZ <neo@capiro.ai>
+CommitDate: Mon Oct 12 20:43:38 2026 +0000
+
+    Navigate attendance tests to the Information section
+
+diff --git a/apps/web/tests/browser/attendance.spec.ts b/apps/web/tests/browser/attendance.spec.ts
+index cb1c552..dc2f996 100644
+--- a/apps/web/tests/browser/attendance.spec.ts
++++ b/apps/web/tests/browser/attendance.spec.ts
+@@ -56,6 +56,15 @@ async function setup(page: Page) {
+       return json(route, []);
+     return json(route, path.endsWith(meetingId) ? meeting : [meeting]);
+   });
++  // Upcoming meetings enter Preparation, whose scoped attachment read is
++  // independent of the attendance controls exercised after choosing Information.
++  await page.route(
++    `**/core/engagement/attachments?meetingId=${meetingId}`,
++    (route) => {
++      expect(route.request().method()).toBe("GET");
++      return json(route, []);
++    },
++  );
+   await page.route(
+     `**/core/engagement/meetings/${meetingId}/notetaker`,
+     (route) => {
+@@ -99,6 +108,11 @@ async function openMeeting(page: Page) {
+   await page.goto(
+     `/portfolio/${clientId}/calendar?view=agenda&date=2099-10-15&zone=UTC&meeting=${meetingId}`,
+   );
++  await page
++    .getByRole("dialog", { name: meeting.subject, exact: true })
++    .getByRole("navigation", { name: "Meeting sections" })
++    .getByRole("button", { name: "Information", exact: true })
++    .click();
+   const panel = page.getByRole("region", { name: "Meri meeting attendance" });
+   await expect(panel).toBeVisible();
+   return panel;

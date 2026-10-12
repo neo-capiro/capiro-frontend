@@ -1,0 +1,354 @@
+.description {
+  font-size: 14px;
+  color: var(--muted-foreground);
+  line-height: 1.5;
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.card h2 {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.075px;
+}
+.card h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+.cardScope section {
+  padding: 20px 24px;
+  box-shadow: none;
+}
+.cardScope section > header h2 {
+  line-height: 1.35;
+  letter-spacing: -0.15px;
+}
+.cardScope section > header p {
+  margin-top: 4px;
+}
+.cardScope .description {
+  font-size: 13px;
+  line-height: 1.45;
+}
+.cardScope h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+.cardScope section > header {
+  margin-bottom: 16px;
+}
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.pillTabs :global([role="tablist"]) {
+  border: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  overflow: visible;
+}
+.pillTabs :global([role="tab"]) {
+  min-height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 7px 14px;
+  color: var(--foreground);
+  background: var(--card);
+  font-size: 12px;
+  font-weight: 500;
+}
+.pillTabs :global([aria-selected="true"]) {
+  background: linear-gradient(168deg, #242424, #0a0a0a);
+  color: white;
+  border-color: #242424;
+}
+.cardScope div:has(> table) {
+  border: 0;
+  border-radius: 0;
+  margin-inline: -24px;
+  width: calc(100% + 48px);
+}
+.card .description {
+  font-size: 13px;
+  margin-top: 6px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.input {
+  width: 100%;
+  min-height: 40px;
+  border: 1px solid var(--input);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: var(--card);
+  color: var(--foreground);
+  font-size: 13px;
+}
+.button {
+  min-height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 14px;
+  background: var(--card);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.button[data-primary="true"] {
+  color: white;
+  border-color: #242424;
+  background: linear-gradient(172deg, #242424, #0a0a0a);
+}
+.button[data-danger="true"] {
+  border-color: #b91c1c;
+  color: #991b1b;
+}
+.button:disabled {
+  opacity: 0.55;
+}
+.small {
+  min-height: 28px;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 8px;
+}
+.notice {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  padding: 16px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.notice[role="alert"] {
+  color: #991b1b;
+  border-color: #fecaca;
+}
+.notice strong {
+  display: block;
+  margin-bottom: 3px;
+}
+.facts {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.facts > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.facts dt {
+  color: var(--muted-foreground);
+}
+.facts dd {
+  margin: 0;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+.empty {
+  padding: 32px 24px;
+  text-align: center;
+  color: var(--muted-foreground);
+  font-size: 13px;
+}
+.badgeScope > span {
+  gap: 5px;
+  align-items: center;
+  color: var(--foreground);
+  background: #eeeeec;
+}
+.badgeScope[data-tone="success"] > span {
+  background: #e6eef0;
+  color: #215566;
+}
+.badgeScope[data-tone="warning"] > span {
+  background: #f0ece5;
+  color: var(--foreground);
+}
+.newBadge > span {
+  background: #e4e7ed;
+  border-radius: 999px;
+  font-size: 12px;
+}
+.dropzone {
+  border: 1px dashed var(--border-strong, #d6d3d1);
+  border-radius: 12px;
+  padding: 22px 12px;
+  text-align: center;
+  background: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+.logoPreview {
+  border: 1px dashed var(--border-strong, #d6d3d1);
+  background: var(--muted);
+  border-radius: 12px;
+  width: 160px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--muted-foreground);
+}
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.divider::before,
+.divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: var(--border);
+}
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  padding: 6px 8px;
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 10px 10px 0 0;
+}
+.toolbar button {
+  border: 0;
+  background: none;
+  padding: 5px 8px;
+  font-size: 12px;
+}
+.richEditor :global([contenteditable]) {
+  min-height: 120px;
+  border: 1px solid var(--border);
+  border-top: 0;
+  border-radius: 0 0 10px 10px;
+  padding: 12px 16px;
+  font-size: 13px;
+  line-height: 1.55;
+  background: var(--card);
+}
+.richEditor :global([contenteditable]) p {
+  margin: 0;
+}
+.richEditor :global([contenteditable]) h1 {
+  font-size: 24px;
+}
+.richEditor :global([contenteditable]) h2 {
+  font-size: 18px;
+}
+.richEditor :global([contenteditable]) img {
+  max-width: 100%;
+  height: auto;
+}
+.toolbar [aria-pressed="true"] {
+  background: #e7e5e4;
+  border-radius: 4px;
+}
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.check input {
+  accent-color: #0a0a0a;
+  margin-top: 3px;
+}
+.switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: none;
+  padding: 4px;
+  min-height: 28px;
+}
+.switch:disabled {
+  opacity: 0.5;
+}
+.metric {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  padding: 24px;
+}
+.metric span {
+  display: block;
+  color: var(--muted-foreground);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.metric strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 24px;
+  font-weight: 600;
+}
+.signaturePreview {
+  width: 100%;
+  min-height: 160px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+}
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}
+.pre {
+  font-size: 12px;
+  background: var(--muted);
+  border-radius: 8px;
+  padding: 16px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 640px) {
+  .facts > div {
+    flex-direction: column;
+    gap: 5px;
+  }
+  .facts dd {
+    text-align: left;
+  }
+  .button {
+    min-height: 40px;
+  }
+}
+@media (max-width: 640px) {
+  .cardScope div:has(> table) {
+    margin-inline: -18px;
+    width: calc(100% + 36px);
+  }
+}
+@media (max-width: 640px) {
+  .cardScope section {
+    padding: 18px;
+  }
+}

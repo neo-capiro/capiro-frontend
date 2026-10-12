@@ -1,0 +1,54 @@
+{
+  "source": {
+    "head": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+    "tree": "fd436a652182d40e3f8c0bbfb74c16a46eb8d5f9",
+    "applicationTree": "9f0698bd6d9cfefb7648fd899ee22f4e3b541617",
+    "sourceDiff": ""
+  },
+  "atUTC": "2026-10-12T21:55:54.905934+00:00",
+  "actualImageGate": "FAILED_ENVIRONMENT",
+  "exitCode": 1,
+  "attempt": {
+    "name": "docker-build",
+    "command": [
+      "env",
+      "DOCKER_CONFIG=/tmp/capiro-docker-config-20261012",
+      "docker",
+      "build",
+      "--progress=plain",
+      "-f",
+      "apps/web/Dockerfile",
+      "--tag",
+      "capiro-remaining:d68c2dc-20261012",
+      "."
+    ],
+    "startedUTC": "2026-10-12T21:53:15.469090+00:00",
+    "endedUTC": "2026-10-12T21:53:26.169935+00:00",
+    "durationSeconds": 10.700879185998929,
+    "exitCode": 1,
+    "sourceBefore": {
+      "head": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+      "tree": "fd436a652182d40e3f8c0bbfb74c16a46eb8d5f9",
+      "applicationTree": "9f0698bd6d9cfefb7648fd899ee22f4e3b541617",
+      "sourceDiff": ""
+    },
+    "sourceAfter": {
+      "head": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+      "tree": "fd436a652182d40e3f8c0bbfb74c16a46eb8d5f9",
+      "applicationTree": "9f0698bd6d9cfefb7648fd899ee22f4e3b541617",
+      "sourceDiff": ""
+    },
+    "sourceChanged": false
+  },
+  "logSHA256": "4c9633096318fa78f64849725e45d0d274ab9863c8691c993a513d4695c9b199",
+  "cause": "Alpine 3.23 APKINDEX fetches fail DNS before application compilation. Subsequent package-selection errors do not establish invalid pins.",
+  "imageReference": "capiro-remaining:d68c2dc-20261012",
+  "imageExists": false,
+  "imageInspectExitCode": 1,
+  "containerSmoke": "NOT_RUN_NO_IMAGE",
+  "imageScan": "NOT_RUN_NO_IMAGE",
+  "contextGate": "Separate 33/33 scratch-COPY context regression passed on same source",
+  "securityAndDockerfilePinsChanged": false,
+  "awsShippingAttempt": false,
+  "earlierAttempts": "DOCKER-IMAGE-BLOCKER.json retains three adbc84b attempts and bounded diagnostics."
+}

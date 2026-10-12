@@ -1,0 +1,125 @@
+{
+  "createdAtUtc": "2026-10-12T21:00:29.630847+00:00",
+  "disposition": "Accepted bounded test-only correction; no open review issue.",
+  "sourcePin": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+  "integrationCommit": "3c64057d3a436a728cd35f05b805ce6e7e7e8577",
+  "ownerCommit": "1cbca00a471a722ed249fccb95f761853e96246a",
+  "priorFrozenSource": "104495d4cdc8251640b922aea431fa0e169fe935",
+  "file": "apps/web/tests/browser/attendance.spec.ts",
+  "sha256": "6d408c2d7b193388ade7ea18ff1e9dcc75925566a0b23702c0b3bebaebb2425d",
+  "sourceMatchesOwnerAndIntegration": true,
+  "allProductionSourceUnchanged": true,
+  "preservation": {
+    "beforeCount": 12,
+    "afterCount": 12,
+    "allEntireTestCallSourcesByteIdentical": true,
+    "titles": [
+      "\"Owned meeting dispatch requires both confirmations and preserves future scheduling without claiming attendance\"",
+      "\"Server validation retains the join URL and confirmations for explicit correction\"",
+      "\"A foreign success receipt is uncertain and cannot be resent automatically or from the same form\"",
+      "\"Explicit removal handles a still-dispatching error and then accepts the actual removed receipt\"",
+      "\"Client preference saves consent once, preserves Off/stopping, and retries only DELETE\"",
+      "\"A concurrent preference change requires refresh and preserves the unsaved affirmations\"",
+      "\"Runtime disabled keeps real session status visible and forbids external actions\"",
+      "\"Read-only role does not fetch private attendance or expose dispatch controls\"",
+      "\"Meeting privacy errors and session expiry never expose a successful-looking attendance control\"",
+      "\"Unmounting during held dispatch preflight prevents the later POST\"",
+      "\"Leaving the client during held preference preflight prevents the later enable POST\"",
+      "\"Mobile dark Send Meri dialog fits the viewport and retains accessible consent and actions\""
+    ]
+  },
+  "sourceChanges": [
+    {
+      "operation": "insert",
+      "old": [
+        58,
+        58
+      ],
+      "new": [
+        58,
+        67
+      ]
+    },
+    {
+      "operation": "insert",
+      "old": [
+        101,
+        101
+      ],
+      "new": [
+        110,
+        115
+      ]
+    }
+  ],
+  "addedLines": 14,
+  "removedOrReplacedLines": 0,
+  "sizeSignals": [
+    {
+      "file": "apps/web/tests/browser/attendance.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 527,
+      "fingerprint": "104e497cbadddc6276598b633d787a5e0f32e1c5e5ba8242cb8bd4f7dc9084cf",
+      "sha256": "6d408c2d7b193388ade7ea18ff1e9dcc75925566a0b23702c0b3bebaebb2425d",
+      "baseline": {
+        "file": "apps/web/tests/browser/attendance.spec.ts",
+        "kind": "file",
+        "symbol": "<module>",
+        "line": 1,
+        "nonblank": 513,
+        "fingerprint": "d93b943be52aa6c7c7890fbcae6ac0b25e2e172e272ba8786f4237bf3b6fda9c"
+      }
+    }
+  ],
+  "sizeRationale": "Attendance remains one coherent consent/dispatch/preferences and authorization scenario owner. The existing 513-line file grows to527 only by an exact scoped read fixture and deterministic navigation to the existing attendance section. All12 test bodies and their assertions are byte-identical. No production-domain behavior, independent fixture framework or duplicated authority algorithm is added; no >80-function signal is introduced. Splitting the existing scenarios merely to silence this file count is not warranted.",
+  "fixtureRationale": "The 2099 scheduled meeting intentionally opens Preparation through initialMeetingTab. MeetingAttendance remains under Information, so selecting the actual meeting dialog's named Meeting sections\u2192Information control is the required user interaction. Preparation may already request attachments; the exact meetingId URL now returns a synthetic native empty list and asserts methodGET. It does not broaden another route, mask a mutation, fabricate approval data, change an attendance receipt or weaken unexpected-request assertions. The generic client attachment fixture was not appropriate to that current-meeting read.",
+  "consumerAudit": {
+    "ownerFiles": 18,
+    "allOwnerConsumerHashesMatchFinal": true,
+    "independentSearch": "rg engagement/meetings|MeetingDetail|[?&]meeting=|Meri meeting attendance across Portfolio *.spec.ts found17 files, all included in the owner list; isolated meeting-voice is the additional adjacent consumer. Inspected explicit Preparation/Debriefs/chosen-tab helpers, persistent meeting actions, isolated harness ownership and unchanged lifecycle default assertions. No further implicit Information consumer found in this bounded source audit.",
+    "limit": "This is a source consumer audit, not a fresh browser execution of every consumer."
+  },
+  "evidence": {
+    "redSource": "104495d4cdc8251640b922aea431fa0e169fe935",
+    "redCount": 7,
+    "originalReportSHA256": "e10fc92e917a903ee3f1b4888c84219c4554df97c532be871c0507a895851772",
+    "originalReportHashMatches": true,
+    "redMeaning": "All seven recorded failures await Meri meeting attendance in the old shared openMeeting helper at line103. Error contexts preserve Preparation entry. They do not establish broken attendance dispatch.",
+    "ownerGreen": {
+      "stats": {
+        "startTime": "2026-10-12T20:41:16.380Z",
+        "duration": 45348.248999999996,
+        "expected": 20,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "workers": 1,
+      "projects": [
+        {
+          "name": "",
+          "retries": 0
+        }
+      ]
+    },
+    "greenScope": "12 attendance plus8 unchanged lifecycle controls; observed raw output20pass/0skip/0unexpected/0flaky, one worker/zero retries."
+  },
+  "profileStatus": {
+    "review": "../profile-test-review/REPORT.md",
+    "allSevenFilesUnchanged": true,
+    "newProfileAuditRun": false,
+    "changedTestPathsSincePriorReview": [
+      "apps/web/tests/browser/attendance.spec.ts"
+    ],
+    "finalChangedTestSignalCount": 12,
+    "explanation": "Prior11 signals remain; attendance adds one changed file signal. Only attendance test source changed since104495d."
+  },
+  "limits": [
+    "No source/registry edits, browser/runtime/typecheck/server/build/install actions performed by reviewer.",
+    "Synthetic fixtures do not qualify native attendance recording, provider dispatch, or live authorization.",
+    "Root owns final source qualification and publication."
+  ],
+  "findings": []
+}

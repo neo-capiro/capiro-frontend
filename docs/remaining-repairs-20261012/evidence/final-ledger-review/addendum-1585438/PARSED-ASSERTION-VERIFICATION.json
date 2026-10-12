@@ -1,0 +1,67 @@
+{
+  "at": "2026-10-12T22:10:38.583Z",
+  "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "scope": "Read-only parsing and pure source scanning; no application import or runtime gate",
+  "spec": "apps/web/test/browser/remaining-modules.spec.ts",
+  "testNamesUnchanged": 10,
+  "allBytesOutsideTargetStatementUnchanged": true,
+  "originalStatements": 20,
+  "finalStatements": 30,
+  "allOriginalStatementsPreservedInOrder": true,
+  "originalFileAssertions": 66,
+  "finalFileAssertions": 76,
+  "allOriginalAssertionsPreservedInOrder": true,
+  "originalKeyboardStatements": [
+    "page.keyboard.press(\"Enter\")",
+    "page.keyboard.press(\"ArrowDown\")",
+    "page.keyboard.press(\"Enter\")",
+    "page.keyboard.press(\"Enter\")",
+    "page.keyboard.press(\"ArrowDown\")",
+    "page.keyboard.press(\"Enter\")"
+  ],
+  "finalKeyboardStatements": [
+    "page.keyboard.press(\"Enter\")",
+    "page.keyboard.press(\"ArrowDown\")",
+    "page.keyboard.press(\"Enter\")",
+    "page.keyboard.press(\"Enter\")",
+    "page.keyboard.press(\"ArrowDown\")",
+    "page.keyboard.press(\"Enter\")"
+  ],
+  "addedAssertions": [
+    "await expect(scope).toBeFocused();",
+    "await expect(\n    page.getByRole(\"combobox\", {\n      name: \"Planner client scope\",\n      includeHidden: true,\n    }),\n  ).toHaveAttribute(\"aria-expanded\", \"true\");",
+    "await expect(page.getByRole(\"listbox\")).toBeVisible();",
+    "await expect(\n    page.getByRole(\"option\", { name: \"Scope · All clients\", exact: true }),\n  ).toBeFocused();",
+    "await expect(\n    page.getByRole(\"option\", { name: client.name, exact: true }),\n  ).toBeFocused();",
+    "await expect(grouping).toBeFocused();",
+    "await expect(\n    page.getByRole(\"combobox\", {\n      name: \"Group by\",\n      exact: true,\n      includeHidden: true,\n    }),\n  ).toHaveAttribute(\"aria-expanded\", \"true\");",
+    "await expect(page.getByRole(\"listbox\")).toBeVisible();",
+    "await expect(\n    page.getByRole(\"option\", { name: \"Group by · Client\", exact: true }),\n  ).toBeFocused();",
+    "await expect(\n    page.getByRole(\"option\", { name: \"Group by · None\", exact: true }),\n  ).toBeFocused();"
+  ],
+  "changedTestFiles": 28,
+  "sizeSignals": 14,
+  "changedSizeSignal": {
+    "before": {
+      "file": "apps/web/test/browser/remaining-modules.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 486,
+      "fingerprint": "33e115194230d772767d40ce9ef9e855370ea36a7ee90ba0feba0563f6947f89"
+    },
+    "after": {
+      "file": "apps/web/test/browser/remaining-modules.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 515,
+      "fingerprint": "c74cdf3448592374784d818b0d4f89512e9a0cfc89e0b13ed9c33afd0a9bd0fd"
+    }
+  },
+  "callback": {
+    "nonblankBodyLines": 59,
+    "fingerprint": "e446b32e857bb9fde448c6d412938cac9aa53f9f9fd751eec2450a5fc7644eff"
+  },
+  "other13SignalsIdentical": true
+}

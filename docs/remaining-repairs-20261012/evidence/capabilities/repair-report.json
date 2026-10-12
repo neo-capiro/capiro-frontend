@@ -1,0 +1,125 @@
+{
+  "featureCommit": "e3d1cbb91a31cadff90898fcf2143ff5ce17318e",
+  "featureBase": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+  "integrateOnlyFeatureCommit": true,
+  "combinedQualifiedLaneHead": "31ce56f6f3e7edde47fcb83b7f5f81c31b5d9862",
+  "rootHeaderOriginalCommit": "98d18058263289293c8acf82aaeb4534d7e93317",
+  "rootHeaderCherryPick": "31ce56f6f3e7edde47fcb83b7f5f81c31b5d9862",
+  "featureFiles": [
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
+      "sha256": "4f2a6d0d08239b93d295090a251df20ed3d9b318f19124501c838231ae9998c5",
+      "nonblank": 141
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
+      "sha256": "5245aa0d98a2e82a97b61fc9dd2515447d5a9fa97f2135f0fa255daa592a43b4",
+      "nonblank": 241
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/capabilities.module.css",
+      "sha256": "84e7f0b3c84ae67e150a787427c519cb6dfa47104d3001606b4333efe9c9af05",
+      "nonblank": 136
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/registrations.module.css",
+      "sha256": "751999781d4e23050d94853c98d2c86470e00523eb10eef26687b69654e88b63",
+      "nonblank": 86
+    }
+  ],
+  "testFile": {
+    "path": "apps/web/tests/browser/capability-list-registration-layout.spec.ts",
+    "sha256": "c8973d36bb4b7332d7a7b0e99dd4083e07e004a9448502be5be3b78d8a292902",
+    "nonblank": 293
+  },
+  "facets": [
+    {
+      "finding": "OWI-F03",
+      "row": "CAP-08",
+      "frame": "411:55825",
+      "frontendFacet": "repaired:680px registration dialog with aligned170px labels,16px columns/row spacing,10px vertically padded divided rows and wrapping values",
+      "nativeRowAcceptance": "held; only recorded presentation facet repaired"
+    },
+    {
+      "finding": "OWI-F04",
+      "row": "CAP-01",
+      "frame": "411:86453",
+      "frontendFacet": "repaired: compact grouped phone list, name/maturity first line and actual PE or fallback below; icon/description remain desktop/editor; same selection owner",
+      "nativeRowAcceptance": "held; only recorded presentation facet repaired"
+    }
+  ],
+  "verification": [
+    {
+      "run": "browser-before",
+      "result": "3 intended failures",
+      "source": "immutable extracted7aca86e capability folder, unchanged shared source",
+      "assertions": "phone light/dark decorative monogram still visible; registration dialog640 vs680",
+      "evidence": "browser-before.log; browser-before/results.json"
+    },
+    {
+      "run": "browser-new",
+      "result": "4pass1fail",
+      "source": "feature candidate before root header correction",
+      "assertions": "owned row and registration cases pass; full page at320 reveals inherited329px header",
+      "evidence": "browser-new.log; browser-new/results.json"
+    },
+    {
+      "run": "browser-overflow-diagnostic",
+      "result": "1 intended diagnostic failure",
+      "evidence": "shared-header-320-limit.json; browser-overflow-diagnostic/results.json"
+    },
+    {
+      "run": "browser-new-final",
+      "result": "5pass",
+      "source": "feature bytes equale3d1cbb91a31cadff90898fcf2143ff5ce17318e",
+      "assertions": "owned geometry/content/keyboard/desktop/registration checks complete; wholepage assertion separated and preserved canonically"
+    },
+    {
+      "run": "browser-existing",
+      "result": "42pass",
+      "source": "exact feature bytese3d1cbb91a31cadff90898fcf2143ff5ce17318e before separate header correction",
+      "assertions": "all unchanged affected presentation/naming/type/sector/tab/documents/focus/read/receipt/pending/concurrency/lifetime assertions",
+      "evidence": "browser-existing.log; browser-existing/results.json"
+    },
+    {
+      "run": "browser-header-before",
+      "result": "1 intended failure",
+      "source": "feature before root header correction",
+      "assertions": "restored canonical complete-page320 guard fails",
+      "evidence": "browser-header-before.log; browser-header-before/results.json"
+    },
+    {
+      "run": "browser-final-six",
+      "result": "6pass",
+      "source": "31ce56f6f3e7edde47fcb83b7f5f81c31b5d9862",
+      "assertions": "all six final new cases; wholepage320 and seven enabled header controls visible/in-bounds/correctTaborder; Updates visible-disabled",
+      "evidence": "browser-final-six.log; browser-final-six/results.json"
+    },
+    {
+      "run": "unit",
+      "result": "34pass",
+      "evidence": "unit.log",
+      "scope": "unchanged capability and registration native writer controls"
+    },
+    {
+      "run": "static",
+      "result": "full web TypeScript passed before test-only diagnostics/wholepage additions; final focused test TypeScript passed; final changed-file ESLint/Prettier and diffcheck pass",
+      "evidence": "typecheck-corrected.log; final-focused-test-typecheck.log; lint-final.log; format-final.log"
+    },
+    {
+      "run": "architecture",
+      "result": "zero boundary errors; exact changed-function review records for CapabilitiesPage122 and Registrations214 require root registry integration",
+      "evidence": "architecture-final.json; source-review.json; root-static-review.json"
+    }
+  ],
+  "visualReview": "Inspected actual390 light/dark compact list,680 desktop divided registration dialog,390 dark long/missing/EIN registration view,320 long card, and final320 fullpage header. Bounded geometry/content verified; no full-page pixel-equivalence claim.",
+  "nativeLimits": "NATIVE-LIMITS.md; all traffic intercepted and no native/provider writes. Eight existing registration fields retained; no invented LDA/contracts/classification/NAICS descriptions.",
+  "figmaPreservation": "figma-baseline-manifest.json; exact original nodes/context/screens saved2026-10-12T19:21:58Z; no returned versionID; local only until root evidence commit; no new external image dependency.",
+  "independentWork": "MS06 review in ms06-independent-review; one client-scope carryover source finding corrected and source-reviewed; optional-preps truthfulness also source-reviewed. No root source edits/browser execution by reviewer.",
+  "remainingBlockers": [
+    "No remaining lane source blocker after including canonical root header correction. Root must integrate only feature commit and keep existing header98d1805; exact-size registry review and combined final qualification remain root-owned.",
+    "Native and full-row acceptance remain held; these bounded frontend fixes do not establish337 native acceptance rows."
+  ],
+  "lease": "lease-release.json proves PID725868 gone, TCP5191 connect_ex111 at19:50:54UTC",
+  "compiledBuild": "No install or production build performed; borrowed dependencies and test-only Vite server/cache used."
+}

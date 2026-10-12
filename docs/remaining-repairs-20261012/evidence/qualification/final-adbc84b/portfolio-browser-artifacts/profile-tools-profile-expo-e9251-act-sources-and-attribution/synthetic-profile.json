@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-10-12T21:35:25.283Z",
+  "complete": true,
+  "omittedSources": [],
+  "sources": {
+    "client": {
+      "status": "available"
+    },
+    "intelligence": {
+      "status": "available",
+      "error": null
+    }
+  },
+  "client": {
+    "id": "10000000-0000-4000-8000-000000000001",
+    "name": "Test Aerospace",
+    "website": "https://example.test",
+    "description": "Synthetic organization for isolated UI validation.",
+    "profileType": "CLIENT",
+    "profileStatus": "ACTIVE",
+    "status": "active",
+    "sectorTag": "Aerospace",
+    "intakeData": {
+      "profileNotes": "Synthetic saved notes",
+      "tags": [
+        "Saved focus"
+      ],
+      "nested": {
+        "unchanged": true
+      }
+    },
+    "setAsideCertifications": [
+      "LEGACY_CODE"
+    ],
+    "tenantId": "10000000-0000-4000-8000-000000000002"
+  },
+  "intelligence": {
+    "client": {
+      "id": "10000000-0000-4000-8000-000000000001",
+      "name": "Test Aerospace",
+      "description": "Synthetic organization for isolated UI validation.",
+      "sectorTag": "Aerospace",
+      "submissionTracks": [],
+      "capabilities": []
+    },
+    "mappings": [
+      {
+        "source": "contracting",
+        "confirmed": false,
+        "externalId": "synthetic-source"
+      }
+    ],
+    "lda": {
+      "matched": false
+    },
+    "contracting": {
+      "matched": true,
+      "totalContracts": 123.45
+    },
+    "lobbyIntel": {
+      "matched": false
+    },
+    "relevantBills": [],
+    "activeRegulations": [],
+    "competitors": [],
+    "aiSummary": null,
+    "lastUpdated": "2026-10-11T00:00:00Z"
+  }
+}

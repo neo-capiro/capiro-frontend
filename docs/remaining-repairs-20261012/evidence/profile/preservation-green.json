@@ -1,0 +1,2767 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-remaining-profile/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "/tmp/capiro-remaining-profile-evidence/playwright.config.ts"
+    ],
+    "configFile": "/tmp/capiro-remaining-profile-evidence/playwright.config.ts",
+    "rootDir": "/tmp/capiro-remaining-profile-evidence",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-remaining-profile-evidence/preservation-green",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-remaining-profile-evidence",
+        "testIgnore": [],
+        "testMatch": [
+          "preservation.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-remaining-profile-evidence/preservation-green.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "preservation.spec.ts",
+      "file": "preservation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "history search, kind, inclusive local dates, invalid range and clear use the existing feed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4049,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:17:39.622Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-history-searc-2f8a4-clear-use-the-existing-feed/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-cd74f67b5679ecea7b2c",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity.spec.ts",
+          "line": 28,
+          "column": 5
+        },
+        {
+          "title": "history failure and retry retain entered filters",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3953,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:17:44.053Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-history-failu-97edc-etry-retain-entered-filters/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-8e3bfce1a85d3c9a9886",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity.spec.ts",
+          "line": 137,
+          "column": 5
+        },
+        {
+          "title": "pin/unpin persists only the note field, displays inline state and returns keyboard focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4617,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:17:48.154Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-pin-unpin-per-3984b--and-returns-keyboard-focus/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-ec47aff8951b221c6bcb",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts",
+          "line": 25,
+          "column": 5
+        },
+        {
+          "title": "pin refuses wrong client receipt and requires review before retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2769,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:17:52.913Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-pin-refuses-w-ea041-equires-review-before-retry/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-6c86b48d6710c3b39f69",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts",
+          "line": 83,
+          "column": 7
+        },
+        {
+          "title": "pin refuses wrong tenant receipt and requires review before retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2838,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:17:55.826Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-pin-refuses-w-ae4d3-equires-review-before-retry/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-5d82f046d4435c9f2411",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts",
+          "line": 83,
+          "column": 7
+        },
+        {
+          "title": "pin refuses wrong record receipt and requires review before retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3266,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:17:58.796Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-pin-refuses-w-4b135-equires-review-before-retry/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-fb196d032c0c9c40d65b",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts",
+          "line": 83,
+          "column": 7
+        },
+        {
+          "title": "pin refuses false pinned result receipt and requires review before retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2802,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:02.181Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-pin-refuses-f-c2fa5-equires-review-before-retry/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-5d142521c33dd097d348",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts",
+          "line": 83,
+          "column": 7
+        },
+        {
+          "title": "readonly identity cannot open activity mutations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2337,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:05.105Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-readonly-iden-c46b7-not-open-activity-mutations/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-5cd46e97dc48442df511",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts",
+          "line": 131,
+          "column": 5
+        },
+        {
+          "title": "a changed note at preflight stops before PATCH and preserves edit input",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2822,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:07.573Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-changed-not-14bf1-CH-and-preserves-edit-input/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-93617be329291d126de8",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts",
+          "line": 152,
+          "column": 5
+        },
+        {
+          "title": "unmount during held preflight prevents PATCH after the read returns",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4477,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:10.528Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-unmount-durin-a1131-ATCH-after-the-read-returns/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-55c145496cc686af4e11",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts",
+          "line": 205,
+          "column": 5
+        },
+        {
+          "title": "a lost pin response is reconciled by an explicit read without replaying the write",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2861,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:15.175Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-lost-pin-re-4dc25-without-replaying-the-write/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-af145e1bd94c9ef902a7",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts",
+          "line": 241,
+          "column": 5
+        },
+        {
+          "title": "session expiry at preflight dispatches no activity write",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2489,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:18.168Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-session-expir-5fa14-ispatches-no-activity-write/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-1b3e42877e5375f752b1",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts",
+          "line": 279,
+          "column": 5
+        },
+        {
+          "title": "profile notes conceal a failed saved-client read and prevent replacement",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1118,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:20.780Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-profile-notes-3f9b5-ead-and-prevent-replacement/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-3332383ef4efa62862e1",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "profile notes reject another client's receipt and require review before retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1205,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:21.937Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-profile-notes-c1716-require-review-before-retry/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-45655db906ba0e9fbe4b",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts",
+          "line": 34,
+          "column": 5
+        },
+        {
+          "title": "profile notes retain a refused draft without reporting it saved",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1096,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:23.182Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-profile-notes-65c4c--without-reporting-it-saved/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-f5f5eef52af41b4702d6",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts",
+          "line": 56,
+          "column": 5
+        },
+        {
+          "title": "late notes receipts cannot close a replacement actor's editor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1129,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:24.327Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-late-notes-re-19ad3--replacement-actor-s-editor/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-ad0414e36deeabf18461",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts",
+          "line": 72,
+          "column": 5
+        },
+        {
+          "title": "failed account-team refresh conceals cached members and disables changes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1175,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:25.490Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-failed-accoun-d50d4-embers-and-disables-changes/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-71b6b3c199df0c62ede9",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts",
+          "line": 106,
+          "column": 5
+        },
+        {
+          "title": "failed member options cannot submit a retained selection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1209,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:26.699Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-failed-member-6a4eb-submit-a-retained-selection/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-576f427b2e1eaa514241",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts",
+          "line": 129,
+          "column": 5
+        },
+        {
+          "title": "team add needs the requested native roster effect",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1305,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:27.939Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-team-add-need-81ea6-uested-native-roster-effect/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-a3914c7fcebaa3b36342",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts",
+          "line": 147,
+          "column": 5
+        },
+        {
+          "title": "owner assignment rejects a different returned owner",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1334,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:29.276Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-owner-assignm-b86e9--a-different-returned-owner/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-1bf0cfcac078cece651a",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts",
+          "line": 163,
+          "column": 5
+        },
+        {
+          "title": "failed facilities refresh conceals saved locations and closes their detail",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1659,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:30.663Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-failed-facili-96c75-ons-and-closes-their-detail/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-bfb232f3732d77300275",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts",
+          "line": 188,
+          "column": 5
+        },
+        {
+          "title": "a removed facility selection does not reopen when that ID returns",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1521,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:32.421Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-removed-fac-19e39-reopen-when-that-ID-returns/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-a56805b8ba36d9d67858",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts",
+          "line": 213,
+          "column": 5
+        },
+        {
+          "title": "unknown facility creation stays fenced after closing and reopening",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1500,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:34.033Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-unknown-facil-c7d00-after-closing-and-reopening/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-7efe9eea84e754bc6b0c",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts",
+          "line": 235,
+          "column": 5
+        },
+        {
+          "title": "identity invalidation disables facility creation despite a cached role",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1250,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:35.632Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-identity-inva-de4c8-ation-despite-a-cached-role/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-78ca74b6d39d9368695b",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts",
+          "line": 262,
+          "column": 5
+        },
+        {
+          "title": "a matching notes clear uses only the native notes PUT and closes once",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1130,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:36.973Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-matching-no-a2b2b-e-notes-PUT-and-closes-once/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-c9b8200387d747450bd2",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts",
+          "line": 23,
+          "column": 5
+        },
+        {
+          "title": "a refreshed notes source fences a late receipt and retains the local draft for review",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1273,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:38.140Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-refreshed-n-65272--the-local-draft-for-review/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-6f62435e394d0710bc78",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts",
+          "line": 47,
+          "column": 5
+        },
+        {
+          "title": "owner membership role mismatches stay unknown and preserve the role draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1193,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:39.454Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-owner-members-61573-and-preserve-the-role-draft/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-3190b797424814b526c3",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts",
+          "line": 91,
+          "column": 5
+        },
+        {
+          "title": "an owner's successfully updated membership role remains visible on the single owner row",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1336,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:40.693Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-an-owner-s-su-0d3b2-ble-on-the-single-owner-row/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-79a3d668c52ba292e234",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts",
+          "line": 111,
+          "column": 5
+        },
+        {
+          "title": "a successfully removed member option leaves the retained choice unavailable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1182,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:42.088Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-successfull-950ca-retained-choice-unavailable/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-5c1853a2eb9dd2941bfa",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts",
+          "line": 139,
+          "column": 5
+        },
+        {
+          "title": "late team receipts do not report success or invalidate a replacement client view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1143,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:43.299Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-late-team-rec-f409e-e-a-replacement-client-view/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-30e69b57c0397bdcf41d",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts",
+          "line": 163,
+          "column": 5
+        },
+        {
+          "title": "closing a pending facility create keeps the unknown fence when its view reopens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1387,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:44.477Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-closing-a-pen-b1b49-fence-when-its-view-reopens/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-eb04a5787d79bea42c54",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts",
+          "line": 206,
+          "column": 5
+        },
+        {
+          "title": "a similar current facility cannot be claimed as an unknown creation receipt",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1543,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:45.943Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-similar-cur-fc04b-an-unknown-creation-receipt/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-fdd7d4621f0ca53af515",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts",
+          "line": 248,
+          "column": 5
+        },
+        {
+          "title": "a changed saved facility cannot be overwritten by an older open draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1639,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:47.588Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-changed-sav-5a880-tten-by-an-older-open-draft/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-ac31e75db29a615152dd",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts",
+          "line": 286,
+          "column": 5
+        },
+        {
+          "title": "a late facility result cannot escape its original actor's unknown fence",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1394,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:49.312Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-late-facili-ed465-ginal-actor-s-unknown-fence/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-15f6bf1e21e0759ae502",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts",
+          "line": 321,
+          "column": 5
+        },
+        {
+          "title": "a facility action refuses another tenant's otherwise matching receipt",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1238,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:50.810Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-facility-ac-560f0--otherwise-matching-receipt/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-c19d3510a4888476e85f",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts",
+          "line": 45,
+          "column": 5
+        },
+        {
+          "title": "a definite facility action refusal remains a deliberate retry without claiming success",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1356,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:52.122Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-definite-fa-670e8-ry-without-claiming-success/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-bac265cffcd8432ca9dc",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts",
+          "line": 64,
+          "column": 5
+        },
+        {
+          "title": "an uncertain facility action needs a current GET review before a new explicit request",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1551,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:53.553Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-an-uncertain--7a18f-fore-a-new-explicit-request/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-0d7bd3e08e4559f56978",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts",
+          "line": 84,
+          "column": 5
+        },
+        {
+          "title": "closing a pending geocode view retains uncertainty without replay when reopened",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1397,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:55.187Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-closing-a-pen-1cb68-ithout-replay-when-reopened/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-0e78a59a83d44fe154ec",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts",
+          "line": 139,
+          "column": 5
+        },
+        {
+          "title": "a refreshed facility source aborts obsolete action effects and retains the new address",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1320,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:56.663Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-refreshed-f-9bdef-and-retains-the-new-address/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-aba646fc708f6f526c22",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts",
+          "line": 169,
+          "column": 5
+        },
+        {
+          "title": "a failed current review cannot erase an uncertain facility action",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1450,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:58.067Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-failed-curr-20762-n-uncertain-facility-action/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-e51b037df25e5d089122",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts",
+          "line": 207,
+          "column": 5
+        },
+        {
+          "title": "a late geocode receipt cannot clear the initiating actor's unknown fence",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1365,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:18:59.601Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-late-geocod-86e91-ating-actor-s-unknown-fence/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-bb2d34698afc5d580471",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts",
+          "line": 236,
+          "column": 5
+        },
+        {
+          "title": "a late candidate conflict cannot refresh a newer reviewed snapshot",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1271,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:01.045Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-late-candid-ac5ec-h-a-newer-reviewed-snapshot/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-7f77aa337c866e10eae4",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts",
+          "line": 269,
+          "column": 5
+        },
+        {
+          "title": "current profile dialogs fit 1440px and avoid cross-component render updates",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3048,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:02.396Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-current-profi-efdc5-ss-component-render-updates/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-431787bad81245ee7a54",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-dialog-layout.spec.ts",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "current profile dialogs fit 390px and avoid cross-component render updates",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2894,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:05.536Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-current-profi-0eb89-ss-component-render-updates/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-1dde7330909d6de5a08d",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-dialog-layout.spec.ts",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "conflicting ACL receipt retains the draft and freezes repeat save until current GET review",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2953,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:08.525Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-conflicting-A-20232-ve-until-current-GET-review/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-f17a882c07b0d5106d8c",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+          "line": 26,
+          "column": 5
+        },
+        {
+          "title": "a matching reordered restricted viewer set completes the save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2647,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:11.574Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-matching-re-c961a-ewer-set-completes-the-save/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-45a2f49f6317034b171b",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+          "line": 80,
+          "column": 5
+        },
+        {
+          "title": "a definite access rejection retains an editable draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2684,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:14.295Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-definite-ac-89314-n-retains-an-editable-draft/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-b3dc44d014b3b8574a24",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+          "line": 135,
+          "column": 5
+        },
+        {
+          "title": "a matching PATCH completing after actor replacement cannot close or update the replacement view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1667,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:17.053Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-matching-PA-53613-update-the-replacement-view/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-e7b7a2974160de153d0f",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+          "line": 165,
+          "column": 7
+        },
+        {
+          "title": "a matching PATCH completing after client replacement cannot close or update the replacement view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1389,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:18.768Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-matching-PA-f60ec-update-the-replacement-view/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-659ea018f3f5e26d7c35",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+          "line": 165,
+          "column": 7
+        },
+        {
+          "title": "a matching PATCH completing after unmount replacement cannot close or update the replacement view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1382,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:20.192Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-matching-PA-a86ba-update-the-replacement-view/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-5aca6055919bc29918e8",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+          "line": 165,
+          "column": 7
+        },
+        {
+          "title": "a review completing after actor replacement cannot clear the original unknown save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1930,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:21.624Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-review-comp-d5382-r-the-original-unknown-save/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-1a385695a1ff35502617",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+          "line": 214,
+          "column": 5
+        },
+        {
+          "title": "an unknown draft can recover even when the reopened access query fails",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3129,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:23.610Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-an-unknown-dr-12048-reopened-access-query-fails/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-2d856b190dafb916caac",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+          "line": 256,
+          "column": 5
+        },
+        {
+          "title": "reopening access as another reader requests that reader's current ACL",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1537,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:26.785Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-reopening-acc-73ef0-s-that-reader-s-current-ACL/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-95a53bd3958d4cba498f",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+          "line": 307,
+          "column": 5
+        },
+        {
+          "title": "a contradictory folder receipt keeps the requested folder and needs current review",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2473,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:28.359Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-contradicto-398da-er-and-needs-current-review/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-b5a9bc0018768dc70c83",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+          "line": 334,
+          "column": 5
+        },
+        {
+          "title": "unknown ACL save survives close/reopen and a failed review does not thaw it",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2901,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:30.910Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-unknown-ACL-s-7fb07-led-review-does-not-thaw-it/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-2173c54a612f0d132cef",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+          "line": 372,
+          "column": 5
+        },
+        {
+          "title": "unknown deletion survives close/reopen until deliberate current review and a new confirmation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2781,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:33.902Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-unknown-delet-96d18-view-and-a-new-confirmation/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-27ad33bca85c88630030",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 21,
+          "column": 5
+        },
+        {
+          "title": "an absent current file is unavailable, not a deletion confirmation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2705,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:36.786Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-an-absent-cur-55ae0-not-a-deletion-confirmation/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-cda86ba9471f1510de3a",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 86,
+          "column": 5
+        },
+        {
+          "title": "pending current deletion stays fenced until a later explicit review reports a recoverable file",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2688,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:39.564Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-pending-curre-3645a--reports-a-recoverable-file/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-9af352bff7d58abbf101",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 134,
+          "column": 5
+        },
+        {
+          "title": "a definite deletion refusal does not impose an unknown fence",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1266,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:42.348Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-definite-de-eb1a7-not-impose-an-unknown-fence/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-03dac82f6b3ebd7e403f",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 170,
+          "column": 5
+        },
+        {
+          "title": "a failed explicit current read 403 revokes all cached file actions until successful recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1698,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:43.650Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-failed-expl-365b3-s-until-successful-recovery/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-b8204d340e772ecbd447",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 193,
+          "column": 7
+        },
+        {
+          "title": "a failed explicit current read 503 revokes all cached file actions until successful recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3041,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:45.390Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-failed-expl-05668-s-until-successful-recovery/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-a200e5ff7368a99cf9c0",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 193,
+          "column": 7
+        },
+        {
+          "title": "a late deletion receipt after actor replacement cannot publish completion into the new view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1647,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:48.482Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-late-deleti-db286-ompletion-into-the-new-view/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-212aa97ca2941d426482",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 258,
+          "column": 7
+        },
+        {
+          "title": "a late deletion receipt after client replacement cannot publish completion into the new view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1270,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:50.170Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-late-deleti-ef7c4-ompletion-into-the-new-view/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-b3031072bb71008b442c",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 258,
+          "column": 7
+        },
+        {
+          "title": "a late deletion receipt after unmount replacement cannot publish completion into the new view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1297,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:51.482Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-late-deleti-b4249-ompletion-into-the-new-view/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-5c89af0d15a8177bcfc6",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 258,
+          "column": 7
+        },
+        {
+          "title": "a current read completing after actor replacement cannot release the old fence or leak its state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1518,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:52.813Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-current-rea-d68fc-old-fence-or-leak-its-state/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-6204911d0a95e0dff3fb",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 307,
+          "column": 5
+        },
+        {
+          "title": "a superseded current read returning 200 cannot replace or poison newer client files",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1338,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:54.374Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-superseded--28b5b-r-poison-newer-client-files/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-9f3d8ddae92229037e2b",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 340,
+          "column": 7
+        },
+        {
+          "title": "a superseded current read returning 403 cannot replace or poison newer client files",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1259,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:19:55.752Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/preservation-green/preservation-a-superseded--816d4-r-poison-newer-client-files/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "916db4927fed39d072d2-7ebfb11853b9751b2b40",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 340,
+          "column": 7
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T20:17:39.091Z",
+    "duration": 138058.563,
+    "expected": 67,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

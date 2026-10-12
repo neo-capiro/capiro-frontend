@@ -1,0 +1,167 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-remaining-mail/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-remaining-mail-evidence/playwright.config.mjs",
+      "--grep",
+      "identity invalidation revokes rich Undo"
+    ],
+    "configFile": "/tmp/capiro-remaining-mail-evidence/playwright.config.mjs",
+    "rootDir": "/workspace/capiro-remaining-mail/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-remaining-mail-evidence/history-red-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-remaining-mail/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "mail-rich-compose.spec.ts",
+          "email-compose.spec.ts",
+          "mail-local-draft.spec.ts",
+          "mail-rewrite.spec.ts",
+          "thread-mail.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-remaining-mail-evidence/history-red-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "mail-rich-compose.spec.ts",
+      "file": "mail-rich-compose.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "identity invalidation revokes rich Undo without provider effects",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8472,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('textbox', { name: 'Message', exact: true })\nExpected: \u001b[32m\"\u001b[7mVerified rewrite\u001b[27m.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mOriginal rich draft\u001b[27m.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Message', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <div tabindex=\"0\" role=\"textbox\" translate=\"no\" aria-required=\"true\" aria-multiline=\"true\" contenteditable=\"true\" aria-labelledby=\"_r_3_\" class=\"tiptap ProseMirror _messageBody_1de57_68 ProseMirror-focused\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"Original rich draft.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('textbox', { name: 'Message', exact: true })\nExpected: \u001b[32m\"\u001b[7mVerified rewrite\u001b[27m.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mOriginal rich draft\u001b[27m.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Message', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <div tabindex=\"0\" role=\"textbox\" translate=\"no\" aria-required=\"true\" aria-multiline=\"true\" contenteditable=\"true\" aria-labelledby=\"_r_3_\" class=\"tiptap ProseMirror _messageBody_1de57_68 ProseMirror-focused\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"Original rich draft.\"\u001b[22m\n\n    at /workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts:315:31",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts",
+                      "column": 31,
+                      "line": 315
+                    },
+                    "snippet": "  313 |   await expect(message(page)).toHaveText(\"Verified rewrite.\");\n  314 |   await message(page).press(\"ControlOrMeta+z\");\n> 315 |   await expect(message(page)).toHaveText(\"Verified rewrite.\");\n      |                               ^\n  316 |   expect(state.sends).toHaveLength(0);\n  317 | });\n  318 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts",
+                        "column": 31,
+                        "line": 315
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('textbox', { name: 'Message', exact: true })\nExpected: \u001b[32m\"\u001b[7mVerified rewrite\u001b[27m.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mOriginal rich draft\u001b[27m.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Message', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <div tabindex=\"0\" role=\"textbox\" translate=\"no\" aria-required=\"true\" aria-multiline=\"true\" contenteditable=\"true\" aria-labelledby=\"_r_3_\" class=\"tiptap ProseMirror _messageBody_1de57_68 ProseMirror-focused\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"Original rich draft.\"\u001b[22m\n\n\n  313 |   await expect(message(page)).toHaveText(\"Verified rewrite.\");\n  314 |   await message(page).press(\"ControlOrMeta+z\");\n> 315 |   await expect(message(page)).toHaveText(\"Verified rewrite.\");\n      |                               ^\n  316 |   expect(state.sends).toHaveLength(0);\n  317 | });\n  318 |\n    at /workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts:315:31"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T19:47:07.282Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-mail-evidence/history-red-artifacts/mail-rich-compose-identity-c8ed2-do-without-provider-effects/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-mail-evidence/history-red-artifacts/mail-rich-compose-identity-c8ed2-do-without-provider-effects/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-mail-evidence/history-red-artifacts/mail-rich-compose-identity-c8ed2-do-without-provider-effects/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts",
+                    "column": 31,
+                    "line": 315
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "23d8565415e63e119d0c-ba2ee0398b8a36692d52",
+          "file": "mail-rich-compose.spec.ts",
+          "line": 294,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T19:47:06.688Z",
+    "duration": 9499.356,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "file": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
+  "kind": "function",
+  "symbol": "ClientOverview",
+  "line": 24,
+  "nonblank": 189,
+  "fingerprint": "3f43ae2907e653a978dfb51c9fc90a613d983ec2d0844a549398cf8feefb6d62",
+  "provenance": "changed-since-transfer",
+  "reviewStatus": "changed-since-review",
+  "blocking": true,
+  "fileSha256": "1a0adcde4fad7a6a665f09271a0314de5bbee833280e972963a77eeb1566b707",
+  "proposedReview": "Coordinated CP05 callback addition only. ActivityTimeline delegates opening to existing URL-driven QuickLog owner. Copies existing parameters, sets log=1 and uses Next router.push with scroll:false; existing QuickLog close replaces only that parameter. No duplicate mutation/lifetime owner. Requires profile lane optional onLog interface and combined replay.",
+  "commit": "24ac231749b9e8dc9b778cf318f3f94e74d168ad"
+}

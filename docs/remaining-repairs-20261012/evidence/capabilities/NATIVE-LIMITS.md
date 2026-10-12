@@ -1,0 +1,9 @@
+# Contract inspection and remaining limits
+
+Read-only pinned source 243248e726243c44bd4b9d24fd1ed220da18c56a preserved in native-source/. Client capabilities list returns persisted clientCapability records after tenant/client checks; its create path stores peNumbers and optional legacy peNumber, nullable TRL/description. This repair projects those existing supplied fields; it neither infers missing TRL nor introduces program matching data. Existing maturity categories remain 1–3 Research, 4–6 Prototype, 7–9 Fielded, null Not set.
+
+Client registrations reuse the existing core client read. The existing client PUT is user_admin controlled and recognizes the five edited registration fields. Native client data also supplies intakeData/applicantTypes projected by the unchanged read view. No new registry endpoint, field, write, or identity rule was added. Eight existing read rows remain: UEI, CAGE, EIN, Primary NAICS, NAICS codes, PSC codes, Set-aside certifications, Organization types. Figma's Small business classification, LDA registrant, Existing contracts and resolved descriptive NAICS labels are outside this bounded geometry repair; they are not fabricated from unrelated data.
+
+The feature retains existing SAM.gov supplied/not-supplied text, persisted EIN warning, five-field form, permission/error messages and close behavior. Figma's decorative header info and extra footer Close control are not added; existing adopted modal remains the behavior owner. Shared page headers/navigation and desktop capability redesign are outside OWI-F03/04.
+
+All browser traffic is synthetic interception, with unexpected requests rejected by existing fixtures. These source and fixture checks do not prove current hosted/native registration reads, writes, access, live SAM status, enrichment, or all CAP-01/CAP-08 acceptance criteria. Only the recorded divided-row and mobile compact-list facets are being repaired.

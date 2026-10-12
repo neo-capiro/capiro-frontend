@@ -1,0 +1,119 @@
+{
+  "files": [
+    {
+      "source": "/tmp/capiro-remaining-calendar-evidence/candidate-results.json",
+      "copy": "owner-candidate-results.json",
+      "bytes": 81032,
+      "sha256": "b61ebeaa989fd075c57e762c68a2d4f7987d869fab90afc08aeca673043b9b32"
+    },
+    {
+      "source": "/tmp/capiro-remaining-calendar-evidence/refresh-controls-results.json",
+      "copy": "owner-refresh-controls-results.json",
+      "bytes": 4550,
+      "sha256": "e898dc7dc9eb716c361ff6605f8623afe44a7185e1519a80f0c19e3c9e4f3bdd"
+    },
+    {
+      "source": "/tmp/capiro-remaining-calendar-evidence/draft-snapshot-green-results.json",
+      "copy": "owner-draft-snapshot-green-results.json",
+      "bytes": 5314,
+      "sha256": "b3a19037d89d51487cddc4c9282ba3289f06becdbf92f38310b16f7049869945"
+    },
+    {
+      "source": "/tmp/capiro-remaining-calendar-evidence/baseline-results.json",
+      "copy": "owner-baseline-results.json",
+      "bytes": 21184,
+      "sha256": "58916e3e8a5969c0fa7eccb060b743c62b133a0e9d5b4dc967abc904918d324f"
+    },
+    {
+      "source": "/tmp/capiro-remaining-calendar-evidence/sharing-unit-after.json",
+      "copy": "owner-sharing-unit-after.json",
+      "bytes": 8647,
+      "sha256": "e3734e6e3f35590604889e3a06b1086931f877eb646e69ce16a882fa045b26fe"
+    },
+    {
+      "source": "/tmp/capiro-remaining-calendar-evidence/lifecycle-unit-after.json",
+      "copy": "owner-lifecycle-unit-after.json",
+      "bytes": 30950,
+      "sha256": "f7ef217bcbedc0d4824a59efef7ca82565b1046355a5fdef1853a2bf418c038b"
+    },
+    {
+      "source": "/tmp/capiro-remaining-calendar-evidence/lease-release.json",
+      "copy": "owner-lease-release.json",
+      "bytes": 157,
+      "sha256": "a51a528fafa58b0cbce378070b78098b86af0c1014ffeb5eae01302100c1e519"
+    },
+    {
+      "source": "/tmp/capiro-remaining-calendar-evidence/calendar-unit-final.json",
+      "copy": "owner-calendar-unit-final.json",
+      "bytes": 39794,
+      "sha256": "955231b40dadce646ff32de99f9b6c5430b5aa3f8c6051c755231f9dac677ce7"
+    },
+    {
+      "source": "/tmp/capiro-remaining-calendar-evidence/calendar-unit-verified.json",
+      "copy": "owner-calendar-unit-verified.json",
+      "bytes": 36981,
+      "sha256": "7dfa106d35c52984fb6a029d642a3d5ae329adc6d3775324a84a144bcb4b63fe"
+    }
+  ],
+  "candidateCountsBySpecAndStatus": [
+    {
+      "file": "calendar-artifact-receipts.spec.ts",
+      "status": "expected",
+      "count": 17
+    },
+    {
+      "file": "calendar-boundary.spec.ts",
+      "status": "expected",
+      "count": 9
+    },
+    {
+      "file": "calendar-lifecycle.spec.ts",
+      "status": "expected",
+      "count": 7
+    },
+    {
+      "file": "calendar-lifecycle.spec.ts",
+      "status": "unexpected",
+      "count": 1
+    },
+    {
+      "file": "calendar-meeting-receipts.spec.ts",
+      "status": "expected",
+      "count": 4
+    },
+    {
+      "file": "calendar-preparation.spec.ts",
+      "status": "expected",
+      "count": 1
+    },
+    {
+      "file": "calendar-sharing.spec.ts",
+      "status": "expected",
+      "count": 12
+    },
+    {
+      "file": "calendar-sharing.spec.ts",
+      "status": "unexpected",
+      "count": 1
+    },
+    {
+      "file": "meeting-library.spec.ts",
+      "status": "expected",
+      "count": 12
+    }
+  ],
+  "candidateFailures": [
+    {
+      "file": "calendar-lifecycle.spec.ts",
+      "title": "held and failed refresh hide stale lifecycle rows until an explicit successful retry",
+      "status": "unexpected"
+    },
+    {
+      "file": "calendar-sharing.spec.ts",
+      "title": "cached shared feed disappears during held and failed refresh then returns current records",
+      "status": "unexpected"
+    }
+  ],
+  "claims": "62 passed in full64-case attempt; two new test fixture/expectation corrections passed separately. No single final64/64 full replay is claimed.",
+  "intermediateUnitReceiptNote": "sharing-unit-after.json preserves13/16 failed intermediate fixture attempt, not final units. calendar-unit-verified.json is the final98/98 receipt."
+}

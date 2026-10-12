@@ -1,0 +1,16 @@
+private filterToSharedArtifacts<
+    T extends {
+      notes: Array<{ sharedAt: Date | null }>;
+      debriefs: Array<{ sharedAt: Date | null }>;
+      preps: Array<{ sharedAt: Date | null }>;
+      attachments: Array<{ sharedAt: Date | null }>;
+    },
+  >(row: T): T {
+    return {
+      ...row,
+      notes: row.notes.filter((n) => n.sharedAt != null),
+      debriefs: row.debriefs.filter((d) => d.sharedAt != null),
+      preps: row.preps.filter((p) => p.sharedAt != null),
+      attachments: row.attachments.filter((a) => a.sharedAt != null),
+    };
+  }

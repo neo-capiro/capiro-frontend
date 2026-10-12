@@ -1,0 +1,106 @@
+{
+  "boundaryErrors": [],
+  "signals": [
+    {
+      "file": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 410,
+      "fingerprint": "1471eb1124a29fe24ebf21e91fad0d83cb4f1596cac88f9635dce47fad461a5e",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "sha256": "e28e6310d7b99394510cec58039f74ceb60adc7ac7910af3369ed2b0fdf17aa6",
+      "responsibilityReview": "Calendar scope, view, lifecycle filter and detail/library navigation remain one existing page coordinator. Canonical metadata, lifecycle decisions, table rendering, shared-feed read and sharing mutations are separate leaf owners. No transport/authority logic is added to the page.",
+      "reviewDisposition": "Proposed for independent/root exact review; no registry edits."
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
+      "kind": "function",
+      "symbol": "CalendarPage",
+      "line": 30,
+      "nonblank": 375,
+      "fingerprint": "f5e9238597077884681433f79e422929b1d82e7d06dae40549d5e3bc9e641549",
+      "provenance": "changed-since-transfer",
+      "reviewStatus": "changed-since-review",
+      "blocking": true,
+      "sha256": "e28e6310d7b99394510cec58039f74ceb60adc7ac7910af3369ed2b0fdf17aa6",
+      "responsibilityReview": "Calendar scope, view, lifecycle filter and detail/library navigation remain one existing page coordinator. Canonical metadata, lifecycle decisions, table rendering, shared-feed read and sharing mutations are separate leaf owners. No transport/authority logic is added to the page.",
+      "reviewDisposition": "Proposed for independent/root exact review; no registry edits."
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/artifacts/useArtifactMutation.ts",
+      "kind": "function",
+      "symbol": "useArtifactMutation",
+      "line": 28,
+      "nonblank": 88,
+      "fingerprint": "9073247d9809144bbb9ead2a98d24e1272748ae53edffb0b19163b63357caa97",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "sha256": "443bdfe2ac7830a73fc07aef22f6c8d1c3118242ece77e7f54dd8e1f34ebd413",
+      "responsibilityReview": "The existing saved artifact attempt lifecycle now observes the canonical per-meeting sharing fence. The two owners prevent concurrent or uncertain write replay without moving receipt/transport concerns into UI.",
+      "reviewDisposition": "Proposed for independent/root exact review; no registry edits."
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/library/SharedMeetings.tsx",
+      "kind": "function",
+      "symbol": "SharedMeetings",
+      "line": 12,
+      "nonblank": 127,
+      "fingerprint": "1366759cf36d89e80e3aad049b05ee7d80fad61210a8d0ca3d8c9c2d98e593d0",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "sha256": "cc9180c76585f6ab41d31028cdc9cac43231b4e674ba321b2db0babd1f014596",
+      "responsibilityReview": "One current authorized client feed owns its keyed query and metadata-only rendering. It neither opens owner-only meeting details nor invents notes/debrief body or signed download capability.",
+      "reviewDisposition": "Proposed for independent/root exact review; no registry edits."
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/sharing/MeetingSharing.tsx",
+      "kind": "function",
+      "symbol": "MeetingSharing",
+      "line": 11,
+      "nonblank": 163,
+      "fingerprint": "727cc3956153caa435c9011566317d7a6016e5549990240f930348ade5090cdf",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "sha256": "ed8ce1105570de9ab5f8cbbdb74689b344908321cca84d6373d330aedb425415",
+      "responsibilityReview": "One explicit selected-artifact confirmation owns checkbox snapshots, current read states and the share/unshare confirmation. Native contracts, selection eligibility and dispatched attempt semantics are separate coherent modules.",
+      "reviewDisposition": "Proposed for independent/root exact review; no registry edits."
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/sharing/useSharing.ts",
+      "kind": "function",
+      "symbol": "useSharing",
+      "line": 14,
+      "nonblank": 118,
+      "fingerprint": "4ef7b2fa293d7022f77528c118ea9ad2278e5559050b10e3903625ad89b52b03",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "sha256": "9855c5f60c0ace9aa2509cb6c98371bf9bea52d1dda75c9141da3fdbe0bc823c",
+      "responsibilityReview": "One actor/tenant/meeting/client-bound read and mutation lifetime owns the synchronous fence, cleanup, existing artifact coordination and invalidations. Native request/receipt validation lives in api/contracts, not UI.",
+      "reviewDisposition": "Proposed for independent/root exact review; no registry edits."
+    }
+  ],
+  "testModules": [
+    {
+      "path": "apps/web/tests/browser/calendar-sharing.spec.ts",
+      "nonblank": 422,
+      "sha256": "23a2427feb083c1dbcb1474f5376a8902f57290025991dc43f011043924aedee",
+      "responsibilityReview": "Focused synthetic Calendar scenarios with shared bounded fixtures and original meaningful assertions preserved; no application configuration or transport implementation."
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-lifecycle.spec.ts",
+      "nonblank": 273,
+      "sha256": "f74d8b284991958fe4bed9fa2952e4a7d52f230e88f4102ce993f15741d199e8",
+      "responsibilityReview": "Focused synthetic Calendar scenarios with shared bounded fixtures and original meaningful assertions preserved; no application configuration or transport implementation."
+    }
+  ],
+  "sourceCommit": "16fb50f9578cca86189b2e303f0918ddebc60413",
+  "sourceTree": "2af9545acb53781e8fa48944230a6278f982a940",
+  "independentReview": "/tmp/capiro-remaining-calendar-independent-review"
+}

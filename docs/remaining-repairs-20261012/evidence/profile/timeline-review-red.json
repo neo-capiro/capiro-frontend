@@ -1,0 +1,383 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-remaining-profile/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "/tmp/capiro-remaining-profile-evidence/playwright.config.ts"
+    ],
+    "configFile": "/tmp/capiro-remaining-profile-evidence/playwright.config.ts",
+    "rootDir": "/tmp/capiro-remaining-profile-evidence",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-remaining-profile-evidence/timeline-review-red",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-remaining-profile-evidence",
+        "testIgnore": [],
+        "testMatch": [
+          "timeline-review.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-remaining-profile-evidence/timeline-review-red.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "timeline-review.spec.ts",
+      "file": "timeline-review.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "uncertain activity stays fenced through expand and return",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8547,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('button', { name: 'Review latest activity', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('button', { name: 'Review latest activity', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('button', { name: 'Review latest activity', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('button', { name: 'Review latest activity', exact: true })\u001b[22m\n\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:72:7",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+                      "column": 7,
+                      "line": 72
+                    },
+                    "snippet": "  70 |         exact: true,\n  71 |       }),\n> 72 |     ).toBeVisible();\n     |       ^\n  73 |     await timeline\n  74 |       .getByRole(\"button\", {\n  75 |         name: `Activity actions: ${note.title}`,"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+                        "column": 7,
+                        "line": 72
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('button', { name: 'Review latest activity', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('button', { name: 'Review latest activity', exact: true })\u001b[22m\n\n\n  70 |         exact: true,\n  71 |       }),\n> 72 |     ).toBeVisible();\n     |       ^\n  73 |     await timeline\n  74 |       .getByRole(\"button\", {\n  75 |         name: `Activity actions: ${note.title}`,\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:72:7"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:06:09.100Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-uncertain--0362b-d-through-expand-and-return/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-uncertain--0362b-d-through-expand-and-return/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-uncertain--0362b-d-through-expand-and-return/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+                    "column": 7,
+                    "line": 72
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "5d0088ddfad7c0363f6b-bc1fa945f9417f7bfcd0",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+          "line": 26,
+          "column": 7
+        },
+        {
+          "title": "uncertain activity stays fenced through native pinned regrouping",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8464,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('menuitem', { name: /^Pin note$|^Unpin note$/ })\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: serializes to the same string\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('menuitem', { name: /^Pin note$|^Unpin note$/ })\u001b[22m\n\u001b[2m    14 × locator resolved to <div tabindex=\"-1\" role=\"menuitem\" data-orientation=\"vertical\" data-radix-collection-item=\"\">Unpin note</div>\u001b[22m\n\u001b[2m       - unexpected value \"null\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('menuitem', { name: /^Pin note$|^Unpin note$/ })\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: serializes to the same string\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('menuitem', { name: /^Pin note$|^Unpin note$/ })\u001b[22m\n\u001b[2m    14 × locator resolved to <div tabindex=\"-1\" role=\"menuitem\" data-orientation=\"vertical\" data-radix-collection-item=\"\">Unpin note</div>\u001b[22m\n\u001b[2m       - unexpected value \"null\"\u001b[22m\n\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:81:7",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+                      "column": 7,
+                      "line": 81
+                    },
+                    "snippet": "  79 |     await expect(\n  80 |       page.getByRole(\"menuitem\", { name: /^Pin note$|^Unpin note$/ }),\n> 81 |     ).toHaveAttribute(\"data-disabled\", \"\");\n     |       ^\n  82 |     await page.keyboard.press(\"Escape\");\n  83 |     expect(writes).toBe(1);\n  84 |     expect(unexpected).toEqual([]);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+                        "column": 7,
+                        "line": 81
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('menuitem', { name: /^Pin note$|^Unpin note$/ })\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: serializes to the same string\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('menuitem', { name: /^Pin note$|^Unpin note$/ })\u001b[22m\n\u001b[2m    14 × locator resolved to <div tabindex=\"-1\" role=\"menuitem\" data-orientation=\"vertical\" data-radix-collection-item=\"\">Unpin note</div>\u001b[22m\n\u001b[2m       - unexpected value \"null\"\u001b[22m\n\n\n  79 |     await expect(\n  80 |       page.getByRole(\"menuitem\", { name: /^Pin note$|^Unpin note$/ }),\n> 81 |     ).toHaveAttribute(\"data-disabled\", \"\");\n     |       ^\n  82 |     await page.keyboard.press(\"Escape\");\n  83 |     expect(writes).toBe(1);\n  84 |     expect(unexpected).toEqual([]);\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:81:7"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:06:18.511Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-uncertain--2c97e-gh-native-pinned-regrouping/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-uncertain--2c97e-gh-native-pinned-regrouping/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-uncertain--2c97e-gh-native-pinned-regrouping/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+                    "column": 7,
+                    "line": 81
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "5d0088ddfad7c0363f6b-896a074496da4538d0b8",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+          "line": 26,
+          "column": 7
+        },
+        {
+          "title": "pending activity stays fenced while its response is held across expand and return",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8110,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('button', { name: 'Activity actions: Uncertain timeline note', exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('button', { name: 'Activity actions: Uncertain timeline note', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button type=\"button\" id=\"radix-_r_20_\" data-state=\"closed\" aria-haspopup=\"menu\" aria-expanded=\"false\" class=\"_trigger_7mgmu_7\" aria-label=\"Activity actions: Uncertain timeline note\">⋯</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('button', { name: 'Activity actions: Uncertain timeline note', exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('button', { name: 'Activity actions: Uncertain timeline note', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button type=\"button\" id=\"radix-_r_20_\" data-state=\"closed\" aria-haspopup=\"menu\" aria-expanded=\"false\" class=\"_trigger_7mgmu_7\" aria-label=\"Activity actions: Uncertain timeline note\">⋯</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:124:26",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+                      "column": 26,
+                      "line": 124
+                    },
+                    "snippet": "  122 |       .getByRole(\"button\", { name: \"Return to profile\", exact: true })\n  123 |       .click();\n> 124 |     await expect(action).toBeDisabled();\n      |                          ^\n  125 |   } finally {\n  126 |     release();\n  127 |   }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+                        "column": 26,
+                        "line": 124
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('button', { name: 'Activity actions: Uncertain timeline note', exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Activity timeline', exact: true }).getByRole('button', { name: 'Activity actions: Uncertain timeline note', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button type=\"button\" id=\"radix-_r_20_\" data-state=\"closed\" aria-haspopup=\"menu\" aria-expanded=\"false\" class=\"_trigger_7mgmu_7\" aria-label=\"Activity actions: Uncertain timeline note\">⋯</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n\n  122 |       .getByRole(\"button\", { name: \"Return to profile\", exact: true })\n  123 |       .click();\n> 124 |     await expect(action).toBeDisabled();\n      |                          ^\n  125 |   } finally {\n  126 |     release();\n  127 |   }\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:124:26"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:06:27.885Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-pending-ac-55be0-ld-across-expand-and-return/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-pending-ac-55be0-ld-across-expand-and-return/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-pending-ac-55be0-ld-across-expand-and-return/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+                    "column": 26,
+                    "line": 124
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "5d0088ddfad7c0363f6b-ed0ca75bdfc8baaf74f3",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+          "line": 87,
+          "column": 5
+        },
+        {
+          "title": "expanded Log activity reuses the existing Quick log uncertain creation owner",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7896,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Quick log', exact: true }).getByRole('button', { name: 'Save activity', exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Quick log', exact: true }).getByRole('button', { name: 'Save activity', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Save activity</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Quick log', exact: true }).getByRole('button', { name: 'Save activity', exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Quick log', exact: true }).getByRole('button', { name: 'Save activity', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Save activity</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:169:5",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+                      "column": 5,
+                      "line": 169
+                    },
+                    "snippet": "  167 |   await expect(\n  168 |     log.getByRole(\"button\", { name: \"Save activity\", exact: true }),\n> 169 |   ).toBeDisabled();\n      |     ^\n  170 |   await expect(log.getByText(/save result is uncertain/i)).toBeVisible();\n  171 |   expect(new URL(page.url()).searchParams.get(\"context\")).toBe(\"preserved\");\n  172 |   expect(new URL(page.url()).searchParams.get(\"log\")).toBe(\"1\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+                        "column": 5,
+                        "line": 169
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Quick log', exact: true }).getByRole('button', { name: 'Save activity', exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Quick log', exact: true }).getByRole('button', { name: 'Save activity', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button class=\"button primary\">Save activity</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n\n  167 |   await expect(\n  168 |     log.getByRole(\"button\", { name: \"Save activity\", exact: true }),\n> 169 |   ).toBeDisabled();\n      |     ^\n  170 |   await expect(log.getByText(/save result is uncertain/i)).toBeVisible();\n  171 |   expect(new URL(page.url()).searchParams.get(\"context\")).toBe(\"preserved\");\n  172 |   expect(new URL(page.url()).searchParams.get(\"log\")).toBe(\"1\");\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:169:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:06:36.845Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-expanded-L-ea6ed-og-uncertain-creation-owner/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-expanded-L-ea6ed-og-uncertain-creation-owner/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/timeline-review-red/timeline-review-expanded-L-ea6ed-og-uncertain-creation-owner/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+                    "column": 5,
+                    "line": 169
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "5d0088ddfad7c0363f6b-46f08dea96ed1c1d84c2",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+          "line": 138,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T20:06:08.525Z",
+    "duration": 36682.766,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

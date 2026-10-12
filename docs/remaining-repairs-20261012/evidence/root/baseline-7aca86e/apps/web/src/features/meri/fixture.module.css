@@ -1,0 +1,48 @@
+.entry {
+  max-width: 720px;
+  margin: 100px auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  line-height: 1.6;
+}
+.entry h1 {
+  font-size: 36px;
+  line-height: 1.15;
+  letter-spacing: -1px;
+}
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+.open {
+  align-self: flex-start;
+  display: inline-flex;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: #0a0a0a;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.openSecondary {
+  align-self: flex-start;
+  display: inline-flex;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.note {
+  font-size: 13px;
+  color: var(--muted-foreground);
+}

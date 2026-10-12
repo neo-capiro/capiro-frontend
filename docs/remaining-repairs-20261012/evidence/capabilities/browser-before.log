@@ -1,0 +1,126 @@
+
+Running 3 tests using 1 worker
+
+(node:724872) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/browser/capability-list-registration-layout.spec.ts:25:3 › phone capability rows retain native content and keyboard selection in light (10.6s)
+(node:725220) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 tests/browser/capability-list-registration-layout.spec.ts:25:3 › phone capability rows retain native content and keyboard selection in dark (8.3s)
+(node:725478) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 tests/browser/capability-list-registration-layout.spec.ts:148:1 › registration summary uses aligned divided rows and the Figma dialog width (3.6s)
+
+
+  1) tests/browser/capability-list-registration-layout.spec.ts:25:3 › phone capability rows retain native content and keyboard selection in light 
+
+    Error: expect(locator).toBeHidden() failed
+
+    Locator:  locator('section').filter({ hasText: 'Capability areas' }).getByRole('button').first().locator('.monogram')
+    Expected: hidden
+    Received: visible
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeHidden" with timeout 5000ms
+      - waiting for locator('section').filter({ hasText: 'Capability areas' }).getByRole('button').first().locator('.monogram')
+        14 × locator resolved to <span class="monogram">▦</span>
+           - unexpected value "visible"
+
+
+      39 |     await expect(rows).toHaveCount(4);
+      40 |     const first = rows.first();
+    > 41 |     await expect(first.locator(".monogram")).toBeHidden();
+         |                                              ^
+      42 |     await expect(
+      43 |       first.getByText(areas[0]!.description, { exact: true }),
+      44 |     ).toBeHidden();
+        at /workspace/capiro-remaining-capabilities/apps/web/tests/browser/capability-list-registration-layout.spec.ts:41:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-capabilities-evidence/browser-before/artifacts/capability-list-registrati-5b5b4-keyboard-selection-in-light/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-remaining-capabilities-evidence/browser-before/artifacts/capability-list-registrati-5b5b4-keyboard-selection-in-light/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-capabilities-evidence/browser-before/artifacts/capability-list-registrati-5b5b4-keyboard-selection-in-light/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-remaining-capabilities-evidence/browser-before/artifacts/capability-list-registrati-5b5b4-keyboard-selection-in-light/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/browser/capability-list-registration-layout.spec.ts:25:3 › phone capability rows retain native content and keyboard selection in dark 
+
+    Error: expect(locator).toBeHidden() failed
+
+    Locator:  locator('section').filter({ hasText: 'Capability areas' }).getByRole('button').first().locator('.monogram')
+    Expected: hidden
+    Received: visible
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeHidden" with timeout 5000ms
+      - waiting for locator('section').filter({ hasText: 'Capability areas' }).getByRole('button').first().locator('.monogram')
+        14 × locator resolved to <span class="monogram">▦</span>
+           - unexpected value "visible"
+
+
+      39 |     await expect(rows).toHaveCount(4);
+      40 |     const first = rows.first();
+    > 41 |     await expect(first.locator(".monogram")).toBeHidden();
+         |                                              ^
+      42 |     await expect(
+      43 |       first.getByText(areas[0]!.description, { exact: true }),
+      44 |     ).toBeHidden();
+        at /workspace/capiro-remaining-capabilities/apps/web/tests/browser/capability-list-registration-layout.spec.ts:41:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-capabilities-evidence/browser-before/artifacts/capability-list-registrati-62753--keyboard-selection-in-dark/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-remaining-capabilities-evidence/browser-before/artifacts/capability-list-registrati-62753--keyboard-selection-in-dark/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-capabilities-evidence/browser-before/artifacts/capability-list-registrati-62753--keyboard-selection-in-dark/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-remaining-capabilities-evidence/browser-before/artifacts/capability-list-registrati-62753--keyboard-selection-in-dark/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/browser/capability-list-registration-layout.spec.ts:148:1 › registration summary uses aligned divided rows and the Figma dialog width 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 680
+    Received: 640
+
+      152 |   const dialog = await openRegistrations(page);
+      153 |   await expect(dialog.locator("dd").first()).toHaveText(registrationClient.uei);
+    > 154 |   expect((await dialog.boundingBox())!.width).toBe(680);
+          |                                               ^
+      155 |   const rows = await dialog.locator("dl > div").evaluateAll((elements) =>
+      156 |     elements.map((row) => {
+      157 |       const style = getComputedStyle(row);
+        at /workspace/capiro-remaining-capabilities/apps/web/tests/browser/capability-list-registration-layout.spec.ts:154:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-capabilities-evidence/browser-before/artifacts/capability-list-registrati-2092f--and-the-Figma-dialog-width/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-remaining-capabilities-evidence/browser-before/artifacts/capability-list-registrati-2092f--and-the-Figma-dialog-width/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-capabilities-evidence/browser-before/artifacts/capability-list-registrati-2092f--and-the-Figma-dialog-width/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-remaining-capabilities-evidence/browser-before/artifacts/capability-list-registrati-2092f--and-the-Figma-dialog-width/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests/browser/capability-list-registration-layout.spec.ts:25:3 › phone capability rows retain native content and keyboard selection in light 
+    tests/browser/capability-list-registration-layout.spec.ts:25:3 › phone capability rows retain native content and keyboard selection in dark 
+    tests/browser/capability-list-registration-layout.spec.ts:148:1 › registration summary uses aligned divided rows and the Figma dialog width 

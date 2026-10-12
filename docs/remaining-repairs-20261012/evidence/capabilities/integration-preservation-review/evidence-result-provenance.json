@@ -1,0 +1,292 @@
+{
+  "mail": {
+    "affected-results.json": {
+      "sha256": "a26918aeb53a6fadf0f71bf7c76f88d58e048abb1eb83961b3d777def5151692",
+      "stats": {
+        "startTime": "2026-10-12T19:34:11.251Z",
+        "duration": 296126.97000000003,
+        "expected": 77,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "workers": 1,
+      "projects": [
+        {
+          "retries": 0,
+          "name": ""
+        }
+      ]
+    },
+    "extra-before-results.json": {
+      "sha256": "bb6325581b28c21eb7f10c57e6c2f6bd87814c3640f3ca92e6f20aa8488708c3",
+      "stats": {
+        "startTime": "2026-10-12T19:39:32.923Z",
+        "duration": 17768.783,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "workers": 1,
+      "projects": [
+        {
+          "retries": 0,
+          "name": ""
+        }
+      ]
+    },
+    "final-base-results.json": {
+      "sha256": "278142892b7ed2b29c51afcb9991a1883ddb0094a7360a5a716cd902790f3f79",
+      "stats": {
+        "startTime": "2026-10-12T19:51:14.556Z",
+        "duration": 37313.051,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      },
+      "workers": 1,
+      "projects": [
+        {
+          "retries": 0,
+          "name": ""
+        }
+      ]
+    },
+    "final-results.json": {
+      "sha256": "d215d98457a343b67067f28e0b5aa17a06b1d497c744361b778391808470c4d1",
+      "stats": {
+        "startTime": "2026-10-12T19:40:13.330Z",
+        "duration": 295426.86100000003,
+        "expected": 79,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "workers": 1,
+      "projects": [
+        {
+          "retries": 0,
+          "name": ""
+        }
+      ]
+    },
+    "final-source-and-results.json": {
+      "sha256": "992788d61e73eee8a4da2042084240b3bf0a8b9abf82faad12faf8fa00ebd315",
+      "stats": null,
+      "workers": null,
+      "projects": []
+    },
+    "green-results.json": {
+      "sha256": "d34c0f04db65e7c30f5b4722db9882a788a672c093677a5a931f41623a801aa7",
+      "stats": {
+        "startTime": "2026-10-12T19:32:24.464Z",
+        "duration": 56510.227,
+        "expected": 11,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "workers": 1,
+      "projects": [
+        {
+          "retries": 0,
+          "name": ""
+        }
+      ]
+    },
+    "history-green-results.json": {
+      "sha256": "66515d1b183834d42269d268df08ea59307dc69ce0a6f067d594187227f277ec",
+      "stats": {
+        "startTime": "2026-10-12T19:47:41.812Z",
+        "duration": 179152.11800000002,
+        "expected": 45,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "workers": 1,
+      "projects": [
+        {
+          "retries": 0,
+          "name": ""
+        }
+      ]
+    },
+    "history-red-results.json": {
+      "sha256": "aa356be6e9e4bdb300287b5a349c0af32f0a79acf58033f178731d324d3484c1",
+      "stats": {
+        "startTime": "2026-10-12T19:47:06.688Z",
+        "duration": 9499.356,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "workers": 1,
+      "projects": [
+        {
+          "retries": 0,
+          "name": ""
+        }
+      ]
+    },
+    "red-results.json": {
+      "sha256": "dc26f26ba24535692f89e5612fbfb31c280131590cd60013de123573f6ff9c45",
+      "stats": {
+        "startTime": "2026-10-12T19:30:14.500Z",
+        "duration": 70451.36499999999,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      },
+      "workers": 1,
+      "projects": [
+        {
+          "retries": 0,
+          "name": ""
+        }
+      ]
+    }
+  },
+  "intake": {
+    "final-results.json": {
+      "sha256": "0f421de673a68331df398cb454dfc3cfc4900c10cd7ecb80588ada70bb1f5eca",
+      "stats": {
+        "startTime": "2026-10-12T19:40:31.691Z",
+        "duration": 91955.86,
+        "expected": 10,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "workers": 1,
+      "projects": [
+        {
+          "retries": 0,
+          "name": ""
+        }
+      ]
+    },
+    "focused-results.json": {
+      "sha256": "4a4f0af4d69380f8f6442ac4342985daabc7b92bd3bda17f8b80840cfa9bf6aa",
+      "stats": {
+        "startTime": "2026-10-12T19:37:03.922Z",
+        "duration": 172710.003,
+        "expected": 46,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "workers": 1,
+      "projects": [
+        {
+          "retries": 0,
+          "name": ""
+        }
+      ]
+    },
+    "green-results.json": {
+      "sha256": "17f72df48040770220d0aec7168f686ee24da41edbb84beec6b5122238fd7b66",
+      "stats": {
+        "startTime": "2026-10-12T19:30:54.884Z",
+        "duration": 100409.08799999999,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 4,
+        "flaky": 0
+      },
+      "workers": 1,
+      "projects": [
+        {
+          "retries": 0,
+          "name": ""
+        }
+      ]
+    },
+    "green2-results.json": {
+      "sha256": "59bd77d5b344f006c4564528bec42131648e75ec9e8e793a000bbe2ccb378170",
+      "stats": {
+        "startTime": "2026-10-12T19:34:35.813Z",
+        "duration": 36764.081999999995,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "workers": 1,
+      "projects": [
+        {
+          "retries": 0,
+          "name": ""
+        }
+      ]
+    },
+    "popup-green-results.json": {
+      "sha256": "2cb80e3fcb2e0ab3b94d1163a05588733fa6f4467b3b93b7ce9474d450cc98b6",
+      "stats": {
+        "startTime": "2026-10-12T19:52:04.621Z",
+        "duration": 38804.085,
+        "expected": 10,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "workers": 1,
+      "projects": [
+        {
+          "retries": 0,
+          "name": ""
+        }
+      ]
+    },
+    "popup-red-results.json": {
+      "sha256": "7d3538a23e7fc655186eabd138a472da072db32a11de057d0d4f4b1a9defb0c7",
+      "stats": {
+        "startTime": "2026-10-12T19:51:24.749Z",
+        "duration": 4616.491,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "workers": 1,
+      "projects": [
+        {
+          "retries": 0,
+          "name": ""
+        }
+      ]
+    },
+    "red-results.json": {
+      "sha256": "68ea972c40eb09680d40636d1a3cfc6d906560f70a25caeda725b43158ae5635",
+      "stats": {
+        "startTime": "2026-10-12T19:25:28.302Z",
+        "duration": 28832.735,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 4,
+        "flaky": 0
+      },
+      "workers": 1,
+      "projects": [
+        {
+          "retries": 0,
+          "name": ""
+        }
+      ]
+    }
+  },
+  "mailSummaryStatsMatchRaw": {
+    "red-results": true,
+    "green-results": true,
+    "affected-results": true,
+    "extra-before-results": true,
+    "final-results": true,
+    "history-red-results": true,
+    "history-green-results": true,
+    "final-base-results": true
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "classification": "Observed inherited shared-header responsive overflow; outside owned capability list. Root notified; no shared edit.",
+  "metrics": {
+    "viewport": 320,
+    "documentWidth": 329,
+    "elements": [
+      {
+        "tag": "NAV",
+        "className": "_actions_1w898_37",
+        "right": 329,
+        "width": 152
+      },
+      {
+        "tag": "DIV",
+        "className": "_avatar_1w898_139",
+        "right": 329,
+        "width": 32
+      },
+      {
+        "tag": "BUTTON",
+        "className": "monogram",
+        "right": 329,
+        "width": 32
+      }
+    ]
+  },
+  "productionChangedForCorrection": false,
+  "testCorrection": "New long-content test now asserts no internal overflow and viewport containment of owned capability card; full document metrics remain attached. Existing tests were not edited.",
+  "proof": "Only capability feature source differs from7aca86e; offending NAV/actions/avatar are unchanged shared header. Baseline aliases the capability feature only and shares exactly these unchanged header bytes."
+}

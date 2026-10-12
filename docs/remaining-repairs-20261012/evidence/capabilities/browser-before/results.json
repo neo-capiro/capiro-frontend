@@ -1,0 +1,312 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-remaining-capabilities/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-remaining-capabilities-evidence/playwright.config.ts",
+      "capability-list-registration-layout",
+      "--grep",
+      "phone capability rows|registration summary uses"
+    ],
+    "configFile": "/tmp/capiro-remaining-capabilities-evidence/playwright.config.ts",
+    "rootDir": "/workspace/capiro-remaining-capabilities/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-remaining-capabilities-evidence/browser-before/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-remaining-capabilities/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-remaining-capabilities-evidence/browser-before/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "capability-list-registration-layout.spec.ts",
+      "file": "capability-list-registration-layout.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "phone capability rows retain native content and keyboard selection in light",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 10568,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('section').filter({ hasText: 'Capability areas' }).getByRole('button').first().locator('.monogram')\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('section').filter({ hasText: 'Capability areas' }).getByRole('button').first().locator('.monogram')\u001b[22m\n\u001b[2m    14 × locator resolved to <span class=\"monogram\">▦</span>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('section').filter({ hasText: 'Capability areas' }).getByRole('button').first().locator('.monogram')\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('section').filter({ hasText: 'Capability areas' }).getByRole('button').first().locator('.monogram')\u001b[22m\n\u001b[2m    14 × locator resolved to <span class=\"monogram\">▦</span>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n    at /workspace/capiro-remaining-capabilities/apps/web/tests/browser/capability-list-registration-layout.spec.ts:41:46",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-capabilities/apps/web/tests/browser/capability-list-registration-layout.spec.ts",
+                      "column": 46,
+                      "line": 41
+                    },
+                    "snippet": "  39 |     await expect(rows).toHaveCount(4);\n  40 |     const first = rows.first();\n> 41 |     await expect(first.locator(\".monogram\")).toBeHidden();\n     |                                              ^\n  42 |     await expect(\n  43 |       first.getByText(areas[0]!.description, { exact: true }),\n  44 |     ).toBeHidden();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-capabilities/apps/web/tests/browser/capability-list-registration-layout.spec.ts",
+                        "column": 46,
+                        "line": 41
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('section').filter({ hasText: 'Capability areas' }).getByRole('button').first().locator('.monogram')\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('section').filter({ hasText: 'Capability areas' }).getByRole('button').first().locator('.monogram')\u001b[22m\n\u001b[2m    14 × locator resolved to <span class=\"monogram\">▦</span>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n\n  39 |     await expect(rows).toHaveCount(4);\n  40 |     const first = rows.first();\n> 41 |     await expect(first.locator(\".monogram\")).toBeHidden();\n     |                                              ^\n  42 |     await expect(\n  43 |       first.getByText(areas[0]!.description, { exact: true }),\n  44 |     ).toBeHidden();\n    at /workspace/capiro-remaining-capabilities/apps/web/tests/browser/capability-list-registration-layout.spec.ts:41:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T19:43:07.233Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-capabilities-evidence/browser-before/artifacts/capability-list-registrati-5b5b4-keyboard-selection-in-light/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-capabilities-evidence/browser-before/artifacts/capability-list-registrati-5b5b4-keyboard-selection-in-light/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-capabilities-evidence/browser-before/artifacts/capability-list-registrati-5b5b4-keyboard-selection-in-light/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-capabilities/apps/web/tests/browser/capability-list-registration-layout.spec.ts",
+                    "column": 46,
+                    "line": 41
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1e9e682405e1667a030d-a568f66c5fbc8181ba06",
+          "file": "capability-list-registration-layout.spec.ts",
+          "line": 25,
+          "column": 3
+        },
+        {
+          "title": "phone capability rows retain native content and keyboard selection in dark",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8277,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('section').filter({ hasText: 'Capability areas' }).getByRole('button').first().locator('.monogram')\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('section').filter({ hasText: 'Capability areas' }).getByRole('button').first().locator('.monogram')\u001b[22m\n\u001b[2m    14 × locator resolved to <span class=\"monogram\">▦</span>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('section').filter({ hasText: 'Capability areas' }).getByRole('button').first().locator('.monogram')\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('section').filter({ hasText: 'Capability areas' }).getByRole('button').first().locator('.monogram')\u001b[22m\n\u001b[2m    14 × locator resolved to <span class=\"monogram\">▦</span>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n    at /workspace/capiro-remaining-capabilities/apps/web/tests/browser/capability-list-registration-layout.spec.ts:41:46",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-capabilities/apps/web/tests/browser/capability-list-registration-layout.spec.ts",
+                      "column": 46,
+                      "line": 41
+                    },
+                    "snippet": "  39 |     await expect(rows).toHaveCount(4);\n  40 |     const first = rows.first();\n> 41 |     await expect(first.locator(\".monogram\")).toBeHidden();\n     |                                              ^\n  42 |     await expect(\n  43 |       first.getByText(areas[0]!.description, { exact: true }),\n  44 |     ).toBeHidden();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-capabilities/apps/web/tests/browser/capability-list-registration-layout.spec.ts",
+                        "column": 46,
+                        "line": 41
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('section').filter({ hasText: 'Capability areas' }).getByRole('button').first().locator('.monogram')\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('section').filter({ hasText: 'Capability areas' }).getByRole('button').first().locator('.monogram')\u001b[22m\n\u001b[2m    14 × locator resolved to <span class=\"monogram\">▦</span>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n\n  39 |     await expect(rows).toHaveCount(4);\n  40 |     const first = rows.first();\n> 41 |     await expect(first.locator(\".monogram\")).toBeHidden();\n     |                                              ^\n  42 |     await expect(\n  43 |       first.getByText(areas[0]!.description, { exact: true }),\n  44 |     ).toBeHidden();\n    at /workspace/capiro-remaining-capabilities/apps/web/tests/browser/capability-list-registration-layout.spec.ts:41:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T19:43:18.901Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-capabilities-evidence/browser-before/artifacts/capability-list-registrati-62753--keyboard-selection-in-dark/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-capabilities-evidence/browser-before/artifacts/capability-list-registrati-62753--keyboard-selection-in-dark/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-capabilities-evidence/browser-before/artifacts/capability-list-registrati-62753--keyboard-selection-in-dark/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-capabilities/apps/web/tests/browser/capability-list-registration-layout.spec.ts",
+                    "column": 46,
+                    "line": 41
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1e9e682405e1667a030d-78e3b2f8d359619531ca",
+          "file": "capability-list-registration-layout.spec.ts",
+          "line": 25,
+          "column": 3
+        },
+        {
+          "title": "registration summary uses aligned divided rows and the Figma dialog width",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3572,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m680\u001b[39m\nReceived: \u001b[31m640\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m680\u001b[39m\nReceived: \u001b[31m640\u001b[39m\n    at /workspace/capiro-remaining-capabilities/apps/web/tests/browser/capability-list-registration-layout.spec.ts:154:47",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-capabilities/apps/web/tests/browser/capability-list-registration-layout.spec.ts",
+                      "column": 47,
+                      "line": 154
+                    },
+                    "snippet": "  152 |   const dialog = await openRegistrations(page);\n  153 |   await expect(dialog.locator(\"dd\").first()).toHaveText(registrationClient.uei);\n> 154 |   expect((await dialog.boundingBox())!.width).toBe(680);\n      |                                               ^\n  155 |   const rows = await dialog.locator(\"dl > div\").evaluateAll((elements) =>\n  156 |     elements.map((row) => {\n  157 |       const style = getComputedStyle(row);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-capabilities/apps/web/tests/browser/capability-list-registration-layout.spec.ts",
+                        "column": 47,
+                        "line": 154
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m680\u001b[39m\nReceived: \u001b[31m640\u001b[39m\n\n  152 |   const dialog = await openRegistrations(page);\n  153 |   await expect(dialog.locator(\"dd\").first()).toHaveText(registrationClient.uei);\n> 154 |   expect((await dialog.boundingBox())!.width).toBe(680);\n      |                                               ^\n  155 |   const rows = await dialog.locator(\"dl > div\").evaluateAll((elements) =>\n  156 |     elements.map((row) => {\n  157 |       const style = getComputedStyle(row);\n    at /workspace/capiro-remaining-capabilities/apps/web/tests/browser/capability-list-registration-layout.spec.ts:154:47"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T19:43:28.403Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-capabilities-evidence/browser-before/artifacts/capability-list-registrati-2092f--and-the-Figma-dialog-width/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-capabilities-evidence/browser-before/artifacts/capability-list-registrati-2092f--and-the-Figma-dialog-width/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-capabilities-evidence/browser-before/artifacts/capability-list-registrati-2092f--and-the-Figma-dialog-width/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-capabilities/apps/web/tests/browser/capability-list-registration-layout.spec.ts",
+                    "column": 47,
+                    "line": 154
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1e9e682405e1667a030d-3a8b73aa43fce8fd7637",
+          "file": "capability-list-registration-layout.spec.ts",
+          "line": 148,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T19:43:06.652Z",
+    "duration": 25807.899,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

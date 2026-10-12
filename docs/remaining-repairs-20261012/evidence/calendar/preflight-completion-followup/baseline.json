@@ -1,0 +1,16 @@
+{
+  "sourceCommit": "16fb50f9578cca86189b2e303f0918ddebc60413",
+  "recordedAt": "2026-10-12T20:14:25.808022+00:00",
+  "finding": "Test confidence gap only: dialog unmount was not a completion barrier for the old held operation. No production defect claimed.",
+  "existingEvidenceUnchanged": "../candidate-results.json; ../manifest.json; ../REPORT.md",
+  "files": [
+    {
+      "path": "apps/web/tests/browser/calendar-sharing.spec.ts",
+      "sha256": "23a2427feb083c1dbcb1474f5376a8902f57290025991dc43f011043924aedee"
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-sharing-harness.tsx",
+      "sha256": "7d51d8344009553e698a5fde447c62bfeb582c5e9d60116e0b6544208a94ec10"
+    }
+  ]
+}

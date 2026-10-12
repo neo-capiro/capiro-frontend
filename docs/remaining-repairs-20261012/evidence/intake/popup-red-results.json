@@ -1,0 +1,164 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-remaining-intake/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "/tmp/capiro-remaining-intake-evidence/playwright.config.mjs",
+      "remaining-intake.spec.ts",
+      "--grep",
+      "narrow dark"
+    ],
+    "configFile": "/tmp/capiro-remaining-intake-evidence/playwright.config.mjs",
+    "rootDir": "/workspace/capiro-remaining-intake/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-remaining-intake-evidence/popup-red-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-remaining-intake/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-remaining-intake-evidence/popup-red-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "remaining-intake.spec.ts",
+      "file": "remaining-intake.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "CI-02 narrow dark view switcher keeps keyboard selection visible",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3702,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m120\u001b[39m\nReceived:    \u001b[31m78\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m120\u001b[39m\nReceived:    \u001b[31m78\u001b[39m\n    at /workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts:359:23",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts",
+                      "column": 23,
+                      "line": 359
+                    },
+                    "snippet": "  357 |     .boundingBox();\n  358 |   const popupBox = await page.getByRole(\"dialog\").boundingBox();\n> 359 |   expect(inputBox!.y).toBeGreaterThanOrEqual(popupBox!.y);\n      |                       ^\n  360 |   expect(inputBox!.y + inputBox!.height).toBeLessThanOrEqual(listBox!.y);\n  361 |   await page.screenshot({\n  362 |     path: info.outputPath(\"view-switcher-mobile-dark.png\"),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts",
+                        "column": 23,
+                        "line": 359
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m120\u001b[39m\nReceived:    \u001b[31m78\u001b[39m\n\n  357 |     .boundingBox();\n  358 |   const popupBox = await page.getByRole(\"dialog\").boundingBox();\n> 359 |   expect(inputBox!.y).toBeGreaterThanOrEqual(popupBox!.y);\n      |                       ^\n  360 |   expect(inputBox!.y + inputBox!.height).toBeLessThanOrEqual(listBox!.y);\n  361 |   await page.screenshot({\n  362 |     path: info.outputPath(\"view-switcher-mobile-dark.png\"),\n    at /workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts:359:23"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T19:51:25.245Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-intake-evidence/popup-red-output/remaining-intake-CI-02-nar-9048e--keyboard-selection-visible/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-intake-evidence/popup-red-output/remaining-intake-CI-02-nar-9048e--keyboard-selection-visible/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-intake-evidence/popup-red-output/remaining-intake-CI-02-nar-9048e--keyboard-selection-visible/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts",
+                    "column": 23,
+                    "line": 359
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c321fe834c9adb562776-068be6867c5af2f7bee3",
+          "file": "remaining-intake.spec.ts",
+          "line": 335,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T19:51:24.749Z",
+    "duration": 4616.491,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "file": "apps/web/test/browser/remaining-modules.spec.ts",
+  "before": [
+    {
+      "file": "apps/web/test/browser/remaining-modules.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 486,
+      "fingerprint": "33e115194230d772767d40ce9ef9e855370ea36a7ee90ba0feba0563f6947f89"
+    }
+  ],
+  "after": [
+    {
+      "file": "apps/web/test/browser/remaining-modules.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 515,
+      "fingerprint": "c74cdf3448592374784d818b0d4f89512e9a0cfc89e0b13ed9c33afd0a9bd0fd"
+    }
+  ],
+  "review": "This browser specification owns bounded MS07 Workspace filter layout, MS08 current-page task grouping/scope and MS09 public-form presentation regression contracts using the canonical fixture boundary. This change only adds observable keyboard focus prerequisites to the existing MS08 phone case; it adds no fixtures, queries, authority, application behavior, helper abstraction or scenario responsibility. Assertions stay next to their keypresses to expose the expected focus handoffs. Only the two new aria-expanded inspections include a background trigger hidden by the canonical modal Select; visible option focus and all original trigger and result checks remain. Other test cases and original action/outcome statements are byte-preserved. A module split would be unrelated churn for this synchronization repair.",
+  "keyboardCallback": {
+    "beforeNonblank": 30,
+    "afterNonblank": 59,
+    "beforeFingerprint": "8b7b9f030a94141422bd25bb6ed62f2b30491f8c5534e07200a360424805e31f",
+    "afterFingerprint": "e446b32e857bb9fde448c6d412938cac9aa53f9f9fd751eec2450a5fc7644eff",
+    "over80": false
+  },
+  "unchangedFunctionSignals": true,
+  "registryEdited": false,
+  "scope": "focused canonical AST scan only; no full architecture gate claimed"
+}

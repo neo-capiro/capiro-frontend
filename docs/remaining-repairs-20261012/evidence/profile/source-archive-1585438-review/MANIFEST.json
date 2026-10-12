@@ -1,0 +1,43 @@
+{
+  "sealedUTC": "2026-10-12T22:41:20.052848+00:00",
+  "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "status": "PASS_ARCHIVE_INTEGRITY_ONLY",
+  "files": [
+    {
+      "path": "DRAFT-PRESERVATION.json",
+      "bytes": 235,
+      "sha256": "1a3bc097f11cdd01bca2cb86698739889d9fc155648850894dfd7c3b7acd99d5"
+    },
+    {
+      "path": "MEMBER-VERIFICATION.jsonl",
+      "bytes": 3191486,
+      "sha256": "242cff3f85977fbeaa3ddb84cf0227bb9f7332d0b48da782744a23aaee876440"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 2179,
+      "sha256": "9dbf1f786696905a2fe5f1c14edbf23ffd900d63287f6c73e825bbf27d36a03b"
+    },
+    {
+      "path": "REVIEW.json",
+      "bytes": 1539,
+      "sha256": "12c472f79f08d2508a401010e46349972b3a5467bce7c656a14b62a2e6e4c879"
+    },
+    {
+      "path": "verification.log",
+      "bytes": 739,
+      "sha256": "a43f5a0bb0b3cf7ee9ca9d5bc4a4247d27da17ee5b8fcd08b10d9031b6ec9dd5"
+    },
+    {
+      "path": "verify-archive.py",
+      "bytes": 8890,
+      "sha256": "5bbb155b26680034a1d81c24055928fac008ac2eda6192ef2e4ba44a177ceeb1"
+    }
+  ],
+  "fileCount": 6,
+  "bytes": 3205068,
+  "excluded": [
+    "MANIFEST.json (self)",
+    "MANIFEST.sha256 (manifest digest)"
+  ]
+}

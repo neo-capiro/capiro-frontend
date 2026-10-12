@@ -1,0 +1,200 @@
+const imgIcon = "https://www.figma.com/api/mcp/asset/a12b51ad-5f17-46f6-8e15-d1e617cbdd33.svg";
+const imgIcon1 = "https://www.figma.com/api/mcp/asset/85b05c1d-3350-4233-a31b-c7f775ee59bb.svg";
+const imgIcon2 = "https://www.figma.com/api/mcp/asset/ced4e67b-b3c3-4ec8-92f2-60a771d0011b.svg";
+
+type V2ContactFieldProps = {
+  className?: string;
+  label?: string;
+  showChevron?: boolean;
+  type?: "Line";
+  value?: string;
+};
+
+function V2ContactField({ className, label = "Name *", showChevron = false, type = "Line", value = "Jordan Park" }: V2ContactFieldProps) {
+  return (
+    <div className={className || "[word-break:break-word] content-stretch flex flex-col gap-[var(--theme(spacing.1.5),6px)] items-start justify-center relative w-[582px]"} data-node-id="431:41485">
+      <p className="font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[12px] text-[color:var(--foreground,#0a0a0a)] w-full" data-node-id="431:41488">
+        {label}
+      </p>
+      <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex font-['Geist:Regular'] font-normal h-[36px] items-center leading-[1.45] overflow-clip px-[var(--theme(spacing.3),12px)] py-[9px] relative rounded-[var(--radius-md,8px)] shrink-0 text-[13px] tracking-[-0.039px] w-full" data-node-id="431:41489" data-name="Input">
+        <p className="flex-[1_0_0] min-w-px relative text-[color:var(--foreground,#0a0a0a)]" data-node-id="431:41490">
+          {value}
+        </p>
+        {showChevron && (
+          <p className="h-[17px] relative shrink-0 text-[color:var(--muted-foreground,#78716c)] w-[12px]" data-node-id="431:41491">
+            ⌄
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default function EmailComposeConnectedMailbox() {
+  return (
+    <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col items-start overflow-clip relative rounded-[var(--radius-xl,12px)] shadow-[0px_16px_40px_-12px_rgba(12,10,9,0.18),0px_2px_6px_0px_rgba(12,10,9,0.05)] size-full" data-node-id="435:82802" data-name="Email compose · Connected mailbox">
+      <div className="content-stretch flex gap-[var(--theme(spacing.3),12px)] items-center overflow-clip p-[var(--theme(spacing.6),24px)] relative shrink-0 w-full" data-node-id="435:82803" data-name="Modal header">
+        <p className="[word-break:break-word] flex-[1_0_0] font-['Geist:Medium'] font-medium leading-[1.3] min-w-px relative text-[20px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.3px]" data-node-id="435:82804">
+          New email
+        </p>
+        <a className="content-stretch cursor-pointer flex gap-[8px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0 size-[36px]" data-node-id="435:82805" data-name="Close modal">
+          <div className="relative shrink-0 size-[16px]" data-node-id="I435:82805;12:383" data-name="Icon">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon} />
+          </div>
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I435:82805;12:385">
+            ​
+          </p>
+        </a>
+      </div>
+      <div className="content-stretch flex flex-col gap-[var(--theme(spacing.4),16px)] items-start overflow-clip pb-[var(--theme(spacing.6),24px)] px-[var(--theme(spacing.6),24px)] relative shrink-0 w-full" data-node-id="435:82806" data-name="Modal body">
+        <div className="content-stretch flex gap-[var(--theme(spacing.2),8px)] items-center overflow-clip relative shrink-0 w-full" data-node-id="435:82807" data-name="To and copied recipients">
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[12px] text-[color:var(--foreground,#0a0a0a)] whitespace-nowrap" data-node-id="435:82808">
+            To
+          </p>
+          <p className="[word-break:break-word] flex-[1_0_0] font-['Geist:Regular'] font-normal leading-[1.45] min-w-px relative text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px]" data-node-id="435:82809">{`Jordan Park <jordan.park@anduril-demo.com>`}</p>
+          <a className="content-stretch cursor-pointer flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[44px]" data-node-id="435:82810" data-name="Show Cc">
+            <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I435:82810;12:385">
+              Cc
+            </p>
+          </a>
+          <a className="content-stretch cursor-pointer flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[48px]" data-node-id="435:82811" data-name="Show Bcc">
+            <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I435:82811;12:385">
+              Bcc
+            </p>
+          </a>
+        </div>
+        <a className="content-stretch cursor-pointer flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[132px]" data-node-id="435:82813" data-name="Add recipient">
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I435:82813;12:385">
+            + Add recipient
+          </p>
+        </a>
+        <div className="[word-break:break-word] content-stretch flex gap-[var(--theme(spacing.3),12px)] items-start overflow-clip relative shrink-0 w-full" data-node-id="435:82814" data-name="Sender mailbox">
+          <p className="font-['Geist:Medium'] font-medium h-[17px] leading-[1.2] relative shrink-0 text-[12px] text-[color:var(--foreground,#0a0a0a)] w-[36px]" data-node-id="435:82815">
+            From
+          </p>
+          <p className="flex-[1_0_0] font-['Geist:Regular'] font-normal leading-[1.45] min-w-px relative text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px]" data-node-id="435:82816">
+            Your connected mailbox (Settings → Personal)
+          </p>
+        </div>
+        <V2ContactField className="content-stretch flex flex-col gap-[var(--theme(spacing.1.5),6px)] items-start justify-center relative shrink-0 w-full" label="Subject" value="FY27 funding review" />
+        <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col items-start overflow-clip relative rounded-[var(--radius-md,8px)] shrink-0 w-full" data-node-id="435:82818" data-name="Email rich text editor">
+          <div className="content-stretch flex gap-[var(--theme(spacing.1),4px)] items-start overflow-clip p-[var(--theme(spacing.3),12px)] relative shrink-0 w-full" data-node-id="435:82819" data-name="Formatting toolbar">
+            <div className="content-stretch flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[32px]" data-node-id="435:82820" data-name="Format bold">
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="I435:82820;12:385">
+                B
+              </p>
+            </div>
+            <div className="content-stretch flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[32px]" data-node-id="435:82821" data-name="Format italic">
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="I435:82821;12:385">
+                I
+              </p>
+            </div>
+            <div className="content-stretch flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[32px]" data-node-id="435:82822" data-name="Format underline">
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="I435:82822;12:385">
+                U
+              </p>
+            </div>
+            <div className="content-stretch flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[50px]" data-node-id="435:82823" data-name="Format list">
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="I435:82823;12:385">
+                List
+              </p>
+            </div>
+            <div className="content-stretch flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[106px]" data-node-id="435:82824" data-name="Attach a file">
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="I435:82824;12:385">
+                Attach file
+              </p>
+            </div>
+          </div>
+          <div className="content-stretch flex flex-col gap-[var(--theme(spacing.4),16px)] h-[180px] items-start overflow-clip p-[var(--theme(spacing.4),16px)] relative shrink-0 w-full" data-node-id="435:82825" data-name="Message body">
+            <div className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[0] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] w-full whitespace-pre-wrap" data-node-id="435:82826">
+              <p className="leading-[1.45] mb-0">Hi,</p>
+              <p className="leading-[1.45] mb-0">​</p>
+              <p className="leading-[1.45] mb-0">Could we review the revised FY27 funding summary next week? I can share the briefing materials in advance.</p>
+              <p className="leading-[1.45] mb-0">​</p>
+              <p className="leading-[1.45]">Best,</p>
+            </div>
+          </div>
+        </div>
+        <div className="[word-break:break-word] content-stretch flex flex-col font-['Geist:Regular'] font-normal gap-[var(--theme(spacing.1.5),6px)] items-start overflow-clip relative shrink-0 w-full" data-node-id="435:82827" data-name="Automatic email signature">
+          <p className="leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] w-full" data-node-id="435:82828">
+            Signature (added automatically)
+          </p>
+          <div className="leading-[0] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] w-full" data-node-id="435:82829">
+            <p className="leading-[1.45] mb-0">Jordan Clayton</p>
+            <p className="leading-[1.45]">Chief Executive Officer · Capiro</p>
+          </div>
+        </div>
+        <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex gap-[var(--theme(spacing.2),8px)] items-start overflow-clip p-[var(--theme(spacing.3),12px)] relative shrink-0 w-full" data-node-id="435:83132" data-name="Email attachment">
+          <p className="[word-break:break-word] flex-[1_0_0] font-['Geist:Regular'] font-normal leading-[1.45] min-w-px relative text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px]" data-node-id="435:83140">
+            FY27 briefing.pdf · 240 KB
+          </p>
+          <a className="content-stretch cursor-pointer flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[32px]" data-node-id="435:83141" data-name="Remove attachment">
+            <div className="relative shrink-0 size-[16px]" data-node-id="I435:83141;12:383" data-name="Icon">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon} />
+            </div>
+            <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I435:83141;12:385">
+              ​
+            </p>
+          </a>
+        </div>
+      </div>
+      <div className="content-stretch flex gap-[var(--theme(spacing.2),8px)] items-start overflow-clip pb-[var(--theme(spacing.6),24px)] pt-[16px] px-[var(--theme(spacing.6),24px)] relative shrink-0 w-full" data-node-id="435:82831" data-name="Modal footer">
+        <button className="bg-[var(--card,white)] border border-[var(--input,#e7e5e4)] border-solid content-stretch cursor-pointer drop-shadow-[0px_1px_1px_rgba(12,10,9,0.05)] flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[164px]" data-node-id="435:82832" data-name="Rewrite email with Meri">
+          <div className="relative shrink-0 size-[16px]" data-node-id="I435:82832;12:377" data-name="Icon">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+          </div>
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I435:82832;12:379">
+            Rewrite with Meri
+          </p>
+        </button>
+        <div className="flex-[1_0_0] h-[10px] min-w-px relative" data-node-id="435:82833" data-name="Footer spacer" />
+        <a className="bg-[var(--card,white)] border border-[var(--input,#e7e5e4)] border-solid content-stretch cursor-pointer drop-shadow-[0px_1px_1px_rgba(12,10,9,0.05)] flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[88px]" data-node-id="435:82834" data-name="Cancel email">
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I435:82834;12:379">
+            Cancel
+          </p>
+        </a>
+        <a className="content-stretch cursor-pointer drop-shadow-[0px_1px_1px_rgba(12,10,9,0.14)] flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[92px]" data-node-id="435:82835" data-name="Send email">
+          <div aria-hidden className="absolute inset-0 pointer-events-none rounded-[var(--radius-lg,10px)]" style={{ backgroundImage: "linear-gradient(166.5824149187099deg, rgb(36, 36, 36) 0%, rgb(10, 10, 10) 100%)" }} />
+          <div className="relative shrink-0 size-[16px]" data-node-id="I435:82835;12:371" data-name="Icon">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon2} />
+          </div>
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--primary-foreground,white)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I435:82835;12:373">
+            Send
+          </p>
+          <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_0px_0px_rgba(255,255,255,0.14)]" />
+        </a>
+      </div>
+    </div>
+  );
+}
+
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+
+These styles are contained in the design: v2/Title L: Font(family: "Geist", style: Medium, size: 20, weight: 500, lineHeight: 1.2999999523162842, letterSpacing: -1.5), v2/Button: Font(family: "Geist", style: Medium, size: 14, weight: 500, lineHeight: 1.2000000476837158, letterSpacing: -0.5), v2/Label: Font(family: "Geist", style: Medium, size: 12, weight: 500, lineHeight: 1.2000000476837158, letterSpacing: 0), v2/Small: Font(family: "Geist", style: Regular, size: 13, weight: 400, lineHeight: 1.4500000476837158, letterSpacing: -0.30000001192092896), v2/Body: Font(family: "Geist", style: Regular, size: 14, weight: 400, lineHeight: 1.4500000476837158, letterSpacing: -0.5), v2/Caption: Font(family: "Geist", style: Regular, size: 12, weight: 400, lineHeight: 1.399999976158142, letterSpacing: 0), v2/shadow-xs: Effect(type: DROP_SHADOW, color: #0C0A090D, offset: (0, 1), radius: 2, spread: 0), v2/Black gradient: , v2/metal-shadow: Effect(type: INNER_SHADOW, color: #FFFFFF24, offset: (0, 1), radius: 0, spread: 0); Effect(type: DROP_SHADOW, color: #0C0A0924, offset: (0, 1), radius: 2, spread: 0), v2/shadow-lift: Effect(type: DROP_SHADOW, color: #0C0A090D, offset: (0, 2), radius: 6, spread: 0); Effect(type: DROP_SHADOW, color: #0C0A092E, offset: (0, 16), radius: 40, spread: -12).
+
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## v2/Button
+**Node ID:** 12:388
+
+shadcn/ui <Button> (new-york v4). h-9 px-3.5 rounded-\[10px\] text-sm font-medium. Primary | Outline (shadow-xs) | Ghost. Chevron = <Select> trigger look.
+
+## v2/Contact field
+**Node ID:** 431:41487
+
+Contact drawer and email compose fields. Line for short values, Multiline for notes. Label and Value are editable. Matches the Geist Capiro 3.1 field treatment.
+
+## icon/sparkle
+**Node ID:** 4:9
+
+Lucide-style sparkle icon. Recolor via the vector stroke.
+
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.

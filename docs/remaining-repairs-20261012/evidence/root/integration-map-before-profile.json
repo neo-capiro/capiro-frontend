@@ -1,0 +1,51 @@
+{
+  "checkedAt": "2026-10-12T20:17:25.603042+00:00",
+  "integratedHead": "29f61166565f568045286baa49b4386f8836faf7",
+  "mapping": [
+    {
+      "owner": "objectives_work_intel_review",
+      "source": "e3d1cbb91a31cadff90898fcf2143ff5ce17318e",
+      "integration": "b46a1379ffa37c4e6f8676f286768552294e3060"
+    },
+    {
+      "owner": "prospects_review",
+      "source": "685e55039d5d3945c76085513cde8bc6c33cb55d",
+      "integration": "ceed53a8c49e07c88eef064bc821a2d60a7af71d"
+    },
+    {
+      "owner": "core_intake_review",
+      "source": "ced1d1b428f57a5cd8628ece6222924c0ebcf0f2",
+      "integration": "8daaf2822f282fa1f764cf795a2bdb5668928beb"
+    },
+    {
+      "owner": "modules_settings_review",
+      "source": "b5eaadd031580edca79e9d99de2c0ab14d59997c",
+      "integration": "cfbbe5f51ddfe1aef72e5afdb40dd86cd7e2cc8f"
+    },
+    {
+      "owner": "root",
+      "source": "24641d784f36dbb1d8ca558ed41ad4c6e22bf9ab",
+      "integration": "24641d784f36dbb1d8ca558ed41ad4c6e22bf9ab"
+    },
+    {
+      "owner": "calendar_relationships_review",
+      "source": "16fb50f9578cca86189b2e303f0918ddebc60413",
+      "integration": "a18ce6edcaf9e7158d19835415f77fa551b41b6f"
+    },
+    {
+      "owner": "calendar_relationships_review",
+      "source": "3195ffab57584054a714ff5bd025063fba363929",
+      "integration": "29f61166565f568045286baa49b4386f8836faf7",
+      "scope": "test completion barrier only; production unchanged"
+    }
+  ],
+  "excludedHistoricalCommit": "24ac231749b9e8dc9b778cf318f3f94e74d168ad",
+  "excludedReason": "Superseded cross-lane callback; timeline will reuse existing URL intent and canonical QuickLog owner",
+  "sourcePins": {
+    "main": "02c02d95bdf3949662b9123f425271c6491ffdab",
+    "portfolio": "c330cebbd021eb984b4bf64ae13dbb991ae6b1c0",
+    "meri": "3cc30ff3182e8050d563516607866cf07efe2aef",
+    "modules": "50155cbbf0e4df1eecba22cbfc9b2c35bff87e0a"
+  },
+  "pending": "Profile source and final combined qualification"
+}

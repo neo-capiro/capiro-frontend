@@ -1,0 +1,71 @@
+:root {
+  --background: #f5f5f4;
+  --card: #fff;
+  --foreground: #0a0a0a;
+  --muted: #f5f5f4;
+  --muted-foreground: #78716c;
+  --border: #e7e5e4;
+  --input: #e7e5e4;
+  --radius: 10px;
+  --border-strong: #d6d3d1;
+  --font-newsreader: "Newsreader", serif;
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  color: var(--foreground);
+  background: var(--card);
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+button,
+textarea,
+input {
+  font: inherit;
+}
+button {
+  color: inherit;
+}
+button:not(:disabled) {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+button:focus-visible,
+a:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 3px;
+}
+a {
+  color: inherit;
+}
+p,
+h1,
+h2 {
+  margin: 0;
+}
+img {
+  display: block;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+[data-slot="dialog-overlay"] {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #0006;
+}
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 3px;
+}

@@ -1,0 +1,38 @@
+.header {
+  height: 65px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--card);
+}
+
+@media (max-width: 680px) {
+  .header {
+    gap: 8px;
+    padding: 0 12px;
+  }
+}
+
+@media (max-width: 680px) {
+  .header.mobileModeRow {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 52px 54px;
+    grid-template-areas: "brand actions" "modes modes";
+    height: 108px;
+    gap: 0;
+  }
+  .mobileModeRow > :nth-last-child(3) {
+    grid-area: brand;
+  }
+  .mobileModeRow > :nth-last-child(2) {
+    grid-area: modes;
+    justify-self: center;
+  }
+  .mobileModeRow > :last-child {
+    grid-area: actions;
+    justify-self: end;
+  }
+}
