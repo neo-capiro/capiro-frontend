@@ -7,10 +7,10 @@ import {
   publicFormToken,
   publicPlannerFormOperations,
 } from "../../../shared/capiro/operations/planner-public-forms";
-import { ActionButton, Panel, StatusPanel } from "../../../shared/module-ui";
+import { ActionButton, StatusPanel } from "../../../shared/module-ui";
 import { FormAnswers } from "./FormAnswers";
 import { visibleFormQuestions } from "./form-model";
-import styles from "./planner.module.css";
+import styles from "./public-form.module.css";
 const api = createCapiroApi(publicPlannerFormOperations);
 
 export function PublicForm({ token }: { token: string }) {
@@ -55,11 +55,15 @@ function FormRequest({ token, reload }: { token: string; reload: () => void }) {
     return () => controller.abort();
   }, [token]);
   return (
-    <main style={{ maxWidth: 680, margin: "48px auto", padding: "0 20px" }}>
-      <p className={styles.eyebrow}>Capiro · Request form</p>
-      <StatusPanel loading={!form && !error} error={error} onRetry={reload}>
-        {form && <PublicFormQuestions key={token} token={token} form={form} />}
-      </StatusPanel>
+    <main className={styles.page}>
+      <section className={styles.card} aria-label="Public request form">
+        <p className={styles.eyebrow}>Capiro Planner</p>
+        <StatusPanel loading={!form && !error} error={error} onRetry={reload}>
+          {form && (
+            <PublicFormQuestions key={token} token={token} form={form} />
+          )}
+        </StatusPanel>
+      </section>
     </main>
   );
 }
@@ -129,7 +133,11 @@ function PublicFormQuestions({
     }
   };
   return (
-    <Panel title={form.name} description={form.description}>
+    <>
+      <h1 className={styles.title}>{form.name}</h1>
+      {form.description && (
+        <p className={styles.description}>{form.description}</p>
+      )}
       {submitted ? (
         <div role="status">
           <h2>{form.confirmationMessage || "Your request was received."}</h2>
@@ -147,11 +155,7 @@ function PublicFormQuestions({
         </div>
       ) : (
         <form onSubmit={(event) => void submit(event)}>
-          <fieldset
-            disabled={busy}
-            className={styles.stack}
-            style={{ border: 0, padding: 0 }}
-          >
+          <fieldset disabled={busy} className={styles.questions}>
             <FormAnswers
               fields={fields}
               answers={answers}
@@ -160,13 +164,19 @@ function PublicFormQuestions({
               }
               onFiles={setFiles}
             />
-            <ActionButton primary type="submit">
-              {busy ? "Submitting…" : "Submit request"}
-            </ActionButton>
+            {error && (
+              <p className={styles.error} role="alert">
+                {error}
+              </p>
+            )}
+            <div>
+              <ActionButton primary type="submit">
+                {busy ? "Submitting…" : "Submit request"}
+              </ActionButton>
+            </div>
           </fieldset>
-          {error && <p role="alert">{error}</p>}
         </form>
       )}
-    </Panel>
+    </>
   );
 }
