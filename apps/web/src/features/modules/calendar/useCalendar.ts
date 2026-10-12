@@ -12,13 +12,22 @@ import {
 } from "./agenda";
 import { calendarRange, currentCalendarDate, type CalendarView } from "./range";
 import { useAgendaSources } from "./useAgendaSources";
+import { calendarSelection } from "./selection";
 
 /** Calendar state lives independently of its month/week/agenda renderers. */
 export function useCalendar() {
-  const [date, setDate] = useState(currentCalendarDate);
-  const [view, setView] = useState<CalendarView>("month");
   const router = useRouter();
   const params = useSearchParams();
+  const [fallbackDate] = useState(currentCalendarDate);
+  const { date, view } = calendarSelection(params, fallbackDate);
+  const changeSelection = (nextDate: string, nextView: CalendarView) => {
+    const next = new URLSearchParams(params.toString());
+    next.set("date", nextDate);
+    next.set("view", nextView);
+    router.replace(`/modules/calendar?${next}`);
+  };
+  const setDate = (nextDate: string) => changeSelection(nextDate, view);
+  const setView = (nextView: CalendarView) => changeSelection(date, nextView);
   const scope = useSelectedClient();
   const clientId = scope.state === "authorized-client" ? scope.client.id : "";
   const [newMeeting, setNewMeeting] = useState(false);

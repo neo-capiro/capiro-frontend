@@ -56,7 +56,9 @@ test("Calendar picker and history share verified scope and discard a held former
     otherClientId,
   );
   await page.getByLabel("Calendar client scope").selectOption("");
-  await expect(page).toHaveURL("/modules/calendar");
+  await expect(page).toHaveURL(
+    /\/modules\/calendar\?date=2026-10-08&view=agenda$/,
+  );
   await expect(page.getByLabel("Calendar client scope")).toHaveValue("");
   expect(reads).toContain("master");
 });
