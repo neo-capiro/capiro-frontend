@@ -12,6 +12,7 @@ const fenceSchema = z
 export type RecoveryContract<Data> = {
   schema: z.ZodType<Data>;
   requestId: (data: Data) => string;
+  validateUpdate?: (previous: Data, next: Data) => void;
 };
 function decode<Data>(
   record: JournalEnvelope,
@@ -83,6 +84,7 @@ export function reserveRecovery<Data>(
   return locked(scope, assert, async () => {
     const existing = await current(scope);
     if (existing?.state === "pending") return decode(existing, contract);
+    if (existing?.requestId === requestId) throw new RecoveryStorageError();
     const value = contract.schema.parse(data);
     if (contract.requestId(value) !== requestId)
       throw new RecoveryStorageError();
@@ -120,6 +122,7 @@ export function updateRecovery<Data>(
     const value = contract.schema.parse(data);
     if (contract.requestId(value) !== requestId)
       throw new RecoveryStorageError();
+    contract.validateUpdate?.(decode(existing, contract), value);
     await writeJournalRecord(
       scope,
       await encryptJournal({

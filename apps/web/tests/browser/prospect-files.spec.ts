@@ -198,3 +198,172 @@ test("dismissed prospect retains historical files but cannot upload, including o
     fullPage: false,
   });
 });
+
+test("reload preserves the original upload confirmation without reuploading bytes", async ({
+  page,
+}) => {
+  const { writes } = await setup(page);
+  let storagePosts = 0,
+    confirms = 0;
+  await page.route("**/engagement/attachments/upload-url", (route) => {
+    const body = route.request().postDataJSON();
+    return json(route, {
+      url: "https://storage.example.test/upload",
+      s3Key: record.s3Key,
+      uploadIntentId: otherId,
+      requestId: body.requestId,
+      expiresAt: "2099-10-12T12:00:00Z",
+      fields: {
+        key: record.s3Key,
+        "Content-Type": "text/plain",
+        "x-amz-checksum-algorithm": "SHA256",
+        "x-amz-checksum-sha256": Buffer.from(checksum, "hex").toString(
+          "base64",
+        ),
+      },
+    });
+  });
+  await page.route("https://storage.example.test/upload", (route) => {
+    storagePosts++;
+    return route.fulfill({ status: 204 });
+  });
+  await page.route("**/engagement/attachments/confirm", (route) =>
+    ++confirms === 1 ? route.abort("connectionreset") : json(route, record),
+  );
+  await page.goto(`/portfolio/prospects/${prospectId}`);
+  const area = files(page);
+  await expect(area.getByText(record.fileName, { exact: true })).toBeVisible();
+  await area.getByLabel("Upload prospect file").setInputFiles({
+    name: "test.txt",
+    mimeType: "text/plain",
+    buffer: Buffer.from("hello"),
+  });
+  await area.getByRole("button", { name: "Upload file", exact: true }).click();
+  await expect(
+    area.getByRole("button", { name: "Recover original upload" }),
+  ).toBeEnabled();
+  await page.reload();
+  await expect(
+    area.getByRole("button", { name: "Recover original upload" }),
+  ).toBeEnabled();
+  await area.getByRole("button", { name: "Recover original upload" }).click();
+  await expect(area.getByText(/test.txt uploaded/)).toBeVisible();
+  expect(storagePosts).toBe(1);
+  expect(confirms).toBe(2);
+  expect(writes).toHaveLength(3);
+  expect(writes[0]!.body).toEqual({
+    prospectId,
+    fileName: "test.txt",
+    contentType: "text/plain",
+    checksumSha256: checksum,
+    requestId: expect.any(String),
+    contentLength: 5,
+  });
+  expect(writes[1]!.body).toEqual(writes[2]!.body);
+});
+
+test("lost upload-ticket response survives reload and requires exact original bytes before same-key recovery", async ({
+  page,
+}) => {
+  const { writes } = await setup(page);
+  let tickets = 0,
+    bytes = 0;
+  await page.route("**/engagement/attachments/upload-url", (route) => {
+    const body = route.request().postDataJSON();
+    if (++tickets === 1) return route.abort("connectionreset");
+    return json(route, {
+      url: "https://storage.example.test/upload",
+      s3Key: record.s3Key,
+      uploadIntentId: otherId,
+      requestId: body.requestId,
+      expiresAt: "2099-10-12T12:00:00Z",
+      fields: {
+        key: record.s3Key,
+        "Content-Type": "text/plain",
+        "x-amz-checksum-algorithm": "SHA256",
+        "x-amz-checksum-sha256": Buffer.from(checksum, "hex").toString(
+          "base64",
+        ),
+      },
+    });
+  });
+  await page.route("https://storage.example.test/upload", (route) => {
+    bytes++;
+    return route.fulfill({ status: 204 });
+  });
+  await page.route("**/engagement/attachments/confirm", (route) =>
+    json(route, record),
+  );
+  await page.goto(`/portfolio/prospects/${prospectId}`);
+  const area = files(page);
+  await area.getByLabel("Upload prospect file", { exact: true }).setInputFiles({
+    name: "test.txt",
+    mimeType: "text/plain",
+    buffer: Buffer.from("hello"),
+  });
+  await area.getByRole("button", { name: "Upload file", exact: true }).click();
+  await expect(
+    area.getByRole("button", { name: "Recover original upload", exact: true }),
+  ).toBeEnabled();
+  const original = structuredClone(writes[0]!.body);
+  await page.reload();
+  await area
+    .getByRole("button", { name: "Recover original upload", exact: true })
+    .click();
+  await expect(area.getByRole("alert")).toContainText(
+    "Reselect the exact original file",
+  );
+  expect(tickets).toBe(1);
+  await area
+    .getByLabel("Reselect original prospect file", { exact: true })
+    .setInputFiles({
+      name: "test.txt",
+      mimeType: "text/plain",
+      buffer: Buffer.from("wrong"),
+    });
+  await area
+    .getByRole("button", { name: "Recover original upload", exact: true })
+    .click();
+  await expect(area.getByRole("alert")).toContainText("same original file");
+  expect(tickets).toBe(1);
+  expect(bytes).toBe(0);
+  await area
+    .getByLabel("Reselect original prospect file", { exact: true })
+    .setInputFiles({
+      name: "test.txt",
+      mimeType: "text/plain",
+      buffer: Buffer.from("hello"),
+    });
+  await area
+    .getByRole("button", { name: "Recover original upload", exact: true })
+    .click();
+  await expect(area.getByText(/test.txt uploaded/)).toBeVisible();
+  expect(tickets).toBe(2);
+  expect(bytes).toBe(1);
+  expect(writes[1]!.body).toEqual(original);
+});
+
+test("unavailable browser recovery storage cannot issue an upload intent", async ({
+  page,
+}) => {
+  const { writes } = await setup(page);
+  await page.addInitScript(() =>
+    Object.defineProperty(window, "indexedDB", {
+      get() {
+        throw new DOMException("Synthetic blocked storage", "SecurityError");
+      },
+    }),
+  );
+  await page.goto(`/portfolio/prospects/${prospectId}`);
+  const area = files(page);
+  await expect(
+    area.getByRole("button", {
+      name: "Retry saved upload recovery",
+      exact: true,
+    }),
+  ).toBeVisible();
+  await expect(
+    area.getByRole("button", { name: "Upload file", exact: true }),
+  ).toBeDisabled();
+  expect(writes).toEqual([]);
+});

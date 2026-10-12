@@ -32,7 +32,7 @@ const recordSchema = z
     iv: z.instanceof(Uint8Array).refine((value) => value.length === 12),
     ciphertext: z
       .instanceof(ArrayBuffer)
-      .refine((value) => value.byteLength > 0 && value.byteLength < 100_000),
+      .refine((value) => value.byteLength > 0),
   })
   .strict();
 export async function encryptJournal(value: JournalEnvelope) {

@@ -1,0 +1,40 @@
+
+> @capiro/web@0.1.0 test:browser
+> playwright test prospect-files.spec.ts activity-command.spec.ts activity-command-recovery.spec.ts
+
+[WebServer] (node:224707) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 22 tests using 1 worker
+
+(node:224726) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/browser/activity-command-recovery.spec.ts:11:1 › reload restores the original body only after fresh Core authority; 404 permits only deliberate exact-key replay (6.0s)
+  ✓   2 tests/browser/activity-command-recovery.spec.ts:58:3 › a replacement Core actor never sees or dispatches the retained body after reload (4.4s)
+  ✓   3 tests/browser/activity-command-recovery.spec.ts:58:3 › a replacement Core tenant never sees or dispatches the retained body after reload (4.5s)
+  ✓   4 tests/browser/activity-command-recovery.spec.ts:89:1 › expiry hides the draft immediately; restoring the same current actor recovers the original without posting (3.8s)
+  ✓   5 tests/browser/activity-command-recovery.spec.ts:109:1 › current client authorization refusal holds recovery without decrypting or posting; explicit retry rereads authority (4.9s)
+  ✓   6 tests/browser/activity-command-recovery.spec.ts:132:1 › explicit acknowledgement erases the sensitive journal payload and permits the next intent after reload (5.1s)
+  ✓   7 tests/browser/activity-command-recovery.spec.ts:152:1 › closing the document and opening another tab recovers the journal without an automatic command call (5.5s)
+  ✓   8 tests/browser/activity-command.spec.ts:32:1 › activity saved and task pending are separate; explicit resume uses the latest read version (4.0s)
+  ✓   9 tests/browser/activity-command.spec.ts:74:1 › a date requires explicit zone; scheduled follow-up fits mobile and has no commitment controls (2.2s)
+  ✓  10 tests/browser/activity-command.spec.ts:122:1 › lost create plus nondisclosing 404 retain the exact original body and key for deliberate recovery (3.1s)
+  ✓  11 tests/browser/activity-command.spec.ts:150:1 › interrupting create retains its command across reopening and reads without another POST (3.5s)
+  ✓  12 tests/browser/activity-command.spec.ts:182:1 › actor replacement during assignee reread aborts creation and clears the former draft (3.2s)
+  ✓  13 tests/browser/activity-command.spec.ts:207:1 › wrong-context success is uncertain, cannot show saved activity and cannot be resent (3.3s)
+  ✓  14 tests/browser/activity-command.spec.ts:230:1 › stale resume discards its receipt and requires another read; a hidden task stays unavailable (4.2s)
+  ✓  15 tests/browser/prospect-files.spec.ts:40:1 › current prospect files retain readiness and do not expose unsupported actions (2.8s)
+  ✓  16 tests/browser/prospect-files.spec.ts:63:1 › upload loss retains one exact intent and confirms without reuploading bytes (3.3s)
+  ✓  17 tests/browser/prospect-files.spec.ts:121:1 › wrong lineage suppresses file links and upload without broadening the request (2.5s)
+  ✓  18 tests/browser/prospect-files.spec.ts:146:1 › deletion requires confirmation and current list, with no uncertain automatic retry (2.5s)
+  ✓  19 tests/browser/prospect-files.spec.ts:175:1 › dismissed prospect retains historical files but cannot upload, including on mobile (1.8s)
+  ✓  20 tests/browser/prospect-files.spec.ts:202:1 › reload preserves the original upload confirmation without reuploading bytes (3.8s)
+  ✓  21 tests/browser/prospect-files.spec.ts:265:1 › lost upload-ticket response survives reload and requires exact original bytes before same-key recovery (4.1s)
+  ✓  22 tests/browser/prospect-files.spec.ts:346:1 › unavailable browser recovery storage cannot issue an upload intent (1.9s)
+
+  22 passed (1.4m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

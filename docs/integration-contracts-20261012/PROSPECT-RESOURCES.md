@@ -68,9 +68,10 @@ converted client). The fixture was corrected to dismissed without broadening the
 schema. Final Files plus existing prospect overview/brief/conversion: 24/24.
 The 390px Workspace screenshot was inspected for field focus and overflow.
 
-Retained upload File objects/create seeds/manual save attempts are scoped in
-memory. View-close recovery is qualified; full document/browser restart recovery
-is not persisted or claimed. Interrupted/expired storage can remain unavailable:
+At the failed b5028cf candidate, retained upload File objects/create seeds/manual
+save attempts were scoped in memory. View-close recovery passed, but browser restart
+was not implemented. New failing reload baselines demonstrated all three missing
+recovery paths; the restart repair below supersedes that source limitation. Interrupted/expired storage can remain unavailable:
 there is no unsafe replacement key or speculative cleanup action. Existing signed
 URLs are short-lived bearer capabilities, not immediately revocable browser grants.
 The backend has no atomic PATCH-plus-version/CAS contract: current reads reduce
@@ -83,3 +84,51 @@ Architecture reports 400 visible size signals, 375 specifically reviewed and 25
 inherited unreviewed, with zero boundary errors or blocking findings. Eight changed
 or new functions have exact responsibility reviews; no guard rule was weakened.
 Initial lint/format failures are retained beside corrected terminal logs.
+
+## Restart repair design, 07:10 UTC
+
+Extend the same original-intent storage primitive to the three newly added prospect
+writers. Promote its ownership to shared session recovery now that both Portfolio
+and Modules use it. Keep transport and schema ownership separate: Files uses Core
+attachments; Workspace uses only registered fixed operations. Fresh Core actor,
+tenant and prospect/document reads precede restoring retained input; lifecycle
+cancellation remains in each existing boundary.
+
+Draft creation retains its exact original seed/request ID before POST. Upload
+retains metadata/digest, original ticket/key and whether bytes may have started;
+never persist the File or signed URL/fields. Recovery after bytes-start dispatches
+only original confirmation. Before bytes start, require reselecting identical
+name/type/length/digest bytes and refresh only the original upload intent. The
+browser cannot invent a replacement key after expiry or a nondisclosing response.
+
+Manual save retains reviewed input and unknown state before PATCH; on restart it
+must require fresh read-back again. PATCH and version remain separate backend
+operations with no invented CAS/idempotency contract. Current content is shown
+beside retained edits before any deliberate repeat. Journal acknowledgements follow
+only validated final receipts. Storage refusal/corruption blocks new writes rather
+than treating missing recovery as a new operation. Native/backend limits remain.
+
+
+The restart repair now uses shared/session/recovery as its sole storage owner.
+Encryption retains no upload File bytes or signed URL/fields. Current Core actor
+and resource reads precede restored input; browser selection never authorizes a
+write. A pending upload may claim bytes-started only once under the journal lock;
+later transitions cannot reset it or replace its storage key. Known Quicklog IDs,
+input and accepted version likewise cannot move backwards. An acknowledged request
+ID cannot be reserved again by a stale tab.
+
+The manual editor is mounted only after recovery checks complete. Its state key is
+the retained save ID, so restored edits replace cached initial fields. Uncertain
+edits are persisted before the interruptible preflight. Every restart requires a
+new explicit read-back; the user sees saved content beside retained edits. Existing
+backend PATCH/version separation, absent atomic CAS and native checks remain limits.
+
+Discovery evidence preserves the failed three reload baselines, an initially fuzzy
+Document title locator (also matched New prospect document title), a preflight
+fixture that held hydration instead of the user save, and duplicate alerts for one
+failed file-list read. Locator matching is now exact; the preflight fixture arms on
+Save after initial hydration. Original write-count, original-body/key, interrupted
+zero-write and retained-edit assertions remain. Duplicate source alert presentation
+was corrected instead of loosening the existing single-alert test.
+
+Focused restart repair terminal results:22 command/Files browser,16 prospect Workspace browser and61 command/journal/prospect units passed. Types and full format passed. Lint0errors/76retainedwarnings. Architecture405signals/380reviewed/25inheritedunreviewed/0blocking. No final combined or native acceptance is transferred from these focused results.

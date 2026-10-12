@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   decryptJournal,
   encryptJournal,
-} from "../src/shared/portfolio/recovery/journal-crypto";
+} from "../src/shared/session/recovery/journal-crypto";
 const scope = '["synthetic-command","tenant-a","actor-a","client-a"]';
 const requestId = "a1000000-0000-4000-8000-000000000008";
 const input = {
@@ -51,5 +51,79 @@ describe("opaque recovery journal", () => {
     );
     const invalid = { ...value, data: input.data };
     await expect(encryptJournal(invalid)).rejects.toThrow();
+  });
+});
+
+describe("concurrent intent progress cannot be overwritten", () => {
+  it("keeps command body, known IDs and accepted version monotonic", async () => {
+    const { validateCommandRecoveryUpdate } =
+      await import("../src/features/portfolio/client-profile/quick-log/command-recovery");
+    const { commandInput } = await import("./activity-command-fixtures");
+    const value = {
+      input: commandInput,
+      known: { version: 7, taskId: "task-one" },
+    };
+    expect(() =>
+      validateCommandRecoveryUpdate(value, {
+        ...value,
+        known: { ...value.known, version: 8 },
+      }),
+    ).not.toThrow();
+    expect(() =>
+      validateCommandRecoveryUpdate(value, {
+        ...value,
+        known: { ...value.known, version: 6 },
+      }),
+    ).toThrow();
+    expect(() =>
+      validateCommandRecoveryUpdate(value, { ...value, known: { version: 7 } }),
+    ).toThrow();
+    expect(() =>
+      validateCommandRecoveryUpdate(value, {
+        ...value,
+        input: {
+          ...commandInput,
+          activity: { ...commandInput.activity, title: "Changed original" },
+        },
+      }),
+    ).toThrow();
+  });
+  it("claims upload bytes once and never persists File or signed credentials", async () => {
+    const { retainedUpload, uploadRecoveryContract } =
+      await import("../src/features/portfolio/files/prospect-upload-recovery");
+    const { prepareProspectUpload } =
+      await import("../src/features/portfolio/files/prospect-upload");
+    const { actor, prospectId, requestId } =
+      await import("./prospect-resources-fixtures");
+    const prepared = await prepareProspectUpload(
+      prospectId,
+      actor,
+      new File(["hello"], "test.txt", { type: "text/plain" }),
+      requestId,
+      () => {},
+    );
+    const original = retainedUpload(prepared);
+    const ticket = { ...original, s3Key: "original/key" };
+    const started = { ...ticket, bytesStarted: true };
+    expect(() =>
+      uploadRecoveryContract.validateUpdate(original, ticket),
+    ).not.toThrow();
+    expect(() =>
+      uploadRecoveryContract.validateUpdate(ticket, started),
+    ).not.toThrow();
+    expect(() =>
+      uploadRecoveryContract.validateUpdate(started, started),
+    ).toThrow();
+    expect(() =>
+      uploadRecoveryContract.validateUpdate(started, ticket),
+    ).toThrow();
+    expect(() =>
+      uploadRecoveryContract.validateUpdate(ticket, {
+        ...ticket,
+        s3Key: "replacement/key",
+      }),
+    ).toThrow();
+    expect(original).not.toHaveProperty("file");
+    expect(original).not.toHaveProperty("ticket");
   });
 });

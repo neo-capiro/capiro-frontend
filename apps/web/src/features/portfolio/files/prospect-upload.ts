@@ -18,7 +18,9 @@ export type ProspectUpload = {
   requestId: string;
   prospectId: string;
   actor: ClientWriter;
-  file: File;
+  file?: File;
+  metadata: { name: string; type: string; size: number };
+  s3Key?: string;
   checksumSha256: string;
   ticket?: z.infer<typeof prospectTicketSchema>;
   bytesStarted?: boolean;
@@ -45,6 +47,7 @@ export async function prepareProspectUpload(
     prospectId,
     actor,
     file,
+    metadata: { name: file.name, type: contentType(file)!, size: file.size },
     requestId,
     checksumSha256: Array.from(new Uint8Array(digest), (byte) =>
       byte.toString(16).padStart(2, "0"),
@@ -58,6 +61,7 @@ export async function uploadProspectFile(
   assert: () => void,
   stage: (value: string) => void,
   transport: typeof fetch = fetch,
+  persist: (attempt: ProspectUpload) => Promise<void> = async () => {},
 ) {
   const guard = () => {
     signal.throwIfAborted();
@@ -65,12 +69,16 @@ export async function uploadProspectFile(
   };
   const metadata = {
     prospectId: attempt.prospectId,
-    fileName: attempt.file.name,
-    contentType: contentType(attempt.file)!,
+    fileName: attempt.metadata.name,
+    contentType: attempt.metadata.type,
     checksumSha256: attempt.checksumSha256,
   };
   guard();
-  if (!attempt.ticket) {
+  if (!attempt.bytesStarted && !attempt.file)
+    throw new Error(
+      "Reselect the exact original file before recovering this upload.",
+    );
+  if (!attempt.ticket && !attempt.bytesStarted) {
     stage("Preparing the original upload intent…");
     const ticket = await api.request(
       "core",
@@ -95,7 +103,7 @@ export async function uploadProspectFile(
         body: {
           ...metadata,
           requestId: attempt.requestId,
-          contentLength: attempt.file.size,
+          contentLength: attempt.metadata.size,
         },
         signal,
       },
@@ -105,21 +113,28 @@ export async function uploadProspectFile(
       throw new Error(
         "The upload service returned an invalid HTTPS destination.",
       );
+    if (attempt.s3Key && attempt.s3Key !== ticket.s3Key)
+      throw new Error("The original upload returned a different storage key.");
     attempt.ticket = ticket;
+    attempt.s3Key = ticket.s3Key;
+    await persist(attempt);
+    guard();
   }
   if (!attempt.bytesStarted) {
-    if (Date.parse(attempt.ticket.expiresAt) <= Date.now())
+    if (Date.parse(attempt.ticket!.expiresAt) <= Date.now())
       throw new Error(
         "The original upload intent expired. It cannot be replaced or replayed as a new upload here.",
       );
     const form = new FormData();
-    for (const [key, value] of Object.entries(attempt.ticket.fields))
+    for (const [key, value] of Object.entries(attempt.ticket!.fields))
       form.append(key, value);
-    form.append("file", attempt.file);
+    form.append("file", attempt.file!);
     guard();
     stage("Uploading the verified bytes…");
     attempt.bytesStarted = true;
-    const response = await transport(attempt.ticket.url, {
+    await persist(attempt);
+    guard();
+    const response = await transport(attempt.ticket!.url, {
       method: "POST",
       body: form,
       credentials: "omit",
@@ -134,6 +149,8 @@ export async function uploadProspectFile(
     attempt.bytesUploaded = true;
   }
   guard();
+  if (!attempt.s3Key)
+    throw new Error("The original upload storage key is unavailable.");
   stage("Confirming the original upload…");
   const file = await api.request(
     "core",
@@ -143,17 +160,17 @@ export async function uploadProspectFile(
         value.tenantId === attempt.actor.tenantId &&
         value.prospectId === attempt.prospectId &&
         value.uploadedByUserId === attempt.actor.userId &&
-        value.s3Key === attempt.ticket?.s3Key &&
+        value.s3Key === attempt.s3Key &&
         value.fileName === metadata.fileName &&
         value.contentType === metadata.contentType &&
-        value.byteSize === attempt.file.size &&
+        value.byteSize === attempt.metadata.size &&
         value.checksumSha256 === attempt.checksumSha256 &&
         value.calculatedSha256 === attempt.checksumSha256 &&
         value.source === "manual",
     ),
     {
       method: "POST",
-      body: { ...metadata, s3Key: attempt.ticket.s3Key },
+      body: { ...metadata, s3Key: attempt.s3Key },
       signal,
     },
   );

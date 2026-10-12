@@ -213,12 +213,14 @@ function ProspectFileSession({
         Preview and download links expire after five minutes. Refresh Files to
         request current links.
       </small>
-      {active && !upload.attempt && (
+      {active && (!upload.attempt || !upload.attempt.bytesStarted) && (
         <label>
-          Upload prospect file
+          {upload.attempt
+            ? "Reselect original prospect file"
+            : "Upload prospect file"}
           <input
             type="file"
-            disabled={!current || upload.busy}
+            disabled={!current || upload.busy || !upload.ready}
             onChange={(event) => setSelected(event.target.files?.[0])}
           />
         </label>
@@ -228,15 +230,18 @@ function ProspectFileSession({
       )}
       {upload.attempt && (
         <p role="status">
-          Original upload retained: {upload.attempt.file.name}. Recovery reuses
-          its request and storage key; another copy will not be uploaded
+          Original upload retained: {upload.attempt.metadata.name}. Recovery
+          reuses its request and storage key; another copy will not be uploaded
           automatically.
         </p>
       )}
       <button
         className="button"
         disabled={
-          !current || upload.busy || (!upload.attempt && (!active || !selected))
+          !current ||
+          !upload.ready ||
+          upload.busy ||
+          (!upload.attempt && (!active || !selected))
         }
         onClick={() => void upload.run(selected)}
       >
@@ -246,6 +251,16 @@ function ProspectFileSession({
             ? "Recover original upload"
             : "Upload file"}
       </button>
+      {!upload.ready && (
+        <div role={upload.recoveryError && !query.error ? "alert" : "status"}>
+          <p>{upload.recoveryError ?? "Checking saved upload recovery…"}</p>
+          {upload.recoveryError && (
+            <button className="button" onClick={upload.retry}>
+              Retry saved upload recovery
+            </button>
+          )}
+        </div>
+      )}
       {upload.stage && <p role="status">{upload.stage}</p>}
       <QueryState error={upload.error ?? error} />
       {uncertain && (

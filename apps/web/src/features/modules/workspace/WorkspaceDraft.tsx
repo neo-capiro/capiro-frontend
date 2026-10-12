@@ -20,6 +20,7 @@ import {
   assertProspectDraft,
 } from "./prospects/manual-draft";
 import { useProspectDraftSave } from "./prospects/useProspectDraftSave";
+import type { ProspectWriter } from "./prospects/recovery-authority";
 import { ProspectDraftExport } from "./prospects/ProspectDraftExport";
 import { NewsletterWorkflow } from "./newsletter/NewsletterWorkflow";
 import styles from "./workspace.module.css";
@@ -28,13 +29,14 @@ function DraftEditor({
   draft,
   onClose,
   reload,
+  prospectSave,
 }: {
   draft: WorkspaceDraftDocument;
   onClose: () => void;
   reload: () => void;
+  prospectSave?: ReturnType<typeof useProspectDraftSave>;
 }) {
-  const prospectSave = useProspectDraftSave(draft, reload);
-  const initial = prospectSave.retained?.input ?? manualDraftInput(draft);
+  const initial = prospectSave?.retained?.input ?? manualDraftInput(draft);
   const [title, setTitle] = useState(initial.title);
   const [sections, setSections] = useState(initial.sections);
   const names = initial.names;
@@ -48,7 +50,7 @@ function DraftEditor({
   );
   async function save() {
     if (draft.prospectId) {
-      await prospectSave.save({ title, sections, names });
+      await prospectSave?.save({ title, sections, names });
       return;
     }
     try {
@@ -82,8 +84,8 @@ function DraftEditor({
             disabled={
               update.pending ||
               snapshot.pending ||
-              prospectSave.pending ||
-              Boolean(prospectSave.retained?.uncertain) ||
+              prospectSave?.pending ||
+              Boolean(prospectSave?.retained?.uncertain) ||
               !title.trim()
             }
             onClick={save}
@@ -92,18 +94,18 @@ function DraftEditor({
           </ActionButton>
         </div>
       </header>
-      {draft.prospectId && (
+      {draft.prospectId && prospectSave && (
         <>
           <p>
             Immutable prospect origin: {draft.prospectId}. Manual edits only.
           </p>
-          {prospectSave.error && <p role="alert">{prospectSave.error}</p>}
-          {prospectSave.readback && (
+          {prospectSave?.error && <p role="alert">{prospectSave?.error}</p>}
+          {prospectSave?.readback && (
             <details>
               <summary>Current saved content</summary>
-              <h2>{prospectSave.readback.docTitle}</h2>
+              <h2>{prospectSave?.readback.docTitle}</h2>
               {Object.entries(
-                prospectSave.readback.config.sectionContent ?? {},
+                prospectSave?.readback.config.sectionContent ?? {},
               ).map(([name, content]) => (
                 <section key={name}>
                   <h3>{name}</h3>
@@ -112,16 +114,18 @@ function DraftEditor({
               ))}
             </details>
           )}
-          {prospectSave.message && <p role="status">{prospectSave.message}</p>}
-          {prospectSave.retained?.uncertain && (
+          {prospectSave?.message && (
+            <p role="status">{prospectSave?.message}</p>
+          )}
+          {prospectSave?.retained?.uncertain && (
             <p role="status">
               The previous save is not confirmed. No automatic retry will run.
               Read current document before another save.
             </p>
           )}
           <ActionButton
-            disabled={prospectSave.pending}
-            onClick={() => void prospectSave.readCurrent()}
+            disabled={prospectSave?.pending}
+            onClick={() => void prospectSave?.readCurrent()}
           >
             Read current document
           </ActionButton>
@@ -132,7 +136,8 @@ function DraftEditor({
               prospectId: draft.prospectId,
             }}
             disabled={
-              prospectSave.pending || Boolean(prospectSave.retained?.uncertain)
+              prospectSave?.pending ||
+              Boolean(prospectSave?.retained?.uncertain)
             }
           />
         </>
@@ -207,6 +212,41 @@ function DraftEditor({
   );
 }
 
+function ProspectDraftEditor({
+  draft,
+  actor,
+  onClose,
+  reload,
+}: {
+  draft: WorkspaceDraftDocument;
+  actor: ProspectWriter;
+  onClose: () => void;
+  reload: () => void;
+}) {
+  const save = useProspectDraftSave(draft, actor, reload);
+  if (!save.ready)
+    return (
+      <section role={save.recoveryError ? "alert" : "status"}>
+        <p>{save.recoveryError ?? "Checking saved prospect edits…"}</p>
+        {save.recoveryError && (
+          <ActionButton onClick={save.retry}>
+            Retry saved document recovery
+          </ActionButton>
+        )}
+        <ActionButton onClick={onClose}>← Workspace</ActionButton>
+      </section>
+    );
+  return (
+    <DraftEditor
+      key={save.retained?.requestId ?? "current"}
+      draft={draft}
+      onClose={onClose}
+      reload={reload}
+      prospectSave={save}
+    />
+  );
+}
+
 export function WorkspaceDraft({
   id,
   prospectId,
@@ -252,14 +292,29 @@ export function WorkspaceDraft({
         me.reload();
       }}
     >
-      {query.data && (
-        <DraftEditor
-          key={query.data.id}
-          draft={query.data}
-          onClose={onClose}
-          reload={query.reload}
-        />
-      )}
+      {query.data &&
+        (query.data.prospectId ? (
+          me.data && (
+            <ProspectDraftEditor
+              key={`${me.data.tenant.id}:${me.data.user.id}:${me.data.user.clerkUserId}:${query.data.id}`}
+              actor={{
+                tenantId: me.data.tenant.id,
+                userId: me.data.user.id,
+                ownerId: me.data.user.clerkUserId,
+              }}
+              draft={query.data}
+              onClose={onClose}
+              reload={query.reload}
+            />
+          )
+        ) : (
+          <DraftEditor
+            key={query.data.id}
+            draft={query.data}
+            onClose={onClose}
+            reload={query.reload}
+          />
+        ))}
     </StatusPanel>
   );
 }

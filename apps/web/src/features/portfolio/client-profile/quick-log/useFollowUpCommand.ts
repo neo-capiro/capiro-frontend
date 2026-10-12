@@ -12,7 +12,7 @@ import {
   reserveRecovery,
   updateRecovery,
   RecoveryStorageError,
-} from "@/shared/portfolio/recovery/journal";
+} from "@/shared/session/recovery/journal";
 import {
   retainedCommandContract,
   verifyCommandAuthority,

@@ -10,7 +10,7 @@ required in evidence/command-restart-red; the published candidate is failed.
 
 Keep Core's existing command protocol and current-client writer semantics. The
 feature owns its strict retained input/known-receipt schema and fresh Core `me`
-and client read; shared Portfolio recovery owns the browser journal, encryption
+and client read; shared session recovery owns the browser journal, encryption
 and storage consistency. No backend endpoint, authorization bypass, global
 session credential or copied backend implementation is introduced.
 
@@ -82,3 +82,5 @@ launcher, positive acceptance), but their source text was not written before
 context compaction and is not on this mounted filesystem. Exact byte restoration
 has been requested; these independent artifacts have not been reconstructed or
 claimed as run. The local red/green control is explicitly separate.
+
+The storage primitive moved without duplication to shared/session/recovery when prospect writers became real consumers. Known input/IDs/version updates are additionally checked under the journal lock; a stale tab cannot regress accepted lineage or reuse an acknowledged request UUID.

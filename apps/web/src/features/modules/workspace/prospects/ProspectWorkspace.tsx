@@ -97,10 +97,11 @@ export function ProspectWorkspace({
             {me.data!.user.clerkUserId && (
               <Panel title="New manual document">
                 <ProspectDraftCreate
-                  key={`${me.data!.tenant.id}:${me.data!.user.clerkUserId}:${prospectId}`}
+                  key={`${me.data!.tenant.id}:${me.data!.user.id}:${me.data!.user.clerkUserId}:${prospectId}`}
                   prospectId={prospectId}
                   tenantId={me.data!.tenant.id}
                   ownerId={me.data!.user.clerkUserId}
+                  userId={me.data!.user.id}
                   onCreated={onOpen}
                 />
               </Panel>

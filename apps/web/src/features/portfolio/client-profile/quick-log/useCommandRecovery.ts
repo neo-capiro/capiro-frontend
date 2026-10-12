@@ -2,7 +2,7 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import type { QueryClient } from "@tanstack/react-query";
 import type { ApiClient } from "@/shared/portfolio/api/http";
-import { readRecovery } from "@/shared/portfolio/recovery/journal";
+import { readRecovery } from "@/shared/session/recovery/journal";
 import { assertClientWriter, type ClientWriter } from "./authority";
 import {
   recoveryScope,

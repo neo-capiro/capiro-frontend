@@ -1,5 +1,5 @@
 import { test, expect, type Page } from "@playwright/test";
-import { onlyLocalRequests, operationFixtures } from "./fixtures";
+import { onlyLocalRequests, operationFixtures, testIdentity } from "./fixtures";
 import { moduleRouteFixtures } from "./module-route-fixtures";
 import {
   draft,
@@ -59,7 +59,9 @@ test("prospect creation recovers its original seed and key after a lost receipt"
     page.getByRole("button", { name: "Recover original draft" }),
   ).toBeEnabled();
   await page.getByRole("button", { name: "Recover original draft" }).click();
-  await expect(page.getByLabel("Document title")).toHaveValue(draft.docTitle);
+  await expect(page.getByLabel("Document title", { exact: true })).toHaveValue(
+    draft.docTitle,
+  );
   expect(writes).toHaveLength(2);
   expect(writes[0]!.body).toEqual(writes[1]!.body);
   expect(writes[0]!.body).toEqual({
@@ -158,7 +160,9 @@ for (const field of ["prospectId", "tenantId"] as const)
     await expect(page.getByRole("main").getByRole("alert")).toContainText(
       "does not match",
     );
-    await expect(page.getByLabel("Document title")).toHaveCount(0);
+    await expect(
+      page.getByLabel("Document title", { exact: true }),
+    ).toHaveCount(0);
     expect(writes).toEqual([]);
   });
 test("prospect Newsletter origin cannot open its sending workflow", async ({
@@ -214,8 +218,10 @@ test("mobile prospect manual editor preserves keyboard fields and stays in the v
   await page.setViewportSize({ width: 390, height: 844 });
   await page.emulateMedia({ colorScheme: "dark" });
   await page.goto(detail);
-  await page.getByLabel("Document title").focus();
-  await expect(page.getByLabel("Document title")).toBeFocused();
+  await page.getByLabel("Document title", { exact: true }).focus();
+  await expect(
+    page.getByLabel("Document title", { exact: true }),
+  ).toBeFocused();
   await page.getByLabel("Body content").fill("Manual only");
   expect(
     await page.evaluate(
@@ -232,14 +238,14 @@ test("leaving during save preflight aborts the write and retains the uncertain e
   page,
 }) => {
   const { writes } = await setup(page);
-  let reads = 0,
+  let saving = false,
     started = false;
   let release!: () => void;
   const held = new Promise<void>((resolve) => {
     release = resolve;
   });
   await page.route("**/api/capiro/workspace.draft?*", async (route) => {
-    if (++reads === 2) {
+    if (saving && !started) {
       started = true;
       await held;
     }
@@ -247,6 +253,7 @@ test("leaving during save preflight aborts the write and retains the uncertain e
   });
   await page.goto(detail);
   await page.getByLabel("Body content").fill("Interrupted manual text");
+  saving = true;
   await page.getByRole("button", { name: "Save draft", exact: true }).click();
   await expect.poll(() => started).toBe(true);
   await page.getByRole("button", { name: "← Workspace", exact: true }).click();
@@ -285,3 +292,165 @@ test("expired creation sends one original request and clears the authenticated e
   ).toHaveCount(0);
   expect(writes).toHaveLength(1);
 });
+
+test("reload preserves the original prospect creation seed and request key", async ({
+  page,
+}) => {
+  const { writes, errors } = await setup(page);
+  let attempts = 0;
+  await page.route("**/api/capiro/workspace.prospect.create", (route) =>
+    ++attempts === 1
+      ? route.abort("connectionreset")
+      : route.fulfill({ json: draft }),
+  );
+  await page.goto(base);
+  await page.getByLabel("New prospect document title").fill(draft.docTitle);
+  await page.getByRole("button", { name: "Create manual draft" }).click();
+  await expect(
+    page.getByRole("button", { name: "Recover original draft" }),
+  ).toBeEnabled();
+  await page.reload();
+  await expect(
+    page.getByRole("button", { name: "Recover original draft" }),
+  ).toBeEnabled();
+  await page.getByRole("button", { name: "Recover original draft" }).click();
+  await expect(page.getByLabel("Document title", { exact: true })).toHaveValue(
+    draft.docTitle,
+  );
+  expect(writes).toHaveLength(2);
+  expect(writes[0]!.body).toEqual(writes[1]!.body);
+  expect(writes[0]!.body).toEqual({
+    body: {
+      prospectId,
+      docTitle: draft.docTitle,
+      requestId: expect.stringMatching(/^[a-f0-9-]{36}$/),
+    },
+  });
+  expect(errors).toEqual([]);
+});
+test("reload preserves uncertain manual edits and the read-back requirement", async ({
+  page,
+}) => {
+  const { writes } = await setup(page);
+  await page.route("**/api/capiro/workspace.draft.update", (route) =>
+    route.abort("connectionreset"),
+  );
+  await page.goto(detail);
+  await page.getByLabel("Body content").fill("Keep this draft");
+  await page.getByRole("button", { name: "Save draft", exact: true }).click();
+  await expect(page.getByText(/previous save is not confirmed/)).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Save draft", exact: true }),
+  ).toBeDisabled();
+  await page.reload();
+  await expect(page.getByLabel("Body content")).toHaveValue("Keep this draft");
+  await expect(
+    page.getByRole("button", { name: "Save draft", exact: true }),
+  ).toBeDisabled();
+  expect(writes).toHaveLength(1);
+  await page.getByRole("button", { name: "Read current document" }).click();
+  await expect(
+    page.getByRole("button", { name: "Save draft", exact: true }),
+  ).toBeEnabled();
+  expect(writes).toHaveLength(1);
+});
+
+for (const kind of ["creation", "manual-save"] as const) {
+  test(`replacement Core actor cannot restore the former ${kind} input after reload`, async ({
+    page,
+  }) => {
+    const { writes } = await setup(page);
+    await page.route("**/api/capiro/workspace.prospect.create", (route) =>
+      route.abort("connectionreset"),
+    );
+    await page.route("**/api/capiro/workspace.draft.update", (route) =>
+      route.abort("connectionreset"),
+    );
+    await page.goto(kind === "creation" ? base : detail);
+    if (kind === "creation") {
+      await page
+        .getByLabel("New prospect document title")
+        .fill("Former actor private seed");
+      await page
+        .getByRole("button", { name: "Create manual draft", exact: true })
+        .click();
+      await expect(
+        page.getByRole("button", {
+          name: "Recover original draft",
+          exact: true,
+        }),
+      ).toBeEnabled();
+    } else {
+      await page.getByLabel("Body content").fill("Former actor private edits");
+      await page
+        .getByRole("button", { name: "Save draft", exact: true })
+        .click();
+      await expect(
+        page.getByText(/previous save is not confirmed/),
+      ).toBeVisible();
+      await expect.poll(() => writes.length).toBe(1);
+    }
+    await page.route("**/api/capiro/me.read?*", (route) =>
+      route.fulfill({
+        json: {
+          ...testIdentity,
+          user: {
+            ...testIdentity.user,
+            id: otherId,
+            clerkUserId: "replacement-user",
+          },
+        },
+      }),
+    );
+    await page.reload();
+    if (kind === "creation") {
+      await expect(page.getByLabel("New prospect document title")).toHaveValue(
+        "",
+      );
+      await expect(
+        page.getByRole("button", {
+          name: "Recover original draft",
+          exact: true,
+        }),
+      ).toHaveCount(0);
+    } else {
+      await expect(page.getByLabel("Body content")).toHaveValue("");
+      await expect(
+        page.getByText(/previous save is not confirmed/),
+      ).toHaveCount(0);
+    }
+    expect(writes).toHaveLength(1);
+  });
+}
+
+for (const kind of ["creation", "manual-save"] as const) {
+  test(`unavailable browser journal blocks ${kind} without a backend write`, async ({
+    page,
+  }) => {
+    const { writes } = await setup(page);
+    await page.addInitScript(() =>
+      Object.defineProperty(window, "indexedDB", {
+        get() {
+          throw new DOMException("Synthetic blocked storage", "SecurityError");
+        },
+      }),
+    );
+    await page.goto(kind === "creation" ? base : detail);
+    await expect(
+      page.getByRole("button", {
+        name:
+          kind === "creation"
+            ? "Retry saved draft recovery"
+            : "Retry saved document recovery",
+        exact: true,
+      }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("button", {
+        name: kind === "creation" ? "Create manual draft" : "Save draft",
+        exact: true,
+      }),
+    ).toHaveCount(0);
+    expect(writes).toEqual([]);
+  });
+}

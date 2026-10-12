@@ -1,7 +1,6 @@
 import { z } from "zod";
 import type { ApiClient } from "@/shared/portfolio/api/http";
-import { ApiError } from "@/shared/portfolio/api/http";
-import { identitySchema } from "@/shared/portfolio/auth/identity";
+import { verifyCoreWriter } from "@/shared/portfolio/auth/verify-writer";
 import type { ClientWriter } from "./authority";
 import { activityCommandInputSchema } from "./command-contracts";
 
@@ -19,7 +18,24 @@ export const retainedCommandSchema = z
   })
   .strict();
 export type RetainedCommand = z.infer<typeof retainedCommandSchema>;
+export function validateCommandRecoveryUpdate(
+  previous: RetainedCommand,
+  next: RetainedCommand,
+) {
+  if (JSON.stringify(previous.input) !== JSON.stringify(next.input))
+    throw new Error("The original command body cannot change.");
+  for (const key of ["commandId", "activityId", "taskId"] as const)
+    if (previous.known[key] && previous.known[key] !== next.known[key])
+      throw new Error("Known command lineage cannot change.");
+  if (
+    previous.known.version !== undefined &&
+    (next.known.version === undefined ||
+      next.known.version < previous.known.version)
+  )
+    throw new Error("Known command version cannot move backwards.");
+}
 export const retainedCommandContract = {
+  validateUpdate: validateCommandRecoveryUpdate,
   schema: retainedCommandSchema,
   requestId: (record: RetainedCommand) => record.input.requestId,
 };
@@ -43,19 +59,7 @@ export async function verifyCommandAuthority(
     assert();
   };
   guard();
-  const identity = await api.request("core", "me", identitySchema, { signal });
-  guard();
-  if (
-    identity.user.id.toLowerCase() !== actor.userId.toLowerCase() ||
-    identity.tenant?.id.toLowerCase() !== actor.tenantId.toLowerCase() ||
-    !["standard_user", "user_admin", "capiro_admin"].includes(
-      identity.role ?? "",
-    )
-  )
-    throw new ApiError(
-      403,
-      "The current Core session cannot recover this saved command.",
-    );
+  await verifyCoreWriter(api, actor, signal, guard);
   await api.request(
     "core",
     `clients/${encodeURIComponent(clientId)}`,
