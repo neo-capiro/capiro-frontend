@@ -1,0 +1,55 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> capiro-frontend@0.1.0 build
+> npm run build --workspace @capiro/meri-client && npm run build --workspace @capiro/web
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @capiro/meri-client@0.1.0 build
+> tsc -p tsconfig.json
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @capiro/web@0.1.0 build
+> next build
+
+▲ Next.js 16.4.0 (Turbopack)
+✓ Running next.config.ts took 22ms
+Error: Diagnostic prevented external request before network: https://registry.npmjs.org/-/npm/v1/security/advisories/bulk
+    at globalThis.fetch (/workspace/scratch/853fba62b1f1/capiro-frontend-consolidation-20261011/.cited-offline-diagnostic.cjs:5:19)
+    at fetchJSON (/workspace/scratch/853fba62b1f1/capiro-frontend-ui-audit/node_modules/next/dist/lib/upgrade/prepare-upgrade.js:233:32)
+    at readNpmAdvisories (/workspace/scratch/853fba62b1f1/capiro-frontend-ui-audit/node_modules/next/dist/lib/upgrade/prepare-upgrade.js:309:24)
+    at getUpgradeAssessment (/workspace/scratch/853fba62b1f1/capiro-frontend-ui-audit/node_modules/next/dist/lib/upgrade/prepare-upgrade.js:108:31)
+    at assessUpgrade (/workspace/scratch/853fba62b1f1/capiro-frontend-ui-audit/node_modules/next/dist/lib/upgrade/nudge.js:208:28)
+    at nudgeUpgrade (/workspace/scratch/853fba62b1f1/capiro-frontend-ui-audit/node_modules/next/dist/lib/upgrade/nudge.js:496:125)
+
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 1 error:
+./apps/web/src/app
+Error: Could not find the Next.js package (next/package.json)
+Resolved from: /workspace/scratch/853fba62b1f1/capiro-frontend-consolidation-20261011/apps/web/src/app
+Filesystem root used for resolution: /workspace/scratch/853fba62b1f1/capiro-frontend-consolidation-20261011
+
+Possible causes:
+  - node_modules is being reorganized by a concurrent install (e.g. pnpm adding a package with a `next` peer dependency). This is transient and should clear once the install completes.
+  - node_modules/next was removed, renamed, or has a broken symlink.
+  - The workspace root is incorrect — see turbopack.root in the Next.js config docs for how to configure it.
+  - In a monorepo, the Next.js package may only exist in a directory above the closest directory containing a package manager lockfile. The workspace root is detected by locating the nearest package manager lockfile.
+  - Next.js is installed globally rather than as a project dependency. This is not supported; install it locally.
+
+Note: To ensure a hermetic build and a portable cache, files outside of the workspace root are not compiled.
+
+https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory
+
+
+    at <unknown> (Filesystem root used for resolution: /workspace/scratch/853fba62b1f1/capiro-frontend-consolidation-20261011)
+    at <unknown> (https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory)
+npm error Lifecycle script `build` failed with error:
+npm error code 1
+npm error path /workspace/scratch/853fba62b1f1/capiro-frontend-consolidation-20261011/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/scratch/853fba62b1f1/capiro-frontend-consolidation-20261011/apps/web
+npm error command failed
+npm error command sh -c next build

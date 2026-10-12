@@ -1,0 +1,151 @@
+{
+  "origin": "http://127.0.0.1:34873",
+  "browser": "borrowed /tmp/chromium preview only; no AWS sandbox qualification",
+  "groups": [],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/meri/fixture/cited-answer"
+    },
+    {
+      "method": "GET",
+      "path": "/_next/static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2"
+    },
+    {
+      "method": "GET",
+      "path": "/design/home/wordmark.png"
+    },
+    {
+      "method": "GET",
+      "path": "/design/cited-answer/mode-meri.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/design/cited-answer/mode-portfolio.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/_next/static/chunks/18932pv-ebku5.css"
+    },
+    {
+      "method": "GET",
+      "path": "/_next/static/chunks/3yffr8hk38l6q.css"
+    },
+    {
+      "method": "GET",
+      "path": "/design/cited-answer/mode-modules.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/design/cited-answer/quick-log.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/design/cited-answer/calendar.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/design/cited-answer/search.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/design/cited-answer/updates.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/design/cited-answer/profile.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/design/cited-answer/plus.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/_next/static/chunks/2hz8yws_wswjz.js"
+    },
+    {
+      "method": "GET",
+      "path": "/_next/static/chunks/3srfjz42u14tx.js"
+    },
+    {
+      "method": "GET",
+      "path": "/_next/static/chunks/3dmm3v_fq28gc.js"
+    },
+    {
+      "method": "GET",
+      "path": "/_next/static/chunks/06p9qvhv171xu.js"
+    },
+    {
+      "method": "GET",
+      "path": "/_next/static/chunks/turbopack-3-ry682tkyiqk.js"
+    },
+    {
+      "method": "GET",
+      "path": "/_next/static/chunks/0umf92h1sb77c.js"
+    },
+    {
+      "method": "GET",
+      "path": "/_next/static/chunks/1i-fwmv_jiuo3.js"
+    },
+    {
+      "method": "GET",
+      "path": "/_next/static/chunks/2y57jqt-trt-x.js"
+    },
+    {
+      "method": "GET",
+      "path": "/design/cited-answer/conversations.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/design/cited-answer/files.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/design/cited-answer/runs.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/design/cited-answer/approvals.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/design/cited-answer/memory.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/design/cited-answer/routines.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/design/cited-answer/data-access.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/design/cited-answer/assistant-sparkle.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/design/cited-answer/external.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/design/cited-answer/plus-secondary.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/design/cited-answer/chevron.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/design/cited-answer/send.svg"
+    },
+    {
+      "method": "GET",
+      "path": "/design/cited-answer/meri-ink.png"
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "screenshots": [],
+  "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   background: 'rgb(239, 239, 239)',\n+   borderStyle: 'outset',\n+   borderWidth: '2px'\n-   background: 'rgb(255, 255, 255)',\n-   borderStyle: 'solid',\n-   borderWidth: '1px'\n  }\n\n    at file:///workspace/scratch/853fba62b1f1/capiro-frontend-consolidation-20261011/docs/qualification/candidates/cited-consolidation-20261011/browser-check.mjs:43:10\n    at runNextTicks (node:internal/process/task_queues:65:5)\n    at process.processImmediate (node:internal/timers:502:9)"
+}

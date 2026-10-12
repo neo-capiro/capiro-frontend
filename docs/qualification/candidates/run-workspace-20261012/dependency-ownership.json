@@ -1,0 +1,13 @@
+{
+  "strategy": "task-owned copy of pinned installed dependencies; no install or outside-root symlink for Turbopack",
+  "borrowedRoots": [
+    "/workspace/scratch/853fba62b1f1/capiro-frontend-consolidation-20261011/node_modules",
+    "/workspace/scratch/853fba62b1f1/capiro-frontend-consolidation-20261011/apps/portfolio-web/node_modules"
+  ],
+  "ownedIgnoredCopies": [
+    "node_modules",
+    "apps/portfolio-web/node_modules"
+  ],
+  "borrowedBytesModified": false,
+  "versionsOrLockModified": false
+}
