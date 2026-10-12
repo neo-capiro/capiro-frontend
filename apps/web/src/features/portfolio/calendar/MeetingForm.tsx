@@ -36,7 +36,11 @@ export function MeetingForm({
         (!selectedClientId ||
           currentClients.some((client) => client.id === selectedClientId))));
   const [validation, setValidation] = useState("");
-  const mutation = useSaveMeeting(meeting?.id, () => onOpenChange(false));
+  const mutation = useSaveMeeting(
+    meeting?.id,
+    () => onOpenChange(false),
+    clientId ?? selectedClientId,
+  );
   const local = (instant: string | undefined) =>
     instant
       ? Temporal.Instant.from(instant)
@@ -46,6 +50,7 @@ export function MeetingForm({
       : "";
   function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (mutation.isPending || mutation.uncertain) return;
     if (!clientAvailable) {
       setValidation("Refresh the client list before saving the meeting.");
       return;
@@ -69,11 +74,11 @@ export function MeetingForm({
       setValidation("");
       mutation.mutate({
         subject: String(form.get("subject")).trim(),
-        description: form.get("description"),
+        description: String(form.get("description") ?? ""),
         startsAt,
         endsAt,
         ...(scope ? { clientId: scope } : {}),
-        ...(location ? { location } : {}),
+        location,
       });
     } catch {
       setValidation("Enter valid start and end date/times.");
@@ -83,7 +88,7 @@ export function MeetingForm({
     <Dialog
       open={open}
       onOpenChange={(value) => {
-        if (!mutation.isPending) onOpenChange(value);
+        if (!mutation.isPending && !mutation.uncertain) onOpenChange(value);
       }}
       title={meeting ? "Edit meeting" : "New meeting"}
       description={`Meeting times use ${zone}. New meetings are private until explicitly shared.`}
@@ -182,7 +187,9 @@ export function MeetingForm({
         <QueryState error={mutation.error} />
         <button
           className="button primary"
-          disabled={mutation.isPending || !clientAvailable}
+          disabled={
+            mutation.isPending || mutation.uncertain || !clientAvailable
+          }
         >
           {mutation.isPending ? "Saving…" : "Save meeting"}
         </button>
