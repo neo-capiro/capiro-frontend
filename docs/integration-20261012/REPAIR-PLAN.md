@@ -38,3 +38,15 @@ and deployment-source static checks. Parent coordinates independent re-review of
 the runtime and deployment-source delta. No AWS build/push/project change,
 deployment, provider action, billing operation or paid model run is authorized.
 All 337 Portfolio native acceptance rows remain open.
+
+
+The subsequent frozen9fa5e2c full run is also preserved:881passed,1failed,
+zero skipped/flaky. Its sole failure was an immediate request-array assertion
+after an asynchronous preparation retry click. The trace records a second POST,
+202receipt and queued dialog; it started2ms before the assertion observed only
+the first route callback. The follow-up changes one browser test file, adding
+bounded positive request observation while retaining exact count, identical
+payload/key and cancellation. An exact2 count is also checked after cancellation.
+The adjacent selected-depth submit assertion gets the same asynchronous wait.
+All10 focused repeated cases pass; a new complete frozen-source gate is required.
+Application and deployment source are unchanged from9fa5e2c.

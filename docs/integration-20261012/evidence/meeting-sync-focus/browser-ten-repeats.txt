@@ -1,0 +1,36 @@
+
+> @capiro/web@0.1.0 test:browser
+> playwright test tests/browser/meeting-preparation.spec.ts --grep ambiguous submit|source settings --repeat-each=5 --workers=3
+
+[WebServer] (node:116083) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 10 tests using 3 workers
+
+(node:116112) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:116114) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:116113) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 tests/browser/meeting-preparation.spec.ts:267:1 › ambiguous submit retries the same key and cancel observes the saved job (12.9s)
+  ✓   1 tests/browser/meeting-preparation.spec.ts:267:1 › ambiguous submit retries the same key and cancel observes the saved job (13.0s)
+  ✓   3 tests/browser/meeting-preparation.spec.ts:267:1 › ambiguous submit retries the same key and cancel observes the saved job (13.6s)
+  ✓   5 tests/browser/meeting-preparation.spec.ts:325:1 › source settings enforce client receipt, save board IDs, and send selected depth (17.7s)
+  ✓   4 tests/browser/meeting-preparation.spec.ts:325:1 › source settings enforce client receipt, save board IDs, and send selected depth (17.9s)
+  ✓   6 tests/browser/meeting-preparation.spec.ts:325:1 › source settings enforce client receipt, save board IDs, and send selected depth (17.4s)
+(node:116675) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:116668) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   8 tests/browser/meeting-preparation.spec.ts:267:1 › ambiguous submit retries the same key and cancel observes the saved job (9.7s)
+  ✓   7 tests/browser/meeting-preparation.spec.ts:267:1 › ambiguous submit retries the same key and cancel observes the saved job (10.2s)
+  ✓  10 tests/browser/meeting-preparation.spec.ts:325:1 › source settings enforce client receipt, save board IDs, and send selected depth (10.4s)
+  ✓   9 tests/browser/meeting-preparation.spec.ts:325:1 › source settings enforce client receipt, save board IDs, and send selected depth (11.7s)
+
+  10 passed (54.9s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

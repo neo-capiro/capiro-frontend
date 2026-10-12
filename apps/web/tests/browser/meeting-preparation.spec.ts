@@ -304,6 +304,8 @@ test("ambiguous submit retries the same key and cancel observes the saved job", 
   await drawer
     .getByRole("button", { name: "Retry same preparation request" })
     .click();
+  // A click does not wait for the asynchronous preparation preflight.
+  await expect.poll(() => bodies.length).toBe(2);
   expect(bodies).toHaveLength(2);
   expect(bodies[1]).toEqual(bodies[0]);
   await page
@@ -316,6 +318,7 @@ test("ambiguous submit retries the same key and cancel observes the saved job", 
   await expect(
     drawer.getByText("Preparation cancelled", { exact: true }),
   ).toBeVisible();
+  expect(bodies).toHaveLength(2);
   expect(unexpected).toEqual([]);
 });
 
@@ -380,7 +383,7 @@ test("source settings enforce client receipt, save board IDs, and send selected 
   });
   await settings.getByRole("button", { name: "Generate with Meri" }).click();
   expect(saved).toEqual({ boardIds: ["123", "987654321098765432109876"] });
-  expect(submitted).toMatchObject({ depth: "deep" });
+  await expect.poll(() => submitted).toMatchObject({ depth: "deep" });
   expect(unexpected).toEqual([]);
 });
 
