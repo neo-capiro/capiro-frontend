@@ -1,4 +1,5 @@
 "use client";
+import { SelectField } from "@/shared/portfolio/ui/SelectField";
 import { TextareaField } from "@/shared/portfolio/ui/TextareaField";
 import type { Facility } from "./contracts";
 import styles from "./facilities-manager.module.css";
@@ -30,24 +31,22 @@ export function FacilityFields({ facility }: { facility?: Facility }) {
             defaultValue={facility?.city ?? ""}
           />
         </label>
-        <label>
-          State / territory
-          <select
-            name="state"
-            autoComplete="address-level1"
-            defaultValue={facility?.state ?? ""}
-          >
-            <option value="">Not set</option>
-            {facility?.state && !stateCodes.includes(facility.state) && (
-              <option value={facility.state}>{facility.state}</option>
-            )}
-            {stateCodes.map((code) => (
-              <option key={code} value={code}>
-                {code}
-              </option>
-            ))}
-          </select>
-        </label>
+        <SelectField
+          label="State / territory"
+          name="state"
+          autoComplete="address-level1"
+          defaultValue={facility?.state ?? ""}
+        >
+          <option value="">Not set</option>
+          {facility?.state && !stateCodes.includes(facility.state) && (
+            <option value={facility.state}>{facility.state}</option>
+          )}
+          {stateCodes.map((code) => (
+            <option key={code} value={code}>
+              {code}
+            </option>
+          ))}
+        </SelectField>
         <label>
           ZIP code
           <input

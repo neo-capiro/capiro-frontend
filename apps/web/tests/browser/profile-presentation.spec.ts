@@ -1,6 +1,6 @@
 import { test, expect, type Page } from "@playwright/test";
 import { clientId, installFixtures, json } from "./fixtures";
-import { facility } from "../facility-map-fixtures";
+import { boundaryFixture, facility } from "../facility-map-fixtures";
 import type { Activity } from "../../src/features/portfolio/client-profile/contracts";
 
 const activity = (id: string, kind: string, occurredAt: string): Activity => ({
@@ -16,10 +16,6 @@ const activity = (id: string, kind: string, occurredAt: string): Activity => ({
   settledAt: null,
   pinned: false,
 });
-const activities = [
-  activity("today", "call", "2026-10-12T12:00:00Z"),
-  activity("yesterday", "note", "2026-10-11T12:00:00Z"),
-];
 const file = {
   id: "60000000-0000-4000-8000-000000000001",
   clientId,
@@ -39,6 +35,31 @@ const file = {
 };
 async function setup(page: Page) {
   const unexpected = await installFixtures(page);
+  const dates = await page.evaluate(() => {
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+    return [today.toISOString(), yesterday.toISOString()];
+  });
+  const activities = [
+    activity("today", "call", dates[0]!),
+    activity("yesterday", "note", dates[1]!),
+  ];
+  await page.route("**/intelligence/district-nexus/boundaries?*", (route) =>
+    json(route, {
+      status: "current",
+      vintage: "119",
+      generatedAt: "2026-10-11T00:00:00Z",
+      districtCount: 2,
+      source: "census_cartographic_500k",
+      hash: "synthetic-boundary",
+      warnings: [],
+    }),
+  );
+  await page.route(
+    "**/intelligence/district-nexus/boundaries/C/geojson",
+    (route) => json(route, boundaryFixture),
+  );
   await page.route(`**/clients/${clientId}/facilities`, (route) =>
     json(route, [facility]),
   );
@@ -124,7 +145,6 @@ for (const width of [1440, 360]) {
     page,
   }, info) => {
     await page.setViewportSize({ width, height: 1040 });
-    await page.clock.setFixedTime(new Date("2026-10-12T18:00:00Z"));
     const unexpected = await setup(page);
     await page.goto(`/portfolio/${clientId}`);
     const timeline = page.getByRole("region", {
@@ -181,7 +201,7 @@ for (const width of [1440, 360]) {
         name: "Activity actions: note yesterday",
         exact: true,
       }),
-    ).toBeEnabled();
+    ).toHaveCount(0);
     await page.screenshot({
       path: info.outputPath(`timeline-expanded-${width}.png`),
       fullPage: true,
@@ -202,8 +222,6 @@ for (const width of [1440, 360]) {
     await expect(quickLog.getByLabel("Title", { exact: true })).toBeFocused();
     await page.keyboard.press("Escape");
     await expect(quickLog).not.toBeVisible();
-    await expect(expanded).toBeVisible();
-    await page.keyboard.press("Escape");
     await expect(expanded).not.toBeVisible();
     await expect(
       timeline.getByText("note yesterday", { exact: true }),
@@ -223,10 +241,10 @@ for (const width of [1440, 360]) {
     });
     await sources.getByRole("button", { name: "manual", exact: true }).click();
     await expect(
-      page.getByRole("cell", { name: "pdf Report.pdf", exact: true }),
+      page.getByRole("button", { name: "pdf Report.pdf", exact: true }),
     ).toBeVisible();
     await expect(
-      page.getByRole("cell", { name: "txt Capability.txt", exact: true }),
+      page.getByRole("button", { name: "txt Capability.txt", exact: true }),
     ).not.toBeVisible();
     await sources.getByRole("button", { name: "All", exact: true }).click();
     await page

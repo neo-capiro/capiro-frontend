@@ -113,7 +113,16 @@ function CurrentFacilitiesManager({
             facility={selected}
             inline
             onClose={() => setEditing(null)}
-            onRestart={() => setRevision((value) => value + 1)}
+            onRestart={() => {
+              // The writer already validated the deliberately reviewed source.
+              // Keep drafts until that choice, then adopt its current record.
+              if (selected)
+                setEditing(
+                  facilities.find((facility) => facility.id === selected.id) ??
+                    null,
+                );
+              setRevision((value) => value + 1);
+            }}
           />
         )}
       </div>
