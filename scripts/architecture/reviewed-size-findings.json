@@ -242,15 +242,6 @@
     "reviewedOn": "2026-10-11"
   },
   {
-    "file": "apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx",
-    "kind": "function",
-    "symbol": "ActivityTimeline",
-    "fingerprint": "bed4a3575c212136c24a958ab46948381b88018db78b65157f197de2bc170510",
-    "reason": "Owns presentation of one current activity feed, its existing search/kind/date projection and source-specific links. Filtering and date validation remain in activity-filters, controls in ActivityFilters, row operations in ActivityActions and mail reads in TimelineMailThread. The current-success projection gates rows, kinds and the source-limit caption together without adding an operation, identity or cache owner.",
-    "reviewedBy": "Codex root, full component and final diff reviewed",
-    "reviewedOn": "2026-10-11"
-  },
-  {
     "file": "apps/web/src/features/portfolio/client-profile/ClientHeader.tsx",
     "kind": "function",
     "symbol": "ClientHeader",
@@ -836,24 +827,6 @@
     "reviewedOn": "2026-10-11"
   },
   {
-    "file": "apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx",
-    "kind": "function",
-    "symbol": "CurrentFacilitiesCard",
-    "fingerprint": "e604ea969b9d865f57c11f13508d811fc95784efbdc6912d52459f93e18c6fe1",
-    "reason": "Owns one facilities-card presentation and its card/detail/map selection. It derives visible counts and current selected IDs from the qualified useFacilities read, then composes dedicated map and dialog owners. It does not construct native writes, parse receipts, or manage their lifetime. The selection resets belong together because all three views share the same current facility collection.",
-    "reviewedOn": "2026-10-11",
-    "reviewedBy": "Codex portfolio_calendar_relationships; independent portfolio_objectives review; root full-body integration review"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/client-profile/FacilityFields.tsx",
-    "kind": "function",
-    "symbol": "FacilityFields",
-    "fingerprint": "e182503baa60d1b91d087cc4e5b63e38bf22ba8c923af1310231c4184207fe8a",
-    "reason": "Owns only the existing facility form field projection: names, defaults, native input constraints, accessibility labels, and the shared district explanation. It has no requests, query state, permission decisions, receipts, or dialog lifecycle. Splitting individual labels into separate stateful components would not create a clearer responsibility.",
-    "reviewedOn": "2026-10-11",
-    "reviewedBy": "Codex portfolio_calendar_relationships; independent portfolio_objectives review; root full-body integration review"
-  },
-  {
     "file": "apps/web/src/features/portfolio/client-profile/useFacilityWriter.ts",
     "kind": "function",
     "symbol": "useFacilityWriter",
@@ -895,15 +868,6 @@
     "symbol": "useFacilityAction > run",
     "fingerprint": "347a287a7e58a5866f036daceedd821f3eb90e182ccea3d4fffd895b0291128a",
     "reason": "Owns one explicit provider-action dispatch from preflight through settlement. Its branches distinguish pre-dispatch refusal, native matched receipt, definite native refusal, and dispatched uncertainty; each branch settles the same token and its cache/UI effects. The source watcher is a separate named closure, current GET review is another operation, and native request/receipt validation is delegated. Keeping cleanup in finally beside the receipt/error paths makes it possible to review that obsolete attempts cannot clear a newer token or refresh a replacement view.",
-    "reviewedOn": "2026-10-11",
-    "reviewedBy": "Codex portfolio_calendar_relationships; independently reviewed by root"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/client-profile/FacilityGeocoding.tsx",
-    "kind": "function",
-    "symbol": "CurrentFacilityGeocoding",
-    "fingerprint": "ad0deafc1a01b241a2cb418b51d2486d5f6e95fbc26711f8b6b0a18ce1cf508c",
-    "reason": "Owns the current facility address-resolution presentation: native status and boundary provenance, displayed candidate choices, the explicit resolve/retry controls, and a delegated status/review view. It has no direct API, receipt parsing, unknown-attempt storage, or query invalidation. Actor/client/facility lifetime is established by its keyed wrapper and dedicated controller; the view only supplies the actual displayed candidate index and returned revision.",
     "reviewedOn": "2026-10-11",
     "reviewedBy": "Codex portfolio_calendar_relationships; independently reviewed by root"
   },
@@ -960,15 +924,6 @@
     "reason": "Presents one selected attachment and restores its connected opener when the modal closes. Readiness controls which original-file links and extracted-text controls appear; current URL resolution and text extraction are delegated to navigation and extraction. It displays only the owners' current scoped state, so actor/source/view replacement removes obsolete text. The 103-line body consists of one modal with readiness, current-navigation and extracted-text branches; retain the presentation together without another lifecycle owner.",
     "reviewedBy": "Codex portfolio_prospects_files; independent root integration review",
     "reviewedOn": "2026-10-11"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
-    "kind": "function",
-    "symbol": "FilesPage",
-    "fingerprint": "6b1e2d5c668d17e152ce5d4dedb60bb2ed7827e2fbd68033559a0dff55bf8726",
-    "reason": "FilesPage remains one current-reader file listing, filter, selection and related-dialog composition. Deletion now has cohesive separate DeleteFile/useFileDeletion/deletion owners; the page retains only reader-scoped selected IDs and disposes dialog content on scope/error replacement. Canonical current-files queries own read loading/failure, while the separate operation module owns unknown-attempt fencing and deliberate existing-contract recovery. Root and independent Modules reviewer inspected all seven original files and the canonical lifecycle correction; the245-line page adds no provider, transport or second authority. See docs/followup-20261012/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex shared frontend integration owner and independent modules_settings source review",
-    "reviewedOn": "2026-10-12"
   },
   {
     "file": "apps/web/src/features/portfolio/advocacy/AdvocacyHistory.tsx",
@@ -1602,6 +1557,69 @@
     "fingerprint": "4ef7b2fa293d7022f77528c118ea9ad2278e5559050b10e3903625ad89b52b03",
     "reason": "One actor/tenant/meeting/client-bound read and mutation lifetime owns the synchronous fence, cleanup, existing artifact coordination and invalidations. Native request/receipt validation lives in api/contracts, not UI.",
     "reviewedBy": "Codex shared frontend integration review with independent core_intake_review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/ActivityFeed.tsx",
+    "kind": "function",
+    "symbol": "ActivityRow",
+    "fingerprint": "f199a7b9b70b087960c39c8c4947c4a23422aaee736a03fef2c38087e1e93517",
+    "reason": "One native activity record projection owns title/body/kind/time/due/settled/pinned and existing source links. It selects canonical ActivityActions/TimelineMailThread only in the retained default feed. Expanded mode adds no writer/draft owner; the flat keyed parent preserves row mutation identity across group changes. Its markup remains cohesive.",
+    "reviewedBy": "Codex shared frontend integration review with independent modules_settings_review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx",
+    "kind": "function",
+    "symbol": "ActivityTimeline",
+    "fingerprint": "626e4b4fbd75bf396ce2b4a9a86d457a90d6d0b0981555d3b50af86b970fb1c8",
+    "reason": "One history view controller owns current query admission, filters, expansion and the explicit canonical QuickLog URL handoff. ActivityFeed owns row presentation; existing activity mutations and QuickLog own writes/receipts/unknown recovery. The close-focus one-shot flag is local view coordination with client/unmount cleanup, not a second mutation lifecycle.",
+    "reviewedBy": "Codex shared frontend integration review with independent modules_settings_review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx",
+    "kind": "function",
+    "symbol": "CurrentFacilitiesCard",
+    "fingerprint": "57886290e8ec40b32db018ef14077b55c4a23b7e945217d32ccf564827d3ff8c",
+    "reason": "One current facilities collection card retains existing map/display and current-source ownership while launching the separate manager. Data/query/actor behavior remains canonical; extracted editor and manager own their distinct UI lifetimes. No new transport or permission policy is added.",
+    "reviewedBy": "Codex shared frontend integration review with independent modules_settings_review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/FacilitiesManager.tsx",
+    "kind": "function",
+    "symbol": "CurrentFacilitiesManager",
+    "fingerprint": "08d7bc0f241e37c60771df546df15f54f6eabc62ed5583407ebc843abef53c92",
+    "reason": "One actor/client-scoped facilities dialog composes saved cards, selection, canonical editor/removal/geocoding owners and footer actions. It keeps draft snapshots until explicitly admitted review, then adopts only the actual matching current facility. Writer/query/uncertain-attempt implementation is reused, not duplicated.",
+    "reviewedBy": "Codex shared frontend integration review with independent modules_settings_review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/FacilityFields.tsx",
+    "kind": "function",
+    "symbol": "FacilityFields",
+    "fingerprint": "29a51391739b3163a8903b000750ae6ad53b08fc0910bd0ed987ceb92327de6f",
+    "reason": "Declarative native field catalog for one facility record, retaining field names/defaults/constraints and a canonical SelectField with unknown-existing state preservation. No query, dispatch, actor or recovery state is introduced.",
+    "reviewedBy": "Codex shared frontend integration review with independent modules_settings_review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/FacilityGeocoding.tsx",
+    "kind": "function",
+    "symbol": "CurrentFacilityGeocoding",
+    "fingerprint": "fae28b9d6e908889e5a695dc1ee95081dd2b6f82dbfcbf7451b2bfe6eda7acb4",
+    "reason": "Existing single facility resolution flow uses canonical useFacilityAction/current-source controls. Compact manager presentation changes matched controls without adding a service owner, permission inference or new endpoint.",
+    "reviewedBy": "Codex shared frontend integration review with independent modules_settings_review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+    "kind": "function",
+    "symbol": "FilesPage",
+    "fingerprint": "71b102bced5c6eb98f9187aa4979c27119ab3a26a1078ba7e98a910aa7f382ce",
+    "reason": "The 320-line function still composes one current collection/action lifetime. New FileToolbar and FolderCards isolate provenance/folder presentation, while existing upload/access/move/delete/preview owners retain requests, receipt admission, unknown recovery and current reader/actor/client guards. Reader-scoped filters do not become native ACLs; no new transport/provider orchestration was added. A further arbitrary JSX split is not required for this bounded change.",
+    "reviewedBy": "Codex shared frontend integration review with independent modules_settings_review",
     "reviewedOn": "2026-10-12"
   }
 ]
