@@ -13,7 +13,12 @@ import {
   SettingsDialog,
   SettingsNotice,
 } from "./components";
-import { settingsDestination } from "./externalNavigation";
+import {
+  billingFlow,
+  BillingStateChanged,
+  requestBillingDestination,
+  type BillingAction,
+} from "./billingFlow";
 import styles from "./styles";
 import { useSettingsAction } from "./useSettingsAction";
 
@@ -31,12 +36,26 @@ export function BillingSettings() {
   const [checkout, setCheckout] = useState(false);
   const [cancel, setCancel] = useState(false);
   const action = useSettingsAction(api);
-  async function portal(signal: AbortSignal) {
-    const result = await api.request("settings.billing.portal", {}, { signal });
-    signal.throwIfAborted();
-    window.location.assign(settingsDestination(result.url, "billing"));
+  async function openBilling(request: BillingAction, signal: AbortSignal) {
+    try {
+      const destination = await requestBillingDestination(api, request, signal);
+      signal.throwIfAborted();
+      window.location.assign(destination);
+    } catch (error) {
+      if (error instanceof BillingStateChanged && !signal.aborted) {
+        setCheckout(false);
+        setCancel(false);
+        state.reload();
+        summary.reload();
+      }
+      throw error;
+    }
   }
+  const portal = (signal: AbortSignal) =>
+    openBilling({ kind: "portal" }, signal);
   const plan = summary.data;
+  const flow = billingFlow(plan, state.data);
+  const canOpenPortal = flow === "portal";
   return (
     <div className={styles.stack} data-design-target="411:91384">
       <StatusPanel
@@ -58,7 +77,7 @@ export function BillingSettings() {
                     onClick={() =>
                       void action.run(portal, "Opening payment settings…")
                     }
-                    disabled={action.busy}
+                    disabled={action.busy || !canOpenPortal}
                   >
                     Update payment method
                   </SettingsButton>
@@ -89,13 +108,17 @@ export function BillingSettings() {
               action={
                 <SettingsButton
                   primary
-                  disabled={action.busy || !plan.billingEnabled}
+                  disabled={action.busy || flow === "unavailable"}
                   onClick={() => {
-                    setQuantity(Math.max(10, plan.slots));
-                    setCheckout(true);
+                    if (canOpenPortal)
+                      void action.run(portal, "Opening billing portal…");
+                    else if (flow === "checkout") {
+                      setQuantity(Math.max(10, plan.slots));
+                      setCheckout(true);
+                    }
                   }}
                 >
-                  Add profiles
+                  {flow === "checkout" ? "Start subscription" : "Add profiles"}
                 </SettingsButton>
               }
             >
@@ -123,6 +146,13 @@ export function BillingSettings() {
                   ["AI overage", money(plan.llmOverageUsd)],
                 ]}
               />
+              <p className={styles.description}>
+                {canOpenPortal
+                  ? "Review profile capacity and available plan changes in the billing portal."
+                  : flow === "checkout"
+                    ? "Start a new subscription and review its price in hosted checkout."
+                    : "Profile changes are unavailable for this billing state."}
+              </p>
               {state.data?.trialEndsAt && (
                 <p className={styles.description}>
                   Trial ends{" "}
@@ -135,9 +165,7 @@ export function BillingSettings() {
               description="View and update your payment method through the billing provider."
               action={
                 <SettingsButton
-                  disabled={
-                    action.busy || !plan.hasSubscription || !plan.billingEnabled
-                  }
+                  disabled={action.busy || !canOpenPortal}
                   onClick={() =>
                     void action.run(portal, "Opening billing portal…")
                   }
@@ -152,9 +180,7 @@ export function BillingSettings() {
             </SettingsCard>
             <SettingsCard title="Invoices and receipts">
               <SettingsButton
-                disabled={
-                  action.busy || !plan.hasSubscription || !plan.billingEnabled
-                }
+                disabled={action.busy || !canOpenPortal}
                 onClick={() => void action.run(portal, "Opening invoices…")}
               >
                 View and download invoices
@@ -165,9 +191,7 @@ export function BillingSettings() {
               description="Only authorized billing administrators can manage the plan."
               action={
                 <SettingsButton
-                  disabled={
-                    action.busy || !plan.hasSubscription || !plan.billingEnabled
-                  }
+                  disabled={action.busy || !canOpenPortal}
                   onClick={() => setCancel(true)}
                 >
                   Cancel plan
@@ -193,10 +217,10 @@ export function BillingSettings() {
       )}
       {action.message && <SettingsNotice title={action.message} />}
       <SettingsDialog
-        open={checkout}
+        open={checkout && flow === "checkout"}
         onClose={() => setCheckout(false)}
-        title="Add profiles"
-        description="Set the total profile capacity. Review pricing in the hosted checkout before payment."
+        title="Start subscription"
+        description="Choose the total profile capacity for a new subscription. Review pricing in hosted checkout before payment."
         footer={
           <>
             <SettingsButton
@@ -221,17 +245,17 @@ export function BillingSettings() {
           id="billing-checkout"
           onSubmit={(event) => {
             event.preventDefault();
-            void action.run(async (signal) => {
-              const result = await api.request(
-                "settings.billing.checkout",
-                { body: { quantity, ...(promoCode ? { promoCode } : {}) } },
-                { signal },
-              );
-              signal.throwIfAborted();
-              window.location.assign(
-                settingsDestination(result.url, "billing"),
-              );
-            }, "Opening secure checkout…");
+            void action.run(
+              (signal) =>
+                openBilling(
+                  {
+                    kind: "checkout",
+                    body: { quantity, ...(promoCode ? { promoCode } : {}) },
+                  },
+                  signal,
+                ),
+              "Opening secure checkout…",
+            );
           }}
         >
           <SettingField label="Total profiles">
@@ -260,7 +284,7 @@ export function BillingSettings() {
         </form>
       </SettingsDialog>
       <SettingsDialog
-        open={cancel}
+        open={cancel && canOpenPortal}
         onClose={() => setCancel(false)}
         title="Cancel Capiro?"
         description="Review your cancellation terms with the billing provider."
