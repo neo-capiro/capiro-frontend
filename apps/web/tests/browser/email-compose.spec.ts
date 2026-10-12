@@ -518,8 +518,8 @@ test("actor change while prepare awaits causes zero storage/confirm/send", async
   await page.evaluate(() => window.__mailRecheck?.());
   state.releasePrepare();
   await expect(
-    page.getByText(/mailbox session changed or is unverified/),
-  ).toBeVisible();
+    page.getByRole("region", { name: "Email attachments" }).getByRole("alert"),
+  ).toContainText("mailbox session changed or is unverified");
   expect(state.counts()).toMatchObject({ uploads: 0, confirms: 0 });
   expect(state.sent).toHaveLength(0);
 });
