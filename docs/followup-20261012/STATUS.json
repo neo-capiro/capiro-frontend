@@ -1,0 +1,23 @@
+{
+  "createdUTC": "2026-10-12T17:49:51.098873+00:00",
+  "branch": "integration/capiro-followup-20261012",
+  "baseEvidenceCommit": "fd1176790a6fb31b7ae68587f965a22d4145d8a2",
+  "frozenShippingSource": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "selectedFindings": [
+    "MS02",
+    "MS03",
+    "MS04",
+    "MS05",
+    "CR-07",
+    "CR-11",
+    "OWI-F02",
+    "PROS-F03",
+    "CP-03"
+  ],
+  "selectedFindingCount": 9,
+  "remainingOutsideGroup": 18,
+  "status": "IMPLEMENTATION_AND_TARGETED_REGRESSION_IN_PROGRESS",
+  "combinedQualification": "NOT_RUN_ON_NEW_SOURCE",
+  "scopePolicy": "Preserve per-row/facet criteria; do not replace337rows with a blanket status.",
+  "nativeOrCloudActions": []
+}
