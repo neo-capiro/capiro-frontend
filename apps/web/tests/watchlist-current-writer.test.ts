@@ -186,9 +186,17 @@ it.each([7, 9])(
 
 it("retains Intel partial rejections and exact version without inventing a Core-style identity echo", async () => {
   const { cache, view, draft } = watchlistFixture();
+  draft.topics[0]!.terms.push({ termType: "agency", value: "xx" });
   const rejected = {
     topics: [],
-    terms: [{ topicLabel: "Sensors", value: "xx", reason: "Term too short" }],
+    terms: [
+      {
+        topicLabel: "Sensors",
+        termType: "agency",
+        value: "xx",
+        reason: "Term too short",
+      },
+    ],
   };
   const { api, calls } = watchlistApi((request) =>
     request.method === "PUT"

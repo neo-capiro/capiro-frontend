@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { SelectInput } from "../module-ui";
 import { moduleCatalog, moduleHref, type ModuleSlug } from "./module-catalog";
-import styles from "./module-shell.module.css";
+import styles from "./module-shell.descriptor.css";
 
 export function ModuleBreadcrumb({ active }: { active: ModuleSlug }) {
   const router = useRouter();
@@ -19,14 +19,14 @@ export function ModuleBreadcrumb({ active }: { active: ModuleSlug }) {
         value={active}
         aria-label="Switch module"
         options={moduleCatalog.map((module) => ({
-          value: module.slug,
-          label: module.label,
+          value: descriptor.slug,
+          label: descriptor.label,
         }))}
         onValueChange={(value) => {
-          const module = moduleCatalog.find(
+          const descriptor = moduleCatalog.find(
             (candidate) => candidate.slug === value,
           );
-          if (module) router.push(moduleHref(module.slug));
+          if (module) router.push(moduleHref(descriptor.slug));
         }}
       />
     </nav>

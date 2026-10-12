@@ -18,7 +18,9 @@ export function LegiWatchSettings() {
     [chamber, setChamber] = useState("all"),
     [email, setEmail] = useState(false),
     [success, setSuccess] = useState<string>();
-  useEffect(() => {
+  const [loadedMe, setLoadedMe] = useState(() => (me.data));
+  if (loadedMe !== (me.data)) {
+    setLoadedMe(me.data);
     const prefs = me.data?.user.legiwatchPrefs;
     if (prefs) {
       setTimezone(
@@ -31,10 +33,14 @@ export function LegiWatchSettings() {
       );
       setChamber(typeof prefs.chamber === "string" ? prefs.chamber : "all");
     }
-  }, [me.data]);
-  useEffect(() => {
+
+  }
+  const [loadedNotifications, setLoadedNotifications] = useState(() => (notifications.data));
+  if (loadedNotifications !== (notifications.data)) {
+    setLoadedNotifications(notifications.data);
     if (notifications.data) setEmail(notifications.data.committeeEmailEnabled);
-  }, [notifications.data]);
+
+  }
   async function saveDisplay() {
     setSuccess(undefined);
     try {

@@ -23,21 +23,21 @@ export function CapiroDataProvider({
   children: ReactNode;
   onSessionExpired: () => void;
 }) {
-  const scope = useRef(new AbortController());
+  const [scope] = useState(() => ({ controller: new AbortController() }));
   const [api] = useState(() =>
     createCapiroApi(capiroOperations, {
       onSessionExpired: () => {
-        scope.current.abort();
+        scope.controller.abort();
         onSessionExpired();
       },
-      scopeSignal: () => scope.current.signal,
+      scopeSignal: () => scope.controller.signal,
     }),
   );
   useLayoutEffect(() => {
-    if (scope.current.signal.aborted) scope.current = new AbortController();
-    const current = scope.current;
+    if (scope.controller.signal.aborted) scope.controller = new AbortController();
+    const current = scope.controller;
     return () => current.abort();
-  }, []);
+  }, [scope]);
   return <ApiContext.Provider value={api}>{children}</ApiContext.Provider>;
 }
 /** The application owns Clerk and both transport lifetimes; this is a route gate. */
@@ -67,19 +67,19 @@ export function CapiroBoundary({
 
 export function useCapiro() {
   const api = useContext(ApiContext);
-  const lifetime = useRef(new AbortController());
+  const [lifetime] = useState(() => ({ controller: new AbortController() }));
   useLayoutEffect(() => {
-    if (lifetime.current.signal.aborted)
-      lifetime.current = new AbortController();
-    const current = lifetime.current;
+    if (lifetime.controller.signal.aborted)
+      lifetime.controller = new AbortController();
+    const current = lifetime.controller;
     return () => current.abort();
-  }, [api]);
+  }, [api, lifetime]);
   const scoped = useMemo(() => {
     if (!api) return null;
     const signal = (provided?: AbortSignal) =>
       provided
-        ? AbortSignal.any([provided, lifetime.current.signal])
-        : lifetime.current.signal;
+        ? AbortSignal.any([provided, lifetime.controller.signal])
+        : lifetime.controller.signal;
     const result: CapiroApi<typeof capiroOperations> = {
       request: (key, input, options) =>
         api.request(key, input, { signal: signal(options?.signal) }),
@@ -89,7 +89,7 @@ export function useCapiro() {
         api.download(key, input, { signal: signal(options?.signal) }),
     };
     return result;
-  }, [api]);
+  }, [api, lifetime]);
   if (!scoped) throw new Error("A signed-in CapiroBoundary is required.");
   return scoped;
 }

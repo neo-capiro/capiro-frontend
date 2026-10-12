@@ -24,13 +24,15 @@ function SessionData({
         <section role="alert">
           <h2>Your session expired</h2>
           <p>Sign in again to continue.</p>
+          {/* A fresh document must discard the expired session before reauthentication. */}
+          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
           <a href="/sign-in">Sign in</a>
         </section>
       </SessionContext.Provider>
     );
   return (
     <SessionContext.Provider value="signed-in">
-      <DataProvider onSessionExpired={expire}>
+      <DataProvider key={clientId ?? "no-selection"} onSessionExpired={expire}>
         <CapiroDataProvider onSessionExpired={expire}>
           <SelectedClientProvider requestedId={clientId}>
             {children}
@@ -60,7 +62,7 @@ function CurrentSession({ children }: { children: ReactNode }) {
   // Identity AND client replacement dispose queries, drafts, pending writes and selection.
   return (
     <SessionData
-      key={JSON.stringify([userId, sessionId, orgId, clientId])}
+      key={JSON.stringify([userId, sessionId, orgId])}
       clientId={clientId}
     >
       {children}

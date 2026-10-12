@@ -30,7 +30,8 @@ export function OutreachView({
   directoryContext?: boolean;
 }) {
   const [session, setSession] = useState<string | null>(initialSession ?? null);
-  useEffect(() => setSession(initialSession ?? null), [initialSession]);
+  const [previousSession, setPreviousSession] = useState(initialSession);
+  if (previousSession !== initialSession) { setPreviousSession(initialSession); setSession(initialSession ?? null); }
   const sessions = useCampaignList();
   const draft = useCapiroQuery(
     "engagement.outreach.record",
@@ -45,9 +46,12 @@ export function OutreachView({
     [selected, setSelected] = useState<OutreachRecord | "new" | null>(
       initialCreate ? "new" : null,
     );
-  useEffect(() => {
+  const [loadedDraft, setLoadedDraft] = useState(() => (draft.data));
+  if (loadedDraft !== (draft.data)) {
+    setLoadedDraft(draft.data);
     if (draft.data) setSelected(draft.data);
-  }, [draft.data]);
+
+  }
   const rows =
     query.data?.filter(
       (record) =>

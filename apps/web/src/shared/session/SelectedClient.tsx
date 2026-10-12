@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { createContext, useContext, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useApi } from "../portfolio/api/provider";
@@ -55,7 +56,7 @@ export function SelectedClientGate({ children }: { children: ReactNode }) {
           This client could not be verified for your current session. Return to
           Portfolio to choose a permitted client.
         </p>
-        <a href="/">Open Portfolio</a>
+        <Link href="/">Open Portfolio</Link>
       </section>
     );
   return children;

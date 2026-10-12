@@ -3,7 +3,6 @@ import {
   createContext,
   useContext,
   useLayoutEffect,
-  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -20,7 +19,7 @@ export function DataProvider({
   api?: ApiClient;
   onSessionExpired?: () => void;
 }) {
-  const scope = useRef(new AbortController());
+  const [scope] = useState(() => ({ controller: new AbortController() }));
   const [client] = useState(
     () =>
       new QueryClient({
@@ -41,23 +40,23 @@ export function DataProvider({
     createApiClient(
       fetch,
       () => {
-        scope.current.abort();
+        scope.controller.abort();
         client.clear();
         setExpired(true);
         onSessionExpired?.();
       },
-      () => scope.current.signal,
+      () => scope.controller.signal,
     ),
   );
   useLayoutEffect(() => {
-    if (scope.current.signal.aborted) scope.current = new AbortController();
-    const current = scope.current;
+    if (scope.controller.signal.aborted) scope.controller = new AbortController();
+    const current = scope.controller;
     return () => {
       current.abort();
       void client.cancelQueries();
       client.clear();
     };
-  }, [client]);
+  }, [client, scope]);
   if (expired)
     return (
       <main className="centered">

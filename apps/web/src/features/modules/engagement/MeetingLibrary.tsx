@@ -22,6 +22,7 @@ export function MeetingLibrary({
   clientId: string;
   mode: "library" | "meetings";
 }) {
+  const [now] = useState(() => Date.now());
   const {
     search,
     setSearch,
@@ -78,7 +79,7 @@ export function MeetingLibrary({
         {display === "queue" && mode === "meetings" ? (
           <Panel title="Meeting preparation queue">
             {rows
-              .filter((meeting) => Date.parse(meeting.startsAt) > Date.now())
+              .filter((meeting) => Date.parse(meeting.startsAt) > now)
               .map((meeting) => (
                 <div className={styles.queueItem} key={meeting.id}>
                   <time>{new Date(meeting.startsAt).toLocaleDateString()}</time>

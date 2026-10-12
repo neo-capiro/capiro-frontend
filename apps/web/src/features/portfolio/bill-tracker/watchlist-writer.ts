@@ -1,3 +1,4 @@
+import { intelWatchlistReceipt } from "./intel-watchlist-receipt";
 import type { ApiClient } from "@/shared/portfolio/api/http";
 import { ApiError } from "@/shared/portfolio/api/http";
 import type { TrackerBackend } from "@/shared/portfolio/config/config";
@@ -111,10 +112,7 @@ export async function writeWatchlist(
   const result = await api.request(
     "intelligence",
     watchlistPath(view.clientId, "intelligence"),
-    intelWatchlistForClient(view.clientId).refine(
-      (record) => record.version === version + 1,
-      "The returned watchlist version cannot confirm this save.",
-    ),
+    intelWatchlistReceipt(view.clientId, body, view.record),
     { method: "PUT", body, signal },
   );
   current();

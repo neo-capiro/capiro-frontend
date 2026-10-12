@@ -12,6 +12,7 @@ const configuration = {
   esbuild: { jsx: "automatic" },
   resolve: {
     alias: [
+      { find: "@", replacement: path.join(app, "src") },
       { find: "@clerk/nextjs", replacement: local("clerk.tsx") },
       { find: "next/link", replacement: local("navigation.tsx") },
       { find: "next/navigation", replacement: local("navigation.tsx") },

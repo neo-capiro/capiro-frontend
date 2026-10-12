@@ -27,13 +27,14 @@ export function useCapiroQuery<Key extends OperationKey>(
     }
   >({ loading: enabled });
   const reload = useCallback(() => setRevision((value) => value + 1), []);
+  const [previousRequest, setPreviousRequest] = useState({ api, requestId, enabled });
+  if (previousRequest.api !== api || previousRequest.requestId !== requestId || previousRequest.enabled !== enabled) {
+    setPreviousRequest({ api, requestId, enabled });
+    setState({ loading: enabled, requestId });
+  }
   useEffect(() => {
-    if (!enabled) {
-      setState({ loading: false, requestId });
-      return;
-    }
+    if (!enabled) return;
     const controller = new AbortController();
-    setState({ loading: true, requestId });
     const requestInput = JSON.parse(serializedInput) as OperationRequest<
       (typeof capiroOperations)[Key]
     >;

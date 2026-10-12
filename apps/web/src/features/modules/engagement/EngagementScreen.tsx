@@ -45,18 +45,19 @@ export function EngagementScreen() {
       plannerId.safeParse(requestedClient).success ? requestedClient! : "",
     ),
     [create, setCreate] = useState(false);
-  useEffect(() => {
+  const [routeKey, setRouteKey] = useState(() => (JSON.stringify([requestedView, session, draft, initialCreate])));
+  if (routeKey !== (JSON.stringify([requestedView, session, draft, initialCreate]))) {
+    setRouteKey(JSON.stringify([requestedView, session, draft, initialCreate]));
     if (session || draft || initialCreate) setView("outreach");
     else if (tabs.some((tab) => tab.id === requestedView))
       setView(requestedView!);
-  }, [requestedView, session, draft, initialCreate]);
-  useEffect(
-    () =>
-      setClientId(
-        plannerId.safeParse(requestedClient).success ? requestedClient! : "",
-      ),
-    [requestedClient],
-  );
+
+  }
+  const [previousClient, setPreviousClient] = useState(requestedClient);
+  if (previousClient !== requestedClient) {
+    setPreviousClient(requestedClient);
+    setClientId(plannerId.safeParse(requestedClient).success ? requestedClient! : "");
+  }
   const clientQuery = useCapiroQuery("clients.list", {});
   const meetings = useCapiroQuery("engagement.meetings", {
     query: { clientId: clientId || undefined },

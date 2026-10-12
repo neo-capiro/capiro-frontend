@@ -21,13 +21,14 @@ export function useAgendaSources(range: CalendarRange, enabled: boolean) {
     loading: enabled,
     warnings: [],
   });
+  const [previousRequest, setPreviousRequest] = useState({ api, rangeId, enabled });
+  if (previousRequest.api !== api || previousRequest.rangeId !== rangeId || previousRequest.enabled !== enabled) {
+    setPreviousRequest({ api, rangeId, enabled });
+    setState({ items: [], loading: enabled, warnings: [], rangeId });
+  }
   useEffect(() => {
-    if (!enabled) {
-      setState({ items: [], loading: false, warnings: [], rangeId });
-      return;
-    }
+    if (!enabled) return;
     const controller = new AbortController();
-    setState({ items: [], loading: true, warnings: [], rangeId });
     loadAgendaSources(api, range, controller.signal).then((loaded) => {
       if (!controller.signal.aborted)
         setState({ ...loaded, loading: false, rangeId });

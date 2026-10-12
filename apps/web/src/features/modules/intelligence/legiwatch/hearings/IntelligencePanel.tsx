@@ -19,7 +19,9 @@ export function IntelligencePanel({
 }) {
   const route = useLegiWatchRoute();
   const [cursors, setCursors] = useState<string[]>([]);
-  useEffect(() => setCursors([]), [hearingId, route.clientId, relevantOnly]);
+  const contextKey = JSON.stringify([hearingId, route.clientId, relevantOnly]);
+  const [previousContext, setPreviousContext] = useState(contextKey);
+  if (contextKey !== previousContext) { setPreviousContext(contextKey); setCursors([]); }
   const result = useCapiroQuery("legiwatch.intelligence", {
     params: { id: hearingId },
     query: {

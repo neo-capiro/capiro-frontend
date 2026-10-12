@@ -56,10 +56,13 @@ export function PlannerScreen() {
     ),
     [projectId, setProjectId] = useState<string | null>(null);
   const bootstrap = useCapiroQuery("planner.bootstrap", {});
-  useEffect(() => {
+  const [routeView, setRouteView] = useState(() => (requestedView));
+  if (routeView !== (requestedView)) {
+    setRouteView(requestedView);
     if (sections.some((section) => section.id === requestedView))
       setSection(requestedView!);
-  }, [requestedView]);
+
+  }
   return (
     <div className={styles.screen}>
       <PageHeader

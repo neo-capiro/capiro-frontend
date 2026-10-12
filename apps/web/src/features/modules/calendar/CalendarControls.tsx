@@ -144,7 +144,7 @@ export function CalendarToolbar({
               aria-pressed={view === item}
               onClick={() => onView(item)}
             >
-              {item[0].toUpperCase() + item.slice(1)}
+              {item.charAt(0).toUpperCase() + item.slice(1)}
             </button>
           ))}
         </div>

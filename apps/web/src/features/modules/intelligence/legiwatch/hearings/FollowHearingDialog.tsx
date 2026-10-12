@@ -43,7 +43,9 @@ export function FollowHearingDialog({
       notifyOnTranscriptReady: true,
       notifyOnHighPriorityMatch: true,
     });
-  useEffect(() => {
+  const [loadedFollow, setLoadedFollow] = useState(() => (follow.data));
+  if (loadedFollow !== (follow.data)) {
+    setLoadedFollow(follow.data);
     if (follow.data) {
       setIds(follow.data.clientIds);
       setPreferences({
@@ -53,7 +55,8 @@ export function FollowHearingDialog({
         notifyOnHighPriorityMatch: follow.data.notifyOnHighPriorityMatch,
       });
     }
-  }, [follow.data]);
+
+  }
   const finish = async (unfollow = false) => {
     try {
       if (unfollow) await remove.run({ params: { id: hearingId } });

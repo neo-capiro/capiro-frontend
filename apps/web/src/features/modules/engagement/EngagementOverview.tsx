@@ -23,6 +23,7 @@ export function EngagementOverview({
   meetings: Query;
   onView: (view: string) => void;
 }) {
+  const [now] = useState(() => Date.now());
   const outreach = useCapiroQuery("engagement.outreach", {
     query: { clientId: clientId || undefined, limit: 500 },
   });
@@ -48,7 +49,7 @@ export function EngagementOverview({
     };
     row.meetings++;
     if (
-      Date.parse(meeting.startsAt) > Date.now() &&
+      Date.parse(meeting.startsAt) > now &&
       (!row.next || meeting.startsAt < row.next)
     )
       row.next = meeting.startsAt;

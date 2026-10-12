@@ -15,10 +15,12 @@ export function PhoneVerification({
       aria-labelledby="alert-verification-title"
     >
       <h3 id="alert-verification-title">Phone verification</h3>
-      <p className={styles.help}>
-        Request a code for the saved phone number. Confirming it enables SMS
-        alerts. Message and data rates may apply.
-      </p>
+      {!(action.challenge && savedCurrent) && (
+        <p className={styles.help}>
+          Request a code for the saved phone number. Confirming it enables SMS
+          alerts. Message and data rates may apply.
+        </p>
+      )}
       {!action.available && !action.busy && (
         <p className={styles.help}>
           Save a phone number and reload current preferences before requesting a
@@ -48,7 +50,7 @@ export function PhoneVerification({
                 Request acknowledged for {action.challenge.receipt.masked}.{" "}
                 {action.challenge.receipt.dormant
                   ? "The service reports that SMS is dormant."
-                  : "Enter the code if it arrives."}
+                  : "Enter the code if it arrives. Confirming this phone enables SMS alerts."}
               </p>
               {action.challenge.receipt.devCode && (
                 <p className={styles.help}>

@@ -103,20 +103,22 @@ export function PreferenceSkills() {
         Reusable ways to begin supported work.
       </p>
       <div className={styles.grid}>
-        {[
+        {(
           [
-            "Research brief",
-            "A sourced brief with explicit coverage and current facts.",
-          ],
-          [
-            "Spreadsheet analysis",
-            "Verified values, charts and supported formulas.",
-          ],
-          [
-            "Client update deck",
-            "A concise deck with speaker notes and references.",
-          ],
-        ].map(([title, description]) => (
+            [
+              "Research brief",
+              "A sourced brief with explicit coverage and current facts.",
+            ],
+            [
+              "Spreadsheet analysis",
+              "Verified values, charts and supported formulas.",
+            ],
+            [
+              "Client update deck",
+              "A concise deck with speaker notes and references.",
+            ],
+          ] as const
+        ).map(([title, description]) => (
           <SettingsCard key={title} title={title} description={description}>
             <SettingsButton disabled>Use skill</SettingsButton>
           </SettingsCard>
@@ -196,7 +198,7 @@ export function PreferencePrivacy() {
 }
 
 export function PreferenceHelp() {
-  const shortcuts = [
+  const shortcuts: [string, string][] = [
     ["Search workspace", "⌘K / Ctrl+K"],
     ["Send message", "Enter"],
     ["New line", "Shift+Enter"],

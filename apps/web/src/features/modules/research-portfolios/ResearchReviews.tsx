@@ -75,7 +75,7 @@ export function ResearchReviews({
       <Tabs
         items={["mine", "team", "deferred", "resolved"].map((id) => ({
           id,
-          label: id[0].toUpperCase() + id.slice(1),
+          label: id.charAt(0).toUpperCase() + id.slice(1),
         }))}
         value={lane}
         onChange={(id) => setLane(id as typeof lane)}

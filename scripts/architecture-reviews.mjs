@@ -12,7 +12,7 @@ export function reviewSizeSignals(files, signals, records, evidenceExists) {
     byPath.set(record.path, record);
   }
   for (const signal of signals) {
-    const name = signal.split(': ')[0], record = byPath.get(name), source = files.get(name);
+    const name = signal.split(': ')[0].replace(/:\d+$/, ''), record = byPath.get(name), source = files.get(name);
     const valid = record && source !== undefined
       && /^[a-f0-9]{64}$/.test(record.sha256 ?? '')
       && createHash('sha256').update(source).digest('hex') === record.sha256

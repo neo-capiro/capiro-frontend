@@ -27,9 +27,20 @@ export const topicSchema = z.object({
 export type Topic = z.infer<typeof topicSchema>;
 export type TopicDraft = Topic & { key: string; originalLabel?: string };
 const rejectionSchema = z.object({
-  topics: z.array(z.object({ label: z.string(), reason: z.string() })),
+  topics: z.array(
+    z.object({
+      index: z.number().int().nonnegative().optional(),
+      label: z.string(),
+      reason: z.string(),
+    }),
+  ),
   terms: z.array(
-    z.object({ topicLabel: z.string(), value: z.string(), reason: z.string() }),
+    z.object({
+      topicLabel: z.string(),
+      termType: z.enum(termTypes).optional(),
+      value: z.string(),
+      reason: z.string(),
+    }),
   ),
 });
 export const intelWatchlistSchema = z.object({

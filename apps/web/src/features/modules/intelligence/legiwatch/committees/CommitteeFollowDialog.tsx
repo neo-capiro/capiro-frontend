@@ -43,7 +43,9 @@ export function CommitteeFollowDialog({
     {},
   );
   const [error, setError] = useState<string>();
-  useEffect(() => {
+  const [loadedFollow, setLoadedFollow] = useState(() => (query.data));
+  if (loadedFollow !== (query.data)) {
+    setLoadedFollow(query.data);
     if (query.data)
       setBody({
         clientIds: query.data.clientIds,
@@ -51,7 +53,8 @@ export function CommitteeFollowDialog({
           flags.map((flag) => [flag.key, query.data![flag.key]]),
         ),
       });
-  }, [query.data]);
+
+  }
   async function save(unfollow = false) {
     setError(undefined);
     try {

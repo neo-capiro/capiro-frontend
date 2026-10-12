@@ -32,12 +32,13 @@ type Credential = z.infer<typeof maskedCredentialSchema>;
 
 export function AiKeysSettings() {
   const [days, setDays] = useState("30");
+  const [now] = useState(() => Date.now());
   const range = useMemo(
     () => ({
-      from: new Date(Date.now() - Number(days) * 86400000).toISOString(),
-      to: new Date().toISOString(),
+      from: new Date(now - Number(days) * 86400000).toISOString(),
+      to: new Date(now).toISOString(),
     }),
-    [days],
+    [days, now],
   );
   const query = useCapiroQuery("settings.hq.ai.usage", { query: range });
   const [selected, setSelected] = useState<{ id: string; name: string }>();

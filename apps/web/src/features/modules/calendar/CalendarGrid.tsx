@@ -4,7 +4,7 @@ import { createViewMonthGrid, createViewWeek } from "@schedule-x/calendar";
 import { createCalendarControlsPlugin } from "@schedule-x/calendar-controls";
 import { ScheduleXCalendar, useNextCalendarApp } from "@schedule-x/react";
 import "@schedule-x/theme-default/dist/index.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Temporal } from "temporal-polyfill";
 import type { EngagementMeeting } from "../../../shared/capiro/operations/engagement";
 import styles from "./calendar.module.css";
@@ -30,7 +30,7 @@ export function CalendarGrid({
 }) {
   const [controls] = useState(() => createCalendarControlsPlugin());
   const current = useRef({ meetings, onMeeting });
-  current.current = { meetings, onMeeting };
+  useLayoutEffect(() => { current.current = { meetings, onMeeting }; }, [meetings, onMeeting]);
   const calendar = useNextCalendarApp(
     {
       views: [createViewMonthGrid(), createViewWeek()],

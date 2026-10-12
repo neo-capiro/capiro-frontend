@@ -15,12 +15,13 @@ const number = (value: number) =>
 
 export function UsageSettings() {
   const [days, setDays] = useState("30");
+  const [now] = useState(() => Date.now());
   const range = useMemo(
     () => ({
-      from: new Date(Date.now() - Number(days) * 86400000).toISOString(),
-      to: new Date().toISOString(),
+      from: new Date(now - Number(days) * 86400000).toISOString(),
+      to: new Date(now).toISOString(),
     }),
-    [days],
+    [days, now],
   );
   const query = useCapiroQuery("settings.aiUsage.summary", { query: range });
   const credentials = useCapiroQuery("settings.aiUsage.credentials", {});

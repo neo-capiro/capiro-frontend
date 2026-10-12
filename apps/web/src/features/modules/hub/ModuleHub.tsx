@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import { PageHeader } from "../../../shared/module-ui";
 import {
@@ -67,7 +67,14 @@ export function ModuleHub() {
   const clients = useCapiroQuery("clients.list", {
     query: { includeArchived: false },
   });
-  const [clientId, setClientId] = useState("");
+  const router = useRouter();
+  const params = useSearchParams();
+  const clientId = params.get("clientId") ?? "";
+  const setClientId = (id: string) => {
+    const next = new URLSearchParams(params);
+    if (id) next.set("clientId", id); else next.delete("clientId");
+    router.push(`/modules?${next}`);
+  };
   const profiles = clients.data ?? [];
   const workOrder = ["engagement", "workspace", "planner", "strategies"];
   const work = moduleCatalog

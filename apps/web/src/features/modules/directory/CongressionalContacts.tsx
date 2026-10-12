@@ -84,7 +84,7 @@ export function CongressionalContacts({
             <option value="">
               {key === "issue"
                 ? "Issue area"
-                : key[0].toUpperCase() + key.slice(1)}{" "}
+                : key.charAt(0).toUpperCase() + key.slice(1)}{" "}
               · Any
             </option>
             {options[key].map((x) => (

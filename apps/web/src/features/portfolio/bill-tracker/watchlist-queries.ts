@@ -89,7 +89,7 @@ export function useWatchlistView(clientId: string, backend: TrackerBackend) {
   });
   const taxonomy = useQuery({
     queryKey: taxonomyKey(backend, reader),
-    enabled: Boolean(reader),
+    enabled: Boolean(reader && client.source),
     queryFn: async ({ signal }) => {
       assertReader();
       const result = await api.request(
@@ -105,7 +105,7 @@ export function useWatchlistView(clientId: string, backend: TrackerBackend) {
   });
   const coverage = useQuery({
     queryKey: jurisdictionsKey(reader),
-    enabled: Boolean(reader && backend === "intelligence"),
+    enabled: Boolean(reader && client.source && backend === "intelligence"),
     queryFn: async ({ signal }) => {
       assertReader();
       const result = await fetchJurisdictions(api, signal);
