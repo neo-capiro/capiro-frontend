@@ -1,0 +1,47 @@
+[
+  {
+    "path": "apps/web/src/features/modules/workspace/newsletter/NewsletterComments.tsx",
+    "gitBlob": "608f1a55511561518a56f4110ba205d77445f521",
+    "semantics": "Generic Workspace document comments; no rich campaign/block reviewer or invitation contract."
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/newsletter/NewsletterPaper.tsx",
+    "gitBlob": "64966261567c476e074aa6739bdd1b14a733b5d3",
+    "semantics": "Plain text/heading/link/image URL display and simple block editor/order/removal; does not implement rich NewsletterDesign renderer."
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/newsletter/NewsletterStaging.tsx",
+    "gitBlob": "70696c996e9d685769a2f9d716905bf8dbeae364",
+    "semantics": "Exact WsDocVersion/hash review into caller-selected existing V3 session with explicit acknowledgement."
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/newsletter/NewsletterTemplates.tsx",
+    "gitBlob": "ffd88a8676d2aa79dd90da30b03cf8812ae12e53",
+    "semantics": "Three local presets with local search/category/preview; no persisted rich section/template library."
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
+    "gitBlob": "b8d63fac537d0790b4497ebca8399fa26a9423b1",
+    "semantics": "Generic WorkspaceDraft workflow; nine simple blocks, local builder/review and explicit saved-version V3 staging; template publication currently unavailable."
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/newsletter/newsletter-model.ts",
+    "gitBlob": "3d73e79a64fb7dc733c06b0059bd7936e89d15b7",
+    "semantics": "Local generic NewsletterBody presets, safe href and generic document conversion; not canonical rich campaign design model."
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/newsletter/staging-model.ts",
+    "gitBlob": "e7ebe775f8dd30bdd4208e572141102451dc4063",
+    "semantics": "Strict saved-version receipt and sponsor validation; not stage UUID conversion."
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/newsletter/use-newsletter.ts",
+    "gitBlob": "700d2c64156050e953780c2cf13a4fd110f269b9",
+    "semantics": "Generic draft/document update/snapshot ownership; local Undo/Redo; not WsNewsletterDocument revision CAS."
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/newsletter/useNewsletterStaging.ts",
+    "gitBlob": "bc396b66ad466d7899c81a7771a5d244007ed263",
+    "semantics": "Saved-version retained request/recovery/current-authority owner; preserve unchanged."
+  }
+]

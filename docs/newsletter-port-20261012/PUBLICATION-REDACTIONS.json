@@ -1,0 +1,43 @@
+{
+  "at": "2026-10-12T21:35:01.121269+00:00",
+  "files": [
+    {
+      "path": "scope-audit/evidence/newsletterAssetDirectoryC.json",
+      "originalSHA256": "c670bc8e393ccf5f1c3892b1ceab075ebe26948e9cae5c7840bcbae01a36f086",
+      "publishedSHA256": "68cc7a1bfc5893b24995552c724bc06f52aad3f4f6fce3901ea917c555af0ddd",
+      "removedQueryCount": 179,
+      "policy": "Only ephemeral GitHub raw download URL query strings removed; source ref, path, blob, size and origin/path URL remain. Original sealed receipt retained outside Git."
+    },
+    {
+      "path": "scope-audit/evidence/newsletterAssetDirectoryW.json",
+      "originalSHA256": "7bc9ef42fc3cb49572c967b417516dabe56f2d883db266667f3a883a279dcf2e",
+      "publishedSHA256": "685d13b0620ec1d6429b991ecd448ebdce66fb41b516179abb381af4486c379f",
+      "removedQueryCount": 179,
+      "policy": "Only ephemeral GitHub raw download URL query strings removed; source ref, path, blob, size and origin/path URL remain. Original sealed receipt retained outside Git."
+    },
+    {
+      "path": "scope-audit/evidence/newsletterPlanDirectory.json",
+      "originalSHA256": "de4a8fe44262911020e2f60e70b3a10dfe4674e318a9458f2f40c5687297fa90",
+      "publishedSHA256": "49624e6157685a768bd2e980d399b12a3782f3c39b417da79d51e0b13498cfbb",
+      "removedQueryCount": 8,
+      "policy": "Only ephemeral GitHub raw download URL query strings removed; source ref, path, blob, size and origin/path URL remain. Original sealed receipt retained outside Git."
+    },
+    {
+      "path": "scope-audit/evidence/newsletterPlanEvidenceDirectory.json",
+      "originalSHA256": "845809867613d79a6ff6da1ef429d432039cf1a9b121f5cf25e5bfcf3e677957",
+      "publishedSHA256": "1c4aa2dd50155f62840a4611593b45eff5e22c3416b11ff8836aad4a1df11b97",
+      "removedQueryCount": 27,
+      "policy": "Only ephemeral GitHub raw download URL query strings removed; source ref, path, blob, size and origin/path URL remain. Original sealed receipt retained outside Git."
+    },
+    {
+      "path": "scope-audit/evidence/newsletterRuntimeDirectoryW.json",
+      "originalSHA256": "70d297436ef588a0438901428283588e361f59b83d7089427a3a45ae021bc053",
+      "publishedSHA256": "dfed5354666969e38748293cdacaab630d102caaf6f04644b10e25c484d53771",
+      "removedQueryCount": 78,
+      "policy": "Only ephemeral GitHub raw download URL query strings removed; source ref, path, blob, size and origin/path URL remain. Original sealed receipt retained outside Git."
+    }
+  ],
+  "removedQueryCount": 471,
+  "scope": "The original scope-audit/SHA256-INDEX.json binds original local audit bytes. This publication has five deliberate credential redactions identified here. Root publication manifest binds actual committed bytes. Asset bytes and all canonical source Git hashes remain unchanged.",
+  "originalAudit": "/tmp/capiro-newsletter-port-scope-20261012"
+}
