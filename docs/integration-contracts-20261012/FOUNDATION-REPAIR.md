@@ -56,3 +56,10 @@ to the existing Proxy entry, before rendering; it preserves the relative target,
 query hint and all three existing headers via one shared response-policy constant.
 The destination still traverses the unchanged Clerk middleware. No header value
 or authentication policy is weakened. The obsolete config redirect is removed.
+
+The intermediate Proxy response used a relative Location; Next rejected it with
+Invalid URL before dispatching the response. The supported NextResponse.redirect
+now clones the request URL, preserving its origin/query and changing only the
+pathname. Actual-server and image smoke assertions accept equivalent relative or
+absolute locations only at the exact same origin/path; 307 and security checks
+remain mandatory. The failing server log is retained at foundation-4d6021a.

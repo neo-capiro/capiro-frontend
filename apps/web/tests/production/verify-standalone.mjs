@@ -30,8 +30,8 @@ for (const [path, status, text] of [
   assert.equal(response.status, status, path);
   if (new URL(origin + path).pathname === "/settings")
     assert.equal(
-      response.headers.get("location"),
-      `/settings/personal${new URL(origin + path).search}`,
+      new URL(response.headers.get("location"), origin).href,
+      `${origin}/settings/personal${new URL(origin + path).search}`,
     );
   assert.ok((await response.text()).includes(text), path);
   assert.equal(response.headers.get("x-content-type-options"), "nosniff", path);

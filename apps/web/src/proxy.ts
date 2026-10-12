@@ -10,14 +10,13 @@ import { responseHeaders } from "./shared/response-headers";
 const clerk = clerkMiddleware();
 export default function proxy(request: NextRequest, event: NextFetchEvent) {
   if (request.nextUrl.pathname === "/settings") {
-    return new NextResponse(null, {
+    const destination = request.nextUrl.clone();
+    destination.pathname = "/settings/personal";
+    return NextResponse.redirect(destination, {
       status: 307,
-      headers: {
-        ...Object.fromEntries(
-          responseHeaders.map(({ key, value }) => [key, value]),
-        ),
-        Location: `/settings/personal${request.nextUrl.search}`,
-      },
+      headers: Object.fromEntries(
+        responseHeaders.map(({ key, value }) => [key, value]),
+      ),
     });
   }
   if (!readCapiroConfig(process.env).authConfigured) return NextResponse.next();
