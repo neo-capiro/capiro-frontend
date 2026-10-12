@@ -4,8 +4,8 @@ Current application and deployment source is frozen at
 `9fa5e2cb68bc2b15f2dddc5dd2a846756a5b6c9e`
 (tree `d6ebc315242254504b6f99a3ec4bae8673826983`) on draft PR8.
 Subsequent evidence-only commits do not change that source. The full 882-case
-Portfolio browser run is in progress and has one failure in meeting preparation
-recovery. This pin has not passed combined qualification.
+Portfolio browser run finished: **881 passed, 1 failed, zero skipped/flaky**,
+in36.3minutes. This pin failed combined qualification.
 
 The input heads, merge order, shared ownership and preserved-source audit are in
 PLAN.md and PRESERVATION.json. The Portfolio owner's later archive-only head
@@ -35,12 +35,13 @@ branches, main, resources, credentials and databases remain unchanged.
   receipt. No native/provider calls were made.
 
 Source-bound logs, JSON and hashes are in `evidence/candidate-9fa5e2c/`.
-The complete Portfolio browser result will be recorded after the full run finishes.
+The complete Portfolio browser result and source-bound receipt are preserved in
+`evidence/candidate-9fa5e2c/qualification-receipt.json`.
 The current failure checks a request array immediately after an asynchronous
 retry click: the trace records the second POST/202 and queued-job dialog, but the
 assertion runs before its route callback is observed. Its red trace and precise
 timing diagnosis are preserved under the candidate evidence's failures directory.
-No source will change during this run; a subsequent test synchronization correction
+No source changed during this run; a subsequent test synchronization correction
 must retain exact count, identical key/payload and saved-job cancellation controls.
 The separate local container gate is blocked: the existing environment proxy
 rejects HTTPS CONNECT to the official Alpine package index with HTTP403.
@@ -66,7 +67,8 @@ submission reads while retaining request counts, cancellation and no-late-effect
 assertions. Canonical navigation and visible-disabled Core404 preference entries
 replace obsolete assertions. Two long visual/100-selection cases have bounded
 90-second budgets justified by their observed work; every assertion and action
-remains. Focused corrections pass; the full new run is still required.
+remains. Focused corrections passed. The complete new run passed the prior twelve failing
+cases and found the one asynchronous fixture-observation race above.
 
 Original Intel targeting receipt, requested phone-code copy and Core404 zero-Intel
 regression baselines also remain. Normalization and explicit partial rejections

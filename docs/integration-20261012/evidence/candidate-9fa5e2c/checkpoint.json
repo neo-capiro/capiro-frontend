@@ -1,7 +1,13 @@
 {
   "source": "9fa5e2cb68bc2b15f2dddc5dd2a846756a5b6c9e",
   "tree": "d6ebc315242254504b6f99a3ec4bae8673826983",
-  "portfolioBrowser": "IN_PROGRESS; no result claimed",
+  "portfolioBrowser": {
+    "complete": true,
+    "passed": 881,
+    "failed": 1,
+    "skipped": 0,
+    "flaky": 0
+  },
   "container": "ENVIRONMENT_BLOCKED",
   "artifacts": [
     {
@@ -88,5 +94,6 @@
       "bytes": 984830
     }
   ],
-  "artifactHashMeaning": "sha256 and bytes describe committed artifact bytes; capture fields preserve original console bytes when Git normalized line endings."
+  "artifactHashMeaning": "sha256 and bytes describe committed artifact bytes; capture fields preserve original console bytes when Git normalized line endings.",
+  "finalReceipt": "qualification-receipt.json"
 }
