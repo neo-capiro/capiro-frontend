@@ -1,14 +1,14 @@
 {
-  "head": "5840b50ea3a94e766666254600f1c16d26d3860a",
-  "sourceTree": "256bdbdeac97257e5b14d7ff97e44951b6ca7fc5",
+  "head": "9fa5e2cb68bc2b15f2dddc5dd2a846756a5b6c9e",
+  "sourceTree": "d6ebc315242254504b6f99a3ec4bae8673826983",
   "scope": "Tracked feature, meaningful test, asset and governed client package preservation; exact source changes remain reviewable in Git.",
   "inputs": [
     {
       "name": "Portfolio",
-      "head": "abaeab37b36d60b3e5185755e1b2c9169d7c92f3",
+      "head": "c330cebbd021eb984b4bf64ae13dbb991ae6b1c0",
       "ancestor": true,
       "trackedFiles": 861,
-      "byteIdentical": 853,
+      "byteIdentical": 843,
       "formattingOnly": 0,
       "missing": [],
       "changed": [
@@ -16,7 +16,17 @@
         "apps/web/src/features/portfolio/bill-tracker/watchlist-contracts.ts",
         "apps/web/src/features/portfolio/bill-tracker/watchlist-queries.ts",
         "apps/web/src/features/portfolio/bill-tracker/watchlist-writer.ts",
+        "apps/web/src/features/portfolio/billing/BillingSummaryPanel.tsx",
+        "apps/web/src/features/portfolio/index/CreateProfileDialog.tsx",
         "apps/web/src/features/portfolio/index/contracts.ts",
+        "apps/web/tests/browser/billing-summary-integration.spec.ts",
+        "apps/web/tests/browser/billing-summary.spec.ts",
+        "apps/web/tests/browser/capability-boundary-fixtures.ts",
+        "apps/web/tests/browser/capability-presentation-visual.spec.ts",
+        "apps/web/tests/browser/capability-registration-execution.spec.ts",
+        "apps/web/tests/browser/portfolio-index.spec.ts",
+        "apps/web/tests/browser/registrant-intake.spec.ts",
+        "apps/web/tests/browser/tracker-alert-preferences.spec.ts",
         "apps/web/tests/production/run-standalone.mjs",
         "apps/web/tests/production/verify-standalone.mjs",
         "apps/web/tests/watchlist-current-writer.test.ts"

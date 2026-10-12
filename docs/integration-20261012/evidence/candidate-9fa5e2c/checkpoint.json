@@ -1,0 +1,88 @@
+{
+  "source": "9fa5e2cb68bc2b15f2dddc5dd2a846756a5b6c9e",
+  "tree": "d6ebc315242254504b6f99a3ec4bae8673826983",
+  "portfolioBrowser": "IN_PROGRESS; no result claimed",
+  "container": "ENVIRONMENT_BLOCKED",
+  "artifacts": [
+    {
+      "path": "actual-server.txt",
+      "sha256": "21c889355b32eac597d1f948834e97d06bf87314d2c71726359ad80d1c2bf7d9",
+      "bytes": 3877
+    },
+    {
+      "path": "clean-install.txt",
+      "sha256": "316f0fd98b26c0ef9d985051fc3f9fa8a276bfd359137b2970711818935bea34",
+      "bytes": 164
+    },
+    {
+      "path": "combined-check.txt",
+      "sha256": "367b868cda246c80feefe1bfa4e8418bbee099a1e461b7e99a95aa2d8963c97f",
+      "bytes": 731841
+    },
+    {
+      "path": "container-initial.txt",
+      "sha256": "2bc8c46d49040153863828b3c6e9c3acb9e6c07b742674126a0ae24c984a09a1",
+      "bytes": 63
+    },
+    {
+      "path": "container-network-detail.txt",
+      "sha256": "3f8d221bb76a8a8c5dd7a02a85085ffa93642217a0b74c3ce36cea9b868b34ef",
+      "bytes": 96
+    },
+    {
+      "path": "container-network-failure.txt",
+      "sha256": "70bda68514e9c24f9e1f3327b1acf1c6a567058be81001cb397b55ca891febc0",
+      "bytes": 5107
+    },
+    {
+      "path": "container-network-probe.txt",
+      "sha256": "95af31e9a4b157a6df5016b224631edeaf7db5446e120ee8cb1d30408e67751c",
+      "bytes": 604
+    },
+    {
+      "path": "container-node-network-probe.txt",
+      "sha256": "99e72b1ca1746f3eabefbf2cfd96014dd734b4330c3c4e80c22765eb3e8a12f0",
+      "bytes": 15
+    },
+    {
+      "path": "container-proxy-failure.txt",
+      "sha256": "73670c5e26a4251d03f5aec3f84574d95c73b51a4789f5b9ad6a1c7f1b7525a0",
+      "bytes": 2504
+    },
+    {
+      "path": "host-alpine-connect-denied.txt",
+      "sha256": "94ee9a2b5221ca67be528c46ff0eb575e0a82093630de4bc3fb7e026cfb9816c",
+      "bytes": 51
+    },
+    {
+      "path": "modules-browser.json",
+      "sha256": "afb742e88428818db543f688ef1255730c967cb16c683186482296b25d65ceb5",
+      "bytes": 69274
+    },
+    {
+      "path": "modules-browser.txt",
+      "sha256": "99d12c5b71c36b09782a60e3ccc439370e5693774a89164e57e939c5d4833804",
+      "bytes": 9403
+    },
+    {
+      "path": "portfolio-history-bundle-verify.txt",
+      "sha256": "407c638f6e6cbfbb66f969a2ac7eaaa4d06a7f6f430f8faadd438722a060bded",
+      "bytes": 2660
+    },
+    {
+      "path": "production-build.txt",
+      "sha256": "7f5409a679b7ec5c2d1bee53519d7b31945af92146142672025cdb6efaefc6a1",
+      "bytes": 2302
+    },
+    {
+      "path": "ui-provenance-ssr.txt",
+      "sha256": "a2f5655fca1d44b72a737e0752bd99f83ac03388eae394cc0377d91045c49425",
+      "bytes": 3318
+    },
+    {
+      "path": "ui-ssr-receipt.json",
+      "sha256": "d167fd83fae792f10aae3e38d4b7f3072d9fc98df6ce7d9daf7cd37c3212ab61",
+      "bytes": 984830
+    }
+  ]
+}

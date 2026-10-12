@@ -7,7 +7,8 @@ Original mounted checkouts and feature-owner branches remain untouched.
 ## Pinned inputs
 
 - main: `02c02d95bdf3949662b9123f425271c6491ffdab`
-- Portfolio PR6 foundation: `abaeab37b36d60b3e5185755e1b2c9169d7c92f3`
+- Portfolio PR6 foundation: `abaeab37b36d60b3e5185755e1b2c9169d7c92f3`; later
+  archive-only additions preserved through `c330cebbd021eb984b4bf64ae13dbb991ae6b1c0`
 - Meri PR4: `3cc30ff3182e8050d563516607866cf07efe2aef` (includes PR1)
 - Modules PR5: `50155cbbf0e4df1eecba22cbfc9b2c35bff87e0a`
 
@@ -54,4 +55,5 @@ Record passed, failed and unrun separately. All 337 Portfolio rows remain open.
 
 Publish a new draft integration PR. No main merge, deployment, resources,
 credentials, database/security change, real provider messages, billing or paid
-model calls. Portfolio archive completion remains with its original owner.
+model calls. The original owner completed the Portfolio archive; its later commits are merged
+and the history bundle is hash-verified without restoring over this checkout.

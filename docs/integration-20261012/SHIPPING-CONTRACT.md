@@ -1,9 +1,9 @@
 # Corrected unified image contract
 
-The source recipe is corrected in the follow-up candidate after failed application
-pin `5840b50`. The final qualification receipt identifies the new exact committed
-pin; until that receipt and independent review pass, this is not build/deployment
-authorization. The previous recipe defects and frozen failure evidence remain in
+The corrected application and recipe are pinned at
+`9fa5e2cb68bc2b15f2dddc5dd2a846756a5b6c9e`, tree
+`d6ebc315242254504b6f99a3ec4bae8673826983`. Until the complete qualification
+receipt and independent review pass, this is not AWS build/deployment authorization. The previous recipe defects and frozen failure evidence remain in
 Git history and `evidence/frozen-qualification-receipt.json`.
 
 ## Exact build and output contract
@@ -80,3 +80,20 @@ and the read-back rollback digest. Never bake credentials into the archive/image
 
 No push, ECR scan, AWS project mutation, ECS update or deployment occurs here.
 All 337 Portfolio native acceptance rows remain open.
+
+## Local container attempt on the pinned source
+
+The base image pull succeeded, but the local build stopped at the first APK step.
+The existing environment proxy rejects HTTPS CONNECT to the official Alpine
+package index with HTTP403. Forwarding the existing proxy did not resolve it.
+The package-index refresh never completed, so the cached zlib version conflict
+does not establish that the required pinned package is unavailable upstream.
+No TLS/proxy bypass, package downgrade or base-image change was made.
+
+The initial Docker client configuration path was read-only; an empty temporary
+Docker configuration resolved that local setup issue without copying credentials.
+Logs and the HTTP403 diagnosis are preserved under
+`evidence/candidate-9fa5e2c/`. No final image was produced and container smoke and
+fresh image scan remain unrun. Static CLI checks, bash syntax, source hashes and
+the fresh fifteen-case SSR helper gate pass on this source. The shipping owner
+needs a permitted package-index path and independent review before building.
