@@ -1,3 +1,4 @@
+import { effectivePage } from "../effective-date-fixtures";
 import type { Page, Route } from "@playwright/test";
 import type { Prospect } from "../../src/features/portfolio/prospects/contracts";
 export const clientId = "10000000-0000-4000-8000-000000000001";
@@ -326,12 +327,32 @@ export async function installFixtures(page: Page) {
         withheld: 0,
       },
     };
-    if (path === "core/federal-register/effective-date-calendar")
-      return json(
-        route,
-        { message: "Synthetic publisher effective-date source unavailable" },
-        503,
+    if (path === "core/federal-register/effective-date-calendar") {
+      // A synthetic empty, explicitly incomplete source is independent of the
+      // failing source selected by each calendar test. It implies no live data.
+      const query = new URL(route.request().url()).searchParams;
+      const result = effectivePage(
+        query.get("dateFrom")!,
+        query.get("dateTo")!,
+        Number(query.get("page") ?? 1),
       );
+      return json(route, {
+        ...result,
+        data: [],
+        pagination: {
+          totalCandidates: 0,
+          returned: 0,
+          excludedOnPage: 0,
+          hasMoreCandidates: false,
+        },
+        coverage: {
+          ...result.coverage,
+          catalogRules: 0,
+          withoutEvidence: 0,
+          unsupportedEvidence: 0,
+        },
+      });
+    }
     if (path === "core/business-development/prospect-stages")
       return json(route, { message: "New stages unavailable" }, 404);
     if (path === "core/me/portfolio-layout")

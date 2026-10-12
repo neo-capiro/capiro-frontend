@@ -81,7 +81,7 @@ The parent reviewer supplied hashes for three immutable controls (negative sourc
 launcher, positive acceptance), but their source text was not written before
 context compaction and is not on this mounted filesystem. Exact byte restoration
 has been requested; these independent artifacts have not been reconstructed or
-claimed as run. The local red/green control is explicitly separate.
+claimed as run. The local red/green control is explicitly separate. This is the historical07:06 state: the controls were subsequently restored byte-for-byte and SHA-verified; canonical positive and mounted-reopen replays pass on1bf75bb, as recorded in its candidate evidence.
 
 The storage primitive moved without duplication to shared/session/recovery when prospect writers became real consumers. Known input/IDs/version updates are additionally checked under the journal lock; a stale tab cannot regress accepted lineage or reuse an acknowledged request UUID.
 

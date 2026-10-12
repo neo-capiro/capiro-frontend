@@ -1,0 +1,41 @@
+
+> capiro-frontend@0.1.0 test:browser
+> npm run test:browser --workspace @capiro/web -- calendar-boundary.spec.ts calendar-planner.spec.ts effective-dates.spec.ts
+
+
+> @capiro/web@0.1.0 test:browser
+> playwright test calendar-boundary.spec.ts calendar-planner.spec.ts effective-dates.spec.ts
+
+[WebServer] (node:266059) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 14 tests using 1 worker
+
+(node:266078) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/browser/calendar-boundary.spec.ts:77:3 › failed refresh removes Synthetic retained effective date and preserves other feeds (1.9s)
+  ✓   2 tests/browser/calendar-boundary.spec.ts:77:3 › failed refresh removes Synthetic retained meeting and preserves other feeds (1.6s)
+  ✓   3 tests/browser/calendar-boundary.spec.ts:77:3 › failed refresh removes Synthetic retained hearing and preserves other feeds (1.7s)
+  ✓   4 tests/browser/calendar-boundary.spec.ts:77:3 › failed refresh removes Synthetic retained task and preserves other feeds (1.7s)
+  ✓   5 tests/browser/calendar-boundary.spec.ts:77:3 › failed refresh removes Synthetic retained deadline and preserves other feeds (1.5s)
+  ✓   6 tests/browser/calendar-boundary.spec.ts:120:1 › failed client refresh removes cached names from the Calendar scope picker (1.4s)
+  ✓   7 tests/browser/calendar-boundary.spec.ts:148:1 › meeting client selection survives failed refresh without a silent association change (2.8s)
+  ✓   8 tests/browser/calendar-boundary.spec.ts:201:1 › a master Calendar client link cannot save after its selected client becomes unavailable (2.9s)
+  ✓   9 tests/browser/calendar-boundary.spec.ts:241:1 › unavailable Calendar feeds do not become a successful empty-state claim (1.6s)
+  ✓  10 tests/browser/calendar-planner.spec.ts:17:1 › Master Agenda retains scheduled starts and due dates while client Calendar stays meeting-scoped (2.2s)
+  ✓  11 tests/browser/calendar-planner.spec.ts:87:1 › invalid timed Planner source is a visible feed error (3.4s)
+  ✓  12 tests/browser/effective-dates.spec.ts:4:1 › master Agenda reads publisher effective dates across excluded pages without shifting civil dates (2.4s)
+  ✓  13 tests/browser/effective-dates.spec.ts:76:1 › client Agenda and master Month never fetch the public effective-date feed (3.9s)
+  ✓  14 tests/browser/effective-dates.spec.ts:97:1 › stale effective evidence stays unavailable without publication-date fallback (3.3s)
+
+  14 passed (33.9s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
