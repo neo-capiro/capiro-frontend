@@ -27,9 +27,12 @@ no original owner branch, main, resource, credential or database is changed.
 - Additional actual-server Meri fixture checks pass for citations, all eight run
   states, unavailable actions, keyboard access, viewport fit and zero API requests.
 
-The **881-case Portfolio browser run is still in progress**. It has passed over
-200 cases without a failure at this checkpoint. This is not final combined
-qualification or authority to ship. The prior concurrent run was interrupted;
+The **881-case Portfolio browser run is still in progress**. Full-log inspection
+at the 600-case progress check found ten failed cases (capability visual/lifetime checks and an
+obsolete Portfolio wordmark expectation). Earlier progress based on the recent
+tail missed those failures and is superseded by this correction. Traces are
+retained; triage proceeds without modifying the frozen application. This is not
+final combined qualification or authority to ship. The prior concurrent run was interrupted;
 its timeout and output-directory collision evidence are retained. The affected
 timeout case passes unchanged in the frozen run. Separate harness output paths
 now prevent Playwright cleanup from deleting the other suite's built files.
