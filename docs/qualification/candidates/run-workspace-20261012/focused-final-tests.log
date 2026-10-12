@@ -1,0 +1,25 @@
+✔ all eight canonical run states display explicit labels without inferred completion (15.260329ms)
+✔ fixture events all validate with the public browser contract; unknown scenarios fail (7.666599ms)
+✔ selected run and attempt isolate colliding message and tool request IDs (1.637823ms)
+✔ message fragments concatenate in accepted order; sparse references stay exact (3.740012ms)
+✔ unmatched completion never invents a tool name, arguments or business success (5.352458ms)
+✔ canonical safe error rendering never exposes raw text or prototype-looking codes (0.709225ms)
+✔ canonical projection owns replay and sequence repair before presentation (1.572538ms)
+✔ fixture canonical admission rejects cross-view and immutable-event conflicts (0.575118ms)
+✔ presentation does not mutate accepted events or include unsupported metadata (3.398448ms)
+✔ discovers real route composition and accepts directed local imports (8.074269ms)
+✔ run workspace admits only its three approved additional public seams (1.18039ms)
+✔ rejects cycles, feature-private crossing, private package and external repository paths (0.94293ms)
+✔ rejects computed loading and undeclared server endpoints (1.166369ms)
+✔ size and function thresholds require explicit review instead of silent exceptions (6.45301ms)
+✔ browser client resolves emitted JS imports and refuses server or Node contract entries (0.819208ms)
+✔ resolved relative imports cannot cross application and package ownership in either direction (1.982381ms)
+✔ same-owner relative edges and explicitly approved public package imports stay valid (0.423895ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 347.193859

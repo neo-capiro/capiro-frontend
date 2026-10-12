@@ -1,0 +1,144 @@
+✖ all eight canonical run states display explicit labels without inferred completion (10.721307ms)
+✖ fixture events all validate with the public browser contract; unknown scenarios fail (1.231094ms)
+✖ selected run and attempt isolate colliding message and tool request IDs (0.581066ms)
+✖ message fragments concatenate in accepted order; sparse references stay exact (0.579724ms)
+✖ unmatched completion never invents a tool name, arguments or business success (0.594846ms)
+✖ canonical safe error rendering never exposes raw text or prototype-looking codes (0.31936ms)
+✖ canonical projection owns replay and sequence repair before presentation (0.371908ms)
+✖ fixture canonical admission rejects cross-view and immutable-event conflicts (0.2036ms)
+✖ presentation does not mutate accepted events or include unsupported metadata (0.269257ms)
+✔ discovers real route composition and accepts directed local imports (11.506705ms)
+✔ run workspace admits only its three approved additional public seams (1.26925ms)
+✔ rejects cycles, feature-private crossing, private package and external repository paths (0.962678ms)
+✔ rejects computed loading and undeclared server endpoints (1.610132ms)
+✔ size and function thresholds require explicit review instead of silent exceptions (8.654162ms)
+✔ browser client resolves emitted JS imports and refuses server or Node contract entries (1.010079ms)
+✔ resolved relative imports cannot cross application and package ownership in either direction (2.164349ms)
+✔ same-owner relative edges and explicitly approved public package imports stay valid (0.573165ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 8
+ℹ fail 9
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 336.765124
+
+✖ failing tests:
+
+test at apps/web/test/run-workspace.test.mjs:10:1
+✖ all eight canonical run states display explicit labels without inferred completion (10.721307ms)
+  Error: Unknown synthetic run scenario
+      at runActivityEvents (file:///workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web/src/features/meri/fixtures/run-activity-events.ts:27:41)
+      at TestContext.<anonymous> (file:///workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web/test/run-workspace.test.mjs:12:72)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+
+test at apps/web/test/run-workspace.test.mjs:19:1
+✖ fixture events all validate with the public browser contract; unknown scenarios fail (1.231094ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web/test/run-workspace.test.mjs:20:141)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at apps/web/test/run-workspace.test.mjs:26:1
+✖ selected run and attempt isolate colliding message and tool request IDs (0.581066ms)
+  Error: Synthetic event failed the public0.1 browser validator
+      at projectSampleEvents (file:///workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web/src/features/meri/fixtures/run-activity-events.ts:54:41)
+      at TestContext.<anonymous> (file:///workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web/test/run-workspace.test.mjs:27:22)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at apps/web/test/run-workspace.test.mjs:38:1
+✖ message fragments concatenate in accepted order; sparse references stay exact (0.579724ms)
+  Error: Synthetic event failed the public0.1 browser validator
+      at projectSampleEvents (file:///workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web/src/features/meri/fixtures/run-activity-events.ts:54:41)
+      at viewOf (file:///workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web/test/run-workspace.test.mjs:8:68)
+      at TestContext.<anonymous> (file:///workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web/test/run-workspace.test.mjs:39:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at apps/web/test/run-workspace.test.mjs:47:1
+✖ unmatched completion never invents a tool name, arguments or business success (0.594846ms)
+  Error: Synthetic event failed the public0.1 browser validator
+      at projectSampleEvents (file:///workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web/src/features/meri/fixtures/run-activity-events.ts:54:41)
+      at viewOf (file:///workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web/test/run-workspace.test.mjs:8:68)
+      at TestContext.<anonymous> (file:///workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web/test/run-workspace.test.mjs:48:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at apps/web/test/run-workspace.test.mjs:55:1
+✖ canonical safe error rendering never exposes raw text or prototype-looking codes (0.31936ms)
+  Error: Unknown synthetic run scenario
+      at runActivityEvents (file:///workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web/src/features/meri/fixtures/run-activity-events.ts:27:41)
+      at TestContext.<anonymous> (file:///workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web/test/run-workspace.test.mjs:56:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at apps/web/test/run-workspace.test.mjs:64:1
+✖ canonical projection owns replay and sequence repair before presentation (0.371908ms)
+  Error: Synthetic event failed the public0.1 browser validator
+      at projectSampleEvents (file:///workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web/src/features/meri/fixtures/run-activity-events.ts:54:41)
+      at TestContext.<anonymous> (file:///workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web/test/run-workspace.test.mjs:65:75)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at apps/web/test/run-workspace.test.mjs:75:1
+✖ fixture canonical admission rejects cross-view and immutable-event conflicts (0.2036ms)
+  Error: Unknown synthetic run scenario
+      at runActivityEvents (file:///workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web/src/features/meri/fixtures/run-activity-events.ts:27:41)
+      at TestContext.<anonymous> (file:///workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web/test/run-workspace.test.mjs:76:18)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at apps/web/test/run-workspace.test.mjs:83:1
+✖ presentation does not mutate accepted events or include unsupported metadata (0.269257ms)
+  Error: Synthetic event failed the public0.1 browser validator
+      at projectSampleEvents (file:///workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web/src/features/meri/fixtures/run-activity-events.ts:54:41)
+      at TestContext.<anonymous> (file:///workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web/test/run-workspace.test.mjs:84:22)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)

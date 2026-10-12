@@ -1,0 +1,15 @@
+# Primary run workspace review
+
+**ACCEPT_SOURCE_PRESERVATION_ONLY** for `0068c58613f1e2d5ed13e68f9a9d18c8b9a7ef88`, tree `ba250acb34eda76a9632d5daa0c18fca7d0d5bec`.
+
+The feature has cohesive presentation, transcript, activity and fixture owners. It reuses the adopted Conversation/Message/PromptInput components and canonical public0.1 validation/projection. Presentation grouping does not replace admission, replay, transport or authorization. All eight states and sparse immutable references are represented without inventing result coverage, business success, artifact names, costs, plan metadata or executable actions. The route is explicitly a disconnected fixture, not a connected product workspace.
+
+Primary independently inspected source and desktop/mobile screenshots, verified all 36 author evidence payloads against committed bytes, and ran 17 actual presentation/architecture tests plus seven actual browser groups. Those checks passed with zero page errors or external requests. Tests exercised status versus stream completion, canonical replay, escaped script-like response text, unmatched tool completion, keyboard/log/disclosure/drafts/scroll, run/attempt isolation and preserved Home/cited/Routines/mode behavior.
+
+Fresh Figma content `443:84463` in file `Zc2dEN5aLU47dVdsewDmiJ` produced Git blob `67c231c07d5036c19aa9cbcde7d7f5b1888ebe33`, exactly matching the committed author tool-activity reference. The accepted implementation is the documented sparse-contract subset; it does not implement the reference's richer record tables, source coverage, verified file rows or full-screen workflow.
+
+Primary borrowed the frozen author's installed dependencies and already reviewed production build read-only; no additional production build is claimed by this review. The author had passed full29+21 checks and a clean actual build. Primary's first preview invocation used an incorrect workspace-local Next binary path and exited before readiness. That failure, original harness and physical cleanup receipt remain preserved. Correcting only the binary path to the actual root installation produced the passing browser run. Source and assertions were unchanged. Both server groups exited and listeners closed; the final owned server's exit143 is deliberate SIGTERM cleanup. Browser context/process cleanup completed.
+
+The local preview uses unsandboxed Chromium for UI verification and blocked external requests. This is not deployment browser/renderer sandbox, network isolation, authentication or recovery qualification. Portfolio-first `apps/web`/HeaderFrame integration and one combined existing preview remain pending. No shared-shell, Home/cited/Portfolio, package/lock/public0.1 or existing assets were changed by this review. No cloud write, main merge or source activation occurred.
+
+Exact receipts, hashes, the retained failed preview and the successful run are [indexed](../../qualification/candidates/run-workspace-20261012/primary-review-index.json). The primary review adds evidence only; original source and author tests are unchanged.

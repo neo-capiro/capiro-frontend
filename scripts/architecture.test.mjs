@@ -6,6 +6,14 @@ test('discovers real route composition and accepts directed local imports', () =
   const files = new Map([['apps/web/src/app/page.tsx', "import { Home } from '../features/meri/Home'; export default Home;"], ['apps/web/src/features/meri/Home.tsx', "import { Button } from '@capiro/ui/button'; export const Home=()=>null;"]]);
   const result = inspectSources(files); assert.deepEqual(result.errors, []); assert.deepEqual(result.routes, ['apps/web/src/app/page.tsx']);
 });
+test('run workspace admits only its three approved additional public seams', () => {
+  const source = "import '@capiro/ui/conversation'; import '@capiro/ui/message'; import '@capiro/meri-client/projection';";
+  assert.deepEqual(inspectSources(new Map([['apps/web/src/features/meri/workspace/View.tsx', source]])).errors, []);
+  for (const specifier of ['@capiro/ui/src/ai-elements/message', '@capiro/ui/vendor/conversation', '@capiro/meri-client/src/projection', '@capiro/meri-client', '@capiro/meri-client/react']) {
+    const errors = inspectSources(new Map([['apps/web/src/features/meri/workspace/View.tsx', `import '${specifier}';`]])).errors;
+    assert.equal(errors.filter(error => error.includes('non-public package')).length, 1, specifier);
+  }
+});
 test('rejects cycles, feature-private crossing, private package and external repository paths', () => {
   const files = new Map([['apps/web/src/features/meri/A.ts', "import '../portfolio/B'; import '@capiro/ui/vendor/button'; import 'meri-greenfield/apps/private';"], ['apps/web/src/features/portfolio/B.ts', "import '../meri/A';"]]);
   const errors = inspectSources(files).errors.join('\n');

@@ -7,7 +7,7 @@ const extensions = ['', '.ts', '.tsx', '.mjs', '.mts', '.css', '.json', '/index.
 const slash = value => value.split(path.sep).join('/');
 
 /** Inspect authored application sources, never execute application/vendor code. */
-export function inspectSources(files, publicExports = new Set(['@capiro/ui/button', '@capiro/ui/prompt-input', '@capiro/meri-contracts', '@capiro/meri-contracts/browser', '@capiro/meri-contracts/metadata', '@capiro/meri-ui-stream/protocol'])) {
+export function inspectSources(files, publicExports = new Set(['@capiro/ui/button', '@capiro/ui/prompt-input', '@capiro/ui/conversation', '@capiro/ui/message', '@capiro/meri-client/projection', '@capiro/meri-contracts', '@capiro/meri-contracts/browser', '@capiro/meri-contracts/metadata', '@capiro/meri-ui-stream/protocol'])) {
   const errors = [], signals = [], graph = new Map();
   const feature = name => name.match(/\/features\/([^/]+)\//)?.[1];
   const owner = name => name.match(/^(?:apps|packages)\/[^/]+(?=\/)/)?.[0];
