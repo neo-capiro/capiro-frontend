@@ -19,6 +19,7 @@ const same = (left: unknown, right: unknown) =>
  */
 function explainedTerms(submitted: Submitted, record: Receipt) {
   const rejected = new Set<string>();
+  const counts = new Map<string, number>();
   for (const entry of record.rejected?.terms ?? []) {
     const topic = submitted.topics.find(
       (topic) => topic.label.trim() === entry.topicLabel,
@@ -37,7 +38,14 @@ function explainedTerms(submitted: Submitted, record: Receipt) {
       : entry.reason === "Term too short" ||
         entry.reason.startsWith(`"${value}" is too short to match safely.`);
     const key = JSON.stringify([entry.topicLabel, termKey(term)]);
-    if (!tooShort || !reasonMatches || rejected.has(key)) return null;
+    const count = (counts.get(key) ?? 0) + 1;
+    const submittedCount = topic!.terms.filter(
+      (candidate) =>
+        candidate.termType === entry.termType &&
+        candidate.value.trim() === value,
+    ).length;
+    if (!tooShort || !reasonMatches || count > submittedCount) return null;
+    counts.set(key, count);
     rejected.add(key);
   }
   return rejected;

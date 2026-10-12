@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useCapiroQuery } from "../../../../../shared/capiro/queries";
 import {
   ActionButton,
@@ -21,7 +21,10 @@ export function IntelligencePanel({
   const [cursors, setCursors] = useState<string[]>([]);
   const contextKey = JSON.stringify([hearingId, route.clientId, relevantOnly]);
   const [previousContext, setPreviousContext] = useState(contextKey);
-  if (contextKey !== previousContext) { setPreviousContext(contextKey); setCursors([]); }
+  if (contextKey !== previousContext) {
+    setPreviousContext(contextKey);
+    setCursors([]);
+  }
   const result = useCapiroQuery("legiwatch.intelligence", {
     params: { id: hearingId },
     query: {

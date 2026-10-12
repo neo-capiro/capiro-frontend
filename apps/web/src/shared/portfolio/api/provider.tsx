@@ -1,4 +1,5 @@
 "use client";
+import { createRequestLifetime } from "../../session/request-lifetime";
 import {
   createContext,
   useContext,
@@ -19,7 +20,7 @@ export function DataProvider({
   api?: ApiClient;
   onSessionExpired?: () => void;
 }) {
-  const [scope] = useState(() => ({ controller: new AbortController() }));
+  const [scope] = useState(createRequestLifetime);
   const [client] = useState(
     () =>
       new QueryClient({
@@ -40,19 +41,18 @@ export function DataProvider({
     createApiClient(
       fetch,
       () => {
-        scope.controller.abort();
+        scope.abort();
         client.clear();
         setExpired(true);
         onSessionExpired?.();
       },
-      () => scope.controller.signal,
+      scope.signal,
     ),
   );
   useLayoutEffect(() => {
-    if (scope.controller.signal.aborted) scope.controller = new AbortController();
-    const current = scope.controller;
+    const dispose = scope.mount();
     return () => {
-      current.abort();
+      dispose();
       void client.cancelQueries();
       client.clear();
     };

@@ -1,5 +1,11 @@
 "use client";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { useCapiro } from "../../../../../shared/capiro/CapiroBoundary";
 import {
   HearingRecordingTransport,
@@ -39,7 +45,9 @@ export function useBrowserCapture(
     resources = useRef<CaptureResources>({ startedAt: 0, graceful: false }),
     generation = useRef(0),
     onEndedRef = useRef(onEnded);
-  useLayoutEffect(() => { onEndedRef.current = onEnded; }, [onEnded]);
+  useLayoutEffect(() => {
+    onEndedRef.current = onEnded;
+  }, [onEnded]);
   const [phase, setPhase] = useState<CapturePhase>("idle"),
     [error, setError] = useState<string>(),
     [interim, setInterim] = useState<LiveSegment>(),

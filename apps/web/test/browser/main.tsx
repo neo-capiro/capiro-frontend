@@ -1,3 +1,11 @@
+import { IntegrationProbe } from "./IntegrationProbe";
+import { RequireSession } from "../../src/shared/session/SessionContext";
+import { PortfolioIndex } from "../../src/features/portfolio/index/PortfolioIndex";
+import { ClientFrame } from "../../src/features/portfolio/client-profile/ClientFrame";
+import { ClientOverview } from "../../src/features/portfolio/client-profile/ClientOverview";
+import { ProductShell } from "../../src/shared/shell/ProductShell";
+import { MeriHome } from "../../src/features/meri/MeriHome";
+import "../../src/shared/portfolio/styles.css";
 import { ApplicationBoundary } from "../../src/shared/session/ApplicationBoundary";
 import { StrictMode } from "react";
 import { PublicForm } from "../../src/features/modules/planner/PublicForm";
@@ -39,6 +47,28 @@ function RoutedApp() {
         </p>
       </>
     );
+  if (path === "/meri")
+    return (
+      <ProductShell>
+        <MeriHome />
+      </ProductShell>
+    );
+  if (path === "/" || path === "/portfolio" || path.startsWith("/portfolio/")) {
+    const id = path.split("/")[2];
+    return (
+      <div data-portfolio-root>
+        <RequireSession>
+          {id ? (
+            <ClientFrame clientId={id} destinations={{}}>
+              <ClientOverview clientId={id} />
+            </ClientFrame>
+          ) : (
+            <PortfolioIndex destinations={{}} />
+          )}
+        </RequireSession>
+      </div>
+    );
+  }
   const configured = path !== "/__test/unconfigured";
   const isSettings = path.startsWith("/settings");
   const slug = path.split("/")[2] as ModuleSlug;
@@ -83,4 +113,15 @@ function RoutedApp() {
 }
 createRoot(document.getElementById("root")!).render(<App />);
 
-function App() { return <ApplicationBoundary publishableKey="pk_test_YQ=="><RoutedApp /></ApplicationBoundary>; }
+function App() {
+  return (
+    <ApplicationBoundary publishableKey="pk_test_YQ==">
+      <RoutedApp />
+      {sessionStorage.getItem("integration-probe") && (
+        <RequireSession>
+          <IntegrationProbe />
+        </RequireSession>
+      )}
+    </ApplicationBoundary>
+  );
+}

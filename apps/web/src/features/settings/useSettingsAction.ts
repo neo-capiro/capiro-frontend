@@ -11,7 +11,12 @@ export function useSettingsAction(scopeKey?: object) {
   const [error, setError] = useState<string>();
   const [message, setMessage] = useState<string>();
   const [previousScope, setPreviousScope] = useState(() => scopeKey);
-  if (previousScope !== scopeKey) { setPreviousScope(() => scopeKey); setBusy(false); setError(undefined); setMessage(undefined); }
+  if (previousScope !== scopeKey) {
+    setPreviousScope(() => scopeKey);
+    setBusy(false);
+    setError(undefined);
+    setMessage(undefined);
+  }
   useEffect(() => {
     active.current = true;
     scope.current = new AbortController();

@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 
 import { useState } from "react";
 import { useCapiroQuery } from "../../../../shared/capiro/queries";
@@ -242,17 +243,17 @@ export function RunDetail({
                 />
                 <div className={styles.actions}>
                   {run.findings?.execution?.kind === "workspace" && (
-                    <a className={styles.anchor} href="/modules/workspace">
+                    <Link className={styles.anchor} href="/modules/workspace">
                       Open Workspace
-                    </a>
+                    </Link>
                   )}
                   {run.findings?.execution?.kind === "outreach" && (
-                    <a
+                    <Link
                       className={styles.anchor}
                       href="/modules/engagement?view=outreach"
                     >
                       Open Outreach
-                    </a>
+                    </Link>
                   )}
                 </div>
               </Panel>

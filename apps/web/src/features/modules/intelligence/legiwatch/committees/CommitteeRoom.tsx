@@ -41,8 +41,8 @@ export function CommitteeRoom({ id }: { id: string }) {
         )}
         {row && row.upcomingEvents.length + row.recentEvents.length === 0 && (
           <p className={styles.description}>
-            No proceedings were returned within the committee room's one year
-            windows.
+            No proceedings were returned within the committee room&apos;s one
+            year windows.
           </p>
         )}
       </div>

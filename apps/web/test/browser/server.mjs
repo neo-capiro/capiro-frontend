@@ -37,7 +37,7 @@ const configuration = {
 await build({
   ...configuration,
   build: {
-    outDir: path.join(app, "test-results/harness"),
+    outDir: path.join(app, ".qa/modules-harness"),
     emptyOutDir: true,
     minify: false,
     sourcemap: true,
@@ -51,7 +51,7 @@ await build({
 });
 await preview({
   ...configuration,
-  build: { outDir: path.join(app, "test-results/harness") },
+  build: { outDir: path.join(app, ".qa/modules-harness") },
   preview: { host: "127.0.0.1", port: 5197, strictPort: true },
   logLevel: "warn",
 });

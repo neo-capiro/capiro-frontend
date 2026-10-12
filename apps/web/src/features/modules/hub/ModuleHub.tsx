@@ -72,7 +72,8 @@ export function ModuleHub() {
   const clientId = params.get("clientId") ?? "";
   const setClientId = (id: string) => {
     const next = new URLSearchParams(params);
-    if (id) next.set("clientId", id); else next.delete("clientId");
+    if (id) next.set("clientId", id);
+    else next.delete("clientId");
     router.push(`/modules?${next}`);
   };
   const profiles = clients.data ?? [];

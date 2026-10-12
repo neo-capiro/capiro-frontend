@@ -15,11 +15,21 @@ const api = createCapiroApi(publicPlannerFormOperations);
 
 export function PublicForm({ token }: { token: string }) {
   const [revision, reload] = useState(0);
-  return <FormRequest key={`${token}:${revision}`} token={token} reload={() => reload(value => value + 1)} />;
+  return (
+    <FormRequest
+      key={`${token}:${revision}`}
+      token={token}
+      reload={() => reload((value) => value + 1)}
+    />
+  );
 }
 function FormRequest({ token, reload }: { token: string; reload: () => void }) {
   const [form, setForm] = useState<z.infer<typeof publicForm>>(),
-    [error, setError] = useState<Error>(() => publicFormToken.safeParse(token).success ? undefined : new Error("This form link is unavailable."));
+    [error, setError] = useState<Error | undefined>(() =>
+      publicFormToken.safeParse(token).success
+        ? undefined
+        : new Error("This form link is unavailable."),
+    );
   useEffect(() => {
     const controller = new AbortController();
     if (!publicFormToken.safeParse(token).success) return;
@@ -47,18 +57,8 @@ function FormRequest({ token, reload }: { token: string; reload: () => void }) {
   return (
     <main style={{ maxWidth: 680, margin: "48px auto", padding: "0 20px" }}>
       <p className={styles.eyebrow}>Capiro · Request form</p>
-      <StatusPanel
-        loading={!form && !error}
-        error={error}
-        onRetry={reload}
-      >
-        {form && (
-          <PublicFormQuestions
-            key={token}
-            token={token}
-            form={form}
-          />
-        )}
+      <StatusPanel loading={!form && !error} error={error} onRetry={reload}>
+        {form && <PublicFormQuestions key={token} token={token} form={form} />}
       </StatusPanel>
     </main>
   );

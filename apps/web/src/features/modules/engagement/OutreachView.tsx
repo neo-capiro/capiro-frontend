@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useCapiro } from "../../../shared/capiro/CapiroBoundary";
 import type { OutreachRecord } from "../../../shared/capiro/operations/engagement";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
@@ -31,7 +31,10 @@ export function OutreachView({
 }) {
   const [session, setSession] = useState<string | null>(initialSession ?? null);
   const [previousSession, setPreviousSession] = useState(initialSession);
-  if (previousSession !== initialSession) { setPreviousSession(initialSession); setSession(initialSession ?? null); }
+  if (previousSession !== initialSession) {
+    setPreviousSession(initialSession);
+    setSession(initialSession ?? null);
+  }
   const sessions = useCampaignList();
   const draft = useCapiroQuery(
     "engagement.outreach.record",
@@ -46,11 +49,10 @@ export function OutreachView({
     [selected, setSelected] = useState<OutreachRecord | "new" | null>(
       initialCreate ? "new" : null,
     );
-  const [loadedDraft, setLoadedDraft] = useState(() => (draft.data));
-  if (loadedDraft !== (draft.data)) {
+  const [loadedDraft, setLoadedDraft] = useState(() => draft.data);
+  if (loadedDraft !== draft.data) {
     setLoadedDraft(draft.data);
     if (draft.data) setSelected(draft.data);
-
   }
   const rows =
     query.data?.filter(

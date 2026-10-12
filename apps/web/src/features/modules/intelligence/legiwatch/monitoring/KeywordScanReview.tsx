@@ -88,8 +88,8 @@ export function KeywordScanReview({
     <div className={styles.form}>
       <p className={styles.banner}>
         Preview scans have no assignment effects. Active scans follow the saved
-        rule's reviewed mode; automatic additions require backend capability and
-        current source qualification.
+        rule&apos;s reviewed mode; automatic additions require backend
+        capability and current source qualification.
       </p>
       <div className={styles.actions}>
         <ActionButton disabled={pending} onClick={() => void begin("preview")}>

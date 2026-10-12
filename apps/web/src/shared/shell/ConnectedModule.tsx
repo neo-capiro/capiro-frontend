@@ -16,10 +16,7 @@ export function ConnectedModule({
 }) {
   const config = publicCapiroConfig(readCapiroConfig(process.env));
   return (
-    <ModuleShell
-      active={active}
-      settings={settings}
-    >
+    <ModuleShell active={active} settings={settings}>
       <CapiroBoundary config={config}>
         <Suspense fallback={<p role="status">Loading view…</p>}>
           {children}

@@ -12,7 +12,7 @@
     "test:browser": "playwright test",
     "test": "vitest run",
     "lint": "eslint src tests",
-    "format:check": "prettier --check src/features/portfolio src/shared/portfolio 'src/app/(portfolio)' src/app/api src/app/healthz src/proxy.ts src/shared/shell/HeaderFrame.tsx src/shared/shell/header-frame.module.css tests *.json *.ts *.mjs",
+    "format:check": "prettier --check src test tests *.json *.ts *.mjs",
     "architecture": "node ../../scripts/architecture.mjs",
     "test:browser:modules": "playwright test --config test/browser/playwright.config.ts"
   },

@@ -18,11 +18,11 @@
   },
   {
     "path": "apps/web/src/features/modules/directory/CongressionalContacts.tsx",
-    "sha256": "6cd3f551573f1210f782cc94a4b8a40653005cc899e180993bf886a86f55a57d",
-    "reviewer": "Codex implementation review",
+    "sha256": "0b6c1df6ea8e36914b43ae2c6c75c0e39ec4598acab9925ff73061ef4b41364e",
+    "reviewer": "Codex shared frontend integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "CongressionalContacts.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The directory table still owns only congressional-contact filtering and selection. charAt preserves the original label while satisfying noUncheckedIndexedAccess; transport stays in the existing query adapter.",
     "functions": [
       {
         "name": "CongressionalContacts",
@@ -125,15 +125,15 @@
   },
   {
     "path": "apps/web/src/features/modules/engagement/EngagementOverview.tsx",
-    "sha256": "fcf46d122ab226e119eb0c1a2b84c5c0df955fb6454be4feca17e50401d98610",
-    "reviewer": "Codex implementation review",
+    "sha256": "e5ca3912855cc6c056522cfdf03973dd56fcff6ffa8086ae3447a5c66e80dc39",
+    "reviewer": "Codex shared frontend integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "EngagementOverview.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The overview still aggregates permitted meetings/tasks/report projections. A stable view clock replaces a render-time clock; no service, provider or authorization responsibility moves into the component.",
     "functions": [
       {
         "name": "EngagementOverview",
-        "nonblankLines": 118
+        "nonblankLines": 119
       }
     ],
     "signals": [
@@ -142,15 +142,15 @@
   },
   {
     "path": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
-    "sha256": "42a4a82a3cd65d9acdc387203364d538fb48d6241e9d5ba26ac4cf6bdad586a7",
-    "reviewer": "Codex implementation review",
+    "sha256": "41c2018ff90f7274dd22260b03d2ed57fad1e19bac3aad9e4e6b3d2b7b9f71b1",
+    "reviewer": "Codex shared frontend integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "EngagementScreen.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The engagement composer owns one route-selected view. Its client selector now changes the canonical URL, clearing client-bound draft/session hints and remounting the shared request/editor scope. Existing meeting, outreach, report and team surfaces remain separate modules.",
     "functions": [
       {
         "name": "EngagementScreen",
-        "nonblankLines": 109
+        "nonblankLines": 118
       }
     ],
     "signals": [
@@ -159,15 +159,15 @@
   },
   {
     "path": "apps/web/src/features/modules/engagement/MeetingLibrary.tsx",
-    "sha256": "18f43500428abff6178c9c44ca45e25ca3ecf3d9c2c2c0602387169686327d5b",
-    "reviewer": "Codex implementation review",
+    "sha256": "09df8ca2d02026f72ced2ee0a86fff841cbee9b961fd0e544323dbef579d4267",
+    "reviewer": "Codex shared frontend integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "MeetingLibrary.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The meeting list and selection retain their existing owner. The upcoming queue uses a stable mounted-view clock and apostrophe escaping preserves visible text. Export, attendance and preparation contracts remain in their adapters.",
     "functions": [
       {
         "name": "MeetingLibrary",
-        "nonblankLines": 115
+        "nonblankLines": 116
       }
     ],
     "signals": [
@@ -176,15 +176,15 @@
   },
   {
     "path": "apps/web/src/features/modules/engagement/OutreachView.tsx",
-    "sha256": "97801100b0636639cc04e7d740dd6a355adbdfd15721f1aabb0a34fe4263abb3",
-    "reviewer": "Codex implementation review",
+    "sha256": "20bdd7f04a8f1414113b3ec9ded35a6176ac7fdbbf9f193bb8d2dc307f6b0512",
+    "reviewer": "Codex shared frontend integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "OutreachView.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The view selects one outreach session/draft; the adjacent OutreachForm owns editing that record. Guarded state replacement handles changed inputs before rendering without moving dispatch into presentation. Original action/cancellation tests remain required.",
     "functions": [
       {
         "name": "OutreachView",
-        "nonblankLines": 92
+        "nonblankLines": 98
       },
       {
         "name": "OutreachForm",
@@ -368,15 +368,15 @@
   },
   {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/committees/CommitteeFollowDialog.tsx",
-    "sha256": "d4950df1b07836fcec3aef36975df299a9776a17a4b8bcf65f340e9fb70b20be",
-    "reviewer": "Codex implementation review",
+    "sha256": "16c7e3d3bcdf3139a9f4eeb758788452d6f6f79e89ba4d0ea4690893b45a2a5a",
+    "reviewer": "Codex shared frontend integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "CommitteeFollowDialog.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The form owns one committee-follow preference transaction. Guarded initialization replaces the effect only when the loaded source changes; typed operations still own the write contract.",
     "functions": [
       {
         "name": "CommitteeFollowDialog",
-        "nonblankLines": 120
+        "nonblankLines": 122
       }
     ],
     "signals": [
@@ -385,11 +385,11 @@
   },
   {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/committees/CommitteeRoom.tsx",
-    "sha256": "8a2918b6398214f76f3485af59bd4cf6f046b8348caca5f50e41cd4680dca70d",
-    "reviewer": "Codex implementation review",
+    "sha256": "fa2346dbb1a5cfe18335992d4891194d615dd5f476e4113b32ffcec215cc0aaa",
+    "reviewer": "Codex shared frontend integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "CommitteeRoom.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "This is one committee-room projection composer; the only integration change is equivalent JSX apostrophe escaping.",
     "functions": [
       {
         "name": "CommitteeRoom",
@@ -538,15 +538,15 @@
   },
   {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/FollowHearingDialog.tsx",
-    "sha256": "f43c1a76677ef224129372626fe54804f7880e1f0bc6d1cf5306fc9fce8450b8",
-    "reviewer": "Codex implementation review",
+    "sha256": "024b629ea4b3508eba052d9a15233ba5c4187c29c3e28f6a0e7b6638040bd047",
+    "reviewer": "Codex shared frontend integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "FollowHearingDialog.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "This dialog edits one hearing-follow preference. Guarded loaded-record replacement preserves the same selected-client/preference transaction and existing operation boundaries.",
     "functions": [
       {
         "name": "FollowHearingDialog",
-        "nonblankLines": 127
+        "nonblankLines": 129
       }
     ],
     "signals": [
@@ -611,15 +611,15 @@
   },
   {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/IntelligencePanel.tsx",
-    "sha256": "ccf57b31f4df31f439cf8374b603a839434a3c3926f169417b871ed8157c57b3",
-    "reviewer": "Codex implementation review",
+    "sha256": "ffa3b437a70858ca9c944e01ce784bb224cc76d8587336ffd16ff5c2cb31262c",
+    "reviewer": "Codex shared frontend integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "IntelligencePanel.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The panel owns one hearing intelligence query and pagination. Cursor clearing follows the complete hearing/client/relevance tuple before rendering; matching and source qualification remain server-owned.",
     "functions": [
       {
         "name": "IntelligencePanel",
-        "nonblankLines": 93
+        "nonblankLines": 98
       }
     ],
     "signals": [
@@ -793,22 +793,22 @@
   },
   {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/live/use-browser-capture.ts",
-    "sha256": "2aaf2a340ef58ca3193bb97bd136b5c134052842ce306c076d8099989b2dc43e",
-    "reviewer": "Codex implementation review",
+    "sha256": "8975c6e41cc63d920e06e041840ad578c72d90c1d7e77b6340fd92bc644207b0",
+    "reviewer": "Codex shared frontend integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "use-browser-capture.ts owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The hook and its nested connect/message handlers own one bounded browser media/socket capture lifetime. The existing generation, ownsCapture, interruption and cleanup fences remain intact. Callback synchronization moves to layout commit and visible state resets on scope replacement; MediaRecorder, stream, socket, recording transport and timer are still released together. No capture, provider or live execution was performed by this review.",
     "functions": [
       {
         "name": "useBrowserCapture",
-        "nonblankLines": 332
+        "nonblankLines": 338
       },
       {
-        "name": "connect",
+        "name": "useBrowserCapture > connect",
         "nonblankLines": 224
       },
       {
-        "name": "callback at line 185",
+        "name": "useBrowserCapture > connect > <anonymous> #9",
         "nonblankLines": 112
       }
     ],
@@ -905,11 +905,11 @@
   },
   {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/KeywordScanReview.tsx",
-    "sha256": "af6e9e173aea915209a31d66142f72bb53e2446cd83a21d164827c9d3e693257",
-    "reviewer": "Codex implementation review",
+    "sha256": "e8e10caff10845373c2825862aba60d9684093317ffbe7cc7dcade0b600aea4c",
+    "reviewer": "Codex shared frontend integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "KeywordScanReview.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "One reviewed scan intent remains local to this form, with effects dispatched by the fixed operation registry. Only equivalent JSX apostrophe escaping changes.",
     "functions": [
       {
         "name": "KeywordScanReview",
@@ -1199,15 +1199,15 @@
   },
   {
     "path": "apps/web/src/features/modules/intelligence/legiwatch/more/LegiWatchSettings.tsx",
-    "sha256": "9291e3782b5b261acade497affe3ca9e08ce3ad5249443f5140db513e52da6f4",
-    "reviewer": "Codex implementation review",
+    "sha256": "c1c8b561d9531a39f0296b124fd54299b5269a86988cb5a01e6ce282a092bc36",
+    "reviewer": "Codex shared frontend integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
-    "rationale": "LegiWatchSettings.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "Display preferences and hearing email preference retain separate loaded projections and writes within this settings view. Guarded synchronization changes timing before render, not authorization or operation contracts.",
     "functions": [
       {
         "name": "LegiWatchSettings",
-        "nonblankLines": 158
+        "nonblankLines": 164
       }
     ],
     "signals": [
@@ -1736,15 +1736,15 @@
   },
   {
     "path": "apps/web/src/features/modules/planner/ProjectCatalog.tsx",
-    "sha256": "8a95c643fb33e17139400bb3a4e08fe45f8cc127b7709d5aab8d65dc5d5b949c",
-    "reviewer": "Codex implementation review",
+    "sha256": "d7c892ec95d0452aa6c12d1fee6665d4391be82b37f0ae0d1320ae9d612d7a9c",
+    "reviewer": "Codex shared frontend integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "ProjectCatalog.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The catalog and its project form keep separate presentation responsibilities in one cohesive project module. Stable project keys repair React identity; JSX text is preserved.",
     "functions": [
       {
         "name": "ProjectCatalog",
-        "nonblankLines": 92
+        "nonblankLines": 93
       },
       {
         "name": "ProjectForm",
@@ -1758,11 +1758,11 @@
   },
   {
     "path": "apps/web/src/features/modules/planner/PublicForm.tsx",
-    "sha256": "23ac294dd021b91c042fa02101b34489132a0bf119501f97408e4d20c9901d4e",
-    "reviewer": "Codex implementation review",
+    "sha256": "bd18ef0a2a085c5b060f02f1e77d901c2c86df201a9367e3baa2c6d1b38092c9",
+    "reviewer": "Codex shared frontend integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "PublicForm.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The public token form retains its distinct unauthenticated capability contract. A keyed FormRequest owns one token/revision read lifetime, while PublicFormQuestions retains answer, attachment and submission state. Retry and token replacement now explicitly remount both and abort old requests.",
     "functions": [
       {
         "name": "PublicFormQuestions",
@@ -1775,11 +1775,11 @@
   },
   {
     "path": "apps/web/src/features/modules/planner/ResourceEditor.tsx",
-    "sha256": "59594c998294693281fdcf966149b9dc4c9684a6090a3ead69ba19f00403274a",
-    "reviewer": "Codex implementation review",
+    "sha256": "d68c5f2ee915af38335c716cb3b5e2b663f8a564372b03d9e1471362ae3bab36",
+    "reviewer": "Codex shared frontend integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "ResourceEditor.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "One resource-edit form remains behind its registered operation. The integration changes only JSX apostrophe escaping.",
     "functions": [
       {
         "name": "ResourceForm",
@@ -2057,11 +2057,11 @@
   },
   {
     "path": "apps/web/src/features/modules/research-portfolios/ResearchReviews.tsx",
-    "sha256": "1394a3514f42838f29bed2c8f40a2804dc5c8b3ee130825235ab1f4c03355d67",
-    "reviewer": "Codex implementation review",
+    "sha256": "ea34294fbf764ac9bf8ce060be503e45ac46ca399a83a4b1994f803eb0eb87cc",
+    "reviewer": "Codex shared frontend integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "ResearchReviews.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The research review lane retains its typed query and explicit review actions. charAt preserves the lane label without optional indexed access.",
     "functions": [
       {
         "name": "ResearchReviews",
@@ -2463,11 +2463,11 @@
   },
   {
     "path": "apps/web/src/features/modules/strategies/runs/RunDetail.tsx",
-    "sha256": "1db393d1f7ffba249a1a835ee3a5ca4c44d9e760becd7db04d7312d576a824dc",
-    "reviewer": "Codex implementation review",
+    "sha256": "e9ef44957066e8ca12a51283904b406b6b2f2f3d3ea26a2c0b31d9ae8f150355",
+    "reviewer": "Codex shared frontend integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "RunDetail.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "This run-detail projection still delegates artifact/data rendering and fixed operations. Next Links replace internal document navigation to retain the shared session boundary; no run execution or inference is added.",
     "functions": [
       {
         "name": "RunDetail",
@@ -2543,15 +2543,15 @@
   },
   {
     "path": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
-    "sha256": "ddd6044ec850e7a4e6ede547f36ebca5ef66cbf5d71cb882f3c7d5f2ce09e827",
-    "reviewer": "Codex implementation review",
+    "sha256": "a5c4f4e0eb715cc33623bc3890facee1c57f7abec026d966f66039b0da9aba9a",
+    "reviewer": "Codex shared frontend integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "WorkspaceScreen.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "One selected workspace view and document editor remain composed here. Route/client replacement clears the selected/created record before rendering, while document persistence stays in the existing editor/adapter.",
     "functions": [
       {
         "name": "WorkspaceScreen",
-        "nonblankLines": 142
+        "nonblankLines": 146
       }
     ],
     "signals": [
@@ -3105,15 +3105,15 @@
   },
   {
     "path": "apps/web/src/features/settings/UsageSettings.tsx",
-    "sha256": "e410c3cf7f6729faeb6fe73f6f661d54496e0e907cae02f0107355e00b65ba59",
-    "reviewer": "Codex implementation review",
+    "sha256": "f9d338ae4203deec9edb352b227664e7401e2bb885db0563cf383f1989c8ebf4",
+    "reviewer": "Codex shared frontend integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
-    "rationale": "UsageSettings.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "One usage report screen retains its existing summary/credential queries. A stable mounted-view clock makes the requested date range deterministic across renders; changing days still changes the query.",
     "functions": [
       {
         "name": "UsageSettings",
-        "nonblankLines": 210
+        "nonblankLines": 211
       }
     ],
     "signals": [
@@ -3256,15 +3256,15 @@
   },
   {
     "path": "apps/web/src/features/settings/hq/AiKeysSettings.tsx",
-    "sha256": "f04f1140b7ebba455f3ad913b6d0c9e9c426d5ef835b3d399874a6bcc0f80a6e",
-    "reviewer": "Codex implementation review",
+    "sha256": "c6571916dfe512442559fe5950d11686320a136231a4f05a9635629121de2021",
+    "reviewer": "Codex shared frontend integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
-    "rationale": "AiKeysSettings.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The usage report and TenantKeyDrawer retain their existing report and credential-edit interfaces. Only the mounted-view report clock changes. Masked credential records, permission checks and lifecycle tests remain intact; no credential operation is executed by integration.",
     "functions": [
       {
         "name": "AiKeysSettings",
-        "nonblankLines": 94
+        "nonblankLines": 95
       },
       {
         "name": "TenantKeyDrawer",

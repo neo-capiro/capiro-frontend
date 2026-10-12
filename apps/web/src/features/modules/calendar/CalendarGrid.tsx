@@ -30,7 +30,9 @@ export function CalendarGrid({
 }) {
   const [controls] = useState(() => createCalendarControlsPlugin());
   const current = useRef({ meetings, onMeeting });
-  useLayoutEffect(() => { current.current = { meetings, onMeeting }; }, [meetings, onMeeting]);
+  useLayoutEffect(() => {
+    current.current = { meetings, onMeeting };
+  }, [meetings, onMeeting]);
   const calendar = useNextCalendarApp(
     {
       views: [createViewMonthGrid(), createViewWeek()],

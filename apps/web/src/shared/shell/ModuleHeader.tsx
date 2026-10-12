@@ -1,6 +1,7 @@
 import { HeaderFrame } from "./HeaderFrame";
 import { ModeLink } from "./ModeLink";
 import Link from "next/link";
+import { ScopedLink } from "./ScopedLink";
 import { ModuleAsset } from "./ModuleAsset";
 import styles from "./module-shell.module.css";
 
@@ -50,20 +51,18 @@ export function ModuleHeader({
       }
       actions={
         <nav className={styles.globalActions} aria-label="Workspace actions">
-          <button
-            type="button"
-            disabled
-            aria-label="Quick log — unavailable"
-            title="Quick log belongs to the Portfolio integration"
-          >
+          <Link href="/?log=1" aria-label="Quick log">
             <ModuleAsset name="quickLog" />
-          </button>
-          <Link href="/calendar" aria-label="Master calendar">
+          </Link>
+          <ScopedLink href="/calendar" aria-label="Master calendar">
             <ModuleAsset name="calendar" />
-          </Link>
-          <Link href="/modules/intelligence" aria-label="Search intelligence">
+          </ScopedLink>
+          <ScopedLink
+            href="/modules/intelligence"
+            aria-label="Search intelligence"
+          >
             <ModuleAsset name="search" />
-          </Link>
+          </ScopedLink>
           <button
             type="button"
             disabled

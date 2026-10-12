@@ -115,7 +115,7 @@ function ResourceForm({
       {kind === "template" && (
         <p className={styles.note}>
           A new template starts with an empty project. Task configuration
-          remains on the template's reviewed resource.
+          remains on the template&apos;s reviewed resource.
         </p>
       )}
       {error && (

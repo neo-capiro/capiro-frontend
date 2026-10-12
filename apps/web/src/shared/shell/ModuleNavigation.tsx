@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ScopedLink } from "./ScopedLink";
 import { useState } from "react";
 import { moduleCatalog, moduleHref, type ModuleSlug } from "./module-catalog";
 import styles from "./module-shell.module.css";
@@ -25,16 +26,16 @@ export function ModuleNavigation({ active }: { active?: ModuleSlug | "hub" }) {
       >
         <p className={styles.navEyebrow}>Modules</p>
         <nav aria-label="Modules">
-          <Link
+          <ScopedLink
             href="/modules"
             className={active === "hub" ? styles.current : ""}
             aria-current={active === "hub" ? "page" : undefined}
           >
             <ModuleAsset name="modules" />
             <span>Module hub</span>
-          </Link>
+          </ScopedLink>
           {moduleCatalog.map((item) => (
-            <Link
+            <ScopedLink
               key={item.slug}
               href={moduleHref(item.slug)}
               className={active === item.slug ? styles.current : ""}
@@ -43,7 +44,7 @@ export function ModuleNavigation({ active }: { active?: ModuleSlug | "hub" }) {
             >
               <ModuleAsset name={item.icon} />
               <span>{item.label}</span>
-            </Link>
+            </ScopedLink>
           ))}
         </nav>
         <Link href="/settings/personal" className={styles.settings}>

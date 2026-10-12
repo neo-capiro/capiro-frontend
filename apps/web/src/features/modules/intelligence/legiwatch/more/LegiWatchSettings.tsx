@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   useCapiroMutation,
   useCapiroQuery,
@@ -18,8 +18,8 @@ export function LegiWatchSettings() {
     [chamber, setChamber] = useState("all"),
     [email, setEmail] = useState(false),
     [success, setSuccess] = useState<string>();
-  const [loadedMe, setLoadedMe] = useState(() => (me.data));
-  if (loadedMe !== (me.data)) {
+  const [loadedMe, setLoadedMe] = useState(() => me.data);
+  if (loadedMe !== me.data) {
     setLoadedMe(me.data);
     const prefs = me.data?.user.legiwatchPrefs;
     if (prefs) {
@@ -33,13 +33,13 @@ export function LegiWatchSettings() {
       );
       setChamber(typeof prefs.chamber === "string" ? prefs.chamber : "all");
     }
-
   }
-  const [loadedNotifications, setLoadedNotifications] = useState(() => (notifications.data));
-  if (loadedNotifications !== (notifications.data)) {
+  const [loadedNotifications, setLoadedNotifications] = useState(
+    () => notifications.data,
+  );
+  if (loadedNotifications !== notifications.data) {
     setLoadedNotifications(notifications.data);
     if (notifications.data) setEmail(notifications.data.committeeEmailEnabled);
-
   }
   async function saveDisplay() {
     setSuccess(undefined);

@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { plannerId } from "../../../shared/capiro/operations/planner-schemas";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
@@ -56,12 +56,11 @@ export function PlannerScreen() {
     ),
     [projectId, setProjectId] = useState<string | null>(null);
   const bootstrap = useCapiroQuery("planner.bootstrap", {});
-  const [routeView, setRouteView] = useState(() => (requestedView));
-  if (routeView !== (requestedView)) {
+  const [routeView, setRouteView] = useState(() => requestedView);
+  if (routeView !== requestedView) {
     setRouteView(requestedView);
     if (sections.some((section) => section.id === requestedView))
       setSection(requestedView!);
-
   }
   return (
     <div className={styles.screen}>

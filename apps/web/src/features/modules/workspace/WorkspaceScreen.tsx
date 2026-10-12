@@ -2,7 +2,7 @@
 import { DocumentsLibrary, WorkflowCards } from "./WorkspaceLibrary";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   workspaceId,
   type WorkspaceLibraryDocument,
@@ -47,13 +47,14 @@ export function WorkspaceScreen() {
   const [selected, setSelected] = useState<WorkspaceLibraryDocument>();
   const [createdId, setCreatedId] = useState<string>();
   const [newDocument, setNewDocument] = useState(false);
-  const [routeKey, setRouteKey] = useState(() => (JSON.stringify([requestedView, clientId])));
-  if (routeKey !== (JSON.stringify([requestedView, clientId]))) {
+  const [routeKey, setRouteKey] = useState(() =>
+    JSON.stringify([requestedView, clientId]),
+  );
+  if (routeKey !== JSON.stringify([requestedView, clientId])) {
     setRouteKey(JSON.stringify([requestedView, clientId]));
     setView(requestedView);
     setSelected(undefined);
     setCreatedId(undefined);
-
   }
   const back = () => {
     setSelected(undefined);

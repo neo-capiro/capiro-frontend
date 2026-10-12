@@ -124,8 +124,8 @@ export function MeetingLibrary({
         </div>
       )}
       <p className={styles.note}>
-        Meetings you own, plus colleagues' shared approved materials. Private
-        material stays with its owner.
+        Meetings you own, plus colleagues&apos; shared approved materials.
+        Private material stays with its owner.
       </p>
       {selected && (
         <MeetingDetail

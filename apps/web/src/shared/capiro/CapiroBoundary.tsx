@@ -1,10 +1,10 @@
 "use client";
+import { createRequestLifetime } from "../session/request-lifetime";
 import {
   createContext,
   useContext,
   useLayoutEffect,
   useMemo,
-  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -23,20 +23,18 @@ export function CapiroDataProvider({
   children: ReactNode;
   onSessionExpired: () => void;
 }) {
-  const [scope] = useState(() => ({ controller: new AbortController() }));
+  const [scope] = useState(createRequestLifetime);
   const [api] = useState(() =>
     createCapiroApi(capiroOperations, {
       onSessionExpired: () => {
-        scope.controller.abort();
+        scope.abort();
         onSessionExpired();
       },
-      scopeSignal: () => scope.controller.signal,
+      scopeSignal: scope.signal,
     }),
   );
   useLayoutEffect(() => {
-    if (scope.controller.signal.aborted) scope.controller = new AbortController();
-    const current = scope.controller;
-    return () => current.abort();
+    return scope.mount();
   }, [scope]);
   return <ApiContext.Provider value={api}>{children}</ApiContext.Provider>;
 }
@@ -67,19 +65,16 @@ export function CapiroBoundary({
 
 export function useCapiro() {
   const api = useContext(ApiContext);
-  const [lifetime] = useState(() => ({ controller: new AbortController() }));
+  const [lifetime] = useState(createRequestLifetime);
   useLayoutEffect(() => {
-    if (lifetime.controller.signal.aborted)
-      lifetime.controller = new AbortController();
-    const current = lifetime.controller;
-    return () => current.abort();
+    return lifetime.mount();
   }, [api, lifetime]);
   const scoped = useMemo(() => {
     if (!api) return null;
     const signal = (provided?: AbortSignal) =>
       provided
-        ? AbortSignal.any([provided, lifetime.controller.signal])
-        : lifetime.controller.signal;
+        ? AbortSignal.any([provided, lifetime.signal()])
+        : lifetime.signal();
     const result: CapiroApi<typeof capiroOperations> = {
       request: (key, input, options) =>
         api.request(key, input, { signal: signal(options?.signal) }),

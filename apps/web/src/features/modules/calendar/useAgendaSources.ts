@@ -21,8 +21,16 @@ export function useAgendaSources(range: CalendarRange, enabled: boolean) {
     loading: enabled,
     warnings: [],
   });
-  const [previousRequest, setPreviousRequest] = useState({ api, rangeId, enabled });
-  if (previousRequest.api !== api || previousRequest.rangeId !== rangeId || previousRequest.enabled !== enabled) {
+  const [previousRequest, setPreviousRequest] = useState({
+    api,
+    rangeId,
+    enabled,
+  });
+  if (
+    previousRequest.api !== api ||
+    previousRequest.rangeId !== rangeId ||
+    previousRequest.enabled !== enabled
+  ) {
     setPreviousRequest({ api, rangeId, enabled });
     setState({ items: [], loading: enabled, warnings: [], rangeId });
   }

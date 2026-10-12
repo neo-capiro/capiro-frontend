@@ -1,5 +1,6 @@
 import { Button } from "@capiro/ui/button";
 import Link from "next/link";
+import { ScopedLink } from "./ScopedLink";
 import { ModeLink } from "./ModeLink";
 import { productModes } from "../session/client-route";
 import { DesignIcon } from "./DesignIcon";
@@ -62,9 +63,9 @@ export function Header({
                 variant="ghost"
                 className={styles.action}
               >
-                <Link href={action.href} aria-label={action.label}>
+                <ScopedLink href={action.href} aria-label={action.label}>
                   <DesignIcon name={action.icon} assetSet={assetSet} />
-                </Link>
+                </ScopedLink>
               </Button>
             ) : (
               <Button

@@ -39,7 +39,7 @@ export function SelectedClientProvider({
     ? { state: "no-selection" }
     : !valid || query.error
       ? { state: "unavailable", requestedId }
-      : query.isPending
+      : query.isPending || query.isFetching
         ? { state: "loading", requestedId }
         : { state: "authorized-client", requestedId, client: query.data };
   return <Context.Provider value={value}>{children}</Context.Provider>;

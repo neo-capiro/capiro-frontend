@@ -1,46 +1,304 @@
-.workspace { display: flex; flex-direction: column; gap: 20px; padding: 28px; min-width: 0; }
-.heading { display: flex; gap: 16px; justify-content: space-between; align-items: flex-start; }
-.heading h1 { font-size: 26px; line-height: 39px; font-weight: 600; letter-spacing: -.4px; }
-.heading p { font-size: 13px; line-height: 1.45; color: var(--muted-foreground); margin-top: 6px; }
-.mark { width: 62px; height: 20px; flex: 0 0 62px; margin-top: 10px; background: var(--foreground); mask: url('/design/home/meri-wordmark.png') center / 62px 20px no-repeat; }
-.notice { padding: 16px; border-radius: 12px; background: var(--muted); font-size: 14px; line-height: 1.5; }
-.body { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 20px; align-items: start; }
-.transcriptPanel, .activity { border: 1px solid var(--border); border-radius: 12px; padding: 16px; min-width: 0; }
-.transcriptPanel h2, .activity h2 { font-size: 15px; line-height: 1.45; font-weight: 600; }
-.log { position: relative; height: 360px; overflow: hidden; margin-top: 12px; }
-.scroll { height: 100%; overflow: auto; overscroll-behavior: contain; }
-.messages { display: flex; flex-direction: column; gap: 16px; padding: 4px 4px 48px; }
-.message { display: flex; flex-direction: column; min-width: 0; }
-.messageContent { width: 100%; min-width: 0; border-radius: 10px; padding: 12px; background: var(--muted); }
-.identity { font-size: 13px; font-weight: 500; margin-bottom: 8px; }
-.response { font-size: 15px; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
-.empty { display: flex; flex-direction: column; gap: 8px; padding: 20px 4px; font-size: 14px; color: var(--muted-foreground); }
-.empty h3 { font-size: 15px; color: var(--foreground); }
-.scrollButton { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; padding: 0; border: 1px solid var(--input); border-radius: 50%; background: var(--card); }
-.scrollButton svg { width: 16px; height: 16px; }
-.activity { display: flex; flex-direction: column; gap: 12px; }
-.activityHeading { display: flex; gap: 12px; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-.badge { background: var(--muted); color: var(--muted-foreground); padding: 6px 12px; border-radius: 999px; font-size: 12px; line-height: 1.4; }
-.muted { font-size: 12px; line-height: 1.5; color: var(--muted-foreground); overflow-wrap: anywhere; }
-.tools { display: flex; flex-direction: column; gap: 12px; }
-.tool { border: 1px solid var(--border); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
-.tool h3, .references h3 { font-size: 14px; line-height: 1.4; overflow-wrap: anywhere; margin: 0; }
-.tool p, .references p { font-size: 13px; line-height: 1.45; }
-.activity dl { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 6px 12px; margin: 0; font-size: 12px; line-height: 1.5; }
-.activity dt { color: var(--muted-foreground); }
-.activity dd { margin: 0; overflow-wrap: anywhere; }
-.references { border: 1px solid var(--border); border-radius: 10px; padding: 12px; }
-.references summary { font-size: 14px; font-weight: 500; cursor: pointer; }
-.references[open] > :not(summary) { margin-top: 12px; }
-.references article { display: flex; flex-direction: column; gap: 8px; }
-.controls, .fixtureControls { display: flex; flex-wrap: wrap; gap: 8px; }
-.button { display: inline-flex; align-items: center; justify-content: center; padding: 0 14px; height: 36px; border: 1px solid var(--input); border-radius: 10px; background: var(--card); font-size: 14px; font-weight: 500; }
-.error { border: 1px solid #f2caca; background: #fff7f7; border-radius: 10px; padding: 12px; font-size: 13px; line-height: 1.5; }
-.fixture { padding: 20px 28px 0; display: flex; flex-direction: column; gap: 12px; }
-.fixtureField { display: flex; flex-direction: column; gap: 5px; min-width: 0; max-width: 100%; }
-.fixtureControls label { font-size: 12px; font-weight: 500; }
-.fixtureControls select { min-height: 36px; width: min(330px, 100%); max-width: 100%; border: 1px solid var(--input); border-radius: 10px; padding: 0 10px; background: var(--card); font-size: 13px; }
-.fixtureControls .button { align-self: end; }
-.fixtureOutcome { font-size: 12px; line-height: 1.4; color: var(--muted-foreground); }
-@media (max-width: 1100px) { .body { grid-template-columns: minmax(0, 1fr); } }
-@media (max-width: 680px) { .workspace { padding: 24px 16px; } .fixture { padding: 16px 16px 0; } .heading h1 { font-size: 23px; line-height: 1.2; } .mark { margin-top: 3px; } .activity dl { grid-template-columns: 80px minmax(0, 1fr); } .fixtureControls { flex-direction: column; } .fixtureControls .button { align-self: start; } }
+.workspace {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 28px;
+  min-width: 0;
+}
+.heading {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.heading h1 {
+  font-size: 26px;
+  line-height: 39px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+}
+.heading p {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted-foreground);
+  margin-top: 6px;
+}
+.mark {
+  width: 62px;
+  height: 20px;
+  flex: 0 0 62px;
+  margin-top: 10px;
+  background: var(--foreground);
+  mask: url("/design/home/meri-wordmark.png") center / 62px 20px no-repeat;
+}
+.notice {
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.transcriptPanel,
+.activity {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  min-width: 0;
+}
+.transcriptPanel h2,
+.activity h2 {
+  font-size: 15px;
+  line-height: 1.45;
+  font-weight: 600;
+}
+.log {
+  position: relative;
+  height: 360px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+.scroll {
+  height: 100%;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 4px 4px 48px;
+}
+.message {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.messageContent {
+  width: 100%;
+  min-width: 0;
+  border-radius: 10px;
+  padding: 12px;
+  background: var(--muted);
+}
+.identity {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.response {
+  font-size: 15px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.empty {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px 4px;
+  font-size: 14px;
+  color: var(--muted-foreground);
+}
+.empty h3 {
+  font-size: 15px;
+  color: var(--foreground);
+}
+.scrollButton {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid var(--input);
+  border-radius: 50%;
+  background: var(--card);
+}
+.scrollButton svg {
+  width: 16px;
+  height: 16px;
+}
+.activity {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.activityHeading {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.badge {
+  background: var(--muted);
+  color: var(--muted-foreground);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.muted {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted-foreground);
+  overflow-wrap: anywhere;
+}
+.tools {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.tool {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.tool h3,
+.references h3 {
+  font-size: 14px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  margin: 0;
+}
+.tool p,
+.references p {
+  font-size: 13px;
+  line-height: 1.45;
+}
+.activity dl {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 6px 12px;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.activity dt {
+  color: var(--muted-foreground);
+}
+.activity dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.references {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+}
+.references summary {
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.references[open] > :not(summary) {
+  margin-top: 12px;
+}
+.references article {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.controls,
+.fixtureControls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  height: 36px;
+  border: 1px solid var(--input);
+  border-radius: 10px;
+  background: var(--card);
+  font-size: 14px;
+  font-weight: 500;
+}
+.error {
+  border: 1px solid #f2caca;
+  background: #fff7f7;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.fixture {
+  padding: 20px 28px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.fixtureField {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+  max-width: 100%;
+}
+.fixtureControls label {
+  font-size: 12px;
+  font-weight: 500;
+}
+.fixtureControls select {
+  min-height: 36px;
+  width: min(330px, 100%);
+  max-width: 100%;
+  border: 1px solid var(--input);
+  border-radius: 10px;
+  padding: 0 10px;
+  background: var(--card);
+  font-size: 13px;
+}
+.fixtureControls .button {
+  align-self: end;
+}
+.fixtureOutcome {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--muted-foreground);
+}
+@media (max-width: 1100px) {
+  .body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 680px) {
+  .workspace {
+    padding: 24px 16px;
+  }
+  .fixture {
+    padding: 16px 16px 0;
+  }
+  .heading h1 {
+    font-size: 23px;
+    line-height: 1.2;
+  }
+  .mark {
+    margin-top: 3px;
+  }
+  .activity dl {
+    grid-template-columns: 80px minmax(0, 1fr);
+  }
+  .fixtureControls {
+    flex-direction: column;
+  }
+  .fixtureControls .button {
+    align-self: start;
+  }
+}

@@ -164,8 +164,8 @@ await withServer("portfolio", async () => {
     redirect: "manual",
     signal: AbortSignal.timeout(10_000),
   });
-  assert.equal(response.status, 307);
-  assert.equal(response.headers.get("location"), "/portfolio");
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get("location"), null);
   const redirected = await fetch("http://127.0.0.1:5188/", {
     signal: AbortSignal.timeout(10_000),
   });
@@ -174,7 +174,7 @@ await withServer("portfolio", async () => {
   const result = {
     defaultProduct: "portfolio",
     rootStatus: response.status,
-    location: "/portfolio",
+    location: "/",
     followedSetup: true,
   };
   await writeFile(

@@ -158,3 +158,37 @@ it("retains both saved topics on a rejected rename collision and rejects lost or
     else await expect(result).rejects.toMatchObject({ status: 502 });
   }
 });
+
+it("accepts one explicit rejection for each repeated invalid term and rejects extra rejection entries", async () => {
+  for (const count of [2, 3]) {
+    const { view, draft } = watchlistFixture();
+    draft.topics[0]!.terms.push(
+      { termType: "agency", value: "xx" },
+      { termType: "agency", value: " xx " },
+    );
+    const rejected = {
+      topics: [],
+      terms: Array.from({ length: count }, () => ({
+        topicLabel: "Sensors",
+        termType: "agency",
+        value: "xx",
+        reason: "Term too short",
+      })),
+    };
+    const { api } = watchlistApi((request) =>
+      request.method === "PUT"
+        ? { ...nativeIntelWatchlist, version: 8, rejected }
+        : watchlistClient,
+    );
+    const result = writeWatchlist(
+      api,
+      view,
+      draft,
+      () => {},
+      new AbortController().signal,
+      () => {},
+    );
+    if (count === 2) expect((await result).rejected).toEqual(rejected);
+    else await expect(result).rejects.toMatchObject({ status: 502 });
+  }
+});

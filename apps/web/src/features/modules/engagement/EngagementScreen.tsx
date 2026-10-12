@@ -1,6 +1,6 @@
 "use client";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 import { plannerId } from "../../../shared/capiro/operations/planner-schemas";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import { CreateMeeting } from "../../../shared/meetings/CreateMeeting";
@@ -41,23 +41,31 @@ export function EngagementScreen() {
           ? requestedView!
           : "overview",
     ),
-    [clientId, setClientId] = useState(() =>
-      plannerId.safeParse(requestedClient).success ? requestedClient! : "",
-    ),
     [create, setCreate] = useState(false);
-  const [routeKey, setRouteKey] = useState(() => (JSON.stringify([requestedView, session, draft, initialCreate])));
-  if (routeKey !== (JSON.stringify([requestedView, session, draft, initialCreate]))) {
+  const [routeKey, setRouteKey] = useState(() =>
+    JSON.stringify([requestedView, session, draft, initialCreate]),
+  );
+  if (
+    routeKey !== JSON.stringify([requestedView, session, draft, initialCreate])
+  ) {
     setRouteKey(JSON.stringify([requestedView, session, draft, initialCreate]));
     if (session || draft || initialCreate) setView("outreach");
     else if (tabs.some((tab) => tab.id === requestedView))
       setView(requestedView!);
-
   }
-  const [previousClient, setPreviousClient] = useState(requestedClient);
-  if (previousClient !== requestedClient) {
-    setPreviousClient(requestedClient);
-    setClientId(plannerId.safeParse(requestedClient).success ? requestedClient! : "");
-  }
+  const router = useRouter();
+  const clientId = plannerId.safeParse(requestedClient).success
+    ? requestedClient!
+    : "";
+  const setClientId = (id: string) => {
+    const next = new URLSearchParams(params);
+    if (id) next.set("clientId", id);
+    else next.delete("clientId");
+    for (const key of ["draft", "session", "create", "directoryContactId"])
+      next.delete(key);
+    next.set("view", view);
+    router.push(`/modules/engagement?${next}`);
+  };
   const clientQuery = useCapiroQuery("clients.list", {});
   const meetings = useCapiroQuery("engagement.meetings", {
     query: { clientId: clientId || undefined },

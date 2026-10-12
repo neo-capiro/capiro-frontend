@@ -63,6 +63,7 @@ export function ProjectCatalog({
           .filter((project) => project.archived === archived)
           .map((project) => (
             <ProjectCard
+              key={project.id}
               project={project}
               busy={busy}
               onOpen={onOpen}
@@ -78,7 +79,7 @@ export function ProjectCatalog({
           <div className={styles.emptyLayout}>
             <h2>No {archived ? "archived" : "active"} projects</h2>
             <p className={styles.muted}>
-              Create a project to organize your team's work.
+              Create a project to organize your team&apos;s work.
             </p>
           </div>
         </Panel>

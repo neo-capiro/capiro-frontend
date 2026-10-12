@@ -1,32 +1,240 @@
-.view { display: flex; flex-direction: column; gap: 20px; padding: 28px; min-width: 0; }
-.heading { display: flex; justify-content: space-between; align-items: flex-start; min-height: 64px; gap: 16px; }
-.heading h1 { font-size: 26px; line-height: 39px; letter-spacing: -.4px; font-weight: 600; }
-.heading p { margin-top: 6px; color: var(--muted-foreground); font-size: 13px; line-height: 1.45; letter-spacing: -.039px; }
-.meriMark { display: block; flex: 0 0 62px; width: 62px; height: 20px; margin-top: 10px; background: var(--foreground); mask-image: url('/design/cited-answer/meri-ink.png'); mask-position: center; mask-size: 62px 20px; mask-repeat: no-repeat; }
-.conversation { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
-.question { min-height: 56px; padding: 16px; border-radius: 12px; background: var(--muted); font-size: 15px; line-height: 1.5; letter-spacing: -.075px; }
-.answer { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; min-width: 0; }
-.identity { display: flex; align-items: center; gap: 8px; min-height: 18px; font-size: 14px; font-weight: 500; line-height: 1.45; letter-spacing: -.07px; }
-.answer p { font-size: 15px; line-height: 1.5; letter-spacing: -.075px; }
-.answer h2 { font-size: 20px; line-height: 1.3; letter-spacing: -.3px; font-weight: 500; }
-.citation { height: 36px; display: flex; align-items: center; gap: 8px; padding: 0 14px; border: 0; background: transparent; box-shadow: none; border-radius: 10px; font-size: 14px; font-weight: 500; letter-spacing: -.07px; }
-.inlineCitation { border: 0; padding: 0; background: transparent; font-size: inherit; line-height: inherit; text-decoration: underline; text-underline-offset: 2px; }
-.tableScroll { width: 100%; overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; }
-.table { width: 100%; min-width: 540px; border-collapse: collapse; table-layout: fixed; text-align: left; }
-.itemColumn { width: 42%; } .statusColumn { width: 20%; } .nextColumn { width: 38%; }
-.table th { height: 40px; padding: 10px; background: var(--muted); color: var(--muted-foreground); font-size: 12px; line-height: 1.2; font-weight: 500; }
-.table td { height: 44px; padding: 10px; font-size: 13px; line-height: 1.45; letter-spacing: -.039px; }
-.table tbody tr:nth-child(even) { background: var(--background); }
-.followups { display: flex; flex-wrap: wrap; gap: 8px; }
-.followups button { height: 36px; display: flex; align-items: center; gap: 8px; padding: 0 14px; border: 1px solid var(--input); background: var(--card); border-radius: 10px; box-shadow: 0 1px 2px #0c0a090d; font-size: 14px; font-weight: 500; letter-spacing: -.07px; }
-.messageActions { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
-.messageActions button { height: 36px; padding: 0 14px; border: 0; background: transparent; box-shadow: none; border-radius: 10px; font-size: 14px; font-weight: 500; letter-spacing: -.07px; }
-.unavailable:disabled { opacity: 1; color: var(--foreground); }
-.sourcePanel { width: 100%; border: 1px solid var(--border); border-radius: 12px; padding: 16px; background: var(--card); }
-.sourcePanel h3 { margin: 0 0 8px; font-size: 15px; }
-.sourcePanel p { color: var(--muted-foreground); font-size: 13px; }
-.sourcePanel ul { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; }
-.sourcePanel li { display: flex; flex-direction: column; gap: 2px; padding: 8px; border-radius: 8px; font-size: 13px; }
-.sourcePanel li span { color: var(--muted-foreground); }
-.selectedSource { background: var(--muted); }
-@media (max-width: 680px) { .view { padding: 24px 16px; } .heading h1 { font-size: 23px; line-height: 1.2; } .meriMark { margin-top: 3px; } .answer h2 { font-size: 18px; } .question { min-height: 0; } }
+.view {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 28px;
+  min-width: 0;
+}
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-height: 64px;
+  gap: 16px;
+}
+.heading h1 {
+  font-size: 26px;
+  line-height: 39px;
+  letter-spacing: -0.4px;
+  font-weight: 600;
+}
+.heading p {
+  margin-top: 6px;
+  color: var(--muted-foreground);
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+}
+.meriMark {
+  display: block;
+  flex: 0 0 62px;
+  width: 62px;
+  height: 20px;
+  margin-top: 10px;
+  background: var(--foreground);
+  mask-image: url("/design/cited-answer/meri-ink.png");
+  mask-position: center;
+  mask-size: 62px 20px;
+  mask-repeat: no-repeat;
+}
+.conversation {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+.question {
+  min-height: 56px;
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+  letter-spacing: -0.075px;
+}
+.answer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+}
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 18px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.07px;
+}
+.answer p {
+  font-size: 15px;
+  line-height: 1.5;
+  letter-spacing: -0.075px;
+}
+.answer h2 {
+  font-size: 20px;
+  line-height: 1.3;
+  letter-spacing: -0.3px;
+  font-weight: 500;
+}
+.citation {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.07px;
+}
+.inlineCitation {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  font-size: inherit;
+  line-height: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.tableScroll {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.table {
+  width: 100%;
+  min-width: 540px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  text-align: left;
+}
+.itemColumn {
+  width: 42%;
+}
+.statusColumn {
+  width: 20%;
+}
+.nextColumn {
+  width: 38%;
+}
+.table th {
+  height: 40px;
+  padding: 10px;
+  background: var(--muted);
+  color: var(--muted-foreground);
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 500;
+}
+.table td {
+  height: 44px;
+  padding: 10px;
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.039px;
+}
+.table tbody tr:nth-child(even) {
+  background: var(--background);
+}
+.followups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.followups button {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  border: 1px solid var(--input);
+  background: var(--card);
+  border-radius: 10px;
+  box-shadow: 0 1px 2px #0c0a090d;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.07px;
+}
+.messageActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+.messageActions button {
+  height: 36px;
+  padding: 0 14px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.07px;
+}
+.unavailable:disabled {
+  opacity: 1;
+  color: var(--foreground);
+}
+.sourcePanel {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  background: var(--card);
+}
+.sourcePanel h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+.sourcePanel p {
+  color: var(--muted-foreground);
+  font-size: 13px;
+}
+.sourcePanel ul {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.sourcePanel li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+.sourcePanel li span {
+  color: var(--muted-foreground);
+}
+.selectedSource {
+  background: var(--muted);
+}
+@media (max-width: 680px) {
+  .view {
+    padding: 24px 16px;
+  }
+  .heading h1 {
+    font-size: 23px;
+    line-height: 1.2;
+  }
+  .meriMark {
+    margin-top: 3px;
+  }
+  .answer h2 {
+    font-size: 18px;
+  }
+  .question {
+    min-height: 0;
+  }
+}

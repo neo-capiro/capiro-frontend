@@ -244,6 +244,16 @@ test("Engagement library opens shared notes, approval is a separate real operati
       return notes[0];
     },
   });
+  await page.route(`**/api/backend/core/clients/${clientId}`, (route) =>
+    route.fulfill({
+      json: {
+        id: clientId,
+        name: "Synthetic client",
+        status: "ACTIVE",
+        profileStatus: "ACTIVE",
+      },
+    }),
+  );
   await page.goto("/modules/engagement?view=library&clientId=" + clientId);
   await expect(
     page.getByRole("tab", { name: "Library", exact: true }),

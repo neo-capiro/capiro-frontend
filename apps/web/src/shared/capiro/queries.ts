@@ -27,8 +27,16 @@ export function useCapiroQuery<Key extends OperationKey>(
     }
   >({ loading: enabled });
   const reload = useCallback(() => setRevision((value) => value + 1), []);
-  const [previousRequest, setPreviousRequest] = useState({ api, requestId, enabled });
-  if (previousRequest.api !== api || previousRequest.requestId !== requestId || previousRequest.enabled !== enabled) {
+  const [previousRequest, setPreviousRequest] = useState({
+    api,
+    requestId,
+    enabled,
+  });
+  if (
+    previousRequest.api !== api ||
+    previousRequest.requestId !== requestId ||
+    previousRequest.enabled !== enabled
+  ) {
     setPreviousRequest({ api, requestId, enabled });
     setState({ loading: enabled, requestId });
   }

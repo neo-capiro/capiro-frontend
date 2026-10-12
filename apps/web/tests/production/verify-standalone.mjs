@@ -14,13 +14,12 @@ for (const [path, status, text] of [
   ["/healthz", 200, '"status":"ok"'],
   ["/portfolio", 200, "Portfolio setup required"],
   ["/calendar", 200, "Portfolio setup required"],
-  [
-    "/sign-in",
-    200,
-    "Configure the existing Clerk test application to sign in.",
-  ],
+  ["/sign-in", 200, "Sign-in setup required"],
   ["/api/backend/core/clients", 503, ""],
-  ["/", 200, "Explore a synthetic Meri Home."],
+  ["/", 200, "Portfolio setup required"],
+  ["/modules", 200, "Connection setup required"],
+  ["/settings", 200, "Connection setup required"],
+  ["/api/capiro/me.read", 503, ""],
 ]) {
   const response = await fetch(origin + path, {
     redirect: "manual",
@@ -80,7 +79,7 @@ try {
       const portfolioLink = page
         .getByRole("navigation", { name: "Product modes" })
         .getByRole("link", { name: "Portfolio", exact: true });
-      assert.equal(await portfolioLink.getAttribute("href"), "/portfolio");
+      assert.equal(await portfolioLink.getAttribute("href"), "/");
       await portfolioLink.click();
       await page
         .getByRole("heading", { name: "Portfolio setup required" })
@@ -128,9 +127,9 @@ try {
           `production-portfolio-${viewport.width}-${colorScheme}.png`,
         ),
       });
-      await page.evaluate(() => window.next.router.push("/"));
+      await page.evaluate(() => window.next.router.push("/meri"));
       await page
-        .getByRole("heading", { name: "Explore a synthetic Meri Home." })
+        .getByRole("heading", { name: "Good morning, Jordan." })
         .waitFor();
       const returned = await page.evaluate(() => ({
         background: getComputedStyle(document.body).backgroundColor,
@@ -153,6 +152,27 @@ try {
         headerNavigation: true,
       });
     }
+    await page.setViewportSize({ width: 1440, height: 1040 });
+    await page.getByRole("link", { name: "Modules", exact: true }).click();
+    await page
+      .getByRole("heading", { name: "Connection setup required" })
+      .waitFor();
+    assert.equal(await page.locator("[data-portfolio-root]").count(), 0);
+    await page.getByRole("link", { name: "Account settings" }).click();
+    await page.waitForURL("**/settings/personal");
+    await page.goBack();
+    await page.waitForURL("**/modules");
+    await page.goForward();
+    await page.waitForURL("**/settings/personal");
+    assert.equal(
+      await page.evaluate(() => window.portfolioRuntimeProbe),
+      "same-document",
+    );
+    results.push({
+      crossMode: "Meri/Portfolio/Modules/Settings",
+      history: "back/forward",
+      sameDocument: true,
+    });
     await page.close();
   }
   assert.deepEqual(pageErrors, []);

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { z } from "zod";
 import { committeeFollowBodySchema } from "../../../../../shared/capiro/operations/legiwatch-committees";
 import {
@@ -43,8 +43,8 @@ export function CommitteeFollowDialog({
     {},
   );
   const [error, setError] = useState<string>();
-  const [loadedFollow, setLoadedFollow] = useState(() => (query.data));
-  if (loadedFollow !== (query.data)) {
+  const [loadedFollow, setLoadedFollow] = useState(() => query.data);
+  if (loadedFollow !== query.data) {
     setLoadedFollow(query.data);
     if (query.data)
       setBody({
@@ -53,7 +53,6 @@ export function CommitteeFollowDialog({
           flags.map((flag) => [flag.key, query.data![flag.key]]),
         ),
       });
-
   }
   async function save(unfollow = false) {
     setError(undefined);

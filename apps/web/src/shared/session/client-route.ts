@@ -26,3 +26,11 @@ export function productHref(mode: ProductMode, clientId?: string) {
     return clientId ? `/portfolio/${encodeURIComponent(clientId)}` : "/";
   return `/${mode}${clientId ? `?clientId=${encodeURIComponent(clientId)}` : ""}`;
 }
+
+export function scopedHref(href: string, clientId?: string) {
+  if (!clientId) return href;
+  const [path, query = ""] = href.split("?");
+  const params = new URLSearchParams(query);
+  params.set("clientId", clientId);
+  return `${path}?${params}`;
+}

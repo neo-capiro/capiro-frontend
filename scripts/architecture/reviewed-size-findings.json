@@ -856,15 +856,6 @@
     "reviewedOn": "2026-10-11"
   },
   {
-    "file": "apps/web/src/shared/portfolio/shell/Shell.tsx",
-    "kind": "function",
-    "symbol": "Shell",
-    "fingerprint": "1639294018d6171dc2f9e31f91ab2655cc50f2773a6536b92ff25ace06f9a14d",
-    "reason": "One Portfolio shell composes the HeaderFrame brand/actions slots, sidebar, navigation and main content with a single mobile-open state. Destinations, client identity display and optional profile control are inputs; the Clerk avatar remains an external UI component. HeaderFrame owns shared geometry, while WorkspaceSwitcher and PortfolioNavigation own navigation presentation. No service calls, trusted authorization or persistence were added. The long body is cohesive responsive shell markup, so another extraction solely for size is not justified.",
-    "reviewedBy": "Codex portfolio_objectives (independent review of root changes)",
-    "reviewedOn": "2026-10-11"
-  },
-  {
     "file": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
     "kind": "function",
     "symbol": "PortfolioIndex",
@@ -1204,15 +1195,6 @@
     "reviewedOn": "2026-10-12"
   },
   {
-    "file": "apps/web/src/features/portfolio/bill-tracker/watchlist-queries.ts",
-    "kind": "function",
-    "symbol": "useWatchlistView",
-    "fingerprint": "1d9fa53813edfdfaaba836b0c1bc52261495c01af276fafca7a4b6200c2fcda6",
-    "reason": "Combines the exact current client and owner-specific targeting, taxonomy and jurisdiction reads for one Configure source boundary. Reader-key derivation and source validation are in watchlist-source, while canonical Profile actor/client primitives are reused through the narrow public facade and native targeting IO stays in watchlist-writer. The subscriptions and three query lifecycles must share this captured reader so a successful sibling feed cannot accidentally authorize stale targeting.",
-    "reviewedBy": "Codex portfolio_objectives",
-    "reviewedOn": "2026-10-12"
-  },
-  {
     "file": "apps/web/src/features/portfolio/bill-tracker/useWatchlistEditor.ts",
     "kind": "function",
     "symbol": "useWatchlistEditor",
@@ -1229,15 +1211,6 @@
     "reason": "Runs one selected save or read-only reload from a captured reviewed source through the same interruption latch, then checks the exact replacement source revision before each cache or UI effect. The two branches deliberately share lifetime and failure handling; native Core/Intel dispatch and receipt semantics are delegated to watchlist-writer. No unrelated service, global authorization owner or automatic retry flow is mixed into this transaction.",
     "reviewedBy": "Codex portfolio_objectives",
     "reviewedOn": "2026-10-12"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/PhoneVerification.tsx",
-    "kind": "function",
-    "symbol": "PhoneVerification",
-    "fingerprint": "837805fab28d6fb757d965bfbcc63cefc7adfc9ee6371364cb69dcffd25624d9",
-    "reason": "Owns OTP-control presentation for one phone workflow: request acknowledgement, code entry, explicit confirmation/opt-in, refusal, and unknown-result review. It dispatches hook commands but contains no API, cache, recipient, or receipt-validation implementation.",
-    "reviewedOn": "2026-10-12",
-    "reviewedBy": "portfolio_calendar_relationships"
   },
   {
     "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/TestAlert.tsx",
@@ -1274,5 +1247,86 @@
     "reason": "Owns a single deliberate test of current saved channels and its local outcome/uncertainty state. It retains no scheduling, OTP, or preference-saving behavior; domain receipt validation, common current-input lifetime, and result presentation are separately owned.",
     "reviewedOn": "2026-10-12",
     "reviewedBy": "portfolio_calendar_relationships"
+  },
+  {
+    "file": "apps/web/src/features/meri/MeriCitedAnswer.tsx",
+    "kind": "function",
+    "symbol": "MeriCitedAnswer",
+    "fingerprint": "61429f6b227c1f7329bd4625e2d7ab38045254d530275a56a7e26b5543be20eb",
+    "reason": "Formatting exposes the existing single synthetic cited-answer presentation above the threshold. Its draft, citation disclosure and copy states belong to that answer; the composer is separate. Public sample labels, disabled unavailable controls and exact local design assets remain. No connected source, transport or authority is introduced.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/meri/fixtures/RunActivityFixture.tsx",
+    "kind": "function",
+    "symbol": "RunActivityFixture",
+    "fingerprint": "a058e12dea3e36956ac29948e402fe90511bb45835838972da5cb7e7bbf61626",
+    "reason": "Formatting exposes the existing explicit synthetic event-control surface. Scenario, replay and run-attempt selection serve one local fixture; canonical public projection owns acceptance and replay semantics, and MeriRunWorkspace owns rendering.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/meri/fixtures/run-activity-events.ts",
+    "kind": "function",
+    "symbol": "runActivityEvents",
+    "fingerprint": "02b01ef3eb3f409d90c1bb83f85d3beaa777ea1afc7d21f4cd912ff15e99ac3c",
+    "reason": "Formatting exposes the existing finite synthetic event factory. It emits public-contract-valid fixture records, not server events or an agent runtime. Existing source-isolation, invalid-scenario and all-state tests remain.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/meri/workspace/RunActivityPanel.tsx",
+    "kind": "function",
+    "symbol": "RunActivityPanel",
+    "fingerprint": "e63a4dff08726bd1f3b959c688e53f75940dedba27bd1d897835da4f3cfd3735",
+    "reason": "Formatting exposes the existing single run-activity projection renderer. Tools, sources, artifacts, approval references and errors are already accepted public events from one run/attempt. Controls remain disabled without a connected authorized service; no orchestration is added.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/meri/workspace/workspace-view.ts",
+    "kind": "function",
+    "symbol": "buildWorkspaceView",
+    "fingerprint": "afd02f5df94938288ae3bb7840d5f4dc3d168f08ddaa9a744c194cbe9403d632",
+    "reason": "Formatting exposes the existing display-only fold of accepted events. The finite event switch maps the published contract to one run/attempt view. Replay, authorization and admission remain owned by the public projection package; no second event protocol is introduced.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/PhoneVerification.tsx",
+    "kind": "function",
+    "symbol": "PhoneVerification",
+    "fingerprint": "71550b17240adafed4fd2d91ea6af2abb32de0955b0aa64f8c82a6f55b90e20a",
+    "reason": "This component still presents one phone verification transaction owned by usePhoneVerification. Requested-state text follows Figma 1028:188442, removes the conflicting ready-state paragraph, and preserves dormant/unknown/verified distinctions without asserting delivery. The red baseline and browser regressions bind the copy correction.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/bill-tracker/watchlist-queries.ts",
+    "kind": "function",
+    "symbol": "useWatchlistView",
+    "fingerprint": "1f5ddbaca49dc4f6b7a767969d36fe8e66f82a77c1df90fda99dc679dbab9534",
+    "reason": "The hook combines current client, targeting, taxonomy and jurisdiction reads for one watchlist editor. All Intel reads now depend on a current Core client source. Reader validation, cancellation and explicit refresh remain together; the Core-404 browser negative control requires zero Intel calls.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/portfolio.module.css",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "c9f7cfaf6b15c78697cc7094d37738b63d72a73219a78e99eee4c34a386a20ad",
+    "reason": "This stylesheet contains only the Portfolio index layout, table/cards, responsive and theme presentation, scoped through CSS modules and the existing Portfolio root. The union guard newly discovers its 411 nonblank CSS lines; it introduces no shared global reset or additional domain.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/shared/portfolio/shell/Shell.tsx",
+    "kind": "function",
+    "symbol": "Shell",
+    "fingerprint": "a7e91183d3f64217de0406c57968ba6de11d16686147b508bfdfbb375f88c95a",
+    "reason": "This component remains a shared Portfolio chrome composer. HeaderFrame and WorkspaceSwitcher own common structure/navigation; PortfolioNavigation owns the sidebar. Canonical home/settings links replace sibling-host assumptions, without changing feature transport or session ownership.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
   }
 ]

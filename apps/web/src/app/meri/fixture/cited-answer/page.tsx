@@ -1,6 +1,10 @@
-import { ProductShell } from '../../../../shared/shell/ProductShell';
-import { MeriCitedAnswer } from '../../../../features/meri/MeriCitedAnswer';
+import { ProductShell } from "../../../../shared/shell/ProductShell";
+import { MeriCitedAnswer } from "../../../../features/meri/MeriCitedAnswer";
 
 export default function CitedAnswerFixturePage() {
-  return <ProductShell designTarget="442:81682" assetSet="cited-answer"><MeriCitedAnswer /></ProductShell>;
+  return (
+    <ProductShell designTarget="442:81682" assetSet="cited-answer">
+      <MeriCitedAnswer />
+    </ProductShell>
+  );
 }

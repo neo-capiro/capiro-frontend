@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 import {
   useCapiroMutation,
@@ -76,12 +77,12 @@ export function ImportItem({
               />
             )}
             {(row.kind === "statute" || family === "Statute Alert") && (
-              <a
+              <Link
                 className={styles.link}
                 href="/modules/intelligence?view=legiwatch&lw=more&lwMore=research-imports"
               >
                 Review captured statute sources and mappings
-              </a>
+              </Link>
             )}
             {row.targetId && ruleFamily && (
               <RulePromotion id={row.targetId} family={ruleFamily} />

@@ -40,7 +40,16 @@ export async function onlyLocalRequests(page: Page) {
 }
 export async function operationFixtures(
   page: Page,
-  handlers: Record<string, object | string | number | boolean | null | undefined | ((input: unknown) => unknown)>,
+  handlers: Record<
+    string,
+    | object
+    | string
+    | number
+    | boolean
+    | null
+    | undefined
+    | ((input: unknown) => unknown)
+  >,
 ) {
   await page.route("**/api/capiro/*", async (route) => {
     const request = route.request();

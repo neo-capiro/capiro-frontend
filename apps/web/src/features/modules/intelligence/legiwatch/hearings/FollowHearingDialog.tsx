@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   useCapiroMutation,
   useCapiroQuery,
@@ -43,8 +43,8 @@ export function FollowHearingDialog({
       notifyOnTranscriptReady: true,
       notifyOnHighPriorityMatch: true,
     });
-  const [loadedFollow, setLoadedFollow] = useState(() => (follow.data));
-  if (loadedFollow !== (follow.data)) {
+  const [loadedFollow, setLoadedFollow] = useState(() => follow.data);
+  if (loadedFollow !== follow.data) {
     setLoadedFollow(follow.data);
     if (follow.data) {
       setIds(follow.data.clientIds);
@@ -55,7 +55,6 @@ export function FollowHearingDialog({
         notifyOnHighPriorityMatch: follow.data.notifyOnHighPriorityMatch,
       });
     }
-
   }
   const finish = async (unfollow = false) => {
     try {
