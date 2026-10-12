@@ -1,0 +1,260 @@
+.shell {
+  min-height: 100dvh;
+  background: var(--background);
+}
+.header {
+  height: 65px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 16px;
+  background: var(--card);
+  border-bottom: 2px solid var(--border);
+}
+.brand {
+  flex: 0 0 196px;
+  display: flex;
+  align-items: center;
+  height: 32px;
+}
+.modes {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 10px;
+  background: var(--muted);
+}
+.modes a,
+.modes button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 36px;
+  border-radius: 10px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  text-decoration: none;
+}
+.modes .selectedMode {
+  background: var(--card);
+  border: 1px solid var(--input);
+  box-shadow: 0 1px 2px #0c0a090d;
+}
+.globalActions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-left: auto;
+}
+.globalActions a,
+.globalActions button {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  border-radius: 10px;
+}
+.assetSlot {
+  display: inline-flex;
+  position: relative;
+  flex-shrink: 0;
+}
+.assetSlot img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: top left;
+  max-width: none;
+}
+.body {
+  display: flex;
+  min-height: calc(100dvh - 65px);
+}
+.navigation {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 232px;
+  width: 232px;
+  padding: 16px;
+  background: var(--card);
+  border-right: 1px solid var(--border);
+  min-height: 975px;
+}
+.navEyebrow {
+  margin: 0 0 12px;
+  font-size: 11px;
+  line-height: 1.3;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  letter-spacing: 0.66px;
+}
+.navigation nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.navigation a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  min-height: 36px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  text-decoration: none;
+}
+.navigation .current {
+  color: var(--foreground);
+  background: var(--card);
+  border-color: var(--input);
+  box-shadow: 0 1px 2px #0c0a090d;
+}
+.navigation .settings {
+  margin-top: auto;
+}
+.main {
+  flex: 1;
+  min-width: 0;
+  padding: 40px 64px 64px;
+}
+.hubMain {
+  padding-inline: 32px;
+}
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  color: var(--muted-foreground);
+  font-size: 13px;
+}
+.breadcrumb a {
+  text-decoration: none;
+  white-space: nowrap;
+}
+.breadcrumb [role="combobox"] {
+  width: auto;
+  min-width: 120px;
+  height: 32px;
+  font-size: 13px;
+}
+.settingsMain {
+  flex: 1;
+  min-width: 0;
+}
+.skip {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 200;
+  padding: 10px;
+  background: white;
+}
+.skip:focus {
+  top: 8px;
+}
+.mobileNavToggle {
+  display: none;
+}
+@media (max-width: 1100px) {
+  .brand {
+    flex-basis: 56px;
+  }
+  .navigation {
+    flex-basis: 72px;
+    width: 72px;
+    padding: 12px;
+  }
+  .navigation span:not([class]) {
+    display: none;
+  }
+  .navEyebrow {
+    display: none;
+  }
+  .navigation a {
+    width: 48px;
+    justify-content: center;
+    padding: 0;
+  }
+  .navigation nav {
+    gap: 8px;
+  }
+  .main {
+    padding: 28px 24px 48px;
+  }
+}
+@media (max-width: 680px) {
+  .header {
+    padding: 0 12px;
+    gap: 10px;
+  }
+  .brand {
+    flex-basis: 77px;
+  }
+  .modes a,
+  .modes button {
+    width: 32px;
+  }
+  .globalActions {
+    gap: 0;
+  }
+  .globalActions a,
+  .globalActions button {
+    width: 32px;
+  }
+  .globalActions > button,
+  .globalActions > a[aria-label="Search intelligence"] {
+    display: none;
+  }
+  .main {
+    padding: 20px 16px 40px;
+  }
+  .body {
+    display: block;
+    position: relative;
+  }
+  .navigation {
+    display: none;
+    min-height: auto;
+    position: absolute;
+    top: 44px;
+    left: 0;
+    z-index: 50;
+    width: 232px;
+    padding: 16px;
+    box-shadow: 8px 8px 24px #0002;
+  }
+  .navigation.expanded {
+    display: flex;
+  }
+  .navigation span:not([class]) {
+    display: inline;
+  }
+  .navigation a {
+    width: auto;
+    justify-content: flex-start;
+    padding: 0 12px;
+  }
+  .navigation .settings {
+    margin-top: 16px;
+  }
+  .mobileNavToggle {
+    display: block;
+    margin: 12px 16px 0;
+    padding: 6px 12px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+  }
+}

@@ -2,18 +2,24 @@ import { readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
+import { reviewSizeSignals } from './architecture-reviews.mjs';
 
 const extensions = ['', '.ts', '.tsx', '.mjs', '.mts', '.css', '.json', '/index.ts', '/index.tsx'];
 const slash = value => value.split(path.sep).join('/');
 
 /** Inspect authored application sources, never execute application/vendor code. */
-export function inspectSources(files, publicExports = new Set(['@capiro/ui/button', '@capiro/ui/prompt-input', '@capiro/meri-contracts', '@capiro/meri-contracts/browser', '@capiro/meri-contracts/metadata', '@capiro/meri-ui-stream/protocol'])) {
+export function inspectSources(files, publicExports = new Set(['@capiro/ui/button', '@capiro/ui/dialog', '@capiro/ui/input', '@capiro/ui/textarea', '@capiro/ui/select', '@capiro/ui/dropdown-menu', '@capiro/ui/prompt-input', '@capiro/meri-contracts', '@capiro/meri-contracts/browser', '@capiro/meri-contracts/metadata', '@capiro/meri-ui-stream/protocol'])) {
   const errors = [], signals = [], graph = new Map();
   const feature = name => name.match(/\/features\/([^/]+)\//)?.[1];
   const owner = name => name.match(/^(?:apps|packages)\/[^/]+(?=\/)/)?.[0];
   for (const [name, source] of files) {
+    if (/\.css$/.test(name)) {
+      const nonblank = source.split(/\r?\n/).filter(line => line.trim()).length;
+      if (nonblank > 400) signals.push(`${name}: ${nonblank} nonblank lines require review`);
+      continue;
+    }
     if (!/\.(ts|tsx|mjs|mts)$/.test(name)) continue;
-    if (/\/features\/(portfolio|modules|settings)\//.test(name)) errors.push(`${name}: future feature implementation not allocated`);
+    if (/\/features\/portfolio\//.test(name)) errors.push(`${name}: future feature implementation not allocated`);
     const ast = ts.createSourceFile(name, source, ts.ScriptTarget.Latest, true);
     const edges = [];
     const nonblank = source.split(/\r?\n/).filter(line => line.trim()).length;
@@ -54,7 +60,7 @@ export function inspectSources(files, publicExports = new Set(['@capiro/ui/butto
   }
   for (const name of graph.keys()) visit(name, []);
   const routes = [...files.keys()].filter(name => /\/app\/(?:.*\/)?(?:page|layout|route)\.(ts|tsx)$/.test(name)).sort();
-  if (routes.some(name => /\/route\./.test(name))) errors.push('No backend route handler is allocated');
+  if (routes.some(name => /\/route\./.test(name) && !name.startsWith('apps/web/src/app/api/capiro/'))) errors.push('No backend route handler is allocated outside the authenticated Capiro operation gateway');
   return { errors, signals, routes, graph: Object.fromEntries(graph) };
 }
 
@@ -77,12 +83,23 @@ function main() {
   if (process.argv.length === 3 && process.argv[2] === '--help') { console.log('Usage: node scripts/architecture.mjs\nExit0: no violations; exit1: boundary/review signal; exit2: setup failure.'); return; }
   if (process.argv.length !== 2) { console.error('Usage: node scripts/architecture.mjs\nExit0: no violations; exit1: boundary/review signal; exit2: setup failure.'); process.exitCode = 2; return; }
   const root = fileURLToPath(new URL('../', import.meta.url));
-  const result = inspectSources(discover(root));
+  const files = discover(root);
+  const result = inspectSources(files);
+  const reviews = JSON.parse(readFileSync(path.join(root, 'docs/architecture-size-reviews.json'), 'utf8'));
+  const sizeReview = reviewSizeSignals(files, result.signals, reviews, reference => {
+    const [name, anchor] = reference.split('#');
+    if (!name.startsWith('docs/') || name.includes('..') || !name.endsWith('.md')) return false;
+    try {
+      const evidence = readFileSync(path.join(root, name), 'utf8');
+      return !anchor || evidence.includes(`id="${anchor}"`);
+    } catch { return false; }
+  });
+  result.errors.push(...sizeReview.errors);
   if (!result.routes.includes('apps/web/src/app/page.tsx') || !result.routes.includes('apps/web/src/app/layout.tsx')) result.errors.push('Missing canonical Next entrypoints');
   const ui = JSON.parse(readFileSync(path.join(root, 'packages/ui/package.json'), 'utf8'));
   for (const name of ['button', 'prompt-input']) if (!ui.exports?.[`./${name}`]) result.errors.push(`Missing canonical @capiro/ui/${name} export`);
-  console.log(JSON.stringify(result, null, 2));
-  if (result.errors.length || result.signals.length) process.exitCode = 1;
+  console.log(JSON.stringify({ ...result, sizeReview }, null, 2));
+  if (result.errors.length || sizeReview.pending.length) process.exitCode = 1;
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

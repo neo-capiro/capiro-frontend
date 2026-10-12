@@ -15,9 +15,22 @@ test('rejects computed loading and undeclared server endpoints', () => {
   const errors = inspectSources(new Map([['apps/web/src/app/api/fake/route.ts', 'export async function GET(){return import(process.env.MODULE);}']])).errors;
   assert.ok(errors.some(value => value.includes('computed import'))); assert.ok(errors.some(value => value.includes('backend route')));
 });
+test('allocated Modules and Settings may use shared adapters and the narrow Capiro gateway', () => {
+  const files = new Map([
+    ['apps/web/src/features/modules/Directory.tsx', "import '../../shared/capiro/client';"],
+    ['apps/web/src/features/settings/Profile.tsx', "import '../../shared/capiro/client';"],
+    ['apps/web/src/shared/capiro/client.ts', 'export const client = 1;'],
+    ['apps/web/src/app/api/capiro/[operation]/route.ts', "import '../../../../shared/capiro/client';"],
+  ]);
+  assert.deepEqual(inspectSources(files).errors, []);
+});
 test('size and function thresholds require explicit review instead of silent exceptions', () => {
   const source = `export function oversized(){\n${'void 0;\n'.repeat(401)}}`;
   assert.equal(inspectSources(new Map([['apps/web/src/features/meri/large.ts', source]])).signals.length, 2);
+});
+test('authored stylesheets retain the same file-size review threshold', () => {
+  const result = inspectSources(new Map([['apps/web/src/features/modules/view.module.css', '.view {}\n'.repeat(401)]]));
+  assert.deepEqual(result.signals, ['apps/web/src/features/modules/view.module.css: 401 nonblank lines require review']);
 });
 
 test('browser client resolves emitted JS imports and refuses server or Node contract entries', () => {

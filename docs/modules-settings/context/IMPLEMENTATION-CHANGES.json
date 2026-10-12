@@ -1,0 +1,2274 @@
+{
+  "base": "02c02d95bdf3949662b9123f425271c6491ffdab",
+  "implementation": "e717867300e8568d467ac1cc9a54cab6540f4312",
+  "files": [
+    {
+      "path": "README.md",
+      "status": "M"
+    },
+    {
+      "path": "apps/web/design/modules-shared-assets.json",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/package.json",
+      "status": "M"
+    },
+    {
+      "path": "apps/web/public/design/modules/calendar/check.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/calendar/filter.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/calendar/manifest.json",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/calendar/next.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/calendar/previous.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/calendar/scope-chevron.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/calendar/today.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgCapiro31ProfilePicture.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgCapiroWordmark.png",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgIcon.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgIcon1.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgIcon10.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgIcon11.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgIcon12.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgIcon13.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgIcon14.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgIcon15.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgIcon2.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgIcon3.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgIcon4.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgIcon5.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgIcon6.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgIcon7.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgIcon8.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgIcon9.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgIconFileText.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgIconHandshake.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgIconUsers.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgLucideFolders.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgLucideListTodo.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgLucideRadar.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/design/modules/shared/imgLucideRoute.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/directory-chevron-down.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/district-assets-manifest.json",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/district-boundaries.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/district-close.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/district-layers.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/district-locate.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/district-minus.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/district-plus.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/district-points.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/district-states.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/planner-board-imgDragHandle.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/planner-board-imgEllipse.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/planner-board-imgEllipse1.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/planner-board-imgEllipse2.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/planner-board-imgEllipse3.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/settings-hq-imgEllipse.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/settings-hq-imgEllipse1.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/settings-integrations-imgEllipse.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/settings-integrations-imgEllipse1.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/settings-personal-imgEllipse.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/settings-personal-imgIcon7.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/settings-team-imgEllipse.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/settings-team-imgEllipse1.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/settings-team-imgSwitchOff.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/settings-team-imgSwitchOn.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/workspace-calendar.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/public/figma/modules/workspace-mail.svg",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/app/api/capiro/[operation]/route.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/app/forms/[token]/page.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/app/globals.css",
+      "status": "M"
+    },
+    {
+      "path": "apps/web/src/app/layout.tsx",
+      "status": "M"
+    },
+    {
+      "path": "apps/web/src/app/modules/[module]/page.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/app/modules/page.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/app/settings/[section]/page.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/app/settings/page.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/app/sign-in/[[...sign-in]]/page.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/ModuleScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/calendar/CalendarAgenda.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/calendar/CalendarCard.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/calendar/CalendarControls.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/calendar/CalendarGrid.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/calendar/CalendarScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/calendar/README.md",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/calendar/agenda-loader.test.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/calendar/agenda-loader.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/calendar/agenda.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/calendar/calendar.module.css",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/calendar/range.test.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/calendar/range.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/calendar/useAgendaSources.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/calendar/useCalendar.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/directory/CommitteeDirectory.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/directory/CongressionalContacts.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/directory/ContactPreview.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/directory/DirectoryPagination.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/directory/DirectoryScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/directory/MemberProfile.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/directory/PersonnelDirectory.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/directory/StateDirectory.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/directory/directory.module.css",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/CampaignSession.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/CommitmentView.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/EngagementOverview.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/MeetingLibrary.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/OutreachView.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/PlanView.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/README.md",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/ReportView.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/TeamView.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/engagement.module.css",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/hub/ModuleHub.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/hub/hub.module.css",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/DataExplorer.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/DefenseBudget.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/DistrictMap.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/DistrictNexus.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/FundingDetail.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/FundingOpportunities.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/IntelligenceScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/ProgramElementProfile.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/ProgramEvidence.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/SaveBillToLegiWatch.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/district-geometry.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/intelligence.module.css",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/LegiWatchScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/committees/CommitteeFollowDialog.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/committees/CommitteeRoom.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/committees/CommitteesScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/committees/StateCommitteeRoom.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/components.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/BudgetCompare.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/BudgetEvidence.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/BudgetScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/EvidenceActions.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/EvidenceBasket.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/EvidenceDialogs.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/EvidenceScope.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/NewsCoverage.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/NewsImport.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/NewsMonitorEditor.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/NewsMonitors.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/NewsScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/PersonnelEvidence.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/budget-presentation.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/use-evidence-selection.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/use-news-import.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/use-news-monitor.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/ArchiveScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/AttendanceDialog.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/FollowHearingDialog.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/HearingCalendar.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/HearingDetailScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/HearingWorkDialog.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/HearingsScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/IntelligencePanel.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/RecordingsScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/TranscriptPanel.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/calendar-dates.test.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/calendar-dates.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/imports/ImportItem.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/imports/ImportReview.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/imports/ImportScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/imports/ImportUpload.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/imports/KeywordPromotion.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/imports/LegalImportDecision.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/imports/ResearchImports.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/legiwatch.module.css",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/live/BrowserRoom.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/live/HearingRecordingTransport.test.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/live/HearingRecordingTransport.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/live/RetainedAudioPanel.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/live/use-browser-capture.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/live/ws-messages.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/InternalWorkflows.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/KeywordDefinitions.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/KeywordDelivery.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/KeywordEditor.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/KeywordMappings.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/KeywordRules.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/KeywordScanReview.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/KeywordSuggestions.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/MonitoringScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/RecordRuleEditor.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/RecordRules.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/ScopeControls.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/StatuteMonitorEditor.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/StatuteMonitorReview.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/StatuteMonitors.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/SubscriptionActivation.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/SubscriptionEditor.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/SubscriptionHistory.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/SubscriptionsScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/WorkflowActionView.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/WorkflowEditor.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/WorkflowPreview.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/more/BriefingCitations.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/more/BriefingComposer.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/more/BriefingReview.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/more/BriefingsScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/more/DigestScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/more/EditorialActivation.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/more/EditorialEditor.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/more/EditorialScheduleFields.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/more/EditorialSchedules.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/more/EditorialSourceFields.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/more/LegiWatchSettings.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/more/MoreScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/more/TrendsScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/more/more-catalog.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/more/use-editorial-draft.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/publications/PublicationClaimsEditor.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/publications/PublicationDelivery.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/publications/PublicationReview.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/publications/PublicationWorkspace.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/publications/SmsConsentPanel.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/reports/RecipientPicker.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportCompose.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportEditor.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportHistory.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportRecipients.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportRunView.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportsScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/research/DeadlineDraft.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/research/FloridaLaw.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/research/LegalDeadlines.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/research/ResearchCoverage.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/research/ResearchDraft.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/research/ResearchReportReview.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/research/ResearchScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/research/ResearchSearch.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/research/ResearchVersions.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/updates/UpdatesScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/use-legiwatch-route.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/AdvancedTaskFields.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/AllocationDialog.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/BudgetDialog.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/CapacityRecordDialog.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/CapacityView.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/CopyProjectDialog.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/DashboardEditor.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/FormAnswers.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/FormPreview.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/FormQuestions.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/FormSharing.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/ImportTasks.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/PersonalViewDialog.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/PlannerInbox.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/PlannerScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/ProjectBudget.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/ProjectCatalog.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/PublicForm.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/README.md",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/ReportingDashboard.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/ResourceCatalog.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/ResourceEditor.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/ResourceTypeFields.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskAttachments.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskDetail.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskEditor.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskViews.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TimeDialogs.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TimeExportDialog.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TimeSettings.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TimesheetTables.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TimesheetWorkDialog.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TimesheetsView.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/WorkloadView.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/form-model.test.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/form-model.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/planner.module.css",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/resource-data.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/task-editor-data.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/task-presentation.test.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/task-presentation.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/use-timesheets.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/research-portfolios/ResearchAnalytics.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/research-portfolios/ResearchChanges.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/research-portfolios/ResearchDetail.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/research-portfolios/ResearchMembers.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/research-portfolios/ResearchOverview.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/research-portfolios/ResearchPortfoliosScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/research-portfolios/ResearchReviews.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/research-portfolios/ResearchSettings.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/research-portfolios/ResearchSnapshots.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/research-portfolios/ResearchSubscriptions.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/research-portfolios/research.module.css",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/FirmPhases.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/README.md",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/StrategiesLibrary.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/StrategiesScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/StrategyCalendar.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/StrategyCreate.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/StrategyExport.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/StrategyHistory.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/StrategyLinkedWork.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/StrategyStep.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/StrategyTimeline.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/StrategyTimelineGrid.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/context/ContextDocument.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/context/ContextEvidence.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/context/ContextUpload.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/context/StrategyContext.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/context/use-context-import.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/review/ProposalReview.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/review/StrategyReview.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/runs/ApprovalReview.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/runs/RunActions.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/runs/RunDetail.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/runs/StrategyRuns.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/runs/run-model.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/runs/runs.module.css",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/strategies.module.css",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/strategies/strategy-model.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/README.md",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/WorkspaceLibrary.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/WorkspaceShares.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/hillday/HillDayContext.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/hillday/HillDayEditor.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/hillday/HillDayExport.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/hillday/HillDayGeneration.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/hillday/HillDayMeetings.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/hillday/HillDayResolution.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/hillday/HillDaySectionEditors.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/hillday/HillDayWizard.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/NewsletterComments.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/NewsletterPaper.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/NewsletterTemplates.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/newsletter-model.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/use-newsletter.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/templates/TemplateCard.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/templates/TemplateDefaults.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/templates/TemplateDetails.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/templates/TemplateGuardrails.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/templates/TemplateSettings.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/templates/TemplateStudio.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/templates/TemplateVariables.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/templates/TemplateWizard.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/templates/template-model.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/workspace.module.css",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/BillingSettings.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/BrandingSettings.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/ContactSettings.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/IntegrationSettings.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/InviteMember.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/MemorySettings.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/MeriPreferences.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/PersonalSettings.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/ProfileSettings.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/RegisterAccount.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/SettingsNavigation.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/SettingsScreen.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/SignatureSettings.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/TeamSettings.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/UsageSettings.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/access.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/analyst/AliasManager.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/analyst/AnalystSettings.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/analyst/AuditAndQuarantine.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/analyst/MergePrograms.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/analyst/PersonReviewQueues.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/analyst/ProgramMatchQueue.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/analyst/QueuePagination.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/analyst/ReconciliationQueue.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/components.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/externalNavigation.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/hq/AiKeysSettings.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/hq/BroadcastDetail.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/hq/BroadcastSettings.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/hq/CustomerSettings.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/hq/TenantDialogs.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/hq/TenantSettings.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/hq/TenantTabs.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/index.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/integrationProviders.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/mappings/AttachFederalRecord.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/mappings/ContractorIdentity.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/mappings/MappingReview.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/mappings/MappingSettings.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/mappings/SourceSearch.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/mappings/bulkReview.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/mappings/presentation.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/preferences/PreferencePages.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/settings-controls.module.css",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/settings-layout.module.css",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/signature/RichSignatureEditor.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/styles.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/features/settings/useSettingsAction.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/proxy.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/CapiroBoundary.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/README.md",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/binary.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/config.test.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/config.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/contracts.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/gateway-input.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/gateway.test.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/gateway.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/http.test.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/http.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/legiwatch-review.test.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/lifecycle.test.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/multipart.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/calendar.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/directory-schemas.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/directory.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/engagement-artifacts.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/engagement-sessions.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/engagement.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/intelligence-defense.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/intelligence-explorer.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/intelligence-funding.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/intelligence-research-contracts.test.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/intelligence.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-analytics.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-briefings.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-budget-schemas.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-calendar-schemas.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-calendar.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-committees.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-contracts.test.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-editorial.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-evidence-schemas.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-evidence.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-hearing-schemas.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-hearings.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-imports.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-keyword-schemas.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-keywords.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-monitor-schemas.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-monitoring.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-publication-schemas.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-publications.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-report-schemas.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-reports.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-research-imports.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-research-schemas.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-research-work.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-research.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-sessions.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-subscriptions.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-work.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-workflows.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/outreach-template-schemas.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/outreach-templates.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/planner-attachments.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/planner-budgets.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/planner-capacity.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/planner-contracts.test.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/planner-core-schemas.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/planner-management.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/planner-public-forms.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/planner-resource-data.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/planner-resources.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/planner-schemas.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/planner-tasks.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/planner-time-options.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/planner-time.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/planner.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/research-portfolios.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/research-schemas.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/settings-admin.test.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/settings-admin.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/settings-admin/analyst-audit.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/settings-admin/analyst-personnel.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/settings-admin/analyst-programs.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/settings-admin/analyst-reconciliation.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/settings-admin/analyst.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/settings-admin/broadcasts.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/settings-admin/hq.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/settings-admin/mappings.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/settings-admin/profiles.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/settings-admin/schemas.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/settings-schemas.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/settings.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/strategies-agents.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/strategies-context.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/strategies-imports.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/strategies-plan.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/strategies-reference.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/strategies-reports.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/strategies-schemas.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/strategies-watch.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/strategies.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/workspace-comments.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/workspace-documents.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/workspace-exports.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/workspace-hillday.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/workspace-schemas.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/workspace.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/public-forms.test.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/queries.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/registry.test.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/registry.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/transfers.test.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/uploads.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/vitest.config.mts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/meetings/CreateMeeting.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/meetings/MeetingArtifacts.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/meetings/MeetingDetail.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/meetings/library-materials.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/meetings/meetings.module.css",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/module-ui/DataTable.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/module-ui/Modal.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/module-ui/SelectInput.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/module-ui/Tabs.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/module-ui/controls.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/module-ui/index.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/module-ui/layout.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/module-ui/module-ui.module.css",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/shell/ConnectedModule.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/shell/Header.tsx",
+      "status": "M"
+    },
+    {
+      "path": "apps/web/src/shared/shell/ModuleAsset.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/shell/ModuleBreadcrumb.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/shell/ModuleHeader.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/shell/ModuleNavigation.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/shell/ModuleShell.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/shell/module-catalog.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/shell/module-shell.module.css",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/src/shared/shell/public-routing.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/test/browser/README.md",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/test/browser/calendar.spec.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/test/browser/clerk.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/test/browser/fixtures.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/test/browser/font.css",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/test/browser/image.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/test/browser/index.html",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/test/browser/legiwatch-fixtures.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/test/browser/legiwatch.spec.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/test/browser/main.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/test/browser/module-route-fixtures.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/test/browser/modules.spec.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/test/browser/navigation.tsx",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/test/browser/planner-engagement.spec.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/test/browser/playwright.config.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/test/browser/public-forms.spec.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/test/browser/server.mjs",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/test/browser/session.spec.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/test/browser/settings-fixtures.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/test/browser/settings-scenes.spec.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/test/browser/settings.spec.ts",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/test/module-assets.test.mjs",
+      "status": "A"
+    },
+    {
+      "path": "apps/web/test/settings-access.test.mjs",
+      "status": "A"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "status": "M"
+    },
+    {
+      "path": "docs/architecture-size-reviews.json",
+      "status": "A"
+    },
+    {
+      "path": "docs/coordination/MODULES-SETTINGS-20261011.md",
+      "status": "A"
+    },
+    {
+      "path": "docs/modules-settings/DEPENDENCIES.md",
+      "status": "A"
+    },
+    {
+      "path": "docs/modules-settings/FIGMA-INVENTORY.json",
+      "status": "A"
+    },
+    {
+      "path": "docs/modules-settings/IMPLEMENTATION.md",
+      "status": "A"
+    },
+    {
+      "path": "docs/modules-settings/INTEGRATION-MAP.md",
+      "status": "A"
+    },
+    {
+      "path": "docs/modules-settings/STRUCTURE-REVIEW.md",
+      "status": "A"
+    },
+    {
+      "path": "docs/modules-settings/VERIFICATION.md",
+      "status": "A"
+    },
+    {
+      "path": "docs/modules-settings/evidence/browser-results.json",
+      "status": "A"
+    },
+    {
+      "path": "docs/modules-settings/evidence/build.txt",
+      "status": "A"
+    },
+    {
+      "path": "docs/modules-settings/evidence/engagement-meeting-phone.png",
+      "status": "A"
+    },
+    {
+      "path": "docs/modules-settings/evidence/legiwatch-mobile.png",
+      "status": "A"
+    },
+    {
+      "path": "docs/modules-settings/evidence/legiwatch-research.png",
+      "status": "A"
+    },
+    {
+      "path": "docs/modules-settings/evidence/planner-list.png",
+      "status": "A"
+    },
+    {
+      "path": "docs/modules-settings/evidence/settings-personal.png",
+      "status": "A"
+    },
+    {
+      "path": "docs/modules-settings/evidence/strategies.png",
+      "status": "A"
+    },
+    {
+      "path": "package-lock.json",
+      "status": "M"
+    },
+    {
+      "path": "package.json",
+      "status": "M"
+    },
+    {
+      "path": "packages/ui/package.json",
+      "status": "M"
+    },
+    {
+      "path": "scripts/architecture-reviews.mjs",
+      "status": "A"
+    },
+    {
+      "path": "scripts/architecture-reviews.test.mjs",
+      "status": "A"
+    },
+    {
+      "path": "scripts/architecture.mjs",
+      "status": "M"
+    },
+    {
+      "path": "scripts/architecture.test.mjs",
+      "status": "M"
+    }
+  ]
+}

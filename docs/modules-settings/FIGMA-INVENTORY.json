@@ -1,0 +1,3206 @@
+{
+  "fileKey": "Zc2dEN5aLU47dVdsewDmiJ",
+  "pageId": "411:40601",
+  "note": "Discovered frame and component inventory; ownership mapping is not pixel-perfect or live acceptance. Responsive/state variants share components.",
+  "frames": [
+    {
+      "nodeId": "411:83961",
+      "name": "Modules · Hub · Tablet (1024)",
+      "section": "Modules · Tablet",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-83961"
+    },
+    {
+      "nodeId": "411:84152",
+      "name": "Strategies · Library · Tablet",
+      "section": "Modules · Tablet",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-84152"
+    },
+    {
+      "nodeId": "411:84222",
+      "name": "Module · Planner (tablet, 1024)",
+      "section": "Modules · Tablet",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-84222"
+    },
+    {
+      "nodeId": "411:84292",
+      "name": "Module · Engagement (tablet, 1024)",
+      "section": "Modules · Tablet",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-84292"
+    },
+    {
+      "nodeId": "411:84355",
+      "name": "Module · Workspace (tablet, 1024)",
+      "section": "Modules · Tablet",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-84355"
+    },
+    {
+      "nodeId": "411:84405",
+      "name": "Module · Directory (tablet, 1024)",
+      "section": "Modules · Tablet",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-84405"
+    },
+    {
+      "nodeId": "411:84461",
+      "name": "Module · LegiWatch (tablet, 1024)",
+      "section": "Modules · Tablet",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-84461"
+    },
+    {
+      "nodeId": "411:86805",
+      "name": "Modules · Hub · Mobile (390)",
+      "section": "Modules · Phone",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-86805"
+    },
+    {
+      "nodeId": "411:86927",
+      "name": "Strategies · Library · Phone",
+      "section": "Modules · Phone",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-86927"
+    },
+    {
+      "nodeId": "411:87002",
+      "name": "Module · Planner (phone, 390)",
+      "section": "Modules · Phone",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-87002"
+    },
+    {
+      "nodeId": "411:87077",
+      "name": "Module · Engagement (phone, 390)",
+      "section": "Modules · Phone",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-87077"
+    },
+    {
+      "nodeId": "411:87144",
+      "name": "Module · Workspace (phone, 390)",
+      "section": "Modules · Phone",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-87144"
+    },
+    {
+      "nodeId": "411:87198",
+      "name": "Module · Directory (phone, 390)",
+      "section": "Modules · Phone",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-87198"
+    },
+    {
+      "nodeId": "411:87258",
+      "name": "Module · LegiWatch (phone, 390)",
+      "section": "Modules · Phone",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-87258"
+    },
+    {
+      "nodeId": "411:93787",
+      "name": "Modules · Hub (1440)",
+      "section": "Modules · Hub · Desktop",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-93787"
+    },
+    {
+      "nodeId": "411:93988",
+      "name": "Modules · Engagement Manager (1440)",
+      "section": "Modules · Engagement · Desktop",
+      "owner": "apps/web/src/features/modules/engagement",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-93988"
+    },
+    {
+      "nodeId": "411:94161",
+      "name": "Engagement Manager · Library (1440)",
+      "section": "Modules · Engagement · Desktop",
+      "owner": "apps/web/src/features/modules/engagement",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-94161"
+    },
+    {
+      "nodeId": "411:94315",
+      "name": "Engagement Manager · Outreach (1440)",
+      "section": "Modules · Engagement · Desktop",
+      "owner": "apps/web/src/features/modules/engagement",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-94315"
+    },
+    {
+      "nodeId": "411:94410",
+      "name": "Engagement Manager · Reports (1440)",
+      "section": "Modules · Engagement · Desktop",
+      "owner": "apps/web/src/features/modules/engagement",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-94410"
+    },
+    {
+      "nodeId": "411:94643",
+      "name": "Engagement Manager · Commitments (1440)",
+      "section": "Modules · Engagement · Desktop",
+      "owner": "apps/web/src/features/modules/engagement",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-94643"
+    },
+    {
+      "nodeId": "411:94827",
+      "name": "Engagement Manager · Meetings (list, 1440)",
+      "section": "Modules · Engagement · Desktop",
+      "owner": "apps/web/src/features/modules/engagement",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-94827"
+    },
+    {
+      "nodeId": "411:94903",
+      "name": "Overlay · Module switcher · Engagement",
+      "section": "Modules · Engagement · Desktop",
+      "owner": "apps/web/src/features/modules/engagement",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-94903"
+    },
+    {
+      "nodeId": "411:95121",
+      "name": "Modules · Engagement Manager · Plan (1440)",
+      "section": "Modules · Engagement · Desktop",
+      "owner": "apps/web/src/features/modules/engagement",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-95121"
+    },
+    {
+      "nodeId": "411:95288",
+      "name": "Engagement Manager · Team workload",
+      "section": "Modules · Engagement · Desktop",
+      "owner": "apps/web/src/features/modules/engagement",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-95288"
+    },
+    {
+      "nodeId": "411:95360",
+      "name": "Engagement Manager · Outreach · Shared target detail",
+      "section": "Modules · Engagement · Desktop",
+      "owner": "apps/web/src/features/modules/engagement",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-95360"
+    },
+    {
+      "nodeId": "411:95399",
+      "name": "Engagement Manager · Meetings · Queue",
+      "section": "Modules · Engagement · Desktop",
+      "owner": "apps/web/src/features/modules/engagement",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-95399"
+    },
+    {
+      "nodeId": "411:95475",
+      "name": "Planner · Firm tasks (list, 1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-95475"
+    },
+    {
+      "nodeId": "411:95693",
+      "name": "Planner · Tasks for strategy (FY27 counter-UAS, 1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-95693"
+    },
+    {
+      "nodeId": "411:95900",
+      "name": "Planner · Board (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-95900"
+    },
+    {
+      "nodeId": "411:96069",
+      "name": "Overlay · Module switcher · Planner",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-96069"
+    },
+    {
+      "nodeId": "411:96324",
+      "name": "Planner · My tasks · List (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-96324"
+    },
+    {
+      "nodeId": "411:96631",
+      "name": "Planner · My tasks · List · bulk actions open (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-96631"
+    },
+    {
+      "nodeId": "411:96796",
+      "name": "Planner · My tasks · Board (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-96796"
+    },
+    {
+      "nodeId": "411:96974",
+      "name": "Planner · Project · List (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-96974"
+    },
+    {
+      "nodeId": "411:97233",
+      "name": "Planner · Project · Calendar (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-97233"
+    },
+    {
+      "nodeId": "411:97503",
+      "name": "Planner · Project · Timeline (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-97503"
+    },
+    {
+      "nodeId": "411:97756",
+      "name": "Planner · Project · Gantt (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-97756"
+    },
+    {
+      "nodeId": "411:98018",
+      "name": "Planner · Projects (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-98018"
+    },
+    {
+      "nodeId": "411:98142",
+      "name": "Planner · Projects · archived and empty (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-98142"
+    },
+    {
+      "nodeId": "411:98199",
+      "name": "Planner · Inbox (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-98199"
+    },
+    {
+      "nodeId": "411:98286",
+      "name": "Planner · Inbox · empty (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-98286"
+    },
+    {
+      "nodeId": "411:98342",
+      "name": "Planner · Workload (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-98342"
+    },
+    {
+      "nodeId": "411:98432",
+      "name": "Planner · Portfolios (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-98432"
+    },
+    {
+      "nodeId": "411:98537",
+      "name": "Planner · Goals (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-98537"
+    },
+    {
+      "nodeId": "411:98667",
+      "name": "Planner · Templates (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-98667"
+    },
+    {
+      "nodeId": "411:98762",
+      "name": "Planner · Rules (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-98762"
+    },
+    {
+      "nodeId": "411:98850",
+      "name": "Planner · Forms (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-98850"
+    },
+    {
+      "nodeId": "411:98966",
+      "name": "Planner · Capacity · no plan selected (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-98966"
+    },
+    {
+      "nodeId": "411:99028",
+      "name": "Planner · Capacity · People · Week · Hours (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-99028"
+    },
+    {
+      "nodeId": "411:99438",
+      "name": "Planner · Capacity · Projects · Month · Percent (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-99438"
+    },
+    {
+      "nodeId": "411:99738",
+      "name": "Planner · Capacity · People · selection, bulk bar and row menu (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-99738"
+    },
+    {
+      "nodeId": "411:100044",
+      "name": "Planner · Capacity · staffing panel open (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-100044"
+    },
+    {
+      "nodeId": "411:100136",
+      "name": "Reference · Capacity · State examples",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-100136"
+    },
+    {
+      "nodeId": "411:100367",
+      "name": "Task details · drawer top (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-100367"
+    },
+    {
+      "nodeId": "411:100790",
+      "name": "Task details · drawer bottom: attachments, subtasks, time, activity (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-100790"
+    },
+    {
+      "nodeId": "411:101189",
+      "name": "New project (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-101189"
+    },
+    {
+      "nodeId": "411:101552",
+      "name": "Duplicate project (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-101552"
+    },
+    {
+      "nodeId": "411:101828",
+      "name": "My tasks settings (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-101828"
+    },
+    {
+      "nodeId": "411:102222",
+      "name": "Save view (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-102222"
+    },
+    {
+      "nodeId": "411:102498",
+      "name": "Import tasks (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-102498"
+    },
+    {
+      "nodeId": "411:102812",
+      "name": "Create project from template (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-102812"
+    },
+    {
+      "nodeId": "411:102932",
+      "name": "Planner · Timesheets · my week, draft (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-102932"
+    },
+    {
+      "nodeId": "411:103279",
+      "name": "Planner · Timesheets · reviewing Ravi Patel, submitted (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-103279"
+    },
+    {
+      "nodeId": "411:103523",
+      "name": "Planner · Timesheets · Time review (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-103523"
+    },
+    {
+      "nodeId": "411:103666",
+      "name": "Planner · Project · Budget and costs (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-103666"
+    },
+    {
+      "nodeId": "411:103845",
+      "name": "Add time (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-103845"
+    },
+    {
+      "nodeId": "411:104254",
+      "name": "Add work to timesheet (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-104254"
+    },
+    {
+      "nodeId": "411:104635",
+      "name": "My timesheet settings (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-104635"
+    },
+    {
+      "nodeId": "411:104994",
+      "name": "Reject timesheet (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-104994"
+    },
+    {
+      "nodeId": "411:105255",
+      "name": "Export time entries (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-105255"
+    },
+    {
+      "nodeId": "411:105628",
+      "name": "Time settings (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-105628"
+    },
+    {
+      "nodeId": "411:106061",
+      "name": "Set project budget (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-106061"
+    },
+    {
+      "nodeId": "411:106269",
+      "name": "Project rates (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-106269"
+    },
+    {
+      "nodeId": "411:106499",
+      "name": "My budget alert (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-106499"
+    },
+    {
+      "nodeId": "411:106701",
+      "name": "Goal details · detail and reminders (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-106701"
+    },
+    {
+      "nodeId": "411:106894",
+      "name": "Goal details · update composer, history, comments (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-106894"
+    },
+    {
+      "nodeId": "411:107246",
+      "name": "Edit goal (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-107246"
+    },
+    {
+      "nodeId": "411:107481",
+      "name": "Edit rule (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-107481"
+    },
+    {
+      "nodeId": "411:107657",
+      "name": "Edit template (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-107657"
+    },
+    {
+      "nodeId": "411:107822",
+      "name": "Edit form · questions (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-107822"
+    },
+    {
+      "nodeId": "411:108142",
+      "name": "Edit form · preview and submission settings (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-108142"
+    },
+    {
+      "nodeId": "411:108340",
+      "name": "Open form · submit (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-108340"
+    },
+    {
+      "nodeId": "411:108486",
+      "name": "Open form · success (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-108486"
+    },
+    {
+      "nodeId": "411:108618",
+      "name": "Public form · filled with validation error (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-108618"
+    },
+    {
+      "nodeId": "411:108641",
+      "name": "Public form · success (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-108641"
+    },
+    {
+      "nodeId": "411:108648",
+      "name": "Public form · unavailable (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-108648"
+    },
+    {
+      "nodeId": "411:108653",
+      "name": "Public form · loading (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-108653"
+    },
+    {
+      "nodeId": "411:108657",
+      "name": "Planner · Reporting · dashboard gallery (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-108657"
+    },
+    {
+      "nodeId": "411:108737",
+      "name": "Reference · Reporting gallery · State examples",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-108737"
+    },
+    {
+      "nodeId": "411:108801",
+      "name": "Planner · Reporting · dashboard with bar, donut, line, number and text widgets (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-108801"
+    },
+    {
+      "nodeId": "411:108965",
+      "name": "Reference · Reporting widgets · State examples",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-108965"
+    },
+    {
+      "nodeId": "411:109116",
+      "name": "Reporting · drill-down (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-109116"
+    },
+    {
+      "nodeId": "411:109364",
+      "name": "Reporting · dashboard editor, chart widget (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-109364"
+    },
+    {
+      "nodeId": "411:109691",
+      "name": "Reporting · dashboard editor, text widget (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-109691"
+    },
+    {
+      "nodeId": "411:109931",
+      "name": "Capacity · plan dialog (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-109931"
+    },
+    {
+      "nodeId": "411:110396",
+      "name": "Capacity · team dialog (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-110396"
+    },
+    {
+      "nodeId": "411:110840",
+      "name": "Capacity · placeholder dialog (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-110840"
+    },
+    {
+      "nodeId": "411:111278",
+      "name": "Capacity · allocate project work (dialog)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-111278"
+    },
+    {
+      "nodeId": "411:111734",
+      "name": "Planner · Project · Board (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-111734"
+    },
+    {
+      "nodeId": "411:111909",
+      "name": "Planner · More menu: Templates, Rules, Forms (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-111909"
+    },
+    {
+      "nodeId": "411:112012",
+      "name": "Planner · Project · Objective project, List (1440)",
+      "section": "Modules · Planner · Desktop",
+      "owner": "apps/web/src/features/modules/planner",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-112012"
+    },
+    {
+      "nodeId": "411:119498",
+      "name": "Strategies · Library · Live functionality",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-119498"
+    },
+    {
+      "nodeId": "411:119740",
+      "name": "Strategies · Working timeline · FY27–FY29",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-119740"
+    },
+    {
+      "nodeId": "411:120223",
+      "name": "Strategies · Context library · Client and firm context",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-120223"
+    },
+    {
+      "nodeId": "411:120335",
+      "name": "Strategies · Agent review · Apply proposed changes",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-120335"
+    },
+    {
+      "nodeId": "411:120419",
+      "name": "Strategies · Execution runs · Staging and recovery",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-120419"
+    },
+    {
+      "nodeId": "867:165831",
+      "name": "Strategies · Production review index",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=867-165831"
+    },
+    {
+      "nodeId": "411:120782",
+      "name": "Directory · Congressional Staff (1440)",
+      "section": "Modules · Directory · Desktop",
+      "owner": "apps/web/src/features/modules/directory",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-120782"
+    },
+    {
+      "nodeId": "411:120966",
+      "name": "Directory · Committee Staff (1440)",
+      "section": "Modules · Directory · Desktop",
+      "owner": "apps/web/src/features/modules/directory",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-120966"
+    },
+    {
+      "nodeId": "411:121116",
+      "name": "Directory · Department of War (1440)",
+      "section": "Modules · Directory · Desktop",
+      "owner": "apps/web/src/features/modules/directory",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-121116"
+    },
+    {
+      "nodeId": "411:121276",
+      "name": "Directory · State Legislators (1440)",
+      "section": "Modules · Directory · Desktop",
+      "owner": "apps/web/src/features/modules/directory",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-121276"
+    },
+    {
+      "nodeId": "411:121431",
+      "name": "Directory · State Committees (1440)",
+      "section": "Modules · Directory · Desktop",
+      "owner": "apps/web/src/features/modules/directory",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-121431"
+    },
+    {
+      "nodeId": "411:121574",
+      "name": "Directory · Member profile · Rep. Mike Fallon (1440)",
+      "section": "Modules · Directory · Desktop",
+      "owner": "apps/web/src/features/modules/directory",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-121574"
+    },
+    {
+      "nodeId": "411:121700",
+      "name": "Overlay · Module switcher · Directory",
+      "section": "Modules · Directory · Desktop",
+      "owner": "apps/web/src/features/modules/directory",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-121700"
+    },
+    {
+      "nodeId": "411:121930",
+      "name": "Intelligence · Data Explorer (1440)",
+      "section": "Modules · Intelligence · Desktop",
+      "owner": "apps/web/src/features/modules/intelligence",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-121930"
+    },
+    {
+      "nodeId": "411:122298",
+      "name": "Intelligence · Defense Budget · Explore (1440)",
+      "section": "Modules · Intelligence · Desktop",
+      "owner": "apps/web/src/features/modules/intelligence",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-122298"
+    },
+    {
+      "nodeId": "411:122500",
+      "name": "Intelligence · Funding Opportunities (1440)",
+      "section": "Modules · Intelligence · Desktop",
+      "owner": "apps/web/src/features/modules/intelligence",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-122500"
+    },
+    {
+      "nodeId": "411:122663",
+      "name": "Intelligence · District Nexus (1440)",
+      "section": "Modules · Intelligence · Desktop",
+      "owner": "apps/web/src/features/modules/intelligence",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-122663"
+    },
+    {
+      "nodeId": "411:122817",
+      "name": "Defense Budget · Line profile · PE 0604134A (1440)",
+      "section": "Modules · Intelligence · Desktop",
+      "owner": "apps/web/src/features/modules/intelligence",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-122817"
+    },
+    {
+      "nodeId": "411:122955",
+      "name": "Intelligence · Funding opportunity detail (1440)",
+      "section": "Modules · Intelligence · Desktop",
+      "owner": "apps/web/src/features/modules/intelligence",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-122955"
+    },
+    {
+      "nodeId": "411:123212",
+      "name": "Overlay · Module switcher · Intelligence",
+      "section": "Modules · Intelligence · Desktop",
+      "owner": "apps/web/src/features/modules/intelligence",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-123212"
+    },
+    {
+      "nodeId": "411:123447",
+      "name": "Research Portfolios · List (1440)",
+      "section": "Modules · Research Portfolios · Desktop",
+      "owner": "apps/web/src/features/modules/research-portfolios",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-123447"
+    },
+    {
+      "nodeId": "411:123601",
+      "name": "Research Portfolios · Detail · Overview (1440)",
+      "section": "Modules · Research Portfolios · Desktop",
+      "owner": "apps/web/src/features/modules/research-portfolios",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-123601"
+    },
+    {
+      "nodeId": "411:123698",
+      "name": "Overlay · Module switcher · Research Portfolios",
+      "section": "Modules · Research Portfolios · Desktop",
+      "owner": "apps/web/src/features/modules/research-portfolios",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-123698"
+    },
+    {
+      "nodeId": "952:186076",
+      "name": "Modules/Icon/play",
+      "section": "Modules · Polished UI patterns",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=952-186076"
+    },
+    {
+      "nodeId": "952:186079",
+      "name": "Modules/Icon/pause",
+      "section": "Modules · Polished UI patterns",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=952-186079"
+    },
+    {
+      "nodeId": "952:186083",
+      "name": "Modules/Icon/volume-2",
+      "section": "Modules · Polished UI patterns",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=952-186083"
+    },
+    {
+      "nodeId": "952:186088",
+      "name": "Modules/Icon/captions",
+      "section": "Modules · Polished UI patterns",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=952-186088"
+    },
+    {
+      "nodeId": "952:186092",
+      "name": "Modules/Icon/settings-2",
+      "section": "Modules · Polished UI patterns",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=952-186092"
+    },
+    {
+      "nodeId": "952:186098",
+      "name": "Modules/Icon/external-link",
+      "section": "Modules · Polished UI patterns",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=952-186098"
+    },
+    {
+      "nodeId": "952:186103",
+      "name": "Modules/Icon/locate-fixed",
+      "section": "Modules · Polished UI patterns",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=952-186103"
+    },
+    {
+      "nodeId": "952:186111",
+      "name": "Modules/Icon/route",
+      "section": "Modules · Polished UI patterns",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=952-186111"
+    },
+    {
+      "nodeId": "952:186116",
+      "name": "Modules/Icon/radar",
+      "section": "Modules · Polished UI patterns",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=952-186116"
+    },
+    {
+      "nodeId": "952:186126",
+      "name": "Modules/Icon/folders",
+      "section": "Modules · Polished UI patterns",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=952-186126"
+    },
+    {
+      "nodeId": "952:186130",
+      "name": "Modules/Icon/list-todo",
+      "section": "Modules · Polished UI patterns",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=952-186130"
+    },
+    {
+      "nodeId": "962:186699",
+      "name": "Modules · UI polish review",
+      "section": "Modules · Polished UI patterns",
+      "owner": "apps/web/src/shared/shell",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=962-186699"
+    },
+    {
+      "nodeId": "411:67409",
+      "name": "Overlay · Account menu · Standard",
+      "section": "Settings · Standard user · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-67409"
+    },
+    {
+      "nodeId": "411:67533",
+      "name": "Overlay · Account menu · Capiro admin",
+      "section": "Settings · Standard user · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-67533"
+    },
+    {
+      "nodeId": "411:67666",
+      "name": "Settings · Personal",
+      "section": "Settings · Standard user · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-67666"
+    },
+    {
+      "nodeId": "411:67803",
+      "name": "Settings · Contact info",
+      "section": "Settings · Standard user · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-67803"
+    },
+    {
+      "nodeId": "411:67920",
+      "name": "Settings · Memory",
+      "section": "Settings · Standard user · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-67920"
+    },
+    {
+      "nodeId": "411:68134",
+      "name": "Settings · Memory · Review detail (drawer)",
+      "section": "Settings · Standard user · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-68134"
+    },
+    {
+      "nodeId": "411:68400",
+      "name": "Settings · Memory · Governance · Active",
+      "section": "Settings · Standard user · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-68400"
+    },
+    {
+      "nodeId": "411:68525",
+      "name": "Settings · Memory · Governance · Access grants",
+      "section": "Settings · Standard user · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-68525"
+    },
+    {
+      "nodeId": "411:68634",
+      "name": "Settings · Memory · Grant client memory access (modal)",
+      "section": "Settings · Standard user · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-68634"
+    },
+    {
+      "nodeId": "411:68780",
+      "name": "Settings · Memory · File pending review",
+      "section": "Settings · Standard user · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-68780"
+    },
+    {
+      "nodeId": "411:68885",
+      "name": "Settings · Integrations",
+      "section": "Settings · Standard user · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-68885"
+    },
+    {
+      "nodeId": "411:69743",
+      "name": "Settings · Integrations · Register account (modal)",
+      "section": "Settings · Standard user · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-69743"
+    },
+    {
+      "nodeId": "411:70321",
+      "name": "Settings · Integrations · Disconnect Microsoft 365 (confirm)",
+      "section": "Settings · Standard user · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-70321"
+    },
+    {
+      "nodeId": "411:70590",
+      "name": "Settings · Team",
+      "section": "Settings · Admin · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-70590"
+    },
+    {
+      "nodeId": "411:70715",
+      "name": "Settings · Team · Pending invitations",
+      "section": "Settings · Admin · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-70715"
+    },
+    {
+      "nodeId": "411:70792",
+      "name": "Settings · Team · Add team member (modal)",
+      "section": "Settings · Admin · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-70792"
+    },
+    {
+      "nodeId": "411:70958",
+      "name": "Settings · Profiles",
+      "section": "Settings · Admin · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-70958"
+    },
+    {
+      "nodeId": "411:71170",
+      "name": "Settings · Profiles · Archive confirm (modal)",
+      "section": "Settings · Admin · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-71170"
+    },
+    {
+      "nodeId": "411:71400",
+      "name": "Settings · Profiles · Archived",
+      "section": "Settings · Admin · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-71400"
+    },
+    {
+      "nodeId": "411:71677",
+      "name": "Settings · Billing · Past due",
+      "section": "Settings · Admin · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-71677"
+    },
+    {
+      "nodeId": "411:71847",
+      "name": "Settings · Billing · No access",
+      "section": "Settings · Admin · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-71847"
+    },
+    {
+      "nodeId": "411:71894",
+      "name": "Settings · AI usage",
+      "section": "Settings · Admin · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-71894"
+    },
+    {
+      "nodeId": "411:72025",
+      "name": "Settings · Branding",
+      "section": "Settings · Admin · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-72025"
+    },
+    {
+      "nodeId": "411:74020",
+      "name": "Settings · Intelligence mappings",
+      "section": "Settings · Admin · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-74020"
+    },
+    {
+      "nodeId": "411:74223",
+      "name": "Settings · Intelligence mappings · Client contractor identity",
+      "section": "Settings · Admin · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-74223"
+    },
+    {
+      "nodeId": "411:74484",
+      "name": "Settings · Intelligence mappings · Empty",
+      "section": "Settings · Admin · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-74484"
+    },
+    {
+      "nodeId": "411:74584",
+      "name": "Settings · Intelligence mappings · Attach a federal record (modal)",
+      "section": "Settings · Admin · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-74584"
+    },
+    {
+      "nodeId": "411:74850",
+      "name": "Settings · Billing · Bank account (ACH)",
+      "section": "Settings · Admin · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-74850"
+    },
+    {
+      "nodeId": "411:91384",
+      "name": "Settings · Billing · Plan and payment",
+      "section": "Settings · Admin · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-91384"
+    },
+    {
+      "nodeId": "411:75020",
+      "name": "Settings · HQ · Tenants",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-75020"
+    },
+    {
+      "nodeId": "411:75145",
+      "name": "Settings · HQ · Create tenant + invite admin (modal)",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-75145"
+    },
+    {
+      "nodeId": "411:75316",
+      "name": "Settings · HQ · Impersonate pilot-a (modal)",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-75316"
+    },
+    {
+      "nodeId": "411:75464",
+      "name": "Settings · HQ · Permanently delete tenant (modal)",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-75464"
+    },
+    {
+      "nodeId": "411:75615",
+      "name": "Settings · HQ · Customers",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-75615"
+    },
+    {
+      "nodeId": "411:75768",
+      "name": "Settings · HQ · Grant complimentary access (modal)",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-75768"
+    },
+    {
+      "nodeId": "411:75937",
+      "name": "Settings · HQ · AI Keys & Usage",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-75937"
+    },
+    {
+      "nodeId": "411:76051",
+      "name": "Settings · HQ · AI Keys · Tenant drawer",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-76051"
+    },
+    {
+      "nodeId": "411:76239",
+      "name": "Settings · HQ · Personnel Merge Queue",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-76239"
+    },
+    {
+      "nodeId": "411:76402",
+      "name": "Settings · HQ · Broadcasts · Pick a tenant",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-76402"
+    },
+    {
+      "nodeId": "411:76476",
+      "name": "Settings · HQ · Broadcasts",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-76476"
+    },
+    {
+      "nodeId": "411:76638",
+      "name": "Settings · HQ · Broadcasts · Specific users",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-76638"
+    },
+    {
+      "nodeId": "411:76833",
+      "name": "Settings · HQ · Broadcasts · Detail (modal)",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-76833"
+    },
+    {
+      "nodeId": "411:77058",
+      "name": "Settings · HQ · Broadcasts · Send confirm (modal)",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-77058"
+    },
+    {
+      "nodeId": "411:77237",
+      "name": "Settings · HQ · PE reconciliation",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-77237"
+    },
+    {
+      "nodeId": "411:77375",
+      "name": "Settings · HQ · PE reconciliation · Manual value (modal)",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-77375"
+    },
+    {
+      "nodeId": "411:77538",
+      "name": "Settings · HQ · PE match queue",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-77538"
+    },
+    {
+      "nodeId": "411:77704",
+      "name": "Settings · HQ · Analyst · Reconciliation",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-77704"
+    },
+    {
+      "nodeId": "411:77878",
+      "name": "Settings · HQ · Analyst · Program matches",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-77878"
+    },
+    {
+      "nodeId": "411:78057",
+      "name": "Settings · HQ · Analyst · Alias manager",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-78057"
+    },
+    {
+      "nodeId": "411:78250",
+      "name": "Settings · HQ · Analyst · Person candidates",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-78250"
+    },
+    {
+      "nodeId": "411:78432",
+      "name": "Settings · HQ · Analyst · Merge candidates",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-78432"
+    },
+    {
+      "nodeId": "411:78602",
+      "name": "Settings · HQ · Analyst · Quarantine",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-78602"
+    },
+    {
+      "nodeId": "411:78767",
+      "name": "Settings · HQ · Analyst · Audit log",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-78767"
+    },
+    {
+      "nodeId": "411:78943",
+      "name": "Settings · HQ · Analyst · Provision links",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-78943"
+    },
+    {
+      "nodeId": "411:79064",
+      "name": "Settings · HQ · Analyst · SAM",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-79064"
+    },
+    {
+      "nodeId": "411:79185",
+      "name": "Settings · HQ · Analyst · Add alias (modal)",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-79185"
+    },
+    {
+      "nodeId": "411:79410",
+      "name": "Settings · HQ · Analyst · Merge programs (modal)",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-79410"
+    },
+    {
+      "nodeId": "411:79627",
+      "name": "Settings · HQ · Analyst · Raw record (modal)",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-79627"
+    },
+    {
+      "nodeId": "411:79807",
+      "name": "Settings · HQ · Analyst · Audit detail (modal)",
+      "section": "Settings · Capiro admins · HQ · Desktop",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-79807"
+    },
+    {
+      "nodeId": "411:84646",
+      "name": "Settings · Tablet (1024) · Personal",
+      "section": "Settings · Tablet",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-84646"
+    },
+    {
+      "nodeId": "411:84723",
+      "name": "Settings · Tablet (1024) · Team",
+      "section": "Settings · Tablet",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-84723"
+    },
+    {
+      "nodeId": "411:87590",
+      "name": "Settings · Mobile (390) · Index",
+      "section": "Settings · Phone",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-87590"
+    },
+    {
+      "nodeId": "411:87656",
+      "name": "Settings · Mobile (390) · Personal",
+      "section": "Settings · Phone",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-87656"
+    },
+    {
+      "nodeId": "411:87694",
+      "name": "Settings · Mobile (390) · Team",
+      "section": "Settings · Phone",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-87694"
+    },
+    {
+      "nodeId": "411:91488",
+      "name": "Overlay · Cancel plan · inside the window",
+      "section": "Settings · Billing lifecycle",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-91488"
+    },
+    {
+      "nodeId": "411:91672",
+      "name": "Overlay · Cancel plan · after the window",
+      "section": "Settings · Billing lifecycle",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-91672"
+    },
+    {
+      "nodeId": "411:91854",
+      "name": "Overlay · Cancelled · exit survey",
+      "section": "Settings · Billing lifecycle",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-91854"
+    },
+    {
+      "nodeId": "411:92041",
+      "name": "App · Window banner (inside cancel window)",
+      "section": "Settings · Billing lifecycle",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-92041"
+    },
+    {
+      "nodeId": "411:92145",
+      "name": "App · Payment failed banner (warning)",
+      "section": "Settings · Billing lifecycle",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-92145"
+    },
+    {
+      "nodeId": "411:92249",
+      "name": "App · Read-only (locked for non-payment)",
+      "section": "Settings · Billing lifecycle",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-92249"
+    },
+    {
+      "nodeId": "411:92265",
+      "name": "Overlay · Terms update (blocking)",
+      "section": "Settings · Billing lifecycle",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-92265"
+    },
+    {
+      "nodeId": "448:87360",
+      "name": "09.01 · Personal preferences",
+      "section": "Settings · Meri preferences",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=448-87360"
+    },
+    {
+      "nodeId": "448:87595",
+      "name": "09.02 · Connector accounts and permissions",
+      "section": "Settings · Meri preferences",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=448-87595"
+    },
+    {
+      "nodeId": "448:87836",
+      "name": "09.03 · Usage and workspace limits",
+      "section": "Settings · Meri preferences",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=448-87836"
+    },
+    {
+      "nodeId": "448:88066",
+      "name": "09.04 · Skills and artifact templates",
+      "section": "Settings · Meri preferences",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=448-88066"
+    },
+    {
+      "nodeId": "448:89130",
+      "name": "09.05 · Notifications and account menu",
+      "section": "Settings · Meri preferences",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=448-89130"
+    },
+    {
+      "nodeId": "448:89371",
+      "name": "09.06 · Privacy and deletion",
+      "section": "Settings · Meri preferences",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=448-89371"
+    },
+    {
+      "nodeId": "448:89562",
+      "name": "09.07 · Help, shortcuts and feedback",
+      "section": "Settings · Meri preferences",
+      "owner": "apps/web/src/features/settings",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=448-89562"
+    },
+    {
+      "nodeId": "411:112533",
+      "name": "Workspace · Documents (1440)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-112533"
+    },
+    {
+      "nodeId": "411:112887",
+      "name": "Template Studio · Outreach library (1440)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-112887"
+    },
+    {
+      "nodeId": "411:113126",
+      "name": "Template Studio · Outreach library · card menu (1440)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-113126"
+    },
+    {
+      "nodeId": "411:113384",
+      "name": "Template Studio · Outreach library · Capiro empty (1440)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-113384"
+    },
+    {
+      "nodeId": "411:113448",
+      "name": "Template Studio · Outreach library · loading (1440)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-113448"
+    },
+    {
+      "nodeId": "411:113518",
+      "name": "Create template · step 1 · Basics (dialog)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-113518"
+    },
+    {
+      "nodeId": "411:113802",
+      "name": "Create template · step 2 · Defaults (dialog)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-113802"
+    },
+    {
+      "nodeId": "411:114140",
+      "name": "Create template · step 3 · Questions & Variables (dialog)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-114140"
+    },
+    {
+      "nodeId": "411:114482",
+      "name": "Create template · step 4 · Guardrails (dialog)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-114482"
+    },
+    {
+      "nodeId": "411:114792",
+      "name": "Create template · step 5 · Review & Publish (dialog)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-114792"
+    },
+    {
+      "nodeId": "411:115067",
+      "name": "Create template · draft saved (dialog)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-115067"
+    },
+    {
+      "nodeId": "411:115336",
+      "name": "Edit template settings (dialog)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-115336"
+    },
+    {
+      "nodeId": "411:115608",
+      "name": "Use template · questions (dialog)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-115608"
+    },
+    {
+      "nodeId": "411:115878",
+      "name": "Template applied · receipt (dialog)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-115878"
+    },
+    {
+      "nodeId": "411:116155",
+      "name": "Template version history (dialog)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-116155"
+    },
+    {
+      "nodeId": "411:116439",
+      "name": "Save campaign as template (dialog)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-116439"
+    },
+    {
+      "nodeId": "411:116602",
+      "name": "Save campaign as template · published (dialog)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-116602"
+    },
+    {
+      "nodeId": "411:116749",
+      "name": "Hill Day · 1 Template (1440)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-116749"
+    },
+    {
+      "nodeId": "411:116813",
+      "name": "Hill Day · 2 Sponsor (1440)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-116813"
+    },
+    {
+      "nodeId": "411:116917",
+      "name": "Hill Day · 3 Meetings · Calendar (1440)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-116917"
+    },
+    {
+      "nodeId": "411:117061",
+      "name": "Hill Day · 3 Meetings · List (1440)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-117061"
+    },
+    {
+      "nodeId": "411:117182",
+      "name": "Hill Day · 3 Meetings · Directory (1440)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-117182"
+    },
+    {
+      "nodeId": "411:117353",
+      "name": "Hill Day · 4 Resolution (1440)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-117353"
+    },
+    {
+      "nodeId": "411:117559",
+      "name": "Hill Day · 4 Resolution · panels open (1440)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-117559"
+    },
+    {
+      "nodeId": "411:117761",
+      "name": "Hill Day · 5 Context (1440)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-117761"
+    },
+    {
+      "nodeId": "411:117902",
+      "name": "Hill Day · 6 Generate · running (1440)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-117902"
+    },
+    {
+      "nodeId": "411:117981",
+      "name": "Hill Day · 6 Generate · done with one unavailable (1440)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-117981"
+    },
+    {
+      "nodeId": "411:118060",
+      "name": "Hill Day · 6 Generate · failed (1440)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-118060"
+    },
+    {
+      "nodeId": "411:118139",
+      "name": "Workspace · Documents · empty (1440)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-118139"
+    },
+    {
+      "nodeId": "411:118210",
+      "name": "Workspace · Documents · error (1440)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-118210"
+    },
+    {
+      "nodeId": "411:118285",
+      "name": "Hill Day · Editor (1440)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-118285"
+    },
+    {
+      "nodeId": "411:118509",
+      "name": "Hill Day · Editor · Context used open (1440)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-118509"
+    },
+    {
+      "nodeId": "411:118770",
+      "name": "Hill Day · Editor · first page edit mode (1440)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-118770"
+    },
+    {
+      "nodeId": "411:119026",
+      "name": "Hill Day · Editor · section edit with Refine with Meri (1440)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-119026"
+    },
+    {
+      "nodeId": "411:119260",
+      "name": "Hill Day · Editor · delivered and export strips (1440)",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-119260"
+    },
+    {
+      "nodeId": "976:190063",
+      "name": "Workspace · Newsletter · 1 Select template",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=976-190063"
+    },
+    {
+      "nodeId": "976:190222",
+      "name": "Workspace · Newsletter · 2 Builder",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=976-190222"
+    },
+    {
+      "nodeId": "976:190381",
+      "name": "Workspace · Newsletter · 3 Preview and review",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=976-190381"
+    },
+    {
+      "nodeId": "976:190540",
+      "name": "Workspace · Newsletter · Stage in Outreach",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=976-190540"
+    },
+    {
+      "nodeId": "571:124282",
+      "name": "Workspace · Workflows · Newsletter and Hill Day Schedule",
+      "section": "Modules · Workspace · Desktop",
+      "owner": "apps/web/src/features/modules/workspace",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=571-124282"
+    },
+    {
+      "nodeId": "411:119870",
+      "name": "Superseded reference · Strategies · Objectives (1440)",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-119870"
+    },
+    {
+      "nodeId": "411:120058",
+      "name": "Superseded reference · Strategies · Work products (Anduril FY27, 1440)",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-120058"
+    },
+    {
+      "nodeId": "850:153669",
+      "name": "Strategies · New strategy",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=850-153669"
+    },
+    {
+      "nodeId": "850:153999",
+      "name": "Strategies · Choose an objective type",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=850-153999"
+    },
+    {
+      "nodeId": "850:154300",
+      "name": "Strategies · Meri is drafting your strategy",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=850-154300"
+    },
+    {
+      "nodeId": "850:154593",
+      "name": "Strategies · Strategy draft could not be completed",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=850-154593"
+    },
+    {
+      "nodeId": "851:154348",
+      "name": "Strategies · New strategy · Check required fields",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=851-154348"
+    },
+    {
+      "nodeId": "851:154651",
+      "name": "Strategies · Delete strategy",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=851-154651"
+    },
+    {
+      "nodeId": "863:165147",
+      "name": "Strategies · New strategy · Draft with Meri",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=863-165147"
+    },
+    {
+      "nodeId": "869:166240",
+      "name": "Strategies · Discard strategy setup?",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=869-166240"
+    },
+    {
+      "nodeId": "851:154931",
+      "name": "Strategies · Firm phases",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=851-154931"
+    },
+    {
+      "nodeId": "851:155273",
+      "name": "Strategies · Firm phases · Resolve coverage",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=851-155273"
+    },
+    {
+      "nodeId": "851:155584",
+      "name": "Strategies · Firm phases · Save failed",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=851-155584"
+    },
+    {
+      "nodeId": "851:155877",
+      "name": "Strategies · Fiscal horizon",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=851-155877"
+    },
+    {
+      "nodeId": "852:155353",
+      "name": "Strategies · Edit legislative calendar",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=852-155353"
+    },
+    {
+      "nodeId": "852:155672",
+      "name": "Strategies · Calendar changes could not be saved",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=852-155672"
+    },
+    {
+      "nodeId": "864:165349",
+      "name": "Strategies · Working timeline · FY27 only",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=864-165349"
+    },
+    {
+      "nodeId": "864:168797",
+      "name": "Strategies · Working timeline · FY27–FY28",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=864-168797"
+    },
+    {
+      "nodeId": "869:166566",
+      "name": "Strategies · Discard phase changes?",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=869-166566"
+    },
+    {
+      "nodeId": "852:155976",
+      "name": "Strategies · Meeting with Sen. Wicker staff",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=852-155976"
+    },
+    {
+      "nodeId": "852:156363",
+      "name": "Strategies · New step",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=852-156363"
+    },
+    {
+      "nodeId": "852:156702",
+      "name": "Strategies · Edit step",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=852-156702"
+    },
+    {
+      "nodeId": "852:157045",
+      "name": "Strategies · Step field options",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=852-157045"
+    },
+    {
+      "nodeId": "853:156352",
+      "name": "Strategies · Risk · Ongoing",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=853-156352"
+    },
+    {
+      "nodeId": "853:156683",
+      "name": "Strategies · Step · Could not save",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=853-156683"
+    },
+    {
+      "nodeId": "853:157002",
+      "name": "Strategies · Discard unsaved changes?",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=853-157002"
+    },
+    {
+      "nodeId": "853:157277",
+      "name": "Strategies · Delete step?",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=853-157277"
+    },
+    {
+      "nodeId": "853:157568",
+      "name": "Strategies · Strategy assistant",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=853-157568"
+    },
+    {
+      "nodeId": "853:157904",
+      "name": "Strategies · Link existing work",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=853-157904"
+    },
+    {
+      "nodeId": "854:157423",
+      "name": "Strategies · Prepare work · Needs attention",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=854-157423"
+    },
+    {
+      "nodeId": "854:158695",
+      "name": "Strategies · Meri · Response interrupted",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=854-158695"
+    },
+    {
+      "nodeId": "871:167073",
+      "name": "Strategies · Meri · Strategy-level assistant",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=871-167073"
+    },
+    {
+      "nodeId": "854:157749",
+      "name": "Strategies · Plan health",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=854-157749"
+    },
+    {
+      "nodeId": "854:158066",
+      "name": "Strategies · Strategy monitoring",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=854-158066"
+    },
+    {
+      "nodeId": "854:158381",
+      "name": "Strategies · Monitoring unavailable",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=854-158381"
+    },
+    {
+      "nodeId": "854:159022",
+      "name": "Strategies · Upload context",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=854-159022"
+    },
+    {
+      "nodeId": "854:159337",
+      "name": "Strategies · Reading your files",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=854-159337"
+    },
+    {
+      "nodeId": "854:159623",
+      "name": "Strategies · Review what Meri found",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=854-159623"
+    },
+    {
+      "nodeId": "855:158841",
+      "name": "Strategies · Context import · Partial completion",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=855-158841"
+    },
+    {
+      "nodeId": "855:159143",
+      "name": "Strategies · FY27 strategy brief",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=855-159143"
+    },
+    {
+      "nodeId": "855:159483",
+      "name": "Strategies · Change strategy association",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=855-159483"
+    },
+    {
+      "nodeId": "855:159779",
+      "name": "Strategies · Archive context document",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=855-159779"
+    },
+    {
+      "nodeId": "855:160073",
+      "name": "Strategies · Mark as reviewed source",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=855-160073"
+    },
+    {
+      "nodeId": "855:160353",
+      "name": "Strategies · Facts and conflicts",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=855-160353"
+    },
+    {
+      "nodeId": "855:160684",
+      "name": "Strategies · Resolve conflicting information",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=855-160684"
+    },
+    {
+      "nodeId": "855:160992",
+      "name": "Strategies · Confirm evidence decision",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=855-160992"
+    },
+    {
+      "nodeId": "856:160175",
+      "name": "Strategies · Context · Recovery states",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=856-160175"
+    },
+    {
+      "nodeId": "869:166892",
+      "name": "Strategies · Leave this context import?",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=869-166892"
+    },
+    {
+      "nodeId": "856:160494",
+      "name": "Strategies · Review proposed changes",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=856-160494"
+    },
+    {
+      "nodeId": "856:160820",
+      "name": "Strategies · Approve a critical-risk proposal?",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=856-160820"
+    },
+    {
+      "nodeId": "856:161109",
+      "name": "Strategies · Reject proposed changes?",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=856-161109"
+    },
+    {
+      "nodeId": "856:161384",
+      "name": "Strategies · Proposed changes · Recovery",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=856-161384"
+    },
+    {
+      "nodeId": "856:161690",
+      "name": "Strategies · Undo applied changes?",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=856-161690"
+    },
+    {
+      "nodeId": "856:161968",
+      "name": "Strategies · Firm-level findings",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=856-161968"
+    },
+    {
+      "nodeId": "856:162285",
+      "name": "Strategies · Prepare Wicker briefing",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=856-162285"
+    },
+    {
+      "nodeId": "857:161467",
+      "name": "Strategies · Run · Waiting for input",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=857-161467"
+    },
+    {
+      "nodeId": "857:161770",
+      "name": "Strategies · Run · Plan changed",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=857-161770"
+    },
+    {
+      "nodeId": "857:162060",
+      "name": "Strategies · Run · Could not complete",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=857-162060"
+    },
+    {
+      "nodeId": "857:162351",
+      "name": "Strategies · Run · Staged outputs ready",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=857-162351"
+    },
+    {
+      "nodeId": "857:162646",
+      "name": "Strategies · Run · Executing",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=857-162646"
+    },
+    {
+      "nodeId": "857:162934",
+      "name": "Strategies · Run · Completed",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=857-162934"
+    },
+    {
+      "nodeId": "857:163225",
+      "name": "Strategies · Change this execution run?",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=857-163225"
+    },
+    {
+      "nodeId": "857:163519",
+      "name": "Strategies · Staging and review rules",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=857-163519"
+    },
+    {
+      "nodeId": "857:163799",
+      "name": "Strategies · Export strategy",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=857-163799"
+    },
+    {
+      "nodeId": "857:164170",
+      "name": "Strategies · Export readiness",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=857-164170"
+    },
+    {
+      "nodeId": "857:164493",
+      "name": "Strategies · Internal strategy report",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=857-164493"
+    },
+    {
+      "nodeId": "857:164802",
+      "name": "Strategies · Advanced · Current plan Markdown",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=857-164802"
+    },
+    {
+      "nodeId": "857:165096",
+      "name": "Strategies · Export · Generation and download",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=857-165096"
+    },
+    {
+      "nodeId": "857:165418",
+      "name": "Strategies · Strategy history",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=857-165418"
+    },
+    {
+      "nodeId": "857:165756",
+      "name": "Strategies · Restore version 18?",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=857-165756"
+    },
+    {
+      "nodeId": "857:166046",
+      "name": "Strategies · History · Recovery states",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=857-166046"
+    },
+    {
+      "nodeId": "857:166353",
+      "name": "Strategies · Strategies · Filtered library",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=857-166353"
+    },
+    {
+      "nodeId": "857:166661",
+      "name": "Strategies · Strategies · First use",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=857-166661"
+    },
+    {
+      "nodeId": "857:166954",
+      "name": "Strategies · Strategies · Loading and recovery",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=857-166954"
+    },
+    {
+      "nodeId": "857:167263",
+      "name": "Strategies · You do not have access",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=857-167263"
+    },
+    {
+      "nodeId": "857:167536",
+      "name": "Strategies · Your session has expired",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=857-167536"
+    },
+    {
+      "nodeId": "857:167802",
+      "name": "Strategies · Strategy not found",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=857-167802"
+    },
+    {
+      "nodeId": "857:168075",
+      "name": "Strategies · This strategy has been archived",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=857-168075"
+    },
+    {
+      "nodeId": "862:166001",
+      "name": "Strategies · New strategy · Phone",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=862-166001"
+    },
+    {
+      "nodeId": "866:165775",
+      "name": "Strategies · Edit step · Phone",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=866-165775"
+    },
+    {
+      "nodeId": "873:167108",
+      "name": "Strategies · Working timeline · Phone",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=873-167108"
+    },
+    {
+      "nodeId": "874:167237",
+      "name": "Strategies · Working timeline · Tablet",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=874-167237"
+    },
+    {
+      "nodeId": "874:168294",
+      "name": "Strategies · New step · Phone",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=874-168294"
+    },
+    {
+      "nodeId": "884:167616",
+      "name": "Strategies · Meri assistant · Phone",
+      "section": "Modules · Strategies · Desktop",
+      "owner": "apps/web/src/features/modules/strategies",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=884-167616"
+    },
+    {
+      "nodeId": "926:183758",
+      "name": "LegiWatch · guide · LegiWatch · implementation review",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=926-183758"
+    },
+    {
+      "nodeId": "411:123078",
+      "name": "LegiWatch · hearings · Hearings",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-123078"
+    },
+    {
+      "nodeId": "913:167783",
+      "name": "LegiWatch · agenda · Hearing agenda",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=913-167783"
+    },
+    {
+      "nodeId": "924:181009",
+      "name": "LegiWatch · day · Hearings · Day view",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=924-181009"
+    },
+    {
+      "nodeId": "924:181199",
+      "name": "LegiWatch · fl-calendar · Florida hearing calendar",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=924-181199"
+    },
+    {
+      "nodeId": "918:173969",
+      "name": "LegiWatch · filters · Hearing filters",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=918-173969"
+    },
+    {
+      "nodeId": "924:181371",
+      "name": "LegiWatch · calendar-date · Choose date range",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=924-181371"
+    },
+    {
+      "nodeId": "924:181663",
+      "name": "LegiWatch · export-calendar · Export hearing calendar",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=924-181663"
+    },
+    {
+      "nodeId": "924:181838",
+      "name": "LegiWatch · empty · No hearings match these filters",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=924-181838"
+    },
+    {
+      "nodeId": "924:182002",
+      "name": "LegiWatch · source-error · Hearing coverage needs attention",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=924-182002"
+    },
+    {
+      "nodeId": "930:184063",
+      "name": "LegiWatch · recordings · My recordings",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=930-184063"
+    },
+    {
+      "nodeId": "930:184287",
+      "name": "LegiWatch · archive · Past hearings",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=930-184287"
+    },
+    {
+      "nodeId": "938:185150",
+      "name": "LegiWatch · jurisdiction · Calendar jurisdiction",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=938-185150"
+    },
+    {
+      "nodeId": "938:185344",
+      "name": "LegiWatch · committee-jurisdiction · Committee jurisdiction",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=938-185344"
+    },
+    {
+      "nodeId": "938:185531",
+      "name": "LegiWatch · federal-calendar · Federal hearing calendar",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=938-185531"
+    },
+    {
+      "nodeId": "913:167961",
+      "name": "LegiWatch · committees · Committee directory",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=913-167961"
+    },
+    {
+      "nodeId": "913:168176",
+      "name": "LegiWatch · fl-committees · Florida committees",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=913-168176"
+    },
+    {
+      "nodeId": "915:168126",
+      "name": "LegiWatch · committee-overview · House Armed Services Committee",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=915-168126"
+    },
+    {
+      "nodeId": "915:168371",
+      "name": "LegiWatch · committee-proceedings · House Armed Services Committee",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=915-168371"
+    },
+    {
+      "nodeId": "915:168576",
+      "name": "LegiWatch · committee-members · House Armed Services Committee",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=915-168576"
+    },
+    {
+      "nodeId": "915:168822",
+      "name": "LegiWatch · committee-updates · House Armed Services Committee",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=915-168822"
+    },
+    {
+      "nodeId": "915:169051",
+      "name": "LegiWatch · committee-intelligence · House Armed Services Committee",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=915-169051"
+    },
+    {
+      "nodeId": "915:169287",
+      "name": "LegiWatch · fl-overview · Florida Appropriations Committee",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=915-169287"
+    },
+    {
+      "nodeId": "915:169517",
+      "name": "LegiWatch · fl-proceedings · Florida Appropriations Committee",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=915-169517"
+    },
+    {
+      "nodeId": "915:169732",
+      "name": "LegiWatch · fl-members · Florida Appropriations Committee",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=915-169732"
+    },
+    {
+      "nodeId": "924:180606",
+      "name": "LegiWatch · fl-agendas · Florida agendas & published records",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=924-180606"
+    },
+    {
+      "nodeId": "924:180816",
+      "name": "LegiWatch · fl-updates · Florida committee updates",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=924-180816"
+    },
+    {
+      "nodeId": "916:171297",
+      "name": "LegiWatch · fl-source-health · Florida source health",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=916-171297"
+    },
+    {
+      "nodeId": "918:173598",
+      "name": "LegiWatch · follow-committee · Follow committee",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=918-173598"
+    },
+    {
+      "nodeId": "918:173780",
+      "name": "LegiWatch · edit-follow · Edit committee follow",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=918-173780"
+    },
+    {
+      "nodeId": "916:169513",
+      "name": "LegiWatch · hearing-overview · Defense priorities and acquisition oversight",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=916-169513"
+    },
+    {
+      "nodeId": "916:169795",
+      "name": "LegiWatch · fl-hearing · Florida committee hearing",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=916-169795"
+    },
+    {
+      "nodeId": "916:170046",
+      "name": "LegiWatch · live-capture · Defense priorities and acquisition oversight",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=916-170046"
+    },
+    {
+      "nodeId": "916:170280",
+      "name": "LegiWatch · transcript · Defense priorities and acquisition oversight",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=916-170280"
+    },
+    {
+      "nodeId": "916:170546",
+      "name": "LegiWatch · intelligence · Defense priorities and acquisition oversight",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=916-170546"
+    },
+    {
+      "nodeId": "916:170790",
+      "name": "LegiWatch · client-relevance · Defense priorities and acquisition oversight",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=916-170790"
+    },
+    {
+      "nodeId": "916:171046",
+      "name": "LegiWatch · sources · Defense priorities and acquisition oversight",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=916-171046"
+    },
+    {
+      "nodeId": "918:173419",
+      "name": "LegiWatch · follow-hearing · Follow this hearing",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=918-173419"
+    },
+    {
+      "nodeId": "917:170960",
+      "name": "LegiWatch · attend · Attendance & capture",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=917-170960"
+    },
+    {
+      "nodeId": "917:171138",
+      "name": "LegiWatch · attend-consent · Attendance & capture",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=917-171138"
+    },
+    {
+      "nodeId": "917:171316",
+      "name": "LegiWatch · scheduled · Server attendance scheduled",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=917-171316"
+    },
+    {
+      "nodeId": "926:183141",
+      "name": "LegiWatch · scheduled-consent · Browser consent confirmed",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=926-183141"
+    },
+    {
+      "nodeId": "917:171493",
+      "name": "LegiWatch · capturing · Server capture running",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=917-171493"
+    },
+    {
+      "nodeId": "926:183325",
+      "name": "LegiWatch · capturing-consent · Browser consent confirmed",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=926-183325"
+    },
+    {
+      "nodeId": "917:171670",
+      "name": "LegiWatch · processing · Capture is processing",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=917-171670"
+    },
+    {
+      "nodeId": "917:171835",
+      "name": "LegiWatch · capture-ready · Capture ready for review",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=917-171835"
+    },
+    {
+      "nodeId": "917:172006",
+      "name": "LegiWatch · capture-failed · Capture needs attention",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=917-172006"
+    },
+    {
+      "nodeId": "917:172186",
+      "name": "LegiWatch · preflight · Checking source capability",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=917-172186"
+    },
+    {
+      "nodeId": "918:172114",
+      "name": "LegiWatch · browser-only · Browser capture available",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=918-172114"
+    },
+    {
+      "nodeId": "918:172279",
+      "name": "LegiWatch · no-stream · No public stream available",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=918-172279"
+    },
+    {
+      "nodeId": "918:172440",
+      "name": "LegiWatch · closed · Closed session",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=918-172440"
+    },
+    {
+      "nodeId": "918:172607",
+      "name": "LegiWatch · unverified · Public access is unverified",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=918-172607"
+    },
+    {
+      "nodeId": "918:172774",
+      "name": "LegiWatch · fl-link-only · Florida · official Watch / Replay",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=918-172774"
+    },
+    {
+      "nodeId": "918:172936",
+      "name": "LegiWatch · fl-capture-enabled · Florida · capture enabled by source policy",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=918-172936"
+    },
+    {
+      "nodeId": "918:173097",
+      "name": "LegiWatch · policy-changed · Availability changed",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=918-173097"
+    },
+    {
+      "nodeId": "918:173258",
+      "name": "LegiWatch · cancel-attendance · Cancel my server attendance?",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=918-173258"
+    },
+    {
+      "nodeId": "930:184537",
+      "name": "LegiWatch · canonical-attached · Attached to shared capture",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=930-184537"
+    },
+    {
+      "nodeId": "919:173860",
+      "name": "LegiWatch · room-ready · Browser hearing room",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=919-173860"
+    },
+    {
+      "nodeId": "919:174037",
+      "name": "LegiWatch · browser-picker · Share the hearing tab audio",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=919-174037"
+    },
+    {
+      "nodeId": "919:174219",
+      "name": "LegiWatch · room-live · Live hearing room",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=919-174219"
+    },
+    {
+      "nodeId": "919:174444",
+      "name": "LegiWatch · room-recovery · Browser capture interrupted",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=919-174444"
+    },
+    {
+      "nodeId": "919:174620",
+      "name": "LegiWatch · room-ended · Stop capture and save",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=919-174620"
+    },
+    {
+      "nodeId": "919:174784",
+      "name": "LegiWatch · audio-review · Defense priorities and acquisition oversight",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=919-174784"
+    },
+    {
+      "nodeId": "919:175020",
+      "name": "LegiWatch · prep-setup · Create hearing preparation",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=919-175020"
+    },
+    {
+      "nodeId": "919:175193",
+      "name": "LegiWatch · prep-workspace · Hearing preparation",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=919-175193"
+    },
+    {
+      "nodeId": "919:175405",
+      "name": "LegiWatch · brief-setup · Create client brief",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=919-175405"
+    },
+    {
+      "nodeId": "919:175574",
+      "name": "LegiWatch · brief-review · Review client brief",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=919-175574"
+    },
+    {
+      "nodeId": "919:175817",
+      "name": "LegiWatch · brief-saved · Brief saved",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=919-175817"
+    },
+    {
+      "nodeId": "920:177738",
+      "name": "LegiWatch · save-recap · Save hearing recap to client",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=920-177738"
+    },
+    {
+      "nodeId": "930:185128",
+      "name": "LegiWatch · staged-outreach · Outreach draft staged",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=930-185128"
+    },
+    {
+      "nodeId": "920:175574",
+      "name": "LegiWatch · publication-evidence · Create reviewed hearing update",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=920-175574"
+    },
+    {
+      "nodeId": "920:175769",
+      "name": "LegiWatch · publication-draft · Compose hearing recap",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=920-175769"
+    },
+    {
+      "nodeId": "920:176002",
+      "name": "LegiWatch · publication-review · Review and approve publication",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=920-176002"
+    },
+    {
+      "nodeId": "926:183509",
+      "name": "LegiWatch · publication-review-checked · Review confirmed",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=926-183509"
+    },
+    {
+      "nodeId": "920:176176",
+      "name": "LegiWatch · publication-delivery · Preview publication delivery",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=920-176176"
+    },
+    {
+      "nodeId": "920:176358",
+      "name": "LegiWatch · publication-history · Publication delivery history",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=920-176358"
+    },
+    {
+      "nodeId": "920:176557",
+      "name": "LegiWatch · sms-consent · SMS consent and verification",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=920-176557"
+    },
+    {
+      "nodeId": "920:176741",
+      "name": "LegiWatch · records-sources · Published records",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=920-176741"
+    },
+    {
+      "nodeId": "920:176944",
+      "name": "LegiWatch · reconciliation · Reconcile published statements",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=920-176944"
+    },
+    {
+      "nodeId": "920:177141",
+      "name": "LegiWatch · record-brief · Published-record brief",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=920-177141"
+    },
+    {
+      "nodeId": "920:177381",
+      "name": "LegiWatch · exact-evidence · Exact source evidence",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=920-177381"
+    },
+    {
+      "nodeId": "920:177552",
+      "name": "LegiWatch · record-history · Published-record history",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=920-177552"
+    },
+    {
+      "nodeId": "930:184724",
+      "name": "LegiWatch · record-correction · Published-record correction review",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=930-184724"
+    },
+    {
+      "nodeId": "930:184924",
+      "name": "LegiWatch · record-delivery · Published-record brief delivery",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=930-184924"
+    },
+    {
+      "nodeId": "939:185595",
+      "name": "LegiWatch · record-approval · Approve published-record brief",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=939-185595"
+    },
+    {
+      "nodeId": "939:185794",
+      "name": "LegiWatch · record-delivery-reviewed · Audience reviewed",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=939-185794"
+    },
+    {
+      "nodeId": "939:185841",
+      "name": "LegiWatch · record-correction-reviewed · Chronology reviewed",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=939-185841"
+    },
+    {
+      "nodeId": "411:122119",
+      "name": "LegiWatch · updates · Updates",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=411-122119"
+    },
+    {
+      "nodeId": "922:177579",
+      "name": "LegiWatch · update-packet · Hearing update packet",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=922-177579"
+    },
+    {
+      "nodeId": "922:177782",
+      "name": "LegiWatch · more · More LegiWatch",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=922-177782"
+    },
+    {
+      "nodeId": "922:177971",
+      "name": "LegiWatch · reports · Reports",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=922-177971"
+    },
+    {
+      "nodeId": "922:178221",
+      "name": "LegiWatch · report-definition · Report definition",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=922-178221"
+    },
+    {
+      "nodeId": "922:178426",
+      "name": "LegiWatch · report-run · Frozen report run",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=922-178426"
+    },
+    {
+      "nodeId": "922:178649",
+      "name": "LegiWatch · report-delivery · Compose report delivery",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=922-178649"
+    },
+    {
+      "nodeId": "926:182972",
+      "name": "LegiWatch · report-history · Report run and delivery history",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=926-182972"
+    },
+    {
+      "nodeId": "923:178716",
+      "name": "LegiWatch · subscriptions · Daily updates",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=923-178716"
+    },
+    {
+      "nodeId": "923:178916",
+      "name": "LegiWatch · rules · Published-record and agenda rules",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=923-178916"
+    },
+    {
+      "nodeId": "923:179131",
+      "name": "LegiWatch · contacts · Contacts & lists",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=923-179131"
+    },
+    {
+      "nodeId": "923:179341",
+      "name": "LegiWatch · import-review · Import review",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=923-179341"
+    },
+    {
+      "nodeId": "923:179514",
+      "name": "LegiWatch · keyword-workflows · Keyword rules and internal workflows",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=923-179514"
+    },
+    {
+      "nodeId": "923:179716",
+      "name": "LegiWatch · client-briefings · Client briefings",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=923-179716"
+    },
+    {
+      "nodeId": "926:182798",
+      "name": "LegiWatch · legacy-digest · Legacy digest",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=926-182798"
+    },
+    {
+      "nodeId": "922:178832",
+      "name": "LegiWatch · trends · Trends",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=922-178832"
+    },
+    {
+      "nodeId": "922:179011",
+      "name": "LegiWatch · settings · LegiWatch settings",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=922-179011"
+    },
+    {
+      "nodeId": "930:185319",
+      "name": "LegiWatch · report-send-review · Review exact report delivery",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=930-185319"
+    },
+    {
+      "nodeId": "923:179944",
+      "name": "LegiWatch · news · News evidence",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=923-179944"
+    },
+    {
+      "nodeId": "923:180168",
+      "name": "LegiWatch · news-monitors · News monitors & import",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=923-180168"
+    },
+    {
+      "nodeId": "923:180359",
+      "name": "LegiWatch · fl-budget · Florida Budget",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=923-180359"
+    },
+    {
+      "nodeId": "923:180568",
+      "name": "LegiWatch · budget-compare · Compare retained amounts",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=923-180568"
+    },
+    {
+      "nodeId": "923:180744",
+      "name": "LegiWatch · research · Research evidence",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=923-180744"
+    },
+    {
+      "nodeId": "923:180965",
+      "name": "LegiWatch · fl-law · Florida law and official deadlines",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=923-180965"
+    },
+    {
+      "nodeId": "926:183550",
+      "name": "LegiWatch · research-operations · Research monitors, imports and coverage",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=926-183550"
+    },
+    {
+      "nodeId": "924:182173",
+      "name": "LegiWatch · view-states · Discovery and access states",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=924-182173"
+    },
+    {
+      "nodeId": "924:182350",
+      "name": "LegiWatch · transcript-states · Transcript availability and recovery",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=924-182350"
+    },
+    {
+      "nodeId": "924:182526",
+      "name": "LegiWatch · operation-states · Save, delivery and concurrent-edit recovery",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=924-182526"
+    },
+    {
+      "nodeId": "924:182702",
+      "name": "LegiWatch · discard · Discard unsaved changes?",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=924-182702"
+    },
+    {
+      "nodeId": "926:182467",
+      "name": "LegiWatch · phone-agenda · Hearings",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=926-182467"
+    },
+    {
+      "nodeId": "926:182569",
+      "name": "LegiWatch · phone-hearing · Defense priorities and acquisition oversight",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=926-182569"
+    },
+    {
+      "nodeId": "926:182701",
+      "name": "LegiWatch · phone-attend · Attendance & capture",
+      "section": "LegiWatch · Federal + Florida · Production design",
+      "owner": "apps/web/src/features/modules/intelligence/legiwatch",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ?node-id=926-182701"
+    }
+  ]
+}
