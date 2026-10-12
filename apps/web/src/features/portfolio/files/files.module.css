@@ -139,7 +139,7 @@
   color: var(--foreground);
   border-color: var(--border-strong);
 }
-.viewMode [aria-pressed="true"] {
+.viewMode button[aria-pressed="true"] {
   background: var(--foreground);
   color: var(--card);
   border-color: var(--foreground);
