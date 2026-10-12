@@ -4,7 +4,8 @@ Current application and deployment source is frozen at
 `9fa5e2cb68bc2b15f2dddc5dd2a846756a5b6c9e`
 (tree `d6ebc315242254504b6f99a3ec4bae8673826983`) on draft PR8.
 Subsequent evidence-only commits do not change that source. The full 882-case
-Portfolio browser run is in progress; combined qualification is not yet claimed.
+Portfolio browser run is in progress and has one failure in meeting preparation
+recovery. This pin has not passed combined qualification.
 
 The input heads, merge order, shared ownership and preserved-source audit are in
 PLAN.md and PRESERVATION.json. The Portfolio owner's later archive-only head
@@ -34,7 +35,13 @@ branches, main, resources, credentials and databases remain unchanged.
   receipt. No native/provider calls were made.
 
 Source-bound logs, JSON and hashes are in `evidence/candidate-9fa5e2c/`.
-The Portfolio browser result will be recorded only after the full run finishes.
+The complete Portfolio browser result will be recorded after the full run finishes.
+The current failure checks a request array immediately after an asynchronous
+retry click: the trace records the second POST/202 and queued-job dialog, but the
+assertion runs before its route callback is observed. Its red trace and precise
+timing diagnosis are preserved under the candidate evidence's failures directory.
+No source will change during this run; a subsequent test synchronization correction
+must retain exact count, identical key/payload and saved-job cancellation controls.
 The separate local container gate is blocked: the existing environment proxy
 rejects HTTPS CONNECT to the official Alpine package index with HTTP403.
 The pinned base image pulled, but APK indexes could not refresh; no final image,

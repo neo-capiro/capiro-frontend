@@ -59,7 +59,53 @@ a different payload conflicts, and a new key must never work around an unknown
 outcome. The reported 194 independent source tests do not establish native
 PostgreSQL/RLS contention or deployment acceptance.
 
-This is a Planner-only durable step. Full Core Quick log still lacks its activity
-command/outbox, partial-state owner, lineage and product decisions for task
-audience/date-zone semantics. It does not authorize two unrelated frontend POSTs
+PR2395 is a Planner-only durable step. The later Core bridge below adds a
+source-qualified activity owner; neither authorizes two unrelated frontend POSTs
 as an atomic action. No Quick log behavior or availability was changed here.
+
+
+## Core Quick log next-candidate contract
+
+Parent supplied PR2396 at `e2c2c110edd986e799d47d43b0db50b24fab0201` during the
+frozen 9fa5e2c browser run. CONTRACT.md and QUALIFICATION.md at that exact head
+were inspected read-only. Its reviewed source candidate is `961cbe0204d762ddfcb96ec054a907665720380e`
+(tree `04749f1c520bc68ee5b68b1516b4256c2009cb27`), stacked on PR2395. The handoff
+reports 284 independently run overlapping synthetic tests plus final serial
+Core/Strategy type/build passes; this frontend session did not rerun those suites.
+
+The new Core owner provides `POST /api/clients/:clientId/activity-commands`,
+read-only receipt GET by the retained request UUID, and explicit resume with
+`expectedVersion`. It commits local activity and durable intent together and
+keeps remote Planner calls outside the transaction. A generic Planner follow-up
+uses a separate server command UUID, fixed title and no copied protected client
+text. The browser must retain its reviewed command key and receipt version;
+unknown remote outcome never permits a new key, automatic retry or task fallback.
+Same-key creation replay does not start a remote attempt. Completed task links
+require current scoped receipt confirmation.
+
+Receipt version 1 distinguishes completed, pending, in_progress and
+needs_attention, with bounded reason codes and withheld unavailable destinations.
+The optional task date/time requires an explicit zone and preserved civil date;
+no midnight/UTC invention. Existing ClientPerson identity is required, with no
+Directory-ID translation. Canonical legacy activity routes also gain the current
+client wall. Browser selection remains only a hint, never current authorization.
+
+This source requires migration/native PostgreSQL/RLS qualification and authorized
+server configuration, including the new HTTPS-only Core Planner origin. None is
+assumed deployed or configured. Full commitment direction, Directory identity,
+objective/strategy links and rich task visibility remain unclosed. Frontend
+receipt handling requires a separate source candidate and review after preserving
+the running 9fa5e2c result. No live endpoint or action is enabled by this record.
+
+## Approved memory wording only
+
+Parent supplied PR2397 at `4915f3fa5c938182b2624377375674654baa5337`; its CONTRACT.md
+was inspected. It records wording source `539f62e7f2a3f87d9f56f1281e6fff717aed0958`.
+The existing response stays `{saved:false, scope, candidateId, message}` and every
+shared proposal starts pending. An administrator with current governed approval
+authority may later approve their own proposal under existing policy; ordinary
+firm grants do not confer approval, and ordinary client review keeps its current
+grant, assignment and different-proposer requirements. Personal memory remains an
+offer requiring another user request. No permission, evaluator, endpoint, JSON
+shape, Meri public package version or automatic save was added. No frozen
+frontend code or governed authorization behavior changed here.

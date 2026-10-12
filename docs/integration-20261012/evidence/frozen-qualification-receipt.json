@@ -57,8 +57,11 @@
     },
     {
       "path": "production-build.txt",
-      "sha256": "c90df43b937ae1f728f0aa37d2677bd30eea70eac857f0e08336e4f8c88ecf83",
-      "bytes": 2302
+      "sha256": "1d3c5718f97bab44bc1ab0f3b0370ccd3b1ed7ddb4f39d4b4ce08a37934a2a4f",
+      "bytes": 2299,
+      "captureSha256": "c90df43b937ae1f728f0aa37d2677bd30eea70eac857f0e08336e4f8c88ecf83",
+      "captureBytes": 2302,
+      "normalization": "Git text normalization converted three CRLF progress lines to LF; captured byte hash retained."
     },
     {
       "path": "actual-server.txt",
@@ -100,5 +103,6 @@
       "sha256": "b399b91ef9b832fc0608a72ef950eb08634fea9374b84786d21e3727e91ad7a5",
       "bytes": 1010940
     }
-  ]
+  ],
+  "artifactHashMeaning": "sha256 and bytes describe committed artifact bytes; capture fields preserve original console bytes when Git normalized line endings."
 }
