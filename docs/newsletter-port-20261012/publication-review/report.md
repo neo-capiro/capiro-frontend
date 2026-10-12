@@ -1,0 +1,13 @@
+# Newsletter staged publication review
+
+**PASS — NEWSLETTER-DOC-01 is resolved for this exact staged publication.** The Git index contains 300 additions: 179 newsletter assets and 121 dedicated documentation files. No baseline file, saved-version source, shared shell, manifest or lockfile changes. There is no unstaged diff or other untracked change. The index remained identical throughout this review.
+
+Every one of the publication manifest's 299 records matches its staged Git blob, SHA-256, byte length, mode and working copy. The manifest itself has SHA-256 `a5fce96a79c555cfbdb96be03467904b6c1885635561f20cc3e3b96fbcc4d797`. All 179 asset blobs still match the independent original C/W byte review: 172 PNGs, 5 SVGs, 2 notices and 486,014 bytes. The 168-social matrix and template coverage remain unchanged.
+
+Independent structural comparison verifies exactly **471 removed temporary query strings across five directory receipts**. Every changed value is a `download_url` on `raw.githubusercontent.com`; the only removed query key was `token`. URL origin/path, source refs, Git blobs, sizes, array entries and all other JSON values remain unchanged. Original-to-published SHA-256 attestations match. All other copied scope audit files, byte proof/helper and initial independent review are byte-identical to their original local packets.
+
+All 300 staged blobs were scanned for the actual original credential values and token query parameters: none remain. No token value is included in this review. HANDOVER explains that the original audit index binds the preserved local bytes while the publication manifest binds sanitized bytes. The scoped `.gitattributes` preserves documentation bytes and affects no application path.
+
+The accepted scope is static byte preservation and sanitized documentation publication. Rich UI/package distribution and packed-consumer qualification, native behavior, deployed static serving and runtime/build/browser/typecheck/install gates remain unaccepted or unrun. No source or index was mutated by this reviewer, and no runtime/network/native gate was executed. The original review and PR15 evidence remain unchanged. Root must bind the eventual commit to this staged snapshot; no push, merge or deployment is claimed.
+
+Root's preserved staged diff check returned **exit 2**, with five `new blank line at EOF` warnings: HANDOVER, the captured extraction helper and three immutable audit JSON receipts. This is not reported as a clean diff-check pass. The warning log is copied unchanged here; the evidence bytes were preserved without normalization. No asset or runtime source is involved.

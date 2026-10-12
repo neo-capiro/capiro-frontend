@@ -1,0 +1,627 @@
+{
+  "finding": "NEWSLETTER-DOC-01",
+  "disposition": "RESOLVED_FOR_EXACT_STAGED_PUBLICATION",
+  "redactedFiles": 5,
+  "removedQueryCount": 471,
+  "checks": [
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/newsletterAssetDirectoryC.json",
+      "originalLocalPath": "/tmp/capiro-newsletter-port-scope-20261012/evidence/newsletterAssetDirectoryC.json",
+      "originalSHA256": "c670bc8e393ccf5f1c3892b1ceab075ebe26948e9cae5c7840bcbae01a36f086",
+      "publishedSHA256": "68cc7a1bfc5893b24995552c724bc06f52aad3f4f6fce3901ea917c555af0ddd",
+      "onlyChanges": "download_url raw.githubusercontent.com token query removed; all other JSON values unchanged",
+      "removedQueryCount": 179,
+      "attestationMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/newsletterAssetDirectoryW.json",
+      "originalLocalPath": "/tmp/capiro-newsletter-port-scope-20261012/evidence/newsletterAssetDirectoryW.json",
+      "originalSHA256": "7bc9ef42fc3cb49572c967b417516dabe56f2d883db266667f3a883a279dcf2e",
+      "publishedSHA256": "685d13b0620ec1d6429b991ecd448ebdce66fb41b516179abb381af4486c379f",
+      "onlyChanges": "download_url raw.githubusercontent.com token query removed; all other JSON values unchanged",
+      "removedQueryCount": 179,
+      "attestationMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/newsletterPlanDirectory.json",
+      "originalLocalPath": "/tmp/capiro-newsletter-port-scope-20261012/evidence/newsletterPlanDirectory.json",
+      "originalSHA256": "de4a8fe44262911020e2f60e70b3a10dfe4674e318a9458f2f40c5687297fa90",
+      "publishedSHA256": "49624e6157685a768bd2e980d399b12a3782f3c39b417da79d51e0b13498cfbb",
+      "onlyChanges": "download_url raw.githubusercontent.com token query removed; all other JSON values unchanged",
+      "removedQueryCount": 8,
+      "attestationMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/newsletterPlanEvidenceDirectory.json",
+      "originalLocalPath": "/tmp/capiro-newsletter-port-scope-20261012/evidence/newsletterPlanEvidenceDirectory.json",
+      "originalSHA256": "845809867613d79a6ff6da1ef429d432039cf1a9b121f5cf25e5bfcf3e677957",
+      "publishedSHA256": "1c4aa2dd50155f62840a4611593b45eff5e22c3416b11ff8836aad4a1df11b97",
+      "onlyChanges": "download_url raw.githubusercontent.com token query removed; all other JSON values unchanged",
+      "removedQueryCount": 27,
+      "attestationMatches": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/newsletterRuntimeDirectoryW.json",
+      "originalLocalPath": "/tmp/capiro-newsletter-port-scope-20261012/evidence/newsletterRuntimeDirectoryW.json",
+      "originalSHA256": "70d297436ef588a0438901428283588e361f59b83d7089427a3a45ae021bc053",
+      "publishedSHA256": "dfed5354666969e38748293cdacaab630d102caaf6f04644b10e25c484d53771",
+      "onlyChanges": "download_url raw.githubusercontent.com token query removed; all other JSON values unchanged",
+      "removedQueryCount": 78,
+      "attestationMatches": true
+    }
+  ],
+  "allOtherScopeFilesUnchanged": [
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/OUTLINE.md",
+      "sha256": "71ef916a5e8a9479f376657198345dee0d65eb2679cf8680a6db5f5028cdc5ec",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/README.md",
+      "sha256": "6676917168ada34eb9550026f331fae52e5f23f497b97df67042047b036e92d3",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/SHA256-INDEX.json",
+      "sha256": "5c4f56d20f20c1d58eec5fd83c9e749e1d8108355cc6d0f0dd8e94dc5d8e308d",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/asset-extraction-manifest.json",
+      "sha256": "1cc360175bc8768ea8a8c0684954842a028b48a35ed67aff929f36193d05e091",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/asset-paths.txt",
+      "sha256": "d4637e0d99d89f31bdbbfce516a25d73c7f93a0f7b875b3f98bfbe897408b3f6",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/asset-url-coverage.json",
+      "sha256": "ea52baddea0f6a492d28ab3e85149d0c88850b1a0fc9bbe8a05a400be1060d0e",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/App.tsx",
+      "sha256": "a7b1ff2a7cb9945af55ba58c5849cfe18cf5f89a47c195d99e7edac1fcbfe2cc",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/BACKEND-CONTRACT-DELTA.md",
+      "sha256": "fabbd6e0bc16bd1e901447df717c35939a389d1e1070f6214e6003357fbbadbf",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/FRONTEND-BOUNDARY.md",
+      "sha256": "1342128757a22bc9301f52b16f4fcda8bc1c3b48ea2bb65ee74116d3ed0134f0",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/HANDOFF.md",
+      "sha256": "5f428d03b503a8f18ac3f6293f64ac5cf64081cb2b1276b6969ee3ac47749713",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/OWNERSHIP-MATRIX.md",
+      "sha256": "94756084eb3de9f277ad0339bd46be4f286134c416e43dc38a5968cf0da35af1",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/SOURCE-MANIFEST.json",
+      "sha256": "9164ba06f5d8d8704f92d729c585191a692ff7776730f54f9451bca8d848179a",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/W-NewsletterEditor.test.tsx",
+      "sha256": "e3b8139d80e73a6b78fc85d2ce9a5ee53697c7599c78fe1fc0541c3364c8904d",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/W-NewsletterOutreach.tsx",
+      "sha256": "5962b492b9e6b178adbfbac1fe3a808ef4092e3f6c3eddafb2fc5814fd258a04",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/backend-tsconfig.base.json",
+      "sha256": "8ee4b594732f7ae6ffba44e3d591be59060a818720d2627fb14cfd3deec63aa7",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter-fonts.catalog.ts",
+      "sha256": "7360c71bdfaedf091171ff704bdd1e38c68605614dda06c30dbf7958a0dedf1f",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter-fonts.ts",
+      "sha256": "56db91870105d8268ad8f1699ad04a3c60062f45b4738ae8b4c892f3e58d4825",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter-outreach.controller.ts",
+      "sha256": "c7395dd8d1805d73ff5de5a82fdb83a5f4a85b855349cf607c68cdb3dd4b592d",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter-render.ts",
+      "sha256": "b143df93036c87dbce9dc49a0e01f1f4bd3a7b6cf562b64608940bdea97c3f3c",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter-social-share.ts",
+      "sha256": "ddaeebbda2901158ccd809a2ec2c7e7515d213af043bef9524e1f707cb3e57a0",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter.controller.ts",
+      "sha256": "ae8a6453c04d0bab8ea81d717415c3747dbee0edc4d5eff9299df3e97fa576c7",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter.service.ts",
+      "sha256": "4a2d4c6234dd12bda4b787ed52211d405728c81e6b824afbaaefe382a7977583",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter.ts",
+      "sha256": "f586855ffb43f7b4a014b0e27c8ae6be342fb843cb656a58b520b0ac1706c796",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-EngagementPage.tsx",
+      "sha256": "1cff2ecf6f733f84b9d00020eed37a5f2f9d0691611d4e9cc7fc3bf4be210148",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterAdvancedImageEditor.tsx",
+      "sha256": "2298f304d0530354954cbec1170d14dab2e153873169aa4848bb4bca8e0efbda",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterApps.tsx",
+      "sha256": "84fc970435a13209b864df0ed64aa56e54f039e801706ad38256358020c55377",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterAssetDetails.tsx",
+      "sha256": "08a44d7c88aaf90310e27d34a0d2d395a43977ca70c08443cfc2de4f97ddfabe",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterAssetFolders.tsx",
+      "sha256": "15cae77da5e1dbc27e9aae41a838aacbeb4aa7c82609a7d932530dc1daf27230",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterAssetRevisions.tsx",
+      "sha256": "f7e43573dbb217c225bdcaade7643a4614bd9f47f32534c14aa641d06a32c109",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterBrandKit.tsx",
+      "sha256": "d7ae5ae1d26330c8e693624e29726c430beffdaa5828a2cc0c7f48d910d78146",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterBundledImage.test.ts",
+      "sha256": "0c66c83456018b43b1896f0a8db13f67f9f6e0cb38de586481db3294686f0e3a",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterComments.tsx",
+      "sha256": "9a89cf7f95d73eee224cda8d20882d0ee9d02272cb1823375b9a54aa0c0d863a",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterContentStudio.tsx",
+      "sha256": "ade74bd192ed7e8dd2492209180aafbe429306e35023ad87a8df5902982b8c87",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterCreation.tsx",
+      "sha256": "4ee2d544ed1d260fd9ff64ccdb72a332f3e8bfa19996e46241b0493205d181ca",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterEditor.test.tsx",
+      "sha256": "82f9617bae59807020e04b84ced4d0e44b4cf5b67dc8b01d067e37448e8a331d",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterEditor.tsx",
+      "sha256": "8041b051d2e2fa288a7af33bb177297d6e0b298930fdc8291768c354be6da587",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterFontPicker.tsx",
+      "sha256": "cd11420a1bead012662e7731e785ab703cb57414cf8f75948a44cc416e5099a6",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterImageAi.tsx",
+      "sha256": "3756dfda17d4244ea5a0284441dc9653189185c177c5f8c1aba5fcf7646feb88",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterImageAltText.tsx",
+      "sha256": "a3a0db77f3a722458a334d01ea76ce318290cf65d070bdc3416921a041323914",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterImageControls.tsx",
+      "sha256": "a020311211b14ccfdfb70f36d3cf3e7c8c645babce165ef2ac9adfc82ce871aa",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterImageCropOverlay.tsx",
+      "sha256": "398bcae5c30f1027886df854502d522c5337199d17f5d85223887cd6e45eb104",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterImageEditor.tsx",
+      "sha256": "e2b1a87f66ff0d77d428bb6ff1c62963a3474fa04311049a6ded2d3cffd18d38",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterImageFocusOverlay.tsx",
+      "sha256": "a21410b5ed658782a47c2821206df992f5011f55a694968af95117bbbf58082c",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterImageReplaceMenu.tsx",
+      "sha256": "817d1a14a1be9733fcb777c03791be8d58d3bdb89aaadc1c83068c81d96003de",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterImageRotationRuler.tsx",
+      "sha256": "f47d74dfc81f2280831d1f797f26649aa385d8dd00a48dbfa6adbd7abefc2438",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterImageTextOverlay.tsx",
+      "sha256": "91789438ff130362f92c42ff517eaf3be099fee656b629995dc9477c9f15c3eb",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterLinkChecker.tsx",
+      "sha256": "7ef48f2335da7dd9ee9fd9da1ab5ccd0a6382f2a3d848655e129074efdc1d53b",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterOutreach.test.tsx",
+      "sha256": "3729a76170729e832883e0e294276a54bb510d355ef924e51d0853444d7bd5d2",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterOutreach.tsx",
+      "sha256": "5962b492b9e6b178adbfbac1fe3a808ef4092e3f6c3eddafb2fc5814fd258a04",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterQuickCrop.tsx",
+      "sha256": "a5cb31a31cfade84a60fd783df03f89ecafa0e59dafe68247dbe006913df510e",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterReview.test.tsx",
+      "sha256": "10c333cf5103f1cfa1133ee045022532704e3a1b029a581e2e2e4f7e3a15d567",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterReview.tsx",
+      "sha256": "93630762c0e7e1747ec9415580cdc7ff693abd0b2e73053df759f56726c2ddcd",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterSocialControls.tsx",
+      "sha256": "1a97b7902220a8000aeec7f631786ed2e4e8b1b8fb5aa4d3f311799438b065ff",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterSocialShareContent.tsx",
+      "sha256": "707b87fb1004a2100cf0bb4d5ff3f91fae041387a681a911d3d599e425241b8f",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterStockImages.tsx",
+      "sha256": "8e2c0feffcd1eb448b73e44b180a2bde3cc9a5b566db95995184fd7b324ddabf",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterSurveyBuilder.tsx",
+      "sha256": "6fc54f5c249c061f517e0fe557ab6f60d6b2a921c997d8316b9625bcaa0c5bd1",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterSurveyDesign.tsx",
+      "sha256": "d1029cfffcd5e5c91cc446dbe48b25f94b49999046a81f06e26797d72a5246d7",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterSurveyMedia.tsx",
+      "sha256": "652a2c56eef1b4658c036e1ba7a47d58554ae9caed5cd0d6f0f2496eb0f91411",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterSurveyPreview.tsx",
+      "sha256": "daafb2e3c34f6457259171fb73343f0142fe52d9b15b494eba2fe9928682659b",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterTemplateChooser.test.tsx",
+      "sha256": "2d9b1fa7de85b29be6c162dee20fe48de0b45ab508abeaa14a046b09237a3dff",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterTemplateChooser.tsx",
+      "sha256": "d50a86e7a51a38868a8736064a7e13740fb078238c1b8ed11f21698365001ac7",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterThreadNotifications.tsx",
+      "sha256": "0eb5910c0396155698b8f027c8abe88c16a6d01caf5c16d2dcc441abad671d87",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterVideoDesign.tsx",
+      "sha256": "1941fd805f6f5729ece5569dba9c320733f46326dc25b0b5d0509bfec26ab2ca",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterVideoUrlControl.tsx",
+      "sha256": "d9a49f6c6007505dc0ccb76df97f704099156f57ce5a8092174367d9b09c03e1",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-OutreachView.tsx",
+      "sha256": "d11bb1216814783e831e73fa602f60d83fe0f60874706e2b0528e3b7de7ce8b6",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-VNextApp.tsx",
+      "sha256": "d26380dc16ae86a786de54fdce6db420b9cf504aacf64c5ad6f34bc9cc0ec77e",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-VNextRouter.tsx",
+      "sha256": "63e97e7c6a8e67709bcdc3e9fc4d6056db005363c96c1b91d9fd65c178d5381c",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-WorkspaceRoutes.tsx",
+      "sha256": "ade8a5be84c74cca9ac464485e0115708b7d7eda35ef4ad7d50b08e411a8fb77",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-WorkspaceVNextRoutes.tsx",
+      "sha256": "e62ad8f36b4323346f5228509fd29f25490504e2215f5caf50bbc2b4a7a707c0",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-api.ts",
+      "sha256": "8ac4128acea79c92a6287a1b410fc65e9f76078bc60cc3e32122ecae5bcfa1e5",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-brand-context.tsx",
+      "sha256": "e0be2e0450cf4e531648c0d6efbc8dcf2c3adc98bd83f65c253e5db8cbbeabf5",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-controls.tsx",
+      "sha256": "33724c2cb8317415586b5b96e8f5348c915b41616b203b63e1b59812b691fec9",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-image-editor-crop.ts",
+      "sha256": "c0fe5799ee6835ab60f77691a389655fc3b212d97aaff8e1fa720a4aad73e458",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-image-editor.ts",
+      "sha256": "80b6fc75e089c031148004fe6b2cf2bf4cdb420043bde5d307b59ebf38048ea1",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-main.tsx",
+      "sha256": "dcfb2e729bd2cff15cf1b44fd24dc78d3d344e5b2d36466c53154a26fe6802ce",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-model.test.ts",
+      "sha256": "6e84912628849e061d2a85aa96dfed121ce6ca5fe43dac352e7f30af9cae04b5",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-model.ts",
+      "sha256": "e329c449060797f276265b7990f4f8eb1b59914a6c2c8bc00b4027fb9e605586",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-newsletter-links.ts",
+      "sha256": "6e31c4e2041ea96e70cb65da01e0aa12065a0e58886356e078453409215a05f6",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-newsletter-outreach.css",
+      "sha256": "69ed2d0b32310f10e1a54109e64e2691652e4e827ccc21d2f7d8e6faf559d4fa",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-newsletter.css",
+      "sha256": "81ef24b7abbee605a7b7aa5c520adb161f801d4aaa5938fcb1954f8ed52bb3b3",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-useNewsletterSurveySave.ts",
+      "sha256": "df44ee676e569f74c77b40b7cd564d4f17b66de714e8658679855821eefdc5be",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/shared-package.json",
+      "sha256": "3ec63a174f34c80651c3ca3b7e82132857dabccaf94018bb7ff996a1b4297ddf",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/shared-tsconfig.json",
+      "sha256": "89278950647f196ac9ae3c088f96a35f83e2fa45a7c28c563af3b2e2c059dab5",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/social-icons-attribution.txt",
+      "sha256": "3aadf1580c4a90dfac6895616a13241759ad253615091782edcd07b444f924a0",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/backend-source/social-icons-license.txt",
+      "sha256": "20c6f40715a567c97b80f6944beb8bb325835cab47ea7dcab89ee3b8e077eced",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/current-owner-map.json",
+      "sha256": "4bf89adb246d436927126860dd1e4c6fcac9d7947f4b9da80ed2771faca3208a",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/adbc-inventory-comparison.json",
+      "sha256": "0c7d4c9b305a9fdf66d537f83df1d2bfe0458d5789c04ee6bf79be0306a0b5a1",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/controller-source.json",
+      "sha256": "cea389c53bc8fe5d76af415e415d99a534310933b24e220afc7883036f6fb829",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/dedicated-frontend-identity-comparison.json",
+      "sha256": "188bdd9434aae4941a507f13194803223cf6597fed48ef17d671d895eb6405ef",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/final-source-read-addendum.json",
+      "sha256": "9e5302aeb5a7ec0ffbb153de29f61329e28042a57e9275da476c2767abeea862",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/local-object-availability.json",
+      "sha256": "2b8b9f502eb8c53646276e74d2a9a27f04331ac9d3310803ded4c58525a0a2e6",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/pr2424-changed-files.json",
+      "sha256": "70015e9520509d829fbcbe2755492e5bed090a52ad480f23bc8ee8a86384f34e",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/pr2424.json",
+      "sha256": "db91a5a6050ee60a62f5ed105630ca3d54c92a0a9587a168dc8e2791d14204d1",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/raw-source-addendum.json",
+      "sha256": "7bc4ec873d862324d9acf99f5a55e5c73ccfdc14e9103b3d42bf45e19c1bd2c4",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/raw-source-snapshots.json",
+      "sha256": "2725c4db403f70537c279d25187ae9e704bc9c52f836cd70d84dc2dee13fca48",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/schema-assets-lock-receipt.json",
+      "sha256": "6e4a0d178311e32152dd35f908ce34e78e37ad8734c638d9013c97551662b520",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/evidence/source-dependency-receipt.json",
+      "sha256": "39af80400cbe9eb74bd9d9c45e5dffa4bbab091b2c82c194a06f8b95e6fc4fde",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/make-scope-inventory.py",
+      "sha256": "1eda2831ee2a4199299eef02d8eb1e2ecca7480170571ae2b462985854766662",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/meaningful-test-map.json",
+      "sha256": "0ab45b29d9a8f2788bc15bb4dd1c5fd305331bf830410aa7fc4a3cb815ba0603",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/package-boundary.json",
+      "sha256": "e61aeb2b9569f8294828d8128058cad1d0c525394e0483036a9521481b317795",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/path-map.json",
+      "sha256": "640098960b17ecf2d8dd3f1fb748b1d56036a1b6f301f67bbd4334cdf341c2db",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/report.md",
+      "sha256": "88bc25d5415f8dadec56b909fb47a5b653ff29b5bac9de73c731dfd38b46e378",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/scope-summary.json",
+      "sha256": "eebd7eea2050054b0edf6c1174f3597e4795dfaabfffe5a756a4c8840fb46e8c",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/scope-audit/source-pins.json",
+      "sha256": "62b8dd937855837f0b82222e70ea94decc7be36feeffc86a51abf7349d4f62c0",
+      "originalBytesUnchanged": true
+    }
+  ],
+  "initialIndependentReviewFilesUnchanged": [
+    {
+      "path": "docs/newsletter-port-20261012/asset-review/ASSET-VERIFICATION.json",
+      "sha256": "3883973266bcdb63fbacb2e82860372b310c08477d0a9dce22b0f0da106501e2",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/asset-review/DOCUMENTATION-OBSERVATION.json",
+      "sha256": "46b827b315c4f9739095d3c3286716c3592341032dcf67257f1b3790931ee805",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/asset-review/MANIFEST.json",
+      "sha256": "f02157e043679edf0c8bff38b2fcc5b24a0503799102c43b905c26a795ea33e1",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/asset-review/SCOPE-AND-LICENSE.json",
+      "sha256": "da7dd1abada6df5f500bef937ade8278bd341a8a3d9e2eb71ba162a817396db5",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/asset-review/URL-COVERAGE.json",
+      "sha256": "d0b86a3b621b2f0595d68efb5e3f38accdb265ef5e2cb985d088f3ee9a81d729",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/asset-review/report.md",
+      "sha256": "a99d52d9e994c64a7f1bc2ac7f4a959ad675dadd61b7246017549cf77f4bbbe3",
+      "originalBytesUnchanged": true
+    }
+  ],
+  "originalByteProofAndHelperUnchanged": [
+    {
+      "path": "docs/newsletter-port-20261012/asset-preservation/ASSET-BYTE-VERIFICATION.json",
+      "sha256": "169e5a0294676f031cdea71634e9481f64105286610d2f682da91c231af79324",
+      "originalBytesUnchanged": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/asset-preservation/extract-assets.py",
+      "sha256": "872a5a9e9c6c0ac2a8583685dbbeff7dacada0e6ff7ddd6ccac5dce469504ab7",
+      "originalBytesUnchanged": true
+    }
+  ],
+  "sourceIndexCaveatExplicit": true,
+  "scopedGitattributesPreservesDocBytes": true,
+  "knownOriginalTokenValuesFoundInAnyStagedBlob": false,
+  "tokenQueryParameterFoundInAnyStagedBlob": false,
+  "scanScope": "All 300 staged blobs, including assets, source snapshots, receipts and copied independent review. Tested original values without recording them.",
+  "limit": "This is a scan for observed ephemeral download credentials and token query patterns, not a broad secret-audit guarantee.",
+  "originalLocalAuditRetainedUnchanged": true,
+  "tokenValuesIncludedInReview": false
+}
