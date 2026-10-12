@@ -15,6 +15,7 @@ import {
   TextInput,
 } from "../../../shared/module-ui";
 import styles from "./engagement.module.css";
+import { MeetingSplitView } from "./MeetingSplitView";
 export function MeetingLibrary({
   clientId,
   mode,
@@ -96,6 +97,13 @@ export function MeetingLibrary({
                 </div>
               ))}
           </Panel>
+        ) : mode === "meetings" ? (
+          <MeetingSplitView
+            rows={rows}
+            selected={selected}
+            onSelect={setSelected}
+            onReload={query.reload}
+          />
         ) : (
           <MeetingTable rows={rows} mode={mode} onSelect={setSelected} />
         )}
@@ -127,8 +135,9 @@ export function MeetingLibrary({
         Meetings you own, plus colleagues&apos; shared approved materials.
         Private material stays with its owner.
       </p>
-      {selected && (
+      {selected && (mode === "library" || display === "queue") && (
         <MeetingDetail
+          key={selected.id}
           meeting={selected}
           onClose={() => setSelected(null)}
           onSaved={query.reload}
@@ -319,6 +328,12 @@ function useMeetingLibrary(clientId: string, mode: "library" | "meetings") {
     [page, setPage] = useState(1),
     [display, setDisplay] = useState("list"),
     [selected, setSelected] = useState<EngagementMeeting | null>(null);
+  const scope = `${clientId}:${mode}`;
+  const [selectionScope, setSelectionScope] = useState(scope);
+  if (selectionScope !== scope) {
+    setSelectionScope(scope);
+    setSelected(null);
+  }
   const library = useCapiroQuery(
     "engagement.library",
     {
