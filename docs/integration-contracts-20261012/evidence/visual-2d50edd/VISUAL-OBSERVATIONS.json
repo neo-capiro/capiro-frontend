@@ -1,0 +1,884 @@
+{
+  "source": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+  "state": "SCOPED_COMPARISONS_REVIEWED",
+  "method": "Manual comparison with actual Figma exports, explicit geometry/keyboard/behavior assertions and 27 exact-candidate captures. Fourteen candidate captures are byte-identical to already inspected reference captures; all thirteen other captures were manually inspected on the exact candidate. Target and capture SHA-256 bindings are recorded. No image-diff threshold, complete WCAG certification or native acceptance is inferred.",
+  "rootTarget": {
+    "node": "411:40601",
+    "kind": "Design page, as identified by existing source inventory",
+    "attempts": [
+      "Fresh whole-page screenshot timed out.",
+      "Fresh metadata read returned Transport closed."
+    ],
+    "disposition": "Specific child target frames successfully retrieved; whole-page access is not claimed."
+  },
+  "observations": [
+    {
+      "id": "V01",
+      "rows": [
+        "CORE-001",
+        "CORE-002",
+        "CORE-003",
+        "CORE-004",
+        "CORE-005",
+        "CORE-006",
+        "CORE-007",
+        "CORE-011",
+        "CORE-086",
+        "CORE-098",
+        "CORE-121",
+        "PROS-038"
+      ],
+      "targetNodes": [
+        "411:41421"
+      ],
+      "figmaFile": "Zc2dEN5aLU47dVdsewDmiJ",
+      "targetFiles": [
+        "figma-411-41421.png"
+      ],
+      "candidateCaptureNames": [
+        "index-desktop.png",
+        "index-mobile-dark.png"
+      ],
+      "comparisonStatus": "PARTIAL_FRAME_COMPARISON",
+      "verifiedScope": "Canonical wordmark, 64px desktop header, mode switch, 232px sidebar and main content offset, dark pulse band and card/attention surfaces are present. Actual-server checks exercise all-mode/back/forward navigation; fixture tests exercise list/card/filter behavior and phone fit.",
+      "remainingDifferencesOrGates": "The current filter/sort row and additional New objective action differ from this target. Unavailable rollups and saved-order/attention limitations are explicitly shown, so the populated design metrics/attention list are not accepted. Responsive full-frame and every visible asset slot still require complete screen acceptance.",
+      "interactionTestFiles": [
+        "portfolio-index.spec.ts",
+        "current-projection.spec.ts",
+        "portfolio-layout-integration.spec.ts",
+        "visual.spec.ts"
+      ],
+      "nativeAcceptance": false,
+      "candidateCaptures": [
+        {
+          "path": "candidate-captures/V01-Portfolio-index-desktop.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/portfolio-browser/visual-representative-inde-2c61f-top-mobile-and-in-dark-mode/index-desktop.png",
+          "sha256": "f05e3d426c3822a68a0ade524fbe32b4f04aeea0c92c5921815edaa14699f88b",
+          "width": 1440,
+          "height": 1040,
+          "capturedMtimeUTC": "2026-10-12T10:59:14.594819+00:00",
+          "byteIdenticalToReviewedF4Reference": true,
+          "reviewDisposition": "BYTE_IDENTICAL_TO_MANUALLY_REVIEWED_REFERENCE"
+        },
+        {
+          "path": "candidate-captures/V01-Portfolio-index-mobile-dark.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/portfolio-browser/visual-representative-inde-2c61f-top-mobile-and-in-dark-mode/index-mobile-dark.png",
+          "sha256": "e2335364f5082c2e0a3fce36f47a3a995865de4a284f6b1f19900463fe567ea7",
+          "width": 390,
+          "height": 1631,
+          "capturedMtimeUTC": "2026-10-12T10:59:14.986832+00:00",
+          "byteIdenticalToReviewedF4Reference": true,
+          "reviewDisposition": "BYTE_IDENTICAL_TO_MANUALLY_REVIEWED_REFERENCE"
+        }
+      ],
+      "targetEvidence": [
+        {
+          "path": "figma-411-41421.png",
+          "sha256": "f68acc02667f5454d6738d0a58e5871fb245613b9e7a2abd9a86ef3fd81cf861",
+          "width": 1440,
+          "height": 1040
+        }
+      ],
+      "reviewedAt": "2026-10-12T11:03:28.895120+00:00"
+    },
+    {
+      "id": "V02",
+      "rows": [
+        "OBJ-13",
+        "OBJ-17",
+        "OBJ-28",
+        "OBJ-30"
+      ],
+      "targetNodes": [
+        "411:60728"
+      ],
+      "figmaFile": "Zc2dEN5aLU47dVdsewDmiJ",
+      "targetFiles": [
+        "figma-411-60728.png"
+      ],
+      "candidateCaptureNames": [
+        "objective-intake-desktop-filled.png",
+        "objective-intake-phone-dark.png"
+      ],
+      "comparisonStatus": "PARTIAL_FRAME_COMPARISON",
+      "verifiedScope": "The two-column Objective form and 360px readiness rail align with a 24px gutter; the four authored field labels/ask chips/readiness checks are present. Explicit save/back/re-entry, keyboard choices, focused validation and phone stacking are covered.",
+      "remainingDifferencesOrGates": "Meri clarification, cycle preview, supporting-file/context rail and semantic outcome rewording in the target are absent/unavailable. The page title and bottom action arrangement differ. Explicit save behavior does not accept autosave or generated clarification.",
+      "interactionTestFiles": [
+        "objective-intake.spec.ts",
+        "objective-readiness.spec.ts"
+      ],
+      "nativeAcceptance": false,
+      "candidateCaptures": [
+        {
+          "path": "candidate-captures/V02-Work-objective-intake-desktop-filled.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/work/objective-intake-desktop-filled.png",
+          "sha256": "6d12e71b8b5aebd8f3cefa2d5d52387e678600940f0bd0a71bf74826861a8211",
+          "width": 1440,
+          "height": 1040,
+          "capturedMtimeUTC": "2026-10-12T10:45:09.950877+00:00",
+          "byteIdenticalToReviewedF4Reference": false,
+          "reviewDisposition": "MANUALLY_REVIEWED_EXACT_CANDIDATE"
+        },
+        {
+          "path": "candidate-captures/V02-Work-objective-intake-phone-dark.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/work/objective-intake-phone-dark.png",
+          "sha256": "f9c779c0305937743336a69cdc10f35b80ebf115c194bdbe5239ba8e857007d5",
+          "width": 390,
+          "height": 1488,
+          "capturedMtimeUTC": "2026-10-12T10:45:10.270888+00:00",
+          "byteIdenticalToReviewedF4Reference": false,
+          "reviewDisposition": "MANUALLY_REVIEWED_EXACT_CANDIDATE"
+        }
+      ],
+      "targetEvidence": [
+        {
+          "path": "figma-411-60728.png",
+          "sha256": "98ac5c3fad8f05bafd560907b46d46dcf4eeaa396d242172ace22157f82432f6",
+          "width": 1440,
+          "height": 1040
+        }
+      ],
+      "reviewedAt": "2026-10-12T11:03:28.895120+00:00"
+    },
+    {
+      "id": "V03",
+      "rows": [
+        "BILL-11",
+        "BILL-12"
+      ],
+      "targetNodes": [
+        "1028:188442"
+      ],
+      "figmaFile": "Zc2dEN5aLU47dVdsewDmiJ",
+      "targetFiles": [
+        "figma-1028-188442.png"
+      ],
+      "candidateCaptureNames": [
+        "alert-channels-phone-light.png",
+        "alert-channels-desktop-light.png"
+      ],
+      "comparisonStatus": "PASS_SCOPED_COMPONENT",
+      "verifiedScope": "The requested-code acknowledgement, conditional arrival wording and enabling-SMS explanation match the exact authored phone target. Field ordering, two-column alert kinds, quiet-hour fields, verification controls and saved-alert test section match the component structure; desktop/phone/light/dark geometry and keyboard closure are asserted.",
+      "remainingDifferencesOrGates": "Disabled buttons in the captured pending state are intentional. No provider request, code delivery, real phone confirmation or full native preference acceptance is established.",
+      "interactionTestFiles": [
+        "integration-defect-baselines.spec.ts",
+        "alert-channel-visual.spec.ts",
+        "alert-channels.spec.ts"
+      ],
+      "nativeAcceptance": false,
+      "additionalUnitEvidence": [
+        "apps/web/tests/watchlist-integration-receipt.test.ts: accepted normalization and explicit partial-rejection receipts; included in the1141-test combined application gate."
+      ],
+      "candidateCaptures": [
+        {
+          "path": "candidate-captures/V03-Portfolio-alert-channels-phone-light.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/portfolio-browser/alert-channel-visual-phone-92fa6-d-remain-keyboard-reachable/alert-channels-phone-light.png",
+          "sha256": "599db268aa02adc7c4f4cddd16512e6585fafbd5c01e6a03efc745c9e1d557e2",
+          "width": 358,
+          "height": 1754,
+          "capturedMtimeUTC": "2026-10-12T10:25:44.532638+00:00",
+          "byteIdenticalToReviewedF4Reference": false,
+          "reviewDisposition": "MANUALLY_REVIEWED_EXACT_CANDIDATE"
+        },
+        {
+          "path": "candidate-captures/V03-Portfolio-alert-channels-desktop-light.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/portfolio-browser/alert-channel-visual-deskt-ae329-d-remain-keyboard-reachable/alert-channels-desktop-light.png",
+          "sha256": "ddce5a3e09d8b39cb1c9815c5878e59dd61ce045893f2836a560b42247c0a443",
+          "width": 720,
+          "height": 1242,
+          "capturedMtimeUTC": "2026-10-12T10:25:39.104459+00:00",
+          "byteIdenticalToReviewedF4Reference": true,
+          "reviewDisposition": "BYTE_IDENTICAL_TO_MANUALLY_REVIEWED_REFERENCE"
+        }
+      ],
+      "targetEvidence": [
+        {
+          "path": "figma-1028-188442.png",
+          "sha256": "836858c91273a3d29d931862c7732c29596fdf34211ff7418611c2753594eb2d",
+          "width": 329,
+          "height": 1440
+        }
+      ],
+      "reviewedAt": "2026-10-12T11:03:28.895120+00:00"
+    },
+    {
+      "id": "V04",
+      "rows": [
+        "WORK-08",
+        "WORK-09"
+      ],
+      "targetNodes": [
+        "411:52106"
+      ],
+      "figmaFile": "Zc2dEN5aLU47dVdsewDmiJ",
+      "targetFiles": [
+        "figma-411-52106.png"
+      ],
+      "candidateCaptureNames": [
+        "workspace-desktop-table.png",
+        "workspace-phone-cards.png"
+      ],
+      "comparisonStatus": "PASS_SCOPED_COMPONENT",
+      "verifiedScope": "The Workspace documents subsection uses the intended document/status/updated/action columns, exact existing document icon, status badges and open destination controls. Phone cards retain readable actions and no horizontal scrolling.",
+      "remainingDifferencesOrGates": "This is acceptance of the bounded subsection presentation only. Dynamic fixture names/counts differ. Legacy client-name association limitations are visible; stable native identity, live opening and the rest of the Work page remain open.",
+      "interactionTestFiles": [
+        "work-presentation.spec.ts",
+        "work-documents.spec.ts"
+      ],
+      "nativeAcceptance": false,
+      "candidateCaptures": [
+        {
+          "path": "candidate-captures/V04-Portfolio-workspace-desktop-table.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/portfolio-browser/work-presentation-desktop--2ecb6--exact-native-icon-geometry/workspace-desktop-table.png",
+          "sha256": "e1aba0530edad1e4894711d151558229e5328d848d57ee71b7070ddcf03516ce",
+          "width": 1040,
+          "height": 277,
+          "capturedMtimeUTC": "2026-10-12T11:02:01.248322+00:00",
+          "byteIdenticalToReviewedF4Reference": true,
+          "reviewDisposition": "BYTE_IDENTICAL_TO_MANUALLY_REVIEWED_REFERENCE"
+        },
+        {
+          "path": "candidate-captures/V04-Portfolio-workspace-phone-cards.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/portfolio-browser/work-presentation-phone-Wo-52eb0-ithout-horizontal-scrolling/workspace-phone-cards.png",
+          "sha256": "4695846d563b5353cb7319e12723c2096b924b0dfc733ac76f12cdb6b0c1b4cf",
+          "width": 358,
+          "height": 429,
+          "capturedMtimeUTC": "2026-10-12T11:01:59.044249+00:00",
+          "byteIdenticalToReviewedF4Reference": true,
+          "reviewDisposition": "BYTE_IDENTICAL_TO_MANUALLY_REVIEWED_REFERENCE"
+        }
+      ],
+      "targetEvidence": [
+        {
+          "path": "figma-411-52106.png",
+          "sha256": "7c140b4d26a010b3efe6e3fda779879db87d8ace301738cdbc5216aaa4c80b07",
+          "width": 1440,
+          "height": 1040
+        }
+      ],
+      "reviewedAt": "2026-10-12T11:03:28.895120+00:00"
+    },
+    {
+      "id": "V05",
+      "rows": [
+        "CAP-02",
+        "CAP-03"
+      ],
+      "targetNodes": [
+        "411:55155",
+        "999:51328"
+      ],
+      "figmaFile": "Zc2dEN5aLU47dVdsewDmiJ",
+      "targetFiles": [
+        "figma-411-55155.png",
+        "figma-999-51328.png"
+      ],
+      "candidateCaptureNames": [
+        "capability-create-desktop-light.png",
+        "capability-create-details-desktop-light.png",
+        "capability-profile-phone-light.png"
+      ],
+      "comparisonStatus": "PARTIAL_FRAME_COMPARISON",
+      "verifiedScope": "The 620px create dialog, field sequence, readiness controls and explicit footer follow the base frame. Additional details and retained metadata follow the later authored variant rather than being an accidental extra section. Existing native fields and keyboard/focus behavior survive.",
+      "remainingDifferencesOrGates": "The create Name label lacks the target asterisk, and Type/Sector controls are text inputs instead of the target dropdown presentation. These visible differences remain open; native CRUD and final full-screen acceptance are not implied.",
+      "interactionTestFiles": [
+        "capability-presentation.spec.ts",
+        "capability-presentation-visual.spec.ts"
+      ],
+      "nativeAcceptance": false,
+      "candidateCaptures": [
+        {
+          "path": "candidate-captures/V05-Portfolio-capability-create-desktop-light.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/portfolio-browser/capability-presentation-vi-41878-e-surfaces-at-desktop-light/capability-create-desktop-light.png",
+          "sha256": "75d60e085dd24715d6a9d80af87dbbb7efe7d71e15943827c6416487a705c996",
+          "width": 1440,
+          "height": 1105,
+          "capturedMtimeUTC": "2026-10-12T10:32:25.641782+00:00",
+          "byteIdenticalToReviewedF4Reference": true,
+          "reviewDisposition": "BYTE_IDENTICAL_TO_MANUALLY_REVIEWED_REFERENCE"
+        },
+        {
+          "path": "candidate-captures/V05-Portfolio-capability-create-details-desktop-light.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/portfolio-browser/capability-presentation-vi-41878-e-surfaces-at-desktop-light/capability-create-details-desktop-light.png",
+          "sha256": "a14241db3516e43bbd4b416aa4eb7810aa72cfeef4d7b094e65c2485c855604b",
+          "width": 1440,
+          "height": 1105,
+          "capturedMtimeUTC": "2026-10-12T10:32:28.609879+00:00",
+          "byteIdenticalToReviewedF4Reference": true,
+          "reviewDisposition": "BYTE_IDENTICAL_TO_MANUALLY_REVIEWED_REFERENCE"
+        },
+        {
+          "path": "candidate-captures/V05-Portfolio-capability-profile-phone-light.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/portfolio-browser/capability-presentation-vi-ea68d-ate-surfaces-at-phone-light/capability-profile-phone-light.png",
+          "sha256": "8792eac92c88031be7ef058edbe6786d2feb59661fdd692cdea41db271316765",
+          "width": 390,
+          "height": 1220,
+          "capturedMtimeUTC": "2026-10-12T10:32:34.002056+00:00",
+          "byteIdenticalToReviewedF4Reference": true,
+          "reviewDisposition": "BYTE_IDENTICAL_TO_MANUALLY_REVIEWED_REFERENCE"
+        }
+      ],
+      "targetEvidence": [
+        {
+          "path": "figma-411-55155.png",
+          "sha256": "f8756017d52f7c3beeb841d6ae0a0da0e582e6d28b5c32c9a039bc835413864f",
+          "width": 1440,
+          "height": 1040
+        },
+        {
+          "path": "figma-999-51328.png",
+          "sha256": "9f10ed5dead6df182e8bb1262c42954befc6b6a89ec5210dbd8e8747adf9ddfe",
+          "width": 1412,
+          "height": 522
+        }
+      ],
+      "reviewedAt": "2026-10-12T11:03:28.895120+00:00"
+    },
+    {
+      "id": "V06",
+      "rows": [
+        "CORE-128"
+      ],
+      "targetNodes": [
+        "1019:187928"
+      ],
+      "figmaFile": "Zc2dEN5aLU47dVdsewDmiJ",
+      "targetFiles": [
+        "figma-1019-187928.png"
+      ],
+      "candidateCaptureNames": [
+        "saved-submissions-desktop.png",
+        "saved-submissions-phone.png"
+      ],
+      "comparisonStatus": "PASS_SCOPED_COMPONENT",
+      "verifiedScope": "The Saved submissions section matches the authored desktop component in width/height, header, divider rows, typography, refresh button, removal text action and footer. Tests assert 1024x277 desktop and 358x385 phone geometry, button styles and fit.",
+      "remainingDifferencesOrGates": "Native history completeness, real removal, versionless DELETE concurrency and cross-device recovery remain open. Only this component is visually assessed.",
+      "interactionTestFiles": [
+        "saved-submissions-visual.spec.ts",
+        "saved-submissions-current.spec.ts",
+        "saved-submissions-lifetime.spec.ts"
+      ],
+      "nativeAcceptance": false,
+      "candidateCaptures": [
+        {
+          "path": "candidate-captures/V06-Portfolio-saved-submissions-desktop.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/portfolio-browser/saved-submissions-visual-t-92f00-s-its-authored-Figma-layout/saved-submissions-desktop.png",
+          "sha256": "da92bfcd5ccb9e429bbf60b7a86d68dfbd8d1fe80e01f1f39cf9f13a96d6a93b",
+          "width": 1024,
+          "height": 277,
+          "capturedMtimeUTC": "2026-10-12T10:57:43.319810+00:00",
+          "byteIdenticalToReviewedF4Reference": true,
+          "reviewDisposition": "BYTE_IDENTICAL_TO_MANUALLY_REVIEWED_REFERENCE"
+        },
+        {
+          "path": "candidate-captures/V06-Portfolio-saved-submissions-phone.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/portfolio-browser/saved-submissions-visual-t-4a7bc-s-its-authored-Figma-layout/saved-submissions-phone.png",
+          "sha256": "39839138b93a64e748a267958be47229d963599e6a920fa55ae09d7f9170e759",
+          "width": 358,
+          "height": 385,
+          "capturedMtimeUTC": "2026-10-12T10:57:45.355877+00:00",
+          "byteIdenticalToReviewedF4Reference": true,
+          "reviewDisposition": "BYTE_IDENTICAL_TO_MANUALLY_REVIEWED_REFERENCE"
+        }
+      ],
+      "targetEvidence": [
+        {
+          "path": "figma-1019-187928.png",
+          "sha256": "057cfd6cab5c92546062fc7ad4c251a5f2801cdd4fcd021a821bb151cf464d2c",
+          "width": 1025,
+          "height": 277
+        }
+      ],
+      "reviewedAt": "2026-10-12T11:03:28.895120+00:00"
+    },
+    {
+      "id": "V07",
+      "rows": [
+        "CORE-027",
+        "CORE-028",
+        "CORE-029",
+        "CORE-099"
+      ],
+      "targetNodes": [
+        "411:41685"
+      ],
+      "figmaFile": "Zc2dEN5aLU47dVdsewDmiJ",
+      "targetFiles": [
+        "figma-411-41685.png"
+      ],
+      "candidateCaptureNames": [
+        "ordered-owners-mobile.png"
+      ],
+      "comparisonStatus": "FAIL_FULL_VISUAL_CRITERION",
+      "verifiedScope": "Current selectors preserve all four named ranks, explicit complete-order save, current roster eligibility, unavailable historical owners and no implicit promotion.",
+      "remainingDifferencesOrGates": "The designed Owners dialog uses owner cards, initials/roles, rank badges, removal/add and reorder affordances. The current Team dialog uses four native select fields and does not match that visual/interaction presentation. Rank persistence tests do not close this design gap.",
+      "interactionTestFiles": [
+        "ordered-owners.spec.ts"
+      ],
+      "nativeAcceptance": false,
+      "candidateCaptures": [
+        {
+          "path": "candidate-captures/V07-Portfolio-ordered-owners-mobile.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/portfolio-browser/ordered-owners-four-ranked-9d7d3-ve-and-preserve-exact-order/ordered-owners-mobile.png",
+          "sha256": "c853b7dcf2c806317b9d6190b7ec2ec6cba0157dbadf6babcd1a6ac7b2dfe268",
+          "width": 390,
+          "height": 844,
+          "capturedMtimeUTC": "2026-10-12T10:46:18.485135+00:00",
+          "byteIdenticalToReviewedF4Reference": true,
+          "reviewDisposition": "BYTE_IDENTICAL_TO_MANUALLY_REVIEWED_REFERENCE"
+        }
+      ],
+      "targetEvidence": [
+        {
+          "path": "figma-411-41685.png",
+          "sha256": "aeca5b4153f7725830149715898eecf312bc4c15fd23d821897e3e016c65a148",
+          "width": 1440,
+          "height": 1040
+        }
+      ],
+      "reviewedAt": "2026-10-12T11:03:28.895120+00:00"
+    },
+    {
+      "id": "V08",
+      "rows": [
+        "PROS-004",
+        "PROS-005",
+        "PROS-010",
+        "PROS-011",
+        "PROS-013",
+        "PROS-014",
+        "PROS-015",
+        "PROS-037"
+      ],
+      "targetNodes": [
+        "411:64863"
+      ],
+      "figmaFile": "Zc2dEN5aLU47dVdsewDmiJ",
+      "targetFiles": [
+        "figma-411-64863.png"
+      ],
+      "candidateCaptureNames": [
+        "prospect-overview-desktop.png",
+        "prospect-overview-mobile.png"
+      ],
+      "comparisonStatus": "PARTIAL_FRAME_COMPARISON",
+      "verifiedScope": "The overview uses a company summary, a two-column next-step/contact/note arrangement, horizontal pipeline stage tracker and dated activity list. Current receipt and responsive interactions are tested.",
+      "remainingDifferencesOrGates": "Top navigation/action placements and lower sections differ. Contact/Meri research availability and rich company fields remain incomplete; current notes are explicitly firm-shared and do not satisfy the private-note row. Native conversion/billing remains separate.",
+      "interactionTestFiles": [
+        "prospect-overview.spec.ts",
+        "prospect-contacts.spec.ts"
+      ],
+      "nativeAcceptance": false,
+      "candidateCaptures": [
+        {
+          "path": "candidate-captures/V08-Portfolio-prospect-overview-desktop.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/portfolio-browser/prospect-overview-overview-ec720-and-filters-actual-activity/prospect-overview-desktop.png",
+          "sha256": "edf0f3588738efec4d6516b11c9aeba5d53f68f63bd6a87a44984429d4171630",
+          "width": 1440,
+          "height": 1882,
+          "capturedMtimeUTC": "2026-10-12T10:52:54.594267+00:00",
+          "byteIdenticalToReviewedF4Reference": false,
+          "reviewDisposition": "MANUALLY_REVIEWED_EXACT_CANDIDATE"
+        },
+        {
+          "path": "candidate-captures/V08-Portfolio-prospect-overview-mobile.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/portfolio-browser/prospect-overview-overview-ec720-and-filters-actual-activity/prospect-overview-mobile.png",
+          "sha256": "d6f2d61cb197ff4f79287b86ade87462fbfa815aaf597cac1f1c95e8537759fc",
+          "width": 390,
+          "height": 3052,
+          "capturedMtimeUTC": "2026-10-12T10:52:54.938279+00:00",
+          "byteIdenticalToReviewedF4Reference": false,
+          "reviewDisposition": "MANUALLY_REVIEWED_EXACT_CANDIDATE"
+        }
+      ],
+      "targetEvidence": [
+        {
+          "path": "figma-411-64863.png",
+          "sha256": "1b5921a1e9580bbc04e9d2fab00b036f5db4cf477fa5d6005970bb87199ecad7",
+          "width": 1440,
+          "height": 1040
+        }
+      ],
+      "reviewedAt": "2026-10-12T11:03:28.895120+00:00"
+    },
+    {
+      "id": "V09",
+      "rows": [
+        "BILL-01",
+        "BILL-02",
+        "BILL-03",
+        "BILL-11",
+        "BILL-12",
+        "BILL-13",
+        "BILL-14"
+      ],
+      "targetNodes": [
+        "411:56471"
+      ],
+      "figmaFile": "Zc2dEN5aLU47dVdsewDmiJ",
+      "targetFiles": [
+        "figma-411-56471.png"
+      ],
+      "candidateCaptureNames": [
+        "bills-desktop.png",
+        "bills-mobile-dark.png"
+      ],
+      "comparisonStatus": "PARTIAL_FRAME_COMPARISON",
+      "verifiedScope": "Tracked-bill container, Configure/Track actions, summary columns and table/board surfaces are present; unavailable material-change/coverage metrics are not invented.",
+      "remainingDifferencesOrGates": "The current title is larger, filter/view controls and table-header layout differ, and the captured empty fixture cannot accept the populated target. Native PASS percentage/coverage semantics and final full-frame presentation remain open.",
+      "interactionTestFiles": [
+        "bills.spec.ts",
+        "tracker-current-data.spec.ts",
+        "visual.spec.ts"
+      ],
+      "nativeAcceptance": false,
+      "candidateCaptures": [
+        {
+          "path": "candidate-captures/V09-Portfolio-bills-desktop.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/portfolio-browser/visual-representative-bill-511b7-top-mobile-and-in-dark-mode/bills-desktop.png",
+          "sha256": "e68523d722917875d03abe8132e557f731fb8afe81c6aef13ce52b82a1187ead",
+          "width": 1440,
+          "height": 1040,
+          "capturedMtimeUTC": "2026-10-12T10:59:50.740010+00:00",
+          "byteIdenticalToReviewedF4Reference": false,
+          "reviewDisposition": "MANUALLY_REVIEWED_EXACT_CANDIDATE"
+        },
+        {
+          "path": "candidate-captures/V09-Portfolio-bills-mobile-dark.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/portfolio-browser/visual-representative-bill-511b7-top-mobile-and-in-dark-mode/bills-mobile-dark.png",
+          "sha256": "545ae25b46ae6ab2bfdcef75012811b96a302d9eb7b3d35c266f69c70ac14ab0",
+          "width": 390,
+          "height": 1113,
+          "capturedMtimeUTC": "2026-10-12T10:59:51.136024+00:00",
+          "byteIdenticalToReviewedF4Reference": true,
+          "reviewDisposition": "BYTE_IDENTICAL_TO_MANUALLY_REVIEWED_REFERENCE"
+        }
+      ],
+      "targetEvidence": [
+        {
+          "path": "figma-411-56471.png",
+          "sha256": "02bbc60129ff02d98d8381bb508756e5192a0b13ec47472ed992965e27f7d746",
+          "width": 1440,
+          "height": 1040
+        }
+      ],
+      "reviewedAt": "2026-10-12T11:03:28.895120+00:00"
+    },
+    {
+      "id": "V10",
+      "rows": [
+        "MCAL-001",
+        "MCAL-002",
+        "MCAL-003",
+        "MCAL-004",
+        "MCAL-005",
+        "MCAL-008",
+        "MCAL-009",
+        "MCAL-010",
+        "MCAL-012",
+        "MCAL-013",
+        "MCAL-014",
+        "MCAL-015"
+      ],
+      "targetNodes": [
+        "460:90798"
+      ],
+      "figmaFile": "Zc2dEN5aLU47dVdsewDmiJ",
+      "targetFiles": [
+        "figma-460-90798.png"
+      ],
+      "candidateCaptureNames": [
+        "effective-date-mobile.png",
+        "effective-date-desktop.png",
+        "modules-effective-date-desktop.png"
+      ],
+      "comparisonStatus": "PARTIAL_FRAME_COMPARISON",
+      "verifiedScope": "Modules Master scope, previous/Today/next and Month/Week/Agenda controls, five source colors and dated Agenda table match the target structure. The exact-source desktop capture and full-suite phone capture show readable source rows and current provenance. The separate Portfolio Master Calendar also retains tested scope/source/filter behavior.",
+      "remainingDifferencesOrGates": "The owner-bound provenance and incomplete-coverage text are deliberate read-only extensions. The separate Portfolio /calendar desktop uses a flat filter row and event cards and does not match this Modules target. Populated target events, all desktop spacing, forecasts, native source completeness and legal-date interpretation remain unaccepted.",
+      "interactionTestFiles": [
+        "effective-dates.spec.ts",
+        "calendar-boundary.spec.ts",
+        "calendar-planner.spec.ts"
+      ],
+      "nativeAcceptance": false,
+      "candidateCaptures": [
+        {
+          "path": "candidate-captures/V10-Modules-effective-date-mobile.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/modules-browser/effective-dates-Modules-ma-bdcd2-enance-and-partial-coverage/effective-date-mobile.png",
+          "sha256": "9f07ae138dae280152aa83c34a4ba983767f1a7231fb35b61112c5404e4baf46",
+          "width": 390,
+          "height": 1566,
+          "capturedMtimeUTC": "2026-10-12T10:18:37.878520+00:00",
+          "byteIdenticalToReviewedF4Reference": true,
+          "reviewDisposition": "BYTE_IDENTICAL_TO_MANUALLY_REVIEWED_REFERENCE"
+        },
+        {
+          "path": "candidate-captures/V10-Portfolio-effective-date-desktop.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/portfolio-browser/effective-dates-master-Age-7698d-ithout-shifting-civil-dates/effective-date-desktop.png",
+          "sha256": "cf1b160c5626c437217861526e08d1d95fe0ce61b9262fdb539d33d10f95856c",
+          "width": 1440,
+          "height": 1040,
+          "capturedMtimeUTC": "2026-10-12T10:35:33.316001+00:00",
+          "byteIdenticalToReviewedF4Reference": true,
+          "reviewDisposition": "BYTE_IDENTICAL_TO_MANUALLY_REVIEWED_REFERENCE"
+        },
+        {
+          "path": "candidate-captures/V10-Modules-modules-effective-date-desktop.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "/tmp/capiro-candidate-2d50edd/modules-calendar-visual/artifacts/control-Modules-master-Gov-58918-enance-and-partial-coverage/modules-effective-date-desktop.png",
+          "sha256": "fdb41a75c7d96d1c21779459cfc285ecc375b616bac3f9545af8b37c0c3a3c75",
+          "width": 1440,
+          "height": 1040,
+          "captureGate": "modules-calendar-visual-execution.json",
+          "byteIdenticalToReviewedF4Reference": false,
+          "reviewDisposition": "MANUALLY_REVIEWED_EXACT_CANDIDATE"
+        }
+      ],
+      "targetEvidence": [
+        {
+          "path": "figma-460-90798.png",
+          "sha256": "570a3984dc02c946c4d763b8f11dd9d83b319f019065bef84d823afa29a9b303",
+          "width": 1440,
+          "height": 1040
+        }
+      ],
+      "reviewedAt": "2026-10-12T11:03:28.895120+00:00"
+    },
+    {
+      "id": "V11",
+      "rows": [
+        "OBJ-26"
+      ],
+      "targetNodes": [
+        "411:119740"
+      ],
+      "figmaFile": "Zc2dEN5aLU47dVdsewDmiJ",
+      "targetFiles": [
+        "figma-411-119740.png"
+      ],
+      "candidateCaptureNames": [
+        "strategies-desktop.png",
+        "strategies-mobile.png"
+      ],
+      "comparisonStatus": "READ_ONLY_CONTRACT_EXTENSION",
+      "verifiedScope": "The existing shared Modules shell and controls are reused. The Objective-bound strategies view is explicitly read-only, fits desktop/phone, exposes current provenance and a keyboard-reachable recheck, and re-resolves on open/history/reload.",
+      "remainingDifferencesOrGates": "The target is the ordinary editable strategies screen, preserved separately. This new observation view is a documented contract extension, not pixel acceptance of that ordinary editor or a durable association. Native permission and resource-owner criteria remain open.",
+      "interactionTestFiles": [
+        "objective-work-destinations.spec.ts",
+        "objective-work-navigation.spec.ts"
+      ],
+      "nativeAcceptance": false,
+      "candidateCaptures": [
+        {
+          "path": "candidate-captures/V11-Modules-strategies-desktop.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/modules-browser/objective-work-destination-0d8c8-ut-ordinary-reads-or-writes/strategies-desktop.png",
+          "sha256": "3c7a3396bd3af82c68a6303cfc42ff5ec0ae37bcf4ecf3e501129aedd76c3e47",
+          "width": 1440,
+          "height": 1040,
+          "capturedMtimeUTC": "2026-10-12T10:19:37.548492+00:00",
+          "byteIdenticalToReviewedF4Reference": false,
+          "reviewDisposition": "MANUALLY_REVIEWED_EXACT_CANDIDATE"
+        },
+        {
+          "path": "candidate-captures/V11-Modules-strategies-mobile.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/modules-browser/objective-work-destination-0d8c8-ut-ordinary-reads-or-writes/strategies-mobile.png",
+          "sha256": "3e1f47eec7d5b3772ba26e03d441608e794c60e49978ca55cb1b3eb53b709f47",
+          "width": 390,
+          "height": 899,
+          "capturedMtimeUTC": "2026-10-12T10:19:38.476522+00:00",
+          "byteIdenticalToReviewedF4Reference": false,
+          "reviewDisposition": "MANUALLY_REVIEWED_EXACT_CANDIDATE"
+        }
+      ],
+      "targetEvidence": [
+        {
+          "path": "figma-411-119740.png",
+          "sha256": "0cd1c2ab493cd597cfd385ea79b09c194c4fbc37d4ea87cb60435ae481b8ba3a",
+          "width": 1440,
+          "height": 1040
+        }
+      ],
+      "reviewedAt": "2026-10-12T11:03:28.895120+00:00"
+    },
+    {
+      "id": "V12",
+      "rows": [
+        "OBJ-26"
+      ],
+      "targetNodes": [
+        "411:95693"
+      ],
+      "figmaFile": "Zc2dEN5aLU47dVdsewDmiJ",
+      "targetFiles": [
+        "figma-411-95693.png"
+      ],
+      "candidateCaptureNames": [
+        "planner-desktop.png",
+        "planner-mobile.png"
+      ],
+      "comparisonStatus": "READ_ONLY_CONTRACT_EXTENSION",
+      "verifiedScope": "The existing shared Modules shell and controls are reused. The Objective-bound planner view is explicitly read-only, fits desktop/phone, exposes current provenance and a keyboard-reachable recheck, and re-resolves on open/history/reload.",
+      "remainingDifferencesOrGates": "The target is the ordinary editable planner screen, preserved separately. This new observation view is a documented contract extension, not pixel acceptance of that ordinary editor or a durable association. Native permission and resource-owner criteria remain open. The fixed synthetic-fixture badge overlaps a small portion of the long phone capture. It is a fixture disclosure, not production content; this capture does not establish unobscured full-frame presentation. Keyboard/control assertions pass separately.",
+      "interactionTestFiles": [
+        "objective-work-destinations.spec.ts",
+        "objective-work-navigation.spec.ts"
+      ],
+      "nativeAcceptance": false,
+      "candidateCaptures": [
+        {
+          "path": "candidate-captures/V12-Modules-planner-desktop.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/modules-browser/objective-work-destination-434fd-ut-ordinary-reads-or-writes/planner-desktop.png",
+          "sha256": "c665bab0285987f8223fa847d06dec8141751fa1e218454c4daf92131b262ef5",
+          "width": 1440,
+          "height": 1040,
+          "capturedMtimeUTC": "2026-10-12T10:19:44.652726+00:00",
+          "byteIdenticalToReviewedF4Reference": false,
+          "reviewDisposition": "MANUALLY_REVIEWED_EXACT_CANDIDATE"
+        },
+        {
+          "path": "candidate-captures/V12-Modules-planner-mobile.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/modules-browser/objective-work-destination-434fd-ut-ordinary-reads-or-writes/planner-mobile.png",
+          "sha256": "57b82c4219e1b9b56e7759db56cd99539cc2d4722f51cfce79ed2b108189684a",
+          "width": 390,
+          "height": 933,
+          "capturedMtimeUTC": "2026-10-12T10:19:45.708761+00:00",
+          "byteIdenticalToReviewedF4Reference": false,
+          "reviewDisposition": "MANUALLY_REVIEWED_EXACT_CANDIDATE"
+        }
+      ],
+      "targetEvidence": [
+        {
+          "path": "figma-411-95693.png",
+          "sha256": "5f036dc1559cb7258a81f2d0d6b73298d0abf5eae61e76ac2abf8ea1ad8de622",
+          "width": 1024,
+          "height": 740
+        }
+      ],
+      "reviewedAt": "2026-10-12T11:03:28.895120+00:00"
+    },
+    {
+      "id": "V13",
+      "rows": [
+        "OBJ-26"
+      ],
+      "targetNodes": [
+        "411:112533"
+      ],
+      "figmaFile": "Zc2dEN5aLU47dVdsewDmiJ",
+      "targetFiles": [
+        "figma-411-112533.png"
+      ],
+      "candidateCaptureNames": [
+        "workspace-desktop.png",
+        "workspace-mobile.png"
+      ],
+      "comparisonStatus": "READ_ONLY_CONTRACT_EXTENSION",
+      "verifiedScope": "The existing shared Modules shell and controls are reused. The Objective-bound workspace view is explicitly read-only, fits desktop/phone, exposes current provenance and a keyboard-reachable recheck, and re-resolves on open/history/reload.",
+      "remainingDifferencesOrGates": "The target is the ordinary editable workspace screen, preserved separately. This new observation view is a documented contract extension, not pixel acceptance of that ordinary editor or a durable association. Native permission and resource-owner criteria remain open. The fixed synthetic-fixture badge overlaps a small portion of the long phone capture. It is a fixture disclosure, not production content; this capture does not establish unobscured full-frame presentation. Keyboard/control assertions pass separately.",
+      "interactionTestFiles": [
+        "objective-work-destinations.spec.ts",
+        "objective-work-navigation.spec.ts"
+      ],
+      "nativeAcceptance": false,
+      "candidateCaptures": [
+        {
+          "path": "candidate-captures/V13-Modules-workspace-desktop.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/modules-browser/objective-work-destination-82943-ut-ordinary-reads-or-writes/workspace-desktop.png",
+          "sha256": "a87b248d381109efb22dd1009dc3a56863852e1ed745eede3addbd71e0ff8fb1",
+          "width": 1440,
+          "height": 1040,
+          "capturedMtimeUTC": "2026-10-12T10:19:52.304979+00:00",
+          "byteIdenticalToReviewedF4Reference": false,
+          "reviewDisposition": "MANUALLY_REVIEWED_EXACT_CANDIDATE"
+        },
+        {
+          "path": "candidate-captures/V13-Modules-workspace-mobile.png",
+          "executedSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+          "sourcePath": "apps/web/test-results/modules-browser/objective-work-destination-82943-ut-ordinary-reads-or-writes/workspace-mobile.png",
+          "sha256": "875721e3584a9dbe74e3f59e21aeb58fd73399573d76fad1f8a6185ea6a7aeff",
+          "width": 390,
+          "height": 1100,
+          "capturedMtimeUTC": "2026-10-12T10:19:53.361014+00:00",
+          "byteIdenticalToReviewedF4Reference": false,
+          "reviewDisposition": "MANUALLY_REVIEWED_EXACT_CANDIDATE"
+        }
+      ],
+      "targetEvidence": [
+        {
+          "path": "figma-411-112533.png",
+          "sha256": "e7608095db75e5d0fd2c55ba2f1795a83ed9c7246053d397d7fd1379240bd8fc",
+          "width": 1024,
+          "height": 740
+        }
+      ],
+      "reviewedAt": "2026-10-12T11:03:28.895120+00:00"
+    }
+  ],
+  "candidateQualification": {
+    "head": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+    "portfolio": {
+      "head": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "tree": "d7986d01b5f5aca3a8e4c824556315a82b692e92",
+      "statusAtStart": "",
+      "command": [
+        "env",
+        "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+        "npm",
+        "run",
+        "test:browser",
+        "--",
+        "--workers=2"
+      ],
+      "startedAt": "2026-10-12T10:20:54.958114+00:00",
+      "state": "finished",
+      "exitCode": 0,
+      "finishedAt": "2026-10-12T11:02:08.472181+00:00",
+      "headAtFinish": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "statusAtFinish": ""
+    },
+    "modules": {
+      "head": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "tree": "d7986d01b5f5aca3a8e4c824556315a82b692e92",
+      "statusAtStart": "",
+      "command": [
+        "env",
+        "CAPIRO_QA_CHROMIUM_EXECUTABLE=/usr/bin/chromium",
+        "npm",
+        "run",
+        "test:browser:modules"
+      ],
+      "startedAt": "2026-10-12T10:18:28.713761+00:00",
+      "state": "finished",
+      "exitCode": 0,
+      "finishedAt": "2026-10-12T10:21:58.863227+00:00",
+      "headAtFinish": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+      "statusAtFinish": ""
+    }
+  },
+  "reviewedAt": "2026-10-12T11:03:28.895120+00:00"
+}
