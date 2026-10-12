@@ -95,8 +95,7 @@ export function ObjectiveOutreachDestination() {
         Recheck current Objective destination
       </ActionButton>
       <p>
-        Objective-bound creation, durable associations, Strategy, Planner and
-        Workspace destinations remain unavailable.
+        Objective-bound creation and durable associations remain unavailable.
       </p>
     </section>
   );

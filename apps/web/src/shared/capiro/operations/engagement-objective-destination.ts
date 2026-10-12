@@ -1,17 +1,16 @@
 import { z } from "zod";
 import { defineOperation } from "../contracts";
 import { engagementSessionOperations } from "./engagement-sessions";
-const id = z.uuid().transform((value) => value.toLowerCase());
-export const objectiveDestinationQuery = z
-  .object({
-    clientId: id,
-    objectiveId: id,
-    objectiveVersion: z.number().int().min(1).max(2147483647),
-  })
-  .strict();
-export type ObjectiveDestinationQuery = z.infer<
-  typeof objectiveDestinationQuery
->;
+import {
+  objectiveResourceId as id,
+  objectiveDestinationQuery,
+  requireObjectiveBinding,
+  type ObjectiveDestinationQuery,
+} from "./objective-destination-binding";
+export {
+  objectiveDestinationQuery,
+  type ObjectiveDestinationQuery,
+} from "./objective-destination-binding";
 export const objectiveOutreachDestination = engagementSessionOperations[
   "engagement.session"
 ].response
@@ -43,18 +42,7 @@ export function requireObjectiveDestination(
   sessionId: string,
   query: ObjectiveDestinationQuery,
 ) {
-  const selected = objectiveDestinationQuery.parse(query),
-    d = value.destination;
-  if (
-    d.resourceId !== sessionId.toLowerCase() ||
-    d.clientId !== selected.clientId ||
-    d.objectiveId !== selected.objectiveId ||
-    d.objectiveVersion !== selected.objectiveVersion
-  )
-    throw new Error(
-      "The destination does not match the selected current Objective version.",
-    );
-  return value;
+  return requireObjectiveBinding(value, sessionId, query);
 }
 export const objectiveDestinationOperations = {
   "engagement.objectiveDestination": defineOperation({

@@ -173,10 +173,7 @@ export function ObjectiveOutreach({
           </button>
         </>
       )}
-      <small>
-        Creation, durable associations and Strategy, Planner and Workspace
-        destinations remain unavailable.
-      </small>
+      <small>Creation and durable associations remain unavailable.</small>
     </section>
   );
 }

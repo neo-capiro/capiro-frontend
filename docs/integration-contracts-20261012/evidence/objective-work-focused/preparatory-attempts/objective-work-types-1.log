@@ -1,0 +1,19 @@
+
+> @capiro/web@0.1.0 typecheck
+> tsc --noEmit
+
+test/browser/objective-work-destinations.spec.ts(39,50): error TS2345: Argument of type '{ clientId: string; objectiveId: string; objectiveVersion: string; strategyId: string; taskId?: undefined; draftId?: undefined; versionId?: undefined; } | { clientId: string; objectiveId: string; ... 4 more ...; versionId?: undefined; } | { ...; }' is not assignable to parameter of type 'string | Record<string, string> | string[][] | URLSearchParams | undefined'.
+  Type '{ clientId: string; objectiveId: string; objectiveVersion: string; strategyId: string; taskId?: undefined; draftId?: undefined; versionId?: undefined; }' is not assignable to type 'string | Record<string, string> | string[][] | URLSearchParams | undefined'.
+    Type '{ clientId: string; objectiveId: string; objectiveVersion: string; strategyId: string; taskId?: undefined; draftId?: undefined; versionId?: undefined; }' is not assignable to type 'undefined'.
+npm error Lifecycle script `typecheck` failed with error:
+npm error code 2
+npm error path /workspace/capiro-contracts/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-contracts/apps/web
+npm error command failed
+npm error command sh -c tsc --noEmit
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

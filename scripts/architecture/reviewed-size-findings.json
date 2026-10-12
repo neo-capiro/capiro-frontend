@@ -1522,8 +1522,8 @@
     "file": "apps/web/src/features/modules/engagement/ObjectiveOutreachDestination.tsx",
     "kind": "function",
     "symbol": "ObjectiveOutreachDestination",
-    "fingerprint": "ff29c088755f4d5d3e001ebda5d2b6700aa23e1e274d1f96e6cf0a419e3ff3e7",
-    "reason": "This component owns one read-only Objective-bound destination. Query parsing and exact response binding protect the same observation. The shared fixed operation and useCapiroQuery own transport, reset and cancellation; the existing campaign editor is separate and is deliberately not rendered under this limited contract. It has no resource mutation, durable association or alternative-kind fallback.",
+    "fingerprint": "042d944d962abd1bfe9f87ccc492150cacbb6d664edc2cbd729c53e2d57d3d7d",
+    "reason": "This component owns one read-only Objective-bound destination. Query parsing and exact response binding protect the same observation. The shared fixed operation and useCapiroQuery own transport, reset and cancellation; the existing campaign editor is separate and is deliberately not rendered under this limited contract. It has no resource mutation, durable association or alternative-kind fallback. The current delta only removes stale copy claiming all other destination kinds are unavailable; the Outreach flow, transport and lifecycle are unchanged.",
     "reviewedBy": "Codex shared frontend integration review",
     "reviewedOn": "2026-10-12"
   },
@@ -1531,9 +1531,18 @@
     "file": "apps/web/src/features/portfolio/objectives/ObjectiveOutreach.tsx",
     "kind": "function",
     "symbol": "ObjectiveOutreach",
-    "fingerprint": "6f279b5d30e6dbfb7b58b6e42e4ec23356446deab3667e4393790e9eb7f7b09b",
-    "reason": "One explicit existing-session selection and navigation interaction belongs here: paged authorized session choices, current persisted Objective context, cancellation, owner resolution and its pending/error UI. The shared operation module owns the wire validation; there is no campaign write, association persistence or resource creation. Keeping these dependent states together makes interrupted and unsaved-editor behavior reviewable.",
+    "fingerprint": "3f06b71ba80c542e4031b1898d7387f1d52cd112a9e315eaf1ad48b1a900c1af",
+    "reason": "One explicit existing-session selection and navigation interaction belongs here: paged authorized session choices, current persisted Objective context, cancellation, owner resolution and its pending/error UI. The shared operation module owns the wire validation; there is no campaign write, association persistence or resource creation. Keeping these dependent states together makes interrupted and unsaved-editor behavior reviewable. The current delta only removes stale copy claiming all other destination kinds are unavailable; the Outreach flow, transport and lifecycle are unchanged.",
     "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/ObjectiveWorkDestinations.tsx",
+    "kind": "function",
+    "symbol": "ObjectiveWorkPicker",
+    "fingerprint": "6a1f8d2731c638e12c34a268415e63e496c40ba42b4d7e28656384be81dc322e",
+    "reason": "This is one existing-resource selection interaction: current Objective/client-scoped choice query, explicit selected resource, task cursor navigation and owner-resolution status. Canonical wire/owner binding and service selection live in objective-work-sources; cancellation/navigation belong to useObjectiveWorkDestination; saved-version choice has its own cohesive component. No backend authorization, command, persisted association or feature editor is embedded. Keeping this dependent choice/paging state together makes stale selections and interrupted opens reviewable.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
     "reviewedOn": "2026-10-12"
   }
 ]

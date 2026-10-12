@@ -1,0 +1,328 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-contracts/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/objective-work-baseline-d825528/review.playwright.ts"
+    ],
+    "configFile": "/tmp/objective-work-baseline-d825528/review.playwright.ts",
+    "rootDir": "/tmp/objective-work-baseline-d825528",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/objective-work-baseline-d825528/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/objective-work-baseline-d825528",
+        "testIgnore": [],
+        "testMatch": [
+          "control.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/objective-work-baseline-d825528/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" \"/workspace/capiro-contracts/apps/web/test/browser/server.mjs\"",
+      "url": "http://127.0.0.1:5197",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "control.spec.ts",
+      "file": "control.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "existing strategies Objective link mounts its bound read instead of the ordinary editor",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 4206,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Objective Strategy destination', exact: true })\nExpected: visible\nTimeout: 3000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 3000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Objective Strategy destination', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Objective Strategy destination', exact: true })\nExpected: visible\nTimeout: 3000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 3000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Objective Strategy destination', exact: true })\u001b[22m\n\n    at /tmp/objective-work-baseline-d825528/control.spec.ts:20:71",
+                    "location": {
+                      "file": "/tmp/objective-work-baseline-d825528/control.spec.ts",
+                      "column": 71,
+                      "line": 20
+                    },
+                    "snippet": "  18 |     await page.goto(`/modules/${module}?${ids}&clientId=${clientId}&objectiveId=${objectiveId}&objectiveVersion=7`);\n  19 |     try {\n> 20 |       await expect(page.getByRole('heading',{name:title,exact:true})).toBeVisible({timeout:3000});\n     |                                                                       ^\n  21 |       expect(keys).toContain(operation);\n  22 |     } finally {\n  23 |       await info.attach('observed-operation-keys',{body:JSON.stringify(keys),contentType:'application/json'});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/objective-work-baseline-d825528/control.spec.ts",
+                        "column": 71,
+                        "line": 20
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Objective Strategy destination', exact: true })\nExpected: visible\nTimeout: 3000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 3000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Objective Strategy destination', exact: true })\u001b[22m\n\n\n  18 |     await page.goto(`/modules/${module}?${ids}&clientId=${clientId}&objectiveId=${objectiveId}&objectiveVersion=7`);\n  19 |     try {\n> 20 |       await expect(page.getByRole('heading',{name:title,exact:true})).toBeVisible({timeout:3000});\n     |                                                                       ^\n  21 |       expect(keys).toContain(operation);\n  22 |     } finally {\n  23 |       await info.attach('observed-operation-keys',{body:JSON.stringify(keys),contentType:'application/json'});\n    at /tmp/objective-work-baseline-d825528/control.spec.ts:20:71"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T09:55:17.797Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "observed-operation-keys",
+                      "contentType": "application/json",
+                      "body": "WyJzdHJhdGVnaWVzLmxpc3QiLCJjbGllbnRzLmxpc3QiLCJwbGFubmVyLmJvb3RzdHJhcCIsInN0cmF0ZWdpZXMucGhhc2VzIiwic3RyYXRlZ2llcy5wcm9wb3NhbHMiLCJjbGllbnRzLmxpc3QiXQ=="
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/objective-work-baseline-d825528/artifacts/control-existing-strategie-92848-tead-of-the-ordinary-editor/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/objective-work-baseline-d825528/artifacts/control-existing-strategie-92848-tead-of-the-ordinary-editor/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/objective-work-baseline-d825528/artifacts/control-existing-strategie-92848-tead-of-the-ordinary-editor/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/objective-work-baseline-d825528/control.spec.ts",
+                    "column": 71,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "df0f65ccd0bbb0c6ab20-ff6b6b9ca33f37c532ab",
+          "file": "control.spec.ts",
+          "line": 12,
+          "column": 3
+        },
+        {
+          "title": "existing planner Objective link mounts its bound read instead of the ordinary editor",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 4171,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Objective Planner task destination', exact: true })\nExpected: visible\nTimeout: 3000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 3000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Objective Planner task destination', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Objective Planner task destination', exact: true })\nExpected: visible\nTimeout: 3000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 3000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Objective Planner task destination', exact: true })\u001b[22m\n\n    at /tmp/objective-work-baseline-d825528/control.spec.ts:20:71",
+                    "location": {
+                      "file": "/tmp/objective-work-baseline-d825528/control.spec.ts",
+                      "column": 71,
+                      "line": 20
+                    },
+                    "snippet": "  18 |     await page.goto(`/modules/${module}?${ids}&clientId=${clientId}&objectiveId=${objectiveId}&objectiveVersion=7`);\n  19 |     try {\n> 20 |       await expect(page.getByRole('heading',{name:title,exact:true})).toBeVisible({timeout:3000});\n     |                                                                       ^\n  21 |       expect(keys).toContain(operation);\n  22 |     } finally {\n  23 |       await info.attach('observed-operation-keys',{body:JSON.stringify(keys),contentType:'application/json'});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/objective-work-baseline-d825528/control.spec.ts",
+                        "column": 71,
+                        "line": 20
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Objective Planner task destination', exact: true })\nExpected: visible\nTimeout: 3000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 3000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Objective Planner task destination', exact: true })\u001b[22m\n\n\n  18 |     await page.goto(`/modules/${module}?${ids}&clientId=${clientId}&objectiveId=${objectiveId}&objectiveVersion=7`);\n  19 |     try {\n> 20 |       await expect(page.getByRole('heading',{name:title,exact:true})).toBeVisible({timeout:3000});\n     |                                                                       ^\n  21 |       expect(keys).toContain(operation);\n  22 |     } finally {\n  23 |       await info.attach('observed-operation-keys',{body:JSON.stringify(keys),contentType:'application/json'});\n    at /tmp/objective-work-baseline-d825528/control.spec.ts:20:71"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T09:55:22.852Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "observed-operation-keys",
+                      "contentType": "application/json",
+                      "body": "WyJwbGFubmVyLmJvb3RzdHJhcCJd"
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/objective-work-baseline-d825528/artifacts/control-existing-planner-O-ce242-tead-of-the-ordinary-editor/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/objective-work-baseline-d825528/artifacts/control-existing-planner-O-ce242-tead-of-the-ordinary-editor/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/objective-work-baseline-d825528/artifacts/control-existing-planner-O-ce242-tead-of-the-ordinary-editor/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/objective-work-baseline-d825528/control.spec.ts",
+                    "column": 71,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "df0f65ccd0bbb0c6ab20-f384a1df1d824a9f1486",
+          "file": "control.spec.ts",
+          "line": 12,
+          "column": 3
+        },
+        {
+          "title": "existing workspace Objective link mounts its bound read instead of the ordinary editor",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 4244,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Objective saved Workspace revision', exact: true })\nExpected: visible\nTimeout: 3000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 3000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Objective saved Workspace revision', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Objective saved Workspace revision', exact: true })\nExpected: visible\nTimeout: 3000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 3000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Objective saved Workspace revision', exact: true })\u001b[22m\n\n    at /tmp/objective-work-baseline-d825528/control.spec.ts:20:71",
+                    "location": {
+                      "file": "/tmp/objective-work-baseline-d825528/control.spec.ts",
+                      "column": 71,
+                      "line": 20
+                    },
+                    "snippet": "  18 |     await page.goto(`/modules/${module}?${ids}&clientId=${clientId}&objectiveId=${objectiveId}&objectiveVersion=7`);\n  19 |     try {\n> 20 |       await expect(page.getByRole('heading',{name:title,exact:true})).toBeVisible({timeout:3000});\n     |                                                                       ^\n  21 |       expect(keys).toContain(operation);\n  22 |     } finally {\n  23 |       await info.attach('observed-operation-keys',{body:JSON.stringify(keys),contentType:'application/json'});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/objective-work-baseline-d825528/control.spec.ts",
+                        "column": 71,
+                        "line": 20
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Objective saved Workspace revision', exact: true })\nExpected: visible\nTimeout: 3000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 3000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Objective saved Workspace revision', exact: true })\u001b[22m\n\n\n  18 |     await page.goto(`/modules/${module}?${ids}&clientId=${clientId}&objectiveId=${objectiveId}&objectiveVersion=7`);\n  19 |     try {\n> 20 |       await expect(page.getByRole('heading',{name:title,exact:true})).toBeVisible({timeout:3000});\n     |                                                                       ^\n  21 |       expect(keys).toContain(operation);\n  22 |     } finally {\n  23 |       await info.attach('observed-operation-keys',{body:JSON.stringify(keys),contentType:'application/json'});\n    at /tmp/objective-work-baseline-d825528/control.spec.ts:20:71"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T09:55:27.781Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "observed-operation-keys",
+                      "contentType": "application/json",
+                      "body": "WyJ3b3Jrc3BhY2UuZHJhZnQiXQ=="
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/objective-work-baseline-d825528/artifacts/control-existing-workspace-c7cdd-tead-of-the-ordinary-editor/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/objective-work-baseline-d825528/artifacts/control-existing-workspace-c7cdd-tead-of-the-ordinary-editor/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/objective-work-baseline-d825528/artifacts/control-existing-workspace-c7cdd-tead-of-the-ordinary-editor/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/objective-work-baseline-d825528/control.spec.ts",
+                    "column": 71,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "df0f65ccd0bbb0c6ab20-49a308a7de70a74d1e02",
+          "file": "control.spec.ts",
+          "line": 12,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T09:55:15.455Z",
+    "duration": 16953.252,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}
