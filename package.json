@@ -3,8 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "workspaces": ["apps/*", "packages/*"],
-  "engines": {"node": ">=24 <25"},
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=24 <25"
+  },
   "scripts": {
     "dev": "npm run dev --workspace @capiro/web --",
     "build": "npm run build --workspace @capiro/meri-client && npm run build --workspace @capiro/web",
@@ -15,8 +20,18 @@
     "check:packages": "node scripts/public-packages.mjs",
     "test:transport": "npm test --workspace @capiro/qualification-transport",
     "check:elements": "npm run pins:check --workspace @capiro/qualification-elements && npm run check --workspace @capiro/qualification-elements",
-    "check": "npm run check:packages && npm run typecheck && npm test && npm run architecture && npm run test:transport"
+    "check": "npm run check:packages && npm run typecheck && npm test && npm run architecture && npm run test:transport && npm run lint --workspace @capiro/web && npm run format:check --workspace @capiro/web && npm run test:portfolio",
+    "test:portfolio": "npm test --workspace @capiro/web",
+    "test:browser": "npm run test:browser --workspace @capiro/web --",
+    "test:production": "node apps/web/tests/production/run-standalone.mjs"
   },
-  "devDependencies": {"@types/node": "24.0.0", "@types/react": "19.3.0", "@types/react-dom": "19.3.0", "typescript": "5.9.3"},
-  "overrides": {"uuid": "14.0.2"}
+  "devDependencies": {
+    "@types/node": "24.0.0",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "typescript": "5.9.3"
+  },
+  "overrides": {
+    "uuid": "14.0.2"
+  }
 }

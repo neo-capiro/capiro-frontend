@@ -1,5 +1,5 @@
 .target { min-height: 1040px; }
-.header { height: 65px; display: flex; align-items: center; gap: 20px; padding: 0 16px; border-bottom: 2px solid var(--border); }
+.header { border-bottom-width: 2px; }
 .brand { width: 196px; height: 32px; flex: 0 0 196px; display: flex; align-items: center; }
 .modes { display: flex; gap: 4px; padding: 4px; background: var(--muted); border-radius: 10px; }
 .mode, .action { display: flex; align-items: center; justify-content: center; padding: 0; height: 36px; width: 40px; background: transparent; border: 0; border-radius: 10px; }
@@ -20,4 +20,4 @@
 .main { flex: 1; min-width: 0; }
 .fixtureNotice { padding: 16px 28px; border-top: 1px solid var(--border); background: #fff8e7; font-size: 13px; line-height: 1.5; }
 @media (max-width: 900px) { .brand { width: 120px; flex-basis: 120px; } .globalActions { gap: 2px; } .sidebar { flex-basis: 210px; width: 210px; padding: 12px 5px; } }
-@media (max-width: 680px) { .header { gap: 8px; padding: 0 12px; } .brand { width: 77px; flex-basis: 77px; } .globalActions .action:not(:last-child) { display: none; } .sidebar { display: none; } }
+@media (max-width: 680px) { .brand { width: 77px; flex-basis: 77px; } .globalActions .action:not(:last-child) { display: none; } .sidebar { display: none; } }

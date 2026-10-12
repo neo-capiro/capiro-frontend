@@ -1,0 +1,48 @@
+{
+  "recordedAt": "2026-10-12T01:21:39.475Z",
+  "content": [
+    {
+      "type": "text",
+      "text": "Action completed."
+    }
+  ],
+  "structuredContent": {
+    "url": "https://github.com/neo-capiro/capiro-frontend/pull/4",
+    "number": 4,
+    "state": "open",
+    "merged": false,
+    "mergeable": true,
+    "draft": true,
+    "body": "Meri Home, cited answer and run-workspace source are preserved at head 3cc30ff3182e8050d563516607866cf07efe2aef, tree d67a73f5a3d68ed3d927d3611b5f8377f826f9b1 (source-equivalent local d792cb5791a998dc886c74d24da086703879878f). Original PR1 history is retained; integrate this consolidated PR, not a duplicate PR1.\n\nUses the existing Next apps/web, AI SDK Elements Conversation/Message/PromptInput and canonical public 0.1 transport projection. Eight run states and tool/evidence/approval/artifact/checkpoint/usage reference displays are contract-limited; fixtures do not imply live actions or recovery. Figma section/frame references, actual browser evidence and a 280-file context inventory are committed. No Portfolio or Modules UI is implemented here beyond the navigation toggle.\n\nAuthor checks: 29 root tests, 21 transport tests, types, pins, architecture, clean build and 7 actual browser cases. Primary review: 17 focused architecture checks and 7 browser cases, byte-preservation audit and Figma screenshot binding; it borrowed the author's build and does not claim a second clean build.\n\nSOURCE PRESERVATION ONLY. Portfolio consolidation precedes shared-shell integration: one apps/web, one reviewed image, existing portfolio-preview.app.capiro.ai origin, shared HeaderFrame and authentication/client scope ownership pending reconciliation. No separate Meri UI deployment, no AWS writes, no main merge or production admission.",
+    "title": "Preserve Figma-based Meri Home, cited answer and run workspace in the shared frontend",
+    "base": "main",
+    "base_sha": "02c02d95bdf3949662b9123f425271c6491ffdab",
+    "head": "task/meri-ui-publish-20261011",
+    "head_sha": "3cc30ff3182e8050d563516607866cf07efe2aef",
+    "head_repo_id": 1413425685,
+    "head_repo_full_name": "neo-capiro/capiro-frontend",
+    "merge_commit_sha": "17311134309b77b6810f607dd624b533ba04d235",
+    "user": {
+      "login": "neo-capiro",
+      "name": "neo-capiro",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/276034435?v=4",
+      "id": 276034435
+    },
+    "requested_reviewers": null,
+    "requested_team_reviewers": null,
+    "diff": null,
+    "comments": null,
+    "created_at": "2026-10-11T21:40:23Z",
+    "updated_at": "2026-10-12T01:12:00Z",
+    "closed_at": null,
+    "merged_at": null,
+    "commits": 8,
+    "changed_files": 199,
+    "additions": 16529,
+    "deletions": 23,
+    "display_url": "https://github.com/neo-capiro/capiro-frontend/pull/4",
+    "display_title": "Preserve Figma-based Meri Home, cited answer and run workspace in the shared frontend"
+  },
+  "isError": false
+}

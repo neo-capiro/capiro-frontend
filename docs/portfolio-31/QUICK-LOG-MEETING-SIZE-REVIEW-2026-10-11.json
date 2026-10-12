@@ -1,0 +1,11 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/QuickLog.tsx",
+    "kind": "function",
+    "symbol": "QuickLog",
+    "fingerprint": "527bbeee1ca91882b2c5f5970be50d48019bdeafc020c22bf239a05ab28f6850",
+    "reason": "QuickLog composes one existing activity form and its exact saved-entry Undo presentation. The added meeting entry is a type=button navigation control, guarded by this form's current canCreate, pending and uncertain state, with the existing current client encoded into the established Calendar creation URL. Its button and caption remain beside the activity kind because they distinguish the two existing recording paths at the point of entry. The 108-line body does not add meeting transport, duration, draft projection or service state; activity authority, lifetime, persistence and receipts remain in useQuickLog, and meeting input stays in Calendar. A second controller or extracted form would split the one coupled form-action gate without removing an independent responsibility. The separate 17-line CSS module owns only the new row's desktop/phone wrapping and existing button presentation.",
+    "reviewedBy": "Codex portfolio_objectives (author responsibility review; integration confirmation pending)",
+    "reviewedOn": "2026-10-11"
+  }
+]

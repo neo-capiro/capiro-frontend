@@ -1,0 +1,29 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/facility-map-mutations.ts",
+    "kind": "function",
+    "symbol": "useFacilityAction",
+    "fingerprint": "6b26718a26a14c0b8a4c00cb7bdd6e68c0069c94a9f738d5b2960dbdc1b75b31",
+    "reason": "Owns the lifetime of one explicit address-resolution action against a current facility source: availability, scoped attempt state, cache-event cancellation, matched completion effects, definite versus unknown failure, and explicit saved-state review. Native body and receipt validation are delegated to facility-action-writer, session-local attempt persistence to facility-action-attempt, and rendering to separate views. Geocode, resolve, and reviewed choice share the same facility action lifetime; no CRUD or other feature workflow is introduced. Captured source and actor gates remain visibly adjacent to their effects.",
+    "reviewedOn": "2026-10-11",
+    "reviewedBy": "portfolio_calendar_relationships"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/facility-map-mutations.ts",
+    "kind": "function",
+    "symbol": "useFacilityAction > run",
+    "fingerprint": "347a287a7e58a5866f036daceedd821f3eb90e182ccea3d4fffd895b0291128a",
+    "reason": "Owns one explicit provider-action dispatch from preflight through settlement. Its branches distinguish pre-dispatch refusal, native matched receipt, definite native refusal, and dispatched uncertainty; each branch settles the same token and its cache/UI effects. The source watcher is a separate named closure, current GET review is another operation, and native request/receipt validation is delegated. Keeping cleanup in finally beside the receipt/error paths makes it possible to review that obsolete attempts cannot clear a newer token or refresh a replacement view.",
+    "reviewedOn": "2026-10-11",
+    "reviewedBy": "portfolio_calendar_relationships"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/FacilityGeocoding.tsx",
+    "kind": "function",
+    "symbol": "CurrentFacilityGeocoding",
+    "fingerprint": "ad0deafc1a01b241a2cb418b51d2486d5f6e95fbc26711f8b6b0a18ce1cf508c",
+    "reason": "Owns the current facility address-resolution presentation: native status and boundary provenance, displayed candidate choices, the explicit resolve/retry controls, and a delegated status/review view. It has no direct API, receipt parsing, unknown-attempt storage, or query invalidation. Actor/client/facility lifetime is established by its keyed wrapper and dedicated controller; the view only supplies the actual displayed candidate index and returned revision.",
+    "reviewedOn": "2026-10-11",
+    "reviewedBy": "portfolio_calendar_relationships"
+  }
+]

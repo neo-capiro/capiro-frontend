@@ -1,5 +1,45 @@
 # Capiro 3.1 Portfolio — portable session handover
 
+## Current continuation takes precedence
+
+The 12 October UTC coordination follow-up additionally preserves all existing
+merge/deployment holds and starts no new credential or AWS action. Read the
+[proposed shared integration contract](../../SHARED-INTEGRATION-CONTRACT-2026-10-12.md):
+Meri consolidation is frontend draft PR #4 at freshly checked
+`e141d68f8954ba6c76327bcbed94739d28e0a902`, preserving PR #1 history. Never integrate
+both as separate contributions. Common-shell ownership remains proposed pending
+Meri/Modules reconciliation; desired Portfolio-at-`/` and common auth/client
+context are explicitly flagged against the current source.
+
+Portfolio's latest locally integrated product source is
+`d4c613985b69bc80cd3af28ed2c48c29335c770d`, adding current-list linked-file arrival
+to the previous `75409a96` checkpoint. The Tracker slices and final combined
+qualification are still pending; the historical evidence below is not a claim
+that this current source has passed those release gates.
+
+The owner subsequently instructed this session to work independently without
+`capiro-agent-ops`, implement **Portfolio only**, use existing `capirov2` services,
+keep code organized and reference the supplied Figma design. Missing Portfolio
+UI components may be authored in Figma before implementation. The historical
+policy-repository stop rule below is **superseded by that direct user waiver**.
+
+Read [the current continuation and restart](../CONTINUATION-2026-10-11.md) first.
+Portfolio has now been consolidated into the canonical **`apps/web`** application;
+the former `apps/portfolio-web` is no longer an active source/build owner. The
+continuation branch is local pending authenticated publication, and its exact
+code, test and publication status is recorded in that note. Additional frontend
+implementation and final signed-in acceptance remain open.
+The latest integrated source checkpoint is `75409a9`: Documents, Advocacy and
+Saved submissions are included, while the supported Tracker follow-on and the
+combined release verification remain in progress.
+
+The ledger preserves every original packet row and earlier delta and adds
+canonical paths and separately scoped continuation evidence. It still contains
+345 IDs, 337 open rows, seven packet exclusions, the owner exclusion `CORE-018`
+and zero accepted complete. The remainder of this handover records the **earlier
+19:25 UTC checkpoint**; deployment, source paths, counts and restart requirements
+there must not override the current continuation or fresh read-back.
+
 Status captured **2026-10-11, about 19:25 UTC**. This directory is intended for a new session in a web browser or on another machine. All linked source, plans, matrix files, and row-level reconciliation are in private GitHub repositories. It does not depend on the previous machine's checkout, packet ZIP, or generated `outputs` directory. The historical packet and evidence files retain some old local paths; treat those as provenance, not instructions for the new host.
 
 ## One-minute state
@@ -62,6 +102,21 @@ The packet [phase audit map](./phase-audit-map.csv) assigns each ID to P0–P6 a
 The [row summary](./Portfolio-345-Row-Reconciliation-Summary-2026-10-11.md) records two small merged frontend slices (`CORE-002` search and `CORE-078` billing link) plus nine **read-only contract reviews**. None closes its audit row. Contract documents are [email sender](./Email-Prep-Sender-Contract-Review-2026-10-11.md), [Quick Log commitment](./Quick-Log-Commitment-Contract-Review-2026-10-11.md), [prospect Files/Workspace](./Prospect-Files-Workspace-Contract-Review-2026-10-11.md), [ordered client owners](./Ordered-Client-Owners-Contract-Review-2026-10-11.md), and [Objective cross-navigation](./Objective-Cross-Navigation-Contract-Review-2026-10-11.md). Backend product/owner decisions, UI implementation, real signed-in behavior and final per-row verification remain where each review says OPEN.
 
 ## Safe restart on a different machine
+
+Follow the seven current restart steps in
+[CONTINUATION-2026-10-11.md](../CONTINUATION-2026-10-11.md#current-checkpoint-and-restart).
+They cover current branch/publication verification, repository instructions,
+canonical `apps/web` ownership, Figma and native contract references, the unchanged
+345-ID acceptance ledger, fixed-source tests and authenticated preview read-back.
+The owner's `capiro-agent-ops` waiver remains effective. Preserve other authors'
+work and verify exact AWS/account/preview scope before any shipment or resource
+change. The current continuation's local branch must be published or transferred
+explicitly before a different machine can fetch that work.
+
+## Historical restart procedure at the earlier checkpoint
+
+The following procedure is preserved as provenance. Its policy-repository
+prerequisite, source layout and earlier test counts are superseded above.
 
 1. Authenticate to all **four** private GitHub repositories. Clone/fetch `neo-capiro/capiro-agent-ops` first; follow its `BOOTSTRAP.md`, read `AGENTS.md`, create/verify that host's ignored `machine-paths.local.yaml`, record current policy SHA and map revision. For Hermes or QA board work, read the additional rules above. If remote main has changed since this record, follow the current policy. If policy is unreachable, stop.
 2. Fetch `neo-capiro/capiro-frontend` and `neo-capiro/meri-greenfield`; verify their current `main` heads include the merged transfer and removal commits above. Read frontend [AGENTS.md](https://github.com/neo-capiro/capiro-frontend/blob/8e8e6999c385beccd245e94e8f32a8a3120e8131/AGENTS.md), [architecture](https://github.com/neo-capiro/capiro-frontend/blob/8e8e6999c385beccd245e94e8f32a8a3120e8131/docs/ARCHITECTURE.md), and implementation standards before code changes. Continue shared-shell consolidation in the frontend repository; keep Meri backend services/contracts in its repository. Fetch `neo-capiro/capirov2` read-only first for Portfolio/Modules backend contracts; inspect status/origin/main and avoid touching a dirty primary checkout. Use isolated worktrees for new implementation.

@@ -1,0 +1,225 @@
+{
+  "blockingFindings": [],
+  "boundArtifacts": [
+    {
+      "bytes": 3906,
+      "path": "context_delivery.py",
+      "sha256": "f2ddd5700397706469fde9a2af7841ae113538bf661690751bc6637c36e453a4"
+    },
+    {
+      "bytes": 4426,
+      "path": "split_context.py",
+      "sha256": "b5e7b4a21b4f8228eb65c6a3234ed026308c29632e5eaba95490426a81366771"
+    },
+    {
+      "bytes": 4844,
+      "path": "prepare_context.py",
+      "sha256": "e0fc62fb4f2373222bdf6bb8c9d0119b4c05ada108740a3b35f2ab7090f0b319"
+    },
+    {
+      "bytes": 10416,
+      "path": "context_common.py",
+      "sha256": "8633a0f83cc28e54ea65c9bb99300090861fbfe35d0a16efd40d5e15e3d0c800"
+    },
+    {
+      "bytes": 2116,
+      "path": "context-delivery.json",
+      "sha256": "2e64be7670e860809a63781e17e683f1d1a10ad5857a23b5bce305e7c3e09ed5"
+    },
+    {
+      "bytes": 7620,
+      "path": "context-delivery-qualification.json",
+      "sha256": "afb7cbd1faeb69c23dcab189879d1d9c9704084d42b9a48e60157eb9c5efd0a3"
+    },
+    {
+      "bytes": 755,
+      "path": "context-delivery-ENOSPC-attempt.json",
+      "sha256": "19a30c9ee4caff73a346dffe8151634273620f8b23719dbe4d1aa1340281da89"
+    },
+    {
+      "bytes": 4830,
+      "path": "CONTEXT-DELIVERY.md",
+      "sha256": "8a274a3e9e5af625f3395cd4693494cd4da2e3dbd501a1409cd42f7104ce3fc6"
+    },
+    {
+      "bytes": 1600,
+      "path": "context-delivery-packs-only/context-delivery.json",
+      "sha256": "fae8e3661df3c26dbe501193f1fe5cfa9d009568ccbdf60fa4a6276d584ce875"
+    },
+    {
+      "bytes": 6712,
+      "path": "context-delivery-packs-only/context-delivery-qualification.json",
+      "sha256": "e5ac76bfa43b76a909fb4a513cb6e9a833ab35768de086d89a851e7b927a6932"
+    },
+    {
+      "bytes": 7991,
+      "path": "direct-artifact-review.json",
+      "sha256": "f20f9104960815f0414215fe55c23c7b6659cb835f7f6ddec033fab5c61aa11b"
+    },
+    {
+      "bytes": 2035,
+      "path": "direct-artifact-history-resolution.json",
+      "sha256": "0a3cde2743f510e222aa9678c2580cf72a1b3a5700fef3a9792976bbd0998124"
+    },
+    {
+      "bytes": 11279,
+      "path": "collector-independent-review.json",
+      "sha256": "d7b6296e3107a49db8f2048c257877019c34712c3d07c5214bac62319b1e1fd2"
+    },
+    {
+      "bytes": 3431,
+      "path": "collector-final-binding-review.json",
+      "sha256": "ed6d961623e47348390d1ef9df508be265fe4ab0e459218f503e1bc4cd59980f"
+    },
+    {
+      "bytes": 253,
+      "path": "context-verification-result.json",
+      "sha256": "17bbb656a1d8ff08d1907dade487d98e9754f4a2f199900a3a27c1d305819047"
+    }
+  ],
+  "disposition": "PASS_WITH_RECORDED_LIMITS",
+  "format": "portfolio-context-delivery-independent-review-v1",
+  "historyAndPackageBinding": {
+    "manifestSha256": "c23fb2a329d4a6c314ef41bec572603049e2601168579b86d2dd94bba4aa2575",
+    "primaryHistoryBundleSha256": "591d293dee1b903e31c70e8b659beae928b04d4c1ed87c8e7a6e27416eabc8af",
+    "priorReviewRecordsRemainImmutable": true,
+    "publishedSourceEquivalentCommit": "abaeab37b36d60b3e5185755e1b2c9169d7c92f3",
+    "qualifiedLocalProductCommit": "760dcc6c1179312c7f4b762e64cf3af1aad60c3e",
+    "requiredGitBase": "02c02d95bdf3949662b9123f425271c6491ffdab",
+    "sourceTree": "46417a01484727747b0a2d81b3b4f278285cb709"
+  },
+  "independentByteChecks": {
+    "allEightPartsIndividuallyHashed": true,
+    "concatenationsMatchOriginalBytes": true,
+    "originals": [
+      {
+        "parts": [
+          {
+            "path": "manifest.json.part-00001",
+            "sha256": "3b81f42f38d46100802ab2051d375b466c03ee3491b0264c9ec416a7ffaa69fe",
+            "size": 8388608
+          },
+          {
+            "path": "manifest.json.part-00002",
+            "sha256": "8a5117aaabd97b761a52bef41ba0ed3d798ebe8e8db0bdd5989e79f675aeadcf",
+            "size": 7373617
+          }
+        ],
+        "path": "manifest.json",
+        "sha256": "c23fb2a329d4a6c314ef41bec572603049e2601168579b86d2dd94bba4aa2575",
+        "size": 15762225
+      },
+      {
+        "parts": [
+          {
+            "path": "context-00005.tar.gz.part-00001",
+            "sha256": "4f76f9bf49a4fdad52cc8ed3d1c852925085027565ad153b69c98f19d98d432e",
+            "size": 8388608
+          },
+          {
+            "path": "context-00005.tar.gz.part-00002",
+            "sha256": "f72d24077b4836db4a89d3d0b2702e0103146f17a9ff199bc10763504f72ab2d",
+            "size": 8388608
+          },
+          {
+            "path": "context-00005.tar.gz.part-00003",
+            "sha256": "c429fd53be596f172639dfd96ce3cf109f2eccc5e43d72300623c03845cca0d9",
+            "size": 3624724
+          }
+        ],
+        "path": "packs/context-00005.tar.gz",
+        "sha256": "930a0d1bc7ab99ba06996a35a65d3af0dce1466e28d495f218c2e2704c4aa8ac",
+        "size": 20401940
+      },
+      {
+        "parts": [
+          {
+            "path": "context-00132.tar.gz.part-00001",
+            "sha256": "5eca5ecaf62b75592984bd03eaf63c73218f962d85df223f039bcc0b0462cf98",
+            "size": 8388608
+          },
+          {
+            "path": "context-00132.tar.gz.part-00002",
+            "sha256": "f5d0eb12a334c2bac4f6c0c193788cfa19b24ae6f7bcf9236aafcd9de19371fa",
+            "size": 8388608
+          },
+          {
+            "path": "context-00132.tar.gz.part-00003",
+            "sha256": "fca08b61ada9d6642c46c9facc727c639b0c4e4cb4638f9c8d4b59b720d57995",
+            "size": 3083602
+          }
+        ],
+        "path": "packs/context-00132.tar.gz",
+        "sha256": "3d4b12a71d25920ebb8e652a93dd897139e4bc329fed35b9da6e26a909070c02",
+        "size": 19860818
+      }
+    ],
+    "priorPackRecordsAndSixPartHashesUnchanged": true
+  },
+  "limits": [
+    "This pass qualifies the reviewed transport-preservation mechanism and exact local receipt; final GitHub handover commit/blob readback remains the integration owner's publication step.",
+    "The existing verifier retains credentialReview=ROOT_REVIEW_REQUIRED. Root's separate manual disposition must accompany publication; this review does not assert universal credential absence.",
+    "The qualified primary Git bundle requires the existing 02c base; its exact history-restoration receipt supersedes the original shallow all-ref bundle's standalone-recovery assumption while preserving that historical bundle.",
+    "The final combined production build, actual-production smoke, full browser suite and signed-in/hosted acceptance after source760 remain separate pending product gates; no audit rows are closed by these preservation checks.",
+    "Previously recorded Watchlist receipt/mixed-read finding, PhoneVerification requested-state copy, and old Core-entry assertion follow-ups remain open; no product code was changed during this review."
+  ],
+  "reviewedAt": "2026-10-12T02:02:09.428584+00:00",
+  "reviewedBy": "/root/portfolio_prospects_files",
+  "reviewedQualification": {
+    "allPackageFilesMatch": 370,
+    "allThreeOriginalsAbsentInPublishedFixture": true,
+    "coveredRefusals": [
+      "existing target",
+      "manifest traversal before target creation",
+      "manifest relocation outside exact manifest.json",
+      "corrupt manifest part before target creation"
+    ],
+    "generatedFinalQualificationLayoutIndependentlyObservedAbsent": true,
+    "methodLimit": "Qualification execution is evidenced by the exact P2 receipt and its raw command/stdout/stderr fields; this reviewer independently read and validated the bindings and bytes rather than running another materialization.",
+    "ordinaryFilesCopied": 367,
+    "originalsReassembled": 3,
+    "passedCases": 7,
+    "path": "context-delivery-qualification.json",
+    "previousQualificationKeptSeparate": {
+      "countsNotAggregated": true,
+      "passedCases": 8,
+      "path": "context-delivery-packs-only/context-delivery-qualification.json",
+      "sha256": "e5ac76bfa43b76a909fb4a513cb6e9a833ab35768de086d89a851e7b927a6932"
+    },
+    "resourceFailurePreserved": {
+      "disposition": "Failed transport materialization attempt retained separately; no product-test failure or successful reconstruction claim attached to it.",
+      "path": "context-delivery-ENOSPC-attempt.json",
+      "sha256": "19a30c9ee4caff73a346dffe8151634273620f8b23719dbe4d1aa1340281da89"
+    },
+    "sha256": "afb7cbd1faeb69c23dcab189879d1d9c9704084d42b9a48e60157eb9c5efd0a3",
+    "verifiedResult": {
+      "credentialReview": "ROOT_REVIEW_REQUIRED",
+      "files": 35264,
+      "historyBundleVerified": true,
+      "manifestSha256": "c23fb2a329d4a6c314ef41bec572603049e2601168579b86d2dd94bba4aa2575",
+      "metadataFiles": 202,
+      "packs": 166,
+      "uniqueBlobs": 9729,
+      "verified": true
+    }
+  },
+  "scope": "Read-only source, original-file/part hashing, receipt and recovery-guide review. No product tests, builds, browser, splitter, materializer, verifier or AWS command executed by this reviewer.",
+  "sourceAssessment": [
+    {
+      "assessment": "The descriptor allows canonical direct packs/*.tar.gz records plus one optional record whose only allowed path is exactly manifest.json. The common original validator retains exact ordered canonical part names, SHA-256, length and 8 MiB boundaries; no arbitrary extra original path is admitted.",
+      "owner": "context_delivery.py"
+    },
+    {
+      "assessment": "Original file bytes are read and checked before/during/after splitting. Existing exact parts are reused, differing parts and changed/disappeared prior records are refused, and descriptor replacement requires the prior descriptor bytes to remain unchanged. The manifest extension leaves prior pack records and all six prior part bytes intact.",
+      "owner": "split_context.py"
+    },
+    {
+      "assessment": "The target must be a new directory outside the handover. Ordinary inputs and parts are checked before creation; source symlinks/traversal/nonregular entries are rejected. Ordinary copies and ordered reconstruction use exclusive writes and complete-file hashes. The exact manifest is reconstructed before the existing verifier is invoked by the documented next step; failures may leave only explicitly unverified partial output.",
+      "owner": "prepare_context.py"
+    },
+    {
+      "assessment": "The published layout and CLI now explicitly cover eight parts, three optionally absent originals, the trusted c23 manifest, new-target behavior, original bundle prerequisite, and mandatory existing verification before restoration. The guide makes no Portfolio product-acceptance claim.",
+      "owner": "CONTEXT-DELIVERY.md"
+    }
+  ]
+}

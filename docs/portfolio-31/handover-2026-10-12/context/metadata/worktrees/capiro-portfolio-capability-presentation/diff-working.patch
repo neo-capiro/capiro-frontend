@@ -1,0 +1,461 @@
+diff --git a/apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx b/apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx
+index d31535e105e1cd66c0eed44314b93e3616681d3d..d1ba0481a5674d96fd00ee40cee8db0b47f0670d 100644
+--- a/apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx
++++ b/apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx
+@@ -1,13 +1,14 @@
+ "use client";
+-import { TextareaField } from "@/shared/portfolio/ui/TextareaField";
+-import { useState } from "react";
++import { useRef, useState } from "react";
++import { Tabs } from "radix-ui";
+ import { Dialog } from "@/shared/portfolio/ui/Dialog";
+-import { TokenInput } from "@/shared/portfolio/ui/TokenInput";
+ import { QueryState } from "@/shared/portfolio/ui/QueryState";
+-import { type Capability } from "./contracts";
+ import { EntityDocuments } from "@/features/portfolio/files/public";
++import type { Capability } from "./contracts";
+ import { useCapabilityMutation } from "./mutations";
+-import styles from "./capabilities.module.css";
++import { CapabilityForm } from "./CapabilityForm";
++import styles from "./capability-editor.module.css";
++
+ export function CapabilityEditor({
+   clientId,
+   capability,
+@@ -19,17 +20,10 @@ export function CapabilityEditor({
+   open: boolean;
+   onClose: () => void;
+ }) {
+-  const [tags, setTags] = useState(capability?.tags ?? []);
+-  const [pes, setPes] = useState(
+-    capability?.peNumbers.length
+-      ? capability.peNumbers
+-      : capability?.peNumber
+-        ? [capability.peNumber]
+-        : [],
+-  );
+-  const [keywords, setKeywords] = useState(capability?.keywords ?? []);
+-  const [trl, setTrl] = useState(capability?.trl ?? null);
++  const [tab, setTab] = useState("profile");
+   const [remove, setRemove] = useState(false);
++  const opener = useRef<HTMLElement | null>(null);
++  const profileTab = useRef<HTMLButtonElement>(null);
+   const mutation = useCapabilityMutation(
+     clientId,
+     capability?.id,
+@@ -37,165 +31,80 @@ export function CapabilityEditor({
+     onClose,
+   );
+   const saving = mutation.isPending && mutation.variables?.type === "save";
++  const form = (
++    <CapabilityForm
++      capability={capability}
++      disabled={!mutation.canWrite || mutation.isPending}
++      saving={saving}
++      pending={mutation.isPending}
++      error={mutation.variables?.type === "save" ? mutation.error : undefined}
++      onSave={(body) => mutation.mutate({ type: "save", body })}
++      onRemove={() => setRemove(true)}
++      onCancel={onClose}
++    />
++  );
+   return (
+     <Dialog
+       open={open}
+       onOpenChange={(value) => {
+         if (!value && !mutation.isPending) onClose();
+       }}
++      onOpenAutoFocus={(event) => {
++        opener.current =
++          document.activeElement instanceof HTMLElement
++            ? document.activeElement
++            : null;
++        event.preventDefault();
++        if (capability) profileTab.current?.focus();
++        else if (event.target instanceof HTMLElement)
++          event.target
++            .querySelector<HTMLInputElement>('input[name="name"]')
++            ?.focus();
++      }}
++      onCloseAutoFocus={(event) => {
++        if (opener.current?.isConnected) {
++          event.preventDefault();
++          opener.current.focus();
++        }
++      }}
+       title={capability ? `Capability: ${capability.name}` : "New capability"}
++      className={`${styles.dialog} ${capability ? styles.saved : ""}`}
+     >
+-      <form
+-        className="stack"
+-        onSubmit={(event) => {
+-          event.preventDefault();
+-          const form = new FormData(event.currentTarget);
+-          mutation.mutate({
+-            type: "save",
+-            body: {
+-              name: String(form.get("name")).trim(),
+-              type: String(form.get("type")),
+-              sector: String(form.get("sector")) || null,
+-              description: String(form.get("description")),
+-              tags,
+-              issueCodes: capability?.issueCodes ?? [],
+-              trl,
+-              mrl: form.get("mrl") ? Number(form.get("mrl")) : null,
+-              peNumbers: pes,
+-              keywords,
+-              notes: String(form.get("notes") ?? ""),
+-            },
+-          });
+-        }}
+-      >
+-        <fieldset
+-          className={`stack ${styles.editorFields}`}
+-          disabled={!mutation.canWrite || mutation.isPending}
+-        >
+-          <label>
+-            Name
+-            <input
+-              name="name"
+-              required
+-              defaultValue={capability?.name}
+-              autoFocus
+-              maxLength={300}
+-            />
+-          </label>
+-          <div className={`formGrid ${styles.typeSector}`}>
+-            <label>
+-              Type
+-              <input
+-                name="type"
+-                defaultValue={capability?.type ?? "product"}
+-                maxLength={120}
+-              />
+-            </label>
+-            <label>
+-              Sector
+-              <input
+-                name="sector"
+-                defaultValue={capability?.sector ?? ""}
+-                maxLength={120}
++      {capability ? (
++        <Tabs.Root value={tab} onValueChange={setTab} className={styles.tabs}>
++          <Tabs.List
++            aria-label="Capability sections"
++            className={styles.tabList}
++          >
++            <Tabs.Trigger
++              value="profile"
++              ref={profileTab}
++              className={styles.tab}
++            >
++              Profile
++            </Tabs.Trigger>
++            <Tabs.Trigger value="documents" className={styles.tab}>
++              Documents
++            </Tabs.Trigger>
++          </Tabs.List>
++          <Tabs.Content value="profile" forceMount className={styles.tabPanel}>
++            {form}
++          </Tabs.Content>
++          <Tabs.Content value="documents" className={styles.tabPanel}>
++            <div className={styles.documents}>
++              <p className={styles.caption}>
++                Documents added here are scoped to this capability and also
++                appear in the client’s Files tab.
++              </p>
++              <EntityDocuments
++                clientId={clientId}
++                source={`capability:${capability.id}`}
+               />
+-            </label>
+-          </div>
+-          <fieldset>
+-            <legend>Technology Readiness Level · {trl ?? "Not set"}</legend>
+-            <div className="row">
+-              {Array.from({ length: 9 }, (_, i) => i + 1).map((level) => (
+-                <button
+-                  type="button"
+-                  key={level}
+-                  className={`button ${trl !== null && level <= trl ? "primary" : ""}`}
+-                  aria-label={`TRL ${level}`}
+-                  aria-pressed={trl === level}
+-                  onClick={() => setTrl(level)}
+-                >
+-                  {level}
+-                </button>
+-              ))}
+-              <button
+-                type="button"
+-                className="button ghost"
+-                onClick={() => setTrl(null)}
+-              >
+-                Clear TRL
+-              </button>
+             </div>
+-          </fieldset>
+-          <label>
+-            Manufacturing Readiness Level
+-            <select name="mrl" defaultValue={capability?.mrl ?? ""}>
+-              <option value="">Not set</option>
+-              {Array.from({ length: 10 }, (_, i) => i + 1).map((level) => (
+-                <option key={level}>{level}</option>
+-              ))}
+-            </select>
+-          </label>
+-          <TokenInput label="Tags" value={tags} onChange={setTags} />
+-          {capability && (
+-            <>
+-              <TokenInput label="PE numbers" value={pes} onChange={setPes} />
+-              <TokenInput
+-                label="Match keywords"
+-                value={keywords}
+-                onChange={setKeywords}
+-              />
+-            </>
+-          )}
+-          <TextareaField
+-            label="Description"
+-            name="description"
+-            defaultValue={capability?.description ?? ""}
+-            maxLength={20000}
+-          />
+-          <TextareaField
+-            label="Notes"
+-            name="notes"
+-            defaultValue={capability?.notes ?? ""}
+-            maxLength={20000}
+-          />
+-          {!capability && (
+-            <small>
+-              Save first to add PE numbers, match keywords and documents to the
+-              saved record.
+-            </small>
+-          )}
+-          <QueryState
+-            error={
+-              mutation.variables?.type === "save" ? mutation.error : undefined
+-            }
+-          />
+-          <div className="formActions">
+-            {capability && (
+-              <button
+-                type="button"
+-                className="button ghost"
+-                disabled={!mutation.canWrite || mutation.isPending}
+-                onClick={() => setRemove(true)}
+-              >
+-                Remove capability
+-              </button>
+-            )}
+-            <button
+-              className="button primary"
+-              disabled={!mutation.canWrite || mutation.isPending}
+-            >
+-              {saving
+-                ? "Saving…"
+-                : capability
+-                  ? "Save capability"
+-                  : "Add capability"}
+-            </button>
+-          </div>
+-        </fieldset>
+-      </form>
+-      {capability && (
+-        <EntityDocuments
+-          clientId={clientId}
+-          source={`capability:${capability.id}`}
+-        />
++          </Tabs.Content>
++        </Tabs.Root>
++      ) : (
++        form
+       )}
+       <Dialog
+         open={remove}
+diff --git a/apps/web/src/features/portfolio/capabilities/capabilities.module.css b/apps/web/src/features/portfolio/capabilities/capabilities.module.css
+index f49382ac17d8d91d9818ad7c5253659b24c17b9e..dcbfabc051265e9711a85ae835ec1e2a0944c02b 100644
+--- a/apps/web/src/features/portfolio/capabilities/capabilities.module.css
++++ b/apps/web/src/features/portfolio/capabilities/capabilities.module.css
+@@ -22,12 +22,6 @@
+ .card :global(.monogram) {
+   border-radius: 50%;
+ }
+-.typeSector:global(.formGrid) {
+-  gap: 12px;
+-}
+-.typeSector > label {
+-  min-width: 0;
+-}
+ .editorFields {
+   border: 0;
+   margin: 0;
+diff --git a/apps/web/src/shared/portfolio/ui/TokenInput.tsx b/apps/web/src/shared/portfolio/ui/TokenInput.tsx
+index 67dd98401a278959b5ab0a2aee19c71257591947..d50487032c3d562a50aadd6cf57846d2e698bcae 100644
+--- a/apps/web/src/shared/portfolio/ui/TokenInput.tsx
++++ b/apps/web/src/shared/portfolio/ui/TokenInput.tsx
+@@ -1,16 +1,20 @@
+ "use client";
+-import { useState } from "react";
++import { useId, useState } from "react";
++import styles from "./token-input.module.css";
+ export function TokenInput({
+   label,
+   value,
+   onChange,
+   placeholder,
++  layout = "stacked",
+ }: {
+   label: string;
+   value: string[];
+   onChange: (value: string[]) => void;
+   placeholder?: string;
++  layout?: "stacked" | "inline";
+ }) {
++  const inputId = useId();
+   const [draft, setDraft] = useState("");
+   const add = () => {
+     const tokens = draft
+@@ -20,38 +24,51 @@ export function TokenInput({
+     if (tokens.length) onChange([...new Set([...value, ...tokens])]);
+     setDraft("");
+   };
++  const input = (
++    <input
++      id={inputId}
++      value={draft}
++      placeholder={placeholder ?? "Add a value and press Enter"}
++      onChange={(e) => setDraft(e.target.value)}
++      onBlur={add}
++      onKeyDown={(e) => {
++        if (e.key === "Enter" || e.key === ",") {
++          e.preventDefault();
++          add();
++        }
++      }}
++    />
++  );
++  const tokens = value.map((token) => (
++    <span className={layout === "inline" ? styles.token : "chip"} key={token}>
++      {layout === "inline" ? <span>{token}</span> : token}
++      <button
++        type="button"
++        className={layout === "inline" ? styles.remove : "button ghost"}
++        aria-label={`Remove ${token} from ${label}`}
++        onClick={() => onChange(value.filter((v) => v !== token))}
++      >
++        ×
++      </button>
++    </span>
++  ));
++  if (layout === "inline")
++    return (
++      <div className={styles.inline}>
++        <label htmlFor={inputId}>{label}</label>
++        <div className={styles.field}>
++          {tokens}
++          {input}
++        </div>
++      </div>
++    );
+   return (
+     <div className="stack" style={{ gap: 6 }}>
+       <label>
+         {label}
+-        <input
+-          value={draft}
+-          placeholder={placeholder ?? "Add a value and press Enter"}
+-          onChange={(e) => setDraft(e.target.value)}
+-          onBlur={add}
+-          onKeyDown={(e) => {
+-            if (e.key === "Enter" || e.key === ",") {
+-              e.preventDefault();
+-              add();
+-            }
+-          }}
+-        />
++        {input}
+       </label>
+-      <div className="row">
+-        {value.map((token) => (
+-          <span className="chip" key={token}>
+-            {token}
+-            <button
+-              type="button"
+-              className="button ghost"
+-              aria-label={`Remove ${token} from ${label}`}
+-              onClick={() => onChange(value.filter((v) => v !== token))}
+-            >
+-              ×
+-            </button>
+-          </span>
+-        ))}
+-      </div>
++      <div className="row">{tokens}</div>
+     </div>
+   );
+ }
+diff --git a/apps/web/tests/browser/capability-boundary.spec.ts b/apps/web/tests/browser/capability-boundary.spec.ts
+index 42a33dc56652e5e416ee10f8526b0a3e6daa6cec..4eb812f145897934c94078b847d1f9e9a4ddd0d6 100644
+--- a/apps/web/tests/browser/capability-boundary.spec.ts
++++ b/apps/web/tests/browser/capability-boundary.spec.ts
+@@ -15,6 +15,7 @@ test("capability refresh failure removes cached cards, counts and the open edito
+   await expect(
+     page.getByRole("dialog", { name: "Capability: Test sensor" }),
+   ).toBeVisible();
++  await page.getByRole("dialog").getByText("Details", { exact: true }).click();
+   await page
+     .getByRole("dialog")
+     .getByLabel("Name", { exact: true })
+@@ -81,6 +82,7 @@ test("editing rejects a receipt for another capability without closing the draft
+   );
+   await page.goto(`/capability-boundary.html?capability=${capabilityId}`);
+   const dialog = page.getByRole("dialog", { name: "Capability: Test sensor" });
++  await dialog.getByText("Details", { exact: true }).click();
+   await dialog
+     .getByLabel("Name", { exact: true })
+     .fill("Retained synthetic draft");
+diff --git a/apps/web/tests/browser/capability-execution.spec.ts b/apps/web/tests/browser/capability-execution.spec.ts
+index 459eeefb20447bb5cb75fd99ae5012f8da9274bc..ef4ccb5277c6dbb8d117f0ba3dc52c1adca97116 100644
+--- a/apps/web/tests/browser/capability-execution.spec.ts
++++ b/apps/web/tests/browser/capability-execution.spec.ts
+@@ -67,6 +67,7 @@ for (const action of ["save", "remove"] as const)
+       const editor = page.getByRole("dialog", {
+         name: "Capability: Test sensor",
+       });
++      await editor.getByText("Details", { exact: true }).click();
+       await editor
+         .getByLabel("Name", { exact: true })
+         .fill("Original actor draft");
+@@ -129,6 +130,7 @@ test("capability save keeps a single immutable draft in flight then refreshes an
+   );
+   await page.goto(`/capability-boundary.html?capability=${capabilityId}`);
+   const editor = page.getByRole("dialog", { name: "Capability: Test sensor" });
++  await editor.getByText("Details", { exact: true }).click();
+   await editor
+     .getByLabel("Name", { exact: true })
+     .fill("Saved synthetic capability");
+diff --git a/apps/web/tests/browser/capability-opportunity-visual.spec.ts b/apps/web/tests/browser/capability-opportunity-visual.spec.ts
+index 95eb73690c8bbcd7165dcd53aa9a23177bea4ee0..66341390fa3362f57336ea96c3b8f7561af7ba6a 100644
+--- a/apps/web/tests/browser/capability-opportunity-visual.spec.ts
++++ b/apps/web/tests/browser/capability-opportunity-visual.spec.ts
+@@ -25,6 +25,7 @@ for (const screen of [
+     const editor = page.getByRole("dialog", {
+       name: "Capability: Test sensor",
+     });
++    await editor.getByText("Details", { exact: true }).click();
+     await expect(editor.getByLabel("Name", { exact: true })).toBeEnabled();
+     const type = await editor.getByLabel("Type", { exact: true }).boundingBox();
+     const sector = await editor
+diff --git a/apps/web/tests/browser/portfolio.spec.ts b/apps/web/tests/browser/portfolio.spec.ts
+index 183779ed5d23fe1c67b7e9225f096cadcfdb2f99..a1b5b91cbf102ea75f9e0bf276faacd511fa5133 100644
+--- a/apps/web/tests/browser/portfolio.spec.ts
++++ b/apps/web/tests/browser/portfolio.spec.ts
+@@ -149,6 +149,7 @@ test("capability edits invalidate the list and retain unrelated registration cod
+   const editor = page.getByRole("dialog", {
+     name: `Capability: ${capability.name}`,
+   });
++  await editor.getByText("Details", { exact: true }).click();
+   await editor.getByLabel("Name", { exact: true }).fill("Updated sensor");
+   await editor.getByRole("button", { name: "Save capability" }).click();
+   await expect(page.getByText("Updated sensor", { exact: true })).toBeVisible();

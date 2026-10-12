@@ -10,6 +10,7 @@
   },
   "exports": {
     "./button": "./src/shadcn/button.tsx",
+    "./dialog": "./src/shadcn/dialog.tsx",
     "./conversation": "./src/ai-elements/conversation.tsx",
     "./message": "./src/ai-elements/message.tsx",
     "./prompt-input": "./src/ai-elements/prompt-input.tsx"
