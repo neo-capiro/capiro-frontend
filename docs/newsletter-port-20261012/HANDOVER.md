@@ -2,7 +2,7 @@
 
 This separate branch preserves the original 179 newsletter public assets at their existing `/newsletter/*` paths. All 486,014 decoded bytes match the original C/W Git blobs, byte lengths and pinned SHA-256 inventory. The 172 PNGs, five SVGs and two attribution/license files are unchanged. This is the first bounded slice of the rich newsletter port; it does not establish rich editor, delivery, native backend or deployed-origin acceptance.
 
-The branch starts at frontend `adbc84b2251fe6b06cb7f75030026fba5b4ff498`. PR15 qualification and its later corrections remain on `integration/capiro-remaining-20261012`. No source under `apps/web/src`, shared shell/session/client/operation boundary, root manifest or lockfile changes in this slice. The current generic newsletter builder and exact saved-version OutreachV3 flow retain their original source.
+The branch starts at frontend `adbc84b2251fe6b06cb7f75030026fba5b4ff498`. PR15 qualification and its later corrections remain on `integration/capiro-remaining-20261012`. Slice1 changed no application source or manifests. Slice2 adds only the governed package, qualification workspace, exact two-export allowlist and root manifest/lock/check discovery; `apps/web/src` and the shared shell/session/client/operation boundary remain unchanged. The current generic newsletter builder and exact saved-version OutreachV3 flow retain their original source.
 
 ## Source and evidence
 
@@ -18,7 +18,7 @@ Five copied directory receipts contained temporary GitHub download URL credentia
 
 ## Coordinated next slices
 
-Follow the [implementation outline](scope-audit/OUTLINE.md). The backend already owns public `@capiro/shared/newsletter` and `@capiro/shared/newsletter-render` exports in `@capiro/shared@0.0.0`, over five pure modules. The inspected handoff does not supply a packed artifact with entry provenance and consumer qualification. The backend package owner must supply or identify that immutable distribution; the frontend integration owner will verify packed imports, declarations, browser-safe closure and render behavior before making vendor, manifest and lock changes. No replacement DTO, renderer, version or private-checkout import is proposed.
+Follow the [implementation outline](scope-audit/OUTLINE.md). The backend already owns public `@capiro/shared/newsletter` and `@capiro/shared/newsletter-render` exports in `@capiro/shared@0.0.0`, over five pure modules. The backend package owner subsequently supplied the immutable distribution at `62d057b4a17b2c038920f10b93e83e51e46239bc`, built from `fe50dc1c2de1660a036e338cf81acdcf0f2fb26a`. Slice2 now vendors that exact artifact and verifies actual packed imports, declarations, browser closure and original renderer behavior. See [package consumption](PACKED-CONSUMER.md) and its linked qualification evidence. This closes the missing-distribution prerequisite only. No replacement DTO, renderer, version or private-checkout import is proposed.
 
 Modules Workspace will own the rich document/revision editor, assets and review; Modules Engagement will own the rich stage/legacy record destination. Thin compatibility routes use the existing shared application shell. The current Outreach record validator strips `metadata.newsletterStageId`; the port must preserve the canonical rich-record distinction before dispatching records to the proper editor. Its presence is not evidence of a live data-loss event.
 
