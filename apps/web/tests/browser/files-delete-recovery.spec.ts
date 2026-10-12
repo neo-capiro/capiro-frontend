@@ -211,7 +211,7 @@ for (const status of [403, 503]) {
       return json(r, {}, 503);
     });
     await page.goto("/capability-documents.html?files");
-    const dialog = await openDelete(page);
+    let dialog = await openDelete(page);
     await dialog.getByRole("button", { name: "Confirm delete" }).click();
     await expect(dialog.getByText(/deletion outcome is unknown/)).toBeVisible();
     failed = true;
@@ -237,9 +237,14 @@ for (const status of [403, 503]) {
     await expect(
       dialog.getByRole("button", { name: "Confirm delete" }),
     ).toBeDisabled();
+    await dialog.getByRole("button", { name: "Close", exact: true }).click();
     await expect(
       page.getByRole("button", { name: `Actions for ${other.fileName}` }),
-    ).toHaveCount(1);
+    ).toBeVisible();
+    dialog = await openDelete(page);
+    await expect(
+      dialog.getByRole("button", { name: "Confirm delete" }),
+    ).toBeDisabled();
     await dialog.getByRole("button", { name: "Review current files" }).click();
     await expect(
       dialog.getByRole("button", { name: "Confirm delete" }),

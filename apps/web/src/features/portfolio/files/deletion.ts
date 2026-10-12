@@ -132,9 +132,21 @@ export async function reviewFileDeletion(
   execution.signal.addEventListener("abort", cancel, { once: true });
   try {
     // The canonical query owns loading/error authority; this always starts a fresh GET.
-    const files = await cache.fetchQuery({ ...options, staleTime: 0 });
+    let originalRead: AbortSignal | undefined;
+    const files = await cache.fetchQuery({
+      ...options,
+      staleTime: 0,
+      queryFn: (request) => {
+        originalRead ??= request.signal;
+        return options.queryFn(request);
+      },
+    });
     execution.guard();
     if (
+      // A silently canceled TanStack fetch can adopt a replacement read's promise.
+      // Only this review's original native dispatch can release its uncertainty.
+      !originalRead ||
+      originalRead.aborted ||
       !currentFilesAvailable(cache, clientId) ||
       cache.getQueryState(queryKey)?.dataUpdateCount !== before + 1
     )

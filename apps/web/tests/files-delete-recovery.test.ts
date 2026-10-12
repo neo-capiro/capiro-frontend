@@ -287,7 +287,7 @@ it.each([403, 503])(
 );
 
 it.each([200, 403])(
-  "a superseded review returning %s cannot replace or poison a newer successful collection",
+  "a silently superseded review returning %s cannot replace or poison a newer successful collection",
   async (status) => {
     let release!: (response: Response) => void;
     let reads = 0;
@@ -306,11 +306,10 @@ it.each([200, 403])(
     const rejected = expect(review).rejects.toMatchObject({ status: 409 });
     await vi.waitFor(() => expect(release).toBeDefined());
     const options = filesOptions(state.api, state.cache, clientId);
-    await state.cache.cancelQueries({
+    await state.cache.refetchQueries({
       queryKey: options.queryKey,
       exact: true,
     });
-    await state.cache.fetchQuery({ ...options, staleTime: 0 });
     release(
       json(status === 200 ? [file] : { message: "Obsolete refusal" }, status),
     );
