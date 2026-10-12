@@ -91,7 +91,9 @@ test("Master calendar retains selected client, date and zone when switching view
     .getByRole("combobox", { name: "Calendar view" })
     .selectOption("agenda");
   await page.getByRole("combobox", { name: "Calendar scope" }).selectOption("");
-  await expect(page.getByText("Government unavailable")).toBeVisible();
+  await expect(
+    page.getByText("Government forecasts unavailable"),
+  ).toBeVisible();
   await expect(page.getByText(/at most 50 upcoming records/)).toBeVisible();
   expect(unexpected).toEqual([]);
 });

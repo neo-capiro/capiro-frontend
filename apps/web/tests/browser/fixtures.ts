@@ -326,6 +326,12 @@ export async function installFixtures(page: Page) {
         withheld: 0,
       },
     };
+    if (path === "core/federal-register/effective-date-calendar")
+      return json(
+        route,
+        { message: "Synthetic publisher effective-date source unavailable" },
+        503,
+      );
     if (path === "core/business-development/prospect-stages")
       return json(route, { message: "New stages unavailable" }, 404);
     if (path === "core/me/portfolio-layout")

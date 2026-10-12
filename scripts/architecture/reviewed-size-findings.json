@@ -30,10 +30,10 @@
     "file": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
     "kind": "function",
     "symbol": "CalendarPage",
-    "fingerprint": "6644914bfea3ab55eeb4c4649a07fca4cb9b3a1752eb2943680ef99ec5263d1e",
-    "reason": "Independently reread after the current-read correction: this is one Calendar view composer. Active feed selection, current-record filtering, display filters, navigation and selected surface all serve that view. Agenda, grid, record details, meeting input, library and sync retain separate owners; authorization, pagination and normalization remain in the existing queries/adapters. The caller availability flag prevents a master URL scope from bypassing a failed client read, and empty Agenda text requires successful active feeds. These checks constrain the same view rather than introduce another workflow.",
-    "reviewedBy": "Codex portfolio_calendar_relationships (independent coordinator-change review)",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "2aff092af2306bc537900f9cda9c4263c2dc32c1d3bfc13925cf4579ccbc8499",
+    "reason": "This remains the existing calendar surface composer. The only new source is a query-owned government effective-date feed with canonical shared protocol/pagination/provenance outside this component. The current meetings-only month/week/client semantics and existing current-read filters remain. Government forecast unavailability remains explicit; display filtering does not create backend authority.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/debrief/DebriefGeneration.tsx",
@@ -1516,6 +1516,24 @@
     "fingerprint": "d9a78c326945d796ecb29eae0e04620a06f756f76fd415d91df922465127b57d",
     "reason": "The recovery hook remains the single owner of fresh authority before retained Quicklog hydration. A render-time activation epoch invalidates ready state for every open/close/scope/API lifetime transition before any retained fields commit. The async effect still checks current Core identity and client authorization, aborts stale reads, then installs the journal. This closes the mounted reopen disclosure without weakening the original mutation checks or splitting one authority lifecycle across components.",
     "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/ObjectiveOutreachDestination.tsx",
+    "kind": "function",
+    "symbol": "ObjectiveOutreachDestination",
+    "fingerprint": "ff29c088755f4d5d3e001ebda5d2b6700aa23e1e274d1f96e6cf0a419e3ff3e7",
+    "reason": "This component owns one read-only Objective-bound destination. Query parsing and exact response binding protect the same observation. The shared fixed operation and useCapiroQuery own transport, reset and cancellation; the existing campaign editor is separate and is deliberately not rendered under this limited contract. It has no resource mutation, durable association or alternative-kind fallback.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/ObjectiveOutreach.tsx",
+    "kind": "function",
+    "symbol": "ObjectiveOutreach",
+    "fingerprint": "6f279b5d30e6dbfb7b58b6e42e4ec23356446deab3667e4393790e9eb7f7b09b",
+    "reason": "One explicit existing-session selection and navigation interaction belongs here: paged authorized session choices, current persisted Objective context, cancellation, owner resolution and its pending/error UI. The shared operation module owns the wire validation; there is no campaign write, association persistence or resource creation. Keeping these dependent states together makes interrupted and unsaved-editor behavior reviewable.",
+    "reviewedBy": "Codex shared frontend integration review",
     "reviewedOn": "2026-10-12"
   }
 ]

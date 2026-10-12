@@ -1,0 +1,10 @@
+
+Running 1 test using 1 worker
+
+  ✓  1 ../../../../tmp/r3-reopen-d79a16c-green/control.spec.ts:5:1 › a continuously mounted Quick log hides its retained body until reopened fresh authority completes (10.4s)
+
+  1 passed (13.2s)
+[WebServer] (node:242944) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:242975) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

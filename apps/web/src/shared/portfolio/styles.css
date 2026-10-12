@@ -377,7 +377,8 @@
     font-size: 12px;
   }
 }
-:where(body:has([data-portfolio-root])) [data-slot="dialog-overlay"] {
+/* Keep the scoped portal layer stable when shared CSS is bundled later. */
+body:has([data-portfolio-root]) [data-slot="dialog-overlay"] {
   position: fixed;
   inset: 0;
   background: #0a0a0a66;

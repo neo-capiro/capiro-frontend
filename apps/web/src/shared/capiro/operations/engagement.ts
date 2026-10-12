@@ -2,6 +2,7 @@ import { z } from "zod";
 import { defineOperation } from "../contracts";
 import { engagementArtifactOperations } from "./engagement-artifacts";
 import { engagementSessionOperations } from "./engagement-sessions";
+import { objectiveDestinationOperations } from "./engagement-objective-destination";
 const source =
   "capirov2@4be13b0 apps/api/src/engagement/engagement.controller.ts and engagement.service.ts";
 const id = z.uuid();
@@ -145,6 +146,7 @@ const scopeQuery = z
 export const engagementOperations = {
   ...engagementArtifactOperations,
   ...engagementSessionOperations,
+  ...objectiveDestinationOperations,
   "engagement.meetings": defineOperation({
     service: "core",
     method: "GET",

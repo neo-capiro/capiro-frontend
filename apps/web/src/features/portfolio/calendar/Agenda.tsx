@@ -2,6 +2,7 @@
 import type { CalendarItem } from "./contracts";
 import { formatInstant } from "./range";
 import styles from "./calendar.module.css";
+import { EffectiveDateDetails } from "@/shared/federal-register/EffectiveDateDetails";
 const labels = {
   meeting: "Meeting",
   hearing: "Hearing",
@@ -68,6 +69,9 @@ export function Agenda({
                   {item.status && ` · ${item.status}`}
                 </small>
                 <small>{item.provenance}</small>
+                {item.effectiveDate && (
+                  <EffectiveDateDetails record={item.effectiveDate} />
+                )}
               </div>
             </article>
           ))}

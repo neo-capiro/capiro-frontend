@@ -1,0 +1,182 @@
+[WebServer] (node:245094) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 1 worker
+
+(node:245239) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 test/browser/effective-dates.spec.ts:8:1 › Modules master Government feed preserves date-only provenance and partial coverage (2.3s)
+  ✓  2 test/browser/effective-dates.spec.ts:49:1 › an empty Government page remains explicitly incomplete and forecasts unavailable (2.3s)
+  ✘  3 test/browser/objective-destination.spec.ts:28:1 › each Objective-bound open/reload calls the canonical owner without an unbound session fallback (6.6s)
+(node:245597) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  4 test/browser/objective-destination.spec.ts:62:3 › owner refusal404 clears bound content and never falls back (6.6s)
+(node:245769) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  5 test/browser/objective-destination.spec.ts:62:3 › owner refusal409 clears bound content and never falls back (6.0s)
+(node:245901) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  6 test/browser/objective-destination.spec.ts:89:1 › mismatched binding and malformed Objective query never expose session content (6.0s)
+
+
+  1) test/browser/objective-destination.spec.ts:28:1 › each Objective-bound open/reload calls the canonical owner without an unbound session fallback 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByText(/immutable revision/)
+    Expected substring: "50000000-0000-4000-8000-000000000001"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for getByText(/immutable revision/)
+
+
+      44 |   });
+      45 |   await page.goto(path);
+    > 46 |   await expect(page.getByText(/immutable revision/)).toContainText(
+         |                                                      ^
+      47 |     binding.objectiveRevisionId,
+      48 |   );
+      49 |   await expect(
+        at /workspace/capiro-contracts/apps/web/test/browser/objective-destination.spec.ts:46:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/objective-destination-each-3e2e9-an-unbound-session-fallback/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/objective-destination-each-3e2e9-an-unbound-session-fallback/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/objective-destination-each-3e2e9-an-unbound-session-fallback/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/objective-destination-each-3e2e9-an-unbound-session-fallback/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) test/browser/objective-destination.spec.ts:62:3 › owner refusal404 clears bound content and never falls back 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText(/immutable revision/)
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByText(/immutable revision/)
+
+
+      69 |     });
+      70 |     await page.goto(path);
+    > 71 |     await expect(page.getByText(/immutable revision/)).toBeVisible();
+         |                                                        ^
+      72 |     await page.route("**/api/capiro/engagement.objectiveDestination?*", (r) =>
+      73 |       r.fulfill({
+      74 |         status,
+        at /workspace/capiro-contracts/apps/web/test/browser/objective-destination.spec.ts:71:56
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/objective-destination-owne-0f478-ontent-and-never-falls-back/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/objective-destination-owne-0f478-ontent-and-never-falls-back/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/objective-destination-owne-0f478-ontent-and-never-falls-back/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/objective-destination-owne-0f478-ontent-and-never-falls-back/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) test/browser/objective-destination.spec.ts:62:3 › owner refusal409 clears bound content and never falls back 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText(/immutable revision/)
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByText(/immutable revision/)
+
+
+      69 |     });
+      70 |     await page.goto(path);
+    > 71 |     await expect(page.getByText(/immutable revision/)).toBeVisible();
+         |                                                        ^
+      72 |     await page.route("**/api/capiro/engagement.objectiveDestination?*", (r) =>
+      73 |       r.fulfill({
+      74 |         status,
+        at /workspace/capiro-contracts/apps/web/test/browser/objective-destination.spec.ts:71:56
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/objective-destination-owne-f84b0-ontent-and-never-falls-back/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/objective-destination-owne-f84b0-ontent-and-never-falls-back/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/objective-destination-owne-f84b0-ontent-and-never-falls-back/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/objective-destination-owne-f84b0-ontent-and-never-falls-back/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) test/browser/objective-destination.spec.ts:89:1 › mismatched binding and malformed Objective query never expose session content 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('alert')
+    Expected substring: "does not match"
+    Received string:    "Selected client unavailableThis client could not be verified for your current session. Return to Portfolio to choose a permitted client.Open Portfolio"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for getByRole('alert')
+        8 × locator resolved to <section role="alert">…</section>
+          - unexpected value "Selected client unavailableThis client could not be verified for your current session. Return to Portfolio to choose a permitted client.Open Portfolio"
+
+
+      100 |   });
+      101 |   await page.goto(path);
+    > 102 |   await expect(page.getByRole("alert")).toContainText("does not match");
+          |                                         ^
+      103 |   await expect(page.getByText(/immutable revision/)).toHaveCount(0);
+      104 |   await page.goto(path.replace("objectiveVersion=7", "objectiveVersion=1e0"));
+      105 |   await expect(page.getByRole("alert")).toContainText("exact client");
+        at /workspace/capiro-contracts/apps/web/test/browser/objective-destination.spec.ts:102:41
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/objective-destination-mism-63294-ever-expose-session-content/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/objective-destination-mism-63294-ever-expose-session-content/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/objective-destination-mism-63294-ever-expose-session-content/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/objective-destination-mism-63294-ever-expose-session-content/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    test/browser/objective-destination.spec.ts:28:1 › each Objective-bound open/reload calls the canonical owner without an unbound session fallback 
+    test/browser/objective-destination.spec.ts:62:3 › owner refusal404 clears bound content and never falls back 
+    test/browser/objective-destination.spec.ts:62:3 › owner refusal409 clears bound content and never falls back 
+    test/browser/objective-destination.spec.ts:89:1 › mismatched binding and malformed Objective query never expose session content 
+  2 passed (35.6s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

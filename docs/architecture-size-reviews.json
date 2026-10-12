@@ -142,15 +142,15 @@
   },
   {
     "path": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
-    "sha256": "41c2018ff90f7274dd22260b03d2ed57fad1e19bac3aad9e4e6b3d2b7b9f71b1",
+    "sha256": "268d2ca2dd156e33f7adbd671dadd804cf3a61861969609d10f45e86825c0f22",
     "reviewer": "Codex shared frontend integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
-    "rationale": "The engagement composer owns one route-selected view. Its client selector now changes the canonical URL, clearing client-bound draft/session hints and remounting the shared request/editor scope. Existing meeting, outreach, report and team surfaces remain separate modules.",
+    "evidence": "docs/integration-contracts-20261012/EFFECTIVE-DATES-OBJECTIVE-OUTREACH.md",
+    "rationale": "EngagementScreen remains the route-selected screen composer. An explicitly Objective-bound route selects the separate read-only owner-resolver surface and disables unrelated client/meeting readers; other views, canonical session editor and CommitmentView retain their existing owners. It introduces no campaign writer or generic destination fallback.",
     "functions": [
       {
         "name": "EngagementScreen",
-        "nonblankLines": 118
+        "nonblankLines": 129
       }
     ],
     "signals": [

@@ -2,6 +2,7 @@ import { IntegrationProbe } from "./IntegrationProbe";
 import { RequireSession } from "../../src/shared/session/SessionContext";
 import { PortfolioIndex } from "../../src/features/portfolio/index/PortfolioIndex";
 import { ClientFrame } from "../../src/features/portfolio/client-profile/ClientFrame";
+import { ObjectivesPage } from "../../src/features/portfolio/objectives/ObjectivesPage";
 import { ClientOverview } from "../../src/features/portfolio/client-profile/ClientOverview";
 import { ProductShell } from "../../src/shared/shell/ProductShell";
 import { MeriHome } from "../../src/features/meri/MeriHome";
@@ -60,7 +61,11 @@ function RoutedApp() {
         <RequireSession>
           {id ? (
             <ClientFrame clientId={id} destinations={{}}>
-              <ClientOverview clientId={id} />
+              {path.split("/")[3] === "objectives" ? (
+                <ObjectivesPage clientId={id} />
+              ) : (
+                <ClientOverview clientId={id} />
+              )}
             </ClientFrame>
           ) : (
             <PortfolioIndex destinations={{}} />

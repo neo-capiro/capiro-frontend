@@ -1,0 +1,36 @@
+[WebServer] (node:243372) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 27 tests using 1 worker
+
+(node:243391) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/browser/activity-command-recovery.spec.ts:11:1 › reload restores the original body only after fresh Core authority; 404 permits only deliberate exact-key replay (5.2s)
+  ✓   2 tests/browser/activity-command-recovery.spec.ts:58:3 › a replacement Core actor never sees or dispatches the retained body after reload (4.2s)
+  ✓   3 tests/browser/activity-command-recovery.spec.ts:58:3 › a replacement Core tenant never sees or dispatches the retained body after reload (3.7s)
+  ✓   4 tests/browser/activity-command-recovery.spec.ts:89:1 › expiry hides the draft immediately; restoring the same current actor recovers the original without posting (2.9s)
+  ✓   5 tests/browser/activity-command-recovery.spec.ts:109:1 › current client authorization refusal holds recovery without decrypting or posting; explicit retry rereads authority (3.9s)
+  ✓   6 tests/browser/activity-command-recovery.spec.ts:132:1 › explicit acknowledgement erases the sensitive journal payload and permits the next intent after reload (4.1s)
+  ✓   7 tests/browser/activity-command-recovery.spec.ts:152:1 › closing the document and opening another tab recovers the journal without an automatic command call (3.8s)
+  ✓   8 tests/browser/activity-command-reopen.spec.ts:8:1 › a continuously mounted Quick log hides its retained body until reopened fresh authority completes (6.2s)
+  ✓   9 tests/browser/activity-command-restart.spec.ts:19:1 › a committed command with a lost response cannot create another activity/task pair after reload (3.9s)
+  ✓  10 tests/browser/activity-command-storage.spec.ts:9:3 › localStorage unavailable after response loss blocks replacement commands across reload (4.1s)
+  ✓  11 tests/browser/activity-command-storage.spec.ts:9:3 › indexedDB unavailable after response loss blocks replacement commands across reload (4.4s)
+  ✓  12 tests/browser/activity-command-storage.spec.ts:9:3 › locks unavailable after response loss blocks replacement commands across reload (3.6s)
+  ✓  13 tests/browser/activity-command-storage.spec.ts:47:3 › fence corruption cannot become an empty form or a replacement key (3.9s)
+  ✓  14 tests/browser/activity-command-storage.spec.ts:47:3 › missing-fence corruption cannot become an empty form or a replacement key (3.3s)
+  ✓  15 tests/browser/activity-command-storage.spec.ts:47:3 › missing-record corruption cannot become an empty form or a replacement key (3.9s)
+  ✓  16 tests/browser/activity-command-storage.spec.ts:47:3 › ciphertext corruption cannot become an empty form or a replacement key (4.0s)
+  ✓  17 tests/browser/activity-command-storage.spec.ts:97:1 › retained browser storage contains opaque ciphertext and a nonextractable key, never plaintext draft fields (3.6s)
+  ✓  18 tests/browser/activity-command.spec.ts:32:1 › activity saved and task pending are separate; explicit resume uses the latest read version (3.8s)
+  ✓  19 tests/browser/activity-command.spec.ts:74:1 › a date requires explicit zone; scheduled follow-up fits mobile and has no commitment controls (2.1s)
+  ✓  20 tests/browser/activity-command.spec.ts:122:1 › lost create plus nondisclosing 404 retain the exact original body and key for deliberate recovery (3.2s)
+  ✓  21 tests/browser/activity-command.spec.ts:150:1 › interrupting create retains its command across reopening and reads without another POST (3.1s)
+  ✓  22 tests/browser/activity-command.spec.ts:182:1 › actor replacement during assignee reread aborts creation and clears the former draft (2.3s)
+  ✓  23 tests/browser/activity-command.spec.ts:207:1 › wrong-context success is uncertain, cannot show saved activity and cannot be resent (2.2s)
+  ✓  24 tests/browser/activity-command.spec.ts:230:1 › stale resume discards its receipt and requires another read; a hidden task stays unavailable (3.4s)
+  ✓  25 tests/browser/prospect-upload-restart-acceptance.spec.ts:5:1 › uncertain prospect confirmation cannot become a fresh key and second byte upload after reload (4.0s)
+  ✓  26 tests/browser/restart-recovery.acceptance.spec.ts:13:1 › restart revalidates current identity, retains the original key/body and explicitly recovers after nondisclosing 404 (3.9s)
+  ✓  27 tests/browser/restart-recovery.acceptance.spec.ts:57:1 › restart under a replacement Core actor cannot expose or recover the former actor command (3.4s)
+
+  27 passed (1.7m)

@@ -2,6 +2,7 @@
 import Link from "next/link";
 import type { EngagementMeeting } from "../../../shared/capiro/operations/engagement";
 import { safeAgendaHref, type AgendaItem } from "./agenda";
+import { EffectiveDateDetails } from "../../../shared/federal-register/EffectiveDateDetails";
 import styles from "./calendar.module.css";
 export function AgendaTable({
   items,
@@ -58,6 +59,9 @@ export function AgendaTable({
                   item.title
                 )}
                 <small>{item.context}</small>
+                {item.effectiveDate && (
+                  <EffectiveDateDetails record={item.effectiveDate} />
+                )}
               </td>
               <td>{item.source}</td>
             </tr>

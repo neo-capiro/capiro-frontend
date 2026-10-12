@@ -81,13 +81,11 @@ test("uncertain prospect confirmation cannot become a fresh key and second byte 
     exact: true,
   });
   const choose = () =>
-    area
-      .getByLabel("Upload prospect file")
-      .setInputFiles({
-        name: "test.txt",
-        mimeType: "text/plain",
-        buffer: Buffer.from("hello"),
-      });
+    area.getByLabel("Upload prospect file").setInputFiles({
+      name: "test.txt",
+      mimeType: "text/plain",
+      buffer: Buffer.from("hello"),
+    });
   await page.goto(`/portfolio/prospects/${prospectId}`);
   await choose();
   await area.getByRole("button", { name: "Upload file", exact: true }).click();
