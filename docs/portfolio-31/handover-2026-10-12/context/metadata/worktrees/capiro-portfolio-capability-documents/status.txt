@@ -1,0 +1,31 @@
+## codex/portfolio-capability-documents-20261011
+ M apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx
+ M apps/web/src/features/portfolio/files/EntityDocuments.tsx
+ M apps/web/src/features/portfolio/files/FilePreview.tsx
+ M apps/web/src/features/portfolio/files/FilesPage.tsx
+ M apps/web/src/features/portfolio/files/UploadDialog.tsx
+ M apps/web/src/features/portfolio/files/mutations.ts
+ M apps/web/src/features/portfolio/files/queries.ts
+ M apps/web/src/features/portfolio/files/upload.ts
+ M apps/web/tests/browser/client-enrichment.spec.ts
+ M apps/web/tests/browser/email-compose.spec.ts
+ M apps/web/tests/browser/files-boundary.spec.ts
+ M apps/web/tests/files.test.ts
+?? apps/web/src/features/portfolio/files/DocumentState.tsx
+?? apps/web/src/features/portfolio/files/entity-documents.module.css
+?? apps/web/src/features/portfolio/files/extraction.ts
+?? apps/web/src/features/portfolio/files/file-reader.ts
+?? apps/web/src/features/portfolio/files/file-scope.ts
+?? apps/web/src/features/portfolio/files/navigation.ts
+?? apps/web/tests/browser/capability-documents-download.spec.ts
+?? apps/web/tests/browser/capability-documents-execution.spec.ts
+?? apps/web/tests/browser/capability-documents-fixtures.ts
+?? apps/web/tests/browser/capability-documents-harness.tsx
+?? apps/web/tests/browser/capability-documents-readers.spec.ts
+?? apps/web/tests/browser/capability-documents-upload.spec.ts
+?? apps/web/tests/browser/capability-documents-visual.spec.ts
+?? apps/web/tests/browser/capability-documents.html
+?? apps/web/tests/browser/files-reader-selection.spec.ts
+?? apps/web/tests/file-navigation.test.ts
+?? apps/web/tests/file-upload-receipts.test.ts
+?? docs/portfolio-31/CAPABILITY-DOCUMENTS-CONTINUATION.md

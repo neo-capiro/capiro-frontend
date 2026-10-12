@@ -1,0 +1,50 @@
+{
+  "format": "portfolio-context-delivery-parts-v1",
+  "packs": [
+    {
+      "parts": [
+        {
+          "path": "context-00005.tar.gz.part-00001",
+          "sha256": "4f76f9bf49a4fdad52cc8ed3d1c852925085027565ad153b69c98f19d98d432e",
+          "size": 8388608
+        },
+        {
+          "path": "context-00005.tar.gz.part-00002",
+          "sha256": "f72d24077b4836db4a89d3d0b2702e0103146f17a9ff199bc10763504f72ab2d",
+          "size": 8388608
+        },
+        {
+          "path": "context-00005.tar.gz.part-00003",
+          "sha256": "c429fd53be596f172639dfd96ce3cf109f2eccc5e43d72300623c03845cca0d9",
+          "size": 3624724
+        }
+      ],
+      "path": "packs/context-00005.tar.gz",
+      "sha256": "930a0d1bc7ab99ba06996a35a65d3af0dce1466e28d495f218c2e2704c4aa8ac",
+      "size": 20401940
+    },
+    {
+      "parts": [
+        {
+          "path": "context-00132.tar.gz.part-00001",
+          "sha256": "5eca5ecaf62b75592984bd03eaf63c73218f962d85df223f039bcc0b0462cf98",
+          "size": 8388608
+        },
+        {
+          "path": "context-00132.tar.gz.part-00002",
+          "sha256": "f5d0eb12a334c2bac4f6c0c193788cfa19b24ae6f7bcf9236aafcd9de19371fa",
+          "size": 8388608
+        },
+        {
+          "path": "context-00132.tar.gz.part-00003",
+          "sha256": "fca08b61ada9d6642c46c9facc727c639b0c4e4cb4638f9c8d4b59b720d57995",
+          "size": 3083602
+        }
+      ],
+      "path": "packs/context-00132.tar.gz",
+      "sha256": "3d4b12a71d25920ebb8e652a93dd897139e4bc329fed35b9da6e26a909070c02",
+      "size": 19860818
+    }
+  ],
+  "partSize": 8388608
+}

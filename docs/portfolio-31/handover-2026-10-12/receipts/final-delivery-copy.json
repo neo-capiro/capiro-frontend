@@ -1,0 +1,167 @@
+{
+  "copies": [
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/context_delivery.py",
+      "destination": "tools/context_delivery.py",
+      "size": 3906,
+      "sha256": "f2ddd5700397706469fde9a2af7841ae113538bf661690751bc6637c36e453a4"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/split_context.py",
+      "destination": "tools/split_context.py",
+      "size": 4426,
+      "sha256": "b5e7b4a21b4f8228eb65c6a3234ed026308c29632e5eaba95490426a81366771"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/prepare_context.py",
+      "destination": "tools/prepare_context.py",
+      "size": 4844,
+      "sha256": "e0fc62fb4f2373222bdf6bb8c9d0119b4c05ada108740a3b35f2ab7090f0b319"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/assemble-delivery.py",
+      "destination": "tools/assemble-delivery.py",
+      "size": 3423,
+      "sha256": "84b1a691617d018824adcd895163fb260c5401ec3e52d87372f658c041f0030d"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/context-delivery.json",
+      "destination": "context-delivery.json",
+      "size": 2116,
+      "sha256": "2e64be7670e860809a63781e17e683f1d1a10ad5857a23b5bce305e7c3e09ed5"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/CONTEXT-DELIVERY.md",
+      "destination": "CONTEXT-DELIVERY.md",
+      "size": 4830,
+      "sha256": "8a274a3e9e5af625f3395cd4693494cd4da2e3dbd501a1409cd42f7104ce3fc6"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/context-delivery-qualification.json",
+      "destination": "receipts/context-delivery-qualification.json",
+      "size": 7620,
+      "sha256": "afb7cbd1faeb69c23dcab189879d1d9c9704084d42b9a48e60157eb9c5efd0a3"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/context-delivery-ENOSPC-attempt.json",
+      "destination": "receipts/context-delivery-ENOSPC-attempt.json",
+      "size": 755,
+      "sha256": "19a30c9ee4caff73a346dffe8151634273620f8b23719dbe4d1aa1340281da89"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/part-upload-receipts.json",
+      "destination": "receipts/part-upload-receipts.json",
+      "size": 3948,
+      "sha256": "a189b5de479d993ba856bc7cf1666c792ee294efc078e4b328835bf79a069068"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/context-delivery-independent-review.json",
+      "destination": "reviews/context-delivery-independent-review.json",
+      "size": 10446,
+      "sha256": "7fa2343df505540af1ed5db6281ae2bc6519ad5a1eaaa593827de3b8879a4fd3"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/context-parts/context-00005.tar.gz.part-00001",
+      "destination": "context-parts/context-00005.tar.gz.part-00001",
+      "size": 8388608,
+      "sha256": "4f76f9bf49a4fdad52cc8ed3d1c852925085027565ad153b69c98f19d98d432e"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/context-parts/context-00005.tar.gz.part-00002",
+      "destination": "context-parts/context-00005.tar.gz.part-00002",
+      "size": 8388608,
+      "sha256": "f72d24077b4836db4a89d3d0b2702e0103146f17a9ff199bc10763504f72ab2d"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/context-parts/context-00005.tar.gz.part-00003",
+      "destination": "context-parts/context-00005.tar.gz.part-00003",
+      "size": 3624724,
+      "sha256": "c429fd53be596f172639dfd96ce3cf109f2eccc5e43d72300623c03845cca0d9"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/context-parts/context-00132.tar.gz.part-00001",
+      "destination": "context-parts/context-00132.tar.gz.part-00001",
+      "size": 8388608,
+      "sha256": "5eca5ecaf62b75592984bd03eaf63c73218f962d85df223f039bcc0b0462cf98"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/context-parts/context-00132.tar.gz.part-00002",
+      "destination": "context-parts/context-00132.tar.gz.part-00002",
+      "size": 8388608,
+      "sha256": "f5d0eb12a334c2bac4f6c0c193788cfa19b24ae6f7bcf9236aafcd9de19371fa"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/context-parts/context-00132.tar.gz.part-00003",
+      "destination": "context-parts/context-00132.tar.gz.part-00003",
+      "size": 3083602,
+      "sha256": "fca08b61ada9d6642c46c9facc727c639b0c4e4cb4638f9c8d4b59b720d57995"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/context-parts/manifest.json.part-00001",
+      "destination": "context-parts/manifest.json.part-00001",
+      "size": 8388608,
+      "sha256": "3b81f42f38d46100802ab2051d375b466c03ee3491b0264c9ec416a7ffaa69fe"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/context-parts/manifest.json.part-00002",
+      "destination": "context-parts/manifest.json.part-00002",
+      "size": 7373617,
+      "sha256": "8a5117aaabd97b761a52bef41ba0ed3d798ebe8e8db0bdd5989e79f675aeadcf"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/context-delivery-packs-only/CONTEXT-DELIVERY.md",
+      "destination": "history/context-delivery-packs-only/CONTEXT-DELIVERY.md",
+      "size": 4178,
+      "sha256": "15cae0e5317d09171de50d5d1bb9db263c96e674df9c2694d071494fd5e4235c"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/context-delivery-packs-only/context-delivery-qualification.json",
+      "destination": "history/context-delivery-packs-only/context-delivery-qualification.json",
+      "size": 6712,
+      "sha256": "e5ac76bfa43b76a909fb4a513cb6e9a833ab35768de086d89a851e7b927a6932"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/context-delivery-packs-only/context-delivery.json",
+      "destination": "history/context-delivery-packs-only/context-delivery.json",
+      "size": 1600,
+      "sha256": "fae8e3661df3c26dbe501193f1fe5cfa9d009568ccbdf60fa4a6276d584ce875"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/context-delivery-packs-only/context_delivery.py",
+      "destination": "history/context-delivery-packs-only/context_delivery.py",
+      "size": 3486,
+      "sha256": "e88191af82509b399deb76fbe9b6350d50efdef6ac4f53bc060b46c84cb55f9d"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/context-delivery-packs-only/prepare_context.py",
+      "destination": "history/context-delivery-packs-only/prepare_context.py",
+      "size": 4735,
+      "sha256": "0e51b827dd3237127eec8d47461f6ef4d294c210406f707ec797d1f8be0f34a4"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/context-delivery-packs-only/split_context.py",
+      "destination": "history/context-delivery-packs-only/split_context.py",
+      "size": 4181,
+      "sha256": "c021be358e96b1f182ecfb6d759d06805a0e3b0d5e50a8ea2c015f5491963c55"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/HANDOVER-draft.md",
+      "destination": "history/HANDOVER-prepublication-draft.md",
+      "size": 78109,
+      "sha256": "7d9d71c7bd977a5f04fd743d850f25e657a6a8ce826cef651f885943dc803a41"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/REFERENCE-INDEX.md",
+      "destination": "history/REFERENCE-INDEX-initial.md",
+      "size": 35524,
+      "sha256": "6a2fe66efa6a43b2c643c8726df5ae8a725d0c99fbd0d46615c5daff62342cb1"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/handover-preparation/context-pack-upload-plan.json",
+      "destination": "history/context-pack-upload-plan-initial.json",
+      "size": 49540,
+      "sha256": "eaddd77fb54d7ed8de8c68c4d1b96bfdc71f4e206513a68091fce7f5c70c6d0a"
+    }
+  ],
+  "allSourceAndDestinationHashesAndModesEqual": true
+}

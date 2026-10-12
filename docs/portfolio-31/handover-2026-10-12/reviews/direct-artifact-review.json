@@ -1,0 +1,159 @@
+{
+  "status": "SOURCE_AND_CHECK_VERIFIED_HISTORY_RECOVERY_QUALIFICATION_OPEN",
+  "reviewedBy": "/root/portfolio_prospects_files",
+  "reviewedAt": "2026-10-12T01:38:34.099352+00:00",
+  "scope": "Read-only direct handover artifact, committed-source and exact receipt/hash review. No product tests/build/browser, clone, remote writes or changes to root artifacts.",
+  "sourceMapping": {
+    "localSourceHead": "760dcc6c1179312c7f4b762e64cf3af1aad60c3e",
+    "publishedEquivalentHead": "abaeab37b36d60b3e5185755e1b2c9169d7c92f3",
+    "exactSourceTree": "46417a01484727747b0a2d81b3b4f278285cb709",
+    "sourceFiles": 1184,
+    "verified": "Every path/mode/type/Git blob/byte length/SHA256 equals the local committed tree; exact tree and published head agree with the saved GitHub commit/branch readbacks."
+  },
+  "history": {
+    "continuationCommitsAfterBase": 33,
+    "allRefsLogCommits": 36,
+    "sourceHeadAncestryIncludingBase": 34,
+    "extraSideBranchCommits": [
+      "eb04ced29a868f8df1e033c1a38c7dfc53e91848",
+      "34cb6a017aa2ea37c3a72bffe399277762a859fa"
+    ],
+    "exactTableOrderSubjectsAndAllRefsLogParentsVerified": true,
+    "originalBundleRefCount": 29,
+    "originalBundlePrerequisites": [],
+    "sameRepositoryBundleVerifyExit": 0,
+    "bundleBytes": 3356581,
+    "bundleSha256": "e87784dee0afa22f165ab50f39380fa408fb837ddeb2f61c4a986ffc3aea0a9f",
+    "shallow": true,
+    "shallowBoundary": "02c02d95bdf3949662b9123f425271c6491ffdab",
+    "rawBoundaryParent": "8e8e6999c385beccd245e94e8f32a8a3120e8131",
+    "boundaryParentObjectLocallyAvailable": false
+  },
+  "directCopies": {
+    "count": 29,
+    "allCopiesOriginalHashesAndSizesMatch": true,
+    "knownIgnoredLogsExistAndMatch": true,
+    "qualification": "The named exact copies are verified; exhaustive context collection is separate."
+  },
+  "integrations": [
+    {
+      "lane": "watchlist",
+      "commit": "ac66c0610323a4f20bcbe7a36d4a7ed772c11c8c",
+      "ownedFiles": 23,
+      "cohesionRecords": 5,
+      "everyCommittedPreimageAndPostimageMatches": true,
+      "frozenManifestHashVerified": true
+    },
+    {
+      "lane": "alert-channels",
+      "commit": "760dcc6c1179312c7f4b762e64cf3af1aad60c3e",
+      "ownedFiles": 32,
+      "cohesionRecords": 8,
+      "everyCommittedPreimageAndPostimageMatches": true,
+      "frozenManifestHashVerified": true
+    }
+  ],
+  "verificationSummary": {
+    "admittedCommand": [
+      "npm",
+      "run",
+      "check"
+    ],
+    "exitCode": 0,
+    "durationSeconds": 62.487664,
+    "allFourRawEvidenceHashesMatchReceipt": true,
+    "beforeAfterEqualCommittedSourceFiles": 1048,
+    "sourceChangedDuringCheck": [],
+    "admissionErrors": [],
+    "portfolioTests": 998,
+    "portfolioTestFiles": 66,
+    "foundationTests": 32,
+    "transportTests": 21,
+    "typecheckPackageChecksAndFormat": "Successful admitted command chain and exact raw log agree.",
+    "lintErrors": 0,
+    "nextImageWarnings": 11,
+    "architecture": {
+      "errors": [],
+      "moduleCount": 505,
+      "routeCount": 22,
+      "sizeSummary": {
+        "total": 153,
+        "reviewed": 126,
+        "inheritedUnreviewed": 27,
+        "blocking": 0
+      }
+    },
+    "buildProductionFullBrowserAndSignedInRemainExplicitlyPending": true
+  },
+  "blockingFindings": [
+    {
+      "id": "HANDOVER-HISTORY-01",
+      "scope": "Standalone/complete history restoration claim, not source-byte preservation",
+      "finding": "The original v2 bundle declares no prerequisites and was verified only in its originating shallow repository. Raw02c still names an absent parent8e8. That result does not demonstrate independent clone connectivity or preserve the shallow boundary by itself.",
+      "evidence": [
+        "git rev-parse --is-shallow-repository -> true",
+        "Raw git cat-file02c parent8e8e6999c385beccd245e94e8f32a8a3120e8131",
+        "git cat-file -e missing parent -> exit128",
+        "Original v2 bundle header has no prerequisite or shallow-boundary record"
+      ],
+      "coordinatorResponse": "Root will preserve the old bundle/receipt unchanged, create a separate explicit02c-prerequisite bundle, then qualify a fresh protocol-based clone retaining the shallow base boundary plus verify/fetch/fsck and exact source-tree checks. Normal full GitHub clone provides the prerequisite and upstream ancestors.",
+      "responseReview": "The proposed minimal repair is appropriate: distinguish historical byte preservation from a supported recovery path, require the named base, and independently verify restored local commit/tree coverage. Qualification receipt remains pending this snapshot."
+    }
+  ],
+  "limits": [
+    "This record does not assert fresh remote access beyond saved GitHub readbacks or a completed handover/context publication.",
+    "No new build, actual-production, full-browser, hosted or native/provider acceptance was run.",
+    "OPEN Watchlist accepted-projection, PhoneVerification copy and Core-404 entry assertion remain unapproved.",
+    "Collector coverage and restoration script implementation receive a separate bounded review."
+  ],
+  "reviewedArtifactHashes": [
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/DIRECT-ARTIFACTS.json",
+      "sha256": "9ad8d4cf988e5ecb53a185b925e7da50834ba76db3ecb4c94019e0f16e1246b3"
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/SOURCE-INVENTORY.json",
+      "sha256": "e6283d9358ce972c7f8bd611ae8c90d96ec72edb4b8d0b4c6b445b13877f0ba6"
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/SOURCE-COMMITS.md",
+      "sha256": "69e64c0ea8bd4a3a91045aa87026a3dd0c283af66b2384d2ca2ae6748738d997"
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/VERIFICATION-SUMMARY.json",
+      "sha256": "213119442ab3d9a6580ba8b1abfbf51e46d566dfbd61e0743ddf2e660176fd19"
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/history/local-history-bundle-receipt.json",
+      "sha256": "3b0b3c27262c15e0750e73d6bee7d0f359a4fe6cdb79990fa4441b7c74fac00c"
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/history/local-history.log",
+      "sha256": "74c336aece1a295ae36a3526c8ce00626198f02b48971d7cca0515d162affb2e"
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/receipts/source-publication-receipt.json",
+      "sha256": "0c3e4eb0a13973f8c73f271787b69aea6d098432aee68a557bd075e22073c47c"
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/receipts/source-publication-plan.json",
+      "sha256": "45bff4c119bd2a271bb70d78dc08a9e2ef990babbff0539d2be0cdec37d18d47"
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/receipts/watchlist-integration.json",
+      "sha256": "646b857dd4d532ac25e80dde9a0d6765bcca8d141b26090e10cc1ffc3c857e88"
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/receipts/alert-channels-integration.json",
+      "sha256": "45c9aa3401ec0448a340f3f44fb6428c0a0eaacf638caa0bd1468d03217baeda"
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/verification/root-check/receipt.json",
+      "sha256": "723c43af57758dbb10cb87fe87ee12739cd4dcef13d4d4d5716282150ae64ded"
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/verification/root-check/gate.log",
+      "sha256": "7c9af1237e3ca6b88703508a3f2ee7cc522c48d65e67e25ae400ce199ad424af"
+    }
+  ]
+}

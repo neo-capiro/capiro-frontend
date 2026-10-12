@@ -1,0 +1,1591 @@
+diff --git a/apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx b/apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx
+index a28f9b6d51ecc7026ddc8fec10f28e448160efb3..d6c9789bf0ac801ebeb049cc8e6d81191f4fc903 100644
+--- a/apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx
++++ b/apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx
+@@ -1,5 +1,6 @@
+ "use client";
+ /* eslint-disable @next/next/no-img-element */
++import { useIdentity } from "@/shared/portfolio/auth/identity";
+ import { useState } from "react";
+ import { QueryState } from "@/shared/portfolio/ui/QueryState";
+ import { useFacilities } from "./queries";
+@@ -9,6 +10,7 @@ import { FacilityMapDialog } from "./FacilityMapDialog";
+ import { FacilityMap } from "./FacilityMap";
+ import { facilityCoordinates, facilityDistrict } from "./facility-map-model";
+ import styles from "./facility-map.module.css";
++import { profileActorKey, useProfileActor } from "./profile-access";
+ 
+ export function FacilitiesCard({
+   clientId,
+@@ -16,13 +18,37 @@ export function FacilitiesCard({
+ }: {
+   clientId: string;
+   clientName: string;
++}) {
++  useIdentity();
++  return (
++    <CurrentFacilitiesCard
++      key={clientId}
++      clientId={clientId}
++      clientName={clientName}
++    />
++  );
++}
++function CurrentFacilitiesCard({
++  clientId,
++  clientName,
++}: {
++  clientId: string;
++  clientName: string;
+ }) {
+   const query = useFacilities(clientId);
++  const actor = useProfileActor();
+   const [creating, setCreating] = useState(false);
+   const [selectedId, setSelectedId] = useState("");
+   const [expanded, setExpanded] = useState(false);
+   const facilities = query.data ?? [];
+   const selected = facilities.find((facility) => facility.id === selectedId);
++  const [selectionScope, setSelectionScope] = useState(profileActorKey(actor));
++  if (selectionScope !== profileActorKey(actor)) {
++    setSelectionScope(profileActorKey(actor));
++    setSelectedId("");
++    setExpanded(false);
++  } else if (selectedId && !selected) setSelectedId("");
++  if (expanded && !query.data) setExpanded(false);
+   const stateCount = new Set(facilities.map((f) => f.state).filter(Boolean))
+     .size;
+   const districtCount = new Set(
+@@ -47,6 +73,7 @@ export function FacilitiesCard({
+           <button
+             className="button"
+             aria-label="Add facility"
++            disabled={!query.source}
+             onClick={() => setCreating(true)}
+           >
+             <img src="/design/411-47066-plus.svg" alt="" />
+@@ -54,6 +81,7 @@ export function FacilitiesCard({
+           <button
+             className="button ghost"
+             aria-label="Open district map"
++            disabled={!query.data}
+             onClick={() => setExpanded(true)}
+           >
+             <img src="/design/411-47066-maximize.svg" alt="" />
+@@ -131,6 +159,7 @@ export function FacilitiesCard({
+           clientId={clientId}
+           clientName={clientName}
+           facility={selected}
++          available={Boolean(query.source)}
+           open
+           onOpenChange={(open) => {
+             if (!open) setSelectedId("");
+diff --git a/apps/web/src/features/portfolio/client-profile/FacilityDetailDialog.tsx b/apps/web/src/features/portfolio/client-profile/FacilityDetailDialog.tsx
+index 9c321f4bcc89cc6b4296dcd2b2e2dd622334c8b3..d34c4b1d5ef300671b102d2bd68e9aefd883046e 100644
+--- a/apps/web/src/features/portfolio/client-profile/FacilityDetailDialog.tsx
++++ b/apps/web/src/features/portfolio/client-profile/FacilityDetailDialog.tsx
+@@ -10,7 +10,7 @@ import { FacilityGeocoding } from "./FacilityGeocoding";
+ import { FacilityRepresentation } from "./FacilityRepresentation";
+ import { facilityAddress, facilityDistrict } from "./facility-map-model";
+ import { useFacilityRepresentation } from "./facility-map-queries";
+-import { useFacilityAction } from "./facility-map-mutations";
++import { FacilityRemoveDialog } from "./FacilityRemoveDialog";
+ import styles from "./facility-map.module.css";
+ 
+ export function FacilityDetailDialog({
+@@ -19,20 +19,23 @@ export function FacilityDetailDialog({
+   facility,
+   open,
+   onOpenChange,
++  available = true,
+ }: {
+   clientId: string;
+   clientName: string;
+   facility: Facility;
+   open: boolean;
+   onOpenChange: (value: boolean) => void;
++  available?: boolean;
+ }) {
+   const [editing, setEditing] = useState(false);
+   const [removing, setRemoving] = useState(false);
+   const representation = useFacilityRepresentation(clientId, open);
+-  const mutation = useFacilityAction(clientId);
+-  const delegation = representation.data?.find(
+-    (row) => row.facility.id === facility.id,
+-  )?.representation;
++  const delegation =
++    !representation.error && representation.isSuccess
++      ? representation.data?.find((row) => row.facility.id === facility.id)
++          ?.representation
++      : undefined;
+   return (
+     <>
+       <Dialog
+@@ -70,7 +73,9 @@ export function FacilityDetailDialog({
+             error={representation.error}
+             retry={() => void representation.refetch()}
+           />
+-          {representation.data && <FacilityRepresentation value={delegation} />}
++          {!representation.error && representation.isSuccess && (
++            <FacilityRepresentation value={delegation} />
++          )}
+           {delegation && !delegation.unresolved && delegation.federal.house && (
+             <AddGovernmentTargetButton
+               clientId={clientId}
+@@ -80,7 +85,11 @@ export function FacilityDetailDialog({
+             />
+           )}
+         </section>
+-        <FacilityGeocoding clientId={clientId} facility={facility} />
++        <FacilityGeocoding
++          clientId={clientId}
++          facility={facility}
++          disabled={!available}
++        />
+         <div className="row between">
+           <Link
+             className="button"
+@@ -89,11 +98,16 @@ export function FacilityDetailDialog({
+             Open relationships
+           </Link>
+           <div className="row">
+-            <button className="button" onClick={() => setEditing(true)}>
++            <button
++              className="button"
++              disabled={!available}
++              onClick={() => setEditing(true)}
++            >
+               Edit facility
+             </button>
+             <button
+               className="button ghost danger"
++              disabled={!available}
+               onClick={() => setRemoving(true)}
+             >
+               Remove
+@@ -109,42 +123,17 @@ export function FacilityDetailDialog({
+         open={editing}
+         onOpenChange={setEditing}
+       />
+-      <Dialog
++      <FacilityRemoveDialog
++        clientId={clientId}
++        clientName={clientName}
++        facility={facility}
+         open={removing}
+-        onOpenChange={(value) => {
+-          if (!mutation.isPending) setRemoving(value);
++        onOpenChange={setRemoving}
++        onRemoved={() => {
++          setRemoving(false);
++          onOpenChange(false);
+         }}
+-        title="Remove facility"
+-        description={`Remove ${facility.name} from ${clientName}? Its location will no longer contribute to this client's footprint.`}
+-      >
+-        <QueryState error={mutation.error} />
+-        <div className="formActions">
+-          <button
+-            className="button"
+-            disabled={mutation.isPending}
+-            onClick={() => setRemoving(false)}
+-          >
+-            Cancel
+-          </button>
+-          <button
+-            className="button primary"
+-            disabled={mutation.isPending}
+-            onClick={() =>
+-              mutation.mutate(
+-                { kind: "remove", facilityId: facility.id },
+-                {
+-                  onSuccess: () => {
+-                    setRemoving(false);
+-                    onOpenChange(false);
+-                  },
+-                },
+-              )
+-            }
+-          >
+-            {mutation.isPending ? "Removing…" : "Remove facility"}
+-          </button>
+-        </div>
+-      </Dialog>
++      />
+     </>
+   );
+ }
+diff --git a/apps/web/src/features/portfolio/client-profile/FacilityDialog.tsx b/apps/web/src/features/portfolio/client-profile/FacilityDialog.tsx
+index a9c53c53b6d15d57032e446ca1e955097da57af7..88f9e7b2a24a46397e05b142ff4e6b180acdec83 100644
+--- a/apps/web/src/features/portfolio/client-profile/FacilityDialog.tsx
++++ b/apps/web/src/features/portfolio/client-profile/FacilityDialog.tsx
+@@ -1,11 +1,18 @@
+ "use client";
+-import { TextareaField } from "@/shared/portfolio/ui/TextareaField";
+-import { useSaveFacility } from "./mutations";
+ import { useState } from "react";
++import { useIdentity } from "@/shared/portfolio/auth/identity";
+ import { Dialog } from "@/shared/portfolio/ui/Dialog";
+-import { QueryState } from "@/shared/portfolio/ui/QueryState";
+ import type { Facility } from "./contracts";
+ import { facilityFormBody } from "./facility-map-model";
++import {
++  profileActorKey,
++  useProfileActor,
++  type ProfileActor,
++} from "./profile-access";
++import { useFacilityWriter } from "./useFacilityWriter";
++import { FacilityFields } from "./FacilityFields";
++import { FacilityWriteStatus } from "./FacilityWriteStatus";
++
+ export function FacilityDialog({
+   clientId,
+   clientName,
+@@ -19,144 +26,99 @@ export function FacilityDialog({
+   onOpenChange: (open: boolean) => void;
+   facility?: Facility;
+ }) {
++  useIdentity();
++  const actor = useProfileActor();
++  const [revision, setRevision] = useState(0);
++  return (
++    <Dialog
++      open={open}
++      onOpenChange={onOpenChange}
++      title={facility ? "Edit facility" : "Add facility"}
++      description={`Location for ${clientName}. Complete the address to request automatic geocoding.`}
++    >
++      {open && (
++        <FacilityEditor
++          key={`${clientId}:${facility?.id ?? "create"}:${profileActorKey(actor)}:${revision}`}
++          clientId={clientId}
++          actor={actor}
++          facility={facility}
++          onClose={() => onOpenChange(false)}
++          onRestart={() => setRevision((value) => value + 1)}
++        />
++      )}
++    </Dialog>
++  );
++}
++function FacilityEditor({
++  clientId,
++  actor,
++  facility,
++  onClose,
++  onRestart,
++}: {
++  clientId: string;
++  actor: ProfileActor | undefined;
++  facility?: Facility;
++  onClose: () => void;
++  onRestart: () => void;
++}) {
++  const [initial] = useState(facility);
+   const [validation, setValidation] = useState("");
+-  const mutation = useSaveFacility(clientId, facility?.id, () =>
+-    onOpenChange(false),
++  const writer = useFacilityWriter(
++    clientId,
++    actor,
++    initial,
++    onClose,
++    onRestart,
+   );
++  const pending = writer.attempt?.status === "pending";
+   function submit(event: React.FormEvent<HTMLFormElement>) {
+     event.preventDefault();
+-    const raw = Object.fromEntries(new FormData(event.currentTarget));
++    if (!writer.canWrite) return;
+     try {
+-      const body = facilityFormBody(raw, facility);
++      const body = facilityFormBody(
++        Object.fromEntries(new FormData(event.currentTarget)),
++        initial,
++      );
+       setValidation("");
+-      mutation.mutate(body);
+-    } catch (error) {
++      void writer.save({ kind: "save", body });
++    } catch (cause) {
+       setValidation(
+-        error instanceof Error ? error.message : "Review the facility details.",
++        cause instanceof Error ? cause.message : "Review the facility details.",
+       );
+     }
+   }
+   return (
+-    <Dialog
+-      open={open}
+-      onOpenChange={(value) => {
+-        if (!mutation.isPending) onOpenChange(value);
+-      }}
+-      title={facility ? "Edit facility" : "Add facility"}
+-      description={`Location for ${clientName}. Complete the address to request automatic geocoding.`}
+-    >
+-      <form className="stack" onSubmit={submit}>
+-        <label>
+-          Facility name
+-          <input name="name" required defaultValue={facility?.name} autoFocus />
+-        </label>
+-        <label>
+-          Street address
+-          <input
+-            name="addressLine"
+-            autoComplete="street-address"
+-            defaultValue={facility?.addressLine ?? ""}
+-          />
+-        </label>
+-        <div className="formGrid">
+-          <label>
+-            City
+-            <input
+-              name="city"
+-              autoComplete="address-level2"
+-              defaultValue={facility?.city ?? ""}
+-            />
+-          </label>
+-          <label>
+-            State / territory
+-            <input
+-              name="state"
+-              autoComplete="address-level1"
+-              pattern="[A-Za-z]{2}"
+-              maxLength={2}
+-              placeholder="CA"
+-              defaultValue={facility?.state ?? ""}
+-            />
+-          </label>
+-          <label>
+-            ZIP code
+-            <input
+-              name="zip"
+-              autoComplete="postal-code"
+-              defaultValue={facility?.zip ?? ""}
+-            />
+-          </label>
+-          <label>
+-            Employees
+-            <input
+-              name="employeeCount"
+-              type="number"
+-              min={0}
+-              step={1}
+-              defaultValue={facility?.employeeCount ?? ""}
+-            />
+-          </label>
+-          <label>
+-            Congressional district
+-            <input
+-              name="congressionalDistrict"
+-              pattern="[0-9]{1,2}"
+-              maxLength={2}
+-              placeholder="12 or 00"
+-              defaultValue={facility?.congressionalDistrict ?? ""}
+-            />
+-          </label>
+-          <label>
+-            State House district
+-            <input
+-              name="stateHouseDistrict"
+-              maxLength={64}
+-              defaultValue={facility?.stateHouseDistrict ?? ""}
+-            />
+-          </label>
+-          <label>
+-            State Senate district
+-            <input
+-              name="stateSenateDistrict"
+-              maxLength={64}
+-              defaultValue={facility?.stateSenateDistrict ?? ""}
+-            />
+-          </label>
+-        </div>
+-        <p className="muted">
+-          Use a bare House district number, or 00 for at-large. Leave districts
+-          blank to resolve from the address. A later successful geocode can
+-          replace manual state districts.
++    <form className="stack" onSubmit={submit}>
++      {!actor && (
++        <p role="status">
++          A current member session is required to save this facility.
+         </p>
+-        <TextareaField
+-          label="Notes"
+-          name="notes"
+-          defaultValue={facility?.notes ?? ""}
+-        />
+-        {validation && (
+-          <p className="danger" role="alert">
+-            {validation}
+-          </p>
+-        )}
+-        <QueryState error={mutation.error} />
+-        <div className="formActions">
+-          <button
+-            type="button"
+-            className="button"
+-            disabled={mutation.isPending}
+-            onClick={() => onOpenChange(false)}
+-          >
+-            Cancel
+-          </button>
+-          <button className="button primary" disabled={mutation.isPending}>
+-            {mutation.isPending
+-              ? "Saving…"
+-              : facility
+-                ? "Save changes"
+-                : "Add facility"}
+-          </button>
+-        </div>
+-      </form>
+-    </Dialog>
++      )}
++      <fieldset
++        className="stack"
++        style={{ border: 0, padding: 0, margin: 0, minWidth: 0 }}
++        disabled={
++          !actor || pending || !writer.query.source || Boolean(writer.attempt)
++        }
++      >
++        <legend className="srOnly">Facility details</legend>
++        <FacilityFields facility={initial} />
++      </fieldset>
++      {validation && (
++        <p className="danger" role="alert">
++          {validation}
++        </p>
++      )}
++      <FacilityWriteStatus writer={writer} />
++      <div className="formActions">
++        <button type="button" className="button" onClick={onClose}>
++          Cancel
++        </button>
++        <button className="button primary" disabled={!writer.canWrite}>
++          {pending ? "Saving…" : facility ? "Save changes" : "Add facility"}
++        </button>
++      </div>
++    </form>
+   );
+ }
+diff --git a/apps/web/src/features/portfolio/client-profile/FacilityGeocoding.tsx b/apps/web/src/features/portfolio/client-profile/FacilityGeocoding.tsx
+index 311c12c47c1970dd99f9b969028d9bfa39ecf101..14709fb050eee3bbb7bc56984e5cffaa7941faa3 100644
+--- a/apps/web/src/features/portfolio/client-profile/FacilityGeocoding.tsx
++++ b/apps/web/src/features/portfolio/client-profile/FacilityGeocoding.tsx
+@@ -1,19 +1,46 @@
+ "use client";
+-import { useState } from "react";
+-import { QueryState } from "@/shared/portfolio/ui/QueryState";
+ import type { Facility } from "./contracts";
+ import { useFacilityAction } from "./facility-map-mutations";
++import {
++  profileActorKey,
++  useProfileActor,
++  type ProfileActor,
++} from "./profile-access";
++import { FacilityActionStatus } from "./FacilityActionStatus";
+ import styles from "./facility-map.module.css";
+ 
+ export function FacilityGeocoding({
+   clientId,
+   facility,
++  disabled = false,
+ }: {
+   clientId: string;
+   facility: Facility;
++  disabled?: boolean;
+ }) {
+-  const mutation = useFacilityAction(clientId);
+-  const [queued, setQueued] = useState(false);
++  const actor = useProfileActor();
++  return (
++    <CurrentFacilityGeocoding
++      key={`${clientId}:${facility.id}:${profileActorKey(actor)}`}
++      clientId={clientId}
++      facility={facility}
++      disabled={disabled}
++      actor={actor}
++    />
++  );
++}
++function CurrentFacilityGeocoding({
++  clientId,
++  facility,
++  disabled,
++  actor,
++}: {
++  clientId: string;
++  facility: Facility;
++  disabled: boolean;
++  actor: ProfileActor | undefined;
++}) {
++  const mutation = useFacilityAction(clientId, facility, actor, !disabled);
+   const hasAddress = Boolean(
+     facility.addressLine?.trim() &&
+     facility.city?.trim() &&
+@@ -60,13 +87,13 @@ export function FacilityGeocoding({
+               <button
+                 className="button"
+                 disabled={
+-                  mutation.isPending ||
++                  !mutation.canAct ||
+                   !candidate.matchedAddress ||
+                   !facility.geocodeCandidateRevision
+                 }
+                 onClick={() => {
+                   if (!facility.geocodeCandidateRevision) return;
+-                  mutation.mutate({
++                  void mutation.run({
+                     kind: "geocode-candidate",
+                     facilityId: facility.id,
+                     candidateIndex,
+@@ -83,26 +110,23 @@ export function FacilityGeocoding({
+       <div className="row">
+         <button
+           className="button"
+-          disabled={mutation.isPending || !hasAddress}
++          disabled={!mutation.canAct || !hasAddress}
+           onClick={() =>
+-            mutation.mutate({
++            void mutation.run({
+               kind: "resolve-district",
+               facilityId: facility.id,
+             })
+           }
+         >
+-          {mutation.isPending && mutation.variables.kind === "resolve-district"
++          {mutation.isPending && mutation.kind === "resolve-district"
+             ? "Resolving…"
+             : "Resolve district"}
+         </button>
+         <button
+           className="button ghost"
+-          disabled={mutation.isPending || !hasAddress}
++          disabled={!mutation.canAct || !hasAddress}
+           onClick={() =>
+-            mutation.mutate(
+-              { kind: "geocode", facilityId: facility.id },
+-              { onSuccess: () => setQueued(true) },
+-            )
++            void mutation.run({ kind: "geocode", facilityId: facility.id })
+           }
+         >
+           Retry geocoding
+@@ -113,13 +137,14 @@ export function FacilityGeocoding({
+           Enter a street address, city and state before geocoding.
+         </p>
+       )}
+-      {queued && (
+-        <p role="status" className="muted">
+-          Retry requested. The current geocoder result above updates when the
+-          service finishes.
+-        </p>
+-      )}
+-      <QueryState error={mutation.error} />
++      <FacilityActionStatus
++        error={mutation.error}
++        unknown={mutation.unknown}
++        reviewed={mutation.reviewed}
++        reviewing={mutation.reviewing}
++        message={mutation.message}
++        onReview={() => void mutation.review()}
++      />
+     </section>
+   );
+ }
+diff --git a/apps/web/src/features/portfolio/client-profile/NotesDialog.tsx b/apps/web/src/features/portfolio/client-profile/NotesDialog.tsx
+index 539a42981270971cb1a0814dfe0a61ed5d9fdc95..188be31c0bd4a73cd7bec78c30b82aeabfe8cb47 100644
+--- a/apps/web/src/features/portfolio/client-profile/NotesDialog.tsx
++++ b/apps/web/src/features/portfolio/client-profile/NotesDialog.tsx
+@@ -1,10 +1,15 @@
+ "use client";
+ import { TextareaField } from "@/shared/portfolio/ui/TextareaField";
+-import { useSaveProfileNotes } from "./mutations";
+-import { useIdentity, canAdminister } from "@/shared/portfolio/auth/identity";
++import { useIdentity } from "@/shared/portfolio/auth/identity";
+ import { Dialog } from "@/shared/portfolio/ui/Dialog";
+ import { QueryState } from "@/shared/portfolio/ui/QueryState";
+-import { useClient } from "@/features/portfolio/index/public";
++import {
++  profileActorKey,
++  useProfileActor,
++  type ProfileActor,
++} from "./profile-access";
++import { useProfileNotesEditor } from "./useProfileNotesEditor";
++
+ export function NotesDialog({
+   clientId,
+   open,
+@@ -14,42 +19,96 @@ export function NotesDialog({
+   open: boolean;
+   onOpenChange: (open: boolean) => void;
+ }) {
+-  const client = useClient(clientId);
+-  const identity = useIdentity();
+-  const editable = canAdminister(identity.data?.role);
+-  const mutation = useSaveProfileNotes(clientId, () => onOpenChange(false));
++  useIdentity();
++  const actor = useProfileActor();
+   return (
+     <Dialog open={open} onOpenChange={onOpenChange} title="Profile notes">
+-      <form
+-        className="stack"
+-        onSubmit={(event) => {
+-          event.preventDefault();
+-          mutation.mutate(
+-            String(new FormData(event.currentTarget).get("notes")),
+-          );
+-        }}
+-      >
+-        <TextareaField
+-          label="Notes"
+-          name="notes"
+-          defaultValue={client.data?.intakeData?.profileNotes ?? ""}
+-          readOnly={!editable}
+-          rows={12}
+-          maxLength={20000}
++      {open && (
++        <ProfileNotesEditor
++          key={`${clientId}:${profileActorKey(actor)}`}
++          clientId={clientId}
++          actor={actor}
++          onSaved={() => onOpenChange(false)}
+         />
+-        {!editable && (
+-          <small>
+-            Editing profile notes requires an administrator. Use Quick log to
+-            record new activity.
+-          </small>
+-        )}
+-        <QueryState error={mutation.error} />
+-        {editable && (
+-          <button className="button primary" disabled={mutation.isPending}>
+-            {mutation.isPending ? "Saving…" : "Save notes"}
+-          </button>
+-        )}
+-      </form>
++      )}
+     </Dialog>
+   );
+ }
++function ProfileNotesEditor({
++  clientId,
++  actor,
++  onSaved,
++}: {
++  clientId: string;
++  actor: ProfileActor | undefined;
++  onSaved: () => void;
++}) {
++  const editor = useProfileNotesEditor(clientId, actor, onSaved);
++  return (
++    <form
++      className="stack"
++      onSubmit={(event) => {
++        event.preventDefault();
++        void editor.save();
++      }}
++    >
++      <QueryState
++        pending={Boolean(actor) && editor.client.isPending}
++        error={editor.client.error}
++        retry={() => void editor.client.refetch()}
++      />
++      <TextareaField
++        label="Notes"
++        name="notes"
++        value={editor.client.data ? editor.draft : ""}
++        onChange={(event) => editor.setDraft(event.target.value)}
++        readOnly={!editor.editable || !editor.client.source || editor.pending}
++        rows={12}
++        maxLength={20000}
++      />
++      {!editor.editable && (
++        <small>
++          Editing profile notes requires a current administrator session. Use
++          Quick log to record new activity.
++        </small>
++      )}
++      {editor.changed && (
++        <p role="status">
++          Saved notes changed while this draft was open. Review the saved notes
++          before replacing them.
++        </p>
++      )}
++      {editor.unknown && (
++        <p role="status">
++          Save result is unknown. Refresh saved notes and review the current
++          value before deciding whether to save again.
++        </p>
++      )}
++      {(editor.changed || editor.unknown) && (
++        <>
++          <button
++            type="button"
++            className="button"
++            disabled={editor.client.isFetching}
++            onClick={() => void editor.review()}
++          >
++            Review saved notes
++          </button>
++          {editor.client.data && (
++            <details>
++              <summary>Current saved notes</summary>
++              <p style={{ whiteSpace: "pre-wrap" }}>
++                {editor.client.data.intakeData?.profileNotes ||
++                  "No saved notes."}
++              </p>
++            </details>
++          )}
++        </>
++      )}
++      <QueryState error={editor.error} />
++      <button className="button primary" disabled={!editor.canSave}>
++        {editor.pending ? "Saving…" : "Save notes"}
++      </button>
++    </form>
++  );
++}
+diff --git a/apps/web/src/features/portfolio/client-profile/TeamDialog.tsx b/apps/web/src/features/portfolio/client-profile/TeamDialog.tsx
+index 965bd263396ef896b4266731d5a62853de6c9e0c..55330ba81e72553d33d991dca3a90d87fcf105d0 100644
+--- a/apps/web/src/features/portfolio/client-profile/TeamDialog.tsx
++++ b/apps/web/src/features/portfolio/client-profile/TeamDialog.tsx
+@@ -1,13 +1,17 @@
+ "use client";
+-import { useChangeTeam } from "./mutations";
++import { useState } from "react";
++import { useIdentity } from "@/shared/portfolio/auth/identity";
+ import { Dialog } from "@/shared/portfolio/ui/Dialog";
+ import { QueryState } from "@/shared/portfolio/ui/QueryState";
++import { memberName } from "@/features/portfolio/index/public";
+ import {
+-  useMemberOptions,
+-  memberName,
+-} from "@/features/portfolio/index/public";
+-import { useIdentity, canAdminister } from "@/shared/portfolio/auth/identity";
+-import { useTeam } from "./queries";
++  profileActorKey,
++  useProfileActor,
++  type ProfileActor,
++} from "./profile-access";
++import { useProfileTeamEditor } from "./useProfileTeamEditor";
++import { TeamMemberFields, TeamOwnerField } from "./TeamMemberFields";
++
+ export function TeamDialog({
+   clientId,
+   open,
+@@ -17,25 +21,49 @@ export function TeamDialog({
+   open: boolean;
+   onOpenChange: (open: boolean) => void;
+ }) {
+-  const team = useTeam(clientId);
+-  const options = useMemberOptions();
+-  const identity = useIdentity();
+-  const canEdit = canAdminister(identity.data?.role);
+-  const mutation = useChangeTeam(clientId);
++  useIdentity();
++  const actor = useProfileActor();
+   return (
+     <Dialog
+       open={open}
+       onOpenChange={onOpenChange}
+       title="Account team"
+-      description="The firm's members assigned to this client."
++      description="The firm's members assigned to this client. The account owner is always on the team."
+     >
++      {open && (
++        <ProfileTeamEditor
++          key={`${clientId}:${profileActorKey(actor)}`}
++          clientId={clientId}
++          actor={actor}
++        />
++      )}
++      <div className="formActions">
++        <button className="button" onClick={() => onOpenChange(false)}>
++          Done
++        </button>
++      </div>
++    </Dialog>
++  );
++}
++function ProfileTeamEditor({
++  clientId,
++  actor,
++}: {
++  clientId: string;
++  actor: ProfileActor | undefined;
++}) {
++  const editor = useProfileTeamEditor(clientId, actor);
++  const [selectedId, setSelectedId] = useState("");
++  const [role, setRole] = useState("");
++  return (
++    <>
+       <QueryState
+-        pending={team.isPending}
+-        error={team.error}
+-        retry={() => void team.refetch()}
++        pending={Boolean(actor) && editor.team.isPending}
++        error={editor.team.error}
++        retry={() => void editor.team.refetch()}
+       />
+       <ul className="stack">
+-        {team.data?.map((member) => (
++        {editor.team.data?.map((member) => (
+           <li className="row between" key={member.userId}>
+             <span>
+               <strong>{memberName({ ...member, id: member.userId })}</strong>
+@@ -43,19 +71,16 @@ export function TeamDialog({
+                 {" "}
+                 ·{" "}
+                 {member.isOwner
+-                  ? "Account owner"
++                  ? `Account owner${member.role ? ` · ${member.role}` : ""}`
+                   : (member.role ?? "Team member")}
+               </small>
+             </span>
+-            {canEdit && !member.isOwner && (
++            {editor.canEdit && !member.isOwner && (
+               <button
+                 className="button ghost"
+-                disabled={mutation.isPending}
++                disabled={!editor.canChange}
+                 onClick={() =>
+-                  mutation.mutate({
+-                    kind: "remove",
+-                    userId: member.userId,
+-                  })
++                  void editor.change({ kind: "remove", userId: member.userId })
+                 }
+               >
+                 Remove
+@@ -64,72 +89,63 @@ export function TeamDialog({
+           </li>
+         ))}
+       </ul>
+-      {canEdit ? (
++      {editor.canEdit ? (
+         <>
+           <QueryState
+-            error={options.error}
+-            retry={() => void options.refetch()}
++            pending={editor.options.isPending}
++            error={editor.options.error}
++            retry={() => void editor.options.refetch()}
+           />
+-          <form
+-            className="stack"
+-            onSubmit={(event) => {
+-              event.preventDefault();
+-              const form = new FormData(event.currentTarget);
+-              mutation.mutate({
+-                kind: "add",
+-                userId: String(form.get("userId")),
+-                role: String(form.get("role")),
+-              });
+-            }}
+-          >
+-            <label>
+-              Add team member
+-              <select name="userId" required disabled={!options.data}>
+-                <option value="">Choose a member</option>
+-                {options.data?.map((member) => (
+-                  <option key={member.id} value={member.id}>
+-                    {memberName(member)}
+-                  </option>
+-                ))}
+-              </select>
+-            </label>
+-            <label>
+-              Role
+-              <input name="role" maxLength={120} />
+-            </label>
+-            <button
+-              className="button"
+-              disabled={mutation.isPending || !options.data}
+-            >
+-              Add member
+-            </button>
+-          </form>
+-          <label>
+-            Account owner
+-            <select
+-              disabled={mutation.isPending || !options.data}
+-              value={team.data?.find((m) => m.isOwner)?.userId ?? ""}
+-              onChange={(event) =>
+-                mutation.mutate({
+-                  kind: "owner",
+-                  userId: event.target.value || null,
++          <TeamMemberFields
++            members={editor.options.data ?? []}
++            selectedId={selectedId}
++            role={role}
++            disabled={!editor.canChange || !editor.options.source}
++            onMemberChange={setSelectedId}
++            onRoleChange={setRole}
++            onAdd={() =>
++              void editor
++                .change({ kind: "add", userId: selectedId, role })
++                .then((saved) => {
++                  if (saved) {
++                    setSelectedId("");
++                    setRole("");
++                  }
+                 })
+-              }
+-            >
+-              <option value="">Unassigned</option>
+-              {options.data?.map((member) => (
+-                <option key={member.id} value={member.id}>
+-                  {memberName(member)}
+-                </option>
+-              ))}
+-            </select>
+-          </label>
++            }
++          />
++          <TeamOwnerField
++            members={editor.options.data ?? []}
++            ownerId={
++              editor.team.data?.find((member) => member.isOwner)?.userId ?? ""
++            }
++            ownerAvailable={Boolean(editor.team.data)}
++            disabled={!editor.canChange || !editor.options.source}
++            onChange={(userId) => void editor.change({ kind: "owner", userId })}
++          />
+         </>
+       ) : (
+-        <small>Account team changes require an administrator.</small>
++        <small>
++          Account team changes require a current administrator session.
++        </small>
+       )}
+-      <QueryState error={mutation.error} />
+-      {mutation.isSuccess && <p role="status">Team updated.</p>}
+-    </Dialog>
++      <QueryState error={editor.error} />
++      {editor.unknown && (
++        <div className="stack">
++          <p role="status">
++            Change result is unknown. Reload the current team and review it
++            before making another change.
++          </p>
++          <button
++            className="button"
++            disabled={editor.team.isFetching || editor.options.isFetching}
++            onClick={() => void editor.review()}
++          >
++            Reload account team
++          </button>
++        </div>
++      )}
++      {editor.message && <p role="status">{editor.message}</p>}
++    </>
+   );
+ }
+diff --git a/apps/web/src/features/portfolio/client-profile/facility-map-mutations.ts b/apps/web/src/features/portfolio/client-profile/facility-map-mutations.ts
+index 2ea818b128c5ea12437e28680514e136615f1290..b3419a49c41639edd949e849eba66d496f8bc208 100644
+--- a/apps/web/src/features/portfolio/client-profile/facility-map-mutations.ts
++++ b/apps/web/src/features/portfolio/client-profile/facility-map-mutations.ts
+@@ -1,66 +1,221 @@
+ "use client";
+-import { useMutation, useQueryClient } from "@tanstack/react-query";
+-import { z } from "zod";
++import { useEffect, useRef, useState } from "react";
++import { useQueryClient } from "@tanstack/react-query";
+ import { useApi } from "@/shared/portfolio/api/provider";
+-import { facilitySchema } from "./contracts";
+-import { profileKey } from "./queries";
++import { ambiguousClientWrite } from "@/shared/portfolio/auth/client-writer";
++import type { Facility } from "./contracts";
++import { assertProfileActor, type ProfileActor } from "./profile-access";
++import { profileKey, profileReadKey } from "./profile-keys";
++import { currentProfileSource, profileSourceMatches } from "./profile-source";
++import { useFacilities } from "./queries";
++import {
++  nextFacilityActionAttempt,
++  setFacilityActionAttempt,
++  unknownFacilityActionAttempt,
++  useFacilityActionAttempt,
++  type FacilityActionAttempt,
++} from "./facility-action-attempt";
++import {
++  assertFacilityAction,
++  facilityActionRevision,
++  writeFacilityAction,
++  type FacilityAction,
++  type FacilityActionContext,
++} from "./facility-action-writer";
++export type { FacilityAction } from "./facility-action-writer";
+ 
+-export type FacilityAction =
+-  | { kind: "resolve-district" | "geocode"; facilityId: string }
+-  | {
+-      kind: "geocode-candidate";
+-      facilityId: string;
+-      candidateIndex: number;
+-      expectedRevision: string;
+-    }
+-  | { kind: "remove"; facilityId: string };
+-export function useFacilityAction(clientId: string) {
++type ActiveAction = {
++  token: number;
++  controller: AbortController;
++  stop: () => void;
++};
++
++export function useFacilityAction(
++  clientId: string,
++  facility: Facility,
++  actor: ProfileActor | undefined,
++  enabled: boolean,
++) {
+   const api = useApi();
+   const cache = useQueryClient();
+-  return useMutation({
+-    mutationFn: async (action: FacilityAction) => {
+-      const path = `clients/${clientId}/facilities/${encodeURIComponent(action.facilityId)}`;
+-      if (action.kind === "remove") {
+-        await api.request(
+-          "core",
+-          path,
+-          z.object({ deleted: z.literal(true) }),
+-          { method: "DELETE" },
+-        );
+-        return null;
++  const query = useFacilities(clientId);
++  const { key, attempt } = useFacilityActionAttempt(
++    clientId,
++    actor,
++    facility.id,
++  );
++  const [error, setError] = useState<Error | null>(null);
++  const [message, setMessage] = useState("");
++  const [reviewed, setReviewed] = useState(false);
++  const request = useRef<ActiveAction | null>(null);
++  const alive = useRef(true);
++  useEffect(() => {
++    alive.current = true;
++    return () => {
++      alive.current = false;
++      const active = request.current;
++      if (active) {
++        active.stop();
++        active.controller.abort();
++        unknownFacilityActionAttempt(cache, key, active.token);
+       }
+-      return api.request(
+-        "core",
+-        `${path}/${action.kind === "geocode-candidate" ? "geocode-candidate/reviewed" : action.kind}`,
+-        facilitySchema.refine(
+-          (facility) =>
+-            facility.clientId === clientId && facility.id === action.facilityId,
+-        ),
+-        {
+-          method: "POST",
+-          body:
+-            action.kind === "geocode-candidate"
+-              ? {
+-                  candidateIndex: action.candidateIndex,
+-                  expectedRevision: action.expectedRevision,
+-                }
+-              : undefined,
+-        },
++    };
++  }, [cache, key]);
++  const current = query.data?.find((row) => row.id === facility.id);
++  const canAct = Boolean(
++    enabled &&
++    actor &&
++    query.source &&
++    current &&
++    facilityActionRevision(current) === facilityActionRevision(facility) &&
++    !attempt,
++  );
++
++  function watch(context: FacilityActionContext, active: ActiveAction) {
++    const encoded = JSON.stringify(context.source.key);
++    return cache.getQueryCache().subscribe((event) => {
++      if (
++        event.query.queryKey[0] !== "identity" &&
++        JSON.stringify(event.query.queryKey) !== encoded
++      )
++        return;
++      try {
++        assertProfileActor(cache, context.actor);
++        if (profileSourceMatches(cache, context.source)) return;
++      } catch {
++        /* A changed actor also makes this local request obsolete. */
++      }
++      active.stop();
++      active.controller.abort();
++      if (request.current === active) request.current = null;
++      unknownFacilityActionAttempt(cache, key, active.token);
++    });
++  }
++  async function run(action: FacilityAction) {
++    if (
++      !canAct ||
++      !actor ||
++      !query.source ||
++      request.current ||
++      cache.getQueryData<FacilityActionAttempt | null>(key)
++    )
++      return;
++    const context = { clientId, actor, source: query.source, facility };
++    try {
++      assertFacilityAction(cache, context, action);
++    } catch (cause) {
++      setError(
++        cause instanceof Error
++          ? cause
++          : new Error("Review the saved facility."),
+       );
+-    },
+-    onSuccess: async () => {
+-      await Promise.all(
+-        ["facilities", "representation", "district-nexus"].map((section) =>
+-          cache.invalidateQueries({ queryKey: profileKey(clientId, section) }),
+-        ),
++      return;
++    }
++    const active: ActiveAction = {
++      token: nextFacilityActionAttempt(),
++      controller: new AbortController(),
++      stop: () => {},
++    };
++    request.current = active;
++    setError(null);
++    setMessage("");
++    setReviewed(false);
++    setFacilityActionAttempt(cache, key, {
++      token: active.token,
++      kind: action.kind,
++      status: "pending",
++    });
++    active.stop = watch(context, active);
++    try {
++      await writeFacilityAction(
++        api,
++        cache,
++        context,
++        action,
++        active.controller.signal,
+       );
+-    },
+-    onError: async (_error, action) => {
+-      if (action.kind === "geocode-candidate") {
+-        await cache.invalidateQueries({
+-          queryKey: profileKey(clientId, "facilities"),
++      if (!alive.current || active.controller.signal.aborted) return;
++      assertProfileActor(cache, actor);
++      if (!profileSourceMatches(cache, context.source)) {
++        unknownFacilityActionAttempt(cache, key, active.token);
++        return;
++      }
++      active.stop();
++      setFacilityActionAttempt(cache, key, null);
++      if (action.kind === "geocode")
++        setMessage(
++          "Retry requested. Refresh this page later to check the current result.",
++        );
++      for (const section of ["facilities", "representation", "district-nexus"])
++        void cache.invalidateQueries({
++          queryKey: profileKey(clientId, section),
+         });
++    } catch (cause) {
++      if (!alive.current || active.controller.signal.aborted) return;
++      active.stop();
++      if (ambiguousClientWrite(cause))
++        unknownFacilityActionAttempt(cache, key, active.token);
++      else setFacilityActionAttempt(cache, key, null);
++      setError(
++        cause instanceof Error
++          ? cause
++          : new Error("The address-resolution request could not be completed."),
++      );
++      if (
++        action.kind === "geocode-candidate" &&
++        !ambiguousClientWrite(cause) &&
++        profileSourceMatches(cache, context.source)
++      ) {
++        try {
++          assertProfileActor(cache, actor);
++          void cache.invalidateQueries({
++            queryKey: profileKey(clientId, "facilities"),
++          });
++        } catch {
++          /* An obsolete error cannot refresh a replacement view. */
++        }
+       }
+-    },
+-  });
++    } finally {
++      active.stop();
++      if (request.current === active) request.current = null;
++    }
++  }
++  async function review() {
++    if (!actor || attempt?.status !== "unknown") return;
++    const token = attempt.token;
++    const result = await query.refetch();
++    if (!alive.current || !result.isSuccess || result.error) return;
++    try {
++      assertProfileActor(cache, actor);
++      const source = currentProfileSource(
++        cache,
++        profileReadKey(clientId, "facilities", actor),
++      );
++      const stored = cache.getQueryData<FacilityActionAttempt | null>(key);
++      if (
++        !source ||
++        !result.data.some((row) => row.id === facility.id) ||
++        stored?.token !== token ||
++        stored.status !== "unknown"
++      )
++        return;
++      setFacilityActionAttempt(cache, key, null);
++      setReviewed(true);
++      setError(null);
++    } catch {
++      /* Only the initiating current view may resume explicit actions. */
++    }
++  }
++  return {
++    canAct,
++    isPending: attempt?.status === "pending",
++    kind: attempt?.kind,
++    unknown: attempt?.status === "unknown",
++    error,
++    message,
++    reviewed,
++    reviewing: query.isFetching,
++    run,
++    review,
++  };
+ }
+diff --git a/apps/web/src/features/portfolio/client-profile/facility-map-queries.ts b/apps/web/src/features/portfolio/client-profile/facility-map-queries.ts
+index 0d810fe73430a322b5da9488e9af2423e5ebdd4e..1098bc1c8e2317f07789e13d628a1d32fb8a708a 100644
+--- a/apps/web/src/features/portfolio/client-profile/facility-map-queries.ts
++++ b/apps/web/src/features/portfolio/client-profile/facility-map-queries.ts
+@@ -1,7 +1,8 @@
+ "use client";
+-import { useQuery } from "@tanstack/react-query";
++import { useQuery, useQueryClient } from "@tanstack/react-query";
+ import { useApi } from "@/shared/portfolio/api/provider";
+-import { profileKey } from "./queries";
++import { profileReadKey } from "./profile-keys";
++import { assertProfileActor, useProfileActor } from "./profile-access";
+ import {
+   boundaryCollectionSchema,
+   boundaryManifestSchema,
+@@ -11,24 +12,43 @@ import {
+ 
+ export function useFacilityRepresentation(clientId: string, enabled: boolean) {
+   const api = useApi();
+-  return useQuery({
+-    queryKey: profileKey(clientId, "representation"),
+-    enabled,
+-    queryFn: ({ signal }) =>
+-      api.request(
++  const cache = useQueryClient();
++  const actor = useProfileActor();
++  const query = useQuery({
++    queryKey: profileReadKey(clientId, "representation", actor),
++    enabled: enabled && Boolean(actor),
++    queryFn: async ({ signal }) => {
++      if (!actor) throw new Error("A current session is required.");
++      assertProfileActor(cache, actor);
++      const rows = await api.request(
+         "core",
+         `clients/${clientId}/representation`,
+         representationSchema,
+         { signal },
+-      ),
++      );
++      signal.throwIfAborted();
++      assertProfileActor(cache, actor);
++      return rows;
++    },
+   });
++  return {
++    ...query,
++    data:
++      enabled && actor && query.isSuccess && !query.error
++        ? query.data
++        : undefined,
++  };
+ }
+ export function useFacilityNexus(clientId: string, enabled: boolean) {
+   const api = useApi();
+-  return useQuery({
+-    queryKey: profileKey(clientId, "district-nexus"),
+-    enabled,
++  const cache = useQueryClient();
++  const actor = useProfileActor();
++  const query = useQuery({
++    queryKey: profileReadKey(clientId, "district-nexus", actor),
++    enabled: enabled && Boolean(actor),
+     queryFn: async ({ signal }) => {
++      if (!actor) throw new Error("A current session is required.");
++      assertProfileActor(cache, actor);
+       const value = await api.request(
+         "core",
+         `intelligence/clients/${clientId}/district-nexus-v2`,
+@@ -39,9 +59,18 @@ export function useFacilityNexus(clientId: string, enabled: boolean) {
+         throw new Error(
+           "The footprint response belongs to a different client.",
+         );
++      signal.throwIfAborted();
++      assertProfileActor(cache, actor);
+       return value;
+     },
+   });
++  return {
++    ...query,
++    data:
++      enabled && actor && query.isSuccess && !query.error
++        ? query.data
++        : undefined,
++  };
+ }
+ export function useFacilityBoundaries(enabled: boolean) {
+   const api = useApi();
+diff --git a/apps/web/src/features/portfolio/client-profile/facility-map.module.css b/apps/web/src/features/portfolio/client-profile/facility-map.module.css
+index cfb378f08567682df7864bfdc85e0a70255c8460..fa285d26347fa41b6eb541713f29141901a46282 100644
+--- a/apps/web/src/features/portfolio/client-profile/facility-map.module.css
++++ b/apps/web/src/features/portfolio/client-profile/facility-map.module.css
+@@ -264,3 +264,8 @@
+     grid-template-columns: 85px 1fr;
+   }
+ }
++@media (max-width: 480px) {
++  .stats {
++    grid-template-columns: 1fr;
++  }
++}
+diff --git a/apps/web/src/features/portfolio/client-profile/mutations.ts b/apps/web/src/features/portfolio/client-profile/mutations.ts
+deleted file mode 100644
+index 0adaf9ac0470a5bb88fb50cb7cf100ec18f39bc7..0000000000000000000000000000000000000000
+--- a/apps/web/src/features/portfolio/client-profile/mutations.ts
++++ /dev/null
+@@ -1,91 +0,0 @@
+-"use client";
+-import { useMutation, useQueryClient } from "@tanstack/react-query";
+-import { useApi } from "@/shared/portfolio/api/provider";
+-import { acknowledged } from "@/shared/portfolio/api/http";
+-import { clientKey } from "@/features/portfolio/index/public";
+-import { facilitySchema } from "./contracts";
+-import { profileKey } from "./queries";
+-export function useSaveFacility(
+-  clientId: string,
+-  facilityId: string | undefined,
+-  onSaved: () => void,
+-) {
+-  const api = useApi();
+-  const cache = useQueryClient();
+-  return useMutation({
+-    mutationFn: (body: Record<string, unknown>) =>
+-      api.request(
+-        "core",
+-        `clients/${clientId}/facilities${facilityId ? `/${encodeURIComponent(facilityId)}` : ""}`,
+-        facilitySchema.refine(
+-          (facility) =>
+-            facility.clientId === clientId &&
+-            (!facilityId || facility.id === facilityId),
+-        ),
+-        { method: facilityId ? "PATCH" : "POST", body },
+-      ),
+-    onSuccess: async () => {
+-      await cache.invalidateQueries({
+-        queryKey: profileKey(clientId, "facilities"),
+-      });
+-      await cache.invalidateQueries({
+-        queryKey: profileKey(clientId, "representation"),
+-      });
+-      await cache.invalidateQueries({
+-        queryKey: profileKey(clientId, "district-nexus"),
+-      });
+-      onSaved();
+-    },
+-  });
+-}
+-export function useSaveProfileNotes(clientId: string, onSaved: () => void) {
+-  const api = useApi();
+-  const cache = useQueryClient();
+-  return useMutation({
+-    mutationFn: (notes: string) =>
+-      api.request("core", `clients/${clientId}/profile-notes`, acknowledged, {
+-        method: "PUT",
+-        body: { notes },
+-      }),
+-    onSuccess: async () => {
+-      await cache.invalidateQueries({ queryKey: clientKey(clientId) });
+-      onSaved();
+-    },
+-  });
+-}
+-export type TeamChange =
+-  | { kind: "add"; userId: string; role: string }
+-  | { kind: "remove"; userId: string }
+-  | { kind: "owner"; userId: string | null };
+-export function useChangeTeam(clientId: string) {
+-  const api = useApi();
+-  const cache = useQueryClient();
+-  return useMutation({
+-    mutationFn: (change: TeamChange) => {
+-      if (change.kind === "owner")
+-        return api.request(
+-          "core",
+-          `client-account-owners/${clientId}`,
+-          acknowledged,
+-          { method: "PUT", body: { accountOwnerUserId: change.userId } },
+-        );
+-      if (change.kind === "remove")
+-        return api.request(
+-          "core",
+-          `clients/${clientId}/team?userId=${encodeURIComponent(change.userId)}`,
+-          acknowledged,
+-          { method: "DELETE" },
+-        );
+-      return api.request("core", `clients/${clientId}/team`, acknowledged, {
+-        method: "POST",
+-        body: { userId: change.userId, role: change.role },
+-      });
+-    },
+-    onSuccess: async () => {
+-      await Promise.all([
+-        cache.invalidateQueries({ queryKey: profileKey(clientId, "team") }),
+-        cache.invalidateQueries({ queryKey: ["account-owners"] }),
+-      ]);
+-    },
+-  });
+-}
+diff --git a/apps/web/src/features/portfolio/client-profile/queries.ts b/apps/web/src/features/portfolio/client-profile/queries.ts
+index 3a36a65e46d200074a5f626e515feeca8c91fb54..9b5df19a4f94e22c5b3bd3121621e60b92b35227 100644
+--- a/apps/web/src/features/portfolio/client-profile/queries.ts
++++ b/apps/web/src/features/portfolio/client-profile/queries.ts
+@@ -1,10 +1,13 @@
+ "use client";
+-import { useQuery } from "@tanstack/react-query";
++import { useQuery, useQueryClient } from "@tanstack/react-query";
+ import { z } from "zod";
+ import { useApi } from "@/shared/portfolio/api/provider";
+-import { activitySchema, facilitySchema, teamMemberSchema } from "./contracts";
+-export const profileKey = (clientId: string, section: string) =>
+-  ["client-profile", clientId, section] as const;
++import { activitySchema } from "./contracts";
++import { assertProfileActor, useProfileActor } from "./profile-access";
++import { profileKey, profileReadKey } from "./profile-keys";
++import { profileFacilityList, profileTeamSchema } from "./profile-receipts";
++import { currentProfileSource } from "./profile-source";
++export { profileKey } from "./profile-keys";
+ export function useActivity(clientId: string) {
+   const api = useApi();
+   return useQuery({
+@@ -20,19 +23,25 @@ export function useActivity(clientId: string) {
+ }
+ export function useFacilities(clientId: string) {
+   const api = useApi();
+-  return useQuery({
+-    queryKey: profileKey(clientId, "facilities"),
+-    queryFn: ({ signal }) =>
+-      api.request(
++  const cache = useQueryClient();
++  const actor = useProfileActor();
++  const queryKey = profileReadKey(clientId, "facilities", actor);
++  const query = useQuery({
++    queryKey,
++    enabled: Boolean(actor),
++    queryFn: async ({ signal }) => {
++      if (!actor) throw new Error("A current session is required.");
++      assertProfileActor(cache, actor);
++      const facilities = await api.request(
+         "core",
+         `clients/${clientId}/facilities`,
+-        z
+-          .array(facilitySchema)
+-          .refine((facilities) =>
+-            facilities.every((facility) => facility.clientId === clientId),
+-          ),
++        profileFacilityList(clientId, actor.tenantId),
+         { signal },
+-      ),
++      );
++      signal.throwIfAborted();
++      assertProfileActor(cache, actor);
++      return facilities;
++    },
+     refetchInterval: (query) =>
+       query.state.data?.some(
+         (f) =>
+@@ -45,17 +54,38 @@ export function useFacilities(clientId: string) {
+         ? 5000
+         : false,
+   });
++  return {
++    ...query,
++    data: actor && query.isSuccess && !query.error ? query.data : undefined,
++    source: actor ? currentProfileSource(cache, queryKey) : undefined,
++  };
+ }
+ export function useTeam(clientId: string) {
+   const api = useApi();
+-  return useQuery({
+-    queryKey: profileKey(clientId, "team"),
+-    queryFn: ({ signal }) =>
+-      api.request(
++  const cache = useQueryClient();
++  const actor = useProfileActor();
++  const queryKey = profileReadKey(clientId, "team", actor);
++  const query = useQuery({
++    queryKey,
++    enabled: Boolean(actor),
++    refetchOnMount: "always",
++    queryFn: async ({ signal }) => {
++      if (!actor) throw new Error("A current session is required.");
++      assertProfileActor(cache, actor);
++      const team = await api.request(
+         "core",
+         `clients/${clientId}/team`,
+-        z.array(teamMemberSchema),
++        profileTeamSchema,
+         { signal },
+-      ),
++      );
++      signal.throwIfAborted();
++      assertProfileActor(cache, actor);
++      return team;
++    },
+   });
++  return {
++    ...query,
++    data: actor && query.isSuccess && !query.error ? query.data : undefined,
++    source: actor ? currentProfileSource(cache, queryKey) : undefined,
++  };
+ }
+diff --git a/apps/web/src/features/portfolio/index/contracts-public.ts b/apps/web/src/features/portfolio/index/contracts-public.ts
+index 57bdb12ab28db5dc2885ba7bd2b42f5a205e32de..184cfa50a5adce907808108b3b172915a6f9459a 100644
+--- a/apps/web/src/features/portfolio/index/contracts-public.ts
++++ b/apps/web/src/features/portfolio/index/contracts-public.ts
+@@ -1 +1,7 @@
+-export { clientSchema, type Client } from "./contracts";
++export {
++  clientSchema,
++  memberSchema,
++  ownerSchema,
++  type Client,
++  type Member,
++} from "./contracts";
+diff --git a/apps/web/tests/browser/facility-map.spec.ts b/apps/web/tests/browser/facility-map.spec.ts
+index a4f3c3fbdd5133462e99120ca742ac7a21068923..aa806c7b4f3f83e0fbc082b939cbbe2c1371ff72 100644
+--- a/apps/web/tests/browser/facility-map.spec.ts
++++ b/apps/web/tests/browser/facility-map.spec.ts
+@@ -285,6 +285,9 @@ test("candidate index, district resolution, queued retry and failure messages st
+     "Synthetic geocoder failure",
+   );
+   expect(attempts).toBe(1);
++  await detail
++    .getByRole("button", { name: "Review current address resolution" })
++    .click();
+   await detail
+     .getByRole("button", { name: "Retry geocoding", exact: true })
+     .click();

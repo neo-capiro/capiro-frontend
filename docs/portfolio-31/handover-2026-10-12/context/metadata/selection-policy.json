@@ -1,0 +1,212 @@
+{
+  "binaryDownloadArchives": "cli-runtime/downloads/*.(zip|tar.gz|tgz)",
+  "componentNames": [
+    ".git",
+    ".next",
+    "__pycache__",
+    "handover-2026-10-12",
+    "handover-output",
+    "handover-preparation",
+    "node_modules"
+  ],
+  "encountered": [
+    {
+      "path": "browser-runtime/node_modules",
+      "reason": "Installed dependency/build/bytecode output; lockfiles and logs remain included"
+    },
+    {
+      "path": "browser-runtime/runtime",
+      "reason": "Installed runtime or credential store; public provenance is separately retained"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/DIRECT-ARTIFACTS.json",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/SOURCE-COMMITS.md",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/SOURCE-INVENTORY.json",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/VERIFICATION-SUMMARY.json",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/history/local-history-bundle-receipt.json",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/history/portfolio-local-history-through-760dcc6.bundle",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/planning/PHASE-GATES-20261012.md",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/receipts/alert-channels-integration.json",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/receipts/github-cli-auth-status.json",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/receipts/github-publication-preflight.json",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/receipts/meri-pr4-final-read.json",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/receipts/source-publication-plan.json",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/receipts/source-publication-receipt.json",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/receipts/source-upload-timeout.json",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/receipts/watchlist-integration.json",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/references/Capiro-3.1-Portfolio-Audit.xlsx",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/reviews/PR4-SOURCE-ADVANCE-20261012.md",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/reviews/alert-channels-independent-review-20261012.json",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/reviews/context-roots.json",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/reviews/file-arrival-final-integration.json",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/reviews/final-helper-independent-review.json",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/reviews/portable-evidence-and-ledger-proposal.json",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/reviews/supplemental-selection-and-source-note.json",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/reviews/watchlist-accepted-projection-REVIEW.md",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/reviews/watchlist-accepted-projection-review.json",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/tools/assemble-portable-verification.py",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/tools/integrate-frozen.py",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/tools/prepare-handoff.py",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/tools/reconcile-current-ledger.py",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/tools/run-final-checkpoint.py",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/verification/root-check/attempt-start.json",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/verification/root-check/receipt.json",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/verification/root-check/source-after.json",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-12/verification/root-check/source-before.json",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    },
+    {
+      "path": "capiro-frontend-portfolio/outputs/evidence/portfolio-shared-integration-20261011/__pycache__",
+      "reason": "Installed dependency/build/bytecode output; lockfiles and logs remain included"
+    },
+    {
+      "path": "capiro-frontend-portfolio/outputs/evidence/portfolio-shared-integration-20261011/pre-consolidation-generated/node_modules",
+      "reason": "Installed dependency/build/bytecode output; lockfiles and logs remain included"
+    },
+    {
+      "path": "cli-runtime/auth-github",
+      "reason": "Installed runtime or credential store; public provenance is separately retained"
+    },
+    {
+      "path": "cli-runtime/aws",
+      "reason": "Installed runtime or credential store; public provenance is separately retained"
+    },
+    {
+      "path": "cli-runtime/bin",
+      "reason": "Installed runtime or credential store; public provenance is separately retained"
+    },
+    {
+      "path": "cli-runtime/downloads/aws-package",
+      "reason": "Installed runtime or credential store; public provenance is separately retained"
+    },
+    {
+      "path": "cli-runtime/downloads/awscliv2.zip",
+      "reason": "Downloaded installable CLI binary archive"
+    },
+    {
+      "path": "cli-runtime/downloads/gh_2.102.0_linux_amd64.tar.gz",
+      "reason": "Downloaded installable CLI binary archive"
+    },
+    {
+      "path": "cli-runtime/gnupg",
+      "reason": "Installed runtime or credential store; public provenance is separately retained"
+    },
+    {
+      "path": "handover-preparation",
+      "reason": "New handover outputs/preparation published separately; prevents recursive capture"
+    }
+  ],
+  "explicitException": "handover-preparation/integrate-frozen.py",
+  "ignoredWorktreePolicy": "All tracked working and untracked nonignored files; all outputs/ regardless of Git ignore. Other ignored dependency/build material is intentionally excluded.",
+  "runtimePrefixes": [
+    "browser-runtime/runtime",
+    "browser-runtime/node_modules",
+    "cli-runtime/aws",
+    "cli-runtime/bin",
+    "cli-runtime/auth-github",
+    "cli-runtime/gnupg",
+    "cli-runtime/downloads/aws-package"
+  ],
+  "sourceHistoryPolicy": "Git administration is excluded; root-owned complete history bundle is referenced separately.",
+  "stabilityPolicy": "Exact recorded Git metadata is retained. Stability comparison excludes only untracked status/list entries whose paths are explicitly excluded; tracked HEAD/index/diffs and all selected file paths/identities must remain unchanged.",
+  "topLevelPolicy": "All files outside discovered worktrees and exclusions, including discovered context not on the initial requested list."
+}

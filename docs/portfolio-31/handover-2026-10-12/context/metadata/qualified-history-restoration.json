@@ -1,0 +1,125 @@
+{
+  "recordedAt": "2026-10-12T01:38:06.430999+00:00",
+  "bundle": "portfolio-continuation-760dcc6-requires-02c02d9.bundle",
+  "bytes": 1389324,
+  "sha256": "591d293dee1b903e31c70e8b659beae928b04d4c1ed87c8e7a6e27416eabc8af",
+  "sourceHead": "760dcc6c1179312c7f4b762e64cf3af1aad60c3e",
+  "sourceTree": "46417a01484727747b0a2d81b3b4f278285cb709",
+  "requiredPublishedBase": "02c02d95bdf3949662b9123f425271c6491ffdab",
+  "localSourceCommitsAfterBase": 33,
+  "scope": "All available local continuation refs/history after published base; not a self-contained copy of older GitHub ancestry.",
+  "historicalBundle": "portfolio-local-history-through-760dcc6.bundle",
+  "historicalLimitation": "The original all-ref bundle was built from a shallow repository at02c. Same-repository verify did not establish fresh standalone restoration. Its exact bytes and old receipt are preserved as historical evidence; use this prerequisite bundle for recovery.",
+  "freshRestore": "Passed clone through Git protocol with explicit shallow boundary, base prerequisite verification, import into recovered namespace, exact source HEAD/tree/count, and git fsck --full. A normal authenticated GitHub clone of this branch supplies the published prerequisite.",
+  "bundleRefs": "3eeaeb785bf131d41f7bcdc28170d5bfa587cd0a refs/heads/codex/portfolio-advocacy-filters-outcomes-20261011\n75409a96d6c58a53c7d44eb6053cc291995caf80 refs/heads/codex/portfolio-alert-channels-20261012\ne7cdd3cc3e50cd2fd3355f134a7ceb64861134f5 refs/heads/codex/portfolio-capability-documents-20261011\n0beb51c3593ca801f88fdc4c8b972d209a929760 refs/heads/codex/portfolio-capability-presentation-20261011\n760dcc6c1179312c7f4b762e64cf3af1aad60c3e refs/heads/codex/portfolio-continuation-20261011\neb04ced29a868f8df1e033c1a38c7dfc53e91848 refs/heads/codex/portfolio-current-reads-20261011\n75409a96d6c58a53c7d44eb6053cc291995caf80 refs/heads/codex/portfolio-file-arrival-20261012\nee39c2fc6e3520ac5e9eb49cd9b8a6d94e6716eb refs/heads/codex/portfolio-objective-intake-20261011\n0beb51c3593ca801f88fdc4c8b972d209a929760 refs/heads/codex/portfolio-profile-current-state-20261011\n3eeaeb785bf131d41f7bcdc28170d5bfa587cd0a refs/heads/codex/portfolio-saved-submissions-20261011\n34cb6a017aa2ea37c3a72bffe399277762a859fa refs/heads/codex/portfolio-tracker-preferences-20261011\n75409a96d6c58a53c7d44eb6053cc291995caf80 refs/heads/codex/portfolio-watchlist-current-state-20261011\n0beb51c3593ca801f88fdc4c8b972d209a929760 refs/heads/codex/portfolio-work-current-reads-20261011\n760dcc6c1179312c7f4b762e64cf3af1aad60c3e HEAD\n3eeaeb785bf131d41f7bcdc28170d5bfa587cd0a worktrees/capiro-portfolio-saved-submissions/HEAD\n0beb51c3593ca801f88fdc4c8b972d209a929760 worktrees/capiro-portfolio-profile-current-state/HEAD\ne7cdd3cc3e50cd2fd3355f134a7ceb64861134f5 worktrees/capiro-portfolio-capability-documents/HEAD\n0beb51c3593ca801f88fdc4c8b972d209a929760 worktrees/capiro-portfolio-capability-presentation/HEAD\n75409a96d6c58a53c7d44eb6053cc291995caf80 worktrees/capiro-portfolio-file-arrival/HEAD\neb04ced29a868f8df1e033c1a38c7dfc53e91848 worktrees/capiro-portfolio-current-reads/HEAD\n0beb51c3593ca801f88fdc4c8b972d209a929760 worktrees/capiro-portfolio-work-current-reads/HEAD\n75409a96d6c58a53c7d44eb6053cc291995caf80 worktrees/capiro-portfolio-alert-channels/HEAD\n3eeaeb785bf131d41f7bcdc28170d5bfa587cd0a worktrees/capiro-portfolio-advocacy-filters-outcomes/HEAD\nee39c2fc6e3520ac5e9eb49cd9b8a6d94e6716eb worktrees/capiro-portfolio-objective-intake/HEAD\n34cb6a017aa2ea37c3a72bffe399277762a859fa worktrees/capiro-portfolio-tracker-preferences/HEAD\n75409a96d6c58a53c7d44eb6053cc291995caf80 worktrees/capiro-portfolio-watchlist-current-state/HEAD",
+  "steps": [
+    {
+      "command": [
+        "git",
+        "clone",
+        "--no-local",
+        "--single-branch",
+        "--branch",
+        "main",
+        "/workspace/scratch/158b6018a5d3/capiro-frontend-base",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/history-restore-validation"
+      ],
+      "cwd": "/workspace/scratch/158b6018a5d3",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Cloning into '/workspace/scratch/158b6018a5d3/handover-preparation/history-restore-validation'...\n"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/workspace/scratch/158b6018a5d3/handover-preparation/history-restore-validation",
+      "exit": 0,
+      "stdout": "02c02d95bdf3949662b9123f425271c6491ffdab\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "bundle",
+        "verify",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/portfolio-continuation-760dcc6-requires-02c02d9.bundle"
+      ],
+      "cwd": "/workspace/scratch/158b6018a5d3/handover-preparation/history-restore-validation",
+      "exit": 0,
+      "stdout": "The bundle contains these 26 refs:\n3eeaeb785bf131d41f7bcdc28170d5bfa587cd0a refs/heads/codex/portfolio-advocacy-filters-outcomes-20261011\n75409a96d6c58a53c7d44eb6053cc291995caf80 refs/heads/codex/portfolio-alert-channels-20261012\ne7cdd3cc3e50cd2fd3355f134a7ceb64861134f5 refs/heads/codex/portfolio-capability-documents-20261011\n0beb51c3593ca801f88fdc4c8b972d209a929760 refs/heads/codex/portfolio-capability-presentation-20261011\n760dcc6c1179312c7f4b762e64cf3af1aad60c3e refs/heads/codex/portfolio-continuation-20261011\neb04ced29a868f8df1e033c1a38c7dfc53e91848 refs/heads/codex/portfolio-current-reads-20261011\n75409a96d6c58a53c7d44eb6053cc291995caf80 refs/heads/codex/portfolio-file-arrival-20261012\nee39c2fc6e3520ac5e9eb49cd9b8a6d94e6716eb refs/heads/codex/portfolio-objective-intake-20261011\n0beb51c3593ca801f88fdc4c8b972d209a929760 refs/heads/codex/portfolio-profile-current-state-20261011\n3eeaeb785bf131d41f7bcdc28170d5bfa587cd0a refs/heads/codex/portfolio-saved-submissions-20261011\n34cb6a017aa2ea37c3a72bffe399277762a859fa refs/heads/codex/portfolio-tracker-preferences-20261011\n75409a96d6c58a53c7d44eb6053cc291995caf80 refs/heads/codex/portfolio-watchlist-current-state-20261011\n0beb51c3593ca801f88fdc4c8b972d209a929760 refs/heads/codex/portfolio-work-current-reads-20261011\n760dcc6c1179312c7f4b762e64cf3af1aad60c3e HEAD\n3eeaeb785bf131d41f7bcdc28170d5bfa587cd0a worktrees/capiro-portfolio-saved-submissions/HEAD\n0beb51c3593ca801f88fdc4c8b972d209a929760 worktrees/capiro-portfolio-profile-current-state/HEAD\ne7cdd3cc3e50cd2fd3355f134a7ceb64861134f5 worktrees/capiro-portfolio-capability-documents/HEAD\n0beb51c3593ca801f88fdc4c8b972d209a929760 worktrees/capiro-portfolio-capability-presentation/HEAD\n75409a96d6c58a53c7d44eb6053cc291995caf80 worktrees/capiro-portfolio-file-arrival/HEAD\neb04ced29a868f8df1e033c1a38c7dfc53e91848 worktrees/capiro-portfolio-current-reads/HEAD\n0beb51c3593ca801f88fdc4c8b972d209a929760 worktrees/capiro-portfolio-work-current-reads/HEAD\n75409a96d6c58a53c7d44eb6053cc291995caf80 worktrees/capiro-portfolio-alert-channels/HEAD\n3eeaeb785bf131d41f7bcdc28170d5bfa587cd0a worktrees/capiro-portfolio-advocacy-filters-outcomes/HEAD\nee39c2fc6e3520ac5e9eb49cd9b8a6d94e6716eb worktrees/capiro-portfolio-objective-intake/HEAD\n34cb6a017aa2ea37c3a72bffe399277762a859fa worktrees/capiro-portfolio-tracker-preferences/HEAD\n75409a96d6c58a53c7d44eb6053cc291995caf80 worktrees/capiro-portfolio-watchlist-current-state/HEAD\nThe bundle requires this ref:\n02c02d95bdf3949662b9123f425271c6491ffdab \nThe bundle uses this hash algorithm: sha1\n",
+      "stderr": "/workspace/scratch/158b6018a5d3/handover-preparation/portfolio-continuation-760dcc6-requires-02c02d9.bundle is okay\n"
+    },
+    {
+      "command": [
+        "git",
+        "fetch",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/portfolio-continuation-760dcc6-requires-02c02d9.bundle",
+        "refs/heads/*:refs/remotes/portfolio-history/*"
+      ],
+      "cwd": "/workspace/scratch/158b6018a5d3/handover-preparation/history-restore-validation",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "From /workspace/scratch/158b6018a5d3/handover-preparation/portfolio-continuation-760dcc6-requires-02c02d9.bundle\n * [new branch]      codex/portfolio-work-current-reads-20261011 -> portfolio-history/codex/portfolio-work-current-reads-20261011\n * [new branch]      codex/portfolio-watchlist-current-state-20261011 -> portfolio-history/codex/portfolio-watchlist-current-state-20261011\n * [new branch]      codex/portfolio-tracker-preferences-20261011 -> portfolio-history/codex/portfolio-tracker-preferences-20261011\n * [new branch]      codex/portfolio-saved-submissions-20261011 -> portfolio-history/codex/portfolio-saved-submissions-20261011\n * [new branch]      codex/portfolio-profile-current-state-20261011 -> portfolio-history/codex/portfolio-profile-current-state-20261011\n * [new branch]      codex/portfolio-objective-intake-20261011 -> portfolio-history/codex/portfolio-objective-intake-20261011\n * [new branch]      codex/portfolio-file-arrival-20261012 -> portfolio-history/codex/portfolio-file-arrival-20261012\n * [new branch]      codex/portfolio-current-reads-20261011 -> portfolio-history/codex/portfolio-current-reads-20261011\n * [new branch]      codex/portfolio-continuation-20261011 -> portfolio-history/codex/portfolio-continuation-20261011\n * [new branch]      codex/portfolio-capability-presentation-20261011 -> portfolio-history/codex/portfolio-capability-presentation-20261011\n * [new branch]      codex/portfolio-capability-documents-20261011 -> portfolio-history/codex/portfolio-capability-documents-20261011\n * [new branch]      codex/portfolio-alert-channels-20261012 -> portfolio-history/codex/portfolio-alert-channels-20261012\n * [new branch]      codex/portfolio-advocacy-filters-outcomes-20261011 -> portfolio-history/codex/portfolio-advocacy-filters-outcomes-20261011\n"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "refs/remotes/portfolio-history/codex/portfolio-continuation-20261011"
+      ],
+      "cwd": "/workspace/scratch/158b6018a5d3/handover-preparation/history-restore-validation",
+      "exit": 0,
+      "stdout": "760dcc6c1179312c7f4b762e64cf3af1aad60c3e\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "refs/remotes/portfolio-history/codex/portfolio-continuation-20261011^{tree}"
+      ],
+      "cwd": "/workspace/scratch/158b6018a5d3/handover-preparation/history-restore-validation",
+      "exit": 0,
+      "stdout": "46417a01484727747b0a2d81b3b4f278285cb709\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-list",
+        "--count",
+        "02c02d95bdf3949662b9123f425271c6491ffdab..refs/remotes/portfolio-history/codex/portfolio-continuation-20261011"
+      ],
+      "cwd": "/workspace/scratch/158b6018a5d3/handover-preparation/history-restore-validation",
+      "exit": 0,
+      "stdout": "33\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "fsck",
+        "--full"
+      ],
+      "cwd": "/workspace/scratch/158b6018a5d3/handover-preparation/history-restore-validation",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "bundle",
+        "list-heads",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/portfolio-continuation-760dcc6-requires-02c02d9.bundle"
+      ],
+      "cwd": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio",
+      "exit": 0,
+      "stdout": "3eeaeb785bf131d41f7bcdc28170d5bfa587cd0a refs/heads/codex/portfolio-advocacy-filters-outcomes-20261011\n75409a96d6c58a53c7d44eb6053cc291995caf80 refs/heads/codex/portfolio-alert-channels-20261012\ne7cdd3cc3e50cd2fd3355f134a7ceb64861134f5 refs/heads/codex/portfolio-capability-documents-20261011\n0beb51c3593ca801f88fdc4c8b972d209a929760 refs/heads/codex/portfolio-capability-presentation-20261011\n760dcc6c1179312c7f4b762e64cf3af1aad60c3e refs/heads/codex/portfolio-continuation-20261011\neb04ced29a868f8df1e033c1a38c7dfc53e91848 refs/heads/codex/portfolio-current-reads-20261011\n75409a96d6c58a53c7d44eb6053cc291995caf80 refs/heads/codex/portfolio-file-arrival-20261012\nee39c2fc6e3520ac5e9eb49cd9b8a6d94e6716eb refs/heads/codex/portfolio-objective-intake-20261011\n0beb51c3593ca801f88fdc4c8b972d209a929760 refs/heads/codex/portfolio-profile-current-state-20261011\n3eeaeb785bf131d41f7bcdc28170d5bfa587cd0a refs/heads/codex/portfolio-saved-submissions-20261011\n34cb6a017aa2ea37c3a72bffe399277762a859fa refs/heads/codex/portfolio-tracker-preferences-20261011\n75409a96d6c58a53c7d44eb6053cc291995caf80 refs/heads/codex/portfolio-watchlist-current-state-20261011\n0beb51c3593ca801f88fdc4c8b972d209a929760 refs/heads/codex/portfolio-work-current-reads-20261011\n760dcc6c1179312c7f4b762e64cf3af1aad60c3e HEAD\n3eeaeb785bf131d41f7bcdc28170d5bfa587cd0a worktrees/capiro-portfolio-saved-submissions/HEAD\n0beb51c3593ca801f88fdc4c8b972d209a929760 worktrees/capiro-portfolio-profile-current-state/HEAD\ne7cdd3cc3e50cd2fd3355f134a7ceb64861134f5 worktrees/capiro-portfolio-capability-documents/HEAD\n0beb51c3593ca801f88fdc4c8b972d209a929760 worktrees/capiro-portfolio-capability-presentation/HEAD\n75409a96d6c58a53c7d44eb6053cc291995caf80 worktrees/capiro-portfolio-file-arrival/HEAD\neb04ced29a868f8df1e033c1a38c7dfc53e91848 worktrees/capiro-portfolio-current-reads/HEAD\n0beb51c3593ca801f88fdc4c8b972d209a929760 worktrees/capiro-portfolio-work-current-reads/HEAD\n75409a96d6c58a53c7d44eb6053cc291995caf80 worktrees/capiro-portfolio-alert-channels/HEAD\n3eeaeb785bf131d41f7bcdc28170d5bfa587cd0a worktrees/capiro-portfolio-advocacy-filters-outcomes/HEAD\nee39c2fc6e3520ac5e9eb49cd9b8a6d94e6716eb worktrees/capiro-portfolio-objective-intake/HEAD\n34cb6a017aa2ea37c3a72bffe399277762a859fa worktrees/capiro-portfolio-tracker-preferences/HEAD\n75409a96d6c58a53c7d44eb6053cc291995caf80 worktrees/capiro-portfolio-watchlist-current-state/HEAD\n",
+      "stderr": ""
+    }
+  ]
+}

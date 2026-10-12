@@ -1,0 +1,137 @@
+{
+  "cases": [
+    {
+      "name": "Manifest extension and idempotent rerun preserve all six original pack parts",
+      "passed": true,
+      "priorDeliverySha256": "fae8e3661df3c26dbe501193f1fe5cfa9d009568ccbdf60fa4a6276d584ce875"
+    },
+    {
+      "allPackageFiles": 370,
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/prepare_context.py",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-final-qualification-jksxrfqf/published",
+        "--target",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-final-qualification-jksxrfqf/materialized"
+      ],
+      "exitCode": 0,
+      "name": "Published layout missing manifest and both large packs reconstructs every original byte",
+      "passed": true,
+      "reassembledOriginals": [
+        {
+          "path": "manifest.json",
+          "sha256": "c23fb2a329d4a6c314ef41bec572603049e2601168579b86d2dd94bba4aa2575",
+          "size": 15762225
+        },
+        {
+          "path": "packs/context-00005.tar.gz",
+          "sha256": "930a0d1bc7ab99ba06996a35a65d3af0dce1466e28d495f218c2e2704c4aa8ac",
+          "size": 20401940
+        },
+        {
+          "path": "packs/context-00132.tar.gz",
+          "sha256": "3d4b12a71d25920ebb8e652a93dd897139e4bc329fed35b9da6e26a909070c02",
+          "size": 19860818
+        }
+      ],
+      "seconds": 0.890503799997532,
+      "stderr": "",
+      "stdout": "{\n  \"manifestReassembled\": true,\n  \"manifestSha256\": \"c23fb2a329d4a6c314ef41bec572603049e2601168579b86d2dd94bba4aa2575\",\n  \"nextStep\": \"Run the existing verify_context.py against this target and the trusted manifest hash.\",\n  \"ordinaryFilesCopied\": 367,\n  \"packsReassembled\": 2,\n  \"target\": \"/workspace/scratch/158b6018a5d3/handover-preparation/delivery-final-qualification-jksxrfqf/materialized\"\n}\n"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/verify_context.py",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-final-qualification-jksxrfqf/materialized",
+        "--expected-manifest-sha256",
+        "c23fb2a329d4a6c314ef41bec572603049e2601168579b86d2dd94bba4aa2575",
+        "--history-bundle",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/portfolio-continuation-760dcc6-requires-02c02d9.bundle"
+      ],
+      "exitCode": 0,
+      "name": "Existing unchanged verifier accepts reconstructed manifest, all package bytes and history binding",
+      "passed": true,
+      "seconds": 5.3626152709985035,
+      "stderr": "",
+      "stdout": "{\"credentialReview\": \"ROOT_REVIEW_REQUIRED\", \"files\": 35264, \"historyBundleVerified\": true, \"manifestSha256\": \"c23fb2a329d4a6c314ef41bec572603049e2601168579b86d2dd94bba4aa2575\", \"metadataFiles\": 202, \"packs\": 166, \"uniqueBlobs\": 9729, \"verified\": true}\n"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/prepare_context.py",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-final-qualification-jksxrfqf/published",
+        "--target",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-final-qualification-jksxrfqf/materialized"
+      ],
+      "exitCode": 1,
+      "name": "Existing target is refused",
+      "passed": true,
+      "seconds": 0.03274068599785096,
+      "stderr": "Preparation refused: Target must be a NEW directory: /workspace/scratch/158b6018a5d3/handover-preparation/delivery-final-qualification-jksxrfqf/materialized. Any partial target is unverified; do not reuse it.\n",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/prepare_context.py",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-final-qualification-jksxrfqf/published",
+        "--target",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-final-qualification-jksxrfqf/manifest-traversal-target"
+      ],
+      "exitCode": 1,
+      "name": "Manifest traversal is refused before creating the target",
+      "passed": true,
+      "seconds": 0.033357563999743434,
+      "stderr": "Preparation refused: Absolute, dot or traversal path is not allowed. Any partial target is unverified; do not reuse it.\n",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/prepare_context.py",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-final-qualification-jksxrfqf/published",
+        "--target",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-final-qualification-jksxrfqf/manifest-relocation-target"
+      ],
+      "exitCode": 1,
+      "name": "Manifest relocation outside exact manifest.json is refused",
+      "passed": true,
+      "seconds": 0.040951335002318956,
+      "stderr": "Preparation refused: The extra original must be exactly manifest.json. Any partial target is unverified; do not reuse it.\n",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/prepare_context.py",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-final-qualification-jksxrfqf/published",
+        "--target",
+        "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-final-qualification-jksxrfqf/corrupt-manifest-target"
+      ],
+      "exitCode": 1,
+      "name": "Corrupt manifest part is refused before creating the target",
+      "passed": true,
+      "seconds": 0.09772834800241981,
+      "stderr": "Preparation refused: File integrity mismatch: manifest.json.part-00001. Any partial target is unverified; do not reuse it.\n",
+      "stdout": ""
+    }
+  ],
+  "deliverySha256": "2e64be7670e860809a63781e17e683f1d1a10ad5857a23b5bce305e7c3e09ed5",
+  "fixture": "Ordinary files and parts hardlinked read-only; descriptor copied independently. Corruption check detaches its fixture part before mutation.",
+  "generatedValidationLayoutRemoved": true,
+  "originalContextManifestSha256": "c23fb2a329d4a6c314ef41bec572603049e2601168579b86d2dd94bba4aa2575",
+  "originalContextUnchanged": true,
+  "originalPackageFileCount": 370,
+  "passed": true,
+  "previousQualification": "context-delivery-packs-only/context-delivery-qualification.json",
+  "removedScope": "Only this script-owned temporary published fixture and materialized target; all originals/parts/helper/history/qualification receipts remain.",
+  "resourceFailure": "context-delivery-ENOSPC-attempt.json",
+  "scope": "Transport preservation only; original manifest plus two packs split",
+  "sourceHelpers": {
+    "context_common.py": "8633a0f83cc28e54ea65c9bb99300090861fbfe35d0a16efd40d5e15e3d0c800",
+    "context_delivery.py": "f2ddd5700397706469fde9a2af7841ae113538bf661690751bc6637c36e453a4",
+    "prepare_context.py": "e0fc62fb4f2373222bdf6bb8c9d0119b4c05ada108740a3b35f2ab7090f0b319",
+    "split_context.py": "b5e7b4a21b4f8228eb65c6a3234ed026308c29632e5eaba95490426a81366771"
+  },
+  "work": "/workspace/scratch/158b6018a5d3/handover-preparation/delivery-final-qualification-jksxrfqf"
+}

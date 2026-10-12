@@ -1,0 +1,35 @@
+{
+  "candidate": "preservation-tools-01",
+  "files": [
+    {
+      "path": "collect_context.py",
+      "sha256": "0e38211652da3dfbaf7b34d7f1d2de5fa4a867fd227fe92d8feb243efe4b6baf",
+      "size": 21115
+    },
+    {
+      "path": "context_common.py",
+      "sha256": "8633a0f83cc28e54ea65c9bb99300090861fbfe35d0a16efd40d5e15e3d0c800",
+      "size": 10416
+    },
+    {
+      "path": "scan_credentials.py",
+      "sha256": "692f36b9a5195e04fd0ab973cf2f088e540f654fc4762e91e61e789decea421c",
+      "size": 7717
+    },
+    {
+      "path": "verify_context.py",
+      "sha256": "4a28c73ac3020924a0680bd383f85cb0e04e2eb237142806e52c01d4aaab8c23",
+      "size": 824
+    },
+    {
+      "path": "restore_context.py",
+      "sha256": "01fc4fbe3e288c42a3cb32c4a963333a9be545c273eb99288b42f6bef3acb61c",
+      "size": 5919
+    },
+    {
+      "path": "CONTEXT-TOOLS.md",
+      "sha256": "1dba9a02679d7cca1edcbf7dda3c67d26ae9dd1f0c2e1f79299e9f982407a338",
+      "size": 5619
+    }
+  ]
+}

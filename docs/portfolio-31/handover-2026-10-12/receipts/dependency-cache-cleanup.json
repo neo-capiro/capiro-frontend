@@ -1,0 +1,20 @@
+{
+  "recordedAt": "2026-10-12T01:59:21.354865+00:00",
+  "reason": "Free space for final source preservation, new-target restoration qualification and Git objects after ENOSPC; affected feature worktrees are frozen and no task Node/browser runners were active.",
+  "removed": [
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-objective-intake/node_modules",
+      "classification": "npm-installed reproducible dependencies only; exact source and lockfiles retained",
+      "trackedFiles": 0
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-watchlist-current-state/node_modules",
+      "classification": "npm-installed reproducible dependencies only; exact source and lockfiles retained",
+      "trackedFiles": 0
+    }
+  ],
+  "sourceChanged": false,
+  "rawEvidenceChanged": false,
+  "recovery": "Reinstall in the specific worktree with npm ci from its preserved lockfile when needed. No task source, evidence, package/lockfile, context bytes, archive, credential store or shared root install was removed.",
+  "freeBytesAfter": 1435185152
+}

@@ -1,0 +1,663 @@
+diff --git a/apps/web/src/features/portfolio/client-profile/QuickLog.tsx b/apps/web/src/features/portfolio/client-profile/QuickLog.tsx
+index 7b7540ae135b9cbc937be38184f57a123112509e..62f0c9332010c831c211611bbae7a8768bfc0b8e 100644
+--- a/apps/web/src/features/portfolio/client-profile/QuickLog.tsx
++++ b/apps/web/src/features/portfolio/client-profile/QuickLog.tsx
+@@ -1,5 +1,6 @@
+ "use client";
+-import { useState } from "react";
++import { useId, useState } from "react";
++import { useRouter } from "next/navigation";
+ import { TextareaField } from "@/shared/portfolio/ui/TextareaField";
+ import {
+   QuickLogUndo,
+@@ -8,6 +9,7 @@ import {
+ } from "./quick-log/public";
+ import { Dialog } from "@/shared/portfolio/ui/Dialog";
+ import { QueryState } from "@/shared/portfolio/ui/QueryState";
++import meetingEntryStyles from "./quick-log/meeting-entry.module.css";
+ export function QuickLog({
+   clientId,
+   clientName,
+@@ -21,12 +23,15 @@ export function QuickLog({
+   onOpenChange: (open: boolean) => void;
+   personId?: string;
+ }) {
++  const router = useRouter();
++  const meetingHint = useId();
+   const [validation, setValidation] = useState("");
+   const { mutation, receipt, clearReceipt, canCreate, uncertain } = useQuickLog(
+     clientId,
+     open,
+     () => onOpenChange(false),
+   );
++  const canOpenMeeting = open && canCreate && !mutation.isPending && !uncertain;
+   return (
+     <>
+       <Dialog
+@@ -68,6 +73,25 @@ export function QuickLog({
+               <option value="request">Request</option>
+             </select>
+           </label>
++          <div className={meetingEntryStyles.entry}>
++            <button
++              type="button"
++              className="button"
++              aria-describedby={meetingHint}
++              disabled={!canOpenMeeting}
++              onClick={() => {
++                if (canOpenMeeting)
++                  router.push(
++                    `/portfolio/${encodeURIComponent(clientId)}/calendar?new=meeting`,
++                  );
++              }}
++            >
++              Record a meeting
++            </button>
++            <small id={meetingHint} className={meetingEntryStyles.hint}>
++              Enter the required start and end times in Calendar.
++            </small>
++          </div>
+           <label>
+             Title
+             <input name="title" required maxLength={300} autoFocus />
+diff --git a/apps/web/src/features/portfolio/index/PortfolioIndex.tsx b/apps/web/src/features/portfolio/index/PortfolioIndex.tsx
+index 372cfa7ea6cd72c6091a178ab670e117b32cc0fc..c8f697e9376fc230b1e3d1d1f12db44e635437c2 100644
+--- a/apps/web/src/features/portfolio/index/PortfolioIndex.tsx
++++ b/apps/web/src/features/portfolio/index/PortfolioIndex.tsx
+@@ -1,5 +1,5 @@
+ "use client";
+-import { useState } from "react";
++import { useRef, useState } from "react";
+ import Link from "next/link";
+ import { useSearchParams, useRouter, usePathname } from "next/navigation";
+ import { Plus, Search } from "lucide-react";
+@@ -23,6 +23,7 @@ import { GlobalQuickLog } from "./GlobalQuickLog";
+ import { PortfolioAttention } from "./attention/public";
+ import { GlobalObjectiveClientPicker } from "@/features/portfolio/objectives/global-create/public";
+ import styles from "./portfolio.module.css";
++import objectiveEntryStyles from "./objective-entry.module.css";
+ 
+ export function PortfolioIndex({
+   destinations,
+@@ -36,6 +37,7 @@ export function PortfolioIndex({
+   const router = useRouter();
+   const pathname = usePathname();
+   const [creating, setCreating] = useState(false);
++  const objectiveTrigger = useRef<HTMLButtonElement>(null);
+   const state = readPortfolioState(params);
+   const permitted =
+     !identity.error &&
+@@ -75,7 +77,9 @@ export function PortfolioIndex({
+               Portfolio <span>{clients.data?.length ?? "—"}</span>
+             </h1>
+           </div>
+-          <div className={styles.headerActions}>
++          <div
++            className={`${styles.headerActions} ${objectiveEntryStyles.actions}`}
++          >
+             <label className={styles.search}>
+               <Search size={16} aria-hidden="true" />
+               <input
+@@ -86,6 +90,14 @@ export function PortfolioIndex({
+                 onChange={(e) => set("q", e.target.value)}
+               />
+             </label>
++            <button
++              ref={objectiveTrigger}
++              className="button"
++              disabled={!permitted}
++              onClick={() => set("new", "objective")}
++            >
++              New objective
++            </button>
+             <button
+               className="button primary"
+               disabled={!permitted}
+@@ -251,6 +263,15 @@ export function PortfolioIndex({
+         />
+         <GlobalObjectiveClientPicker
+           open={params.get("new") === "objective"}
++          onCloseAutoFocus={(event) => {
++            if (
++              objectiveTrigger.current &&
++              !objectiveTrigger.current.disabled
++            ) {
++              event.preventDefault();
++              objectiveTrigger.current.focus();
++            }
++          }}
+           onOpenChange={(open) => {
+             if (!open) {
+               const next = new URLSearchParams(params);
+diff --git a/apps/web/src/features/portfolio/objectives/ObjectiveEditor.tsx b/apps/web/src/features/portfolio/objectives/ObjectiveEditor.tsx
+index 2b569dff3a90afb4d676bb121f5b34768a805618..2bce78db1986a82d00e6edb0e5d3270725ef4a40 100644
+--- a/apps/web/src/features/portfolio/objectives/ObjectiveEditor.tsx
++++ b/apps/web/src/features/portfolio/objectives/ObjectiveEditor.tsx
+@@ -1,22 +1,15 @@
+ "use client";
+-import { TextareaField } from "@/shared/portfolio/ui/TextareaField";
+-import { useSaveObjective } from "./mutations";
+-import { useState } from "react";
+ import { Dialog } from "@/shared/portfolio/ui/Dialog";
+-import { QueryState } from "@/shared/portfolio/ui/QueryState";
+-import { ApiError } from "@/shared/portfolio/api/http";
++import { statusLabels, type Objective } from "./contracts";
++import { ObjectiveFields } from "./ObjectiveFields";
+ import { ObjectiveReadiness } from "./ObjectiveReadiness";
+-import styles from "./objectives.module.css";
+ import {
+-  askTypes,
+-  emptyFields,
+-  objectiveFieldsSchema,
+-  objectiveReadiness,
+-  statusLabels,
+-  type Objective,
+-  type ObjectiveFields,
+-} from "./contracts";
+-type Action = "save" | "request_review" | "confirm_ready";
++  ObjectiveEditorActions,
++  ObjectiveEditorFeedback,
++  ObjectiveReadyConfirmation,
++} from "./ObjectiveEditorControls";
++import { useObjectiveEditorSession } from "./useObjectiveEditorSession";
++
+ export function ObjectiveEditor({
+   clientId,
+   objective,
+@@ -28,44 +21,19 @@ export function ObjectiveEditor({
+   open: boolean;
+   onOpenChange: (open: boolean) => void;
+ }) {
+-  const [record, setRecord] = useState(objective);
+-  const [fields, setFields] = useState<ObjectiveFields>(
+-    objective ?? emptyFields,
+-  );
+-  const [requestId] = useState(() => crypto.randomUUID());
+-  const [validation, setValidation] = useState("");
+-  const [confirming, setConfirming] = useState(false);
+-  const mutation = useSaveObjective(
++  const session = useObjectiveEditorSession({
+     clientId,
+-    { fields, record, requestId },
+-    setRecord,
+-    () => onOpenChange(false),
++    objective,
+     open,
+-  );
+-  const ready = objectiveReadiness(fields).isReady;
+-  function submit(action: Action) {
+-    const parsed = objectiveFieldsSchema.safeParse(fields);
+-    if (!parsed.success) {
+-      setValidation(parsed.error.issues.map((i) => i.message).join(" "));
+-      return;
+-    }
+-    if (action !== "save" && !ready) {
+-      setValidation(
+-        "Complete outcome, government problem, ask type and minimum win.",
+-      );
+-      return;
+-    }
+-    setValidation("");
+-    if (action === "confirm_ready") setConfirming(true);
+-    else mutation.mutate(action);
+-  }
++    onSaved: () => onOpenChange(false),
++  });
+   return (
+     <Dialog
+       open={open}
+       onOpenChange={(value) => {
+-        if (!mutation.isPending) onOpenChange(value);
++        if (!session.mutation.isPending) onOpenChange(value);
+       }}
+-      title={objective ? "Edit objective" : "New objective"}
++      title="Edit objective"
+       description="Define the outcome and the government action that would make a meaningful win."
+       drawer
+     >
+@@ -73,155 +41,26 @@ export function ObjectiveEditor({
+         className="stack"
+         onSubmit={(event) => {
+           event.preventDefault();
+-          submit("save");
++          session.submit("save");
+         }}
+       >
+         <div className="row">
+           <span className="chip">
+-            {record ? statusLabels[record.status] : "Draft"}
++            {session.record ? statusLabels[session.record.status] : "Draft"}
+           </span>
+           <small>Four required fields before review or ready.</small>
+         </div>
+-        <fieldset
+-          className={`stack ${styles.editorFields}`}
+-          disabled={mutation.isPending}
+-        >
+-          <legend className="srOnly">Objective details</legend>
+-          <TextareaField
+-            label="Outcome"
+-            hint="What should be different?"
+-            autoFocus
+-            maxLength={2000}
+-            value={fields.outcome}
+-            onChange={(e) => setFields({ ...fields, outcome: e.target.value })}
+-          />
+-          <TextareaField
+-            label="Government problem"
+-            hint="What must government solve?"
+-            maxLength={4000}
+-            value={fields.governmentProblem}
+-            onChange={(e) =>
+-              setFields({ ...fields, governmentProblem: e.target.value })
+-            }
+-          />
+-          <label>
+-            Ask type
+-            <select
+-              value={fields.askType ?? ""}
+-              onChange={(e) => {
+-                const parsed = objectiveFieldsSchema.shape.askType.safeParse(
+-                  e.target.value || null,
+-                );
+-                if (parsed.success)
+-                  setFields({ ...fields, askType: parsed.data });
+-              }}
+-            >
+-              <option value="">Choose an ask type</option>
+-              {Object.entries(askTypes).map(([value, label]) => (
+-                <option key={value} value={value}>
+-                  {label}
+-                </option>
+-              ))}
+-            </select>
+-          </label>
+-          <TextareaField
+-            label="Minimum win"
+-            hint="What is the smallest result that matters?"
+-            maxLength={2000}
+-            value={fields.minimumWin}
+-            onChange={(e) =>
+-              setFields({ ...fields, minimumWin: e.target.value })
+-            }
+-          />
+-          <TextareaField
+-            label="Limits"
+-            hint="Optional boundaries and constraints"
+-            maxLength={4000}
+-            value={fields.limits}
+-            onChange={(e) => setFields({ ...fields, limits: e.target.value })}
+-          />
+-        </fieldset>
+-        <ObjectiveReadiness fields={fields} />
+-        {record?.status !== "draft" && record && (
+-          <small>Saving changes reopens this objective as a draft.</small>
+-        )}
+-        {validation && (
+-          <p className="danger" role="alert">
+-            {validation}
+-          </p>
+-        )}
+-        <QueryState error={mutation.error} />
+-        {mutation.error instanceof ApiError &&
+-          mutation.error.status === 409 && (
+-            <p>
+-              Another change conflicts with this version. Close and reopen the
+-              objective to review the latest version before saving.
+-            </p>
+-          )}
+-        <div className={`formActions ${styles.editorActions}`}>
+-          <button
+-            className="button"
+-            disabled={mutation.isPending || !mutation.canWrite}
+-          >
+-            Save draft
+-          </button>
+-          <button
+-            className="button"
+-            type="button"
+-            disabled={mutation.isPending || !mutation.canWrite}
+-            onClick={() => submit("request_review")}
+-          >
+-            Request review
+-          </button>
+-          <button
+-            className="button primary"
+-            type="button"
+-            disabled={mutation.isPending || !mutation.canWrite}
+-            onClick={() => submit("confirm_ready")}
+-          >
+-            Confirm ready
+-          </button>
+-        </div>
+-        {mutation.isPending && <p role="status">Saving objective…</p>}
+-        {!mutation.canWrite && !mutation.isPending && (
+-          <p role="status">
+-            A current session with permission to change client records is
+-            required.
+-          </p>
+-        )}
++        <ObjectiveFields
++          fields={session.fields}
++          onChange={session.setFields}
++          disabled={session.mutation.isPending}
++          presentation="dialog"
++        />
++        <ObjectiveReadiness fields={session.fields} />
++        <ObjectiveEditorFeedback session={session} />
++        <ObjectiveEditorActions session={session} />
+       </form>
+-      <Dialog
+-        open={confirming}
+-        onOpenChange={(value) => {
+-          if (!mutation.isPending) setConfirming(value);
+-        }}
+-        title="Confirm objective ready"
+-        description="Outcome, government problem, ask type and minimum win are complete."
+-      >
+-        <p>
+-          This confirms the objective is ready. Editing it later reopens the
+-          draft.
+-        </p>
+-        <div className="formActions">
+-          <button
+-            className="button"
+-            disabled={mutation.isPending}
+-            onClick={() => setConfirming(false)}
+-          >
+-            Back
+-          </button>
+-          <button
+-            className="button primary"
+-            disabled={mutation.isPending || !mutation.canWrite}
+-            onClick={() => {
+-              setConfirming(false);
+-              mutation.mutate("confirm_ready");
+-            }}
+-          >
+-            Confirm ready
+-          </button>
+-        </div>
+-      </Dialog>
++      <ObjectiveReadyConfirmation session={session} />
+     </Dialog>
+   );
+ }
+diff --git a/apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx b/apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx
+index d3143639a60176033de5e90d114a45f72332a2bd..f7682759eda4bf3b495ce015cef75e2c843c5e29 100644
+--- a/apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx
++++ b/apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx
+@@ -13,6 +13,7 @@ import {
+ import { useObjectives } from "./queries";
+ import { statusLabels, type Objective } from "./contracts";
+ import { ObjectiveEditor } from "./ObjectiveEditor";
++import { NewObjectivePage } from "./NewObjectivePage";
+ import styles from "./objectives.module.css";
+ export function ObjectivesPage({ clientId }: { clientId: string }) {
+   const query = useObjectives(clientId);
+@@ -40,6 +41,14 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
+       scroll: false,
+     });
+   }
++  if (creating)
++    return (
++      <NewObjectivePage
++        key={clientId}
++        clientId={clientId}
++        onClose={() => navigate()}
++      />
++    );
+   return (
+     <div className="page">
+       <header className="pageHeader">
+@@ -150,10 +159,10 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
+         </section>
+       </div>
+       <ObjectiveEditor
+-        key={`${clientId}:${selected?.id ?? (creating ? "new" : "closed")}`}
++        key={`${clientId}:${selected?.id ?? "closed"}`}
+         clientId={clientId}
+         objective={selected}
+-        open={creating || Boolean(selected)}
++        open={Boolean(selected)}
+         onOpenChange={(open) => {
+           if (!open) navigate();
+         }}
+diff --git a/apps/web/src/features/portfolio/objectives/contracts.ts b/apps/web/src/features/portfolio/objectives/contracts.ts
+index 9ac839d1e532da4b242aafe829aead89fd4da14e..f90e4386960b33becd93dbe0e20dd1a873d66628 100644
+--- a/apps/web/src/features/portfolio/objectives/contracts.ts
++++ b/apps/web/src/features/portfolio/objectives/contracts.ts
+@@ -2,10 +2,10 @@ import { z } from "zod";
+ // Wire contract candidate: capirov2 PR 2362, objective-rules.ts / presentObjective.
+ export const askTypes = {
+   funding: "Funding",
+-  policy_authority: "Policy / authority",
+-  both: "Funding and policy",
+-  protect_funding: "Protect funding",
+-  meri_propose: "Let Meri propose",
++  policy_authority: "Policy or authority",
++  both: "Both",
++  protect_funding: "Protect existing funding",
++  meri_propose: "Not sure, let Meri propose",
+ } as const;
+ export const objectiveFieldsSchema = z.object({
+   outcome: z.string().trim().max(2000),
+diff --git a/apps/web/src/features/portfolio/objectives/objectives.module.css b/apps/web/src/features/portfolio/objectives/objectives.module.css
+index d2f8364803a9478b2c44c1bea87cd149ac23815a..b3ba3e7ade4263eaa13273a08632bdca10ba304c 100644
+--- a/apps/web/src/features/portfolio/objectives/objectives.module.css
++++ b/apps/web/src/features/portfolio/objectives/objectives.module.css
+@@ -83,12 +83,6 @@
+   border-color: transparent;
+   color: #fff;
+ }
+-.editorFields {
+-  min-width: 0;
+-  padding: 0;
+-  border: 0;
+-  margin: 0;
+-}
+ .editorActions {
+   flex-wrap: wrap;
+ }
+diff --git a/apps/web/tests/browser/global-objective.spec.ts b/apps/web/tests/browser/global-objective.spec.ts
+index 49f681aa48ecb43b8416bc4bf3e61741d27617c9..be537fca7e8f472c8d4cdf11c0286a675650d90b 100644
+--- a/apps/web/tests/browser/global-objective.spec.ts
++++ b/apps/web/tests/browser/global-objective.spec.ts
+@@ -37,6 +37,58 @@ async function event(page: Page, name: string) {
+   );
+ }
+ 
++test("visible Portfolio entry opens the guarded picker without losing filters and fits on phone", async ({
++  page,
++}) => {
++  const { unexpected, writes } = await setup(page);
++  await page.goto("/portfolio?q=Civic&status=ACTIVE&view=list&sort=name");
++  const entry = page.getByRole("button", {
++    name: "New objective",
++    exact: true,
++  });
++  await expect(entry).toBeEnabled();
++  await page.screenshot({
++    path: "work/objective-global-entry-desktop.png",
++    fullPage: true,
++  });
++  await entry.click();
++  await expect(
++    page.getByRole("dialog", { name: "New objective", exact: true }),
++  ).toBeVisible();
++  expect(Object.fromEntries(new URL(page.url()).searchParams)).toEqual({
++    q: "Civic",
++    status: "ACTIVE",
++    view: "list",
++    sort: "name",
++    new: "objective",
++  });
++  await page.getByRole("button", { name: "Cancel", exact: true }).click();
++  await expect(entry).toBeFocused();
++  await page.setViewportSize({ width: 390, height: 844 });
++  await page.emulateMedia({ colorScheme: "dark" });
++  await expect(entry).toBeVisible();
++  const bounds = await entry.boundingBox();
++  expect(bounds?.x).toBeGreaterThanOrEqual(0);
++  expect((bounds?.x ?? 0) + (bounds?.width ?? 0)).toBeLessThanOrEqual(390);
++  expect(
++    await page.evaluate(
++      () => document.documentElement.scrollWidth <= innerWidth,
++    ),
++  ).toBe(true);
++  await page.screenshot({
++    path: "work/objective-global-entry-phone-dark.png",
++    fullPage: true,
++  });
++  await entry.click();
++  await selectClient(page);
++  await continueButton(page).click();
++  await expect(
++    page.getByRole("region", { name: "New objective", exact: true }),
++  ).toBeVisible();
++  expect(writes).toEqual([]);
++  expect(unexpected).toEqual([]);
++});
++
+ test("keyboard search chooses the real client and opens the existing empty four-field editor", async ({
+   page,
+ }) => {
+@@ -59,12 +111,15 @@ test("keyboard search chooses the real client and opens the existing empty four-
+   });
+   await continueButton(page).click();
+   await expect(page).toHaveURL(`/portfolio/${clientId}/objectives?new=1`);
+-  const editor = page.getByRole("dialog", { name: "New objective" });
++  const editor = page.getByRole("region", {
++    name: "New objective",
++    exact: true,
++  });
+   await expect(editor.getByLabel("Outcome", { exact: false })).toHaveValue("");
+   await expect(
+     editor.getByLabel("Government problem", { exact: false }),
+   ).toHaveValue("");
+-  await expect(editor.getByLabel("Ask type")).toHaveValue("");
++  await expect(editor.getByRole("radio", { checked: true })).toHaveCount(0);
+   await expect(editor.getByLabel("Minimum win", { exact: false })).toHaveValue(
+     "",
+   );
+@@ -333,8 +388,9 @@ test("actual Portfolio deep link preserves filters on close and continues throug
+   await expect(page).toHaveURL(`/portfolio/${clientId}/objectives?new=1`);
+   await expect(
+     page
+-      .getByRole("dialog", { name: "New objective" })
+-      .getByRole("button", { name: "Save draft", exact: true }),
++      .getByRole("region", { name: "New objective", exact: true })
++      .getByRole("button", { name: "Save draft", exact: true })
++      .last(),
+   ).toBeVisible();
+   expect(writes).toEqual([]);
+   expect(unexpected).toEqual([]);
+diff --git a/apps/web/tests/browser/objective-readiness.spec.ts b/apps/web/tests/browser/objective-readiness.spec.ts
+index 3f64d6719916ee9ec97db5a58582dd5b5a1d8244..bdf51c899c45d21c5e4cdda7c4920014c78bd914 100644
+--- a/apps/web/tests/browser/objective-readiness.spec.ts
++++ b/apps/web/tests/browser/objective-readiness.spec.ts
+@@ -7,7 +7,9 @@ async function complete(editor: Locator) {
+   await editor
+     .getByLabel(/^Government problem/)
+     .fill("A reviewed government problem");
+-  await editor.getByLabel("Ask type").selectOption("meri_propose");
++  await editor
++    .getByRole("radio", { name: "Not sure, let Meri propose", exact: true })
++    .check();
+   await editor.getByLabel(/^Minimum win/).fill("An agreed minimum win");
+ }
+ async function event(page: Page, name: string) {
+@@ -28,7 +30,10 @@ test("readiness shows exactly the four required fields and follows edits without
+     return json(route, []);
+   });
+   await page.goto(newPath);
+-  const editor = page.getByRole("dialog", { name: "New objective" });
++  const editor = page.getByRole("region", {
++    name: "New objective",
++    exact: true,
++  });
+   const readiness = editor.getByRole("region", { name: "Readiness" });
+   await expect(readiness.getByRole("listitem")).toHaveCount(4);
+   await expect(readiness.getByText("Needed", { exact: true })).toHaveCount(4);
+@@ -90,13 +95,24 @@ test("a pending save locks the exact draft and retains it after a failed transit
+     return json(route, saved);
+   });
+   await page.goto(newPath);
+-  const editor = page.getByRole("dialog", { name: "New objective" });
++  const editor = page.getByRole("region", {
++    name: "New objective",
++    exact: true,
++  });
+   await complete(editor);
+   await editor.getByRole("button", { name: "Request review" }).click();
+   await expect(editor.getByLabel(/^Outcome/)).toBeDisabled();
+-  await expect(editor.getByLabel("Ask type")).toBeDisabled();
+   await expect(
+-    editor.getByRole("button", { name: "Save draft" }),
++    editor.getByRole("radio", { name: "Funding", exact: true }),
++  ).toBeDisabled();
++  await expect(
++    editor.getByRole("button", { name: "Save draft" }).last(),
++  ).toBeDisabled();
++  await expect(
++    editor.getByRole("button", { name: "Save draft" }).first(),
++  ).toBeDisabled();
++  await expect(
++    editor.getByRole("button", { name: "← Objectives", exact: true }),
+   ).toBeDisabled();
+   expect(calls).toHaveLength(1);
+   release();
+@@ -126,7 +142,10 @@ for (const change of ["actor-change", "role-change", "invalidate", "unmount"])
+       return json(route, { ...objective, ...route.request().postDataJSON() });
+     });
+     await page.goto("/__test/objective-session?new=1");
+-    const editor = page.getByRole("dialog", { name: "New objective" });
++    const editor = page.getByRole("region", {
++      name: "New objective",
++      exact: true,
++    });
+     await complete(editor);
+     await editor.getByRole("button", { name: "Request review" }).click();
+     await expect.poll(() => calls.length).toBe(1);
+diff --git a/apps/web/tests/browser/objective-receipts.spec.ts b/apps/web/tests/browser/objective-receipts.spec.ts
+index 8ebe9e8b40f746d41ecc5ec06ba760b02c1803e3..9be2be5f05f12419a4de3614290242d9fabec817 100644
+--- a/apps/web/tests/browser/objective-receipts.spec.ts
++++ b/apps/web/tests/browser/objective-receipts.spec.ts
+@@ -16,10 +16,13 @@ test("an unrelated create receipt never transitions or closes the objective edit
+     });
+   });
+   await page.goto(`/portfolio/${clientId}/objectives?new=1`);
+-  const editor = page.getByRole("dialog", { name: "New objective" });
++  const editor = page.getByRole("region", {
++    name: "New objective",
++    exact: true,
++  });
+   await editor.getByLabel(/^Outcome/).fill("Reviewed outcome");
+   await editor.getByLabel(/^Government problem/).fill("Reviewed problem");
+-  await editor.getByLabel("Ask type").selectOption("funding");
++  await editor.getByRole("radio", { name: "Funding", exact: true }).check();
+   await editor.getByLabel(/^Minimum win/).fill("Reviewed minimum");
+   await editor.getByRole("button", { name: "Request review" }).click();
+   await expect(editor.getByRole("alert")).toContainText(
+diff --git a/apps/web/tests/browser/portfolio.spec.ts b/apps/web/tests/browser/portfolio.spec.ts
+index f5cfc1ef0ed3c782e661596fe8183d4431c9f966..183779ed5d23fe1c67b7e9225f096cadcfdb2f99 100644
+--- a/apps/web/tests/browser/portfolio.spec.ts
++++ b/apps/web/tests/browser/portfolio.spec.ts
+@@ -34,12 +34,15 @@ test("four-field readiness persists once, transitions, and refreshes the list",
+     return json(route, savedObjective);
+   });
+   await page.goto(`/portfolio/${clientId}/objectives?new=1`);
+-  const editor = page.getByRole("dialog", { name: "New objective" });
++  const editor = page.getByRole("region", {
++    name: "New objective",
++    exact: true,
++  });
+   await editor.getByRole("button", { name: "Confirm ready" }).click();
+   await expect(editor.getByRole("alert")).toContainText("Complete outcome");
+   await editor.getByLabel(/^Outcome/).fill("Test outcome");
+   await editor.getByLabel(/^Government problem/).fill("Test problem");
+-  await editor.getByLabel("Ask type").selectOption("funding");
++  await editor.getByRole("radio", { name: "Funding", exact: true }).check();
+   await editor.getByLabel(/^Minimum win/).fill("Test minimum win");
+   await editor.getByRole("button", { name: "Confirm ready" }).click();
+   await page

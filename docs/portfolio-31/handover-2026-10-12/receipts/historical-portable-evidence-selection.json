@@ -1,0 +1,374 @@
+[
+  {
+    "source": "outputs/evidence/portfolio-shared-integration-20261011/capability-presentation-integration-manifest.json",
+    "destination": "integrations/capability-presentation-integration-manifest.json",
+    "description": "Exact frozen-source integration record; see the related Portfolio continuation report for its independent cohort scope.",
+    "sha256": "70bac6ca14b5b2514982fbdfc82fd6ed1ad779bf9d9ff267fec5fa60697db1f1"
+  },
+  {
+    "source": "outputs/evidence/portfolio-shared-integration-20261011/capability-registration-integration-manifest.json",
+    "destination": "integrations/capability-registration-integration-manifest.json",
+    "description": "Exact frozen-source integration record; see the related Portfolio continuation report for its independent cohort scope.",
+    "sha256": "1d7c37f30d3dfd26b4a1044cfe11ed04f0f390038327501ce5053c10d5ffe4e6"
+  },
+  {
+    "source": "outputs/evidence/portfolio-shared-integration-20261011/facility-actions-integration-manifest.json",
+    "destination": "integrations/facility-actions-integration-manifest.json",
+    "description": "Exact frozen-source integration record; see the related Portfolio continuation report for its independent cohort scope.",
+    "sha256": "a26d3d32c4857337213b7ec32a78eb96ae7f09d99fabfdb425b6a3ab97b4ddb5"
+  },
+  {
+    "source": "outputs/evidence/portfolio-shared-integration-20261011/objective-integration-manifest.json",
+    "destination": "integrations/objective-integration-manifest.json",
+    "description": "Exact frozen-source integration record; see the related Portfolio continuation report for its independent cohort scope.",
+    "sha256": "e2e428af3376817338d81d5261731f6ac1e5b216f1c06f57cd825de1da73e6f1"
+  },
+  {
+    "source": "outputs/evidence/portfolio-shared-integration-20261011/profile-crud-integration-manifest.json",
+    "destination": "integrations/profile-crud-integration-manifest.json",
+    "description": "Exact frozen-source integration record; see the related Portfolio continuation report for its independent cohort scope.",
+    "sha256": "170779d6c87f0b93242c6de836e94fc3b4a0e196fd3761c08ac3e1caf8d4138d"
+  },
+  {
+    "source": "outputs/evidence/portfolio-shared-integration-20261011/quick-log-integration-manifest.json",
+    "destination": "integrations/quick-log-integration-manifest.json",
+    "description": "Exact frozen-source integration record; see the related Portfolio continuation report for its independent cohort scope.",
+    "sha256": "d16c043f9917425e03ddce08e02dd45469bcea2b8b2652b14bd8e16259eb17fe"
+  },
+  {
+    "source": "outputs/evidence/portfolio-shared-integration-20261011/tracker-integration-manifest.json",
+    "destination": "integrations/tracker-integration-manifest.json",
+    "description": "Exact frozen-source integration record; see the related Portfolio continuation report for its independent cohort scope.",
+    "sha256": "23b4fac0145d68f671aa66c86e35112b3a7c3ffdeeb0803e3e3200d3ffa69831"
+  },
+  {
+    "source": "outputs/evidence/portfolio-shared-integration-20261011/work-current-reads-integration-manifest.json",
+    "destination": "integrations/work-current-reads-integration-manifest.json",
+    "description": "Exact frozen-source integration record; see the related Portfolio continuation report for its independent cohort scope.",
+    "sha256": "23aabc8d81eb5c20e7bcbc4e27bd8f239d15b7ce2ab30dbb17f94024dd02a34c"
+  },
+  {
+    "source": "outputs/evidence/portfolio-shared-integration-20261011/work-presentation-integration-manifest.json",
+    "destination": "integrations/work-presentation-integration-manifest.json",
+    "description": "Exact frozen-source integration record; see the related Portfolio continuation report for its independent cohort scope.",
+    "sha256": "21ae81a7dd9ce29c752c4f55657339dbcbde3e69dce10b7f1111eca4a9acff80"
+  },
+  {
+    "source": "outputs/evidence/portfolio-current-projections-20261011/qualification.json",
+    "destination": "integrations/current-projections-qualification.json",
+    "description": "Current Index/Activity/Overview projection source and focused qualification; overlapping with full-suite tests.",
+    "sha256": "8befa5ff7724e8e2c731506946054c77fd83799baaa68a3d703979dd2f001741"
+  },
+  {
+    "source": "outputs/evidence/portfolio-current-projections-20261011/fixed-source.json",
+    "destination": "integrations/current-projections-fixed-source.json",
+    "description": "Current Index/Activity/Overview projection source and focused qualification; overlapping with full-suite tests.",
+    "sha256": "76ca2cc65337108e449ef59537270ae4bd16a1034cd6c965ad3350a47f16da06"
+  },
+  {
+    "source": "outputs/evidence/portfolio-current-projections-20261011/fixture-type-correction.json",
+    "destination": "integrations/current-projections-fixture-type-correction.json",
+    "description": "Current Index/Activity/Overview projection source and focused qualification; overlapping with full-suite tests.",
+    "sha256": "53142c08198c0d14891cb24bec4e117fb34ad7fda1cc1ffe46795dd04668d978"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-work-current-reads/outputs/evidence/portfolio-work-presentation-20261011/raw-checks/browser-final/work-presentation-desktop--2ecb6--exact-native-icon-geometry/workspace-desktop-table.png",
+    "destination": "captures/work-documents-desktop.png",
+    "description": "Synthetic focused qualification capture, independently inspected against the referenced Figma target; not signed-in or whole-product acceptance.",
+    "sha256": "8ef8549effbd106964793a82a09533429332f0b675af026c0b20d2e55f66c7fb"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-work-current-reads/outputs/evidence/portfolio-work-presentation-20261011/raw-checks/browser-final/work-presentation-narrow-d-bfa45-and-retain-readable-actions/workspace-narrow-dark-cards.png",
+    "destination": "captures/work-documents-phone-dark.png",
+    "description": "Synthetic focused qualification capture, independently inspected against the referenced Figma target; not signed-in or whole-product acceptance.",
+    "sha256": "3ab27b8d25b334587987418bf6805d38bf64b72a043d2b939ec7b2922da6223b"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-capability-presentation/outputs/evidence/portfolio-capability-presentation-20261011/browser-final/capability-presentation-vi-41878-e-surfaces-at-desktop-light/capability-create-details-desktop-light.png",
+    "destination": "captures/capability-create-desktop.png",
+    "description": "Synthetic focused qualification capture, independently inspected against the referenced Figma target; not signed-in or whole-product acceptance.",
+    "sha256": "d63ff02d04c1f840a974172dbbd745cea1a83a79fdf5ca9e25d3d4c8d011f6e5"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-capability-presentation/outputs/evidence/portfolio-capability-presentation-20261011/browser-final/capability-presentation-vi-ea68d-ate-surfaces-at-phone-light/capability-details-phone-light.png",
+    "destination": "captures/capability-details-phone.png",
+    "description": "Synthetic focused qualification capture, independently inspected against the referenced Figma target; not signed-in or whole-product acceptance.",
+    "sha256": "736be2af368e3d9a213dce9209d39b0a9dd256be42938eb4e74f07f7efaaa1ce"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-profile-current-state/outputs/evidence/core-facility-actions-20261011/fixed-final-browser-artifacts/facility-action-lifetime-a-b9473-fore-a-new-explicit-request/address-action-unknown-desktop.png",
+    "destination": "captures/facility-action-unknown-desktop.png",
+    "description": "Synthetic focused qualification capture, independently inspected against the referenced Figma target; not signed-in or whole-product acceptance.",
+    "sha256": "e11238fe173c18cb2a7e8ea2da4359ce256df9bc4ca8ca26205a819d93175bb6"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-profile-current-state/outputs/evidence/core-facility-actions-20261011/fixed-final-browser-artifacts/facility-action-lifetime-a-b9473-fore-a-new-explicit-request/address-action-unknown-phone.png",
+    "destination": "captures/facility-action-unknown-phone.png",
+    "description": "Synthetic focused qualification capture, independently inspected against the referenced Figma target; not signed-in or whole-product acceptance.",
+    "sha256": "56132b35ed9089b51c47375efc05f629af8468e6b5c965583831b9c98e11f0c6"
+  },
+  {
+    "source": "outputs/evidence/portfolio-shared-integration-20261011/documents-final-integration.json",
+    "destination": "integrations/documents-final-integration.json",
+    "description": "Root exact 30-file integration, reader/current-operation review and seven cohesive owner reviews. Final dedicated and preserved compatibility cohorts overlap the full suite and are not additive.",
+    "sha256": "a0441eeb877db5ca093f00e3359a54d5d339cd4e09796d5928b368b126e9d99f"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-capability-documents/outputs/evidence/portfolio-capability-documents-20261011/integration-manifest.json",
+    "destination": "integrations/documents-agent-manifest.json",
+    "description": "Final immutable Documents source/tests/report handoff with exact preimages and postimages.",
+    "sha256": "e87fe328d04baee24a6ee2ce44191b2b57539c98aebfc58527a6044b33274e87"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-capability-documents/outputs/evidence/portfolio-capability-documents-20261011/review-candidate-04/manifest.json",
+    "destination": "integrations/documents-candidate04-source.json",
+    "description": "Fourteen exact product hashes shared by the successful 48-case and 38-case browser cohorts.",
+    "sha256": "4613fe3e13079dc16061c8067ab90909dcd094e265ceee92bfdbcf3ec2026ea5"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-capability-documents/outputs/evidence/portfolio-capability-documents-20261011/browser-candidate-04/capability-documents-visua-7609e-s-variants-at-desktop-light/documents-ready-desktop-light.png",
+    "destination": "captures/documents-ready-desktop.png",
+    "description": "Synthetic final Documents qualification capture independently inspected against Figma; not signed-in or whole-product acceptance.",
+    "sha256": "661d26404cbccf5b3f822953ca80aa6c5b84124efdef94ded76bfb89664e68d2"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-capability-documents/outputs/evidence/portfolio-capability-documents-20261011/browser-candidate-04/capability-documents-visua-a1117-atus-variants-at-phone-dark/documents-ready-phone-dark.png",
+    "destination": "captures/documents-ready-phone-dark.png",
+    "description": "Synthetic final Documents qualification capture independently inspected against Figma; not signed-in or whole-product acceptance.",
+    "sha256": "d18f72e0acbd329eb505c838832ba7d4dd8112af23276a00397b000f74da71a8"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-capability-documents/outputs/evidence/portfolio-capability-documents-20261011/browser-candidate-04/capability-documents-visua-a1117-atus-variants-at-phone-dark/documents-error-phone-dark.png",
+    "destination": "captures/documents-error-phone-dark.png",
+    "description": "Synthetic final Documents qualification capture independently inspected against Figma; not signed-in or whole-product acceptance.",
+    "sha256": "fe049aa8c856a8e477a66bf58dabdd7a2cadbf108c47db27840f888f119c7989"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-capability-documents/outputs/evidence/portfolio-capability-documents-20261011/browser-candidate-04/capability-documents-visua-02748--document-access-is-pending/documents-loading-phone.png",
+    "destination": "captures/documents-loading-phone.png",
+    "description": "Synthetic final Documents qualification capture independently inspected against Figma; not signed-in or whole-product acceptance.",
+    "sha256": "14d396eb48ad4b8dce74b4d66fd6b387062348c06a254b465ca8bac51727ff08"
+  },
+  {
+    "source": "outputs/evidence/portfolio-shared-integration-20261011/preview-shipment-source-review.json",
+    "destination": "integrations/preview-shipment-source-review.json",
+    "description": "Independent shared-navigation and finite-container-probe source review; actual runtime result is the final combined production gate.",
+    "sha256": "4e0c02762960c8e117cb98af2f7e8791d3a3c29d2beb74b5ae9334fba6ccf5f1"
+  },
+  {
+    "source": "outputs/evidence/portfolio-shared-integration-20261011/advocacy-final-integration.json",
+    "destination": "integrations/advocacy-final-integration.json",
+    "description": "Root exact 32-file integration and three substantive function reviews; historical targeted cohorts remain distinct from final integrated verification.",
+    "sha256": "c1b615a1aee8158ec63045abaab8419062ab28b4f7832d6cb3d7d95f84a17f4a"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-advocacy-filters-outcomes/outputs/evidence/advocacy-20261011/frozen-final/manifest.json",
+    "destination": "integrations/advocacy-agent-manifest.json",
+    "description": "Immutable Advocacy source/test/report handoff. Its two final dark cases were pending the root gate at handoff time.",
+    "sha256": "7136525f2941cdb344a33e9e5ebfbac7501da0aecb7c580c9b17854559af433b"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-advocacy-filters-outcomes/outputs/evidence/advocacy-20261011/frozen-final/size-reviews.json",
+    "destination": "integrations/advocacy-size-reviews.json",
+    "description": "Exact author responsibility reviews independently examined during root integration.",
+    "sha256": "4ef59f1d13ea4fbafa55e507b8fab8fd9a3ba532060f1c957af6cba636a32fb7"
+  },
+  {
+    "source": "outputs/evidence/portfolio-shared-integration-20261011/DEPLOYMENT-INDEPENDENT-REVIEW-P4.md",
+    "destination": "deployment/DEPLOYMENT-INDEPENDENT-REVIEW-P4.md",
+    "description": "Independent review and bounded AWS preview shipment plan. Historical inventory requires authenticated current discovery; no AWS action is implied.",
+    "sha256": "b597b392c6a0d496bc58a19114d347fbe8af4797c5e9b9f51ea330a66dba8ca3"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-advocacy-filters-outcomes/outputs/evidence/advocacy-20261011/actor-lifetime-baseline-results.json",
+    "destination": "history/advocacy/actor-lifetime-baseline-results.json",
+    "description": "Preserved raw targeted qualification history; failures and separate corrected reruns are not combined or counted additively.",
+    "sha256": "55e78b7ff936819dfce418e800ed8ef503a888ce3a045ebb8c130c07e40c951a"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-advocacy-filters-outcomes/outputs/evidence/advocacy-20261011/baseline-browser-initial-results.json",
+    "destination": "history/advocacy/baseline-browser-initial-results.json",
+    "description": "Preserved raw targeted qualification history; failures and separate corrected reruns are not combined or counted additively.",
+    "sha256": "e0014f7f781403396dce68f7fab7ac72382a1b24d44f8542465c7b54386d234c"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-advocacy-filters-outcomes/outputs/evidence/advocacy-20261011/baseline-outcome-results.json",
+    "destination": "history/advocacy/baseline-outcome-results.json",
+    "description": "Preserved raw targeted qualification history; failures and separate corrected reruns are not combined or counted additively.",
+    "sha256": "126ed04489916382e993a3a78860853e7c78f1b003b580da61208e7017aff1b9"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-advocacy-filters-outcomes/outputs/evidence/advocacy-20261011/geometry-baseline-results.json",
+    "destination": "history/advocacy/geometry-baseline-results.json",
+    "description": "Preserved raw targeted qualification history; failures and separate corrected reruns are not combined or counted additively.",
+    "sha256": "a917f50a078620710a52df2171b7e10920b7d7907f2069e86551c80b3a84ac15"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-advocacy-filters-outcomes/outputs/evidence/advocacy-20261011/fixed-02-browser-results.json",
+    "destination": "history/advocacy/fixed-02-browser-results.json",
+    "description": "Preserved raw targeted qualification history; failures and separate corrected reruns are not combined or counted additively.",
+    "sha256": "eb16b24cf5c4262d097878f01c3f6a72812ed0112375ff05e26543587a709175"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-advocacy-filters-outcomes/outputs/evidence/advocacy-20261011/fixed-03-focused-results.json",
+    "destination": "history/advocacy/fixed-03-focused-results.json",
+    "description": "Preserved raw targeted qualification history; failures and separate corrected reruns are not combined or counted additively.",
+    "sha256": "b5b2b93158977c1a1e25fe0d6c1c2eae8c2a9f328a1057f10871ea85b0e509b6"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-advocacy-filters-outcomes/outputs/evidence/advocacy-20261011/fixed-02-units.json",
+    "destination": "history/advocacy/fixed-02-units.json",
+    "description": "Preserved raw targeted qualification history; failures and separate corrected reruns are not combined or counted additively.",
+    "sha256": "8548cf84ba815adc7d4e412e54b970d160b2c94bf45d7dcd4e79f965ad4d1722"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-advocacy-filters-outcomes/outputs/evidence/advocacy-20261011/fixed-03-focused-artifacts/advocacy-history-edit-base-653d7--preserves-undated-evidence/advocacy-timeline-desktop.png",
+    "destination": "captures/advocacy-timeline-desktop.png",
+    "description": "Actual candidate03 light capture inspected by the author and root against the existing or authored Figma frame; synthetic data and no signed-in acceptance.",
+    "sha256": "c5f1f7b71557dc0729d5bfb747e2f4ab7a471571800a6c430db953bca2783ea9"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-advocacy-filters-outcomes/outputs/evidence/advocacy-20261011/fixed-03-focused-artifacts/advocacy-history-edit-time-60427--with-keyboard-cancellation/advocacy-timeline-phone.png",
+    "destination": "captures/advocacy-timeline-phone.png",
+    "description": "Actual candidate03 light capture inspected by the author and root against the existing or authored Figma frame; synthetic data and no signed-in acceptance.",
+    "sha256": "4c305351818731769888e8ba28069036dd0a8489e6e7d24710f86645800a87dc"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-advocacy-filters-outcomes/outputs/evidence/advocacy-20261011/fixed-03-focused-artifacts/advocacy-history-edit-desk-928c6-xact-Figma-frame-dimensions/advocacy-outcome-desktop.png",
+    "destination": "captures/advocacy-outcome-desktop.png",
+    "description": "Actual candidate03 light capture inspected by the author and root against the existing or authored Figma frame; synthetic data and no signed-in acceptance.",
+    "sha256": "204e98236fade311f8fe75316f974d387faf96e18c60b2904e642bcd83ae356e"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-advocacy-filters-outcomes/outputs/evidence/advocacy-20261011/fixed-03-focused-artifacts/advocacy-history-edit-time-60427--with-keyboard-cancellation/advocacy-outcome-phone.png",
+    "destination": "captures/advocacy-outcome-phone.png",
+    "description": "Actual candidate03 light capture inspected by the author and root against the existing or authored Figma frame; synthetic data and no signed-in acceptance.",
+    "sha256": "8bdb17c80628c63592b61ed406e4e15a7c5fd8d9fd276f537aab1290a423ae09"
+  },
+  {
+    "source": "outputs/evidence/portfolio-shared-integration-20261011/saved-submissions-final-integration.json",
+    "destination": "integrations/saved-submissions-final-integration.json",
+    "description": "Root exact Saved submissions integration, shared-fixture merge and three cohesive owner reviews; focused versus combined evidence remains distinct.",
+    "sha256": "4dbe6c0a1f72a1494eba68bea483d3fd6f410e5ced6fefb349ba0ea870254301"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-saved-submissions/outputs/evidence/core-128-saved-submissions-20261011/frozen-final/manifest.json",
+    "destination": "integrations/saved-submissions-agent-manifest.json",
+    "description": "Final immutable source/test/report handoff with exact original-reference hashes.",
+    "sha256": "efe6eac578a203c9c2522768ce9aea9676d4c6e397c902779d64debf4902ba79"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-saved-submissions/outputs/evidence/core-128-saved-submissions-20261011/frozen-final/qualification.json",
+    "destination": "integrations/saved-submissions-qualification.json",
+    "description": "Frozen individual baseline and corrected qualification receipts; overlapping cohorts are not additive.",
+    "sha256": "818b08bafbeb790f0ea528e3b4fa3cfd8e2568e747e269a4bf5366ecfc9bf378"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-saved-submissions/outputs/evidence/core-128-saved-submissions-20261011/evidence-manifest.json",
+    "destination": "integrations/saved-submissions-evidence-inventory.json",
+    "description": "Original lane evidence inventory. Absolute historical source paths are provenance, not portable artifact destinations.",
+    "sha256": "bac7401b0e006b6e4eac91575886ae144eaea9535b93b2262562bf60f781173b"
+  },
+  {
+    "source": "outputs/evidence/portfolio-shared-integration-20261011/publication-remote-references.json",
+    "destination": "integrations/publication-remote-references.json",
+    "description": "Fresh read-only source and related PR state, with no deployment or publication claim.",
+    "sha256": "93d62a997fd93b11b4c0627f5c73444d7528d4afbb1588f4930319be8048237b"
+  },
+  {
+    "source": "outputs/evidence/portfolio-shared-integration-20261011/advocacy-dark-75409a9/receipt.json",
+    "destination": "history/advocacy/dark-75409a9-receipt.json",
+    "description": "Two newly added actual-image dark contrast cases passed at immutable root75409a9; separate from the later full gate.",
+    "sha256": "f92a5fdc6e833b3e84392683d7eeec90731854acb2435af6282698d14e72eb1e"
+  },
+  {
+    "source": "outputs/evidence/portfolio-shared-integration-20261011/advocacy-dark-75409a9/results.json",
+    "destination": "history/advocacy/dark-75409a9-results.json",
+    "description": "Raw focused dark desktop/phone browser result, zero skips/failures/flakes.",
+    "sha256": "3104711f02734b516a13fefb52a7556d3c085080c4ba0221f2236d3ffb13ed55"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-saved-submissions/outputs/evidence/core-128-saved-submissions-20261011/browser-baseline-01/results.json",
+    "destination": "history/saved-submissions/browser-baseline-01-results.json",
+    "description": "Preserved exact baseline or corrected cohort source/result record. Not an additive total or a single final-tree full run.",
+    "sha256": "8eec8a13bbad0451cefac9934449de3cb798b859c664d9aae53a5bf4b1715aae"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-saved-submissions/outputs/evidence/core-128-saved-submissions-20261011/browser-baseline-01/source-receipt.json",
+    "destination": "history/saved-submissions/browser-baseline-01-source-receipt.json",
+    "description": "Preserved exact baseline or corrected cohort source/result record. Not an additive total or a single final-tree full run.",
+    "sha256": "51108937d5f56b022eeff2894904276c44f3e723bf4cb71a0cc5e29d6d13fc0c"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-saved-submissions/outputs/evidence/core-128-saved-submissions-20261011/browser-fixed-01/results.json",
+    "destination": "history/saved-submissions/browser-fixed-01-results.json",
+    "description": "Preserved exact baseline or corrected cohort source/result record. Not an additive total or a single final-tree full run.",
+    "sha256": "6ac329be79f3f56dbb2437f6442e0e9eb66e8be774d3a218930b66fa6d3662bc"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-saved-submissions/outputs/evidence/core-128-saved-submissions-20261011/browser-fixed-01/source-receipt.json",
+    "destination": "history/saved-submissions/browser-fixed-01-source-receipt.json",
+    "description": "Preserved exact baseline or corrected cohort source/result record. Not an additive total or a single final-tree full run.",
+    "sha256": "96a8dcecd5847831f9e2d776a4ae17923a736fdfcc976ed60b62911458619da3"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-saved-submissions/outputs/evidence/core-128-saved-submissions-20261011/browser-baseline-counts-02/results.json",
+    "destination": "history/saved-submissions/browser-baseline-counts-02-results.json",
+    "description": "Preserved exact baseline or corrected cohort source/result record. Not an additive total or a single final-tree full run.",
+    "sha256": "38d9c26c69c7264710158bb2474f58fcb9e0a57d802abbdcc93dd035f9da9469"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-saved-submissions/outputs/evidence/core-128-saved-submissions-20261011/browser-baseline-counts-02/source-receipt.json",
+    "destination": "history/saved-submissions/browser-baseline-counts-02-source-receipt.json",
+    "description": "Preserved exact baseline or corrected cohort source/result record. Not an additive total or a single final-tree full run.",
+    "sha256": "38cb1fd0036ab624bf898ca816e996f52daab9fb2f7b691bd7d57338ee500c8d"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-saved-submissions/outputs/evidence/core-128-saved-submissions-20261011/browser-geometry-baseline-01/results.json",
+    "destination": "history/saved-submissions/browser-geometry-baseline-01-results.json",
+    "description": "Preserved exact baseline or corrected cohort source/result record. Not an additive total or a single final-tree full run.",
+    "sha256": "141476dcc1f6a59c19d15f998ad4fe78402a93aafd870192f5f4a6c0873ca982"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-saved-submissions/outputs/evidence/core-128-saved-submissions-20261011/browser-geometry-baseline-01/source-receipt.json",
+    "destination": "history/saved-submissions/browser-geometry-baseline-01-source-receipt.json",
+    "description": "Preserved exact baseline or corrected cohort source/result record. Not an additive total or a single final-tree full run.",
+    "sha256": "91a7acd856740f68628572d867828fb1c01e0f09421d460f454571e5ab32444c"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-saved-submissions/outputs/evidence/core-128-saved-submissions-20261011/browser-fixed-affected-02/results.json",
+    "destination": "history/saved-submissions/browser-fixed-affected-02-results.json",
+    "description": "Preserved exact baseline or corrected cohort source/result record. Not an additive total or a single final-tree full run.",
+    "sha256": "23e55ef9943a0cea5819a3ea2841c08947da64e694e2be84b0d47b35e54f2d57"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-saved-submissions/outputs/evidence/core-128-saved-submissions-20261011/browser-fixed-affected-02/source-receipt.json",
+    "destination": "history/saved-submissions/browser-fixed-affected-02-source-receipt.json",
+    "description": "Preserved exact baseline or corrected cohort source/result record. Not an additive total or a single final-tree full run.",
+    "sha256": "a37cbd977d4ab6497c44bda08e8ef6611d960a554a88e9f82ebe21990718bc8d"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-saved-submissions/outputs/evidence/core-128-saved-submissions-20261011/visual/saved-submissions-desktop.png",
+    "destination": "captures/saved-submissions-desktop.png",
+    "description": "Final corrected Saved submissions capture independently inspected by root against the authored Figma frame.",
+    "sha256": "ad25b0f1d8536bf693950836f6576c683620d22a411072b8571f0f8856ab7f9c"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-saved-submissions/outputs/evidence/core-128-saved-submissions-20261011/visual/saved-submissions-phone.png",
+    "destination": "captures/saved-submissions-phone.png",
+    "description": "Final corrected Saved submissions capture independently inspected by root against the authored Figma frame.",
+    "sha256": "d9e84da64982cea2336165e81a85398981d0c40975965a40152f17dbc0f212c1"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/outputs/evidence/portfolio-shared-integration-20261011/advocacy-dark-75409a9/artifacts/advocacy-timeline-dark-dar-38c24-ble-at-their-exact-geometry/advocacy-timeline-desktop-dark.png",
+    "destination": "captures/advocacy-timeline-desktop-dark.png",
+    "description": "Actual root75409a9 loaded-icon dark capture inspected by root; native16px/rendered14px, contrast and responsive geometry passed.",
+    "sha256": "b72685e6055764ca357662dfb89aaa7d96abc26e2fe09dacc629e2f6c415c37c"
+  },
+  {
+    "source": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/outputs/evidence/portfolio-shared-integration-20261011/advocacy-dark-75409a9/artifacts/advocacy-timeline-dark-dar-f96a1-ble-at-their-exact-geometry/advocacy-timeline-phone-dark.png",
+    "destination": "captures/advocacy-timeline-phone-dark.png",
+    "description": "Actual root75409a9 loaded-icon dark capture inspected by root; native16px/rendered14px, contrast and responsive geometry passed.",
+    "sha256": "dbb15181380436cdb305d7c418c2aeb4f6047f76042371f8ac83884433686050"
+  }
+]

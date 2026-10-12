@@ -1,0 +1,15 @@
+{
+  "command": [
+    "python3",
+    "prepare_context.py",
+    "delivery-manifest-qualification-t2ahoghz/published",
+    "--target",
+    "delivery-manifest-qualification-t2ahoghz/materialized"
+  ],
+  "disposition": "Process exited; only generated duplicate validation layout/partial target removed by integration owner. Original context, parts, helpers and evidence preserved. Retry uses hardlinked read-only fixture plus one real materialized target.",
+  "exitCode": 1,
+  "scope": "Transport materialization resource failure, not a product test",
+  "seconds": 0.13385764800113975,
+  "stage": "First follow-up with split manifest",
+  "stderr": "Preparation refused: [Errno 28] No space left on device. Any partial target is unverified; do not reuse it."
+}
