@@ -1,0 +1,77 @@
+{
+  "source": "35b6598c0456ebc9ef4cf48e20aef0e5167660b2",
+  "posts": [
+    {
+      "prospectId": "30000000-0000-4000-8000-000000000001",
+      "requestId": "ed07e365-dcf7-4bd7-bb00-6105cc0643f8",
+      "docTitle": "Independent uncertain prospect draft"
+    },
+    {
+      "prospectId": "30000000-0000-4000-8000-000000000001",
+      "requestId": "0731221c-5db4-49a0-9827-d24f8b6a6f91",
+      "docTitle": "Independent uncertain prospect draft"
+    }
+  ],
+  "drafts": [
+    {
+      "id": "972b2f7b-a2d5-4cf0-9cc3-8baf45353e38",
+      "tenantId": "20000000-0000-4000-8000-000000000001",
+      "prospectId": "30000000-0000-4000-8000-000000000001",
+      "ownerId": "test-user",
+      "docTitle": "Independent uncertain prospect draft",
+      "client": null,
+      "product": null,
+      "industry": null,
+      "status": "draft",
+      "updatedAt": "2026-10-12T12:00:00Z",
+      "createdAt": "2026-10-12T12:00:00Z",
+      "config": {
+        "sections": [],
+        "sectionContent": {}
+      },
+      "documents": [
+        {
+          "id": "46940bd7-c15d-4959-9765-6845544c8425",
+          "draftId": "972b2f7b-a2d5-4cf0-9cc3-8baf45353e38",
+          "name": "Main document",
+          "ordinal": 0,
+          "body": {
+            "blocks": []
+          },
+          "createdAt": "2026-10-12T12:00:00Z",
+          "updatedAt": "2026-10-12T12:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "cf7be641-e202-41cd-9cf4-df757517ad75",
+      "tenantId": "20000000-0000-4000-8000-000000000001",
+      "prospectId": "30000000-0000-4000-8000-000000000001",
+      "ownerId": "test-user",
+      "docTitle": "Independent uncertain prospect draft",
+      "client": null,
+      "product": null,
+      "industry": null,
+      "status": "draft",
+      "updatedAt": "2026-10-12T12:00:00Z",
+      "createdAt": "2026-10-12T12:00:00Z",
+      "config": {
+        "sections": [],
+        "sectionContent": {}
+      },
+      "documents": [
+        {
+          "id": "316c2d01-3c1a-475c-83d9-d13288a0bca1",
+          "draftId": "cf7be641-e202-41cd-9cf4-df757517ad75",
+          "name": "Main document",
+          "ordinal": 0,
+          "body": {
+            "blocks": []
+          },
+          "createdAt": "2026-10-12T12:00:00Z",
+          "updatedAt": "2026-10-12T12:00:00Z"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+
+Running 1 test using 1 worker
+
+  ✘  1 ../../../../tmp/r3-draft-167e306-negative/control.spec.ts:7:1 › lost prospect draft creation retains its original request through reload rather than creating a duplicate draft (8.3s)
+
+
+  1) ../../../../tmp/r3-draft-167e306-negative/control.spec.ts:7:1 › lost prospect draft creation retains its original request through reload rather than creating a duplicate draft 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator:  getByLabel('New prospect document title')
+    Expected: ""
+    Received: "Independent uncertain prospect draft"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveValue" with timeout 5000ms
+      - waiting for getByLabel('New prospect document title')
+        12 × locator resolved to <input disabled maxlength="500" data-slot="input" id="prospect-draft-title" value="Independent uncertain prospect draft" class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-event…/>
+           - unexpected value "Independent uncertain prospect draft"
+
+
+      28 |  expect(records.size).toBe(1);
+      29 |  await page.reload();
+    > 30 |  await expect(page.getByLabel('New prospect document title')).toHaveValue('');
+         |                                                               ^
+      31 |  await expect(page.getByRole('button',{name:'Recover original draft',exact:true})).toHaveCount(0);
+      32 |  await page.getByLabel('New prospect document title').fill('Independent uncertain prospect draft');
+      33 |  await page.getByRole('button',{name:'Create manual draft',exact:true}).click();
+        at /tmp/r3-draft-167e306-negative/control.spec.ts:30:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/r3-draft-167e306-negative/artifacts/control-lost-prospect-draf-ef366--creating-a-duplicate-draft/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/r3-draft-167e306-negative/artifacts/control-lost-prospect-draf-ef366--creating-a-duplicate-draft/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/r3-draft-167e306-negative/artifacts/control-lost-prospect-draf-ef366--creating-a-duplicate-draft/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/r3-draft-167e306-negative/artifacts/control-lost-prospect-draf-ef366--creating-a-duplicate-draft/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    ../../../../tmp/r3-draft-167e306-negative/control.spec.ts:7:1 › lost prospect draft creation retains its original request through reload rather than creating a duplicate draft 
+[WebServer] (node:241339) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:241496) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

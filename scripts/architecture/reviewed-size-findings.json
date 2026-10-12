@@ -1375,15 +1375,6 @@
     "reviewedOn": "2026-10-12"
   },
   {
-    "file": "apps/web/src/features/portfolio/client-profile/quick-log/useCommandRecovery.ts",
-    "kind": "function",
-    "symbol": "useCommandRecovery",
-    "fingerprint": "3e7e5c1fc2eed080f50121a3e66f5ad8358573a0bac21354520703d468b0fc5c",
-    "reason": "This hook owns one current-context hydration transition: fresh Core authority, guarded journal read, scoped install or visible hold. Abort cleanup and the scope/open/retry token prevent stale hydration from displaying former input. Journal storage/cryptography and Core validation have separate owners. Its 82-line size arises from explicit dependencies and failure states, not unrelated behavior.",
-    "reviewedBy": "Codex shared frontend integration responsibility review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
     "file": "apps/web/src/features/portfolio/client-profile/quick-log/useFollowUpCommand.ts",
     "kind": "function",
     "symbol": "useFollowUpCommand",
@@ -1515,6 +1506,15 @@
     "symbol": "useNewsletterStaging",
     "fingerprint": "0f8c856513200a41973bf288a183f289c9abcadb8c0712ce3ef84aa165d96921",
     "reason": "This hook owns one original staging intent from explicit submission through validated receipt acknowledgement. It composes existing durable recovery and fixed transport APIs with feature-specific source/destination/provenance checks. Preflight, same-key dispatch, uncertain-result hold and explicit acknowledgement must preserve one original lineage; splitting flags across unrelated hooks would obscure that invariant. No content generation, sender mutation or delivery is performed.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/quick-log/useCommandRecovery.ts",
+    "kind": "function",
+    "symbol": "useCommandRecovery",
+    "fingerprint": "d9a78c326945d796ecb29eae0e04620a06f756f76fd415d91df922465127b57d",
+    "reason": "The recovery hook remains the single owner of fresh authority before retained Quicklog hydration. A render-time activation epoch invalidates ready state for every open/close/scope/API lifetime transition before any retained fields commit. The async effect still checks current Core identity and client authorization, aborts stale reads, then installs the journal. This closes the mounted reopen disclosure without weakening the original mutation checks or splitting one authority lifecycle across components.",
     "reviewedBy": "Codex shared frontend integration responsibility review",
     "reviewedOn": "2026-10-12"
   }

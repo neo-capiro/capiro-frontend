@@ -1,0 +1,165 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-control-35b6598/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/r3-draft-35b6598-red/review.playwright.ts"
+    ],
+    "configFile": "/tmp/r3-draft-35b6598-red/review.playwright.ts",
+    "rootDir": "/tmp/r3-draft-35b6598-red",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/r3-draft-35b6598-red/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/r3-draft-35b6598-red",
+        "testIgnore": [],
+        "testMatch": [
+          "control.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/r3-draft-35b6598-red/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" \"/workspace/capiro-control-35b6598/apps/web/test/browser/server.mjs\"",
+      "url": "http://127.0.0.1:5197",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "control.spec.ts",
+      "file": "control.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "lost prospect draft creation retains its original request through reload rather than creating a duplicate draft",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3260,
+                  "error": {
+                    "message": "Error: a replacement key cannot recover an uncertain original draft\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m",
+                    "stack": "Error: a replacement key cannot recover an uncertain original draft\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\n    at /tmp/r3-draft-35b6598-red/control.spec.ts:36:86",
+                    "location": {
+                      "file": "/tmp/r3-draft-35b6598-red/control.spec.ts",
+                      "column": 86,
+                      "line": 36
+                    },
+                    "snippet": "  34 |  await expect(page.getByLabel('Document title')).toHaveValue('Independent uncertain prospect draft');\n  35 |  writeFileSync(\"/tmp/r3-draft-35b6598-red/prospect-draft-duplicate.json\",JSON.stringify({source:'35b6598c0456ebc9ef4cf48e20aef0e5167660b2',posts,drafts:[...records.values()]},null,2));\n> 36 |  expect(records.size,'a replacement key cannot recover an uncertain original draft').toBe(1);\n     |                                                                                      ^\n  37 | });\n  38 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/r3-draft-35b6598-red/control.spec.ts",
+                        "column": 86,
+                        "line": 36
+                      },
+                      "message": "Error: a replacement key cannot recover an uncertain original draft\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\n\n  34 |  await expect(page.getByLabel('Document title')).toHaveValue('Independent uncertain prospect draft');\n  35 |  writeFileSync(\"/tmp/r3-draft-35b6598-red/prospect-draft-duplicate.json\",JSON.stringify({source:'35b6598c0456ebc9ef4cf48e20aef0e5167660b2',posts,drafts:[...records.values()]},null,2));\n> 36 |  expect(records.size,'a replacement key cannot recover an uncertain original draft').toBe(1);\n     |                                                                                      ^\n  37 | });\n  38 |\n    at /tmp/r3-draft-35b6598-red/control.spec.ts:36:86"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T08:15:33.676Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/r3-draft-35b6598-red/artifacts/control-lost-prospect-draf-ef366--creating-a-duplicate-draft/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/r3-draft-35b6598-red/artifacts/control-lost-prospect-draf-ef366--creating-a-duplicate-draft/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/r3-draft-35b6598-red/artifacts/control-lost-prospect-draf-ef366--creating-a-duplicate-draft/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/r3-draft-35b6598-red/control.spec.ts",
+                    "column": 86,
+                    "line": 36
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "df0f65ccd0bbb0c6ab20-59ef6e08bdf466a25cc1",
+          "file": "control.spec.ts",
+          "line": 7,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T08:15:30.227Z",
+    "duration": 7224.574,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

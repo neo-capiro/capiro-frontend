@@ -33,11 +33,27 @@ export function useCommandRecovery(
   }
   const [state, setState] = useState<RecoveryState>();
   const [revision, setRevision] = useState(0);
+  // Reopening a mounted dialog is a new authority check, even when its scope
+  // matches a former ready state. Invalidate during render before fields commit.
+  const [activation, setActivation] = useState({
+    scope,
+    open,
+    api,
+    cache,
+    epoch: 0,
+  });
+  if (
+    activation.scope !== scope ||
+    activation.open !== open ||
+    activation.api !== api ||
+    activation.cache !== cache
+  )
+    setActivation({ scope, open, api, cache, epoch: activation.epoch + 1 });
   const installRef = useRef(install);
   useLayoutEffect(() => {
     installRef.current = install;
   }, [install]);
-  const token = JSON.stringify([scope, open, revision]);
+  const token = JSON.stringify([scope, open, revision, activation.epoch]);
   const actorUserId = actor?.userId,
     tenantId = actor?.tenantId;
   useLayoutEffect(() => {

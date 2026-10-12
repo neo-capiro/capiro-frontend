@@ -1,0 +1,73 @@
+{
+  "source": "35b6598c0456ebc9ef4cf48e20aef0e5167660b2",
+  "uploadUrlPosts": [
+    {
+      "prospectId": "70000000-0000-4000-8000-000000000001",
+      "fileName": "test.txt",
+      "contentType": "text/plain",
+      "checksumSha256": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824",
+      "requestId": "a519b346-a5a4-41c9-b3c7-48b7d699ee5c",
+      "contentLength": 5
+    },
+    {
+      "prospectId": "70000000-0000-4000-8000-000000000001",
+      "fileName": "test.txt",
+      "contentType": "text/plain",
+      "checksumSha256": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824",
+      "requestId": "65778710-5f82-44be-bf05-e828d0edffc4",
+      "contentLength": 5
+    }
+  ],
+  "bytePosts": 2,
+  "attachments": [
+    {
+      "id": "e94f45f4-953d-429f-b897-1d00678088ef",
+      "tenantId": "20000000-0000-4000-8000-000000000001",
+      "prospectId": "70000000-0000-4000-8000-000000000001",
+      "clientId": null,
+      "meetingId": null,
+      "mailMessageId": null,
+      "fileName": "test.txt",
+      "contentType": "text/plain",
+      "byteSize": 5,
+      "source": "manual",
+      "folder": null,
+      "viewerMode": "all",
+      "viewerUserIds": [],
+      "uploadedByUserId": "10000000-0000-4000-8000-000000000001",
+      "createdAt": "2026-10-12T12:00:00Z",
+      "lifecycleStatus": "quarantined",
+      "scanStatus": "pending",
+      "extractionStatus": "pending",
+      "indexedAt": null,
+      "s3Key": "tenants/synthetic/engagement/a519b346-a5a4-41c9-b3c7-48b7d699ee5c/test.txt",
+      "checksumSha256": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824",
+      "calculatedSha256": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824"
+    },
+    {
+      "id": "b64137a5-5914-4c75-b044-984e0be2e50b",
+      "tenantId": "20000000-0000-4000-8000-000000000001",
+      "prospectId": "70000000-0000-4000-8000-000000000001",
+      "clientId": null,
+      "meetingId": null,
+      "mailMessageId": null,
+      "fileName": "test.txt",
+      "contentType": "text/plain",
+      "byteSize": 5,
+      "source": "manual",
+      "folder": null,
+      "viewerMode": "all",
+      "viewerUserIds": [],
+      "uploadedByUserId": "10000000-0000-4000-8000-000000000001",
+      "createdAt": "2026-10-12T12:00:00Z",
+      "lifecycleStatus": "quarantined",
+      "scanStatus": "pending",
+      "extractionStatus": "pending",
+      "indexedAt": null,
+      "s3Key": "tenants/synthetic/engagement/65778710-5f82-44be-bf05-e828d0edffc4/test.txt",
+      "checksumSha256": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824",
+      "calculatedSha256": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824"
+    }
+  ],
+  "unexpected": []
+}
