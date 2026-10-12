@@ -6,6 +6,8 @@ import { useClient } from "@/features/portfolio/index/public";
 import { useFiles } from "./queries";
 import { filterFiles } from "./contracts";
 import { DeleteFile } from "./DeleteFile";
+import { FileToolbar } from "./FileToolbar";
+import { FolderCards } from "./FolderCards";
 import { FileTable, type FileAction } from "./FileTable";
 import { FilePreview } from "./FilePreview";
 import { FileAccess } from "./FileAccess";
@@ -26,10 +28,36 @@ export function FilesPage({
   const query = useFiles(clientId);
   const arrival = useLinkedFileArrival(clientId, linkedFileId, query);
   const client = useClient(clientId);
-  const [search, setSearch] = useState("");
-  const [folder, setFolder] = useState<string>();
-  const [source, setSource] = useState("");
-  const [sort, setSort] = useState("created");
+  const [filters, setFilters] = useState<{
+    view: string;
+    search: string;
+    folder?: string;
+    source: string;
+    sort: string;
+    mode: "files" | "folders";
+  }>({
+    view: query.readerScope,
+    search: "",
+    source: "",
+    sort: "created",
+    mode: "files",
+  });
+  const currentFilters =
+    filters.view === query.readerScope
+      ? filters
+      : {
+          view: query.readerScope,
+          search: "",
+          source: "",
+          sort: "created",
+          mode: "files" as const,
+          folder: undefined,
+        };
+  const { search, folder, source, sort, mode } = currentFilters;
+  const changeFilters = (value: Partial<typeof currentFilters>) =>
+    setFilters({ ...currentFilters, ...value });
+  const setFolder = (value: string | undefined) =>
+    changeFilters({ folder: value, mode: "files" });
   const [checked, setChecked] = useState<{ view: string; ids: string[] }>();
   const selected = checked?.view === query.readerScope ? checked.ids : [];
   const [requestedAction, setAction] = useState<{
@@ -101,31 +129,30 @@ export function FilesPage({
           </button>
         </div>
       </header>
-      <div className="toolbar">
-        <input
-          aria-label="Search files"
-          placeholder="Search files"
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
-        />
-        <select
-          aria-label="File source"
-          value={source}
-          onChange={(event) => setSource(event.target.value)}
+      <FileToolbar
+        search={search}
+        source={source}
+        sources={[...new Set(files.map((file) => file.source))]}
+        sort={sort}
+        onSearch={(search) => changeFilters({ search })}
+        onSource={(source) => changeFilters({ source })}
+        onSort={(sort) => changeFilters({ sort })}
+      />
+      <div className={styles.viewMode} role="group" aria-label="File view">
+        <button
+          className="button"
+          aria-pressed={mode === "folders"}
+          onClick={() => changeFilters({ mode: "folders", folder: undefined })}
         >
-          <option value="">All sources</option>
-          {[...new Set(files.map((f) => f.source))].map((source) => (
-            <option key={source}>{source}</option>
-          ))}
-        </select>
-        <select
-          aria-label="Sort files"
-          value={sort}
-          onChange={(event) => setSort(event.target.value)}
+          Folders
+        </button>
+        <button
+          className="button"
+          aria-pressed={mode === "files"}
+          onClick={() => changeFilters({ mode: "files" })}
         >
-          <option value="created">Created · newest</option>
-          <option value="name">Name</option>
-        </select>
+          All files
+        </button>
       </div>
       <QueryState
         pending={query.isPending}
@@ -189,33 +216,83 @@ export function FilesPage({
               current attachments are counted.
             </small>
           </aside>
-          <section className="stack">
-            <div className="row between">
-              <span>
-                {rows.length} files · {chosen.length} selected
-              </span>
+          <section
+            className={styles.results}
+            aria-label={
+              folder === undefined
+                ? "All client files"
+                : `Folder ${folder || "Unfiled"}`
+            }
+          >
+            <header className={styles.folderHeading}>
+              <div className={styles.breadcrumb}>
+                <button onClick={() => setFolder(undefined)}>
+                  {client.data?.name ?? "All files"}
+                </button>
+                {folder !== undefined && (
+                  <>
+                    <span aria-hidden="true">›</span>
+                    <strong>{folder || "Unfiled"}</strong>
+                  </>
+                )}
+                <small>{rows.length} files</small>
+              </div>
               <button
                 className="button"
-                disabled={chosen.length !== 1}
+                disabled={!available || Boolean(folder)}
+                title={
+                  folder
+                    ? "Upload first, then move the saved file into this folder."
+                    : undefined
+                }
                 onClick={() => {
-                  if (chosen[0]) requestAction("move", chosen[0].id);
+                  arrival.dismiss();
+                  setUploadView(query.readerScope);
                 }}
               >
-                Move to folder
+                Upload here
               </button>
-            </div>
-            {chosen.length > 1 && (
-              <p role="status">
-                Batch moves require the atomic move contract. Move individual
-                files until that contract is integrated.
+            </header>
+            {folder && (
+              <p className={styles.folderHint}>
+                Upload first, then use Move to folder. Uploads cannot be placed
+                directly in a named folder.
               </p>
             )}
-            <FileTable
-              files={rows}
-              selected={selected}
-              onSelect={(ids) => setChecked({ view: query.readerScope, ids })}
-              onAction={(kind, file) => requestAction(kind, file.id)}
-            />
+            {mode === "folders" ? (
+              <FolderCards files={rows} onOpen={setFolder} />
+            ) : (
+              <>
+                <div className={styles.selectionBar}>
+                  <span>
+                    {rows.length} files · {chosen.length} selected
+                  </span>
+                  <button
+                    className="button"
+                    disabled={chosen.length !== 1}
+                    onClick={() => {
+                      if (chosen[0]) requestAction("move", chosen[0].id);
+                    }}
+                  >
+                    Move to folder
+                  </button>
+                </div>
+                {chosen.length > 1 && (
+                  <p role="status">
+                    Batch moves require the atomic move contract. Move
+                    individual files until that contract is integrated.
+                  </p>
+                )}
+                <FileTable
+                  files={rows}
+                  selected={selected}
+                  onSelect={(ids) =>
+                    setChecked({ view: query.readerScope, ids })
+                  }
+                  onAction={(kind, file) => requestAction(kind, file.id)}
+                />
+              </>
+            )}
           </section>
         </div>
       )}

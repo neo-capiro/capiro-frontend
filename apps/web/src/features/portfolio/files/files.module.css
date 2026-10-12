@@ -1,6 +1,6 @@
 .layout {
   display: grid;
-  grid-template-columns: 270px minmax(0, 1fr);
+  grid-template-columns: 300px minmax(0, 1fr);
   gap: 20px;
   align-items: start;
 }
@@ -13,6 +13,9 @@
   gap: 8px;
 }
 .folders button {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: normal;
   justify-content: start;
   text-align: left;
 }
@@ -95,5 +98,176 @@
   .folders > p,
   .folders > small {
     width: 100%;
+  }
+}
+
+.toolbar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.search {
+  width: 300px;
+  max-width: 100%;
+}
+.sourceFilters,
+.viewMode {
+  min-width: 0;
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.sourceFilters button,
+.viewMode button {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  min-height: 32px;
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+.sourceFilters [aria-pressed="true"],
+.viewMode [aria-pressed="true"] {
+  background: var(--foreground);
+  color: var(--card);
+  border-color: var(--foreground);
+}
+.sort {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.sort select {
+  width: auto;
+  min-height: 32px;
+}
+.viewMode {
+  align-self: flex-start;
+}
+.results {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  overflow: hidden;
+}
+.folderHeading {
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  min-width: 0;
+  font-size: 13px;
+}
+.breadcrumb button {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: var(--muted-foreground);
+  font: inherit;
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+.breadcrumb strong {
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.breadcrumb small {
+  color: var(--muted-foreground);
+}
+.selectionBar {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px 20px;
+  font-size: 12px;
+}
+.results > :global(.tableWrap) {
+  border: 0;
+  border-radius: 0;
+}
+.folderHint {
+  font-size: 12px;
+  color: var(--muted-foreground);
+  padding: 10px 20px;
+}
+.folderGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px;
+  padding: 20px;
+}
+.folderCard {
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--foreground);
+  text-align: left;
+  min-width: 0;
+  cursor: pointer;
+}
+.folderCard:hover {
+  background: var(--muted);
+}
+.folderCard strong {
+  font-size: 14px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.folderCard > span:not(.folderCardIcon) {
+  font-size: 11px;
+  color: var(--muted-foreground);
+}
+.folderCardIcon {
+  font-size: 20px;
+  color: var(--muted-foreground);
+}
+.folderCardFooter {
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+  margin-top: 4px;
+}
+@media (max-width: 540px) {
+  .search {
+    width: 100%;
+  }
+  .sort {
+    margin-left: 0;
+  }
+  .folderHeading,
+  .selectionBar {
+    padding: 12px 14px;
+  }
+  .folderGrid {
+    grid-template-columns: 1fr;
+    padding: 14px;
   }
 }
