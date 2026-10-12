@@ -55,7 +55,19 @@ The original requested Intel normalization/explicit partial-rejection, requested
 phone-code copy and Core 404 visible-disabled/zero-Intel baselines remain in
 `evidence/`. Representative Figma/mobile/keyboard findings and their limits are in
 VISUAL-REVIEW.md; this is not exhaustive pixel or assistive-technology acceptance.
-Final independent source/delta review remains parent-coordinated.
+Parent reports the independent narrow review ofe1bcf60 passed, including both
+changed files, focused replays, exact keys/bodies, cancellation and status/security
+checks. Archive subtree, all477 inventoried files/eight parts and prerequisite
+hashes were independently verified. This is bounded source review only.
+
+An additional production-artifact regression identifies an open runtime-config
+finding: Meri static output serializes the shared boundary publishableKey as
+undefined. Direct Meri entry can retain build-time unconfigured context after
+runtime credentials are supplied. No credentials/provider calls were used to
+reproduce it. `evidence/runtime-config-red/` retains the actual prerender route projection,
+serialized marker and failing assertion. Finish this frozen run unchanged, then
+repair common request-time initialization in the distinct follow-up candidate.
+This finding is a shipping hold despite the separate narrow review pass.
 
 ## Preservation and shipping boundary
 
