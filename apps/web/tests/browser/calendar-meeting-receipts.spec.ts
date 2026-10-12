@@ -58,3 +58,44 @@ test("native normalized meeting receipt succeeds and an empty location is explic
   await expect(page.getByRole("dialog")).toHaveCount(0);
   expect(body).toMatchObject({ location: "" });
 });
+
+test("pending meeting fields cannot accept a newer unsaved draft before a valid receipt", async ({
+  page,
+}) => {
+  await installFixtures(page);
+  let release!: () => void;
+  const pending = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  let requests = 0;
+  await page.route("**/core/engagement/meetings/meeting-one", async (route) => {
+    requests++;
+    await pending;
+    return json(route, meeting);
+  });
+  await page.goto("/calendar-meeting-receipts.html");
+  await page.getByRole("button", { name: "Save meeting" }).click();
+  await expect.poll(() => requests).toBe(1);
+  for (const [label, value] of [
+    ["Subject", "Synthetic meeting"],
+    ["Description", ""],
+    ["Location or join URL", "Old location"],
+    ["Starts", "2026-10-10T14:00"],
+    ["Ends", "2026-10-10T15:00"],
+  ]) {
+    const field = page.getByLabel(label!, { exact: true });
+    await expect(field).toHaveAttribute("readonly", "");
+    if (
+      label === "Subject" ||
+      label === "Description" ||
+      label === "Location or join URL"
+    ) {
+      await field.press("End");
+      await field.pressSequentially(" newer unsaved draft");
+    }
+    await expect(field).toHaveValue(value!);
+  }
+  release();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  expect(requests).toBe(1);
+});

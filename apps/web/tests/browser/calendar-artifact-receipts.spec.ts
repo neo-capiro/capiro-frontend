@@ -306,3 +306,30 @@ for (const kind of ["notes", "debriefs"]) {
     ]);
   });
 }
+
+for (const kind of ["notes", "debriefs"]) {
+  const singular = kind === "notes" ? "note" : "debrief";
+  test(`${kind}: pending fields cannot accept a later draft before a valid receipt`, async ({
+    page,
+  }) => {
+    const state = await setup(page, kind);
+    const pending = held();
+    state.hold = pending.promise;
+    await draft(page, singular);
+    await page.getByRole("button", { name: `Save ${singular}` }).click();
+    await expect.poll(() => state.writes).toBe(1);
+    const content = page.getByLabel("Content", { exact: true });
+    await content.press("End");
+    await content.pressSequentially(" later draft");
+    await expect(content).toHaveValue("Retain this synthetic draft");
+    await expect(
+      page.getByRole("checkbox", { name: "Confidential", exact: true }),
+    ).toBeDisabled();
+    pending.release();
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+    expect(state.requests[0]?.body).toEqual({
+      body: "Retain this synthetic draft",
+      confidential: false,
+    });
+  });
+}

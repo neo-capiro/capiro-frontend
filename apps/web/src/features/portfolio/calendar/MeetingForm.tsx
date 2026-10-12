@@ -41,6 +41,7 @@ export function MeetingForm({
     () => onOpenChange(false),
     clientId ?? selectedClientId,
   );
+  const locked = mutation.isPending || mutation.uncertain;
   const local = (instant: string | undefined) =>
     instant
       ? Temporal.Instant.from(instant)
@@ -98,6 +99,7 @@ export function MeetingForm({
           Subject
           <input
             name="subject"
+            readOnly={locked}
             required
             maxLength={240}
             autoFocus
@@ -111,7 +113,7 @@ export function MeetingForm({
               name="clientId"
               value={selectedClientId}
               onChange={(event) => setSelectedClientId(event.target.value)}
-              disabled={!clients.isSuccess || clients.isFetching}
+              disabled={locked || !clients.isSuccess || clients.isFetching}
             >
               <option value="">No client</option>
               {currentClients.map((client) => (
@@ -151,6 +153,7 @@ export function MeetingForm({
             Starts
             <input
               name="start"
+              readOnly={locked}
               type="datetime-local"
               required
               defaultValue={local(meeting?.startsAt)}
@@ -160,6 +163,7 @@ export function MeetingForm({
             Ends
             <input
               name="end"
+              readOnly={locked}
               type="datetime-local"
               required
               defaultValue={local(meeting?.endsAt)}
@@ -170,6 +174,7 @@ export function MeetingForm({
           Location or join URL
           <input
             name="location"
+            readOnly={locked}
             maxLength={240}
             defaultValue={meeting?.location ?? ""}
           />
@@ -177,6 +182,7 @@ export function MeetingForm({
         <TextareaField
           label="Description"
           name="description"
+          readOnly={locked}
           defaultValue={meeting?.description ?? ""}
         />
         {validation && (
