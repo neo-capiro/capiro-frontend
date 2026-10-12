@@ -1,0 +1,19 @@
+{
+  "applicationSource": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "archiveSHA256": "252ccdf0d91d94a6b53e4a9d905534f2b4e325ef231481774154daa96bfacbf5",
+  "archiveBytes": 451977924,
+  "s3Version": "OFFLINE-TEST-NOT-S3-CUSTODY",
+  "executionId": "capiro-4a-f02ece91-bbd4-4cb1-9bd2-a522c830b395",
+  "runnerSHA256": "f568a0481a1cdca232e197739d76bcd855b89bfa2e1386ccc9c67735ba8f970c",
+  "buildspecOverrideSHA256": "ee12fc3035d9542a5df25f77d9df1674d7ee2aa88a833c6028f00cdb67989c28",
+  "templateSHA256": "39bf521fbaf531d8b6586fc70bb63eaa879862b57c81c08eab6a1f57470a2b33",
+  "maximumImageBytes": 1,
+  "maximumCommandLogBytes": 1,
+  "wholeLifecycleSeconds": 4200,
+  "cancelAfterSeconds": 3900,
+  "cloudExecution": "NOT_RUN",
+  "sourceArchiveModified": false,
+  "purpose": "OFFLINE PREPARATION CONTROL ONLY; synthetic S3 version and1-byte bounds; not a shipping request",
+  "offlineValidation": "PASS",
+  "actualArchiveHashAndLengthVerified": true
+}

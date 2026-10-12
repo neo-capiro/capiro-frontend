@@ -1,0 +1,47 @@
+{
+  "scope": "Small tracked-file real Git archive probes, no full archive write and no source changes",
+  "variants": [
+    {
+      "TZ": "UTC0",
+      "appendedCreateSystem": 3,
+      "gitDateTime": [
+        2026,
+        10,
+        12,
+        11,
+        48,
+        20
+      ],
+      "sha256": "9aeb2644523912160b834e84ac90a068fb0a97042e58cea3722ca63f97808dc4",
+      "bytes": 520
+    },
+    {
+      "TZ": "EST5EDT",
+      "appendedCreateSystem": 0,
+      "gitDateTime": [
+        2026,
+        10,
+        12,
+        7,
+        48,
+        20
+      ],
+      "sha256": "d84b1690b65290ab9a078c898af0b64893a7331693fe8d3d78a26d903aac86c7",
+      "bytes": 520
+    },
+    {
+      "TZ": "EST5EDT",
+      "appendedCreateSystem": 3,
+      "gitDateTime": [
+        2026,
+        10,
+        12,
+        7,
+        48,
+        20
+      ],
+      "sha256": "1670f3da1ba286957d92c34a70d6cd1eb27b3319a96cd95ef06fcb0a3ce83113",
+      "bytes": 520
+    }
+  ]
+}

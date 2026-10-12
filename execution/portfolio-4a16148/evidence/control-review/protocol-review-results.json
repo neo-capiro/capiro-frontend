@@ -1,0 +1,262 @@
+{
+  "candidateRunnerSHA256": "f908e7bf7f7901f5215f902fdc87cdecdd95ba447536722aee4df1cd06bb1a0c",
+  "baselineRunnerSHA256": "f568a0481a1cdca232e197739d76bcd855b89bfa2e1386ccc9c67735ba8f970c",
+  "awsCalls": 0,
+  "dockerCalls": 0,
+  "sourceEdits": 0,
+  "results": [
+    {
+      "variant": "baseline",
+      "probe": "schema/order",
+      "passed": false,
+      "detail": null,
+      "error": "AssertionError: expected exactly one compatible control receipt"
+    },
+    {
+      "variant": "baseline",
+      "probe": "invalid identity",
+      "passed": false,
+      "detail": null,
+      "error": "AssertionError: invalid build identity reached gates"
+    },
+    {
+      "variant": "baseline",
+      "probe": "separate stream counters",
+      "passed": false,
+      "detail": null,
+      "error": "AttributeError: 'OutputBudget' object has no attribute 'stdout_bytes'"
+    },
+    {
+      "variant": "candidate",
+      "probe": "schema/order",
+      "passed": true,
+      "detail": {
+        "schemaVersion": 1,
+        "stage": "pre_push",
+        "buildId": "capiro-portfolio-preview-build:12345678-1234-1234-1234-123456789012",
+        "executionId": "capiro-4a-12345678-1234-1234-1234-123456789012",
+        "sourceSHA": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+        "s3Version": "version-fixture",
+        "imageBoundBytes": 100,
+        "imageMeasure": "docker.image.Size",
+        "stdoutBytes": 442,
+        "stderrBytes": 0,
+        "imageLimitBytes": 100,
+        "outputLimitBytes": 10000,
+        "guardPass": true
+      },
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "invalid identity",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "separate stream counters",
+      "passed": true,
+      "detail": {
+        "stdoutBytes": 82,
+        "stderrBytes": 5,
+        "error": null
+      },
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "shared cap extra byte",
+      "passed": true,
+      "detail": {
+        "stdoutBytes": 82,
+        "stderrBytes": 5,
+        "error": "BoundExceeded"
+      },
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "secret combined capture exact",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "secret combined capture+1",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "receipt exact capacity and+1",
+      "passed": true,
+      "detail": {
+        "exactReceiptLimit": 440,
+        "oneByteLessRejectedAtomically": true
+      },
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "escaped identity and4096record bound",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "qualification failure1",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "qualification failure2",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "qualification failure3",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "qualification failure4",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "qualification failure5",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "qualification failure6",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "qualification failure7",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "qualification failure8",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "qualification failure9",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "qualification failure10",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "qualification failure11",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "qualification failure12",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "qualification failure13",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "image+1",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "image malformed",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "bad EXPECTED_SHA",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "bad EXPECTED_S3_VERSION",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "bad REPOSITORY_URI",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "bad CAPIRO_EXECUTION_ID",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "bad CODEBUILD_BUILD_ID",
+      "passed": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "variant": "candidate",
+      "probe": "insufficient receipt budget",
+      "passed": true,
+      "detail": null,
+      "error": null
+    }
+  ],
+  "candidatePassed": 29,
+  "candidateTotal": 29,
+  "baselineRed": 3,
+  "baselineTotal": 3
+}

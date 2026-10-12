@@ -1,0 +1,44 @@
+test_child_stderr_has_separate_counter_and_shared_limit (test_control_gate.ControlGateTests.test_child_stderr_has_separate_counter_and_shared_limit) ... ok
+test_control_receipt_binds_identity_limits_and_completed_output (test_control_gate.ControlGateTests.test_control_receipt_binds_identity_limits_and_completed_output) ... ok
+test_guard_cannot_exceed_remaining_output_allowance (test_control_gate.ControlGateTests.test_guard_cannot_exceed_remaining_output_allowance) ... ok
+test_missing_or_foreign_execution_identity_stops_before_gates (test_control_gate.ControlGateTests.test_missing_or_foreign_execution_identity_stops_before_gates) ... ok
+test_bad_archive_fails_before_output (test_execution.PreparationTests.test_bad_archive_fails_before_output) ... ok
+test_changed_recipe_is_rejected (test_execution.PreparationTests.test_changed_recipe_is_rejected) ... ok
+test_inline_recipe_binds_exact_runner (test_execution.PreparationTests.test_inline_recipe_binds_exact_runner) ... ok
+test_offline_validate_and_execute_opt_in (test_execution.PreparationTests.test_offline_validate_and_execute_opt_in) ... ok
+test_unknown_limits_and_version_are_rejected (test_execution.PreparationTests.test_unknown_limits_and_version_are_rejected) ... ok
+test_child_exit_failure_propagates (test_execution.RunnerTests.test_child_exit_failure_propagates) ... ok
+test_deadline_kills_blocked_child (test_execution.RunnerTests.test_deadline_kills_blocked_child) ... ok
+test_exact_size_bound_is_accepted (test_execution.RunnerTests.test_exact_size_bound_is_accepted) ... ok
+test_failed_qualification_never_inspects_or_pushes (test_execution.RunnerTests.test_failed_qualification_never_inspects_or_pushes) ... ok
+test_local_command_output_is_incrementally_bounded (test_execution.RunnerTests.test_local_command_output_is_incrementally_bounded) ... ok
+test_output_budget_fails_at_first_extra_byte (test_execution.RunnerTests.test_output_budget_fails_at_first_extra_byte) ... ok
+test_oversize_and_malformed_size_are_rejected (test_execution.RunnerTests.test_oversize_and_malformed_size_are_rejected) ... ok
+test_secret_capture_limit_fails_closed (test_execution.RunnerTests.test_secret_capture_limit_fails_closed) ... ok
+test_secret_response_is_captured_without_logging (test_execution.RunnerTests.test_secret_response_is_captured_without_logging) ... ok
+test_size_failure_never_authenticates_or_pushes (test_execution.RunnerTests.test_size_failure_never_authenticates_or_pushes) ... ok
+test_size_gate_precedes_login_and_push (test_execution.RunnerTests.test_size_gate_precedes_login_and_push) ... ok
+test_source_and_expired_deadline_fail_before_commands (test_execution.RunnerTests.test_source_and_expired_deadline_fail_before_commands) ... ok
+test_bound_request_rejects_changed_state_identity (test_execution.SupervisionTests.test_bound_request_rejects_changed_state_identity) ... ok
+test_cancel_at_65_minutes_and_confirm_stop_before_70 (test_execution.SupervisionTests.test_cancel_at_65_minutes_and_confirm_stop_before_70) ... ok
+test_changed_deadline_is_rejected (test_execution.SupervisionTests.test_changed_deadline_is_rejected) ... ok
+test_completed_resume_uses_confirmed_receipt (test_execution.SupervisionTests.test_completed_resume_uses_confirmed_receipt) ... ok
+test_expired_initial_attempt_never_calls_aws (test_execution.SupervisionTests.test_expired_initial_attempt_never_calls_aws) ... ok
+test_expired_resume_never_calls_aws (test_execution.SupervisionTests.test_expired_resume_never_calls_aws) ... ok
+test_incomplete_terminal_cannot_succeed (test_execution.SupervisionTests.test_incomplete_terminal_cannot_succeed) ... ok
+test_late_complete_observation_cannot_succeed (test_execution.SupervisionTests.test_late_complete_observation_cannot_succeed) ... ok
+test_resume_preserves_original_deadline (test_execution.SupervisionTests.test_resume_preserves_original_deadline) ... ok
+test_resume_unconfirmed_success_requires_fresh_observation (test_execution.SupervisionTests.test_resume_unconfirmed_success_requires_fresh_observation) ... ok
+test_second_start_is_rejected (test_execution.SupervisionTests.test_second_start_is_rejected) ... ok
+test_signal_before_submission_does_not_start (test_execution.SupervisionTests.test_signal_before_submission_does_not_start) ... ok
+test_stop_acceptance_is_not_terminal_confirmation (test_execution.SupervisionTests.test_stop_acceptance_is_not_terminal_confirmation) ... ok
+test_success_requires_confirmed_complete_terminal (test_execution.SupervisionTests.test_success_requires_confirmed_complete_terminal) ... ok
+test_three_observation_failures_request_cancellation (test_execution.SupervisionTests.test_three_observation_failures_request_cancellation) ... ok
+test_uncertain_submission_is_discovered_and_stopped_without_retry (test_execution.SupervisionTests.test_uncertain_submission_is_discovered_and_stopped_without_retry) ... ok
+test_unknown_submission_never_retries_and_reports_unknown (test_execution.SupervisionTests.test_unknown_submission_never_retries_and_reports_unknown) ... ok
+test_wrong_identity_is_never_stopped (test_execution.SupervisionTests.test_wrong_identity_is_never_stopped) ... ok
+
+----------------------------------------------------------------------
+Ran 39 tests in 1.098s
+
+OK
