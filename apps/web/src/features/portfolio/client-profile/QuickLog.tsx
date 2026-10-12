@@ -10,6 +10,10 @@ import {
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import meetingEntryStyles from "./quick-log/meeting-entry.module.css";
+import { followUpInputSchema } from "./quick-log/command-contracts";
+import { useFollowUpCommand } from "./quick-log/useFollowUpCommand";
+import { FollowUpFields } from "./quick-log/FollowUpFields";
+import { FollowUpStatus } from "./quick-log/FollowUpStatus";
 export function QuickLog({
   clientId,
   clientName,
@@ -26,18 +30,22 @@ export function QuickLog({
   const router = useRouter();
   const meetingHint = useId();
   const [validation, setValidation] = useState("");
+  const [followUpRequested, setFollowUpRequested] = useState(false);
+  const command = useFollowUpCommand(clientId, open);
+  const withFollowUp = followUpRequested || Boolean(command.pending);
   const { mutation, receipt, clearReceipt, canCreate, uncertain } = useQuickLog(
     clientId,
     open,
     () => onOpenChange(false),
   );
-  const canOpenMeeting = open && canCreate && !mutation.isPending && !uncertain;
+  const canOpenMeeting =
+    open && canCreate && !mutation.isPending && !uncertain && !command.pending;
   return (
     <>
       <Dialog
         open={open}
         onOpenChange={(value) => {
-          if (!mutation.isPending) onOpenChange(value);
+          if (!mutation.isPending && !command.busy) onOpenChange(value);
         }}
         title="Quick log"
         description={`Record activity for ${clientName}.`}
@@ -46,6 +54,7 @@ export function QuickLog({
           className="stack"
           onSubmit={(event) => {
             event.preventDefault();
+            if (command.pending) return;
             const form = new FormData(event.currentTarget);
             const input = quickLogInputSchema.safeParse({
               kind: form.get("kind"),
@@ -60,12 +69,36 @@ export function QuickLog({
               return;
             }
             setValidation("");
+            if (withFollowUp) {
+              const dueOn = String(form.get("followUpDate") ?? "");
+              const dueTime = String(form.get("followUpTime") ?? "");
+              const timeZone = String(form.get("followUpZone") ?? "").trim();
+              const followUp = followUpInputSchema.safeParse({
+                assigneeUserId: form.get("followUpAssignee"),
+                ...(dueOn ? { dueOn } : {}),
+                ...(dueTime ? { dueTime } : {}),
+                ...(timeZone ? { timeZone } : {}),
+              });
+              if (!followUp.success) {
+                setValidation(
+                  followUp.error.issues[0]?.message ??
+                    "Review the follow-up fields.",
+                );
+                return;
+              }
+              command.start(input.data, followUp.data);
+              return;
+            }
             mutation.mutate(input.data);
           }}
         >
           <label>
             Activity type
-            <select name="kind">
+            <select
+              name="kind"
+              disabled={Boolean(command.pending)}
+              defaultValue={command.pending?.input.activity.kind ?? "note"}
+            >
               <option value="note">Note</option>
               <option value="call">Call</option>
               <option value="email">Logged email</option>
@@ -94,14 +127,51 @@ export function QuickLog({
           </div>
           <label>
             Title
-            <input name="title" required maxLength={300} autoFocus />
+            <input
+              name="title"
+              required
+              maxLength={300}
+              autoFocus
+              disabled={Boolean(command.pending)}
+              defaultValue={command.pending?.input.activity.title ?? ""}
+            />
           </label>
-          <TextareaField label="Details" name="body" maxLength={5000} />
+          <TextareaField
+            label="Details"
+            name="body"
+            maxLength={5000}
+            disabled={Boolean(command.pending)}
+            defaultValue={command.pending?.input.activity.body ?? ""}
+          />
           <small>
             Logged email records history; it does not send a message.
           </small>
+          <label className="row">
+            <input
+              type="checkbox"
+              checked={withFollowUp}
+              disabled={
+                mutation.isPending || uncertain || Boolean(command.pending)
+              }
+              onChange={(event) => setFollowUpRequested(event.target.checked)}
+            />
+            Add generic follow-up
+          </label>
+          {withFollowUp && (
+            <FollowUpFields
+              disabled={Boolean(command.pending) || !canCreate}
+              initial={command.pending?.input.followUp}
+            />
+          )}
           {validation && <p role="alert">{validation}</p>}
           <QueryState error={mutation.error} />
+          <FollowUpStatus
+            command={command}
+            onDone={() => {
+              setFollowUpRequested(false);
+              onOpenChange(false);
+            }}
+          />
           {uncertain && (
             <p role="alert">
               The save result is uncertain. Inspect the timeline before logging
@@ -112,9 +182,15 @@ export function QuickLog({
           <div className="formActions">
             <button
               className="button primary"
-              disabled={!canCreate || mutation.isPending}
+              disabled={
+                !canCreate || mutation.isPending || Boolean(command.pending)
+              }
             >
-              {mutation.isPending ? "Saving…" : "Save activity"}
+              {mutation.isPending || command.busy
+                ? "Saving…"
+                : withFollowUp
+                  ? "Save activity and follow-up"
+                  : "Save activity"}
             </button>
           </div>
         </form>

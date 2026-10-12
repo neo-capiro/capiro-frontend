@@ -449,10 +449,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/QuickLog.tsx",
     "kind": "function",
     "symbol": "QuickLog",
-    "fingerprint": "527bbeee1ca91882b2c5f5970be50d48019bdeafc020c22bf239a05ab28f6850",
-    "reason": "QuickLog composes one existing activity form and its exact saved-entry Undo presentation. The added meeting entry is a type=button navigation control, guarded by this form's current canCreate, pending and uncertain state, with the existing current client encoded into the established Calendar creation URL. Its button and caption remain beside the activity kind because they distinguish the two existing recording paths at the point of entry. The 108-line body does not add meeting transport, duration, draft projection or service state; activity authority, lifetime, persistence and receipts remain in useQuickLog, and meeting input stays in Calendar. A second controller or extracted form would split the one coupled form-action gate without removing an independent responsibility. The separate 17-line CSS module owns only the new row's desktop/phone wrapping and existing button presentation.",
-    "reviewedBy": "Codex portfolio_objectives; Codex integration coordinator (independent confirmation)",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "c865623a6c851c7f36936fccbb4341309e712d10af66dad2293a0a5121cb5569",
+    "reason": "This 180-line form retains the five ordinary activity kinds and legacy logging/Undo owner. It optionally composes the generic follow-up fields and command status, delegating durable request lifetime and all HTTP/receipt logic to specific modules. The form only reads named inputs, selects one of the two explicitly different supported operations, and prevents ordinary writes while a command is pending. Meeting navigation and no-Commitment scope remain. No Planner transport, association policy or recovery algorithm lives in the container.",
+    "reviewedBy": "Codex shared frontend integration owner (source review)",
+    "reviewedOn": "2026-10-12"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/tags/FocusTags.tsx",
@@ -1353,6 +1353,33 @@
     "symbol": "useOrderedOwners",
     "fingerprint": "f9ef647e05f17133d59662c726ef2315e1999b17075b20513b8b80f4955e3b21",
     "reason": "This 182-line hook owns one versioned owner edit lifetime: current scoped reads, the first-edit source snapshot, dispatch state and deliberate readback after conflict or uncertainty. Input and receipt validation/HTTP replacement remain in ordered-owners.ts; rank presentation remains in OrderedOwnerFields. The retained attempt uses the application query cache across dialog closure and is cleared by the canonical application identity/client boundary. Readback compares the complete submitted order/version; draft gaps are preserved without promotion. These dependent transitions belong to one editor state machine; no member authority service, roster writer or backend ownership policy is duplicated.",
+    "reviewedBy": "Codex shared frontend integration owner (source review)",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/quick-log/FollowUpStatus.tsx",
+    "kind": "function",
+    "symbol": "FollowUpStatus",
+    "fingerprint": "fcfe3f1deede3eeda23ebf842cdc4523b3d89f2c3a472e58bb582bf04fecff59",
+    "reason": "This 91-line presentation renders one command outcome and its supported next actions: separate activity/task state, diagnostic reason, read, original-key recovery, explicit resume or completion. It owns no network, storage, authority or version mutation. The conditional output is one receipt state view and is checked with malformed, partial, unavailable and uncertain browser cases.",
+    "reviewedBy": "Codex shared frontend integration owner (source review)",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/quick-log/useFollowUpCommand.ts",
+    "kind": "function",
+    "symbol": "useFollowUpCommand",
+    "fingerprint": "6b7ed8cb68c6114a3c4d19b18a24d26a0144f73473ab947988bbfee94c7a3c98",
+    "reason": "This 184-line hook owns the scoped lifetime of one durable Core command, using the existing application query cache. Original input is retained before dispatch, interrupted views retain the pending command, and changed identities/clients use separate scopes under the canonical application reset boundary. Pure contracts and guarded Core operations live separately; this hook owns UI transition and cancellation, not Planner or backend authorization. No general orchestration abstraction or second task owner is introduced.",
+    "reviewedBy": "Codex shared frontend integration owner (source review)",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/quick-log/useFollowUpCommand.ts",
+    "kind": "function",
+    "symbol": "useFollowUpCommand > run",
+    "fingerprint": "76833d93d277e5be300bc1de93233085d75bdb0592008c9616455922e668cc75",
+    "reason": "This 99-line transition captures the exact current pending command, serializes one explicit operation, clears stale success presentation, delegates to the guarded Core create/read/resume functions, and records only validated results. Recovery reuses the original body/key; resume requires a fresh read version. The operation token coordinates cancellation and cache publication across dialog closure. Keeping these dependent state transitions together makes the no-replay and no-stale-success ordering reviewable; it does not select unrelated providers or workflows.",
     "reviewedBy": "Codex shared frontend integration owner (source review)",
     "reviewedOn": "2026-10-12"
   }
