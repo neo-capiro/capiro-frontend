@@ -701,15 +701,6 @@
     "reviewedOn": "2026-10-11"
   },
   {
-    "file": "apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts",
-    "kind": "function",
-    "symbol": "useMailRewrite",
-    "fingerprint": "6798b98e516658cb4532c155035dd9a15a15ca0aa1bae5b49b61b4ef72b22bfa",
-    "reason": "One source-bound rewrite lifecycle owns the current body, pending attempt and one prior-body Undo snapshot. Manual edits, source/recipient changes, identity invalidation and unmount revoke the coupled state; Undo rechecks the existing captured authority and issues no request. The native request/schema/conversion retain rewrite.ts ownership. Splitting Undo into another hook would duplicate lifetime and cache subscriptions. Root and independent prospects reviewed full161-line function and meaningful authority controls. See docs/followup-20261012/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex shared frontend integration owner with independent assigned-lane source review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
     "file": "apps/web/src/features/portfolio/relationships/GovernmentRelationships.tsx",
     "kind": "function",
     "symbol": "GovernmentRelationships",
@@ -726,15 +717,6 @@
     "reason": "This form reviews and saves one contact placement. Canonical hierarchy validation and cycle logic remain in the existing schema/helpers and mutation. Reset and save use the same draft. No duplicate hierarchy engine or cross-domain behavior is present.",
     "reviewedBy": "Codex portfolio_calendar_relationships",
     "reviewedOn": "2026-10-11"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
-    "kind": "function",
-    "symbol": "MailCompose",
-    "fingerprint": "024c124c331a351cede7aef7a9eac568dd49edcf28ebea0130511dab6f78d256",
-    "reason": "One composer owns recipient/body controls and the frozen send-review snapshot. SignaturePreview separately owns adopted DOMPurify/sandbox presentation; useMailRewrite owns local rewrite/Undo lifetime. Only current successful non-fetching signature HTML enters the display snapshot; loading/unavailable state remains explicit and appendSignature keeps backend send semantics without copying preview HTML into bodyHtml. Root and independent prospects reviewed the stale-refetch correction and full361-line function. No new provider, transport or actor resolver is embedded here. See docs/followup-20261012/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex shared frontend integration owner with independent assigned-lane source review",
-    "reviewedOn": "2026-10-12"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/member-notes/MemberNoteForm.tsx",
@@ -834,15 +816,6 @@
     "reason": "OpportunitiesPage composes two independently authoritative feeds, URL search/paging and the explicitly page-scoped summary. The current-read decisions belong alongside the summary and feed-level navigation so failed refreshes cannot leave derived counts or links active. Detailed match and PE evidence rendering is already delegated to OpportunityResults and RelevantPrograms; no transport or new workflow aggregation is introduced. Retain the two-feed page composition.",
     "reviewedBy": "Codex /root/portfolio_prospects_files; independently confirmed by Codex /root",
     "reviewedOn": "2026-10-11"
-  },
-  {
-    "kind": "function",
-    "reviewedBy": "Codex /root; previous writer and dialog review independently confirmed by Codex /root/portfolio_objectives and /root/portfolio_prospects_files",
-    "reviewedOn": "2026-10-11",
-    "file": "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
-    "symbol": "Registrations",
-    "fingerprint": "1b84caf9839b2d02e6a98287ded9ffb9a41b1b51acdfd7a18e3a3f915b56b977",
-    "reason": "Registrations owns the read/edit presentation for one registration dialog: the successful exact-client read, eight readonly code rows, five-field draft, legacy certification inputs, current-write controls and read/save failures. The draft key tracks only registration fields so changed codes reset stale uncontrolled inputs while unrelated profile notes preserve a local draft. Native PUT validation and exact receipt checking are in registration-writer.ts; captured actor/lifetime and cache sequencing are in execution.ts and registration-mutations.ts. The current 207-line body changes only the user-facing explanation of fields that are read-only in this form. Its mutually exclusive field and readonly markup remains cohesive, without adding a transport or profile-update owner. Retain this dialog; extract an edit panel if its fields or independent reuse grow."
   },
   {
     "kind": "function",
@@ -1425,15 +1398,6 @@
     "reviewedOn": "2026-10-12"
   },
   {
-    "file": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
-    "kind": "function",
-    "symbol": "CapabilitiesPage",
-    "fingerprint": "d4b3500e670ce928604a647800950870bf7f33bf66b356dc96b8eb1ffcfeb858",
-    "reason": "Passes only its already-current capability records as optional suggestions. Query scope, invalidation and unavailable handling remain in existing hooks; no new catalog, service, DTO or cross-client state is created. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex shared frontend implementation review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
     "file": "apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx",
     "kind": "function",
     "symbol": "CapabilityEditor",
@@ -1448,15 +1412,6 @@
     "symbol": "CapabilityForm",
     "fingerprint": "9b492ddd92a19d7b2f8e6829a6998adfa034f83bba04f3d3ee8bc9c2d586ca49",
     "reason": "Owns the existing native capability form and fields. It forwards optional suggestions only to creation identity fields; form parsing, mutation boundaries and arbitrary type/sector strings remain canonical. Saved Details still renders the authored variant. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex shared frontend implementation review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
-    "kind": "function",
-    "symbol": "ClientOverview",
-    "fingerprint": "4125c1012f0d551322a20f250ef083d7692189913d5e7fd0dab1ec3851bf81a1",
-    "reason": "Adds current verified client name to the existing Team dialog solely for owner-dialog context. All current-client failure gates, activity/overview composition and transport ownership are unchanged. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
     "reviewedBy": "Codex shared frontend implementation review",
     "reviewedOn": "2026-10-12"
   },
@@ -1521,6 +1476,87 @@
     "fingerprint": "370b43d4c8e1db0b7afe8e3f6ed0f4910b4ed62f27f563103870c99735aa3e11",
     "reason": "Retains Portfolio index/card/chooser presentation and responsive rules. The added header owner filter and compact navigation/disclosure styling are scoped to the same index. No global shell tokens, mode navigation, backend state or unrelated domain rules are added. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
     "reviewedBy": "Codex shared frontend implementation review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
+    "kind": "function",
+    "symbol": "CapabilitiesPage",
+    "fingerprint": "f637c27f71b03629f672fe313f55353bd71023c6732d40f7b35fd28dc5e05f56",
+    "reason": "Single capability-list projection and URL-selected editor owner. New markup connects existing records/maturity to responsive feature CSS; state, query, selection, fit and native mutations are unchanged. Extracting a second mobile projection would duplicate record rendering; no second state owner or shared-layer dependency was added.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
+    "kind": "function",
+    "symbol": "Registrations",
+    "fingerprint": "d36d58ddb6eb1d1aa322e018072b563bff95fea938c9bb02aa989036053e66e8",
+    "reason": "One native client registration read/edit modal, current client/identity/save gates remain local and unchanged. Changes add feature-local layout classes/body wrapper and preserve the five-field edit/write path. Added CSS is isolated to registration presentation; no DTO, query or lifetime abstraction added.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "085d41cdae4c7395f952951cfcf24d288456fa9d77daa01f49779c5f40cf0fd3",
+    "reason": "Composes one mail draft and its explicit review/send dialog. The new editor and safe HTML codec own rich-body representation and display; existing recipient, mailbox, signature, attachment, send and authority owners remain canonical. This patch replaces textarea/plain review with the editor and frozen HTML snapshot; no transport or policy moved into the composer. The file404/function369 signal is reviewed explicitly, not waived by splitting markup.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+    "kind": "function",
+    "symbol": "MailCompose",
+    "fingerprint": "0307558bf27a23b765bab9ce4e78ad1149bf88f2896ead69313805a8e241ede0",
+    "reason": "Composes one mail draft and its explicit review/send dialog. The new editor and safe HTML codec own rich-body representation and display; existing recipient, mailbox, signature, attachment, send and authority owners remain canonical. This patch replaces textarea/plain review with the editor and frozen HTML snapshot; no transport or policy moved into the composer. The file404/function369 signal is reviewed explicitly, not waived by splitting markup.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx",
+    "kind": "function",
+    "symbol": "RichMailEditor",
+    "fingerprint": "5d677184fdfad38853a16f9a178d24c4c93af24c868af676e66d946b58b2e255",
+    "reason": "Owns a single controlled Tiptap editor and its inert body preview. Editor schema, formatting controls, safe paste, selection preservation and externally supplied draft synchronization are one local presentation responsibility. Attach invokes the existing picker through a callback; no upload, provider, state persistence or authority implementation is introduced. External rewrite/guarded-Undo replacements start a new editor history, while local typing and formatting retain native Undo. This prevents the native keyboard history from bypassing guarded Meri Undo lifetime checks.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts",
+    "kind": "function",
+    "symbol": "useMailRewrite",
+    "fingerprint": "f6045b9a9e6ec9613609eed24a0d9b4c2e0b918a2f5a7893f549fcfcf10f4fea",
+    "reason": "Owns one in-flight rewrite, verified result and one local Undo under the same draft/source and captured-authority lifetime. Atomic MailBody replaces the old string snapshot so formatting-only edits revoke pending/previous rewrites and Undo restores text plus HTML together. Existing transport, cancellation, source revision and identity checks remain unchanged.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-intake/RegistrationStep.tsx",
+    "kind": "function",
+    "symbol": "RegistrationStep",
+    "fingerprint": "a511873c1e2ada4defedaac8654c59cc2866f45b5321ea92641f36257f954e12",
+    "reason": "Cohesive existing registration form. The sole behavior-neutral addition selects the certifications presentation variant; fields, values, unknown-code preservation and payload owner are unchanged. Crossing 80 by one line does not justify splitting the form into arbitrary fragments.",
+    "reviewedBy": "Codex shared frontend integration review with independent core_profile_review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
+    "kind": "function",
+    "symbol": "ClientOverview",
+    "fingerprint": "2f89761f0e1e6ae9c114dfeee441be65ab6a2c46e911b3462e5ff876497da857",
+    "reason": "Existing overview composition retains read/query/error ownership and all prior child boundaries. Two-line change imports/inserts ClientDetails with current saved client and key=id. Detail field rendering and modal interaction live in cohesive new children; no new transport, writer or authority rule joins this container.",
+    "reviewedBy": "Codex shared frontend integration review with independent core_profile_review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/ClientViewSwitcher.tsx",
+    "kind": "function",
+    "symbol": "ClientViewSwitcher",
+    "fingerprint": "04e69dacf0fad530f3c0f798f0686fbc9e8b8d43312b3cace8fc103ad422680e",
+    "reason": "Owns one searchable view-picker interaction: canonical descriptor filtering, active option, local open state, navigation, accessible combobox/listbox presentation and visibility scroll. Global key lifetime is separated into useClientViewKeys and metadata belongs to canonical clientViews. Uses adopted Radix Popover/Next navigation; no persistence, API, authority, custom overlay engine or speculative destination. Keeping option rendering with local filter state makes keyboard selection auditable without a speculative generic command abstraction.",
+    "reviewedBy": "Codex shared frontend integration review with independent core_profile_review",
     "reviewedOn": "2026-10-12"
   }
 ]
