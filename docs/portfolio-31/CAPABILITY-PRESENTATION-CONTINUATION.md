@@ -1,0 +1,72 @@
+# Capability editor presentation continuation
+
+## Scope and outline, before implementation
+
+Base: `0beb51c`, in the isolated `codex/portfolio-capability-presentation-20261011` worktree. This continuation addresses the retained CAP-02/03 presentation gap; it does not accept audit rows or establish signed-in service acceptance.
+
+The current Figma references are [create 411:55155](https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-55155), [saved Profile 411:55341](https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-55341), and [Documents 411:55548](https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-55548). Fresh design context and screenshots were inspected against the retained editor and its qualified desktop screenshot.
+
+- `CapabilityEditor` remains the dialog/tab composition and single capability-operation owner. Existing execution, actor/client/lifetime guards, receipt matching, query invalidation and native writer stay unchanged.
+- `CapabilityForm` owns the mounted Profile draft and exact existing request projection. The existing Name, Type, Sector, MRL and Notes fields remain available. Saved records expose metadata in a Details disclosure; creation exposes MRL/Notes in Additional details. These missing variants and the explicit saved footer will be authored in Figma before code, under the user's authorization and root's bounded outline approval.
+- Saved Profile presents type/sector badges, the TRL ladder, Tags, PE numbers, match keywords, Description and Notes in the existing frame's order. Create uses the 620px surface and progressive-disclosure copy. Saved dialogs use 720px. Both retain the explicit save/cancel workflow; absence of a mock footer is not an autosave contract.
+- Installed Radix Tabs supplies focus and keyboard semantics. Inactive panels must be absent from keyboard/accessibility navigation while the mounted Profile draft survives switching tabs. The existing Files public `EntityDocuments` remains the Documents pipeline and owns file queries, upload, readiness and preview.
+- Canonical Dialog and TextareaField are reused. Root separately authorized an optional `layout="inline"` variant on shared TokenInput and its local stylesheet. Default stacked markup/geometry and one token-normalization implementation remain. The input label stays separate from interactive token removal buttons.
+- Native [controller](https://github.com/neo-capiro/capirov2/blob/4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace/apps/api/src/clients/client-capabilities.controller.ts) and [service](https://github.com/neo-capiro/capirov2/blob/4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace/apps/api/src/clients/client-capabilities.service.ts) confirm free-text Type/Sector, nullable TRL/MRL, tags, PE numbers, keywords and notes. Existing values and payload fields remain intact; no strict vocabulary, default sector, new endpoint or server receipt property is introduced.
+
+## Required verification
+
+Preserve original behavioral assertions, adding only disclosure-opening steps where metadata editing now requires them. Verify the exact full payload, tab and disclosure keyboard behavior, inactive-panel accessibility, draft survival, inline tokens' Enter/comma/blur/removal/wrapping, retained stacked callers, save refusal/error/late completion guards, and desktop/phone geometry. Record viewed captures, scoped formatting/lint/type/unit results, exact changed-function fingerprints and any remaining visual/service limits. Root owns the shared browser port until released and the final integrated suite/build.
+
+## Figma additions and final evidence
+
+Created on the existing Components page, with no changes to the original capability frames:
+
+| Native Figma addition                                          | Exact node                                                                                                |
+| -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Review composition, showing instances of all retained variants | [999:51328](https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=999-51328) |
+| Capability Details component family                            | `999:51300`                                                                                               |
+| Saved Details, collapsed / expanded                            | `999:51267` / `999:51269`                                                                                 |
+| Create Additional details, collapsed / expanded                | `999:51288` / `999:51290`                                                                                 |
+| Explicit footer component family                               | `999:51327`                                                                                               |
+| Saved / Create footer                                          | `999:51301` / `999:51314`                                                                                 |
+| Native text-field component reused within the disclosures      | `999:51266`                                                                                               |
+
+The composition was inspected through current design context and its rendered screenshot. It contains 49 editable descendants (23 text layers, 11 frames, 15 instances), all rendered text uses Geist, and there are no image-filled UI layers. Existing v2/Button instances, text styles and local color/spacing variables are reused. Main components are outside the review composition. The complete node ledger, Figma text contexts/screens and pinned native controller/service evidence are under `outputs/evidence/portfolio-capability-presentation-20261011/`.
+
+### Source responsibilities
+
+`CapabilityEditor` now composes the canonical modal, Radix tab state and existing remove confirmation around one `useCapabilityMutation`. It captures the opener before moving focus to the saved Profile tab or create Name field, then restores focus when that opener remains connected. `CapabilityForm` owns one mounted draft, its exact existing eleven-field native payload projection and the create/saved field arrangement. `CapabilityFields` groups identity fields, metadata disclosure and readiness presentation; these controls receive values/callbacks and own no request, cache or authority. Its disclosure opens on a child field's invalid event before the browser performs native validation focus; the handler does not suppress validation or submit a request. `capability-editor.module.css` owns only this editor's geometry. Card-grid styles and the retained Registrations fieldset reset remain in their existing module.
+
+The canonical TokenInput extension has one draft/normalization path and one token/removal mapping. The optional inline renderer places the separately labelled input and removable chips inside a wrapping border. The default renderer retains its original label/input followed by a separate chip row. The optional stylesheet is imported by the primitive and scopes all new rules to its inline elements. Root authorized these two shared files as a separate prerequisite; no other shared source changes are included.
+
+### Preserved evidence and verification status
+
+Original assertions in `capability-boundary.spec.ts`, `capability-execution.spec.ts`, `capability-opportunity-visual.spec.ts` and the capability case in `portfolio.spec.ts` are unchanged. Six additional steps open Details immediately before metadata editing/geometry checks. Tests do not bypass the disclosure or replace existing behavior checks.
+
+Final TypeScript, scoped lint, formatting and `git diff --check` pass. All 21 capability writer units pass. The architecture scan has no boundary errors and exactly two changed/new review signals: `CapabilityEditor` (113 body nonblank lines) and `CapabilityForm` (128). Exact responsibility reviews are in `ARCHITECTURE-REVIEW-CAPABILITY-PRESENTATION.json`; root owns central review-registry integration.
+
+| Preserved browser cohort      | Result                                                  | What the result establishes                                                                                                                                                                                                                                                                                                                                                               |
+| ----------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `browser-first`               | 38 passed / 3 failed; 172.2 seconds; no skips or flakes | All retained capability/current-writer/fit checks, all three new visual cases, default stacked TokenInput and inline wrapping passed. Two new exact-label MRL select locators timed out, and the new saved-card focus restoration assertion exposed missing feature-level opener restoration.                                                                                             |
+| `browser-validation-baseline` | 15 passed / 1 failed; 60.8 seconds; no skips or flakes  | Role-based native-select locators preserved and passed the exact create/update request assertions. Saved/create focus restoration, all three complete visual cases, four retained registration boundary checks and both registration visual cases passed. The added collapsed-required-Name case demonstrated that the browser blocked submission while leaving the invalid field hidden. |
+| `browser-final`               | 7 passed / 0 failed; 34.7 seconds; no skips or flakes   | The disclosure's invalid handler reveals and focuses the empty required Name with zero writes. All seven presentation cases pass together, including the exact native payloads, saved/create focus, save refusal, pending-state protection and source-scoped Documents.                                                                                                                   |
+
+These cohorts cover 48 distinct browser cases. Every previously failing case has a passing result after the corresponding bounded correction. The original behavioral assertions remain intact. New select locators use the actual accessible combobox role/name already visible in the first failure snapshot; no payload or validation assertion was loosened.
+
+The current source retains all eleven submission properties: `name`, `type`, `sector`, `description`, `tags`, `issueCodes`, `trl`, `mrl`, `peNumbers`, `keywords` and `notes`. Dedicated cases verify custom free-text metadata, MRL/Notes, legacy issue codes, token Enter/comma/blur/deduplication/removal, no write on tab changes, draft preservation across tabs and closed Details, inactive-panel accessibility, explicit save refusal and one pending mutation. The request schema, native writers, actor/client/lifetime guards and receipt validation are unchanged.
+
+Root review found that `Registrations.tsx` still consumes the shared feature stylesheet's `.editorFields`; the exact existing border/margin/padding/min-width reset was restored. The old `.typeSector` rules were the only unused rules removed, after confirming the new field component imports the editor-owned stylesheet. Registrations source, its writer and its existing test assertions were not edited. Its four boundary checks and two visual checks requalified the restored stylesheet.
+
+### Visual review and final artifact binding
+
+The three presentation visual cases cover 1440×1040 light and 390×844 light/dark. Each captures Profile, expanded Details, Documents, an actual save error, create and expanded Additional details. All 18 first-pass captures were inspected, alongside both canonical TokenInput captures. The second cohort's three revised expanded-Details captures were also inspected: they scroll to the Save footer so the full Name/Type/Sector/MRL section is reviewable. All six retained registration read/edit-error/read-error captures were inspected after the shared fieldset restoration.
+
+The screenshots and geometry checks show the 720px saved and 620px create surfaces, current spacing, badges, tab underline, inline tokens and nine TRL buttons. Type/Sector retain the 12px desktop gap and become one column on phones. Long inline tokens wrap within the dialog; the default intake caller retains its separate chip row and keyboard/removal behavior. The explicit metadata disclosure and footer follow the authored Figma variants. No further visual defect was found in this bounded editor/primitive slice.
+
+Final integration inputs and SHA-256 preimages are listed in `outputs/evidence/portfolio-capability-presentation-20261011/source-final.json`. The manifest separates the two authorized root-owned shared TokenInput prerequisites from feature source, tests and review/report files. Prior candidate manifests and all failing reports/traces remain preserved. No commit, backend change, deployment, AWS action or live provider mutation was performed in this worktree. Root owns the final integrated browser suite and production build.
+
+### Deliberate service and presentation boundaries
+
+Type and Sector remain free text; the native service does not publish a controlled choice catalog. The existing TRL classification remains Research / Prototype / Fielded. Explicit Save/Cancel and the metadata disclosures follow the added Figma variants. Error text comes from actual validated failures rather than a permanently displayed mock error.
+
+Documents still use the public Files component, including its existing current-read, upload, scan/readiness and preview behavior. This continuation adds tab placement; it does not claim the separate Files row/preview UI is identical to the sample's immediate download arrow. No new download endpoint, local persistence, provider operation or service activation is introduced. Signed-in acceptance and final per-row acceptance remain open.

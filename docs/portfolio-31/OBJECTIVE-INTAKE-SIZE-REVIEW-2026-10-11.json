@@ -1,0 +1,29 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
+    "kind": "function",
+    "symbol": "PortfolioIndex",
+    "fingerprint": "4cb90a66f6f14b3ccbf7c8dc9b6d8e12f3e91df7c497629e383ab7b9416ec487",
+    "reason": "PortfolioIndex composes the existing authorized profile index, query-backed filters and feature entry dialogs. This change adds one New objective trigger, preserves the current filter query when opening the existing picker, and returns focus to that exact enabled trigger when the picker closes. The accessible-client catalog, selection authority and navigation intent remain owned by GlobalObjectiveClientPicker; draft state, validation, persistence and lifecycle remain owned by Objectives. The extra body length is the visible entry and its coupled focus-return composition, not an Objective service inside the index. The seven-line entry stylesheet only lets whole header buttons wrap at narrow widths.",
+    "reviewedBy": "Codex portfolio_objectives (author responsibility review; integration confirmation pending)",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/NewObjectivePage.tsx",
+    "kind": "function",
+    "symbol": "ObjectiveIntake",
+    "fingerprint": "1c90fcc45d3bd0484ebe51973e30d4617ce2a6f5640d8f64d0a5cf6c0bea8d38",
+    "reason": "ObjectiveIntake composes the one full-page draft presentation: back navigation, heading, fixed current-client identity, controlled form, explicit footer actions and the readiness rail. Its 82-line body is primarily that Figma hierarchy. Draft state and validation belong to useObjectiveEditorSession; fields belong to ObjectiveFields; feedback, actions and confirmation have shared presentation owners; mutation and receipt validation remain in the existing mutation/writer modules. Keeping the single form and its pending exit/action gates together avoids splitting one draft's submit lifecycle across layout fragments. No service transport, inferred context, autosave or independent persistence is added here.",
+    "reviewedBy": "Codex portfolio_objectives (author responsibility review; integration confirmation pending)",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx",
+    "kind": "function",
+    "symbol": "ObjectivesPage",
+    "fingerprint": "868db003b24e6da6e201b3afa0af4c465f57f3f0ddebe8378c8694ca1e759949",
+    "reason": "ObjectivesPage remains the existing Objective list, status-filter and URL composition owner, with its existing selected-record edit and delete dialogs. The create query state now delegates directly to NewObjectivePage, so the list does not absorb full-page form state or mutation logic. Both create exit and edit navigation reuse the same query-preserving navigator, and the existing client-keyed editor boundary remains explicit. The 184-line body is cohesive page composition; further extraction solely to satisfy the threshold would separate coupled list/selection navigation without moving a second service responsibility out.",
+    "reviewedBy": "Codex portfolio_objectives (author responsibility review; integration confirmation pending)",
+    "reviewedOn": "2026-10-11"
+  }
+]

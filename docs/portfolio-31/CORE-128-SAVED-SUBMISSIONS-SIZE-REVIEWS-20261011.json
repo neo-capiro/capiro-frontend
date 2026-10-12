@@ -1,0 +1,35 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/past-performance/PastPerformance.tsx",
+    "kind": "function",
+    "symbol": "History",
+    "line": 30,
+    "nonblank": 106,
+    "fingerprint": "9fb0e928080f60796bf31ea4b0eb1515c8b07ef5050fb3bb5eb9099cee13761a",
+    "reason": "History composes one Saved submissions section: its current client/history gate, native row fields, count and notes, refresh control, and the existing removal confirmation. Native data validation/source revisions live in submission-view/queries, and selection/dispatch/uncertainty live in useSubmissionRemoval. The markup preserves the authored desktop/phone hierarchy and never owns capability transport or lifecycle.",
+    "reviewedBy": "Codex portfolio_objectives",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/past-performance/useSubmissionRemoval.ts",
+    "kind": "function",
+    "symbol": "useSubmissionRemoval",
+    "line": 100,
+    "nonblank": 122,
+    "fingerprint": "8099717d17ec7e17dd0605ae88958f8f563a52ee065c1a10c793323286ec4c09",
+    "reason": "The hook owns one selected removal review: open/close, pending exclusion, native action invocation, current refusal reconciliation, and exact current feedback/cache publication. createRemovalReview separately binds actor/client/history revisions and the session-local uncertainty fence; actions.ts separately owns native preflight/DELETE/receipt parsing, and RemoveSubmission owns layout/focus. Its branches share the same selected-review lifetime invariant; splitting them would duplicate that coordination.",
+    "reviewedBy": "Codex portfolio_objectives",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
+    "kind": "function",
+    "symbol": "CapabilitiesPage",
+    "line": 14,
+    "nonblank": 107,
+    "fingerprint": "84e2958a0bb94902205118b78788ee2653e374afc23c98a05e6f63cd39ba1a50",
+    "reason": "CapabilitiesPage retains its existing page composition, capability selection query, fit/editor/registration entries and navigation. This change adds only the PastPerformance public entry and clarifies the Advocacy history label. Saved client/history reads and removal state remain wholly inside the client-profile public feature. No second service, mutation or identity owner enters this page.",
+    "reviewedBy": "Codex portfolio_objectives",
+    "reviewedOn": "2026-10-11"
+  }
+]

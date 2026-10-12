@@ -1,0 +1,39 @@
+{
+  "base": "ee39c2f",
+  "worktree": "/workspace/scratch/158b6018a5d3/capiro-portfolio-tracker-preferences",
+  "branch": "codex/portfolio-tracker-preferences-20261011",
+  "sourceFrozen": true,
+  "sharedPrerequisite": {
+    "rootCommit": "f0fb28809a090d6f3f65090c689deaba522151b6",
+    "localCherryPick": "34cb6a0",
+    "note": "Already root-owned; do not copy shared source from this patch."
+  },
+  "auditIds": ["BILL-01", "BILL-03", "BILL-07", "BILL-11", "BILL-12"],
+  "files": [
+    "apps/web/src/features/portfolio/bill-tracker/AlertPreferencesDialog.tsx",
+    "apps/web/src/features/portfolio/bill-tracker/BillTrackerPage.tsx",
+    "apps/web/src/features/portfolio/bill-tracker/WatchlistDialog.tsx",
+    "apps/web/src/features/portfolio/bill-tracker/alert-preferences/AlertCriteria.tsx",
+    "apps/web/src/features/portfolio/bill-tracker/alert-preferences/AlertDelivery.tsx",
+    "apps/web/src/features/portfolio/bill-tracker/alert-preferences/PreferenceForm.tsx",
+    "apps/web/src/features/portfolio/bill-tracker/alert-preferences/access.ts",
+    "apps/web/src/features/portfolio/bill-tracker/alert-preferences/contracts.ts",
+    "apps/web/src/features/portfolio/bill-tracker/alert-preferences/preferences.module.css",
+    "apps/web/src/features/portfolio/bill-tracker/alert-preferences/queries.ts",
+    "apps/web/src/features/portfolio/bill-tracker/alert-preferences/usePreferenceEditor.ts",
+    "apps/web/src/features/portfolio/bill-tracker/current-data.ts",
+    "apps/web/src/features/portfolio/bill-tracker/queries.ts",
+    "apps/web/tests/browser/tracker-alert-preferences.spec.ts",
+    "apps/web/tests/browser/tracker-boundary-harness.tsx",
+    "apps/web/tests/browser/tracker-boundary.html",
+    "apps/web/tests/browser/tracker-current-data.spec.ts",
+    "apps/web/tests/tracker-alert-preferences.test.ts",
+    "apps/web/tests/tracker-current-data.test.ts",
+    "apps/web/tests/tracker-preference-fixtures.ts",
+    "docs/portfolio-31/P6-TRACKER-PREFERENCES-20261011.md",
+    "docs/portfolio-31/P6-TRACKER-PREFERENCES-PATCH-20261011.json",
+    "docs/portfolio-31/P6-TRACKER-PREFERENCES-SIZE-REVIEWS-20261011.json"
+  ],
+  "evidenceDirectory": "outputs/evidence/portfolio-tracker-preferences-20261011",
+  "sizeReviews": "docs/portfolio-31/P6-TRACKER-PREFERENCES-SIZE-REVIEWS-20261011.json"
+}
