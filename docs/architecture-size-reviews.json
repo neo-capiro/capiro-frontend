@@ -3606,7 +3606,7 @@
     "sha256": "314c3d1c5fedb548d77b926aa2664deb4d82b11468b3d39546d8c19719c94809",
     "reviewer": "Codex independent objectives_work_intel_review and root integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/successor-p1-20261012/CALENDAR-NATIVE-CORRECTION-REVIEW.json",
+    "evidence": "docs/successor-p1-20261012/CALENDAR-NATIVE-CORRECTION-REVIEW.md",
     "rationale": "ArtifactEditor owns a cohesive notes/debrief presentation and local interaction lifecycle: list cards, edit/share dialogs, preview selection and pending/uncertain draft feedback. It delegates native request/receipt semantics and lifetime fencing to artifacts/api, contracts and useArtifactMutation, generation eligibility/workflow to DebriefGeneration, and saved preview to its existing owner. The correction changes only whether the generation child is mounted: local pending/uncertain writes suppress new input, while role/runtime disabled presentation remains with the generation child. It adds no persistence, backend authority or independent domain. Keep this 248-line composition; extracting solely for line count would scatter one artifact interaction invariant. The added sharing caption distinguishes omitted metadata from explicit null without normalizing unknown state or inventing an endpoint or action. This 85-line map callback renders one saved artifact card and derives its preview/edit/approve/share/unshare controls from the same item and outer pending/allowed state. It delegates operations to the canonical mutation callback and owns no transport, receipt validation or backend rules. Its ordinal changes with the surrounding JSX; exact current fingerprint is reviewed. Separating this small cohesive card solely to silence the nested function threshold is unnecessary. The caption is this card's direct presentation responsibility: undefined means unavailable, null means private, timestamp means shared, and confidential remains explicit.",
     "functions": [
       {
@@ -3627,7 +3627,7 @@
     "sha256": "4e330177ee89a55f5f2995b363eabdbde3ad7bebcc6db688473c7e956242a2dc",
     "reviewer": "Codex independent objectives_work_intel_review and root integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/successor-p1-20261012/CALENDAR-NATIVE-CORRECTION-REVIEW.json",
+    "evidence": "docs/successor-p1-20261012/CALENDAR-NATIVE-CORRECTION-REVIEW.md",
     "rationale": "MeetingForm owns meeting input, civil-time conversion, client selection and submission composition. The only added branch serializes explicit clientId:null for an existing meeting when No client is selected; new unscoped creation preserves omission for native inference. Receipt checking, uncertainty, session/actor lifetime and transport remain useSaveMeeting/meeting-save owners. No backend association policy is replicated and no extra domain is introduced. Keeping this 181-line form together makes omission versus explicit-clear intent reviewable at the submission boundary.",
     "functions": [
       {
