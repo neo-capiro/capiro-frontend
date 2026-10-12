@@ -1,0 +1,96 @@
+{
+  "source": "e1bcf60030007edaab610b069c6fb885fc5265dc",
+  "tree": "1e8ca91eb1c22a62c845f7fcfd0c5356cb3c39e9",
+  "steps": [
+    {
+      "name": "clean-install",
+      "command": [
+        "npm",
+        "ci",
+        "--ignore-scripts",
+        "--no-audit",
+        "--fund=false",
+        "--cache",
+        "/tmp/capiro-npm-cache"
+      ],
+      "started": "2026-10-12T04:05:45.961662+00:00",
+      "log": "/tmp/capiro-reviewed-qualification/clean-install.txt",
+      "finished": "2026-10-12T04:05:57.930846+00:00",
+      "exit": 0
+    },
+    {
+      "name": "combined-check",
+      "command": [
+        "npm",
+        "run",
+        "check"
+      ],
+      "started": "2026-10-12T04:05:57.939890+00:00",
+      "log": "/tmp/capiro-reviewed-qualification/combined-check.txt",
+      "finished": "2026-10-12T04:07:09.264934+00:00",
+      "exit": 0
+    },
+    {
+      "name": "production-build",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "started": "2026-10-12T04:07:09.272638+00:00",
+      "log": "/tmp/capiro-reviewed-qualification/production-build.txt",
+      "finished": "2026-10-12T04:07:16.783570+00:00",
+      "exit": 0
+    },
+    {
+      "name": "actual-server",
+      "command": [
+        "npm",
+        "run",
+        "test:production"
+      ],
+      "started": "2026-10-12T04:07:16.794157+00:00",
+      "log": "/tmp/capiro-reviewed-qualification/actual-server.txt",
+      "finished": "2026-10-12T04:07:23.186860+00:00",
+      "exit": 0
+    },
+    {
+      "name": "ui-provenance-ssr",
+      "command": [
+        "node",
+        "apps/web/deployment/portfolio/qualify-elements.mjs",
+        "/tmp/capiro-reviewed-elements"
+      ],
+      "started": "2026-10-12T04:07:23.194828+00:00",
+      "log": "/tmp/capiro-reviewed-qualification/ui-provenance-ssr.txt",
+      "finished": "2026-10-12T04:07:30.400589+00:00",
+      "exit": 0
+    },
+    {
+      "name": "modules-browser",
+      "command": [
+        "npm",
+        "run",
+        "test:browser:modules"
+      ],
+      "started": "2026-10-12T04:07:30.408001+00:00",
+      "log": "/tmp/capiro-reviewed-qualification/modules-browser.txt",
+      "finished": "2026-10-12T04:08:42.719241+00:00",
+      "exit": 0
+    },
+    {
+      "name": "portfolio-browser",
+      "command": [
+        "npm",
+        "run",
+        "test:browser",
+        "--",
+        "--workers=3"
+      ],
+      "started": "2026-10-12T04:08:42.733476+00:00",
+      "log": "/tmp/capiro-reviewed-qualification/portfolio-browser.txt",
+      "finished": "2026-10-12T04:44:24.669498+00:00",
+      "exit": 1
+    }
+  ]
+}

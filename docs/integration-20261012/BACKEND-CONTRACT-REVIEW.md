@@ -150,3 +150,20 @@ decision; no dependent commitment semantics are inferred here.
 These are inputs to a separate source-qualified contract integration candidate
 after the frozen shared integration work. No route, selector or workflow in
 e1bcf60 is enabled or changed by this documentation.
+
+## Product direction — 12 October 2026, 04:41 UTC
+
+Neo explicitly directed that Quick log must omit the Commitment option and the
+commitment-specific “We owe / They owe”, counterparty and due-date fields.
+Preserve ordinary activity logging and generic follow-up tasks. Do not implement
+firm-versus-client commitment semantics. Apply any necessary narrow UI removal
+and regression coverage in the next candidate after the frozen suite terminates;
+historical source and evidence remain preserved. This supersedes the earlier
+open commitment-semantics question.
+
+At 04:42 UTC Neo additionally required removal of feature-only dead runtime code,
+imports, adapters, branches, fixtures/tests and stale active documentation for
+the omitted Commitment UI. Trace references before removing anything: preserve
+shared/live dependencies and historical Git evidence, but do not keep unreachable
+feature implementations for archival purposes. Include reference, type and build
+verification and an explicit retained-dependency rationale in the next review.

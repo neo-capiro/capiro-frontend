@@ -37,7 +37,7 @@
       "sha256": "454a9d35ebdbe0b188e6ea8fbb2b7b83172c490b1f2cc589d05a61fadecfc6ca"
     }
   ],
-  "independentReview": "Parent re-review of9fa5e2c cleared prior Intel/billing controls and supported bounded meeting-recovery wait; one sign-in smoke body assertion correction is included in this pin. Final delta review remains parent-coordinated.",
+  "independentReview": "Parent reports narrow review PASS for exact e1bcf60 delta; full browser qualification failed (880 passed, two failed) and additional runtime-config regression is open. Shipping remains held.",
   "containerResult": "UNRUN on this pin; the9fa5e2c local build stopped at official Alpine package-index HTTPS CONNECT403 from configured proxy. Base and APK pins unchanged. No bypass, final image, runtime smoke or new scan.",
   "AWSAction": "none",
   "containerEvidence": "evidence/candidate-9fa5e2c/host-alpine-connect-denied.txt",

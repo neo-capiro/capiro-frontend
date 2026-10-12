@@ -36,3 +36,15 @@ This is not an exhaustive assistive-technology or color-contrast audit.
 Figma screenshots were read using the required design workflow. The hosted image
 URL returned HTTP403 to the executor, so inline screenshot responses were used.
 No temporary Figma URL or screenshot is embedded in application implementation.
+
+## Current-source follow-up
+
+On `e1bcf60030007edaab610b069c6fb885fc5265dc`, the actual standalone-server
+Meri audit passed at 1440 and 390 pixels after the full suite terminated. Fresh
+cited-answer/run-state captures are in `evidence/candidate-e1bcf60/`; sample
+disclosures, source expansion, all eight status labels, disabled unavailable
+actions, keyboard focus and no horizontal overflow remain. No API requests or
+page errors occurred. Desktop cited-answer and phone run-state captures were
+visually inspected. This is representative continuity evidence, not a new full
+Figma or assistive-technology acceptance. The full browser suite still has two
+open desktop outside-click dismissal failures, preserved in that directory.
