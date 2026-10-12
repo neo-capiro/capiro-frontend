@@ -152,6 +152,7 @@ function DraftEditor({
           id="workspace-document-title"
           value={title}
           maxLength={500}
+          disabled={prospectSave?.pending}
           onChange={(event) => setTitle(event.target.value)}
         />
       </Field>
@@ -161,6 +162,7 @@ function DraftEditor({
             <TextArea
               aria-label={`${name} content`}
               value={sections[name] ?? ""}
+              disabled={prospectSave?.pending}
               onChange={(event) =>
                 setSections((previous) => ({
                   ...previous,
