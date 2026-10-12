@@ -27,12 +27,14 @@ no original owner branch, main, resource, credential or database is changed.
 - Additional actual-server Meri fixture checks pass for citations, all eight run
   states, unavailable actions, keyboard access, viewport fit and zero API requests.
 
-The **881-case Portfolio browser run is still in progress**. Full-log inspection
-at the 600-case progress check found ten failed cases (capability visual/lifetime checks and an
-obsolete Portfolio wordmark expectation). Earlier progress based on the recent
-tail missed those failures and is superseded by this correction. Traces are
-retained; triage proceeds without modifying the frozen application. This is not
-final combined qualification or authority to ship. The prior concurrent run was interrupted;
+The **881-case Portfolio browser run finished: 869 passed, 12 failed, zero skipped
+or flaky**, in 36.6 minutes. `5840b50` failed combined qualification. The complete
+JSON, log, traces and source-bound receipt are in evidence/. Failures cover
+capability visual/lifetime cases, two obsolete navigation/preference assertions,
+and two long-case timeouts. Earlier progress based on the recent tail missed
+failures and is superseded by this final result. No source changed during this
+run. A narrow correction candidate follows, requiring new qualification; no
+acceptance transfers automatically from this pin. The prior concurrent run was interrupted;
 its timeout and output-directory collision evidence are retained. The affected
 timeout case passes unchanged in the frozen run. Separate harness output paths
 now prevent Playwright cleanup from deleting the other suite's built files.
