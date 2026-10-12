@@ -119,7 +119,7 @@ test("failed account-team refresh conceals cached members and disables changes",
   ).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Add member" })).toBeDisabled();
   await expect(
-    page.getByRole("combobox", { name: /^Account owner/ }),
+    page.getByRole("combobox", { name: "Primary owner", exact: true }),
   ).toBeDisabled();
   expect(state.writes).toEqual([]);
   expect(unexpected).toEqual([]);
@@ -165,14 +165,17 @@ test("owner assignment rejects a different returned owner", async ({
   const { state, unexpected } = await installProfileCurrentState(page);
   state.write = (route) =>
     json(route, {
-      accountOwnerUserId: profileMembers[0]!.id,
-      accountOwner: profileMembers[0],
+      ...state.owners,
+      version: state.owners.version + 1,
     });
   await page.goto("/profile-current-state.html?mode=team");
   await page
-    .getByRole("combobox", { name: /^Account owner/ })
+    .getByRole("combobox", { name: "Primary owner", exact: true })
     .selectOption(profileMembers[2]!.id);
-  await expect(page.getByText(/change result is unknown/i)).toBeVisible();
+  await page.getByRole("button", { name: "Save owner order" }).click();
+  await expect(
+    page.getByText(/owner change result needs review/i),
+  ).toBeVisible();
   await expect(
     page.getByText("Team updated.", { exact: true }),
   ).not.toBeVisible();

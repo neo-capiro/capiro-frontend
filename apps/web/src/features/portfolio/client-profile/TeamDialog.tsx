@@ -10,7 +10,9 @@ import {
   type ProfileActor,
 } from "./profile-access";
 import { useProfileTeamEditor } from "./useProfileTeamEditor";
-import { TeamMemberFields, TeamOwnerField } from "./TeamMemberFields";
+import { TeamMemberFields } from "./TeamMemberFields";
+import { OrderedOwnerFields } from "./OrderedOwnerFields";
+import { ownerLabels } from "./ordered-owners";
 
 export function TeamDialog({
   clientId,
@@ -28,7 +30,7 @@ export function TeamDialog({
       open={open}
       onOpenChange={onOpenChange}
       title="Account team"
-      description="The firm's members assigned to this client. The account owner is always on the team."
+      description="The firm's members assigned to this client. Ranked account owners remain on the team until their ownership is explicitly changed."
     >
       {open && (
         <ProfileTeamEditor
@@ -72,10 +74,13 @@ function ProfileTeamEditor({
                 ·{" "}
                 {member.isOwner
                   ? `Account owner${member.role ? ` · ${member.role}` : ""}`
-                  : (member.role ?? "Team member")}
+                  : member.ownerRank
+                    ? `${ownerLabels[member.ownerRank - 1]} account owner${member.role ? ` · ${member.role}` : ""}`
+                    : (member.role ?? "Team member")}
+                {member.ownerAvailable === false && " · Unavailable member"}
               </small>
             </span>
-            {editor.canEdit && !member.isOwner && (
+            {editor.canEdit && !member.isOwner && !member.ownerRank && (
               <button
                 className="button ghost"
                 disabled={!editor.canChange}
@@ -114,21 +119,17 @@ function ProfileTeamEditor({
                 })
             }
           />
-          <TeamOwnerField
-            members={editor.options.data ?? []}
-            ownerId={
-              editor.team.data?.find((member) => member.isOwner)?.userId ?? ""
-            }
-            ownerAvailable={Boolean(editor.team.data)}
-            disabled={!editor.canChange || !editor.options.source}
-            onChange={(userId) => void editor.change({ kind: "owner", userId })}
-          />
         </>
       ) : (
         <small>
           Account team changes require a current administrator session.
         </small>
       )}
+      <OrderedOwnerFields
+        clientId={clientId}
+        actor={actor}
+        blocked={!editor.team.source || editor.pending || editor.unknown}
+      />
       <QueryState error={editor.error} />
       {editor.unknown && (
         <div className="stack">

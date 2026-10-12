@@ -967,10 +967,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/TeamDialog.tsx",
     "kind": "function",
     "symbol": "ProfileTeamEditor",
-    "fingerprint": "f86f79366352c576ca839de56283b65c96ed8316d9ab61f02c846f2ae134be5b",
-    "reason": "Owns the account-team editor presentation and its local member/role draft. It renders the current roster, delegates controlled member/owner fields, and displays the dedicated controller result. Role input clearing occurs only after that controller reports a matching effect. Native request bodies, membership/owner receipt checks, authority, source revisions, and async lifetime are separate modules; the owner designation and actual membership role are one roster-row responsibility.",
-    "reviewedOn": "2026-10-11",
-    "reviewedBy": "Codex portfolio_calendar_relationships; independent portfolio_objectives review; root full-body integration review"
+    "fingerprint": "48b6e29fbcc5de39acf902c4ff5b1f1a688ab6aa31b44503ecee4cb469289799",
+    "reason": "This 97-line presentation composes the existing roster list/add/remove controls and the separate OrderedOwnerFields editor. The scalar writer and field were removed, ranked owners are protected from roster removal, and free-text roles retain their original display. Versioned owners, readback and pending lifetime live in their own cohesive owner module; this component implements neither transport nor authorization.",
+    "reviewedOn": "2026-10-12",
+    "reviewedBy": "Codex shared frontend integration owner (source review)"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/FacilityFields.tsx",
@@ -1003,10 +1003,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/useProfileTeamEditor.ts",
     "kind": "function",
     "symbol": "useProfileTeamEditor",
-    "fingerprint": "c7350d093b1af5abcfd8fe5be3c443e3a6ad4cd0e049ce65dd62070be2fa7e79",
-    "reason": "Owns one account-team change lifecycle for the current roster and options: authorization-derived availability, explicit change, exact effect completion, retained uncertainty, and current-roster review. Native add/remove/owner contracts remain in team-writer/profile-receipts, and member/role field state remains in the view. Roster and owner cache refreshes are consequences of the same team change and do not introduce another responsibility.",
-    "reviewedOn": "2026-10-11",
-    "reviewedBy": "Codex portfolio_calendar_relationships; independent portfolio_objectives review; root full-body integration review"
+    "fingerprint": "adf493cd9639577559582281f7847966112df6bb8318086342f45b155121a738",
+    "reason": "This 109-line hook now owns only roster add/remove and its existing uncertainty/reload lifetime. Removing the scalar owner branch narrows responsibility. Current role/source guards and request cancellation are preserved; exact roster receipt validation remains in team-writer/profile-receipts. Ordered replacement has its own distinct expected-version and retained-attempt semantics and is not hidden in this hook.",
+    "reviewedOn": "2026-10-12",
+    "reviewedBy": "Codex shared frontend integration owner (source review)"
   },
   {
     "file": "apps/web/src/features/portfolio/capabilities/CapabilityForm.tsx",
@@ -1345,6 +1345,15 @@
     "fingerprint": "f74a873373b60ce98d607820d05e23f1aa70d9f0be82ed1c51b75e3295043339",
     "reason": "One Add profile choice and transition into the canonical intake form. Removing the billing summary sibling-host argument introduces no new responsibility or financial mutation. Existing capacity/intake/summary owners remain separate. See docs/integration-20261012/STRUCTURE-REVIEW.md.",
     "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/useOrderedOwners.ts",
+    "kind": "function",
+    "symbol": "useOrderedOwners",
+    "fingerprint": "f9ef647e05f17133d59662c726ef2315e1999b17075b20513b8b80f4955e3b21",
+    "reason": "This 182-line hook owns one versioned owner edit lifetime: current scoped reads, the first-edit source snapshot, dispatch state and deliberate readback after conflict or uncertainty. Input and receipt validation/HTTP replacement remain in ordered-owners.ts; rank presentation remains in OrderedOwnerFields. The retained attempt uses the application query cache across dialog closure and is cleared by the canonical application identity/client boundary. Readback compares the complete submitted order/version; draft gaps are preserved without promotion. These dependent transitions belong to one editor state machine; no member authority service, roster writer or backend ownership policy is duplicated.",
+    "reviewedBy": "Codex shared frontend integration owner (source review)",
     "reviewedOn": "2026-10-12"
   }
 ]
