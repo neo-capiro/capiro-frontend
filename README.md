@@ -1,5 +1,7 @@
 # Capiro frontend
 
+For the complete Modules and Settings restart package, read the [session handover](docs/modules-settings/HANDOVER.md) and [context file index](docs/modules-settings/CONTEXT-INDEX.md), including pinned source inventories and the captured design/workbook archive.
+
 Independent product frontend for Meri, Portfolio, Modules and Settings. Created at the human owner's request on10October2026. Meri backend and runtime remain separately owned in [meri-greenfield](https://github.com/neo-capiro/meri-greenfield); Portfolio and Modules backend services remain in [capirov2](https://github.com/neo-capiro/capirov2).
 
 Read [the architecture](docs/ARCHITECTURE.md) and [implementation standards](docs/IMPLEMENTATION-STANDARDS.md) before changes. `apps/web` composes the shared shell, Meri Home, Modules and Settings; `packages/ui` owns reusable presentation, and `packages/meri-client` owns the public browser transport/projection adapter. Portfolio's transferred source is in `apps/portfolio-web` pending shared-app consolidation; see its [move outline](docs/portfolio-31/REPOSITORY-MOVE-OUTLINE.md) and [handover](docs/portfolio-31/handover-2026-10-11/HANDOVER.md). Modules and Settings use the reviewed existing Capiro service boundary; see their [implementation and configuration guide](docs/modules-settings/IMPLEMENTATION.md), [operation map](docs/modules-settings/INTEGRATION-MAP.md) and [verification limits](docs/modules-settings/VERIFICATION.md). The Portfolio mode link requires the approved `NEXT_PUBLIC_PORTFOLIO_URL`.
