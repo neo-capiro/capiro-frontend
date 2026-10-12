@@ -805,10 +805,10 @@
     "file": "apps/web/src/features/portfolio/relationships/member-notes/MemberNoteForm.tsx",
     "kind": "function",
     "symbol": "NoteSession",
-    "fingerprint": "6acc2499fdd204e4fda818226a3a6819e7d91a40c56f72739528d374a30bec78",
-    "reason": "This is one shared Directory-member note form with its status and supported-kind presentation. The member-note hook owns API and lifetime behavior. Unsupported modes are explicitly disabled instead of implying client or Planner lineage. The form's fields and outcomes belong to the same note draft.",
-    "reviewedBy": "Codex portfolio_calendar_relationships",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "8654d24cc3d3ec7cdb1d01f9f98c71745bf02f09ee442e7127f2cc3a7e841f90",
+    "reason": "The shared Directory member note form retains one supported Note draft and its existing integrity/lifetime hook. The excluded disabled Commitment choice is removed from the Global Quick log member path; no replacement adapter or semantics are introduced. Existing Call/Meeting/Email disclosures and Note fields, uncertain completion and save receipt remain the same cohesive form.",
+    "reviewedBy": "Codex shared frontend integration owner (source review)",
+    "reviewedOn": "2026-10-12"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/member-notes/MemberQuickLog.tsx",

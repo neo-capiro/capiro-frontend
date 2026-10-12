@@ -167,7 +167,11 @@ test("explicit Note save sends only supported fields and displays its verified r
   await expect(
     page.getByText("The service records the time when the note is saved."),
   ).toBeVisible();
-  for (const name of ["Call", "Meeting", "Email", "Commitment"])
+  await expect(
+    dialog.getByRole("button", { name: "Commitment", exact: true }),
+  ).toHaveCount(0);
+  await expect(dialog.getByText(/We owe|They owe|Counterparty/)).toHaveCount(0);
+  for (const name of ["Call", "Meeting", "Email"])
     await expect(
       page.getByRole("button", { name, exact: true }),
     ).toBeDisabled();

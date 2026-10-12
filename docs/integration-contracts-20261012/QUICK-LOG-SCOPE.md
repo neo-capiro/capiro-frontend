@@ -17,9 +17,10 @@ Retained live/shared uses are deliberate:
 - Existing activity receipt dueAt/settledAt/source fields let create/Undo reject
   changed or unrelated saved entries; these are active integrity checks, not an
   unreachable commitment form.
-- Directory member notes separately show disabled unsupported log-type controls,
-  including Commitment. They remain reachable product gap disclosure in a
-  different workflow, with independent browser tests.
+- Global Quick log also reaches the Directory member note form. Its abandoned
+  disabled Commitment option is removed following independent review; there is
+  no exception for disabled UI. Call, Meeting and Email remain existing disabled
+  disclosures, and the supported Note save flow and integrity tests are retained.
 - Meeting preparation's commitments section is existing meeting content, not a
   Quick log commitment writer or direction model.
 - Historical handovers and Git evidence retain the earlier proposed scope. This
@@ -41,3 +42,19 @@ by its create/edit/complete/reopen controls. These are not Quick log direction
 fields or abandoned code; deleting them would remove an independently used
 feature. Preserve these routes/types/adapters/tests without claiming native
 acceptance. No new commitment party semantics are added by this disposition.
+
+## Review correction
+
+The first audit was too narrowly limited to the client QuickLog form. The member
+path exposed one excluded disabled Commitment button. The updated member save
+browser test failed with expected zero / actual one before the source correction.
+The corrected candidate removes only that option and updates the expectation to
+zero, while preserving the complete note dispatch/receipt and lifecycle tests.
+
+Correction validation: 25/25 member-note unit tests and 26/26 member-note plus
+ordinary Quick log browser tests passed (desktop, mobile dark, save receipt,
+uncertain completion, actor/role replacement, expiry and interrupted preflight).
+The red baseline is preserved in evidence/member-scope-baseline; green logs and
+browser JSON are in evidence/member-scope-green. These are focused correction
+checks, not acceptance of the later owners/follow-up/prospect or final combined
+candidate. The prospect worktree edits were not included in this correction.

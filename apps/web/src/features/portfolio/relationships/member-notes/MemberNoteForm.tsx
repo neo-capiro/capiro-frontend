@@ -75,7 +75,7 @@ function NoteSession({ member, onSaved, onChangeMember }: Props) {
         <span className={styles.label}>What kind of log</span>
         <div className={styles.kinds} aria-label="Member log type">
           <span className={styles.active}>Note</span>
-          {["Call", "Meeting", "Email", "Commitment"].map((kind) => (
+          {["Call", "Meeting", "Email"].map((kind) => (
             <button
               type="button"
               key={kind}
