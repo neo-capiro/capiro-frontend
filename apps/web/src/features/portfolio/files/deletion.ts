@@ -1,4 +1,4 @@
-import type { QueryClient } from "@tanstack/react-query";
+import { isCancelledError, type QueryClient } from "@tanstack/react-query";
 import { z } from "zod";
 import { ApiError, type ApiClient } from "@/shared/portfolio/api/http";
 import {
@@ -122,30 +122,46 @@ export async function reviewFileDeletion(
       "Wait for the current file operation to finish before reviewing.",
     );
   const options = filesOptions(api, cache, clientId);
-  const before = cache.getQueryState(options.queryKey);
-  // Invoke the actual GET, never accept a cached/background query as deliberate review.
-  const files = await options.queryFn({ signal: execution.signal });
+  const queryKey = options.queryKey;
+  await cache.cancelQueries({ queryKey, exact: true });
   execution.guard();
-  if (
-    !currentFilesAvailable(cache, clientId) ||
-    cache.getQueryState(options.queryKey)?.dataUpdateCount !==
-      before?.dataUpdateCount
-  )
-    throw new ApiError(
-      409,
-      "The current files changed during review. Review again.",
+  const before = cache.getQueryState(queryKey)?.dataUpdateCount ?? 0;
+  const cancel = () => {
+    void cache.cancelQueries({ queryKey, exact: true });
+  };
+  execution.signal.addEventListener("abort", cancel, { once: true });
+  try {
+    // The canonical query owns loading/error authority; this always starts a fresh GET.
+    const files = await cache.fetchQuery({ ...options, staleTime: 0 });
+    execution.guard();
+    if (
+      !currentFilesAvailable(cache, clientId) ||
+      cache.getQueryState(queryKey)?.dataUpdateCount !== before + 1
+    )
+      throw new ApiError(
+        409,
+        "The current files changed during review. Review again.",
+      );
+    const latest = cache.getQueryData<FileDeletionAttempt | null>(
+      fileDeletionKey(clientId, id, execution.actor),
     );
-  const latest = cache.getQueryData<FileDeletionAttempt | null>(
-    fileDeletionKey(clientId, id, execution.actor),
-  );
-  if (latest?.token !== attempt.token || latest.status !== "unknown")
-    throw new ApiError(
-      409,
-      "The deletion attempt changed during review. Review again.",
-    );
-  cache.setQueryData(options.queryKey, files);
-  const file = files.find((row) => row.id === id) ?? null;
-  if (file && file.lifecycleStatus !== "delete_pending")
-    settle(context, id, attempt.token, false);
-  return { file };
+    if (latest?.token !== attempt.token || latest.status !== "unknown")
+      throw new ApiError(
+        409,
+        "The deletion attempt changed during review. Review again.",
+      );
+    const file = files.find((row) => row.id === id) ?? null;
+    if (file && file.lifecycleStatus !== "delete_pending")
+      settle(context, id, attempt.token, false);
+    return { file };
+  } catch (error) {
+    if (isCancelledError(error))
+      throw new ApiError(
+        409,
+        "The current files changed during review. Review again.",
+      );
+    throw error;
+  } finally {
+    execution.signal.removeEventListener("abort", cancel);
+  }
 }

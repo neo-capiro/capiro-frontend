@@ -178,7 +178,7 @@ test("a definite deletion refusal does not impose an unknown fence", async ({
   const dialog = await openDelete(page);
   await dialog.getByRole("button", { name: "Confirm delete" }).click();
   await expect(dialog.getByRole("alert")).toContainText(
-    "Synthetic definite refusal",
+    "You do not have permission for this operation.",
   );
   await expect(
     dialog.getByRole("button", { name: "Confirm delete" }),
@@ -189,34 +189,65 @@ test("a definite deletion refusal does not impose an unknown fence", async ({
   expect(unexpected).toEqual([]);
 });
 
-test("a failed explicit current read retains the unknown fence and can be reviewed again", async ({
-  page,
-}) => {
-  const unexpected = await installDocumentFixtures(page);
-  await page.route(`**/engagement/attachments/${nativeFile.id}`, (r) =>
-    json(r, {}, 503),
-  );
-  await page.goto("/capability-documents.html?files");
-  const dialog = await openDelete(page);
-  await dialog.getByRole("button", { name: "Confirm delete" }).click();
-  let failed = true;
-  await page.route("**/engagement/attachments?**", (r) =>
-    failed
-      ? json(r, { message: "Synthetic read unavailable" }, 503)
-      : json(r, [nativeFile]),
-  );
-  await dialog.getByRole("button", { name: "Review current files" }).click();
-  await expect(dialog.getByText("Synthetic read unavailable")).toBeVisible();
-  await expect(
-    dialog.getByRole("button", { name: "Confirm delete" }),
-  ).toBeDisabled();
-  failed = false;
-  await dialog.getByRole("button", { name: "Review current files" }).click();
-  await expect(
-    dialog.getByRole("button", { name: "Confirm delete" }),
-  ).toBeEnabled();
-  expect(unexpected).toEqual([]);
-});
+for (const status of [403, 503]) {
+  test(`a failed explicit current read ${status} revokes all cached file actions until successful recovery`, async ({
+    page,
+  }) => {
+    const unexpected = await installDocumentFixtures(page);
+    const other = {
+      ...nativeFile,
+      id: "60000000-0000-4000-8000-000000000002",
+      fileName: "Second current file.txt",
+    };
+    let failed = false;
+    let deletes = 0;
+    await page.route("**/engagement/attachments?**", (r) =>
+      failed
+        ? json(r, { message: "Synthetic read unavailable" }, status)
+        : json(r, [nativeFile, other]),
+    );
+    await page.route(`**/engagement/attachments/${nativeFile.id}`, (r) => {
+      deletes++;
+      return json(r, {}, 503);
+    });
+    await page.goto("/capability-documents.html?files");
+    const dialog = await openDelete(page);
+    await dialog.getByRole("button", { name: "Confirm delete" }).click();
+    await expect(dialog.getByText(/deletion outcome is unknown/)).toBeVisible();
+    failed = true;
+    await dialog.getByRole("button", { name: "Review current files" }).click();
+    await expect(dialog).toHaveCount(0);
+    await expect(page.getByRole("alert")).toContainText(
+      status === 403
+        ? "You do not have permission for this operation."
+        : "Synthetic read unavailable",
+    );
+    await expect(
+      page.getByRole("button", { name: /^Actions for / }),
+    ).toHaveCount(0);
+    await expect(page.getByText(other.fileName, { exact: true })).toHaveCount(
+      0,
+    );
+    await expect(
+      page.getByRole("button", { name: "Upload", exact: true }),
+    ).toBeDisabled();
+    failed = false;
+    await page.getByRole("button", { name: "Retry", exact: true }).click();
+    await expect(dialog).toBeVisible();
+    await expect(
+      dialog.getByRole("button", { name: "Confirm delete" }),
+    ).toBeDisabled();
+    await expect(
+      page.getByRole("button", { name: `Actions for ${other.fileName}` }),
+    ).toHaveCount(1);
+    await dialog.getByRole("button", { name: "Review current files" }).click();
+    await expect(
+      dialog.getByRole("button", { name: "Confirm delete" }),
+    ).toBeEnabled();
+    expect(deletes).toBe(1);
+    expect(unexpected).toEqual([]);
+  });
+}
 
 for (const boundary of ["actor", "client", "unmount"] as const) {
   test(`a late deletion receipt after ${boundary} replacement cannot publish completion into the new view`, async ({
@@ -300,51 +331,59 @@ test("a current read completing after actor replacement cannot release the old f
   expect(unexpected).toEqual([]);
 });
 
-test("a superseded current read cannot replace newer client files or clear uncertainty", async ({
-  page,
-}) => {
-  const unexpected = await installDocumentFixtures(page);
-  await page.route(`**/engagement/attachments/${nativeFile.id}`, (r) =>
-    json(r, {}, 503),
-  );
-  await page.goto("/capability-documents.html?files");
-  const dialog = await openDelete(page);
-  await dialog.getByRole("button", { name: "Confirm delete" }).click();
-  let release!: () => void;
-  let received!: () => void;
-  const gate = new Promise<void>((resolve) => {
-    release = resolve;
-  });
-  const started = new Promise<void>((resolve) => {
-    received = resolve;
-  });
-  let reads = 0;
-  await page.route("**/engagement/attachments?**", async (r) => {
-    if (++reads === 1) {
-      received();
-      await gate;
-      return json(r, [nativeFile]);
+for (const status of [200, 403]) {
+  test(`a superseded current read returning ${status} cannot replace or poison newer client files`, async ({
+    page,
+  }) => {
+    const unexpected = await installDocumentFixtures(page);
+    await page.route(`**/engagement/attachments/${nativeFile.id}`, (r) =>
+      json(r, {}, 503),
+    );
+    await page.goto("/capability-documents.html?files");
+    const dialog = await openDelete(page);
+    await dialog.getByRole("button", { name: "Confirm delete" }).click();
+    let release!: () => void;
+    let received!: () => void;
+    const gate = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    const started = new Promise<void>((resolve) => {
+      received = resolve;
+    });
+    let reads = 0;
+    await page.route("**/engagement/attachments?**", async (r) => {
+      if (++reads === 1) {
+        received();
+        await gate;
+        return json(
+          r,
+          status === 200 ? [nativeFile] : { message: "Obsolete refusal" },
+          status,
+        );
+      }
+      return json(r, [{ ...nativeFile, fileName: "Newer current file.txt" }]);
+    });
+    try {
+      await dialog
+        .getByRole("button", { name: "Review current files" })
+        .click();
+      await started;
+      await changeDocumentView(page, "files");
+      await expect(
+        page.getByLabel("Synthetic original document cache"),
+      ).toContainText("Newer current file.txt");
+    } finally {
+      release();
     }
-    return json(r, [{ ...nativeFile, fileName: "Newer current file.txt" }]);
-  });
-  try {
-    await dialog.getByRole("button", { name: "Review current files" }).click();
-    await started;
-    await changeDocumentView(page, "files");
+    await expect(
+      dialog.getByText(/current files changed during review/),
+    ).toBeVisible();
+    await expect(
+      dialog.getByRole("button", { name: "Confirm delete" }),
+    ).toBeDisabled();
     await expect(
       page.getByLabel("Synthetic original document cache"),
     ).toContainText("Newer current file.txt");
-  } finally {
-    release();
-  }
-  await expect(
-    dialog.getByText(/current files changed during review/),
-  ).toBeVisible();
-  await expect(
-    dialog.getByRole("button", { name: "Confirm delete" }),
-  ).toBeDisabled();
-  await expect(
-    page.getByLabel("Synthetic original document cache"),
-  ).toContainText("Newer current file.txt");
-  expect(unexpected).toEqual([]);
-});
+    expect(unexpected).toEqual([]);
+  });
+}

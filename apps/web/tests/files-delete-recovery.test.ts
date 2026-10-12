@@ -5,8 +5,10 @@ import { assertClientWriter } from "../src/shared/portfolio/auth/client-writer";
 import {
   assertFileReader,
   currentFileReader,
+  currentFilesAvailable,
   currentFilesKey,
 } from "../src/features/portfolio/files/file-reader";
+import { filesOptions } from "../src/features/portfolio/files/queries";
 import {
   deleteClientFile,
   fileDeletionKey,
@@ -201,6 +203,8 @@ for (const phase of ["delete", "review"] as const) {
       if (phase === "review")
         await expect(state.remove()).rejects.toBeInstanceOf(Error);
       const request = phase === "delete" ? state.remove() : state.review();
+      const rejected = expect(request).rejects.toBeInstanceOf(Error);
+      await vi.waitFor(() => expect(release).toBeDefined());
       if (boundary === "client-abort") state.controller.abort();
       else if (boundary === "cache-clear") state.cache.clear();
       else
@@ -210,7 +214,7 @@ for (const phase of ["delete", "review"] as const) {
           role: "standard_user",
         });
       release(json(phase === "delete" ? { ok: true } : [file]));
-      await expect(request).rejects.toBeInstanceOf(Error);
+      await rejected;
       if (boundary === "cache-clear")
         expect(state.cache.getQueryData(state.key)).toBeUndefined();
       else
@@ -229,29 +233,6 @@ for (const phase of ["delete", "review"] as const) {
   );
 }
 
-it("rejects an old review after a newer list result without overwriting it", async () => {
-  let release!: (response: Response) => void;
-  const state = setup((options) =>
-    options?.method === "DELETE"
-      ? json({}, 503)
-      : new Promise((resolve) => {
-          release = resolve;
-        }),
-  );
-  await expect(state.remove()).rejects.toBeInstanceOf(Error);
-  const review = state.review();
-  const current = [{ ...file, fileName: "Newer authoritative name.pdf" }];
-  state.cache.setQueryData(currentFilesKey(state.cache, clientId), current);
-  release(json([file]));
-  await expect(review).rejects.toMatchObject({ status: 409 });
-  expect(state.cache.getQueryData(state.key)).toMatchObject({
-    status: "unknown",
-  });
-  expect(
-    state.cache.getQueryData(currentFilesKey(state.cache, clientId)),
-  ).toEqual(current);
-});
-
 it("does not dispatch a file missing from the current collection or already pending deletion", async () => {
   const state = setup(() => json({ ok: true }));
   state.cache.setQueryData(currentFilesKey(state.cache, clientId), []);
@@ -262,3 +243,82 @@ it("does not dispatch a file missing from the current collection or already pend
   await expect(state.remove()).rejects.toMatchObject({ status: 409 });
   expect(state.fetcher).not.toHaveBeenCalled();
 });
+
+it.each([403, 503])(
+  "a failed deliberate GET %s revokes collection authority until a new successful read",
+  async (status) => {
+    const other = { ...file, id: "60000000-0000-4000-8000-000000000002" };
+    let readFails = true;
+    const state = setup((options) =>
+      options?.method === "DELETE"
+        ? json({}, 503)
+        : readFails
+          ? json({ message: "Current files unavailable" }, status)
+          : json([file, other]),
+    );
+    state.cache.setQueryData(currentFilesKey(state.cache, clientId), [
+      file,
+      other,
+    ]);
+    await expect(state.remove()).rejects.toMatchObject({ status: 503 });
+    await expect(state.review()).rejects.toMatchObject({ status });
+    expect(currentFilesAvailable(state.cache, clientId)).toBe(false);
+    expect(
+      state.cache.getQueryState(currentFilesKey(state.cache, clientId))?.status,
+    ).toBe("error");
+    await expect(
+      deleteClientFile(state.api, other.id, state.context),
+    ).rejects.toMatchObject({ status: 409 });
+    expect(state.fetcher).toHaveBeenCalledTimes(2);
+    expect(state.cache.getQueryData(state.key)).toMatchObject({
+      status: "unknown",
+    });
+    readFails = false;
+    await state.cache.fetchQuery(
+      filesOptions(state.api, state.cache, clientId),
+    );
+    expect(currentFilesAvailable(state.cache, clientId)).toBe(true);
+    await expect(state.remove()).rejects.toMatchObject({ status: 409 });
+    await expect(state.review()).resolves.toMatchObject({
+      file: { id: file.id },
+    });
+    expect(state.cache.getQueryData(state.key)).toBeNull();
+  },
+);
+
+it.each([200, 403])(
+  "a superseded review returning %s cannot replace or poison a newer successful collection",
+  async (status) => {
+    let release!: (response: Response) => void;
+    let reads = 0;
+    const newer = [{ ...file, fileName: "Newer current collection.pdf" }];
+    const state = setup((options) =>
+      options?.method === "DELETE"
+        ? json({}, 503)
+        : ++reads === 1
+          ? new Promise((resolve) => {
+              release = resolve;
+            })
+          : json(newer),
+    );
+    await expect(state.remove()).rejects.toMatchObject({ status: 503 });
+    const review = state.review();
+    const rejected = expect(review).rejects.toMatchObject({ status: 409 });
+    await vi.waitFor(() => expect(release).toBeDefined());
+    const options = filesOptions(state.api, state.cache, clientId);
+    await state.cache.cancelQueries({
+      queryKey: options.queryKey,
+      exact: true,
+    });
+    await state.cache.fetchQuery({ ...options, staleTime: 0 });
+    release(
+      json(status === 200 ? [file] : { message: "Obsolete refusal" }, status),
+    );
+    await rejected;
+    expect(currentFilesAvailable(state.cache, clientId)).toBe(true);
+    expect(state.cache.getQueryData(options.queryKey)).toEqual(newer);
+    expect(state.cache.getQueryData(state.key)).toMatchObject({
+      status: "unknown",
+    });
+  },
+);
