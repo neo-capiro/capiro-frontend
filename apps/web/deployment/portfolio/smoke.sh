@@ -59,7 +59,7 @@ probe /settings/personal 200
 probe /settings/billing 200
 probe /calendar 200
 probe /sign-in 200
-grep -q 'Configure the existing Clerk test application to sign in.' "$scratch/body"
+grep -q 'Sign-in setup required' "$scratch/body"
 probe /api/backend/core/clients 503
 probe /api/capiro/me.read 503
 

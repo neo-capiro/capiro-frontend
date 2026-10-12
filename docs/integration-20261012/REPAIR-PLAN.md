@@ -50,3 +50,14 @@ payload/key and cancellation. An exact2 count is also checked after cancellation
 The adjacent selected-depth submit assertion gets the same asynchronous wait.
 All10 focused repeated cases pass; a new complete frozen-source gate is required.
 Application and deployment source are unchanged from9fa5e2c.
+
+
+Independent9fa5e2c re-review passed both prior Intel/billing controls and the
+meeting-recovery bounded-wait control, but requested one remaining shipping
+correction: the smoke script expected an absent sign-in sentence. The actual
+unconfigured page and existing production verifier use `Sign-in setup required`.
+A real standalone-server red/green check retained the HTTP200, nosniff, DENY and
+no-powered-by assertions. The smoke literal alone changes; all route/status/header
+and fail-closed checks remain. The newly started988b244 qualification was explicitly
+stopped during combined checks and is preserved as superseded, not passed. A new
+source pin must run the complete gate. Alpine access remains blocked without bypass.
