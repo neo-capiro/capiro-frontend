@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { clientId, json } from "./fixtures";
+import { sendingMailbox, clientId, json } from "./fixtures";
 import {
   committee,
   subcommittee,
@@ -259,6 +259,7 @@ test("state target details preserve encoded identity; tier clearing, reviewed ma
   await compose
     .getByLabel("Message", { exact: true })
     .fill("Test directory message");
+  await compose.getByLabel("From mailbox").selectOption(sendingMailbox.id);
   await compose.getByRole("button", { name: "Review email" }).click();
   expect(mails).toBe(0);
   const review = page.getByRole("dialog", { name: "Send email", exact: true });

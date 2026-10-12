@@ -28,3 +28,16 @@ Retained live/shared uses are deliberate:
 No excluded runtime feature was added. Later generic follow-up implementation
 must continue using the ordinary activity enum and its own explicit task schedule;
 backend support for additional kinds is not a reason to expose them here.
+
+## Existing Modules task management is retained
+
+CommitmentView.tsx is an independently active Modules Engagement task-management
+view, byte-identical (Git blob 35c008c086d461e8ccf8575e07037e0956c0dc3a) in
+the supplied Modules head 50155cbb and this candidate. EngagementScreen renders
+it from the Commitments tab/query view; EngagementOverview has a live navigation
+action. The fixed gateway GET engagement.tasks also serves Overview and TeamView
+workload. POST engagement.task.create and PATCH engagement.task.update are used
+by its create/edit/complete/reopen controls. These are not Quick log direction
+fields or abandoned code; deleting them would remove an independently used
+feature. Preserve these routes/types/adapters/tests without claiming native
+acceptance. No new commitment party semantics are added by this disposition.

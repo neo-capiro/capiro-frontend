@@ -176,6 +176,21 @@ export async function json(route: Route, body: unknown, status = 200) {
     body: JSON.stringify(body),
   });
 }
+export const sendingMailbox = {
+  id: "70000000-0000-4000-8000-000000000001",
+  provider: "google_workspace",
+  accountEmail: "sender@example.test",
+  displayName: "Synthetic mailbox",
+  availability: "available",
+  signaturePolicy: "actor",
+};
+export const sendingReceipt = {
+  senderConnectionId: sendingMailbox.id,
+  senderEmail: sendingMailbox.accountEmail,
+  senderName: sendingMailbox.displayName,
+  signaturePolicy: "actor",
+  signatureAppended: false,
+};
 export async function installFixtures(page: Page) {
   const unexpected: string[] = [];
   await page.route("**/api/backend/**", async (route) => {
@@ -187,6 +202,7 @@ export async function installFixtures(page: Page) {
       return json(route, { message: "Unexpected test mutation" }, 500);
     }
     const responses: Record<string, unknown> = {
+      "core/engagement/mail/mailboxes": [sendingMailbox],
       "core/billing/state": {
         billingEnabled: false,
         status: "none",

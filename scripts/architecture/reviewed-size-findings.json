@@ -751,10 +751,10 @@
     "file": "apps/web/src/features/portfolio/relationships/email/send.ts",
     "kind": "function",
     "symbol": "sendReviewedMail",
-    "fingerprint": "9d52e43ed9acfb11da0f3c2afa6720179d67627d9272351a21a7d1fc9892be51",
-    "reason": "This function owns the exact boundary between safe preflight refusal and uncertain post-dispatch delivery. Identity, attachment readiness, reply scope and receipt rules reuse canonical contracts. Its ordering, including the final synchronous guard immediately before POST, should remain contiguous for auditability. Splitting the84 lines solely for count risks obscuring certainty classification; native authorization gaps remain explicitly open.",
-    "reviewedBy": "Codex portfolio_calendar_relationships",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "bab1c939b099abae78e44e7001577fec874a77dcc0733ce9c4f98caa9cc4f969",
+    "reason": "This 108-line function remains the sole single-mail send transaction: validate frozen input, recheck current authority/thread/attachments and selected mailbox, dispatch once, then classify a scoped receipt or uncertain outcome. Mailbox projection/recheck logic lives in mailboxes.ts and attachment policy remains separate. The reviewed sender is stripped from the wire DTO, exact connection/address/name/signature facts are verified, replies pin their origin, and uncertain dispatch never retries. These checks form one preflight/dispatch boundary rather than separate services. Existing selector-omitted compatibility and original safety cases survive; no durable replay or provider implementation was added.",
+    "reviewedBy": "Codex shared frontend integration owner (source review)",
+    "reviewedOn": "2026-10-12"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/email/useMailAttachments.ts",
@@ -796,10 +796,10 @@
     "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
     "kind": "function",
     "symbol": "MailCompose",
-    "fingerprint": "4b1ed0d9ff281b6e9ddf0b46e31610df9ad4783fdb701409208dcd7118a860e6",
-    "reason": "The rewrite request, source/lifetime guards and HTML conversion have been removed to the specific useMailRewrite controller and rewrite boundary, resolving the separate asynchronous responsibility found in the initial review. This function now composes one email draft and its frozen send-review intent; recipients, attachments, signature reads and canonical sending have separate owners. Draft fields and explicit review/confirmation describe the same compose transaction. A render-only ReviewedMailDialog remains optional if that presentation gains reuse or grows; no remaining provider or conversion orchestration justifies another extraction now.",
-    "reviewedBy": "Codex portfolio_calendar_relationships and portfolio_objectives (independent source review)",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "30b8d4c69b7db390c4bb7847e48502b27b720be5f18469f79b47c8306904b3d2",
+    "reason": "The existing compose container owns one draft and frozen send-review interaction. Current mailbox listing/thread origin are now isolated in useMailboxes, presentation in MailboxField, and safe projections/rechecks in mailboxes.ts. This function only selects and freezes the reviewed sender, presents it and gates review/confirmation. Recipient, attachment, rewrite, signature and send lifetimes retain their canonical owners. No new provider, actor resolver or transport is implemented in the 301-line presentation function; further extraction would only move the same single-use review presentation.",
+    "reviewedBy": "Codex shared frontend integration owner (source review)",
+    "reviewedOn": "2026-10-12"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/member-notes/MemberNoteForm.tsx",

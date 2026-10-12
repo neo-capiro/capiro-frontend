@@ -1,4 +1,5 @@
 import { test, expect, type Page } from "@playwright/test";
+import { sendingMailbox, sendingReceipt } from "./fixtures";
 const clientId = "10000000-0000-4000-8000-000000000001";
 const id = "20000000-0000-4000-8000-000000000001";
 const other = "20000000-0000-4000-8000-000000000002";
@@ -73,6 +74,7 @@ async function setup(
       });
     if (path === "me/email-signature")
       return json({ html: null, enabled: false });
+    if (path === "engagement/mail/mailboxes") return json([sendingMailbox]);
     if (path === `clients/${clientId}/people`)
       return json([
         person,
@@ -90,7 +92,11 @@ async function setup(
         },
       ]);
     if (path === `engagement/mail-threads/${id}`)
-      return json({ id, clientId: options.replyClient ?? clientId });
+      return json({
+        id,
+        clientId: options.replyClient ?? clientId,
+        connectionId: sendingMailbox.id,
+      });
     if (path === "engagement/attachments/upload-url") {
       prepares++;
       if (options.holdPrepare)
@@ -138,7 +144,7 @@ async function setup(
           ? { ok: true }
           : options.sendStatus
             ? { message: "Delivery could not be confirmed" }
-            : { ok: true, threadId: id, messageId: other },
+            : { ok: true, threadId: id, messageId: other, ...sendingReceipt },
         options.sendStatus ?? 200,
       );
     }
@@ -162,7 +168,7 @@ async function setup(
     releaseRead: () => releaseRead?.(),
   };
 }
-async function compose(page: Page, reply = false) {
+async function compose(page: Page, reply = false, reviewAvailable = true) {
   await page
     .getByRole("button", {
       name: reply ? "Reply to thread" : "Mail contact",
@@ -173,9 +179,12 @@ async function compose(page: Page, reply = false) {
   await page
     .getByLabel("Message", { exact: true })
     .fill("Draft retained for explicit review.");
-  await expect(
-    page.getByRole("button", { name: "Review email", exact: true }),
-  ).toBeEnabled();
+  if (!reply)
+    await page.getByLabel("From mailbox").selectOption(sendingMailbox.id);
+  if (reviewAvailable)
+    await expect(
+      page.getByRole("button", { name: "Review email", exact: true }),
+    ).toBeEnabled();
 }
 async function attach(page: Page) {
   await page.getByLabel("Attach file", { exact: true }).setInputFiles({
@@ -184,6 +193,96 @@ async function attach(page: Page) {
     buffer: Buffer.from("%PDF-fixture"),
   });
 }
+test("explicit mailbox B is shown in review and confirmed by its exact sender receipt", async ({
+  page,
+}) => {
+  await setup(page);
+  const second = {
+    ...sendingMailbox,
+    id: other,
+    accountEmail: "second@example.test",
+    displayName: "Second mailbox",
+  };
+  const sent: unknown[] = [];
+  await page.route("**/engagement/mail/mailboxes", (route) =>
+    route.fulfill({ json: [sendingMailbox, second] }),
+  );
+  await page.route("**/engagement/mail/send", (route) => {
+    const body = route.request().postDataJSON();
+    sent.push(body);
+    expect(body.senderConnectionId).toBe(second.id);
+    expect(body).not.toHaveProperty("reviewedSender");
+    return route.fulfill({
+      json: {
+        ok: true,
+        threadId: id,
+        messageId: other,
+        ...sendingReceipt,
+        senderConnectionId: second.id,
+        senderEmail: second.accountEmail,
+        senderName: second.displayName,
+      },
+    });
+  });
+  await compose(page);
+  await page.getByLabel("From mailbox").selectOption(second.id);
+  await page.getByRole("button", { name: "Review email", exact: true }).click();
+  const review = page.getByRole("dialog", { name: "Send email", exact: true });
+  await expect(
+    review.getByText("From: Second mailbox · second@example.test", {
+      exact: true,
+    }),
+  ).toBeVisible();
+  await review.getByRole("button", { name: "Send email", exact: true }).click();
+  await expect(page.getByText("Email sent.", { exact: true })).toBeVisible();
+  await expect(
+    page.getByText("From: second@example.test", { exact: true }),
+  ).toBeVisible();
+  expect(sent).toHaveLength(1);
+});
+test("a removed reviewed mailbox is not replaced by another mailbox", async ({
+  page,
+}) => {
+  const state = await setup(page);
+  await compose(page);
+  await page.getByRole("button", { name: "Review email", exact: true }).click();
+  await page.route("**/engagement/mail/mailboxes", (route) =>
+    route.fulfill({
+      json: [
+        { ...sendingMailbox, id: other, accountEmail: "other@example.test" },
+      ],
+    }),
+  );
+  await page.getByRole("button", { name: "Send email", exact: true }).click();
+  await expect(
+    page.getByText(/reviewed sending mailbox changed or is unavailable/).last(),
+  ).toBeVisible();
+  expect(state.sent).toHaveLength(0);
+  await page.keyboard.press("Escape");
+  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+    "Draft retained for explicit review.",
+  );
+});
+test("an unavailable mailbox contract leaves the draft review disabled", async ({
+  page,
+}) => {
+  const state = await setup(page);
+  await page.route("**/engagement/mail/mailboxes", (route) =>
+    route.fulfill({ status: 404, json: { message: "Mailboxes unavailable" } }),
+  );
+  await page.getByRole("button", { name: "Mail contact", exact: true }).click();
+  await page.getByLabel("Message", { exact: true }).fill("Retained draft");
+  await expect(
+    page.getByRole("button", { name: "Review email", exact: true }),
+  ).toBeDisabled();
+  await expect(
+    page.getByText("Mailboxes unavailable", { exact: true }),
+  ).toBeVisible();
+  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+    "Retained draft",
+  );
+  expect(state.sent).toHaveLength(0);
+});
 test("overlay clicks respect context gestures and dismiss only the top email review", async ({
   page,
 }) => {
@@ -443,10 +542,14 @@ test("reply to foreign-client thread refuses before mail send", async ({
   page,
 }) => {
   const state = await setup(page, { replyClient: other });
-  await compose(page, true);
-  await page.getByRole("button", { name: "Review email", exact: true }).click();
-  await page.getByRole("button", { name: "Send email", exact: true }).click();
+  await compose(page, true, false);
+  await expect(
+    page.getByRole("button", { name: "Review email", exact: true }),
+  ).toBeDisabled();
   await expect(page.getByText(/unexpected response/).last()).toBeVisible();
+  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+    "Draft retained for explicit review.",
+  );
   expect(state.sent).toHaveLength(0);
 });
 test("read-only role cannot upload or send", async ({ page }) => {
@@ -503,6 +606,7 @@ test("prepared seed requires canonical availability and an explicit selected rec
   await page
     .getByRole("button", { name: "Email prepared document", exact: true })
     .click();
+  await page.getByLabel("From mailbox").selectOption(sendingMailbox.id);
   await expect(page.getByLabel("Subject", { exact: true })).toHaveValue(
     "Prepared review",
   );

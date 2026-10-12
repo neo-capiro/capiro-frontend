@@ -15,6 +15,8 @@ import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { type MailContact } from "./email";
 import { plainMailHtml, useSendMail, useSignature } from "./email";
+import { useMailboxes } from "./email/useMailboxes";
+import { MailboxField } from "./email/MailboxField";
 export function MailCompose({
   person,
   clientId,
@@ -60,6 +62,7 @@ export function MailCompose({
   const send = useSendMail(clientId);
   const signature = useSignature();
   const authority = useMailAuthority(clientId);
+  const mailboxes = useMailboxes(clientId, thread?.id, !sendBlockedReason);
   const rewrite = useMailRewrite({
     sourceKey: JSON.stringify([clientId, person, thread, to, cc, bcc]),
     initialBody: initialDraft?.body ?? "",
@@ -88,6 +91,10 @@ export function MailCompose({
       {send.isSuccess ? (
         <div className="stack">
           <p role="status">Email sent.</p>
+          {send.data?.senderEmail && <p>From: {send.data.senderEmail}</p>}
+          {send.data?.signatureAppended === false && (
+            <small>Your saved signature was not appended.</small>
+          )}
           <button className="button primary" onClick={onClose}>
             Done
           </button>
@@ -101,7 +108,8 @@ export function MailCompose({
               locked ||
               !authority.ready ||
               attachments.blocked ||
-              rewrite.isPending
+              rewrite.isPending ||
+              (!sendBlockedReason && !mailboxes.selected)
             )
               return;
             try {
@@ -121,6 +129,12 @@ export function MailCompose({
                   appendSignature: signatureEnabled,
                   attachmentIds: attachments.ids,
                   ...(thread ? { threadId: thread.id } : {}),
+                  ...(mailboxes.selected
+                    ? {
+                        senderConnectionId: mailboxes.selected.id,
+                        reviewedSender: { ...mailboxes.selected },
+                      }
+                    : {}),
                 },
               });
             } catch (error) {
@@ -132,6 +146,9 @@ export function MailCompose({
             }
           }}
         >
+          {!sendBlockedReason && (
+            <MailboxField state={mailboxes} disabled={locked} />
+          )}
           <RecipientFields
             clientId={clientId}
             to={to}
@@ -177,7 +194,9 @@ export function MailCompose({
             {rewrite.isPending ? "Rewriting…" : "Rewrite with Meri"}
           </button>
           {rewrite.warning && <p role="status">{rewrite.warning}</p>}
-          <QueryState error={rewrite.error ?? signature.error} />
+          <div role="group" aria-label="Draft rewrite status">
+            <QueryState error={rewrite.error ?? signature.error} />
+          </div>
           <label className="row">
             <input
               type="checkbox"
@@ -221,7 +240,8 @@ export function MailCompose({
               !authority.ready ||
               attachments.blocked ||
               signature.isPending ||
-              rewrite.isPending
+              rewrite.isPending ||
+              (!sendBlockedReason && !mailboxes.selected)
             }
           >
             Review email
@@ -243,6 +263,15 @@ export function MailCompose({
         {review && (
           <div className="stack">
             {sendBlockedReason && <p role="note">{sendBlockedReason}</p>}
+            {review.input.reviewedSender && (
+              <p>
+                From:{" "}
+                {review.input.reviewedSender.displayName
+                  ? `${review.input.reviewedSender.displayName} · `
+                  : ""}
+                {review.input.reviewedSender.accountEmail}
+              </p>
+            )}
             <p>To: {review.input.to.map((item) => item.email).join(", ")}</p>
             {Boolean(review.input.cc?.length) && (
               <p>Cc: {review.input.cc?.map((item) => item.email).join(", ")}</p>
@@ -278,6 +307,7 @@ export function MailCompose({
             uncertain ||
             !authority.ready ||
             !review ||
+            !mailboxes.selected ||
             Boolean(sendBlockedReason)
           }
           onClick={() => {
@@ -286,6 +316,7 @@ export function MailCompose({
               send.isPending ||
               uncertain ||
               !authority.ready ||
+              !mailboxes.selected ||
               sendBlockedReason
             )
               return;
