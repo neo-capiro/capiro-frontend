@@ -1,0 +1,49 @@
+
+Running 1 test using 1 worker
+
+(node:648391) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 apps/web/tests/browser/files-delete-recovery.spec.ts:21:5 › unknown deletion survives close/reopen until deliberate current review and a new confirmation (8.2s)
+
+
+  1) apps/web/tests/browser/files-delete-recovery.spec.ts:21:5 › unknown deletion survives close/reopen until deliberate current review and a new confirmation 
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator:  getByRole('dialog', { name: 'Delete file', exact: true }).getByRole('button', { name: 'Confirm delete' })
+    Expected: disabled
+    Received: enabled
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeDisabled" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Delete file', exact: true }).getByRole('button', { name: 'Confirm delete' })
+        14 × locator resolved to <button class="button primary">Confirm delete</button>
+           - unexpected value "enabled"
+
+
+      51 |   await expect(
+      52 |     dialog.getByRole("button", { name: "Confirm delete" }),
+    > 53 |   ).toBeDisabled();
+         |     ^
+      54 |   await expect(dialog.getByText(/deletion outcome is unknown/)).toBeVisible();
+      55 |   await page.screenshot({
+      56 |     path: info.outputPath("delete-unknown-desktop.png"),
+        at /workspace/capiro-next-delete/apps/web/tests/browser/files-delete-recovery.spec.ts:53:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-delete-evidence/browser-red-dispatch/guarded-unknown-deletion-s-bd608-view-and-a-new-confirmation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-delete-evidence/browser-red-dispatch/guarded-unknown-deletion-s-bd608-view-and-a-new-confirmation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-delete-evidence/browser-red-dispatch/guarded-unknown-deletion-s-bd608-view-and-a-new-confirmation/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-delete-evidence/browser-red-dispatch/guarded-unknown-deletion-s-bd608-view-and-a-new-confirmation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    apps/web/tests/browser/files-delete-recovery.spec.ts:21:5 › unknown deletion survives close/reopen until deliberate current review and a new confirmation 

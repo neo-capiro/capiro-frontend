@@ -1,0 +1,55 @@
+{
+  "commit": "7ad059006c3f8286e7e578ead10eade14ff31da9",
+  "base": "fd1176790a6fb31b7ae68587f965a22d4145d8a2",
+  "createdAt": "2026-10-12T18:02:22.052963+00:00",
+  "appTree": "d7bf96545509e473d1ed03f49dbd8cf1eedd02cd",
+  "files": [
+    {
+      "path": "apps/web/src/features/portfolio/files/DeleteFile.tsx",
+      "sha256": "6af9a574f8bd8dd8af08de849c3610557d3ff80bcea89c916f3c6d947dccd861",
+      "lines": 90,
+      "nonblank": 89
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+      "sha256": "f653edde31a3d6f020f46dc80a9015354d4fff72195c658e325f3d39b8019422",
+      "lines": 269,
+      "nonblank": 269
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/deletion.ts",
+      "sha256": "f08fb9b4c51c240e49c07b1ff3f52caae23ea829779681610f608d5f36e10e57",
+      "lines": 151,
+      "nonblank": 146
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/mutations.ts",
+      "sha256": "9a531e2e772095680371b089e1b35e7d2e250e6f238576202f2ff6826e0940eb",
+      "lines": 38,
+      "nonblank": 38
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/useFileDeletion.ts",
+      "sha256": "db4bf033c957345368c1baf106b84509ed29749e3ea2b7e69d79504fbded7a60",
+      "lines": 81,
+      "nonblank": 79
+    },
+    {
+      "path": "apps/web/tests/browser/files-delete-recovery.spec.ts",
+      "sha256": "3fd3a1d6b1bdcd65b11d0bb43b8830437a370f7f63e94e61271f310801ed8953",
+      "lines": 350,
+      "nonblank": 341
+    },
+    {
+      "path": "apps/web/tests/files-delete-recovery.test.ts",
+      "sha256": "d9d091621bc18759f10c6a7b9ad21d5acc4093cb336beca395132ca1b3561d0a",
+      "lines": 264,
+      "nonblank": 252
+    }
+  ],
+  "untrackedDependencyLinks": [
+    "node_modules",
+    "apps/web/node_modules"
+  ],
+  "browserQualification": "awaiting root slot; not run"
+}

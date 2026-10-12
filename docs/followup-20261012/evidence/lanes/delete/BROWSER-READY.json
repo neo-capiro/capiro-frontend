@@ -1,0 +1,11 @@
+{
+  "base": "fd1176790a6fb31b7ae68587f965a22d4145d8a2",
+  "worktree": "/workspace/capiro-next-delete",
+  "test": "apps/web/tests/browser/files-delete-recovery.spec.ts",
+  "sha256": "3fd3a1d6b1bdcd65b11d0bb43b8830437a370f7f63e94e61271f310801ed8953",
+  "browserTests": 10,
+  "browserAndServerStarted": false,
+  "browserConfig": "/tmp/capiro-next-delete-evidence/playwright.config.ts",
+  "redRequiredOnUntouchedBase": true,
+  "unitBaselineDescription": "Same DELETE transport extracted and wired into original mutation before implementation; duplicate request still received second503. No missing-import failure."
+}

@@ -1,0 +1,66 @@
+{
+  "source": "ee01be3b2c5c64a53744994ae4ad0d992a111054",
+  "counts": {
+    "modules": {
+      "stats": {
+        "startTime": "2026-10-12T18:27:05.534Z",
+        "duration": 261349.237,
+        "expected": 182,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "tests": 182,
+      "timeouts": {
+        "60000": 182
+      },
+      "resultStatuses": {
+        "passed": 182
+      },
+      "retryIndexes": {
+        "0": 182
+      },
+      "workers": 1
+    },
+    "portfolio": {
+      "stats": {
+        "startTime": "2026-10-12T18:31:34.997Z",
+        "duration": 2182915.166,
+        "expected": 1051,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "tests": 1051,
+      "timeouts": {
+        "60000": 1047,
+        "180000": 4
+      },
+      "resultStatuses": {
+        "passed": 1051
+      },
+      "retryIndexes": {
+        "0": 1051
+      },
+      "workers": 3
+    },
+    "production": {
+      "http": 11,
+      "viewportTheme": 4,
+      "history": 2,
+      "pageErrors": []
+    }
+  },
+  "errors": [],
+  "priorEvidenceDiffs": {
+    "docs/remaining-assessment-20261012": [],
+    "docs/successor-p1-20261012": [],
+    "docs/visual-closeout-20261012": []
+  },
+  "archiveReadOnlyHash": {
+    "bytes": 770461228,
+    "sha256": "6d9297afed3c0447783472c4d3e19a9b20ee50b8c8729321d27b369eeac5b61e"
+  },
+  "preservedPreviousReviewSHA256": "3f55192e254f1d7bbb1eb72dc36a4563139c55b73e5af8ef95af2606c2faedf5",
+  "buildIdFromCurrentOutput": "YeRpCYwLZ8c5jqEhEYTc5"
+}

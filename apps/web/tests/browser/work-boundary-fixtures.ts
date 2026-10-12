@@ -145,5 +145,8 @@ export async function installWorkFixtures(page: Page) {
   await page.route("**/core/clients", (route) =>
     respond(route, state.statuses.clients, state.clients),
   );
+  await page.route("**/api/capiro/settings.tenantMembers*", (route) =>
+    respond(route, 200, []),
+  );
   return { state, unexpected, requests };
 }

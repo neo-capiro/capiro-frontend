@@ -1,0 +1,26 @@
+{
+  "source": "ee01be3b2c5c64a53744994ae4ad0d992a111054",
+  "reviewedUTC": "2026-10-12T19:08:22.556864+00:00",
+  "method": "Root view_image inspection of fresh combined-run PNGs; source remains frozen",
+  "scope": "Bounded rendering observations plus original automated keyboard/geometry assertions; not native, whole-screen parity or complete assistive-technology audit",
+  "images": [
+    {
+      "path": "final-ee01be3/portfolio-artifacts/prospect-files-local-searc-5b80d-uests-or-changing-readiness/search-mobile.png",
+      "bytes": 39863,
+      "sha256": "2406ddb41629387c29146b333842712252033267641f863349812ab2efb82a5b",
+      "observation": "Search, clear and refresh controls remain readable; filename/readiness states and unavailable actions are visible; focused input has visible outline."
+    },
+    {
+      "path": "final-ee01be3/portfolio-artifacts/mail-local-draft-saved-sig-8bc69-ktop-and-mobile-dark-review/mail-local-mobile-dark.png",
+      "bytes": 34674,
+      "sha256": "723909487a99e5ea0e2bf1e674e355cebbf77f5fc6bf2efaaa385587a5557c62",
+      "observation": "Scrolled dark phone composer shows rewritten body, Undo and saved-signature preview; links/images suppression is explicit; lower controls continue inside the scrollable dialog. No full composer pixel-parity claim."
+    },
+    {
+      "path": "final-ee01be3/portfolio-artifacts/work-owners-supplied-nativ-dc422--node-projections-at-1088px/work-owners-1088.png",
+      "bytes": 163756,
+      "sha256": "aff53925d8e31ffaabc618a96f2bfae6d25e563891bc062a267636b8c31fc967",
+      "observation": "Root inspected fresh combined Work desktop rendering: supplied document and node owners and per-node upcoming status are visible in existing cards/table; unresolved/unassigned cases remain explicit."
+    }
+  ]
+}

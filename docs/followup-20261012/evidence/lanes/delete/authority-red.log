@@ -1,0 +1,35 @@
+
+ RUN  v4.1.11 /workspace/capiro-next-delete/apps/web
+
+ ❯ tests/files-delete-recovery.test.ts (26 tests | 2 failed | 24 skipped) 39ms
+   × a failed deliberate GET 403 revokes collection authority until a new successful read 35ms
+   × a failed deliberate GET 503 revokes collection authority until a new successful read 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/files-delete-recovery.test.ts > a failed deliberate GET 403 revokes collection authority until a new successful read
+ FAIL  tests/files-delete-recovery.test.ts > a failed deliberate GET 503 revokes collection authority until a new successful read
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/files-delete-recovery.test.ts:276:56
+    274|   await expect(state.remove()).rejects.toMatchObject({ status: 503 });
+    275|   await expect(state.review()).rejects.toMatchObject({ status });
+    276|   expect(currentFilesAvailable(state.cache, clientId)).toBe(false);
+       |                                                        ^
+    277|   expect(state.cache.getQueryState(currentFilesKey(state.cache, client…
+    278|   await expect(deleteClientFile(state.api, other.id, state.context)).r…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 24 skipped (26)
+   Start at  18:10:11
+   Duration  410ms (transform 106ms, setup 0ms, import 235ms, tests 39ms, environment 0ms)
+

@@ -1,0 +1,91 @@
+"use client";
+import { useState } from "react";
+import type { EngagementMeeting } from "../../../shared/capiro/operations/engagement";
+import { useCapiroQuery } from "../../../shared/capiro/queries";
+import {
+  agendaSources,
+  meetingItems,
+  uniqueAgenda,
+  type AgendaSource,
+} from "./agenda";
+import { calendarRange, currentCalendarDate, type CalendarView } from "./range";
+import { useAgendaSources } from "./useAgendaSources";
+
+/** Calendar state lives independently of its month/week/agenda renderers. */
+export function useCalendar() {
+  const [date, setDate] = useState(currentCalendarDate);
+  const [view, setView] = useState<CalendarView>("month");
+  const [clientId, setClientId] = useState("");
+  const [newMeeting, setNewMeeting] = useState(false);
+  const [selected, setSelected] = useState<EngagementMeeting>();
+  const [datePicker, setDatePicker] = useState(false);
+  const [search, setSearch] = useState("");
+  const [sources, setSources] = useState<Set<AgendaSource>>(
+    () => new Set(agendaSources),
+  );
+  const range = calendarRange(date, view);
+  const clients = useCapiroQuery("clients.list", {});
+  const identity = useCapiroQuery("me.read", {});
+  const meetings = useCapiroQuery("engagement.meetings", {
+    query: {
+      from: range.from,
+      to: range.to,
+      ...(clientId ? { clientId } : {}),
+    },
+  });
+  const extras = useAgendaSources(range, view === "agenda" && !clientId);
+  const loaded = meetings.data ?? [];
+  const allItems = uniqueAgenda([...meetingItems(loaded), ...extras.items]);
+  const filtered = allItems.filter(
+    (item) =>
+      sources.has(item.source) &&
+      (!search ||
+        `${item.title} ${item.context}`
+          .toLowerCase()
+          .includes(search.toLowerCase())),
+  );
+  const clientName =
+    clients.data?.find((client) => client.id === clientId)?.name ??
+    "Master view";
+  const count = view === "agenda" ? allItems.length : loaded.length;
+  const changeScope = (value: string) => {
+    setClientId(value);
+    setSelected(undefined);
+  };
+  const toggle = (source: AgendaSource) =>
+    setSources((current) => {
+      const next = new Set(current);
+      if (next.has(source)) next.delete(source);
+      else next.add(source);
+      return next;
+    });
+  return {
+    date,
+    setDate,
+    view,
+    setView,
+    clientId,
+    newMeeting,
+    setNewMeeting,
+    selected,
+    setSelected,
+    datePicker,
+    setDatePicker,
+    search,
+    setSearch,
+    sources,
+    setSources,
+    clients,
+    identity,
+    meetings,
+    extras,
+    loaded,
+    allItems,
+    filtered,
+    clientName,
+    count,
+    changeScope,
+    toggle,
+  };
+}
+export type CalendarModel = ReturnType<typeof useCalendar>;

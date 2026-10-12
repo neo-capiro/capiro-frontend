@@ -1,0 +1,135 @@
+
+Running 3 tests using 1 worker
+
+(node:641221) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 apps/web/tests/browser/mail-local-draft.spec.ts:428:3 › cached signature 403 refetch cannot supply a current review preview (8.3s)
+(node:641482) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 apps/web/tests/browser/mail-local-draft.spec.ts:428:3 › cached signature 503 refetch cannot supply a current review preview (8.8s)
+(node:641668) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 apps/web/tests/browser/mail-local-draft.spec.ts:428:3 › cached signature loading refetch cannot supply a current review preview (7.5s)
+
+
+  1) apps/web/tests/browser/mail-local-draft.spec.ts:428:3 › cached signature 403 refetch cannot supply a current review preview 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('dialog', { name: 'Send email', exact: true }).locator('iframe[title="Saved signature preview"]')
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Send email', exact: true }).locator('iframe[title="Saved signature preview"]')
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      459 |       await expect(
+      460 |         review.locator('iframe[title="Saved signature preview"]'),
+    > 461 |       ).toHaveCount(0);
+          |         ^
+      462 |       await expect(
+      463 |         review.getByText(
+      464 |           response === "loading"
+        at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:461:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/signature-current/before-output/mail-local-draft-cached-si-27bde-ly-a-current-review-preview/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-mail-evidence/signature-current/before-output/mail-local-draft-cached-si-27bde-ly-a-current-review-preview/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/signature-current/before-output/mail-local-draft-cached-si-27bde-ly-a-current-review-preview/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-mail-evidence/signature-current/before-output/mail-local-draft-cached-si-27bde-ly-a-current-review-preview/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) apps/web/tests/browser/mail-local-draft.spec.ts:428:3 › cached signature 503 refetch cannot supply a current review preview 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('dialog', { name: 'Send email', exact: true }).locator('iframe[title="Saved signature preview"]')
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Send email', exact: true }).locator('iframe[title="Saved signature preview"]')
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      459 |       await expect(
+      460 |         review.locator('iframe[title="Saved signature preview"]'),
+    > 461 |       ).toHaveCount(0);
+          |         ^
+      462 |       await expect(
+      463 |         review.getByText(
+      464 |           response === "loading"
+        at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:461:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/signature-current/before-output/mail-local-draft-cached-si-04c65-ly-a-current-review-preview/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-mail-evidence/signature-current/before-output/mail-local-draft-cached-si-04c65-ly-a-current-review-preview/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/signature-current/before-output/mail-local-draft-cached-si-04c65-ly-a-current-review-preview/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-mail-evidence/signature-current/before-output/mail-local-draft-cached-si-04c65-ly-a-current-review-preview/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) apps/web/tests/browser/mail-local-draft.spec.ts:428:3 › cached signature loading refetch cannot supply a current review preview 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('dialog', { name: 'Send email', exact: true }).locator('iframe[title="Saved signature preview"]')
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Send email', exact: true }).locator('iframe[title="Saved signature preview"]')
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      459 |       await expect(
+      460 |         review.locator('iframe[title="Saved signature preview"]'),
+    > 461 |       ).toHaveCount(0);
+          |         ^
+      462 |       await expect(
+      463 |         review.getByText(
+      464 |           response === "loading"
+        at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:461:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/signature-current/before-output/mail-local-draft-cached-si-0b2a6-ly-a-current-review-preview/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-mail-evidence/signature-current/before-output/mail-local-draft-cached-si-0b2a6-ly-a-current-review-preview/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/signature-current/before-output/mail-local-draft-cached-si-0b2a6-ly-a-current-review-preview/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-mail-evidence/signature-current/before-output/mail-local-draft-cached-si-0b2a6-ly-a-current-review-preview/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    apps/web/tests/browser/mail-local-draft.spec.ts:428:3 › cached signature 403 refetch cannot supply a current review preview 
+    apps/web/tests/browser/mail-local-draft.spec.ts:428:3 › cached signature 503 refetch cannot supply a current review preview 
+    apps/web/tests/browser/mail-local-draft.spec.ts:428:3 › cached signature loading refetch cannot supply a current review preview 

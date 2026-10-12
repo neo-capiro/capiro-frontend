@@ -1,0 +1,31 @@
+{
+  "audit_id": "PROS-019",
+  "criterion": "Prospect Files: list, search and open uploaded/research documents",
+  "baseline": "fd1176790a6fb31b7ae68587f965a22d4145d8a2",
+  "finding": "PROS-F03",
+  "searchFacet": {
+    "status": "IMPLEMENTED_AND_FIXTURE_VERIFIED",
+    "behavior": "Case-insensitive trimmed filename substring search and explicit clear over only the current authorized loaded list; preserve source order, readiness disclosure and signed preview/download guards. Search state belongs to tenant/user/prospect keyed session. Distinct true empty and no matching files messages.",
+    "design": "Saved actual Figma Zc2dEN5aLU47dVdsewDmiJ frame 411:65071, search input nodes 411:65104/411:65105. Reuse existing input/toolbar tokens within existing Files card.",
+    "limits": "Searches filenames within the loaded authorized collection; no server search, full-text content search, source federation or new endpoint.",
+    "sourceRefs": [
+      "apps/web/src/features/portfolio/files/ProspectFiles.tsx:94",
+      "apps/web/src/features/portfolio/files/ProspectFiles.tsx:113",
+      "apps/web/src/features/portfolio/files/ProspectFiles.tsx:158",
+      "apps/web/src/features/portfolio/files/ProspectFiles.tsx:235"
+    ]
+  },
+  "existingFacets": {
+    "list": "Existing canonical scoped and schema-validated reader remains untouched.",
+    "upload": "Preserved: new filtered upload control and nine prior readiness/upload/reload/recovery/deletion controls pass.",
+    "open": "Preserved: matching ready file retains exact HTTPS Preview/Download hrefs; matching pending file exposes no open link."
+  },
+  "remaining": [
+    "Native storage service authorization, uploaded bytes durability and real signed URL expiry/open are unrun by this source fixture task.",
+    "Research/proposal source aggregation and complete source availability are separate unresolved dependencies.",
+    "Standalone Figma Files page/table/shell parity and unavailable sharing/sending/text import are outside local search scope."
+  ],
+  "nativeStatus": "NOT_RUN_FOR_THIS_CRITERION",
+  "acceptanceLimit": "Local source and synthetic browser controls cannot establish native service acceptance or full row/design acceptance.",
+  "commit": "066d2601f55e750e6863db0e72251c26a3651fc8"
+}

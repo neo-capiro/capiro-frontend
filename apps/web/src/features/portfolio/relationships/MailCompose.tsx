@@ -6,6 +6,7 @@ import { AttachmentFields } from "./email/AttachmentFields";
 import { useMailAttachments } from "./email/useMailAttachments";
 import { useMailAuthority } from "./email/authority";
 import { useMailRewrite } from "./email/useMailRewrite";
+import { SignaturePreview } from "./email/SignaturePreview";
 import { recipients, type Recipient } from "./email/recipients";
 import { MailSendError, type SendInput } from "./email/send";
 import styles from "./email/email.module.css";
@@ -41,6 +42,8 @@ export function MailCompose({
   const [review, setReview] = useState<{
     input: SendInput;
     text: string;
+    signatureHtml: string | null;
+    signatureStatus: "current" | "loading" | "unavailable";
   } | null>(null);
   const [to, setTo] = useState<Recipient[]>(
     initialDraft?.to ??
@@ -74,6 +77,8 @@ export function MailCompose({
   const uncertain = send.error instanceof MailSendError && send.error.uncertain;
   const locked = send.isPending || attachments.busy || uncertain;
   const signatureEnabled = append ?? signature.data?.enabled ?? false;
+  const signatureCurrent =
+    signature.isSuccess && !signature.error && !signature.isFetching;
   return (
     <Dialog
       open
@@ -120,6 +125,15 @@ export function MailCompose({
               setValidation("");
               setReview({
                 text: body,
+                signatureHtml:
+                  signatureEnabled && signatureCurrent
+                    ? (signature.data.html ?? null)
+                    : null,
+                signatureStatus: signatureCurrent
+                  ? "current"
+                  : signature.isFetching
+                    ? "loading"
+                    : "unavailable",
                 input: {
                   clientId,
                   ...(personIds.length ? { personIds } : {}),
@@ -193,9 +207,24 @@ export function MailCompose({
             {" "}
             {rewrite.isPending ? "Rewriting…" : "Rewrite with Meri"}
           </button>
+          {rewrite.canUndo && (
+            <button
+              type="button"
+              className="button"
+              disabled={
+                locked ||
+                !authority.ready ||
+                rewrite.isPending ||
+                Boolean(sendBlockedReason)
+              }
+              onClick={rewrite.undo}
+            >
+              Undo Meri rewrite
+            </button>
+          )}
           {rewrite.warning && <p role="status">{rewrite.warning}</p>}
           <div role="group" aria-label="Draft rewrite status">
-            <QueryState error={rewrite.error ?? signature.error} />
+            <QueryState error={rewrite.error} />
           </div>
           <label className="row">
             <input
@@ -206,11 +235,27 @@ export function MailCompose({
             />
             Append my saved signature
           </label>
-          <small>
-            {signature.data?.html
-              ? "Your saved signature is appended by the server."
-              : "No saved signature is available."}
-          </small>
+          <section aria-label="Saved signature" className="stack">
+            <QueryState
+              pending={signature.isPending || signature.isFetching}
+              error={signature.error}
+            />
+            {signature.error && (
+              <button
+                type="button"
+                className="button"
+                onClick={() => void signature.refetch()}
+              >
+                Retry signature
+              </button>
+            )}
+            {signatureCurrent &&
+              (signature.data.html ? (
+                <SignaturePreview html={signature.data.html} />
+              ) : (
+                <small>No saved signature is available.</small>
+              ))}
+          </section>
           {!sendBlockedReason && (
             <AttachmentFields
               state={attachments}
@@ -289,7 +334,23 @@ export function MailCompose({
               </small>
             )}
             {review.input.appendSignature && (
-              <small>Includes your saved signature.</small>
+              <div className="stack">
+                <small>
+                  Your saved signature will be requested when this email is
+                  sent.
+                </small>
+                {review.signatureHtml ? (
+                  <SignaturePreview html={review.signatureHtml} />
+                ) : (
+                  <small role="status">
+                    {review.signatureStatus === "loading"
+                      ? "Signature preview was still loading when this review opened. Close this review and review again after it loads."
+                      : review.signatureStatus === "unavailable"
+                        ? "Saved signature preview is unavailable. Close this review to retry loading it."
+                        : "No saved signature is available."}
+                  </small>
+                )}
+              </div>
             )}
           </div>
         )}

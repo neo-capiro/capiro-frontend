@@ -1,0 +1,59 @@
+{
+  "findingId": "OWI-F02",
+  "sourceBase": "fd1176790a6fb31b7ae68587f965a22d4145d8a2",
+  "scope": "Work owner identity presentation and supplied upcoming-node status",
+  "rows": [
+    {
+      "auditId": "WORK-03",
+      "frameIds": [
+        "411:52106"
+      ],
+      "repairedFacet": "Display the current supplied owner for each strategy node in next nodes, upcoming work and risks, and display strategy owner context; show Unassigned only for native null node ownership and Owner unavailable for unresolved supplied subjects. Each upcoming node also retains its own supplied status beside its owner.",
+      "status": "PASS_BOUNDED_SYNTHETIC_OWNER_AND_STATUS_FACETS",
+      "evidence": [
+        "unit-before.log",
+        "unit-after.log",
+        "source-review.json",
+        "figma/411-52106.json",
+        "figma/411-52106.png",
+        "browser-before.json",
+        "browser-after.json",
+        "browser-existing.json"
+      ],
+      "remainingOutsideThisRepair": [
+        "Native signed-in data completeness and authorization acceptance",
+        "The broader timeline and Strategy authoring criteria",
+        "Owner subjects absent from the active tenant-member read remain explicitly unresolved"
+      ]
+    },
+    {
+      "auditId": "WORK-08",
+      "frameIds": [
+        "411:52106",
+        "411:86349"
+      ],
+      "repairedFacet": "Add the document owner's supplied display label beside product in desktop table and phone card subtitles, preserving native draft/complete status and exact document destination.",
+      "status": "PASS_BOUNDED_SYNTHETIC_OWNER_AND_STATUS_FACETS",
+      "evidence": [
+        "unit-before.log",
+        "unit-after.log",
+        "source-review.json",
+        "figma/411-52106.json",
+        "figma/411-86349.json",
+        "figma/411-86349.png",
+        "browser-before.json",
+        "browser-after.json",
+        "browser-existing.json"
+      ],
+      "remainingOutsideThisRepair": [
+        "Native signed-in document/roster qualification",
+        "Legacy client-display-name association still requires uniqueness and is not rename-safe without a canonical native clientId"
+      ]
+    }
+  ],
+  "nativeContractPin": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+  "nativeGate": "NOT_RUN; source contract inspection and synthetic tests do not establish native acceptance",
+  "sharedPrerequisite": "Root-owned PortfolioHarnessProviders helper c5e06ba56f1ceacbaa255fff6e07271a10625572, locally cherry-picked as d180d11",
+  "sourceCommit": "8f2f49962c181f879f9aa9d1f1d95f85e78339e2",
+  "sourceTree": "9b212b304795c6ad0b6c1cc66bfe7e5c139f5bbe"
+}

@@ -6,13 +6,16 @@ import type { Destinations } from "@/shared/portfolio/config/config";
 import { clientDrafts } from "./contracts";
 import { useWorkspaceDrafts } from "./queries";
 import { WorkspaceDocumentTable } from "./WorkspaceDocumentTable";
+import type { WorkMembers } from "./owners";
 import styles from "./workspace-documents.module.css";
 export function WorkspaceDocuments({
   clientId,
   destinations,
+  members,
 }: {
   clientId: string;
   destinations: Destinations;
+  members: WorkMembers | undefined;
 }) {
   const query = useWorkspaceDrafts();
   const client = useClient(clientId);
@@ -78,6 +81,7 @@ export function WorkspaceDocuments({
         <WorkspaceDocumentTable
           rows={rows}
           destination={destinations.existingApp}
+          members={members}
         />
       )}
       <p className={styles.association}>

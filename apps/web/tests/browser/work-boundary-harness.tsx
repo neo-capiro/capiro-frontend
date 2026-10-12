@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { useQueryClient } from "@tanstack/react-query";
-import { DataProvider } from "@/shared/portfolio/api/provider";
+import { PortfolioHarnessProviders } from "./portfolio-harness-providers";
 import { WorkPage } from "@/features/portfolio/work/WorkPage";
 import { clientKey, clientsKey } from "@/features/portfolio/index/public";
 import "@/app/globals.css";
@@ -15,6 +15,7 @@ declare global {
     __workBoundary?: {
       refresh: (source: WorkSource) => Promise<void>;
       changeClient: (clientId: string) => void;
+      remount: () => void;
       snapshots: () => {
         key: readonly unknown[];
         status: string;
@@ -32,6 +33,7 @@ function WorkBoundaryHarness() {
   const [clientId, setClientId] = useState(
     "10000000-0000-4000-8000-000000000001",
   );
+  const [revision, setRevision] = useState(0);
   useEffect(() => {
     const keys = {
       summaries: ["strategies", clientId],
@@ -43,6 +45,7 @@ function WorkBoundaryHarness() {
     window.__workBoundary = {
       refresh: (source) => cache.invalidateQueries({ queryKey: keys[source] }),
       changeClient: setClientId,
+      remount: () => setRevision((value) => value + 1),
       snapshots: () =>
         cache
           .getQueryCache()
@@ -59,6 +62,7 @@ function WorkBoundaryHarness() {
   }, [cache, clientId]);
   return (
     <WorkPage
+      key={revision}
       clientId={clientId}
       destinations={
         missingDestinations
@@ -73,7 +77,7 @@ function WorkBoundaryHarness() {
 }
 
 createRoot(document.getElementById("root")!).render(
-  <DataProvider>
+  <PortfolioHarnessProviders>
     <WorkBoundaryHarness />
-  </DataProvider>,
+  </PortfolioHarnessProviders>,
 );

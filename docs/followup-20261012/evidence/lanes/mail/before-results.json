@@ -1,0 +1,1120 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-next-mail/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config=/tmp/capiro-next-mail-evidence/browser.config.ts",
+      "mail-local-draft.spec.ts"
+    ],
+    "configFile": "/tmp/capiro-next-mail-evidence/browser.config.ts",
+    "rootDir": "/workspace/capiro-next-mail/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-next-mail-evidence/browser-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-next-mail/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "mail-local-draft.spec.ts",
+          "mail-rewrite.spec.ts",
+          "email-compose.spec.ts",
+          "thread-mail.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-next-mail-evidence/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "mail-local-draft.spec.ts",
+      "file": "mail-local-draft.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "saved signature display preserves append=true without copying HTML into the body",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7987,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'New email', exact: true }).locator('iframe[title=\"Saved signature preview\"]').contentFrame().getByText('Synthetic Sender', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'New email', exact: true }).locator('iframe[title=\"Saved signature preview\"]').contentFrame().getByText('Synthetic Sender', { exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'New email', exact: true }).locator('iframe[title=\"Saved signature preview\"]').contentFrame().getByText('Synthetic Sender', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'New email', exact: true }).locator('iframe[title=\"Saved signature preview\"]').contentFrame().getByText('Synthetic Sender', { exact: true })\u001b[22m\n\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:57:127",
+                    "location": {
+                      "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                      "column": 127,
+                      "line": 57
+                    },
+                    "snippet": "  55 |   const state = await setup(page, { html: savedHtml, enabled }); await open(page);\n  56 |   const editor = page.getByRole(\"dialog\", { name: \"New email\", exact: true });\n> 57 |   await expect(editor.frameLocator('iframe[title=\"Saved signature preview\"]').getByText(\"Synthetic Sender\", { exact: true })).toBeVisible();\n     |                                                                                                                               ^\n  58 |   await expect(page.getByLabel(\"Append my saved signature\")).toBeChecked({ checked: enabled });\n  59 |   await page.getByRole(\"button\", { name: \"Review email\", exact: true }).click();\n  60 |   const review = page.getByRole(\"dialog\", { name: \"Send email\", exact: true });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                        "column": 127,
+                        "line": 57
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'New email', exact: true }).locator('iframe[title=\"Saved signature preview\"]').contentFrame().getByText('Synthetic Sender', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'New email', exact: true }).locator('iframe[title=\"Saved signature preview\"]').contentFrame().getByText('Synthetic Sender', { exact: true })\u001b[22m\n\n\n  55 |   const state = await setup(page, { html: savedHtml, enabled }); await open(page);\n  56 |   const editor = page.getByRole(\"dialog\", { name: \"New email\", exact: true });\n> 57 |   await expect(editor.frameLocator('iframe[title=\"Saved signature preview\"]').getByText(\"Synthetic Sender\", { exact: true })).toBeVisible();\n     |                                                                                                                               ^\n  58 |   await expect(page.getByLabel(\"Append my saved signature\")).toBeChecked({ checked: enabled });\n  59 |   await page.getByRole(\"button\", { name: \"Review email\", exact: true }).click();\n  60 |   const review = page.getByRole(\"dialog\", { name: \"Send email\", exact: true });\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:57:127"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:51:50.855Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-b0c97--copying-HTML-into-the-body/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-b0c97--copying-HTML-into-the-body/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-b0c97--copying-HTML-into-the-body/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                    "column": 127,
+                    "line": 57
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-014ff9aba21090965d44",
+          "file": "mail-local-draft.spec.ts",
+          "line": 54,
+          "column": 38
+        },
+        {
+          "title": "saved signature display preserves append=false without copying HTML into the body",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7028,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'New email', exact: true }).locator('iframe[title=\"Saved signature preview\"]').contentFrame().getByText('Synthetic Sender', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'New email', exact: true }).locator('iframe[title=\"Saved signature preview\"]').contentFrame().getByText('Synthetic Sender', { exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'New email', exact: true }).locator('iframe[title=\"Saved signature preview\"]').contentFrame().getByText('Synthetic Sender', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'New email', exact: true }).locator('iframe[title=\"Saved signature preview\"]').contentFrame().getByText('Synthetic Sender', { exact: true })\u001b[22m\n\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:57:127",
+                    "location": {
+                      "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                      "column": 127,
+                      "line": 57
+                    },
+                    "snippet": "  55 |   const state = await setup(page, { html: savedHtml, enabled }); await open(page);\n  56 |   const editor = page.getByRole(\"dialog\", { name: \"New email\", exact: true });\n> 57 |   await expect(editor.frameLocator('iframe[title=\"Saved signature preview\"]').getByText(\"Synthetic Sender\", { exact: true })).toBeVisible();\n     |                                                                                                                               ^\n  58 |   await expect(page.getByLabel(\"Append my saved signature\")).toBeChecked({ checked: enabled });\n  59 |   await page.getByRole(\"button\", { name: \"Review email\", exact: true }).click();\n  60 |   const review = page.getByRole(\"dialog\", { name: \"Send email\", exact: true });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                        "column": 127,
+                        "line": 57
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'New email', exact: true }).locator('iframe[title=\"Saved signature preview\"]').contentFrame().getByText('Synthetic Sender', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'New email', exact: true }).locator('iframe[title=\"Saved signature preview\"]').contentFrame().getByText('Synthetic Sender', { exact: true })\u001b[22m\n\n\n  55 |   const state = await setup(page, { html: savedHtml, enabled }); await open(page);\n  56 |   const editor = page.getByRole(\"dialog\", { name: \"New email\", exact: true });\n> 57 |   await expect(editor.frameLocator('iframe[title=\"Saved signature preview\"]').getByText(\"Synthetic Sender\", { exact: true })).toBeVisible();\n     |                                                                                                                               ^\n  58 |   await expect(page.getByLabel(\"Append my saved signature\")).toBeChecked({ checked: enabled });\n  59 |   await page.getByRole(\"button\", { name: \"Review email\", exact: true }).click();\n  60 |   const review = page.getByRole(\"dialog\", { name: \"Send email\", exact: true });\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:57:127"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:51:59.597Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-d2280--copying-HTML-into-the-body/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-d2280--copying-HTML-into-the-body/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-d2280--copying-HTML-into-the-body/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                    "column": 127,
+                    "line": 57
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-4c2f584ee95ca8361c33",
+          "file": "mail-local-draft.spec.ts",
+          "line": 54,
+          "column": 38
+        },
+        {
+          "title": "saved signature preview blocks active markup and automatic remote content",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6962,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('iframe[title=\"Saved signature preview\"]').contentFrame().getByText('Synthetic Sender', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('iframe[title=\"Saved signature preview\"]').contentFrame().getByText('Synthetic Sender', { exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('iframe[title=\"Saved signature preview\"]').contentFrame().getByText('Synthetic Sender', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('iframe[title=\"Saved signature preview\"]').contentFrame().getByText('Synthetic Sender', { exact: true })\u001b[22m\n\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:77:72",
+                    "location": {
+                      "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                      "column": 72,
+                      "line": 77
+                    },
+                    "snippet": "  75 |   await open(page);\n  76 |   const preview = page.frameLocator('iframe[title=\"Saved signature preview\"]');\n> 77 |   await expect(preview.getByText(\"Synthetic Sender\", { exact: true })).toBeVisible();\n     |                                                                        ^\n  78 |   await expect(preview.getByAltText(\"Inline logo\")).toBeVisible();\n  79 |   await expect(preview.locator(\"script,iframe,form,a[href],img[src^='https:'],[onerror]\")).toHaveCount(0);\n  80 |   await expect(page.locator('iframe[title=\"Saved signature preview\"]')).toHaveAttribute(\"sandbox\", \"\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                        "column": 72,
+                        "line": 77
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('iframe[title=\"Saved signature preview\"]').contentFrame().getByText('Synthetic Sender', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('iframe[title=\"Saved signature preview\"]').contentFrame().getByText('Synthetic Sender', { exact: true })\u001b[22m\n\n\n  75 |   await open(page);\n  76 |   const preview = page.frameLocator('iframe[title=\"Saved signature preview\"]');\n> 77 |   await expect(preview.getByText(\"Synthetic Sender\", { exact: true })).toBeVisible();\n     |                                                                        ^\n  78 |   await expect(preview.getByAltText(\"Inline logo\")).toBeVisible();\n  79 |   await expect(preview.locator(\"script,iframe,form,a[href],img[src^='https:'],[onerror]\")).toHaveCount(0);\n  80 |   await expect(page.locator('iframe[title=\"Saved signature preview\"]')).toHaveAttribute(\"sandbox\", \"\");\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:77:72"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:52:07.363Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-35e79-nd-automatic-remote-content/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-35e79-nd-automatic-remote-content/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-35e79-nd-automatic-remote-content/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                    "column": 72,
+                    "line": 77
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-140a1a3ee1e053fd8883",
+          "file": "mail-local-draft.spec.ts",
+          "line": 69,
+          "column": 1
+        },
+        {
+          "title": "empty signature null has no misleading preview",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1915,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:52:15.036Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-9900fe42991b6ac4ed43",
+          "file": "mail-local-draft.spec.ts",
+          "line": 84,
+          "column": 32
+        },
+        {
+          "title": "empty signature  has no misleading preview",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1900,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:52:17.166Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-598ca1c2766f316da973",
+          "file": "mail-local-draft.spec.ts",
+          "line": 84,
+          "column": 32
+        },
+        {
+          "title": "signature read failure remains distinct from empty and can be retried deliberately",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6895,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Saved signature' }).getByRole('alert')\nExpected substring: \u001b[32m\"Signature temporarily unavailable\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Saved signature' }).getByRole('alert')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Saved signature' }).getByRole('alert')\nExpected substring: \u001b[32m\"Signature temporarily unavailable\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Saved signature' }).getByRole('alert')\u001b[22m\n\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:94:46",
+                    "location": {
+                      "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                      "column": 46,
+                      "line": 94
+                    },
+                    "snippet": "  92 |   const state = await setup(page); state.signatureStatus = 503; await open(page);\n  93 |   const signature = page.getByRole(\"region\", { name: \"Saved signature\" });\n> 94 |   await expect(signature.getByRole(\"alert\")).toContainText(\"Signature temporarily unavailable\");\n     |                                              ^\n  95 |   await expect(page.getByText(\"No saved signature is available.\", { exact: true })).toHaveCount(0);\n  96 |   state.signatureStatus = 200;\n  97 |   await signature.getByRole(\"button\", { name: \"Retry signature\" }).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                        "column": 46,
+                        "line": 94
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Saved signature' }).getByRole('alert')\nExpected substring: \u001b[32m\"Signature temporarily unavailable\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Saved signature' }).getByRole('alert')\u001b[22m\n\n\n  92 |   const state = await setup(page); state.signatureStatus = 503; await open(page);\n  93 |   const signature = page.getByRole(\"region\", { name: \"Saved signature\" });\n> 94 |   await expect(signature.getByRole(\"alert\")).toContainText(\"Signature temporarily unavailable\");\n     |                                              ^\n  95 |   await expect(page.getByText(\"No saved signature is available.\", { exact: true })).toHaveCount(0);\n  96 |   state.signatureStatus = 200;\n  97 |   await signature.getByRole(\"button\", { name: \"Retry signature\" }).click();\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:94:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:52:19.076Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-signature-c479c-can-be-retried-deliberately/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-signature-c479c-can-be-retried-deliberately/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-signature-c479c-can-be-retried-deliberately/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                    "column": 46,
+                    "line": 94
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-894d668f2298936223a6",
+          "file": "mail-local-draft.spec.ts",
+          "line": 91,
+          "column": 1
+        },
+        {
+          "title": "local Undo restores exactly the body preceding the latest verified rewrite with no extra requests",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7018,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n\n    at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:103:54",
+                    "location": {
+                      "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                      "column": 86,
+                      "line": 51
+                    },
+                    "snippet": "  49 |   await page.getByRole(\"button\", { name: \"Rewrite with Meri\", exact: true }).click();\n  50 |   await expect(page.getByLabel(\"Message\", { exact: true })).toHaveValue(\"Verified rewritten draft.\");\n> 51 |   await expect(page.getByRole(\"button\", { name: \"Undo Meri rewrite\", exact: true })).toBeEnabled();\n     |                                                                                      ^\n  52 | }\n  53 |\n  54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                        "column": 86,
+                        "line": 51
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n\n\n  49 |   await page.getByRole(\"button\", { name: \"Rewrite with Meri\", exact: true }).click();\n  50 |   await expect(page.getByLabel(\"Message\", { exact: true })).toHaveValue(\"Verified rewritten draft.\");\n> 51 |   await expect(page.getByRole(\"button\", { name: \"Undo Meri rewrite\", exact: true })).toBeEnabled();\n     |                                                                                      ^\n  52 | }\n  53 |\n  54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {\n    at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:103:54"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:52:26.537Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-local-Und-c33eb-rite-with-no-extra-requests/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-local-Und-c33eb-rite-with-no-extra-requests/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-local-Und-c33eb-rite-with-no-extra-requests/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                    "column": 86,
+                    "line": 51
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-5ab204ddd355c2c35705",
+          "file": "mail-local-draft.spec.ts",
+          "line": 102,
+          "column": 1
+        },
+        {
+          "title": "manual edits retire Undo and the next rewrite snapshots the new local draft",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6939,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n\n    at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:111:54",
+                    "location": {
+                      "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                      "column": 86,
+                      "line": 51
+                    },
+                    "snippet": "  49 |   await page.getByRole(\"button\", { name: \"Rewrite with Meri\", exact: true }).click();\n  50 |   await expect(page.getByLabel(\"Message\", { exact: true })).toHaveValue(\"Verified rewritten draft.\");\n> 51 |   await expect(page.getByRole(\"button\", { name: \"Undo Meri rewrite\", exact: true })).toBeEnabled();\n     |                                                                                      ^\n  52 | }\n  53 |\n  54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                        "column": 86,
+                        "line": 51
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n\n\n  49 |   await page.getByRole(\"button\", { name: \"Rewrite with Meri\", exact: true }).click();\n  50 |   await expect(page.getByLabel(\"Message\", { exact: true })).toHaveValue(\"Verified rewritten draft.\");\n> 51 |   await expect(page.getByRole(\"button\", { name: \"Undo Meri rewrite\", exact: true })).toBeEnabled();\n     |                                                                                      ^\n  52 | }\n  53 |\n  54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {\n    at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:111:54"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:52:34.272Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-manual-ed-0a2f6-apshots-the-new-local-draft/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-manual-ed-0a2f6-apshots-the-new-local-draft/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-manual-ed-0a2f6-apshots-the-new-local-draft/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                    "column": 86,
+                    "line": 51
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-d96a7707937c682dfedd",
+          "file": "mail-local-draft.spec.ts",
+          "line": 110,
+          "column": 1
+        },
+        {
+          "title": "repeated rewrites retain one latest snapshot and Undo is unavailable while another rewrite awaits",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7094,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n\n    at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:121:54",
+                    "location": {
+                      "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                      "column": 86,
+                      "line": 51
+                    },
+                    "snippet": "  49 |   await page.getByRole(\"button\", { name: \"Rewrite with Meri\", exact: true }).click();\n  50 |   await expect(page.getByLabel(\"Message\", { exact: true })).toHaveValue(\"Verified rewritten draft.\");\n> 51 |   await expect(page.getByRole(\"button\", { name: \"Undo Meri rewrite\", exact: true })).toBeEnabled();\n     |                                                                                      ^\n  52 | }\n  53 |\n  54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                        "column": 86,
+                        "line": 51
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n\n\n  49 |   await page.getByRole(\"button\", { name: \"Rewrite with Meri\", exact: true }).click();\n  50 |   await expect(page.getByLabel(\"Message\", { exact: true })).toHaveValue(\"Verified rewritten draft.\");\n> 51 |   await expect(page.getByRole(\"button\", { name: \"Undo Meri rewrite\", exact: true })).toBeEnabled();\n     |                                                                                      ^\n  52 | }\n  53 |\n  54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {\n    at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:121:54"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:52:41.982Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-repeated--9179c-hile-another-rewrite-awaits/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                    "column": 86,
+                    "line": 51
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-833dd723fbc484840301",
+          "file": "mail-local-draft.spec.ts",
+          "line": 120,
+          "column": 1
+        },
+        {
+          "title": "unverified subsequent rewrite retains the prior valid Undo",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7226,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n\n    at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:135:54",
+                    "location": {
+                      "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                      "column": 86,
+                      "line": 51
+                    },
+                    "snippet": "  49 |   await page.getByRole(\"button\", { name: \"Rewrite with Meri\", exact: true }).click();\n  50 |   await expect(page.getByLabel(\"Message\", { exact: true })).toHaveValue(\"Verified rewritten draft.\");\n> 51 |   await expect(page.getByRole(\"button\", { name: \"Undo Meri rewrite\", exact: true })).toBeEnabled();\n     |                                                                                      ^\n  52 | }\n  53 |\n  54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                        "column": 86,
+                        "line": 51
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n\n\n  49 |   await page.getByRole(\"button\", { name: \"Rewrite with Meri\", exact: true }).click();\n  50 |   await expect(page.getByLabel(\"Message\", { exact: true })).toHaveValue(\"Verified rewritten draft.\");\n> 51 |   await expect(page.getByRole(\"button\", { name: \"Undo Meri rewrite\", exact: true })).toBeEnabled();\n     |                                                                                      ^\n  52 | }\n  53 |\n  54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {\n    at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:135:54"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:52:49.812Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-unverifie-0e27f-etains-the-prior-valid-Undo/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-unverifie-0e27f-etains-the-prior-valid-Undo/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-unverifie-0e27f-etains-the-prior-valid-Undo/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                    "column": 86,
+                    "line": 51
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-81277f00b7c0a592d199",
+          "file": "mail-local-draft.spec.ts",
+          "line": 134,
+          "column": 37
+        },
+        {
+          "title": "failed subsequent rewrite retains the prior valid Undo",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8632,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n\n    at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:135:54",
+                    "location": {
+                      "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                      "column": 86,
+                      "line": 51
+                    },
+                    "snippet": "  49 |   await page.getByRole(\"button\", { name: \"Rewrite with Meri\", exact: true }).click();\n  50 |   await expect(page.getByLabel(\"Message\", { exact: true })).toHaveValue(\"Verified rewritten draft.\");\n> 51 |   await expect(page.getByRole(\"button\", { name: \"Undo Meri rewrite\", exact: true })).toBeEnabled();\n     |                                                                                      ^\n  52 | }\n  53 |\n  54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                        "column": 86,
+                        "line": 51
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n\n\n  49 |   await page.getByRole(\"button\", { name: \"Rewrite with Meri\", exact: true }).click();\n  50 |   await expect(page.getByLabel(\"Message\", { exact: true })).toHaveValue(\"Verified rewritten draft.\");\n> 51 |   await expect(page.getByRole(\"button\", { name: \"Undo Meri rewrite\", exact: true })).toBeEnabled();\n     |                                                                                      ^\n  52 | }\n  53 |\n  54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {\n    at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:135:54"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:52:58.065Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-failed-su-0cea5-etains-the-prior-valid-Undo/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-failed-su-0cea5-etains-the-prior-valid-Undo/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-failed-su-0cea5-etains-the-prior-valid-Undo/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                    "column": 86,
+                    "line": 51
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-5a7654c2bbf7c426444a",
+          "file": "mail-local-draft.spec.ts",
+          "line": 134,
+          "column": 37
+        },
+        {
+          "title": "recipients replacement retires an earlier Undo snapshot",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7487,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n\n    at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:145:54",
+                    "location": {
+                      "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                      "column": 86,
+                      "line": 51
+                    },
+                    "snippet": "  49 |   await page.getByRole(\"button\", { name: \"Rewrite with Meri\", exact: true }).click();\n  50 |   await expect(page.getByLabel(\"Message\", { exact: true })).toHaveValue(\"Verified rewritten draft.\");\n> 51 |   await expect(page.getByRole(\"button\", { name: \"Undo Meri rewrite\", exact: true })).toBeEnabled();\n     |                                                                                      ^\n  52 | }\n  53 |\n  54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                        "column": 86,
+                        "line": 51
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n\n\n  49 |   await page.getByRole(\"button\", { name: \"Rewrite with Meri\", exact: true }).click();\n  50 |   await expect(page.getByLabel(\"Message\", { exact: true })).toHaveValue(\"Verified rewritten draft.\");\n> 51 |   await expect(page.getByRole(\"button\", { name: \"Undo Meri rewrite\", exact: true })).toBeEnabled();\n     |                                                                                      ^\n  52 | }\n  53 |\n  54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {\n    at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:145:54"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:53:07.621Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-recipient-01ded-es-an-earlier-Undo-snapshot/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-recipient-01ded-es-an-earlier-Undo-snapshot/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-recipient-01ded-es-an-earlier-Undo-snapshot/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                    "column": 86,
+                    "line": 51
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-27ab0555c598f84bc77c",
+          "file": "mail-local-draft.spec.ts",
+          "line": 144,
+          "column": 80
+        },
+        {
+          "title": "actor replacement retires an earlier Undo snapshot",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9541,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n\n    at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:145:54",
+                    "location": {
+                      "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                      "column": 86,
+                      "line": 51
+                    },
+                    "snippet": "  49 |   await page.getByRole(\"button\", { name: \"Rewrite with Meri\", exact: true }).click();\n  50 |   await expect(page.getByLabel(\"Message\", { exact: true })).toHaveValue(\"Verified rewritten draft.\");\n> 51 |   await expect(page.getByRole(\"button\", { name: \"Undo Meri rewrite\", exact: true })).toBeEnabled();\n     |                                                                                      ^\n  52 | }\n  53 |\n  54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                        "column": 86,
+                        "line": 51
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n\n\n  49 |   await page.getByRole(\"button\", { name: \"Rewrite with Meri\", exact: true }).click();\n  50 |   await expect(page.getByLabel(\"Message\", { exact: true })).toHaveValue(\"Verified rewritten draft.\");\n> 51 |   await expect(page.getByRole(\"button\", { name: \"Undo Meri rewrite\", exact: true })).toBeEnabled();\n     |                                                                                      ^\n  52 | }\n  53 |\n  54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {\n    at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:145:54"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:53:16.188Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-actor-rep-8a8dc-es-an-earlier-Undo-snapshot/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-actor-rep-8a8dc-es-an-earlier-Undo-snapshot/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-actor-rep-8a8dc-es-an-earlier-Undo-snapshot/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                    "column": 86,
+                    "line": 51
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-c8d85f2623700e6ffa11",
+          "file": "mail-local-draft.spec.ts",
+          "line": 144,
+          "column": 80
+        },
+        {
+          "title": "invalidated replacement retires an earlier Undo snapshot",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8460,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n\n    at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:145:54",
+                    "location": {
+                      "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                      "column": 86,
+                      "line": 51
+                    },
+                    "snippet": "  49 |   await page.getByRole(\"button\", { name: \"Rewrite with Meri\", exact: true }).click();\n  50 |   await expect(page.getByLabel(\"Message\", { exact: true })).toHaveValue(\"Verified rewritten draft.\");\n> 51 |   await expect(page.getByRole(\"button\", { name: \"Undo Meri rewrite\", exact: true })).toBeEnabled();\n     |                                                                                      ^\n  52 | }\n  53 |\n  54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                        "column": 86,
+                        "line": 51
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n\n\n  49 |   await page.getByRole(\"button\", { name: \"Rewrite with Meri\", exact: true }).click();\n  50 |   await expect(page.getByLabel(\"Message\", { exact: true })).toHaveValue(\"Verified rewritten draft.\");\n> 51 |   await expect(page.getByRole(\"button\", { name: \"Undo Meri rewrite\", exact: true })).toBeEnabled();\n     |                                                                                      ^\n  52 | }\n  53 |\n  54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {\n    at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:145:54"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:53:27.160Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-invalidat-29e60-es-an-earlier-Undo-snapshot/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-invalidat-29e60-es-an-earlier-Undo-snapshot/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-invalidat-29e60-es-an-earlier-Undo-snapshot/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                    "column": 86,
+                    "line": 51
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-1299e52de8242d20910a",
+          "file": "mail-local-draft.spec.ts",
+          "line": 144,
+          "column": 80
+        },
+        {
+          "title": "close replacement retires an earlier Undo snapshot",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7426,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n\n    at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:145:54",
+                    "location": {
+                      "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                      "column": 86,
+                      "line": 51
+                    },
+                    "snippet": "  49 |   await page.getByRole(\"button\", { name: \"Rewrite with Meri\", exact: true }).click();\n  50 |   await expect(page.getByLabel(\"Message\", { exact: true })).toHaveValue(\"Verified rewritten draft.\");\n> 51 |   await expect(page.getByRole(\"button\", { name: \"Undo Meri rewrite\", exact: true })).toBeEnabled();\n     |                                                                                      ^\n  52 | }\n  53 |\n  54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                        "column": 86,
+                        "line": 51
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Undo Meri rewrite', exact: true })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Undo Meri rewrite', exact: true })\u001b[22m\n\n\n  49 |   await page.getByRole(\"button\", { name: \"Rewrite with Meri\", exact: true }).click();\n  50 |   await expect(page.getByLabel(\"Message\", { exact: true })).toHaveValue(\"Verified rewritten draft.\");\n> 51 |   await expect(page.getByRole(\"button\", { name: \"Undo Meri rewrite\", exact: true })).toBeEnabled();\n     |                                                                                      ^\n  52 | }\n  53 |\n  54 | for (const enabled of [true, false]) test(`saved signature display preserves append=${enabled} without copying HTML into the body`, async ({ page }) => {\n    at rewrite (/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:51:86)\n    at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:145:54"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:53:36.786Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-close-rep-dc833-es-an-earlier-Undo-snapshot/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-close-rep-dc833-es-an-earlier-Undo-snapshot/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-close-rep-dc833-es-an-earlier-Undo-snapshot/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts",
+                    "column": 86,
+                    "line": 51
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-6e2cd7eef3f91b5285f9",
+          "file": "mail-local-draft.spec.ts",
+          "line": 144,
+          "column": 80
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T17:51:50.318Z",
+    "duration": 114301.389,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 13,
+    "flaky": 0
+  }
+}

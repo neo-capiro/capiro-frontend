@@ -1,0 +1,312 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-next-prospect-files/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-next-prospect-files-evidence/playwright.config.mjs",
+      "prospect-files-local-search.spec.ts",
+      "--grep",
+      "loaded file search|search distinguishes"
+    ],
+    "configFile": "/tmp/capiro-next-prospect-files-evidence/playwright.config.mjs",
+    "rootDir": "/workspace/capiro-next-prospect-files/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-next-prospect-files-evidence/red-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-next-prospect-files/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-next-prospect-files-evidence/red-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "prospect-files-local-search.spec.ts",
+      "file": "prospect-files-local-search.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "loaded file search filters case-insensitively, trims and clears without requests or changing readiness",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9954,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })\u001b[22m\n\n    at /workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts:110:24",
+                    "location": {
+                      "file": "/workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts",
+                      "column": 24,
+                      "line": 110
+                    },
+                    "snippet": "  108 |   await expect(area.getByText(ready.fileName, { exact: true })).toBeVisible();\n  109 |   const search = area.getByRole(\"searchbox\", { name: \"Search files\" });\n> 110 |   await expect(search).toBeVisible();\n      |                        ^\n  111 |   const reads = state.reads.length;\n  112 |   await search.fill(\"  aGeNcY  \");\n  113 |   await expect(area.locator(\"li strong\")).toHaveText([ready.fileName]);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts",
+                        "column": 24,
+                        "line": 110
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })\u001b[22m\n\n\n  108 |   await expect(area.getByText(ready.fileName, { exact: true })).toBeVisible();\n  109 |   const search = area.getByRole(\"searchbox\", { name: \"Search files\" });\n> 110 |   await expect(search).toBeVisible();\n      |                        ^\n  111 |   const reads = state.reads.length;\n  112 |   await search.fill(\"  aGeNcY  \");\n  113 |   await expect(area.locator(\"li strong\")).toHaveText([ready.fileName]);\n    at /workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts:110:24"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:58:02.100Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-prospect-files-evidence/red-artifacts/prospect-files-local-searc-5b80d-uests-or-changing-readiness/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-prospect-files-evidence/red-artifacts/prospect-files-local-searc-5b80d-uests-or-changing-readiness/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-prospect-files-evidence/red-artifacts/prospect-files-local-searc-5b80d-uests-or-changing-readiness/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts",
+                    "column": 24,
+                    "line": 110
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "7cf1cef6ce19f3e8cacf-303e944666724593ae38",
+          "file": "prospect-files-local-search.spec.ts",
+          "line": 102,
+          "column": 1
+        },
+        {
+          "title": "search distinguishes no matching files",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8453,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })\u001b[22m\n\n    at /workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts:154:26",
+                    "location": {
+                      "file": "/workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts",
+                      "column": 26,
+                      "line": 154
+                    },
+                    "snippet": "  152 |     const area = files(page);\n  153 |     const search = area.getByRole(\"searchbox\", { name: \"Search files\" });\n> 154 |     await expect(search).toBeEnabled();\n      |                          ^\n  155 |     await search.fill(\"unmatched filename\");\n  156 |     await expect(\n  157 |       area.getByText("
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts",
+                        "column": 26,
+                        "line": 154
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })\u001b[22m\n\n\n  152 |     const area = files(page);\n  153 |     const search = area.getByRole(\"searchbox\", { name: \"Search files\" });\n> 154 |     await expect(search).toBeEnabled();\n      |                          ^\n  155 |     await search.fill(\"unmatched filename\");\n  156 |     await expect(\n  157 |       area.getByText(\n    at /workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts:154:26"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:58:13.152Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-prospect-files-evidence/red-artifacts/prospect-files-local-searc-ac584-inguishes-no-matching-files/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-prospect-files-evidence/red-artifacts/prospect-files-local-searc-ac584-inguishes-no-matching-files/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-prospect-files-evidence/red-artifacts/prospect-files-local-searc-ac584-inguishes-no-matching-files/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts",
+                    "column": 26,
+                    "line": 154
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "7cf1cef6ce19f3e8cacf-76da504ddb34f61f45fa",
+          "file": "prospect-files-local-search.spec.ts",
+          "line": 147,
+          "column": 3
+        },
+        {
+          "title": "search distinguishes a true empty list",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7886,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })\u001b[22m\n\n    at /workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts:154:26",
+                    "location": {
+                      "file": "/workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts",
+                      "column": 26,
+                      "line": 154
+                    },
+                    "snippet": "  152 |     const area = files(page);\n  153 |     const search = area.getByRole(\"searchbox\", { name: \"Search files\" });\n> 154 |     await expect(search).toBeEnabled();\n      |                          ^\n  155 |     await search.fill(\"unmatched filename\");\n  156 |     await expect(\n  157 |       area.getByText("
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts",
+                        "column": 26,
+                        "line": 154
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEnabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })\nExpected: enabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeEnabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })\u001b[22m\n\n\n  152 |     const area = files(page);\n  153 |     const search = area.getByRole(\"searchbox\", { name: \"Search files\" });\n> 154 |     await expect(search).toBeEnabled();\n      |                          ^\n  155 |     await search.fill(\"unmatched filename\");\n  156 |     await expect(\n  157 |       area.getByText(\n    at /workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts:154:26"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:58:22.778Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-prospect-files-evidence/red-artifacts/prospect-files-local-searc-7ba98-inguishes-a-true-empty-list/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-prospect-files-evidence/red-artifacts/prospect-files-local-searc-7ba98-inguishes-a-true-empty-list/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-prospect-files-evidence/red-artifacts/prospect-files-local-searc-7ba98-inguishes-a-true-empty-list/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts",
+                    "column": 26,
+                    "line": 154
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "7cf1cef6ce19f3e8cacf-af4b910c7e621423cd36",
+          "file": "prospect-files-local-search.spec.ts",
+          "line": 147,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T17:58:00.974Z",
+    "duration": 30367.22,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

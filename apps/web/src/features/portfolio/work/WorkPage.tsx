@@ -2,8 +2,10 @@
 import type { Destinations } from "@/shared/portfolio/config/config";
 import { Temporal } from "temporal-polyfill";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
+import { useCapiroQuery } from "@/shared/capiro/queries";
 import { useStrategies, useStrategyDetails } from "./queries";
 import { workProjection } from "./contracts";
+import { workOwnerLabel } from "./owners";
 import { WorkspaceDocuments } from "./WorkspaceDocuments";
 import {
   isRetryingWorkFailure,
@@ -18,6 +20,9 @@ export function WorkPage({
   clientId: string;
   destinations: Destinations;
 }) {
+  const members = useCapiroQuery("settings.tenantMembers", {});
+  const ownerLabel = (ownerId: string | null) =>
+    workOwnerLabel(ownerId, members.data);
   const summaries = useStrategies(clientId);
   const currentSummaries =
     summaries.isSuccess && !summaries.error ? summaries.data : undefined;
@@ -108,7 +113,19 @@ export function WorkPage({
           }
         />
       )}
-      <WorkspaceDocuments clientId={clientId} destinations={destinations} />
+      {members.error && (
+        <div role="status" className="row">
+          <p>Owner names could not be loaded.</p>
+          <button className="button" onClick={members.reload}>
+            Retry owner names
+          </button>
+        </div>
+      )}
+      <WorkspaceDocuments
+        clientId={clientId}
+        destinations={destinations}
+        members={members.data}
+      />
       {!summariesUnavailable && (
         <div className={styles.columns}>
           <section className="stack" aria-label="Strategies">
@@ -125,6 +142,9 @@ export function WorkPage({
                   )}
                 </header>
                 <p className="muted">{strategy.goal ?? "No goal provided."}</p>
+                <small className={styles.owner}>
+                  Owner: {ownerLabel(strategy.ownerUserId)}
+                </small>
                 <small>
                   Target {strategy.targetDate?.slice(0, 10) ?? "not set"}
                 </small>
@@ -134,7 +154,12 @@ export function WorkPage({
                   .slice(0, 5)
                   .map((node) => (
                     <div className="row between" key={node.id}>
-                      <span>{node.title}</span>
+                      <span className="stack">
+                        <span>{node.title}</span>
+                        <small className={styles.owner}>
+                          Owner: {ownerLabel(node.ownerUserId)}
+                        </small>
+                      </span>
                       <span className="chip">
                         {node.status.replaceAll("_", " ")}
                       </span>
@@ -164,6 +189,14 @@ export function WorkPage({
                   <small>
                     {node.startsOn.slice(0, 10)} · {node.strategyTitle}
                   </small>
+                  <div className="row">
+                    <small className={styles.owner}>
+                      Owner: {ownerLabel(node.ownerUserId)}
+                    </small>
+                    <span className="chip">
+                      {node.status.replaceAll("_", " ")}
+                    </span>
+                  </div>
                   {base && (
                     <a href={strategyLink(node.strategyId, node.id)}>
                       Open step ↗
@@ -181,6 +214,9 @@ export function WorkPage({
                 <article key={node.id} className={styles.risk}>
                   <strong>{node.title}</strong>
                   <p>{node.note}</p>
+                  <small className={styles.owner}>
+                    Owner: {ownerLabel(node.ownerUserId)}
+                  </small>
                   <small>
                     {node.openEnded ? "Ongoing" : node.startsOn.slice(0, 10)}
                   </small>

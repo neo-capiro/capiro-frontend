@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { Button } from "@capiro/ui/button";
 import type { WorkspaceDraft } from "./contracts";
+import { workOwnerLabel, type WorkMembers } from "./owners";
 import styles from "./workspace-documents.module.css";
 
 function DocumentUpdated({ value }: { value: string }) {
@@ -17,9 +18,11 @@ function DocumentUpdated({ value }: { value: string }) {
 export function WorkspaceDocumentTable({
   rows,
   destination,
+  members,
 }: {
   rows: WorkspaceDraft[];
   destination?: string;
+  members: WorkMembers | undefined;
 }) {
   return (
     <div className={`tableWrap ${styles.container}`}>
@@ -50,7 +53,13 @@ export function WorkspaceDocumentTable({
                   <div className={styles.documentInfo}>
                     <strong className={styles.title}>{draft.docTitle}</strong>
                     <p className={styles.product}>
-                      {draft.product ?? "Document"}
+                      <span>{draft.product ?? "Document"}</span>
+                      {" · "}
+                      <span
+                        aria-label={`Owner: ${workOwnerLabel(draft.ownerId, members)}`}
+                      >
+                        {workOwnerLabel(draft.ownerId, members)}
+                      </span>
                     </p>
                   </div>
                 </div>

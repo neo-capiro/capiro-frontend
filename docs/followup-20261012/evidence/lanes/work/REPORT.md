@@ -1,0 +1,30 @@
+# Work owner identity and upcoming status repair
+
+Candidate `8f2f49962c181f879f9aa9d1f1d95f85e78339e2` (tree `9b212b304795c6ad0b6c1cc66bfe7e5c139f5bbe`) is the bounded Work commit; root already owns the shared fixture prerequisite.
+
+The bounded OWI-F02 correction resolves native supplied Clerk owner subjects through the existing authorized `settings.tenantMembers` operation. Workspace document subtitles, strategy owner context, next nodes, upcoming work and risks now show the supplied member name. Unresolved identities remain `Owner unavailable`; only native null node ownership is `Unassigned`. Each upcoming node also displays its own native status. No endpoint, transport DTO, authority, provider integration or backend behavior was added.
+
+`owners.ts` owns the pure exact-subject resolution and derives its type from the canonical operation. `WorkPage` owns one current member read and the bounded retry message; the existing shared query discards previous names when re-reading or replacing its scope. `WorkspaceDocuments` passes the current directory into the existing table/card renderer. Healthy work remains usable if the member source is denied, unavailable or malformed. The root-owned `ApplicationBoundary` and shared transports remain the only lifetime/expiry owners.
+
+## Verification
+
+- Preserved baseline document-render unit: **1 expected failure**, missing the supplied owner subtitle. Candidate focused render/resolver plus existing Work contract/association checks: **13/13 pass** (`unit-before.log`, `unit-after.log`).
+- Preserved fd117 Work source browser replay: **3 expected failures**, independently missing upcoming status and desktop/phone document owner labels. The baseline alias overrides only Work source; unchanged candidate tests/fixtures are used (`browser-before.json`).
+- Candidate owner/status browser checks: **12/12 pass**; actual `ApplicationBoundary` handles user, session, organization and selected-client replacement during a held roster read, rejects the released old result, and expires both scopes on member 401. Other controls cover native exact Clerk identity, null/empty/unknown/Core UUID distinction, member 403/503 with held recovery, malformed members, usable work destinations, and individual active/in-progress status (`browser-after.json`).
+- Existing affected Work checks: **26/26 pass**, retaining independent Strategy/document failure behavior, cache-removal fences, destination and client association checks, exact native icon geometry, desktop/phone rendering, keyboard navigation and narrow dark overflow controls (`browser-existing.json`). No original assertion was removed or weakened.
+- Browser runs used one worker, zero retries and external configuration with no webServer. Installed `/usr/bin/chromium` was used. The first launcher attempt omitted its executable override; that setup-only failure is preserved separately as `browser-setup-no-executable.*` and is not counted as a product regression.
+- Fresh Figma contexts/screenshots for 411:52106 and 411:86349 are under `figma/`. Candidate desktop 1088 and phone 390 screenshots were inspected: owner subtitles occupy the existing product line, full owner text is readable, node statuses are visible and neither viewport overflows. Existing style/token/icon ownership is preserved. This is a scoped owner/status comparison, not full screen or row acceptance.
+- Final candidate TypeScript, focused lint (no warnings), formatting and git diff whitespace checks pass.
+- Architecture reports **zero boundary errors**. The sole changed review signal is `WorkPage`, 226 nonblank function lines, fingerprint `b17ef5e4ba4bd46f95cab84e38f19965fc48ca771295e97a124fe91295c0b82d`; the file has 247 nonblank lines. Exact rationale is in `source-review.json`; root owns independent acceptance and registry entry. No changed file exceeds 400 nonblank lines and no new test function exceeds 80.
+
+## Fixture composition and isolation
+
+Root's provider-helper commit c5e06ba56f1ceacbaa255fff6e07271a10625572 was cherry-picked locally as d180d11. The existing focused Work harness reuses it. New authority controls mount the real application boundary and use the existing Modules Clerk test double; the external Vite config aliases `@clerk/nextjs` to that existing double. Root separately owns the canonical Portfolio Clerk re-export adaptation so the final normal browser gate discovers/runs this harness without an external alias. Work's general document spec adds only a narrow member-operation interception.
+
+The two owned fixture server PIDs 635917 and 636867 were stopped. Both were absent and 5191 returned connect_ex111 when released (`server-release.json`). No full build, whole-suite gate, live API call, native write, paid model/provider action, deployment, merge or push was performed in this lane. No prior evidence or frozen source was edited. Borrowed dependencies remain external; fixture cache is under this lane's /tmp directory.
+
+## Native limits and row mapping
+
+Read-only source inspection is pinned to capirov2 `243248e726243c44bd4b9d24fd1ed220da18c56a`; exact source copies are under `native-contracts/`. `/tenant-members` projects active tenant members with internal ID, Clerk subject, name and email. Work fields use Clerk subjects. The unrelated account-owner option UUID contract is not a valid identity mapping and is not used. Only a unique exact Clerk match yields a supplied label; email, display name or internal UUID are never guessed as ownership.
+
+WORK-03's bounded node-owner and individual upcoming-status facets are repaired. WORK-08's bounded document-owner subtitle is repaired. See `row-facets.json` for scope and evidence. Native signed-in authorization/data-completeness gates remain unrun. Owners absent from the active roster remain explicitly unavailable. Workspace's legacy client-name association still requires uniqueness and cannot guarantee rename-safe completeness without a canonical native clientId. Broader timeline/Strategy-authoring criteria and full-row/native acceptance are not claimed.

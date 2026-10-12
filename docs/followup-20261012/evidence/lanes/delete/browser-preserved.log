@@ -1,0 +1,22 @@
+
+Running 15 tests using 1 worker
+
+(node:649530) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 apps/web/tests/browser/files-metadata-receipts.spec.ts:26:5 › conflicting ACL receipt retains the draft and freezes repeat save until current GET review (2.9s)
+  ✓   2 apps/web/tests/browser/files-metadata-receipts.spec.ts:80:5 › a matching reordered restricted viewer set completes the save (2.4s)
+  ✓   3 apps/web/tests/browser/files-metadata-receipts.spec.ts:135:5 › a definite access rejection retains an editable draft (2.4s)
+  ✓   4 apps/web/tests/browser/files-metadata-receipts.spec.ts:165:7 › a matching PATCH completing after actor replacement cannot close or update the replacement view (1.7s)
+  ✓   5 apps/web/tests/browser/files-metadata-receipts.spec.ts:165:7 › a matching PATCH completing after client replacement cannot close or update the replacement view (1.4s)
+  ✓   6 apps/web/tests/browser/files-metadata-receipts.spec.ts:165:7 › a matching PATCH completing after unmount replacement cannot close or update the replacement view (1.4s)
+  ✓   7 apps/web/tests/browser/files-metadata-receipts.spec.ts:214:5 › a review completing after actor replacement cannot clear the original unknown save (2.0s)
+  ✓   8 apps/web/tests/browser/files-metadata-receipts.spec.ts:256:5 › an unknown draft can recover even when the reopened access query fails (3.6s)
+  ✓   9 apps/web/tests/browser/files-metadata-receipts.spec.ts:307:5 › reopening access as another reader requests that reader's current ACL (1.6s)
+  ✓  10 apps/web/tests/browser/files-metadata-receipts.spec.ts:334:5 › a contradictory folder receipt keeps the requested folder and needs current review (2.7s)
+  ✓  11 apps/web/tests/browser/files-metadata-receipts.spec.ts:372:5 › unknown ACL save survives close/reopen and a failed review does not thaw it (2.6s)
+  ✓  12 apps/web/tests/browser/dialog-disabled-focus.spec.ts:22:9 › disabled button keeps pending and unknown dialog focus at 360px (2.4s)
+  ✓  13 apps/web/tests/browser/dialog-disabled-focus.spec.ts:22:9 › disabled field keeps pending and unknown dialog focus at 360px (3.2s)
+  ✓  14 apps/web/tests/browser/dialog-disabled-focus.spec.ts:22:9 › disabled button keeps pending and unknown dialog focus at 1440px (3.5s)
+  ✓  15 apps/web/tests/browser/dialog-disabled-focus.spec.ts:22:9 › disabled field keeps pending and unknown dialog focus at 1440px (4.4s)
+
+  15 passed (40.4s)

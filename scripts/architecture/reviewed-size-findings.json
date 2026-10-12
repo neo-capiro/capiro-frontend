@@ -704,10 +704,10 @@
     "file": "apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts",
     "kind": "function",
     "symbol": "useMailRewrite",
-    "fingerprint": "6a225dc31b1c19b0e549d04666026d4bc60db5fbfd2c2fc5ae9a84757d6a6305",
-    "reason": "This controller owns one source-bound rewrite attempt and the exact body revision it may replace. Draft edits, context changes, identity-cache invalidation and unmount all revoke that same attempt; a local AbortController and post-response guard prevent stale application even if transport still completes. It reuses the existing captured mail authority rather than duplicating actor policy, and native request/schema plus HTML conversion live in rewrite.ts. The110-line body is one coupled attempt lifecycle; splitting each phase into separate hooks would obscure its shared identity and old/new attempt ordering. It does not claim server model cancellation.",
-    "reviewedBy": "Codex portfolio_calendar_relationships and portfolio_objectives (independent source review)",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "6798b98e516658cb4532c155035dd9a15a15ca0aa1bae5b49b61b4ef72b22bfa",
+    "reason": "One source-bound rewrite lifecycle owns the current body, pending attempt and one prior-body Undo snapshot. Manual edits, source/recipient changes, identity invalidation and unmount revoke the coupled state; Undo rechecks the existing captured authority and issues no request. The native request/schema/conversion retain rewrite.ts ownership. Splitting Undo into another hook would duplicate lifetime and cache subscriptions. Root and independent prospects reviewed full161-line function and meaningful authority controls. See docs/followup-20261012/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex shared frontend integration owner with independent assigned-lane source review",
+    "reviewedOn": "2026-10-12"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/GovernmentRelationships.tsx",
@@ -731,9 +731,9 @@
     "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
     "kind": "function",
     "symbol": "MailCompose",
-    "fingerprint": "30b8d4c69b7db390c4bb7847e48502b27b720be5f18469f79b47c8306904b3d2",
-    "reason": "The existing compose container owns one draft and frozen send-review interaction. Current mailbox listing/thread origin are now isolated in useMailboxes, presentation in MailboxField, and safe projections/rechecks in mailboxes.ts. This function only selects and freezes the reviewed sender, presents it and gates review/confirmation. Recipient, attachment, rewrite, signature and send lifetimes retain their canonical owners. No new provider, actor resolver or transport is implemented in the 301-line presentation function; further extraction would only move the same single-use review presentation.",
-    "reviewedBy": "Codex shared frontend integration owner (source review)",
+    "fingerprint": "024c124c331a351cede7aef7a9eac568dd49edcf28ebea0130511dab6f78d256",
+    "reason": "One composer owns recipient/body controls and the frozen send-review snapshot. SignaturePreview separately owns adopted DOMPurify/sandbox presentation; useMailRewrite owns local rewrite/Undo lifetime. Only current successful non-fetching signature HTML enters the display snapshot; loading/unavailable state remains explicit and appendSignature keeps backend send semantics without copying preview HTML into bodyHtml. Root and independent prospects reviewed the stale-refetch correction and full361-line function. No new provider, transport or actor resolver is embedded here. See docs/followup-20261012/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex shared frontend integration owner with independent assigned-lane source review",
     "reviewedOn": "2026-10-12"
   },
   {
@@ -857,10 +857,10 @@
     "file": "apps/web/src/features/portfolio/work/WorkPage.tsx",
     "kind": "function",
     "symbol": "WorkPage",
-    "fingerprint": "f9d036784b3d8e71e6cce18cb6c62ee47b2593038d77847ae0310c5777c27417",
-    "reason": "WorkPage composes one current-client, read-only Strategy view: successful summaries select the exact detail observers, completeness selects aggregate counts, and the same verified details feed the cards, upcoming work, risks and canonical links. Native validation/projection remain in contracts.ts and query keys/cancellation in queries.ts. WorkStrategyState owns the error/unavailable presentation and derives initial-error retry feedback from current observer status, without adding stored error, cache, editor or mutation state. WorkspaceDocuments separately owns the three-read legacy document association gate and now delegates its responsive table rendering to WorkspaceDocumentTable. The remaining WorkPage body is the composition of those coupled projections; another extraction solely for its line count would not separate an unrelated responsibility.",
-    "reviewedBy": "Codex portfolio_objectives; root full-body integration review",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "b17ef5e4ba4bd46f95cab84e38f19965fc48ca771295e97a124fe91295c0b82d",
+    "reason": "One current-client read-only Work composition shows current Strategy projections and the separate Workspace document view. The existing fixed tenantMembers read supplies labels through a pure exact-Clerk resolver with canonical derived type; missing or ambiguous roster data is unavailable, only null ownership unassigned. Source failures stay independent, while shared query/ApplicationBoundary own cancellation and expiry. Upcoming status is a supplied node field. Root and independent core_intake reviewed full226-line function, final8f2f499 bytes and owner/status controls. See docs/followup-20261012/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex shared frontend integration owner with independent assigned-lane source review",
+    "reviewedOn": "2026-10-12"
   },
   {
     "file": "apps/web/src/features/portfolio/work/WorkspaceDocuments.tsx",
@@ -1001,9 +1001,9 @@
     "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
     "kind": "function",
     "symbol": "FilesPage",
-    "fingerprint": "db89e110514dfb52bbe6186b6836df43eab0c6aa2278eb8489dd28a977c056b2",
-    "reason": "Owns the client Files table/sidebar/filter/selection and related dialog composition. The reviewed addition resolves a one-time URL arrival through the cohesive linked-arrival hook and composes the existing FilePreview. Current list, native ACLs, download navigation, extraction and mutations retain their canonical owners; explicit competing file actions consume arrival. The254-line function connects this one page's related presentation, with no second transport, file action or provider lifecycle. Root read the entire final source and observed the successful desktop/phone/unavailable captures; splitting these mutually related controls would add no responsibility boundary.",
-    "reviewedBy": "Codex portfolio_prospects_files; independent root exact-source and capture review",
+    "fingerprint": "6b1e2d5c668d17e152ce5d4dedb60bb2ed7827e2fbd68033559a0dff55bf8726",
+    "reason": "FilesPage remains one current-reader file listing, filter, selection and related-dialog composition. Deletion now has cohesive separate DeleteFile/useFileDeletion/deletion owners; the page retains only reader-scoped selected IDs and disposes dialog content on scope/error replacement. Canonical current-files queries own read loading/failure, while the separate operation module owns unknown-attempt fencing and deliberate existing-contract recovery. Root and independent Modules reviewer inspected all seven original files and the canonical lifecycle correction; the245-line page adds no provider, transport or second authority. See docs/followup-20261012/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex shared frontend integration owner and independent modules_settings source review",
     "reviewedOn": "2026-10-12"
   },
   {
@@ -1302,9 +1302,9 @@
     "file": "apps/web/src/features/portfolio/files/ProspectFiles.tsx",
     "kind": "function",
     "symbol": "ProspectFileSession",
-    "fingerprint": "fdb71b7f7745545c4be16e63b5d26c31ffba9371f8c0540833908ded57fe4548",
-    "reason": "This view composes the existing prospect file list, readiness-gated read links, explicit deletion confirmation and separate upload hook. New checking/hold/reselect controls describe upload recovery; they add no HTTP or storage implementation to the renderer. A duplicate alert for the same failed current-list read is avoided while both retry controls remain visible.",
-    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "fingerprint": "6605779ecb5415ef0988fb6221d0877ae23ee29e700ae4d85ef066818921624c",
+    "reason": "One keyed actor/tenant/prospect view composes the existing authorized file list, readiness-gated links and separate upload recovery hook. The added filename search, clear and no-match presentation consume only the current successful non-fetching list and reset with the existing scope. No new transport, cache, authority or corpus ownership is introduced. Root inspected the full function and phone capture; independent calendar_relationships accepted its bounded source/test evidence. See docs/followup-20261012/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex shared frontend integration owner with independent assigned-lane source review",
     "reviewedOn": "2026-10-12"
   },
   {

@@ -1,0 +1,71 @@
+{
+  "completedAt": "2026-10-12T18:23:14.389018+00:00",
+  "candidate": "274a7d876d36a964aedf8081dc83225078fe092c",
+  "appTree": "d67f99d2fadb4cb1735dea9910c0c096b5eb0395",
+  "finding": "CP-03",
+  "rows": [
+    "CORE-060"
+  ],
+  "severity": "P3",
+  "unit": {
+    "passed": 39,
+    "log": "dispatch-unit-green.log"
+  },
+  "browser": {
+    "browser-red-dispatch": {
+      "startTime": "2026-10-12T18:19:42.475Z",
+      "duration": 9141.453,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "browser-dispatch-green": {
+      "startTime": "2026-10-12T18:20:22.565Z",
+      "duration": 25585,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "browser-preserved": {
+      "startTime": "2026-10-12T18:21:31.378Z",
+      "duration": 40360.78200000001,
+      "expected": 15,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "typecheck": {
+    "exitCode": 0,
+    "log": "dispatch-typecheck.log"
+  },
+  "lint": {
+    "exitCode": 0,
+    "log": "dispatch-lint.log"
+  },
+  "architecture": {
+    "exitCode": 1,
+    "errors": [],
+    "blockingRegistrySignals": [
+      "FilesPage245:6b1e2d5c668d17e152ce5d4dedb60bb2ed7827e2fbd68033559a0dff55bf8726"
+    ],
+    "report": "dispatch-architecture.json",
+    "owner": "root",
+    "independentStructureAccepted": true
+  },
+  "sourceReview": {
+    "path": "/tmp/capiro-next-modules-evidence/independent-delete-review.md",
+    "sha256": "0b4e91beed21a6a2542c876e5686ca1cd60dbf80f6fc6b83d70ef5a6b2f10d42",
+    "disposition": "No remaining source defect at274a7d; combined qualification remains root-owned."
+  },
+  "lease": "FINAL-LEASE-RELEASE.json",
+  "limits": [
+    "Fixture-only browser controls, no native authorized writes or providers.",
+    "GET proves current visible state, not causal deletion or ACL absence attribution.",
+    "Cache-local uncertainty fence; no cross-tab/reload durable idempotency.",
+    "Existing Figma modal/footer parity differences retained.",
+    "Root owns clean combined qualification, architecture registry and integration."
+  ]
+}

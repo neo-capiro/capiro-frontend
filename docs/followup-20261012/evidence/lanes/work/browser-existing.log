@@ -1,0 +1,33 @@
+
+Running 26 tests using 1 worker
+
+(node:637533) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/browser/work-boundary.spec.ts:83:3 › a failed 403 Strategy list refresh removes cached Strategy content but retains documents (1.9s)
+  ✓   2 tests/browser/work-boundary.spec.ts:83:3 › a failed 503 Strategy list refresh removes cached Strategy content but retains documents (2.6s)
+  ✓   3 tests/browser/work-boundary.spec.ts:137:3 › a failed 403 Strategy detail refresh removes only that Strategy and its derived links (1.7s)
+  ✓   4 tests/browser/work-boundary.spec.ts:137:3 › a failed 410 Strategy detail refresh removes only that Strategy and its derived links (1.6s)
+  ✓   5 tests/browser/work-boundary.spec.ts:137:3 › a failed 503 Strategy detail refresh removes only that Strategy and its derived links (2.5s)
+  ✓   6 tests/browser/work-boundary.spec.ts:183:3 › a failed documents refresh removes cached Workspace rows without hiding healthy Strategies (1.6s)
+  ✓   7 tests/browser/work-boundary.spec.ts:183:3 › a failed client refresh removes cached Workspace rows without hiding healthy Strategies (1.6s)
+  ✓   8 tests/browser/work-boundary.spec.ts:183:3 › a failed clients refresh removes cached Workspace rows without hiding healthy Strategies (1.5s)
+  ✓   9 tests/browser/work-boundary.spec.ts:218:3 › a Strategy detail with a different strategy ID is rejected before presentation (3.0s)
+  ✓  10 tests/browser/work-boundary.spec.ts:218:3 › a Strategy detail with a different client ID is rejected before presentation (3.0s)
+  ✓  11 tests/browser/work-boundary.spec.ts:255:1 › a unique same-name catalog row for another client cannot supply current-client Workspace documents (1.2s)
+  ✓  12 tests/browser/work-boundary.spec.ts:271:1 › a mismatched current Client response cannot establish the Workspace association (1.5s)
+  ✓  13 tests/browser/work-boundary.spec.ts:293:1 › a Strategy removed from the latest list cannot return through a late detail response (2.4s)
+  ✓  14 tests/browser/work-boundary.spec.ts:342:1 › changing client scope requires a matching detail read even when the strategy ID is cached (3.1s)
+  ✓  15 tests/browser/work-boundary.spec.ts:394:1 › a failed refresh of an empty Strategy list does not retain a successful empty claim (1.4s)
+  ✓  16 tests/browser/work-boundary.spec.ts:415:1 › healthy Work keeps native counts, the five-node preview and exact existing application links (1.7s)
+  ✓  17 tests/browser/work-documents.spec.ts:33:1 › client Work opens typed Workspace drafts through the canonical editor route (4.9s)
+  ✓  18 tests/browser/work-documents.spec.ts:96:1 › client Work withholds legacy name matches when accessible clients collide (2.7s)
+  ✓  19 tests/browser/work-presentation.spec.ts:36:1 › phone Workspace cards expose each exact destination without horizontal scrolling (2.1s)
+  ✓  20 tests/browser/work-presentation.spec.ts:103:1 › narrow dark Workspace cards wrap long source text and retain readable actions (1.3s)
+  ✓  21 tests/browser/work-presentation.spec.ts:147:1 › desktop Workspace keeps semantic table columns and exact native icon geometry (1.5s)
+  ✓  22 tests/browser/work-presentation.spec.ts:188:1 › an unavailable Strategy list uses the compact band and error card while documents remain usable (2.9s)
+  ✓  23 tests/browser/work-presentation.spec.ts:256:1 › phone Strategy permission errors retain refusal meaning and healthy document cards (1.2s)
+  ✓  24 tests/browser/work-presentation.spec.ts:293:1 › a failed Strategy detail keeps healthy work and disables duplicate Retry while refreshing (1.5s)
+  ✓  25 tests/browser/work-presentation.spec.ts:352:1 › phone document cards and their links disappear on a failed Workspace read and recover together (1.7s)
+  ✓  26 tests/browser/work-presentation.spec.ts:388:1 › unavailable Workspace destinations and timestamps remain explicit without fabricated links (1.2s)
+
+  26 passed (54.4s)

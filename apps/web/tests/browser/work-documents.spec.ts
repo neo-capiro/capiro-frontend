@@ -1,6 +1,12 @@
 import { test, expect } from "@playwright/test";
 import { client, clientId, installFixtures, json } from "./fixtures";
 
+test.beforeEach(async ({ page }) => {
+  await page.route("**/api/capiro/settings.tenantMembers*", (route) =>
+    json(route, []),
+  );
+});
+
 const draftId = "91000000-0000-4000-8000-000000000001";
 const completeId = "91000000-0000-4000-8000-000000000002";
 const drafts = [

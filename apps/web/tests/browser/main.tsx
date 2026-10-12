@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import { DataProvider } from "@/shared/portfolio/api/provider";
+import { PortfolioHarnessProviders } from "./portfolio-harness-providers";
 import { Shell } from "@/shared/portfolio/shell/Shell";
 import { ClientFrame } from "@/features/portfolio/client-profile/ClientFrame";
 import { ClientOverview } from "@/features/portfolio/client-profile/ClientOverview";
@@ -118,7 +118,7 @@ function App() {
   );
 }
 createRoot(document.getElementById("root")!).render(
-  <DataProvider>
+  <PortfolioHarnessProviders>
     <App />
-  </DataProvider>,
+  </PortfolioHarnessProviders>,
 );

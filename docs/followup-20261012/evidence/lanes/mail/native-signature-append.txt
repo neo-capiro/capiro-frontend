@@ -1,0 +1,158 @@
+1124:    * verbatim append into a stored-XSS sink into outbound email. PUBLIC for the
+1125:    * send-intent service, which captures the rendered body ONCE at intent
+1126:    * creation so a later signature edit cannot mutate an in-flight send.
+1127:    */
+1128:   async resolveSenderSignatureHtml(
+1129:     ctx: TenantContext,
+1130:     appendSignature?: boolean,
+1131:   ): Promise<{
+1132:     appendSignature: boolean;
+1133:     signatureHtml: string;
+1134:     senderEmail: string | null;
+1135:     senderFirstName: string | null;
+1136:   }> {
+1137:     const sender = await this.prisma.withTenant(ctx.tenantId, (tx) =>
+1138:       tx.user.findUnique({
+1139:         where: { id: ctx.userId },
+1140:         select: {
+1141:           email: true,
+1142:           firstName: true,
+1143:           emailSignatureHtml: true,
+1144:           emailSignatureEnabled: true,
+1145:         },
+1146:       }),
+1147:     );
+1148:     const append = appendSignature ?? sender?.emailSignatureEnabled ?? false;
+1149:     return {
+1150:       appendSignature: append,
+1151:       signatureHtml:
+1152:         append && sender?.emailSignatureHtml
+1153:           ? sanitizeSignatureHtml(sender.emailSignatureHtml)
+1154:           : '',
+1155:       senderEmail: sender?.email ?? null,
+1156:       senderFirstName: sender?.firstName ?? null,
+1157:     };
+1158:   }
+1159: 
+1160:   /**
+1161:    * Phase 0 capability flags, exposed to the first-party web app (§3.i1).
+1162:    *
+1163:    * §h4 — the remediation-specific booleans are unconditionally `this.versionedOutreach`,
+1164:    * not a separate flag: attachment integrity verification, request
+1165:    * fingerprinting, and exact-version audit-ledger correlation are not
+1166:    * independently toggleable — they are load-bearing parts of the send-intent
+1167:    * path itself, so the only meaningful question is whether that path is
+1168:    * reachable at all.
+1169:    */
+1170:   engagementTrustBoundaryCapabilities(): {
+1171:     versionedOutreachEnabled: boolean;
+1172:     externalSendV2Required: boolean;
+1173:     attachmentIntegrityEnforced: boolean;
+1174:     requestFingerprintingEnabled: boolean;
+1175:     auditLedgerExactVersionSupported: boolean;
+
+9291:       }
+9292:       throw error;
+9293:     });
+9294:     const sender = mailboxSender(connection);
+9295:     const signature = await this.resolveSenderSignatureHtml(ctx, input.appendSignature);
+9296:     // Same render pipeline every campaign send uses: sanitize the editor HTML
+9297:     // against the outbound allowlist (renderOutreachBody), then append the
+9298:     // (already-sanitized) signature — the result always sends as HTML.
+9299:     const body = appendOutreachSignature(
+9300:       renderOutreachBody(trimTrailingEmptyHtml(input.bodyHtml)),
+9301:       signature.signatureHtml,
+9302:     );
+9303:     // Same resolver the campaign path uses (loadGraphAttachments): loads each
+9304:     // attachment's real bytes, and throws a clear, real reason (quarantined /
+9305:     // still scanning / removed) rather than silently sending without it or
+9306:     // pretending a not-yet-cleared file is safe to attach.
+9307:     const attachments = await this.loadGraphAttachments(
+9308:       ctx,
+9309:       input.attachmentIds,
+9310:       input.clientId ?? null,
+9311:     );
+9312:     // Derived from what actually got attached, not from the request's id list:
+9313:     // `loadGraphAttachments` throws rather than silently dropping a file, so
+9314:     // these agree — but the resolved list is the one that describes the email
+9315:     // that was really sent.
+9316:     const sentWithAttachments = (attachments?.length ?? 0) > 0;
+9317: 
+9318:     let sendResult: EngagementMailSendResult;
+9319:     try {
+9320:       sendResult = await this.mailSender.sendMail(ctx, connection, {
+9321:         subject: input.subject,
+9322:         body: body.content,
+9323:         bodyContentType: 'HTML',
+9324:         toRecipients: input.to.map((r) => ({ email: r.email, name: r.name ?? null })),
+9325:         ccRecipients: (input.cc ?? []).map((r) => ({ email: r.email, name: r.name ?? null })),
+9326:         bccRecipients: (input.bcc ?? []).map((r) => ({ email: r.email, name: r.name ?? null })),
+9327:         attachments,
+9328:       });
+9329:     } catch (error) {
+9330:       if (error instanceof AmbiguousMailSendError) {
+9331:         // At-most-once send: the outcome is genuinely undetermined (timeout /
+9332:         // socket failure after the request left this process). The message
+9333:         // may already be in the recipient's inbox — never silently retry.
+9334:         throw new ServiceUnavailableException({
+9335:           statusCode: HttpStatus.SERVICE_UNAVAILABLE,
+9336:           error: 'MAIL_SEND_OUTCOME_UNKNOWN',
+9337:           message: "Could not confirm this email sent. Check your Sent Items before trying again — don't resend blindly.",
+9338:           senderConnectionId: connection.id,
+9339:           senderEmail: sender.email,
+9340:           retryable: false,
+9341:         });
+9342:       }
+
+4512:           emailSignatureEnabled: true,
+4513:         },
+4514:       }),
+4515:     );
+4516:     const appendSignature = input.appendSignature ?? sender?.emailSignatureEnabled ?? false;
+4517:     // Re-sanitize on read (idempotent, once per send). The stored value is
+4518:     // already sanitized by the PUT /me/email-signature path, but re-running here
+4519:     // means even a future writer that bypasses that path can never turn this
+4520:     // verbatim append into a stored-XSS sink into outbound email.
+4521:     const signatureHtml =
+4522:       appendSignature && sender?.emailSignatureHtml
+4523:         ? sanitizeSignatureHtml(sender.emailSignatureHtml)
+4524:         : '';
+4525: 
+4526:     // Signature append uses the shared renderer (W6.1); bind the resolved
+4527:     // signature so call sites stay `withSignature(rendered)`.
+4528:     const withSignature = (rendered: RenderedOutreachBody): RenderedOutreachBody =>
+4529:       appendOutreachSignature(rendered, signatureHtml);
+4530: 
+4531:     // Resolve attachments once (same set for every recipient). Files above the
+4532:     // Graph simple-send inline limit (~3MB) are skipped and reported back; larger
+4533:     // files would need a Graph upload session on a draft message.
+4534:     const GRAPH_INLINE_ATTACHMENT_MAX = 3 * 1024 * 1024;
+4535:     const skippedAttachments: string[] = [];
+4536:     const graphAttachments: Array<{ name: string; contentType: string; contentBytes: string }> = [];
+4537:     if (input.attachmentIds?.length) {
+4538:       const rows = await this.prisma.withTenant(ctx.tenantId, (tx) =>
+4539:         tx.engagementAttachment.findMany({
+4540:           where: { tenantId: ctx.tenantId, id: { in: input.attachmentIds! } },
+4541:         }),
+4542:       );
+4543:       // Remediation plan §3.d6: this legacy path predates the scan/lifecycle
+4544:       // readiness gate and never checked it — a quarantined or threat-flagged
+4545:       // file would sail straight through to a real recipient. Apply the SAME
+4546:       // centralized policy the send-intent path enforces, and refuse the whole
+4547:       // send rather than silently mailing without it (plan hard boundary: never
+4548:       // silently omit an attachment).
+4549:       if (rows.some((row) => row.prospectId))
+4550:         throw new BadRequestException({ code: 'PROSPECT_RESOURCE_TRANSFER_UNSUPPORTED' });
+4551:       const unusable: string[] = [];
+4552:       for (const row of rows) {
+4553:         const verdict = this.attachmentContent.readiness(row, this.scanner.scanRequired);
+4554:         if (!verdict.usable) {
+4555:           unusable.push(`${row.fileName} (${verdict.disclosure ?? 'not usable'})`);
+4556:         }
+4557:       }
+4558:       if (unusable.length) {
+4559:         throw new BadRequestException(
+4560:           `These files cannot be sent: ${unusable.join(', ')}. ` +
+4561:             `Remove them or wait for verification to complete.`,
+4562:         );
+4563:       }

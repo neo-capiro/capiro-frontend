@@ -55,23 +55,35 @@ export function hearingItems(hearings: CalendarHearing[]): AgendaItem[] {
 }
 export function plannerItems(tasks: PlannerTask[]): AgendaItem[] {
   return tasks.flatMap((task) => {
-    const date = task.dueOn ?? task.startOn;
-    if (!date || task.archived) return [];
-    const time = task.dueOn ? task.dueTime : task.startTime;
-    return [
-      {
-        key: `task:${task.id}`,
-        source: "Planner" as const,
-        title: task.name,
-        date,
-        time: time ?? "Date only",
-        sortTime: time ?? undefined,
-        context: `${task.dueOn ? "Due date" : "Start date"}${time && task.timeZone ? ` · ${task.timeZone}` : ""}`,
-        href: `/modules/planner?task=${encodeURIComponent(task.id)}`,
-      },
-    ];
+    if (task.archived) return [];
+    const sameOccurrence =
+      task.startOn === task.dueOn &&
+      (task.startTime ?? null) === (task.dueTime ?? null);
+    return (["start", "due"] as const).flatMap((kind): AgendaItem[] => {
+      const date = kind === "start" ? task.startOn : task.dueOn;
+      if (!date || (kind === "start" && sameOccurrence)) return [];
+      const time = kind === "start" ? task.startTime : task.dueTime;
+      const label = sameOccurrence
+        ? "Start and due date"
+        : kind === "start"
+          ? "Start date"
+          : "Due date";
+      return [
+        {
+          key: `task:${task.id}:${kind}`,
+          source: "Planner",
+          title: task.name,
+          date,
+          time: time ?? "Date only",
+          sortTime: time ?? undefined,
+          context: `${label}${time && task.timeZone ? ` · ${task.timeZone}` : ""}`,
+          href: `/modules/planner?task=${encodeURIComponent(task.id)}`,
+        },
+      ];
+    });
   });
 }
+
 export function commentDeadlineItems(
   records: z.infer<typeof commentDeadline>[],
 ): AgendaItem[] {

@@ -1,0 +1,384 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-next-modules/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-next-modules-evidence/red/playwright.config.mjs",
+      "next-modules-baseline.spec.ts"
+    ],
+    "configFile": "/tmp/capiro-next-modules-evidence/red/playwright.config.mjs",
+    "rootDir": "/workspace/capiro-next-modules/apps/web/test/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-next-modules-evidence/red/output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-next-modules/apps/web/test/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "next-modules-*.spec.ts"
+        ],
+        "timeout": 25000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-next-modules-evidence/red/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "next-modules-baseline.spec.ts",
+      "file": "next-modules-baseline.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "MS02 verified Calendar entry dispatches only the selected client scope",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5071,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Calendar client scope')\nExpected: \u001b[32m\"30000000-0000-4000-8000-000000000001\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  4000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 4000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Calendar client scope')\u001b[22m\n\u001b[2m    - locator resolved to <select disabled aria-label=\"Calendar client scope\">…</select>\u001b[22m\n\u001b[2m    11 × unexpected value \"\"\u001b[22m\n\u001b[2m       - locator resolved to <select aria-label=\"Calendar client scope\">…</select>\u001b[22m\n\u001b[2m    - unexpected value \"\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Calendar client scope')\nExpected: \u001b[32m\"30000000-0000-4000-8000-000000000001\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  4000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 4000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Calendar client scope')\u001b[22m\n\u001b[2m    - locator resolved to <select disabled aria-label=\"Calendar client scope\">…</select>\u001b[22m\n\u001b[2m    11 × unexpected value \"\"\u001b[22m\n\u001b[2m       - locator resolved to <select aria-label=\"Calendar client scope\">…</select>\u001b[22m\n\u001b[2m    - unexpected value \"\"\u001b[22m\n\n    at /workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts:8:57",
+                    "location": {
+                      "file": "/workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts",
+                      "column": 57,
+                      "line": 8
+                    },
+                    "snippet": "   6 |  await setup(page,{\"engagement.meetings\":input=>{reads.push(input);return [];}});\n   7 |  await page.goto(`/modules/calendar?clientId=${clientId}`);\n>  8 |  await expect(page.getByLabel(\"Calendar client scope\")).toHaveValue(clientId);\n     |                                                         ^\n   9 |  await expect.poll(()=>reads.length).toBeGreaterThan(0);\n  10 |  expect(reads.every(input=>(input as {query:{clientId?:string}}).query.clientId===clientId)).toBe(true);\n  11 |  await page.getByRole(\"button\",{name:\"Agenda\",exact:true}).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts",
+                        "column": 57,
+                        "line": 8
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Calendar client scope')\nExpected: \u001b[32m\"30000000-0000-4000-8000-000000000001\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  4000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" with timeout 4000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Calendar client scope')\u001b[22m\n\u001b[2m    - locator resolved to <select disabled aria-label=\"Calendar client scope\">…</select>\u001b[22m\n\u001b[2m    11 × unexpected value \"\"\u001b[22m\n\u001b[2m       - locator resolved to <select aria-label=\"Calendar client scope\">…</select>\u001b[22m\n\u001b[2m    - unexpected value \"\"\u001b[22m\n\n\n   6 |  await setup(page,{\"engagement.meetings\":input=>{reads.push(input);return [];}});\n   7 |  await page.goto(`/modules/calendar?clientId=${clientId}`);\n>  8 |  await expect(page.getByLabel(\"Calendar client scope\")).toHaveValue(clientId);\n     |                                                         ^\n   9 |  await expect.poll(()=>reads.length).toBeGreaterThan(0);\n  10 |  expect(reads.every(input=>(input as {query:{clientId?:string}}).query.clientId===clientId)).toBe(true);\n  11 |  await page.getByRole(\"button\",{name:\"Agenda\",exact:true}).click();\n    at /workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts:8:57"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:50:06.969Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS02-4ffa3-y-the-selected-client-scope/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS02-4ffa3-y-the-selected-client-scope/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS02-4ffa3-y-the-selected-client-scope/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts",
+                    "column": 57,
+                    "line": 8
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3bd313013452371e6f67-576a7ad9051c1f178438",
+          "file": "next-modules-baseline.spec.ts",
+          "line": 4,
+          "column": 1
+        },
+        {
+          "title": "MS03 agenda preserves both Planner start and due occurrences",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5314,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ hasText: 'Test appropriation review' })\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  4000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 4000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ hasText: 'Test appropriation review' })\u001b[22m\n\u001b[2m    12 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ hasText: 'Test appropriation review' })\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  4000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 4000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ hasText: 'Test appropriation review' })\u001b[22m\n\u001b[2m    12 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at /workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts:20:21",
+                    "location": {
+                      "file": "/workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts",
+                      "column": 21,
+                      "line": 20
+                    },
+                    "snippet": "  18 |  await page.getByRole(\"button\",{name:\"Agenda\",exact:true}).click();\n  19 |  const rows=page.getByRole(\"row\").filter({hasText:nextTask.name});\n> 20 |  await expect(rows).toHaveCount(2);\n     |                     ^\n  21 |  await expect(rows.filter({hasText:\"Start date\"})).toContainText(\"09:00\");\n  22 |  await expect(rows.filter({hasText:\"Due date\"})).toContainText(\"17:00\");\n  23 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts",
+                        "column": 21,
+                        "line": 20
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('row').filter({ hasText: 'Test appropriation review' })\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  4000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 4000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('row').filter({ hasText: 'Test appropriation review' })\u001b[22m\n\u001b[2m    12 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  18 |  await page.getByRole(\"button\",{name:\"Agenda\",exact:true}).click();\n  19 |  const rows=page.getByRole(\"row\").filter({hasText:nextTask.name});\n> 20 |  await expect(rows).toHaveCount(2);\n     |                     ^\n  21 |  await expect(rows.filter({hasText:\"Start date\"})).toContainText(\"09:00\");\n  22 |  await expect(rows.filter({hasText:\"Due date\"})).toContainText(\"17:00\");\n  23 | });\n    at /workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts:20:21"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:50:12.763Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS03-81d4a-r-start-and-due-occurrences/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS03-81d4a-r-start-and-due-occurrences/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS03-81d4a-r-start-and-due-occurrences/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts",
+                    "column": 21,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3bd313013452371e6f67-bf615a99fa9f819d0c49",
+          "file": "next-modules-baseline.spec.ts",
+          "line": 15,
+          "column": 1
+        },
+        {
+          "title": "MS04 meeting failure leaves successful agenda feeds visible",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5241,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('table')\nExpected substring: \u001b[32m\"Test appropriation review\"\u001b[39m\nTimeout: 4000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 4000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('table')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('table')\nExpected substring: \u001b[32m\"Test appropriation review\"\u001b[39m\nTimeout: 4000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 4000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('table')\u001b[22m\n\n    at /workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts:31:40",
+                    "location": {
+                      "file": "/workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts",
+                      "column": 40,
+                      "line": 31
+                    },
+                    "snippet": "  29 |  await page.getByRole(\"button\",{name:\"Agenda\",exact:true}).click();\n  30 |  await expect(page.getByRole(\"alert\")).toContainText(\"Meetings currently denied\");\n> 31 |  await expect(page.getByRole(\"table\")).toContainText(nextTask.name);\n     |                                        ^\n  32 |  await expect(page.getByRole(\"heading\",{name:\"No events match this view\"})).toHaveCount(0);\n  33 | });\n  34 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts",
+                        "column": 40,
+                        "line": 31
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('table')\nExpected substring: \u001b[32m\"Test appropriation review\"\u001b[39m\nTimeout: 4000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 4000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('table')\u001b[22m\n\n\n  29 |  await page.getByRole(\"button\",{name:\"Agenda\",exact:true}).click();\n  30 |  await expect(page.getByRole(\"alert\")).toContainText(\"Meetings currently denied\");\n> 31 |  await expect(page.getByRole(\"table\")).toContainText(nextTask.name);\n     |                                        ^\n  32 |  await expect(page.getByRole(\"heading\",{name:\"No events match this view\"})).toHaveCount(0);\n  33 | });\n  34 |\n    at /workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts:31:40"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:50:18.793Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS04-fadde-essful-agenda-feeds-visible/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS04-fadde-essful-agenda-feeds-visible/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS04-fadde-essful-agenda-feeds-visible/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts",
+                    "column": 40,
+                    "line": 31
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3bd313013452371e6f67-e230c6ea5aea5572517f",
+          "file": "next-modules-baseline.spec.ts",
+          "line": 25,
+          "column": 1
+        },
+        {
+          "title": "MS05 linked task resolves beyond the current list and opens its detail",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 25000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5092,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Test appropriation review', exact: true })\nExpected: visible\nTimeout: 4000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 4000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Test appropriation review', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Test appropriation review', exact: true })\nExpected: visible\nTimeout: 4000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 4000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Test appropriation review', exact: true })\u001b[22m\n\n    at /workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts:39:73",
+                    "location": {
+                      "file": "/workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts",
+                      "column": 73,
+                      "line": 39
+                    },
+                    "snippet": "  37 |  await setup(page,{\"planner.tasks\":{items:[],nextCursor:null},\"planner.task\":input=>{reads.push(input);return nextTask;}});\n  38 |  await page.goto(`/modules/planner?task=${taskId}`);\n> 39 |  await expect(page.getByRole(\"dialog\",{name:nextTask.name,exact:true})).toBeVisible();\n     |                                                                         ^\n  40 |  expect(reads).toEqual([{params:{id:taskId}}]);\n  41 |  await expect(page.getByRole(\"button\",{name:\"Edit task\",exact:true})).toBeEnabled();\n  42 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts",
+                        "column": 73,
+                        "line": 39
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Test appropriation review', exact: true })\nExpected: visible\nTimeout: 4000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 4000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Test appropriation review', exact: true })\u001b[22m\n\n\n  37 |  await setup(page,{\"planner.tasks\":{items:[],nextCursor:null},\"planner.task\":input=>{reads.push(input);return nextTask;}});\n  38 |  await page.goto(`/modules/planner?task=${taskId}`);\n> 39 |  await expect(page.getByRole(\"dialog\",{name:nextTask.name,exact:true})).toBeVisible();\n     |                                                                         ^\n  40 |  expect(reads).toEqual([{params:{id:taskId}}]);\n  41 |  await expect(page.getByRole(\"button\",{name:\"Edit task\",exact:true})).toBeEnabled();\n  42 | });\n    at /workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts:39:73"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:50:24.785Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS05-8b311-t-list-and-opens-its-detail/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS05-8b311-t-list-and-opens-its-detail/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS05-8b311-t-list-and-opens-its-detail/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts",
+                    "column": 73,
+                    "line": 39
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3bd313013452371e6f67-ed93cfde4a13b5d81069",
+          "file": "next-modules-baseline.spec.ts",
+          "line": 35,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T17:50:06.480Z",
+    "duration": 23719.91,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

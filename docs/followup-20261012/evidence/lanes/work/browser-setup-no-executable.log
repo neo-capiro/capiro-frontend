@@ -1,0 +1,84 @@
+
+Running 3 tests using 1 worker
+
+(node:635965) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/browser/work-owners.spec.ts:65:1 › upcoming nodes display their individual native status (2ms)
+(node:635977) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 tests/browser/work-owners.spec.ts:86:3 › supplied native owner labels appear in document and all node projections at 1088px (2ms)
+(node:635989) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 tests/browser/work-owners.spec.ts:86:3 › supplied native owner labels appear in document and all node projections at 390px (1ms)
+
+
+  1) tests/browser/work-owners.spec.ts:65:1 › upcoming nodes display their individual native status 
+
+    Error: browserType.launch: Executable doesn't exist at /home/agent/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: ../../../../tmp/capiro-next-work-evidence/browser-before/work-owners-upcoming-nodes-b42b5-ir-individual-native-status/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-next-work-evidence/browser-before/work-owners-upcoming-nodes-b42b5-ir-individual-native-status/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-next-work-evidence/browser-before/work-owners-upcoming-nodes-b42b5-ir-individual-native-status/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/browser/work-owners.spec.ts:86:3 › supplied native owner labels appear in document and all node projections at 1088px 
+
+    Error: browserType.launch: Executable doesn't exist at /home/agent/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: ../../../../tmp/capiro-next-work-evidence/browser-before/work-owners-supplied-nativ-dc422--node-projections-at-1088px/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-next-work-evidence/browser-before/work-owners-supplied-nativ-dc422--node-projections-at-1088px/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-next-work-evidence/browser-before/work-owners-supplied-nativ-dc422--node-projections-at-1088px/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/browser/work-owners.spec.ts:86:3 › supplied native owner labels appear in document and all node projections at 390px 
+
+    Error: browserType.launch: Executable doesn't exist at /home/agent/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: ../../../../tmp/capiro-next-work-evidence/browser-before/work-owners-supplied-nativ-43600-l-node-projections-at-390px/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-next-work-evidence/browser-before/work-owners-supplied-nativ-43600-l-node-projections-at-390px/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-next-work-evidence/browser-before/work-owners-supplied-nativ-43600-l-node-projections-at-390px/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests/browser/work-owners.spec.ts:65:1 › upcoming nodes display their individual native status ─
+    tests/browser/work-owners.spec.ts:86:3 › supplied native owner labels appear in document and all node projections at 1088px 
+    tests/browser/work-owners.spec.ts:86:3 › supplied native owner labels appear in document and all node projections at 390px 

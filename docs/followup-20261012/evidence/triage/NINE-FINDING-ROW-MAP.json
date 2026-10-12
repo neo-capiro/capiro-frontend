@@ -1,0 +1,495 @@
+{
+  "mode": "READ_ONLY_TRIAGE_NO_STATUS_MUTATION",
+  "baseline": "fd1176790a6fb31b7ae68587f965a22d4145d8a2",
+  "originalAssessment": "e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac",
+  "frozenShipping": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "findingCount": 9,
+  "distinctInScopeRows": 11,
+  "findings": [
+    {
+      "findingId": "MS02",
+      "priority": "P2",
+      "originalAuthorPriority": "P2",
+      "title": "Modules Calendar loses a verified client selection on entry",
+      "rows": [
+        {
+          "auditId": "MCAL-002",
+          "criterion": "Populate the Master / client scope selector",
+          "scope": "IN_SCOPE",
+          "relationship": "related_modules_variant_only",
+          "originalClassificationUnchanged": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "NOT_ACCEPTED_AGAINST_ALL_TARGETS",
+          "originalDetailedEvidence": "evidence/modules_settings/row-assessment.json",
+          "originalRowJsonPointer": "/rows/332"
+        },
+        {
+          "auditId": "MCAL-003",
+          "criterion": "Select Master view, Anduril or NACD while retaining Month / Week / Agenda",
+          "scope": "IN_SCOPE",
+          "relationship": "related_modules_variant_only",
+          "originalClassificationUnchanged": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "NOT_ACCEPTED_AGAINST_ALL_TARGETS",
+          "originalDetailedEvidence": "evidence/modules_settings/row-assessment.json",
+          "originalRowJsonPointer": "/rows/333"
+        }
+      ],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "795:148369"
+      ],
+      "originalSourceEvidence": [
+        {
+          "path": "apps/web/src/features/modules/calendar/useCalendar.ts",
+          "line": 18
+        }
+      ],
+      "originalEvidence": [
+        "calendar-scope-repro.json",
+        "calendar-scope-repro.png",
+        "browser-results.json"
+      ],
+      "originalAuthorEvidence": "evidence/modules_settings/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/29",
+      "requirement": "Verified client survives Modules Calendar entry and explicit scope/view transitions.",
+      "contractRefs": [
+        "identity_clients",
+        "meetings"
+      ],
+      "boundedFacetLimit": "Modules /modules/calendar entry only; canonical /calendar selector/source checks retained; no broad Calendar repair.",
+      "stage": "authorized_source_group_pending_independent_implementation_review"
+    },
+    {
+      "findingId": "MS03",
+      "priority": "P2",
+      "originalAuthorPriority": "P2",
+      "title": "Modules Agenda drops the start of tasks with a separate due date",
+      "rows": [
+        {
+          "auditId": "MCAL-009",
+          "criterion": "Show Planner tasks and their scheduled / due dates in Master Agenda",
+          "scope": "IN_SCOPE",
+          "relationship": "related_modules_variant_only",
+          "originalClassificationUnchanged": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "NOT_ACCEPTED_AGAINST_ALL_TARGETS",
+          "originalDetailedEvidence": "evidence/modules_settings/row-assessment.json",
+          "originalRowJsonPointer": "/rows/339"
+        }
+      ],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "460:90798"
+      ],
+      "originalSourceEvidence": [
+        {
+          "path": "apps/web/src/features/modules/calendar/agenda.ts",
+          "line": 56
+        }
+      ],
+      "originalEvidence": [
+        "calendar-task-occurrence-repro.png",
+        "browser-results.json",
+        "canonical-results.json"
+      ],
+      "originalAuthorEvidence": "evidence/modules_settings/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/30",
+      "requirement": "Master Agenda retains distinct Planner scheduled-start and due occurrences, without duplicate identical occurrence or date/zone invention.",
+      "contractRefs": [
+        "planner",
+        "master_feeds"
+      ],
+      "boundedFacetLimit": "Modules projection only; same MCAL-009 also has separate MS05. Preserve canonical /calendar prior pass and existing pagination coverage.",
+      "stage": "authorized_source_group_pending_independent_implementation_review"
+    },
+    {
+      "findingId": "MS04",
+      "priority": "P2",
+      "originalAuthorPriority": "P2",
+      "title": "Modules meetings failure hides independently loaded agenda sources",
+      "rows": [
+        {
+          "auditId": "MCAL-013",
+          "criterion": "Compose the mixed Master Agenda without widening source permissions",
+          "scope": "IN_SCOPE",
+          "relationship": "related_modules_variant_only",
+          "originalClassificationUnchanged": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "NOT_ACCEPTED_AGAINST_ALL_TARGETS",
+          "originalDetailedEvidence": "evidence/modules_settings/row-assessment.json",
+          "originalRowJsonPointer": "/rows/342"
+        }
+      ],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "460:90798"
+      ],
+      "originalSourceEvidence": [
+        {
+          "path": "apps/web/src/features/modules/calendar/CalendarCard.tsx",
+          "line": 48
+        },
+        {
+          "path": "apps/web/src/shared/module-ui/layout.tsx",
+          "line": 77
+        }
+      ],
+      "originalEvidence": [
+        "calendar-independent-feed-repro.png",
+        "browser-results.json",
+        "canonical-results.json"
+      ],
+      "originalAuthorEvidence": "evidence/modules_settings/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/31",
+      "requirement": "A failed meetings read leaves independently successful Master Agenda sources visible with source-specific error/coverage state.",
+      "contractRefs": [
+        "meetings",
+        "planner",
+        "master_feeds"
+      ],
+      "boundedFacetLimit": "Do not turn one denied source into a client/tenant-wide authorization fallback or hide independent successful sources.",
+      "stage": "authorized_source_group_pending_independent_implementation_review"
+    },
+    {
+      "findingId": "MS05",
+      "priority": "P2",
+      "originalAuthorPriority": "P2",
+      "title": "Modules agenda task links never open the referenced task",
+      "rows": [
+        {
+          "auditId": "MCAL-009",
+          "criterion": "Show Planner tasks and their scheduled / due dates in Master Agenda",
+          "scope": "IN_SCOPE",
+          "relationship": "related_modules_variant_only",
+          "originalClassificationUnchanged": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "NOT_ACCEPTED_AGAINST_ALL_TARGETS",
+          "originalDetailedEvidence": "evidence/modules_settings/row-assessment.json",
+          "originalRowJsonPointer": "/rows/339"
+        }
+      ],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "460:90798",
+        "411:100367"
+      ],
+      "originalSourceEvidence": [
+        {
+          "path": "apps/web/src/features/modules/calendar/agenda.ts",
+          "line": 70
+        },
+        {
+          "path": "apps/web/src/features/modules/planner/PlannerScreen.tsx",
+          "line": 44
+        },
+        {
+          "path": "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
+          "line": 59
+        }
+      ],
+      "originalEvidence": [
+        "calendar-task-target-repro.png",
+        "browser-results.json"
+      ],
+      "originalAuthorEvidence": "evidence/modules_settings/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/32",
+      "requirement": "Modules Calendar task link opens that exact currently authorized canonical Planner task.",
+      "contractRefs": [
+        "planner"
+      ],
+      "boundedFacetLimit": "Navigation/read facet only; no new task writer, no old Engagement task route; missing/denied/foreign task must not open cached or alternate task.",
+      "stage": "authorized_source_group_pending_independent_implementation_review"
+    },
+    {
+      "findingId": "CR-07",
+      "priority": "P2",
+      "originalAuthorPriority": "P2",
+      "title": "Saved email signature is fetched but never displayed",
+      "rows": [
+        {
+          "auditId": "ENG-email_send",
+          "criterion": "Send client/contact email or reply (To/Cc/Bcc/signature/attachments)",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "PARTIAL_FRONTEND",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "AS_RECORDED_IN_ORIGINAL_ROW",
+          "originalDetailedEvidence": "evidence/calendar_relationships/row-assessment.json",
+          "originalRowJsonPointer": "/rows/177"
+        },
+        {
+          "auditId": "ENG-email_signature",
+          "criterion": "Display saved user email signature",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "FRONTEND_DEFECT",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "AS_RECORDED_IN_ORIGINAL_ROW",
+          "originalDetailedEvidence": "evidence/calendar_relationships/row-assessment.json",
+          "originalRowJsonPointer": "/rows/179"
+        }
+      ],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "433:77331",
+        "435:82656",
+        "435:82802"
+      ],
+      "originalSourceEvidence": [
+        "apps/web/src/features/portfolio/relationships/email.ts:106",
+        "apps/web/src/features/portfolio/relationships/MailCompose.tsx:200"
+      ],
+      "originalEvidence": [
+        "review.spec.ts",
+        "browser-results-initial.json",
+        "mail-compose-signature-hidden.png",
+        "figma-435-82802.json"
+      ],
+      "originalAuthorEvidence": "evidence/calendar_relationships/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/16",
+      "requirement": "Show saved current-user signature safely in composer/review with applied/disabled/absent state reflecting existing contract.",
+      "contractRefs": [
+        "signature"
+      ],
+      "boundedFacetLimit": "ENG-email_send signature-preview facet only; rich-text CR-10, sender/reply/provider delivery and attachments remain separate.",
+      "stage": "authorized_source_group_pending_independent_implementation_review"
+    },
+    {
+      "findingId": "CR-11",
+      "priority": "P3",
+      "originalAuthorPriority": "P3",
+      "title": "Meri rewrite has no Undo control or prior-body snapshot",
+      "rows": [
+        {
+          "auditId": "ENG-email_rewrite",
+          "criterion": "Rewrite email with Meri",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "PARTIAL_FRONTEND",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "AS_RECORDED_IN_ORIGINAL_ROW",
+          "originalDetailedEvidence": "evidence/calendar_relationships/row-assessment.json",
+          "originalRowJsonPointer": "/rows/178"
+        }
+      ],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "433:77331",
+        "433:77577",
+        "435:82802"
+      ],
+      "originalSourceEvidence": [
+        "apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts:127",
+        "apps/web/src/features/portfolio/relationships/MailCompose.tsx:181"
+      ],
+      "originalEvidence": [
+        "figma-435-82802.json"
+      ],
+      "originalAuthorEvidence": "evidence/calendar_relationships/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/20",
+      "requirement": "After verified rewrite, explicit Undo restores the captured prior body locally; no previous actor/client/attempt result can rewrite current draft.",
+      "contractRefs": [
+        "rewrite"
+      ],
+      "boundedFacetLimit": "Local undo facet only; no paid call or email send required for local source proof; preserve pending/edit authority protections.",
+      "stage": "authorized_source_group_pending_independent_implementation_review"
+    },
+    {
+      "findingId": "OWI-F02",
+      "priority": "P2",
+      "originalAuthorPriority": "P2",
+      "title": "Work discards supplied owner identities in its document and node projections",
+      "rows": [
+        {
+          "auditId": "WORK-03",
+          "criterion": "Upcoming work / timeline / node owner, status and date",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "CONFIRMED_FRONTEND_DEFECT",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+          "originalDetailedEvidence": "evidence/objectives_work_intel/row-assessment.json",
+          "originalRowJsonPointer": "/rows/232"
+        },
+        {
+          "auditId": "WORK-08",
+          "criterion": "Workspace documents: display client drafts and completed work",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "CONFIRMED_FRONTEND_DEFECT_AND_NATIVE_DEPENDENCY",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "PARTIAL_ONLY; see reason and finding references. A fresh capture alone does not qualify all states or breakpoints.",
+          "originalDetailedEvidence": "evidence/objectives_work_intel/row-assessment.json",
+          "originalRowJsonPointer": "/rows/236"
+        }
+      ],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "411:52106",
+        "411:86349"
+      ],
+      "originalSourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/work/contracts.ts",
+          "line": 18
+        },
+        {
+          "path": "apps/web/src/features/portfolio/work/contracts.ts",
+          "line": 45
+        },
+        {
+          "path": "apps/web/src/features/portfolio/work/WorkPage.tsx",
+          "line": 136
+        },
+        {
+          "path": "apps/web/src/features/portfolio/work/WorkPage.tsx",
+          "line": 161
+        },
+        {
+          "path": "apps/web/src/features/portfolio/work/WorkspaceDocumentTable.tsx",
+          "line": 49
+        }
+      ],
+      "originalEvidence": [
+        "review.spec.ts:27",
+        "results.json",
+        "artifacts/review-work-owner-and-upcoming-status-source-facts/work-owners.png",
+        "figma/411-86349.json",
+        "figma/411-86349.png"
+      ],
+      "originalAuthorEvidence": "evidence/objectives_work_intel/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/22",
+      "requirement": "Display native node/document owner from exact authorized identity mapping, or truthful unresolved/unassigned state; preserve per-node status on upcoming rows as recorded in WORK-03.",
+      "contractRefs": [
+        "work",
+        "owner_members"
+      ],
+      "boundedFacetLimit": "Owner/status presentation only; no strategy/Workspace authority expansion, rich creation promise, or legacy-name guessing. Node owner strings without exact authorized clerk mapping remain unresolved.",
+      "stage": "authorized_source_group_pending_independent_implementation_review"
+    },
+    {
+      "findingId": "PROS-F03",
+      "priority": "P2",
+      "originalAuthorPriority": "P2",
+      "title": "Prospect Files cannot search the loaded file list",
+      "rows": [
+        {
+          "auditId": "PROS-019",
+          "criterion": "Prospect Files: list, search and open uploaded/research documents",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "CONFIRMED_PRODUCT_GAP_WITH_IMPLEMENTED_FACETS",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "AS_RECORDED_IN_ORIGINAL_ROW",
+          "originalDetailedEvidence": "evidence/prospects/row-assessment.json",
+          "originalRowJsonPointer": "/rows/309"
+        }
+      ],
+      "originalDisposition": "Retain author severity and bounded impact; consult evidence for exact native and visual limits.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "411:65071"
+      ],
+      "originalSourceEvidence": [
+        {
+          "path": "apps/web/src/features/portfolio/files/ProspectFiles.tsx",
+          "line": 164
+        },
+        {
+          "path": "apps/web/src/features/portfolio/files/ProspectFiles.tsx",
+          "line": 166
+        }
+      ],
+      "originalEvidence": [
+        "review.spec.ts:27",
+        "browser-results-locator-correction.json",
+        "browser-artifacts-locator-correction/review-Figma-files-search--9fd2d--file-records-are-available/prospect-files-current.png",
+        "figma-411-65071-context.txt",
+        "figma-411-65071.png"
+      ],
+      "originalAuthorEvidence": "evidence/prospects/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/27",
+      "requirement": "Search the loaded authorized Prospect Files collection and recover full collection when cleared.",
+      "contractRefs": [
+        "prospect_files"
+      ],
+      "boundedFacetLimit": "Only PROS-019 search facet; preserve implemented upload/readiness/open; no synthetic full-storage completeness claim.",
+      "stage": "authorized_source_group_pending_independent_implementation_review"
+    },
+    {
+      "findingId": "CP-03",
+      "priority": "P3",
+      "originalAuthorPriority": "P2",
+      "title": "Ambiguous file deletion response immediately re-enables the destructive confirmation",
+      "rows": [
+        {
+          "auditId": "CORE-060",
+          "criterion": "Delete file",
+          "scope": "IN_SCOPE",
+          "relationship": "direct_bounded_facet",
+          "originalClassificationUnchanged": "CONFIRMED_SOURCE_AND_BROWSER_DEFECT",
+          "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+          "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+          "originalVisualStatusUnchanged": "REFERENCE_AND_SOURCE_REVIEWED_FULL_RENDERED_STATES_UNASSESSED",
+          "originalDetailedEvidence": "evidence/core_profile/row-assessment.json",
+          "originalRowJsonPointer": "/rows/86"
+        }
+      ],
+      "originalDisposition": "Secondary backend source review shows same-ID deletion is recoverable. Repeat DELETE dispatch is proved; duplicate destructive impact is not. Keep as uncertain-outcome/readback UX concern, not a standalone release blocker.",
+      "baselineDisposition": "open_prior_acceptance_hold_unchanged",
+      "newImplementationReview": "NOT_ASSESSED_BY_THIS_TRIAGE",
+      "frames": [
+        "411:53857"
+      ],
+      "originalSourceEvidence": [
+        {
+          "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+          "line": 259
+        },
+        {
+          "file": "apps/web/src/features/portfolio/files/mutations.ts",
+          "line": 29
+        }
+      ],
+      "originalEvidence": [
+        "browser-results.json",
+        "defect-repeat-delete.png"
+      ],
+      "originalAuthorEvidence": "evidence/core_profile/findings.json",
+      "originalFindingPointer": "FINDINGS.json#/findings/6",
+      "requirement": "On dispatched DELETE with uncertain/malformed/failed outcome, retain explicit uncertainty and selected context; reconcile by fresh scoped read before any deliberate same-ID retry.",
+      "contractRefs": [
+        "client_delete"
+      ],
+      "boundedFacetLimit": "P3 interrupted-delete recovery; repeat dispatch evidence, not proved duplicate destruction. Never infer 404/omitted row alone is successful erasure. No automatic retry or invented durable command/CAS.",
+      "stage": "authorized_source_group_pending_independent_implementation_review"
+    }
+  ]
+}

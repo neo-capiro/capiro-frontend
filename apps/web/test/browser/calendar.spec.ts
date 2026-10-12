@@ -19,6 +19,17 @@ const meetings = [
 ];
 test.beforeEach(async ({ page }) => {
   await onlyLocalRequests(page);
+  // Scope changes now use the same current-client verification as URL entry.
+  await page.route(`**/api/backend/core/clients/${clientId}`, (route) =>
+    route.fulfill({
+      json: {
+        id: clientId,
+        name: "Test Aerospace",
+        status: "ACTIVE",
+        profileStatus: "ACTIVE",
+      },
+    }),
+  );
   await page.clock.setFixedTime(new Date("2026-10-08T16:00:00Z"));
 });
 test("month and week retain client scope and query end-exclusive Eastern ranges", async ({

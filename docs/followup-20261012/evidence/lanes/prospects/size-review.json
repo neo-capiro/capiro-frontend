@@ -1,0 +1,19 @@
+{
+  "file": "apps/web/src/features/portfolio/files/ProspectFiles.tsx",
+  "kind": "function",
+  "symbol": "ProspectFileSession",
+  "line": 73,
+  "nonblank": 240,
+  "fingerprint": "6605779ecb5415ef0988fb6221d0877ae23ee29e700ae4d85ef066818921624c",
+  "provenance": "new",
+  "reviewStatus": "changed-since-review",
+  "blocking": true,
+  "reason": "ProspectFileSession remains the single current actor/prospect file interaction surface. The added filename predicate and search/clear/no-match presentation consume only its already authorized current query result and share its keyed session lifetime. Existing canonical list validation, delete preflight, upload recovery and signed-link guards remain in their current owners unchanged. There is no new transport, cache, authorization logic or shared API. Splitting the small predicate or relocating local search state would add indirection without separating a responsibility.",
+  "reviewedBy": "Codex PROS-F03 implementation responsibility review; independent/root exact registry acceptance pending",
+  "reviewedOn": "2026-10-12",
+  "fileNonblank": 319,
+  "baselineFunctionNonblank": 211,
+  "baselineFileNonblank": 290,
+  "boundaryErrors": 0,
+  "registryOwnership": "Root integration only; no registry edited by this lane."
+}

@@ -1,0 +1,39 @@
+diff --git a/apps/web/test/browser/calendar.spec.ts b/apps/web/test/browser/calendar.spec.ts
+index 008e694..aabbaf0 100644
+--- a/apps/web/test/browser/calendar.spec.ts
++++ b/apps/web/test/browser/calendar.spec.ts
+@@ -19,6 +19,17 @@ const meetings = [
+ ];
+ test.beforeEach(async ({ page }) => {
+   await onlyLocalRequests(page);
++  // Scope changes now use the same current-client verification as URL entry.
++  await page.route(`**/api/backend/core/clients/${clientId}`, (route) =>
++    route.fulfill({
++      json: {
++        id: clientId,
++        name: "Test Aerospace",
++        status: "ACTIVE",
++        profileStatus: "ACTIVE",
++      },
++    }),
++  );
+   await page.clock.setFixedTime(new Date("2026-10-08T16:00:00Z"));
+ });
+ test("month and week retain client scope and query end-exclusive Eastern ranges", async ({
+diff --git a/apps/web/tests/browser/work-documents.spec.ts b/apps/web/tests/browser/work-documents.spec.ts
+index c9f51c5..d9e4ce3 100644
+--- a/apps/web/tests/browser/work-documents.spec.ts
++++ b/apps/web/tests/browser/work-documents.spec.ts
+@@ -1,6 +1,12 @@
+ import { test, expect } from "@playwright/test";
+ import { client, clientId, installFixtures, json } from "./fixtures";
+ 
++test.beforeEach(async ({ page }) => {
++  await page.route("**/api/capiro/settings.tenantMembers*", (route) =>
++    json(route, []),
++  );
++});
++
+ const draftId = "91000000-0000-4000-8000-000000000001";
+ const completeId = "91000000-0000-4000-8000-000000000002";
+ const drafts = [

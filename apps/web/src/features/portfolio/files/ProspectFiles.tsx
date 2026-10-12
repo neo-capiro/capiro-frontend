@@ -91,6 +91,7 @@ function ProspectFileSession({
         assertClientWriter(cache, actor),
       ),
   });
+  const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<File>();
   const [removing, setRemoving] = useState<ProspectAttachment | null>(null);
   const [error, setError] = useState<Error | null>(null);
@@ -110,6 +111,12 @@ function ProspectFileSession({
     void query.refetch();
   });
   const current = query.isSuccess && !query.error && !query.isFetching;
+  const searchTerm = search.trim().toLowerCase();
+  const matchingFiles = current
+    ? query.data.filter((file) =>
+        file.fileName.toLowerCase().includes(searchTerm),
+      )
+    : [];
   async function remove() {
     if (!removing || !current || request.current || uncertain) return;
     const controller = new AbortController();
@@ -148,22 +155,41 @@ function ProspectFileSession({
         error={query.error}
         retry={() => void query.refetch()}
       />
-      <button
-        className="button"
-        disabled={pending || upload.busy || query.isFetching}
-        onClick={async () => {
-          const result = await query.refetch();
-          if (result.isSuccess && !result.error) {
-            setUncertain(false);
-            setRemoving(null);
-          }
-        }}
-      >
-        Refresh files
-      </button>
+      <div className="toolbar">
+        <input
+          type="search"
+          aria-label="Search files"
+          placeholder="Search files"
+          value={search}
+          disabled={!current}
+          onChange={(event) => setSearch(event.target.value)}
+        />
+        {search && (
+          <button
+            className="button"
+            disabled={!current}
+            onClick={() => setSearch("")}
+          >
+            Clear file search
+          </button>
+        )}
+        <button
+          className="button"
+          disabled={pending || upload.busy || query.isFetching}
+          onClick={async () => {
+            const result = await query.refetch();
+            if (result.isSuccess && !result.error) {
+              setUncertain(false);
+              setRemoving(null);
+            }
+          }}
+        >
+          Refresh files
+        </button>
+      </div>
       {current && (
         <ul className="stack">
-          {query.data.map((file) => (
+          {matchingFiles.map((file) => (
             <li key={file.id} className="stack">
               <strong>{file.fileName}</strong>
               <small>
@@ -208,6 +234,9 @@ function ProspectFileSession({
       )}
       {current && !query.data.length && (
         <p>No files are available for this prospect.</p>
+      )}
+      {current && query.data.length > 0 && !matchingFiles.length && (
+        <p role="status">No files match your search.</p>
       )}
       <small>
         Preview and download links expire after five minutes. Refresh Files to

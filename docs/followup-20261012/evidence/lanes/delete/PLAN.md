@@ -1,0 +1,7 @@
+CP-03 / CORE-060, P3: preserve uncertain DELETE outcomes and require deliberate existing native current-state review before renewed destructive confirmation. Same-ID deletion is recoverable; duplicate destructive impact is not established.
+
+Canonical owners: new deletion action/attempt module owns cache-local dispatch fencing and explicit current list read; useFileScope/file-reader remain actor/client/lifetime owners; a narrow deletion hook and dialog own pending/review presentation; FilesPage only selects the dialog. Folder access and CP01/02 metadata semantics remain unchanged. No Prospect/shared/backend edits.
+
+GET engagement/attachments?clientId=... supplies current visible state; absence is not a deletion receipt. delete_pending stays fenced; delete_failed/present rows can receive a deliberate new confirmation after fresh review. Failed/malformed/superseded reads and actor/client/lifetime replacement cannot clear the attempt. Cache-local scope is not hard-reload/durable idempotency.
+
+Red baseline: preserve old transport behavior while extracting its request into deletion.ts and wire the old mutation branch to it; unchanged focused action regression proves a second DELETE dispatch after503. Keep this intermediate diff and log. Final: remove the old raw branch and wire the dedicated deletion dialog/hook. Browser red/green against exact base and candidate waits for root slot; no server/build/full-suite permission yet.

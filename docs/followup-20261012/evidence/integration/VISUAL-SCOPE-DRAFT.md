@@ -1,0 +1,11 @@
+# Bounded visual and accessibility evidence
+
+Source candidate: `ee01be3b2c5c64a53744994ae4ad0d992a111054`. Final feature blobs are independently identical to the reviewed lane sources. Screenshots captured in those lanes retain their own exact-source and synthetic-fixture labels; the combined browser and standalone-server captures bind the integrated candidate separately.
+
+Root inspected the final Work phone owner/status screenshot, the deletion absent-state phone dialog, the corrected Modules Calendar phone rendering and exact linked-task desktop dialog. Supplied owners/statuses remain readable; current unavailable/absent states are explicit; the inspected layouts show no new horizontal clipping in these bounded states. Earlier root inspection covered Mail signature-preview and Prospect search phone captures. The matching automated controls cover keyboard/focus, relevant viewport bounds and state transitions.
+
+Work references saved Figma frames411:52106 and411:86349 and qualifies only owner/status presentation. Mail frame435:82802 is clipped1x1; complete composer pixel parity is unassessed. Delete frame411:53857 depicts the existing failure state, without an authored uncertain/recovery counterpart; existing modal geometry/footer differences remain open. Modules preserves the previously reviewed responsive Calendar composition while changing scope/task/source behavior. Prospect adds local search using the existing file surface; this does not claim full Prospect Files parity.
+
+The actual Next standalone server, with no credential or intercepted backend, passed1440×1040 and390×844 in light and dark themes, style restoration and header navigation, plus cross-mode back/forward. That setup-state smoke does not qualify authenticated native screens. Synthetic session/expiry and tenant/client replacement controls belong to the combined browser suite. No complete screen-reader audit or full337-row visual acceptance is claimed.
+
+Fresh integrated-candidate Mail dark-phone, Prospect search-phone and Work desktop captures were also opened during the full browser run. Their exact paths/hashes and bounded observations are in `evidence/integration/INTEGRATED-VISUAL-INSPECTION.json`. These support the combined-source rendering claim separately from the lane captures.

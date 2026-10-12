@@ -1,0 +1,3032 @@
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Headers,
+  HttpCode,
+  Optional,
+  NotFoundException,
+  Param,
+  Patch,
+  Post,
+  Put,
+  Query,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
+import { Throttle } from '@nestjs/throttler';
+import type { Response as ExpressResponse } from 'express';
+import { Transform, Type } from 'class-transformer';
+import {
+  ArrayMaxSize,
+  ArrayMinSize,
+  IsArray,
+  IsBoolean,
+  IsDateString,
+  IsEmail,
+  IsEnum,
+  IsInt,
+  IsIn,
+  IsOptional,
+  IsObject,
+  IsString,
+  IsUUID,
+  Length,
+  Max,
+  MaxLength,
+  Min,
+  MinLength,
+  ValidateNested,
+  ValidateIf,
+} from 'class-validator';
+import { AssociationEntityType, EngagementProvider, EngagementTaskStatus } from '@prisma/client';
+import type { TenantContext } from '@capiro/shared';
+import { Roles } from '../auth/roles.decorator.js';
+import { RolesGuard } from '../auth/roles.guard.js';
+import { CurrentTenant } from '../tenant/current-tenant.decorator.js';
+import { EngagementService } from './engagement.service.js';
+import {
+  OUTREACH_AUDIENCE_TYPES,
+  type OutreachAudienceType,
+} from './outreach-audience-types.js';
+import { MeetingPrepJobService } from './meeting-prep-job.service.js';
+import { MEETING_PREP_DEPTHS, meetingPrepEnabled, type MeetingPrepDepth } from './meeting-prep-policy.js';
+import { OutreachJobService, outreachRecipientKey } from './outreach-job.service.js';
+import { NotetakerService } from './notetaker/notetaker.service.js';
+import { OutreachDraftService } from './outreach-draft.service.js';
+import { OutreachSendIntentService } from './outreach-send-intent.service.js';
+import { EngagementRuntimeAction } from './runtime/engagement-runtime-action.decorator.js';
+import { EngagementRuntimePolicyService } from './runtime/engagement-runtime-policy.service.js';
+
+/**
+ * Coerce empty/whitespace-only strings to `undefined` BEFORE validation runs.
+ *
+ * Many optional recipient/context fields are declared `@IsOptional() @Length(1, N)`.
+ * class-validator's `@IsOptional()` only skips `null`/`undefined` — an empty
+ * string `''` still hits `@Length(1, N)` and fails min-length, which (under the
+ * global `forbidNonWhitelisted` ValidationPipe) 400s the entire save/generate
+ * request. The wizard legitimately emits `''` for fields like `relevanceReason`
+ * when a recipient has no committee/focus area, so saving an in-progress
+ * outreach failed. Stacking this transform makes `''` become `undefined` so
+ * `@IsOptional()` correctly skips it, while genuinely-provided non-empty values
+ * still get the `@Length(1, N)` check. Applied via `transform: true` in main.ts.
+ */
+function EmptyToUndefined() {
+  return Transform(({ value }) =>
+    typeof value === 'string' && value.trim() === '' ? undefined : value,
+  );
+}
+
+/**
+ * Truncate an over-long string to `max` BEFORE validation runs — the max-length
+ * counterpart to `EmptyToUndefined` above.
+ *
+ * The recipient/context normalizers the service runs on this payload
+ * (`normalizeOutreachRecipients`, `normalizeOutreachContextPool`) already clamp
+ * every one of these fields with `.slice(0, N)` at exactly the `N` the matching
+ * `@Length(_, N)` rejects on. So the two layers disagreed: validation 400'd the
+ * whole request for a value the service was written to store truncated.
+ *
+ * That is not hypothetical — a 305-char document title ("Hearing recap — Armed
+ * Services Committee — …") in a real context library made `contextPool.0.title`
+ * 400 `POST /api/engagement/outreach`. Because Phase 0 routes generation through
+ * `ensureDraftRecord()` first, an over-long *title* presented to the user as
+ * "email generation is failing" — the AI was never reached.
+ *
+ * Clamping here makes the DTO produce exactly what the normalizer would have
+ * stored, so the `@Length` max can no longer fire; it stays declared as the
+ * documented bound. Guarded on `typeof value === 'string'` so it composes with
+ * `EmptyToUndefined` in either decorator order, and leaves non-strings for
+ * `@IsString` to reject.
+ */
+function ClampTo(max: number) {
+  return Transform(({ value }) => (typeof value === 'string' ? value.slice(0, max) : value));
+}
+
+/**
+ * Array counterpart to `ClampTo`: drop entries past `max`, mirroring the
+ * `.slice(0, N)` the same normalizers apply to `recipients`, `contextPool`,
+ * `recipientIds`, and `matches`.
+ */
+function ClampArrayTo(max: number) {
+  return Transform(({ value }) => (Array.isArray(value) ? value.slice(0, max) : value));
+}
+
+/**
+ * Accept a single object where an array is now expected — wire back-compat only.
+ *
+ * `SendSingleMailDto.to` was one `{ email, name }` object until PR #1444 made it
+ * an array. The web bundle and this API deploy independently (and a browser keeps
+ * serving its cached bundle for minutes after an API rollout), so the
+ * previously-shipped single-object shape has to keep validating. Running as a
+ * `@Transform` puts the normalization BEFORE validation, so `@IsArray`,
+ * `@ArrayMinSize`, `@ArrayMaxSize` and `@ValidateNested({ each: true })` all see
+ * an array whichever shape actually arrived.
+ *
+ * Ordering against `@Type` is guaranteed, not luck: for plain-to-class,
+ * class-transformer applies `@Type` metadata first and custom `@Transform`s
+ * second (0.5.1 `TransformOperationExecutor` — `finalValue = this.transform(...)`
+ * then `applyCustomTransformations(...)`). A lone object therefore reaches this
+ * transform ALREADY constructed as its `@Type` class and stays that instance once
+ * wrapped, so `@ValidateNested` still finds its metadata. Do not "simplify" this
+ * to normalize off the raw payload — returning bare plain objects makes
+ * class-validator report `unknownValue` and 400.
+ *
+ * Non-objects and `null` pass through untouched so `@IsArray` still produces the
+ * honest 400 rather than this wrapping garbage into a one-element array.
+ */
+function WrapSingleInArray() {
+  return Transform(({ value }) =>
+    Array.isArray(value) || value == null || typeof value !== 'object' ? value : [value],
+  );
+}
+
+class CreateIntegrationDto {
+  @IsEnum(EngagementProvider)
+  provider!: EngagementProvider;
+
+  @IsOptional()
+  @IsEmail()
+  accountEmail?: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 120)
+  displayName?: string;
+}
+
+class AttendeeDto {
+  @IsOptional()
+  @IsEmail()
+  email?: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 160)
+  name?: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 80)
+  role?: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 80)
+  responseStatus?: string;
+}
+
+class CreateMeetingDto {
+  @IsOptional()
+  @IsUUID()
+  clientId?: string;
+
+  @IsString()
+  @Length(1, 240)
+  subject!: string;
+
+  @IsOptional()
+  @IsString()
+  description?: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 240)
+  location?: string;
+
+  @IsDateString()
+  startsAt!: string;
+
+  @IsDateString()
+  endsAt!: string;
+
+  @IsOptional()
+  @IsEmail()
+  organizerEmail?: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 160)
+  organizerName?: string;
+
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(80)
+  @ValidateNested({ each: true })
+  @Type(() => AttendeeDto)
+  attendees?: AttendeeDto[];
+}
+
+class UpdateMeetingDto {
+  @IsOptional()
+  @IsUUID()
+  clientId?: string | null;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 240)
+  subject?: string;
+
+  @IsOptional()
+  @IsString()
+  description?: string | null;
+
+  @IsOptional()
+  @IsString()
+  location?: string | null;
+
+  @IsOptional()
+  @IsDateString()
+  startsAt?: string;
+
+  @IsOptional()
+  @IsDateString()
+  endsAt?: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 80)
+  status?: string;
+}
+
+class CreateNoteDto {
+  @IsString()
+  @MinLength(1)
+  body!: string;
+
+  @IsOptional()
+  @IsBoolean()
+  confidential?: boolean;
+
+  @IsOptional()
+  @IsString()
+  accessLevel?: string;
+}
+
+class CreateDebriefDto extends CreateNoteDto {}
+
+// Phase 2 §d — per-artifact sharing (ENGAGEMENT_ARTIFACT_SHARING_V2). 'note' is
+// deliberately singular (one artifact reference), unlike the plural 'notes' used
+// by ArtifactKind / MeetingLibraryQueryDto.artifactType elsewhere in this file.
+class ArtifactRefDto {
+  @IsIn(['prep', 'note', 'debrief', 'attachment'])
+  type!: 'prep' | 'note' | 'debrief' | 'attachment';
+
+  @IsUUID()
+  id!: string;
+}
+
+class ShareArtifactsDto {
+  @IsArray()
+  @ArrayMinSize(1)
+  @ArrayMaxSize(50)
+  @ValidateNested({ each: true })
+  @Type(() => ArtifactRefDto)
+  artifacts!: ArtifactRefDto[];
+}
+
+class GenerateDebriefDraftDto {
+  @IsIn(['upload', 'manual', 'voice'])
+  method!: 'upload' | 'manual' | 'voice';
+
+  @IsString()
+  @MinLength(1)
+  sourceText!: string;
+}
+
+class ClientNotetakerConsentDto {
+  @IsBoolean()
+  authorizedToRecord!: boolean;
+
+  @IsBoolean()
+  allPartiesWillBeNotified!: boolean;
+}
+
+class DispatchNotetakerDto {
+  @IsString()
+  @Length(1, 2000)
+  meetingUrl!: string;
+
+  // Strict-consent affirmation — must be true (re-enforced in the service).
+  @IsBoolean()
+  authorizedToRecord!: boolean;
+
+  @IsOptional()
+  @IsBoolean()
+  allPartiesWillBeNotified?: boolean;
+
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(60)
+  @IsString({ each: true })
+  allPartyStates?: string[];
+
+  // 'audio_and_transcript' is deliberately NOT accepted: the MVP pipeline always
+  // deletes vendor media after pulling the transcript, so offering it would be a
+  // silent downgrade of a consent-critical choice. Add it here only when audio
+  // retention is actually implemented.
+  @IsOptional()
+  @IsIn(['no_storage', 'transcript_only'])
+  recordingPolicy?: 'no_storage' | 'transcript_only';
+
+  @IsOptional()
+  @IsDateString()
+  joinAt?: string;
+}
+
+class SingleMailRecipientDto {
+  @IsEmail()
+  email!: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 160)
+  name?: string;
+}
+
+class SendSingleMailDto {
+  @ValidateIf((_object, value) => value !== undefined)
+  @IsUUID()
+  senderConnectionId?: string;
+
+  @IsOptional()
+  @IsUUID()
+  clientId?: string;
+
+  /** Every selected "To" recipient's ClientPerson id — one or more, e.g. picked from the client's org roster. */
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(50)
+  @IsUUID(undefined, { each: true })
+  personIds?: string[];
+
+  /**
+   * DEPRECATED pre-#1444 wire field, declared only so a browser still running
+   * the old bundle does not 400: the global ValidationPipe runs
+   * `forbidNonWhitelisted` (see `configure-api-http-app.ts`), so an UNDECLARED
+   * `personId` rejects the whole send rather than being ignored.
+   *
+   * Folded into `personIds` by the handler, NOT by a `@Transform` on
+   * `personIds`: class-transformer only visits keys present on the incoming
+   * payload, and an old client sends `personId` with no `personIds` key at all,
+   * so a transform declared there would simply never run.
+   *
+   * Delete this field, `@WrapSingleInArray()` on `to`, and the fold in
+   * `sendSingleMail` below once no deployed web bundle can still send the old
+   * shape.
+   */
+  @IsOptional()
+  @IsUUID()
+  personId?: string;
+
+  // Accepts both the pre-#1444 single `{ email, name }` object and the current
+  // array — see `WrapSingleInArray`. Every constraint below applies unchanged to
+  // the normalized array, so a legacy send gets the same nested email/name
+  // validation it always got.
+  @WrapSingleInArray()
+  @IsArray()
+  @ArrayMinSize(1)
+  @ArrayMaxSize(50)
+  @ValidateNested({ each: true })
+  @Type(() => SingleMailRecipientDto)
+  to!: SingleMailRecipientDto[];
+
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(10)
+  @ValidateNested({ each: true })
+  @Type(() => SingleMailRecipientDto)
+  cc?: SingleMailRecipientDto[];
+
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(10)
+  @ValidateNested({ each: true })
+  @Type(() => SingleMailRecipientDto)
+  bcc?: SingleMailRecipientDto[];
+
+  @IsString()
+  @Length(1, 300)
+  subject!: string;
+
+  @IsString()
+  @Length(1, 40_000)
+  bodyHtml!: string;
+
+  @IsOptional()
+  @IsBoolean()
+  appendSignature?: boolean;
+
+  /** Reply within an existing thread instead of starting a new one. */
+  @IsOptional()
+  @IsUUID()
+  threadId?: string;
+
+  /** Ids from the existing attachments upload-url + confirm flow. */
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(5)
+  @IsUUID(undefined, { each: true })
+  attachmentIds?: string[];
+}
+
+class RewriteEmailDto {
+  @IsString()
+  @Length(1, 8000)
+  rawText!: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 160)
+  recipientName?: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 160)
+  recipientTitle?: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 160)
+  clientName?: string;
+}
+
+class GenerateMeetingPrepDto {
+  @IsOptional()
+  @IsIn([...MEETING_PREP_DEPTHS])
+  depth?: MeetingPrepDepth;
+
+  @IsOptional()
+  @IsString()
+  @Length(8, 128)
+  requestKey?: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(0, 4000)
+  additionalContext?: string;
+}
+
+class MeetingPrepMondayMappingDto {
+  @IsArray()
+  @ArrayMaxSize(20)
+  @IsString({ each: true })
+  boardIds!: string[];
+}
+
+class UpdateMeetingPrepDto {
+  @IsOptional()
+  @IsString()
+  summary?: string | null;
+
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(80)
+  @IsString({ each: true })
+  agenda?: string[];
+
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(80)
+  @IsString({ each: true })
+  talkingPoints?: string[];
+
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(80)
+  @IsString({ each: true })
+  risks?: string[];
+
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(80)
+  @IsString({ each: true })
+  followUps?: string[];
+
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(80)
+  @IsString({ each: true })
+  emailEvidence?: string[];
+}
+
+// Meeting Library filters (Meetings v2 §6). page/limit follow the house
+// pagination convention (default 1 / 50, capped at 100 server-side).
+class MeetingLibraryQueryDto {
+  /**
+   * Free-text search over the meeting subject and the associated client's name.
+   *
+   * Deliberately NOT over artifact bodies. Prep/notes/debrief content is stored
+   * encrypted and `listSharedMeetingsForClient` is explicit that these list
+   * endpoints return "metadata-only (no decrypted bodies)" — searching bodies
+   * would mean decrypting every candidate row on every keystroke, and would
+   * leak artifact content through result counts even where the body is never
+   * returned. Subject + client name is what the client-side filter this
+   * replaces actually matched.
+   *
+   * 160 chars matches the outreach-template `search` field's cap.
+   */
+  @IsOptional()
+  @IsString()
+  @MaxLength(160)
+  search?: string;
+
+  @IsOptional()
+  @IsUUID()
+  clientId?: string;
+
+  @IsOptional()
+  @IsIn(['prep', 'notes', 'debrief'])
+  artifactType?: 'prep' | 'notes' | 'debrief';
+
+  @IsOptional()
+  @IsIn(['shared', 'private'])
+  visibility?: 'shared' | 'private';
+
+  @IsOptional()
+  @IsDateString()
+  from?: string;
+
+  @IsOptional()
+  @IsDateString()
+  to?: string;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  page?: number;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  limit?: number;
+}
+
+class CreateTaskDto {
+  @IsOptional()
+  @IsUUID()
+  clientId?: string;
+
+  @IsOptional()
+  @IsUUID()
+  meetingId?: string;
+
+  @IsOptional()
+  @IsUUID()
+  contactId?: string;
+
+  @IsOptional()
+  @IsUUID()
+  mailThreadId?: string;
+
+  @IsString()
+  @Length(1, 240)
+  title!: string;
+
+  @IsOptional()
+  @IsString()
+  description?: string;
+
+  @IsOptional()
+  @IsUUID()
+  ownerUserId?: string;
+
+  @IsOptional()
+  @IsDateString()
+  dueDate?: string;
+}
+
+class UpdateTaskDto {
+  @IsOptional()
+  @IsString()
+  @Length(1, 240)
+  title?: string;
+
+  @IsOptional()
+  @IsString()
+  description?: string | null;
+
+  @IsOptional()
+  @IsUUID()
+  ownerUserId?: string | null;
+
+  @IsOptional()
+  @IsDateString()
+  dueDate?: string | null;
+
+  @IsOptional()
+  @IsEnum(EngagementTaskStatus)
+  status?: EngagementTaskStatus;
+}
+
+class AssociationOverrideDto {
+  @IsEnum(AssociationEntityType)
+  entityType!: AssociationEntityType;
+
+  @IsUUID()
+  entityId!: string;
+
+  @IsOptional()
+  @IsUUID()
+  clientId?: string;
+
+  /**
+   * When true, mark the entity (meetings only) as internal — clears any client
+   * association and stops the sync from re-linking it. Mutually exclusive with
+   * clientId; one of the two must be provided.
+   */
+  @IsOptional()
+  @IsBoolean()
+  internal?: boolean;
+
+  @IsOptional()
+  @IsString()
+  reason?: string;
+}
+
+class AttachmentContextReadDto {
+  @IsUUID()
+  clientId!: string;
+}
+
+class AttachmentUploadDto {
+  @IsOptional()
+  @IsUUID()
+  prospectId?: string;
+
+  @IsOptional()
+  @IsUUID()
+  requestId?: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(64, 64)
+  checksumSha256?: string;
+  @IsOptional()
+  @IsUUID()
+  clientId?: string;
+
+  @IsOptional()
+  @IsUUID()
+  meetingId?: string;
+
+  @IsOptional()
+  @IsUUID()
+  mailMessageId?: string;
+
+  @IsString()
+  @Length(1, 240)
+  fileName!: string;
+
+  @IsString()
+  @Length(1, 160)
+  contentType!: string;
+
+  @IsInt()
+  @Min(1)
+  @Max(25 * 1024 * 1024)
+  contentLength!: number;
+}
+
+class ConfirmAttachmentDto {
+  @IsOptional()
+  @IsUUID()
+  prospectId?: string;
+  @IsOptional()
+  @IsUUID()
+  clientId?: string;
+
+  @IsOptional()
+  @IsUUID()
+  meetingId?: string;
+
+  @IsOptional()
+  @IsUUID()
+  mailMessageId?: string;
+
+  @IsString()
+  @Length(1, 240)
+  fileName!: string;
+
+  @IsString()
+  @Length(1, 160)
+  contentType!: string;
+
+  @IsString()
+  s3Key!: string;
+
+  @IsOptional()
+  @IsString()
+  checksumSha256?: string;
+
+  // Free-text provenance tag. Defaults to "manual" server-side. Used to scope an
+  // attachment to a sub-entity without a dedicated column — e.g. "capability:<id>"
+  // for documents uploaded from a capability drawer (which also carry clientId, so
+  // they appear in the client Documents tab too).
+  @IsOptional()
+  @IsString()
+  @Length(1, 120)
+  source?: string;
+}
+
+const campaignTypes = [
+  'post_meeting_followup',
+  'congressional_outreach',
+  'program_update',
+  'custom',
+] as const;
+
+const campaignStatuses = ['draft', 'active', 'paused', 'complete'] as const;
+
+class CreateCampaignDto {
+  @IsString()
+  @Length(1, 240)
+  name!: string;
+
+  @IsOptional()
+  @IsUUID()
+  clientId?: string;
+
+  @IsOptional()
+  @IsIn(campaignTypes)
+  type?: (typeof campaignTypes)[number];
+
+  @IsOptional()
+  @IsObject()
+  sourceContext?: Record<string, unknown>;
+}
+
+class UpdateCampaignDto {
+  @IsOptional()
+  @IsString()
+  @Length(1, 240)
+  name?: string;
+
+  @IsOptional()
+  @IsUUID()
+  clientId?: string | null;
+
+  @IsOptional()
+  @IsIn(campaignTypes)
+  type?: (typeof campaignTypes)[number];
+
+  @IsOptional()
+  @IsIn(campaignStatuses)
+  status?: (typeof campaignStatuses)[number];
+
+  @IsOptional()
+  @IsString()
+  @Length(0, 300)
+  subject?: string | null;
+
+  @IsOptional()
+  @IsString()
+  body?: string | null;
+
+  @IsOptional()
+  @IsObject()
+  sourceContext?: Record<string, unknown>;
+
+  @IsOptional()
+  @IsObject()
+  metadata?: Record<string, unknown>;
+}
+
+class CampaignRecipientDto {
+  @IsOptional()
+  @IsString()
+  @Length(1, 160)
+  name?: string;
+
+  @IsEmail()
+  email!: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 240)
+  title?: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 240)
+  office?: string;
+}
+
+class AddCampaignRecipientsDto {
+  @IsArray()
+  @ArrayMaxSize(500)
+  @ValidateNested({ each: true })
+  @Type(() => CampaignRecipientDto)
+  recipients!: CampaignRecipientDto[];
+}
+
+class GenerateCampaignEmailDto {
+  @IsOptional()
+  @IsString()
+  customContext?: string;
+}
+
+const reportStatuses = ['auto', 'not_started', 'in_progress', 'complete'] as const;
+const outreachTypes = ['campaign', 'follow_up', 'prep', 'outbound_campaign'] as const;
+const outreachStatuses = ['draft', 'sent', 'opened_in_email', 'failed'] as const;
+const outreachPromptTemplates = [
+  'custom',
+  'thank_you',
+  'follow_up',
+  'memo',
+  'post_meeting_memo',
+  'introduction',
+  'meeting_request',
+  'status_update',
+] as const;
+
+class CreateReportTargetOfficeDto {
+  @IsUUID()
+  clientId!: string;
+
+  @IsInt()
+  @Min(1900)
+  @Max(2200)
+  reportYear!: number;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 240)
+  directoryContactId?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  manualOnly?: boolean;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 240)
+  memberPrincipal?: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(0, 120)
+  committee?: string | null;
+
+  @IsOptional()
+  @IsString()
+  @Length(0, 160)
+  staffer?: string | null;
+
+  @IsOptional()
+  @IsString()
+  @Length(0, 120)
+  building?: string | null;
+
+  @IsOptional()
+  @IsString()
+  @Length(0, 120)
+  leadOwner?: string | null;
+}
+
+class ClearReportTargetOfficeOverrideDto {
+  @IsUUID()
+  clientId!: string;
+  @IsString()
+  @Length(1, 240)
+  officeKey!: string;
+  @IsInt()
+  @Min(1900)
+  @Max(2200)
+  reportYear!: number;
+  @IsIn(['prepStatus', 'outreachStatus', 'submissionStatus'])
+  field!: 'prepStatus' | 'outreachStatus' | 'submissionStatus';
+}
+
+class LinkReportTargetOfficeDto {
+  @IsUUID()
+  clientId!: string;
+  @IsOptional()
+  @IsUUID()
+  targetId?: string;
+  @IsOptional()
+  @IsString()
+  @Length(1, 240)
+  officeKey?: string;
+  @IsString()
+  @Length(1, 240)
+  directoryContactId!: string;
+  @IsOptional()
+  @IsObject()
+  conflictResolutions?: Record<string, 'manual' | 'existing'>;
+}
+
+class UpdateReportTargetOfficeDto {
+  @IsOptional()
+  @IsUUID()
+  clientId?: string | null;
+  @IsOptional()
+  @IsString()
+  @Length(1, 240)
+  memberPrincipal?: string;
+  @IsOptional()
+  @IsString()
+  @Length(0, 120)
+  committee?: string | null;
+  @IsOptional()
+  @IsString()
+  @Length(0, 160)
+  staffer?: string | null;
+  @IsOptional()
+  @IsString()
+  @Length(0, 120)
+  building?: string | null;
+  @IsOptional()
+  @IsString()
+  @Length(0, 120)
+  leadOwner?: string | null;
+}
+
+class UpsertReportTargetOfficeDto extends CreateReportTargetOfficeDto {
+  @IsString()
+  @Length(1, 240)
+  officeKey!: string;
+
+  @IsOptional()
+  @IsIn(reportStatuses)
+  prepStatus?: (typeof reportStatuses)[number];
+
+  @IsOptional()
+  @IsIn(reportStatuses)
+  outreachStatus?: (typeof reportStatuses)[number];
+
+  @IsOptional()
+  @IsIn(reportStatuses)
+  submissionStatus?: (typeof reportStatuses)[number];
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 80)
+  source?: string;
+}
+
+// Every bound below mirrors normalizeOutreachContextPool (engagement.service.ts):
+// the DTO clamps to the same N the service would have `.slice(0, N)`'d to, so an
+// over-long library title/summary is truncated rather than 400ing the save. See
+// ClampTo.
+class OutreachContextPoolItemDto {
+  @IsOptional()
+  @IsString()
+  @ClampTo(240)
+  @Length(1, 240)
+  id?: string;
+
+  @IsOptional()
+  @IsString()
+  @ClampTo(80)
+  @Length(1, 80)
+  sourceType?: string;
+
+  @IsOptional()
+  @IsString()
+  @ClampTo(240)
+  @Length(1, 240)
+  title?: string;
+
+  @IsOptional()
+  @IsString()
+  @ClampTo(2000)
+  @Length(0, 2000)
+  summary?: string;
+
+  @IsOptional()
+  @IsString()
+  @ClampTo(2000)
+  @Length(0, 2000)
+  note?: string;
+
+  @IsOptional()
+  @IsString()
+  @ClampTo(240)
+  @Length(1, 240)
+  scope?: string;
+
+  @IsOptional()
+  @IsArray()
+  @ClampArrayTo(200)
+  @ArrayMaxSize(200)
+  @IsString({ each: true })
+  recipientIds?: string[];
+
+  @IsOptional()
+  @IsArray()
+  @ClampArrayTo(200)
+  @ArrayMaxSize(200)
+  @IsString({ each: true })
+  matches?: string[];
+}
+
+class GroupMemberDto {
+  @IsEmail()
+  email!: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(0, 240)
+  name?: string;
+}
+
+// As with OutreachContextPoolItemDto, every ClampTo below mirrors the matching
+// `.slice(0, N)` in normalizeOutreachRecipients (engagement.service.ts). Fields
+// the normalizer does NOT clamp (sourceLabel, cc/bcc, groupMembers,
+// generationKey[s]) keep their hard bound — there is no server-side truncation
+// to agree with, so rejecting is still the honest answer.
+class OutreachRecipientDto {
+  @IsOptional()
+  @IsString()
+  @EmptyToUndefined()
+  @ClampTo(240)
+  @Length(1, 240)
+  id?: string;
+
+  @IsOptional()
+  @IsUUID()
+  clientId?: string;
+
+  @IsOptional()
+  @IsIn(['on-behalf', 'to-clients'])
+  direction?: 'on-behalf' | 'to-clients';
+
+  @IsOptional()
+  @IsString()
+  @EmptyToUndefined()
+  @ClampTo(160)
+  @Length(1, 160)
+  name?: string;
+
+  // Deliberately NOT clamped: a truncated address is an undeliverable address,
+  // so a malformed value must still be rejected rather than quietly mailed.
+  @IsOptional()
+  @IsEmail()
+  email?: string;
+
+  @IsOptional()
+  @IsString()
+  @EmptyToUndefined()
+  @ClampTo(240)
+  @Length(1, 240)
+  office?: string;
+
+  @IsOptional()
+  @IsString()
+  @EmptyToUndefined()
+  @ClampTo(160)
+  @Length(1, 160)
+  title?: string;
+
+  @IsOptional()
+  @IsString()
+  @EmptyToUndefined()
+  @ClampTo(80)
+  @Length(1, 80)
+  chamber?: string;
+
+  @IsOptional()
+  @IsString()
+  @EmptyToUndefined()
+  @ClampTo(80)
+  @Length(1, 80)
+  state?: string;
+
+  @IsOptional()
+  @IsString()
+  @EmptyToUndefined()
+  @ClampTo(80)
+  @Length(1, 80)
+  district?: string;
+
+  @IsOptional()
+  @IsString()
+  @EmptyToUndefined()
+  @ClampTo(80)
+  @Length(1, 80)
+  party?: string;
+
+  @IsOptional()
+  @IsString()
+  @EmptyToUndefined()
+  @ClampTo(240)
+  @Length(1, 240)
+  directoryContactId?: string;
+
+  @IsOptional()
+  @IsString()
+  @EmptyToUndefined()
+  @ClampTo(240)
+  @Length(1, 240)
+  directoryContactName?: string;
+
+  @IsOptional()
+  @IsString()
+  @EmptyToUndefined()
+  @ClampTo(160)
+  @Length(1, 160)
+  committee?: string;
+
+  @IsOptional()
+  @IsString()
+  @ClampTo(500)
+  @Length(0, 500)
+  address?: string;
+
+  @IsOptional()
+  @IsString()
+  @EmptyToUndefined()
+  @ClampTo(240)
+  @Length(1, 240)
+  relevanceReason?: string;
+
+  // Manual recipient's audience, chosen by the user in the wizard's audience
+  // picker. Optional: existing directory recipients omit it. Only supported
+  // choices pass; unknown values reject via @IsIn.
+  @IsOptional()
+  @IsIn(OUTREACH_AUDIENCE_TYPES)
+  audienceType?: OutreachAudienceType;
+
+  // The wizard tags each recipient with its provenance (e.g. "District nexus",
+  // "Directory"). Display-only, but it IS sent in the generate/send payload, so
+  // it must be whitelisted — otherwise forbidNonWhitelisted 400s the whole batch
+  // and the wizard silently falls back to placeholder drafts. Allow empty too.
+  @IsOptional()
+  @IsString()
+  @Length(0, 240)
+  sourceLabel?: string;
+
+  @IsOptional()
+  @IsString()
+  @EmptyToUndefined()
+  @ClampTo(500)
+  @Length(1, 500)
+  personalNote?: string;
+
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(50)
+  @IsEmail({}, { each: true })
+  cc?: string[];
+
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(50)
+  @IsEmail({}, { each: true })
+  bcc?: string[];
+
+  // Group representative only: all members for the To field (one shared email).
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(200)
+  @ValidateNested({ each: true })
+  @Type(() => GroupMemberDto)
+  groupMembers?: GroupMemberDto[];
+
+  /**
+   * Phase 0 (§3.c1) — the generation slot(s) this recipient's draft belongs to.
+   * The wizard sends its GenerationTargetKey; one generated draft can back
+   * several slots (the same person in two lists is generated once, on purpose).
+   *
+   * NOTE: `recipientKey` is deliberately NOT accepted from the browser — it is
+   * derived server-side with the same precedence as outreachRecipientKey().
+   */
+  @IsOptional()
+  @IsString()
+  @EmptyToUndefined()
+  @Length(1, 512)
+  generationKey?: string;
+
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(8)
+  @IsString({ each: true })
+  @Length(1, 512, { each: true })
+  generationKeys?: string[];
+
+  @IsOptional()
+  @IsUUID()
+  meetingId?: string;
+
+  @IsOptional()
+  @IsString()
+  @EmptyToUndefined()
+  @ClampTo(240)
+  @Length(1, 240)
+  meetingSubject?: string;
+
+  @IsOptional()
+  @IsString()
+  @EmptyToUndefined()
+  @ClampTo(120)
+  @Length(1, 120)
+  meetingDateTime?: string;
+
+  @IsOptional()
+  @IsString()
+  @ClampTo(1000)
+  @Length(0, 1000)
+  attendeeNames?: string;
+
+  @IsOptional()
+  @IsString()
+  @ClampTo(1000)
+  @Length(0, 1000)
+  attendeeEmails?: string;
+
+  @IsOptional()
+  @IsString()
+  @ClampTo(2000)
+  @Length(0, 2000)
+  prepSummary?: string;
+
+  @IsOptional()
+  @IsString()
+  @ClampTo(2000)
+  @Length(0, 2000)
+  debriefSummary?: string;
+
+  @IsOptional()
+  @IsString()
+  @ClampTo(500)
+  @Length(0, 500)
+  meetingLocation?: string;
+}
+
+class CreateOutreachTemplateDto {
+  @IsString()
+  @Length(1, 120)
+  name!: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 300)
+  subject?: string;
+
+  @IsString()
+  @Length(1, 10000)
+  body!: string;
+}
+
+// Outreach 2.0 saved audiences (reusable lists/groups; user-owned).
+class OutreachAudienceMemberDto {
+  @IsIn(['congress', 'client_contact', 'manual'])
+  source!: 'congress' | 'client_contact' | 'manual';
+
+  @IsOptional()
+  @IsString()
+  @EmptyToUndefined()
+  @Length(1, 240)
+  sourceRefId?: string;
+
+  @IsOptional()
+  @IsString()
+  @EmptyToUndefined()
+  @Length(1, 160)
+  name?: string;
+
+  @IsEmail()
+  email!: string;
+
+  @IsOptional()
+  @IsString()
+  @EmptyToUndefined()
+  @Length(1, 240)
+  title?: string;
+
+  @IsOptional()
+  @IsString()
+  @EmptyToUndefined()
+  @Length(1, 240)
+  office?: string;
+}
+
+class CreateOutreachAudienceDto {
+  @IsIn(['list', 'group'])
+  kind!: 'list' | 'group';
+
+  @IsString()
+  @Length(1, 120)
+  name!: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 500)
+  description?: string;
+
+  @IsArray()
+  @ArrayMaxSize(500)
+  @ValidateNested({ each: true })
+  @Type(() => OutreachAudienceMemberDto)
+  members!: OutreachAudienceMemberDto[];
+}
+
+class ListOutreachAudiencesQueryDto {
+  @IsOptional()
+  @IsIn(['list', 'group'])
+  kind?: 'list' | 'group';
+}
+
+class CreateAiTemplateDto {
+  @IsString()
+  @Length(1, 120)
+  name!: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 50)
+  category?: string;
+
+  @IsString()
+  @MinLength(1)
+  prompt!: string;
+
+  @IsOptional()
+  @IsString()
+  description?: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 50)
+  tone?: string;
+}
+
+class UpdateAiTemplateDto {
+  @IsOptional()
+  @IsString()
+  @Length(1, 120)
+  name?: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 50)
+  category?: string;
+
+  @IsOptional()
+  @IsString()
+  @MinLength(1)
+  prompt?: string;
+
+  @IsOptional()
+  @IsString()
+  description?: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 50)
+  tone?: string;
+}
+
+class GenerateTalkingPointsDto {
+  @IsArray()
+  @IsString({ each: true })
+  insights!: string[];
+
+  @IsOptional()
+  @IsUUID()
+  clientId?: string;
+
+  @IsOptional()
+  @IsString()
+  additionalContext?: string;
+}
+
+/**
+ * Optional per-item context object the v2 wizard sends. The shape mirrors
+ * the wizard's `SelectedContextItem`: every item carries an explicit scope
+ * (either 'all' for shared or a recipient key string for per-recipient
+ * targeting) and a free-form note. The service may use these to build
+ * recipient-specific prompts; older callers that send `insights[]` or
+ * `additionalContext` continue to work unchanged.
+ */
+class OutreachSelectedContextItemDto {
+  @IsString()
+  id!: string;
+
+  // MUST stay in sync with the frontend ContextKind union
+  // (apps/web/src/pages/engagement/outreach/v2/types.ts). Saved meeting
+  // debriefs are a selectable context source that sends kind:'debrief'; a kind
+  // missing here makes forbidNonWhitelisted 400 the whole generate-batch and
+  // the wizard silently falls back to placeholder drafts.
+  @IsIn([
+    'bill',
+    'stateBill',
+    'intel',
+    'email',
+    'meeting',
+    'note',
+    'document',
+    'debrief',
+    'prep',
+    'programElement',
+    'capability',
+    'clientOverview',
+  ])
+  kind!:
+    | 'bill'
+    | 'stateBill'
+    | 'intel'
+    | 'email'
+    | 'meeting'
+    | 'note'
+    | 'document'
+    | 'debrief'
+    | 'prep'
+    | 'programElement'
+    | 'capability'
+    | 'clientOverview';
+
+  @IsString()
+  scope!: 'all' | string;
+
+  // ── Phase 1 §3.b1 — the current contract ──────────────────────────────────
+  // The server rehydrates every server-backed source by `id`. The only free text
+  // the browser may contribute is the user's OWN words, and both are bounded.
+
+  /** An authenticated per-item directive. */
+  @IsOptional()
+  @IsString()
+  @Length(0, 2000)
+  userInstruction?: string;
+
+  /** Only meaningful for kind==='note'. */
+  @IsOptional()
+  @IsString()
+  @Length(0, 8000)
+  customNoteText?: string;
+
+  /**
+   * Whether a custom note is a FACT to state or an INSTRUCTION to follow.
+   * Absent ⇒ 'instruction' (the safe default: treating typed prose as assertable
+   * fact is how "we spoke last week" becomes invented detail about the call).
+   */
+  @IsOptional()
+  @IsIn(['fact', 'instruction'])
+  noteUse?: 'fact' | 'instruction';
+
+  // ── Legacy fields, accepted for ONE compatibility release ─────────────────
+  // Kept so a cached client bundle or a resumed localStorage draft does not 400
+  // the moment this deploys. `title`/`body` are display-only and are NEVER used
+  // as evidence; under ENGAGEMENT_GENERATION_GATEWAY a `body` on a server-backed
+  // kind is REJECTED (assertGatewayContextContract) rather than silently ignored,
+  // so a stale client is told rather than quietly having its context dropped.
+
+  /** @deprecated Display-only; the server resolves the real title by id. */
+  @IsOptional()
+  @IsString()
+  @Length(0, 500)
+  title?: string;
+
+  /** @deprecated Never evidence. Rejected under the gateway for server-backed kinds. */
+  @IsOptional()
+  @IsString()
+  body?: string;
+
+  /** @deprecated Maps to userInstruction (or customNoteText for a note). */
+  @IsOptional()
+  @IsString()
+  @Length(0, 8000)
+  note?: string;
+}
+
+export class GenerateBatchEmailDto {
+  @IsOptional()
+  @IsUUID()
+  campaignId?: string;
+
+  /**
+   * Phase 0 (§3.c1) — the OutreachRecord every generated version is filed under.
+   *
+   * Declared OPTIONAL at the DTO layer so the pre-Phase-0 wizard keeps working
+   * with ENGAGEMENT_VERSIONED_OUTREACH=false; the SERVICE requires it (a typed
+   * 400) whenever the flag is on. Making it structurally required here would 400
+   * every legacy caller the moment this code deploys, before the flag flip.
+   */
+  @IsOptional()
+  @IsUUID()
+  outreachRecordId?: string;
+
+  @IsOptional()
+  @IsUUID()
+  clientId?: string;
+
+  @IsString()
+  @MinLength(1)
+  templateId!: string;
+
+  @IsArray()
+  // Bound the synchronous AI fan-out (A8). Each recipient is one billable AI
+  // call; the sync path also runs under the ~180s ALB idle timeout, so >100 in a
+  // single request would time out regardless. Background generation (W4) lifts
+  // this. The message is surfaced to the wizard, so keep it actionable.
+  @ArrayMaxSize(100, {
+    message: 'Generate at most 100 recipients at a time — split the campaign into smaller batches.',
+  })
+  @ValidateNested({ each: true })
+  @Type(() => OutreachRecipientDto)
+  recipients!: OutreachRecipientDto[];
+
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  insights?: string[];
+
+  @IsOptional()
+  @IsString()
+  additionalContext?: string;
+
+  /** Context Plan step 4's "what is this outreach about" free text — see
+   *  GenerateBatchEmailInput.mainIdea. */
+  @IsOptional()
+  @IsString()
+  @Length(0, 4000)
+  mainIdea?: string;
+
+  @IsOptional()
+  @IsString()
+  tone?: string;
+
+  // ---- v2 wizard additions (additive, no breaking change for v1) ----
+  @IsOptional()
+  @IsIn(['on-behalf', 'to-clients'])
+  direction?: 'on-behalf' | 'to-clients';
+
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(500)
+  @ValidateNested({ each: true })
+  @Type(() => OutreachSelectedContextItemDto)
+  contextItems?: OutreachSelectedContextItemDto[];
+
+  // 'group' → the single recipient represents a whole group getting ONE shared
+  // email (collective salutation, no per-member tailoring). Absent = individual.
+  @IsOptional()
+  @IsIn(['individual', 'group'])
+  audienceKind?: 'individual' | 'group';
+
+  // ---- Revision ("Improve") mode: single-recipient edit-in-place ----
+  @IsOptional()
+  @IsString()
+  @Length(0, 4000)
+  existingSubject?: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(0, 40000)
+  existingBody?: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(0, 2000)
+  reviseInstruction?: string;
+}
+
+/**
+ * Async generation-job submit (plan W4): the generate-batch payload + a
+ * client-generated idempotency key. A retried POST with the same requestKey
+ * returns the existing job (server dedup), so a flaky network never double-fans.
+ */
+export class OutreachGenerateJobDto extends GenerateBatchEmailDto {
+  @IsString()
+  @Length(8, 128)
+  requestKey!: string;
+}
+
+/** Body for the "last contacted" badge lookup (W5.2). Cap matches the saved-audience
+ *  member cap (CreateOutreachAudienceDto @ArrayMaxSize(500)), so applying a full
+ *  audience in the Recipients step never 400s and silently drops badges. */
+export class GetPriorContactDto {
+  @IsOptional()
+  @IsUUID()
+  clientId?: string;
+
+  @IsArray()
+  @ArrayMaxSize(500)
+  @IsEmail({}, { each: true })
+  emails!: string[];
+}
+
+class SendBatchDraftDto {
+  @IsString()
+  @Length(1, 240)
+  recipientId!: string;
+
+  @IsString()
+  @Length(0, 300)
+  subject!: string;
+
+  @IsString()
+  @Length(0, 20000)
+  body!: string;
+}
+
+class SendBatchEmailDto {
+  @IsOptional()
+  @IsUUID()
+  clientId?: string;
+
+  // When the wizard has already saved a draft, its record id rides along so the
+  // send updates THAT record in place (draft → sent) instead of orphaning it.
+  // Absent (sent without saving) → the service creates a fresh sent record so
+  // every real send still lands in the Sent history.
+  @IsOptional()
+  @IsUUID()
+  engagementId?: string;
+
+  // Campaign name for the persisted Sent record's title (falls back to the
+  // first draft subject). Purely cosmetic; the send itself doesn't need it.
+  @IsOptional()
+  @IsString()
+  @MaxLength(240)
+  campaignName?: string;
+
+  @IsOptional()
+  @IsIn(['on-behalf', 'to-clients'])
+  direction?: 'on-behalf' | 'to-clients';
+
+  @IsArray()
+  @ArrayMaxSize(500)
+  @ValidateNested({ each: true })
+  @Type(() => OutreachRecipientDto)
+  recipients!: OutreachRecipientDto[];
+
+  @IsArray()
+  @ArrayMaxSize(500)
+  @ValidateNested({ each: true })
+  @Type(() => SendBatchDraftDto)
+  drafts!: SendBatchDraftDto[];
+
+  @IsOptional()
+  @IsBoolean()
+  testMode?: boolean;
+
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(25)
+  @IsUUID('4', { each: true })
+  attachmentIds?: string[];
+
+  @IsOptional()
+  @IsBoolean()
+  appendSignature?: boolean;
+
+  // Which connected inbox to send from (IntegrationConnection id), chosen in
+  // the wizard's sender-mailbox picker. Omitted → most recently connected inbox.
+  @IsOptional()
+  @IsUUID()
+  senderConnectionId?: string;
+}
+
+/** Async send-job submit (plan W4.3): the send-batch payload + idempotency key. */
+export class OutreachSendJobDto extends SendBatchEmailDto {
+  @IsString()
+  @Length(8, 128)
+  requestKey!: string;
+}
+
+// ── Phase 0: immutable draft versions + durable send intents ─────────────────
+
+/**
+ * Append a new IMMUTABLE version of one draft slot (§3.c1).
+ *
+ * `baseVersionId` is the optimistic-concurrency token: the server refuses (409)
+ * if it is no longer the artifact's current version, so two tabs cannot silently
+ * overwrite each other.
+ *
+ * EM-04 — omit `baseVersionId` only when the artifact has never had a version
+ * (failed generation the user is authoring by hand). The server creates v1 and
+ * audits it; a missing base against a non-empty artifact is still a 409.
+ */
+export class CreateDraftVersionDto {
+  @IsOptional()
+  @IsUUID()
+  baseVersionId?: string;
+
+  @IsString()
+  @Length(0, 300)
+  subject!: string;
+
+  @IsString()
+  @Length(0, 40000)
+  body!: string;
+
+  @IsIn(['manual', 'improve', 'revert'])
+  editKind!: 'manual' | 'improve' | 'revert';
+}
+
+/**
+ * Ensure a draft-artifact row exists for one generation slot WITHOUT a version
+ * (EM-04). Used when generation failed/blocked so the user still has a stable
+ * target to hand-author against. No text is persisted here — the first version
+ * is written via CreateDraftVersionDto with no baseVersionId.
+ */
+export class EnsureDraftArtifactDto {
+  @IsString()
+  @Length(1, 512)
+  generationKey!: string;
+
+  @IsString()
+  @Length(1, 256)
+  recipientKey!: string;
+
+  @IsOptional()
+  @IsIn(['individual', 'group'])
+  audienceKind?: 'individual' | 'group';
+
+  @IsOptional()
+  @IsObject()
+  recipientSnapshot?: Record<string, unknown>;
+}
+
+/** Phase 2 §3.f2 — accept a candidate regeneration as the new current version. */
+export class AcceptCandidateVersionDto {
+  /**
+   * The artifact's currentVersion the candidate was offered against —
+   * server rejects with 409 if the artifact has moved since (someone
+   * accepted a different candidate, or authored a new edit).
+   */
+  @IsInt()
+  @Min(0)
+  baseVersion!: number;
+}
+
+/**
+ * Create a durable send intent (§3.d2).
+ *
+ * Carries DRAFT VERSION IDS ONLY. There is deliberately no subject/body field:
+ * the outbound text is read from the immutable audited version server-side, which
+ * is what makes the raw-body bypass structurally impossible rather than merely
+ * discouraged.
+ */
+export class CreateSendIntentDto {
+  @IsUUID()
+  outreachRecordId!: string;
+
+  /** Client idempotency token, minted once per Send click and reused on retry. */
+  @IsString()
+  @Length(8, 128)
+  requestKey!: string;
+
+  /** Which connected inbox to send from. Required — never inferred for a real send. */
+  @IsUUID()
+  senderConnectionId!: string;
+
+  @IsArray()
+  @ArrayMaxSize(500)
+  @IsUUID('4', { each: true })
+  draftVersionIds!: string[];
+
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(25)
+  @IsUUID('4', { each: true })
+  attachmentIds?: string[];
+
+  @IsOptional()
+  @IsBoolean()
+  appendSignature?: boolean;
+
+  /** Test send: one copy to the authenticated user; no real recipient rows. */
+  @IsOptional()
+  @IsBoolean()
+  testMode?: boolean;
+}
+
+// Exported so engagement-outreach-clamp.spec.ts can validate the REAL DTO
+// (with its real ClampTo bounds) rather than a hand-mirrored copy that could
+// drift from it.
+export class CreateOutreachRecordDto {
+  @IsIn(outreachTypes)
+  type!: (typeof outreachTypes)[number];
+
+  @IsOptional()
+  @IsUUID()
+  clientId?: string;
+
+  @IsOptional()
+  @IsUUID()
+  meetingId?: string;
+
+  @IsOptional()
+  @IsIn(['on-behalf', 'to-clients'])
+  direction?: 'on-behalf' | 'to-clients';
+
+  @IsString()
+  @Length(1, 240)
+  title!: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 300)
+  subject?: string;
+
+  @IsOptional()
+  @IsString()
+  body?: string;
+
+  // Both arrays are clamped to 500 by their normalizers before persisting, so
+  // the DTO clamps too rather than 400ing an over-long list. This is the
+  // PERSISTENCE path only — GenerateBatchEmailDto.recipients keeps its hard
+  // @ArrayMaxSize(100) reject, because silently dropping recipients from a
+  // generate or a send would lose mail the user asked to send.
+  @IsOptional()
+  @IsArray()
+  @ClampArrayTo(500)
+  @ArrayMaxSize(500)
+  @ValidateNested({ each: true })
+  @Type(() => OutreachRecipientDto)
+  recipients?: OutreachRecipientDto[];
+
+  @IsOptional()
+  @IsArray()
+  @ClampArrayTo(500)
+  @ArrayMaxSize(500)
+  @ValidateNested({ each: true })
+  @Type(() => OutreachContextPoolItemDto)
+  contextPool?: OutreachContextPoolItemDto[];
+
+  @IsOptional()
+  @IsObject()
+  metadata?: Record<string, unknown>;
+
+  @IsOptional()
+  @IsInt()
+  @Min(1)
+  @Max(7)
+  lastStep?: number;
+}
+
+class UpdateOutreachRecordDto {
+  @IsOptional()
+  @IsUUID()
+  clientId?: string | null;
+
+  @IsOptional()
+  @IsUUID()
+  meetingId?: string | null;
+
+  @IsOptional()
+  @IsIn(['on-behalf', 'to-clients'])
+  direction?: 'on-behalf' | 'to-clients' | null;
+
+  @IsOptional()
+  @IsIn(outreachStatuses)
+  status?: (typeof outreachStatuses)[number];
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 240)
+  title?: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 300)
+  subject?: string | null;
+
+  @IsOptional()
+  @IsString()
+  body?: string | null;
+
+  // Both arrays are clamped to 500 by their normalizers before persisting, so
+  // the DTO clamps too rather than 400ing an over-long list. This is the
+  // PERSISTENCE path only — GenerateBatchEmailDto.recipients keeps its hard
+  // @ArrayMaxSize(100) reject, because silently dropping recipients from a
+  // generate or a send would lose mail the user asked to send.
+  @IsOptional()
+  @IsArray()
+  @ClampArrayTo(500)
+  @ArrayMaxSize(500)
+  @ValidateNested({ each: true })
+  @Type(() => OutreachRecipientDto)
+  recipients?: OutreachRecipientDto[];
+
+  @IsOptional()
+  @IsArray()
+  @ClampArrayTo(500)
+  @ArrayMaxSize(500)
+  @ValidateNested({ each: true })
+  @Type(() => OutreachContextPoolItemDto)
+  contextPool?: OutreachContextPoolItemDto[];
+
+  @IsOptional()
+  @IsObject()
+  metadata?: Record<string, unknown>;
+
+  @IsOptional()
+  @IsInt()
+  @Min(1)
+  @Max(7)
+  lastStep?: number;
+}
+
+class GenerateOutreachDraftDto {
+  @IsOptional()
+  @IsString()
+  objective?: string;
+
+  @IsOptional()
+  @IsIn(['on-behalf', 'to-clients'])
+  direction?: 'on-behalf' | 'to-clients';
+
+  // Both arrays are clamped to 500 by their normalizers before persisting, so
+  // the DTO clamps too rather than 400ing an over-long list. This is the
+  // PERSISTENCE path only — GenerateBatchEmailDto.recipients keeps its hard
+  // @ArrayMaxSize(100) reject, because silently dropping recipients from a
+  // generate or a send would lose mail the user asked to send.
+  @IsOptional()
+  @IsArray()
+  @ClampArrayTo(500)
+  @ArrayMaxSize(500)
+  @ValidateNested({ each: true })
+  @Type(() => OutreachRecipientDto)
+  recipients?: OutreachRecipientDto[];
+
+  @IsOptional()
+  @IsArray()
+  @ClampArrayTo(500)
+  @ArrayMaxSize(500)
+  @ValidateNested({ each: true })
+  @Type(() => OutreachContextPoolItemDto)
+  contextPool?: OutreachContextPoolItemDto[];
+
+  @IsOptional()
+  @IsIn(outreachPromptTemplates)
+  promptTemplate?: (typeof outreachPromptTemplates)[number];
+
+  @IsOptional()
+  @IsObject()
+  metadata?: Record<string, unknown>;
+}
+
+class ListContactsQueryDto {
+  @IsOptional()
+  @IsString()
+  q?: string;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  @Max(100)
+  limit?: number;
+}
+
+@Controller('engagement')
+@UseGuards(RolesGuard)
+@Roles('standard_user')
+export class EngagementController {
+  constructor(
+    private readonly service: EngagementService,
+    private readonly notetaker: NotetakerService,
+    private readonly outreachJobs: OutreachJobService,
+    private readonly drafts: OutreachDraftService,
+    private readonly sendIntents: OutreachSendIntentService,
+    private readonly runtimePolicy: EngagementRuntimePolicyService,
+    @Optional() private readonly meetingPrepJobs?: MeetingPrepJobService,
+  ) {}
+
+  @Get('capabilities')
+  capabilities() {
+    // Phase 0 §3.i1: the web app must know whether versioned outreach and the
+    // v2 send gate are on, so it can pick the right send path. Booleans only —
+    // no secrets, and the raw auditor mode is never exposed.
+    //
+    // Runtime policy snapshot: exposes the live engagement-api runtime posture
+    // (shadow vs armed, external actions, background workers) so the UI can
+    // honestly report whether V3 send/generation are enabled in this environment.
+    const snapshot = this.runtimePolicy.snapshot();
+    return {
+      ...this.service.capabilities(),
+      ...this.service.engagementTrustBoundaryCapabilities(),
+      meetingPrepComprehensiveEnabled: meetingPrepEnabled(),
+      runtime: {
+        serviceName: snapshot.serviceName,
+        processMode: snapshot.processMode,
+        backgroundOwner: snapshot.backgroundOwner,
+        externalActions: snapshot.externalActions,
+        callbacksEnabled: snapshot.callbacksEnabled,
+        recallWebhookEnabled: snapshot.recallWebhookEnabled,
+        // Convenience booleans for the UI
+        externalActionsEnabled: snapshot.externalActions === 'enabled',
+        backgroundWorkersEnabled: this.runtimePolicy.backgroundWorkersEnabled(),
+        outreachV3FullGenerationEnabled: this.runtimePolicy.outreachV3FullGenerationWorkerEnabled(),
+        outreachV3SendIntentEnabled: this.runtimePolicy.outreachV3SendIntentWorkerEnabled(),
+      },
+    };
+  }
+
+  // Tenant-wide CRM contact list for link pickers (e.g. linking an
+  // acquisition-personnel record to a known contact from the Program Element
+  // page). Declared as a static segment so it never collides with the dynamic
+  // ':id' meeting/contact routes below.
+  @Get('contacts')
+  listContacts(@CurrentTenant() ctx: TenantContext, @Query() query: ListContactsQueryDto) {
+    return this.service.listContacts(ctx, query);
+  }
+
+  @Get('integrations')
+  @Roles('standard_user')
+  integrations(@CurrentTenant() ctx: TenantContext) {
+    return this.service.listIntegrations(ctx);
+  }
+
+  @Get('mail/mailboxes')
+  mailboxes(@CurrentTenant() ctx: TenantContext) {
+    return this.service.listSendingMailboxes(ctx);
+  }
+
+  @Post('integrations')
+  @Roles('standard_user')
+  createIntegration(@CurrentTenant() ctx: TenantContext, @Body() body: CreateIntegrationDto) {
+    return this.service.createIntegration(ctx, body);
+  }
+
+  @Get('meetings')
+  meetings(
+    @CurrentTenant() ctx: TenantContext,
+    @Query('clientId') clientId?: string,
+    @Query('from') from?: string,
+    @Query('to') to?: string,
+    @Query('recipientEmails') recipientEmails?: string,
+  ) {
+    return this.service.listMeetings(ctx, {
+      clientId,
+      from,
+      to,
+      recipientEmails: recipientEmails
+        ? recipientEmails
+            .split(',')
+            .map((s) => s.trim())
+            .filter(Boolean)
+        : undefined,
+    });
+  }
+
+  // Declared as a static segment BEFORE the dynamic ':id' route below so
+  // 'library' is never captured as a meeting id (same ordering rule as
+  // 'contacts' above).
+  @Get('meetings/library')
+  meetingLibrary(@CurrentTenant() ctx: TenantContext, @Query() query: MeetingLibraryQueryDto) {
+    return this.service.listMeetingLibrary(ctx, query);
+  }
+
+  @Get('meetings/:id')
+  meeting(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+    return this.service.getMeeting(ctx, id);
+  }
+
+  @Post('meetings')
+  createMeeting(@CurrentTenant() ctx: TenantContext, @Body() body: CreateMeetingDto) {
+    return this.service.createMeeting(ctx, body);
+  }
+
+  @Put('meetings/:id')
+  updateMeeting(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') id: string,
+    @Body() body: UpdateMeetingDto,
+  ) {
+    return this.service.updateMeeting(ctx, id, body);
+  }
+
+  // Private-until-shared (Meetings v2 §6). Share requires an associated client
+  // (enforced in the service); the confirmation "what/where/who" is populated by
+  // the client from the meeting payload before this is called.
+  @Post('meetings/:id/share')
+  shareMeeting(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+    return this.service.shareMeeting(ctx, id);
+  }
+
+  @Post('meetings/:id/unshare')
+  unshareMeeting(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+    return this.service.unshareMeeting(ctx, id);
+  }
+
+  // Per-artifact sharing (Phase 2 §d, ENGAGEMENT_ARTIFACT_SHARING_V2). Requires
+  // each target artifact to already be approved; the legacy whole-meeting
+  // share/unshare above keep working unchanged while the flag is off, and
+  // shareMeeting() is refused once it's on (see the service).
+  @Post('meetings/:id/artifacts/share')
+  shareArtifacts(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') meetingId: string,
+    @Body() body: ShareArtifactsDto,
+  ) {
+    return this.service.shareArtifacts(ctx, meetingId, body.artifacts);
+  }
+
+  @Post('meetings/:id/artifacts/unshare')
+  unshareArtifacts(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') meetingId: string,
+    @Body() body: ShareArtifactsDto,
+  ) {
+    return this.service.unshareArtifacts(ctx, meetingId, body.artifacts);
+  }
+
+  @Post('meetings/:id/notes')
+  createNote(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') meetingId: string,
+    @Body() body: CreateNoteDto,
+  ) {
+    return this.service.createMeetingNote(ctx, meetingId, body);
+  }
+
+  @Get('meetings/:id/notes')
+  meetingNotes(@CurrentTenant() ctx: TenantContext, @Param('id') meetingId: string) {
+    return this.service.listMeetingNotes(ctx, meetingId);
+  }
+
+  @Patch('meetings/:id/notes/:noteId')
+  updateNote(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') meetingId: string,
+    @Param('noteId') noteId: string,
+    @Body() body: CreateNoteDto,
+  ) {
+    return this.service.updateMeetingNote(ctx, meetingId, noteId, body);
+  }
+
+  // Approve a note (Phase 2 §d) — symmetric with debriefs/:debriefId/approve
+  // and debriefs/:debriefId/approve below. Only an approved note reaches the
+  // Library / is shareable.
+  @Post('meetings/:id/notes/:noteId/approve')
+  approveNote(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') meetingId: string,
+    @Param('noteId') noteId: string,
+  ) {
+    return this.service.approveMeetingNote(ctx, meetingId, noteId);
+  }
+
+  @Post('meetings/:id/debriefs')
+  createDebrief(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') meetingId: string,
+    @Body() body: CreateDebriefDto,
+  ) {
+    return this.service.createMeetingDebrief(ctx, meetingId, body);
+  }
+
+  @Get('meetings/:id/debriefs')
+  meetingDebriefs(@CurrentTenant() ctx: TenantContext, @Param('id') meetingId: string) {
+    return this.service.listMeetingDebriefs(ctx, meetingId);
+  }
+
+  @Patch('meetings/:id/debriefs/:debriefId')
+  updateDebrief(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') meetingId: string,
+    @Param('debriefId') debriefId: string,
+    @Body() body: CreateDebriefDto,
+  ) {
+    return this.service.updateMeetingDebrief(ctx, meetingId, debriefId, body);
+  }
+
+  // Approve a debrief (Meetings v2 §6).
+  // Only an approved debrief reaches the Library / is shareable.
+  @Post('meetings/:id/debriefs/:debriefId/approve')
+  approveDebrief(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') meetingId: string,
+    @Param('debriefId') debriefId: string,
+  ) {
+    return this.service.approveMeetingDebrief(ctx, meetingId, debriefId);
+  }
+
+  // Approve a meeting attachment (Phase 2 §d). Single-user approval (Neo
+  // decision) — any user with access to the meeting, including the uploader,
+  // may approve.
+  @Post('meetings/:id/attachments/:attachmentId/approve')
+  approveMeetingAttachment(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') meetingId: string,
+    @Param('attachmentId') attachmentId: string,
+  ) {
+    return this.service.approveMeetingAttachment(ctx, meetingId, attachmentId);
+  }
+
+  @Post('meetings/:id/debrief-draft')
+  @EngagementRuntimeAction('meeting_debrief_generate')
+  generateDebriefDraft(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') meetingId: string,
+    @Body() body: GenerateDebriefDraftDto,
+  ) {
+    return this.service.generateMeetingDebriefDraft(ctx, meetingId, body);
+  }
+
+  @Post('meetings/:id/notetaker')
+  @EngagementRuntimeAction('notetaker_dispatch')
+  dispatchNotetaker(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') meetingId: string,
+    @Body() body: DispatchNotetakerDto,
+  ) {
+    return this.notetaker.dispatch(ctx, meetingId, body);
+  }
+
+  @Get('clients/:id/notetaker')
+  clientNotetaker(@CurrentTenant() ctx: TenantContext, @Param('id') clientId: string) {
+    return this.notetaker.getClientPreference(ctx, clientId);
+  }
+
+  @Post('clients/:id/notetaker')
+  @EngagementRuntimeAction('notetaker_dispatch')
+  enableClientNotetaker(@CurrentTenant() ctx: TenantContext, @Param('id') clientId: string, @Body() body: ClientNotetakerConsentDto) {
+    return this.notetaker.enableClientPreference(ctx, clientId, body);
+  }
+
+  @Delete('clients/:id/notetaker')
+  @EngagementRuntimeAction('notetaker_remove')
+  disableClientNotetaker(@CurrentTenant() ctx: TenantContext, @Param('id') clientId: string) {
+    return this.notetaker.disableClientPreference(ctx, clientId);
+  }
+
+  @Get('meetings/:id/notetaker')
+  meetingNotetaker(@CurrentTenant() ctx: TenantContext, @Param('id') meetingId: string) {
+    return this.notetaker.getSessionForMeeting(ctx, meetingId);
+  }
+
+  // Kill switch (plan §5 consent control): the bot leaves the call immediately.
+  @Delete('meetings/:id/notetaker')
+  @EngagementRuntimeAction('notetaker_remove')
+  removeNotetaker(@CurrentTenant() ctx: TenantContext, @Param('id') meetingId: string) {
+    return this.notetaker.remove(ctx, meetingId);
+  }
+
+  @Post('meetings/:id/prep')
+  @HttpCode(202)
+  @EngagementRuntimeAction('meeting_prep_generate')
+  generatePrep(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') meetingId: string,
+    @Body() body: GenerateMeetingPrepDto,
+    @Res({ passthrough: true }) response?: ExpressResponse,
+  ) {
+    if (meetingPrepEnabled() && this.meetingPrepJobs) return this.meetingPrepJobs.submit(ctx, meetingId, body);
+    response?.status(201);
+    return this.service.generateMeetingPrep(ctx, meetingId, body.additionalContext);
+  }
+
+  @Get('meetings/:id/prep-jobs/latest')
+  latestPrepJob(@CurrentTenant() ctx: TenantContext, @Param('id') meetingId: string) {
+    return this.meetingPrepJobs?.get(ctx, meetingId) ?? null;
+  }
+
+  @Get('meetings/:id/prep-monday-mapping')
+  prepMondayMapping(@CurrentTenant() ctx: TenantContext, @Param('id') meetingId: string) {
+    return this.meetingPrepJobs?.mondayMapping(ctx, meetingId) ?? null;
+  }
+
+  @Put('meetings/:id/prep-monday-mapping')
+  updatePrepMondayMapping(@CurrentTenant() ctx: TenantContext, @Param('id') meetingId: string, @Body() body: MeetingPrepMondayMappingDto) {
+    return this.meetingPrepJobs?.mondayMapping(ctx, meetingId, body.boardIds) ?? null;
+  }
+
+  @Get('meetings/:id/prep-jobs/:jobId')
+  prepJob(@CurrentTenant() ctx: TenantContext, @Param('id') meetingId: string, @Param('jobId') jobId: string) {
+    return this.meetingPrepJobs?.get(ctx, meetingId, jobId) ?? null;
+  }
+
+  @Delete('meetings/:id/prep-jobs/:jobId')
+  cancelPrepJob(@CurrentTenant() ctx: TenantContext, @Param('id') meetingId: string, @Param('jobId') jobId: string) {
+    return this.meetingPrepJobs?.cancel(ctx, meetingId, jobId) ?? null;
+  }
+
+  @Post('meetings/:id/prep-jobs/:jobId/resume')
+  @HttpCode(202)
+  @EngagementRuntimeAction('meeting_prep_generate')
+  resumePrepJob(@CurrentTenant() ctx: TenantContext, @Param('id') meetingId: string, @Param('jobId') jobId: string) {
+    return this.meetingPrepJobs?.resume(ctx, meetingId, jobId) ?? null;
+  }
+
+  @Patch('meeting-preps/:id')
+  updatePrep(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') prepId: string,
+    @Body() body: UpdateMeetingPrepDto,
+  ) {
+    return this.service.updateMeetingPrep(ctx, prepId, body);
+  }
+
+  // The on-screen prep rendered to PDF and stored as a meeting attachment, so
+  // the compose window can email it to teammates through the user's mailbox.
+  @Post('meeting-preps/:id/pdf-attachment')
+  @EngagementRuntimeAction('attachment_external_write')
+  prepPdfAttachment(@CurrentTenant() ctx: TenantContext, @Param('id') prepId: string) {
+    return this.service.createMeetingPrepPdfAttachment(ctx, prepId);
+  }
+
+  @Get('mail-threads')
+  mailThreads(
+    @CurrentTenant() ctx: TenantContext,
+    @Query('clientId') clientId?: string,
+    @Query('recipientEmails') recipientEmails?: string,
+  ) {
+    return this.service.listMailThreads(ctx, {
+      clientId,
+      recipientEmails: recipientEmails
+        ? recipientEmails
+            .split(',')
+            .map((s) => s.trim())
+            .filter(Boolean)
+        : undefined,
+    });
+  }
+
+  /** Full message history for one thread — the list route caps each thread at 3. */
+  @Get('mail-threads/:id')
+  mailThreadDetail(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+    return this.service.getMailThread(ctx, id);
+  }
+
+  /**
+   * Send a single email as the caller's own connected mailbox (Outlook or
+   * Gmail) — the compose window on a client's Timeline / person drawer, not a
+   * batch campaign. Classified under `outreach_send` (not a new action):
+   * same real side effect — dispatching outbound email through a connected
+   * mailbox — the existing action already governs.
+   */
+  @Post('mail/send')
+  @EngagementRuntimeAction('outreach_send')
+  sendSingleMail(@CurrentTenant() ctx: TenantContext, @Body() body: SendSingleMailDto) {
+    // Wire back-compat lives here, at the edge, so `SendSingleMailInput` and the
+    // whole service body stay single-shape: fold the deprecated pre-#1444
+    // `personId` into `personIds`. This cannot be a DTO `@Transform` —
+    // class-transformer only runs a property's transform when that key is on the
+    // payload, and an old client sends `personId` with no `personIds` key. `to`
+    // needs nothing here; `@WrapSingleInArray()` already normalized it. The
+    // destructure also strips `personId` so the dead field never reaches the
+    // service's input contract.
+    const { personId, ...rest } = body;
+    return this.service.sendSingleMail(ctx, {
+      ...rest,
+      personIds: rest.personIds?.length ? rest.personIds : personId ? [personId] : undefined,
+    });
+  }
+
+  /**
+   * "Rewrite with Meri" — turns the user's own rough notes into a coherent
+   * email. Classified under `outreach_generate` (not a new action): same
+   * real side effect — an LLM call drafting outbound-email prose — the
+   * existing action already governs.
+   */
+  @Post('mail/rewrite')
+  @EngagementRuntimeAction('outreach_generate')
+  rewriteEmail(@CurrentTenant() ctx: TenantContext, @Body() body: RewriteEmailDto) {
+    return this.service.rewriteEmailDraft(ctx, body);
+  }
+
+  @Get('debriefs')
+  clientDebriefs(
+    @CurrentTenant() ctx: TenantContext,
+    @Query('clientId') clientId?: string,
+    @Query('recipientEmails') recipientEmails?: string,
+  ) {
+    return this.service.listClientDebriefs(ctx, {
+      clientId,
+      recipientEmails: recipientEmails
+        ? recipientEmails
+            .split(',')
+            .map((s) => s.trim())
+            .filter(Boolean)
+        : undefined,
+    });
+  }
+
+  // Shared meeting records for a client's Documents tab (Meetings v2 §8). Tenant-
+  // scoped (shared material is org-visible), NOT owner-scoped — mirrors the
+  // client-scoped debriefs feed above. Query-param client scoping matches the
+  // existing /engagement/attachments?clientId= and /engagement/debriefs?clientId= idiom.
+  @Get('shared-meetings')
+  sharedMeetings(@CurrentTenant() ctx: TenantContext, @Query('clientId') clientId: string) {
+    return this.service.listSharedMeetingsForClient(ctx, clientId);
+  }
+
+  @Get('outreach')
+  outreachRecords(
+    @CurrentTenant() ctx: TenantContext,
+    @Query('clientId') clientId?: string,
+    @Query('from') from?: string,
+    @Query('to') to?: string,
+    @Query('type') type?: string,
+    @Query('limit') limit?: string,
+    @Query('deleted') deleted?: string,
+  ) {
+    return this.service.listOutreachRecords(ctx, {
+      clientId,
+      from,
+      to,
+      type,
+      limit,
+      deleted: deleted === 'true' || deleted === '1',
+    });
+  }
+
+  @Get('outreach/outbound/contact-data')
+  outboundCampaignContactData(
+    @CurrentTenant() ctx: TenantContext,
+    @Query('clientId') clientId?: string,
+  ) {
+    return this.service.outboundCampaignContactData(ctx, { clientId });
+  }
+
+  @Get('outreach/templates')
+  outreachTemplates(@CurrentTenant() ctx: TenantContext, @Query('type') type?: string) {
+    return this.service.listOutreachTemplates(ctx, { type });
+  }
+
+  @Post('outreach/templates')
+  createOutreachTemplate(
+    @CurrentTenant() ctx: TenantContext,
+    @Body() body: CreateOutreachTemplateDto,
+  ) {
+    return this.service.createOutreachTemplate(ctx, body);
+  }
+
+  @Get('outreach/ai-templates')
+  listAiTemplates(@CurrentTenant() ctx: TenantContext) {
+    return this.service.listAiTemplates(ctx);
+  }
+
+  @Post('outreach/ai-templates')
+  createAiTemplate(@CurrentTenant() ctx: TenantContext, @Body() body: CreateAiTemplateDto) {
+    return this.service.createAiTemplate(ctx, body);
+  }
+
+  @Put('outreach/ai-templates/:id')
+  updateAiTemplate(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') id: string,
+    @Body() body: UpdateAiTemplateDto,
+  ) {
+    return this.service.updateAiTemplate(ctx, id, body);
+  }
+
+  @Delete('outreach/ai-templates/:id')
+  deleteAiTemplate(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+    return this.service.deleteAiTemplate(ctx, id);
+  }
+
+  // Live, billable AI call. Cap well below the global 600/min per-IP limit
+  // (A7); the global 30/s `short` burst limit still applies unchanged.
+  @Throttle({ long: { ttl: 60_000, limit: 30 } })
+  @Get('outreach/ai-templates/:id/preview')
+  previewAiTemplate(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+    return this.service.previewAiTemplate(ctx, id);
+  }
+
+  @Get('outreach/insights')
+  outreachInsights(@CurrentTenant() ctx: TenantContext, @Query('clientId') clientId?: string) {
+    return this.service.getOutreachInsights(ctx, { clientId });
+  }
+
+  // Billable AI call (A7). Cap below the global 600/min per-IP limit.
+  @Throttle({ long: { ttl: 60_000, limit: 40 } })
+  @Post('outreach/insights/talking-points')
+  @EngagementRuntimeAction('outreach_generate')
+  generateTalkingPoints(
+    @CurrentTenant() ctx: TenantContext,
+    @Body() body: GenerateTalkingPointsDto,
+  ) {
+    return this.service.generateTalkingPoints(ctx, body);
+  }
+
+  // The most expensive endpoint: fans out one AI call per recipient (up to 100).
+  // Cap at 120/min per IP (A7) — an order of magnitude below the global 600/min,
+  // but with headroom for a many-group campaign: one "Generate" click costs
+  // (1 flat chunk + N group) parallel POSTs, and a regenerate-all repeats them.
+  // Only the per-minute window is overridden — the 30/s `short` limit is left
+  // intact so those near-simultaneous POSTs are not falsely rejected.
+  @Throttle({ long: { ttl: 60_000, limit: 120 } })
+  @Post('outreach/generate-batch')
+  @EngagementRuntimeAction('outreach_generate')
+  generateBatchEmails(
+    @CurrentTenant() ctx: TenantContext,
+    @Body() body: GenerateBatchEmailDto,
+    // HP-05 (Gate L): forwarded so an 'intel' context item can be rehydrated
+    // from intel-api's packet endpoint under the caller's own identity — see
+    // AlertPacketClientService. Never logged, never persisted.
+    @Headers('authorization') authHeader?: string,
+  ) {
+    return this.service.generateBatchEmails(ctx, body, authHeader);
+  }
+
+  @Post('outreach/send-batch')
+  @EngagementRuntimeAction('outreach_send')
+  sendBatchEmails(@CurrentTenant() ctx: TenantContext, @Body() body: SendBatchEmailDto) {
+    return this.service.sendBatchEmails(ctx, body);
+  }
+
+  // "Last contacted Nd ago" badge lookup for the Recipients step (W5.2). Cheap
+  // read (no AI), so no @Throttle override — same class as outreach-insights.
+  @Post('outreach/prior-contact')
+  getPriorContact(@CurrentTenant() ctx: TenantContext, @Body() body: GetPriorContactDto) {
+    return this.service.getRecipientPriorContact(ctx, body);
+  }
+
+  // Async generation job (plan W4): returns 202 + jobId in ms; the claim-sweep
+  // worker drafts off the request path. Gated on OUTREACH_ASYNC_GEN so the sync
+  // generate-batch above stays the path until the async flag is flipped on.
+  @Throttle({ long: { ttl: 60_000, limit: 120 } })
+  @Post('outreach/jobs/generate')
+  @EngagementRuntimeAction('outreach_generate')
+  async submitGenerateJob(
+    @CurrentTenant() ctx: TenantContext,
+    @Body() body: OutreachGenerateJobDto,
+  ) {
+    if (!this.outreachJobs.asyncEnabled('generate')) {
+      throw new BadRequestException('Async outreach generation is not enabled in this environment');
+    }
+    const { requestKey, recipients, ...params } = body;
+    return this.outreachJobs.submit(ctx, {
+      requestKey,
+      kind: 'generate',
+      params: params as Record<string, unknown>,
+      recipients: (recipients ?? []) as Array<Record<string, unknown>>,
+    });
+  }
+
+  // Async send job (plan W4.3): at-most-once, idempotent on requestKey. Each
+  // draft is merged into its recipient to form the per-item send payload. Gated
+  // on OUTREACH_ASYNC_SEND (sync send-batch stays the path until flipped).
+  @Post('outreach/jobs/send')
+  @EngagementRuntimeAction('outreach_send')
+  async submitSendJob(@CurrentTenant() ctx: TenantContext, @Body() body: OutreachSendJobDto) {
+    if (!this.outreachJobs.asyncEnabled('send')) {
+      throw new BadRequestException('Async outreach send is not enabled in this environment');
+    }
+    const { requestKey, recipients, drafts, ...params } = body;
+    const draftByKey = new Map(drafts.map((d) => [d.recipientId, d]));
+    // One item per recipient that has a matching draft; the draft's subject/body
+    // ride in the item payload alongside the recipient fields.
+    const items = (recipients ?? [])
+      .map((r, i): Record<string, unknown> | null => {
+        const key = outreachRecipientKey(r as unknown as Record<string, unknown>, i);
+        const draft = draftByKey.get(key);
+        if (!draft) return null;
+        return {
+          ...(r as unknown as Record<string, unknown>),
+          subject: draft.subject,
+          body: draft.body,
+        };
+      })
+      .filter((x): x is Record<string, unknown> => x !== null);
+    return this.outreachJobs.submit(ctx, {
+      requestKey,
+      kind: 'send',
+      params: params as Record<string, unknown>,
+      recipients: items,
+    });
+  }
+
+  @Get('outreach/jobs/:id')
+  async getOutreachJob(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+    const job = await this.outreachJobs.getJob(ctx, id);
+    if (!job) throw new NotFoundException('Outreach job not found');
+    return job;
+  }
+
+  @Post('outreach/jobs/:id/cancel')
+  cancelOutreachJob(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+    return this.outreachJobs.cancelJob(ctx, id);
+  }
+
+  // Retry ONE failed generation item (plan W4.4) without resubmitting the whole
+  // batch. Gated the same way as generate-job submission.
+  @Post('outreach/jobs/:id/items/:itemId/retry')
+  retryOutreachJobItem(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') id: string,
+    @Param('itemId') itemId: string,
+  ) {
+    if (!this.outreachJobs.asyncEnabled('generate')) {
+      throw new BadRequestException('Async outreach generation is not enabled in this environment');
+    }
+    return this.outreachJobs.retryItem(ctx, id, itemId);
+  }
+
+  // ── Phase 0: immutable draft versions ──────────────────────────────────────
+  // All declared BEFORE 'outreach/:id' so the dynamic route cannot swallow
+  // 'draft-artifacts' / 'draft-versions' / 'send-intents' as record ids.
+
+  /** Every draft slot for one outreach record, with its current version. */
+  @Get('outreach/:outreachRecordId/draft-artifacts')
+  listDraftArtifacts(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('outreachRecordId') outreachRecordId: string,
+  ) {
+    return this.drafts.listForOutreach(ctx, outreachRecordId);
+  }
+
+  /**
+   * EM-04 — ensure a draft-artifact row exists for one generation slot WITHOUT
+   * a version. Called when generation failed/blocked so the user still has a
+   * stable target to hand-author against. Idempotent: re-calling with the same
+   * generationKey returns the existing artifact.
+   */
+  @Throttle({ long: { ttl: 60_000, limit: 240 } })
+  @Post('outreach/:outreachRecordId/draft-artifacts')
+  ensureDraftArtifact(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('outreachRecordId') outreachRecordId: string,
+    @Body() body: EnsureDraftArtifactDto,
+  ) {
+    return this.drafts.ensureArtifact(ctx, {
+      outreachRecordId,
+      generationKey: body.generationKey,
+      recipientKey: body.recipientKey,
+      audienceKind: body.audienceKind ?? 'individual',
+      recipientSnapshot: body.recipientSnapshot ?? {},
+      subject: '',
+      body: '',
+    });
+  }
+
+  /**
+   * Append a new immutable version (manual edit / Improve / Revert).
+   *
+   * Throttled like the other write endpoints: this can trigger an AUDIT but never
+   * a new drafting LLM call, so it does not need the tight generate-batch budget —
+   * and autosave means a user legitimately produces a steady trickle of these.
+   */
+  @Throttle({ long: { ttl: 60_000, limit: 240 } })
+  @Post('outreach/draft-artifacts/:artifactId/versions')
+  createDraftVersion(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('artifactId') artifactId: string,
+    @Body() body: CreateDraftVersionDto,
+  ) {
+    return this.drafts.createEditedVersion(ctx, artifactId, body);
+  }
+
+  /** One immutable version, owner-scoped. */
+  @Get('outreach/draft-versions/:versionId')
+  getDraftVersion(@CurrentTenant() ctx: TenantContext, @Param('versionId') versionId: string) {
+    return this.drafts.getVersion(ctx, versionId);
+  }
+
+  /**
+   * Phase 2 §3.f2 — accept a candidate regeneration (one offered instead of
+   * silently overwriting a manually authored current version) as the new
+   * current version. 409s if the artifact moved since the candidate was
+   * generated.
+   */
+  @Throttle({ long: { ttl: 60_000, limit: 240 } })
+  @Post('outreach/draft-artifacts/:artifactId/versions/:candidateVersionId/accept')
+  acceptCandidateVersion(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('artifactId') artifactId: string,
+    @Param('candidateVersionId') candidateVersionId: string,
+    @Body() body: AcceptCandidateVersionDto,
+  ) {
+    return this.drafts.acceptCandidateVersion(ctx, artifactId, candidateVersionId, body.baseVersion);
+  }
+
+  // ── Phase 0: durable send intents ──────────────────────────────────────────
+
+  /**
+   * Create a durable send intent. The intent and every delivery row are committed
+   * BEFORE any provider request; the worker then delivers at-most-once.
+   */
+  @Post('outreach/send-intents')
+  @EngagementRuntimeAction('outreach_send')
+  createSendIntent(@CurrentTenant() ctx: TenantContext, @Body() body: CreateSendIntentDto) {
+    return this.sendIntents.createIntent(ctx, body);
+  }
+
+  @Get('outreach/send-intents/:id')
+  getSendIntent(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+    return this.sendIntents.getIntent(ctx, id);
+  }
+
+  /**
+   * Cancel what has not left yet. Pending deliveries become skipped; a delivery
+   * already in flight is NOT cancelled (we will not claim success for a message
+   * that may already have been delivered) and is reported back in `inFlight`.
+   */
+  @Post('outreach/send-intents/:id/cancel')
+  cancelSendIntent(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+    return this.sendIntents.cancelIntent(ctx, id);
+  }
+
+  // Tenant-wide context library for the Build Context step (docs/notes, debriefs,
+  // preps grouped by client). Declared before 'outreach/:id' so the dynamic route
+  // doesn't swallow 'context-library' as an id.
+  @Get('outreach/context-library')
+  outreachContextLibrary(@CurrentTenant() ctx: TenantContext) {
+    return this.service.buildOutreachContextLibrary(ctx);
+  }
+
+  // Saved audiences must be declared BEFORE 'outreach/:id' or the dynamic
+  // route would swallow 'audiences' as an id.
+  @Get('outreach/audiences')
+  listOutreachAudiences(
+    @CurrentTenant() ctx: TenantContext,
+    @Query() query: ListOutreachAudiencesQueryDto,
+  ) {
+    return this.service.listOutreachAudiences(ctx, query.kind);
+  }
+
+  @Post('outreach/audiences')
+  createOutreachAudience(
+    @CurrentTenant() ctx: TenantContext,
+    @Body() body: CreateOutreachAudienceDto,
+  ) {
+    return this.service.createOutreachAudience(ctx, body);
+  }
+
+  @Get('outreach/:id')
+  outreachRecord(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+    return this.service.getOutreachRecord(ctx, id);
+  }
+
+  @Post('outreach')
+  createOutreachRecord(@CurrentTenant() ctx: TenantContext, @Body() body: CreateOutreachRecordDto) {
+    return this.service.createOutreachRecord(ctx, body);
+  }
+
+  @Patch('outreach/:id')
+  updateOutreachRecord(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') id: string,
+    @Body() body: UpdateOutreachRecordDto,
+  ) {
+    return this.service.updateOutreachRecord(ctx, id, body);
+  }
+
+  // Single-record AI regeneration (billable). Cap below the global per-IP limit (A7).
+  @Throttle({ long: { ttl: 60_000, limit: 40 } })
+  @Post('outreach/:id/generate-draft')
+  @EngagementRuntimeAction('outreach_generate')
+  generateOutreachDraft(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') id: string,
+    @Body() body: GenerateOutreachDraftDto,
+  ) {
+    return this.service.generateOutreachDraft(ctx, id, body);
+  }
+
+  @Post('outreach/:id/open-email')
+  openOutreachEmail(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+    return this.service.openOutreachInConnectedEmail(ctx, id);
+  }
+
+  @Post('outreach/:id/send-campaign')
+  @EngagementRuntimeAction('outreach_send')
+  sendCampaign(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+    return this.service.sendCampaign(ctx, id);
+  }
+
+  @Delete('outreach/:id')
+  deleteOutreachRecord(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+    return this.service.deleteOutreachRecord(ctx, id);
+  }
+
+  @Post('outreach/:id/restore')
+  restoreOutreachRecord(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+    return this.service.restoreOutreachRecord(ctx, id);
+  }
+
+  @Get('reports/overview')
+  reportOverview(
+    @CurrentTenant() ctx: TenantContext,
+    @Query('clientId') clientId?: string,
+    @Query('period') period?: string,
+  ) {
+    return this.service.reportOverview(ctx, { clientId, period });
+  }
+
+  @Post('reports/target-offices')
+  createReportTargetOffice(
+    @CurrentTenant() ctx: TenantContext,
+    @Body() body: CreateReportTargetOfficeDto,
+  ) {
+    return this.service.createReportTargetOffice(ctx, body);
+  }
+
+  @Post('reports/target-offices/overrides')
+  upsertReportTargetOffice(
+    @CurrentTenant() ctx: TenantContext,
+    @Body() body: UpsertReportTargetOfficeDto,
+  ) {
+    return this.service.upsertReportTargetOffice(ctx, body);
+  }
+
+  @Delete('reports/target-offices/overrides')
+  clearReportTargetOfficeOverrides(
+    @CurrentTenant() ctx: TenantContext,
+    @Body() body: ClearReportTargetOfficeOverrideDto,
+  ) {
+    return this.service.clearReportTargetOfficeOverrides(ctx, body);
+  }
+
+  @Post('reports/target-offices/link')
+  linkReportTargetOffice(
+    @CurrentTenant() ctx: TenantContext,
+    @Body() body: LinkReportTargetOfficeDto,
+  ) {
+    return this.service.linkReportTargetOfficeToDirectory(ctx, body);
+  }
+
+  @Patch('reports/target-offices/:id')
+  updateReportTargetOffice(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') id: string,
+    @Body() body: UpdateReportTargetOfficeDto,
+  ) {
+    return this.service.updateReportTargetOffice(ctx, id, body);
+  }
+
+  @Delete('reports/target-offices/:id')
+  archiveReportTargetOffice(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+    return this.service.archiveReportTargetOffice(ctx, id);
+  }
+
+  @Get('tasks')
+  tasks(@CurrentTenant() ctx: TenantContext, @Query('clientId') clientId?: string) {
+    return this.service.listTasks(ctx, { clientId });
+  }
+
+  @Post('tasks')
+  createTask(@CurrentTenant() ctx: TenantContext, @Body() body: CreateTaskDto) {
+    return this.service.createTask(ctx, body);
+  }
+
+  @Patch('tasks/:id')
+  updateTask(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') id: string,
+    @Body() body: UpdateTaskDto,
+  ) {
+    return this.service.updateTask(ctx, id, body);
+  }
+
+  @Post('associations/override')
+  overrideAssociation(@CurrentTenant() ctx: TenantContext, @Body() body: AssociationOverrideDto) {
+    return this.service.overrideAssociation(ctx, body);
+  }
+
+  @Get('context/:clientId')
+  clientContext(@CurrentTenant() ctx: TenantContext, @Param('clientId') clientId: string) {
+    return this.service.clientContext(ctx, clientId);
+  }
+
+  @Post('attachments/upload-url')
+  @EngagementRuntimeAction('attachment_external_write')
+  createAttachmentUploadUrl(
+    @CurrentTenant() ctx: TenantContext,
+    @Body() body: AttachmentUploadDto,
+  ) {
+    return this.service.createAttachmentUploadUrl(ctx, body);
+  }
+
+  @Post('attachments/confirm')
+  @EngagementRuntimeAction('attachment_external_write')
+  confirmAttachment(@CurrentTenant() ctx: TenantContext, @Body() body: ConfirmAttachmentDto) {
+    return this.service.confirmAttachment(ctx, body);
+  }
+
+  @Get('attachments')
+  attachments(
+    @CurrentTenant() ctx: TenantContext,
+    @Query('clientId') clientId?: string,
+    @Query('meetingId') meetingId?: string,
+    @Query('mailMessageId') mailMessageId?: string,
+    @Query('unlinked') unlinked?: string,
+    @Query('prospectId') prospectId?: string,
+  ) {
+    return this.service.listAttachments(ctx, {
+      prospectId,
+      clientId,
+      meetingId,
+      mailMessageId,
+      // General (client-free) outreach library: files with no parent entity.
+      unlinked: unlinked === 'true' || unlinked === '1',
+    });
+  }
+
+  @Post('attachments/:id/extract-text')
+  @EngagementRuntimeAction('attachment_external_read')
+  extractAttachmentText(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+    return this.service.extractAttachmentText(ctx, id);
+  }
+
+  @Post('attachments/:id/context-text')
+  @EngagementRuntimeAction('attachment_external_read')
+  extractAttachmentContext(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') id: string,
+    @Body() body: AttachmentContextReadDto,
+  ) {
+    return this.service.extractAttachmentText(ctx, id, {
+      clientId: body.clientId,
+      contextImport: true,
+    });
+  }
+
+  @Post('attachments/:id/context-source')
+  @EngagementRuntimeAction('attachment_external_read')
+  async attachmentContextSource(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') id: string,
+    @Body() body: AttachmentContextReadDto,
+  ) {
+    const source = await this.service.extractAttachmentText(ctx, id, {
+      clientId: body.clientId,
+      contextSourceOnly: true,
+    });
+    return {
+      attachmentId: source.attachmentId,
+      clientId: body.clientId,
+      fileName: source.fileName,
+      contentType: source.contentType,
+      contentHash: source.contentHash,
+    };
+  }
+
+  @Delete('attachments/:id')
+  deleteAttachment(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+    return this.service.deleteAttachment(ctx, id);
+  }
+
+  @Get('campaigns')
+  listCampaigns(
+    @CurrentTenant() ctx: TenantContext,
+    @Query('clientId') clientId?: string,
+    @Query('status') status?: string,
+  ) {
+    return this.service.listCampaigns(ctx, { clientId, status });
+  }
+
+  @Post('campaigns')
+  createCampaign(@CurrentTenant() ctx: TenantContext, @Body() body: CreateCampaignDto) {
+    return this.service.createCampaign(ctx, body);
+  }
+
+  @Get('campaigns/:id')
+  getCampaign(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+    return this.service.getCampaign(ctx, id);
+  }
+
+  @Patch('campaigns/:id')
+  updateCampaign(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') id: string,
+    @Body() body: UpdateCampaignDto,
+  ) {
+    return this.service.updateCampaign(ctx, id, body);
+  }
+
+  @Delete('campaigns/:id')
+  deleteCampaign(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+    return this.service.deleteCampaign(ctx, id);
+  }
+
+  @Post('campaigns/:id/recipients')
+  addCampaignRecipients(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') id: string,
+    @Body() body: AddCampaignRecipientsDto,
+  ) {
+    return this.service.addCampaignRecipients(ctx, id, body.recipients);
+  }
+
+  @Delete('campaigns/:id/recipients/:recipientId')
+  removeCampaignRecipient(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') id: string,
+    @Param('recipientId') recipientId: string,
+  ) {
+    return this.service.removeCampaignRecipient(ctx, id, recipientId);
+  }
+
+  @Post('campaigns/:id/generate')
+  @EngagementRuntimeAction('outreach_generate')
+  generateCampaignEmail(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') id: string,
+    @Body() body: GenerateCampaignEmailDto,
+  ) {
+    return this.service.generateCampaignEmail(ctx, id, body);
+  }
+
+  @Post('campaigns/:id/send')
+  @EngagementRuntimeAction('outreach_send')
+  sendCampaignEmails(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+    return this.service.sendCampaignEmails(ctx, id);
+  }
+
+  @Post('campaigns/:id/send-test')
+  @EngagementRuntimeAction('outreach_test_send', { testMode: true })
+  sendCampaignTest(@CurrentTenant() ctx: TenantContext, @Param('id') id: string) {
+    return this.service.sendCampaignTest(ctx, id);
+  }
+}
