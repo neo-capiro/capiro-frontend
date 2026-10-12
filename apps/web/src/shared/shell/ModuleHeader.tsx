@@ -13,6 +13,7 @@ export function ModuleHeader({
 }) {
   return (
     <HeaderFrame
+      mobileModeRow
       className={styles.header}
       brand={
         <Link href="/" className={styles.brand} aria-label="Capiro Home">

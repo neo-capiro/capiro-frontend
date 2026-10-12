@@ -212,10 +212,6 @@
   .globalActions button {
     width: 32px;
   }
-  .globalActions > button,
-  .globalActions > a[aria-label="Search intelligence"] {
-    display: none;
-  }
   .main {
     padding: 20px 16px 40px;
   }

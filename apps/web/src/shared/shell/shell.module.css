@@ -156,9 +156,6 @@
     width: 77px;
     flex-basis: 77px;
   }
-  .globalActions .action:not(:last-child) {
-    display: none;
-  }
   .sidebar {
     display: none;
   }

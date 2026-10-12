@@ -8,15 +8,19 @@ export function HeaderFrame({
   actions,
   leading,
   className = "",
+  mobileModeRow = false,
 }: {
   brand: ReactNode;
   modes: ReactNode;
   actions: ReactNode;
   leading?: ReactNode;
   className?: string;
+  mobileModeRow?: boolean;
 }) {
   return (
-    <header className={`${styles.header} ${className}`}>
+    <header
+      className={`${styles.header} ${mobileModeRow ? styles.mobileModeRow : ""} ${className}`}
+    >
       {leading}
       {brand}
       {modes}

@@ -92,6 +92,17 @@ test("shared product navigation and history preserve verified client hints and s
   );
   await expect(page.getByLabel("Scope draft")).toHaveValue("");
   await page.setViewportSize({ width: 390, height: 844 });
+  const modes = page.getByRole("navigation", { name: "Product modes" });
+  const brand = page.getByRole("link", { name: "Capiro Home" });
+  const modeBounds = await modes.boundingBox();
+  const brandBounds = await brand.boundingBox();
+  expect(modeBounds!.y).toBeGreaterThan(brandBounds!.y + brandBounds!.height);
+  await expect(
+    page.getByRole("link", { name: "Search intelligence" }),
+  ).toBeVisible();
+  await page.screenshot({
+    path: "test-results/integration-modules-mobile-collapsed.png",
+  });
   await page.getByRole("button", { name: "Modules menu" }).click();
   await expect(
     page.getByRole("navigation", { name: "Modules", exact: true }),
