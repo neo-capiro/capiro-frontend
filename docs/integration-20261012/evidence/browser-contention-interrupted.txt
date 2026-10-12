@@ -1,0 +1,241 @@
+
+> @capiro/web@0.1.0 test:browser
+> playwright test --workers=4
+
+[WebServer] (node:14140) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 881 tests using 4 workers
+
+(node:14209) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14208) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14215) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14216) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓    4 tests/browser/advocacy-corrections.spec.ts:64:1 › Objectives preserves history left/current objectives right and New matter; saved source identity stays explicit (22.7s)
+  ✓    2 tests/browser/activity-actions.spec.ts:27:1 › recorded edits retain failed input, reject blank titles and refresh the scoped feed (24.3s)
+  ✓    3 tests/browser/activity-pin.spec.ts:25:1 › pin/unpin persists only the note field, displays inline state and returns keyboard focus (30.2s)
+  ✘    1 tests/browser/activity.spec.ts:28:1 › history search, kind, inclusive local dates, invalid range and clear use the existing feed (32.8s)
+(node:15176) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓    6 tests/browser/activity-actions.spec.ts:133:1 › settlement requires a due date, retains permission errors, prevents duplicate writes and reopens (16.8s)
+  ✓    5 tests/browser/advocacy-corrections.spec.ts:111:1 › merge explicitly reviews source into kept destination, guards pending and verifies transferred evidence (21.3s)
+  ✓    7 tests/browser/activity-pin.spec.ts:83:3 › pin refuses wrong client receipt and requires review before retry (19.2s)
+  ✓    8 tests/browser/activity.spec.ts:137:1 › history failure and retry retain entered filters (14.3s)
+  ✓   12 tests/browser/advocacy-history-edit.spec.ts:41:1 › baseline: dated timeline reveals only withheld loaded events and preserves undated evidence (8.7s)
+  ✓   13 tests/browser/advocacy-history-edit.spec.ts:77:1 › baseline: search and status operate on native title summary PE and bill fields (5.6s)
+  ✓   11 tests/browser/activity-pin.spec.ts:83:3 › pin refuses wrong tenant receipt and requires review before retry (19.9s)
+  ✓   10 tests/browser/advocacy-corrections.spec.ts:171:1 › reassign moves exact reviewed record and refreshes both matter views (25.3s)
+  ✓   14 tests/browser/advocacy-history-edit.spec.ts:108:1 › baseline: failed timeline refresh conceals retained events while current matters stay reachable (5.4s)
+  ✓   17 tests/browser/advocacy-history-edit.spec.ts:128:1 › failed matter reads conceal retained rows but preserve independently current unfiltered events (9.4s)
+  ✘    9 tests/browser/activity-actions.spec.ts:209:1 › removal is confirmed, retains service errors and rejects a false success response (36.9s)
+(node:16394) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   18 tests/browser/advocacy-history-edit.spec.ts:157:1 › a selected status cannot join stale matter data after catalog failure (6.9s)
+  ✓   15 tests/browser/activity-pin.spec.ts:83:3 › pin refuses wrong record receipt and requires review before retry (27.1s)
+  ✓   20 tests/browser/advocacy-history-edit.spec.ts:187:1 › exact requested detail remains independent of a failed timeline and refuses another matter receipt (10.2s)
+  ✓   19 tests/browser/activity-actions.spec.ts:301:1 › expired authentication during removal uses the shared session boundary (18.8s)
+  ✓   16 tests/browser/advocacy-corrections.spec.ts:199:1 › detach preserves a scoped unassigned record that can be reassigned later (32.6s)
+  ✓   22 tests/browser/advocacy-history-edit.spec.ts:215:1 › invalidated timeline success is not displayed as current (6.8s)
+  ✓   23 tests/browser/advocacy-timeline-dark.spec.ts:8:3 › dark desktop timeline keeps loaded Figma icons legible at their exact geometry (9.7s)
+  ✓   21 tests/browser/activity-pin.spec.ts:83:3 › pin refuses false pinned result receipt and requires review before retry (19.2s)
+  ✓   26 tests/browser/advocacy-timeline-dark.spec.ts:8:3 › dark phone timeline keeps loaded Figma icons legible at their exact geometry (4.9s)
+  ✓   25 tests/browser/advocacy-history-edit.spec.ts:228:3 › baseline: final successful requires explicit judgment and exact native confirmation body (18.3s)
+  ✓   24 tests/browser/advocacy-corrections.spec.ts:237:1 › not advocacy reviews optional bounded reason and refreshes the visible history (20.2s)
+  ✓   27 tests/browser/activity-pin.spec.ts:131:1 › readonly identity cannot open activity mutations (13.0s)
+  ✓   28 tests/browser/alert-channel-lifetime.spec.ts:12:3 › an unknown start attempt survives close and requires deliberate review before another dispatch (13.9s)
+  ✓   29 tests/browser/advocacy-history-edit.spec.ts:228:3 › baseline: final partially_successful requires explicit judgment and exact native confirmation body (11.2s)
+  ✓   30 tests/browser/advocacy-corrections.spec.ts:271:1 › lost response preserves submitted state and uses read-only reconciliation without repost (20.2s)
+  ✓   32 tests/browser/alert-channel-lifetime.spec.ts:12:3 › an unknown test attempt survives close and requires deliberate review before another dispatch (12.5s)
+  ✓   33 tests/browser/advocacy-history-edit.spec.ts:228:3 › baseline: final unsuccessful requires explicit judgment and exact native confirmation body (10.9s)
+  ✓   31 tests/browser/activity-pin.spec.ts:152:1 › a changed note at preflight stops before PATCH and preserves edit input (21.2s)
+  ✓   35 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late start receipt cannot publish after actor change (9.8s)
+  ✓   36 tests/browser/advocacy-history-edit.spec.ts:266:3 › linked status edit follows native outcome evidence semantics (13.5s)
+  ✓   38 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late start receipt cannot publish after client change (8.9s)
+  ✓   34 tests/browser/advocacy-corrections.spec.ts:292:1 › unapplied failed request remains unconfirmed and cannot silently repeat (20.3s)
+  ✓   39 tests/browser/advocacy-history-edit.spec.ts:266:3 › unchanged-final status edit follows native outcome evidence semantics (13.8s)
+  ✓   40 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late start receipt cannot publish after owner change (10.0s)
+  ✓   37 tests/browser/activity-pin.spec.ts:205:1 › unmount during held preflight prevents PATCH after the read returns (24.6s)
+  ✓   43 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late start receipt cannot publish after close change (6.9s)
+  ✓   42 tests/browser/advocacy-history-edit.spec.ts:304:1 › legacy current status remains editable without offering other legacy transitions (10.7s)
+  ✓   41 tests/browser/advocacy-corrections.spec.ts:311:1 › leaving the feature during preflight aborts the review and prevents a late POST (19.1s)
+  ✓   45 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late test receipt cannot publish after actor change (8.0s)
+  ✓   44 tests/browser/activity-pin.spec.ts:241:1 › a lost pin response is reconciled by an explicit read without replaying the write (15.5s)
+  ✓   48 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late test receipt cannot publish after client change (7.8s)
+  ✓   46 tests/browser/advocacy-history-edit.spec.ts:325:1 › fresh native source changes retain the draft and stop dispatch (14.2s)
+  ✓   47 tests/browser/advocacy-corrections.spec.ts:344:1 › lost not-advocacy acknowledgement remains unconfirmed even when the bounded history is empty (19.6s)
+  ✓   50 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late test receipt cannot publish after owner change (7.7s)
+  ✓   49 tests/browser/activity-pin.spec.ts:279:1 › session expiry at preflight dispatches no activity write (12.8s)
+  ✓   53 tests/browser/alert-channel-lifetime.spec.ts:56:5 › a late test receipt cannot publish after close change (7.9s)
+  ✓   51 tests/browser/advocacy-history-edit.spec.ts:360:1 › a definite native refusal allows an explicit retry without a false success (16.1s)
+  ✓   54 tests/browser/alert-channel-visual.spec.ts:9:5 › desktop light alert controls match the authored Figma fields and remain keyboard reachable (15.0s)
+  ✓   55 tests/browser/alert-channel-lifetime.spec.ts:116:3 › a test action latches a same-callback identity interruption even after the source is restored (11.3s)
+  ✓   52 tests/browser/advocacy-corrections.spec.ts:375:1 › concurrent matter changes require reload/review while preserving reason before any write (20.6s)
+  ✓   56 tests/browser/advocacy-history-edit.spec.ts:381:1 › unexpected acknowledgement remains unknown and reconciles by GET without replay (17.7s)
+  ✓   57 tests/browser/alert-channel-visual.spec.ts:9:5 › phone light alert controls match the authored Figma fields and remain keyboard reachable (11.9s)
+  ✓   58 tests/browser/alert-channel-lifetime.spec.ts:116:3 › a test action latches a same-callback client interruption even after the source is restored (10.4s)
+  ✓   59 tests/browser/advocacy-corrections.spec.ts:406:1 › standard user retains source reads and New matter label but correction writes are unavailable (15.6s)
+  ✘   61 tests/browser/alert-channel-visual.spec.ts:9:5 › desktop dark alert controls match the authored Figma fields and remain keyboard reachable (9.4s)
+(node:19983) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   62 tests/browser/alert-channel-lifetime.spec.ts:116:3 › a test action latches a same-callback preferences interruption even after the source is restored (12.9s)
+  ✓   63 tests/browser/advocacy-corrections.spec.ts:435:1 › unsafe or missing source does not become guessed source navigation (13.0s)
+  ✓   60 tests/browser/advocacy-history-edit.spec.ts:411:1 › void acknowledgement cannot replace wrong-field readback with a success claim (23.8s)
+  ✓   65 tests/browser/alert-channel-lifetime.spec.ts:153:1 › a late confirmation cannot trigger a saved-state read after the client lifetime ends (8.5s)
+  ✓   64 tests/browser/alert-channel-visual.spec.ts:9:5 › phone dark alert controls match the authored Figma fields and remain keyboard reachable (14.0s)
+  ✓   66 tests/browser/advocacy-corrections.spec.ts:450:3 › empty user identity fails closed before history writes (10.0s)
+  ✓   68 tests/browser/alert-channel-lifetime.spec.ts:199:1 › a pending channel action disables preference edits and other channel effects (10.2s)
+  ✓   67 tests/browser/advocacy-history-edit.spec.ts:438:1 › another matter returned after PATCH remains unknown without late invalidation (11.1s)
+  ✓   69 tests/browser/alert-channels.spec.ts:16:1 › baseline: Core preferences use database identity and preserve the full native no-echo PUT (8.3s)
+  ✓   70 tests/browser/advocacy-corrections.spec.ts:450:3 › empty tenant identity fails closed before history writes (9.3s)
+  ✓   73 tests/browser/alert-channels.spec.ts:46:1 › baseline: Core phone edits clear the submitted verification flag without losing native criteria (8.2s)
+  ✓   72 tests/browser/advocacy-history-edit.spec.ts:465:3 › delayed preflight cannot dispatch after actor changes (10.9s)
+  ✘   74 tests/browser/advocacy-corrections.spec.ts:481:1 › mobile dark correction keeps draft, readable review and keyboard cancel within viewport (11.6s)
+  ✘   75 tests/browser/alert-channels.spec.ts:72:3 › baseline: core verification uses exact explicit requests and reads the resulting SMS opt-in (9.2s)
+  ✘   76 tests/browser/advocacy-history-edit.spec.ts:465:3 › delayed preflight cannot dispatch after role changes (7.5s)
+  ✘   71 tests/browser/attendance.spec.ts:126:1 › Owned meeting dispatch requires both confirmations and preserves future scheduling without claiming attendance (20.4s)
+
+
+  1) tests/browser/activity-actions.spec.ts:209:1 › removal is confirmed, retains service errors and rejects a false success response 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('dialog', { name: 'Remove activity?', exact: true }).getByRole('button', { name: 'Review latest activity', exact: true })
+        - locator resolved to <button type="button" class="button">Review latest activity</button>
+      - attempting click action
+        - waiting for element to be visible, enabled and stable
+
+
+      272 |   await dialog
+      273 |     .getByRole("button", { name: "Review latest activity", exact: true })
+    > 274 |     .click();
+          |      ^
+      275 |   await dialog
+      276 |     .getByRole("button", { name: "Remove activity", exact: true })
+      277 |     .click();
+        at /workspace/capiro-integration/apps/web/tests/browser/activity-actions.spec.ts:274:6
+
+    Error Context: test-results/portfolio-browser/activity-actions-removal-i-153c5-ts-a-false-success-response/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/activity-actions-removal-i-153c5-ts-a-false-success-response/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/activity-actions-removal-i-153c5-ts-a-false-success-response/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/browser/activity.spec.ts:28:1 › history search, kind, inclusive local dates, invalid range and clear use the existing feed 
+
+    Test timeout of 30000ms exceeded.
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/activity-history-search-ki-76942-clear-use-the-existing-feed/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/activity-history-search-ki-76942-clear-use-the-existing-feed/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/activity-history-search-ki-76942-clear-use-the-existing-feed/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/activity-history-search-ki-76942-clear-use-the-existing-feed/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/browser/alert-channel-visual.spec.ts:9:5 › desktop dark alert controls match the authored Figma fields and remain keyboard reachable 
+
+    Error: locator.screenshot: Element is not attached to the DOM
+    Call log:
+      - taking element screenshot
+      - waiting for fonts to load...
+      - fonts loaded
+      - attempting scroll into view action
+        - waiting for element to be stable
+
+
+      73 |         dialog.getByRole("button", { name: "Send test alert", exact: true }),
+      74 |       ).toBeFocused();
+    > 75 |       await dialog.screenshot({
+         |                    ^
+      76 |         path: testInfo.outputPath(
+      77 |           `alert-channels-${viewport.name}-${theme}.png`,
+      78 |         ),
+        at /workspace/capiro-integration/apps/web/tests/browser/alert-channel-visual.spec.ts:75:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/alert-channel-visual-deskt-8daca-d-remain-keyboard-reachable/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/alert-channel-visual-deskt-8daca-d-remain-keyboard-reachable/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/alert-channel-visual-deskt-8daca-d-remain-keyboard-reachable/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/alert-channel-visual-deskt-8daca-d-remain-keyboard-reachable/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/browser/advocacy-corrections.spec.ts:481:1 › mobile dark correction keeps draft, readable review and keyboard cancel within viewport 
+
+    Test was interrupted.
+
+    Error: page.screenshot: Test ended.
+    Call log:
+      - taking page screenshot
+      - waiting for fonts to load...
+      - fonts loaded
+
+
+      493 |     ),
+      494 |   ).toBe(true);
+    > 495 |   await page.screenshot({
+          |              ^
+      496 |     path: "work/advocacy-evidence/not-advocacy-mobile-dark.png",
+      497 |     fullPage: false,
+      498 |   });
+        at /workspace/capiro-integration/apps/web/tests/browser/advocacy-corrections.spec.ts:495:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/advocacy-corrections-mobil-42347-oard-cancel-within-viewport/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/advocacy-corrections-mobil-42347-oard-cancel-within-viewport/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/advocacy-corrections-mobil-42347-oard-cancel-within-viewport/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/advocacy-corrections-mobil-42347-oard-cancel-within-viewport/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests/browser/activity-actions.spec.ts:209:1 › removal is confirmed, retains service errors and rejects a false success response 
+    tests/browser/activity.spec.ts:28:1 › history search, kind, inclusive local dates, invalid range and clear use the existing feed 
+    tests/browser/alert-channel-visual.spec.ts:9:5 › desktop dark alert controls match the authored Figma fields and remain keyboard reachable 
+  4 interrupted
+    tests/browser/advocacy-corrections.spec.ts:481:1 › mobile dark correction keeps draft, readable review and keyboard cancel within viewport 
+    tests/browser/advocacy-history-edit.spec.ts:465:3 › delayed preflight cannot dispatch after role changes 
+    tests/browser/alert-channels.spec.ts:72:3 › baseline: core verification uses exact explicit requests and reads the resulting SMS opt-in 
+    tests/browser/attendance.spec.ts:126:1 › Owned meeting dispatch requires both confirmations and preserves future scheduling without claiming attendance 
+  805 did not run
+  69 passed (4.8m)
+npm error Lifecycle script `test:browser` failed with error:
+npm error code 130
+npm error path /workspace/capiro-integration/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-integration/apps/web
+npm error command failed
+npm error command sh -c playwright test --workers=4
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

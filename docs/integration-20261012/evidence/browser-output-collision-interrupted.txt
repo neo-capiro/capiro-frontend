@@ -1,0 +1,1254 @@
+
+> @capiro/web@0.1.0 test:browser:modules
+> playwright test --config test/browser/playwright.config.ts
+
+[WebServer] (node:8001) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 62 tests using 1 worker
+
+(node:8028) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 test/browser/calendar.spec.ts:24:1 › month and week retain client scope and query end-exclusive Eastern ranges (1.8s)
+  ✓   2 test/browser/calendar.spec.ts:79:1 › client agenda is meetings-only and the meeting opens the shared prep/notes/debrief workflow (1.3s)
+  ✓   3 test/browser/integration.spec.ts:37:1 › shared product navigation and history preserve verified client hints and scoped styles (2.0s)
+  ✘   4 test/browser/integration.spec.ts:109:1 › client replacement interrupts a write and organization replacement clears drafts and revalidates (371ms)
+(node:8339) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   5 test/browser/integration.spec.ts:158:1 › Core expiry clears the application, does not replay and cannot be escaped by changing client (461ms)
+(node:8475) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   6 test/browser/legiwatch.spec.ts:21:3 › LegiWatch News evidence renders a real connected view (401ms)
+(node:8613) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   7 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Florida Budget renders a real connected view (732ms)
+(node:8886) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   8 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Research evidence renders a real connected view (529ms)
+(node:9028) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   9 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Monitoring renders a real connected view (470ms)
+(node:9167) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  10 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Client briefings renders a real connected view (681ms)
+(node:9307) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  11 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Reports renders a real connected view (504ms)
+(node:9443) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  12 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Trends renders a real connected view (638ms)
+(node:9617) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  13 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Legacy digest renders a real connected view (570ms)
+(node:9757) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  14 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Import review renders a real connected view (784ms)
+(node:9935) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  15 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Research import review renders a real connected view (536ms)
+(node:10077) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  16 test/browser/legiwatch.spec.ts:21:3 › LegiWatch LegiWatch settings renders a real connected view (582ms)
+(node:10221) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  17 test/browser/legiwatch.spec.ts:48:1 › research continues past an empty matched page using the retained-source cursor (490ms)
+(node:10361) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  18 test/browser/legiwatch.spec.ts:96:1 › workflow changes invalidate a reviewed preview and enqueue only its exact current hash (610ms)
+(node:10549) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  19 test/browser/legiwatch.spec.ts:169:1 › monitoring tabs and keyword drawer support keyboard dismissal on mobile without overflow (506ms)
+(node:10691) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  20 test/browser/modules.spec.ts:16:3 › Engagement Manager primary route renders through the canonical session/API boundary (557ms)
+(node:10865) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  21 test/browser/modules.spec.ts:16:3 › Planner primary route renders through the canonical session/API boundary (591ms)
+(node:11002) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  22 test/browser/modules.spec.ts:16:3 › Master calendar primary route renders through the canonical session/API boundary (559ms)
+(node:11136) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  23 test/browser/modules.spec.ts:16:3 › Workspace primary route renders through the canonical session/API boundary (629ms)
+(node:11311) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  24 test/browser/modules.spec.ts:16:3 › Strategies primary route renders through the canonical session/API boundary (512ms)
+(node:11446) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  25 test/browser/modules.spec.ts:16:3 › Directory primary route renders through the canonical session/API boundary (513ms)
+(node:11612) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  26 test/browser/modules.spec.ts:16:3 › Intelligence Center primary route renders through the canonical session/API boundary (622ms)
+(node:11772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  27 test/browser/modules.spec.ts:16:3 › Research Portfolios primary route renders through the canonical session/API boundary (663ms)
+(node:11907) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  28 test/browser/planner-engagement.spec.ts:112:1 › Planner modes use the same permitted task data and exact board assets (806ms)
+(node:12086) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  29 test/browser/planner-engagement.spec.ts:163:1 › Planner failed writes retain drafts and a successful save uses only reviewed fields (540ms)
+(node:12224) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  30 test/browser/planner-engagement.spec.ts:218:1 › Engagement library opens shared notes, approval is a separate real operation and tabs work at phone width (777ms)
+(node:12423) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  31 test/browser/planner-engagement.spec.ts:279:1 › A template session deep link keeps the server state version and sends no mail (556ms)
+(node:12557) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  32 test/browser/public-forms.spec.ts:5:1 › public form submits only displayed answers and shows the returned receipt without sign-in (508ms)
+(node:12692) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  33 test/browser/public-forms.spec.ts:52:1 › revoked public capability renders an unavailable state without a submission action (765ms)
+(node:12871) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  34 test/browser/session.spec.ts:7:1 › missing configuration renders setup without issuing service requests (457ms)
+(node:13011) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  35 test/browser/session.spec.ts:20:1 › org/session change clears prior records and sign-out removes all protected content (612ms)
+(node:13189) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  36 test/browser/session.spec.ts:53:1 › 401 removes protected content and asks for sign-in without replaying a request (454ms)
+(node:13326) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  37 test/browser/session.spec.ts:69:1 › development StrictMode remount establishes a valid request scope before child reads (489ms)
+(node:13464) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  38 test/browser/settings-scenes.spec.ts:33:3 › Settings personal renders compatible responses without runtime failures (734ms)
+(node:13638) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  39 test/browser/settings-scenes.spec.ts:33:3 › Settings contact-info renders compatible responses without runtime failures (578ms)
+(node:13779) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  40 test/browser/settings-scenes.spec.ts:33:3 › Settings branding renders compatible responses without runtime failures (4ms)
+
+
+  1) test/browser/integration.spec.ts:109:1 › client replacement interrupts a write and organization replacement clears drafts and revalidates 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules?clientId=10000000-0000-4000-8000-000000000001
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules?clientId=10000000-0000-4000-8000-000000000001", waiting until "load"
+
+
+      126 |     await route.fulfill({ json: {} }).catch(() => {});
+      127 |   });
+    > 128 |   await page.goto(`/modules?clientId=${clientId}`);
+          |              ^
+      129 |   await expect(page.getByTestId("client-state")).toContainText(
+      130 |     "authorized-client",
+      131 |   );
+        at /workspace/capiro-integration/apps/web/test/browser/integration.spec.ts:128:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/integration-client-replace-f2e3f-ears-drafts-and-revalidates/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/integration-client-replace-f2e3f-ears-drafts-and-revalidates/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/integration-client-replace-f2e3f-ears-drafts-and-revalidates/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/integration-client-replace-f2e3f-ears-drafts-and-revalidates/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) test/browser/integration.spec.ts:158:1 › Core expiry clears the application, does not replay and cannot be escaped by changing client 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules", waiting until "load"
+
+
+      165 |     return route.fulfill({ status: 401, json: { message: "Expired" } });
+      166 |   });
+    > 167 |   await page.goto("/modules");
+          |              ^
+      168 |   await page
+      169 |     .getByRole("button", { name: "Check synthetic Core session" })
+      170 |     .click();
+        at /workspace/capiro-integration/apps/web/test/browser/integration.spec.ts:167:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/integration-Core-expiry-cl-85ab5--escaped-by-changing-client/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/integration-Core-expiry-cl-85ab5--escaped-by-changing-client/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/integration-Core-expiry-cl-85ab5--escaped-by-changing-client/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/integration-Core-expiry-cl-85ab5--escaped-by-changing-client/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) test/browser/legiwatch.spec.ts:21:3 › LegiWatch News evidence renders a real connected view ───
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=news
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=news", waiting until "load"
+
+
+      28 |     await onlyLocalRequests(page);
+      29 |     await operationFixtures(page, legiwatchFixtures);
+    > 30 |     await page.goto(route(view!));
+         |                ^
+      31 |     await expect(
+      32 |       page.getByRole("heading", { name: title, exact: true, level: 1 }),
+      33 |     ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/legiwatch.spec.ts:30:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-LegiWatch-News-e-94897-nders-a-real-connected-view/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/legiwatch-LegiWatch-News-e-94897-nders-a-real-connected-view/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-LegiWatch-News-e-94897-nders-a-real-connected-view/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/legiwatch-LegiWatch-News-e-94897-nders-a-real-connected-view/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) test/browser/legiwatch.spec.ts:21:3 › LegiWatch Florida Budget renders a real connected view ──
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=budget
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=budget", waiting until "load"
+
+
+      28 |     await onlyLocalRequests(page);
+      29 |     await operationFixtures(page, legiwatchFixtures);
+    > 30 |     await page.goto(route(view!));
+         |                ^
+      31 |     await expect(
+      32 |       page.getByRole("heading", { name: title, exact: true, level: 1 }),
+      33 |     ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/legiwatch.spec.ts:30:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-LegiWatch-Florid-aa824-nders-a-real-connected-view/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/legiwatch-LegiWatch-Florid-aa824-nders-a-real-connected-view/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-LegiWatch-Florid-aa824-nders-a-real-connected-view/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/legiwatch-LegiWatch-Florid-aa824-nders-a-real-connected-view/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) test/browser/legiwatch.spec.ts:21:3 › LegiWatch Research evidence renders a real connected view 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=research
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=research", waiting until "load"
+
+
+      28 |     await onlyLocalRequests(page);
+      29 |     await operationFixtures(page, legiwatchFixtures);
+    > 30 |     await page.goto(route(view!));
+         |                ^
+      31 |     await expect(
+      32 |       page.getByRole("heading", { name: title, exact: true, level: 1 }),
+      33 |     ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/legiwatch.spec.ts:30:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-LegiWatch-Resear-9db19-nders-a-real-connected-view/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/legiwatch-LegiWatch-Resear-9db19-nders-a-real-connected-view/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-LegiWatch-Resear-9db19-nders-a-real-connected-view/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/legiwatch-LegiWatch-Resear-9db19-nders-a-real-connected-view/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) test/browser/legiwatch.spec.ts:21:3 › LegiWatch Monitoring renders a real connected view ──────
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=monitoring
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=monitoring", waiting until "load"
+
+
+      28 |     await onlyLocalRequests(page);
+      29 |     await operationFixtures(page, legiwatchFixtures);
+    > 30 |     await page.goto(route(view!));
+         |                ^
+      31 |     await expect(
+      32 |       page.getByRole("heading", { name: title, exact: true, level: 1 }),
+      33 |     ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/legiwatch.spec.ts:30:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-LegiWatch-Monitoring-renders-a-real-connected-view/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/legiwatch-LegiWatch-Monitoring-renders-a-real-connected-view/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-LegiWatch-Monitoring-renders-a-real-connected-view/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/legiwatch-LegiWatch-Monitoring-renders-a-real-connected-view/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) test/browser/legiwatch.spec.ts:21:3 › LegiWatch Client briefings renders a real connected view 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=briefings
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=briefings", waiting until "load"
+
+
+      28 |     await onlyLocalRequests(page);
+      29 |     await operationFixtures(page, legiwatchFixtures);
+    > 30 |     await page.goto(route(view!));
+         |                ^
+      31 |     await expect(
+      32 |       page.getByRole("heading", { name: title, exact: true, level: 1 }),
+      33 |     ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/legiwatch.spec.ts:30:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-LegiWatch-Client-6e53c-nders-a-real-connected-view/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/legiwatch-LegiWatch-Client-6e53c-nders-a-real-connected-view/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-LegiWatch-Client-6e53c-nders-a-real-connected-view/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/legiwatch-LegiWatch-Client-6e53c-nders-a-real-connected-view/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) test/browser/legiwatch.spec.ts:21:3 › LegiWatch Reports renders a real connected view ─────────
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=reports
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=reports", waiting until "load"
+
+
+      28 |     await onlyLocalRequests(page);
+      29 |     await operationFixtures(page, legiwatchFixtures);
+    > 30 |     await page.goto(route(view!));
+         |                ^
+      31 |     await expect(
+      32 |       page.getByRole("heading", { name: title, exact: true, level: 1 }),
+      33 |     ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/legiwatch.spec.ts:30:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-LegiWatch-Reports-renders-a-real-connected-view/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/legiwatch-LegiWatch-Reports-renders-a-real-connected-view/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-LegiWatch-Reports-renders-a-real-connected-view/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/legiwatch-LegiWatch-Reports-renders-a-real-connected-view/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) test/browser/legiwatch.spec.ts:21:3 › LegiWatch Trends renders a real connected view ──────────
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=trends
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=trends", waiting until "load"
+
+
+      28 |     await onlyLocalRequests(page);
+      29 |     await operationFixtures(page, legiwatchFixtures);
+    > 30 |     await page.goto(route(view!));
+         |                ^
+      31 |     await expect(
+      32 |       page.getByRole("heading", { name: title, exact: true, level: 1 }),
+      33 |     ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/legiwatch.spec.ts:30:16
+
+    Error Context: test-results/modules-browser/legiwatch-LegiWatch-Trends-renders-a-real-connected-view/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-LegiWatch-Trends-renders-a-real-connected-view/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/legiwatch-LegiWatch-Trends-renders-a-real-connected-view/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  10) test/browser/legiwatch.spec.ts:21:3 › LegiWatch Legacy digest renders a real connected view ──
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=digest
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=digest", waiting until "load"
+
+
+      28 |     await onlyLocalRequests(page);
+      29 |     await operationFixtures(page, legiwatchFixtures);
+    > 30 |     await page.goto(route(view!));
+         |                ^
+      31 |     await expect(
+      32 |       page.getByRole("heading", { name: title, exact: true, level: 1 }),
+      33 |     ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/legiwatch.spec.ts:30:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-LegiWatch-Legacy-6642a-nders-a-real-connected-view/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/legiwatch-LegiWatch-Legacy-6642a-nders-a-real-connected-view/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-LegiWatch-Legacy-6642a-nders-a-real-connected-view/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/legiwatch-LegiWatch-Legacy-6642a-nders-a-real-connected-view/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  11) test/browser/legiwatch.spec.ts:21:3 › LegiWatch Import review renders a real connected view ──
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=imports
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=imports", waiting until "load"
+
+
+      28 |     await onlyLocalRequests(page);
+      29 |     await operationFixtures(page, legiwatchFixtures);
+    > 30 |     await page.goto(route(view!));
+         |                ^
+      31 |     await expect(
+      32 |       page.getByRole("heading", { name: title, exact: true, level: 1 }),
+      33 |     ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/legiwatch.spec.ts:30:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-LegiWatch-Import-93441-nders-a-real-connected-view/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/legiwatch-LegiWatch-Import-93441-nders-a-real-connected-view/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-LegiWatch-Import-93441-nders-a-real-connected-view/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/legiwatch-LegiWatch-Import-93441-nders-a-real-connected-view/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  12) test/browser/legiwatch.spec.ts:21:3 › LegiWatch Research import review renders a real connected view 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=research-imports
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=research-imports", waiting until "load"
+
+
+      28 |     await onlyLocalRequests(page);
+      29 |     await operationFixtures(page, legiwatchFixtures);
+    > 30 |     await page.goto(route(view!));
+         |                ^
+      31 |     await expect(
+      32 |       page.getByRole("heading", { name: title, exact: true, level: 1 }),
+      33 |     ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/legiwatch.spec.ts:30:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-LegiWatch-Resear-05717-nders-a-real-connected-view/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/legiwatch-LegiWatch-Resear-05717-nders-a-real-connected-view/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-LegiWatch-Resear-05717-nders-a-real-connected-view/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/legiwatch-LegiWatch-Resear-05717-nders-a-real-connected-view/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  13) test/browser/legiwatch.spec.ts:21:3 › LegiWatch LegiWatch settings renders a real connected view 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=settings
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=settings", waiting until "load"
+
+
+      28 |     await onlyLocalRequests(page);
+      29 |     await operationFixtures(page, legiwatchFixtures);
+    > 30 |     await page.goto(route(view!));
+         |                ^
+      31 |     await expect(
+      32 |       page.getByRole("heading", { name: title, exact: true, level: 1 }),
+      33 |     ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/legiwatch.spec.ts:30:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-LegiWatch-LegiWa-a7035-nders-a-real-connected-view/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/legiwatch-LegiWatch-LegiWa-a7035-nders-a-real-connected-view/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-LegiWatch-LegiWa-a7035-nders-a-real-connected-view/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/legiwatch-LegiWatch-LegiWa-a7035-nders-a-real-connected-view/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  14) test/browser/legiwatch.spec.ts:48:1 › research continues past an empty matched page using the retained-source cursor 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=research
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=research", waiting until "load"
+
+
+      72 |     },
+      73 |   });
+    > 74 |   await page.goto(route("research"));
+         |              ^
+      75 |   await page.getByLabel("Florida session", { exact: true }).fill("2026");
+      76 |   await page
+      77 |     .getByRole("button", { name: "Search retained text", exact: true })
+        at /workspace/capiro-integration/apps/web/test/browser/legiwatch.spec.ts:74:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-research-continu-46822--the-retained-source-cursor/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/legiwatch-research-continu-46822--the-retained-source-cursor/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-research-continu-46822--the-retained-source-cursor/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/legiwatch-research-continu-46822--the-retained-source-cursor/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  15) test/browser/legiwatch.spec.ts:96:1 › workflow changes invalidate a reviewed preview and enqueue only its exact current hash 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=monitoring
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=monitoring", waiting until "load"
+
+
+      137 |     "legiwatch.workflow.action": action,
+      138 |   });
+    > 139 |   await page.goto(route("monitoring"));
+          |              ^
+      140 |   await page
+      141 |     .getByRole("button", { name: "Internal workflows", exact: true })
+      142 |     .click();
+        at /workspace/capiro-integration/apps/web/test/browser/legiwatch.spec.ts:139:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-workflow-changes-5f6bf-only-its-exact-current-hash/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/legiwatch-workflow-changes-5f6bf-only-its-exact-current-hash/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-workflow-changes-5f6bf-only-its-exact-current-hash/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/legiwatch-workflow-changes-5f6bf-only-its-exact-current-hash/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  16) test/browser/legiwatch.spec.ts:169:1 › monitoring tabs and keyword drawer support keyboard dismissal on mobile without overflow 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=monitoring
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/intelligence?view=legiwatch&lw=more&lwMore=monitoring", waiting until "load"
+
+
+      173 |   await operationFixtures(page, legiwatchFixtures);
+      174 |   await page.setViewportSize({ width: 390, height: 844 });
+    > 175 |   await page.goto(route("monitoring"));
+          |              ^
+      176 |   for (const name of [
+      177 |     "Bill record rules",
+      178 |     "Agenda rules",
+        at /workspace/capiro-integration/apps/web/test/browser/legiwatch.spec.ts:175:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-monitoring-tabs--cef98--on-mobile-without-overflow/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/legiwatch-monitoring-tabs--cef98--on-mobile-without-overflow/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/legiwatch-monitoring-tabs--cef98--on-mobile-without-overflow/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/legiwatch-monitoring-tabs--cef98--on-mobile-without-overflow/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  17) test/browser/modules.spec.ts:16:3 › Engagement Manager primary route renders through the canonical session/API boundary 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/engagement
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/engagement", waiting until "load"
+
+
+      27 |     await onlyLocalRequests(page);
+      28 |     await operationFixtures(page, moduleRouteFixtures);
+    > 29 |     await page.goto(`/modules/${slug}`);
+         |                ^
+      30 |     await expect(
+      31 |       page.getByRole("heading", { name: heading, exact: true }),
+      32 |     ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/modules.spec.ts:29:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/modules-Engagement-Manager-bcc87-onical-session-API-boundary/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/modules-Engagement-Manager-bcc87-onical-session-API-boundary/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/modules-Engagement-Manager-bcc87-onical-session-API-boundary/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/modules-Engagement-Manager-bcc87-onical-session-API-boundary/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  18) test/browser/modules.spec.ts:16:3 › Planner primary route renders through the canonical session/API boundary 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/planner
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/planner", waiting until "load"
+
+
+      27 |     await onlyLocalRequests(page);
+      28 |     await operationFixtures(page, moduleRouteFixtures);
+    > 29 |     await page.goto(`/modules/${slug}`);
+         |                ^
+      30 |     await expect(
+      31 |       page.getByRole("heading", { name: heading, exact: true }),
+      32 |     ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/modules.spec.ts:29:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/modules-Planner-primary-ro-41141-onical-session-API-boundary/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/modules-Planner-primary-ro-41141-onical-session-API-boundary/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/modules-Planner-primary-ro-41141-onical-session-API-boundary/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/modules-Planner-primary-ro-41141-onical-session-API-boundary/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  19) test/browser/modules.spec.ts:16:3 › Master calendar primary route renders through the canonical session/API boundary 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/calendar
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/calendar", waiting until "load"
+
+
+      27 |     await onlyLocalRequests(page);
+      28 |     await operationFixtures(page, moduleRouteFixtures);
+    > 29 |     await page.goto(`/modules/${slug}`);
+         |                ^
+      30 |     await expect(
+      31 |       page.getByRole("heading", { name: heading, exact: true }),
+      32 |     ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/modules.spec.ts:29:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/modules-Master-calendar-pr-0875f-onical-session-API-boundary/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/modules-Master-calendar-pr-0875f-onical-session-API-boundary/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/modules-Master-calendar-pr-0875f-onical-session-API-boundary/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/modules-Master-calendar-pr-0875f-onical-session-API-boundary/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  20) test/browser/modules.spec.ts:16:3 › Workspace primary route renders through the canonical session/API boundary 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/workspace
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/workspace", waiting until "load"
+
+
+      27 |     await onlyLocalRequests(page);
+      28 |     await operationFixtures(page, moduleRouteFixtures);
+    > 29 |     await page.goto(`/modules/${slug}`);
+         |                ^
+      30 |     await expect(
+      31 |       page.getByRole("heading", { name: heading, exact: true }),
+      32 |     ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/modules.spec.ts:29:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/modules-Workspace-primary--45341-onical-session-API-boundary/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/modules-Workspace-primary--45341-onical-session-API-boundary/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/modules-Workspace-primary--45341-onical-session-API-boundary/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/modules-Workspace-primary--45341-onical-session-API-boundary/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  21) test/browser/modules.spec.ts:16:3 › Strategies primary route renders through the canonical session/API boundary 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/strategies
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/strategies", waiting until "load"
+
+
+      27 |     await onlyLocalRequests(page);
+      28 |     await operationFixtures(page, moduleRouteFixtures);
+    > 29 |     await page.goto(`/modules/${slug}`);
+         |                ^
+      30 |     await expect(
+      31 |       page.getByRole("heading", { name: heading, exact: true }),
+      32 |     ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/modules.spec.ts:29:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/modules-Strategies-primary-c3453-onical-session-API-boundary/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/modules-Strategies-primary-c3453-onical-session-API-boundary/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/modules-Strategies-primary-c3453-onical-session-API-boundary/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/modules-Strategies-primary-c3453-onical-session-API-boundary/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  22) test/browser/modules.spec.ts:16:3 › Directory primary route renders through the canonical session/API boundary 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/directory
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/directory", waiting until "load"
+
+
+      27 |     await onlyLocalRequests(page);
+      28 |     await operationFixtures(page, moduleRouteFixtures);
+    > 29 |     await page.goto(`/modules/${slug}`);
+         |                ^
+      30 |     await expect(
+      31 |       page.getByRole("heading", { name: heading, exact: true }),
+      32 |     ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/modules.spec.ts:29:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/modules-Directory-primary--d7765-onical-session-API-boundary/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/modules-Directory-primary--d7765-onical-session-API-boundary/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/modules-Directory-primary--d7765-onical-session-API-boundary/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/modules-Directory-primary--d7765-onical-session-API-boundary/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  23) test/browser/modules.spec.ts:16:3 › Intelligence Center primary route renders through the canonical session/API boundary 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/intelligence
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/intelligence", waiting until "load"
+
+
+      27 |     await onlyLocalRequests(page);
+      28 |     await operationFixtures(page, moduleRouteFixtures);
+    > 29 |     await page.goto(`/modules/${slug}`);
+         |                ^
+      30 |     await expect(
+      31 |       page.getByRole("heading", { name: heading, exact: true }),
+      32 |     ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/modules.spec.ts:29:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/modules-Intelligence-Cente-539d3-onical-session-API-boundary/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/modules-Intelligence-Cente-539d3-onical-session-API-boundary/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/modules-Intelligence-Cente-539d3-onical-session-API-boundary/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/modules-Intelligence-Cente-539d3-onical-session-API-boundary/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  24) test/browser/modules.spec.ts:16:3 › Research Portfolios primary route renders through the canonical session/API boundary 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/research-portfolios
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/research-portfolios", waiting until "load"
+
+
+      27 |     await onlyLocalRequests(page);
+      28 |     await operationFixtures(page, moduleRouteFixtures);
+    > 29 |     await page.goto(`/modules/${slug}`);
+         |                ^
+      30 |     await expect(
+      31 |       page.getByRole("heading", { name: heading, exact: true }),
+      32 |     ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/modules.spec.ts:29:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/modules-Research-Portfolio-8fd0a-onical-session-API-boundary/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/modules-Research-Portfolio-8fd0a-onical-session-API-boundary/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/modules-Research-Portfolio-8fd0a-onical-session-API-boundary/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/modules-Research-Portfolio-8fd0a-onical-session-API-boundary/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  25) test/browser/planner-engagement.spec.ts:112:1 › Planner modes use the same permitted task data and exact board assets 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/planner?view=board
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/planner?view=board", waiting until "load"
+
+
+      122 |     "planner.tasks": { items: [blankTask], nextCursor: null },
+      123 |   });
+    > 124 |   await page.goto("/modules/planner?view=board");
+          |              ^
+      125 |   await expect(
+      126 |     page.getByRole("heading", { name: "Planner", exact: true }),
+      127 |   ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/planner-engagement.spec.ts:124:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/planner-engagement-Planner-be764-data-and-exact-board-assets/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/planner-engagement-Planner-be764-data-and-exact-board-assets/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/planner-engagement-Planner-be764-data-and-exact-board-assets/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/planner-engagement-Planner-be764-data-and-exact-board-assets/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  26) test/browser/planner-engagement.spec.ts:163:1 › Planner failed writes retain drafts and a successful save uses only reviewed fields 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/planner
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/planner", waiting until "load"
+
+
+      196 |       : route.fallback(),
+      197 |   );
+    > 198 |   await page.goto("/modules/planner");
+          |              ^
+      199 |   await page.getByRole("button", { name: "+ New task", exact: true }).click();
+      200 |   await page.getByLabel("Task name", { exact: true }).fill("Test new work");
+      201 |   await page.getByRole("button", { name: "Save task", exact: true }).click();
+        at /workspace/capiro-integration/apps/web/test/browser/planner-engagement.spec.ts:198:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/planner-engagement-Planner-a73d0-e-uses-only-reviewed-fields/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/planner-engagement-Planner-a73d0-e-uses-only-reviewed-fields/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/planner-engagement-Planner-a73d0-e-uses-only-reviewed-fields/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/planner-engagement-Planner-a73d0-e-uses-only-reviewed-fields/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  27) test/browser/planner-engagement.spec.ts:218:1 › Engagement library opens shared notes, approval is a separate real operation and tabs work at phone width 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/engagement?view=library&clientId=30000000-0000-4000-8000-000000000001
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/engagement?view=library&clientId=30000000-0000-4000-8000-000000000001", waiting until "load"
+
+
+      255 |     }),
+      256 |   );
+    > 257 |   await page.goto("/modules/engagement?view=library&clientId=" + clientId);
+          |              ^
+      258 |   await expect(
+      259 |     page.getByRole("tab", { name: "Library", exact: true }),
+      260 |   ).toHaveAttribute("aria-selected", "true");
+        at /workspace/capiro-integration/apps/web/test/browser/planner-engagement.spec.ts:257:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/planner-engagement-Engagem-bb590-nd-tabs-work-at-phone-width/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/planner-engagement-Engagem-bb590-nd-tabs-work-at-phone-width/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/planner-engagement-Engagem-bb590-nd-tabs-work-at-phone-width/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/planner-engagement-Engagem-bb590-nd-tabs-work-at-phone-width/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  28) test/browser/planner-engagement.spec.ts:279:1 › A template session deep link keeps the server state version and sends no mail 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/modules/engagement?session=60000000-0000-4000-8000-000000000001
+    Call log:
+      - navigating to "http://127.0.0.1:5197/modules/engagement?session=60000000-0000-4000-8000-000000000001", waiting until "load"
+
+
+      314 |     },
+      315 |   });
+    > 316 |   await page.goto("/modules/engagement?session=" + sessionId);
+          |              ^
+      317 |   await expect(
+      318 |     page.getByRole("heading", { name: "Test campaign topic", exact: true }),
+      319 |   ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/planner-engagement.spec.ts:316:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/planner-engagement-A-templ-164f3-e-version-and-sends-no-mail/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/planner-engagement-A-templ-164f3-e-version-and-sends-no-mail/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/planner-engagement-A-templ-164f3-e-version-and-sends-no-mail/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/planner-engagement-A-templ-164f3-e-version-and-sends-no-mail/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  29) test/browser/public-forms.spec.ts:5:1 › public form submits only displayed answers and shows the returned receipt without sign-in 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/forms/20000000-0000-4000-8000-000000000001.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    Call log:
+      - navigating to "http://127.0.0.1:5197/forms/20000000-0000-4000-8000-000000000001.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", waiting until "load"
+
+
+      35 |     },
+      36 |   });
+    > 37 |   await page.goto(`/forms/${token}`);
+         |              ^
+      38 |   await page.getByLabel("Request title").fill("Synthetic request");
+      39 |   await page
+      40 |     .getByRole("button", { name: "Submit request", exact: true })
+        at /workspace/capiro-integration/apps/web/test/browser/public-forms.spec.ts:37:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/public-forms-public-form-s-7f1cf-ned-receipt-without-sign-in/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/public-forms-public-form-s-7f1cf-ned-receipt-without-sign-in/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/public-forms-public-form-s-7f1cf-ned-receipt-without-sign-in/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/public-forms-public-form-s-7f1cf-ned-receipt-without-sign-in/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  30) test/browser/public-forms.spec.ts:52:1 › revoked public capability renders an unavailable state without a submission action 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/forms/20000000-0000-4000-8000-000000000001.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    Call log:
+      - navigating to "http://127.0.0.1:5197/forms/20000000-0000-4000-8000-000000000001.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", waiting until "load"
+
+
+      60 |     }),
+      61 |   );
+    > 62 |   await page.goto(`/forms/${token}`);
+         |              ^
+      63 |   await expect(page.getByRole("alert")).toContainText(
+      64 |     "This form link is unavailable.",
+      65 |   );
+        at /workspace/capiro-integration/apps/web/test/browser/public-forms.spec.ts:62:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/public-forms-revoked-publi-7b2ae-without-a-submission-action/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/public-forms-revoked-publi-7b2ae-without-a-submission-action/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/public-forms-revoked-publi-7b2ae-without-a-submission-action/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/public-forms-revoked-publi-7b2ae-without-a-submission-action/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  31) test/browser/session.spec.ts:7:1 › missing configuration renders setup without issuing service requests 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/__test/unconfigured
+    Call log:
+      - navigating to "http://127.0.0.1:5197/__test/unconfigured", waiting until "load"
+
+
+      12 |     if (request.url().includes("/api/capiro/")) requests.push(request.url());
+      13 |   });
+    > 14 |   await page.goto("/__test/unconfigured");
+         |              ^
+      15 |   await expect(
+      16 |     page.getByRole("heading", { name: "Connection setup required" }),
+      17 |   ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/session.spec.ts:14:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/session-missing-configurat-07aa0-ut-issuing-service-requests/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/session-missing-configurat-07aa0-ut-issuing-service-requests/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/session-missing-configurat-07aa0-ut-issuing-service-requests/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/session-missing-configurat-07aa0-ut-issuing-service-requests/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  32) test/browser/session.spec.ts:20:1 › org/session change clears prior records and sign-out removes all protected content 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/__test/session
+    Call log:
+      - navigating to "http://127.0.0.1:5197/__test/session", waiting until "load"
+
+
+      23 |   let current = testIdentity;
+      24 |   await operationFixtures(page, { "me.read": () => current });
+    > 25 |   await page.goto("/__test/session");
+         |              ^
+      26 |   await expect(page.getByTestId("identity")).toContainText("Test Firm");
+      27 |   current = {
+      28 |     ...testIdentity,
+        at /workspace/capiro-integration/apps/web/test/browser/session.spec.ts:25:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/session-org-session-change-55ebd-moves-all-protected-content/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/session-org-session-change-55ebd-moves-all-protected-content/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/session-org-session-change-55ebd-moves-all-protected-content/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/session-org-session-change-55ebd-moves-all-protected-content/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  33) test/browser/session.spec.ts:53:1 › 401 removes protected content and asks for sign-in without replaying a request 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/__test/session
+    Call log:
+      - navigating to "http://127.0.0.1:5197/__test/session", waiting until "load"
+
+
+      59 |     return route.fulfill({ status: 401, json: { message: "Expired" } });
+      60 |   });
+    > 61 |   await page.goto("/__test/session");
+         |              ^
+      62 |   await expect(
+      63 |     page.getByRole("heading", { name: "Your session expired" }),
+      64 |   ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/session.spec.ts:61:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/session-401-removes-protec-ef7da-without-replaying-a-request/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/session-401-removes-protec-ef7da-without-replaying-a-request/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/session-401-removes-protec-ef7da-without-replaying-a-request/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/session-401-removes-protec-ef7da-without-replaying-a-request/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  34) test/browser/session.spec.ts:69:1 › development StrictMode remount establishes a valid request scope before child reads 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/__test/strict
+    Call log:
+      - navigating to "http://127.0.0.1:5197/__test/strict", waiting until "load"
+
+
+      71 | }) => {
+      72 |   await operationFixtures(page, { "me.read": testIdentity });
+    > 73 |   await page.goto("/__test/strict");
+         |              ^
+      74 |   await expect(page.getByTestId("identity")).toHaveText("Test Firm · Test");
+      75 |   await expect(page.getByRole("main").getByRole("alert")).toHaveCount(0);
+      76 | });
+        at /workspace/capiro-integration/apps/web/test/browser/session.spec.ts:73:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/session-development-Strict-cb7e2-st-scope-before-child-reads/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/session-development-Strict-cb7e2-st-scope-before-child-reads/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/session-development-Strict-cb7e2-st-scope-before-child-reads/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/session-development-Strict-cb7e2-st-scope-before-child-reads/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  35) test/browser/settings-scenes.spec.ts:33:3 › Settings personal renders compatible responses without runtime failures 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/settings/personal
+    Call log:
+      - navigating to "http://127.0.0.1:5197/settings/personal", waiting until "load"
+
+
+      37 |     page.on("pageerror", (error) => errors.push(error.message));
+      38 |     await mkdir("test-results/settings-scenes", { recursive: true });
+    > 39 |     await page.goto(`/settings/${section}`);
+         |                ^
+      40 |     await expect(
+      41 |       page.getByRole("heading", { name: title, exact: true, level: 1 }),
+      42 |     ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/settings-scenes.spec.ts:39:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/settings-scenes-Settings-p-54176-es-without-runtime-failures/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/settings-scenes-Settings-p-54176-es-without-runtime-failures/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/settings-scenes-Settings-p-54176-es-without-runtime-failures/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/settings-scenes-Settings-p-54176-es-without-runtime-failures/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  36) test/browser/settings-scenes.spec.ts:33:3 › Settings contact-info renders compatible responses without runtime failures 
+
+    Error: page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:5197/settings/contact-info
+    Call log:
+      - navigating to "http://127.0.0.1:5197/settings/contact-info", waiting until "load"
+
+
+      37 |     page.on("pageerror", (error) => errors.push(error.message));
+      38 |     await mkdir("test-results/settings-scenes", { recursive: true });
+    > 39 |     await page.goto(`/settings/${section}`);
+         |                ^
+      40 |     await expect(
+      41 |       page.getByRole("heading", { name: title, exact: true, level: 1 }),
+      42 |     ).toBeVisible();
+        at /workspace/capiro-integration/apps/web/test/browser/settings-scenes.spec.ts:39:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/settings-scenes-Settings-c-d8cca-es-without-runtime-failures/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/settings-scenes-Settings-c-d8cca-es-without-runtime-failures/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/settings-scenes-Settings-c-d8cca-es-without-runtime-failures/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/settings-scenes-Settings-c-d8cca-es-without-runtime-failures/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  36 failed
+    test/browser/integration.spec.ts:109:1 › client replacement interrupts a write and organization replacement clears drafts and revalidates 
+    test/browser/integration.spec.ts:158:1 › Core expiry clears the application, does not replay and cannot be escaped by changing client 
+    test/browser/legiwatch.spec.ts:21:3 › LegiWatch News evidence renders a real connected view ────
+    test/browser/legiwatch.spec.ts:21:3 › LegiWatch Florida Budget renders a real connected view ───
+    test/browser/legiwatch.spec.ts:21:3 › LegiWatch Research evidence renders a real connected view 
+    test/browser/legiwatch.spec.ts:21:3 › LegiWatch Monitoring renders a real connected view ───────
+    test/browser/legiwatch.spec.ts:21:3 › LegiWatch Client briefings renders a real connected view ─
+    test/browser/legiwatch.spec.ts:21:3 › LegiWatch Reports renders a real connected view ──────────
+    test/browser/legiwatch.spec.ts:21:3 › LegiWatch Trends renders a real connected view ───────────
+    test/browser/legiwatch.spec.ts:21:3 › LegiWatch Legacy digest renders a real connected view ────
+    test/browser/legiwatch.spec.ts:21:3 › LegiWatch Import review renders a real connected view ────
+    test/browser/legiwatch.spec.ts:21:3 › LegiWatch Research import review renders a real connected view 
+    test/browser/legiwatch.spec.ts:21:3 › LegiWatch LegiWatch settings renders a real connected view 
+    test/browser/legiwatch.spec.ts:48:1 › research continues past an empty matched page using the retained-source cursor 
+    test/browser/legiwatch.spec.ts:96:1 › workflow changes invalidate a reviewed preview and enqueue only its exact current hash 
+    test/browser/legiwatch.spec.ts:169:1 › monitoring tabs and keyword drawer support keyboard dismissal on mobile without overflow 
+    test/browser/modules.spec.ts:16:3 › Engagement Manager primary route renders through the canonical session/API boundary 
+    test/browser/modules.spec.ts:16:3 › Planner primary route renders through the canonical session/API boundary 
+    test/browser/modules.spec.ts:16:3 › Master calendar primary route renders through the canonical session/API boundary 
+    test/browser/modules.spec.ts:16:3 › Workspace primary route renders through the canonical session/API boundary 
+    test/browser/modules.spec.ts:16:3 › Strategies primary route renders through the canonical session/API boundary 
+    test/browser/modules.spec.ts:16:3 › Directory primary route renders through the canonical session/API boundary 
+    test/browser/modules.spec.ts:16:3 › Intelligence Center primary route renders through the canonical session/API boundary 
+    test/browser/modules.spec.ts:16:3 › Research Portfolios primary route renders through the canonical session/API boundary 
+    test/browser/planner-engagement.spec.ts:112:1 › Planner modes use the same permitted task data and exact board assets 
+    test/browser/planner-engagement.spec.ts:163:1 › Planner failed writes retain drafts and a successful save uses only reviewed fields 
+    test/browser/planner-engagement.spec.ts:218:1 › Engagement library opens shared notes, approval is a separate real operation and tabs work at phone width 
+    test/browser/planner-engagement.spec.ts:279:1 › A template session deep link keeps the server state version and sends no mail 
+    test/browser/public-forms.spec.ts:5:1 › public form submits only displayed answers and shows the returned receipt without sign-in 
+    test/browser/public-forms.spec.ts:52:1 › revoked public capability renders an unavailable state without a submission action 
+    test/browser/session.spec.ts:7:1 › missing configuration renders setup without issuing service requests 
+    test/browser/session.spec.ts:20:1 › org/session change clears prior records and sign-out removes all protected content 
+    test/browser/session.spec.ts:53:1 › 401 removes protected content and asks for sign-in without replaying a request 
+    test/browser/session.spec.ts:69:1 › development StrictMode remount establishes a valid request scope before child reads 
+    test/browser/settings-scenes.spec.ts:33:3 › Settings personal renders compatible responses without runtime failures 
+    test/browser/settings-scenes.spec.ts:33:3 › Settings contact-info renders compatible responses without runtime failures 
+  1 interrupted
+    test/browser/settings-scenes.spec.ts:33:3 › Settings branding renders compatible responses without runtime failures 
+  22 did not run
+  3 passed (1.0m)
+npm error Lifecycle script `test:browser:modules` failed with error:
+npm error code 130
+npm error path /workspace/capiro-integration/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-integration/apps/web
+npm error command failed
+npm error command sh -c playwright test --config test/browser/playwright.config.ts
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
