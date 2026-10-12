@@ -6,24 +6,27 @@ import { useObjectives } from "./queries";
 import { statusLabels } from "./contracts";
 export function ObjectiveSummary({ clientId }: { clientId: string }) {
   const query = useObjectives(clientId);
+  const records = query.isSuccess && !query.error ? query.data : undefined;
   return (
     <section className="card stack">
       <header className="row between">
         <h2>Objectives</h2>
-        <Link
-          className="button ghost iconButton"
-          href={`/portfolio/${clientId}/objectives?new=1`}
-          aria-label="New objective"
-        >
-          <Plus size={16} />
-        </Link>
+        {records && !query.isFetching && (
+          <Link
+            className="button ghost iconButton"
+            href={`/portfolio/${clientId}/objectives?new=1`}
+            aria-label="New objective"
+          >
+            <Plus size={16} />
+          </Link>
+        )}
       </header>
       <QueryState
         pending={query.isPending}
         error={query.error}
         retry={() => void query.refetch()}
       />
-      {query.data?.slice(0, 3).map((objective) => (
+      {records?.slice(0, 3).map((objective) => (
         <Link
           className="stack"
           key={objective.id}
@@ -38,7 +41,7 @@ export function ObjectiveSummary({ clientId }: { clientId: string }) {
           </p>
         </Link>
       ))}
-      {query.data?.length === 0 && (
+      {records?.length === 0 && (
         <p className="muted">
           No objectives yet. Define the first outcome for this client.
         </p>

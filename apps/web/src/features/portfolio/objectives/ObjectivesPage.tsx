@@ -1,6 +1,6 @@
 "use client";
 import { useDeleteObjective } from "./mutations";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Plus, Trash2 } from "lucide-react";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
@@ -22,14 +22,31 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
   const router = useRouter();
   const [filter, setFilter] = useState("");
   const [deleting, setDeleting] = useState<Objective>();
-  const selected = query.data?.find((o) => o.id === params.get("objective"));
+  const [readScope, setReadScope] = useState({ clientId, error: query.error });
+  if (readScope.clientId !== clientId || readScope.error !== query.error) {
+    setReadScope({ clientId, error: query.error });
+    setDeleting(undefined);
+  }
+  const records = query.isSuccess && !query.error ? query.data : undefined;
+  const selected = records?.find((o) => o.id === params.get("objective"));
   const creating = params.has("new");
+  const search = params.toString();
+  useEffect(() => {
+    if (!query.error) return;
+    const next = new URLSearchParams(search);
+    if (!next.has("objective") && !next.has("new")) return;
+    next.delete("objective");
+    next.delete("new");
+    router.replace(`/portfolio/${clientId}/objectives?${next}`, {
+      scroll: false,
+    });
+  }, [clientId, query.error, router, search]);
   const remove = useDeleteObjective(
     clientId,
     () => setDeleting(undefined),
-    Boolean(deleting),
+    Boolean(records && deleting),
   );
-  const visible = query.data?.filter(
+  const visible = records?.filter(
     (objective) => !filter || objective.status === filter,
   );
   function navigate(key?: string, value?: string) {
@@ -41,7 +58,7 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
       scroll: false,
     });
   }
-  if (creating)
+  if (creating && records)
     return (
       <NewObjectivePage
         key={clientId}
@@ -56,7 +73,11 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
           <p className="eyebrow">Outcomes and institutional memory</p>
           <h1>Objectives</h1>
         </div>
-        <button className="button primary" onClick={() => navigate("new", "1")}>
+        <button
+          className="button primary"
+          disabled={!records || query.isFetching}
+          onClick={() => navigate("new", "1")}
+        >
           <Plus size={16} />
           New objective
         </button>
@@ -91,6 +112,7 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
                 <button
                   className="button ghost iconButton"
                   aria-label={`Delete ${objective.outcome || "untitled objective"}`}
+                  disabled={query.isFetching}
                   onClick={() => setDeleting(objective)}
                 >
                   <Trash2 size={14} />
@@ -99,6 +121,7 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
               <h2>
                 <button
                   className={styles.titleButton}
+                  disabled={query.isFetching}
                   onClick={() => navigate("objective", objective.id)}
                 >
                   {objective.outcome || "Untitled objective"}
@@ -129,13 +152,14 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
               </div>
               <button
                 className="button"
+                disabled={query.isFetching}
                 onClick={() => navigate("objective", objective.id)}
               >
                 Open objective
               </button>
             </article>
           ))}
-          {query.data?.length === 0 && (
+          {records?.length === 0 && (
             <div className="status">
               <h3>No current objectives</h3>
               <p className="muted">
@@ -143,7 +167,7 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
               </p>
             </div>
           )}
-          {Boolean(query.data?.length) && visible?.length === 0 && (
+          {Boolean(records?.length) && visible?.length === 0 && (
             <div className="status">
               <h3>No objectives match this status</h3>
               <button className="button" onClick={() => setFilter("")}>
@@ -168,7 +192,7 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
         }}
       />
       <Dialog
-        open={Boolean(deleting)}
+        open={Boolean(records && deleting)}
         onOpenChange={(open) => {
           if (!open && !remove.isPending) setDeleting(undefined);
         }}
