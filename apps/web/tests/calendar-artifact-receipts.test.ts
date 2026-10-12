@@ -24,7 +24,7 @@ const meeting = {
   attendees: [],
   preps: [],
 };
-const metadata = {
+const baseMetadata = {
   id: "artifact-one",
   meetingId: "meeting-one",
   clientId: "client-one",
@@ -42,6 +42,11 @@ const save: ArtifactChange = {
   confidential: false,
 };
 for (const kind of ["notes", "debriefs"] as ArtifactKind[]) {
+  const metadata = {
+    ...baseMetadata,
+    status: kind === "notes" ? "draft" : "generated",
+    ...(kind === "notes" ? { approvedAt: null, approvedByUserId: null } : {}),
+  };
   describe(kind, () => {
     it.each([
       {},

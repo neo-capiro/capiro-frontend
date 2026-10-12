@@ -6,6 +6,7 @@ import type { Meeting } from "@/features/portfolio/calendar/contracts";
 import "@/app/globals.css";
 import "@/shared/portfolio/styles.css";
 import "./test-font.css";
+import { clientId } from "./fixtures";
 const meeting: Meeting = {
   id: "meeting-one",
   subject: "Synthetic meeting",
@@ -24,15 +25,24 @@ const meeting: Meeting = {
 };
 function Harness() {
   const [open, setOpen] = useState(true);
+  const mode = new URLSearchParams(location.search).get("mode");
   return (
     <main>
       <h1>Synthetic meeting receipt review</h1>
       <MeetingForm
         open={open}
         onOpenChange={setOpen}
-        clientId="client-one"
+        clientId={
+          mode === "clear" || mode === "create" ? undefined : "client-one"
+        }
         zone="UTC"
-        meeting={meeting}
+        meeting={
+          mode === "create"
+            ? undefined
+            : mode === "clear"
+              ? { ...meeting, client: { id: clientId, name: "Synthetic" } }
+              : meeting
+        }
       />
     </main>
   );

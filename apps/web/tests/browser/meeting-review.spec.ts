@@ -184,7 +184,7 @@ async function setup(
           clientId,
           authorUserId: "user-test",
           confidential: false,
-          status: "draft",
+          status: "generated",
           sharedAt: null,
           sharedByUserId: null,
           createdAt: "2026-10-11T12:00:00Z",

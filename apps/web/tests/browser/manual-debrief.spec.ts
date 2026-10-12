@@ -59,7 +59,18 @@ async function setup(page: Page, enabled = true) {
           body: "Synthetic reviewed recap\n\nAction items\n• Review evidence\n\nNotes\nRetain the written qualification.",
           confidential: false,
         });
-        return json(route, { id: "synthetic-debrief" });
+        return json(route, {
+          id: "synthetic-debrief",
+          meetingId: meetingId,
+          clientId: clientId,
+          authorUserId: "user-test",
+          confidential: false,
+          status: "generated",
+          sharedAt: null,
+          sharedByUserId: null,
+          createdAt: "2026-10-11T16:00:00Z",
+          updatedAt: "2026-10-11T16:00:00Z",
+        });
       }
       return json(route, []);
     }

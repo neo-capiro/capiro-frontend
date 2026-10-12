@@ -41,7 +41,10 @@ export function artifactReceiptSchema(
     return selected.refine(
       (row) =>
         row.confidential === change.confidential &&
-        row.status === (change.id ? "edited" : "draft") &&
+        row.status ===
+          (change.id ? "edited" : kind === "notes" ? "draft" : "generated") &&
+        (kind === "debriefs" ||
+          (row.approvedAt === null && row.approvedByUserId === null)) &&
         (Boolean(change.id) || row.authorUserId === actor.userId) &&
         row.sharedAt === null &&
         row.sharedByUserId === null,
@@ -56,7 +59,8 @@ export function artifactReceiptSchema(
       "The receipt does not confirm this approval.",
     );
   // Share/unshare return a decorated meeting. Other artifacts may remain shared,
-  // and an idempotent share preserves the original sharer's attribution.
+  // and an idempotent share preserves the original sharer's attribution,
+  // which is nullable after that user is deleted.
   return meetingSchema
     .and(z.object({ [kind]: z.array(metadataSchema) }))
     .refine((row) => {
@@ -74,7 +78,6 @@ export function artifactReceiptSchema(
               artifact.status === "approved" &&
               !artifact.confidential &&
               artifact.sharedAt &&
-              artifact.sharedByUserId &&
               row.visibility === "shared",
             )
           : artifact.sharedAt === null && artifact.sharedByUserId === null)

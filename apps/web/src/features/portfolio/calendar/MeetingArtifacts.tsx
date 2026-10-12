@@ -99,7 +99,9 @@ function ArtifactEditor({
             : `Add ${singular}`}
         </button>
       </div>
-      {kind === "debriefs" && !blocked && (
+      {/* Generation owns role/runtime disabled states; active or uncertain artifact
+          writes suppress new draft entry points until that attempt is resolved. */}
+      {kind === "debriefs" && !mutation.isPending && !mutation.uncertain && (
         <DebriefGeneration
           meeting={meeting}
           onDraft={(body) =>
@@ -119,9 +121,11 @@ function ArtifactEditor({
             <small>
               {item.confidential
                 ? "Confidential"
-                : item.sharedAt
-                  ? "Shared with client team"
-                  : "Private"}
+                : item.sharedAt === undefined
+                  ? "Sharing status unavailable"
+                  : item.sharedAt
+                    ? "Shared with client team"
+                    : "Private"}
             </small>
           </div>
           {item.restricted ? (

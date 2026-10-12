@@ -28,7 +28,18 @@ test("Calendar voice source explicitly generates a reviewed draft and saves sepa
     if (path.endsWith("/debriefs")) {
       if (route.request().method() === "POST") {
         saved.push(route.request().postDataJSON());
-        return json(route, { id: "synthetic-voice-debrief" });
+        return json(route, {
+          id: "synthetic-voice-debrief",
+          meetingId: voiceMeetingId,
+          clientId: voiceMeeting.client!.id,
+          authorUserId: "user-test",
+          confidential: false,
+          status: "generated",
+          sharedAt: null,
+          sharedByUserId: null,
+          createdAt: "2026-10-11T16:00:00Z",
+          updatedAt: "2026-10-11T16:00:00Z",
+        });
       }
       return json(route, []);
     }

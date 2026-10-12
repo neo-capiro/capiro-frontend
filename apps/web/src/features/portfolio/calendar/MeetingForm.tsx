@@ -78,7 +78,7 @@ export function MeetingForm({
         description: String(form.get("description") ?? ""),
         startsAt,
         endsAt,
-        ...(scope ? { clientId: scope } : {}),
+        ...(scope ? { clientId: scope } : meeting ? { clientId: null } : {}),
         location,
       });
     } catch {

@@ -29,6 +29,13 @@ const metadata = {
   createdAt: "2026-10-10T15:00:00Z",
   updatedAt: "2026-10-10T15:00:00Z",
 };
+function createdMetadata(kind: string) {
+  return {
+    ...metadata,
+    status: kind === "notes" ? "draft" : "generated",
+    ...(kind === "notes" ? { approvedAt: null, approvedByUserId: null } : {}),
+  };
+}
 function held() {
   let release!: () => void;
   const promise = new Promise<void>((resolve) => {
@@ -41,7 +48,7 @@ async function setup(page: Page, kind: string) {
   const state = {
     writes: 0,
     requests: [] as { path: string; method: string; body: unknown }[],
-    receipt: metadata as unknown,
+    receipt: createdMetadata(kind) as unknown,
     status: 200,
     hold: undefined as Promise<void> | undefined,
     readHold: undefined as Promise<void> | undefined,
@@ -112,6 +119,10 @@ for (const kind of ["notes", "debriefs"]) {
       page.getByRole("button", { name: `Save ${singular}` }),
     ).toBeDisabled();
     await expect(page.getByText(/may have completed/).first()).toBeVisible();
+    if (kind === "debriefs")
+      await expect(
+        page.getByRole("button", { name: "Type Notes Manually", exact: true }),
+      ).toHaveCount(0);
     await page.keyboard.press("Escape");
     await page.getByRole("button", { name: `Refresh saved ${kind}` }).click();
     await page.getByRole("button", { name: "Toggle artifacts" }).click();
@@ -166,7 +177,7 @@ for (const kind of ["notes", "debriefs"]) {
       "Retain this synthetic draft",
     );
     state.status = 200;
-    state.receipt = metadata;
+    state.receipt = createdMetadata(kind);
     await page.getByRole("button", { name: `Save ${singular}` }).click();
     await expect(page.getByRole("dialog")).toHaveCount(0);
     expect(state.writes).toBe(2);
@@ -228,12 +239,12 @@ for (const kind of ["notes", "debriefs"]) {
     ).toBeDisabled();
     expect(state.writes).toBe(1);
   });
-  test(`${kind}: native edit, approval, share and unshare receipts succeed`, async ({
+  test(`${kind}: action-specific edit, approval, share and unshare receipts succeed`, async ({
     page,
   }) => {
     const state = await setup(page, kind);
     const item = {
-      ...metadata,
+      ...createdMetadata(kind),
       body: "Saved synthetic content",
       restricted: false,
     };
@@ -241,11 +252,11 @@ for (const kind of ["notes", "debriefs"]) {
     await page.reload();
     await page.getByRole("button", { name: "Edit", exact: true }).click();
     await page.getByLabel("Content", { exact: true }).fill("Changed content");
-    state.receipt = { ...metadata, status: "edited" };
+    state.receipt = { ...createdMetadata(kind), status: "edited" };
     await page.getByRole("button", { name: `Save ${singular}` }).click();
     await expect(page.getByRole("dialog")).toHaveCount(0);
     state.receipt = {
-      ...metadata,
+      ...createdMetadata(kind),
       status: "approved",
       ...(kind === "notes"
         ? { approvedAt: "2026-10-10T15:00:00Z", approvedByUserId: "user-test" }
@@ -257,12 +268,14 @@ for (const kind of ["notes", "debriefs"]) {
       page.getByRole("button", { name: "Share", exact: true }),
     ).toBeVisible();
     const shared = {
-      ...metadata,
+      ...createdMetadata(kind),
       status: "approved",
       sharedAt: "2026-10-10T15:00:00Z",
       sharedByUserId: "original-sharer",
     };
     state.receipt = { ...meeting, visibility: "shared", [kind]: [shared] };
+    // Synthetic presentation bridge: native debrief list responses currently omit
+    // sharing stamps. This controls mutation receipts, not that native read gap.
     state.items = [{ ...item, ...shared }];
     await page.getByRole("button", { name: "Share", exact: true }).click();
     await page
@@ -273,7 +286,7 @@ for (const kind of ["notes", "debriefs"]) {
     state.receipt = {
       ...meeting,
       visibility: "shared",
-      [kind]: [{ ...metadata, status: "approved" }],
+      [kind]: [{ ...createdMetadata(kind), status: "approved" }],
     };
     state.items = [{ ...item, status: "approved" }];
     await page.getByRole("button", { name: "Unshare", exact: true }).click();
@@ -318,6 +331,14 @@ for (const kind of ["notes", "debriefs"]) {
     await draft(page, singular);
     await page.getByRole("button", { name: `Save ${singular}` }).click();
     await expect.poll(() => state.writes).toBe(1);
+    if (kind === "debriefs")
+      await expect(
+        page.getByRole("button", {
+          name: "Type Notes Manually",
+          exact: true,
+          includeHidden: true,
+        }),
+      ).toHaveCount(0);
     const content = page.getByLabel("Content", { exact: true });
     await content.press("End");
     await content.pressSequentially(" later draft");
@@ -333,3 +354,58 @@ for (const kind of ["notes", "debriefs"]) {
     });
   });
 }
+
+test("artifact captions distinguish omitted sharing metadata from explicit privacy", async ({
+  page,
+}) => {
+  const state = await setup(page, "debriefs");
+  const cases = [
+    {
+      id: "unknown",
+      sharedAt: undefined,
+      confidential: false,
+      caption: "Sharing status unavailable",
+    },
+    { id: "private", sharedAt: null, confidential: false, caption: "Private" },
+    {
+      id: "shared",
+      sharedAt: "2026-10-10T15:00:00Z",
+      confidential: false,
+      caption: "Shared with client team",
+    },
+    {
+      id: "confidential",
+      sharedAt: undefined,
+      confidential: true,
+      caption: "Confidential",
+    },
+  ];
+  state.items = cases.map(({ id, sharedAt, confidential }) => ({
+    ...createdMetadata("debriefs"),
+    id,
+    sharedAt,
+    sharedByUserId: undefined,
+    confidential,
+    status: "approved",
+    body: `Synthetic ${id} debrief`,
+    restricted: false,
+  }));
+  // JSON omits undefined stamps just as native GET /debriefs does. The other
+  // rows exercise explicit values used by artifact reads that supply stamps.
+  await page.reload();
+  for (const { id, caption } of cases) {
+    const artifact = page
+      .getByRole("article")
+      .filter({ hasText: `Synthetic ${id} debrief` });
+    await expect(artifact.getByText(caption, { exact: true })).toBeVisible();
+    if (id === "unknown") {
+      await expect(artifact.getByText("Private", { exact: true })).toHaveCount(
+        0,
+      );
+      await expect(
+        artifact.getByRole("button", { name: "Unshare", exact: true }),
+      ).toHaveCount(0);
+    }
+  }
+  expect(state.writes).toBe(0);
+});
