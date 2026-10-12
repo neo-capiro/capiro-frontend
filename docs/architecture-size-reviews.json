@@ -2512,7 +2512,7 @@
     "sha256": "78facf8f6c85d1a7e98b7d884db86a5c79281918484f3a0125a706fc2e5be207",
     "reviewer": "Codex independent objectives_work_intel_review and root integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/successor-p1-20261012/evidence/independent/workspace-review.json",
+    "evidence": "docs/successor-p1-20261012/STRUCTURE-REVIEW.md",
     "rationale": "DraftEditor remains the canonical presentation and local-state owner for one document editor: title/sections, save/history controls and status. The two pending attributes reuse the existing prospect-save lifecycle without adding transport, persistence, provider integration or authority responsibilities. The 178-nonblank function is cohesive JSX composition; splitting solely to lower the count would obscure the shared editor lifetime. Existing separate hook, export and newsletter owners remain separate.",
     "functions": [
       {
@@ -2923,7 +2923,7 @@
     "sha256": "7a64a5917f672d5064c75795e34cdfdcc465de8953c40d3cc4b2c529601a3838",
     "reviewer": "Codex independent objectives_work_intel_review and root integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/successor-p1-20261012/evidence/independent/billing-review.json",
+    "evidence": "docs/successor-p1-20261012/STRUCTURE-REVIEW.md",
     "rationale": "BillingSettings remains one screen presentation with checkout/cancel local dialog state. The 292-nonblank signal is principally cohesive JSX for this same billing screen. Flow choice, fresh-read preflight and exact hosted redirect validation are separated into the small billingFlow owner, while the existing typed registry owns transport contracts and useSettingsAction owns cancellation/concurrency. No billing server logic, authority implementation, second catalog, unrelated domain or cyclic dependency was added. Further splitting for line count alone is not needed.",
     "functions": [
       {

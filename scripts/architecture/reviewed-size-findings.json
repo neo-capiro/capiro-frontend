@@ -108,24 +108,6 @@
     "reviewedOn": "2026-10-11"
   },
   {
-    "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
-    "kind": "function",
-    "symbol": "MeetingArtifacts",
-    "fingerprint": "c225761627054943324aa2c49d2d45b971ec70d43cd87e141404f2e2d532ddd4",
-    "reason": "One meeting-artifact session owns the displayed notes/debrief list, selection, edit draft and share intent. Writes remain in the mutation hook, while generation and PDF review have separate components. Keeping the selected artifact and its draft actions together preserves one record workflow. An artifact card can be extracted if independent reuse appears; there is no provider orchestration or unrelated persistence in this component.",
-    "reviewedBy": "Codex portfolio_calendar_relationships",
-    "reviewedOn": "2026-10-11"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
-    "kind": "function",
-    "symbol": "MeetingArtifacts > <anonymous> #5",
-    "fingerprint": "267831594d9e44f4bec4e80779d0534f706783ddbbb62118fc9ca3f6c077fbab",
-    "reason": "This map callback renders exactly one artifact row, including restricted content and callbacks for that row's actions. It neither performs transport nor establishes authority. Its conditional markup reflects a single record's allowed presentation. Naming it MeetingArtifactCard would be useful with another caller, but extracting solely because the callback exceeds80 lines adds a boundary without a separate responsibility.",
-    "reviewedBy": "Codex portfolio_calendar_relationships",
-    "reviewedOn": "2026-10-11"
-  },
-  {
     "file": "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
     "kind": "function",
     "symbol": "MeetingDetail",
@@ -1281,15 +1263,6 @@
     "reviewedOn": "2026-10-12"
   },
   {
-    "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
-    "kind": "function",
-    "symbol": "DraftEditor",
-    "fingerprint": "460c5e02e91187ab5fcc03a8dbb83b0ba8d4bc0857d028a32111a8b6928f252a",
-    "reason": "DraftEditor remains the canonical presentation and local-state owner for one document editor: title/sections, save/history controls and status. The two pending attributes reuse the existing prospect-save lifecycle without adding transport, persistence, provider integration or authority responsibilities. The 178-nonblank function is cohesive JSX composition; splitting solely to lower the count would obscure the shared editor lifetime. Existing separate hook, export and newsletter owners remain separate.",
-    "reviewedBy": "Codex independent objectives_work_intel_review and root integration review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
     "file": "apps/web/src/features/modules/workspace/prospects/ProspectDraftCreate.tsx",
     "kind": "function",
     "symbol": "ProspectDraftCreate",
@@ -1548,69 +1521,6 @@
     "fingerprint": "370b43d4c8e1db0b7afe8e3f6ed0f4910b4ed62f27f563103870c99735aa3e11",
     "reason": "Retains Portfolio index/card/chooser presentation and responsive rules. The added header owner filter and compact navigation/disclosure styling are scoped to the same index. No global shell tokens, mode navigation, backend state or unrelated domain rules are added. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
     "reviewedBy": "Codex shared frontend implementation review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
-    "file": "apps/web/src/features/settings/BillingSettings.tsx",
-    "kind": "function",
-    "symbol": "BillingSettings",
-    "fingerprint": "e1a7cb20d84cd766915defd93a303aa4806c0525a8d9ed3636b1aba4e5a42044",
-    "reason": "BillingSettings remains one screen presentation with checkout/cancel local dialog state. The 292-nonblank signal is principally cohesive JSX for this same billing screen. Flow choice, fresh-read preflight and exact hosted redirect validation are separated into the small billingFlow owner, while the existing typed registry owns transport contracts and useSettingsAction owns cancellation/concurrency. No billing server logic, authority implementation, second catalog, unrelated domain or cyclic dependency was added. Further splitting for line count alone is not needed.",
-    "reviewedBy": "Codex independent objectives_work_intel_review and root integration review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
-    "kind": "function",
-    "symbol": "ArtifactEditor",
-    "fingerprint": "74c2a940af8068f5842b680b59a455ef48e6a7b4c92da4a45665d3bc4c4c4220",
-    "reason": "Owns one notes/debrief interaction presentation and local draft. Native action-specific wire validation, dispatch and cache-local mutation lifetime are separate artifacts/contracts, api and useArtifactMutation owners. Pending field locks protect the submitted snapshot without adding domain responsibilities. Independent review and raw results are recorded in docs/successor-p1-20261012/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex independent core_intake_review and root integration review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
-    "kind": "function",
-    "symbol": "ArtifactEditor > <anonymous> #5",
-    "fingerprint": "51a2e68f07cabc01899676537ac125327048c6f6f8aa43a6de961c52479829ed",
-    "reason": "Renders one existing artifact and its action affordances within the same artifact editor. Native effect validation and mutation lifecycle remain delegated. Splitting this cohesive row only for line count would obscure its shared pending/uncertainty state. Independent review and raw results are recorded in docs/successor-p1-20261012/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex independent core_intake_review and root integration review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
-    "kind": "function",
-    "symbol": "MeetingForm",
-    "fingerprint": "5731a9f733741460daf9a93f01ca6fc11c8d52496f04e96dcb8cb2ee6dc5a1cb",
-    "reason": "Owns one meeting draft, date conversion, validation and presentation. Native effect matching belongs to meeting-save.ts and actor/lifetime/receipt mutation belongs to mutations.ts. Pending field locks preserve the submitted snapshot without new responsibilities. Independent review and raw results are recorded in docs/successor-p1-20261012/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex independent core_intake_review and root integration review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/files/MoveFile.tsx",
-    "kind": "function",
-    "symbol": "MoveFile",
-    "fingerprint": "17fffc40d9fe6d4fd5e096e44fdfb2137e6d1a18b5a23cbcf1b4cee578538b8c",
-    "reason": "Owns one folder dialog, local choice and presentation. It delegates captured-authority checks, semantic receipt validation and uncertain-write recovery to useFileMetadataChange; status rendering is separate. No transport, shared authority or foreign-domain responsibility is duplicated. Independent review and raw results are recorded in docs/successor-p1-20261012/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex independent core_intake_review and root integration review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx",
-    "kind": "function",
-    "symbol": "ObjectivesPage",
-    "fingerprint": "5f1c21710a260ec6edb31ab366fdb048eeff1d28e1f149b7c7e4a80367bb4163",
-    "reason": "Owns the client Objective list, local status filter, URL selection and failure cleanup. A single current-success projection conceals records and editors after failed reads. Existing ObjectiveEditor, NewObjectivePage and mutation hooks retain edits, validation and dispatch. No shared cache abstraction, transport or backend authority is added. See docs/successor-p1-20261012/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex independent objectives_work_intel_review and root integration review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx",
-    "kind": "function",
-    "symbol": "ProspectsIndex",
-    "fingerprint": "d0be79ab36b07635085df1e03a891890f55b36a345cb0ac4a199caf5e3552d84",
-    "reason": "Owns Prospect list presentation, filters, counts, cards and URL-based dialog selection. One current-success projection and existing TanStack fetched-after-mount semantics govern data-backed branches. The query hook owns scoped list freshness; existing editors and pipeline retain mutations. No duplicate cache framework, transport or authority is introduced. See docs/successor-p1-20261012/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex root integration review; independent current-read behavior review separately recorded",
     "reviewedOn": "2026-10-12"
   }
 ]
