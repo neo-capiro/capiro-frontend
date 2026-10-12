@@ -11,6 +11,9 @@ async function setup(
   const state = {
     signature,
     signatureStatus: 200,
+    signatureReads: 0,
+    holdSignature: false,
+    releaseSignature: () => {},
     actor: "actor-a",
     role: "standard_user",
     rewriteResult: {
@@ -40,7 +43,12 @@ async function setup(
           role: state.role,
         },
       });
-    if (path === "me/email-signature")
+    if (path === "me/email-signature") {
+      state.signatureReads += 1;
+      if (state.holdSignature)
+        await new Promise<void>((resolve) => {
+          state.releaseSignature = resolve;
+        });
       return route.fulfill({
         status: state.signatureStatus,
         json:
@@ -48,6 +56,7 @@ async function setup(
             ? state.signature
             : { message: "Signature temporarily unavailable" },
       });
+    }
     if (path === "engagement/mail/mailboxes")
       return route.fulfill({ json: [sendingMailbox] });
     if (path?.endsWith("/people")) return route.fulfill({ json: [] });
@@ -414,3 +423,71 @@ test("saved signature and Undo remain usable in desktop and mobile dark review",
     original,
   );
 });
+
+for (const response of [403, 503, "loading"] as const)
+  test(`cached signature ${response} refetch cannot supply a current review preview`, async ({
+    page,
+  }) => {
+    await page.clock.install();
+    const state = await setup(page);
+    await open(page);
+    await expect(
+      page
+        .frameLocator('iframe[title="Saved signature preview"]')
+        .getByText("Synthetic Sender", { exact: true }),
+    ).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(
+      page.getByRole("dialog", { name: "New email", exact: true }),
+    ).toHaveCount(0);
+    await page.clock.fastForward(31_000);
+    state.signatureStatus = response === "loading" ? 200 : response;
+    state.holdSignature = response === "loading";
+    await open(page);
+    await expect.poll(() => state.signatureReads).toBe(2);
+    const signature = page.getByRole("region", { name: "Saved signature" });
+    if (response !== "loading")
+      await expect(signature.getByRole("alert")).toBeVisible();
+    try {
+      await page
+        .getByRole("button", { name: "Review email", exact: true })
+        .click();
+      const review = page.getByRole("dialog", {
+        name: "Send email",
+        exact: true,
+      });
+      await expect(
+        review.locator('iframe[title="Saved signature preview"]'),
+      ).toHaveCount(0);
+      await expect(
+        review.getByText(
+          response === "loading"
+            ? "Signature preview was still loading when this review opened. Close this review and review again after it loads."
+            : "Saved signature preview is unavailable. Close this review to retry loading it.",
+          { exact: true },
+        ),
+      ).toBeVisible();
+      await expect(
+        review.getByText(
+          "Your saved signature will be requested when this email is sent.",
+          { exact: true },
+        ),
+      ).toBeVisible();
+      await expect(
+        signature.locator('iframe[title="Saved signature preview"]'),
+      ).toHaveCount(0);
+      await review
+        .getByRole("button", { name: "Send email", exact: true })
+        .click();
+      await expect.poll(() => state.sends.length).toBe(1);
+      expect(state.sends[0]).toMatchObject({
+        bodyHtml: `<p>${original}</p>`,
+        appendSignature: true,
+      });
+      expect(state.sends[0]?.bodyHtml).not.toContain("Synthetic Sender");
+      expect(state.rewrites).toEqual([]);
+      expect(state.remote).toEqual([]);
+    } finally {
+      state.releaseSignature();
+    }
+  });

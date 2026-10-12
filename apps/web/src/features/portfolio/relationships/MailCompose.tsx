@@ -43,6 +43,7 @@ export function MailCompose({
     input: SendInput;
     text: string;
     signatureHtml: string | null;
+    signatureStatus: "current" | "loading" | "unavailable";
   } | null>(null);
   const [to, setTo] = useState<Recipient[]>(
     initialDraft?.to ??
@@ -76,6 +77,8 @@ export function MailCompose({
   const uncertain = send.error instanceof MailSendError && send.error.uncertain;
   const locked = send.isPending || attachments.busy || uncertain;
   const signatureEnabled = append ?? signature.data?.enabled ?? false;
+  const signatureCurrent =
+    signature.isSuccess && !signature.error && !signature.isFetching;
   return (
     <Dialog
       open
@@ -122,9 +125,15 @@ export function MailCompose({
               setValidation("");
               setReview({
                 text: body,
-                signatureHtml: signatureEnabled
-                  ? (signature.data?.html ?? null)
-                  : null,
+                signatureHtml:
+                  signatureEnabled && signatureCurrent
+                    ? (signature.data.html ?? null)
+                    : null,
+                signatureStatus: signatureCurrent
+                  ? "current"
+                  : signature.isFetching
+                    ? "loading"
+                    : "unavailable",
                 input: {
                   clientId,
                   ...(personIds.length ? { personIds } : {}),
@@ -227,7 +236,10 @@ export function MailCompose({
             Append my saved signature
           </label>
           <section aria-label="Saved signature" className="stack">
-            <QueryState pending={signature.isPending} error={signature.error} />
+            <QueryState
+              pending={signature.isPending || signature.isFetching}
+              error={signature.error}
+            />
             {signature.error && (
               <button
                 type="button"
@@ -237,7 +249,7 @@ export function MailCompose({
                 Retry signature
               </button>
             )}
-            {signature.isSuccess &&
+            {signatureCurrent &&
               (signature.data.html ? (
                 <SignaturePreview html={signature.data.html} />
               ) : (
@@ -324,10 +336,19 @@ export function MailCompose({
             {review.input.appendSignature && (
               <div className="stack">
                 <small>
-                  Your saved signature is added when this email is sent.
+                  Your saved signature will be requested when this email is
+                  sent.
                 </small>
-                {review.signatureHtml && (
+                {review.signatureHtml ? (
                   <SignaturePreview html={review.signatureHtml} />
+                ) : (
+                  <small role="status">
+                    {review.signatureStatus === "loading"
+                      ? "Signature preview was still loading when this review opened. Close this review and review again after it loads."
+                      : review.signatureStatus === "unavailable"
+                        ? "Saved signature preview is unavailable. Close this review to retry loading it."
+                        : "No saved signature is available."}
+                  </small>
                 )}
               </div>
             )}
