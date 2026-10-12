@@ -1,0 +1,12 @@
+- dialog "Add debrief":
+  - banner:
+    - heading "Add debrief" [level=2]
+    - button "Close"
+  - paragraph: Add debrief
+  - text: Content
+  - textbox "Content": Synthetic reviewed meeting draft. Preserve the full content while the response is pending or uncertain.
+  - checkbox "Confidential" [disabled]
+  - text: Confidential Edits require approval again. Saving does not send email.
+  - alert:
+    - paragraph: This action may have completed. Your draft is retained. Refresh the saved records and verify the result before further changes; this attempt cannot be retried here.
+  - button "Save debrief" [disabled]

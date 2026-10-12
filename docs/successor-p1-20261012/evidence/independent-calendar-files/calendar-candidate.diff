@@ -1,0 +1,1759 @@
+diff --git a/apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx b/apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx
+index d05b5ee..ec87e23 100644
+--- a/apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx
++++ b/apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx
+@@ -1,6 +1,8 @@
+ "use client";
+ import { TextareaField } from "@/shared/portfolio/ui/TextareaField";
+-import { useChangeMeetingArtifact } from "./mutations";
++import { useArtifactMutation } from "./artifacts/useArtifactMutation";
++import type { ArtifactActor, ArtifactChange } from "./artifacts/contracts";
++import { canAdminister, useIdentity } from "@/shared/portfolio/auth/identity";
+ import { useState } from "react";
+ import { Dialog } from "@/shared/portfolio/ui/Dialog";
+ import { QueryState } from "@/shared/portfolio/ui/QueryState";
+@@ -15,20 +17,62 @@ export function MeetingArtifacts({
+ }: {
+   meeting: Meeting;
+   kind: "notes" | "debriefs";
++}) {
++  const identity = useIdentity();
++  if (!identity.data?.tenant || !identity.isSuccess)
++    return <QueryState pending={identity.isPending} error={identity.error} />;
++  return (
++    <ArtifactEditor
++      key={`${identity.data.tenant.id}:${identity.data.user.id}:${meeting.id}:${meeting.client?.id ?? ""}:${kind}`}
++      meeting={meeting}
++      kind={kind}
++      actor={{
++        userId: identity.data.user.id,
++        tenantId: identity.data.tenant.id,
++      }}
++      allowed={
++        !identity.isFetching &&
++        !identity.error &&
++        (identity.data.role === "standard_user" ||
++          canAdminister(identity.data.role))
++      }
++    />
++  );
++}
++function ArtifactEditor({
++  meeting,
++  kind,
++  actor,
++  allowed,
++}: {
++  meeting: Meeting;
++  kind: "notes" | "debriefs";
++  actor: ArtifactActor;
++  allowed: boolean;
+ }) {
+   const query = useMeetingNotes(meeting.id, kind);
+-  const [editing, setEditing] = useState<{
+-    id?: string;
+-    body: string;
+-    confidential: boolean;
+-    generated?: boolean;
+-  }>();
++  const mutation = useArtifactMutation(meeting, kind, actor);
++  const blocked = mutation.isPending || mutation.uncertain || !allowed;
++  const [editing, setEditing] = useState<
++    | {
++        id?: string;
++        body: string;
++        confidential: boolean;
++        generated?: boolean;
++      }
++    | undefined
++  >(() =>
++    mutation.attempt.change?.action === "save"
++      ? mutation.attempt.change
++      : undefined,
++  );
+   const [sharing, setSharing] = useState<string>();
+   const [preview, setPreview] = useState<z.infer<typeof noteSchema>>();
+-  const mutation = useChangeMeetingArtifact(meeting.id, kind, () => {
+-    setEditing(undefined);
+-    setSharing(undefined);
+-  });
++  const changeArtifact = (change: ArtifactChange) =>
++    mutation.mutate(change, () => {
++      setEditing(undefined);
++      setSharing(undefined);
++    });
+   const singular = kind === "notes" ? "note" : "debrief";
+   return (
+     <div className="stack">
+@@ -36,12 +80,26 @@ export function MeetingArtifacts({
+         <h3>{kind === "notes" ? "Meeting notes" : "Debriefs"}</h3>
+         <button
+           className="button"
+-          onClick={() => setEditing({ body: "", confidential: false })}
++          disabled={
++            mutation.isPending ||
++            !allowed ||
++            (mutation.uncertain && mutation.attempt.change?.action !== "save")
++          }
++          onClick={() => {
++            const saved = mutation.attempt.change;
++            if (mutation.uncertain) {
++              if (saved?.action === "save") setEditing(saved);
++              return;
++            }
++            setEditing({ body: "", confidential: false });
++          }}
+         >
+-          Add {singular}
++          {mutation.uncertain && mutation.attempt.change?.action === "save"
++            ? "Review retained draft"
++            : `Add ${singular}`}
+         </button>
+       </div>
+-      {kind === "debriefs" && (
++      {kind === "debriefs" && !blocked && (
+         <DebriefGeneration
+           meeting={meeting}
+           onDraft={(body) =>
+@@ -81,7 +139,7 @@ export function MeetingArtifacts({
+                 )}
+                 <button
+                   className="button"
+-                  disabled={mutation.isPending}
++                  disabled={blocked}
+                   onClick={() =>
+                     setEditing({
+                       id: item.id,
+@@ -95,9 +153,9 @@ export function MeetingArtifacts({
+                 {item.status !== "approved" && (
+                   <button
+                     className="button"
+-                    disabled={mutation.isPending}
++                    disabled={blocked}
+                     onClick={() =>
+-                      mutation.mutate({
++                      changeArtifact({
+                         action: "approve",
+                         id: item.id,
+                       })
+@@ -112,7 +170,7 @@ export function MeetingArtifacts({
+                   !item.sharedAt && (
+                     <button
+                       className="button"
+-                      disabled={mutation.isPending}
++                      disabled={blocked}
+                       onClick={() => setSharing(item.id)}
+                     >
+                       Share
+@@ -121,9 +179,9 @@ export function MeetingArtifacts({
+                 {item.sharedAt && (
+                   <button
+                     className="button"
+-                    disabled={mutation.isPending}
++                    disabled={blocked}
+                     onClick={() =>
+-                      mutation.mutate({
++                      changeArtifact({
+                         action: "unshare",
+                         id: item.id,
+                       })
+@@ -146,6 +204,15 @@ export function MeetingArtifacts({
+         />
+       )}
+       <QueryState error={mutation.error} />
++      {mutation.uncertain && (
++        <button
++          className="button"
++          disabled={query.isFetching}
++          onClick={() => void query.refetch()}
++        >
++          Refresh saved {kind}
++        </button>
++      )}
+       <Dialog
+         open={Boolean(editing)}
+         onOpenChange={(open) => {
+@@ -161,8 +228,9 @@ export function MeetingArtifacts({
+           className="stack"
+           onSubmit={(event) => {
+             event.preventDefault();
++            if (blocked) return;
+             const form = new FormData(event.currentTarget);
+-            mutation.mutate({
++            changeArtifact({
+               action: "save",
+               id: editing?.id,
+               body: String(form.get("body")).trim(),
+@@ -176,11 +244,13 @@ export function MeetingArtifacts({
+             rows={12}
+             required
+             defaultValue={editing?.body}
++            readOnly={blocked}
+           />
+           <label className="row">
+             <input
+               type="checkbox"
+               name="confidential"
++              disabled={blocked}
+               defaultChecked={editing?.confidential}
+             />
+             Confidential
+@@ -189,7 +259,7 @@ export function MeetingArtifacts({
+             Edits require approval again. Saving does not send email.
+           </small>
+           <QueryState error={mutation.error} />
+-          <button className="button primary" disabled={mutation.isPending}>
++          <button className="button primary" disabled={blocked}>
+             Save {singular}
+           </button>
+         </form>
+@@ -208,10 +278,10 @@ export function MeetingArtifacts({
+         <QueryState error={mutation.error} />
+         <button
+           className="button primary"
+-          disabled={mutation.isPending}
++          disabled={blocked}
+           onClick={() => {
+             if (sharing)
+-              mutation.mutate({
++              changeArtifact({
+                 action: "share",
+                 id: sharing,
+               });
+diff --git a/apps/web/src/features/portfolio/calendar/MeetingForm.tsx b/apps/web/src/features/portfolio/calendar/MeetingForm.tsx
+index bb44d85..ddd7826 100644
+--- a/apps/web/src/features/portfolio/calendar/MeetingForm.tsx
++++ b/apps/web/src/features/portfolio/calendar/MeetingForm.tsx
+@@ -36,7 +36,12 @@ export function MeetingForm({
+         (!selectedClientId ||
+           currentClients.some((client) => client.id === selectedClientId))));
+   const [validation, setValidation] = useState("");
+-  const mutation = useSaveMeeting(meeting?.id, () => onOpenChange(false));
++  const mutation = useSaveMeeting(
++    meeting?.id,
++    () => onOpenChange(false),
++    clientId ?? selectedClientId,
++  );
++  const locked = mutation.isPending || mutation.uncertain;
+   const local = (instant: string | undefined) =>
+     instant
+       ? Temporal.Instant.from(instant)
+@@ -46,6 +51,7 @@ export function MeetingForm({
+       : "";
+   function submit(event: React.FormEvent<HTMLFormElement>) {
+     event.preventDefault();
++    if (mutation.isPending || mutation.uncertain) return;
+     if (!clientAvailable) {
+       setValidation("Refresh the client list before saving the meeting.");
+       return;
+@@ -69,11 +75,11 @@ export function MeetingForm({
+       setValidation("");
+       mutation.mutate({
+         subject: String(form.get("subject")).trim(),
+-        description: form.get("description"),
++        description: String(form.get("description") ?? ""),
+         startsAt,
+         endsAt,
+         ...(scope ? { clientId: scope } : {}),
+-        ...(location ? { location } : {}),
++        location,
+       });
+     } catch {
+       setValidation("Enter valid start and end date/times.");
+@@ -83,7 +89,7 @@ export function MeetingForm({
+     <Dialog
+       open={open}
+       onOpenChange={(value) => {
+-        if (!mutation.isPending) onOpenChange(value);
++        if (!mutation.isPending && !mutation.uncertain) onOpenChange(value);
+       }}
+       title={meeting ? "Edit meeting" : "New meeting"}
+       description={`Meeting times use ${zone}. New meetings are private until explicitly shared.`}
+@@ -93,6 +99,7 @@ export function MeetingForm({
+           Subject
+           <input
+             name="subject"
++            readOnly={locked}
+             required
+             maxLength={240}
+             autoFocus
+@@ -106,7 +113,7 @@ export function MeetingForm({
+               name="clientId"
+               value={selectedClientId}
+               onChange={(event) => setSelectedClientId(event.target.value)}
+-              disabled={!clients.isSuccess || clients.isFetching}
++              disabled={locked || !clients.isSuccess || clients.isFetching}
+             >
+               <option value="">No client</option>
+               {currentClients.map((client) => (
+@@ -146,6 +153,7 @@ export function MeetingForm({
+             Starts
+             <input
+               name="start"
++              readOnly={locked}
+               type="datetime-local"
+               required
+               defaultValue={local(meeting?.startsAt)}
+@@ -155,6 +163,7 @@ export function MeetingForm({
+             Ends
+             <input
+               name="end"
++              readOnly={locked}
+               type="datetime-local"
+               required
+               defaultValue={local(meeting?.endsAt)}
+@@ -165,6 +174,7 @@ export function MeetingForm({
+           Location or join URL
+           <input
+             name="location"
++            readOnly={locked}
+             maxLength={240}
+             defaultValue={meeting?.location ?? ""}
+           />
+@@ -172,6 +182,7 @@ export function MeetingForm({
+         <TextareaField
+           label="Description"
+           name="description"
++          readOnly={locked}
+           defaultValue={meeting?.description ?? ""}
+         />
+         {validation && (
+@@ -182,7 +193,9 @@ export function MeetingForm({
+         <QueryState error={mutation.error} />
+         <button
+           className="button primary"
+-          disabled={mutation.isPending || !clientAvailable}
++          disabled={
++            mutation.isPending || mutation.uncertain || !clientAvailable
++          }
+         >
+           {mutation.isPending ? "Saving…" : "Save meeting"}
+         </button>
+diff --git a/apps/web/src/features/portfolio/calendar/artifacts/api.ts b/apps/web/src/features/portfolio/calendar/artifacts/api.ts
+new file mode 100644
+index 0000000..32734e3
+--- /dev/null
++++ b/apps/web/src/features/portfolio/calendar/artifacts/api.ts
+@@ -0,0 +1,102 @@
++import { ApiError, type ApiClient } from "@/shared/portfolio/api/http";
++import { meetingSchema } from "../contracts";
++import {
++  artifactReceiptSchema,
++  type ArtifactActor,
++  type ArtifactChange,
++  type ArtifactKind,
++  type ArtifactMeeting,
++} from "./contracts";
++
++export class ArtifactMutationError extends Error {
++  constructor(
++    message: string,
++    public readonly uncertain: boolean,
++  ) {
++    super(message);
++    this.name = "ArtifactMutationError";
++  }
++}
++
++function operation(base: string, kind: ArtifactKind, change: ArtifactChange) {
++  if (change.action === "save")
++    return {
++      path: `${base}/${kind}${change.id ? `/${encodeURIComponent(change.id)}` : ""}`,
++      method: change.id ? "PATCH" : "POST",
++      body: { body: change.body, confidential: change.confidential },
++    };
++  if (change.action === "approve")
++    return {
++      path: `${base}/${kind}/${encodeURIComponent(change.id)}/approve`,
++      method: "POST",
++      body: undefined,
++    };
++  return {
++    path: `${base}/artifacts/${change.action}`,
++    method: "POST",
++    body: {
++      artifacts: [
++        { type: kind === "notes" ? "note" : "debrief", id: change.id },
++      ],
++    },
++  };
++}
++
++export async function changeMeetingArtifact(
++  api: ApiClient,
++  meeting: ArtifactMeeting,
++  kind: ArtifactKind,
++  actor: ArtifactActor,
++  change: ArtifactChange,
++  assertCurrent: () => void,
++  signal: AbortSignal,
++) {
++  let dispatched = false;
++  let knownRefusal = false;
++  const base = `engagement/meetings/${encodeURIComponent(meeting.id)}`;
++  try {
++    assertCurrent();
++    await api.request(
++      "core",
++      base,
++      meetingSchema.refine(
++        (row) =>
++          row.id === meeting.id &&
++          (row.client?.id ?? null) === (meeting.client?.id ?? null),
++        "The meeting or client association changed. Reopen the meeting.",
++      ),
++      { signal },
++    );
++    assertCurrent();
++    const request = operation(base, kind, change);
++    dispatched = true;
++    await api
++      .request(
++        "core",
++        request.path,
++        artifactReceiptSchema(meeting, kind, actor, change),
++        {
++          method: request.method,
++          body: request.body,
++          signal,
++        },
++      )
++      .catch((error: unknown) => {
++        knownRefusal =
++          error instanceof ApiError &&
++          [400, 401, 403, 404, 409, 422].includes(error.status);
++        throw error;
++      });
++    assertCurrent();
++  } catch (error) {
++    const uncertain = dispatched && !knownRefusal;
++    throw new ArtifactMutationError(
++      uncertain
++        ? `This action may have completed.${change.action === "save" ? " Your draft is retained." : ""} Refresh the saved records and verify the result before further changes; this attempt cannot be retried here.`
++        : error instanceof Error
++          ? error.message
++          : "The artifact could not be changed.",
++      uncertain,
++    );
++  }
++}
+diff --git a/apps/web/src/features/portfolio/calendar/artifacts/contracts.ts b/apps/web/src/features/portfolio/calendar/artifacts/contracts.ts
+new file mode 100644
+index 0000000..412711c
+--- /dev/null
++++ b/apps/web/src/features/portfolio/calendar/artifacts/contracts.ts
+@@ -0,0 +1,83 @@
++import { z } from "zod";
++import { meetingSchema, type Meeting } from "../contracts";
++
++export type ArtifactKind = "notes" | "debriefs";
++export type ArtifactChange =
++  | { action: "save"; id?: string; body: string; confidential: boolean }
++  | { action: "approve" | "share" | "unshare"; id: string };
++export type ArtifactActor = { userId: string; tenantId: string };
++export type ArtifactMeeting = Pick<Meeting, "id" | "client">;
++
++// Native save/approve responses contain metadata, never the saved plaintext.
++const metadataSchema = z.object({
++  id: z.string().min(1),
++  meetingId: z.string().min(1),
++  clientId: z.string().nullable(),
++  authorUserId: z.string().nullable(),
++  confidential: z.boolean(),
++  status: z.string(),
++  sharedAt: z.iso.datetime().nullable(),
++  sharedByUserId: z.string().nullable(),
++  createdAt: z.iso.datetime(),
++  updatedAt: z.iso.datetime(),
++  approvedAt: z.iso.datetime().nullable().optional(),
++  approvedByUserId: z.string().nullable().optional(),
++});
++
++export function artifactReceiptSchema(
++  meeting: ArtifactMeeting,
++  kind: ArtifactKind,
++  actor: ArtifactActor,
++  change: ArtifactChange,
++): z.ZodType {
++  const selected = metadataSchema.refine(
++    (row) =>
++      row.meetingId === meeting.id &&
++      row.clientId === (meeting.client?.id ?? null) &&
++      (!change.id || row.id === change.id),
++    "The artifact receipt does not match this meeting, client and artifact.",
++  );
++  if (change.action === "save")
++    return selected.refine(
++      (row) =>
++        row.confidential === change.confidential &&
++        row.status === (change.id ? "edited" : "draft") &&
++        (Boolean(change.id) || row.authorUserId === actor.userId) &&
++        row.sharedAt === null &&
++        row.sharedByUserId === null,
++      "The receipt does not confirm the submitted save.",
++    );
++  if (change.action === "approve")
++    return selected.refine(
++      (row) =>
++        row.status === "approved" &&
++        (kind === "debriefs" ||
++          (Boolean(row.approvedAt) && row.approvedByUserId === actor.userId)),
++      "The receipt does not confirm this approval.",
++    );
++  // Share/unshare return a decorated meeting. Other artifacts may remain shared,
++  // and an idempotent share preserves the original sharer's attribution.
++  return meetingSchema
++    .and(z.object({ [kind]: z.array(metadataSchema) }))
++    .refine((row) => {
++      const entries = row[kind] as z.infer<typeof metadataSchema>[];
++      const matches = entries.filter((item) => item.id === change.id);
++      const artifact = matches[0];
++      return (
++        row.id === meeting.id &&
++        (row.client?.id ?? null) === (meeting.client?.id ?? null) &&
++        matches.length === 1 &&
++        artifact !== undefined &&
++        selected.safeParse(artifact).success &&
++        (change.action === "share"
++          ? Boolean(
++              artifact.status === "approved" &&
++              !artifact.confidential &&
++              artifact.sharedAt &&
++              artifact.sharedByUserId &&
++              row.visibility === "shared",
++            )
++          : artifact.sharedAt === null && artifact.sharedByUserId === null)
++      );
++    }, "The meeting receipt does not confirm the selected artifact's sharing state.");
++}
+diff --git a/apps/web/src/features/portfolio/calendar/artifacts/useArtifactMutation.ts b/apps/web/src/features/portfolio/calendar/artifacts/useArtifactMutation.ts
+new file mode 100644
+index 0000000..5eca32b
+--- /dev/null
++++ b/apps/web/src/features/portfolio/calendar/artifacts/useArtifactMutation.ts
+@@ -0,0 +1,104 @@
++"use client";
++import { useLayoutEffect, useRef } from "react";
++import { useQuery, useQueryClient } from "@tanstack/react-query";
++import { useApi } from "@/shared/portfolio/api/provider";
++import { useDispatchGuard } from "../access/public";
++import { ArtifactMutationError, changeMeetingArtifact } from "./api";
++import type {
++  ArtifactActor,
++  ArtifactChange,
++  ArtifactKind,
++  ArtifactMeeting,
++} from "./contracts";
++
++type Attempt = {
++  status: "idle" | "pending" | "uncertain" | "refused";
++  change?: ArtifactChange;
++  error?: Error;
++};
++const idle: Attempt = { status: "idle" };
++
++/** A session-scoped fence survives tab unmounts; it is never an idempotency claim. */
++export function useArtifactMutation(
++  meeting: ArtifactMeeting,
++  kind: ArtifactKind,
++  actor: ArtifactActor,
++) {
++  const api = useApi();
++  const cache = useQueryClient();
++  const guard = useDispatchGuard(actor.userId, actor.tenantId);
++  const key = [
++    "meeting-artifact-attempt",
++    actor.tenantId,
++    actor.userId,
++    meeting.id,
++    meeting.client?.id ?? null,
++    kind,
++  ];
++  const attempt = useQuery<Attempt>({
++    queryKey: key,
++    queryFn: () => idle,
++    enabled: false,
++    initialData: idle,
++    gcTime: Infinity,
++  }).data;
++  const lifetime = useRef<AbortController | null>(null);
++  useLayoutEffect(() => {
++    const controller = new AbortController();
++    lifetime.current = controller;
++    return () => controller.abort();
++  }, [actor.userId, actor.tenantId, meeting.id, meeting.client?.id, kind]);
++
++  const mutate = (change: ArtifactChange, onSaved: () => void) => {
++    const previous = cache.getQueryData<Attempt>(key);
++    if (previous?.status === "pending" || previous?.status === "uncertain")
++      return;
++    const controller = lifetime.current;
++    if (!controller || controller.signal.aborted) return;
++    const assertCurrent = () => {
++      controller.signal.throwIfAborted();
++      guard();
++    };
++    // setQueryData is synchronous: two submit events in the same render cannot
++    // dispatch two non-idempotent creates.
++    cache.setQueryData<Attempt>(key, { status: "pending", change });
++    void changeMeetingArtifact(
++      api,
++      meeting,
++      kind,
++      actor,
++      change,
++      assertCurrent,
++      controller.signal,
++    ).then(
++      () => {
++        cache.setQueryData<Attempt>(key, idle);
++        void cache.invalidateQueries({ queryKey: ["meeting", meeting.id] });
++        void cache.invalidateQueries({ queryKey: ["calendar", "meetings"] });
++        onSaved();
++      },
++      (error: unknown) => {
++        // Never repopulate a cleared session cache after expiration.
++        if (!cache.getQueryData<Attempt>(key)) return;
++        cache.setQueryData<Attempt>(key, {
++          status:
++            error instanceof ArtifactMutationError && error.uncertain
++              ? "uncertain"
++              : "refused",
++          change,
++          error:
++            error instanceof Error
++              ? error
++              : new Error("The artifact could not be changed."),
++        });
++      },
++    );
++  };
++  return {
++    mutate,
++    attempt,
++    isPending: attempt.status === "pending",
++    uncertain: attempt.status === "uncertain",
++    error: attempt.error,
++  };
++}
+diff --git a/apps/web/src/features/portfolio/calendar/meeting-save.ts b/apps/web/src/features/portfolio/calendar/meeting-save.ts
+new file mode 100644
+index 0000000..e4db390
+--- /dev/null
++++ b/apps/web/src/features/portfolio/calendar/meeting-save.ts
+@@ -0,0 +1,37 @@
++import { z } from "zod";
++import { meetingSchema } from "./contracts";
++
++export const meetingInputSchema = z.object({
++  subject: z.string(),
++  description: z.string().nullable().optional(),
++  location: z.string().nullable().optional(),
++  startsAt: z.string(),
++  endsAt: z.string(),
++  clientId: z.string().nullable().optional(),
++});
++export type MeetingInput = z.infer<typeof meetingInputSchema>;
++
++/** Check only native persisted input semantics, not derived virtuality or association hints. */
++export function meetingSaveReceiptSchema(
++  id: string | undefined,
++  input: MeetingInput,
++) {
++  return meetingSchema.refine(
++    (row) =>
++      Boolean(row.id.trim()) &&
++      (!id || row.id === id) &&
++      row.subject === input.subject.trim() &&
++      (input.description === undefined ||
++        row.description === (input.description?.trim() || null)) &&
++      (input.location === undefined ||
++        row.location === (input.location?.trim() || null)) &&
++      Date.parse(row.startsAt) === Date.parse(input.startsAt) &&
++      Date.parse(row.endsAt) === Date.parse(input.endsAt) &&
++      // An unscoped create may be associated by the backend. An explicit update
++      // to null clears the association; neither case requires a browser echo.
++      (input.clientId === undefined ||
++        (!id && !input.clientId) ||
++        (row.client?.id ?? null) === input.clientId),
++    "The saved meeting does not match the submitted meeting and client.",
++  );
++}
+diff --git a/apps/web/src/features/portfolio/calendar/mutations.ts b/apps/web/src/features/portfolio/calendar/mutations.ts
+index 0debb2f..50472e8 100644
+--- a/apps/web/src/features/portfolio/calendar/mutations.ts
++++ b/apps/web/src/features/portfolio/calendar/mutations.ts
+@@ -1,81 +1,93 @@
+ "use client";
++import { useLayoutEffect, useRef, useState } from "react";
+ import { useMutation, useQueryClient } from "@tanstack/react-query";
+ import { useApi } from "@/shared/portfolio/api/provider";
+-import { acknowledged } from "@/shared/portfolio/api/http";
+-import { meetingSchema } from "./contracts";
++import { ApiError } from "@/shared/portfolio/api/http";
++import { useIdentity } from "@/shared/portfolio/auth/identity";
++import { useDispatchGuard } from "./access/public";
++import {
++  meetingInputSchema,
++  meetingSaveReceiptSchema,
++  type MeetingInput,
++} from "./meeting-save";
++
+ export function useSaveMeeting(
+   meetingId: string | undefined,
+   onSaved: () => void,
++  clientId?: string,
+ ) {
+   const api = useApi();
+   const cache = useQueryClient();
+-  return useMutation({
+-    mutationFn: (body: unknown) =>
+-      api.request(
+-        "core",
+-        `engagement/meetings${meetingId ? `/${encodeURIComponent(meetingId)}` : ""}`,
+-        meetingSchema,
+-        { method: meetingId ? "PUT" : "POST", body },
+-      ),
+-    onSuccess: async () => {
+-      await Promise.all([
+-        cache.invalidateQueries({ queryKey: ["calendar", "meetings"] }),
+-        cache.invalidateQueries({ queryKey: ["meeting", meetingId] }),
+-      ]);
+-      onSaved();
+-    },
+-  });
+-}
+-export type ArtifactChange =
+-  | { action: "save"; id?: string; body: string; confidential: boolean }
+-  | { action: "approve" | "share" | "unshare"; id: string };
+-export function useChangeMeetingArtifact(
+-  meetingId: string,
+-  kind: "notes" | "debriefs",
+-  onSaved: () => void,
+-) {
+-  const api = useApi();
+-  const cache = useQueryClient();
+-  const base = `engagement/meetings/${encodeURIComponent(meetingId)}`;
+-  return useMutation({
+-    mutationFn: (change: ArtifactChange) => {
+-      if (change.action === "save")
+-        return api.request(
+-          "core",
+-          `${base}/${kind}${change.id ? `/${encodeURIComponent(change.id)}` : ""}`,
+-          acknowledged,
+-          {
+-            method: change.id ? "PATCH" : "POST",
+-            body: { body: change.body, confidential: change.confidential },
+-          },
+-        );
+-      if (change.action === "approve")
+-        return api.request(
+-          "core",
+-          `${base}/${kind}/${encodeURIComponent(change.id)}/approve`,
+-          acknowledged,
+-          { method: "POST" },
++  const identity = useIdentity();
++  const userId = identity.data?.user.id;
++  const tenantId = identity.data?.tenant?.id;
++  const guard = useDispatchGuard(userId, tenantId);
++  const busy = useRef(false);
++  const uncertain = useRef(false);
++  const [isUncertain, setUncertain] = useState(false);
++  const lifetime = useRef<AbortController | null>(null);
++  useLayoutEffect(() => {
++    const controller = new AbortController();
++    lifetime.current = controller;
++    return () => controller.abort();
++  }, [meetingId, clientId, userId, tenantId]);
++  const mutation = useMutation({
++    mutationFn: async (body: MeetingInput) => {
++      const input = meetingInputSchema.parse(body);
++      const controller = lifetime.current;
++      if (!controller)
++        throw new ApiError(409, "Reopen this meeting before saving.");
++      const current = () => {
++        controller.signal.throwIfAborted();
++        guard();
++      };
++      current();
++      let knownRefusal = false;
++      try {
++        const receipt = await api
++          .request(
++            "core",
++            `engagement/meetings${meetingId ? `/${encodeURIComponent(meetingId)}` : ""}`,
++            meetingSaveReceiptSchema(meetingId, input),
++            {
++              method: meetingId ? "PUT" : "POST",
++              body: input,
++              signal: controller.signal,
++            },
++          )
++          .catch((error: unknown) => {
++            knownRefusal =
++              error instanceof ApiError &&
++              [400, 401, 403, 404, 409, 422].includes(error.status);
++            throw error;
++          });
++        current();
++        return receipt;
++      } catch (error) {
++        if (knownRefusal) throw error;
++        uncertain.current = true;
++        setUncertain(true);
++        throw new Error(
++          "The meeting save may have completed. Keep this draft and verify the saved meeting before further changes; this attempt cannot be retried here.",
+         );
+-      return api.request(
+-        "core",
+-        `${base}/artifacts/${change.action}`,
+-        acknowledged,
+-        {
+-          method: "POST",
+-          body: {
+-            artifacts: [
+-              { type: kind === "notes" ? "note" : "debrief", id: change.id },
+-            ],
+-          },
+-        },
+-      );
++      }
+     },
+-    onSuccess: async () => {
+-      await Promise.all([
+-        cache.invalidateQueries({ queryKey: ["meeting", meetingId] }),
+-        cache.invalidateQueries({ queryKey: ["calendar", "meetings"] }),
+-      ]);
++    onSuccess: () => {
++      void cache.invalidateQueries({ queryKey: ["calendar", "meetings"] });
++      void cache.invalidateQueries({ queryKey: ["meeting", meetingId] });
+       onSaved();
+     },
++    onSettled: () => {
++      busy.current = false;
++    },
+   });
++  return {
++    ...mutation,
++    uncertain: isUncertain,
++    mutate: (body: MeetingInput) => {
++      if (busy.current || uncertain.current) return;
++      busy.current = true;
++      mutation.mutate(body);
++    },
++  };
+ }
+diff --git a/apps/web/tests/browser/calendar-artifact-receipts-harness.tsx b/apps/web/tests/browser/calendar-artifact-receipts-harness.tsx
+new file mode 100644
+index 0000000..563d40b
+--- /dev/null
++++ b/apps/web/tests/browser/calendar-artifact-receipts-harness.tsx
+@@ -0,0 +1,53 @@
++import { useState } from "react";
++import { createRoot } from "react-dom/client";
++import { DataProvider } from "@/shared/portfolio/api/provider";
++import { MeetingArtifacts } from "@/features/portfolio/calendar/MeetingArtifacts";
++import type { Meeting } from "@/features/portfolio/calendar/contracts";
++import "@/app/globals.css";
++import "@/shared/portfolio/styles.css";
++import "./test-font.css";
++
++function Harness() {
++  const [clientId, setClient] = useState("client-one");
++  const [visible, setVisible] = useState(true);
++  const kind =
++    new URLSearchParams(location.search).get("kind") === "debriefs"
++      ? "debriefs"
++      : "notes";
++  const meeting: Meeting = {
++    id: "meeting-one",
++    subject: "Synthetic receipt review",
++    description: null,
++    location: null,
++    startsAt: "2026-10-10T14:00:00Z",
++    endsAt: "2026-10-10T15:00:00Z",
++    status: "scheduled",
++    joinLink: null,
++    visibility: "private",
++    isVirtual: false,
++    meri: null,
++    client: { id: clientId, name: clientId },
++    attendees: [],
++    preps: [],
++  };
++  return (
++    <main style={{ padding: 24 }}>
++      <h1>Synthetic artifact receipt review</h1>
++      <button
++        onClick={() =>
++          setClient(clientId === "client-one" ? "client-two" : "client-one")
++        }
++      >
++        Replace client
++      </button>
++      <button onClick={() => setVisible(!visible)}>Toggle artifacts</button>
++      <p>Current client: {clientId}</p>
++      {visible && <MeetingArtifacts meeting={meeting} kind={kind} />}
++    </main>
++  );
++}
++createRoot(document.getElementById("root")!).render(
++  <DataProvider>
++    <Harness />
++  </DataProvider>,
++);
+diff --git a/apps/web/tests/browser/calendar-artifact-receipts.html b/apps/web/tests/browser/calendar-artifact-receipts.html
+new file mode 100644
+index 0000000..f286484
+--- /dev/null
++++ b/apps/web/tests/browser/calendar-artifact-receipts.html
+@@ -0,0 +1,14 @@
++<!doctype html>
++<html lang="en">
++  <head>
++    <meta charset="utf-8" />
++    <title>Synthetic artifact receipt review</title>
++  </head>
++  <body>
++    <div id="root" data-portfolio-root></div>
++    <script
++      type="module"
++      src="/calendar-artifact-receipts-harness.tsx"
++    ></script>
++  </body>
++</html>
+diff --git a/apps/web/tests/browser/calendar-artifact-receipts.spec.ts b/apps/web/tests/browser/calendar-artifact-receipts.spec.ts
+new file mode 100644
+index 0000000..9dbe277
+--- /dev/null
++++ b/apps/web/tests/browser/calendar-artifact-receipts.spec.ts
+@@ -0,0 +1,335 @@
++import { test, expect, type Page } from "@playwright/test";
++import { installFixtures, json } from "./fixtures";
++
++const meeting = {
++  id: "meeting-one",
++  subject: "Synthetic receipt review",
++  description: null,
++  location: null,
++  startsAt: "2026-10-10T14:00:00Z",
++  endsAt: "2026-10-10T15:00:00Z",
++  status: "scheduled",
++  joinLink: null,
++  visibility: "private",
++  isVirtual: false,
++  meri: null,
++  client: { id: "client-one", name: "client-one" },
++  attendees: [],
++  preps: [],
++};
++const metadata = {
++  id: "artifact-one",
++  meetingId: meeting.id,
++  clientId: "client-one",
++  authorUserId: "user-test",
++  confidential: false,
++  status: "draft",
++  sharedAt: null,
++  sharedByUserId: null,
++  createdAt: "2026-10-10T15:00:00Z",
++  updatedAt: "2026-10-10T15:00:00Z",
++};
++function held() {
++  let release!: () => void;
++  const promise = new Promise<void>((resolve) => {
++    release = resolve;
++  });
++  return { promise, release };
++}
++async function setup(page: Page, kind: string) {
++  await installFixtures(page);
++  const state = {
++    writes: 0,
++    requests: [] as { path: string; method: string; body: unknown }[],
++    receipt: metadata as unknown,
++    status: 200,
++    hold: undefined as Promise<void> | undefined,
++    readHold: undefined as Promise<void> | undefined,
++    reads: 0,
++    clientId: "client-one",
++    items: [] as unknown[],
++  };
++  await page.route("**/core/engagement/meetings/**", async (route) => {
++    if (route.request().method() !== "GET") {
++      state.writes++;
++      state.requests.push({
++        path: new URL(route.request().url()).pathname,
++        method: route.request().method(),
++        body: route.request().postData()
++          ? route.request().postDataJSON()
++          : undefined,
++      });
++      if (state.hold) await state.hold;
++      return json(route, state.receipt, state.status).catch(() => {});
++    }
++    if (new URL(route.request().url()).pathname.endsWith(`/${kind}`))
++      return json(route, state.items);
++    state.reads++;
++    if (state.readHold) await state.readHold;
++    return json(route, {
++      ...meeting,
++      client: { id: state.clientId, name: state.clientId },
++    }).catch(() => {});
++  });
++  await page.goto(`/calendar-artifact-receipts.html?kind=${kind}`);
++  await expect(page.getByText(`No ${kind} yet.`)).toBeVisible();
++  return state;
++}
++async function draft(page: Page, singular: string) {
++  await page
++    .getByRole("button", { name: `Add ${singular}`, exact: true })
++    .click();
++  await page
++    .getByLabel("Content", { exact: true })
++    .fill("Retain this synthetic draft");
++}
++for (const kind of ["notes", "debriefs"]) {
++  const singular = kind === "notes" ? "note" : "debrief";
++  test(`${kind}: malformed receipt preserves draft and fences repeat creation`, async ({
++    page,
++  }) => {
++    const state = await setup(page, kind);
++    state.receipt = {};
++    await draft(page, singular);
++    await page.getByRole("button", { name: `Save ${singular}` }).click();
++    await expect(page.getByLabel("Content", { exact: true })).toHaveValue(
++      "Retain this synthetic draft",
++    );
++    await expect(
++      page.getByRole("button", { name: `Save ${singular}` }),
++    ).toBeDisabled();
++    await expect(page.getByText(/may have completed/).first()).toBeVisible();
++    expect(state.writes).toBe(1);
++  });
++  test(`${kind}: uncertain creation cannot be repeated after remount`, async ({
++    page,
++  }) => {
++    const state = await setup(page, kind);
++    state.status = 503;
++    await draft(page, singular);
++    await page.getByRole("button", { name: `Save ${singular}` }).click();
++    await expect(
++      page.getByRole("button", { name: `Save ${singular}` }),
++    ).toBeDisabled();
++    await expect(page.getByText(/may have completed/).first()).toBeVisible();
++    await page.keyboard.press("Escape");
++    await page.getByRole("button", { name: `Refresh saved ${kind}` }).click();
++    await page.getByRole("button", { name: "Toggle artifacts" }).click();
++    await page.getByRole("button", { name: "Toggle artifacts" }).click();
++    await expect(page.getByLabel("Content", { exact: true })).toHaveValue(
++      "Retain this synthetic draft",
++    );
++    await expect(
++      page.getByRole("button", { name: `Save ${singular}` }),
++    ).toBeDisabled();
++    expect(state.writes).toBe(1);
++  });
++  test(`${kind}: synchronous submit guard sends one creation`, async ({
++    page,
++  }) => {
++    const state = await setup(page, kind);
++    const pending = held();
++    state.hold = pending.promise;
++    await draft(page, singular);
++    await page.locator("[role=dialog] form").evaluate((form) => {
++      form.dispatchEvent(
++        new Event("submit", { bubbles: true, cancelable: true }),
++      );
++      form.dispatchEvent(
++        new Event("submit", { bubbles: true, cancelable: true }),
++      );
++    });
++    await expect.poll(() => state.writes).toBeGreaterThan(0);
++    pending.release();
++    await expect(page.getByRole("dialog")).toHaveCount(0);
++    expect(state.writes).toBe(1);
++  });
++}
++
++for (const kind of ["notes", "debriefs"]) {
++  const singular = kind === "notes" ? "note" : "debrief";
++  test(`${kind}: a known refusal retains editable draft and permits deliberate retry`, async ({
++    page,
++  }) => {
++    const state = await setup(page, kind);
++    state.status = 409;
++    state.receipt = { message: "Synthetic conflict; review and retry" };
++    await draft(page, singular);
++    await page.getByRole("button", { name: `Save ${singular}` }).click();
++    await expect(
++      page.getByText("Synthetic conflict; review and retry").first(),
++    ).toBeVisible();
++    await expect(
++      page.getByRole("button", { name: `Save ${singular}` }),
++    ).toBeEnabled();
++    await expect(page.getByLabel("Content", { exact: true })).toHaveValue(
++      "Retain this synthetic draft",
++    );
++    state.status = 200;
++    state.receipt = metadata;
++    await page.getByRole("button", { name: `Save ${singular}` }).click();
++    await expect(page.getByRole("dialog")).toHaveCount(0);
++    expect(state.writes).toBe(2);
++  });
++  test(`${kind}: replacing the client during preflight prevents dispatch`, async ({
++    page,
++  }) => {
++    const state = await setup(page, kind);
++    const pending = held();
++    state.readHold = pending.promise;
++    await draft(page, singular);
++    await page.getByRole("button", { name: `Save ${singular}` }).click();
++    await expect.poll(() => state.reads).toBe(1);
++    await page
++      .getByRole("button", { name: "Replace client", includeHidden: true })
++      .evaluate((button) => (button as HTMLButtonElement).click());
++    state.clientId = "client-two";
++    pending.release();
++    await expect(page.getByRole("dialog")).toHaveCount(0);
++    await draft(page, singular);
++    await expect(
++      page.getByRole("button", { name: `Save ${singular}` }),
++    ).toBeEnabled();
++    expect(state.writes).toBe(0);
++  });
++  test(`${kind}: a late creation receipt cannot close the replacement client's draft`, async ({
++    page,
++  }) => {
++    const state = await setup(page, kind);
++    const pending = held();
++    state.hold = pending.promise;
++    await draft(page, singular);
++    await page.getByRole("button", { name: `Save ${singular}` }).click();
++    await expect.poll(() => state.writes).toBe(1);
++    await page
++      .getByRole("button", { name: "Replace client", includeHidden: true })
++      .evaluate((button) => (button as HTMLButtonElement).click());
++    state.clientId = "client-two";
++    await draft(page, singular);
++    await page
++      .getByLabel("Content", { exact: true })
++      .fill("Replacement client draft");
++    pending.release();
++    await expect(page.getByLabel("Content", { exact: true })).toHaveValue(
++      "Replacement client draft",
++    );
++    await expect(
++      page.getByRole("button", { name: `Save ${singular}` }),
++    ).toBeEnabled();
++    await page
++      .getByRole("button", { name: "Replace client", includeHidden: true })
++      .evaluate((button) => (button as HTMLButtonElement).click());
++    state.clientId = "client-one";
++    await expect(page.getByLabel("Content", { exact: true })).toHaveValue(
++      "Retain this synthetic draft",
++    );
++    await expect(
++      page.getByRole("button", { name: `Save ${singular}` }),
++    ).toBeDisabled();
++    expect(state.writes).toBe(1);
++  });
++  test(`${kind}: native edit, approval, share and unshare receipts succeed`, async ({
++    page,
++  }) => {
++    const state = await setup(page, kind);
++    const item = {
++      ...metadata,
++      body: "Saved synthetic content",
++      restricted: false,
++    };
++    state.items = [item];
++    await page.reload();
++    await page.getByRole("button", { name: "Edit", exact: true }).click();
++    await page.getByLabel("Content", { exact: true }).fill("Changed content");
++    state.receipt = { ...metadata, status: "edited" };
++    await page.getByRole("button", { name: `Save ${singular}` }).click();
++    await expect(page.getByRole("dialog")).toHaveCount(0);
++    state.receipt = {
++      ...metadata,
++      status: "approved",
++      ...(kind === "notes"
++        ? { approvedAt: "2026-10-10T15:00:00Z", approvedByUserId: "user-test" }
++        : {}),
++    };
++    state.items = [{ ...item, status: "approved" }];
++    await page.getByRole("button", { name: "Approve", exact: true }).click();
++    await expect(
++      page.getByRole("button", { name: "Share", exact: true }),
++    ).toBeVisible();
++    const shared = {
++      ...metadata,
++      status: "approved",
++      sharedAt: "2026-10-10T15:00:00Z",
++      sharedByUserId: "original-sharer",
++    };
++    state.receipt = { ...meeting, visibility: "shared", [kind]: [shared] };
++    state.items = [{ ...item, ...shared }];
++    await page.getByRole("button", { name: "Share", exact: true }).click();
++    await page
++      .getByRole("button", { name: `Share ${singular}`, exact: true })
++      .click();
++    await expect(page.getByRole("dialog")).toHaveCount(0);
++    // Another artifact can keep the meeting shared after this one is unshared.
++    state.receipt = {
++      ...meeting,
++      visibility: "shared",
++      [kind]: [{ ...metadata, status: "approved" }],
++    };
++    state.items = [{ ...item, status: "approved" }];
++    await page.getByRole("button", { name: "Unshare", exact: true }).click();
++    await expect(
++      page.getByRole("button", { name: "Share", exact: true }),
++    ).toBeVisible();
++    expect(state.writes).toBe(4);
++    const base = "/api/backend/core/engagement/meetings/meeting-one";
++    expect(state.requests).toEqual([
++      {
++        path: `${base}/${kind}/artifact-one`,
++        method: "PATCH",
++        body: { body: "Changed content", confidential: false },
++      },
++      {
++        path: `${base}/${kind}/artifact-one/approve`,
++        method: "POST",
++        body: undefined,
++      },
++      {
++        path: `${base}/artifacts/share`,
++        method: "POST",
++        body: { artifacts: [{ type: singular, id: "artifact-one" }] },
++      },
++      {
++        path: `${base}/artifacts/unshare`,
++        method: "POST",
++        body: { artifacts: [{ type: singular, id: "artifact-one" }] },
++      },
++    ]);
++  });
++}
++
++for (const kind of ["notes", "debriefs"]) {
++  const singular = kind === "notes" ? "note" : "debrief";
++  test(`${kind}: pending fields cannot accept a later draft before a valid receipt`, async ({
++    page,
++  }) => {
++    const state = await setup(page, kind);
++    const pending = held();
++    state.hold = pending.promise;
++    await draft(page, singular);
++    await page.getByRole("button", { name: `Save ${singular}` }).click();
++    await expect.poll(() => state.writes).toBe(1);
++    const content = page.getByLabel("Content", { exact: true });
++    await content.press("End");
++    await content.pressSequentially(" later draft");
++    await expect(content).toHaveValue("Retain this synthetic draft");
++    await expect(
++      page.getByRole("checkbox", { name: "Confidential", exact: true }),
++    ).toBeDisabled();
++    pending.release();
++    await expect(page.getByRole("dialog")).toHaveCount(0);
++    expect(state.requests[0]?.body).toEqual({
++      body: "Retain this synthetic draft",
++      confidential: false,
++    });
++  });
++}
+diff --git a/apps/web/tests/browser/calendar-meeting-receipts-harness.tsx b/apps/web/tests/browser/calendar-meeting-receipts-harness.tsx
+new file mode 100644
+index 0000000..ce26a8c
+--- /dev/null
++++ b/apps/web/tests/browser/calendar-meeting-receipts-harness.tsx
+@@ -0,0 +1,44 @@
++import { useState } from "react";
++import { createRoot } from "react-dom/client";
++import { DataProvider } from "@/shared/portfolio/api/provider";
++import { MeetingForm } from "@/features/portfolio/calendar/MeetingForm";
++import type { Meeting } from "@/features/portfolio/calendar/contracts";
++import "@/app/globals.css";
++import "@/shared/portfolio/styles.css";
++import "./test-font.css";
++const meeting: Meeting = {
++  id: "meeting-one",
++  subject: "Synthetic meeting",
++  description: null,
++  location: "Old location",
++  startsAt: "2026-10-10T14:00:00Z",
++  endsAt: "2026-10-10T15:00:00Z",
++  status: "scheduled",
++  joinLink: null,
++  visibility: "private",
++  isVirtual: false,
++  meri: null,
++  client: { id: "client-one", name: "Synthetic" },
++  attendees: [],
++  preps: [],
++};
++function Harness() {
++  const [open, setOpen] = useState(true);
++  return (
++    <main>
++      <h1>Synthetic meeting receipt review</h1>
++      <MeetingForm
++        open={open}
++        onOpenChange={setOpen}
++        clientId="client-one"
++        zone="UTC"
++        meeting={meeting}
++      />
++    </main>
++  );
++}
++createRoot(document.getElementById("root")!).render(
++  <DataProvider>
++    <Harness />
++  </DataProvider>,
++);
+diff --git a/apps/web/tests/browser/calendar-meeting-receipts.html b/apps/web/tests/browser/calendar-meeting-receipts.html
+new file mode 100644
+index 0000000..d267dcb
+--- /dev/null
++++ b/apps/web/tests/browser/calendar-meeting-receipts.html
+@@ -0,0 +1,11 @@
++<!doctype html>
++<html lang="en">
++  <head>
++    <meta charset="utf-8" />
++    <title>Synthetic meeting receipt review</title>
++  </head>
++  <body>
++    <div id="root" data-portfolio-root></div>
++    <script type="module" src="/calendar-meeting-receipts-harness.tsx"></script>
++  </body>
++</html>
+diff --git a/apps/web/tests/browser/calendar-meeting-receipts.spec.ts b/apps/web/tests/browser/calendar-meeting-receipts.spec.ts
+new file mode 100644
+index 0000000..ec4c1d7
+--- /dev/null
++++ b/apps/web/tests/browser/calendar-meeting-receipts.spec.ts
+@@ -0,0 +1,101 @@
++import { test, expect } from "@playwright/test";
++import { installFixtures, json } from "./fixtures";
++const meeting = {
++  id: "meeting-one",
++  subject: "Synthetic meeting",
++  description: null,
++  location: "Old location",
++  startsAt: "2026-10-10T14:00:00Z",
++  endsAt: "2026-10-10T15:00:00Z",
++  status: "scheduled",
++  joinLink: null,
++  visibility: "private",
++  isVirtual: false,
++  meri: null,
++  client: { id: "client-one", name: "Synthetic" },
++  attendees: [],
++  preps: [],
++};
++for (const foreign of [
++  { id: "foreign" },
++  { client: { id: "foreign", name: "Other" } },
++]) {
++  test(`foreign meeting receipt retains editor: ${JSON.stringify(foreign)}`, async ({
++    page,
++  }) => {
++    await installFixtures(page);
++    await page.route("**/core/engagement/meetings/meeting-one", (route) =>
++      json(route, { ...meeting, ...foreign }),
++    );
++    await page.goto("/calendar-meeting-receipts.html");
++    await page.getByRole("button", { name: "Save meeting" }).click();
++    await expect(page.getByLabel("Subject", { exact: true })).toHaveValue(
++      "Synthetic meeting",
++    );
++    await expect(page.getByText(/may have completed/)).toBeVisible();
++    await expect(
++      page.getByRole("button", { name: "Save meeting" }),
++    ).toBeDisabled();
++  });
++}
++test("native normalized meeting receipt succeeds and an empty location is explicitly cleared", async ({
++  page,
++}) => {
++  await installFixtures(page);
++  let body: unknown;
++  await page.route("**/core/engagement/meetings/meeting-one", (route) => {
++    body = route.request().postDataJSON();
++    return json(route, {
++      ...meeting,
++      location: null,
++      startsAt: "2026-10-10T14:00:00.000Z",
++      endsAt: "2026-10-10T15:00:00.000Z",
++    });
++  });
++  await page.goto("/calendar-meeting-receipts.html");
++  await page.getByLabel("Location or join URL").fill("");
++  await page.getByRole("button", { name: "Save meeting" }).click();
++  await expect(page.getByRole("dialog")).toHaveCount(0);
++  expect(body).toMatchObject({ location: "" });
++});
++
++test("pending meeting fields cannot accept a newer unsaved draft before a valid receipt", async ({
++  page,
++}) => {
++  await installFixtures(page);
++  let release!: () => void;
++  const pending = new Promise<void>((resolve) => {
++    release = resolve;
++  });
++  let requests = 0;
++  await page.route("**/core/engagement/meetings/meeting-one", async (route) => {
++    requests++;
++    await pending;
++    return json(route, meeting);
++  });
++  await page.goto("/calendar-meeting-receipts.html");
++  await page.getByRole("button", { name: "Save meeting" }).click();
++  await expect.poll(() => requests).toBe(1);
++  for (const [label, value] of [
++    ["Subject", "Synthetic meeting"],
++    ["Description", ""],
++    ["Location or join URL", "Old location"],
++    ["Starts", "2026-10-10T14:00"],
++    ["Ends", "2026-10-10T15:00"],
++  ]) {
++    const field = page.getByLabel(label!, { exact: true });
++    await expect(field).toHaveAttribute("readonly", "");
++    if (
++      label === "Subject" ||
++      label === "Description" ||
++      label === "Location or join URL"
++    ) {
++      await field.press("End");
++      await field.pressSequentially(" newer unsaved draft");
++    }
++    await expect(field).toHaveValue(value!);
++  }
++  release();
++  await expect(page.getByRole("dialog")).toHaveCount(0);
++  expect(requests).toBe(1);
++});
+diff --git a/apps/web/tests/calendar-artifact-receipts.test.ts b/apps/web/tests/calendar-artifact-receipts.test.ts
+new file mode 100644
+index 0000000..d1056e7
+--- /dev/null
++++ b/apps/web/tests/calendar-artifact-receipts.test.ts
+@@ -0,0 +1,314 @@
++import { describe, expect, it, vi } from "vitest";
++import { createApiClient } from "../src/shared/portfolio/api/http";
++import { changeMeetingArtifact } from "../src/features/portfolio/calendar/artifacts/api";
++import {
++  artifactReceiptSchema,
++  type ArtifactChange,
++  type ArtifactKind,
++} from "../src/features/portfolio/calendar/artifacts/contracts";
++
++const actor = { userId: "actor-one", tenantId: "tenant-one" };
++const meeting = {
++  id: "meeting-one",
++  subject: "Synthetic",
++  description: null,
++  location: null,
++  startsAt: "2026-10-10T14:00:00Z",
++  endsAt: "2026-10-10T15:00:00Z",
++  status: "scheduled",
++  joinLink: null,
++  visibility: "private" as const,
++  isVirtual: false,
++  meri: null,
++  client: { id: "client-one", name: "Synthetic" },
++  attendees: [],
++  preps: [],
++};
++const metadata = {
++  id: "artifact-one",
++  meetingId: "meeting-one",
++  clientId: "client-one",
++  authorUserId: "actor-one",
++  confidential: false,
++  status: "draft",
++  sharedAt: null,
++  sharedByUserId: null,
++  createdAt: "2026-10-10T15:00:00Z",
++  updatedAt: "2026-10-10T15:00:00Z",
++};
++const save: ArtifactChange = {
++  action: "save",
++  body: "Retained content",
++  confidential: false,
++};
++for (const kind of ["notes", "debriefs"] as ArtifactKind[]) {
++  describe(kind, () => {
++    it.each([
++      {},
++      null,
++      { ...metadata, meetingId: "foreign" },
++      { ...metadata, clientId: "foreign" },
++      { ...metadata, authorUserId: "foreign" },
++      { ...metadata, confidential: true },
++      { ...metadata, status: "approved" },
++    ])("rejects an unrelated or incomplete creation receipt: %j", (receipt) => {
++      expect(
++        artifactReceiptSchema(meeting, kind, actor, save).safeParse(receipt)
++          .success,
++      ).toBe(false);
++    });
++    it("accepts native metadata without plaintext or a tenant field", () => {
++      expect(
++        artifactReceiptSchema(meeting, kind, actor, save).safeParse(metadata)
++          .success,
++      ).toBe(true);
++    });
++    it("validates edit ID and lifecycle while allowing an admin to edit another author's artifact", () => {
++      const schema = artifactReceiptSchema(meeting, kind, actor, {
++        ...save,
++        id: metadata.id,
++      });
++      expect(
++        schema.safeParse({
++          ...metadata,
++          authorUserId: "another-author",
++          status: "edited",
++        }).success,
++      ).toBe(true);
++      expect(
++        schema.safeParse({ ...metadata, id: "foreign", status: "edited" })
++          .success,
++      ).toBe(false);
++      expect(schema.safeParse(metadata).success).toBe(false);
++    });
++    it("validates native approval attribution separately for notes and debriefs", () => {
++      const schema = artifactReceiptSchema(meeting, kind, actor, {
++        action: "approve",
++        id: metadata.id,
++      });
++      const receipt = {
++        ...metadata,
++        status: "approved",
++        ...(kind === "notes"
++          ? { approvedAt: metadata.updatedAt, approvedByUserId: actor.userId }
++          : {}),
++      };
++      expect(schema.safeParse(receipt).success).toBe(true);
++      expect(schema.safeParse({ ...receipt, id: "foreign" }).success).toBe(
++        false,
++      );
++      if (kind === "notes")
++        expect(
++          schema.safeParse({ ...receipt, approvedByUserId: "foreign" }).success,
++        ).toBe(false);
++    });
++    it("accepts an idempotent share retaining its original sharer and rejects absent/foreign artifacts", () => {
++      const schema = artifactReceiptSchema(meeting, kind, actor, {
++        action: "share",
++        id: metadata.id,
++      });
++      const artifact = {
++        ...metadata,
++        status: "approved",
++        sharedAt: metadata.updatedAt,
++        sharedByUserId: "original-sharer",
++      };
++      const receipt = { ...meeting, visibility: "shared", [kind]: [artifact] };
++      expect(schema.safeParse(receipt).success).toBe(true);
++      expect(schema.safeParse({ ...receipt, [kind]: [] }).success).toBe(false);
++      expect(
++        schema.safeParse({
++          ...receipt,
++          [kind]: [{ ...artifact, meetingId: "foreign" }],
++        }).success,
++      ).toBe(false);
++      expect(
++        schema.safeParse({ ...receipt, [kind]: [artifact, artifact] }).success,
++      ).toBe(false);
++    });
++    it("accepts unshare with another artifact still shared, but requires both selected share stamps cleared", () => {
++      const schema = artifactReceiptSchema(meeting, kind, actor, {
++        action: "unshare",
++        id: metadata.id,
++      });
++      const receipt = {
++        ...meeting,
++        visibility: "shared",
++        [kind]: [{ ...metadata, status: "approved" }],
++      };
++      expect(schema.safeParse(receipt).success).toBe(true);
++      expect(
++        schema.safeParse({
++          ...receipt,
++          [kind]: [{ ...metadata, sharedByUserId: "original-sharer" }],
++        }).success,
++      ).toBe(false);
++    });
++    it.each([200, 204, 500, 503])(
++      "retains uncertainty for dispatched invalid responses (HTTP %i)",
++      async (status) => {
++        const fetcher = vi
++          .fn()
++          .mockResolvedValueOnce(Response.json(meeting))
++          .mockResolvedValueOnce(
++            status === 204
++              ? new Response(null, { status })
++              : Response.json({}, { status }),
++          );
++        await expect(
++          changeMeetingArtifact(
++            createApiClient(fetcher),
++            meeting,
++            kind,
++            actor,
++            save,
++            () => {},
++            new AbortController().signal,
++          ),
++        ).rejects.toMatchObject({ uncertain: true });
++        expect(fetcher).toHaveBeenCalledTimes(2);
++      },
++    );
++    it.each([400, 401, 403, 404, 409, 422])(
++      "distinguishes a known HTTP %i refusal from uncertain completion",
++      async (status) => {
++        const fetcher = vi
++          .fn()
++          .mockResolvedValueOnce(Response.json(meeting))
++          .mockResolvedValueOnce(
++            Response.json({ message: "Refused" }, { status }),
++          );
++        await expect(
++          changeMeetingArtifact(
++            createApiClient(fetcher),
++            meeting,
++            kind,
++            actor,
++            save,
++            () => {},
++            new AbortController().signal,
++          ),
++        ).rejects.toMatchObject({
++          uncertain: false,
++          message:
++            status === 401 ? "Your session expired. Sign in again." : "Refused",
++        });
++      },
++    );
++    it("does not dispatch after a changed parent client", async () => {
++      const fetcher = vi.fn().mockResolvedValue(
++        Response.json({
++          ...meeting,
++          client: { id: "foreign", name: "Other" },
++        }),
++      );
++      await expect(
++        changeMeetingArtifact(
++          createApiClient(fetcher),
++          meeting,
++          kind,
++          actor,
++          save,
++          () => {},
++          new AbortController().signal,
++        ),
++      ).rejects.toMatchObject({ uncertain: false });
++      expect(fetcher).toHaveBeenCalledTimes(1);
++    });
++    it("does not dispatch after the initiating scope aborts during preflight", async () => {
++      const controller = new AbortController();
++      const fetcher = vi.fn().mockImplementation(async () => {
++        controller.abort();
++        return Response.json(meeting);
++      });
++      await expect(
++        changeMeetingArtifact(
++          createApiClient(fetcher),
++          meeting,
++          kind,
++          actor,
++          save,
++          () => {},
++          controller.signal,
++        ),
++      ).rejects.toMatchObject({ uncertain: false });
++      expect(fetcher).toHaveBeenCalledTimes(1);
++    });
++    it("treats a network failure after dispatch as uncertain", async () => {
++      const fetcher = vi
++        .fn()
++        .mockResolvedValueOnce(Response.json(meeting))
++        .mockRejectedValueOnce(new TypeError("Network failed"));
++      await expect(
++        changeMeetingArtifact(
++          createApiClient(fetcher),
++          meeting,
++          kind,
++          actor,
++          save,
++          () => {},
++          new AbortController().signal,
++        ),
++      ).rejects.toMatchObject({ uncertain: true });
++    });
++  });
++}
++
++describe("meeting save native normalization", () => {
++  it("matches normalized fields and equivalent instants", async () => {
++    const { meetingSaveReceiptSchema } =
++      await import("../src/features/portfolio/calendar/meeting-save");
++    const input = {
++      subject: "  Synthetic  ",
++      description: " ",
++      location: " ",
++      startsAt: meeting.startsAt,
++      endsAt: meeting.endsAt,
++      clientId: "client-one",
++    };
++    const schema = meetingSaveReceiptSchema(meeting.id, input);
++    expect(
++      schema.safeParse({ ...meeting, startsAt: "2026-10-10T14:00:00.000Z" })
++        .success,
++    ).toBe(true);
++    expect(schema.safeParse({ ...meeting, id: "foreign" }).success).toBe(false);
++    expect(
++      schema.safeParse({ ...meeting, client: { id: "foreign", name: "Other" } })
++        .success,
++    ).toBe(false);
++    expect(
++      schema.safeParse({ ...meeting, startsAt: "2026-10-10T16:00:00Z" })
++        .success,
++    ).toBe(false);
++  });
++  it("permits backend automatic association only on an unscoped create", async () => {
++    const { meetingSaveReceiptSchema } =
++      await import("../src/features/portfolio/calendar/meeting-save");
++    const input = {
++      subject: meeting.subject,
++      startsAt: meeting.startsAt,
++      endsAt: meeting.endsAt,
++    };
++    expect(
++      meetingSaveReceiptSchema(undefined, input).safeParse(meeting).success,
++    ).toBe(true);
++    expect(
++      meetingSaveReceiptSchema(undefined, {
++        ...input,
++        clientId: "other",
++      }).safeParse(meeting).success,
++    ).toBe(false);
++    expect(
++      meetingSaveReceiptSchema(meeting.id, {
++        ...input,
++        clientId: null,
++      }).safeParse(meeting).success,
++    ).toBe(false);
++    expect(
++      meetingSaveReceiptSchema(meeting.id, {
++        ...input,
++        clientId: null,
++      }).safeParse({ ...meeting, client: null }).success,
++    ).toBe(true);
++  });
++});

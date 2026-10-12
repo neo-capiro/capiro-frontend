@@ -1,0 +1,17 @@
+
+Running 10 tests using 1 worker
+
+(node:498914) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 ../tmp/capiro-successor-visual-review/review.spec.ts:19:6 › Files ACL pending unknown review at 1440 (7.2s)
+  ✓   2 ../tmp/capiro-successor-visual-review/review.spec.ts:28:6 › Files folder unknown review at 1440 (5.3s)
+  ✓   3 ../tmp/capiro-successor-visual-review/review.spec.ts:31:6 › Meeting pending unknown at 1440 (5.2s)
+  ✓   4 ../tmp/capiro-successor-visual-review/review.spec.ts:34:45 › Calendar notes pending unknown at 1440 (4.1s)
+  ✓   5 ../tmp/capiro-successor-visual-review/review.spec.ts:34:45 › Calendar debriefs pending unknown at 1440 (3.9s)
+  ✓   6 ../tmp/capiro-successor-visual-review/review.spec.ts:19:6 › Files ACL pending unknown review at 360 (6.9s)
+  ✓   7 ../tmp/capiro-successor-visual-review/review.spec.ts:28:6 › Files folder unknown review at 360 (5.1s)
+  ✓   8 ../tmp/capiro-successor-visual-review/review.spec.ts:31:6 › Meeting pending unknown at 360 (5.1s)
+  ✓   9 ../tmp/capiro-successor-visual-review/review.spec.ts:34:45 › Calendar notes pending unknown at 360 (3.9s)
+  ✓  10 ../tmp/capiro-successor-visual-review/review.spec.ts:34:45 › Calendar debriefs pending unknown at 360 (4.0s)
+
+  10 passed (52.2s)

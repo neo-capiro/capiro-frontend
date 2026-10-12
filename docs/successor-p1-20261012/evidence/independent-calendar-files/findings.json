@@ -1,0 +1,113 @@
+{
+  "assessments": [
+    {
+      "id": "CP-01",
+      "rows": [
+        "CORE-058"
+      ],
+      "decision": "PASS_TARGETED_REPAIR",
+      "evidence": [
+        "files-browser-results.json",
+        "files-unit.log",
+        "candidate-files-semantic.log"
+      ],
+      "reason": "Same-ID receipt must also confirm requested access mode and normalized restricted viewer set. Conflicts retain draft, serialize subsequent metadata operations, survive same-cache reopen and expose deliberate current GET review."
+    },
+    {
+      "id": "CP-02",
+      "rows": [
+        "CORE-056",
+        "CORE-063"
+      ],
+      "decision": "PASS_TARGETED_REPAIR",
+      "evidence": [
+        "files-browser-results.json",
+        "candidate-files-semantic.log"
+      ],
+      "reason": "Folder receipt must confirm native trimmed destination or null. Unknown state preserves draft; a current matching-identity GET shows saved state without claiming earlier PATCH causality."
+    },
+    {
+      "id": "CR-01",
+      "rows": [
+        "ENG-notes_add",
+        "ENG-notes_edit",
+        "ENG-notes_approve",
+        "ENG-debrief_create",
+        "ENG-debrief_edit",
+        "ENG-debrief_approve",
+        "ENG-meeting_share_artifacts",
+        "ENG-meeting_unshare_artifacts"
+      ],
+      "decision": "PASS_TARGETED_REPAIR",
+      "evidence": [
+        "calendar-final-browser-results.json",
+        "calendar-unit.log",
+        "independent-contracts-replay.log"
+      ],
+      "reason": "Create/edit/approve native metadata and share/unshare decorated meeting responses have distinct action-specific validators, including meeting/client/selected artifact identity and lifecycle/share semantics. Native responses contain no plaintext echo; content durability is not inferred."
+    },
+    {
+      "id": "CR-02",
+      "rows": [
+        "ENG-notes_add",
+        "ENG-debrief_create"
+      ],
+      "decision": "PASS_TARGETED_REPAIR",
+      "evidence": [
+        "calendar-final-browser-results.json",
+        "calendar-unit.log"
+      ],
+      "reason": "Synchronous cache-local attempt fence prevents double dispatch and fences uncertain non-idempotent creation across remounts; known refusal permits deliberate correction. Parent preflight and captured lifetime prevent former-client publication."
+    },
+    {
+      "id": "CR-03",
+      "rows": [
+        "ENG-meeting_edit"
+      ],
+      "decision": "PASS_TARGETED_REPAIR",
+      "evidence": [
+        "calendar-final-browser-results.json",
+        "independent-contracts-replay.log"
+      ],
+      "reason": "Empty location is explicitly submitted and normalized null receipt accepted; stale location is rejected."
+    },
+    {
+      "id": "CR-04",
+      "rows": [
+        "ENG-meeting_edit",
+        "ENG-meeting_create"
+      ],
+      "decision": "PASS_TARGETED_REPAIR",
+      "evidence": [
+        "calendar-final-browser-results.json",
+        "calendar-unit.log",
+        "independent-contracts-replay.log"
+      ],
+      "reason": "Meeting save checks existing ID and explicit submitted client with trimmed text/equivalent instant normalization, preserving backend autoassociation for unscoped creation and avoiding derived virtuality echo assumptions."
+    },
+    {
+      "id": "CF-IR01",
+      "classification": "ADJACENT_INHERITED_P1_DRAFT_LOSS_FOUND_AND_FIXED",
+      "rows": [
+        "ENG-meeting_edit",
+        "ENG-meeting_create"
+      ],
+      "decision": "PASS_AFTER_CORRECTION",
+      "beforeCommit": "42a7e0c0f7602a1fc01b23495178639a46360c13",
+      "fixedCommit": "d1f57b2cf9d05ce271ac8c73f280bbdd7746acab",
+      "source": [
+        "apps/web/src/features/portfolio/calendar/MeetingForm.tsx:44",
+        "apps/web/src/features/portfolio/calendar/mutations.ts:74"
+      ],
+      "evidence": [
+        "independent-calendar-before.json",
+        "independent-calendar-before-output",
+        "independent-calendar-after.json",
+        "independent-calendar-after-output",
+        "independent-calendar.spec.ts"
+      ],
+      "reason": "Independent held-PUT probe confirmed newer editable subject disappeared on an earlier matching receipt. Owner correction makes meeting draft inputs read-only and client choice disabled during pending/uncertain save. Same independent test failed before and passed after; expanded owner browser suite covers meeting and note/debrief pending fields."
+    }
+  ],
+  "remainingSourceBlockersInAssignedScope": []
+}

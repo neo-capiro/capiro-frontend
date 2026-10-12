@@ -1,0 +1,219 @@
+
+Running 10 tests using 1 worker
+
+(node:485785) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   1 ../tmp/capiro-successor-visual-review/review.spec.ts:17:6 › Files ACL pending unknown review at 1440 (12.4s)
+(node:486200) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   2 ../tmp/capiro-successor-visual-review/review.spec.ts:26:6 › Files folder unknown review at 1440 (10.7s)
+(node:486668) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   3 ../tmp/capiro-successor-visual-review/review.spec.ts:29:6 › Meeting pending unknown at 1440 (6.0s)
+(node:487033) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   4 ../tmp/capiro-successor-visual-review/review.spec.ts:32:45 › Calendar notes pending unknown at 1440 (6.5s)
+(node:487353) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   5 ../tmp/capiro-successor-visual-review/review.spec.ts:32:45 › Calendar debriefs pending unknown at 1440 (7.5s)
+(node:487768) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   6 ../tmp/capiro-successor-visual-review/review.spec.ts:17:6 › Files ACL pending unknown review at 360 (13.9s)
+(node:488389) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+  1) ../tmp/capiro-successor-visual-review/review.spec.ts:17:6 › Files ACL pending unknown review at 1440 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      12 |  if(metrics.scrollHeight>metrics.clientHeight+1){await dialog.evaluate(el=>el.scrollTop=el.scrollHeight);await page.screenshot({path:info.outputPath(label+'-bottom.png')});}
+      13 |  const enabled=dialog.locator('button:not(:disabled),input:not(:disabled),textarea:not(:disabled),select:not(:disabled)');
+    > 14 |  for(let i=0;i<Math.min(await enabled.count()+2,14);i++){await page.keyboard.press('Tab');expect(await dialog.evaluate(el=>el.contains(document.activeElement))).toBe(true);const focused=await page.locator(':focus').boundingBox();if(focused){expect(focused.x).toBeGreaterThanOrEqual(metrics.x-1);expect(focused.x+focused.width).toBeLessThanOrEqual(metrics.x+metrics.width+1);}}
+         |                                                                                                                                                                  ^
+      15 | }
+      16 | for(const width of [1440,360]){
+      17 |  test(`Files ACL pending unknown review at ${width}`,async({page},info)=>{
+        at inspect (/tmp/capiro-successor-visual-review/review.spec.ts:14:162)
+        at /tmp/capiro-successor-visual-review/review.spec.ts:23:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-1440/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-1440/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-1440/trace.zip
+    Usage:
+
+        npx playwright show-trace ../tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-1440/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) ../tmp/capiro-successor-visual-review/review.spec.ts:26:6 › Files folder unknown review at 1440 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      12 |  if(metrics.scrollHeight>metrics.clientHeight+1){await dialog.evaluate(el=>el.scrollTop=el.scrollHeight);await page.screenshot({path:info.outputPath(label+'-bottom.png')});}
+      13 |  const enabled=dialog.locator('button:not(:disabled),input:not(:disabled),textarea:not(:disabled),select:not(:disabled)');
+    > 14 |  for(let i=0;i<Math.min(await enabled.count()+2,14);i++){await page.keyboard.press('Tab');expect(await dialog.evaluate(el=>el.contains(document.activeElement))).toBe(true);const focused=await page.locator(':focus').boundingBox();if(focused){expect(focused.x).toBeGreaterThanOrEqual(metrics.x-1);expect(focused.x+focused.width).toBeLessThanOrEqual(metrics.x+metrics.width+1);}}
+         |                                                                                                                                                                  ^
+      15 | }
+      16 | for(const width of [1440,360]){
+      17 |  test(`Files ACL pending unknown review at ${width}`,async({page},info)=>{
+        at inspect (/tmp/capiro-successor-visual-review/review.spec.ts:14:162)
+        at /tmp/capiro-successor-visual-review/review.spec.ts:27:783
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../tmp/capiro-successor-visual-review/artifacts/review-Files-folder-unknown-review-at-1440/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../tmp/capiro-successor-visual-review/artifacts/review-Files-folder-unknown-review-at-1440/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../tmp/capiro-successor-visual-review/artifacts/review-Files-folder-unknown-review-at-1440/trace.zip
+    Usage:
+
+        npx playwright show-trace ../tmp/capiro-successor-visual-review/artifacts/review-Files-folder-unknown-review-at-1440/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) ../tmp/capiro-successor-visual-review/review.spec.ts:29:6 › Meeting pending unknown at 1440 ───
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      12 |  if(metrics.scrollHeight>metrics.clientHeight+1){await dialog.evaluate(el=>el.scrollTop=el.scrollHeight);await page.screenshot({path:info.outputPath(label+'-bottom.png')});}
+      13 |  const enabled=dialog.locator('button:not(:disabled),input:not(:disabled),textarea:not(:disabled),select:not(:disabled)');
+    > 14 |  for(let i=0;i<Math.min(await enabled.count()+2,14);i++){await page.keyboard.press('Tab');expect(await dialog.evaluate(el=>el.contains(document.activeElement))).toBe(true);const focused=await page.locator(':focus').boundingBox();if(focused){expect(focused.x).toBeGreaterThanOrEqual(metrics.x-1);expect(focused.x+focused.width).toBeLessThanOrEqual(metrics.x+metrics.width+1);}}
+         |                                                                                                                                                                  ^
+      15 | }
+      16 | for(const width of [1440,360]){
+      17 |  test(`Files ACL pending unknown review at ${width}`,async({page},info)=>{
+        at inspect (/tmp/capiro-successor-visual-review/review.spec.ts:14:162)
+        at /tmp/capiro-successor-visual-review/review.spec.ts:30:568
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../tmp/capiro-successor-visual-review/artifacts/review-Meeting-pending-unknown-at-1440/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../tmp/capiro-successor-visual-review/artifacts/review-Meeting-pending-unknown-at-1440/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../tmp/capiro-successor-visual-review/artifacts/review-Meeting-pending-unknown-at-1440/trace.zip
+    Usage:
+
+        npx playwright show-trace ../tmp/capiro-successor-visual-review/artifacts/review-Meeting-pending-unknown-at-1440/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) ../tmp/capiro-successor-visual-review/review.spec.ts:32:45 › Calendar notes pending unknown at 1440 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      12 |  if(metrics.scrollHeight>metrics.clientHeight+1){await dialog.evaluate(el=>el.scrollTop=el.scrollHeight);await page.screenshot({path:info.outputPath(label+'-bottom.png')});}
+      13 |  const enabled=dialog.locator('button:not(:disabled),input:not(:disabled),textarea:not(:disabled),select:not(:disabled)');
+    > 14 |  for(let i=0;i<Math.min(await enabled.count()+2,14);i++){await page.keyboard.press('Tab');expect(await dialog.evaluate(el=>el.contains(document.activeElement))).toBe(true);const focused=await page.locator(':focus').boundingBox();if(focused){expect(focused.x).toBeGreaterThanOrEqual(metrics.x-1);expect(focused.x+focused.width).toBeLessThanOrEqual(metrics.x+metrics.width+1);}}
+         |                                                                                                                                                                  ^
+      15 | }
+      16 | for(const width of [1440,360]){
+      17 |  test(`Files ACL pending unknown review at ${width}`,async({page},info)=>{
+        at inspect (/tmp/capiro-successor-visual-review/review.spec.ts:14:162)
+        at /tmp/capiro-successor-visual-review/review.spec.ts:33:921
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../tmp/capiro-successor-visual-review/artifacts/review-Calendar-notes-pending-unknown-at-1440/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../tmp/capiro-successor-visual-review/artifacts/review-Calendar-notes-pending-unknown-at-1440/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../tmp/capiro-successor-visual-review/artifacts/review-Calendar-notes-pending-unknown-at-1440/trace.zip
+    Usage:
+
+        npx playwright show-trace ../tmp/capiro-successor-visual-review/artifacts/review-Calendar-notes-pending-unknown-at-1440/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) ../tmp/capiro-successor-visual-review/review.spec.ts:32:45 › Calendar debriefs pending unknown at 1440 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      12 |  if(metrics.scrollHeight>metrics.clientHeight+1){await dialog.evaluate(el=>el.scrollTop=el.scrollHeight);await page.screenshot({path:info.outputPath(label+'-bottom.png')});}
+      13 |  const enabled=dialog.locator('button:not(:disabled),input:not(:disabled),textarea:not(:disabled),select:not(:disabled)');
+    > 14 |  for(let i=0;i<Math.min(await enabled.count()+2,14);i++){await page.keyboard.press('Tab');expect(await dialog.evaluate(el=>el.contains(document.activeElement))).toBe(true);const focused=await page.locator(':focus').boundingBox();if(focused){expect(focused.x).toBeGreaterThanOrEqual(metrics.x-1);expect(focused.x+focused.width).toBeLessThanOrEqual(metrics.x+metrics.width+1);}}
+         |                                                                                                                                                                  ^
+      15 | }
+      16 | for(const width of [1440,360]){
+      17 |  test(`Files ACL pending unknown review at ${width}`,async({page},info)=>{
+        at inspect (/tmp/capiro-successor-visual-review/review.spec.ts:14:162)
+        at /tmp/capiro-successor-visual-review/review.spec.ts:33:921
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../tmp/capiro-successor-visual-review/artifacts/review-Calendar-debriefs-pending-unknown-at-1440/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../tmp/capiro-successor-visual-review/artifacts/review-Calendar-debriefs-pending-unknown-at-1440/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../tmp/capiro-successor-visual-review/artifacts/review-Calendar-debriefs-pending-unknown-at-1440/trace.zip
+    Usage:
+
+        npx playwright show-trace ../tmp/capiro-successor-visual-review/artifacts/review-Calendar-debriefs-pending-unknown-at-1440/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) ../tmp/capiro-successor-visual-review/review.spec.ts:17:6 › Files ACL pending unknown review at 360 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      12 |  if(metrics.scrollHeight>metrics.clientHeight+1){await dialog.evaluate(el=>el.scrollTop=el.scrollHeight);await page.screenshot({path:info.outputPath(label+'-bottom.png')});}
+      13 |  const enabled=dialog.locator('button:not(:disabled),input:not(:disabled),textarea:not(:disabled),select:not(:disabled)');
+    > 14 |  for(let i=0;i<Math.min(await enabled.count()+2,14);i++){await page.keyboard.press('Tab');expect(await dialog.evaluate(el=>el.contains(document.activeElement))).toBe(true);const focused=await page.locator(':focus').boundingBox();if(focused){expect(focused.x).toBeGreaterThanOrEqual(metrics.x-1);expect(focused.x+focused.width).toBeLessThanOrEqual(metrics.x+metrics.width+1);}}
+         |                                                                                                                                                                  ^
+      15 | }
+      16 | for(const width of [1440,360]){
+      17 |  test(`Files ACL pending unknown review at ${width}`,async({page},info)=>{
+        at inspect (/tmp/capiro-successor-visual-review/review.spec.ts:14:162)
+        at /tmp/capiro-successor-visual-review/review.spec.ts:23:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-360/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-360/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-360/trace.zip
+    Usage:
+
+        npx playwright show-trace ../tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-360/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6 failed
+    ../tmp/capiro-successor-visual-review/review.spec.ts:17:6 › Files ACL pending unknown review at 1440 
+    ../tmp/capiro-successor-visual-review/review.spec.ts:26:6 › Files folder unknown review at 1440 
+    ../tmp/capiro-successor-visual-review/review.spec.ts:29:6 › Meeting pending unknown at 1440 ────
+    ../tmp/capiro-successor-visual-review/review.spec.ts:32:45 › Calendar notes pending unknown at 1440 
+    ../tmp/capiro-successor-visual-review/review.spec.ts:32:45 › Calendar debriefs pending unknown at 1440 
+    ../tmp/capiro-successor-visual-review/review.spec.ts:17:6 › Files ACL pending unknown review at 360 
+  4 did not run

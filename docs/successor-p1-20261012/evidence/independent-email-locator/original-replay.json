@@ -1,0 +1,274 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-p1-successor/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config=/tmp/capiro-email-actor-review/original.config.ts"
+    ],
+    "configFile": "/tmp/capiro-email-actor-review/original.config.ts",
+    "rootDir": "/tmp/capiro-email-actor-review",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-email-actor-review/original-replay-output",
+        "repeatEach": 3,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-email-actor-review",
+        "testIgnore": [],
+        "testMatch": [
+          "original-email-compose.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-email-actor-review/original-replay.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "original-email-compose.spec.ts",
+      "file": "original-email-compose.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "actor change while prepare awaits causes zero storage/confirm/send",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5610,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/mailbox session changed or is unverified/)\nExpected: visible\nError: strict mode violation: getByText(/mailbox session changed or is unverified/) resolved to 2 elements:\n    1) <p>Your mailbox session changed or is unverified. Re…</p> aka getByRole('paragraph').filter({ hasText: 'Your mailbox session changed' })\n    2) <p role=\"alert\">Your mailbox session changed or is unverified. Re…</p> aka getByLabel('Email attachments').getByText('Your mailbox session changed')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/mailbox session changed or is unverified/)\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/mailbox session changed or is unverified/)\nExpected: visible\nError: strict mode violation: getByText(/mailbox session changed or is unverified/) resolved to 2 elements:\n    1) <p>Your mailbox session changed or is unverified. Re…</p> aka getByRole('paragraph').filter({ hasText: 'Your mailbox session changed' })\n    2) <p role=\"alert\">Your mailbox session changed or is unverified. Re…</p> aka getByLabel('Email attachments').getByText('Your mailbox session changed')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/mailbox session changed or is unverified/)\u001b[22m\n\n    at /tmp/capiro-email-actor-review/original-email-compose.spec.ts:522:5",
+                    "location": {
+                      "file": "/tmp/capiro-email-actor-review/original-email-compose.spec.ts",
+                      "column": 5,
+                      "line": 522
+                    },
+                    "snippet": "  520 |   await expect(\n  521 |     page.getByText(/mailbox session changed or is unverified/),\n> 522 |   ).toBeVisible();\n      |     ^\n  523 |   expect(state.counts()).toMatchObject({ uploads: 0, confirms: 0 });\n  524 |   expect(state.sent).toHaveLength(0);\n  525 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-email-actor-review/original-email-compose.spec.ts",
+                        "column": 5,
+                        "line": 522
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/mailbox session changed or is unverified/)\nExpected: visible\nError: strict mode violation: getByText(/mailbox session changed or is unverified/) resolved to 2 elements:\n    1) <p>Your mailbox session changed or is unverified. Re…</p> aka getByRole('paragraph').filter({ hasText: 'Your mailbox session changed' })\n    2) <p role=\"alert\">Your mailbox session changed or is unverified. Re…</p> aka getByLabel('Email attachments').getByText('Your mailbox session changed')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/mailbox session changed or is unverified/)\u001b[22m\n\n\n  520 |   await expect(\n  521 |     page.getByText(/mailbox session changed or is unverified/),\n> 522 |   ).toBeVisible();\n      |     ^\n  523 |   expect(state.counts()).toMatchObject({ uploads: 0, confirms: 0 });\n  524 |   expect(state.sent).toHaveLength(0);\n  525 | });\n    at /tmp/capiro-email-actor-review/original-email-compose.spec.ts:522:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:23:58.512Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-email-actor-review/original-replay-output/original-email-compose-act-d3b82-s-zero-storage-confirm-send/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-email-actor-review/original-replay-output/original-email-compose-act-d3b82-s-zero-storage-confirm-send/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-email-actor-review/original-replay-output/original-email-compose-act-d3b82-s-zero-storage-confirm-send/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-email-actor-review/original-email-compose.spec.ts",
+                    "column": 5,
+                    "line": 522
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3b1ad9537eaa4cd94f1f-4dab769c4c9c6b753b11",
+          "file": "original-email-compose.spec.ts",
+          "line": 510,
+          "column": 5
+        },
+        {
+          "title": "actor change while prepare awaits causes zero storage/confirm/send",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6767,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:24:06.201Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-email-actor-review/original-replay-output/original-email-compose-act-d3b82-s-zero-storage-confirm-send-repeat1/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3b1ad9537eaa4cd94f1f-c3b6e2e565bdbde71b6c",
+          "file": "original-email-compose.spec.ts",
+          "line": 510,
+          "column": 5
+        },
+        {
+          "title": "actor change while prepare awaits causes zero storage/confirm/send",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7315,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/mailbox session changed or is unverified/)\nExpected: visible\nError: strict mode violation: getByText(/mailbox session changed or is unverified/) resolved to 2 elements:\n    1) <p>Your mailbox session changed or is unverified. Re…</p> aka getByRole('paragraph').filter({ hasText: 'Your mailbox session changed' })\n    2) <p role=\"alert\">Your mailbox session changed or is unverified. Re…</p> aka getByLabel('Email attachments').getByText('Your mailbox session changed')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/mailbox session changed or is unverified/)\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/mailbox session changed or is unverified/)\nExpected: visible\nError: strict mode violation: getByText(/mailbox session changed or is unverified/) resolved to 2 elements:\n    1) <p>Your mailbox session changed or is unverified. Re…</p> aka getByRole('paragraph').filter({ hasText: 'Your mailbox session changed' })\n    2) <p role=\"alert\">Your mailbox session changed or is unverified. Re…</p> aka getByLabel('Email attachments').getByText('Your mailbox session changed')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/mailbox session changed or is unverified/)\u001b[22m\n\n    at /tmp/capiro-email-actor-review/original-email-compose.spec.ts:522:5",
+                    "location": {
+                      "file": "/tmp/capiro-email-actor-review/original-email-compose.spec.ts",
+                      "column": 5,
+                      "line": 522
+                    },
+                    "snippet": "  520 |   await expect(\n  521 |     page.getByText(/mailbox session changed or is unverified/),\n> 522 |   ).toBeVisible();\n      |     ^\n  523 |   expect(state.counts()).toMatchObject({ uploads: 0, confirms: 0 });\n  524 |   expect(state.sent).toHaveLength(0);\n  525 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-email-actor-review/original-email-compose.spec.ts",
+                        "column": 5,
+                        "line": 522
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/mailbox session changed or is unverified/)\nExpected: visible\nError: strict mode violation: getByText(/mailbox session changed or is unverified/) resolved to 2 elements:\n    1) <p>Your mailbox session changed or is unverified. Re…</p> aka getByRole('paragraph').filter({ hasText: 'Your mailbox session changed' })\n    2) <p role=\"alert\">Your mailbox session changed or is unverified. Re…</p> aka getByLabel('Email attachments').getByText('Your mailbox session changed')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/mailbox session changed or is unverified/)\u001b[22m\n\n\n  520 |   await expect(\n  521 |     page.getByText(/mailbox session changed or is unverified/),\n> 522 |   ).toBeVisible();\n      |     ^\n  523 |   expect(state.counts()).toMatchObject({ uploads: 0, confirms: 0 });\n  524 |   expect(state.sent).toHaveLength(0);\n  525 | });\n    at /tmp/capiro-email-actor-review/original-email-compose.spec.ts:522:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:24:15.213Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-email-actor-review/original-replay-output/original-email-compose-act-d3b82-s-zero-storage-confirm-send-repeat2/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-email-actor-review/original-replay-output/original-email-compose-act-d3b82-s-zero-storage-confirm-send-repeat2/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-email-actor-review/original-replay-output/original-email-compose-act-d3b82-s-zero-storage-confirm-send-repeat2/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-email-actor-review/original-email-compose.spec.ts",
+                    "column": 5,
+                    "line": 522
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3b1ad9537eaa4cd94f1f-895d8ee34f4ce547927e",
+          "file": "original-email-compose.spec.ts",
+          "line": 510,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T16:23:57.218Z",
+    "duration": 26426.543999999998,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

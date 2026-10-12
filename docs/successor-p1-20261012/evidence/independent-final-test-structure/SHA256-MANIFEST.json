@@ -1,0 +1,66 @@
+{
+  "createdAt": "2026-10-12T17:00:35.182269+00:00",
+  "fileCount": 12,
+  "files": [
+    {
+      "path": "added-or-updated-publication-records.json",
+      "bytes": 13708,
+      "sha256": "86f983bd406a18dd754a92b6c47d74a9d935cf7a64940b45d3751a6c6ae582dc"
+    },
+    {
+      "path": "all-signal-review.json",
+      "bytes": 22796,
+      "sha256": "5862f1cec90bf5a929f6344003a39173e0abf5e4efee102b91573ef944cc35a9"
+    },
+    {
+      "path": "assemble-review.py",
+      "bytes": 15931,
+      "sha256": "6e1ed9bef9396231e46d6917a36371499a7ba6165b0d3c8691e91e4259f33eab"
+    },
+    {
+      "path": "fixture-evidence-limits.json",
+      "bytes": 1180,
+      "sha256": "397ee14e7f4bab455f5683d667392021119a5e974a8da1e063f4ab9e5c073353"
+    },
+    {
+      "path": "inherited-unchanged-functions.json",
+      "bytes": 4943,
+      "sha256": "2e726b7fdbf95751868a27f0cbe27c4145daacd49c908caf8015100c7349dd45"
+    },
+    {
+      "path": "new-responsibility-reviews.json",
+      "bytes": 10510,
+      "sha256": "0a508b210a40612ced3b1da1b6ada602f660b1f937cc2d6dc875c03c5b2ad341"
+    },
+    {
+      "path": "prior-record.json",
+      "bytes": 2317,
+      "sha256": "d64b7bbdac45a87a87533ee3403ae7b9b29c8c853cdade18e48c197eb0a56869"
+    },
+    {
+      "path": "provided-signals.json",
+      "bytes": 5327,
+      "sha256": "ced155ca9688d7b482a3e3ececa5dd5019410723ac3cfd046035b3e5f0a70e5b"
+    },
+    {
+      "path": "report.md",
+      "bytes": 2594,
+      "sha256": "e9eb2d4e51449bea3db67e670fe01ecb9988f2b3466c7c747a0165d088319435"
+    },
+    {
+      "path": "review-summary.json",
+      "bytes": 2915,
+      "sha256": "af038deef0cc0ad5abcde6e44cad38d7dca16191f68b1e2e7a28e2ecee98ebfa"
+    },
+    {
+      "path": "signal-comparison.json",
+      "bytes": 10951,
+      "sha256": "78594dceb330b1dd13300f4d7cd1c6edef0ffa759445c0aacb01c647b0f3f0a9"
+    },
+    {
+      "path": "test-diff.patch",
+      "bytes": 123979,
+      "sha256": "0c24b73006dabe079fca34775da6240027f15b6863cd9070790e866ff6694f71"
+    }
+  ]
+}

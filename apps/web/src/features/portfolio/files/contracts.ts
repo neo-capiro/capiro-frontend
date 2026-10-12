@@ -45,10 +45,34 @@ export const fileAccessForIdSchema = (id: string) =>
     (file) => file.id === id,
     "Unexpected attachment identity",
   );
-export const fileChangeForIdSchema = (id: string) =>
+export type FileMetadataChange =
+  | { kind: "move"; folder: string | null }
+  | {
+      kind: "access";
+      viewerMode: "all" | "restricted";
+      viewerUserIds: string[];
+    };
+const viewerSet = (ids: string[]) =>
+  JSON.stringify(
+    [...new Set(ids.map((id) => id.trim()).filter(Boolean))].sort(),
+  );
+export const fileChangeForIdSchema = (
+  id: string,
+  change?: FileMetadataChange,
+) =>
   accessSchema
     .omit({ uploadedByUserId: true })
-    .refine((file) => file.id === id, "Unexpected attachment identity");
+    .refine((file) => file.id === id, "Unexpected attachment identity")
+    .refine((file) => {
+      if (!change) return true;
+      if (change.kind === "move")
+        return file.folder === (change.folder?.trim() || null);
+      return (
+        file.viewerMode === change.viewerMode &&
+        (change.viewerMode === "all" ||
+          viewerSet(file.viewerUserIds) === viewerSet(change.viewerUserIds))
+      );
+    }, "The attachment receipt does not confirm the requested change");
 export const uploadTicketSchema = z.object({
   url: z.string(),
   fields: z.record(z.string(), z.string()),

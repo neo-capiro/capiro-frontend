@@ -1,0 +1,416 @@
+{
+  "createdAt": "2026-10-12T16:46:15.771337+00:00",
+  "fileCount": 82,
+  "files": [
+    {
+      "path": "action-plumbing-browser.spec.ts",
+      "bytes": 9687,
+      "sha256": "47c05f7b2bc7c17f0c2dede18180a0bf7c7bb01e08c299a7132ab2409ec0000b"
+    },
+    {
+      "path": "architecture-review.json",
+      "bytes": 4323,
+      "sha256": "4efcd099e0f207a58b28cb580499f9a4abd0ec695560b42e9d53f55c0de16794"
+    },
+    {
+      "path": "architecture.json",
+      "bytes": 744945,
+      "sha256": "d82190d9c00bbbf08c8a163fe260e91925881b8157d621b3c6acc8a2a388ad5f"
+    },
+    {
+      "path": "backend/engagement-access.helpers.ts",
+      "bytes": 5101,
+      "sha256": "a7d28dcb3db441049d7f93a89b54cc21b097af3757a66f2934b0e5a2a560d0bf"
+    },
+    {
+      "path": "backend/engagement.controller.ts",
+      "bytes": 83984,
+      "sha256": "9e4cb0008290eb3afaac654dc0f15909f16c88e4db28149971f6790737dccdae"
+    },
+    {
+      "path": "backend/engagement.service.ts",
+      "bytes": 506538,
+      "sha256": "78770fac56ac51c3af48674d07ea6b735490785dd73684265e54e861958cd3f9"
+    },
+    {
+      "path": "backend/schema.prisma",
+      "bytes": 975974,
+      "sha256": "d79006f5a5d24a64ea605e7d04ab8b69d1ced0c42292b7406564d71feadc8afa"
+    },
+    {
+      "path": "backend/source-pin.json",
+      "bytes": 833,
+      "sha256": "f5b37c59dcec2c2d69bf1c56fec2c37db352757aa8f81649c7397fc26aaff832"
+    },
+    {
+      "path": "backend-contract-review.json",
+      "bytes": 6999,
+      "sha256": "d43b63674d2fa1b3060f8034a00ffe8ac5cf70b95c568d6acce36bf969b53c22"
+    },
+    {
+      "path": "before-source/apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+      "bytes": 9310,
+      "sha256": "bb081bf0130f3f35341e68e0c61c491cd46ab782a5fe3be4ab6a1de1af5d4450"
+    },
+    {
+      "path": "before-source/apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
+      "bytes": 6400,
+      "sha256": "df79c29f4a5e3f72fb1cf7ea303a9a02af75c070039aaf28e7fc1dfbd6db6434"
+    },
+    {
+      "path": "before-source/apps/web/src/features/portfolio/calendar/artifacts/contracts.ts",
+      "bytes": 3198,
+      "sha256": "145e2f76cb7461f7009583117d0355b1587fd55b6da18d80addbca26630ed389"
+    },
+    {
+      "path": "before-source/apps/web/src/features/portfolio/calendar/meeting-save.ts",
+      "bytes": 1447,
+      "sha256": "2a777f94c992ab6b6947e5306088415b2c61e0de8a9103eb50af9c83ec87a85f"
+    },
+    {
+      "path": "before-source-pin.json",
+      "bytes": 768,
+      "sha256": "970fde2f1338968d98bb5d769e0b90aca30ec230debf3f2f64a4a5e74a5f763f"
+    },
+    {
+      "path": "caption-before-artifacts/.last-run.json",
+      "bytes": 145,
+      "sha256": "2a13e0d2a3d26258e23fdf7550b8ee8eec945f0baa62e1e44b233f8058f9d66c"
+    },
+    {
+      "path": "caption-before-artifacts/native-browser-native-debr-b5b00-once-with-correct-lifecycle/error-context.md",
+      "bytes": 12396,
+      "sha256": "05ae6f383caee1d9cc7246c660ef42e2cda377ea80c707746639351f4a39b427"
+    },
+    {
+      "path": "caption-before-artifacts/native-browser-native-debr-b5b00-once-with-correct-lifecycle/test-failed-1.png",
+      "bytes": 46414,
+      "sha256": "e471216e71c7fbae1520e0f5d7d45f092ebd40cc4ebe6558cb6e330ae9566143"
+    },
+    {
+      "path": "caption-before-artifacts/native-browser-native-debr-b5b00-once-with-correct-lifecycle/trace.zip",
+      "bytes": 337541,
+      "sha256": "6869eb27e130cc27db105965196d857cc090de3e8586ad7387dd09fe02de1c8c"
+    },
+    {
+      "path": "caption-before-artifacts/native-browser-native-idem-de5d4-ithout-invented-list-stamps/error-context.md",
+      "bytes": 12362,
+      "sha256": "74a8ee65ce88b98e18dbea13c2308dd97aa3623fa847db1187225d03fdf7e1c6"
+    },
+    {
+      "path": "caption-before-artifacts/native-browser-native-idem-de5d4-ithout-invented-list-stamps/test-failed-1.png",
+      "bytes": 46766,
+      "sha256": "2b674f998e02b25c379b2b0db3b38ab54ef4b1143ed4c03c61878b9926612d69"
+    },
+    {
+      "path": "caption-before-artifacts/native-browser-native-idem-de5d4-ithout-invented-list-stamps/trace.zip",
+      "bytes": 285247,
+      "sha256": "233eff5501bfec043108eb6b298653a2614c05360791d632d8b98f5abe1709d9"
+    },
+    {
+      "path": "caption-before-results.json",
+      "bytes": 23410,
+      "sha256": "f674d2bcd29739d1e87ee1e1a00adec47096c3a55a13a3432ee905eeefad6b2e"
+    },
+    {
+      "path": "caption-before.config.mts",
+      "bytes": 700,
+      "sha256": "7aa0bc5d933dbf3fc2d3d90a96b4741fb2a89e308eab95024a565a9b02256e47"
+    },
+    {
+      "path": "caption-before.log",
+      "bytes": 11791,
+      "sha256": "60eeefe7c46a4e8b8ed54c3857b9139571394d008cfb7c9500fcbd41464c4454"
+    },
+    {
+      "path": "final-browser-artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "final-browser-artifacts/native-browser-No-client-s-2d9ee--cleared-native-association/client-clear-confirmed.png",
+      "bytes": 120559,
+      "sha256": "ae0f7275d52ca96c239dcbd607b4607a3167000f5437d1655ae994913dedfa78"
+    },
+    {
+      "path": "final-browser-artifacts/native-browser-No-client-s-853e9-and-refuses-old-association/client-clear-old-refused.png",
+      "bytes": 109882,
+      "sha256": "a61bc0f1ac55e7d03cf6244cd433151ccb33bc2a1c653cc6522388c48e6bc9c3"
+    },
+    {
+      "path": "final-browser-artifacts/native-browser-native-debr-b5b00-once-with-correct-lifecycle/debriefs-native-save.png",
+      "bytes": 47604,
+      "sha256": "5db7745a7f574b1cb51be1789a2817ec88a7027d3fb8025080127d7fb957388c"
+    },
+    {
+      "path": "final-browser-artifacts/native-browser-native-idem-6555c-ithout-invented-list-stamps/notes-null-original-sharer.png",
+      "bytes": 33069,
+      "sha256": "a55e8f1a7d26e5b69f2e4b1f07589d51b6dc831d046ffd90a61c37b7e7d61fd9"
+    },
+    {
+      "path": "final-browser-artifacts/native-browser-native-idem-de5d4-ithout-invented-list-stamps/debriefs-null-original-sharer.png",
+      "bytes": 47986,
+      "sha256": "53fdab0c16b27621404c50a6ce8b22d7648d50f05a3aa86a4a29f85ac0ec70c8"
+    },
+    {
+      "path": "final-browser-artifacts/native-browser-native-note-7f441-once-with-correct-lifecycle/notes-native-save.png",
+      "bytes": 30970,
+      "sha256": "873ecd0456dab179f9e45801fb60f7dbf4265df78e709af42593c248a86f3107"
+    },
+    {
+      "path": "final-browser-artifacts/native-browser-new-unscope-4e036-d-accepts-backend-inference/unscoped-create-inference.png",
+      "bytes": 107671,
+      "sha256": "bfd9e175abbc24b2a627845f5a40496c1c97ced902bd00cf008881bd7d6eaa12"
+    },
+    {
+      "path": "final-browser-artifacts/native-browser-portal-gene-1280d-bled-and-dispatch-no-action/portal-generation-visible-disabled.png",
+      "bytes": 35546,
+      "sha256": "a600301448b792a61dc06ced266e24ccf4f1271244277c4bbde88a82e72abcd4"
+    },
+    {
+      "path": "final-browser-results.json",
+      "bytes": 10606,
+      "sha256": "811897f78662ee753fc9f19b11626101beb39e0ff2db258ac436b05e9b8b7492"
+    },
+    {
+      "path": "final-browser.config.mts",
+      "bytes": 698,
+      "sha256": "f94c20d7f62da0206894c3aa5cebb5c72e2fa041463f1d25025f14948ee9276d"
+    },
+    {
+      "path": "final-browser.log",
+      "bytes": 1592,
+      "sha256": "e686fcf17b2c0a2cc7da898c7fe30946bc151a449834f264c266c4ed367bf642"
+    },
+    {
+      "path": "final-source/apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+      "bytes": 9615,
+      "sha256": "314c3d1c5fedb548d77b926aa2664deb4d82b11468b3d39546d8c19719c94809"
+    },
+    {
+      "path": "final-source/apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
+      "bytes": 6431,
+      "sha256": "4e330177ee89a55f5f2995b363eabdbde3ad7bebcc6db688473c7e956242a2dc"
+    },
+    {
+      "path": "final-source/apps/web/src/features/portfolio/calendar/artifacts/contracts.ts",
+      "bytes": 3356,
+      "sha256": "8d272d709972ecac8e2134ad24099f6321e316f565bb28e7b7eb5b8c8a71adf3"
+    },
+    {
+      "path": "final-source/apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+      "bytes": 14446,
+      "sha256": "f37b063199dcdea0c1f098a50a1b6ba48e61992c492f05326966c6d890521f06"
+    },
+    {
+      "path": "final-source/apps/web/tests/browser/calendar-client-clear.spec.ts",
+      "bytes": 2584,
+      "sha256": "0171c3c5cec47c8c723531b4f63e5955c131cc0db772ed56f71d97318216cede"
+    },
+    {
+      "path": "final-source/apps/web/tests/browser/calendar-meeting-receipts-harness.tsx",
+      "bytes": 1544,
+      "sha256": "8faf894068b364106621806f1f62259a7964b6fa33547cec3d92f7bcb4a6f93b"
+    },
+    {
+      "path": "final-source/apps/web/tests/browser/manual-debrief.spec.ts",
+      "bytes": 7389,
+      "sha256": "baa61f651707935b274c9937cb1f45d7b8b893ac8af3db6901147cbb60705c79"
+    },
+    {
+      "path": "final-source/apps/web/tests/browser/meeting-library.spec.ts",
+      "bytes": 23824,
+      "sha256": "ab51fe5352b9cbe5db0d8ac46d3ac817ad01ca75750748a5cf64c80e183d492e"
+    },
+    {
+      "path": "final-source/apps/web/tests/browser/meeting-review.spec.ts",
+      "bytes": 24367,
+      "sha256": "851510fe08497f7c14f14755c77f590fb82b72169bb1a5bbe1b986b08c53f331"
+    },
+    {
+      "path": "final-source/apps/web/tests/browser/voice-integration.spec.ts",
+      "bytes": 3721,
+      "sha256": "0d52dfd98950b1b5cb00c8e2bf5c54c0cb7a99220efa96d8d1ff5deb8c0b6fd4"
+    },
+    {
+      "path": "final-source/apps/web/tests/calendar-artifact-receipts.test.ts",
+      "bytes": 10178,
+      "sha256": "0cbcdbed55af981472970bc9b66263dd282f1ffc4ac172ea338985ac99664949"
+    },
+    {
+      "path": "final-source/apps/web/tests/calendar-native-lifecycle.test.ts",
+      "bytes": 3940,
+      "sha256": "ff552c6be01e958d841d84b9c15797133b97bbbedcbe53002c4a3904b5543808"
+    },
+    {
+      "path": "final-source-pin.json",
+      "bytes": 2319,
+      "sha256": "ed7ccf6a4396bfd7254f595fcf5f5f50eb88437d819e537efab29582a38d0d1b"
+    },
+    {
+      "path": "finalize.py",
+      "bytes": 11191,
+      "sha256": "a3f115d692465217d47ab0dd1f722778e802560834ee0817daf9b07ff1b240a6"
+    },
+    {
+      "path": "first-candidate-architecture-review.json",
+      "bytes": 4006,
+      "sha256": "a490be0df8e46b715be244fc9a2f18ca81b7fb3d3ff4b3e35577c4a01dd3bd0c"
+    },
+    {
+      "path": "first-candidate-architecture.json",
+      "bytes": 744945,
+      "sha256": "46009d9fbc28ed5ad4adef1239f8960af5d4ba510abe66d004f0dc0cb743e6fe"
+    },
+    {
+      "path": "first-candidate-source-pin.json",
+      "bytes": 714,
+      "sha256": "1c4101be9259c4a80cbb4408cc55c593c61f2fb963b74562d9c551921d34fe24"
+    },
+    {
+      "path": "native-browser-artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "native-browser-artifacts/native-browser-No-client-s-2d9ee--cleared-native-association/client-clear-confirmed.png",
+      "bytes": 120559,
+      "sha256": "ae0f7275d52ca96c239dcbd607b4607a3167000f5437d1655ae994913dedfa78"
+    },
+    {
+      "path": "native-browser-artifacts/native-browser-No-client-s-853e9-and-refuses-old-association/client-clear-old-refused.png",
+      "bytes": 109880,
+      "sha256": "eae59f14a273a034d9e7f0880d36b3915bfaae735faa5e5de2f0dab1b05f0b4d"
+    },
+    {
+      "path": "native-browser-artifacts/native-browser-native-debr-b5b00-once-with-correct-lifecycle/debriefs-native-save.png",
+      "bytes": 46414,
+      "sha256": "e471216e71c7fbae1520e0f5d7d45f092ebd40cc4ebe6558cb6e330ae9566143"
+    },
+    {
+      "path": "native-browser-artifacts/native-browser-native-idem-6555c-ithout-invented-list-stamps/notes-null-original-sharer.png",
+      "bytes": 33069,
+      "sha256": "a55e8f1a7d26e5b69f2e4b1f07589d51b6dc831d046ffd90a61c37b7e7d61fd9"
+    },
+    {
+      "path": "native-browser-artifacts/native-browser-native-idem-de5d4-ithout-invented-list-stamps/debriefs-null-original-sharer.png",
+      "bytes": 46766,
+      "sha256": "2b674f998e02b25c379b2b0db3b38ab54ef4b1143ed4c03c61878b9926612d69"
+    },
+    {
+      "path": "native-browser-artifacts/native-browser-native-note-7f441-once-with-correct-lifecycle/notes-native-save.png",
+      "bytes": 30970,
+      "sha256": "873ecd0456dab179f9e45801fb60f7dbf4265df78e709af42593c248a86f3107"
+    },
+    {
+      "path": "native-browser-artifacts/native-browser-new-unscope-4e036-d-accepts-backend-inference/unscoped-create-inference.png",
+      "bytes": 107671,
+      "sha256": "bfd9e175abbc24b2a627845f5a40496c1c97ced902bd00cf008881bd7d6eaa12"
+    },
+    {
+      "path": "native-browser-artifacts/native-browser-portal-gene-1280d-bled-and-dispatch-no-action/portal-generation-visible-disabled.png",
+      "bytes": 35546,
+      "sha256": "a600301448b792a61dc06ced266e24ccf4f1271244277c4bbde88a82e72abcd4"
+    },
+    {
+      "path": "native-browser-results.json",
+      "bytes": 10611,
+      "sha256": "d732b025db9ccf39f3195a09b03f214a5cd8a832b8e5785bce97605d34e96953"
+    },
+    {
+      "path": "native-browser.config.mts",
+      "bytes": 700,
+      "sha256": "0e643863f4ac724e41cdf8ddf3912cbd96316396b7efe775f90d08789d1b4169"
+    },
+    {
+      "path": "native-browser.log",
+      "bytes": 1592,
+      "sha256": "e0cf05a75209dbbaea0b813437999f8432bb538da48bc6d0f4ffaab37380c41e"
+    },
+    {
+      "path": "native-browser.spec.ts",
+      "bytes": 10090,
+      "sha256": "0269f2dd2bcd0160b99e41649b29c58bd9c10301279c43b53c1f3113ded897d1"
+    },
+    {
+      "path": "native-parser.spec.ts",
+      "bytes": 5906,
+      "sha256": "51548c5e6f7a55ed7f5bdcef2896f069c4fd144a10d49a1a898e2f1d67003941"
+    },
+    {
+      "path": "parser-after-results.json",
+      "bytes": 10844,
+      "sha256": "dd87d76f9ad79773ce207e4e8f87e20ec3f4a8b75e8eab67a1409fe9706aaa25"
+    },
+    {
+      "path": "parser-after.config.mts",
+      "bytes": 664,
+      "sha256": "431c76134d1b097187e16cd4160da2bd5b2c1936eefc39f70d20b6e0bad88156"
+    },
+    {
+      "path": "parser-after.log",
+      "bytes": 365,
+      "sha256": "509f4367fa80e595d5339f67f19300eecf41658bc797cfe906e4f4e949301532"
+    },
+    {
+      "path": "parser-before-results.json",
+      "bytes": 16734,
+      "sha256": "42a8b33f16668673f6c61b0de2328bb5f67f01d39a2316443812946a3f3cf6c3"
+    },
+    {
+      "path": "parser-before.config.mts",
+      "bytes": 625,
+      "sha256": "2e1c7ac5c0742b80245bea1878a463e785e7c007820f30c141b72cb9dc28b9a8"
+    },
+    {
+      "path": "parser-before.log",
+      "bytes": 4699,
+      "sha256": "8a48cfae88a2928d21aa23894f56bddf38df78346878c4f37cfc816f6b8b776e"
+    },
+    {
+      "path": "parser-native-before-results.json",
+      "bytes": 16728,
+      "sha256": "30d00eecb6908915cc53007b09a3a80e3924a3b938b7cb06f3f383e1239b3471"
+    },
+    {
+      "path": "parser-native-before.config.mts",
+      "bytes": 632,
+      "sha256": "750eeb74a2196358dfa4c97c74de66bc24e96d1dfc098e27f7d6a846d0458f88"
+    },
+    {
+      "path": "parser-native-before.log",
+      "bytes": 4709,
+      "sha256": "f9a9def08443bfc85a3623183be0687fa1c5218eff5b57cdb6a6692473b85f89"
+    },
+    {
+      "path": "preliminary-parser.spec.ts",
+      "bytes": 5872,
+      "sha256": "182b37d263cab9b6ac5c20dd10ad0e447233ecf41f70b49f4aac84562812dc5f"
+    },
+    {
+      "path": "report.md",
+      "bytes": 3903,
+      "sha256": "15e462b51aca99b3d0c58fe2889d7342cf8d2673f232e83d18ee8d47d7244491"
+    },
+    {
+      "path": "review-summary.json",
+      "bytes": 7717,
+      "sha256": "7c65f43e0a77e66b0216dae56b297df11e3475022fd8eab2fc29e56e8a60e590"
+    },
+    {
+      "path": "reviewed-final.patch",
+      "bytes": 23410,
+      "sha256": "38c02331010cc11346ce257590a39a727579bcb23131f151363ad69b730719fc"
+    },
+    {
+      "path": "reviewed-production-hashes.json",
+      "bytes": 501,
+      "sha256": "083327a675ccea9a98becba3bc3f5f1354e6fb34a14a05f8d5f7a3473bec5c8c"
+    },
+    {
+      "path": "test-structure-review.json",
+      "bytes": 1399,
+      "sha256": "01300a64c15ac255a5c3323978d13d596965b324e069f5d796424303971803bf"
+    }
+  ]
+}

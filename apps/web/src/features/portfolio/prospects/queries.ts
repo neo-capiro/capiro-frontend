@@ -36,6 +36,7 @@ export function useProspects(filter: ProspectFilter) {
   const query = prospectQuery(filter);
   return useQuery({
     queryKey: ["prospects", query],
+    staleTime: 0,
     queryFn: ({ signal }) =>
       api.request("core", `${prospectBase}?${query}`, prospectListSchema, {
         signal,

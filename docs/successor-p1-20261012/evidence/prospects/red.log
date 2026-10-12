@@ -1,0 +1,391 @@
+
+Running 9 tests using 1 worker
+
+(node:456980) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 apps/web/tests/browser/prospect-current-read.spec.ts:158:3 › a 403 current read on remount withholds cached records until a successful retry (10.2s)
+(node:457238) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 apps/web/tests/browser/prospect-current-read.spec.ts:177:3 › a 403 failed cached filter read cannot expose its earlier list or pipeline (8.9s)
+(node:457639) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 apps/web/tests/browser/prospect-current-read.spec.ts:198:5 › a 403 current read failure discards the open pipeline editor (8.9s)
+(node:457918) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  4 apps/web/tests/browser/prospect-current-read.spec.ts:198:5 › a 403 current read failure discards the open create editor (9.5s)
+(node:458268) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  5 apps/web/tests/browser/prospect-current-read.spec.ts:158:3 › a 503 current read on remount withholds cached records until a successful retry (11.4s)
+(node:458809) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  6 apps/web/tests/browser/prospect-current-read.spec.ts:177:3 › a 503 failed cached filter read cannot expose its earlier list or pipeline (12.5s)
+(node:459301) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  7 apps/web/tests/browser/prospect-current-read.spec.ts:198:5 › a 503 current read failure discards the open pipeline editor (12.1s)
+(node:459692) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  8 apps/web/tests/browser/prospect-current-read.spec.ts:198:5 › a 503 current read failure discards the open create editor (12.8s)
+(node:460134) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  9 apps/web/tests/browser/prospect-current-read.spec.ts:248:1 › client route replacement discards a failed Prospects editor and requires a current successful read on return (9.5s)
+
+
+  1) apps/web/tests/browser/prospect-current-read.spec.ts:158:3 › a 403 current read on remount withholds cached records until a successful retry 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('link', { name: /Test Prospect|Recovered prospect/ })
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('link', { name: /Test Prospect|Recovered prospect/ })
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      108 |   await expect(
+      109 |     page.getByRole("link", { name: /Test Prospect|Recovered prospect/ }),
+    > 110 |   ).toHaveCount(0);
+          |     ^
+      111 |   await expect(page.getByText("Review proposal", { exact: true })).toHaveCount(
+      112 |     0,
+      113 |   );
+        at expectUnavailable (/workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:110:5)
+        at /workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:170:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-40-b8e5f-ds-until-a-successful-retry/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-40-b8e5f-ds-until-a-successful-retry/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-40-b8e5f-ds-until-a-successful-retry/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-40-b8e5f-ds-until-a-successful-retry/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) apps/web/tests/browser/prospect-current-read.spec.ts:177:3 › a 403 failed cached filter read cannot expose its earlier list or pipeline 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('link', { name: /Test Prospect|Recovered prospect/ })
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('link', { name: /Test Prospect|Recovered prospect/ })
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      108 |   await expect(
+      109 |     page.getByRole("link", { name: /Test Prospect|Recovered prospect/ }),
+    > 110 |   ).toHaveCount(0);
+          |     ^
+      111 |   await expect(page.getByText("Review proposal", { exact: true })).toHaveCount(
+      112 |     0,
+      113 |   );
+        at expectUnavailable (/workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:110:5)
+        at /workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:193:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-40-6c0e9-ts-earlier-list-or-pipeline/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-40-6c0e9-ts-earlier-list-or-pipeline/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-40-6c0e9-ts-earlier-list-or-pipeline/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-40-6c0e9-ts-earlier-list-or-pipeline/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) apps/web/tests/browser/prospect-current-read.spec.ts:198:5 › a 403 current read failure discards the open pipeline editor 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('alert').filter({ hasText: 'You do not have permission' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('alert').filter({ hasText: 'You do not have permission' })
+
+
+      105 |             : "Synthetic current prospect read failed",
+      106 |       }),
+    > 107 |   ).toBeVisible();
+          |     ^
+      108 |   await expect(
+      109 |     page.getByRole("link", { name: /Test Prospect|Recovered prospect/ }),
+      110 |   ).toHaveCount(0);
+        at expectUnavailable (/workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:107:5)
+        at /workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:224:13
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-40-2f6a3-ds-the-open-pipeline-editor/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-40-2f6a3-ds-the-open-pipeline-editor/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-40-2f6a3-ds-the-open-pipeline-editor/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-40-2f6a3-ds-the-open-pipeline-editor/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) apps/web/tests/browser/prospect-current-read.spec.ts:198:5 › a 403 current read failure discards the open create editor 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('alert').filter({ hasText: 'You do not have permission' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('alert').filter({ hasText: 'You do not have permission' })
+
+
+      105 |             : "Synthetic current prospect read failed",
+      106 |       }),
+    > 107 |   ).toBeVisible();
+          |     ^
+      108 |   await expect(
+      109 |     page.getByRole("link", { name: /Test Prospect|Recovered prospect/ }),
+      110 |   ).toHaveCount(0);
+        at expectUnavailable (/workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:107:5)
+        at /workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:224:13
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-40-a0c02-ards-the-open-create-editor/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-40-a0c02-ards-the-open-create-editor/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-40-a0c02-ards-the-open-create-editor/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-40-a0c02-ards-the-open-create-editor/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) apps/web/tests/browser/prospect-current-read.spec.ts:158:3 › a 503 current read on remount withholds cached records until a successful retry 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('link', { name: /Test Prospect|Recovered prospect/ })
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('link', { name: /Test Prospect|Recovered prospect/ })
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      108 |   await expect(
+      109 |     page.getByRole("link", { name: /Test Prospect|Recovered prospect/ }),
+    > 110 |   ).toHaveCount(0);
+          |     ^
+      111 |   await expect(page.getByText("Review proposal", { exact: true })).toHaveCount(
+      112 |     0,
+      113 |   );
+        at expectUnavailable (/workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:110:5)
+        at /workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:170:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-50-0a7fd-ds-until-a-successful-retry/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-50-0a7fd-ds-until-a-successful-retry/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-50-0a7fd-ds-until-a-successful-retry/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-50-0a7fd-ds-until-a-successful-retry/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) apps/web/tests/browser/prospect-current-read.spec.ts:177:3 › a 503 failed cached filter read cannot expose its earlier list or pipeline 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('link', { name: /Test Prospect|Recovered prospect/ })
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('link', { name: /Test Prospect|Recovered prospect/ })
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      108 |   await expect(
+      109 |     page.getByRole("link", { name: /Test Prospect|Recovered prospect/ }),
+    > 110 |   ).toHaveCount(0);
+          |     ^
+      111 |   await expect(page.getByText("Review proposal", { exact: true })).toHaveCount(
+      112 |     0,
+      113 |   );
+        at expectUnavailable (/workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:110:5)
+        at /workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:193:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-50-e03a1-ts-earlier-list-or-pipeline/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-50-e03a1-ts-earlier-list-or-pipeline/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-50-e03a1-ts-earlier-list-or-pipeline/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-50-e03a1-ts-earlier-list-or-pipeline/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) apps/web/tests/browser/prospect-current-read.spec.ts:198:5 › a 503 current read failure discards the open pipeline editor 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('alert').filter({ hasText: 'Synthetic current prospect read failed' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('alert').filter({ hasText: 'Synthetic current prospect read failed' })
+
+
+      105 |             : "Synthetic current prospect read failed",
+      106 |       }),
+    > 107 |   ).toBeVisible();
+          |     ^
+      108 |   await expect(
+      109 |     page.getByRole("link", { name: /Test Prospect|Recovered prospect/ }),
+      110 |   ).toHaveCount(0);
+        at expectUnavailable (/workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:107:5)
+        at /workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:224:13
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-50-99216-ds-the-open-pipeline-editor/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-50-99216-ds-the-open-pipeline-editor/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-50-99216-ds-the-open-pipeline-editor/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-50-99216-ds-the-open-pipeline-editor/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) apps/web/tests/browser/prospect-current-read.spec.ts:198:5 › a 503 current read failure discards the open create editor 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('alert').filter({ hasText: 'Synthetic current prospect read failed' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('alert').filter({ hasText: 'Synthetic current prospect read failed' })
+
+
+      105 |             : "Synthetic current prospect read failed",
+      106 |       }),
+    > 107 |   ).toBeVisible();
+          |     ^
+      108 |   await expect(
+      109 |     page.getByRole("link", { name: /Test Prospect|Recovered prospect/ }),
+      110 |   ).toHaveCount(0);
+        at expectUnavailable (/workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:107:5)
+        at /workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:224:13
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-50-1e6b5-ards-the-open-create-editor/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-50-1e6b5-ards-the-open-create-editor/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-50-1e6b5-ards-the-open-create-editor/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-a-50-1e6b5-ards-the-open-create-editor/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) apps/web/tests/browser/prospect-current-read.spec.ts:248:1 › client route replacement discards a failed Prospects editor and requires a current successful read on return 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Test Aerospace', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'Test Aerospace', exact: true })
+
+
+      258 |   await expect(
+      259 |     page.getByRole("heading", { name: "Test Aerospace", exact: true }),
+    > 260 |   ).toBeVisible();
+          |     ^
+      261 |   control.fail(403);
+      262 |   await page.clock.fastForward(31_000);
+      263 |   await replaceRoute(page, `${listPath}?new=1`);
+        at /workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:260:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-clie-22119-t-successful-read-on-return/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-clie-22119-t-successful-read-on-return/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-clie-22119-t-successful-read-on-return/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-prospect-current-read-20261012/red-artifacts/prospect-current-read-clie-22119-t-successful-read-on-return/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9 failed
+    apps/web/tests/browser/prospect-current-read.spec.ts:158:3 › a 403 current read on remount withholds cached records until a successful retry 
+    apps/web/tests/browser/prospect-current-read.spec.ts:177:3 › a 403 failed cached filter read cannot expose its earlier list or pipeline 
+    apps/web/tests/browser/prospect-current-read.spec.ts:198:5 › a 403 current read failure discards the open pipeline editor 
+    apps/web/tests/browser/prospect-current-read.spec.ts:198:5 › a 403 current read failure discards the open create editor 
+    apps/web/tests/browser/prospect-current-read.spec.ts:158:3 › a 503 current read on remount withholds cached records until a successful retry 
+    apps/web/tests/browser/prospect-current-read.spec.ts:177:3 › a 503 failed cached filter read cannot expose its earlier list or pipeline 
+    apps/web/tests/browser/prospect-current-read.spec.ts:198:5 › a 503 current read failure discards the open pipeline editor 
+    apps/web/tests/browser/prospect-current-read.spec.ts:198:5 › a 503 current read failure discards the open create editor 
+    apps/web/tests/browser/prospect-current-read.spec.ts:248:1 › client route replacement discards a failed Prospects editor and requires a current successful read on return 

@@ -1,0 +1,58 @@
+{
+  "findings": [
+    {
+      "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+      "kind": "function",
+      "symbol": "ArtifactEditor",
+      "line": 42,
+      "nonblank": 244,
+      "fingerprint": "74c2a940af8068f5842b680b59a455ef48e6a7b4c92da4a45665d3bc4c4c4220",
+      "lane": "calendar",
+      "decision": "APPROVED",
+      "reason": "Approved as one note/debrief editing, approval, share/unshare and uncertain-attempt presentation. Distinct wire response semantics reside in artifacts/contracts.ts; network dispatch and uncertainty classification reside in artifacts/api.ts; captured actor/lifetime and cache-local attempt ownership reside in useArtifactMutation.ts. The view delegates preview/generation to existing public modules and does not own backend authority, provider calls or persistent artifact content.",
+      "reviewedBy": "Independent core_intake_review",
+      "reviewedOn": "2026-10-12"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+      "kind": "function",
+      "symbol": "ArtifactEditor > <anonymous> #5",
+      "line": 115,
+      "nonblank": 83,
+      "fingerprint": "51a2e68f07cabc01899676537ac125327048c6f6f8aa43a6de961c52479829ed",
+      "lane": "calendar",
+      "decision": "APPROVED",
+      "reason": "Approved as one saved-artifact row rendering its confidentiality/share state, body or restricted placeholder, and existing edit/approve/share/unshare/preview affordances. It passes deliberate actions to the canonical parent mutation and does not duplicate transport or lifecycle logic.",
+      "reviewedBy": "Independent core_intake_review",
+      "reviewedOn": "2026-10-12"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
+      "kind": "function",
+      "symbol": "MeetingForm",
+      "line": 11,
+      "nonblank": 181,
+      "fingerprint": "5731a9f733741460daf9a93f01ca6fc11c8d52496f04e96dcb8cb2ee6dc5a1cb",
+      "lane": "calendar",
+      "decision": "APPROVED",
+      "reason": "Approved as one meeting draft form: local client choice, local timezone conversion and validation, field presentation and pending/uncertain field locks. Native persisted input matching is owned by meeting-save.ts; actor/lifetime and response handling by mutations.ts. The final locks keep the submitted snapshot stable and add no unrelated responsibility.",
+      "reviewedBy": "Independent core_intake_review",
+      "reviewedOn": "2026-10-12"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/files/MoveFile.tsx",
+      "kind": "function",
+      "symbol": "MoveFile",
+      "line": 7,
+      "nonblank": 86,
+      "fingerprint": "17fffc40d9fe6d4fd5e096e44fdfb2137e6d1a18b5a23cbcf1b4cee578538b8c",
+      "lane": "files",
+      "decision": "APPROVED",
+      "reason": "Approved as one destination-choice dialog, preserving trim/null semantics and draft presentation. File authority, same-file serialization, semantic receipts and explicit current-state recovery are delegated to the metadata hook/actions; reusable status rendering is separate. No unrelated subsystem or speculative abstraction added.",
+      "reviewedBy": "Independent core_intake_review",
+      "reviewedOn": "2026-10-12"
+    }
+  ],
+  "dependencyInspection": "dependency-inspection.json",
+  "sharedRegistryEdits": false
+}

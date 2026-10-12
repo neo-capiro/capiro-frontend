@@ -1,6 +1,8 @@
 "use client";
 import { TextareaField } from "@/shared/portfolio/ui/TextareaField";
-import { useChangeMeetingArtifact } from "./mutations";
+import { useArtifactMutation } from "./artifacts/useArtifactMutation";
+import type { ArtifactActor, ArtifactChange } from "./artifacts/contracts";
+import { canAdminister, useIdentity } from "@/shared/portfolio/auth/identity";
 import { useState } from "react";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
@@ -16,19 +18,61 @@ export function MeetingArtifacts({
   meeting: Meeting;
   kind: "notes" | "debriefs";
 }) {
+  const identity = useIdentity();
+  if (!identity.data?.tenant || !identity.isSuccess)
+    return <QueryState pending={identity.isPending} error={identity.error} />;
+  return (
+    <ArtifactEditor
+      key={`${identity.data.tenant.id}:${identity.data.user.id}:${meeting.id}:${meeting.client?.id ?? ""}:${kind}`}
+      meeting={meeting}
+      kind={kind}
+      actor={{
+        userId: identity.data.user.id,
+        tenantId: identity.data.tenant.id,
+      }}
+      allowed={
+        !identity.isFetching &&
+        !identity.error &&
+        (identity.data.role === "standard_user" ||
+          canAdminister(identity.data.role))
+      }
+    />
+  );
+}
+function ArtifactEditor({
+  meeting,
+  kind,
+  actor,
+  allowed,
+}: {
+  meeting: Meeting;
+  kind: "notes" | "debriefs";
+  actor: ArtifactActor;
+  allowed: boolean;
+}) {
   const query = useMeetingNotes(meeting.id, kind);
-  const [editing, setEditing] = useState<{
-    id?: string;
-    body: string;
-    confidential: boolean;
-    generated?: boolean;
-  }>();
+  const mutation = useArtifactMutation(meeting, kind, actor);
+  const blocked = mutation.isPending || mutation.uncertain || !allowed;
+  const [editing, setEditing] = useState<
+    | {
+        id?: string;
+        body: string;
+        confidential: boolean;
+        generated?: boolean;
+      }
+    | undefined
+  >(() =>
+    mutation.attempt.change?.action === "save"
+      ? mutation.attempt.change
+      : undefined,
+  );
   const [sharing, setSharing] = useState<string>();
   const [preview, setPreview] = useState<z.infer<typeof noteSchema>>();
-  const mutation = useChangeMeetingArtifact(meeting.id, kind, () => {
-    setEditing(undefined);
-    setSharing(undefined);
-  });
+  const changeArtifact = (change: ArtifactChange) =>
+    mutation.mutate(change, () => {
+      setEditing(undefined);
+      setSharing(undefined);
+    });
   const singular = kind === "notes" ? "note" : "debrief";
   return (
     <div className="stack">
@@ -36,12 +80,28 @@ export function MeetingArtifacts({
         <h3>{kind === "notes" ? "Meeting notes" : "Debriefs"}</h3>
         <button
           className="button"
-          onClick={() => setEditing({ body: "", confidential: false })}
+          disabled={
+            mutation.isPending ||
+            !allowed ||
+            (mutation.uncertain && mutation.attempt.change?.action !== "save")
+          }
+          onClick={() => {
+            const saved = mutation.attempt.change;
+            if (mutation.uncertain) {
+              if (saved?.action === "save") setEditing(saved);
+              return;
+            }
+            setEditing({ body: "", confidential: false });
+          }}
         >
-          Add {singular}
+          {mutation.uncertain && mutation.attempt.change?.action === "save"
+            ? "Review retained draft"
+            : `Add ${singular}`}
         </button>
       </div>
-      {kind === "debriefs" && (
+      {/* Generation owns role/runtime disabled states; active or uncertain artifact
+          writes suppress new draft entry points until that attempt is resolved. */}
+      {kind === "debriefs" && !mutation.isPending && !mutation.uncertain && (
         <DebriefGeneration
           meeting={meeting}
           onDraft={(body) =>
@@ -61,9 +121,11 @@ export function MeetingArtifacts({
             <small>
               {item.confidential
                 ? "Confidential"
-                : item.sharedAt
-                  ? "Shared with client team"
-                  : "Private"}
+                : item.sharedAt === undefined
+                  ? "Sharing status unavailable"
+                  : item.sharedAt
+                    ? "Shared with client team"
+                    : "Private"}
             </small>
           </div>
           {item.restricted ? (
@@ -81,7 +143,7 @@ export function MeetingArtifacts({
                 )}
                 <button
                   className="button"
-                  disabled={mutation.isPending}
+                  disabled={blocked}
                   onClick={() =>
                     setEditing({
                       id: item.id,
@@ -95,9 +157,9 @@ export function MeetingArtifacts({
                 {item.status !== "approved" && (
                   <button
                     className="button"
-                    disabled={mutation.isPending}
+                    disabled={blocked}
                     onClick={() =>
-                      mutation.mutate({
+                      changeArtifact({
                         action: "approve",
                         id: item.id,
                       })
@@ -112,7 +174,7 @@ export function MeetingArtifacts({
                   !item.sharedAt && (
                     <button
                       className="button"
-                      disabled={mutation.isPending}
+                      disabled={blocked}
                       onClick={() => setSharing(item.id)}
                     >
                       Share
@@ -121,9 +183,9 @@ export function MeetingArtifacts({
                 {item.sharedAt && (
                   <button
                     className="button"
-                    disabled={mutation.isPending}
+                    disabled={blocked}
                     onClick={() =>
-                      mutation.mutate({
+                      changeArtifact({
                         action: "unshare",
                         id: item.id,
                       })
@@ -146,6 +208,15 @@ export function MeetingArtifacts({
         />
       )}
       <QueryState error={mutation.error} />
+      {mutation.uncertain && (
+        <button
+          className="button"
+          disabled={query.isFetching}
+          onClick={() => void query.refetch()}
+        >
+          Refresh saved {kind}
+        </button>
+      )}
       <Dialog
         open={Boolean(editing)}
         onOpenChange={(open) => {
@@ -161,8 +232,9 @@ export function MeetingArtifacts({
           className="stack"
           onSubmit={(event) => {
             event.preventDefault();
+            if (blocked) return;
             const form = new FormData(event.currentTarget);
-            mutation.mutate({
+            changeArtifact({
               action: "save",
               id: editing?.id,
               body: String(form.get("body")).trim(),
@@ -176,11 +248,13 @@ export function MeetingArtifacts({
             rows={12}
             required
             defaultValue={editing?.body}
+            readOnly={blocked}
           />
           <label className="row">
             <input
               type="checkbox"
               name="confidential"
+              disabled={blocked}
               defaultChecked={editing?.confidential}
             />
             Confidential
@@ -189,7 +263,7 @@ export function MeetingArtifacts({
             Edits require approval again. Saving does not send email.
           </small>
           <QueryState error={mutation.error} />
-          <button className="button primary" disabled={mutation.isPending}>
+          <button className="button primary" disabled={blocked}>
             Save {singular}
           </button>
         </form>
@@ -208,10 +282,10 @@ export function MeetingArtifacts({
         <QueryState error={mutation.error} />
         <button
           className="button primary"
-          disabled={mutation.isPending}
+          disabled={blocked}
           onClick={() => {
             if (sharing)
-              mutation.mutate({
+              changeArtifact({
                 action: "share",
                 id: sharing,
               });

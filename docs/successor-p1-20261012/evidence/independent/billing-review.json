@@ -1,0 +1,70 @@
+{
+  "reviewedAt": "2026-10-12T15:19:42.669015+00:00",
+  "finding": "MS01",
+  "candidateCommit": "0f80c354ee7eb08ce9a5dd08dd2305b7a5694bcd",
+  "verdict": "ACCEPT_BOUNDED_FRONTEND_REPAIR_PENDING_ROOT_INTEGRATED_GATES",
+  "sourceDiff": "BillingSettings keeps page/dialog presentation; new billingFlow owns selected hosted-flow eligibility, current reads and exact hosted origin validation. Fixed operation registry, backend contracts and shared action lifetime remain unchanged.",
+  "sourceEvidence": [
+    {
+      "path": "apps/web/src/features/settings/BillingSettings.tsx",
+      "sha256": "7a64a5917f672d5064c75795e34cdfdcc465de8953c40d3cc4b2c529601a3838"
+    },
+    {
+      "path": "apps/web/src/features/settings/billingFlow.ts",
+      "sha256": "283de53c92e183bf9da301c102d8c191b7d0036b97032a55c5f2aad4da415897"
+    },
+    {
+      "path": "apps/web/test/browser/billing-flow.spec.ts",
+      "sha256": "ecdfd9e46a5d7d2709c5dd12b790292411a3a5bd0517e92f4a676b46d7d761ea"
+    }
+  ],
+  "independentBrowserRuns": [
+    {
+      "file": "billing-independent-results.json",
+      "expected": 3,
+      "unexpected": 0,
+      "meaning": "Fresh403 no dispatch; organization replacement during held preflight no old POST; existing canceled subscription portal-only."
+    },
+    {
+      "file": "billing-author-controls-results.json",
+      "expected": 24,
+      "unexpected": 0,
+      "meaning": "Independent execution of all author regression controls, including6 subscriber statuses,2 new-subscription statuses, unavailable/contradictory reads, stale dialogs, wrong-flow origins, double dispatch and authority replacement."
+    }
+  ],
+  "behaviorReview": [
+    "Existing hasSubscription true uses portal only when current enabled reads agree; none/trialing without subscription can explicitly start a new subscription. Unsupported/contradictory states remain unavailable.",
+    "Fresh state and summary requests precede both hosted actions. Failed or changed eligibility never falls back to another write. Stale eligibility closes dialogs and reloads; transient read failure retains the checkout draft without dispatch.",
+    "The exact action-specific HTTPS origin is checked after the canonical URL safety guard. Credentials, unsafe hosts and cross-flow URLs are not accepted.",
+    "Existing useSettingsAction provides the synchronous single-action guard and abort/session lifecycle; independent controls show no old POST or redirected old receipt after replacement.",
+    "Copy accurately offers review of available plan changes in the hosted portal and describes checkout as a new subscription. It does not guarantee provider configuration, exact invoicing, native capacity change or completed payment."
+  ],
+  "architecture": {
+    "boundaryErrors": [],
+    "scannerExit": 1,
+    "pendingSignals": [
+      {
+        "file": "apps/web/src/features/settings/BillingSettings.tsx",
+        "kind": "function",
+        "symbol": "BillingSettings",
+        "line": 30,
+        "nonblank": 292,
+        "fingerprint": "e1a7cb20d84cd766915defd93a303aa4806c0525a8d9ed3636b1aba4e5a42044",
+        "provenance": "new",
+        "reviewStatus": "unreviewed",
+        "blocking": true
+      }
+    ],
+    "decision": "ACCEPT_EXACT_FUNCTION_RESPONSIBILITY_REVIEW_FOR_ROOT_RECORDING",
+    "reason": "BillingSettings remains one screen presentation with checkout/cancel local dialog state. The 292-nonblank signal is principally cohesive JSX for this same billing screen. Flow choice, fresh-read preflight and exact hosted redirect validation are separated into the small billingFlow owner, while the existing typed registry owns transport contracts and useSettingsAction owns cancellation/concurrency. No billing server logic, authority implementation, second catalog, unrelated domain or cyclic dependency was added. Further splitting for line count alone is not needed.",
+    "registryEdited": false
+  },
+  "limitations": [
+    "Root must record exact architecture fingerprint and run combined qualification on the integrated successor.",
+    "No native billing-admin authorization, provider URL/session execution, real subscription/capacity/payment/invoice effect or deployed-image acceptance performed. All hosted navigation was fulfilled by synthetic documents.",
+    "Frontend preflight cannot provide atomic service-side subscription eligibility; current native URL-only receipt cannot prove tenant/subscription identity beyond the configured trusted operation and host.",
+    "Existing hosted cancellation semantics and absent in-app billing contracts remain outside this repair."
+  ],
+  "newFindings": [],
+  "noSourceEditsByReviewer": true
+}

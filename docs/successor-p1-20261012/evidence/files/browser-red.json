@@ -1,0 +1,310 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-p1-files/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "/tmp/capiro-p1-files/playwright.config.ts",
+      "files-metadata-receipts.spec.ts"
+    ],
+    "configFile": "/tmp/capiro-p1-files/playwright.config.ts",
+    "rootDir": "/workspace/capiro-p1-files/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-p1-files/browser-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-p1-files/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-p1-files/browser-red.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "files-metadata-receipts.spec.ts",
+      "file": "files-metadata-receipts.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "conflicting ACL receipt retains the draft and freezes repeat save until current GET review",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 13578,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Access: Test report.pdf', exact: true }).getByRole('alert')\nExpected substring: \u001b[32m\"unexpected response\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Access: Test report.pdf', exact: true }).getByRole('alert')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Access: Test report.pdf', exact: true }).getByRole('alert')\nExpected substring: \u001b[32m\"unexpected response\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Access: Test report.pdf', exact: true }).getByRole('alert')\u001b[22m\n\n    at /workspace/capiro-p1-files/apps/web/tests/browser/files-metadata-receipts.spec.ts:25:43",
+                    "location": {
+                      "file": "/workspace/capiro-p1-files/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+                      "column": 43,
+                      "line": 25
+                    },
+                    "snippet": "  23 |   await dialog.getByRole(\"radio\", { name: \"Specific people\" }).check();\n  24 |   await dialog.getByRole(\"button\", { name: \"Save access\" }).click();\n> 25 |   await expect(dialog.getByRole(\"alert\")).toContainText(\"unexpected response\");\n     |                                           ^\n  26 |   await expect(dialog.getByRole(\"radio\", { name: \"Specific people\" })).toBeChecked();\n  27 |   await expect(dialog.getByRole(\"button\", { name: \"Save access\" })).toBeDisabled();\n  28 |   await expect(dialog.getByText(/save outcome is unknown/i)).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-p1-files/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+                        "column": 43,
+                        "line": 25
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'Access: Test report.pdf', exact: true }).getByRole('alert')\nExpected substring: \u001b[32m\"unexpected response\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Access: Test report.pdf', exact: true }).getByRole('alert')\u001b[22m\n\n\n  23 |   await dialog.getByRole(\"radio\", { name: \"Specific people\" }).check();\n  24 |   await dialog.getByRole(\"button\", { name: \"Save access\" }).click();\n> 25 |   await expect(dialog.getByRole(\"alert\")).toContainText(\"unexpected response\");\n     |                                           ^\n  26 |   await expect(dialog.getByRole(\"radio\", { name: \"Specific people\" })).toBeChecked();\n  27 |   await expect(dialog.getByRole(\"button\", { name: \"Save access\" })).toBeDisabled();\n  28 |   await expect(dialog.getByText(/save outcome is unknown/i)).toBeVisible();\n    at /workspace/capiro-p1-files/apps/web/tests/browser/files-metadata-receipts.spec.ts:25:43"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:13:45.165Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-metadata-receipts-co-f0a2e-ve-until-current-GET-review/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-metadata-receipts-co-f0a2e-ve-until-current-GET-review/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-metadata-receipts-co-f0a2e-ve-until-current-GET-review/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-p1-files/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+                    "column": 43,
+                    "line": 25
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "bf3678af30faab3f9883-e9e180137125e19683eb",
+          "file": "files-metadata-receipts.spec.ts",
+          "line": 12,
+          "column": 1
+        },
+        {
+          "title": "a contradictory folder receipt keeps the requested folder and needs current review",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 12698,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'New folder', exact: true }).getByRole('alert')\nExpected substring: \u001b[32m\"unexpected response\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'New folder', exact: true }).getByRole('alert')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'New folder', exact: true }).getByRole('alert')\nExpected substring: \u001b[32m\"unexpected response\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'New folder', exact: true }).getByRole('alert')\u001b[22m\n\n    at /workspace/capiro-p1-files/apps/web/tests/browser/files-metadata-receipts.spec.ts:52:43",
+                    "location": {
+                      "file": "/workspace/capiro-p1-files/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+                      "column": 43,
+                      "line": 52
+                    },
+                    "snippet": "  50 |   await dialog.getByLabel(\"Folder name\").fill(\"Reviewed destination\");\n  51 |   await dialog.getByRole(\"button\", { name: \"Create folder & move file\" }).click();\n> 52 |   await expect(dialog.getByRole(\"alert\")).toContainText(\"unexpected response\");\n     |                                           ^\n  53 |   await expect(dialog.getByLabel(\"Folder name\")).toHaveValue(\"Reviewed destination\");\n  54 |   await expect(dialog.getByRole(\"button\", { name: \"Create folder & move file\" })).toBeDisabled();\n  55 |   await dialog.getByRole(\"button\", { name: \"Review current file\" }).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-p1-files/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+                        "column": 43,
+                        "line": 52
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: 'New folder', exact: true }).getByRole('alert')\nExpected substring: \u001b[32m\"unexpected response\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'New folder', exact: true }).getByRole('alert')\u001b[22m\n\n\n  50 |   await dialog.getByLabel(\"Folder name\").fill(\"Reviewed destination\");\n  51 |   await dialog.getByRole(\"button\", { name: \"Create folder & move file\" }).click();\n> 52 |   await expect(dialog.getByRole(\"alert\")).toContainText(\"unexpected response\");\n     |                                           ^\n  53 |   await expect(dialog.getByLabel(\"Folder name\")).toHaveValue(\"Reviewed destination\");\n  54 |   await expect(dialog.getByRole(\"button\", { name: \"Create folder & move file\" })).toBeDisabled();\n  55 |   await dialog.getByRole(\"button\", { name: \"Review current file\" }).click();\n    at /workspace/capiro-p1-files/apps/web/tests/browser/files-metadata-receipts.spec.ts:52:43"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:14:00.302Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-metadata-receipts-a--f141d-er-and-needs-current-review/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-metadata-receipts-a--f141d-er-and-needs-current-review/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-metadata-receipts-a--f141d-er-and-needs-current-review/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-p1-files/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+                    "column": 43,
+                    "line": 52
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "bf3678af30faab3f9883-384126e500ffa686a8e2",
+          "file": "files-metadata-receipts.spec.ts",
+          "line": 41,
+          "column": 1
+        },
+        {
+          "title": "unknown ACL save survives close/reopen and a failed review does not thaw it",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 17371,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeChecked\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Access: Test report.pdf', exact: true }).getByRole('radio', { name: 'Specific people' })\nExpected: checked\nReceived: unchecked\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeChecked\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Access: Test report.pdf', exact: true }).getByRole('radio', { name: 'Specific people' })\u001b[22m\n\u001b[2m    14 × locator resolved to <input required=\"\" name=\"mode\" type=\"radio\"/>\u001b[22m\n\u001b[2m       - unexpected value \"unchecked\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeChecked\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Access: Test report.pdf', exact: true }).getByRole('radio', { name: 'Specific people' })\nExpected: checked\nReceived: unchecked\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeChecked\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Access: Test report.pdf', exact: true }).getByRole('radio', { name: 'Specific people' })\u001b[22m\n\u001b[2m    14 × locator resolved to <input required=\"\" name=\"mode\" type=\"radio\"/>\u001b[22m\n\u001b[2m       - unexpected value \"unchecked\"\u001b[22m\n\n    at /workspace/capiro-p1-files/apps/web/tests/browser/files-metadata-receipts.spec.ts:75:72",
+                    "location": {
+                      "file": "/workspace/capiro-p1-files/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+                      "column": 72,
+                      "line": 75
+                    },
+                    "snippet": "  73 |   await dialog.getByRole(\"button\", { name: \"Close\", exact: true }).click();\n  74 |   dialog = await openAccess(page);\n> 75 |   await expect(dialog.getByRole(\"radio\", { name: \"Specific people\" })).toBeChecked();\n     |                                                                        ^\n  76 |   await expect(dialog.getByRole(\"button\", { name: \"Save access\" })).toBeDisabled();\n  77 |   refuseRead = true;\n  78 |   await dialog.getByRole(\"button\", { name: \"Review current file\" }).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-p1-files/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+                        "column": 72,
+                        "line": 75
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeChecked\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Access: Test report.pdf', exact: true }).getByRole('radio', { name: 'Specific people' })\nExpected: checked\nReceived: unchecked\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeChecked\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Access: Test report.pdf', exact: true }).getByRole('radio', { name: 'Specific people' })\u001b[22m\n\u001b[2m    14 × locator resolved to <input required=\"\" name=\"mode\" type=\"radio\"/>\u001b[22m\n\u001b[2m       - unexpected value \"unchecked\"\u001b[22m\n\n\n  73 |   await dialog.getByRole(\"button\", { name: \"Close\", exact: true }).click();\n  74 |   dialog = await openAccess(page);\n> 75 |   await expect(dialog.getByRole(\"radio\", { name: \"Specific people\" })).toBeChecked();\n     |                                                                        ^\n  76 |   await expect(dialog.getByRole(\"button\", { name: \"Save access\" })).toBeDisabled();\n  77 |   refuseRead = true;\n  78 |   await dialog.getByRole(\"button\", { name: \"Review current file\" }).click();\n    at /workspace/capiro-p1-files/apps/web/tests/browser/files-metadata-receipts.spec.ts:75:72"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:14:14.683Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-metadata-receipts-un-6539b-led-review-does-not-thaw-it/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-metadata-receipts-un-6539b-led-review-does-not-thaw-it/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-files/browser-output/files-metadata-receipts-un-6539b-led-review-does-not-thaw-it/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-p1-files/apps/web/tests/browser/files-metadata-receipts.spec.ts",
+                    "column": 72,
+                    "line": 75
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "bf3678af30faab3f9883-1f013c45e3b38a231806",
+          "file": "files-metadata-receipts.spec.ts",
+          "line": 62,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T15:13:44.226Z",
+    "duration": 48982.97,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

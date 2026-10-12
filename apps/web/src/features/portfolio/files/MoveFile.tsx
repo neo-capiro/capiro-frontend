@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
-import { QueryState } from "@/shared/portfolio/ui/QueryState";
-import { useFileChange } from "./mutations";
+import { useFileMetadataChange } from "./useFileMetadataChange";
+import { FileMetadataStatus } from "./FileMetadataStatus";
 import type { Attachment } from "./contracts";
 export function MoveFile({
   clientId,
@@ -17,9 +17,16 @@ export function MoveFile({
   onClose: () => void;
   creating?: boolean;
 }) {
-  const [folder, setFolder] = useState(creating ? "" : (file.folder ?? ""));
+  const move = useFileMetadataChange(clientId, file.id, onClose);
+  const draft = move.attempt?.change;
+  const [folder, setFolder] = useState(
+    draft?.kind === "move"
+      ? (draft.folder ?? "")
+      : creating
+        ? ""
+        : (file.folder ?? ""),
+  );
   const [search, setSearch] = useState("");
-  const move = useFileChange(clientId, onClose);
   return (
     <Dialog
       open
@@ -33,9 +40,9 @@ export function MoveFile({
         className="stack"
         onSubmit={(event) => {
           event.preventDefault();
+          if (move.blocked) return;
           move.mutate({
             kind: "move",
-            id: file.id,
             folder: folder.trim() || null,
           });
         }}
@@ -47,6 +54,7 @@ export function MoveFile({
               required
               autoFocus
               maxLength={120}
+              disabled={move.blocked}
               value={folder}
               onChange={(event) => setFolder(event.target.value)}
             />
@@ -59,7 +67,7 @@ export function MoveFile({
               value={search}
               onChange={(event) => setSearch(event.target.value)}
             />
-            <fieldset>
+            <fieldset disabled={move.blocked}>
               <legend>Destination</legend>
               {["", ...folders]
                 .filter((name) =>
@@ -83,10 +91,10 @@ export function MoveFile({
           Folders are shared labels on files. No physical copy is created. Empty
           folders are not persisted.
         </p>
-        <QueryState error={move.error} />
+        <FileMetadataStatus change={move} kind="move" />
         <button
           className="button primary"
-          disabled={move.isPending || (creating && !folder.trim())}
+          disabled={move.blocked || (creating && !folder.trim())}
         >
           {creating ? "Create folder & move file" : "Move file"}
         </button>

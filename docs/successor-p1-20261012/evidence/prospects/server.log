@@ -1,0 +1,51 @@
+Test-only component server: http://127.0.0.1:5299
+3:22:22 PM [vite] (client) [Unhandled error] TypeError: Intl.DateTimeFormat(...).resolvedOptions is not a function
+ > ActivityTimeline ../../src/features/portfolio/client-profile/ActivityTimeline.tsx:21:37
+    19 |      activity.isSuccess && !activity.error ? activity.data : undefined;
+    20 |    const timeline = useRef<HTMLElement>(null);
+    21 |    const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+       |                                       ^
+    22 |    const [filters, setFilters] = useState({ ...emptyActivityFilters });
+    23 |    const rangeError = activityRangeError(filters);
+ > Object.react_stack_bottom_frame ../../../../../capiro-visual-closeout/node_modules/react-dom/cjs/react-dom-client.development.js:28571:19
+ > renderWithHooks ../../../../../capiro-visual-closeout/node_modules/react-dom/cjs/react-dom-client.development.js:8030:21
+ > updateFunctionComponent ../../../../../capiro-visual-closeout/node_modules/react-dom/cjs/react-dom-client.development.js:10569:18
+ > beginWork ../../../../../capiro-visual-closeout/node_modules/react-dom/cjs/react-dom-client.development.js:12205:17
+ > runWithFiberInDEV ../../../../../capiro-visual-closeout/node_modules/react-dom/cjs/react-dom-client.development.js:1045:29
+ > performUnitOfWork ../../../../../capiro-visual-closeout/node_modules/react-dom/cjs/react-dom-client.development.js:19176:21
+ > workLoopSync ../../../../../capiro-visual-closeout/node_modules/react-dom/cjs/react-dom-client.development.js:19004:40
+ > renderRootSync ../../../../../capiro-visual-closeout/node_modules/react-dom/cjs/react-dom-client.development.js:18985:10
+ > performWorkOnRoot ../../../../../capiro-visual-closeout/node_modules/react-dom/cjs/react-dom-client.development.js:18094:34
+
+3:22:22 PM [vite] (client) [console.warn] An error occurred in the <ActivityTimeline> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+3:23:27 PM [vite] (client) [Unhandled error] TypeError: Intl.DateTimeFormat(...).resolvedOptions is not a function
+ > ActivityTimeline ../../src/features/portfolio/client-profile/ActivityTimeline.tsx:21:37
+    19 |      activity.isSuccess && !activity.error ? activity.data : undefined;
+    20 |    const timeline = useRef<HTMLElement>(null);
+    21 |    const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+       |                                       ^
+    22 |    const [filters, setFilters] = useState({ ...emptyActivityFilters });
+    23 |    const rangeError = activityRangeError(filters);
+ > Object.react_stack_bottom_frame ../../../../../capiro-visual-closeout/node_modules/react-dom/cjs/react-dom-client.development.js:28571:19
+ > renderWithHooks ../../../../../capiro-visual-closeout/node_modules/react-dom/cjs/react-dom-client.development.js:8030:21
+ > updateFunctionComponent ../../../../../capiro-visual-closeout/node_modules/react-dom/cjs/react-dom-client.development.js:10569:18
+ > beginWork ../../../../../capiro-visual-closeout/node_modules/react-dom/cjs/react-dom-client.development.js:12205:17
+ > runWithFiberInDEV ../../../../../capiro-visual-closeout/node_modules/react-dom/cjs/react-dom-client.development.js:1045:29
+ > performUnitOfWork ../../../../../capiro-visual-closeout/node_modules/react-dom/cjs/react-dom-client.development.js:19176:21
+ > workLoopSync ../../../../../capiro-visual-closeout/node_modules/react-dom/cjs/react-dom-client.development.js:19004:40
+ > renderRootSync ../../../../../capiro-visual-closeout/node_modules/react-dom/cjs/react-dom-client.development.js:18985:10
+ > performWorkOnRoot ../../../../../capiro-visual-closeout/node_modules/react-dom/cjs/react-dom-client.development.js:18094:34
+
+3:23:27 PM [vite] (client) [console.warn] An error occurred in the <ActivityTimeline> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+3:26:02 PM [vite] (client) page reload /workspace/capiro-prospect-current-read/apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx
+3:26:02 PM [vite] (client) page reload /workspace/capiro-prospect-current-read/apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx
+3:31:00 PM [vite] (client) page reload /workspace/capiro-prospect-current-read/apps/web/src/features/portfolio/prospects/queries.ts
+3:31:01 PM [vite] (client) page reload /workspace/capiro-prospect-current-read/apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx

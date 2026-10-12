@@ -1,0 +1,308 @@
+{
+  "base": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+  "final": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "files": [
+    {
+      "file": "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+      "baselinePresent": false,
+      "baseFileSHA256": null,
+      "finalFileSHA256": "e9a32d5e6b794976d349cd16aee2fba5edc2e62949422cfb76e6cdb921ff5978",
+      "baseSignals": [],
+      "finalSignals": [
+        {
+          "file": "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+          "kind": "function",
+          "symbol": "<anonymous> #3",
+          "line": 196,
+          "nonblank": 82,
+          "fingerprint": "c24bfe8406f60e1da52ae6d356e41b7475dc2e7c24eacdc1cd4fcabf5b2cce4b"
+        }
+      ]
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+      "baselinePresent": false,
+      "baseFileSHA256": null,
+      "finalFileSHA256": "f37b063199dcdea0c1f098a50a1b6ba48e61992c492f05326966c6d890521f06",
+      "baseSignals": [],
+      "finalSignals": [
+        {
+          "file": "apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+          "kind": "file",
+          "symbol": "<module>",
+          "line": 1,
+          "nonblank": 407,
+          "fingerprint": "4c5d2906210db1a25f83b906e019fe0d5f673b0ff682afb534ae9080075d772d"
+        }
+      ]
+    },
+    {
+      "file": "apps/web/tests/browser/email-compose.spec.ts",
+      "baselinePresent": true,
+      "baseFileSHA256": "eddc6e6d8c5ca097053cc976ed0f3a47d67f11d1edbd4a9ffca4f38d9ccc2c95",
+      "finalFileSHA256": "90c43d7ad2ae3ef0065873d0027175569baafeb530364f26c8ee7c9ab3ef54af",
+      "baseSignals": [
+        {
+          "file": "apps/web/tests/browser/email-compose.spec.ts",
+          "kind": "file",
+          "symbol": "<module>",
+          "line": 1,
+          "nonblank": 668,
+          "fingerprint": "589f2aed4aa9e08b4a870bd9473bd70dbd5f7f935af27c94b0d54911c689534a"
+        },
+        {
+          "file": "apps/web/tests/browser/email-compose.spec.ts",
+          "kind": "function",
+          "symbol": "setup",
+          "line": 40,
+          "nonblank": 119,
+          "fingerprint": "486aa09e731ad40a8b5b850b7e2a07fa02ee17f98914c8f7c90efc64a7988c4b"
+        },
+        {
+          "file": "apps/web/tests/browser/email-compose.spec.ts",
+          "kind": "function",
+          "symbol": "setup > <anonymous>",
+          "line": 63,
+          "nonblank": 90,
+          "fingerprint": "422ede19b0edb762a92ff41f98b8fd81e377588a9f7a05cb88e541ccbdf137f4"
+        }
+      ],
+      "finalSignals": [
+        {
+          "file": "apps/web/tests/browser/email-compose.spec.ts",
+          "kind": "file",
+          "symbol": "<module>",
+          "line": 1,
+          "nonblank": 668,
+          "fingerprint": "a4f0704898b428f6c0ceb6457b09f50843f41565b817f32775312ece71dff348"
+        },
+        {
+          "file": "apps/web/tests/browser/email-compose.spec.ts",
+          "kind": "function",
+          "symbol": "setup",
+          "line": 40,
+          "nonblank": 119,
+          "fingerprint": "486aa09e731ad40a8b5b850b7e2a07fa02ee17f98914c8f7c90efc64a7988c4b"
+        },
+        {
+          "file": "apps/web/tests/browser/email-compose.spec.ts",
+          "kind": "function",
+          "symbol": "setup > <anonymous>",
+          "line": 63,
+          "nonblank": 90,
+          "fingerprint": "422ede19b0edb762a92ff41f98b8fd81e377588a9f7a05cb88e541ccbdf137f4"
+        }
+      ]
+    },
+    {
+      "file": "apps/web/tests/browser/files-metadata-receipts.spec.ts",
+      "baselinePresent": false,
+      "baseFileSHA256": null,
+      "finalFileSHA256": "3964338e9f0760a99b107a6901ca61c67dae04686e0530223e340ddb460c5429",
+      "baseSignals": [],
+      "finalSignals": [
+        {
+          "file": "apps/web/tests/browser/files-metadata-receipts.spec.ts",
+          "kind": "file",
+          "symbol": "<module>",
+          "line": 1,
+          "nonblank": 401,
+          "fingerprint": "297e2fcea744b0f411477ffb27af91483759ddc7f43b81bcd195ca211c5e4abb"
+        }
+      ]
+    },
+    {
+      "file": "apps/web/tests/browser/meeting-library.spec.ts",
+      "baselinePresent": true,
+      "baseFileSHA256": "6c777994f270f261efd4b19d3ade1121bbbdd5efe7dbbcafaeaadd1f07669ef2",
+      "finalFileSHA256": "ab51fe5352b9cbe5db0d8ac46d3ac817ad01ca75750748a5cf64c80e183d492e",
+      "baseSignals": [
+        {
+          "file": "apps/web/tests/browser/meeting-library.spec.ts",
+          "kind": "file",
+          "symbol": "<module>",
+          "line": 1,
+          "nonblank": 715,
+          "fingerprint": "ef5eaf3cf362cad262792723d96a167c5f6cecdba3a85860679172d45d254f17"
+        },
+        {
+          "file": "apps/web/tests/browser/meeting-library.spec.ts",
+          "kind": "function",
+          "symbol": "<anonymous> #7",
+          "line": 308,
+          "nonblank": 158,
+          "fingerprint": "e672c07b14dc4f557101bac2fc8196db01e6d26b975a8cd6553604a5372dc495"
+        },
+        {
+          "file": "apps/web/tests/browser/meeting-library.spec.ts",
+          "kind": "function",
+          "symbol": "<anonymous> #8",
+          "line": 469,
+          "nonblank": 85,
+          "fingerprint": "6df8273e429c6c13c26065415c18e5260183bd11ee80825beba19e816a85311b"
+        },
+        {
+          "file": "apps/web/tests/browser/meeting-library.spec.ts",
+          "kind": "function",
+          "symbol": "<anonymous> #10",
+          "line": 619,
+          "nonblank": 97,
+          "fingerprint": "708706a0d1f3e37ae01e11e4830b15fadf7d8f1ef10558323152252af50f45cb"
+        }
+      ],
+      "finalSignals": [
+        {
+          "file": "apps/web/tests/browser/meeting-library.spec.ts",
+          "kind": "file",
+          "symbol": "<module>",
+          "line": 1,
+          "nonblank": 726,
+          "fingerprint": "000a5183ef7cc0e430d8952b4010d34f39f7e1777321115720504c1ab46d1dac"
+        },
+        {
+          "file": "apps/web/tests/browser/meeting-library.spec.ts",
+          "kind": "function",
+          "symbol": "<anonymous> #7",
+          "line": 308,
+          "nonblank": 169,
+          "fingerprint": "ebfb009db8b416aa5e5cd282489b16de55d2b405d4cf8373577d582878987191"
+        },
+        {
+          "file": "apps/web/tests/browser/meeting-library.spec.ts",
+          "kind": "function",
+          "symbol": "<anonymous> #8",
+          "line": 480,
+          "nonblank": 85,
+          "fingerprint": "6df8273e429c6c13c26065415c18e5260183bd11ee80825beba19e816a85311b"
+        },
+        {
+          "file": "apps/web/tests/browser/meeting-library.spec.ts",
+          "kind": "function",
+          "symbol": "<anonymous> #10",
+          "line": 630,
+          "nonblank": 97,
+          "fingerprint": "708706a0d1f3e37ae01e11e4830b15fadf7d8f1ef10558323152252af50f45cb"
+        }
+      ]
+    },
+    {
+      "file": "apps/web/tests/browser/meeting-review.spec.ts",
+      "baselinePresent": true,
+      "baseFileSHA256": "30f88667d9a6f8b8d9ccb07b8959f79feccf3da6b0186288e229b76020d54f19",
+      "finalFileSHA256": "851510fe08497f7c14f14755c77f590fb82b72169bb1a5bbe1b986b08c53f331",
+      "baseSignals": [
+        {
+          "file": "apps/web/tests/browser/meeting-review.spec.ts",
+          "kind": "file",
+          "symbol": "<module>",
+          "line": 1,
+          "nonblank": 727,
+          "fingerprint": "44a6c611cb68d5029f9db2cfe789c27e421ec0e54a843ae04589b3dacec8ee07"
+        },
+        {
+          "file": "apps/web/tests/browser/meeting-review.spec.ts",
+          "kind": "function",
+          "symbol": "setup",
+          "line": 71,
+          "nonblank": 115,
+          "fingerprint": "d29ea8c6d721343d64e05a241287f323f827cc4ba538fbf98efa9b028bdf3a30"
+        }
+      ],
+      "finalSignals": [
+        {
+          "file": "apps/web/tests/browser/meeting-review.spec.ts",
+          "kind": "file",
+          "symbol": "<module>",
+          "line": 1,
+          "nonblank": 738,
+          "fingerprint": "b25cc651b88cf9d0286e3a3a43b298f54d2f75ce067f3acb21daf72b40d719ff"
+        },
+        {
+          "file": "apps/web/tests/browser/meeting-review.spec.ts",
+          "kind": "function",
+          "symbol": "setup",
+          "line": 71,
+          "nonblank": 126,
+          "fingerprint": "2c066003e4c68f95ab96debef8355d57784f9a50eba336279034e68b3c269198"
+        }
+      ]
+    },
+    {
+      "file": "apps/web/tests/browser/voice-integration.spec.ts",
+      "baselinePresent": true,
+      "baseFileSHA256": "b81edd6faec408d5470b2308c5223468203c82d5329e378ac43946e00f4489f4",
+      "finalFileSHA256": "0d52dfd98950b1b5cb00c8e2bf5c54c0cb7a99220efa96d8d1ff5deb8c0b6fd4",
+      "baseSignals": [
+        {
+          "file": "apps/web/tests/browser/voice-integration.spec.ts",
+          "kind": "function",
+          "symbol": "<anonymous>",
+          "line": 10,
+          "nonblank": 93,
+          "fingerprint": "5277a62cdfc861f7cae7cada40fd81092ddd9c892e127474fd28a25648d4e884"
+        }
+      ],
+      "finalSignals": [
+        {
+          "file": "apps/web/tests/browser/voice-integration.spec.ts",
+          "kind": "function",
+          "symbol": "<anonymous>",
+          "line": 10,
+          "nonblank": 104,
+          "fingerprint": "6fc64002e018b58ff6859c40b66160133b2c9a03a5ecb05c99ce4966523a0bde"
+        }
+      ]
+    },
+    {
+      "file": "apps/web/tests/calendar-artifact-receipts.test.ts",
+      "baselinePresent": false,
+      "baseFileSHA256": null,
+      "finalFileSHA256": "0cbcdbed55af981472970bc9b66263dd282f1ffc4ac172ea338985ac99664949",
+      "baseSignals": [],
+      "finalSignals": [
+        {
+          "file": "apps/web/tests/calendar-artifact-receipts.test.ts",
+          "kind": "function",
+          "symbol": "<anonymous>",
+          "line": 50,
+          "nonblank": 210,
+          "fingerprint": "ee4ea47e0557f38a5c6356fd78efe66dd2bd676df69b33d196fb64f35af0adbf"
+        }
+      ]
+    },
+    {
+      "file": "apps/web/tests/calendar-native-lifecycle.test.ts",
+      "baselinePresent": false,
+      "baseFileSHA256": null,
+      "finalFileSHA256": "ff552c6be01e958d841d84b9c15797133b97bbbedcbe53002c4a3904b5543808",
+      "baseSignals": [],
+      "finalSignals": [
+        {
+          "file": "apps/web/tests/calendar-native-lifecycle.test.ts",
+          "kind": "function",
+          "symbol": "<anonymous>",
+          "line": 41,
+          "nonblank": 88,
+          "fingerprint": "2e9bc4836ff79ac664597a9ebd169638c241c35a713a101910cacf8944ccb5c4"
+        }
+      ]
+    },
+    {
+      "file": "apps/web/tests/files-metadata-actions.test.ts",
+      "baselinePresent": false,
+      "baseFileSHA256": null,
+      "finalFileSHA256": "e90bd79de4edf1fc75f3797a470afe90a3d3fb81ebb80faab79ae1d398947868",
+      "baseSignals": [],
+      "finalSignals": [
+        {
+          "file": "apps/web/tests/files-metadata-actions.test.ts",
+          "kind": "function",
+          "symbol": "<anonymous>",
+          "line": 67,
+          "nonblank": 118,
+          "fingerprint": "70a03126414eecd7c7c3f46e0da3ddce282ede91857be68929285523a90cb119"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "reviewer": "Codex prospects repair agent",
+  "reviewedAt": "2026-10-12",
+  "sources": [
+    {
+      "path": "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx",
+      "sha256": "2e559c408c5f0db2b89bf5f7b1fa13ec05e49d5ed3eeabb0953c6d24be68cfed",
+      "nonblank": 215,
+      "sizeFindings": [
+        {
+          "file": "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx",
+          "kind": "function",
+          "symbol": "ProspectsIndex",
+          "line": 23,
+          "nonblank": 189,
+          "fingerprint": "d0be79ab36b07635085df1e03a891890f55b36a345cb0ac4a199caf5e3552d84"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/prospects/queries.ts",
+      "sha256": "be991fedfb9af416834677771aa52458821dade8b3f1c993e44aba24d3f49410",
+      "nonblank": 71,
+      "sizeFindings": []
+    },
+    {
+      "path": "apps/web/tests/browser/prospect-current-read.spec.ts",
+      "sha256": "84eb51196c433cf32261a4a9202b4df2d73d073c4d04218f92b215e1c174096f",
+      "nonblank": 319,
+      "sizeFindings": []
+    }
+  ],
+  "rationale": "ProspectsIndex remains the cohesive list presentation and URL interaction owner for filters, counts, cards and creation/pipeline dialogs. A single successful-current-read data gate governs every data-backed branch, using existing TanStack isFetchedAfterMount semantics. The one effect synchronizes failed-current-read state with the existing new/pipeline URL intents, preserving filters and unmounting stale child editor state. The prospect query hook remains the canonical request owner: its local staleTime0 ensures a new read on mount/filter selection instead of restoring a fresh-but-older cached filter after a denial. No new cache framework, backend authority, mutation dispatch or shared policy is introduced. Keeping this189-line composition together makes every branch auditable against the same current-data invariant; arbitrary extraction would obscure it. Error copy/retry remain QueryState; modal internals remain ProspectEditor/ProspectPipeline.",
+  "scopeLimits": "The Portfolio browser fixture has a canonical DataProvider but not the complete ApplicationBoundary. The client test proves actual navigation to another client route discards the editor and re-entry after failed current read remains closed; it does not independently qualify live session/client authorization.",
+  "tests": "Twelve new browser cases cover failed remount/filter reads, fresh cached-filter return after403/503, open creation/pipeline-stage editors, held authorized retry, client route replacement and preservation of typed input on successful same-key background refresh. Existing fixture and public query semantics are reused."
+}

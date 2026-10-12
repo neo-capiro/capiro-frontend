@@ -1,0 +1,93 @@
+
+ RUN  v4.1.11 /workspace/capiro-p1-files/apps/web
+
+ ❯ tests/files-metadata-receipts.test.ts (6 tests | 4 failed) 30ms
+     × rejects a same-file receipt that did not restrict access 20ms
+     × requires the exact restricted viewer set, rejecting missing and extra viewers 2ms
+     × compares all-mode semantically while still requiring its returned mode 3ms
+     × rejects an unchanged folder and accepts native normalized folder or unfiled 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/files-metadata-receipts.test.ts > reviewed single-file metadata receipts > rejects a same-file receipt that did not restrict access
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/files-metadata-receipts.test.ts:10:44
+      8|       kind: "access", viewerMode: "restricted", viewerUserIds: [],
+      9|     });
+     10|     expect(schema.safeParse(file).success).toBe(false);
+       |                                            ^
+     11|   });
+     12|   it("requires the exact restricted viewer set, rejecting missing and …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/files-metadata-receipts.test.ts > reviewed single-file metadata receipts > requires the exact restricted viewer set, rejecting missing and extra viewers
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/files-metadata-receipts.test.ts:17:99
+     15|     });
+     16|     for (const ids of [["viewer-a"], ["viewer-a", "viewer-b", "viewer-…
+     17|       expect(schema.safeParse({ ...file, viewerMode: "restricted", vie…
+       |                                                                                                   ^
+     18|   });
+     19|   it("compares normalized viewer sets independently of order", () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/files-metadata-receipts.test.ts > reviewed single-file metadata receipts > compares all-mode semantically while still requiring its returned mode
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/files-metadata-receipts.test.ts:30:96
+     28|     });
+     29|     expect(schema.safeParse(file).success).toBe(true);
+     30|     expect(schema.safeParse({ ...file, viewerMode: "restricted", viewe…
+       |                                                                                                ^
+     31|   });
+     32|   it("rejects an unchanged folder and accepts native normalized folder…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/files-metadata-receipts.test.ts > reviewed single-file metadata receipts > rejects an unchanged folder and accepts native normalized folder or unfiled
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/files-metadata-receipts.test.ts:34:44
+     32|   it("rejects an unchanged folder and accepts native normalized folder…
+     33|     const schema = fileChangeForIdSchema(file.id, { kind: "move", fold…
+     34|     expect(schema.safeParse(file).success).toBe(false);
+       |                                            ^
+     35|     expect(schema.safeParse({ ...file, folder: "Reviewed destination" …
+     36|     expect(fileChangeForIdSchema(file.id, { kind: "move", folder: " " …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 2 passed (6)
+   Start at  15:13:32
+   Duration  444ms (transform 144ms, setup 0ms, import 245ms, tests 30ms, environment 0ms)
+

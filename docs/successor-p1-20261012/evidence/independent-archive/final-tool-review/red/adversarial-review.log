@@ -1,0 +1,93 @@
+/tmp/capiro-successor-archive-review/verify-source-zip.py:252: UserWarning: Overlapped entries: 'README.md' (possible zip bomb)
+  with archive.open(info, "r") as member:
+/tmp/capiro-successor-archive-review/verify-source-zip.py:252: UserWarning: Overlapped entries: 'source-commit.txt' (possible zip bomb)
+  with archive.open(info, "r") as member:
+{
+  "canonicalSHA256": "47550e17b5dafc0dc693fae95d27ee0272a72db70265e460d5437fb6f6b3c911",
+  "independentSHA256": "7a1ef0bfdc9d4d0a8a85824c397536c8cef10ca024733ddfaa44c6b18cba859c",
+  "syntheticCommit": "d46507df37c8cf2cbdd2b973f39b751a369a0746",
+  "syntheticRepository": "/tmp/capiro-successor-archive-review/synthetic-git",
+  "successorArchiveCreated": false,
+  "awsCalls": 0,
+  "providerCalls": 0,
+  "canonicalPassed": 18,
+  "independentPassed": 23,
+  "total": 23
+}
+[
+  {
+    "case": "file-dos-directory-conflict",
+    "expectedAccept": false,
+    "archiveSHA256": "b0aaed228a482db4b0bd1787ad35ebef5afcf45cfc90d5b8fc9b415c7e2a3bd8",
+    "canonical": {
+      "accepted": true,
+      "passed": false,
+      "error": null
+    },
+    "independent": {
+      "accepted": false,
+      "passed": true,
+      "error": "Rejected: File mode/type mismatch"
+    }
+  },
+  {
+    "case": "dos-creator-executable-bits",
+    "expectedAccept": false,
+    "archiveSHA256": "63c47d392cf7e95b8963ed44ed9dd8d3222d6808fa6ea2b6b579db4914918d81",
+    "canonical": {
+      "accepted": true,
+      "passed": false,
+      "error": null
+    },
+    "independent": {
+      "accepted": false,
+      "passed": true,
+      "error": "Rejected: Unsupported non-Unix permission metadata"
+    }
+  },
+  {
+    "case": "hidden-prefixed-archive",
+    "expectedAccept": false,
+    "archiveSHA256": "4c8cf2da618e7a13dd8e41838dc0ceaf55bfc78e337ec03dfd832f46ba8bd98d",
+    "canonical": {
+      "accepted": true,
+      "passed": false,
+      "error": null
+    },
+    "independent": {
+      "accepted": false,
+      "passed": true,
+      "error": "Rejected: ZIP prefix or unindexed first member"
+    }
+  },
+  {
+    "case": "trailing-unindexed-bytes",
+    "expectedAccept": false,
+    "archiveSHA256": "64783bb09f3f57d5e45bca1818f475c48afdbde746f002c944787bcddf51c3d5",
+    "canonical": {
+      "accepted": true,
+      "passed": false,
+      "error": null
+    },
+    "independent": {
+      "accepted": false,
+      "passed": true,
+      "error": "Rejected: Multipart or trailing ZIP content"
+    }
+  },
+  {
+    "case": "pathname-mutated-after-zip-close",
+    "expectedAccept": false,
+    "canonical": {
+      "accepted": true,
+      "passed": false,
+      "receiptArchiveSHA256": "0d44ab5069232dc1efa1852ca66abe8bc598d26344be97816085b72b1e8901bf",
+      "boundUnverifiedBytes": true
+    },
+    "independent": {
+      "accepted": false,
+      "passed": true,
+      "error": "Rejected: Archive changed during verification"
+    }
+  }
+]

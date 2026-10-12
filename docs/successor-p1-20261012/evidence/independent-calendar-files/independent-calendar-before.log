@@ -1,0 +1,47 @@
+
+Running 1 test using 1 worker
+
+(node:467633) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 ../../tmp/capiro-p1-calendar-files-review/independent-calendar.spec.ts:5:5 › a matching earlier meeting receipt cannot discard an editable newer draft (4.3s)
+
+
+  1) ../../tmp/capiro-p1-calendar-files-review/independent-calendar.spec.ts:5:5 › a matching earlier meeting receipt cannot discard an editable newer draft 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator: getByLabel('Subject', { exact: true })
+    Expected: "Newer unsubmitted meeting draft"
+    Timeout: 1000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveValue" with timeout 1000ms
+      - waiting for getByLabel('Subject', { exact: true })
+
+
+      21 |    await expect(page.getByRole("button",{name:"Saving…"})).toHaveCount(0);
+      22 |    await writeFile(info.outputPath("draft-observation.json"),JSON.stringify({editable,writes,body,dialogs:await page.getByRole("dialog").count(),currentSubject:await subject.count()?await subject.inputValue():null},null,2));
+    > 23 |    await expect(subject).toHaveValue("Newer unsubmitted meeting draft",{timeout:1000});
+         |                          ^
+      24 |  } else {
+      25 |    await expect(page.getByRole("dialog")).toHaveCount(0);
+      26 |    expect(body.subject).toBe("Synthetic meeting");expect(writes).toBe(1);
+        at /tmp/capiro-p1-calendar-files-review/independent-calendar.spec.ts:23:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-calendar-files-review/independent-calendar-before-output/independent-calendar-a-mat-b7c0c-ard-an-editable-newer-draft/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-p1-calendar-files-review/independent-calendar-before-output/independent-calendar-a-mat-b7c0c-ard-an-editable-newer-draft/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-calendar-files-review/independent-calendar-before-output/independent-calendar-a-mat-b7c0c-ard-an-editable-newer-draft/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-p1-calendar-files-review/independent-calendar-before-output/independent-calendar-a-mat-b7c0c-ard-an-editable-newer-draft/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    ../../tmp/capiro-p1-calendar-files-review/independent-calendar.spec.ts:5:5 › a matching earlier meeting receipt cannot discard an editable newer draft 

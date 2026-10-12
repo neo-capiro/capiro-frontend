@@ -1,0 +1,2 @@
+import {defineConfig} from "/workspace/capiro-p1-calendar/node_modules/@playwright/test/index.mjs";
+export default defineConfig({testDir:"/tmp/capiro-p1-calendar-files-review",testMatch:"independent-calendar.spec.ts",outputDir:process.env.REVIEW_OUTPUT,workers:1,reporter:[["list"],["json",{outputFile:process.env.REVIEW_REPORT}]],use:{baseURL:"http://127.0.0.1:5193",viewport:{width:1440,height:1040},launchOptions:{executablePath:"/usr/bin/chromium",args:["--disable-dev-shm-usage"]},trace:"on",screenshot:"only-on-failure"},webServer:undefined});

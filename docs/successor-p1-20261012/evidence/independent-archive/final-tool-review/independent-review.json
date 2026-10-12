@@ -1,0 +1,75 @@
+{
+  "status": "ACCEPTED_FOR_DOCUMENTED_ZIP32_PROFILE",
+  "sourceCommitForFutureArchive": "49f6609c7277ce8701b0d38c3ba163860633e668",
+  "rootTree": "fb895410ba3be77003977d9d5fdf33f2a525c7c8",
+  "appSourceTree": "964c8c51b1449d303a9286cf902133d02c2e4301",
+  "bindings": {
+    "source_archive.py": "578d072953f898142392fa92437ab0ac207dadf8d093d6b88bfdcf7a02915882",
+    "zip_layout.py": "1666011cab053d93ddd7feb2d95cb8283c069444cc507cc0f62d79f57fef1179",
+    "verify-source-zip.py": "dc4b13aaa05856c86bf989c58c54316bf4a0a6ff8a4b50bb0953672ccd566ee2",
+    "README.md": "d2c4f687637ff716e4a91f85f02ab49db44b6bbf138b0e3a8e6148ad52672a4b"
+  },
+  "controls": {
+    "supportedBaseline": {
+      "passed": 25,
+      "total": 25
+    },
+    "zip64SafeUnsupported": [
+      "valid-local-zip64",
+      "valid-zip64-data-descriptor",
+      "valid-zip64-directory"
+    ],
+    "extraFieldControls": {
+      "passed": 39,
+      "total": 39
+    },
+    "portablePathAndRace": {
+      "passed": 51,
+      "total": 51
+    },
+    "independentVerifierBaseline": {
+      "passed": 28,
+      "total": 28
+    }
+  },
+  "rawResultInterpretation": "adversarial-results.json retains generic expectedAccept=true for three valid ZIP64 archives; canonical passed=false on those rows is an intentional unsupported-format result, not a remaining supported-profile defect. Independent broader ZIP64 verifier accepts them.",
+  "confirmedFixedFindings": [
+    "Conflicting file DOS directory attribute",
+    "Non-Unix creator with executable Unix mode bits",
+    "Unindexed ZIP prefix",
+    "Unindexed ZIP trailer",
+    "Hash reopening/rebinding of changed archive pathname",
+    "Local-only Unicode Path extra metadata conflict",
+    "Stale buffered reads during same-size mutation when stat checks are uninformative"
+  ],
+  "sameLengthRaceLimit": "Metadata checks were deliberately mocked constant and mtime restored to isolate content guard; this is not a demonstrated unmocked Linux bypass. Final unbuffered verifier rejects. Git source remains unchanged.",
+  "originalArchiveControl": {
+    "archiveBytes": 451977924,
+    "archiveSHA256": "252ccdf0d91d94a6b53e4a9d905534f2b4e325ef231481774154daa96bfacbf5",
+    "cloudActions": [],
+    "commit": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+    "independentManifestSHA256": "09839411f477703f570b698e94a6da093a1d6be068461510c55c185e8f9de856",
+    "marker": "source-commit.txt",
+    "metadataPolicy": "ZIP timestamps/comments/compression may vary; source paths, Git modes and all payload bytes must match",
+    "trackedBlobs": 4155,
+    "trackedPayloadBytes": 527192337,
+    "tree": "16c0b62901859aa4ff3f2ea01856aa13e13c65cd",
+    "verified": true,
+    "zipMembers": 4940
+  },
+  "architecture": {
+    "disposition": "APPROVED",
+    "signals": [],
+    "rationale": "Source binding, Git blob verification, member verification and ZIP physical-layout checks have coherent separate functions/modules. AST inspection found no function above 80 nonblank lines and no file above 400. No new dependency, cycle or application architecture change."
+  },
+  "nativeWindowsExecuted": false,
+  "successorArchiveVerified": false,
+  "applicationQualification": "PARENT_OWNED_NOT_ESTABLISHED_BY_THIS_REVIEW",
+  "cloudActions": [],
+  "remainingBlockers": [],
+  "remainingRequiredSteps": [
+    "Independently verify the newly created successor ZIP against exact 49f6609 commit and compare canonical per-member manifest before binding new archive SHA.",
+    "Keep source qualification and build/deployment admission separate.",
+    "Recheck immutable archive identity at transfer/build boundary."
+  ]
+}

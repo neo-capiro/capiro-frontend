@@ -1,0 +1,63 @@
+{
+  "base": "c305af13dd93cad2af18352b8a8b449e133a0fc2",
+  "worktree": "/workspace/capiro-calendar-native-status",
+  "branch": "repair/capiro-calendar-native-status-20261012",
+  "backendPin": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+  "productionFiles": {
+    "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx": "314c3d1c5fedb548d77b926aa2664deb4d82b11468b3d39546d8c19719c94809",
+    "apps/web/src/features/portfolio/calendar/MeetingForm.tsx": "4e330177ee89a55f5f2995b363eabdbde3ad7bebcc6db688473c7e956242a2dc",
+    "apps/web/src/features/portfolio/calendar/artifacts/contracts.ts": "8d272d709972ecac8e2134ad24099f6321e316f565bb28e7b7eb5b8c8a71adf3"
+  },
+  "baselineEvidence": {
+    "nativeGeneratedBrowser": "/tmp/capiro-debrief-fixture-review/actual-native-results.json",
+    "portalUnchangedAssertion": "/tmp/capiro-debrief-fixture-review/portal-results.json",
+    "ownerNativeParser": "/tmp/capiro-calendar-native-status-evidence/native-unit-before.log",
+    "clearClient": "/tmp/capiro-calendar-native-status-evidence/clear-before-results.json",
+    "independentParser": "/tmp/capiro-calendar-correction-independent/parser-before-results.json"
+  },
+  "commitChain": [
+    "01cba25e85f1e82c731e65191c98b1de4e9d48de",
+    "dee19b106d87859b812bfccc10ef9387f90ad4be"
+  ],
+  "finalCommit": "dee19b106d87859b812bfccc10ef9387f90ad4be",
+  "tree": "bc279628fc582a0b730a6375b5c31e607be4e729",
+  "ownerChecks": {
+    "parser": {
+      "passed": 59,
+      "failed": 0,
+      "note": "Native receipt contracts unchanged by final caption-only follow-up"
+    },
+    "affectedBrowserBeforeCaption": {
+      "passed": 62,
+      "failed": 0,
+      "commit": "01cba25e85f1e82c731e65191c98b1de4e9d48de"
+    },
+    "finalCaptionAndArtifactBrowser": {
+      "passed": 17,
+      "failed": 0,
+      "commit": "dee19b106d87859b812bfccc10ef9387f90ad4be"
+    },
+    "typecheck": "passed",
+    "changedFileLint": "passed",
+    "format": "passed",
+    "architecture": {
+      "dependencyErrors": 0,
+      "changedReviewFingerprints": 3,
+      "rootOwnsRegistry": true
+    }
+  },
+  "independentChecks": {
+    "reviewer": "/root/objectives_work_intel_review",
+    "evidence": "/tmp/capiro-calendar-correction-independent",
+    "nativeParser": {
+      "passed": 39,
+      "failed": 0
+    },
+    "finalBrowser": {
+      "passed": 8,
+      "failed": 0
+    },
+    "architectureReview": "accepted, root registry integration pending",
+    "testModuleReview": "accepted cohesive owner at407nonblank lines"
+  }
+}

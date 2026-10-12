@@ -1,0 +1,87 @@
+
+Running 2 tests using 1 worker
+
+(node:545738) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 ../tmp/capiro-calendar-correction-independent/native-browser.spec.ts:6:53 › native debriefs creation receipt completes exactly once with correct lifecycle (6.5s)
+(node:545881) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 ../tmp/capiro-calendar-correction-independent/native-browser.spec.ts:24:53 › native idempotent debriefs share accepts deleted original sharer without invented list stamps (6.3s)
+
+
+  1) ../tmp/capiro-calendar-correction-independent/native-browser.spec.ts:6:53 › native debriefs creation receipt completes exactly once with correct lifecycle 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('Sharing status unavailable', { exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByText('Sharing status unavailable', { exact: true })
+
+
+       8 |  await page.route('**/core/engagement/capabilities',route=>json(route,{meetingPrepComprehensiveEnabled:false,runtime:{externalActionsEnabled:false}}));
+       9 |  await page.route('**/core/engagement/meetings/**',route=>{const url=new URL(route.request().url());if(url.pathname.endsWith(`/${kind}`)){if(route.request().method()==='POST'){writes++;saved=true;expect(route.request().postDataJSON()).toEqual({body:'Independent native lifecycle draft',confidential:false});return json(route,metadata);}const {sharedAt,sharedByUserId,...debriefListMetadata}=metadata;return json(route,saved?[{...(kind==='debriefs'?debriefListMetadata:metadata),body:'Independent native lifecycle draft',restricted:false}]:[]);}return json(route,artifactMeeting);});
+    > 10 |  await page.goto(`/calendar-artifact-receipts.html?kind=${kind}`);await page.getByRole('button',{name:`Add ${singular}`,exact:true}).click();await page.getByLabel('Content',{exact:true}).fill('Independent native lifecycle draft');await page.getByRole('button',{name:`Save ${singular}`,exact:true}).click();await expect(page.getByRole('dialog')).toHaveCount(0);await expect(page.getByText('Independent native lifecycle draft',{exact:true})).toBeVisible();await expect(page.getByText(/may have completed/)).toHaveCount(0);expect(writes).toBe(1);if(kind==='debriefs'){await expect(page.getByText('Sharing status unavailable',{exact:true})).toBeVisible();await expect(page.getByText('Private',{exact:true})).toHaveCount(0);}else await expect(page.getByText('Private',{exact:true})).toBeVisible();expect(unexpected).toEqual([]);await page.screenshot({path:info.outputPath(`${kind}-native-save.png`)});
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ^
+      11 | });
+      12 | test('portal generation entries remain visible disabled and dispatch no action',async({page},info)=>{
+      13 |  const unexpected=await setup(page);let writes=0;page.on('request',r=>{if(r.url().includes('/api/backend/')&&r.method()!=='GET')writes++;});await page.route('**/core/me',route=>json(route,{user:{id:'user-test',email:null},tenant:{id:'tenant-test',name:'Synthetic'},role:'client_portal_user'}));await page.route('**/core/engagement/capabilities',route=>json(route,{meetingPrepComprehensiveEnabled:false,runtime:{externalActionsEnabled:true}}));await page.route('**/core/engagement/meetings/**',route=>json(route,new URL(route.request().url()).pathname.endsWith('/debriefs')?[]:artifactMeeting));await page.goto('/calendar-artifact-receipts.html?kind=debriefs');
+        at /tmp/capiro-calendar-correction-independent/native-browser.spec.ts:10:638
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../tmp/capiro-calendar-correction-independent/caption-before-artifacts/native-browser-native-debr-b5b00-once-with-correct-lifecycle/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../tmp/capiro-calendar-correction-independent/caption-before-artifacts/native-browser-native-debr-b5b00-once-with-correct-lifecycle/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../tmp/capiro-calendar-correction-independent/caption-before-artifacts/native-browser-native-debr-b5b00-once-with-correct-lifecycle/trace.zip
+    Usage:
+
+        npx playwright show-trace ../tmp/capiro-calendar-correction-independent/caption-before-artifacts/native-browser-native-debr-b5b00-once-with-correct-lifecycle/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) ../tmp/capiro-calendar-correction-independent/native-browser.spec.ts:24:53 › native idempotent debriefs share accepts deleted original sharer without invented list stamps 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('Sharing status unavailable', { exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByText('Sharing status unavailable', { exact: true })
+
+
+      25 |  const unexpected=await setup(page);const singular=kind==='notes'?'note':'debrief';let writes=0,saved=false;const approved={id:'independent-shared-artifact',meetingId:artifactMeeting.id,clientId:'client-one',authorUserId:'user-test',author:{id:'user-test',email:'test@example.test',firstName:null,lastName:null},confidential:false,accessLevel:kind==='notes'?'tenant_admins_and_author':'tenant_members',keyVersion:null,status:'approved',sharedAt:null,sharedByUserId:null,createdAt:date,updatedAt:date,...(kind==='notes'?{approvedAt:date,approvedByUserId:'user-test'}:{})};const shared={...approved,sharedAt:date,sharedByUserId:null};
+      26 |  await page.route('**/core/engagement/capabilities',route=>json(route,{meetingPrepComprehensiveEnabled:false,runtime:{externalActionsEnabled:false}}));await page.route('**/core/engagement/meetings/**',route=>{const url=new URL(route.request().url());if(url.pathname.endsWith('/artifacts/share')){writes++;saved=true;expect(route.request().postDataJSON()).toEqual({artifacts:[{type:singular,id:approved.id}]});return json(route,{...artifactMeeting,visibility:'shared',[kind]:[shared]});}if(url.pathname.endsWith(`/${kind}`)){const {sharedAt,sharedByUserId,...debriefListMetadata}=approved;return json(route,[{...(kind==='debriefs'?debriefListMetadata:saved?shared:approved),body:'Previously approved independent content',restricted:false}]);}return json(route,{...artifactMeeting,visibility:'shared',[kind]:[shared]});});
+    > 27 |  await page.goto(`/calendar-artifact-receipts.html?kind=${kind}`);await page.getByRole('button',{name:'Share',exact:true}).click();await page.getByRole('dialog',{name:`Share ${singular}`,exact:true}).getByRole('button',{name:`Share ${singular}`,exact:true}).click();await expect(page.getByRole('dialog')).toHaveCount(0);await expect(page.getByText(/may have completed/)).toHaveCount(0);expect(writes).toBe(1);if(kind==='notes')await expect(page.getByRole('button',{name:'Unshare',exact:true})).toBeVisible();else{await expect(page.getByText('Sharing status unavailable',{exact:true})).toBeVisible();await expect(page.getByText('Private',{exact:true})).toHaveCount(0);await expect(page.getByRole('button',{name:'Unshare',exact:true})).toHaveCount(0);await expect(page.getByRole('button',{name:'Share',exact:true})).toBeVisible();}expect(unexpected).toEqual([]);await page.screenshot({path:info.outputPath(`${kind}-null-original-sharer.png`)});
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ^
+      28 | });
+      29 |
+        at /tmp/capiro-calendar-correction-independent/native-browser.spec.ts:27:586
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../tmp/capiro-calendar-correction-independent/caption-before-artifacts/native-browser-native-idem-de5d4-ithout-invented-list-stamps/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../tmp/capiro-calendar-correction-independent/caption-before-artifacts/native-browser-native-idem-de5d4-ithout-invented-list-stamps/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../tmp/capiro-calendar-correction-independent/caption-before-artifacts/native-browser-native-idem-de5d4-ithout-invented-list-stamps/trace.zip
+    Usage:
+
+        npx playwright show-trace ../tmp/capiro-calendar-correction-independent/caption-before-artifacts/native-browser-native-idem-de5d4-ithout-invented-list-stamps/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    ../tmp/capiro-calendar-correction-independent/native-browser.spec.ts:6:53 › native debriefs creation receipt completes exactly once with correct lifecycle 
+    ../tmp/capiro-calendar-correction-independent/native-browser.spec.ts:24:53 › native idempotent debriefs share accepts deleted original sharer without invented list stamps 

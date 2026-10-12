@@ -1,0 +1,606 @@
+diff --git a/apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx b/apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx
+index ec87e23..29fcea2 100644
+--- a/apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx
++++ b/apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx
+@@ -99,7 +99,9 @@ function ArtifactEditor({
+             : `Add ${singular}`}
+         </button>
+       </div>
+-      {kind === "debriefs" && !blocked && (
++      {/* Generation owns role/runtime disabled states; active or uncertain artifact
++          writes suppress new draft entry points until that attempt is resolved. */}
++      {kind === "debriefs" && !mutation.isPending && !mutation.uncertain && (
+         <DebriefGeneration
+           meeting={meeting}
+           onDraft={(body) =>
+@@ -119,9 +121,11 @@ function ArtifactEditor({
+             <small>
+               {item.confidential
+                 ? "Confidential"
+-                : item.sharedAt
+-                  ? "Shared with client team"
+-                  : "Private"}
++                : item.sharedAt === undefined
++                  ? "Sharing status unavailable"
++                  : item.sharedAt
++                    ? "Shared with client team"
++                    : "Private"}
+             </small>
+           </div>
+           {item.restricted ? (
+diff --git a/apps/web/src/features/portfolio/calendar/MeetingForm.tsx b/apps/web/src/features/portfolio/calendar/MeetingForm.tsx
+index ddd7826..855f5a9 100644
+--- a/apps/web/src/features/portfolio/calendar/MeetingForm.tsx
++++ b/apps/web/src/features/portfolio/calendar/MeetingForm.tsx
+@@ -78,7 +78,7 @@ export function MeetingForm({
+         description: String(form.get("description") ?? ""),
+         startsAt,
+         endsAt,
+-        ...(scope ? { clientId: scope } : {}),
++        ...(scope ? { clientId: scope } : meeting ? { clientId: null } : {}),
+         location,
+       });
+     } catch {
+diff --git a/apps/web/src/features/portfolio/calendar/artifacts/contracts.ts b/apps/web/src/features/portfolio/calendar/artifacts/contracts.ts
+index 412711c..31dbcbb 100644
+--- a/apps/web/src/features/portfolio/calendar/artifacts/contracts.ts
++++ b/apps/web/src/features/portfolio/calendar/artifacts/contracts.ts
+@@ -41,7 +41,10 @@ export function artifactReceiptSchema(
+     return selected.refine(
+       (row) =>
+         row.confidential === change.confidential &&
+-        row.status === (change.id ? "edited" : "draft") &&
++        row.status ===
++          (change.id ? "edited" : kind === "notes" ? "draft" : "generated") &&
++        (kind === "debriefs" ||
++          (row.approvedAt === null && row.approvedByUserId === null)) &&
+         (Boolean(change.id) || row.authorUserId === actor.userId) &&
+         row.sharedAt === null &&
+         row.sharedByUserId === null,
+@@ -56,7 +59,8 @@ export function artifactReceiptSchema(
+       "The receipt does not confirm this approval.",
+     );
+   // Share/unshare return a decorated meeting. Other artifacts may remain shared,
+-  // and an idempotent share preserves the original sharer's attribution.
++  // and an idempotent share preserves the original sharer's attribution,
++  // which is nullable after that user is deleted.
+   return meetingSchema
+     .and(z.object({ [kind]: z.array(metadataSchema) }))
+     .refine((row) => {
+@@ -74,7 +78,6 @@ export function artifactReceiptSchema(
+               artifact.status === "approved" &&
+               !artifact.confidential &&
+               artifact.sharedAt &&
+-              artifact.sharedByUserId &&
+               row.visibility === "shared",
+             )
+           : artifact.sharedAt === null && artifact.sharedByUserId === null)
+diff --git a/apps/web/tests/browser/calendar-artifact-receipts.spec.ts b/apps/web/tests/browser/calendar-artifact-receipts.spec.ts
+index 9dbe277..b6ca81e 100644
+--- a/apps/web/tests/browser/calendar-artifact-receipts.spec.ts
++++ b/apps/web/tests/browser/calendar-artifact-receipts.spec.ts
+@@ -29,6 +29,13 @@ const metadata = {
+   createdAt: "2026-10-10T15:00:00Z",
+   updatedAt: "2026-10-10T15:00:00Z",
+ };
++function createdMetadata(kind: string) {
++  return {
++    ...metadata,
++    status: kind === "notes" ? "draft" : "generated",
++    ...(kind === "notes" ? { approvedAt: null, approvedByUserId: null } : {}),
++  };
++}
+ function held() {
+   let release!: () => void;
+   const promise = new Promise<void>((resolve) => {
+@@ -41,7 +48,7 @@ async function setup(page: Page, kind: string) {
+   const state = {
+     writes: 0,
+     requests: [] as { path: string; method: string; body: unknown }[],
+-    receipt: metadata as unknown,
++    receipt: createdMetadata(kind) as unknown,
+     status: 200,
+     hold: undefined as Promise<void> | undefined,
+     readHold: undefined as Promise<void> | undefined,
+@@ -112,6 +119,10 @@ for (const kind of ["notes", "debriefs"]) {
+       page.getByRole("button", { name: `Save ${singular}` }),
+     ).toBeDisabled();
+     await expect(page.getByText(/may have completed/).first()).toBeVisible();
++    if (kind === "debriefs")
++      await expect(
++        page.getByRole("button", { name: "Type Notes Manually", exact: true }),
++      ).toHaveCount(0);
+     await page.keyboard.press("Escape");
+     await page.getByRole("button", { name: `Refresh saved ${kind}` }).click();
+     await page.getByRole("button", { name: "Toggle artifacts" }).click();
+@@ -166,7 +177,7 @@ for (const kind of ["notes", "debriefs"]) {
+       "Retain this synthetic draft",
+     );
+     state.status = 200;
+-    state.receipt = metadata;
++    state.receipt = createdMetadata(kind);
+     await page.getByRole("button", { name: `Save ${singular}` }).click();
+     await expect(page.getByRole("dialog")).toHaveCount(0);
+     expect(state.writes).toBe(2);
+@@ -228,12 +239,12 @@ for (const kind of ["notes", "debriefs"]) {
+     ).toBeDisabled();
+     expect(state.writes).toBe(1);
+   });
+-  test(`${kind}: native edit, approval, share and unshare receipts succeed`, async ({
++  test(`${kind}: action-specific edit, approval, share and unshare receipts succeed`, async ({
+     page,
+   }) => {
+     const state = await setup(page, kind);
+     const item = {
+-      ...metadata,
++      ...createdMetadata(kind),
+       body: "Saved synthetic content",
+       restricted: false,
+     };
+@@ -241,11 +252,11 @@ for (const kind of ["notes", "debriefs"]) {
+     await page.reload();
+     await page.getByRole("button", { name: "Edit", exact: true }).click();
+     await page.getByLabel("Content", { exact: true }).fill("Changed content");
+-    state.receipt = { ...metadata, status: "edited" };
++    state.receipt = { ...createdMetadata(kind), status: "edited" };
+     await page.getByRole("button", { name: `Save ${singular}` }).click();
+     await expect(page.getByRole("dialog")).toHaveCount(0);
+     state.receipt = {
+-      ...metadata,
++      ...createdMetadata(kind),
+       status: "approved",
+       ...(kind === "notes"
+         ? { approvedAt: "2026-10-10T15:00:00Z", approvedByUserId: "user-test" }
+@@ -257,12 +268,14 @@ for (const kind of ["notes", "debriefs"]) {
+       page.getByRole("button", { name: "Share", exact: true }),
+     ).toBeVisible();
+     const shared = {
+-      ...metadata,
++      ...createdMetadata(kind),
+       status: "approved",
+       sharedAt: "2026-10-10T15:00:00Z",
+       sharedByUserId: "original-sharer",
+     };
+     state.receipt = { ...meeting, visibility: "shared", [kind]: [shared] };
++    // Synthetic presentation bridge: native debrief list responses currently omit
++    // sharing stamps. This controls mutation receipts, not that native read gap.
+     state.items = [{ ...item, ...shared }];
+     await page.getByRole("button", { name: "Share", exact: true }).click();
+     await page
+@@ -273,7 +286,7 @@ for (const kind of ["notes", "debriefs"]) {
+     state.receipt = {
+       ...meeting,
+       visibility: "shared",
+-      [kind]: [{ ...metadata, status: "approved" }],
++      [kind]: [{ ...createdMetadata(kind), status: "approved" }],
+     };
+     state.items = [{ ...item, status: "approved" }];
+     await page.getByRole("button", { name: "Unshare", exact: true }).click();
+@@ -318,6 +331,14 @@ for (const kind of ["notes", "debriefs"]) {
+     await draft(page, singular);
+     await page.getByRole("button", { name: `Save ${singular}` }).click();
+     await expect.poll(() => state.writes).toBe(1);
++    if (kind === "debriefs")
++      await expect(
++        page.getByRole("button", {
++          name: "Type Notes Manually",
++          exact: true,
++          includeHidden: true,
++        }),
++      ).toHaveCount(0);
+     const content = page.getByLabel("Content", { exact: true });
+     await content.press("End");
+     await content.pressSequentially(" later draft");
+@@ -333,3 +354,58 @@ for (const kind of ["notes", "debriefs"]) {
+     });
+   });
+ }
++
++test("artifact captions distinguish omitted sharing metadata from explicit privacy", async ({
++  page,
++}) => {
++  const state = await setup(page, "debriefs");
++  const cases = [
++    {
++      id: "unknown",
++      sharedAt: undefined,
++      confidential: false,
++      caption: "Sharing status unavailable",
++    },
++    { id: "private", sharedAt: null, confidential: false, caption: "Private" },
++    {
++      id: "shared",
++      sharedAt: "2026-10-10T15:00:00Z",
++      confidential: false,
++      caption: "Shared with client team",
++    },
++    {
++      id: "confidential",
++      sharedAt: undefined,
++      confidential: true,
++      caption: "Confidential",
++    },
++  ];
++  state.items = cases.map(({ id, sharedAt, confidential }) => ({
++    ...createdMetadata("debriefs"),
++    id,
++    sharedAt,
++    sharedByUserId: undefined,
++    confidential,
++    status: "approved",
++    body: `Synthetic ${id} debrief`,
++    restricted: false,
++  }));
++  // JSON omits undefined stamps just as native GET /debriefs does. The other
++  // rows exercise explicit values used by artifact reads that supply stamps.
++  await page.reload();
++  for (const { id, caption } of cases) {
++    const artifact = page
++      .getByRole("article")
++      .filter({ hasText: `Synthetic ${id} debrief` });
++    await expect(artifact.getByText(caption, { exact: true })).toBeVisible();
++    if (id === "unknown") {
++      await expect(artifact.getByText("Private", { exact: true })).toHaveCount(
++        0,
++      );
++      await expect(
++        artifact.getByRole("button", { name: "Unshare", exact: true }),
++      ).toHaveCount(0);
++    }
++  }
++  expect(state.writes).toBe(0);
++});
+diff --git a/apps/web/tests/browser/calendar-client-clear.spec.ts b/apps/web/tests/browser/calendar-client-clear.spec.ts
+new file mode 100644
+index 0000000..55b0a6f
+--- /dev/null
++++ b/apps/web/tests/browser/calendar-client-clear.spec.ts
+@@ -0,0 +1,65 @@
++import { test, expect } from "@playwright/test";
++import { installFixtures, json, clientId } from "./fixtures";
++const meeting = {
++  id: "meeting-one",
++  subject: "Synthetic meeting",
++  description: null,
++  location: "Old location",
++  startsAt: "2026-10-10T14:00:00Z",
++  endsAt: "2026-10-10T15:00:00Z",
++  status: "scheduled",
++  joinLink: null,
++  visibility: "private",
++  isVirtual: false,
++  meri: null,
++  client: { id: clientId, name: "Synthetic" },
++  attendees: [],
++  preps: [],
++};
++for (const stale of [false, true])
++  test(`existing meeting No client sends explicit null and ${stale ? "rejects old association" : "accepts native clear receipt"}`, async ({
++    page,
++  }) => {
++    await installFixtures(page);
++    const writes: Record<string, unknown>[] = [];
++    await page.route("**/core/engagement/meetings/meeting-one", (route) => {
++      const body = route.request().postDataJSON();
++      writes.push(body);
++      return json(route, {
++        ...meeting,
++        client: stale || body.clientId !== null ? meeting.client : null,
++      });
++    });
++    await page.goto("/calendar-meeting-receipts.html?mode=clear");
++    await page
++      .getByRole("combobox", { name: "Client", exact: true })
++      .selectOption("");
++    await page.getByRole("button", { name: "Save meeting" }).click();
++    await expect.poll(() => writes.length).toBe(1);
++    expect(writes[0]).toHaveProperty("clientId", null);
++    if (stale) {
++      await expect(page.getByRole("dialog")).toBeVisible();
++      await expect(page.getByText(/may have completed/)).toBeVisible();
++      await expect(
++        page.getByRole("button", { name: "Save meeting" }),
++      ).toBeDisabled();
++    } else await expect(page.getByRole("dialog")).toHaveCount(0);
++  });
++test("new unscoped meeting omits clientId and accepts backend association", async ({
++  page,
++}) => {
++  await installFixtures(page);
++  const writes: Record<string, unknown>[] = [];
++  await page.route("**/core/engagement/meetings", (route) => {
++    writes.push(route.request().postDataJSON());
++    return json(route, { ...meeting, location: null });
++  });
++  await page.goto("/calendar-meeting-receipts.html?mode=create");
++  await page.getByLabel("Subject", { exact: true }).fill(meeting.subject);
++  await page.getByLabel("Starts", { exact: true }).fill("2026-10-10T14:00");
++  await page.getByLabel("Ends", { exact: true }).fill("2026-10-10T15:00");
++  await page.getByRole("button", { name: "Save meeting" }).click();
++  await expect(page.getByRole("dialog")).toHaveCount(0);
++  expect(writes).toHaveLength(1);
++  expect(writes[0]).not.toHaveProperty("clientId");
++});
+diff --git a/apps/web/tests/browser/calendar-meeting-receipts-harness.tsx b/apps/web/tests/browser/calendar-meeting-receipts-harness.tsx
+index ce26a8c..be6b7e5 100644
+--- a/apps/web/tests/browser/calendar-meeting-receipts-harness.tsx
++++ b/apps/web/tests/browser/calendar-meeting-receipts-harness.tsx
+@@ -6,6 +6,7 @@ import type { Meeting } from "@/features/portfolio/calendar/contracts";
+ import "@/app/globals.css";
+ import "@/shared/portfolio/styles.css";
+ import "./test-font.css";
++import { clientId } from "./fixtures";
+ const meeting: Meeting = {
+   id: "meeting-one",
+   subject: "Synthetic meeting",
+@@ -24,15 +25,24 @@ const meeting: Meeting = {
+ };
+ function Harness() {
+   const [open, setOpen] = useState(true);
++  const mode = new URLSearchParams(location.search).get("mode");
+   return (
+     <main>
+       <h1>Synthetic meeting receipt review</h1>
+       <MeetingForm
+         open={open}
+         onOpenChange={setOpen}
+-        clientId="client-one"
++        clientId={
++          mode === "clear" || mode === "create" ? undefined : "client-one"
++        }
+         zone="UTC"
+-        meeting={meeting}
++        meeting={
++          mode === "create"
++            ? undefined
++            : mode === "clear"
++              ? { ...meeting, client: { id: clientId, name: "Synthetic" } }
++              : meeting
++        }
+       />
+     </main>
+   );
+diff --git a/apps/web/tests/browser/manual-debrief.spec.ts b/apps/web/tests/browser/manual-debrief.spec.ts
+index c9d86f3..162475c 100644
+--- a/apps/web/tests/browser/manual-debrief.spec.ts
++++ b/apps/web/tests/browser/manual-debrief.spec.ts
+@@ -59,7 +59,18 @@ async function setup(page: Page, enabled = true) {
+           body: "Synthetic reviewed recap\n\nAction items\n• Review evidence\n\nNotes\nRetain the written qualification.",
+           confidential: false,
+         });
+-        return json(route, { id: "synthetic-debrief" });
++        return json(route, {
++          id: "synthetic-debrief",
++          meetingId: meetingId,
++          clientId: clientId,
++          authorUserId: "user-test",
++          confidential: false,
++          status: "generated",
++          sharedAt: null,
++          sharedByUserId: null,
++          createdAt: "2026-10-11T16:00:00Z",
++          updatedAt: "2026-10-11T16:00:00Z",
++        });
+       }
+       return json(route, []);
+     }
+diff --git a/apps/web/tests/browser/meeting-library.spec.ts b/apps/web/tests/browser/meeting-library.spec.ts
+index 0f61f2f..dd169df 100644
+--- a/apps/web/tests/browser/meeting-library.spec.ts
++++ b/apps/web/tests/browser/meeting-library.spec.ts
+@@ -339,7 +339,18 @@ test("Transcript shares canonical upload, retries extraction without duplicate b
+         expect(route.request().postDataJSON()).toMatchObject({
+           confidential: false,
+         });
+-        return json(route, { id: "debrief-synthetic" });
++        return json(route, {
++          id: "debrief-synthetic",
++          meetingId: meetingId,
++          clientId: clientId,
++          authorUserId: "user-test",
++          confidential: false,
++          status: "generated",
++          sharedAt: null,
++          sharedByUserId: null,
++          createdAt: "2026-10-15T16:00:00Z",
++          updatedAt: "2026-10-15T16:00:00Z",
++        });
+       }
+       return json(
+         route,
+diff --git a/apps/web/tests/browser/meeting-review.spec.ts b/apps/web/tests/browser/meeting-review.spec.ts
+index f89f3a3..d71fb91 100644
+--- a/apps/web/tests/browser/meeting-review.spec.ts
++++ b/apps/web/tests/browser/meeting-review.spec.ts
+@@ -184,7 +184,7 @@ async function setup(
+           clientId,
+           authorUserId: "user-test",
+           confidential: false,
+-          status: "draft",
++          status: "generated",
+           sharedAt: null,
+           sharedByUserId: null,
+           createdAt: "2026-10-11T12:00:00Z",
+diff --git a/apps/web/tests/browser/voice-integration.spec.ts b/apps/web/tests/browser/voice-integration.spec.ts
+index a4b826d..bc1d393 100644
+--- a/apps/web/tests/browser/voice-integration.spec.ts
++++ b/apps/web/tests/browser/voice-integration.spec.ts
+@@ -28,7 +28,18 @@ test("Calendar voice source explicitly generates a reviewed draft and saves sepa
+     if (path.endsWith("/debriefs")) {
+       if (route.request().method() === "POST") {
+         saved.push(route.request().postDataJSON());
+-        return json(route, { id: "synthetic-voice-debrief" });
++        return json(route, {
++          id: "synthetic-voice-debrief",
++          meetingId: voiceMeetingId,
++          clientId: voiceMeeting.client!.id,
++          authorUserId: "user-test",
++          confidential: false,
++          status: "generated",
++          sharedAt: null,
++          sharedByUserId: null,
++          createdAt: "2026-10-11T16:00:00Z",
++          updatedAt: "2026-10-11T16:00:00Z",
++        });
+       }
+       return json(route, []);
+     }
+diff --git a/apps/web/tests/calendar-artifact-receipts.test.ts b/apps/web/tests/calendar-artifact-receipts.test.ts
+index d1056e7..5c6d106 100644
+--- a/apps/web/tests/calendar-artifact-receipts.test.ts
++++ b/apps/web/tests/calendar-artifact-receipts.test.ts
+@@ -24,7 +24,7 @@ const meeting = {
+   attendees: [],
+   preps: [],
+ };
+-const metadata = {
++const baseMetadata = {
+   id: "artifact-one",
+   meetingId: "meeting-one",
+   clientId: "client-one",
+@@ -42,6 +42,11 @@ const save: ArtifactChange = {
+   confidential: false,
+ };
+ for (const kind of ["notes", "debriefs"] as ArtifactKind[]) {
++  const metadata = {
++    ...baseMetadata,
++    status: kind === "notes" ? "draft" : "generated",
++    ...(kind === "notes" ? { approvedAt: null, approvedByUserId: null } : {}),
++  };
+   describe(kind, () => {
+     it.each([
+       {},
+diff --git a/apps/web/tests/calendar-native-lifecycle.test.ts b/apps/web/tests/calendar-native-lifecycle.test.ts
+new file mode 100644
+index 0000000..ed31ff5
+--- /dev/null
++++ b/apps/web/tests/calendar-native-lifecycle.test.ts
+@@ -0,0 +1,128 @@
++import { describe, expect, it } from "vitest";
++import {
++  artifactReceiptSchema,
++  type ArtifactKind,
++} from "../src/features/portfolio/calendar/artifacts/contracts";
++
++const actor = { userId: "author", tenantId: "tenant" };
++const meeting = {
++  id: "meeting",
++  subject: "Synthetic",
++  description: null,
++  location: null,
++  startsAt: "2026-10-10T14:00:00Z",
++  endsAt: "2026-10-10T15:00:00Z",
++  status: "scheduled",
++  joinLink: null,
++  visibility: "shared" as const,
++  isVirtual: false,
++  meri: null,
++  client: { id: "client", name: "Synthetic" },
++  attendees: [],
++  preps: [],
++};
++const metadata = {
++  id: "artifact",
++  meetingId: meeting.id,
++  clientId: meeting.client.id,
++  authorUserId: actor.userId,
++  confidential: false,
++  sharedAt: null,
++  sharedByUserId: null,
++  createdAt: "2026-10-10T15:00:00Z",
++  updatedAt: "2026-10-10T15:00:00Z",
++};
++const save = {
++  action: "save" as const,
++  body: "Synthetic content",
++  confidential: false,
++};
++const clearedApproval = { approvedAt: null, approvedByUserId: null };
++describe("pinned native artifact lifecycle", () => {
++  for (const kind of ["notes", "debriefs"] as ArtifactKind[]) {
++    const receipt = {
++      ...metadata,
++      status: kind === "notes" ? "draft" : "generated",
++      ...(kind === "notes" ? clearedApproval : {}),
++    };
++    it(`${kind} accepts its real creation status and rejects the other artifact's status`, () => {
++      const schema = artifactReceiptSchema(meeting, kind, actor, save);
++      expect(schema.safeParse(receipt).success).toBe(true);
++      expect(
++        schema.safeParse({
++          ...receipt,
++          status: kind === "notes" ? "generated" : "draft",
++        }).success,
++      ).toBe(false);
++    });
++    it(`${kind} accepts a native idempotent share whose original sharer was deleted`, () => {
++      const artifact = {
++        ...receipt,
++        status: "approved",
++        sharedAt: metadata.updatedAt,
++        sharedByUserId: null,
++      };
++      const schema = artifactReceiptSchema(meeting, kind, actor, {
++        action: "share",
++        id: metadata.id,
++      });
++      expect(schema.safeParse({ ...meeting, [kind]: [artifact] }).success).toBe(
++        true,
++      );
++      for (const invalid of [
++        { id: "foreign" },
++        { meetingId: "foreign" },
++        { clientId: "foreign" },
++        { status: "edited" },
++        { confidential: true },
++        { sharedAt: null },
++      ])
++        expect(
++          schema.safeParse({
++            ...meeting,
++            [kind]: [{ ...artifact, ...invalid }],
++          }).success,
++        ).toBe(false);
++      expect(
++        schema.safeParse({
++          ...meeting,
++          visibility: "private",
++          [kind]: [artifact],
++        }).success,
++      ).toBe(false);
++    });
++  }
++  for (const editing of [false, true])
++    it(`note ${editing ? "edit" : "create"} requires cleared native approval stamps`, () => {
++      const schema = artifactReceiptSchema(meeting, "notes", actor, {
++        ...save,
++        ...(editing ? { id: metadata.id } : {}),
++      });
++      const receipt = {
++        ...metadata,
++        status: editing ? "edited" : "draft",
++        ...clearedApproval,
++      };
++      expect(schema.safeParse(receipt).success).toBe(true);
++      expect(
++        schema.safeParse({ ...receipt, approvedAt: metadata.updatedAt })
++          .success,
++      ).toBe(false);
++      expect(
++        schema.safeParse({ ...receipt, approvedByUserId: actor.userId })
++          .success,
++      ).toBe(false);
++      const { approvedAt, approvedByUserId, ...incomplete } = receipt;
++      void approvedAt;
++      void approvedByUserId;
++      expect(schema.safeParse(incomplete).success).toBe(false);
++    });
++  it("debrief edit accepts edited metadata without nonexistent approval stamps", () => {
++    expect(
++      artifactReceiptSchema(meeting, "debriefs", actor, {
++        ...save,
++        id: metadata.id,
++      }).safeParse({ ...metadata, status: "edited" }).success,
++    ).toBe(true);
++  });
++});

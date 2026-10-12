@@ -1,0 +1,242 @@
+
+Running 6 tests using 1 worker
+
+(node:445173) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:26:2 › notes: malformed receipt preserves draft and fences repeat creation (6.8s)
+(node:445365) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:34:2 › notes: uncertain creation cannot be repeated after remount (6.3s)
+(node:445697) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:45:2 › notes: synchronous submit guard sends one creation (1.6s)
+(node:445865) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  4 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:26:2 › debriefs: malformed receipt preserves draft and fences repeat creation (7.0s)
+(node:446150) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  5 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:34:2 › debriefs: uncertain creation cannot be repeated after remount (6.8s)
+(node:446417) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  6 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:45:2 › debriefs: synchronous submit guard sends one creation (1.9s)
+
+
+  1) apps/web/tests/browser/calendar-artifact-receipts.spec.ts:26:2 › notes: malformed receipt preserves draft and fences repeat creation 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator: getByLabel('Content', { exact: true })
+    Expected: "Retain this synthetic draft"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveValue" with timeout 5000ms
+      - waiting for getByLabel('Content', { exact: true })
+
+
+      27 |   const state = await setup(page, kind); state.receipt = {};
+      28 |   await draft(page,singular); await page.getByRole("button",{name:`Save ${singular}`}).click();
+    > 29 |   await expect(page.getByLabel("Content",{exact:true})).toHaveValue("Retain this synthetic draft");
+         |                                                         ^
+      30 |   await expect(page.getByRole("button",{name:`Save ${singular}`})).toBeDisabled();
+      31 |   await expect(page.getByText(/may have completed/).first()).toBeVisible();
+      32 |   expect(state.writes).toBe(1);
+        at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts:29:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-d5ef8--and-fences-repeat-creation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-d5ef8--and-fences-repeat-creation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-d5ef8--and-fences-repeat-creation/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-d5ef8--and-fences-repeat-creation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) apps/web/tests/browser/calendar-artifact-receipts.spec.ts:34:2 › notes: uncertain creation cannot be repeated after remount 
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator:  getByRole('button', { name: 'Save note' })
+    Expected: disabled
+    Received: enabled
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeDisabled" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Save note' })
+        14 × locator resolved to <button class="button primary">Save note</button>
+           - unexpected value "enabled"
+
+
+      35 |   const state = await setup(page, kind); state.status = 503;
+      36 |   await draft(page,singular); await page.getByRole("button",{name:`Save ${singular}`}).click();
+    > 37 |   await expect(page.getByRole("button",{name:`Save ${singular}`})).toBeDisabled();
+         |                                                                    ^
+      38 |   await page.keyboard.press("Escape");
+      39 |   await page.getByRole("button",{name:"Toggle artifacts"}).click();
+      40 |   await page.getByRole("button",{name:"Toggle artifacts"}).click();
+        at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts:37:68
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-626da-t-be-repeated-after-remount/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-626da-t-be-repeated-after-remount/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-626da-t-be-repeated-after-remount/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-626da-t-be-repeated-after-remount/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) apps/web/tests/browser/calendar-artifact-receipts.spec.ts:45:2 › notes: synchronous submit guard sends one creation 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: 2
+
+      49 |   await expect.poll(()=>state.writes).toBeGreaterThan(0);
+      50 |   pending.release(); await expect(page.getByRole("dialog")).toHaveCount(0);
+    > 51 |   expect(state.writes).toBe(1);
+         |                        ^
+      52 |  });
+      53 | }
+      54 |
+        at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts:51:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-6e033-it-guard-sends-one-creation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-6e033-it-guard-sends-one-creation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-6e033-it-guard-sends-one-creation/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-6e033-it-guard-sends-one-creation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) apps/web/tests/browser/calendar-artifact-receipts.spec.ts:26:2 › debriefs: malformed receipt preserves draft and fences repeat creation 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator: getByLabel('Content', { exact: true })
+    Expected: "Retain this synthetic draft"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveValue" with timeout 5000ms
+      - waiting for getByLabel('Content', { exact: true })
+
+
+      27 |   const state = await setup(page, kind); state.receipt = {};
+      28 |   await draft(page,singular); await page.getByRole("button",{name:`Save ${singular}`}).click();
+    > 29 |   await expect(page.getByLabel("Content",{exact:true})).toHaveValue("Retain this synthetic draft");
+         |                                                         ^
+      30 |   await expect(page.getByRole("button",{name:`Save ${singular}`})).toBeDisabled();
+      31 |   await expect(page.getByText(/may have completed/).first()).toBeVisible();
+      32 |   expect(state.writes).toBe(1);
+        at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts:29:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-5f66f--and-fences-repeat-creation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-5f66f--and-fences-repeat-creation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-5f66f--and-fences-repeat-creation/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-5f66f--and-fences-repeat-creation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) apps/web/tests/browser/calendar-artifact-receipts.spec.ts:34:2 › debriefs: uncertain creation cannot be repeated after remount 
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator:  getByRole('button', { name: 'Save debrief' })
+    Expected: disabled
+    Received: enabled
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeDisabled" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Save debrief' })
+        14 × locator resolved to <button class="button primary">Save debrief</button>
+           - unexpected value "enabled"
+
+
+      35 |   const state = await setup(page, kind); state.status = 503;
+      36 |   await draft(page,singular); await page.getByRole("button",{name:`Save ${singular}`}).click();
+    > 37 |   await expect(page.getByRole("button",{name:`Save ${singular}`})).toBeDisabled();
+         |                                                                    ^
+      38 |   await page.keyboard.press("Escape");
+      39 |   await page.getByRole("button",{name:"Toggle artifacts"}).click();
+      40 |   await page.getByRole("button",{name:"Toggle artifacts"}).click();
+        at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts:37:68
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-c7021-t-be-repeated-after-remount/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-c7021-t-be-repeated-after-remount/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-c7021-t-be-repeated-after-remount/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-c7021-t-be-repeated-after-remount/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) apps/web/tests/browser/calendar-artifact-receipts.spec.ts:45:2 › debriefs: synchronous submit guard sends one creation 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: 2
+
+      49 |   await expect.poll(()=>state.writes).toBeGreaterThan(0);
+      50 |   pending.release(); await expect(page.getByRole("dialog")).toHaveCount(0);
+    > 51 |   expect(state.writes).toBe(1);
+         |                        ^
+      52 |  });
+      53 | }
+      54 |
+        at /workspace/capiro-p1-calendar/apps/web/tests/browser/calendar-artifact-receipts.spec.ts:51:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-9c184-it-guard-sends-one-creation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-9c184-it-guard-sends-one-creation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-9c184-it-guard-sends-one-creation/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-p1-calendar-evidence/browser-output/calendar-artifact-receipts-9c184-it-guard-sends-one-creation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6 failed
+    apps/web/tests/browser/calendar-artifact-receipts.spec.ts:26:2 › notes: malformed receipt preserves draft and fences repeat creation 
+    apps/web/tests/browser/calendar-artifact-receipts.spec.ts:34:2 › notes: uncertain creation cannot be repeated after remount 
+    apps/web/tests/browser/calendar-artifact-receipts.spec.ts:45:2 › notes: synchronous submit guard sends one creation 
+    apps/web/tests/browser/calendar-artifact-receipts.spec.ts:26:2 › debriefs: malformed receipt preserves draft and fences repeat creation 
+    apps/web/tests/browser/calendar-artifact-receipts.spec.ts:34:2 › debriefs: uncertain creation cannot be repeated after remount 
+    apps/web/tests/browser/calendar-artifact-receipts.spec.ts:45:2 › debriefs: synchronous submit guard sends one creation 

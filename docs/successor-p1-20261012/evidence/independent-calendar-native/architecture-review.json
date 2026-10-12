@@ -1,0 +1,50 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+    "kind": "function",
+    "symbol": "ArtifactEditor",
+    "line": 42,
+    "nonblank": 248,
+    "fingerprint": "135be5833c25496b9f9202ff0d8743f7121644a1c559fbfa43f1b1a4ad8c99c8",
+    "provenance": "new",
+    "reviewStatus": "unreviewed",
+    "blocking": true,
+    "reviewedBy": "Independent Codex reviewer /root/objectives_work_intel_review",
+    "reviewedOn": "2026-10-12",
+    "decision": "accepted exact responsibility and fingerprint for this bounded correction",
+    "rationale": "ArtifactEditor owns a cohesive notes/debrief presentation and local interaction lifecycle: list cards, edit/share dialogs, preview selection and pending/uncertain draft feedback. It delegates native request/receipt semantics and lifetime fencing to artifacts/api, contracts and useArtifactMutation, generation eligibility/workflow to DebriefGeneration, and saved preview to its existing owner. The correction changes only whether the generation child is mounted: local pending/uncertain writes suppress new input, while role/runtime disabled presentation remains with the generation child. It adds no persistence, backend authority or independent domain. Keep this 248-line composition; extracting solely for line count would scatter one artifact interaction invariant. The added sharing caption distinguishes omitted metadata from explicit null without normalizing unknown state or inventing an endpoint or action.",
+    "rootAction": "Record exact changed size fingerprint in root-owned architecture registry; unrelated inherited signals remain unreviewed."
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+    "kind": "function",
+    "symbol": "ArtifactEditor > <anonymous> #5",
+    "line": 117,
+    "nonblank": 85,
+    "fingerprint": "484085a8fe816be1488594d9b8f225fe3eccb69ccc11867afda41001d28333b5",
+    "provenance": "new",
+    "reviewStatus": "unreviewed",
+    "blocking": true,
+    "reviewedBy": "Independent Codex reviewer /root/objectives_work_intel_review",
+    "reviewedOn": "2026-10-12",
+    "decision": "accepted exact responsibility and fingerprint for this bounded correction",
+    "rationale": "This 85-line map callback renders one saved artifact card and derives its preview/edit/approve/share/unshare controls from the same item and outer pending/allowed state. It delegates operations to the canonical mutation callback and owns no transport, receipt validation or backend rules. Its ordinal changes with the surrounding JSX; exact current fingerprint is reviewed. Separating this small cohesive card solely to silence the nested function threshold is unnecessary. The caption is this card's direct presentation responsibility: undefined means unavailable, null means private, timestamp means shared, and confidential remains explicit.",
+    "rootAction": "Record exact changed size fingerprint in root-owned architecture registry; unrelated inherited signals remain unreviewed."
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
+    "kind": "function",
+    "symbol": "MeetingForm",
+    "line": 11,
+    "nonblank": 181,
+    "fingerprint": "c15bf22c62730c9bfb3f3332b50b858f2d3b9a2b52c47c074f7153965a466543",
+    "provenance": "changed-since-transfer",
+    "reviewStatus": "unreviewed",
+    "blocking": true,
+    "reviewedBy": "Independent Codex reviewer /root/objectives_work_intel_review",
+    "reviewedOn": "2026-10-12",
+    "decision": "accepted exact responsibility and fingerprint for this bounded correction",
+    "rationale": "MeetingForm owns meeting input, civil-time conversion, client selection and submission composition. The only added branch serializes explicit clientId:null for an existing meeting when No client is selected; new unscoped creation preserves omission for native inference. Receipt checking, uncertainty, session/actor lifetime and transport remain useSaveMeeting/meeting-save owners. No backend association policy is replicated and no extra domain is introduced. Keeping this 181-line form together makes omission versus explicit-clear intent reviewable at the submission boundary.",
+    "rootAction": "Record exact changed size fingerprint in root-owned architecture registry; unrelated inherited signals remain unreviewed."
+  }
+]

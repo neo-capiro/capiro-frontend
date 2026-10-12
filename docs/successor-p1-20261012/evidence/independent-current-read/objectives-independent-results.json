@@ -1,0 +1,296 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-objective-current-read/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config=/tmp/capiro-p1-independent-review/current-read/objectives-independent.config.mts"
+    ],
+    "configFile": "/tmp/capiro-p1-independent-review/current-read/objectives-independent.config.mts",
+    "rootDir": "/tmp/capiro-p1-independent-review/current-read",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-p1-independent-review/current-read/objectives-independent-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-p1-independent-review/current-read",
+        "testIgnore": [],
+        "testMatch": [
+          "objectives-independent.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-p1-independent-review/current-read/objectives-independent-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "objectives-independent.spec.ts",
+      "file": "objectives-independent.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "actual Objectives route conceals an open editor after 403; held retry cannot revive its draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3970,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:29:29.259Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6e5a1bb220732cc866d3-144c69b7f6363c836679",
+          "file": "objectives-independent.spec.ts",
+          "line": 13,
+          "column": 35
+        },
+        {
+          "title": "actual Objectives route conceals an open editor after 503; held retry cannot revive its draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5359,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:29:33.540Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6e5a1bb220732cc866d3-51571fecb398f296b0b3",
+          "file": "objectives-independent.spec.ts",
+          "line": 13,
+          "column": 35
+        },
+        {
+          "title": "actual client Overview summary conceals cached records after403 and restores only a successful read",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3297,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected: visible\nError: strict mode violation: getByRole('alert') resolved to 2 elements:\n    1) <div role=\"alert\" class=\"status error\">…</div> aka locator('section').filter({ hasText: 'ObjectivesYou do not have' }).getByRole('alert')\n    2) <div role=\"alert\" class=\"status error\">…</div> aka getByLabel('District nexus').getByText('You do not have permission for this operation.Retry')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected: visible\nError: strict mode violation: getByRole('alert') resolved to 2 elements:\n    1) <div role=\"alert\" class=\"status error\">…</div> aka locator('section').filter({ hasText: 'ObjectivesYou do not have' }).getByRole('alert')\n    2) <div role=\"alert\" class=\"status error\">…</div> aka getByLabel('District nexus').getByText('You do not have permission for this operation.Retry')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\n    at /tmp/capiro-p1-independent-review/current-read/objectives-independent.spec.ts:21:229",
+                    "location": {
+                      "file": "/tmp/capiro-p1-independent-review/current-read/objectives-independent.spec.ts",
+                      "column": 229,
+                      "line": 21
+                    },
+                    "snippet": "  19 | });\n  20 | test('actual client Overview summary conceals cached records after403 and restores only a successful read',async({page},info)=>{\n> 21 |  const c=await setup(page);await page.goto(`/portfolio/${clientId}`);const old=page.getByRole('link',{name:/Test outcome/});await expect(old).toBeVisible();c.fail(403);await reconnect(page);await expect(page.getByRole('alert')).toBeVisible();await expect(old).toHaveCount(0);await expect(page.getByRole('link',{name:'New objective',exact:true})).toHaveCount(0);await expect(page.getByText('No objectives yet. Define the first outcome for this client.')).toHaveCount(0);\n     |                                                                                                                                                                                                                                     ^\n  22 |  const release=c.recover();await page.getByRole('alert').getByRole('button',{name:'Retry',exact:true}).click();await expect(old).toHaveCount(0);release();await expect(page.getByRole('link',{name:/Independently current outcome/})).toBeVisible();expect(c.writes).toEqual([]);expect(c.unexpected).toEqual([]);await page.screenshot({path:info.outputPath('objective-summary-current.png')});\n  23 | });\n  24 | test('actual client route replacement never renders another-client Objective receipt',async({page},info)=>{"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-p1-independent-review/current-read/objectives-independent.spec.ts",
+                        "column": 229,
+                        "line": 21
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected: visible\nError: strict mode violation: getByRole('alert') resolved to 2 elements:\n    1) <div role=\"alert\" class=\"status error\">…</div> aka locator('section').filter({ hasText: 'ObjectivesYou do not have' }).getByRole('alert')\n    2) <div role=\"alert\" class=\"status error\">…</div> aka getByLabel('District nexus').getByText('You do not have permission for this operation.Retry')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\n\n  19 | });\n  20 | test('actual client Overview summary conceals cached records after403 and restores only a successful read',async({page},info)=>{\n> 21 |  const c=await setup(page);await page.goto(`/portfolio/${clientId}`);const old=page.getByRole('link',{name:/Test outcome/});await expect(old).toBeVisible();c.fail(403);await reconnect(page);await expect(page.getByRole('alert')).toBeVisible();await expect(old).toHaveCount(0);await expect(page.getByRole('link',{name:'New objective',exact:true})).toHaveCount(0);await expect(page.getByText('No objectives yet. Define the first outcome for this client.')).toHaveCount(0);\n     |                                                                                                                                                                                                                                     ^\n  22 |  const release=c.recover();await page.getByRole('alert').getByRole('button',{name:'Retry',exact:true}).click();await expect(old).toHaveCount(0);release();await expect(page.getByRole('link',{name:/Independently current outcome/})).toBeVisible();expect(c.writes).toEqual([]);expect(c.unexpected).toEqual([]);await page.screenshot({path:info.outputPath('objective-summary-current.png')});\n  23 | });\n  24 | test('actual client route replacement never renders another-client Objective receipt',async({page},info)=>{\n    at /tmp/capiro-p1-independent-review/current-read/objectives-independent.spec.ts:21:229"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:29:38.911Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-p1-independent-review/current-read/objectives-independent-artifacts/objectives-independent-act-356a3-ores-only-a-successful-read/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-p1-independent-review/current-read/objectives-independent-artifacts/objectives-independent-act-356a3-ores-only-a-successful-read/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-independent-review/current-read/objectives-independent-artifacts/objectives-independent-act-356a3-ores-only-a-successful-read/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-p1-independent-review/current-read/objectives-independent.spec.ts",
+                    "column": 229,
+                    "line": 21
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "6e5a1bb220732cc866d3-6db0c27e86378a08da94",
+          "file": "objectives-independent.spec.ts",
+          "line": 20,
+          "column": 5
+        },
+        {
+          "title": "actual client route replacement never renders another-client Objective receipt",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4393,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:29:42.852Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6e5a1bb220732cc866d3-0021f69836820ffc1465",
+          "file": "objectives-independent.spec.ts",
+          "line": 24,
+          "column": 5
+        },
+        {
+          "title": "ordinary successful background read keeps the current Objective editor draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2670,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:29:47.501Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6e5a1bb220732cc866d3-94f1961f3c60c7e4ae0b",
+          "file": "objectives-independent.spec.ts",
+          "line": 30,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T15:29:28.598Z",
+    "duration": 21695.755,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

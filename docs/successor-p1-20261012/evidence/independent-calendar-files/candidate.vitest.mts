@@ -1,0 +1,2 @@
+import {defineConfig} from "vitest/config";
+export default defineConfig({cacheDir:"/tmp/capiro-p1-calendar-files-review/unit-cache",resolve:{alias:{"@":"/workspace/capiro-p1-files/apps/web/src"}},test:{include:["/tmp/capiro-p1-calendar-files-review/candidate-files-semantic.test.ts"],environment:"node"}});

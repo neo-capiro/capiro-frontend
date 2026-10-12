@@ -1,0 +1,289 @@
+{
+  "assessmentCommit": "e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac",
+  "sourceCandidate": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "applicationSourceTree": "32c0d89bf53037dbab4b611d7e25957b8b0caf9e",
+  "fullNativeRowsNewlyAccepted": 0,
+  "scopeRowsRemainOpen": 337,
+  "originalFindings": 37,
+  "boundedSourceRepairs": 10,
+  "remainingFindings": 27,
+  "findings": [
+    {
+      "id": "CI-01",
+      "severity": "P2",
+      "title": "Saved client detail fields have no on-screen read-only profile surface",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "CI-02",
+      "severity": "P2",
+      "title": "Client view switcher omits search and the specified per-view keyboard shortcuts",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "CI-03",
+      "severity": "P3",
+      "title": "Account team retains a generic stacked form instead of the designed roster",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "CI-04",
+      "severity": "P3",
+      "title": "Intake choice groups use one three-column grid for distinct designed layouts",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "CP-01",
+      "severity": "P1",
+      "title": "File access editor silently completes when receipt contradicts requested restriction",
+      "disposition": "source_repaired_synthetic_review_passed_combined_qualification_pending",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "CP-02",
+      "severity": "P2",
+      "title": "Folder change discards the draft when the same-ID receipt still names the old folder",
+      "disposition": "source_repaired_synthetic_review_passed_combined_qualification_pending",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "CP-03",
+      "severity": "P3",
+      "title": "Ambiguous file deletion response immediately re-enables the destructive confirmation",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "CP-04",
+      "severity": "P2",
+      "title": "Facilities entry opens a standalone editor instead of the designed management dialog",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "CP-05",
+      "severity": "P2",
+      "title": "Overview timeline retains a generic dot list instead of the designed grouped activity feed",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "CP-06",
+      "severity": "P2",
+      "title": "Files toolbar and results header do not follow the supplied Files composition",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "CR-01",
+      "severity": "P1",
+      "title": "Meeting artifact writes accept arbitrary success bodies and discard the editor",
+      "disposition": "source_repaired_synthetic_review_passed_combined_qualification_pending",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "CR-02",
+      "severity": "P1",
+      "title": "Meeting note/debrief creation can replay after an uncertain result and dispatch twice",
+      "disposition": "source_repaired_synthetic_review_passed_combined_qualification_pending",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "CR-03",
+      "severity": "P2",
+      "title": "Clearing a meeting location never clears the saved value",
+      "disposition": "source_repaired_synthetic_review_passed_combined_qualification_pending",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "CR-04",
+      "severity": "P2",
+      "title": "Meeting save accepts a receipt for a different meeting/client",
+      "disposition": "source_repaired_synthetic_review_passed_combined_qualification_pending",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "CR-05",
+      "severity": "P2",
+      "title": "Client Agenda omits lifecycle triage filters and state columns",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "CR-06",
+      "severity": "P2",
+      "title": "Meeting workspace loses identity context across tabs and always enters Information",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "CR-07",
+      "severity": "P2",
+      "title": "Saved email signature is fetched but never displayed",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "CR-08",
+      "severity": "P2",
+      "title": "Prep and attachment share/unshare are missing",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "CR-09",
+      "severity": "P2",
+      "title": "Client-shared meeting materials feed has no Portfolio consumer",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "CR-10",
+      "severity": "P3",
+      "title": "Email composer omits the designed rich-text formatting controls",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "CR-11",
+      "severity": "P3",
+      "title": "Meri rewrite has no Undo control or prior-body snapshot",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "OWI-F01",
+      "severity": "P2",
+      "title": "Objectives renders and opens cached records after a current read is denied",
+      "disposition": "source_repaired_synthetic_review_passed_combined_qualification_pending",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "OWI-F02",
+      "severity": "P2",
+      "title": "Work discards supplied owner identities in its document and node projections",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "OWI-F03",
+      "severity": "P2",
+      "title": "Registrations dialog omits the authored divided row layout",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "OWI-F04",
+      "severity": "P2",
+      "title": "Mobile capabilities retains full desktop cards instead of the compact authored list",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "PROS-F01",
+      "severity": "P2",
+      "title": "Fresh prospect-list denial leaves cached cards and pipeline usable",
+      "disposition": "source_repaired_synthetic_review_passed_combined_qualification_pending",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "PROS-F02",
+      "severity": "P1",
+      "title": "Typing during a prospect document save is silently lost on success",
+      "disposition": "source_repaired_synthetic_review_passed_combined_qualification_pending",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "PROS-F03",
+      "severity": "P2",
+      "title": "Prospect Files cannot search the loaded file list",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "MS01",
+      "severity": "P1",
+      "title": "Existing-plan Add profiles invokes subscription creation checkout",
+      "disposition": "source_repaired_synthetic_review_passed_combined_qualification_pending",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "MS02",
+      "severity": "P2",
+      "title": "Modules Calendar loses a verified client selection on entry",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "MS03",
+      "severity": "P2",
+      "title": "Modules Agenda drops the start of tasks with a separate due date",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "MS04",
+      "severity": "P2",
+      "title": "Modules meetings failure hides independently loaded agenda sources",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "MS05",
+      "severity": "P2",
+      "title": "Modules agenda task links never open the referenced task",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "MS06",
+      "severity": "P2",
+      "title": "Modules meeting detail omits supplied join link and designed split view",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "MS07",
+      "severity": "P2",
+      "title": "Workspace desktop filters expand to three full-width rows",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "MS08",
+      "severity": "P2",
+      "title": "Planner All tasks lacks the authored client grouping and scope controls",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    },
+    {
+      "id": "MS09",
+      "severity": "P3",
+      "title": "Public Planner form loses the designed title and validation hierarchy",
+      "disposition": "open_prior_acceptance_hold_unchanged",
+      "originalFinding": "https://github.com/neo-capiro/capiro-frontend/blob/e9ba4c32da8e9a499bf7fb3b1b34dad7acf913ac/docs/remaining-assessment-20261012/FINDINGS.json"
+    }
+  ],
+  "additionalRepairs": [
+    {
+      "id": "CF-IR01",
+      "title": "Pending meeting receipt discarded a later editable draft",
+      "disposition": "source_repaired_independent_red_then_green",
+      "evidence": "evidence/independent-calendar-files/findings.json"
+    },
+    {
+      "id": "SV-01",
+      "title": "Disabled focused control allowed modal focus to escape",
+      "disposition": "source_repaired_independent_red_then_green",
+      "evidence": "evidence/independent-visual/FINDINGS.json"
+    }
+  ],
+  "applicationSourceTreePath": "apps/web/src",
+  "applicationTreeIncludingTests": "79deadc9fd0c74c3634d3acc3b026a6ac9087ffe",
+  "supersededSourceCandidate": "49f6609c7277ce8701b0d38c3ba163860633e668",
+  "qualificationGateLinkCorrection": "943d90c application unchanged; d5dd0be binds completed Calendar reviews through the supported Markdown evidence path."
+}

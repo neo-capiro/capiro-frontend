@@ -1,0 +1,283 @@
+{
+  "canonicalSHA256": "578d072953f898142392fa92437ab0ac207dadf8d093d6b88bfdcf7a02915882",
+  "layoutSHA256": "1666011cab053d93ddd7feb2d95cb8283c069444cc507cc0f62d79f57fef1179",
+  "passed": 39,
+  "total": 39,
+  "results": [
+    {
+      "case": "no-extra-local",
+      "expectedAccept": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "case": "no-extra-central",
+      "expectedAccept": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "case": "no-extra-both",
+      "expectedAccept": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "case": "extended-mtime-local",
+      "expectedAccept": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "case": "extended-mtime-central",
+      "expectedAccept": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "case": "extended-mtime-both",
+      "expectedAccept": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "case": "extended-three-times-local",
+      "expectedAccept": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "case": "extended-three-times-central",
+      "expectedAccept": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "case": "extended-three-times-both",
+      "expectedAccept": true,
+      "accepted": true,
+      "passed": true,
+      "error": null
+    },
+    {
+      "case": "unicode-path-override-local",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Unsupported ZIP extra field; only extended timestamps are allowed"
+    },
+    {
+      "case": "unicode-path-override-central",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Unsupported ZIP extra field; only extended timestamps are allowed"
+    },
+    {
+      "case": "unicode-path-override-both",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Unsupported ZIP extra field; only extended timestamps are allowed"
+    },
+    {
+      "case": "unknown-extra-local",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Unsupported ZIP extra field; only extended timestamps are allowed"
+    },
+    {
+      "case": "unknown-extra-central",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Unsupported ZIP extra field; only extended timestamps are allowed"
+    },
+    {
+      "case": "unknown-extra-both",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Unsupported ZIP extra field; only extended timestamps are allowed"
+    },
+    {
+      "case": "unix-extra-local",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Unsupported ZIP extra field; only extended timestamps are allowed"
+    },
+    {
+      "case": "unix-extra-central",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Unsupported ZIP extra field; only extended timestamps are allowed"
+    },
+    {
+      "case": "unix-extra-both",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Unsupported ZIP extra field; only extended timestamps are allowed"
+    },
+    {
+      "case": "ntfs-extra-local",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Unsupported ZIP extra field; only extended timestamps are allowed"
+    },
+    {
+      "case": "ntfs-extra-central",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Unsupported ZIP extra field; only extended timestamps are allowed"
+    },
+    {
+      "case": "ntfs-extra-both",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Unsupported ZIP extra field; only extended timestamps are allowed"
+    },
+    {
+      "case": "duplicate-extra-local",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Truncated or duplicate ZIP extra field"
+    },
+    {
+      "case": "duplicate-extra-central",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Truncated or duplicate ZIP extra field"
+    },
+    {
+      "case": "duplicate-extra-both",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Truncated or duplicate ZIP extra field"
+    },
+    {
+      "case": "truncated-header-local",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Truncated ZIP extra field"
+    },
+    {
+      "case": "truncated-header-central",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Truncated ZIP extra field"
+    },
+    {
+      "case": "truncated-header-both",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Truncated ZIP extra field"
+    },
+    {
+      "case": "truncated-body-local",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Truncated or duplicate ZIP extra field"
+    },
+    {
+      "case": "truncated-body-central",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "BadZipFile: Corrupt extra field 5455 (size=99)"
+    },
+    {
+      "case": "truncated-body-both",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "BadZipFile: Corrupt extra field 5455 (size=99)"
+    },
+    {
+      "case": "invalid-timestamp-mask-local",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Unsupported ZIP extra field; only extended timestamps are allowed"
+    },
+    {
+      "case": "invalid-timestamp-mask-central",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Unsupported ZIP extra field; only extended timestamps are allowed"
+    },
+    {
+      "case": "invalid-timestamp-mask-both",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Unsupported ZIP extra field; only extended timestamps are allowed"
+    },
+    {
+      "case": "invalid-timestamp-length-local",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Unsupported ZIP extra field; only extended timestamps are allowed"
+    },
+    {
+      "case": "invalid-timestamp-length-central",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Unsupported ZIP extra field; only extended timestamps are allowed"
+    },
+    {
+      "case": "invalid-timestamp-length-both",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Unsupported ZIP extra field; only extended timestamps are allowed"
+    },
+    {
+      "case": "empty-timestamp-local",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Unsupported ZIP extra field; only extended timestamps are allowed"
+    },
+    {
+      "case": "empty-timestamp-central",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Unsupported ZIP extra field; only extended timestamps are allowed"
+    },
+    {
+      "case": "empty-timestamp-both",
+      "expectedAccept": false,
+      "accepted": false,
+      "passed": true,
+      "error": "ValueError: Unsupported ZIP extra field; only extended timestamps are allowed"
+    }
+  ],
+  "successorArchiveCreated": false,
+  "cloudActions": []
+}

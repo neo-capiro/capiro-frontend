@@ -1,0 +1,34 @@
+{
+  "completedAt": "2026-10-12T17:11:12.357354+00:00",
+  "commit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "appsWebTree": "79deadc9fd0c74c3634d3acc3b026a6ac9087ffe",
+  "sourceTree": "32c0d89bf53037dbab4b611d7e25957b8b0caf9e",
+  "applicationChanges": "",
+  "all126ReviewedFilesUnchanged": true,
+  "runStats": {
+    "results.json": {
+      "startTime": "2026-10-12T17:07:31.649Z",
+      "duration": 132120.732,
+      "expected": 10,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "focus-regression-results.json": {
+      "startTime": "2026-10-12T17:09:54.153Z",
+      "duration": 10262.859,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "focus-field-results.json": {
+      "startTime": "2026-10-12T17:10:13.010Z",
+      "duration": 40276.392,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  }
+}

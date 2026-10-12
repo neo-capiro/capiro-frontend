@@ -72,15 +72,28 @@ export function useFiles(clientId: string) {
 }
 export function useFileAccess(clientId: string, id?: string) {
   const api = useApi();
+  const cache = useQueryClient();
+  const reader = useFileReader();
   return useQuery({
-    queryKey: ["file-access", clientId, id],
-    enabled: Boolean(id),
-    queryFn: ({ signal }) =>
-      api.request(
+    queryKey: [
+      "file-access",
+      clientId,
+      id,
+      reader?.tenantId,
+      reader?.userId,
+      reader?.revision,
+    ],
+    enabled: Boolean(id && reader),
+    queryFn: async ({ signal }) => {
+      assertFileReader(cache, reader);
+      const access = await api.request(
         "core",
         `clients/${encodeURIComponent(clientId)}/files/${encodeURIComponent(id ?? "")}/access`,
         fileAccessForIdSchema(id ?? ""),
         { signal },
-      ),
+      );
+      assertFileReader(cache, reader);
+      return access;
+    },
   });
 }

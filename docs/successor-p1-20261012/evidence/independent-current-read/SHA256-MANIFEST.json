@@ -1,0 +1,316 @@
+{
+  "createdAt": "2026-10-12T15:38:49.754456+00:00",
+  "fileCount": 62,
+  "files": [
+    {
+      "path": "architecture-review.json",
+      "bytes": 2834,
+      "sha256": "6cf09ac67a17344c0021f6199bdf8b28bb0fe5bbcd487607fd1964342af9bc0e"
+    },
+    {
+      "path": "finalize-review.py",
+      "bytes": 14146,
+      "sha256": "75f9e097b9e677c5bb41066c6847d70ba42beca1fb873a64abdbeef70f0ce86a"
+    },
+    {
+      "path": "objectives-architecture.json",
+      "bytes": 742023,
+      "sha256": "f2c49b42ee37eb3c562b56a70a9cb5340e131dfccdefebf8fc49d6d01b95eaf2"
+    },
+    {
+      "path": "objectives-independent-artifacts/.last-run.json",
+      "bytes": 96,
+      "sha256": "0e0fe872a806ed1a1e0cfc590564156080220e1d5101646427c58ae842cecda1"
+    },
+    {
+      "path": "objectives-independent-artifacts/objectives-independent-act-356a3-ores-only-a-successful-read/error-context.md",
+      "bytes": 17011,
+      "sha256": "fe85586dbdc7e0c074d97ac1b0fc80dd7f34fdbd1a8b588fbc9b4e54aa93183e"
+    },
+    {
+      "path": "objectives-independent-artifacts/objectives-independent-act-356a3-ores-only-a-successful-read/test-failed-1.png",
+      "bytes": 184344,
+      "sha256": "4eab78e06b638751172d77af70f875a9132cc7968119c160b2ae9dde2a61fa2b"
+    },
+    {
+      "path": "objectives-independent-artifacts/objectives-independent-act-356a3-ores-only-a-successful-read/trace.zip",
+      "bytes": 1113753,
+      "sha256": "e5846355825f58e03e07145c652c77b5b7b0e203f1c666f9f1374ab699366a32"
+    },
+    {
+      "path": "objectives-independent-artifacts/objectives-independent-act-85198-er-client-Objective-receipt/objective-wrong-client-rejected.png",
+      "bytes": 111473,
+      "sha256": "f0d0a3ce028324387c994a0c74b351045f3ef3f5148ce89e5b397b71c4f3b39a"
+    },
+    {
+      "path": "objectives-independent-artifacts/objectives-independent-act-95246-try-cannot-revive-its-draft/objective-recovered-503.png",
+      "bytes": 126932,
+      "sha256": "34f8af378d6b40c4c3b0b01aff0680136bccacddc7fdd3a88b227c92da8b0f55"
+    },
+    {
+      "path": "objectives-independent-artifacts/objectives-independent-act-a7a1e-try-cannot-revive-its-draft/objective-recovered-403.png",
+      "bytes": 126932,
+      "sha256": "34f8af378d6b40c4c3b0b01aff0680136bccacddc7fdd3a88b227c92da8b0f55"
+    },
+    {
+      "path": "objectives-independent-results.json",
+      "bytes": 14651,
+      "sha256": "b51b5f59dd66cbc28850b2ebddbcaee9d6af418c8f956f7375c61b64b7a4002c"
+    },
+    {
+      "path": "objectives-independent.config.mts",
+      "bytes": 733,
+      "sha256": "71e93b2494889bda5ffcd0f0bc56fe2a42dc347de2f64966d70d7c3f39bec3da"
+    },
+    {
+      "path": "objectives-independent.spec.ts",
+      "bytes": 6579,
+      "sha256": "3db94f98af1bde3539436cbfb9cba7c04a7345f81080a8495031c67cf7413f5d"
+    },
+    {
+      "path": "objectives-replay-artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "objectives-replay-artifacts/objective-current-read-cac-e6567-fter-503-on-a-stale-remount/objectives-current-error-503.png",
+      "bytes": 109284,
+      "sha256": "ddfb0614f135767a17265ede081345322ffc2986169d243bbd547e574ccabaf1"
+    },
+    {
+      "path": "objectives-replay-artifacts/objective-current-read-cac-f8087-fter-403-on-a-stale-remount/objectives-current-error-403.png",
+      "bytes": 109308,
+      "sha256": "18eace8e3d3ed09812cff5876d6c34270fc71a6c6b159f4bdaf58d186e34a7ea"
+    },
+    {
+      "path": "objectives-replay-results.json",
+      "bytes": 13950,
+      "sha256": "40aea07885cf670a6d28a98dbf8e2bb47b94d7523e23cb71bdb0c959b3ee0900"
+    },
+    {
+      "path": "objectives-replay.config.mts",
+      "bytes": 740,
+      "sha256": "60a237f01427cae7d153789d10f2350c79fa15b96063486b8821f059a1305b74"
+    },
+    {
+      "path": "objectives-review.json",
+      "bytes": 5386,
+      "sha256": "5f39d10d026dd672af80ff9ce01950dec3390a05928e8f52d64b878860eeb2a1"
+    },
+    {
+      "path": "objectives-reviewed.patch",
+      "bytes": 21431,
+      "sha256": "9ca32ba5067206637e250c61971beaccd1ceef8826e9ffcc3896f8686db47a18"
+    },
+    {
+      "path": "objectives-source-pin.json",
+      "bytes": 984,
+      "sha256": "cee8c0915bda11ed181ed7257bb1e548054bdcc35dbaf43bdce4ec70e9cb1aef"
+    },
+    {
+      "path": "objectives-summary-corrected-artifacts/.last-run.json",
+      "bytes": 96,
+      "sha256": "0e0fe872a806ed1a1e0cfc590564156080220e1d5101646427c58ae842cecda1"
+    },
+    {
+      "path": "objectives-summary-corrected-artifacts/objectives-independent-act-356a3-ores-only-a-successful-read/error-context.md",
+      "bytes": 17150,
+      "sha256": "e3c10f2c8bc591c1a4b4a2dcd74a0b6f50389d0121b887114832c8bd284c6f1a"
+    },
+    {
+      "path": "objectives-summary-corrected-artifacts/objectives-independent-act-356a3-ores-only-a-successful-read/test-failed-1.png",
+      "bytes": 184344,
+      "sha256": "4eab78e06b638751172d77af70f875a9132cc7968119c160b2ae9dde2a61fa2b"
+    },
+    {
+      "path": "objectives-summary-corrected-artifacts/objectives-independent-act-356a3-ores-only-a-successful-read/trace.zip",
+      "bytes": 1032841,
+      "sha256": "1f85d432203480fc7a019a3a75675a109d2d54d7a486504286e9d33ab3466924"
+    },
+    {
+      "path": "objectives-summary-corrected-results.json",
+      "bytes": 10759,
+      "sha256": "f48b86a3c340be398ad9101198696dfb4f8d2942db5df49d31073d3abba88c46"
+    },
+    {
+      "path": "objectives-summary-corrected.config.mts",
+      "bytes": 745,
+      "sha256": "0e863224510285d3685c0e50a3e30bbe4689c05eda6c62b1778651ae25b739dd"
+    },
+    {
+      "path": "objectives-summary-scoped-artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "objectives-summary-scoped-artifacts/objectives-independent-act-356a3-ores-only-a-successful-read/objective-summary-current.png",
+      "bytes": 182795,
+      "sha256": "df6428db12c9fbe8bb57e1d24c6084d5e3688a72c7634c640487713808c56a04"
+    },
+    {
+      "path": "objectives-summary-scoped-results.json",
+      "bytes": 3294,
+      "sha256": "2bd8f67440f828236e4bf593c20a325ca2ab3ea0c6c8027a0e8e66b5641fcc73"
+    },
+    {
+      "path": "objectives-summary-scoped.config.mts",
+      "bytes": 739,
+      "sha256": "acac7423667fd8e8f0de1e5ff325c1be12947c75db63a194c3893f86bc957eda"
+    },
+    {
+      "path": "prior-evidence-immutability.json",
+      "bytes": 3276,
+      "sha256": "c53130b91bda38a0e14eeb605938dbb486842d8aa4f58aa379252adf99b8c4d8"
+    },
+    {
+      "path": "prospects-architecture.json",
+      "bytes": 742306,
+      "sha256": "dc3a48037d26160684b47aac21b9ec40bff08ed5af770811a5be4980e8e2e69d"
+    },
+    {
+      "path": "prospects-detail-corrected-artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "prospects-detail-corrected-artifacts/prospects-independent-exis-665fb-ry-cannot-restore-old-draft/prospect-detail-recovered-503.png",
+      "bytes": 115776,
+      "sha256": "201b6cf558e6f89c883144e04328a53187fcbc87cdbcb47a493b8a19f9162da3"
+    },
+    {
+      "path": "prospects-detail-corrected-artifacts/prospects-independent-exis-8bcb7-ry-cannot-restore-old-draft/prospect-detail-recovered-403.png",
+      "bytes": 115776,
+      "sha256": "201b6cf558e6f89c883144e04328a53187fcbc87cdbcb47a493b8a19f9162da3"
+    },
+    {
+      "path": "prospects-detail-corrected-results.json",
+      "bytes": 4415,
+      "sha256": "ac3919427e071eb4754acfa4ddbfb64ea6995b597bcadba03915a3cdf785d9b2"
+    },
+    {
+      "path": "prospects-detail-corrected.config.mts",
+      "bytes": 739,
+      "sha256": "357f888c557763b33ac9ae651b996a0a5a38d66d93d3e83ee26d77b3abd02d0e"
+    },
+    {
+      "path": "prospects-independent-artifacts/.last-run.json",
+      "bytes": 145,
+      "sha256": "dd4f85b4b78d5aced11c97eb68b4b3216d1a3232b0a16247fcb1ad50f3f6d5b0"
+    },
+    {
+      "path": "prospects-independent-artifacts/prospects-independent-cach-a2ee9-r-through-client-navigation/prospect-service-error-no-pipeline.png",
+      "bytes": 46076,
+      "sha256": "90d659c5e52e4ce439ad1f739ecab8cf3ca1f10da69baa2f7e081929fde87230"
+    },
+    {
+      "path": "prospects-independent-artifacts/prospects-independent-exis-665fb-ry-cannot-restore-old-draft/error-context.md",
+      "bytes": 9056,
+      "sha256": "b0b7930ef01d4fe4af5f916238afa1490c5193ffa29c24f0102dbdd4c3dfdedd"
+    },
+    {
+      "path": "prospects-independent-artifacts/prospects-independent-exis-665fb-ry-cannot-restore-old-draft/test-failed-1.png",
+      "bytes": 131494,
+      "sha256": "0038c8f3dbddcaf06f176733b1e989d63d952d606590946a22934414a369bd8a"
+    },
+    {
+      "path": "prospects-independent-artifacts/prospects-independent-exis-665fb-ry-cannot-restore-old-draft/trace.zip",
+      "bytes": 1227272,
+      "sha256": "89f9ef5b861daee7a3a1979fe8df0ffecf19eaa286cbc5bb5d2fb1921c4a65e6"
+    },
+    {
+      "path": "prospects-independent-artifacts/prospects-independent-exis-8bcb7-ry-cannot-restore-old-draft/error-context.md",
+      "bytes": 9056,
+      "sha256": "277eb413b0bae2fadbd62d1245d938c42c1dd30ccb8868602e082b530cd22a59"
+    },
+    {
+      "path": "prospects-independent-artifacts/prospects-independent-exis-8bcb7-ry-cannot-restore-old-draft/test-failed-1.png",
+      "bytes": 131494,
+      "sha256": "0038c8f3dbddcaf06f176733b1e989d63d952d606590946a22934414a369bd8a"
+    },
+    {
+      "path": "prospects-independent-artifacts/prospects-independent-exis-8bcb7-ry-cannot-restore-old-draft/trace.zip",
+      "bytes": 1103615,
+      "sha256": "82d6872a1f526aea4662569b8d845a127bbb12627b59aa5c4f301aae5ff0a5b3"
+    },
+    {
+      "path": "prospects-independent-artifacts/prospects-independent-fres-2f275-rough-held-reread-after-503/prospect-fresh-filter-recovered-503.png",
+      "bytes": 49752,
+      "sha256": "e497db4d44a51334939a9cf7cdc957bdacd9b666214c4f1db42f440344c74073"
+    },
+    {
+      "path": "prospects-independent-artifacts/prospects-independent-fres-97362-rough-held-reread-after-403/prospect-fresh-filter-recovered-403.png",
+      "bytes": 49746,
+      "sha256": "e82c318582c7b8c7f4c2e0e20311f860644a21438dd61be899e05f5fddbbbdcd"
+    },
+    {
+      "path": "prospects-independent-results.json",
+      "bytes": 22701,
+      "sha256": "1e3275568ec070c41e326f4bd1b4356c290bf185c8348f8c7a383c8fa663284e"
+    },
+    {
+      "path": "prospects-independent.config.mts",
+      "bytes": 729,
+      "sha256": "2554c5d8d5f1492f3a343d02b0f90b64055fb95de60c309782ee48c9d7e0bf0b"
+    },
+    {
+      "path": "prospects-independent.spec.ts",
+      "bytes": 7211,
+      "sha256": "058372a445d668ac9180071331cb1f03a2a7914fbf1ad4c26ab91514a7fe48d7"
+    },
+    {
+      "path": "prospects-replay-artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "prospects-replay-artifacts/prospect-current-read-a-40-b8e5f-ds-until-a-successful-retry/current-read-403.png",
+      "bytes": 46575,
+      "sha256": "6e505bab46f94d4c11b413967156c84f0c0ca643c9d4c4d554e7f1bb5c8da2a8"
+    },
+    {
+      "path": "prospects-replay-artifacts/prospect-current-read-a-50-0a7fd-ds-until-a-successful-retry/current-read-503.png",
+      "bytes": 46592,
+      "sha256": "a40b2a6fe76f64bf03ceed013584065455b84b4ca9f589f7c72abb7dcea2e0d9"
+    },
+    {
+      "path": "prospects-replay-results.json",
+      "bytes": 15053,
+      "sha256": "9b77f8adb1d2f92e51520aeb453bd7949ea521667c96ca7838d9d4d0ce315851"
+    },
+    {
+      "path": "prospects-replay.config.mts",
+      "bytes": 735,
+      "sha256": "e628e4d4d4281769a8a189cc9569270c562ee1d3206ccb90d4ec559c901f3458"
+    },
+    {
+      "path": "prospects-review.json",
+      "bytes": 5404,
+      "sha256": "92fda953e15b6e506becc4b4895a86dd3c0a951ac726640a2683add614900a04"
+    },
+    {
+      "path": "prospects-reviewed.patch",
+      "bytes": 17222,
+      "sha256": "c4887411cae9d9eddf420d25db588c3af558c4ab22163e96a2676fd3d655131f"
+    },
+    {
+      "path": "prospects-source-pin.json",
+      "bytes": 636,
+      "sha256": "d1c8f6001d61bcecfcf6daa50abac46f6065270f4adb38fddc3d6ec3c6745667"
+    },
+    {
+      "path": "report.md",
+      "bytes": 3431,
+      "sha256": "cf1b66d6eab582faafff8273c939ed9755173a244876b454783ca175640f6fc0"
+    },
+    {
+      "path": "review-summary.json",
+      "bytes": 6947,
+      "sha256": "aa151dd42cfc9d6c05f5a290eaaf988d89c06db28639ef9080b413c0224e1daf"
+    },
+    {
+      "path": "test-assertion-corrections.json",
+      "bytes": 1309,
+      "sha256": "633269720fe53141c8e588ca7b445900c37cfeac33c082987af9db9a22f9cbd4"
+    }
+  ]
+}

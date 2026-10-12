@@ -1,0 +1,371 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-prospect-current-read/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "/tmp/capiro-p1-independent-review/current-read/prospects-independent.config.mts"
+    ],
+    "configFile": "/tmp/capiro-p1-independent-review/current-read/prospects-independent.config.mts",
+    "rootDir": "/tmp/capiro-p1-independent-review/current-read",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-p1-independent-review/current-read/prospects-independent-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-p1-independent-review/current-read",
+        "testIgnore": [],
+        "testMatch": [
+          "prospects-independent.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-p1-independent-review/current-read/prospects-independent-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "prospects-independent.spec.ts",
+      "file": "prospects-independent.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "existing Prospect detail gate closes its edit form after current 403 and retry cannot restore old draft",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8403,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Independently current prospect', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Independently current prospect', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Independently current prospect', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Independently current prospect', exact: true })\u001b[22m\n\n    at /tmp/capiro-p1-independent-review/current-read/prospects-independent.spec.ts:11:93",
+                    "location": {
+                      "file": "/tmp/capiro-p1-independent-review/current-read/prospects-independent.spec.ts",
+                      "column": 93,
+                      "line": 11
+                    },
+                    "snippet": "   9 |  await expect(page.getByRole('alert')).toBeVisible();await expect(page.getByRole('dialog')).toHaveCount(0);await expect(page.getByRole('heading',{name:'Test Prospect',exact:true})).toHaveCount(0);await expect(page.getByRole('button',{name:'Edit details',exact:true})).toHaveCount(0);\n  10 |  code=200;record={...prospect,displayName:'Independently current prospect'};hold=new Promise<void>(r=>release=r);const before=reads;await page.getByRole('alert').getByRole('button',{name:'Retry',exact:true}).click();await expect.poll(()=>reads).toBeGreaterThan(before);await expect(page.getByRole('dialog')).toHaveCount(0);hold=undefined;release();\n> 11 |  await expect(page.getByRole('heading',{name:'Independently current prospect',exact:true})).toBeVisible();if(await page.getByRole('dialog').count()===0)await page.getByRole('button',{name:'Edit details',exact:true}).click();await expect(page.getByLabel('Company name')).toHaveValue('Independently current prospect');expect(c.writes).toEqual([]);expect(c.unexpected).toEqual([]);await page.screenshot({path:info.outputPath(`prospect-detail-recovered-${status}.png`)});\n     |                                                                                             ^\n  12 | });\n  13 | test('cached global list plus explicit pipeline URL cannot reappear after service error through client navigation',async({page},info)=>{\n  14 |  const c=await setup(page);let code=200,reads=0;await page.route('**/core/business-development/prospects?*',route=>{reads++;return json(route,code===200?{prospects:[prospect],counts:{visible:1,total:1,active:1,dismissed:0,byStage:{proposal:1}}}:{message:'Independent list service unavailable'},code);});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-p1-independent-review/current-read/prospects-independent.spec.ts",
+                        "column": 93,
+                        "line": 11
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Independently current prospect', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Independently current prospect', exact: true })\u001b[22m\n\n\n   9 |  await expect(page.getByRole('alert')).toBeVisible();await expect(page.getByRole('dialog')).toHaveCount(0);await expect(page.getByRole('heading',{name:'Test Prospect',exact:true})).toHaveCount(0);await expect(page.getByRole('button',{name:'Edit details',exact:true})).toHaveCount(0);\n  10 |  code=200;record={...prospect,displayName:'Independently current prospect'};hold=new Promise<void>(r=>release=r);const before=reads;await page.getByRole('alert').getByRole('button',{name:'Retry',exact:true}).click();await expect.poll(()=>reads).toBeGreaterThan(before);await expect(page.getByRole('dialog')).toHaveCount(0);hold=undefined;release();\n> 11 |  await expect(page.getByRole('heading',{name:'Independently current prospect',exact:true})).toBeVisible();if(await page.getByRole('dialog').count()===0)await page.getByRole('button',{name:'Edit details',exact:true}).click();await expect(page.getByLabel('Company name')).toHaveValue('Independently current prospect');expect(c.writes).toEqual([]);expect(c.unexpected).toEqual([]);await page.screenshot({path:info.outputPath(`prospect-detail-recovered-${status}.png`)});\n     |                                                                                             ^\n  12 | });\n  13 | test('cached global list plus explicit pipeline URL cannot reappear after service error through client navigation',async({page},info)=>{\n  14 |  const c=await setup(page);let code=200,reads=0;await page.route('**/core/business-development/prospects?*',route=>{reads++;return json(route,code===200?{prospects:[prospect],counts:{visible:1,total:1,active:1,dismissed:0,byStage:{proposal:1}}}:{message:'Independent list service unavailable'},code);});\n    at /tmp/capiro-p1-independent-review/current-read/prospects-independent.spec.ts:11:93"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:35:20.201Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-p1-independent-review/current-read/prospects-independent-artifacts/prospects-independent-exis-8bcb7-ry-cannot-restore-old-draft/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-p1-independent-review/current-read/prospects-independent-artifacts/prospects-independent-exis-8bcb7-ry-cannot-restore-old-draft/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-independent-review/current-read/prospects-independent-artifacts/prospects-independent-exis-8bcb7-ry-cannot-restore-old-draft/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-p1-independent-review/current-read/prospects-independent.spec.ts",
+                    "column": 93,
+                    "line": 11
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "df6ebc20ba7b8523497e-cc5394abe712ff012540",
+          "file": "prospects-independent.spec.ts",
+          "line": 5,
+          "column": 35
+        },
+        {
+          "title": "existing Prospect detail gate closes its edit form after current 503 and retry cannot restore old draft",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8955,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Independently current prospect', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Independently current prospect', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Independently current prospect', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Independently current prospect', exact: true })\u001b[22m\n\n    at /tmp/capiro-p1-independent-review/current-read/prospects-independent.spec.ts:11:93",
+                    "location": {
+                      "file": "/tmp/capiro-p1-independent-review/current-read/prospects-independent.spec.ts",
+                      "column": 93,
+                      "line": 11
+                    },
+                    "snippet": "   9 |  await expect(page.getByRole('alert')).toBeVisible();await expect(page.getByRole('dialog')).toHaveCount(0);await expect(page.getByRole('heading',{name:'Test Prospect',exact:true})).toHaveCount(0);await expect(page.getByRole('button',{name:'Edit details',exact:true})).toHaveCount(0);\n  10 |  code=200;record={...prospect,displayName:'Independently current prospect'};hold=new Promise<void>(r=>release=r);const before=reads;await page.getByRole('alert').getByRole('button',{name:'Retry',exact:true}).click();await expect.poll(()=>reads).toBeGreaterThan(before);await expect(page.getByRole('dialog')).toHaveCount(0);hold=undefined;release();\n> 11 |  await expect(page.getByRole('heading',{name:'Independently current prospect',exact:true})).toBeVisible();if(await page.getByRole('dialog').count()===0)await page.getByRole('button',{name:'Edit details',exact:true}).click();await expect(page.getByLabel('Company name')).toHaveValue('Independently current prospect');expect(c.writes).toEqual([]);expect(c.unexpected).toEqual([]);await page.screenshot({path:info.outputPath(`prospect-detail-recovered-${status}.png`)});\n     |                                                                                             ^\n  12 | });\n  13 | test('cached global list plus explicit pipeline URL cannot reappear after service error through client navigation',async({page},info)=>{\n  14 |  const c=await setup(page);let code=200,reads=0;await page.route('**/core/business-development/prospects?*',route=>{reads++;return json(route,code===200?{prospects:[prospect],counts:{visible:1,total:1,active:1,dismissed:0,byStage:{proposal:1}}}:{message:'Independent list service unavailable'},code);});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-p1-independent-review/current-read/prospects-independent.spec.ts",
+                        "column": 93,
+                        "line": 11
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Independently current prospect', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Independently current prospect', exact: true })\u001b[22m\n\n\n   9 |  await expect(page.getByRole('alert')).toBeVisible();await expect(page.getByRole('dialog')).toHaveCount(0);await expect(page.getByRole('heading',{name:'Test Prospect',exact:true})).toHaveCount(0);await expect(page.getByRole('button',{name:'Edit details',exact:true})).toHaveCount(0);\n  10 |  code=200;record={...prospect,displayName:'Independently current prospect'};hold=new Promise<void>(r=>release=r);const before=reads;await page.getByRole('alert').getByRole('button',{name:'Retry',exact:true}).click();await expect.poll(()=>reads).toBeGreaterThan(before);await expect(page.getByRole('dialog')).toHaveCount(0);hold=undefined;release();\n> 11 |  await expect(page.getByRole('heading',{name:'Independently current prospect',exact:true})).toBeVisible();if(await page.getByRole('dialog').count()===0)await page.getByRole('button',{name:'Edit details',exact:true}).click();await expect(page.getByLabel('Company name')).toHaveValue('Independently current prospect');expect(c.writes).toEqual([]);expect(c.unexpected).toEqual([]);await page.screenshot({path:info.outputPath(`prospect-detail-recovered-${status}.png`)});\n     |                                                                                             ^\n  12 | });\n  13 | test('cached global list plus explicit pipeline URL cannot reappear after service error through client navigation',async({page},info)=>{\n  14 |  const c=await setup(page);let code=200,reads=0;await page.route('**/core/business-development/prospects?*',route=>{reads++;return json(route,code===200?{prospects:[prospect],counts:{visible:1,total:1,active:1,dismissed:0,byStage:{proposal:1}}}:{message:'Independent list service unavailable'},code);});\n    at /tmp/capiro-p1-independent-review/current-read/prospects-independent.spec.ts:11:93"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:35:29.419Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-p1-independent-review/current-read/prospects-independent-artifacts/prospects-independent-exis-665fb-ry-cannot-restore-old-draft/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-p1-independent-review/current-read/prospects-independent-artifacts/prospects-independent-exis-665fb-ry-cannot-restore-old-draft/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-p1-independent-review/current-read/prospects-independent-artifacts/prospects-independent-exis-665fb-ry-cannot-restore-old-draft/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-p1-independent-review/current-read/prospects-independent.spec.ts",
+                    "column": 93,
+                    "line": 11
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "df6ebc20ba7b8523497e-35adb16648c853abdfa9",
+          "file": "prospects-independent.spec.ts",
+          "line": 5,
+          "column": 35
+        },
+        {
+          "title": "cached global list plus explicit pipeline URL cannot reappear after service error through client navigation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3859,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:35:39.217Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "df6ebc20ba7b8523497e-704140ecad864338e32f",
+          "file": "prospects-independent.spec.ts",
+          "line": 13,
+          "column": 5
+        },
+        {
+          "title": "ordinary successful background list refresh keeps an in-progress new Prospect draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2131,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:35:43.305Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "df6ebc20ba7b8523497e-fd782064753bcb5baca3",
+          "file": "prospects-independent.spec.ts",
+          "line": 18,
+          "column": 5
+        },
+        {
+          "title": "fresh earlier filter cache stays inaccessible through held reread after 403",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2120,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:35:45.446Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "df6ebc20ba7b8523497e-887e22ad73ffd332ea43",
+          "file": "prospects-independent.spec.ts",
+          "line": 21,
+          "column": 36
+        },
+        {
+          "title": "fresh earlier filter cache stays inaccessible through held reread after 503",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3380,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:35:47.580Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "df6ebc20ba7b8523497e-e7b97f81b35156ac40b6",
+          "file": "prospects-independent.spec.ts",
+          "line": 21,
+          "column": 36
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T15:35:19.663Z",
+    "duration": 31412.933,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

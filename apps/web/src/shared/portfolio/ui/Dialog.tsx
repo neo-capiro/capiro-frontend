@@ -9,6 +9,7 @@ import {
 import { useRef, type ComponentProps, type ReactNode } from "react";
 import { X } from "lucide-react";
 import styles from "./dialog.module.css";
+import { useDialogDisabledFocus } from "./dialog-focus";
 import {
   useDialogOverlayDismissal,
   useDialogReturnFocus,
@@ -61,12 +62,14 @@ export function Dialog({
   onOpenAutoFocus?: ComponentProps<typeof DialogContent>["onOpenAutoFocus"];
 }) {
   const content = useRef<HTMLDivElement>(null);
+  const rememberFocus = useDialogDisabledFocus(open, content);
   useDialogOverlayDismissal(open, content, onOpenChange);
   const returnFocus = useDialogReturnFocus(open);
   return (
     <DialogRoot open={open} onOpenChange={onOpenChange}>
       <DialogContent
         ref={content}
+        onFocusCapture={rememberFocus}
         aria-modal="true"
         showCloseButton={false}
         onCloseAutoFocus={(event) => {

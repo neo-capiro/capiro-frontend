@@ -1,0 +1,28 @@
+{
+  "sourceCommit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "passed": 996,
+  "failed": 0,
+  "skipped": 0,
+  "flaky": 0,
+  "retries": 0,
+  "workers": 3,
+  "defaultTotalCaseBudgetMilliseconds": 60000,
+  "defaultExpectationBudgetMilliseconds": 5000,
+  "effectiveCaseBudgetCounts": {
+    "60000": 992,
+    "180000": 4
+  },
+  "existingSlowCaseAndAssertionOverridesPreserved": true,
+  "stats": {
+    "startTime": "2026-10-12T17:01:00.385Z",
+    "duration": 2090360.615,
+    "expected": 996,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "sourceChanged": false,
+  "resultsSHA256": "c80c3d200bfd76afc2af67c60e581f2d0f7acc890a8689c0b8ae5e5167b2aa10",
+  "logSHA256": "ecb266410fcc3a6bc95faec7b7330fdf554ee776fe509312e340bebfd81bef10",
+  "scope": "Complete unchanged Portfolio/Meri browser suite; synthetic services. Action calls without their own timeout inherit the remaining total case budget."
+}

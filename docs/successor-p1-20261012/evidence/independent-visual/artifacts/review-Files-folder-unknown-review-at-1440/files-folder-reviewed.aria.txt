@@ -1,0 +1,12 @@
+- dialog "New folder":
+  - banner:
+    - heading "New folder" [level=2]
+    - button "Close"
+  - paragraph: File organization for Test report.pdf.
+  - text: Folder name
+  - textbox "Folder name": Quarterly reports and supporting evidence
+  - paragraph: Folders are shared labels on files. No physical copy is created. Empty folders are not persisted.
+  - status:
+    - paragraph: "Current saved folder: Reports"
+    - text: This is the current saved state. It does not confirm the earlier save. Review your retained draft before saving again.
+  - button "Create folder & move file"

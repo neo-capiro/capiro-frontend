@@ -1,0 +1,20 @@
+
+Running 13 tests using 1 worker
+
+(node:466974) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 apps/web/tests/browser/prospect-current-read.spec.ts:160:3 › a 403 current read on remount withholds cached records until a successful retry (9.3s)
+  ✓   2 apps/web/tests/browser/prospect-current-read.spec.ts:179:3 › a 403 failed cached filter read cannot expose its earlier list or pipeline (4.4s)
+  ✓   3 apps/web/tests/browser/prospect-current-read.spec.ts:200:5 › a 403 current read failure discards the open pipeline editor (5.4s)
+  ✓   4 apps/web/tests/browser/prospect-current-read.spec.ts:200:5 › a 403 current read failure discards the open create editor (6.0s)
+  ✓   5 apps/web/tests/browser/prospect-current-read.spec.ts:160:3 › a 503 current read on remount withholds cached records until a successful retry (6.8s)
+  ✓   6 apps/web/tests/browser/prospect-current-read.spec.ts:179:3 › a 503 failed cached filter read cannot expose its earlier list or pipeline (5.8s)
+  ✓   7 apps/web/tests/browser/prospect-current-read.spec.ts:200:5 › a 503 current read failure discards the open pipeline editor (5.6s)
+  ✓   8 apps/web/tests/browser/prospect-current-read.spec.ts:200:5 › a 503 current read failure discards the open create editor (5.4s)
+  ✓   9 apps/web/tests/browser/prospect-current-read.spec.ts:250:1 › client route replacement discards a failed Prospects editor and requires a current successful read on return (3.9s)
+  ✓  10 apps/web/tests/browser/prospect-current-read.spec.ts:277:1 › a successful background reread preserves an active creation draft (3.6s)
+  ✓  11 apps/web/tests/browser/prospects.spec.ts:26:1 › old backend preserves reads and company edits while new creates stay unavailable (2.1s)
+  ✓  12 apps/web/tests/browser/prospects.spec.ts:58:1 › new catalog creates identified and closed won changes only stage, then refreshes pipeline (2.2s)
+  ✓  13 apps/web/tests/browser/prospects.spec.ts:118:1 › legacy stages remain unmapped and note failures preserve entered text (2.1s)
+
+  13 passed (1.1m)

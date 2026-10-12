@@ -339,7 +339,18 @@ test("Transcript shares canonical upload, retries extraction without duplicate b
         expect(route.request().postDataJSON()).toMatchObject({
           confidential: false,
         });
-        return json(route, { id: "debrief-synthetic" });
+        return json(route, {
+          id: "debrief-synthetic",
+          meetingId: meetingId,
+          clientId: clientId,
+          authorUserId: "user-test",
+          confidential: false,
+          status: "generated",
+          sharedAt: null,
+          sharedByUserId: null,
+          createdAt: "2026-10-15T16:00:00Z",
+          updatedAt: "2026-10-15T16:00:00Z",
+        });
       }
       return json(
         route,

@@ -1,0 +1,43 @@
+
+Running 1 test using 1 worker
+
+(node:489884) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 ../tmp/capiro-successor-visual-review/review.spec.ts:18:6 › Files ACL pending unknown review at 1440 (46.0s)
+
+
+  1) ../tmp/capiro-successor-visual-review/review.spec.ts:18:6 › Files ACL pending unknown review at 1440 
+
+    Test timeout of 45000ms exceeded.
+
+    Error: locator.boundingBox: Test timeout of 45000ms exceeded.
+    Call log:
+      - waiting for locator(':focus')
+
+
+      12 |  if(metrics.scrollHeight>metrics.clientHeight+1){await dialog.evaluate(el=>el.scrollTop=el.scrollHeight);await page.screenshot({path:info.outputPath(label+'-bottom.png')});}
+      13 |  const focusLog:any[]=[];const captureFocus=async()=>await page.evaluate(()=>({tag:document.activeElement?.tagName,text:document.activeElement?.getAttribute('aria-label')||document.activeElement?.textContent?.slice(0,100),name:document.activeElement?.getAttribute('name'),inDialog:Boolean(document.activeElement?.closest('[role=dialog]'))}));focusLog.push(await captureFocus());const enabled=dialog.locator('button:not(:disabled),input:not(:disabled),textarea:not(:disabled),select:not(:disabled)');
+    > 14 |  for(let i=0;i<Math.min(await enabled.count()+2,14);i++){await page.keyboard.press('Tab');focusLog.push(await captureFocus());const focused=await page.evaluate(()=>{const el=document.activeElement;if(!el)return null;const r=el.getBoundingClientRect();return{x:r.x,width:r.width};});if(focused && focusLog.at(-1)?.inDialog){expect(focused.x).toBeGreaterThanOrEqual(metrics.x-1);expect(focused.x+focused.width).toBeLessThanOrEqual(metrics.x+metrics.width+1);}}
+         |                                                                                                                                                                          ^
+      15 |  await writeFile(info.outputPath(label+'.focus.json'),JSON.stringify(focusLog,null,2));
+      16 | }
+      17 | for(const width of [1440,360]){
+        at inspect (/tmp/capiro-successor-visual-review/review.spec.ts:14:170)
+        at /tmp/capiro-successor-visual-review/review.spec.ts:24:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-1440/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-1440/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-1440/trace.zip
+    Usage:
+
+        npx playwright show-trace ../tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-1440/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    ../tmp/capiro-successor-visual-review/review.spec.ts:18:6 › Files ACL pending unknown review at 1440 

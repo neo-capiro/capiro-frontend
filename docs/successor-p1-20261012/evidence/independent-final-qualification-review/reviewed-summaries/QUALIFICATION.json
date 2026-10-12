@@ -1,0 +1,252 @@
+{
+  "sourceCommit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "rootTree": "7448658084841f7773144ce5d8714a19103e4ddd",
+  "gitSubtrees": {
+    "apps/web": "79deadc9fd0c74c3634d3acc3b026a6ac9087ffe",
+    "apps/web/src": "32c0d89bf53037dbab4b611d7e25957b8b0caf9e"
+  },
+  "sourceCommitIsDistinctFromLaterEvidenceOnlyPRHead": true,
+  "status": "PASSED_BOUNDED_OFFLINE_GATES",
+  "offlineQualificationComplete": true,
+  "completedUTC": "2026-10-12T17:35:50.819741+00:00",
+  "environment": {
+    "node": "v24.19.0",
+    "npm": "11.9.0",
+    "browser": "154.0.8037.57",
+    "cpuQuota": 4
+  },
+  "gates": {
+    "cleanInstall": {
+      "exitCode": 0,
+      "packages": 847,
+      "command": "npm ci --ignore-scripts --no-audit --no-fund --cache /tmp/capiro-p1-npm-cache",
+      "evidence": "evidence/qualification-d5dd0be/clean-install.log"
+    },
+    "combinedCheck": {
+      "sourceCommit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+      "exitCode": 0,
+      "rootTests": 58,
+      "transportTests": 21,
+      "portfolioTests": 1213,
+      "gatewayTests": 94,
+      "total": 1386,
+      "lintErrors": 0,
+      "lintWarnings": 76,
+      "architecture": {
+        "totalSignals": 413,
+        "reviewed": 389,
+        "inheritedUnreviewed": 24,
+        "blocking": 0,
+        "boundaryErrors": 0
+      },
+      "sourceChanged": false,
+      "logSHA256": "88adac5be2fd5fa43629925dc268f8e8e19d2761fa94559d55c16df02826b493",
+      "nativePortfolioRowsAccepted": 0,
+      "command": "npm run check",
+      "includes": [
+        "public-package contracts",
+        "typecheck",
+        "root unit",
+        "architecture",
+        "transport",
+        "web lint",
+        "web format",
+        "Portfolio unit",
+        "Modules gateway unit"
+      ],
+      "evidence": "evidence/qualification-d5dd0be/check-exit.json"
+    },
+    "elements": {
+      "exitCode": 0,
+      "passed": 15,
+      "failed": 0,
+      "sourceChanged": false,
+      "evidence": "evidence/elements-d5dd0be/qualification.json",
+      "wrapper": "evidence/qualification-d5dd0be/elements-exit.json"
+    },
+    "portfolioMeriBrowser": {
+      "sourceCommit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+      "passed": 996,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "retries": 0,
+      "workers": 3,
+      "defaultTotalCaseBudgetMilliseconds": 60000,
+      "defaultExpectationBudgetMilliseconds": 5000,
+      "effectiveCaseBudgetCounts": {
+        "60000": 992,
+        "180000": 4
+      },
+      "existingSlowCaseAndAssertionOverridesPreserved": true,
+      "stats": {
+        "startTime": "2026-10-12T17:01:00.385Z",
+        "duration": 2090360.615,
+        "expected": 996,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "sourceChanged": false,
+      "resultsSHA256": "c80c3d200bfd76afc2af67c60e581f2d0f7acc890a8689c0b8ae5e5167b2aa10",
+      "logSHA256": "ecb266410fcc3a6bc95faec7b7330fdf554ee776fe509312e340bebfd81bef10",
+      "scope": "Complete unchanged Portfolio/Meri browser suite; synthetic services. Action calls without their own timeout inherit the remaining total case budget.",
+      "evidence": "evidence/portfolio-d5dd-60s/portfolio-exit.json"
+    },
+    "modulesBrowser": {
+      "sourceCommit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+      "passed": 157,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "stats": {
+        "startTime": "2026-10-12T16:54:31.787Z",
+        "duration": 763850.703,
+        "expected": 157,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "resultsSHA256": "6bfb0d1c0f24c273a4087c1e4cc52e836d040a36ebde3cef8993fcfbbc4ad6eb",
+      "sourceChanged": false,
+      "evidence": "evidence/qualification-d5dd0be/modules-exit.json",
+      "sharedBoundaryCoverageIndex": "evidence/qualification-d5dd0be/SHARED-BOUNDARY-COVERAGE.json"
+    },
+    "productionBuild": {
+      "sourceCommit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+      "command": "NEXT_TELEMETRY_DISABLED=1 npm run build",
+      "exitCode": 0,
+      "buildID": "HW5M0_NcA2YohM1f7uUwZ",
+      "logSHA256": "5a422c60f09ac72169ad83efbea1a7355f0fd35e00cf41b48d758d335dfd44c2",
+      "sourceChanged": false,
+      "buildCountOnThisFinalSource": 1,
+      "imageBuilds": 0,
+      "awsActions": [],
+      "evidence": "evidence/qualification-d5dd0be/build-exit.json"
+    },
+    "actualStandaloneServer": {
+      "sourceCommit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+      "buildID": "HW5M0_NcA2YohM1f7uUwZ",
+      "exitCode": 0,
+      "httpRouteHeaderChecks": 11,
+      "desktopMobileThemeNavigationChecks": 4,
+      "crossModeBackForwardChecks": 2,
+      "pageErrors": [],
+      "browserVersion": "154.0.8037.57",
+      "scope": "Actual Next standalone server without credentials, fixture identity or service interception. Live sign-in not exercised.",
+      "defaultProductRoot": "passed separately for CAPIRO_DEFAULT_PRODUCT=portfolio",
+      "sourceChanged": false,
+      "evidence": "evidence/qualification-d5dd0be/production-exit.json"
+    },
+    "originalParentClientClear": {
+      "passed": 1,
+      "failed": 0,
+      "sourceChanged": false,
+      "originalSpecSHA256": "825c56e51ffd385ea9be30255a0f1784505740d6713b8925477f8883d2a4e5df",
+      "originalLauncherSHA256": "3672e250b6eaa375018971012e732fbaba8c78e3ff861d89c23b2f54896b0a79",
+      "evidence": "evidence/parent-client-clear-green-d5dd0be/exit.json"
+    },
+    "independentVisualKeyboard": {
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "renderedStateCaptures": 22,
+      "focusSamples": 200,
+      "outsideModalFocus": 0,
+      "horizontalOverflow": 0,
+      "all126ReviewedFilesUnchanged": true,
+      "evidence": "evidence/independent-visual-d5dd0be/FINAL-SOURCE.json"
+    },
+    "independentNativeDerivedCalendarControls": {
+      "parserPassed": 39,
+      "browserPassed": 8,
+      "scope": "Exact author source bytes integrated into d5dd; independent synthetic controls, not native backend execution. Do not add these to root suite totals.",
+      "evidence": "evidence/independent-calendar-native/report.md"
+    }
+  },
+  "historicalAttempts": [
+    {
+      "source": "49f6609c7277ce8701b0d38c3ba163860633e668",
+      "passed": 671,
+      "failed": 4,
+      "interrupted": 3,
+      "unrun": 314,
+      "status": "explicitly stopped; superseded by corrections",
+      "evidence": "evidence/qualification-49f-failed"
+    },
+    {
+      "source": "943d90c459998dac4ac90a462bf5a9c880d6a736",
+      "check": "3 architecture evidence-link failures; corrected by Markdown references without guard changes",
+      "portfolio": {
+        "passed": 111,
+        "failed": 0,
+        "interrupted": 4,
+        "unrun": 881
+      },
+      "modules": {
+        "passed": 50,
+        "failed": 0,
+        "interrupted": 1,
+        "unrun": 106
+      },
+      "status": "explicitly stopped before final documentation-only source pin",
+      "evidence": "evidence/qualification-943d-link-failure"
+    },
+    {
+      "source": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+      "portfolio": {
+        "passed": 144,
+        "timedOut": 1,
+        "interrupted": 4,
+        "unrun": 847
+      },
+      "workers": 4,
+      "totalCaseBudgetMilliseconds": 30000,
+      "status": "explicitly stopped; independent trace review found global budget exhaustion without a failed semantic assertion; complete unchanged source replay above used3workers/60s/0retries",
+      "evidence": "evidence/portfolio-d5dd-30s-history",
+      "review": "evidence/independent-reopen-timeout/report.md"
+    }
+  ],
+  "archive": {
+    "sourceCommit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+    "rootTree": "7448658084841f7773144ce5d8714a19103e4ddd",
+    "archiveBytes": 498171732,
+    "archiveSHA256": "971c9116e1b9e7d4fc11da434ba26110a401b85e210650322e7b5a14b918cfc7",
+    "trackedBlobs": 5006,
+    "zipMembers": 5007,
+    "perMemberInventorySHA256": "1ac06b53762855f60f8a1d4fc1343e51ce373711cee5ac8479bd26a0e2a73139"
+  },
+  "acceptance": {
+    "nativePortfolioRowsAccepted": 0,
+    "nativePortfolioRowsHeld": 337,
+    "originalExclusions": 8,
+    "originalFindings": 37,
+    "sourceRepairs": 10,
+    "unchangedOpenFindings": 27,
+    "remainingHolds": "REMAINING-HOLDS.md"
+  },
+  "unrunOrUnestablished": [
+    "Native backend authorization, tenant/role matrices, persistence/CAS/RLS and durable effects",
+    "Live sign-in against a native identity provider",
+    "Provider messages, billing effects and paid model workloads",
+    "Actual image build, vulnerability gates, deployed runtime and AWS shipping",
+    "Complete Figma parity, missing exact editor frames, other browsers/devices and full assistive-technology certification",
+    "Native Windows archive execution and Library custody"
+  ],
+  "library": {
+    "id": null,
+    "uploadCompleted": false,
+    "observedFailure": "Original mandatory helper tools/list network failure before upload preparation; no size rejection. No current archive upload attempted.",
+    "supportedRoute": "packaging/d5dd0be/README.md"
+  },
+  "actions": {
+    "merge": false,
+    "deploy": false,
+    "aws": false,
+    "newCredentialsResources": false,
+    "securityDatabaseChanges": false,
+    "providerBillingPaidWorkloads": false
+  },
+  "parentReview": "PARENT-CALENDAR-REVIEW-RECEIPT.json is separately parent-reported and not included in locally executed counts."
+}

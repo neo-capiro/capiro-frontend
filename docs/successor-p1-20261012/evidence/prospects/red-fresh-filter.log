@@ -1,0 +1,92 @@
+
+Running 2 tests using 1 worker
+
+(node:470784) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 apps/web/tests/browser/prospect-current-read.spec.ts:199:3 › returning from a 403 filtered failure requires a new read even when the earlier filter cache is fresh (7.3s)
+(node:470969) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 apps/web/tests/browser/prospect-current-read.spec.ts:199:3 › returning from a 503 filtered failure requires a new read even when the earlier filter cache is fresh (8.6s)
+
+
+  1) apps/web/tests/browser/prospect-current-read.spec.ts:199:3 › returning from a 403 filtered failure requires a new read even when the earlier filter cache is fresh 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('link', { name: /Test Prospect/ })
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('link', { name: /Test Prospect/ })
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      211 |     const reads = control.reads();
+      212 |     await page.getByLabel("Search prospects").fill("");
+    > 213 |     await expect(page.getByRole("link", { name: /Test Prospect/ })).toHaveCount(
+          |                                                                     ^
+      214 |       0,
+      215 |     );
+      216 |     await expect(
+        at /workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:213:69
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-fresh-filter-artifacts/prospect-current-read-retu-71a5d-rlier-filter-cache-is-fresh/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-prospect-current-read-20261012/red-fresh-filter-artifacts/prospect-current-read-retu-71a5d-rlier-filter-cache-is-fresh/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-fresh-filter-artifacts/prospect-current-read-retu-71a5d-rlier-filter-cache-is-fresh/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-prospect-current-read-20261012/red-fresh-filter-artifacts/prospect-current-read-retu-71a5d-rlier-filter-cache-is-fresh/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) apps/web/tests/browser/prospect-current-read.spec.ts:199:3 › returning from a 503 filtered failure requires a new read even when the earlier filter cache is fresh 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('link', { name: /Test Prospect/ })
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('link', { name: /Test Prospect/ })
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      211 |     const reads = control.reads();
+      212 |     await page.getByLabel("Search prospects").fill("");
+    > 213 |     await expect(page.getByRole("link", { name: /Test Prospect/ })).toHaveCount(
+          |                                                                     ^
+      214 |       0,
+      215 |     );
+      216 |     await expect(
+        at /workspace/capiro-prospect-current-read/apps/web/tests/browser/prospect-current-read.spec.ts:213:69
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-fresh-filter-artifacts/prospect-current-read-retu-62323-rlier-filter-cache-is-fresh/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-prospect-current-read-20261012/red-fresh-filter-artifacts/prospect-current-read-retu-62323-rlier-filter-cache-is-fresh/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-prospect-current-read-20261012/red-fresh-filter-artifacts/prospect-current-read-retu-62323-rlier-filter-cache-is-fresh/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-prospect-current-read-20261012/red-fresh-filter-artifacts/prospect-current-read-retu-62323-rlier-filter-cache-is-fresh/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    apps/web/tests/browser/prospect-current-read.spec.ts:199:3 › returning from a 403 filtered failure requires a new read even when the earlier filter cache is fresh 
+    apps/web/tests/browser/prospect-current-read.spec.ts:199:3 › returning from a 503 filtered failure requires a new read even when the earlier filter cache is fresh 

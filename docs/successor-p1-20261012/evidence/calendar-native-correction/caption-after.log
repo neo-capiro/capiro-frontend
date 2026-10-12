@@ -1,0 +1,24 @@
+
+Running 17 tests using 1 worker
+
+(node:546279) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:95:3 › notes: malformed receipt preserves draft and fences repeat creation (1.4s)
+  ✓   2 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:111:3 › notes: uncertain creation cannot be repeated after remount (1.3s)
+  ✓   3 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:138:3 › notes: synchronous submit guard sends one creation (1.3s)
+  ✓   4 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:95:3 › debriefs: malformed receipt preserves draft and fences repeat creation (1.2s)
+  ✓   5 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:111:3 › debriefs: uncertain creation cannot be repeated after remount (1.4s)
+  ✓   6 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:138:3 › debriefs: synchronous submit guard sends one creation (1.6s)
+  ✓   7 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:162:3 › notes: a known refusal retains editable draft and permits deliberate retry (3.0s)
+  ✓   8 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:185:3 › notes: replacing the client during preflight prevents dispatch (1.5s)
+  ✓   9 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:206:3 › notes: a late creation receipt cannot close the replacement client's draft (1.7s)
+  ✓  10 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:242:3 › notes: action-specific edit, approval, share and unshare receipts succeed (2.7s)
+  ✓  11 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:162:3 › debriefs: a known refusal retains editable draft and permits deliberate retry (1.6s)
+  ✓  12 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:185:3 › debriefs: replacing the client during preflight prevents dispatch (1.8s)
+  ✓  13 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:206:3 › debriefs: a late creation receipt cannot close the replacement client's draft (1.6s)
+  ✓  14 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:242:3 › debriefs: action-specific edit, approval, share and unshare receipts succeed (2.5s)
+  ✓  15 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:325:3 › notes: pending fields cannot accept a later draft before a valid receipt (1.5s)
+  ✓  16 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:325:3 › debriefs: pending fields cannot accept a later draft before a valid receipt (1.5s)
+  ✓  17 apps/web/tests/browser/calendar-artifact-receipts.spec.ts:358:1 › artifact captions distinguish omitted sharing metadata from explicit privacy (2.1s)
+
+  17 passed (30.6s)

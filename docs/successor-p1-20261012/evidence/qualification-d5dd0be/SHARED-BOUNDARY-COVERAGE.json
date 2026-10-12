@@ -1,0 +1,49 @@
+{
+  "sourceCommit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "evidence": "modules-results.json",
+  "scope": "Seven selected existing cases from the complete157-case Modules browser run, not additional tests. Synthetic service/identity controls cover cross-mode history, shared styles, client and organization replacement, interrupted writes, expiry, sign-out and request-scope reset.",
+  "cases": [
+    {
+      "file": "integration.spec.ts",
+      "line": 37,
+      "title": "shared product navigation and history preserve verified client hints and scoped styles",
+      "passed": true
+    },
+    {
+      "file": "integration.spec.ts",
+      "line": 120,
+      "title": "client replacement interrupts a write and organization replacement clears drafts and revalidates",
+      "passed": true
+    },
+    {
+      "file": "integration.spec.ts",
+      "line": 169,
+      "title": "Core expiry clears the application, does not replay and cannot be escaped by changing client",
+      "passed": true
+    },
+    {
+      "file": "session.spec.ts",
+      "line": 7,
+      "title": "missing configuration renders setup without issuing service requests",
+      "passed": true
+    },
+    {
+      "file": "session.spec.ts",
+      "line": 20,
+      "title": "org/session change clears prior records and sign-out removes all protected content",
+      "passed": true
+    },
+    {
+      "file": "session.spec.ts",
+      "line": 53,
+      "title": "401 removes protected content and asks for sign-in without replaying a request",
+      "passed": true
+    },
+    {
+      "file": "session.spec.ts",
+      "line": 69,
+      "title": "development StrictMode remount establishes a valid request scope before child reads",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+- dialog "Edit meeting":
+  - banner:
+    - heading "Edit meeting" [level=2]
+    - button "Close"
+  - paragraph: Meeting times use UTC. New meetings are private until explicitly shared.
+  - text: Subject
+  - textbox "Subject": Synthetic meeting
+  - text: Starts
+  - textbox "Starts": 2026-10-10T14:00
+  - text: Ends
+  - textbox "Ends": 2026-10-10T15:00
+  - text: Location or join URL
+  - textbox "Location or join URL": Old location
+  - text: Description
+  - textbox "Description"
+  - button "Saving…" [disabled]

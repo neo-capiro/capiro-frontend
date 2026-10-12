@@ -1,0 +1,21 @@
+
+Running 14 tests using 1 worker
+
+(node:497996) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 apps/web/tests/browser/dialog-disabled-focus.spec.ts:22:5 › disabled button keeps pending and unknown dialog focus at 360px (4.0s)
+  ✓   2 apps/web/tests/browser/dialog-disabled-focus.spec.ts:22:5 › disabled field keeps pending and unknown dialog focus at 360px (2.5s)
+  ✓   3 apps/web/tests/browser/dialog-disabled-focus.spec.ts:22:5 › disabled button keeps pending and unknown dialog focus at 1440px (2.8s)
+  ✓   4 apps/web/tests/browser/dialog-disabled-focus.spec.ts:22:5 › disabled field keeps pending and unknown dialog focus at 1440px (2.5s)
+  ✓   5 apps/web/tests/browser/profile-dialog-layout.spec.ts:8:3 › current profile dialogs fit 1440px and avoid cross-component render updates (3.4s)
+  ✓   6 apps/web/tests/browser/profile-dialog-layout.spec.ts:8:3 › current profile dialogs fit 390px and avoid cross-component render updates (2.9s)
+  ✓   7 apps/web/tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on desktop (2.7s)
+  ✓   8 apps/web/tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on desktop (3.2s)
+  ✓   9 apps/web/tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on desktop (2.8s)
+  ✓  10 apps/web/tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on desktop (2.8s)
+  ✓  11 apps/web/tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on phone (2.4s)
+  ✓  12 apps/web/tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on phone (2.4s)
+  ✓  13 apps/web/tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on phone (2.4s)
+  ✓  14 apps/web/tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on phone (2.3s)
+
+  14 passed (40.3s)

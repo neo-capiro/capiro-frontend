@@ -1,0 +1,21 @@
+{
+  "source": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "stats": {
+    "startTime": "2026-10-12T16:54:30.409Z",
+    "duration": 381704.441,
+    "expected": 144,
+    "skipped": 851,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "resultStatuses": {
+    "passed": 144,
+    "timedOut": 1,
+    "interrupted": 4
+  },
+  "exit": 130,
+  "reason": "One total30-second test deadline exhausted with no failed product assertion. Preserve timeout and rerun complete996 on same source with3workers,60-second total budget,retries0. Expect assertion budgets remain5seconds; actions without their own timeout inherit total budget.",
+  "review": "/tmp/capiro-d5dd-reopen-timeout-review",
+  "supersededBy": "/tmp/capiro-successor-qualification/portfolio-d5dd0be-60s",
+  "sourceChanged": false
+}

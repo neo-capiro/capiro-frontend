@@ -1,0 +1,18 @@
+
+Running 11 tests using 1 worker
+
+(node:443429) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 apps/web/test/browser/prospect-draft-pending-edit.spec.ts:111:5 › prospect fields freeze during held update; success preserves submitted text (6.4s)
+  ✓   2 apps/web/test/browser/prospect-draft-pending-edit.spec.ts:111:5 › prospect fields freeze during held update; failure preserves submitted text (3.9s)
+  ✓   3 apps/web/test/browser/prospect-draft-pending-edit.spec.ts:111:5 › prospect fields freeze during held update; lost receipt preserves submitted text (4.2s)
+  ✓   4 apps/web/test/browser/prospect-draft-pending-edit.spec.ts:166:3 › leaving during held update retains the original intent without continuing the old save (1.7s)
+  ✓   5 apps/web/test/browser/prospect-draft-pending-edit.spec.ts:111:5 › prospect fields freeze during held snapshot; success preserves submitted text (2.6s)
+  ✓   6 apps/web/test/browser/prospect-draft-pending-edit.spec.ts:111:5 › prospect fields freeze during held snapshot; failure preserves submitted text (2.6s)
+  ✓   7 apps/web/test/browser/prospect-draft-pending-edit.spec.ts:111:5 › prospect fields freeze during held snapshot; lost receipt preserves submitted text (3.0s)
+  ✓   8 apps/web/test/browser/prospect-draft-pending-edit.spec.ts:166:3 › leaving during held snapshot retains the original intent without continuing the old save (2.6s)
+  ✓   9 apps/web/test/browser/prospect-draft-pending-edit.spec.ts:196:3 › a user replacement during PATCH cannot restore or finish the former editor (2.2s)
+  ✓  10 apps/web/test/browser/prospect-draft-pending-edit.spec.ts:196:3 › a tenant replacement during PATCH cannot restore or finish the former editor (2.0s)
+  ✓  11 apps/web/test/browser/prospect-draft-pending-edit.spec.ts:196:3 › a prospect replacement during PATCH cannot restore or finish the former editor (2.2s)
+
+  11 passed (35.1s)

@@ -1,0 +1,191 @@
+{
+  "decision": "PASS_ASSIGNED_FILES_CALENDAR_REPAIR_SCOPE",
+  "date": "2026-10-12",
+  "candidates": {
+    "files": "752e29f902339c990ee6fb27a2006f88af4de0f2",
+    "calendar": "d1f57b2cf9d05ce271ac8c73f280bbdd7746acab"
+  },
+  "candidateBindings": "candidate-bindings.json",
+  "assessments": [
+    {
+      "id": "CP-01",
+      "rows": [
+        "CORE-058"
+      ],
+      "decision": "PASS_TARGETED_REPAIR",
+      "evidence": [
+        "files-browser-results.json",
+        "files-unit.log",
+        "candidate-files-semantic.log"
+      ],
+      "reason": "Same-ID receipt must also confirm requested access mode and normalized restricted viewer set. Conflicts retain draft, serialize subsequent metadata operations, survive same-cache reopen and expose deliberate current GET review."
+    },
+    {
+      "id": "CP-02",
+      "rows": [
+        "CORE-056",
+        "CORE-063"
+      ],
+      "decision": "PASS_TARGETED_REPAIR",
+      "evidence": [
+        "files-browser-results.json",
+        "candidate-files-semantic.log"
+      ],
+      "reason": "Folder receipt must confirm native trimmed destination or null. Unknown state preserves draft; a current matching-identity GET shows saved state without claiming earlier PATCH causality."
+    },
+    {
+      "id": "CR-01",
+      "rows": [
+        "ENG-notes_add",
+        "ENG-notes_edit",
+        "ENG-notes_approve",
+        "ENG-debrief_create",
+        "ENG-debrief_edit",
+        "ENG-debrief_approve",
+        "ENG-meeting_share_artifacts",
+        "ENG-meeting_unshare_artifacts"
+      ],
+      "decision": "PASS_TARGETED_REPAIR",
+      "evidence": [
+        "calendar-final-browser-results.json",
+        "calendar-unit.log",
+        "independent-contracts-replay.log"
+      ],
+      "reason": "Create/edit/approve native metadata and share/unshare decorated meeting responses have distinct action-specific validators, including meeting/client/selected artifact identity and lifecycle/share semantics. Native responses contain no plaintext echo; content durability is not inferred."
+    },
+    {
+      "id": "CR-02",
+      "rows": [
+        "ENG-notes_add",
+        "ENG-debrief_create"
+      ],
+      "decision": "PASS_TARGETED_REPAIR",
+      "evidence": [
+        "calendar-final-browser-results.json",
+        "calendar-unit.log"
+      ],
+      "reason": "Synchronous cache-local attempt fence prevents double dispatch and fences uncertain non-idempotent creation across remounts; known refusal permits deliberate correction. Parent preflight and captured lifetime prevent former-client publication."
+    },
+    {
+      "id": "CR-03",
+      "rows": [
+        "ENG-meeting_edit"
+      ],
+      "decision": "PASS_TARGETED_REPAIR",
+      "evidence": [
+        "calendar-final-browser-results.json",
+        "independent-contracts-replay.log"
+      ],
+      "reason": "Empty location is explicitly submitted and normalized null receipt accepted; stale location is rejected."
+    },
+    {
+      "id": "CR-04",
+      "rows": [
+        "ENG-meeting_edit",
+        "ENG-meeting_create"
+      ],
+      "decision": "PASS_TARGETED_REPAIR",
+      "evidence": [
+        "calendar-final-browser-results.json",
+        "calendar-unit.log",
+        "independent-contracts-replay.log"
+      ],
+      "reason": "Meeting save checks existing ID and explicit submitted client with trimmed text/equivalent instant normalization, preserving backend autoassociation for unscoped creation and avoiding derived virtuality echo assumptions."
+    },
+    {
+      "id": "CF-IR01",
+      "classification": "ADJACENT_INHERITED_P1_DRAFT_LOSS_FOUND_AND_FIXED",
+      "rows": [
+        "ENG-meeting_edit",
+        "ENG-meeting_create"
+      ],
+      "decision": "PASS_AFTER_CORRECTION",
+      "beforeCommit": "42a7e0c0f7602a1fc01b23495178639a46360c13",
+      "fixedCommit": "d1f57b2cf9d05ce271ac8c73f280bbdd7746acab",
+      "source": [
+        "apps/web/src/features/portfolio/calendar/MeetingForm.tsx:44",
+        "apps/web/src/features/portfolio/calendar/mutations.ts:74"
+      ],
+      "evidence": [
+        "independent-calendar-before.json",
+        "independent-calendar-before-output",
+        "independent-calendar-after.json",
+        "independent-calendar-after-output",
+        "independent-calendar.spec.ts"
+      ],
+      "reason": "Independent held-PUT probe confirmed newer editable subject disappeared on an earlier matching receipt. Owner correction makes meeting draft inputs read-only and client choice disabled during pending/uncertain save. Same independent test failed before and passed after; expanded owner browser suite covers meeting and note/debrief pending fields."
+    }
+  ],
+  "remainingSourceBlockersInAssignedScope": [],
+  "validation": {
+    "filesOwnerBrowserIndependentReplay": {
+      "passed": 11,
+      "unexpected": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "report": "files-browser-results.json"
+    },
+    "calendarFinalOwnerBrowserIndependentReplay": {
+      "passed": 20,
+      "unexpected": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "report": "calendar-final-browser-results.json"
+    },
+    "filesOwnerUnitIndependentReplay": {
+      "passed": 21,
+      "log": "files-unit.log"
+    },
+    "calendarOwnerUnitIndependentReplay": {
+      "passed": 52,
+      "log": "calendar-unit.log"
+    },
+    "independentAdditionalContracts": {
+      "passed": 10,
+      "log": "independent-contracts-replay.log"
+    },
+    "independentFilesSemanticRedGreen": {
+      "baselineFailedExpected": 2,
+      "candidatePassed": 2,
+      "logs": [
+        "baseline-files-semantic.log",
+        "candidate-files-semantic.log"
+      ]
+    },
+    "independentMeetingPendingDraftRedGreen": {
+      "baselineFailedExpected": 1,
+      "candidatePassed": 1,
+      "reports": [
+        "independent-calendar-before.json",
+        "independent-calendar-after.json"
+      ]
+    },
+    "dependencyAndCycleInspection": "Both candidate source graphs had zero errors; dependency-inspection.json. Four changed size signals explicitly reviewed in architecture-review.json."
+  },
+  "nativeContractEvidence": {
+    "commit": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+    "clientFilesControllerSHA256": "9b983bc5ecbf7810ebf054c3e55c6d6343220eb7f3832057469e0c21da8dcfa2",
+    "engagementServiceSHA256": "78770fac56ac51c3af48674d07ea6b735490785dd73684265e54e861958cd3f9",
+    "interpretation": "File mode normalization and move trim/null are native; versionless current GET cannot establish PATCH causality. Meeting create may autoassociate; save text is trimmed/null-normalized. Note approval carries actor/time stamps; debrief approval only status. Edits reset lifecycle/share stamps. Native update contracts expose optional expectedRevision where supported; this patch does not add a CAS/idempotency claim."
+  },
+  "existingCoverage": "No existing assertion was removed/weakened in owner candidate diffs. Root meeting-review fixture-only native metadata correction inspected separately; existing assertions unchanged. Full successor suites remain root-owned.",
+  "architectureReview": "architecture-review.json",
+  "scopeLimits": [
+    "Synthetic browser/API fixtures and pure contract tests only; no native service, authenticated tenant, provider, AWS or live write execution.",
+    "Files replay protection/current-state recovery is cache-local and versionless, not durable operation confirmation or cross-tab CAS.",
+    "Calendar uncertain artifact attempt fence survives same QueryClient remount/client changes; it is not durable across full reload/session/cache replacement.",
+    "Meeting uncertainty is retained within its open review; live durable recovery and native concurrency guarantees are not established.",
+    "Pass applies to the named repaired behaviors, not blanket acceptance of all related rows, design parity, other P1 successor lanes or release/deployment."
+  ],
+  "activity": {
+    "reviewerSourceEdits": 0,
+    "registryEdits": 0,
+    "commits": 0,
+    "pushes": 0,
+    "awsCalls": 0,
+    "providerCalls": 0,
+    "liveWrites": 0,
+    "subagents": 0
+  },
+  "evidenceDirectory": "/tmp/capiro-p1-calendar-files-review"
+}

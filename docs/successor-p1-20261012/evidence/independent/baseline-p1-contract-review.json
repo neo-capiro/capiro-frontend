@@ -1,0 +1,217 @@
+{
+  "createdAt": "2026-10-12T15:09:08.834656+00:00",
+  "reviewer": "objectives_work_intel_review",
+  "mode": "INDEPENDENT_READ_ONLY_SOURCE_AND_ARCHIVED_REPRODUCTION_REVIEW",
+  "base": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+  "frozenApplication": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "backendPin": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+  "nativeCalls": false,
+  "newBrowserRunsAtThisStage": 0,
+  "limitation": "This first stage independently reads implementation, pinned backend excerpts and meaningful archived assertion/replay evidence. Fresh successor-specific independent tests follow author commits. No production/native effects are inferred.",
+  "findings": [
+    {
+      "id": "CP-01",
+      "verdict": "CONFIRMED_FRONTEND_FALSE_COMPLETION",
+      "priority": "P1",
+      "impact": "The confidentiality editor closes on same-ID response retaining all-viewers after uploader-only was requested. This can mislead a user about access restriction; no native disclosure or authorization bypass was demonstrated.",
+      "frontend": [
+        "apps/web/src/features/portfolio/files/mutations.ts:47",
+        "apps/web/src/features/portfolio/files/contracts.ts:48"
+      ],
+      "currentContract": "243248e client-files.controller setAccess139\u2013175 returns ID, viewerMode, normalized unique trimmed viewerUserIds and uploadedByUserId. Exact semantic receipt comparison is available; no new endpoint required. Folder bulk access separately returns folder/mode/IDs/count.",
+      "backendEvidence": [
+        "modules_settings/secondary-backend-setAccess.txt"
+      ],
+      "reproductionEvidence": [
+        "core_profile/assessment.spec.ts",
+        "core_profile/browser-results.json",
+        "root-review/files-corrected-negative-controls.json"
+      ],
+      "independentTestReview": "The existing browser control changes actual UI to Specific people/no selected users, intercepts PATCH, returns real-shaped unchanged file, and observes editor dismissal. It demonstrates frontend receipt handling rather than server ACL enforcement.",
+      "repairReviewRequirements": [
+        "Compare normalized requested ACL, not raw viewer ordering/duplicates.",
+        "Preserve review/draft on incompatible receipt; distinguish uncertain completion from confirmed refusal.",
+        "Retain actor/client current-reader boundaries and authority replacement."
+      ]
+    },
+    {
+      "id": "CR-01",
+      "verdict": "CONFIRMED_FRONTEND_UNVALIDATED_ACKNOWLEDGEMENT",
+      "priority": "P1",
+      "impact": "Enabled artifact writes accept HTTP200 arbitrary bodies and clear editing state, losing reviewed draft without available identity/context validation. Create is browser-proven; other actions share source, not separately native-qualified.",
+      "frontend": [
+        "apps/web/src/features/portfolio/calendar/mutations.ts:46",
+        "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx:31",
+        "apps/web/src/shared/portfolio/api/http.ts:75"
+      ],
+      "currentContract": "243248e noteMetadataSelect11009 and debriefMetadataSelect11031 provide ID/meeting/client/author/status/confidential/timestamps. shareArtifacts1844 and unshareArtifacts1913 return a decorated meeting. Validators must be action-specific.",
+      "backendEvidence": [
+        "modules_settings/secondary-backend-artifact-contracts.txt",
+        "modules_settings/secondary-backend-artifact-sharing.txt"
+      ],
+      "reproductionEvidence": [
+        "calendar_relationships/review.spec.ts",
+        "calendar_relationships/browser-results-initial.json",
+        "root-review/calendar-negative-controls.json"
+      ],
+      "independentTestReview": "The control injects {saved:false, foreign meeting/client} with unchanged GET, then verifies note draft is no longer editable. This is meaningful negative receipt evidence. It does not prove backend emits malformed receipts.",
+      "repairReviewRequirements": [
+        "Validate metadata on save/approve and meeting receipt on share/unshare against original reviewed scope.",
+        "Do not demand body plaintext where backend returns metadata only.",
+        "Preserve intent after unknown outcome; avoid automatic write retry."
+      ]
+    },
+    {
+      "id": "CR-02",
+      "verdict": "CONFIRMED_FRONTEND_REPLAY_RISK",
+      "priority": "P1",
+      "impact": "After an uncertain503 creation response a second ordinary click emits a second POST. Backend current create calls .create without a request-key deduplication contract. Duplicate persistence is possible but no native duplicate records were created.",
+      "frontend": [
+        "apps/web/src/features/portfolio/calendar/mutations.ts:40",
+        "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx:155"
+      ],
+      "currentContract": "243248e createMeetingNote5733\u20135767 and createMeetingDebrief5831\u20135860 have body/confidential/accessLevel/approved inputs and direct create. No request ID or replay deduplication is exposed. Browser abort does not cancel the durable effect.",
+      "backendEvidence": [
+        "modules_settings/secondary-backend-createMeetingNote.txt",
+        "modules_settings/secondary-backend-artifact-contracts.txt"
+      ],
+      "reproductionEvidence": [
+        "calendar_relationships/review.spec.ts",
+        "calendar_relationships/browser-results-initial.json",
+        "root-review/calendar-negative-controls.json"
+      ],
+      "independentTestReview": "The503 then deliberate second-click proof is distinct from synthetic same-tick submit-event proof. The latter tests synchronous guard absence, not a claim about ordinary user double-click dispatch. Debrief currently shares the hook.",
+      "repairReviewRequirements": [
+        "Synchronous single-dispatch guard.",
+        "Retain uncertain creation state and prevent blind repeat POST, including reopen if retained lifecycle supports it.",
+        "Do not acknowledge newly created record by body similarity or ordering without durable identity."
+      ]
+    },
+    {
+      "id": "PROS-F02",
+      "verdict": "CONFIRMED_FRONTEND_LOCAL_DATA_LOSS",
+      "priority": "P1",
+      "impact": "Typing after Save while PATCH is held is accepted, but successful valid PATCH/snapshot and journal clearing remount DraftEditor and discard later input. This needs no malformed backend receipt.",
+      "frontend": [
+        "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx:150",
+        "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx:241",
+        "apps/web/src/features/modules/workspace/prospects/useProspectDraftSave.ts:153"
+      ],
+      "currentContract": "Existing manual draft update and snapshot are separate operations, with exact prospect origin and returned content validation. Journal reserves/rechecks actor, current document and baseline before update; success acknowledges retained intent then remounts local editor. The fix must not replace that journal/authority owner.",
+      "backendEvidence": [
+        "../../integration-contracts-20261012/evidence/backend-243248e/FRONTEND-COMPATIBILITY.md"
+      ],
+      "reproductionEvidence": [
+        "prospects/workspace-review.spec.ts",
+        "prospects/workspace-results.json",
+        "core_intake/secondary-workspace-results.json",
+        "root-review/draft-negative-controls.json"
+      ],
+      "independentTestReview": "The test holds actual intercepted PATCH, types different later input, returns matching submitted content and a valid snapshot, then observes initial input restored. Multiple independent archived replays confirm the same baseline.",
+      "repairReviewRequirements": [
+        "Disable all editable prospect title/section fields throughout reserve/read/update/snapshot/acknowledge pending, or preserve later draft explicitly.",
+        "Hold PATCH and snapshot separately in tests.",
+        "Keep uncertain saved input, deliberate read-current recovery, immutable prospect origin and actor/session replacement intact."
+      ]
+    },
+    {
+      "id": "MS01",
+      "verdict": "CONFIRMED_FRONTEND_OPERATION_SELECTION_MISMATCH",
+      "priority": "P1",
+      "impact": "Existing subscribers can enter Add profiles then Review checkout, but selected backend operation creates a new subscription Checkout Session using absolute quantity. Duplicate charges/subscriptions were not executed or claimed.",
+      "frontend": [
+        "apps/web/src/features/settings/BillingSettings.tsx:86",
+        "apps/web/src/features/settings/BillingSettings.tsx:219",
+        "apps/web/src/shared/capiro/operations/settings.ts:363"
+      ],
+      "currentContract": "Current243248e billing service is byte-identical to prior4be13b0 snapshot. createCheckoutSession95\u2013145 always mode subscription; ensureCustomer only reuses customer. createPortalSession148\u2013166 supplies the existing hosted quantity/payment/invoice management owner. Controller summary comment saying checkout add slots is contradicted by service implementation.",
+      "backendEvidence": [
+        "root-review/backend-current-billing.service.ts",
+        "modules_settings/backend-pin-billing.service.ts",
+        "modules_settings/backend-pin-billing.controller.ts"
+      ],
+      "reproductionEvidence": [
+        "modules_settings/billing-active-add-profiles.png",
+        "modules_settings/assessment.spec.ts",
+        "modules_settings/browser-results.json"
+      ],
+      "independentTestReview": "Baseline preview did not submit Checkout, avoiding a provider action. Frontend operation route plus exact service source establishes the mismatch. Successor request tests must intercept all provider navigation and HTTP.",
+      "repairReviewRequirements": [
+        "hasSubscription true never dispatches checkout for capacity management, including past_due/incomplete/canceled states.",
+        "Reread current billing state/summary before dispatch and refuse unavailable or contradictory state.",
+        "Truthful hosted portal copy; provider configuration and actual billing-admin outcomes remain unqualified.",
+        "Retain synchronous action lock, scope abort and safe destination validation."
+      ]
+    }
+  ],
+  "sourceFingerprints": [
+    {
+      "path": "/workspace/capiro-acceptance-assessment/docs/remaining-assessment-20261012/evidence/modules_settings/backend-pin-billing.controller.ts",
+      "sha256": "4ea9ec86acf7de2ccf98a8cbf1831c5d270ad0af76d8013fa7536dfda99c8874"
+    },
+    {
+      "path": "/workspace/capiro-acceptance-assessment/docs/remaining-assessment-20261012/evidence/modules_settings/backend-pin-billing.service.ts",
+      "sha256": "5ce1534d7cc803321a11375b1a97291ff9d8ce84ae40d49dcc060292cde0297f"
+    },
+    {
+      "path": "/workspace/capiro-acceptance-assessment/docs/remaining-assessment-20261012/evidence/modules_settings/secondary-backend-artifact-contracts.txt",
+      "sha256": "5c98d8abe56b68e4d10cab7bd0bb7db959c6c61c23aad1059ed7a8607c761979"
+    },
+    {
+      "path": "/workspace/capiro-acceptance-assessment/docs/remaining-assessment-20261012/evidence/modules_settings/secondary-backend-artifact-sharing.txt",
+      "sha256": "ef6548ea37b48e46a28d57e38b7a613d08e809667c924b589d51d6d20e9775f0"
+    },
+    {
+      "path": "/workspace/capiro-acceptance-assessment/docs/remaining-assessment-20261012/evidence/modules_settings/secondary-backend-createMeetingNote.txt",
+      "sha256": "5dc4c56e32505c0070307d66f43f37bd8d888275851de869112641ab5fd1ff65"
+    },
+    {
+      "path": "/workspace/capiro-acceptance-assessment/docs/remaining-assessment-20261012/evidence/modules_settings/secondary-backend-setAccess.txt",
+      "sha256": "02894165514105d26a2f0350ac706d4c5e0b69c1ca0a8f548c45860a96949e05"
+    },
+    {
+      "path": "/workspace/capiro-acceptance-assessment/docs/remaining-assessment-20261012/evidence/root-review/backend-current-billing.service.ts",
+      "sha256": "5ce1534d7cc803321a11375b1a97291ff9d8ce84ae40d49dcc060292cde0297f"
+    },
+    {
+      "path": "/workspace/capiro-p1-successor/apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+      "sha256": "4e3d34df21fb1dbe5dc89b91ebc4ef378476a80418fb0274df899d9ffac1a330"
+    },
+    {
+      "path": "/workspace/capiro-p1-successor/apps/web/src/features/modules/workspace/prospects/useProspectDraftSave.ts",
+      "sha256": "73e7b0473bccc679674f9404106ab98134c82e966d29bd70921f4d58909c7cdd"
+    },
+    {
+      "path": "/workspace/capiro-p1-successor/apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+      "sha256": "b66448ff3ded6ddde22d80237bd5eb35714868640750e61e427c0eeee843d9c6"
+    },
+    {
+      "path": "/workspace/capiro-p1-successor/apps/web/src/features/portfolio/calendar/mutations.ts",
+      "sha256": "5d34bdd573f7f465a0b510057b9fb4702fa8799bef249c7a323194ec89ee8b84"
+    },
+    {
+      "path": "/workspace/capiro-p1-successor/apps/web/src/features/portfolio/files/contracts.ts",
+      "sha256": "3f2520b1d63a086ced9a6a592f4d6c1c3d5d2c55aa4cf02da8b7dab6c0bf73e7"
+    },
+    {
+      "path": "/workspace/capiro-p1-successor/apps/web/src/features/portfolio/files/mutations.ts",
+      "sha256": "6de99c4578060400c222de07d5d0ab7dd83cea38dd79638a1b4f7cf4058638a0"
+    },
+    {
+      "path": "/workspace/capiro-p1-successor/apps/web/src/features/settings/BillingSettings.tsx",
+      "sha256": "40a95a3030a93aba6d5872788f504d8edc952047a705505a485f5846a23c91da"
+    },
+    {
+      "path": "/workspace/capiro-p1-successor/apps/web/src/shared/capiro/operations/settings.ts",
+      "sha256": "4b67eafda33f2dc9c245bf9cb53eb93300899c0a6ff8727616333c9f72d3e2b9"
+    },
+    {
+      "path": "/workspace/capiro-p1-successor/apps/web/src/shared/portfolio/api/http.ts",
+      "sha256": "fbf7da76a48270344669f73bc3671b682ccd6d732660c6c85f18b9a871d51f17"
+    }
+  ],
+  "reviewScopeNext": [
+    "Billing candidate source, focused tests, current-read/hosted operation/scoped async behavior and complexity.",
+    "Workspace candidate source, delayed write/version controls, journal/authority replacement and complexity."
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "reviewedAt": "2026-10-12T16:46:15.771337+00:00",
+  "reviewer": "Independent Codex /root/objectives_work_intel_review",
+  "decision": "Accept exact final bounded frontend correction for root integration and combined qualification",
+  "source": {
+    "baseCommit": "c305af13dd93cad2af18352b8a8b449e133a0fc2",
+    "commitChain": [
+      "01cba25e85f1e82c731e65191c98b1de4e9d48de",
+      "dee19b106d87859b812bfccc10ef9387f90ad4be"
+    ],
+    "finalCommit": "dee19b106d87859b812bfccc10ef9387f90ad4be",
+    "tree": "bc279628fc582a0b730a6375b5c31e607be4e729",
+    "changedFiles": [
+      {
+        "path": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+        "sha256": "314c3d1c5fedb548d77b926aa2664deb4d82b11468b3d39546d8c19719c94809"
+      },
+      {
+        "path": "apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
+        "sha256": "4e330177ee89a55f5f2995b363eabdbde3ad7bebcc6db688473c7e956242a2dc"
+      },
+      {
+        "path": "apps/web/src/features/portfolio/calendar/artifacts/contracts.ts",
+        "sha256": "8d272d709972ecac8e2134ad24099f6321e316f565bb28e7b7eb5b8c8a71adf3"
+      },
+      {
+        "path": "apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+        "sha256": "f37b063199dcdea0c1f098a50a1b6ba48e61992c492f05326966c6d890521f06"
+      },
+      {
+        "path": "apps/web/tests/browser/calendar-client-clear.spec.ts",
+        "sha256": "0171c3c5cec47c8c723531b4f63e5955c131cc0db772ed56f71d97318216cede"
+      },
+      {
+        "path": "apps/web/tests/browser/calendar-meeting-receipts-harness.tsx",
+        "sha256": "8faf894068b364106621806f1f62259a7964b6fa33547cec3d92f7bcb4a6f93b"
+      },
+      {
+        "path": "apps/web/tests/browser/manual-debrief.spec.ts",
+        "sha256": "baa61f651707935b274c9937cb1f45d7b8b893ac8af3db6901147cbb60705c79"
+      },
+      {
+        "path": "apps/web/tests/browser/meeting-library.spec.ts",
+        "sha256": "ab51fe5352b9cbe5db0d8ac46d3ac817ad01ca75750748a5cf64c80e183d492e"
+      },
+      {
+        "path": "apps/web/tests/browser/meeting-review.spec.ts",
+        "sha256": "851510fe08497f7c14f14755c77f590fb82b72169bb1a5bbe1b986b08c53f331"
+      },
+      {
+        "path": "apps/web/tests/browser/voice-integration.spec.ts",
+        "sha256": "0d52dfd98950b1b5cb00c8e2bf5c54c0cb7a99220efa96d8d1ff5deb8c0b6fd4"
+      },
+      {
+        "path": "apps/web/tests/calendar-artifact-receipts.test.ts",
+        "sha256": "0cbcdbed55af981472970bc9b66263dd282f1ffc4ac172ea338985ac99664949"
+      },
+      {
+        "path": "apps/web/tests/calendar-native-lifecycle.test.ts",
+        "sha256": "ff552c6be01e958d841d84b9c15797133b97bbbedcbe53002c4a3904b5543808"
+      }
+    ]
+  },
+  "results": {
+    "independentParserBefore": {
+      "passed": 33,
+      "failed": 6,
+      "total": 39,
+      "file": "parser-native-before-results.json"
+    },
+    "independentParserAfter": {
+      "passed": 39,
+      "failed": 0,
+      "total": 39,
+      "file": "parser-after-results.json",
+      "sourceBinding": "Contracts and meeting-save bytes unchanged between 01cba25 and final dee19b1; recorded hashes bind final source."
+    },
+    "captionBefore": {
+      "passed": 0,
+      "failed": 2,
+      "file": "caption-before-results.json",
+      "commit": "01cba25e85f1e82c731e65191c98b1de4e9d48de"
+    },
+    "finalBrowser": {
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "file": "final-browser-results.json",
+      "commit": "dee19b106d87859b812bfccc10ef9387f90ad4be"
+    },
+    "totalFinalIndependentPassingControls": 47
+  },
+  "correctionsReviewed": [
+    {
+      "file": "apps/web/src/features/portfolio/calendar/artifacts/contracts.ts",
+      "reason": "Creation requires native notes draft/debriefs generated; both updates require edited. Note save requires null approval stamps. Current creation author is checked, while nullable/different update author remains valid. Note approval requires current approver/time; debrief approval uses status only. Share permits nullable preserved original attribution while retaining selected artifact/meeting/client binding, approved status, confidentiality, sharedAt and shared visibility; unshare requires both selected share stamps cleared without requiring globally private meeting."
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+      "reason": "Generation retains role/runtime-owned visible-disabled entries while pending/uncertain artifact writes suppress new drafts. Saved nonconfidential card caption distinguishes undefined sharing metadata from explicit null: unavailable versus private; timestamp is shared. Missing debrief GET stamps are not fabricated, normalized to null, or used to enable Unshare."
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
+      "reason": "Existing No client edit sends clientId:null, causing native clear semantics; old-association receipt fails existing parser. New unscoped create omits clientId and accepts backend inference. No native association algorithm is reproduced in browser."
+    }
+  ],
+  "browserControls": [
+    "Native notes and generated debrief creation each dispatch one intercepted POST and close successfully on metadata-only receipt.",
+    "Portal role keeps all four generation entries visible disabled and dispatches no action.",
+    "No client existing edit sends explicit null; cleared native response succeeds, old association retains locked draft and reports uncertain completion.",
+    "New unscoped meeting omits clientId and accepts native-inferred client.",
+    "Notes/debrief idempotent share accepts nullable original sharer with actual operation metadata; native debrief GET continues to omit stamps, shows unavailable caption, and cannot fabricate Unshare."
+  ],
+  "nativeContractEvidence": "backend-contract-review.json",
+  "architectureReview": "architecture-review.json",
+  "testStructureReview": "test-structure-review.json",
+  "remainingLimitations": [
+    "Pinned native listMeetingDebriefs omits sharing stamps. Full native shared/unshare list presentation remains unavailable; corrected UI explicitly reports Sharing status unavailable. No backend fix, endpoint or metadata invention was performed.",
+    "All requests in browser controls are synthetic intercepted localhost fixtures structurally derived from pinned native source. This is not live/native authorization, encrypted-content, provider, durability or deployment acceptance. No backend/provider/paid-model/AWS operations were performed.",
+    "Root owns final exact architecture registry recording, integrated gates and successor pin. Earlier 49f/c305 incompatible source and draft-only debrief greens are not accepted retroactively."
+  ],
+  "provenance": {
+    "preliminaryParser": "parser-before-results.json / preliminary-parser.spec.ts preserve the first exploratory 33-pass/6-fail run; parser-native-before uses fully stamped positive approved-note fixtures and reproduces the same failures. No corrected setup failure is counted as product red evidence.",
+    "firstBrowser": "native-browser-results.json / action-plumbing-browser.spec.ts preserve 8 passes on 01cba25 before the missing-caption assertion was introduced. They qualify action plumbing only, superseded by final-browser for final UI acceptance.",
+    "ownerReportedNotIndependentlyReplayed": "Owner reports 59 unit controls, 62 affected browser cases and 17 final receipt/caption cases; these are not added to the 47 independent count. Owner clear-client red2/green3 and original generated/portal reds remain in owner evidence; root retains canonical parent reproduction825c56e51ffd385ea9be30255a0f1784505740d6713b8925477f8883d2a4e5df."
+  }
+}

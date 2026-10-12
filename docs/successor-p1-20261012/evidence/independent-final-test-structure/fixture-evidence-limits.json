@@ -1,0 +1,12 @@
+[
+  {
+    "file": "apps/web/tests/browser/meeting-library.spec.ts:359",
+    "classification": "inherited fixture-content limitation, not a new responsibility defect",
+    "detail": "The unchanged GET row following the corrected POST response still contains status:draft and sharedAt:null for a debrief. The corrected POST now returns generated metadata. This scenario proves upload/extraction/review/save separation and receipt plumbing; it does not establish native GET lifecycle/sharing projection. The separate independent final Calendar controls use native-absent debrief share stamps and verify unavailable captions."
+  },
+  {
+    "file": "apps/web/tests/calendar-native-lifecycle.test.ts:59",
+    "classification": "focused parser fixture limitation, not a responsibility defect",
+    "detail": "The note-share positive case inherits cleared approval stamps from the create fixture while changing status to approved. It exercises selected sharing/attribution validation only; it is not a full native approved-note row oracle. The independent native parser controls use stamped approved-note fixtures and independently verify current approver and save-stamp clearing."
+  }
+]

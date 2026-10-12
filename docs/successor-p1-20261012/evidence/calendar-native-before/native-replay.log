@@ -1,0 +1,10 @@
+
+Running 3 tests using 1 worker
+
+(node:533770) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 ../../tmp/capiro-debrief-fixture-review/native-manual-debrief.spec.ts:96:5 › manual debrief reviews written context, generates only on submit and saves separately (9.7s)
+  ✓  2 ../../tmp/capiro-debrief-fixture-review/native-meeting-library.spec.ts:308:5 › Transcript shares canonical upload, retries extraction without duplicate bytes and reviews truncation (10.3s)
+  ✓  3 ../../tmp/capiro-debrief-fixture-review/native-voice-integration.spec.ts:10:5 › Calendar voice source explicitly generates a reviewed draft and saves separately (8.4s)
+
+  3 passed (32.1s)

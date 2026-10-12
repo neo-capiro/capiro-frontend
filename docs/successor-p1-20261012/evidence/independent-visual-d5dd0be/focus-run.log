@@ -1,0 +1,8 @@
+
+Running 1 test using 1 worker
+
+(node:582258) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 ../../tmp/capiro-final-visual-d5dd0be/focus-regression.spec.ts:3:5 › unknown folder save keeps settled Tab focus inside its modal (7.6s)
+
+  1 passed (10.3s)

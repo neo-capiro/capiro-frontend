@@ -108,39 +108,12 @@
     "reviewedOn": "2026-10-11"
   },
   {
-    "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
-    "kind": "function",
-    "symbol": "MeetingArtifacts",
-    "fingerprint": "c225761627054943324aa2c49d2d45b971ec70d43cd87e141404f2e2d532ddd4",
-    "reason": "One meeting-artifact session owns the displayed notes/debrief list, selection, edit draft and share intent. Writes remain in the mutation hook, while generation and PDF review have separate components. Keeping the selected artifact and its draft actions together preserves one record workflow. An artifact card can be extracted if independent reuse appears; there is no provider orchestration or unrelated persistence in this component.",
-    "reviewedBy": "Codex portfolio_calendar_relationships",
-    "reviewedOn": "2026-10-11"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
-    "kind": "function",
-    "symbol": "MeetingArtifacts > <anonymous> #5",
-    "fingerprint": "267831594d9e44f4bec4e80779d0534f706783ddbbb62118fc9ca3f6c077fbab",
-    "reason": "This map callback renders exactly one artifact row, including restricted content and callbacks for that row's actions. It neither performs transport nor establishes authority. Its conditional markup reflects a single record's allowed presentation. Naming it MeetingArtifactCard would be useful with another caller, but extracting solely because the callback exceeds80 lines adds a boundary without a separate responsibility.",
-    "reviewedBy": "Codex portfolio_calendar_relationships",
-    "reviewedOn": "2026-10-11"
-  },
-  {
     "file": "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
     "kind": "function",
     "symbol": "MeetingDetail",
     "fingerprint": "f3ccfeb592e9875faa6f155044d5b306545c97ffffaa94b1c427e5add98ac235",
     "reason": "This saved-meeting detail composes the record query, tabs and delegated child surfaces. Generation, uploads, attendance and preparation internals remain outside it. Loading/missing/error states and the selected tab all describe the same meeting. Its size is composition markup, not a second service owner.",
     "reviewedBy": "Codex portfolio_calendar_relationships",
-    "reviewedOn": "2026-10-11"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
-    "kind": "function",
-    "symbol": "MeetingForm",
-    "fingerprint": "7292a3622fa0ecfcc23fbea06e393f92bb95f7089d703dec889ac5537b31045d",
-    "reason": "Independently reread after the client-scope correction: this is one meeting input boundary. Controlled client selection and local fields remain together with temporal-order validation, caller/picker availability and submit intent. The retained unavailable client choice prevents silently changing the draft association. The existing save hook owns persistence and mutation errors; authorization and provider behavior remain external. These additions do not introduce an unrelated lifecycle or justify splitting a single form merely by line count.",
-    "reviewedBy": "Codex portfolio_calendar_relationships (independent coordinator-change review)",
     "reviewedOn": "2026-10-11"
   },
   {
@@ -490,15 +463,6 @@
     "reviewedOn": "2026-10-11"
   },
   {
-    "file": "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx",
-    "kind": "function",
-    "symbol": "ObjectivesPage",
-    "fingerprint": "868db003b24e6da6e201b3afa0af4c465f57f3f0ddebe8378c8694ca1e759949",
-    "reason": "ObjectivesPage remains the existing Objective list, status-filter and URL composition owner, with its existing selected-record edit and delete dialogs. The create query state now delegates directly to NewObjectivePage, so the list does not absorb full-page form state or mutation logic. Both create exit and edit navigation reuse the same query-preserving navigator, and the existing client-keyed editor boundary remains explicit. The 184-line body is cohesive page composition; further extraction solely to satisfy the threshold would separate coupled list/selection navigation without moving a second service responsibility out.",
-    "reviewedBy": "Codex portfolio_objectives; Codex integration coordinator (independent confirmation)",
-    "reviewedOn": "2026-10-11"
-  },
-  {
     "file": "apps/web/src/features/portfolio/prospects/brief/BriefEditor.tsx",
     "kind": "function",
     "symbol": "BriefEditor",
@@ -634,17 +598,6 @@
     "nonblank": 125,
     "fingerprint": "6de7f0e3319ca02c8abc26a0604775cff426b3e1d618ffda0118902946d06d90",
     "reason": "Owns the pipeline view's drag/selection intent and opens `StageEditor` for review. It does not persist on drop, infer legacy mappings, calculate billing or create clients. Counts and stage data remain authoritative inputs. Retain the local drag ID and selected-stage review together; a valuation model would need a different owner.",
-    "reviewedBy": "Codex portfolio_prospects_files",
-    "reviewedOn": "2026-10-11"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx",
-    "kind": "function",
-    "symbol": "ProspectsIndex",
-    "line": 22,
-    "nonblank": 176,
-    "fingerprint": "81ce12080a5eda26f9f9eed0061539cb379eba08e87f9ce6f3d321c880b32a0d",
-    "reason": "Owns URL filter state, accessible result cards and opening the create/pipeline views. Query construction and writes live elsewhere; result counts are displayed rather than invented from the visible page. Retain this browse-page composition. New prospect lifecycle operations should not be added to its filter setter or result renderer.",
     "reviewedBy": "Codex portfolio_prospects_files",
     "reviewedOn": "2026-10-11"
   },
@@ -1306,15 +1259,6 @@
     "symbol": "useFollowUpCommand > run",
     "fingerprint": "a7824978aad5641b0f3c187d65702a225821bf79480c0a62345f39447ca7a5a1",
     "reason": "This is the ordered state transition for one explicit command operation. It verifies current authority, reserves/reads the canonical original journal, dispatches the existing Core command operation, durably records validated lineage and then publishes the receipt. All steps use one lifetime guard and original request identity; pre-dispatch failure, uncertain dispatch and storage refusal remain distinct. Wire semantics, schema validation and persistence transactions are separate owners. Its sequencing is intentionally contiguous for review.",
-    "reviewedBy": "Codex shared frontend integration responsibility review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
-    "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
-    "kind": "function",
-    "symbol": "DraftEditor",
-    "fingerprint": "27b4e0b06f83d1a19f4d4d87478db8d3d4b1006a3d7d4e20d6e048200bfa5c5e",
-    "reason": "This remains the canonical manual document editor for both general and prospect-origin drafts. The prospect wrapper hydrates guarded retained input before mounting it and supplies the dedicated save lifecycle. Fields, current-content comparison, history and export controls concern this same document; request/persistence/authority logic remains outside the renderer. General draft and Newsletter behavior are preserved.",
     "reviewedBy": "Codex shared frontend integration responsibility review",
     "reviewedOn": "2026-10-12"
   },

@@ -1,0 +1,47 @@
+
+Running 1 test using 1 worker
+
+(node:537894) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 ../../tmp/capiro-debrief-fixture-review/original-meeting-review.spec.ts:398:5 › disabled generation capability and portal role send no source generation (17.7s)
+
+
+  1) ../../tmp/capiro-debrief-fixture-review/original-meeting-review.spec.ts:398:5 › disabled generation capability and portal role send no source generation 
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator: getByRole('button', { name: 'Use saved meeting notes', exact: true })
+    Expected: disabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeDisabled" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Use saved meeting notes', exact: true })
+
+
+      416 |   await expect(
+      417 |     page.getByRole("button", { name: "Use saved meeting notes", exact: true }),
+    > 418 |   ).toBeDisabled();
+          |     ^
+      419 |   await expect(
+      420 |     page.getByRole("dialog", { name: "Use saved meeting notes", exact: true }),
+      421 |   ).toHaveCount(0);
+        at /tmp/capiro-debrief-fixture-review/original-meeting-review.spec.ts:418:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-debrief-fixture-review/portal-output/original-meeting-review-di-2f8b7-e-send-no-source-generation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-debrief-fixture-review/portal-output/original-meeting-review-di-2f8b7-e-send-no-source-generation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-debrief-fixture-review/portal-output/original-meeting-review-di-2f8b7-e-send-no-source-generation/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-debrief-fixture-review/portal-output/original-meeting-review-di-2f8b7-e-send-no-source-generation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    ../../tmp/capiro-debrief-fixture-review/original-meeting-review.spec.ts:398:5 › disabled generation capability and portal role send no source generation 

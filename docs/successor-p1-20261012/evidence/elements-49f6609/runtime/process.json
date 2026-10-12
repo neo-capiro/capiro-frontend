@@ -1,0 +1,35 @@
+{
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "/workspace/capiro-p1-successor/packages/qualification-elements/ssr-runtime.mjs",
+    "/tmp/capiro-successor-elements-49f6609/ssr/receipt.json",
+    "06e8052d76f31561d1ce7ce2453c60fa709c0f39a542ea43f8b304f9b6497925"
+  ],
+  "cwd": "/workspace/capiro-p1-successor/packages/qualification-elements",
+  "environment": {
+    "PATH": "/workspace/capiro-p1-successor/packages/qualification-elements/node_modules/.bin:/workspace/capiro-p1-successor/packages/node_modules/.bin:/workspace/capiro-p1-successor/node_modules/.bin:/workspace/node_modules/.bin:/node_modules/.bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/node/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/workspace/capiro-p1-successor/packages/qualification-elements/node_modules/.bin:/workspace/capiro-p1-successor/packages/node_modules/.bin:/workspace/capiro-p1-successor/node_modules/.bin:/workspace/node_modules/.bin:/node_modules/.bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/node/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/workspace/capiro-p1-successor/node_modules/.bin:/workspace/node_modules/.bin:/node_modules/.bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/node/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/home/agent/.local/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin/override:/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin:/opt/codex/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/agent/.local/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin/fallback",
+    "SystemRoot": "",
+    "NODE_ENV": "production",
+    "TZ": "UTC",
+    "NODE_DISABLE_COMPILE_CACHE": "1"
+  },
+  "startUtc": "2026-10-12T16:05:32.357Z",
+  "endUtc": "2026-10-12T16:05:35.769Z",
+  "durationMs": 3411.8084959999996,
+  "timeoutMs": 25000,
+  "maxBuffer": 524288,
+  "status": 0,
+  "signal": null,
+  "error": null,
+  "shell": false,
+  "streams": {
+    "stdout": {
+      "bytes": 168939,
+      "sha256": "194e2a539ace51fbf120e0d4ac2cd9d691b4563f870599e93799d99c4e3641cf"
+    },
+    "stderr": {
+      "bytes": 652,
+      "sha256": "dfb23e5194197718f858fabb6667e9114fb289463e77404272931d4275dec913"
+    }
+  }
+}

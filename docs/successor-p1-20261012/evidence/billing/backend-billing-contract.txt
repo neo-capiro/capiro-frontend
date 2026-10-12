@@ -1,0 +1,86 @@
+243248e726243c44bd4b9d24fd1ed220da18c56a apps/onboard-api/src/billing/billing.service.ts
+  94   async createCheckoutSession(
+  95     actor: BillingActor,
+  96     opts: { quantity: number; promoCode?: string },
+  97   ): Promise<{ url: string }> {
+  98     const stripe = this.stripe.require();
+  99     const quantity = Math.max(MIN_CLIENT_SLOTS, Math.floor(opts.quantity || 0));
+ 100 
+ 101     const customerId = await this.ensureCustomer(actor, stripe);
+ 102 
+ 103     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [
+ 104       { price: this.slotsPriceId, quantity },
+ 105     ];
+ 106     if (this.overagePriceId) {
+ 107       // Metered prices carry no quantity.
+ 108       lineItems.push({ price: this.overagePriceId });
+ 109     }
+ 110 
+ 111     // Promotion code: if the caller supplied one, resolve it to a promotion-code
+ 112     // id and apply it directly (Checkout forbids combining an explicit discount
+ 113     // with allow_promotion_codes). Otherwise let the customer type one in.
+ 114     let discounts: Stripe.Checkout.SessionCreateParams.Discount[] | undefined;
+ 115     let allowPromotionCodes: boolean | undefined = true;
+ 116     if (opts.promoCode?.trim()) {
+ 117       const code = opts.promoCode.trim();
+ 118       const found = await stripe.promotionCodes.list({ code, active: true, limit: 1 });
+ 119       const promo = found.data[0];
+ 120       if (!promo) throw new BadRequestException(`Promo code "${code}" is not valid.`);
+ 121       discounts = [{ promotion_code: promo.id }];
+ 122       allowPromotionCodes = undefined;
+ 123     }
+ 124 
+ 125     const session = await stripe.checkout.sessions.create({
+ 126       mode: 'subscription',
+ 127       customer: customerId,
+ 128       client_reference_id: actor.tenantId,
+ 129       line_items: lineItems,
+ 130       discounts,
+ 131       allow_promotion_codes: allowPromotionCodes,
+ 132       subscription_data: {
+ 133         metadata: { tenantId: actor.tenantId, tenantSlug: actor.tenantSlug },
+ 134       },
+ 135       metadata: { tenantId: actor.tenantId, tenantSlug: actor.tenantSlug },
+ 136       success_url: `${this.returnBase}/onboarding/subscribe?status=success&session_id={CHECKOUT_SESSION_ID}`,
+ 137       cancel_url: `${this.returnBase}/onboarding/subscribe?status=cancelled`,
+ 138     });
+ 139 
+ 140     if (!session.url) throw new BadRequestException('Stripe did not return a Checkout URL.');
+ 141     await this.audit(actor.tenantId, 'checkout_session_created', {
+ 142       quantity,
+ 143       actor: actor.clerkUserId,
+ 144     });
+ 145     return { url: session.url };
+ 146   }
+ 147 
+ 148   /**
+ 149    * Create a Stripe Customer Portal session (manage card, change slot quantity,
+ 150    * view invoices). Surfaced under Settings → Billing and the slot-limit CTA.
+ 151    */
+ 152   async createPortalSession(actor: BillingActor): Promise<{ url: string }> {
+ 153     const stripe = this.stripe.require();
+ 154     const tenant = await this.prisma.withTenant(actor.tenantId, (tx) =>
+ 155       tx.tenant.findUnique({
+ 156         where: { id: actor.tenantId },
+ 157         select: { stripeCustomerId: true },
+ 158       }),
+ 159     );
+ 160     if (!tenant?.stripeCustomerId) {
+ 161       throw new BadRequestException('No billing account yet — subscribe first.');
+ 162     }
+ 163     const session = await stripe.billingPortal.sessions.create({
+ 164       customer: tenant.stripeCustomerId,
+ 165       return_url: `${this.returnBase}/settings/billing`,
+ 166     });
+ 167     return { url: session.url };
+ 168   }
+ 169 
+ 170   /** Find-or-create the tenant's Stripe customer, persisting the id. */
+ 171   async ensureCustomer(actor: BillingActor, stripe: Stripe): Promise<string> {
+ 172     const tenant = await this.prisma.withTenant(actor.tenantId, (tx) =>
+ 173       tx.tenant.findUnique({
+ 174         where: { id: actor.tenantId },
+ 175         select: { name: true, slug: true, stripeCustomerId: true },
+ 176       }),
+ 177     );
+ 178     if (tenant?.stripeCustomerId) return tenant.stripeCustomerId;

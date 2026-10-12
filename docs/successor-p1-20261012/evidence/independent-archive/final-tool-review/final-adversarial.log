@@ -1,0 +1,63 @@
+/tmp/capiro-successor-archive-review/verify-source-zip.py:255: UserWarning: Overlapped entries: 'README.md' (possible zip bomb)
+  with archive.open(info, "r") as member:
+/tmp/capiro-successor-archive-review/verify-source-zip.py:255: UserWarning: Overlapped entries: 'source-commit.txt' (possible zip bomb)
+  with archive.open(info, "r") as member:
+{
+  "canonicalSHA256": "578d072953f898142392fa92437ab0ac207dadf8d093d6b88bfdcf7a02915882",
+  "independentSHA256": "dc4b13aaa05856c86bf989c58c54316bf4a0a6ff8a4b50bb0953672ccd566ee2",
+  "syntheticCommit": "d46507df37c8cf2cbdd2b973f39b751a369a0746",
+  "syntheticRepository": "/tmp/capiro-successor-archive-review/synthetic-git",
+  "successorArchiveCreated": false,
+  "awsCalls": 0,
+  "providerCalls": 0,
+  "canonicalPassed": 25,
+  "independentPassed": 28,
+  "total": 28
+}
+[
+  {
+    "case": "valid-local-zip64",
+    "expectedAccept": true,
+    "archiveSHA256": "99f3486c94e493f2487cdf81a7b0dadea1b1e30a58fcf5b4b9911b8463900990",
+    "canonical": {
+      "accepted": false,
+      "passed": false,
+      "error": "ValueError: ZIP local/central header mismatch or unsupported layout"
+    },
+    "independent": {
+      "accepted": true,
+      "passed": true,
+      "error": null
+    }
+  },
+  {
+    "case": "valid-zip64-data-descriptor",
+    "expectedAccept": true,
+    "archiveSHA256": "dec3a03d5e29ac1ff8c9bccd2f6457403005664b2140313bf0ac496b47f41b05",
+    "canonical": {
+      "accepted": false,
+      "passed": false,
+      "error": "ValueError: ZIP local/central header mismatch or unsupported layout"
+    },
+    "independent": {
+      "accepted": true,
+      "passed": true,
+      "error": null
+    }
+  },
+  {
+    "case": "valid-zip64-directory",
+    "expectedAccept": true,
+    "archiveSHA256": "e8f705d1ab54fd6e30ab4ffc3d8c0551c24cc6faa3de481fd7cbf4cffb9653c5",
+    "canonical": {
+      "accepted": false,
+      "passed": false,
+      "error": "ValueError: ZIP has prefix/trailing data, split volumes or unsupported ZIP64 layout"
+    },
+    "independent": {
+      "accepted": true,
+      "passed": true,
+      "error": null
+    }
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "id": "FINAL-DISPOSITION-01",
+  "status": "RESOLVED_VERIFIED",
+  "changedIDs": [
+    "CP-01",
+    "CP-02",
+    "CR-01",
+    "CR-02",
+    "CR-03",
+    "CR-04",
+    "OWI-F01",
+    "PROS-F01",
+    "PROS-F02",
+    "MS01"
+  ],
+  "onlyChangesWereTenDispositionValues": true,
+  "oldSHA256": "b006cb14218be79708f2047d0c6903c4ca4836fc2139580183bf152f283ba458",
+  "newSHA256": "d58f2f75787a78d18f5af9f2dfacc417cbfd1e2b72ecad29a015bdc4a48acbb4",
+  "openFindings": 27,
+  "nativeRowsHeld": 337,
+  "nativeRowsNewlyAccepted": 0
+}
