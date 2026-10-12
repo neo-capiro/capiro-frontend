@@ -1,0 +1,35 @@
+{
+  "sealedAt": "2026-10-12T23:39:32.022975+00:00",
+  "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "files": [
+    {
+      "path": "PATCH-OFFSETS.jsonl",
+      "bytes": 2782076,
+      "sha256": "339498ce3c38505276fc9b4565ccab4382700ca485c8b69a324057a2700303de"
+    },
+    {
+      "path": "PROOF.json",
+      "bytes": 1442,
+      "sha256": "090de231174bf07fdf776f0bbe2e27a88f6d61474009ffd741995b3c0b8789ec"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 1939,
+      "sha256": "080bb1d1d5229c21c45d99133c738234b37ecc4d1dbeb2b80cf1966d81dcffde"
+    },
+    {
+      "path": "verification.log",
+      "bytes": 1442,
+      "sha256": "090de231174bf07fdf776f0bbe2e27a88f6d61474009ffd741995b3c0b8789ec"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 4760,
+      "sha256": "4ffa5de24e4b525f492c8f2f42f1191faf6d4f5342599b82f16158afee9c2014"
+    }
+  ],
+  "excludedSelf": [
+    "MANIFEST.json",
+    "MANIFEST.sha256"
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "sealedAt": "2026-10-12T23:35:20.156654+00:00",
+  "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "files": [
+    {
+      "path": "CURRENT-RUNTIME-AND-RECIPE.json",
+      "bytes": 1816,
+      "sha256": "8578f6b1dcbd925d2aff54af5a05d39c94b8b8d1e9c20f9c7df8f3d49e57af18"
+    },
+    {
+      "path": "INSPECTED-ROOT-UTC-REPRODUCTION.json",
+      "bytes": 574,
+      "sha256": "93ad3682897df34d394236dc3816228bfe04ad4c4ee970134ca511ff492ae2e2"
+    },
+    {
+      "path": "PRODUCER-RECEIPT-SUMMARY.json",
+      "bytes": 879,
+      "sha256": "6801ad1a07e19c82bd9ebb6c722be81b0f76f86a8c6d417e6ef121d5e801e83e"
+    },
+    {
+      "path": "PRODUCER-ZIP-METADATA.json",
+      "bytes": 472,
+      "sha256": "2e84f3d0be4de278dad220cb35f0580655a4eac2ca873004dac65398ec27e674"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 5128,
+      "sha256": "84caa5f1e5969f7824b5df7f17b5bc2cc6a827a66103f3527b0d5262e50c549c"
+    },
+    {
+      "path": "SINGLE-MEMBER-COMPRESSED-CONTINUITY.json",
+      "bytes": 260,
+      "sha256": "993d7425d9e547c8a64232395052d3cf74226c8dcef21ae1ba5f7e094dcd17d4"
+    },
+    {
+      "path": "TZ-BYTE-DIFF.json",
+      "bytes": 636,
+      "sha256": "368fb829ee376ac46492936382cf279ea736c320f91009ad95c6c3425e78ccb2"
+    },
+    {
+      "path": "TZ-SINGLE-MEMBER-PROBES.json",
+      "bytes": 1909,
+      "sha256": "4847f6f23c60a67c9e509ca768f45597913bdafeebf040fec2335817e63a2e5d"
+    },
+    {
+      "path": "producer-recipe-readonly-copy.py",
+      "bytes": 2328,
+      "sha256": "7344623e3f2cc5a8a94cc57e5d6b645dfdd9cab06ac52b172af98d8a7f7f0dfb"
+    }
+  ],
+  "excludedSelf": [
+    "MANIFEST.json",
+    "MANIFEST.sha256"
+  ]
+}

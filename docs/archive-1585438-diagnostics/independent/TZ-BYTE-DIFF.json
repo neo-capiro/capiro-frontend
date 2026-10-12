@@ -1,0 +1,38 @@
+{
+  "centralDirectoryOffset": 98,
+  "DOSDateTimeAllowedOffsets": [
+    10,
+    11,
+    12,
+    13,
+    110,
+    111,
+    112,
+    113
+  ],
+  "probes": [
+    {
+      "TZ": "UTC",
+      "offsetsDifferingFromUTC": [],
+      "onlyLocalAndCentralDOSDateTimeDiffer": true
+    },
+    {
+      "TZ": "America/Los_Angeles",
+      "offsetsDifferingFromUTC": [
+        11,
+        111
+      ],
+      "onlyLocalAndCentralDOSDateTimeDiffer": true
+    },
+    {
+      "TZ": "Pacific/Kiritimati",
+      "offsetsDifferingFromUTC": [
+        11,
+        12,
+        111,
+        112
+      ],
+      "onlyLocalAndCentralDOSDateTimeDiffer": true
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "readOnly": true,
+  "sourceArchiveUnchanged": true,
+  "method": "Stream original archive into SHA256, replacing only the four DOS timestamp bytes in each local and central entry; UTC extras, compressed payloads and all other bytes preserved. No candidate ZIP written.",
+  "records": [
+    {
+      "offsetHours": 11,
+      "DOSDateTime": "2026-10-13T09:07:40",
+      "sha256": "e5126c0b2c0e5a9a1bfee0cbe9cde5fc0649b3a97ba01eb968701602e3dbc046",
+      "matchesReportedShippingArchive": false,
+      "changedHeaderFields": 22886,
+      "bytes": 841126268
+    },
+    {
+      "offsetHours": 10,
+      "DOSDateTime": "2026-10-13T08:07:40",
+      "sha256": "24c8d8267e2c045be688b11ee5b432bae1f17c9e2eec72f41f76b347d8b5816d",
+      "matchesReportedShippingArchive": false,
+      "changedHeaderFields": 22886,
+      "bytes": 841126268
+    },
+    {
+      "offsetHours": -7,
+      "DOSDateTime": "2026-10-12T15:07:40",
+      "sha256": "aff0b40ecb8949578c3aa6c1af639569e7556938f8141b8307aaf783a08c6f38",
+      "matchesReportedShippingArchive": false,
+      "changedHeaderFields": 22886,
+      "bytes": 841126268
+    },
+    {
+      "offsetHours": -4,
+      "DOSDateTime": "2026-10-12T18:07:40",
+      "sha256": "5a21de580abd7e9b19401d9903f598439cda8df6e8a46d415a3bc239c64ae714",
+      "matchesReportedShippingArchive": true,
+      "changedHeaderFields": 22886,
+      "bytes": 841126268
+    }
+  ]
+}
