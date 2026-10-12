@@ -7,6 +7,7 @@ declare global {
   interface Window {
     __mailRecheck?: () => Promise<void>;
     __mailUnmount?: () => void;
+    __mailChangeClient?: (id: string) => void;
     __mailInvalidate?: () => Promise<{
       status?: string;
       fetchStatus?: string;
@@ -18,11 +19,13 @@ export function EmailComposeHarness() {
   const [open, setOpen] = useState(false);
   const [reply, setReply] = useState(false);
   const [prepared, setPrepared] = useState(false);
+  const [selectedClient, setSelectedClient] = useState(clientId);
   const cache = useQueryClient();
   useEffect(() => {
     window.__mailRecheck = () =>
       cache.invalidateQueries({ queryKey: ["identity"] });
     window.__mailUnmount = () => setOpen(false);
+    window.__mailChangeClient = setSelectedClient;
     window.__mailInvalidate = async () => {
       await cache.invalidateQueries({
         queryKey: ["identity"],
@@ -38,6 +41,7 @@ export function EmailComposeHarness() {
     return () => {
       delete window.__mailRecheck;
       delete window.__mailUnmount;
+      delete window.__mailChangeClient;
       delete window.__mailInvalidate;
     };
   }, [cache]);
@@ -77,7 +81,7 @@ export function EmailComposeHarness() {
       </button>
       {open && (
         <MailCompose
-          clientId={clientId}
+          clientId={selectedClient}
           person={{
             personId: prepared ? undefined : id,
             name: prepared ? "" : "Taylor Test",

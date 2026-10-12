@@ -6,6 +6,7 @@ import { requestMailRewrite, rewrittenMailText } from "./rewrite";
 
 type RewriteStatus = {
   isPending: boolean;
+  canUndo: boolean;
   error: Error | null;
   warning: string;
 };
@@ -13,7 +14,12 @@ type RewriteAttempt = {
   controller: AbortController;
   assert: () => void;
 };
-const idle: RewriteStatus = { isPending: false, error: null, warning: "" };
+const idle: RewriteStatus = {
+  isPending: false,
+  canUndo: false,
+  error: null,
+  warning: "",
+};
 
 export function useMailRewrite({
   sourceKey,
@@ -34,6 +40,11 @@ export function useMailRewrite({
   const revision = useRef(0);
   const lifetime = useRef({ active: false, sourceKey });
   const pending = useRef<RewriteAttempt | null>(null);
+  const previous = useRef<{
+    body: string;
+    sourceKey: string;
+    assert: () => void;
+  } | null>(null);
   // Forget the old status even if this composer later returns to that source.
   if (state.sourceKey !== sourceKey) setState({ ...idle, sourceKey });
 
@@ -42,12 +53,18 @@ export function useMailRewrite({
     lifetime.current = scope;
     const unsubscribe = cache.getQueryCache().subscribe((event) => {
       const attempt = pending.current;
-      if (event.query.queryKey[0] !== "identity" || !attempt) return;
+      if (
+        event.query.queryKey[0] !== "identity" ||
+        (!attempt && !previous.current)
+      )
+        return;
       try {
-        attempt.assert();
+        attempt?.assert();
+        previous.current?.assert();
       } catch (error) {
         pending.current = null;
-        attempt.controller.abort();
+        previous.current = null;
+        attempt?.controller.abort();
         setState({
           ...idle,
           sourceKey,
@@ -63,6 +80,7 @@ export function useMailRewrite({
       unsubscribe();
       pending.current?.controller.abort();
       pending.current = null;
+      previous.current = null;
     };
   }, [cache, sourceKey]);
 
@@ -71,8 +89,34 @@ export function useMailRewrite({
     const attempt = pending.current;
     pending.current = null;
     attempt?.controller.abort();
+    previous.current = null;
     setBody(value);
     setState({ ...idle, sourceKey });
+  }
+
+  function undo() {
+    const saved = previous.current;
+    if (
+      pending.current ||
+      !saved ||
+      saved.sourceKey !== sourceKey ||
+      !lifetime.current.active
+    )
+      return;
+    try {
+      saved.assert();
+      edit(saved.body);
+    } catch (error) {
+      previous.current = null;
+      setState({
+        ...idle,
+        sourceKey,
+        error:
+          error instanceof Error
+            ? error
+            : new Error("This rewrite can no longer be undone."),
+      });
+    }
   }
 
   async function rewrite() {
@@ -98,7 +142,12 @@ export function useMailRewrite({
         },
       };
       pending.current = attempt;
-      setState({ ...idle, sourceKey, isPending: true });
+      setState({
+        ...idle,
+        sourceKey,
+        isPending: true,
+        canUndo: Boolean(previous.current),
+      });
       const result = await requestMailRewrite(
         api,
         {
@@ -110,10 +159,17 @@ export function useMailRewrite({
         attempt.assert,
       );
       attempt.assert();
-      if (result.verified) setBody(rewrittenMailText(result.bodyHtml, body));
+      if (result.verified) {
+        const rewritten = rewrittenMailText(result.bodyHtml, body);
+        if (rewritten !== body) {
+          previous.current = { body, sourceKey, assert: assertAuthority };
+          setBody(rewritten);
+        }
+      }
       setState({
         ...idle,
         sourceKey,
+        canUndo: Boolean(previous.current),
         warning: result.verified
           ? ""
           : "Meri could not verify the rewrite. Your original content was retained.",
@@ -123,6 +179,7 @@ export function useMailRewrite({
         setState({
           ...idle,
           sourceKey,
+          canUndo: Boolean(previous.current),
           error:
             error instanceof Error
               ? error
@@ -138,5 +195,6 @@ export function useMailRewrite({
     body,
     edit,
     rewrite,
+    undo,
   };
 }

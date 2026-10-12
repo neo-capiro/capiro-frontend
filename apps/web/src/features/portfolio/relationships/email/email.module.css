@@ -32,3 +32,10 @@
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
+.signaturePreview {
+  width: 100%;
+  height: 132px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+}
