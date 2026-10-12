@@ -1,8 +1,8 @@
 # Corrected unified image contract
 
 The corrected application and recipe are pinned at
-`9fa5e2cb68bc2b15f2dddc5dd2a846756a5b6c9e`, tree
-`d6ebc315242254504b6f99a3ec4bae8673826983`. Until the complete qualification
+`e1bcf60030007edaab610b069c6fb885fc5265dc`, tree
+`1e8ca91eb1c22a62c845f7fcfd0c5356cb3c39e9`. Until the complete qualification
 receipt and independent review pass, this is not AWS build/deployment authorization. The previous recipe defects and frozen failure evidence remain in
 Git history and `evidence/frozen-qualification-receipt.json`.
 
@@ -41,8 +41,8 @@ It creates a fresh external work directory and runs all fifteen provenance/SSR
 cases against that receipt. Existing receipts are never silently reused.
 
 Both Portfolio browsers (three workers) and Modules/shared-integration browsers
-run before the unified Next build and actual standalone-server smoke. The local
-881-case failed run took 36.6 minutes at three workers; the existing CodeBuild
+run before the unified Next build and actual standalone-server smoke. The failed
+882-case run at `9fa5e2c` took 36.3 minutes at three workers; the existing CodeBuild
 Linux large environment has a 60-minute timeout. Record actual build duration;
 a timeout is a failed gate, not authority to drop tests or replay automatically.
 
@@ -83,7 +83,7 @@ All 337 Portfolio native acceptance rows remain open.
 
 ## Local container attempt on the pinned source
 
-The base image pull succeeded, but the local build stopped at the first APK step.
+On `9fa5e2c`, the base image pull succeeded, but the local build stopped at the first APK step.
 The existing environment proxy rejects HTTPS CONNECT to the official Alpine
 package index with HTTP403. Forwarding the existing proxy did not resolve it.
 The package-index refresh never completed, so the cached zlib version conflict
@@ -97,3 +97,11 @@ Logs and the HTTP403 diagnosis are preserved under
 fresh image scan remain unrun. Static CLI checks, bash syntax, source hashes and
 the fresh fifteen-case SSR helper gate pass on this source. The shipping owner
 needs a permitted package-index path and independent review before building.
+
+
+The subsequent independent review identified an obsolete sign-in body assertion.
+The current recipe checks `Sign-in setup required`, matching the real unconfigured
+page and existing actual-server verifier. Red/green actual-server evidence and
+unchanged status/security checks are in `evidence/shipping-sign-in/`. This one-line
+recipe correction does not attest a new container image; e1bcf60 still needs its
+separate image build/runtime/scan gates after permitted Alpine access.

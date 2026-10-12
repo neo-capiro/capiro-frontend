@@ -1,6 +1,6 @@
 {
-  "head": "9fa5e2cb68bc2b15f2dddc5dd2a846756a5b6c9e",
-  "sourceTree": "d6ebc315242254504b6f99a3ec4bae8673826983",
+  "head": "e1bcf60030007edaab610b069c6fb885fc5265dc",
+  "sourceTree": "1e8ca91eb1c22a62c845f7fcfd0c5356cb3c39e9",
   "scope": "Tracked feature, meaningful test, asset and governed client package preservation; exact source changes remain reviewable in Git.",
   "inputs": [
     {
@@ -8,7 +8,7 @@
       "head": "c330cebbd021eb984b4bf64ae13dbb991ae6b1c0",
       "ancestor": true,
       "trackedFiles": 861,
-      "byteIdentical": 843,
+      "byteIdentical": 842,
       "formattingOnly": 0,
       "missing": [],
       "changed": [
@@ -24,6 +24,7 @@
         "apps/web/tests/browser/capability-boundary-fixtures.ts",
         "apps/web/tests/browser/capability-presentation-visual.spec.ts",
         "apps/web/tests/browser/capability-registration-execution.spec.ts",
+        "apps/web/tests/browser/meeting-preparation.spec.ts",
         "apps/web/tests/browser/portfolio-index.spec.ts",
         "apps/web/tests/browser/registrant-intake.spec.ts",
         "apps/web/tests/browser/tracker-alert-preferences.spec.ts",

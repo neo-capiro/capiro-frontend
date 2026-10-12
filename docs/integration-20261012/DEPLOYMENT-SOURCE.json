@@ -1,6 +1,6 @@
 {
-  "source": "9fa5e2cb68bc2b15f2dddc5dd2a846756a5b6c9e",
-  "tree": "d6ebc315242254504b6f99a3ec4bae8673826983",
+  "source": "e1bcf60030007edaab610b069c6fb885fc5265dc",
+  "tree": "1e8ca91eb1c22a62c845f7fcfd0c5356cb3c39e9",
   "context": "committed repository root",
   "platform": "linux/amd64",
   "repository": "967807252336.dkr.ecr.us-east-1.amazonaws.com/capiro/portfolio-preview",
@@ -22,7 +22,7 @@
     },
     {
       "path": "apps/web/deployment/portfolio/smoke.sh",
-      "sha256": "e5c7dc01ba7707bd558bd4b2bb93f2c255e4c41c5980a47e2d8b63cd4ef77889"
+      "sha256": "001ce1efc52666ec91815fcd23b1ed59883aa2561a564c740b2f8d909d050f01"
     },
     {
       "path": "apps/web/deployment/portfolio/qualify-elements.mjs",
@@ -37,8 +37,9 @@
       "sha256": "454a9d35ebdbe0b188e6ea8fbb2b7b83172c490b1f2cc589d05a61fadecfc6ca"
     }
   ],
-  "independentReview": "pending parent-coordinated re-review",
-  "containerResult": "ENVIRONMENT_BLOCKED: existing proxy rejects official Alpine package index HTTPS CONNECT with HTTP 403; container APK indexes unavailable; no final image built or runtime smoke performed. Pinned base and zlib remain unchanged.",
+  "independentReview": "Parent re-review of9fa5e2c cleared prior Intel/billing controls and supported bounded meeting-recovery wait; one sign-in smoke body assertion correction is included in this pin. Final delta review remains parent-coordinated.",
+  "containerResult": "UNRUN on this pin; the9fa5e2c local build stopped at official Alpine package-index HTTPS CONNECT403 from configured proxy. Base and APK pins unchanged. No bypass, final image, runtime smoke or new scan.",
   "AWSAction": "none",
-  "containerEvidence": "evidence/candidate-9fa5e2c/host-alpine-connect-denied.txt"
+  "containerEvidence": "evidence/candidate-9fa5e2c/host-alpine-connect-denied.txt",
+  "reviewCorrectionEvidence": "evidence/shipping-sign-in/"
 }

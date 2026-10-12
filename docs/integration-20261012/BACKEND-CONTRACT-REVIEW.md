@@ -109,3 +109,44 @@ grant, assignment and different-proposer requirements. Personal memory remains a
 offer requiring another user request. No permission, evaluator, endpoint, JSON
 shape, Meri public package version or automatic save was added. No frozen
 frontend code or governed authorization behavior changed here.
+
+
+## Exact next-candidate handoffs received during e1bcf60 qualification
+
+Read `docs/backend-frontend-handoff-20261012/QUICK-LOG-PR2396.md` at capirov2
+`797e3a59158cff56b017ab7d01ee445bf624fced`. This pins PR2396 runtime to961cbe02
+and confirms both its Core and Planner changes are required; PR2395 alone lacks
+expected-tenant/actor enforcement. Creation and resume return201, including
+needs_attention; GET returns200. A successful HTTP status alone is not completion.
+Validate receiptVersion1, status/reason discriminants, UUIDs, current tenant/client/
+Core actor, retained browser requestId, and followUp.requestId===commandId.
+Keep the original normalized-equivalent submitted body and explicit instant
+spelling. Never infer absence or issue a replacement key after nondisclosing404,
+timeout or uncertain commit. An available activity and pending generic follow-up
+must remain separate outcomes. Version changes are server-owned; refresh before
+explicit recovery. Existing product entitlements are separate: this API does not
+create an upgrade/paid-plan decision. Migration/native qualification and bridge
+configuration remain unrun; rich commitment direction/identity/linkage stay open.
+
+Read ordered-owner PR2399 CONTRACT.md at
+`0783423aeaaa8b65f289d0927d605142816d8cfe`. Its new GET/PUT
+`/api/clients/:clientId/account-owners` returns a tenant/client/version-bound
+ordered set of Primary–Quaternary slots. Preserve unavailable historical slots
+and exact rank order. PUT replaces zero–four distinct active Core member UUIDs
+under expectedVersion and current admin authority; assignment never grants a
+client wall. A409 requires fresh read and deliberate save; an uncertain PUT
+requires complete order/version reconciliation, without guessed versions or
+blind retry. Legacy single-owner writes cannot erase additional ranks. Existing
+team projections add ownerRank/ownerAvailable without changing isOwner's Primary
+meaning or rewriting free-text team roles.
+
+Parent reports107 independent source tests and Core types/builds passed; this
+session inspected the contract, not those backend suites. Migration20281012020000,
+native locking/RLS and coordinated canonical-writer rollout remain unrun. Shared
+schema/ClientsModule intersections with Objective/Quick log require backend owner
+reconciliation. The pending meaning of 'We owe' (firm versus client) is a product
+decision; no dependent commitment semantics are inferred here.
+
+These are inputs to a separate source-qualified contract integration candidate
+after the frozen shared integration work. No route, selector or workflow in
+e1bcf60 is enabled or changed by this documentation.

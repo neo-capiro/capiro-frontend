@@ -1,99 +1,91 @@
 # Frozen integration qualification checkpoint
 
-Current application and deployment source is frozen at
-`9fa5e2cb68bc2b15f2dddc5dd2a846756a5b6c9e`
-(tree `d6ebc315242254504b6f99a3ec4bae8673826983`) on draft PR8.
-Subsequent evidence-only commits do not change that source. The full 882-case
-Portfolio browser run finished: **881 passed, 1 failed, zero skipped/flaky**,
-in36.3minutes. This pin failed combined qualification.
+Current source/test/deployment pin:
+`e1bcf60030007edaab610b069c6fb885fc5265dc`, tree
+`1e8ca91eb1c22a62c845f7fcfd0c5356cb3c39e9`, on draft PR8.
+The complete 882-case Portfolio browser run is in progress. Combined qualification
+is not yet claimed. Subsequent documentation-only commits leave this source frozen.
 
-The input heads, merge order, shared ownership and preserved-source audit are in
-PLAN.md and PRESERVATION.json. The Portfolio owner's later archive-only head
-`c330cebbd021eb984b4bf64ae13dbb991ae6b1c0` is included. Its complete 33-commit
-history bundle verifies against the expected SHA256; no restoration tool was run
-over the checkout. No audited feature/test/asset file is missing. Original owner
-branches, main, resources, credentials and databases remain unchanged.
+## Passed on the current exact source
 
-## Completed on the current frozen source
+- Clean root-lock install: 847 packages with lifecycle scripts disabled;
+  Node 24.19.0 and npm 11.9.0.
+- Public package hashes, all workspace types, 58 repository/architecture/asset/CLI
+  cases, 21 transport cases, lint with zero errors and 76 inherited warnings,
+  formatting, 1,011 Portfolio units and 94 Modules contract units.
+- Architecture retains all 391 signals: 366 individually reviewed and 25 inherited
+  unreviewed signals, with zero boundary or blocking errors. No guard threshold,
+  dependency boundary or meaningful test was dropped.
+- Unified Next production build and actual standalone-server checks for routes,
+  mode navigation/history, scoped styles, desktop/mobile light/dark layouts,
+  security headers and unconfigured API refusal.
+- Fifteen UI provenance/SSR cases using a fresh receipt and official hash-verified
+  Linux esbuild 0.28.2 tool through the corrected shipping helper.
+- All 62 Modules/Settings/shared browser cases, including sign-out, expiry,
+  identity/client replacement, interrupted writes and history. These are
+  controlled fixtures, not live Clerk or backend acceptance.
 
-- Clean npm ci with the root lock: 847 packages, scripts disabled as required by
-  the repository's qualification package. Node24.19.0 / npm11.9.0.
-- Combined check: public package hashes; all workspace typechecks; 58 repository
-  guard/asset/CLI cases; architecture with zero boundary/blocking errors;
-  21 transport cases; lint with zero errors/76 warnings; formatting of all web
-  source and both test trees; 1,011 Portfolio units and 94 Modules contract units.
-- Architecture preserves all 391 signals: 366 explicitly reviewed, 25 inherited
-  unchanged and still unreviewed. Two changed existing large functions have
-  individual source-bound reviews; no threshold or boundary was weakened.
-- One unified Next production build and actual standalone-server smoke pass.
-  Routes, style isolation, light/dark desktop/mobile, history and mode links pass.
-- All 62 Modules/Settings/shared-integration browser cases pass, including
-  sign-out, expiry, client replacement, organization replacement, interrupted
-  writes and history. These use controlled fixtures, not live Clerk acceptance.
-- Fifteen UI provenance/SSR cases pass through the new shipping helper, using
-  the official hash-verified Linux esbuild0.28.2 tool and a fresh source-bound
-  receipt. No native/provider calls were made.
+Current logs, receipts and fresh shared-layout captures are in
+`evidence/candidate-e1bcf60/`. The complete Portfolio result will be added after
+the run ends. The pipeline checks that non-documentation source bytes still
+match the pin between every gate.
 
-Source-bound logs, JSON and hashes are in `evidence/candidate-9fa5e2c/`.
-The complete Portfolio browser result and source-bound receipt are preserved in
-`evidence/candidate-9fa5e2c/qualification-receipt.json`.
-The current failure checks a request array immediately after an asynchronous
-retry click: the trace records the second POST/202 and queued-job dialog, but the
-assertion runs before its route callback is observed. Its red trace and precise
-timing diagnosis are preserved under the candidate evidence's failures directory.
-No source changed during this run; a subsequent test synchronization correction
-must retain exact count, identical key/payload and saved-job cancellation controls.
-The separate local container gate is blocked: the existing environment proxy
-rejects HTTPS CONNECT to the official Alpine package index with HTTP403.
-The pinned base image pulled, but APK indexes could not refresh; no final image,
-container runtime smoke or fresh vulnerability scan is attested. The Node24.19.0
-host checks do not attest the container's Node24.21.0 runtime. Deployment-source
-independent review remains parent-coordinated. See SHIPPING-CONTRACT.md and
-DEPLOYMENT-SOURCE.json for the exact source recipe and runtime contract.
+## Preserved prior results and review corrections
 
-## Preserved failure and repair evidence
+`5840b50` failed its complete run: 869 passed, 12 failed, zero skipped/flaky.
+`9fa5e2c` passed those prior failing cases but finished with 881 passed, one failed,
+zero skipped/flaky, in 36.3 minutes. Both full reports and all failure artifacts
+remain preserved. The latter failure was an immediate fixture-array assertion
+racing the asynchronous meeting-preparation retry dispatch; the trace records
+identical request bodies/keys, the second POST/202 and the queued saved-job dialog.
 
-The prior frozen application `5840b50` failed combined qualification: its complete
-881-case Portfolio browser run finished with 869 passed, 12 failed, zero skipped
-and zero flaky. Its logs, traces and receipt remain in evidence/. Earlier progress
-based on the recent log tail missed failures and is superseded by that final
-result. No source changed during that run. No acceptance transfers to this pin.
+Independent re-review of `9fa5e2c` cleared the prior Intel partial-rejection identity
+and canonical billing controls, supported the bounded synchronization correction,
+and reported passing affected Escape/focus and SSR checks. It requested one
+remaining shipping assertion correction: the actual unconfigured sign-in page
+renders `Sign-in setup required`. Actual-server red/green evidence retains
+HTTP 200, nosniff, DENY and no-powered-by checks. This corrected source includes
+that literal and a bounded request-observation wait in one browser test file.
+Exactly two identical request bodies, saved-job cancellation and no-extra-send
+assertions remain. Ten focused repeats passed. No application behavior changed
+between `9fa5e2c` and this pin. The intermediate `988b244` run was explicitly superseded
+and interrupted during combined checks; it is not counted as qualified.
 
-The follow-up repairs preserve independent failing controls for case-sensitive
-Intel rejection identity and canonical billing navigation. They also retain the
-nested-dialog Escape failure and repeated reproduction; top-dialog dismissal now
-preserves its parent and focus. Fixture expectations explicitly account for saved
-submission reads while retaining request counts, cancellation and no-late-effect
-assertions. Canonical navigation and visible-disabled Core404 preference entries
-replace obsolete assertions. Two long visual/100-selection cases have bounded
-90-second budgets justified by their observed work; every assertion and action
-remains. Focused corrections passed. The complete new run passed the prior twelve failing
-cases and found the one asynchronous fixture-observation race above.
+The original requested Intel normalization/explicit partial-rejection, requested
+phone-code copy and Core 404 visible-disabled/zero-Intel baselines remain in
+`evidence/`. Representative Figma/mobile/keyboard findings and their limits are in
+VISUAL-REVIEW.md; this is not exhaustive pixel or assistive-technology acceptance.
+Final independent source/delta review remains parent-coordinated.
 
-Original Intel targeting receipt, requested phone-code copy and Core404 zero-Intel
-regression baselines also remain. Normalization and explicit partial rejections
-are honored while unexplained targeting loss fails. Phone requested-state copy
-matches the inspected design. Native backend gaps remain visible.
+## Preservation and shipping boundary
 
-Representative Figma/mobile/keyboard findings and limitations are documented in
-VISUAL-REVIEW.md. This is not exhaustive pixel or assistive-technology acceptance.
-The earlier additional actual-server Meri fixture audit is retained with its
-original source identity; it is not represented as a new-pin run.
+PLAN.md and PRESERVATION.json pin all inputs and show no missing audited feature,
+meaningful test, asset or governed package file. The complete Portfolio archive
+from owner head `c330cebb` is preserved at `docs/portfolio-31/handover-2026-10-12/`.
+ARCHIVE-PRESERVATION.md records exact paths/hashes, 477 independently checked
+inventoried files, eight checked transport parts, the unchanged Git subtree and
+the owner's isolated 33-commit history restoration/fsck evidence. This session
+verified bytes and the qualified bundle without restoring over any worktree.
+No original owner branch or main was replaced.
 
-## Remaining acceptance boundaries
+The local image build on `9fa5e2c` pulled the pinned base but stopped when the existing
+proxy rejected official Alpine package-index HTTPS CONNECT with HTTP 403. No
+proxy/TLS bypass, package weakening or base-image change occurred. This new pin's
+image build, runtime smoke and fresh vulnerability scan remain unrun. Host
+Node 24.19.0 passes do not attest container Node 24.21.0. DEPLOYMENT-SOURCE.json and
+SHIPPING-CONTRACT.md identify the exact reviewed recipe and separate shipping
+owner's remaining gates. No AWS build, image push or deployment occurred.
 
-Backend draft PR2393/2394/2395 contracts were inspected without activating new
-frontend workflows. Existing facility wiring already uses the opaque revision
-and reviewed route, with404 no-fallback and409 renewed review; CORE-039 remains
-native/deployment-blocked. Sender selection ENG-prep_sender_select and durable
-Planner command wiring are separate next-candidate work. CORE-108 native reply,
-PROS-029/031 proposal version/send/reminder and the remaining handover gaps stay
-open. See BACKEND-CONTRACT-REVIEW.md for exact reviewed source heads.
+## Native and next-candidate scope
 
 All **337 Portfolio rows remain unaccepted**. Live Clerk/tenant/role/client
-matrices, backend persistence/CAS, provider/sender/reply, media/capture, billing,
-paid model/runtime and missing contracts remain unrun or blocked as documented
-in the original handovers. Container build/runtime/scan and preview shipping are
-not qualified. No merge, AWS build/deployment, real send, billing or paid workload
-occurred. The designated shipping session owns any later approved image and AWS
-operation after source qualification and independent review.
+matrices, persistence/CAS/RLS, provider/sender/reply, media/capture, billing,
+paid model runtime and other handover gaps remain unrun or blocked.
+No real provider message, billing action, database/security change or paid
+workload occurred.
+
+Exact sender, Planner, Core Quick log, ordered-owner and approved memory wording
+handoffs are recorded in BACKEND-CONTRACT-REVIEW.md for a separate source-qualified
+contract integration candidate. Their source review does not establish deployment
+or permit missing native workflows. Full commitment direction, including the
+pending meaning of 'We owe', remains unresolved; no semantics were invented.
