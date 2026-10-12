@@ -98,7 +98,9 @@ test("facility creation uses the selected client's endpoint and refreshes the ma
   await dialog.getByRole("button", { name: "Save facility" }).click();
   await expect(dialog.getByLabel("Facility name")).not.toBeVisible();
   await expect(
-    dialog.getByRole("list", { name: "Saved facilities" }).getByText("Test lab"),
+    dialog
+      .getByRole("list", { name: "Saved facilities" })
+      .getByText("Test lab"),
   ).toBeVisible();
   await dialog.getByRole("button", { name: "Done", exact: true }).click();
   await expect(dialog).not.toBeVisible();
