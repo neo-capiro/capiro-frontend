@@ -1,0 +1,3 @@
+import base from "/workspace/capiro-visual-closeout/apps/web/playwright.config.ts";
+import {defineConfig} from '@playwright/test';
+export default defineConfig({...base,testDir:"/tmp/capiro-control-replay-portfolio-3e7ad7c",testMatch:'control.spec.ts',grep:undefined,retries:0,outputDir:"/tmp/capiro-control-replay-portfolio-3e7ad7c/artifacts",reporter:[['list'],['json',{outputFile:"/tmp/capiro-control-replay-portfolio-3e7ad7c/results.json"}]],webServer:{...base.webServer,command:"\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" \"/workspace/capiro-visual-closeout/apps/web/tests/browser/server.mjs\""}});

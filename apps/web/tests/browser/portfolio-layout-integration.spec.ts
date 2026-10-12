@@ -56,6 +56,7 @@ test("actual index saves the complete canonical catalog and restores it after re
     });
   });
   await page.goto("/portfolio");
+  await page.getByRole("button", { name: "Customize", exact: true }).click();
   await expect(page.getByLabel("Sort profiles")).toHaveValue("saved");
   await expect.poll(() => positions(page)).toEqual([secondId, clientId]);
   await page
@@ -114,6 +115,7 @@ test("name, recent, filters and list presentation never persist a subset or over
   await expect(
     page.getByRole("button", { name: /Move .* earlier/ }),
   ).toHaveCount(0);
+  await page.getByText("Filters and view", { exact: true }).click();
   await page.getByLabel("Sort profiles").selectOption("recent");
   await expect(page.getByRole("article").first()).toContainText(
     "Test Aerospace",
@@ -164,6 +166,7 @@ test("saved order is not requested against an unloaded catalog", async ({
     });
   });
   await page.goto("/portfolio");
+  await page.getByRole("button", { name: "Customize", exact: true }).click();
   await expect(
     page.getByRole("heading", { name: "Portfolio —", exact: true }),
   ).toBeVisible();

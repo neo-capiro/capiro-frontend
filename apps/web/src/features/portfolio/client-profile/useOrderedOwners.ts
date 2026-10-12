@@ -171,6 +171,28 @@ export function useOrderedOwners(
       if (alive.current) setPending(false);
     }
   }
+  function reorder(from: number, to: number) {
+    if (
+      !editable ||
+      !current ||
+      !source ||
+      stale ||
+      !slots[from] ||
+      to < 0 ||
+      to >= slots.length
+    )
+      return;
+    const next = [...slots];
+    const [moved] = next.splice(from, 1);
+    next.splice(to, 0, moved!);
+    setDraft({
+      base: draft?.base ?? current,
+      source: draft?.source ?? source,
+      slots: next,
+    });
+    setError(null);
+    setMessage("");
+  }
   async function review() {
     if (!actor || pending || request.current) return;
     const [result] = await Promise.all([query.refetch(), options.refetch()]);
@@ -204,6 +226,7 @@ export function useOrderedOwners(
     current,
     slots,
     edit,
+    reorder,
     save,
     review,
     draft,

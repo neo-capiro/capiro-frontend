@@ -1,0 +1,20 @@
+{
+  "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "recordedAt": "2026-10-12T11:55:25.117409+00:00",
+  "controls": [
+    {
+      "suite": "portfolio",
+      "canonicalSha256": "47a8faecfb55bea520d43748663014e64a12e684666486f49c14cc0edece25ea",
+      "qualifiedResult": "defect-portfolio-results.json",
+      "baselineResult": "development/portfolio/canonical-baseline-results.json",
+      "assertionsChanged": false
+    },
+    {
+      "suite": "modules",
+      "canonicalSha256": "01f43f1b255ef9c7125872d995f6f3ad38d7bc098a4b8d669c17d56fc8870285",
+      "qualifiedResult": "defect-modules-results.json",
+      "baselineResult": "development/modules/canonical-baseline-results.json",
+      "assertionsChanged": false
+    }
+  ]
+}

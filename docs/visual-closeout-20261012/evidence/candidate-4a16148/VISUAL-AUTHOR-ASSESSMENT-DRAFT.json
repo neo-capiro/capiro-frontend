@@ -1,0 +1,50 @@
+{
+  "status": "AUTHOR_COMPARISON_PREPARED; full Portfolio and independent acceptance remain pending",
+  "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "baseline": "a397d45c461b24eb741afcd3b7cf28ca354d1e96 (qualified application 2d50edd)",
+  "observations": [
+    {
+      "findings": [
+        "VD-01"
+      ],
+      "target": "411:41685",
+      "observed": "Dedicated 580px dialog, 20px title, ordered avatar/rank cards, explicit reorder and Cancel/Save owners. Current client name is supplied by the verified overview.",
+      "retainedExtensions": "Current Team context, authority note, 24px targets, unavailable/save-disabled states and native member choice; no implied access grant or automatic owner promotion."
+    },
+    {
+      "findings": [
+        "VD-02",
+        "VD-03"
+      ],
+      "target": "411:41421",
+      "observed": "Owner and Customize share the title toolbar. Secondary filters/views retain all existing controls, New objective and current-read recovery. Reorder controls appear through Customize; blocked ordering has no drag/save promise.",
+      "retainedExtensions": "Unavailable metrics/order/source warnings remain visible; no synthetic metrics copied from Figma. Filtering/list/sort never change the persisted catalog scope."
+    },
+    {
+      "findings": [
+        "VD-04",
+        "VD-07"
+      ],
+      "target": "411:55155",
+      "observed": "Inline required marker, visible editable Type/Sector indicators, current-client suggestions and sharp dimmed scrim. Existing 620px creation dialog, 12px desktop field gap and mobile single-column layout pass.",
+      "retainedExtensions": "Arbitrary wire strings, optional MRL/Notes disclosure and later authored saved Details variant remain. Datalist suggestions do not create a fixed catalog or new endpoint."
+    },
+    {
+      "findings": [
+        "VD-05"
+      ],
+      "target": "411:56471",
+      "observed": "20px Bill Tracker title and inner Tracked bills header/results/footer. Existing filter, table/board and paging controls survive.",
+      "retainedExtensions": "Actual current fixture totals and unknown service metrics are shown. Empty fixtures do not attest all populated visual/content variants or native data completeness."
+    },
+    {
+      "findings": [
+        "VD-06"
+      ],
+      "target": "460:90798",
+      "observed": "Calendar starts at x264 with compact heading and the card at the authored top inset. Scope and New meeting remain usable. Native Modules navigation and the scoped switcher are retained in the header disclosure; nested Escape/focus and history pass.",
+      "retainedExtensions": "Existing Search and source-coverage disclosures remain. New meeting keeps the actual governed action; no unavailable generic event workflow is invented."
+    }
+  ],
+  "acceptanceBoundary": "Seven finite findings across eight direct row IDs only. Full/native acceptance remains open for all 337 Portfolio rows. No full WCAG certification or live/provider behavior is claimed."
+}

@@ -12,11 +12,13 @@ import styles from "./capability-editor.module.css";
 export function CapabilityEditor({
   clientId,
   capability,
+  choices,
   open,
   onClose,
 }: {
   clientId: string;
   capability?: Capability;
+  choices?: readonly Capability[];
   open: boolean;
   onClose: () => void;
 }) {
@@ -34,6 +36,7 @@ export function CapabilityEditor({
   const form = (
     <CapabilityForm
       capability={capability}
+      choices={choices}
       disabled={!mutation.canWrite || mutation.isPending}
       saving={saving}
       pending={mutation.isPending}

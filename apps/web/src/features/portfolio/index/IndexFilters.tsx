@@ -1,46 +1,25 @@
 "use client";
 import { LayoutGrid, List } from "lucide-react";
 import { sectorLabel } from "@/shared/portfolio/domain/sector";
-import {
-  clientSectors,
-  memberName,
-  type Client,
-  type Member,
-} from "./contracts";
-import { unassignedOwner, type PortfolioIndexState } from "./filter";
+import { clientSectors, type Client } from "./contracts";
+import { type PortfolioIndexState } from "./filter";
 import styles from "./portfolio.module.css";
 
 export function IndexFilters({
   state,
   clients,
-  owners,
   set,
   clear,
-  ownerPending,
 }: {
   state: PortfolioIndexState;
   clients?: Client[];
-  owners?: Record<
-    string,
-    { accountOwnerUserId: string | null; accountOwner: Member | null }
-  >;
   set: (key: string, value: string) => void;
   clear: () => void;
-  ownerPending: boolean;
 }) {
   const statuses = [
     ...new Set((clients ?? []).map((c) => c.profileStatus)),
   ].sort();
   const sectors = [...new Set((clients ?? []).flatMap(clientSectors))].sort();
-  const choices = [
-    ...new Map(
-      Object.values(owners ?? {}).flatMap((a) =>
-        a.accountOwner && a.accountOwnerUserId
-          ? [[a.accountOwnerUserId, a.accountOwner] as const]
-          : [],
-      ),
-    ).entries(),
-  ].sort((a, b) => memberName(a[1]).localeCompare(memberName(b[1])));
   const filtered = Boolean(
     state.search || state.status || state.sector || state.owner || state.type,
   );
@@ -77,25 +56,6 @@ export function IndexFilters({
         {sectors.map((sector) => (
           <option key={sector} value={sector}>
             {sectorLabel(sector)}
-          </option>
-        ))}
-      </select>
-      <select
-        aria-label="Account owner"
-        disabled={!owners || ownerPending}
-        value={state.owner}
-        onChange={(e) => set("owner", e.target.value)}
-      >
-        <option value="">All owners</option>
-        <option value={unassignedOwner}>Unassigned</option>
-        {state.owner &&
-          state.owner !== unassignedOwner &&
-          !choices.some(([id]) => id === state.owner) && (
-            <option value={state.owner}>Selected owner (not available)</option>
-          )}
-        {choices.map(([id, owner]) => (
-          <option key={id} value={id}>
-            {memberName(owner)}
           </option>
         ))}
       </select>

@@ -1,0 +1,30 @@
+{
+  "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "files": {
+    "apps/web/Dockerfile": {
+      "gitBlob": "575c2216592b0fa7e8db183f9a8e0df931c102fd",
+      "sha256": "03225dcc94257dfd919f3b889f0886d4981156890897fee579e50d644959cbe1"
+    },
+    "apps/web/deployment/portfolio/buildspec.yml": {
+      "gitBlob": "ebe61038e0d6b8d31ff53f765eb5e284c2ff16aa",
+      "sha256": "37d84507c0759001c3376408982d1fa3fa1309731cc2bf618d389abcafae25a6"
+    },
+    "apps/web/deployment/portfolio/smoke.sh": {
+      "gitBlob": "d053f99276d622b2d70333e39ddda681dd2adade",
+      "sha256": "c4c749f92c90284ef8a2d3e8bed80476123bdde38fc321450e321d51310f732b"
+    },
+    ".dockerignore": {
+      "gitBlob": "0cad08b6a9b2708193abcd928fa4158f0ee30149",
+      "sha256": "432b70d7b19f3a7a55ecefc38d706d95d53fe253c82dd5dc7538d918dadd3c34"
+    },
+    "package-lock.json": {
+      "gitBlob": "48343e320a9caaf6e92f042ad3373474f8825029",
+      "sha256": "93b3dd0484180ade603daf74a32f75fc16a9bf0bda1694966a6e68100e2a6802"
+    }
+  },
+  "baseImage": "node:24.21.0-alpine3.23@sha256:9ec4a2e289874ed0d722e1772ec2de45d2801541db8612f3638b26f128c69ac2",
+  "requiredApk": "zlib=1.3.2-r1",
+  "platform": "linux/amd64",
+  "applicationSourceTree": "46cebca97ccfc1facc1c1a939beb6f4d7730685b",
+  "evidencePublication": "3e7ad7c648b65b84c758388f9505b3b057e0c57f"
+}

@@ -1,0 +1,37 @@
+
+> capiro-frontend@0.1.0 test:browser
+> npm run test:browser --workspace @capiro/web -- visual-closeout.spec.ts capability-presentation-visual.spec.ts --workers=2
+
+
+> @capiro/web@0.1.0 test:browser
+> playwright test visual-closeout.spec.ts capability-presentation-visual.spec.ts --workers=2
+
+[WebServer] (node:374702) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 8 tests using 2 workers
+
+(node:374735) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:374736) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 tests/browser/visual-closeout.spec.ts:8:1 › owner cards support deliberate keyboard and pointer ordering, cancel, and nested focus return (5.6s)
+  ✓  3 tests/browser/visual-closeout.spec.ts:79:1 › closing only the Owners dialog during a PUT preserves its uncertainty fence (3.2s)
+  ✓  1 tests/browser/capability-presentation-visual.spec.ts:42:3 › Figma capability Profile, Documents and create surfaces at desktop-light (12.4s)
+  ✓  4 tests/browser/visual-closeout.spec.ts:116:1 › Portfolio Customize retains unavailable guards and keyboard-accessible filters (5.0s)
+  ✓  6 tests/browser/visual-closeout.spec.ts:171:1 › capability create offers current-client suggestions, inline required marker and sharp scrim (3.8s)
+  ✓  5 tests/browser/capability-presentation-visual.spec.ts:42:3 › Figma capability Profile, Documents and create surfaces at phone-light (5.9s)
+  ✓  7 tests/browser/visual-closeout.spec.ts:215:1 › Bill Tracker retains table/board/filter controls inside its compact results frame (3.9s)
+  ✓  8 tests/browser/capability-presentation-visual.spec.ts:42:3 › Figma capability Profile, Documents and create surfaces at phone-dark (5.4s)
+
+  8 passed (25.5s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

@@ -2,6 +2,7 @@
 
 import { ActionButton, TextInput } from "../../../shared/module-ui";
 import { agendaSources, type AgendaItem, type AgendaSource } from "./agenda";
+import { ModuleBreadcrumb } from "../../../shared/shell/ModuleBreadcrumb";
 import styles from "./calendar.module.css";
 import {
   calendarTitle,
@@ -34,11 +35,20 @@ export function CalendarHeader({
   return (
     <header className={styles.pageHeader}>
       <div>
+        <details
+          className={styles.moduleNavigation}
+          onKeyDown={(event) => {
+            if (event.key === "Escape") {
+              event.preventDefault();
+              event.currentTarget.open = false;
+              event.currentTarget.querySelector("summary")?.focus();
+            }
+          }}
+        >
+          <summary>Master calendar</summary>
+          <ModuleBreadcrumb active="calendar" />
+        </details>
         <h1>Master calendar</h1>
-        <p>
-          Your meetings across client profiles, with preparation, notes and
-          debriefs.
-        </p>
       </div>
       <div className={styles.actions}>
         <label className={styles.scope}>

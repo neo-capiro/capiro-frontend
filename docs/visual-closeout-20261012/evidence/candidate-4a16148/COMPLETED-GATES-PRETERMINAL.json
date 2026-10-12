@@ -1,0 +1,76 @@
+{
+  "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "meaning": "Completed gates only. Overall qualification is pending full Portfolio and separately attributed independent review.",
+  "gates": [
+    {
+      "gate": "clean-install-writable-cache",
+      "result": "PASS",
+      "receipt": "clean-install-writable-cache-execution.json"
+    },
+    {
+      "gate": "check",
+      "result": "PASS",
+      "receipt": "check-execution.json"
+    },
+    {
+      "gate": "build",
+      "result": "PASS",
+      "receipt": "build-execution.json"
+    },
+    {
+      "gate": "elements",
+      "result": "PASS",
+      "receipt": "elements-execution.json"
+    },
+    {
+      "gate": "production",
+      "result": "PASS",
+      "receipt": "production-execution.json"
+    },
+    {
+      "gate": "meri-actual-server",
+      "result": "PASS",
+      "receipt": "meri-actual-server-execution.json"
+    },
+    {
+      "gate": "preservation",
+      "result": "PASS",
+      "receipt": "preservation-execution.json"
+    },
+    {
+      "gate": "defect-portfolio",
+      "result": "PASS",
+      "receipt": "defect-portfolio-execution.json"
+    },
+    {
+      "gate": "defect-modules",
+      "result": "PASS",
+      "receipt": "defect-modules-execution.json"
+    },
+    {
+      "gate": "reviewer-positive",
+      "result": "PASS",
+      "receipt": "reviewer-positive-execution.json"
+    },
+    {
+      "gate": "reviewer-reopen",
+      "result": "PASS",
+      "receipt": "reviewer-reopen-execution.json"
+    },
+    {
+      "gate": "objective-baseline-candidate-paths",
+      "result": "PASS",
+      "receipt": "objective-baseline-candidate-paths-execution.json"
+    },
+    {
+      "gate": "calendar-nested-escape",
+      "result": "PASS",
+      "receipt": "calendar-nested-escape-execution.json"
+    },
+    {
+      "gate": "modules-browser",
+      "result": "PASS",
+      "receipt": "modules-browser-execution.json"
+    }
+  ]
+}

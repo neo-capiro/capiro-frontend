@@ -13,6 +13,7 @@ import styles from "./capability-editor.module.css";
 
 export function CapabilityForm({
   capability,
+  choices,
   disabled,
   saving,
   pending,
@@ -22,6 +23,7 @@ export function CapabilityForm({
   onCancel,
 }: {
   capability?: Capability;
+  choices?: readonly Capability[];
   disabled: boolean;
   saving: boolean;
   pending: boolean;
@@ -83,7 +85,7 @@ export function CapabilityForm({
               Name it and save. PE numbers, match keywords, and documents open
               next, on the saved record.
             </p>
-            <CapabilityIdentityFields />
+            <CapabilityIdentityFields choices={choices} />
             <p className={styles.caption}>
               Drives downstream agency and policy matching.
             </p>

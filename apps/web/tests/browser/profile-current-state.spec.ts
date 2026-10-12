@@ -118,6 +118,7 @@ test("failed account-team refresh conceals cached members and disables changes",
     page.getByRole("listitem").filter({ hasText: "Terry Team" }),
   ).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Add member" })).toBeDisabled();
+  await page.getByRole("button", { name: "Manage owners" }).click();
   await expect(
     page.getByRole("combobox", { name: "Primary owner", exact: true }),
   ).toBeDisabled();
@@ -169,10 +170,11 @@ test("owner assignment rejects a different returned owner", async ({
       version: state.owners.version + 1,
     });
   await page.goto("/profile-current-state.html?mode=team");
+  await page.getByRole("button", { name: "Manage owners" }).click();
   await page
     .getByRole("combobox", { name: "Primary owner", exact: true })
     .selectOption(profileMembers[2]!.id);
-  await page.getByRole("button", { name: "Save owner order" }).click();
+  await page.getByRole("button", { name: "Save owners" }).click();
   await expect(
     page.getByText(/owner change result needs review/i),
   ).toBeVisible();

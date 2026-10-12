@@ -28,11 +28,11 @@ export function ModuleShell({
           className={
             settings
               ? styles.settingsMain
-              : `${styles.main} ${["hub", "intelligence", "directory", "research-portfolios"].includes(active) ? styles.hubMain : ""}`
+              : `${styles.main} ${active === "calendar" ? styles.calendarMain : ""} ${["hub", "intelligence", "directory", "research-portfolios"].includes(active) ? styles.hubMain : ""}`
           }
           id="main-content"
         >
-          {!settings && active !== "hub" && (
+          {!settings && active !== "hub" && active !== "calendar" && (
             <ModuleBreadcrumb active={active} />
           )}
           {children}

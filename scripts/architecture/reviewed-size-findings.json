@@ -298,15 +298,6 @@
     "reviewedOn": "2026-10-11"
   },
   {
-    "file": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
-    "kind": "function",
-    "symbol": "ClientOverview",
-    "fingerprint": "2ee4de520c6aba4138d1dee504f9f3d7c5574ffabb03b0e15fe84dc09c45f488",
-    "reason": "Composes the selected client overview from existing identity, team, facilities, Objective summary, activity and dialog owners. The change requires a current successful Client before rendering and gates only the activity-derived count on that feed; independently healthy sources keep their existing presentation. Detailed forms, actions, query contracts, metrics and mutation lifetimes remain delegated. No new workflow is placed in this component.",
-    "reviewedBy": "Codex root, full component and final diff reviewed",
-    "reviewedOn": "2026-10-11"
-  },
-  {
     "file": "apps/web/src/features/portfolio/client-profile/ClientProfileActions.tsx",
     "kind": "function",
     "symbol": "ClientProfileActions",
@@ -847,15 +838,6 @@
     "reviewedOn": "2026-10-11"
   },
   {
-    "file": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
-    "kind": "function",
-    "symbol": "PortfolioIndex",
-    "fingerprint": "e5a63bd1ded18e92d9689db356b1a55ca6ac0a7a09f1b8a21cccc57691e84b7f",
-    "reason": "Owns composition and URL state for the Portfolio index. Current-success catalog projection is now the single input for its count, pulse, filter choices, result cards, attention and Quick log. Native queries, filtering/sorting, result layouts, attention, create intake and the Objective picker remain separate existing owners. The long body is page composition of related index controls; this change adds no server operation or independent feature lifecycle.",
-    "reviewedBy": "Codex root, full component and final diff reviewed",
-    "reviewedOn": "2026-10-11"
-  },
-  {
     "file": "apps/web/src/features/portfolio/objectives/NewObjectivePage.tsx",
     "kind": "function",
     "symbol": "ObjectiveIntake",
@@ -863,15 +845,6 @@
     "reason": "ObjectiveIntake composes the one full-page draft presentation: back navigation, heading, fixed current-client identity, controlled form, explicit footer actions and the readiness rail. Its 82-line body is primarily that Figma hierarchy. Draft state and validation belong to useObjectiveEditorSession; fields belong to ObjectiveFields; feedback, actions and confirmation have shared presentation owners; mutation and receipt validation remain in the existing mutation/writer modules. Keeping the single form and its pending exit/action gates together avoids splitting one draft's submit lifecycle across layout fragments. No service transport, inferred context, autosave or independent persistence is added here.",
     "reviewedBy": "Codex portfolio_objectives; Codex integration coordinator (independent confirmation)",
     "reviewedOn": "2026-10-11"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/bill-tracker/BillTrackerPage.tsx",
-    "kind": "function",
-    "symbol": "ConfiguredTracker",
-    "fingerprint": "2625de2deb09bc4f7e3b78ec8f7ee17a8943f7abdcf7cd853d8e29852ae1275b",
-    "reason": "Reviewed the complete page composition. It owns URL view/search and the current selected bill ID, then delegates native reads, current-data projection, tables, drawers, and configuration forms to their existing owners. Resolving selection from the successful scoped read closes the stale-record gap without adding persistence or provider behavior. The remaining length is the single page layout and conditional composition.",
-    "reviewedOn": "2026-10-11",
-    "reviewedBy": "Codex portfolio_calendar_relationships; Codex portfolio_objectives (independent confirmation)"
   },
   {
     "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/AlertDelivery.tsx",
@@ -955,15 +928,6 @@
     "reviewedBy": "Codex portfolio_calendar_relationships; independent portfolio_objectives review; root full-body integration review"
   },
   {
-    "file": "apps/web/src/features/portfolio/client-profile/TeamDialog.tsx",
-    "kind": "function",
-    "symbol": "ProfileTeamEditor",
-    "fingerprint": "48b6e29fbcc5de39acf902c4ff5b1f1a688ab6aa31b44503ecee4cb469289799",
-    "reason": "This 97-line presentation composes the existing roster list/add/remove controls and the separate OrderedOwnerFields editor. The scalar writer and field were removed, ranked owners are protected from roster removal, and free-text roles retain their original display. Versioned owners, readback and pending lifetime live in their own cohesive owner module; this component implements neither transport nor authorization.",
-    "reviewedOn": "2026-10-12",
-    "reviewedBy": "Codex shared frontend integration owner (source review)"
-  },
-  {
     "file": "apps/web/src/features/portfolio/client-profile/FacilityFields.tsx",
     "kind": "function",
     "symbol": "FacilityFields",
@@ -998,15 +962,6 @@
     "reason": "This 109-line hook now owns only roster add/remove and its existing uncertainty/reload lifetime. Removing the scalar owner branch narrows responsibility. Current role/source guards and request cancellation are preserved; exact roster receipt validation remains in team-writer/profile-receipts. Ordered replacement has its own distinct expected-version and retained-attempt semantics and is not hidden in this hook.",
     "reviewedOn": "2026-10-12",
     "reviewedBy": "Codex shared frontend integration owner (source review)"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/capabilities/CapabilityForm.tsx",
-    "kind": "function",
-    "symbol": "CapabilityForm",
-    "fingerprint": "356f48fa6379550c0a14b30cc9ae0ede2e97f4904a43fca7bad35568674653ca",
-    "reason": "CapabilityForm owns one mounted local capability Profile draft and the exact existing native submission projection for create/update. Keeping token/TRL state, uncontrolled named metadata fields, conditional create/saved sections and the explicit submit footer together makes hidden Details values and tab-retained draft values part of one form. Identity, disclosure and readiness field presentation is delegated to CapabilityFields; token behavior remains in canonical TokenInput. This 128-line body does not perform transport, query/cache effects or authorization: onSave sends the same eleven-field CapabilityInput to the editor's one guarded mutation. Retain this cohesive form; extract a section only if it gains an independent lifecycle or public caller, rather than splitting the coupled draft projection and field arrangement by line count.",
-    "reviewedBy": "Codex portfolio_prospects_files; root full-body integration review",
-    "reviewedOn": "2026-10-11"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/facility-map-mutations.ts",
@@ -1090,15 +1045,6 @@
     "reviewedOn": "2026-10-11"
   },
   {
-    "file": "apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx",
-    "kind": "function",
-    "symbol": "CapabilityEditor",
-    "fingerprint": "78a0b361b5ded37536426ac6b7949c1afed4572db168d0f02af663d6b193c945",
-    "reason": "Composes one capability modal with Profile/Documents tabs, the retained Profile draft, explicit initial focus and connected-opener restoration, and the existing remove confirmation. useCapabilityMutation remains the sole capability write owner; all native payload, receipt and actor/client/lifetime checks remain in unchanged capability modules. This continuation only supplies the capability caption and empty-state wording to the public EntityDocuments composition. The 111-line body remains the two create/saved compositions and their confirmation; Files owns every document query, upload, read and readiness rule.",
-    "reviewedBy": "Codex portfolio_prospects_files; independent root integration review",
-    "reviewedOn": "2026-10-11"
-  },
-  {
     "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
     "kind": "function",
     "symbol": "FilesPage",
@@ -1153,17 +1099,6 @@
     "nonblank": 122,
     "fingerprint": "8099717d17ec7e17dd0605ae88958f8f563a52ee065c1a10c793323286ec4c09",
     "reason": "The hook owns one selected removal review: open/close, pending exclusion, native action invocation, current refusal reconciliation, and exact current feedback/cache publication. createRemovalReview separately binds actor/client/history revisions and the session-local uncertainty fence; actions.ts separately owns native preflight/DELETE/receipt parsing, and RemoveSubmission owns layout/focus. Its branches share the same selected-review lifetime invariant; splitting them would duplicate that coordination.",
-    "reviewedBy": "portfolio_objectives; root independent source, native contract, visual and integration review",
-    "reviewedOn": "2026-10-11"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
-    "kind": "function",
-    "symbol": "CapabilitiesPage",
-    "line": 14,
-    "nonblank": 107,
-    "fingerprint": "84e2958a0bb94902205118b78788ee2653e374afc23c98a05e6f63cd39ba1a50",
-    "reason": "CapabilitiesPage retains its existing page composition, capability selection query, fit/editor/registration entries and navigation. This change adds only the PastPerformance public entry and clarifies the Advocacy history label. Saved client/history reads and removal state remain wholly inside the client-profile public feature. No second service, mutation or identity owner enters this page.",
     "reviewedBy": "portfolio_objectives; root independent source, native contract, visual and integration review",
     "reviewedOn": "2026-10-11"
   },
@@ -1303,15 +1238,6 @@
     "reviewedOn": "2026-10-12"
   },
   {
-    "file": "apps/web/src/features/portfolio/index/portfolio.module.css",
-    "kind": "file",
-    "symbol": "<module>",
-    "fingerprint": "c9f7cfaf6b15c78697cc7094d37738b63d72a73219a78e99eee4c34a386a20ad",
-    "reason": "This stylesheet contains only the Portfolio index layout, table/cards, responsive and theme presentation, scoped through CSS modules and the existing Portfolio root. The union guard newly discovers its 411 nonblank CSS lines; it introduces no shared global reset or additional domain.",
-    "reviewedBy": "Codex shared frontend integration review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
     "file": "apps/web/src/shared/portfolio/shell/Shell.tsx",
     "kind": "function",
     "symbol": "Shell",
@@ -1336,15 +1262,6 @@
     "fingerprint": "f74a873373b60ce98d607820d05e23f1aa70d9f0be82ed1c51b75e3295043339",
     "reason": "One Add profile choice and transition into the canonical intake form. Removing the billing summary sibling-host argument introduces no new responsibility or financial mutation. Existing capacity/intake/summary owners remain separate. See docs/integration-20261012/STRUCTURE-REVIEW.md.",
     "reviewedBy": "Codex shared frontend integration review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/client-profile/useOrderedOwners.ts",
-    "kind": "function",
-    "symbol": "useOrderedOwners",
-    "fingerprint": "f9ef647e05f17133d59662c726ef2315e1999b17075b20513b8b80f4955e3b21",
-    "reason": "This 182-line hook owns one versioned owner edit lifetime: current scoped reads, the first-edit source snapshot, dispatch state and deliberate readback after conflict or uncertainty. Input and receipt validation/HTTP replacement remain in ordered-owners.ts; rank presentation remains in OrderedOwnerFields. The retained attempt uses the application query cache across dialog closure and is cleared by the canonical application identity/client boundary. Readback compares the complete submitted order/version; draft gaps are preserved without promotion. These dependent transitions belong to one editor state machine; no member authority service, roster writer or backend ownership policy is duplicated.",
-    "reviewedBy": "Codex shared frontend integration owner (source review)",
     "reviewedOn": "2026-10-12"
   },
   {
@@ -1543,6 +1460,123 @@
     "fingerprint": "6a1f8d2731c638e12c34a268415e63e496c40ba42b4d7e28656384be81dc322e",
     "reason": "This is one existing-resource selection interaction: current Objective/client-scoped choice query, explicit selected resource, task cursor navigation and owner-resolution status. Canonical wire/owner binding and service selection live in objective-work-sources; cancellation/navigation belong to useObjectiveWorkDestination; saved-version choice has its own cohesive component. No backend authorization, command, persisted association or feature editor is embedded. Keeping this dependent choice/paging state together makes stale selections and interrupted opens reviewable.",
     "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/modules/calendar/calendar.module.css",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "34cab455d626ec584301c7fd0e83cc14f412b8ccd2116d12c1e9d7aaa17d2e20",
+    "reason": "Calendar-specific authored geometry, source filters, agenda and responsive rules remain a single presentation stylesheet. The new compact header/disclosure owns no data or routing policy; ModuleBreadcrumb remains the navigation owner. No other module geometry changes. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex shared frontend implementation review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/bill-tracker/BillTrackerPage.tsx",
+    "kind": "function",
+    "symbol": "ConfiguredTracker",
+    "fingerprint": "f3ad354e9af10face3b9b49c378deb28607ead4b96ade92ae73174bfeb653fd5",
+    "reason": "Owns only Bill Tracker screen composition and local table/board/search/selection state. This delta nests the existing QueryState, BillResults and pagination in a results frame; currentBoard and the governed queries retain data/transport ownership. No request, receipt or paging algorithm moved into the view. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex shared frontend implementation review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
+    "kind": "function",
+    "symbol": "CapabilitiesPage",
+    "fingerprint": "d4b3500e670ce928604a647800950870bf7f33bf66b356dc96b8eb1ffcfeb858",
+    "reason": "Passes only its already-current capability records as optional suggestions. Query scope, invalidation and unavailable handling remain in existing hooks; no new catalog, service, DTO or cross-client state is created. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex shared frontend implementation review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx",
+    "kind": "function",
+    "symbol": "CapabilityEditor",
+    "fingerprint": "a1093d9e7ba03dc0b4cf15244fda82e07cc40c17a0024ca3a704822aad5babca",
+    "reason": "Owns the existing saved/create dialog and tabs. It forwards current-record suggestions to the create form without changing lifecycle, receipt, draft, document or focus ownership. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex shared frontend implementation review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/CapabilityForm.tsx",
+    "kind": "function",
+    "symbol": "CapabilityForm",
+    "fingerprint": "9b492ddd92a19d7b2f8e6829a6998adfa034f83bba04f3d3ee8bc9c2d586ca49",
+    "reason": "Owns the existing native capability form and fields. It forwards optional suggestions only to creation identity fields; form parsing, mutation boundaries and arbitrary type/sector strings remain canonical. Saved Details still renders the authored variant. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex shared frontend implementation review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
+    "kind": "function",
+    "symbol": "ClientOverview",
+    "fingerprint": "4125c1012f0d551322a20f250ef083d7692189913d5e7fd0dab1ec3851bf81a1",
+    "reason": "Adds current verified client name to the existing Team dialog solely for owner-dialog context. All current-client failure gates, activity/overview composition and transport ownership are unchanged. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex shared frontend implementation review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/OwnerCards.tsx",
+    "kind": "function",
+    "symbol": "OwnerCards",
+    "fingerprint": "32d0f3e4ce8206ab42b93adea8f463a3b6d413e5233f0e15529bcd4dd4ea75fe",
+    "reason": "Owns the ordered-owner card list and local pointer/keyboard interaction. The canonical hook owns draft validation, source/version binding and writes; this component receives that editor and current team display roles, and contains no request or duplicate contract. It preserves empty positions and only an explicit reorder moves an owner. Its nested map is reviewed separately. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex shared frontend implementation review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/OwnerCards.tsx",
+    "kind": "function",
+    "symbol": "OwnerCards > <anonymous>",
+    "fingerprint": "d16223008fa4350c86dab7eb42be0c834a80664c132395e993a6ab34cd64e6b4",
+    "reason": "Renders one rank card, current person/unavailable identity, native member selection, rank badge and clear/reorder controls. All edits delegate to the canonical editor; no authorization or persistence lives in this rendering callback. Keeping the related card controls together avoids obscuring keyboard/drag parity across fragments. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex shared frontend implementation review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/TeamDialog.tsx",
+    "kind": "function",
+    "symbol": "ProfileTeamEditor",
+    "fingerprint": "dfbadc5012d749cfd5eb18a62c9fc70c4c88bb5a65d9710fa48dd21acaee8e14",
+    "reason": "Retains team membership lifecycle; adds a dedicated Owners entry and passes only verified current team roles and client display name. Its existing source/pending/unknown fences still block owner changes. The owner dialog/hook remain distinct cohesive owners. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex shared frontend implementation review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/useOrderedOwners.ts",
+    "kind": "function",
+    "symbol": "useOrderedOwners",
+    "fingerprint": "9f9a15eddc765794dfe5efe939f7da49cb79d9667c3af85c10e3bded6d32fdcd",
+    "reason": "Remains the single ordered-owner read/draft/versioned-write/read-back lifecycle owner. The added explicit local reorder preserves the captured base/source and pending/stale/uncertainty fences, clears no persisted data and sends no request. Existing save validation still rejects holes/duplicates; clearing a rank never promotes another owner. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex shared frontend implementation review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
+    "kind": "function",
+    "symbol": "PortfolioIndex",
+    "fingerprint": "cc00a22d3c966f6f415d0817bcd3e3fcfda650c7b0eb283acf0b98f7440c7f28",
+    "reason": "Composes the canonical index queries, URL filters, profile catalog, attention and dialogs. Secondary tabs/filter disclosure are extracted to IndexNavigation, owner choices to IndexOwnerFilter. Customize only controls visibility of existing local layout editing; full catalog, current-read concealment, actor/session and objective focus ownership remain unchanged. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md. Done customizing explicitly returns focus to its trigger.",
+    "reviewedBy": "Codex shared frontend implementation review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/layout/PortfolioLayoutEditor.tsx",
+    "kind": "function",
+    "symbol": "EditorSession",
+    "fingerprint": "deb989ba5ae827a2b85baed68dea4697f9059c9a3edd4460ecdbdd3abe0a83a4",
+    "reason": "Owns one organization layout draft and its explicit save/conflict/reconciliation UI. An editing flag hides controls outside Customize; it does not duplicate layout state or bypass any availability/current catalog/write fence. Guidance now reflects explicit Save and is hidden when blocked; Done stays disabled while a changed or unresolved write exists. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex shared frontend implementation review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/portfolio.module.css",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "370b43d4c8e1db0b7afe8e3f6ed0f4910b4ed62f27f563103870c99735aa3e11",
+    "reason": "Retains Portfolio index/card/chooser presentation and responsive rules. The added header owner filter and compact navigation/disclosure styling are scoped to the same index. No global shell tokens, mode navigation, backend state or unrelated domain rules are added. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex shared frontend implementation review",
     "reviewedOn": "2026-10-12"
   }
 ]

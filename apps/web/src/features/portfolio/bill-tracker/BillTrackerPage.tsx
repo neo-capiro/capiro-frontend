@@ -24,7 +24,7 @@ export function BillTrackerPage({
 }) {
   if (!backend)
     return (
-      <div className="page stack">
+      <div className={`page stack ${styles.page}`}>
         <h1>Bill Tracker</h1>
         <p className="status" role="status">
           Bill Tracker is not available in this environment.
@@ -74,9 +74,9 @@ function ConfiguredTracker({
   // A failed read/removal closes the selection permanently, even if it later returns.
   if (selection && !selected) setSelection(undefined);
   return (
-    <div className="page stack">
+    <div className={`page stack ${styles.page}`}>
       <h1>Bill Tracker</h1>
-      <section className="card stack">
+      <section className={`card stack ${styles.tracker}`}>
         <header className="row between">
           <h2>Tracked bills</h2>
           <span className="muted">{pages[0]?.total ?? "—"} tracked bills</span>
@@ -103,63 +103,68 @@ function ConfiguredTracker({
             <small>Watchlist coverage</small>
           </div>
         </div>
-        <div className="toolbar">
-          <input
-            aria-label="Filter loaded bills"
-            value={search}
-            maxLength={200}
-            placeholder="Filter loaded bills"
-            onChange={(event) => set("q", event.target.value)}
-          />
-          <button
-            className="button"
-            aria-pressed={view === "table"}
-            onClick={() => set("view", "table")}
-          >
-            Table view
-          </button>
-          <button
-            className="button"
-            aria-pressed={view === "board"}
-            onClick={() => set("view", "board")}
-          >
-            Board view
-          </button>
-        </div>
-        <QueryState
-          pending={board.isPending}
-          error={board.error}
-          retry={() => void board.refetch()}
-        />
-        {board.isSuccess && !board.error && (
-          <>
-            <BillResults
-              columns={columns}
-              view={view}
-              onOpen={(bill) =>
-                setSelection({ billId: bill.billId, scope: board.scope })
-              }
-            />
-            {unique.length === 0 && (
-              <p className="empty">
-                No tracked bills yet. Search for a bill to start tracking.
-              </p>
-            )}
-            <p className="muted">
-              Showing {unique.length} loaded bills of {pages[0]?.total}. Passage
-              estimates come from the service.
-            </p>
-            {board.hasNextPage && (
+        <section className={styles.results} aria-label="Tracked bill results">
+          <header className={styles.resultsHeader}>
+            <h3>Tracked bills</h3>
+            <div className={styles.resultsControls}>
+              <input
+                aria-label="Filter loaded bills"
+                value={search}
+                maxLength={200}
+                placeholder="Filter loaded bills"
+                onChange={(event) => set("q", event.target.value)}
+              />
               <button
                 className="button"
-                disabled={board.isFetchingNextPage}
-                onClick={() => void board.fetchNextPage()}
+                aria-pressed={view === "table"}
+                onClick={() => set("view", "table")}
               >
-                {board.isFetchingNextPage ? "Loading…" : "Load more bills"}
+                Table view
               </button>
-            )}
-          </>
-        )}
+              <button
+                className="button"
+                aria-pressed={view === "board"}
+                onClick={() => set("view", "board")}
+              >
+                Board view
+              </button>
+            </div>
+          </header>
+          <QueryState
+            pending={board.isPending}
+            error={board.error}
+            retry={() => void board.refetch()}
+          />
+          {board.isSuccess && !board.error && (
+            <>
+              <BillResults
+                columns={columns}
+                view={view}
+                onOpen={(bill) =>
+                  setSelection({ billId: bill.billId, scope: board.scope })
+                }
+              />
+              {unique.length === 0 && (
+                <p className="empty">
+                  No tracked bills yet. Search for a bill to start tracking.
+                </p>
+              )}
+              <p className={styles.resultsFooter}>
+                Showing {unique.length} loaded bills of {pages[0]?.total}.
+                Passage estimates come from the service.
+              </p>
+              {board.hasNextPage && (
+                <button
+                  className="button"
+                  disabled={board.isFetchingNextPage}
+                  onClick={() => void board.fetchNextPage()}
+                >
+                  {board.isFetchingNextPage ? "Loading…" : "Load more bills"}
+                </button>
+              )}
+            </>
+          )}
+        </section>
       </section>
       {tracking && (
         <TrackBillDialog

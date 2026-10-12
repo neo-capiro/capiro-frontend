@@ -1,0 +1,20 @@
+[WebServer] (node:369603) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 1 worker
+
+(node:369630) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:5:1 › VD01 dedicated Owners dialog presents ordered cards (4.0s)
+  ✓  2 ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:12:1 › VD02 unavailable ordering never promises drag or saved layout (4.8s)
+  ✓  3 ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:18:1 › VD03 Portfolio title toolbar contains Owner and Customize (2.8s)
+  ✓  4 ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:24:1 › VD04 capability create marks required name and retains editable choices (3.2s)
+  ✓  5 ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:31:1 › VD05 Bill Tracker has compact heading and an inner results frame (2.0s)
+  ✓  6 ../../../../tmp/capiro-visual-closeout/portfolio/control.spec.ts:36:1 › VD07 Portfolio modal scrim does not blur the underlying page (2.2s)
+
+  6 passed (20.6s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

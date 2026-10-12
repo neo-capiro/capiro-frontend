@@ -1,0 +1,40 @@
+{
+  "recordedAt": "2026-10-12T12:45:19.633059+00:00",
+  "status": "QUALIFIED_SOURCE_FINAL_IMAGE_PROPOSAL_READY_FOR_SHIPPING_REVIEW",
+  "qualifiedSource": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "qualifiedRootTree": "16c0b62901859aa4ff3f2ea01856aa13e13c65cd",
+  "applicationSourceTree": "46cebca97ccfc1facc1c1a939beb6f4d7730685b",
+  "independentReview": "INDEPENDENT-FINAL-REVIEW.json",
+  "provenanceCorrection": "evidence/provenance-correction-4a16148/CORRECTION.json",
+  "archive": {
+    "sourceCommit": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+    "bytes": 451977924,
+    "sha256": "252ccdf0d91d94a6b53e4a9d905534f2b4e325ef231481774154daa96bfacbf5",
+    "trackedFiles": 4155,
+    "reproducibleRecipe": "evidence/image-proposal-4a16148/prepare-image-source.py",
+    "receipt": "evidence/image-proposal-4a16148/ARCHIVE.json"
+  },
+  "recipeBindings": {
+    "buildspec.reviewed.yml": "37d84507c0759001c3376408982d1fa3fa1309731cc2bf618d389abcafae25a6",
+    "start-build.request.template.json": "48c42de83ce59cc5c2a6a27be60af598a8b298fbcce62591289979266b07f8b0",
+    "prepare-image-source.py": "581a8016453b682a7369b1c68cf134ba8f4dcd77081b689749baf8f42587720f",
+    "BUILD-INPUTS.json": "6cbed49b2e016573c0e227170cbed32170957aa7d09ff09c4e2ca391b07fc4ee"
+  },
+  "sourceArchiveAndRecipeChangedSince6d429aa": false,
+  "futureAudit": "verification/meri-server-audit.mjs",
+  "futureAuditSHA256": "e425e26e2247a75b4ccc45d36a201f1432cc586c59e5d6f677b39f1943c8b247",
+  "cloudExecution": {
+    "upload": "NOT_RUN",
+    "build": "NOT_RUN",
+    "container": "NOT_RUN",
+    "push": "NOT_RUN",
+    "scan": "NOT_RUN",
+    "deployment": "NOT_RUN"
+  },
+  "remaining": [
+    "Separately authorized designated shipping execution and fresh image qualification",
+    "Native/live acceptance",
+    "Unassessed Figma frames",
+    "All 337 Portfolio full/native rows remain open"
+  ]
+}

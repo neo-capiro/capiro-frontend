@@ -1,0 +1,166 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-visual-closeout/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "test/browser/playwright.config.ts",
+      "calendar-visual-closeout.spec.ts"
+    ],
+    "configFile": "/workspace/capiro-visual-closeout/apps/web/test/browser/playwright.config.ts",
+    "rootDir": "/workspace/capiro-visual-closeout/apps/web/test/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/capiro-visual-closeout/apps/web/test-results/modules-browser",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-visual-closeout/apps/web/test/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/modules-browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" \"/workspace/capiro-visual-closeout/apps/web/test/browser/server.mjs\"",
+      "url": "http://127.0.0.1:5197",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "calendar-visual-closeout.spec.ts",
+      "file": "calendar-visual-closeout.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "compact Calendar retains scoped module navigation, history, source disclosures and mobile controls",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9222,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Search displayed events')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Search displayed events')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Search displayed events')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Search displayed events')\u001b[22m\n\n    at /workspace/capiro-visual-closeout/apps/web/test/browser/calendar-visual-closeout.spec.ts:74:60",
+                    "location": {
+                      "file": "/workspace/capiro-visual-closeout/apps/web/test/browser/calendar-visual-closeout.spec.ts",
+                      "column": 60,
+                      "line": 74
+                    },
+                    "snippet": "  72 |     page.getByRole(\"button\", { name: /Government Unavailable/ }),\n  73 |   ).toBeVisible();\n> 74 |   await expect(page.getByLabel(\"Search displayed events\")).toBeVisible();\n     |                                                            ^\n  75 |   for (const asset of [\n  76 |     \"filter\",\n  77 |     \"scope-chevron\","
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-visual-closeout/apps/web/test/browser/calendar-visual-closeout.spec.ts",
+                        "column": 60,
+                        "line": 74
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Search displayed events')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Search displayed events')\u001b[22m\n\n\n  72 |     page.getByRole(\"button\", { name: /Government Unavailable/ }),\n  73 |   ).toBeVisible();\n> 74 |   await expect(page.getByLabel(\"Search displayed events\")).toBeVisible();\n     |                                                            ^\n  75 |   for (const asset of [\n  76 |     \"filter\",\n  77 |     \"scope-chevron\",\n    at /workspace/capiro-visual-closeout/apps/web/test/browser/calendar-visual-closeout.spec.ts:74:60"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T11:42:22.011Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-visual-closeout/apps/web/test-results/modules-browser/calendar-visual-closeout-c-2a977-losures-and-mobile-controls/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-visual-closeout/apps/web/test-results/modules-browser/calendar-visual-closeout-c-2a977-losures-and-mobile-controls/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-visual-closeout/apps/web/test-results/modules-browser/calendar-visual-closeout-c-2a977-losures-and-mobile-controls/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-visual-closeout/apps/web/test/browser/calendar-visual-closeout.spec.ts",
+                    "column": 60,
+                    "line": 74
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "06180893bc08d6a2468a-9d59ed03c4b713013566",
+          "file": "calendar-visual-closeout.spec.ts",
+          "line": 6,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T11:42:17.086Z",
+    "duration": 15051.613000000001,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

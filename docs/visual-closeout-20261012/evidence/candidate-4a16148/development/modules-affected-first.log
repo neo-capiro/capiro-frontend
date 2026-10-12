@@ -1,0 +1,65 @@
+
+> @capiro/web@0.1.0 test:browser:modules
+> playwright test --config test/browser/playwright.config.ts calendar-visual-closeout.spec.ts calendar.spec.ts module-routing.spec.ts
+
+[WebServer] (node:373343) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+(node:373403) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 test/browser/calendar-visual-closeout.spec.ts:6:1 › compact Calendar retains scoped module navigation, history, source disclosures and mobile controls (30.4s)
+(node:373983) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 test/browser/calendar.spec.ts:24:1 › month and week retain client scope and query end-exclusive Eastern ranges (4.1s)
+  ✓  3 test/browser/calendar.spec.ts:79:1 › client agenda is meetings-only and the meeting opens the shared prep/notes/debrief workflow (3.6s)
+
+
+  1) test/browser/calendar-visual-closeout.spec.ts:6:1 › compact Calendar retains scoped module navigation, history, source disclosures and mobile controls 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Agenda', exact: true })
+
+
+      27 |   });
+      28 |   await page.goto(`/modules/calendar?clientId=${clientId}`);
+    > 29 |   await page.getByRole("button", { name: "Agenda", exact: true }).click();
+         |                                                                   ^
+      30 |   const heading = page.getByRole("heading", {
+      31 |     name: "Master calendar",
+      32 |     exact: true,
+        at /workspace/capiro-visual-closeout/apps/web/test/browser/calendar-visual-closeout.spec.ts:29:67
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/calendar-visual-closeout-c-2a977-losures-and-mobile-controls/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/calendar-visual-closeout-c-2a977-losures-and-mobile-controls/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/calendar-visual-closeout-c-2a977-losures-and-mobile-controls/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/calendar-visual-closeout-c-2a977-losures-and-mobile-controls/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    test/browser/calendar-visual-closeout.spec.ts:6:1 › compact Calendar retains scoped module navigation, history, source disclosures and mobile controls 
+  2 passed (46.9s)
+npm error Lifecycle script `test:browser:modules` failed with error:
+npm error code 1
+npm error path /workspace/capiro-visual-closeout/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-visual-closeout/apps/web
+npm error command failed
+npm error command sh -c playwright test --config test/browser/playwright.config.ts calendar-visual-closeout.spec.ts calendar.spec.ts module-routing.spec.ts
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

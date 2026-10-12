@@ -1,19 +1,24 @@
 "use client";
+import { useId } from "react";
 import { TextareaField } from "@/shared/portfolio/ui/TextareaField";
 import { maturity, type Capability } from "./contracts";
 import styles from "./capability-editor.module.css";
 
 export function CapabilityIdentityFields({
   capability,
+  choices = [],
 }: {
   capability?: Capability;
+  choices?: readonly Capability[];
 }) {
+  const listId = useId();
   return (
     <>
       <label>
-        Name
+        <span>Name{!capability && <span aria-hidden="true"> *</span>}</span>
         <input
           name="name"
+          aria-label="Name"
           required
           defaultValue={capability?.name}
           maxLength={300}
@@ -23,21 +28,55 @@ export function CapabilityIdentityFields({
       <div className={`formGrid ${styles.typeSector}`}>
         <label>
           Type
-          <input
-            name="type"
-            defaultValue={capability?.type ?? "product"}
-            maxLength={120}
-          />
+          <span
+            className={`${styles.choiceField} ${!capability ? styles.editableChoice : ""}`}
+          >
+            <input
+              name="type"
+              aria-label="Type"
+              list={!capability ? `${listId}-types` : undefined}
+              defaultValue={capability?.type ?? "product"}
+              maxLength={120}
+            />
+            {!capability && <span aria-hidden="true">▾</span>}
+          </span>
         </label>
         <label>
           Sector
-          <input
-            name="sector"
-            defaultValue={capability?.sector ?? ""}
-            maxLength={120}
-          />
+          <span
+            className={`${styles.choiceField} ${!capability ? styles.editableChoice : ""}`}
+          >
+            <input
+              name="sector"
+              aria-label="Sector"
+              list={!capability ? `${listId}-sectors` : undefined}
+              defaultValue={capability?.sector ?? ""}
+              maxLength={120}
+            />
+            {!capability && <span aria-hidden="true">▾</span>}
+          </span>
         </label>
       </div>
+      {!capability && (
+        <>
+          <datalist id={`${listId}-types`}>
+            {[...new Set(["product", ...choices.map((item) => item.type)])].map(
+              (value) => (
+                <option key={value} value={value} />
+              ),
+            )}
+          </datalist>
+          <datalist id={`${listId}-sectors`}>
+            {[
+              ...new Set(
+                choices.flatMap((item) => (item.sector ? [item.sector] : [])),
+              ),
+            ].map((value) => (
+              <option key={value} value={value} />
+            ))}
+          </datalist>
+        </>
+      )}
     </>
   );
 }

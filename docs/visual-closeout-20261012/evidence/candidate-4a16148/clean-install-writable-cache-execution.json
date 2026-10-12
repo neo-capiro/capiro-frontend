@@ -1,0 +1,20 @@
+{
+  "head": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "tree": "16c0b62901859aa4ff3f2ea01856aa13e13c65cd",
+  "statusAtStart": "",
+  "command": [
+    "npm",
+    "ci",
+    "--ignore-scripts",
+    "--no-audit",
+    "--fund=false",
+    "--cache",
+    "/tmp/capiro-npm-cache"
+  ],
+  "startedAt": "2026-10-12T11:49:37.377638+00:00",
+  "state": "finished",
+  "exitCode": 0,
+  "finishedAt": "2026-10-12T11:49:50.259865+00:00",
+  "headAtFinish": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "statusAtFinish": ""
+}

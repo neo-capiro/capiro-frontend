@@ -169,6 +169,7 @@ export function ClientOverview({ clientId }: { clientId: string }) {
       <ActivityTimeline clientId={clientId} />
       <TeamDialog
         clientId={clientId}
+        clientName={value.name}
         open={showTeam}
         onOpenChange={setShowTeam}
       />

@@ -1,0 +1,20 @@
+{
+  "recordedAt": "2026-10-12T12:43:18.587627+00:00",
+  "finding": "Nonblocking P3: historical Meri actual-server receipt source label is stale.",
+  "historicalEvidenceCommit": "3e7ad7c648b65b84c758388f9505b3b057e0c57f",
+  "historicalSourceLabel": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+  "actualExecutedSource": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "actualExecutedRootTree": "16c0b62901859aa4ff3f2ea01856aa13e13c65cd",
+  "actualApplicationSourceTree": "46cebca97ccfc1facc1c1a939beb6f4d7730685b",
+  "cause": "meri-server-audit.mjs line 40 hardcoded the prior checkpoint into meri-actual-server.json. The enclosing execution receipt correctly captured clean Git source at start and finish.",
+  "effect": "Receipt provenance label only; the recorded pass and screenshots remain historical observations of the 4a16148 execution. Meri source/package/assets and shared Meri header inputs are unchanged between 2d50edd and 4a16148.",
+  "rawEvidenceTreatment": "Original script, JSON, execution receipt and all 578 original manifest entries remain byte-identical; this record supplements rather than rewrites them.",
+  "originalSHA256": {
+    "meri-server-audit.mjs": "1e94e32c94c9e975cc8a23b10bf3c2d27a261b835cfbed28719a24effe8bb5f0",
+    "meri-actual-server.json": "1ed0f38ea3b250dcc595f9811793de542defb7009e665bbcd2f7fec38433a3a6",
+    "meri-actual-server-execution.json": "f7b2533df13e5bb2dd7688d486b4e656e5c7711e71ef36f8e4b21b56f7933795"
+  },
+  "authoritativeExecutionReceipt": "../candidate-4a16148/meri-actual-server-execution.json",
+  "futurePrevention": "New audit derives checkout commit and application tree from Git, separately records built source from the successful clean build execution receipt, and refuses changed non-documentation build inputs.",
+  "acceptance": "No live/native/image or unassessed-frame acceptance is created."
+}
