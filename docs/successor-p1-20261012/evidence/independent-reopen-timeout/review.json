@@ -1,0 +1,63 @@
+{
+  "status": "GLOBAL_TEST_BUDGET_EXHAUSTION_CONFIRMED",
+  "sourceCommit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "fullRunResult": "Preserved failed/timed-out execution; this review does not qualify it",
+  "observedSemanticAssertionFailure": false,
+  "observations": [
+    "Held-authority screenshot shows only recovery-checking text, no retained Title/body/request ID.",
+    "Fresh authority read and exactly-one-POST assertions pass before screenshot.",
+    "Title and request-ID absence checks pass after screenshot, before release.",
+    "After release, retained title/details pass before timeout; request-ID visibility, Read saved command enabled and final exactly-one-POST check finish without recorded error just after the global timeout event.",
+    "The only final reported error is Test timeout of 30000ms exceeded; earlier poll subattempt mismatches are expected and their parent poll succeeds."
+  ],
+  "expensiveSpansMs": {
+    "Navigate to activity fixture": 4526.462,
+    "Navigate to client profile": 4647.492,
+    "Close dialog": 4988.387,
+    "Reopen via Quick log link": 2489.882,
+    "Capture held-authority screenshot": 5703.111
+  },
+  "resourcePressure": "Consistent with slow actionability/rasterization and concurrent4-worker Portfolio plus Modules/static jobs. Causal CPU saturation is inferred, not measured by this trace.",
+  "sourceAssessment": "Reopen token changes during render; retained state remains gated by current authority readiness. Source and observed protected/restored states agree. No source fix supported by this failure.",
+  "priorEvidence": {
+    "943d90c": {
+      "durationMs": 26394,
+      "status": "passed",
+      "sameAppsWebTree": true
+    },
+    "49f6609": {
+      "durationMs": 22148,
+      "status": "passed",
+      "sameControl": true,
+      "sameEntireAppClaimed": false
+    }
+  },
+  "recommendedDisposition": {
+    "agreesWithParentPlan": true,
+    "preserveFailedRun": true,
+    "rerunScope": "All996 Portfolio cases on unchanged d5dd0be",
+    "workers": 3,
+    "testTimeoutMs": 60000,
+    "expectTimeoutMs": 5000,
+    "retries": 0,
+    "explicitActionTimeoutConfigChanged": false,
+    "effectiveActionBudgetNote": "Actions use timeout0 and inherit the remaining global test budget; increasing test timeout increases their possible effective duration.",
+    "qualificationCondition": "New complete full-suite report must pass. A targeted replay alone is not full qualification.",
+    "sourceOrAssertionEdits": false
+  },
+  "reviewActions": {
+    "additionalBrowserRuns": 0,
+    "stoppedOrRestartedRuns": 0,
+    "sourceEdits": 0,
+    "timeoutEdits": 0,
+    "cloudActions": []
+  },
+  "networkAssessment": {
+    "activityCommandPOSTs": 1,
+    "postStatus": 503,
+    "postStatusMeaning": "Intentional synthetic lost response after fixture commit, not a native backend error.",
+    "heldAuthorityGETDurationMs": 6008.884,
+    "heldAuthorityStatus": 200,
+    "heldAuthorityMeaning": "The test deliberately holds this request through screenshot and absence assertions; do not classify as backend latency."
+  }
+}

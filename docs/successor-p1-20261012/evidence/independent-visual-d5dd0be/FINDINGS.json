@@ -1,0 +1,19 @@
+{
+  "source": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "appsWebTree": "79deadc9fd0c74c3634d3acc3b026a6ac9087ffe",
+  "sourceTree": "32c0d89bf53037dbab4b611d7e25957b8b0caf9e",
+  "newConfirmedDefects": [],
+  "remainingBlockingFindingsInReviewedScope": [],
+  "previousFinding": {
+    "id": "SV-01",
+    "classification": "CONFIRMED_INHERITED_ACCESSIBILITY_DEFECT_RESOLVED_BY_ROOT",
+    "repairSource": "49f6609c7277ce8701b0d38c3ba163860633e668",
+    "finalReplay": "Original minimal regression and14 companion controls pass unchanged at d5dd0be; shared Dialog/focus bytes unchanged.",
+    "priorEvidence": "/tmp/capiro-successor-visual-review/FINDINGS.json"
+  },
+  "limits": [
+    "Unchanged15 replay covers Files/Calendar pending/unknown/review geometry and keyboard behavior; native receipt/client-clear/sharing-caption corrections have separate root-owned contract qualification.",
+    "Existing Figma differences are retained, not accepted as exact parity.",
+    "Synthetic Chromium/light fixtures are not live backend/auth/provider or screen-reader certification."
+  ]
+}

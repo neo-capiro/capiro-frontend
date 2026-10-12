@@ -1,0 +1,50 @@
+{
+  "status": "PASS_FULL_SOURCE_IDENTITY",
+  "sourceCommit": "943d90c459998dac4ac90a462bf5a9c880d6a736",
+  "rootTree": "f6ba34d27536feef6931a22ddde87781a8a0e966",
+  "gitSubtrees": {
+    "apps/web": "79deadc9fd0c74c3634d3acc3b026a6ac9087ffe",
+    "apps/web/src": "32c0d89bf53037dbab4b611d7e25957b8b0caf9e"
+  },
+  "archivePath": "/tmp/capiro-source-943d90c/source-943d90c.zip",
+  "archiveBytes": 498170759,
+  "archiveSHA256": "0f63187e7f4899060accfeed623c636c21b90b3dd27c497cea0b3bb7207efe06",
+  "archiveFormat": "single-volume ZIP32, canonical accepted profile",
+  "trackedBlobs": 5005,
+  "zipMembers": 5006,
+  "trackedPayloadBytes": 589104234,
+  "perMemberInventorySHA256": "242d73eef8bc5fa7eb13a2ee53ef7357e6e0c628affc8dd8c604b5a0c09ddf5e",
+  "allMemberPathModeSizeGitBlobAndSHA256Match": true,
+  "exactSourceMarkerVerified": true,
+  "creatorAndFreshCanonicalReceiptsEqual": true,
+  "receipts": {
+    "creator-receipt.json": {
+      "sha256": "3700884bbce5706b29a31dd70a6a938401022d82b9397441a9ba1054309f45eb",
+      "bytes": 1586690
+    },
+    "canonical-review-receipt.json": {
+      "sha256": "3700884bbce5706b29a31dd70a6a938401022d82b9397441a9ba1054309f45eb",
+      "bytes": 1586690
+    },
+    "independent-review-receipt.json": {
+      "sha256": "0bb4e650e20074cf16ab64bad2d36d00990f6ae76c0b4de7d18936865ad8955d",
+      "bytes": 585
+    }
+  },
+  "verifierBindings": {
+    "source_archive.py": "578d072953f898142392fa92437ab0ac207dadf8d093d6b88bfdcf7a02915882",
+    "zip_layout.py": "1666011cab053d93ddd7feb2d95cb8283c069444cc507cc0f62d79f57fef1179",
+    "verify-source-zip.py": "dc4b13aaa05856c86bf989c58c54316bf4a0a6ff8a4b50bb0953672ccd566ee2"
+  },
+  "qualificationStatus": "PENDING_PARENT_GATES_NOT_ESTABLISHED_BY_ARCHIVE_VERIFICATION",
+  "priorArchivePreserved": {
+    "commit": "49f6609c7277ce8701b0d38c3ba163860633e668",
+    "archiveSHA256": "d99017b116c1797d55e7d7bc25b6b19a7c85852c41914dbcb01c0b9b58c32fec",
+    "archiveBytes": 496928201,
+    "action": "not modified; new943d90c binding is separate"
+  },
+  "cloudActions": [],
+  "archiveWrites": false,
+  "extraction": false,
+  "sourceEdits": false
+}

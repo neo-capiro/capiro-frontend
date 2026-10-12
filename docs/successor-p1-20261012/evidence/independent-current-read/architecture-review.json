@@ -1,0 +1,34 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx",
+    "kind": "function",
+    "symbol": "ObjectivesPage",
+    "line": 18,
+    "nonblank": 208,
+    "fingerprint": "5f1c21710a260ec6edb31ab366fdb048eeff1d28e1f149b7c7e4a80367bb4163",
+    "provenance": "changed-since-transfer",
+    "reviewStatus": "changed-since-review",
+    "blocking": true,
+    "reviewedBy": "Independent Codex reviewer /root/objectives_work_intel_review",
+    "reviewedOn": "2026-10-12",
+    "decision": "accepted exact responsibility and fingerprint within this repair scope",
+    "rationale": "ObjectivesPage owns objective-list rendering, local status selection, URL-selected editor/create state and delete confirmation. The change derives every objective branch from one successful non-error list and clears local editor/delete intent after current read failure or client change. Query transport, schema/client receipt binding, mutations and form internals remain their existing owners. The added effect and render-time read-scope reset maintain the page interaction invariant and add no backend authority, persistence or unrelated domain. Keeping this 208-line composition together is proportionate; arbitrary extraction would scatter the same read invariant.",
+    "rootAction": "Record this exact fingerprint in the root-owned architecture review registry; unchanged inherited findings are not approved by this review."
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx",
+    "kind": "function",
+    "symbol": "ProspectsIndex",
+    "line": 23,
+    "nonblank": 189,
+    "fingerprint": "d0be79ab36b07635085df1e03a891890f55b36a345cb0ac4a199caf5e3552d84",
+    "provenance": "changed-since-transfer",
+    "reviewStatus": "changed-since-review",
+    "blocking": true,
+    "reviewedBy": "Independent Codex reviewer /root/objectives_work_intel_review",
+    "reviewedOn": "2026-10-12",
+    "decision": "accepted exact responsibility and fingerprint within this repair scope",
+    "rationale": "ProspectsIndex remains the list presentation and URL interaction owner for filters, counts, cards and creation/pipeline dialogs. Every data-backed branch now uses one successful fetched-after-mount gate; failed reads clear only existing new/pipeline URL intents. The canonical useProspects query hook owns the local staleTime:0 needed for filter-key/remount rereads. Same-key successful background refresh retains drafts. No global cache framework, new authority, persistence, backend semantics or mutation owner is introduced. The cohesive 189-line page keeps the read invariant auditable; splitting solely for line count would obscure it.",
+    "rootAction": "Record this exact fingerprint in the root-owned architecture review registry; unchanged inherited findings are not approved by this review."
+  }
+]

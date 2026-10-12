@@ -1,0 +1,12 @@
+{
+  "path": "apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+  "sha256": "f37b063199dcdea0c1f098a50a1b6ba48e61992c492f05326966c6d890521f06",
+  "nonblank": 407,
+  "kind": "file",
+  "symbol": "<module>",
+  "fingerprint": "4c5d2906210db1a25f83b906e019fe0d5f673b0ff682afb534ae9080075d772d",
+  "reviewedBy": "Independent Codex reviewer /root/objectives_work_intel_review",
+  "reviewedOn": "2026-10-12",
+  "decision": "accepted exact test module responsibility and fingerprint",
+  "rationale": "This single regression spec owns the shared synthetic artifact route fixture and its request/receipt controls for both notes and debriefs, plus the directly adjacent saved-artifact caption projection. Tests cover malformed/uncertain receipts, repeat-submission fencing, remount and client replacement, pending input, native operation-specific metadata, and four distinct sharing captions. The added caption case uses the existing private fixture instead of introducing a duplicate server/setup owner. The file is only seven nonblank lines beyond the review threshold, has no function-size signals, adds no production dependency or policy, and keeps the action-specific scenario assertions visible together. The explicitly labeled synthetic debrief share presentation bridge does not qualify the native GET gap; independent native-omission tests qualify truthful unavailable captions separately."
+}

@@ -1,0 +1,275 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-calendar-native-status/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config=/tmp/capiro-calendar-native-status-evidence/browser.config.ts",
+      "calendar-client-clear.spec.ts"
+    ],
+    "configFile": "/tmp/capiro-calendar-native-status-evidence/browser.config.ts",
+    "rootDir": "/workspace/capiro-calendar-native-status/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-calendar-native-status-evidence/browser-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-calendar-native-status/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "calendar-client-clear.spec.ts",
+          "calendar-artifact-receipts.spec.ts",
+          "calendar-meeting-receipts.spec.ts",
+          "manual-debrief.spec.ts",
+          "meeting-library.spec.ts",
+          "voice-integration.spec.ts",
+          "meeting-review.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-calendar-native-status-evidence/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "calendar-client-clear.spec.ts",
+      "file": "calendar-client-clear.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "existing meeting No client sends explicit null and accepts native clear receipt",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1093,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveProperty\u001b[2m(\u001b[22m\u001b[32mpath\u001b[39m\u001b[2m, \u001b[22m\u001b[32mvalue\u001b[39m\u001b[2m)\u001b[22m\n\nExpected path: \u001b[32m\"clientId\"\u001b[39m\nReceived path: \u001b[31m[]\u001b[39m\n\nExpected value: \u001b[32mnull\u001b[39m\nReceived value: \u001b[31m{\"description\": \"\", \"endsAt\": \"2026-10-10T15:00:00Z\", \"location\": \"Old location\", \"startsAt\": \"2026-10-10T14:00:00Z\", \"subject\": \"Synthetic meeting\"}\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveProperty\u001b[2m(\u001b[22m\u001b[32mpath\u001b[39m\u001b[2m, \u001b[22m\u001b[32mvalue\u001b[39m\u001b[2m)\u001b[22m\n\nExpected path: \u001b[32m\"clientId\"\u001b[39m\nReceived path: \u001b[31m[]\u001b[39m\n\nExpected value: \u001b[32mnull\u001b[39m\nReceived value: \u001b[31m{\"description\": \"\", \"endsAt\": \"2026-10-10T15:00:00Z\", \"location\": \"Old location\", \"startsAt\": \"2026-10-10T14:00:00Z\", \"subject\": \"Synthetic meeting\"}\u001b[39m\n    at /workspace/capiro-calendar-native-status/apps/web/tests/browser/calendar-client-clear.spec.ts:37:23",
+                    "location": {
+                      "file": "/workspace/capiro-calendar-native-status/apps/web/tests/browser/calendar-client-clear.spec.ts",
+                      "column": 23,
+                      "line": 37
+                    },
+                    "snippet": "  35 |     await page.getByRole(\"button\", { name: \"Save meeting\" }).click();\n  36 |     await expect.poll(() => writes.length).toBe(1);\n> 37 |     expect(writes[0]).toHaveProperty(\"clientId\", null);\n     |                       ^\n  38 |     if (stale) {\n  39 |       await expect(page.getByRole(\"dialog\")).toBeVisible();\n  40 |       await expect(page.getByText(/may have completed/)).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-calendar-native-status/apps/web/tests/browser/calendar-client-clear.spec.ts",
+                        "column": 23,
+                        "line": 37
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveProperty\u001b[2m(\u001b[22m\u001b[32mpath\u001b[39m\u001b[2m, \u001b[22m\u001b[32mvalue\u001b[39m\u001b[2m)\u001b[22m\n\nExpected path: \u001b[32m\"clientId\"\u001b[39m\nReceived path: \u001b[31m[]\u001b[39m\n\nExpected value: \u001b[32mnull\u001b[39m\nReceived value: \u001b[31m{\"description\": \"\", \"endsAt\": \"2026-10-10T15:00:00Z\", \"location\": \"Old location\", \"startsAt\": \"2026-10-10T14:00:00Z\", \"subject\": \"Synthetic meeting\"}\u001b[39m\n\n  35 |     await page.getByRole(\"button\", { name: \"Save meeting\" }).click();\n  36 |     await expect.poll(() => writes.length).toBe(1);\n> 37 |     expect(writes[0]).toHaveProperty(\"clientId\", null);\n     |                       ^\n  38 |     if (stale) {\n  39 |       await expect(page.getByRole(\"dialog\")).toBeVisible();\n  40 |       await expect(page.getByText(/may have completed/)).toBeVisible();\n    at /workspace/capiro-calendar-native-status/apps/web/tests/browser/calendar-client-clear.spec.ts:37:23"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:37:47.150Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-calendar-native-status-evidence/browser-output/calendar-client-clear-exis-8ed33-ccepts-native-clear-receipt/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-calendar-native-status-evidence/browser-output/calendar-client-clear-exis-8ed33-ccepts-native-clear-receipt/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-calendar-native-status-evidence/browser-output/calendar-client-clear-exis-8ed33-ccepts-native-clear-receipt/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-calendar-native-status/apps/web/tests/browser/calendar-client-clear.spec.ts",
+                    "column": 23,
+                    "line": 37
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "532150e736c2b61f813f-6401df2160b6716e251e",
+          "file": "calendar-client-clear.spec.ts",
+          "line": 20,
+          "column": 3
+        },
+        {
+          "title": "existing meeting No client sends explicit null and rejects old association",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1039,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveProperty\u001b[2m(\u001b[22m\u001b[32mpath\u001b[39m\u001b[2m, \u001b[22m\u001b[32mvalue\u001b[39m\u001b[2m)\u001b[22m\n\nExpected path: \u001b[32m\"clientId\"\u001b[39m\nReceived path: \u001b[31m[]\u001b[39m\n\nExpected value: \u001b[32mnull\u001b[39m\nReceived value: \u001b[31m{\"description\": \"\", \"endsAt\": \"2026-10-10T15:00:00Z\", \"location\": \"Old location\", \"startsAt\": \"2026-10-10T14:00:00Z\", \"subject\": \"Synthetic meeting\"}\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveProperty\u001b[2m(\u001b[22m\u001b[32mpath\u001b[39m\u001b[2m, \u001b[22m\u001b[32mvalue\u001b[39m\u001b[2m)\u001b[22m\n\nExpected path: \u001b[32m\"clientId\"\u001b[39m\nReceived path: \u001b[31m[]\u001b[39m\n\nExpected value: \u001b[32mnull\u001b[39m\nReceived value: \u001b[31m{\"description\": \"\", \"endsAt\": \"2026-10-10T15:00:00Z\", \"location\": \"Old location\", \"startsAt\": \"2026-10-10T14:00:00Z\", \"subject\": \"Synthetic meeting\"}\u001b[39m\n    at /workspace/capiro-calendar-native-status/apps/web/tests/browser/calendar-client-clear.spec.ts:37:23",
+                    "location": {
+                      "file": "/workspace/capiro-calendar-native-status/apps/web/tests/browser/calendar-client-clear.spec.ts",
+                      "column": 23,
+                      "line": 37
+                    },
+                    "snippet": "  35 |     await page.getByRole(\"button\", { name: \"Save meeting\" }).click();\n  36 |     await expect.poll(() => writes.length).toBe(1);\n> 37 |     expect(writes[0]).toHaveProperty(\"clientId\", null);\n     |                       ^\n  38 |     if (stale) {\n  39 |       await expect(page.getByRole(\"dialog\")).toBeVisible();\n  40 |       await expect(page.getByText(/may have completed/)).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-calendar-native-status/apps/web/tests/browser/calendar-client-clear.spec.ts",
+                        "column": 23,
+                        "line": 37
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveProperty\u001b[2m(\u001b[22m\u001b[32mpath\u001b[39m\u001b[2m, \u001b[22m\u001b[32mvalue\u001b[39m\u001b[2m)\u001b[22m\n\nExpected path: \u001b[32m\"clientId\"\u001b[39m\nReceived path: \u001b[31m[]\u001b[39m\n\nExpected value: \u001b[32mnull\u001b[39m\nReceived value: \u001b[31m{\"description\": \"\", \"endsAt\": \"2026-10-10T15:00:00Z\", \"location\": \"Old location\", \"startsAt\": \"2026-10-10T14:00:00Z\", \"subject\": \"Synthetic meeting\"}\u001b[39m\n\n  35 |     await page.getByRole(\"button\", { name: \"Save meeting\" }).click();\n  36 |     await expect.poll(() => writes.length).toBe(1);\n> 37 |     expect(writes[0]).toHaveProperty(\"clientId\", null);\n     |                       ^\n  38 |     if (stale) {\n  39 |       await expect(page.getByRole(\"dialog\")).toBeVisible();\n  40 |       await expect(page.getByText(/may have completed/)).toBeVisible();\n    at /workspace/capiro-calendar-native-status/apps/web/tests/browser/calendar-client-clear.spec.ts:37:23"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:37:48.916Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-calendar-native-status-evidence/browser-output/calendar-client-clear-exis-9f953-and-rejects-old-association/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-calendar-native-status-evidence/browser-output/calendar-client-clear-exis-9f953-and-rejects-old-association/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-calendar-native-status-evidence/browser-output/calendar-client-clear-exis-9f953-and-rejects-old-association/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-calendar-native-status/apps/web/tests/browser/calendar-client-clear.spec.ts",
+                    "column": 23,
+                    "line": 37
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "532150e736c2b61f813f-241d11c589404ece0a72",
+          "file": "calendar-client-clear.spec.ts",
+          "line": 20,
+          "column": 3
+        },
+        {
+          "title": "new unscoped meeting omits clientId and accepts backend association",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1078,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:37:50.638Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "532150e736c2b61f813f-006336195dc4c19ac773",
+          "file": "calendar-client-clear.spec.ts",
+          "line": 46,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T16:37:46.651Z",
+    "duration": 5365.576,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

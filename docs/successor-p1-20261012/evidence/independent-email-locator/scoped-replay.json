@@ -1,0 +1,221 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-p1-successor/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config=/tmp/capiro-email-actor-review/scoped.config.ts"
+    ],
+    "configFile": "/tmp/capiro-email-actor-review/scoped.config.ts",
+    "rootDir": "/tmp/capiro-email-actor-review",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-email-actor-review/scoped-replay-output",
+        "repeatEach": 3,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-email-actor-review",
+        "testIgnore": [],
+        "testMatch": [
+          "scoped-email-compose.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-email-actor-review/scoped-replay.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "scoped-email-compose.spec.ts",
+      "file": "scoped-email-compose.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "actor change while prepare awaits causes zero storage/confirm/send",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7587,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:24:28.160Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "effect-counts",
+                      "contentType": "application/json",
+                      "body": "eyJjb3VudHMiOnsicHJlcGFyZXMiOjEsInVwbG9hZHMiOjAsImNvbmZpcm1zIjowLCJyZWFkcyI6MH0sInNlbnQiOltdfQ=="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-email-actor-review/scoped-replay-output/scoped-email-compose-actor-4a81c-s-zero-storage-confirm-send/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0bc0a09ac43127793863-aff8f3c8204c95463440",
+          "file": "scoped-email-compose.spec.ts",
+          "line": 510,
+          "column": 5
+        },
+        {
+          "title": "actor change while prepare awaits causes zero storage/confirm/send",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8004,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:24:38.162Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "effect-counts",
+                      "contentType": "application/json",
+                      "body": "eyJjb3VudHMiOnsicHJlcGFyZXMiOjEsInVwbG9hZHMiOjAsImNvbmZpcm1zIjowLCJyZWFkcyI6MH0sInNlbnQiOltdfQ=="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-email-actor-review/scoped-replay-output/scoped-email-compose-actor-4a81c-s-zero-storage-confirm-send-repeat1/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0bc0a09ac43127793863-18ed61d7f0c4d4893cb5",
+          "file": "scoped-email-compose.spec.ts",
+          "line": 510,
+          "column": 5
+        },
+        {
+          "title": "actor change while prepare awaits causes zero storage/confirm/send",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8214,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:24:48.399Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "effect-counts",
+                      "contentType": "application/json",
+                      "body": "eyJjb3VudHMiOnsicHJlcGFyZXMiOjEsInVwbG9hZHMiOjAsImNvbmZpcm1zIjowLCJyZWFkcyI6MH0sInNlbnQiOltdfQ=="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-email-actor-review/scoped-replay-output/scoped-email-compose-actor-4a81c-s-zero-storage-confirm-send-repeat2/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0bc0a09ac43127793863-fb1e17fd35db71d0f582",
+          "file": "scoped-email-compose.spec.ts",
+          "line": 510,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T16:24:27.000Z",
+    "duration": 30844.004999999997,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

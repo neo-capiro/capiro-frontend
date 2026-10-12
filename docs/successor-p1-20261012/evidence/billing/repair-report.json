@@ -1,0 +1,65 @@
+{
+  "commit": "0f80c354ee7eb08ce9a5dd08dd2305b7a5694bcd",
+  "branch": "repair/capiro-p1-billing-20261012",
+  "base": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+  "worktree": "/workspace/capiro-p1-billing",
+  "finding": "MS01 / CORE-077",
+  "backendPin": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+  "impact": "Existing subscribers Add profiles opens hosted customer management rather than a new subscription checkout. New checkout remains available only with matching enabled current state/summary, no subscription and status none or trialing. Other unsupported or contradictory states display unavailable controls.",
+  "behavior": [
+    "Before every hosted request, reread both billing summary and state; stop on failure, disagreement or changed flow eligibility.",
+    "Close a stale checkout/cancellation dialog when revalidation establishes a different eligibility; read failures keep the checkout draft without dispatch.",
+    "Require the exact HTTPS origin for the selected hosted flow; a portal response pointing at checkout, or vice versa, cannot redirect.",
+    "Reuse canonical useSettingsAction synchronous in-flight guard and session/abort lifetime. No replacement session inherits a pending hosted destination."
+  ],
+  "changedFiles": [
+    "apps/web/src/features/settings/BillingSettings.tsx",
+    "apps/web/src/features/settings/billingFlow.ts",
+    "apps/web/test/browser/billing-flow.spec.ts"
+  ],
+  "contractChanges": false,
+  "providerCalls": false,
+  "backendEdits": false,
+  "frozenArchivesEdited": false,
+  "validation": {
+    "beforeBrowser": "1 expected regression case fails on baseline: active subscriber Add profiles opens checkout dialog (before-results.json).",
+    "afterBrowser": {
+      "startTime": "2026-10-12T15:13:34.361Z",
+      "duration": 58300.564,
+      "expected": 24,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "settingsAccessTests": "4/4 pass",
+    "typecheck": "tsc --noEmit --project apps/web/tsconfig.json PASS",
+    "lint": "Focused three-file ESLint PASS",
+    "format": "Focused three-file Prettier PASS",
+    "diffCheck": "PASS",
+    "harnessBuild": "Vite Modules/Settings fixture build PASS; final tests run rebuilt candidate on port5199",
+    "architecture": {
+      "boundaryErrors": [],
+      "exitCode": 1,
+      "pendingSizeReviews": [
+        {
+          "file": "apps/web/src/features/settings/BillingSettings.tsx",
+          "kind": "function",
+          "symbol": "BillingSettings",
+          "line": 30,
+          "nonblank": 292,
+          "fingerprint": "e1a7cb20d84cd766915defd93a303aa4806c0525a8d9ed3636b1aba4e5a42044",
+          "provenance": "new",
+          "reviewStatus": "unreviewed",
+          "blocking": true
+        }
+      ]
+    }
+  },
+  "architectureReviewProposal": "BillingSettings retains one screen presentation and checkout/cancel local dialog state. New billingFlow owns the cohesive flow decision, current-read preflight and action-specific hosted destination check. Backend authority and operation registry remain unchanged; useSettingsAction still owns concurrency and cancellation. This is a changed existing long JSX screen, not a new mixed-domain controller. Root owns the shared fingerprint review record; no registry was edited here.",
+  "limits": [
+    "No native billing service/provider execution or actual subscription/quantity changes. Hosted destinations in tests are fulfilled synthetic documents.",
+    "Current HTTP receipt contains only url; action-specific origin is validated, but no tenant/subscription receipt identity can be checked from this contract.",
+    "There remains an inherent service-side race after the preflight read; backend authorization and atomic subscription safeguards remain native responsibilities.",
+    "Production build and combined qualification belong to root. Architecture remains blocked until the changed BillingSettings fingerprint receives its required independent review record."
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "originalManifestSha256": "8f83d86d85eef420d3140c9ffdd2c92ed44780bc8414376954ded1d40f68415e",
+  "expectedOriginalManifestSha256": "8f83d86d85eef420d3140c9ffdd2c92ed44780bc8414376954ded1d40f68415e",
+  "originalFileCount": 28,
+  "allOriginalFilesUnchanged": true,
+  "checks": [
+    {
+      "path": "baseline-p1-contract-review.json",
+      "matches": true
+    },
+    {
+      "path": "billing-architecture.json",
+      "matches": true
+    },
+    {
+      "path": "billing-author-controls-artifacts/.last-run.json",
+      "matches": true
+    },
+    {
+      "path": "billing-author-controls-artifacts/billing-flow-active-subscr-b2db1-h-the-portal-never-checkout/billing-existing-subscription.png",
+      "matches": true
+    },
+    {
+      "path": "billing-author-controls-results.json",
+      "matches": true
+    },
+    {
+      "path": "billing-author-controls.config.mts",
+      "matches": true
+    },
+    {
+      "path": "billing-independent-artifacts/.last-run.json",
+      "matches": true
+    },
+    {
+      "path": "billing-independent-artifacts/billing-independent-existi-2db15--a-replacement-subscription/billing-canceled-hosted.png",
+      "matches": true
+    },
+    {
+      "path": "billing-independent-artifacts/billing-independent-fresh--51080--subscriber-portal-dispatch/billing-current-denial.png",
+      "matches": true
+    },
+    {
+      "path": "billing-independent-artifacts/billing-independent-organi-78e5e-spatch-former-portal-action/billing-replaced-preflight.png",
+      "matches": true
+    },
+    {
+      "path": "billing-independent-results.json",
+      "matches": true
+    },
+    {
+      "path": "billing-independent.config.mts",
+      "matches": true
+    },
+    {
+      "path": "billing-independent.spec.ts",
+      "matches": true
+    },
+    {
+      "path": "billing-review.json",
+      "matches": true
+    },
+    {
+      "path": "report.md",
+      "matches": true
+    },
+    {
+      "path": "review-summary.json",
+      "matches": true
+    },
+    {
+      "path": "workspace-architecture.json",
+      "matches": true
+    },
+    {
+      "path": "workspace-author-controls-artifacts/.last-run.json",
+      "matches": true
+    },
+    {
+      "path": "workspace-author-controls-results.json",
+      "matches": true
+    },
+    {
+      "path": "workspace-author-controls.config.mts",
+      "matches": true
+    },
+    {
+      "path": "workspace-independent-artifacts/.last-run.json",
+      "matches": true
+    },
+    {
+      "path": "workspace-independent-artifacts/workspace-independent-chan-ddd6a-ntent-for-deliberate-review/changed-source-retained.png",
+      "matches": true
+    },
+    {
+      "path": "workspace-independent-artifacts/workspace-independent-fore-b646a-never-automatically-resends/foreign-snapshot-reviewed.png",
+      "matches": true
+    },
+    {
+      "path": "workspace-independent-artifacts/workspace-independent-pref-f5d70-enial-cannot-become-success/denied-preflight.png",
+      "matches": true
+    },
+    {
+      "path": "workspace-independent-results.json",
+      "matches": true
+    },
+    {
+      "path": "workspace-independent.config.mts",
+      "matches": true
+    },
+    {
+      "path": "workspace-independent.spec.ts",
+      "matches": true
+    },
+    {
+      "path": "workspace-review.json",
+      "matches": true
+    }
+  ]
+}

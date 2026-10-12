@@ -1,0 +1,114 @@
+[
+  {
+    "_monotonicTime": 10857.04,
+    "startedDateTime": "2026-10-12T16:54:40.389Z",
+    "time": 381.158,
+    "timings": {
+      "dns": -1,
+      "connect": -1,
+      "ssl": -1,
+      "send": 0,
+      "wait": 375.851,
+      "receive": 5.307
+    },
+    "url": "http://127.0.0.1:5191/api/backend/core/me",
+    "method": "GET",
+    "status": 200
+  },
+  {
+    "_monotonicTime": 11084.876,
+    "startedDateTime": "2026-10-12T16:54:40.881Z",
+    "time": 115.257,
+    "timings": {
+      "dns": -1,
+      "connect": -1,
+      "ssl": -1,
+      "send": 0,
+      "wait": 112.578,
+      "receive": 2.679
+    },
+    "url": "http://127.0.0.1:5191/api/backend/core/me",
+    "method": "GET",
+    "status": 200
+  },
+  {
+    "_monotonicTime": 14116.268,
+    "startedDateTime": "2026-10-12T16:54:43.999Z",
+    "time": 16.747,
+    "timings": {
+      "dns": -1,
+      "connect": -1,
+      "ssl": -1,
+      "send": 0,
+      "wait": 13.375,
+      "receive": 3.372
+    },
+    "url": "http://127.0.0.1:5191/api/backend/core/me",
+    "method": "GET",
+    "status": 200
+  },
+  {
+    "_monotonicTime": 14605.678,
+    "startedDateTime": "2026-10-12T16:54:44.492Z",
+    "time": 59.758,
+    "timings": {
+      "dns": -1,
+      "connect": -1,
+      "ssl": -1,
+      "send": 0,
+      "wait": 58.975,
+      "receive": 0.783
+    },
+    "url": "http://127.0.0.1:5191/api/backend/core/clients/10000000-0000-4000-8000-000000000001/activity-commands",
+    "method": "POST",
+    "status": 503
+  },
+  {
+    "_monotonicTime": 20169.092,
+    "startedDateTime": "2026-10-12T16:54:49.788Z",
+    "time": 289.817,
+    "timings": {
+      "dns": -1,
+      "connect": -1,
+      "ssl": -1,
+      "send": 0,
+      "wait": 281.459,
+      "receive": 8.358
+    },
+    "url": "http://127.0.0.1:5191/api/backend/core/me",
+    "method": "GET",
+    "status": 200
+  },
+  {
+    "_monotonicTime": 20848.544,
+    "startedDateTime": "2026-10-12T16:54:50.675Z",
+    "time": 82.923,
+    "timings": {
+      "dns": -1,
+      "connect": -1,
+      "ssl": -1,
+      "send": 0,
+      "wait": 75.285,
+      "receive": 7.638
+    },
+    "url": "http://127.0.0.1:5191/api/backend/core/me",
+    "method": "GET",
+    "status": 200
+  },
+  {
+    "_monotonicTime": 29078.464,
+    "startedDateTime": "2026-10-12T16:54:58.838Z",
+    "time": 6008.884,
+    "timings": {
+      "dns": -1,
+      "connect": -1,
+      "ssl": -1,
+      "send": 0,
+      "wait": 5997.894,
+      "receive": 10.99
+    },
+    "url": "http://127.0.0.1:5191/api/backend/core/me",
+    "method": "GET",
+    "status": 200
+  }
+]

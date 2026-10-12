@@ -1,0 +1,148 @@
+{
+  "status": "PASS_REQUESTED_FINAL_GATE_SUMMARIES",
+  "sourceCommit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "portfolio": {
+    "tests": 996,
+    "resultCounts": {
+      "passed": 996
+    },
+    "retries": {
+      "0": 996
+    },
+    "effectiveTimeouts": {
+      "60000": 992,
+      "180000": 4
+    },
+    "workers": 3
+  },
+  "modules": {
+    "tests": 157,
+    "resultCounts": {
+      "passed": 157
+    },
+    "retries": {
+      "0": 157
+    },
+    "effectiveTimeouts": {
+      "30000": 157
+    },
+    "workers": 1
+  },
+  "combinedTests": 1386,
+  "elements": 15,
+  "visual": 15,
+  "archive": {
+    "sourceCommit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+    "rootTree": "7448658084841f7773144ce5d8714a19103e4ddd",
+    "archiveBytes": 498171732,
+    "archiveSHA256": "971c9116e1b9e7d4fc11da434ba26110a401b85e210650322e7b5a14b918cfc7",
+    "trackedBlobs": 5006,
+    "zipMembers": 5007,
+    "perMemberInventorySHA256": "1ac06b53762855f60f8a1d4fc1343e51ce373711cee5ac8479bd26a0e2a73139"
+  },
+  "historical30sFailurePreserved": true,
+  "sourceUnchangedReceiptsVerified": true,
+  "nativeRowsAccepted": 0,
+  "nativeRowsHeld": 337,
+  "remainingSourceDesignFindings": 27,
+  "shippingAuthorized": false,
+  "libraryID": null,
+  "findings": [],
+  "evidence": {
+    "evidence/qualification-d5dd0be/check-exit.json": {
+      "sha256": "43d2596582ba4562ea46de52c5232e9bc7d7c9162d728db447572b414a4ee7f8",
+      "bytes": 710
+    },
+    "evidence/qualification-d5dd0be/elements-exit.json": {
+      "sha256": "45e30a1ea6f7720bcd8f63fe839f152c09d4616d65a2856c626dc7b0b0693e6e",
+      "bytes": 722
+    },
+    "evidence/qualification-d5dd0be/modules-exit.json": {
+      "sha256": "b1546388ddf938f51c757b281eede6c43314d14741e2e0bd0220b83ef7591f29",
+      "bytes": 859
+    },
+    "evidence/qualification-d5dd0be/build-exit.json": {
+      "sha256": "93402500cb84cd8890831ad8ea30dc0351066a36a282a1c3f1bf1712a6b249e9",
+      "bytes": 711
+    },
+    "evidence/qualification-d5dd0be/production-exit.json": {
+      "sha256": "5b70559418454435f775cae1441f436ab463295149ef636c9ab3cb4055b40e50",
+      "bytes": 802
+    },
+    "evidence/portfolio-d5dd-60s/portfolio-exit.json": {
+      "sha256": "7ad88afdca4052ea716eeb4e10ac704b1e06a6655833ecb6fbd1a82a1bf3368d",
+      "bytes": 886
+    },
+    "evidence/portfolio-d5dd-60s/portfolio-results.json": {
+      "sha256": "c80c3d200bfd76afc2af67c60e581f2d0f7acc890a8689c0b8ae5e5167b2aa10",
+      "bytes": 1096838
+    },
+    "evidence/qualification-d5dd0be/modules-results.json": {
+      "sha256": "6bfb0d1c0f24c273a4087c1e4cc52e836d040a36ebde3cef8993fcfbbc4ad6eb",
+      "bytes": 173299
+    },
+    "evidence/qualification-d5dd0be/check.log": {
+      "sha256": "88adac5be2fd5fa43629925dc268f8e8e19d2761fa94559d55c16df02826b493",
+      "bytes": 781496
+    },
+    "evidence/portfolio-d5dd-60s/portfolio.log": {
+      "sha256": "ecb266410fcc3a6bc95faec7b7330fdf554ee776fe509312e340bebfd81bef10",
+      "bytes": 153845
+    },
+    "evidence/qualification-d5dd0be/build.log": {
+      "sha256": "5a422c60f09ac72169ad83efbea1a7355f0fd35e00cf41b48d758d335dfd44c2",
+      "bytes": 2233
+    },
+    "evidence/qualification-d5dd0be/production/production-smoke.json": {
+      "sha256": "653bf3486ea9ec193195ed3289ac8e44a3729ef58b19a48842c8448c990dd36f",
+      "bytes": 3624
+    },
+    "evidence/independent-visual-d5dd0be/FINAL-SOURCE.json": {
+      "sha256": "8817c4e700303c666ccf03e1bac8bbad91df11530504d6590a563025a2694725",
+      "bytes": 910
+    },
+    "evidence/independent-source-d5dd0be/comparison.json": {
+      "sha256": "d23d6a55d1de24864201ad4976ab2f8d7e3a129ce83b173c9191ece28e33c1c7",
+      "bytes": 2153
+    },
+    "evidence/qualification-d5dd0be/RUN-INDEX.json": {
+      "sha256": "ba7010daf5a07f46eb77197b5a1d6971b378edde9fea04e770108b28f6754702",
+      "bytes": 709
+    },
+    "evidence/portfolio-d5dd-30s-history/STOP-DISPOSITION.json": {
+      "sha256": "7d768e0c0d8a0d3b813b4e6d93788c96b2aec5b0fc76aa31dfe2988923da8562",
+      "bytes": 776
+    }
+  },
+  "packetManifest": "Intentionally excluded; parent regenerates after audit.",
+  "actions": {
+    "tests": 0,
+    "browsers": 0,
+    "repositoryEdits": 0,
+    "processChanges": 0
+  },
+  "resolvedDuringReview": [
+    {
+      "id": "FINAL-DISPOSITION-01",
+      "status": "RESOLVED_VERIFIED",
+      "changedIDs": [
+        "CP-01",
+        "CP-02",
+        "CR-01",
+        "CR-02",
+        "CR-03",
+        "CR-04",
+        "OWI-F01",
+        "PROS-F01",
+        "PROS-F02",
+        "MS01"
+      ],
+      "onlyChangesWereTenDispositionValues": true,
+      "oldSHA256": "b006cb14218be79708f2047d0c6903c4ca4836fc2139580183bf152f283ba458",
+      "newSHA256": "d58f2f75787a78d18f5af9f2dfacc417cbfd1e2b72ecad29a015bdc4a48acbb4",
+      "openFindings": 27,
+      "nativeRowsHeld": 337,
+      "nativeRowsNewlyAccepted": 0
+    }
+  ]
+}

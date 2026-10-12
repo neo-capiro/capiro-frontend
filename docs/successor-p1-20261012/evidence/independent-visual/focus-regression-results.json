@@ -1,0 +1,132 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-p1-successor/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "/tmp/capiro-successor-visual-review/focus.config.ts"
+    ],
+    "configFile": "/tmp/capiro-successor-visual-review/focus.config.ts",
+    "rootDir": "/tmp/capiro-successor-visual-review",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-successor-visual-review/focus-regression-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-successor-visual-review",
+        "testIgnore": [],
+        "testMatch": [
+          "focus-regression.spec.ts"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-successor-visual-review/focus-regression-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "focus-regression.spec.ts",
+      "file": "focus-regression.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "unknown folder save keeps settled Tab focus inside its modal",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2253,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:58:28.583Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "settled-focus",
+                      "contentType": "application/json",
+                      "body": "ewogICJ0YWciOiAiQlVUVE9OIiwKICAidGV4dCI6ICJSZXZpZXcgY3VycmVudCBmaWxlIiwKICAiZG9jdW1lbnRIYXNGb2N1cyI6IHRydWUsCiAgImluRGlhbG9nIjogdHJ1ZQp9"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-successor-visual-review/focus-regression-artifacts/focus-regression-unknown-f-1b556--Tab-focus-inside-its-modal/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "09d88f4df4b059b9d0b5-263bc9254038273e0965",
+          "file": "focus-regression.spec.ts",
+          "line": 3,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T15:58:28.053Z",
+    "duration": 3136.3450000000003,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

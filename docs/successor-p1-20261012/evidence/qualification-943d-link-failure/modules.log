@@ -1,0 +1,89 @@
+
+> capiro-frontend@0.1.0 test:browser:modules
+> npm run test:browser:modules --workspace @capiro/web --output=/tmp/capiro-successor-qualification/final-943d90c/modules-artifacts
+
+npm warn Unknown cli config "--output". This will stop working in the next major version of npm.
+
+> @capiro/web@0.1.0 test:browser:modules
+> playwright test --config test/browser/playwright.config.ts
+
+[WebServer] (node:548563) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 157 tests using 1 worker
+
+(node:549128) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓    1 test/browser/billing-flow.spec.ts:54:3 › active subscriber adds profiles through the portal, never checkout (6.3s)
+  ✓    2 test/browser/billing-flow.spec.ts:54:3 › past_due subscriber adds profiles through the portal, never checkout (5.2s)
+  ✓    3 test/browser/billing-flow.spec.ts:54:3 › trialing subscriber adds profiles through the portal, never checkout (4.3s)
+  ✓    4 test/browser/billing-flow.spec.ts:54:3 › canceled subscriber adds profiles through the portal, never checkout (5.5s)
+  ✓    5 test/browser/billing-flow.spec.ts:54:3 › none subscriber adds profiles through the portal, never checkout (5.4s)
+  ✓    6 test/browser/billing-flow.spec.ts:54:3 › comped subscriber adds profiles through the portal, never checkout (5.1s)
+  ✓    7 test/browser/billing-flow.spec.ts:73:3 › none non-subscriber can review a new subscription (5.7s)
+  ✓    8 test/browser/billing-flow.spec.ts:73:3 › trialing non-subscriber can review a new subscription (4.9s)
+  ✓    9 test/browser/billing-flow.spec.ts:100:3 › active without a subscription does not infer checkout eligibility (3.9s)
+  ✓   10 test/browser/billing-flow.spec.ts:100:3 › past_due without a subscription does not infer checkout eligibility (5.4s)
+  ✓   11 test/browser/billing-flow.spec.ts:100:3 › canceled without a subscription does not infer checkout eligibility (5.8s)
+  ✓   12 test/browser/billing-flow.spec.ts:100:3 › comped without a subscription does not infer checkout eligibility (5.2s)
+  ✓   13 test/browser/billing-flow.spec.ts:120:1 › disabled billing cannot open either hosted flow (5.4s)
+  ✓   14 test/browser/billing-flow.spec.ts:131:1 › checkout closes when a fresh summary reports an existing subscription (7.2s)
+  ✓   15 test/browser/billing-flow.spec.ts:157:3 › failed current summary prevents checkout from a previously opened form (5.6s)
+  ✓   16 test/browser/billing-flow.spec.ts:157:3 › failed current state prevents checkout from a previously opened form (4.1s)
+  ✓   17 test/browser/billing-flow.spec.ts:182:1 › an existing-subscriber action rechecks that a subscription still exists (4.4s)
+  ✓   18 test/browser/billing-flow.spec.ts:199:3 › portal rejects a receipt for the other hosted flow (4.9s)
+  ✓   19 test/browser/billing-flow.spec.ts:199:3 › checkout rejects a receipt for the other hosted flow (4.0s)
+  ✓   20 test/browser/billing-flow.spec.ts:228:3 › repeated clicks while summary revalidation is pending dispatch one portal request (4.5s)
+  ✓   21 test/browser/billing-flow.spec.ts:228:3 › repeated clicks while summary revalidation is pending dispatch one checkout request (4.9s)
+  ✓   22 test/browser/billing-flow.spec.ts:274:1 › session replacement discards a pending hosted receipt (4.5s)
+  ✓   23 test/browser/billing-flow.spec.ts:315:1 › contradictory current reads and failed initial summary expose no billing action (9.1s)
+  ✓   24 test/browser/billing-flow.spec.ts:347:1 › session replacement during revalidation prevents dispatch from the old form (5.0s)
+  ✓   25 test/browser/calendar-visual-closeout.spec.ts:6:1 › compact Calendar retains scoped module navigation, history, source disclosures and mobile controls (7.6s)
+  ✓   26 test/browser/calendar.spec.ts:24:1 › month and week retain client scope and query end-exclusive Eastern ranges (5.5s)
+  ✓   27 test/browser/calendar.spec.ts:79:1 › client agenda is meetings-only and the meeting opens the shared prep/notes/debrief workflow (5.6s)
+  ✓   28 test/browser/effective-dates.spec.ts:8:1 › Modules master Government feed preserves date-only provenance and partial coverage (5.6s)
+  ✓   29 test/browser/effective-dates.spec.ts:49:1 › an empty Government page remains explicitly incomplete and forecasts unavailable (4.6s)
+  ✓   30 test/browser/integration.spec.ts:37:1 › shared product navigation and history preserve verified client hints and scoped styles (8.4s)
+  ✓   31 test/browser/integration.spec.ts:120:1 › client replacement interrupts a write and organization replacement clears drafts and revalidates (5.3s)
+  ✓   32 test/browser/integration.spec.ts:169:1 › Core expiry clears the application, does not replay and cannot be escaped by changing client (4.7s)
+  ✓   33 test/browser/legiwatch.spec.ts:21:3 › LegiWatch News evidence renders a real connected view (4.5s)
+  ✓   34 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Florida Budget renders a real connected view (5.0s)
+  ✓   35 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Research evidence renders a real connected view (6.1s)
+  ✓   36 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Monitoring renders a real connected view (6.3s)
+  ✓   37 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Client briefings renders a real connected view (5.6s)
+  ✓   38 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Reports renders a real connected view (4.5s)
+  ✓   39 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Trends renders a real connected view (4.4s)
+  ✓   40 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Legacy digest renders a real connected view (4.1s)
+  ✓   41 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Import review renders a real connected view (4.4s)
+  ✓   42 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Research import review renders a real connected view (3.3s)
+  ✓   43 test/browser/legiwatch.spec.ts:21:3 › LegiWatch LegiWatch settings renders a real connected view (3.6s)
+  ✓   44 test/browser/legiwatch.spec.ts:48:1 › research continues past an empty matched page using the retained-source cursor (5.8s)
+  ✓   45 test/browser/legiwatch.spec.ts:96:1 › workflow changes invalidate a reviewed preview and enqueue only its exact current hash (6.5s)
+  ✓   46 test/browser/legiwatch.spec.ts:169:1 › monitoring tabs and keyword drawer support keyboard dismissal on mobile without overflow (5.5s)
+  ✓   47 test/browser/modules.spec.ts:16:3 › Engagement Manager primary route renders through the canonical session/API boundary (5.5s)
+  ✓   48 test/browser/modules.spec.ts:16:3 › Planner primary route renders through the canonical session/API boundary (4.0s)
+  ✓   49 test/browser/modules.spec.ts:16:3 › Master calendar primary route renders through the canonical session/API boundary (5.5s)
+  ✓   50 test/browser/modules.spec.ts:16:3 › Workspace primary route renders through the canonical session/API boundary (4.9s)
+  ✘   51 test/browser/modules.spec.ts:16:3 › Strategies primary route renders through the canonical session/API boundary (5.0s)
+
+  1 interrupted
+    test/browser/modules.spec.ts:16:3 › Strategies primary route renders through the canonical session/API boundary 
+  106 did not run
+  50 passed (4.7m)
+npm error Lifecycle script `test:browser:modules` failed with error:
+npm error code 130
+npm error path /workspace/capiro-p1-successor/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-p1-successor/apps/web
+npm error command failed
+npm error command sh -c playwright test --config test/browser/playwright.config.ts
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

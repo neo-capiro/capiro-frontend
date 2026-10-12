@@ -1,0 +1,31 @@
+{
+  "sourceCommit": "49f6609c7277ce8701b0d38c3ba163860633e668",
+  "rootTree": "fb895410ba3be77003977d9d5fdf33f2a525c7c8",
+  "applicationSourceTree": "964c8c51b1449d303a9286cf902133d02c2e4301",
+  "recordedUTC": "2026-10-12T16:13:56.884876+00:00",
+  "cleanInstall": {
+    "command": "npm ci --ignore-scripts --no-audit --no-fund --cache /tmp/capiro-p1-npm-cache",
+    "exitCode": 0,
+    "packages": 847
+  },
+  "check": {
+    "command": "npm run check",
+    "exitCode": 0,
+    "rootTests": 58,
+    "transportTests": 21,
+    "portfolioTests": 1206,
+    "gatewayTests": 94,
+    "totalTests": 1379,
+    "lintErrors": 0,
+    "lintWarnings": 76,
+    "logSHA256": "0a580d90aa05f47864ebb3f61369fa0207722a49e864ff8e8e69cae5ab86ac52"
+  },
+  "qualificationComplete": false,
+  "remainingGates": [
+    "992-case Portfolio/Meri browser suite",
+    "157-case Modules browser suite",
+    "production build",
+    "actual-server/browser gate"
+  ],
+  "nativePortfolioRowsAccepted": 0
+}

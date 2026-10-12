@@ -1,0 +1,168 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-calendar-native-status/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config=/tmp/capiro-calendar-native-status-evidence/caption-before.config.ts",
+      "--grep",
+      "artifact captions distinguish"
+    ],
+    "configFile": "/tmp/capiro-calendar-native-status-evidence/caption-before.config.ts",
+    "rootDir": "/workspace/capiro-calendar-native-status/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-calendar-native-status-evidence/caption-before-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-calendar-native-status/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "calendar-client-clear.spec.ts",
+          "calendar-artifact-receipts.spec.ts",
+          "calendar-meeting-receipts.spec.ts",
+          "manual-debrief.spec.ts",
+          "meeting-library.spec.ts",
+          "voice-integration.spec.ts",
+          "meeting-review.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-calendar-native-status-evidence/caption-before-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "calendar-artifact-receipts.spec.ts",
+      "file": "calendar-artifact-receipts.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "artifact captions distinguish omitted sharing metadata from explicit privacy",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6563,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('article').filter({ hasText: 'Synthetic unknown debrief' }).getByText('Sharing status unavailable', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('article').filter({ hasText: 'Synthetic unknown debrief' }).getByText('Sharing status unavailable', { exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('article').filter({ hasText: 'Synthetic unknown debrief' }).getByText('Sharing status unavailable', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('article').filter({ hasText: 'Synthetic unknown debrief' }).getByText('Sharing status unavailable', { exact: true })\u001b[22m\n\n    at /workspace/capiro-calendar-native-status/apps/web/tests/browser/calendar-artifact-receipts.spec.ts:400:64",
+                    "location": {
+                      "file": "/workspace/capiro-calendar-native-status/apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+                      "column": 64,
+                      "line": 400
+                    },
+                    "snippet": "  398 |       .getByRole(\"article\")\n  399 |       .filter({ hasText: `Synthetic ${id} debrief` });\n> 400 |     await expect(artifact.getByText(caption, { exact: true })).toBeVisible();\n      |                                                                ^\n  401 |     if (id === \"unknown\") {\n  402 |       await expect(artifact.getByText(\"Private\", { exact: true })).toHaveCount(\n  403 |         0,"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-calendar-native-status/apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+                        "column": 64,
+                        "line": 400
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('article').filter({ hasText: 'Synthetic unknown debrief' }).getByText('Sharing status unavailable', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('article').filter({ hasText: 'Synthetic unknown debrief' }).getByText('Sharing status unavailable', { exact: true })\u001b[22m\n\n\n  398 |       .getByRole(\"article\")\n  399 |       .filter({ hasText: `Synthetic ${id} debrief` });\n> 400 |     await expect(artifact.getByText(caption, { exact: true })).toBeVisible();\n      |                                                                ^\n  401 |     if (id === \"unknown\") {\n  402 |       await expect(artifact.getByText(\"Private\", { exact: true })).toHaveCount(\n  403 |         0,\n    at /workspace/capiro-calendar-native-status/apps/web/tests/browser/calendar-artifact-receipts.spec.ts:400:64"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T16:43:02.517Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-calendar-native-status-evidence/caption-before-output/calendar-artifact-receipts-3fb4c-adata-from-explicit-privacy/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-calendar-native-status-evidence/caption-before-output/calendar-artifact-receipts-3fb4c-adata-from-explicit-privacy/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-calendar-native-status-evidence/caption-before-output/calendar-artifact-receipts-3fb4c-adata-from-explicit-privacy/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-calendar-native-status/apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+                    "column": 64,
+                    "line": 400
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1e2da02db29f796d80c2-57d2a671229556cfe624",
+          "file": "calendar-artifact-receipts.spec.ts",
+          "line": 358,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T16:43:01.956Z",
+    "duration": 7493.737,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

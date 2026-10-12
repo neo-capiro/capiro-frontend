@@ -1,0 +1,15 @@
+
+Running 8 tests using 1 worker
+
+(node:545165) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 ../tmp/capiro-calendar-correction-independent/native-browser.spec.ts:6:53 › native notes creation receipt completes exactly once with correct lifecycle (1.5s)
+  ✓  2 ../tmp/capiro-calendar-correction-independent/native-browser.spec.ts:6:53 › native debriefs creation receipt completes exactly once with correct lifecycle (1.4s)
+  ✓  3 ../tmp/capiro-calendar-correction-independent/native-browser.spec.ts:12:5 › portal generation entries remain visible disabled and dispatch no action (1.1s)
+  ✓  4 ../tmp/capiro-calendar-correction-independent/native-browser.spec.ts:18:42 › No client selection serializes null and accepts cleared native association (2.3s)
+  ✓  5 ../tmp/capiro-calendar-correction-independent/native-browser.spec.ts:18:42 › No client selection serializes null and refuses old association (2.2s)
+  ✓  6 ../tmp/capiro-calendar-correction-independent/native-browser.spec.ts:21:5 › new unscoped meeting omits clientId and accepts backend inference (2.3s)
+  ✓  7 ../tmp/capiro-calendar-correction-independent/native-browser.spec.ts:24:53 › native idempotent notes share accepts deleted original sharer without invented list stamps (1.3s)
+  ✓  8 ../tmp/capiro-calendar-correction-independent/native-browser.spec.ts:24:53 › native idempotent debriefs share accepts deleted original sharer without invented list stamps (1.2s)
+
+  8 passed (14.3s)

@@ -1,0 +1,583 @@
+diff --git a/apps/web/src/features/portfolio/objectives/ObjectiveSummary.tsx b/apps/web/src/features/portfolio/objectives/ObjectiveSummary.tsx
+index a866e78..53bf135 100644
+--- a/apps/web/src/features/portfolio/objectives/ObjectiveSummary.tsx
++++ b/apps/web/src/features/portfolio/objectives/ObjectiveSummary.tsx
+@@ -6,24 +6,27 @@ import { useObjectives } from "./queries";
+ import { statusLabels } from "./contracts";
+ export function ObjectiveSummary({ clientId }: { clientId: string }) {
+   const query = useObjectives(clientId);
++  const records = query.isSuccess && !query.error ? query.data : undefined;
+   return (
+     <section className="card stack">
+       <header className="row between">
+         <h2>Objectives</h2>
+-        <Link
+-          className="button ghost iconButton"
+-          href={`/portfolio/${clientId}/objectives?new=1`}
+-          aria-label="New objective"
+-        >
+-          <Plus size={16} />
+-        </Link>
++        {records && !query.isFetching && (
++          <Link
++            className="button ghost iconButton"
++            href={`/portfolio/${clientId}/objectives?new=1`}
++            aria-label="New objective"
++          >
++            <Plus size={16} />
++          </Link>
++        )}
+       </header>
+       <QueryState
+         pending={query.isPending}
+         error={query.error}
+         retry={() => void query.refetch()}
+       />
+-      {query.data?.slice(0, 3).map((objective) => (
++      {records?.slice(0, 3).map((objective) => (
+         <Link
+           className="stack"
+           key={objective.id}
+@@ -38,7 +41,7 @@ export function ObjectiveSummary({ clientId }: { clientId: string }) {
+           </p>
+         </Link>
+       ))}
+-      {query.data?.length === 0 && (
++      {records?.length === 0 && (
+         <p className="muted">
+           No objectives yet. Define the first outcome for this client.
+         </p>
+diff --git a/apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx b/apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx
+index f768275..aeba6a6 100644
+--- a/apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx
++++ b/apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx
+@@ -1,6 +1,6 @@
+ "use client";
+ import { useDeleteObjective } from "./mutations";
+-import { useState } from "react";
++import { useEffect, useState } from "react";
+ import { useSearchParams, useRouter } from "next/navigation";
+ import { Plus, Trash2 } from "lucide-react";
+ import { Dialog } from "@/shared/portfolio/ui/Dialog";
+@@ -22,14 +22,31 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
+   const router = useRouter();
+   const [filter, setFilter] = useState("");
+   const [deleting, setDeleting] = useState<Objective>();
+-  const selected = query.data?.find((o) => o.id === params.get("objective"));
++  const [readScope, setReadScope] = useState({ clientId, error: query.error });
++  if (readScope.clientId !== clientId || readScope.error !== query.error) {
++    setReadScope({ clientId, error: query.error });
++    setDeleting(undefined);
++  }
++  const records = query.isSuccess && !query.error ? query.data : undefined;
++  const selected = records?.find((o) => o.id === params.get("objective"));
+   const creating = params.has("new");
++  const search = params.toString();
++  useEffect(() => {
++    if (!query.error) return;
++    const next = new URLSearchParams(search);
++    if (!next.has("objective") && !next.has("new")) return;
++    next.delete("objective");
++    next.delete("new");
++    router.replace(`/portfolio/${clientId}/objectives?${next}`, {
++      scroll: false,
++    });
++  }, [clientId, query.error, router, search]);
+   const remove = useDeleteObjective(
+     clientId,
+     () => setDeleting(undefined),
+-    Boolean(deleting),
++    Boolean(records && deleting),
+   );
+-  const visible = query.data?.filter(
++  const visible = records?.filter(
+     (objective) => !filter || objective.status === filter,
+   );
+   function navigate(key?: string, value?: string) {
+@@ -41,7 +58,7 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
+       scroll: false,
+     });
+   }
+-  if (creating)
++  if (creating && records)
+     return (
+       <NewObjectivePage
+         key={clientId}
+@@ -56,7 +73,11 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
+           <p className="eyebrow">Outcomes and institutional memory</p>
+           <h1>Objectives</h1>
+         </div>
+-        <button className="button primary" onClick={() => navigate("new", "1")}>
++        <button
++          className="button primary"
++          disabled={!records || query.isFetching}
++          onClick={() => navigate("new", "1")}
++        >
+           <Plus size={16} />
+           New objective
+         </button>
+@@ -91,6 +112,7 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
+                 <button
+                   className="button ghost iconButton"
+                   aria-label={`Delete ${objective.outcome || "untitled objective"}`}
++                  disabled={query.isFetching}
+                   onClick={() => setDeleting(objective)}
+                 >
+                   <Trash2 size={14} />
+@@ -99,6 +121,7 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
+               <h2>
+                 <button
+                   className={styles.titleButton}
++                  disabled={query.isFetching}
+                   onClick={() => navigate("objective", objective.id)}
+                 >
+                   {objective.outcome || "Untitled objective"}
+@@ -129,13 +152,14 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
+               </div>
+               <button
+                 className="button"
++                disabled={query.isFetching}
+                 onClick={() => navigate("objective", objective.id)}
+               >
+                 Open objective
+               </button>
+             </article>
+           ))}
+-          {query.data?.length === 0 && (
++          {records?.length === 0 && (
+             <div className="status">
+               <h3>No current objectives</h3>
+               <p className="muted">
+@@ -143,7 +167,7 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
+               </p>
+             </div>
+           )}
+-          {Boolean(query.data?.length) && visible?.length === 0 && (
++          {Boolean(records?.length) && visible?.length === 0 && (
+             <div className="status">
+               <h3>No objectives match this status</h3>
+               <button className="button" onClick={() => setFilter("")}>
+@@ -168,7 +192,7 @@ export function ObjectivesPage({ clientId }: { clientId: string }) {
+         }}
+       />
+       <Dialog
+-        open={Boolean(deleting)}
++        open={Boolean(records && deleting)}
+         onOpenChange={(open) => {
+           if (!open && !remove.isPending) setDeleting(undefined);
+         }}
+diff --git a/apps/web/tests/browser/objective-current-read-harness.tsx b/apps/web/tests/browser/objective-current-read-harness.tsx
+new file mode 100644
+index 0000000..fe86dc1
+--- /dev/null
++++ b/apps/web/tests/browser/objective-current-read-harness.tsx
+@@ -0,0 +1,59 @@
++import { useEffect, useState } from "react";
++import { createRoot } from "react-dom/client";
++import { useQueryClient } from "@tanstack/react-query";
++import { DataProvider } from "@/shared/portfolio/api/provider";
++import { useIdentity } from "@/shared/portfolio/auth/identity";
++import { ObjectivesPage } from "@/features/portfolio/objectives/ObjectivesPage";
++import { ObjectiveSummary } from "@/features/portfolio/objectives/ObjectiveSummary";
++import { clientId as initialClient } from "./fixtures";
++import "@/app/globals.css";
++import "@/shared/portfolio/styles.css";
++import "./test-font.css";
++
++function CurrentReadProbe() {
++  const cache = useQueryClient();
++  useIdentity();
++  const [clientId, setClientId] = useState(initialClient);
++  const [summary] = useState(() =>
++    new URLSearchParams(location.search).has("summary"),
++  );
++  useEffect(() => {
++    const refresh = () =>
++      void cache.invalidateQueries({ queryKey: ["objectives", clientId] });
++    const replace = (event: Event) =>
++      setClientId(String((event as CustomEvent).detail));
++    window.addEventListener("objective-current-read-refresh", refresh);
++    window.addEventListener("objective-current-read-client", replace);
++    return () => {
++      window.removeEventListener("objective-current-read-refresh", refresh);
++      window.removeEventListener("objective-current-read-client", replace);
++    };
++  }, [cache, clientId]);
++  return (
++    <main>
++      <p>Synthetic current-read checks. Service requests are intercepted.</p>
++      {summary ? (
++        <ObjectiveSummary clientId={clientId} />
++      ) : (
++        <ObjectivesPage clientId={clientId} />
++      )}
++    </main>
++  );
++}
++
++function ScopeProbe() {
++  const [session, setSession] = useState(0);
++  useEffect(() => {
++    const replace = () => setSession((value) => value + 1);
++    window.addEventListener("objective-current-read-session", replace);
++    return () =>
++      window.removeEventListener("objective-current-read-session", replace);
++  }, []);
++  return (
++    <DataProvider key={session}>
++      <CurrentReadProbe />
++    </DataProvider>
++  );
++}
++
++createRoot(document.getElementById("root")!).render(<ScopeProbe />);
+diff --git a/apps/web/tests/browser/objective-current-read.html b/apps/web/tests/browser/objective-current-read.html
+new file mode 100644
+index 0000000..0bd39f1
+--- /dev/null
++++ b/apps/web/tests/browser/objective-current-read.html
+@@ -0,0 +1,11 @@
++<!doctype html>
++<html lang="en">
++  <head>
++    <meta charset="UTF-8" />
++    <title>Synthetic objective read checks</title>
++  </head>
++  <body>
++    <div id="root"></div>
++    <script type="module" src="./objective-current-read-harness.tsx"></script>
++  </body>
++</html>
+diff --git a/apps/web/tests/browser/objective-current-read.spec.ts b/apps/web/tests/browser/objective-current-read.spec.ts
+new file mode 100644
+index 0000000..ce1cb02
+--- /dev/null
++++ b/apps/web/tests/browser/objective-current-read.spec.ts
+@@ -0,0 +1,327 @@
++import { expect, test, type Page } from "@playwright/test";
++import {
++  client,
++  clientId,
++  objective,
++  objectiveId,
++  installFixtures,
++  json,
++} from "./fixtures";
++
++async function refresh(page: Page) {
++  await page.evaluate(() =>
++    window.dispatchEvent(new Event("objective-current-read-refresh")),
++  );
++}
++async function currentFixture(page: Page) {
++  const unexpected = await installFixtures(page);
++  const state = { status: 200, records: [objective], reads: 0 };
++  await page.route(`**/core/clients/${clientId}/objectives`, (route) => {
++    state.reads++;
++    return json(
++      route,
++      state.status === 200
++        ? state.records
++        : { message: "Synthetic current objectives unavailable" },
++      state.status,
++    );
++  });
++  return { state, unexpected };
++}
++
++for (const status of [403, 503]) {
++  test(`cached list is hidden after ${status} on a stale remount`, async ({
++    page,
++  }, testInfo) => {
++    const { state, unexpected } = await currentFixture(page);
++    await page.clock.install();
++    await page.goto(`/portfolio/${clientId}/objectives`);
++    await expect(
++      page.getByRole("button", { name: "Test outcome", exact: true }),
++    ).toBeVisible();
++    await page.clock.fastForward(31000);
++    state.status = status;
++    await page.getByRole("link", { name: "Capabilities", exact: true }).click();
++    await page.getByRole("link", { name: "Objectives", exact: true }).click();
++    await expect(page.getByRole("alert")).toBeVisible();
++    await expect(page.getByText("Test outcome", { exact: true })).toHaveCount(
++      0,
++    );
++    await expect(
++      page.getByText("Test minimum win", { exact: true }),
++    ).toHaveCount(0);
++    await expect(
++      page.getByRole("button", { name: "New objective", exact: true }),
++    ).toBeDisabled();
++    expect(state.reads).toBeGreaterThan(1);
++    await page.screenshot({
++      path: testInfo.outputPath(`objectives-current-error-${status}.png`),
++      fullPage: true,
++    });
++    expect(unexpected).toEqual([]);
++  });
++
++  test(`failed list ${status} preserves filters and restores only a successful current read`, async ({
++    page,
++  }) => {
++    const { state, unexpected } = await currentFixture(page);
++    await page.goto("/objective-current-read.html");
++    await expect(
++      page.getByRole("button", { name: "Test outcome", exact: true }),
++    ).toBeVisible();
++    await page.getByLabel("Objective status").selectOption("draft");
++    state.status = status;
++    await refresh(page);
++    await expect(page.getByRole("alert")).toBeVisible();
++    await expect(page.getByRole("article")).toHaveCount(0);
++    await page.getByLabel("Objective status").selectOption("ready");
++    await expect(page.getByText("No objectives match this status")).toHaveCount(
++      0,
++    );
++    await page.getByLabel("Objective status").selectOption("draft");
++    await expect(page.getByRole("article")).toHaveCount(0);
++    let release!: () => void;
++    const waiting = new Promise<void>((resolve) => {
++      release = resolve;
++    });
++    await page.route(
++      `**/core/clients/${clientId}/objectives`,
++      async (route) => {
++        await waiting;
++        return json(route, [
++          { ...objective, outcome: "Current recovered outcome" },
++        ]);
++      },
++    );
++    await page
++      .getByRole("alert")
++      .getByRole("button", { name: "Retry" })
++      .click();
++    await expect(page.getByRole("article")).toHaveCount(0);
++    release();
++    await expect(
++      page.getByRole("button", {
++        name: "Current recovered outcome",
++        exact: true,
++      }),
++    ).toBeVisible();
++    await expect(
++      page.getByRole("button", { name: "New objective", exact: true }),
++    ).toBeEnabled();
++    await expect(page.getByLabel("Objective status")).toHaveValue("draft");
++    await expect(page.getByText("Test outcome", { exact: true })).toHaveCount(
++      0,
++    );
++    expect(unexpected).toEqual([]);
++  });
++
++  test(`failed summary ${status} hides retained content and creation entry until recovery`, async ({
++    page,
++  }) => {
++    const { state, unexpected } = await currentFixture(page);
++    await page.goto("/objective-current-read.html?summary=1");
++    await expect(
++      page.getByRole("link", { name: /Test outcome/ }),
++    ).toBeVisible();
++    state.status = status;
++    await refresh(page);
++    await expect(page.getByRole("alert")).toBeVisible();
++    await expect(page.getByText("Test outcome", { exact: true })).toHaveCount(
++      0,
++    );
++    await expect(
++      page.getByRole("link", { name: "New objective", exact: true }),
++    ).toHaveCount(0);
++    state.status = 200;
++    state.records = [{ ...objective, outcome: "Refreshed summary" }];
++    await page
++      .getByRole("alert")
++      .getByRole("button", { name: "Retry" })
++      .click();
++    await expect(
++      page.getByRole("link", { name: /Refreshed summary/ }),
++    ).toBeVisible();
++    await expect(
++      page.getByRole("link", { name: "New objective", exact: true }),
++    ).toBeVisible();
++    expect(unexpected).toEqual([]);
++  });
++
++  test(`failed read ${status} closes the selected editor and does not restore its stale draft`, async ({
++    page,
++  }) => {
++    const { state, unexpected } = await currentFixture(page);
++    await page.goto(`/objective-current-read.html?objective=${objectiveId}`);
++    const editor = page.getByRole("dialog", { name: "Edit objective" });
++    await expect(editor).toBeVisible();
++    await editor
++      .getByLabel("Outcome", { exact: true })
++      .fill("Stale unsaved editor");
++    state.status = status;
++    await refresh(page);
++    await expect(editor).toHaveCount(0);
++    await expect(page.getByRole("alert")).toBeVisible();
++    await expect(page).not.toHaveURL(/objective=/);
++    state.status = 200;
++    state.records = [{ ...objective, outcome: "Recovered editor source" }];
++    await page
++      .getByRole("alert")
++      .getByRole("button", { name: "Retry" })
++      .click();
++    await expect(
++      page.getByRole("button", {
++        name: "Recovered editor source",
++        exact: true,
++      }),
++    ).toBeVisible();
++    await expect(editor).toHaveCount(0);
++    await page
++      .getByRole("button", { name: "Recovered editor source", exact: true })
++      .click();
++    await expect(editor.getByLabel("Outcome", { exact: true })).toHaveValue(
++      "Recovered editor source",
++    );
++    expect(unexpected).toEqual([]);
++  });
++}
++
++test("failed current read clears delete confirmation and new-objective input", async ({
++  page,
++}) => {
++  const { state, unexpected } = await currentFixture(page);
++  await page.goto("/objective-current-read.html");
++  await page
++    .getByRole("button", { name: "Delete Test outcome", exact: true })
++    .click();
++  await expect(
++    page.getByRole("dialog", { name: "Delete objective" }),
++  ).toBeVisible();
++  state.status = 403;
++  await refresh(page);
++  await expect(
++    page.getByRole("dialog", { name: "Delete objective" }),
++  ).toHaveCount(0);
++  state.status = 200;
++  await page.getByRole("alert").getByRole("button", { name: "Retry" }).click();
++  await expect(
++    page.getByRole("button", { name: "Test outcome", exact: true }),
++  ).toBeVisible();
++  await expect(
++    page.getByRole("dialog", { name: "Delete objective" }),
++  ).toHaveCount(0);
++  await page
++    .getByRole("button", { name: "New objective", exact: true })
++    .click();
++  await page
++    .getByRole("textbox", { name: "Outcome", exact: true })
++    .fill("Unsaved new objective");
++  state.status = 503;
++  await refresh(page);
++  await expect(page.getByRole("alert")).toBeVisible();
++  await expect(
++    page.getByRole("textbox", { name: "Outcome", exact: true }),
++  ).toHaveCount(0);
++  await expect(page).not.toHaveURL(/new=/);
++  expect(unexpected).toEqual([]);
++});
++
++test("client replacement rejects a late former-client read and recovers the new client", async ({
++  page,
++}) => {
++  const { unexpected } = await currentFixture(page);
++  const nextClient = "10000000-0000-4000-8000-000000000002";
++  await page.route(`**/core/clients/${nextClient}`, (route) =>
++    json(route, { ...client, id: nextClient, name: "Other current client" }),
++  );
++  await page.route(
++    `**/core/clients/${nextClient}/advocacy-matters**`,
++    (route) => json(route, []),
++  );
++  let allowed = false;
++  await page.route(`**/core/clients/${nextClient}/objectives`, (route) =>
++    json(
++      route,
++      allowed
++        ? [
++            {
++              ...objective,
++              clientId: nextClient,
++              outcome: "New client outcome",
++            },
++          ]
++        : { message: "Synthetic new client denial" },
++      allowed ? 200 : 403,
++    ),
++  );
++  await page.goto("/objective-current-read.html");
++  await expect(
++    page.getByRole("button", { name: "Test outcome", exact: true }),
++  ).toBeVisible();
++  let release!: () => void;
++  const waiting = new Promise<void>((resolve) => {
++    release = resolve;
++  });
++  let offered = false;
++  let held = false;
++  await page.route(`**/core/clients/${clientId}/objectives`, async (route) => {
++    held = true;
++    await waiting;
++    await json(route, [objective]);
++    offered = true;
++  });
++  await refresh(page);
++  await expect.poll(() => held).toBe(true);
++  await page.evaluate(
++    (id) =>
++      window.dispatchEvent(
++        new CustomEvent("objective-current-read-client", { detail: id }),
++      ),
++    nextClient,
++  );
++  await expect(page.getByRole("alert")).toBeVisible();
++  release();
++  await expect.poll(() => offered).toBe(true);
++  await expect(page.getByText("Test outcome", { exact: true })).toHaveCount(0);
++  allowed = true;
++  await page.getByRole("alert").getByRole("button", { name: "Retry" }).click();
++  await expect(
++    page.getByRole("button", { name: "New client outcome", exact: true }),
++  ).toBeVisible();
++  expect(unexpected).toEqual([]);
++});
++
++test("replacement data provider cannot receive the former session's cached editor", async ({
++  page,
++}) => {
++  const { unexpected } = await currentFixture(page);
++  await page.goto(`/objective-current-read.html?objective=${objectiveId}`);
++  const editor = page.getByRole("dialog", { name: "Edit objective" });
++  await expect(editor).toBeVisible();
++  let release!: () => void;
++  const waiting = new Promise<void>((resolve) => {
++    release = resolve;
++  });
++  let held = false;
++  let offered = false;
++  await page.route(`**/core/clients/${clientId}/objectives`, async (route) => {
++    if (!held) {
++      held = true;
++      await waiting;
++      await json(route, [objective]);
++      offered = true;
++    } else await json(route, []);
++  });
++  await refresh(page);
++  await expect.poll(() => held).toBe(true);
++  await page.evaluate(() =>
++    window.dispatchEvent(new Event("objective-current-read-session")),
++  );
++  await expect(
++    page.getByText("No current objectives", { exact: true }),
++  ).toBeVisible();
++  release();
++  await expect.poll(() => offered).toBe(true);
++  await expect(editor).toHaveCount(0);
++  await expect(page.getByText("Test outcome", { exact: true })).toHaveCount(0);
++  expect(unexpected).toEqual([]);
++});

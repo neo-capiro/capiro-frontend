@@ -1,0 +1,611 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-p1-successor/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "/tmp/capiro-successor-visual-review/playwright.config.ts"
+    ],
+    "configFile": "/tmp/capiro-successor-visual-review/playwright.config.ts",
+    "rootDir": "/tmp/capiro-successor-visual-review",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-successor-visual-review/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-successor-visual-review",
+        "testIgnore": [],
+        "testMatch": [
+          "review.spec.ts"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-successor-visual-review/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "review.spec.ts",
+      "file": "review.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Files ACL pending unknown review at 1440",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 12434,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at inspect (/tmp/capiro-successor-visual-review/review.spec.ts:14:162)\n    at /tmp/capiro-successor-visual-review/review.spec.ts:23:3",
+                    "location": {
+                      "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                      "column": 162,
+                      "line": 14
+                    },
+                    "snippet": "  12 |  if(metrics.scrollHeight>metrics.clientHeight+1){await dialog.evaluate(el=>el.scrollTop=el.scrollHeight);await page.screenshot({path:info.outputPath(label+'-bottom.png')});}\n  13 |  const enabled=dialog.locator('button:not(:disabled),input:not(:disabled),textarea:not(:disabled),select:not(:disabled)');\n> 14 |  for(let i=0;i<Math.min(await enabled.count()+2,14);i++){await page.keyboard.press('Tab');expect(await dialog.evaluate(el=>el.contains(document.activeElement))).toBe(true);const focused=await page.locator(':focus').boundingBox();if(focused){expect(focused.x).toBeGreaterThanOrEqual(metrics.x-1);expect(focused.x+focused.width).toBeLessThanOrEqual(metrics.x+metrics.width+1);}}\n     |                                                                                                                                                                  ^\n  15 | }\n  16 | for(const width of [1440,360]){\n  17 |  test(`Files ACL pending unknown review at ${width}`,async({page},info)=>{"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                        "column": 162,
+                        "line": 14
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  12 |  if(metrics.scrollHeight>metrics.clientHeight+1){await dialog.evaluate(el=>el.scrollTop=el.scrollHeight);await page.screenshot({path:info.outputPath(label+'-bottom.png')});}\n  13 |  const enabled=dialog.locator('button:not(:disabled),input:not(:disabled),textarea:not(:disabled),select:not(:disabled)');\n> 14 |  for(let i=0;i<Math.min(await enabled.count()+2,14);i++){await page.keyboard.press('Tab');expect(await dialog.evaluate(el=>el.contains(document.activeElement))).toBe(true);const focused=await page.locator(':focus').boundingBox();if(focused){expect(focused.x).toBeGreaterThanOrEqual(metrics.x-1);expect(focused.x+focused.width).toBeLessThanOrEqual(metrics.x+metrics.width+1);}}\n     |                                                                                                                                                                  ^\n  15 | }\n  16 | for(const width of [1440,360]){\n  17 |  test(`Files ACL pending unknown review at ${width}`,async({page},info)=>{\n    at inspect (/tmp/capiro-successor-visual-review/review.spec.ts:14:162)\n    at /tmp/capiro-successor-visual-review/review.spec.ts:23:3"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:43:18.358Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-1440/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-1440/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-1440/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                    "column": 162,
+                    "line": 14
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-259ed4d424883032cab1",
+          "file": "review.spec.ts",
+          "line": 17,
+          "column": 6
+        },
+        {
+          "title": "Files folder unknown review at 1440",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 10738,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at inspect (/tmp/capiro-successor-visual-review/review.spec.ts:14:162)\n    at /tmp/capiro-successor-visual-review/review.spec.ts:27:783",
+                    "location": {
+                      "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                      "column": 162,
+                      "line": 14
+                    },
+                    "snippet": "  12 |  if(metrics.scrollHeight>metrics.clientHeight+1){await dialog.evaluate(el=>el.scrollTop=el.scrollHeight);await page.screenshot({path:info.outputPath(label+'-bottom.png')});}\n  13 |  const enabled=dialog.locator('button:not(:disabled),input:not(:disabled),textarea:not(:disabled),select:not(:disabled)');\n> 14 |  for(let i=0;i<Math.min(await enabled.count()+2,14);i++){await page.keyboard.press('Tab');expect(await dialog.evaluate(el=>el.contains(document.activeElement))).toBe(true);const focused=await page.locator(':focus').boundingBox();if(focused){expect(focused.x).toBeGreaterThanOrEqual(metrics.x-1);expect(focused.x+focused.width).toBeLessThanOrEqual(metrics.x+metrics.width+1);}}\n     |                                                                                                                                                                  ^\n  15 | }\n  16 | for(const width of [1440,360]){\n  17 |  test(`Files ACL pending unknown review at ${width}`,async({page},info)=>{"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                        "column": 162,
+                        "line": 14
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  12 |  if(metrics.scrollHeight>metrics.clientHeight+1){await dialog.evaluate(el=>el.scrollTop=el.scrollHeight);await page.screenshot({path:info.outputPath(label+'-bottom.png')});}\n  13 |  const enabled=dialog.locator('button:not(:disabled),input:not(:disabled),textarea:not(:disabled),select:not(:disabled)');\n> 14 |  for(let i=0;i<Math.min(await enabled.count()+2,14);i++){await page.keyboard.press('Tab');expect(await dialog.evaluate(el=>el.contains(document.activeElement))).toBe(true);const focused=await page.locator(':focus').boundingBox();if(focused){expect(focused.x).toBeGreaterThanOrEqual(metrics.x-1);expect(focused.x+focused.width).toBeLessThanOrEqual(metrics.x+metrics.width+1);}}\n     |                                                                                                                                                                  ^\n  15 | }\n  16 | for(const width of [1440,360]){\n  17 |  test(`Files ACL pending unknown review at ${width}`,async({page},info)=>{\n    at inspect (/tmp/capiro-successor-visual-review/review.spec.ts:14:162)\n    at /tmp/capiro-successor-visual-review/review.spec.ts:27:783"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:43:34.494Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Files-folder-unknown-review-at-1440/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Files-folder-unknown-review-at-1440/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Files-folder-unknown-review-at-1440/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                    "column": 162,
+                    "line": 14
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-b06483ccf72d1b3a142a",
+          "file": "review.spec.ts",
+          "line": 26,
+          "column": 6
+        },
+        {
+          "title": "Meeting pending unknown at 1440",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6020,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at inspect (/tmp/capiro-successor-visual-review/review.spec.ts:14:162)\n    at /tmp/capiro-successor-visual-review/review.spec.ts:30:568",
+                    "location": {
+                      "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                      "column": 162,
+                      "line": 14
+                    },
+                    "snippet": "  12 |  if(metrics.scrollHeight>metrics.clientHeight+1){await dialog.evaluate(el=>el.scrollTop=el.scrollHeight);await page.screenshot({path:info.outputPath(label+'-bottom.png')});}\n  13 |  const enabled=dialog.locator('button:not(:disabled),input:not(:disabled),textarea:not(:disabled),select:not(:disabled)');\n> 14 |  for(let i=0;i<Math.min(await enabled.count()+2,14);i++){await page.keyboard.press('Tab');expect(await dialog.evaluate(el=>el.contains(document.activeElement))).toBe(true);const focused=await page.locator(':focus').boundingBox();if(focused){expect(focused.x).toBeGreaterThanOrEqual(metrics.x-1);expect(focused.x+focused.width).toBeLessThanOrEqual(metrics.x+metrics.width+1);}}\n     |                                                                                                                                                                  ^\n  15 | }\n  16 | for(const width of [1440,360]){\n  17 |  test(`Files ACL pending unknown review at ${width}`,async({page},info)=>{"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                        "column": 162,
+                        "line": 14
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  12 |  if(metrics.scrollHeight>metrics.clientHeight+1){await dialog.evaluate(el=>el.scrollTop=el.scrollHeight);await page.screenshot({path:info.outputPath(label+'-bottom.png')});}\n  13 |  const enabled=dialog.locator('button:not(:disabled),input:not(:disabled),textarea:not(:disabled),select:not(:disabled)');\n> 14 |  for(let i=0;i<Math.min(await enabled.count()+2,14);i++){await page.keyboard.press('Tab');expect(await dialog.evaluate(el=>el.contains(document.activeElement))).toBe(true);const focused=await page.locator(':focus').boundingBox();if(focused){expect(focused.x).toBeGreaterThanOrEqual(metrics.x-1);expect(focused.x+focused.width).toBeLessThanOrEqual(metrics.x+metrics.width+1);}}\n     |                                                                                                                                                                  ^\n  15 | }\n  16 | for(const width of [1440,360]){\n  17 |  test(`Files ACL pending unknown review at ${width}`,async({page},info)=>{\n    at inspect (/tmp/capiro-successor-visual-review/review.spec.ts:14:162)\n    at /tmp/capiro-successor-visual-review/review.spec.ts:30:568"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:43:49.593Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Meeting-pending-unknown-at-1440/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Meeting-pending-unknown-at-1440/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Meeting-pending-unknown-at-1440/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                    "column": 162,
+                    "line": 14
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-549cca217471727a266e",
+          "file": "review.spec.ts",
+          "line": 29,
+          "column": 6
+        },
+        {
+          "title": "Calendar notes pending unknown at 1440",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6475,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at inspect (/tmp/capiro-successor-visual-review/review.spec.ts:14:162)\n    at /tmp/capiro-successor-visual-review/review.spec.ts:33:921",
+                    "location": {
+                      "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                      "column": 162,
+                      "line": 14
+                    },
+                    "snippet": "  12 |  if(metrics.scrollHeight>metrics.clientHeight+1){await dialog.evaluate(el=>el.scrollTop=el.scrollHeight);await page.screenshot({path:info.outputPath(label+'-bottom.png')});}\n  13 |  const enabled=dialog.locator('button:not(:disabled),input:not(:disabled),textarea:not(:disabled),select:not(:disabled)');\n> 14 |  for(let i=0;i<Math.min(await enabled.count()+2,14);i++){await page.keyboard.press('Tab');expect(await dialog.evaluate(el=>el.contains(document.activeElement))).toBe(true);const focused=await page.locator(':focus').boundingBox();if(focused){expect(focused.x).toBeGreaterThanOrEqual(metrics.x-1);expect(focused.x+focused.width).toBeLessThanOrEqual(metrics.x+metrics.width+1);}}\n     |                                                                                                                                                                  ^\n  15 | }\n  16 | for(const width of [1440,360]){\n  17 |  test(`Files ACL pending unknown review at ${width}`,async({page},info)=>{"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                        "column": 162,
+                        "line": 14
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  12 |  if(metrics.scrollHeight>metrics.clientHeight+1){await dialog.evaluate(el=>el.scrollTop=el.scrollHeight);await page.screenshot({path:info.outputPath(label+'-bottom.png')});}\n  13 |  const enabled=dialog.locator('button:not(:disabled),input:not(:disabled),textarea:not(:disabled),select:not(:disabled)');\n> 14 |  for(let i=0;i<Math.min(await enabled.count()+2,14);i++){await page.keyboard.press('Tab');expect(await dialog.evaluate(el=>el.contains(document.activeElement))).toBe(true);const focused=await page.locator(':focus').boundingBox();if(focused){expect(focused.x).toBeGreaterThanOrEqual(metrics.x-1);expect(focused.x+focused.width).toBeLessThanOrEqual(metrics.x+metrics.width+1);}}\n     |                                                                                                                                                                  ^\n  15 | }\n  16 | for(const width of [1440,360]){\n  17 |  test(`Files ACL pending unknown review at ${width}`,async({page},info)=>{\n    at inspect (/tmp/capiro-successor-visual-review/review.spec.ts:14:162)\n    at /tmp/capiro-successor-visual-review/review.spec.ts:33:921"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:43:59.760Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Calendar-notes-pending-unknown-at-1440/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Calendar-notes-pending-unknown-at-1440/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Calendar-notes-pending-unknown-at-1440/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                    "column": 162,
+                    "line": 14
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-77ba200e31a0f9c78492",
+          "file": "review.spec.ts",
+          "line": 32,
+          "column": 45
+        },
+        {
+          "title": "Calendar debriefs pending unknown at 1440",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7450,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at inspect (/tmp/capiro-successor-visual-review/review.spec.ts:14:162)\n    at /tmp/capiro-successor-visual-review/review.spec.ts:33:921",
+                    "location": {
+                      "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                      "column": 162,
+                      "line": 14
+                    },
+                    "snippet": "  12 |  if(metrics.scrollHeight>metrics.clientHeight+1){await dialog.evaluate(el=>el.scrollTop=el.scrollHeight);await page.screenshot({path:info.outputPath(label+'-bottom.png')});}\n  13 |  const enabled=dialog.locator('button:not(:disabled),input:not(:disabled),textarea:not(:disabled),select:not(:disabled)');\n> 14 |  for(let i=0;i<Math.min(await enabled.count()+2,14);i++){await page.keyboard.press('Tab');expect(await dialog.evaluate(el=>el.contains(document.activeElement))).toBe(true);const focused=await page.locator(':focus').boundingBox();if(focused){expect(focused.x).toBeGreaterThanOrEqual(metrics.x-1);expect(focused.x+focused.width).toBeLessThanOrEqual(metrics.x+metrics.width+1);}}\n     |                                                                                                                                                                  ^\n  15 | }\n  16 | for(const width of [1440,360]){\n  17 |  test(`Files ACL pending unknown review at ${width}`,async({page},info)=>{"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                        "column": 162,
+                        "line": 14
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  12 |  if(metrics.scrollHeight>metrics.clientHeight+1){await dialog.evaluate(el=>el.scrollTop=el.scrollHeight);await page.screenshot({path:info.outputPath(label+'-bottom.png')});}\n  13 |  const enabled=dialog.locator('button:not(:disabled),input:not(:disabled),textarea:not(:disabled),select:not(:disabled)');\n> 14 |  for(let i=0;i<Math.min(await enabled.count()+2,14);i++){await page.keyboard.press('Tab');expect(await dialog.evaluate(el=>el.contains(document.activeElement))).toBe(true);const focused=await page.locator(':focus').boundingBox();if(focused){expect(focused.x).toBeGreaterThanOrEqual(metrics.x-1);expect(focused.x+focused.width).toBeLessThanOrEqual(metrics.x+metrics.width+1);}}\n     |                                                                                                                                                                  ^\n  15 | }\n  16 | for(const width of [1440,360]){\n  17 |  test(`Files ACL pending unknown review at ${width}`,async({page},info)=>{\n    at inspect (/tmp/capiro-successor-visual-review/review.spec.ts:14:162)\n    at /tmp/capiro-successor-visual-review/review.spec.ts:33:921"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:44:10.656Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Calendar-debriefs-pending-unknown-at-1440/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Calendar-debriefs-pending-unknown-at-1440/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Calendar-debriefs-pending-unknown-at-1440/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                    "column": 162,
+                    "line": 14
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-911989ab9afb3d70a698",
+          "file": "review.spec.ts",
+          "line": 32,
+          "column": 45
+        },
+        {
+          "title": "Files ACL pending unknown review at 360",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 13924,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at inspect (/tmp/capiro-successor-visual-review/review.spec.ts:14:162)\n    at /tmp/capiro-successor-visual-review/review.spec.ts:23:3",
+                    "location": {
+                      "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                      "column": 162,
+                      "line": 14
+                    },
+                    "snippet": "  12 |  if(metrics.scrollHeight>metrics.clientHeight+1){await dialog.evaluate(el=>el.scrollTop=el.scrollHeight);await page.screenshot({path:info.outputPath(label+'-bottom.png')});}\n  13 |  const enabled=dialog.locator('button:not(:disabled),input:not(:disabled),textarea:not(:disabled),select:not(:disabled)');\n> 14 |  for(let i=0;i<Math.min(await enabled.count()+2,14);i++){await page.keyboard.press('Tab');expect(await dialog.evaluate(el=>el.contains(document.activeElement))).toBe(true);const focused=await page.locator(':focus').boundingBox();if(focused){expect(focused.x).toBeGreaterThanOrEqual(metrics.x-1);expect(focused.x+focused.width).toBeLessThanOrEqual(metrics.x+metrics.width+1);}}\n     |                                                                                                                                                                  ^\n  15 | }\n  16 | for(const width of [1440,360]){\n  17 |  test(`Files ACL pending unknown review at ${width}`,async({page},info)=>{"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                        "column": 162,
+                        "line": 14
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  12 |  if(metrics.scrollHeight>metrics.clientHeight+1){await dialog.evaluate(el=>el.scrollTop=el.scrollHeight);await page.screenshot({path:info.outputPath(label+'-bottom.png')});}\n  13 |  const enabled=dialog.locator('button:not(:disabled),input:not(:disabled),textarea:not(:disabled),select:not(:disabled)');\n> 14 |  for(let i=0;i<Math.min(await enabled.count()+2,14);i++){await page.keyboard.press('Tab');expect(await dialog.evaluate(el=>el.contains(document.activeElement))).toBe(true);const focused=await page.locator(':focus').boundingBox();if(focused){expect(focused.x).toBeGreaterThanOrEqual(metrics.x-1);expect(focused.x+focused.width).toBeLessThanOrEqual(metrics.x+metrics.width+1);}}\n     |                                                                                                                                                                  ^\n  15 | }\n  16 | for(const width of [1440,360]){\n  17 |  test(`Files ACL pending unknown review at ${width}`,async({page},info)=>{\n    at inspect (/tmp/capiro-successor-visual-review/review.spec.ts:14:162)\n    at /tmp/capiro-successor-visual-review/review.spec.ts:23:3"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T15:44:21.956Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-360/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-360/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-successor-visual-review/artifacts/review-Files-ACL-pending-unknown-review-at-360/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-successor-visual-review/review.spec.ts",
+                    "column": 162,
+                    "line": 14
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-8416193e7a0688ad72f9",
+          "file": "review.spec.ts",
+          "line": 17,
+          "column": 6
+        },
+        {
+          "title": "Files folder unknown review at 360",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-4997e8d23b7fabdcbe71",
+          "file": "review.spec.ts",
+          "line": 26,
+          "column": 6
+        },
+        {
+          "title": "Meeting pending unknown at 360",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-b9be69514a2e10197af2",
+          "file": "review.spec.ts",
+          "line": 29,
+          "column": 6
+        },
+        {
+          "title": "Calendar notes pending unknown at 360",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-e806d7a395ee09864ada",
+          "file": "review.spec.ts",
+          "line": 32,
+          "column": 45
+        },
+        {
+          "title": "Calendar debriefs pending unknown at 360",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-8ba550bed2c19481978b",
+          "file": "review.spec.ts",
+          "line": 32,
+          "column": 45
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T15:43:15.840Z",
+    "duration": 83797.871,
+    "expected": 0,
+    "skipped": 4,
+    "unexpected": 6,
+    "flaky": 0
+  }
+}

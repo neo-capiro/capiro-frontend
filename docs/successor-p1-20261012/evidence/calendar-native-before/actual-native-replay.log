@@ -1,0 +1,135 @@
+
+Running 3 tests using 1 worker
+
+(node:535724) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 ../../tmp/capiro-debrief-fixture-review/actual-native-manual-debrief.spec.ts:96:5 › manual debrief reviews written context, generates only on submit and saves separately (13.6s)
+(node:536207) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 ../../tmp/capiro-debrief-fixture-review/actual-native-meeting-library.spec.ts:308:5 › Transcript shares canonical upload, retries extraction without duplicate bytes and reviews truncation (14.9s)
+(node:536648) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 ../../tmp/capiro-debrief-fixture-review/actual-native-voice-integration.spec.ts:10:5 › Calendar voice source explicitly generates a reviewed draft and saves separately (14.9s)
+
+
+  1) ../../tmp/capiro-debrief-fixture-review/actual-native-manual-debrief.spec.ts:96:5 › manual debrief reviews written context, generates only on submit and saves separately 
+
+    Error: expect(locator).not.toBeVisible() failed
+
+    Locator:  getByRole('dialog', { name: 'Review generated debrief', exact: true })
+    Expected: not visible
+    Received: visible
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "not toBeVisible" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Review generated debrief', exact: true })
+        13 × locator resolved to <div role="dialog" tabindex="-1" id="radix-_r_1f_" data-state="open" aria-modal="true" data-slot="dialog-content" aria-labelledby="radix-_r_1g_" aria-describedby="radix-_r_1h_" class="bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg b…>…</div>
+           - unexpected value "visible"
+
+
+      124 |     .getByRole("button", { name: "Save debrief", exact: true })
+      125 |     .click();
+    > 126 |   await expect(editor).not.toBeVisible();
+          |                            ^
+      127 |   expect(state.saves).toBe(1);
+      128 |   expect(unexpected).toEqual([]);
+      129 | });
+        at /tmp/capiro-debrief-fixture-review/actual-native-manual-debrief.spec.ts:126:28
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-debrief-fixture-review/actual-native-output/actual-native-manual-debri-53222-submit-and-saves-separately/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-debrief-fixture-review/actual-native-output/actual-native-manual-debri-53222-submit-and-saves-separately/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-debrief-fixture-review/actual-native-output/actual-native-manual-debri-53222-submit-and-saves-separately/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-debrief-fixture-review/actual-native-output/actual-native-manual-debri-53222-submit-and-saves-separately/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) ../../tmp/capiro-debrief-fixture-review/actual-native-meeting-library.spec.ts:308:5 › Transcript shares canonical upload, retries extraction without duplicate bytes and reviews truncation 
+
+    Error: expect(locator).not.toBeVisible() failed
+
+    Locator:  getByRole('dialog', { name: 'Review generated debrief', exact: true })
+    Expected: not visible
+    Received: visible
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "not toBeVisible" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Review generated debrief', exact: true })
+        13 × locator resolved to <div role="dialog" tabindex="-1" id="radix-_r_1f_" data-state="open" aria-modal="true" data-slot="dialog-content" aria-labelledby="radix-_r_1g_" aria-describedby="radix-_r_1h_" class="bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg b…>…</div>
+           - unexpected value "visible"
+
+
+      473 |     .getByRole("button", { name: "Save debrief", exact: true })
+      474 |     .click();
+    > 475 |   await expect(editor).not.toBeVisible();
+          |                            ^
+      476 |   expect(saved).toBe(true);
+      477 |   expect(unexpected).toEqual([]);
+      478 | });
+        at /tmp/capiro-debrief-fixture-review/actual-native-meeting-library.spec.ts:475:28
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-debrief-fixture-review/actual-native-output/actual-native-meeting-libr-d9d1a-ytes-and-reviews-truncation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-debrief-fixture-review/actual-native-output/actual-native-meeting-libr-d9d1a-ytes-and-reviews-truncation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-debrief-fixture-review/actual-native-output/actual-native-meeting-libr-d9d1a-ytes-and-reviews-truncation/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-debrief-fixture-review/actual-native-output/actual-native-meeting-libr-d9d1a-ytes-and-reviews-truncation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) ../../tmp/capiro-debrief-fixture-review/actual-native-voice-integration.spec.ts:10:5 › Calendar voice source explicitly generates a reviewed draft and saves separately 
+
+    Error: expect(locator).not.toBeVisible() failed
+
+    Locator:  getByRole('dialog', { name: 'Review generated debrief', exact: true })
+    Expected: not visible
+    Received: visible
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "not toBeVisible" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Review generated debrief', exact: true })
+        13 × locator resolved to <div role="dialog" tabindex="-1" id="radix-_r_16_" data-state="open" aria-modal="true" data-slot="dialog-content" aria-labelledby="radix-_r_17_" aria-describedby="radix-_r_18_" class="bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg b…>…</div>
+           - unexpected value "visible"
+
+
+      105 |     .getByRole("button", { name: "Save debrief", exact: true })
+      106 |     .click();
+    > 107 |   await expect(editor).not.toBeVisible();
+          |                            ^
+      108 |   expect(saved).toEqual([
+      109 |     {
+      110 |       body: "Reviewed voice recap\n\nAction items\n• Review the original evidence\n\nNotes\nKeep the source qualification.",
+        at /tmp/capiro-debrief-fixture-review/actual-native-voice-integration.spec.ts:107:28
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-debrief-fixture-review/actual-native-output/actual-native-voice-integr-1d216--draft-and-saves-separately/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-debrief-fixture-review/actual-native-output/actual-native-voice-integr-1d216--draft-and-saves-separately/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-debrief-fixture-review/actual-native-output/actual-native-voice-integr-1d216--draft-and-saves-separately/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-debrief-fixture-review/actual-native-output/actual-native-voice-integr-1d216--draft-and-saves-separately/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    ../../tmp/capiro-debrief-fixture-review/actual-native-manual-debrief.spec.ts:96:5 › manual debrief reviews written context, generates only on submit and saves separately 
+    ../../tmp/capiro-debrief-fixture-review/actual-native-meeting-library.spec.ts:308:5 › Transcript shares canonical upload, retries extraction without duplicate bytes and reviews truncation 
+    ../../tmp/capiro-debrief-fixture-review/actual-native-voice-integration.spec.ts:10:5 › Calendar voice source explicitly generates a reviewed draft and saves separately 

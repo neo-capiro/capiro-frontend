@@ -1,0 +1,41 @@
+{
+  "reason": "Architecture gate failed because root registry evidence links used JSON but the unchanged loader supports Markdown. Exact independent reviews existed; corrected only evidence binding in successor d5dd0be. Source remained fixed throughout stopped runs. No application defect was reported in the partial browser runs.",
+  "failedCheckExit": 1,
+  "ownedProcessesSignalled": [
+    548461,
+    548550
+  ],
+  "browserExit": 130,
+  "counts": {
+    "portfolio": {
+      "reportedStats": {
+        "startTime": "2026-10-12T16:47:46.625Z",
+        "duration": 287400.408,
+        "expected": 111,
+        "skipped": 885,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "individualResultStatuses": {
+        "passed": 111,
+        "interrupted": 4
+      }
+    },
+    "modules": {
+      "reportedStats": {
+        "startTime": "2026-10-12T16:47:48.902Z",
+        "duration": 283323.05100000004,
+        "expected": 50,
+        "skipped": 107,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "individualResultStatuses": {
+        "passed": 50,
+        "interrupted": 1
+      }
+    }
+  },
+  "qualificationComplete": false,
+  "archiveIdentityPreserved": true
+}

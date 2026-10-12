@@ -1,0 +1,131 @@
+
+Running 3 tests using 1 worker
+
+(node:449069) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 apps/web/tests/browser/files-metadata-receipts.spec.ts:12:1 › conflicting ACL receipt retains the draft and freezes repeat save until current GET review (13.6s)
+(node:449516) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 apps/web/tests/browser/files-metadata-receipts.spec.ts:41:1 › a contradictory folder receipt keeps the requested folder and needs current review (12.7s)
+(node:450189) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 apps/web/tests/browser/files-metadata-receipts.spec.ts:62:1 › unknown ACL save survives close/reopen and a failed review does not thaw it (17.4s)
+
+
+  1) apps/web/tests/browser/files-metadata-receipts.spec.ts:12:1 › conflicting ACL receipt retains the draft and freezes repeat save until current GET review 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('dialog', { name: 'Access: Test report.pdf', exact: true }).getByRole('alert')
+    Expected substring: "unexpected response"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Access: Test report.pdf', exact: true }).getByRole('alert')
+
+
+      23 |   await dialog.getByRole("radio", { name: "Specific people" }).check();
+      24 |   await dialog.getByRole("button", { name: "Save access" }).click();
+    > 25 |   await expect(dialog.getByRole("alert")).toContainText("unexpected response");
+         |                                           ^
+      26 |   await expect(dialog.getByRole("radio", { name: "Specific people" })).toBeChecked();
+      27 |   await expect(dialog.getByRole("button", { name: "Save access" })).toBeDisabled();
+      28 |   await expect(dialog.getByText(/save outcome is unknown/i)).toBeVisible();
+        at /workspace/capiro-p1-files/apps/web/tests/browser/files-metadata-receipts.spec.ts:25:43
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-files/browser-output/files-metadata-receipts-co-f0a2e-ve-until-current-GET-review/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-p1-files/browser-output/files-metadata-receipts-co-f0a2e-ve-until-current-GET-review/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-files/browser-output/files-metadata-receipts-co-f0a2e-ve-until-current-GET-review/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-p1-files/browser-output/files-metadata-receipts-co-f0a2e-ve-until-current-GET-review/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) apps/web/tests/browser/files-metadata-receipts.spec.ts:41:1 › a contradictory folder receipt keeps the requested folder and needs current review 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('dialog', { name: 'New folder', exact: true }).getByRole('alert')
+    Expected substring: "unexpected response"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'New folder', exact: true }).getByRole('alert')
+
+
+      50 |   await dialog.getByLabel("Folder name").fill("Reviewed destination");
+      51 |   await dialog.getByRole("button", { name: "Create folder & move file" }).click();
+    > 52 |   await expect(dialog.getByRole("alert")).toContainText("unexpected response");
+         |                                           ^
+      53 |   await expect(dialog.getByLabel("Folder name")).toHaveValue("Reviewed destination");
+      54 |   await expect(dialog.getByRole("button", { name: "Create folder & move file" })).toBeDisabled();
+      55 |   await dialog.getByRole("button", { name: "Review current file" }).click();
+        at /workspace/capiro-p1-files/apps/web/tests/browser/files-metadata-receipts.spec.ts:52:43
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-files/browser-output/files-metadata-receipts-a--f141d-er-and-needs-current-review/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-p1-files/browser-output/files-metadata-receipts-a--f141d-er-and-needs-current-review/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-files/browser-output/files-metadata-receipts-a--f141d-er-and-needs-current-review/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-p1-files/browser-output/files-metadata-receipts-a--f141d-er-and-needs-current-review/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) apps/web/tests/browser/files-metadata-receipts.spec.ts:62:1 › unknown ACL save survives close/reopen and a failed review does not thaw it 
+
+    Error: expect(locator).toBeChecked() failed
+
+    Locator:  getByRole('dialog', { name: 'Access: Test report.pdf', exact: true }).getByRole('radio', { name: 'Specific people' })
+    Expected: checked
+    Received: unchecked
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeChecked" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Access: Test report.pdf', exact: true }).getByRole('radio', { name: 'Specific people' })
+        14 × locator resolved to <input required="" name="mode" type="radio"/>
+           - unexpected value "unchecked"
+
+
+      73 |   await dialog.getByRole("button", { name: "Close", exact: true }).click();
+      74 |   dialog = await openAccess(page);
+    > 75 |   await expect(dialog.getByRole("radio", { name: "Specific people" })).toBeChecked();
+         |                                                                        ^
+      76 |   await expect(dialog.getByRole("button", { name: "Save access" })).toBeDisabled();
+      77 |   refuseRead = true;
+      78 |   await dialog.getByRole("button", { name: "Review current file" }).click();
+        at /workspace/capiro-p1-files/apps/web/tests/browser/files-metadata-receipts.spec.ts:75:72
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-files/browser-output/files-metadata-receipts-un-6539b-led-review-does-not-thaw-it/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-p1-files/browser-output/files-metadata-receipts-un-6539b-led-review-does-not-thaw-it/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-p1-files/browser-output/files-metadata-receipts-un-6539b-led-review-does-not-thaw-it/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-p1-files/browser-output/files-metadata-receipts-un-6539b-led-review-does-not-thaw-it/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    apps/web/tests/browser/files-metadata-receipts.spec.ts:12:1 › conflicting ACL receipt retains the draft and freezes repeat save until current GET review 
+    apps/web/tests/browser/files-metadata-receipts.spec.ts:41:1 › a contradictory folder receipt keeps the requested folder and needs current review 
+    apps/web/tests/browser/files-metadata-receipts.spec.ts:62:1 › unknown ACL save survives close/reopen and a failed review does not thaw it 

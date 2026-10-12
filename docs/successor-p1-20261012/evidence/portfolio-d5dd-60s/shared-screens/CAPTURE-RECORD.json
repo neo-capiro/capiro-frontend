@@ -1,0 +1,368 @@
+{
+  "sourceCommit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "startUTC": "2026-10-12T17:00:59.338519+00:00",
+  "endUTC": "2026-10-12T17:35:50.819741+00:00",
+  "scope": "Shared root/work screenshot files modified within the complete replay window. Early Modules execution, static checks, independent visual review and host build overlapped parts of this window; all used the same application source. These images alone are not suite attribution; suite-specific artifacts and JSON remain authoritative.",
+  "files": [
+    {
+      "sourcePath": "apps/web/test-results/activity-history-desktop.png",
+      "mtime": 1791824553.3888278,
+      "bytes": 29309,
+      "sha256": "d98d2b905fba32788673b4a4fe9b8f8c4893e2a5b10203f53778135c79b502aa"
+    },
+    {
+      "sourcePath": "apps/web/test-results/activity-history-mobile-dark.png",
+      "mtime": 1791824555.0728872,
+      "bytes": 27443,
+      "sha256": "61df0f4f2af38e9799df59a555aa5443edeeb3a88b9548e88083b4184e71c208"
+    },
+    {
+      "sourcePath": "apps/web/test-results/activity-pinned-desktop.png",
+      "mtime": 1791824523.2558248,
+      "bytes": 22525,
+      "sha256": "9c4188ceab17ceec04b9df2c10c8160d73e82e386c16d606c44e66fdd83f2d53"
+    },
+    {
+      "sourcePath": "apps/web/test-results/activity-pinned-mobile-dark.png",
+      "mtime": 1791824524.6998692,
+      "bytes": 21176,
+      "sha256": "df94e2af5b1f78c5054b108087a0ab68d63cfd2bcea400d17214356d02a02808"
+    },
+    {
+      "sourcePath": "apps/web/test-results/activity-remove-error.png",
+      "mtime": 1791824498.7733731,
+      "bytes": 26674,
+      "sha256": "9cb010caa0e22c7a2c6d5fcbe8fdf73b204a7d5949c77f2251c6f519ab28bb1e"
+    },
+    {
+      "sourcePath": "apps/web/test-results/activity-remove-mobile-dark.png",
+      "mtime": 1791824499.9910371,
+      "bytes": 26483,
+      "sha256": "399d84b89e6217831624419d22593d475b637b8c7aa9d94e6ae2cbb56dc28c94"
+    },
+    {
+      "sourcePath": "apps/web/test-results/activity-settled.png",
+      "mtime": 1791824484.3505077,
+      "bytes": 34971,
+      "sha256": "c90efb162d1808b555a00c9ff42723387c2e3fd375dd2d657edd2f4f4604ac80"
+    },
+    {
+      "sourcePath": "apps/web/test-results/calendar-structured-preparation.png",
+      "mtime": 1791824906.3606222,
+      "bytes": 143871,
+      "sha256": "432ec6dcc8c38f59f1e34fea8bd424d6b8f9f57b53e70c938af6bb4d70064444"
+    },
+    {
+      "sourcePath": "apps/web/test-results/client-intake-company-desktop.png",
+      "mtime": 1791825174.3820555,
+      "bytes": 58089,
+      "sha256": "ed88d6d8b0d56962d6fe7630f9cdc44e015de9706cb8b809290f0364fec90a74"
+    },
+    {
+      "sourcePath": "apps/web/test-results/client-intake-company-mobile-dark.png",
+      "mtime": 1791825175.7021005,
+      "bytes": 40635,
+      "sha256": "416b4f37315f1a0e7863b708ac522c1f04eedf0209045cec9c81ba3616a973ef"
+    },
+    {
+      "sourcePath": "apps/web/test-results/client-intake-sector-bottom-desktop.png",
+      "mtime": 1791825160.0495534,
+      "bytes": 60514,
+      "sha256": "e28199444f311eb81a1c50208a7110c34815b943380158ab7be0c99ee078e81a"
+    },
+    {
+      "sourcePath": "apps/web/test-results/client-intake-sector-desktop.png",
+      "mtime": 1791825161.445603,
+      "bytes": 62388,
+      "sha256": "00edb09f782fb9a5a479ba318ee4b26c313a56b71050e642ac9cbd619ee01dab"
+    },
+    {
+      "sourcePath": "apps/web/test-results/committee-picker-phone-dark.png",
+      "mtime": 1791825187.8385246,
+      "bytes": 15885,
+      "sha256": "7641e6efffe9bec1c01f25762ba6d3120308992df3186e1283fbc762afc851ac"
+    },
+    {
+      "sourcePath": "apps/web/test-results/committee-picker-phone-light.png",
+      "mtime": 1791825180.3942657,
+      "bytes": 16019,
+      "sha256": "f8bb6cbb85ed83cf713fadb1c335792079920b2b0dcef17c93a79ebff7e4f18c"
+    },
+    {
+      "sourcePath": "apps/web/test-results/email-attachment-mobile-dark.png",
+      "mtime": 1791825354.0602767,
+      "bytes": 35068,
+      "sha256": "ba53c577a1673836eeddf9da5ded27a179d1834de353cf2041bf9c0d8d986f13"
+    },
+    {
+      "sourcePath": "apps/web/test-results/email-picker-desktop-light.png",
+      "mtime": 1791825281.4977622,
+      "bytes": 82460,
+      "sha256": "917e47624085e2eb162fb103a0749abd2afa358ccf1fd0c750fd1e1e81f1d7f5"
+    },
+    {
+      "sourcePath": "apps/web/test-results/engagement-meeting-phone.png",
+      "mtime": 1791824575.1815677,
+      "bytes": 56177,
+      "sha256": "1b7e276c5cdff21cd51ddad83787d9f5bbf928fef162c69c3737a76b6bf68b7d"
+    },
+    {
+      "sourcePath": "apps/web/test-results/facility-detail-mobile-dark.png",
+      "mtime": 1791825270.4093795,
+      "bytes": 44352,
+      "sha256": "d5768d42ac6eed3e3965aca0f3149db2f21b39ca27395818540b2e3119fca4a9"
+    },
+    {
+      "sourcePath": "apps/web/test-results/facility-geocoding-detail.png",
+      "mtime": 1791825278.6816654,
+      "bytes": 165540,
+      "sha256": "50e19a34c4a43f07a17496dd195034c90ca0f95b40f48a97994a11a6459b0c93"
+    },
+    {
+      "sourcePath": "apps/web/test-results/facility-map-desktop.png",
+      "mtime": 1791825269.2573423,
+      "bytes": 92706,
+      "sha256": "c24d7ffef6167f5f07c0a132e9650548c66856df35ef4ab05711dea186f0efe1"
+    },
+    {
+      "sourcePath": "apps/web/test-results/facility-map-mobile-dark.png",
+      "mtime": 1791825269.8493614,
+      "bytes": 48401,
+      "sha256": "bbb6844259176b81585b554c9527e6e36ec4a764ff909c21d527494a1112d2d3"
+    },
+    {
+      "sourcePath": "apps/web/test-results/facility-target-saved.png",
+      "mtime": 1791825320.7470984,
+      "bytes": 158461,
+      "sha256": "1bf763be770478a419c7e0819da367c9248fd5c367dc5dcda78f5aeb04bac548"
+    },
+    {
+      "sourcePath": "apps/web/test-results/meeting-preparation-desktop.png",
+      "mtime": 1791825496.9972925,
+      "bytes": 134453,
+      "sha256": "7088068fd3cba6d10072ceec82f2d6816a4ce21204113cdd13651e71da26125f"
+    },
+    {
+      "sourcePath": "apps/web/test-results/meeting-preparation-edit-error.png",
+      "mtime": 1791825494.8612218,
+      "bytes": 119819,
+      "sha256": "4e179561708eb03094c12dde9e2d168ad282758ea4e17dfa087ca75f02c99bd6"
+    },
+    {
+      "sourcePath": "apps/web/test-results/meeting-preparation-email-evidence.png",
+      "mtime": 1791825558.535365,
+      "bytes": 137607,
+      "sha256": "8162917f1385e5ae9e0229e3bda6105f775631a6d3909da6e6049af2cee98feb"
+    },
+    {
+      "sourcePath": "apps/web/test-results/meeting-preparation-mobile-dark.png",
+      "mtime": 1791825537.0586605,
+      "bytes": 47533,
+      "sha256": "cfdac0c40ac1d40565e7707c52deef796a6d56f8485bbccccc31487d28f70d9e"
+    },
+    {
+      "sourcePath": "apps/web/test-results/meeting-preparation-progress.png",
+      "mtime": 1791825503.2415056,
+      "bytes": 130028,
+      "sha256": "0034c272d2d7d55d5f1e2ed6618efb247264e851a03971d574a0fd22f4dc8e72"
+    },
+    {
+      "sourcePath": "apps/web/test-results/meeting-preparation-settings.png",
+      "mtime": 1791825530.6224399,
+      "bytes": 145714,
+      "sha256": "de865ca4e8846f230c78045fd8211cca2edf0cce220df552f5fe3a5c93387237"
+    },
+    {
+      "sourcePath": "apps/web/test-results/meeting-preparation-sources.png",
+      "mtime": 1791825496.4052727,
+      "bytes": 135284,
+      "sha256": "a2ecc9f93f4f79ad6ec9e2ccd41648dfb9ec31aac11a1a05e2cfac861c59a0e7"
+    },
+    {
+      "sourcePath": "apps/web/test-results/planner-list.png",
+      "mtime": 1791824566.0812619,
+      "bytes": 85872,
+      "sha256": "0ec745f49e08846605668978be5c1aa830fd2f292b1a5a2cf9c7895b8907b618"
+    },
+    {
+      "sourcePath": "apps/web/test-results/prospect-brief-conflict.png",
+      "mtime": 1791825991.209869,
+      "bytes": 164878,
+      "sha256": "adb22a882c54b96df0b2680cb1a02b536106f8685160f7e28a00e351f34f2ba1"
+    },
+    {
+      "sourcePath": "apps/web/test-results/prospect-brief-desktop.png",
+      "mtime": 1791825982.3735762,
+      "bytes": 172349,
+      "sha256": "b5dec53f2a8a2ebd0d699cbffd15aac49f3c28d867c0be2fc097cf49611e7e33"
+    },
+    {
+      "sourcePath": "apps/web/test-results/prospect-brief-mobile-dark.png",
+      "mtime": 1791826036.595374,
+      "bytes": 56928,
+      "sha256": "a135b1b2b2c3a4062f6684dff4690b980f09dc8bb51eedc42286c6aab0679811"
+    },
+    {
+      "sourcePath": "apps/web/test-results/prospect-brief-refresh.png",
+      "mtime": 1791826021.7388797,
+      "bytes": 189406,
+      "sha256": "4342a520872804538061417db808fcc8cec3bb56f95ed5f619b0849d69347e75"
+    },
+    {
+      "sourcePath": "apps/web/test-results/prospect-brief-source.png",
+      "mtime": 1791826013.0745924,
+      "bytes": 186378,
+      "sha256": "00d1b41c4418700f38e9d41bd75a5f7a86cdb27e9a441cd4e7ebe597ca662285"
+    },
+    {
+      "sourcePath": "apps/web/test-results/prospect-link-desktop.png",
+      "mtime": 1791826064.4443035,
+      "bytes": 135961,
+      "sha256": "0f3dd4b55e934c664561f305e38e10ab5331dc165d3a34fc722d85122dcf5f16"
+    },
+    {
+      "sourcePath": "apps/web/test-results/prospect-link-phone-dark.png",
+      "mtime": 1791826065.7803478,
+      "bytes": 48821,
+      "sha256": "2aec0f164d32c1679032d8e45b22cebcd15c16d3005d3bc044c274da842f4dae"
+    },
+    {
+      "sourcePath": "apps/web/test-results/prospect-proposals-catalog.png",
+      "mtime": 1791826125.7943702,
+      "bytes": 121342,
+      "sha256": "c0c246fb570df25a54abcb1ee6f6eaca9cf001aaef58226a41646cb662cff203"
+    },
+    {
+      "sourcePath": "apps/web/test-results/prospect-proposals-mobile-dark.png",
+      "mtime": 1791826168.4001548,
+      "bytes": 57178,
+      "sha256": "238f163ac118d0e70fb5e6331757bc4826e2718005c2e1b0a4fe9f4efee50792"
+    },
+    {
+      "sourcePath": "apps/web/test-results/prospect-proposals-preview.png",
+      "mtime": 1791826124.882339,
+      "bytes": 97845,
+      "sha256": "fa8095ffe400ea26fa9664b490e0b9b534501bcabb597ba8113dec7d517acf7c"
+    },
+    {
+      "sourcePath": "apps/web/test-results/prospect-workspace-mobile.png",
+      "mtime": 1791824684.17322,
+      "bytes": 51817,
+      "sha256": "525c35cd744db031441d19b54a65ee66e50e79a84d5fabb166f71a6f0ea13255"
+    },
+    {
+      "sourcePath": "apps/web/test-results/settings-scenes/ai-usage.png",
+      "mtime": 1791824772.096147,
+      "bytes": 102043,
+      "sha256": "095ebe94d121e2034c0c8b957dfd4392b1a8862ba609c6566c0bae8c87b31883"
+    },
+    {
+      "sourcePath": "apps/web/test-results/settings-scenes/billing.png",
+      "mtime": 1791824768.1080155,
+      "bytes": 107955,
+      "sha256": "fe222b709e255ac2f37868f3044f55fcf4c3003d7bba4ee4914496f8b0a19282"
+    },
+    {
+      "sourcePath": "apps/web/test-results/settings-scenes/branding.png",
+      "mtime": 1791824751.447468,
+      "bytes": 57978,
+      "sha256": "3aa15602e0d410839c72d4ec3cea42cd2c4f59079f45ccaeb5166ca3c842e63b"
+    },
+    {
+      "sourcePath": "apps/web/test-results/settings-scenes/contact-info.png",
+      "mtime": 1791824748.0793557,
+      "bytes": 75902,
+      "sha256": "f526dae960e7e7536fb15d5381aef7563da88a8625f8db47dcc41beef78255c3"
+    },
+    {
+      "sourcePath": "apps/web/test-results/settings-scenes/hq-ai-keys.png",
+      "mtime": 1791824787.9406774,
+      "bytes": 71001,
+      "sha256": "fbded12435410d26935869444cbbf02c70a0a7390cd0ff4e600e770bc83224ae"
+    },
+    {
+      "sourcePath": "apps/web/test-results/settings-scenes/hq-analyst.png",
+      "mtime": 1791824804.5812345,
+      "bytes": 92701,
+      "sha256": "90314403cf86faf4369dc1b3ae56a3ead3f8dd187f173b4b6b387ea1913122a4"
+    },
+    {
+      "sourcePath": "apps/web/test-results/settings-scenes/hq-broadcasts.png",
+      "mtime": 1791824791.4087934,
+      "bytes": 69088,
+      "sha256": "fa188e8ada7e2f60dfe6b0e474534a720008644f85daff8ed13326c7ff575b44"
+    },
+    {
+      "sourcePath": "apps/web/test-results/settings-scenes/hq-customers.png",
+      "mtime": 1791824784.9565718,
+      "bytes": 81372,
+      "sha256": "aed396146117ff3845a832f28dfb6c5c2d7891646fc2dd3d3b1161b40d14925d"
+    },
+    {
+      "sourcePath": "apps/web/test-results/settings-scenes/hq-matches.png",
+      "mtime": 1791824801.2891243,
+      "bytes": 75816,
+      "sha256": "d88d5e060f1d626f011bc33da1477c3c377a47d58591dcd737725e683fcc25ac"
+    },
+    {
+      "sourcePath": "apps/web/test-results/settings-scenes/hq-personnel.png",
+      "mtime": 1791824794.7329044,
+      "bytes": 72425,
+      "sha256": "90f77c30590507eda037bdd224b0a4414ca8a2022f5ac308fe3e2467794fea96"
+    },
+    {
+      "sourcePath": "apps/web/test-results/settings-scenes/hq-reconciliation.png",
+      "mtime": 1791824797.7690063,
+      "bytes": 65960,
+      "sha256": "56d70c7548771c0b2b4fb97591ffd852dc53c1e266c9620f592809e0415b7f49"
+    },
+    {
+      "sourcePath": "apps/web/test-results/settings-scenes/hq-tenants.png",
+      "mtime": 1791824781.1764462,
+      "bytes": 64500,
+      "sha256": "0ce927f0f10394b7fb4aa3dc8bcbc832d140b086ad4a286b840f09af26f147af"
+    },
+    {
+      "sourcePath": "apps/web/test-results/settings-scenes/integrations.png",
+      "mtime": 1791824758.4396996,
+      "bytes": 102957,
+      "sha256": "544c674423a699dee4678d166ff653304033f9424b16359132d44dcd85d3b226"
+    },
+    {
+      "sourcePath": "apps/web/test-results/settings-scenes/intelligence-mappings.png",
+      "mtime": 1791824778.2963505,
+      "bytes": 92532,
+      "sha256": "a65589a43bb0728b82d94746a131ea4572125009d69827c7af8d7f322187b6f3"
+    },
+    {
+      "sourcePath": "apps/web/test-results/settings-scenes/memory.png",
+      "mtime": 1791824762.2038236,
+      "bytes": 126961,
+      "sha256": "dfc09677b7c5281e700b3f56887ec6a6276479696e1a1b3f6dd046ea6dcbbe6b"
+    },
+    {
+      "sourcePath": "apps/web/test-results/settings-scenes/meri-preferences.png",
+      "mtime": 1791824765.1559198,
+      "bytes": 122979,
+      "sha256": "663968b68811e06777a6a82f474b4480f857424ab5e9764216a044a785e38f17"
+    },
+    {
+      "sourcePath": "apps/web/test-results/settings-scenes/personal.png",
+      "mtime": 1791824744.8472478,
+      "bytes": 139255,
+      "sha256": "ecce59cca77eadbe495dfbdafd3075913a7d22b9d02be3be52d5fbdc69cf0b7d"
+    },
+    {
+      "sourcePath": "apps/web/test-results/settings-scenes/profiles.png",
+      "mtime": 1791824775.1362467,
+      "bytes": 66703,
+      "sha256": "bb67ccae9957e03880ef3b2bccaa881bd0b10baba2d8d0ad3f55f5fa43dcda87"
+    },
+    {
+      "sourcePath": "apps/web/test-results/settings-scenes/team.png",
+      "mtime": 1791824755.2395942,
+      "bytes": 89230,
+      "sha256": "2bfa16bfb36595395d46d2e6dcc4359ab840496cafc9f8463d28fe5a8393355a"
+    }
+  ]
+}

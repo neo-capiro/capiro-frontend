@@ -1,0 +1,14 @@
+{
+  "sourceCommit": "d5dd0be9bf5ad7800e648ff1421ce047523288b3",
+  "finalQualification": "PASSED_BOUNDED_OFFLINE_GATES",
+  "portfolio": "The portfolio-results.json/log/exit.json directly in this directory belong to the preserved first 30-second attempt; they are NOT the final gate. Final complete 996-case results are in ../portfolio-d5dd-60s/ when copied to the packet.",
+  "historicalStatus": "RUNNING-STATUS.json is the immutable in-progress snapshot from17:04UTC. QUALIFICATION.json and HANDOFF-STATUS.json are the final status.",
+  "finalGates": [
+    "check",
+    "elements",
+    "modules",
+    "build",
+    "production"
+  ],
+  "finalPortfolioEvidence": "../portfolio-d5dd-60s/PORTFOLIO-SUMMARY.json"
+}

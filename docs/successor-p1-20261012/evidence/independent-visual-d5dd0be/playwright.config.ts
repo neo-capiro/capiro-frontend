@@ -1,0 +1,2 @@
+import { defineConfig } from '/workspace/capiro-p1-successor/node_modules/@playwright/test';
+export default defineConfig({testDir:'/tmp/capiro-final-visual-d5dd0be',testMatch:'review.spec.ts',outputDir:'/tmp/capiro-final-visual-d5dd0be/artifacts',webServer:undefined,workers:1,retries:0,reporter:[['list'],['json',{outputFile:'/tmp/capiro-final-visual-d5dd0be/results.json'}]],timeout:45000,use:{baseURL:'http://127.0.0.1:5191',trace:'on',screenshot:'only-on-failure',launchOptions:{executablePath:'/usr/bin/chromium',args:['--disable-dev-shm-usage']}}});
