@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import type { Destinations } from "@/shared/portfolio/config/config";
@@ -34,8 +35,19 @@ export function ProspectsIndex({
     status: status === "all" || status === "dismissed" ? status : "active",
   };
   const query = useProspects(filter);
+  const data =
+    query.isSuccess && query.isFetchedAfterMount && !query.error
+      ? query.data
+      : undefined;
   const catalog = useStageCatalog();
   const owners = useMemberOptions();
+  useEffect(() => {
+    if (!query.error || (!params.has("new") && !params.has("pipeline"))) return;
+    const next = new URLSearchParams(params);
+    next.delete("new");
+    next.delete("pipeline");
+    router.replace(`/portfolio/prospects?${next}`, { scroll: false });
+  }, [params, query.error, router]);
   function set(key: string, value: string) {
     const next = new URLSearchParams(params);
     if (value) next.set(key, value);
@@ -50,12 +62,14 @@ export function ProspectsIndex({
             <p className="eyebrow">Portfolio</p>
             <h1>
               Prospects{" "}
-              {query.data && (
-                <span className="muted">{query.data.counts.visible}</span>
-              )}
+              {data && <span className="muted">{data.counts.visible}</span>}
             </h1>
           </div>
-          <button className="button primary" onClick={() => set("new", "1")}>
+          <button
+            className="button primary"
+            disabled={!data}
+            onClick={() => set("new", "1")}
+          >
             + Add prospect
           </button>
         </header>
@@ -109,37 +123,37 @@ export function ProspectsIndex({
           </select>
           <button
             className="button"
-            disabled={!query.data}
+            disabled={!data}
             onClick={() => set("pipeline", "1")}
           >
             Pipeline
           </button>
         </div>
         <QueryState
-          pending={query.isPending}
+          pending={
+            query.isPending || (!query.isFetchedAfterMount && query.isFetching)
+          }
           error={query.error}
           retry={() => void query.refetch()}
         />
-        {query.data && (
+        {data && (
           <>
             <div className="row" aria-label="Stage totals">
-              {Object.entries(query.data.counts.byStage).map(
-                ([stage, count]) => (
-                  <span className="chip" key={stage}>
-                    {stageLabel(stage)} · {count}
-                  </span>
-                ),
-              )}
+              {Object.entries(data.counts.byStage).map(([stage, count]) => (
+                <span className="chip" key={stage}>
+                  {stageLabel(stage)} · {count}
+                </span>
+              ))}
             </div>
-            {query.data.counts.visible > query.data.prospects.length && (
+            {data.counts.visible > data.prospects.length && (
               <p role="status">
-                Showing the latest {query.data.prospects.length} of{" "}
-                {query.data.counts.visible} matching prospects. Narrow the
-                filters to find older records.
+                Showing the latest {data.prospects.length} of{" "}
+                {data.counts.visible} matching prospects. Narrow the filters to
+                find older records.
               </p>
             )}
             <div className={styles.cards}>
-              {query.data.prospects.map((prospect) => (
+              {data.prospects.map((prospect) => (
                 <Link
                   className={styles.card}
                   key={prospect.id}
@@ -174,12 +188,12 @@ export function ProspectsIndex({
                 </Link>
               ))}
             </div>
-            {!query.data.prospects.length && (
+            {!data.prospects.length && (
               <p className="empty">No prospects match this view.</p>
             )}
           </>
         )}
-        {params.has("new") && (
+        {data && params.has("new") && (
           <ProspectEditor
             onClose={() => set("new", "")}
             onSaved={(record) =>
@@ -187,9 +201,9 @@ export function ProspectsIndex({
             }
           />
         )}
-        {params.has("pipeline") && query.data && (
+        {params.has("pipeline") && data && (
           <ProspectPipeline
-            data={query.data}
+            data={data}
             catalog={catalog.data}
             error={catalog.error}
             onClose={() => set("pipeline", "")}
