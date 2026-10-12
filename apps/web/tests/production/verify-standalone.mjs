@@ -18,7 +18,8 @@ for (const [path, status, text] of [
   ["/api/backend/core/clients", 503, ""],
   ["/", 200, "Portfolio setup required"],
   ["/modules", 200, "Connection setup required"],
-  ["/settings", 200, "Connection setup required"],
+  ["/settings", 307, ""],
+  ["/settings/personal", 200, "Connection setup required"],
   ["/api/capiro/me.read", 503, ""],
 ]) {
   const response = await fetch(origin + path, {
@@ -26,6 +27,8 @@ for (const [path, status, text] of [
     signal: AbortSignal.timeout(10_000),
   });
   assert.equal(response.status, status, path);
+  if (path === "/settings")
+    assert.equal(response.headers.get("location"), "/settings/personal");
   assert.ok((await response.text()).includes(text), path);
   assert.equal(response.headers.get("x-content-type-options"), "nosniff", path);
   assert.equal(response.headers.get("x-frame-options"), "DENY", path);
