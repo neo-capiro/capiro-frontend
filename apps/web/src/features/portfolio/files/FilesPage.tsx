@@ -1,12 +1,11 @@
 "use client";
 import { useState } from "react";
 import type { Destinations } from "@/shared/portfolio/config/config";
-import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { useClient } from "@/features/portfolio/index/public";
 import { useFiles } from "./queries";
 import { filterFiles } from "./contracts";
-import { useFileChange } from "./mutations";
+import { DeleteFile } from "./DeleteFile";
 import { FileTable, type FileAction } from "./FileTable";
 import { FilePreview } from "./FilePreview";
 import { FileAccess } from "./FileAccess";
@@ -51,7 +50,6 @@ export function FilesPage({
     arrival.dismiss();
     setAction(undefined);
   };
-  const mutation = useFileChange(clientId, close);
   const available = query.isSuccess && !query.error;
   const files = available ? query.data : [];
   const currentFile =
@@ -248,25 +246,17 @@ export function FilesPage({
           onClose={close}
         />
       )}
-      <Dialog
-        open={action?.kind === "delete"}
-        title="Delete file"
-        description={`Delete ${action?.file.fileName ?? "this file"}? This removes the attachment and its stored object.`}
-        onOpenChange={(open) => {
-          if (!open && !mutation.isPending) close();
-        }}
-      >
-        <QueryState error={mutation.error} />
-        <button
-          className="button primary"
-          disabled={mutation.isPending}
-          onClick={() => {
-            if (action) mutation.mutate({ kind: "delete", id: action.file.id });
-          }}
-        >
-          Confirm delete
-        </button>
-      </Dialog>
+      {requestedAction?.kind === "delete" &&
+        requestedAction.view === query.readerScope &&
+        available && (
+          <DeleteFile
+            key={`${query.readerScope}:${requestedAction.id}`}
+            clientId={clientId}
+            id={requestedAction.id}
+            fileName={currentFile?.fileName}
+            onClose={close}
+          />
+        )}
       {uploadView === query.readerScope && available && (
         <UploadDialog
           clientId={clientId}
