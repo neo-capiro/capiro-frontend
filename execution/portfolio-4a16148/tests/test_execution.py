@@ -163,6 +163,7 @@ class RunnerTests(unittest.TestCase):
         env = {'EXPECTED_SHA': runner.SOURCE, 'EXPECTED_S3_VERSION': 'v', 'CODEBUILD_SOURCE_VERSION': 'v',
                'REPOSITORY_URI': runner.REPOSITORY, 'AWS_DEFAULT_REGION': 'us-east-1',
                'CAPIRO_MAX_IMAGE_BYTES': '100', 'CAPIRO_MAX_LOG_BYTES': '10000',
+               'CAPIRO_EXECUTION_ID': EXECUTION, 'CODEBUILD_BUILD_ID': BUILD_ID,
                'CAPIRO_STOP_EPOCH': str(int(time.time())+300)}
         env.update(env_changes or {})
         def command(argv, deadline, budget, **kwargs):

@@ -21,12 +21,21 @@ class BoundExceeded(RuntimeError):
 class OutputBudget:
     def __init__(self, limit, output=None):
         self.remaining = limit
+        self.limit = limit
+        self.stdout_bytes = 0
+        self.stderr_bytes = 0
         self.output = output if output is not None else sys.stdout.buffer
+        self.error_output = output if output is not None else sys.stderr.buffer
 
-    def emit(self, data):
+    def emit(self, data, stream="stdout"):
         allowed = min(len(data), self.remaining)
-        self.output.write(data[:allowed])
-        self.output.flush()
+        output = self.error_output if stream == "stderr" else self.output
+        output.write(data[:allowed])
+        output.flush()
+        if stream == "stderr":
+            self.stderr_bytes += allowed
+        else:
+            self.stdout_bytes += allowed
         self.remaining -= allowed
         if allowed < len(data):
             raise BoundExceeded("Build command output exceeded the reviewed byte limit")
@@ -50,21 +59,23 @@ def terminate_group(process):
 
 
 def run(argv, deadline, budget, *, capture_limit=0, secret=False, input_data=None):
-    """Drain merged bytes incrementally; fail rather than hide excess output."""
+    """Drain both streams incrementally against one shared output budget."""
     if time.monotonic() >= deadline:
         raise BoundExceeded("Execution deadline reached before command")
     if not secret:
         budget.emit(("GATE " + argv[0] + "\n").encode())
-    process = subprocess.Popen(argv, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+    process = subprocess.Popen(argv, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                stdin=subprocess.PIPE if input_data is not None else subprocess.DEVNULL,
                                start_new_session=True)
     captured = bytearray()
+    captured_bytes = 0
     try:
         if input_data is not None:
             if len(input_data) > 16384:
                 raise BoundExceeded("Credential input exceeds bounded pipe allowance")
         with selectors.DefaultSelector() as selector:
             selector.register(process.stdout, selectors.EVENT_READ)
+            selector.register(process.stderr, selectors.EVENT_READ)
             pending_input = memoryview(input_data or b"")
             if process.stdin is not None:
                 os.set_blocking(process.stdin.fileno(), False)
@@ -87,11 +98,13 @@ def run(argv, deadline, budget, *, capture_limit=0, secret=False, input_data=Non
                         selector.unregister(key.fileobj)
                         continue
                     if capture_limit:
-                        if len(captured) + len(chunk) > capture_limit:
+                        captured_bytes += len(chunk)
+                        if captured_bytes > capture_limit:
                             raise BoundExceeded("Command response exceeds capture limit")
-                        captured.extend(chunk)
+                        if key.fileobj is process.stdout:
+                            captured.extend(chunk)
                     if not secret:
-                        budget.emit(chunk)
+                        budget.emit(chunk, "stderr" if key.fileobj is process.stderr else "stdout")
                 if process.poll() is not None and not selector.get_map():
                     break
         status = process.wait(timeout=max(0.01, deadline - time.monotonic()))
@@ -103,6 +116,7 @@ def run(argv, deadline, budget, *, capture_limit=0, secret=False, input_data=Non
         raise
     finally:
         process.stdout.close()
+        process.stderr.close()
         if process.stdin is not None:
             process.stdin.close()
 
@@ -122,6 +136,27 @@ def assert_image_size(raw, maximum):
     if size > maximum:
         raise BoundExceeded(f"Image .Size {size} exceeds reviewed maximum {maximum}; push refused")
     return size
+
+
+def emit_control_gate(env, budget, size, maximum):
+    """Atomic bounded receipt; counters include this receipt, before publication."""
+    value = {"schemaVersion": 1, "stage": "pre_push", "buildId": env["CODEBUILD_BUILD_ID"],
+             "executionId": env["CAPIRO_EXECUTION_ID"], "sourceSHA": SOURCE,
+             "s3Version": env["EXPECTED_S3_VERSION"], "imageBoundBytes": size,
+             "imageMeasure": "docker.image.Size", "stdoutBytes": budget.stdout_bytes,
+             "stderrBytes": budget.stderr_bytes, "imageLimitBytes": maximum,
+             "outputLimitBytes": budget.limit, "guardPass": True}
+    # Account for the receipt's own bytes, including decimal counter width changes.
+    for _ in range(5):
+        encoded = ("CAPIRO_CONTROL_GATE " + json.dumps(value, separators=(",", ":")) + "\n").encode()
+        count = budget.stdout_bytes + len(encoded)
+        if count == value["stdoutBytes"]:
+            if len(encoded) > 4096 or len(encoded) > budget.remaining:
+                raise BoundExceeded("Pre-push control receipt exceeds output allowance; push refused")
+            budget.emit(encoded)
+            return
+        value["stdoutBytes"] = count
+    raise BoundExceeded("Pre-push control receipt byte count did not stabilize")
 
 
 def gates():
@@ -147,6 +182,10 @@ def execute(environment=None, command=run):
         raise ValueError("Source S3 version does not match reviewed custody")
     if env.get("REPOSITORY_URI") != REPOSITORY or env.get("AWS_DEFAULT_REGION") != "us-east-1":
         raise ValueError("Unexpected repository or region")
+    if not re.fullmatch(r"capiro-4a-[a-f0-9-]{36}", env.get("CAPIRO_EXECUTION_ID", "")):
+        raise ValueError("Missing or invalid execution identity")
+    if not re.fullmatch(r"capiro-portfolio-preview-build:[a-f0-9-]{36}", env.get("CODEBUILD_BUILD_ID", "")):
+        raise ValueError("Missing or invalid CodeBuild identity")
     maximum = positive_integer(env.get("CAPIRO_MAX_IMAGE_BYTES"), "Maximum image bytes")
     budget = OutputBudget(positive_integer(env.get("CAPIRO_MAX_LOG_BYTES"), "Maximum log bytes"))
     stop_epoch = positive_integer(env.get("CAPIRO_STOP_EPOCH"), "Supervised stop epoch")
@@ -160,7 +199,7 @@ def execute(environment=None, command=run):
     image = f"{REPOSITORY}:{SOURCE}"
     raw = command(["docker", "image", "inspect", "--format", "{{.Size}}", image], deadline, budget, capture_limit=64)
     size = assert_image_size(raw, maximum)
-    budget.emit((json.dumps({"imageSizeBytes": size, "maximumBytes": maximum, "metric": "docker.image.Size", "prePushGate": "PASS"}) + "\n").encode())
+    emit_control_gate(env, budget, size, maximum)
     password = command(["aws", "ecr", "get-login-password", "--region", "us-east-1", "--cli-connect-timeout", "5", "--cli-read-timeout", "10"], min(deadline, time.monotonic()+20), budget, capture_limit=16384, secret=True)
     command(["docker", "login", "--username", "AWS", "--password-stdin", REPOSITORY.split('/')[0]], min(deadline, time.monotonic()+20), budget, input_data=password)
     command(["docker", "push", image], deadline, budget)

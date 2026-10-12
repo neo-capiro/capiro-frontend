@@ -1,0 +1,66 @@
+{
+  "sourceArchive": "/tmp/capiro-image-proposal-4a16148/source-4a16148.zip",
+  "frozenSourceCommitMember": {
+    "filename": "source-commit.txt",
+    "date_time": [
+      2026,
+      10,
+      12,
+      0,
+      0,
+      0
+    ],
+    "create_system": 3,
+    "create_version": 20,
+    "extract_version": 20,
+    "external_attr": 2175008768,
+    "internal_attr": 0,
+    "flag_bits": 0,
+    "compress_type": 8,
+    "CRC": 3864300443,
+    "compress_size": 42,
+    "file_size": 41,
+    "header_offset": 451252330,
+    "extraHex": "",
+    "commentHex": "",
+    "bodySHA256": "409a914960dbca84146e6f6354cbdd4f551a55e2db358d52c78275c8ca461821",
+    "archiveComment": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+    "entryCount": 4940,
+    "nondirectoryCount": 4156
+  },
+  "demonstration": {
+    "scope": "Tiny isolated archive only; does not mutate or replace frozen ZIP or establish Windows archive cause",
+    "variants": [
+      {
+        "create_system": 3,
+        "bytes": 174,
+        "sha256": "c9f37f58df5208144553e87249cf4a2cfb4519eb9beeb41f296c368396e2ecfa",
+        "crc": 3864300443,
+        "crcCheck": null,
+        "uncompressedMatchesFrozen": true,
+        "compressedSize": 42
+      },
+      {
+        "create_system": 0,
+        "bytes": 174,
+        "sha256": "63f2d4aaacd2e8facee4e3afc65d5f54e5f1c7dc7fb045545f1cc7f1a9379933",
+        "crc": 3864300443,
+        "crcCheck": null,
+        "uncompressedMatchesFrozen": true,
+        "compressedSize": 42
+      }
+    ],
+    "differingByteOffsets": [
+      94
+    ],
+    "singleDifferingBytes": [
+      {
+        "offset": 94,
+        "unix": 3,
+        "windows": 0
+      }
+    ]
+  },
+  "localPython": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "localZlib": "1.3.2"
+}
