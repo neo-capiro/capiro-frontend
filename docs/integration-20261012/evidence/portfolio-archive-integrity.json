@@ -1,0 +1,63 @@
+{
+  "verifiedAt": "2026-10-12T03:51:44.588941+00:00",
+  "scope": "Read-only archive/delivery integrity; no history import, context materialization or worktree restoration performed by integration owner.",
+  "archive": "docs/portfolio-31/handover-2026-10-12",
+  "ownerHead": "c330cebbd021eb984b4bf64ae13dbb991ae6b1c0",
+  "identicalGitSubtree": "67b25ecb1eac4d4dd618748f51660e004f5a7028",
+  "directInventoryFilesVerified": 477,
+  "directInventoryBytesVerified": 360325228,
+  "selfPublicationExclusions": [
+    "DELIVERY-INVENTORY.json",
+    "PUBLICATION.json"
+  ],
+  "transportPartsVerified": 8,
+  "reassembledOriginalHashesVerifiedInMemory": [
+    {
+      "path": "manifest.json",
+      "bytes": 15762225,
+      "sha256": "c23fb2a329d4a6c314ef41bec572603049e2601168579b86d2dd94bba4aa2575"
+    },
+    {
+      "path": "packs/context-00005.tar.gz",
+      "bytes": 20401940,
+      "sha256": "930a0d1bc7ab99ba06996a35a65d3af0dce1466e28d495f218c2e2704c4aa8ac"
+    },
+    {
+      "path": "packs/context-00132.tar.gz",
+      "bytes": 19860818,
+      "sha256": "3d4b12a71d25920ebb8e652a93dd897139e4bc329fed35b9da6e26a909070c02"
+    }
+  ],
+  "pinnedFiles": {
+    "history/portfolio-continuation-760dcc6-requires-02c02d9.bundle": {
+      "sha256": "591d293dee1b903e31c70e8b659beae928b04d4c1ed87c8e7a6e27416eabc8af",
+      "bytes": 1389324
+    },
+    "context-delivery.json": {
+      "sha256": "2e64be7670e860809a63781e17e683f1d1a10ad5857a23b5bce305e7c3e09ed5",
+      "bytes": 2116
+    },
+    "DELIVERY-INVENTORY.json": {
+      "sha256": "2a7c8b4b4a61739dae3baf6bd81572295dc2d4f6597b631ec621f7c78d62d74a",
+      "bytes": 133395
+    },
+    "history/qualified-history-restoration.json": {
+      "sha256": "de4ca7729497303349ec742f6a61c42119b15ea3648df03dca5f2f08cad71f5b",
+      "bytes": 13865
+    },
+    "receipts/context-delivery-qualification.json": {
+      "sha256": "afb7cbd1faeb69c23dcab189879d1d9c9704084d42b9a48e60157eb9c5efd0a3",
+      "bytes": 7620
+    },
+    "receipts/context/self-check-final-receipt.json": {
+      "sha256": "ac27062d06b39205a583c4194e2bdf230f9b99002abab4868ceae2bbed023e8c",
+      "bytes": 854
+    }
+  },
+  "historyBundleVerifyLog": "evidence/candidate-9fa5e2c/portfolio-history-bundle-verify.txt",
+  "ownerRestorationEvidence": {
+    "qualified-history-restoration.json": "Original owner recorded isolated prerequisite clone/import, exact head/tree,33 continuation commits,git fsck --full; all exits0.",
+    "context-delivery-qualification.json": "Original owner recorded reconstruction of370 package files and verification of35264 paths,9729 content blobs,166 packs,202 metadata files; all refusal controls passed.",
+    "self-check-final-receipt.json": "Eight synthetic preservation-tool checks including exact new-target restore, executable mode, deleted-path absence, overwrite/traversal/link refusal. Not a full real-context working-copy restore."
+  }
+}
