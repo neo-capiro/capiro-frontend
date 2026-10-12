@@ -246,25 +246,72 @@ test("changed selected preparation is refused before sharing", async ({
 });
 test("actor replacement during held preflight produces zero writes", async ({
   page,
-}) => {
+}, testInfo) => {
   const { state } = await setup(page);
   await openSharing(page);
   const dialog = await choosePrepAndFile(page);
   const pause = held();
   const before = state.reads;
   state.readHold = pause.promise;
+  const requested = page.waitForRequest(
+    (request) =>
+      request.method() === "GET" &&
+      new URL(request.url()).pathname.endsWith(
+        `/engagement/meetings/${sharingMeeting.id}`,
+      ),
+  );
   await dialog
     .getByRole("button", { name: "Confirm: Share selected artifacts" })
     .click();
+  const preflight = await requested;
   await expect.poll(() => state.reads).toBeGreaterThan(before);
+  await page.waitForFunction(
+    () =>
+      (
+        window as unknown as {
+          __sharingTest: { originalSharingAttempt: () => string | undefined };
+        }
+      ).__sharingTest.originalSharingAttempt() === "pending",
+  );
   await page.evaluate(() =>
     (
       window as unknown as { __sharingTest: { replaceActor: () => void } }
     ).__sharingTest.replaceActor(),
   );
   pause.release();
+  // Actor replacement can abort this exact GET instead of delivering its body.
+  // Observe both its network outcome and the original action's terminal state;
+  // dialog removal alone only proves that the replacement workspace mounted.
+  const response = await preflight.response();
+  const completionError = response
+    ? await response.finished()
+    : preflight.failure();
+  if (completionError)
+    expect(
+      "errorText" in completionError
+        ? completionError.errorText
+        : completionError.message,
+    ).toContain("ERR_ABORTED");
+  else expect(response).not.toBeNull();
+  await page.waitForFunction(
+    () =>
+      (
+        window as unknown as {
+          __sharingTest: { originalSharingAttempt: () => string | undefined };
+        }
+      ).__sharingTest.originalSharingAttempt() === "refused",
+  );
   await expect(dialog).toHaveCount(0);
   expect(state.writes).toEqual([]);
+  await testInfo.attach("preflight-completion.json", {
+    body: JSON.stringify({
+      url: preflight.url(),
+      network: completionError ? "aborted" : "finished",
+      originalAttempt: "refused",
+      writes: state.writes,
+    }),
+    contentType: "application/json",
+  });
 });
 test("client shared feed lists only server-shared metadata without opening owner details or invented downloads", async ({
   page,

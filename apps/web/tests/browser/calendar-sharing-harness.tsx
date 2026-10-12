@@ -3,6 +3,11 @@ import { createRoot } from "react-dom/client";
 import { useQueryClient } from "@tanstack/react-query";
 import { DataProvider } from "@/shared/portfolio/api/provider";
 import { CalendarPage } from "@/features/portfolio/calendar/CalendarPage";
+import {
+  sharingAttemptKey,
+  type SharingAttempt,
+} from "@/features/portfolio/calendar/sharing/fence";
+import { sharingMeeting } from "../calendar-sharing-fixtures";
 import "@/app/globals.css";
 import "@/shared/portfolio/styles.css";
 import "./test-font.css";
@@ -11,6 +16,13 @@ function Harness() {
   useEffect(() => {
     Object.assign(window, {
       __sharingTest: {
+        originalSharingAttempt: () =>
+          cache.getQueryData<SharingAttempt>(
+            sharingAttemptKey(sharingMeeting, {
+              userId: "user-test",
+              tenantId: "tenant-test",
+            }),
+          )?.status,
         replaceActor: () =>
           cache.setQueryData(["identity"], {
             user: {
