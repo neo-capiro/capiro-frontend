@@ -45,6 +45,10 @@ export function FollowUpStatus({
             <p>An attempt is in progress. Wait and read the command again.</p>
           )}
         </>
+      ) : command.busy ? (
+        <p role="status">
+          Checking the original activity and follow-up command…
+        </p>
       ) : (
         <p role="status">
           The save result is not confirmed. The original request is retained.
@@ -86,9 +90,8 @@ export function FollowUpStatus({
             type="button"
             className="button primary"
             disabled={command.busy}
-            onClick={() => {
-              command.finish();
-              onDone();
+            onClick={async () => {
+              if (await command.finish()) onDone();
             }}
           >
             Done

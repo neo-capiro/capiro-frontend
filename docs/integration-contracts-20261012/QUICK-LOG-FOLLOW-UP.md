@@ -53,10 +53,12 @@ is invented; only the current verified task ID is displayed. Ordinary logging
 retains its existing Undo. The durable activity/task pair has no compensating
 browser Undo, since deleting one side would not undo the other.
 
-Pending input currently lives in the scoped in-memory application cache and
+At the failed 6b7abd/eabc8bf/b5028cf milestones, pending input lived in the scoped in-memory application cache and
 survives dialog closure. It is cleared on application identity/client replacement;
-full document/browser restart persistence is not implemented or qualified. The
+full document/browser restart persistence was not implemented or qualified. The independent reload control demonstrated a duplicate-write defect; this historical limitation is not an accepted substitute for repair. The
 visible request ID and backend command remain durable, but this candidate must not
 be described as browser-restart recovery. Native Core/Planner/RLS/migration,
 real session recovery, exact final combined build/browser and Figma acceptance
 remain unrun. All 337 Portfolio rows remain unaccepted.
+
+The source repair is specified in [COMMAND-RESTART-RECOVERY.md](COMMAND-RESTART-RECOVERY.md). It adds a guarded durable original-intent journal before dispatch. Historical focused passes above do not qualify that new source or the final application.

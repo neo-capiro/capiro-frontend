@@ -446,15 +446,6 @@
     "reviewedOn": "2026-10-11"
   },
   {
-    "file": "apps/web/src/features/portfolio/client-profile/QuickLog.tsx",
-    "kind": "function",
-    "symbol": "QuickLog",
-    "fingerprint": "c865623a6c851c7f36936fccbb4341309e712d10af66dad2293a0a5121cb5569",
-    "reason": "This 180-line form retains the five ordinary activity kinds and legacy logging/Undo owner. It optionally composes the generic follow-up fields and command status, delegating durable request lifetime and all HTTP/receipt logic to specific modules. The form only reads named inputs, selects one of the two explicitly different supported operations, and prevents ordinary writes while a command is pending. Meeting navigation and no-Commitment scope remain. No Planner transport, association policy or recovery algorithm lives in the container.",
-    "reviewedBy": "Codex shared frontend integration owner (source review)",
-    "reviewedOn": "2026-10-12"
-  },
-  {
     "file": "apps/web/src/features/portfolio/client-profile/tags/FocusTags.tsx",
     "kind": "function",
     "symbol": "FocusTagSession",
@@ -1357,33 +1348,6 @@
     "reviewedOn": "2026-10-12"
   },
   {
-    "file": "apps/web/src/features/portfolio/client-profile/quick-log/FollowUpStatus.tsx",
-    "kind": "function",
-    "symbol": "FollowUpStatus",
-    "fingerprint": "fcfe3f1deede3eeda23ebf842cdc4523b3d89f2c3a472e58bb582bf04fecff59",
-    "reason": "This 91-line presentation renders one command outcome and its supported next actions: separate activity/task state, diagnostic reason, read, original-key recovery, explicit resume or completion. It owns no network, storage, authority or version mutation. The conditional output is one receipt state view and is checked with malformed, partial, unavailable and uncertain browser cases.",
-    "reviewedBy": "Codex shared frontend integration owner (source review)",
-    "reviewedOn": "2026-10-12"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/client-profile/quick-log/useFollowUpCommand.ts",
-    "kind": "function",
-    "symbol": "useFollowUpCommand",
-    "fingerprint": "6b7ed8cb68c6114a3c4d19b18a24d26a0144f73473ab947988bbfee94c7a3c98",
-    "reason": "This 184-line hook owns the scoped lifetime of one durable Core command, using the existing application query cache. Original input is retained before dispatch, interrupted views retain the pending command, and changed identities/clients use separate scopes under the canonical application reset boundary. Pure contracts and guarded Core operations live separately; this hook owns UI transition and cancellation, not Planner or backend authorization. No general orchestration abstraction or second task owner is introduced.",
-    "reviewedBy": "Codex shared frontend integration owner (source review)",
-    "reviewedOn": "2026-10-12"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/client-profile/quick-log/useFollowUpCommand.ts",
-    "kind": "function",
-    "symbol": "useFollowUpCommand > run",
-    "fingerprint": "76833d93d277e5be300bc1de93233085d75bdb0592008c9616455922e668cc75",
-    "reason": "This 99-line transition captures the exact current pending command, serializes one explicit operation, clears stale success presentation, delegates to the guarded Core create/read/resume functions, and records only validated results. Recovery reuses the original body/key; resume requires a fresh read version. The operation token coordinates cancellation and cache publication across dialog closure. Keeping these dependent state transitions together makes the no-replay and no-stale-success ordering reviewable; it does not select unrelated providers or workflows.",
-    "reviewedBy": "Codex shared frontend integration owner (source review)",
-    "reviewedOn": "2026-10-12"
-  },
-  {
     "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
     "kind": "function",
     "symbol": "DraftEditor",
@@ -1444,6 +1408,51 @@
     "fingerprint": "aaac70852048a0bfd34aa37950c725c0419d1f114655861669e1e0cc7ce6b739",
     "reason": "One upload protocol binds exact prospect/actor metadata and byte digest to the original intent, submits its untouched presigned fields at most once, and validates the original confirmation. Preparation/hash and list/delete are separate. The stage branches share one retained attempt and cancellation guard; splitting phases into unrelated hooks would risk replacement keys or duplicate bytes after uncertain storage. This is one bounded transport orchestration, not a new service or retry framework.",
     "reviewedBy": "Codex shared frontend integration owner (source review)",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/QuickLog.tsx",
+    "kind": "function",
+    "symbol": "QuickLog",
+    "fingerprint": "e582ed8617e436f13f83c017161541cae717cb5ad14c1522e428afaa4066e99b",
+    "reason": "This component remains the one ordinary-activity/optional-follow-up form. The added checking and hold presentations hide restored input until current Core authority and journal consistency pass. Field remounting follows the retained request identity; FollowUpFields and FollowUpStatus own specialized rendering, and useFollowUpCommand owns command lifetime. No storage or network implementation moved into the form.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/quick-log/FollowUpStatus.tsx",
+    "kind": "function",
+    "symbol": "FollowUpStatus",
+    "fingerprint": "492843993e8de8f7798f9e1c8720837fd6f5a0967edbc004a187ddacb6f0772e",
+    "reason": "This renderer presents one retained command and its independently validated activity/task outcome. Busy text now describes an in-flight check instead of claiming response loss before dispatch. Explicit Read, Recover, Resume and acknowledged Done remain calls into the single lifecycle owner; this function performs no transport or persistence.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/quick-log/useCommandRecovery.ts",
+    "kind": "function",
+    "symbol": "useCommandRecovery",
+    "fingerprint": "3e7e5c1fc2eed080f50121a3e66f5ad8358573a0bac21354520703d468b0fc5c",
+    "reason": "This hook owns one current-context hydration transition: fresh Core authority, guarded journal read, scoped install or visible hold. Abort cleanup and the scope/open/retry token prevent stale hydration from displaying former input. Journal storage/cryptography and Core validation have separate owners. Its 82-line size arises from explicit dependencies and failure states, not unrelated behavior.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/quick-log/useFollowUpCommand.ts",
+    "kind": "function",
+    "symbol": "useFollowUpCommand",
+    "fingerprint": "a192413368a1005fe9db5f9c2c5aec721fda757fb08292c782ec7a0a62d4ffd5",
+    "reason": "This hook coordinates one durable follow-up command lifetime across current view, scoped query state and explicit user actions. Core protocol validation/dispatch is in command-actions, restart hydration in useCommandRecovery, and transaction/encryption consistency in the shared journal. Start, read, replay, resume and acknowledged completion share the same immutable intent, receipt lineage and cancellation guard; extracting arbitrary flags would fragment these invariants. No ordinary logger, Planner implementation, session issuer or storage algorithm is embedded here.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/quick-log/useFollowUpCommand.ts",
+    "kind": "function",
+    "symbol": "useFollowUpCommand > run",
+    "fingerprint": "a7824978aad5641b0f3c187d65702a225821bf79480c0a62345f39447ca7a5a1",
+    "reason": "This is the ordered state transition for one explicit command operation. It verifies current authority, reserves/reads the canonical original journal, dispatches the existing Core command operation, durably records validated lineage and then publishes the receipt. All steps use one lifetime guard and original request identity; pre-dispatch failure, uncertain dispatch and storage refusal remain distinct. Wire semantics, schema validation and persistence transactions are separate owners. Its sequencing is intentionally contiguous for review.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
     "reviewedOn": "2026-10-12"
   }
 ]

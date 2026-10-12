@@ -3,8 +3,21 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { z } from "zod";
 import { useApi } from "@/shared/portfolio/api/provider";
+import { ApiError } from "@/shared/portfolio/api/http";
 import { useIdentity } from "@/shared/portfolio/auth/identity";
 import { assertClientWriter, currentClientWriter } from "./authority";
+import {
+  acknowledgeRecovery,
+  readRecovery,
+  reserveRecovery,
+  updateRecovery,
+  RecoveryStorageError,
+} from "@/shared/portfolio/recovery/journal";
+import {
+  retainedCommandContract,
+  verifyCommandAuthority,
+} from "./command-recovery";
+import { useCommandRecovery } from "./useCommandRecovery";
 import { profileKey } from "../profile-keys";
 import type { QuickLogInput } from "./contracts";
 import {
@@ -67,13 +80,28 @@ export function useFollowUpCommand(clientId: string, open: boolean) {
       operation.current = null;
     };
   }, [cache, scope, open]);
-  const pending = cached.data ?? null;
+  const recovery = useCommandRecovery(
+    api,
+    cache,
+    actor,
+    clientId,
+    open,
+    (record) => {
+      cache.setQueryData(
+        key,
+        record ? { ...record, readFresh: false, readAttempted: false } : null,
+      );
+    },
+  );
+  const pending = recovery.ready ? (cached.data ?? null) : null;
   async function run(kind: Operation, input?: ActivityCommandInput) {
     const controller = lifetime.current;
     const saved = cache.getQueryData<PendingCommand | null>(key);
     if (
       !open ||
       !actor ||
+      !recovery.ready ||
+      !recovery.scope ||
       !controller ||
       controller.signal.aborted ||
       operation.current ||
@@ -83,7 +111,7 @@ export function useFollowUpCommand(clientId: string, open: boolean) {
       return;
     if (kind === "recover" && (!saved?.readAttempted || saved.receipt)) return;
     if (kind === "resume" && (!saved?.readFresh || !saved.receipt)) return;
-    const original: PendingCommand = saved ?? {
+    let original: PendingCommand = saved ?? {
       input: input!,
       known: {},
       readFresh: false,
@@ -105,17 +133,51 @@ export function useFollowUpCommand(clientId: string, open: boolean) {
       controller.signal.throwIfAborted();
       assertClientWriter(cache, actor);
     };
-    const context = {
-      actor,
-      clientId,
-      input: original.input,
-      known: original.known,
-    };
     let dispatched = false;
     const mark = () => {
       dispatched = true;
     };
+    let authorityVerified = false;
+    let durable = Boolean(saved);
     try {
+      await verifyCommandAuthority(
+        api,
+        actor,
+        clientId,
+        controller.signal,
+        guard,
+      );
+      authorityVerified = true;
+      const retained =
+        kind === "create"
+          ? await reserveRecovery(
+              recovery.scope,
+              original.input.requestId,
+              { input: original.input, known: original.known },
+              retainedCommandContract,
+              guard,
+            )
+          : await readRecovery(recovery.scope, retainedCommandContract, guard);
+      guard();
+      if (!retained) throw new RecoveryStorageError();
+      durable = true;
+      if (retained.input.requestId !== original.input.requestId) {
+        cache.setQueryData(key, {
+          ...retained,
+          readFresh: false,
+          readAttempted: false,
+          error:
+            "An original command was restored from another view. Read it before continuing.",
+        });
+        return;
+      }
+      original = { ...original, ...retained };
+      const context = {
+        actor,
+        clientId,
+        input: original.input,
+        known: original.known,
+      };
       const receipt =
         kind === "read"
           ? await readActivityCommand(api, context, controller.signal, guard)
@@ -136,17 +198,26 @@ export function useFollowUpCommand(clientId: string, open: boolean) {
                 mark,
               );
       guard();
+      const known = {
+        commandId: receipt.commandId,
+        activityId: receipt.activity.id,
+        version: receipt.version,
+        taskId: receipt.followUp?.taskId ?? original.known.taskId,
+      };
+      await updateRecovery(
+        recovery.scope,
+        original.input.requestId,
+        { input: original.input, known },
+        retainedCommandContract,
+        guard,
+      );
+      guard();
       cache.setQueryData(key, {
         ...active,
         busy: undefined,
         receipt,
         readFresh: kind === "read",
-        known: {
-          commandId: receipt.commandId,
-          activityId: receipt.activity.id,
-          version: receipt.version,
-          taskId: receipt.followUp?.taskId ?? original.known.taskId,
-        },
+        known,
       });
     } catch (cause) {
       if (controller.signal.aborted) return;
@@ -154,7 +225,13 @@ export function useFollowUpCommand(clientId: string, open: boolean) {
         cause instanceof Error
           ? cause.message
           : "The activity command could not be confirmed.";
-      if (kind === "create" && !dispatched) {
+      if (
+        !authorityVerified ||
+        cause instanceof RecoveryStorageError ||
+        (cause instanceof ApiError && [401, 403].includes(cause.status))
+      )
+        recovery.block(message);
+      if (kind === "create" && !durable) {
         cache.setQueryData(key, null);
         setFailure({ scope, message });
       } else
@@ -199,7 +276,11 @@ export function useFollowUpCommand(clientId: string, open: boolean) {
     error:
       pending?.error ??
       (failure?.scope === scope ? failure.message : undefined),
-    ready: Boolean(actor),
+    ready: Boolean(actor && recovery.ready),
+    checking: recovery.checking,
+    blocked: recovery.blocked,
+    recoveryError: recovery.error,
+    retryRecovery: recovery.retry,
     complete,
     refresh: () => run("read"),
     recover: () => run("recover"),
@@ -210,8 +291,52 @@ export function useFollowUpCommand(clientId: string, open: boolean) {
       ["pending", "needs_attention"].includes(pending.receipt.status) &&
       pending.receipt.version <= 2147483646 &&
       pending.receipt.followUp?.state !== "completed",
-    finish: () => {
-      if (complete && !pending?.busy) cache.setQueryData(key, null);
+    finish: async () => {
+      const controller = lifetime.current;
+      if (
+        !complete ||
+        pending?.busy ||
+        !pending ||
+        !actor ||
+        !recovery.scope ||
+        !controller ||
+        operation.current
+      )
+        return false;
+      const token = crypto.randomUUID();
+      operation.current = token;
+      cache.setQueryData(key, { ...pending, busy: token });
+      const guard = () => {
+        controller.signal.throwIfAborted();
+        assertClientWriter(cache, actor);
+      };
+      try {
+        await verifyCommandAuthority(
+          api,
+          actor,
+          clientId,
+          controller.signal,
+          guard,
+        );
+        await acknowledgeRecovery(
+          recovery.scope,
+          pending.input.requestId,
+          guard,
+        );
+        guard();
+        cache.setQueryData(key, null);
+        return true;
+      } catch (cause) {
+        if (!controller.signal.aborted)
+          recovery.block(
+            cause instanceof Error
+              ? cause.message
+              : "The original command remains retained.",
+          );
+        return false;
+      } finally {
+        if (operation.current === token) operation.current = null;
+      }
     },
   };
 }
