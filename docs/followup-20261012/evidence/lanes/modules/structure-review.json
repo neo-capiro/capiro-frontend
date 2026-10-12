@@ -1,0 +1,73 @@
+{
+  "commit": "21503cf438862be6ea30db7f29c11f5b0db856f5",
+  "boundaryErrors": [],
+  "blockingFindings": [
+    {
+      "file": "apps/web/src/features/modules/calendar/CalendarCard.tsx",
+      "kind": "function",
+      "symbol": "CalendarEvents",
+      "line": 14,
+      "nonblank": 87,
+      "fingerprint": "99d2ca51f7a66e6aa7222c917a646be2e081fd018346a25cb0073e38c45f938c",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "reviewDisposition": "cohesive ownership accepted by implementing lane; independent/root registry review pending",
+      "rationale": "One Calendar event viewport owns the agenda/grid presentation choice and their local search/loading/error/empty states. Meeting status is now a sibling of the agenda table so independent successful sources remain usable. Grid keeps its existing meeting gate. Source loading, normalization, authorization, and meeting dialogs retain their existing owners; extracting arbitrary JSX would obscure this single rendering decision."
+    },
+    {
+      "file": "apps/web/src/features/modules/calendar/useCalendar.ts",
+      "kind": "function",
+      "symbol": "useCalendar",
+      "line": 17,
+      "nonblank": 88,
+      "fingerprint": "0a47de23a83102df39bc0e172f62308a5a892087ea03563abc86bb13b1fd0ed7",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "reviewDisposition": "cohesive ownership accepted by implementing lane; independent/root registry review pending",
+      "rationale": "One Calendar screen-state hook composes its date/view/filter state with fixed-operation reads. Shared SelectedClient remains the only verification owner; router navigation merely changes the selection hint, and shared request lifetimes discard former scope reads. Calendar range and per-source loading remain separate modules. The added lines remove duplicated client state, not add a second authority."
+    },
+    {
+      "file": "apps/web/src/features/modules/planner/PlannerScreen.tsx",
+      "kind": "function",
+      "symbol": "PlannerScreen",
+      "line": 37,
+      "nonblank": 82,
+      "fingerprint": "ef7b1ed1765eddf87397128f3ed8db6ee7fad8e1e1bfddd2db0847f8b0334de6",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "reviewDisposition": "cohesive ownership accepted by implementing lane; independent/root registry review pending",
+      "rationale": "One public Planner entry composes section navigation and current bootstrap state. LinkedTaskDetail is a separate narrow owner for URL task resolution, ID/client binding, retry, and dismissal. All sections remain behind the current bootstrap gate, and client identity is consumed from the shared verification boundary. No transport or generic cache abstraction was added."
+    },
+    {
+      "file": "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
+      "kind": "function",
+      "symbol": "useTaskWorkspace",
+      "line": 43,
+      "nonblank": 87,
+      "fingerprint": "8d21a1647667f71eed1c2590718e9987c9581feea0da0eaef5bca20b90ed4937",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "reviewDisposition": "cohesive ownership accepted by implementing lane; independent/root registry review pending",
+      "rationale": "Existing local task-list state, filtering and batch actions remain together. The only behavioral refactor replaces the inline client/project membership predicate with the same narrow taskMatchesClient helper used by the linked task, preventing divergent scope presentations. Query/mutation authority stays at the fixed operation boundary."
+    },
+    {
+      "file": "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
+      "kind": "function",
+      "symbol": "TaskFilters",
+      "line": 168,
+      "nonblank": 90,
+      "fingerprint": "e37fcba349a4bcc65144de99bb0050c31d966f7f825ebc44afb754335069a648",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "reviewDisposition": "cohesive ownership accepted by implementing lane; independent/root registry review pending",
+      "rationale": "TaskFilters is unchanged in responsibility and logic; its file fingerprint changed because useTaskWorkspace now reuses taskMatchesClient. The contiguous display and filtering controls remain one task-workspace presentation component, with no network or authorization policy."
+    }
+  ],
+  "noChangedSourceFileOver400NonblankLines": true,
+  "registryEdited": false
+}

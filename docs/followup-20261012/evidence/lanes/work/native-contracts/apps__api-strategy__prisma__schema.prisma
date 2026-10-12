@@ -1,0 +1,983 @@
+// Capiro Strategy API (api-strategy) — Prisma schema.
+//
+// This service owns the `sp_*` tables in the shared Aurora cluster and is the
+// ONLY writer of them. It references apps/api entities (tenants, clients,
+// users) by id ONLY — there are no cross-schema foreign keys (mirrors
+// apps/workspace's `ws_*` engine). Owner/actor identity is the raw Clerk
+// subject string (the service does not own the users table).
+//
+// Tenant isolation is enforced in application code via PrismaService.withTenant
+// (the DMMF-derived query hook injects `where.tenantId`); the RLS policies in
+// the migration are defense-in-depth (the runtime `capiro_app` role currently
+// bypasses RLS — see the migration header).
+
+generator client {
+  provider = "prisma-client-js"
+  // Custom output isolates this engine's client from apps/api's @prisma/client
+  // in the shared pnpm monorepo. Import via `../generated/prisma-client`.
+  // Prisma.dmmf read by the tenant-scope hook MUST come from this client, not
+  // from @prisma/client, or the tenant-scoped model set reflects the wrong schema.
+  output          = "../generated/prisma-client"
+  previewFeatures = ["postgresqlExtensions"]
+  // Bookworm slim runtime is OpenSSL 3.x on linux-arm64. `native` covers the
+  // build host; the explicit target covers cross-arch buildx builds.
+  binaryTargets   = ["native", "linux-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Planner is owned by this service. Project configuration and extensible task
+// fields are typed JSON documents; identity, scope, concurrency and indexes are
+// relational. Membership/dependency mutations serialize under a tenant lock.
+model SpPlannerProject {
+  id        String @id @default(uuid()) @db.Uuid
+  tenantId  String @map("tenant_id") @db.Uuid
+  ownerId   String @map("owner_id")
+  data      Json
+  version   Int @default(1)
+  archived  Boolean @default(false)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+  @@index([tenantId, archived])
+  @@map("sp_planner_projects")
+}
+
+model SpPlannerTask {
+  id          String @id @default(uuid()) @db.Uuid
+  tenantId    String @map("tenant_id") @db.Uuid
+  ownerId     String @map("owner_id")
+  assigneeId  String? @map("assignee_id")
+  parentId    String? @map("parent_id") @db.Uuid
+  projectIds  String[] @map("project_ids") @db.Uuid
+  data        Json
+  version     Int @default(1)
+  archived    Boolean @default(false)
+  completedAt DateTime? @map("completed_at") @db.Timestamptz(6)
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+  attachments SpPlannerAttachment[]
+  scheduleClaims SpPlannerScheduleClaim[]
+  @@unique([tenantId, id])
+  @@index([tenantId, archived, assigneeId])
+  @@index([tenantId, parentId])
+  @@index([projectIds], type: Gin)
+  @@map("sp_planner_tasks")
+}
+
+model SpPlannerAttachment {
+  id String @id @default(uuid()) @db.Uuid
+  tenantId String @map("tenant_id") @db.Uuid
+  taskId String @map("task_id") @db.Uuid
+  uploadedBy String @map("uploaded_by")
+  fileName String @map("file_name")
+  sizeBytes Int @map("size_bytes")
+  objectKey String @map("object_key")
+  archived Boolean @default(false)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  task SpPlannerTask @relation(fields:[tenantId,taskId],references:[tenantId,id])
+  @@index([tenantId,taskId,archived])
+  @@map("sp_planner_attachments")
+}
+
+model SpPlannerEvent {
+  id        String @id @default(uuid()) @db.Uuid
+  tenantId  String @map("tenant_id") @db.Uuid
+  actorId   String @map("actor_id")
+  taskId    String? @map("task_id") @db.Uuid
+  projectId String? @map("project_id") @db.Uuid
+  resourceId String? @map("resource_id") @db.Uuid
+  details Json @default("{}")
+  resource SpPlannerResource? @relation(fields: [tenantId,resourceId], references: [tenantId,id], onDelete: Restrict, onUpdate: Cascade)
+  goalReminderClaims SpPlannerGoalReminderClaim[]
+  timeReminderClaims SpPlannerTimeReminderClaim[]
+  budgetAlertClaims SpPlannerBudgetAlertClaim[]
+  kind      String
+  text      String
+  minutes   Int?
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  recipients SpPlannerInbox[]
+  revisions SpPlannerEventRevision[]
+  @@unique([tenantId, id])
+  @@unique([tenantId, resourceId, id])
+  @@index([tenantId, taskId, createdAt])
+  @@index([tenantId, projectId, createdAt])
+  @@index([tenantId, resourceId, createdAt])
+  @@map("sp_planner_events")
+}
+
+model SpPlannerEventRevision {
+  id String @id @default(uuid()) @db.Uuid
+  tenantId String @map("tenant_id") @db.Uuid
+  eventId String @map("event_id") @db.Uuid
+  actorId String @map("actor_id")
+  version Int
+  text String
+  minutes Int?
+  removed Boolean @default(false)
+  details Json @default("{}")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  event SpPlannerEvent @relation(fields: [tenantId, eventId], references: [tenantId, id])
+  @@unique([tenantId, eventId, version])
+  @@map("sp_planner_event_revisions")
+}
+
+model SpPlannerInbox {
+  id        String @id @default(uuid()) @db.Uuid
+  tenantId  String @map("tenant_id") @db.Uuid
+  userId    String @map("user_id")
+  eventId   String @map("event_id") @db.Uuid
+  read      Boolean @default(false)
+  archived  Boolean @default(false)
+  event     SpPlannerEvent @relation(fields: [tenantId, eventId], references: [tenantId, id])
+  @@unique([eventId, userId])
+  @@index([tenantId, userId, archived])
+  @@map("sp_planner_inbox")
+}
+
+model SpPlannerResource {
+  id        String @id @default(uuid()) @db.Uuid
+  tenantId  String @map("tenant_id") @db.Uuid
+  ownerId   String @map("owner_id")
+  projectId String? @map("project_id") @db.Uuid
+  kind      String
+  name      String
+  data      Json
+  version   Int @default(1)
+  archived  Boolean @default(false)
+  shareTokenHash String? @map("share_token_hash")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+  scheduleClaims SpPlannerScheduleClaim[]
+  events SpPlannerEvent[]
+  goalReminderClaims SpPlannerGoalReminderClaim[]
+  timeReminderClaims SpPlannerTimeReminderClaim[]
+  budgetAlertClaims SpPlannerBudgetAlertClaim[]
+  @@unique([tenantId, id])
+  @@index([tenantId, kind, archived])
+  @@map("sp_planner_resources")
+}
+
+// Append-only execution receipts prevent repeat reminders after retries/restarts.
+model SpPlannerScheduleClaim {
+  id String @id @default(uuid()) @db.Uuid
+  tenantId String @map("tenant_id") @db.Uuid
+  resourceId String @map("resource_id") @db.Uuid
+  taskId String @map("task_id") @db.Uuid
+  fingerprint String @db.Char(64)
+  deadlineKey String @map("deadline_key") @db.Char(64)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  resource SpPlannerResource @relation(fields: [tenantId, resourceId], references: [tenantId, id])
+  task SpPlannerTask @relation(fields: [tenantId, taskId], references: [tenantId, id])
+  @@unique([tenantId, resourceId, taskId, fingerprint, deadlineKey], map: "sp_planner_schedule_claims_execution_key")
+  @@map("sp_planner_schedule_claims")
+}
+
+// Append-only goal reminder delivery receipts. Created with the event and Inbox rows.
+model SpPlannerGoalReminderClaim {
+  id String @id @default(uuid()) @db.Uuid
+  tenantId String @map("tenant_id") @db.Uuid
+  resourceId String @map("resource_id") @db.Uuid
+  ownerId String @map("owner_id")
+  kind String
+  fingerprint String @db.Char(64)
+  deadlineKey String @map("deadline_key") @db.Char(64)
+  eventId String @map("event_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  resource SpPlannerResource @relation(fields: [tenantId,resourceId], references: [tenantId,id])
+  event SpPlannerEvent @relation(fields: [tenantId,resourceId,eventId], references: [tenantId,resourceId,id], onDelete: Restrict, onUpdate: Cascade)
+  @@unique([tenantId,resourceId,ownerId,kind,fingerprint,deadlineKey], map:"sp_planner_goal_reminder_claims_delivery_key")
+  @@map("sp_planner_goal_reminder_claims")
+}
+
+// Append-only, once-per-owner/week submission reminders.
+model SpPlannerTimeReminderClaim {
+  id String @id @default(uuid()) @db.Uuid
+  tenantId String @map("tenant_id") @db.Uuid
+  resourceId String @map("resource_id") @db.Uuid
+  ownerId String @map("owner_id")
+  weekOn DateTime @map("week_on") @db.Date
+  scheduledOn DateTime @map("scheduled_on") @db.Date
+  eventId String @map("event_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  resource SpPlannerResource @relation(fields: [tenantId,resourceId], references: [tenantId,id], onDelete: Restrict, onUpdate: Cascade)
+  event SpPlannerEvent @relation(fields: [tenantId,resourceId,eventId], references: [tenantId,resourceId,id], onDelete: Restrict, onUpdate: Cascade)
+  @@unique([tenantId,ownerId,weekOn], map: "sp_planner_time_reminder_claims_delivery_key")
+  @@unique([tenantId,resourceId], map: "sp_planner_time_reminder_claims_resource_key")
+  @@map("sp_planner_time_reminder_claims")
+}
+
+// ---- Enums --------------------------------------------------------------------
+// Immutable delivery receipt for a project's personal budget threshold alert.
+model SpPlannerBudgetAlertClaim {
+  id String @id @default(uuid()) @db.Uuid
+  tenantId String @map("tenant_id") @db.Uuid
+  resourceId String @map("resource_id") @db.Uuid
+  ownerId String @map("owner_id")
+  fingerprint String @db.Char(64)
+  eventId String @map("event_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  resource SpPlannerResource @relation(fields: [tenantId,resourceId], references: [tenantId,id], onDelete: Restrict, onUpdate: Cascade)
+  event SpPlannerEvent @relation(fields: [tenantId,resourceId,eventId], references: [tenantId,resourceId,id], onDelete: Restrict, onUpdate: Cascade)
+  @@unique([tenantId,resourceId,ownerId,fingerprint], map: "sp_planner_budget_alert_claims_delivery_key")
+  @@map("sp_planner_budget_alert_claims")
+}
+
+
+enum SpStrategyType {
+  appropriations
+  authorization
+  regulatory
+  coalition
+  procurement
+  earmark
+  amendment
+
+  @@map("sp_strategy_type")
+}
+
+enum SpNodeKind {
+  action
+  decision
+  gate
+  milestone
+  risk
+
+  @@map("sp_node_kind")
+}
+
+enum SpNodeSubject {
+  deliverable
+  submission
+  member
+  committee
+  ask
+  agency
+  outcome
+  optics
+
+  @@map("sp_node_subject")
+}
+
+enum SpNodeStatus {
+  draft
+  in_progress
+  internal_review
+  active
+  suggested
+  completed
+
+  @@map("sp_node_status")
+}
+
+enum SpAuthorKind {
+  person
+  meri
+
+  @@map("sp_author_kind")
+}
+
+enum SpRefKind {
+  congress_milestone
+  ppbe_lane_bar
+  ppbe_current_phase
+
+  @@map("sp_ref_kind")
+}
+
+enum SpArtifactType {
+  workspace_draft
+  outreach_record
+
+  @@map("sp_artifact_type")
+}
+
+// Draft-from-goal async job lifecycle (strategy generation timeout fix).
+// queued -> running -> completed | failed. A worker claim-sweep drives it; see
+// DraftJobWorkerService.
+enum SpDraftJobStatus {
+  queued
+  running
+  completed
+  failed
+
+  @@map("sp_draft_job_status")
+}
+
+// ---- Models -------------------------------------------------------------------
+
+// A strategy. NO status field (handoff §1: removed intentionally — version
+// history is the audit trail). Firm-wide collaborative: any org member may
+// view/edit; per-strategy ACLs are out of scope.
+model SpStrategy {
+  id                 String         @id @default(uuid()) @db.Uuid
+  tenantId           String         @map("tenant_id") @db.Uuid
+  clientId           String         @map("client_id") @db.Uuid // apps/api clients.id — no FK
+  title              String
+  type               SpStrategyType
+  goal               String?        @db.Text
+  meriContext        String?        @map("meri_context") @db.Text
+  // 1-2 sentence Meri plan summary (MRI-2) — set on draft, refreshed after Meri
+  // edit-sets; surfaced in the strategy-level rail. Null for manual strategies.
+  meriSummary        String?        @map("meri_summary") @db.Text
+  // Provenance (SHL-5): true ONLY for a plan Meri drafted from a goal. Distinct
+  // from meriSummary, which the assistant path also writes — so the "Meri
+  // drafted this" banner must key off this immutable flag, never the summary.
+  draftedByMeri      Boolean        @default(false) @map("drafted_by_meri")
+  targetDate         DateTime?      @map("target_date") @db.Date
+  ownerUserId        String         @map("owner_user_id") // Clerk user id
+  createdByUserId    String         @map("created_by_user_id")
+  lastEditedByUserId String?        @map("last_edited_by_user_id")
+  lastEditedAt       DateTime?      @map("last_edited_at")
+  archivedAt         DateTime?      @map("archived_at")
+  createdAt          DateTime       @default(now()) @map("created_at")
+  updatedAt          DateTime       @updatedAt @map("updated_at")
+
+  nodes        SpNode[]
+  versions     SpVersion[]
+  artifacts    SpNodeArtifact[]
+  chatMessages SpStrategyChatMessage[]
+
+  @@index([tenantId, clientId])
+  @@index([tenantId, archivedAt])
+  @@map("sp_strategy")
+}
+
+// A plan step. True dates are stored; quarter-units are DERIVED render
+// coordinates computed from the live fiscal calendar (plan D2).
+model SpNode {
+  id              String        @id @default(uuid()) @db.Uuid
+  tenantId        String        @map("tenant_id") @db.Uuid
+  strategyId      String        @map("strategy_id") @db.Uuid
+  kind            SpNodeKind
+  subject         SpNodeSubject
+  title           String
+  note            String?       @db.Text
+  ownerUserId     String?       @map("owner_user_id")
+  status          SpNodeStatus  @default(draft)
+  startsOn        DateTime      @map("starts_on") @db.Date
+  endsOn          DateTime?     @map("ends_on") @db.Date // null = point event
+  openEnded       Boolean       @default(false) @map("open_ended") // ongoing risk ⇒ "Ongoing" label
+  meriAuthored    Boolean       @default(false) @map("meri_authored")
+  dependsOnIds    String[]      @map("depends_on_ids") @db.Uuid @default([]) // intra-strategy blocker node ids (Phase 2 A1)
+  provenance      Json?         @map("provenance") // A9: per-node grounding (cited pack sections/facts)
+  targetRef       Json?         @map("target_ref") // ClientTarget snapshot: who this node's outreach/workspace action is for
+  // P0-1 SOFT DELETE. A version restore no longer DELETES the nodes the
+  // restored snapshot omits (that cascaded sp_node_artifact away and left runs
+  // pointing at dead ids) — it ARCHIVES them, so execution runs, approvals,
+  // provenance and artifact back-links referencing the node all survive and
+  // stay readable. Every LIVE read MUST filter archivedAt: null — the single
+  // source of that predicate is LIVE_NODE_WHERE (strategy/live-node.ts).
+  // Restoring a NEWER version whose snapshot contains the node revives it
+  // (archivedAt back to null) because snapshot node ids are stable.
+  archivedAt       DateTime?    @map("archived_at")
+  archivedByUserId String?      @map("archived_by_user_id")
+  archivedReason   String?      @map("archived_reason")
+  createdByUserId String        @map("created_by_user_id")
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  strategy  SpStrategy       @relation(fields: [strategyId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  artifacts SpNodeArtifact[]
+
+  // NO separate (tenantId, strategyId, archivedAt) index on purpose: this index
+  // already narrows to one strategy's nodes (tens of rows), so the added
+  // `archived_at IS NULL` filter is free, and the archived-only read (the
+  // detached surface) is the same prefix. Avoids a redundant index on a live
+  // prod table.
+  @@index([tenantId, strategyId])
+  @@map("sp_node")
+}
+
+// Full-snapshot version history (WsDocVersion pattern). One version per
+// mutation batch; restore replaces current state and itself cuts a version.
+model SpVersion {
+  id                    String       @id @default(uuid()) @db.Uuid
+  tenantId              String       @map("tenant_id") @db.Uuid
+  strategyId            String       @map("strategy_id") @db.Uuid
+  snapshot              Json // full strategy meta + nodes[]
+  authorKind            SpAuthorKind @map("author_kind")
+  authorUserId          String?      @map("author_user_id")
+  note                  String
+  restoredFromVersionId String?      @map("restored_from_version_id") @db.Uuid
+  // True only for coalescible field-edit batches — the versioning policy folds a
+  // consecutive same-author field edit into the latest coalescible version;
+  // structural events (add/delete/create/restore) and Meri versions are false so
+  // they always stand alone in history.
+  coalescible           Boolean      @default(false)
+  createdAt             DateTime     @default(now()) @map("created_at")
+
+  strategy SpStrategy @relation(fields: [strategyId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@index([tenantId, strategyId, createdAt(sort: Desc)])
+  @@map("sp_version")
+}
+
+// Tenant-wide, ordered firm phases (the config modal edits these). "Firm
+// configured" = existence of >=1 row for the tenant.
+model SpFirmPhase {
+  id              String   @id @default(uuid()) @db.Uuid
+  tenantId        String   @map("tenant_id") @db.Uuid
+  label           String
+  startFy         Int      @map("start_fy") // e.g. 2027
+  startQ          Int      @map("start_q") // 1-4 (federal FY quarters)
+  endFy           Int      @map("end_fy")
+  endQ            Int      @map("end_q") // exclusive end, matching the modal's to-select
+  position        Int
+  updatedByUserId String   @map("updated_by_user_id")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  @@index([tenantId, position])
+  @@map("sp_firm_phase")
+}
+
+// GLOBAL Capiro-maintained reference baseline (no tenant_id — intentionally
+// tenant-scope-exempt). Legislative milestones + PPBE lanes + current phases.
+// Seeded at deploy (insert-if-empty) and replaced via the update-strategy-
+// reference ops verb.
+model SpReferenceEntry {
+  id        String    @id @default(uuid()) @db.Uuid
+  kind      SpRefKind
+  label     String
+  fy        Int? // ppbe rows
+  startsOn  DateTime? @map("starts_on") @db.Date // null for ppbe_current_phase
+  endsOn    DateTime? @map("ends_on") @db.Date
+  tone      String? // ink|info|accent|notable|critical|success
+  position  Int
+  active    Boolean   @default(true)
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+
+  @@index([kind, active, position])
+  @@map("sp_reference_entry")
+}
+
+// Tenant fork of the reference baseline (fork-on-edit). Renderer prefers tenant
+// rows for a kind when >=1 exists, else the global baseline.
+model SpReferenceOverride {
+  id              String    @id @default(uuid()) @db.Uuid
+  tenantId        String    @map("tenant_id") @db.Uuid
+  kind            SpRefKind
+  label           String
+  fy              Int?
+  startsOn        DateTime? @map("starts_on") @db.Date
+  endsOn          DateTime? @map("ends_on") @db.Date
+  tone            String?
+  position        Int
+  active          Boolean   @default(true)
+  updatedByUserId String    @map("updated_by_user_id")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+
+  @@index([tenantId, kind, position])
+  @@map("sp_reference_override")
+}
+
+// Node <-> artifact back-links (Workspace draft / Outreach record).
+model SpNodeArtifact {
+  id              String         @id @default(uuid()) @db.Uuid
+  tenantId        String         @map("tenant_id") @db.Uuid
+  strategyId      String         @map("strategy_id") @db.Uuid
+  nodeId          String         @map("node_id") @db.Uuid
+  artifactType    SpArtifactType @map("artifact_type")
+  artifactRef     String         @map("artifact_ref") // ws_draft.id / outreach_records.id
+  // P0-1: stamped when the owning node was ARCHIVED by a version restore. The
+  // row — and the upstream Workspace draft / Outreach record it points at — is
+  // NEVER deleted; the relationship simply becomes HISTORICAL/detached and
+  // stays discoverable through the detached surface
+  // (GET /strategies/:id/detached). Cleared when a later restore revives the
+  // node, which re-attaches the artifact to the live plan.
+  detachedAt      DateTime?      @map("detached_at")
+  detachedReason  String?        @map("detached_reason")
+  createdByUserId String         @map("created_by_user_id")
+  createdAt       DateTime       @default(now()) @map("created_at")
+
+  node     SpNode     @relation(fields: [nodeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  strategy SpStrategy @relation(fields: [strategyId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@unique([nodeId, artifactType, artifactRef])
+  @@index([tenantId, strategyId])
+  @@map("sp_node_artifact")
+}
+
+// Append-only activity log (audit_logs pattern; enforced by a BEFORE
+// UPDATE/DELETE trigger in the migration). actorUserId null => system/meri.
+model SpActivityLog {
+  id          String       @id @default(uuid()) @db.Uuid
+  tenantId    String       @map("tenant_id") @db.Uuid
+  actorUserId String?      @map("actor_user_id")
+  authorKind  SpAuthorKind @map("author_kind")
+  action      String // strategy.created, node.updated, firm_phases.updated, reference.forked, version.restored, ...
+  entityType  String       @map("entity_type")
+  entityId    String       @map("entity_id")
+  before      Json?
+  after       Json?
+  requestId   String?      @map("request_id")
+  occurredAt  DateTime     @default(now()) @map("occurred_at")
+
+  @@index([tenantId, entityType, entityId, occurredAt])
+  @@map("sp_activity_log")
+}
+
+// The durable Meri conversation attached to a strategy (Phase 2). ONE thread per
+// context: the strategy itself (nodeId null) and one per step (nodeId set).
+//
+// Deliberately NOT stored on SpActivityLog: that table is append-only audit with
+// a fixed actor/action/entity shape and a BEFORE UPDATE/DELETE trigger, so it can
+// neither carry a mutable `state` nor be read as an ordered conversation without
+// abusing its semantics.
+model SpStrategyChatMessage {
+  id         String  @id @default(uuid()) @db.Uuid
+  tenantId   String  @map("tenant_id") @db.Uuid
+  strategyId String  @map("strategy_id") @db.Uuid
+  // NO relation/FK on purpose: a step archived by a version restore (P0-1 soft
+  // delete) — or one hard-deleted — must not take its conversation with it. The
+  // thread stays readable; only LIVE steps are selectable from the timeline.
+  nodeId     String? @map("node_id") @db.Uuid
+  // Closed sets validated in StrategyConversationService, not DB enums: Phase 4
+  // adds Watch kinds and Phase 5 adds gap kinds, and an ALTER TYPE per phase buys
+  // nothing here (no index or constraint keys off these).
+  role       String // user | meri | system | watch
+  kind       String  @default("message") // message | context_gap | watch_applied | assistant_error
+  body       String  @db.Text
+  // Immutable DISPLAY snapshots ({id, filename, kind, status}) — never file bytes.
+  // Snapshotted so a later attachment delete/rename cannot rewrite chat history.
+  attachmentRefs  Json?    @map("attachment_refs")
+  // The prototype's `Open "<step>"` affordance: {type:'open_node', nodeId, title}.
+  action          Json?
+  // active | resolved | dismissed — only context_gap uses anything but 'active'.
+  state           String   @default("active")
+  // Client-minted per user send: makes a retried POST idempotent instead of
+  // double-posting the user's message.
+  clientMessageId String?  @map("client_message_id") @db.Uuid
+  createdByUserId String?  @map("created_by_user_id")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  strategy SpStrategy @relation(fields: [strategyId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@unique([tenantId, clientMessageId])
+  @@index([tenantId, strategyId, nodeId, createdAt])
+  @@map("sp_strategy_chat_message")
+}
+
+// ---- Phase 2 agent runtime (Stage C) --------------------------------------------
+//
+// Context Steward / Strategy Watcher / Execution Agent substrate. All tables are
+// tenant-scoped (auto-covered by the DMMF tenant-scope hook + RLS in the
+// migration). LLM loops live in the orchestrator; these tables hold missions,
+// runs, proposals, and the context corpus. Stage C creates the schema + the
+// no-LLM run/ChangeSet lifecycle; Stages D-G populate the content.
+
+enum SpContextDocState {
+  draft
+  active
+  superseded
+  archived
+
+  @@map("sp_context_doc_state")
+}
+
+enum SpContextScope {
+  once
+  node
+  strategy
+  client
+  firm
+
+  @@map("sp_context_scope")
+}
+
+enum SpFactState {
+  active
+  superseded
+  stale
+  rejected
+
+  @@map("sp_fact_state")
+}
+
+enum SpConflictState {
+  open
+  resolved
+  dismissed
+
+  @@map("sp_conflict_state")
+}
+
+enum SpMissionState {
+  draft
+  active
+  paused
+  completed
+  failed
+  canceled
+
+  @@map("sp_mission_state")
+}
+
+// P0-2: the audit's full run vocabulary. `approved` (P0-3 writes it) and `staged`
+// make "authorised" and "artifact exists" distinct facts; the failure split gives
+// the reconciler a recoverable landing zone; `superseded` records that an attempt
+// was abandoned for a retry. `failed` is LEGACY — pre-P0-2 rows carry it and it
+// reads as terminal, but nothing transitions into it any more. `canceled` keeps
+// its existing spelling on purpose (renaming a live enum value used by production
+// rows for the audit's `cancelled` prose buys nothing). run-state.ts is
+// authoritative for which moves between these are legal.
+enum SpRunState {
+  queued
+  planning
+  waiting_for_input
+  ready_for_review
+  approved
+  executing
+  staged
+  completed
+  failed
+  failed_recoverable
+  failed_terminal
+  canceled
+  superseded
+
+  @@map("sp_run_state")
+}
+
+enum SpRunTrigger {
+  manual
+  scheduled
+  event
+
+  @@map("sp_run_trigger")
+}
+
+enum SpChangeSetStatus {
+  proposed
+  approved
+  rejected
+  applied
+  undone
+  stale
+  // Phase 3 (Watch consistency): a Watch-originated proposal invalidated by a
+  // head move (reissued as a new pinned proposal) or by a finding that no
+  // longer holds (dropped). Distinct from `stale`, which apply()'s existing
+  // head-guard still uses for the generic/person-authored change-set path.
+  superseded
+
+  @@map("sp_change_set_status")
+}
+
+enum SpChangeSetRisk {
+  low
+  medium
+  high
+  critical
+
+  @@map("sp_change_set_risk")
+}
+
+// A context-pack markdown document (00-13 templates, Stage D contract).
+// clientId null => firm-scoped. scopeRef carries the node/strategy id when
+// scope is node/strategy. Supersession keeps history (state=superseded, new
+// row points back via supersedesId); checksum dedupes re-uploads.
+model SpContextDocument {
+  id              String            @id @default(uuid()) @db.Uuid
+  tenantId        String            @map("tenant_id") @db.Uuid
+  clientId        String?           @map("client_id") @db.Uuid // apps/api clients.id — no FK
+  scope           SpContextScope
+  scopeRef        String?           @map("scope_ref") @db.Uuid // node/strategy id when scoped
+  templateKey     String            @map("template_key") // e.g. "03_engagement_history" (Stage D contract)
+  title           String
+  state           SpContextDocState @default(draft)
+  content         String            @db.Text // raw markdown body
+  frontmatter     Json? // parsed + validated front-matter (Stage D validator)
+  checksum        String // sha256 of content — dedupe/change detection
+  supersedesId    String?           @map("supersedes_id") @db.Uuid
+  validUntil      DateTime?         @map("valid_until") @db.Date // staleness horizon
+  createdByUserId String            @map("created_by_user_id")
+  updatedByUserId String?           @map("updated_by_user_id")
+  createdAt       DateTime          @default(now()) @map("created_at")
+  updatedAt       DateTime          @updatedAt @map("updated_at")
+
+  facts SpContextFact[]
+
+  @@index([tenantId, clientId, state])
+  @@index([tenantId, templateKey, state])
+  @@map("sp_context_document")
+}
+
+// A structured fact the Steward (Stage E) extracts from a context document.
+// sourceRef anchors the exact heading/row; SpNode.provenance upgrades to
+// `fact:<id>` refs in Stage E. clientId denormalized for eligibility queries.
+model SpContextFact {
+  id         String        @id @default(uuid()) @db.Uuid
+  tenantId   String        @map("tenant_id") @db.Uuid
+  documentId String        @map("document_id") @db.Uuid
+  clientId   String?       @map("client_id") @db.Uuid
+  fact       String        @db.Text
+  sourceRef  String        @map("source_ref") // heading / table-row anchor within the document
+  authority  String? // who asserted it (e.g. "client CEO", "public filing")
+  asOf       DateTime?     @map("as_of") @db.Date
+  confidence Float? // 0-1 extraction confidence
+  state      SpFactState   @default(active)
+  citation   String? // verbatim source snippet
+  createdAt  DateTime      @default(now()) @map("created_at")
+  updatedAt  DateTime      @updatedAt @map("updated_at")
+
+  document SpContextDocument @relation(fields: [documentId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@index([tenantId, documentId])
+  @@index([tenantId, clientId, state])
+  @@map("sp_context_fact")
+}
+
+// Two facts in material disagreement (Stage E detection). Blocking semantics:
+// an OPEN material conflict blocks Execution-Agent eligibility (Stage G) and
+// annotates drafts (Stage A8 health) — it never blocks a human.
+model SpContextConflict {
+  id               String          @id @default(uuid()) @db.Uuid
+  tenantId         String          @map("tenant_id") @db.Uuid
+  factAId          String          @map("fact_a_id") @db.Uuid
+  factBId          String          @map("fact_b_id") @db.Uuid
+  material         Boolean         @default(false)
+  state            SpConflictState @default(open)
+  resolutionNote   String?         @map("resolution_note")
+  resolvedByUserId String?         @map("resolved_by_user_id")
+  resolvedAt       DateTime?       @map("resolved_at")
+  createdAt        DateTime        @default(now()) @map("created_at")
+  updatedAt        DateTime        @updatedAt @map("updated_at")
+
+  @@index([tenantId, state])
+  @@map("sp_context_conflict")
+}
+
+// A standing agent mission ("Keep this strategy on track"). strategyId null =>
+// firm-level mission (calendar watch). cadence is a coarse keyword ("daily",
+// "weekly") interpreted by the F2 scheduler; nextRunAt is its claim column
+// (FOR UPDATE SKIP LOCKED).
+model SpAgentMission {
+  id              String         @id @default(uuid()) @db.Uuid
+  tenantId        String         @map("tenant_id") @db.Uuid
+  strategyId      String?        @map("strategy_id") @db.Uuid
+  clientId        String?        @map("client_id") @db.Uuid
+  name            String
+  description     String?        @db.Text
+  // Durable classification; legacy rows remain discoverable from schedule/run history.
+  purpose         String?
+  state           SpMissionState @default(draft)
+  cadence         String? // "daily" | "weekly" | null (manual-only)
+  nextRunAt       DateTime?      @map("next_run_at")
+  createdByUserId String         @map("created_by_user_id")
+  updatedByUserId String?        @map("updated_by_user_id")
+  createdAt       DateTime       @default(now()) @map("created_at")
+  updatedAt       DateTime       @updatedAt @map("updated_at")
+
+  runs SpAgentRun[]
+
+  @@index([tenantId, strategyId])
+  @@index([state, nextRunAt])
+  @@map("sp_agent_mission")
+}
+
+// One execution of a mission. Lifecycle (enforced in code, run-state.ts):
+// queued -> planning -> waiting_for_input/executing -> ready_for_review ->
+// completed | failed | canceled. idempotencyKey dedupes re-triggers (unique per
+// tenant); createdByUserId null => system/scheduler-triggered.
+model SpAgentRun {
+  id              String       @id @default(uuid()) @db.Uuid
+  tenantId        String       @map("tenant_id") @db.Uuid
+  missionId       String       @map("mission_id") @db.Uuid
+  strategyId      String?      @map("strategy_id") @db.Uuid
+  state           SpRunState   @default(queued)
+  trigger         SpRunTrigger
+  idempotencyKey  String       @map("idempotency_key")
+  startedAt       DateTime?    @map("started_at")
+  finishedAt      DateTime?    @map("finished_at")
+  findings        Json? // deterministic-check + (later) LLM-interpretation findings
+  waitingReason   String?      @map("waiting_reason") // set when state=waiting_for_input
+  error           String?
+  // ---- P0-2 stranded-run recovery -------------------------------------------
+  // Stamped on every state change and at the end of every execution phase. This
+  // is the clock the reconciler measures a state's timeout against (see
+  // run-state.ts RUN_STATE_POLICY) — updatedAt is unusable for that because any
+  // unrelated column write bumps it.
+  heartbeatAt       DateTime? @map("heartbeat_at")
+  // When reconciliation last inspected this run, and how many times. The count is
+  // the loop-breaker: a run that reconciliation cannot fix stops being retried
+  // automatically and is escalated to a human instead of being swept forever.
+  reconciledAt      DateTime? @map("reconciled_at")
+  reconcileAttempts Int       @default(0) @map("reconcile_attempts")
+  // Retry lineage (audit P0-2 `superseded` + P1-16 "retry relationship" /
+  // "compare attempts"). A retry mints a NEW run — which is what unblocks the
+  // "retries blocked by deduplication" defect, since the new run carries a fresh
+  // idempotencyKey (`exec:<nodeId>:<kind>#<attempt>`) — and links back here.
+  attempt           Int       @default(1)
+  retryOfRunId      String?   @map("retry_of_run_id") @db.Uuid
+  supersededByRunId String?   @map("superseded_by_run_id") @db.Uuid
+  createdByUserId String?      @map("created_by_user_id") // null => system
+  createdAt       DateTime     @default(now()) @map("created_at")
+  updatedAt       DateTime     @updatedAt @map("updated_at")
+
+  mission SpAgentMission @relation(fields: [missionId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@unique([tenantId, idempotencyKey])
+  @@index([tenantId, missionId, createdAt(sort: Desc)])
+  // P0-2: the reconciler's sweep predicate — non-terminal runs ordered by how
+  // long they have been quiet. Cross-tenant (the sweep runs under withSystem).
+  @@index([state, heartbeatAt])
+  @@map("sp_agent_run")
+}
+
+// A proposed edit-set (Watcher output / person-authored proposal). ops reuse
+// the Meri assistant edit shape and are re-validated on apply through the SAME
+// pipeline (one meri version per applied ChangeSet). strategyVersionId pins the
+// head the proposal was computed against — apply on a moved head => stale.
+// Undo = restore that pinned version (the existing restore path).
+model SpChangeSet {
+  id                String            @id @default(uuid()) @db.Uuid
+  tenantId          String            @map("tenant_id") @db.Uuid
+  strategyId        String            @map("strategy_id") @db.Uuid
+  runId             String?           @map("run_id") @db.Uuid
+  summary           String
+  ops               Json // Meri edit-set shape: [{op, nodeId?, ...fields, dependsOn?}]
+  risk              SpChangeSetRisk
+  status            SpChangeSetStatus @default(proposed)
+  strategyVersionId String            @map("strategy_version_id") @db.Uuid // pinned head at compute time
+  appliedVersionId  String?           @map("applied_version_id") @db.Uuid // version the apply cut
+  approvedByUserId  String?           @map("approved_by_user_id")
+  approvedAt        DateTime?         @map("approved_at")
+  approvedOps       Json?             @map("approved_ops") // selective approval subset
+  rejectedByUserId  String?           @map("rejected_by_user_id")
+  rejectedAt        DateTime?         @map("rejected_at")
+  appliedByUserId   String?           @map("applied_by_user_id")
+  appliedAt         DateTime?         @map("applied_at")
+  undoneByUserId    String?           @map("undone_by_user_id")
+  undoneAt          DateTime?         @map("undone_at")
+  createdByUserId   String?           @map("created_by_user_id") // null => watcher/system
+  createdAt         DateTime          @default(now()) @map("created_at")
+  updatedAt         DateTime          @updatedAt @map("updated_at")
+  // ---- Phase 3 (Watch consistency backend) — lineage across a revalidate's
+  // reissue. Plain audit pointers, deliberately NOT Prisma relations: a
+  // replaces/supersedes chain must keep resolving after historical cleanup of
+  // either endpoint, which a required/cascading relation would fight.
+  //
+  // watchKey: the SAME stable (code + sorted nodeIds) identity WatcherService
+  // already embeds in `summary` as `[watch:<code>:<ids>]` (parsed via
+  // parseWatchMarker) — promoted to a real column so getState can JOIN a
+  // proposal to its source run finding without regex-parsing prose. Null for
+  // person-authored change-sets (they are not Watch proposals).
+  watchKey                String? @map("watch_key")
+  // The OLD proposal this row reissues (set on the NEW row).
+  replacesChangeSetId     String? @map("replaces_change_set_id") @db.Uuid
+  // The NEW proposal that reissued this row (set on the OLD row, alongside
+  // status: superseded).
+  supersededByChangeSetId String? @map("superseded_by_change_set_id") @db.Uuid
+  // 'unchanged' | 'updated' — set on a newly reissued row only; null otherwise
+  // (in particular, null on the very first proposal for a watchKey).
+  recheckStatus           String? @map("recheck_status")
+  // Plain-language reason a dropped (superseded, no reissue) proposal no
+  // longer applies — surfaced to the user instead of a bare status flip.
+  supersededReason        String? @map("superseded_reason")
+
+  @@index([tenantId, strategyId, status])
+  // Phase 3: getState's proposal lookup and revalidate's reconciliation both
+  // key off (strategy, watchKey, status) — e.g. "the open proposal for this
+  // finding" or "every proposed Watch row for this strategy".
+  @@index([tenantId, strategyId, watchKey, status])
+  @@map("sp_change_set")
+}
+
+// Phase 3 (Watch consistency backend): a PERMANENT suppression of one Watch
+// finding for one strategy. Distinct from a rejected sp_change_set — current
+// Watcher logic may re-propose a rejected finding on the next run; a dismissal
+// must survive that and suppress the SAME watchKey forever (until the user
+// un-dismisses, which this plan does not add a path for — see the Phase 3
+// plan's own scope: "Dismiss permanently suppresses").
+model SpWatchDismissal {
+  id                String   @id @default(uuid()) @db.Uuid
+  tenantId          String   @map("tenant_id") @db.Uuid
+  strategyId        String   @map("strategy_id") @db.Uuid
+  watchKey          String   @map("watch_key")
+  dismissedByUserId String   @map("dismissed_by_user_id")
+  dismissedAt       DateTime @default(now()) @map("dismissed_at")
+  // The proposal row that was on-screen when the user dismissed it — audit
+  // provenance only; not a relation for the same reason as the ChangeSet
+  // lineage pointers above.
+  sourceChangeSetId String?  @map("source_change_set_id") @db.Uuid
+
+  @@unique([tenantId, strategyId, watchKey])
+  @@index([tenantId, strategyId])
+  @@map("sp_watch_dismissal")
+}
+
+// Per-tenant agent permission knobs (risk-ladder overrides, caps). Key-value
+// so Stage F/G policy grows without migrations.
+model SpAgentPermissionPolicy {
+  id              String   @id @default(uuid()) @db.Uuid
+  tenantId        String   @map("tenant_id") @db.Uuid
+  key             String // e.g. "autoApply.maxRisk", "runs.maxConcurrent"
+  value           Json
+  updatedByUserId String   @map("updated_by_user_id")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  @@unique([tenantId, key])
+  @@map("sp_agent_permission_policy")
+}
+
+// Transactional outbox: emitted in the SAME tx as every strategy/node mutation
+// (via VersioningService.logActivity — the one choke point every bump site
+// already flows through). The F2 Watcher consumer polls unconsumed rows and
+// marks consumed_at idempotently.
+model SpEventOutbox {
+  id         String    @id @default(uuid()) @db.Uuid
+  tenantId   String    @map("tenant_id") @db.Uuid
+  type       String // the activity action, e.g. "node.updated", "version.restored"
+  payload    Json // { entityType, entityId, actorUserId, authorKind, ... }
+  createdAt  DateTime  @default(now()) @map("created_at")
+  consumedAt DateTime? @map("consumed_at")
+
+  @@index([consumedAt, createdAt])
+  @@index([tenantId, createdAt])
+  @@map("sp_event_outbox")
+}
+
+// Draft-from-goal async job (strategy generation timeout fix). POST
+// /strategies/draft used to run one fully synchronous call all the way through
+// the orchestrator's repair loop (up to ~3 attempts x 8 rounds x 120s) and
+// could exceed the ALB/client timeout. The endpoint now enqueues this row and
+// returns 202; DraftJobWorkerService's claim-sweep runs the actual generation
+// off the request path and streams progress into stage/progressText/
+// streamPreview. requestKey (hash of the submitted input) + the unique index
+// below make a double-submit (client retry, double-click) return the SAME job
+// instead of starting a second generation.
+model SpDraftJob {
+  id            String           @id @default(uuid()) @db.Uuid
+  tenantId      String           @map("tenant_id") @db.Uuid
+  clientId      String           @map("client_id") @db.Uuid // apps/api clients.id — no FK
+  ownerUserId   String           @map("owner_user_id") // raw Clerk subject — the submitting user
+  requestKey    String           @map("request_key")
+  input         Json // { dto: DraftStrategyDto, bearer: string | null }
+  status        SpDraftJobStatus @default(queued)
+  stage         String? // 'compiling_context' | 'drafting' | 'verifying' | 'repairing' | 'persisting' | ...
+  progressText  String?          @map("progress_text") @db.Text
+  streamPreview String?          @map("stream_preview") @db.Text // rolling tail of streamed model text (last ~4000 chars)
+  attempt       Int              @default(1)
+  strategyId    String?          @map("strategy_id") @db.Uuid // set on completion
+  errorMessage  String?          @map("error_message") @db.Text
+  claimedBy     String?          @map("claimed_by") // worker instance id
+  claimedAt     DateTime?        @map("claimed_at")
+  deadlineAt    DateTime         @map("deadline_at")
+  createdAt     DateTime         @default(now()) @map("created_at")
+  updatedAt     DateTime         @updatedAt @map("updated_at")
+
+  @@unique([tenantId, requestKey])
+  @@index([tenantId, status])
+  // Claim-sweep candidate scan (queued work) and stale-claim reclaim (running,
+  // ordered by last progress) both key off status; updatedAt bumps on every
+  // progress write, which is what makes the stale check "no progress" rather
+  // than just "claimed a while ago".
+  @@index([status, updatedAt])
+  @@map("sp_draft_job")
+}

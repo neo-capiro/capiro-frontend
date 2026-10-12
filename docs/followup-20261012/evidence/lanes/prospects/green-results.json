@@ -1,0 +1,468 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-next-prospect-files/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-next-prospect-files-evidence/playwright.config.mjs",
+      "prospect-files-local-search.spec.ts"
+    ],
+    "configFile": "/tmp/capiro-next-prospect-files-evidence/playwright.config.mjs",
+    "rootDir": "/workspace/capiro-next-prospect-files/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-next-prospect-files-evidence/green-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-next-prospect-files/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-next-prospect-files-evidence/green-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "prospect-files-local-search.spec.ts",
+      "file": "prospect-files-local-search.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "loaded file search filters case-insensitively, trims and clears without requests or changing readiness",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4620,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:58:54.224Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7cf1cef6ce19f3e8cacf-303e944666724593ae38",
+          "file": "prospect-files-local-search.spec.ts",
+          "line": 102,
+          "column": 1
+        },
+        {
+          "title": "search distinguishes no matching files",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3391,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:58:59.297Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7cf1cef6ce19f3e8cacf-76da504ddb34f61f45fa",
+          "file": "prospect-files-local-search.spec.ts",
+          "line": 147,
+          "column": 3
+        },
+        {
+          "title": "search distinguishes a true empty list",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3556,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:59:02.697Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7cf1cef6ce19f3e8cacf-af4b910c7e621423cd36",
+          "file": "prospect-files-local-search.spec.ts",
+          "line": 147,
+          "column": 3
+        },
+        {
+          "title": "a 403 current file read conceals filtered results until successful recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3681,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:59:06.282Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7cf1cef6ce19f3e8cacf-09617d554692cd0f55e6",
+          "file": "prospect-files-local-search.spec.ts",
+          "line": 179,
+          "column": 3
+        },
+        {
+          "title": "a 503 current file read conceals filtered results until successful recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3590,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:59:09.988Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7cf1cef6ce19f3e8cacf-b8c78fdad8ff4e475b32",
+          "file": "prospect-files-local-search.spec.ts",
+          "line": 179,
+          "column": 3
+        },
+        {
+          "title": "userId replacement discards the prior file search and results",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6371,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:59:13.591Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7cf1cef6ce19f3e8cacf-23893ed30ad68aaadf06",
+          "file": "prospect-files-local-search.spec.ts",
+          "line": 214,
+          "column": 3
+        },
+        {
+          "title": "tenantId replacement discards the prior file search and results",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5163,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:59:19.985Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7cf1cef6ce19f3e8cacf-3d734567d5e620496904",
+          "file": "prospect-files-local-search.spec.ts",
+          "line": 214,
+          "column": 3
+        },
+        {
+          "title": "prospect route replacement starts with a clear search and only the new current collection",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8736,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Replacement Prospect', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Replacement Prospect', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Replacement Prospect', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Replacement Prospect', exact: true })\u001b[22m\n\n    at /workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts:273:5",
+                    "location": {
+                      "file": "/workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts",
+                      "column": 5,
+                      "line": 273
+                    },
+                    "snippet": "  271 |   await expect(\n  272 |     page.getByRole(\"heading\", { name: \"Replacement Prospect\", exact: true }),\n> 273 |   ).toBeVisible();\n      |     ^\n  274 |   await expect(area.locator(\"li\")).toHaveCount(0);\n  275 |   state.listGate.release();\n  276 |   const search = area.getByRole(\"searchbox\", { name: \"Search files\" });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts",
+                        "column": 5,
+                        "line": 273
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Replacement Prospect', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Replacement Prospect', exact: true })\u001b[22m\n\n\n  271 |   await expect(\n  272 |     page.getByRole(\"heading\", { name: \"Replacement Prospect\", exact: true }),\n> 273 |   ).toBeVisible();\n      |     ^\n  274 |   await expect(area.locator(\"li\")).toHaveCount(0);\n  275 |   state.listGate.release();\n  276 |   const search = area.getByRole(\"searchbox\", { name: \"Search files\" });\n    at /workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts:273:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:59:25.162Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-next-prospect-files-evidence/green-artifacts/prospect-files-local-searc-06006--the-new-current-collection/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-next-prospect-files-evidence/green-artifacts/prospect-files-local-searc-06006--the-new-current-collection/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-next-prospect-files-evidence/green-artifacts/prospect-files-local-searc-06006--the-new-current-collection/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts",
+                    "column": 5,
+                    "line": 273
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "7cf1cef6ce19f3e8cacf-19a53fd342d639aca2e5",
+          "file": "prospect-files-local-search.spec.ts",
+          "line": 248,
+          "column": 1
+        },
+        {
+          "title": "search cannot expose a mixed-lineage collection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5787,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:59:34.959Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7cf1cef6ce19f3e8cacf-f61badd26833e263f3a8",
+          "file": "prospect-files-local-search.spec.ts",
+          "line": 284,
+          "column": 1
+        },
+        {
+          "title": "filtering retains selected upload bytes and original upload readiness and open actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5956,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T17:59:41.290Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7cf1cef6ce19f3e8cacf-a3cfd303d2235313edd9",
+          "file": "prospect-files-local-search.spec.ts",
+          "line": 298,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T17:58:53.547Z",
+    "duration": 54126.492999999995,
+    "expected": 9,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

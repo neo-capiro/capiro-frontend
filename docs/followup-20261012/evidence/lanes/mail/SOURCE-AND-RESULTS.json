@@ -1,0 +1,59 @@
+{
+  "base": "fd1176790a6fb31b7ae68587f965a22d4145d8a2",
+  "commit": "c9647ce40adf401cdbe8fb499b915612a8ffad16",
+  "tree": "116ae58094b03a4c1dd234aa7489dade2937ac55",
+  "files": {
+    "apps/web/src/features/portfolio/relationships/MailCompose.tsx": "c5e6e9a79aa06fadfa21ed3bbc034d4290eee040a42cc96e58db026177d9f6d1",
+    "apps/web/src/features/portfolio/relationships/email/SignaturePreview.tsx": "95028a72f8c80148ea0548b5415353b3bb92ab39f969b1558d2495a1183f7645",
+    "apps/web/src/features/portfolio/relationships/email/email.module.css": "7e9288cab39848b984e5f38ee1615e9dc83d76c3b0c0abb862517c4fd7da6808",
+    "apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts": "65fd972f9903a4f6d8320ab28a0c425cba6ff057a5290f779f8be1d5d59fb5a1",
+    "apps/web/tests/browser/email-compose-harness.tsx": "c0886f597795b26b05db122b6f27a08ca2335029d7a385cd23550e0f9a613f57",
+    "apps/web/tests/browser/mail-local-draft.spec.ts": "d362e02ebbcef43b0f744d8306fcd8a214f859a3c59785d24097dc697464d496"
+  },
+  "checks": {
+    "unit": {
+      "passed": 64,
+      "failed": 0
+    },
+    "affectedBrowserBeforeFinalHrefHardening": {
+      "passed": 62,
+      "failed": 0
+    },
+    "finalLocalBrowser": {
+      "startTime": "2026-10-12T18:02:21.959Z",
+      "duration": 61787.588,
+      "expected": 18,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "supplementalVisual": {
+      "passed": 1,
+      "failed": 0
+    },
+    "typecheck": "passed",
+    "lint": "passed",
+    "format": "passed",
+    "architecture": {
+      "boundaryErrors": 0,
+      "ownerFunctionReviews": 2,
+      "testModuleReview": true,
+      "independentAcceptance": "Root-owned"
+    }
+  },
+  "cleanup": {
+    "serverPid": 617610,
+    "signal": "SIGTERM to proven owned node",
+    "port5191ConnectionRefused": true,
+    "borrowedDependencyLinkRemoved": true
+  },
+  "scope": {
+    "findings": [
+      "CR-07",
+      "CR-11"
+    ],
+    "noNativeProviderModelEffects": true,
+    "fullGateOrBuildRun": false,
+    "pixelParityClaimed": false
+  }
+}

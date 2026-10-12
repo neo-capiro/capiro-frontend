@@ -1,0 +1,42 @@
+{
+  "parentReviewed": "21503cf438862be6ea30db7f29c11f5b0db856f5",
+  "correctiveCommit": "076ee3e72263f3727ea9b850052e71043c9489af",
+  "tree": "73e6a3cea15bc61d3eb2a080284245467b523ee1",
+  "files": [
+    {
+      "path": "apps/web/src/features/modules/calendar/README.md",
+      "sha256": "b189e1f121b529c9618debc4751108eca3d573ae9c8cb1f0135faf87c7ba1811",
+      "bytes": 3547
+    },
+    {
+      "path": "apps/web/src/features/modules/calendar/selection.test.ts",
+      "sha256": "250b80bd4eb6e3d406a72489735c965d4ab58498655d4e5de0b607bf74727130",
+      "bytes": 983
+    },
+    {
+      "path": "apps/web/src/features/modules/calendar/selection.ts",
+      "sha256": "a5c69ae074a3659fd36f6ade1c2d8622bd45101c080162c76b41510eef753056",
+      "bytes": 780
+    },
+    {
+      "path": "apps/web/src/features/modules/calendar/useCalendar.ts",
+      "sha256": "1cfcf49e7a018c2739e0112b5b5958f9844dc0215f2ede7de778fc40ad86a053",
+      "bytes": 3891
+    },
+    {
+      "path": "apps/web/test/browser/next-modules-scope.spec.ts",
+      "sha256": "985874de5010438de1043077cc14926deed4c7b6ac0514165e357f452c00cad4",
+      "bytes": 6262
+    },
+    {
+      "path": "apps/web/test/browser/next-modules-task-links.spec.ts",
+      "sha256": "338cc262edb3ecd79efe5fe1f0a7f7fa87399a346ba15127e511df93b1e486b6",
+      "bytes": 8379
+    },
+    {
+      "path": "apps/web/test/browser/next-modules-view-persistence.spec.ts",
+      "sha256": "2f06aa344057208e45c7be5cba95aaf1d60abf260a3b15e7e5c224ac0ef66ee0",
+      "bytes": 2932
+    }
+  ]
+}

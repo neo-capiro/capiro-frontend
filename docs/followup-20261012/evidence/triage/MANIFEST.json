@@ -1,0 +1,226 @@
+{
+  "createdAt": "2026-10-12T17:59:24.898685+00:00",
+  "mode": "READ_ONLY_TRIAGE",
+  "files": [
+    {
+      "path": "CONTRACTS.json",
+      "bytes": 9204,
+      "sha256": "b7dc26ac3bdafd7096f471e7a4aa368ecd25926b8adcb94259f0916503a80a99"
+    },
+    {
+      "path": "CROSS-LANE-LEDGER-REVIEW.json",
+      "bytes": 32953,
+      "sha256": "28784915e26921495b0476ea062ebcd8171951a98d04809ca2f235d305fb9e3e"
+    },
+    {
+      "path": "D5DD-FINDING-DISPOSITIONS.json",
+      "bytes": 15519,
+      "sha256": "d58f2f75787a78d18f5af9f2dfacc417cbfd1e2b72ecad29a015bdc4a48acbb4"
+    },
+    {
+      "path": "FINDINGS.json",
+      "bytes": 84485,
+      "sha256": "a06b516f14f7bb45e8cee78ed1dcd5f3abbafb5900541478c9d30ea0ef2f7481"
+    },
+    {
+      "path": "NINE-FINDING-ROW-MAP.json",
+      "bytes": 22851,
+      "sha256": "0566d0e5ddec654a70476eafde079be241a17edfbbede8bd3af07214ad3119c9"
+    },
+    {
+      "path": "PORTFOLIO-337-REMAINING-ASSESSMENT.json",
+      "bytes": 1163119,
+      "sha256": "aaf0bf2670d9e247112c96276b7d1a989fb16106f129485c0a858b0380f50ff2"
+    },
+    {
+      "path": "README.md",
+      "bytes": 8430,
+      "sha256": "6507cb6226852f6886da139a9d341eee62c9c6b290d34f814161b20e78efb8f6"
+    },
+    {
+      "path": "REMAINING-18.json",
+      "bytes": 52303,
+      "sha256": "ea3f7b6fc210cdc4e23afcd82b01c23b7b07dd5da9b5fc7c68e53c0bc5372ec1"
+    },
+    {
+      "path": "ROW-INDEX.csv",
+      "bytes": 119911,
+      "sha256": "3ff5e47b4af7a2fcc08bd2e2f38b80ab73e093dfb2cefd4ddc0cd22a1f530812"
+    },
+    {
+      "path": "SOURCE-EVIDENCE.json",
+      "bytes": 13165,
+      "sha256": "622eac44589cba5151f4aaff309d2d0796428fb0a6dbb74264385b02351ce4f3"
+    },
+    {
+      "path": "STAGING-CHECKS.json",
+      "bytes": 14524,
+      "sha256": "38a174206692065035fafb7213b2388fe668828b5ad382af98520cd2f085633a"
+    },
+    {
+      "path": "TRIAGE-VALIDATION.json",
+      "bytes": 429,
+      "sha256": "1857739100d72b315722d5de4a34c8163f96e38c7580eff268007d9a633ac254"
+    },
+    {
+      "path": "UNCHANGED-ROW-STATUS-REFERENCE.json",
+      "bytes": 112066,
+      "sha256": "bd08c852b5c55cd04183ab2cc552f9588bc6b380cfad806f1c9afb5df765a989"
+    },
+    {
+      "path": "assemble-triage.py",
+      "bytes": 34144,
+      "sha256": "7a8697dcaf3675bb5a18e09030b28a35b3a64fa666997e070d692c40992a6b03"
+    },
+    {
+      "path": "report.md",
+      "bytes": 6045,
+      "sha256": "42102a6f0e6f82aa41e5c73a55e6eadde23ef6625d04cfc3dd35b984d41ddb25"
+    },
+    {
+      "path": "source-evidence/backend/apps/api/src/clients/client-account-owner.controller.ts",
+      "bytes": 1660,
+      "sha256": "18e0ede03e4a51b340d1c9d17ecd495c04d743506523790dad974c2a3252d991"
+    },
+    {
+      "path": "source-evidence/backend/apps/api/src/clients/client-account-owner.service.ts",
+      "bytes": 3792,
+      "sha256": "2e60c2fc12424f12b77f5d27fa7c6889a21ac62bc1c57f86601a228349d7da32"
+    },
+    {
+      "path": "source-evidence/backend/apps/api/src/engagement/engagement.controller.ts",
+      "bytes": 83984,
+      "sha256": "9e4cb0008290eb3afaac654dc0f15909f16c88e4db28149971f6790737dccdae"
+    },
+    {
+      "path": "source-evidence/backend/apps/api/src/engagement/engagement.service.ts",
+      "bytes": 506538,
+      "sha256": "78770fac56ac51c3af48674d07ea6b735490785dd73684265e54e861958cd3f9"
+    },
+    {
+      "path": "source-evidence/backend/apps/api/src/tenant/tenant-context.middleware.ts",
+      "bytes": 22931,
+      "sha256": "dabb24d3ab31777aeee64cd2b943ca8d256a89cd2f3e7196b90b06bc3945b346"
+    },
+    {
+      "path": "source-evidence/backend/apps/api/src/users/users.controller.ts",
+      "bytes": 16950,
+      "sha256": "d7cc8867f6a11f6ca9fc8e4c3dc6c640ecab2c73ce661e51affed17dc7057a20"
+    },
+    {
+      "path": "source-evidence/backend/apps/api-strategy/src/planner/planner.controller.ts",
+      "bytes": 11576,
+      "sha256": "306e9ad090fa3039cf3ae05fc64994ed8418e3c3b9fdb2b314e68a363f2b3c99"
+    },
+    {
+      "path": "source-evidence/backend/apps/api-strategy/src/strategy/dto/node.dto.ts",
+      "bytes": 5461,
+      "sha256": "7fd3159f93d193d7d47cfb160c53167b0d27b4b3d7091499eaac62acd980b978"
+    },
+    {
+      "path": "source-evidence/backend/apps/api-strategy/src/strategy/node.service.ts",
+      "bytes": 14330,
+      "sha256": "b0a2fcf493d70a8832d04ab6e4216f9435b49b96a9adb429767377c10363561c"
+    },
+    {
+      "path": "source-evidence/backend/apps/api-strategy/src/strategy/strategy.controller.ts",
+      "bytes": 9291,
+      "sha256": "f4291ce94b3ef1288f16ccb48b1281f9a25690dc040898f27976836b3087e8df"
+    },
+    {
+      "path": "source-evidence/backend/apps/api-strategy/src/strategy/strategy.service.ts",
+      "bytes": 12624,
+      "sha256": "74023c6cd31305078dcad0798c7098368f912a83f56ced3d23332b373eea42b1"
+    },
+    {
+      "path": "source-evidence/backend/apps/workspace/src/drafts/drafts.controller.ts",
+      "bytes": 2223,
+      "sha256": "8fea8dc5298a606fcffad4d10c0b8daacbd2bd420601f356415bba1eef803874"
+    },
+    {
+      "path": "source-evidence/backend/apps/workspace/src/drafts/drafts.service.ts",
+      "bytes": 17576,
+      "sha256": "44028389c1e414c52962c56077e2759e43bf4328093b7be0e9dfb9e8c7b8ca44"
+    },
+    {
+      "path": "source-evidence/frontend/apps/web/src/features/modules/calendar/agenda-loader.ts",
+      "bytes": 6087,
+      "sha256": "902fd0e055df9e0e9daae9980b52c5608244d7b2e3fc58ad2e19355dfbc81ea7"
+    },
+    {
+      "path": "source-evidence/frontend/apps/web/src/features/modules/calendar/agenda.ts",
+      "bytes": 4435,
+      "sha256": "19ad013669aa71827374010e260faff89180f8eb7e52f7bcb54bef3b6baf18c4"
+    },
+    {
+      "path": "source-evidence/frontend/apps/web/src/features/modules/calendar/useCalendar.ts",
+      "bytes": 2686,
+      "sha256": "00f5513262427c14d3058a3df92811932aa7f8716c2c72b75aa74ac2b32ae73c"
+    },
+    {
+      "path": "source-evidence/frontend/apps/web/src/features/portfolio/files/mutations.ts",
+      "bytes": 1513,
+      "sha256": "e4da1423dac17124164ea3de4aec3fa6d0b9bc45ff4d340166b095bda1821d03"
+    },
+    {
+      "path": "source-evidence/frontend/apps/web/src/features/portfolio/files/prospect-files.ts",
+      "bytes": 2071,
+      "sha256": "fd5417785c90f2057449afc5a1176d6c34ece2a2e3fec3ecf87bc15d8d49e5a5"
+    },
+    {
+      "path": "source-evidence/frontend/apps/web/src/features/portfolio/files/queries.ts",
+      "bytes": 2791,
+      "sha256": "d4bfab2b114044fb1068dae1211a5ea9340f1f514116aa21559aa1e0b3803716"
+    },
+    {
+      "path": "source-evidence/frontend/apps/web/src/features/portfolio/index/contracts.ts",
+      "bytes": 2619,
+      "sha256": "a9d63570a294ba08fb41c1b3229c71f2736d092a01aa697cebc90b9185d58cf7"
+    },
+    {
+      "path": "source-evidence/frontend/apps/web/src/features/portfolio/index/queries.ts",
+      "bytes": 1633,
+      "sha256": "a6d6f751ce82bb536e3441d16cd509b69a379ca4c7d8e40ec88b34ccd8c643f3"
+    },
+    {
+      "path": "source-evidence/frontend/apps/web/src/features/portfolio/relationships/email/rewrite.ts",
+      "bytes": 1171,
+      "sha256": "820d5170b72e6ef91fefe8e0f832ba38e69f6b6aa4262ba8bcd10404eac4c4b3"
+    },
+    {
+      "path": "source-evidence/frontend/apps/web/src/features/portfolio/relationships/email.ts",
+      "bytes": 4382,
+      "sha256": "4d7567992ab3bb82bba15bbb37bfdd2609a54eff57f0850a16a7e363e3c1583c"
+    },
+    {
+      "path": "source-evidence/frontend/apps/web/src/features/portfolio/work/contracts.ts",
+      "bytes": 3095,
+      "sha256": "5eb722f7191b5754d71326f82d117b09d82ddd4623d1ecfc31a36e12cbb7763e"
+    },
+    {
+      "path": "source-evidence/frontend/apps/web/src/features/portfolio/work/queries.ts",
+      "bytes": 1545,
+      "sha256": "52a28a23abf766c92864999cdaffd67c81a026d07ccb315966e69eb81317da68"
+    },
+    {
+      "path": "source-evidence/frontend/apps/web/src/shared/capiro/README.md",
+      "bytes": 5300,
+      "sha256": "9c2ede1981632ea373326e71ce170d751db370fc77f47ca5931b20f89e1521a5"
+    },
+    {
+      "path": "source-evidence/frontend/apps/web/src/shared/capiro/operations/engagement.ts",
+      "bytes": 10920,
+      "sha256": "c76d84157ccbb5b7e4debc46a710f76e4f9922ee9811ec2beab1202d0e924457"
+    },
+    {
+      "path": "source-evidence/frontend/apps/web/src/shared/capiro/operations/planner-tasks.ts",
+      "bytes": 3971,
+      "sha256": "2947c9a845cce772519e8c87fbafda24b2755ff68e866e6d93a726b0db08818c"
+    },
+    {
+      "path": "source-evidence/frontend/apps/web/src/shared/capiro/operations/settings.ts",
+      "bytes": 15754,
+      "sha256": "4b67eafda33f2dc9c245bf9cb53eb93300899c0a6ff8727616333c9f72d3e2b9"
+    }
+  ]
+}

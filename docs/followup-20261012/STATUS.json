@@ -16,8 +16,14 @@
   ],
   "selectedFindingCount": 9,
   "remainingOutsideGroup": 18,
-  "status": "IMPLEMENTATION_AND_TARGETED_REGRESSION_IN_PROGRESS",
+  "status": "ALL_NINE_SOURCE_REPAIRS_INTEGRATED_TARGETED_CONTROLS_PASSED_COMBINED_PENDING",
   "combinedQualification": "NOT_RUN_ON_NEW_SOURCE",
   "scopePolicy": "Preserve per-row/facet criteria; do not replace337rows with a blanket status.",
-  "nativeOrCloudActions": []
+  "nativeOrCloudActions": [],
+  "reviewCorrections": [
+    "Calendar URL date/view survives verified client remount",
+    "Failed signature reread cannot create stale current preview",
+    "Failed deletion-review read revokes stale file actions",
+    "Background replacement read cannot satisfy explicit deletion recovery"
+  ]
 }

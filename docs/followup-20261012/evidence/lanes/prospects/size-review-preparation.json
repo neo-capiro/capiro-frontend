@@ -1,0 +1,28 @@
+{
+  "baseline": {
+    "nonblank": 290,
+    "sizeFindings": [
+      {
+        "file": "apps/web/src/features/portfolio/files/ProspectFiles.tsx",
+        "kind": "function",
+        "symbol": "ProspectFileSession",
+        "line": 73,
+        "nonblank": 211,
+        "fingerprint": "fdb71b7f7745545c4be16e63b5d26c31ffba9371f8c0540833908ded57fe4548"
+      }
+    ]
+  },
+  "candidate": {
+    "nonblank": 319,
+    "sizeFindings": [
+      {
+        "file": "apps/web/src/features/portfolio/files/ProspectFiles.tsx",
+        "kind": "function",
+        "symbol": "ProspectFileSession",
+        "line": 73,
+        "nonblank": 240,
+        "fingerprint": "6605779ecb5415ef0988fb6221d0877ae23ee29e700ae4d85ef066818921624c"
+      }
+    ]
+  }
+}

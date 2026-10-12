@@ -1,0 +1,53 @@
+{
+  "commit": "076ee3e72263f3727ea9b850052e71043c9489af",
+  "parent": "21503cf438862be6ea30db7f29c11f5b0db856f5",
+  "tree": "73e6a3cea15bc61d3eb2a080284245467b523ee1",
+  "rootInstructions": "Cherry-pick corrective commit only; root already integrated original as f26b635.",
+  "red": {
+    "source": "21503cf438862be6ea30db7f29c11f5b0db856f5",
+    "expectedFailures": 3,
+    "controlPasses": 1,
+    "results": "red/results.json",
+    "method": "Preserved fixture bundle produced for 21503cf; unchanged new regression spec."
+  },
+  "green": {
+    "browserPassed": 28,
+    "results": "green/results.json",
+    "unitPassed": 22,
+    "typecheck": "passed",
+    "lint": "passed",
+    "format": "passed",
+    "diffCheck": "passed"
+  },
+  "structure": {
+    "boundaryErrors": [],
+    "useCalendar": {
+      "file": "apps/web/src/features/modules/calendar/useCalendar.ts",
+      "kind": "function",
+      "symbol": "useCalendar",
+      "line": 18,
+      "nonblank": 96,
+      "fingerprint": "99be1ba2c80f448785bb3651fd514baf63dd1553cede089730f7d8715b1c83e4",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true
+    },
+    "rationale": "Calendar hook retains one screen selection/read/composition responsibility. URL presentation selection removes remount-sensitive local view/date ownership. Validation is a narrow Calendar-local helper; shared client verification and lifetime remain unchanged. No new authorization, transport, or persistence owner.",
+    "TaskFilters": "Function syntax is byte-identical to fd117 and its function fingerprint unchanged; only whole-file Modules review invalidated by useTaskWorkspace edit. See unchanged-task-filters.json."
+  },
+  "scopeCharacterization": "taskMatchesClient preserves existing direct task client OR current bootstrap project membership. Positive tests cover null direct client and different direct client with a matching current project; this is a presentation predicate, not strict direct-client equality or backend authority.",
+  "cleanup": {
+    "stoppedExactServerPid": 639595,
+    "port5197": "verified no listener"
+  },
+  "nativeLimits": "Synthetic local transport only; no native/provider/RLS qualification or full MCAL row acceptance.",
+  "changedFiles": [
+    "apps/web/src/features/modules/calendar/README.md",
+    "apps/web/src/features/modules/calendar/selection.test.ts",
+    "apps/web/src/features/modules/calendar/selection.ts",
+    "apps/web/src/features/modules/calendar/useCalendar.ts",
+    "apps/web/test/browser/next-modules-scope.spec.ts",
+    "apps/web/test/browser/next-modules-task-links.spec.ts",
+    "apps/web/test/browser/next-modules-view-persistence.spec.ts"
+  ]
+}

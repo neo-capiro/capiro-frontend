@@ -1865,15 +1865,15 @@
   },
   {
     "path": "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
-    "sha256": "20221fc7fe5eebfdd984866c7d1b892fa76b27e958b1dc50179f9e6afa8b0c9f",
-    "reviewer": "Codex implementation review",
+    "sha256": "d636dd0f21520044523b2a863e88aad088d70122b86a6b3c751c5c0c06367e72",
+    "reviewer": "Codex shared frontend integration owner and independent core_intake source review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "TaskWorkspace.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "evidence": "docs/followup-20261012/STRUCTURE-REVIEW.md#modules-presentation",
+    "rationale": "The existing task workspace owns its related list query, local filters, selection and batch actions. A narrow shared taskMatchesClient predicate replaces inline client/project membership logic and is characterized as direct-client OR current-project association, not backend authorization. TaskFilters remains byte-identical to the frozen base and renders only this workspace's controls; its whole-file review is renewed for the sibling change. Root and independent core_intake reviewed both complete functions. See docs/followup-20261012/STRUCTURE-REVIEW.md.",
     "functions": [
       {
         "name": "useTaskWorkspace",
-        "nonblankLines": 96
+        "nonblankLines": 87
       },
       {
         "name": "TaskFilters",
@@ -3688,6 +3688,57 @@
     ],
     "signals": [
       "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/calendar/CalendarCard.tsx",
+    "sha256": "c799faff79e3caa4edf67336f78ca17d775d0baccae5213598f5e9baf98ac99f",
+    "reviewer": "Codex shared frontend integration owner and independent core_intake source review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/followup-20261012/STRUCTURE-REVIEW.md#modules-presentation",
+    "rationale": "One event viewport owns agenda/grid choice and their loading, error, empty and search presentation. Meetings status is now adjacent to the agenda table so healthy independent sources survive; grids keep the existing meeting gate. Normalization, reads and meeting editors retain separate owners. Root and independent core_intake reviewed full source and scoped evidence; see docs/followup-20261012/STRUCTURE-REVIEW.md.",
+    "functions": [
+      {
+        "name": "CalendarEvents",
+        "nonblankLines": 87
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/calendar/CalendarCard.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/calendar/useCalendar.ts",
+    "sha256": "1cfcf49e7a018c2739e0112b5b5958f9844dc0215f2ede7de778fc40ad86a053",
+    "reviewer": "Codex shared frontend integration owner and independent core_intake source review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/followup-20261012/STRUCTURE-REVIEW.md#modules-presentation",
+    "rationale": "One Calendar screen model composes validated URL date/view selection, current shared-verified client scope, filters and fixed-operation reads. Calendar-local selection.ts validates presentation hints; range and extra-feed loading retain separate owners. URL history preserves view/date through the shared disposal boundary without retaining former scope data or drafts. Root and independent core_intake accepted correction076ee3e after three red controls and28 scoped browser passes; no second authority or transport. See docs/followup-20261012/STRUCTURE-REVIEW.md.",
+    "functions": [
+      {
+        "name": "useCalendar",
+        "nonblankLines": 96
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/calendar/useCalendar.ts: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/PlannerScreen.tsx",
+    "sha256": "a70833a933e56c826547563a317fd98bd6fc726a8d213b971599af8d7e528182",
+    "reviewer": "Codex shared frontend integration owner and independent core_intake source review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/followup-20261012/STRUCTURE-REVIEW.md#modules-presentation",
+    "rationale": "One public Planner entry composes section navigation and current bootstrap. LinkedTaskDetail is the separate narrow owner of task URL resolution, current ID/client presentation checks, retry and dismissal; existing TaskDetail remains canonical. All content stays behind the current bootstrap gate. Root and independent core_intake reviewed scope and history controls; no new transport or authorization behavior in this composition. See docs/followup-20261012/STRUCTURE-REVIEW.md.",
+    "functions": [
+      {
+        "name": "PlannerScreen",
+        "nonblankLines": 82
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/PlannerScreen.tsx: function over80 nonblank lines requires review"
     ]
   }
 ]

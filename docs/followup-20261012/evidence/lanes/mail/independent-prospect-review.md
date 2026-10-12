@@ -1,0 +1,27 @@
+# Independent Prospect local-search review
+
+Accepted for the bounded loaded-file search facet. No confirmed source defect was found in author commit `066d2601f55e750e6863db0e72251c26a3651fc8`, integrated as `1237bee6f2ab0287109871daa9a145d5acc28530`. This is an independent source, test, and recorded-evidence inspection; I did not execute another browser, server, build, backend call, or test suite.
+
+## Exact scope and source binding
+
+Only `apps/web/src/features/portfolio/files/ProspectFiles.tsx` and `apps/web/tests/browser/prospect-files-local-search.spec.ts` change. Their author and integrated git blobs are byte-identical. SHA-256 values are respectively `45b12448e5849095afc5b3cd575824a590289d12329238fecf0333cf76154160` and `ad59ea80af69fcc89cdf62c5195b3fbc1a10bd2de526ac245d697980738cc41c`; these match the final red/green evidence pins. The final test bytes were used for the rerun baseline after correcting the original fixture's wrong prospect detail URL. That fixture correction is explicitly retained in the author report and does not conceal a production change.
+
+## Source and assertion review
+
+- `ProspectFiles.tsx:31–48`: the existing `useIdentity` subscription and `currentClientWriter` gate remain canonical. That helper rejects non-successful, errored, invalidated, fetching, malformed, or non-member identity state. The mounted session key contains tenant ID, user ID, and prospect ID; replacement unmounts the old local search, selected upload, and action state. Search does not establish authorization. Backend authorization remains authoritative.
+- `ProspectFiles.tsx:84–119`: the query key has the same three scope values; `readProspectFiles` retains pre/post current-writer checks, cancellation, exact prospect/tenant row binding, uniqueness, and client/meeting/mail lineage refusal. The new filter only consumes `query.data` when success is current and there is neither an error nor a fetch in progress. It uses trimmed case-insensitive filename containment, preserving input order and original row objects. It does not refetch, write, copy records, add a new cache, or construct signed links.
+- `ProspectFiles.tsx:153–240`: pending/failing refresh retains canonical query feedback while hiding old rows and links. Search and Clear are disabled until current data returns. True-empty is based on the authorized collection; no-match requires a nonempty current collection. Neither message can imply successful emptiness during failure/loading. Existing refresh and uncertain-delete recovery handlers are unchanged.
+- `ProspectFiles.tsx:190–234,245–316`: original ready/blocked disclosures, usable===true and signedUrl checks, delete preflight/uncertainty, upload selection/recovery, active-prospect gate, and cancellation remain unchanged. Filtering does not alter file readiness or the selected local upload.
+- The new spec tests trimmed/case-insensitive search, Clear/order, unchanged ready hrefs, blocked-record link suppression, responsive overflow, true-empty versus no-match, held/failed403/503 refresh, actor and tenant replacement, prospect replacement, mixed-lineage refusal, and a selected upload surviving filtering. It asserts zero list refetches/writes for local search, uses the existing synthetic upload contract for the upload case, and blocks unexpected cross-port requests. These are observable outcomes, not a copied filter implementation.
+
+## Recorded verification and preservation
+
+I read the actual result JSON: final unchanged-spec baseline has three expected failures and zero passes; final search suite has10/10 passes; preservation wrapper has9/9 passes; canonical contract tests have21/21 before and after. Green spec/source pins match the reviewed blobs. Existing `prospect-files.spec.ts` and `prospect-upload-restart-acceptance.spec.ts` are byte-identical between frozen fd117 and integrated1237bee. The external preservation wrapper imports those original specs and adds only cross-port request refusal/zero-attempt assertions; it does not rewrite their upload/readiness/open/recovery assertions. Author reports also retain successful typecheck, lint, format, diff and zero dependency-boundary errors. These are reviewed author-run results, not independently executed results.
+
+## Exact responsibility review
+
+Accepted: `ProspectFileSession` at line73,240 nonblank function lines, fingerprint `6605779ecb5415ef0988fb6221d0877ae23ee29e700ae4d85ef066818921624c`, source hash above (file319 nonblank). This remains the canonical prospect-file interaction owner. Search is a small local projection of its existing current list, with the same actor/prospect lifetime and row/action rendering. Canonical collection validation, transport, upload recovery, current-writer authority, and signed-link checks stay in existing owners. No unrelated domain, parallel DTO, transport, authority/cache system, or shared-module dependency is introduced. Extracting the predicate or controls would not establish a useful independent responsibility. Root owns the exact registry update; this is not a blanket size waiver.
+
+## Limits
+
+Acceptance covers loaded authorized-list search, not the entire PROS-019 design or native release readiness. Native authentication/storage/durability, real signed-link expiry/open, research/proposal federation, standalone page/table/shell parity, and provider effects were not exercised. Existing sharing, sending, and text-import controls remain explicitly unavailable. Stored Figma evidence is only the bounded search-field reference; no new pixel-parity claim is made.
