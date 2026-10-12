@@ -1,0 +1,112 @@
+243248e726243c44bd4b9d24fd1ed220da18c56a apps/api/src/engagement/engagement.service.ts
+ 1844   async shareArtifacts(ctx: TenantContext, meetingId: string, refs: ArtifactRef[]) {
+ 1845     if (!refs.length) throw new BadRequestException('artifacts must not be empty');
+ 1846     return this.prisma.withTenant(ctx.tenantId, async (tx) => {
+ 1847       const meeting = await tx.meeting.findFirst({
+ 1848         where: { id: meetingId, tenantId: ctx.tenantId, ...ownMeetingWhere(ctx.userId) },
+ 1849         select: { id: true, clientId: true, visibility: true },
+ 1850       });
+ 1851       if (!meeting) throw new NotFoundException('Meeting not found');
+ 1852       if (!meeting.clientId) {
+ 1853         throw new BadRequestException(
+ 1854           'This meeting must be associated with a client before it can be shared',
+ 1855         );
+ 1856       }
+ 1857 
+ 1858       const loaded = await Promise.all(
+ 1859         refs.map(async (ref) => ({
+ 1860           ref,
+ 1861           artifact: await this.loadArtifactShareState(tx, ctx, meetingId, ref),
+ 1862         })),
+ 1863       );
+ 1864       const missing = loaded.filter((l) => !l.artifact);
+ 1865       if (missing.length) {
+ 1866         throw new BadRequestException(
+ 1867           `Artifact(s) not found on this meeting: ${describeRefs(missing.map((l) => l.ref))}`,
+ 1868         );
+ 1869       }
+ 1870       const unapproved = loaded.filter((l) => !l.artifact!.approved);
+ 1871       if (unapproved.length) {
+ 1872         throw new BadRequestException(
+ 1873           `Only approved artifacts can be shared. Not yet approved: ${describeRefs(
+ 1874             unapproved.map((l) => l.ref),
+ 1875           )}`,
+ 1876         );
+ 1877       }
+ 1878 
+ 1879       const now = new Date();
+ 1880       for (const { ref, artifact } of loaded) {
+ 1881         if (artifact!.sharedAt) continue; // idempotent — first sharer's stamp wins
+ 1882         await this.stampArtifactShared(tx, ref, ctx.userId, now);
+ 1883       }
+ 1884       if (meeting.visibility !== MeetingVisibility.shared) {
+ 1885         await tx.meeting.update({
+ 1886           where: { id: meetingId },
+ 1887           data: { visibility: MeetingVisibility.shared, sharedAt: now, sharedByUserId: ctx.userId },
+ 1888         });
+ 1889       }
+ 1890 
+ 1891       const refreshed = await tx.meeting.findFirst({
+ 1892         where: { id: meetingId },
+ 1893         include: meetingInclude(),
+ 1894       });
+ 1895       return (await this.decorateMeetings(tx, ctx, [refreshed!]))[0];
+ 1896     });
+ 1897   }
+ 1898 
+ 1899   /**
+ 1900    * Un-share specific artifacts (Phase 2 §d, ENGAGEMENT_ARTIFACT_SHARING_V2).
+ 1901    * Tenant-scoped meeting lookup (not ownMeetingWhere) so an admin can act on a
+ 1902    * meeting they don't personally own. Per Neo's decision, authorization is
+ 1903    * PER ARTIFACT: a user_admin/capiro_admin may unshare ANY artifact; a
+ 1904    * standard user may only unshare one they personally shared
+ 1905    * (sharedByUserId), or — for note/debrief specifically — one they authored.
+ 1906    * All-or-nothing on AUTHORIZATION: if the caller isn't authorized to unshare
+ 1907    * even one requested artifact, the WHOLE batch is rejected rather than
+ 1908    * partially unsharing (this is the opposite of unshareMeeting's bulk mode,
+ 1909    * which is deliberately best-effort/partial — see its own doc comment).
+ 1910    * Once no artifact on the meeting remains shared, Meeting.visibility resets
+ 1911    * to 'private'.
+ 1912    */
+ 1913   async unshareArtifacts(ctx: TenantContext, meetingId: string, refs: ArtifactRef[]) {
+ 1914     if (!refs.length) throw new BadRequestException('artifacts must not be empty');
+ 1915     return this.prisma.withTenant(ctx.tenantId, async (tx) => {
+ 1916       const meeting = await tx.meeting.findFirst({
+ 1917         where: { id: meetingId, tenantId: ctx.tenantId },
+ 1918         select: { id: true },
+ 1919       });
+ 1920       if (!meeting) throw new NotFoundException('Meeting not found');
+ 1921 
+ 1922       const loaded = await Promise.all(
+ 1923         refs.map(async (ref) => ({
+ 1924           ref,
+ 1925           artifact: await this.loadArtifactShareState(tx, ctx, meetingId, ref),
+ 1926         })),
+ 1927       );
+ 1928       const missing = loaded.filter((l) => !l.artifact);
+ 1929       if (missing.length) {
+ 1930         throw new BadRequestException(
+ 1931           `Artifact(s) not found on this meeting: ${describeRefs(missing.map((l) => l.ref))}`,
+ 1932         );
+ 1933       }
+ 1934       const unauthorized = loaded.filter((l) => !canUnshareArtifact(ctx, l.artifact!));
+ 1935       if (unauthorized.length) {
+ 1936         throw new ForbiddenException(
+ 1937           `You are not authorized to unshare: ${describeRefs(unauthorized.map((l) => l.ref))}`,
+ 1938         );
+ 1939       }
+ 1940 
+ 1941       for (const { ref } of loaded) {
+ 1942         await this.clearArtifactShared(tx, ref);
+ 1943       }
+ 1944       await this.recomputeMeetingVisibility(tx, ctx, meetingId);
+ 1945 
+ 1946       const refreshed = await tx.meeting.findFirst({
+ 1947         where: { id: meetingId },
+ 1948         include: meetingInclude(),
+ 1949       });
+ 1950       return (await this.decorateMeetings(tx, ctx, [refreshed!]))[0];
+ 1951     });
+ 1952   }
+ 1953 
+ 1954   /** Load one artifact's approval/share state, scoped to this meeting+tenant. Null if not found. */

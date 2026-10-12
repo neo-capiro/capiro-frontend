@@ -1,0 +1,2 @@
+import { defineConfig } from '/workspace/capiro-acceptance-assessment/node_modules/@playwright/test/index.mjs';
+export default defineConfig({testDir:'.',testMatch:'review.spec.ts',outputDir:'./artifacts',workers:1,fullyParallel:false,timeout:45000,reporter:[['list'],['json',{outputFile:'./results.json'}]],use:{baseURL:'http://127.0.0.1:5191',viewport:{width:1440,height:1040},launchOptions:{executablePath:'/usr/bin/chromium',args:['--disable-dev-shm-usage']},screenshot:'only-on-failure',trace:'retain-on-failure'},webServer:undefined});

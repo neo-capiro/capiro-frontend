@@ -1,0 +1,860 @@
+{
+  "source": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "evidenceBase": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+  "scope": "Meri remaining-frame assessment; no application edits or new runtime qualification",
+  "metadataNodes": 196,
+  "logicalNumberedScreens": 85,
+  "freshActualFigmaFrames": 3,
+  "screens": [
+    {
+      "node": "442:81437",
+      "name": "01.01 \u00b7 Home",
+      "width": 1440,
+      "height": 1040,
+      "classification": "previously-reviewed-bounded-subset",
+      "reason": "Home approved bounded fixture; seven previous refresh repairs excluded from this new assessment.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=442-81437",
+      "freshScreenshot": null
+    },
+    {
+      "node": "442:81682",
+      "name": "01.02 \u00b7 Cited answer",
+      "width": 1440,
+      "height": 1040,
+      "classification": "previously-reviewed-bounded-subset",
+      "reason": "Cited answer approved synthetic fixture; richer authorized sources remain unavailable.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=442-81682",
+      "freshScreenshot": null
+    },
+    {
+      "node": "442:81953",
+      "name": "01.03 \u00b7 Choose client and data scope",
+      "width": 1440,
+      "height": 1040,
+      "classification": "documented-unavailable",
+      "reason": "The scope selector is explicitly disabled in MeriHome; production has no governed Meri conversation admission/current-source selection contract wired. The shared application client hint does not authorize Meri sources. Current desktop design depicts search and source choices, but enabling these from mock data would invent authorization.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=442-81953",
+      "freshScreenshot": "442-81953.png"
+    },
+    {
+      "node": "442:82205",
+      "name": "01.04 \u00b7 Conversation history",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=442-82205",
+      "freshScreenshot": null
+    },
+    {
+      "node": "442:82465",
+      "name": "01.05 \u00b7 Search and command palette",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=442-82465",
+      "freshScreenshot": null
+    },
+    {
+      "node": "443:82027",
+      "name": "02.01 \u00b7 Research in progress",
+      "width": 1440,
+      "height": 1040,
+      "classification": "previously-reviewed-bounded-subset",
+      "reason": "Only run-workspace content subset accepted historically, not whole-screen product parity.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=443-82027",
+      "freshScreenshot": null
+    },
+    {
+      "node": "443:82286",
+      "name": "02.02 \u00b7 Parallel specialist activity",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=443-82286",
+      "freshScreenshot": null
+    },
+    {
+      "node": "443:82547",
+      "name": "02.03 \u00b7 Run detail",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=443-82547",
+      "freshScreenshot": null
+    },
+    {
+      "node": "443:82819",
+      "name": "02.04 \u00b7 Background runs",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=443-82819",
+      "freshScreenshot": null
+    },
+    {
+      "node": "443:83910",
+      "name": "02.05 \u00b7 Steer and stop a run",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=443-83910",
+      "freshScreenshot": null
+    },
+    {
+      "node": "443:84112",
+      "name": "02.06 \u00b7 Checkpoint and verified restore",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=443-84112",
+      "freshScreenshot": null
+    },
+    {
+      "node": "443:84316",
+      "name": "02.07 \u00b7 Tool activity and receipts",
+      "width": 1440,
+      "height": 1040,
+      "classification": "previously-reviewed-bounded-subset",
+      "reason": "Only sparse public0.1 tool/run activity content subset accepted historically.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=443-84316",
+      "freshScreenshot": null
+    },
+    {
+      "node": "443:84534",
+      "name": "02.08 \u00b7 Interrupted run and fork",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=443-84534",
+      "freshScreenshot": null
+    },
+    {
+      "node": "443:84733",
+      "name": "03.01 \u00b7 Workspace files",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=443-84733",
+      "freshScreenshot": null
+    },
+    {
+      "node": "443:85000",
+      "name": "03.02 \u00b7 Word document workspace",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=443-85000",
+      "freshScreenshot": null
+    },
+    {
+      "node": "443:85315",
+      "name": "03.03 \u00b7 PDF and multi-page preview",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=443-85315",
+      "freshScreenshot": null
+    },
+    {
+      "node": "444:83270",
+      "name": "03.04 \u00b7 Spreadsheet preview",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=444-83270",
+      "freshScreenshot": null
+    },
+    {
+      "node": "444:83586",
+      "name": "03.05 \u00b7 Presentation preview",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=444-83586",
+      "freshScreenshot": null
+    },
+    {
+      "node": "444:83833",
+      "name": "03.06 \u00b7 Generated web preview",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=444-83833",
+      "freshScreenshot": null
+    },
+    {
+      "node": "444:88256",
+      "name": "03.07 \u00b7 Code and execution activity",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=444-88256",
+      "freshScreenshot": null
+    },
+    {
+      "node": "444:88450",
+      "name": "03.08 \u00b7 Analysis outputs",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=444-88450",
+      "freshScreenshot": null
+    },
+    {
+      "node": "444:88705",
+      "name": "03.09 \u00b7 Versions and comparison",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=444-88705",
+      "freshScreenshot": null
+    },
+    {
+      "node": "444:88936",
+      "name": "03.10 \u00b7 Revise an artifact",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=444-88936",
+      "freshScreenshot": null
+    },
+    {
+      "node": "445:84258",
+      "name": "04.01 \u00b7 Upload and attachment menu",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=445-84258",
+      "freshScreenshot": null
+    },
+    {
+      "node": "445:84498",
+      "name": "04.02 \u00b7 Attach an authorized Capiro file",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=445-84498",
+      "freshScreenshot": null
+    },
+    {
+      "node": "445:84716",
+      "name": "04.03 \u00b7 Upload and extraction progress",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=445-84716",
+      "freshScreenshot": null
+    },
+    {
+      "node": "445:84926",
+      "name": "04.04 \u00b7 File artifact to client",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=445-84926",
+      "freshScreenshot": null
+    },
+    {
+      "node": "445:85964",
+      "name": "04.05 \u00b7 Download exact artifact version",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=445-85964",
+      "freshScreenshot": null
+    },
+    {
+      "node": "445:86178",
+      "name": "04.06 \u00b7 Revision progress and verification",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=445-86178",
+      "freshScreenshot": null
+    },
+    {
+      "node": "445:86377",
+      "name": "04.07 \u00b7 Filing and download receipts",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=445-86377",
+      "freshScreenshot": null
+    },
+    {
+      "node": "446:84960",
+      "name": "05.01 \u00b7 Evidence and citations",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=446-84960",
+      "freshScreenshot": null
+    },
+    {
+      "node": "446:85206",
+      "name": "05.02 \u00b7 Data coverage and capabilities",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=446-85206",
+      "freshScreenshot": null
+    },
+    {
+      "node": "446:85469",
+      "name": "05.03 \u00b7 Freshness, partial and historical results",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=446-85469",
+      "freshScreenshot": null
+    },
+    {
+      "node": "446:85688",
+      "name": "05.04 \u00b7 Institutional Memory recall",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=446-85688",
+      "freshScreenshot": null
+    },
+    {
+      "node": "446:87422",
+      "name": "05.05 \u00b7 Memory detail and provenance",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=446-87422",
+      "freshScreenshot": null
+    },
+    {
+      "node": "446:87639",
+      "name": "05.06 \u00b7 Memory update proposal",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=446-87639",
+      "freshScreenshot": null
+    },
+    {
+      "node": "446:87838",
+      "name": "05.07 \u00b7 Access changed and clean recovery",
+      "width": 1440,
+      "height": 1040,
+      "classification": "documented-unavailable",
+      "reason": "The current route is an explicitly disconnected synthetic fixture. It has no persisted authorized conversation or source-revocation event to render. ApplicationBoundary clears session/client-scoped state, but this does not qualify the designed live memory/conversation recovery workflow.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=446-87838",
+      "freshScreenshot": "446-87838.png"
+    },
+    {
+      "node": "459:90479",
+      "name": "05.08 \u00b7 Approved memory outcome",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=459-90479",
+      "freshScreenshot": null
+    },
+    {
+      "node": "466:91138",
+      "name": "05.09 \u00b7 Funding evidence detail",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=466-91138",
+      "freshScreenshot": null
+    },
+    {
+      "node": "447:85660",
+      "name": "06.01 \u00b7 Approval center",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=447-85660",
+      "freshScreenshot": null
+    },
+    {
+      "node": "447:85887",
+      "name": "06.02 \u00b7 Memory approval review",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=447-85887",
+      "freshScreenshot": null
+    },
+    {
+      "node": "447:86100",
+      "name": "06.03 \u00b7 Draft a client task",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=447-86100",
+      "freshScreenshot": null
+    },
+    {
+      "node": "447:86303",
+      "name": "06.04 \u00b7 Review exact task action",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=447-86303",
+      "freshScreenshot": null
+    },
+    {
+      "node": "447:87361",
+      "name": "06.05 \u00b7 Review artifact filing",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=447-87361",
+      "freshScreenshot": null
+    },
+    {
+      "node": "447:87582",
+      "name": "06.06 \u00b7 Approved action receipts",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=447-87582",
+      "freshScreenshot": null
+    },
+    {
+      "node": "447:87788",
+      "name": "06.07 \u00b7 Reject or request changes",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=447-87788",
+      "freshScreenshot": null
+    },
+    {
+      "node": "447:87985",
+      "name": "07.01 \u00b7 Public browser activity",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=447-87985",
+      "freshScreenshot": null
+    },
+    {
+      "node": "447:88214",
+      "name": "07.02 \u00b7 Site connection and sign-in",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=447-88214",
+      "freshScreenshot": null
+    },
+    {
+      "node": "447:88418",
+      "name": "07.03 \u00b7 Browser files and receipts",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=447-88418",
+      "freshScreenshot": null
+    },
+    {
+      "node": "447:88639",
+      "name": "07.04 \u00b7 Browser connection states",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=447-88639",
+      "freshScreenshot": null
+    },
+    {
+      "node": "447:88833",
+      "name": "08.01 \u00b7 Routines",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=447-88833",
+      "freshScreenshot": null
+    },
+    {
+      "node": "447:89078",
+      "name": "08.02 \u00b7 Create or edit routine",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=447-89078",
+      "freshScreenshot": null
+    },
+    {
+      "node": "447:89296",
+      "name": "08.03 \u00b7 Routine detail",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=447-89296",
+      "freshScreenshot": null
+    },
+    {
+      "node": "447:89525",
+      "name": "08.04 \u00b7 Routine history and authority changes",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=447-89525",
+      "freshScreenshot": null
+    },
+    {
+      "node": "448:87358",
+      "name": "09.01 \u00b7 Personal preferences",
+      "width": 1440,
+      "height": 1081,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=448-87358",
+      "freshScreenshot": null
+    },
+    {
+      "node": "448:87593",
+      "name": "09.02 \u00b7 Connector accounts and permissions",
+      "width": 1440,
+      "height": 1081,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=448-87593",
+      "freshScreenshot": null
+    },
+    {
+      "node": "448:87834",
+      "name": "09.03 \u00b7 Usage and workspace limits",
+      "width": 1440,
+      "height": 1081,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=448-87834",
+      "freshScreenshot": null
+    },
+    {
+      "node": "448:88064",
+      "name": "09.04 \u00b7 Skills and artifact templates",
+      "width": 1440,
+      "height": 1081,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=448-88064",
+      "freshScreenshot": null
+    },
+    {
+      "node": "448:89128",
+      "name": "09.05 \u00b7 Notifications and account menu",
+      "width": 1440,
+      "height": 1081,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=448-89128",
+      "freshScreenshot": null
+    },
+    {
+      "node": "448:89369",
+      "name": "09.06 \u00b7 Privacy and deletion",
+      "width": 1440,
+      "height": 1081,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=448-89369",
+      "freshScreenshot": null
+    },
+    {
+      "node": "448:89560",
+      "name": "09.07 \u00b7 Help, shortcuts and feedback",
+      "width": 1440,
+      "height": 1081,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=448-89560",
+      "freshScreenshot": null
+    },
+    {
+      "node": "448:89779",
+      "name": "09.08 \u00b7 Conversation management and branches",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=448-89779",
+      "freshScreenshot": null
+    },
+    {
+      "node": "448:89992",
+      "name": "10.01 \u00b7 Dark workspace",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=448-89992",
+      "freshScreenshot": null
+    },
+    {
+      "node": "448:90209",
+      "name": "10.02 \u00b7 Tablet conversation",
+      "width": 1024,
+      "height": 1100,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=448-90209",
+      "freshScreenshot": null
+    },
+    {
+      "node": "448:90399",
+      "name": "10.03 \u00b7 Tablet artifact drawer",
+      "width": 1024,
+      "height": 1100,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=448-90399",
+      "freshScreenshot": null
+    },
+    {
+      "node": "449:88256",
+      "name": "10.04 \u00b7 Mobile home",
+      "width": 390,
+      "height": 844,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=449-88256",
+      "freshScreenshot": null
+    },
+    {
+      "node": "449:88373",
+      "name": "10.05 \u00b7 Mobile conversation",
+      "width": 390,
+      "height": 844,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=449-88373",
+      "freshScreenshot": null
+    },
+    {
+      "node": "449:88504",
+      "name": "10.06 \u00b7 Mobile artifact",
+      "width": 390,
+      "height": 844,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=449-88504",
+      "freshScreenshot": null
+    },
+    {
+      "node": "449:88625",
+      "name": "10.07 \u00b7 Mobile task approval",
+      "width": 390,
+      "height": 844,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=449-88625",
+      "freshScreenshot": null
+    },
+    {
+      "node": "449:88715",
+      "name": "10.08 \u00b7 Mobile navigation",
+      "width": 390,
+      "height": 844,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=449-88715",
+      "freshScreenshot": null
+    },
+    {
+      "node": "454:90810",
+      "name": "10.17 \u00b7 Mobile filing receipt",
+      "width": 390,
+      "height": 844,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=454-90810",
+      "freshScreenshot": null
+    },
+    {
+      "node": "454:90889",
+      "name": "10.18 \u00b7 Mobile revision progress",
+      "width": 390,
+      "height": 844,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=454-90889",
+      "freshScreenshot": null
+    },
+    {
+      "node": "458:90135",
+      "name": "10.09 \u00b7 Mobile sources",
+      "width": 390,
+      "height": 844,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=458-90135",
+      "freshScreenshot": null
+    },
+    {
+      "node": "458:90218",
+      "name": "10.10 \u00b7 Mobile artifact actions",
+      "width": 390,
+      "height": 844,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=458-90218",
+      "freshScreenshot": null
+    },
+    {
+      "node": "458:90320",
+      "name": "10.11 \u00b7 Mobile artifact revision",
+      "width": 390,
+      "height": 844,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=458-90320",
+      "freshScreenshot": null
+    },
+    {
+      "node": "458:90397",
+      "name": "10.12 \u00b7 Mobile versions",
+      "width": 390,
+      "height": 844,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=458-90397",
+      "freshScreenshot": null
+    },
+    {
+      "node": "458:90494",
+      "name": "10.13 \u00b7 Mobile filing review",
+      "width": 390,
+      "height": 844,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=458-90494",
+      "freshScreenshot": null
+    },
+    {
+      "node": "459:90168",
+      "name": "10.14 \u00b7 Mobile scope picker",
+      "width": 390,
+      "height": 844,
+      "classification": "documented-unavailable",
+      "reason": "Actual390px design specifies a searchable authorized client/general-workspace picker. This is the same unavailable governed conversation-scope contract as desktop, not evidence that responsive Home implements mobile scope selection.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=459-90168",
+      "freshScreenshot": "459-90168.png"
+    },
+    {
+      "node": "459:90251",
+      "name": "10.15 \u00b7 Mobile upload",
+      "width": 390,
+      "height": 844,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=459-90251",
+      "freshScreenshot": null
+    },
+    {
+      "node": "459:90349",
+      "name": "10.16 \u00b7 Mobile research progress",
+      "width": 390,
+      "height": 844,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=459-90349",
+      "freshScreenshot": null
+    },
+    {
+      "node": "450:88532",
+      "name": "11.01 \u00b7 Run and recovery state board",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=450-88532",
+      "freshScreenshot": null
+    },
+    {
+      "node": "450:88823",
+      "name": "11.02 \u00b7 File and artifact error state board",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=450-88823",
+      "freshScreenshot": null
+    },
+    {
+      "node": "450:89113",
+      "name": "11.03 \u00b7 Approval and permission state board",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=450-89113",
+      "freshScreenshot": null
+    },
+    {
+      "node": "450:90240",
+      "name": "11.04 \u00b7 Conversation and memory lifecycle states",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=450-90240",
+      "freshScreenshot": null
+    },
+    {
+      "node": "450:90530",
+      "name": "11.05 \u00b7 Empty, search and success states",
+      "width": 1440,
+      "height": 1040,
+      "classification": "unassessed-frame",
+      "reason": "Fresh metadata enumerates this product design. No new screenshot/interaction comparison was completed for this frame; no acceptance or source-defect claim is made.",
+      "figmaUrl": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/?node-id=450-90530",
+      "freshScreenshot": null
+    }
+  ]
+}

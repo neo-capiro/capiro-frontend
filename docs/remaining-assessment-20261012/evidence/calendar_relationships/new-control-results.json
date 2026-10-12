@@ -1,0 +1,40 @@
+{
+  "controls": [
+    {
+      "report": "browser-results-initial.json",
+      "title": "calendar missing lifecycle filters and opens completed meeting on Information",
+      "passed": true
+    },
+    {
+      "report": "browser-results-initial.json",
+      "title": "note editor closes on arbitrary 200 body without a saved record",
+      "passed": true
+    },
+    {
+      "report": "browser-results-initial.json",
+      "title": "note unknown completion allows another POST and repeated form submits dispatch twice",
+      "passed": true
+    },
+    {
+      "report": "browser-results-initial.json",
+      "title": "mail composer never shows fetched signature and uses plain textarea",
+      "passed": true
+    },
+    {
+      "report": "browser-results-initial.json",
+      "title": "capture current contact and Quick log flows without native writes",
+      "passed": false
+    },
+    {
+      "report": "browser-results.json",
+      "title": "capture current contact and Quick log flows without native writes",
+      "passed": true
+    },
+    {
+      "report": "browser-results.json",
+      "title": "clearing edit location omits field and accepts a foreign meeting receipt",
+      "passed": true
+    }
+  ],
+  "interpretation": "Six distinct controls ultimately reproduced intended observations. Initial Quick-log capture timed out on getByLabel; corrected to visible combobox role without changing application and passed. Four initial controls plus two follow-up controls passed; failure retained in original report. These controls assert known current behavior, including defects; they are not acceptance-passing feature tests."
+}

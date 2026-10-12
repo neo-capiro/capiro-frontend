@@ -1,0 +1,50 @@
+{
+  "writes": [
+    {
+      "docTitle": "Synthetic prospect document",
+      "config": {
+        "sections": [
+          "Body"
+        ],
+        "sectionContent": {
+          "Body": "First submitted text"
+        }
+      }
+    }
+  ],
+  "current": {
+    "id": "60000000-0000-4000-8000-000000000001",
+    "tenantId": "20000000-0000-4000-8000-000000000001",
+    "prospectId": "30000000-0000-4000-8000-000000000001",
+    "ownerId": "test-user",
+    "docTitle": "Synthetic prospect document",
+    "client": null,
+    "product": null,
+    "industry": null,
+    "status": "draft",
+    "updatedAt": "2026-10-12T12:01:00Z",
+    "createdAt": "2026-10-12T12:00:00Z",
+    "config": {
+      "sections": [
+        "Body"
+      ],
+      "sectionContent": {
+        "Body": "First submitted text"
+      }
+    },
+    "documents": [
+      {
+        "id": "70000000-0000-4000-8000-000000000001",
+        "draftId": "60000000-0000-4000-8000-000000000001",
+        "name": "Main document",
+        "ordinal": 0,
+        "body": {
+          "blocks": []
+        },
+        "createdAt": "2026-10-12T12:00:00Z",
+        "updatedAt": "2026-10-12T12:00:00Z"
+      }
+    ]
+  },
+  "afterValue": "First submitted text"
+}

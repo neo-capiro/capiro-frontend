@@ -1,0 +1,106 @@
+243248e726243c44bd4b9d24fd1ed220da18c56a apps/api/src/engagement/engagement.service.ts
+ 1563   async updateMeeting(ctx: TenantContext, id: string, input: UpdateMeetingInput) {
+ 1564     const attachmentIds: string[] = [];
+ 1565     const result = await this.prisma.withTenant(ctx.tenantId, async (tx) => {
+ 1566       if ('clientId' in input || input.expectedRevision)
+ 1567         await this.lockMeetingClientAssignment(tx, ctx, id);
+ 1568       const existing = await tx.meeting.findFirst({
+ 1569         where: { id, tenantId: ctx.tenantId, ...ownMeetingWhere(ctx.userId) },
+ 1570       });
+ 1571       if (!existing) throw new NotFoundException('Meeting not found');
+ 1572       assertExpectedRevision(input.expectedRevision, existing.updatedAt, 'meeting', id, {
+ 1573         id: existing.id,
+ 1574         subject: existing.subject,
+ 1575         status: existing.status,
+ 1576         clientId: existing.clientId,
+ 1577       });
+ 1578 
+ 1579       if ('clientId' in input) {
+ 1580         attachmentIds.push(
+ 1581           ...(await this.reassignMeetingClient(
+ 1582             tx,
+ 1583             ctx,
+ 1584             existing,
+ 1585             input.clientId ?? null,
+ 1586             false,
+ 1587             'Meeting client changed from meeting edit form.',
+ 1588           )),
+ 1589         );
+ 1590       }
+ 1591 
+ 1592       // Re-derive the virtual-meeting classification (Meetings v2 §5) whenever the
+ 1593       // location or description changes — e.g. editing in a Zoom link should flip
+ 1594       // the meeting to Meri-eligible. Uses the incoming value for the changed
+ 1595       // field(s) and the stored value otherwise, and preserves any Graph webLink
+ 1596       // in metadata as a join-link source.
+ 1597       const reclassify = 'location' in input || 'description' in input;
+ 1598       const virtualityUpdate = reclassify
+ 1599         ? (({ isVirtual, joinLink, provider }) => ({ isVirtual, joinLink, provider }))(
+ 1600             deriveMeetingVirtuality({
+ 1601               location: 'location' in input ? (input.location ?? null) : existing.location,
+ 1602               description:
+ 1603                 'description' in input ? (input.description ?? null) : existing.description,
+ 1604               metadata: (existing.metadata as Record<string, unknown> | null) ?? null,
+ 1605             }),
+ 1606           )
+ 1607         : {};
+ 1608 
+ 1609       const updated = await tx.meeting.update({
+ 1610         where: { id },
+ 1611         data: {
+ 1612           ...('subject' in input ? { subject: input.subject?.trim() } : {}),
+ 1613           ...('description' in input ? { description: input.description?.trim() || null } : {}),
+ 1614           ...('location' in input ? { location: input.location?.trim() || null } : {}),
+ 1615           ...('startsAt' in input ? { startsAt: parseDate(input.startsAt, 'startsAt') } : {}),
+ 1616           ...('endsAt' in input ? { endsAt: parseDate(input.endsAt, 'endsAt') } : {}),
+ 1617           ...('status' in input ? { status: input.status } : {}),
+ 1618           ...virtualityUpdate,
+ 1619         },
+ 1620         include: meetingInclude(),
+ 1621       });
+ 1622 
+ 1623       if ('clientId' in input && input.clientId && input.clientId !== existing.clientId) {
+ 1624         await tx.clientAssociationOverride.create({
+ 1625           data: {
+ 1626             tenantId: ctx.tenantId,
+ 1627             entityType: AssociationEntityType.meeting,
+ 1628             entityId: id,
+ 1629             clientId: input.clientId,
+ 1630             previousClientId: existing.clientId,
+ 1631             confidenceBefore: existing.associationScore,
+ 1632             reason: 'Meeting client changed from meeting edit form.',
+ 1633             userId: ctx.userId,
+ 1634           },
+ 1635         });
+ 1636       }
+ 1637 
+ 1638       return (await this.decorateMeetings(tx, ctx, [updated]))[0];
+ 1639     });
+ 1640     // Only enqueue after the entire association transaction committed. Old-client
+ 1641     // chunks were removed synchronously; failed indexing cannot leave old evidence.
+ 1642     for (const attachmentId of attachmentIds) {
+ 1643       this.clientKb.indexAttachmentFireAndForget(ctx.tenantId, attachmentId);
+ 1644     }
+ 1645     return result;
+ 1646   }
+ 1647 
+ 1648   /** Serialize parent reads and artifact writes with client reassignment. */
+ 1649   private async lockMeetingClientAssignment(
+ 1650     tx: Prisma.TransactionClient,
+ 1651     ctx: TenantContext,
+ 1652     meetingId: string,
+ 1653   ): Promise<void> {
+ 1654     // Read the prior client only after this lock. Otherwise a concurrent A→B
+ 1655     // followed by an A→A save can skip child propagation using a stale read.
+ 1656     await tx.$queryRaw(Prisma.sql`
+ 1657       SELECT id FROM meetings
+ 1658       WHERE id = ${meetingId}::uuid AND tenant_id = ${ctx.tenantId}::uuid
+ 1659       FOR UPDATE
+ 1660     `);
+ 1661   }
+ 1662 
+ 1663   /** Move the meeting's denormalized children atomically with its client. */
+ 1664   private async reassignMeetingClient(
+ 1665     tx: Prisma.TransactionClient,
+ 1666     ctx: TenantContext,
+ 1667     existing: { id: string; clientId: string | null; isInternal?: boolean },

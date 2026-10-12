@@ -1,0 +1,106 @@
+243248e726243c44bd4b9d24fd1ed220da18c56a apps/api/src/engagement/engagement.service.ts
+ 5733   async createMeetingNote(
+ 5734     ctx: TenantContext,
+ 5735     meetingId: string,
+ 5736     input: { body: string; confidential?: boolean; accessLevel?: string; approved?: boolean },
+ 5737   ) {
+ 5738     const encrypted = this.notesCrypto.encrypt(input.body);
+ 5739     return this.prisma.withTenant(
+ 5740       ctx.tenantId,
+ 5741       async (tx) => {
+ 5742         await this.lockMeetingClientAssignment(tx, ctx, meetingId);
+ 5743         const meeting = await tx.meeting.findFirst({
+ 5744           where: { id: meetingId, tenantId: ctx.tenantId, ...ownMeetingWhere(ctx.userId) },
+ 5745         });
+ 5746         if (!meeting) throw new NotFoundException('Meeting not found');
+ 5747         return tx.meetingNote.create({
+ 5748           data: {
+ 5749             tenantId: ctx.tenantId,
+ 5750             meetingId,
+ 5751             clientId: meeting.clientId,
+ 5752             authorUserId: ctx.userId,
+ 5753             bodyCiphertext: encrypted.bodyCiphertext,
+ 5754             iv: encrypted.iv,
+ 5755             authTag: encrypted.authTag,
+ 5756             keyVersion: encrypted.keyVersion,
+ 5757             confidential: input.confidential ?? true,
+ 5758             accessLevel: input.accessLevel ?? 'tenant_admins_and_author',
+ 5759             ...(input.approved
+ 5760               ? { status: 'approved', approvedAt: new Date(), approvedByUserId: ctx.userId }
+ 5761               : {}),
+ 5762           },
+ 5763           select: noteMetadataSelect(),
+ 5764         });
+ 5765       },
+ 5766       { timeoutMs: MEETING_CONTEXT_TX_TIMEOUT_MS },
+ 5767     );
+ 5768   }
+ 5769 
+ 5770   async updateMeetingNote(
+ 5771     ctx: TenantContext,
+ 5772     meetingId: string,
+ 5773     noteId: string,
+ 5774     input: {
+ 5775       body: string;
+ 5776       confidential?: boolean;
+ 5777       accessLevel?: string;
+ 5778       expectedRevision?: string;
+ 5779     },
+ 5780   ) {
+ 5781     const encrypted = this.notesCrypto.encrypt(input.body);
+ 5782     return this.prisma.withTenant(ctx.tenantId, async (tx) => {
+ 5783       await this.ensureOwnMeeting(tx, ctx, meetingId);
+ 5784       const note = await tx.meetingNote.findFirst({
+ 5785         where: { id: noteId, tenantId: ctx.tenantId, meetingId },
+ 5786         select: {
+ 5787           id: true,
+ 5788           authorUserId: true,
+ 5789           updatedAt: true,
+ 5790           status: true,
+ 5791           confidential: true,
+ 5792           accessLevel: true,
+ 5793         },
+ 5794       });
+ 5795       if (!note) throw new NotFoundException('Meeting note not found');
+ 5796       if (!canEditEncryptedEntry(ctx, note)) {
+ 5797         throw new ForbiddenException('You can only edit your own meeting notes');
+ 5798       }
+ 5799       assertExpectedRevision(input.expectedRevision, note.updatedAt, 'meeting_note', noteId, {
+ 5800         id: note.id,
+ 5801         status: note.status,
+ 5802         confidential: note.confidential,
+ 5803         accessLevel: note.accessLevel,
+ 5804       });
+ 5805 
+ 5806       return tx.meetingNote.update({
+ 5807         where: { id: noteId },
+ 5808         data: {
+ 5809           bodyCiphertext: encrypted.bodyCiphertext,
+ 5810           iv: encrypted.iv,
+ 5811           authTag: encrypted.authTag,
+ 5812           keyVersion: encrypted.keyVersion,
+ 5813           // Phase 2 §d: a manual edit moves an approved/draft note back to
+ 5814           // `edited` (mirrors updateMeetingDebrief/updateMeetingPrep) and
+ 5815           // clears any prior approval/share stamp — an edited note must be
+ 5816           // re-approved (and, if it was shared, re-shared) before it's
+ 5817           // eligible for the Library or the client-facing feed again.
+ 5818           status: 'edited',
+ 5819           approvedAt: null,
+ 5820           approvedByUserId: null,
+ 5821           sharedAt: null,
+ 5822           sharedByUserId: null,
+ 5823           ...(input.confidential === undefined ? {} : { confidential: input.confidential }),
+ 5824           ...(input.accessLevel === undefined ? {} : { accessLevel: input.accessLevel }),
+ 5825         },
+ 5826         select: noteMetadataSelect(),
+ 5827       });
+ 5828     });
+ 5829   }
+ 5830 
+ 5831   async createMeetingDebrief(
+ 5832     ctx: TenantContext,
+ 5833     meetingId: string,
+ 5834     input: { body: string; confidential?: boolean; accessLevel?: string; approved?: boolean },
+ 5835   ) {
+ 5836     const encrypted = this.notesCrypto.encrypt(input.body);
+ 5837     return this.prisma.withTenant(ctx.tenantId, async (tx) => {

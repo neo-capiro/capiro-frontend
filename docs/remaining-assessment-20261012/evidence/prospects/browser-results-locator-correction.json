@@ -1,0 +1,229 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-acceptance-assessment/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "/tmp/capiro-remaining-assessment-20261012/prospects/playwright.config.ts"
+    ],
+    "configFile": "/tmp/capiro-remaining-assessment-20261012/prospects/playwright.config.ts",
+    "rootDir": "/tmp/capiro-remaining-assessment-20261012/prospects",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-remaining-assessment-20261012/prospects/browser-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-remaining-assessment-20261012/prospects",
+        "testIgnore": [],
+        "testMatch": [
+          "review.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-remaining-assessment-20261012/prospects/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "review.spec.ts",
+      "file": "review.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "capture previously unreviewed prospect editor and pipeline frames",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2728,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T14:21:13.425Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-5a971098c3ae0b6605fe",
+          "file": "review.spec.ts",
+          "line": 6,
+          "column": 5
+        },
+        {
+          "title": "Figma files search is absent although current file records are available",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2263,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T14:21:16.365Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-43355250d0b85b378e9f",
+          "file": "review.spec.ts",
+          "line": 27,
+          "column": 5
+        },
+        {
+          "title": "prospect list retains cached cards and pipeline after a current access denial",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7162,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert').filter({ hasText: 'Synthetic prospect access revoked' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert').filter({ hasText: 'Synthetic prospect access revoked' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert').filter({ hasText: 'Synthetic prospect access revoked' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert').filter({ hasText: 'Synthetic prospect access revoked' })\u001b[22m\n\n    at /tmp/capiro-remaining-assessment-20261012/prospects/review.spec.ts:55:94",
+                    "location": {
+                      "file": "/tmp/capiro-remaining-assessment-20261012/prospects/review.spec.ts",
+                      "column": 94,
+                      "line": 55
+                    },
+                    "snippet": "  53 |  await page.clock.fastForward(31000);\n  54 |  await page.getByRole('link',{name:'← Prospects',exact:true}).click();\n> 55 |  await expect(page.getByRole('alert').filter({hasText:'Synthetic prospect access revoked'})).toBeVisible();\n     |                                                                                              ^\n  56 |  await expect(page.getByRole('link',{name:/Test Prospect/})).toBeVisible();\n  57 |  await expect(page.getByRole('button',{name:'Pipeline',exact:true})).toBeEnabled();\n  58 |  await page.screenshot({path:info.outputPath('denied-prospect-list.png')});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-remaining-assessment-20261012/prospects/review.spec.ts",
+                        "column": 94,
+                        "line": 55
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert').filter({ hasText: 'Synthetic prospect access revoked' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert').filter({ hasText: 'Synthetic prospect access revoked' })\u001b[22m\n\n\n  53 |  await page.clock.fastForward(31000);\n  54 |  await page.getByRole('link',{name:'← Prospects',exact:true}).click();\n> 55 |  await expect(page.getByRole('alert').filter({hasText:'Synthetic prospect access revoked'})).toBeVisible();\n     |                                                                                              ^\n  56 |  await expect(page.getByRole('link',{name:/Test Prospect/})).toBeVisible();\n  57 |  await expect(page.getByRole('button',{name:'Pipeline',exact:true})).toBeEnabled();\n  58 |  await page.screenshot({path:info.outputPath('denied-prospect-list.png')});\n    at /tmp/capiro-remaining-assessment-20261012/prospects/review.spec.ts:55:94"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T14:21:18.640Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-assessment-20261012/prospects/browser-artifacts/review-prospect-list-retai-c05da-ter-a-current-access-denial/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-assessment-20261012/prospects/browser-artifacts/review-prospect-list-retai-c05da-ter-a-current-access-denial/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-assessment-20261012/prospects/browser-artifacts/review-prospect-list-retai-c05da-ter-a-current-access-denial/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-remaining-assessment-20261012/prospects/review.spec.ts",
+                    "column": 94,
+                    "line": 55
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-ba0af53f430538821c7f",
+          "file": "review.spec.ts",
+          "line": 43,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T14:21:13.006Z",
+    "duration": 12974.442,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,1061 @@
+const imgCapiro31ProfilePicture = "https://www.figma.com/api/mcp/asset/083d4f35-1f7a-42dd-8e6c-53662edee797.svg";
+const imgCapiroWordmark = "https://www.figma.com/api/mcp/asset/59fde80d-11af-420d-ae06-a3ee536583ac.png";
+const imgIcon = "https://www.figma.com/api/mcp/asset/7e875240-41c5-4413-a53a-b36b91cf0b24.svg";
+const imgIcon1 = "https://www.figma.com/api/mcp/asset/3a0e436a-5d66-432a-8615-955b50b04cfe.svg";
+const imgIcon2 = "https://www.figma.com/api/mcp/asset/3710245c-b75b-498a-b1d0-6268c6f0d240.svg";
+const imgIcon3 = "https://www.figma.com/api/mcp/asset/0cc0560d-1582-4f38-b3d2-3435d83a27e1.svg";
+const imgIcon4 = "https://www.figma.com/api/mcp/asset/fd86b963-67ba-420b-9ad5-f70d72c8e2d1.svg";
+const imgIcon5 = "https://www.figma.com/api/mcp/asset/cbaabfbf-2bd3-4932-9ba3-4de561052aee.svg";
+const imgIcon6 = "https://www.figma.com/api/mcp/asset/27860e32-387a-4370-a1da-63d805154911.svg";
+const imgIcon7 = "https://www.figma.com/api/mcp/asset/266d48a9-71ac-4294-aa74-24d3fcff600b.svg";
+const imgIcon8 = "https://www.figma.com/api/mcp/asset/f7b699d2-b0f9-401b-be1a-77b3ddce199d.svg";
+const imgIcon9 = "https://www.figma.com/api/mcp/asset/e6916571-a1e5-4cd7-a9ea-ebd06c4fb958.svg";
+const imgIcon10 = "https://www.figma.com/api/mcp/asset/55e12908-769e-40a8-bbee-46c0f0a24ac5.svg";
+const imgIcon11 = "https://www.figma.com/api/mcp/asset/6efb91ba-e3f0-4cc0-9bfe-9113be21d5fb.svg";
+const imgIcon12 = "https://www.figma.com/api/mcp/asset/ea8d0edf-9437-4229-9175-bbac01486e12.svg";
+const imgIcon13 = "https://www.figma.com/api/mcp/asset/3d91fbd2-e259-473d-9c57-906ef0228dfc.svg";
+const imgIcon14 = "https://www.figma.com/api/mcp/asset/c174deb2-a74b-417e-a78f-b07a834124fd.svg";
+const imgIcon15 = "https://www.figma.com/api/mcp/asset/252f8a71-d784-41a2-906a-55cf4d16df2b.svg";
+const imgIconArrowLeft = "https://www.figma.com/api/mcp/asset/a4f96ca3-8c52-4499-a5c4-1854b51bcf33.svg";
+const imgIconLayoutGrid = "https://www.figma.com/api/mcp/asset/4c669a7d-62d2-475e-af9f-d39d9b14e163.svg";
+const imgIconChevronDown = "https://www.figma.com/api/mcp/asset/e274faf5-0aa8-47c5-918d-9f59d30cd85b.svg";
+const imgIconPlus = "https://www.figma.com/api/mcp/asset/c8f5f3f0-243f-452c-b358-a7f590aad90e.svg";
+const imgChevron = "https://www.figma.com/api/mcp/asset/f0375d74-714f-4b9a-8c2b-f9344506841d.svg";
+const imgIcon16 = "https://www.figma.com/api/mcp/asset/514d5bc0-14f2-47e9-8d40-70c790e1e3a6.svg";
+const imgChevron1 = "https://www.figma.com/api/mcp/asset/54f3728e-23fd-4a67-9841-7e5216ccda85.svg";
+
+type InfoTipProps = {
+  className?: string;
+  state?: "Default";
+};
+
+function InfoTip({ className, state = "Default" }: InfoTipProps) {
+  return (
+    <div className={className || "bg-[var(--muted,#f5f5f4)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center justify-center relative rounded-[999px] size-[16px]"} data-node-id="411:40618">
+      <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] whitespace-nowrap" data-node-id="411:40619">
+        i
+      </p>
+    </div>
+  );
+}
+
+function Capiro31ProfilePicture({ className }: { className?: string }) {
+  return (
+    <div className={className || "relative size-[32px]"} data-node-id="469:41439" data-name="Capiro 3.1/Profile picture">
+      <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCapiro31ProfilePicture} />
+    </div>
+  );
+}
+
+export default function ClientProfileObjectivesStrategyDraftReview1440() {
+  return (
+    <div className="bg-[var(--background,#f5f5f4)] content-stretch flex flex-col items-start relative size-full" data-node-id="411:61136" data-name="Client profile · Objectives · Strategy draft review (1440)">
+      <div className="bg-[var(--card,white)] border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex gap-[var(--theme(spacing.5),20px)] h-[64px] items-center px-[var(--theme(spacing.4),16px)] relative shrink-0 w-full" data-node-id="475:108772" data-name="Capiro · Shared header">
+        <div className="content-stretch flex h-[32px] items-center overflow-clip relative shrink-0 w-[196px]" data-node-id="I475:108772;469:41501" data-name="Brand · Capiro · Home">
+          <div className="h-[26px] relative shrink-0 w-[77px]" data-node-id="I475:108772;469:41502" data-name="Capiro wordmark">
+            <img alt="" className="absolute inset-0 max-w-none object-contain pointer-events-none size-full" src={imgCapiroWordmark} />
+          </div>
+        </div>
+        <div className="bg-[var(--muted,#f5f5f4)] content-stretch cursor-pointer flex gap-[var(--theme(spacing.1),4px)] items-center justify-center overflow-clip p-[var(--theme(spacing.1),4px)] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="I475:108772;469:41503" data-name="Modes · Portfolio active">
+          <a className="content-stretch flex gap-[8px] h-[36px] items-center justify-center relative rounded-[var(--radius-lg,10px)] shrink-0 w-[40px]" data-node-id="I475:108772;469:41504" data-name="Mode · Meri">
+            <div className="relative shrink-0 size-[16px]" data-node-id="I475:108772;469:41504;12:383" data-name="Icon">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon} />
+            </div>
+          </a>
+          <a className="bg-[var(--card,white)] border border-[var(--input,#e7e5e4)] border-solid content-stretch drop-shadow-[0px_1px_1px_rgba(12,10,9,0.05)] flex gap-[8px] h-[36px] items-center justify-center relative rounded-[var(--radius-lg,10px)] shrink-0 w-[40px]" data-node-id="I475:108772;469:41510" data-name="Mode · Portfolio">
+            <div className="relative shrink-0 size-[16px]" data-node-id="I475:108772;469:41510;12:377" data-name="Icon">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon1} />
+            </div>
+          </a>
+          <a className="content-stretch flex gap-[8px] h-[36px] items-center justify-center relative rounded-[var(--radius-lg,10px)] shrink-0 w-[40px]" data-node-id="I475:108772;469:41516" data-name="Mode · Modules">
+            <div className="relative shrink-0 size-[16px]" data-node-id="I475:108772;469:41516;12:383" data-name="Icon">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon2} />
+            </div>
+          </a>
+        </div>
+        <div className="flex-[1_0_0] h-px min-w-px relative" data-node-id="I475:108772;469:41522" data-name="Flexible space" />
+        <div className="content-stretch cursor-pointer flex gap-[var(--theme(spacing.3),12px)] h-[40px] items-center overflow-clip relative shrink-0" data-node-id="I475:108772;469:41523" data-name="Global actions">
+          <a className="content-stretch flex gap-[8px] items-center justify-center relative rounded-[var(--radius-lg,10px)] shrink-0 size-[40px]" data-node-id="I475:108772;644:139304" data-name="Action · Quick log">
+            <div className="relative shrink-0 size-[16px]" data-node-id="I475:108772;644:139304;12:383" data-name="Icon">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon3} />
+            </div>
+          </a>
+          <a className="content-stretch flex gap-[8px] items-center justify-center relative rounded-[var(--radius-lg,10px)] shrink-0 size-[40px]" data-node-id="I475:108772;501:42742" data-name="Action · Master calendar">
+            <div className="relative shrink-0 size-[16px]" data-node-id="I475:108772;501:42742;12:383" data-name="Icon">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon4} />
+            </div>
+          </a>
+          <a className="content-stretch flex gap-[8px] items-center justify-center relative rounded-[var(--radius-lg,10px)] shrink-0 size-[40px]" data-node-id="I475:108772;469:41524" data-name="Action · Search">
+            <div className="relative shrink-0 size-[16px]" data-node-id="I475:108772;469:41524;12:383" data-name="Icon">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon5} />
+            </div>
+          </a>
+          <a className="content-stretch flex gap-[8px] items-center justify-center relative rounded-[var(--radius-lg,10px)] shrink-0 size-[40px]" data-node-id="I475:108772;469:41532" data-name="Action · Updates">
+            <div className="relative shrink-0 size-[16px]" data-node-id="I475:108772;469:41532;12:383" data-name="Icon">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon6} />
+            </div>
+          </a>
+          <a className="content-stretch flex gap-[var(--theme(spacing.2),8px)] items-center justify-center overflow-clip relative shrink-0 size-[40px]" data-node-id="I475:108772;469:41540" data-name="Action · Profile">
+            <Capiro31ProfilePicture className="relative shrink-0 size-[32px]" />
+          </a>
+        </div>
+      </div>
+      <div className="bg-[var(--border,#e7e5e4)] h-px relative shrink-0 w-full" data-node-id="475:108821" data-name="Capiro · Header divider" />
+      <div className="content-stretch flex flex-[1_0_0] items-start min-h-px overflow-clip relative w-full" data-node-id="475:108822" data-name="Capiro · Workspace body">
+        <div className="bg-[var(--card,white)] border-[var(--border,#e7e5e4)] border-r border-solid content-stretch flex flex-col gap-[var(--theme(spacing.3),12px)] h-full items-start p-[var(--theme(spacing.4),16px)] relative shrink-0 w-[232px]" data-node-id="475:108823" data-name="Capiro · Client navigation">
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.3] relative shrink-0 text-[11px] text-[color:var(--muted-foreground,#78716c)] tracking-[0.66px] uppercase whitespace-nowrap" data-node-id="I475:108823;471:92398">
+            PORTFOLIO
+          </p>
+          <div className="content-stretch cursor-pointer flex flex-col gap-[var(--theme(spacing.1),4px)] items-start overflow-clip relative shrink-0 w-[200px]" data-node-id="I475:108823;471:92399" data-name="Portfolio navigation">
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:108823;471:92400" data-name="Nav · Portfolio">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:108823;471:92400;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon2} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:108823;471:92400;12:385">
+                Overview
+              </p>
+            </a>
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:108823;471:92410" data-name="Nav · Clients">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:108823;471:92410;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon7} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:108823;471:92410;12:385">
+                Clients
+              </p>
+            </a>
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:108823;471:92419" data-name="Nav · Prospects">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:108823;471:92419;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon8} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:108823;471:92419;12:385">
+                Prospects
+              </p>
+            </a>
+          </div>
+          <div className="bg-[var(--muted,#f5f5f4)] h-px relative shrink-0 w-[200px]" data-node-id="I475:108823;471:92428" data-name="Navigation divider" />
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.3] relative shrink-0 text-[11px] text-[color:var(--muted-foreground,#78716c)] tracking-[0.66px] uppercase whitespace-nowrap" data-node-id="I475:108823;471:92429">
+            ANDURIL
+          </p>
+          <div className="content-stretch cursor-pointer flex flex-col gap-[var(--theme(spacing.1),4px)] items-start overflow-clip relative shrink-0 w-[200px]" data-node-id="I475:108823;471:92430" data-name="Client navigation">
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:108823;471:92431" data-name="Nav · Overview">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:108823;471:92431;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon2} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:108823;471:92431;12:385">
+                Overview
+              </p>
+            </a>
+            <a className="bg-[var(--card,white)] border border-[var(--input,#e7e5e4)] border-solid content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:108823;471:92441" data-name="Nav · Objectives">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:108823;471:92441;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon9} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:108823;471:92441;12:385">
+                Objectives
+              </p>
+            </a>
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:108823;471:92450" data-name="Nav · Calendar">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:108823;471:92450;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon10} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:108823;471:92450;12:385">
+                Calendar
+              </p>
+            </a>
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:108823;471:92465" data-name="Nav · Relationships">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:108823;471:92465;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon7} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:108823;471:92465;12:385">
+                Relationships
+              </p>
+            </a>
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:108823;471:92474" data-name="Nav · Work">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:108823;471:92474;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon11} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:108823;471:92474;12:385">
+                Work
+              </p>
+            </a>
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:108823;471:92484" data-name="Nav · Capabilities">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:108823;471:92484;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon12} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:108823;471:92484;12:385">
+                Capabilities
+              </p>
+            </a>
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:108823;746:146731" data-name="Nav · Bill Tracker">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:108823;746:146731;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon13} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:108823;746:146731;12:385">
+                Bill Tracker
+              </p>
+            </a>
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:108823;471:92500" data-name="Nav · Opportunities">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:108823;471:92500;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon14} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:108823;471:92500;12:385">
+                Opportunities
+              </p>
+            </a>
+            <a className="content-stretch flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:108823;471:92508" data-name="Nav · Files">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:108823;471:92508;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon13} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:108823;471:92508;12:385">
+                Files
+              </p>
+            </a>
+          </div>
+          <div className="flex-[1_0_0] min-h-px relative w-[200px]" data-node-id="I475:108823;471:92516" data-name="Flexible space" />
+          <div className="content-stretch flex flex-col gap-[var(--theme(spacing.1),4px)] items-start overflow-clip relative shrink-0 w-[200px]" data-node-id="I475:108823;471:92517" data-name="Workspace settings">
+            <a className="content-stretch cursor-pointer flex gap-[8px] h-[36px] items-center px-[var(--theme(spacing.3),12px)] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[200px]" data-node-id="I475:108823;471:92518" data-name="Nav · Settings">
+              <div className="relative shrink-0 size-[16px]" data-node-id="I475:108823;471:92518;12:383" data-name="Icon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon15} />
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--muted-foreground,#78716c)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I475:108823;471:92518;12:385">
+                Settings
+              </p>
+            </a>
+          </div>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] flex-col gap-[20px] h-full items-start min-w-px overflow-x-clip overflow-y-auto pb-[48px] pt-[24px] px-[32px] relative" data-node-id="411:61138" data-name="Main">
+          <div className="content-stretch flex items-center justify-between overflow-clip relative shrink-0 w-full" data-node-id="411:61139" data-name="Page header">
+            <div className="content-stretch flex gap-[8px] items-center overflow-clip relative shrink-0" data-node-id="411:61140" data-name="Breadcrumb">
+              <a className="block cursor-pointer relative shrink-0 size-[15px]" data-node-id="411:61141" data-name="icon/arrow-left">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconArrowLeft} />
+              </a>
+              <a className="[word-break:break-word] block cursor-pointer font-['Geist:Regular'] font-normal leading-[0] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="411:61142">
+                <p className="leading-[1.45]">Portfolio</p>
+              </a>
+              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="411:61143">
+                /
+              </p>
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[#0a0a0a] text-[12px] whitespace-nowrap" data-node-id="411:61144">
+                Anduril
+              </p>
+              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] whitespace-nowrap" data-node-id="411:61145">
+                /
+              </p>
+              <a className="bg-[var(--card,white)] border border-[var(--input,#e7e5e4)] border-solid content-stretch cursor-pointer flex gap-[6px] items-center overflow-clip pl-[8px] pr-[6px] py-[5px] relative rounded-[8px] shadow-[0px_1px_2px_0px_rgba(12,10,9,0.05)] shrink-0" data-node-id="411:61146" data-name="View switcher (⌘J)">
+                <div className="relative shrink-0 size-[14px]" data-node-id="411:61147" data-name="icon/layout-grid">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconLayoutGrid} />
+                </div>
+                <p className="[word-break:break-word] font-['Geist:SemiBold'] font-semibold leading-[1.2] relative shrink-0 text-[#0a0a0a] text-[12px] text-left whitespace-nowrap" data-node-id="411:61148">
+                  Objectives
+                </p>
+                <div className="relative shrink-0 size-[14px]" data-node-id="411:61149" data-name="icon/chevron-down">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconChevronDown} />
+                </div>
+              </a>
+            </div>
+            <div className="content-stretch flex gap-[8px] items-center overflow-clip relative shrink-0" data-node-id="411:61150" data-name="Actions">
+              <div className="bg-[var(--card,white)] border border-[var(--input,#e7e5e4)] border-solid content-stretch drop-shadow-[0px_1px_1px_rgba(12,10,9,0.05)] flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="411:61151" data-name="Quick add">
+                <div className="relative shrink-0 size-[16px]" data-node-id="I411:61151;12:377" data-name="Icon">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconPlus} />
+                </div>
+                <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[#0a0a0a] text-[14px] tracking-[-0.07px] whitespace-nowrap" data-node-id="I411:61151;12:379">
+                  Quick add
+                </p>
+                <div className="relative shrink-0 size-[14px]" data-node-id="I411:61151;12:380" data-name="Chevron">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgChevron} />
+                </div>
+              </div>
+              <a className="content-stretch cursor-pointer drop-shadow-[0px_1px_1px_rgba(12,10,9,0.14)] flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="411:61152" data-name="Meri actions">
+                <div aria-hidden className="absolute inset-0 pointer-events-none rounded-[var(--radius-lg,10px)]" style={{ backgroundImage: "linear-gradient(171.88910154620726deg, rgb(36, 36, 36) 0%, rgb(10, 10, 10) 100%)" }} />
+                <div className="relative shrink-0 size-[16px]" data-node-id="I411:61152;12:371" data-name="Icon">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcon16} />
+                </div>
+                <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--primary-foreground,white)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I411:61152;12:373">
+                  Meri actions
+                </p>
+                <div className="relative shrink-0 size-[14px]" data-node-id="I411:61152;12:374" data-name="Chevron">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgChevron1} />
+                </div>
+                <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_0px_0px_rgba(255,255,255,0.14)]" />
+              </a>
+            </div>
+          </div>
+          <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex gap-[14px] items-center overflow-clip px-[20px] py-[14px] relative rounded-[12px] shrink-0 w-full" data-node-id="411:61153" data-name="Client strip">
+            <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex items-center justify-center overflow-clip relative rounded-[8px] shrink-0 size-[40px]" data-node-id="411:61154" data-name="Avatar">
+              <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[12px] text-[color:var(--foreground,#0a0a0a)] whitespace-nowrap" data-node-id="411:61155">
+                AN
+              </p>
+            </div>
+            <div className="[word-break:break-word] content-stretch flex flex-col gap-[2px] items-start overflow-clip relative shrink-0 whitespace-nowrap" data-node-id="411:61156" data-name="Name">
+              <p className="font-['Geist:SemiBold'] font-semibold leading-[1.35] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px]" data-node-id="411:61157">
+                Anduril
+              </p>
+              <p className="font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px]" data-node-id="411:61158">
+                Defense technology · Costa Mesa, CA
+              </p>
+            </div>
+            <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex items-start overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:61159" data-name="Badge">
+              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] whitespace-nowrap" data-node-id="411:61160">
+                Active client
+              </p>
+            </div>
+            <div className="flex-[1_0_0] h-[10px] min-w-px relative" data-node-id="411:61161" data-name="Spacer" />
+          </div>
+          <div className="content-stretch flex flex-col gap-[20px] items-start overflow-clip relative shrink-0 w-full" data-node-id="411:61162" data-name="Content">
+            <div className="content-stretch flex items-start overflow-clip relative shrink-0" data-node-id="411:61163" data-name="Back">
+              <a className="[word-break:break-word] block cursor-pointer font-['Geist:Regular'] font-normal leading-[0] relative shrink-0 text-[13px] text-[color:var(--accent,#0a0a0a)] tracking-[-0.039px] whitespace-nowrap" data-node-id="411:61164">
+                <p className="leading-[1.45]">← Accelerate Department adoption of resilient tactical edge computing</p>
+              </a>
+            </div>
+            <div className="content-stretch flex items-start justify-between overflow-clip relative shrink-0 w-full" data-node-id="411:61165" data-name="View head">
+              <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0" data-node-id="411:61166" data-name="L">
+                <div className="content-stretch flex gap-[6px] items-center relative shrink-0" data-node-id="411:61167" data-name="Info row">
+                  <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.3] relative shrink-0 text-[20px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.3px] whitespace-nowrap" data-node-id="411:61168">
+                    Strategy draft
+                  </p>
+                  <InfoTip className="bg-[var(--muted,#f5f5f4)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center justify-center relative rounded-[999px] shrink-0 size-[16px]" />
+                </div>
+              </div>
+              <div className="content-stretch cursor-pointer flex gap-[8px] items-start overflow-clip relative shrink-0" data-node-id="411:61170" data-name="Actions">
+                <a className="bg-[var(--card,white)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center justify-center overflow-clip px-[10px] py-[5px] relative rounded-[8px] shrink-0" data-node-id="411:61171" data-name="Regenerate">
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.039px] whitespace-nowrap" data-node-id="411:61172">
+                    Regenerate
+                  </p>
+                </a>
+                <a className="content-stretch flex items-center justify-center overflow-clip px-[10px] py-[5px] relative rounded-[8px] shrink-0" data-node-id="411:61173" style={{ backgroundImage: "linear-gradient(171.68710867983097deg, rgb(36, 36, 36) 0%, rgb(10, 10, 10) 100%)" }} data-name="Activate strategy">
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--primary-foreground,white)] text-left tracking-[-0.039px] whitespace-nowrap" data-node-id="411:61174">
+                    Activate strategy
+                  </p>
+                </a>
+              </div>
+            </div>
+            <div className="bg-[var(--warning-subtle,#f3eee2)] content-stretch flex gap-[12px] items-center overflow-clip px-[16px] py-[12px] relative rounded-[10px] shrink-0 w-full" data-node-id="411:61175" data-name="Verdict banner">
+              <div className="bg-[var(--warning-subtle,#f3eee2)] content-stretch flex items-center overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:61176" data-name="Tag">
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--warning-text,#6c5226)] whitespace-nowrap" data-node-id="411:61177">
+                  Cycle position
+                </p>
+              </div>
+              <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--warning-text,#6c5226)] tracking-[-0.039px] w-[900px]" data-node-id="411:61178">
+                The FY27 bills are at the final stage, so a new request this cycle cannot be placed. The plan targets FY28 and uses the fall and winter to validate and build support.
+              </p>
+            </div>
+            <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col items-start overflow-clip relative rounded-[12px] shrink-0 w-full" data-node-id="411:61179" data-name="Cycle and verdict">
+              <div className="border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex items-center justify-between overflow-clip px-[20px] py-[14px] relative shrink-0 w-full" data-node-id="411:61180" data-name="Head">
+                <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0" data-node-id="411:61181" data-name="L">
+                  <div className="content-stretch flex gap-[6px] items-center relative shrink-0" data-node-id="411:61182" data-name="Info row">
+                    <p className="[word-break:break-word] font-['Geist:SemiBold'] font-semibold leading-[1.35] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="411:61183">
+                      Where we are in the cycle
+                    </p>
+                    <InfoTip className="bg-[var(--muted,#f5f5f4)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center justify-center relative rounded-[999px] shrink-0 size-[16px]" />
+                  </div>
+                </div>
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--accent,#0a0a0a)] tracking-[-0.039px] whitespace-nowrap" data-node-id="411:61185">
+                  Edit calendar
+                </p>
+              </div>
+              <div className="content-stretch flex flex-col gap-[14px] items-start overflow-clip px-[20px] py-[16px] relative shrink-0 w-full" data-node-id="411:61186" data-name="B">
+                <div className="[word-break:break-word] bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex items-start overflow-clip relative rounded-[10px] shrink-0 w-full" data-node-id="411:61187" data-name="Cycle strip">
+                  <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex flex-[1_0_0] flex-col gap-[4px] items-start min-w-px overflow-clip px-[14px] py-[12px] relative text-[color:var(--muted-foreground,#78716c)]" data-node-id="411:61188" data-name="Window · FY27 conference">
+                    <p className="font-['Geist:Medium'] font-medium leading-[1.3] relative shrink-0 text-[11px] tracking-[0.66px] uppercase whitespace-nowrap" data-node-id="411:61189">
+                      CLOSED
+                    </p>
+                    <p className="font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] tracking-[-0.039px] w-[130px]" data-node-id="411:61190">
+                      FY27 conference
+                    </p>
+                    <p className="font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] w-[130px]" data-node-id="411:61191">
+                      Oct to Dec 2026
+                    </p>
+                    <p className="font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] w-[130px]" data-node-id="411:61192">
+                      Final bills at the last stage
+                    </p>
+                  </div>
+                  <div className="bg-[var(--accent-subtle,#f5f5f4)] border-[var(--border,#e7e5e4)] border-l border-solid content-stretch flex flex-[1_0_0] flex-col gap-[4px] items-start min-w-px overflow-clip px-[14px] py-[12px] relative" data-node-id="411:61193" data-name="Window · Build and validate">
+                    <p className="font-['Geist:Medium'] font-medium leading-[1.3] relative shrink-0 text-[11px] text-[color:var(--accent,#0a0a0a)] tracking-[0.66px] uppercase whitespace-nowrap" data-node-id="411:61194">
+                      OPEN NOW
+                    </p>
+                    <p className="font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] w-[130px]" data-node-id="411:61195">
+                      Build and validate
+                    </p>
+                    <p className="font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] w-[130px]" data-node-id="411:61196">
+                      Oct 2026 to Jan 2027
+                    </p>
+                    <p className="font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] w-[130px]" data-node-id="411:61197">
+                      Today is inside this window
+                    </p>
+                  </div>
+                  <div className="bg-[var(--card,white)] border-[var(--border,#e7e5e4)] border-l border-solid content-stretch flex flex-[1_0_0] flex-col gap-[4px] items-start min-w-px overflow-clip px-[14px] py-[12px] relative" data-node-id="411:61198" data-name="Window · Request submission">
+                    <p className="font-['Geist:Medium'] font-medium leading-[1.3] relative shrink-0 text-[11px] text-[color:var(--muted-foreground,#78716c)] tracking-[0.66px] uppercase whitespace-nowrap" data-node-id="411:61199">
+                      UPCOMING
+                    </p>
+                    <p className="font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] w-[130px]" data-node-id="411:61200">
+                      Request submission
+                    </p>
+                    <p className="font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] w-[130px]" data-node-id="411:61201">
+                      Feb to Mar 2027
+                    </p>
+                    <p className="font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] w-[130px]" data-node-id="411:61202">
+                      Expected, not confirmed
+                    </p>
+                  </div>
+                  <div className="bg-[var(--card,white)] border-[var(--border,#e7e5e4)] border-l border-solid content-stretch flex flex-[1_0_0] flex-col gap-[4px] items-start min-w-px overflow-clip px-[14px] py-[12px] relative" data-node-id="411:61203" data-name="Window · Committee consideration">
+                    <p className="font-['Geist:Medium'] font-medium leading-[1.3] relative shrink-0 text-[11px] text-[color:var(--muted-foreground,#78716c)] tracking-[0.66px] uppercase whitespace-nowrap" data-node-id="411:61204">
+                      UPCOMING
+                    </p>
+                    <p className="font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] w-[130px]" data-node-id="411:61205">
+                      Committee consideration
+                    </p>
+                    <p className="font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] w-[130px]" data-node-id="411:61206">
+                      Apr to Jun 2027
+                    </p>
+                    <p className="font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] w-[130px]" data-node-id="411:61207">
+                      Expected
+                    </p>
+                  </div>
+                  <div className="bg-[var(--card,white)] border-[var(--border,#e7e5e4)] border-l border-solid content-stretch flex flex-[1_0_0] flex-col gap-[4px] items-start min-w-px overflow-clip px-[14px] py-[12px] relative" data-node-id="411:61208" data-name="Window · Floor and conference">
+                    <p className="font-['Geist:Medium'] font-medium leading-[1.3] relative shrink-0 text-[11px] text-[color:var(--muted-foreground,#78716c)] tracking-[0.66px] uppercase whitespace-nowrap" data-node-id="411:61209">
+                      UPCOMING
+                    </p>
+                    <p className="font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] w-[130px]" data-node-id="411:61210">
+                      Floor and conference
+                    </p>
+                    <p className="font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] w-[130px]" data-node-id="411:61211">
+                      Jul to Dec 2027
+                    </p>
+                    <p className="font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] w-[130px]" data-node-id="411:61212">
+                      Expected
+                    </p>
+                  </div>
+                  <div className="bg-[var(--card,white)] border-[var(--border,#e7e5e4)] border-l border-solid content-stretch flex flex-[1_0_0] flex-col gap-[4px] items-start min-w-px overflow-clip px-[14px] py-[12px] relative" data-node-id="411:61213" data-name="Window · Implementation">
+                    <p className="font-['Geist:Medium'] font-medium leading-[1.3] relative shrink-0 text-[11px] text-[color:var(--muted-foreground,#78716c)] tracking-[0.66px] uppercase whitespace-nowrap" data-node-id="411:61214">
+                      UPCOMING
+                    </p>
+                    <p className="font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] w-[130px]" data-node-id="411:61215">
+                      Implementation
+                    </p>
+                    <p className="font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] w-[130px]" data-node-id="411:61216">
+                      2028
+                    </p>
+                    <p className="font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] w-[130px]" data-node-id="411:61217">
+                      After enactment
+                    </p>
+                  </div>
+                </div>
+                <div className="content-stretch flex gap-[12px] items-start overflow-clip relative shrink-0 w-full" data-node-id="411:61218" data-name="Verdicts">
+                  <div className="bg-[var(--background,#f5f5f4)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start min-w-px overflow-clip px-[14px] py-[12px] relative rounded-[10px]" data-node-id="411:61219" data-name="Verdict">
+                    <div className="content-stretch flex items-center justify-between overflow-clip relative shrink-0 w-full" data-node-id="411:61220" data-name="T">
+                      <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="411:61221">
+                        FY28 Appropriations
+                      </p>
+                      <div className="bg-[var(--accent-subtle,#f5f5f4)] content-stretch flex items-center overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:61222" data-name="Tag">
+                        <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--success,#3d6b4f)] whitespace-nowrap" data-node-id="411:61223">
+                          Achievable
+                        </p>
+                      </div>
+                    </div>
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] w-full" data-node-id="411:61224">
+                      118 days of slack before the request window closes. Latest responsible date for the use-of-funds package: Jan 22, 2027.
+                    </p>
+                  </div>
+                  <div className="bg-[var(--background,#f5f5f4)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-[1_0_0] flex-col gap-[6px] items-start min-w-px overflow-clip px-[14px] py-[12px] relative rounded-[10px]" data-node-id="411:61225" data-name="Verdict">
+                    <div className="content-stretch flex items-center justify-between overflow-clip relative shrink-0 w-full" data-node-id="411:61226" data-name="T">
+                      <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="411:61227">
+                        FY28 NDAA
+                      </p>
+                      <div className="bg-[var(--warning-subtle,#f3eee2)] content-stretch flex items-center overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:61228" data-name="Tag">
+                        <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--warning-text,#6c5226)] whitespace-nowrap" data-node-id="411:61229">
+                          Achievable if compressed
+                        </p>
+                      </div>
+                    </div>
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] w-full" data-node-id="411:61230">
+                      Bill text and the validation meetings must overlap. Cut: second round of district visits. Latest responsible date for the request paper: Jan 8, 2027.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col items-start overflow-clip relative rounded-[12px] shrink-0 w-full" data-node-id="411:61231" data-name="Relationships card">
+              <div className="border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex items-center justify-between overflow-clip px-[20px] py-[14px] relative shrink-0 w-full" data-node-id="411:61232" data-name="Head">
+                <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0" data-node-id="411:61233" data-name="L">
+                  <div className="content-stretch flex gap-[6px] items-center relative shrink-0" data-node-id="411:61234" data-name="Info row">
+                    <p className="[word-break:break-word] font-['Geist:SemiBold'] font-semibold leading-[1.35] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="411:61235">
+                      Recommended relationships
+                    </p>
+                    <InfoTip className="bg-[var(--muted,#f5f5f4)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center justify-center relative rounded-[999px] shrink-0 size-[16px]" />
+                  </div>
+                </div>
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--accent,#0a0a0a)] tracking-[-0.039px] whitespace-nowrap" data-node-id="411:61237">
+                  Open Directory
+                </p>
+              </div>
+              <div className="border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex flex-col gap-[8px] items-start overflow-clip px-[20px] py-[14px] relative shrink-0 w-full" data-node-id="411:61238" data-name="Recommendation">
+                <div className="content-stretch flex items-center justify-between overflow-clip relative shrink-0 w-full" data-node-id="411:61239" data-name="T">
+                  <div className="content-stretch flex gap-[10px] items-center overflow-clip relative shrink-0" data-node-id="411:61240" data-name="L">
+                    <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="411:61241">
+                      Rep. Fallon (TX-23)
+                    </p>
+                    <div className="bg-[var(--accent-subtle,#f5f5f4)] content-stretch flex items-center overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:61242" data-name="Tag">
+                      <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--accent,#0a0a0a)] whitespace-nowrap" data-node-id="411:61243">
+                        Primary champion
+                      </p>
+                    </div>
+                  </div>
+                  <div className="[word-break:break-word] content-stretch flex font-['Geist:Regular'] font-normal gap-[12px] items-center overflow-clip relative shrink-0 whitespace-nowrap" data-node-id="411:61244" data-name="A">
+                    <p className="leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)]" data-node-id="411:61245">
+                      Owner JC
+                    </p>
+                    <p className="leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--accent,#0a0a0a)] tracking-[-0.039px]" data-node-id="411:61246">
+                      Accept
+                    </p>
+                    <p className="leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px]" data-node-id="411:61247">
+                      Reject
+                    </p>
+                  </div>
+                </div>
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] w-[900px]" data-node-id="411:61248">
+                  Represents the San Antonio plant (420 employees); sits on House Armed Services; sponsored related language in FY26.
+                </p>
+                <div className="[word-break:break-word] content-stretch flex gap-[12px] items-center overflow-clip relative shrink-0" data-node-id="411:61249" data-name="M">
+                  <p className="font-['Geist:Medium'] font-medium leading-[1.3] relative shrink-0 text-[11px] text-[color:var(--muted-foreground,#78716c)] tracking-[0.66px] uppercase whitespace-nowrap" data-node-id="411:61250">
+                    RELATIONSHIP
+                  </p>
+                  <p className="font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] whitespace-pre" data-node-id="411:61251">{`Met twice  →  needed: Committed to submit`}</p>
+                </div>
+                <div className="content-stretch flex gap-[6px] items-start overflow-clip relative shrink-0" data-node-id="411:61252" data-name="Sources">
+                  <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex items-start overflow-clip px-[7px] py-[2px] relative rounded-[6px] shrink-0" data-node-id="411:61253" data-name="Source">
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] whitespace-nowrap" data-node-id="411:61254">
+                      From intelligence: District nexus
+                    </p>
+                  </div>
+                  <div className="bg-[var(--warning-subtle,#f3eee2)] content-stretch flex items-start overflow-clip px-[7px] py-[2px] relative rounded-[6px] shrink-0" data-node-id="411:61255" data-name="Source">
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--warning-text,#6c5226)] whitespace-nowrap" data-node-id="411:61256">
+                      From memory: FY26 meeting, Oct 7 debrief
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex flex-col gap-[8px] items-start overflow-clip px-[20px] py-[14px] relative shrink-0 w-full" data-node-id="411:61257" data-name="Recommendation">
+                <div className="content-stretch flex items-center justify-between overflow-clip relative shrink-0 w-full" data-node-id="411:61258" data-name="T">
+                  <div className="content-stretch flex gap-[10px] items-center overflow-clip relative shrink-0" data-node-id="411:61259" data-name="L">
+                    <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="411:61260">
+                      House Armed Services professional staff
+                    </p>
+                    <div className="bg-[var(--accent-subtle,#f5f5f4)] content-stretch flex items-center overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:61261" data-name="Tag">
+                      <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--accent,#0a0a0a)] whitespace-nowrap" data-node-id="411:61262">
+                        Committee validator
+                      </p>
+                    </div>
+                  </div>
+                  <div className="[word-break:break-word] content-stretch flex font-['Geist:Regular'] font-normal gap-[12px] items-center overflow-clip relative shrink-0 whitespace-nowrap" data-node-id="411:61263" data-name="A">
+                    <p className="leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)]" data-node-id="411:61264">
+                      Owner NM
+                    </p>
+                    <p className="leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--accent,#0a0a0a)] tracking-[-0.039px]" data-node-id="411:61265">
+                      Accept
+                    </p>
+                    <p className="leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px]" data-node-id="411:61266">
+                      Reject
+                    </p>
+                  </div>
+                </div>
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] w-[900px]" data-node-id="411:61267">
+                  Writes the tactical programs mark. Needed early to test whether the request is realistic.
+                </p>
+                <div className="[word-break:break-word] content-stretch flex gap-[12px] items-center overflow-clip relative shrink-0" data-node-id="411:61268" data-name="M">
+                  <p className="font-['Geist:Medium'] font-medium leading-[1.3] relative shrink-0 text-[11px] text-[color:var(--muted-foreground,#78716c)] tracking-[0.66px] uppercase whitespace-nowrap" data-node-id="411:61269">
+                    RELATIONSHIP
+                  </p>
+                  <p className="font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] whitespace-pre" data-node-id="411:61270">{`No contact  →  needed: Validated the ask`}</p>
+                </div>
+                <div className="content-stretch flex gap-[6px] items-start overflow-clip relative shrink-0" data-node-id="411:61271" data-name="Sources">
+                  <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex items-start overflow-clip px-[7px] py-[2px] relative rounded-[6px] shrink-0" data-node-id="411:61272" data-name="Source">
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] whitespace-nowrap" data-node-id="411:61273">
+                      From intelligence: Committee roster
+                    </p>
+                  </div>
+                  <div className="bg-[var(--accent-subtle,#f5f5f4)] content-stretch flex items-start overflow-clip px-[7px] py-[2px] relative rounded-[6px] shrink-0" data-node-id="411:61274" data-name="Source">
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--accent,#0a0a0a)] whitespace-nowrap" data-node-id="411:61275">
+                      From your form: Type of ask: both
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex flex-col gap-[8px] items-start overflow-clip px-[20px] py-[14px] relative shrink-0 w-full" data-node-id="411:61276" data-name="Recommendation">
+                <div className="content-stretch flex items-center justify-between overflow-clip relative shrink-0 w-full" data-node-id="411:61277" data-name="T">
+                  <div className="content-stretch flex gap-[10px] items-center overflow-clip relative shrink-0" data-node-id="411:61278" data-name="L">
+                    <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="411:61279">
+                      Sen. Hartley (VA)
+                    </p>
+                    <div className="bg-[var(--accent-subtle,#f5f5f4)] content-stretch flex items-center overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:61280" data-name="Tag">
+                      <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--accent,#0a0a0a)] whitespace-nowrap" data-node-id="411:61281">
+                        Chamber counterpart
+                      </p>
+                    </div>
+                  </div>
+                  <div className="[word-break:break-word] content-stretch flex font-['Geist:Regular'] font-normal gap-[12px] items-center overflow-clip relative shrink-0 whitespace-nowrap" data-node-id="411:61282" data-name="A">
+                    <p className="leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)]" data-node-id="411:61283">
+                      Owner JC
+                    </p>
+                    <p className="leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--accent,#0a0a0a)] tracking-[-0.039px]" data-node-id="411:61284">
+                      Accept
+                    </p>
+                    <p className="leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px]" data-node-id="411:61285">
+                      Reject
+                    </p>
+                  </div>
+                </div>
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] w-[900px]" data-node-id="411:61286">
+                  Senate Armed Services member with Arlington facility nexus; no prior ask from this client.
+                </p>
+                <div className="[word-break:break-word] content-stretch flex gap-[12px] items-center overflow-clip relative shrink-0" data-node-id="411:61287" data-name="M">
+                  <p className="font-['Geist:Medium'] font-medium leading-[1.3] relative shrink-0 text-[11px] text-[color:var(--muted-foreground,#78716c)] tracking-[0.66px] uppercase whitespace-nowrap" data-node-id="411:61288">
+                    RELATIONSHIP
+                  </p>
+                  <p className="font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] whitespace-pre" data-node-id="411:61289">{`No contact  →  needed: Introduced`}</p>
+                </div>
+                <div className="content-stretch flex gap-[6px] items-start overflow-clip relative shrink-0" data-node-id="411:61290" data-name="Sources">
+                  <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex items-start overflow-clip px-[7px] py-[2px] relative rounded-[6px] shrink-0" data-node-id="411:61291" data-name="Source">
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] whitespace-nowrap" data-node-id="411:61292">
+                      From intelligence: District nexus
+                    </p>
+                  </div>
+                  <div className="bg-[var(--warning-subtle,#f3eee2)] content-stretch flex items-start overflow-clip px-[7px] py-[2px] relative rounded-[6px] shrink-0" data-node-id="411:61293" data-name="Source">
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--warning-text,#6c5226)] whitespace-nowrap" data-node-id="411:61294">
+                      From memory: Advocacy matter: BVLOS rulemaking
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex flex-col gap-[8px] items-start overflow-clip px-[20px] py-[14px] relative shrink-0 w-full" data-node-id="411:61295" data-name="Recommendation">
+                <div className="content-stretch flex items-center justify-between overflow-clip relative shrink-0 w-full" data-node-id="411:61296" data-name="T">
+                  <div className="content-stretch flex gap-[10px] items-center overflow-clip relative shrink-0" data-node-id="411:61297" data-name="L">
+                    <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="411:61298">
+                      House Defense Appropriations subcommittee staff
+                    </p>
+                    <div className="bg-[var(--accent-subtle,#f5f5f4)] content-stretch flex items-center overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:61299" data-name="Tag">
+                      <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--accent,#0a0a0a)] whitespace-nowrap" data-node-id="411:61300">
+                        Committee validator
+                      </p>
+                    </div>
+                  </div>
+                  <div className="[word-break:break-word] content-stretch flex font-['Geist:Regular'] font-normal gap-[12px] items-center overflow-clip relative shrink-0 whitespace-nowrap" data-node-id="411:61301" data-name="A">
+                    <p className="leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)]" data-node-id="411:61302">
+                      Owner NM
+                    </p>
+                    <p className="leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--accent,#0a0a0a)] tracking-[-0.039px]" data-node-id="411:61303">
+                      Accept
+                    </p>
+                    <p className="leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px]" data-node-id="411:61304">
+                      Reject
+                    </p>
+                  </div>
+                </div>
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] w-[900px]" data-node-id="411:61305">
+                  Controls the technology maturation line; informs funding level realism.
+                </p>
+                <div className="[word-break:break-word] content-stretch flex gap-[12px] items-center overflow-clip relative shrink-0" data-node-id="411:61306" data-name="M">
+                  <p className="font-['Geist:Medium'] font-medium leading-[1.3] relative shrink-0 text-[11px] text-[color:var(--muted-foreground,#78716c)] tracking-[0.66px] uppercase whitespace-nowrap" data-node-id="411:61307">
+                    RELATIONSHIP
+                  </p>
+                  <p className="font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] whitespace-pre" data-node-id="411:61308">{`Intro email sent  →  needed: Meeting held`}</p>
+                </div>
+                <div className="content-stretch flex gap-[6px] items-start overflow-clip relative shrink-0" data-node-id="411:61309" data-name="Sources">
+                  <div className="bg-[var(--accent-subtle,#f5f5f4)] content-stretch flex items-start overflow-clip px-[7px] py-[2px] relative rounded-[6px] shrink-0" data-node-id="411:61310" data-name="Source">
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--accent,#0a0a0a)] whitespace-nowrap" data-node-id="411:61311">
+                      From your form: Funding asked
+                    </p>
+                  </div>
+                  <div className="bg-[var(--warning-subtle,#f3eee2)] content-stretch flex items-start overflow-clip px-[7px] py-[2px] relative rounded-[6px] shrink-0" data-node-id="411:61312" data-name="Source">
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--warning-text,#6c5226)] whitespace-nowrap" data-node-id="411:61313">
+                      From memory: Timeline: Sep 14 email
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col items-start overflow-clip relative rounded-[12px] shrink-0 w-full" data-node-id="411:61314" data-name="Intelligence plan card">
+              <div className="border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex items-center justify-between overflow-clip px-[20px] py-[14px] relative shrink-0 w-full" data-node-id="411:61315" data-name="Head">
+                <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0" data-node-id="411:61316" data-name="L">
+                  <div className="content-stretch flex gap-[6px] items-center relative shrink-0" data-node-id="411:61317" data-name="Info row">
+                    <p className="[word-break:break-word] font-['Geist:SemiBold'] font-semibold leading-[1.35] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="411:61318">
+                      What we need to learn
+                    </p>
+                    <InfoTip className="bg-[var(--muted,#f5f5f4)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center justify-center relative rounded-[999px] shrink-0 size-[16px]" />
+                  </div>
+                </div>
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--accent,#0a0a0a)] tracking-[-0.039px] whitespace-nowrap" data-node-id="411:61320">
+                  Open Intelligence
+                </p>
+              </div>
+              <div className="border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex items-center justify-between overflow-clip px-[20px] py-[12px] relative shrink-0 w-full" data-node-id="411:61321" data-name="Question">
+                <div className="[word-break:break-word] content-stretch flex flex-col gap-[3px] items-start overflow-clip relative shrink-0 w-[830.992px]" data-node-id="411:61322" data-name="L">
+                  <p className="font-['Geist:Medium'] font-medium leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] w-[620px]" data-node-id="411:61323">
+                    Is the technology maturation account defensible for a new start?
+                  </p>
+                  <p className="font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] whitespace-nowrap" data-node-id="411:61324">
+                    Decision: Whether to ask for a new line or an increase
+                  </p>
+                </div>
+                <div className="content-stretch flex flex-col gap-[4px] items-end overflow-clip relative shrink-0 w-[257.008px]" data-node-id="411:61325" data-name="R">
+                  <div className="bg-[var(--accent-subtle,#f5f5f4)] content-stretch flex items-center overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:61326" data-name="Tag">
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--success,#3d6b4f)] whitespace-nowrap" data-node-id="411:61327">
+                      Available
+                    </p>
+                  </div>
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] min-w-full relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] w-[min-content]" data-node-id="411:61328">
+                    Budget programs: PE 0604134A relevance 91%
+                  </p>
+                </div>
+              </div>
+              <div className="border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex items-center justify-between overflow-clip px-[20px] py-[12px] relative shrink-0 w-full" data-node-id="411:61329" data-name="Question">
+                <div className="[word-break:break-word] content-stretch flex flex-col gap-[3px] items-start overflow-clip relative shrink-0 w-[830.992px]" data-node-id="411:61330" data-name="L">
+                  <p className="font-['Geist:Medium'] font-medium leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] w-[620px]" data-node-id="411:61331">
+                    Is the NDAA language already moving in another bill?
+                  </p>
+                  <p className="font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] whitespace-nowrap" data-node-id="411:61332">
+                    Decision: Whether to sponsor or amend
+                  </p>
+                </div>
+                <div className="content-stretch flex flex-col gap-[4px] items-end overflow-clip relative shrink-0 w-[257.008px]" data-node-id="411:61333" data-name="R">
+                  <div className="bg-[var(--accent-subtle,#f5f5f4)] content-stretch flex items-center overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:61334" data-name="Tag">
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--success,#3d6b4f)] whitespace-nowrap" data-node-id="411:61335">
+                      Available
+                    </p>
+                  </div>
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] min-w-full relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] w-[min-content]" data-node-id="411:61336">
+                    Tracked bills: H.R. 4455, S. 2210
+                  </p>
+                </div>
+              </div>
+              <div className="border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex items-center justify-between overflow-clip px-[20px] py-[12px] relative shrink-0 w-full" data-node-id="411:61337" data-name="Question">
+                <div className="[word-break:break-word] content-stretch flex flex-col gap-[3px] items-start overflow-clip relative shrink-0 w-[830.992px]" data-node-id="411:61338" data-name="L">
+                  <p className="font-['Geist:Medium'] font-medium leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] w-[620px]" data-node-id="411:61339">
+                    Does the Department support minimum standards?
+                  </p>
+                  <p className="font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] whitespace-nowrap" data-node-id="411:61340">
+                    Decision: Whether the authorization ask will be resisted
+                  </p>
+                </div>
+                <div className="content-stretch flex flex-col gap-[4px] items-end overflow-clip relative shrink-0 w-[257.008px]" data-node-id="411:61341" data-name="R">
+                  <div className="bg-[var(--warning-subtle,#f3eee2)] content-stretch flex items-center overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:61342" data-name="Tag">
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--warning-text,#6c5226)] whitespace-nowrap" data-node-id="411:61343">
+                      Gap
+                    </p>
+                  </div>
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] min-w-full relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] w-[min-content]" data-node-id="411:61344">
+                    No source: ask the program office in a meeting
+                  </p>
+                </div>
+              </div>
+              <div className="border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex items-center justify-between overflow-clip px-[20px] py-[12px] relative shrink-0 w-full" data-node-id="411:61345" data-name="Question">
+                <div className="[word-break:break-word] content-stretch flex flex-col gap-[3px] items-start overflow-clip relative shrink-0 w-[830.992px]" data-node-id="411:61346" data-name="L">
+                  <p className="font-['Geist:Medium'] font-medium leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] w-[620px]" data-node-id="411:61347">
+                    Which offices have competing language?
+                  </p>
+                  <p className="font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] whitespace-nowrap" data-node-id="411:61348">
+                    Decision: Who to align with before submission
+                  </p>
+                </div>
+                <div className="content-stretch flex flex-col gap-[4px] items-end overflow-clip relative shrink-0 w-[257.008px]" data-node-id="411:61349" data-name="R">
+                  <div className="bg-[var(--accent-subtle,#f5f5f4)] content-stretch flex items-center overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:61350" data-name="Tag">
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--success,#3d6b4f)] whitespace-nowrap" data-node-id="411:61351">
+                      Available
+                    </p>
+                  </div>
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] min-w-full relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] w-[min-content]" data-node-id="411:61352">
+                    Federal footprint: LDA filings by registrant
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col items-start overflow-clip relative rounded-[12px] shrink-0 w-full" data-node-id="411:61353" data-name="Engagement waves card">
+              <div className="border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex items-center justify-between overflow-clip px-[20px] py-[14px] relative shrink-0 w-full" data-node-id="411:61354" data-name="Head">
+                <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0" data-node-id="411:61355" data-name="L">
+                  <div className="content-stretch flex gap-[6px] items-center relative shrink-0" data-node-id="411:61356" data-name="Info row">
+                    <p className="[word-break:break-word] font-['Geist:SemiBold'] font-semibold leading-[1.35] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="411:61357">
+                      Engagement waves
+                    </p>
+                    <InfoTip className="bg-[var(--muted,#f5f5f4)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center justify-center relative rounded-[999px] shrink-0 size-[16px]" />
+                  </div>
+                </div>
+                <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--accent,#0a0a0a)] tracking-[-0.039px] whitespace-nowrap" data-node-id="411:61359">
+                  Open engagement plan
+                </p>
+              </div>
+              <div className="content-stretch flex flex-col gap-[10px] items-start overflow-clip px-[20px] py-[14px] relative shrink-0 w-full" data-node-id="411:61360" data-name="B">
+                <div className="bg-[var(--background,#f5f5f4)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col gap-[6px] items-start overflow-clip px-[14px] py-[12px] relative rounded-[10px] shrink-0 w-full" data-node-id="411:61361" data-name="Wave">
+                  <div className="content-stretch flex items-center justify-between overflow-clip relative shrink-0 w-full" data-node-id="411:61362" data-name="T">
+                    <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="411:61363">
+                      Wave 1. Discovery and validation
+                    </p>
+                    <div className="content-stretch flex gap-[6px] items-start overflow-clip relative shrink-0" data-node-id="411:61364" data-name="Ch">
+                      <div className="bg-[var(--accent-subtle,#f5f5f4)] content-stretch flex items-center overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:61365" data-name="Tag">
+                        <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--accent,#0a0a0a)] whitespace-nowrap" data-node-id="411:61366">
+                          Call or video, then DC visit
+                        </p>
+                      </div>
+                      <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex items-center overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:61367" data-name="Tag">
+                        <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] whitespace-nowrap" data-node-id="411:61368">
+                          Oct 12 to Nov 20
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] w-[900px]" data-node-id="411:61369">
+                    Why now: Staff validation is cheap now and shapes the request before drafting. Three or more meetings cluster into one DC window.
+                  </p>
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] w-[900px]" data-node-id="411:61370">
+                    Exit criteria: Committee staff confirm the ask is realistic and the right account
+                  </p>
+                </div>
+                <div className="bg-[var(--background,#f5f5f4)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col gap-[6px] items-start overflow-clip px-[14px] py-[12px] relative rounded-[10px] shrink-0 w-full" data-node-id="411:61371" data-name="Wave">
+                  <div className="content-stretch flex items-center justify-between overflow-clip relative shrink-0 w-full" data-node-id="411:61372" data-name="T">
+                    <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="411:61373">
+                      Wave 2. Champion cultivation
+                    </p>
+                    <div className="content-stretch flex gap-[6px] items-start overflow-clip relative shrink-0" data-node-id="411:61374" data-name="Ch">
+                      <div className="bg-[var(--accent-subtle,#f5f5f4)] content-stretch flex items-center overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:61375" data-name="Tag">
+                        <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--accent,#0a0a0a)] whitespace-nowrap" data-node-id="411:61376">
+                          DC visit with the client executive
+                        </p>
+                      </div>
+                      <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex items-center overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:61377" data-name="Tag">
+                        <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] whitespace-nowrap" data-node-id="411:61378">
+                          Dec 7 to Dec 11 (in session)
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] w-[900px]" data-node-id="411:61379">
+                    Why now: Closest in-session window before recess and before the request window opens. Client executive adds weight.
+                  </p>
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] w-[900px]" data-node-id="411:61380">
+                    Exit criteria: One office commits to submit
+                  </p>
+                </div>
+                <div className="bg-[var(--background,#f5f5f4)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col gap-[6px] items-start overflow-clip px-[14px] py-[12px] relative rounded-[10px] shrink-0 w-full" data-node-id="411:61381" data-name="Wave">
+                  <div className="content-stretch flex items-center justify-between overflow-clip relative shrink-0 w-full" data-node-id="411:61382" data-name="T">
+                    <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.45] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="411:61383">
+                      Wave 3. District and facility visit
+                    </p>
+                    <div className="content-stretch flex gap-[6px] items-start overflow-clip relative shrink-0" data-node-id="411:61384" data-name="Ch">
+                      <div className="bg-[var(--accent-subtle,#f5f5f4)] content-stretch flex items-center overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:61385" data-name="Tag">
+                        <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--accent,#0a0a0a)] whitespace-nowrap" data-node-id="411:61386">
+                          Facility visit during recess
+                        </p>
+                      </div>
+                      <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex items-center overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:61387" data-name="Tag">
+                        <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] whitespace-nowrap" data-node-id="411:61388">
+                          Jan 4 to Jan 15
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] w-[900px]" data-node-id="411:61389">
+                    Why now: Recess weeks are for district work. Strengthens the geographic validator role at the San Antonio plant.
+                  </p>
+                  <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px] w-[900px]" data-node-id="411:61390">
+                    Exit criteria: Member or staff visit scheduled
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex gap-[20px] items-start overflow-clip relative shrink-0 w-full" data-node-id="411:61391" data-name="Row">
+              <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-[1_0_0] flex-col items-start min-w-px overflow-clip relative rounded-[12px]" data-node-id="411:61392" data-name="Work products card">
+                <div className="border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex items-center justify-between overflow-clip px-[20px] py-[14px] relative shrink-0 w-full" data-node-id="411:61393" data-name="Head">
+                  <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0" data-node-id="411:61394" data-name="L">
+                    <p className="[word-break:break-word] font-['Geist:SemiBold'] font-semibold leading-[1.35] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="411:61395">
+                      Work products
+                    </p>
+                  </div>
+                </div>
+                <div className="[word-break:break-word] content-stretch flex flex-col font-['Geist:Regular'] font-normal gap-[8px] items-start overflow-clip px-[20px] py-[12px] relative shrink-0 w-full whitespace-nowrap" data-node-id="411:61396" data-name="B">
+                  <div className="content-stretch flex items-start justify-between overflow-clip py-[6px] relative shrink-0 w-full" data-node-id="411:61397" data-name="Item">
+                    <p className="leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px]" data-node-id="411:61398">
+                      NDAA request paper and bill text
+                    </p>
+                    <p className="leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)]" data-node-id="411:61399">
+                      Due Jan 8 · JC
+                    </p>
+                  </div>
+                  <div className="content-stretch flex items-start justify-between overflow-clip py-[6px] relative shrink-0 w-full" data-node-id="411:61400" data-name="Item">
+                    <p className="leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px]" data-node-id="411:61401">
+                      Appropriations justification and use of funds
+                    </p>
+                    <p className="leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)]" data-node-id="411:61402">
+                      Due Jan 22 · JC
+                    </p>
+                  </div>
+                  <div className="content-stretch flex items-start justify-between overflow-clip py-[6px] relative shrink-0 w-full" data-node-id="411:61403" data-name="Item">
+                    <p className="leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px]" data-node-id="411:61404">
+                      District impact one-pager
+                    </p>
+                    <p className="leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)]" data-node-id="411:61405">
+                      Due Nov 15 · NM
+                    </p>
+                  </div>
+                  <div className="content-stretch flex items-start justify-between overflow-clip py-[6px] relative shrink-0 w-full" data-node-id="411:61406" data-name="Item">
+                    <p className="leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px]" data-node-id="411:61407">
+                      Committee leave-behind
+                    </p>
+                    <p className="leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)]" data-node-id="411:61408">
+                      Due Dec 4 · NM
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-[1_0_0] flex-col items-start min-w-px overflow-clip relative rounded-[12px]" data-node-id="411:61409" data-name="Client dependencies card">
+                <div className="border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex items-center justify-between overflow-clip px-[20px] py-[14px] relative shrink-0 w-full" data-node-id="411:61410" data-name="Head">
+                  <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0" data-node-id="411:61411" data-name="L">
+                    <p className="[word-break:break-word] font-['Geist:SemiBold'] font-semibold leading-[1.35] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="411:61412">
+                      What the client owes us
+                    </p>
+                  </div>
+                </div>
+                <div className="[word-break:break-word] content-stretch flex flex-col font-['Geist:Regular'] font-normal gap-[8px] items-start overflow-clip px-[20px] py-[12px] relative shrink-0 w-full whitespace-nowrap" data-node-id="411:61413" data-name="B">
+                  <div className="content-stretch flex items-start justify-between overflow-clip py-[6px] relative shrink-0 w-full" data-node-id="411:61414" data-name="Item">
+                    <p className="leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px]" data-node-id="411:61415">
+                      Validated monthly production rate and ramp capacity
+                    </p>
+                    <p className="leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)]" data-node-id="411:61416">
+                      By Nov 6
+                    </p>
+                  </div>
+                  <div className="content-stretch flex items-start justify-between overflow-clip py-[6px] relative shrink-0 w-full" data-node-id="411:61417" data-name="Item">
+                    <p className="leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px]" data-node-id="411:61418">
+                      Disconnected operations test results
+                    </p>
+                    <p className="leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)]" data-node-id="411:61419">
+                      By Nov 20
+                    </p>
+                  </div>
+                  <div className="content-stretch flex items-start justify-between overflow-clip py-[6px] relative shrink-0 w-full" data-node-id="411:61420" data-name="Item">
+                    <p className="leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px]" data-node-id="411:61421">
+                      Executive available for Dec 7 to 11
+                    </p>
+                    <p className="leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)]" data-node-id="411:61422">
+                      By Oct 30
+                    </p>
+                  </div>
+                  <div className="content-stretch flex items-start justify-between overflow-clip py-[6px] relative shrink-0 w-full" data-node-id="411:61423" data-name="Item">
+                    <p className="leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.039px]" data-node-id="411:61424">
+                      Approve minimum acceptable language
+                    </p>
+                    <p className="leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)]" data-node-id="411:61425">
+                      By Dec 1
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col items-start overflow-clip relative rounded-[12px] shrink-0 w-full" data-node-id="411:61426" data-name="Risks and assumptions">
+              <div className="border-[var(--border,#e7e5e4)] border-b border-solid content-stretch flex items-center justify-between overflow-clip px-[20px] py-[14px] relative shrink-0 w-full" data-node-id="411:61427" data-name="Head">
+                <div className="content-stretch flex flex-col items-start overflow-clip relative shrink-0" data-node-id="411:61428" data-name="L">
+                  <div className="content-stretch flex gap-[6px] items-center relative shrink-0" data-node-id="411:61429" data-name="Info row">
+                    <p className="[word-break:break-word] font-['Geist:SemiBold'] font-semibold leading-[1.35] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="411:61430">
+                      Risks and assumptions
+                    </p>
+                    <InfoTip className="bg-[var(--muted,#f5f5f4)] border border-[var(--border-strong,#d6d3d1)] border-solid content-stretch flex items-center justify-center relative rounded-[999px] shrink-0 size-[16px]" />
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col gap-[8px] items-start overflow-clip px-[20px] py-[12px] relative shrink-0 w-full" data-node-id="411:61432" data-name="B">
+                <div className="content-stretch flex items-start overflow-clip relative shrink-0" data-node-id="411:61433" data-name="Item">
+                  <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex items-center overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:61434" data-name="Tag">
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] whitespace-nowrap" data-node-id="411:61435">
+                      Assumption
+                    </p>
+                  </div>
+                </div>
+                <div className="content-stretch flex items-start overflow-clip relative shrink-0" data-node-id="411:61436" data-name="Item">
+                  <div className="bg-[var(--warning-subtle,#f3eee2)] content-stretch flex items-center overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:61437" data-name="Tag">
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--warning-text,#6c5226)] whitespace-nowrap" data-node-id="411:61438">
+                      Risk
+                    </p>
+                  </div>
+                </div>
+                <div className="content-stretch flex items-start overflow-clip relative shrink-0" data-node-id="411:61439" data-name="Item">
+                  <div className="bg-[var(--muted,#f5f5f4)] content-stretch flex items-center overflow-clip px-[8px] py-[3px] relative rounded-[6px] shrink-0" data-node-id="411:61440" data-name="Tag">
+                    <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.4] relative shrink-0 text-[12px] text-[color:var(--muted-foreground,#78716c)] whitespace-nowrap" data-node-id="411:61441">
+                      Caveat
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+These styles are contained in the design: v2/shadow-xs: Effect(type: DROP_SHADOW, color: #0C0A090D, offset: (0, 1), radius: 2, spread: 0), v2/Eyebrow: Font(family: "Geist", style: Medium, size: 11, weight: 500, lineHeight: 1.2999999523162842, letterSpacing: 6), v2/Button: Font(family: "Geist", style: Medium, size: 14, weight: 500, lineHeight: 1.2000000476837158, letterSpacing: -0.5), v2/Small: Font(family: "Geist", style: Regular, size: 13, weight: 400, lineHeight: 1.4500000476837158, letterSpacing: -0.30000001192092896), v2/Label: Font(family: "Geist", style: Medium, size: 12, weight: 500, lineHeight: 1.2000000476837158, letterSpacing: 0), v2/Black gradient: , v2/metal-shadow: Effect(type: INNER_SHADOW, color: #FFFFFF24, offset: (0, 1), radius: 0, spread: 0); Effect(type: DROP_SHADOW, color: #0C0A0924, offset: (0, 1), radius: 2, spread: 0), v2/Title S: Font(family: "Geist", style: SemiBold, size: 14, weight: 600, lineHeight: 1.350000023841858, letterSpacing: -0.5), v2/Caption: Font(family: "Geist", style: Regular, size: 12, weight: 400, lineHeight: 1.399999976158142, letterSpacing: 0), v2/Title L: Font(family: "Geist", style: Medium, size: 20, weight: 500, lineHeight: 1.2999999523162842, letterSpacing: -1.5), v2/Body medium: Font(family: "Geist", style: Medium, size: 14, weight: 500, lineHeight: 1.4500000476837158, letterSpacing: -0.5).
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Device=Desktop, Mode=Portfolio
+**Node ID:** 469:41500
+
+Shared Capiro 3.1 Desktop header with Portfolio selected. Logo returns to Dashboard; three modes are Meri, Portfolio and Modules. Native portrait is a neutral illustration. Wire navigation on page-local instances.
+
+## Capiro 3.1/Shared header
+**Node ID:** 469:92041
+
+Shared Capiro navigation with Meri, Portfolio and Modules modes; Master calendar, Search, Updates and Profile actions. Desktop uses action labels; tablet and phone use icons. Prototype actions are mapped on screen instances to same-device destinations. Compact icon-only mode switcher: sparkle = Meri; briefcase = Portfolio; grid = Modules. Selected tile retains a visible surface and outline. Preserve semantic labels, accessible mode names and current-section navigation when implemented.
+
+## v2/Button
+**Node ID:** 12:388
+
+shadcn/ui <Button> (new-york v4). h-9 px-3.5 rounded-\[10px\] text-sm font-medium. Primary | Outline (shadow-xs) | Ghost. Chevron = <Select> trigger look.
+
+## icon/sparkle
+**Node ID:** 4:9
+
+Lucide-style sparkle icon. Recolor via the vector stroke.
+
+## icon/layout-grid
+**Node ID:** 4:26
+
+Lucide-style layout-grid icon. Recolor via the vector stroke.
+
+## icon/search
+**Node ID:** 4:13
+
+Lucide-style search icon. Recolor via the vector stroke.
+
+## icon/bell
+**Node ID:** 4:17
+
+Lucide-style bell icon. Recolor via the vector stroke.
+
+## Capiro 3.1/Profile picture
+**Node ID:** 469:41439
+
+Neutral editable portrait illustration used for the current-user profile control in the prototype. Replace with the signed-in user image in implementation.
+
+## Device=Desktop, Context=Client
+**Node ID:** 471:92397
+
+Capiro3.1 Client Desktop navigation. Labels and native icons. Current item is a default highlight; override selected fills in screen instances. Reactions are wired on the prototype-page instances.
+
+## Capiro 3.1/Shared sidebar
+**Node ID:** 471:92866
+
+Shared Capiro3.1 application navigation. Contexts are Portfolio, Client and Modules; Desktop232px and Tablet72px widths. Client default scope is Anduril. Settings remains a bottom action. Settings pages retain their existing settings rail. Wire native navigation reactions on page-local instances.
+
+## icon/settings · Capiro 3.1
+**Node ID:** 471:92354
+
+Native editable settings cog, matching the local 16px line icon system.
+
+## icon/plus
+**Node ID:** 4:20
+
+Lucide-style plus icon. Recolor via the vector stroke.
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.

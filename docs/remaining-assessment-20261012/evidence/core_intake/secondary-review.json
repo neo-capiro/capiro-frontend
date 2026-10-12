@@ -1,0 +1,122 @@
+{
+  "review": "Independent secondary review of highest-priority Prospects/Objectives claims",
+  "date": "2026-10-12",
+  "shippingSource": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "assessmentHead": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+  "scope": "Read-only source, tests, fixtures and existing root replay evidence; one independently replayed prospect manual-save case. No application edits or native service/provider actions.",
+  "reviews": [
+    {
+      "findingId": "PROS-F01",
+      "conclusion": "CONFIRMED_WITH_SCOPE_CLARIFICATION",
+      "recommendedSeverity": "P2",
+      "classification": "FRONTEND_CURRENT_LIST_DENIAL_DISPLAY_AND_LOCAL_ACTION_GATING",
+      "source": [
+        "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx:112",
+        "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx:123",
+        "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx:190",
+        "apps/web/src/features/portfolio/prospects/queries.ts:37",
+        "apps/web/src/shared/portfolio/api/provider.tsx:29"
+      ],
+      "evidence": [
+        "../prospects/review.spec.ts:43",
+        "../prospects/browser-results.json",
+        "../root-review/prospects-negative-controls.json",
+        "../root-review/prospects-artifacts/review-prospect-list-retai-c05da-ter-a-current-access-denial/denied-prospect-list.png",
+        "../root-review/prospects-artifacts/review-prospect-list-retai-c05da-ter-a-current-access-denial/denied-prospect-pipeline.png"
+      ],
+      "sufficiency": "Sufficient. Production query/cache and ProspectsIndex are used. First GET returns the normal parsed fixture; after31 seconds a later list GET returns403. Permission alert and cached name/geography/stage/next-action content coexist. Pipeline enablement depends only on query.data, and it receives cached query.data.prospects. Root independently replayed the unchanged negative control successfully.",
+      "claimBoundary": "The same identity and tenant stay mounted. Only the current list GET is denied. This does not prove per-record permission revocation, cross-user/tenant leakage, newly fetched unauthorized data, successful protected mutations or backend authorization bypass. Pipeline is a local cached-data view.",
+      "deploymentRelevance": "Fix or gate the affected authenticated Prospects list/pipeline before claiming current-access acceptance. Root disposition is P2 with a specific affected-surface hold; no backend authorization bypass, cross-tenant leakage or infrastructure deployment failure was established.",
+      "additionalTesting": "No repeated browser replay here because root already replayed it. Source independently inspected; no backend behavior accepted.",
+      "originalSeverity": "P1",
+      "severityDisposition": "Root integration normalizes the same denied-cache pattern to P2, preserving author severity separately. Specific affected-surface acceptance hold; zero backend-bypass claim."
+    },
+    {
+      "findingId": "OWI-F01",
+      "conclusion": "CONFIRMED_WITH_SCOPE_CLARIFICATION",
+      "originalSeverity": "P2",
+      "recommendedSeverity": "P2",
+      "classification": "FRONTEND_CURRENT_LIST_DENIAL_DISPLAY_AND_EDITOR_ENTRY_GATING",
+      "source": [
+        "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx:25",
+        "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx:32",
+        "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx:87",
+        "apps/web/src/features/portfolio/objectives/ObjectiveSummary.tsx:25",
+        "apps/web/src/features/portfolio/objectives/ObjectiveEditor.tsx:26",
+        "apps/web/src/features/portfolio/objectives/mutations.ts:25",
+        "apps/web/src/features/portfolio/objectives/writer.ts:59"
+      ],
+      "evidence": [
+        "../objectives_work_intel/review.spec.ts:35",
+        "../objectives_work_intel/results.json",
+        "../root-review/objectives-negative-controls.json",
+        "../root-review/objectives-artifacts/review-objective-current-list-after-denied-stale-remount/objective-denied-stale-list.png",
+        "../root-review/objectives-artifacts/review-objective-current-list-after-denied-stale-remount/objective-denied-stale-editor.png"
+      ],
+      "sufficiency": "Sufficient for denied-list rendering and stale editor opening. selected and visible are derived directly from query.data; QueryState rendering an error does not prevent those branches. The test first gets an authorized objective list, expires freshness, remounts via real navigation, receives403, and opens Edit objective from the cached card. Root independently reproduced it. ObjectiveSummary has the same unguarded query.data pattern but its403 presentation was not separately exercised.",
+      "claimBoundary": "Editor visibility is not evidence of an accepted unauthorized save. The writer still dispatches through the existing API, binds client, actor/lifetime and expectedVersion, and checks receipts. No write was submitted by this negative control. No cross-tenant identity replacement, native revocation or fresh denied-data fetch was established.",
+      "deploymentRelevance": "Fix or gate the affected authenticated Objectives list/editor before claiming current-access acceptance. Root disposition is P2 with a specific affected-surface hold; no backend authorization bypass, cross-tenant leakage or infrastructure deployment failure was established.",
+      "additionalTesting": "No duplicated denial replay here; source/tests and root report independently inspected. Summary finding remains source-only.",
+      "severityDisposition": "Root integration normalizes the same denied-cache pattern to P2, preserving author severity separately. Specific affected-surface acceptance hold; zero backend-bypass claim."
+    },
+    {
+      "findingId": "PROS-F02",
+      "conclusion": "INDEPENDENTLY_REPRODUCED",
+      "recommendedSeverity": "P1",
+      "classification": "FRONTEND_POST_SUBMIT_UNSAVED_EDIT_LOSS",
+      "source": [
+        "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx:39",
+        "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx:150",
+        "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx:161",
+        "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx:241",
+        "apps/web/src/features/modules/workspace/prospects/useProspectDraftSave.ts:122",
+        "apps/web/src/features/modules/workspace/prospects/useProspectDraftSave.ts:153"
+      ],
+      "evidence": [
+        "secondary-workspace.spec.ts:5",
+        "secondary-workspace-results.json",
+        "secondary-save-observation.json",
+        "secondary-workspace-artifacts/secondary-workspace-prospe-98bd9-ntly-discards-it-on-success/typing-during-pending-save.png",
+        "secondary-workspace-artifacts/secondary-workspace-prospe-98bd9-ntly-discards-it-on-success/later-edits-lost-after-save.png",
+        "../prospects/workspace-review.spec.ts:5",
+        "apps/web/tests/prospect-resources-fixtures.ts:38",
+        "apps/web/test/browser/fixtures.ts:1"
+      ],
+      "sufficiency": "Sufficient and independently reproduced1/1. Fixtures bind the same valid tenant/user/owner/prospect/draft, return a matching updated draft and matching snapshot draftId. The held PATCH lets normal later typing occur while save remains pending; TextArea has no disabled/readOnly gate. Clearing retained recovery state changes DraftEditor key from requestId to current, remounting local fields from the submitted saved value. Extra replay assertions confirm the sole write and service-fixture state contain First submitted text, while Later typed text that must survive disappears from the editor.",
+      "claimBoundary": "The loss is post-submit unsaved text entered during a valid successful save. Previously acknowledged saved content is not shown being lost. No server race, failed transaction, malformed receipt, provider integration or non-prospect editor behavior is needed or proven.",
+      "deploymentRelevance": "Fix or gate prospect manual document editing before exposure. Ordinary network delay plus typing silently loses current user work. This is a local implementation defect independent of native CAS or separate PATCH/snapshot durability questions.",
+      "remediationShape": "Either freeze all editable title/body fields for the full save lifetime or preserve edits made after the submitted snapshot as unsaved state without key-triggered overwrite. No fix implemented."
+    }
+  ],
+  "billingCrossReference": {
+    "rowId": "CORE-077",
+    "canonicalFindingId": "MS01",
+    "canonicalFindingFile": "../modules_settings/findings.json",
+    "classification": "CONFIRMED_SOURCE_CONTRACT_MISMATCH",
+    "originalBoundedAssessmentPreserved": true,
+    "currentBackendRevisionProvenance": "Root supplied backend-current-billing.service.ts from git show 243248e726243c44bd4b9d24fd1ed220da18c56a. This reviewer independently verified its SHA256 equals the pinned service; this reviewer did not fetch the backend repository.",
+    "sourceByteEqualityIndependentlyVerified": true,
+    "sha256": "5ce1534d7cc803321a11375b1a97291ff9d8ce84ae40d49dcc060292cde0297f",
+    "evidence": [
+      "../root-review/backend-current-billing.service.ts",
+      "../modules_settings/backend-pin-billing.service.ts",
+      "apps/web/src/features/settings/BillingSettings.tsx:86",
+      "apps/web/src/shared/capiro/operations/settings.ts:363"
+    ],
+    "conclusion": "The supplied current backend service is byte-identical to the pinned4be13b0 service. Both create Checkout in mode subscription without inspecting/updating an existing subscription; current frontend enables Add profiles for existing plans. CORE-077 now references MS01. No duplicate core/intake finding is created, and no duplicate charge/subscription or other real provider outcome is claimed.",
+    "currentBackendRevision": "243248e726243c44bd4b9d24fd1ed220da18c56a"
+  },
+  "execution": {
+    "independentBrowserCases": 1,
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "workers": 1,
+    "baseURL": "http://127.0.0.1:5197",
+    "allRequestsInterceptedOrLocal": true,
+    "nativeCalls": 0,
+    "applicationEdits": 0
+  },
+  "overall": "The three highest-priority behavioral claims are supported within the narrowed scopes above. Denied-list findings establish frontend cached-data/current-entry defects; draft-save findings establish post-submit local edit loss. Their release gates are specific to the affected authenticated surfaces. Backend authorization compromise and native/provider outcomes remain unclaimed."
+}
