@@ -45,27 +45,44 @@ function CalendarEvents({ model }: { model: CalendarModel }) {
           </ActionButton>
         </div>
       )}
-      <StatusPanel
-        loading={meetings.loading}
-        error={meetings.error}
-        onRetry={meetings.reload}
-      >
-        {view === "agenda" ? (
-          <>
-            <AgendaTable items={filtered} onMeeting={setSelected} />
-            {!filtered.length && !extras.loading && (
+      {view === "agenda" ? (
+        <>
+          <StatusPanel
+            loading={meetings.loading}
+            error={
+              meetings.error
+                ? `Meetings unavailable: ${meetings.error.message}`
+                : undefined
+            }
+            onRetry={meetings.reload}
+          />
+          <AgendaTable items={filtered} onMeeting={setSelected} />
+          {!filtered.length &&
+            !meetings.loading &&
+            !extras.loading &&
+            (meetings.error || extras.warnings.length ? (
+              <p role="status">
+                No matching events in the available sources. Some source
+                coverage is unavailable or incomplete.
+              </p>
+            ) : (
               <StatusPanel empty="No events match this view" />
-            )}
-          </>
-        ) : (
+            ))}
+        </>
+      ) : (
+        <StatusPanel
+          loading={meetings.loading}
+          error={meetings.error}
+          onRetry={meetings.reload}
+        >
           <CalendarGrid
             meetings={sources.has("Meetings") ? loaded : []}
             date={date}
             view={view}
             onMeeting={setSelected}
           />
-        )}
-      </StatusPanel>
+        </StatusPanel>
+      )}
       {extras.loading && (
         <p className={styles.warnings} role="status">
           Loading all visible source pages…
@@ -115,7 +132,14 @@ export function CalendarCard({ model }: { model: CalendarModel }) {
         selected={sources}
         items={allItems}
         loading={meetings.loading || extras.loading}
-        warnings={extras.warnings}
+        warnings={
+          meetings.error
+            ? [
+                `Meetings unavailable: ${meetings.error.message}`,
+                ...extras.warnings,
+              ]
+            : extras.warnings
+        }
         scopeTitle={`${clientName} · ${clientId ? "Client-associated" : "All client profiles"} · Your accessible meetings`}
         onToggle={toggle}
       />

@@ -26,6 +26,7 @@ import {
   type TaskView,
 } from "./task-presentation";
 import { TaskDetail } from "./TaskDetail";
+import { taskMatchesClient } from "./task-client-scope";
 import { TaskEditor } from "./TaskEditor";
 import { TaskViews } from "./TaskViews";
 type Props = {
@@ -70,17 +71,8 @@ function useTaskWorkspace({
       cursor,
     },
   });
-  const scoped = (query.data?.items ?? []).filter(
-    (task) =>
-      !clientId ||
-      task.clientId === clientId ||
-      task.memberships.some((membership) =>
-        projects.some(
-          (project) =>
-            project.id === membership.projectId &&
-            project.clientId === clientId,
-        ),
-      ),
+  const scoped = (query.data?.items ?? []).filter((task) =>
+    taskMatchesClient(task, clientId, projects),
   );
   const visible = filterTasks(scoped, status, priority, assignee);
   const toggleSelection = (id: string) =>

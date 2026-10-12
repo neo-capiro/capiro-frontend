@@ -1,7 +1,8 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { plannerId } from "../../../shared/capiro/operations/planner-schemas";
+import { useSelectedClient } from "../../../shared/session/SelectedClient";
+import { LinkedTaskDetail } from "./LinkedTaskDetail";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
   ActionButton,
@@ -36,16 +37,16 @@ const sections = [
 export function PlannerScreen() {
   const params = useSearchParams(),
     requestedView = params.get("view"),
-    requestedClient = params.get("clientId");
+    requestedTask = params.get("task");
+  const scope = useSelectedClient();
   const openNewTask = params.get("create") === "task";
   const rawPe = params.get("contextPeCode");
   const initialTaskTitle =
     rawPe && /^[A-Za-z0-9]{1,40}$/.test(rawPe)
       ? `Research PE ${rawPe}`
       : undefined;
-  const clientId = plannerId.safeParse(requestedClient).success
-      ? requestedClient!
-      : undefined,
+  const clientId =
+      scope.state === "authorized-client" ? scope.client.id : undefined,
     initialMode = taskViews.includes(requestedView as TaskView)
       ? (requestedView as TaskView)
       : "list";
@@ -86,18 +87,30 @@ export function PlannerScreen() {
         onRetry={bootstrap.reload}
       >
         {bootstrap.data && (
-          <PlannerContent
-            data={bootstrap.data}
-            section={section}
-            setSection={setSection}
-            projectId={projectId}
-            setProjectId={setProjectId}
-            initialMode={initialMode}
-            clientId={clientId}
-            onReload={bootstrap.reload}
-            openNewTask={openNewTask}
-            initialTaskTitle={initialTaskTitle}
-          />
+          <>
+            {requestedTask !== null && (
+              <LinkedTaskDetail
+                key={requestedTask}
+                requestedId={requestedTask}
+                clientId={clientId}
+                people={bootstrap.data.people}
+                projects={bootstrap.data.projects}
+                onSaved={bootstrap.reload}
+              />
+            )}
+            <PlannerContent
+              data={bootstrap.data}
+              section={section}
+              setSection={setSection}
+              projectId={projectId}
+              setProjectId={setProjectId}
+              initialMode={initialMode}
+              clientId={clientId}
+              onReload={bootstrap.reload}
+              openNewTask={openNewTask}
+              initialTaskTitle={initialTaskTitle}
+            />
+          </>
         )}
       </StatusPanel>
     </div>

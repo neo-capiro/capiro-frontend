@@ -32,7 +32,7 @@ export function CalendarScreen() {
       }
     >
       <CalendarHeader
-        clients={clients.data ?? []}
+        clients={model.scopeOptions}
         disabled={clients.loading || Boolean(clients.error)}
         clientId={clientId}
         onClient={changeScope}
