@@ -71,7 +71,7 @@ export function ActivityTimeline({ clientId }: { clientId: string }) {
           <small>
             {rows.length} activities
             {records.length === 500
-              ? " · Latest 500 items available from this history feed"
+              ? " · latest 500 items available from this history feed"
               : ""}
           </small>
           {readOnly && (
