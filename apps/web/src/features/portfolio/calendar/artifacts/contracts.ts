@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { artifactMetadataSchema as metadataSchema } from "./metadata";
 import { meetingSchema, type Meeting } from "../contracts";
 
 export type ArtifactKind = "notes" | "debriefs";
@@ -7,22 +8,6 @@ export type ArtifactChange =
   | { action: "approve" | "share" | "unshare"; id: string };
 export type ArtifactActor = { userId: string; tenantId: string };
 export type ArtifactMeeting = Pick<Meeting, "id" | "client">;
-
-// Native save/approve responses contain metadata, never the saved plaintext.
-const metadataSchema = z.object({
-  id: z.string().min(1),
-  meetingId: z.string().min(1),
-  clientId: z.string().nullable(),
-  authorUserId: z.string().nullable(),
-  confidential: z.boolean(),
-  status: z.string(),
-  sharedAt: z.iso.datetime().nullable(),
-  sharedByUserId: z.string().nullable(),
-  createdAt: z.iso.datetime(),
-  updatedAt: z.iso.datetime(),
-  approvedAt: z.iso.datetime().nullable().optional(),
-  approvedByUserId: z.string().nullable().optional(),
-});
 
 export function artifactReceiptSchema(
   meeting: ArtifactMeeting,

@@ -25,6 +25,8 @@ export const meetingAttachmentSchema = attachmentSchema.extend({
   approvedAt: z.string().datetime({ offset: true }).nullable(),
   approvedByUserId: z.string().nullable(),
   usable: z.boolean(),
+  sharedAt: z.string().datetime({ offset: true }).nullable().optional(),
+  sharedByUserId: z.string().nullable().optional(),
 });
 export type MeetingAttachment = z.infer<typeof meetingAttachmentSchema>;
 export const approvalReceiptSchema = meetingAttachmentSchema.omit({

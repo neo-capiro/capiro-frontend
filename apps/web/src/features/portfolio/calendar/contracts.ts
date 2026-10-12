@@ -2,6 +2,10 @@ import { z } from "zod";
 import type { EffectiveDateRecord } from "@/shared/federal-register/effective-dates";
 import { validDay } from "@/shared/portfolio/date/civil";
 import { preparationSchema } from "./preparation/schema";
+import { artifactMetadataSchema } from "./artifacts/metadata";
+const lifecycleArtifactSchema = artifactMetadataSchema
+  .pick({ id: true, meetingId: true, clientId: true, status: true })
+  .partial({ meetingId: true, clientId: true, status: true });
 export { prepItemSchema } from "./preparation/schema";
 export const meetingSchema = z
   .object({
@@ -26,8 +30,26 @@ export const meetingSchema = z
       }),
     ),
     preps: z.array(preparationSchema),
+    notes: z.array(lifecycleArtifactSchema).optional(),
+    debriefs: z.array(lifecycleArtifactSchema).optional(),
   })
   .superRefine((meeting, ctx) => {
+    for (const kind of ["notes", "debriefs"] as const) {
+      meeting[kind]?.forEach((artifact, index) => {
+        if (
+          (artifact.meetingId !== undefined &&
+            artifact.meetingId !== meeting.id) ||
+          (artifact.clientId !== undefined &&
+            artifact.clientId !== (meeting.client?.id ?? null))
+        ) {
+          ctx.addIssue({
+            code: "custom",
+            path: [kind, index],
+            message: "Artifact belongs to another meeting or client",
+          });
+        }
+      });
+    }
     meeting.preps.forEach((prep, index) => {
       if (prep.meetingId !== undefined && prep.meetingId !== meeting.id) {
         ctx.addIssue({
@@ -133,6 +155,7 @@ export interface CalendarItem {
   href?: string;
   provenance: string;
   effectiveDate?: EffectiveDateRecord;
+  meeting?: Meeting;
 }
 export interface CalendarFeed {
   items: CalendarItem[];

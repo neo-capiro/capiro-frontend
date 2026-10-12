@@ -11,6 +11,12 @@ import type {
   ArtifactMeeting,
 } from "./contracts";
 
+import {
+  sharingAttemptKey,
+  idleSharing,
+  type SharingAttempt,
+} from "../sharing/fence";
+
 type Attempt = {
   status: "idle" | "pending" | "uncertain" | "refused";
   change?: ArtifactChange;
@@ -42,6 +48,14 @@ export function useArtifactMutation(
     initialData: idle,
     gcTime: Infinity,
   }).data;
+  const sharingKey = sharingAttemptKey(meeting, actor);
+  const sharing = useQuery<SharingAttempt>({
+    queryKey: sharingKey,
+    queryFn: () => idleSharing,
+    initialData: idleSharing,
+    enabled: false,
+    gcTime: Infinity,
+  }).data;
   const lifetime = useRef<AbortController | null>(null);
   useLayoutEffect(() => {
     const controller = new AbortController();
@@ -50,6 +64,8 @@ export function useArtifactMutation(
   }, [actor.userId, actor.tenantId, meeting.id, meeting.client?.id, kind]);
 
   const mutate = (change: ArtifactChange, onSaved: () => void) => {
+    const shared = cache.getQueryData<SharingAttempt>(sharingKey);
+    if (shared?.status === "pending" || shared?.status === "uncertain") return;
     const previous = cache.getQueryData<Attempt>(key);
     if (previous?.status === "pending" || previous?.status === "uncertain")
       return;
@@ -97,8 +113,8 @@ export function useArtifactMutation(
   return {
     mutate,
     attempt,
-    isPending: attempt.status === "pending",
-    uncertain: attempt.status === "uncertain",
-    error: attempt.error,
+    isPending: attempt.status === "pending" || sharing.status === "pending",
+    uncertain: attempt.status === "uncertain" || sharing.status === "uncertain",
+    error: attempt.error ?? sharing.error,
   };
 }

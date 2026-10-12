@@ -106,6 +106,7 @@ export const preparationSchema = z.object({
   createdAt: z.string(),
   updatedAt: z.string().optional(),
   sharedAt: z.string().nullable().optional(),
+  sharedByUserId: z.string().nullable().optional(),
   generatedFrom: generatedFrom.nullish(),
 });
 export type Preparation = z.infer<typeof preparationSchema>;
