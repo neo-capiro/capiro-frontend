@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-12T15:00:08.997950+00:00",
+  "status": "PASS_OFFLINE_EXECUTION_RECIPE_REVIEW",
+  "authorTests": {
+    "passed": 35,
+    "failed": 0
+  },
+  "independentProbes": {
+    "passed": 59,
+    "failed": 0
+  },
+  "independentAuthorReplay": {
+    "passed": 35,
+    "failed": 0
+  },
+  "review": "evidence/independent/independent-review.json",
+  "reviewEvidenceFilesVerified": 17,
+  "scriptHashesMatchIndependentReview": true,
+  "inlineBuildspecHashMatch": true,
+  "actualArchiveLocalDigestAndLength": "PASS",
+  "offlinePreparationAndValidation": "PASS_WITH_EXPLICIT_TEST_ONLY_INPUTS",
+  "applicationSourceDiff": "NONE",
+  "applicationGatesRerun": false,
+  "cloudBuild": "NOT_RUN",
+  "dockerBuild": "NOT_RUN",
+  "pushScanDeployment": "NOT_RUN",
+  "requiredShippingInputs": [
+    "Verified exact S3 version/custody",
+    "Accepted maximum local image .Size bytes",
+    "Accepted maximum runner command-output bytes"
+  ],
+  "remainingSourceBlockers": [],
+  "funding": "USD2 operator allowance, not AWS-enforced cap",
+  "independentReviewCorrections": "See preserved initial receipts and final passing controls; no unresolved source failures"
+}

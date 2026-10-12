@@ -1,0 +1,11 @@
+{
+  "runnerSHA256": "972013e4c8ae3acac76c841c089107ea7cba7e36cd959c792ac4d6c544082e5a",
+  "case": "nonreading child blocks16KB input on4KB pipe before deadline loop",
+  "deadlineSeconds": 0.2,
+  "awsCalls": 0,
+  "error": "BoundExceeded: Execution deadline reached during command",
+  "elapsedSeconds": 0.20246744099858915,
+  "pipeSizes": [
+    4096
+  ]
+}

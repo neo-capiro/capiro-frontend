@@ -1,0 +1,243 @@
+{
+  "runnerSHA256": "f568a0481a1cdca232e197739d76bcd855b89bfa2e1386ccc9c67735ba8f970c",
+  "awsCalls": 0,
+  "realBuilds": 0,
+  "passed": 26,
+  "total": 26,
+  "cases": [
+    {
+      "case": "exact cap",
+      "passed": true,
+      "error": null,
+      "calls": 17,
+      "inspectIndex": 12,
+      "loginIndex": 13,
+      "pushIndex": 15
+    },
+    {
+      "case": "over",
+      "passed": true,
+      "error": "BoundExceeded",
+      "calls": 13,
+      "inspectIndex": 12,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "zero",
+      "passed": true,
+      "error": "ValueError",
+      "calls": 13,
+      "inspectIndex": 12,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "negative",
+      "passed": true,
+      "error": "ValueError",
+      "calls": 13,
+      "inspectIndex": 12,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "empty",
+      "passed": true,
+      "error": "ValueError",
+      "calls": 13,
+      "inspectIndex": 12,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "fraction",
+      "passed": true,
+      "error": "ValueError",
+      "calls": 13,
+      "inspectIndex": 12,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "multivalue",
+      "passed": true,
+      "error": "ValueError",
+      "calls": 13,
+      "inspectIndex": 12,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "nonASCII",
+      "passed": true,
+      "error": "ValueError",
+      "calls": 13,
+      "inspectIndex": 12,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "null",
+      "passed": true,
+      "error": "ValueError",
+      "calls": 13,
+      "inspectIndex": 12,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "gate1 failure",
+      "passed": true,
+      "error": "RuntimeError",
+      "calls": 1,
+      "inspectIndex": null,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "gate2 failure",
+      "passed": true,
+      "error": "RuntimeError",
+      "calls": 2,
+      "inspectIndex": null,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "gate3 failure",
+      "passed": true,
+      "error": "RuntimeError",
+      "calls": 3,
+      "inspectIndex": null,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "gate4 failure",
+      "passed": true,
+      "error": "RuntimeError",
+      "calls": 4,
+      "inspectIndex": null,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "gate5 failure",
+      "passed": true,
+      "error": "RuntimeError",
+      "calls": 5,
+      "inspectIndex": null,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "gate6 failure",
+      "passed": true,
+      "error": "RuntimeError",
+      "calls": 6,
+      "inspectIndex": null,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "gate7 failure",
+      "passed": true,
+      "error": "RuntimeError",
+      "calls": 7,
+      "inspectIndex": null,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "gate8 failure",
+      "passed": true,
+      "error": "RuntimeError",
+      "calls": 8,
+      "inspectIndex": null,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "gate9 failure",
+      "passed": true,
+      "error": "RuntimeError",
+      "calls": 9,
+      "inspectIndex": null,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "gate10 failure",
+      "passed": true,
+      "error": "RuntimeError",
+      "calls": 10,
+      "inspectIndex": null,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "gate11 failure",
+      "passed": true,
+      "error": "RuntimeError",
+      "calls": 11,
+      "inspectIndex": null,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "gate12 failure",
+      "passed": true,
+      "error": "RuntimeError",
+      "calls": 12,
+      "inspectIndex": null,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "gate13 failure",
+      "passed": true,
+      "error": "RuntimeError",
+      "calls": 13,
+      "inspectIndex": 12,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "CODEBUILD_SOURCE_VERSION",
+      "passed": true,
+      "error": "ValueError",
+      "calls": 0,
+      "inspectIndex": null,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "EXPECTED_SHA",
+      "passed": true,
+      "error": "ValueError",
+      "calls": 0,
+      "inspectIndex": null,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "AWS_DEFAULT_REGION",
+      "passed": true,
+      "error": "ValueError",
+      "calls": 0,
+      "inspectIndex": null,
+      "loginIndex": null,
+      "pushIndex": null
+    },
+    {
+      "case": "REPOSITORY_URI",
+      "passed": true,
+      "error": "ValueError",
+      "calls": 0,
+      "inspectIndex": null,
+      "loginIndex": null,
+      "pushIndex": null
+    }
+  ]
+}

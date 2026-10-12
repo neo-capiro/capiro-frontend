@@ -1,0 +1,9 @@
+{
+  "runnerSHA256": "667e4e1a4d71402bfb7aeb30b90bca4c28c2f01e19f7a5dff145501dd3937ed5",
+  "case": "leader exits with descendant retaining output",
+  "awsCalls": 0,
+  "error": "BoundExceeded: Execution deadline reached during command",
+  "elapsedSeconds": 0.40161348399851704,
+  "descendantExistsAfterRun": true,
+  "descendantState": "S"
+}
