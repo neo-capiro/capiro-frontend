@@ -1,0 +1,75 @@
+
+> capiro-frontend@0.1.0 test:browser
+> npm run test:browser --workspace @capiro/web -- tests/browser/shared-dialog-layout.spec.ts --repeat-each=5 --workers=3
+
+
+> @capiro/web@0.1.0 test:browser
+> playwright test tests/browser/shared-dialog-layout.spec.ts --repeat-each=5 --workers=3
+
+[WebServer] (node:163622) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 40 tests using 3 workers
+
+(node:163642) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:163643) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:163641) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on desktop (11.0s)
+  ✓   3 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on desktop (11.0s)
+  ✓   2 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on desktop (11.7s)
+  ✓   4 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on desktop (10.3s)
+  ✓   5 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on desktop (10.2s)
+  ✓   6 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on desktop (14.1s)
+  ✓   8 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on desktop (9.7s)
+  ✓   7 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on desktop (11.5s)
+  ✓   9 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on desktop (9.8s)
+  ✓  10 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on desktop (10.8s)
+  ✓  11 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on desktop (9.7s)
+  ✓  12 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on desktop (8.8s)
+  ✓  13 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on phone (6.9s)
+  ✓  14 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on phone (7.0s)
+  ✓  15 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on phone (6.8s)
+  ✓  16 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on phone (6.4s)
+  ✓  17 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on phone (7.2s)
+  ✓  18 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on phone (7.0s)
+  ✓  19 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on phone (6.7s)
+  ✓  20 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on phone (6.9s)
+  ✓  21 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on phone (6.8s)
+  ✓  22 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on phone (6.1s)
+(node:164931) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  23 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on phone (5.5s)
+(node:165023) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  24 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on phone (5.7s)
+  ✓  25 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on desktop (7.5s)
+  ✓  26 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on desktop (7.0s)
+  ✓  27 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on desktop (7.9s)
+  ✓  28 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on desktop (7.1s)
+  ✓  29 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on desktop (7.2s)
+  ✓  30 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on desktop (8.0s)
+  ✓  31 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on desktop (6.2s)
+  ✓  32 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on desktop (6.3s)
+  ✓  33 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on phone (4.6s)
+  ✓  34 tests/browser/shared-dialog-layout.spec.ts:143:5 › standard keeps its canonical layout, overlay and focus on phone (4.5s)
+  ✓  35 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on phone (4.6s)
+  ✓  36 tests/browser/shared-dialog-layout.spec.ts:143:5 › drawer keeps its canonical layout, overlay and focus on phone (4.8s)
+  ✓  37 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on phone (4.3s)
+  ✓  38 tests/browser/shared-dialog-layout.spec.ts:143:5 › wide keeps its canonical layout, overlay and focus on phone (4.4s)
+  ✓  39 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on phone (3.8s)
+  ✓  40 tests/browser/shared-dialog-layout.spec.ts:143:5 › compact contact drawer keeps its canonical layout, overlay and focus on phone (3.2s)
+
+  40 passed (2.0m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

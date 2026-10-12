@@ -1,0 +1,592 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-contracts/node_modules/.bin/playwright",
+      "test",
+      "tests/browser/dialog-diagnostic.spec.ts",
+      "--grep",
+      "on desktop",
+      "--repeat-each=3",
+      "--workers=3"
+    ],
+    "configFile": "/workspace/capiro-contracts/apps/web/playwright.config.ts",
+    "rootDir": "/workspace/capiro-contracts/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 3
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/capiro-contracts/apps/web/test-results/portfolio-browser",
+        "repeatEach": 3,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 3
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-contracts/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 3,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" tests/browser/server.mjs",
+      "url": "http://127.0.0.1:5191",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "dialog-diagnostic.spec.ts",
+      "file": "dialog-diagnostic.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "standard keeps its canonical layout, overlay and focus on desktop",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10232,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:49:42.907Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "29131c3da44df6211fd2-245f6babb60ce368a675",
+          "file": "dialog-diagnostic.spec.ts",
+          "line": 173,
+          "column": 5
+        },
+        {
+          "title": "drawer keeps its canonical layout, overlay and focus on desktop",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10466,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:49:53.591Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "29131c3da44df6211fd2-78a9e49fb2e71b2e583a",
+          "file": "dialog-diagnostic.spec.ts",
+          "line": 173,
+          "column": 5
+        },
+        {
+          "title": "wide keeps its canonical layout, overlay and focus on desktop",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5242,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:50:04.092Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "29131c3da44df6211fd2-cc5f77797c0f0c64451d",
+          "file": "dialog-diagnostic.spec.ts",
+          "line": 173,
+          "column": 5
+        },
+        {
+          "title": "compact contact drawer keeps its canonical layout, overlay and focus on desktop",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7737,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:50:09.346Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "29131c3da44df6211fd2-489b3272c0cbdd5d65b9",
+          "file": "dialog-diagnostic.spec.ts",
+          "line": 173,
+          "column": 5
+        },
+        {
+          "title": "standard keeps its canonical layout, overlay and focus on desktop",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 9842,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:49:43.142Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "29131c3da44df6211fd2-5a2134cb49cdde19478b",
+          "file": "dialog-diagnostic.spec.ts",
+          "line": 173,
+          "column": 5
+        },
+        {
+          "title": "drawer keeps its canonical layout, overlay and focus on desktop",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "failed",
+                  "duration": 16426,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Edit objective', exact: true })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Edit objective', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Edit objective', exact: true })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Edit objective', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at /workspace/capiro-contracts/apps/web/tests/browser/dialog-diagnostic.spec.ts:230:30",
+                    "location": {
+                      "file": "/workspace/capiro-contracts/apps/web/tests/browser/dialog-diagnostic.spec.ts",
+                      "column": 30,
+                      "line": 230
+                    },
+                    "snippet": "  228 |         await expect(dialog).toBeVisible();\n  229 |         await page.mouse.click(4, 4);\n> 230 |         await expect(dialog).toHaveCount(0);\n      |                              ^\n  231 |         await expect(page.locator('[data-slot=\"dialog-overlay\"]')).toHaveCount(\n  232 |           0,\n  233 |         );"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-contracts/apps/web/tests/browser/dialog-diagnostic.spec.ts",
+                        "column": 30,
+                        "line": 230
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Edit objective', exact: true })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Edit objective', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  228 |         await expect(dialog).toBeVisible();\n  229 |         await page.mouse.click(4, 4);\n> 230 |         await expect(dialog).toHaveCount(0);\n      |                              ^\n  231 |         await expect(page.locator('[data-slot=\"dialog-overlay\"]')).toHaveCount(\n  232 |           0,\n  233 |         );\n    at /workspace/capiro-contracts/apps/web/tests/browser/dialog-diagnostic.spec.ts:230:30"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:49:53.348Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-contracts/apps/web/test-results/portfolio-browser/dialog-diagnostic-drawer-k-1019f-verlay-and-focus-on-desktop-repeat1/test-failed-1.png"
+                    },
+                    {
+                      "name": "native-dialog-events",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJhdCI6IDQ3NzEsCiAgICAidHlwZSI6ICJwb2ludGVyZG93biIsCiAgICAiY2FwdHVyZSI6IHRydWUsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogMCwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMAogIH0sCiAgewogICAgImF0IjogNDc3MS4wOTk5OTk5OTk2Mjc1LAogICAgInR5cGUiOiAicG9pbnRlcmRvd24iLAogICAgImNhcHR1cmUiOiBmYWxzZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAiQlVUVE9OIiwKICAgICJjb250ZW50IjogIk9wZW4gb2JqZWN0aXZlIiwKICAgICJsaXN0ZW5lcnMiOiAwLAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAwCiAgfSwKICB7CiAgICAiYXQiOiA0NzcxLjE5OTk5OTk5OTI1NSwKICAgICJ0eXBlIjogIm1vdXNlZG93biIsCiAgICAiY2FwdHVyZSI6IHRydWUsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogMCwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMAogIH0sCiAgewogICAgImF0IjogNDc3MS4zMDAwMDAwMDA3NDUsCiAgICAidHlwZSI6ICJtb3VzZWRvd24iLAogICAgImNhcHR1cmUiOiBmYWxzZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAiQlVUVE9OIiwKICAgICJjb250ZW50IjogIk9wZW4gb2JqZWN0aXZlIiwKICAgICJsaXN0ZW5lcnMiOiAwLAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAwCiAgfSwKICB7CiAgICAiYXQiOiA0NzcxLjgwMDAwMDAwMDc0NSwKICAgICJ0eXBlIjogInBvaW50ZXJ1cCIsCiAgICAiY2FwdHVyZSI6IHRydWUsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogMCwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMAogIH0sCiAgewogICAgImF0IjogNDc3MS45MDAwMDAwMDAzNzI1LAogICAgInR5cGUiOiAicG9pbnRlcnVwIiwKICAgICJjYXB0dXJlIjogZmFsc2UsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogMCwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMAogIH0sCiAgewogICAgImF0IjogNDc3MS45MDAwMDAwMDAzNzI1LAogICAgInR5cGUiOiAibW91c2V1cCIsCiAgICAiY2FwdHVyZSI6IHRydWUsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogMCwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMAogIH0sCiAgewogICAgImF0IjogNDc3Mi4wOTk5OTk5OTk2Mjc1LAogICAgInR5cGUiOiAibW91c2V1cCIsCiAgICAiY2FwdHVyZSI6IGZhbHNlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJCVVRUT04iLAogICAgImNvbnRlbnQiOiAiT3BlbiBvYmplY3RpdmUiLAogICAgImxpc3RlbmVycyI6IDAsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDAKICB9LAogIHsKICAgICJhdCI6IDQ3NzIuMDk5OTk5OTk5NjI3NSwKICAgICJ0eXBlIjogImNsaWNrIiwKICAgICJjYXB0dXJlIjogdHJ1ZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAiQlVUVE9OIiwKICAgICJjb250ZW50IjogIk9wZW4gb2JqZWN0aXZlIiwKICAgICJsaXN0ZW5lcnMiOiAwLAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAwCiAgfSwKICB7CiAgICAiYXQiOiA1MDIxLjY5OTk5OTk5OTI1NSwKICAgICJ0eXBlIjogImNsaWNrIiwKICAgICJjYXB0dXJlIjogZmFsc2UsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogMCwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMQogIH0sCiAgewogICAgImF0IjogNTA5Ny44MDAwMDAwMDA3NDUsCiAgICAicmVnaXN0cmF0aW9uIjogImFkZCIsCiAgICAiY291bnQiOiAxCiAgfSwKICB7CiAgICAiYXQiOiA1ODI3LjA5OTk5OTk5OTYyNzUsCiAgICAicmVnaXN0cmF0aW9uIjogImFkZCIsCiAgICAiY291bnQiOiAyCiAgfSwKICB7CiAgICAiYXQiOiA1ODI3LjA5OTk5OTk5OTYyNzUsCiAgICAicmVnaXN0cmF0aW9uIjogImFkZCIsCiAgICAiY291bnQiOiAzCiAgfSwKICB7CiAgICAiYXQiOiA1ODI3LjA5OTk5OTk5OTYyNzUsCiAgICAicmVnaXN0cmF0aW9uIjogImFkZCIsCiAgICAiY291bnQiOiA0CiAgfSwKICB7CiAgICAiYXQiOiA1ODI3LjA5OTk5OTk5OTYyNzUsCiAgICAicmVnaXN0cmF0aW9uIjogImFkZCIsCiAgICAiY291bnQiOiA1CiAgfSwKICB7CiAgICAiYXQiOiA1ODI3LjA5OTk5OTk5OTYyNzUsCiAgICAicmVnaXN0cmF0aW9uIjogImFkZCIsCiAgICAiY291bnQiOiA2CiAgfSwKICB7CiAgICAiYXQiOiA1ODM1LjY5OTk5OTk5OTI1NSwKICAgICJyZWdpc3RyYXRpb24iOiAiYWRkIiwKICAgICJjb3VudCI6IDYKICB9LAogIHsKICAgICJhdCI6IDU4MzUuNjk5OTk5OTk5MjU1LAogICAgInJlZ2lzdHJhdGlvbiI6ICJhZGQiLAogICAgImNvdW50IjogNgogIH0sCiAgewogICAgImF0IjogNTgzNS42OTk5OTk5OTkyNTUsCiAgICAicmVnaXN0cmF0aW9uIjogImFkZCIsCiAgICAiY291bnQiOiA2CiAgfSwKICB7CiAgICAiYXQiOiA1ODM1LjgwMDAwMDAwMDc0NSwKICAgICJyZWdpc3RyYXRpb24iOiAiYWRkIiwKICAgICJjb3VudCI6IDYKICB9LAogIHsKICAgICJhdCI6IDU4MzUuODAwMDAwMDAwNzQ1LAogICAgInJlZ2lzdHJhdGlvbiI6ICJhZGQiLAogICAgImNvdW50IjogNgogIH0sCiAgewogICAgImF0IjogNjAxMC42OTk5OTk5OTkyNTUsCiAgICAicmVnaXN0cmF0aW9uIjogImFkZCIsCiAgICAiY291bnQiOiA2CiAgfSwKICB7CiAgICAiYXQiOiA2MDEwLjY5OTk5OTk5OTI1NSwKICAgICJyZWdpc3RyYXRpb24iOiAiYWRkIiwKICAgICJjb3VudCI6IDYKICB9LAogIHsKICAgICJhdCI6IDYwMTAuNjk5OTk5OTk5MjU1LAogICAgInJlZ2lzdHJhdGlvbiI6ICJhZGQiLAogICAgImNvdW50IjogNgogIH0sCiAgewogICAgImF0IjogNjAxMC42OTk5OTk5OTkyNTUsCiAgICAicmVnaXN0cmF0aW9uIjogImFkZCIsCiAgICAiY291bnQiOiA2CiAgfSwKICB7CiAgICAiYXQiOiA2MDEwLjY5OTk5OTk5OTI1NSwKICAgICJyZWdpc3RyYXRpb24iOiAiYWRkIiwKICAgICJjb3VudCI6IDYKICB9LAogIHsKICAgICJhdCI6IDgwMTQuNSwKICAgICJyZWdpc3RyYXRpb24iOiAiYWRkIiwKICAgICJjb3VudCI6IDYKICB9LAogIHsKICAgICJhdCI6IDgwMTQuNTk5OTk5OTk5NjI3NSwKICAgICJyZWdpc3RyYXRpb24iOiAiYWRkIiwKICAgICJjb3VudCI6IDYKICB9LAogIHsKICAgICJhdCI6IDgwMTQuNTk5OTk5OTk5NjI3NSwKICAgICJyZWdpc3RyYXRpb24iOiAiYWRkIiwKICAgICJjb3VudCI6IDYKICB9LAogIHsKICAgICJhdCI6IDgwMTQuNTk5OTk5OTk5NjI3NSwKICAgICJyZWdpc3RyYXRpb24iOiAiYWRkIiwKICAgICJjb3VudCI6IDYKICB9LAogIHsKICAgICJhdCI6IDgwMTQuNTk5OTk5OTk5NjI3NSwKICAgICJyZWdpc3RyYXRpb24iOiAiYWRkIiwKICAgICJjb3VudCI6IDYKICB9LAogIHsKICAgICJhdCI6IDgwOTUuODAwMDAwMDAwNzQ1LAogICAgInJlZ2lzdHJhdGlvbiI6ICJyZW1vdmUiLAogICAgImNvdW50IjogNQogIH0sCiAgewogICAgImF0IjogODU1NS42OTk5OTk5OTkyNTUsCiAgICAidHlwZSI6ICJwb2ludGVyZG93biIsCiAgICAiY2FwdHVyZSI6IHRydWUsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogNSwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMAogIH0sCiAgewogICAgImF0IjogODU1NS44MDAwMDAwMDA3NDUsCiAgICAidHlwZSI6ICJwb2ludGVyZG93biIsCiAgICAiY2FwdHVyZSI6IGZhbHNlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJCVVRUT04iLAogICAgImNvbnRlbnQiOiAiT3BlbiBvYmplY3RpdmUiLAogICAgImxpc3RlbmVycyI6IDUsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDAKICB9LAogIHsKICAgICJhdCI6IDg1NTUuODAwMDAwMDAwNzQ1LAogICAgInR5cGUiOiAibW91c2Vkb3duIiwKICAgICJjYXB0dXJlIjogdHJ1ZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAiQlVUVE9OIiwKICAgICJjb250ZW50IjogIk9wZW4gb2JqZWN0aXZlIiwKICAgICJsaXN0ZW5lcnMiOiA1LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAwCiAgfSwKICB7CiAgICAiYXQiOiA4NTU1LjkwMDAwMDAwMDM3MywKICAgICJ0eXBlIjogIm1vdXNlZG93biIsCiAgICAiY2FwdHVyZSI6IGZhbHNlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJCVVRUT04iLAogICAgImNvbnRlbnQiOiAiT3BlbiBvYmplY3RpdmUiLAogICAgImxpc3RlbmVycyI6IDUsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDAKICB9LAogIHsKICAgICJhdCI6IDg1NTYuMzAwMDAwMDAwNzQ1LAogICAgInR5cGUiOiAicG9pbnRlcnVwIiwKICAgICJjYXB0dXJlIjogdHJ1ZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAiQlVUVE9OIiwKICAgICJjb250ZW50IjogIk9wZW4gb2JqZWN0aXZlIiwKICAgICJsaXN0ZW5lcnMiOiA1LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAwCiAgfSwKICB7CiAgICAiYXQiOiA4NTU2LjQwMDAwMDAwMDM3MywKICAgICJ0eXBlIjogInBvaW50ZXJ1cCIsCiAgICAiY2FwdHVyZSI6IGZhbHNlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJCVVRUT04iLAogICAgImNvbnRlbnQiOiAiT3BlbiBvYmplY3RpdmUiLAogICAgImxpc3RlbmVycyI6IDUsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDAKICB9LAogIHsKICAgICJhdCI6IDg1NTYuNDAwMDAwMDAwMzczLAogICAgInR5cGUiOiAibW91c2V1cCIsCiAgICAiY2FwdHVyZSI6IHRydWUsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogNSwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMAogIH0sCiAgewogICAgImF0IjogODU1Ni40MDAwMDAwMDAzNzMsCiAgICAidHlwZSI6ICJtb3VzZXVwIiwKICAgICJjYXB0dXJlIjogZmFsc2UsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogNSwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMAogIH0sCiAgewogICAgImF0IjogODU1Ni41LAogICAgInR5cGUiOiAiY2xpY2siLAogICAgImNhcHR1cmUiOiB0cnVlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJCVVRUT04iLAogICAgImNvbnRlbnQiOiAiT3BlbiBvYmplY3RpdmUiLAogICAgImxpc3RlbmVycyI6IDUsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDAKICB9LAogIHsKICAgICJhdCI6IDg3MTkuNTk5OTk5OTk5NjI3LAogICAgInR5cGUiOiAiY2xpY2siLAogICAgImNhcHR1cmUiOiBmYWxzZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAiQlVUVE9OIiwKICAgICJjb250ZW50IjogIk9wZW4gb2JqZWN0aXZlIiwKICAgICJsaXN0ZW5lcnMiOiA1LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAxCiAgfSwKICB7CiAgICAiYXQiOiA4ODA4LAogICAgInJlZ2lzdHJhdGlvbiI6ICJhZGQiLAogICAgImNvdW50IjogNgogIH0sCiAgewogICAgImF0IjogOTA0MCwKICAgICJ0eXBlIjogInBvaW50ZXJkb3duIiwKICAgICJjYXB0dXJlIjogdHJ1ZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAicGF0aCIsCiAgICAiY29udGVudCI6ICIiLAogICAgImxpc3RlbmVycyI6IDYsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDEKICB9LAogIHsKICAgICJhdCI6IDkwNDAuMDk5OTk5OTk5NjI3LAogICAgInR5cGUiOiAicG9pbnRlcmRvd24iLAogICAgImNhcHR1cmUiOiBmYWxzZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAicGF0aCIsCiAgICAiY29udGVudCI6ICIiLAogICAgImxpc3RlbmVycyI6IDYsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDEKICB9LAogIHsKICAgICJhdCI6IDkwNDAuMzAwMDAwMDAwNzQ1LAogICAgInR5cGUiOiAibW91c2Vkb3duIiwKICAgICJjYXB0dXJlIjogdHJ1ZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAicGF0aCIsCiAgICAiY29udGVudCI6ICIiLAogICAgImxpc3RlbmVycyI6IDYsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDEKICB9LAogIHsKICAgICJhdCI6IDkwNDAuNSwKICAgICJ0eXBlIjogIm1vdXNlZG93biIsCiAgICAiY2FwdHVyZSI6IGZhbHNlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJwYXRoIiwKICAgICJjb250ZW50IjogIiIsCiAgICAibGlzdGVuZXJzIjogNiwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMQogIH0sCiAgewogICAgImF0IjogOTA0MC45MDAwMDAwMDAzNzMsCiAgICAidHlwZSI6ICJwb2ludGVydXAiLAogICAgImNhcHR1cmUiOiB0cnVlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJwYXRoIiwKICAgICJjb250ZW50IjogIiIsCiAgICAibGlzdGVuZXJzIjogNiwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMQogIH0sCiAgewogICAgImF0IjogOTA0MSwKICAgICJ0eXBlIjogInBvaW50ZXJ1cCIsCiAgICAiY2FwdHVyZSI6IGZhbHNlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJwYXRoIiwKICAgICJjb250ZW50IjogIiIsCiAgICAibGlzdGVuZXJzIjogNiwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMQogIH0sCiAgewogICAgImF0IjogOTA0MSwKICAgICJ0eXBlIjogIm1vdXNldXAiLAogICAgImNhcHR1cmUiOiB0cnVlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJwYXRoIiwKICAgICJjb250ZW50IjogIiIsCiAgICAibGlzdGVuZXJzIjogNiwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMQogIH0sCiAgewogICAgImF0IjogOTA0MSwKICAgICJ0eXBlIjogIm1vdXNldXAiLAogICAgImNhcHR1cmUiOiBmYWxzZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAicGF0aCIsCiAgICAiY29udGVudCI6ICIiLAogICAgImxpc3RlbmVycyI6IDYsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDEKICB9LAogIHsKICAgICJhdCI6IDkwNDEuMDk5OTk5OTk5NjI3LAogICAgInR5cGUiOiAiY2xpY2siLAogICAgImNhcHR1cmUiOiB0cnVlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJwYXRoIiwKICAgICJjb250ZW50IjogIiIsCiAgICAibGlzdGVuZXJzIjogNiwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMQogIH0sCiAgewogICAgImF0IjogOTEwNC42OTk5OTk5OTkyNTUsCiAgICAicmVnaXN0cmF0aW9uIjogInJlbW92ZSIsCiAgICAiY291bnQiOiA1CiAgfSwKICB7CiAgICAiYXQiOiA5MTE5LjQwMDAwMDAwMDM3MywKICAgICJ0eXBlIjogImNsaWNrIiwKICAgICJjYXB0dXJlIjogZmFsc2UsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogInBhdGgiLAogICAgImNvbnRlbnQiOiAiIiwKICAgICJsaXN0ZW5lcnMiOiA1LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAwCiAgfSwKICB7CiAgICAiYXQiOiAxMDE2NC40MDAwMDAwMDAzNzMsCiAgICAidHlwZSI6ICJwb2ludGVyZG93biIsCiAgICAiY2FwdHVyZSI6IHRydWUsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogNSwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMAogIH0sCiAgewogICAgImF0IjogMTAxNjQuNSwKICAgICJ0eXBlIjogInBvaW50ZXJkb3duIiwKICAgICJjYXB0dXJlIjogZmFsc2UsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogNSwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMAogIH0sCiAgewogICAgImF0IjogMTAxNjQuNSwKICAgICJ0eXBlIjogIm1vdXNlZG93biIsCiAgICAiY2FwdHVyZSI6IHRydWUsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogNSwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMAogIH0sCiAgewogICAgImF0IjogMTAxNjQuNSwKICAgICJ0eXBlIjogIm1vdXNlZG93biIsCiAgICAiY2FwdHVyZSI6IGZhbHNlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJCVVRUT04iLAogICAgImNvbnRlbnQiOiAiT3BlbiBvYmplY3RpdmUiLAogICAgImxpc3RlbmVycyI6IDUsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDAKICB9LAogIHsKICAgICJhdCI6IDEwMTY0LjgwMDAwMDAwMDc0NSwKICAgICJ0eXBlIjogInBvaW50ZXJ1cCIsCiAgICAiY2FwdHVyZSI6IHRydWUsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogNSwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMAogIH0sCiAgewogICAgImF0IjogMTAxNjQuODAwMDAwMDAwNzQ1LAogICAgInR5cGUiOiAicG9pbnRlcnVwIiwKICAgICJjYXB0dXJlIjogZmFsc2UsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogNSwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMAogIH0sCiAgewogICAgImF0IjogMTAxNjQuODAwMDAwMDAwNzQ1LAogICAgInR5cGUiOiAibW91c2V1cCIsCiAgICAiY2FwdHVyZSI6IHRydWUsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogNSwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMAogIH0sCiAgewogICAgImF0IjogMTAxNjQuODAwMDAwMDAwNzQ1LAogICAgInR5cGUiOiAibW91c2V1cCIsCiAgICAiY2FwdHVyZSI6IGZhbHNlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJCVVRUT04iLAogICAgImNvbnRlbnQiOiAiT3BlbiBvYmplY3RpdmUiLAogICAgImxpc3RlbmVycyI6IDUsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDAKICB9LAogIHsKICAgICJhdCI6IDEwMTY0LjgwMDAwMDAwMDc0NSwKICAgICJ0eXBlIjogImNsaWNrIiwKICAgICJjYXB0dXJlIjogdHJ1ZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAiQlVUVE9OIiwKICAgICJjb250ZW50IjogIk9wZW4gb2JqZWN0aXZlIiwKICAgICJsaXN0ZW5lcnMiOiA1LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAwCiAgfSwKICB7CiAgICAiYXQiOiAxMDI0NSwKICAgICJ0eXBlIjogImNsaWNrIiwKICAgICJjYXB0dXJlIjogZmFsc2UsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogNSwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMQogIH0sCiAgewogICAgImF0IjogMTAzMDYuNTk5OTk5OTk5NjI3LAogICAgInR5cGUiOiAicG9pbnRlcmRvd24iLAogICAgImNhcHR1cmUiOiB0cnVlLAogICAgInNsb3QiOiAiZGlhbG9nLW92ZXJsYXkiLAogICAgInRhZyI6ICJESVYiLAogICAgImNvbnRlbnQiOiAiIiwKICAgICJsaXN0ZW5lcnMiOiA1LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAxCiAgfSwKICB7CiAgICAiYXQiOiAxMDMwNi42OTk5OTk5OTkyNTUsCiAgICAidHlwZSI6ICJwb2ludGVyZG93biIsCiAgICAiY2FwdHVyZSI6IGZhbHNlLAogICAgInNsb3QiOiAiZGlhbG9nLW92ZXJsYXkiLAogICAgInRhZyI6ICJESVYiLAogICAgImNvbnRlbnQiOiAiIiwKICAgICJsaXN0ZW5lcnMiOiA1LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAxCiAgfSwKICB7CiAgICAiYXQiOiAxMDMwNi42OTk5OTk5OTkyNTUsCiAgICAidHlwZSI6ICJtb3VzZWRvd24iLAogICAgImNhcHR1cmUiOiB0cnVlLAogICAgInNsb3QiOiAiZGlhbG9nLW92ZXJsYXkiLAogICAgInRhZyI6ICJESVYiLAogICAgImNvbnRlbnQiOiAiIiwKICAgICJsaXN0ZW5lcnMiOiA1LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAxCiAgfSwKICB7CiAgICAiYXQiOiAxMDMwNi42OTk5OTk5OTkyNTUsCiAgICAidHlwZSI6ICJtb3VzZWRvd24iLAogICAgImNhcHR1cmUiOiBmYWxzZSwKICAgICJzbG90IjogImRpYWxvZy1vdmVybGF5IiwKICAgICJ0YWciOiAiRElWIiwKICAgICJjb250ZW50IjogIiIsCiAgICAibGlzdGVuZXJzIjogNSwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMQogIH0sCiAgewogICAgImF0IjogMTAzMDcuMzAwMDAwMDAwNzQ1LAogICAgInR5cGUiOiAicG9pbnRlcnVwIiwKICAgICJjYXB0dXJlIjogdHJ1ZSwKICAgICJzbG90IjogImRpYWxvZy1vdmVybGF5IiwKICAgICJ0YWciOiAiRElWIiwKICAgICJjb250ZW50IjogIiIsCiAgICAibGlzdGVuZXJzIjogNSwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMQogIH0sCiAgewogICAgImF0IjogMTAzMDcuNDAwMDAwMDAwMzczLAogICAgInR5cGUiOiAicG9pbnRlcnVwIiwKICAgICJjYXB0dXJlIjogZmFsc2UsCiAgICAic2xvdCI6ICJkaWFsb2ctb3ZlcmxheSIsCiAgICAidGFnIjogIkRJViIsCiAgICAiY29udGVudCI6ICIiLAogICAgImxpc3RlbmVycyI6IDUsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDEKICB9LAogIHsKICAgICJhdCI6IDEwMzA3LjQwMDAwMDAwMDM3MywKICAgICJ0eXBlIjogIm1vdXNldXAiLAogICAgImNhcHR1cmUiOiB0cnVlLAogICAgInNsb3QiOiAiZGlhbG9nLW92ZXJsYXkiLAogICAgInRhZyI6ICJESVYiLAogICAgImNvbnRlbnQiOiAiIiwKICAgICJsaXN0ZW5lcnMiOiA1LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAxCiAgfSwKICB7CiAgICAiYXQiOiAxMDMwNy40MDAwMDAwMDAzNzMsCiAgICAidHlwZSI6ICJtb3VzZXVwIiwKICAgICJjYXB0dXJlIjogZmFsc2UsCiAgICAic2xvdCI6ICJkaWFsb2ctb3ZlcmxheSIsCiAgICAidGFnIjogIkRJViIsCiAgICAiY29udGVudCI6ICIiLAogICAgImxpc3RlbmVycyI6IDUsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDEKICB9LAogIHsKICAgICJhdCI6IDEwMzA3LjUsCiAgICAidHlwZSI6ICJjbGljayIsCiAgICAiY2FwdHVyZSI6IHRydWUsCiAgICAic2xvdCI6ICJkaWFsb2ctb3ZlcmxheSIsCiAgICAidGFnIjogIkRJViIsCiAgICAiY29udGVudCI6ICIiLAogICAgImxpc3RlbmVycyI6IDUsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDEKICB9LAogIHsKICAgICJhdCI6IDEwMzA3LjUsCiAgICAidHlwZSI6ICJjbGljayIsCiAgICAiY2FwdHVyZSI6IGZhbHNlLAogICAgInNsb3QiOiAiZGlhbG9nLW92ZXJsYXkiLAogICAgInRhZyI6ICJESVYiLAogICAgImNvbnRlbnQiOiAiIiwKICAgICJsaXN0ZW5lcnMiOiA1LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAxCiAgfSwKICB7CiAgICAiYXQiOiAxMDMyNS40MDAwMDAwMDAzNzMsCiAgICAicmVnaXN0cmF0aW9uIjogImFkZCIsCiAgICAiY291bnQiOiA2CiAgfQpd"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-contracts/apps/web/test-results/portfolio-browser/dialog-diagnostic-drawer-k-1019f-verlay-and-focus-on-desktop-repeat1/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-contracts/apps/web/test-results/portfolio-browser/dialog-diagnostic-drawer-k-1019f-verlay-and-focus-on-desktop-repeat1/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-contracts/apps/web/tests/browser/dialog-diagnostic.spec.ts",
+                    "column": 30,
+                    "line": 230
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "29131c3da44df6211fd2-28e8f86f9c3e2074f628",
+          "file": "dialog-diagnostic.spec.ts",
+          "line": 173,
+          "column": 5
+        },
+        {
+          "title": "wide keeps its canonical layout, overlay and focus on desktop",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 9256,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:50:10.741Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "29131c3da44df6211fd2-2904faf7600ffec64409",
+          "file": "dialog-diagnostic.spec.ts",
+          "line": 173,
+          "column": 5
+        },
+        {
+          "title": "compact contact drawer keeps its canonical layout, overlay and focus on desktop",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 5852,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:50:20.457Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "29131c3da44df6211fd2-46170409176fe4c6c3cd",
+          "file": "dialog-diagnostic.spec.ts",
+          "line": 173,
+          "column": 5
+        },
+        {
+          "title": "standard keeps its canonical layout, overlay and focus on desktop",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 11992,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:49:42.907Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "29131c3da44df6211fd2-e1d25760f5a280ba95b6",
+          "file": "dialog-diagnostic.spec.ts",
+          "line": 173,
+          "column": 5
+        },
+        {
+          "title": "drawer keeps its canonical layout, overlay and focus on desktop",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "failed",
+                  "duration": 16693,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Edit objective', exact: true })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Edit objective', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Edit objective', exact: true })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Edit objective', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n    at /workspace/capiro-contracts/apps/web/tests/browser/dialog-diagnostic.spec.ts:230:30",
+                    "location": {
+                      "file": "/workspace/capiro-contracts/apps/web/tests/browser/dialog-diagnostic.spec.ts",
+                      "column": 30,
+                      "line": 230
+                    },
+                    "snippet": "  228 |         await expect(dialog).toBeVisible();\n  229 |         await page.mouse.click(4, 4);\n> 230 |         await expect(dialog).toHaveCount(0);\n      |                              ^\n  231 |         await expect(page.locator('[data-slot=\"dialog-overlay\"]')).toHaveCount(\n  232 |           0,\n  233 |         );"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-contracts/apps/web/tests/browser/dialog-diagnostic.spec.ts",
+                        "column": 30,
+                        "line": 230
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: 'Edit objective', exact: true })\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Edit objective', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to 1 element\u001b[22m\n\u001b[2m       - unexpected value \"1\"\u001b[22m\n\n\n  228 |         await expect(dialog).toBeVisible();\n  229 |         await page.mouse.click(4, 4);\n> 230 |         await expect(dialog).toHaveCount(0);\n      |                              ^\n  231 |         await expect(page.locator('[data-slot=\"dialog-overlay\"]')).toHaveCount(\n  232 |           0,\n  233 |         );\n    at /workspace/capiro-contracts/apps/web/tests/browser/dialog-diagnostic.spec.ts:230:30"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:49:55.253Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-contracts/apps/web/test-results/portfolio-browser/dialog-diagnostic-drawer-k-1019f-verlay-and-focus-on-desktop-repeat2/test-failed-1.png"
+                    },
+                    {
+                      "name": "native-dialog-events",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJhdCI6IDM0OTYuNjk5OTk5OTk5MjU1LAogICAgInR5cGUiOiAicG9pbnRlcmRvd24iLAogICAgImNhcHR1cmUiOiB0cnVlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJCVVRUT04iLAogICAgImNvbnRlbnQiOiAiT3BlbiBvYmplY3RpdmUiLAogICAgImxpc3RlbmVycyI6IDAsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDAKICB9LAogIHsKICAgICJhdCI6IDM0OTcuMDk5OTk5OTk5NjI3NSwKICAgICJ0eXBlIjogInBvaW50ZXJkb3duIiwKICAgICJjYXB0dXJlIjogZmFsc2UsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogMCwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMAogIH0sCiAgewogICAgImF0IjogMzQ5Ny4xOTk5OTk5OTkyNTUsCiAgICAidHlwZSI6ICJtb3VzZWRvd24iLAogICAgImNhcHR1cmUiOiB0cnVlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJCVVRUT04iLAogICAgImNvbnRlbnQiOiAiT3BlbiBvYmplY3RpdmUiLAogICAgImxpc3RlbmVycyI6IDAsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDAKICB9LAogIHsKICAgICJhdCI6IDM0OTcuMTk5OTk5OTk5MjU1LAogICAgInR5cGUiOiAibW91c2Vkb3duIiwKICAgICJjYXB0dXJlIjogZmFsc2UsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogMCwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMAogIH0sCiAgewogICAgImF0IjogMzQ5Ny41OTk5OTk5OTk2Mjc1LAogICAgInR5cGUiOiAicG9pbnRlcnVwIiwKICAgICJjYXB0dXJlIjogdHJ1ZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAiQlVUVE9OIiwKICAgICJjb250ZW50IjogIk9wZW4gb2JqZWN0aXZlIiwKICAgICJsaXN0ZW5lcnMiOiAwLAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAwCiAgfSwKICB7CiAgICAiYXQiOiAzNDk3LjY5OTk5OTk5OTI1NSwKICAgICJ0eXBlIjogInBvaW50ZXJ1cCIsCiAgICAiY2FwdHVyZSI6IGZhbHNlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJCVVRUT04iLAogICAgImNvbnRlbnQiOiAiT3BlbiBvYmplY3RpdmUiLAogICAgImxpc3RlbmVycyI6IDAsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDAKICB9LAogIHsKICAgICJhdCI6IDM0OTcuNjk5OTk5OTk5MjU1LAogICAgInR5cGUiOiAibW91c2V1cCIsCiAgICAiY2FwdHVyZSI6IHRydWUsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogMCwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMAogIH0sCiAgewogICAgImF0IjogMzQ5Ny43OTk5OTk5OTg4ODI0LAogICAgInR5cGUiOiAibW91c2V1cCIsCiAgICAiY2FwdHVyZSI6IGZhbHNlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJCVVRUT04iLAogICAgImNvbnRlbnQiOiAiT3BlbiBvYmplY3RpdmUiLAogICAgImxpc3RlbmVycyI6IDAsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDAKICB9LAogIHsKICAgICJhdCI6IDM0OTcuNzk5OTk5OTk4ODgyNCwKICAgICJ0eXBlIjogImNsaWNrIiwKICAgICJjYXB0dXJlIjogdHJ1ZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAiQlVUVE9OIiwKICAgICJjb250ZW50IjogIk9wZW4gb2JqZWN0aXZlIiwKICAgICJsaXN0ZW5lcnMiOiAwLAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAwCiAgfSwKICB7CiAgICAiYXQiOiAzNTczLjA5OTk5OTk5OTYyNzUsCiAgICAidHlwZSI6ICJjbGljayIsCiAgICAiY2FwdHVyZSI6IGZhbHNlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJCVVRUT04iLAogICAgImNvbnRlbnQiOiAiT3BlbiBvYmplY3RpdmUiLAogICAgImxpc3RlbmVycyI6IDAsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDEKICB9LAogIHsKICAgICJhdCI6IDM2NTgsCiAgICAicmVnaXN0cmF0aW9uIjogImFkZCIsCiAgICAiY291bnQiOiAxCiAgfSwKICB7CiAgICAiYXQiOiA0MzczLjI5OTk5OTk5ODg4MiwKICAgICJyZWdpc3RyYXRpb24iOiAiYWRkIiwKICAgICJjb3VudCI6IDIKICB9LAogIHsKICAgICJhdCI6IDQzNzMuMjk5OTk5OTk4ODgyLAogICAgInJlZ2lzdHJhdGlvbiI6ICJhZGQiLAogICAgImNvdW50IjogMwogIH0sCiAgewogICAgImF0IjogNDM3My4yOTk5OTk5OTg4ODIsCiAgICAicmVnaXN0cmF0aW9uIjogImFkZCIsCiAgICAiY291bnQiOiA0CiAgfSwKICB7CiAgICAiYXQiOiA0MzczLjI5OTk5OTk5ODg4MiwKICAgICJyZWdpc3RyYXRpb24iOiAiYWRkIiwKICAgICJjb3VudCI6IDUKICB9LAogIHsKICAgICJhdCI6IDQzNzMuMjk5OTk5OTk4ODgyLAogICAgInJlZ2lzdHJhdGlvbiI6ICJhZGQiLAogICAgImNvdW50IjogNgogIH0sCiAgewogICAgImF0IjogNDM3NSwKICAgICJyZWdpc3RyYXRpb24iOiAiYWRkIiwKICAgICJjb3VudCI6IDYKICB9LAogIHsKICAgICJhdCI6IDQzNzUsCiAgICAicmVnaXN0cmF0aW9uIjogImFkZCIsCiAgICAiY291bnQiOiA2CiAgfSwKICB7CiAgICAiYXQiOiA0Mzc1LAogICAgInJlZ2lzdHJhdGlvbiI6ICJhZGQiLAogICAgImNvdW50IjogNgogIH0sCiAgewogICAgImF0IjogNDM3NSwKICAgICJyZWdpc3RyYXRpb24iOiAiYWRkIiwKICAgICJjb3VudCI6IDYKICB9LAogIHsKICAgICJhdCI6IDQzNzUsCiAgICAicmVnaXN0cmF0aW9uIjogImFkZCIsCiAgICAiY291bnQiOiA2CiAgfSwKICB7CiAgICAiYXQiOiA0NDk2LAogICAgInJlZ2lzdHJhdGlvbiI6ICJhZGQiLAogICAgImNvdW50IjogNgogIH0sCiAgewogICAgImF0IjogNDQ5Ni4wOTk5OTk5OTk2Mjc1LAogICAgInJlZ2lzdHJhdGlvbiI6ICJhZGQiLAogICAgImNvdW50IjogNgogIH0sCiAgewogICAgImF0IjogNDQ5Ni4wOTk5OTk5OTk2Mjc1LAogICAgInJlZ2lzdHJhdGlvbiI6ICJhZGQiLAogICAgImNvdW50IjogNgogIH0sCiAgewogICAgImF0IjogNDQ5Ni4wOTk5OTk5OTk2Mjc1LAogICAgInJlZ2lzdHJhdGlvbiI6ICJhZGQiLAogICAgImNvdW50IjogNgogIH0sCiAgewogICAgImF0IjogNDQ5Ni4wOTk5OTk5OTk2Mjc1LAogICAgInJlZ2lzdHJhdGlvbiI6ICJhZGQiLAogICAgImNvdW50IjogNgogIH0sCiAgewogICAgImF0IjogNzU2OS43OTk5OTk5OTg4ODIsCiAgICAicmVnaXN0cmF0aW9uIjogImFkZCIsCiAgICAiY291bnQiOiA2CiAgfSwKICB7CiAgICAiYXQiOiA3NTY5Ljc5OTk5OTk5ODg4MiwKICAgICJyZWdpc3RyYXRpb24iOiAiYWRkIiwKICAgICJjb3VudCI6IDYKICB9LAogIHsKICAgICJhdCI6IDc1NjkuNzk5OTk5OTk4ODgyLAogICAgInJlZ2lzdHJhdGlvbiI6ICJhZGQiLAogICAgImNvdW50IjogNgogIH0sCiAgewogICAgImF0IjogNzU2OS43OTk5OTk5OTg4ODIsCiAgICAicmVnaXN0cmF0aW9uIjogImFkZCIsCiAgICAiY291bnQiOiA2CiAgfSwKICB7CiAgICAiYXQiOiA3NTY5Ljg5OTk5OTk5ODUxLAogICAgInJlZ2lzdHJhdGlvbiI6ICJhZGQiLAogICAgImNvdW50IjogNgogIH0sCiAgewogICAgImF0IjogNzYwMy41LAogICAgInJlZ2lzdHJhdGlvbiI6ICJyZW1vdmUiLAogICAgImNvdW50IjogNQogIH0sCiAgewogICAgImF0IjogODA4OS43OTk5OTk5OTg4ODIsCiAgICAidHlwZSI6ICJwb2ludGVyZG93biIsCiAgICAiY2FwdHVyZSI6IHRydWUsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogNSwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMAogIH0sCiAgewogICAgImF0IjogODA5MCwKICAgICJ0eXBlIjogInBvaW50ZXJkb3duIiwKICAgICJjYXB0dXJlIjogZmFsc2UsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogNSwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMAogIH0sCiAgewogICAgImF0IjogODA5MC4wOTk5OTk5OTk2Mjc1LAogICAgInR5cGUiOiAibW91c2Vkb3duIiwKICAgICJjYXB0dXJlIjogdHJ1ZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAiQlVUVE9OIiwKICAgICJjb250ZW50IjogIk9wZW4gb2JqZWN0aXZlIiwKICAgICJsaXN0ZW5lcnMiOiA1LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAwCiAgfSwKICB7CiAgICAiYXQiOiA4MDkwLjA5OTk5OTk5OTYyNzUsCiAgICAidHlwZSI6ICJtb3VzZWRvd24iLAogICAgImNhcHR1cmUiOiBmYWxzZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAiQlVUVE9OIiwKICAgICJjb250ZW50IjogIk9wZW4gb2JqZWN0aXZlIiwKICAgICJsaXN0ZW5lcnMiOiA1LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAwCiAgfSwKICB7CiAgICAiYXQiOiA4MDkwLjUsCiAgICAidHlwZSI6ICJwb2ludGVydXAiLAogICAgImNhcHR1cmUiOiB0cnVlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJCVVRUT04iLAogICAgImNvbnRlbnQiOiAiT3BlbiBvYmplY3RpdmUiLAogICAgImxpc3RlbmVycyI6IDUsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDAKICB9LAogIHsKICAgICJhdCI6IDgwOTAuNTk5OTk5OTk5NjI3NSwKICAgICJ0eXBlIjogInBvaW50ZXJ1cCIsCiAgICAiY2FwdHVyZSI6IGZhbHNlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJCVVRUT04iLAogICAgImNvbnRlbnQiOiAiT3BlbiBvYmplY3RpdmUiLAogICAgImxpc3RlbmVycyI6IDUsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDAKICB9LAogIHsKICAgICJhdCI6IDgwOTAuNTk5OTk5OTk5NjI3NSwKICAgICJ0eXBlIjogIm1vdXNldXAiLAogICAgImNhcHR1cmUiOiB0cnVlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJCVVRUT04iLAogICAgImNvbnRlbnQiOiAiT3BlbiBvYmplY3RpdmUiLAogICAgImxpc3RlbmVycyI6IDUsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDAKICB9LAogIHsKICAgICJhdCI6IDgwOTAuNTk5OTk5OTk5NjI3NSwKICAgICJ0eXBlIjogIm1vdXNldXAiLAogICAgImNhcHR1cmUiOiBmYWxzZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAiQlVUVE9OIiwKICAgICJjb250ZW50IjogIk9wZW4gb2JqZWN0aXZlIiwKICAgICJsaXN0ZW5lcnMiOiA1LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAwCiAgfSwKICB7CiAgICAiYXQiOiA4MDkwLjY5OTk5OTk5OTI1NSwKICAgICJ0eXBlIjogImNsaWNrIiwKICAgICJjYXB0dXJlIjogdHJ1ZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAiQlVUVE9OIiwKICAgICJjb250ZW50IjogIk9wZW4gb2JqZWN0aXZlIiwKICAgICJsaXN0ZW5lcnMiOiA1LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAwCiAgfSwKICB7CiAgICAiYXQiOiA4MjA3LjM5OTk5OTk5ODUxLAogICAgInR5cGUiOiAiY2xpY2siLAogICAgImNhcHR1cmUiOiBmYWxzZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAiQlVUVE9OIiwKICAgICJjb250ZW50IjogIk9wZW4gb2JqZWN0aXZlIiwKICAgICJsaXN0ZW5lcnMiOiA1LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAxCiAgfSwKICB7CiAgICAiYXQiOiA4MjUwLjg5OTk5OTk5ODUxLAogICAgInJlZ2lzdHJhdGlvbiI6ICJhZGQiLAogICAgImNvdW50IjogNgogIH0sCiAgewogICAgImF0IjogOTU1OS42OTk5OTk5OTkyNTUsCiAgICAidHlwZSI6ICJwb2ludGVyZG93biIsCiAgICAiY2FwdHVyZSI6IHRydWUsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogInBhdGgiLAogICAgImNvbnRlbnQiOiAiIiwKICAgICJsaXN0ZW5lcnMiOiA2LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAxCiAgfSwKICB7CiAgICAiYXQiOiA5NTU5Ljg5OTk5OTk5ODUxLAogICAgInR5cGUiOiAicG9pbnRlcmRvd24iLAogICAgImNhcHR1cmUiOiBmYWxzZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAicGF0aCIsCiAgICAiY29udGVudCI6ICIiLAogICAgImxpc3RlbmVycyI6IDYsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDEKICB9LAogIHsKICAgICJhdCI6IDk1NjAsCiAgICAidHlwZSI6ICJtb3VzZWRvd24iLAogICAgImNhcHR1cmUiOiB0cnVlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJwYXRoIiwKICAgICJjb250ZW50IjogIiIsCiAgICAibGlzdGVuZXJzIjogNiwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMQogIH0sCiAgewogICAgImF0IjogOTU2MC4xOTk5OTk5OTkyNTUsCiAgICAidHlwZSI6ICJtb3VzZWRvd24iLAogICAgImNhcHR1cmUiOiBmYWxzZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAicGF0aCIsCiAgICAiY29udGVudCI6ICIiLAogICAgImxpc3RlbmVycyI6IDYsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDEKICB9LAogIHsKICAgICJhdCI6IDk1NjcuODk5OTk5OTk4NTEsCiAgICAidHlwZSI6ICJwb2ludGVydXAiLAogICAgImNhcHR1cmUiOiB0cnVlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJwYXRoIiwKICAgICJjb250ZW50IjogIiIsCiAgICAibGlzdGVuZXJzIjogNiwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMQogIH0sCiAgewogICAgImF0IjogOTU2Ny44OTk5OTk5OTg1MSwKICAgICJ0eXBlIjogInBvaW50ZXJ1cCIsCiAgICAiY2FwdHVyZSI6IGZhbHNlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJwYXRoIiwKICAgICJjb250ZW50IjogIiIsCiAgICAibGlzdGVuZXJzIjogNiwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMQogIH0sCiAgewogICAgImF0IjogOTU2Ny44OTk5OTk5OTg1MSwKICAgICJ0eXBlIjogIm1vdXNldXAiLAogICAgImNhcHR1cmUiOiB0cnVlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJwYXRoIiwKICAgICJjb250ZW50IjogIiIsCiAgICAibGlzdGVuZXJzIjogNiwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMQogIH0sCiAgewogICAgImF0IjogOTU2OCwKICAgICJ0eXBlIjogIm1vdXNldXAiLAogICAgImNhcHR1cmUiOiBmYWxzZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAicGF0aCIsCiAgICAiY29udGVudCI6ICIiLAogICAgImxpc3RlbmVycyI6IDYsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDEKICB9LAogIHsKICAgICJhdCI6IDk1NjgsCiAgICAidHlwZSI6ICJjbGljayIsCiAgICAiY2FwdHVyZSI6IHRydWUsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogInBhdGgiLAogICAgImNvbnRlbnQiOiAiIiwKICAgICJsaXN0ZW5lcnMiOiA2LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAxCiAgfSwKICB7CiAgICAiYXQiOiA5NjQ0Ljc5OTk5OTk5ODg4MiwKICAgICJyZWdpc3RyYXRpb24iOiAicmVtb3ZlIiwKICAgICJjb3VudCI6IDUKICB9LAogIHsKICAgICJhdCI6IDk2NTcuMDk5OTk5OTk5NjI3LAogICAgInR5cGUiOiAiY2xpY2siLAogICAgImNhcHR1cmUiOiBmYWxzZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAicGF0aCIsCiAgICAiY29udGVudCI6ICIiLAogICAgImxpc3RlbmVycyI6IDUsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDAKICB9LAogIHsKICAgICJhdCI6IDEwMDA2LjU5OTk5OTk5OTYyNywKICAgICJ0eXBlIjogInBvaW50ZXJkb3duIiwKICAgICJjYXB0dXJlIjogdHJ1ZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAiQlVUVE9OIiwKICAgICJjb250ZW50IjogIk9wZW4gb2JqZWN0aXZlIiwKICAgICJsaXN0ZW5lcnMiOiA1LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAwCiAgfSwKICB7CiAgICAiYXQiOiAxMDAwNi41OTk5OTk5OTk2MjcsCiAgICAidHlwZSI6ICJwb2ludGVyZG93biIsCiAgICAiY2FwdHVyZSI6IGZhbHNlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJCVVRUT04iLAogICAgImNvbnRlbnQiOiAiT3BlbiBvYmplY3RpdmUiLAogICAgImxpc3RlbmVycyI6IDUsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDAKICB9LAogIHsKICAgICJhdCI6IDEwMDA2LjU5OTk5OTk5OTYyNywKICAgICJ0eXBlIjogIm1vdXNlZG93biIsCiAgICAiY2FwdHVyZSI6IHRydWUsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogNSwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMAogIH0sCiAgewogICAgImF0IjogMTAwMDYuNTk5OTk5OTk5NjI3LAogICAgInR5cGUiOiAibW91c2Vkb3duIiwKICAgICJjYXB0dXJlIjogZmFsc2UsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogNSwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMAogIH0sCiAgewogICAgImF0IjogMTAwMDYuODk5OTk5OTk4NTEsCiAgICAidHlwZSI6ICJwb2ludGVydXAiLAogICAgImNhcHR1cmUiOiB0cnVlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJCVVRUT04iLAogICAgImNvbnRlbnQiOiAiT3BlbiBvYmplY3RpdmUiLAogICAgImxpc3RlbmVycyI6IDUsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDAKICB9LAogIHsKICAgICJhdCI6IDEwMDA2Ljg5OTk5OTk5ODUxLAogICAgInR5cGUiOiAicG9pbnRlcnVwIiwKICAgICJjYXB0dXJlIjogZmFsc2UsCiAgICAic2xvdCI6IG51bGwsCiAgICAidGFnIjogIkJVVFRPTiIsCiAgICAiY29udGVudCI6ICJPcGVuIG9iamVjdGl2ZSIsCiAgICAibGlzdGVuZXJzIjogNSwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMAogIH0sCiAgewogICAgImF0IjogMTAwMDYuODk5OTk5OTk4NTEsCiAgICAidHlwZSI6ICJtb3VzZXVwIiwKICAgICJjYXB0dXJlIjogdHJ1ZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAiQlVUVE9OIiwKICAgICJjb250ZW50IjogIk9wZW4gb2JqZWN0aXZlIiwKICAgICJsaXN0ZW5lcnMiOiA1LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAwCiAgfSwKICB7CiAgICAiYXQiOiAxMDAwNi44OTk5OTk5OTg1MSwKICAgICJ0eXBlIjogIm1vdXNldXAiLAogICAgImNhcHR1cmUiOiBmYWxzZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAiQlVUVE9OIiwKICAgICJjb250ZW50IjogIk9wZW4gb2JqZWN0aXZlIiwKICAgICJsaXN0ZW5lcnMiOiA1LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAwCiAgfSwKICB7CiAgICAiYXQiOiAxMDAwNi44OTk5OTk5OTg1MSwKICAgICJ0eXBlIjogImNsaWNrIiwKICAgICJjYXB0dXJlIjogdHJ1ZSwKICAgICJzbG90IjogbnVsbCwKICAgICJ0YWciOiAiQlVUVE9OIiwKICAgICJjb250ZW50IjogIk9wZW4gb2JqZWN0aXZlIiwKICAgICJsaXN0ZW5lcnMiOiA1LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAwCiAgfSwKICB7CiAgICAiYXQiOiAxMDE0Mi43OTk5OTk5OTg4ODIsCiAgICAidHlwZSI6ICJjbGljayIsCiAgICAiY2FwdHVyZSI6IGZhbHNlLAogICAgInNsb3QiOiBudWxsLAogICAgInRhZyI6ICJCVVRUT04iLAogICAgImNvbnRlbnQiOiAiT3BlbiBvYmplY3RpdmUiLAogICAgImxpc3RlbmVycyI6IDUsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDEKICB9LAogIHsKICAgICJhdCI6IDEwMjE0LjI5OTk5OTk5ODg4MiwKICAgICJ0eXBlIjogInBvaW50ZXJkb3duIiwKICAgICJjYXB0dXJlIjogdHJ1ZSwKICAgICJzbG90IjogImRpYWxvZy1vdmVybGF5IiwKICAgICJ0YWciOiAiRElWIiwKICAgICJjb250ZW50IjogIiIsCiAgICAibGlzdGVuZXJzIjogNSwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMQogIH0sCiAgewogICAgImF0IjogMTAyMTQuMzk5OTk5OTk4NTEsCiAgICAidHlwZSI6ICJwb2ludGVyZG93biIsCiAgICAiY2FwdHVyZSI6IGZhbHNlLAogICAgInNsb3QiOiAiZGlhbG9nLW92ZXJsYXkiLAogICAgInRhZyI6ICJESVYiLAogICAgImNvbnRlbnQiOiAiIiwKICAgICJsaXN0ZW5lcnMiOiA1LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAxCiAgfSwKICB7CiAgICAiYXQiOiAxMDIxNC4zOTk5OTk5OTg1MSwKICAgICJ0eXBlIjogIm1vdXNlZG93biIsCiAgICAiY2FwdHVyZSI6IHRydWUsCiAgICAic2xvdCI6ICJkaWFsb2ctb3ZlcmxheSIsCiAgICAidGFnIjogIkRJViIsCiAgICAiY29udGVudCI6ICIiLAogICAgImxpc3RlbmVycyI6IDUsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDEKICB9LAogIHsKICAgICJhdCI6IDEwMjE0LjUsCiAgICAidHlwZSI6ICJtb3VzZWRvd24iLAogICAgImNhcHR1cmUiOiBmYWxzZSwKICAgICJzbG90IjogImRpYWxvZy1vdmVybGF5IiwKICAgICJ0YWciOiAiRElWIiwKICAgICJjb250ZW50IjogIiIsCiAgICAibGlzdGVuZXJzIjogNSwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMQogIH0sCiAgewogICAgImF0IjogMTAyMTUsCiAgICAidHlwZSI6ICJwb2ludGVydXAiLAogICAgImNhcHR1cmUiOiB0cnVlLAogICAgInNsb3QiOiAiZGlhbG9nLW92ZXJsYXkiLAogICAgInRhZyI6ICJESVYiLAogICAgImNvbnRlbnQiOiAiIiwKICAgICJsaXN0ZW5lcnMiOiA1LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAxCiAgfSwKICB7CiAgICAiYXQiOiAxMDIxNS4wOTk5OTk5OTk2MjcsCiAgICAidHlwZSI6ICJwb2ludGVydXAiLAogICAgImNhcHR1cmUiOiBmYWxzZSwKICAgICJzbG90IjogImRpYWxvZy1vdmVybGF5IiwKICAgICJ0YWciOiAiRElWIiwKICAgICJjb250ZW50IjogIiIsCiAgICAibGlzdGVuZXJzIjogNSwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMQogIH0sCiAgewogICAgImF0IjogMTAyMTUuMDk5OTk5OTk5NjI3LAogICAgInR5cGUiOiAibW91c2V1cCIsCiAgICAiY2FwdHVyZSI6IHRydWUsCiAgICAic2xvdCI6ICJkaWFsb2ctb3ZlcmxheSIsCiAgICAidGFnIjogIkRJViIsCiAgICAiY29udGVudCI6ICIiLAogICAgImxpc3RlbmVycyI6IDUsCiAgICAicHJldmVudGVkIjogZmFsc2UsCiAgICAib3BlbiI6IDEKICB9LAogIHsKICAgICJhdCI6IDEwMjE1LjA5OTk5OTk5OTYyNywKICAgICJ0eXBlIjogIm1vdXNldXAiLAogICAgImNhcHR1cmUiOiBmYWxzZSwKICAgICJzbG90IjogImRpYWxvZy1vdmVybGF5IiwKICAgICJ0YWciOiAiRElWIiwKICAgICJjb250ZW50IjogIiIsCiAgICAibGlzdGVuZXJzIjogNSwKICAgICJwcmV2ZW50ZWQiOiBmYWxzZSwKICAgICJvcGVuIjogMQogIH0sCiAgewogICAgImF0IjogMTAyMTUuMTk5OTk5OTk5MjU1LAogICAgInR5cGUiOiAiY2xpY2siLAogICAgImNhcHR1cmUiOiB0cnVlLAogICAgInNsb3QiOiAiZGlhbG9nLW92ZXJsYXkiLAogICAgInRhZyI6ICJESVYiLAogICAgImNvbnRlbnQiOiAiIiwKICAgICJsaXN0ZW5lcnMiOiA1LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAxCiAgfSwKICB7CiAgICAiYXQiOiAxMDIxNS4xOTk5OTk5OTkyNTUsCiAgICAidHlwZSI6ICJjbGljayIsCiAgICAiY2FwdHVyZSI6IGZhbHNlLAogICAgInNsb3QiOiAiZGlhbG9nLW92ZXJsYXkiLAogICAgInRhZyI6ICJESVYiLAogICAgImNvbnRlbnQiOiAiIiwKICAgICJsaXN0ZW5lcnMiOiA1LAogICAgInByZXZlbnRlZCI6IGZhbHNlLAogICAgIm9wZW4iOiAxCiAgfSwKICB7CiAgICAiYXQiOiAxMDI3MS41OTk5OTk5OTk2MjcsCiAgICAicmVnaXN0cmF0aW9uIjogImFkZCIsCiAgICAiY291bnQiOiA2CiAgfQpd"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-contracts/apps/web/test-results/portfolio-browser/dialog-diagnostic-drawer-k-1019f-verlay-and-focus-on-desktop-repeat2/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-contracts/apps/web/test-results/portfolio-browser/dialog-diagnostic-drawer-k-1019f-verlay-and-focus-on-desktop-repeat2/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-contracts/apps/web/tests/browser/dialog-diagnostic.spec.ts",
+                    "column": 30,
+                    "line": 230
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "29131c3da44df6211fd2-ba9d1c832c320cc35e26",
+          "file": "dialog-diagnostic.spec.ts",
+          "line": 173,
+          "column": 5
+        },
+        {
+          "title": "wide keeps its canonical layout, overlay and focus on desktop",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 8982,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:50:13.041Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "29131c3da44df6211fd2-27bc95eeec4300180aef",
+          "file": "dialog-diagnostic.spec.ts",
+          "line": 173,
+          "column": 5
+        },
+        {
+          "title": "compact contact drawer keeps its canonical layout, overlay and focus on desktop",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 5705,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T04:50:22.540Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "29131c3da44df6211fd2-18ab292825e23391d333",
+          "file": "dialog-diagnostic.spec.ts",
+          "line": 173,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T04:49:41.893Z",
+    "duration": 46503.637,
+    "expected": 10,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

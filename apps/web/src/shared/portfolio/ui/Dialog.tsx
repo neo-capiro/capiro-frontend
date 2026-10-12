@@ -9,6 +9,10 @@ import {
 import { useRef, type ComponentProps, type ReactNode } from "react";
 import { X } from "lucide-react";
 import styles from "./dialog.module.css";
+import {
+  useDialogOverlayDismissal,
+  useDialogReturnFocus,
+} from "./dialog-interaction";
 const guardedEscape = new WeakSet<KeyboardEvent>();
 const handledEscape = new WeakSet<KeyboardEvent>();
 // Radix installs/removes its highest-layer listener in passive effects. During
@@ -57,13 +61,18 @@ export function Dialog({
   onOpenAutoFocus?: ComponentProps<typeof DialogContent>["onOpenAutoFocus"];
 }) {
   const content = useRef<HTMLDivElement>(null);
+  useDialogOverlayDismissal(open, content, onOpenChange);
+  const returnFocus = useDialogReturnFocus(open);
   return (
     <DialogRoot open={open} onOpenChange={onOpenChange}>
       <DialogContent
         ref={content}
         aria-modal="true"
         showCloseButton={false}
-        onCloseAutoFocus={onCloseAutoFocus}
+        onCloseAutoFocus={(event) => {
+          onCloseAutoFocus?.(event);
+          returnFocus(event);
+        }}
         onOpenAutoFocus={onOpenAutoFocus}
         onEscapeKeyDown={(event) =>
           dismissTopDialog(event, content.current, onOpenChange)

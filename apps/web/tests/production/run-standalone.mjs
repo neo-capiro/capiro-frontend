@@ -4,6 +4,7 @@ import { once } from "node:events";
 import { access, cp, mkdir, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { verifyRuntimeConfig } from "./verify-runtime-config.mjs";
 
 const usage = `Usage: npm run test:production -- [output-directory]
 Requires a completed root npm run build and an installed Playwright Chromium.
@@ -38,6 +39,7 @@ try {
   process.exit(2);
 }
 await mkdir(output, { recursive: true });
+await verifyRuntimeConfig(app);
 // The installed Next output guide requires these assets alongside server.js.
 // Match the existing Docker image assembly without changing authored files.
 await cp(join(app, "public"), join(standalone, "public"), { recursive: true });

@@ -184,6 +184,33 @@ async function attach(page: Page) {
     buffer: Buffer.from("%PDF-fixture"),
   });
 }
+test("overlay clicks respect context gestures and dismiss only the top email review", async ({
+  page,
+}) => {
+  const state = await setup(page);
+  await compose(page);
+  await page.getByRole("button", { name: "Review email", exact: true }).click();
+  const review = page.getByRole("dialog", { name: "Send email", exact: true });
+  await expect(review).toBeVisible();
+  await page.mouse.click(4, 4, { button: "right" });
+  await expect(review).toBeVisible();
+  await page.keyboard.down("Control");
+  await page.mouse.click(4, 4);
+  await page.keyboard.up("Control");
+  await expect(review).toBeVisible();
+  await page.mouse.click(4, 4);
+  await expect(review).toHaveCount(0);
+  await expect(
+    page.getByRole("dialog", { name: "New email", exact: true }),
+  ).toBeVisible();
+  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+    "Draft retained for explicit review.",
+  );
+  await expect(
+    page.getByRole("button", { name: "Review email", exact: true }),
+  ).toBeFocused();
+  expect(state.sent).toHaveLength(0);
+});
 test("invalidated successful idle identity refuses mail dispatch and retains draft", async ({
   page,
 }) => {
