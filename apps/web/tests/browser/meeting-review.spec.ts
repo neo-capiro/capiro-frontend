@@ -178,7 +178,18 @@ async function setup(
         expect(route.request().postDataJSON()).toMatchObject({
           confidential: false,
         });
-        return json(route, { id: "synthetic-debrief" });
+        return json(route, {
+          id: "synthetic-debrief",
+          meetingId,
+          clientId,
+          authorUserId: "user-test",
+          confidential: false,
+          status: "draft",
+          sharedAt: null,
+          sharedByUserId: null,
+          createdAt: "2026-10-11T12:00:00Z",
+          updatedAt: "2026-10-11T12:00:00Z",
+        });
       }
       return json(route, []);
     }

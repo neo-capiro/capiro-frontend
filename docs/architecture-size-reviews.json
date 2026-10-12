@@ -2509,15 +2509,15 @@
   },
   {
     "path": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
-    "sha256": "b8744e9c2cc4e9de44a38bc946455ae98a79eed9bdfcd4065c395f66b8a17e3c",
-    "reviewer": "Codex implementation review",
+    "sha256": "78facf8f6c85d1a7e98b7d884db86a5c79281918484f3a0125a706fc2e5be207",
+    "reviewer": "Codex independent objectives_work_intel_review and root integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "WorkspaceDraft.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "evidence": "docs/successor-p1-20261012/evidence/independent/workspace-review.json",
+    "rationale": "DraftEditor remains the canonical presentation and local-state owner for one document editor: title/sections, save/history controls and status. The two pending attributes reuse the existing prospect-save lifecycle without adding transport, persistence, provider integration or authority responsibilities. The 178-nonblank function is cohesive JSX composition; splitting solely to lower the count would obscure the shared editor lifetime. Existing separate hook, export and newsletter owners remain separate.",
     "functions": [
       {
         "name": "DraftEditor",
-        "nonblankLines": 118
+        "nonblankLines": 178
       }
     ],
     "signals": [
@@ -2920,15 +2920,15 @@
   },
   {
     "path": "apps/web/src/features/settings/BillingSettings.tsx",
-    "sha256": "40a95a3030a93aba6d5872788f504d8edc952047a705505a485f5846a23c91da",
-    "reviewer": "Codex implementation review",
+    "sha256": "7a64a5917f672d5064c75795e34cdfdcc465de8953c40d3cc4b2c529601a3838",
+    "reviewer": "Codex independent objectives_work_intel_review and root integration review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
-    "rationale": "BillingSettings.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "evidence": "docs/successor-p1-20261012/evidence/independent/billing-review.json",
+    "rationale": "BillingSettings remains one screen presentation with checkout/cancel local dialog state. The 292-nonblank signal is principally cohesive JSX for this same billing screen. Flow choice, fresh-read preflight and exact hosted redirect validation are separated into the small billingFlow owner, while the existing typed registry owns transport contracts and useSettingsAction owns cancellation/concurrency. No billing server logic, authority implementation, second catalog, unrelated domain or cyclic dependency was added. Further splitting for line count alone is not needed.",
     "functions": [
       {
         "name": "BillingSettings",
-        "nonblankLines": 273
+        "nonblankLines": 292
       }
     ],
     "signals": [
@@ -3599,6 +3599,95 @@
     ],
     "signals": [
       "apps/web/src/shared/meetings/MeetingDetail.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
+    "sha256": "bb081bf0130f3f35341e68e0c61c491cd46ab782a5fe3be4ab6a1de1af5d4450",
+    "reviewer": "Codex independent core_intake_review and root integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/successor-p1-20261012/STRUCTURE-REVIEW.md",
+    "rationale": "Owns one notes/debrief interaction presentation and local draft. Native action-specific wire validation, dispatch and cache-local mutation lifetime are separate artifacts/contracts, api and useArtifactMutation owners. Pending field locks protect the submitted snapshot without adding domain responsibilities. Renders one existing artifact and its action affordances within the same artifact editor. Native effect validation and mutation lifecycle remain delegated. Splitting this cohesive row only for line count would obscure its shared pending/uncertainty state.",
+    "functions": [
+      {
+        "name": "ArtifactEditor",
+        "nonblankLines": 244
+      },
+      {
+        "name": "ArtifactEditor > <anonymous> #5",
+        "nonblankLines": 83
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/portfolio/calendar/MeetingForm.tsx",
+    "sha256": "df79c29f4a5e3f72fb1cf7ea303a9a02af75c070039aaf28e7fc1dfbd6db6434",
+    "reviewer": "Codex independent core_intake_review and root integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/successor-p1-20261012/STRUCTURE-REVIEW.md",
+    "rationale": "Owns one meeting draft, date conversion, validation and presentation. Native effect matching belongs to meeting-save.ts and actor/lifetime/receipt mutation belongs to mutations.ts. Pending field locks preserve the submitted snapshot without new responsibilities.",
+    "functions": [
+      {
+        "name": "MeetingForm",
+        "nonblankLines": 181
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/portfolio/calendar/MeetingForm.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/portfolio/files/MoveFile.tsx",
+    "sha256": "736a61452028554f57969e4a1d3d8df4194674bd7622ad89acf6629f2b5700c0",
+    "reviewer": "Codex independent core_intake_review and root integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/successor-p1-20261012/STRUCTURE-REVIEW.md",
+    "rationale": "Owns one folder dialog, local choice and presentation. It delegates captured-authority checks, semantic receipt validation and uncertain-write recovery to useFileMetadataChange; status rendering is separate. No transport, shared authority or foreign-domain responsibility is duplicated.",
+    "functions": [
+      {
+        "name": "MoveFile",
+        "nonblankLines": 86
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/portfolio/files/MoveFile.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx",
+    "sha256": "12adf15153a9e3e45c8d53690132eda492b20030fd1dad6435e6da4682e84ef8",
+    "reviewer": "Codex independent objectives_work_intel_review and root integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/successor-p1-20261012/STRUCTURE-REVIEW.md",
+    "rationale": "Owns the client Objective list, local status filter, URL selection and failure cleanup. A single current-success projection conceals records and editors after failed reads. Existing ObjectiveEditor, NewObjectivePage and mutation hooks retain edits, validation and dispatch. No shared cache abstraction, transport or backend authority is added.",
+    "functions": [
+      {
+        "name": "ObjectivesPage",
+        "nonblankLines": 208
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx",
+    "sha256": "2e559c408c5f0db2b89bf5f7b1fa13ec05e49d5ed3eeabb0953c6d24be68cfed",
+    "reviewer": "Codex root integration review; independent current-read behavior review separately recorded",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/successor-p1-20261012/STRUCTURE-REVIEW.md",
+    "rationale": "Owns Prospect list presentation, filters, counts, cards and URL-based dialog selection. One current-success projection and existing TanStack fetched-after-mount semantics govern data-backed branches. The query hook owns scoped list freshness; existing editors and pipeline retain mutations. No duplicate cache framework, transport or authority is introduced.",
+    "functions": [
+      {
+        "name": "ProspectsIndex",
+        "nonblankLines": 189
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx: function over80 nonblank lines requires review"
     ]
   }
 ]

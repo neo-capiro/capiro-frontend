@@ -1,0 +1,67 @@
+{
+  "completedAt": "2026-10-12T15:19:42.669670+00:00",
+  "reviewer": "objectives_work_intel_review",
+  "initialFindingsIndependentlyVerified": [
+    "CP-01",
+    "CR-01",
+    "CR-02",
+    "PROS-F02",
+    "MS01"
+  ],
+  "candidatePatchesIndependentlyReviewed": {
+    "PROS-F02": "bd7f77f8601da883c54ae700ce32e2748cadd24d",
+    "MS01": "0f80c354ee7eb08ce9a5dd08dd2305b7a5694bcd"
+  },
+  "verdict": "ACCEPT_TWO_BOUNDED_FRONTEND_REPAIRS_PENDING_ROOT_INTEGRATION",
+  "newFindings": [],
+  "freshBrowserCases": 42,
+  "freshNewIndependentCases": 6,
+  "independentReplaysOfAuthorCases": 36,
+  "results": {
+    "workspace-independent": {
+      "startTime": "2026-10-12T15:14:18.602Z",
+      "duration": 15261.099999999999,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "workspace-author-controls": {
+      "startTime": "2026-10-12T15:14:56.904Z",
+      "duration": 23480.121000000003,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "billing-independent": {
+      "startTime": "2026-10-12T15:16:18.667Z",
+      "duration": 6552.209,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "billing-author-controls": {
+      "startTime": "2026-10-12T15:16:54.788Z",
+      "duration": 70170.082,
+      "expected": 24,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "architectureBoundaryErrors": 0,
+  "exactFunctionReviewsProvided": 2,
+  "architectureRegistryEdits": false,
+  "applicationEditsByReviewer": false,
+  "nativeAcceptanceClaimed": false,
+  "fullSuiteRerun": false,
+  "providerOrBackendWrites": false,
+  "frozenArchiveChanges": false,
+  "remaining": [
+    "Root records exact reviewed function fingerprints and runs combined qualification on integrated successor.",
+    "Files and Calendar candidate patches are not independently reviewed by this reviewer; this report verifies their baseline P1 impact/contracts only.",
+    "Native/provider/deployed-image acceptance remains separate."
+  ]
+}
