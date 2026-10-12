@@ -58,6 +58,12 @@
   border-radius: 10px;
   background: color-mix(in srgb, #8a6a2f 12%, var(--card));
 }
+.owner {
+  display: block;
+  color: var(--muted-foreground);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
 @media (max-width: 1000px) {
   .columns {
     grid-template-columns: 1fr;
