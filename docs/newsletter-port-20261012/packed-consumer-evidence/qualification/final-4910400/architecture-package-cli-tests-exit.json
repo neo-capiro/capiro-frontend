@@ -1,0 +1,14 @@
+{
+  "name": "architecture-package-cli-tests",
+  "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+  "command": [
+    "node",
+    "--test",
+    "scripts/architecture.test.mjs",
+    "scripts/public-packages.test.mjs",
+    "scripts/newsletter-cli.test.mjs"
+  ],
+  "exitCode": 0,
+  "start": "2026-10-12T23:23:35.491946+00:00",
+  "end": "2026-10-12T23:23:36.084370+00:00"
+}

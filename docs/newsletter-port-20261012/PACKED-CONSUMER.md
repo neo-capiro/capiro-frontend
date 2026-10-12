@@ -31,7 +31,7 @@ The synchronous synthetic clock and randomness match the original fixture enviro
 
 ## Qualification scope
 
-Development runs passed120 Node tests,116 cases in actual Chromium, four declaration checks, the workspace typecheck, public-package checks, all33 architecture/package unit cases and two CLI smoke cases. The current application architecture scan reports427 size signals:403 reviewed,24 inherited/unreviewed and0 blocking, with0 boundary errors. The final exact-source receipts are published separately with the evidence commit.
+Development runs passed120 Node tests,116 cases in actual Chromium, four declaration checks, the workspace typecheck, public-package checks, all33 architecture/package unit cases and two CLI smoke cases. The current application architecture scan reports427 size signals:403 reviewed,24 inherited/unreviewed and0 blocking, with0 boundary errors. The [final exact-source receipts](PACKED-QUALIFICATION.md) are published with the evidence commit.
 
 The initial Node harness run passed118 and failed2 inventory cases because Node's CommonJS-to-ESM namespace includes interop markers. The corrected harness passes the actual CommonJS objects to the unchanged original CommonJS corpus, then independently asserts every named ESM export, exact namespace keys and alias identity. Both original failures remain in the evidence. No golden/corpus expectation was weakened. Declaration negatives require exactly two TS2345 and one TS2322 diagnostic in each module mode; resolution errors cannot count as success.
 

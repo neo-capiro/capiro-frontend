@@ -1,0 +1,1 @@
+Inspection helper exit 1: source snapshot expected regular files, but git ls-files --others included borrowed packages/qualification-newsletter/node_modules symlink. Content/lock checks before that assertion passed. No consumer execution or feature failure. Corrected helper records/excludes dependency links from source snapshot.

@@ -1,0 +1,362 @@
+{
+  "status": "PASS_STATIC_AST_ONLY",
+  "tool": {
+    "name": "TypeScript parser",
+    "version": "5.9.3"
+  },
+  "runtimeModules": [
+    "dist/newsletter-fonts.catalog.js",
+    "dist/newsletter-fonts.js",
+    "dist/newsletter-render.js",
+    "dist/newsletter-social-share.js",
+    "dist/newsletter.js"
+  ],
+  "graph": [
+    {
+      "file": "dist/newsletter.js",
+      "references": [
+        "./newsletter-fonts.js"
+      ],
+      "exports": []
+    },
+    {
+      "file": "dist/newsletter-render.js",
+      "references": [
+        "./newsletter.js",
+        "./newsletter-fonts.js",
+        "./newsletter-social-share.js"
+      ],
+      "exports": []
+    },
+    {
+      "file": "dist/newsletter-fonts.js",
+      "references": [
+        "./newsletter-fonts.catalog.js"
+      ],
+      "exports": []
+    },
+    {
+      "file": "dist/newsletter-social-share.js",
+      "references": [
+        "./newsletter.js"
+      ],
+      "exports": []
+    },
+    {
+      "file": "dist/newsletter-fonts.catalog.js",
+      "references": [],
+      "exports": []
+    }
+  ],
+  "externalImports": [],
+  "dynamicModuleReferences": [],
+  "forbiddenGlobalReferences": [],
+  "localShadows": [
+    {
+      "file": "dist/newsletter-render.js",
+      "identifier": "global",
+      "line": 399,
+      "localDeclarationLine": 399
+    },
+    {
+      "file": "dist/newsletter-render.js",
+      "identifier": "global",
+      "line": 412,
+      "localDeclarationLine": 399
+    }
+  ],
+  "parsedDeclarations": 36,
+  "declarationExports": [
+    {
+      "file": "dist/newsletter-render.d.ts",
+      "references": [
+        "./newsletter.js",
+        "./newsletter-social-share.js"
+      ],
+      "exports": [
+        {
+          "name": "NewsletterRenderOptions",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "newsletterFontCss",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "newsletterEscape",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "newsletterSafeUrl",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "newsletterStyleCss",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "newsletterBundledImageUrl",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "newsletterMergeText",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "newsletterSocialIconSize",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "renderNewsletterBlock",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "renderNewsletterDesign",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "newsletterPlainText",
+          "kind": "FunctionDeclaration"
+        }
+      ]
+    },
+    {
+      "file": "dist/newsletter.d.ts",
+      "references": [
+        "./newsletter-fonts.js"
+      ],
+      "exports": [
+        {
+          "name": "NewsletterBlockKind",
+          "kind": "TypeAliasDeclaration"
+        },
+        {
+          "name": "NewsletterVisibilityField",
+          "kind": "TypeAliasDeclaration"
+        },
+        {
+          "name": "NewsletterRule",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterStyle",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterLink",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterSocialPlatform",
+          "kind": "TypeAliasDeclaration"
+        },
+        {
+          "name": "NewsletterSocialSharePlatform",
+          "kind": "TypeAliasDeclaration"
+        },
+        {
+          "name": "NewsletterSocialShare",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "defaultNewsletterSocialShare",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "NewsletterSocialDevice",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterSocialSettings",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterVideoSettings",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterSurveySectionType",
+          "kind": "TypeAliasDeclaration"
+        },
+        {
+          "name": "NewsletterSurveyQuestion",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterSurveyDefinition",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterSavedSurvey",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterSurveyButton",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "createNewsletterSurveyQuestion",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "defaultNewsletterSurveyDefinition",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "newsletterVideoSource",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "newsletterCustomVideoThumbnail",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "defaultNewsletterSocialSettings",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "newsletterSocialPlatform",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "newsletterSocialSettings",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "NewsletterBlock",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterLinkPreviewBlock",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterSection",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterEmailStyles",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterDesign",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterFont",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterBrandLogo",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterBrandButton",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterBrandKit",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "defaultNewsletterBrandKit",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "newsletterBrandButtonStyle",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "newsletterDesignFonts",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "applyNewsletterBrandKit",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "newsletterSourceClients",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "NewsletterRecipient",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterCampaignConfig",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterCampaign",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterStage",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterCheck",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterComment",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterLibraryItem",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "NewsletterCapabilities",
+          "kind": "InterfaceDeclaration"
+        },
+        {
+          "name": "newsletterId",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "createNewsletterBlock",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "createNewsletterSection",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "defaultNewsletterStyles",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "defaultNewsletterConfig",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "createNewsletterLayout",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "governmentAffairsNewsletter",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "visitNewsletterBlocks",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "findNewsletterBlock",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "cloneNewsletterBlocks",
+          "kind": "FunctionDeclaration"
+        },
+        {
+          "name": "newsletterBlockVisible",
+          "kind": "FunctionDeclaration"
+        }
+      ]
+    }
+  ],
+  "packageCodeExecuted": false,
+  "installBuildTypecheckRuntimePerformed": false
+}

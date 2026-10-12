@@ -1,0 +1,349 @@
+{
+  "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+  "origin": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400",
+  "files": [
+    {
+      "path": "CONTINUITY.json",
+      "bytes": 1417,
+      "sha256": "6340f5dbe54471ed5852ce40a171fc8ed6d3ba34be1c8bed94d86b01d087fd02"
+    },
+    {
+      "path": "SOURCE-BINDING.json",
+      "bytes": 5043,
+      "sha256": "6c25f0f9f947270ccf2d2df381ecdbcd52e7510388c4123974b6bec1f02b3d0c"
+    },
+    {
+      "path": "SUMMARY.json",
+      "bytes": 5104,
+      "sha256": "001f2d2422c20be04451eb399f2ee62637a854d27dd80393762aaf1dc72c70e1"
+    },
+    {
+      "path": "architecture-exit.json",
+      "bytes": 257,
+      "sha256": "69b58f806f09efbf933d22eb81b8be0f91b03f6224a4be14e409495c9d8b8c44"
+    },
+    {
+      "path": "architecture-package-cli-tests-exit.json",
+      "bytes": 373,
+      "sha256": "bf67b706bf54150beff7daab814acfebf4c4202fb1b56d85980d0a1ee979bb2d"
+    },
+    {
+      "path": "architecture-package-cli-tests.log",
+      "bytes": 3497,
+      "sha256": "61879ee56a286e8fb2f96122eb7112ec738d9d20188638425748c4ebd8636ce7"
+    },
+    {
+      "path": "architecture.log",
+      "bytes": 782859,
+      "sha256": "fdb2167c05bd9d9ff4d80f8292053044f5cd71cb32218937c56e7a42594ce2a1"
+    },
+    {
+      "path": "authored-lint-exit.json",
+      "bytes": 569,
+      "sha256": "37f2a4a15b45187a51c1f8d87f2d64582bc4450fd433f813c9d9a02bb4727f3f"
+    },
+    {
+      "path": "authored-lint.log",
+      "bytes": 392,
+      "sha256": "4775ffae98d38b9f61079a17341c782b14fc4c2e6c6d66e848360e3bdb0b69b7"
+    },
+    {
+      "path": "browser/browser-module-graph.json",
+      "bytes": 2119,
+      "sha256": "e82e91083a4aa4acf51ca3d9503666e930e007b3be30086454400baf82ae8f11"
+    },
+    {
+      "path": "browser/browser-renderer-results.json",
+      "bytes": 54404,
+      "sha256": "57fbce61b8c59e915c4aaaa3f976bf1ed2dc41bbfff17215feca1306bbb5f103"
+    },
+    {
+      "path": "browser/browser-results.json",
+      "bytes": 276,
+      "sha256": "95941e62016ec3d1c98a37f222645064f7e414cdc3cf27b59a01a76922ad4fdb"
+    },
+    {
+      "path": "browser/bundle/newsletter.js",
+      "bytes": 124413,
+      "sha256": "e4f406633d3a01175164db67b53cb8a652fae040c072f58927820742e65c904c"
+    },
+    {
+      "path": "browser/bundle/newsletter.js.map",
+      "bytes": 294548,
+      "sha256": "6f7414dd1ead302ef99d6ea7359636e274a2d0c076cd2ba93e8f89dd6cb33a06"
+    },
+    {
+      "path": "browser-exit.json",
+      "bytes": 357,
+      "sha256": "ac1e2d0f852fc681dd0a732ec464edaaf187bf064cd30fcb0e50912db4c7041f"
+    },
+    {
+      "path": "browser.log",
+      "bytes": 252,
+      "sha256": "507c878f569624fc7f957df9b156630ba6d5433222c800aad29dc78431c2a415"
+    },
+    {
+      "path": "declarations/browser-negative-exit.json",
+      "bytes": 387,
+      "sha256": "5e7fc3cad9cfc872ae008b7747463cc692c63f5df4dd12bf5546c1db0840940f"
+    },
+    {
+      "path": "declarations/browser-negative.json",
+      "bytes": 404,
+      "sha256": "699deceb7c0b1aeb4999951b55b01d94fc36695a71861e11d4fbd543920800c7"
+    },
+    {
+      "path": "declarations/browser-negative.log",
+      "bytes": 718,
+      "sha256": "b6507ecc037057b1154ef34d7e7046de58c2918d1add270b68636e4c80c5a483"
+    },
+    {
+      "path": "declarations/browser-positive-exit.json",
+      "bytes": 387,
+      "sha256": "2736bd52c522e2015dc051f5f5db39c6a47d0e4ff6d794cf67bf43296beb7b4b"
+    },
+    {
+      "path": "declarations/browser-positive.json",
+      "bytes": 404,
+      "sha256": "9534802ad533ed96537f6f0044fa7afe1e5cebc5deb9ad7192341e88661c407f"
+    },
+    {
+      "path": "declarations/browser-positive.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "declarations/declaration-results.json",
+      "bytes": 1853,
+      "sha256": "830abb39cae2c488d7a290c8d922ee3befaf21c699b27465338fc222d827384d"
+    },
+    {
+      "path": "declarations/node-negative-exit.json",
+      "bytes": 381,
+      "sha256": "7c8ca676d5c5ef6ef4d0a818f78b4f572c8267917aa77b0b179bcc4ab8679ac9"
+    },
+    {
+      "path": "declarations/node-negative.json",
+      "bytes": 407,
+      "sha256": "8818859ca6b2a1f193eda907dbce0285d43e4599cfc953a02eadbe428edc3f11"
+    },
+    {
+      "path": "declarations/node-negative.log",
+      "bytes": 718,
+      "sha256": "b6507ecc037057b1154ef34d7e7046de58c2918d1add270b68636e4c80c5a483"
+    },
+    {
+      "path": "declarations/node-positive-exit.json",
+      "bytes": 381,
+      "sha256": "2bdee1ec032aecbd4616ee356809a3d2d938ae3e931fc5a0bf1f151abdbb2b0b"
+    },
+    {
+      "path": "declarations/node-positive.json",
+      "bytes": 407,
+      "sha256": "db0c42efe9a1d72b6329e24fa3042d9651c87778cd5267a8ca1adb0871f1d482"
+    },
+    {
+      "path": "declarations/node-positive.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "declarations-exit.json",
+      "bytes": 366,
+      "sha256": "dacf4501b2fac0585e7277b321e83df038128d8737d4d8d38c17820c2e335b7a"
+    },
+    {
+      "path": "declarations.log",
+      "bytes": 103,
+      "sha256": "5f4d14697523a5f51db10a63e8cb6f6185fdac960fd153fda9a7dc8be90b10e7"
+    },
+    {
+      "path": "diff-check-exit.json",
+      "bytes": 274,
+      "sha256": "78f9ef08cea1749e008bba1fd5d6a070c84db0eac9958470a50abb885ead6c1a"
+    },
+    {
+      "path": "diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "format-exit.json",
+      "bytes": 820,
+      "sha256": "29255e277ab98a9f2746f6d2f3d5988c60f54dd55fe69b66f36ba57ab2aeb158"
+    },
+    {
+      "path": "format.log",
+      "bytes": 66,
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "path": "node-consumer-exit.json",
+      "bytes": 304,
+      "sha256": "2a0f19a7735b826677b113f908e5e8febb9d1362536c38199ad4d8aaa3009a57"
+    },
+    {
+      "path": "node-consumer.log",
+      "bytes": 8720,
+      "sha256": "672421d292b995aed867e2112eb27d301d19759242cb83c1d095f6fcef3d451b"
+    },
+    {
+      "path": "public-packages-exit.json",
+      "bytes": 263,
+      "sha256": "93a053298991b4d02ae499edb96e4baa13859a6c6a1fd88c9a4012d0664c4020"
+    },
+    {
+      "path": "public-packages.log",
+      "bytes": 759,
+      "sha256": "a41ce4777569fe931dd0feb294ca03cf6c639fe863134648d5404334fb6b8f76"
+    },
+    {
+      "path": "workspace-typecheck-exit.json",
+      "bytes": 342,
+      "sha256": "f96800b88ec2715bd3c0b79c6beba99a877568f0efaf53cbcef7d41facb82220"
+    },
+    {
+      "path": "workspace-typecheck.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "topLevelSuccessfulReceipts": [
+    {
+      "name": "architecture",
+      "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+      "command": [
+        "node",
+        "scripts/architecture.mjs"
+      ],
+      "exitCode": 0,
+      "start": "2026-10-12T23:23:41.288281+00:00",
+      "end": "2026-10-12T23:23:42.675975+00:00"
+    },
+    {
+      "name": "architecture-package-cli-tests",
+      "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+      "command": [
+        "node",
+        "--test",
+        "scripts/architecture.test.mjs",
+        "scripts/public-packages.test.mjs",
+        "scripts/newsletter-cli.test.mjs"
+      ],
+      "exitCode": 0,
+      "start": "2026-10-12T23:23:35.491946+00:00",
+      "end": "2026-10-12T23:23:36.084370+00:00"
+    },
+    {
+      "command": [
+        "/workspace/capiro-remaining/node_modules/.bin/eslint",
+        "--config",
+        "/workspace/capiro-remaining/apps/web/eslint.config.mjs",
+        "packages/qualification-newsletter/fixed-clock.mjs",
+        "packages/qualification-newsletter/browser-entry.mjs",
+        "packages/qualification-newsletter/browser-check.mjs",
+        "packages/qualification-newsletter/qualification.test.mjs",
+        "packages/qualification-newsletter/declarations.mjs",
+        "scripts/newsletter-cli.test.mjs"
+      ],
+      "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+      "exitCode": 0
+    },
+    {
+      "name": "browser",
+      "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+      "command": [
+        "node",
+        "packages/qualification-newsletter/browser-check.mjs",
+        "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/browser"
+      ],
+      "exitCode": 0,
+      "start": "2026-10-12T23:23:39.594961+00:00",
+      "end": "2026-10-12T23:23:40.509230+00:00"
+    },
+    {
+      "name": "declarations",
+      "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+      "command": [
+        "node",
+        "packages/qualification-newsletter/declarations.mjs",
+        "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/declarations"
+      ],
+      "exitCode": 0,
+      "start": "2026-10-12T23:23:36.241145+00:00",
+      "end": "2026-10-12T23:23:39.594413+00:00"
+    },
+    {
+      "name": "diff-check",
+      "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "HEAD^",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "start": "2026-10-12T23:23:42.931942+00:00",
+      "end": "2026-10-12T23:23:42.939781+00:00"
+    },
+    {
+      "name": "format",
+      "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+      "command": [
+        "/workspace/capiro-remaining/node_modules/.bin/prettier",
+        "--check",
+        "packages/qualification-newsletter/fixed-clock.mjs",
+        "packages/qualification-newsletter/browser-entry.mjs",
+        "packages/qualification-newsletter/browser-check.mjs",
+        "packages/qualification-newsletter/qualification.test.mjs",
+        "packages/qualification-newsletter/declarations.mjs",
+        "packages/qualification-newsletter/package.json",
+        "packages/qualification-newsletter/tsconfig.json",
+        "scripts/newsletter-cli.test.mjs",
+        "package.json",
+        "package-lock.json",
+        "vendor/newsletter-public-packages.json"
+      ],
+      "exitCode": 0,
+      "start": "2026-10-12T23:23:42.676186+00:00",
+      "end": "2026-10-12T23:23:42.931527+00:00"
+    },
+    {
+      "name": "node-consumer",
+      "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+      "command": [
+        "node",
+        "--test",
+        "packages/qualification-newsletter/qualification.test.mjs"
+      ],
+      "exitCode": 0,
+      "start": "2026-10-12T23:23:36.084634+00:00",
+      "end": "2026-10-12T23:23:36.240929+00:00"
+    },
+    {
+      "name": "public-packages",
+      "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+      "command": [
+        "node",
+        "scripts/public-packages.mjs"
+      ],
+      "exitCode": 0,
+      "start": "2026-10-12T23:23:35.456490+00:00",
+      "end": "2026-10-12T23:23:35.491730+00:00"
+    },
+    {
+      "name": "workspace-typecheck",
+      "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+      "command": [
+        "/workspace/capiro-remaining/node_modules/.bin/tsc",
+        "-p",
+        "packages/qualification-newsletter/tsconfig.json"
+      ],
+      "exitCode": 0,
+      "start": "2026-10-12T23:23:40.509590+00:00",
+      "end": "2026-10-12T23:23:41.288068+00:00"
+    }
+  ],
+  "reviewerExecutedTheseGates": false
+}

@@ -1,0 +1,161 @@
+{
+  "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+  "unchangedAfterRun": true,
+  "pass": true,
+  "results": [
+    {
+      "name": "public-packages",
+      "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+      "command": [
+        "node",
+        "scripts/public-packages.mjs"
+      ],
+      "exitCode": 0,
+      "start": "2026-10-12T23:23:35.456490+00:00",
+      "end": "2026-10-12T23:23:35.491730+00:00"
+    },
+    {
+      "name": "architecture-package-cli-tests",
+      "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+      "command": [
+        "node",
+        "--test",
+        "scripts/architecture.test.mjs",
+        "scripts/public-packages.test.mjs",
+        "scripts/newsletter-cli.test.mjs"
+      ],
+      "exitCode": 0,
+      "start": "2026-10-12T23:23:35.491946+00:00",
+      "end": "2026-10-12T23:23:36.084370+00:00"
+    },
+    {
+      "name": "node-consumer",
+      "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+      "command": [
+        "node",
+        "--test",
+        "packages/qualification-newsletter/qualification.test.mjs"
+      ],
+      "exitCode": 0,
+      "start": "2026-10-12T23:23:36.084634+00:00",
+      "end": "2026-10-12T23:23:36.240929+00:00"
+    },
+    {
+      "name": "declarations",
+      "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+      "command": [
+        "node",
+        "packages/qualification-newsletter/declarations.mjs",
+        "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/declarations"
+      ],
+      "exitCode": 0,
+      "start": "2026-10-12T23:23:36.241145+00:00",
+      "end": "2026-10-12T23:23:39.594413+00:00"
+    },
+    {
+      "name": "browser",
+      "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+      "command": [
+        "node",
+        "packages/qualification-newsletter/browser-check.mjs",
+        "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/browser"
+      ],
+      "exitCode": 0,
+      "start": "2026-10-12T23:23:39.594961+00:00",
+      "end": "2026-10-12T23:23:40.509230+00:00"
+    },
+    {
+      "name": "workspace-typecheck",
+      "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+      "command": [
+        "/workspace/capiro-remaining/node_modules/.bin/tsc",
+        "-p",
+        "packages/qualification-newsletter/tsconfig.json"
+      ],
+      "exitCode": 0,
+      "start": "2026-10-12T23:23:40.509590+00:00",
+      "end": "2026-10-12T23:23:41.288068+00:00"
+    },
+    {
+      "name": "architecture",
+      "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+      "command": [
+        "node",
+        "scripts/architecture.mjs"
+      ],
+      "exitCode": 0,
+      "start": "2026-10-12T23:23:41.288281+00:00",
+      "end": "2026-10-12T23:23:42.675975+00:00"
+    },
+    {
+      "name": "format",
+      "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+      "command": [
+        "/workspace/capiro-remaining/node_modules/.bin/prettier",
+        "--check",
+        "packages/qualification-newsletter/fixed-clock.mjs",
+        "packages/qualification-newsletter/browser-entry.mjs",
+        "packages/qualification-newsletter/browser-check.mjs",
+        "packages/qualification-newsletter/qualification.test.mjs",
+        "packages/qualification-newsletter/declarations.mjs",
+        "packages/qualification-newsletter/package.json",
+        "packages/qualification-newsletter/tsconfig.json",
+        "scripts/newsletter-cli.test.mjs",
+        "package.json",
+        "package-lock.json",
+        "vendor/newsletter-public-packages.json"
+      ],
+      "exitCode": 0,
+      "start": "2026-10-12T23:23:42.676186+00:00",
+      "end": "2026-10-12T23:23:42.931527+00:00"
+    },
+    {
+      "name": "diff-check",
+      "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "HEAD^",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "start": "2026-10-12T23:23:42.931942+00:00",
+      "end": "2026-10-12T23:23:42.939781+00:00"
+    }
+  ],
+  "additionalChecks": [
+    {
+      "command": [
+        "/workspace/capiro-remaining/node_modules/.bin/eslint",
+        "--config",
+        "/workspace/capiro-remaining/apps/web/eslint.config.mjs",
+        "packages/qualification-newsletter/fixed-clock.mjs",
+        "packages/qualification-newsletter/browser-entry.mjs",
+        "packages/qualification-newsletter/browser-check.mjs",
+        "packages/qualification-newsletter/qualification.test.mjs",
+        "packages/qualification-newsletter/declarations.mjs",
+        "scripts/newsletter-cli.test.mjs"
+      ],
+      "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+      "exitCode": 0
+    },
+    {
+      "name": "source-continuity",
+      "passed": true
+    }
+  ],
+  "lintWarnings": [
+    "React detection falls back because receiving sparse checkout has no root install",
+    "Next pages directory absent in root-scoped tooling check"
+  ],
+  "notRun": [
+    "full PR16 root clean install",
+    "combined application gate",
+    "production build/server",
+    "full browser suites",
+    "Figma and accessibility",
+    "native auth/provider/durability",
+    "deployment"
+  ]
+}

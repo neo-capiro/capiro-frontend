@@ -1,0 +1,60 @@
+{
+  "records": [
+    {
+      "name": "node-positive",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "/workspace/capiro-remaining/node_modules/typescript/bin/tsc",
+        "-p",
+        "/tmp/capiro-newsletter-package-consumer-evidence/declarations-initial/node-positive.json"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "expectedExit": 0,
+      "pass": true
+    },
+    {
+      "name": "node-negative",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "/workspace/capiro-remaining/node_modules/typescript/bin/tsc",
+        "-p",
+        "/tmp/capiro-newsletter-package-consumer-evidence/declarations-initial/node-negative.json"
+      ],
+      "exitCode": 2,
+      "signal": null,
+      "spawnError": null,
+      "expectedExit": 2,
+      "pass": true
+    },
+    {
+      "name": "browser-positive",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "/workspace/capiro-remaining/node_modules/typescript/bin/tsc",
+        "-p",
+        "/tmp/capiro-newsletter-package-consumer-evidence/declarations-initial/browser-positive.json"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "expectedExit": 0,
+      "pass": true
+    },
+    {
+      "name": "browser-negative",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "/workspace/capiro-remaining/node_modules/typescript/bin/tsc",
+        "-p",
+        "/tmp/capiro-newsletter-package-consumer-evidence/declarations-initial/browser-negative.json"
+      ],
+      "exitCode": 2,
+      "signal": null,
+      "spawnError": null,
+      "expectedExit": 2,
+      "pass": true
+    }
+  ]
+}

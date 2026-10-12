@@ -1,0 +1,3 @@
+const browser = await esbuild.build({ absWorkingDir: consumer, entryPoints: ['browser-entry.mjs'],
+  outfile: 'browser-bundle.js', bundle: true, platform: 'browser', format: 'iife', globalName: 'PackedNewsletter',
+  target: ['es2022'], write: false, metafile: true, sourcemap: 'external' });

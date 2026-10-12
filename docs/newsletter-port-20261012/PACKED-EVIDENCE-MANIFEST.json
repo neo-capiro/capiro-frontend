@@ -1,0 +1,2518 @@
+{
+  "schema": "capiro-newsletter-packed-consumer-evidence/1",
+  "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+  "files": 417,
+  "bytes": 8324271,
+  "roots": {
+    "provenance": "/tmp/capiro-newsletter-package-verification",
+    "qualification": "/tmp/capiro-newsletter-package-consumer-evidence",
+    "independent-review": "/tmp/capiro-newsletter-consumer-review"
+  },
+  "exclusions": [
+    "Borrowed dependency installations and symlinks are outside all three evidence roots and are not published"
+  ],
+  "records": [
+    {
+      "path": "independent-review/CONTENT-VERIFICATION.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/CONTENT-VERIFICATION.json",
+      "bytes": 4587,
+      "sha256": "68d658b3c1305a0bf67de1ffaadb156da8f41603a95f4ef89e97c703dd8fde10"
+    },
+    {
+      "path": "independent-review/DISPOSITION.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/DISPOSITION.json",
+      "bytes": 1226,
+      "sha256": "42be23016a27c57ab9cb70250d4bac7bcfb04b7124cae41fb741d43e0456ef48"
+    },
+    {
+      "path": "independent-review/EVIDENCE-MANIFEST.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/EVIDENCE-MANIFEST.json",
+      "bytes": 14552,
+      "sha256": "1e0c8e2bc70d6ac5e237bf6d9e2578c0cdc5812c5d7b0ad84b56a3db59323298"
+    },
+    {
+      "path": "independent-review/EVIDENCE-MANIFEST.sha256",
+      "source": "/tmp/capiro-newsletter-consumer-review/EVIDENCE-MANIFEST.sha256",
+      "bytes": 89,
+      "sha256": "0a8842368992abcb4733e91970ef18b0114ace739f8a28c6d4bd4ac340987c45"
+    },
+    {
+      "path": "independent-review/FINAL-SOURCE-BINDINGS.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/FINAL-SOURCE-BINDINGS.json",
+      "bytes": 6588,
+      "sha256": "516634eba83c0361df9d72a1030f96ebf8a000fcfd1c663417a1011149713882"
+    },
+    {
+      "path": "independent-review/INSPECTED-FINAL-OWNER-EVIDENCE.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/INSPECTED-FINAL-OWNER-EVIDENCE.json",
+      "bytes": 11270,
+      "sha256": "8ce5ca14664df248e9a4e2174beb237b90e298b3aad020f1bfe43ac158922ae2"
+    },
+    {
+      "path": "independent-review/REVIEW.md",
+      "source": "/tmp/capiro-newsletter-consumer-review/REVIEW.md",
+      "bytes": 7814,
+      "sha256": "f3f3dd0f352ba5d86a2cc9ce4e4de6776142a586fa0faafaff697e824decf2ef"
+    },
+    {
+      "path": "independent-review/SIZE-REVIEW.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/SIZE-REVIEW.json",
+      "bytes": 846,
+      "sha256": "50d7eb777a06bef2d05b6255e514a140c4a8251a352d7409bdd5af4d6b8bc9a1"
+    },
+    {
+      "path": "independent-review/SOURCE-BINDINGS.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/SOURCE-BINDINGS.json",
+      "bytes": 4697,
+      "sha256": "a6a15510a4b1c7ec66d78b7856418208086aa47e1ff86389c21daa43f0e0facd"
+    },
+    {
+      "path": "independent-review/cli-final-source.log",
+      "source": "/tmp/capiro-newsletter-consumer-review/cli-final-source.log",
+      "bytes": 342,
+      "sha256": "de3afb1e0863ab7dc77031f4676e8aa3f3e6c6cf6386faad5d6479d50d3984e0"
+    },
+    {
+      "path": "independent-review/cli-independent.log",
+      "source": "/tmp/capiro-newsletter-consumer-review/cli-independent.log",
+      "bytes": 341,
+      "sha256": "70f6dc36ac3b5203494859582411b3a99af5f8c4313e9afa9fcf0ff7b4ef87d2"
+    },
+    {
+      "path": "independent-review/final-source-supplement/docs/newsletter-port-20261012/PACKED-CONSUMER.md",
+      "source": "/tmp/capiro-newsletter-consumer-review/final-source-supplement/docs/newsletter-port-20261012/PACKED-CONSUMER.md",
+      "bytes": 7425,
+      "sha256": "ac57a727ecf8f4020e970aa987a3200f1e244915a05139f588d70ce026d6d414"
+    },
+    {
+      "path": "independent-review/finalize.py",
+      "source": "/tmp/capiro-newsletter-consumer-review/finalize.py",
+      "bytes": 5164,
+      "sha256": "7adf1fba8ac15567b391491d853314df22251e23b6e9928e093b97e78fdbbce6"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/CONTINUITY.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/CONTINUITY.json",
+      "bytes": 1417,
+      "sha256": "6340f5dbe54471ed5852ce40a171fc8ed6d3ba34be1c8bed94d86b01d087fd02"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/SOURCE-BINDING.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/SOURCE-BINDING.json",
+      "bytes": 5043,
+      "sha256": "6c25f0f9f947270ccf2d2df381ecdbcd52e7510388c4123974b6bec1f02b3d0c"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/SUMMARY.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/SUMMARY.json",
+      "bytes": 5104,
+      "sha256": "001f2d2422c20be04451eb399f2ee62637a854d27dd80393762aaf1dc72c70e1"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/architecture-exit.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/architecture-exit.json",
+      "bytes": 257,
+      "sha256": "69b58f806f09efbf933d22eb81b8be0f91b03f6224a4be14e409495c9d8b8c44"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/architecture-package-cli-tests-exit.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/architecture-package-cli-tests-exit.json",
+      "bytes": 373,
+      "sha256": "bf67b706bf54150beff7daab814acfebf4c4202fb1b56d85980d0a1ee979bb2d"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/architecture-package-cli-tests.log",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/architecture-package-cli-tests.log",
+      "bytes": 3497,
+      "sha256": "61879ee56a286e8fb2f96122eb7112ec738d9d20188638425748c4ebd8636ce7"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/architecture.log",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/architecture.log",
+      "bytes": 782859,
+      "sha256": "fdb2167c05bd9d9ff4d80f8292053044f5cd71cb32218937c56e7a42594ce2a1"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/authored-lint-exit.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/authored-lint-exit.json",
+      "bytes": 569,
+      "sha256": "37f2a4a15b45187a51c1f8d87f2d64582bc4450fd433f813c9d9a02bb4727f3f"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/authored-lint.log",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/authored-lint.log",
+      "bytes": 392,
+      "sha256": "4775ffae98d38b9f61079a17341c782b14fc4c2e6c6d66e848360e3bdb0b69b7"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/browser-exit.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/browser-exit.json",
+      "bytes": 357,
+      "sha256": "ac1e2d0f852fc681dd0a732ec464edaaf187bf064cd30fcb0e50912db4c7041f"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/browser.log",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/browser.log",
+      "bytes": 252,
+      "sha256": "507c878f569624fc7f957df9b156630ba6d5433222c800aad29dc78431c2a415"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/browser/browser-module-graph.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/browser/browser-module-graph.json",
+      "bytes": 2119,
+      "sha256": "e82e91083a4aa4acf51ca3d9503666e930e007b3be30086454400baf82ae8f11"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/browser/browser-renderer-results.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/browser/browser-renderer-results.json",
+      "bytes": 54404,
+      "sha256": "57fbce61b8c59e915c4aaaa3f976bf1ed2dc41bbfff17215feca1306bbb5f103"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/browser/browser-results.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/browser/browser-results.json",
+      "bytes": 276,
+      "sha256": "95941e62016ec3d1c98a37f222645064f7e414cdc3cf27b59a01a76922ad4fdb"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/declarations-exit.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/declarations-exit.json",
+      "bytes": 366,
+      "sha256": "dacf4501b2fac0585e7277b321e83df038128d8737d4d8d38c17820c2e335b7a"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/declarations.log",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/declarations.log",
+      "bytes": 103,
+      "sha256": "5f4d14697523a5f51db10a63e8cb6f6185fdac960fd153fda9a7dc8be90b10e7"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/declarations/browser-negative-exit.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/declarations/browser-negative-exit.json",
+      "bytes": 387,
+      "sha256": "5e7fc3cad9cfc872ae008b7747463cc692c63f5df4dd12bf5546c1db0840940f"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/declarations/browser-negative.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/declarations/browser-negative.json",
+      "bytes": 404,
+      "sha256": "699deceb7c0b1aeb4999951b55b01d94fc36695a71861e11d4fbd543920800c7"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/declarations/browser-negative.log",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/declarations/browser-negative.log",
+      "bytes": 718,
+      "sha256": "b6507ecc037057b1154ef34d7e7046de58c2918d1add270b68636e4c80c5a483"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/declarations/browser-positive-exit.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/declarations/browser-positive-exit.json",
+      "bytes": 387,
+      "sha256": "2736bd52c522e2015dc051f5f5db39c6a47d0e4ff6d794cf67bf43296beb7b4b"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/declarations/browser-positive.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/declarations/browser-positive.json",
+      "bytes": 404,
+      "sha256": "9534802ad533ed96537f6f0044fa7afe1e5cebc5deb9ad7192341e88661c407f"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/declarations/browser-positive.log",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/declarations/browser-positive.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/declarations/declaration-results.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/declarations/declaration-results.json",
+      "bytes": 1853,
+      "sha256": "830abb39cae2c488d7a290c8d922ee3befaf21c699b27465338fc222d827384d"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/declarations/node-negative-exit.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/declarations/node-negative-exit.json",
+      "bytes": 381,
+      "sha256": "7c8ca676d5c5ef6ef4d0a818f78b4f572c8267917aa77b0b179bcc4ab8679ac9"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/declarations/node-negative.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/declarations/node-negative.json",
+      "bytes": 407,
+      "sha256": "8818859ca6b2a1f193eda907dbce0285d43e4599cfc953a02eadbe428edc3f11"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/declarations/node-negative.log",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/declarations/node-negative.log",
+      "bytes": 718,
+      "sha256": "b6507ecc037057b1154ef34d7e7046de58c2918d1add270b68636e4c80c5a483"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/declarations/node-positive-exit.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/declarations/node-positive-exit.json",
+      "bytes": 381,
+      "sha256": "2bdee1ec032aecbd4616ee356809a3d2d938ae3e931fc5a0bf1f151abdbb2b0b"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/declarations/node-positive.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/declarations/node-positive.json",
+      "bytes": 407,
+      "sha256": "db0c42efe9a1d72b6329e24fa3042d9651c87778cd5267a8ca1adb0871f1d482"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/declarations/node-positive.log",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/declarations/node-positive.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/diff-check-exit.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/diff-check-exit.json",
+      "bytes": 274,
+      "sha256": "78f9ef08cea1749e008bba1fd5d6a070c84db0eac9958470a50abb885ead6c1a"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/diff-check.log",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/format-exit.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/format-exit.json",
+      "bytes": 820,
+      "sha256": "29255e277ab98a9f2746f6d2f3d5988c60f54dd55fe69b66f36ba57ab2aeb158"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/format.log",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/format.log",
+      "bytes": 66,
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/node-consumer-exit.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/node-consumer-exit.json",
+      "bytes": 304,
+      "sha256": "2a0f19a7735b826677b113f908e5e8febb9d1362536c38199ad4d8aaa3009a57"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/node-consumer.log",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/node-consumer.log",
+      "bytes": 8720,
+      "sha256": "672421d292b995aed867e2112eb27d301d19759242cb83c1d095f6fcef3d451b"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/public-packages-exit.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/public-packages-exit.json",
+      "bytes": 263,
+      "sha256": "93a053298991b4d02ae499edb96e4baa13859a6c6a1fd88c9a4012d0664c4020"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/public-packages.log",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/public-packages.log",
+      "bytes": 759,
+      "sha256": "a41ce4777569fe931dd0feb294ca03cf6c639fe863134648d5404334fb6b8f76"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/workspace-typecheck-exit.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/workspace-typecheck-exit.json",
+      "bytes": 342,
+      "sha256": "f96800b88ec2715bd3c0b79c6beba99a877568f0efaf53cbcef7d41facb82220"
+    },
+    {
+      "path": "independent-review/inspected-final-owner-evidence/workspace-typecheck.log",
+      "source": "/tmp/capiro-newsletter-consumer-review/inspected-final-owner-evidence/workspace-typecheck.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "independent-review/source-snapshot/docs/newsletter-port-20261012/HANDOVER.md",
+      "source": "/tmp/capiro-newsletter-consumer-review/source-snapshot/docs/newsletter-port-20261012/HANDOVER.md",
+      "bytes": 4897,
+      "sha256": "d8b7b270d6ff9d8b7c424e550f44053cc73461cd8972e5f80d7e1cebc13988dc"
+    },
+    {
+      "path": "independent-review/source-snapshot/docs/newsletter-port-20261012/PACKED-CONSUMER-PLAN.md",
+      "source": "/tmp/capiro-newsletter-consumer-review/source-snapshot/docs/newsletter-port-20261012/PACKED-CONSUMER-PLAN.md",
+      "bytes": 2153,
+      "sha256": "7e1f2321a4ba4225c0c29157eb07013780051f6f5faac710f0ab5120f2cb4cf7"
+    },
+    {
+      "path": "independent-review/source-snapshot/package-lock.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/source-snapshot/package-lock.json",
+      "bytes": 511228,
+      "sha256": "7f9bd7d2f087017d10139ec57d383de26878bd4382440ed715929be3ac98e1f3"
+    },
+    {
+      "path": "independent-review/source-snapshot/package.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/source-snapshot/package.json",
+      "bytes": 2034,
+      "sha256": "f6159deb8588ef341d6ea5f48cb3d68a1534217758c012a813975a2d9570e51d"
+    },
+    {
+      "path": "independent-review/source-snapshot/packages/qualification-newsletter/README.md",
+      "source": "/tmp/capiro-newsletter-consumer-review/source-snapshot/packages/qualification-newsletter/README.md",
+      "bytes": 2264,
+      "sha256": "ec319597a797ab9cac43d36016fe6ffd7f52ffae312f9fe4efff37c52ce67add"
+    },
+    {
+      "path": "independent-review/source-snapshot/packages/qualification-newsletter/browser-check.mjs",
+      "source": "/tmp/capiro-newsletter-consumer-review/source-snapshot/packages/qualification-newsletter/browser-check.mjs",
+      "bytes": 5013,
+      "sha256": "2b5c600fb592987c5c27516812aa089ef1f3d0a779680f12bd2f1d3cf9e556a1"
+    },
+    {
+      "path": "independent-review/source-snapshot/packages/qualification-newsletter/browser-entry.mjs",
+      "source": "/tmp/capiro-newsletter-consumer-review/source-snapshot/packages/qualification-newsletter/browser-entry.mjs",
+      "bytes": 361,
+      "sha256": "5159b6e71c45780c8d1882c8745c1a665177f5f6314a3a01154a10c79806ca1c"
+    },
+    {
+      "path": "independent-review/source-snapshot/packages/qualification-newsletter/declarations.mjs",
+      "source": "/tmp/capiro-newsletter-consumer-review/source-snapshot/packages/qualification-newsletter/declarations.mjs",
+      "bytes": 3871,
+      "sha256": "788c10e686caaed0286af1948e754dbd2d3334ec33389a5ec708d4b5287a9ba9"
+    },
+    {
+      "path": "independent-review/source-snapshot/packages/qualification-newsletter/fixed-clock.mjs",
+      "source": "/tmp/capiro-newsletter-consumer-review/source-snapshot/packages/qualification-newsletter/fixed-clock.mjs",
+      "bytes": 643,
+      "sha256": "7a1bd66f91f6736c258faaea3e3f60fc9dde8d2669a5ff3529c7c81b7ff83385"
+    },
+    {
+      "path": "independent-review/source-snapshot/packages/qualification-newsletter/fixtures/PUBLIC-ENTRY-BINDINGS.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/source-snapshot/packages/qualification-newsletter/fixtures/PUBLIC-ENTRY-BINDINGS.json",
+      "bytes": 2510,
+      "sha256": "c82b35648c41837c7a5451582a6b5097f6519610ebdb3b46efc9e0dbdd48549a"
+    },
+    {
+      "path": "independent-review/source-snapshot/packages/qualification-newsletter/fixtures/consumer-negative.ts",
+      "source": "/tmp/capiro-newsletter-consumer-review/source-snapshot/packages/qualification-newsletter/fixtures/consumer-negative.ts",
+      "bytes": 410,
+      "sha256": "77dff4d542cea9386399c8ecd680f99c50b253643c5cf3b167cc2b6554d8461c"
+    },
+    {
+      "path": "independent-review/source-snapshot/packages/qualification-newsletter/fixtures/consumer-positive.ts",
+      "source": "/tmp/capiro-newsletter-consumer-review/source-snapshot/packages/qualification-newsletter/fixtures/consumer-positive.ts",
+      "bytes": 1503,
+      "sha256": "67539f5f8c8805273737ff8a8f15b5e4b9b7c513b201af176dafabd9158b2021"
+    },
+    {
+      "path": "independent-review/source-snapshot/packages/qualification-newsletter/fixtures/original-C-renderer-golden.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/source-snapshot/packages/qualification-newsletter/fixtures/original-C-renderer-golden.json",
+      "bytes": 54405,
+      "sha256": "b56b5d3526230e9011aaa82f258c7327816a60a78ddc020714c81e9c7d98b32f"
+    },
+    {
+      "path": "independent-review/source-snapshot/packages/qualification-newsletter/fixtures/renderer-characterizations.cjs",
+      "source": "/tmp/capiro-newsletter-consumer-review/source-snapshot/packages/qualification-newsletter/fixtures/renderer-characterizations.cjs",
+      "bytes": 8823,
+      "sha256": "ceb63415819751398431a4277c75949dac7a1ca2fac7d25b55aa31c4d46a66ba"
+    },
+    {
+      "path": "independent-review/source-snapshot/packages/qualification-newsletter/package.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/source-snapshot/packages/qualification-newsletter/package.json",
+      "bytes": 648,
+      "sha256": "144706ecdb0b3f29eee70ddbba7312467ec518238e5af4fbf7fa6c3d3795e7e1"
+    },
+    {
+      "path": "independent-review/source-snapshot/packages/qualification-newsletter/qualification.test.mjs",
+      "source": "/tmp/capiro-newsletter-consumer-review/source-snapshot/packages/qualification-newsletter/qualification.test.mjs",
+      "bytes": 2963,
+      "sha256": "fb40d8a105dd86278f58d46788deb72de7616cf403fc00ef21c6cffd2212b0f3"
+    },
+    {
+      "path": "independent-review/source-snapshot/packages/qualification-newsletter/tsconfig.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/source-snapshot/packages/qualification-newsletter/tsconfig.json",
+      "bytes": 311,
+      "sha256": "28927e603338c74b0c9b661bd0abb2811ab08fb5a8504bed89ea7e91d00ccace"
+    },
+    {
+      "path": "independent-review/source-snapshot/scripts/architecture.test.mjs",
+      "source": "/tmp/capiro-newsletter-consumer-review/source-snapshot/scripts/architecture.test.mjs",
+      "bytes": 22615,
+      "sha256": "cef6885b5a3c174c62a41657f92b803cdf6b599a8dd0eab6c7d5193a789f2ed5"
+    },
+    {
+      "path": "independent-review/source-snapshot/scripts/architecture/dependencies.mjs",
+      "source": "/tmp/capiro-newsletter-consumer-review/source-snapshot/scripts/architecture/dependencies.mjs",
+      "bytes": 5027,
+      "sha256": "e24fb0affc7b8397a970b1d76df126ca32bb86f9468f4062488c648512d69af8"
+    },
+    {
+      "path": "independent-review/source-snapshot/scripts/newsletter-cli.test.mjs",
+      "source": "/tmp/capiro-newsletter-consumer-review/source-snapshot/scripts/newsletter-cli.test.mjs",
+      "bytes": 1437,
+      "sha256": "63625b7fc3c792c92379f7b3b7469a6268a3eaae2c3ba52333d201cde30deddd"
+    },
+    {
+      "path": "independent-review/source-snapshot/scripts/public-packages.mjs",
+      "source": "/tmp/capiro-newsletter-consumer-review/source-snapshot/scripts/public-packages.mjs",
+      "bytes": 2926,
+      "sha256": "1d3585ed0b380a039b8f42e7d50632fc640e88688de40b345d23fc98459065a0"
+    },
+    {
+      "path": "independent-review/source-snapshot/vendor/README.md",
+      "source": "/tmp/capiro-newsletter-consumer-review/source-snapshot/vendor/README.md",
+      "bytes": 2263,
+      "sha256": "3e5940387698cbb944b2b23c99f85f30c0fb495956d8b6e96c1da9ce66bbfc9d"
+    },
+    {
+      "path": "independent-review/source-snapshot/vendor/newsletter-public-packages.json",
+      "source": "/tmp/capiro-newsletter-consumer-review/source-snapshot/vendor/newsletter-public-packages.json",
+      "bytes": 1052,
+      "sha256": "03a191db7912271f585abb2199fd1404170ef76739f8083047666aaf22c4f855"
+    },
+    {
+      "path": "independent-review/source.diff",
+      "source": "/tmp/capiro-newsletter-consumer-review/source.diff",
+      "bytes": 11836,
+      "sha256": "74666a5aa212a12f061c0ae0627227f76f2f4bfcb56ef926d77bfc0343cb7ee5"
+    },
+    {
+      "path": "independent-review/verify-attempt1.log",
+      "source": "/tmp/capiro-newsletter-consumer-review/verify-attempt1.log",
+      "bytes": 331,
+      "sha256": "c73266baed3674f631730f39d905571d925374c70553c37ccbbb12376ec8995a"
+    },
+    {
+      "path": "independent-review/verify-attempt1.py",
+      "source": "/tmp/capiro-newsletter-consumer-review/verify-attempt1.py",
+      "bytes": 6426,
+      "sha256": "491b1809420ba6de90d78aef4f2073ef44e0a180aae978a9026c2d469da4b1df"
+    },
+    {
+      "path": "independent-review/verify.py",
+      "source": "/tmp/capiro-newsletter-consumer-review/verify.py",
+      "bytes": 6659,
+      "sha256": "d524b07e59daad9e6151b8d648992c5e7e12c13cf3735759b45e126931a825f4"
+    },
+    {
+      "path": "provenance/ARTIFACT-ORIGIN.json",
+      "source": "/tmp/capiro-newsletter-package-verification/ARTIFACT-ORIGIN.json",
+      "bytes": 437,
+      "sha256": "3637374b559d9c7f9e381aa262702b1f0d2a09a0a27d8a081e79bf8454d73920"
+    },
+    {
+      "path": "provenance/BACKEND-CONTENT-VERIFICATION.json",
+      "source": "/tmp/capiro-newsletter-package-verification/BACKEND-CONTENT-VERIFICATION.json",
+      "bytes": 4257,
+      "sha256": "0521c4fc1b77a0450e1d08ce5b93f259ef1542d9affd6855ea2c2355df175003"
+    },
+    {
+      "path": "provenance/BACKEND-FILE-ORIGINS-ADDITIONAL.json",
+      "source": "/tmp/capiro-newsletter-package-verification/BACKEND-FILE-ORIGINS-ADDITIONAL.json",
+      "bytes": 1324,
+      "sha256": "e3550cae5a8fc24fdff6c9da757d9d03660edfdb3b5e6004b5c166c23fb9c040"
+    },
+    {
+      "path": "provenance/BACKEND-FILE-ORIGINS.json",
+      "source": "/tmp/capiro-newsletter-package-verification/BACKEND-FILE-ORIGINS.json",
+      "bytes": 1376,
+      "sha256": "34c253d6eeaa6cdeaa50657f4c8be1d15d8194fafd2d4b675fbe905c12a1f0dc"
+    },
+    {
+      "path": "provenance/BROWSER-CLOSURE-STATIC.json",
+      "source": "/tmp/capiro-newsletter-package-verification/BROWSER-CLOSURE-STATIC.json",
+      "bytes": 9051,
+      "sha256": "870451566095d6e9f7dc50d166c0037293d637392ecfed424a61e79da660fa5c"
+    },
+    {
+      "path": "provenance/CONSUMER-PREPARATION.md",
+      "source": "/tmp/capiro-newsletter-package-verification/CONSUMER-PREPARATION.md",
+      "bytes": 8553,
+      "sha256": "0609973152bd3cfba54d69ed0d25cde5d8012fcf1e6f7fbccc29e6ad02b310b2"
+    },
+    {
+      "path": "provenance/CORPUS-ORIGINS.json",
+      "source": "/tmp/capiro-newsletter-package-verification/CORPUS-ORIGINS.json",
+      "bytes": 5349,
+      "sha256": "34660b81ab9af314dcd4ee380eee9dfb245886bf91f7615bff8d1aba83bf13f9"
+    },
+    {
+      "path": "provenance/CORPUS-VERIFICATION.json",
+      "source": "/tmp/capiro-newsletter-package-verification/CORPUS-VERIFICATION.json",
+      "bytes": 23934,
+      "sha256": "05b30dbd28228d844cb6a5c2a26f83db1e6725b17b7584ccd2cb47037eb0eddc"
+    },
+    {
+      "path": "provenance/DIRECTORY-SAFE.json",
+      "source": "/tmp/capiro-newsletter-package-verification/DIRECTORY-SAFE.json",
+      "bytes": 2902,
+      "sha256": "00068d64c9c901eda3de58acf8d0d2d96b1ea23400dcfc7ff333ff39f4df7435"
+    },
+    {
+      "path": "provenance/ENTRY-VERIFICATION.json",
+      "source": "/tmp/capiro-newsletter-package-verification/ENTRY-VERIFICATION.json",
+      "bytes": 33072,
+      "sha256": "f214b2cc33e1104ea8d14fb366965dfb017550889dca02ea537a0fcbe636ff03"
+    },
+    {
+      "path": "provenance/EVIDENCE-MANIFEST.json",
+      "source": "/tmp/capiro-newsletter-package-verification/EVIDENCE-MANIFEST.json",
+      "bytes": 51813,
+      "sha256": "871fdf273c65172b2f11e0b139d5e427cb52300abc526ffc94db4d016b11bf1a"
+    },
+    {
+      "path": "provenance/EVIDENCE-MANIFEST.sha256",
+      "source": "/tmp/capiro-newsletter-package-verification/EVIDENCE-MANIFEST.sha256",
+      "bytes": 89,
+      "sha256": "964b5ed03aeb04a0db8e22cbef326ceed0800676683f530fc18a0bd83232a58d"
+    },
+    {
+      "path": "provenance/FINAL-PREPARATION-RECEIPT.json",
+      "source": "/tmp/capiro-newsletter-package-verification/FINAL-PREPARATION-RECEIPT.json",
+      "bytes": 381,
+      "sha256": "3df87f2bb55d8580cc356a192fe227040970cea45b45c3e605a94cd6875ef9fd"
+    },
+    {
+      "path": "provenance/FRONTEND-READ-RECEIPT.json",
+      "source": "/tmp/capiro-newsletter-package-verification/FRONTEND-READ-RECEIPT.json",
+      "bytes": 2810,
+      "sha256": "15f334b9c9abefddaf1a35c79f8dcc2e8b75f848ddd9e907b111eb3fa79bc706"
+    },
+    {
+      "path": "provenance/GIT-COMMIT-SAFE.json",
+      "source": "/tmp/capiro-newsletter-package-verification/GIT-COMMIT-SAFE.json",
+      "bytes": 447,
+      "sha256": "183d468ff7f4f95792c0361b4b5a1bd58d1234d75c295fd3ab31e739d51870c9"
+    },
+    {
+      "path": "provenance/GIT-CONSUMER-EVIDENCE-TREE.json",
+      "source": "/tmp/capiro-newsletter-package-verification/GIT-CONSUMER-EVIDENCE-TREE.json",
+      "bytes": 39856,
+      "sha256": "621d13fa9674f2b5e1c60f35014cde15217dc4687b23725417c706d0238cb98b"
+    },
+    {
+      "path": "provenance/GIT-PACKAGES-TREE.json",
+      "source": "/tmp/capiro-newsletter-package-verification/GIT-PACKAGES-TREE.json",
+      "bytes": 2032,
+      "sha256": "582af3a6424b51f820f48972575bafce1de0ac35f8cf1afc08f45b4ec55ad720"
+    },
+    {
+      "path": "provenance/GIT-ROOT-TREE.json",
+      "source": "/tmp/capiro-newsletter-package-verification/GIT-ROOT-TREE.json",
+      "bytes": 11555,
+      "sha256": "8a80670138842b376639b5a087a82f65160f4b74347205b65df7c60df59b77ef"
+    },
+    {
+      "path": "provenance/GIT-SHARED-TREE.json",
+      "source": "/tmp/capiro-newsletter-package-verification/GIT-SHARED-TREE.json",
+      "bytes": 11865,
+      "sha256": "b923a00ed39f92110948b890f95a4d32f5dd4c20bf8b8f35f369cce6ba79e66d"
+    },
+    {
+      "path": "provenance/MAP-VERIFICATION.json",
+      "source": "/tmp/capiro-newsletter-package-verification/MAP-VERIFICATION.json",
+      "bytes": 9247,
+      "sha256": "a3342877e6b43dba43925724e60b7fabe7d7dd18be889957230838debca26c01"
+    },
+    {
+      "path": "provenance/PR2427-SAFE.json",
+      "source": "/tmp/capiro-newsletter-package-verification/PR2427-SAFE.json",
+      "bytes": 3363,
+      "sha256": "03d5d57d415a67c4477515c2776457d9120f00d1af9549ec8a3ad22f2aa7af8d"
+    },
+    {
+      "path": "provenance/REPORT.md",
+      "source": "/tmp/capiro-newsletter-package-verification/REPORT.md",
+      "bytes": 9065,
+      "sha256": "fc5649a5f57d2e91c0d172af7540c93010706af5747699f13460bedb64614803"
+    },
+    {
+      "path": "provenance/SOURCE-CONTINUITY.json",
+      "source": "/tmp/capiro-newsletter-package-verification/SOURCE-CONTINUITY.json",
+      "bytes": 10210,
+      "sha256": "52e9bd3d79ee9b3e02839b4b509eb3f7b79198d1f2ab1b5dcb44d9a685aae439"
+    },
+    {
+      "path": "provenance/STATIC-VERIFICATION.json",
+      "source": "/tmp/capiro-newsletter-package-verification/STATIC-VERIFICATION.json",
+      "bytes": 7487,
+      "sha256": "37c536472809cba3722cb44213bf72ef58000f58c2919373673f8547f9e76371"
+    },
+    {
+      "path": "provenance/artifact/capiro-shared-0.0.0.tgz",
+      "source": "/tmp/capiro-newsletter-package-verification/artifact/capiro-shared-0.0.0.tgz",
+      "bytes": 510772,
+      "sha256": "697d826647e88e7f8559da386be7de1ae6408dc61c73877b86c2e17275fd63ab"
+    },
+    {
+      "path": "provenance/artifact/transport-base64.txt",
+      "source": "/tmp/capiro-newsletter-package-verification/artifact/transport-base64.txt",
+      "bytes": 692383,
+      "sha256": "d5c7b37a83114ed7a5c544808e903f003e6885d4246eb1cf212954cf2b9d819a"
+    },
+    {
+      "path": "provenance/backend/docs/cleanup-outreach-metadata-retirement-contract-audit-20261012/NEWSLETTER-METADATA-CONTRACT.md",
+      "source": "/tmp/capiro-newsletter-package-verification/backend/docs/cleanup-outreach-metadata-retirement-contract-audit-20261012/NEWSLETTER-METADATA-CONTRACT.md",
+      "bytes": 6599,
+      "sha256": "b0c21379e1d0ea99f46db132129848e8c4332f3b35b57b746b734404c962c4bf"
+    },
+    {
+      "path": "provenance/backend/docs/cleanup-shared-packed-newsletter-independent-review-20261012/FINAL-REVIEW.md",
+      "source": "/tmp/capiro-newsletter-package-verification/backend/docs/cleanup-shared-packed-newsletter-independent-review-20261012/FINAL-REVIEW.md",
+      "bytes": 6161,
+      "sha256": "479c50428c76f8fdcaf6b6346b59cf81819824ca7eef0fd6ea6db684b41eb42d"
+    },
+    {
+      "path": "provenance/backend/docs/contracts/newsletter-outreach-response-routing.md",
+      "source": "/tmp/capiro-newsletter-package-verification/backend/docs/contracts/newsletter-outreach-response-routing.md",
+      "bytes": 3739,
+      "sha256": "dc8377aefa66ed65521154a680a0cc2f03532a2146c076b2e80c3aec054d83f6"
+    },
+    {
+      "path": "provenance/backend/docs/shared-newsletter-browser-handoff-20261012/HANDOFF.md",
+      "source": "/tmp/capiro-newsletter-package-verification/backend/docs/shared-newsletter-browser-handoff-20261012/HANDOFF.md",
+      "bytes": 6190,
+      "sha256": "241f7a1706a5822a0c4d8f934bc6c04150dd8293720f29c6d1d31f86b2d0bb28"
+    },
+    {
+      "path": "provenance/backend/docs/shared-newsletter-packed-distribution-20261012/BUILD-RECEIPT.json",
+      "source": "/tmp/capiro-newsletter-package-verification/backend/docs/shared-newsletter-packed-distribution-20261012/BUILD-RECEIPT.json",
+      "bytes": 1379,
+      "sha256": "6ee51964ea038d69c6c5210b8bdd92fdb39980900e0064de0e3b081f662be72e"
+    },
+    {
+      "path": "provenance/backend/docs/shared-newsletter-packed-distribution-20261012/CONSUMER-QUALIFICATION.json",
+      "source": "/tmp/capiro-newsletter-package-verification/backend/docs/shared-newsletter-packed-distribution-20261012/CONSUMER-QUALIFICATION.json",
+      "bytes": 7698,
+      "sha256": "404268e36daacf8938ca3bb2b2e58507f915795474dbed68c372f0a976451cd3"
+    },
+    {
+      "path": "provenance/backend/docs/shared-newsletter-packed-distribution-20261012/HANDOFF.md",
+      "source": "/tmp/capiro-newsletter-package-verification/backend/docs/shared-newsletter-packed-distribution-20261012/HANDOFF.md",
+      "bytes": 6907,
+      "sha256": "f6cef67378a9ce8906c198224c43e67f3f2591b3661740aca113824736526041"
+    },
+    {
+      "path": "provenance/backend/docs/shared-newsletter-packed-distribution-20261012/PACKED-MANIFEST.json",
+      "source": "/tmp/capiro-newsletter-package-verification/backend/docs/shared-newsletter-packed-distribution-20261012/PACKED-MANIFEST.json",
+      "bytes": 85935,
+      "sha256": "02a5a379790da3eb96035b5a022ca7366d03f0ad4c179a44eb4402191ba9aa9b"
+    },
+    {
+      "path": "provenance/backend/docs/shared-newsletter-packed-distribution-20261012/evidence/canonical-source-binding.json",
+      "source": "/tmp/capiro-newsletter-package-verification/backend/docs/shared-newsletter-packed-distribution-20261012/evidence/canonical-source-binding.json",
+      "bytes": 15498,
+      "sha256": "f05f3526ea7a73f15b23ad2b5ff9b9f198607fcacf48a0d9559cff8b7f2584e7"
+    },
+    {
+      "path": "provenance/backend/packages/shared/package.json",
+      "source": "/tmp/capiro-newsletter-package-verification/backend/packages/shared/package.json",
+      "bytes": 3761,
+      "sha256": "3ec63a174f34c80651c3ca3b7e82132857dabccaf94018bb7ff996a1b4297ddf"
+    },
+    {
+      "path": "provenance/backend/packages/shared/tsconfig.json",
+      "source": "/tmp/capiro-newsletter-package-verification/backend/packages/shared/tsconfig.json",
+      "bytes": 686,
+      "sha256": "89278950647f196ac9ae3c088f96a35f83e2fa45a7c28c563af3b2e2c059dab5"
+    },
+    {
+      "path": "provenance/backend/tsconfig.base.json",
+      "source": "/tmp/capiro-newsletter-package-verification/backend/tsconfig.base.json",
+      "bytes": 471,
+      "sha256": "8ee4b594732f7ae6ffba44e3d591be59060a818720d2627fb14cfd3deec63aa7"
+    },
+    {
+      "path": "provenance/closure-attempt1.log",
+      "source": "/tmp/capiro-newsletter-package-verification/closure-attempt1.log",
+      "bytes": 1356,
+      "sha256": "a292472607a780362363aa8e8167010c6397704651bc9bfebbccfcf493673504"
+    },
+    {
+      "path": "provenance/closure-final.log",
+      "source": "/tmp/capiro-newsletter-package-verification/closure-final.log",
+      "bytes": 110,
+      "sha256": "f9b34c103a298cbd6906a68f77af2322dd1c5525d0686dd4562fd4b7a166a535"
+    },
+    {
+      "path": "provenance/consumer-corpus/browser-metafile.json",
+      "source": "/tmp/capiro-newsletter-package-verification/consumer-corpus/browser-metafile.json",
+      "bytes": 3919,
+      "sha256": "44225ba4c4d18f07c98d3c8e8905dcba5c41f65eb1e9706ccdd61b229afbbdcc"
+    },
+    {
+      "path": "provenance/consumer-corpus/browser-renderer-results.json",
+      "source": "/tmp/capiro-newsletter-package-verification/consumer-corpus/browser-renderer-results.json",
+      "bytes": 54405,
+      "sha256": "b56b5d3526230e9011aaa82f258c7327816a60a78ddc020714c81e9c7d98b32f"
+    },
+    {
+      "path": "provenance/consumer-corpus/consumer-negative.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/consumer-corpus/consumer-negative.ts",
+      "bytes": 410,
+      "sha256": "77dff4d542cea9386399c8ecd680f99c50b253643c5cf3b167cc2b6554d8461c"
+    },
+    {
+      "path": "provenance/consumer-corpus/consumer-positive.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/consumer-corpus/consumer-positive.ts",
+      "bytes": 1503,
+      "sha256": "67539f5f8c8805273737ff8a8f15b5e4b9b7c513b201af176dafabd9158b2021"
+    },
+    {
+      "path": "provenance/consumer-corpus/consumer-qualification.stdout.json",
+      "source": "/tmp/capiro-newsletter-package-verification/consumer-corpus/consumer-qualification.stdout.json",
+      "bytes": 249,
+      "sha256": "00a88f4644a6342f0cd094641ef7b5d0ba816a5aff24a7fbf23a1c25c9a05a4d"
+    },
+    {
+      "path": "provenance/consumer-corpus/original-C-renderer-golden.json",
+      "source": "/tmp/capiro-newsletter-package-verification/consumer-corpus/original-C-renderer-golden.json",
+      "bytes": 54405,
+      "sha256": "b56b5d3526230e9011aaa82f258c7327816a60a78ddc020714c81e9c7d98b32f"
+    },
+    {
+      "path": "provenance/consumer-corpus/packed-esm-imports.command.json",
+      "source": "/tmp/capiro-newsletter-package-verification/consumer-corpus/packed-esm-imports.command.json",
+      "bytes": 191,
+      "sha256": "060052ac4e9c334bc58f0e31ec0f14ed7adb8ee4f0156dbab621928e1ff5d728"
+    },
+    {
+      "path": "provenance/consumer-corpus/packed-esm-imports.log",
+      "source": "/tmp/capiro-newsletter-package-verification/consumer-corpus/packed-esm-imports.log",
+      "bytes": 68,
+      "sha256": "3a8fce20fb3f56a91278db2e5b8cd4297d99f95663d8a88b8a2bd00f7f841a8d"
+    },
+    {
+      "path": "provenance/consumer-corpus/packed-renderer-results.json",
+      "source": "/tmp/capiro-newsletter-package-verification/consumer-corpus/packed-renderer-results.json",
+      "bytes": 54405,
+      "sha256": "b56b5d3526230e9011aaa82f258c7327816a60a78ddc020714c81e9c7d98b32f"
+    },
+    {
+      "path": "provenance/consumer-corpus/packed-types-browser-negative.command.json",
+      "source": "/tmp/capiro-newsletter-package-verification/consumer-corpus/packed-types-browser-negative.command.json",
+      "bytes": 278,
+      "sha256": "fea07c2420ab91c6ddf597a9b2ff8fae4b83d7fbc4b4a6c72f0a9371b9982e4c"
+    },
+    {
+      "path": "provenance/consumer-corpus/packed-types-browser-negative.log",
+      "source": "/tmp/capiro-newsletter-package-verification/consumer-corpus/packed-types-browser-negative.log",
+      "bytes": 589,
+      "sha256": "960eaf4a0f529eb27f884c6bd773e57dd2015e8e487f68568fc568bb7d7b37bb"
+    },
+    {
+      "path": "provenance/consumer-corpus/packed-types-browser-positive.command.json",
+      "source": "/tmp/capiro-newsletter-package-verification/consumer-corpus/packed-types-browser-positive.command.json",
+      "bytes": 269,
+      "sha256": "e0202527941ee9e59464ff431d8471fcc8cb49ab73fbb19271afbfafbcdbecf1"
+    },
+    {
+      "path": "provenance/consumer-corpus/packed-types-node-negative.command.json",
+      "source": "/tmp/capiro-newsletter-package-verification/consumer-corpus/packed-types-node-negative.command.json",
+      "bytes": 275,
+      "sha256": "a60c6cdfb5ae3aeff223eddaf3ae2729c7ee695c920f63ade6443969e23af583"
+    },
+    {
+      "path": "provenance/consumer-corpus/packed-types-node-negative.log",
+      "source": "/tmp/capiro-newsletter-package-verification/consumer-corpus/packed-types-node-negative.log",
+      "bytes": 589,
+      "sha256": "960eaf4a0f529eb27f884c6bd773e57dd2015e8e487f68568fc568bb7d7b37bb"
+    },
+    {
+      "path": "provenance/consumer-corpus/packed-types-node-positive.command.json",
+      "source": "/tmp/capiro-newsletter-package-verification/consumer-corpus/packed-types-node-positive.command.json",
+      "bytes": 266,
+      "sha256": "efbb5eda1793a7092e326b46414bc5b85c982dd61dd958d21296242cac9ea103"
+    },
+    {
+      "path": "provenance/consumer-corpus/qualify-packed-consumer.mjs",
+      "source": "/tmp/capiro-newsletter-package-verification/consumer-corpus/qualify-packed-consumer.mjs",
+      "bytes": 16868,
+      "sha256": "fe88480d48bc93f36db8ef0dcd25ce3e6904430cba9c1cd050d168f4aa92f824"
+    },
+    {
+      "path": "provenance/consumer-corpus/renderer-characterizations.cjs",
+      "source": "/tmp/capiro-newsletter-package-verification/consumer-corpus/renderer-characterizations.cjs",
+      "bytes": 8823,
+      "sha256": "ceb63415819751398431a4277c75949dac7a1ca2fac7d25b55aa31c4d46a66ba"
+    },
+    {
+      "path": "provenance/consumer-corpus/static-five-module-closure.json",
+      "source": "/tmp/capiro-newsletter-package-verification/consumer-corpus/static-five-module-closure.json",
+      "bytes": 2671,
+      "sha256": "60d9fded5ff63103b77e53dbab9ed8aa5aac9e565b672a142204342cc7895406"
+    },
+    {
+      "path": "provenance/inspect-closure-attempt1.cjs",
+      "source": "/tmp/capiro-newsletter-package-verification/inspect-closure-attempt1.cjs",
+      "bytes": 4456,
+      "sha256": "ef821bb2f171ba6b0dc3edfc2f806ad7789d776401b6003fa626a601fbef7c82"
+    },
+    {
+      "path": "provenance/inspect-closure.cjs",
+      "source": "/tmp/capiro-newsletter-package-verification/inspect-closure.cjs",
+      "bytes": 5531,
+      "sha256": "24cadbc2bc0fce0984d50d4de86d24f93c9ad885f0547cca77f32c48ddee3743"
+    },
+    {
+      "path": "provenance/prepare-corpus.py",
+      "source": "/tmp/capiro-newsletter-package-verification/prepare-corpus.py",
+      "bytes": 7051,
+      "sha256": "820016bd37e900f1f9c848c66b5d4612f090f3b09dc3b8ccf0109dbbb227738b"
+    },
+    {
+      "path": "provenance/prepared-consumer/DERIVATION.json",
+      "source": "/tmp/capiro-newsletter-package-verification/prepared-consumer/DERIVATION.json",
+      "bytes": 10002,
+      "sha256": "ece00046cb6bcdf25c56bf5eacd39e811be6583d7dc7b4a161764a97059bae67"
+    },
+    {
+      "path": "provenance/prepared-consumer/browser-build-options-excerpt.txt",
+      "source": "/tmp/capiro-newsletter-package-verification/prepared-consumer/browser-build-options-excerpt.txt",
+      "bytes": 292,
+      "sha256": "720f41ba43950feebcd4cb5016472a72255c5c03776ced6ff783bb98f559e538"
+    },
+    {
+      "path": "provenance/prepared-consumer/browser-entry.mjs",
+      "source": "/tmp/capiro-newsletter-package-verification/prepared-consumer/browser-entry.mjs",
+      "bytes": 221,
+      "sha256": "0f8efa3e9c36fea411e5209dcebf7db569f3bb3842ccbb956603b13391d3c3cd"
+    },
+    {
+      "path": "provenance/prepared-consumer/consumer-negative.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/prepared-consumer/consumer-negative.ts",
+      "bytes": 410,
+      "sha256": "77dff4d542cea9386399c8ecd680f99c50b253643c5cf3b167cc2b6554d8461c"
+    },
+    {
+      "path": "provenance/prepared-consumer/consumer-positive.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/prepared-consumer/consumer-positive.ts",
+      "bytes": 1503,
+      "sha256": "67539f5f8c8805273737ff8a8f15b5e4b9b7c513b201af176dafabd9158b2021"
+    },
+    {
+      "path": "provenance/prepared-consumer/consumer.mjs",
+      "source": "/tmp/capiro-newsletter-package-verification/prepared-consumer/consumer.mjs",
+      "bytes": 544,
+      "sha256": "bdc836867468d8480ac6f3559fba755eeef94ce3650dd0060a6150ebd18fe5ca"
+    },
+    {
+      "path": "provenance/prepared-consumer/fixed-sandbox-excerpt.txt",
+      "source": "/tmp/capiro-newsletter-package-verification/prepared-consumer/fixed-sandbox-excerpt.txt",
+      "bytes": 387,
+      "sha256": "b3d8a089dbfe8bfbc2dbdce57ac3602e2e3cb6177e30f2329bdf06a04a0f3a62"
+    },
+    {
+      "path": "provenance/prepared-consumer/original-C-renderer-golden.json",
+      "source": "/tmp/capiro-newsletter-package-verification/prepared-consumer/original-C-renderer-golden.json",
+      "bytes": 54405,
+      "sha256": "b56b5d3526230e9011aaa82f258c7327816a60a78ddc020714c81e9c7d98b32f"
+    },
+    {
+      "path": "provenance/prepared-consumer/renderer-characterizations.cjs",
+      "source": "/tmp/capiro-newsletter-package-verification/prepared-consumer/renderer-characterizations.cjs",
+      "bytes": 8823,
+      "sha256": "ceb63415819751398431a4277c75949dac7a1ca2fac7d25b55aa31c4d46a66ba"
+    },
+    {
+      "path": "provenance/prepared-consumer/tsconfig-browser-negative.json",
+      "source": "/tmp/capiro-newsletter-package-verification/prepared-consumer/tsconfig-browser-negative.json",
+      "bytes": 327,
+      "sha256": "925fa9bec308efe8274c48073c62b78a625b3c607b7aac43f727bee867b431e3"
+    },
+    {
+      "path": "provenance/prepared-consumer/tsconfig-browser.json",
+      "source": "/tmp/capiro-newsletter-package-verification/prepared-consumer/tsconfig-browser.json",
+      "bytes": 327,
+      "sha256": "cbf1a65d321798ac252c4d692770401692ee1e96e61835e522260a3c9fedfc77"
+    },
+    {
+      "path": "provenance/prepared-consumer/tsconfig-node-negative.json",
+      "source": "/tmp/capiro-newsletter-package-verification/prepared-consumer/tsconfig-node-negative.json",
+      "bytes": 330,
+      "sha256": "fcde867ce080963cff07647c9cf6512b552657a498265b17f94a216695172251"
+    },
+    {
+      "path": "provenance/prepared-consumer/tsconfig-node.json",
+      "source": "/tmp/capiro-newsletter-package-verification/prepared-consumer/tsconfig-node.json",
+      "bytes": 330,
+      "sha256": "20e1adb4a3711fa7977441a2459b47ec2fac4f3c87ba3106b0bf717f82ec1046"
+    },
+    {
+      "path": "provenance/static-verification.log",
+      "source": "/tmp/capiro-newsletter-package-verification/static-verification.log",
+      "bytes": 296,
+      "sha256": "890d7dd52f0a04390ccb5ec99ca75c9947b5e806d4ad6b8c2f529da9c02f79eb"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/ai-model-policy.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/ai-model-policy.d.ts",
+      "bytes": 1280,
+      "sha256": "60dde3f5524c4a5f29a06359f38a075bfedeb40dcf85a1a961062cc6a99f37ea"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/ai-model-policy.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/ai-model-policy.d.ts.map",
+      "bytes": 711,
+      "sha256": "af2aebed9c0426d9a37a51055af7b89a3d70475f1a41d715333548414f5d4528"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/ai-model-policy.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/ai-model-policy.js",
+      "bytes": 5334,
+      "sha256": "9a80a7b3a981153a92f81cec499866e4105d4632d349003b6ba9182aba7e4420"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/ai-model-policy.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/ai-model-policy.js.map",
+      "bytes": 4469,
+      "sha256": "172a64d61cab02564182534095db3654a36cebca543e94a115af65942bea8ba9"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/client-memory-wall.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/client-memory-wall.d.ts",
+      "bytes": 651,
+      "sha256": "76e2282167b3e2077863706012534fd71e4409f3333878f4d5c4a2e6adce9147"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/client-memory-wall.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/client-memory-wall.d.ts.map",
+      "bytes": 440,
+      "sha256": "60d1a05329b097b040a7805e7366aab76d18c0369c1778be9f152e4a52fb9897"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/client-memory-wall.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/client-memory-wall.js",
+      "bytes": 876,
+      "sha256": "04b5ec4ac716081380b3abffafb153e415a555254654770353d156bd99dad369"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/client-memory-wall.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/client-memory-wall.js.map",
+      "bytes": 392,
+      "sha256": "ff139b8372114a4e9bac91002b752524b4c353d8cf6d603b80d879981025b09e"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/client-objective-destination.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/client-objective-destination.d.ts",
+      "bytes": 1427,
+      "sha256": "59cf05a92aff6e76a47e0d9a177f7ea4d4b52f036d4f41d90c19c1624601e14b"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/client-objective-destination.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/client-objective-destination.d.ts.map",
+      "bytes": 921,
+      "sha256": "ff2ee63ed27ab7bd35055e22a47fb15098c6e51d9efec82e28ed2fd909b33974"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/client-objective-destination.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/client-objective-destination.js",
+      "bytes": 3738,
+      "sha256": "00ac92eb29a2d4e37a7d792ec032c0d3dc37a0abc9e09bf3eb1f221c990b632c"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/client-objective-destination.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/client-objective-destination.js.map",
+      "bytes": 2215,
+      "sha256": "ff80e765e2cc7a72bad3c40e76eb0f2cd43d6fd916f24be85dd32fd5ca70a04b"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/client-registration-integrity.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/client-registration-integrity.d.ts",
+      "bytes": 1312,
+      "sha256": "30e6e19d27434681f2fc0d740f6186ebf56a85f96167c596081a6155738d6992"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/client-registration-integrity.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/client-registration-integrity.d.ts.map",
+      "bytes": 920,
+      "sha256": "a5d29726512d7aa04134c1de5bd7e4eaadbcac139f18897f72302cce68c54557"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/client-registration-integrity.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/client-registration-integrity.js",
+      "bytes": 7738,
+      "sha256": "afaa3ef7813e6917a93f42d9b314aaea4a6b9c66f86812ef0262205764d857e6"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/client-registration-integrity.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/client-registration-integrity.js.map",
+      "bytes": 6102,
+      "sha256": "0840004b5f9f0d18a7ee32488af5de42d1a5db42769ce0b8e0b890c0d03f06ca"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/defense-budget-line.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/defense-budget-line.d.ts",
+      "bytes": 1564,
+      "sha256": "35e2007ec3696dfe52af2d2566613e7ff15ad460a1ce1c8916230753cb21367b"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/defense-budget-line.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/defense-budget-line.d.ts.map",
+      "bytes": 697,
+      "sha256": "d324055cdbfc659c418d0b2767ff8f56c31b8c9c4ed54b966ada7ec83cb12ece"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/defense-budget-line.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/defense-budget-line.js",
+      "bytes": 5399,
+      "sha256": "28b6bcd7e3fe89786c1ec54a3df96ced742d416c2b4c76915beb75e94b34ffd6"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/defense-budget-line.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/defense-budget-line.js.map",
+      "bytes": 2652,
+      "sha256": "ed7f34f4de86b0367317d6dc6745313eeddac61ffbb1c1e1c207862487f2c6ae"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/defense-research.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/defense-research.d.ts",
+      "bytes": 20390,
+      "sha256": "21e999a9d9f1f7f5bf56264b4a8f0ed350dd6d9bab222afa683b37e882740973"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/defense-research.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/defense-research.d.ts.map",
+      "bytes": 18480,
+      "sha256": "8f27145c70da84d9903224ff23514cabd427a775ab89f6ef5d3692da4ca59bdd"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/defense-research.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/defense-research.js",
+      "bytes": 121,
+      "sha256": "77a6ef9f90af110b57ca5348741e344a5b82b295bafd536ddcb172be35083c7a"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/defense-research.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/defense-research.js.map",
+      "bytes": 124,
+      "sha256": "dab4c2cd2fb268a9fb161d4bfe1d2c81acd476c1cb8440182a9d159014d15b94"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/funding-claim.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/funding-claim.d.ts",
+      "bytes": 16089,
+      "sha256": "3797e8cddcd42d20ab215269b2272ef01c8fa112283f568f56ab328f5c466ae8"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/funding-claim.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/funding-claim.d.ts.map",
+      "bytes": 7232,
+      "sha256": "6fdb8426bc5c8240bf3c95fb01f57ec8e407ad204399f0af40bead1b1639aeb3"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/funding-claim.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/funding-claim.js",
+      "bytes": 17500,
+      "sha256": "f425e8691cdd73331fe670e7bd42b25d9b1132d9df1194d4a802823ca6ee29be"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/funding-claim.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/funding-claim.js.map",
+      "bytes": 11322,
+      "sha256": "1ca5e7562c20e5df9f727dc3cd0131a797b111823863905294c1600bd46f58c2"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/funding-opportunities-v2-detail.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/funding-opportunities-v2-detail.d.ts",
+      "bytes": 6942,
+      "sha256": "55ab2eb9693f3dc828f42d53b84035f02b804e74a89302766ba899f2918b26ff"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/funding-opportunities-v2-detail.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/funding-opportunities-v2-detail.d.ts.map",
+      "bytes": 5520,
+      "sha256": "5098639144314b5ce098de7e9fb780879dbda69d41a248dfed1089e1ae2d6fff"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/funding-opportunities-v2-detail.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/funding-opportunities-v2-detail.js",
+      "bytes": 136,
+      "sha256": "523a280ddb7650826c2b0a3dbc76eaafa227b8bd19354583ca058449c98809bd"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/funding-opportunities-v2-detail.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/funding-opportunities-v2-detail.js.map",
+      "bytes": 154,
+      "sha256": "aeb87e3de3bd3f475670c84f0d444235965e70434e8168807c717c7f0b7dba80"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/funding-opportunities-v2-workflow.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/funding-opportunities-v2-workflow.d.ts",
+      "bytes": 1836,
+      "sha256": "de42f99e2dfe5271ba1d123deed1ab96665efee38b66bfde510ce8f741b4e706"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/funding-opportunities-v2-workflow.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/funding-opportunities-v2-workflow.d.ts.map",
+      "bytes": 1725,
+      "sha256": "7c3257ab54b74c1bbafe61f773121830f8c57a2e849220721e22fb9ee4118d8a"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/funding-opportunities-v2-workflow.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/funding-opportunities-v2-workflow.js",
+      "bytes": 138,
+      "sha256": "633d9329afa90fe37ab7dbb986e21d84fe1f73e77d306cf9a53a35be5c18325f"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/funding-opportunities-v2-workflow.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/funding-opportunities-v2-workflow.js.map",
+      "bytes": 158,
+      "sha256": "82a846b0c7d28938614d199bf4863b2cd23ecd930180cdd66d55ab8973c1aff5"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/funding-opportunities-v2.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/funding-opportunities-v2.d.ts",
+      "bytes": 7137,
+      "sha256": "1214085e5511599ade254f0359b41d8d4df2aa8ac40c442ea6448d450111dc89"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/funding-opportunities-v2.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/funding-opportunities-v2.d.ts.map",
+      "bytes": 5598,
+      "sha256": "926dd6410f42b662166a282ac6aba29842777a81f7bf30f2399b6ade06aff2e7"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/funding-opportunities-v2.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/funding-opportunities-v2.js",
+      "bytes": 8937,
+      "sha256": "349f734882d845f19265b3dfe09924d26a7e16b38c7f276a5b2e67f62cb7bfb3"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/funding-opportunities-v2.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/funding-opportunities-v2.js.map",
+      "bytes": 9409,
+      "sha256": "3297b0753b4484fa359ca9a1c46769b006e00d0344bfa4bca6bd0150ab7136e7"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/funding-priorities.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/funding-priorities.d.ts",
+      "bytes": 650,
+      "sha256": "06bbb72d29fcfb4ed527b64df8d2a702a913db541fe453267cb9580f1663e963"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/funding-priorities.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/funding-priorities.d.ts.map",
+      "bytes": 353,
+      "sha256": "2cef2de95853de66696080241e5394ac9cc6c5a96b6ac8be3b69b9c216f6b432"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/funding-priorities.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/funding-priorities.js",
+      "bytes": 1616,
+      "sha256": "6696f2c66af59584ff1d34c62259b4afda3e654f126c38cde407c041470b2ede"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/funding-priorities.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/funding-priorities.js.map",
+      "bytes": 1108,
+      "sha256": "cb44bc70f5eb9ba673edd5e014f9d01622f551848627b71a55149198cdf56222"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/index.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/index.d.ts",
+      "bytes": 203549,
+      "sha256": "5f4e51a02cc5e7c599fad29b2795c9fef48a2acda769fc06ac81ee959157cddd"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/index.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/index.d.ts.map",
+      "bytes": 27568,
+      "sha256": "8f723181c339882876a11f8d482434d876ad7915486fdb340f6ed71d3c88e2e8"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/index.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/index.js",
+      "bytes": 253411,
+      "sha256": "f83e0bd65710f78e06f9fbc7886bd30fcad8913e06cc1f37f0932bcefe788bd4"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/index.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/index.js.map",
+      "bytes": 110449,
+      "sha256": "9cae16e14eb079c547b2fd4ff632adb4cedbeabfad627c7169b8699b278f071b"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/legislative-research.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/legislative-research.d.ts",
+      "bytes": 3348,
+      "sha256": "f9f5fced53394bcd13ba7d9bd7b561770242670ba6905b1d2804de3c33f378c2"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/legislative-research.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/legislative-research.d.ts.map",
+      "bytes": 2513,
+      "sha256": "b315946c2cfb62e60e76fb573ca5e6c969034cdc29305b900ad9c2743676f923"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/legislative-research.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/legislative-research.js",
+      "bytes": 13461,
+      "sha256": "fff1ac3bee939da4aea1407cb06325c29295948060d4c269116e6b4ce18e6196"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/legislative-research.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/legislative-research.js.map",
+      "bytes": 13736,
+      "sha256": "1854f1fdd2f5b9a9ec17c3d587f6e61d6937a4b82ecbef9bffac0eb63c0c94a5"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/legiwatch-phase8.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/legiwatch-phase8.d.ts",
+      "bytes": 4425,
+      "sha256": "f8ba13557565bc468e515158d374f902904e87f7198c56a4c2ae1f7e1dc98fb8"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/legiwatch-phase8.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/legiwatch-phase8.d.ts.map",
+      "bytes": 2236,
+      "sha256": "963d1ef3c9a7a9b174c5946832415215d896d55db4833256ba2697d7287adbb2"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/legiwatch-phase8.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/legiwatch-phase8.js",
+      "bytes": 7924,
+      "sha256": "08df345fb7c85d878fa4ffedf19d869087db31868bb4788282ee8166cf8553b9"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/legiwatch-phase8.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/legiwatch-phase8.js.map",
+      "bytes": 7932,
+      "sha256": "b7d6c2bc6d8d0c40acf8154abdbfc13daf269a97edb76503149943e9c61eb86a"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/legiwatch-query.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/legiwatch-query.d.ts",
+      "bytes": 2123,
+      "sha256": "d65cab0d2803fd3fc2c54c7686414dd53fd01f8edddf2ddf0b094cf1a3e80a02"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/legiwatch-query.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/legiwatch-query.d.ts.map",
+      "bytes": 1618,
+      "sha256": "99daea2d1b7330d499654d06059178b6069b756a48df5b5299ffcba004e127d9"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/legiwatch-query.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/legiwatch-query.js",
+      "bytes": 10705,
+      "sha256": "cacc99ab453f9b1a512215d67f6e4a2b9c3a677872910563795a76de7ab34cbc"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/legiwatch-query.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/legiwatch-query.js.map",
+      "bytes": 11056,
+      "sha256": "158f7310641451e2d6f13409b6f2a2b30ecbd46f70620290425b05adcaade278"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/market-title.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/market-title.d.ts",
+      "bytes": 1203,
+      "sha256": "9102a69273b2ea83e11e53270fb550cd969e815544d03e40dbeba39f96a39e21"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/market-title.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/market-title.d.ts.map",
+      "bytes": 213,
+      "sha256": "605e13cd6c7c9ddef33e7a78f06314ebb0be5865e38e94e4c1bb7bb97be146fb"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/market-title.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/market-title.js",
+      "bytes": 2780,
+      "sha256": "339b9f6615f4e22e08d6a53542263e115dc822b328fa36d057ef9bf996fe0eec"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/market-title.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/market-title.js.map",
+      "bytes": 1507,
+      "sha256": "dff310bf3c9b0c1ceb0c187ae54c5762db2da1cd3fe1e824cc2e105756bdb8fb"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/meri-document-request.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/meri-document-request.d.ts",
+      "bytes": 971,
+      "sha256": "f42e2356c99b735659003bf58064c3f95627c1c40cb8c37f439ad9cfd02785d3"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/meri-document-request.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/meri-document-request.d.ts.map",
+      "bytes": 519,
+      "sha256": "251493020796ce12c6d971350bb38f1c8b0d44a2d34f30fef8226bfaa794fb8f"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/meri-document-request.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/meri-document-request.js",
+      "bytes": 3879,
+      "sha256": "0779cb0638ecae1f84f67314c53d1f9a53c1a4b6f0b22723bf2901714fcf7101"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/meri-document-request.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/meri-document-request.js.map",
+      "bytes": 2275,
+      "sha256": "00ed95c6c6dbb5a6ab1cfb8ef53975143e4f441cdc52a80dc0a26b44762363b3"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/meri-read-outcome.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/meri-read-outcome.d.ts",
+      "bytes": 1451,
+      "sha256": "bef6ce5adbb0fab951e03bb29227c3b823b0769fbe64675a99ab3494ce7c5142"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/meri-read-outcome.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/meri-read-outcome.d.ts.map",
+      "bytes": 1153,
+      "sha256": "6e7a945763ce05648db1bfb08f8de10e6c3a24cb8cc5f3f8f11cc82e9605eef6"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/meri-read-outcome.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/meri-read-outcome.js",
+      "bytes": 36414,
+      "sha256": "252231dd67570f63081469ab3c662113f0bbc0ff612348aba8c529d1acfd9fed"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/meri-read-outcome.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/meri-read-outcome.js.map",
+      "bytes": 29747,
+      "sha256": "e836f9c6fddf3e4d42c3fb00aaadb2df0a0b10dc52736a96a25a618ef7306ce7"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/meri-skills.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/meri-skills.d.ts",
+      "bytes": 15889,
+      "sha256": "63c4a632e6e2d161d542d3a04cd2cb208b4b9901dca71eb029c12a5df8f3a0d1"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/meri-skills.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/meri-skills.d.ts.map",
+      "bytes": 1404,
+      "sha256": "85c60820f2eb53796af73c2335be20eb0b2948b5ac6e3338765067402c9abbdc"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/meri-skills.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/meri-skills.js",
+      "bytes": 15787,
+      "sha256": "ab844167bdac57bde38e9340f8c4b1e493f463b1571ad4d0876ce1bdb81d641a"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/meri-skills.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/meri-skills.js.map",
+      "bytes": 6704,
+      "sha256": "08284d4ffd8e9ae9ddd6bda66092ec9aa26c974f108c0f0a061fe8d6abb43f06"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/money.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/money.d.ts",
+      "bytes": 801,
+      "sha256": "aca121e254bf5baebadf636369f809202ded8d900a199dd66720cf19b8c8995d"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/money.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/money.d.ts.map",
+      "bytes": 456,
+      "sha256": "6e16f9185dd112c7063be7fc5b963af3af96ad23784550de83a9f0c3c48c1f44"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/money.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/money.js",
+      "bytes": 2278,
+      "sha256": "89ba56b91f331d868b9b54ca94fdb5972d7c641e5b5c8663f23826d8bcef6ba4"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/money.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/money.js.map",
+      "bytes": 1039,
+      "sha256": "cfdfdb1a59da9a7a18909806ba1b9a6afa036fea199e2511d48f73de2bc7db8d"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/newsletter-fonts.catalog.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/newsletter-fonts.catalog.d.ts",
+      "bytes": 252,
+      "sha256": "88dc210e0aabed431af2efe62e8b18c7c2dc9e38c5daae1917cf5cc48216f9bc"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/newsletter-fonts.catalog.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/newsletter-fonts.catalog.d.ts.map",
+      "bytes": 259,
+      "sha256": "a9a5a68992429ac88cbf7057ae554c5343ee8e3c93e48591dae54e4e6578a818"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/newsletter-fonts.catalog.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/newsletter-fonts.catalog.js",
+      "bytes": 98670,
+      "sha256": "0757b3545306780830281c197dc330a9485cf82ee5f36aea16f7b6df0c6140ef"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/newsletter-fonts.catalog.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/newsletter-fonts.catalog.js.map",
+      "bytes": 103128,
+      "sha256": "36fc698777dd942a4654cc55de932d1b8aa34770fd6ddb533999044480c6ac2b"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/newsletter-fonts.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/newsletter-fonts.d.ts",
+      "bytes": 1157,
+      "sha256": "82d36b112b7468a9b54854ee3c2906bf6861acd7e3506c1d34790958618f3eca"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/newsletter-fonts.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/newsletter-fonts.d.ts.map",
+      "bytes": 896,
+      "sha256": "5f4dfc89b74895f3bba5e23ea23b776c1631ca523f33db1f31cf6c5c15e3498c"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/newsletter-fonts.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/newsletter-fonts.js",
+      "bytes": 5876,
+      "sha256": "aa2e3e28a296138c57478bd6949224e71fcda83e78b17e7f6fcb89c33ec35438"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/newsletter-fonts.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/newsletter-fonts.js.map",
+      "bytes": 6016,
+      "sha256": "29ce0bfe401bdd956b2a93c0ba450d3a06dbc3f8441643efdbdbc6f706c08b7b"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/newsletter-render.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/newsletter-render.d.ts",
+      "bytes": 1930,
+      "sha256": "c7e1b8a8fd1d8a624a57383296ef5df913de484a9e6121a9c208874fc5f851cb"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/newsletter-render.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/newsletter-render.d.ts.map",
+      "bytes": 1652,
+      "sha256": "8ec51727f898c56857473a4ff9b83d64e56439cbdbda20387ad48f42d530ffad"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/newsletter-render.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/newsletter-render.js",
+      "bytes": 32251,
+      "sha256": "e7980dde68e97970f3faf6f6a8b7f06d325d2458fc46364780719edea7233d0f"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/newsletter-render.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/newsletter-render.js.map",
+      "bytes": 28687,
+      "sha256": "4be856659e2d043fb098611d323719ad98b1a5f18e72935f885b0df78705245f"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/newsletter-social-share.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/newsletter-social-share.d.ts",
+      "bytes": 585,
+      "sha256": "41d66ee9d87d1a20026eb3d0f6122b89fc8767d7fa9f644b3663852406c5e8d6"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/newsletter-social-share.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/newsletter-social-share.d.ts.map",
+      "bytes": 401,
+      "sha256": "0fd69d293007b99dfa065ecc846c289bf14c123a00fe6148d191656a84463f98"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/newsletter-social-share.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/newsletter-social-share.js",
+      "bytes": 2406,
+      "sha256": "d2e01acc5574baadde9f5d03154da90c06eab4385e3f97e7aed9434df4e933b1"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/newsletter-social-share.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/newsletter-social-share.js.map",
+      "bytes": 1701,
+      "sha256": "21ad3b89eec146d8f4616f1f1a19d215594d4313372a8f89482b4913639aea2a"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/newsletter.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/newsletter.d.ts",
+      "bytes": 16528,
+      "sha256": "d56adf1cec6c8565932671af8ca696a47d7828f9e4b578e33b1b56d5f46410f8"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/newsletter.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/newsletter.d.ts.map",
+      "bytes": 13109,
+      "sha256": "ffd2a3d1298d4bda415e1e4b2a43e78f19ee4fa892eb2e1cc53be36b027f4a7e"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/newsletter.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/newsletter.js",
+      "bytes": 30650,
+      "sha256": "6e48b1b29f1546305c98401d6f04b2aec21c851d493150d502d0e2013a06a0e0"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/newsletter.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/newsletter.js.map",
+      "bytes": 24139,
+      "sha256": "6281b12f50ba5383ac7ec4920f84b5e63c98a84445e2b50c6c5189610204f8ef"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/pe-source-coverage.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/pe-source-coverage.d.ts",
+      "bytes": 2196,
+      "sha256": "e7b5ff5a4540019a08bd64762ca893bfcc25dcd19e781c053f26ef6e6b059873"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/pe-source-coverage.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/pe-source-coverage.d.ts.map",
+      "bytes": 840,
+      "sha256": "633d919608c59ad83dca7e98ac6fe6a7ce0ecb3ec2a48ebc5211b316a54a3864"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/pe-source-coverage.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/pe-source-coverage.js",
+      "bytes": 7755,
+      "sha256": "a3590a61d3fefd6944d53e8f994aceceb410bd5770928b8c7cb3645a7c803e97"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/pe-source-coverage.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/pe-source-coverage.js.map",
+      "bytes": 3786,
+      "sha256": "f6367538482c0a7071a8d5310964d5912a4382b58390bfb2b47af67e87e3f728"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/prospect-resource-scope.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/prospect-resource-scope.d.ts",
+      "bytes": 1001,
+      "sha256": "61ba24cb2b03d1cc812227c7e98f87428774c9dd69584f72e77b0145c11ca536"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/prospect-resource-scope.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/prospect-resource-scope.d.ts.map",
+      "bytes": 653,
+      "sha256": "94df3417019903ba911ab3b3b1a8f05fd50a640cd376ef8959bc8663a5e51e33"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/prospect-resource-scope.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/prospect-resource-scope.js",
+      "bytes": 3243,
+      "sha256": "7b7849a00759669b33130cde8920df351d30cd0d62f9dc0723a38a1ddb702ca7"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/prospect-resource-scope.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/prospect-resource-scope.js.map",
+      "bytes": 1755,
+      "sha256": "ef59bef8529ea0b5862a2f05bf5439873b079d9f1778c3aa6828a3bf674a778f"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/research-portfolios.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/research-portfolios.d.ts",
+      "bytes": 32756,
+      "sha256": "d9e82045d5676d336bc770aff21cb9d1a75fa3b944f236ca8fb19982f3071b06"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/research-portfolios.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/research-portfolios.d.ts.map",
+      "bytes": 27935,
+      "sha256": "d9df62aeca5f0c7f19f06c477a97a4958bb1cae81d38f7c8e65c6445560a37c8"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/research-portfolios.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/research-portfolios.js",
+      "bytes": 124,
+      "sha256": "af52b4368370552ce8fbf718cec52eb2aa9550008f61181c607fbfd4e5dc400e"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/research-portfolios.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/research-portfolios.js.map",
+      "bytes": 130,
+      "sha256": "96a8cbbaf8b465e48d0d834b1ea701915781d2c37c0cdf56a70818295bb63292"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/schedule/deadline.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/schedule/deadline.d.ts",
+      "bytes": 695,
+      "sha256": "bcb4ef01b245d41202fa40ab6a37ff671c3a3dc1c404551db4a1eb121f2d18e3"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/schedule/deadline.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/schedule/deadline.d.ts.map",
+      "bytes": 722,
+      "sha256": "4e69ec1d037df082f14f3443cc08df4e3dcd9e12c56a81cdc885d0fc18b47a62"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/schedule/deadline.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/schedule/deadline.js",
+      "bytes": 2398,
+      "sha256": "006f9c41adb8a1fb6e9bbca3316a47b7799bf6629b904b7a335524f8f69f9490"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/schedule/deadline.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/schedule/deadline.js.map",
+      "bytes": 2447,
+      "sha256": "b729f668cb5042406dc8ae0d48c06a2fd6caea551642689a1b283df784a7267c"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/schedule/synthesis.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/schedule/synthesis.d.ts",
+      "bytes": 953,
+      "sha256": "c40524d8d3e3860cabf9c32649f08605a795c55754765efcb900879f5b43ba15"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/schedule/synthesis.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/schedule/synthesis.d.ts.map",
+      "bytes": 1014,
+      "sha256": "4ee1ceca98170ddd5428153bd2955af72083890be4bbb95c57c2ffd55aa710e7"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/schedule/synthesis.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/schedule/synthesis.js",
+      "bytes": 7073,
+      "sha256": "98c2d27eb74736d7f9053a3ce645c4fd9d6eb97bcc11ae043119e850d20eb8e1"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/schedule/synthesis.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/schedule/synthesis.js.map",
+      "bytes": 7056,
+      "sha256": "5f35dc0696ac48c27a9650bee29a55994f65b79d157a9cfdfb3252dfe44cd5f9"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/schedule/time-zone.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/schedule/time-zone.d.ts",
+      "bytes": 686,
+      "sha256": "f7a03144cfbba0dcb09fd8859bee742dfb87ab2b21e0507390b84cf24f804056"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/schedule/time-zone.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/schedule/time-zone.d.ts.map",
+      "bytes": 538,
+      "sha256": "a5b086ddc3e0f46e632c58fdd3dba24c2e7da53613209f1c3bf8e23789a5d518"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/schedule/time-zone.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/schedule/time-zone.js",
+      "bytes": 3269,
+      "sha256": "97994beda998267b4faa5d41ab93eac0fff780ca50d4da50a6e03be28034f42f"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/schedule/time-zone.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/schedule/time-zone.js.map",
+      "bytes": 3764,
+      "sha256": "5d16cc909161d9876770919993b3acc72adfba45ad947bfa0b7ff457e7dc6567"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/schedule/validate.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/schedule/validate.d.ts",
+      "bytes": 1017,
+      "sha256": "19230f27d578037fa57e4d9ee6626212eacdd7bdf5571e296ac52848c5279edd"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/schedule/validate.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/schedule/validate.d.ts.map",
+      "bytes": 1132,
+      "sha256": "8c6e1227c240a4af20a64b46c6f4043b1cc2555bcbf6bc50fae16c2d45ae57fb"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/schedule/validate.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/schedule/validate.js",
+      "bytes": 4364,
+      "sha256": "589bf0a9de4a85a0fefe7557bc2addcb2bd07f79a33b4ccc29b31ef91bac9f64"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/schedule/validate.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/schedule/validate.js.map",
+      "bytes": 4571,
+      "sha256": "0a7d1da8d3d9d8efef4975effead09dac83e6ab2ef68e1c0af3e00e469e246b7"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/tenant-feature.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/tenant-feature.d.ts",
+      "bytes": 220,
+      "sha256": "601667bbdc6044c009eb131b16a00350f447578223a89fb9714c42d5b7be4750"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/tenant-feature.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/tenant-feature.d.ts.map",
+      "bytes": 231,
+      "sha256": "5d153d64c2a94654ab5cdedf9cc7de57329139ed42e2f0dffb627fcbaa28d0b1"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/tenant-feature.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/tenant-feature.js",
+      "bytes": 659,
+      "sha256": "7d9930490a8b93b2aa7736f84fd9f61463474755510c7a278e8e4b18ba89738d"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/tenant-feature.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/tenant-feature.js.map",
+      "bytes": 574,
+      "sha256": "839c3f726c033f3fb6af72101f65d070695cdb3a0809c1626b84ae29ba7c7aa0"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/time.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/time.d.ts",
+      "bytes": 582,
+      "sha256": "e9794d675905a8d777e8216de81bacb52073d1e0fd0eadccbc2f8823c2ff1a0f"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/time.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/time.d.ts.map",
+      "bytes": 432,
+      "sha256": "a2fbb9ac3990b0bccf884c8b795a0834aef3edc7e8b268a2f0f87f7bf0cf1560"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/time.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/time.js",
+      "bytes": 522,
+      "sha256": "5a3c57e6ac868e3c7161634e7b5bb4a415f0aadf6902e54846dd230872beaa20"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/time.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/time.js.map",
+      "bytes": 402,
+      "sha256": "6c6dce9cafaa47e18b10036ac4b2364720e918bb8b07790df983ddbaaa9a6ad0"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/us-states.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/us-states.d.ts",
+      "bytes": 292,
+      "sha256": "94a7d23af89a60b5c9a5498a6a287c6bd3993aad8b0f53293b9dd51027d41a76"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/us-states.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/us-states.d.ts.map",
+      "bytes": 288,
+      "sha256": "5d2488379c56477efef3a33053826ca0f3197e904e194b160c026ceea3f8570d"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/us-states.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/us-states.js",
+      "bytes": 1829,
+      "sha256": "fddbd41da19003c6b3a8dc63fb867e2779d49ce264ea192db49668c46b3ae9e9"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/us-states.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/us-states.js.map",
+      "bytes": 1717,
+      "sha256": "7c165653b21e198a0e22b988e5fb37ffea53d7c5ce628f127a409aabaf5fdf54"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/workspace-saved-revision.d.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/workspace-saved-revision.d.ts",
+      "bytes": 1591,
+      "sha256": "30cf983c67630739d882af215b80563fc31836afac6b1bda4b2e301191a18018"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/workspace-saved-revision.d.ts.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/workspace-saved-revision.d.ts.map",
+      "bytes": 734,
+      "sha256": "e059e7c7e4415aff5107133295c7365bc9c55f018a8233419062839ffbe40092"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/workspace-saved-revision.js",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/workspace-saved-revision.js",
+      "bytes": 9715,
+      "sha256": "afa6558cd2e4d053e2b64c9e45b78c98c44b2e418c17375f41220108366fc2c8"
+    },
+    {
+      "path": "provenance/unpacked/package/dist/workspace-saved-revision.js.map",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/dist/workspace-saved-revision.js.map",
+      "bytes": 7823,
+      "sha256": "aa96b8d551f9efad6879b3d2b9cbfc91dff694a88185512be4514083e6045aba"
+    },
+    {
+      "path": "provenance/unpacked/package/package.json",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/package.json",
+      "bytes": 3761,
+      "sha256": "3ec63a174f34c80651c3ca3b7e82132857dabccaf94018bb7ff996a1b4297ddf"
+    },
+    {
+      "path": "provenance/unpacked/package/src/ai-model-policy.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/ai-model-policy.ts",
+      "bytes": 5033,
+      "sha256": "d2470de73f4b049329e9aaf59e75f0280f998766b6b769dacbbcb2fbdb9e66b5"
+    },
+    {
+      "path": "provenance/unpacked/package/src/client-memory-wall.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/client-memory-wall.ts",
+      "bytes": 1137,
+      "sha256": "e50636f9199ea5cc1649e5f21a35f95c56358785b9c49faffe80910c3dc33ca7"
+    },
+    {
+      "path": "provenance/unpacked/package/src/client-objective-destination.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/client-objective-destination.ts",
+      "bytes": 4318,
+      "sha256": "a7fafdf28c55cb9af93b2faf5fbb4b824023622cc68b08501e0d367dcf4a5443"
+    },
+    {
+      "path": "provenance/unpacked/package/src/client-registration-integrity.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/client-registration-integrity.ts",
+      "bytes": 7777,
+      "sha256": "1472cf3683ee70e6a7e4ae992b36b03b2c324a565cd68bc459f387a931bccefe"
+    },
+    {
+      "path": "provenance/unpacked/package/src/defense-budget-line.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/defense-budget-line.ts",
+      "bytes": 5738,
+      "sha256": "8e31070879a32f1b46792630c6f5689483109c98f93521fbb531a32ea0bd51e9"
+    },
+    {
+      "path": "provenance/unpacked/package/src/defense-research.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/defense-research.ts",
+      "bytes": 20679,
+      "sha256": "27f03c3a19f5d3426e85d374143b8c89ca10937419126ffd868e61b7130e724d"
+    },
+    {
+      "path": "provenance/unpacked/package/src/funding-claim.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/funding-claim.ts",
+      "bytes": 25949,
+      "sha256": "2f820f5891ff140038224b4a8114c4ec83f3353c4083ec362e0730f2a14a77ab"
+    },
+    {
+      "path": "provenance/unpacked/package/src/funding-opportunities-v2-detail.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/funding-opportunities-v2-detail.ts",
+      "bytes": 6645,
+      "sha256": "dd7783ced2d5ca22c98db2c35b456b686516edb75245d1daaf906ff55497114b"
+    },
+    {
+      "path": "provenance/unpacked/package/src/funding-opportunities-v2-workflow.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/funding-opportunities-v2-workflow.ts",
+      "bytes": 1582,
+      "sha256": "34bb6c27b11dfb483f7894b4286fec6de46ac91df0b50bc6e69bef070340e823"
+    },
+    {
+      "path": "provenance/unpacked/package/src/funding-opportunities-v2.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/funding-opportunities-v2.ts",
+      "bytes": 14664,
+      "sha256": "37fe8499b219d9eb29e288744ca840149fe35f5f7ac5e328a58a03add2257893"
+    },
+    {
+      "path": "provenance/unpacked/package/src/funding-priorities.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/funding-priorities.ts",
+      "bytes": 1265,
+      "sha256": "82e59918864b70f8ad2dfc0f9d341c651a952e6a24a3b811c5b82a6ffbe041f3"
+    },
+    {
+      "path": "provenance/unpacked/package/src/index.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/index.ts",
+      "bytes": 273692,
+      "sha256": "fde2cea920fcb64f3150bbe5849d2cfd438462edaf711634dc7ed48f0eba7d9a"
+    },
+    {
+      "path": "provenance/unpacked/package/src/legislative-research.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/legislative-research.ts",
+      "bytes": 13892,
+      "sha256": "1ca1772ecb3ac924660f41eb181bf252c4d7989747287af7e238402491295826"
+    },
+    {
+      "path": "provenance/unpacked/package/src/legiwatch-phase8.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/legiwatch-phase8.ts",
+      "bytes": 8328,
+      "sha256": "11ea686e845a02f022f2bd2fc0687b08a2a0be464ada912e0ae40e94f616f6f0"
+    },
+    {
+      "path": "provenance/unpacked/package/src/legiwatch-query.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/legiwatch-query.ts",
+      "bytes": 10141,
+      "sha256": "94a5cfcdbbff33132a9a8b0766e6a1f2856e2d395bdba180af5da20fe41a045c"
+    },
+    {
+      "path": "provenance/unpacked/package/src/market-title.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/market-title.ts",
+      "bytes": 2561,
+      "sha256": "3bd334381746f0e66cf53db2ffdbb9ce4fdb1cd060b4411dc264d5375c1607c0"
+    },
+    {
+      "path": "provenance/unpacked/package/src/meri-document-request.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/meri-document-request.ts",
+      "bytes": 3733,
+      "sha256": "809add572f5162bfab985b5e6ed5dd24aa58f2b291cab69c64fbed383d06d1d1"
+    },
+    {
+      "path": "provenance/unpacked/package/src/meri-read-outcome.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/meri-read-outcome.ts",
+      "bytes": 35738,
+      "sha256": "66f1cc4fb2bd6226ea56774e70dd981e3f80e12f61ab915d63d10c3646c4731f"
+    },
+    {
+      "path": "provenance/unpacked/package/src/meri-skills.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/meri-skills.ts",
+      "bytes": 15699,
+      "sha256": "8c23514721ad84242de330fa90a1f2d5d2ed4b48ca609e3222f6e57414e020b0"
+    },
+    {
+      "path": "provenance/unpacked/package/src/money.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/money.ts",
+      "bytes": 2461,
+      "sha256": "716e981669967e81cd785880aa42576d044e034709b8c7f9623b280f3f48df67"
+    },
+    {
+      "path": "provenance/unpacked/package/src/newsletter-fonts.catalog.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/newsletter-fonts.catalog.ts",
+      "bytes": 94631,
+      "sha256": "7360c71bdfaedf091171ff704bdd1e38c68605614dda06c30dbf7958a0dedf1f"
+    },
+    {
+      "path": "provenance/unpacked/package/src/newsletter-fonts.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/newsletter-fonts.ts",
+      "bytes": 5766,
+      "sha256": "56db91870105d8268ad8f1699ad04a3c60062f45b4738ae8b4c892f3e58d4825"
+    },
+    {
+      "path": "provenance/unpacked/package/src/newsletter-render.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/newsletter-render.ts",
+      "bytes": 30096,
+      "sha256": "b143df93036c87dbce9dc49a0e01f1f4bd3a7b6cf562b64608940bdea97c3f3c"
+    },
+    {
+      "path": "provenance/unpacked/package/src/newsletter-social-share.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/newsletter-social-share.ts",
+      "bytes": 2068,
+      "sha256": "ddaeebbda2901158ccd809a2ec2c7e7515d213af043bef9524e1f707cb3e57a0"
+    },
+    {
+      "path": "provenance/unpacked/package/src/newsletter.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/newsletter.ts",
+      "bytes": 36470,
+      "sha256": "f586855ffb43f7b4a014b0e27c8ae6be342fb843cb656a58b520b0ac1706c796"
+    },
+    {
+      "path": "provenance/unpacked/package/src/pe-source-coverage.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/pe-source-coverage.ts",
+      "bytes": 7723,
+      "sha256": "c4d60bc72ab8ae42e6f69998651eb997cbb38b16039d1799b647cde605e2c42d"
+    },
+    {
+      "path": "provenance/unpacked/package/src/prospect-resource-scope.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/prospect-resource-scope.ts",
+      "bytes": 3684,
+      "sha256": "0982e0a984cfded64c05cf726eb3d95a67d8700d4671ee651378646cb9d5d2f7"
+    },
+    {
+      "path": "provenance/unpacked/package/src/research-portfolios.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/research-portfolios.ts",
+      "bytes": 31751,
+      "sha256": "8cd82fdc0ac7d6fcb3d61be1b84f6537c50e1bf0d0872043c9e62b46fbb23c90"
+    },
+    {
+      "path": "provenance/unpacked/package/src/schedule/deadline.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/schedule/deadline.ts",
+      "bytes": 2333,
+      "sha256": "69aab17c2a329fcfded00e7f3e8ebf3ebffebb1800b37e555efacb6901f08c9e"
+    },
+    {
+      "path": "provenance/unpacked/package/src/schedule/synthesis.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/schedule/synthesis.ts",
+      "bytes": 7016,
+      "sha256": "515f2d07b367a4fe9190d6468a1c2a6d23ca093a608bbf48656958ab7f1ec9f0"
+    },
+    {
+      "path": "provenance/unpacked/package/src/schedule/time-zone.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/schedule/time-zone.ts",
+      "bytes": 3231,
+      "sha256": "4f76a48e72d911780ec149223d49ee3ab1126238132a4dd53d400935e947a378"
+    },
+    {
+      "path": "provenance/unpacked/package/src/schedule/validate.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/schedule/validate.ts",
+      "bytes": 4554,
+      "sha256": "ff321d0b38f9034ac1c1b30c3511742be75024d6eb6a750926c0da50efa3bae7"
+    },
+    {
+      "path": "provenance/unpacked/package/src/tenant-feature.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/tenant-feature.ts",
+      "bytes": 550,
+      "sha256": "0256d761d048fc28ad6f0c0753e99ed4a6559b4a001a0688f24e21f1d350fbb6"
+    },
+    {
+      "path": "provenance/unpacked/package/src/time.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/time.ts",
+      "bytes": 653,
+      "sha256": "c8f5e960d56e7bdb509a990517c2c2ffe7cbfbc975442bb7a53a4ed52845a854"
+    },
+    {
+      "path": "provenance/unpacked/package/src/us-states.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/us-states.ts",
+      "bytes": 1573,
+      "sha256": "ad65aa6cd523c745c5fa835abe30b0d4e6bb060bc5c1765af4c707ad1f8e0e8b"
+    },
+    {
+      "path": "provenance/unpacked/package/src/workspace-saved-revision.ts",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/src/workspace-saved-revision.ts",
+      "bytes": 9740,
+      "sha256": "f177cee24ac6a540ccc00d097caa69cd6cfc0d09ab3fe800395c6af6ae26b9b9"
+    },
+    {
+      "path": "provenance/unpacked/package/tsconfig.json",
+      "source": "/tmp/capiro-newsletter-package-verification/unpacked/package/tsconfig.json",
+      "bytes": 686,
+      "sha256": "89278950647f196ac9ae3c088f96a35f83e2fa45a7c28c563af3b2e2c059dab5"
+    },
+    {
+      "path": "provenance/verify-static.py",
+      "source": "/tmp/capiro-newsletter-package-verification/verify-static.py",
+      "bytes": 7703,
+      "sha256": "813fb7a896f3654b00d374c07a647a9c40ee55574f27dd7ee54312c336fad3a2"
+    },
+    {
+      "path": "qualification/architecture-and-package-tests-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/architecture-and-package-tests-exit.json",
+      "bytes": 186,
+      "sha256": "e9b57a72da5bd3dde6237727bf76e8eb2d5e6c48c1a3977476689e2f25ecf7a8"
+    },
+    {
+      "path": "qualification/architecture-and-package-tests.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/architecture-and-package-tests.log",
+      "bytes": 3272,
+      "sha256": "0a739eb0bfeefcfe1c8cfd15f3bf4156323e92f482098f189c899a54ccda9af6"
+    },
+    {
+      "path": "qualification/architecture-current-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/architecture-current-exit.json",
+      "bytes": 83,
+      "sha256": "8bf7a52a6cb35ff1bb730bc2e5f292d5c91fb393b1c9cd4a252479c901c88199"
+    },
+    {
+      "path": "qualification/architecture-current.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/architecture-current.log",
+      "bytes": 782859,
+      "sha256": "fdb2167c05bd9d9ff4d80f8292053044f5cd71cb32218937c56e7a42594ce2a1"
+    },
+    {
+      "path": "qualification/architecture-new-export-baseline.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/architecture-new-export-baseline.json",
+      "bytes": 286,
+      "sha256": "480b8a10ab3c8dda6477f9a7ee9bb8f0b3acbd55b74b208038275c9cac2f7308"
+    },
+    {
+      "path": "qualification/architecture-new-export-baseline.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/architecture-new-export-baseline.log",
+      "bytes": 1464,
+      "sha256": "d6ff7003e4750446c17dd37944c13a34d95630bf3c77b30de48f3e9dbd520b7b"
+    },
+    {
+      "path": "qualification/browser-initial-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/browser-initial-exit.json",
+      "bytes": 226,
+      "sha256": "e14c317ae4e54f4b0c9471a8338f76b1c9cb461c88054d6ab9161f8da4646f13"
+    },
+    {
+      "path": "qualification/browser-initial.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/browser-initial.log",
+      "bytes": 252,
+      "sha256": "507c878f569624fc7f957df9b156630ba6d5433222c800aad29dc78431c2a415"
+    },
+    {
+      "path": "qualification/browser-initial/browser-module-graph.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/browser-initial/browser-module-graph.json",
+      "bytes": 2119,
+      "sha256": "e82e91083a4aa4acf51ca3d9503666e930e007b3be30086454400baf82ae8f11"
+    },
+    {
+      "path": "qualification/browser-initial/browser-renderer-results.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/browser-initial/browser-renderer-results.json",
+      "bytes": 54404,
+      "sha256": "57fbce61b8c59e915c4aaaa3f976bf1ed2dc41bbfff17215feca1306bbb5f103"
+    },
+    {
+      "path": "qualification/browser-initial/browser-results.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/browser-initial/browser-results.json",
+      "bytes": 276,
+      "sha256": "95941e62016ec3d1c98a37f222645064f7e414cdc3cf27b59a01a76922ad4fdb"
+    },
+    {
+      "path": "qualification/browser-initial/bundle/newsletter.js",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/browser-initial/bundle/newsletter.js",
+      "bytes": 124413,
+      "sha256": "e4f406633d3a01175164db67b53cb8a652fae040c072f58927820742e65c904c"
+    },
+    {
+      "path": "qualification/browser-initial/bundle/newsletter.js.map",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/browser-initial/bundle/newsletter.js.map",
+      "bytes": 294489,
+      "sha256": "56d47f52450ab84d3407351e173ab16479dca2c15bf6e8d5aa52f591d9b0f9a5"
+    },
+    {
+      "path": "qualification/declarations-initial-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/declarations-initial-exit.json",
+      "bytes": 230,
+      "sha256": "43dca9774534e644668965500127a232711627f6ca1a1ce865a89733bfee9230"
+    },
+    {
+      "path": "qualification/declarations-initial.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/declarations-initial.log",
+      "bytes": 97,
+      "sha256": "675f2e09c6798091bb73d854d0d10b0369c68312ce41b210c7744bf358be95d2"
+    },
+    {
+      "path": "qualification/declarations-initial/browser-negative-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/declarations-initial/browser-negative-exit.json",
+      "bytes": 381,
+      "sha256": "b46cece8b2749008a9ff8d38ccffb210787b5c071c0c3b67d9b064faf7e6486a"
+    },
+    {
+      "path": "qualification/declarations-initial/browser-negative.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/declarations-initial/browser-negative.json",
+      "bytes": 404,
+      "sha256": "699deceb7c0b1aeb4999951b55b01d94fc36695a71861e11d4fbd543920800c7"
+    },
+    {
+      "path": "qualification/declarations-initial/browser-negative.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/declarations-initial/browser-negative.log",
+      "bytes": 718,
+      "sha256": "b6507ecc037057b1154ef34d7e7046de58c2918d1add270b68636e4c80c5a483"
+    },
+    {
+      "path": "qualification/declarations-initial/browser-positive-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/declarations-initial/browser-positive-exit.json",
+      "bytes": 381,
+      "sha256": "3b181fb9898db7c3205c123858072ff25d8980eb29610588327ac9c9de1a3f22"
+    },
+    {
+      "path": "qualification/declarations-initial/browser-positive.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/declarations-initial/browser-positive.json",
+      "bytes": 404,
+      "sha256": "9534802ad533ed96537f6f0044fa7afe1e5cebc5deb9ad7192341e88661c407f"
+    },
+    {
+      "path": "qualification/declarations-initial/browser-positive.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/declarations-initial/browser-positive.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/declarations-initial/declaration-results.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/declarations-initial/declaration-results.json",
+      "bytes": 1829,
+      "sha256": "0f6cbf0d4af0f9beefae9bd9430a727462e162379a4032752d5e0892ba29e85e"
+    },
+    {
+      "path": "qualification/declarations-initial/node-negative-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/declarations-initial/node-negative-exit.json",
+      "bytes": 375,
+      "sha256": "9c7d33be579038ec239c6bfa672506d7ff353db4faabee6b0b3c25ae7b8d51e9"
+    },
+    {
+      "path": "qualification/declarations-initial/node-negative.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/declarations-initial/node-negative.json",
+      "bytes": 407,
+      "sha256": "8818859ca6b2a1f193eda907dbce0285d43e4599cfc953a02eadbe428edc3f11"
+    },
+    {
+      "path": "qualification/declarations-initial/node-negative.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/declarations-initial/node-negative.log",
+      "bytes": 718,
+      "sha256": "b6507ecc037057b1154ef34d7e7046de58c2918d1add270b68636e4c80c5a483"
+    },
+    {
+      "path": "qualification/declarations-initial/node-positive-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/declarations-initial/node-positive-exit.json",
+      "bytes": 375,
+      "sha256": "b08b115e9a391b78ce886b9593e834d17caa277b620863a7eceadfa513127160"
+    },
+    {
+      "path": "qualification/declarations-initial/node-positive.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/declarations-initial/node-positive.json",
+      "bytes": 407,
+      "sha256": "db0c42efe9a1d72b6329e24fa3042d9651c87778cd5267a8ca1adb0871f1d482"
+    },
+    {
+      "path": "qualification/declarations-initial/node-positive.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/declarations-initial/node-positive.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/final-4910400/CONTINUITY.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/CONTINUITY.json",
+      "bytes": 1417,
+      "sha256": "6340f5dbe54471ed5852ce40a171fc8ed6d3ba34be1c8bed94d86b01d087fd02"
+    },
+    {
+      "path": "qualification/final-4910400/SOURCE-BINDING.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/SOURCE-BINDING.json",
+      "bytes": 5043,
+      "sha256": "6c25f0f9f947270ccf2d2df381ecdbcd52e7510388c4123974b6bec1f02b3d0c"
+    },
+    {
+      "path": "qualification/final-4910400/SUMMARY.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/SUMMARY.json",
+      "bytes": 5104,
+      "sha256": "001f2d2422c20be04451eb399f2ee62637a854d27dd80393762aaf1dc72c70e1"
+    },
+    {
+      "path": "qualification/final-4910400/architecture-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/architecture-exit.json",
+      "bytes": 257,
+      "sha256": "69b58f806f09efbf933d22eb81b8be0f91b03f6224a4be14e409495c9d8b8c44"
+    },
+    {
+      "path": "qualification/final-4910400/architecture-package-cli-tests-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/architecture-package-cli-tests-exit.json",
+      "bytes": 373,
+      "sha256": "bf67b706bf54150beff7daab814acfebf4c4202fb1b56d85980d0a1ee979bb2d"
+    },
+    {
+      "path": "qualification/final-4910400/architecture-package-cli-tests.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/architecture-package-cli-tests.log",
+      "bytes": 3497,
+      "sha256": "61879ee56a286e8fb2f96122eb7112ec738d9d20188638425748c4ebd8636ce7"
+    },
+    {
+      "path": "qualification/final-4910400/architecture.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/architecture.log",
+      "bytes": 782859,
+      "sha256": "fdb2167c05bd9d9ff4d80f8292053044f5cd71cb32218937c56e7a42594ce2a1"
+    },
+    {
+      "path": "qualification/final-4910400/authored-lint-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/authored-lint-exit.json",
+      "bytes": 569,
+      "sha256": "37f2a4a15b45187a51c1f8d87f2d64582bc4450fd433f813c9d9a02bb4727f3f"
+    },
+    {
+      "path": "qualification/final-4910400/authored-lint.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/authored-lint.log",
+      "bytes": 392,
+      "sha256": "4775ffae98d38b9f61079a17341c782b14fc4c2e6c6d66e848360e3bdb0b69b7"
+    },
+    {
+      "path": "qualification/final-4910400/browser-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/browser-exit.json",
+      "bytes": 357,
+      "sha256": "ac1e2d0f852fc681dd0a732ec464edaaf187bf064cd30fcb0e50912db4c7041f"
+    },
+    {
+      "path": "qualification/final-4910400/browser.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/browser.log",
+      "bytes": 252,
+      "sha256": "507c878f569624fc7f957df9b156630ba6d5433222c800aad29dc78431c2a415"
+    },
+    {
+      "path": "qualification/final-4910400/browser/browser-module-graph.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/browser/browser-module-graph.json",
+      "bytes": 2119,
+      "sha256": "e82e91083a4aa4acf51ca3d9503666e930e007b3be30086454400baf82ae8f11"
+    },
+    {
+      "path": "qualification/final-4910400/browser/browser-renderer-results.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/browser/browser-renderer-results.json",
+      "bytes": 54404,
+      "sha256": "57fbce61b8c59e915c4aaaa3f976bf1ed2dc41bbfff17215feca1306bbb5f103"
+    },
+    {
+      "path": "qualification/final-4910400/browser/browser-results.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/browser/browser-results.json",
+      "bytes": 276,
+      "sha256": "95941e62016ec3d1c98a37f222645064f7e414cdc3cf27b59a01a76922ad4fdb"
+    },
+    {
+      "path": "qualification/final-4910400/browser/bundle/newsletter.js",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/browser/bundle/newsletter.js",
+      "bytes": 124413,
+      "sha256": "e4f406633d3a01175164db67b53cb8a652fae040c072f58927820742e65c904c"
+    },
+    {
+      "path": "qualification/final-4910400/browser/bundle/newsletter.js.map",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/browser/bundle/newsletter.js.map",
+      "bytes": 294548,
+      "sha256": "6f7414dd1ead302ef99d6ea7359636e274a2d0c076cd2ba93e8f89dd6cb33a06"
+    },
+    {
+      "path": "qualification/final-4910400/declarations-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/declarations-exit.json",
+      "bytes": 366,
+      "sha256": "dacf4501b2fac0585e7277b321e83df038128d8737d4d8d38c17820c2e335b7a"
+    },
+    {
+      "path": "qualification/final-4910400/declarations.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/declarations.log",
+      "bytes": 103,
+      "sha256": "5f4d14697523a5f51db10a63e8cb6f6185fdac960fd153fda9a7dc8be90b10e7"
+    },
+    {
+      "path": "qualification/final-4910400/declarations/browser-negative-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/declarations/browser-negative-exit.json",
+      "bytes": 387,
+      "sha256": "5e7fc3cad9cfc872ae008b7747463cc692c63f5df4dd12bf5546c1db0840940f"
+    },
+    {
+      "path": "qualification/final-4910400/declarations/browser-negative.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/declarations/browser-negative.json",
+      "bytes": 404,
+      "sha256": "699deceb7c0b1aeb4999951b55b01d94fc36695a71861e11d4fbd543920800c7"
+    },
+    {
+      "path": "qualification/final-4910400/declarations/browser-negative.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/declarations/browser-negative.log",
+      "bytes": 718,
+      "sha256": "b6507ecc037057b1154ef34d7e7046de58c2918d1add270b68636e4c80c5a483"
+    },
+    {
+      "path": "qualification/final-4910400/declarations/browser-positive-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/declarations/browser-positive-exit.json",
+      "bytes": 387,
+      "sha256": "2736bd52c522e2015dc051f5f5db39c6a47d0e4ff6d794cf67bf43296beb7b4b"
+    },
+    {
+      "path": "qualification/final-4910400/declarations/browser-positive.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/declarations/browser-positive.json",
+      "bytes": 404,
+      "sha256": "9534802ad533ed96537f6f0044fa7afe1e5cebc5deb9ad7192341e88661c407f"
+    },
+    {
+      "path": "qualification/final-4910400/declarations/browser-positive.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/declarations/browser-positive.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/final-4910400/declarations/declaration-results.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/declarations/declaration-results.json",
+      "bytes": 1853,
+      "sha256": "830abb39cae2c488d7a290c8d922ee3befaf21c699b27465338fc222d827384d"
+    },
+    {
+      "path": "qualification/final-4910400/declarations/node-negative-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/declarations/node-negative-exit.json",
+      "bytes": 381,
+      "sha256": "7c8ca676d5c5ef6ef4d0a818f78b4f572c8267917aa77b0b179bcc4ab8679ac9"
+    },
+    {
+      "path": "qualification/final-4910400/declarations/node-negative.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/declarations/node-negative.json",
+      "bytes": 407,
+      "sha256": "8818859ca6b2a1f193eda907dbce0285d43e4599cfc953a02eadbe428edc3f11"
+    },
+    {
+      "path": "qualification/final-4910400/declarations/node-negative.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/declarations/node-negative.log",
+      "bytes": 718,
+      "sha256": "b6507ecc037057b1154ef34d7e7046de58c2918d1add270b68636e4c80c5a483"
+    },
+    {
+      "path": "qualification/final-4910400/declarations/node-positive-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/declarations/node-positive-exit.json",
+      "bytes": 381,
+      "sha256": "2bdee1ec032aecbd4616ee356809a3d2d938ae3e931fc5a0bf1f151abdbb2b0b"
+    },
+    {
+      "path": "qualification/final-4910400/declarations/node-positive.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/declarations/node-positive.json",
+      "bytes": 407,
+      "sha256": "db0c42efe9a1d72b6329e24fa3042d9651c87778cd5267a8ca1adb0871f1d482"
+    },
+    {
+      "path": "qualification/final-4910400/declarations/node-positive.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/declarations/node-positive.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/final-4910400/diff-check-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/diff-check-exit.json",
+      "bytes": 274,
+      "sha256": "78f9ef08cea1749e008bba1fd5d6a070c84db0eac9958470a50abb885ead6c1a"
+    },
+    {
+      "path": "qualification/final-4910400/diff-check.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/final-4910400/format-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/format-exit.json",
+      "bytes": 820,
+      "sha256": "29255e277ab98a9f2746f6d2f3d5988c60f54dd55fe69b66f36ba57ab2aeb158"
+    },
+    {
+      "path": "qualification/final-4910400/format.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/format.log",
+      "bytes": 66,
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "path": "qualification/final-4910400/node-consumer-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/node-consumer-exit.json",
+      "bytes": 304,
+      "sha256": "2a0f19a7735b826677b113f908e5e8febb9d1362536c38199ad4d8aaa3009a57"
+    },
+    {
+      "path": "qualification/final-4910400/node-consumer.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/node-consumer.log",
+      "bytes": 8720,
+      "sha256": "672421d292b995aed867e2112eb27d301d19759242cb83c1d095f6fcef3d451b"
+    },
+    {
+      "path": "qualification/final-4910400/public-packages-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/public-packages-exit.json",
+      "bytes": 263,
+      "sha256": "93a053298991b4d02ae499edb96e4baa13859a6c6a1fd88c9a4012d0664c4020"
+    },
+    {
+      "path": "qualification/final-4910400/public-packages.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/public-packages.log",
+      "bytes": 759,
+      "sha256": "a41ce4777569fe931dd0feb294ca03cf6c639fe863134648d5404334fb6b8f76"
+    },
+    {
+      "path": "qualification/final-4910400/workspace-typecheck-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/workspace-typecheck-exit.json",
+      "bytes": 342,
+      "sha256": "f96800b88ec2715bd3c0b79c6beba99a877568f0efaf53cbcef7d41facb82220"
+    },
+    {
+      "path": "qualification/final-4910400/workspace-typecheck.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/final-4910400/workspace-typecheck.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/isolated-install-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/isolated-install-exit.json",
+      "bytes": 261,
+      "sha256": "62ef102bd73a501b93143e53af0d3cdc45d5873d264c143ece0520af6f8e087c"
+    },
+    {
+      "path": "qualification/isolated-install.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/isolated-install.log",
+      "bytes": 26,
+      "sha256": "ed3ff08371b71b80333321bb041501b9cf461ef339d29a31b56d5fa07767bc16"
+    },
+    {
+      "path": "qualification/package-workspace-types-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/package-workspace-types-exit.json",
+      "bytes": 161,
+      "sha256": "151371ee7578e510c478553be2c1384990e17d918a143e7678c8abb7a8e3a4c3"
+    },
+    {
+      "path": "qualification/package-workspace-types.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/package-workspace-types.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/packed-node-corrected-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/packed-node-corrected-exit.json",
+      "bytes": 173,
+      "sha256": "f383a0f5373a3bf323f9a311b8def3c5f2e6913dd1d8969929cb36cc2f669249"
+    },
+    {
+      "path": "qualification/packed-node-corrected.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/packed-node-corrected.log",
+      "bytes": 8725,
+      "sha256": "80c7bdf3fb7932ca24a0d99c097989114bf264c919844ea5770d935819403109"
+    },
+    {
+      "path": "qualification/packed-node-initial-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/packed-node-initial-exit.json",
+      "bytes": 165,
+      "sha256": "5c882088b6635aff89aea6e03054495ff6606c6726574d4e4ffc67c3a65a50b5"
+    },
+    {
+      "path": "qualification/packed-node-initial.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/packed-node-initial.log",
+      "bytes": 15876,
+      "sha256": "f8c36a4e96f0c3825fa6ed3d4319162ccd30bfe8f6a8fe6574a3af097f9e9143"
+    },
+    {
+      "path": "qualification/public-package-inputs-exit.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/public-package-inputs-exit.json",
+      "bytes": 127,
+      "sha256": "9e48dd1d0800b9addca4ab4f83ea58e134074759602b47e225042c59847afbff"
+    },
+    {
+      "path": "qualification/public-package-inputs.log",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/public-package-inputs.log",
+      "bytes": 835,
+      "sha256": "2a9edbb92bec3ae74695f1d6bc99f7f1931301892c6acb5b282929c7e8165225"
+    },
+    {
+      "path": "qualification/source-continuity-development.json",
+      "source": "/tmp/capiro-newsletter-package-consumer-evidence/source-continuity-development.json",
+      "bytes": 1217,
+      "sha256": "e1c3400a50a9a9cc9c426153af2f3ec14087f3c68b8c390db59c0c6b4ae6bef3"
+    }
+  ]
+}

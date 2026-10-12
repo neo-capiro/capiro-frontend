@@ -1,0 +1,267 @@
+
+> @capiro/qualification-newsletter@0.0.0 test
+> node --test qualification.test.mjs
+
+✔ the complete immutable producer corpus survives packed frontend consumption (3.302515ms)
+✖ packed renderer: public runtime names/newsletter (2.023347ms)
+✖ packed renderer: public runtime names/renderer (0.400147ms)
+✔ packed renderer: existing default configuration (0.200875ms)
+✔ packed renderer: existing default brand kit (0.154894ms)
+✔ packed renderer: node ids remain document-local lazy time/random (0.10597ms)
+✔ packed renderer: safe link/https://example.test/a?x=1&y=2 (0.168084ms)
+✔ packed renderer: safe image/https://example.test/a?x=1&y=2 (0.096256ms)
+✔ packed renderer: safe link/https://u:p@example.test/ (0.125841ms)
+✔ packed renderer: safe image/https://u:p@example.test/ (0.244941ms)
+✔ packed renderer: safe link/javascript:alert(1) (0.185511ms)
+✔ packed renderer: safe image/javascript:alert(1) (0.103958ms)
+✔ packed renderer: safe link//newsletter/capitol.svg (0.080853ms)
+✔ packed renderer: safe image//newsletter/capitol.svg (0.071028ms)
+✔ packed renderer: safe link/#anchor (0.07271ms)
+✔ packed renderer: safe image/#anchor (0.171791ms)
+✔ packed renderer: safe link/*|ARCHIVE|* (0.077598ms)
+✔ packed renderer: safe image/*|ARCHIVE|* (0.069165ms)
+✔ packed renderer: safe link/mailto:ada@example.test (0.124598ms)
+✔ packed renderer: safe image/mailto:ada@example.test (0.126161ms)
+✔ packed renderer: safe link/tel:+15555550100 (0.091649ms)
+✔ packed renderer: safe image/tel:+15555550100 (0.10529ms)
+✔ packed renderer: safe link///example.test/a (0.100672ms)
+✔ packed renderer: safe image///example.test/a (0.070737ms)
+✔ packed renderer: safe link/data:image/png;base64,YQ== (0.057808ms)
+✔ packed renderer: safe image/data:image/png;base64,YQ== (0.066411ms)
+✔ packed renderer: safe link/https:// (0.078229ms)
+✔ packed renderer: safe image/https:// (0.050687ms)
+✔ packed renderer: safe link/ (0.048003ms)
+✔ packed renderer: safe image/ (0.094053ms)
+✔ packed renderer: escaping special characters (0.136707ms)
+✔ packed renderer: merge tags disabled retain legacy tags (0.069165ms)
+✔ packed renderer: merge tags live preserve unknown tags (0.056585ms)
+✔ packed renderer: style clamping and fixed catalog (0.056635ms)
+✔ packed renderer: font catalog known and unknown (0.082124ms)
+✔ packed renderer: bundled legacy SVG remapping (0.058279ms)
+✔ packed renderer: custom fonts retain filter and CSS escaping (0.083907ms)
+✔ packed renderer: visibility operator/is (0.060942ms)
+✔ packed renderer: visibility operator/is-not (0.056385ms)
+✔ packed renderer: visibility operator/contains (0.054342ms)
+✔ packed renderer: visibility operator/does-not-contain (0.051608ms)
+✔ packed renderer: visibility operator/is-empty (0.049745ms)
+✔ packed renderer: visibility operator/is-not-empty (0.047763ms)
+✔ packed renderer: visibility without recipient denies (0.052009ms)
+✔ packed renderer: visibility authorized recipient (0.094594ms)
+✔ packed renderer: editor shows conditional block (0.077568ms)
+✔ packed renderer: block kind/image (0.055595ms)
+✔ packed renderer: block kind/heading (0.050286ms)
+✔ packed renderer: block kind/paragraph (0.046972ms)
+✔ packed renderer: block kind/button (0.048483ms)
+✔ packed renderer: block kind/divider (0.048774ms)
+✔ packed renderer: block kind/spacer (0.049845ms)
+✔ packed renderer: block kind/video (0.046831ms)
+✔ packed renderer: block kind/social (0.049965ms)
+✔ packed renderer: block kind/logo (0.046561ms)
+✔ packed renderer: block kind/survey (0.049706ms)
+✔ packed renderer: block kind/code (0.050948ms)
+✔ packed renderer: block kind/apps (0.089246ms)
+✔ packed renderer: block kind/product (0.043917ms)
+✔ packed renderer: block kind/product-rec (0.054402ms)
+✔ packed renderer: block kind/footer (0.043697ms)
+✔ packed renderer: block kind/columns (0.041623ms)
+✔ packed renderer: rich fallback escapes HTML (0.049585ms)
+✔ packed renderer: explicit sanitizer remains caller policy (0.049555ms)
+✔ packed renderer: image sizing crop asset and rewrite callback (0.142365ms)
+✔ packed renderer: saved survey no callback disabled (0.061794ms)
+✔ packed renderer: saved survey authorized caller callback (0.054042ms)
+✔ packed renderer: legacy survey callbacks preserved (0.064839ms)
+✔ packed renderer: callback arguments and order (0.0928ms)
+✔ packed renderer: social target/https://example.test/public?a=1 (0.048133ms)
+✔ packed renderer: social url/facebook/https://example.test/public?a=1 (0.084879ms)
+✔ packed renderer: social url/linkedin/https://example.test/public?a=1 (0.087532ms)
+✔ packed renderer: social url/pinterest/https://example.test/public?a=1 (0.051508ms)
+✔ packed renderer: social url/twitter/https://example.test/public?a=1 (0.046381ms)
+✔ packed renderer: social url/instapaper/https://example.test/public?a=1 (0.045949ms)
+✔ packed renderer: social url/forward/https://example.test/public?a=1 (0.092901ms)
+✔ packed renderer: social target/https://example.test/engagement/newsletter-public/token (0.051368ms)
+✔ packed renderer: social url/facebook/https://example.test/engagement/newsletter-public/token (0.043927ms)
+✔ packed renderer: social url/linkedin/https://example.test/engagement/newsletter-public/token (0.046881ms)
+✔ packed renderer: social url/pinterest/https://example.test/engagement/newsletter-public/token (0.047652ms)
+✔ packed renderer: social url/twitter/https://example.test/engagement/newsletter-public/token (0.055975ms)
+✔ packed renderer: social url/instapaper/https://example.test/engagement/newsletter-public/token (0.043005ms)
+✔ packed renderer: social url/forward/https://example.test/engagement/newsletter-public/token (0.043035ms)
+✔ packed renderer: social target/https://example.test/engagement/%6eewsletter-public/token (0.044908ms)
+✔ packed renderer: social url/facebook/https://example.test/engagement/%6eewsletter-public/token (0.049335ms)
+✔ packed renderer: social url/linkedin/https://example.test/engagement/%6eewsletter-public/token (0.050096ms)
+✔ packed renderer: social url/pinterest/https://example.test/engagement/%6eewsletter-public/token (0.047672ms)
+✔ packed renderer: social url/twitter/https://example.test/engagement/%6eewsletter-public/token (0.049535ms)
+✔ packed renderer: social url/instapaper/https://example.test/engagement/%6eewsletter-public/token (0.042524ms)
+✔ packed renderer: social url/forward/https://example.test/engagement/%6eewsletter-public/token (0.041583ms)
+✔ packed renderer: social target/https://u:p@example.test/ (0.040752ms)
+✔ packed renderer: social url/facebook/https://u:p@example.test/ (0.044317ms)
+✔ packed renderer: social url/linkedin/https://u:p@example.test/ (0.045509ms)
+✔ packed renderer: social url/pinterest/https://u:p@example.test/ (0.114263ms)
+✔ packed renderer: social url/twitter/https://u:p@example.test/ (0.087883ms)
+✔ packed renderer: social url/instapaper/https://u:p@example.test/ (0.041853ms)
+✔ packed renderer: social url/forward/https://u:p@example.test/ (0.029915ms)
+✔ packed renderer: social target/*|ARCHIVE|* (0.035384ms)
+✔ packed renderer: social url/facebook/*|ARCHIVE|* (0.04582ms)
+✔ packed renderer: social url/linkedin/*|ARCHIVE|* (0.044187ms)
+✔ packed renderer: social url/pinterest/*|ARCHIVE|* (0.028764ms)
+✔ packed renderer: social url/twitter/*|ARCHIVE|* (0.030086ms)
+✔ packed renderer: social url/instapaper/*|ARCHIVE|* (0.032168ms)
+✔ packed renderer: social url/forward/*|ARCHIVE|* (0.078229ms)
+✔ packed renderer: social target/javascript:bad (0.03905ms)
+✔ packed renderer: social url/facebook/javascript:bad (0.031297ms)
+✔ packed renderer: social url/linkedin/javascript:bad (0.027903ms)
+✔ packed renderer: social url/pinterest/javascript:bad (0.038829ms)
+✔ packed renderer: social url/twitter/javascript:bad (0.029134ms)
+✔ packed renderer: social url/instapaper/javascript:bad (0.029855ms)
+✔ packed renderer: social url/forward/javascript:bad (0.033411ms)
+✔ packed renderer: share block and mobile styles (0.050146ms)
+✔ packed renderer: full rich document rendering (0.041733ms)
+✔ packed renderer: full plain text rendering (0.03278ms)
+✔ packed renderer: government affairs original template (0.058349ms)
+✔ packed renderer: column layout original template (0.03973ms)
+✔ packed renderer: code layout original template (0.042234ms)
+✔ CommonJS and ESM consumers resolve the same public contract and renderer (0.77214ms)
+✔ private source, output and undeclared subpath imports remain refused (0.859893ms)
+✔ the installed public entries retain the producer JavaScript and declaration bytes (3.028029ms)
+ℹ tests 120
+ℹ suites 0
+ℹ pass 118
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 179.881273
+
+✖ failing tests:
+
+test at qualification.test.mjs:22:3
+✖ packed renderer: public runtime names/newsletter (2.023347ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  ... Skipped lines
+  
+    {
+      name: 'public runtime names/newsletter',
+      value: [
+        'NEWSLETTER_BLOCK_KINDS',
+        'NEWSLETTER_BLOCK_LABELS',
+  ...
+        'NEWSLETTER_TEMPLATE_ID',
+  +     '__esModule',
+        'applyNewsletterBrandKit',
+        'cloneNewsletterBlocks',
+        'createNewsletterBlock',
+        'createNewsletterLayout',
+        'createNewsletterSection',
+  ...
+        'governmentAffairsNewsletter',
+  +     'module.exports',
+        'newsletterBlockVisible',
+        'newsletterBrandButtonStyle',
+        'newsletterCatalogFont',
+        'newsletterCatalogStyle',
+        'newsletterCustomVideoThumbnail',
+  
+      at TestContext.<anonymous> (file:///workspace/capiro-newsletter-port/packages/qualification-newsletter/qualification.test.mjs:22:54)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: {
+      name: 'public runtime names/newsletter',
+      value: [
+        'NEWSLETTER_BLOCK_KINDS',            'NEWSLETTER_BLOCK_LABELS',
+        'NEWSLETTER_COLUMN_RATIOS',          'NEWSLETTER_FONT_CATALOG',
+        'NEWSLETTER_SOCIAL_ICON_STYLES',     'NEWSLETTER_SOCIAL_PLATFORMS',
+        'NEWSLETTER_SOCIAL_SHARE_PLATFORMS', 'NEWSLETTER_SURVEY_SECTION_TYPES',
+        'NEWSLETTER_SYSTEM_FONTS',           'NEWSLETTER_TEMPLATE_ID',
+        '__esModule',                        'applyNewsletterBrandKit',
+        'cloneNewsletterBlocks',             'createNewsletterBlock',
+        'createNewsletterLayout',            'createNewsletterSection',
+        'createNewsletterSurveyQuestion',    'defaultNewsletterBrandKit',
+        'defaultNewsletterConfig',           'defaultNewsletterSocialSettings',
+        'defaultNewsletterSocialShare',      'defaultNewsletterStyles',
+        'defaultNewsletterSurveyDefinition', 'findNewsletterBlock',
+        'governmentAffairsNewsletter',       'module.exports',
+        'newsletterBlockVisible',            'newsletterBrandButtonStyle',
+        'newsletterCatalogFont',             'newsletterCatalogStyle',
+        'newsletterCustomVideoThumbnail',    'newsletterDesignFontRequests',
+        'newsletterDesignFonts',             'newsletterId',
+        'newsletterSocialPlatform',          'newsletterSocialSettings',
+        'newsletterSourceClients',           'newsletterVideoSource',
+        'newsletterWebFontUrls',             'visitNewsletterBlocks'
+      ]
+    },
+    expected: {
+      name: 'public runtime names/newsletter',
+      value: [
+        'NEWSLETTER_BLOCK_KINDS',            'NEWSLETTER_BLOCK_LABELS',
+        'NEWSLETTER_COLUMN_RATIOS',          'NEWSLETTER_FONT_CATALOG',
+        'NEWSLETTER_SOCIAL_ICON_STYLES',     'NEWSLETTER_SOCIAL_PLATFORMS',
+        'NEWSLETTER_SOCIAL_SHARE_PLATFORMS', 'NEWSLETTER_SURVEY_SECTION_TYPES',
+        'NEWSLETTER_SYSTEM_FONTS',           'NEWSLETTER_TEMPLATE_ID',
+        'applyNewsletterBrandKit',           'cloneNewsletterBlocks',
+        'createNewsletterBlock',             'createNewsletterLayout',
+        'createNewsletterSection',           'createNewsletterSurveyQuestion',
+        'defaultNewsletterBrandKit',         'defaultNewsletterConfig',
+        'defaultNewsletterSocialSettings',   'defaultNewsletterSocialShare',
+        'defaultNewsletterStyles',           'defaultNewsletterSurveyDefinition',
+        'findNewsletterBlock',               'governmentAffairsNewsletter',
+        'newsletterBlockVisible',            'newsletterBrandButtonStyle',
+        'newsletterCatalogFont',             'newsletterCatalogStyle',
+        'newsletterCustomVideoThumbnail',    'newsletterDesignFontRequests',
+        'newsletterDesignFonts',             'newsletterId',
+        'newsletterSocialPlatform',          'newsletterSocialSettings',
+        'newsletterSourceClients',           'newsletterVideoSource',
+        'newsletterWebFontUrls',             'visitNewsletterBlocks'
+      ]
+    },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at qualification.test.mjs:22:3
+✖ packed renderer: public runtime names/renderer (0.400147ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+      name: 'public runtime names/renderer',
+      value: [
+  +     '__esModule',
+  +     'module.exports',
+        'newsletterBundledImageUrl',
+        'newsletterEscape',
+        'newsletterFontCss',
+        'newsletterMergeText',
+        'newsletterPlainText',
+  
+      at TestContext.<anonymous> (file:///workspace/capiro-newsletter-port/packages/qualification-newsletter/qualification.test.mjs:22:54)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { name: 'public runtime names/renderer', value: [ '__esModule', 'module.exports', 'newsletterBundledImageUrl', 'newsletterEscape', 'newsletterFontCss', 'newsletterMergeText', 'newsletterPlainText', 'newsletterSafeUrl', 'newsletterSocialIconSize', 'newsletterSocialShareItems', 'newsletterSocialShareTarget', 'newsletterSocialShareUrl', 'newsletterStyleCss', 'renderNewsletterBlock', 'renderNewsletterDesign' ] },
+    expected: { name: 'public runtime names/renderer', value: [ 'newsletterBundledImageUrl', 'newsletterEscape', 'newsletterFontCss', 'newsletterMergeText', 'newsletterPlainText', 'newsletterSafeUrl', 'newsletterSocialIconSize', 'newsletterSocialShareItems', 'newsletterSocialShareTarget', 'newsletterSocialShareUrl', 'newsletterStyleCss', 'renderNewsletterBlock', 'renderNewsletterDesign' ] },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+npm error Lifecycle script `test` failed with error:
+npm error code 1
+npm error path /workspace/capiro-newsletter-port/packages/qualification-newsletter
+npm error workspace @capiro/qualification-newsletter@0.0.0
+npm error location /workspace/capiro-newsletter-port/packages/qualification-newsletter
+npm error command failed
+npm error command sh -c node --test qualification.test.mjs
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

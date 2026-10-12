@@ -1,0 +1,24 @@
+{
+  "name": "@capiro/qualification-newsletter",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Offline consumer qualification of governed newsletter public exports",
+  "scripts": {
+    "test": "node --test qualification.test.mjs",
+    "typecheck": "tsc -p tsconfig.json",
+    "test:declarations": "node declarations.mjs",
+    "test:browser": "node browser-check.mjs"
+  },
+  "dependencies": {
+    "@capiro/shared": "file:../../vendor/capiro-shared-0.0.0.tgz"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1",
+    "typescript": "5.9.3",
+    "vite": "8.3.4"
+  },
+  "engines": {
+    "node": ">=24 <25"
+  }
+}
