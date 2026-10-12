@@ -18,6 +18,14 @@ MailCompose still composes one draft and its frozen review/send snapshot. Recipi
 
 The 404-line MailCompose module and its 369-line function are explicit reviewed signals. The new editor and existing rewrite hook have 124- and 161-line function signals. These states and controls describe one draft lifetime; moving arbitrary markup would obscure the review snapshot and send guard. Independent review found and corrected native editor Undo bypassing the retired Meri Undo. External verified replacements now clear only local editor history; ordinary typing and formatting keep Undo. Source and retained red/green evidence were independently reviewed by calendar_relationships_review and root.
 
+## Calendar lifecycle and selected artifact sharing
+
+CalendarPage remains the existing scope/view/filter/detail coordinator; its 410-line module and 375-line function now delegate lifecycle decisions, agenda rows, meeting identity, shared feed and sharing to cohesive children. MeetingWorkspace owns one mounted meeting's initial tab and local editor openings. Background current-read checks conceal inactive content while preserving mounted drafts; identity/meeting/client replacement uses the existing keyed boundary. Independent review caught the early unmount defect. The captured intermediate source already included the correction, so its three passing controls are positive evidence only; failing-before browser evidence for that adjacent correction is explicitly unrun.
+
+Sharing contracts reuse canonical preparation, artifact metadata and attachment receipt schemas. Sharing API/target modules own current saved eligibility, exact reviewed snapshots, every-selected-artifact receipt validation and known refusal versus uncertain dispatch. useSharing owns one actor/tenant/meeting/client lifetime, abort cleanup, synchronous pending/uncertain fence and coordinated artifact invalidation; useArtifactMutation observes that same fence. The UI owns checkbox snapshots and explicit confirmation only. Existing Core routes and authorization remain unchanged; no new shared adapter, endpoint, provider operation or legacy implementation was introduced. Independent native-source comparison records both exact reference commits and the unrelated attachment-list difference.
+
+SharedMeetings consumes one separate client/tenant/actor-keyed metadata feed. It does not open colleagues' owner-only details or invent missing body/download/readiness fields. The new 127-line feed, 163-line confirmation, 118-line attempt hook and changed 88-line artifact hook each retain one cohesive interaction. Owner and independent source reviews agree on these six exact signals. Observed browser evidence is 62/64 plus two corrected test-fixture controls passing 2/2 on unchanged production; all 43 original controls passed. Final combined qualification remains separate.
+
 <span id="shared-meetings"></span>
 ## Shared meeting presentation
 

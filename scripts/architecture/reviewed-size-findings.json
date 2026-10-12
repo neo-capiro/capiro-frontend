@@ -27,15 +27,6 @@
     "reviewedOn": "2026-10-11"
   },
   {
-    "file": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
-    "kind": "function",
-    "symbol": "CalendarPage",
-    "fingerprint": "2aff092af2306bc537900f9cda9c4263c2dc32c1d3bfc13925cf4579ccbc8499",
-    "reason": "This remains the existing calendar surface composer. The only new source is a query-owned government effective-date feed with canonical shared protocol/pagination/provenance outside this component. The current meetings-only month/week/client semantics and existing current-read filters remain. Government forecast unavailability remains explicit; display filtering does not create backend authority.",
-    "reviewedBy": "Codex shared frontend integration review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
     "file": "apps/web/src/features/portfolio/calendar/debrief/DebriefGeneration.tsx",
     "kind": "function",
     "symbol": "SessionDebriefGeneration",
@@ -1557,6 +1548,60 @@
     "fingerprint": "04e69dacf0fad530f3c0f798f0686fbc9e8b8d43312b3cace8fc103ad422680e",
     "reason": "Owns one searchable view-picker interaction: canonical descriptor filtering, active option, local open state, navigation, accessible combobox/listbox presentation and visibility scroll. Global key lifetime is separated into useClientViewKeys and metadata belongs to canonical clientViews. Uses adopted Radix Popover/Next navigation; no persistence, API, authority, custom overlay engine or speculative destination. Keeping option rendering with local filter state makes keyboard selection auditable without a speculative generic command abstraction.",
     "reviewedBy": "Codex shared frontend integration review with independent core_profile_review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "1471eb1124a29fe24ebf21e91fad0d83cb4f1596cac88f9635dce47fad461a5e",
+    "reason": "Calendar scope, view, lifecycle filter and detail/library navigation remain one existing page coordinator. Canonical metadata, lifecycle decisions, table rendering, shared-feed read and sharing mutations are separate leaf owners. No transport/authority logic is added to the page.",
+    "reviewedBy": "Codex shared frontend integration review with independent core_intake_review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
+    "kind": "function",
+    "symbol": "CalendarPage",
+    "fingerprint": "f5e9238597077884681433f79e422929b1d82e7d06dae40549d5e3bc9e641549",
+    "reason": "Calendar scope, view, lifecycle filter and detail/library navigation remain one existing page coordinator. Canonical metadata, lifecycle decisions, table rendering, shared-feed read and sharing mutations are separate leaf owners. No transport/authority logic is added to the page.",
+    "reviewedBy": "Codex shared frontend integration review with independent core_intake_review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/artifacts/useArtifactMutation.ts",
+    "kind": "function",
+    "symbol": "useArtifactMutation",
+    "fingerprint": "9073247d9809144bbb9ead2a98d24e1272748ae53edffb0b19163b63357caa97",
+    "reason": "The existing saved artifact attempt lifecycle now observes the canonical per-meeting sharing fence. The two owners prevent concurrent or uncertain write replay without moving receipt/transport concerns into UI.",
+    "reviewedBy": "Codex shared frontend integration review with independent core_intake_review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/library/SharedMeetings.tsx",
+    "kind": "function",
+    "symbol": "SharedMeetings",
+    "fingerprint": "1366759cf36d89e80e3aad049b05ee7d80fad61210a8d0ca3d8c9c2d98e593d0",
+    "reason": "One current authorized client feed owns its keyed query and metadata-only rendering. It neither opens owner-only meeting details nor invents notes/debrief body or signed download capability.",
+    "reviewedBy": "Codex shared frontend integration review with independent core_intake_review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/sharing/MeetingSharing.tsx",
+    "kind": "function",
+    "symbol": "MeetingSharing",
+    "fingerprint": "727cc3956153caa435c9011566317d7a6016e5549990240f930348ade5090cdf",
+    "reason": "One explicit selected-artifact confirmation owns checkbox snapshots, current read states and the share/unshare confirmation. Native contracts, selection eligibility and dispatched attempt semantics are separate coherent modules.",
+    "reviewedBy": "Codex shared frontend integration review with independent core_intake_review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/sharing/useSharing.ts",
+    "kind": "function",
+    "symbol": "useSharing",
+    "fingerprint": "4ef7b2fa293d7022f77528c118ea9ad2278e5559050b10e3903625ad89b52b03",
+    "reason": "One actor/tenant/meeting/client-bound read and mutation lifetime owns the synchronous fence, cleanup, existing artifact coordination and invalidations. Native request/receipt validation lives in api/contracts, not UI.",
+    "reviewedBy": "Codex shared frontend integration review with independent core_intake_review",
     "reviewedOn": "2026-10-12"
   }
 ]
