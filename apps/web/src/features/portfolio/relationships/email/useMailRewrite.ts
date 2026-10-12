@@ -3,6 +3,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
 import { requestMailRewrite, rewrittenMailText } from "./rewrite";
+import { plainMailBody, type MailBody } from "./mail-body";
 
 type RewriteStatus = {
   isPending: boolean;
@@ -35,13 +36,13 @@ export function useMailRewrite({
 }) {
   const api = useApi();
   const cache = useQueryClient();
-  const [body, setBody] = useState(initialBody);
+  const [body, setBody] = useState(() => plainMailBody(initialBody));
   const [state, setState] = useState({ ...idle, sourceKey });
   const revision = useRef(0);
   const lifetime = useRef({ active: false, sourceKey });
   const pending = useRef<RewriteAttempt | null>(null);
   const previous = useRef<{
-    body: string;
+    body: MailBody;
     sourceKey: string;
     assert: () => void;
   } | null>(null);
@@ -84,7 +85,7 @@ export function useMailRewrite({
     };
   }, [cache, sourceKey]);
 
-  function edit(value: string) {
+  function edit(value: MailBody) {
     revision.current++;
     const attempt = pending.current;
     pending.current = null;
@@ -151,7 +152,7 @@ export function useMailRewrite({
       const result = await requestMailRewrite(
         api,
         {
-          rawText: body,
+          rawText: body.text,
           recipientName: recipient.name,
           ...(recipient.title ? { recipientTitle: recipient.title } : {}),
         },
@@ -160,10 +161,10 @@ export function useMailRewrite({
       );
       attempt.assert();
       if (result.verified) {
-        const rewritten = rewrittenMailText(result.bodyHtml, body);
-        if (rewritten !== body) {
+        const rewritten = rewrittenMailText(result.bodyHtml, body.text);
+        if (rewritten !== body.text) {
           previous.current = { body, sourceKey, assert: assertAuthority };
-          setBody(rewritten);
+          setBody(plainMailBody(rewritten));
         }
       }
       setState({

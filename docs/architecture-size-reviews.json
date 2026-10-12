@@ -158,23 +158,6 @@
     ]
   },
   {
-    "path": "apps/web/src/features/modules/engagement/MeetingLibrary.tsx",
-    "sha256": "09df8ca2d02026f72ced2ee0a86fff841cbee9b961fd0e544323dbef579d4267",
-    "reviewer": "Codex shared frontend integration review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
-    "rationale": "The meeting list and selection retain their existing owner. The upcoming queue uses a stable mounted-view clock and apostrophe escaping preserves visible text. Export, attendance and preparation contracts remain in their adapters.",
-    "functions": [
-      {
-        "name": "MeetingLibrary",
-        "nonblankLines": 116
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/engagement/MeetingLibrary.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
     "path": "apps/web/src/features/modules/engagement/OutreachView.tsx",
     "sha256": "20bdd7f04a8f1414113b3ec9ded35a6176ac7fdbbf9f193bb8d2dc307f6b0512",
     "reviewer": "Codex shared frontend integration review",
@@ -1757,23 +1740,6 @@
     ]
   },
   {
-    "path": "apps/web/src/features/modules/planner/PublicForm.tsx",
-    "sha256": "bd18ef0a2a085c5b060f02f1e77d901c2c86df201a9367e3baa2c6d1b38092c9",
-    "reviewer": "Codex shared frontend integration review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
-    "rationale": "The public token form retains its distinct unauthenticated capability contract. A keyed FormRequest owns one token/revision read lifetime, while PublicFormQuestions retains answer, attachment and submission state. Retry and token replacement now explicitly remount both and abort old requests.",
-    "functions": [
-      {
-        "name": "PublicFormQuestions",
-        "nonblankLines": 101
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/planner/PublicForm.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
     "path": "apps/web/src/features/modules/planner/ResourceEditor.tsx",
     "sha256": "d68c5f2ee915af38335c716cb3b5e2b663f8a564372b03d9e1471362ae3bab36",
     "reviewer": "Codex shared frontend integration review",
@@ -1844,45 +1810,6 @@
     "signals": [
       "apps/web/src/features/modules/planner/TaskEditor.tsx: function over80 nonblank lines requires review",
       "apps/web/src/features/modules/planner/TaskEditor.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/planner/TaskViews.tsx",
-    "sha256": "36f60ab5694bd29d767cdf895a0aaf8126c01747958c31042a02919ba1d39d72",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
-    "rationale": "TaskViews.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
-    "functions": [
-      {
-        "name": "TaskList",
-        "nonblankLines": 100
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/planner/TaskViews.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
-    "path": "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
-    "sha256": "d636dd0f21520044523b2a863e88aad088d70122b86a6b3c751c5c0c06367e72",
-    "reviewer": "Codex shared frontend integration owner and independent core_intake source review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/followup-20261012/STRUCTURE-REVIEW.md#modules-presentation",
-    "rationale": "The existing task workspace owns its related list query, local filters, selection and batch actions. A narrow shared taskMatchesClient predicate replaces inline client/project membership logic and is characterized as direct-client OR current-project association, not backend authorization. TaskFilters remains byte-identical to the frozen base and renders only this workspace's controls; its whole-file review is renewed for the sibling change. Root and independent core_intake reviewed both complete functions. See docs/followup-20261012/STRUCTURE-REVIEW.md.",
-    "functions": [
-      {
-        "name": "useTaskWorkspace",
-        "nonblankLines": 87
-      },
-      {
-        "name": "TaskFilters",
-        "nonblankLines": 90
-      }
-    ],
-    "signals": [
-      "apps/web/src/features/modules/planner/TaskWorkspace.tsx: function over80 nonblank lines requires review",
-      "apps/web/src/features/modules/planner/TaskWorkspace.tsx: function over80 nonblank lines requires review"
     ]
   },
   {
@@ -2907,18 +2834,6 @@
     ]
   },
   {
-    "path": "apps/web/src/features/modules/workspace/workspace.module.css",
-    "sha256": "335f344cd19574f5077f81e585d9bf4fc2dcae6f7718c62088b417676f9f4b6f",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#styles",
-    "rationale": "workspace.module.css owns its feature family visual vocabulary and responsive variants. Related selectors stay together; no behavioral or authorization responsibility is present, and no private cross-feature selectors were introduced.",
-    "functions": [],
-    "signals": [
-      "apps/web/src/features/modules/workspace/workspace.module.css: 782 nonblank lines require review"
-    ]
-  },
-  {
     "path": "apps/web/src/features/settings/BillingSettings.tsx",
     "sha256": "7a64a5917f672d5064c75795e34cdfdcc465de8953c40d3cc4b2c529601a3838",
     "reviewer": "Codex independent objectives_work_intel_review and root integration review",
@@ -3585,23 +3500,6 @@
     ]
   },
   {
-    "path": "apps/web/src/shared/meetings/MeetingDetail.tsx",
-    "sha256": "64e8b027a336710260cfc9a69a4802c86d39aadc33e52437e97f4d27f7d844ae",
-    "reviewer": "Codex implementation review",
-    "reviewedAt": "2026-10-12",
-    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#shared-meetings",
-    "rationale": "MeetingDetail.tsx is the canonical meeting detail/artifact presentation shared by Engagement and Calendar. Transport, authorization and mail/runtime execution remain outside the component.",
-    "functions": [
-      {
-        "name": "MeetingDetail",
-        "nonblankLines": 98
-      }
-    ],
-    "signals": [
-      "apps/web/src/shared/meetings/MeetingDetail.tsx: function over80 nonblank lines requires review"
-    ]
-  },
-  {
     "path": "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx",
     "sha256": "314c3d1c5fedb548d77b926aa2664deb4d82b11468b3d39546d8c19719c94809",
     "reviewer": "Codex independent objectives_work_intel_review and root integration review",
@@ -3725,20 +3623,136 @@
     ]
   },
   {
-    "path": "apps/web/src/features/modules/planner/PlannerScreen.tsx",
-    "sha256": "a70833a933e56c826547563a317fd98bd6fc726a8d213b971599af8d7e528182",
-    "reviewer": "Codex shared frontend integration owner and independent core_intake source review",
+    "path": "apps/web/src/shared/meetings/MeetingDetail.tsx",
+    "sha256": "095bb21f213f9c0790c5f795c02359d44566779bee1bda4d94a257dbdf8796c8",
+    "reviewer": "Codex shared frontend integration review with independent objectives_work_intel_review",
     "reviewedAt": "2026-10-12",
-    "evidence": "docs/followup-20261012/STRUCTURE-REVIEW.md#modules-presentation",
-    "rationale": "One public Planner entry composes section navigation and current bootstrap. LinkedTaskDetail is the separate narrow owner of task URL resolution, current ID/client presentation checks, retry and dismissal; existing TaskDetail remains canonical. All content stays behind the current bootstrap gate. Root and independent core_intake reviewed scope and history controls; no new transport or authorization behavior in this composition. See docs/followup-20261012/STRUCTURE-REVIEW.md.",
+    "evidence": "docs/remaining-repairs-20261012/STRUCTURE-REVIEW.md#shared-meetings",
+    "rationale": "One selected meeting read and material-tab composition. Current receipt lineage gates both inline and modal presentations; header/link and preparation rendering are separate cohesive children, and artifact editing retains its canonical owner. No new transport, authority, provider or persistence responsibility. Missing versus empty preparation remains explicit. Independent source review accepted exact correction; browser and combined qualification are reported separately.",
+    "functions": [
+      {
+        "name": "MeetingDetail",
+        "nonblankLines": 92
+      }
+    ],
+    "signals": [
+      "apps/web/src/shared/meetings/MeetingDetail.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/engagement/MeetingLibrary.tsx",
+    "sha256": "9f2ef9d73525ab845d2ac7e83de2958314579a63f061bd36ef72600f6148012e",
+    "reviewer": "Codex shared frontend integration review with independent objectives_work_intel_review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/remaining-repairs-20261012/STRUCTURE-REVIEW.md#shared-meetings",
+    "rationale": "Existing meeting list/filter/selection composition with a deliberate inline list-detail view. MeetingSplitView owns geometry and focus; existing query hooks retain fixed-operation reads. Client/mode scope replacement clears selected meeting before another list can expose it, while filter state remains local. Default library and queue modal behavior is preserved. Independent source review accepted exact correction; browser and combined qualification remain separate.",
+    "functions": [
+      {
+        "name": "MeetingLibrary",
+        "nonblankLines": 124
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/engagement/MeetingLibrary.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/PlannerScreen.tsx",
+    "sha256": "363d965a5dd033843b7fb1afaba6a5822877869f406cbd04752fb8004651dad5",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/remaining-repairs-20261012/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "Planner route composition owns section/project selection, current bootstrap and optional All tasks client catalog. The new picker isolates URL scope interaction in PlannerClientScope; grouping and table presentation remain outside this controller. No authorization/transport orchestration added.",
     "functions": [
       {
         "name": "PlannerScreen",
-        "nonblankLines": 82
+        "nonblankLines": 106
       }
     ],
     "signals": [
       "apps/web/src/features/modules/planner/PlannerScreen.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/PublicForm.tsx",
+    "sha256": "ed102f7fec21c728f1d049b83142223482ed300c97e162461531a110b28f9a5e",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/remaining-repairs-20261012/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "Existing public submit state, conditional displayed answers and attachment collection remain one cohesive form lifecycle. This patch changes only card headings, fieldset styling and alert/button placement; transport validation, abort lifetime, in-flight guard and input retention stay canonical and unchanged.",
+    "functions": [
+      {
+        "name": "PublicFormQuestions",
+        "nonblankLines": 107
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/PublicForm.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/TaskViews.tsx",
+    "sha256": "87bef46fbafa2e42329fd9461de0400655b771270d1299cec9da34831228dd71",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/remaining-repairs-20261012/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "TaskViews is the existing permitted-task rendering owner for list, board, calendar and timeline/Gantt presentations, selected through one typed Props interface. These modes reuse canonical task/date/status helpers and emit the same parent-owned select/open/complete/move callbacks; the only local state is Calendar display month. This patch adds client section headings and compact grouped columns while reusing the sole TaskList row implementation. Group derivation is separately owned by the pure task-client-groups helper; current reads, permissions, writes, pending/error state and editors remain TaskWorkspace/its established owners. There is no second query, transport, authorization, persistence or mutation lifecycle in this module. Its 408-line size is a review trigger; retaining these closely related renderers avoids an unrelated mechanical split, subject to root independent whole-module acceptance. Single table column definition still owns selection, task opening and completion presentation for flat/grouped views. Grouped rows add current project labels and omit time totals; no duplicate task-row implementation or new dispatch behavior. Native operations remain TaskWorkspace responsibility. The entire408-line module was additionally reviewed by root: existing board, list, calendar and timeline/gantt renderers consume one permitted task projection with shared callbacks. Only grouped list presentation changes; view-specific local calendar selection and scheduling geometry remain existing UI responsibilities. No query, mutation transport, persistence, authority or separate domain is introduced. Named render functions already partition each view. The file signal is explicitly included, not hidden by the single-function proposal.",
+    "functions": [
+      {
+        "name": "TaskList",
+        "nonblankLines": 135
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/TaskViews.tsx: 408 nonblank lines require review",
+      "apps/web/src/features/modules/planner/TaskViews.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
+    "sha256": "0ba080a47173133c48a42f63f406e937586a6a810b9b7f48715deea9c159af23",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/remaining-repairs-20261012/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "One task workspace composes its query/filter model, toolbar, selection, results and existing dialogs. This patch adds only local Group by state and calls the separate typed presentation grouping helper. Existing fixed-operation dispatch, scope predicate and dialog owners remain unchanged. No additional native lifecycle or unrelated domain added. Existing task-page local model owns query, filters, selection and task actions. New groupBy is presentation-only local state; no persistence or transport field is invented. Current read disposal remains useCapiroQuery/ApplicationBoundary. One bounded task toolbar uses canonical SelectInput/Tabs/actions. The sole added control switches All tasks list grouping. Existing controls and handlers remain unchanged; no duplicated filtering algorithm.",
+    "functions": [
+      {
+        "name": "useTaskWorkspace",
+        "nonblankLines": 90
+      },
+      {
+        "name": "TaskFilters",
+        "nonblankLines": 101
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/TaskWorkspace.tsx: 409 nonblank lines require review",
+      "apps/web/src/features/modules/planner/TaskWorkspace.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/modules/planner/TaskWorkspace.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/planner.module.css",
+    "sha256": "9221305dabbe776b1cf6b484087f47e7be9197029186ff8e1f39fc41f09e8d05",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/remaining-repairs-20261012/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "Canonical Planner presentation stylesheet gains only client group card/header/table geometry. Public form card styling is in its own public-form.module.css owner because its public page differs from authenticated Planner. No global/common override. Final automatic table layout honors name/metadata cell widths with visually hidden semantic headers; fixed layout had incorrectly equalized columns.",
+    "functions": [],
+    "signals": [
+      "apps/web/src/features/modules/planner/planner.module.css: 441 nonblank lines require review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/workspace.module.css",
+    "sha256": "48fd2aae2553a13ed60b9cf5936f86f0884b58e16ee051c02b529fdc37e21c3c",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/remaining-repairs-20261012/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "Existing Workspace feature stylesheet remains canonical. Exactly owned filter rules now target actual Radix combobox triggers plus phone wrapping; all editor/workflow rules remain unchanged. A broad CSS extraction would be unrelated to this bounded repair.",
+    "functions": [],
+    "signals": [
+      "apps/web/src/features/modules/workspace/workspace.module.css: 791 nonblank lines require review"
     ]
   }
 ]

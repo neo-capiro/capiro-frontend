@@ -29,6 +29,7 @@ import { TaskDetail } from "./TaskDetail";
 import { taskMatchesClient } from "./task-client-scope";
 import { TaskEditor } from "./TaskEditor";
 import { TaskViews } from "./TaskViews";
+import { groupTasksByClient } from "./task-client-groups";
 type Props = {
   mine: boolean;
   initialView?: TaskView;
@@ -38,6 +39,7 @@ type Props = {
   projectId: string | null;
   people: PlannerPerson[];
   projects: PlannerProject[];
+  clients?: readonly { id: string; name: string }[];
 };
 type Model = ReturnType<typeof useTaskWorkspace>;
 function useTaskWorkspace({
@@ -50,7 +52,8 @@ function useTaskWorkspace({
 }: Props) {
   const api = useCapiro();
   const [view, setView] = useState<TaskView>(initialView),
-    [budget, setBudget] = useState(false);
+    [budget, setBudget] = useState(false),
+    [groupBy, setGroupBy] = useState(!mine && !projectId ? "client" : "none");
   const [search, setSearch] = useState(""),
     [status, setStatus] = useState("open"),
     [priority, setPriority] = useState("all"),
@@ -108,6 +111,8 @@ function useTaskWorkspace({
   return {
     view,
     setView,
+    groupBy,
+    setGroupBy,
     budget,
     setBudget,
     search,
@@ -155,6 +160,9 @@ export function TaskWorkspace(props: Props) {
         Time is shown as hours:minutes. This page includes only work you can
         access.
         {props.clientId ? " Client scope filters the current task page." : ""}
+        {!props.mine && !props.projectId
+          ? " Client groups and counts include only the displayed page."
+          : ""}
       </p>
       {model.budget && props.projectId ? (
         <ProjectBudget projectId={props.projectId} people={props.people} />
@@ -243,6 +251,17 @@ function TaskFilters({ props, model: m }: { props: Props; model: Model }) {
         <ActionButton onClick={() => m.setDialog("import")}>
           Import CSV
         </ActionButton>
+        {!props.mine && !props.projectId && m.view === "list" && (
+          <SelectInput
+            aria-label="Group by"
+            value={m.groupBy}
+            onValueChange={m.setGroupBy}
+            options={[
+              { value: "client", label: "Group by · Client" },
+              { value: "none", label: "Group by · None" },
+            ]}
+          />
+        )}
         <ActionButton onClick={() => m.setDialog("save-view")}>
           Save view
         </ActionButton>
@@ -298,6 +317,16 @@ function TaskResults({ props, model: m }: { props: Props; model: Model }) {
           tasks={m.visible}
           people={props.people}
           view={m.view}
+          groups={
+            m.groupBy === "client" && !props.mine && !props.projectId
+              ? groupTasksByClient(
+                  m.visible,
+                  props.projects,
+                  props.clients ?? [],
+                )
+              : undefined
+          }
+          projects={props.projects}
           selected={m.selected}
           onSelect={m.toggleSelection}
           onOpen={m.setTask}

@@ -1,0 +1,15 @@
+{
+  "firstAttempt": "runner-setup-failed.log",
+  "browserLaunched": false,
+  "testsRun": 0,
+  "cause": "Root-install Playwright runner and owner test resolving the borrowed followup install loaded two physical copies.",
+  "correction": "Use the owner borrowed install for both runner and config, as the spec already does. Application remains exact d68 root source.",
+  "sourceEditsForSetup": false,
+  "secondAttempt": {
+    "log": "runner-selection-failed.log",
+    "browserLaunched": false,
+    "testsRun": 0,
+    "cause": "Anchored grep omitted the filename prefix in the Playwright full test title.",
+    "correction": "Use the unchanged full unique test title without regex anchors."
+  }
+}

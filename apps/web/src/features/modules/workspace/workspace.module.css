@@ -47,8 +47,13 @@
 .filters > input {
   width: 220px;
 }
-.filters > select {
+.filters > [role="combobox"] {
+  width: auto;
   max-width: 190px;
+  min-height: 34px;
+  height: 34px;
+  padding: 7px 10px;
+  font-size: 13px;
 }
 .pills {
   display: flex;
@@ -746,6 +751,10 @@
   }
   .filters > input {
     width: 100%;
+  }
+  .filters > [role="combobox"] {
+    flex: 1 1 auto;
+    max-width: 100%;
   }
   .paper {
     padding: 22px;

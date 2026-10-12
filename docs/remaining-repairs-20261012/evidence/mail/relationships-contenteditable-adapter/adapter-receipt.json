@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-12T21:44:54.739778+00:00",
+  "ownerBase": "685e55039d5d3945c76085513cde8bc6c33cb55d",
+  "rootFrozen": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+  "path": "apps/web/tests/browser/relationships.spec.ts",
+  "line": 511,
+  "change": "toHaveValue -> toHaveText",
+  "expectedValue": "Synthetic message",
+  "locator": "mail.getByLabel(\"Message\", { exact: true })",
+  "beforeSha256": "ca439b6a7c7494a879a508382cff343a3e514c76091f8feca803c351fb56b9d4",
+  "afterSha256": "ad299c87f68dee52a5123e2cc215415de3879cc5d65a6c1f252ac1e83a6662ec",
+  "onlyMatcherChanged": true,
+  "allOtherBytesIdentical": true,
+  "providerAndNoteHandlersCountsUnchanged": true,
+  "noProductionChanges": true,
+  "runtimeRerun": false,
+  "greenBrowserStatus": "unrun: no lease; root owns exact-source rerun",
+  "preexistingUntrackedDependencyLinkPreserved": true
+}

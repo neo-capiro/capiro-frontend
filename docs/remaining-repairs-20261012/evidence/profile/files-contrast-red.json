@@ -1,0 +1,235 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-remaining-profile/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "/tmp/capiro-remaining-profile-evidence/playwright.config.ts"
+    ],
+    "configFile": "/tmp/capiro-remaining-profile-evidence/playwright.config.ts",
+    "rootDir": "/tmp/capiro-remaining-profile-evidence",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-remaining-profile-evidence/files-contrast-red",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-remaining-profile-evidence",
+        "testIgnore": [],
+        "testMatch": [
+          "contrast.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-remaining-profile-evidence/files-contrast-red.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "contrast.spec.ts",
+      "file": "contrast.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "selected Files view keeps readable text while hovered at 1440px",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2540,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m4.5\u001b[39m\nReceived:    \u001b[31m1.1491398126989472\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m4.5\u001b[39m\nReceived:    \u001b[31m1.1491398126989472\u001b[39m\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/files-view-contrast.spec.ts:41:22",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/files-view-contrast.spec.ts",
+                      "column": 22,
+                      "line": 41
+                    },
+                    "snippet": "  39 |       );\n  40 |     });\n> 41 |     expect(contrast).toBeGreaterThanOrEqual(4.5);\n     |                      ^\n  42 |     expect(unexpected).toEqual([]);\n  43 |   });\n  44 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/files-view-contrast.spec.ts",
+                        "column": 22,
+                        "line": 41
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m4.5\u001b[39m\nReceived:    \u001b[31m1.1491398126989472\u001b[39m\n\n  39 |       );\n  40 |     });\n> 41 |     expect(contrast).toBeGreaterThanOrEqual(4.5);\n     |                      ^\n  42 |     expect(unexpected).toEqual([]);\n  43 |   });\n  44 |\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/files-view-contrast.spec.ts:41:22"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:20:23.268Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-profile-evidence/files-contrast-red/contrast-selected-Files-vi-8ce0a-ext-while-hovered-at-1440px/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-profile-evidence/files-contrast-red/contrast-selected-Files-vi-8ce0a-ext-while-hovered-at-1440px/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/files-contrast-red/contrast-selected-Files-vi-8ce0a-ext-while-hovered-at-1440px/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/files-view-contrast.spec.ts",
+                    "column": 22,
+                    "line": 41
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "71a6ba077a40ffcb3ac4-8a968aa2eba26c0d62f4",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-view-contrast.spec.ts",
+          "line": 5,
+          "column": 7
+        },
+        {
+          "title": "selected Files view keeps readable text while hovered at 360px",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2437,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m4.5\u001b[39m\nReceived:    \u001b[31m1.1491398126989472\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m4.5\u001b[39m\nReceived:    \u001b[31m1.1491398126989472\u001b[39m\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/files-view-contrast.spec.ts:41:22",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/files-view-contrast.spec.ts",
+                      "column": 22,
+                      "line": 41
+                    },
+                    "snippet": "  39 |       );\n  40 |     });\n> 41 |     expect(contrast).toBeGreaterThanOrEqual(4.5);\n     |                      ^\n  42 |     expect(unexpected).toEqual([]);\n  43 |   });\n  44 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/files-view-contrast.spec.ts",
+                        "column": 22,
+                        "line": 41
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m4.5\u001b[39m\nReceived:    \u001b[31m1.1491398126989472\u001b[39m\n\n  39 |       );\n  40 |     });\n> 41 |     expect(contrast).toBeGreaterThanOrEqual(4.5);\n     |                      ^\n  42 |     expect(unexpected).toEqual([]);\n  43 |   });\n  44 |\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/files-view-contrast.spec.ts:41:22"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:20:26.581Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-profile-evidence/files-contrast-red/contrast-selected-Files-vi-15109-text-while-hovered-at-360px/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-profile-evidence/files-contrast-red/contrast-selected-Files-vi-15109-text-while-hovered-at-360px/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/files-contrast-red/contrast-selected-Files-vi-15109-text-while-hovered-at-360px/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/files-view-contrast.spec.ts",
+                    "column": 22,
+                    "line": 41
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "71a6ba077a40ffcb3ac4-c37ced683d10aba424be",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-view-contrast.spec.ts",
+          "line": 5,
+          "column": 7
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T20:20:22.752Z",
+    "duration": 6645.027,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,40 @@
+
+Running 1 test using 1 worker
+
+(node:733401) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/browser/capability-list-registration-layout.spec.ts:211:1 › the complete capability page fits the 320px viewport including its shared header (5.4s)
+
+
+  1) tests/browser/capability-list-registration-layout.spec.ts:211:1 › the complete capability page fits the 320px viewport including its shared header 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      226 |       () => document.documentElement.scrollWidth <= innerWidth,
+      227 |     ),
+    > 228 |   ).toBe(true);
+          |     ^
+      229 |   const header = page.getByRole("banner");
+      230 |   const controls = [
+      231 |     header.getByRole("button", { name: "Toggle navigation", exact: true }),
+        at /workspace/capiro-remaining-capabilities/apps/web/tests/browser/capability-list-registration-layout.spec.ts:228:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-capabilities-evidence/browser-header-before/artifacts/capability-list-registrati-02bd7-including-its-shared-header/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-remaining-capabilities-evidence/browser-header-before/artifacts/capability-list-registrati-02bd7-including-its-shared-header/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-capabilities-evidence/browser-header-before/artifacts/capability-list-registrati-02bd7-including-its-shared-header/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-remaining-capabilities-evidence/browser-header-before/artifacts/capability-list-registrati-02bd7-including-its-shared-header/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/browser/capability-list-registration-layout.spec.ts:211:1 › the complete capability page fits the 320px viewport including its shared header 

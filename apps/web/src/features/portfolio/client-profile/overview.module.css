@@ -56,37 +56,6 @@
   letter-spacing: -0.44px;
   line-height: 1.2;
 }
-.timeline {
-  list-style: none;
-  padding: 0 0 0 16px;
-  margin: 0;
-  max-height: 420px;
-  overflow: auto;
-}
-.timeline li {
-  position: relative;
-  padding: 0 8px 24px 24px;
-  border-left: 1px solid var(--border);
-}
-.timeline li:last-child {
-  padding-bottom: 0;
-}
-.timeline li > div {
-  gap: 5px;
-}
-.timeline time {
-  font-size: 11px;
-}
-.timelineDot {
-  position: absolute;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  left: -5px;
-  top: 5px;
-  background: var(--border-strong);
-  border: 2px solid var(--card);
-}
 .body {
   white-space: pre-wrap;
   font-size: 13px;
@@ -156,5 +125,236 @@
   .profileMeta {
     flex-wrap: wrap;
     gap: 12px;
+  }
+}
+
+.timelineCard:global(.card) {
+  padding: 0;
+  overflow: hidden;
+}
+.timelineHeader {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.timelineHeader h2 {
+  font-size: 16px;
+}
+.timelineFilters {
+  padding: 12px 20px;
+}
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.dateHeading {
+  background: var(--muted);
+  padding: 8px 20px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--muted-foreground);
+}
+.activityItem {
+  min-height: 70px;
+}
+.activityRow {
+  display: flex;
+  gap: 14px;
+  min-height: 70px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.activityIcon {
+  display: flex;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--muted);
+  color: var(--muted-foreground);
+}
+.activityContent {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+}
+.activityHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+.activityHeading strong {
+  font-size: 13px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.activityMeta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.activityMeta time,
+.activityKind,
+.activityDue {
+  font-size: 11px;
+  color: var(--muted-foreground);
+}
+.activityKind {
+  overflow-wrap: anywhere;
+  text-transform: capitalize;
+}
+.activityContent .body {
+  font-size: 12px;
+  color: var(--muted-foreground);
+  overflow-wrap: anywhere;
+}
+.timelineFooter {
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted-foreground);
+}
+.timelineDialog.timelineDialog {
+  width: min(880px, calc(100vw - 32px));
+  height: min(880px, calc(100dvh - 48px));
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-height: min(880px, calc(100dvh - 48px));
+}
+.timelineDialog > header {
+  padding: 24px 28px 4px;
+  flex-shrink: 0;
+}
+.timelineDialog > header h2 {
+  font-size: 20px;
+  padding-right: 132px;
+}
+.timelineDialog > p {
+  padding: 0 28px 12px;
+  font-size: 13px;
+}
+.timelineDialogBody {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.timelineDialogBody .timelineFooter {
+  margin-top: auto;
+}
+.timelineLog {
+  position: absolute;
+  top: 28px;
+  right: 76px;
+}
+.expandedFeed {
+  padding: 0 24px;
+}
+.expandedFeed .dateHeading {
+  background: transparent;
+  padding: 16px 0 10px;
+  margin-left: -14px;
+}
+.expandedFeed .timeline {
+  padding-left: 14px;
+}
+.expandedFeed .activityRow {
+  position: relative;
+  border-bottom: 0;
+  border-left: 1px solid var(--border);
+  padding: 0 0 24px 26px;
+  min-height: 64px;
+}
+.expandedFeed .activityIcon {
+  position: absolute;
+  left: -14px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--card);
+}
+.expandedFeed .activityItem:last-child .activityRow {
+  border-left-color: transparent;
+}
+.expandedMeta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+.expandedMeta .activityKind {
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--muted);
+}
+@media (max-width: 540px) {
+  .timelineHeader,
+  .timelineFilters,
+  .timelineFooter {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .timelineHeader {
+    flex-wrap: wrap;
+  }
+  .activityRow {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+  .activityHeading {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .activityMeta {
+    justify-content: flex-start;
+  }
+  .timelineDialog.timelineDialog {
+    max-height: calc(100dvh - 24px);
+  }
+  .expandedFeed {
+    padding: 0 16px;
+  }
+  .timelineDialog > header {
+    padding: 16px;
+  }
+  .timelineDialog > header h2 {
+    padding-right: 0;
+  }
+  .timelineDialog > p {
+    padding: 0 16px 8px;
+  }
+  .timelineLog {
+    position: static;
+    display: flex;
+    justify-content: flex-end;
+    padding: 4px 16px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .activityIcon img {
+    filter: invert(0.9);
   }
 }

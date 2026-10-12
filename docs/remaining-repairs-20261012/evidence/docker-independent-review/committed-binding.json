@@ -1,0 +1,31 @@
+{
+  "recordedAt": "2026-10-12T20:56:30.970490+00:00",
+  "commit": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+  "files": [
+    {
+      "path": "scripts/docker-context-regression.mjs",
+      "bytes": 6362,
+      "sha256": "404e52d329f094b44928a0d8148501cec937ec6929c0c3fb52799a25fc6c1a35",
+      "matchesReviewedBytes": true
+    },
+    {
+      "path": "scripts/deployment-cli.test.mjs",
+      "bytes": 3349,
+      "sha256": "393f0c193faaf08110515f82b01bac11ea364cfd7f894b5e9568d10239efd998",
+      "matchesReviewedBytes": true
+    },
+    {
+      "path": ".dockerignore",
+      "bytes": 311,
+      "sha256": "0e4ca55ceb868d95b904348b39f3bd86ac55bf26d73cc922ccaea25af9e0b53a",
+      "matchesReviewedBytes": true
+    },
+    {
+      "path": "package.json",
+      "bytes": 1762,
+      "sha256": "616c749f95524f28cf1d07e5f99dbb106442ef7c7f7a27a686ccb8e1ef754b49",
+      "matchesReviewedBytes": true
+    }
+  ],
+  "nativeAcceptance": false
+}

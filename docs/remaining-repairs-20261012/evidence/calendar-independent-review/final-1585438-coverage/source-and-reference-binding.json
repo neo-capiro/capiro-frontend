@@ -1,0 +1,387 @@
+{
+  "preparedAt": "2026-10-12T22:41:35.337286+00:00",
+  "status": "PREPARED_NOT_SEALED_AWAITING_ROOT_PORTFOLIO_COMPLETION",
+  "sourceCommit": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "rootTree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+  "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+  "runtimeSourceTree": "fa4ca7b5ca126f7bcdc1cf816584fa0303d61704",
+  "previousSource": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+  "previousApplicationTree": "9f0698bd6d9cfefb7648fd899ee22f4e3b541617",
+  "previousRuntimeSourceTree": "fa4ca7b5ca126f7bcdc1cf816584fa0303d61704",
+  "priorManifestSHA256": "69e00ca8d7f0a51627c3610bafb202407840d0a156a68b4c9f34f2783d3466bd",
+  "priorManifestAllFilesVerifiedUnchanged": true,
+  "changedPaths": [
+    "apps/web/test/browser/remaining-modules.spec.ts",
+    "docs/remaining-repairs-20261012/STRUCTURE-REVIEW.md"
+  ],
+  "refs": [
+    {
+      "path": "apps/web/test/browser/integration.spec.ts",
+      "line": 37,
+      "sourceAtLine": "test(\"shared product navigation and history preserve verified client hints and scoped styles\", async ({",
+      "sha256": "88c056b836913b4c9f779acaffae2484e4b529d0a7bfa4131d4532c6e7ccd66c",
+      "gitBlob": "f9d93e4d92d41c4a604508cc2694c2d1e8405efc",
+      "previousSHA256": "88c056b836913b4c9f779acaffae2484e4b529d0a7bfa4131d4532c6e7ccd66c"
+    },
+    {
+      "path": "apps/web/test/browser/next-modules-view-persistence.spec.ts",
+      "line": 5,
+      "sourceAtLine": "  test(`Calendar keeps ${view} and chosen date across client, Master and history`, async ({",
+      "sha256": "2f06aa344057208e45c7be5cba95aaf1d60abf260a3b15e7e5c224ac0ef66ee0",
+      "gitBlob": "2b1923b72d501d2987309b341d60f00b6391e2c5",
+      "previousSHA256": "2f06aa344057208e45c7be5cba95aaf1d60abf260a3b15e7e5c224ac0ef66ee0"
+    },
+    {
+      "path": "apps/web/test/browser/next-modules-task-links.spec.ts",
+      "line": 106,
+      "sourceAtLine": "test(\"linked task follows back-forward and discards a held replaced task\", async ({",
+      "sha256": "338cc262edb3ecd79efe5fe1f0a7f7fa87399a346ba15127e511df93b1e486b6",
+      "gitBlob": "2ac4ba68b80eaa27ec663b7a194e19dc07ba359d",
+      "previousSHA256": "338cc262edb3ecd79efe5fe1f0a7f7fa87399a346ba15127e511df93b1e486b6"
+    },
+    {
+      "path": "apps/web/test/browser/objective-work-destinations.spec.ts",
+      "line": 114,
+      "sourceAtLine": "    await page.goBack();",
+      "sha256": "bee9fde73f85e76d91c5727e5249c949685c5d0034f956eac5a3d68990fb0289",
+      "gitBlob": "2f763a0b15dc3ec9c1ac66da42511f6269ba2894",
+      "previousSHA256": "bee9fde73f85e76d91c5727e5249c949685c5d0034f956eac5a3d68990fb0289"
+    },
+    {
+      "path": "apps/web/tests/production/verify-standalone.mjs",
+      "line": 67,
+      "sourceAtLine": "    );",
+      "sha256": "2b06e07abd048aa2d7de43be5ea89fe3115d9ef6bd2993cc7b0f1a60e7846dd8",
+      "gitBlob": "440636cbe6fb6d15c490192e35c9340b1af7ea42",
+      "previousSHA256": "2b06e07abd048aa2d7de43be5ea89fe3115d9ef6bd2993cc7b0f1a60e7846dd8"
+    },
+    {
+      "path": "apps/web/test/browser/session.spec.ts",
+      "line": 20,
+      "sourceAtLine": "test(\"org/session change clears prior records and sign-out removes all protected content\", async ({",
+      "sha256": "371bd65b8e7ef753c722edb1d1c5f07de12d82291e587d8f7061fd59f58bb817",
+      "gitBlob": "999926fc11354f4f7ca7d0b53833ff02cea6746a",
+      "previousSHA256": "371bd65b8e7ef753c722edb1d1c5f07de12d82291e587d8f7061fd59f58bb817"
+    },
+    {
+      "path": "apps/web/test/browser/integration.spec.ts",
+      "line": 169,
+      "sourceAtLine": "test(\"Core expiry clears the application, does not replay and cannot be escaped by changing client\", async ({",
+      "sha256": "88c056b836913b4c9f779acaffae2484e4b529d0a7bfa4131d4532c6e7ccd66c",
+      "gitBlob": "f9d93e4d92d41c4a604508cc2694c2d1e8405efc",
+      "previousSHA256": "88c056b836913b4c9f779acaffae2484e4b529d0a7bfa4131d4532c6e7ccd66c"
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio.spec.ts",
+      "line": 183,
+      "sourceAtLine": "test(\"navigation, permissions, session expiry and mobile layout use real feature components\", async ({",
+      "sha256": "ea288c75629bc8156dde4ef25eada45fb7968141938355a793d46e943fb8c66b",
+      "gitBlob": "fc4bfb4095f7834389cfaa6407fb72e03ef3b16c",
+      "previousSHA256": "ea288c75629bc8156dde4ef25eada45fb7968141938355a793d46e943fb8c66b"
+    },
+    {
+      "path": "apps/web/tests/browser/attendance.spec.ts",
+      "line": 397,
+      "sourceAtLine": "test(\"Meeting privacy errors and session expiry never expose a successful-looking attendance control\", async ({",
+      "sha256": "6d408c2d7b193388ade7ea18ff1e9dcc75925566a0b23702c0b3bebaebb2425d",
+      "gitBlob": "dc2f996f6c7b587574b9c1ed5ed543e9521b99e0",
+      "previousSHA256": "6d408c2d7b193388ade7ea18ff1e9dcc75925566a0b23702c0b3bebaebb2425d"
+    },
+    {
+      "path": "apps/web/test/browser/integration.spec.ts",
+      "line": 120,
+      "sourceAtLine": "test(\"client replacement interrupts a write and organization replacement clears drafts and revalidates\", async ({",
+      "sha256": "88c056b836913b4c9f779acaffae2484e4b529d0a7bfa4131d4532c6e7ccd66c",
+      "gitBlob": "f9d93e4d92d41c4a604508cc2694c2d1e8405efc",
+      "previousSHA256": "88c056b836913b4c9f779acaffae2484e4b529d0a7bfa4131d4532c6e7ccd66c"
+    },
+    {
+      "path": "apps/web/test/browser/next-modules-scope.spec.ts",
+      "line": 13,
+      "sourceAtLine": "test(\"Calendar picker and history share verified scope and discard a held former-client read\", async ({",
+      "sha256": "985874de5010438de1043077cc14926deed4c7b6ac0514165e357f452c00cad4",
+      "gitBlob": "b0ba487222e47bf617e139d2b68faac6596dc8fc",
+      "previousSHA256": "985874de5010438de1043077cc14926deed4c7b6ac0514165e357f452c00cad4"
+    },
+    {
+      "path": "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+      "line": 195,
+      "sourceAtLine": "for (const replacement of [\"user\", \"tenant\", \"prospect\", \"client\"] as const)",
+      "sha256": "e9a32d5e6b794976d349cd16aee2fba5edc2e62949422cfb76e6cdb921ff5978",
+      "gitBlob": "5275cb5e85cdf577db7a8cc25706b02921116f3e",
+      "previousSHA256": "e9a32d5e6b794976d349cd16aee2fba5edc2e62949422cfb76e6cdb921ff5978"
+    },
+    {
+      "path": "apps/web/tests/browser/activity-command-recovery.spec.ts",
+      "line": 57,
+      "sourceAtLine": "for (const replacement of [\"actor\", \"tenant\"] as const) {",
+      "sha256": "10f8837d6e44c11c8642017750257ec73ff3f1cbda70270b070abad8a5eaf533",
+      "gitBlob": "06ed17c9406029336c2a28e085a0c858b29af4ba",
+      "previousSHA256": "10f8837d6e44c11c8642017750257ec73ff3f1cbda70270b070abad8a5eaf533"
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-sharing.spec.ts",
+      "line": 247,
+      "sourceAtLine": "test(\"actor replacement during held preflight produces zero writes\", async ({",
+      "sha256": "0ee7273f96b8c01cf9af22739d436ab207dcd3dd21f9d69dd8871bd2809f7cae",
+      "gitBlob": "ba1abf468b0a649620cfb5566c303c1e5fae9919",
+      "previousSHA256": "0ee7273f96b8c01cf9af22739d436ab207dcd3dd21f9d69dd8871bd2809f7cae"
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+      "line": 95,
+      "sourceAtLine": "  test(`${kind}: malformed receipt preserves draft and fences repeat creation`, async ({",
+      "sha256": "f37b063199dcdea0c1f098a50a1b6ba48e61992c492f05326966c6d890521f06",
+      "gitBlob": "b6ca81e03233a0c0a019652b3ef2a87be7eca0d1",
+      "previousSHA256": "f37b063199dcdea0c1f098a50a1b6ba48e61992c492f05326966c6d890521f06"
+    },
+    {
+      "path": "apps/web/tests/browser/activity-command-recovery.spec.ts",
+      "line": 11,
+      "sourceAtLine": "test(\"reload restores the original body only after fresh Core authority; 404 permits only deliberate exact-key replay\", async ({",
+      "sha256": "10f8837d6e44c11c8642017750257ec73ff3f1cbda70270b070abad8a5eaf533",
+      "gitBlob": "06ed17c9406029336c2a28e085a0c858b29af4ba",
+      "previousSHA256": "10f8837d6e44c11c8642017750257ec73ff3f1cbda70270b070abad8a5eaf533"
+    },
+    {
+      "path": "apps/web/test/browser/newsletter-staging.spec.ts",
+      "line": 129,
+      "sourceAtLine": "test(\"lost response then reload recovers original key/version without restaging later session edits\", async ({",
+      "sha256": "8a8c35892f2374b3b5c555a274f75abb11de63771878d6c8961064870c4d142e",
+      "gitBlob": "f688b7503be7e59e62345e8177efe7519234d891",
+      "previousSHA256": "8a8c35892f2374b3b5c555a274f75abb11de63771878d6c8961064870c4d142e"
+    },
+    {
+      "path": "apps/web/test/browser/prospect-workspace.spec.ts",
+      "line": 124,
+      "sourceAtLine": "test(\"an uncertain save retains edits across navigation and requires read-back before explicit save\", async ({",
+      "sha256": "a454060901bd660003afeb3eaa702e3b717b06fd80405391f3adeda52adbc756",
+      "gitBlob": "336af557d08be617dcc1471dd0865ac6cf43e089",
+      "previousSHA256": "a454060901bd660003afeb3eaa702e3b717b06fd80405391f3adeda52adbc756"
+    },
+    {
+      "path": "apps/web/tests/browser/email-compose.spec.ts",
+      "line": 436,
+      "sourceAtLine": "test(\"confirmation retry reuses storage attempt without another byte upload\", async ({",
+      "sha256": "c61e2e708f1a7a079570478891cd17982586f9bf262d8e979931a7976ccd90c0",
+      "gitBlob": "9ef2551a7cacadde78316c2e5289f96f23296817",
+      "previousSHA256": "c61e2e708f1a7a079570478891cd17982586f9bf262d8e979931a7976ccd90c0"
+    },
+    {
+      "path": "apps/web/tests/browser/files-delete-recovery.spec.ts",
+      "line": 21,
+      "sourceAtLine": "test(\"unknown deletion survives close/reopen until deliberate current review and a new confirmation\", async ({",
+      "sha256": "31bd8876d7edb4ed73a4412a629b2b6a63197a54fae43552f17865e5aec3f7a4",
+      "gitBlob": "0d38971eaea2da4ee72aadc839a9177cfe928c02",
+      "previousSHA256": "31bd8876d7edb4ed73a4412a629b2b6a63197a54fae43552f17865e5aec3f7a4"
+    },
+    {
+      "path": "apps/web/tests/browser/shared-dialog-layout.spec.ts",
+      "line": 143,
+      "sourceAtLine": "    test(`${surface.name} keeps its canonical layout, overlay and focus on ${viewport.name}`, async ({",
+      "sha256": "1908dcd7446c40aceabf63a8b0f7eb85313334ab84ffd49ec6d6327cfa370de7",
+      "gitBlob": "09b283182c53b8715dc7ae3e2f2fe3a117d3b2b8",
+      "previousSHA256": "1908dcd7446c40aceabf63a8b0f7eb85313334ab84ffd49ec6d6327cfa370de7"
+    },
+    {
+      "path": "apps/web/tests/browser/dialog-disabled-focus.spec.ts",
+      "line": 22,
+      "sourceAtLine": "    test(`disabled ${submit} keeps pending and unknown dialog focus at ${width}px`, async ({",
+      "sha256": "392b460ccc2c70f18f577897cfa31e9b575fa2f5b4c758901931880b1f728355",
+      "gitBlob": "a8e7d85c56a5da79d87e6a0dc50e475edb2a82fc",
+      "previousSHA256": "392b460ccc2c70f18f577897cfa31e9b575fa2f5b4c758901931880b1f728355"
+    },
+    {
+      "path": "apps/web/tests/browser/visual.spec.ts",
+      "line": 21,
+      "sourceAtLine": "  test(`representative ${name} screen renders at desktop/mobile and in dark mode`, async ({",
+      "sha256": "f7358b0e00219df4bdf085308d3c860466ada3f3e26fa933fdb42551b506ce14",
+      "gitBlob": "68f982cbcd42bfb75a08a579d0f228aa4a0ba30c",
+      "previousSHA256": "f7358b0e00219df4bdf085308d3c860466ada3f3e26fa933fdb42551b506ce14"
+    },
+    {
+      "path": "apps/web/test/browser/settings-scenes.spec.ts",
+      "line": 95,
+      "sourceAtLine": "test(\"Settings dialogs trap focus and Escape closes an unsent invitation\", async ({",
+      "sha256": "5d34745e0a497181b8935e3489bbabb0b233d7b6cb6c02d81494c09e35e3cb11",
+      "gitBlob": "b68e37cb9f5aef3a4c17e184151d97fcba593338",
+      "previousSHA256": "5d34745e0a497181b8935e3489bbabb0b233d7b6cb6c02d81494c09e35e3cb11"
+    },
+    {
+      "path": "apps/web/test/browser/remaining-modules.spec.ts",
+      "line": 277,
+      "sourceAtLine": "test(\"MS08 scope and grouping controls remain keyboard operable at phone width\", async ({",
+      "sha256": "ff19d419f382abb100089e5bc03619f85d499a044ac995fe4b988e7aac78d994",
+      "gitBlob": "700a39a8a0169f633abb1e0e22b3d25c96187e84",
+      "previousSHA256": "c86ad251ee3eb115e5e6edeb0309192aebd9b3fd38fc6f85fdf19e89deaea78f"
+    },
+    {
+      "path": "apps/web/test/browser/meeting-detail-current.spec.ts",
+      "line": 209,
+      "sourceAtLine": "test(\"MS06 phone detail stays in bounds and Escape restores its list opener\", async ({",
+      "sha256": "f95af100b29a951f7019ee548e1783c05d7ad7371cdae4f5d6956302b1fe0f85",
+      "gitBlob": "4bc05e2a391166dcdf96f9b1d41097bd9eb6e5f9",
+      "previousSHA256": "f95af100b29a951f7019ee548e1783c05d7ad7371cdae4f5d6956302b1fe0f85"
+    },
+    {
+      "path": "packages/qualification-transport/qualification.test.mjs",
+      "line": 167,
+      "sourceAtLine": "test('all ten frozen variants compose through the real factory + external Chat and project exactly once in order', async () => {",
+      "sha256": "74531c453feb5696f1941e681d3e357025b42d76fe8744cf767e5417f5702fd4",
+      "gitBlob": "773e98a6fecb5c63ddd8626c2f7ede5ba83b920e",
+      "previousSHA256": "74531c453feb5696f1941e681d3e357025b42d76fe8744cf767e5417f5702fd4"
+    },
+    {
+      "path": "apps/web/test/run-workspace.test.mjs",
+      "line": 21,
+      "sourceAtLine": "test(\"all eight canonical run states display explicit labels without inferred completion\", () => {",
+      "sha256": "02c102575159a310b814dc33c48f319e2a3ce70fa151802a3af1d3ed27f8aa5e",
+      "gitBlob": "2cc000c27f7d81281d72d9d711409d0bf981ce02",
+      "previousSHA256": "02c102575159a310b814dc33c48f319e2a3ce70fa151802a3af1d3ed27f8aa5e"
+    },
+    {
+      "path": "apps/web/src/features/meri/MeriComposer.tsx",
+      "line": 66,
+      "sourceAtLine": "            type=\"submit\"",
+      "sha256": "1abcdd338fde7735699e91d60ffb3e8e4097828ab2eb8c0addae019f1d5771b8",
+      "gitBlob": "6153c695b9971882b16a6c98a2b177990d8e3a92",
+      "previousSHA256": "1abcdd338fde7735699e91d60ffb3e8e4097828ab2eb8c0addae019f1d5771b8"
+    },
+    {
+      "path": "apps/web/src/features/meri/workspace/MeriRunWorkspace.tsx",
+      "line": 29,
+      "sourceAtLine": "      <p className={styles.notice}>",
+      "sha256": "2cb4d2735cad72a5a9f0230e1f84612b551a515c2cc701b49392be86c926cbd2",
+      "gitBlob": "d641d43469a0e0ba4d7065af742d97ae4967b9dc",
+      "previousSHA256": "2cb4d2735cad72a5a9f0230e1f84612b551a515c2cc701b49392be86c926cbd2"
+    },
+    {
+      "path": "apps/web/src/features/meri/workspace/RunActivityPanel.tsx",
+      "line": 125,
+      "sourceAtLine": "          (label) => (",
+      "sha256": "06e0a6f0076f36da03b9e83e3e8615fd325c98ed11d6e1ac947ecbc1db0232e0",
+      "gitBlob": "3d72861283d5ccbf8eb1c7a57bb0c4d4576bf664",
+      "previousSHA256": "06e0a6f0076f36da03b9e83e3e8615fd325c98ed11d6e1ac947ecbc1db0232e0"
+    },
+    {
+      "path": "apps/web/test/browser/session.spec.ts",
+      "line": 53,
+      "sourceAtLine": "test(\"401 removes protected content and asks for sign-in without replaying a request\", async ({",
+      "sha256": "371bd65b8e7ef753c722edb1d1c5f07de12d82291e587d8f7061fd59f58bb817",
+      "gitBlob": "999926fc11354f4f7ca7d0b53833ff02cea6746a",
+      "previousSHA256": "371bd65b8e7ef753c722edb1d1c5f07de12d82291e587d8f7061fd59f58bb817"
+    },
+    {
+      "path": "apps/web/test/browser/next-modules-scope.spec.ts",
+      "line": 144,
+      "sourceAtLine": "test(\"Calendar tenant replacement and failed current read hide prior agenda rows\", async ({",
+      "sha256": "985874de5010438de1043077cc14926deed4c7b6ac0514165e357f452c00cad4",
+      "gitBlob": "b0ba487222e47bf617e139d2b68faac6596dc8fc",
+      "previousSHA256": "985874de5010438de1043077cc14926deed4c7b6ac0514165e357f452c00cad4"
+    },
+    {
+      "path": "apps/web/tests/browser/activity-command-recovery.spec.ts",
+      "line": 152,
+      "sourceAtLine": "test(\"closing the document and opening another tab recovers the journal without an automatic command call\", async ({",
+      "sha256": "10f8837d6e44c11c8642017750257ec73ff3f1cbda70270b070abad8a5eaf533",
+      "gitBlob": "06ed17c9406029336c2a28e085a0c858b29af4ba",
+      "previousSHA256": "10f8837d6e44c11c8642017750257ec73ff3f1cbda70270b070abad8a5eaf533"
+    },
+    {
+      "path": "apps/web/tests/browser/email-compose.spec.ts",
+      "line": 499,
+      "sourceAtLine": "test(\"actor change while prepare awaits causes zero storage/confirm/send\", async ({",
+      "sha256": "c61e2e708f1a7a079570478891cd17982586f9bf262d8e979931a7976ccd90c0",
+      "gitBlob": "9ef2551a7cacadde78316c2e5289f96f23296817",
+      "previousSHA256": "c61e2e708f1a7a079570478891cd17982586f9bf262d8e979931a7976ccd90c0"
+    },
+    {
+      "path": "apps/web/tests/browser/email-compose.spec.ts",
+      "line": 634,
+      "sourceAtLine": "test(\"actor change during send attachment preflight causes zero mail POST\", async ({",
+      "sha256": "c61e2e708f1a7a079570478891cd17982586f9bf262d8e979931a7976ccd90c0",
+      "gitBlob": "9ef2551a7cacadde78316c2e5289f96f23296817",
+      "previousSHA256": "c61e2e708f1a7a079570478891cd17982586f9bf262d8e979931a7976ccd90c0"
+    },
+    {
+      "path": "packages/qualification-transport/qualification.test.mjs",
+      "line": 195,
+      "sourceAtLine": "test('split SSE / UTF-8 byte boundaries do not corrupt frames (real factory path)', async () => {",
+      "sha256": "74531c453feb5696f1941e681d3e357025b42d76fe8744cf767e5417f5702fd4",
+      "gitBlob": "773e98a6fecb5c63ddd8626c2f7ede5ba83b920e",
+      "previousSHA256": "74531c453feb5696f1941e681d3e357025b42d76fe8744cf767e5417f5702fd4"
+    },
+    {
+      "path": "packages/qualification-transport/qualification.test.mjs",
+      "line": 229,
+      "sourceAtLine": "test('immutable eventId conflict aborts the subscription and preserves the last contiguous cursor', async () => {",
+      "sha256": "74531c453feb5696f1941e681d3e357025b42d76fe8744cf767e5417f5702fd4",
+      "gitBlob": "773e98a6fecb5c63ddd8626c2f7ede5ba83b920e",
+      "previousSHA256": "74531c453feb5696f1941e681d3e357025b42d76fe8744cf767e5417f5702fd4"
+    },
+    {
+      "path": "packages/qualification-transport/qualification.test.mjs",
+      "line": 263,
+      "sourceAtLine": "test('a gap pauses the cursor and is repaired by the missing event (real factory path)', async () => {",
+      "sha256": "74531c453feb5696f1941e681d3e357025b42d76fe8744cf767e5417f5702fd4",
+      "gitBlob": "773e98a6fecb5c63ddd8626c2f7ede5ba83b920e",
+      "previousSHA256": "74531c453feb5696f1941e681d3e357025b42d76fe8744cf767e5417f5702fd4"
+    },
+    {
+      "path": "packages/qualification-transport/qualification.test.mjs",
+      "line": 294,
+      "sourceAtLine": "test('malformed custom data is rejected on the guard boundary before onData/admission', async () => {",
+      "sha256": "74531c453feb5696f1941e681d3e357025b42d76fe8744cf767e5417f5702fd4",
+      "gitBlob": "773e98a6fecb5c63ddd8626c2f7ede5ba83b920e",
+      "previousSHA256": "74531c453feb5696f1941e681d3e357025b42d76fe8744cf767e5417f5702fd4"
+    },
+    {
+      "path": "packages/qualification-transport/qualification.test.mjs",
+      "line": 381,
+      "sourceAtLine": "test('HTTP 204 reconnect via chat.resumeStream uses the authorized conversation URL and cursor header', async () => {",
+      "sha256": "74531c453feb5696f1941e681d3e357025b42d76fe8744cf767e5417f5702fd4",
+      "gitBlob": "773e98a6fecb5c63ddd8626c2f7ede5ba83b920e",
+      "previousSHA256": "74531c453feb5696f1941e681d3e357025b42d76fe8744cf767e5417f5702fd4"
+    },
+    {
+      "path": "packages/qualification-transport/qualification.test.mjs",
+      "line": 395,
+      "sourceAtLine": "test('incremental reconnect via chat.resumeStream requests the last accepted sequence and appends', async () => {",
+      "sha256": "74531c453feb5696f1941e681d3e357025b42d76fe8744cf767e5417f5702fd4",
+      "gitBlob": "773e98a6fecb5c63ddd8626c2f7ede5ba83b920e",
+      "previousSHA256": "74531c453feb5696f1941e681d3e357025b42d76fe8744cf767e5417f5702fd4"
+    },
+    {
+      "path": "packages/qualification-transport/qualification.test.mjs",
+      "line": 420,
+      "sourceAtLine": "test('stop/dispose on a held-open pending stream admit nothing, issue no durable cancel, and leave run status unchanged', async () => {",
+      "sha256": "74531c453feb5696f1941e681d3e357025b42d76fe8744cf767e5417f5702fd4",
+      "gitBlob": "773e98a6fecb5c63ddd8626c2f7ede5ba83b920e",
+      "previousSHA256": "74531c453feb5696f1941e681d3e357025b42d76fe8744cf767e5417f5702fd4"
+    },
+    {
+      "path": "packages/qualification-transport/qualification.test.mjs",
+      "line": 531,
+      "sourceAtLine": "test('a completed stream outcome does not mark the run complete without an authoritative run.status', () => {",
+      "sha256": "74531c453feb5696f1941e681d3e357025b42d76fe8744cf767e5417f5702fd4",
+      "gitBlob": "773e98a6fecb5c63ddd8626c2f7ede5ba83b920e",
+      "previousSHA256": "74531c453feb5696f1941e681d3e357025b42d76fe8744cf767e5417f5702fd4"
+    },
+    {
+      "path": "apps/web/test/run-workspace.test.mjs",
+      "line": 65,
+      "sourceAtLine": "test(\"selected run and attempt isolate colliding message and tool request IDs\", () => {",
+      "sha256": "02c102575159a310b814dc33c48f319e2a3ce70fa151802a3af1d3ed27f8aa5e",
+      "gitBlob": "2cc000c27f7d81281d72d9d711409d0bf981ce02",
+      "previousSHA256": "02c102575159a310b814dc33c48f319e2a3ce70fa151802a3af1d3ed27f8aa5e"
+    },
+    {
+      "path": "apps/web/test/run-workspace.test.mjs",
+      "line": 171,
+      "sourceAtLine": "test(\"canonical projection owns replay and sequence repair before presentation\", () => {",
+      "sha256": "02c102575159a310b814dc33c48f319e2a3ce70fa151802a3af1d3ed27f8aa5e",
+      "gitBlob": "2cc000c27f7d81281d72d9d711409d0bf981ce02",
+      "previousSHA256": "02c102575159a310b814dc33c48f319e2a3ce70fa151802a3af1d3ed27f8aa5e"
+    }
+  ]
+}

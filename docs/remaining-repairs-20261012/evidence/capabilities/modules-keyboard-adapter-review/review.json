@@ -1,0 +1,68 @@
+{
+  "decision": "ACCEPT_BOUNDED_TEST_CORRECTION",
+  "ownerCommit": "fb093821c6691d3ff45c0cd51ac1edca12364c9b",
+  "applicationBaseline": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+  "sourceSHA256": "ff19d419f382abb100089e5bc03619f85d499a044ac995fe4b988e7aac78d994",
+  "sourceFile": "apps/web/test/browser/remaining-modules.spec.ts",
+  "findings": [],
+  "preservation": {
+    "allOriginalAssertionsExactInOrder": true,
+    "originalAssertionCount": 66,
+    "finalAssertionCount": 76,
+    "all20OriginalTargetStatementsExactInOrder": true,
+    "allSixKeypressesExactInOrder": true,
+    "allBytesOutsideTargetTestCallUnchanged": true,
+    "all10TestDeclarationsRetained": true,
+    "productionAndDependencyChanges": false,
+    "sleepsRetriesTimeoutOrKeyEventChanges": false
+  },
+  "diagnosis": {
+    "baselineInputDeltaMs": 3.447,
+    "causalEvidence": "Radix2.3.8 ArrowDown schedules focus with setTimeout. Final Enter input snapshot still references prior Client-focused DOM. Explicit focus assertions wait for the observable intended next item before selecting it.",
+    "productFailureEstablished": false,
+    "firstCorrectionFailure": "New expanded-state check used the normal accessible trigger lookup while Radix hides background root; final includeHidden:true is confined to these two new attribute assertions.",
+    "visibleFocusAssertionsPreserved": true
+  },
+  "structureReview": {
+    "signal": {
+      "file": "apps/web/test/browser/remaining-modules.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 515,
+      "fingerprint": "c74cdf3448592374784d818b0d4f89512e9a0cfc89e0b13ed9c33afd0a9bd0fd"
+    },
+    "rationale": "The existing bounded Modules presentation regression suite retains canonical next-modules fixtures and related MS07 Workspace, MS08 Planner and MS09 public-form checks. The only addition is ten observable focus/open-state assertions within the existing MS08 phone keyboard scenario. Fixtures, request handlers, authority replacement controls and other scenarios are byte-preserved. No production grouping/focus algorithm is reproduced in the test. Keeping prerequisites next to their original keyboard actions makes the expected transition reviewable; splitting the file for this change would not address a new responsibility.",
+    "callback": {
+      "nonblank": 59,
+      "fingerprint": "e446b32e857bb9fde448c6d412938cac9aa53f9f9fd751eec2450a5fc7644eff"
+    },
+    "callbackRequiresOver80Review": false,
+    "newSizeSignalsIntroduced": 0
+  },
+  "runtimeEvidence": {
+    "independentExecution": "Not run: read-only trace/source review; no runtime lease used.",
+    "ownerReplay": "1/1 passed, one worker, zero retries; no skipped or flaky cases. Exact final source embedded in trace.",
+    "ownerReplayStats": {
+      "startTime": "2026-10-12T22:05:05.604Z",
+      "duration": 2533.41,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "finalTraceSHA256": "63a59e0fece60c5c7512ac78da1ff889524ecf5b14046fb56e37b02253431940",
+    "originalFailedTraceSHA256": "340367c691640536ea9e4507e2098dd4c1570b4aae6e26b9827f8e9de0901ed2",
+    "firstCorrectionFailedTraceSHA256": "872062ff8b833fa936f9cddfcb3bebecda669ccf214897e4488412d1c36eb299",
+    "rootFinalQualification": "Still owned by root; this review does not claim full-suite or native service acceptance."
+  },
+  "changedTestScan": {
+    "baseline": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+    "composition": "d68c2dc plus owner fb09382 test blob in memory",
+    "tsTsxSourceFiles": 28,
+    "allPathsIncludingHtml": 29,
+    "sizeSignals": 14,
+    "countDelta": "relationships.spec.ts joined the previous 27-source/12-signal set; its changed module and unchanged inherited anonymous #2 account for the extra two signals. See count-delta-context.json. This count audit does not blanket-approve other signals."
+  },
+  "evidenceStatus": "Raw original red, intermediate locator red, final green, installed dependency source, exact source snapshots, AST audit and owner receipts preserved; older review packets unchanged."
+}

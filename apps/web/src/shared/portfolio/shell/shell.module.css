@@ -221,3 +221,10 @@ button.mobileToggle {
     display: flex;
   }
 }
+
+@media (max-width: 360px) {
+  header.header {
+    gap: 2px;
+    padding-inline: 8px;
+  }
+}

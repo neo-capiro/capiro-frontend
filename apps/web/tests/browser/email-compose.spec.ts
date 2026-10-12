@@ -1,3 +1,4 @@
+import { expectMailMessage } from "./mail-message-assertions";
 import { test, expect, type Page } from "@playwright/test";
 import { sendingMailbox, sendingReceipt } from "./fixtures";
 const clientId = "10000000-0000-4000-8000-000000000001";
@@ -259,9 +260,7 @@ test("a removed reviewed mailbox is not replaced by another mailbox", async ({
   ).toBeVisible();
   expect(state.sent).toHaveLength(0);
   await page.keyboard.press("Escape");
-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-    "Draft retained for explicit review.",
-  );
+  await expectMailMessage(page, "Draft retained for explicit review.");
 });
 test("an unavailable mailbox contract leaves the draft review disabled", async ({
   page,
@@ -278,9 +277,7 @@ test("an unavailable mailbox contract leaves the draft review disabled", async (
   await expect(
     page.getByText("Mailboxes unavailable", { exact: true }),
   ).toBeVisible();
-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-    "Retained draft",
-  );
+  await expectMailMessage(page, "Retained draft");
   expect(state.sent).toHaveLength(0);
 });
 test("overlay clicks respect context gestures and dismiss only the top email review", async ({
@@ -302,9 +299,7 @@ test("overlay clicks respect context gestures and dismiss only the top email rev
   await expect(
     page.getByRole("dialog", { name: "New email", exact: true }),
   ).toBeVisible();
-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-    "Draft retained for explicit review.",
-  );
+  await expectMailMessage(page, "Draft retained for explicit review.");
   await expect(
     page.getByRole("button", { name: "Review email", exact: true }),
   ).toBeFocused();
@@ -327,9 +322,7 @@ test("invalidated successful idle identity refuses mail dispatch and retains dra
   ).toBeVisible({ timeout: 2000 });
   expect(state.sent).toHaveLength(0);
   await page.keyboard.press("Escape");
-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-    "Draft retained for explicit review.",
-  );
+  await expectMailMessage(page, "Draft retained for explicit review.");
 });
 test("invalidated successful idle identity refuses upload prepare dispatch", async ({
   page,
@@ -403,9 +396,7 @@ test("invalid/duplicate copied recipient retains draft and never sends", async (
   await page.getByLabel("Cc", { exact: true }).fill("TAYLOR@example.test");
   await page.getByRole("button", { name: "Review email", exact: true }).click();
   await expect(page.getByText(/only once across/)).toBeVisible();
-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-    "Draft retained for explicit review.",
-  );
+  await expectMailMessage(page, "Draft retained for explicit review.");
   expect(state.sent).toHaveLength(0);
 });
 test("upload confirmation and scan readiness stay separate before send", async ({
@@ -502,9 +493,7 @@ for (const status of [503, 200])
     await expect(
       page.getByText(/This attempt cannot be retried here/),
     ).toBeVisible();
-    await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-      "Draft retained for explicit review.",
-    );
+    await expectMailMessage(page, "Draft retained for explicit review.");
     expect(state.sent).toHaveLength(1);
   });
 test("actor change while prepare awaits causes zero storage/confirm/send", async ({
@@ -547,9 +536,7 @@ test("reply to foreign-client thread refuses before mail send", async ({
     page.getByRole("button", { name: "Review email", exact: true }),
   ).toBeDisabled();
   await expect(page.getByText(/unexpected response/).last()).toBeVisible();
-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-    "Draft retained for explicit review.",
-  );
+  await expectMailMessage(page, "Draft retained for explicit review.");
   expect(state.sent).toHaveLength(0);
 });
 test("read-only role cannot upload or send", async ({ page }) => {
@@ -610,9 +597,7 @@ test("prepared seed requires canonical availability and an explicit selected rec
   await expect(page.getByLabel("Subject", { exact: true })).toHaveValue(
     "Prepared review",
   );
-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-    "Prepared document for your review.",
-  );
+  await expectMailMessage(page, "Prepared document for your review.");
   await expect(
     page.getByRole("button", { name: "Review email", exact: true }),
   ).toBeDisabled();

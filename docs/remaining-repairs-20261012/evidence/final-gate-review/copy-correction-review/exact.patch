@@ -1,0 +1,21 @@
+commit 4ed4b56aaa1660e7f7abdccd94208c17aa38f21b
+Author:     NEO MARTINEZ <neo@capiro.ai>
+AuthorDate: Mon Oct 12 21:27:42 2026 +0000
+Commit:     NEO MARTINEZ <neo@capiro.ai>
+CommitDate: Mon Oct 12 21:27:42 2026 +0000
+
+    Preserve lowercase activity history limit copy
+
+diff --git a/apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx b/apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx
+index 32a837f..da9f21d 100644
+--- a/apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx
++++ b/apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx
+@@ -71,7 +71,7 @@ export function ActivityTimeline({ clientId }: { clientId: string }) {
+           <small>
+             {rows.length} activities
+             {records.length === 500
+-              ? " · Latest 500 items available from this history feed"
++              ? " · latest 500 items available from this history feed"
+               : ""}
+           </small>
+           {readOnly && (

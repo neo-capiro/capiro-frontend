@@ -1,0 +1,8 @@
+class ShareArtifactsDto {
+  @IsArray()
+  @ArrayMinSize(1)
+  @ArrayMaxSize(50)
+  @ValidateNested({ each: true })
+  @Type(() => ArtifactRefDto)
+  artifacts!: ArtifactRefDto[];
+}

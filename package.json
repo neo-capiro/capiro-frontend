@@ -24,6 +24,7 @@
     "test:portfolio": "npm test --workspace @capiro/web",
     "test:browser": "npm run test:browser --workspace @capiro/web --",
     "test:production": "node apps/web/tests/production/run-standalone.mjs",
+    "test:docker-context": "node scripts/docker-context-regression.mjs",
     "test:browser:modules": "npm run test:browser:modules --workspace @capiro/web"
   },
   "devDependencies": {

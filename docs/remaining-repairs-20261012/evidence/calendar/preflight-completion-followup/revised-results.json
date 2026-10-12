@@ -1,0 +1,130 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-remaining-calendar/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "/tmp/capiro-remaining-calendar-evidence/playwright.config.mjs",
+      "apps/web/tests/browser/calendar-sharing.spec.ts",
+      "--grep",
+      "actor replacement during held preflight produces zero writes"
+    ],
+    "configFile": "/tmp/capiro-remaining-calendar-evidence/playwright.config.mjs",
+    "rootDir": "/workspace/capiro-remaining-calendar/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-remaining-calendar-evidence/preflight-completion-followup/revised-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-remaining-calendar/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 20000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-remaining-calendar-evidence/preflight-completion-followup/revised-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "calendar-sharing.spec.ts",
+      "file": "calendar-sharing.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "actor replacement during held preflight produces zero writes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 20000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2042,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:14:48.098Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "preflight-completion.json",
+                      "contentType": "application/json",
+                      "body": "eyJ1cmwiOiJodHRwOi8vMTI3LjAuMC4xOjUxOTEvYXBpL2JhY2tlbmQvY29yZS9lbmdhZ2VtZW50L21lZXRpbmdzLzkxMDAwMDAwLTAwMDAtNDAwMC04MDAwLTAwMDAwMDAwMDAwMSIsIm5ldHdvcmsiOiJhYm9ydGVkIiwib3JpZ2luYWxBdHRlbXB0IjoicmVmdXNlZCIsIndyaXRlcyI6W119"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b37c751a053b4f2f41d4-3160ed7ba031ed32be81",
+          "file": "calendar-sharing.spec.ts",
+          "line": 247,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T20:14:47.528Z",
+    "duration": 2949.439,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,27 @@
+apps/web/src/features/portfolio/client-profile/ClientDetails.tsx 54ms
+apps/web/src/features/portfolio/client-profile/ProfileFacts.tsx 12ms
+apps/web/src/features/portfolio/client-profile/GovernmentInfo.tsx 13ms
+apps/web/src/features/portfolio/client-profile/TeamRoster.tsx 9ms
+apps/web/src/features/portfolio/client-profile/ClientViewSwitcher.tsx 18ms
+[error] apps/web/src/features/portfolio/client-profile/ClientHeader.tsx: SyntaxError: Declaration or statement expected. (20:4)
+[error]   18 |     clientViews[0];
+[error]   19 |   return () => document.removeEventListener("keydown", onKey);
+[error] > 20 |   }, []);
+[error]      |    ^
+[error]   21 |   return (
+[error]   22 |     <div className={styles.frame}>
+[error]   23 |       <header className={styles.header}>
+apps/web/src/features/portfolio/client-profile/TeamDialog.tsx 12ms (unchanged)
+apps/web/src/features/portfolio/client-profile/TeamMemberFields.tsx 6ms
+apps/web/src/features/portfolio/client-profile/useClientViewKeys.ts 7ms
+apps/web/src/features/portfolio/client-profile/profile-details.module.css 20ms (unchanged)
+apps/web/src/features/portfolio/client-profile/team.module.css 11ms
+apps/web/src/features/portfolio/client-profile/view-switcher.module.css 6ms
+apps/web/src/features/portfolio/client-intake/CompanyStep.tsx 6ms (unchanged)
+apps/web/src/features/portfolio/client-intake/RegistrationStep.tsx 7ms (unchanged)
+apps/web/src/features/portfolio/client-intake/SectorStep.tsx 6ms (unchanged)
+apps/web/src/features/portfolio/client-intake/Fields.tsx 13ms
+apps/web/src/features/portfolio/client-intake/intake.module.css 13ms (unchanged)
+apps/web/src/features/portfolio/client-intake/public.ts 2ms (unchanged)
+apps/web/src/shared/portfolio/shell/client-views.ts 3ms
+apps/web/tests/browser/remaining-intake.spec.ts 21ms

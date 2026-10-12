@@ -47,6 +47,7 @@ export function CompanyStep({ values, set, errors }: StepProps) {
       </div>
       <ChoiceList
         label="Small Business Classification"
+        layout="business"
         options={businessFlags}
         value={Object.keys(values.sbClassification).filter(
           (key) => values.sbClassification[key],

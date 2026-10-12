@@ -1,0 +1,28 @@
+async listSharedMeetingsForClient(ctx: TenantContext, clientId: string) {
+    return this.prisma.withTenant(ctx.tenantId, async (tx) => {
+      const [tenant, rows] = await Promise.all([
+        tx.tenant.findFirst({ where: { id: ctx.tenantId }, select: { settings: true } }),
+        tx.meeting.findMany({
+          where: {
+            tenantId: ctx.tenantId,
+            clientId,
+            visibility: MeetingVisibility.shared,
+            status: { not: 'deleted' },
+          },
+          include: meetingInclude(),
+          orderBy: [{ sharedAt: 'desc' }, { startsAt: 'desc' }],
+        }),
+      ]);
+      const narrowed = rows.map((row) => this.filterToSharedArtifacts(row));
+      const decorated = await this.decorateMeetings(tx, ctx, narrowed);
+      // Phase 2 collision model (spec §7, §4.4): when the tenant is on the
+      // cross-user flag, collapse per-mailbox rows that share a Graph iCalUId into
+      // ONE record — canonical notes, contributors merged (first-sharer primary,
+      // colleagues with their own prep/debrief surfaced via the expander), and
+      // multi-user notetakers attributed. Non-destructive; off = Phase 1 (one row
+      // per record). Rows with no iCalUId (manual meetings) stay standalone.
+      return meetingsCrossUserEnabled(tenant?.settings)
+        ? mergeSharedMeetingsByICalUid(decorated)
+        : decorated;
+    });
+  }

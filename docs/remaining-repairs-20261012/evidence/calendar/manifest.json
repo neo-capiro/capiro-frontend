@@ -1,0 +1,335 @@
+{
+  "sourceCommit": "16fb50f9578cca86189b2e303f0918ddebc60413",
+  "sourceTree": "2af9545acb53781e8fa48944230a6278f982a940",
+  "baseCommit": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+  "branch": "repair/capiro-remaining-calendar-20261012",
+  "worktree": "/workspace/capiro-remaining-calendar",
+  "createdAt": "2026-10-12T20:10:34.203381+00:00",
+  "changes": [
+    {
+      "file": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
+      "sha256": "e28e6310d7b99394510cec58039f74ceb60adc7ac7910af3369ed2b0fdf17aa6",
+      "bytes": 13294
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/MeetingAgenda.tsx",
+      "sha256": "24b58b634b151a8f0ed5a14837838b3a63c0a5f7590482725720a06e6cf4491d",
+      "bytes": 2571
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
+      "sha256": "c2fcee319ca80cada332c9e8fe0aa09277b876aef4b29a7e8a6c82cdb4ea983c",
+      "bytes": 5179
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/MeetingIdentity.tsx",
+      "sha256": "996db99bb02dccfa7d36a60921bbb6f303f7e65ada7776514e32e92114d5d45f",
+      "bytes": 3060
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/artifacts/contracts.ts",
+      "sha256": "312827f14dd931bd856589e52bb9ff12af2fcd41f1d30403c77df2606af9d87d",
+      "bytes": 2876
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/artifacts/metadata.ts",
+      "sha256": "c2c6873c83adcaf1606fad800305bac2065b9391642baef2a5030b5a6221945e",
+      "bytes": 591
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/artifacts/useArtifactMutation.ts",
+      "sha256": "443bdfe2ac7830a73fc07aef22f6c8d1c3118242ece77e7f54dd8e1f34ebd413",
+      "bytes": 3750
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/calendar.module.css",
+      "sha256": "32a28c1f19eb80288225dae4058f009f1eb6cacb7e347d6d074ddb150e33a703",
+      "bytes": 2935
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/contracts.ts",
+      "sha256": "7a20373d12e29ea74dd088e31ef3a2f013c911700772ee13c597d2d489688174",
+      "bytes": 5164
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/feeds.ts",
+      "sha256": "e46c6dd4f6f41f3e27cb834498d067f3970caf7cd9d6186148b46b2f69745382",
+      "bytes": 4742
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/library/SharedMeetings.tsx",
+      "sha256": "cc9180c76585f6ab41d31028cdc9cac43231b4e674ba321b2db0babd1f014596",
+      "bytes": 4828
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/library/public.ts",
+      "sha256": "8ddeec3df871810165d40d62d0c5ae0fd31edc2e400fd841ee8d31a47aa32fa7",
+      "bytes": 333
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/lifecycle.ts",
+      "sha256": "a3d50316a66389f65f666ce0b11726edc584fd49e2a3ec72d312e403d4ca6491",
+      "bytes": 2571
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/preparation/schema.ts",
+      "sha256": "b9699bb7e19abc68645d3e650573691b92c698608e76cd1d67f9940c31755d79",
+      "bytes": 3878
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/review/contracts.ts",
+      "sha256": "9365a8ce200d7a6a7347a6a45933a58bf589c4b6fdf84ade68e3958b3d965553",
+      "bytes": 2804
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/sharing/MeetingSharing.tsx",
+      "sha256": "ed8ce1105570de9ab5f8cbbdb74689b344908321cca84d6373d330aedb425415",
+      "bytes": 6078
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/sharing/api.ts",
+      "sha256": "7e10d160f1b72202393b8921679958faf5c3cf576a363a7c6641ac5b20c6194a",
+      "bytes": 3006
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/sharing/contracts.ts",
+      "sha256": "92f9f70ad1a78632dd267efbb91b72f3f0d714efcd0f21b77b38c6bba91cc290",
+      "bytes": 4039
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/sharing/fence.ts",
+      "sha256": "ac321a98f167846eb06ca869ada1bdc8a3f2a4b62a50bc00b3ec1ddbeb8abc99",
+      "bytes": 489
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/sharing/sharing.module.css",
+      "sha256": "d3f4f2498ab2a1c74fe0382565ce31c1d15b7811cb35ac35e863ed5ff9205a3f",
+      "bytes": 503
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/sharing/targets.ts",
+      "sha256": "5cb7be0f1f33e49917404a47c8b5e9a9716b665a16d7e6bb48d074a26e2d3a8d",
+      "bytes": 2828
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/sharing/useSharing.ts",
+      "sha256": "9855c5f60c0ace9aa2509cb6c98371bf9bea52d1dda75c9141da3fdbe0bc823c",
+      "bytes": 3949
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/useMeetingClock.ts",
+      "sha256": "6efce8a5ce1e88f2e9ca25378923cf48c78cca3027abd7cb665635700caefbbe",
+      "bytes": 384
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-lifecycle.spec.ts",
+      "sha256": "f74d8b284991958fe4bed9fa2952e4a7d52f230e88f4102ce993f15741d199e8",
+      "bytes": 8967
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-sharing-harness.tsx",
+      "sha256": "7d51d8344009553e698a5fde447c62bfeb582c5e9d60116e0b6544208a94ec10",
+      "bytes": 1328
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-sharing.html",
+      "sha256": "3d8d847dca8e2fa5903d480f051756899678a9e324dc091d4a91f8ae8d604357",
+      "bytes": 300
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-sharing.spec.ts",
+      "sha256": "23a2427feb083c1dbcb1474f5376a8902f57290025991dc43f011043924aedee",
+      "bytes": 15006
+    },
+    {
+      "file": "apps/web/tests/calendar-lifecycle-contract.test.ts",
+      "sha256": "a3ce8a8534e8158190a293a2a537547aa212dfb3cec03380bcaa25bc4f51c726",
+      "bytes": 3979
+    },
+    {
+      "file": "apps/web/tests/calendar-sharing-fixtures.ts",
+      "sha256": "788b079ddda8273f485e359d5e112e32474ad4172facb2e474be1f221bbdc05f",
+      "bytes": 2900
+    },
+    {
+      "file": "apps/web/tests/calendar-sharing.test.ts",
+      "sha256": "5d837055a6c3644987422fddfee54b1b3762f4b108b9c064cd699a67e3718a30",
+      "bytes": 6985
+    }
+  ],
+  "evidence": [
+    {
+      "file": "REPORT.md",
+      "sha256": "82f2749e4ef0f0ae03c4ee028b060aa33ef21305427ca98bef538b5e04321439",
+      "bytes": 10714
+    },
+    {
+      "file": "ATTEMPTS.md",
+      "sha256": "5523c4ae4335f5c15ac7960af7ec1ad2d153ac484273036f801f94477d372aa9",
+      "bytes": 4506
+    },
+    {
+      "file": "PLAN.md",
+      "sha256": "3799de949f5b320ffa8a6e357d65c9aac0286961df9c2ded8b89dd5730f5bcf0",
+      "bytes": 2976
+    },
+    {
+      "file": "lifecycle-unit-before.json",
+      "sha256": "bba92f697abd4fe7ba24a8da7acdc620bbce74bdc4cb7317ff313c39a4bfccc7",
+      "bytes": 8499
+    },
+    {
+      "file": "calendar-unit-verified.json",
+      "sha256": "7dfa106d35c52984fb6a029d642a3d5ae329adc6d3775324a84a144bcb4b63fe",
+      "bytes": 36981
+    },
+    {
+      "file": "baseline-results.json",
+      "sha256": "58916e3e8a5969c0fa7eccb060b743c62b133a0e9d5b4dc967abc904918d324f",
+      "bytes": 21184
+    },
+    {
+      "file": "candidate-results.json",
+      "sha256": "b61ebeaa989fd075c57e762c68a2d4f7987d869fab90afc08aeca673043b9b32",
+      "bytes": 81032
+    },
+    {
+      "file": "refresh-controls-results.json",
+      "sha256": "e898dc7dc9eb716c361ff6605f8623afe44a7185e1519a80f0c19e3c9e4f3bdd",
+      "bytes": 4550
+    },
+    {
+      "file": "draft-snapshot-green-results.json",
+      "sha256": "b3a19037d89d51487cddc4c9282ba3289f06becdbf92f38310b16f7049869945",
+      "bytes": 5314
+    },
+    {
+      "file": "final-static-exit.json",
+      "sha256": "338627f65f217ed5a1f082f26fb03e87fb04d5c116c527d745ff78b2e58b99a2",
+      "bytes": 418
+    },
+    {
+      "file": "typecheck-candidate-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "format-final.log",
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20",
+      "bytes": 66
+    },
+    {
+      "file": "lint-corrected.log",
+      "sha256": "4eff80d39062603af577fa48b9a57e465ed5e3ac5ef9f579189b5f7ad605ba8d",
+      "bytes": 806
+    },
+    {
+      "file": "diff-check-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "format-final-correction.json",
+      "sha256": "e487603fe9559403138690fa647a1b1f6bfd7ebe1d77b2a923667f84f74a32d2",
+      "bytes": 412
+    },
+    {
+      "file": "calendar-lifecycle-as-executed-final.spec.ts",
+      "sha256": "88ee26ea2586d47aa71508f8d4c86c4f21eaf2ddee247bbb6acc08adcdacfadf",
+      "bytes": 8992
+    },
+    {
+      "file": "baseline-extraction.json",
+      "sha256": "0ec4416aba5d255042596868af0c2249c342c4b78a8335fd0a3bce4d2cca93c1",
+      "bytes": 199851
+    },
+    {
+      "file": "functional-baseline-specs.json",
+      "sha256": "a93806cdd34dbb9f457417ce45b3a66b45361c0f6a194973afe9696b4d4e284e",
+      "bytes": 310
+    },
+    {
+      "file": "source-pins.json",
+      "sha256": "f36fecf7d76bca0fcfc0353f52342234c8981c2b6ccaeeadca3ce21a56ec9b5a",
+      "bytes": 394
+    },
+    {
+      "file": "native-pin-comparison.json",
+      "sha256": "901966a33545236523c744b93ab38d9263c6b949b8a6324e7e8c89fa81683f31",
+      "bytes": 10264
+    },
+    {
+      "file": "design-baseline-audit.json",
+      "sha256": "98d80bc8eb6e425429329c3a3677a304d2c3d3a51215077de87d4dde32e4f470",
+      "bytes": 3677
+    },
+    {
+      "file": "fresh-design-captures.json",
+      "sha256": "2082321f300e67ceb4214599f689df8ae3d748ec1f8726e7016747b6e1eb89f1",
+      "bytes": 1410
+    },
+    {
+      "file": "visual-review.json",
+      "sha256": "eb911bcbb94d92b4bb2c288406403208f163ef6c11f5c03cc51e6147185994d4",
+      "bytes": 1858
+    },
+    {
+      "file": "structure-review-proposal.json",
+      "sha256": "a92afe4aedfafd107f1620cd6c2f6ab172a4b9db7b26b3725cf5af0d47d3b0ca",
+      "bytes": 5955
+    },
+    {
+      "file": "architecture-final.json",
+      "sha256": "54ad733c06edb7c578f9fb07c932aa5278d060649948dcb0d31c7de3b811348b",
+      "bytes": 762149
+    },
+    {
+      "file": "lease-release.json",
+      "sha256": "a51a528fafa58b0cbce378070b78098b86af0c1014ffeb5eae01302100c1e519",
+      "bytes": 157
+    },
+    {
+      "file": "independent-mail-review.md",
+      "sha256": "c6e4b8e7bf7421249a46fa076d27b995f901707a2169ce3601ae0b047d8ee0f0",
+      "bytes": 3726
+    },
+    {
+      "file": "independent-mail-source-review.json",
+      "sha256": "3648bccc5d614dd907b89f1a64f829962bac3c884f52ac9272a2ec83ea3d8830",
+      "bytes": 7561
+    },
+    {
+      "file": "server.mjs",
+      "sha256": "039e654d34c39c2f4e32743b712b9106ce6f991e43ba050e4830dec31504e69d",
+      "bytes": 2418
+    },
+    {
+      "file": "playwright.config.mjs",
+      "sha256": "475734b8a167ec67f3d48f32d1f977473ed54044692fc3afbfc5f33b58ab2f15",
+      "bytes": 854
+    }
+  ],
+  "browserSummary": {
+    "originalMeaningfulBaselineFailures": 4,
+    "candidatePass": 62,
+    "candidateFail": 2,
+    "correctedNewControlPass": 2,
+    "existingTestsUnchanged": 43,
+    "distinctAffectedControlsPassingAcrossRuns": 64,
+    "single64CaseFinalGreenRun": false,
+    "adjacentDraftBeforeBrowser": "NOT_RUN",
+    "adjacentDraftPositive": 3
+  },
+  "unitSummary": {
+    "passed": 98,
+    "failed": 0
+  },
+  "backendPins": {
+    "originalInspected": "4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace",
+    "compatibilityReviewed": "243248e726243c44bd4b9d24fd1ed220da18c56a"
+  },
+  "independentReview": "/tmp/capiro-remaining-calendar-independent-review",
+  "finalSourceChangedAfterGreen": false,
+  "testWhitespaceOnlyAfterGreen": "format-final-correction.json",
+  "liveEffects": false
+}

@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import type {
   PlannerPerson,
   PlannerTask,
+  PlannerProject,
 } from "../../../shared/capiro/operations/planner-schemas";
 import {
   ActionButton,
@@ -11,6 +13,7 @@ import {
   Panel,
 } from "../../../shared/module-ui";
 import styles from "./planner.module.css";
+import type { TaskClientGroup } from "./task-client-groups";
 import {
   assigneeName,
   dayLabel,
@@ -24,6 +27,8 @@ type Props = {
   tasks: PlannerTask[];
   people: PlannerPerson[];
   view: TaskView;
+  groups?: TaskClientGroup[];
+  projects?: PlannerProject[];
   selected: Set<string>;
   onSelect: (id: string) => void;
   onOpen: (task: PlannerTask) => void;
@@ -41,6 +46,36 @@ export function TaskViews(props: Props) {
         view={props.view}
         onOpen={props.onOpen}
       />
+    );
+  if (props.groups)
+    return (
+      <div className={styles.stack}>
+        {props.groups.map((group) => (
+          <section
+            key={group.key}
+            className={styles.clientGroup}
+            aria-label={`${group.label} tasks`}
+          >
+            <header className={styles.clientGroupHeading}>
+              <h2>{group.label}</h2>
+              <span>
+                {group.tasks.length} shown ·{" "}
+                {group.tasks.filter((task) => task.status !== "done").length}{" "}
+                open
+              </span>
+              {group.clientId && (
+                <Link
+                  href={`/portfolio/${encodeURIComponent(group.clientId)}`}
+                  prefetch={false}
+                >
+                  Open client ↗
+                </Link>
+              )}
+            </header>
+            <TaskList {...props} tasks={group.tasks} />
+          </section>
+        ))}
+      </div>
     );
   return <TaskList {...props} />;
 }
@@ -151,12 +186,42 @@ function TaskList(props: Props) {
             </div>
           ),
         },
+        ...(props.groups
+          ? [
+              {
+                key: "project",
+                label: "Project",
+                render: (task: PlannerTask) =>
+                  task.memberships
+                    .map(
+                      (membership) =>
+                        props.projects?.find(
+                          (project) => project.id === membership.projectId,
+                        )?.name ?? "Project unavailable",
+                    )
+                    .join(", ") || "—",
+              },
+            ]
+          : []),
         {
           key: "assignee",
           label: "Assignee",
           render: (task) => (
-            <span className={styles.muted}>
-              {assigneeName(task, props.people)}
+            <span
+              className={props.groups ? styles.assigneeAvatar : styles.muted}
+              title={assigneeName(task, props.people)}
+              aria-label={assigneeName(task, props.people)}
+            >
+              {props.groups
+                ? task.assigneeId
+                  ? assigneeName(task, props.people)
+                      .split(/\s+/)
+                      .slice(0, 2)
+                      .map((part) => part[0])
+                      .join("")
+                      .toUpperCase()
+                  : "—"
+                : assigneeName(task, props.people)}
             </span>
           ),
         },
@@ -196,16 +261,21 @@ function TaskList(props: Props) {
             </Badge>
           ),
         },
-        {
-          key: "estimated",
-          label: "Estimated",
-          render: (task) => minutesLabel(task.estimateMinutes),
-        },
-        {
-          key: "actual",
-          label: "Actual",
-          render: (task) => minutesLabel(task.actualMinutes),
-        },
+        ...(!props.groups
+          ? [
+              {
+                key: "estimated",
+                label: "Estimated",
+                render: (task: PlannerTask) =>
+                  minutesLabel(task.estimateMinutes),
+              },
+              {
+                key: "actual",
+                label: "Actual",
+                render: (task: PlannerTask) => minutesLabel(task.actualMinutes),
+              },
+            ]
+          : []),
       ]}
     />
   );

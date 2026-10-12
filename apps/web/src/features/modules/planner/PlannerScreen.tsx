@@ -3,6 +3,7 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useSelectedClient } from "../../../shared/session/SelectedClient";
 import { LinkedTaskDetail } from "./LinkedTaskDetail";
+import { PlannerClientScope } from "./PlannerClientScope";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import {
   ActionButton,
@@ -57,6 +58,17 @@ export function PlannerScreen() {
     ),
     [projectId, setProjectId] = useState<string | null>(null);
   const bootstrap = useCapiroQuery("planner.bootstrap", {});
+  const clients = useCapiroQuery(
+    "clients.list",
+    {},
+    { enabled: section === "all-tasks" },
+  );
+  const knownClients = clients.data ?? [];
+  const groupClients =
+    scope.state === "authorized-client" &&
+    !knownClients.some((client) => client.id === scope.client.id)
+      ? [...knownClients, scope.client]
+      : knownClients;
   const [routeView, setRouteView] = useState(() => requestedView);
   if (routeView !== requestedView) {
     setRouteView(requestedView);
@@ -69,7 +81,19 @@ export function PlannerScreen() {
         title="Planner"
         description="Coordinate tasks, projects and capacity across your permitted work."
         actions={
-          <ActionButton onClick={bootstrap.reload}>Refresh</ActionButton>
+          <>
+            {section === "all-tasks" && (
+              <PlannerClientScope clients={clients} section={section} />
+            )}
+            <ActionButton
+              onClick={() => {
+                bootstrap.reload();
+                clients.reload();
+              }}
+            >
+              Refresh
+            </ActionButton>
+          </>
         }
       />
       <Tabs
@@ -100,6 +124,7 @@ export function PlannerScreen() {
             )}
             <PlannerContent
               data={bootstrap.data}
+              clients={groupClients}
               section={section}
               setSection={setSection}
               projectId={projectId}
@@ -117,6 +142,7 @@ export function PlannerScreen() {
   );
 }
 type ContentProps = {
+  clients: readonly { id: string; name: string }[];
   data: NonNullable<
     ReturnType<typeof useCapiroQuery<"planner.bootstrap">>["data"]
   >;
@@ -132,6 +158,7 @@ type ContentProps = {
 };
 function PlannerContent({
   data,
+  clients,
   section,
   setSection,
   projectId,
@@ -154,6 +181,7 @@ function PlannerContent({
         projectId={projectId}
         people={data.people}
         projects={data.projects}
+        clients={clients}
       />
     );
   if (section === "projects")

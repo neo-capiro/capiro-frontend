@@ -1,0 +1,343 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-remaining-mail/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-remaining-mail-evidence/final-base.config.mjs",
+      "--timeout",
+      "12000",
+      "--grep",
+      "rich Bold survives|verified rewrite uses text|keyboard formatting and mobile|local Undo restores exactly"
+    ],
+    "configFile": "/tmp/capiro-remaining-mail-evidence/final-base.config.mjs",
+    "rootDir": "/workspace/capiro-remaining-mail/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-remaining-mail-evidence/final-base-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-remaining-mail/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "mail-rich-compose.spec.ts",
+          "email-compose.spec.ts",
+          "mail-local-draft.spec.ts",
+          "mail-rewrite.spec.ts",
+          "thread-mail.spec.ts"
+        ],
+        "timeout": 12000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-remaining-mail-evidence/final-base-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "mail-local-draft.spec.ts",
+      "file": "mail-local-draft.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "local Undo restores exactly the body preceding the latest verified rewrite with no extra requests",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 12000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2927,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T19:51:15.061Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "86b0d5c245559dd96541-5ab204ddd355c2c35705",
+          "file": "mail-local-draft.spec.ts",
+          "line": 223,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "mail-rich-compose.spec.ts",
+      "file": "mail-rich-compose.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "rich Bold survives review and explicit send without signature duplication",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 12000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 12147,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 12000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 12000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 12000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts",
+                        "column": 57,
+                        "line": 91
+                      },
+                      "message": "Error: locator.click: Test timeout of 12000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Bold', exact: true })\u001b[22m\n\n\n  89 |   await message(page).fill(text);\n  90 |   await message(page).press(\"ControlOrMeta+a\");\n> 91 |   await page.getByRole(\"button\", { name, exact: true }).click();\n     |                                                         ^\n  92 | }\n  93 | async function review(page: Page) {\n  94 |   await page.getByRole(\"button\", { name: \"Review email\", exact: true }).click();\n    at format (/workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts:91:57)\n    at /workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts:108:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T19:51:18.229Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-mail-evidence/final-base-artifacts/mail-rich-compose-rich-Bol-901d4-thout-signature-duplication/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-mail-evidence/final-base-artifacts/mail-rich-compose-rich-Bol-901d4-thout-signature-duplication/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-mail-evidence/final-base-artifacts/mail-rich-compose-rich-Bol-901d4-thout-signature-duplication/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "23d8565415e63e119d0c-0a8874ba915f8cc5e03d",
+          "file": "mail-rich-compose.spec.ts",
+          "line": 104,
+          "column": 3
+        },
+        {
+          "title": "verified rewrite uses text and Undo restores the complete formatted draft",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 12000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 12186,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 12000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 12000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 12000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts",
+                        "column": 57,
+                        "line": 91
+                      },
+                      "message": "Error: locator.click: Test timeout of 12000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Bold', exact: true })\u001b[22m\n\n\n  89 |   await message(page).fill(text);\n  90 |   await message(page).press(\"ControlOrMeta+a\");\n> 91 |   await page.getByRole(\"button\", { name, exact: true }).click();\n     |                                                         ^\n  92 | }\n  93 | async function review(page: Page) {\n  94 |   await page.getByRole(\"button\", { name: \"Review email\", exact: true }).click();\n    at format (/workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts:91:57)\n    at /workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts:134:3"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T19:51:30.926Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-mail-evidence/final-base-artifacts/mail-rich-compose-verified-98d78-he-complete-formatted-draft/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-mail-evidence/final-base-artifacts/mail-rich-compose-verified-98d78-he-complete-formatted-draft/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-mail-evidence/final-base-artifacts/mail-rich-compose-verified-98d78-he-complete-formatted-draft/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "23d8565415e63e119d0c-40000f39807ad22e74cc",
+          "file": "mail-rich-compose.spec.ts",
+          "line": 130,
+          "column": 1
+        },
+        {
+          "title": "keyboard formatting and mobile toolbar remain reachable",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 12000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7523,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Bold', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Bold', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Bold', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Bold', exact: true })\u001b[22m\n\n    at /workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts:273:5",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts",
+                      "column": 5,
+                      "line": 273
+                    },
+                    "snippet": "  271 |   await expect(\n  272 |     page.getByRole(\"button\", { name: \"Bold\", exact: true }),\n> 273 |   ).toBeVisible();\n      |     ^\n  274 |   await message(page).fill(\"Keyboard rich draft.\");\n  275 |   await message(page).press(\"ControlOrMeta+a\");\n  276 |   await message(page).press(\"ControlOrMeta+b\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts",
+                        "column": 5,
+                        "line": 273
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Bold', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Bold', exact: true })\u001b[22m\n\n\n  271 |   await expect(\n  272 |     page.getByRole(\"button\", { name: \"Bold\", exact: true }),\n> 273 |   ).toBeVisible();\n      |     ^\n  274 |   await message(page).fill(\"Keyboard rich draft.\");\n  275 |   await message(page).press(\"ControlOrMeta+a\");\n  276 |   await message(page).press(\"ControlOrMeta+b\");\n    at /workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts:273:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T19:51:43.916Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-mail-evidence/final-base-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-mail-evidence/final-base-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-mail-evidence/final-base-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts",
+                    "column": 5,
+                    "line": 273
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "23d8565415e63e119d0c-89fa0e1fae3f9fed8d24",
+          "file": "mail-rich-compose.spec.ts",
+          "line": 266,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T19:51:14.556Z",
+    "duration": 37313.051,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

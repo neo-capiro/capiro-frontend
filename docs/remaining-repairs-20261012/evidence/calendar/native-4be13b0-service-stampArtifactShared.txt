@@ -1,0 +1,20 @@
+private stampArtifactShared(
+    tx: Prisma.TransactionClient,
+    ref: ArtifactRef,
+    userId: string,
+    now: Date,
+  ): Promise<unknown> {
+    const data = { sharedAt: now, sharedByUserId: userId };
+    switch (ref.type) {
+      case 'prep':
+        return tx.meetingPrep.update({ where: { id: ref.id }, data });
+      case 'note':
+        return tx.meetingNote.update({ where: { id: ref.id }, data });
+      case 'debrief':
+        return tx.meetingDebrief.update({ where: { id: ref.id }, data });
+      case 'attachment':
+        return tx.engagementAttachment.update({ where: { id: ref.id }, data });
+      default:
+        throw new BadRequestException(`Unknown artifact type: ${(ref as ArtifactRef).type}`);
+    }
+  }

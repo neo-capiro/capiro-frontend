@@ -1,0 +1,88 @@
+async listAttachments(
+    ctx: TenantContext,
+    query: { clientId?: string; meetingId?: string; mailMessageId?: string; unlinked?: boolean },
+  ) {
+    const hasParent = Boolean(query.clientId || query.meetingId || query.mailMessageId);
+    if (!hasParent && !query.unlinked) {
+      throw new BadRequestException('An attachment parent (or unlinked=true) is required');
+    }
+    await this.validateAttachmentParents(ctx, query);
+    const { rows, uploaderNameById } = await this.prisma.withTenant(ctx.tenantId, async (tx) => {
+      const rows = await tx.engagementAttachment.findMany({
+        where: {
+          tenantId: ctx.tenantId,
+          // Gate H a-6: a superseded row is a past version, not a document a
+          // caller listing "the client's documents" should see — excluding it
+          // here is what makes supersedeAttachment look like a delete to every
+          // existing reader of this list, even though nothing was destroyed.
+          supersededByAttachmentId: null,
+          // "unlinked" = the tenant's general outreach library: files not tied
+          // to any client, meeting, or mail message. Explicit opt-in (and only
+          // when no parent is given) so a caller can't accidentally page the
+          // whole tenant's attachments.
+          ...(!hasParent && query.unlinked
+            ? { clientId: null, meetingId: null, mailMessageId: null }
+            : {}),
+          ...(query.clientId ? { clientId: query.clientId } : {}),
+          ...(query.meetingId ? { meetingId: query.meetingId } : {}),
+          ...(query.mailMessageId ? { mailMessageId: query.mailMessageId } : {}),
+          // Client Files view ACL: default viewerMode='all' keeps every prior
+          // row visible. Restricted rows only surface for their uploader or a
+          // listed viewerUserIds member. Meeting/mail parent lists still honor
+          // the same rule so a restricted client file cannot leak through
+          // another parent path.
+          OR: [
+            { viewerMode: 'all' },
+            { viewerMode: 'restricted', viewerUserIds: { has: ctx.userId } },
+            { uploadedByUserId: ctx.userId },
+          ],
+        },
+        orderBy: { createdAt: 'desc' },
+      });
+      // Resolve uploader display names (Meetings v2 §8 — the Documents tab shows
+      // the uploader). uploadedByUserId is a bare UUID, so batch-look up the users.
+      const uploaderIds = [
+        ...new Set(rows.map((r) => r.uploadedByUserId).filter((v): v is string => Boolean(v))),
+      ];
+      const users = uploaderIds.length
+        ? await tx.user.findMany({
+            where: { id: { in: uploaderIds } },
+            select: { id: true, firstName: true, lastName: true, email: true },
+          })
+        : [];
+      const uploaderNameById = new Map(users.map((u) => [u.id, userDisplayName(u)]));
+      return { rows, uploaderNameById };
+    });
+    const accessibleRows = [];
+    for (const row of rows) {
+      try {
+        await assertHearingRecordDocumentAccess(this.prisma, ctx, row);
+        accessibleRows.push(row);
+      } catch (error) {
+        if (row.sourceEntityType !== 'hearing_record_brief') throw error;
+        // A removed private context must not leak its title or signed bytes.
+      }
+    }
+    return Promise.all(
+      accessibleRows.map(async (row) => {
+        // Phase 1 §3.h1 — no download URL for a file that may not be used, and an
+        // explicit disclosure when it was never actually scanned. A signed URL for
+        // a quarantined or threat-flagged object is the download the gate exists
+        // to prevent.
+        const verdict = this.attachmentContent.readiness(row, this.scanner.scanRequired);
+        return {
+          ...row,
+          uploadedByName: row.uploadedByUserId
+            ? (uploaderNameById.get(row.uploadedByUserId) ?? null)
+            : null,
+          downloadUrl: verdict.usable ? await this.createAttachmentDownloadUrl(row.s3Key) : null,
+          previewUrl: verdict.usable
+            ? await this.createAttachmentPreviewUrl(row.s3Key, row.contentType)
+            : null,
+          usable: verdict.usable,
+          ...(verdict.code ? { blockedReason: verdict.code } : {}),
+          ...(verdict.disclosure ? { scanDisclosure: verdict.disclosure } : {}),
+        };
+      }),
+    );
+  }

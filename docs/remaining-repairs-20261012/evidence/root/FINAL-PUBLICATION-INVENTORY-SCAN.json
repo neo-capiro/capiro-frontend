@@ -1,0 +1,42 @@
+{
+  "at": "2026-10-12T22:56:16.259778+00:00",
+  "sourceCommit": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "scope": "Bounded plaintext signature scan and final-sized inventory; binary and compressed contents are not a separate security audit; no secret values emitted",
+  "filesObserved": 6927,
+  "bytesObserved": 784191443,
+  "textFilesScanned": 5678,
+  "signatureMatches": [],
+  "filesOver50MiB": [],
+  "borrowedLinks": [
+    {
+      "path": "/tmp/capiro-remaining-capabilities-evidence/node_modules",
+      "target": "/workspace/capiro-remaining-capabilities/node_modules"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-104495d/elements-ssr/negative-6NSaSH/workspace/node_modules",
+      "target": "/workspace/capiro-remaining/node_modules"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/elements-ssr/negative-JdzkmQ/workspace/node_modules",
+      "target": "/workspace/capiro-remaining/node_modules"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/elements-ssr/negative-OVDdAW/workspace/node_modules",
+      "target": "/workspace/capiro-remaining/node_modules"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/elements-ssr/negative-dUvsES/workspace/node_modules",
+      "target": "/workspace/capiro-remaining/node_modules"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-d68c2dc/elements-ssr/negative-F22IjG/workspace/node_modules",
+      "target": "/workspace/capiro-remaining/node_modules"
+    }
+  ],
+  "publicationDirectoryCount": 16,
+  "notes": [
+    "Review producers may still add small final reports before the final preservation manifest.",
+    "Original failures, fixtures and generated proof are retained without extension filtering.",
+    "Newsletter evidence roots are outside this explicit preservation map."
+  ]
+}

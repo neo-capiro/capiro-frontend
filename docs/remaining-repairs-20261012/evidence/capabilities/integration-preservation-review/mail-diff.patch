@@ -1,0 +1,1256 @@
+diff --git a/apps/web/src/features/portfolio/relationships/MailCompose.tsx b/apps/web/src/features/portfolio/relationships/MailCompose.tsx
+index 47a9c3f..3ee1091 100644
+--- a/apps/web/src/features/portfolio/relationships/MailCompose.tsx
++++ b/apps/web/src/features/portfolio/relationships/MailCompose.tsx
+@@ -1,6 +1,7 @@
+ "use client";
+-import { TextareaField } from "@/shared/portfolio/ui/TextareaField";
+-import { useState } from "react";
++import { useRef, useState } from "react";
++import { RichMailEditor, MailBodyPreview } from "./email/RichMailEditor";
++import { mailBodyError } from "./email/mail-body";
+ import { RecipientFields } from "./email/RecipientFields";
+ import { AttachmentFields } from "./email/AttachmentFields";
+ import { useMailAttachments } from "./email/useMailAttachments";
+@@ -9,13 +10,12 @@ import { useMailRewrite } from "./email/useMailRewrite";
+ import { SignaturePreview } from "./email/SignaturePreview";
+ import { recipients, type Recipient } from "./email/recipients";
+ import { MailSendError, type SendInput } from "./email/send";
+-import styles from "./email/email.module.css";
+ import type { MailInitialDraft } from "./email/draft";
+ export type { MailInitialDraft } from "./email/draft";
+ import { Dialog } from "@/shared/portfolio/ui/Dialog";
+ import { QueryState } from "@/shared/portfolio/ui/QueryState";
+ import { type MailContact } from "./email";
+-import { plainMailHtml, useSendMail, useSignature } from "./email";
++import { useSendMail, useSignature } from "./email";
+ import { useMailboxes } from "./email/useMailboxes";
+ import { MailboxField } from "./email/MailboxField";
+ export function MailCompose({
+@@ -41,7 +41,6 @@ export function MailCompose({
+   const [append, setAppend] = useState<boolean | null>(null);
+   const [review, setReview] = useState<{
+     input: SendInput;
+-    text: string;
+     signatureHtml: string | null;
+     signatureStatus: "current" | "loading" | "unavailable";
+   } | null>(null);
+@@ -66,13 +65,16 @@ export function MailCompose({
+   const signature = useSignature();
+   const authority = useMailAuthority(clientId);
+   const mailboxes = useMailboxes(clientId, thread?.id, !sendBlockedReason);
++  const sourceKey = JSON.stringify([clientId, person, thread, to, cc, bcc]);
++  const attachmentInput = useRef<HTMLInputElement>(null);
+   const rewrite = useMailRewrite({
+-    sourceKey: JSON.stringify([clientId, person, thread, to, cc, bcc]),
++    sourceKey,
+     initialBody: initialDraft?.body ?? "",
+     recipient: person,
+     captureAuthority: authority.capture,
+   });
+   const body = rewrite.body;
++  const bodyError = mailBodyError(body);
+   const attachments = useMailAttachments(clientId, initialDraft?.attachments);
+   const uncertain = send.error instanceof MailSendError && send.error.uncertain;
+   const locked = send.isPending || attachments.busy || uncertain;
+@@ -118,13 +120,13 @@ export function MailCompose({
+             )
+               return;
+             try {
++              if (bodyError) throw new Error(bodyError);
+               const selected = recipients(to, cc, bcc);
+               const personIds = selected.to.flatMap((item) =>
+                 item.personId ? [item.personId] : [],
+               );
+               setValidation("");
+               setReview({
+-                text: body,
+                 signatureHtml:
+                   signatureEnabled && signatureCurrent
+                     ? (signature.data.html ?? null)
+@@ -139,7 +141,7 @@ export function MailCompose({
+                   ...(personIds.length ? { personIds } : {}),
+                   ...selected,
+                   subject: subject.trim(),
+-                  bodyHtml: plainMailHtml(body),
++                  bodyHtml: body.html,
+                   appendSignature: signatureEnabled,
+                   attachmentIds: attachments.ids,
+                   ...(thread ? { threadId: thread.id } : {}),
+@@ -183,14 +185,19 @@ export function MailCompose({
+               onChange={(e) => setSubject(e.target.value)}
+             />
+           </label>
+-          <TextareaField
+-            label="Message"
+-            required
+-            maxLength={8000}
++          <RichMailEditor
++            key={sourceKey}
+             value={body}
+             disabled={locked}
+-            onChange={(e) => rewrite.edit(e.target.value)}
+-            rows={9}
++            onChange={rewrite.edit}
++            onAttach={
++              sendBlockedReason
++                ? undefined
++                : () => attachmentInput.current?.click()
++            }
++            attachDisabled={
++              locked || !authority.ready || attachments.jobs.length >= 5
++            }
+           />
+           <button
+             type="button"
+@@ -199,7 +206,7 @@ export function MailCompose({
+               locked ||
+               !authority.ready ||
+               rewrite.isPending ||
+-              !body.trim() ||
++              Boolean(bodyError) ||
+               Boolean(sendBlockedReason)
+             }
+             onClick={() => void rewrite.rewrite()}
+@@ -259,6 +266,7 @@ export function MailCompose({
+           {!sendBlockedReason && (
+             <AttachmentFields
+               state={attachments}
++              inputRef={attachmentInput}
+               disabled={send.isPending || uncertain || !authority.ready}
+             />
+           )}
+@@ -326,7 +334,7 @@ export function MailCompose({
+                 Bcc: {review.input.bcc?.map((item) => item.email).join(", ")}
+               </p>
+             )}
+-            <p className={styles.review}>{review.text}</p>
++            <MailBodyPreview html={review.input.bodyHtml} />
+             {!sendBlockedReason && (
+               <small>
+                 {review.input.attachmentIds?.length ?? 0} attachment(s),
+diff --git a/apps/web/src/features/portfolio/relationships/email.ts b/apps/web/src/features/portfolio/relationships/email.ts
+index 7b3c3af..16fbb2b 100644
+--- a/apps/web/src/features/portfolio/relationships/email.ts
++++ b/apps/web/src/features/portfolio/relationships/email.ts
+@@ -45,15 +45,7 @@ export function threadsForRecipient(threads: MailThread[], email: string) {
+       ),
+   );
+ }
+-export function plainMailHtml(text: string) {
+-  return text
+-    .split(/\r?\n/)
+-    .map(
+-      (line) =>
+-        `<p>${line.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;") || "<br>"}</p>`,
+-    )
+-    .join("");
+-}
++export { plainMailHtml } from "./email/mail-body";
+ export function useContactThreads(clientId: string, email: string | null) {
+   const api = useApi();
+   return useQuery({
+diff --git a/apps/web/src/features/portfolio/relationships/email/AttachmentFields.tsx b/apps/web/src/features/portfolio/relationships/email/AttachmentFields.tsx
+index f30bd3c..8954047 100644
+--- a/apps/web/src/features/portfolio/relationships/email/AttachmentFields.tsx
++++ b/apps/web/src/features/portfolio/relationships/email/AttachmentFields.tsx
+@@ -1,19 +1,23 @@
+ "use client";
++import type { Ref } from "react";
+ import type { useMailAttachments } from "./useMailAttachments";
+ import { mailFileValidation, attachmentRefusal } from "./attachments";
+ import styles from "./email.module.css";
+ export function AttachmentFields({
+   state,
+   disabled,
++  inputRef,
+ }: {
+   state: ReturnType<typeof useMailAttachments>;
+   disabled: boolean;
++  inputRef?: Ref<HTMLInputElement>;
+ }) {
+   return (
+     <section className="stack" aria-label="Email attachments">
+       <label>
+         Attach file
+         <input
++          ref={inputRef}
+           type="file"
+           disabled={disabled || state.busy || state.jobs.length >= 5}
+           onChange={(event) => {
+diff --git a/apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx b/apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx
+new file mode 100644
+index 0000000..ebcaf4b
+--- /dev/null
++++ b/apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx
+@@ -0,0 +1,156 @@
++"use client";
++import { EditorContent, useEditor } from "@tiptap/react";
++import { EditorState } from "@tiptap/pm/state";
++import StarterKit from "@tiptap/starter-kit";
++import { useEffect, useId, useRef } from "react";
++import { type MailBody } from "./mail-body";
++import { safeMailBodyHtml } from "./mail-body-html";
++import styles from "./email.module.css";
++
++/** Local composition only; transport, signature and attachment ownership stay outside. */
++export function RichMailEditor({
++  value,
++  onChange,
++  disabled,
++  onAttach,
++  attachDisabled,
++}: {
++  value: MailBody;
++  onChange: (body: MailBody) => void;
++  disabled: boolean;
++  onAttach?: () => void;
++  attachDisabled: boolean;
++}) {
++  const label = useId();
++  const received = useRef(value.html);
++  const editor = useEditor({
++    immediatelyRender: false,
++    shouldRerenderOnTransaction: true,
++    extensions: [
++      StarterKit.configure({
++        blockquote: false,
++        code: false,
++        codeBlock: false,
++        heading: false,
++        horizontalRule: false,
++        link: false,
++        orderedList: false,
++        strike: false,
++      }),
++    ],
++    content: safeMailBodyHtml(value.html),
++    editable: !disabled,
++    editorProps: {
++      attributes: {
++        role: "textbox",
++        "aria-labelledby": label,
++        "aria-multiline": "true",
++        "aria-required": "true",
++        class: styles.messageBody ?? "",
++      },
++      transformPastedHTML: safeMailBodyHtml,
++    },
++    onUpdate: ({ editor: current }) => {
++      const html = current.getHTML();
++      if (html === received.current) return;
++      received.current = html;
++      onChange({ html, text: current.getText({ blockSeparator: "\n" }) });
++    },
++  });
++  useEffect(() => {
++    if (!editor || received.current === value.html) return;
++    editor.commands.setContent(safeMailBodyHtml(value.html), {
++      emitUpdate: false,
++    });
++    // External rewrites and guarded restores begin a new local editing history.
++    // Only the authority-checked Meri Undo may restore the preceding draft.
++    editor.view.updateState(
++      EditorState.create({
++        schema: editor.schema,
++        doc: editor.state.doc,
++        selection: editor.state.selection,
++        plugins: editor.state.plugins,
++      }),
++    );
++    received.current = editor.getHTML();
++  }, [editor, value.html]);
++  useEffect(() => {
++    editor?.setEditable(!disabled, false);
++  }, [editor, disabled]);
++  const controls = editor
++    ? [
++        {
++          label: "B",
++          name: "Bold",
++          active: editor.isActive("bold"),
++          run: () => editor.chain().focus().toggleBold().run(),
++        },
++        {
++          label: "I",
++          name: "Italic",
++          active: editor.isActive("italic"),
++          run: () => editor.chain().focus().toggleItalic().run(),
++        },
++        {
++          label: "U",
++          name: "Underline",
++          active: editor.isActive("underline"),
++          run: () => editor.chain().focus().toggleUnderline().run(),
++        },
++        {
++          label: "List",
++          name: "List",
++          active: editor.isActive("bulletList"),
++          run: () => editor.chain().focus().toggleBulletList().run(),
++        },
++      ]
++    : [];
++  return (
++    <div className="stack">
++      <span id={label}>Message</span>
++      <div className={styles.richEditor}>
++        <div
++          className={styles.formatting}
++          role="group"
++          aria-label="Message formatting"
++        >
++          {controls.map((control) => (
++            <button
++              key={control.name}
++              type="button"
++              className="button ghost"
++              aria-label={control.name}
++              aria-pressed={control.active}
++              disabled={disabled || !editor}
++              onMouseDown={(event) => event.preventDefault()}
++              onClick={control.run}
++            >
++              {control.label}
++            </button>
++          ))}
++          {onAttach && (
++            <button
++              type="button"
++              className={`button ghost ${styles.attachButton}`}
++              disabled={attachDisabled}
++              onClick={onAttach}
++            >
++              Attach file
++            </button>
++          )}
++        </div>
++        <EditorContent editor={editor} />
++      </div>
++    </div>
++  );
++}
++
++export function MailBodyPreview({ html }: { html: string }) {
++  return (
++    <section
++      aria-label="Message preview"
++      className={styles.messageBody}
++      dangerouslySetInnerHTML={{ __html: safeMailBodyHtml(html) }}
++    />
++  );
++}
+diff --git a/apps/web/src/features/portfolio/relationships/email/email.module.css b/apps/web/src/features/portfolio/relationships/email/email.module.css
+index 63ee06d..f94b9f9 100644
+--- a/apps/web/src/features/portfolio/relationships/email/email.module.css
++++ b/apps/web/src/features/portfolio/relationships/email/email.module.css
+@@ -39,3 +39,56 @@
+   border-radius: 8px;
+   background: white;
+ }
++
++.richEditor {
++  border: 1px solid var(--border);
++  border-radius: 8px;
++  background: var(--card);
++  overflow: hidden;
++}
++.formatting {
++  display: flex;
++  flex-wrap: wrap;
++  align-items: center;
++  gap: 4px;
++  padding: 12px;
++}
++.formatting button {
++  height: 36px;
++  min-width: 32px;
++  padding: 0 10px;
++  border-radius: 10px;
++  font-size: 14px;
++  line-height: 1.2;
++  font-weight: 500;
++}
++.formatting button[aria-pressed="true"] {
++  background: var(--muted);
++}
++.messageBody {
++  min-height: 180px;
++  padding: 16px;
++  font-size: 14px;
++  line-height: 1.45;
++  letter-spacing: -0.07px;
++  overflow-wrap: anywhere;
++  white-space: pre-wrap;
++}
++.messageBody p {
++  margin: 0;
++}
++.messageBody ul {
++  padding-left: 24px;
++  margin: 0;
++}
++.messageBody:focus-visible {
++  outline: 2px solid var(--ring);
++  outline-offset: -2px;
++}
++
++.formatting button[aria-label="List"] {
++  min-width: 50px;
++}
++.formatting .attachButton {
++  min-width: 106px;
++}
+diff --git a/apps/web/src/features/portfolio/relationships/email/mail-body-html.ts b/apps/web/src/features/portfolio/relationships/email/mail-body-html.ts
+new file mode 100644
+index 0000000..6f110d5
+--- /dev/null
++++ b/apps/web/src/features/portfolio/relationships/email/mail-body-html.ts
+@@ -0,0 +1,12 @@
++import DOMPurify from "dompurify";
++
++/** Local display/editor subset. The backend remains the send sanitizer. */
++export function safeMailBodyHtml(html: string) {
++  if (!DOMPurify.isSupported) return "";
++  return DOMPurify.sanitize(html, {
++    ALLOWED_TAGS: ["p", "br", "strong", "b", "em", "i", "u", "ul", "li"],
++    ALLOWED_ATTR: [],
++    ALLOW_DATA_ATTR: false,
++    ALLOW_ARIA_ATTR: false,
++  });
++}
+diff --git a/apps/web/src/features/portfolio/relationships/email/mail-body.ts b/apps/web/src/features/portfolio/relationships/email/mail-body.ts
+new file mode 100644
+index 0000000..b06fd2f
+--- /dev/null
++++ b/apps/web/src/features/portfolio/relationships/email/mail-body.ts
+@@ -0,0 +1,27 @@
++/** Both representations belong to the same local editor revision. */
++export interface MailBody {
++  text: string;
++  html: string;
++}
++
++export function plainMailHtml(text: string) {
++  return text
++    .split(/\r?\n/)
++    .map(
++      (line) =>
++        `<p>${line.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;") || "<br>"}</p>`,
++    )
++    .join("");
++}
++
++export function plainMailBody(text: string): MailBody {
++  return { text, html: plainMailHtml(text) };
++}
++
++export function mailBodyError(body: MailBody) {
++  if (!body.text.trim()) return "Enter a message.";
++  if (body.text.length > 8000) return "Keep the message to 8,000 characters.";
++  if (body.html.length > 40000)
++    return "The formatted message is too large. Remove some formatting or shorten it.";
++  return "";
++}
+diff --git a/apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts b/apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts
+index a9bec3c..dad54a2 100644
+--- a/apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts
++++ b/apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts
+@@ -3,6 +3,7 @@ import { useLayoutEffect, useRef, useState } from "react";
+ import { useQueryClient } from "@tanstack/react-query";
+ import { useApi } from "@/shared/portfolio/api/provider";
+ import { requestMailRewrite, rewrittenMailText } from "./rewrite";
++import { plainMailBody, type MailBody } from "./mail-body";
+ 
+ type RewriteStatus = {
+   isPending: boolean;
+@@ -35,13 +36,13 @@ export function useMailRewrite({
+ }) {
+   const api = useApi();
+   const cache = useQueryClient();
+-  const [body, setBody] = useState(initialBody);
++  const [body, setBody] = useState(() => plainMailBody(initialBody));
+   const [state, setState] = useState({ ...idle, sourceKey });
+   const revision = useRef(0);
+   const lifetime = useRef({ active: false, sourceKey });
+   const pending = useRef<RewriteAttempt | null>(null);
+   const previous = useRef<{
+-    body: string;
++    body: MailBody;
+     sourceKey: string;
+     assert: () => void;
+   } | null>(null);
+@@ -84,7 +85,7 @@ export function useMailRewrite({
+     };
+   }, [cache, sourceKey]);
+ 
+-  function edit(value: string) {
++  function edit(value: MailBody) {
+     revision.current++;
+     const attempt = pending.current;
+     pending.current = null;
+@@ -151,7 +152,7 @@ export function useMailRewrite({
+       const result = await requestMailRewrite(
+         api,
+         {
+-          rawText: body,
++          rawText: body.text,
+           recipientName: recipient.name,
+           ...(recipient.title ? { recipientTitle: recipient.title } : {}),
+         },
+@@ -160,10 +161,10 @@ export function useMailRewrite({
+       );
+       attempt.assert();
+       if (result.verified) {
+-        const rewritten = rewrittenMailText(result.bodyHtml, body);
+-        if (rewritten !== body) {
++        const rewritten = rewrittenMailText(result.bodyHtml, body.text);
++        if (rewritten !== body.text) {
+           previous.current = { body, sourceKey, assert: assertAuthority };
+-          setBody(rewritten);
++          setBody(plainMailBody(rewritten));
+         }
+       }
+       setState({
+diff --git a/apps/web/tests/browser/email-compose.spec.ts b/apps/web/tests/browser/email-compose.spec.ts
+index 2960fa4..9ef2551 100644
+--- a/apps/web/tests/browser/email-compose.spec.ts
++++ b/apps/web/tests/browser/email-compose.spec.ts
+@@ -1,3 +1,4 @@
++import { expectMailMessage } from "./mail-message-assertions";
+ import { test, expect, type Page } from "@playwright/test";
+ import { sendingMailbox, sendingReceipt } from "./fixtures";
+ const clientId = "10000000-0000-4000-8000-000000000001";
+@@ -259,9 +260,7 @@ test("a removed reviewed mailbox is not replaced by another mailbox", async ({
+   ).toBeVisible();
+   expect(state.sent).toHaveLength(0);
+   await page.keyboard.press("Escape");
+-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-    "Draft retained for explicit review.",
+-  );
++  await expectMailMessage(page, "Draft retained for explicit review.");
+ });
+ test("an unavailable mailbox contract leaves the draft review disabled", async ({
+   page,
+@@ -278,9 +277,7 @@ test("an unavailable mailbox contract leaves the draft review disabled", async (
+   await expect(
+     page.getByText("Mailboxes unavailable", { exact: true }),
+   ).toBeVisible();
+-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-    "Retained draft",
+-  );
++  await expectMailMessage(page, "Retained draft");
+   expect(state.sent).toHaveLength(0);
+ });
+ test("overlay clicks respect context gestures and dismiss only the top email review", async ({
+@@ -302,9 +299,7 @@ test("overlay clicks respect context gestures and dismiss only the top email rev
+   await expect(
+     page.getByRole("dialog", { name: "New email", exact: true }),
+   ).toBeVisible();
+-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-    "Draft retained for explicit review.",
+-  );
++  await expectMailMessage(page, "Draft retained for explicit review.");
+   await expect(
+     page.getByRole("button", { name: "Review email", exact: true }),
+   ).toBeFocused();
+@@ -327,9 +322,7 @@ test("invalidated successful idle identity refuses mail dispatch and retains dra
+   ).toBeVisible({ timeout: 2000 });
+   expect(state.sent).toHaveLength(0);
+   await page.keyboard.press("Escape");
+-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-    "Draft retained for explicit review.",
+-  );
++  await expectMailMessage(page, "Draft retained for explicit review.");
+ });
+ test("invalidated successful idle identity refuses upload prepare dispatch", async ({
+   page,
+@@ -403,9 +396,7 @@ test("invalid/duplicate copied recipient retains draft and never sends", async (
+   await page.getByLabel("Cc", { exact: true }).fill("TAYLOR@example.test");
+   await page.getByRole("button", { name: "Review email", exact: true }).click();
+   await expect(page.getByText(/only once across/)).toBeVisible();
+-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-    "Draft retained for explicit review.",
+-  );
++  await expectMailMessage(page, "Draft retained for explicit review.");
+   expect(state.sent).toHaveLength(0);
+ });
+ test("upload confirmation and scan readiness stay separate before send", async ({
+@@ -502,9 +493,7 @@ for (const status of [503, 200])
+     await expect(
+       page.getByText(/This attempt cannot be retried here/),
+     ).toBeVisible();
+-    await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-      "Draft retained for explicit review.",
+-    );
++    await expectMailMessage(page, "Draft retained for explicit review.");
+     expect(state.sent).toHaveLength(1);
+   });
+ test("actor change while prepare awaits causes zero storage/confirm/send", async ({
+@@ -547,9 +536,7 @@ test("reply to foreign-client thread refuses before mail send", async ({
+     page.getByRole("button", { name: "Review email", exact: true }),
+   ).toBeDisabled();
+   await expect(page.getByText(/unexpected response/).last()).toBeVisible();
+-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-    "Draft retained for explicit review.",
+-  );
++  await expectMailMessage(page, "Draft retained for explicit review.");
+   expect(state.sent).toHaveLength(0);
+ });
+ test("read-only role cannot upload or send", async ({ page }) => {
+@@ -610,9 +597,7 @@ test("prepared seed requires canonical availability and an explicit selected rec
+   await expect(page.getByLabel("Subject", { exact: true })).toHaveValue(
+     "Prepared review",
+   );
+-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-    "Prepared document for your review.",
+-  );
++  await expectMailMessage(page, "Prepared document for your review.");
+   await expect(
+     page.getByRole("button", { name: "Review email", exact: true }),
+   ).toBeDisabled();
+diff --git a/apps/web/tests/browser/mail-local-draft.spec.ts b/apps/web/tests/browser/mail-local-draft.spec.ts
+index 5aeb03b..1fcb0c0 100644
+--- a/apps/web/tests/browser/mail-local-draft.spec.ts
++++ b/apps/web/tests/browser/mail-local-draft.spec.ts
+@@ -1,3 +1,4 @@
++import { expectMailMessage } from "./mail-message-assertions";
+ import { test, expect, type Page } from "@playwright/test";
+ import { sendingMailbox, sendingReceipt } from "./fixtures";
+ 
+@@ -109,9 +110,7 @@ async function rewrite(page: Page) {
+   await page
+     .getByRole("button", { name: "Rewrite with Meri", exact: true })
+     .click();
+-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-    "Verified rewritten draft.",
+-  );
++  await expectMailMessage(page, "Verified rewritten draft.");
+   await expect(
+     page.getByRole("button", { name: "Undo Meri rewrite", exact: true }),
+   ).toBeEnabled();
+@@ -230,9 +229,7 @@ test("local Undo restores exactly the body preceding the latest verified rewrite
+   await page
+     .getByRole("button", { name: "Undo Meri rewrite", exact: true })
+     .click();
+-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-    original,
+-  );
++  await expectMailMessage(page, original);
+   await expect(
+     page.getByRole("button", { name: "Undo Meri rewrite", exact: true }),
+   ).toHaveCount(0);
+@@ -254,9 +251,7 @@ test("manual edits retire Undo and the next rewrite snapshots the new local draf
+   await page
+     .getByRole("button", { name: "Undo Meri rewrite", exact: true })
+     .click();
+-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-    "Newer manual work.",
+-  );
++  await expectMailMessage(page, "Newer manual work.");
+   expect(state.rewrites).toHaveLength(2);
+   expect(state.sends).toEqual([]);
+ });
+@@ -277,15 +272,11 @@ test("repeated rewrites retain one latest snapshot and Undo is unavailable while
+     page.getByRole("button", { name: "Undo Meri rewrite", exact: true }),
+   ).toBeDisabled();
+   state.release();
+-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-    "Second verified revision.",
+-  );
++  await expectMailMessage(page, "Second verified revision.");
+   await page
+     .getByRole("button", { name: "Undo Meri rewrite", exact: true })
+     .click();
+-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-    "Verified rewritten draft.",
+-  );
++  await expectMailMessage(page, "Verified rewritten draft.");
+   await expect(
+     page.getByRole("button", { name: "Undo Meri rewrite", exact: true }),
+   ).toHaveCount(0);
+@@ -317,9 +308,7 @@ for (const failed of [false, true])
+     await page
+       .getByRole("button", { name: "Undo Meri rewrite", exact: true })
+       .click();
+-    await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-      original,
+-    );
++    await expectMailMessage(page, original);
+     expect(state.sends).toEqual([]);
+   });
+ 
+@@ -419,9 +408,7 @@ test("saved signature and Undo remain usable in desktop and mobile dark review",
+   await page
+     .getByRole("button", { name: "Undo Meri rewrite", exact: true })
+     .click();
+-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-    original,
+-  );
++  await expectMailMessage(page, original);
+ });
+ 
+ for (const response of [403, 503, "loading"] as const)
+diff --git a/apps/web/tests/browser/mail-message-assertions.ts b/apps/web/tests/browser/mail-message-assertions.ts
+new file mode 100644
+index 0000000..ee74444
+--- /dev/null
++++ b/apps/web/tests/browser/mail-message-assertions.ts
+@@ -0,0 +1,16 @@
++import { expect, type Page } from "@playwright/test";
++
++/** Preserve exact plain-message expectations across textarea and paragraph editors. */
++export async function expectMailMessage(page: Page, expected: string) {
++  await expect
++    .poll(() =>
++      page.getByLabel("Message", { exact: true }).evaluate((element) => {
++        if (element instanceof HTMLTextAreaElement) return element.value;
++        return Array.from(
++          element.children,
++          (block) => block.textContent ?? "",
++        ).join("\n");
++      }),
++    )
++    .toBe(expected);
++}
+diff --git a/apps/web/tests/browser/mail-rewrite.spec.ts b/apps/web/tests/browser/mail-rewrite.spec.ts
+index 35912d2..a7a52dc 100644
+--- a/apps/web/tests/browser/mail-rewrite.spec.ts
++++ b/apps/web/tests/browser/mail-rewrite.spec.ts
+@@ -1,3 +1,4 @@
++import { expectMailMessage } from "./mail-message-assertions";
+ import { test, expect, type Page, type Request } from "@playwright/test";
+ import { sendingMailbox } from "./fixtures";
+ 
+@@ -114,9 +115,7 @@ test("a current verified rewrite preserves the native payload and plain-text rev
+       "<style>hidden</style><script>hidden</script><p>Reviewed first.</p><p>Reviewed second.</p>",
+     verified: true,
+   });
+-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-    "Reviewed first.\nReviewed second.",
+-  );
++  await expectMailMessage(page, "Reviewed first.\nReviewed second.");
+   await expect(
+     page.getByRole("button", { name: "Review email", exact: true }),
+   ).toBeEnabled();
+@@ -135,9 +134,7 @@ test("an unverified rewrite preserves the original draft", async ({ page }) => {
+       "Meri could not verify the rewrite. Your original content was retained.",
+     ),
+   ).toBeVisible();
+-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-    original,
+-  );
++  await expectMailMessage(page, original);
+   expect(state.sends()).toBe(0);
+ });
+ 
+@@ -153,9 +150,7 @@ test("editing a pending draft discards the old result without clearing a newer a
+     bodyHtml: "<p>Late stale result.</p>",
+     verified: true,
+   });
+-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-    "New manual draft.",
+-  );
++  await expectMailMessage(page, "New manual draft.");
+   await expect(
+     page.getByRole("button", { name: "Rewriting…", exact: true }),
+   ).toBeDisabled();
+@@ -166,9 +161,7 @@ test("editing a pending draft discards the old result without clearing a newer a
+     bodyHtml: "<p>Current reviewed draft.</p>",
+     verified: true,
+   });
+-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-    "Current reviewed draft.",
+-  );
++  await expectMailMessage(page, "Current reviewed draft.");
+   expect(state.sends()).toBe(0);
+ });
+ 
+@@ -184,9 +177,7 @@ test("editing back to the original text still invalidates its earlier rewrite",
+     bodyHtml: "<p>Late stale result.</p>",
+     verified: true,
+   });
+-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-    original,
+-  );
++  await expectMailMessage(page, original);
+   await expect(
+     page.getByRole("button", { name: "Rewrite with Meri", exact: true }),
+   ).toBeEnabled();
+@@ -211,9 +202,7 @@ test("closing and reopening the composer cannot accept an earlier response", asy
+     bodyHtml: "<p>Closed composer result.</p>",
+     verified: true,
+   });
+-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-    "Reopened manual draft.",
+-  );
++  await expectMailMessage(page, "Reopened manual draft.");
+   expect(state.sends()).toBe(0);
+ });
+ 
+@@ -230,9 +219,7 @@ test("changing and restoring recipients discards the old source without leaving
+     bodyHtml: "<p>Old recipient context.</p>",
+     verified: true,
+   });
+-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-    original,
+-  );
++  await expectMailMessage(page, original);
+   await expect(
+     page.getByRole("button", { name: "Rewrite with Meri", exact: true }),
+   ).toBeEnabled();
+@@ -263,9 +250,7 @@ for (const change of ["invalidated", "actor"] as const) {
+       bodyHtml: "<p>Revoked session result.</p>",
+       verified: true,
+     });
+-    await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-      original,
+-    );
++    await expectMailMessage(page, original);
+     await expect(
+       page
+         .getByRole("group", { name: "Draft rewrite status" })
+@@ -286,9 +271,7 @@ test("invalidated idle authority refuses rewrite before dispatch", async ({
+   await expect(
+     page.getByText(/mailbox session changed or is unverified/),
+   ).toBeVisible();
+-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
+-    original,
+-  );
++  await expectMailMessage(page, original);
+   expect(state.requests).toHaveLength(0);
+   expect(state.sends()).toBe(0);
+ });
+diff --git a/apps/web/tests/browser/mail-rich-compose.spec.ts b/apps/web/tests/browser/mail-rich-compose.spec.ts
+new file mode 100644
+index 0000000..a6d9314
+--- /dev/null
++++ b/apps/web/tests/browser/mail-rich-compose.spec.ts
+@@ -0,0 +1,394 @@
++import { test, expect, type Page } from "@playwright/test";
++import { sendingMailbox, sendingReceipt } from "./fixtures";
++
++async function setup(page: Page) {
++  const state = {
++    actor: "actor-a",
++    rewrites: [] as Record<string, unknown>[],
++    sends: [] as Record<string, unknown>[],
++    unexpected: [] as string[],
++    held: false,
++    release: () => {},
++    verified: true,
++    rewriteStatus: 200,
++  };
++  const localOrigin = new URL(String(test.info().project.use.baseURL)).origin;
++  await page.route("**/*", (route) => {
++    const url = new URL(route.request().url());
++    if (url.origin === localOrigin) return route.continue();
++    state.unexpected.push(url.href);
++    return route.abort();
++  });
++  await page.route("**/api/backend/core/**", async (route) => {
++    const path = new URL(route.request().url()).pathname.split(
++      "/api/backend/core/",
++    )[1];
++    if (path === "me")
++      return route.fulfill({
++        json: {
++          user: { id: state.actor, email: "actor@example.test" },
++          tenant: { id: "tenant-a", name: "Synthetic" },
++          role: "standard_user",
++        },
++      });
++    if (path === "me/email-signature")
++      return route.fulfill({
++        json: { html: "<p>Saved synthetic signature</p>", enabled: true },
++      });
++    if (path === "engagement/mail/mailboxes")
++      return route.fulfill({ json: [sendingMailbox] });
++    if (path?.endsWith("/people")) return route.fulfill({ json: [] });
++    if (path === "engagement/mail/rewrite") {
++      state.rewrites.push(route.request().postDataJSON());
++      if (state.held)
++        await new Promise<void>((resolve) => {
++          state.release = resolve;
++        });
++      return route
++        .fulfill({
++          status: state.rewriteStatus,
++          json:
++            state.rewriteStatus === 200
++              ? {
++                  bodyHtml: "<p>Verified rewrite.</p>",
++                  verified: state.verified,
++                }
++              : { message: "Synthetic rewrite unavailable" },
++        })
++        .catch(() => {});
++    }
++    if (path === "engagement/mail/send") {
++      state.sends.push(route.request().postDataJSON());
++      return route.fulfill({
++        json: {
++          ok: true,
++          threadId: "20000000-0000-4000-8000-000000000001",
++          messageId: "20000000-0000-4000-8000-000000000002",
++          ...sendingReceipt,
++          signatureAppended: true,
++        },
++      });
++    }
++    state.unexpected.push(path ?? route.request().url());
++    return route.fulfill({
++      status: 500,
++      json: { message: "Unexpected synthetic route" },
++    });
++  });
++  await page.goto("/__test/email-compose");
++  await page.getByRole("button", { name: "Mail contact", exact: true }).click();
++  await page
++    .getByLabel("Subject", { exact: true })
++    .fill("Rich synthetic message");
++  await page.getByLabel("From mailbox").selectOption(sendingMailbox.id);
++  return state;
++}
++const message = (page: Page) =>
++  page.getByRole("textbox", { name: "Message", exact: true });
++async function format(page: Page, name: string, text = "Original rich draft.") {
++  await message(page).fill(text);
++  await message(page).press("ControlOrMeta+a");
++  await page.getByRole("button", { name, exact: true }).click();
++}
++async function review(page: Page) {
++  await page.getByRole("button", { name: "Review email", exact: true }).click();
++  return page.getByRole("dialog", { name: "Send email", exact: true });
++}
++
++for (const [name, tag] of [
++  ["Bold", "strong"],
++  ["Italic", "em"],
++  ["Underline", "u"],
++  ["List", "ul > li"],
++] as const) {
++  test(`rich ${name} survives review and explicit send without signature duplication`, async ({
++    page,
++  }) => {
++    const state = await setup(page);
++    await format(page, name);
++    await expect(message(page).locator(tag)).toHaveText("Original rich draft.");
++    const reviewed = await review(page);
++    await expect(
++      reviewed.getByRole("region", { name: "Message preview" }).locator(tag),
++    ).toHaveText("Original rich draft.");
++    expect(state.sends).toHaveLength(0);
++    await reviewed
++      .getByRole("button", { name: "Send email", exact: true })
++      .click();
++    await expect.poll(() => state.sends.length).toBe(1);
++    expect(state.sends[0]?.bodyHtml).toContain(
++      name === "List"
++        ? "<ul><li><p>Original rich draft.</p></li></ul>"
++        : `<${tag}>Original rich draft.</${tag}>`,
++    );
++    expect(state.sends[0]?.appendSignature).toBe(true);
++    expect(state.sends[0]?.bodyHtml).not.toContain("signature");
++    expect(state.unexpected).toEqual([]);
++  });
++}
++
++test("verified rewrite uses text and Undo restores the complete formatted draft", async ({
++  page,
++}) => {
++  const state = await setup(page);
++  await format(page, "Bold");
++  const before = await message(page).innerHTML();
++  await page
++    .getByRole("button", { name: "Rewrite with Meri", exact: true })
++    .click();
++  await expect(message(page)).toHaveText("Verified rewrite.");
++  expect(state.rewrites[0]?.rawText).toBe("Original rich draft.");
++  await page
++    .getByRole("button", { name: "Undo Meri rewrite", exact: true })
++    .click();
++  await expect(message(page)).toHaveJSProperty("innerHTML", before);
++  await expect(
++    page.getByRole("button", { name: "Undo Meri rewrite", exact: true }),
++  ).toHaveCount(0);
++});
++
++test("formatting-only edit revokes a held rewrite without replacing current formatting", async ({
++  page,
++}) => {
++  const state = await setup(page);
++  state.held = true;
++  await message(page).fill("Original rich draft.");
++  await page
++    .getByRole("button", { name: "Rewrite with Meri", exact: true })
++    .click();
++  await expect.poll(() => state.rewrites.length).toBe(1);
++  await message(page).press("ControlOrMeta+a");
++  await page.getByRole("button", { name: "Italic", exact: true }).click();
++  state.release();
++  await expect(message(page).locator("em")).toHaveText("Original rich draft.");
++  await expect(
++    page.getByRole("button", { name: "Rewrite with Meri", exact: true }),
++  ).toBeEnabled();
++  await expect(
++    page.getByRole("button", { name: "Undo Meri rewrite", exact: true }),
++  ).toHaveCount(0);
++});
++
++for (const failure of ["unverified", "unavailable"])
++  test(`${failure} rewrite preserves rich content`, async ({ page }) => {
++    const state = await setup(page);
++    state.verified = failure !== "unverified";
++    state.rewriteStatus = failure === "unavailable" ? 503 : 200;
++    await format(page, "Underline");
++    const before = await message(page).innerHTML();
++    await page
++      .getByRole("button", { name: "Rewrite with Meri", exact: true })
++      .click();
++    await expect(
++      page.getByRole("button", { name: "Rewrite with Meri", exact: true }),
++    ).toBeEnabled();
++    await expect(message(page)).toHaveJSProperty("innerHTML", before);
++    await expect(
++      page.getByRole("button", { name: "Undo Meri rewrite", exact: true }),
++    ).toHaveCount(0);
++  });
++
++test("paste keeps supported formatting while removing active markup and remote content", async ({
++  page,
++}) => {
++  const state = await setup(page);
++  await expect(
++    page.getByRole("button", { name: "Bold", exact: true }),
++  ).toBeVisible();
++  await message(page).focus();
++  await message(page).evaluate((element) => {
++    const clipboardData = new DataTransfer();
++    clipboardData.setData(
++      "text/html",
++      '<p><strong>Safe bold</strong> <u>underlined</u><script>window.__mailPasted=true</script><img src="https://mail.example.test/pixel" onerror="window.__mailPasted=true"><a href="https://mail.example.test/link">Literal link text</a></p><ul><li>Safe item</li></ul><style>body{display:none}</style><iframe src="https://mail.example.test/frame"></iframe>',
++    );
++    element.dispatchEvent(
++      new ClipboardEvent("paste", {
++        clipboardData,
++        bubbles: true,
++        cancelable: true,
++      }),
++    );
++  });
++  await expect(message(page).locator("strong")).toHaveText("Safe bold");
++  await expect(message(page).locator("li")).toHaveText("Safe item");
++  await expect(
++    message(page).locator("script,style,img[src],a,iframe,[onerror],[href]"),
++  ).toHaveCount(0);
++  const reviewed = await review(page);
++  await expect(
++    reviewed.getByRole("region", { name: "Message preview" }).locator("strong"),
++  ).toHaveText("Safe bold");
++  expect(
++    await page.evaluate(
++      () => (window as unknown as { __mailPasted?: boolean }).__mailPasted,
++    ),
++  ).toBeUndefined();
++  await expect(
++    reviewed
++      .getByRole("region", { name: "Message preview" })
++      .locator("img,script,style,a,iframe,[onerror],[href]"),
++  ).toHaveCount(0);
++  await reviewed
++    .getByRole("button", { name: "Send email", exact: true })
++    .click();
++  await expect.poll(() => state.sends.length).toBe(1);
++  expect(state.sends[0]?.bodyHtml).not.toMatch(
++    /<(?:img|script|style|a|iframe)\b|onerror=|href=/,
++  );
++  expect(state.unexpected).toEqual([]);
++});
++
++test("empty and oversized rich bodies cannot be reviewed, and typed text is retained", async ({
++  page,
++}) => {
++  const state = await setup(page);
++  await expect(
++    page.getByRole("button", { name: "Bold", exact: true }),
++  ).toBeVisible();
++  await review(page);
++  await expect(
++    page.getByRole("dialog", { name: "Send email", exact: true }),
++  ).toHaveCount(0);
++  await expect(
++    page.getByText("Enter a message.", { exact: true }),
++  ).toBeVisible();
++  const long = "a".repeat(8001);
++  await message(page).fill(long);
++  await review(page);
++  await expect(
++    page.getByText("Keep the message to 8,000 characters.", { exact: true }),
++  ).toBeVisible();
++  await expect(message(page)).toHaveText(long);
++  expect(state.sends).toHaveLength(0);
++});
++
++test("keyboard formatting and mobile toolbar remain reachable", async ({
++  page,
++}) => {
++  await page.setViewportSize({ width: 390, height: 844 });
++  const state = await setup(page);
++  await expect(
++    page.getByRole("button", { name: "Bold", exact: true }),
++  ).toBeVisible();
++  await message(page).fill("Keyboard rich draft.");
++  await message(page).press("ControlOrMeta+a");
++  await message(page).press("ControlOrMeta+b");
++  await expect(message(page).locator("strong")).toHaveText(
++    "Keyboard rich draft.",
++  );
++  for (const name of ["Bold", "Italic", "Underline", "List"]) {
++    const button = page.getByRole("button", { name, exact: true });
++    await button.focus();
++    await expect(button).toBeFocused();
++    const box = await button.boundingBox();
++    expect(box!.x).toBeGreaterThanOrEqual(0);
++    expect(box!.x + box!.width).toBeLessThanOrEqual(390);
++  }
++  await page.screenshot({
++    path: test.info().outputPath("mobile-rich.png"),
++  });
++  expect(state.unexpected).toEqual([]);
++});
++
++test("identity invalidation revokes rich Undo without provider effects", async ({
++  page,
++}) => {
++  const state = await setup(page);
++  await format(page, "Bold");
++  await page
++    .getByRole("button", { name: "Rewrite with Meri", exact: true })
++    .click();
++  await expect(
++    page.getByRole("button", { name: "Undo Meri rewrite", exact: true }),
++  ).toBeVisible();
++  await page.evaluate(() =>
++    (
++      window as unknown as { __mailInvalidate: () => Promise<unknown> }
++    ).__mailInvalidate(),
++  );
++  await expect(
++    page.getByRole("button", { name: "Undo Meri rewrite", exact: true }),
++  ).toHaveCount(0);
++  await expect(message(page)).toHaveText("Verified rewrite.");
++  await message(page).press("ControlOrMeta+z");
++  await expect(message(page)).toHaveText("Verified rewrite.");
++  expect(state.sends).toHaveLength(0);
++});
++
++test("source replacement retires editor history and rich Meri Undo", async ({
++  page,
++}) => {
++  const state = await setup(page);
++  await format(page, "Bold");
++  await page
++    .getByRole("button", { name: "Rewrite with Meri", exact: true })
++    .click();
++  await expect(message(page)).toHaveText("Verified rewrite.");
++  await page.evaluate(() =>
++    window.__mailChangeClient?.("10000000-0000-4000-8000-000000000099"),
++  );
++  await expect(
++    page.getByRole("button", { name: "Undo Meri rewrite", exact: true }),
++  ).toHaveCount(0);
++  await message(page).press("ControlOrMeta+z");
++  await expect(message(page)).toHaveText("Verified rewrite.");
++  expect(state.sends).toHaveLength(0);
++});
++
++test("toolbar Attach file opens the existing attachment picker with no extra request", async ({
++  page,
++}) => {
++  const state = await setup(page);
++  await format(page, "Bold");
++  const chooserPromise = page.waitForEvent("filechooser");
++  await page
++    .getByRole("group", { name: "Message formatting" })
++    .getByRole("button", { name: "Attach file", exact: true })
++    .click();
++  const chooser = await chooserPromise;
++  expect(await chooser.element().getAttribute("type")).toBe("file");
++  expect(
++    await chooser
++      .element()
++      .evaluate(
++        (element) =>
++          element ===
++          document.querySelector(
++            'section[aria-label="Email attachments"] input[type="file"]',
++          ),
++      ),
++  ).toBe(true);
++  await chooser.setFiles([]);
++  expect(state.sends).toHaveLength(0);
++  expect(state.rewrites).toHaveLength(0);
++  expect(state.unexpected).toEqual([]);
++  await page
++    .getByRole("group", { name: "Message formatting" })
++    .scrollIntoViewIfNeeded();
++  await page.screenshot({ path: test.info().outputPath("desktop-rich.png") });
++});
++
++test("ordinary formatting and typing keep native Undo after a verified rewrite", async ({
++  page,
++}) => {
++  const state = await setup(page);
++  await format(page, "Bold");
++  await page
++    .getByRole("button", { name: "Rewrite with Meri", exact: true })
++    .click();
++  await expect(message(page)).toHaveText("Verified rewrite.");
++  await message(page).press("ControlOrMeta+a");
++  await message(page).press("ControlOrMeta+b");
++  await expect(message(page).locator("strong")).toHaveText("Verified rewrite.");
++  await message(page).press("ControlOrMeta+z");
++  await expect(message(page).locator("strong")).toHaveCount(0);
++  await expect(message(page)).toHaveText("Verified rewrite.");
++  await message(page).press("End");
++  await message(page).pressSequentially(" Added locally.");
++  await expect(message(page)).toHaveText("Verified rewrite. Added locally.");
++  await message(page).press("ControlOrMeta+z");
++  await expect(message(page)).toHaveText("Verified rewrite.");
++  expect(state.rewrites).toHaveLength(1);
++  expect(state.sends).toHaveLength(0);
++});
+diff --git a/apps/web/tests/mail-body.test.ts b/apps/web/tests/mail-body.test.ts
+new file mode 100644
+index 0000000..01240c2
+--- /dev/null
++++ b/apps/web/tests/mail-body.test.ts
+@@ -0,0 +1,27 @@
++import { describe, expect, it } from "vitest";
++import {
++  plainMailBody,
++  mailBodyError,
++} from "../src/features/portfolio/relationships/email/mail-body";
++
++describe("local rich mail body contract", () => {
++  it("treats initial and rewritten text as literal content, including blank lines", () => {
++    expect(plainMailBody('A <b>literal</b> & "quoted"\n\nLast')).toEqual({
++      text: 'A <b>literal</b> & "quoted"\n\nLast',
++      html: "<p>A &lt;b&gt;literal&lt;/b&gt; &amp; &quot;quoted&quot;</p><p><br></p><p>Last</p>",
++    });
++  });
++  it("requires actual text and retains existing plain character and wire bounds", () => {
++    expect(mailBodyError({ text: " \n ", html: "<p><br></p>" })).toBe(
++      "Enter a message.",
++    );
++    expect(mailBodyError(plainMailBody("x".repeat(8000)))).toBe("");
++    expect(mailBodyError(plainMailBody("x".repeat(8001)))).toBe(
++      "Keep the message to 8,000 characters.",
++    );
++    expect(mailBodyError({ text: "x", html: "x".repeat(40000) })).toBe("");
++    expect(mailBodyError({ text: "x", html: "x".repeat(40001) })).toBe(
++      "The formatted message is too large. Remove some formatting or shorten it.",
++    );
++  });
++});

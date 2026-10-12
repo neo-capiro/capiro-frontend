@@ -1,0 +1,28 @@
+{
+  "commit": "fb093821c6691d3ff45c0cd51ac1edca12364c9b",
+  "parent": "b5eaadd031580edca79e9d99de2c0ab14d59997c",
+  "rootFrozenHead": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+  "changedFiles": [
+    "apps/web/test/browser/remaining-modules.spec.ts"
+  ],
+  "specBlob": "700a39a8a0169f633abb1e0e22b3d25c96187e84",
+  "specSha256": "ff19d419f382abb100089e5bc03619f85d499a044ac995fe4b988e7aac78d994",
+  "specBytes": 17554,
+  "appSrcTreeUnchanged": true,
+  "worktreeStatus": "?? node_modules",
+  "borrowedInstallOnlyUntracked": true,
+  "focusedBrowser": {
+    "expected": 1,
+    "unexpected": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "workers": 1,
+    "retries": 0,
+    "timeoutMs": 60000,
+    "app": "exact root d68 fixture application",
+    "test": "corrected owner spec",
+    "runnerVersion": "1.61.1"
+  },
+  "fullGates": "NOT_RUN_BY_OWNER; root will freeze and run fresh combined qualification",
+  "applicationBehaviorChanged": false
+}

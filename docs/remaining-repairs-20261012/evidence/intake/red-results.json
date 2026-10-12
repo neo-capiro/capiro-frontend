@@ -1,0 +1,384 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-remaining-intake/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "/tmp/capiro-remaining-intake-evidence/playwright.config.mjs",
+      "remaining-intake.spec.ts"
+    ],
+    "configFile": "/tmp/capiro-remaining-intake-evidence/playwright.config.mjs",
+    "rootDir": "/workspace/capiro-remaining-intake/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-remaining-intake-evidence/red-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-remaining-intake/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-remaining-intake-evidence/red-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "remaining-intake.spec.ts",
+      "file": "remaining-intake.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "CI-01 standard reader can inspect saved client details and government fields",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8613,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Client details', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Client details', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Client details', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Client details', exact: true })\u001b[22m\n\n    at /workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts:42:84",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts",
+                      "column": 84,
+                      "line": 42
+                    },
+                    "snippet": "  40 |   }));\n  41 |   await page.goto(`/portfolio/${clientId}`);\n> 42 |   await expect(page.getByRole(\"heading\", { name: \"Client details\", exact: true })).toBeVisible();\n     |                                                                                    ^\n  43 |   await expect(page.getByText(details.primaryContactEmail, { exact: true })).toBeVisible();\n  44 |   await expect(page.getByText(\"Saved synthetic intake note\", { exact: true })).toBeVisible();\n  45 |   await page.getByRole(\"button\", { name: \"Government info\", exact: true }).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts",
+                        "column": 84,
+                        "line": 42
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Client details', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Client details', exact: true })\u001b[22m\n\n\n  40 |   }));\n  41 |   await page.goto(`/portfolio/${clientId}`);\n> 42 |   await expect(page.getByRole(\"heading\", { name: \"Client details\", exact: true })).toBeVisible();\n     |                                                                                    ^\n  43 |   await expect(page.getByText(details.primaryContactEmail, { exact: true })).toBeVisible();\n  44 |   await expect(page.getByText(\"Saved synthetic intake note\", { exact: true })).toBeVisible();\n  45 |   await page.getByRole(\"button\", { name: \"Government info\", exact: true }).click();\n    at /workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts:42:84"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T19:25:28.826Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-01-sta-a5904-tails-and-government-fields/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-01-sta-a5904-tails-and-government-fields/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-01-sta-a5904-tails-and-government-fields/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts",
+                    "column": 84,
+                    "line": 42
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c321fe834c9adb562776-e06e88f82006a7fef4bf",
+          "file": "remaining-intake.spec.ts",
+          "line": 30,
+          "column": 1
+        },
+        {
+          "title": "CI-02 view search selects the canonical current-client route",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7674,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('combobox', { name: 'Jump to a view' })\nExpected: focused\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('combobox', { name: 'Jump to a view' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('combobox', { name: 'Jump to a view' })\nExpected: focused\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('combobox', { name: 'Jump to a view' })\u001b[22m\n\n    at /workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts:61:24",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts",
+                      "column": 24,
+                      "line": 61
+                    },
+                    "snippet": "  59 |   await page.getByRole(\"button\", { name: \"Switch client view: Overview\" }).click();\n  60 |   const search = page.getByRole(\"combobox\", { name: \"Jump to a view\" });\n> 61 |   await expect(search).toBeFocused();\n     |                        ^\n  62 |   await search.fill(\"files\");\n  63 |   await expect(page.getByRole(\"option\")).toHaveCount(1);\n  64 |   await page.screenshot({ path: info.outputPath(\"view-search.png\") });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts",
+                        "column": 24,
+                        "line": 61
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('combobox', { name: 'Jump to a view' })\nExpected: focused\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('combobox', { name: 'Jump to a view' })\u001b[22m\n\n\n  59 |   await page.getByRole(\"button\", { name: \"Switch client view: Overview\" }).click();\n  60 |   const search = page.getByRole(\"combobox\", { name: \"Jump to a view\" });\n> 61 |   await expect(search).toBeFocused();\n     |                        ^\n  62 |   await search.fill(\"files\");\n  63 |   await expect(page.getByRole(\"option\")).toHaveCount(1);\n  64 |   await page.screenshot({ path: info.outputPath(\"view-search.png\") });\n    at /workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts:61:24"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T19:25:38.266Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-02-vie-890ae-onical-current-client-route/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-02-vie-890ae-onical-current-client-route/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-02-vie-890ae-onical-current-client-route/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts",
+                    "column": 24,
+                    "line": 61
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c321fe834c9adb562776-d15d610bff303ebf5d1f",
+          "file": "remaining-intake.spec.ts",
+          "line": 56,
+          "column": 1
+        },
+        {
+          "title": "CI-03 account roster shows supplied member email and inline addition",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6116,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('listitem').filter({ hasText: 'Olivia Owner' }).getByText('owner@example.test')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('listitem').filter({ hasText: 'Olivia Owner' }).getByText('owner@example.test')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('listitem').filter({ hasText: 'Olivia Owner' }).getByText('owner@example.test')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('listitem').filter({ hasText: 'Olivia Owner' }).getByText('owner@example.test')\u001b[22m\n\n    at /workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts:77:72",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts",
+                      "column": 72,
+                      "line": 77
+                    },
+                    "snippet": "  75 |   await page.goto(\"/profile-current-state.html?mode=team\");\n  76 |   const row = page.getByRole(\"listitem\").filter({ hasText: \"Olivia Owner\" });\n> 77 |   await expect(row.getByText(state.team[0]!.email!, { exact: false })).toBeVisible();\n     |                                                                        ^\n  78 |   const member = await page.getByLabel(\"Add team member\", { exact: true }).boundingBox();\n  79 |   const role = await page.getByLabel(\"Role\", { exact: true }).boundingBox();\n  80 |   expect(member).not.toBeNull(); expect(role).not.toBeNull();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts",
+                        "column": 72,
+                        "line": 77
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('listitem').filter({ hasText: 'Olivia Owner' }).getByText('owner@example.test')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('listitem').filter({ hasText: 'Olivia Owner' }).getByText('owner@example.test')\u001b[22m\n\n\n  75 |   await page.goto(\"/profile-current-state.html?mode=team\");\n  76 |   const row = page.getByRole(\"listitem\").filter({ hasText: \"Olivia Owner\" });\n> 77 |   await expect(row.getByText(state.team[0]!.email!, { exact: false })).toBeVisible();\n     |                                                                        ^\n  78 |   const member = await page.getByLabel(\"Add team member\", { exact: true }).boundingBox();\n  79 |   const role = await page.getByLabel(\"Role\", { exact: true }).boundingBox();\n  80 |   expect(member).not.toBeNull(); expect(role).not.toBeNull();\n    at /workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts:77:72"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T19:25:46.761Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-03-acc-435b2-r-email-and-inline-addition/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-03-acc-435b2-r-email-and-inline-addition/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-03-acc-435b2-r-email-and-inline-addition/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts",
+                    "column": 72,
+                    "line": 77
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c321fe834c9adb562776-2ba154ea09aab782306f",
+          "file": "remaining-intake.spec.ts",
+          "line": 73,
+          "column": 1
+        },
+        {
+          "title": "CI-04 choice groups retain their distinct desktop layouts",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3210,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m819\u001b[39m\nReceived:   \u001b[31m298\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m819\u001b[39m\nReceived:   \u001b[31m298\u001b[39m\n    at /workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts:95:26",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts",
+                      "column": 26,
+                      "line": 95
+                    },
+                    "snippet": "  93 |   const outer = await company.boundingBox();\n  94 |   const foreign = await company.locator(\"label\").filter({ hasText: \"Foreign-owned\" }).boundingBox();\n> 95 |   expect(foreign!.width).toBeGreaterThan(outer!.width * 0.9);\n     |                          ^\n  96 |   await page.screenshot({ path: info.outputPath(\"company-choices.png\") });\n  97 |   await dialog.getByRole(\"button\", { name: \"2. Government Registration\", exact: true }).click();\n  98 |   const certifications = dialog.getByRole(\"group\", { name: \"Federal set-aside certifications\" }).locator(\"label\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts",
+                        "column": 26,
+                        "line": 95
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m819\u001b[39m\nReceived:   \u001b[31m298\u001b[39m\n\n  93 |   const outer = await company.boundingBox();\n  94 |   const foreign = await company.locator(\"label\").filter({ hasText: \"Foreign-owned\" }).boundingBox();\n> 95 |   expect(foreign!.width).toBeGreaterThan(outer!.width * 0.9);\n     |                          ^\n  96 |   await page.screenshot({ path: info.outputPath(\"company-choices.png\") });\n  97 |   await dialog.getByRole(\"button\", { name: \"2. Government Registration\", exact: true }).click();\n  98 |   const certifications = dialog.getByRole(\"group\", { name: \"Federal set-aside certifications\" }).locator(\"label\");\n    at /workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts:95:26"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T19:25:53.554Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-04-cho-a0b9b-ir-distinct-desktop-layouts/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-04-cho-a0b9b-ir-distinct-desktop-layouts/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-04-cho-a0b9b-ir-distinct-desktop-layouts/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts",
+                    "column": 26,
+                    "line": 95
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c321fe834c9adb562776-07bb467eaca1a114daef",
+          "file": "remaining-intake.spec.ts",
+          "line": 86,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T19:25:28.302Z",
+    "duration": 28832.735,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

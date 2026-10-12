@@ -1,3 +1,4 @@
+import { expectMailMessage } from "./mail-message-assertions";
 import { test, expect, type Page, type Request } from "@playwright/test";
 import { sendingMailbox } from "./fixtures";
 
@@ -114,9 +115,7 @@ test("a current verified rewrite preserves the native payload and plain-text rev
       "<style>hidden</style><script>hidden</script><p>Reviewed first.</p><p>Reviewed second.</p>",
     verified: true,
   });
-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-    "Reviewed first.\nReviewed second.",
-  );
+  await expectMailMessage(page, "Reviewed first.\nReviewed second.");
   await expect(
     page.getByRole("button", { name: "Review email", exact: true }),
   ).toBeEnabled();
@@ -135,9 +134,7 @@ test("an unverified rewrite preserves the original draft", async ({ page }) => {
       "Meri could not verify the rewrite. Your original content was retained.",
     ),
   ).toBeVisible();
-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-    original,
-  );
+  await expectMailMessage(page, original);
   expect(state.sends()).toBe(0);
 });
 
@@ -153,9 +150,7 @@ test("editing a pending draft discards the old result without clearing a newer a
     bodyHtml: "<p>Late stale result.</p>",
     verified: true,
   });
-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-    "New manual draft.",
-  );
+  await expectMailMessage(page, "New manual draft.");
   await expect(
     page.getByRole("button", { name: "Rewriting…", exact: true }),
   ).toBeDisabled();
@@ -166,9 +161,7 @@ test("editing a pending draft discards the old result without clearing a newer a
     bodyHtml: "<p>Current reviewed draft.</p>",
     verified: true,
   });
-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-    "Current reviewed draft.",
-  );
+  await expectMailMessage(page, "Current reviewed draft.");
   expect(state.sends()).toBe(0);
 });
 
@@ -184,9 +177,7 @@ test("editing back to the original text still invalidates its earlier rewrite", 
     bodyHtml: "<p>Late stale result.</p>",
     verified: true,
   });
-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-    original,
-  );
+  await expectMailMessage(page, original);
   await expect(
     page.getByRole("button", { name: "Rewrite with Meri", exact: true }),
   ).toBeEnabled();
@@ -211,9 +202,7 @@ test("closing and reopening the composer cannot accept an earlier response", asy
     bodyHtml: "<p>Closed composer result.</p>",
     verified: true,
   });
-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-    "Reopened manual draft.",
-  );
+  await expectMailMessage(page, "Reopened manual draft.");
   expect(state.sends()).toBe(0);
 });
 
@@ -230,9 +219,7 @@ test("changing and restoring recipients discards the old source without leaving 
     bodyHtml: "<p>Old recipient context.</p>",
     verified: true,
   });
-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-    original,
-  );
+  await expectMailMessage(page, original);
   await expect(
     page.getByRole("button", { name: "Rewrite with Meri", exact: true }),
   ).toBeEnabled();
@@ -263,9 +250,7 @@ for (const change of ["invalidated", "actor"] as const) {
       bodyHtml: "<p>Revoked session result.</p>",
       verified: true,
     });
-    await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-      original,
-    );
+    await expectMailMessage(page, original);
     await expect(
       page
         .getByRole("group", { name: "Draft rewrite status" })
@@ -286,9 +271,7 @@ test("invalidated idle authority refuses rewrite before dispatch", async ({
   await expect(
     page.getByText(/mailbox session changed or is unverified/),
   ).toBeVisible();
-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-    original,
-  );
+  await expectMailMessage(page, original);
   expect(state.requests).toHaveLength(0);
   expect(state.sends()).toBe(0);
 });

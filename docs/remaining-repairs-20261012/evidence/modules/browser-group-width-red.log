@@ -1,0 +1,40 @@
+
+Running 1 test using 1 worker
+
+(node:741014) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 ../../workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:63:1 › MS08 regression: All tasks defaults to named client groups and current-page counts (1.3s)
+
+
+  1) ../../workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:63:1 › MS08 regression: All tasks defaults to named client groups and current-page counts 
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 400
+    Received:   179.65625
+
+      84 |   expect(
+      85 |     (await alpha.getByRole("cell").first().boundingBox())!.width,
+    > 86 |   ).toBeGreaterThan(400);
+         |     ^
+      87 |   await page.screenshot({
+      88 |     path: info.outputPath("planner-client-groups-desktop.png"),
+      89 |     fullPage: true,
+        at /workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:86:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    browser-group-width-red/remaining-modules-MS08-reg-4f5e1-ups-and-current-page-counts/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: browser-group-width-red/remaining-modules-MS08-reg-4f5e1-ups-and-current-page-counts/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    browser-group-width-red/remaining-modules-MS08-reg-4f5e1-ups-and-current-page-counts/trace.zip
+    Usage:
+
+        npx playwright show-trace browser-group-width-red/remaining-modules-MS08-reg-4f5e1-ups-and-current-page-counts/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    ../../workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:63:1 › MS08 regression: All tasks defaults to named client groups and current-page counts 

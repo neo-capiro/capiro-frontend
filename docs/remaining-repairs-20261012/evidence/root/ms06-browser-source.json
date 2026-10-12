@@ -1,0 +1,39 @@
+{
+  "recordedAt": "2026-10-12T19:59:52.176601+00:00",
+  "head": "8daaf2822f282fa1f764cf795a2bdb5668928beb",
+  "scope": "MS06 development candidate; combined qualification remains pending",
+  "files": [
+    {
+      "path": "apps/web/src/features/modules/engagement/MeetingLibrary.tsx",
+      "sha256": "9f2ef9d73525ab845d2ac7e83de2958314579a63f061bd36ef72600f6148012e"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/MeetingSplitView.tsx",
+      "sha256": "73c1ccf1aef9d9f025e9edf85afd3de4d688d4d14e98b38c00a1083469ecea09"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/meeting-split.module.css",
+      "sha256": "ed24f5ba89cbbee6744002c57c73927ad186f50ba09c36ce4dc4dc57bfe36cdd"
+    },
+    {
+      "path": "apps/web/src/shared/meetings/MeetingDetail.tsx",
+      "sha256": "095bb21f213f9c0790c5f795c02359d44566779bee1bda4d94a257dbdf8796c8"
+    },
+    {
+      "path": "apps/web/src/shared/meetings/MeetingDetailHeader.tsx",
+      "sha256": "54c2e5763057523de9988572f3a44284cbefee4dfca90aa065bc9ff614b54af7"
+    },
+    {
+      "path": "apps/web/src/shared/meetings/MeetingPreparation.tsx",
+      "sha256": "f24d4205970353406377d90ed88d052192da41a91045ae46f53814f5156be305"
+    },
+    {
+      "path": "apps/web/src/shared/meetings/meetings.module.css",
+      "sha256": "6e4c020e84ae5d2347f593bf63b3b0b4374fd56ee7aa60db128821d83f3880d7"
+    },
+    {
+      "path": "apps/web/test/browser/meeting-detail-current.spec.ts",
+      "sha256": "f95af100b29a951f7019ee548e1783c05d7ad7371cdae4f5d6956302b1fe0f85"
+    }
+  ]
+}

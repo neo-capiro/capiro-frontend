@@ -16,14 +16,17 @@ import {
 import { useCalendarFeeds } from "./queries";
 import { CalendarGrid } from "./CalendarGrid";
 import { Agenda } from "./Agenda";
+import { MeetingAgenda } from "./MeetingAgenda";
+import { matchesMeetingFilter, type MeetingFilter } from "./lifecycle";
 import { MeetingDetail } from "./MeetingDetail";
 import { MeetingForm } from "./MeetingForm";
-import { MeetingLibrary } from "./library/public";
+import { MeetingLibrary, SharedMeetings } from "./library/public";
 import { PublicEventDetail } from "./public-event/public";
 import { CalendarSyncDialog } from "./sync/public";
 import type { CalendarKind } from "./contracts";
 import { deduplicate } from "./feeds";
 import styles from "./calendar.module.css";
+import { useMeetingClock } from "./useMeetingClock";
 export function CalendarPage({
   clientId,
   destinations,
@@ -31,6 +34,7 @@ export function CalendarPage({
   clientId?: string;
   destinations: Destinations;
 }) {
+  const now = useMeetingClock();
   const params = useSearchParams();
   const router = useRouter();
   const path = usePathname();
@@ -60,6 +64,12 @@ export function CalendarPage({
   const syncScope = JSON.stringify([scope, view, date, zone]);
   const [search, setSearch] = useState("");
   const [hidden, setHidden] = useState<CalendarKind[]>([]);
+  const meetingFilter: MeetingFilter =
+    params.get("meetingFilter") === "needs-prep"
+      ? "needs-prep"
+      : params.get("meetingFilter") === "needs-debrief"
+        ? "needs-debrief"
+        : "all";
   function update(values: Record<string, string | undefined>) {
     const next = new URLSearchParams(params);
     for (const [key, value] of Object.entries(values))
@@ -71,18 +81,27 @@ export function CalendarPage({
     ? Object.entries(feeds)
     : [["meetings", feeds.meetings] as const];
   const all = deduplicate(
-    activeFeeds.flatMap(([, feed]) => (feed.isSuccess ? feed.data.items : [])),
+    activeFeeds.flatMap(([, feed]) =>
+      feed.isSuccess && !feed.isFetching && !feed.error ? feed.data.items : [],
+    ),
   );
   const items = all.filter(
     (item) =>
       !hidden.includes(item.kind) &&
+      (!scope ||
+        view !== "agenda" ||
+        meetingFilter === "all" ||
+        Boolean(
+          item.meeting &&
+          matchesMeetingFilter(item.meeting, meetingFilter, now),
+        )) &&
       (!search ||
         item.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())),
   );
   const library = params.get("library") === "1";
   const detail = (
     <MeetingDetail
-      key={params.get("meeting") ?? "none"}
+      key={`${params.get("meeting") ?? "none"}:${scope ?? "all"}`}
       id={params.get("meeting")}
       onClose={() => update({ meeting: undefined })}
       zone={zone}
@@ -90,6 +109,15 @@ export function CalendarPage({
       clientId={scope}
     />
   );
+  if (params.get("shared") === "1" && scope)
+    return (
+      <SharedMeetings
+        key={scope}
+        clientId={scope}
+        zone={zone}
+        onClose={() => update({ shared: undefined })}
+      />
+    );
   if (library)
     return (
       <>
@@ -112,6 +140,14 @@ export function CalendarPage({
           <h1>{clientId ? "Calendar" : "Master Calendar"}</h1>
         </div>
         <div className="row">
+          {scope && (
+            <button
+              className="button"
+              onClick={() => update({ shared: "1", meeting: undefined })}
+            >
+              Shared meetings
+            </button>
+          )}
           <button className="button" onClick={() => update({ library: "1" })}>
             Meeting library
           </button>
@@ -133,7 +169,12 @@ export function CalendarPage({
           <select
             aria-label="Calendar scope"
             value={scope ?? ""}
-            onChange={(e) => update({ clientId: e.target.value || undefined })}
+            onChange={(e) =>
+              update({
+                clientId: e.target.value || undefined,
+                meeting: undefined,
+              })
+            }
           >
             <option value="">Master view</option>
             {currentClients.map((client) => (
@@ -203,6 +244,34 @@ export function CalendarPage({
       )}
       {view === "agenda" && (
         <div className="toolbar">
+          {scope && (
+            <div
+              className="row"
+              role="group"
+              aria-label="Meeting lifecycle filters"
+            >
+              {(
+                [
+                  ["all", "All meetings"],
+                  ["needs-prep", "Needs prep"],
+                  ["needs-debrief", "Needs debrief"],
+                ] as const
+              ).map(([value, label]) => (
+                <button
+                  key={value}
+                  className="button"
+                  aria-pressed={meetingFilter === value}
+                  onClick={() =>
+                    update({
+                      meetingFilter: value === "all" ? undefined : value,
+                    })
+                  }
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          )}
           <input
             aria-label="Search calendar events"
             placeholder="Search events…"
@@ -242,6 +311,7 @@ export function CalendarPage({
             onClick={() => {
               setHidden([]);
               setSearch("");
+              update({ meetingFilter: undefined });
             }}
           >
             Clear filters
@@ -251,11 +321,12 @@ export function CalendarPage({
       <div className="stack">
         {activeFeeds.map(([name, feed]) => (
           <div key={name}>
-            {feed.isPending && (name === "meetings" || mixed) && (
-              <p role="status" className="muted">
-                Loading {name}…
-              </p>
-            )}
+            {(feed.isPending || feed.isFetching) &&
+              (name === "meetings" || mixed) && (
+                <p role="status" className="muted">
+                  Loading {name}…
+                </p>
+              )}
             {feed.error && (
               <QueryState
                 error={feed.error}
@@ -278,13 +349,21 @@ export function CalendarPage({
       </p>
       {view === "agenda" ? (
         (items.length > 0 ||
-          activeFeeds.every(([, feed]) => feed.isSuccess)) && (
+          activeFeeds.every(
+            ([, feed]) => feed.isSuccess && !feed.isFetching && !feed.error,
+          )) &&
+        (scope ? (
+          <MeetingAgenda
+            items={items}
+            onMeeting={(id) => update({ meeting: id, hearing: undefined })}
+          />
+        ) : (
           <Agenda
             items={items}
             onMeeting={(id) => update({ meeting: id, hearing: undefined })}
             onPublicEvent={(id) => update({ hearing: id, meeting: undefined })}
           />
-        )
+        ))
       ) : (
         <CalendarGrid
           key={`${view}:${date}:${zone}`}

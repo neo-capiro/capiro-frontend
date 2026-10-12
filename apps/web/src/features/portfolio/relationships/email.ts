@@ -45,15 +45,7 @@ export function threadsForRecipient(threads: MailThread[], email: string) {
       ),
   );
 }
-export function plainMailHtml(text: string) {
-  return text
-    .split(/\r?\n/)
-    .map(
-      (line) =>
-        `<p>${line.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;") || "<br>"}</p>`,
-    )
-    .join("");
-}
+export { plainMailHtml } from "./email/mail-body";
 export function useContactThreads(clientId: string, email: string | null) {
   const api = useApi();
   return useQuery({

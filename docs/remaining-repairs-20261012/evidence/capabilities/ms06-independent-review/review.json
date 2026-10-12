@@ -1,0 +1,83 @@
+{
+  "reviewer": "objectives_work_intel_review",
+  "reviewType": "Independent read-only source review; no browser or source mutation",
+  "capturedAtUtc": "2026-10-12T19:37:24.756157+00:00",
+  "rootHead": "c0ff28152de4753c81c232e6203d2c1249ceb30d",
+  "sourceStatus": "Uncommitted MS06 candidate; exact bytes captured below. Not acceptance of later revisions.",
+  "files": [
+    {
+      "path": "apps/web/src/shared/meetings/MeetingDetail.tsx",
+      "sha256": "095bb21f213f9c0790c5f795c02359d44566779bee1bda4d94a257dbdf8796c8"
+    },
+    {
+      "path": "apps/web/src/shared/meetings/MeetingDetailHeader.tsx",
+      "sha256": "54c2e5763057523de9988572f3a44284cbefee4dfca90aa065bc9ff614b54af7"
+    },
+    {
+      "path": "apps/web/src/shared/meetings/MeetingPreparation.tsx",
+      "sha256": "3e110fa2f88df90a81a08d8c6cb0a7cd793365f7989d6fa353dea8420875d017"
+    },
+    {
+      "path": "apps/web/src/shared/meetings/meetings.module.css",
+      "sha256": "6e4c020e84ae5d2347f593bf63b3b0b4374fd56ee7aa60db128821d83f3880d7"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/MeetingLibrary.tsx",
+      "sha256": "8d54f1ce7102a96d3d1308c54c90d5173f044c22b22f25619fdfe9a3a7f68353"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/MeetingSplitView.tsx",
+      "sha256": "73c1ccf1aef9d9f025e9edf85afd3de4d688d4d14e98b38c00a1083469ecea09"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/meeting-split.module.css",
+      "sha256": "ed24f5ba89cbbee6744002c57c73927ad186f50ba09c36ce4dc4dc57bfe36cdd"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+      "sha256": "268d2ca2dd156e33f7adbd671dadd804cf3a61861969609d10f45e86825c0f22"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/queries.ts",
+      "sha256": "451a8381928451c2ab27357ccf0634e3008f313bbfa6a14cc6107ed585b95143"
+    },
+    {
+      "path": "apps/web/test/browser/meeting-detail-current.spec.ts",
+      "sha256": "0fff9fcc4896a147cf715cc313e7fe673adf93946d7c162f8da3c8df4206cc3f"
+    }
+  ],
+  "findings": [
+    {
+      "id": "MS06-INDEP-01",
+      "severity": "P2",
+      "classification": "Client context/lifetime carryover; not asserted authorization bypass",
+      "files": [
+        "apps/web/src/features/modules/engagement/EngagementScreen.tsx:127",
+        "apps/web/src/features/modules/engagement/MeetingLibrary.tsx:332",
+        "apps/web/src/features/modules/engagement/MeetingSplitView.tsx:50"
+      ],
+      "reproduction": [
+        "Open Engagement Meetings with client A, select A meeting and read its Join link.",
+        "Change Engagement client scope to B without changing view.",
+        "The list query reloads for B, but selected state remains A. When B list settles, MeetingSplitView mounts A detail because selected is truthy even if absent from B rows.",
+        "The detail endpoint reads A by ID; matching A receipt enables A Join link under current B scope. Held old reads are aborted on split teardown, but the old selection initiates a new A read."
+      ],
+      "evidence": "Source-deterministic path; needs focused browser confirmation. Prior modal selection inherited same context gap; inline split newly exposes it with a B list beside A detail.",
+      "suggestedRepair": "Reset/key selection lifetime by client scope and mode; verify held old detail followed by replacement never reopens old material/link."
+    }
+  ],
+  "positiveChecks": [
+    "Only a detail result matching selected meeting ID and known client association activates material tabs or Join. Summary joinLink is never used.",
+    "useCapiroQuery clears replacement/reload state and aborts superseded effects; key=selected.id remounts inline meeting/detail selection.",
+    "Explicit HTTP(S) prefix + safeWebsite excludes credentials, javascript/data, scheme-relative strings and absent links. rel noopener noreferrer/referrerPolicy no-referrer retained.",
+    "Modal remains default and starts Notes; inline starts Prep. Preparation content/empty disabled generation extracted without new endpoint or invented data.",
+    "Inline heading focuses on mount and close explicitly restores a connected list opener; responsive split is 280px+flex desktop, one-column below900.",
+    "Artifact read/write implementation is unchanged; current detail gate now blocks material access until detail read succeeds."
+  ],
+  "limits": [
+    "No MS06 browser run by this reviewer; candidate root tests inspected only.",
+    "Existing shared artifact mutation cancellation/authority behavior is not rewritten or accepted wholesale by this presentation review.",
+    "Filtered-away selection has no remaining row to restore focus to; current handler safely avoids focusing a missing ref.",
+    "No native/provider Join action was invoked."
+  ]
+}

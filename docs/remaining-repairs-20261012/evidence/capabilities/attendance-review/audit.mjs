@@ -1,0 +1,28 @@
+import { readFile, writeFile } from 'node:fs/promises';
+import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import ts from '/workspace/capiro-remaining-capabilities/node_modules/typescript/lib/typescript.js';
+import { scanModule } from '/workspace/capiro-remaining-capabilities/scripts/architecture/scan.mjs';
+const repo='/workspace/capiro-remaining',out='/tmp/capiro-remaining-capabilities-evidence/attendance-review',evidence='/tmp/capiro-remaining-calendar-evidence/attendance-lifecycle-followup';
+const git=(...args)=>execFileSync('git',args,{cwd:repo,encoding:'utf8',stdio:['ignore','pipe','pipe']});
+const pin=git('rev-parse','adbc84b').trim(),integrated=git('rev-parse','3c64057').trim(),owner=git('rev-parse','1cbca00').trim(),base=git('rev-parse','104495d').trim();
+const file='apps/web/tests/browser/attendance.spec.ts';
+const hashes={},bytes={};
+for(const [key,ref] of Object.entries({pin,integrated,owner,base})){bytes[key]=git('show',`${ref}:${file}`);hashes[key]=createHash('sha256').update(bytes[key]).digest('hex');}
+const tests=source=>{const ast=ts.createSourceFile(file,source,ts.ScriptTarget.Latest,true);const calls=[];const walk=n=>{if(ts.isCallExpression(n)&&n.expression.getText(ast)==='test')calls.push({title:n.arguments[0].getText(ast),entireCall:n.getText(ast)});ts.forEachChild(n,walk);};walk(ast);return calls;};
+const before=tests(bytes.base),after=tests(bytes.pin);
+const ownerConsumer=JSON.parse(await readFile(`${evidence}/consumer-audit.json`,'utf8'));
+const consumers=ownerConsumer.files.map(r=>({...r,rootSHA256:createHash('sha256').update(git('show',`${pin}:${r.file}`)).digest('hex')})).map(r=>({...r,sourceMatches:r.sha256===r.rootSHA256}));
+const candidate=JSON.parse(await readFile(`${evidence}/candidate-results.json`,'utf8'));
+const red=JSON.parse(await readFile(`${evidence}/seven-frozen-reds.json`,'utf8'));
+const originalRaw=await readFile(red.originalReport);
+const baselineCalls=scanModule(file,bytes.base).sizeFindings;
+const signals=scanModule(file,bytes.pin).sizeFindings.map(r=>({...r,sha256:hashes.pin,baseline:baselineCalls.find(s=>s.kind===r.kind&&s.symbol===r.symbol)||null}));
+const prior=JSON.parse(await readFile('/tmp/capiro-remaining-capabilities-evidence/profile-test-review/all-changed-test-signals.json','utf8'));
+const carriedProfile=prior.files.filter(f=>f.ownerIsProfile).map(f=>({...f,finalSHA256:createHash('sha256').update(git('show',`${pin}:${f.file}`)).digest('hex')})).map(f=>({...f,unchangedSinceProfileReview:f.finalSHA256===f.sha256}));
+const data={capturedAtUtc:new Date().toISOString(),pin,integrated,owner,base,file,hashes,sourceEquality:hashes.pin===hashes.owner&&hashes.owner===hashes.integrated,changedFilesInIntegration:git('diff-tree','--no-commit-id','--name-only','-r',integrated).trim().split('\n'),productionDiffSinceFrozen:git('diff',base,pin,'--','apps/web/src'),preservation:{beforeCount:before.length,afterCount:after.length,allEntireTestCallSourcesByteIdentical:JSON.stringify(before)===JSON.stringify(after),titles:after.map(x=>x.title)},sizeSignals:signals,consumers,candidate:{stats:candidate.stats,workers:candidate.config.workers,projects:candidate.config.projects.map(x=>({name:x.name,retries:x.retries}))},red:{source:red.source,originalReport:red.originalReport,recordedSHA256:red.originalReportSha256,actualSHA256:createHash('sha256').update(originalRaw).digest('hex'),failureCount:red.failures.length,failures:red.failures.map(f=>({title:f.title,locations:f.tests.flatMap(t=>t.results.flatMap(r=>r.errors??[])).map(e=>e.location),messages:f.tests.flatMap(t=>t.results.flatMap(r=>r.errors??[])).map(e=>e.message)}))},priorProfileFiles:carriedProfile};
+await writeFile(`${out}/source-preservation-and-results.json`,JSON.stringify(data,null,2)+'\n');
+await writeFile(`${out}/attendance.before.spec.ts`,bytes.base);await writeFile(`${out}/attendance.spec.ts`,bytes.pin);
+await writeFile(`${out}/integration.patch`,git('show','--format=fuller',integrated));
+for(const name of ['consumer-audit.json','seven-frozen-reds.json','candidate-results.json','manifest.json','assertion-preservation.json']) await writeFile(`${out}/owner-${name}`,await readFile(`${evidence}/${name}`));
+console.log(JSON.stringify({pin,hashes,sourceEquality:data.sourceEquality,testsPreserved:data.preservation.allEntireTestCallSourcesByteIdentical,counts:[before.length,after.length],productionDiffEmpty:data.productionDiffSinceFrozen==='',sizeSignals:signals,consumerMismatches:consumers.filter(x=>!x.sourceMatches).length,redCount:data.red.failureCount,redHashMatches:data.red.actualSHA256===data.red.recordedSHA256,green:candidate.stats,profileUnchanged:carriedProfile.every(x=>x.unchangedSinceProfileReview)},null,2));

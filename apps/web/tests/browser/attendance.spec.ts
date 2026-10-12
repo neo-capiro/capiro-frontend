@@ -56,6 +56,15 @@ async function setup(page: Page) {
       return json(route, []);
     return json(route, path.endsWith(meetingId) ? meeting : [meeting]);
   });
+  // Upcoming meetings enter Preparation, whose scoped attachment read is
+  // independent of the attendance controls exercised after choosing Information.
+  await page.route(
+    `**/core/engagement/attachments?meetingId=${meetingId}`,
+    (route) => {
+      expect(route.request().method()).toBe("GET");
+      return json(route, []);
+    },
+  );
   await page.route(
     `**/core/engagement/meetings/${meetingId}/notetaker`,
     (route) => {
@@ -99,6 +108,11 @@ async function openMeeting(page: Page) {
   await page.goto(
     `/portfolio/${clientId}/calendar?view=agenda&date=2099-10-15&zone=UTC&meeting=${meetingId}`,
   );
+  await page
+    .getByRole("dialog", { name: meeting.subject, exact: true })
+    .getByRole("navigation", { name: "Meeting sections" })
+    .getByRole("button", { name: "Information", exact: true })
+    .click();
   const panel = page.getByRole("region", { name: "Meri meeting attendance" });
   await expect(panel).toBeVisible();
   return panel;

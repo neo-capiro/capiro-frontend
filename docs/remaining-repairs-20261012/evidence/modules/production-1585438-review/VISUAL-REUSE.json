@@ -1,0 +1,112 @@
+{
+  "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "priorReview": "/tmp/capiro-remaining-modules-evidence/production-d68-review",
+  "priorManifestSha256": "d200cf101574355ded75c36e2a4d0bf6bfc9500b6158098fe91049dc1d359508",
+  "priorSealedInputsAndOutputsStillMatch": true,
+  "pngCount": 4,
+  "allPngsByteIdentical": true,
+  "captures": [
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/production-portfolio-1440-dark.png",
+      "bytes": 29101,
+      "sha256": "39049b79761b8a2d4c6c6ef06178b6777f97556ad618f7f762fe0b741e316dfa",
+      "priorPath": "/tmp/capiro-remaining-qualification/final-d68c2dc/production-artifacts/production-portfolio-1440-dark.png",
+      "byteIdenticalToPriorArtifact": true,
+      "width": 1440,
+      "height": 1040,
+      "inspection": "Prior actual visual inspection explicitly reused because complete PNG bytes/hash are identical. No new image opening claimed."
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/production-portfolio-1440-light.png",
+      "bytes": 29213,
+      "sha256": "adb252c0670b1797a9515d1ea50002c30fd73566891ced4cb9634a26a102be8e",
+      "priorPath": "/tmp/capiro-remaining-qualification/final-d68c2dc/production-artifacts/production-portfolio-1440-light.png",
+      "byteIdenticalToPriorArtifact": true,
+      "width": 1440,
+      "height": 1040,
+      "inspection": "Prior actual visual inspection explicitly reused because complete PNG bytes/hash are identical. No new image opening claimed."
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/production-portfolio-390-dark.png",
+      "bytes": 21836,
+      "sha256": "532b06a716f405c135b7b3ee84008b5b208415588a1aa934725894561f53e318",
+      "priorPath": "/tmp/capiro-remaining-qualification/final-d68c2dc/production-artifacts/production-portfolio-390-dark.png",
+      "byteIdenticalToPriorArtifact": true,
+      "width": 390,
+      "height": 844,
+      "inspection": "Prior actual visual inspection explicitly reused because complete PNG bytes/hash are identical. No new image opening claimed."
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/production-portfolio-390-light.png",
+      "bytes": 22077,
+      "sha256": "083c3ac5298d3cafd0c8b24b7678ac36e86a628352a17fbcabd454717b1ccf37",
+      "priorPath": "/tmp/capiro-remaining-qualification/final-d68c2dc/production-artifacts/production-portfolio-390-light.png",
+      "byteIdenticalToPriorArtifact": true,
+      "width": 390,
+      "height": 844,
+      "inspection": "Prior actual visual inspection explicitly reused because complete PNG bytes/hash are identical. No new image opening claimed."
+    }
+  ],
+  "otherArtifacts": [
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/preview-root-smoke.json",
+      "bytes": 101,
+      "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e",
+      "priorPath": "/tmp/capiro-remaining-qualification/final-d68c2dc/production-artifacts/preview-root-smoke.json",
+      "byteIdenticalToPriorArtifact": true
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/production-portfolio-1440-dark.png",
+      "bytes": 29101,
+      "sha256": "39049b79761b8a2d4c6c6ef06178b6777f97556ad618f7f762fe0b741e316dfa",
+      "priorPath": "/tmp/capiro-remaining-qualification/final-d68c2dc/production-artifacts/production-portfolio-1440-dark.png",
+      "byteIdenticalToPriorArtifact": true
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/production-portfolio-1440-light.png",
+      "bytes": 29213,
+      "sha256": "adb252c0670b1797a9515d1ea50002c30fd73566891ced4cb9634a26a102be8e",
+      "priorPath": "/tmp/capiro-remaining-qualification/final-d68c2dc/production-artifacts/production-portfolio-1440-light.png",
+      "byteIdenticalToPriorArtifact": true
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/production-portfolio-390-dark.png",
+      "bytes": 21836,
+      "sha256": "532b06a716f405c135b7b3ee84008b5b208415588a1aa934725894561f53e318",
+      "priorPath": "/tmp/capiro-remaining-qualification/final-d68c2dc/production-artifacts/production-portfolio-390-dark.png",
+      "byteIdenticalToPriorArtifact": true
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/production-portfolio-390-light.png",
+      "bytes": 22077,
+      "sha256": "083c3ac5298d3cafd0c8b24b7678ac36e86a628352a17fbcabd454717b1ccf37",
+      "priorPath": "/tmp/capiro-remaining-qualification/final-d68c2dc/production-artifacts/production-portfolio-390-light.png",
+      "byteIdenticalToPriorArtifact": true
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/production-smoke.json",
+      "bytes": 3624,
+      "sha256": "653bf3486ea9ec193195ed3289ac8e44a3729ef58b19a48842c8448c990dd36f",
+      "priorPath": "/tmp/capiro-remaining-qualification/final-d68c2dc/production-artifacts/production-smoke.json",
+      "byteIdenticalToPriorArtifact": true
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/standalone-default.log",
+      "bytes": 147,
+      "sha256": "1fb0278dec1db2aef66d951b30910680cc3d3de170f07bdab0c84a200e1bc4f3",
+      "priorPath": "/tmp/capiro-remaining-qualification/final-d68c2dc/production-artifacts/standalone-default.log",
+      "byteIdenticalToPriorArtifact": true
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/standalone-portfolio.log",
+      "bytes": 147,
+      "sha256": "3369c9ea9a42245d036e46f816e552863c8c52f214c0ad2be54b0b4d6155d95a",
+      "priorPath": "/tmp/capiro-remaining-qualification/final-d68c2dc/production-artifacts/standalone-portfolio.log",
+      "byteIdenticalToPriorArtifact": false
+    }
+  ],
+  "visualInspectionReused": true,
+  "newImagesOpened": false,
+  "visualConclusion": "No new bounded visual defect; all four identical PNGs preserve the already-inspected configuration-required Portfolio fallback.",
+  "scope": "1440x1040 and 390x844, light/dark. No loaded product screen/Figma visual acceptance."
+}

@@ -52,7 +52,9 @@ export function ChoiceList({
   options,
   value,
   onChange,
+  layout = "default",
 }: {
+  layout?: "default" | "business" | "certifications" | "tracks";
   label: string;
   options: readonly (readonly [string, string])[];
   value: string[];
@@ -66,11 +68,21 @@ export function ChoiceList({
       .map((key) => [key, `${key} · existing value`] as const),
   ];
   return (
-    <fieldset className={styles.choices}>
+    <fieldset
+      className={`${styles.choices} ${styles[layout] ?? ""}`}
+      data-choice-layout={layout}
+    >
       <legend>{label}</legend>
       <div>
         {all.map(([key, name]) => (
-          <label key={key}>
+          <label
+            key={key}
+            data-full-row={
+              layout === "business" && key === "foreignOwned"
+                ? "true"
+                : undefined
+            }
+          >
             <input
               type="checkbox"
               checked={value.includes(key)}

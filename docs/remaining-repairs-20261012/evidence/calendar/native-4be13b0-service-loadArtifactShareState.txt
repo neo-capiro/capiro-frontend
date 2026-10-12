@@ -1,0 +1,66 @@
+private async loadArtifactShareState(
+    tx: Prisma.TransactionClient,
+    ctx: TenantContext,
+    meetingId: string,
+    ref: ArtifactRef,
+  ): Promise<ArtifactShareState | null> {
+    switch (ref.type) {
+      case 'prep': {
+        const row = await tx.meetingPrep.findFirst({
+          where: { id: ref.id, tenantId: ctx.tenantId, meetingId },
+          select: { status: true, sharedAt: true, sharedByUserId: true, generatedFrom:true },
+        });
+        if (!row) return null;
+        if((row.generatedFrom as Record<string,unknown>|null)?.schemaVersion==='research_portfolio_institutional_v1')throw new ForbiddenException('Private Research Portfolio preparation cannot be shared');
+        return {
+          approved: row.status === MeetingPrepStatus.approved,
+          sharedAt: row.sharedAt,
+          sharedByUserId: row.sharedByUserId,
+          authorUserId: null,
+        };
+      }
+      case 'note': {
+        const row = await tx.meetingNote.findFirst({
+          where: { id: ref.id, tenantId: ctx.tenantId, meetingId },
+          select: { status: true, sharedAt: true, sharedByUserId: true, authorUserId: true },
+        });
+        if (!row) return null;
+        return {
+          approved: row.status === 'approved',
+          sharedAt: row.sharedAt,
+          sharedByUserId: row.sharedByUserId,
+          authorUserId: row.authorUserId,
+        };
+      }
+      case 'debrief': {
+        const row = await tx.meetingDebrief.findFirst({
+          where: { id: ref.id, tenantId: ctx.tenantId, meetingId },
+          select: { status: true, sharedAt: true, sharedByUserId: true, authorUserId: true },
+        });
+        if (!row) return null;
+        return {
+          approved: row.status === MeetingDebriefStatus.approved,
+          sharedAt: row.sharedAt,
+          sharedByUserId: row.sharedByUserId,
+          authorUserId: row.authorUserId,
+        };
+      }
+      case 'attachment': {
+        const row = await tx.engagementAttachment.findFirst({
+          where: { id: ref.id, tenantId: ctx.tenantId, meetingId },
+          select: { approvedAt: true, sharedAt: true, sharedByUserId: true },
+        });
+        if (!row) return null;
+        // Attachments have no author concept (Neo decision — see
+        // canUnshareArtifact): never populate authorUserId here.
+        return {
+          approved: row.approvedAt != null,
+          sharedAt: row.sharedAt,
+          sharedByUserId: row.sharedByUserId,
+          authorUserId: null,
+        };
+      }
+      default:
+        throw new BadRequestException(`Unknown artifact type: ${(ref as ArtifactRef).type}`);
+    }
+  }

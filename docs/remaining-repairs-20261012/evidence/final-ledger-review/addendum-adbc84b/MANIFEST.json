@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-12T20:57:40.134093+00:00",
+  "finalSource": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+  "checkpoint": "104495d4cdc8251640b922aea431fa0e169fe935",
+  "checkpointManifestSHA256": "42260e95b4dc65374e672eed1e2498fc68caf42292ffd781bb8971b504c10082",
+  "originalCheckpointFilesUnchanged": true,
+  "combinedGates": "NOT_CLAIMED",
+  "files": [
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-adbc84b/EVIDENCE-REFERENCES.json",
+      "bytes": 2604,
+      "sha256": "45b8d37eb7da44ee3bb8be5572e406cd62318d898f9b8ad214c4901be52f2999"
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-adbc84b/LEDGER-ADDENDUM.json",
+      "bytes": 5072,
+      "sha256": "65c9ad25d30c5b234dfda6f22e7b6e67989d32f2549181ac9f4edf4f33796f86"
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-adbc84b/REPORT.md",
+      "bytes": 4036,
+      "sha256": "753533d2c120b11682bbf0542310f3fb56a60bd532a7232bd230e1aa1f6ab0fe"
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-adbc84b/SOURCE-BINDING.json",
+      "bytes": 34045,
+      "sha256": "b5a5f61f112bcac1bb60934b6790161156a14c9fe6657b4c16340df2c4e2da7f"
+    }
+  ]
+}

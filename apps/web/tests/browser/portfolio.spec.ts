@@ -88,11 +88,21 @@ test("facility creation uses the selected client's endpoint and refreshes the ma
   });
   await page.goto(`/portfolio/${clientId}`);
   await page.getByRole("button", { name: "Add facility" }).click();
-  const dialog = page.getByRole("dialog", { name: "Add facility" });
+  const dialog = page.getByRole("dialog", {
+    name: `Facilities: ${client.name}`,
+    exact: true,
+  });
   await dialog.getByLabel("Facility name").fill("Test lab");
   await dialog.getByLabel("City", { exact: true }).fill("Austin");
-  await dialog.getByLabel("State / territory").fill("tx");
-  await dialog.getByRole("button", { name: "Add facility" }).click();
+  await dialog.getByLabel("State / territory").selectOption("TX");
+  await dialog.getByRole("button", { name: "Save facility" }).click();
+  await expect(dialog.getByLabel("Facility name")).not.toBeVisible();
+  await expect(
+    dialog
+      .getByRole("list", { name: "Saved facilities" })
+      .getByText("Test lab"),
+  ).toBeVisible();
+  await dialog.getByRole("button", { name: "Done", exact: true }).click();
   await expect(dialog).not.toBeVisible();
   await expect(page.getByText("Test lab")).toBeVisible();
   expect(unexpected).toEqual([]);

@@ -1,0 +1,155 @@
+
+Running 64 tests using 1 worker
+
+(node:746009) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/browser/calendar-artifact-receipts.spec.ts:95:3 › notes: malformed receipt preserves draft and fences repeat creation (1.4s)
+  ✓   2 tests/browser/calendar-artifact-receipts.spec.ts:111:3 › notes: uncertain creation cannot be repeated after remount (1.4s)
+  ✓   3 tests/browser/calendar-artifact-receipts.spec.ts:138:3 › notes: synchronous submit guard sends one creation (1.8s)
+  ✓   4 tests/browser/calendar-artifact-receipts.spec.ts:95:3 › debriefs: malformed receipt preserves draft and fences repeat creation (1.8s)
+  ✓   5 tests/browser/calendar-artifact-receipts.spec.ts:111:3 › debriefs: uncertain creation cannot be repeated after remount (2.0s)
+  ✓   6 tests/browser/calendar-artifact-receipts.spec.ts:138:3 › debriefs: synchronous submit guard sends one creation (1.7s)
+  ✓   7 tests/browser/calendar-artifact-receipts.spec.ts:162:3 › notes: a known refusal retains editable draft and permits deliberate retry (1.6s)
+  ✓   8 tests/browser/calendar-artifact-receipts.spec.ts:185:3 › notes: replacing the client during preflight prevents dispatch (1.6s)
+  ✓   9 tests/browser/calendar-artifact-receipts.spec.ts:206:3 › notes: a late creation receipt cannot close the replacement client's draft (1.8s)
+  ✓  10 tests/browser/calendar-artifact-receipts.spec.ts:242:3 › notes: action-specific edit, approval, share and unshare receipts succeed (3.1s)
+  ✓  11 tests/browser/calendar-artifact-receipts.spec.ts:162:3 › debriefs: a known refusal retains editable draft and permits deliberate retry (2.0s)
+  ✓  12 tests/browser/calendar-artifact-receipts.spec.ts:185:3 › debriefs: replacing the client during preflight prevents dispatch (1.8s)
+  ✓  13 tests/browser/calendar-artifact-receipts.spec.ts:206:3 › debriefs: a late creation receipt cannot close the replacement client's draft (2.2s)
+  ✓  14 tests/browser/calendar-artifact-receipts.spec.ts:242:3 › debriefs: action-specific edit, approval, share and unshare receipts succeed (3.4s)
+  ✓  15 tests/browser/calendar-artifact-receipts.spec.ts:325:3 › notes: pending fields cannot accept a later draft before a valid receipt (1.7s)
+  ✓  16 tests/browser/calendar-artifact-receipts.spec.ts:325:3 › debriefs: pending fields cannot accept a later draft before a valid receipt (1.8s)
+  ✓  17 tests/browser/calendar-artifact-receipts.spec.ts:358:1 › artifact captions distinguish omitted sharing metadata from explicit privacy (2.3s)
+  ✓  18 tests/browser/calendar-boundary.spec.ts:77:3 › failed refresh removes Synthetic retained effective date and preserves other feeds (2.0s)
+  ✓  19 tests/browser/calendar-boundary.spec.ts:77:3 › failed refresh removes Synthetic retained meeting and preserves other feeds (1.9s)
+  ✓  20 tests/browser/calendar-boundary.spec.ts:77:3 › failed refresh removes Synthetic retained hearing and preserves other feeds (1.8s)
+  ✓  21 tests/browser/calendar-boundary.spec.ts:77:3 › failed refresh removes Synthetic retained task and preserves other feeds (1.6s)
+  ✓  22 tests/browser/calendar-boundary.spec.ts:77:3 › failed refresh removes Synthetic retained deadline and preserves other feeds (1.3s)
+  ✓  23 tests/browser/calendar-boundary.spec.ts:120:1 › failed client refresh removes cached names from the Calendar scope picker (1.3s)
+  ✓  24 tests/browser/calendar-boundary.spec.ts:148:1 › meeting client selection survives failed refresh without a silent association change (1.5s)
+  ✓  25 tests/browser/calendar-boundary.spec.ts:201:1 › a master Calendar client link cannot save after its selected client becomes unavailable (1.4s)
+  ✓  26 tests/browser/calendar-boundary.spec.ts:241:1 › unavailable Calendar feeds do not become a successful empty-state claim (1.3s)
+  ✓  27 tests/browser/calendar-lifecycle.spec.ts:113:1 › client agenda filters native lifecycle status without requests or approval inference (1.2s)
+  ✓  28 tests/browser/calendar-lifecycle.spec.ts:159:1 › omitted debrief metadata is unavailable rather than a missing debrief (1.2s)
+  ✓  29 tests/browser/calendar-lifecycle.spec.ts:194:3 › upcoming opens Preparation and retains identity across all meeting tabs (1.6s)
+  ✓  30 tests/browser/calendar-lifecycle.spec.ts:194:3 › live opens Notes and retains identity across all meeting tabs (1.5s)
+  ✓  31 tests/browser/calendar-lifecycle.spec.ts:194:3 › completed opens Debriefs and retains identity across all meeting tabs (1.8s)
+  ✓  32 tests/browser/calendar-lifecycle.spec.ts:194:3 › cancelled opens Information and retains identity across all meeting tabs (1.6s)
+  ✘  33 tests/browser/calendar-lifecycle.spec.ts:218:1 › held and failed refresh hide stale lifecycle rows until an explicit successful retry (6.3s)
+(node:748636) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  34 tests/browser/calendar-lifecycle.spec.ts:256:1 › meeting identity and material columns fit mobile and desktop without losing controls (1.7s)
+  ✓  35 tests/browser/calendar-meeting-receipts.spec.ts:23:3 › foreign meeting receipt retains editor: {"id":"foreign"} (953ms)
+  ✓  36 tests/browser/calendar-meeting-receipts.spec.ts:23:3 › foreign meeting receipt retains editor: {"client":{"id":"foreign","name":"Other"}} (1.0s)
+  ✓  37 tests/browser/calendar-meeting-receipts.spec.ts:41:1 › native normalized meeting receipt succeeds and an empty location is explicitly cleared (1.0s)
+  ✓  38 tests/browser/calendar-meeting-receipts.spec.ts:62:1 › pending meeting fields cannot accept a newer unsaved draft before a valid receipt (1.2s)
+  ✓  39 tests/browser/calendar-preparation.spec.ts:4:1 › Master calendar accepts saved structured prep and renders its text without object coercion (3.0s)
+  ✓  40 tests/browser/calendar-sharing.spec.ts:122:1 › approved prep and attachment share and selected unshare preserve other shared notes (2.1s)
+  ✓  41 tests/browser/calendar-sharing.spec.ts:168:1 › approval, confidentiality, institutional and readiness restrictions are visible and do not dispatch (1.4s)
+  ✓  42 tests/browser/calendar-sharing.spec.ts:192:3 › uncertain remains fenced after reopening and duplicate clicks (1.8s)
+  ✓  43 tests/browser/calendar-sharing.spec.ts:192:3 › foreign receipt remains fenced after reopening and duplicate clicks (1.8s)
+  ✓  44 tests/browser/calendar-sharing.spec.ts:232:1 › changed selected preparation is refused before sharing (2.0s)
+  ✓  45 tests/browser/calendar-sharing.spec.ts:247:1 › actor replacement during held preflight produces zero writes (1.8s)
+  ✓  46 tests/browser/calendar-sharing.spec.ts:269:1 › client shared feed lists only server-shared metadata without opening owner details or invented downloads (1.3s)
+  ✘  47 tests/browser/calendar-sharing.spec.ts:291:1 › cached shared feed disappears during held and failed refresh then returns current records (6.3s)
+(node:749398) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  48 tests/browser/calendar-sharing.spec.ts:318:1 › foreign client records are rejected and actor replacement does not reuse the prior feed (2.6s)
+  ✓  49 tests/browser/calendar-sharing.spec.ts:342:1 › sharing modal supports keyboard selection and fits original desktop and mobile sizes (1.6s)
+  ✓  50 tests/browser/calendar-sharing.spec.ts:367:3 › same-scope held meeting refresh preserves an open note draft (1.5s)
+  ✓  51 tests/browser/calendar-sharing.spec.ts:367:3 › same-scope held meeting refresh preserves an open meeting draft (1.5s)
+  ✓  52 tests/browser/calendar-sharing.spec.ts:367:3 › same-scope held meeting refresh preserves an open selection draft (1.5s)
+  ✓  53 tests/browser/meeting-library.spec.ts:81:1 › Library uses real page/filter contract, historical qualification and calendar-preserving deep links (2.8s)
+  ✓  54 tests/browser/meeting-library.spec.ts:139:1 › Library surfaces failure/retry, empty results, scoped receipt rejection and session expiry (5.0s)
+  ✓  55 tests/browser/meeting-library.spec.ts:185:1 › Library responsive dark layout keeps metadata and scope accessible (2.2s)
+  ✓  56 tests/browser/meeting-library.spec.ts:216:1 › Assignment requires explicit move/revoke review, retains chosen draft on conflict and retries only after review (3.7s)
+  ✓  57 tests/browser/meeting-library.spec.ts:258:1 › Assignment rejects wrong successful receipt and preserves unsaved selection (4.0s)
+  ✓  58 tests/browser/meeting-library.spec.ts:284:1 › Read-only identity cannot assign or list caller archive (3.7s)
+  ✓  59 tests/browser/meeting-library.spec.ts:308:1 › Transcript shares canonical upload, retries extraction without duplicate bytes and reviews truncation (3.9s)
+  ✓  60 tests/browser/meeting-library.spec.ts:480:1 › Lost storage reply retries same-key confirmation; wrong parent receipt cannot reach extraction (3.5s)
+  ✓  61 tests/browser/meeting-library.spec.ts:590:1 › Leaving the meeting during assignment preflight prevents a later PUT (2.2s)
+  ✓  62 tests/browser/meeting-library.spec.ts:630:3 › Leaving the meeting while ticket is pending prevents subsequent upload or extraction dispatch (2.5s)
+  ✓  63 tests/browser/meeting-library.spec.ts:630:3 › Leaving the meeting while storage is pending prevents subsequent upload or extraction dispatch (4.2s)
+  ✓  64 tests/browser/meeting-library.spec.ts:630:3 › Leaving the meeting while confirm is pending prevents subsequent upload or extraction dispatch (2.5s)
+
+
+  1) tests/browser/calendar-lifecycle.spec.ts:218:1 › held and failed refresh hide stale lifecycle rows until an explicit successful retry 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('alert')
+    Expected substring: "Synthetic meeting feed failed"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for getByRole('alert')
+
+
+      234 |   ).toHaveCount(0);
+      235 |   state.release();
+    > 236 |   await expect(page.getByRole("alert")).toContainText(
+          |                                         ^
+      237 |     "Synthetic meeting feed failed",
+      238 |   );
+      239 |   await expect(
+        at /workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-lifecycle.spec.ts:236:41
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-calendar-evidence/candidate-artifacts/calendar-lifecycle-held-an-cddd9-n-explicit-successful-retry/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-remaining-calendar-evidence/candidate-artifacts/calendar-lifecycle-held-an-cddd9-n-explicit-successful-retry/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-calendar-evidence/candidate-artifacts/calendar-lifecycle-held-an-cddd9-n-explicit-successful-retry/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-remaining-calendar-evidence/candidate-artifacts/calendar-lifecycle-held-an-cddd9-n-explicit-successful-retry/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/browser/calendar-sharing.spec.ts:291:1 › cached shared feed disappears during held and failed refresh then returns current records 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('alert')
+    Expected substring: "Synthetic shared feed unavailable"
+    Received string:    "You do not have permission for this operation.Retry"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for getByRole('alert')
+        14 × locator resolved to <div role="alert" class="status error">…</div>
+           - unexpected value "You do not have permission for this operation.Retry"
+
+
+      303 |   await expect(heading).toHaveCount(0);
+      304 |   pause.release();
+    > 305 |   await expect(page.getByRole("alert")).toContainText(
+          |                                         ^
+      306 |     "Synthetic shared feed unavailable",
+      307 |   );
+      308 |   await expect(heading).toHaveCount(0);
+        at /workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-sharing.spec.ts:305:41
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-calendar-evidence/candidate-artifacts/calendar-sharing-cached-sh-c8bc4-hen-returns-current-records/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-remaining-calendar-evidence/candidate-artifacts/calendar-sharing-cached-sh-c8bc4-hen-returns-current-records/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-calendar-evidence/candidate-artifacts/calendar-sharing-cached-sh-c8bc4-hen-returns-current-records/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-remaining-calendar-evidence/candidate-artifacts/calendar-sharing-cached-sh-c8bc4-hen-returns-current-records/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests/browser/calendar-lifecycle.spec.ts:218:1 › held and failed refresh hide stale lifecycle rows until an explicit successful retry 
+    tests/browser/calendar-sharing.spec.ts:291:1 › cached shared feed disappears during held and failed refresh then returns current records 
+  62 passed (2.4m)

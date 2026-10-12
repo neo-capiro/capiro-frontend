@@ -1,0 +1,525 @@
+{
+  "source": "104495d4cdc8251640b922aea431fa0e169fe935",
+  "originalReport": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-browser-results.json",
+  "originalReportSha256": "e10fc92e917a903ee3f1b4888c84219c4554df97c532be871c0507a895851772",
+  "failures": [
+    {
+      "title": "Owned meeting dispatch requires both confirmations and preserves future scheduling without claiming attendance",
+      "ok": false,
+      "tags": [],
+      "tests": [
+        {
+          "timeout": 60000,
+          "annotations": [],
+          "expectedStatus": "passed",
+          "projectId": "",
+          "projectName": "",
+          "results": [
+            {
+              "workerIndex": 1,
+              "parallelIndex": 1,
+              "status": "failed",
+              "duration": 11520,
+              "error": {
+                "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n",
+                "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n\n    at openMeeting (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:103:23)\n    at openSend (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:107:17)\n    at /workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:130:18",
+                "location": {
+                  "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+                  "column": 23,
+                  "line": 103
+                },
+                "snippet": "  101 |   );\n  102 |   const panel = page.getByRole(\"region\", { name: \"Meri meeting attendance\" });\n> 103 |   await expect(panel).toBeVisible();\n      |                       ^\n  104 |   return panel;\n  105 | }\n  106 | async function openSend(page: Page) {"
+              },
+              "errors": [
+                {
+                  "location": {
+                    "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+                    "column": 23,
+                    "line": 103
+                  },
+                  "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n\n\n  101 |   );\n  102 |   const panel = page.getByRole(\"region\", { name: \"Meri meeting attendance\" });\n> 103 |   await expect(panel).toBeVisible();\n      |                       ^\n  104 |   return panel;\n  105 | }\n  106 | async function openSend(page: Page) {\n    at openMeeting (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:103:23)\n    at openSend (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:107:17)\n    at /workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:130:18"
+                }
+              ],
+              "stdout": [],
+              "stderr": [],
+              "retry": 0,
+              "startTime": "2026-10-12T20:37:47.862Z",
+              "annotations": [],
+              "attachments": [
+                {
+                  "name": "screenshot",
+                  "contentType": "image/png",
+                  "path": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-artifacts/attendance-Owned-meeting-d-fd500-without-claiming-attendance/test-failed-1.png"
+                },
+                {
+                  "name": "error-context",
+                  "contentType": "text/markdown",
+                  "path": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-artifacts/attendance-Owned-meeting-d-fd500-without-claiming-attendance/error-context.md"
+                },
+                {
+                  "name": "trace",
+                  "contentType": "application/zip",
+                  "path": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-artifacts/attendance-Owned-meeting-d-fd500-without-claiming-attendance/trace.zip"
+                }
+              ],
+              "errorLocation": {
+                "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+                "column": 23,
+                "line": 103
+              }
+            }
+          ],
+          "status": "unexpected"
+        }
+      ],
+      "id": "3b9a56e6ecc460e88dcd-67cbac8d341ed18541df",
+      "file": "attendance.spec.ts",
+      "line": 126,
+      "column": 1
+    },
+    {
+      "title": "Server validation retains the join URL and confirmations for explicit correction",
+      "ok": false,
+      "tags": [],
+      "tests": [
+        {
+          "timeout": 60000,
+          "annotations": [],
+          "expectedStatus": "passed",
+          "projectId": "",
+          "projectName": "",
+          "results": [
+            {
+              "workerIndex": 3,
+              "parallelIndex": 1,
+              "status": "failed",
+              "duration": 11111,
+              "error": {
+                "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n",
+                "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n\n    at openMeeting (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:103:23)\n    at openSend (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:107:17)\n    at /workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:185:18",
+                "location": {
+                  "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+                  "column": 23,
+                  "line": 103
+                },
+                "snippet": "  101 |   );\n  102 |   const panel = page.getByRole(\"region\", { name: \"Meri meeting attendance\" });\n> 103 |   await expect(panel).toBeVisible();\n      |                       ^\n  104 |   return panel;\n  105 | }\n  106 | async function openSend(page: Page) {"
+              },
+              "errors": [
+                {
+                  "location": {
+                    "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+                    "column": 23,
+                    "line": 103
+                  },
+                  "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n\n\n  101 |   );\n  102 |   const panel = page.getByRole(\"region\", { name: \"Meri meeting attendance\" });\n> 103 |   await expect(panel).toBeVisible();\n      |                       ^\n  104 |   return panel;\n  105 | }\n  106 | async function openSend(page: Page) {\n    at openMeeting (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:103:23)\n    at openSend (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:107:17)\n    at /workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:185:18"
+                }
+              ],
+              "stdout": [],
+              "stderr": [],
+              "retry": 0,
+              "startTime": "2026-10-12T20:38:00.903Z",
+              "annotations": [],
+              "attachments": [
+                {
+                  "name": "screenshot",
+                  "contentType": "image/png",
+                  "path": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-artifacts/attendance-Server-validati-4184a-ons-for-explicit-correction/test-failed-1.png"
+                },
+                {
+                  "name": "error-context",
+                  "contentType": "text/markdown",
+                  "path": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-artifacts/attendance-Server-validati-4184a-ons-for-explicit-correction/error-context.md"
+                },
+                {
+                  "name": "trace",
+                  "contentType": "application/zip",
+                  "path": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-artifacts/attendance-Server-validati-4184a-ons-for-explicit-correction/trace.zip"
+                }
+              ],
+              "errorLocation": {
+                "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+                "column": 23,
+                "line": 103
+              }
+            }
+          ],
+          "status": "unexpected"
+        }
+      ],
+      "id": "3b9a56e6ecc460e88dcd-6aca30e37e128798014d",
+      "file": "attendance.spec.ts",
+      "line": 171,
+      "column": 1
+    },
+    {
+      "title": "A foreign success receipt is uncertain and cannot be resent automatically or from the same form",
+      "ok": false,
+      "tags": [],
+      "tests": [
+        {
+          "timeout": 60000,
+          "annotations": [],
+          "expectedStatus": "passed",
+          "projectId": "",
+          "projectName": "",
+          "results": [
+            {
+              "workerIndex": 4,
+              "parallelIndex": 1,
+              "status": "failed",
+              "duration": 10375,
+              "error": {
+                "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n",
+                "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n\n    at openMeeting (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:103:23)\n    at openSend (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:107:17)\n    at /workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:218:18",
+                "location": {
+                  "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+                  "column": 23,
+                  "line": 103
+                },
+                "snippet": "  101 |   );\n  102 |   const panel = page.getByRole(\"region\", { name: \"Meri meeting attendance\" });\n> 103 |   await expect(panel).toBeVisible();\n      |                       ^\n  104 |   return panel;\n  105 | }\n  106 | async function openSend(page: Page) {"
+              },
+              "errors": [
+                {
+                  "location": {
+                    "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+                    "column": 23,
+                    "line": 103
+                  },
+                  "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n\n\n  101 |   );\n  102 |   const panel = page.getByRole(\"region\", { name: \"Meri meeting attendance\" });\n> 103 |   await expect(panel).toBeVisible();\n      |                       ^\n  104 |   return panel;\n  105 | }\n  106 | async function openSend(page: Page) {\n    at openMeeting (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:103:23)\n    at openSend (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:107:17)\n    at /workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:218:18"
+                }
+              ],
+              "stdout": [],
+              "stderr": [],
+              "retry": 0,
+              "startTime": "2026-10-12T20:38:13.883Z",
+              "annotations": [],
+              "attachments": [
+                {
+                  "name": "screenshot",
+                  "contentType": "image/png",
+                  "path": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-artifacts/attendance-A-foreign-succe-4adc1-cally-or-from-the-same-form/test-failed-1.png"
+                },
+                {
+                  "name": "error-context",
+                  "contentType": "text/markdown",
+                  "path": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-artifacts/attendance-A-foreign-succe-4adc1-cally-or-from-the-same-form/error-context.md"
+                },
+                {
+                  "name": "trace",
+                  "contentType": "application/zip",
+                  "path": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-artifacts/attendance-A-foreign-succe-4adc1-cally-or-from-the-same-form/trace.zip"
+                }
+              ],
+              "errorLocation": {
+                "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+                "column": 23,
+                "line": 103
+              }
+            }
+          ],
+          "status": "unexpected"
+        }
+      ],
+      "id": "3b9a56e6ecc460e88dcd-b5837d46430a14b7a67f",
+      "file": "attendance.spec.ts",
+      "line": 201,
+      "column": 1
+    },
+    {
+      "title": "Explicit removal handles a still-dispatching error and then accepts the actual removed receipt",
+      "ok": false,
+      "tags": [],
+      "tests": [
+        {
+          "timeout": 60000,
+          "annotations": [],
+          "expectedStatus": "passed",
+          "projectId": "",
+          "projectName": "",
+          "results": [
+            {
+              "workerIndex": 5,
+              "parallelIndex": 1,
+              "status": "failed",
+              "duration": 11085,
+              "error": {
+                "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n",
+                "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n\n    at openMeeting (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:103:23)\n    at /workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:259:17",
+                "location": {
+                  "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+                  "column": 23,
+                  "line": 103
+                },
+                "snippet": "  101 |   );\n  102 |   const panel = page.getByRole(\"region\", { name: \"Meri meeting attendance\" });\n> 103 |   await expect(panel).toBeVisible();\n      |                       ^\n  104 |   return panel;\n  105 | }\n  106 | async function openSend(page: Page) {"
+              },
+              "errors": [
+                {
+                  "location": {
+                    "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+                    "column": 23,
+                    "line": 103
+                  },
+                  "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n\n\n  101 |   );\n  102 |   const panel = page.getByRole(\"region\", { name: \"Meri meeting attendance\" });\n> 103 |   await expect(panel).toBeVisible();\n      |                       ^\n  104 |   return panel;\n  105 | }\n  106 | async function openSend(page: Page) {\n    at openMeeting (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:103:23)\n    at /workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:259:17"
+                }
+              ],
+              "stdout": [],
+              "stderr": [],
+              "retry": 0,
+              "startTime": "2026-10-12T20:38:26.045Z",
+              "annotations": [],
+              "attachments": [
+                {
+                  "name": "screenshot",
+                  "contentType": "image/png",
+                  "path": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-artifacts/attendance-Explicit-remova-175af--the-actual-removed-receipt/test-failed-1.png"
+                },
+                {
+                  "name": "error-context",
+                  "contentType": "text/markdown",
+                  "path": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-artifacts/attendance-Explicit-remova-175af--the-actual-removed-receipt/error-context.md"
+                },
+                {
+                  "name": "trace",
+                  "contentType": "application/zip",
+                  "path": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-artifacts/attendance-Explicit-remova-175af--the-actual-removed-receipt/trace.zip"
+                }
+              ],
+              "errorLocation": {
+                "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+                "column": 23,
+                "line": 103
+              }
+            }
+          ],
+          "status": "unexpected"
+        }
+      ],
+      "id": "3b9a56e6ecc460e88dcd-ede2ede0623815f82a49",
+      "file": "attendance.spec.ts",
+      "line": 234,
+      "column": 1
+    },
+    {
+      "title": "Runtime disabled keeps real session status visible and forbids external actions",
+      "ok": false,
+      "tags": [],
+      "tests": [
+        {
+          "timeout": 60000,
+          "annotations": [],
+          "expectedStatus": "passed",
+          "projectId": "",
+          "projectName": "",
+          "results": [
+            {
+              "workerIndex": 6,
+              "parallelIndex": 1,
+              "status": "failed",
+              "duration": 11248,
+              "error": {
+                "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n",
+                "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n\n    at openMeeting (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:103:23)\n    at /workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:341:17",
+                "location": {
+                  "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+                  "column": 23,
+                  "line": 103
+                },
+                "snippet": "  101 |   );\n  102 |   const panel = page.getByRole(\"region\", { name: \"Meri meeting attendance\" });\n> 103 |   await expect(panel).toBeVisible();\n      |                       ^\n  104 |   return panel;\n  105 | }\n  106 | async function openSend(page: Page) {"
+              },
+              "errors": [
+                {
+                  "location": {
+                    "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+                    "column": 23,
+                    "line": 103
+                  },
+                  "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n\n\n  101 |   );\n  102 |   const panel = page.getByRole(\"region\", { name: \"Meri meeting attendance\" });\n> 103 |   await expect(panel).toBeVisible();\n      |                       ^\n  104 |   return panel;\n  105 | }\n  106 | async function openSend(page: Page) {\n    at openMeeting (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:103:23)\n    at /workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:341:17"
+                }
+              ],
+              "stdout": [],
+              "stderr": [],
+              "retry": 0,
+              "startTime": "2026-10-12T20:38:58.795Z",
+              "annotations": [],
+              "attachments": [
+                {
+                  "name": "screenshot",
+                  "contentType": "image/png",
+                  "path": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-artifacts/attendance-Runtime-disable-59349-nd-forbids-external-actions/test-failed-1.png"
+                },
+                {
+                  "name": "error-context",
+                  "contentType": "text/markdown",
+                  "path": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-artifacts/attendance-Runtime-disable-59349-nd-forbids-external-actions/error-context.md"
+                },
+                {
+                  "name": "trace",
+                  "contentType": "application/zip",
+                  "path": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-artifacts/attendance-Runtime-disable-59349-nd-forbids-external-actions/trace.zip"
+                }
+              ],
+              "errorLocation": {
+                "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+                "column": 23,
+                "line": 103
+              }
+            }
+          ],
+          "status": "unexpected"
+        }
+      ],
+      "id": "3b9a56e6ecc460e88dcd-c81802bd3f04134a71e0",
+      "file": "attendance.spec.ts",
+      "line": 330,
+      "column": 1
+    },
+    {
+      "title": "Read-only role does not fetch private attendance or expose dispatch controls",
+      "ok": false,
+      "tags": [],
+      "tests": [
+        {
+          "timeout": 60000,
+          "annotations": [],
+          "expectedStatus": "passed",
+          "projectId": "",
+          "projectName": "",
+          "results": [
+            {
+              "workerIndex": 7,
+              "parallelIndex": 1,
+              "status": "failed",
+              "duration": 10873,
+              "error": {
+                "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n",
+                "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n\n    at openMeeting (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:103:23)\n    at /workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:372:17",
+                "location": {
+                  "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+                  "column": 23,
+                  "line": 103
+                },
+                "snippet": "  101 |   );\n  102 |   const panel = page.getByRole(\"region\", { name: \"Meri meeting attendance\" });\n> 103 |   await expect(panel).toBeVisible();\n      |                       ^\n  104 |   return panel;\n  105 | }\n  106 | async function openSend(page: Page) {"
+              },
+              "errors": [
+                {
+                  "location": {
+                    "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+                    "column": 23,
+                    "line": 103
+                  },
+                  "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n\n\n  101 |   );\n  102 |   const panel = page.getByRole(\"region\", { name: \"Meri meeting attendance\" });\n> 103 |   await expect(panel).toBeVisible();\n      |                       ^\n  104 |   return panel;\n  105 | }\n  106 | async function openSend(page: Page) {\n    at openMeeting (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:103:23)\n    at /workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:372:17"
+                }
+              ],
+              "stdout": [],
+              "stderr": [],
+              "retry": 0,
+              "startTime": "2026-10-12T20:39:11.697Z",
+              "annotations": [],
+              "attachments": [
+                {
+                  "name": "screenshot",
+                  "contentType": "image/png",
+                  "path": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-artifacts/attendance-Read-only-role--65095-or-expose-dispatch-controls/test-failed-1.png"
+                },
+                {
+                  "name": "error-context",
+                  "contentType": "text/markdown",
+                  "path": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-artifacts/attendance-Read-only-role--65095-or-expose-dispatch-controls/error-context.md"
+                },
+                {
+                  "name": "trace",
+                  "contentType": "application/zip",
+                  "path": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-artifacts/attendance-Read-only-role--65095-or-expose-dispatch-controls/trace.zip"
+                }
+              ],
+              "errorLocation": {
+                "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+                "column": 23,
+                "line": 103
+              }
+            }
+          ],
+          "status": "unexpected"
+        }
+      ],
+      "id": "3b9a56e6ecc460e88dcd-dc4134c766141d4f2365",
+      "file": "attendance.spec.ts",
+      "line": 353,
+      "column": 1
+    },
+    {
+      "title": "Meeting privacy errors and session expiry never expose a successful-looking attendance control",
+      "ok": false,
+      "tags": [],
+      "tests": [
+        {
+          "timeout": 60000,
+          "annotations": [],
+          "expectedStatus": "passed",
+          "projectId": "",
+          "projectName": "",
+          "results": [
+            {
+              "workerIndex": 8,
+              "parallelIndex": 1,
+              "status": "failed",
+              "duration": 11566,
+              "error": {
+                "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n",
+                "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n\n    at openMeeting (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:103:23)\n    at /workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:397:17",
+                "location": {
+                  "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+                  "column": 23,
+                  "line": 103
+                },
+                "snippet": "  101 |   );\n  102 |   const panel = page.getByRole(\"region\", { name: \"Meri meeting attendance\" });\n> 103 |   await expect(panel).toBeVisible();\n      |                       ^\n  104 |   return panel;\n  105 | }\n  106 | async function openSend(page: Page) {"
+              },
+              "errors": [
+                {
+                  "location": {
+                    "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+                    "column": 23,
+                    "line": 103
+                  },
+                  "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Meri meeting attendance' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Meri meeting attendance' })\u001b[22m\n\n\n  101 |   );\n  102 |   const panel = page.getByRole(\"region\", { name: \"Meri meeting attendance\" });\n> 103 |   await expect(panel).toBeVisible();\n      |                       ^\n  104 |   return panel;\n  105 | }\n  106 | async function openSend(page: Page) {\n    at openMeeting (/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:103:23)\n    at /workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts:397:17"
+                }
+              ],
+              "stdout": [],
+              "stderr": [],
+              "retry": 0,
+              "startTime": "2026-10-12T20:39:24.583Z",
+              "annotations": [],
+              "attachments": [
+                {
+                  "name": "screenshot",
+                  "contentType": "image/png",
+                  "path": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-artifacts/attendance-Meeting-privacy-45166--looking-attendance-control/test-failed-1.png"
+                },
+                {
+                  "name": "error-context",
+                  "contentType": "text/markdown",
+                  "path": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-artifacts/attendance-Meeting-privacy-45166--looking-attendance-control/error-context.md"
+                },
+                {
+                  "name": "trace",
+                  "contentType": "application/zip",
+                  "path": "/tmp/capiro-remaining-qualification/final-104495d/portfolio-artifacts/attendance-Meeting-privacy-45166--looking-attendance-control/trace.zip"
+                }
+              ],
+              "errorLocation": {
+                "file": "/workspace/capiro-remaining/apps/web/tests/browser/attendance.spec.ts",
+                "column": 23,
+                "line": 103
+              }
+            }
+          ],
+          "status": "unexpected"
+        }
+      ],
+      "id": "3b9a56e6ecc460e88dcd-c7c822a29ec86d333f50",
+      "file": "attendance.spec.ts",
+      "line": 383,
+      "column": 1
+    }
+  ]
+}

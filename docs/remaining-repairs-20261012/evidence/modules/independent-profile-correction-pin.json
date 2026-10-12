@@ -1,0 +1,134 @@
+{
+  "reviewer": "modules_settings_review",
+  "base": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+  "head": "a5202a066d0a0bd29fd5158b1d8380d4a5736768",
+  "appsWebTree": "8e1930bf2c17b292d2c621bb33eac3aedb77b6b3",
+  "scope": "Read-only independent source/evidence review; no reviewer browser/build/server/native execution",
+  "files": [
+    {
+      "path": "apps/web/public/design/remaining-profile/file-text.svg",
+      "sha256": "44c3171673e553972f34198f8518b3c7eafe7460ae8e64fe0230f86e4490fa27"
+    },
+    {
+      "path": "apps/web/public/design/remaining-profile/mail.svg",
+      "sha256": "6e408546bacc34da3cae57ef4a4545c1328826599bd096a2f076507c8128e3cf"
+    },
+    {
+      "path": "apps/web/public/design/remaining-profile/phone.svg",
+      "sha256": "66df14e84ed694495210acbf113402185859046aabb8882aaeb94a2cdce3dae1"
+    },
+    {
+      "path": "apps/web/public/design/remaining-profile/provenance.json",
+      "sha256": "bf3b0206e695d72dfd9043f4760ec3ae0f80c72a24d84b5465c5f391b178dbfd"
+    },
+    {
+      "path": "apps/web/public/design/remaining-profile/sticky-note.svg",
+      "sha256": "ea1903caf9804f694b2449b7c6bd449c54385a83738bd682b94ef2fc6044b7a3"
+    },
+    {
+      "path": "apps/web/public/design/remaining-profile/users.svg",
+      "sha256": "0b02d58c80d492ce1e15d28b77777d761558f6304a5e486ce0993d8dd3131785"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ActivityFeed.tsx",
+      "sha256": "109613b7ab6adc563570804d1a83d35e452810fd6ac117c6f79a813e7185acc6"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx",
+      "sha256": "2cff749fe4fde463166880004fc18c2f5955b0c3292179d59a722d3f51d1d339"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx",
+      "sha256": "64cc056a645a42c851d6b8b65c8a49c24e29ef3e5aecf842eec4db92991a9d2b"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilitiesManager.tsx",
+      "sha256": "3cc5cc8c82fe4ef018917e6101be9088d9a77913042492498698a074cd829844"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilityDialog.tsx",
+      "sha256": "eed360cf9d619188f52c999b80ce85ea6aa9999df896b584891b85f7fa490bce"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilityEditor.tsx",
+      "sha256": "c49006d0aa6b04746c6c4b76f7debcd2f3915c1be6cd861cb4124c99964f4307"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilityFields.tsx",
+      "sha256": "38f0a479904765e6ddff737f33e48f7ebed4e53ab6470ecfacf4987fdeb03960"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilityGeocoding.tsx",
+      "sha256": "5419bc8e5d00584177e1ad3e82ccd33d741f0491446eb9f8c4124d8376c135f5"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/activity-presentation.ts",
+      "sha256": "a1e6e919f742eda6fba0ea70894fcb2a6b736c29ca6b32861d55df470ed4f7e2"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/facilities-manager.module.css",
+      "sha256": "6cc54de2087ae2a2275e8ce7cda6ccbbe3fbee51ee98da8e88ecb331113d9413"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/overview.module.css",
+      "sha256": "29ed76e99691c42beb8c835d4df7b350db01b6aae818507a49a94cf65fa75b09"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/FileToolbar.tsx",
+      "sha256": "f4333e48b3818aca8e74587f5bf732858bc031c9a7c7f014ccdd1307d909d3d7"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+      "sha256": "18d6f94455f08109e3883c569bc4203a198c5004aaa42bd42add8143adfc95bd"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/FolderCards.tsx",
+      "sha256": "b4b077ba3e9d65cd8a3f4c47364bd28a9033753e3314ce5907e8bd3eafff2f16"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/files.module.css",
+      "sha256": "0ce60cd202f0961ed40b32472c0378a7141feebe87d45348db368189920e943f"
+    },
+    {
+      "path": "apps/web/tests/browser/facility-manager-review.spec.ts",
+      "sha256": "2d7cbf390c733f925929f9f0d1215b25be51007eaac414438d4dcbe2b5566f35"
+    },
+    {
+      "path": "apps/web/tests/browser/profile-current-state.spec.ts",
+      "sha256": "26ef8d88a3ed49bf6e8c1a7b36944f0dfcc981771009517aae9c21430ac8612e"
+    },
+    {
+      "path": "apps/web/tests/browser/profile-presentation.spec.ts",
+      "sha256": "80db7a4c935fd13cea0cd5d6b4a82e5c6ae202b5a5a01e445248ac723a69819d"
+    },
+    {
+      "path": "apps/web/tests/browser/profile-write-lifetime.spec.ts",
+      "sha256": "70bb8a5a331f7fc9b22c4e408e9e8d5da139d47f74aadd80910ca927999b9a54"
+    },
+    {
+      "path": "apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+      "sha256": "db9f60de3c2a286333f234be540a9bece083067ceceb139427a0be2af34ad7ab"
+    },
+    {
+      "path": "apps/web/tests/profile-presentation.test.ts",
+      "sha256": "5e09463343c1b016826bbb3ccffae64169a7131a85375f48ad4e0bc3248ba125"
+    }
+  ],
+  "newSourceFindings": [],
+  "sourceConclusion": "The confirmed facility restart and timeline presentation lifetime defects are corrected in this exact source. Broader backend/provider/native acceptance is not inferred. Owner preservation run remains pending.",
+  "preservedCanonicalOwners": [
+    "useFacilityWriter.ts",
+    "queries.ts",
+    "activity-mutations.ts",
+    "QuickLog.tsx",
+    "profile-access.ts",
+    "Files CP01\u201303 non-presentation helpers"
+  ],
+  "ownerEvidenceReviewed": {
+    "recoveryRed": "manager-review-red(2 intended failures) + timeline-review-red(4 intended failures) on5291c71",
+    "correctedPresentationRed": "presentation-corrected-baseline-red(8 intended failures) on7aca86e",
+    "finalNewGreen": "final-handoff-green(14 passed,0 retries,1 worker)",
+    "focusedUnits": "correction-unit-green(104 passed)",
+    "remaining": "67 original preservation controls and root combined qualification"
+  }
+}

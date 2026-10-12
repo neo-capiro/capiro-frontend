@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-12T21:46:43.245123+00:00",
+  "source": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+  "statistics": {
+    "startTime": "2026-10-12T21:06:56.488Z",
+    "duration": 2361060.567,
+    "expected": 1115,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  },
+  "fullSuiteCompleted": true,
+  "sourceUnchanged": true,
+  "status": "FAILED",
+  "corrections": [
+    "4ed4b56aaa1660e7f7abdccd94208c17aa38f21b",
+    "83874fb2bbc0769a232d9890beccbe764863a1ef",
+    "850da33808dab050d2396a26233d3d3881d2fecf"
+  ],
+  "notes": [
+    "All failures and original artifacts preserved. No retries or skipped cases.",
+    "Corrections require fresh combined qualification."
+  ]
+}

@@ -39,3 +39,56 @@
   border-radius: 8px;
   background: white;
 }
+
+.richEditor {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  overflow: hidden;
+}
+.formatting {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  padding: 12px;
+}
+.formatting button {
+  height: 36px;
+  min-width: 32px;
+  padding: 0 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 500;
+}
+.formatting button[aria-pressed="true"] {
+  background: var(--muted);
+}
+.messageBody {
+  min-height: 180px;
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.45;
+  letter-spacing: -0.07px;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+.messageBody p {
+  margin: 0;
+}
+.messageBody ul {
+  padding-left: 24px;
+  margin: 0;
+}
+.messageBody:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: -2px;
+}
+
+.formatting button[aria-label="List"] {
+  min-width: 50px;
+}
+.formatting .attachButton {
+  min-width: 106px;
+}

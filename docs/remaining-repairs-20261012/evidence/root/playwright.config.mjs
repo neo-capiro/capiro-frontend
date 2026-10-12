@@ -1,0 +1,2 @@
+import {defineConfig} from "/workspace/capiro-remaining/node_modules/@playwright/test/index.mjs";
+export default defineConfig({testDir:"/workspace/capiro-remaining/apps/web/test/browser",workers:1,retries:0,timeout:60000,outputDir:process.env.CAPIRO_QA_ARTIFACTS,reporter:[["list"],["json",{outputFile:process.env.CAPIRO_QA_RESULTS}]],use:{baseURL:"http://127.0.0.1:5197",viewport:{width:1440,height:1040},launchOptions:{executablePath:"/usr/bin/chromium",args:["--disable-dev-shm-usage"]},screenshot:"only-on-failure",trace:"retain-on-failure"},webServer:undefined});

@@ -1,0 +1,387 @@
+/* Portfolio styles apply only while its route surface is mounted, including portals. */
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/newsreader/Newsreader-Variable.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/newsreader/Newsreader-Italic-Variable.ttf")
+    format("truetype");
+  font-style: italic;
+  font-weight: 200 800;
+  font-display: swap;
+}
+:where(body:has([data-portfolio-root])) {
+  --font-newsreader: "Newsreader";
+  --border-strong: #d6d3d1;
+  --accent: #f0efed;
+  --danger: #7a2e2e;
+  --destructive-subtle: #f3e7e5;
+  --destructive-text: #652424;
+  --success: #42634b;
+  --shadow: 0 2px 8px -2px #0c0a090a, 0 1px 2px #0c0a090a;
+  --dark-gradient: linear-gradient(173deg, #242424, #0a0a0a);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :where(body:has([data-portfolio-root])) {
+    --background: #121212;
+    --card: #1b1b1b;
+    --foreground: #fafaf9;
+    --muted: #242424;
+    --muted-foreground: #aaa29c;
+    --border: #34312f;
+    --border-strong: #57534e;
+    --accent: #292724;
+    --danger: #e79b9b;
+    --destructive-subtle: #322626;
+    --destructive-text: #e79b9b;
+    --success: #9dbea4;
+    color-scheme: dark;
+  }
+}
+:where(body:has([data-portfolio-root])) * {
+  box-sizing: border-box;
+}
+:where(body:has([data-portfolio-root])) {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font:
+    14px/1.45 var(--font-geist-sans),
+    sans-serif;
+}
+:where(body:has([data-portfolio-root])) button,
+:where(body:has([data-portfolio-root])) input,
+:where(body:has([data-portfolio-root])) textarea,
+:where(body:has([data-portfolio-root])) select {
+  font: inherit;
+  color: inherit;
+}
+:where(body:has([data-portfolio-root])) button,
+:where(body:has([data-portfolio-root])) a,
+:where(body:has([data-portfolio-root])) input,
+:where(body:has([data-portfolio-root])) textarea,
+:where(body:has([data-portfolio-root])) select {
+  -webkit-tap-highlight-color: transparent;
+}
+:where(body:has([data-portfolio-root])) button {
+  cursor: pointer;
+}
+:where(body:has([data-portfolio-root])) button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+:where(body:has([data-portfolio-root])) a {
+  color: inherit;
+  text-decoration: none;
+}
+:where(body:has([data-portfolio-root])) a:hover {
+  text-decoration: underline;
+}
+:where(body:has([data-portfolio-root])) button:focus-visible,
+:where(body:has([data-portfolio-root])) a:focus-visible,
+:where(body:has([data-portfolio-root])) input:focus-visible,
+:where(body:has([data-portfolio-root])) textarea:focus-visible,
+:where(body:has([data-portfolio-root])) select:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 3px;
+}
+:where(body:has([data-portfolio-root])) h1,
+:where(body:has([data-portfolio-root])) h2,
+:where(body:has([data-portfolio-root])) h3,
+:where(body:has([data-portfolio-root])) p {
+  margin: 0;
+}
+:where(body:has([data-portfolio-root])) h1 {
+  font-size: 30px;
+  line-height: 1.15;
+  letter-spacing: -0.9px;
+  font-weight: 600;
+}
+:where(body:has([data-portfolio-root])) h2 {
+  font-size: 18px;
+  letter-spacing: -0.36px;
+  font-weight: 600;
+}
+:where(body:has([data-portfolio-root])) h3 {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.15px;
+}
+:where(body:has([data-portfolio-root])) input,
+:where(body:has([data-portfolio-root])) textarea,
+:where(body:has([data-portfolio-root])) select {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  padding: 9px 12px;
+  max-width: 100%;
+}
+:where(body:has([data-portfolio-root])) textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+:where(body:has([data-portfolio-root])) label {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+}
+:where(body:has([data-portfolio-root])) small,
+:where(body:has([data-portfolio-root])) .muted {
+  color: var(--muted-foreground);
+}
+:where(body:has([data-portfolio-root])) code {
+  font-family: var(--font-geist-mono), monospace;
+}
+:where(body:has([data-portfolio-root])) .centered {
+  display: grid;
+  place-content: center;
+  min-height: 100vh;
+  padding: 24px;
+  gap: 20px;
+}
+:where(body:has([data-portfolio-root])) .page {
+  padding: 28px 32px;
+  max-width: 1680px;
+  margin: auto;
+}
+:where(body:has([data-portfolio-root])) .pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+:where(body:has([data-portfolio-root])) .stack {
+  display: grid;
+  gap: 16px;
+}
+:where(body:has([data-portfolio-root])) .row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+:where(body:has([data-portfolio-root])) .between {
+  justify-content: space-between;
+}
+:where(body:has([data-portfolio-root]))
+  .grid:where(:not([data-slot="dialog-content"])) {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+:where(body:has([data-portfolio-root])) .card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 22px 24px;
+}
+:where(body:has([data-portfolio-root])) .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  padding: 8px 14px;
+  min-height: 36px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.2;
+}
+:where(body:has([data-portfolio-root])) .button:hover {
+  background: var(--accent);
+  text-decoration: none;
+}
+:where(body:has([data-portfolio-root])) .primary {
+  background: var(--dark-gradient);
+  border-color: #242424;
+  color: #fff;
+}
+:where(body:has([data-portfolio-root])) .primary:hover {
+  background: #343434;
+}
+:where(body:has([data-portfolio-root])) .ghost {
+  background: transparent;
+  border-color: transparent;
+}
+:where(body:has([data-portfolio-root])) .iconButton {
+  padding: 8px;
+  width: 36px;
+  height: 36px;
+}
+:where(body:has([data-portfolio-root])) .chip {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  max-width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px 9px;
+  font-size: 12px;
+  font-weight: 500;
+}
+:where(body:has([data-portfolio-root])) .eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.66px;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+:where(body:has([data-portfolio-root])) .danger {
+  color: var(--danger);
+}
+:where(body:has([data-portfolio-root])) .status {
+  padding: 24px;
+  text-align: center;
+  border: 1px dashed var(--border-strong);
+  border-radius: 12px;
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+}
+:where(body:has([data-portfolio-root])) .error {
+  border-color: var(--danger);
+}
+:where(body:has([data-portfolio-root])) .toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+:where(body:has([data-portfolio-root])) .toolbar input {
+  min-width: 180px;
+}
+:where(body:has([data-portfolio-root])) .tableWrap {
+  position: relative;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+}
+:where(body:has([data-portfolio-root])) table {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: left;
+}
+:where(body:has([data-portfolio-root])) th {
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--muted-foreground);
+  background: var(--muted);
+}
+:where(body:has([data-portfolio-root])) td,
+:where(body:has([data-portfolio-root])) th {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+}
+:where(body:has([data-portfolio-root])) tbody tr:last-child td {
+  border-bottom: 0;
+}
+:where(body:has([data-portfolio-root])) .monogram {
+  display: grid;
+  place-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  background: var(--dark-gradient);
+  color: #fff;
+  border-radius: 10px;
+  font-weight: 600;
+}
+:where(body:has([data-portfolio-root])) .truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+:where(body:has([data-portfolio-root])) .empty {
+  padding: 36px;
+  text-align: center;
+  color: var(--muted-foreground);
+}
+:where(body:has([data-portfolio-root])) .formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+:where(body:has([data-portfolio-root])) .formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 12px;
+}
+:where(body:has([data-portfolio-root])) .divider {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 8px 0;
+}
+:where(body:has([data-portfolio-root])) .srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+:where(body:has([data-portfolio-root])) .skip {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 100;
+  background: var(--card);
+  padding: 12px;
+}
+:where(body:has([data-portfolio-root])) .skip:focus {
+  top: 8px;
+}
+@media (max-width: 1100px) {
+  :where(body:has([data-portfolio-root]))
+    .grid:where(:not([data-slot="dialog-content"])) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  :where(body:has([data-portfolio-root])) .page {
+    padding: 24px;
+  }
+}
+@media (max-width: 680px) {
+  :where(body:has([data-portfolio-root])) .page {
+    padding: 20px 16px;
+  }
+  :where(body:has([data-portfolio-root])) .pageHeader {
+    align-items: flex-start;
+  }
+  :where(body:has([data-portfolio-root])) h1 {
+    font-size: 26px;
+  }
+  :where(body:has([data-portfolio-root]))
+    .grid:where(:not([data-slot="dialog-content"])),
+  :where(body:has([data-portfolio-root])) .formGrid {
+    grid-template-columns: 1fr;
+  }
+  :where(body:has([data-portfolio-root])) .card {
+    padding: 18px;
+  }
+  :where(body:has([data-portfolio-root])) .toolbar input {
+    flex: 1;
+    min-width: 120px;
+  }
+  :where(body:has([data-portfolio-root])) .pageHeader .button {
+    font-size: 12px;
+  }
+}
+/* Keep the scoped portal layer stable when shared CSS is bundled later. */
+body:has([data-portfolio-root]) [data-slot="dialog-overlay"] {
+  position: fixed;
+  inset: 0;
+  background: #0a0a0a66;
+  z-index: 50;
+  backdrop-filter: none;
+}

@@ -39,6 +39,7 @@ export async function fetchMeetings(
       clientId: row.client?.id,
       status: row.status,
       provenance: "Your accessible meetings",
+      meeting: row,
     })),
     limitations: [],
   };

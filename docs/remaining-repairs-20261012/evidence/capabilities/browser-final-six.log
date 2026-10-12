@@ -1,0 +1,13 @@
+
+Running 6 tests using 1 worker
+
+(node:734229) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/browser/capability-list-registration-layout.spec.ts:25:3 › phone capability rows retain native content and keyboard selection in light (7.4s)
+  ✓  2 tests/browser/capability-list-registration-layout.spec.ts:25:3 › phone capability rows retain native content and keyboard selection in dark (5.4s)
+  ✓  3 tests/browser/capability-list-registration-layout.spec.ts:106:1 › compact rows wrap long supplied content and desktop retains descriptive cards (5.2s)
+  ✓  4 tests/browser/capability-list-registration-layout.spec.ts:170:1 › registration summary uses aligned divided rows and the Figma dialog width (3.7s)
+  ✓  5 tests/browser/capability-list-registration-layout.spec.ts:211:1 › the complete capability page fits the 320px viewport including its shared header (5.0s)
+  ✓  6 tests/browser/capability-list-registration-layout.spec.ts:257:1 › registration rows wrap long values and preserve missing-value and EIN review states on phone (2.4s)
+
+  6 passed (31.3s)

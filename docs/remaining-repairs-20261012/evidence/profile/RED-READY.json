@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-12T19:52:50.452563+00:00",
+  "runtimeSource": "5291c717e77c8b3ffdc995a4e20080c4964483fd",
+  "baseline": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+  "presentationControlCount": 8,
+  "candidateRegressionCount": 6,
+  "tests": {
+    "apps/web/tests/browser/profile-presentation.spec.ts": "f4bb425518a1436d3e41eeb7c60f0d970444b04f905eb64eb9eab7d36b0c960d",
+    "apps/web/tests/browser/facility-manager-review.spec.ts": "2d7cbf390c733f925929f9f0d1215b25be51007eaac414438d4dcbe2b5566f35",
+    "apps/web/tests/browser/timeline-presentation-lifetime.spec.ts": "db9f60de3c2a286333f234be540a9bece083067ceceb139427a0be2af34ad7ab"
+  },
+  "runtimeUntouchedAfterReview": true,
+  "lease": "waiting",
+  "finalSpecChangesBeforeBaseline": "Read-only expanded projection has no mutation controls; Log closes projection and activates existing URL owner, preserving context."
+}

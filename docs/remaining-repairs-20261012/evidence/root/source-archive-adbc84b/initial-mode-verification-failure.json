@@ -1,0 +1,5 @@
+{
+  "phase": "Archive created; validation failed at first regular file .dockerignore",
+  "reason": "Validator required Unix external attributes, but git archive emits regular non-executable files with DOS defaults; no executable or symlink blobs exist in this source",
+  "action": "Keep archive bytes untouched and independently verify every path/blob plus regular-file mode equivalence"
+}

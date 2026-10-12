@@ -1,0 +1,92 @@
+
+Running 2 tests using 1 worker
+
+(node:752492) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 apps/web/tests/browser/facility-manager-review.spec.ts:10:7 › inline facility recovery adopts the reviewed record after remote update (6.9s)
+(node:752679) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 apps/web/tests/browser/facility-manager-review.spec.ts:10:7 › inline facility recovery adopts the reviewed record after uncertain applied edit (6.8s)
+
+
+  1) apps/web/tests/browser/facility-manager-review.spec.ts:10:7 › inline facility recovery adopts the reviewed record after remote update 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator:  getByRole('dialog', { name: 'Facilities: Synthetic profile client', exact: true }).getByLabel('Notes', { exact: true })
+    Expected: "Authoritative current note"
+    Received: "Saved facility notes"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveValue" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Facilities: Synthetic profile client', exact: true }).getByLabel('Notes', { exact: true })
+        14 × locator resolved to <textarea id="_r_8_" name="notes">Saved facility notes</textarea>
+           - unexpected value "Saved facility notes"
+
+
+      55 |       .getByRole("button", { name: "Use the reviewed facility", exact: true })
+      56 |       .click();
+    > 57 |     await expect(manager.getByLabel("Notes", { exact: true })).toHaveValue(
+         |                                                                ^
+      58 |       "Authoritative current note",
+      59 |     );
+      60 |     await expect(
+        at /workspace/capiro-remaining-profile/apps/web/tests/browser/facility-manager-review.spec.ts:57:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/manager-review-red/manager-review-inline-faci-da4aa--record-after-remote-update/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-profile-evidence/manager-review-red/manager-review-inline-faci-da4aa--record-after-remote-update/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/manager-review-red/manager-review-inline-faci-da4aa--record-after-remote-update/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-profile-evidence/manager-review-red/manager-review-inline-faci-da4aa--record-after-remote-update/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) apps/web/tests/browser/facility-manager-review.spec.ts:10:7 › inline facility recovery adopts the reviewed record after uncertain applied edit 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator:  getByRole('dialog', { name: 'Facilities: Synthetic profile client', exact: true }).getByLabel('Notes', { exact: true })
+    Expected: "Authoritative current note"
+    Received: "Saved facility notes"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveValue" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Facilities: Synthetic profile client', exact: true }).getByLabel('Notes', { exact: true })
+        14 × locator resolved to <textarea id="_r_8_" name="notes">Saved facility notes</textarea>
+           - unexpected value "Saved facility notes"
+
+
+      55 |       .getByRole("button", { name: "Use the reviewed facility", exact: true })
+      56 |       .click();
+    > 57 |     await expect(manager.getByLabel("Notes", { exact: true })).toHaveValue(
+         |                                                                ^
+      58 |       "Authoritative current note",
+      59 |     );
+      60 |     await expect(
+        at /workspace/capiro-remaining-profile/apps/web/tests/browser/facility-manager-review.spec.ts:57:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/manager-review-red/manager-review-inline-faci-0b60d-fter-uncertain-applied-edit/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-profile-evidence/manager-review-red/manager-review-inline-faci-0b60d-fter-uncertain-applied-edit/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-profile-evidence/manager-review-red/manager-review-inline-faci-0b60d-fter-uncertain-applied-edit/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-profile-evidence/manager-review-red/manager-review-inline-faci-0b60d-fter-uncertain-applied-edit/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    apps/web/tests/browser/facility-manager-review.spec.ts:10:7 › inline facility recovery adopts the reviewed record after remote update 
+    apps/web/tests/browser/facility-manager-review.spec.ts:10:7 › inline facility recovery adopts the reviewed record after uncertain applied edit 

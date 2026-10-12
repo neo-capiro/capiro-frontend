@@ -1,0 +1,471 @@
+{
+  "sourceCommit": "b5eaadd031580edca79e9d99de2c0ab14d59997c",
+  "files": [
+    {
+      "path": "PLAN.md",
+      "bytes": 2110,
+      "sha256": "d400486ecbc27d1c95e66f66e3b355df17eecafe05863b0161571112e00e1fea"
+    },
+    {
+      "path": "architecture-final.json",
+      "bytes": 755338,
+      "sha256": "ee13724631c3ed374ec1041a35e3475283d99ff115024990a073bcf5ef43842d"
+    },
+    {
+      "path": "architecture.json",
+      "bytes": 755338,
+      "sha256": "84cd624c49f261115d7e3fa2c2709da76c379724e2c44b2e19381430f9b35636"
+    },
+    {
+      "path": "baseline-source/apps/web/src/features/modules/planner/PlannerScreen.tsx",
+      "bytes": 6095,
+      "sha256": "a70833a933e56c826547563a317fd98bd6fc726a8d213b971599af8d7e528182"
+    },
+    {
+      "path": "baseline-source/apps/web/src/features/modules/planner/PublicForm.tsx",
+      "bytes": 5366,
+      "sha256": "bd18ef0a2a085c5b060f02f1e77d901c2c86df201a9367e3baa2c6d1b38092c9"
+    },
+    {
+      "path": "baseline-source/apps/web/src/features/modules/planner/TaskViews.tsx",
+      "bytes": 10336,
+      "sha256": "36f60ab5694bd29d767cdf895a0aaf8126c01747958c31042a02919ba1d39d72"
+    },
+    {
+      "path": "baseline-source/apps/web/src/features/modules/planner/TaskWorkspace.tsx",
+      "bytes": 10579,
+      "sha256": "d636dd0f21520044523b2a863e88aad088d70122b86a6b3c751c5c0c06367e72"
+    },
+    {
+      "path": "baseline-source/apps/web/src/features/modules/planner/planner.module.css",
+      "bytes": 6116,
+      "sha256": "144c369b5b31d12ea9523c9789b17d80591d6017d5af355bdd5b03a400194990"
+    },
+    {
+      "path": "baseline-source/apps/web/src/features/modules/workspace/workspace.module.css",
+      "bytes": 13711,
+      "sha256": "335f344cd19574f5077f81e585d9bf4fc2dcae6f7718c62088b417676f9f4b6f"
+    },
+    {
+      "path": "browser-final/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "browser-final/remaining-modules-MS07-reg-a476c-ktop-row-and-wrap-on-phones/workspace-filters-desktop.png",
+      "bytes": 100166,
+      "sha256": "14e6fa0687dba4cb701d162f04d060b334017a949878b9ab68641da6a3273ddb"
+    },
+    {
+      "path": "browser-final/remaining-modules-MS07-reg-a476c-ktop-row-and-wrap-on-phones/workspace-filters-phone.png",
+      "bytes": 77661,
+      "sha256": "21aa2fcf18daa31660379227eec59478d62c2a97e4787aa33c1537adb972f9d1"
+    },
+    {
+      "path": "browser-final/remaining-modules-MS08-reg-4f5e1-ups-and-current-page-counts/planner-client-groups-desktop.png",
+      "bytes": 110403,
+      "sha256": "b9df58bed18b46e8ef7dc63ab781fe0dffa74f8f98a99a77f41f58e21986d280"
+    },
+    {
+      "path": "browser-final/remaining-modules-MS08-sco-10d0d-ard-operable-at-phone-width/planner-client-groups-phone.png",
+      "bytes": 62621,
+      "sha256": "1062c1a4289c1e90ab8f92bcbd50d4c1571ef152162d3153919721c8d1e8a02b"
+    },
+    {
+      "path": "browser-final/remaining-modules-MS09-reg-03ca4-keeps-input-on-styled-error/public-form-error-desktop.png",
+      "bytes": 32254,
+      "sha256": "a4264e8169534fb90f5c17320d26e507a816dd27136c9dbd86924d61c2871a5a"
+    },
+    {
+      "path": "browser-final/remaining-modules-MS09-reg-03ca4-keeps-input-on-styled-error/public-form-error-phone.png",
+      "bytes": 24527,
+      "sha256": "2abbb3484c81e7cf9320c29a72db17c7b879ce75caa8bfa70d94237fd4e01fc5"
+    },
+    {
+      "path": "browser-final.json",
+      "bytes": 13868,
+      "sha256": "b2851cd4734595528f83893b1bb4a4e4998ab799522199c382f460e1df09840e"
+    },
+    {
+      "path": "browser-final.log",
+      "bytes": 2366,
+      "sha256": "74dbd8a6c4a0200903f462bbac124ad28ec536877bae1d80c8f0ceb6b892a6aa"
+    },
+    {
+      "path": "browser-green/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "browser-green/remaining-modules-MS07-reg-a476c-ktop-row-and-wrap-on-phones/workspace-filters-desktop.png",
+      "bytes": 100166,
+      "sha256": "14e6fa0687dba4cb701d162f04d060b334017a949878b9ab68641da6a3273ddb"
+    },
+    {
+      "path": "browser-green/remaining-modules-MS07-reg-a476c-ktop-row-and-wrap-on-phones/workspace-filters-phone.png",
+      "bytes": 77659,
+      "sha256": "220573a093c2bf2de3c5355539dd58e2c978463ffc5dbf131c1cf089feb275b5"
+    },
+    {
+      "path": "browser-green/remaining-modules-MS08-reg-4f5e1-ups-and-current-page-counts/planner-client-groups-desktop.png",
+      "bytes": 111091,
+      "sha256": "8f9fa4d51da855979590c3fef03f6d857e8b301503e402b4a6da59eac892eb99"
+    },
+    {
+      "path": "browser-green/remaining-modules-MS08-sco-10d0d-ard-operable-at-phone-width/planner-client-groups-phone.png",
+      "bytes": 65135,
+      "sha256": "87408a292e74c4b892ca512d2fafb8cd4eb1ff54f1a6ac28cbe40b0057eab3d4"
+    },
+    {
+      "path": "browser-green/remaining-modules-MS09-reg-03ca4-keeps-input-on-styled-error/public-form-error-desktop.png",
+      "bytes": 32254,
+      "sha256": "a4264e8169534fb90f5c17320d26e507a816dd27136c9dbd86924d61c2871a5a"
+    },
+    {
+      "path": "browser-green/remaining-modules-MS09-reg-03ca4-keeps-input-on-styled-error/public-form-error-phone.png",
+      "bytes": 24527,
+      "sha256": "2abbb3484c81e7cf9320c29a72db17c7b879ce75caa8bfa70d94237fd4e01fc5"
+    },
+    {
+      "path": "browser-green.json",
+      "bytes": 13868,
+      "sha256": "47dc843587178da533bf1f8d01e52443d2eaae9c0fb14c107b68749b011e6320"
+    },
+    {
+      "path": "browser-green.log",
+      "bytes": 2366,
+      "sha256": "cbef9dc93883e1ccaff7b7d1fcac52bc7b778478db65ec5b031851010ed191b5"
+    },
+    {
+      "path": "browser-group-width-red/.last-run.json",
+      "bytes": 96,
+      "sha256": "58e96c162c2fe072cf400fc7411815e5dd06a1fc29e1d6602c03c31df36b718c"
+    },
+    {
+      "path": "browser-group-width-red/remaining-modules-MS08-reg-4f5e1-ups-and-current-page-counts/error-context.md",
+      "bytes": 21448,
+      "sha256": "2a8387b8b4867d9abbb49f0c661530d1056fd19affd26b84c1f027524936603e"
+    },
+    {
+      "path": "browser-group-width-red/remaining-modules-MS08-reg-4f5e1-ups-and-current-page-counts/test-failed-1.png",
+      "bytes": 111076,
+      "sha256": "fc04aded5624c2da307cd0dfac8997683e210f15936e4bd7e3e8dcf9f632eda1"
+    },
+    {
+      "path": "browser-group-width-red/remaining-modules-MS08-reg-4f5e1-ups-and-current-page-counts/trace.zip",
+      "bytes": 410450,
+      "sha256": "3f45048baedbcb7cbc6fa38a704c79c0e8c474e2cee9d5e1b50f11fccedd3844"
+    },
+    {
+      "path": "browser-group-width-red.json",
+      "bytes": 6632,
+      "sha256": "4ec11c39a38b8a02df15b91148fced4e7371272c8af6d6a76e186679daae4970"
+    },
+    {
+      "path": "browser-group-width-red.log",
+      "bytes": 2769,
+      "sha256": "8cece84ec4fdf5258e7cba11b7c6b2a4fca74411bc0a1b2f92416f618a0435a2"
+    },
+    {
+      "path": "browser-preservation/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "browser-preservation/next-modules-task-links-ag-56488--and-respects-viewer-access/linked-task-detail.png",
+      "bytes": 103888,
+      "sha256": "7feaf864c8d2c48da178097db50b70ef6c5494482c6cd9ce75d412a97e1dc055"
+    },
+    {
+      "path": "browser-preservation.json",
+      "bytes": 29773,
+      "sha256": "c1dacc8aed2ff1a3a9126322f7bf2933aad587311bc164a1e64a0d9896b11a38"
+    },
+    {
+      "path": "browser-preservation.log",
+      "bytes": 5200,
+      "sha256": "5cb840ee566e26eb17ac61a75e0859f61ba4f9e4180103540959e765dd305b7d"
+    },
+    {
+      "path": "browser-red/.last-run.json",
+      "bytes": 194,
+      "sha256": "a83eab2f2163d826c3d033679061ecbee1df900832f2cce956b1d6ceffef2bc1"
+    },
+    {
+      "path": "browser-red/remaining-modules-MS07-reg-a476c-ktop-row-and-wrap-on-phones/error-context.md",
+      "bytes": 16033,
+      "sha256": "412c7a9f775ff881a10e61c84db9ead3284ba532fbb33b59abcff63b9fb3df89"
+    },
+    {
+      "path": "browser-red/remaining-modules-MS07-reg-a476c-ktop-row-and-wrap-on-phones/test-failed-1.png",
+      "bytes": 101536,
+      "sha256": "ddf35d2bf4c805387c70b53133f5a9dd36c54b5aded141dc5e1ba5ffc241e56e"
+    },
+    {
+      "path": "browser-red/remaining-modules-MS07-reg-a476c-ktop-row-and-wrap-on-phones/trace.zip",
+      "bytes": 373042,
+      "sha256": "3b07884cb3dfb6c88b51e7c2434f7016c88e026088e00bf8a4bf2f8c23e21944"
+    },
+    {
+      "path": "browser-red/remaining-modules-MS08-reg-4f5e1-ups-and-current-page-counts/error-context.md",
+      "bytes": 12855,
+      "sha256": "9b5682ea363a076de2223b11ad823894e3d603faba89339d094b4848f7155a08"
+    },
+    {
+      "path": "browser-red/remaining-modules-MS08-reg-4f5e1-ups-and-current-page-counts/test-failed-1.png",
+      "bytes": 98389,
+      "sha256": "002f64557fa106acd63774a497fa79f917a1477c0ea9568ecc66aeab23e9d37b"
+    },
+    {
+      "path": "browser-red/remaining-modules-MS08-reg-4f5e1-ups-and-current-page-counts/trace.zip",
+      "bytes": 381209,
+      "sha256": "db15b882fc3bce0315d0296a924d33f3f5aff05dcc8f94c5c24f8f7849aa6282"
+    },
+    {
+      "path": "browser-red/remaining-modules-MS09-reg-03ca4-keeps-input-on-styled-error/error-context.md",
+      "bytes": 8547,
+      "sha256": "1bfeed05903cae4753620ea90dffcbcfa19d221e1d1a3d9d321c86cbcfb2a6a4"
+    },
+    {
+      "path": "browser-red/remaining-modules-MS09-reg-03ca4-keeps-input-on-styled-error/test-failed-1.png",
+      "bytes": 26290,
+      "sha256": "a864aad32d9df2b9bb88c4130eac8c29f5c523868ae28321094c82aa269fa35c"
+    },
+    {
+      "path": "browser-red/remaining-modules-MS09-reg-03ca4-keeps-input-on-styled-error/trace.zip",
+      "bytes": 162989,
+      "sha256": "57aec216f2f80aed3e77613288775584783d5c0d732a5ec01a8e39934ce57f72"
+    },
+    {
+      "path": "browser-red-final/.last-run.json",
+      "bytes": 194,
+      "sha256": "a83eab2f2163d826c3d033679061ecbee1df900832f2cce956b1d6ceffef2bc1"
+    },
+    {
+      "path": "browser-red-final/remaining-modules-MS07-reg-a476c-ktop-row-and-wrap-on-phones/error-context.md",
+      "bytes": 16033,
+      "sha256": "6edf554b98eb061770374863a56de71514a8d749f0ddafb55031294ab9caa2cc"
+    },
+    {
+      "path": "browser-red-final/remaining-modules-MS07-reg-a476c-ktop-row-and-wrap-on-phones/test-failed-1.png",
+      "bytes": 101536,
+      "sha256": "ddf35d2bf4c805387c70b53133f5a9dd36c54b5aded141dc5e1ba5ffc241e56e"
+    },
+    {
+      "path": "browser-red-final/remaining-modules-MS07-reg-a476c-ktop-row-and-wrap-on-phones/trace.zip",
+      "bytes": 382239,
+      "sha256": "db9fe48fff4e39e651904cf5183e9a7f32a6c5ddc81a2cef678bb9b70faa4676"
+    },
+    {
+      "path": "browser-red-final/remaining-modules-MS08-reg-4f5e1-ups-and-current-page-counts/error-context.md",
+      "bytes": 12847,
+      "sha256": "5ea7a0ebc6dcfcb2dda526903b146f4056edbadf471a2b1b8fd3e4b71d925094"
+    },
+    {
+      "path": "browser-red-final/remaining-modules-MS08-reg-4f5e1-ups-and-current-page-counts/test-failed-1.png",
+      "bytes": 98389,
+      "sha256": "002f64557fa106acd63774a497fa79f917a1477c0ea9568ecc66aeab23e9d37b"
+    },
+    {
+      "path": "browser-red-final/remaining-modules-MS08-reg-4f5e1-ups-and-current-page-counts/trace.zip",
+      "bytes": 381246,
+      "sha256": "4112bbf30b479866220e3656839659fe67d51bf32c696bc87454754f2bcf8050"
+    },
+    {
+      "path": "browser-red-final/remaining-modules-MS09-reg-03ca4-keeps-input-on-styled-error/error-context.md",
+      "bytes": 8547,
+      "sha256": "ef713ee56ebfec33e55b5d6a6b29bb2c365a2a01f0f9c47a6fc2cf66c9c42dcc"
+    },
+    {
+      "path": "browser-red-final/remaining-modules-MS09-reg-03ca4-keeps-input-on-styled-error/test-failed-1.png",
+      "bytes": 26290,
+      "sha256": "a864aad32d9df2b9bb88c4130eac8c29f5c523868ae28321094c82aa269fa35c"
+    },
+    {
+      "path": "browser-red-final/remaining-modules-MS09-reg-03ca4-keeps-input-on-styled-error/trace.zip",
+      "bytes": 163051,
+      "sha256": "f7420c48817c1770f53849483e5650a72fb6d46d1f2f3a438a681359323926b5"
+    },
+    {
+      "path": "browser-red-final.json",
+      "bytes": 18265,
+      "sha256": "1e269da9d27be2850eccf3c4bf85fdbf15634f4d25c645b59ba578a007cd0a8b"
+    },
+    {
+      "path": "browser-red-final.log",
+      "bytes": 9008,
+      "sha256": "4591fe34701c1466af2399de37895bf0139cda2c059bdf67c0c493dc45ce5867"
+    },
+    {
+      "path": "browser-red.json",
+      "bytes": 18199,
+      "sha256": "5db4373a8b5e4b934ee44045d3a49088c0a6fd18f2263e3747d65c8199b5294f"
+    },
+    {
+      "path": "browser-red.log",
+      "bytes": 8936,
+      "sha256": "3f9b94ef495f925a365f3520ceeba793c614a9b28e4d67e11ddf22baa8c01567"
+    },
+    {
+      "path": "design-baseline.json",
+      "bytes": 3133,
+      "sha256": "9246e03525568820905c11fd6c9ceed3730710284b8cd686de231beb7e8a99c4"
+    },
+    {
+      "path": "figma-form-5.png",
+      "bytes": 27963,
+      "sha256": "0732f5b691abbadb1344f3a5b4a32010df424676f85014b83b9375f8138eab0d"
+    },
+    {
+      "path": "figma-form-context.json",
+      "bytes": 45666,
+      "sha256": "71d174f9ee4f9f580ce510981d777a6afee6114da1980056660ba2b54ff2bd3a"
+    },
+    {
+      "path": "figma-form-text.json",
+      "bytes": 8305,
+      "sha256": "0fd73ff0d03fa58511b46fc1c38d399c2f4b1cd2df2a04943224549c70d0dbf5"
+    },
+    {
+      "path": "figma-planner-6.png",
+      "bytes": 91352,
+      "sha256": "c73cf124884d4489e52a505d8e32726d59359d5119a8a165d6f409dba4a556ca"
+    },
+    {
+      "path": "figma-planner-text.json",
+      "bytes": 80070,
+      "sha256": "8d09861e47c9de7843623f834a9c6feafd027fbcd81a5d13a58cba91fd5b0d4e"
+    },
+    {
+      "path": "figma-workspace-6.png",
+      "bytes": 88048,
+      "sha256": "e7608095db75e5d0fd2c55ba2f1795a83ed9c7246053d397d7fd1379240bd8fc"
+    },
+    {
+      "path": "figma-workspace-text.json",
+      "bytes": 73999,
+      "sha256": "155cb60823f5b14a4bbe77d96e8efe4d7c951f8cdaf279d47d7ab56983d959d3"
+    },
+    {
+      "path": "final-source-and-checks.json",
+      "bytes": 4742,
+      "sha256": "72a67638837ff1bdabbb17486f8ec8e63721917270cd24f2c95a2448989f28b5"
+    },
+    {
+      "path": "format-check.log",
+      "bytes": 66,
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "path": "grouping-unit-green.log",
+      "bytes": 243,
+      "sha256": "4394df815a1b6036127613df78adea52c809e9b253dd25ab571dfbe228a2f9e2"
+    },
+    {
+      "path": "lint.log",
+      "bytes": 781,
+      "sha256": "221a8522399a20ae529a779b91d409b3f1b9ec4adf5e3ba119251cb1b0f6ae4b"
+    },
+    {
+      "path": "playwright.config.mjs",
+      "bytes": 633,
+      "sha256": "21962f8d73fca6e8eb48d65d5ffab80724fb694931b078125136bb485909aa28"
+    },
+    {
+      "path": "preservation-list.log",
+      "bytes": 2996,
+      "sha256": "849affd550b3bdd07466f25252d16c35d2e3dc9c126228fa1dca29311498af9f"
+    },
+    {
+      "path": "preservation-work/test-results/engagement-meeting-phone.png",
+      "bytes": 56177,
+      "sha256": "1b7e276c5cdff21cd51ddad83787d9f5bbf928fef162c69c3737a76b6bf68b7d"
+    },
+    {
+      "path": "preservation-work/test-results/planner-list.png",
+      "bytes": 85872,
+      "sha256": "0ec745f49e08846605668978be5c1aa830fd2f292b1a5a2cf9c7895b8907b618"
+    },
+    {
+      "path": "preservation.config.mjs",
+      "bytes": 727,
+      "sha256": "8aa004cd17bfa01bbee87c39dcfc286cad15b8866cb7e8de97482a4de72df846"
+    },
+    {
+      "path": "report.md",
+      "bytes": 7969,
+      "sha256": "9cb1b3d544cc351420a9fc1da392287d65a8fe496dadc1785a671429fabb1e3c"
+    },
+    {
+      "path": "root-static-review.json",
+      "bytes": 2174,
+      "sha256": "4ab64fa79b62e4eddddc9173ff14c9bf159dcd5094307942cc91e58ba0db69af"
+    },
+    {
+      "path": "server-closed.json",
+      "bytes": 151,
+      "sha256": "72dcb8751f47a10845949144e2e1260b229cca6650d128bd8817aa0c45e9a07d"
+    },
+    {
+      "path": "server-final.log",
+      "bytes": 71,
+      "sha256": "802ef6061f660fdea42635d410fc8b163d75d3fa65352fca8a99af427b3dd8d2"
+    },
+    {
+      "path": "server-green.log",
+      "bytes": 71,
+      "sha256": "802ef6061f660fdea42635d410fc8b163d75d3fa65352fca8a99af427b3dd8d2"
+    },
+    {
+      "path": "server-red-final.log",
+      "bytes": 71,
+      "sha256": "802ef6061f660fdea42635d410fc8b163d75d3fa65352fca8a99af427b3dd8d2"
+    },
+    {
+      "path": "server-red.log",
+      "bytes": 71,
+      "sha256": "802ef6061f660fdea42635d410fc8b163d75d3fa65352fca8a99af427b3dd8d2"
+    },
+    {
+      "path": "server.mjs",
+      "bytes": 2308,
+      "sha256": "4be63ccde717789ff238161b5a2e341f040edb2388af69574c555a2e99ad8995"
+    },
+    {
+      "path": "source-before-browser.json",
+      "bytes": 3212,
+      "sha256": "f296c6844fdabd5ead802ec6c282dc4c860353db327f0d19a403c1152001238f"
+    },
+    {
+      "path": "structure-review-before-width-correction.json",
+      "bytes": 6271,
+      "sha256": "443b08a799b7a640246355fb81d8eb409cd993d3e7058f0ba20a8f6faf5f6624"
+    },
+    {
+      "path": "structure-review.json",
+      "bytes": 8408,
+      "sha256": "cee0818b7c5c124e70285efe85c84be738361fee15fd4d0551711c5c96186e52"
+    },
+    {
+      "path": "typecheck-initial.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "typecheck.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "undefined.json",
+      "bytes": 18220,
+      "sha256": "d61745e4e68eeef24dbb39a2f8d797fce491c6c1471ef0e3196bcb5bcfba3e5b"
+    },
+    {
+      "path": "unit-green.log",
+      "bytes": 248,
+      "sha256": "92eccf444937ce5d2fa1982a7837ce67e8791f20d86a478174587df32b886479"
+    }
+  ],
+  "excluded": "Rebuilt synthetic harness bundles; source/baseline, raw Figma inputs, screenshots, logs and traces are retained. Separately evolving independent Profile review files are outside this finalized Modules evidence index."
+}

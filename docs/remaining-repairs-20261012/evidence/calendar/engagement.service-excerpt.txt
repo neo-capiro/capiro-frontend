@@ -1,0 +1,507 @@
+1360:       to?: string;
+1361:       recipientEmails?: string[];
+1362:       limit?: number;
+1363:       cursor?: { startsAt: string; id: string };
+1364:     },
+1365:   ) {
+1366:     const { from, to } = toDateWindow(query);
+1367:     const cursorStartsAt = query.cursor ? parseDate(query.cursor.startsAt, 'cursor') : null;
+1368:     const cursorWhere: Prisma.MeetingWhereInput = cursorStartsAt
+1369:       ? {
+1370:           OR: [
+1371:             { startsAt: { gt: cursorStartsAt } },
+1372:             { startsAt: cursorStartsAt, id: { gt: query.cursor!.id } },
+1373:           ],
+1374:         }
+1375:       : {};
+1376:     const take = query.limit ? Math.max(1, Math.min(101, query.limit)) : undefined;
+1377:     return this.prisma.withTenant(ctx.tenantId, async (tx) => {
+1378:       const baseWhere: Prisma.MeetingWhereInput = {
+1379:         tenantId: ctx.tenantId,
+1380:         ...ownMeetingWhere(ctx.userId),
+1381:         startsAt: { gte: from, lt: to },
+1382:         ...(cursorStartsAt ? { AND: [cursorWhere] } : {}),
+1383:       };
+1384: 
+1385:       if (!query.clientId) {
+1386:         const rows = await tx.meeting.findMany({
+1387:           where: baseWhere,
+1388:           include: meetingInclude(),
+1389:           orderBy: [{ startsAt: 'asc' }, { id: 'asc' }],
+1390:           ...(take ? { take } : {}),
+1391:         });
+1392:         return this.decorateMeetings(tx, ctx, rows);
+1393:       }
+1394: 
+1395:       const clientAssociationWhere = await this.clientMeetingAssociationWhere(
+1396:         tx,
+1397:         ctx.tenantId,
+1398:         query.clientId,
+1399:         query.recipientEmails ?? [],
+1400:       );
+1401:       const where: Prisma.MeetingWhereInput = { AND: [baseWhere, clientAssociationWhere] };
+1402: 
+1403:       const rows = await tx.meeting.findMany({
+1404:         where,
+1405:         include: meetingInclude(),
+1406:         orderBy: [{ startsAt: 'asc' }, { id: 'asc' }],
+1407:         ...(take ? { take } : {}),
+1408:       });
+1409:       return this.decorateMeetings(tx, ctx, rows);
+1410:     });
+1411:   }
+1412: 
+1413:   async getMeeting(ctx: TenantContext, id: string) {
+1414:     return this.prisma.withTenant(ctx.tenantId, async (tx) => {
+1415:       const meeting = await tx.meeting.findFirst({
+1416:         where: { id, tenantId: ctx.tenantId, ...ownMeetingWhere(ctx.userId) },
+1417:         include: meetingInclude(),
+1418:       });
+1419:       if (!meeting) throw new NotFoundException('Meeting not found');
+1420:       return (await this.decorateMeetings(tx, ctx, [meeting]))[0];
+1421:     });
+1422:   }
+1800:    * §d, ENGAGEMENT_ARTIFACT_SHARING_V2). Owner-gated exactly like shareMeeting
+1801:    * (mirrors its clientId requirement). All-or-nothing: every referenced
+1802:    * artifact must belong to this meeting/tenant AND already be `approved`, or
+1803:    * NOTHING is written. Idempotent per-artifact: re-sharing an
+1804:    * already-shared artifact never overwrites the first sharer's stamp (mirrors
+1805:    * shareMeeting's alreadyShared short-circuit). Once at least one artifact is
+1806:    * shared, Meeting.visibility flips to 'shared' (first-sharer-wins) — it is a
+1807:    * derived summary field, not independently settable once this flag is on.
+1808:    */
+1809:   async shareArtifacts(ctx: TenantContext, meetingId: string, refs: ArtifactRef[]) {
+1810:     if (!refs.length) throw new BadRequestException('artifacts must not be empty');
+1811:     return this.prisma.withTenant(ctx.tenantId, async (tx) => {
+1812:       const meeting = await tx.meeting.findFirst({
+1813:         where: { id: meetingId, tenantId: ctx.tenantId, ...ownMeetingWhere(ctx.userId) },
+1814:         select: { id: true, clientId: true, visibility: true },
+1815:       });
+1816:       if (!meeting) throw new NotFoundException('Meeting not found');
+1817:       if (!meeting.clientId) {
+1818:         throw new BadRequestException(
+1819:           'This meeting must be associated with a client before it can be shared',
+1820:         );
+1821:       }
+1822: 
+1823:       const loaded = await Promise.all(
+1824:         refs.map(async (ref) => ({
+1825:           ref,
+1826:           artifact: await this.loadArtifactShareState(tx, ctx, meetingId, ref),
+1827:         })),
+1828:       );
+1829:       const missing = loaded.filter((l) => !l.artifact);
+1830:       if (missing.length) {
+1831:         throw new BadRequestException(
+1832:           `Artifact(s) not found on this meeting: ${describeRefs(missing.map((l) => l.ref))}`,
+1833:         );
+1834:       }
+1835:       const unapproved = loaded.filter((l) => !l.artifact!.approved);
+1836:       if (unapproved.length) {
+1837:         throw new BadRequestException(
+1838:           `Only approved artifacts can be shared. Not yet approved: ${describeRefs(
+1839:             unapproved.map((l) => l.ref),
+1840:           )}`,
+1841:         );
+1842:       }
+1843: 
+1844:       const now = new Date();
+1845:       for (const { ref, artifact } of loaded) {
+1846:         if (artifact!.sharedAt) continue; // idempotent — first sharer's stamp wins
+1847:         await this.stampArtifactShared(tx, ref, ctx.userId, now);
+1848:       }
+1849:       if (meeting.visibility !== MeetingVisibility.shared) {
+1850:         await tx.meeting.update({
+1851:           where: { id: meetingId },
+1852:           data: { visibility: MeetingVisibility.shared, sharedAt: now, sharedByUserId: ctx.userId },
+1853:         });
+1854:       }
+1855: 
+1856:       const refreshed = await tx.meeting.findFirst({
+1857:         where: { id: meetingId },
+1858:         include: meetingInclude(),
+1859:       });
+1860:       return (await this.decorateMeetings(tx, ctx, [refreshed!]))[0];
+1861:     });
+1862:   }
+1863: 
+1864:   /**
+1865:    * Un-share specific artifacts (Phase 2 §d, ENGAGEMENT_ARTIFACT_SHARING_V2).
+1866:    * Tenant-scoped meeting lookup (not ownMeetingWhere) so an admin can act on a
+1867:    * meeting they don't personally own. Per Neo's decision, authorization is
+1868:    * PER ARTIFACT: a user_admin/capiro_admin may unshare ANY artifact; a
+1869:    * standard user may only unshare one they personally shared
+1870:    * (sharedByUserId), or — for note/debrief specifically — one they authored.
+1871:    * All-or-nothing on AUTHORIZATION: if the caller isn't authorized to unshare
+1872:    * even one requested artifact, the WHOLE batch is rejected rather than
+1873:    * partially unsharing (this is the opposite of unshareMeeting's bulk mode,
+1874:    * which is deliberately best-effort/partial — see its own doc comment).
+1875:    * Once no artifact on the meeting remains shared, Meeting.visibility resets
+1876:    * to 'private'.
+1877:    */
+1878:   async unshareArtifacts(ctx: TenantContext, meetingId: string, refs: ArtifactRef[]) {
+1879:     if (!refs.length) throw new BadRequestException('artifacts must not be empty');
+1880:     return this.prisma.withTenant(ctx.tenantId, async (tx) => {
+1881:       const meeting = await tx.meeting.findFirst({
+1882:         where: { id: meetingId, tenantId: ctx.tenantId },
+1883:         select: { id: true },
+1884:       });
+1885:       if (!meeting) throw new NotFoundException('Meeting not found');
+1886: 
+1887:       const loaded = await Promise.all(
+1888:         refs.map(async (ref) => ({
+1889:           ref,
+1890:           artifact: await this.loadArtifactShareState(tx, ctx, meetingId, ref),
+1891:         })),
+1892:       );
+1893:       const missing = loaded.filter((l) => !l.artifact);
+1894:       if (missing.length) {
+1895:         throw new BadRequestException(
+1896:           `Artifact(s) not found on this meeting: ${describeRefs(missing.map((l) => l.ref))}`,
+1897:         );
+1898:       }
+1899:       const unauthorized = loaded.filter((l) => !canUnshareArtifact(ctx, l.artifact!));
+1900:       if (unauthorized.length) {
+1901:         throw new ForbiddenException(
+1902:           `You are not authorized to unshare: ${describeRefs(unauthorized.map((l) => l.ref))}`,
+1903:         );
+1904:       }
+1905: 
+1906:       for (const { ref } of loaded) {
+1907:         await this.clearArtifactShared(tx, ref);
+1908:       }
+1909:       await this.recomputeMeetingVisibility(tx, ctx, meetingId);
+1910: 
+1911:       const refreshed = await tx.meeting.findFirst({
+1912:         where: { id: meetingId },
+1913:         include: meetingInclude(),
+1914:       });
+1915:       return (await this.decorateMeetings(tx, ctx, [refreshed!]))[0];
+1916:     });
+1917:   }
+1918: 
+1919:   /** Load one artifact's approval/share state, scoped to this meeting+tenant. Null if not found. */
+1920:   private async loadArtifactShareState(
+1921:     tx: Prisma.TransactionClient,
+1922:     ctx: TenantContext,
+1923:     meetingId: string,
+1924:     ref: ArtifactRef,
+1925:   ): Promise<ArtifactShareState | null> {
+1926:     switch (ref.type) {
+1927:       case 'prep': {
+1928:         const row = await tx.meetingPrep.findFirst({
+1929:           where: { id: ref.id, tenantId: ctx.tenantId, meetingId },
+1930:           select: { status: true, sharedAt: true, sharedByUserId: true, generatedFrom:true },
+1931:         });
+1932:         if (!row) return null;
+1933:         if((row.generatedFrom as Record<string,unknown>|null)?.schemaVersion==='research_portfolio_institutional_v1')throw new ForbiddenException('Private Research Portfolio preparation cannot be shared');
+1934:         return {
+1935:           approved: row.status === MeetingPrepStatus.approved,
+1936:           sharedAt: row.sharedAt,
+1937:           sharedByUserId: row.sharedByUserId,
+1938:           authorUserId: null,
+1939:         };
+1940:       }
+1941:       case 'note': {
+1942:         const row = await tx.meetingNote.findFirst({
+1943:           where: { id: ref.id, tenantId: ctx.tenantId, meetingId },
+1944:           select: { status: true, sharedAt: true, sharedByUserId: true, authorUserId: true },
+1945:         });
+1946:         if (!row) return null;
+1947:         return {
+1948:           approved: row.status === 'approved',
+1949:           sharedAt: row.sharedAt,
+1950:           sharedByUserId: row.sharedByUserId,
+1951:           authorUserId: row.authorUserId,
+1952:         };
+1953:       }
+1954:       case 'debrief': {
+1955:         const row = await tx.meetingDebrief.findFirst({
+1956:           where: { id: ref.id, tenantId: ctx.tenantId, meetingId },
+1957:           select: { status: true, sharedAt: true, sharedByUserId: true, authorUserId: true },
+1958:         });
+1959:         if (!row) return null;
+1960:         return {
+1961:           approved: row.status === MeetingDebriefStatus.approved,
+1962:           sharedAt: row.sharedAt,
+1963:           sharedByUserId: row.sharedByUserId,
+1964:           authorUserId: row.authorUserId,
+1965:         };
+1966:       }
+1967:       case 'attachment': {
+1968:         const row = await tx.engagementAttachment.findFirst({
+1969:           where: { id: ref.id, tenantId: ctx.tenantId, meetingId },
+1970:           select: { approvedAt: true, sharedAt: true, sharedByUserId: true },
+1971:         });
+1972:         if (!row) return null;
+1973:         // Attachments have no author concept (Neo decision — see
+1974:         // canUnshareArtifact): never populate authorUserId here.
+1975:         return {
+1976:           approved: row.approvedAt != null,
+1977:           sharedAt: row.sharedAt,
+1978:           sharedByUserId: row.sharedByUserId,
+1979:           authorUserId: null,
+1980:         };
+1981:       }
+1982:       default:
+1983:         throw new BadRequestException(`Unknown artifact type: ${(ref as ArtifactRef).type}`);
+1984:     }
+1985:   }
+1986: 
+1987:   /** Every currently-shared artifact on a meeting, across all four tables (for bulk unshare). */
+1988:   private async loadAllSharedArtifacts(
+1989:     tx: Prisma.TransactionClient,
+1990:     ctx: TenantContext,
+1991:     meetingId: string,
+1992:   ): Promise<Array<{ ref: ArtifactRef; artifact: ArtifactShareState }>> {
+1993:     const [preps, notes, debriefs, attachments] = await Promise.all([
+1994:       tx.meetingPrep.findMany({
+1995:         where: { meetingId, tenantId: ctx.tenantId, sharedAt: { not: null } },
+1996:         select: { id: true, status: true, sharedAt: true, sharedByUserId: true },
+1997:       }),
+1998:       tx.meetingNote.findMany({
+1999:         where: { meetingId, tenantId: ctx.tenantId, sharedAt: { not: null } },
+2000:         select: {
+2320:    * feed. (Legacy meetings shared before this migration existed had their
+2321:    * already-approved prep/debrief conservatively backfilled with sharedAt —
+2322:    * see the migration header; notes/attachments were deliberately not.)
+2323:    */
+2324:   async listSharedMeetingsForClient(ctx: TenantContext, clientId: string) {
+2325:     return this.prisma.withTenant(ctx.tenantId, async (tx) => {
+2326:       const [tenant, rows] = await Promise.all([
+2327:         tx.tenant.findFirst({ where: { id: ctx.tenantId }, select: { settings: true } }),
+2328:         tx.meeting.findMany({
+2329:           where: {
+2330:             tenantId: ctx.tenantId,
+2331:             clientId,
+2332:             visibility: MeetingVisibility.shared,
+2333:             status: { not: 'deleted' },
+2334:           },
+2335:           include: meetingInclude(),
+2336:           orderBy: [{ sharedAt: 'desc' }, { startsAt: 'desc' }],
+2337:         }),
+2338:       ]);
+2339:       const narrowed = rows.map((row) => this.filterToSharedArtifacts(row));
+2340:       const decorated = await this.decorateMeetings(tx, ctx, narrowed);
+2341:       // Phase 2 collision model (spec §7, §4.4): when the tenant is on the
+2342:       // cross-user flag, collapse per-mailbox rows that share a Graph iCalUId into
+2343:       // ONE record — canonical notes, contributors merged (first-sharer primary,
+2344:       // colleagues with their own prep/debrief surfaced via the expander), and
+2345:       // multi-user notetakers attributed. Non-destructive; off = Phase 1 (one row
+2346:       // per record). Rows with no iCalUId (manual meetings) stay standalone.
+2347:       return meetingsCrossUserEnabled(tenant?.settings)
+2348:         ? mergeSharedMeetingsByICalUid(decorated)
+2349:         : decorated;
+2350:     });
+2351:   }
+2352: 
+2353:   /**
+2354:    * Phase 2 §d: narrow a shared meeting's nested artifact arrays down to the
+2355:    * ones that are ACTUALLY shared (sharedAt != null). listSharedMeetingsForClient
+2356:    * is a client-facing feed — "the meeting is shared" no longer means "show
+2357:    * all of its metadata"; each artifact must have been explicitly (or, for a
+2358:    * legacy pre-Phase-2 meeting, conservatively backfilled — see the migration)
+2359:    * shared on its own. Metadata-only in, metadata-only out: bodies are never
+2360:    * touched, only which rows are included.
+2361:    */
+2362:   private filterToSharedArtifacts<
+2363:     T extends {
+2364:       notes: Array<{ sharedAt: Date | null }>;
+2365:       debriefs: Array<{ sharedAt: Date | null }>;
+2366:       preps: Array<{ sharedAt: Date | null }>;
+2367:       attachments: Array<{ sharedAt: Date | null }>;
+2368:     },
+2369:   >(row: T): T {
+2370:     return {
+2371:       ...row,
+2372:       notes: row.notes.filter((n) => n.sharedAt != null),
+2373:       debriefs: row.debriefs.filter((d) => d.sharedAt != null),
+2374:       preps: row.preps.filter((p) => p.sharedAt != null),
+2375:       attachments: row.attachments.filter((a) => a.sharedAt != null),
+2376:     };
+2377:   }
+2378: 
+2379:   /**
+2380:    * Augment meeting rows (from meetingInclude) with the computed response fields
+2381:    * the Meetings v2 UI needs (docs/plans/2026-07-10-meetings-meri-v2-redesign-plan.md
+2382:    * §6): `notesApproved`, the coarse notetaker `meri` state, the `contributors`
+2383:    * array (always length-1 in Phase 1 — the single owner), and `sharedBy`. Names
+2384:    * are batch-resolved for createdByUserId/sharedByUserId (those are bare UUIDs
+2385:    * with no relation, by convention), and the latest bot-session status per meeting
+2386:    * is fetched once for the whole set — no N+1.
+2387:    *
+2388:    * Phase 2 §d: `notesApproved` requires an ACTUALLY-approved note (checks
+2389:    * `status`), not mere existence — callers must select `status` in whatever
+2390:    * note projection they pass in (see noteMetadataSelect).
+2391:    */
+2392:   private async decorateMeetings<
+2393:     T extends {
+2394:       id: string;
+2395:       createdByUserId: string | null;
+2396:       sharedByUserId: string | null;
+2397:       notes: Array<{ status: string }>;
+2398:       debriefs: Array<{ status: MeetingDebriefStatus }>;
+2399:       preps: Array<{ status: MeetingPrepStatus }>;
+2400:     },
+2401:   >(tx: Prisma.TransactionClient, ctx: TenantContext, rows: T[]) {
+2402:     const userIds = [
+2403:       ...new Set(
+2404:         rows
+2405:           .flatMap((r) => [r.createdByUserId, r.sharedByUserId])
+2406:           .filter((v): v is string => Boolean(v)),
+2407:       ),
+2408:     ];
+2409:     const meetingIds = rows.map((r) => r.id);
+2410:     const [users, sessions] = await Promise.all([
+2411:       userIds.length
+2412:         ? tx.user.findMany({
+2413:             where: { id: { in: userIds } },
+2414:             select: { id: true, firstName: true, lastName: true, email: true },
+2415:           })
+2416:         : Promise.resolve([] as Array<{ id: string }>),
+2417:       meetingIds.length
+2418:         ? tx.meetingBotSession.findMany({
+2419:             where: { tenantId: ctx.tenantId, meetingId: { in: meetingIds } },
+2420:             select: { meetingId: true, status: true, error: true },
+2421:             orderBy: { createdAt: 'desc' },
+2422:           })
+2423:         : Promise.resolve([] as Array<{ meetingId: string; status: string; error: string | null }>),
+2424:     ]);
+2425:     const nameById = new Map(
+2426:       (
+2427:         users as Array<{
+2428:           id: string;
+2429:           firstName?: string | null;
+2430:           lastName?: string | null;
+2431:           email?: string | null;
+2432:         }>
+2433:       ).map((u) => [u.id, userDisplayName(u)]),
+2434:     );
+2435:     const latestSessionByMeeting = new Map<string, { status: string; error: string | null }>();
+2436:     for (const s of sessions) {
+2437:       if (!latestSessionByMeeting.has(s.meetingId))
+2438:         latestSessionByMeeting.set(s.meetingId, { status: s.status, error: s.error });
+2439:     }
+2440: 
+2441:     return Promise.all(
+2442:       rows.map(async (row) => {
+2443:         // Phase 2 §d: a note counts here only once APPROVED — existence alone is
+2444:         // not approval (that was the pre-Phase-2 bug this fixes).
+2445:         const visibleRpPreps=await filterResearchPortfolioMeetingPreps(tx,ctx,row.preps as Array<{generatedFrom?:unknown}>);
+2446:         row.preps.splice(0,row.preps.length,...visibleRpPreps as typeof row.preps);
+2447:         const hasApprovedNote = row.notes.some((n) => n.status === 'approved');
+2448:         const artifacts: Array<'prep' | 'notes' | 'debrief'> = [];
+2449:         if (row.preps[0]?.status === MeetingPrepStatus.approved) artifacts.push('prep');
+2450:         if (hasApprovedNote) artifacts.push('notes');
+2451:         if (row.debriefs.some((d) => d.status === MeetingDebriefStatus.approved)) {
+2452:           artifacts.push('debrief');
+2453:         }
+2454:         const contributors = row.createdByUserId
+2455:           ? [
+2456:               {
+2457:                 userId: row.createdByUserId,
+2458:                 name: nameById.get(row.createdByUserId) ?? null,
+2459:                 artifacts,
+2460:               },
+2461:             ]
+2462:           : [];
+2463:         const latestSession = latestSessionByMeeting.get(row.id) ?? null;
+2464:         const visiblePreps = [] as typeof row.preps;
+2465:         for (const prep of row.preps) {
+2466:           const value = prep as typeof prep & {
+2467:             generatedFrom?: {
+2468:               briefing?: unknown;
+2469:               grounding?: { sources?: import('./meeting-prep-grounding.js').PrepEvidenceSource[] };
+2470:             };
+2471:           };
+2472:           if (value.generatedFrom?.briefing) {
+2473:             try {
+2474:               await assertSavedMeetingPrepAccess(tx, ctx, value.generatedFrom);
+2475:             } catch {
+2476:               continue;
+2477:             }
+2478:           }
+2479:           visiblePreps.push(prep);
+2480:         }
+2481:         return {
+2482:           ...row,
+2483:           preps: visiblePreps as T['preps'],
+2484:           notesApproved: hasApprovedNote,
+2485:           meri: coarseMeriState(latestSession?.status ?? null),
+2486:           meriError: meriFailureReason(latestSession?.status ?? null, latestSession?.error ?? null),
+2487:           contributors,
+2488:           sharedBy: row.sharedByUserId
+2489:             ? { userId: row.sharedByUserId, name: nameById.get(row.sharedByUserId) ?? null }
+2490:             : null,
+2491:         };
+2492:       }),
+2493:     );
+2494:   }
+2495: 
+2496:   /**
+2497:    * One thread's full message history — `listMailThreads` intentionally caps
+10747:   }
+10748: }
+10749: 
+10750: function meetingInclude() {
+10751:   return {
+10752:     client: clientSummarySelect(),
+10753:     attendees: { include: { contact: true }, orderBy: { createdAt: 'asc' as const } },
+10754:     attachments: { orderBy: { createdAt: 'desc' as const } },
+10755:     notes: { select: noteMetadataSelect(), orderBy: { createdAt: 'desc' as const } },
+10756:     debriefs: { select: debriefMetadataSelect(), orderBy: { createdAt: 'desc' as const } },
+10757:     preps: { orderBy: { createdAt: 'desc' as const }, take: 1 },
+10758:     tasks: {
+10759:       where: { status: { not: EngagementTaskStatus.canceled } },
+10760:       orderBy: [{ dueDate: 'asc' as const }, { createdAt: 'desc' as const }],
+10761:     },
+10762:   };
+10763: }
+10764: 
+10765: // isPlainTextAttachment / isDocxAttachment / isPdfAttachment / extractPdfBuffer
+10832:     },
+10833:   };
+10834: }
+10835: 
+10836: function noteMetadataSelect() {
+10837:   return {
+10838:     id: true,
+10839:     meetingId: true,
+10840:     clientId: true,
+10841:     authorUserId: true,
+10842:     author: { select: { id: true, email: true, firstName: true, lastName: true } },
+10843:     confidential: true,
+10844:     accessLevel: true,
+10845:     keyVersion: true,
+10846:     // Phase 2 §d — lifecycle: decorateMeetings' notesApproved and
+10847:     // libraryArtifactWhere both need `status` to tell existence from approval.
+10848:     status: true,
+10849:     approvedAt: true,
+10850:     approvedByUserId: true,
+10851:     sharedAt: true,
+10852:     sharedByUserId: true,
+10853:     createdAt: true,
+10854:     updatedAt: true,
+10855:   };
+10856: }
+10857: 
+10858: function debriefMetadataSelect() {
+10859:   return {
+10860:     id: true,
+10861:     meetingId: true,
+10862:     clientId: true,
+10863:     authorUserId: true,
+10864:     author: { select: { id: true, email: true, firstName: true, lastName: true } },
+10865:     confidential: true,
+10866:     accessLevel: true,
+10867:     status: true,
+10868:     keyVersion: true,
+10869:     // Phase 2 §d — sharing only; approval already lives in `status` above.
+10870:     sharedAt: true,
+10871:     sharedByUserId: true,
+10872:     createdAt: true,
+10873:     updatedAt: true,
+10874:   };
+10875: }
+10876: 
+10877: /**

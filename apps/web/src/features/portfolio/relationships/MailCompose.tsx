@@ -1,6 +1,7 @@
 "use client";
-import { TextareaField } from "@/shared/portfolio/ui/TextareaField";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { RichMailEditor, MailBodyPreview } from "./email/RichMailEditor";
+import { mailBodyError } from "./email/mail-body";
 import { RecipientFields } from "./email/RecipientFields";
 import { AttachmentFields } from "./email/AttachmentFields";
 import { useMailAttachments } from "./email/useMailAttachments";
@@ -9,13 +10,12 @@ import { useMailRewrite } from "./email/useMailRewrite";
 import { SignaturePreview } from "./email/SignaturePreview";
 import { recipients, type Recipient } from "./email/recipients";
 import { MailSendError, type SendInput } from "./email/send";
-import styles from "./email/email.module.css";
 import type { MailInitialDraft } from "./email/draft";
 export type { MailInitialDraft } from "./email/draft";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { type MailContact } from "./email";
-import { plainMailHtml, useSendMail, useSignature } from "./email";
+import { useSendMail, useSignature } from "./email";
 import { useMailboxes } from "./email/useMailboxes";
 import { MailboxField } from "./email/MailboxField";
 export function MailCompose({
@@ -41,7 +41,6 @@ export function MailCompose({
   const [append, setAppend] = useState<boolean | null>(null);
   const [review, setReview] = useState<{
     input: SendInput;
-    text: string;
     signatureHtml: string | null;
     signatureStatus: "current" | "loading" | "unavailable";
   } | null>(null);
@@ -66,13 +65,16 @@ export function MailCompose({
   const signature = useSignature();
   const authority = useMailAuthority(clientId);
   const mailboxes = useMailboxes(clientId, thread?.id, !sendBlockedReason);
+  const sourceKey = JSON.stringify([clientId, person, thread, to, cc, bcc]);
+  const attachmentInput = useRef<HTMLInputElement>(null);
   const rewrite = useMailRewrite({
-    sourceKey: JSON.stringify([clientId, person, thread, to, cc, bcc]),
+    sourceKey,
     initialBody: initialDraft?.body ?? "",
     recipient: person,
     captureAuthority: authority.capture,
   });
   const body = rewrite.body;
+  const bodyError = mailBodyError(body);
   const attachments = useMailAttachments(clientId, initialDraft?.attachments);
   const uncertain = send.error instanceof MailSendError && send.error.uncertain;
   const locked = send.isPending || attachments.busy || uncertain;
@@ -118,13 +120,13 @@ export function MailCompose({
             )
               return;
             try {
+              if (bodyError) throw new Error(bodyError);
               const selected = recipients(to, cc, bcc);
               const personIds = selected.to.flatMap((item) =>
                 item.personId ? [item.personId] : [],
               );
               setValidation("");
               setReview({
-                text: body,
                 signatureHtml:
                   signatureEnabled && signatureCurrent
                     ? (signature.data.html ?? null)
@@ -139,7 +141,7 @@ export function MailCompose({
                   ...(personIds.length ? { personIds } : {}),
                   ...selected,
                   subject: subject.trim(),
-                  bodyHtml: plainMailHtml(body),
+                  bodyHtml: body.html,
                   appendSignature: signatureEnabled,
                   attachmentIds: attachments.ids,
                   ...(thread ? { threadId: thread.id } : {}),
@@ -183,14 +185,19 @@ export function MailCompose({
               onChange={(e) => setSubject(e.target.value)}
             />
           </label>
-          <TextareaField
-            label="Message"
-            required
-            maxLength={8000}
+          <RichMailEditor
+            key={sourceKey}
             value={body}
             disabled={locked}
-            onChange={(e) => rewrite.edit(e.target.value)}
-            rows={9}
+            onChange={rewrite.edit}
+            onAttach={
+              sendBlockedReason
+                ? undefined
+                : () => attachmentInput.current?.click()
+            }
+            attachDisabled={
+              locked || !authority.ready || attachments.jobs.length >= 5
+            }
           />
           <button
             type="button"
@@ -199,7 +206,7 @@ export function MailCompose({
               locked ||
               !authority.ready ||
               rewrite.isPending ||
-              !body.trim() ||
+              Boolean(bodyError) ||
               Boolean(sendBlockedReason)
             }
             onClick={() => void rewrite.rewrite()}
@@ -259,6 +266,7 @@ export function MailCompose({
           {!sendBlockedReason && (
             <AttachmentFields
               state={attachments}
+              inputRef={attachmentInput}
               disabled={send.isPending || uncertain || !authority.ready}
             />
           )}
@@ -326,7 +334,7 @@ export function MailCompose({
                 Bcc: {review.input.bcc?.map((item) => item.email).join(", ")}
               </p>
             )}
-            <p className={styles.review}>{review.text}</p>
+            <MailBodyPreview html={review.input.bodyHtml} />
             {!sendBlockedReason && (
               <small>
                 {review.input.attachmentIds?.length ?? 0} attachment(s),

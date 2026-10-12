@@ -1,0 +1,100 @@
+
+Running 2 tests using 1 worker
+
+(node:720296) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 apps/web/tests/browser/mail-rich-compose.spec.ts:317:1 › source replacement retires editor history and rich Meri Undo (10.8s)
+(node:720641) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 apps/web/tests/browser/mail-rich-compose.spec.ts:337:1 › toolbar Attach file opens the existing attachment picker with no extra request (4.4s)
+
+
+  1) apps/web/tests/browser/mail-rich-compose.spec.ts:317:1 › source replacement retires editor history and rich Meri Undo 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  getByRole('textbox', { name: 'Message', exact: true })
+    Expected: "Verified rewrite."
+    Received: ""
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" with timeout 5000ms
+      - waiting for getByRole('textbox', { name: 'Message', exact: true })
+        14 × locator resolved to <div tabindex="0" role="textbox" translate="no" aria-required="true" aria-multiline="true" contenteditable="true" aria-labelledby="_r_7_" class="tiptap ProseMirror _messageBody_1r7cj_68 ProseMirror-focused">…</div>
+           - unexpected value ""
+
+
+      331 |   ).toHaveCount(0);
+      332 |   await message(page).press("ControlOrMeta+z");
+    > 333 |   await expect(message(page)).toHaveText("Verified rewrite.");
+          |                               ^
+      334 |   expect(state.sends).toHaveLength(0);
+      335 | });
+      336 |
+        at /workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts:333:31
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-mail-evidence/extra-before-artifacts/mail-rich-compose-source-r-5e51f--history-and-rich-Meri-Undo/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-mail-evidence/extra-before-artifacts/mail-rich-compose-source-r-5e51f--history-and-rich-Meri-Undo/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-mail-evidence/extra-before-artifacts/mail-rich-compose-source-r-5e51f--history-and-rich-Meri-Undo/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-mail-evidence/extra-before-artifacts/mail-rich-compose-source-r-5e51f--history-and-rich-Meri-Undo/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) apps/web/tests/browser/mail-rich-compose.spec.ts:337:1 › toolbar Attach file opens the existing attachment picker with no extra request 
+
+    Error: locator.click: Error: strict mode violation: getByRole('button', { name: 'Attach file', exact: true }) resolved to 2 elements:
+        1) <button type="button" class="button ghost">Attach file</button> aka getByLabel('Message formatting').getByRole('button', { name: 'Attach file' })
+        2) <input type="file"/> aka getByLabel('Attach file')
+
+    Call log:
+      - waiting for getByRole('button', { name: 'Attach file', exact: true })
+
+
+      341 |   await format(page, "Bold");
+      342 |   const chooserPromise = page.waitForEvent("filechooser");
+    > 343 |   await page.getByRole("button", { name: "Attach file", exact: true }).click();
+          |                                                                        ^
+      344 |   const chooser = await chooserPromise;
+      345 |   expect(await chooser.element().getAttribute("type")).toBe("file");
+      346 |   expect(
+        at /workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts:343:72
+
+    Error: page.waitForEvent: Test ended.
+    =========================== logs ===========================
+    waiting for event "filechooser"
+    ============================================================
+
+      340 |   const state = await setup(page);
+      341 |   await format(page, "Bold");
+    > 342 |   const chooserPromise = page.waitForEvent("filechooser");
+          |                               ^
+      343 |   await page.getByRole("button", { name: "Attach file", exact: true }).click();
+      344 |   const chooser = await chooserPromise;
+      345 |   expect(await chooser.element().getAttribute("type")).toBe("file");
+        at /workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts:342:31
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-mail-evidence/extra-before-artifacts/mail-rich-compose-toolbar--72582-icker-with-no-extra-request/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-mail-evidence/extra-before-artifacts/mail-rich-compose-toolbar--72582-icker-with-no-extra-request/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-mail-evidence/extra-before-artifacts/mail-rich-compose-toolbar--72582-icker-with-no-extra-request/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-mail-evidence/extra-before-artifacts/mail-rich-compose-toolbar--72582-icker-with-no-extra-request/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    apps/web/tests/browser/mail-rich-compose.spec.ts:317:1 › source replacement retires editor history and rich Meri Undo 
+    apps/web/tests/browser/mail-rich-compose.spec.ts:337:1 › toolbar Attach file opens the existing attachment picker with no extra request 

@@ -4,6 +4,82 @@
   gap: 24px;
   min-width: 0;
 }
+.clientGroup {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--card);
+}
+.clientGroupHeading {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px 20px;
+  background: var(--muted);
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+.clientGroupHeading h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--foreground);
+}
+.clientGroupHeading a {
+  color: inherit;
+}
+.clientGroup > div {
+  border: 0;
+  border-radius: 0;
+}
+.clientGroup thead {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.clientGroup td {
+  padding: 11px 7px;
+}
+.clientGroup table {
+  min-width: 760px;
+  table-layout: auto;
+}
+.clientGroup td:first-child {
+  padding-left: 20px;
+  width: calc(100% - 435px);
+  font-size: 14px;
+}
+.clientGroup td:nth-child(2) {
+  width: 134px;
+  color: var(--muted-foreground);
+}
+.clientGroup td:nth-child(3) {
+  width: 38px;
+}
+.clientGroup td:nth-child(4) {
+  width: 68px;
+}
+.clientGroup td:nth-child(5) {
+  width: 78px;
+}
+.clientGroup td:last-child {
+  width: 117px;
+  padding-right: 20px;
+}
+.assigneeAvatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--muted);
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
 .tools {
   display: flex;
   align-items: center;

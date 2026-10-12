@@ -1,0 +1,62 @@
+{
+  "capturedAtUtc": "2026-10-12T20:16:10.052Z",
+  "commit": "3195ffab57584054a714ff5bd025063fba363929",
+  "changed": [
+    "apps/web/tests/browser/calendar-sharing-harness.tsx",
+    "apps/web/tests/browser/calendar-sharing.spec.ts"
+  ],
+  "sources": [
+    {
+      "file": "apps/web/tests/browser/calendar-sharing-harness.tsx",
+      "sha256": "c677b8570f1fcd4b121fad6047962ed570717ed76dbadb418cda12e06a86df38",
+      "workingMatchesCommit": true,
+      "sizeSignals": []
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-sharing.spec.ts",
+      "sha256": "0ee7273f96b8c01cf9af22739d436ab207dcd3dd21f9d69dd8871bd2809f7cae",
+      "workingMatchesCommit": true,
+      "sizeSignals": [
+        {
+          "file": "apps/web/tests/browser/calendar-sharing.spec.ts",
+          "kind": "file",
+          "symbol": "<module>",
+          "line": 1,
+          "nonblank": 469,
+          "fingerprint": "062206c3277a4a8e3cde4ddef011c7bca486457f523ff3c5fbfccfdbc8b68b29"
+        },
+        {
+          "file": "apps/web/tests/browser/calendar-sharing.spec.ts",
+          "kind": "function",
+          "symbol": "setup",
+          "line": 17,
+          "nonblank": 81,
+          "fingerprint": "fad2e4d85b892511b6f812be3847d67b27affde5c1d7f51f10ecfed57f128125"
+        }
+      ]
+    }
+  ],
+  "browser": {
+    "stats": {
+      "startTime": "2026-10-12T20:14:47.528Z",
+      "duration": 2949.439,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "workers": 1,
+    "projects": [
+      {
+        "name": "",
+        "retries": 0
+      }
+    ]
+  },
+  "outcome": {
+    "url": "http://127.0.0.1:5191/api/backend/core/engagement/meetings/91000000-0000-4000-8000-000000000001",
+    "network": "aborted",
+    "originalAttempt": "refused",
+    "writes": []
+  }
+}

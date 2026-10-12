@@ -1,0 +1,44 @@
+{
+  "decision": "ACCEPT_FINAL_DOCUMENTS_FOR_PUBLICATION",
+  "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "documents": [
+    {
+      "file": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/HANDOVER.md",
+      "bytes": 7760,
+      "sha256": "3fb8a7098869942a700db72ea2108566d58262af00b904157cf84744cafbd907",
+      "pendingPhrases": []
+    },
+    {
+      "file": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/QUALIFICATION.md",
+      "bytes": 7698,
+      "sha256": "04a0e52b38e704e9d5c7707b9bbd0fb924be365cfc727eb84741b0306adf171c",
+      "pendingPhrases": []
+    }
+  ],
+  "findings": [],
+  "resolvedObservation": {
+    "issue": "Archive-save failure receipt names historical adbc84b while initial qualification wording could imply final1585438.",
+    "resolution": "Both final documents explicitly label the earlier archive-save attempts historical adbc84b and state that no Library save of final1585438 was attempted or claimed; original-shipping materialization is also labeled historical.",
+    "ownerChangedDocuments": true,
+    "reviewerChangedRootDocuments": false
+  },
+  "checks": {
+    "sourceTreesAnd140RecordBytes": "MATCH; no working-byte mismatch",
+    "integrationMap": "21 entries; original four branch heads independently confirmed ancestors",
+    "fullPortfolio": "1118 cases/1118 attempts passed once; JSON df511e86bf2b7e32102716d7509bff264b1a4fe8b51c48f1867fb3ecb88aa68f",
+    "fullModules": "208 cases/208 attempts passed once",
+    "boundedReplay": "23 cases/23 attempts; overlapping full Portfolio and not added to unique full-suite count",
+    "browserLimits": "All three report zero skipped/unexpected/flaky/retries; Portfolio3workers,1114x60s+4x180s; Modules1worker,208x60s",
+    "combined": "1472=59+21+1275+117; Elements15 separately;847-package install; 76 lint warnings;427/403/24/0 architecture counts match logs",
+    "host": "11 HTTP checks,4 renders,2 desktop history records,no page errors; phone four-mode parity not claimed",
+    "image": "Exact source build exit1/no image; Alpine DNS before compilation; smoke/scan NOT_RUN",
+    "archive": "9191 tracked blobs,841126268bytes,0feb5ef3a18f4dffa872da5f733bb16eede65c8e2d3f25c0d13c136d4985bff1, matching independent archive/gate receipts; not re-streamed by this reviewer",
+    "ledger": "18 bounded findings,34 mapped facets,337 held in-scope rows,8 exclusions,0full rows newly accepted,303not reassessed",
+    "historicFailures": "104495d163/7/3interrupted/945unrun;adbc1115/3;d68Modules207/1andPortfolioNOT_RUN retained",
+    "limits": "Library custody/save, complete Figma/native editable backup, full accessibility/native/provider/durability/Meri/image/deployment acceptance remain open; PR16 separate; AWS shipping authorization explicitly outside this integration session",
+    "links": "43 relative occurrences:41 existing mapped producers and2 acknowledged manifest/index publication targets; zero other missing producers",
+    "currentPendingPhrases": "None in final HANDOVER.md or QUALIFICATION.md; retained historical producer reports remain time-bounded, not silently rewritten"
+  },
+  "publicationFollowThrough": "Root still must create EVIDENCE-MANIFEST.json and PRESERVATION-VERIFICATION.json and perform the documented exact-index/blob verification. Their known prepublication absence is not treated as a missing-evidence finding.",
+  "reviewScope": "Read-only document/source/receipt inspection and static JSON/hash analysis. No source/index edits, runtime/browser/build/typecheck/Docker, external connector/provider, AWS or native actions. Existing source archive review and gate report inspected rather than repeating runtime or archive-member qualification."
+}

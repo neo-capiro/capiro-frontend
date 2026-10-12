@@ -14,6 +14,7 @@ import { ObjectiveSummary } from "@/features/portfolio/objectives/public";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { ActivityTimeline } from "./ActivityTimeline";
 import { FacilitiesCard } from "./FacilitiesCard";
+import { ClientDetails } from "./ClientDetails";
 import { TeamDialog } from "./TeamDialog";
 import { NotesDialog } from "./NotesDialog";
 import { QuickLog } from "./QuickLog";
@@ -142,6 +143,7 @@ export function ClientOverview({ clientId }: { clientId: string }) {
               </div>
             </div>
           </section>
+          <ClientDetails key={value.id} client={value} />
           <ObjectiveSummary clientId={clientId} />
         </div>
         <div className={styles.column}>

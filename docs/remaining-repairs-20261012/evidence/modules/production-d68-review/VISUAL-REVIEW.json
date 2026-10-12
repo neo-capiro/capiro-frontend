@@ -1,0 +1,183 @@
+{
+  "head": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+  "verdict": "PASS_WITHIN_CAPTURED_UNCONFIGURED_PORTFOLIO_SCOPE",
+  "allCapturedPngsReviewed": true,
+  "captureCount": 4,
+  "captures": [
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-d68c2dc/production-artifacts/production-portfolio-1440-light.png",
+      "bytes": 29213,
+      "sha256": "adb252c0670b1797a9515d1ea50002c30fd73566891ced4cb9634a26a102be8e",
+      "viewport": {
+        "width": 1440,
+        "height": 1040
+      },
+      "theme": "light",
+      "reviewedVisually": true,
+      "surface": "Canonical / Portfolio configuration-required fallback reached through actual Meri header Portfolio link.",
+      "observations": [
+        "Capiro wordmark is visible and proportional; white in dark mode and dark in light mode.",
+        "Setup heading, explanation and both configuration issue bullets are visible and legible.",
+        "No visible overlap, clipped glyphs or horizontal overflow in this captured viewport.",
+        "Content and hierarchy match the config-gated source; no data, signed-in identity or usable editor is presented.",
+        "Compact left-aligned text group is centered within the desktop viewport with ample surrounding space."
+      ],
+      "contractEvidence": {
+        "colorScheme": "light",
+        "viewport": {
+          "width": 1440,
+          "height": 1040
+        },
+        "portfolio": {
+          "background": "rgb(245, 245, 244)",
+          "color": "rgb(10, 10, 10)",
+          "fontSize": "14px",
+          "markerCount": 1,
+          "fits": true,
+          "sameDocument": true
+        },
+        "wordmark": {
+          "width": 77,
+          "height": 26,
+          "filter": "none"
+        },
+        "stylesRestoredOnReturn": true,
+        "clientNavigation": true,
+        "headerNavigation": true
+      },
+      "accessibilityLimit": "Visual legibility and source semantics only; no keyboard, assistive technology or complete contrast audit."
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-d68c2dc/production-artifacts/production-portfolio-390-light.png",
+      "bytes": 22077,
+      "sha256": "083c3ac5298d3cafd0c8b24b7678ac36e86a628352a17fbcabd454717b1ccf37",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "reviewedVisually": true,
+      "surface": "Canonical / Portfolio configuration-required fallback reached through actual Meri header Portfolio link.",
+      "observations": [
+        "Capiro wordmark is visible and proportional; white in dark mode and dark in light mode.",
+        "Setup heading, explanation and both configuration issue bullets are visible and legible.",
+        "No visible overlap, clipped glyphs or horizontal overflow in this captured viewport.",
+        "Content and hierarchy match the config-gated source; no data, signed-in identity or usable editor is presented.",
+        "Mobile copy and the first configuration bullet wrap within 24px page padding; heading remains on one line."
+      ],
+      "contractEvidence": {
+        "colorScheme": "light",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "portfolio": {
+          "background": "rgb(245, 245, 244)",
+          "color": "rgb(10, 10, 10)",
+          "fontSize": "14px",
+          "markerCount": 1,
+          "fits": true,
+          "sameDocument": true
+        },
+        "wordmark": {
+          "width": 77,
+          "height": 26,
+          "filter": "none"
+        },
+        "stylesRestoredOnReturn": true,
+        "clientNavigation": true,
+        "headerNavigation": true
+      },
+      "accessibilityLimit": "Visual legibility and source semantics only; no keyboard, assistive technology or complete contrast audit."
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-d68c2dc/production-artifacts/production-portfolio-1440-dark.png",
+      "bytes": 29101,
+      "sha256": "39049b79761b8a2d4c6c6ef06178b6777f97556ad618f7f762fe0b741e316dfa",
+      "viewport": {
+        "width": 1440,
+        "height": 1040
+      },
+      "theme": "dark",
+      "reviewedVisually": true,
+      "surface": "Canonical / Portfolio configuration-required fallback reached through actual Meri header Portfolio link.",
+      "observations": [
+        "Capiro wordmark is visible and proportional; white in dark mode and dark in light mode.",
+        "Setup heading, explanation and both configuration issue bullets are visible and legible.",
+        "No visible overlap, clipped glyphs or horizontal overflow in this captured viewport.",
+        "Content and hierarchy match the config-gated source; no data, signed-in identity or usable editor is presented.",
+        "Compact left-aligned text group is centered within the desktop viewport with ample surrounding space."
+      ],
+      "contractEvidence": {
+        "colorScheme": "dark",
+        "viewport": {
+          "width": 1440,
+          "height": 1040
+        },
+        "portfolio": {
+          "background": "rgb(18, 18, 18)",
+          "color": "rgb(250, 250, 249)",
+          "fontSize": "14px",
+          "markerCount": 1,
+          "fits": true,
+          "sameDocument": true
+        },
+        "wordmark": {
+          "width": 77,
+          "height": 26,
+          "filter": "invert(1)"
+        },
+        "stylesRestoredOnReturn": true,
+        "clientNavigation": true,
+        "headerNavigation": true
+      },
+      "accessibilityLimit": "Visual legibility and source semantics only; no keyboard, assistive technology or complete contrast audit."
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-d68c2dc/production-artifacts/production-portfolio-390-dark.png",
+      "bytes": 21836,
+      "sha256": "532b06a716f405c135b7b3ee84008b5b208415588a1aa934725894561f53e318",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "dark",
+      "reviewedVisually": true,
+      "surface": "Canonical / Portfolio configuration-required fallback reached through actual Meri header Portfolio link.",
+      "observations": [
+        "Capiro wordmark is visible and proportional; white in dark mode and dark in light mode.",
+        "Setup heading, explanation and both configuration issue bullets are visible and legible.",
+        "No visible overlap, clipped glyphs or horizontal overflow in this captured viewport.",
+        "Content and hierarchy match the config-gated source; no data, signed-in identity or usable editor is presented.",
+        "Mobile copy and the first configuration bullet wrap within 24px page padding; heading remains on one line."
+      ],
+      "contractEvidence": {
+        "colorScheme": "dark",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "portfolio": {
+          "background": "rgb(18, 18, 18)",
+          "color": "rgb(250, 250, 249)",
+          "fontSize": "14px",
+          "markerCount": 1,
+          "fits": true,
+          "sameDocument": true
+        },
+        "wordmark": {
+          "width": 77,
+          "height": 26,
+          "filter": "invert(1)"
+        },
+        "stylesRestoredOnReturn": true,
+        "clientNavigation": true,
+        "headerNavigation": true
+      },
+      "accessibilityLimit": "Visual legibility and source semantics only; no keyboard, assistive technology or complete contrast audit."
+    }
+  ],
+  "confirmedVisualDefects": [],
+  "figmaComparison": "NOT_RUN; no complete Figma design parity claimed for fallback or signed-in screens.",
+  "renderer": "Chromium 154.0.8037.57"
+}

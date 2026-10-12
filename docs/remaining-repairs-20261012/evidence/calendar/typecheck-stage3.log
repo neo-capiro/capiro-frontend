@@ -1,0 +1,50 @@
+apps/web/src/features/portfolio/calendar/sharing/MeetingSharing.tsx(29,29): error TS18048: 'state.query.data' is possibly 'undefined'.
+apps/web/src/features/portfolio/calendar/sharing/contracts.ts(32,22): error TS2349: This expression is not callable.
+  Each member of the union type '((<U>(callbackfn: (value: { id: string; status: string; summary: string | null; agenda: (string | { text: string; factIds: string[]; } | { text: string; evidenceReferences: string[]; } | { title: string; description: string; dueDate?: string | undefined; })[]; ... 10 more ...; generatedFrom?: { ...; } | ... 1 more ....' has signatures, but none of those signatures are compatible with each other.
+apps/web/src/features/portfolio/calendar/sharing/contracts.ts(32,27): error TS7006: Parameter 'row' implicitly has an 'any' type.
+apps/web/src/features/portfolio/calendar/sharing/contracts.ts(33,14): error TS2349: This expression is not callable.
+  Each member of the union type '(((predicate: (value: { id: string; status: string; summary: string | null; agenda: (string | { text: string; factIds: string[]; } | { text: string; evidenceReferences: string[]; } | { title: string; description: string; dueDate?: string | undefined; })[]; ... 10 more ...; generatedFrom?: { ...; } | ... 1 more ... |...' has signatures, but none of those signatures are compatible with each other.
+apps/web/src/features/portfolio/calendar/sharing/contracts.ts(34,12): error TS7006: Parameter 'row' implicitly has an 'any' type.
+apps/web/src/features/portfolio/calendar/sharing/contracts.ts(60,40): error TS2349: This expression is not callable.
+  Each member of the union type '({ <S extends { id: string; status: string; summary: string | null; agenda: (string | { text: string; factIds: string[]; } | { text: string; evidenceReferences: string[]; } | { title: string; description: string; dueDate?: string | undefined; })[]; ... 10 more ...; generatedFrom?: { ...; } | ... 1 more ... | undefin...' has signatures, but none of those signatures are compatible with each other.
+apps/web/src/features/portfolio/calendar/sharing/contracts.ts(60,46): error TS7006: Parameter 'row' implicitly has an 'any' type.
+apps/web/src/features/portfolio/calendar/sharing/contracts.ts(113,25): error TS2349: This expression is not callable.
+  Each member of the union type '({ <S extends { id: string; status: string; summary: string | null; agenda: (string | { text: string; factIds: string[]; } | { text: string; evidenceReferences: string[]; } | { title: string; description: string; dueDate?: string | undefined; })[]; ... 10 more ...; generatedFrom?: { ...; } | ... 1 more ... | undefin...' has signatures, but none of those signatures are compatible with each other.
+apps/web/src/features/portfolio/calendar/sharing/contracts.ts(113,32): error TS7006: Parameter 'item' implicitly has an 'any' type.
+apps/web/src/features/portfolio/calendar/sharing/targets.ts(19,31): error TS2349: This expression is not callable.
+  Each member of the union type '((<U>(callbackfn: (value: { id: string; status: string; summary: string | null; agenda: (string | { text: string; factIds: string[]; } | { text: string; evidenceReferences: string[]; } | { title: string; description: string; dueDate?: string | undefined; })[]; ... 10 more ...; generatedFrom?: { ...; } | ... 1 more ....' has signatures, but none of those signatures are compatible with each other.
+apps/web/src/features/portfolio/calendar/sharing/targets.ts(19,36): error TS7006: Parameter 'row' implicitly has an 'any' type.
+apps/web/tests/calendar-sharing.test.ts(18,23): error TS2532: Object is possibly 'undefined'.
+apps/web/tests/calendar-sharing.test.ts(26,5): error TS2532: Object is possibly 'undefined'.
+apps/web/tests/calendar-sharing.test.ts(27,5): error TS2532: Object is possibly 'undefined'.
+apps/web/tests/calendar-sharing.test.ts(42,31): error TS2532: Object is possibly 'undefined'.
+apps/web/tests/calendar-sharing.test.ts(45,34): error TS2532: Object is possibly 'undefined'.
+apps/web/tests/calendar-sharing.test.ts(53,19): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(target: {}, source: { sharedAt: null; sharedByUserId: null; }): { sharedAt: null; sharedByUserId: null; }', gave the following error.
+    Argument of type '{ id: string; status: string; summary: string; agenda: never[]; talkingPoints: never[]; risks: never[]; followUps: never[]; emailEvidence: never[]; generatedFrom: null; createdAt: string; updatedAt: string; sharedAt: null; sharedByUserId: null; meetingId: string; clientId: string; } | undefined' is not assignable to parameter of type '{}'.
+      Type 'undefined' is not assignable to type '{}'.
+  Overload 2 of 4, '(target: object, ...sources: any[]): any', gave the following error.
+    Argument of type '{ id: string; status: string; summary: string; agenda: never[]; talkingPoints: never[]; risks: never[]; followUps: never[]; emailEvidence: never[]; generatedFrom: null; createdAt: string; updatedAt: string; sharedAt: null; sharedByUserId: null; meetingId: string; clientId: string; } | undefined' is not assignable to parameter of type 'object'.
+      Type 'undefined' is not assignable to type 'object'.
+apps/web/tests/calendar-sharing.test.ts(54,19): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(target: {}, source: { sharedAt: null; sharedByUserId: null; }): { sharedAt: null; sharedByUserId: null; }', gave the following error.
+    Argument of type '{ id: string; tenantId: string; fileName: string; contentType: string; byteSize: number; source: string; folder: null; viewerMode: "all"; viewerUserIds: never[]; uploadedByUserId: string; createdAt: string; ... 11 more ...; clientId: string; } | undefined' is not assignable to parameter of type '{}'.
+      Type 'undefined' is not assignable to type '{}'.
+  Overload 2 of 4, '(target: object, ...sources: any[]): any', gave the following error.
+    Argument of type '{ id: string; tenantId: string; fileName: string; contentType: string; byteSize: number; source: string; folder: null; viewerMode: "all"; viewerUserIds: never[]; uploadedByUserId: string; createdAt: string; ... 11 more ...; clientId: string; } | undefined' is not assignable to parameter of type 'object'.
+      Type 'undefined' is not assignable to type 'object'.
+apps/web/tests/calendar-sharing.test.ts(58,19): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(target: {}, source: { sharedByUserId: string; }): { sharedByUserId: string; }', gave the following error.
+    Argument of type '{ id: string; tenantId: string; fileName: string; contentType: string; byteSize: number; source: string; folder: null; viewerMode: "all"; viewerUserIds: never[]; uploadedByUserId: string; createdAt: string; ... 11 more ...; clientId: string; } | undefined' is not assignable to parameter of type '{}'.
+      Type 'undefined' is not assignable to type '{}'.
+  Overload 2 of 4, '(target: object, ...sources: any[]): any', gave the following error.
+    Argument of type '{ id: string; tenantId: string; fileName: string; contentType: string; byteSize: number; source: string; folder: null; viewerMode: "all"; viewerUserIds: never[]; uploadedByUserId: string; createdAt: string; ... 11 more ...; clientId: string; } | undefined' is not assignable to parameter of type 'object'.
+      Type 'undefined' is not assignable to type 'object'.
+apps/web/tests/calendar-sharing.test.ts(82,5): error TS2532: Object is possibly 'undefined'.
+apps/web/tests/calendar-sharing.test.ts(85,5): error TS2532: Object is possibly 'undefined'.
+apps/web/tests/calendar-sharing.test.ts(86,5): error TS2532: Object is possibly 'undefined'.
+apps/web/tests/calendar-sharing.test.ts(102,5): error TS2532: Object is possibly 'undefined'.
+apps/web/tests/calendar-sharing.test.ts(104,12): error TS2532: Object is possibly 'undefined'.
+apps/web/tests/calendar-sharing.test.ts(105,12): error TS2532: Object is possibly 'undefined'.
+apps/web/tests/calendar-sharing.test.ts(107,7): error TS2532: Object is possibly 'undefined'.
+apps/web/tests/calendar-sharing.test.ts(127,7): error TS2532: Object is possibly 'undefined'.

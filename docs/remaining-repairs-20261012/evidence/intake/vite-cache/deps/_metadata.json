@@ -1,0 +1,132 @@
+{
+  "hash": "eeeed09e",
+  "configHash": "18175feb",
+  "lockfileHash": "6a3f698f",
+  "browserHash": "ec717235",
+  "optimized": {
+    "@schedule-x/calendar": {
+      "src": "../../../../workspace/capiro-followup/node_modules/@schedule-x/calendar/dist/core.js",
+      "file": "@schedule-x_calendar.js",
+      "fileHash": "c5c150d0",
+      "needsInterop": false
+    },
+    "@schedule-x/react": {
+      "src": "../../../../workspace/capiro-followup/node_modules/@schedule-x/react/dist/index.js",
+      "file": "@schedule-x_react.js",
+      "fileHash": "b846cbf0",
+      "needsInterop": false
+    },
+    "@tanstack/react-query": {
+      "src": "../../../../workspace/capiro-followup/node_modules/@tanstack/react-query/build/modern/index.js",
+      "file": "@tanstack_react-query.js",
+      "fileHash": "e5b8e2f2",
+      "needsInterop": false
+    },
+    "@xyflow/react": {
+      "src": "../../../../workspace/capiro-followup/node_modules/@xyflow/react/dist/esm/index.js",
+      "file": "@xyflow_react.js",
+      "fileHash": "360afbe1",
+      "needsInterop": false
+    },
+    "class-variance-authority": {
+      "src": "../../../../workspace/capiro-followup/node_modules/class-variance-authority/dist/index.mjs",
+      "file": "class-variance-authority.js",
+      "fileHash": "e79e3168",
+      "needsInterop": false
+    },
+    "clsx": {
+      "src": "../../../../workspace/capiro-followup/node_modules/clsx/dist/clsx.mjs",
+      "file": "clsx.js",
+      "fileHash": "c5e62369",
+      "needsInterop": false
+    },
+    "d3-geo": {
+      "src": "../../../../workspace/capiro-followup/node_modules/d3-geo/src/index.js",
+      "file": "d3-geo.js",
+      "fileHash": "23654c68",
+      "needsInterop": false
+    },
+    "dompurify": {
+      "src": "../../../../workspace/capiro-followup/node_modules/dompurify/dist/purify.es.mjs",
+      "file": "dompurify.js",
+      "fileHash": "38b805d6",
+      "needsInterop": false
+    },
+    "lucide-react": {
+      "src": "../../../../workspace/capiro-followup/node_modules/lucide-react/dist/esm/lucide-react.js",
+      "file": "lucide-react.js",
+      "fileHash": "0bfb348b",
+      "needsInterop": false
+    },
+    "radix-ui": {
+      "src": "../../../../workspace/capiro-followup/node_modules/radix-ui/dist/index.mjs",
+      "file": "radix-ui.js",
+      "fileHash": "ca05bc0f",
+      "needsInterop": false
+    },
+    "react-dom/client": {
+      "src": "../../../../workspace/capiro-followup/node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "5c3edf86",
+      "needsInterop": true
+    },
+    "react": {
+      "src": "../../../../workspace/capiro-followup/node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "7854fbb9",
+      "needsInterop": true
+    },
+    "react/jsx-dev-runtime": {
+      "src": "../../../../workspace/capiro-followup/node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "4aa4b273",
+      "needsInterop": true
+    },
+    "tailwind-merge": {
+      "src": "../../../../workspace/capiro-followup/node_modules/tailwind-merge/dist/bundle-mjs.mjs",
+      "file": "tailwind-merge.js",
+      "fileHash": "5b8b1de6",
+      "needsInterop": false
+    },
+    "temporal-polyfill": {
+      "src": "../../../../workspace/capiro-followup/node_modules/temporal-polyfill/index.js",
+      "file": "temporal-polyfill.js",
+      "fileHash": "b86b6037",
+      "needsInterop": false
+    },
+    "temporal-polyfill/global": {
+      "src": "../../../../workspace/capiro-followup/node_modules/temporal-polyfill/global.esm.js",
+      "file": "temporal-polyfill_global.js",
+      "fileHash": "6707f343",
+      "needsInterop": false
+    },
+    "zod": {
+      "src": "../../../../workspace/capiro-followup/node_modules/zod/index.js",
+      "file": "zod.js",
+      "fileHash": "a8cfcfb9",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "classApi-E9yU-mwl": {
+      "file": "classApi-E9yU-mwl.js",
+      "isDynamicEntry": false
+    },
+    "core-Cb_QJZvB": {
+      "file": "core-Cb_QJZvB.js",
+      "isDynamicEntry": false
+    },
+    "jsx-runtime-DMooYQPS": {
+      "file": "jsx-runtime-DMooYQPS.js",
+      "isDynamicEntry": false
+    },
+    "react-dom-CZ3R3u6D": {
+      "file": "react-dom-CZ3R3u6D.js",
+      "isDynamicEntry": false
+    },
+    "rolldown-runtime-DC62tzP2": {
+      "file": "rolldown-runtime-DC62tzP2.js",
+      "isDynamicEntry": false
+    }
+  }
+}

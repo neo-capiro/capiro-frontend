@@ -3,7 +3,8 @@ import { useState } from "react";
 import { useIdentity } from "@/shared/portfolio/auth/identity";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
-import { memberName } from "@/features/portfolio/index/public";
+import { TeamRoster } from "./TeamRoster";
+import styles from "./team.module.css";
 import {
   profileActorKey,
   useProfileActor,
@@ -12,7 +13,6 @@ import {
 import { useProfileTeamEditor } from "./useProfileTeamEditor";
 import { TeamMemberFields } from "./TeamMemberFields";
 import { OrderedOwnerFields } from "./OrderedOwnerFields";
-import { ownerLabels } from "./ordered-owners";
 
 export function TeamDialog({
   clientId,
@@ -31,6 +31,7 @@ export function TeamDialog({
     <Dialog
       open={open}
       onOpenChange={onOpenChange}
+      className={styles.dialog}
       title="Account team"
       description="The firm's members assigned to this client. Ranked account owners remain on the team until their ownership is explicitly changed."
     >
@@ -42,7 +43,7 @@ export function TeamDialog({
           actor={actor}
         />
       )}
-      <div className="formActions">
+      <div className={styles.footer}>
         <button className="button" onClick={() => onOpenChange(false)}>
           Done
         </button>
@@ -69,36 +70,12 @@ function ProfileTeamEditor({
         error={editor.team.error}
         retry={() => void editor.team.refetch()}
       />
-      <ul className="stack">
-        {editor.team.data?.map((member) => (
-          <li className="row between" key={member.userId}>
-            <span>
-              <strong>{memberName({ ...member, id: member.userId })}</strong>
-              <small>
-                {" "}
-                ·{" "}
-                {member.isOwner
-                  ? `Account owner${member.role ? ` · ${member.role}` : ""}`
-                  : member.ownerRank
-                    ? `${ownerLabels[member.ownerRank - 1]} account owner${member.role ? ` · ${member.role}` : ""}`
-                    : (member.role ?? "Team member")}
-                {member.ownerAvailable === false && " · Unavailable member"}
-              </small>
-            </span>
-            {editor.canEdit && !member.isOwner && !member.ownerRank && (
-              <button
-                className="button ghost"
-                disabled={!editor.canChange}
-                onClick={() =>
-                  void editor.change({ kind: "remove", userId: member.userId })
-                }
-              >
-                Remove
-              </button>
-            )}
-          </li>
-        ))}
-      </ul>
+      <TeamRoster
+        members={editor.team.data ?? []}
+        canEdit={editor.canEdit}
+        canChange={editor.canChange}
+        onRemove={(userId) => void editor.change({ kind: "remove", userId })}
+      />
       {editor.canEdit ? (
         <>
           <QueryState

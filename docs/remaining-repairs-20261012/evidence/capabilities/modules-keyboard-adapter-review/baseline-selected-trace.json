@@ -1,0 +1,2170 @@
+[
+  {
+    "type": "before",
+    "callId": "call@18442",
+    "startTime": 235808.232,
+    "class": "Frame",
+    "method": "focus",
+    "params": {
+      "selector": "internal:role=combobox[name=\"Group by\"s]",
+      "strict": true,
+      "timeout": 0
+    },
+    "stepId": "pw:api@72",
+    "pageId": "page@5ca76ff9ae53e939b4e20bcb80575eec",
+    "beforeSnapshot": "before@call@18442"
+  },
+  {
+    "type": "frame-snapshot",
+    "snapshot": {
+      "callId": "call@18442",
+      "snapshotName": "before@call@18442",
+      "pageId": "page@5ca76ff9ae53e939b4e20bcb80575eec",
+      "frameId": "frame@747f5a0c1ee3db0d5ebdc95ae63613a5",
+      "frameUrl": "http://127.0.0.1:5197/modules/planner?view=all-tasks&clientId=30000000-0000-4000-8000-000000000001",
+      "doctype": "html",
+      "html": [
+        "HTML",
+        {
+          "lang": "en"
+        },
+        [
+          [
+            5,
+            0
+          ]
+        ],
+        [
+          [
+            15,
+            13
+          ]
+        ],
+        [
+          "BODY",
+          {
+            "style": ""
+          },
+          [
+            [
+              15,
+              14
+            ]
+          ],
+          [
+            "DIV",
+            {
+              "id": "root"
+            },
+            [
+              "DIV",
+              {
+                "class": "_shell_1m5j3_1"
+              },
+              [
+                [
+                  5,
+                  2
+                ]
+              ],
+              [
+                [
+                  4,
+                  7
+                ]
+              ],
+              [
+                "DIV",
+                {
+                  "class": "_body_1m5j3_75"
+                },
+                [
+                  [
+                    5,
+                    33
+                  ]
+                ],
+                [
+                  [
+                    4,
+                    18
+                  ]
+                ],
+                [
+                  "MAIN",
+                  {
+                    "class": "_main_1m5j3_125  ",
+                    "id": "main-content"
+                  },
+                  [
+                    [
+                      4,
+                      20
+                    ]
+                  ],
+                  [
+                    "DIV",
+                    {
+                      "class": "_screen_f8193_1"
+                    },
+                    [
+                      [
+                        2,
+                        3
+                      ]
+                    ],
+                    [
+                      [
+                        4,
+                        62
+                      ]
+                    ],
+                    [
+                      "DIV",
+                      {
+                        "class": "_stack_f8193_102"
+                      },
+                      [
+                        [
+                          3,
+                          17
+                        ]
+                      ],
+                      [
+                        [
+                          3,
+                          43
+                        ]
+                      ],
+                      [
+                        [
+                          3,
+                          47
+                        ]
+                      ],
+                      [
+                        "DIV",
+                        {
+                          "class": "_stack_f8193_102"
+                        },
+                        [
+                          "SECTION",
+                          {
+                            "class": "_clientGroup_f8193_7",
+                            "aria-label": "Current Aerospace tasks"
+                          },
+                          [
+                            [
+                              1,
+                              11
+                            ]
+                          ],
+                          [
+                            "DIV",
+                            {
+                              "class": "_tableScroll_1rqx0_217"
+                            },
+                            [
+                              "TABLE",
+                              {
+                                "class": "_table_1rqx0_217"
+                              },
+                              [
+                                [
+                                  1,
+                                  13
+                                ]
+                              ],
+                              [
+                                [
+                                  1,
+                                  27
+                                ]
+                              ],
+                              [
+                                "TBODY",
+                                {},
+                                [
+                                  "TR",
+                                  {},
+                                  [
+                                    "TD",
+                                    {},
+                                    [
+                                      "DIV",
+                                      {
+                                        "class": "_taskName_f8193_126"
+                                      },
+                                      [
+                                        [
+                                          1,
+                                          28
+                                        ]
+                                      ],
+                                      [
+                                        [
+                                          1,
+                                          29
+                                        ]
+                                      ],
+                                      [
+                                        "BUTTON",
+                                        {
+                                          "class": "_name_f8193_117"
+                                        },
+                                        [
+                                          [
+                                            1,
+                                            30
+                                          ]
+                                        ]
+                                      ]
+                                    ]
+                                  ],
+                                  [
+                                    [
+                                      1,
+                                      35
+                                    ]
+                                  ],
+                                  [
+                                    [
+                                      1,
+                                      38
+                                    ]
+                                  ],
+                                  [
+                                    [
+                                      1,
+                                      41
+                                    ]
+                                  ],
+                                  [
+                                    [
+                                      1,
+                                      44
+                                    ]
+                                  ],
+                                  [
+                                    [
+                                      1,
+                                      47
+                                    ]
+                                  ]
+                                ],
+                                [
+                                  [
+                                    1,
+                                    69
+                                  ]
+                                ]
+                              ]
+                            ]
+                          ]
+                        ]
+                      ],
+                      [
+                        [
+                          3,
+                          50
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              [
+                5,
+                104
+              ]
+            ]
+          ],
+          [
+            [
+              15,
+              163
+            ]
+          ]
+        ]
+      ],
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "timestamp": 235809.426,
+      "wallTime": 1791475200000,
+      "collectionTime": 1,
+      "resourceOverrides": [],
+      "isMainFrame": true
+    }
+  },
+  {
+    "type": "log",
+    "callId": "call@18442",
+    "time": 235809.597,
+    "message": "waiting for getByRole('combobox', { name: 'Group by', exact: true })"
+  },
+  {
+    "type": "log",
+    "callId": "call@18442",
+    "time": 235811.479,
+    "message": "  locator resolved to <button dir=\"ltr\" type=\"button\" role=\"combobox\" data-state=\"closed\" data-size=\"default\" aria-expanded=\"false\" aria-label=\"Group by\" aria-autocomplete=\"none\" data-slot=\"select-trigger\" class=\"border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit it\u2026>\u2026</button>"
+  },
+  {
+    "type": "after",
+    "callId": "call@18442",
+    "endTime": 235813.501,
+    "afterSnapshot": "after@call@18442"
+  },
+  {
+    "type": "frame-snapshot",
+    "snapshot": {
+      "callId": "call@18442",
+      "snapshotName": "after@call@18442",
+      "pageId": "page@5ca76ff9ae53e939b4e20bcb80575eec",
+      "frameId": "frame@747f5a0c1ee3db0d5ebdc95ae63613a5",
+      "frameUrl": "http://127.0.0.1:5197/modules/planner?view=all-tasks&clientId=30000000-0000-4000-8000-000000000001",
+      "doctype": "html",
+      "html": [
+        "HTML",
+        {
+          "lang": "en"
+        },
+        [
+          [
+            6,
+            0
+          ]
+        ],
+        [
+          [
+            16,
+            13
+          ]
+        ],
+        [
+          "BODY",
+          {
+            "style": ""
+          },
+          [
+            [
+              16,
+              14
+            ]
+          ],
+          [
+            "DIV",
+            {
+              "id": "root"
+            },
+            [
+              "DIV",
+              {
+                "class": "_shell_1m5j3_1"
+              },
+              [
+                [
+                  6,
+                  2
+                ]
+              ],
+              [
+                [
+                  5,
+                  7
+                ]
+              ],
+              [
+                "DIV",
+                {
+                  "class": "_body_1m5j3_75"
+                },
+                [
+                  [
+                    6,
+                    33
+                  ]
+                ],
+                [
+                  [
+                    5,
+                    18
+                  ]
+                ],
+                [
+                  "MAIN",
+                  {
+                    "class": "_main_1m5j3_125  ",
+                    "id": "main-content"
+                  },
+                  [
+                    [
+                      5,
+                      20
+                    ]
+                  ],
+                  [
+                    "DIV",
+                    {
+                      "class": "_screen_f8193_1"
+                    },
+                    [
+                      [
+                        3,
+                        3
+                      ]
+                    ],
+                    [
+                      [
+                        5,
+                        62
+                      ]
+                    ],
+                    [
+                      "DIV",
+                      {
+                        "class": "_stack_f8193_102"
+                      },
+                      [
+                        [
+                          4,
+                          17
+                        ]
+                      ],
+                      [
+                        "DIV",
+                        {
+                          "class": "_tools_f8193_83"
+                        },
+                        [
+                          [
+                            4,
+                            18
+                          ]
+                        ],
+                        [
+                          [
+                            4,
+                            23
+                          ]
+                        ],
+                        [
+                          [
+                            4,
+                            28
+                          ]
+                        ],
+                        [
+                          [
+                            4,
+                            33
+                          ]
+                        ],
+                        [
+                          [
+                            4,
+                            35
+                          ]
+                        ],
+                        [
+                          "BUTTON",
+                          {
+                            "__playwright_target__": "",
+                            "type": "button",
+                            "role": "combobox",
+                            "aria-expanded": "false",
+                            "aria-autocomplete": "none",
+                            "dir": "ltr",
+                            "data-state": "closed",
+                            "data-slot": "select-trigger",
+                            "data-size": "default",
+                            "class": "border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 data-[size=default]:h-9 data-[size=sm]:h-8 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 _selectTrigger_1rqx0_75",
+                            "aria-label": "Group by"
+                          },
+                          [
+                            [
+                              4,
+                              37
+                            ]
+                          ],
+                          [
+                            [
+                              4,
+                              39
+                            ]
+                          ]
+                        ],
+                        [
+                          [
+                            4,
+                            42
+                          ]
+                        ]
+                      ],
+                      [
+                        [
+                          4,
+                          47
+                        ]
+                      ],
+                      [
+                        [
+                          1,
+                          8
+                        ]
+                      ],
+                      [
+                        [
+                          4,
+                          50
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              [
+                6,
+                104
+              ]
+            ]
+          ],
+          [
+            [
+              16,
+              163
+            ]
+          ]
+        ]
+      ],
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "timestamp": 235814.707,
+      "wallTime": 1791475200000,
+      "collectionTime": 0,
+      "resourceOverrides": [],
+      "isMainFrame": true
+    }
+  },
+  {
+    "type": "before",
+    "callId": "call@18444",
+    "startTime": 235815.759,
+    "class": "Page",
+    "method": "keyboardPress",
+    "params": {
+      "key": "Enter"
+    },
+    "stepId": "pw:api@73",
+    "pageId": "page@5ca76ff9ae53e939b4e20bcb80575eec"
+  },
+  {
+    "type": "input",
+    "callId": "call@18444",
+    "inputSnapshot": "input@call@18444"
+  },
+  {
+    "type": "frame-snapshot",
+    "snapshot": {
+      "callId": "call@18444",
+      "snapshotName": "input@call@18444",
+      "pageId": "page@5ca76ff9ae53e939b4e20bcb80575eec",
+      "frameId": "frame@747f5a0c1ee3db0d5ebdc95ae63613a5",
+      "frameUrl": "http://127.0.0.1:5197/modules/planner?view=all-tasks&clientId=30000000-0000-4000-8000-000000000001",
+      "doctype": "html",
+      "html": [
+        [
+          1,
+          9
+        ]
+      ],
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "timestamp": 235817.265,
+      "wallTime": 1791475200000,
+      "collectionTime": 0,
+      "resourceOverrides": [],
+      "isMainFrame": true
+    }
+  },
+  {
+    "type": "after",
+    "callId": "call@18444",
+    "endTime": 235830.744,
+    "afterSnapshot": "after@call@18444"
+  },
+  {
+    "type": "frame-snapshot",
+    "snapshot": {
+      "callId": "call@18444",
+      "snapshotName": "after@call@18444",
+      "pageId": "page@5ca76ff9ae53e939b4e20bcb80575eec",
+      "frameId": "frame@747f5a0c1ee3db0d5ebdc95ae63613a5",
+      "frameUrl": "http://127.0.0.1:5197/modules/planner?view=all-tasks&clientId=30000000-0000-4000-8000-000000000001",
+      "doctype": "html",
+      "html": [
+        "HTML",
+        {
+          "lang": "en"
+        },
+        [
+          "HEAD",
+          {},
+          [
+            [
+              18,
+              0
+            ]
+          ],
+          [
+            [
+              18,
+              1
+            ]
+          ],
+          [
+            [
+              18,
+              2
+            ]
+          ],
+          [
+            [
+              18,
+              3
+            ]
+          ],
+          [
+            [
+              18,
+              4
+            ]
+          ],
+          [
+            [
+              18,
+              5
+            ]
+          ],
+          [
+            [
+              18,
+              7
+            ]
+          ],
+          [
+            [
+              18,
+              8
+            ]
+          ],
+          [
+            [
+              18,
+              9
+            ]
+          ],
+          [
+            [
+              18,
+              10
+            ]
+          ],
+          [
+            [
+              18,
+              11
+            ]
+          ],
+          [
+            "STYLE",
+            {},
+            "\n  .with-scroll-bars-hidden {\n   overflow: hidden !important;\n   padding-right: 0px !important;\n  }\n  body[data-scroll-locked] {\n    overflow: hidden !important;\n    overscroll-behavior: contain;\n    position: relative !important;\n    padding-left: 0px;\n    padding-top: 0px;\n    padding-right: 0px;\n    margin-left:0;\n    margin-top:0;\n    margin-right: 0px !important;\n    \n  }\n  \n  .right-scroll-bar-position {\n    right: 0px !important;\n  }\n  \n  .width-before-scroll-bar {\n    margin-right: 0px !important;\n  }\n  \n  .right-scroll-bar-position .right-scroll-bar-position {\n    right: 0 !important;\n  }\n  \n  .width-before-scroll-bar .width-before-scroll-bar {\n    margin-right: 0 !important;\n  }\n  \n  body[data-scroll-locked] {\n    --removed-body-scroll-bar-size: 0px;\n  }\n"
+          ]
+        ],
+        [
+          [
+            18,
+            13
+          ]
+        ],
+        [
+          "BODY",
+          {
+            "style": "pointer-events: none;",
+            "data-scroll-locked": "1"
+          },
+          [
+            "SPAN",
+            {
+              "data-radix-focus-guard": "",
+              "tabindex": "0",
+              "style": "outline: none; opacity: 0; position: fixed; pointer-events: none;",
+              "data-aria-hidden": "true",
+              "aria-hidden": "true"
+            }
+          ],
+          [
+            [
+              18,
+              14
+            ]
+          ],
+          [
+            "DIV",
+            {
+              "id": "root",
+              "data-aria-hidden": "true",
+              "aria-hidden": "true"
+            },
+            [
+              "DIV",
+              {
+                "class": "_shell_1m5j3_1"
+              },
+              [
+                [
+                  8,
+                  2
+                ]
+              ],
+              [
+                [
+                  7,
+                  7
+                ]
+              ],
+              [
+                "DIV",
+                {
+                  "class": "_body_1m5j3_75"
+                },
+                [
+                  [
+                    8,
+                    33
+                  ]
+                ],
+                [
+                  [
+                    7,
+                    18
+                  ]
+                ],
+                [
+                  "MAIN",
+                  {
+                    "class": "_main_1m5j3_125  ",
+                    "id": "main-content"
+                  },
+                  [
+                    [
+                      7,
+                      20
+                    ]
+                  ],
+                  [
+                    "DIV",
+                    {
+                      "class": "_screen_f8193_1"
+                    },
+                    [
+                      [
+                        5,
+                        3
+                      ]
+                    ],
+                    [
+                      [
+                        7,
+                        62
+                      ]
+                    ],
+                    [
+                      "DIV",
+                      {
+                        "class": "_stack_f8193_102"
+                      },
+                      [
+                        [
+                          6,
+                          17
+                        ]
+                      ],
+                      [
+                        "DIV",
+                        {
+                          "class": "_tools_f8193_83"
+                        },
+                        [
+                          [
+                            6,
+                            18
+                          ]
+                        ],
+                        [
+                          [
+                            6,
+                            23
+                          ]
+                        ],
+                        [
+                          [
+                            6,
+                            28
+                          ]
+                        ],
+                        [
+                          [
+                            6,
+                            33
+                          ]
+                        ],
+                        [
+                          [
+                            6,
+                            35
+                          ]
+                        ],
+                        [
+                          "BUTTON",
+                          {
+                            "__playwright_target__": "",
+                            "type": "button",
+                            "role": "combobox",
+                            "aria-expanded": "true",
+                            "aria-autocomplete": "none",
+                            "dir": "ltr",
+                            "data-state": "open",
+                            "data-slot": "select-trigger",
+                            "data-size": "default",
+                            "class": "border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 data-[size=default]:h-9 data-[size=sm]:h-8 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 _selectTrigger_1rqx0_75",
+                            "aria-label": "Group by",
+                            "aria-controls": "radix-_r_20_",
+                            "data-radix-popper-side": "bottom",
+                            "data-radix-popper-align": "center"
+                          },
+                          [
+                            "SPAN",
+                            {
+                              "data-slot": "select-value",
+                              "style": "pointer-events: none;"
+                            },
+                            "Group by \u00b7 Client"
+                          ],
+                          [
+                            [
+                              6,
+                              39
+                            ]
+                          ]
+                        ],
+                        [
+                          [
+                            6,
+                            42
+                          ]
+                        ]
+                      ],
+                      [
+                        [
+                          6,
+                          47
+                        ]
+                      ],
+                      [
+                        [
+                          3,
+                          8
+                        ]
+                      ],
+                      [
+                        [
+                          6,
+                          50
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              [
+                8,
+                104
+              ]
+            ]
+          ],
+          [
+            [
+              18,
+              163
+            ]
+          ],
+          [
+            "DIV",
+            {
+              "data-radix-popper-content-wrapper": "",
+              "dir": "ltr",
+              "style": "position: fixed; left: 0px; top: 0px; transform: translate(124px, 664px); min-width: max-content; --radix-popper-transform-origin: 50% 0px; z-index: 110; --radix-popper-available-width: 370px; --radix-popper-available-height: 170.125px; --radix-popper-anchor-width: 140.90625px; --radix-popper-anchor-height: 36px;"
+            },
+            [
+              "DIV",
+              {
+                "data-side": "bottom",
+                "data-align": "center",
+                "role": "listbox",
+                "id": "radix-_r_20_",
+                "data-state": "open",
+                "dir": "ltr",
+                "data-slot": "select-content",
+                "class": "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 relative z-50 max-h-(--radix-select-content-available-height) min-w-[8rem] origin-(--radix-select-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md border shadow-md data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1 _selectContent_1rqx0_89",
+                "tabindex": "-1",
+                "style": "box-sizing: border-box; display: flex; flex-direction: column; outline: none; --radix-select-content-transform-origin: var(--radix-popper-transform-origin); --radix-select-content-available-width: var(--radix-popper-available-width); --radix-select-content-available-height: var(--radix-popper-available-height); --radix-select-trigger-width: var(--radix-popper-anchor-width); --radix-select-trigger-height: var(--radix-popper-anchor-height); pointer-events: auto;"
+              },
+              [
+                "STYLE",
+                {},
+                "[data-radix-select-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}[data-radix-select-viewport]::-webkit-scrollbar{display:none}"
+              ],
+              [
+                "DIV",
+                {
+                  "data-radix-select-viewport": "",
+                  "role": "presentation",
+                  "class": "p-1 h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)] scroll-my-1",
+                  "style": "position: relative; flex: 1 1 0%; overflow: hidden auto;"
+                },
+                [
+                  "DIV",
+                  {
+                    "role": "option",
+                    "aria-labelledby": "radix-_r_2r_",
+                    "aria-selected": "true",
+                    "data-state": "checked",
+                    "tabindex": "-1",
+                    "data-slot": "select-item",
+                    "class": "focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2 _selectItem_1rqx0_104",
+                    "data-radix-collection-item": "",
+                    "data-highlighted": ""
+                  },
+                  [
+                    "SPAN",
+                    {
+                      "class": "absolute right-2 flex size-3.5 items-center justify-center"
+                    },
+                    [
+                      "SPAN",
+                      {
+                        "aria-hidden": "true"
+                      },
+                      [
+                        "svg",
+                        {
+                          "xmlns": "http://www.w3.org/2000/svg",
+                          "width": "24",
+                          "height": "24",
+                          "viewBox": "0 0 24 24",
+                          "fill": "none",
+                          "stroke": "currentColor",
+                          "stroke-width": "2",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round",
+                          "class": "lucide lucide-check size-4",
+                          "aria-hidden": "true"
+                        },
+                        [
+                          "path",
+                          {
+                            "d": "M20 6 9 17l-5-5"
+                          }
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    "SPAN",
+                    {
+                      "id": "radix-_r_2r_"
+                    },
+                    "Group by \u00b7 Client"
+                  ]
+                ],
+                [
+                  "DIV",
+                  {
+                    "role": "option",
+                    "aria-labelledby": "radix-_r_2s_",
+                    "aria-selected": "false",
+                    "data-state": "unchecked",
+                    "tabindex": "-1",
+                    "data-slot": "select-item",
+                    "class": "focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2 _selectItem_1rqx0_104",
+                    "data-radix-collection-item": ""
+                  },
+                  [
+                    "SPAN",
+                    {
+                      "class": "absolute right-2 flex size-3.5 items-center justify-center"
+                    }
+                  ],
+                  [
+                    "SPAN",
+                    {
+                      "id": "radix-_r_2s_"
+                    },
+                    "Group by \u00b7 None"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "SPAN",
+            {
+              "data-radix-focus-guard": "",
+              "tabindex": "0",
+              "style": "outline: none; opacity: 0; position: fixed; pointer-events: none;",
+              "data-aria-hidden": "true",
+              "aria-hidden": "true"
+            }
+          ]
+        ]
+      ],
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "timestamp": 235834.514,
+      "wallTime": 1791475200000,
+      "collectionTime": 1,
+      "resourceOverrides": [],
+      "isMainFrame": true
+    }
+  },
+  {
+    "type": "before",
+    "callId": "call@18446",
+    "startTime": 235835.768,
+    "class": "Page",
+    "method": "keyboardPress",
+    "params": {
+      "key": "ArrowDown"
+    },
+    "stepId": "pw:api@74",
+    "pageId": "page@5ca76ff9ae53e939b4e20bcb80575eec"
+  },
+  {
+    "type": "input",
+    "callId": "call@18446",
+    "inputSnapshot": "input@call@18446"
+  },
+  {
+    "type": "frame-snapshot",
+    "snapshot": {
+      "callId": "call@18446",
+      "snapshotName": "input@call@18446",
+      "pageId": "page@5ca76ff9ae53e939b4e20bcb80575eec",
+      "frameId": "frame@747f5a0c1ee3db0d5ebdc95ae63613a5",
+      "frameUrl": "http://127.0.0.1:5197/modules/planner?view=all-tasks&clientId=30000000-0000-4000-8000-000000000001",
+      "doctype": "html",
+      "html": [
+        [
+          1,
+          32
+        ]
+      ],
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "timestamp": 235836.7,
+      "wallTime": 1791475200000,
+      "collectionTime": 0,
+      "resourceOverrides": [],
+      "isMainFrame": true
+    }
+  },
+  {
+    "type": "after",
+    "callId": "call@18446",
+    "endTime": 235837.797,
+    "afterSnapshot": "after@call@18446"
+  },
+  {
+    "type": "frame-snapshot",
+    "snapshot": {
+      "callId": "call@18446",
+      "snapshotName": "after@call@18446",
+      "pageId": "page@5ca76ff9ae53e939b4e20bcb80575eec",
+      "frameId": "frame@747f5a0c1ee3db0d5ebdc95ae63613a5",
+      "frameUrl": "http://127.0.0.1:5197/modules/planner?view=all-tasks&clientId=30000000-0000-4000-8000-000000000001",
+      "doctype": "html",
+      "html": [
+        [
+          2,
+          32
+        ]
+      ],
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "timestamp": 235838.643,
+      "wallTime": 1791475200000,
+      "collectionTime": 0,
+      "resourceOverrides": [],
+      "isMainFrame": true
+    }
+  },
+  {
+    "type": "before",
+    "callId": "call@18448",
+    "startTime": 235839.338,
+    "class": "Page",
+    "method": "keyboardPress",
+    "params": {
+      "key": "Enter"
+    },
+    "stepId": "pw:api@75",
+    "pageId": "page@5ca76ff9ae53e939b4e20bcb80575eec"
+  },
+  {
+    "type": "input",
+    "callId": "call@18448",
+    "inputSnapshot": "input@call@18448"
+  },
+  {
+    "type": "frame-snapshot",
+    "snapshot": {
+      "callId": "call@18448",
+      "snapshotName": "input@call@18448",
+      "pageId": "page@5ca76ff9ae53e939b4e20bcb80575eec",
+      "frameId": "frame@747f5a0c1ee3db0d5ebdc95ae63613a5",
+      "frameUrl": "http://127.0.0.1:5197/modules/planner?view=all-tasks&clientId=30000000-0000-4000-8000-000000000001",
+      "doctype": "html",
+      "html": [
+        [
+          3,
+          32
+        ]
+      ],
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "timestamp": 235840.147,
+      "wallTime": 1791475200000,
+      "collectionTime": 1,
+      "resourceOverrides": [],
+      "isMainFrame": true
+    }
+  },
+  {
+    "type": "after",
+    "callId": "call@18448",
+    "endTime": 235846.759,
+    "afterSnapshot": "after@call@18448"
+  },
+  {
+    "type": "frame-snapshot",
+    "snapshot": {
+      "callId": "call@18448",
+      "snapshotName": "after@call@18448",
+      "pageId": "page@5ca76ff9ae53e939b4e20bcb80575eec",
+      "frameId": "frame@747f5a0c1ee3db0d5ebdc95ae63613a5",
+      "frameUrl": "http://127.0.0.1:5197/modules/planner?view=all-tasks&clientId=30000000-0000-4000-8000-000000000001",
+      "doctype": "html",
+      "html": [
+        "HTML",
+        {
+          "lang": "en"
+        },
+        [
+          "HEAD",
+          {},
+          [
+            [
+              22,
+              0
+            ]
+          ],
+          [
+            [
+              22,
+              1
+            ]
+          ],
+          [
+            [
+              22,
+              2
+            ]
+          ],
+          [
+            [
+              22,
+              3
+            ]
+          ],
+          [
+            [
+              22,
+              4
+            ]
+          ],
+          [
+            [
+              22,
+              5
+            ]
+          ],
+          [
+            [
+              22,
+              7
+            ]
+          ],
+          [
+            [
+              22,
+              8
+            ]
+          ],
+          [
+            [
+              22,
+              9
+            ]
+          ],
+          [
+            [
+              22,
+              10
+            ]
+          ],
+          [
+            [
+              22,
+              11
+            ]
+          ]
+        ],
+        [
+          [
+            22,
+            13
+          ]
+        ],
+        [
+          "BODY",
+          {
+            "style": ""
+          },
+          [
+            [
+              22,
+              14
+            ]
+          ],
+          [
+            "DIV",
+            {
+              "id": "root"
+            },
+            [
+              "DIV",
+              {
+                "class": "_shell_1m5j3_1"
+              },
+              [
+                [
+                  12,
+                  2
+                ]
+              ],
+              [
+                [
+                  11,
+                  7
+                ]
+              ],
+              [
+                "DIV",
+                {
+                  "class": "_body_1m5j3_75"
+                },
+                [
+                  [
+                    12,
+                    33
+                  ]
+                ],
+                [
+                  [
+                    11,
+                    18
+                  ]
+                ],
+                [
+                  "MAIN",
+                  {
+                    "class": "_main_1m5j3_125  ",
+                    "id": "main-content"
+                  },
+                  [
+                    [
+                      11,
+                      20
+                    ]
+                  ],
+                  [
+                    "DIV",
+                    {
+                      "class": "_screen_f8193_1"
+                    },
+                    [
+                      [
+                        9,
+                        3
+                      ]
+                    ],
+                    [
+                      [
+                        11,
+                        62
+                      ]
+                    ],
+                    [
+                      "DIV",
+                      {
+                        "class": "_stack_f8193_102"
+                      },
+                      [
+                        [
+                          10,
+                          17
+                        ]
+                      ],
+                      [
+                        "DIV",
+                        {
+                          "class": "_tools_f8193_83"
+                        },
+                        [
+                          [
+                            10,
+                            18
+                          ]
+                        ],
+                        [
+                          [
+                            10,
+                            23
+                          ]
+                        ],
+                        [
+                          [
+                            10,
+                            28
+                          ]
+                        ],
+                        [
+                          [
+                            10,
+                            33
+                          ]
+                        ],
+                        [
+                          [
+                            10,
+                            35
+                          ]
+                        ],
+                        [
+                          "BUTTON",
+                          {
+                            "__playwright_target__": "",
+                            "type": "button",
+                            "role": "combobox",
+                            "aria-expanded": "false",
+                            "aria-autocomplete": "none",
+                            "dir": "ltr",
+                            "data-state": "closed",
+                            "data-slot": "select-trigger",
+                            "data-size": "default",
+                            "class": "border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 data-[size=default]:h-9 data-[size=sm]:h-8 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 _selectTrigger_1rqx0_75",
+                            "aria-label": "Group by"
+                          },
+                          [
+                            "SPAN",
+                            {
+                              "data-slot": "select-value",
+                              "style": "pointer-events: none;"
+                            },
+                            "Group by \u00b7 Client"
+                          ],
+                          [
+                            [
+                              10,
+                              39
+                            ]
+                          ]
+                        ],
+                        [
+                          [
+                            10,
+                            42
+                          ]
+                        ]
+                      ],
+                      [
+                        [
+                          10,
+                          47
+                        ]
+                      ],
+                      [
+                        [
+                          7,
+                          8
+                        ]
+                      ],
+                      [
+                        [
+                          10,
+                          50
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              [
+                12,
+                104
+              ]
+            ]
+          ],
+          [
+            [
+              22,
+              163
+            ]
+          ]
+        ]
+      ],
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "timestamp": 235847.936,
+      "wallTime": 1791475200000,
+      "collectionTime": 0,
+      "resourceOverrides": [],
+      "isMainFrame": true
+    }
+  },
+  {
+    "type": "before",
+    "callId": "call@18450",
+    "startTime": 235849.385,
+    "title": "Expect \"toContainText\"",
+    "class": "Frame",
+    "method": "expect",
+    "params": {
+      "selector": "internal:role=combobox[name=\"Group by\"s]",
+      "expression": "to.have.text",
+      "expectedText": [
+        {
+          "string": "None",
+          "matchSubstring": true,
+          "normalizeWhiteSpace": true
+        }
+      ],
+      "expectedValue": {
+        "value": {
+          "v": "undefined"
+        },
+        "handles": []
+      },
+      "isNot": false,
+      "timeout": 5000
+    },
+    "stepId": "expect@76",
+    "pageId": "page@5ca76ff9ae53e939b4e20bcb80575eec",
+    "beforeSnapshot": "before@call@18450"
+  },
+  {
+    "type": "frame-snapshot",
+    "snapshot": {
+      "callId": "call@18450",
+      "snapshotName": "before@call@18450",
+      "pageId": "page@5ca76ff9ae53e939b4e20bcb80575eec",
+      "frameId": "frame@747f5a0c1ee3db0d5ebdc95ae63613a5",
+      "frameUrl": "http://127.0.0.1:5197/modules/planner?view=all-tasks&clientId=30000000-0000-4000-8000-000000000001",
+      "doctype": "html",
+      "html": [
+        "HTML",
+        {
+          "lang": "en"
+        },
+        [
+          [
+            1,
+            0
+          ]
+        ],
+        [
+          [
+            23,
+            13
+          ]
+        ],
+        [
+          "BODY",
+          {
+            "style": ""
+          },
+          [
+            [
+              23,
+              14
+            ]
+          ],
+          [
+            "DIV",
+            {
+              "id": "root"
+            },
+            [
+              "DIV",
+              {
+                "class": "_shell_1m5j3_1"
+              },
+              [
+                [
+                  13,
+                  2
+                ]
+              ],
+              [
+                [
+                  12,
+                  7
+                ]
+              ],
+              [
+                "DIV",
+                {
+                  "class": "_body_1m5j3_75"
+                },
+                [
+                  [
+                    13,
+                    33
+                  ]
+                ],
+                [
+                  [
+                    12,
+                    18
+                  ]
+                ],
+                [
+                  "MAIN",
+                  {
+                    "class": "_main_1m5j3_125  ",
+                    "id": "main-content"
+                  },
+                  [
+                    [
+                      12,
+                      20
+                    ]
+                  ],
+                  [
+                    "DIV",
+                    {
+                      "class": "_screen_f8193_1"
+                    },
+                    [
+                      [
+                        10,
+                        3
+                      ]
+                    ],
+                    [
+                      [
+                        12,
+                        62
+                      ]
+                    ],
+                    [
+                      "DIV",
+                      {
+                        "class": "_stack_f8193_102"
+                      },
+                      [
+                        [
+                          11,
+                          17
+                        ]
+                      ],
+                      [
+                        "DIV",
+                        {
+                          "class": "_tools_f8193_83"
+                        },
+                        [
+                          [
+                            11,
+                            18
+                          ]
+                        ],
+                        [
+                          [
+                            11,
+                            23
+                          ]
+                        ],
+                        [
+                          [
+                            11,
+                            28
+                          ]
+                        ],
+                        [
+                          [
+                            11,
+                            33
+                          ]
+                        ],
+                        [
+                          [
+                            11,
+                            35
+                          ]
+                        ],
+                        [
+                          "BUTTON",
+                          {
+                            "type": "button",
+                            "role": "combobox",
+                            "aria-expanded": "false",
+                            "aria-autocomplete": "none",
+                            "dir": "ltr",
+                            "data-state": "closed",
+                            "data-slot": "select-trigger",
+                            "data-size": "default",
+                            "class": "border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 data-[size=default]:h-9 data-[size=sm]:h-8 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 _selectTrigger_1rqx0_75",
+                            "aria-label": "Group by"
+                          },
+                          [
+                            [
+                              1,
+                              2
+                            ]
+                          ],
+                          [
+                            [
+                              11,
+                              39
+                            ]
+                          ]
+                        ],
+                        [
+                          [
+                            11,
+                            42
+                          ]
+                        ]
+                      ],
+                      [
+                        [
+                          11,
+                          47
+                        ]
+                      ],
+                      [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      [
+                        [
+                          11,
+                          50
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              [
+                13,
+                104
+              ]
+            ]
+          ],
+          [
+            [
+              23,
+              163
+            ]
+          ]
+        ]
+      ],
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "timestamp": 235850.641,
+      "wallTime": 1791475200000,
+      "collectionTime": 0,
+      "resourceOverrides": [],
+      "isMainFrame": true
+    }
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 235850.915,
+    "message": "Expect \"toContainText\" with timeout 5000ms"
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 235850.921,
+    "message": "waiting for getByRole('combobox', { name: 'Group by', exact: true })"
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 235855.75,
+    "message": "  locator resolved to <button dir=\"ltr\" type=\"button\" role=\"combobox\" data-state=\"closed\" data-size=\"default\" aria-expanded=\"false\" aria-label=\"Group by\" aria-autocomplete=\"none\" data-slot=\"select-trigger\" class=\"border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit it\u2026>\u2026</button>"
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 235855.759,
+    "message": "  unexpected value \"Group by \u00b7 Client\""
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 235878.097,
+    "message": "  locator resolved to <button dir=\"ltr\" type=\"button\" role=\"combobox\" data-state=\"closed\" data-size=\"default\" aria-expanded=\"false\" aria-label=\"Group by\" aria-autocomplete=\"none\" data-slot=\"select-trigger\" class=\"border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit it\u2026>\u2026</button>"
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 235878.109,
+    "message": "  unexpected value \"Group by \u00b7 Client\""
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 235931.417,
+    "message": "  locator resolved to <button dir=\"ltr\" type=\"button\" role=\"combobox\" data-state=\"closed\" data-size=\"default\" aria-expanded=\"false\" aria-label=\"Group by\" aria-autocomplete=\"none\" data-slot=\"select-trigger\" class=\"border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit it\u2026>\u2026</button>"
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 235931.435,
+    "message": "  unexpected value \"Group by \u00b7 Client\""
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 236033.892,
+    "message": "  locator resolved to <button dir=\"ltr\" type=\"button\" role=\"combobox\" data-state=\"closed\" data-size=\"default\" aria-expanded=\"false\" aria-label=\"Group by\" aria-autocomplete=\"none\" data-slot=\"select-trigger\" class=\"border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit it\u2026>\u2026</button>"
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 236033.911,
+    "message": "  unexpected value \"Group by \u00b7 Client\""
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 236137.188,
+    "message": "  locator resolved to <button dir=\"ltr\" type=\"button\" role=\"combobox\" data-state=\"closed\" data-size=\"default\" aria-expanded=\"false\" aria-label=\"Group by\" aria-autocomplete=\"none\" data-slot=\"select-trigger\" class=\"border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit it\u2026>\u2026</button>"
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 236137.209,
+    "message": "  unexpected value \"Group by \u00b7 Client\""
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 236640.45,
+    "message": "  locator resolved to <button dir=\"ltr\" type=\"button\" role=\"combobox\" data-state=\"closed\" data-size=\"default\" aria-expanded=\"false\" aria-label=\"Group by\" aria-autocomplete=\"none\" data-slot=\"select-trigger\" class=\"border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit it\u2026>\u2026</button>"
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 236640.471,
+    "message": "  unexpected value \"Group by \u00b7 Client\""
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 237144.283,
+    "message": "  locator resolved to <button dir=\"ltr\" type=\"button\" role=\"combobox\" data-state=\"closed\" data-size=\"default\" aria-expanded=\"false\" aria-label=\"Group by\" aria-autocomplete=\"none\" data-slot=\"select-trigger\" class=\"border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit it\u2026>\u2026</button>"
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 237144.305,
+    "message": "  unexpected value \"Group by \u00b7 Client\""
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 237647.116,
+    "message": "  locator resolved to <button dir=\"ltr\" type=\"button\" role=\"combobox\" data-state=\"closed\" data-size=\"default\" aria-expanded=\"false\" aria-label=\"Group by\" aria-autocomplete=\"none\" data-slot=\"select-trigger\" class=\"border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit it\u2026>\u2026</button>"
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 237647.207,
+    "message": "  unexpected value \"Group by \u00b7 Client\""
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 238150.215,
+    "message": "  locator resolved to <button dir=\"ltr\" type=\"button\" role=\"combobox\" data-state=\"closed\" data-size=\"default\" aria-expanded=\"false\" aria-label=\"Group by\" aria-autocomplete=\"none\" data-slot=\"select-trigger\" class=\"border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit it\u2026>\u2026</button>"
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 238150.237,
+    "message": "  unexpected value \"Group by \u00b7 Client\""
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 238653.3,
+    "message": "  locator resolved to <button dir=\"ltr\" type=\"button\" role=\"combobox\" data-state=\"closed\" data-size=\"default\" aria-expanded=\"false\" aria-label=\"Group by\" aria-autocomplete=\"none\" data-slot=\"select-trigger\" class=\"border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit it\u2026>\u2026</button>"
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 238653.323,
+    "message": "  unexpected value \"Group by \u00b7 Client\""
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 239156.409,
+    "message": "  locator resolved to <button dir=\"ltr\" type=\"button\" role=\"combobox\" data-state=\"closed\" data-size=\"default\" aria-expanded=\"false\" aria-label=\"Group by\" aria-autocomplete=\"none\" data-slot=\"select-trigger\" class=\"border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit it\u2026>\u2026</button>"
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 239156.43,
+    "message": "  unexpected value \"Group by \u00b7 Client\""
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 239659.947,
+    "message": "  locator resolved to <button dir=\"ltr\" type=\"button\" role=\"combobox\" data-state=\"closed\" data-size=\"default\" aria-expanded=\"false\" aria-label=\"Group by\" aria-autocomplete=\"none\" data-slot=\"select-trigger\" class=\"border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit it\u2026>\u2026</button>"
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 239659.97,
+    "message": "  unexpected value \"Group by \u00b7 Client\""
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 240163.559,
+    "message": "  locator resolved to <button dir=\"ltr\" type=\"button\" role=\"combobox\" data-state=\"closed\" data-size=\"default\" aria-expanded=\"false\" aria-label=\"Group by\" aria-autocomplete=\"none\" data-slot=\"select-trigger\" class=\"border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit it\u2026>\u2026</button>"
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 240163.582,
+    "message": "  unexpected value \"Group by \u00b7 Client\""
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 240666.365,
+    "message": "  locator resolved to <button dir=\"ltr\" type=\"button\" role=\"combobox\" data-state=\"closed\" data-size=\"default\" aria-expanded=\"false\" aria-label=\"Group by\" aria-autocomplete=\"none\" data-slot=\"select-trigger\" class=\"border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit it\u2026>\u2026</button>"
+  },
+  {
+    "type": "log",
+    "callId": "call@18450",
+    "time": 240666.389,
+    "message": "  unexpected value \"Group by \u00b7 Client\""
+  },
+  {
+    "type": "after",
+    "callId": "call@18450",
+    "endTime": 240851.474,
+    "error": {
+      "message": "Expect failed",
+      "stack": "ExpectError: Expect failed\n    at _Frame.expect (/workspace/capiro-remaining/node_modules/playwright-core/lib/coreBundle.js:23429:17)\n    at _FrameDispatcher.expect (/workspace/capiro-remaining/node_modules/playwright-core/lib/coreBundle.js:53562:11)\n    at _ProgressController.run (/workspace/capiro-remaining/node_modules/playwright-core/lib/coreBundle.js:11762:27)\n    at _FrameDispatcher._runCommand (/workspace/capiro-remaining/node_modules/playwright-core/lib/coreBundle.js:18203:18)\n    at DispatcherConnection.dispatch (/workspace/capiro-remaining/node_modules/playwright-core/lib/coreBundle.js:18408:27)",
+      "name": "ExpectError"
+    },
+    "afterSnapshot": "after@call@18450"
+  },
+  {
+    "type": "frame-snapshot",
+    "snapshot": {
+      "callId": "call@18450",
+      "snapshotName": "after@call@18450",
+      "pageId": "page@5ca76ff9ae53e939b4e20bcb80575eec",
+      "frameId": "frame@747f5a0c1ee3db0d5ebdc95ae63613a5",
+      "frameUrl": "http://127.0.0.1:5197/modules/planner?view=all-tasks&clientId=30000000-0000-4000-8000-000000000001",
+      "doctype": "html",
+      "html": [
+        "HTML",
+        {
+          "lang": "en"
+        },
+        [
+          [
+            2,
+            0
+          ]
+        ],
+        [
+          [
+            24,
+            13
+          ]
+        ],
+        [
+          "BODY",
+          {
+            "style": ""
+          },
+          [
+            [
+              24,
+              14
+            ]
+          ],
+          [
+            "DIV",
+            {
+              "id": "root"
+            },
+            [
+              "DIV",
+              {
+                "class": "_shell_1m5j3_1"
+              },
+              [
+                [
+                  14,
+                  2
+                ]
+              ],
+              [
+                [
+                  13,
+                  7
+                ]
+              ],
+              [
+                "DIV",
+                {
+                  "class": "_body_1m5j3_75"
+                },
+                [
+                  [
+                    14,
+                    33
+                  ]
+                ],
+                [
+                  [
+                    13,
+                    18
+                  ]
+                ],
+                [
+                  "MAIN",
+                  {
+                    "class": "_main_1m5j3_125  ",
+                    "id": "main-content"
+                  },
+                  [
+                    [
+                      13,
+                      20
+                    ]
+                  ],
+                  [
+                    "DIV",
+                    {
+                      "class": "_screen_f8193_1"
+                    },
+                    [
+                      [
+                        11,
+                        3
+                      ]
+                    ],
+                    [
+                      [
+                        13,
+                        62
+                      ]
+                    ],
+                    [
+                      "DIV",
+                      {
+                        "class": "_stack_f8193_102"
+                      },
+                      [
+                        [
+                          12,
+                          17
+                        ]
+                      ],
+                      [
+                        "DIV",
+                        {
+                          "class": "_tools_f8193_83"
+                        },
+                        [
+                          [
+                            12,
+                            18
+                          ]
+                        ],
+                        [
+                          [
+                            12,
+                            23
+                          ]
+                        ],
+                        [
+                          [
+                            12,
+                            28
+                          ]
+                        ],
+                        [
+                          [
+                            12,
+                            33
+                          ]
+                        ],
+                        [
+                          [
+                            12,
+                            35
+                          ]
+                        ],
+                        [
+                          "BUTTON",
+                          {
+                            "__playwright_target__": "",
+                            "type": "button",
+                            "role": "combobox",
+                            "aria-expanded": "false",
+                            "aria-autocomplete": "none",
+                            "dir": "ltr",
+                            "data-state": "closed",
+                            "data-slot": "select-trigger",
+                            "data-size": "default",
+                            "class": "border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 data-[size=default]:h-9 data-[size=sm]:h-8 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 _selectTrigger_1rqx0_75",
+                            "aria-label": "Group by"
+                          },
+                          [
+                            [
+                              2,
+                              2
+                            ]
+                          ],
+                          [
+                            [
+                              12,
+                              39
+                            ]
+                          ]
+                        ],
+                        [
+                          [
+                            12,
+                            42
+                          ]
+                        ]
+                      ],
+                      [
+                        [
+                          12,
+                          47
+                        ]
+                      ],
+                      [
+                        [
+                          9,
+                          8
+                        ]
+                      ],
+                      [
+                        [
+                          12,
+                          50
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              [
+                14,
+                104
+              ]
+            ]
+          ],
+          [
+            [
+              24,
+              163
+            ]
+          ]
+        ]
+      ],
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "timestamp": 240853.845,
+      "wallTime": 1791475200000,
+      "collectionTime": 1,
+      "resourceOverrides": [],
+      "isMainFrame": true
+    }
+  }
+]

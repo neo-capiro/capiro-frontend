@@ -64,3 +64,89 @@
     gap: 8px;
   }
 }
+.meetingTableWrap {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  overflow: hidden;
+}
+.meetingTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+}
+.meetingTable th,
+.meetingTable td {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.meetingTable thead th {
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+.meetingTable tbody th {
+  min-width: 200px;
+  font-weight: 500;
+}
+.meetingTable td,
+.meetingTable small {
+  color: var(--muted-foreground);
+}
+.meetingTable small {
+  display: block;
+  margin-top: 6px;
+  font-weight: 400;
+}
+.tableCaption {
+  text-align: left;
+  padding: 12px 16px;
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.meetingIdentity {
+  display: grid;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.meetingIdentity p {
+  margin: 0;
+}
+.meetingIdentity summary {
+  cursor: pointer;
+  color: var(--muted-foreground);
+  font-size: 13px;
+}
+.meetingIdentity small {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 680px) {
+  .meetingTable thead {
+    display: none;
+  }
+  .meetingTable tbody,
+  .meetingTable tr,
+  .meetingTable th,
+  .meetingTable td {
+    display: block;
+  }
+  .meetingTable tr {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .meetingTable tbody th,
+  .meetingTable td {
+    min-width: 0;
+    padding: 4px 0;
+    border: 0;
+    overflow-wrap: anywhere;
+  }
+  .meetingTable td::before {
+    content: attr(data-label) " · ";
+    color: var(--foreground);
+  }
+}

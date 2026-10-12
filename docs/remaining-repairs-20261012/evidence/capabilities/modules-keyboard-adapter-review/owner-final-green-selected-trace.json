@@ -1,0 +1,715 @@
+{
+  "assertions": [
+    {
+      "before": {
+        "type": "before",
+        "callId": "call@68",
+        "startTime": 2168.061,
+        "title": "Expect \"toBeEnabled\"",
+        "class": "Frame",
+        "method": "expect",
+        "params": {
+          "selector": "internal:role=combobox[name=\"Planner client scope\"i]",
+          "expression": "to.be.enabled",
+          "expectedValue": {
+            "value": {
+              "v": "undefined"
+            },
+            "handles": []
+          },
+          "isNot": false,
+          "timeout": 5000
+        },
+        "stepId": "expect@69",
+        "pageId": "page@a3ce518dab767086e9d029eb389719d9",
+        "beforeSnapshot": "before@call@68"
+      },
+      "after": {
+        "type": "after",
+        "callId": "call@68",
+        "endTime": 2248.338,
+        "afterSnapshot": "after@call@68"
+      }
+    },
+    {
+      "before": {
+        "type": "before",
+        "callId": "call@74",
+        "startTime": 2289.355,
+        "title": "Expect \"toBeFocused\"",
+        "class": "Frame",
+        "method": "expect",
+        "params": {
+          "selector": "internal:role=combobox[name=\"Planner client scope\"i]",
+          "expression": "to.be.focused",
+          "expectedValue": {
+            "value": {
+              "v": "undefined"
+            },
+            "handles": []
+          },
+          "isNot": false,
+          "timeout": 5000
+        },
+        "stepId": "expect@72",
+        "pageId": "page@a3ce518dab767086e9d029eb389719d9",
+        "beforeSnapshot": "before@call@74"
+      },
+      "after": {
+        "type": "after",
+        "callId": "call@74",
+        "endTime": 2294.696,
+        "afterSnapshot": "after@call@74"
+      }
+    },
+    {
+      "before": {
+        "type": "before",
+        "callId": "call@76",
+        "startTime": 2299.51,
+        "class": "Page",
+        "method": "keyboardPress",
+        "params": {
+          "key": "Enter"
+        },
+        "stepId": "pw:api@73",
+        "pageId": "page@a3ce518dab767086e9d029eb389719d9"
+      },
+      "after": {
+        "type": "after",
+        "callId": "call@76",
+        "endTime": 2329.564,
+        "afterSnapshot": "after@call@76"
+      }
+    },
+    {
+      "before": {
+        "type": "before",
+        "callId": "call@78",
+        "startTime": 2336.665,
+        "title": "Expect \"toHaveAttribute\"",
+        "class": "Frame",
+        "method": "expect",
+        "params": {
+          "selector": "internal:role=combobox[include-hidden=true][name=\"Planner client scope\"i]",
+          "expression": "to.have.attribute.value",
+          "expressionArg": "aria-expanded",
+          "expectedText": [
+            {
+              "string": "true"
+            }
+          ],
+          "expectedValue": {
+            "value": {
+              "v": "undefined"
+            },
+            "handles": []
+          },
+          "isNot": false,
+          "timeout": 5000
+        },
+        "stepId": "expect@74",
+        "pageId": "page@a3ce518dab767086e9d029eb389719d9",
+        "beforeSnapshot": "before@call@78"
+      },
+      "after": {
+        "type": "after",
+        "callId": "call@78",
+        "endTime": 2341.557,
+        "afterSnapshot": "after@call@78"
+      }
+    },
+    {
+      "before": {
+        "type": "before",
+        "callId": "call@80",
+        "startTime": 2351.762,
+        "title": "Expect \"toBeVisible\"",
+        "class": "Frame",
+        "method": "expect",
+        "params": {
+          "selector": "internal:role=listbox",
+          "expression": "to.be.visible",
+          "expectedValue": {
+            "value": {
+              "v": "undefined"
+            },
+            "handles": []
+          },
+          "isNot": false,
+          "timeout": 5000
+        },
+        "stepId": "expect@75",
+        "pageId": "page@a3ce518dab767086e9d029eb389719d9",
+        "beforeSnapshot": "before@call@80"
+      },
+      "after": {
+        "type": "after",
+        "callId": "call@80",
+        "endTime": 2357.515,
+        "afterSnapshot": "after@call@80"
+      }
+    },
+    {
+      "before": {
+        "type": "before",
+        "callId": "call@82",
+        "startTime": 2360.38,
+        "title": "Expect \"toBeFocused\"",
+        "class": "Frame",
+        "method": "expect",
+        "params": {
+          "selector": "internal:role=option[name=\"Scope \u00b7 All clients\"s]",
+          "expression": "to.be.focused",
+          "expectedValue": {
+            "value": {
+              "v": "undefined"
+            },
+            "handles": []
+          },
+          "isNot": false,
+          "timeout": 5000
+        },
+        "stepId": "expect@76",
+        "pageId": "page@a3ce518dab767086e9d029eb389719d9",
+        "beforeSnapshot": "before@call@82"
+      },
+      "after": {
+        "type": "after",
+        "callId": "call@82",
+        "endTime": 2365.004,
+        "afterSnapshot": "after@call@82"
+      }
+    },
+    {
+      "before": {
+        "type": "before",
+        "callId": "call@84",
+        "startTime": 2367.359,
+        "class": "Page",
+        "method": "keyboardPress",
+        "params": {
+          "key": "ArrowDown"
+        },
+        "stepId": "pw:api@77",
+        "pageId": "page@a3ce518dab767086e9d029eb389719d9"
+      },
+      "after": {
+        "type": "after",
+        "callId": "call@84",
+        "endTime": 2372.397,
+        "afterSnapshot": "after@call@84"
+      }
+    },
+    {
+      "before": {
+        "type": "before",
+        "callId": "call@86",
+        "startTime": 2374.98,
+        "title": "Expect \"toBeFocused\"",
+        "class": "Frame",
+        "method": "expect",
+        "params": {
+          "selector": "internal:role=option[name=\"Current Aerospace\"s]",
+          "expression": "to.be.focused",
+          "expectedValue": {
+            "value": {
+              "v": "undefined"
+            },
+            "handles": []
+          },
+          "isNot": false,
+          "timeout": 5000
+        },
+        "stepId": "expect@78",
+        "pageId": "page@a3ce518dab767086e9d029eb389719d9",
+        "beforeSnapshot": "before@call@86"
+      },
+      "after": {
+        "type": "after",
+        "callId": "call@86",
+        "endTime": 2378.316,
+        "afterSnapshot": "after@call@86"
+      }
+    },
+    {
+      "before": {
+        "type": "before",
+        "callId": "call@88",
+        "startTime": 2380.214,
+        "class": "Page",
+        "method": "keyboardPress",
+        "params": {
+          "key": "Enter"
+        },
+        "stepId": "pw:api@79",
+        "pageId": "page@a3ce518dab767086e9d029eb389719d9"
+      },
+      "after": {
+        "type": "after",
+        "callId": "call@88",
+        "endTime": 2406.439,
+        "afterSnapshot": "after@call@88"
+      }
+    },
+    {
+      "before": {
+        "type": "before",
+        "callId": "call@92",
+        "startTime": 2411.989,
+        "title": "Expect \"toContainText\"",
+        "class": "Frame",
+        "method": "expect",
+        "params": {
+          "selector": "internal:role=combobox[name=\"Planner client scope\"i]",
+          "expression": "to.have.text",
+          "expectedText": [
+            {
+              "string": "Current Aerospace",
+              "matchSubstring": true,
+              "normalizeWhiteSpace": true
+            }
+          ],
+          "expectedValue": {
+            "value": {
+              "v": "undefined"
+            },
+            "handles": []
+          },
+          "isNot": false,
+          "timeout": 5000
+        },
+        "stepId": "expect@81",
+        "pageId": "page@a3ce518dab767086e9d029eb389719d9",
+        "beforeSnapshot": "before@call@92"
+      },
+      "after": {
+        "type": "after",
+        "callId": "call@92",
+        "endTime": 2447.054,
+        "afterSnapshot": "after@call@92"
+      }
+    },
+    {
+      "before": {
+        "type": "before",
+        "callId": "call@100",
+        "startTime": 2452.703,
+        "title": "Expect \"toBeVisible\"",
+        "class": "Frame",
+        "method": "expect",
+        "params": {
+          "selector": "internal:role=button[name=\"Direct client work\"s]",
+          "expression": "to.be.visible",
+          "expectedValue": {
+            "value": {
+              "v": "undefined"
+            },
+            "handles": []
+          },
+          "isNot": false,
+          "timeout": 5000
+        },
+        "stepId": "expect@85",
+        "pageId": "page@a3ce518dab767086e9d029eb389719d9",
+        "beforeSnapshot": "before@call@100"
+      },
+      "after": {
+        "type": "after",
+        "callId": "call@100",
+        "endTime": 2465.046,
+        "afterSnapshot": "after@call@100"
+      }
+    },
+    {
+      "before": {
+        "type": "before",
+        "callId": "call@104",
+        "startTime": 2478.627,
+        "title": "Expect \"toBeFocused\"",
+        "class": "Frame",
+        "method": "expect",
+        "params": {
+          "selector": "internal:role=combobox[name=\"Group by\"s]",
+          "expression": "to.be.focused",
+          "expectedValue": {
+            "value": {
+              "v": "undefined"
+            },
+            "handles": []
+          },
+          "isNot": false,
+          "timeout": 5000
+        },
+        "stepId": "expect@87",
+        "pageId": "page@a3ce518dab767086e9d029eb389719d9",
+        "beforeSnapshot": "before@call@104"
+      },
+      "after": {
+        "type": "after",
+        "callId": "call@104",
+        "endTime": 2481.554,
+        "afterSnapshot": "after@call@104"
+      }
+    },
+    {
+      "before": {
+        "type": "before",
+        "callId": "call@106",
+        "startTime": 2483.771,
+        "class": "Page",
+        "method": "keyboardPress",
+        "params": {
+          "key": "Enter"
+        },
+        "stepId": "pw:api@88",
+        "pageId": "page@a3ce518dab767086e9d029eb389719d9"
+      },
+      "after": {
+        "type": "after",
+        "callId": "call@106",
+        "endTime": 2502.073,
+        "afterSnapshot": "after@call@106"
+      }
+    },
+    {
+      "before": {
+        "type": "before",
+        "callId": "call@108",
+        "startTime": 2508.145,
+        "title": "Expect \"toHaveAttribute\"",
+        "class": "Frame",
+        "method": "expect",
+        "params": {
+          "selector": "internal:role=combobox[include-hidden=true][name=\"Group by\"s]",
+          "expression": "to.have.attribute.value",
+          "expressionArg": "aria-expanded",
+          "expectedText": [
+            {
+              "string": "true"
+            }
+          ],
+          "expectedValue": {
+            "value": {
+              "v": "undefined"
+            },
+            "handles": []
+          },
+          "isNot": false,
+          "timeout": 5000
+        },
+        "stepId": "expect@89",
+        "pageId": "page@a3ce518dab767086e9d029eb389719d9",
+        "beforeSnapshot": "before@call@108"
+      },
+      "after": {
+        "type": "after",
+        "callId": "call@108",
+        "endTime": 2512.865,
+        "afterSnapshot": "after@call@108"
+      }
+    },
+    {
+      "before": {
+        "type": "before",
+        "callId": "call@110",
+        "startTime": 2516.018,
+        "title": "Expect \"toBeVisible\"",
+        "class": "Frame",
+        "method": "expect",
+        "params": {
+          "selector": "internal:role=listbox",
+          "expression": "to.be.visible",
+          "expectedValue": {
+            "value": {
+              "v": "undefined"
+            },
+            "handles": []
+          },
+          "isNot": false,
+          "timeout": 5000
+        },
+        "stepId": "expect@90",
+        "pageId": "page@a3ce518dab767086e9d029eb389719d9",
+        "beforeSnapshot": "before@call@110"
+      },
+      "after": {
+        "type": "after",
+        "callId": "call@110",
+        "endTime": 2519.962,
+        "afterSnapshot": "after@call@110"
+      }
+    },
+    {
+      "before": {
+        "type": "before",
+        "callId": "call@112",
+        "startTime": 2522.824,
+        "title": "Expect \"toBeFocused\"",
+        "class": "Frame",
+        "method": "expect",
+        "params": {
+          "selector": "internal:role=option[name=\"Group by \u00b7 Client\"s]",
+          "expression": "to.be.focused",
+          "expectedValue": {
+            "value": {
+              "v": "undefined"
+            },
+            "handles": []
+          },
+          "isNot": false,
+          "timeout": 5000
+        },
+        "stepId": "expect@91",
+        "pageId": "page@a3ce518dab767086e9d029eb389719d9",
+        "beforeSnapshot": "before@call@112"
+      },
+      "after": {
+        "type": "after",
+        "callId": "call@112",
+        "endTime": 2525.937,
+        "afterSnapshot": "after@call@112"
+      }
+    },
+    {
+      "before": {
+        "type": "before",
+        "callId": "call@114",
+        "startTime": 2528.205,
+        "class": "Page",
+        "method": "keyboardPress",
+        "params": {
+          "key": "ArrowDown"
+        },
+        "stepId": "pw:api@92",
+        "pageId": "page@a3ce518dab767086e9d029eb389719d9"
+      },
+      "after": {
+        "type": "after",
+        "callId": "call@114",
+        "endTime": 2532.056,
+        "afterSnapshot": "after@call@114"
+      }
+    },
+    {
+      "before": {
+        "type": "before",
+        "callId": "call@116",
+        "startTime": 2535.066,
+        "title": "Expect \"toBeFocused\"",
+        "class": "Frame",
+        "method": "expect",
+        "params": {
+          "selector": "internal:role=option[name=\"Group by \u00b7 None\"s]",
+          "expression": "to.be.focused",
+          "expectedValue": {
+            "value": {
+              "v": "undefined"
+            },
+            "handles": []
+          },
+          "isNot": false,
+          "timeout": 5000
+        },
+        "stepId": "expect@93",
+        "pageId": "page@a3ce518dab767086e9d029eb389719d9",
+        "beforeSnapshot": "before@call@116"
+      },
+      "after": {
+        "type": "after",
+        "callId": "call@116",
+        "endTime": 2539.22,
+        "afterSnapshot": "after@call@116"
+      }
+    },
+    {
+      "before": {
+        "type": "before",
+        "callId": "call@118",
+        "startTime": 2541.295,
+        "class": "Page",
+        "method": "keyboardPress",
+        "params": {
+          "key": "Enter"
+        },
+        "stepId": "pw:api@94",
+        "pageId": "page@a3ce518dab767086e9d029eb389719d9"
+      },
+      "after": {
+        "type": "after",
+        "callId": "call@118",
+        "endTime": 2558.329,
+        "afterSnapshot": "after@call@118"
+      }
+    },
+    {
+      "before": {
+        "type": "before",
+        "callId": "call@120",
+        "startTime": 2577.069,
+        "title": "Expect \"toContainText\"",
+        "class": "Frame",
+        "method": "expect",
+        "params": {
+          "selector": "internal:role=combobox[name=\"Group by\"s]",
+          "expression": "to.have.text",
+          "expectedText": [
+            {
+              "string": "None",
+              "matchSubstring": true,
+              "normalizeWhiteSpace": true
+            }
+          ],
+          "expectedValue": {
+            "value": {
+              "v": "undefined"
+            },
+            "handles": []
+          },
+          "isNot": false,
+          "timeout": 5000
+        },
+        "stepId": "expect@95",
+        "pageId": "page@a3ce518dab767086e9d029eb389719d9",
+        "beforeSnapshot": "before@call@120"
+      },
+      "after": {
+        "type": "after",
+        "callId": "call@120",
+        "endTime": 2581.19,
+        "afterSnapshot": "after@call@120"
+      }
+    },
+    {
+      "before": {
+        "type": "before",
+        "callId": "call@122",
+        "startTime": 2584.023,
+        "title": "Expect \"toHaveCount\"",
+        "class": "Frame",
+        "method": "expect",
+        "params": {
+          "selector": "internal:role=table",
+          "expression": "to.have.count",
+          "expectedNumber": 1,
+          "expectedValue": {
+            "value": {
+              "v": "undefined"
+            },
+            "handles": []
+          },
+          "isNot": false,
+          "timeout": 5000
+        },
+        "stepId": "expect@96",
+        "pageId": "page@a3ce518dab767086e9d029eb389719d9",
+        "beforeSnapshot": "before@call@122"
+      },
+      "after": {
+        "type": "after",
+        "callId": "call@122",
+        "endTime": 2587.074,
+        "afterSnapshot": "after@call@122"
+      }
+    }
+  ],
+  "hiddenRootSnapshots": [
+    {
+      "name": "after@call@76",
+      "timestamp": 2333.374,
+      "rootAttributes": {
+        "id": "root",
+        "data-aria-hidden": "true",
+        "aria-hidden": "true"
+      }
+    },
+    {
+      "name": "before@call@78",
+      "timestamp": 2338.937,
+      "rootAttributes": {
+        "id": "root",
+        "data-aria-hidden": "true",
+        "aria-hidden": "true"
+      }
+    },
+    {
+      "name": "after@call@78",
+      "timestamp": 2343.222,
+      "rootAttributes": {
+        "id": "root",
+        "data-aria-hidden": "true",
+        "aria-hidden": "true"
+      }
+    },
+    {
+      "name": "before@call@80",
+      "timestamp": 2354.543,
+      "rootAttributes": {
+        "id": "root",
+        "data-aria-hidden": "true",
+        "aria-hidden": "true"
+      }
+    },
+    {
+      "name": "after@call@106",
+      "timestamp": 2506.336,
+      "rootAttributes": {
+        "id": "root",
+        "data-aria-hidden": "true",
+        "aria-hidden": "true"
+      }
+    },
+    {
+      "name": "before@call@108",
+      "timestamp": 2510.404,
+      "rootAttributes": {
+        "id": "root",
+        "data-aria-hidden": "true",
+        "aria-hidden": "true"
+      }
+    },
+    {
+      "name": "after@call@108",
+      "timestamp": 2514.571,
+      "rootAttributes": {
+        "id": "root",
+        "data-aria-hidden": "true",
+        "aria-hidden": "true"
+      }
+    },
+    {
+      "name": "before@call@110",
+      "timestamp": 2517.618,
+      "rootAttributes": {
+        "id": "root",
+        "data-aria-hidden": "true",
+        "aria-hidden": "true"
+      }
+    },
+    {
+      "name": "after@call@124",
+      "timestamp": 2630.519,
+      "rootAttributes": {
+        "id": "root",
+        "data-aria-hidden": "true",
+        "aria-hidden": "true"
+      }
+    },
+    {
+      "name": "before@call@126",
+      "timestamp": 2633.441,
+      "rootAttributes": {
+        "id": "root",
+        "data-aria-hidden": "true",
+        "aria-hidden": "true"
+      }
+    }
+  ],
+  "sourceEntries": [
+    {
+      "entry": "resources/src@5509b413b0394690ce7bd32776416b68e632a06d.txt",
+      "sha256": "ff19d419f382abb100089e5bc03619f85d499a044ac995fe4b988e7aac78d994",
+      "matchesFinalSource": true
+    }
+  ]
+}

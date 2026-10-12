@@ -13,10 +13,12 @@ export function FacilityGeocoding({
   clientId,
   facility,
   disabled = false,
+  compact = false,
 }: {
   clientId: string;
   facility: Facility;
   disabled?: boolean;
+  compact?: boolean;
 }) {
   const actor = useProfileActor();
   return (
@@ -26,6 +28,7 @@ export function FacilityGeocoding({
       facility={facility}
       disabled={disabled}
       actor={actor}
+      compact={compact}
     />
   );
 }
@@ -34,11 +37,13 @@ function CurrentFacilityGeocoding({
   facility,
   disabled,
   actor,
+  compact,
 }: {
   clientId: string;
   facility: Facility;
   disabled: boolean;
   actor: ProfileActor | undefined;
+  compact: boolean;
 }) {
   const mutation = useFacilityAction(clientId, facility, actor, !disabled);
   const hasAddress = Boolean(
@@ -48,7 +53,7 @@ function CurrentFacilityGeocoding({
   );
   return (
     <section className="stack" aria-label="Address resolution">
-      <h3>Address resolution</h3>
+      {!compact && <h3>Address resolution</h3>}
       <p className="muted">
         Geocoder:{" "}
         {facility.geocodeStatus?.replaceAll("_", " ") ?? "Not requested"}
@@ -107,31 +112,35 @@ function CurrentFacilityGeocoding({
           ))}
         </fieldset>
       ) : null}
-      <div className="row">
-        <button
-          className="button"
-          disabled={!mutation.canAct || !hasAddress}
-          onClick={() =>
-            void mutation.run({
-              kind: "resolve-district",
-              facilityId: facility.id,
-            })
-          }
-        >
-          {mutation.isPending && mutation.kind === "resolve-district"
-            ? "Resolving…"
-            : "Resolve district"}
-        </button>
-        <button
-          className="button ghost"
-          disabled={!mutation.canAct || !hasAddress}
-          onClick={() =>
-            void mutation.run({ kind: "geocode", facilityId: facility.id })
-          }
-        >
-          Retry geocoding
-        </button>
-      </div>
+      {(!compact ||
+        facility.geocodeStatus !== "matched" ||
+        mutation.unknown) && (
+        <div className="row">
+          <button
+            className="button"
+            disabled={!mutation.canAct || !hasAddress}
+            onClick={() =>
+              void mutation.run({
+                kind: "resolve-district",
+                facilityId: facility.id,
+              })
+            }
+          >
+            {mutation.isPending && mutation.kind === "resolve-district"
+              ? "Resolving…"
+              : "Resolve district"}
+          </button>
+          <button
+            className="button ghost"
+            disabled={!mutation.canAct || !hasAddress}
+            onClick={() =>
+              void mutation.run({ kind: "geocode", facilityId: facility.id })
+            }
+          >
+            Retry geocoding
+          </button>
+        </div>
+      )}
       {!hasAddress && (
         <p className="muted">
           Enter a street address, city and state before geocoding.

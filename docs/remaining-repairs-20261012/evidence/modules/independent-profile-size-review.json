@@ -1,0 +1,102 @@
+{
+  "source": "ecf34dfac16e36b22df1a1da9b6e86b785699dbb",
+  "reviewer": "modules_settings_review",
+  "scope": "Independent exact-source responsibility review only; root owns registry acceptance",
+  "completeness": "All7 changed-file scanner signals included; source SHA256 values independently verified from git show",
+  "errors": [],
+  "findings": [
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/ActivityFeed.tsx",
+      "kind": "function",
+      "symbol": "ActivityRow",
+      "line": 53,
+      "nonblank": 97,
+      "fingerprint": "f199a7b9b70b087960c39c8c4947c4a23422aaee736a03fef2c38087e1e93517",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "fileSha256": "109613b7ab6adc563570804d1a83d35e452810fd6ac117c6f79a813e7185acc6",
+      "independentResponsibilityAssessment": "One native activity record projection owns title/body/kind/time/due/settled/pinned and existing source links. It selects canonical ActivityActions/TimelineMailThread only in the retained default feed. Expanded mode adds no writer/draft owner; the flat keyed parent preserves row mutation identity across group changes. Its markup remains cohesive."
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx",
+      "kind": "function",
+      "symbol": "ActivityTimeline",
+      "line": 17,
+      "nonblank": 124,
+      "fingerprint": "626e4b4fbd75bf396ce2b4a9a86d457a90d6d0b0981555d3b50af86b970fb1c8",
+      "provenance": "changed-since-transfer",
+      "reviewStatus": "changed-since-review",
+      "blocking": true,
+      "fileSha256": "2cff749fe4fde463166880004fc18c2f5955b0c3292179d59a722d3f51d1d339",
+      "independentResponsibilityAssessment": "One history view controller owns current query admission, filters, expansion and the explicit canonical QuickLog URL handoff. ActivityFeed owns row presentation; existing activity mutations and QuickLog own writes/receipts/unknown recovery. The close-focus one-shot flag is local view coordination with client/unmount cleanup, not a second mutation lifecycle."
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx",
+      "kind": "function",
+      "symbol": "CurrentFacilitiesCard",
+      "line": 31,
+      "nonblank": 146,
+      "fingerprint": "57886290e8ec40b32db018ef14077b55c4a23b7e945217d32ccf564827d3ff8c",
+      "provenance": "new",
+      "reviewStatus": "changed-since-review",
+      "blocking": true,
+      "fileSha256": "64cc056a645a42c851d6b8b65c8a49c24e29ef3e5aecf842eec4db92991a9d2b",
+      "independentResponsibilityAssessment": "One current facilities collection card retains existing map/display and current-source ownership while launching the separate manager. Data/query/actor behavior remains canonical; extracted editor and manager own their distinct UI lifetimes. No new transport or permission policy is added."
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/FacilitiesManager.tsx",
+      "kind": "function",
+      "symbol": "CurrentFacilitiesManager",
+      "line": 31,
+      "nonblank": 126,
+      "fingerprint": "08d7bc0f241e37c60771df546df15f54f6eabc62ed5583407ebc843abef53c92",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "fileSha256": "3cc5cc8c82fe4ef018917e6101be9088d9a77913042492498698a074cd829844",
+      "independentResponsibilityAssessment": "One actor/client-scoped facilities dialog composes saved cards, selection, canonical editor/removal/geocoding owners and footer actions. It keeps draft snapshots until explicitly admitted review, then adopts only the actual matching current facility. Writer/query/uncertain-attempt implementation is reused, not duplicated."
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/FacilityFields.tsx",
+      "kind": "function",
+      "symbol": "FacilityFields",
+      "line": 10,
+      "nonblank": 100,
+      "fingerprint": "29a51391739b3163a8903b000750ae6ad53b08fc0910bd0ed987ceb92327de6f",
+      "provenance": "new",
+      "reviewStatus": "changed-since-review",
+      "blocking": true,
+      "fileSha256": "38f0a479904765e6ddff737f33e48f7ebed4e53ab6470ecfacf4987fdeb03960",
+      "independentResponsibilityAssessment": "Declarative native field catalog for one facility record, retaining field names/defaults/constraints and a canonical SelectField with unknown-existing state preservation. No query, dispatch, actor or recovery state is introduced."
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/FacilityGeocoding.tsx",
+      "kind": "function",
+      "symbol": "CurrentFacilityGeocoding",
+      "line": 35,
+      "nonblank": 113,
+      "fingerprint": "fae28b9d6e908889e5a695dc1ee95081dd2b6f82dbfcbf7451b2bfe6eda7acb4",
+      "provenance": "new",
+      "reviewStatus": "changed-since-review",
+      "blocking": true,
+      "fileSha256": "5419bc8e5d00584177e1ad3e82ccd33d741f0491446eb9f8c4124d8376c135f5",
+      "independentResponsibilityAssessment": "Existing single facility resolution flow uses canonical useFacilityAction/current-source controls. Compact manager presentation changes matched controls without adding a service owner, permission inference or new endpoint."
+    },
+    {
+      "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+      "kind": "function",
+      "symbol": "FilesPage",
+      "line": 19,
+      "nonblank": 320,
+      "fingerprint": "71b102bced5c6eb98f9187aa4979c27119ab3a26a1078ba7e98a910aa7f382ce",
+      "provenance": "changed-since-transfer",
+      "reviewStatus": "changed-since-review",
+      "blocking": true,
+      "fileSha256": "18d6f94455f08109e3883c569bc4203a198c5004aaa42bd42add8143adfc95bd",
+      "independentResponsibilityAssessment": "The 320-line function still composes one current collection/action lifetime. New FileToolbar and FolderCards isolate provenance/folder presentation, while existing upload/access/move/delete/preview owners retain requests, receipt admission, unknown recovery and current reader/actor/client guards. Reader-scoped filters do not become native ACLs; no new transport/provider orchestration was added. A further arbitrary JSX split is not required for this bounded change."
+    }
+  ],
+  "priorReviewedSource": "a5202a066d0a0bd29fd5158b1d8380d4a5736768",
+  "successorVerification": "All7 reviewed source-file SHA256 hashes remain identical; final successor changes only files.module.css selector and the new2-case test, neither adds a size signal."
+}

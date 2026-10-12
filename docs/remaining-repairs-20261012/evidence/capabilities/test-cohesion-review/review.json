@@ -1,0 +1,159 @@
+{
+  "createdAtUtc": "2026-10-12T20:14:01.257087+00:00",
+  "sourcePin": "4dbbe4b5558f93bbf27ee7263d77a5b838a7d074",
+  "baseline": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+  "scope": "10 current partial test size signals supplied by root; read-only cohesion/fixture/assertion review. Profile remains pending.",
+  "sourceMatches": {
+    "signals": 10,
+    "mismatches": 0,
+    "new": 5,
+    "changedFileSignals": 2,
+    "inheritedUnchangedFunctionSignals": 3
+  },
+  "records": [
+    {
+      "file": "apps/web/test/browser/remaining-modules.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 486,
+      "fingerprint": "33e115194230d772767d40ce9ef9e855370ea36a7ee90ba0feba0563f6947f89",
+      "sha256": "c86ad251ee3eb115e5e6edeb0309192aebd9b3fd38fc6f85fdf19e89deaea78f",
+      "classification": "new",
+      "disposition": "accepted_cohesive_bounded_cohort",
+      "rationale": "The file is a bounded MS07/08/09 acceptance cohort for three named Modules screens. Planner occupies the majority; Workspace layout and public-form presentation cases remain independent tests with local fixtures and explicit outcomes. It reuses the existing operation fixture and actual ApplicationBoundary rather than making a test framework or duplicating planner grouping/filter algorithms. Each case controls its own state, so one screen does not require mocking another screen's behavior. Current-page counts, client links, read-denial recovery, held old-session reads, viewer-disabled mutation, URL history, mobile keyboard interaction, form error retention and malformed/old-token receipts are observable assertions. No split solely to silence 486 lines is justified by the present cohort."
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-sharing.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 422,
+      "fingerprint": "c3ffd4fbca4d35c3529916792ee8bae7f8095f993a3bfb87829973256476c93f",
+      "sha256": "23a2427feb083c1dbcb1474f5376a8902f57290025991dc43f011043924aedee",
+      "classification": "new",
+      "disposition": "accepted_cohesion_with_test_confidence_followup",
+      "rationale": "One workflow owns this file: selected artifact sharing, explicit confirmation, receipt uncertainty and the client shared feed. The selected-ref positive case is complemented by fixed foreign/error responses, zero-dispatch restrictions, changed preflight, identity/feed replacement, keyboard geometry and same-scope draft retention. Shared data and held-read controls are local to that workflow. One actor-replacement negative has an asynchronous observation gap (TCR-01); accepting module cohesion does not close that followup."
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-sharing.spec.ts",
+      "kind": "function",
+      "symbol": "setup",
+      "line": 17,
+      "nonblank": 81,
+      "fingerprint": "fad2e4d85b892511b6f812be3847d67b27affde5c1d7f51f10ecfed57f128125",
+      "sha256": "23a2427feb083c1dbcb1474f5376a8902f57290025991dc43f011043924aedee",
+      "classification": "new",
+      "disposition": "accepted_cohesion_with_explicit_fixture_limits",
+      "rationale": "The 81-line setup owns one controllable synthetic share/feed read/write endpoint set and held-response state. It does not import production eligibility or receipt algorithms to manufacture expected results. Its positive POST responder stamps selected refs and computes a limited visibility projection; this is fixture state, not backend authorization verification. Fixed malicious/503 receipts bypass the positive simulation, and UI tests separately assert exact outgoing refs and preservation fences. The current positive test selects prep plus attachment and retains a separately shared note; the fixture is not evidence for every artifact visibility combination or server permission rule. Calendar actor changes are injected into Portfolio identity cache under DataProvider, proving local guard/lifetime behavior, not full Clerk/ApplicationBoundary replacement."
+    },
+    {
+      "file": "apps/web/tests/browser/email-compose.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 653,
+      "fingerprint": "9586be4f68794516b7826531fcc57d1c83abf9920e2d87137c507ca049143139",
+      "sha256": "c61e2e708f1a7a079570478891cd17982586f9bf262d8e979931a7976ccd90c0",
+      "classification": "changed",
+      "disposition": "accepted_unchanged_responsibility_after_representation_adapter",
+      "rationale": "Existing compose/send/receipt suite remains the same responsibility. The only change is one exact message-value adapter import and eight assertion substitutions retaining identical expected expressions. Prior complete-file AST preservation proves all surrounding cases and assertions survive. The increased file-level fingerprint does not mean new workflow responsibilities."
+    },
+    {
+      "file": "apps/web/tests/browser/email-compose.spec.ts",
+      "kind": "function",
+      "symbol": "setup",
+      "line": 41,
+      "nonblank": 119,
+      "fingerprint": "486aa09e731ad40a8b5b850b7e2a07fa02ee17f98914c8f7c90efc64a7988c4b",
+      "sha256": "c61e2e708f1a7a079570478891cd17982586f9bf262d8e979931a7976ccd90c0",
+      "classification": "inherited-unchanged",
+      "disposition": "inherited_unchanged_preserve_prior_status",
+      "rationale": "Function fingerprint is byte-equivalent to the baseline signal; only its source position moves with the import. No new fixture behavior or responsibility was introduced. This audit confirms preservation rather than issuing a new blanket approval of inherited fixture code."
+    },
+    {
+      "file": "apps/web/tests/browser/email-compose.spec.ts",
+      "kind": "function",
+      "symbol": "setup > <anonymous>",
+      "line": 64,
+      "nonblank": 90,
+      "fingerprint": "422ede19b0edb762a92ff41f98b8fd81e377588a9f7a05cb88e541ccbdf137f4",
+      "sha256": "c61e2e708f1a7a079570478891cd17982586f9bf262d8e979931a7976ccd90c0",
+      "classification": "inherited-unchanged",
+      "disposition": "inherited_unchanged_preserve_prior_status",
+      "rationale": "Nested route fixture fingerprint is unchanged from baseline. Existing controlled route/receipt behavior is not enlarged by rich-editor assertion adaptation; retain its prior review status."
+    },
+    {
+      "file": "apps/web/tests/browser/mail-local-draft.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 467,
+      "fingerprint": "59c7d93e59a1ee79058d223d6af28e3332d38be3593e026cb32ad070b0fea27c",
+      "sha256": "74036b122536e2c3e1ff67497cbccd2e2825d2f165d2ac62acbd81b374797575",
+      "classification": "changed",
+      "disposition": "accepted_unchanged_responsibility_after_representation_adapter",
+      "rationale": "The file continues to exercise local rewrite/draft/Undo lifetimes. One adapter import and seven semantically exact expectation substitutions are the only changes; complete AST comparison confirms all expected strings and surrounding controls survive. No unrelated subsystem is coupled into this owner."
+    },
+    {
+      "file": "apps/web/tests/browser/mail-local-draft.spec.ts",
+      "kind": "function",
+      "symbol": "setup",
+      "line": 8,
+      "nonblank": 90,
+      "fingerprint": "9711fdca346a34b0dfa82fae5065a31f429924616c649beaace06c1191d0282c",
+      "sha256": "74036b122536e2c3e1ff67497cbccd2e2825d2f165d2ac62acbd81b374797575",
+      "classification": "inherited-unchanged",
+      "disposition": "inherited_unchanged_preserve_prior_status",
+      "rationale": "The fixture function has the same fingerprint as baseline; there is no new algorithm, mock owner or authority shortcut in this signal. Preserve prior review classification."
+    },
+    {
+      "file": "apps/web/tests/browser/mail-rich-compose.spec.ts",
+      "kind": "function",
+      "symbol": "setup",
+      "line": 4,
+      "nonblank": 82,
+      "fingerprint": "e45e93bf32a8236faf446bec98b8fcdeb34bb1e53f131a916e71b130dd2d5e25",
+      "sha256": "1b7ca2ca4c029b83e533e073dd5b1ca45b2c76fc8d265973ea2d0d254f884a90",
+      "classification": "new",
+      "disposition": "accepted_cohesive_fixture",
+      "rationale": "The 82-line helper owns one rich-compose synthetic environment: current identity, saved signature, mailbox, people, controlled rewrite and send receipt, plus request capture and a held response. These are prerequisites of the real composer, not unrelated domain mocks. It restricts outbound requests to the exact fixture origin and returns 500 for unknown core routes. It supplies literal receipts without computing HTML/editor outcomes; tests independently inspect actual marks, exact pre-rewrite HTML restoration, outgoing rawText/bodyHtml, no signature duplication, unsupported markup, no early send, formatting-only invalidation and native Undo. Identity invalidation is a query-state control and source replacement is a harness prop change; neither alone claims complete application-session replacement."
+    },
+    {
+      "file": "apps/web/tests/calendar-sharing.test.ts",
+      "kind": "function",
+      "symbol": "<anonymous>",
+      "line": 24,
+      "nonblank": 109,
+      "fingerprint": "4bf56d635643c7e5cdb8d93dcdcbf9b24485a05ff077674e6da194dd28e7a88a",
+      "sha256": "5d837055a6c3644987422fddfee54b1b3762f4b108b9c064cd699a67e3718a30",
+      "classification": "new",
+      "disposition": "accepted_cohesive_describe_group",
+      "rationale": "The 109-line anonymous callback is a describe grouping for the sharing contract, not one long production-like operation. It contains independent cases using explicit malformed fixtures and fixed expected reasons. It checks nullable sharer attribution, wrong tenant/client/meeting, missing selected artifact, wrong visibility/approval, partial unshare, duplicate/foreign feed, confidential/institutional/readiness restrictions, stable identity despite signed-link rotation, and standard/admin unshare distinctions. Expectations are not generated by reimplementing the parser. Separate async dispatch tests use a real API client and literal returned receipts; calling sharingTargets to build the selected input is legitimate boundary composition, paired with independently changed current rows and fixed POST-count/uncertainty assertions. The injected guard test is an isolated contract control, complemented by browser-local lifetime evidence; no native permission acceptance is inferred."
+    }
+  ],
+  "issues": [
+    {
+      "id": "TCR-01",
+      "severity": "test-confidence followup; no demonstrated production defect",
+      "file": "apps/web/tests/browser/calendar-sharing.spec.ts",
+      "line": 247,
+      "sourceSha256": "23a2427feb083c1dbcb1474f5376a8902f57290025991dc43f011043924aedee",
+      "observation": "After releasing the held read at line265, the test awaits dialog absence at266 (which actor replacement independently causes) then synchronously checks writes=[] at267. Neither step proves the released read was processed or aborted before checking for a late POST.",
+      "impact": "This negative may complete before an erroneous late dispatch. The independent injected-guard unit case and inspected production abort/current-actor checks are useful separate evidence but do not make this browser assertion a synchronized proof.",
+      "requestedFollowup": "Have the owner add a deterministic response-processing or expected request-abort observation before the final zero-write assertion, then replay the affected control. Do not substitute a longer arbitrary delay.",
+      "status": "Reported to root; no source edits or test executions by reviewer."
+    }
+  ],
+  "method": [
+    "Read exact source and caller fixtures/harnesses; inspect sharing production boundary only to distinguish test oracle from implementation.",
+    "Recompute source-only AST size records and compare exact committed/working file hashes to all supplied records.",
+    "Reuse prior complete-file Mail assertion AST preservation evidence; no redundant browser execution."
+  ],
+  "limits": [
+    "No tests, browser, server, full TypeScript or build ran. No source or registry was edited.",
+    "Mutable root was captured at the explicit pin; reviewed source files matched supplied hashes exactly.",
+    "Synthetic fixture data and injected cache/guard changes do not prove native backend permission or live provider behavior.",
+    "Cohesion acceptance does not close TCR-01 or approve later source changes."
+  ]
+}

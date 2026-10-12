@@ -1,0 +1,7 @@
+.actions {
+  flex-wrap: wrap;
+}
+.actions > :global(.button) {
+  flex-shrink: 0;
+  white-space: nowrap;
+}

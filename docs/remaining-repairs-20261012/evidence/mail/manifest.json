@@ -1,0 +1,721 @@
+{
+  "sourceCommit": "685e55039d5d3945c76085513cde8bc6c33cb55d",
+  "generatedAt": "2026-10-12T19:55:07.988420+00:00",
+  "files": [
+    {
+      "path": "PLAN.md",
+      "bytes": 2249,
+      "sha256": "c6baa640d6c9f2c05f3f43325453af262d552e1e33f71438e1321db2cb1d132f"
+    },
+    {
+      "path": "affected-artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "affected-artifacts/mail-local-draft-saved-sig-8bc69-ktop-and-mobile-dark-review/mail-local-desktop.png",
+      "bytes": 72899,
+      "sha256": "1376bf89b7dae0f9be74171faf7ff7c8eb32ae076dfc5c998e1c22f21e4f668f"
+    },
+    {
+      "path": "affected-artifacts/mail-local-draft-saved-sig-8bc69-ktop-and-mobile-dark-review/mail-local-mobile-dark.png",
+      "bytes": 34701,
+      "sha256": "2f1f835feca454fde9cf2f6234eb1891b05ff5fd3eb92fe46985e4c031717166"
+    },
+    {
+      "path": "affected-artifacts/thread-mail-Reply-reviews--b8d7a-refuses-send-upload-rewrite/reply-review-desktop.png",
+      "bytes": 99839,
+      "sha256": "c1216800b9943f37b9218e46ac582a4c7c374630ea56c61b79fdb6ae024e03f5"
+    },
+    {
+      "path": "affected-artifacts/thread-mail-actual-Overvie-38aaf-ource-and-reviews-Reply-all/actual-overview-thread-desktop.png",
+      "bytes": 140427,
+      "sha256": "5f21b40770322494cf84979cb9e3ed9560c45715ec391abbbaf52d329c7b1273"
+    },
+    {
+      "path": "affected-artifacts/thread-mail-actual-Overvie-5bf01-e-dark-with-inline-collapse/actual-overview-thread-mobile-dark.png",
+      "bytes": 57451,
+      "sha256": "f0f9a0a8b45842423f72b08829a4cce04aa3a953d1a4fbac0f0639df723fb9df"
+    },
+    {
+      "path": "affected-artifacts/thread-mail-expands-exact--15114-coming-newest-and-collapses/thread-expanded-desktop.png",
+      "bytes": 59424,
+      "sha256": "12ce1a0735e03dc543299afcb02d8d4b26075ce75c86d73f14c835f868b594c1"
+    },
+    {
+      "path": "affected-artifacts/thread-mail-mobile-dark-expansion-wraps-without-overflow/thread-mobile-dark.png",
+      "bytes": 42775,
+      "sha256": "39ea91de9a294348cce17bf26492811477fa00563074a9804236bad445494a4f"
+    },
+    {
+      "path": "affected-results.json",
+      "bytes": 84255,
+      "sha256": "a26918aeb53a6fadf0f71bf7c76f88d58e048abb1eb83961b3d777def5151692"
+    },
+    {
+      "path": "affected.log",
+      "bytes": 10980,
+      "sha256": "c3bf4a481b3ceaeb93d49d4bb1d0525bcbae55697c6f348732ff69fee3dcefc0"
+    },
+    {
+      "path": "architecture-final.json",
+      "bytes": 756341,
+      "sha256": "e4e7b6bd15bfa650160379a8d62d97408a989d1f37eeff3c45e7c532576a49e7"
+    },
+    {
+      "path": "architecture-help.log",
+      "bytes": 250,
+      "sha256": "58938467541a5a6a3e9f241dd9ae70a4835fc47488f2df349441be6cd6b2fbba"
+    },
+    {
+      "path": "architecture-history-final.json",
+      "bytes": 756341,
+      "sha256": "bfd04c7dc5d0930cdaaf6e2f10a6fec64c57ea36d3b70459d2abf5951469f15d"
+    },
+    {
+      "path": "architecture.log",
+      "bytes": 756341,
+      "sha256": "3c8353d163098a8936c201b89fa250bdb52f4a6bd6a8733234c3b0cb1398eed0"
+    },
+    {
+      "path": "assertion-adaptation.json",
+      "bytes": 656,
+      "sha256": "b657d9b951a30ec5905ba747e1b5587020c8ef16aa6bc77aa689e720ad05ff18"
+    },
+    {
+      "path": "assertion-equivalence.json",
+      "bytes": 482,
+      "sha256": "38009a426e17a6bfe587e7c4274d4991480eee5489dbc869f9bc45a0d0d3d9ea"
+    },
+    {
+      "path": "before-source.json",
+      "bytes": 549,
+      "sha256": "af005698ae2321a8e3639b915f5e98bd391daab1093ffc5d5355626cf3aff195"
+    },
+    {
+      "path": "corrections.json",
+      "bytes": 2064,
+      "sha256": "79eeae5f3e29aca4877ce3bf33670d01511e52cc265a03253389049058949ba8"
+    },
+    {
+      "path": "extra-before-artifacts/.last-run.json",
+      "bytes": 145,
+      "sha256": "db4eefe94553fc3ee14292f1aab64060bc0ef457f57b4437fff0d25af3008fc2"
+    },
+    {
+      "path": "extra-before-artifacts/mail-rich-compose-source-r-5e51f--history-and-rich-Meri-Undo/error-context.md",
+      "bytes": 6650,
+      "sha256": "4371282ff1bcb32c0f86b10cc006936aab8bf5d59747eaf415496e897cb9714d"
+    },
+    {
+      "path": "extra-before-artifacts/mail-rich-compose-source-r-5e51f--history-and-rich-Meri-Undo/test-failed-1.png",
+      "bytes": 70997,
+      "sha256": "63ada67ebb27178e8f55d05bc0fa5623234f79d0885c838186e4e18237d8486d"
+    },
+    {
+      "path": "extra-before-artifacts/mail-rich-compose-source-r-5e51f--history-and-rich-Meri-Undo/trace.zip",
+      "bytes": 875618,
+      "sha256": "515eb1fcec6a9239e4fa2eca2e44e24137fc5adc5c105533f8e7af470438bbee"
+    },
+    {
+      "path": "extra-before-artifacts/mail-rich-compose-toolbar--72582-icker-with-no-extra-request/error-context.md",
+      "bytes": 9548,
+      "sha256": "5e945b589ad066068689d37c0a3dcce091087be1aa06054ec92c8f746d9ffd69"
+    },
+    {
+      "path": "extra-before-artifacts/mail-rich-compose-toolbar--72582-icker-with-no-extra-request/test-failed-1.png",
+      "bytes": 73050,
+      "sha256": "50fc87b01c0d4b1968176503b9601fe0db61a42ca60d1249321b5276f2031b5e"
+    },
+    {
+      "path": "extra-before-artifacts/mail-rich-compose-toolbar--72582-icker-with-no-extra-request/trace.zip",
+      "bytes": 531937,
+      "sha256": "db30a96eb9ce3d449f3e5558248159b63ed8988a41dbfba9060a55263dbb6198"
+    },
+    {
+      "path": "extra-before-results.json",
+      "bytes": 15035,
+      "sha256": "bb6325581b28c21eb7f10c57e6c2f6bd87814c3640f3ca92e6f20aa8488708c3"
+    },
+    {
+      "path": "extra-before.log",
+      "bytes": 7256,
+      "sha256": "79b87c56e716e208b69b909969345ae6fbe687431db250a57851c7efc160c0eb"
+    },
+    {
+      "path": "figma-435-82147-context.txt",
+      "bytes": 20005,
+      "sha256": "144ca256b67adc217eac4c098309582ada0bc4c1d6dd70bbefd4adae4fe4f4bc"
+    },
+    {
+      "path": "figma-435-82802-context.png",
+      "bytes": 117,
+      "sha256": "e6e88d37182b112dd0ac819d23c3ce3a293cd626204988b0031336b897abcbff"
+    },
+    {
+      "path": "figma-435-82802-context.txt",
+      "bytes": 18974,
+      "sha256": "e0ed01e8abd5648e29c6e8076e012375cb4155ee63bceec2bd12bf38d3bcffa2"
+    },
+    {
+      "path": "figma-435-82802-screenshot.png",
+      "bytes": 117,
+      "sha256": "e6e88d37182b112dd0ac819d23c3ce3a293cd626204988b0031336b897abcbff"
+    },
+    {
+      "path": "figma-435-82802-screenshot.txt",
+      "bytes": 590,
+      "sha256": "6bc7b5f99475a82d421ce5b265de82aeba6789899f5f992a725b897df16c7634"
+    },
+    {
+      "path": "figma-baseline-manifest.json",
+      "bytes": 2820,
+      "sha256": "2f9f74fe2688b462879026566a4c260ffcf8b4d3997d7a951730055d924f408f"
+    },
+    {
+      "path": "figma-editor-isolated.png",
+      "bytes": 117,
+      "sha256": "e6e88d37182b112dd0ac819d23c3ce3a293cd626204988b0031336b897abcbff"
+    },
+    {
+      "path": "figma-parent.png",
+      "bytes": 102134,
+      "sha256": "29a6e8bc17c63475a1ff07e0db5071ee8b204117ad144c6d2cf2e4a2f68ec8d6"
+    },
+    {
+      "path": "final-artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "final-artifacts/mail-local-draft-saved-sig-8bc69-ktop-and-mobile-dark-review/mail-local-desktop.png",
+      "bytes": 72853,
+      "sha256": "9bd84143970cfda7d1c268dad271363337ad789b3c30ba89e16e52b63bbd857f"
+    },
+    {
+      "path": "final-artifacts/mail-local-draft-saved-sig-8bc69-ktop-and-mobile-dark-review/mail-local-mobile-dark.png",
+      "bytes": 31513,
+      "sha256": "51e9ff98ef4b2ebca68406f76625b62a5e9a0e19555da51baf76f87338d3fb8d"
+    },
+    {
+      "path": "final-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable/mobile-rich.png",
+      "bytes": 33739,
+      "sha256": "3229bdff501593dbe68f9989479a4040c7282dc276352618de95de9dfdca3b3e"
+    },
+    {
+      "path": "final-artifacts/mail-rich-compose-toolbar--72582-icker-with-no-extra-request/desktop-rich.png",
+      "bytes": 73479,
+      "sha256": "54ae38d995d386f418c7eababe18d3a6f182fcc4723ae9edbfe1b5b0ec7c9283"
+    },
+    {
+      "path": "final-artifacts/thread-mail-Reply-reviews--b8d7a-refuses-send-upload-rewrite/reply-review-desktop.png",
+      "bytes": 99838,
+      "sha256": "6d4afc5ad45f52beb412e798c0a97a0a9d1179793e1ead759aaa3bda6f266eb8"
+    },
+    {
+      "path": "final-artifacts/thread-mail-actual-Overvie-38aaf-ource-and-reviews-Reply-all/actual-overview-thread-desktop.png",
+      "bytes": 140427,
+      "sha256": "5f21b40770322494cf84979cb9e3ed9560c45715ec391abbbaf52d329c7b1273"
+    },
+    {
+      "path": "final-artifacts/thread-mail-actual-Overvie-5bf01-e-dark-with-inline-collapse/actual-overview-thread-mobile-dark.png",
+      "bytes": 57451,
+      "sha256": "f0f9a0a8b45842423f72b08829a4cce04aa3a953d1a4fbac0f0639df723fb9df"
+    },
+    {
+      "path": "final-artifacts/thread-mail-expands-exact--15114-coming-newest-and-collapses/thread-expanded-desktop.png",
+      "bytes": 59424,
+      "sha256": "12ce1a0735e03dc543299afcb02d8d4b26075ce75c86d73f14c835f868b594c1"
+    },
+    {
+      "path": "final-artifacts/thread-mail-mobile-dark-expansion-wraps-without-overflow/thread-mobile-dark.png",
+      "bytes": 42775,
+      "sha256": "39ea91de9a294348cce17bf26492811477fa00563074a9804236bad445494a4f"
+    },
+    {
+      "path": "final-base-artifacts/.last-run.json",
+      "bytes": 194,
+      "sha256": "1a8b1fd765706441223c38b9e8b45d41519a8b6521b5a635b5702730af9081bc"
+    },
+    {
+      "path": "final-base-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable/error-context.md",
+      "bytes": 10994,
+      "sha256": "78139f81506d4136680a659b96fe50c304c21f4f0b3d8ed271cf80fa073dbdc4"
+    },
+    {
+      "path": "final-base-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable/test-failed-1.png",
+      "bytes": 44946,
+      "sha256": "8e96d438bde917b212fc21ec15e037b8a11ee630cc7c8c2b098628835e6feaf2"
+    },
+    {
+      "path": "final-base-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable/trace.zip",
+      "bytes": 676665,
+      "sha256": "002692ed52e8aceebab1924660cdd5d318697408eb7b8385f59ffc64926797b3"
+    },
+    {
+      "path": "final-base-artifacts/mail-rich-compose-rich-Bol-901d4-thout-signature-duplication/error-context.md",
+      "bytes": 11991,
+      "sha256": "180b25ba5fd1f993a37b4a9e89c0b475e9a92314a6f6983f5b23b9a3966c394e"
+    },
+    {
+      "path": "final-base-artifacts/mail-rich-compose-rich-Bol-901d4-thout-signature-duplication/test-failed-1.png",
+      "bytes": 73239,
+      "sha256": "f7aff4728a5ff7e84b2578d1e197dc362b1a9da685e36126cde7f6cfd21c9f0b"
+    },
+    {
+      "path": "final-base-artifacts/mail-rich-compose-rich-Bol-901d4-thout-signature-duplication/trace.zip",
+      "bytes": 529615,
+      "sha256": "c118abb1a8067b7ecf2a3ee0ed51ef0cf347884bad94c54f2bf9d1f405fb6625"
+    },
+    {
+      "path": "final-base-artifacts/mail-rich-compose-verified-98d78-he-complete-formatted-draft/error-context.md",
+      "bytes": 11991,
+      "sha256": "e5067a3457b3665e137e88d5071c8a8773df2f176f91cbfad9dba089756fc137"
+    },
+    {
+      "path": "final-base-artifacts/mail-rich-compose-verified-98d78-he-complete-formatted-draft/test-failed-1.png",
+      "bytes": 73239,
+      "sha256": "f7aff4728a5ff7e84b2578d1e197dc362b1a9da685e36126cde7f6cfd21c9f0b"
+    },
+    {
+      "path": "final-base-artifacts/mail-rich-compose-verified-98d78-he-complete-formatted-draft/trace.zip",
+      "bytes": 528011,
+      "sha256": "6cfdbbd9152ec5dfd8759960bf8da711dcf48058866c3f12671cf1d31322efe2"
+    },
+    {
+      "path": "final-base-results.json",
+      "bytes": 15653,
+      "sha256": "278142892b7ed2b29c51afcb9991a1883ddb0094a7360a5a716cd902790f3f79"
+    },
+    {
+      "path": "final-base-source.json",
+      "bytes": 1786,
+      "sha256": "419597260205c09670dac5dba13fa970c73bd3537fbb0f10b8f834935c6cf005"
+    },
+    {
+      "path": "final-base.config.mjs",
+      "bytes": 763,
+      "sha256": "129452cf26b3aa640e50101f470c7d14e0e055b18f07587979ad389038dd4167"
+    },
+    {
+      "path": "final-base.log",
+      "bytes": 9235,
+      "sha256": "831705bb0a296dbe3f9ee98cfa935742fbb9779c4085b33f928742bf23d3fee3"
+    },
+    {
+      "path": "final-results.json",
+      "bytes": 86378,
+      "sha256": "d215d98457a343b67067f28e0b5aa17a06b1d497c744361b778391808470c4d1"
+    },
+    {
+      "path": "final-source-and-results.json",
+      "bytes": 4955,
+      "sha256": "992788d61e73eee8a4da2042084240b3bf0a8b9abf82faad12faf8fa00ebd315"
+    },
+    {
+      "path": "final.log",
+      "bytes": 11273,
+      "sha256": "6ba7e04e990653c6bee79fb52ca87378de844bc721b3111752babdd4be17775c"
+    },
+    {
+      "path": "format-check.log",
+      "bytes": 66,
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "path": "format-correction.log",
+      "bytes": 142,
+      "sha256": "14f2636dedece51e8cbf526ff890434e650d2056b1e1ba17fa19786d05c2a22d"
+    },
+    {
+      "path": "format-final-tests.log",
+      "bytes": 55,
+      "sha256": "658182e3bc4b057181fb1c1177ae5ba62b43e9cbb89824fcec8a220461619430"
+    },
+    {
+      "path": "format-final.log",
+      "bytes": 216,
+      "sha256": "1c746874874d2d550465cda2098f999091a784abfd54755db3eb2577ecb42172"
+    },
+    {
+      "path": "format-history-check.log",
+      "bytes": 66,
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "path": "format-history-tests.log",
+      "bytes": 55,
+      "sha256": "186f194b158dc7076d84f63841ea530002f184cbf753021cef474a922550764b"
+    },
+    {
+      "path": "format-history.log",
+      "bytes": 77,
+      "sha256": "8e26a84ea73a2851ddec31032e73091f670d768ae65dd28af014fd2c1a448369"
+    },
+    {
+      "path": "format-tests.log",
+      "bytes": 208,
+      "sha256": "54abdb29102147429de48b7d710f2fa67092173c319d03d09d4774fca535cde9"
+    },
+    {
+      "path": "format.log",
+      "bytes": 724,
+      "sha256": "6c9a18dd2ba7ed824014f2b471d8a99a9e5a2f3db61187871f55ead1d9da2f48"
+    },
+    {
+      "path": "green-artifacts/.last-run.json",
+      "bytes": 96,
+      "sha256": "19422ccffeae65f7876a99948d467b0494da92b1dde983d220faec3d3bc6562c"
+    },
+    {
+      "path": "green-artifacts/mail-rich-compose-paste-ke-a75d8-e-markup-and-remote-content/error-context.md",
+      "bytes": 12664,
+      "sha256": "336358738d560fad578863b885ac646e294eb30d96967faad6c64bbca35ed31d"
+    },
+    {
+      "path": "green-artifacts/mail-rich-compose-paste-ke-a75d8-e-markup-and-remote-content/test-failed-1.png",
+      "bytes": 75232,
+      "sha256": "703a8c65dc839b7d903c92442166b43866e668b9f0e2433b31084c88adbab2e4"
+    },
+    {
+      "path": "green-artifacts/mail-rich-compose-paste-ke-a75d8-e-markup-and-remote-content/trace.zip",
+      "bytes": 733653,
+      "sha256": "526e9ed962930102f5bb37ed7bf9c9ea015bf1f6464315ea07ee5f58f27bbf5b"
+    },
+    {
+      "path": "green-results.json",
+      "bytes": 19674,
+      "sha256": "d34c0f04db65e7c30f5b4722db9882a788a672c093677a5a931f41623a801aa7"
+    },
+    {
+      "path": "green.log",
+      "bytes": 4988,
+      "sha256": "0d91878079c8354009a5261b3bc7e4fe32d989d15cb7e44f62158fd32128cb38"
+    },
+    {
+      "path": "history-green-artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "history-green-artifacts/mail-local-draft-saved-sig-8bc69-ktop-and-mobile-dark-review/mail-local-desktop.png",
+      "bytes": 72855,
+      "sha256": "b7aea56313b66eac188592782353a8514944aa4c1411c7861befb5f7fecda501"
+    },
+    {
+      "path": "history-green-artifacts/mail-local-draft-saved-sig-8bc69-ktop-and-mobile-dark-review/mail-local-mobile-dark.png",
+      "bytes": 34629,
+      "sha256": "da938b8487e43a3298aba696b009886888eac8a9d56a4fdbd4ebbddea3467523"
+    },
+    {
+      "path": "history-green-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable/mobile-rich.png",
+      "bytes": 33742,
+      "sha256": "137117b893c1d87f14f8401001e31f17a6616453c7971c924eef947c2ffe4e3a"
+    },
+    {
+      "path": "history-green-artifacts/mail-rich-compose-toolbar--72582-icker-with-no-extra-request/desktop-rich.png",
+      "bytes": 73482,
+      "sha256": "f122af9ba29c219e8afdf634c467553aedc1b26e3978070fb72fb8bf5a8dccbf"
+    },
+    {
+      "path": "history-green-results.json",
+      "bytes": 50344,
+      "sha256": "66515d1b183834d42269d268df08ea59307dc69ce0a6f067d594187227f277ec"
+    },
+    {
+      "path": "history-green.log",
+      "bytes": 6636,
+      "sha256": "91a2eab981701fea88be2809ce37f67d021c661f400095122fa5925787e9cbba"
+    },
+    {
+      "path": "history-red-artifacts/.last-run.json",
+      "bytes": 96,
+      "sha256": "e11d0ddef35ef6e14a865a5410eb4a91669e74cbd05575913f47383500ccf323"
+    },
+    {
+      "path": "history-red-artifacts/mail-rich-compose-identity-c8ed2-do-without-provider-effects/error-context.md",
+      "bytes": 8938,
+      "sha256": "0cc72a3c8fc4bea8e054774a82f6f7182df72b3c6e1b37e154c9bf1eb960b3d7"
+    },
+    {
+      "path": "history-red-artifacts/mail-rich-compose-identity-c8ed2-do-without-provider-effects/test-failed-1.png",
+      "bytes": 73419,
+      "sha256": "ad580de535bdb1c20cb205d969dbcaf26339f6e54cde2bc3c214ed3ad8be593f"
+    },
+    {
+      "path": "history-red-artifacts/mail-rich-compose-identity-c8ed2-do-without-provider-effects/trace.zip",
+      "bytes": 631106,
+      "sha256": "14e43c2e7f9f3546c35c2ef1041a22f0863f590ce6c0469ce0db42e6a9e762ab"
+    },
+    {
+      "path": "history-red-results.json",
+      "bytes": 8850,
+      "sha256": "aa356be6e9e4bdb300287b5a349c0af32f0a79acf58033f178731d324d3484c1"
+    },
+    {
+      "path": "history-red.log",
+      "bytes": 3351,
+      "sha256": "8a1d66818ea7637b877436e3c2d6895e8e5f01c2f93ab1853289ab30539a0299"
+    },
+    {
+      "path": "lint-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "lint-history-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "lint.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "mailFigDetail0.txt",
+      "bytes": 499,
+      "sha256": "980f87592a5fe356cf4303d3968c1845765bfdc71f64f5a5452ecf07614b89ff"
+    },
+    {
+      "path": "mailFigDetail1.txt",
+      "bytes": 5650,
+      "sha256": "01b753ad816e67e5b637dad5ff75ccf397b2fee6baae892b0bd24120f81cbbc7"
+    },
+    {
+      "path": "mailFigDetail2.txt",
+      "bytes": 492,
+      "sha256": "4f35953de95415db1b4bda381a2f39263adc1d48eb3b442fc9be59e78ebaf1e1"
+    },
+    {
+      "path": "mobile-rich.png",
+      "bytes": 33761,
+      "sha256": "346d042e66cf492ad73b7e3099e6a4069e0c4675b2065d02cc992de2daf5fd40"
+    },
+    {
+      "path": "native-source-contract.json",
+      "bytes": 537,
+      "sha256": "648af2d2a283af558383deb79c545826f3726c4d04f956f6236c9d552e84b238"
+    },
+    {
+      "path": "playwright.config.mjs",
+      "bytes": 769,
+      "sha256": "be32a49266ccd62cd0cf9b5565689f5fc70d888f73b60767fd2b3828248c9c4b"
+    },
+    {
+      "path": "port-closed.json",
+      "bytes": 51,
+      "sha256": "4750943ccbedc872d22f07e584775d8f4c1c54ec46fdf07c78857551331630da"
+    },
+    {
+      "path": "production-final-snapshot/apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+      "bytes": 14376,
+      "sha256": "3e9e68e1e2566376e383dc47ed167bb9af6fcf3a9f4ecef73cdb44a958def093"
+    },
+    {
+      "path": "production-final-snapshot/apps/web/src/features/portfolio/relationships/email/AttachmentFields.tsx",
+      "bytes": 2498,
+      "sha256": "800100747439b187a2b8f4c23635b945aee3fe7d0c423e201442978fccfb27c0"
+    },
+    {
+      "path": "production-final-snapshot/apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx",
+      "bytes": 4507,
+      "sha256": "57f0f73b009938109936b085438ec7774fbfc0b5b288db860de4a8bf3834a086"
+    },
+    {
+      "path": "production-final-snapshot/apps/web/src/features/portfolio/relationships/email/email.module.css",
+      "bytes": 1602,
+      "sha256": "eb20898dd2c2d4fa287059fddcce7a05f484649f901b1bf1a3a665e0a6ba93ae"
+    },
+    {
+      "path": "production-final-snapshot/apps/web/src/features/portfolio/relationships/email/mail-body-html.ts",
+      "bytes": 398,
+      "sha256": "0dda52ccf4331d07d4096d4bcdf112a69b70fbb294ae662bfcb5575755627336"
+    },
+    {
+      "path": "production-final-snapshot/apps/web/src/features/portfolio/relationships/email/mail-body.ts",
+      "bytes": 842,
+      "sha256": "28a5ff7a27a20052b5b6556c380fc05bcb2ab6435f59ca3ca2576237c6893f7b"
+    },
+    {
+      "path": "production-final-snapshot/apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts",
+      "bytes": 5535,
+      "sha256": "f240df12c35ce6b2867b02642e3cefe720a32205d6b82268fa77599727be6c85"
+    },
+    {
+      "path": "production-final-snapshot/apps/web/src/features/portfolio/relationships/email.ts",
+      "bytes": 4144,
+      "sha256": "f8db96b617a3481454c9d7a0ba6ea594c9146684aec8f7237aab1620dee6388a"
+    },
+    {
+      "path": "production-snapshot/apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+      "bytes": 14376,
+      "sha256": "3e9e68e1e2566376e383dc47ed167bb9af6fcf3a9f4ecef73cdb44a958def093"
+    },
+    {
+      "path": "production-snapshot/apps/web/src/features/portfolio/relationships/email/AttachmentFields.tsx",
+      "bytes": 2498,
+      "sha256": "800100747439b187a2b8f4c23635b945aee3fe7d0c423e201442978fccfb27c0"
+    },
+    {
+      "path": "production-snapshot/apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx",
+      "bytes": 4084,
+      "sha256": "3f1cadd8e9a04d6c6979dfb9b12c6b60c34600cfab2eec4f805e58f0db56199d"
+    },
+    {
+      "path": "production-snapshot/apps/web/src/features/portfolio/relationships/email/email.module.css",
+      "bytes": 1602,
+      "sha256": "eb20898dd2c2d4fa287059fddcce7a05f484649f901b1bf1a3a665e0a6ba93ae"
+    },
+    {
+      "path": "production-snapshot/apps/web/src/features/portfolio/relationships/email/mail-body-html.ts",
+      "bytes": 398,
+      "sha256": "0dda52ccf4331d07d4096d4bcdf112a69b70fbb294ae662bfcb5575755627336"
+    },
+    {
+      "path": "production-snapshot/apps/web/src/features/portfolio/relationships/email/mail-body.ts",
+      "bytes": 842,
+      "sha256": "28a5ff7a27a20052b5b6556c380fc05bcb2ab6435f59ca3ca2576237c6893f7b"
+    },
+    {
+      "path": "production-snapshot/apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts",
+      "bytes": 5535,
+      "sha256": "f240df12c35ce6b2867b02642e3cefe720a32205d6b82268fa77599727be6c85"
+    },
+    {
+      "path": "production-snapshot/apps/web/src/features/portfolio/relationships/email.ts",
+      "bytes": 4144,
+      "sha256": "f8db96b617a3481454c9d7a0ba6ea594c9146684aec8f7237aab1620dee6388a"
+    },
+    {
+      "path": "red-artifacts/.last-run.json",
+      "bytes": 194,
+      "sha256": "1a8b1fd765706441223c38b9e8b45d41519a8b6521b5a635b5702730af9081bc"
+    },
+    {
+      "path": "red-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable/error-context.md",
+      "bytes": 10735,
+      "sha256": "1804044bf39572d119fab062d688231ce2ccb93da226355138138fc0904a971f"
+    },
+    {
+      "path": "red-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable/test-failed-1.png",
+      "bytes": 44960,
+      "sha256": "8294b92df33049d124cc11fad2029dc817fce248ad2d018b5f29b171ec283084"
+    },
+    {
+      "path": "red-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable/trace.zip",
+      "bytes": 694227,
+      "sha256": "8410717accb21bb6fd60a855c9a7cd8dc47ccad0756f61f09d443e8536a89033"
+    },
+    {
+      "path": "red-artifacts/mail-rich-compose-rich-Bol-901d4-thout-signature-duplication/error-context.md",
+      "bytes": 13544,
+      "sha256": "daf62bfacce8f628175ab5cb3b5a4995da4292b14284d64ee17a0878989f050d"
+    },
+    {
+      "path": "red-artifacts/mail-rich-compose-rich-Bol-901d4-thout-signature-duplication/test-failed-1.png",
+      "bytes": 73239,
+      "sha256": "f7aff4728a5ff7e84b2578d1e197dc362b1a9da685e36126cde7f6cfd21c9f0b"
+    },
+    {
+      "path": "red-artifacts/mail-rich-compose-rich-Bol-901d4-thout-signature-duplication/trace.zip",
+      "bytes": 549313,
+      "sha256": "a7e954797e1b8922b6a670dd8ebe7afd3ab0667f8f4d981159d25aac1e4a95af"
+    },
+    {
+      "path": "red-artifacts/mail-rich-compose-verified-98d78-he-complete-formatted-draft/error-context.md",
+      "bytes": 13544,
+      "sha256": "276ed267faba52466b57e404043e06f7824c8dcc8e6bcf8c34d8477c52c9f29a"
+    },
+    {
+      "path": "red-artifacts/mail-rich-compose-verified-98d78-he-complete-formatted-draft/test-failed-1.png",
+      "bytes": 73239,
+      "sha256": "f7aff4728a5ff7e84b2578d1e197dc362b1a9da685e36126cde7f6cfd21c9f0b"
+    },
+    {
+      "path": "red-artifacts/mail-rich-compose-verified-98d78-he-complete-formatted-draft/trace.zip",
+      "bytes": 549345,
+      "sha256": "b9d2ecf4170de16617fa35f30d5af5255b13819d021f04c5f1d6039469bb5c79"
+    },
+    {
+      "path": "red-results.json",
+      "bytes": 14415,
+      "sha256": "dc26f26ba24535692f89e5612fbfb31c280131590cd60013de123573f6ff9c45"
+    },
+    {
+      "path": "red.log",
+      "bytes": 9106,
+      "sha256": "cc147f9e1241b9da3593021b7103ce7098517f06a5d55b95ce71870a533b3f8a"
+    },
+    {
+      "path": "replay-final-base.py",
+      "bytes": 2241,
+      "sha256": "482e34887276e43690e60c0a1ceb5966e87ce9749dbc5fe04dc641260f2808ab"
+    },
+    {
+      "path": "report.md",
+      "bytes": 7077,
+      "sha256": "f6dd257824b6a67db3ccfe8b67158dcd6286d7c53ade80515930c612d2f5a763"
+    },
+    {
+      "path": "row-assessment.json",
+      "bytes": 852,
+      "sha256": "091f2015a9e5eb0616fa3cd3059b6daaa01492f78237c4455ad43568494d5a45"
+    },
+    {
+      "path": "server-stop.json",
+      "bytes": 133,
+      "sha256": "ab311c33ee7939c239a8af883a85a6f812f8003dd1144e5104d35e6540973709"
+    },
+    {
+      "path": "server.mjs",
+      "bytes": 2067,
+      "sha256": "a77dc48076728b38c00cf75e1b69fb113e01f70e6b2ceae2dd43ae7b59ac949d"
+    },
+    {
+      "path": "structure-review-before-history.json",
+      "bytes": 4064,
+      "sha256": "348c7cd69b3ed0ab492b239dad6a051d3308f786932f4bfd3e1ffa43d4fece2f"
+    },
+    {
+      "path": "structure-review-proposal.json",
+      "bytes": 4281,
+      "sha256": "5358792ddd08b3d2381b1d4d77abcc160d37f13f0ef319077bcdfbc819ac84f9"
+    },
+    {
+      "path": "typecheck-bounded.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "typecheck-corrected.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "typecheck-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "typecheck.log",
+      "bytes": 1984,
+      "sha256": "24562e4a39a6dc911c4bbeebd32d8bda4cc9dccd45fa8c625a44864929ecc385"
+    },
+    {
+      "path": "unit-green.log",
+      "bytes": 228,
+      "sha256": "1d60e49bf6a65454d8895e26609fe6cd9aeefe6b808eb807bfbd97e2c840fda8"
+    },
+    {
+      "path": "unit-red-corrected.log",
+      "bytes": 871,
+      "sha256": "efb50d935bbceb25691409fe73dce6b1a98586a93aade3e542bd3f12632997a3"
+    },
+    {
+      "path": "unit-red.log",
+      "bytes": 202,
+      "sha256": "64fb057d03af39107e31a2fbeafe9a9ab866ebf067ecd1fe99a0837b184f9186"
+    }
+  ]
+}

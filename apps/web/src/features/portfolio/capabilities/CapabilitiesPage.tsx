@@ -55,10 +55,13 @@ export function CapabilitiesPage({
         retry={() => void query.refetch()}
       />
       {records && (
-        <section className="card stack">
-          <header className="row between">
-            <p className="eyebrow">Capability areas</p>
-            <small>
+        <section className={`card stack ${styles.areas}`}>
+          <header className={`row between ${styles.areasHeader}`}>
+            <p className="eyebrow">
+              Capability areas
+              <span className={styles.mobileCount}> · {records.length}</span>
+            </p>
+            <small className={styles.desktopCount}>
               {records.length} areas ·{" "}
               {records.filter((cap) => maturity(cap.trl) === "Fielded").length}{" "}
               fielded
@@ -73,11 +76,22 @@ export function CapabilitiesPage({
                 onClick={() => open(cap.id)}
               >
                 <span className="monogram">▦</span>
-                <strong>{cap.name}</strong>
+                <strong className={styles.name}>{cap.name}</strong>
                 <p className="muted">{cap.description}</p>
-                <div className="row">
-                  <span className="chip">{maturity(cap.trl)}</span>
-                  <small>
+                <div className={`row ${styles.metadata}`}>
+                  <span
+                    className={`chip ${styles.maturity}`}
+                    data-maturity={maturity(cap.trl)}
+                  >
+                    {maturity(cap.trl)}
+                  </span>
+                  <small
+                    className={styles.program}
+                    data-mapped={Boolean(cap.peNumbers.length || cap.peNumber)}
+                  >
+                    {(cap.peNumbers.length > 0 || cap.peNumber) && (
+                      <span className={styles.mobileCount}>PE </span>
+                    )}
                     {cap.peNumbers.join(", ") ||
                       cap.peNumber ||
                       "No program line mapped"}

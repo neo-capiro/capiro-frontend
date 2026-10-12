@@ -9,8 +9,10 @@ test("client header supports keyboard navigation and scoped quick-add deep links
     page.getByRole("button", { name: "Switch client view: Work", exact: true }),
   ).toBeVisible();
   await page.keyboard.press("Control+j");
-  await expect(page.getByRole("menu")).toBeVisible();
-  await page.getByRole("menuitem", { name: "Objectives", exact: true }).click();
+  await expect(
+    page.getByRole("listbox", { name: "Client views" }),
+  ).toBeVisible();
+  await page.getByRole("option", { name: "Objectives", exact: true }).click();
   await expect(page).toHaveURL(new RegExp(`${clientId}/objectives$`));
   await page.getByRole("button", { name: "Quick add", exact: true }).click();
   await page

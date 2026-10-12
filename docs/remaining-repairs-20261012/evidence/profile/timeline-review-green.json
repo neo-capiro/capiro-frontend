@@ -1,0 +1,241 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-remaining-profile/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "/tmp/capiro-remaining-profile-evidence/playwright.config.ts"
+    ],
+    "configFile": "/tmp/capiro-remaining-profile-evidence/playwright.config.ts",
+    "rootDir": "/tmp/capiro-remaining-profile-evidence",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-remaining-profile-evidence/timeline-review-green",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-remaining-profile-evidence",
+        "testIgnore": [],
+        "testMatch": [
+          "timeline-review.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-remaining-profile-evidence/timeline-review-green.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "timeline-review.spec.ts",
+      "file": "timeline-review.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "uncertain activity stays fenced through expand and return",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7282,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:07:54.110Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/timeline-review-green/timeline-review-uncertain--0362b-d-through-expand-and-return/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5d0088ddfad7c0363f6b-bc1fa945f9417f7bfcd0",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+          "line": 26,
+          "column": 7
+        },
+        {
+          "title": "uncertain activity stays fenced through native pinned regrouping",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "interrupted",
+                  "duration": 1868,
+                  "error": {
+                    "message": "Error: page.goto: Test ended.\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5299/portfolio/10000000-0000-4000-8000-000000000001\", waiting until \"load\"\u001b[22m\n",
+                    "stack": "Error: page.goto: Test ended.\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5299/portfolio/10000000-0000-4000-8000-000000000001\", waiting until \"load\"\u001b[22m\n\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:39:16",
+                    "location": {
+                      "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+                      "column": 16,
+                      "line": 39
+                    },
+                    "snippet": "  37 |       return json(route, { message: \"Synthetic uncertain timeline pin\" }, 503);\n  38 |     });\n> 39 |     await page.goto(`/portfolio/${clientId}`);\n     |                ^\n  40 |     const timeline = page.getByRole(\"region\", {\n  41 |       name: \"Activity timeline\",\n  42 |       exact: true,"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+                        "column": 16,
+                        "line": 39
+                      },
+                      "message": "Error: page.goto: Test ended.\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5299/portfolio/10000000-0000-4000-8000-000000000001\", waiting until \"load\"\u001b[22m\n\n\n  37 |       return json(route, { message: \"Synthetic uncertain timeline pin\" }, 503);\n  38 |     });\n> 39 |     await page.goto(`/portfolio/${clientId}`);\n     |                ^\n  40 |     const timeline = page.getByRole(\"region\", {\n  41 |       name: \"Activity timeline\",\n  42 |       exact: true,\n    at /workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:39:16"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:08:01.844Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-profile-evidence/timeline-review-green/timeline-review-uncertain--2c97e-gh-native-pinned-regrouping/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-profile-evidence/timeline-review-green/timeline-review-uncertain--2c97e-gh-native-pinned-regrouping/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-profile-evidence/timeline-review-green/timeline-review-uncertain--2c97e-gh-native-pinned-regrouping/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+                    "column": 16,
+                    "line": 39
+                  }
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "5d0088ddfad7c0363f6b-896a074496da4538d0b8",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+          "line": 26,
+          "column": 7
+        },
+        {
+          "title": "pending activity stays fenced while its response is held across expand and return",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5d0088ddfad7c0363f6b-ed0ca75bdfc8baaf74f3",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+          "line": 87,
+          "column": 5
+        },
+        {
+          "title": "expanded Log activity reuses the existing Quick log uncertain creation owner",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5d0088ddfad7c0363f6b-46f08dea96ed1c1d84c2",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+          "line": 138,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T20:07:53.673Z",
+    "duration": 10221.582999999999,
+    "expected": 1,
+    "skipped": 3,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
