@@ -1,19 +1,23 @@
 "use client";
+import type { Ref } from "react";
 import type { useMailAttachments } from "./useMailAttachments";
 import { mailFileValidation, attachmentRefusal } from "./attachments";
 import styles from "./email.module.css";
 export function AttachmentFields({
   state,
   disabled,
+  inputRef,
 }: {
   state: ReturnType<typeof useMailAttachments>;
   disabled: boolean;
+  inputRef?: Ref<HTMLInputElement>;
 }) {
   return (
     <section className="stack" aria-label="Email attachments">
       <label>
         Attach file
         <input
+          ref={inputRef}
           type="file"
           disabled={disabled || state.busy || state.jobs.length >= 5}
           onChange={(event) => {

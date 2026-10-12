@@ -1,3 +1,4 @@
+import { expectMailMessage } from "./mail-message-assertions";
 import { test, expect, type Page } from "@playwright/test";
 import { sendingMailbox, sendingReceipt } from "./fixtures";
 
@@ -109,9 +110,7 @@ async function rewrite(page: Page) {
   await page
     .getByRole("button", { name: "Rewrite with Meri", exact: true })
     .click();
-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-    "Verified rewritten draft.",
-  );
+  await expectMailMessage(page, "Verified rewritten draft.");
   await expect(
     page.getByRole("button", { name: "Undo Meri rewrite", exact: true }),
   ).toBeEnabled();
@@ -230,9 +229,7 @@ test("local Undo restores exactly the body preceding the latest verified rewrite
   await page
     .getByRole("button", { name: "Undo Meri rewrite", exact: true })
     .click();
-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-    original,
-  );
+  await expectMailMessage(page, original);
   await expect(
     page.getByRole("button", { name: "Undo Meri rewrite", exact: true }),
   ).toHaveCount(0);
@@ -254,9 +251,7 @@ test("manual edits retire Undo and the next rewrite snapshots the new local draf
   await page
     .getByRole("button", { name: "Undo Meri rewrite", exact: true })
     .click();
-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-    "Newer manual work.",
-  );
+  await expectMailMessage(page, "Newer manual work.");
   expect(state.rewrites).toHaveLength(2);
   expect(state.sends).toEqual([]);
 });
@@ -277,15 +272,11 @@ test("repeated rewrites retain one latest snapshot and Undo is unavailable while
     page.getByRole("button", { name: "Undo Meri rewrite", exact: true }),
   ).toBeDisabled();
   state.release();
-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-    "Second verified revision.",
-  );
+  await expectMailMessage(page, "Second verified revision.");
   await page
     .getByRole("button", { name: "Undo Meri rewrite", exact: true })
     .click();
-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-    "Verified rewritten draft.",
-  );
+  await expectMailMessage(page, "Verified rewritten draft.");
   await expect(
     page.getByRole("button", { name: "Undo Meri rewrite", exact: true }),
   ).toHaveCount(0);
@@ -317,9 +308,7 @@ for (const failed of [false, true])
     await page
       .getByRole("button", { name: "Undo Meri rewrite", exact: true })
       .click();
-    await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-      original,
-    );
+    await expectMailMessage(page, original);
     expect(state.sends).toEqual([]);
   });
 
@@ -419,9 +408,7 @@ test("saved signature and Undo remain usable in desktop and mobile dark review",
   await page
     .getByRole("button", { name: "Undo Meri rewrite", exact: true })
     .click();
-  await expect(page.getByLabel("Message", { exact: true })).toHaveValue(
-    original,
-  );
+  await expectMailMessage(page, original);
 });
 
 for (const response of [403, 503, "loading"] as const)
