@@ -1,0 +1,5 @@
+# Planner ownership
+
+Planner owns task/project presentation, private view state, management resources, staffing, reporting and time workflows. `PlannerScreen` is the thin public entry. Task workspace, task drawer, resource management, capacity and time surfaces own their respective interactions. Shared semantic controls come from `shared/module-ui`; the reviewed fixed operations and external response schemas are canonical in `shared/capiro/operations/planner*`. Backend guards own all authority and optimistic versions. Failed writes retain drafts and surface the actual error; reads are abortable and cursors are not treated as complete datasets.
+
+Visual references are the high fidelity Figma frame responses for the Planner desktop family (`411:95475` through `411:112012`), preserved in `analysis/figma/planner-engagement`. No legacy UI is imported. Exact static assets are shared shell assets; task views are native text and layout. Live authentication/API qualification remains separate from local boundary tests.
