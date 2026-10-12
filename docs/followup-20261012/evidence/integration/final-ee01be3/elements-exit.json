@@ -1,0 +1,25 @@
+{
+  "name": "elements",
+  "command": [
+    "npm",
+    "run",
+    "check:elements"
+  ],
+  "startedUTC": "2026-10-12T18:22:47.118210+00:00",
+  "endedUTC": "2026-10-12T18:22:51.750239+00:00",
+  "durationSeconds": 4.632067520004057,
+  "exitCode": 1,
+  "sourceBefore": {
+    "head": "ee01be3b2c5c64a53744994ae4ad0d992a111054",
+    "tree": "bce79ae8c0f526e113468b885fc2c7a5515ac7b9",
+    "applicationTree": "17385e9404d12baa01e695c72584a375f4842813",
+    "sourceDiff": ""
+  },
+  "sourceAfter": {
+    "head": "ee01be3b2c5c64a53744994ae4ad0d992a111054",
+    "tree": "bce79ae8c0f526e113468b885fc2c7a5515ac7b9",
+    "applicationTree": "17385e9404d12baa01e695c72584a375f4842813",
+    "sourceDiff": ""
+  },
+  "sourceChanged": false
+}

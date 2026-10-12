@@ -1,0 +1,33 @@
+{
+  "argv": [
+    "/tmp/capiro-elements-tool/linux-x64/esbuild",
+    "--bundle",
+    "--platform=node",
+    "--target=node24",
+    "--format=cjs",
+    "--jsx=automatic",
+    "--tree-shaking=true",
+    "--define:process.env.NODE_ENV=\"production\"",
+    "--sourcefile=ssr-entry.mjs",
+    "--legal-comments=external",
+    "--log-level=warning",
+    "--outfile=/tmp/capiro-followup-elements-ee01be3/discovery/fixture.cjs",
+    "--metafile=/tmp/capiro-followup-elements-ee01be3/discovery/metafile.json"
+  ],
+  "cwd": "/workspace/capiro-followup/packages/qualification-elements",
+  "environmentKeys": [
+    "NODE_ENV",
+    "PATH",
+    "SystemRoot",
+    "TZ"
+  ],
+  "startUtc": "2026-10-12T18:24:31.214Z",
+  "endUtc": "2026-10-12T18:24:32.185Z",
+  "durationMs": 970.016365,
+  "timeoutMs": 120000,
+  "status": 0,
+  "signal": null,
+  "error": null,
+  "shell": false,
+  "inputSha256": "b3e3442c7cdce293b0aafc81399282c0e5848dafbc42f68d8e09cbd477f6636d"
+}

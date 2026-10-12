@@ -1,0 +1,1 @@
+Exact-source combined local qualification completed on ee01be3b2c5c64a53744994ae4ad0d992a111054. See final-ee01be3 command/exit receipts and raw logs. The initial missing-receipt Elements failure is preserved alongside the passing prepared run. Native/deployment gates are unrun; frozen d5dd0be remains separate and unchanged.

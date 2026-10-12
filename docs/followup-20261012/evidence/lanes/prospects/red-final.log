@@ -1,0 +1,129 @@
+
+Running 3 tests using 1 worker
+
+(node:630089) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 apps/web/tests/browser/prospect-files-local-search.spec.ts:102:1 › loaded file search filters case-insensitively, trims and clears without requests or changing readiness (8.6s)
+(node:630228) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 apps/web/tests/browser/prospect-files-local-search.spec.ts:147:3 › search distinguishes no matching files (7.2s)
+(node:630375) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 apps/web/tests/browser/prospect-files-local-search.spec.ts:147:3 › search distinguishes a true empty list (7.2s)
+
+
+  1) apps/web/tests/browser/prospect-files-local-search.spec.ts:102:1 › loaded file search filters case-insensitively, trims and clears without requests or changing readiness 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })
+
+
+      108 |   await expect(area.getByText(ready.fileName, { exact: true })).toBeVisible();
+      109 |   const search = area.getByRole("searchbox", { name: "Search files" });
+    > 110 |   await expect(search).toBeVisible();
+          |                        ^
+      111 |   const reads = state.reads.length;
+      112 |   await search.fill("  aGeNcY  ");
+      113 |   await expect(area.locator("li strong")).toHaveText([ready.fileName]);
+        at /workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts:110:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-prospect-files-evidence/red-final-artifacts/prospect-files-local-searc-5b80d-uests-or-changing-readiness/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-prospect-files-evidence/red-final-artifacts/prospect-files-local-searc-5b80d-uests-or-changing-readiness/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-prospect-files-evidence/red-final-artifacts/prospect-files-local-searc-5b80d-uests-or-changing-readiness/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-prospect-files-evidence/red-final-artifacts/prospect-files-local-searc-5b80d-uests-or-changing-readiness/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) apps/web/tests/browser/prospect-files-local-search.spec.ts:147:3 › search distinguishes no matching files 
+
+    Error: expect(locator).toBeEnabled() failed
+
+    Locator: getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })
+    Expected: enabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeEnabled" with timeout 5000ms
+      - waiting for getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })
+
+
+      152 |     const area = files(page);
+      153 |     const search = area.getByRole("searchbox", { name: "Search files" });
+    > 154 |     await expect(search).toBeEnabled();
+          |                          ^
+      155 |     await search.fill("unmatched filename");
+      156 |     await expect(
+      157 |       area.getByText(
+        at /workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts:154:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-prospect-files-evidence/red-final-artifacts/prospect-files-local-searc-ac584-inguishes-no-matching-files/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-prospect-files-evidence/red-final-artifacts/prospect-files-local-searc-ac584-inguishes-no-matching-files/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-prospect-files-evidence/red-final-artifacts/prospect-files-local-searc-ac584-inguishes-no-matching-files/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-prospect-files-evidence/red-final-artifacts/prospect-files-local-searc-ac584-inguishes-no-matching-files/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) apps/web/tests/browser/prospect-files-local-search.spec.ts:147:3 › search distinguishes a true empty list 
+
+    Error: expect(locator).toBeEnabled() failed
+
+    Locator: getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })
+    Expected: enabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeEnabled" with timeout 5000ms
+      - waiting for getByRole('region', { name: 'Prospect files', exact: true }).getByRole('searchbox', { name: 'Search files' })
+
+
+      152 |     const area = files(page);
+      153 |     const search = area.getByRole("searchbox", { name: "Search files" });
+    > 154 |     await expect(search).toBeEnabled();
+          |                          ^
+      155 |     await search.fill("unmatched filename");
+      156 |     await expect(
+      157 |       area.getByText(
+        at /workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts:154:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-prospect-files-evidence/red-final-artifacts/prospect-files-local-searc-7ba98-inguishes-a-true-empty-list/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-prospect-files-evidence/red-final-artifacts/prospect-files-local-searc-7ba98-inguishes-a-true-empty-list/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-prospect-files-evidence/red-final-artifacts/prospect-files-local-searc-7ba98-inguishes-a-true-empty-list/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-prospect-files-evidence/red-final-artifacts/prospect-files-local-searc-7ba98-inguishes-a-true-empty-list/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    apps/web/tests/browser/prospect-files-local-search.spec.ts:102:1 › loaded file search filters case-insensitively, trims and clears without requests or changing readiness 
+    apps/web/tests/browser/prospect-files-local-search.spec.ts:147:3 › search distinguishes no matching files 
+    apps/web/tests/browser/prospect-files-local-search.spec.ts:147:3 › search distinguishes a true empty list 

@@ -1,0 +1,176 @@
+
+Running 4 tests using 1 worker
+
+(node:617830) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 apps/web/test/browser/next-modules-baseline.spec.ts:4:1 › MS02 verified Calendar entry dispatches only the selected client scope (5.1s)
+(node:618013) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 apps/web/test/browser/next-modules-baseline.spec.ts:15:1 › MS03 agenda preserves both Planner start and due occurrences (5.3s)
+(node:618195) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 apps/web/test/browser/next-modules-baseline.spec.ts:25:1 › MS04 meeting failure leaves successful agenda feeds visible (5.2s)
+(node:618421) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  4 apps/web/test/browser/next-modules-baseline.spec.ts:35:1 › MS05 linked task resolves beyond the current list and opens its detail (5.1s)
+
+
+  1) apps/web/test/browser/next-modules-baseline.spec.ts:4:1 › MS02 verified Calendar entry dispatches only the selected client scope 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator:  getByLabel('Calendar client scope')
+    Expected: "30000000-0000-4000-8000-000000000001"
+    Received: ""
+    Timeout:  4000ms
+
+    Call log:
+      - Expect "toHaveValue" with timeout 4000ms
+      - waiting for getByLabel('Calendar client scope')
+        - locator resolved to <select disabled aria-label="Calendar client scope">…</select>
+        11 × unexpected value ""
+           - locator resolved to <select aria-label="Calendar client scope">…</select>
+        - unexpected value ""
+
+
+       6 |  await setup(page,{"engagement.meetings":input=>{reads.push(input);return [];}});
+       7 |  await page.goto(`/modules/calendar?clientId=${clientId}`);
+    >  8 |  await expect(page.getByLabel("Calendar client scope")).toHaveValue(clientId);
+         |                                                         ^
+       9 |  await expect.poll(()=>reads.length).toBeGreaterThan(0);
+      10 |  expect(reads.every(input=>(input as {query:{clientId?:string}}).query.clientId===clientId)).toBe(true);
+      11 |  await page.getByRole("button",{name:"Agenda",exact:true}).click();
+        at /workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts:8:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS02-4ffa3-y-the-selected-client-scope/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS02-4ffa3-y-the-selected-client-scope/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS02-4ffa3-y-the-selected-client-scope/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS02-4ffa3-y-the-selected-client-scope/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) apps/web/test/browser/next-modules-baseline.spec.ts:15:1 › MS03 agenda preserves both Planner start and due occurrences 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('row').filter({ hasText: 'Test appropriation review' })
+    Expected: 2
+    Received: 1
+    Timeout:  4000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 4000ms
+      - waiting for getByRole('row').filter({ hasText: 'Test appropriation review' })
+        12 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      18 |  await page.getByRole("button",{name:"Agenda",exact:true}).click();
+      19 |  const rows=page.getByRole("row").filter({hasText:nextTask.name});
+    > 20 |  await expect(rows).toHaveCount(2);
+         |                     ^
+      21 |  await expect(rows.filter({hasText:"Start date"})).toContainText("09:00");
+      22 |  await expect(rows.filter({hasText:"Due date"})).toContainText("17:00");
+      23 | });
+        at /workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts:20:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS03-81d4a-r-start-and-due-occurrences/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS03-81d4a-r-start-and-due-occurrences/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS03-81d4a-r-start-and-due-occurrences/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS03-81d4a-r-start-and-due-occurrences/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) apps/web/test/browser/next-modules-baseline.spec.ts:25:1 › MS04 meeting failure leaves successful agenda feeds visible 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('table')
+    Expected substring: "Test appropriation review"
+    Timeout: 4000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 4000ms
+      - waiting for getByRole('table')
+
+
+      29 |  await page.getByRole("button",{name:"Agenda",exact:true}).click();
+      30 |  await expect(page.getByRole("alert")).toContainText("Meetings currently denied");
+    > 31 |  await expect(page.getByRole("table")).toContainText(nextTask.name);
+         |                                        ^
+      32 |  await expect(page.getByRole("heading",{name:"No events match this view"})).toHaveCount(0);
+      33 | });
+      34 |
+        at /workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts:31:40
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS04-fadde-essful-agenda-feeds-visible/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS04-fadde-essful-agenda-feeds-visible/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS04-fadde-essful-agenda-feeds-visible/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS04-fadde-essful-agenda-feeds-visible/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) apps/web/test/browser/next-modules-baseline.spec.ts:35:1 › MS05 linked task resolves beyond the current list and opens its detail 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('dialog', { name: 'Test appropriation review', exact: true })
+    Expected: visible
+    Timeout: 4000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 4000ms
+      - waiting for getByRole('dialog', { name: 'Test appropriation review', exact: true })
+
+
+      37 |  await setup(page,{"planner.tasks":{items:[],nextCursor:null},"planner.task":input=>{reads.push(input);return nextTask;}});
+      38 |  await page.goto(`/modules/planner?task=${taskId}`);
+    > 39 |  await expect(page.getByRole("dialog",{name:nextTask.name,exact:true})).toBeVisible();
+         |                                                                         ^
+      40 |  expect(reads).toEqual([{params:{id:taskId}}]);
+      41 |  await expect(page.getByRole("button",{name:"Edit task",exact:true})).toBeEnabled();
+      42 | });
+        at /workspace/capiro-next-modules/apps/web/test/browser/next-modules-baseline.spec.ts:39:73
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS05-8b311-t-list-and-opens-its-detail/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS05-8b311-t-list-and-opens-its-detail/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS05-8b311-t-list-and-opens-its-detail/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-modules-evidence/red/output/next-modules-baseline-MS05-8b311-t-list-and-opens-its-detail/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    apps/web/test/browser/next-modules-baseline.spec.ts:4:1 › MS02 verified Calendar entry dispatches only the selected client scope 
+    apps/web/test/browser/next-modules-baseline.spec.ts:15:1 › MS03 agenda preserves both Planner start and due occurrences 
+    apps/web/test/browser/next-modules-baseline.spec.ts:25:1 › MS04 meeting failure leaves successful agenda feeds visible 
+    apps/web/test/browser/next-modules-baseline.spec.ts:35:1 › MS05 linked task resolves beyond the current list and opens its detail 

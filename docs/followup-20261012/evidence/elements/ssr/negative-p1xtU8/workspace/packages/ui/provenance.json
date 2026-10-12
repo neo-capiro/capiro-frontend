@@ -1,0 +1,418 @@
+{
+  "schema": "capiro-ui-source-promotion/1",
+  "sourceRepository": "neo-capiro/meri-greenfield",
+  "sourceCommit": "089533104eb567899e79cddf7b400460395e6de0",
+  "sourcePrefix": "apps/ui/elements-qualification/",
+  "baselinePinsSha256": "d7f41d9ae3573698418debb27ea1eef7ffc4e0cf2445bb2c9aa0953acd02b9d1",
+  "sources": [
+    {
+      "localPath": "vendor/ai-elements/conversation.tsx",
+      "localBytes": 4441,
+      "localSha256": "d7ac46f1e7bc8e46bc49f67c768fc93aebdf17d816397cb35a40deff7173e875",
+      "upstreamPath": "packages/elements/src/conversation.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/elements/src/conversation.tsx",
+      "upstreamBlobSha1": "389b8d12b0d8333acf4055c0f4128311f21a0940",
+      "upstreamBytes": 4441,
+      "upstreamSha256": "d7ac46f1e7bc8e46bc49f67c768fc93aebdf17d816397cb35a40deff7173e875",
+      "adaptation": null,
+      "promotedPath": "src/ai-elements/conversation.tsx",
+      "promotedSha256": "7ef993ea4a950d2448d9adbdc28a06863e7dbbb0d09b74547678c170443fe997",
+      "promotedBytes": 4408,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/components/ui/button",
+          "to": "../shadcn/button"
+        },
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "vendor/ai-elements/message.tsx",
+      "localBytes": 8610,
+      "localSha256": "19c7755740e116f221e4247f7b6d4f20b57a44e4c4fcf66d2db5e1f111476509",
+      "upstreamPath": "packages/elements/src/message.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/elements/src/message.tsx",
+      "upstreamBlobSha1": "c04a39935d0ce55b78fef14bbb03be7231d9092f",
+      "upstreamBytes": 8610,
+      "upstreamSha256": "19c7755740e116f221e4247f7b6d4f20b57a44e4c4fcf66d2db5e1f111476509",
+      "adaptation": null,
+      "promotedPath": "src/ai-elements/message.tsx",
+      "promotedSha256": "49d93e770848ce4f4222b2ef9667cc3d4d0b7957bd5e3c5f5122671a22f62767",
+      "promotedBytes": 8537,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/components/ui/button",
+          "to": "../shadcn/button"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/button-group",
+          "to": "../shadcn/button-group"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/tooltip",
+          "to": "../shadcn/tooltip"
+        },
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "vendor/ai-elements/prompt-input.tsx",
+      "localBytes": 39046,
+      "localSha256": "cf43baf5baa444b4ae06d250643b3fb2efd329c85f9b31a43e3aaf481dd27305",
+      "upstreamPath": "packages/elements/src/prompt-input.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/elements/src/prompt-input.tsx",
+      "upstreamBlobSha1": "412c846d35502d18970b1eb729a52c09de76a622",
+      "upstreamBytes": 39046,
+      "upstreamSha256": "cf43baf5baa444b4ae06d250643b3fb2efd329c85f9b31a43e3aaf481dd27305",
+      "adaptation": null,
+      "promotedPath": "src/ai-elements/prompt-input.tsx",
+      "promotedSha256": "2745f684e0e8676528b667d76d5340e68e871fb274bb9fb306dfcc9fdc8a087d",
+      "promotedBytes": 38893,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/components/ui/command",
+          "to": "../shadcn/command"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/dropdown-menu",
+          "to": "../shadcn/dropdown-menu"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/hover-card",
+          "to": "../shadcn/hover-card"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/input-group",
+          "to": "../shadcn/input-group"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/select",
+          "to": "../shadcn/select"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/spinner",
+          "to": "../shadcn/spinner"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/tooltip",
+          "to": "../shadcn/tooltip"
+        },
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "vendor/shadcn-ui/components/ui/button-group.tsx",
+      "localBytes": 2256,
+      "localSha256": "1b0147f3d6ee8770524363f9bc9a57db83de8d2a0733c6e635e51034219e4c1e",
+      "upstreamPath": "packages/shadcn-ui/components/ui/button-group.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/shadcn-ui/components/ui/button-group.tsx",
+      "upstreamBlobSha1": "a137ec7d4343424f6d7b8b81766f2d8af6cb65b7",
+      "upstreamBytes": 2256,
+      "upstreamSha256": "1b0147f3d6ee8770524363f9bc9a57db83de8d2a0733c6e635e51034219e4c1e",
+      "adaptation": null,
+      "promotedPath": "src/shadcn/button-group.tsx",
+      "promotedSha256": "b178d6a9c765369c4b380f7e3946b5fce18d61588ec30c56c3e4211100276e58",
+      "promotedBytes": 2215,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/separator",
+          "to": "./separator"
+        }
+      ]
+    },
+    {
+      "localPath": "vendor/shadcn-ui/components/ui/button.tsx",
+      "localBytes": 2175,
+      "localSha256": "208d8cf515ccd73c1ca0030a11de1ba460a9fcd6c83faafeadc000833790d22e",
+      "upstreamPath": "packages/shadcn-ui/components/ui/button.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/shadcn-ui/components/ui/button.tsx",
+      "upstreamBlobSha1": "aaef0f64602433da563bfb12e38a7ff36ea76289",
+      "upstreamBytes": 2175,
+      "upstreamSha256": "208d8cf515ccd73c1ca0030a11de1ba460a9fcd6c83faafeadc000833790d22e",
+      "adaptation": null,
+      "promotedPath": "src/shadcn/button.tsx",
+      "promotedSha256": "d3e8f32fdd82232f49a2a4db80828ce70ac01e0cbbb462fafe17e2fb770dabc1",
+      "promotedBytes": 2162,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "vendor/shadcn-ui/components/ui/command.tsx",
+      "localBytes": 4846,
+      "localSha256": "53be7fe88f0ddbb2f6d97c64c07c1b4816050494880a582c92c0c3c62117b03c",
+      "upstreamPath": "packages/shadcn-ui/components/ui/command.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/shadcn-ui/components/ui/command.tsx",
+      "upstreamBlobSha1": "091a60a1e2d1517244dba57aca41af75e0e9f3e0",
+      "upstreamBytes": 4846,
+      "upstreamSha256": "53be7fe88f0ddbb2f6d97c64c07c1b4816050494880a582c92c0c3c62117b03c",
+      "adaptation": null,
+      "promotedPath": "src/shadcn/command.tsx",
+      "promotedSha256": "336111eeea2fe1876be00204b8f4ed84a878e611c35f1a679e0d7d6264a4c37e",
+      "promotedBytes": 4805,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/dialog",
+          "to": "./dialog"
+        }
+      ]
+    },
+    {
+      "localPath": "vendor/shadcn-ui/components/ui/dialog.tsx",
+      "localBytes": 3991,
+      "localSha256": "c7d128632214c9c78706a91a0616659ecf3be5119492b2ca66607bd83901b802",
+      "upstreamPath": "packages/shadcn-ui/components/ui/dialog.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/shadcn-ui/components/ui/dialog.tsx",
+      "upstreamBlobSha1": "fec3860203660ed72e889026d14f4ed366370763",
+      "upstreamBytes": 3991,
+      "upstreamSha256": "c7d128632214c9c78706a91a0616659ecf3be5119492b2ca66607bd83901b802",
+      "adaptation": null,
+      "promotedPath": "src/shadcn/dialog.tsx",
+      "promotedSha256": "c48b0bde6f2f458a3763d65ba30a83e83234b7e62d943dc650c738cfdd7c87d3",
+      "promotedBytes": 3978,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "vendor/shadcn-ui/components/ui/dropdown-menu.tsx",
+      "localBytes": 8620,
+      "localSha256": "d2d68bf1f4540baf814fcb20bfd487bfbba1fdfbcc533ef99e0ef862dfbf25a2",
+      "upstreamPath": "packages/shadcn-ui/components/ui/dropdown-menu.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/shadcn-ui/components/ui/dropdown-menu.tsx",
+      "upstreamBlobSha1": "7e65814fad700640bc6d447ebfb3a497d0e85a0f",
+      "upstreamBytes": 8432,
+      "upstreamSha256": "9384b044d08c59be883888a3dd66c3816156316f8debbcf107ef90b1e383d022",
+      "adaptation": {
+        "owner": "Codex integration owner",
+        "reason": "Strict exactOptionalPropertyTypes: omit checked when undefined instead of explicitly passing undefined",
+        "changes": [
+          "Prominent owner change notice",
+          "checked={checked} -> {...(checked === undefined ? {} : { checked })}"
+        ],
+        "importsExports": "Preserved"
+      },
+      "promotedPath": "src/shadcn/dropdown-menu.tsx",
+      "promotedSha256": "5fe334620fef12a3d4923261dcff8642deab738cbad091161ff91e53170eba84",
+      "promotedBytes": 8607,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "vendor/shadcn-ui/components/ui/hover-card.tsx",
+      "localBytes": 1540,
+      "localSha256": "cf19544ba82d332ce2f882f9ae64d9e848c475f13e79fa0353492f2ce7afe1ef",
+      "upstreamPath": "packages/shadcn-ui/components/ui/hover-card.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/shadcn-ui/components/ui/hover-card.tsx",
+      "upstreamBlobSha1": "c259cc8cb050033afad6b901373bc872fbefe7d8",
+      "upstreamBytes": 1540,
+      "upstreamSha256": "cf19544ba82d332ce2f882f9ae64d9e848c475f13e79fa0353492f2ce7afe1ef",
+      "adaptation": null,
+      "promotedPath": "src/shadcn/hover-card.tsx",
+      "promotedSha256": "b0746fd8f97056649af02f84723879b1059c8a05b98fc1d32bfea701e3552512",
+      "promotedBytes": 1527,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "vendor/shadcn-ui/components/ui/input-group.tsx",
+      "localBytes": 5129,
+      "localSha256": "d347e89600f0750a438f31559c85bb91833eeef51a56e70c2af5ef5d8d2acdd2",
+      "upstreamPath": "packages/shadcn-ui/components/ui/input-group.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/shadcn-ui/components/ui/input-group.tsx",
+      "upstreamBlobSha1": "e8e5f6b89a5ca8ed8259c6d68de5a0ce9c88f1f0",
+      "upstreamBytes": 5129,
+      "upstreamSha256": "d347e89600f0750a438f31559c85bb91833eeef51a56e70c2af5ef5d8d2acdd2",
+      "adaptation": null,
+      "promotedPath": "src/shadcn/input-group.tsx",
+      "promotedSha256": "6db695007910296e4cc8f0630261feeb30c83bf1008af42c00ad3bc3365a6b05",
+      "promotedBytes": 5032,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/button",
+          "to": "./button"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/input",
+          "to": "./input"
+        },
+        {
+          "from": "@repo/shadcn-ui/components/ui/textarea",
+          "to": "./textarea"
+        }
+      ]
+    },
+    {
+      "localPath": "vendor/shadcn-ui/components/ui/input.tsx",
+      "localBytes": 976,
+      "localSha256": "96207e020d2624fba7241b91a1f2e5a971510003b9c0becc9d0c02a535b15067",
+      "upstreamPath": "packages/shadcn-ui/components/ui/input.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/shadcn-ui/components/ui/input.tsx",
+      "upstreamBlobSha1": "135e72cb1c5b13168165b06e6ab524a6ff11aecc",
+      "upstreamBytes": 976,
+      "upstreamSha256": "96207e020d2624fba7241b91a1f2e5a971510003b9c0becc9d0c02a535b15067",
+      "adaptation": null,
+      "promotedPath": "src/shadcn/input.tsx",
+      "promotedSha256": "313da1cd9a309d996eb182d5491bbb3f47428d0271be846845b5de82bfa3d80e",
+      "promotedBytes": 963,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "vendor/shadcn-ui/components/ui/select.tsx",
+      "localBytes": 6304,
+      "localSha256": "a0eefd67e05688a6318a3a86080a6951723c6b5d323e1fa92b9d1b7fee777995",
+      "upstreamPath": "packages/shadcn-ui/components/ui/select.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/shadcn-ui/components/ui/select.tsx",
+      "upstreamBlobSha1": "3c1aa27479a09ebda87dd0e79beac628c793dda7",
+      "upstreamBytes": 6304,
+      "upstreamSha256": "a0eefd67e05688a6318a3a86080a6951723c6b5d323e1fa92b9d1b7fee777995",
+      "adaptation": null,
+      "promotedPath": "src/shadcn/select.tsx",
+      "promotedSha256": "23e46864ece159592bc70c18901c3f366b56438457c8715715c391c255107b67",
+      "promotedBytes": 6291,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "vendor/shadcn-ui/components/ui/separator.tsx",
+      "localBytes": 708,
+      "localSha256": "47885bfbdf6468a740999cf934b5cb563ecddb709502c2c501cea524f78d5ce3",
+      "upstreamPath": "packages/shadcn-ui/components/ui/separator.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/shadcn-ui/components/ui/separator.tsx",
+      "upstreamBlobSha1": "970edfce366d0145bea54c6a2157ba7d985da81e",
+      "upstreamBytes": 708,
+      "upstreamSha256": "47885bfbdf6468a740999cf934b5cb563ecddb709502c2c501cea524f78d5ce3",
+      "adaptation": null,
+      "promotedPath": "src/shadcn/separator.tsx",
+      "promotedSha256": "a9329fcc5027a235af664572e4cb55bd3697d7fc3f0362eb7f3cd669adc0d1cc",
+      "promotedBytes": 695,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "vendor/shadcn-ui/components/ui/spinner.tsx",
+      "localBytes": 345,
+      "localSha256": "acf4f2aeb7fc29bd8aa22a6501b85dd4462d196e831dc5424be93ffdb49e21b4",
+      "upstreamPath": "packages/shadcn-ui/components/ui/spinner.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/shadcn-ui/components/ui/spinner.tsx",
+      "upstreamBlobSha1": "934d7e051601e8b756f7d40b785eb3e2f94a5da8",
+      "upstreamBytes": 345,
+      "upstreamSha256": "acf4f2aeb7fc29bd8aa22a6501b85dd4462d196e831dc5424be93ffdb49e21b4",
+      "adaptation": null,
+      "promotedPath": "src/shadcn/spinner.tsx",
+      "promotedSha256": "ee0751b6dbd864163e77ead195616c9d1777a04ccda1a58dd1ced781ed61a685",
+      "promotedBytes": 332,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "vendor/shadcn-ui/components/ui/textarea.tsx",
+      "localBytes": 773,
+      "localSha256": "0b7fc00f5a0fa6ace377c5f61ef14a30b3d190bc2761c2728ec6886809a1a0c8",
+      "upstreamPath": "packages/shadcn-ui/components/ui/textarea.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/shadcn-ui/components/ui/textarea.tsx",
+      "upstreamBlobSha1": "fd5abe361458f97cf44474bd99fa21ecba18b203",
+      "upstreamBytes": 773,
+      "upstreamSha256": "0b7fc00f5a0fa6ace377c5f61ef14a30b3d190bc2761c2728ec6886809a1a0c8",
+      "adaptation": null,
+      "promotedPath": "src/shadcn/textarea.tsx",
+      "promotedSha256": "18fc99389dfcd50059ec60da5c5ac7cfe5195ebd8cb2b2cb8cd9de30be9ddb4f",
+      "promotedBytes": 760,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "vendor/shadcn-ui/components/ui/tooltip.tsx",
+      "localBytes": 1901,
+      "localSha256": "f459111a16d346aaa64d1bb6557cca986f7332b150ad3a29001e8fef3aea973a",
+      "upstreamPath": "packages/shadcn-ui/components/ui/tooltip.tsx",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/shadcn-ui/components/ui/tooltip.tsx",
+      "upstreamBlobSha1": "ef00a342cfeb37bb29575b2337bd77d3e009cde2",
+      "upstreamBytes": 1901,
+      "upstreamSha256": "f459111a16d346aaa64d1bb6557cca986f7332b150ad3a29001e8fef3aea973a",
+      "adaptation": null,
+      "promotedPath": "src/shadcn/tooltip.tsx",
+      "promotedSha256": "0ff01dcc2396975619d64ed8819048ea3ebd66f8baf6a63d11433a8754905ced",
+      "promotedBytes": 1888,
+      "importSpecifierChanges": [
+        {
+          "from": "@repo/shadcn-ui/lib/utils",
+          "to": "../lib/utils"
+        }
+      ]
+    },
+    {
+      "localPath": "vendor/shadcn-ui/lib/utils.ts",
+      "localBytes": 166,
+      "localSha256": "7c8c3dfc0cdd370d44932828eb067ef771c8fe7996693221d5d4b90af6d54f2d",
+      "upstreamPath": "packages/shadcn-ui/lib/utils.ts",
+      "upstreamUrl": "https://raw.githubusercontent.com/vercel/ai-elements/bc871264341cf54a7ea1fee36d951688ed2a1ff7/packages/shadcn-ui/lib/utils.ts",
+      "upstreamBlobSha1": "bd0c391ddd1088e9067844c48835bf4abcd61783",
+      "upstreamBytes": 166,
+      "upstreamSha256": "7c8c3dfc0cdd370d44932828eb067ef771c8fe7996693221d5d4b90af6d54f2d",
+      "adaptation": null,
+      "promotedPath": "src/lib/utils.ts",
+      "promotedSha256": "7c8c3dfc0cdd370d44932828eb067ef771c8fe7996693221d5d4b90af6d54f2d",
+      "promotedBytes": 166,
+      "importSpecifierChanges": []
+    }
+  ],
+  "behaviorChanges": [],
+  "retainedAdaptation": "The original dropdown checked-prop conditional spread remains unchanged; only quoted import specifiers are relocated."
+}

@@ -1,0 +1,30 @@
+
+ RUN  v4.1.11 /workspace/capiro-next-work/apps/web
+
+ ❯ tests/work-owner-presentation.test.ts (1 test | 1 failed) 30ms
+   × renders the supplied document owner's label beside the product 29ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/work-owner-presentation.test.ts > renders the supplied document owner's label beside the product
+AssertionError: expected '<link rel="preload" as="image" href="…' to contain 'Synthetic Jordan Clayton'
+
+Expected: "Synthetic Jordan Clayton"
+Received: "<link rel="preload" as="image" href="/design/411-52106-imgIconFileText.svg"/><div class="tableWrap _container_710253"><table class="_table_710253"><caption class="srOnly">Current Workspace documents</caption><thead><tr><th scope="col">Document</th><th scope="col">Status</th><th scope="col">Updated</th><th scope="col"><span class="srOnly">Open</span></th></tr></thead><tbody><tr data-destination="false"><td class="_documentCell_710253"><div class="_documentSummary_710253"><img class="_icon_710253" src="/design/411-52106-imgIconFileText.svg" width="16" height="16" alt=""/><div class="_documentInfo_710253"><strong class="_title_710253">Synthetic current briefing draft</strong><p class="_product_710253">Briefing</p></div></div></td><td class="_statusCell_710253"><span class="_status_710253" data-status="draft">Draft</span></td><td class="_updatedCell_710253"><time dateTime="2026-10-12T12:00:00.000Z" title="10/12/2026, 12:00:00 PM">Oct 12</time></td><td class="_openCell_710253"><small>Workspace destination unavailable</small></td></tr></tbody></table></div>"
+
+ ❯ tests/work-owner-presentation.test.ts:32:16
+     30|     }),
+     31|   );
+     32|   expect(html).toContain("Synthetic Jordan Clayton");
+       |                ^
+     33|   expect(html).toContain("Briefing");
+     34|   expect(html).not.toContain("user_synthetic_owner");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  17:52:11
+   Duration  383ms (transform 93ms, setup 0ms, import 227ms, tests 30ms, environment 0ms)
+

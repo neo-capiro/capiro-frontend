@@ -1,0 +1,59 @@
+
+Running 10 tests using 1 worker
+
+(node:627948) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 apps/web/tests/browser/prospect-files-local-search.spec.ts:102:1 › loaded file search filters case-insensitively, trims and clears without requests or changing readiness (4.6s)
+  ✓   2 apps/web/tests/browser/prospect-files-local-search.spec.ts:147:3 › search distinguishes no matching files (3.4s)
+  ✓   3 apps/web/tests/browser/prospect-files-local-search.spec.ts:147:3 › search distinguishes a true empty list (3.6s)
+  ✓   4 apps/web/tests/browser/prospect-files-local-search.spec.ts:179:3 › a 403 current file read conceals filtered results until successful recovery (3.7s)
+  ✓   5 apps/web/tests/browser/prospect-files-local-search.spec.ts:179:3 › a 503 current file read conceals filtered results until successful recovery (3.6s)
+  ✓   6 apps/web/tests/browser/prospect-files-local-search.spec.ts:214:3 › userId replacement discards the prior file search and results (6.4s)
+  ✓   7 apps/web/tests/browser/prospect-files-local-search.spec.ts:214:3 › tenantId replacement discards the prior file search and results (5.2s)
+  ✘   8 apps/web/tests/browser/prospect-files-local-search.spec.ts:248:1 › prospect route replacement starts with a clear search and only the new current collection (8.7s)
+(node:628970) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   9 apps/web/tests/browser/prospect-files-local-search.spec.ts:284:1 › search cannot expose a mixed-lineage collection (5.8s)
+  ✓  10 apps/web/tests/browser/prospect-files-local-search.spec.ts:298:1 › filtering retains selected upload bytes and original upload readiness and open actions (6.0s)
+
+
+  1) apps/web/tests/browser/prospect-files-local-search.spec.ts:248:1 › prospect route replacement starts with a clear search and only the new current collection 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Replacement Prospect', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'Replacement Prospect', exact: true })
+
+
+      271 |   await expect(
+      272 |     page.getByRole("heading", { name: "Replacement Prospect", exact: true }),
+    > 273 |   ).toBeVisible();
+          |     ^
+      274 |   await expect(area.locator("li")).toHaveCount(0);
+      275 |   state.listGate.release();
+      276 |   const search = area.getByRole("searchbox", { name: "Search files" });
+        at /workspace/capiro-next-prospect-files/apps/web/tests/browser/prospect-files-local-search.spec.ts:273:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-prospect-files-evidence/green-artifacts/prospect-files-local-searc-06006--the-new-current-collection/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-prospect-files-evidence/green-artifacts/prospect-files-local-searc-06006--the-new-current-collection/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-prospect-files-evidence/green-artifacts/prospect-files-local-searc-06006--the-new-current-collection/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-prospect-files-evidence/green-artifacts/prospect-files-local-searc-06006--the-new-current-collection/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    apps/web/tests/browser/prospect-files-local-search.spec.ts:248:1 › prospect route replacement starts with a clear search and only the new current collection 
+  9 passed (54.1s)

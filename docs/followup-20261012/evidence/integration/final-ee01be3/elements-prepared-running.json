@@ -1,0 +1,19 @@
+{
+  "pid": 652213,
+  "command": [
+    "env",
+    "MERI_ELEMENTS_SSR_RECEIPT=/tmp/capiro-followup-elements-ee01be3/receipt.json",
+    "MERI_ELEMENTS_SSR_RECEIPT_SHA256=4bc214f49da8778dc757340cba197566d30945090ba8d2658d20fd269a1d31e6",
+    "MERI_ELEMENTS_SSR_CAPTURE_ROOT=/tmp/capiro-followup-elements-runtime-ee01be3",
+    "npm",
+    "run",
+    "check:elements"
+  ],
+  "startedUTC": "2026-10-12T18:25:01.415553+00:00",
+  "source": {
+    "head": "ee01be3b2c5c64a53744994ae4ad0d992a111054",
+    "tree": "bce79ae8c0f526e113468b885fc2c7a5515ac7b9",
+    "applicationTree": "17385e9404d12baa01e695c72584a375f4842813",
+    "sourceDiff": ""
+  }
+}

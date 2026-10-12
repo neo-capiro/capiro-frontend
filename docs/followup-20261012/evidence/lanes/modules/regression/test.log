@@ -1,0 +1,14 @@
+
+Running 7 tests using 1 worker
+
+(node:622855) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 apps/web/test/browser/calendar-visual-closeout.spec.ts:6:1 › compact Calendar retains scoped module navigation, history, source disclosures and mobile controls (2.4s)
+  ✓  2 apps/web/test/browser/calendar.spec.ts:35:1 › month and week retain client scope and query end-exclusive Eastern ranges (1.8s)
+  ✓  3 apps/web/test/browser/calendar.spec.ts:90:1 › client agenda is meetings-only and the meeting opens the shared prep/notes/debrief workflow (1.3s)
+  ✓  4 apps/web/test/browser/planner-engagement.spec.ts:112:1 › Planner modes use the same permitted task data and exact board assets (1.6s)
+  ✓  5 apps/web/test/browser/planner-engagement.spec.ts:163:1 › Planner failed writes retain drafts and a successful save uses only reviewed fields (1.7s)
+  ✓  6 apps/web/test/browser/planner-engagement.spec.ts:218:1 › Engagement library opens shared notes, approval is a separate real operation and tabs work at phone width (2.0s)
+  ✓  7 apps/web/test/browser/planner-engagement.spec.ts:279:1 › A template session deep link keeps the server state version and sends no mail (1.4s)
+
+  7 passed (13.4s)

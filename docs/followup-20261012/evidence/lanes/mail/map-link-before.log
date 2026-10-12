@@ -1,0 +1,49 @@
+
+Running 1 test using 1 worker
+
+(node:631335) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 apps/web/tests/browser/mail-local-draft.spec.ts:149:1 › saved signature preview blocks active markup and automatic remote content (7.2s)
+
+
+  1) apps/web/tests/browser/mail-local-draft.spec.ts:149:1 › saved signature preview blocks active markup and automatic remote content 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('iframe[title="Saved signature preview"]').contentFrame().locator('script,iframe,form,[href],img[src^=\'https:\'],[onerror]')
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for locator('iframe[title="Saved signature preview"]').contentFrame().locator('script,iframe,form,[href],img[src^=\'https:\'],[onerror]')
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      167 |   await expect(
+      168 |     preview.locator("script,iframe,form,[href],img[src^='https:'],[onerror]"),
+    > 169 |   ).toHaveCount(0);
+          |     ^
+      170 |   await expect(
+      171 |     page.locator('iframe[title="Saved signature preview"]'),
+      172 |   ).toHaveAttribute("sandbox", "");
+        at /workspace/capiro-next-mail/apps/web/tests/browser/mail-local-draft.spec.ts:169:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-35e79-nd-automatic-remote-content/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-35e79-nd-automatic-remote-content/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-35e79-nd-automatic-remote-content/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-next-mail-evidence/browser-output/mail-local-draft-saved-sig-35e79-nd-automatic-remote-content/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    apps/web/tests/browser/mail-local-draft.spec.ts:149:1 › saved signature preview blocks active markup and automatic remote content 

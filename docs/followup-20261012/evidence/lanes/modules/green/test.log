@@ -1,0 +1,26 @@
+
+Running 19 tests using 1 worker
+
+(node:620666) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 apps/web/test/browser/next-modules-baseline.spec.ts:4:1 › MS02 verified Calendar entry dispatches only the selected client scope (1.7s)
+  ✓   2 apps/web/test/browser/next-modules-baseline.spec.ts:27:1 › MS03 agenda preserves both Planner start and due occurrences (2.2s)
+  ✓   3 apps/web/test/browser/next-modules-baseline.spec.ts:53:1 › MS04 meeting failure leaves successful agenda feeds visible (1.5s)
+  ✓   4 apps/web/test/browser/next-modules-baseline.spec.ts:74:1 › MS05 linked task resolves beyond the current list and opens its detail (1.1s)
+  ✓   5 apps/web/test/browser/next-modules-scope.spec.ts:13:1 › Calendar picker and history share verified scope and discard a held former-client read (1.5s)
+  ✓   6 apps/web/test/browser/next-modules-scope.spec.ts:65:3 › Calendar denied client verification never falls back to master reads (997ms)
+  ✓   7 apps/web/test/browser/next-modules-scope.spec.ts:65:3 › Calendar wrong-client client verification never falls back to master reads (2.5s)
+  ✓   8 apps/web/test/browser/next-modules-scope.spec.ts:89:1 › Calendar current scope label survives optional picker-list failure (1.5s)
+  ✓   9 apps/web/test/browser/next-modules-scope.spec.ts:104:1 › Calendar meeting retry preserves other feeds and reports partial empty coverage (1.4s)
+  ✓  10 apps/web/test/browser/next-modules-scope.spec.ts:142:1 › Calendar tenant replacement and failed current read hide prior agenda rows (1.5s)
+  ✓  11 apps/web/test/browser/next-modules-task-links.spec.ts:13:3 › linked task rejects wrong-task receipt without detail actions (1.1s)
+  ✓  12 apps/web/test/browser/next-modules-task-links.spec.ts:13:3 › linked task rejects wrong-client receipt without detail actions (1.5s)
+  ✓  13 apps/web/test/browser/next-modules-task-links.spec.ts:39:1 › invalid task link makes no detail request and can be dismissed without losing scope (2.6s)
+  ✓  14 apps/web/test/browser/next-modules-task-links.spec.ts:61:3 › task link hides prior editor after current 403, then recovers only after successful retry (2.6s)
+  ✓  15 apps/web/test/browser/next-modules-task-links.spec.ts:61:3 › task link hides prior editor after current 503, then recovers only after successful retry (2.0s)
+  ✓  16 apps/web/test/browser/next-modules-task-links.spec.ts:105:1 › linked task follows back-forward and discards a held replaced task (1.7s)
+  ✓  17 apps/web/test/browser/next-modules-task-links.spec.ts:149:3 › linked task client replacement rejects the former read and editor (1.5s)
+  ✓  18 apps/web/test/browser/next-modules-task-links.spec.ts:149:3 › linked task tenant replacement rejects the former read and editor (2.8s)
+  ✓  19 apps/web/test/browser/next-modules-task-links.spec.ts:194:1 › agenda link opens a done task despite default open list filter, and respects viewer access (2.1s)
+
+  19 passed (35.1s)

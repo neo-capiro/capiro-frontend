@@ -1,0 +1,17 @@
+{
+  "errors": [],
+  "needsReview": [
+    {
+      "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+      "kind": "function",
+      "symbol": "FilesPage",
+      "line": 17,
+      "nonblank": 245,
+      "fingerprint": "6b1e2d5c668d17e152ce5d4dedb60bb2ed7827e2fbd68033559a0dff55bf8726",
+      "provenance": "changed-since-transfer",
+      "reviewStatus": "changed-since-review",
+      "blocking": true
+    }
+  ],
+  "rationale": "FilesPage retains one client collection and selection/modal composition. DELETE transaction/readback now delegates to cohesive deletion owner and dialog; no additional domain, shared owner or native contract. The remaining 245-line body is existing collection toolbar/folder/table/modal JSX with scope-keyed deletion child. New deletion modules do not exceed mandatory size thresholds. Root owns registry review. DeleteFile is one confirmation dialog with pending/unknown/current-state branches and delegates all request/scope semantics to its hook; the native-status presentation is intentionally kept with this one decision. Do not split JSX only to fall below a size threshold."
+}
