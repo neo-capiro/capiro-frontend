@@ -210,7 +210,7 @@ export function CalendarPage({
             onChange={(e) => setSearch(e.target.value)}
           />
           {(mixed
-            ? ["meeting", "hearing", "planner", "deadline"]
+            ? ["meeting", "hearing", "planner", "deadline", "government"]
             : ["meeting"]
           ).map((kind) => (
             <button
@@ -232,9 +232,9 @@ export function CalendarPage({
           {mixed && (
             <span
               className="chip"
-              title="A verified effective-date and confidence contract is required"
+              title="Forecast dates do not have a published source contract"
             >
-              Government unavailable
+              Government forecasts unavailable
             </span>
           )}
           <button

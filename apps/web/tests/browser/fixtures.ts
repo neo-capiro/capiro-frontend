@@ -1,3 +1,4 @@
+import { effectivePage } from "../effective-date-fixtures";
 import type { Page, Route } from "@playwright/test";
 import type { Prospect } from "../../src/features/portfolio/prospects/contracts";
 export const clientId = "10000000-0000-4000-8000-000000000001";
@@ -176,6 +177,21 @@ export async function json(route: Route, body: unknown, status = 200) {
     body: JSON.stringify(body),
   });
 }
+export const sendingMailbox = {
+  id: "70000000-0000-4000-8000-000000000001",
+  provider: "google_workspace",
+  accountEmail: "sender@example.test",
+  displayName: "Synthetic mailbox",
+  availability: "available",
+  signaturePolicy: "actor",
+};
+export const sendingReceipt = {
+  senderConnectionId: sendingMailbox.id,
+  senderEmail: sendingMailbox.accountEmail,
+  senderName: sendingMailbox.displayName,
+  signaturePolicy: "actor",
+  signatureAppended: false,
+};
 export async function installFixtures(page: Page) {
   const unexpected: string[] = [];
   await page.route("**/api/backend/**", async (route) => {
@@ -187,6 +203,7 @@ export async function installFixtures(page: Page) {
       return json(route, { message: "Unexpected test mutation" }, 500);
     }
     const responses: Record<string, unknown> = {
+      "core/engagement/mail/mailboxes": [sendingMailbox],
       "core/billing/state": {
         billingEnabled: false,
         status: "none",
@@ -310,6 +327,32 @@ export async function installFixtures(page: Page) {
         withheld: 0,
       },
     };
+    if (path === "core/federal-register/effective-date-calendar") {
+      // A synthetic empty, explicitly incomplete source is independent of the
+      // failing source selected by each calendar test. It implies no live data.
+      const query = new URL(route.request().url()).searchParams;
+      const result = effectivePage(
+        query.get("dateFrom")!,
+        query.get("dateTo")!,
+        Number(query.get("page") ?? 1),
+      );
+      return json(route, {
+        ...result,
+        data: [],
+        pagination: {
+          totalCandidates: 0,
+          returned: 0,
+          excludedOnPage: 0,
+          hasMoreCandidates: false,
+        },
+        coverage: {
+          ...result.coverage,
+          catalogRules: 0,
+          withoutEvidence: 0,
+          unsupportedEvidence: 0,
+        },
+      });
+    }
     if (path === "core/business-development/prospect-stages")
       return json(route, { message: "New stages unavailable" }, 404);
     if (path === "core/me/portfolio-layout")

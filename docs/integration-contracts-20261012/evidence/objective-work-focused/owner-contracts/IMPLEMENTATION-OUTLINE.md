@@ -1,0 +1,28 @@
+# Bounded existing Objective destinations — planned next candidate
+
+Prepared while the f4e9e1f full Portfolio gate remains frozen. This is preparation only; no frontend source has been edited for this addition. Source implementation follows that run's terminal result and separately archived receipt.
+
+## Published owners and scope
+
+Consume only Strategy/Planner PR2404 at 0716767e8b6ff323b2516d166b22edb4d2413e57 (tree207657e1ae89de5790816e07b5fa149512381955) and Workspace PR2405 at c05b85a29a75cbaaa8538fd7f9a97e298a23913e (treecb0a9d47c0328e2d9b31e9b2e47dbcc08517bf5e). CONTRACT.md and INTEGRATION.md were read at those exact commits, alongside the reconciled39b4ae45 handoff. Existing762aea calendar runtime is source-equivalent to39b4 outside docs; no replacement calendar implementation is needed.
+
+Existing Objective persistence remains canonical. These are GET-only observations of existing authorized resources. No creation, association, mutation, generation, export, send or general Workspace authority is added. Native permissions, RLS/MVCC, migrations and the documented client/grant lock-order race remain unrun and visible.
+
+## Cohesive frontend owners
+
+- Shared Capiro operation schemas validate the three literal route kinds and exact current client/Objective/version/resource bindings. Reuse canonical strategyDetail, plannerTask and savedNewsletterRevision projections; preserve the saved revision's literal-slot restrictions. Extract only the existing common Objective query/binding schema where reuse is real. Never copy backend authorization or persistence code.
+- Portfolio owns explicit existing resource selection from its established service transport. Strategy choices use the exact canonical client UUID. Planner uses the existing cursor pages and only explicit task.clientId. Workspace lists existing accessible draft metadata, excludes known prospect drafts, and requires a separately selected saved version; display client names never establish eligibility. Reuse the Portfolio work area's existing draft-list schema through an explicit public export, rather than broadening the proxy or duplicating the DTO.
+- An abortable Portfolio opener performs a fresh owner resolution before navigating to a fixed local Modules URL. Unsaved Objective edits, pending writes, replacement scope and close cancel/disable this action. Browser selections and prior resolutions grant no authority.
+- Modules gets a small Objective route wrapper around its three ordinary screens. With Objective parameters present, mount only the bound read-only view; ordinary resource queries and editors must not mount. Reuse useCapiroQuery cancellation/input replacement and shared Panel/PageHeader/ActionButton/StatusPanel. Each owner still has its own payload presentation, with saved Workspace plaintext/hash/author/time and no substitution of a working draft.
+- Every open, reload, history return, query replacement and explicit recheck resolves the corresponding fixed owner operation again. Reject repeated/unknown/malformed bound URL claims and every mismatched result. No unbound GET fallback, automatic resolver retry or cached capability is introduced.
+- Shared HeaderFrame, all-mode navigation, auth/session/client boundaries, Core/Intel separation, Meri contracts/assets, root lockfile and existing feature workflows stay under their existing owners. The existing Modules CommitmentView remains unchanged; Quicklog gains no Commitment/counterparty path.
+
+## Design and verification
+
+Figma design-to-code skill loaded before fresh contexts. Planner411:95693 and Workspace411:112533 returned high-fidelity contexts/screenshots. Strategy411:119740 returned sparse metadata; inspected its full screenshot and requested visible header848:153536 for high-fidelity detail. Reuse existing shared shell/assets and controls. The new owner-bound observation/eligibility messaging is a documented contract extension, not a claim of pixel acceptance for the general editable screens or any of the337 Portfolio rows. Bundled Next docs are absent in this installed package; reviewed the official Next useSearchParams/useRouter references, including repeated values, current route updates and fixed safe navigation.
+
+Establish failing feature baselines against the frozen source before application edits. Add strict wire/query/resource/client/version mismatch tests and real navigation tests for all three kinds. Exercise explicit saved-version selection, rejected legacy/prospect/wrong-client destinations, stale404/409, infrastructure failure, query/tenant/session replacement, late responses, unsaved Objective edits, back/forward/reload, desktop/mobile fit and keyboard access. Assert zero writes, no ordinary editor/unbound fallback and no automatic resolver replay.
+
+After focused gates and semantic size review, freeze a distinct source commit and publish it to draft PR9. Run clean install, complete source/type/lint/format/architecture/public-package/transport/unit gates, one production build, complete Modules and Portfolio browsers, official Elements qualification, actual standalone/Meri audits and unchanged immutable reviewer controls on that exact candidate. Never overlap Next build with typechecking. Preserve failed/interrupted/superseded receipts and do not combine counts. All337 Portfolio rows remain unaccepted; shipping/image/native/live gates stay separate.
+
+References: https://nextjs.org/docs/app/api-reference/functions/use-search-params and https://nextjs.org/docs/app/api-reference/functions/use-router (read2026-10-12).

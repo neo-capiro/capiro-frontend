@@ -1,0 +1,108 @@
+
+> @capiro/web@0.1.0 test:browser:modules
+> playwright test --config test/browser/playwright.config.ts prospect-workspace.spec.ts -g reload preserves
+
+[WebServer] (node:219587) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:219758) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 test/browser/prospect-workspace.spec.ts:289:1 › reload preserves the original prospect creation seed and request key (7.8s)
+(node:219898) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 test/browser/prospect-workspace.spec.ts:322:1 › reload preserves uncertain manual edits and the read-back requirement (6.7s)
+
+
+  1) test/browser/prospect-workspace.spec.ts:289:1 › reload preserves the original prospect creation seed and request key 
+
+    Error: expect(locator).toBeEnabled() failed
+
+    Locator: getByRole('button', { name: 'Recover original draft' })
+    Expected: enabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeEnabled" with timeout 5000ms
+      - waiting for getByRole('button', { name: 'Recover original draft' })
+
+
+      306 |   await expect(
+      307 |     page.getByRole("button", { name: "Recover original draft" }),
+    > 308 |   ).toBeEnabled();
+          |     ^
+      309 |   await page.getByRole("button", { name: "Recover original draft" }).click();
+      310 |   await expect(page.getByLabel("Document title")).toHaveValue(draft.docTitle);
+      311 |   expect(writes).toHaveLength(2);
+        at /workspace/capiro-contracts/apps/web/test/browser/prospect-workspace.spec.ts:308:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/prospect-workspace-reload--0df7b-eation-seed-and-request-key/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/prospect-workspace-reload--0df7b-eation-seed-and-request-key/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/prospect-workspace-reload--0df7b-eation-seed-and-request-key/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/prospect-workspace-reload--0df7b-eation-seed-and-request-key/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) test/browser/prospect-workspace.spec.ts:322:1 › reload preserves uncertain manual edits and the read-back requirement 
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator:  getByLabel('Body content')
+    Expected: "Keep this draft"
+    Received: ""
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveValue" with timeout 5000ms
+      - waiting for getByLabel('Body content')
+        14 × locator resolved to <textarea data-slot="textarea" aria-label="Body content" class="border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 flex field-sizing-content min-h-16 w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:…></textarea>
+           - unexpected value ""
+
+
+      335 |   ).toBeDisabled();
+      336 |   await page.reload();
+    > 337 |   await expect(page.getByLabel("Body content")).toHaveValue("Keep this draft");
+          |                                                 ^
+      338 |   await expect(
+      339 |     page.getByRole("button", { name: "Save draft", exact: true }),
+      340 |   ).toBeDisabled();
+        at /workspace/capiro-contracts/apps/web/test/browser/prospect-workspace.spec.ts:337:49
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/prospect-workspace-reload--ace64-d-the-read-back-requirement/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/prospect-workspace-reload--ace64-d-the-read-back-requirement/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/prospect-workspace-reload--ace64-d-the-read-back-requirement/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/prospect-workspace-reload--ace64-d-the-read-back-requirement/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    test/browser/prospect-workspace.spec.ts:289:1 › reload preserves the original prospect creation seed and request key 
+    test/browser/prospect-workspace.spec.ts:322:1 › reload preserves uncertain manual edits and the read-back requirement 
+npm error Lifecycle script `test:browser:modules` failed with error:
+npm error code 1
+npm error path /workspace/capiro-contracts/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-contracts/apps/web
+npm error command failed
+npm error command sh -c playwright test --config test/browser/playwright.config.ts prospect-workspace.spec.ts -g 'reload preserves'
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

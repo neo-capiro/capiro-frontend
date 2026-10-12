@@ -1,0 +1,34 @@
+
+> @capiro/web@0.1.0 test:browser:modules
+> playwright test --config test/browser/playwright.config.ts prospect-workspace.spec.ts
+
+[WebServer] (node:222353) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 16 tests using 1 worker
+
+(node:222536) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 test/browser/prospect-workspace.spec.ts:41:1 › prospect creation recovers its original seed and key after a lost receipt (4.1s)
+  ✓   2 test/browser/prospect-workspace.spec.ts:76:1 › manual content, version history and exports use only reviewed draft operations (3.6s)
+  ✓   3 test/browser/prospect-workspace.spec.ts:124:1 › an uncertain save retains edits across navigation and requires read-back before explicit save (3.4s)
+  ✓   4 test/browser/prospect-workspace.spec.ts:152:3 › a wrong prospectId never exposes the document or writes (2.1s)
+  ✓   5 test/browser/prospect-workspace.spec.ts:152:3 › a wrong tenantId never exposes the document or writes (1.8s)
+  ✓   6 test/browser/prospect-workspace.spec.ts:168:1 › prospect Newsletter origin cannot open its sending workflow (1.9s)
+  ✓   7 test/browser/prospect-workspace.spec.ts:182:1 › a changed document blocks PATCH and shows the saved content for deliberate review (3.0s)
+  ✓   8 test/browser/prospect-workspace.spec.ts:214:1 › mobile prospect manual editor preserves keyboard fields and stays in the viewport (2.8s)
+  ✓   9 test/browser/prospect-workspace.spec.ts:237:1 › leaving during save preflight aborts the write and retains the uncertain editor (3.0s)
+  ✓  10 test/browser/prospect-workspace.spec.ts:274:1 › expired creation sends one original request and clears the authenticated editor (3.0s)
+  ✓  11 test/browser/prospect-workspace.spec.ts:296:1 › reload preserves the original prospect creation seed and request key (4.6s)
+  ✓  12 test/browser/prospect-workspace.spec.ts:331:1 › reload preserves uncertain manual edits and the read-back requirement (4.2s)
+  ✓  13 test/browser/prospect-workspace.spec.ts:359:3 › replacement Core actor cannot restore the former creation input after reload (3.7s)
+  ✓  14 test/browser/prospect-workspace.spec.ts:359:3 › replacement Core actor cannot restore the former manual-save input after reload (3.6s)
+  ✓  15 test/browser/prospect-workspace.spec.ts:427:3 › unavailable browser journal blocks creation without a backend write (1.9s)
+  ✓  16 test/browser/prospect-workspace.spec.ts:427:3 › unavailable browser journal blocks manual-save without a backend write (2.4s)
+
+  16 passed (54.5s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

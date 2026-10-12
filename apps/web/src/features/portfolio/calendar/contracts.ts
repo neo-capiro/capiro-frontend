@@ -1,4 +1,5 @@
 import { z } from "zod";
+import type { EffectiveDateRecord } from "@/shared/federal-register/effective-dates";
 import { validDay } from "@/shared/portfolio/date/civil";
 import { preparationSchema } from "./preparation/schema";
 export { prepItemSchema } from "./preparation/schema";
@@ -131,6 +132,7 @@ export interface CalendarItem {
   status?: string;
   href?: string;
   provenance: string;
+  effectiveDate?: EffectiveDateRecord;
 }
 export interface CalendarFeed {
   items: CalendarItem[];

@@ -1,6 +1,7 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
+import { fetchEffectiveDates } from "./effective-feed";
 import {
   fetchMeetings,
   fetchHearings,
@@ -46,7 +47,13 @@ export function useCalendarFeeds(
     queryFn: ({ signal }) =>
       fetchUpcomingDeadlines(api, range.startDay, range.endDay, signal),
   });
-  return { meetings, hearings, planner, deadlines };
+  const government = useQuery({
+    queryKey: ["calendar", "government", range.startDay, range.endDay],
+    enabled: mixed,
+    queryFn: ({ signal }) =>
+      fetchEffectiveDates(api, range.startDay, range.endDay, signal),
+  });
+  return { meetings, hearings, planner, deadlines, government };
 }
 export function useMeeting(id: string | null) {
   const api = useApi();

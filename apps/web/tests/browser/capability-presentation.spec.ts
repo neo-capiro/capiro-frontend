@@ -234,6 +234,10 @@ test("tab and disclosure keyboard navigation excludes inactive Profile controls 
   }
   await documents.focus();
   await documents.press("ArrowLeft");
+  // Radix schedules roving focus after the key event. Finish this navigation
+  // before deliberately moving focus to the disclosure; otherwise that pending
+  // navigation can steal focus from the next, unrelated keyboard action.
+  await expect(profile).toBeFocused();
   const details = editor.getByText("Details", { exact: true });
   await details.focus();
   await details.press("Enter");

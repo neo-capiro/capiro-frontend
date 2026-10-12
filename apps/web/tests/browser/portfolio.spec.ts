@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import {
+  sendingMailbox,
   installFixtures,
   json,
   client,
@@ -117,6 +118,7 @@ test("mail is reviewed and a provider error remains visible without automatic re
   await compose
     .getByLabel("Message", { exact: true })
     .fill("Synthetic message <unsafe>");
+  await compose.getByLabel("From mailbox").selectOption(sendingMailbox.id);
   await compose.getByRole("button", { name: "Review email" }).click();
   expect(attempts).toBe(0);
   const review = page.getByRole("dialog", { name: "Send email" });

@@ -1,0 +1,48 @@
+[WebServer] (node:241749) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:241918) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 test/browser/prospect-draft-restart-acceptance.spec.ts:6:1 › lost prospect draft creation retains its original request through reload rather than creating a duplicate draft (3.8s)
+
+
+  1) test/browser/prospect-draft-restart-acceptance.spec.ts:6:1 › lost prospect draft creation retains its original request through reload rather than creating a duplicate draft 
+
+    Error: expect(received).toHaveLength(expected)
+
+    Expected length: 2
+    Received length: 1
+    Received array:  [{"docTitle": "Independent uncertain prospect draft", "prospectId": "30000000-0000-4000-8000-000000000001", "requestId": "4b072ded-3e4d-4780-a2e4-94e5bab26a2a"}]
+
+      66 |     "Independent uncertain prospect draft",
+      67 |   );
+    > 68 |   expect(posts).toHaveLength(2);
+         |                 ^
+      69 |   expect(posts[0]).toEqual(posts[1]);
+      70 |   expect(
+      71 |     records.size,
+        at /workspace/capiro-contracts/apps/web/test/browser/prospect-draft-restart-acceptance.spec.ts:68:17
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/prospect-draft-restart-acc-f8f4f--creating-a-duplicate-draft/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/prospect-draft-restart-acc-f8f4f--creating-a-duplicate-draft/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/prospect-draft-restart-acc-f8f4f--creating-a-duplicate-draft/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/prospect-draft-restart-acc-f8f4f--creating-a-duplicate-draft/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    test/browser/prospect-draft-restart-acceptance.spec.ts:6:1 › lost prospect draft creation retains its original request through reload rather than creating a duplicate draft 
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

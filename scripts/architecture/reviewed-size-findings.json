@@ -30,10 +30,10 @@
     "file": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
     "kind": "function",
     "symbol": "CalendarPage",
-    "fingerprint": "6644914bfea3ab55eeb4c4649a07fca4cb9b3a1752eb2943680ef99ec5263d1e",
-    "reason": "Independently reread after the current-read correction: this is one Calendar view composer. Active feed selection, current-record filtering, display filters, navigation and selected surface all serve that view. Agenda, grid, record details, meeting input, library and sync retain separate owners; authorization, pagination and normalization remain in the existing queries/adapters. The caller availability flag prevents a master URL scope from bypassing a failed client read, and empty Agenda text requires successful active feeds. These checks constrain the same view rather than introduce another workflow.",
-    "reviewedBy": "Codex portfolio_calendar_relationships (independent coordinator-change review)",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "2aff092af2306bc537900f9cda9c4263c2dc32c1d3bfc13925cf4579ccbc8499",
+    "reason": "This remains the existing calendar surface composer. The only new source is a query-owned government effective-date feed with canonical shared protocol/pagination/provenance outside this component. The current meetings-only month/week/client semantics and existing current-read filters remain. Government forecast unavailability remains explicit; display filtering does not create backend authority.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
   },
   {
     "file": "apps/web/src/features/portfolio/calendar/debrief/DebriefGeneration.tsx",
@@ -446,15 +446,6 @@
     "reviewedOn": "2026-10-11"
   },
   {
-    "file": "apps/web/src/features/portfolio/client-profile/QuickLog.tsx",
-    "kind": "function",
-    "symbol": "QuickLog",
-    "fingerprint": "527bbeee1ca91882b2c5f5970be50d48019bdeafc020c22bf239a05ab28f6850",
-    "reason": "QuickLog composes one existing activity form and its exact saved-entry Undo presentation. The added meeting entry is a type=button navigation control, guarded by this form's current canCreate, pending and uncertain state, with the existing current client encoded into the established Calendar creation URL. Its button and caption remain beside the activity kind because they distinguish the two existing recording paths at the point of entry. The 108-line body does not add meeting transport, duration, draft projection or service state; activity authority, lifetime, persistence and receipts remain in useQuickLog, and meeting input stays in Calendar. A second controller or extracted form would split the one coupled form-action gate without removing an independent responsibility. The separate 17-line CSS module owns only the new row's desktop/phone wrapping and existing button presentation.",
-    "reviewedBy": "Codex portfolio_objectives; Codex integration coordinator (independent confirmation)",
-    "reviewedOn": "2026-10-11"
-  },
-  {
     "file": "apps/web/src/features/portfolio/client-profile/tags/FocusTags.tsx",
     "kind": "function",
     "symbol": "FocusTagSession",
@@ -619,10 +610,10 @@
     "file": "apps/web/src/features/portfolio/prospects/ProspectDetail.tsx",
     "kind": "function",
     "symbol": "ProspectDetail",
-    "fingerprint": "a6aad16495520cb935cb1d81ef942b9f75e96534ea9e54e205a47688083d694b",
-    "reason": "ProspectDetail owns one overview composition and the open/closed state of its existing editors. Detail reads, exact-ID writes, stage derivation, note/history operations, contacts, brief, templates and linking remain delegated to feature modules; the container does not authorize, persist or convert prospects. Keeping the current-record gate around all cards and dialogs prevents an invalid identity response from becoming a displayed or actionable company.",
-    "reviewedBy": "Codex portfolio_prospects_files",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "cbbe1c4d1e35e6b3b3aadf7610f646b0b27a31eb79f067c3eb6202afa784bdf7",
+    "reason": "Existing prospect detail composes its independently owned overview, brief, contacts, proposals and conversion areas. The addition mounts the canonical Portfolio Files public component only under current prospect access and links the exact immutable prospect UUID to Modules Workspace; it adds no document editor, attachment transport or cross-feature import. Existing field editing remains with its original domain hooks.",
+    "reviewedBy": "Codex shared frontend integration owner (source review)",
+    "reviewedOn": "2026-10-12"
   },
   {
     "file": "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx",
@@ -751,10 +742,10 @@
     "file": "apps/web/src/features/portfolio/relationships/email/send.ts",
     "kind": "function",
     "symbol": "sendReviewedMail",
-    "fingerprint": "9d52e43ed9acfb11da0f3c2afa6720179d67627d9272351a21a7d1fc9892be51",
-    "reason": "This function owns the exact boundary between safe preflight refusal and uncertain post-dispatch delivery. Identity, attachment readiness, reply scope and receipt rules reuse canonical contracts. Its ordering, including the final synchronous guard immediately before POST, should remain contiguous for auditability. Splitting the84 lines solely for count risks obscuring certainty classification; native authorization gaps remain explicitly open.",
-    "reviewedBy": "Codex portfolio_calendar_relationships",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "bab1c939b099abae78e44e7001577fec874a77dcc0733ce9c4f98caa9cc4f969",
+    "reason": "This 108-line function remains the sole single-mail send transaction: validate frozen input, recheck current authority/thread/attachments and selected mailbox, dispatch once, then classify a scoped receipt or uncertain outcome. Mailbox projection/recheck logic lives in mailboxes.ts and attachment policy remains separate. The reviewed sender is stripped from the wire DTO, exact connection/address/name/signature facts are verified, replies pin their origin, and uncertain dispatch never retries. These checks form one preflight/dispatch boundary rather than separate services. Existing selector-omitted compatibility and original safety cases survive; no durable replay or provider implementation was added.",
+    "reviewedBy": "Codex shared frontend integration owner (source review)",
+    "reviewedOn": "2026-10-12"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/email/useMailAttachments.ts",
@@ -796,19 +787,19 @@
     "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
     "kind": "function",
     "symbol": "MailCompose",
-    "fingerprint": "4b1ed0d9ff281b6e9ddf0b46e31610df9ad4783fdb701409208dcd7118a860e6",
-    "reason": "The rewrite request, source/lifetime guards and HTML conversion have been removed to the specific useMailRewrite controller and rewrite boundary, resolving the separate asynchronous responsibility found in the initial review. This function now composes one email draft and its frozen send-review intent; recipients, attachments, signature reads and canonical sending have separate owners. Draft fields and explicit review/confirmation describe the same compose transaction. A render-only ReviewedMailDialog remains optional if that presentation gains reuse or grows; no remaining provider or conversion orchestration justifies another extraction now.",
-    "reviewedBy": "Codex portfolio_calendar_relationships and portfolio_objectives (independent source review)",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "30b8d4c69b7db390c4bb7847e48502b27b720be5f18469f79b47c8306904b3d2",
+    "reason": "The existing compose container owns one draft and frozen send-review interaction. Current mailbox listing/thread origin are now isolated in useMailboxes, presentation in MailboxField, and safe projections/rechecks in mailboxes.ts. This function only selects and freezes the reviewed sender, presents it and gates review/confirmation. Recipient, attachment, rewrite, signature and send lifetimes retain their canonical owners. No new provider, actor resolver or transport is implemented in the 301-line presentation function; further extraction would only move the same single-use review presentation.",
+    "reviewedBy": "Codex shared frontend integration owner (source review)",
+    "reviewedOn": "2026-10-12"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/member-notes/MemberNoteForm.tsx",
     "kind": "function",
     "symbol": "NoteSession",
-    "fingerprint": "6acc2499fdd204e4fda818226a3a6819e7d91a40c56f72739528d374a30bec78",
-    "reason": "This is one shared Directory-member note form with its status and supported-kind presentation. The member-note hook owns API and lifetime behavior. Unsupported modes are explicitly disabled instead of implying client or Planner lineage. The form's fields and outcomes belong to the same note draft.",
-    "reviewedBy": "Codex portfolio_calendar_relationships",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "8654d24cc3d3ec7cdb1d01f9f98c71745bf02f09ee442e7127f2cc3a7e841f90",
+    "reason": "The shared Directory member note form retains one supported Note draft and its existing integrity/lifetime hook. The excluded disabled Commitment choice is removed from the Global Quick log member path; no replacement adapter or semantics are introduced. Existing Call/Meeting/Email disclosures and Note fields, uncertain completion and save receipt remain the same cohesive form.",
+    "reviewedBy": "Codex shared frontend integration owner (source review)",
+    "reviewedOn": "2026-10-12"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/member-notes/MemberQuickLog.tsx",
@@ -967,10 +958,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/TeamDialog.tsx",
     "kind": "function",
     "symbol": "ProfileTeamEditor",
-    "fingerprint": "f86f79366352c576ca839de56283b65c96ed8316d9ab61f02c846f2ae134be5b",
-    "reason": "Owns the account-team editor presentation and its local member/role draft. It renders the current roster, delegates controlled member/owner fields, and displays the dedicated controller result. Role input clearing occurs only after that controller reports a matching effect. Native request bodies, membership/owner receipt checks, authority, source revisions, and async lifetime are separate modules; the owner designation and actual membership role are one roster-row responsibility.",
-    "reviewedOn": "2026-10-11",
-    "reviewedBy": "Codex portfolio_calendar_relationships; independent portfolio_objectives review; root full-body integration review"
+    "fingerprint": "48b6e29fbcc5de39acf902c4ff5b1f1a688ab6aa31b44503ecee4cb469289799",
+    "reason": "This 97-line presentation composes the existing roster list/add/remove controls and the separate OrderedOwnerFields editor. The scalar writer and field were removed, ranked owners are protected from roster removal, and free-text roles retain their original display. Versioned owners, readback and pending lifetime live in their own cohesive owner module; this component implements neither transport nor authorization.",
+    "reviewedOn": "2026-10-12",
+    "reviewedBy": "Codex shared frontend integration owner (source review)"
   },
   {
     "file": "apps/web/src/features/portfolio/client-profile/FacilityFields.tsx",
@@ -1003,10 +994,10 @@
     "file": "apps/web/src/features/portfolio/client-profile/useProfileTeamEditor.ts",
     "kind": "function",
     "symbol": "useProfileTeamEditor",
-    "fingerprint": "c7350d093b1af5abcfd8fe5be3c443e3a6ad4cd0e049ce65dd62070be2fa7e79",
-    "reason": "Owns one account-team change lifecycle for the current roster and options: authorization-derived availability, explicit change, exact effect completion, retained uncertainty, and current-roster review. Native add/remove/owner contracts remain in team-writer/profile-receipts, and member/role field state remains in the view. Roster and owner cache refreshes are consequences of the same team change and do not introduce another responsibility.",
-    "reviewedOn": "2026-10-11",
-    "reviewedBy": "Codex portfolio_calendar_relationships; independent portfolio_objectives review; root full-body integration review"
+    "fingerprint": "adf493cd9639577559582281f7847966112df6bb8318086342f45b155121a738",
+    "reason": "This 109-line hook now owns only roster add/remove and its existing uncertainty/reload lifetime. Removing the scalar owner branch narrows responsibility. Current role/source guards and request cancellation are preserved; exact roster receipt validation remains in team-writer/profile-receipts. Ordered replacement has its own distinct expected-version and retained-attempt semantics and is not hidden in this hook.",
+    "reviewedOn": "2026-10-12",
+    "reviewedBy": "Codex shared frontend integration owner (source review)"
   },
   {
     "file": "apps/web/src/features/portfolio/capabilities/CapabilityForm.tsx",
@@ -1345,6 +1336,213 @@
     "fingerprint": "f74a873373b60ce98d607820d05e23f1aa70d9f0be82ed1c51b75e3295043339",
     "reason": "One Add profile choice and transition into the canonical intake form. Removing the billing summary sibling-host argument introduces no new responsibility or financial mutation. Existing capacity/intake/summary owners remain separate. See docs/integration-20261012/STRUCTURE-REVIEW.md.",
     "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/useOrderedOwners.ts",
+    "kind": "function",
+    "symbol": "useOrderedOwners",
+    "fingerprint": "f9ef647e05f17133d59662c726ef2315e1999b17075b20513b8b80f4955e3b21",
+    "reason": "This 182-line hook owns one versioned owner edit lifetime: current scoped reads, the first-edit source snapshot, dispatch state and deliberate readback after conflict or uncertainty. Input and receipt validation/HTTP replacement remain in ordered-owners.ts; rank presentation remains in OrderedOwnerFields. The retained attempt uses the application query cache across dialog closure and is cleared by the canonical application identity/client boundary. Readback compares the complete submitted order/version; draft gaps are preserved without promotion. These dependent transitions belong to one editor state machine; no member authority service, roster writer or backend ownership policy is duplicated.",
+    "reviewedBy": "Codex shared frontend integration owner (source review)",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
+    "kind": "function",
+    "symbol": "WorkspaceScreen",
+    "fingerprint": "deee3d7a09db876ddbcb2a280bbaa1c34c1fa5c866e741c48b24c330fa82e11c",
+    "reason": "This existing Workspace view dispatcher gains one validated prospect query branch and delegates list/create and the canonical editor. Invalid prospect IDs fail closed and URL navigation owns prospect/draft selection. Existing library/workflows/share routes retain their owners; there is no feature import across Portfolio/Modules or duplicate editor.",
+    "reviewedBy": "Codex shared frontend integration owner (source review)",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/QuickLog.tsx",
+    "kind": "function",
+    "symbol": "QuickLog",
+    "fingerprint": "e582ed8617e436f13f83c017161541cae717cb5ad14c1522e428afaa4066e99b",
+    "reason": "This component remains the one ordinary-activity/optional-follow-up form. The added checking and hold presentations hide restored input until current Core authority and journal consistency pass. Field remounting follows the retained request identity; FollowUpFields and FollowUpStatus own specialized rendering, and useFollowUpCommand owns command lifetime. No storage or network implementation moved into the form.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/quick-log/FollowUpStatus.tsx",
+    "kind": "function",
+    "symbol": "FollowUpStatus",
+    "fingerprint": "492843993e8de8f7798f9e1c8720837fd6f5a0967edbc004a187ddacb6f0772e",
+    "reason": "This renderer presents one retained command and its independently validated activity/task outcome. Busy text now describes an in-flight check instead of claiming response loss before dispatch. Explicit Read, Recover, Resume and acknowledged Done remain calls into the single lifecycle owner; this function performs no transport or persistence.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/quick-log/useFollowUpCommand.ts",
+    "kind": "function",
+    "symbol": "useFollowUpCommand",
+    "fingerprint": "a192413368a1005fe9db5f9c2c5aec721fda757fb08292c782ec7a0a62d4ffd5",
+    "reason": "This hook coordinates one durable follow-up command lifetime across current view, scoped query state and explicit user actions. Core protocol validation/dispatch is in command-actions, restart hydration in useCommandRecovery, and transaction/encryption consistency in the shared journal. Start, read, replay, resume and acknowledged completion share the same immutable intent, receipt lineage and cancellation guard; extracting arbitrary flags would fragment these invariants. No ordinary logger, Planner implementation, session issuer or storage algorithm is embedded here.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/quick-log/useFollowUpCommand.ts",
+    "kind": "function",
+    "symbol": "useFollowUpCommand > run",
+    "fingerprint": "a7824978aad5641b0f3c187d65702a225821bf79480c0a62345f39447ca7a5a1",
+    "reason": "This is the ordered state transition for one explicit command operation. It verifies current authority, reserves/reads the canonical original journal, dispatches the existing Core command operation, durably records validated lineage and then publishes the receipt. All steps use one lifetime guard and original request identity; pre-dispatch failure, uncertain dispatch and storage refusal remain distinct. Wire semantics, schema validation and persistence transactions are separate owners. Its sequencing is intentionally contiguous for review.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+    "kind": "function",
+    "symbol": "DraftEditor",
+    "fingerprint": "27b4e0b06f83d1a19f4d4d87478db8d3d4b1006a3d7d4e20d6e048200bfa5c5e",
+    "reason": "This remains the canonical manual document editor for both general and prospect-origin drafts. The prospect wrapper hydrates guarded retained input before mounting it and supplies the dedicated save lifecycle. Fields, current-content comparison, history and export controls concern this same document; request/persistence/authority logic remains outside the renderer. General draft and Newsletter behavior are preserved.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/prospects/ProspectDraftCreate.tsx",
+    "kind": "function",
+    "symbol": "ProspectDraftCreate",
+    "fingerprint": "c4b28afed0611c6762615d89e71948d7b8c209e0b0150c37e278d79ffee2ac17",
+    "reason": "This component owns one explicit prospect manual-draft creation and original-seed recovery interaction. Shared recovery owns storage/hydration; the fixed-operation gateway owns transport; recovery-authority validates current Core identity. Its title, pending state, exact receipt validation and recovery button serve the same create intent. It neither runs generation nor creates a separate editor.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/prospects/ProspectWorkspace.tsx",
+    "kind": "function",
+    "symbol": "ProspectWorkspace",
+    "fingerprint": "307d5019b31e6e5382e3294ba76e1682071884473678aa3f884b4f8f3ea251fa",
+    "reason": "The prospect document list remains a route-scoped view composer. The only added wiring is current Core user identity into the existing creation session key and props, so retained data cannot cross actors sharing another browser hint. Query, editor and creation owners remain distinct.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/prospects/useProspectDraftSave.ts",
+    "kind": "function",
+    "symbol": "useProspectDraftSave",
+    "fingerprint": "baab3ce571daecef2f438b9da53279a01e30490ad55d9a9a60a71a7c89e7edc8",
+    "reason": "This hook coordinates one manual document save/read-back lifecycle. The journal now retains its uncertain input through restart and current authority is reread before access. Content PATCH and version creation deliberately retain the existing separate fixed operations and explicit concurrency limits. Rendering, origin/content validators, storage/crypto and transport are separate owners; these flags represent one save intent, not a new subsystem.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/prospects/useProspectDraftSave.ts",
+    "kind": "function",
+    "symbol": "useProspectDraftSave > save",
+    "fingerprint": "ef213e547e4bbdb0e03c96e5907bca06ae8e9d665d02c78cc1f5bfbd13e08148",
+    "reason": "The83-line transition keeps original-intent reservation, current-authority/preflight, exact edited-content receipt, version receipt and acknowledgement in one ordered operation. Local persistence precedes the interruptible preflight so leaving cannot lose edits. A mismatch stops further writes and retains the same intent. Backend atomicity/CAS is not invented.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/ProspectFiles.tsx",
+    "kind": "function",
+    "symbol": "ProspectFileSession",
+    "fingerprint": "fdb71b7f7745545c4be16e63b5d26c31ffba9371f8c0540833908ded57fe4548",
+    "reason": "This view composes the existing prospect file list, readiness-gated read links, explicit deletion confirmation and separate upload hook. New checking/hold/reselect controls describe upload recovery; they add no HTTP or storage implementation to the renderer. A duplicate alert for the same failed current-list read is avoided while both retry controls remain visible.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/prospect-upload.ts",
+    "kind": "function",
+    "symbol": "uploadProspectFile",
+    "fingerprint": "b85dd09bb20bf08c4b9aaf7d71249b87da656ec201414e212c2442eee91f9868",
+    "reason": "This adapter owns one exact metadata/digest-bound upload protocol: obtain the original ticket, persist its storage key, claim bytes once, send bytes, then confirm the original key. Persistence is injected at protocol boundaries while the journal owns its transaction. Restored attempts omit File and signed credentials; bytes-started attempts go directly to confirmation. The ordering is essential and remains separate from UI/auth lifetime.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/useProspectUpload.ts",
+    "kind": "function",
+    "symbol": "useProspectUpload",
+    "fingerprint": "0b64e8ebac7cbd6e65481bcd7bc89fbbd8ab370c38a971cb2a55d849edaf5e56",
+    "reason": "This hook owns one actor/prospect upload intent and its view lifetime. It reuses shared guarded hydration and durable journal operations, with upload stages/receipt validation in prospect-upload. Selecting identical bytes for a pre-transfer recovery, retaining the original key and publishing a final receipt share one intent; separate flags/hooks would obscure its no-reupload invariant.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/useProspectUpload.ts",
+    "kind": "function",
+    "symbol": "useProspectUpload > run",
+    "fingerprint": "ec97e8e7ffbfd6ce403d500119f20084f53c835a86c821a146fcef8f2632d64f",
+    "reason": "This transition rereads the original journal, verifies current Core/prospect access, validates any reselected file against immutable metadata/digest, delegates the upload protocol and acknowledges a verified confirmation. Stale acknowledged attempts cannot mint a new key. Storage refusal/authority loss stops the action, and cancellation covers the storage fetch as well as Core calls. Each step belongs to the same upload transaction.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/shared/session/recovery/useRetainedIntent.ts",
+    "kind": "function",
+    "symbol": "useRetainedIntent",
+    "fingerprint": "69c192f961c67f1cfb03a3dd0c31f30e777d476b6ecd22e2a8e266deb44cb59d",
+    "reason": "This85-line shared hook owns only scoped journal hydration and its checking/ready/hold state. Domain callbacks supply fresh authority and retain ownership of every backend write. Scope/retry tokens and abort controllers reject late installs after replacement; it does not establish backend authority or mix domain protocols. It is shared by three real prospect writers.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterStaging.tsx",
+    "kind": "function",
+    "symbol": "StagingSelection",
+    "fingerprint": "5be9a480554f38b89a831e1f2d832fa6256f22c0b970ee87fb0feca78c760b04",
+    "reason": "This renderer owns one explicit saved-revision and existing-session staging review. Source/session query selection, compatibility disclosure, retained-intent presentation, review acknowledgement and receipt link describe the same bounded interaction. The fixed gateway owns transport schemas, staging-model owns binding checks, useNewsletterStaging owns dispatch/recovery, and shared/session/recovery owns persistence. It neither creates sessions nor generates or sends content; no independent domain responsibility is hidden in the view.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
+    "kind": "function",
+    "symbol": "NewsletterWorkflow",
+    "fingerprint": "44a06826b092fe420cba3ad9297469d61388792849d8665a054632582628b787",
+    "reason": "The established Newsletter builder retains its template/editor/preview/comment/save behavior. Its former unavailable staging placeholder now delegates to the cohesive NewsletterStaging component. No wire contract, persistence or write lifecycle was added to the builder. The existing panel and actions remain its presentation responsibility.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/newsletter/useNewsletterStaging.ts",
+    "kind": "function",
+    "symbol": "useNewsletterStaging",
+    "fingerprint": "0f8c856513200a41973bf288a183f289c9abcadb8c0712ce3ef84aa165d96921",
+    "reason": "This hook owns one original staging intent from explicit submission through validated receipt acknowledgement. It composes existing durable recovery and fixed transport APIs with feature-specific source/destination/provenance checks. Preflight, same-key dispatch, uncertain-result hold and explicit acknowledgement must preserve one original lineage; splitting flags across unrelated hooks would obscure that invariant. No content generation, sender mutation or delivery is performed.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/quick-log/useCommandRecovery.ts",
+    "kind": "function",
+    "symbol": "useCommandRecovery",
+    "fingerprint": "d9a78c326945d796ecb29eae0e04620a06f756f76fd415d91df922465127b57d",
+    "reason": "The recovery hook remains the single owner of fresh authority before retained Quicklog hydration. A render-time activation epoch invalidates ready state for every open/close/scope/API lifetime transition before any retained fields commit. The async effect still checks current Core identity and client authorization, aborts stale reads, then installs the journal. This closes the mounted reopen disclosure without weakening the original mutation checks or splitting one authority lifecycle across components.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/ObjectiveOutreachDestination.tsx",
+    "kind": "function",
+    "symbol": "ObjectiveOutreachDestination",
+    "fingerprint": "042d944d962abd1bfe9f87ccc492150cacbb6d664edc2cbd729c53e2d57d3d7d",
+    "reason": "This component owns one read-only Objective-bound destination. Query parsing and exact response binding protect the same observation. The shared fixed operation and useCapiroQuery own transport, reset and cancellation; the existing campaign editor is separate and is deliberately not rendered under this limited contract. It has no resource mutation, durable association or alternative-kind fallback. The current delta only removes stale copy claiming all other destination kinds are unavailable; the Outreach flow, transport and lifecycle are unchanged.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/ObjectiveOutreach.tsx",
+    "kind": "function",
+    "symbol": "ObjectiveOutreach",
+    "fingerprint": "3f06b71ba80c542e4031b1898d7387f1d52cd112a9e315eaf1ad48b1a900c1af",
+    "reason": "One explicit existing-session selection and navigation interaction belongs here: paged authorized session choices, current persisted Objective context, cancellation, owner resolution and its pending/error UI. The shared operation module owns the wire validation; there is no campaign write, association persistence or resource creation. Keeping these dependent states together makes interrupted and unsaved-editor behavior reviewable. The current delta only removes stale copy claiming all other destination kinds are unavailable; the Outreach flow, transport and lifecycle are unchanged.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/objectives/ObjectiveWorkDestinations.tsx",
+    "kind": "function",
+    "symbol": "ObjectiveWorkPicker",
+    "fingerprint": "6a1f8d2731c638e12c34a268415e63e496c40ba42b4d7e28656384be81dc322e",
+    "reason": "This is one existing-resource selection interaction: current Objective/client-scoped choice query, explicit selected resource, task cursor navigation and owner-resolution status. Canonical wire/owner binding and service selection live in objective-work-sources; cancellation/navigation belong to useObjectiveWorkDestination; saved-version choice has its own cohesive component. No backend authorization, command, persisted association or feature editor is embedded. Keeping this dependent choice/paging state together makes stale selections and interrupted opens reviewable.",
+    "reviewedBy": "Codex shared frontend integration responsibility review",
     "reviewedOn": "2026-10-12"
   }
 ]

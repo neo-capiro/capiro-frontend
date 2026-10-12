@@ -1,0 +1,26 @@
+{
+  "head": "35b6598c0456ebc9ef4cf48e20aef0e5167660b2",
+  "tree": "1b4a355634744ef4827eb37fd1e2e846b483bef7",
+  "srcTree": "10f28626c13311cebb0ab3c494ebc63af31c63c2",
+  "status": "?? node_modules",
+  "canonicalControlSHA256": "a9e370b88207ede0d7dbc9eb8ebf71fa50de2fac1b49c27c7244110f3e136e01",
+  "executedControlSHA256": "29afad21825d39723c187020bb52f2dc573b7011ace6d9b32888a2c9841922aa",
+  "substitutions": [
+    {
+      "before": "'/workspace/review-pr9/r3/source/apps/web/test/browser/fixtures'",
+      "after": "\"/workspace/capiro-control-35b6598/apps/web/test/browser/fixtures\""
+    },
+    {
+      "before": "'/workspace/review-pr9/r3/source/apps/web/test/browser/module-route-fixtures'",
+      "after": "\"/workspace/capiro-control-35b6598/apps/web/test/browser/module-route-fixtures\""
+    },
+    {
+      "before": "'/workspace/review-pr9/r3/source/apps/web/tests/prospect-resources-fixtures'",
+      "after": "\"/workspace/capiro-control-35b6598/apps/web/tests/prospect-resources-fixtures\""
+    },
+    {
+      "before": "'/workspace/review-pr9/r3/evidence/prospect-draft-duplicate.json'",
+      "after": "\"/tmp/r3-draft-35b6598-red/prospect-draft-duplicate.json\""
+    }
+  ]
+}

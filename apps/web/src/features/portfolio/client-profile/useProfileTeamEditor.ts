@@ -67,15 +67,10 @@ export function useProfileTeamEditor(
         setUnknown(true);
         return false;
       }
-      if (receipt.kind === "roster")
-        cache.setQueryData(context.roster.key, receipt.roster);
+      cache.setQueryData(context.roster.key, receipt.roster);
       void cache.invalidateQueries({ queryKey: profileKey(clientId, "team") });
       void cache.invalidateQueries({ queryKey: ["account-owners"] });
-      setMessage(
-        value.kind === "owner"
-          ? "Account owner saved. The team is refreshing."
-          : "Team updated.",
-      );
+      setMessage("Team updated.");
       return true;
     } catch (cause) {
       if (!alive.current || controller.signal.aborted) return false;

@@ -1,0 +1,31 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Shared session entries must resolve runtime configuration per request.
++ actual - expected
+
++ [
++   '/meri',
++   '/meri/fixture/cited-answer',
++   '/meri/fixture/run-activity',
++   '/settings'
++ ]
+- []
+
+    at verifyRuntimeConfig (file:///workspace/capiro-contracts/apps/web/tests/production/verify-runtime-config.mjs:17:10)
+    at async file:///workspace/capiro-contracts/[eval1]:1:94 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [
+    '/meri',
+    '/meri/fixture/cited-answer',
+    '/meri/fixture/run-activity',
+    '/settings'
+  ],
+  expected: [],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

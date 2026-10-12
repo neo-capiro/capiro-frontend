@@ -67,5 +67,7 @@ export const teamMemberSchema = z.object({
   lastName: z.string().nullable(),
   role: z.string().nullable(),
   isOwner: z.boolean(),
+  ownerRank: z.number().int().min(1).max(4).nullable().optional(),
+  ownerAvailable: z.boolean().nullable().optional(),
   addedAt: z.string().nullable(),
 });

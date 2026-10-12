@@ -7,6 +7,7 @@ import { PlannerScreen } from "./planner/PlannerScreen";
 import { ResearchPortfoliosScreen } from "./research-portfolios/ResearchPortfoliosScreen";
 import { StrategiesScreen } from "./strategies/StrategiesScreen";
 import { WorkspaceScreen } from "./workspace/WorkspaceScreen";
+import { ObjectiveDestinationRoute } from "./objective-destinations/ObjectiveDestinationRoute";
 
 /** Public composition boundary; each module owns its screens and state. */
 export function ModuleScreen({ module }: { module: ModuleSlug }) {
@@ -20,12 +21,24 @@ export function ModuleScreen({ module }: { module: ModuleSlug }) {
     case "intelligence":
       return <IntelligenceScreen />;
     case "planner":
-      return <PlannerScreen />;
+      return (
+        <ObjectiveDestinationRoute kind="planner_task">
+          <PlannerScreen />
+        </ObjectiveDestinationRoute>
+      );
     case "research-portfolios":
       return <ResearchPortfoliosScreen />;
     case "strategies":
-      return <StrategiesScreen />;
+      return (
+        <ObjectiveDestinationRoute kind="strategy">
+          <StrategiesScreen />
+        </ObjectiveDestinationRoute>
+      );
     case "workspace":
-      return <WorkspaceScreen />;
+      return (
+        <ObjectiveDestinationRoute kind="workspace_saved_revision">
+          <WorkspaceScreen />
+        </ObjectiveDestinationRoute>
+      );
   }
 }

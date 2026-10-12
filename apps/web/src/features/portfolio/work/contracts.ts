@@ -38,6 +38,7 @@ export function strategyDetailFor(strategyId: string, clientId: string) {
 }
 export const workspaceDraftSchema = z.object({
   id: z.string().uuid(),
+  prospectId: z.uuid().nullable().optional(),
   docTitle: z.string(),
   client: z.string().nullable(),
   product: z.string().nullable(),
@@ -57,7 +58,9 @@ export function clientDrafts(
 ) {
   const matches = clients.filter((candidate) => candidate.name === client.name);
   return matches.length === 1 && matches[0]?.id === client.id
-    ? drafts.filter((draft) => draft.client === client.name)
+    ? drafts.filter(
+        (draft) => !draft.prospectId && draft.client === client.name,
+      )
     : [];
 }
 export function workProjection(strategies: StrategyDetail[], today: string) {

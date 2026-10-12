@@ -1,4 +1,5 @@
 import type { CapiroApi } from "../../../shared/capiro/http";
+import { loadEffectiveDatePages } from "../../../shared/federal-register/effective-dates";
 import type { CalendarHearing } from "../../../shared/capiro/operations/legiwatch-calendar-schemas";
 import type { PlannerTask } from "../../../shared/capiro/operations/planner-schemas";
 import type { capiroOperations } from "../../../shared/capiro/registry";
@@ -84,7 +85,7 @@ export async function loadCommentDeadlines(
       await api.request("calendar.commentDeadlines", {}, { signal: signal }),
     ),
     warning:
-      "Federal Register deadlines cover the next 30 days and up to 50 records. Government milestones and forecasts have no verified calendar mapping.",
+      "Federal Register comment deadlines cover the next 30 days and up to 50 records. They are not effective dates.",
   };
 }
 export async function loadFunding(
@@ -138,6 +139,29 @@ export async function loadAgendaSources(
   signal: AbortSignal,
 ) {
   const sources = [
+    {
+      name: "Government",
+      load: async (): Promise<SourceResult> => {
+        const result = await loadEffectiveDatePages(
+          (query) =>
+            api.request("calendar.effectiveDates", { query }, { signal }),
+          range.firstDay,
+          range.lastDay,
+        );
+        return {
+          items: result.records.map((record) => ({
+            key: `effective:${record.documentNumber}`,
+            source: "Government",
+            title: record.title,
+            date: record.date,
+            time: "Publisher effective date · date only",
+            context: `Federal Register · ${record.documentNumber} · coverage incomplete`,
+            effectiveDate: record,
+          })),
+          warning: result.warnings.join(" "),
+        };
+      },
+    },
     { name: "Planner", load: () => loadPlanner(api, signal) },
     { name: "Hearings", load: () => loadHearings(api, range, signal) },
     {

@@ -9,6 +9,8 @@ import {
   ObjectiveReadyConfirmation,
 } from "./ObjectiveEditorControls";
 import { useObjectiveEditorSession } from "./useObjectiveEditorSession";
+import { ObjectiveOutreach } from "./ObjectiveOutreach";
+import { ObjectiveWorkDestinations } from "./ObjectiveWorkDestinations";
 
 export function ObjectiveEditor({
   clientId,
@@ -60,6 +62,26 @@ export function ObjectiveEditor({
         <ObjectiveEditorFeedback session={session} />
         <ObjectiveEditorActions session={session} />
       </form>
+      {open && session.record && (
+        <ObjectiveOutreach
+          key={`${session.record.id}:${session.record.version}`}
+          objective={session.record}
+          disabled={
+            session.mutation.isPending ||
+            session.draftStatus === "Unsaved changes"
+          }
+        />
+      )}
+      {open && session.record && (
+        <ObjectiveWorkDestinations
+          key={`${session.record.id}:${session.record.version}`}
+          objective={session.record}
+          disabled={
+            session.mutation.isPending ||
+            session.draftStatus === "Unsaved changes"
+          }
+        />
+      )}
       <ObjectiveReadyConfirmation session={session} />
     </Dialog>
   );

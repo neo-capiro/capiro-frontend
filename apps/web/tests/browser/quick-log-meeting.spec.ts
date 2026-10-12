@@ -19,6 +19,10 @@ function recordWrites(page: Page) {
 
 async function fillActivity(page: Page) {
   const dialog = quickLog(page);
+  await expect(dialog.getByLabel("Activity type").locator("option")).toHaveText(
+    ["Note", "Call", "Logged email", "Decision", "Request"],
+  );
+  await expect(dialog.getByText(/We owe|They owe|Counterparty/)).toHaveCount(0);
   await dialog.getByLabel("Activity type").selectOption("call");
   await dialog.getByLabel("Title", { exact: true }).fill("Private local title");
   await dialog

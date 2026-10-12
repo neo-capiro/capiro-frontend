@@ -186,11 +186,9 @@ export function CalendarFilters({
   return (
     <div className={styles.filters}>
       {(mixed ? agendaSources : (["Meetings"] as const)).map((source) => {
-        const unavailable =
-          source === "Government" ||
-          warnings.some((warning) =>
-            warning.startsWith(`${source} unavailable:`),
-          );
+        const unavailable = warnings.some((warning) =>
+          warning.startsWith(`${source} unavailable:`),
+        );
         return (
           <button
             type="button"
@@ -198,10 +196,9 @@ export function CalendarFilters({
             className={`${styles.sourceChip} ${styles[source.toLowerCase()]}`}
             aria-pressed={selected.has(source)}
             onClick={() => onToggle(source)}
-            disabled={source === "Government"}
             title={
               source === "Government"
-                ? "Government effective-date and forecast calendar contracts are not available."
+                ? "Publisher effective dates only; coverage is incomplete. Forecast dates remain unavailable."
                 : undefined
             }
           >

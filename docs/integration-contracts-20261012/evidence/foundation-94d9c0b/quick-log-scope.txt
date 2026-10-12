@@ -1,0 +1,33 @@
+
+> capiro-frontend@0.1.0 test:browser
+> npm run test:browser --workspace @capiro/web -- tests/browser/quick-log-meeting.spec.ts --workers=3
+
+
+> @capiro/web@0.1.0 test:browser
+> playwright test tests/browser/quick-log-meeting.spec.ts --workers=3
+
+[WebServer] (node:172967) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 1 worker
+
+(node:173042) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/browser/quick-log-meeting.spec.ts:34:3 › meeting handoff uses current client 10000000-0000-4000-8000-000000000001, carries no activity draft and sends no write (5.9s)
+  ✓  2 tests/browser/quick-log-meeting.spec.ts:34:3 › meeting handoff uses current client 10000000-0000-4000-8000-000000000002, carries no activity draft and sends no write (4.0s)
+  ✓  3 tests/browser/quick-log-meeting.spec.ts:109:1 › phone handoff wraps as designed and opens Calendar without satisfying activity validation (3.1s)
+  ✓  4 tests/browser/quick-log-meeting.spec.ts:151:1 › an unsupported current role cannot navigate through the meeting handoff (3.0s)
+  ✓  5 tests/browser/quick-log-meeting.spec.ts:170:1 › a pending activity save blocks the handoff and preserves the original exact save receipt (3.0s)
+  ✓  6 tests/browser/quick-log-meeting.spec.ts:215:1 › an unknown activity result retains the draft, blocks the handoff and exposes no Undo (3.3s)
+
+  6 passed (23.8s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

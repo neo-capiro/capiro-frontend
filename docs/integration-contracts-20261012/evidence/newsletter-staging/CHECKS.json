@@ -1,0 +1,32 @@
+{
+  "source": "unpublished source subsequently committed with this evidence; final-source combined gate pending",
+  "browser": {
+    "passed": 25,
+    "failed": 0,
+    "scope": "9 Newsletter plus16 prospect Workspace"
+  },
+  "unit": {
+    "passed": 16,
+    "failed": 0
+  },
+  "typecheck": "passed",
+  "lint": {
+    "errors": 0,
+    "warnings": 76,
+    "newWarnings": 0
+  },
+  "format": "passed",
+  "architecture": {
+    "total": 407,
+    "reviewed": 382,
+    "inheritedUnreviewed": 25,
+    "blocking": 0,
+    "boundaryErrors": 0
+  },
+  "notClaimed": [
+    "native PostgreSQL/RLS/MVCC",
+    "backend migration or deployment",
+    "provider sends or model workloads",
+    "337 Portfolio row acceptance"
+  ]
+}

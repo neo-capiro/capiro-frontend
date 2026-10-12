@@ -1,0 +1,39 @@
+
+> @capiro/web@0.1.0 test:browser
+> playwright test activity-command-recovery.spec.ts activity-command-storage.spec.ts capability-presentation.spec.ts
+
+[WebServer] (node:216529) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 21 tests using 1 worker
+
+(node:216548) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/browser/activity-command-recovery.spec.ts:7:1 › reload restores the original body only after fresh Core authority; 404 permits only deliberate exact-key replay (5.4s)
+  ✓   2 tests/browser/activity-command-recovery.spec.ts:37:3 › a replacement Core actor never sees or dispatches the retained body after reload (3.6s)
+  ✓   3 tests/browser/activity-command-recovery.spec.ts:37:3 › a replacement Core tenant never sees or dispatches the retained body after reload (3.6s)
+  ✓   4 tests/browser/activity-command-recovery.spec.ts:55:1 › expiry hides the draft immediately; restoring the same current actor recovers the original without posting (2.7s)
+  ✓   5 tests/browser/activity-command-recovery.spec.ts:65:1 › current client authorization refusal holds recovery without decrypting or posting; explicit retry rereads authority (4.0s)
+  ✓   6 tests/browser/activity-command-recovery.spec.ts:79:1 › explicit acknowledgement erases the sensitive journal payload and permits the next intent after reload (3.7s)
+  ✓   7 tests/browser/activity-command-storage.spec.ts:5:3 › localStorage unavailable after response loss blocks replacement commands across reload (4.3s)
+  ✓   8 tests/browser/activity-command-storage.spec.ts:5:3 › indexedDB unavailable after response loss blocks replacement commands across reload (4.1s)
+  ✓   9 tests/browser/activity-command-storage.spec.ts:5:3 › locks unavailable after response loss blocks replacement commands across reload (4.0s)
+  ✓  10 tests/browser/activity-command-storage.spec.ts:22:3 › fence corruption cannot become an empty form or a replacement key (3.7s)
+  ✓  11 tests/browser/activity-command-storage.spec.ts:22:3 › missing-fence corruption cannot become an empty form or a replacement key (3.4s)
+  ✓  12 tests/browser/activity-command-storage.spec.ts:22:3 › missing-record corruption cannot become an empty form or a replacement key (3.7s)
+  ✓  13 tests/browser/activity-command-storage.spec.ts:22:3 › ciphertext corruption cannot become an empty form or a replacement key (3.9s)
+  ✓  14 tests/browser/activity-command-storage.spec.ts:54:1 › retained browser storage contains opaque ciphertext and a nonextractable key, never plaintext draft fields (4.0s)
+  ✓  15 tests/browser/capability-presentation.spec.ts:11:1 › saved Profile keeps the exact native payload and draft across Documents and closed Details (5.9s)
+  ✓  16 tests/browser/capability-presentation.spec.ts:110:1 › create retains optional MRL and Notes and exposes saved-only fields after its one native create (4.3s)
+  ✓  17 tests/browser/capability-presentation.spec.ts:195:1 › tab and disclosure keyboard navigation excludes inactive Profile controls and restores opener focus (3.9s)
+  ✓  18 tests/browser/capability-presentation.spec.ts:263:1 › saving an invalid Name inside collapsed Details reveals and focuses the field without writing (4.3s)
+  ✓  19 tests/browser/capability-presentation.spec.ts:295:1 › a save refusal preserves the mounted Profile draft and the explicit retry action (4.5s)
+  ✓  20 tests/browser/capability-presentation.spec.ts:331:1 › pending save remains one operation while switching capability tabs (3.2s)
+  ✓  21 tests/browser/capability-presentation.spec.ts:373:1 › Documents tab keeps the existing source-scoped upload and file-read boundary (5.1s)
+
+  21 passed (1.5m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

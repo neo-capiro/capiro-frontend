@@ -4,7 +4,6 @@ import { assertProfileActor, type ProfileActor } from "./profile-access";
 import {
   profileMemberOptionsSchema,
   profileTeamSchema,
-  teamOwnerReceipt,
   teamRosterReceipt,
   type TeamChange,
 } from "./profile-receipts";
@@ -34,10 +33,10 @@ export function assertTeamChange(
   const team = saved.data;
   if (change.kind === "remove") {
     const member = team.find((row) => row.userId === change.userId);
-    if (!member || member.isOwner)
+    if (!member || member.isOwner || member.ownerRank)
       throw new ApiError(
         409,
-        "Reassign the current account owner instead of removing them from the team.",
+        "Change the owner order explicitly before removing a ranked owner from the team.",
       );
     return;
   }
@@ -56,10 +55,7 @@ export function assertTeamChange(
       "Reload current member options before changing this team.",
     );
   const members = available.data;
-  if (
-    change.userId !== null &&
-    !members.some((member) => member.id === change.userId)
-  )
+  if (!members.some((member) => member.id === change.userId))
     throw new ApiError(
       409,
       "That member is no longer available. Choose a current member.",
@@ -75,19 +71,6 @@ export async function writeTeamChange(
   assertTeamChange(cache, context, change);
   signal.throwIfAborted();
   const clientId = encodeURIComponent(context.clientId);
-  if (change.kind === "owner") {
-    const owner = await api.request(
-      "core",
-      `client-account-owners/${clientId}`,
-      teamOwnerReceipt(change.userId),
-      {
-        method: "PUT",
-        body: { accountOwnerUserId: change.userId },
-        signal,
-      },
-    );
-    return { kind: "owner" as const, owner };
-  }
   const roster = await api.request(
     "core",
     `clients/${clientId}/team${change.kind === "remove" ? `?userId=${encodeURIComponent(change.userId)}` : ""}`,

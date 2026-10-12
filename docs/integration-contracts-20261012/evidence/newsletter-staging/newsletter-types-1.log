@@ -1,0 +1,44 @@
+
+> capiro-frontend@0.1.0 typecheck
+> npm run typecheck --workspaces --if-present
+
+
+> @capiro/web@0.1.0 typecheck
+> tsc --noEmit
+
+src/features/modules/workspace/newsletter/NewsletterStaging.tsx(152,14): error TS2322: Type '{ children: (Element | Element[] | undefined)[]; id: string; value: string; disabled: boolean; onChange: (event: any) => void; }' is not assignable to type 'IntrinsicAttributes & { value: string; onValueChange: (value: string) => void; options: readonly { value: string; label: string; disabled?: boolean | undefined; }[]; id?: string | undefined; placeholder?: string | undefined; disabled?: boolean | undefined; "aria-label"?: string | undefined; }'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & { value: string; onValueChange: (value: string) => void; options: readonly { value: string; label: string; disabled?: boolean | undefined; }[]; id?: string | undefined; placeholder?: string | undefined; disabled?: boolean | undefined; "aria-label"?: string | undefined; }'.
+src/features/modules/workspace/newsletter/NewsletterStaging.tsx(156,26): error TS7006: Parameter 'event' implicitly has an 'any' type.
+src/features/modules/workspace/newsletter/NewsletterStaging.tsx(170,14): error TS2322: Type '{ children: (Element | Element[] | undefined)[]; id: string; value: string; disabled: boolean; onChange: (event: any) => void; }' is not assignable to type 'IntrinsicAttributes & { value: string; onValueChange: (value: string) => void; options: readonly { value: string; label: string; disabled?: boolean | undefined; }[]; id?: string | undefined; placeholder?: string | undefined; disabled?: boolean | undefined; "aria-label"?: string | undefined; }'.
+  Property 'children' does not exist on type 'IntrinsicAttributes & { value: string; onValueChange: (value: string) => void; options: readonly { value: string; label: string; disabled?: boolean | undefined; }[]; id?: string | undefined; placeholder?: string | undefined; disabled?: boolean | undefined; "aria-label"?: string | undefined; }'.
+src/features/modules/workspace/newsletter/NewsletterStaging.tsx(174,26): error TS7006: Parameter 'event' implicitly has an 'any' type.
+npm error Lifecycle script `typecheck` failed with error:
+npm error code 2
+npm error path /workspace/capiro-contracts/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-contracts/apps/web
+npm error command failed
+npm error command sh -c tsc --noEmit
+
+
+> @capiro/meri-client@0.1.0 typecheck
+> tsc -p tsconfig.json --noEmit
+
+
+> @capiro/qualification-elements@0.0.0 typecheck
+> tsc -p tsconfig.json
+
+
+> @capiro/ui@0.0.0 typecheck
+> tsc -p tsconfig.json
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

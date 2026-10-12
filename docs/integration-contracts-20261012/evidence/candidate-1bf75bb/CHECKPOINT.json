@@ -1,0 +1,92 @@
+{
+  "source": {
+    "head": "1bf75bb09dab2d0d8b9cc28957d124ed20431050",
+    "tree": "8892ff0295f5fc66c026cda02a0f2cae6258d80c",
+    "srcTree": "320ec093ebb23a3dc2be321b6b88244b97008202",
+    "status": "",
+    "rootLock": "48343e320a9caaf6e92f042ad3373474f8825029",
+    "node": "v24.19.0",
+    "npm": "11.9.0",
+    "startedAt": "2026-10-12T08:47:45.052007+00:00",
+    "browserWorkers": 2,
+    "priorBuildNotReused": true,
+    "preservedArchiveTree": "67b25ecb1eac4d4dd618748f51660e004f5a7028",
+    "preservedCommitmentViewBlob": "35c008c086d461e8ccf8575e07037e0956c0dc3a",
+    "ownerHeads": {
+      "main": "02c02d95bdf3949662b9123f425271c6491ffdab",
+      "portfolioImplementation": "abaeab37b36d60b3e5185755e1b2c9169d7c92f3",
+      "portfolioPublishedArchive": "c330cebbd021eb984b4bf64ae13dbb991ae6b1c0",
+      "meri": "3cc30ff3182e8050d563516607866cf07efe2aef",
+      "modules": "50155cbbf0e4df1eecba22cbfc9b2c35bff87e0a"
+    }
+  },
+  "install": {
+    "exit": 0,
+    "packages": 847,
+    "scripts": "ignored; fresh official SSR preparation separately recorded"
+  },
+  "check": {
+    "exit": 0,
+    "rootTests": 58,
+    "applicationUnitTests": 1133,
+    "gatewayUnitTests": 94,
+    "transportTests": 21,
+    "lintErrors": 0,
+    "lintWarnings": 76,
+    "architecture": {
+      "total": 409,
+      "reviewed": 384,
+      "inheritedUnreviewed": 25,
+      "blocking": 0
+    }
+  },
+  "productionBuild": {
+    "exit": 0,
+    "buildId": "GDfV9FMQ94ToV66tGl1e-"
+  },
+  "elements": {
+    "exit": 0,
+    "tests": 15,
+    "receiptSHA256": "c30f22e4ac29bd4a8a64f8ae14d758b6b1711920ad4ed5797173e4e0e6cfe9a9"
+  },
+  "actualServer": {
+    "exit": 0
+  },
+  "meriActualServer": {
+    "exit": 0
+  },
+  "reviewerCanonicalPositive": {
+    "passed": 2,
+    "failed": 0
+  },
+  "reviewerCanonicalReopen": {
+    "passed": 1,
+    "failed": 0
+  },
+  "modulesBrowser": {
+    "startTime": "2026-10-12T08:52:19.672Z",
+    "duration": 328392.307,
+    "expected": 97,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "portfolioBrowser": {
+    "startTime": "2026-10-12T08:49:47.481Z",
+    "duration": 704259.811,
+    "expected": 216,
+    "skipped": 706,
+    "unexpected": 6,
+    "flaky": 0,
+    "exit": 130,
+    "status": "FAILED/SUPERSEDED: six calendar fixture failures; explicit SIGINT after discovery; terminal result preserved",
+    "passed": 216,
+    "failed": 6,
+    "interrupted": 2,
+    "unrun": 704
+  },
+  "nativeAndImageQualification": "Not accepted: native services/migrations/RLS/permissions/MVCC/liveClerk/providers unrun; official pinned Alpine host proxy403. No workaround or pin change.",
+  "portfolioRowsAccepted": 0,
+  "portfolioRowsTotal": 337,
+  "prohibitedActionsPerformed": false
+}

@@ -5,7 +5,9 @@ import { strategiesPlanOperations } from "./strategies-plan";
 import { strategiesReferenceOperations } from "./strategies-reference";
 import { strategiesReportOperations } from "./strategies-reports";
 import { strategiesWatchOperations } from "./strategies-watch";
+import { strategyObjectiveOperations } from "./objective-work-destinations";
 export const strategiesOperations = {
+  ...strategyObjectiveOperations,
   ...strategiesPlanOperations,
   ...strategiesReferenceOperations,
   ...strategiesReportOperations,

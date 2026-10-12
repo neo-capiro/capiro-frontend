@@ -1,7 +1,7 @@
 "use client";
 import { DocumentsLibrary, WorkflowCards } from "./WorkspaceLibrary";
 
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import {
   workspaceId,
@@ -15,6 +15,7 @@ import { TemplateStudio } from "./templates/TemplateStudio";
 import styles from "./workspace.module.css";
 import { WorkspaceDraft } from "./WorkspaceDraft";
 import { WorkspaceShares } from "./WorkspaceShares";
+import { ProspectWorkspace } from "./prospects/ProspectWorkspace";
 
 type View =
   | "documents"
@@ -31,6 +32,8 @@ const tabs: { id: View; label: string }[] = [
 
 export function WorkspaceScreen() {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const prospect = workspaceId.safeParse(searchParams.get("prospectId"));
   const initialView = searchParams.get("view");
   const requestedView: View =
     initialView === "hillday" ||
@@ -61,6 +64,32 @@ export function WorkspaceScreen() {
     setCreatedId(undefined);
     setView("documents");
   };
+  if (searchParams.has("prospectId") && !prospect.success)
+    return (
+      <section role="alert">
+        <h1>Prospect unavailable</h1>
+        <p>A canonical prospect ID is required.</p>
+      </section>
+    );
+  if (prospect.success) {
+    const base = `/modules/workspace?prospectId=${encodeURIComponent(prospect.data)}`;
+    return requestedDraft.success ? (
+      <WorkspaceDraft
+        key={`${prospect.data}:${requestedDraft.data}`}
+        id={requestedDraft.data}
+        prospectId={prospect.data}
+        onClose={() => router.push(base)}
+      />
+    ) : (
+      <ProspectWorkspace
+        key={prospect.data}
+        prospectId={prospect.data}
+        onOpen={(id) =>
+          router.push(`${base}&draftId=${encodeURIComponent(id)}`)
+        }
+      />
+    );
+  }
   if (requestedDraft.success)
     return (
       <WorkspaceDraft

@@ -9,6 +9,7 @@ import { CommitmentView } from "./CommitmentView";
 import { EngagementOverview } from "./EngagementOverview";
 import { MeetingLibrary } from "./MeetingLibrary";
 import { OutreachView } from "./OutreachView";
+import { ObjectiveOutreachDestination } from "./ObjectiveOutreachDestination";
 import { PlanView } from "./PlanView";
 import { ReportView } from "./ReportView";
 import { TeamView } from "./TeamView";
@@ -34,6 +35,8 @@ export function EngagementScreen() {
   const session = params.get("session");
   const initialCreate = params.get("create") === "draft";
   const directoryContactId = params.get("directoryContactId");
+  const objectiveDestination =
+    params.has("objectiveId") || params.has("objectiveVersion");
   const [view, setView] = useState(() =>
       session || draft || initialCreate
         ? "outreach"
@@ -66,11 +69,20 @@ export function EngagementScreen() {
     next.set("view", view);
     router.push(`/modules/engagement?${next}`);
   };
-  const clientQuery = useCapiroQuery("clients.list", {});
-  const meetings = useCapiroQuery("engagement.meetings", {
-    query: { clientId: clientId || undefined },
-  });
+  const clientQuery = useCapiroQuery(
+    "clients.list",
+    {},
+    { enabled: !objectiveDestination },
+  );
+  const meetings = useCapiroQuery(
+    "engagement.meetings",
+    {
+      query: { clientId: clientId || undefined },
+    },
+    { enabled: !objectiveDestination },
+  );
   const clients = clientQuery.data ?? [];
+  if (objectiveDestination) return <ObjectiveOutreachDestination />;
   return (
     <div className={styles.screen}>
       <PageHeader

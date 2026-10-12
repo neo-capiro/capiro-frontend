@@ -1,5 +1,12 @@
 import { expect, test } from "@playwright/test";
-import { clientId, person, personId, json, installFixtures } from "./fixtures";
+import {
+  sendingMailbox,
+  clientId,
+  person,
+  personId,
+  json,
+  installFixtures,
+} from "./fixtures";
 const path = `/portfolio/${clientId}/relationships`;
 const endpoint = `**/clients/${clientId}/people`;
 const item = `${endpoint}/${personId}`;
@@ -486,6 +493,7 @@ test("person-linked QuickLog retains its failed note and existing email provider
   const mail = page.getByRole("dialog", { name: "New email", exact: true });
   await mail.getByLabel("Subject", { exact: true }).fill("Synthetic subject");
   await mail.getByLabel("Message", { exact: true }).fill("Synthetic message");
+  await mail.getByLabel("From mailbox").selectOption(sendingMailbox.id);
   await mail.getByRole("button", { name: "Review email", exact: true }).click();
   const confirmation = page.getByRole("dialog", {
     name: "Send email",

@@ -1,0 +1,108 @@
+
+> capiro-frontend@0.1.0 test:browser
+> npm run test:browser --workspace @capiro/web -- tests/browser/ordered-owners.spec.ts tests/browser/profile-current-state.spec.ts tests/browser/profile-write-lifetime.spec.ts --workers=3
+
+
+> @capiro/web@0.1.0 test:browser
+> playwright test tests/browser/ordered-owners.spec.ts tests/browser/profile-current-state.spec.ts tests/browser/profile-write-lifetime.spec.ts --workers=3
+
+[WebServer] (node:181618) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 28 tests using 3 workers
+
+(node:181637) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:181639) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:181638) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 tests/browser/profile-current-state.spec.ts:15:1 › profile notes conceal a failed saved-client read and prevent replacement (4.9s)
+  ✓   3 tests/browser/profile-write-lifetime.spec.ts:23:1 › a matching notes clear uses only the native notes PUT and closes once (5.1s)
+  ✓   1 tests/browser/ordered-owners.spec.ts:35:1 › four ranked owners require a deliberate save and preserve exact order (6.6s)
+  ✓   4 tests/browser/profile-current-state.spec.ts:34:1 › profile notes reject another client's receipt and require review before retry (4.2s)
+  ✓   5 tests/browser/profile-write-lifetime.spec.ts:47:1 › a refreshed notes source fences a late receipt and retains the local draft for review (6.1s)
+  ✓   6 tests/browser/ordered-owners.spec.ts:82:1 › clearing Primary preserves later positions and blocks an implicit promotion (6.9s)
+  ✓   7 tests/browser/profile-current-state.spec.ts:56:1 › profile notes retain a refused draft without reporting it saved (5.2s)
+  ✓   8 tests/browser/profile-write-lifetime.spec.ts:91:1 › owner membership role mismatches stay unknown and preserve the role draft (5.9s)
+  ✓   9 tests/browser/ordered-owners.spec.ts:108:1 › unavailable historical owners keep their rank and ranked members have no roster Remove (4.4s)
+  ✓  10 tests/browser/profile-current-state.spec.ts:72:1 › late notes receipts cannot close a replacement actor's editor (5.4s)
+  ✓  11 tests/browser/profile-write-lifetime.spec.ts:111:1 › an owner's successfully updated membership role remains visible on the single owner row (5.4s)
+  ✓  13 tests/browser/profile-current-state.spec.ts:106:1 › failed account-team refresh conceals cached members and disables changes (4.6s)
+  ✓  12 tests/browser/ordered-owners.spec.ts:145:1 › 409 requires read-back and a fresh deliberate versioned save, never automatic retry (8.1s)
+  ✓  14 tests/browser/profile-write-lifetime.spec.ts:139:1 › a successfully removed member option leaves the retained choice unavailable (4.8s)
+  ✓  15 tests/browser/profile-current-state.spec.ts:128:1 › failed member options cannot submit a retained selection (4.3s)
+  ✓  16 tests/browser/ordered-owners.spec.ts:177:1 › an interrupted PUT remains fenced after reopening and matching read-back sends nothing (5.7s)
+  ✓  17 tests/browser/profile-write-lifetime.spec.ts:163:1 › late team receipts do not report success or invalidate a replacement client view (5.9s)
+  ✓  18 tests/browser/profile-current-state.spec.ts:146:1 › team add needs the requested native roster effect (5.1s)
+  ✓  19 tests/browser/ordered-owners.spec.ts:211:1 › background read cannot silently rebase a draft, and replacing the actor clears that editor (4.4s)
+  ✓  21 tests/browser/profile-current-state.spec.ts:162:1 › owner assignment rejects a different returned owner (3.9s)
+  ✓  22 tests/browser/profile-current-state.spec.ts:186:1 › failed facilities refresh conceals saved locations and closes their detail (2.9s)
+  ✓  23 tests/browser/profile-current-state.spec.ts:211:1 › a removed facility selection does not reopen when that ID returns (2.3s)
+  ✘  20 tests/browser/profile-write-lifetime.spec.ts:206:1 › closing a pending facility create keeps the unknown fence when its view reopens (9.9s)
+(node:182876) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  24 tests/browser/profile-current-state.spec.ts:233:1 › unknown facility creation stays fenced after closing and reopening (3.8s)
+  ✓  26 tests/browser/profile-current-state.spec.ts:256:1 › identity invalidation disables facility creation despite a cached role (3.1s)
+  ✓  25 tests/browser/profile-write-lifetime.spec.ts:243:1 › a similar current facility cannot be claimed as an unknown creation receipt (5.8s)
+  ✓  27 tests/browser/profile-write-lifetime.spec.ts:277:1 › a changed saved facility cannot be overwritten by an older open draft (4.4s)
+  ✓  28 tests/browser/profile-write-lifetime.spec.ts:312:1 › a late facility result cannot escape its original actor's unknown fence (2.8s)
+
+
+  1) tests/browser/profile-write-lifetime.spec.ts:206:1 › closing a pending facility create keeps the unknown fence when its view reopens 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('dialog', { name: 'Add facility' }).getByText(/creation result is unknown/i)
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Add facility' }).getByText(/creation result is unknown/i)
+
+
+      233 |   await page.getByRole("button", { name: "Add facility", exact: true }).click();
+      234 |   const dialog = page.getByRole("dialog", { name: "Add facility" });
+    > 235 |   await expect(dialog.getByText(/creation result is unknown/i)).toBeVisible();
+          |                                                                 ^
+      236 |   await expect(
+      237 |     dialog.getByRole("button", { name: "Add facility" }),
+      238 |   ).toBeDisabled();
+        at /workspace/capiro-contracts/apps/web/tests/browser/profile-write-lifetime.spec.ts:235:65
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/profile-write-lifetime-clo-bd636-fence-when-its-view-reopens/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/profile-write-lifetime-clo-bd636-fence-when-its-view-reopens/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/profile-write-lifetime-clo-bd636-fence-when-its-view-reopens/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/profile-write-lifetime-clo-bd636-fence-when-its-view-reopens/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/browser/profile-write-lifetime.spec.ts:206:1 › closing a pending facility create keeps the unknown fence when its view reopens 
+  27 passed (59.3s)
+npm error Lifecycle script `test:browser` failed with error:
+npm error code 1
+npm error path /workspace/capiro-contracts/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-contracts/apps/web
+npm error command failed
+npm error command sh -c playwright test tests/browser/ordered-owners.spec.ts tests/browser/profile-current-state.spec.ts tests/browser/profile-write-lifetime.spec.ts --workers=3
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

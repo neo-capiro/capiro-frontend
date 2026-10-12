@@ -1,0 +1,42 @@
+
+> @capiro/web@0.1.0 test:browser
+> playwright test prospect-files.spec.ts prospect-overview.spec.ts prospect-brief.spec.ts prospect-conversion.spec.ts
+
+[WebServer] (node:190984) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 24 tests using 1 worker
+
+(node:191003) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/browser/prospect-brief.spec.ts:140:1 › initial generation retries a frozen key after a lost response and opens saved content (4.5s)
+  ✓   2 tests/browser/prospect-brief.spec.ts:203:1 › version conflict preserves the draft and requires latest review before a new save (6.9s)
+  ✓   3 tests/browser/prospect-brief.spec.ts:296:1 › a draft root without a version can generate its first saved version (3.0s)
+  ✓   4 tests/browser/prospect-brief.spec.ts:339:1 › ambiguous edit retains a frozen payload and exposes only explicit same-save retry (6.0s)
+  ✓   5 tests/browser/prospect-brief.spec.ts:379:1 › current citations retain separate dates and historical versions never resolve against current indexes (9.9s)
+  ✓   6 tests/browser/prospect-brief.spec.ts:450:1 › refresh comparison preserves edited-result distinction and offers no unsafe apply (5.3s)
+  ✓   7 tests/browser/prospect-brief.spec.ts:495:1 › unavailable brief404 is not mistaken for an empty brief and unauthorized roles never fetch it (4.5s)
+  ✓   8 tests/browser/prospect-brief.spec.ts:522:1 › mobile dark saved brief remains readable and wrong-account receipts cannot open (6.0s)
+  ✓   9 tests/browser/prospect-brief.spec.ts:550:1 › a denied edit preserves the local draft and disables another save (5.1s)
+  ✓  10 tests/browser/prospect-brief.spec.ts:581:1 › archived saved versions remain read-only and failed identity never exposes the brief (6.4s)
+  ✓  11 tests/browser/prospect-brief.spec.ts:616:1 › denied creation is a rejection and does not offer an ambiguous resend (2.4s)
+  ✓  12 tests/browser/prospect-conversion.spec.ts:25:1 › explicit existing-client link preserves failures and confirms a scoped no-charge result (6.3s)
+  ✓  13 tests/browser/prospect-conversion.spec.ts:91:1 › lost link response reads the actual committed association without a second POST (4.2s)
+  ✓  14 tests/browser/prospect-conversion.spec.ts:123:1 › mismatched success is refused and session expiry retains the existing global boundary (5.1s)
+  ✓  15 tests/browser/prospect-conversion.spec.ts:165:1 › viewers and archived prospects cannot initiate linking (4.7s)
+  ✓  16 tests/browser/prospect-files.spec.ts:40:1 › current prospect files retain readiness and do not expose unsupported actions (2.9s)
+  ✓  17 tests/browser/prospect-files.spec.ts:63:1 › upload loss retains one exact intent and confirms without reuploading bytes (3.5s)
+  ✓  18 tests/browser/prospect-files.spec.ts:121:1 › wrong lineage suppresses file links and upload without broadening the request (3.1s)
+  ✓  19 tests/browser/prospect-files.spec.ts:146:1 › deletion requires confirmation and current list, with no uncertain automatic retry (4.2s)
+  ✓  20 tests/browser/prospect-files.spec.ts:175:1 › dismissed prospect retains historical files but cannot upload, including on mobile (3.0s)
+  ✓  21 tests/browser/prospect-overview.spec.ts:32:1 › overview uses Figma stage geometry, separates notes and filters actual activity (3.9s)
+  ✓  22 tests/browser/prospect-overview.spec.ts:120:1 › one saved note refreshes both Notes and Activity without creating a private-note claim (3.6s)
+  ✓  23 tests/browser/prospect-overview.spec.ts:162:1 › a failed refresh removes cached activity and notes until authorized recovery (2.6s)
+  ✓  24 tests/browser/prospect-overview.spec.ts:191:1 › a mismatched prospect response cannot become the displayed company (3.9s)
+
+  24 passed (1.9m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

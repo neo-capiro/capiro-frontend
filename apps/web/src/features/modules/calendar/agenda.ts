@@ -1,4 +1,5 @@
 import type { z } from "zod";
+import type { EffectiveDateRecord } from "../../../shared/federal-register/effective-dates";
 import type { commentDeadline } from "../../../shared/capiro/operations/calendar";
 import type { EngagementMeeting } from "../../../shared/capiro/operations/engagement";
 import type { FundingRecord } from "../../../shared/capiro/operations/intelligence-funding";
@@ -24,6 +25,7 @@ export type AgendaItem = {
   context: string;
   meeting?: EngagementMeeting;
   href?: string;
+  effectiveDate?: EffectiveDateRecord;
 };
 export function meetingItems(meetings: EngagementMeeting[]): AgendaItem[] {
   return meetings.map((meeting) => ({

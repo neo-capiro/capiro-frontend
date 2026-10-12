@@ -65,6 +65,8 @@ export const draftDocument = z.object({
 });
 export const workspaceDraft = z.object({
   id: workspaceId,
+  prospectId: workspaceId.nullable().optional(),
+  tenantId: workspaceId.optional(),
   ownerId: z.string(),
   docTitle: z.string(),
   client: z.string().nullable(),

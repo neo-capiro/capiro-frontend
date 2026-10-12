@@ -1,0 +1,20 @@
+{
+  "head": "d79a16cf278e355610cc3339a2ee8b15df4a08a9",
+  "tree": "522ca38b42b8afe1794bbfed9679c01d44e5b232",
+  "srcTree": "e3413e7b012b437c62ad923a583073b0103e7f6b",
+  "canonicalReopen": {
+    "passed": 1,
+    "sha256": "dc6e4483bd811932cc2a0748b51ee6ba447cc04b46031c5b50a2fb4725d996b1"
+  },
+  "portfolioRecovery": {
+    "passed": 27,
+    "failed": 0
+  },
+  "prospectDraftRecovery": {
+    "passed": 1,
+    "failed": 0
+  },
+  "types": "passed",
+  "architecture": "passed; 407 signals,382 reviewed,25 inherited unreviewed,0blocking",
+  "qualification": "Focused author-run controls only; borrowed identical installed dependencies; no new clean install/build; not independent review acceptance. Positive prospect upload source has formatting-only adjustment in the later contract candidate; immutable reviewer controls are unchanged."
+}

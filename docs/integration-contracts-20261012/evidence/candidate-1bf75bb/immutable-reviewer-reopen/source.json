@@ -1,0 +1,22 @@
+{
+  "head": "1bf75bb09dab2d0d8b9cc28957d124ed20431050",
+  "tree": "8892ff0295f5fc66c026cda02a0f2cae6258d80c",
+  "srcTree": "320ec093ebb23a3dc2be321b6b88244b97008202",
+  "status": "",
+  "canonicalControlSHA256": "dc6e4483bd811932cc2a0748b51ee6ba447cc04b46031c5b50a2fb4725d996b1",
+  "executedControlSHA256": "0e4fecfb6de3670c4079d5c40450b27b93fe02f02064e8e25aff979de47d1a10",
+  "substitutions": [
+    {
+      "before": "'/workspace/review-pr9/r3/source/apps/web/tests/browser/activity-command-recovery-fixtures'",
+      "after": "\"/workspace/capiro-contracts/apps/web/tests/browser/activity-command-recovery-fixtures\""
+    },
+    {
+      "before": "'/workspace/review-pr9/r3/source/apps/web/tests/activity-command-fixtures'",
+      "after": "\"/workspace/capiro-contracts/apps/web/tests/activity-command-fixtures\""
+    },
+    {
+      "before": "'/workspace/review-pr9/r3/source/apps/web/tests/browser/fixtures'",
+      "after": "\"/workspace/capiro-contracts/apps/web/tests/browser/fixtures\""
+    }
+  ]
+}

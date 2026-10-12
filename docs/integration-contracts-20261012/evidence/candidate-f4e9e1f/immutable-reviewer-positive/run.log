@@ -1,0 +1,11 @@
+
+Running 2 tests using 1 worker
+
+  ✓  1 ../../tmp/capiro-reviewer-positive-f4e9e1f/browser/control.spec.ts:13:1 › restart revalidates current identity, retains the original key/body and explicitly recovers after nondisclosing 404 (8.0s)
+  ✓  2 ../../tmp/capiro-reviewer-positive-f4e9e1f/browser/control.spec.ts:57:1 › restart under a replacement Core actor cannot expose or recover the former actor command (6.1s)
+
+  2 passed (17.0s)
+[WebServer] (node:269863) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:269895) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

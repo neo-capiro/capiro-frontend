@@ -14,7 +14,6 @@ import {
 import {
   profileNotesReceipt,
   profileTeamSchema,
-  teamOwnerReceipt,
   teamRosterReceipt,
 } from "../src/features/portfolio/client-profile/profile-receipts";
 import { writeProfileNotes } from "../src/features/portfolio/client-profile/notes-writer";
@@ -243,28 +242,28 @@ describe("account team and single owner native receipts", () => {
     expect(
       teamRosterReceipt({
         kind: "add",
-        userId: "member-team",
+        userId: "81000000-0000-4000-8000-000000000002",
         role: " Analyst ",
       }).safeParse(profileTeam).success,
     ).toBe(true);
     expect(
       teamRosterReceipt({
         kind: "add",
-        userId: "member-team",
+        userId: "81000000-0000-4000-8000-000000000002",
         role: "New role",
       }).safeParse(profileTeam).success,
     ).toBe(false);
     expect(
       teamRosterReceipt({
         kind: "add",
-        userId: "member-owner",
+        userId: "81000000-0000-4000-8000-000000000001",
         role: "Owner membership role",
       }).safeParse(profileTeam).success,
     ).toBe(false);
     expect(
       teamRosterReceipt({
         kind: "add",
-        userId: "member-owner",
+        userId: "81000000-0000-4000-8000-000000000001",
         role: " Owner membership role ",
       }).safeParse(
         profileTeam.map((member) =>
@@ -275,41 +274,17 @@ describe("account team and single owner native receipts", () => {
       ).success,
     ).toBe(true);
     expect(
-      teamRosterReceipt({ kind: "remove", userId: "member-team" }).safeParse(
-        profileTeam,
-      ).success,
+      teamRosterReceipt({
+        kind: "remove",
+        userId: "81000000-0000-4000-8000-000000000002",
+      }).safeParse(profileTeam).success,
     ).toBe(false);
     expect(
-      teamRosterReceipt({ kind: "remove", userId: "member-team" }).safeParse([
-        profileTeam[0],
-      ]).success,
+      teamRosterReceipt({
+        kind: "remove",
+        userId: "81000000-0000-4000-8000-000000000002",
+      }).safeParse([profileTeam[0]]).success,
     ).toBe(true);
-  });
-  it("requires nullable owner/member agreement and the requested database member ID", () => {
-    expect(
-      teamOwnerReceipt(null).safeParse({
-        accountOwnerUserId: null,
-        accountOwner: null,
-      }).success,
-    ).toBe(true);
-    expect(
-      teamOwnerReceipt("member-new").safeParse({
-        accountOwnerUserId: "member-new",
-        accountOwner: profileMembers[2],
-      }).success,
-    ).toBe(true);
-    expect(
-      teamOwnerReceipt("member-new").safeParse({
-        accountOwnerUserId: "member-new",
-        accountOwner: profileMembers[0],
-      }).success,
-    ).toBe(false);
-    expect(
-      teamOwnerReceipt(null).safeParse({
-        accountOwnerUserId: null,
-        accountOwner: profileMembers[0],
-      }).success,
-    ).toBe(false);
   });
   it("refuses removal of the projected owner and missing member options before sending", () => {
     const { cache, actor, sources } = currentProfile();
@@ -322,7 +297,7 @@ describe("account team and single owner native receipts", () => {
     expect(() =>
       assertTeamChange(cache, context, {
         kind: "remove",
-        userId: "member-owner",
+        userId: "81000000-0000-4000-8000-000000000001",
       }),
     ).toThrow(ApiError);
     expect(() =>
@@ -334,10 +309,14 @@ describe("account team and single owner native receipts", () => {
     ).toThrow(ApiError);
     cache.setQueryData(sources.members, []);
     expect(() =>
-      assertTeamChange(cache, context, { kind: "owner", userId: "member-new" }),
+      assertTeamChange(cache, context, {
+        kind: "add",
+        userId: "81000000-0000-4000-8000-000000000003",
+        role: "Analyst",
+      }),
     ).toThrow(ApiError);
   });
-  it("uses the exact owner PUT vocabulary and a roster receipt for DELETE", async () => {
+  it("uses the exact roster DELETE vocabulary and receipt", async () => {
     const { cache, actor, sources } = currentProfile();
     const context = {
       clientId: profileClientId,
@@ -345,26 +324,6 @@ describe("account team and single owner native receipts", () => {
       roster: currentProfileSource(cache, sources.team)!,
       options: currentProfileSource(cache, sources.members)!,
     };
-    const owner = serviceReceipt({
-      accountOwnerUserId: null,
-      accountOwner: null,
-    });
-    expect(
-      (
-        await writeTeamChange(
-          owner.api,
-          cache,
-          context,
-          { kind: "owner", userId: null },
-          new AbortController().signal,
-        )
-      ).kind,
-    ).toBe("owner");
-    expect(owner.calls[0]).toEqual({
-      path: `/api/backend/core/client-account-owners/${profileClientId}`,
-      method: "PUT",
-      body: { accountOwnerUserId: null },
-    });
     const removal = serviceReceipt([profileTeam[0]]);
     expect(
       (
@@ -372,13 +331,13 @@ describe("account team and single owner native receipts", () => {
           removal.api,
           cache,
           context,
-          { kind: "remove", userId: "member-team" },
+          { kind: "remove", userId: "81000000-0000-4000-8000-000000000002" },
           new AbortController().signal,
         )
       ).kind,
     ).toBe("roster");
     expect(removal.calls[0]).toEqual({
-      path: `/api/backend/core/clients/${profileClientId}/team?userId=member-team`,
+      path: `/api/backend/core/clients/${profileClientId}/team?userId=81000000-0000-4000-8000-000000000002`,
       method: "DELETE",
       body: null,
     });

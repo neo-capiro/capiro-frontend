@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import { fileURLToPath } from "node:url";
+import { responseHeaders } from "./src/shared/response-headers";
 
 const config: NextConfig = {
   output: "standalone",
@@ -11,11 +12,7 @@ const config: NextConfig = {
     return [
       {
         source: "/(.*)",
-        headers: [
-          { key: "X-Content-Type-Options", value: "nosniff" },
-          { key: "Referrer-Policy", value: "same-origin" },
-          { key: "X-Frame-Options", value: "DENY" },
-        ],
+        headers: responseHeaders,
       },
     ];
   },

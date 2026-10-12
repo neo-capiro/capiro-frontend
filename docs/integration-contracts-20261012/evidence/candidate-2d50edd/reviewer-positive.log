@@ -1,0 +1,60 @@
+
+Running 2 tests using 1 worker
+
+  ✘  1 ../../tmp/capiro-candidate-2d50edd/immutable-reviewer-positive/browser/control.spec.ts:13:1 › restart revalidates current identity, retains the original key/body and explicitly recovers after nondisclosing 404 (1ms)
+  ✘  2 ../../tmp/capiro-candidate-2d50edd/immutable-reviewer-positive/browser/control.spec.ts:57:1 › restart under a replacement Core actor cannot expose or recover the former actor command (2ms)
+
+
+  1) ../../tmp/capiro-candidate-2d50edd/immutable-reviewer-positive/browser/control.spec.ts:13:1 › restart revalidates current identity, retains the original key/body and explicitly recovers after nondisclosing 404 
+
+    Error: browserType.launch: Executable doesn't exist at /home/agent/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: ../../tmp/capiro-candidate-2d50edd/immutable-reviewer-positive/artifacts/control-restart-revalidate-1690c-ers-after-nondisclosing-404/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-candidate-2d50edd/immutable-reviewer-positive/artifacts/control-restart-revalidate-1690c-ers-after-nondisclosing-404/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-candidate-2d50edd/immutable-reviewer-positive/artifacts/control-restart-revalidate-1690c-ers-after-nondisclosing-404/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) ../../tmp/capiro-candidate-2d50edd/immutable-reviewer-positive/browser/control.spec.ts:57:1 › restart under a replacement Core actor cannot expose or recover the former actor command 
+
+    Error: browserType.launch: Executable doesn't exist at /home/agent/.cache/ms-playwright/chromium_headless_shell-1228/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: ../../tmp/capiro-candidate-2d50edd/immutable-reviewer-positive/artifacts/control-restart-under-a-re-08032-er-the-former-actor-command/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-candidate-2d50edd/immutable-reviewer-positive/artifacts/control-restart-under-a-re-08032-er-the-former-actor-command/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-candidate-2d50edd/immutable-reviewer-positive/artifacts/control-restart-under-a-re-08032-er-the-former-actor-command/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    ../../tmp/capiro-candidate-2d50edd/immutable-reviewer-positive/browser/control.spec.ts:13:1 › restart revalidates current identity, retains the original key/body and explicitly recovers after nondisclosing 404 
+    ../../tmp/capiro-candidate-2d50edd/immutable-reviewer-positive/browser/control.spec.ts:57:1 › restart under a replacement Core actor cannot expose or recover the former actor command 
+[WebServer] (node:323346) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:323406) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:323419) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

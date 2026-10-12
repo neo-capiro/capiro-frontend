@@ -1,0 +1,13 @@
+{
+  "receivedAt": "2026-10-12T09:34:30Z",
+  "source": "Coordinator relay from source thread 01a0ff18-26cd-7609-beba-87726d0300c6; distinct independent bounded review",
+  "reviewedHead": "1bf75bb09dab2d0d8b9cc28957d124ed20431050",
+  "reviewedApplicationTree": "320ec093ebb23a3dc2be321b6b88244b97008202",
+  "candidatePreservesApplicationAssetsBuildInputs": "f4e9e1f3f1ce4cc1d19502b0b617cdf6b3ba624b",
+  "result": "pass for bounded source review; three prior findings closed",
+  "independentUnitPassed": 94,
+  "independentFocusedBrowserPassed": 33,
+  "testDeltaFocusedPassed": 14,
+  "scope": ["Newsletter provenance and original-key recovery", "fresh bound Objective reads", "effective-date semantics and incomplete coverage", "ordinary dialog clicks", "zero Quicklog Commitment UI", "retained immutable controls and separate positive recovery checks", "five-feed failure assertions preserved"],
+  "notAcceptanceOf": ["pending full combined qualification", "preview image", "native database and role gates", "Figma acceptance", "live service gates", "337 Portfolio rows", "future Objective destination additions"]
+}

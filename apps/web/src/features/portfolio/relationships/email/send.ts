@@ -2,6 +2,11 @@ import { z } from "zod";
 import { ApiError, type ApiClient } from "@/shared/portfolio/api/http";
 import { readMailAttachments, attachmentRefusal } from "./attachments";
 import { mailRecipient } from "./recipients";
+import {
+  confirmReviewedMailbox,
+  senderReceiptMatches,
+  type SendingMailbox,
+} from "./mailboxes";
 
 export const sendInputSchema = z.object({
   clientId: z.uuid(),
@@ -14,8 +19,12 @@ export const sendInputSchema = z.object({
   appendSignature: z.boolean(),
   threadId: z.uuid().optional(),
   attachmentIds: z.array(z.uuid()).max(5).optional(),
+  senderConnectionId: z.uuid().optional(),
 });
-export type SendInput = z.infer<typeof sendInputSchema>;
+export type SendInput = z.infer<typeof sendInputSchema> & {
+  /** Frozen local review evidence; excluded from the server DTO. */
+  reviewedSender?: SendingMailbox;
+};
 export class MailSendError extends Error {
   constructor(
     message: string,
@@ -30,23 +39,38 @@ export async function sendReviewedMail(
   assert: () => void,
 ) {
   let body: SendInput;
+  let sender: SendingMailbox | undefined;
   try {
     body = sendInputSchema.parse(input);
+    if (
+      Boolean(body.senderConnectionId) !== Boolean(input.reviewedSender) ||
+      (input.reviewedSender &&
+        input.reviewedSender.id !== body.senderConnectionId)
+    )
+      throw new Error("Review the exact sending mailbox before sending.");
     const emails = [...body.to, ...(body.cc ?? []), ...(body.bcc ?? [])].map(
       (item) => item.email,
     );
     if (new Set(emails).size !== emails.length)
       throw new Error("Duplicate email recipients are not allowed.");
     assert();
+    if (input.reviewedSender)
+      sender = await confirmReviewedMailbox(api, input.reviewedSender, assert);
     if (body.threadId) {
       await api.request(
         "core",
         `engagement/mail-threads/${body.threadId}`,
         z
-          .object({ id: z.uuid(), clientId: z.string().nullable() })
+          .object({
+            id: z.uuid(),
+            clientId: z.string().nullable(),
+            connectionId: z.uuid().optional(),
+          })
           .refine(
             (thread) =>
-              thread.id === body.threadId && thread.clientId === body.clientId,
+              thread.id === body.threadId &&
+              thread.clientId === body.clientId &&
+              (!sender || thread.connectionId === sender.id),
           ),
       );
       assert();
@@ -77,9 +101,18 @@ export async function sendReviewedMail(
           ok: z.literal(true),
           threadId: z.uuid(),
           messageId: z.uuid(),
+          senderConnectionId: z.uuid().optional(),
+          senderEmail: z.email().optional(),
+          senderName: z.string().nullable().optional(),
+          signaturePolicy: z.literal("actor").optional(),
+          signatureAppended: z.boolean().optional(),
         })
         .refine(
-          (receipt) => !body.threadId || receipt.threadId === body.threadId,
+          (receipt) =>
+            (!body.threadId || receipt.threadId === body.threadId) &&
+            (!sender ||
+              (senderReceiptMatches(receipt, sender) &&
+                (body.appendSignature || receipt.signatureAppended === false))),
         ),
       {
         method: "POST",

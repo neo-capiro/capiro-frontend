@@ -1,4 +1,5 @@
 import { test, expect, type Page, type Request } from "@playwright/test";
+import { sendingMailbox } from "./fixtures";
 
 const clientId = "10000000-0000-4000-8000-000000000001";
 const original = "Original draft for review.";
@@ -30,6 +31,8 @@ async function setupRewrite(page: Page) {
       });
     if (path === "me/email-signature")
       return route.fulfill({ json: { html: null, enabled: false } });
+    if (path === "engagement/mail/mailboxes")
+      return route.fulfill({ json: [sendingMailbox] });
     if (path === `clients/${clientId}/people`)
       return route.fulfill({ json: [] });
     if (path === "engagement/mail/rewrite") {
@@ -73,6 +76,7 @@ async function openCompose(page: Page) {
   await page.getByRole("button", { name: "Mail contact", exact: true }).click();
   await page.getByLabel("Subject", { exact: true }).fill("Synthetic review");
   await page.getByLabel("Message", { exact: true }).fill(original);
+  await page.getByLabel("From mailbox").selectOption(sendingMailbox.id);
   await expect(
     page.getByRole("button", { name: "Rewrite with Meri", exact: true }),
   ).toBeEnabled();
@@ -263,7 +267,9 @@ for (const change of ["invalidated", "actor"] as const) {
       original,
     );
     await expect(
-      page.getByText(/mailbox session changed or is unverified/),
+      page
+        .getByRole("group", { name: "Draft rewrite status" })
+        .getByText(/mailbox session changed or is unverified/),
     ).toBeVisible();
     expect(state.sends()).toBe(0);
   });

@@ -94,7 +94,9 @@ test("owner membership role mismatches stay unknown and preserve the role draft"
   const { state, unexpected } = await installProfileCurrentState(page);
   state.write = (route) => json(route, state.team);
   await page.goto("/profile-current-state.html?mode=team");
-  await page.getByLabel("Add team member").selectOption("member-owner");
+  await page
+    .getByLabel("Add team member")
+    .selectOption("81000000-0000-4000-8000-000000000001");
   await page.getByLabel("Role", { exact: true }).fill("Legislative lead");
   await page.getByRole("button", { name: "Add member" }).click();
   await expect(page.getByText(/change result is unknown/i)).toBeVisible();
@@ -112,7 +114,7 @@ test("an owner's successfully updated membership role remains visible on the sin
   const { state, unexpected } = await installProfileCurrentState(page);
   state.write = async (route) => {
     expect(route.request().postDataJSON()).toEqual({
-      userId: "member-owner",
+      userId: "81000000-0000-4000-8000-000000000001",
       role: "Legislative lead",
     });
     state.team = state.team.map((member) =>
@@ -121,7 +123,9 @@ test("an owner's successfully updated membership role remains visible on the sin
     await json(route, state.team);
   };
   await page.goto("/profile-current-state.html?mode=team");
-  await page.getByLabel("Add team member").selectOption("member-owner");
+  await page
+    .getByLabel("Add team member")
+    .selectOption("81000000-0000-4000-8000-000000000001");
   await page.getByLabel("Role", { exact: true }).fill(" Legislative lead ");
   await page.getByRole("button", { name: "Add member" }).click();
   const owner = page.getByRole("listitem").filter({ hasText: "Olivia Owner" });
@@ -137,9 +141,13 @@ test("a successfully removed member option leaves the retained choice unavailabl
 }) => {
   const { state, unexpected } = await installProfileCurrentState(page);
   await page.goto("/profile-current-state.html?mode=team");
-  await page.getByLabel("Add team member").selectOption("member-new");
+  await page
+    .getByLabel("Add team member")
+    .selectOption("81000000-0000-4000-8000-000000000003");
   await page.getByLabel("Role", { exact: true }).fill("Retained role");
-  state.members = state.members.filter((member) => member.id !== "member-new");
+  state.members = state.members.filter(
+    (member) => member.id !== "81000000-0000-4000-8000-000000000003",
+  );
   await profileEvent(page, "refresh");
   await expect(
     page.getByRole("option", { name: "Selected member unavailable" }),
@@ -220,6 +228,9 @@ test("closing a pending facility create keeps the unknown fence when its view re
     .click();
   await expect.poll(() => state.writes.length).toBe(1);
   await profileEvent(page, "unmount");
+  await expect(
+    page.getByText("Profile view closed.", { exact: true }),
+  ).toBeVisible();
   release();
   await profileEvent(page, "open");
   await page.getByRole("button", { name: "Add facility", exact: true }).click();

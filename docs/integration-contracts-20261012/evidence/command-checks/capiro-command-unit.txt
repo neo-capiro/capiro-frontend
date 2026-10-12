@@ -1,0 +1,29 @@
+
+> capiro-frontend@0.1.0 test:portfolio
+> npm test --workspace @capiro/web --run tests/activity-command.test.ts tests/overview-removal.test.ts
+
+npm warn "tests/activity-command.test.ts" is being parsed as a normal command line argument.
+npm warn Unknown cli config "--run". This will stop working in the next major version of npm.
+
+> @capiro/web@0.1.0 test
+> vitest run tests/activity-command.test.ts tests/overview-removal.test.ts
+
+
+ RUN  v4.1.11 /workspace/capiro-contracts/apps/web
+
+
+ Test Files  2 passed (2)
+      Tests  42 passed (42)
+   Start at  05:46:12
+   Duration  399ms (transform 220ms, setup 0ms, import 435ms, tests 110ms, environment 0ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

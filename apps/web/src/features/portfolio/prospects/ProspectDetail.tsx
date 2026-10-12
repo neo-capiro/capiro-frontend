@@ -25,6 +25,7 @@ import { ProspectContacts } from "./contacts/public";
 import { ProspectClientLink } from "./conversion/public";
 import { ProspectBrief } from "./brief/public";
 import { ProspectProposals } from "./proposals/public";
+import { ProspectFiles } from "@/features/portfolio/files/public";
 import styles from "./prospects.module.css";
 export function ProspectDetail({
   id,
@@ -156,6 +157,31 @@ export function ProspectDetail({
                 </section>
                 <ProspectHistory id={id} />
                 <ProspectBrief prospectId={id} />
+                <ProspectFiles
+                  prospectId={id}
+                  available={
+                    query.isSuccess && !query.error && !query.isFetching
+                  }
+                  active={record.status === "active"}
+                />
+                <section className="card stack" aria-label="Prospect Workspace">
+                  <h2>Workspace documents</h2>
+                  <p>
+                    Open this prospect’s manual drafts, saved versions and
+                    exports. Documents retain their prospect origin after
+                    conversion.
+                  </p>
+                  <Link
+                    className="button"
+                    href={`/modules/workspace?prospectId=${encodeURIComponent(id)}`}
+                  >
+                    Open prospect Workspace
+                  </Link>
+                  <small>
+                    Sharing, sending and generation are unavailable for prospect
+                    documents.
+                  </small>
+                </section>
                 <ProspectProposals
                   prospectId={id}
                   workspaceUrl={destinations.workspace}

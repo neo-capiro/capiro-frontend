@@ -54,7 +54,8 @@ probe /meri 200
 probe /modules 200
 grep -q 'Connection setup required' "$scratch/body"
 probe /settings 307
-grep -qi '^location: /settings/personal' "$scratch/headers"
+location=$(sed -n 's/^[Ll]ocation: //p' "$scratch/headers" | tr -d '\r')
+[[ "$location" == /settings/personal || "$location" == "$base/settings/personal" ]]
 probe /settings/personal 200
 probe /settings/billing 200
 probe /calendar 200

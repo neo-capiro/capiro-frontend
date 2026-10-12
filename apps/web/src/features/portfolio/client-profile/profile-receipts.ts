@@ -2,7 +2,6 @@ import { z } from "zod";
 import {
   clientSchema,
   memberSchema,
-  ownerSchema,
 } from "@/features/portfolio/index/contracts-public";
 import { facilitySchema, teamMemberSchema } from "./contracts";
 
@@ -41,11 +40,8 @@ export const profileTeamSchema = z
   );
 export type TeamChange =
   | { kind: "add"; userId: string; role: string }
-  | { kind: "remove"; userId: string }
-  | { kind: "owner"; userId: string | null };
-export function teamRosterReceipt(
-  change: Exclude<TeamChange, { kind: "owner" }>,
-) {
+  | { kind: "remove"; userId: string };
+export function teamRosterReceipt(change: TeamChange) {
   return profileTeamSchema.refine((team) => {
     const member = team.find((row) => row.userId === change.userId);
     return change.kind === "remove"
@@ -53,14 +49,6 @@ export function teamRosterReceipt(
       : Boolean(member && member.role === (change.role.trim() || null));
   });
 }
-export const teamOwnerReceipt = (userId: string | null) =>
-  ownerSchema.refine(
-    (owner) =>
-      owner.accountOwnerUserId === userId &&
-      (userId === null
-        ? owner.accountOwner === null
-        : owner.accountOwner?.id === userId),
-  );
 export const profileFacilityReceipt = (
   clientId: string,
   tenantId: string,

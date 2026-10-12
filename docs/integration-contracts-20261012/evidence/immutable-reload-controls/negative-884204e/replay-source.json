@@ -1,0 +1,26 @@
+{
+  "head": "884204e61721e171abf48f04c233948a632b77c7",
+  "tree": "427ac1406d513d9647862f8b2fdc3c1ec280ec42",
+  "status": "?? apps/web/tests/browser/restart-recovery.acceptance.spec.ts\n?? node_modules\n",
+  "canonicalControlSHA256": "80dfa0fa7c53dc3079055c97777938466d3cbab6e4d66a3c2a38c5e616128815",
+  "executedControlSHA256": "47c7f3446a27a3329d6d0b9f3eca892e35e83e2adb139e24440221ebf3c9fb68",
+  "substitutions": [
+    [
+      "'/workspace/review-pr9/r2/source/apps/web/tests/browser/activity-command-fixtures'",
+      "\"/workspace/capiro-control-884204e/apps/web/tests/browser/activity-command-fixtures\""
+    ],
+    [
+      "'/workspace/review-pr9/r2/source/apps/web/tests/activity-command-fixtures'",
+      "\"/workspace/capiro-control-884204e/apps/web/tests/activity-command-fixtures\""
+    ],
+    [
+      "'/workspace/review-pr9/r2/source/apps/web/tests/browser/fixtures'",
+      "\"/workspace/capiro-control-884204e/apps/web/tests/browser/fixtures\""
+    ],
+    [
+      "'/workspace/review-pr9/r2/evidence/reload-duplicate.json'",
+      "\"/tmp/reload-negative-884204e-1/reload-duplicate.json\""
+    ]
+  ],
+  "baselineSourceLabel": "eabc8bf8b1d28ce3e3c65993624ea967614a45b2"
+}

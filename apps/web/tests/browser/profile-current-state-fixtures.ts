@@ -1,6 +1,7 @@
 import type { Page, Route } from "@playwright/test";
 import { installFixtures, json } from "./fixtures";
 import type { Facility } from "../../src/features/portfolio/client-profile/contracts";
+import type { OrderedOwners } from "../../src/features/portfolio/client-profile/ordered-owners";
 import {
   profileClient,
   profileClientId,
@@ -8,6 +9,7 @@ import {
   profileIdentity,
   profileMembers,
   profileTeam,
+  profileOwners,
 } from "../profile-current-state-fixtures";
 
 export async function installProfileCurrentState(page: Page) {
@@ -15,13 +17,15 @@ export async function installProfileCurrentState(page: Page) {
   const state = {
     client: profileClient,
     team: [...profileTeam],
+    owners: structuredClone(profileOwners) as OrderedOwners,
     members: [...profileMembers],
     facilities: [{ ...profileFacility }] as Facility[],
     clientStatus: 200,
     teamStatus: 200,
+    ownersStatus: 200,
     membersStatus: 200,
     facilitiesStatus: 200,
-    reads: { client: 0, team: 0, members: 0, facilities: 0 },
+    reads: { client: 0, team: 0, owners: 0, members: 0, facilities: 0 },
     writes: [] as { path: string; method: string; body: unknown }[],
     write: async (route: Route) =>
       json(route, { message: "Synthetic write refused" }, 403),
@@ -71,6 +75,16 @@ export async function installProfileCurrentState(page: Page) {
           ? state.team
           : { message: "Roster unavailable" },
         state.teamStatus,
+      );
+    }
+    if (path.endsWith("/account-owners")) {
+      state.reads.owners++;
+      return json(
+        route,
+        state.ownersStatus === 200
+          ? { ...state.owners, clientId: path.split("/")[1] }
+          : { message: "Owners unavailable" },
+        state.ownersStatus,
       );
     }
     if (path.endsWith("/facilities")) {

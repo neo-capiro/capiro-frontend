@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { connection } from "next/server";
 import { ApplicationBoundary } from "../shared/session/ApplicationBoundary";
 import { readCapiroConfig } from "../shared/capiro/config";
 import type { Metadata } from "next";
@@ -12,9 +13,12 @@ export const metadata: Metadata = {
   description: "Government affairs workspace",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  // One deployment image resolves the shared session configuration per request,
+  // including direct entry to Meri pages that otherwise qualify for prerendering.
+  await connection();
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body>

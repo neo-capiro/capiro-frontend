@@ -1,8 +1,19 @@
+import { effectivePage, effectiveRecord } from "../effective-date-fixtures";
 import { expect, test } from "@playwright/test";
 import { client, clientId, installFixtures, json } from "./fixtures";
 import { voiceMeeting } from "./voice-meeting";
 
 const feeds = [
+  {
+    name: "Synthetic retained effective date",
+    route: "**/core/federal-register/effective-date-calendar?**",
+    body: {
+      ...effectivePage(),
+      data: [
+        { ...effectiveRecord, title: "Synthetic retained effective date" },
+      ],
+    },
+  },
   {
     name: "Synthetic retained meeting",
     route: "**/core/engagement/meetings?**",
@@ -250,7 +261,9 @@ test("unavailable Calendar feeds do not become a successful empty-state claim", 
     if (!window.__calendarBoundary) throw new Error("Missing test controls");
     await window.__calendarBoundary.refreshFeeds();
   });
-  await expect(page.getByRole("button", { name: "Retry" })).toHaveCount(4);
+  await expect(page.getByRole("button", { name: "Retry" })).toHaveCount(
+    feeds.length,
+  );
   for (const feed of feeds)
     await expect(
       page.getByRole("heading", { name: new RegExp(feed.name) }),

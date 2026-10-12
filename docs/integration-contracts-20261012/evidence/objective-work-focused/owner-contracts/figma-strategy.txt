@@ -1,0 +1,954 @@
+<frame id="411:119740" name="Strategies · Working timeline · FY27–FY29" x="1680" y="180" width="1440" height="1040">
+  <instance id="476:141465" name="Capiro · Shared header" x="0" y="0" width="1440" height="64" />
+  <instance id="411:119741" name="v2/Top nav" x="0" y="0" width="1440" height="64" hidden="true" />
+  <frame id="476:141514" name="Capiro · Header divider" x="0" y="64" width="1440" height="1" />
+  <frame id="476:141515" name="Capiro · Workspace body" x="0" y="65" width="1440" height="975">
+    <instance id="476:141516" name="Capiro · Modules navigation" x="0" y="0" width="232" height="975" />
+    <frame id="411:119742" name="Body" x="232" y="0" width="1208" height="975">
+      <frame id="411:119743" name="Main" x="0" y="0" width="1208" height="1719">
+        <instance id="870:166876" name="Action · Back to Strategies" x="40" y="28" width="151" height="36" />
+        <frame id="848:153520" name="Client scope and fiscal horizon" x="40" y="84" width="1128" height="36">
+          <instance id="848:153521" name="Action · Anduril  ▾" x="0" y="0" width="88" height="36" />
+          <instance id="848:153527" name="Action · FY27–FY29  ▾" x="100" y="0" width="117" height="36" />
+          <frame id="848:153533" name="Flexible space" x="229" y="17.5" width="682" height="1" />
+          <frame id="848:153534" name="Badge · Live · refreshed just now" x="923" y="5.5" width="205" height="25">
+            <text id="848:153535" name="Live · refreshed just now" x="9" y="4" width="187" height="17" />
+          </frame>
+        </frame>
+        <frame id="848:153536" name="Page header" x="40" y="140" width="1128" height="73">
+          <frame id="848:153537" name="Title and description" x="0" y="0" width="849" height="73">
+            <text id="848:153538" name="FY27 counter-UAS posture" x="0" y="0" width="849" height="41" />
+            <text id="848:153539" name="Goal · Secure a funded counter-UAS demonstration and a clear path to a" x="0" y="53" width="849" height="20" />
+          </frame>
+          <frame id="848:153540" name="Header actions" x="861" y="0" width="267" height="36">
+            <instance id="848:153541" name="Action · Export" x="0" y="0" width="73" height="36" />
+            <instance id="848:153547" name="Action · History" x="85" y="0" width="77" height="36" />
+            <instance id="848:153553" name="Action · Ask Meri" x="174" y="0" width="88" height="36" />
+          </frame>
+        </frame>
+        <frame id="848:153559" name="Reference layer visibility" x="40" y="233" width="1128" height="36">
+          <frame id="848:153560" name="Badge · Appropriations ask" x="0" y="5.5" width="156" height="25">
+            <text id="848:153561" name="Appropriations ask" x="9" y="4" width="138" height="17" />
+          </frame>
+          <frame id="848:153562" name="Flexible space" x="168" y="17.5" width="509" height="1" />
+          <instance id="848:153563" name="Action · PPBE" x="689" y="0" width="66" height="36" />
+          <instance id="848:153569" name="Action · Congress" x="767" y="0" width="92" height="36" />
+          <instance id="848:153575" name="Action · Watch · 2" x="871" y="0" width="90" height="36" />
+          <text id="848:153581" name="Saved today, 9:42 AM" x="973" y="9.5" width="155" height="17" />
+        </frame>
+        <frame id="848:153582" name="Working timeline controls" x="40" y="289" width="1128" height="36">
+          <text id="848:153583" name="Working timeline" x="0" y="5" width="147" height="26" />
+          <text id="848:153584" name="5 steps · 4 reference layers" x="159" y="8.5" width="230" height="19" />
+          <frame id="848:153585" name="Flexible space" x="401" y="17.5" width="362" height="1" />
+          <instance id="848:153586" name="Action · Plan health · 80" x="775" y="0" width="132" height="36" />
+          <instance id="848:153592" name="Action · Firm phases" x="919" y="0" width="110" height="36" />
+          <instance id="848:153598" name="Action · Add step" x="1041" y="0" width="87" height="36" />
+        </frame>
+        <frame id="848:153604" name="Kibo · Fiscal strategy timeline" x="40" y="345" width="1128" height="892">
+          <frame id="848:153605" name="Pinned step and reference labels" x="1" y="1" width="220" height="890">
+            <frame id="848:153608" name="Label · FISCAL WINDOW" x="0" y="0" width="220" height="68">
+              <text id="848:153609" name="FISCAL WINDOW" x="16" y="8" width="192" height="19" />
+              <text id="848:153610" name="October 2026 – September 2029" x="16" y="27" width="192" height="16" />
+            </frame>
+            <frame id="848:153692" name="Label · PPBE · Read only" x="0" y="68" width="220" height="30">
+              <text id="848:153693" name="PPBE · Read only" x="16" y="5" width="192" height="17" />
+            </frame>
+            <frame id="848:153732" name="Label · POM / BES" x="0" y="98" width="220" height="56">
+              <text id="848:153733" name="POM / BES" x="16" y="8" width="192" height="19" />
+              <text id="848:153734" name="Planning reference window" x="16" y="27" width="192" height="16" />
+            </frame>
+            <frame id="848:153777" name="Label · Legislative" x="0" y="154" width="220" height="30">
+              <text id="848:153778" name="Legislative" x="16" y="5" width="192" height="17" />
+            </frame>
+            <frame id="848:153817" name="Action · Edit legislative calendar" x="0" y="184" width="220" height="56">
+              <text id="848:153818" name="NDAA markup" x="16" y="8" width="192" height="19" />
+              <text id="848:153819" name="Nov 5 – Dec 12, 2026" x="16" y="27" width="192" height="16" />
+            </frame>
+            <frame id="848:153862" name="Label · Approps markup" x="0" y="240" width="220" height="56">
+              <text id="848:153863" name="Approps markup" x="16" y="8" width="192" height="19" />
+              <text id="848:153864" name="Jan 10 – Feb 15, 2027" x="16" y="27" width="192" height="16" />
+            </frame>
+            <frame id="848:153907" name="Label · Firm phases" x="0" y="296" width="220" height="30">
+              <text id="848:153908" name="Firm phases" x="16" y="5" width="192" height="17" />
+            </frame>
+            <frame id="848:153947" name="Label · Position" x="0" y="326" width="220" height="56">
+              <text id="848:153948" name="Position" x="16" y="8" width="192" height="19" />
+              <text id="848:153949" name="FY27 Q1" x="16" y="27" width="192" height="16" />
+            </frame>
+            <frame id="848:153992" name="Label · Advocate" x="0" y="382" width="220" height="56">
+              <text id="848:153993" name="Advocate" x="16" y="8" width="192" height="19" />
+              <text id="848:153994" name="FY27 Q2–Q3" x="16" y="27" width="192" height="16" />
+            </frame>
+            <frame id="848:154037" name="Label · Deliver" x="0" y="438" width="220" height="56">
+              <text id="848:154038" name="Deliver" x="16" y="8" width="192" height="19" />
+              <text id="848:154039" name="FY27 Q4" x="16" y="27" width="192" height="16" />
+            </frame>
+            <frame id="848:154082" name="Label · Watch · 2 proposals" x="0" y="494" width="220" height="30">
+              <text id="848:154083" name="Watch · 2 proposals" x="16" y="5" width="192" height="17" />
+            </frame>
+            <frame id="848:154122" name="Action · Review proposals" x="0" y="524" width="220" height="56">
+              <text id="848:154123" name="Proposed: SASC brief" x="16" y="8" width="192" height="19" />
+              <text id="848:154124" name="Review proposed changes" x="16" y="27" width="192" height="16" />
+            </frame>
+            <frame id="848:154166" name="Label · Strategy steps" x="0" y="580" width="220" height="30">
+              <text id="848:154167" name="Strategy steps" x="16" y="5" width="192" height="17" />
+            </frame>
+            <frame id="848:154206" name="Action · Open step" x="0" y="610" width="220" height="56">
+              <text id="848:154207" name="Wicker staff" x="16" y="8" width="192" height="19" />
+              <text id="848:154208" name="Oct 12 · Jordan Clayton" x="16" y="27" width="192" height="16" />
+            </frame>
+            <frame id="848:154250" name="Action · Open step" x="0" y="666" width="220" height="56">
+              <text id="848:154251" name="Fallon outreach" x="16" y="8" width="192" height="19" />
+              <text id="848:154252" name="Oct 19 · Alex Chen" x="16" y="27" width="192" height="16" />
+            </frame>
+            <frame id="848:154294" name="Action · Open step" x="0" y="722" width="220" height="56">
+              <text id="848:154295" name="HASC TAL brief" x="16" y="8" width="192" height="19" />
+              <text id="848:154296" name="Nov 5 · Jordan Clayton" x="16" y="27" width="192" height="16" />
+            </frame>
+            <frame id="848:154338" name="Action · Open step" x="0" y="778" width="220" height="56">
+              <text id="848:154339" name="Approps ask" x="16" y="8" width="192" height="19" />
+              <text id="848:154340" name="Dec 3 · Unassigned" x="16" y="27" width="192" height="16" />
+            </frame>
+            <frame id="848:154382" name="Action · Open step" x="0" y="834" width="220" height="56">
+              <text id="848:154383" name="Fallon meeting" x="16" y="8" width="192" height="19" />
+              <text id="848:154384" name="Jan 15 · Jordan Clayton" x="16" y="27" width="192" height="16" />
+            </frame>
+          </frame>
+          <frame id="848:153606" name="Horizontal timeline scroll" x="221" y="1" width="906" height="887">
+            <frame id="848:153607" name="FY27–FY29 · 36 month grid" x="0" y="0" width="1656" height="887">
+              <frame id="848:153611" name="Fiscal years and months" x="0" y="0" width="1656" height="65">
+                <frame id="848:153612" name="Fiscal years" x="0" y="0" width="1656" height="33">
+                  <frame id="848:153613" name="FY27" x="0" y="0" width="552" height="33">
+                    <text id="848:153614" name="FY27" x="12" y="8" width="540" height="17" />
+                  </frame>
+                  <frame id="848:153615" name="FY28" x="552" y="0" width="552" height="33">
+                    <text id="848:153616" name="FY28" x="12" y="8" width="540" height="17" />
+                  </frame>
+                  <frame id="848:153617" name="FY29" x="1104" y="0" width="552" height="33">
+                    <text id="848:153618" name="FY29" x="12" y="8" width="540" height="17" />
+                  </frame>
+                </frame>
+                <frame id="848:153619" name="Months" x="0" y="33" width="1656" height="32">
+                  <frame id="848:153620" name="Month 0" x="0" y="0" width="46" height="32">
+                    <text id="848:153621" name="Oct" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153622" name="Month 1" x="46" y="0" width="46" height="32">
+                    <text id="848:153623" name="Nov" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153624" name="Month 2" x="92" y="0" width="46" height="32">
+                    <text id="848:153625" name="Dec" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153626" name="Month 3" x="138" y="0" width="46" height="32">
+                    <text id="848:153627" name="Jan" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153628" name="Month 4" x="184" y="0" width="46" height="32">
+                    <text id="848:153629" name="Feb" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153630" name="Month 5" x="230" y="0" width="46" height="32">
+                    <text id="848:153631" name="Mar" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153632" name="Month 6" x="276" y="0" width="46" height="32">
+                    <text id="848:153633" name="Apr" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153634" name="Month 7" x="322" y="0" width="46" height="32">
+                    <text id="848:153635" name="May" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153636" name="Month 8" x="368" y="0" width="46" height="32">
+                    <text id="848:153637" name="Jun" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153638" name="Month 9" x="414" y="0" width="46" height="32">
+                    <text id="848:153639" name="Jul" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153640" name="Month 10" x="460" y="0" width="46" height="32">
+                    <text id="848:153641" name="Aug" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153642" name="Month 11" x="506" y="0" width="46" height="32">
+                    <text id="848:153643" name="Sep" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153644" name="Month 12" x="552" y="0" width="46" height="32">
+                    <text id="848:153645" name="Oct" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153646" name="Month 13" x="598" y="0" width="46" height="32">
+                    <text id="848:153647" name="Nov" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153648" name="Month 14" x="644" y="0" width="46" height="32">
+                    <text id="848:153649" name="Dec" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153650" name="Month 15" x="690" y="0" width="46" height="32">
+                    <text id="848:153651" name="Jan" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153652" name="Month 16" x="736" y="0" width="46" height="32">
+                    <text id="848:153653" name="Feb" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153654" name="Month 17" x="782" y="0" width="46" height="32">
+                    <text id="848:153655" name="Mar" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153656" name="Month 18" x="828" y="0" width="46" height="32">
+                    <text id="848:153657" name="Apr" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153658" name="Month 19" x="874" y="0" width="46" height="32">
+                    <text id="848:153659" name="May" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153660" name="Month 20" x="920" y="0" width="46" height="32">
+                    <text id="848:153661" name="Jun" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153662" name="Month 21" x="966" y="0" width="46" height="32">
+                    <text id="848:153663" name="Jul" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153664" name="Month 22" x="1012" y="0" width="46" height="32">
+                    <text id="848:153665" name="Aug" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153666" name="Month 23" x="1058" y="0" width="46" height="32">
+                    <text id="848:153667" name="Sep" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153668" name="Month 24" x="1104" y="0" width="46" height="32">
+                    <text id="848:153669" name="Oct" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153670" name="Month 25" x="1150" y="0" width="46" height="32">
+                    <text id="848:153671" name="Nov" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153672" name="Month 26" x="1196" y="0" width="46" height="32">
+                    <text id="848:153673" name="Dec" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153674" name="Month 27" x="1242" y="0" width="46" height="32">
+                    <text id="848:153675" name="Jan" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153676" name="Month 28" x="1288" y="0" width="46" height="32">
+                    <text id="848:153677" name="Feb" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153678" name="Month 29" x="1334" y="0" width="46" height="32">
+                    <text id="848:153679" name="Mar" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153680" name="Month 30" x="1380" y="0" width="46" height="32">
+                    <text id="848:153681" name="Apr" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153682" name="Month 31" x="1426" y="0" width="46" height="32">
+                    <text id="848:153683" name="May" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153684" name="Month 32" x="1472" y="0" width="46" height="32">
+                    <text id="848:153685" name="Jun" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153686" name="Month 33" x="1518" y="0" width="46" height="32">
+                    <text id="848:153687" name="Jul" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153688" name="Month 34" x="1564" y="0" width="46" height="32">
+                    <text id="848:153689" name="Aug" x="0" y="8" width="42" height="16" />
+                  </frame>
+                  <frame id="848:153690" name="Month 35" x="1610" y="0" width="46" height="32">
+                    <text id="848:153691" name="Sep" x="0" y="8" width="42" height="16" />
+                  </frame>
+                </frame>
+              </frame>
+              <frame id="848:153694" name="Timeline · PPBE · Read only" x="0" y="65" width="1656" height="30">
+                <rounded-rectangle id="848:153695" name="Rectangle" x="0" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153696" name="Rectangle" x="46" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153697" name="Rectangle" x="92" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153698" name="Rectangle" x="138" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153699" name="Rectangle" x="184" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153700" name="Rectangle" x="230" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153701" name="Rectangle" x="276" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153702" name="Rectangle" x="322" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153703" name="Rectangle" x="368" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153704" name="Rectangle" x="414" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153705" name="Rectangle" x="460" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153706" name="Rectangle" x="506" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153707" name="Rectangle" x="552" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153708" name="Rectangle" x="598" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153709" name="Rectangle" x="644" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153710" name="Rectangle" x="690" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153711" name="Rectangle" x="736" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153712" name="Rectangle" x="782" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153713" name="Rectangle" x="828" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153714" name="Rectangle" x="874" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153715" name="Rectangle" x="920" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153716" name="Rectangle" x="966" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153717" name="Rectangle" x="1012" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153718" name="Rectangle" x="1058" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153719" name="Rectangle" x="1104" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153720" name="Rectangle" x="1150" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153721" name="Rectangle" x="1196" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153722" name="Rectangle" x="1242" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153723" name="Rectangle" x="1288" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153724" name="Rectangle" x="1334" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153725" name="Rectangle" x="1380" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153726" name="Rectangle" x="1426" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153727" name="Rectangle" x="1472" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153728" name="Rectangle" x="1518" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153729" name="Rectangle" x="1564" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153730" name="Rectangle" x="1610" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153731" name="Rectangle" x="1656" y="0" width="1" height="30" />
+              </frame>
+              <frame id="848:153735" name="Timeline · POM / BES" x="0" y="95" width="1656" height="56">
+                <rounded-rectangle id="848:153736" name="Rectangle" x="0" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153737" name="Rectangle" x="46" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153738" name="Rectangle" x="92" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153739" name="Rectangle" x="138" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153740" name="Rectangle" x="184" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153741" name="Rectangle" x="230" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153742" name="Rectangle" x="276" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153743" name="Rectangle" x="322" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153744" name="Rectangle" x="368" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153745" name="Rectangle" x="414" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153746" name="Rectangle" x="460" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153747" name="Rectangle" x="506" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153748" name="Rectangle" x="552" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153749" name="Rectangle" x="598" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153750" name="Rectangle" x="644" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153751" name="Rectangle" x="690" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153752" name="Rectangle" x="736" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153753" name="Rectangle" x="782" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153754" name="Rectangle" x="828" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153755" name="Rectangle" x="874" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153756" name="Rectangle" x="920" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153757" name="Rectangle" x="966" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153758" name="Rectangle" x="1012" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153759" name="Rectangle" x="1058" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153760" name="Rectangle" x="1104" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153761" name="Rectangle" x="1150" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153762" name="Rectangle" x="1196" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153763" name="Rectangle" x="1242" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153764" name="Rectangle" x="1288" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153765" name="Rectangle" x="1334" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153766" name="Rectangle" x="1380" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153767" name="Rectangle" x="1426" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153768" name="Rectangle" x="1472" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153769" name="Rectangle" x="1518" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153770" name="Rectangle" x="1564" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153771" name="Rectangle" x="1610" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153772" name="Rectangle" x="1656" y="0" width="1" height="56" />
+                <instance id="848:153773" name="Reference · POM / BES" x="0" y="13" width="138" height="30" />
+              </frame>
+              <frame id="848:153779" name="Timeline · Legislative" x="0" y="151" width="1656" height="30">
+                <rounded-rectangle id="848:153780" name="Rectangle" x="0" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153781" name="Rectangle" x="46" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153782" name="Rectangle" x="92" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153783" name="Rectangle" x="138" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153784" name="Rectangle" x="184" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153785" name="Rectangle" x="230" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153786" name="Rectangle" x="276" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153787" name="Rectangle" x="322" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153788" name="Rectangle" x="368" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153789" name="Rectangle" x="414" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153790" name="Rectangle" x="460" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153791" name="Rectangle" x="506" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153792" name="Rectangle" x="552" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153793" name="Rectangle" x="598" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153794" name="Rectangle" x="644" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153795" name="Rectangle" x="690" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153796" name="Rectangle" x="736" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153797" name="Rectangle" x="782" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153798" name="Rectangle" x="828" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153799" name="Rectangle" x="874" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153800" name="Rectangle" x="920" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153801" name="Rectangle" x="966" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153802" name="Rectangle" x="1012" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153803" name="Rectangle" x="1058" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153804" name="Rectangle" x="1104" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153805" name="Rectangle" x="1150" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153806" name="Rectangle" x="1196" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153807" name="Rectangle" x="1242" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153808" name="Rectangle" x="1288" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153809" name="Rectangle" x="1334" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153810" name="Rectangle" x="1380" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153811" name="Rectangle" x="1426" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153812" name="Rectangle" x="1472" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153813" name="Rectangle" x="1518" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153814" name="Rectangle" x="1564" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153815" name="Rectangle" x="1610" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153816" name="Rectangle" x="1656" y="0" width="1" height="30" />
+              </frame>
+              <frame id="848:153820" name="Timeline · NDAA markup" x="0" y="181" width="1656" height="56">
+                <rounded-rectangle id="848:153821" name="Rectangle" x="0" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153822" name="Rectangle" x="46" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153823" name="Rectangle" x="92" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153824" name="Rectangle" x="138" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153825" name="Rectangle" x="184" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153826" name="Rectangle" x="230" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153827" name="Rectangle" x="276" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153828" name="Rectangle" x="322" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153829" name="Rectangle" x="368" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153830" name="Rectangle" x="414" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153831" name="Rectangle" x="460" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153832" name="Rectangle" x="506" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153833" name="Rectangle" x="552" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153834" name="Rectangle" x="598" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153835" name="Rectangle" x="644" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153836" name="Rectangle" x="690" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153837" name="Rectangle" x="736" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153838" name="Rectangle" x="782" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153839" name="Rectangle" x="828" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153840" name="Rectangle" x="874" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153841" name="Rectangle" x="920" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153842" name="Rectangle" x="966" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153843" name="Rectangle" x="1012" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153844" name="Rectangle" x="1058" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153845" name="Rectangle" x="1104" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153846" name="Rectangle" x="1150" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153847" name="Rectangle" x="1196" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153848" name="Rectangle" x="1242" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153849" name="Rectangle" x="1288" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153850" name="Rectangle" x="1334" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153851" name="Rectangle" x="1380" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153852" name="Rectangle" x="1426" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153853" name="Rectangle" x="1472" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153854" name="Rectangle" x="1518" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153855" name="Rectangle" x="1564" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153856" name="Rectangle" x="1610" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153857" name="Rectangle" x="1656" y="0" width="1" height="56" />
+                <instance id="848:153858" name="Reference · NDAA markup" x="53.36000061035156" y="13" width="56.119998931884766" height="30" />
+              </frame>
+              <frame id="848:153865" name="Timeline · Approps markup" x="0" y="237" width="1656" height="56">
+                <rounded-rectangle id="848:153866" name="Rectangle" x="0" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153867" name="Rectangle" x="46" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153868" name="Rectangle" x="92" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153869" name="Rectangle" x="138" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153870" name="Rectangle" x="184" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153871" name="Rectangle" x="230" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153872" name="Rectangle" x="276" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153873" name="Rectangle" x="322" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153874" name="Rectangle" x="368" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153875" name="Rectangle" x="414" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153876" name="Rectangle" x="460" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153877" name="Rectangle" x="506" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153878" name="Rectangle" x="552" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153879" name="Rectangle" x="598" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153880" name="Rectangle" x="644" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153881" name="Rectangle" x="690" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153882" name="Rectangle" x="736" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153883" name="Rectangle" x="782" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153884" name="Rectangle" x="828" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153885" name="Rectangle" x="874" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153886" name="Rectangle" x="920" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153887" name="Rectangle" x="966" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153888" name="Rectangle" x="1012" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153889" name="Rectangle" x="1058" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153890" name="Rectangle" x="1104" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153891" name="Rectangle" x="1150" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153892" name="Rectangle" x="1196" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153893" name="Rectangle" x="1242" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153894" name="Rectangle" x="1288" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153895" name="Rectangle" x="1334" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153896" name="Rectangle" x="1380" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153897" name="Rectangle" x="1426" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153898" name="Rectangle" x="1472" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153899" name="Rectangle" x="1518" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153900" name="Rectangle" x="1564" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153901" name="Rectangle" x="1610" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153902" name="Rectangle" x="1656" y="0" width="1" height="56" />
+                <instance id="848:153903" name="Reference · Approps markup" x="152.72000122070312" y="13" width="53.36000061035156" height="30" />
+              </frame>
+              <frame id="848:153909" name="Timeline · Firm phases" x="0" y="293" width="1656" height="30">
+                <rounded-rectangle id="848:153910" name="Rectangle" x="0" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153911" name="Rectangle" x="46" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153912" name="Rectangle" x="92" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153913" name="Rectangle" x="138" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153914" name="Rectangle" x="184" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153915" name="Rectangle" x="230" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153916" name="Rectangle" x="276" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153917" name="Rectangle" x="322" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153918" name="Rectangle" x="368" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153919" name="Rectangle" x="414" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153920" name="Rectangle" x="460" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153921" name="Rectangle" x="506" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153922" name="Rectangle" x="552" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153923" name="Rectangle" x="598" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153924" name="Rectangle" x="644" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153925" name="Rectangle" x="690" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153926" name="Rectangle" x="736" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153927" name="Rectangle" x="782" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153928" name="Rectangle" x="828" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153929" name="Rectangle" x="874" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153930" name="Rectangle" x="920" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153931" name="Rectangle" x="966" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153932" name="Rectangle" x="1012" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153933" name="Rectangle" x="1058" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153934" name="Rectangle" x="1104" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153935" name="Rectangle" x="1150" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153936" name="Rectangle" x="1196" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153937" name="Rectangle" x="1242" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153938" name="Rectangle" x="1288" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153939" name="Rectangle" x="1334" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153940" name="Rectangle" x="1380" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153941" name="Rectangle" x="1426" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153942" name="Rectangle" x="1472" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153943" name="Rectangle" x="1518" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153944" name="Rectangle" x="1564" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153945" name="Rectangle" x="1610" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:153946" name="Rectangle" x="1656" y="0" width="1" height="30" />
+              </frame>
+              <frame id="848:153950" name="Timeline · Position" x="0" y="323" width="1656" height="56">
+                <rounded-rectangle id="848:153951" name="Rectangle" x="0" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153952" name="Rectangle" x="46" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153953" name="Rectangle" x="92" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153954" name="Rectangle" x="138" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153955" name="Rectangle" x="184" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153956" name="Rectangle" x="230" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153957" name="Rectangle" x="276" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153958" name="Rectangle" x="322" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153959" name="Rectangle" x="368" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153960" name="Rectangle" x="414" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153961" name="Rectangle" x="460" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153962" name="Rectangle" x="506" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153963" name="Rectangle" x="552" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153964" name="Rectangle" x="598" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153965" name="Rectangle" x="644" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153966" name="Rectangle" x="690" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153967" name="Rectangle" x="736" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153968" name="Rectangle" x="782" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153969" name="Rectangle" x="828" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153970" name="Rectangle" x="874" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153971" name="Rectangle" x="920" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153972" name="Rectangle" x="966" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153973" name="Rectangle" x="1012" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153974" name="Rectangle" x="1058" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153975" name="Rectangle" x="1104" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153976" name="Rectangle" x="1150" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153977" name="Rectangle" x="1196" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153978" name="Rectangle" x="1242" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153979" name="Rectangle" x="1288" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153980" name="Rectangle" x="1334" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153981" name="Rectangle" x="1380" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153982" name="Rectangle" x="1426" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153983" name="Rectangle" x="1472" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153984" name="Rectangle" x="1518" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153985" name="Rectangle" x="1564" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153986" name="Rectangle" x="1610" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153987" name="Rectangle" x="1656" y="0" width="1" height="56" />
+                <instance id="848:153988" name="Reference · Position" x="0" y="13" width="138" height="30" />
+              </frame>
+              <frame id="848:153995" name="Timeline · Advocate" x="0" y="379" width="1656" height="56">
+                <rounded-rectangle id="848:153996" name="Rectangle" x="0" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153997" name="Rectangle" x="46" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153998" name="Rectangle" x="92" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:153999" name="Rectangle" x="138" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154000" name="Rectangle" x="184" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154001" name="Rectangle" x="230" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154002" name="Rectangle" x="276" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154003" name="Rectangle" x="322" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154004" name="Rectangle" x="368" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154005" name="Rectangle" x="414" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154006" name="Rectangle" x="460" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154007" name="Rectangle" x="506" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154008" name="Rectangle" x="552" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154009" name="Rectangle" x="598" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154010" name="Rectangle" x="644" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154011" name="Rectangle" x="690" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154012" name="Rectangle" x="736" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154013" name="Rectangle" x="782" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154014" name="Rectangle" x="828" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154015" name="Rectangle" x="874" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154016" name="Rectangle" x="920" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154017" name="Rectangle" x="966" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154018" name="Rectangle" x="1012" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154019" name="Rectangle" x="1058" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154020" name="Rectangle" x="1104" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154021" name="Rectangle" x="1150" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154022" name="Rectangle" x="1196" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154023" name="Rectangle" x="1242" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154024" name="Rectangle" x="1288" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154025" name="Rectangle" x="1334" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154026" name="Rectangle" x="1380" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154027" name="Rectangle" x="1426" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154028" name="Rectangle" x="1472" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154029" name="Rectangle" x="1518" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154030" name="Rectangle" x="1564" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154031" name="Rectangle" x="1610" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154032" name="Rectangle" x="1656" y="0" width="1" height="56" />
+                <instance id="848:154033" name="Reference · Advocate" x="138" y="13" width="276" height="30" />
+              </frame>
+              <frame id="848:154040" name="Timeline · Deliver" x="0" y="435" width="1656" height="56">
+                <rounded-rectangle id="848:154041" name="Rectangle" x="0" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154042" name="Rectangle" x="46" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154043" name="Rectangle" x="92" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154044" name="Rectangle" x="138" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154045" name="Rectangle" x="184" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154046" name="Rectangle" x="230" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154047" name="Rectangle" x="276" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154048" name="Rectangle" x="322" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154049" name="Rectangle" x="368" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154050" name="Rectangle" x="414" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154051" name="Rectangle" x="460" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154052" name="Rectangle" x="506" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154053" name="Rectangle" x="552" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154054" name="Rectangle" x="598" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154055" name="Rectangle" x="644" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154056" name="Rectangle" x="690" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154057" name="Rectangle" x="736" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154058" name="Rectangle" x="782" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154059" name="Rectangle" x="828" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154060" name="Rectangle" x="874" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154061" name="Rectangle" x="920" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154062" name="Rectangle" x="966" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154063" name="Rectangle" x="1012" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154064" name="Rectangle" x="1058" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154065" name="Rectangle" x="1104" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154066" name="Rectangle" x="1150" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154067" name="Rectangle" x="1196" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154068" name="Rectangle" x="1242" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154069" name="Rectangle" x="1288" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154070" name="Rectangle" x="1334" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154071" name="Rectangle" x="1380" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154072" name="Rectangle" x="1426" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154073" name="Rectangle" x="1472" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154074" name="Rectangle" x="1518" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154075" name="Rectangle" x="1564" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154076" name="Rectangle" x="1610" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154077" name="Rectangle" x="1656" y="0" width="1" height="56" />
+                <instance id="848:154078" name="Reference · Deliver" x="414" y="13" width="138" height="30" />
+              </frame>
+              <frame id="848:154084" name="Timeline · Watch · 2 proposals" x="0" y="491" width="1656" height="30">
+                <rounded-rectangle id="848:154085" name="Rectangle" x="0" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154086" name="Rectangle" x="46" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154087" name="Rectangle" x="92" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154088" name="Rectangle" x="138" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154089" name="Rectangle" x="184" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154090" name="Rectangle" x="230" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154091" name="Rectangle" x="276" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154092" name="Rectangle" x="322" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154093" name="Rectangle" x="368" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154094" name="Rectangle" x="414" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154095" name="Rectangle" x="460" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154096" name="Rectangle" x="506" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154097" name="Rectangle" x="552" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154098" name="Rectangle" x="598" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154099" name="Rectangle" x="644" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154100" name="Rectangle" x="690" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154101" name="Rectangle" x="736" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154102" name="Rectangle" x="782" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154103" name="Rectangle" x="828" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154104" name="Rectangle" x="874" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154105" name="Rectangle" x="920" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154106" name="Rectangle" x="966" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154107" name="Rectangle" x="1012" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154108" name="Rectangle" x="1058" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154109" name="Rectangle" x="1104" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154110" name="Rectangle" x="1150" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154111" name="Rectangle" x="1196" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154112" name="Rectangle" x="1242" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154113" name="Rectangle" x="1288" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154114" name="Rectangle" x="1334" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154115" name="Rectangle" x="1380" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154116" name="Rectangle" x="1426" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154117" name="Rectangle" x="1472" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154118" name="Rectangle" x="1518" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154119" name="Rectangle" x="1564" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154120" name="Rectangle" x="1610" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154121" name="Rectangle" x="1656" y="0" width="1" height="30" />
+              </frame>
+              <frame id="848:154125" name="Timeline · Proposed: SASC brief" x="0" y="521" width="1656" height="56">
+                <rounded-rectangle id="848:154126" name="Rectangle" x="0" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154127" name="Rectangle" x="46" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154128" name="Rectangle" x="92" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154129" name="Rectangle" x="138" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154130" name="Rectangle" x="184" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154131" name="Rectangle" x="230" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154132" name="Rectangle" x="276" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154133" name="Rectangle" x="322" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154134" name="Rectangle" x="368" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154135" name="Rectangle" x="414" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154136" name="Rectangle" x="460" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154137" name="Rectangle" x="506" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154138" name="Rectangle" x="552" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154139" name="Rectangle" x="598" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154140" name="Rectangle" x="644" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154141" name="Rectangle" x="690" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154142" name="Rectangle" x="736" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154143" name="Rectangle" x="782" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154144" name="Rectangle" x="828" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154145" name="Rectangle" x="874" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154146" name="Rectangle" x="920" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154147" name="Rectangle" x="966" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154148" name="Rectangle" x="1012" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154149" name="Rectangle" x="1058" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154150" name="Rectangle" x="1104" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154151" name="Rectangle" x="1150" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154152" name="Rectangle" x="1196" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154153" name="Rectangle" x="1242" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154154" name="Rectangle" x="1288" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154155" name="Rectangle" x="1334" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154156" name="Rectangle" x="1380" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154157" name="Rectangle" x="1426" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154158" name="Rectangle" x="1472" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154159" name="Rectangle" x="1518" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154160" name="Rectangle" x="1564" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154161" name="Rectangle" x="1610" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154162" name="Rectangle" x="1656" y="0" width="1" height="56" />
+                <instance id="848:154163" name="Proposed change · Proposed: SASC brief" x="41.400001525878906" y="14" width="180" height="28" />
+              </frame>
+              <frame id="848:154168" name="Timeline · Strategy steps" x="0" y="577" width="1656" height="30">
+                <rounded-rectangle id="848:154169" name="Rectangle" x="0" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154170" name="Rectangle" x="46" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154171" name="Rectangle" x="92" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154172" name="Rectangle" x="138" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154173" name="Rectangle" x="184" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154174" name="Rectangle" x="230" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154175" name="Rectangle" x="276" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154176" name="Rectangle" x="322" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154177" name="Rectangle" x="368" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154178" name="Rectangle" x="414" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154179" name="Rectangle" x="460" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154180" name="Rectangle" x="506" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154181" name="Rectangle" x="552" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154182" name="Rectangle" x="598" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154183" name="Rectangle" x="644" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154184" name="Rectangle" x="690" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154185" name="Rectangle" x="736" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154186" name="Rectangle" x="782" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154187" name="Rectangle" x="828" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154188" name="Rectangle" x="874" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154189" name="Rectangle" x="920" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154190" name="Rectangle" x="966" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154191" name="Rectangle" x="1012" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154192" name="Rectangle" x="1058" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154193" name="Rectangle" x="1104" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154194" name="Rectangle" x="1150" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154195" name="Rectangle" x="1196" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154196" name="Rectangle" x="1242" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154197" name="Rectangle" x="1288" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154198" name="Rectangle" x="1334" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154199" name="Rectangle" x="1380" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154200" name="Rectangle" x="1426" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154201" name="Rectangle" x="1472" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154202" name="Rectangle" x="1518" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154203" name="Rectangle" x="1564" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154204" name="Rectangle" x="1610" y="0" width="1" height="30" />
+                <rounded-rectangle id="848:154205" name="Rectangle" x="1656" y="0" width="1" height="30" />
+              </frame>
+              <frame id="848:154209" name="Timeline · Wicker staff" x="0" y="607" width="1656" height="56">
+                <rounded-rectangle id="848:154210" name="Rectangle" x="0" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154211" name="Rectangle" x="46" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154212" name="Rectangle" x="92" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154213" name="Rectangle" x="138" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154214" name="Rectangle" x="184" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154215" name="Rectangle" x="230" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154216" name="Rectangle" x="276" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154217" name="Rectangle" x="322" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154218" name="Rectangle" x="368" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154219" name="Rectangle" x="414" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154220" name="Rectangle" x="460" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154221" name="Rectangle" x="506" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154222" name="Rectangle" x="552" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154223" name="Rectangle" x="598" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154224" name="Rectangle" x="644" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154225" name="Rectangle" x="690" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154226" name="Rectangle" x="736" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154227" name="Rectangle" x="782" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154228" name="Rectangle" x="828" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154229" name="Rectangle" x="874" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154230" name="Rectangle" x="920" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154231" name="Rectangle" x="966" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154232" name="Rectangle" x="1012" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154233" name="Rectangle" x="1058" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154234" name="Rectangle" x="1104" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154235" name="Rectangle" x="1150" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154236" name="Rectangle" x="1196" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154237" name="Rectangle" x="1242" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154238" name="Rectangle" x="1288" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154239" name="Rectangle" x="1334" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154240" name="Rectangle" x="1380" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154241" name="Rectangle" x="1426" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154242" name="Rectangle" x="1472" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154243" name="Rectangle" x="1518" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154244" name="Rectangle" x="1564" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154245" name="Rectangle" x="1610" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154246" name="Rectangle" x="1656" y="0" width="1" height="56" />
+                <instance id="848:154247" name="Open step · Wicker staff" x="18.399999618530273" y="14" width="180" height="28" />
+              </frame>
+              <frame id="848:154253" name="Timeline · Fallon outreach" x="0" y="663" width="1656" height="56">
+                <rounded-rectangle id="848:154254" name="Rectangle" x="0" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154255" name="Rectangle" x="46" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154256" name="Rectangle" x="92" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154257" name="Rectangle" x="138" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154258" name="Rectangle" x="184" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154259" name="Rectangle" x="230" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154260" name="Rectangle" x="276" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154261" name="Rectangle" x="322" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154262" name="Rectangle" x="368" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154263" name="Rectangle" x="414" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154264" name="Rectangle" x="460" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154265" name="Rectangle" x="506" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154266" name="Rectangle" x="552" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154267" name="Rectangle" x="598" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154268" name="Rectangle" x="644" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154269" name="Rectangle" x="690" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154270" name="Rectangle" x="736" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154271" name="Rectangle" x="782" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154272" name="Rectangle" x="828" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154273" name="Rectangle" x="874" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154274" name="Rectangle" x="920" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154275" name="Rectangle" x="966" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154276" name="Rectangle" x="1012" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154277" name="Rectangle" x="1058" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154278" name="Rectangle" x="1104" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154279" name="Rectangle" x="1150" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154280" name="Rectangle" x="1196" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154281" name="Rectangle" x="1242" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154282" name="Rectangle" x="1288" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154283" name="Rectangle" x="1334" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154284" name="Rectangle" x="1380" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154285" name="Rectangle" x="1426" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154286" name="Rectangle" x="1472" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154287" name="Rectangle" x="1518" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154288" name="Rectangle" x="1564" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154289" name="Rectangle" x="1610" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154290" name="Rectangle" x="1656" y="0" width="1" height="56" />
+                <instance id="848:154291" name="Open step · Fallon outreach" x="29.899999618530273" y="14" width="180" height="28" />
+              </frame>
+              <frame id="848:154297" name="Timeline · HASC TAL brief" x="0" y="719" width="1656" height="56">
+                <rounded-rectangle id="848:154298" name="Rectangle" x="0" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154299" name="Rectangle" x="46" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154300" name="Rectangle" x="92" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154301" name="Rectangle" x="138" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154302" name="Rectangle" x="184" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154303" name="Rectangle" x="230" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154304" name="Rectangle" x="276" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154305" name="Rectangle" x="322" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154306" name="Rectangle" x="368" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154307" name="Rectangle" x="414" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154308" name="Rectangle" x="460" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154309" name="Rectangle" x="506" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154310" name="Rectangle" x="552" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154311" name="Rectangle" x="598" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154312" name="Rectangle" x="644" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154313" name="Rectangle" x="690" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154314" name="Rectangle" x="736" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154315" name="Rectangle" x="782" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154316" name="Rectangle" x="828" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154317" name="Rectangle" x="874" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154318" name="Rectangle" x="920" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154319" name="Rectangle" x="966" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154320" name="Rectangle" x="1012" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154321" name="Rectangle" x="1058" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154322" name="Rectangle" x="1104" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154323" name="Rectangle" x="1150" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154324" name="Rectangle" x="1196" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154325" name="Rectangle" x="1242" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154326" name="Rectangle" x="1288" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154327" name="Rectangle" x="1334" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154328" name="Rectangle" x="1380" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154329" name="Rectangle" x="1426" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154330" name="Rectangle" x="1472" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154331" name="Rectangle" x="1518" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154332" name="Rectangle" x="1564" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154333" name="Rectangle" x="1610" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154334" name="Rectangle" x="1656" y="0" width="1" height="56" />
+                <instance id="848:154335" name="Open step · HASC TAL brief" x="53.36000061035156" y="14" width="180" height="28" />
+              </frame>
+              <frame id="848:154341" name="Timeline · Approps ask" x="0" y="775" width="1656" height="56">
+                <rounded-rectangle id="848:154342" name="Rectangle" x="0" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154343" name="Rectangle" x="46" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154344" name="Rectangle" x="92" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154345" name="Rectangle" x="138" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154346" name="Rectangle" x="184" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154347" name="Rectangle" x="230" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154348" name="Rectangle" x="276" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154349" name="Rectangle" x="322" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154350" name="Rectangle" x="368" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154351" name="Rectangle" x="414" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154352" name="Rectangle" x="460" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154353" name="Rectangle" x="506" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154354" name="Rectangle" x="552" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154355" name="Rectangle" x="598" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154356" name="Rectangle" x="644" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154357" name="Rectangle" x="690" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154358" name="Rectangle" x="736" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154359" name="Rectangle" x="782" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154360" name="Rectangle" x="828" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154361" name="Rectangle" x="874" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154362" name="Rectangle" x="920" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154363" name="Rectangle" x="966" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154364" name="Rectangle" x="1012" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154365" name="Rectangle" x="1058" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154366" name="Rectangle" x="1104" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154367" name="Rectangle" x="1150" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154368" name="Rectangle" x="1196" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154369" name="Rectangle" x="1242" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154370" name="Rectangle" x="1288" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154371" name="Rectangle" x="1334" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154372" name="Rectangle" x="1380" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154373" name="Rectangle" x="1426" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154374" name="Rectangle" x="1472" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154375" name="Rectangle" x="1518" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154376" name="Rectangle" x="1564" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154377" name="Rectangle" x="1610" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154378" name="Rectangle" x="1656" y="0" width="1" height="56" />
+                <instance id="848:154379" name="Open step · Approps ask" x="94.76000213623047" y="14" width="180" height="28" />
+              </frame>
+              <frame id="848:154385" name="Timeline · Fallon meeting" x="0" y="831" width="1656" height="56">
+                <rounded-rectangle id="848:154386" name="Rectangle" x="0" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154387" name="Rectangle" x="46" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154388" name="Rectangle" x="92" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154389" name="Rectangle" x="138" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154390" name="Rectangle" x="184" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154391" name="Rectangle" x="230" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154392" name="Rectangle" x="276" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154393" name="Rectangle" x="322" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154394" name="Rectangle" x="368" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154395" name="Rectangle" x="414" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154396" name="Rectangle" x="460" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154397" name="Rectangle" x="506" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154398" name="Rectangle" x="552" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154399" name="Rectangle" x="598" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154400" name="Rectangle" x="644" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154401" name="Rectangle" x="690" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154402" name="Rectangle" x="736" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154403" name="Rectangle" x="782" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154404" name="Rectangle" x="828" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154405" name="Rectangle" x="874" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154406" name="Rectangle" x="920" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154407" name="Rectangle" x="966" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154408" name="Rectangle" x="1012" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154409" name="Rectangle" x="1058" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154410" name="Rectangle" x="1104" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154411" name="Rectangle" x="1150" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154412" name="Rectangle" x="1196" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154413" name="Rectangle" x="1242" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154414" name="Rectangle" x="1288" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154415" name="Rectangle" x="1334" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154416" name="Rectangle" x="1380" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154417" name="Rectangle" x="1426" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154418" name="Rectangle" x="1472" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154419" name="Rectangle" x="1518" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154420" name="Rectangle" x="1564" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154421" name="Rectangle" x="1610" y="0" width="1" height="56" />
+                <rounded-rectangle id="848:154422" name="Rectangle" x="1656" y="0" width="1" height="56" />
+                <instance id="848:154423" name="Open step · Fallon meeting" x="160.0800018310547" y="14" width="180" height="28" />
+              </frame>
+              <rounded-rectangle id="864:165346" name="Today indicator · Oct 11, 2026" x="14.83984375" y="68" width="1" height="826" />
+              <frame id="864:165347" name="Today label" x="14.83984375" y="66" width="44" height="15">
+                <text id="864:165348" name="Today" x="3" y="0" width="38" height="15" />
+              </frame>
+            </frame>
+          </frame>
+        </frame>
+        <text id="848:154426" name="Reference windows support planning. Confirm exact dates with dated pri" x="40" y="1257" width="1128" height="17" />
+        <frame id="848:154427" name="Next actions and plan health" x="40" y="1294" width="1128" height="192">
+          <frame id="848:154428" name="Panel · Next 30 days" x="0" y="0" width="558" height="192">
+            <text id="848:154429" name="Next 30 days" x="21" y="21" width="516" height="23" />
+            <text id="848:154430" name="Meeting with Sen. Wicker staff · Oct 12" x="21" y="56" width="516" height="19" />
+            <instance id="848:154431" name="Action · Open next step" x="21" y="87" width="130" height="36" />
+          </frame>
+          <frame id="848:154437" name="Panel · Plan health" x="570" y="0" width="558" height="192">
+            <text id="848:154438" name="Plan health" x="21" y="21" width="516" height="23" />
+            <text id="848:154439" name="80 / 100 · 1 unassigned step · 1 gate without evidence" x="21" y="56" width="516" height="19" />
+            <instance id="848:154440" name="Action · Review plan health" x="21" y="87" width="154" height="36" />
+            <instance id="848:154446" name="Action · Review with Meri" x="21" y="135" width="141" height="36" />
+          </frame>
+        </frame>
+        <frame id="848:154452" name="Panel · Strategy monitoring" x="40" y="1506" width="1128" height="173">
+          <text id="848:154453" name="Strategy monitoring" x="21" y="21" width="1086" height="23" />
+          <text id="848:154454" name="Manual · Last checked today, 8:30 AM · 2 proposed changes ready." x="21" y="56" width="1086" height="19" />
+          <frame id="848:154455" name="Row" x="21" y="87" width="1086" height="36">
+            <instance id="848:154456" name="Action · Manual  ▾" x="0" y="0" width="90" height="36" />
+            <instance id="848:154462" name="Action · Save monitoring · Disabled" x="102" y="0" width="136" height="36" />
+            <instance id="848:154468" name="Action · Check now" x="250" y="0" width="101" height="36" />
+            <instance id="848:154474" name="Action · Review proposals" x="363" y="0" width="145" height="36" />
+          </frame>
+          <text id="848:154480" name="The Watch layer controls visibility. Monitoring controls when Meri che" x="21" y="135" width="1086" height="17" />
+        </frame>
+      </frame>
+    </frame>
+  </frame>
+</frame>
+
+IMPORTANT: The design was too large to fit into context with get_design_context. Instead you have received a sparse metadata response, you MUST call get_design_context on the IDs of the sublayers to get the full code. Split up the calls to ensure the sublayers do not also exceed the context limit.
