@@ -1,0 +1,28 @@
+{
+  "schema_version": 2,
+  "source_head": "760dcc6c1179312c7f4b762e64cf3af1aad60c3e",
+  "gate": "check",
+  "attempt_id": "check-20261012T012155924364Z-f3e9fc9c",
+  "command": [
+    "npm",
+    "run",
+    "check"
+  ],
+  "started_utc": "2026-10-12T01:21:55.924364+00:00",
+  "runner_sha256": "d787a36edd2798a1dd0afe0c5647c9255d6f1cb4e1fb42ffcb59a93e68d0520a",
+  "command_exit_code": 0,
+  "exit_code": 0,
+  "source_changed_during_check": [],
+  "admission_errors": [],
+  "log": "outputs/evidence/portfolio-shared-integration-20261011/final-760dcc6/attempts/check-20261012T012155924364Z-f3e9fc9c/gate.log",
+  "command_started_utc": "2026-10-12T01:21:56.007696+00:00",
+  "command_finished_utc": "2026-10-12T01:22:58.364101+00:00",
+  "finished_utc": "2026-10-12T01:22:58.412028+00:00",
+  "duration_seconds": 62.487664,
+  "evidence_sha256": {
+    "source-before.json": "6c8c3e0d11684a2b807cae85fc3c17a4f1ebb2880e3285dbc74303847075ca13",
+    "gate.log": "7c9af1237e3ca6b88703508a3f2ee7cc522c48d65e67e25ae400ce199ad424af",
+    "attempt-start.json": "ac7f4db7e707e9479d837980f79384cad5167ef57f4b13b669bc0ccd28d47fe6",
+    "source-after.json": "6c8c3e0d11684a2b807cae85fc3c17a4f1ebb2880e3285dbc74303847075ca13"
+  }
+}

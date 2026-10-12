@@ -1,0 +1,317 @@
+{
+  "status": "READ_ONLY_PROPOSAL_NOT_APPLIED",
+  "preparedOn": "2026-10-12",
+  "owner": "portfolio_prospects_files",
+  "acceptedComplete": 0,
+  "rootHeadWhenPrepared": "ff7eabf152bcc62d1e8a481d5165ae6d1ff9b7b2",
+  "reviewedInputs": [
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/outputs/evidence/portfolio-shared-integration-20261011/reconcile-current-ledger.py",
+      "sha256": "f6d1bc31ece9bd2b24adb3dfb6e565928af6fab94d7fc402e27e2a835146be4e",
+      "bytes": 33121
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/outputs/evidence/portfolio-shared-integration-20261011/portable-evidence-selection.json",
+      "sha256": "d3b30b8a28999d29426cd224ba1b060b7915922722b8c6335afe8326dfac07d3",
+      "bytes": 29737
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/outputs/evidence/portfolio-shared-integration-20261011/assemble-portable-verification.py",
+      "sha256": "9603de891fa90d5ff3e94d4c8352de8440edc4031269a2ba65536c6f0428f4c3",
+      "bytes": 22071
+    }
+  ],
+  "currentSelectionItems": 62,
+  "selectionAdditions": [
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival/outputs/evidence/core-109-file-arrival-handoff-20261012.zip",
+      "destination": "integrations/core-109/file-arrival-handoff-20261012.zip",
+      "description": "Complete frozen CORE-109 source/preimage/native-Figma assessment and baseline/final evidence archive. Integrated at d4c6139; not a final combined gate or signed-in acceptance.",
+      "sha256": "7935c3104cd242138ab2b9a6093ffdf28f2c08eee1c4d686f31c7fc01ed39d1a"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/outputs/evidence/portfolio-shared-integration-20261011/file-arrival-final-integration.json",
+      "destination": "integrations/core-109/root-final-integration.json",
+      "description": "Root exact seven-file d4c6139 integration, unchanged-original hashes, raw 27-case review and three inspected captures.",
+      "sha256": "fac619d6d43f4a08b6a9fa7c2cbbad4455a7645202d95b52e9370ce01bb7a61a"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival/outputs/evidence/core-109-file-arrival-20261012/handoff/manifest.json",
+      "destination": "integrations/core-109/agent-manifest.json",
+      "description": "Frozen seven-file handoff with exact preimages and qualified source bytes.",
+      "sha256": "cf821235e4c577b336d7eb502e2e6b94cd5f7f99f3ff422bc7b7b1e7c50d73e0"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival/outputs/evidence/core-109-file-arrival-20261012/handoff/files/docs/portfolio-31/CORE-109-FILE-ARRIVAL-20261012.md",
+      "destination": "integrations/core-109/CORE-109-FILE-ARRIVAL-20261012.md",
+      "description": "Frozen continuation report, exact route/native/Figma references and OPP-01 raw-score/current-design discrepancy; no numerical opportunity score was added.",
+      "sha256": "116132753c9048d6c8480de0ede9fe5dc9afbc8a43d82a2f967509b745f2e2ca"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival/outputs/evidence/core-109-file-arrival-20261012/baseline-pristine/test-results/browser-results.json",
+      "destination": "history/core-109/baseline-pristine-browser-results.json",
+      "description": "Preserved raw CORE-109 cohort: five intentional pristine failures or 27 passing corrected cases. Focused cohort totals are separate from final combined-source qualification.",
+      "sha256": "4bab32abc5e17212f62d5cc6ed076581549e3392b43f68d74a1a6e42bac822d8"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival/outputs/evidence/core-109-file-arrival-20261012/baseline-pristine/receipt.json",
+      "destination": "history/core-109/baseline-pristine-receipt.json",
+      "description": "Exact source/input binding and completion receipt for the corresponding preserved CORE-109 cohort.",
+      "sha256": "90b9df774cc6566a14feb975510417584fafc5c869ad451828853ef27259e7af"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival/outputs/evidence/core-109-file-arrival-20261012/browser-candidate-01/test-results/browser-results.json",
+      "destination": "history/core-109/browser-candidate-01-browser-results.json",
+      "description": "Preserved raw CORE-109 cohort: five intentional pristine failures or 27 passing corrected cases. Focused cohort totals are separate from final combined-source qualification.",
+      "sha256": "e85f2dbda78f88a2a29b6c68c0ccc07dfae336892442169738f12eb41133f538"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival/outputs/evidence/core-109-file-arrival-20261012/browser-candidate-01/receipt.json",
+      "destination": "history/core-109/browser-candidate-01-receipt.json",
+      "description": "Exact source/input binding and completion receipt for the corresponding preserved CORE-109 cohort.",
+      "sha256": "53123cf2063a117816873bc9b3be6dedaa1d5b6219c567e504a316b1390dfcee"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival/outputs/evidence/core-109-file-arrival-20261012/browser-candidate-01/test-results/linked-file-arrival-a-dire-652ee-board-and-geometry-at-390px/linked-file-390.png",
+      "destination": "captures/core-109/linked-file-390.png",
+      "description": "Actual final CORE-109 desktop/phone/unavailable capture reviewed by author and root. Canonical preview reuse; synthetic current-list data only.",
+      "sha256": "ee93b84a8e02c269f27e7eab5c89af019edbe0a6b22d43c1d8be78bcf5bcaf23"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival/outputs/evidence/core-109-file-arrival-20261012/browser-candidate-01/test-results/linked-file-arrival-a-dire-e4116-oard-and-geometry-at-1440px/linked-file-1440.png",
+      "destination": "captures/core-109/linked-file-1440.png",
+      "description": "Actual final CORE-109 desktop/phone/unavailable capture reviewed by author and root. Canonical preview reuse; synthetic current-list data only.",
+      "sha256": "91b7846047288461c7cafb061674c50bcc98618595eb8e1a2673e02fb0e6237e"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival/outputs/evidence/core-109-file-arrival-20261012/browser-candidate-01/test-results/linked-file-arrival-a-miss-c96f4-g-another-file-or-replaying/linked-file-unavailable.png",
+      "destination": "captures/core-109/linked-file-unavailable.png",
+      "description": "Actual final CORE-109 desktop/phone/unavailable capture reviewed by author and root. Canonical preview reuse; synthetic current-list data only.",
+      "sha256": "269ff158644c2a09aed2af0fd5b6701ee327f0010cae9e98191342af2dccff05"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/handoffs/portfolio-alert-channels-20261012.tar.gz",
+      "destination": "integrations/alert-channels/agent-handoff-20261012.tar.gz",
+      "description": "Complete frozen candidate03 alert source/native/Figma and baseline/72-of-74/affected-11-of-11 history. Predates the separately planned root requested-code copy correction; not a combined all-pass or native/provider acceptance.",
+      "sha256": "556d1ad25f301946212bda9c706e7ca4ef43c5569e17be325d50aff8cfef40a9"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/handoffs/portfolio-alert-channels-20261012.receipt.json",
+      "destination": "integrations/alert-channels/archive-receipt.json",
+      "description": "Archive hash, 32 frozen dispositions and 18 native blob verification recorded by the alert owner.",
+      "sha256": "4cf9825f587b7d1f6b15abe2018c7b681a4c96a286e7bd3e4eca5b4390af011b"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/frozen-manifest.json",
+      "destination": "integrations/alert-channels/agent-frozen-manifest.json",
+      "description": "Frozen 32-disposition candidate03 handoff; root integration and later copy correction must be recorded separately.",
+      "sha256": "c1162e5fc5f9f8fa759017480530e941d0ed32f0a63b37a72cf1a75f82fc67fc"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/outputs/evidence/portfolio-shared-integration-20261011/alert-channels-independent-review-20261012.json",
+      "destination": "integrations/alert-channels/independent-review.json",
+      "description": "Independent source/native/lifetime and eight exact-function review of candidate03, with two historical Figma/context comparisons and explicit limits; unchanged by later root copy work.",
+      "sha256": "c5e0c00c89d7abd09b24d0071e11314e0ace97b31260355d87b25a1461f94f44"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/frozen/docs/portfolio-31/P6-ALERT-CHANNELS-20261012.md",
+      "destination": "integrations/alert-channels/P6-ALERT-CHANNELS-20261012.md",
+      "description": "Frozen bounded report maps BILL-11/12 to actual Core/Intel preferences and explicit channel actions, preserving native limitations and overlapping cohort history.",
+      "sha256": "0b75b1d452bbf6ef43d8199ed255b5a7abe73824f670c34f829f7c8bf04a3b9d"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/baseline-browser-results/browser-results.json",
+      "destination": "history/alert-channels/baseline-browser-results.json",
+      "description": "Exact preserved alert raw report: baseline six failures, candidate02 72/74, or fixture-only affected 11/11. Never aggregate overlaps or claim a single final-source 74/74 cohort.",
+      "sha256": "4f15111d1e6cd8857ce76c7b745efc91e359d10a14edb3c4ba25055c43f1cb14"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/fixed-02-browser-results/browser-results.json",
+      "destination": "history/alert-channels/candidate02-browser-results.json",
+      "description": "Exact preserved alert raw report: baseline six failures, candidate02 72/74, or fixture-only affected 11/11. Never aggregate overlaps or claim a single final-source 74/74 cohort.",
+      "sha256": "e9ee96524c39b31678c344126ae86f4dfcb5bc2de10e4ab65a7bf6663a99a8a0"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/fixed-03-affected-browser-results/browser-results.json",
+      "destination": "history/alert-channels/candidate03-affected-browser-results.json",
+      "description": "Exact preserved alert raw report: baseline six failures, candidate02 72/74, or fixture-only affected 11/11. Never aggregate overlaps or claim a single final-source 74/74 cohort.",
+      "sha256": "c74f47d8eecfdbe3fe93b6a521feb5a056994a3582a8cdd0fabdcde210392bc0"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/baseline-completion.json",
+      "destination": "history/alert-channels/baseline-completion.json",
+      "description": "Pinned source/completion or unit evidence for the frozen alert slice. The 40-unit result and focused browser cohorts remain distinct from root final gates.",
+      "sha256": "a503ac556c607a2dd56012728a1b479fe098d6e8320e71c24d37b22a41464e87"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/fixed-02-completion.json",
+      "destination": "history/alert-channels/fixed-02-completion.json",
+      "description": "Pinned source/completion or unit evidence for the frozen alert slice. The 40-unit result and focused browser cohorts remain distinct from root final gates.",
+      "sha256": "c39aa261632f41d79d560af9f548dd554a2c801135c4809727fced2ff28c311d"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/fixed-03-completion.json",
+      "destination": "history/alert-channels/fixed-03-completion.json",
+      "description": "Pinned source/completion or unit evidence for the frozen alert slice. The 40-unit result and focused browser cohorts remain distinct from root final gates.",
+      "sha256": "7ece05672e56a1b8faa14fbb41acbd70a34c72cba558c10f2f94f9e53d635141"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/candidate-03-manifest.json",
+      "destination": "history/alert-channels/candidate-03-manifest.json",
+      "description": "Pinned source/completion or unit evidence for the frozen alert slice. The 40-unit result and focused browser cohorts remain distinct from root final gates.",
+      "sha256": "1036a688d3b19796d6c5e9b7951762ee487c7d31f4472db10076e7ed4eecf2ac"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/final-unit-results.json",
+      "destination": "history/alert-channels/final-unit-results.json",
+      "description": "Pinned source/completion or unit evidence for the frozen alert slice. The 40-unit result and focused browser cohorts remain distinct from root final gates.",
+      "sha256": "fd5cccf9729e9c19b65ddc308c1c2c6a468701714da5c7c177c4549e9ee342b1"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/fixed-02-browser-results/alert-channel-visual-deskt-8daca-d-remain-keyboard-reachable/alert-channels-desktop-dark.png",
+      "destination": "captures/alert-channels/alert-channels-desktop-dark.png",
+      "description": "Actual frozen candidate02/03 alert layout capture inspected by its owner and root; source predates the separate requested-state copy correction and is synthetic, not signed-in/provider acceptance.",
+      "sha256": "35896eb971e8436680b34a177be1044956887650c0f2d874ec529c5f460153d2"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/fixed-02-browser-results/alert-channel-visual-deskt-ae329-d-remain-keyboard-reachable/alert-channels-desktop-light.png",
+      "destination": "captures/alert-channels/alert-channels-desktop-light.png",
+      "description": "Actual frozen candidate02/03 alert layout capture inspected by its owner and root; source predates the separate requested-state copy correction and is synthetic, not signed-in/provider acceptance.",
+      "sha256": "9a4dbf08519155f42c18b8478a2c3ddf0f3806ea8641f9dc8f64e1ce61a35a4f"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/fixed-02-browser-results/alert-channel-visual-phone-92fa6-d-remain-keyboard-reachable/alert-channels-phone-light.png",
+      "destination": "captures/alert-channels/alert-channels-phone-light.png",
+      "description": "Actual frozen candidate02/03 alert layout capture inspected by its owner and root; source predates the separate requested-state copy correction and is synthetic, not signed-in/provider acceptance.",
+      "sha256": "bc8990c109efe3efba09e4f84b9eb5ff9aa855379319a7f6a85b8c4a16be9516"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/fixed-02-browser-results/alert-channel-visual-phone-bae83-d-remain-keyboard-reachable/alert-channels-phone-dark.png",
+      "destination": "captures/alert-channels/alert-channels-phone-dark.png",
+      "description": "Actual frozen candidate02/03 alert layout capture inspected by its owner and root; source predates the separate requested-state copy correction and is synthetic, not signed-in/provider acceptance.",
+      "sha256": "a02adc06af6d9f383b96e6e795adbf272d44892d191f4dc7c626d5bb7e6b0b40"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival/outputs/evidence/core-109-alert-portable-proposal-20261012/pr4-shared-contract-review-20261012.zip",
+      "destination": "integrations/coordination/pr4-shared-contract-review-20261012.zip",
+      "description": "Portable read-only PR4@e141 versus root85aa metadata/35-source-snapshot packet: all 120 changed files, three overlapping paths, two textual conflicts. PR4 remains source-preservation-only; PR1 is preserved history.",
+      "sha256": "067cbe3e3e3067513283c6eb354ba883d0cfef4a97bd7f4f53b5044c7b92dda6"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/outputs/evidence/portfolio-shared-integration-20261011/PR4-SHARED-CONTRACT-REVIEW-20261012.md",
+      "destination": "integrations/coordination/PR4-SHARED-CONTRACT-REVIEW-20261012.md",
+      "description": "Bounded shared route/header/auth/client/style/config review proposed for owner reconciliation. No Meri integration, credential use or deployment was performed.",
+      "sha256": "2c0c15725e472ecb0cbc8d7ec3f7cd5ef26303f2881215d1f626ba52ce6c69f7"
+    },
+    {
+      "source": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/outputs/evidence/portfolio-shared-integration-20261011/pr4-shared-contract-review-20261012/snapshot-receipt.json",
+      "destination": "integrations/coordination/pr4-source-snapshot-receipt.json",
+      "description": "Exact source bytes and read-only text-merge results for the 120-file PR4 review; production integration remains separate.",
+      "sha256": "c79a7ff241e4bf51512b0b61c318cfefff899a5b04f687af0fa4cd11a088e70f"
+    }
+  ],
+  "readyLedgerGroups": [
+    {
+      "id": "activity-linked-file-arrival",
+      "audit_ids": [
+        "CORE-109"
+      ],
+      "source_commits": [
+        "d4c613985b69bc80cd3af28ed2c48c29335c770d"
+      ],
+      "paths": [
+        "files/FilesPage.tsx",
+        "files/linked-arrival.ts"
+      ],
+      "implementation": "The existing activity file link now reaches the canonical preview through the thin Files route async searchParams composition. One requested file ID is selected only from the successful current reader/client attachment list. A captured arrival lifetime prevents close, refresh, manual selection, failed reads or reader/client replacement from replaying the old intent. Missing records are unavailable in the current list, with no claim of deletion or denial; arrival never opens an external URL or automatically downloads/extracts text.",
+      "remaining_gate": "The exact native attachment list and canonical preview/file-reader remain authoritative. Final combined-source and signed-in navigation/permissions/preview acceptance remain open. The five baseline failures and 27 passing targeted cases are separate focused evidence, not audit acceptance counts. No new URL/ACL endpoint, automatic provider operation or opportunity percentage is introduced.",
+      "evidence": [
+        "CORE-109-FILE-ARRIVAL-20261012.md"
+      ],
+      "figma_nodes": [
+        "411:52484",
+        "1011:51337",
+        "1011:51339"
+      ]
+    }
+  ],
+  "pendingLedgerGroups": [
+    {
+      "id": "tracker-personal-preferences-and-explicit-channel-actions",
+      "audit_ids": [
+        "BILL-11",
+        "BILL-12"
+      ],
+      "source_commits": [
+        "PENDING_ROOT_ALERT_INTEGRATION_AND_FINAL_COPY_COMMIT"
+      ],
+      "paths": [
+        "bill-tracker/AlertPreferencesDialog.tsx",
+        "bill-tracker/alert-preferences/"
+      ],
+      "implementation": "Personal alert preferences use the configured Core or Intel owner, the canonical current actor/client read and each owner's actual complete replacement fields/receipts. Explicit saved-phone code request and confirmation validate the exact normalized phone, then read current saved SMS verification/enabled state. Email/SMS tests choose current saved channels and validate one exact outcome per request, distinguishing provider acceptance from delivery. Captured source/view lifetimes suppress obsolete completion and retain browser unknown attempts for deliberate review without automatic replay.",
+      "remaining_gate": "Requires the final P2 Configure caller, root alert integration/copy correction and combined-source qualification before this group is admitted. Core's submitted verification flag and client-unbound OTP remain native limitations; Intel ownership/tenant enforcement, native persistence/provider behavior and signed-in/final visual acceptance remain open. Versionless preferences have no cross-device CAS; browser abort is not cancellation or durable recovery. Historical candidate02 72/74 plus affected 11/11 are not a single final all-pass run.",
+      "evidence": [
+        "P6-ALERT-CHANNELS-20261012.md",
+        "ARCHITECTURE-REVIEW-ALERT-CHANNELS-20261012.md"
+      ],
+      "figma_nodes": [
+        "411:56471",
+        "971:187129",
+        "975:187289",
+        "1027:188159",
+        "1028:188273",
+        "1028:188442",
+        "1028:188271",
+        "1028:188272"
+      ]
+    }
+  ],
+  "pendingRootEvidence": [
+    {
+      "purpose": "Exact P3 root source integration and eight accepted/current size reviews",
+      "requiredBeforeLedgerAdmission": true,
+      "source": null,
+      "sha256": null
+    },
+    {
+      "purpose": "Separate root PhoneVerification requested-state copy correction, affected capture/result and changed exact function review",
+      "requiredBeforeFinalSourceClaim": true,
+      "source": null,
+      "sha256": null
+    }
+  ],
+  "assemblyRulesVerified": [
+    "Each selected source exists and its SHA-256 matches the proposal.",
+    "All new destinations are unique against the current 62-item selection and each other.",
+    "Destinations are relative under captures/integrations/history; no parent traversal.",
+    "No reconciler/selection/registry/tracked source or docs were modified.",
+    "The core group uses only feature-root paths because the current reconciler prefixes them; exact thin route path is preserved in report/manifest.",
+    "The pending alert source commit is deliberately invalid and must be replaced only after root integration/final copy records exist.",
+    "Final selection must be pinned before root ledger reconciliation; assembler verifies canonical ledger, reconciler and artifact selection hashes."
+  ],
+  "archiveInventory": [
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival/outputs/evidence/core-109-file-arrival-handoff-20261012.zip",
+      "sha256": "7935c3104cd242138ab2b9a6093ffdf28f2c08eee1c4d686f31c7fc01ed39d1a",
+      "bytes": 2113314
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/handoffs/portfolio-alert-channels-20261012.tar.gz",
+      "sha256": "556d1ad25f301946212bda9c706e7ca4ef43c5569e17be325d50aff8cfef40a9",
+      "bytes": 4226220
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival/outputs/evidence/core-109-alert-portable-proposal-20261012/pr4-shared-contract-review-20261012.zip",
+      "sha256": "067cbe3e3e3067513283c6eb354ba883d0cfef4a97bd7f4f53b5044c7b92dda6",
+      "bytes": 217642
+    }
+  ],
+  "metadataRecommendations": [
+    "Preserve historical groups and rows; append the CORE-109 and BILL-11/12 implementation deltas only. Do not close rows or alter the original 345-row order, counts, authority or 12 historical deltas.",
+    "Keep PR4 solely as a portable coordination artifact, outside Portfolio audit implementation groups. Root85aa remains the comparison source and PR4 e141 remains unmerged source-preservation-only.",
+    "After P2/P3 root integration, update current_continuation.additional_frontend_work so it no longer claims these supported follow-ons are absent. Name their exact final source commits and retain combined/signed-in gates.",
+    "Retain historical tracker-current-reads-and-alert-preferences as its earlier checkpoint; the new channel group explains supported continuation without rewriting its original scope.",
+    "Do not add an OPP-01 numeric score implementation delta. The CORE-109 archive/report retains raw native relevanceScore and current Figma discrepancy evidence."
+  ]
+}

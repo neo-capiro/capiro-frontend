@@ -1,0 +1,534 @@
+diff --git a/apps/web/src/features/portfolio/work/WorkPage.tsx b/apps/web/src/features/portfolio/work/WorkPage.tsx
+index d8aafb29f05d446e0df6699b0b08fb49d4a8a5d2..d1ae1c2d576fb90de5fb608a9f254aaa442249ee 100644
+--- a/apps/web/src/features/portfolio/work/WorkPage.tsx
++++ b/apps/web/src/features/portfolio/work/WorkPage.tsx
+@@ -5,6 +5,11 @@ import { QueryState } from "@/shared/portfolio/ui/QueryState";
+ import { useStrategies, useStrategyDetails } from "./queries";
+ import { workProjection } from "./contracts";
+ import { WorkspaceDocuments } from "./WorkspaceDocuments";
++import {
++  isRetryingWorkFailure,
++  WorkStrategyFailure,
++  WorkStrategyUnavailable,
++} from "./WorkStrategyState";
+ import styles from "./work.module.css";
+ export function WorkPage({
+   clientId,
+@@ -14,10 +19,18 @@ export function WorkPage({
+   destinations: Destinations;
+ }) {
+   const summaries = useStrategies(clientId);
+-  const queries = useStrategyDetails((summaries.data ?? []).map((s) => s.id));
+-  const details = queries.flatMap((query) => (query.data ? [query.data] : []));
++  const currentSummaries =
++    summaries.isSuccess && !summaries.error ? summaries.data : undefined;
++  const queries = useStrategyDetails(
++    clientId,
++    (currentSummaries ?? []).map((summary) => summary.id),
++  );
++  const details = queries.flatMap((query) =>
++    query.isSuccess && !query.error ? [query.data] : [],
++  );
+   const complete =
+-    summaries.isSuccess && queries.every((query) => query.isSuccess);
++    currentSummaries !== undefined &&
++    queries.every((query) => query.isSuccess && !query.error);
+   const projection = workProjection(
+     details,
+     Temporal.Now.plainDateISO().toString(),
+@@ -25,6 +38,10 @@ export function WorkPage({
+   const base = destinations.existingApp;
+   const strategyLink = (id: string, nodeId?: string) =>
+     `${base}/strategies/${id}${nodeId ? `?step=${nodeId}` : ""}`;
++  const error = summaries.error ?? queries.find((query) => query.error)?.error;
++  const summariesUnavailable =
++    Boolean(summaries.error) || isRetryingWorkFailure(summaries);
++  const retryingDetailFailure = queries.some(isRetryingWorkFailure);
+   return (
+     <div className="page stack">
+       <header className="row between">
+@@ -47,122 +64,142 @@ export function WorkPage({
+           </div>
+         )}
+       </header>
+-      <section className={styles.pulse} aria-label="Client strategy portfolio">
+-        <h2>Client strategy portfolio</h2>
+-        {[
+-          ["Current strategies", summaries.data?.length],
+-          [
+-            "Active / in progress",
+-            complete ? projection.live.length : undefined,
+-          ],
+-          ["Next 30 days", complete ? projection.upcoming.length : undefined],
+-          ["Open risks", complete ? projection.risks.length : undefined],
+-          ["Linked artifacts", complete ? projection.artifacts : undefined],
+-        ].map(([label, count]) => (
+-          <div key={label}>
+-            <strong>{count ?? "—"}</strong>
+-            <span>{label}</span>
+-          </div>
+-        ))}
+-      </section>
+-      <WorkspaceDocuments clientId={clientId} destinations={destinations} />
+-      <QueryState
+-        pending={summaries.isPending || queries.some((q) => q.isPending)}
+-        error={summaries.error ?? queries.find((q) => q.error)?.error}
+-        retry={() => {
+-          void summaries.refetch();
+-          queries.forEach((query) => void query.refetch());
+-        }}
+-      />
+-      <div className={styles.columns}>
+-        <section className="stack" aria-label="Strategies">
+-          {details.map((strategy) => (
+-            <article key={strategy.id} className="card stack">
+-              <p className="eyebrow">
+-                {strategy.type}
+-                {strategy.draftedByMeri && " · Drafted with Meri"}
+-              </p>
+-              <header className="row between">
+-                <h2>{strategy.title}</h2>
+-                {base && (
+-                  <a href={strategyLink(strategy.id)}>Open strategy ↗</a>
+-                )}
+-              </header>
+-              <p className="muted">{strategy.goal ?? "No goal provided."}</p>
+-              <small>
+-                Target {strategy.targetDate?.slice(0, 10) ?? "not set"}
+-              </small>
+-              <h3>Next strategy nodes</h3>
+-              {strategy.nodes
+-                .filter((n) => n.status !== "completed")
+-                .slice(0, 5)
+-                .map((node) => (
+-                  <div className="row between" key={node.id}>
+-                    <span>{node.title}</span>
+-                    <span className="chip">
+-                      {node.status.replaceAll("_", " ")}
+-                    </span>
+-                    <small>{node.startsOn.slice(0, 10)}</small>
+-                    {base && (
+-                      <a href={strategyLink(strategy.id, node.id)}>
+-                        Open step ↗
+-                      </a>
+-                    )}
+-                  </div>
+-                ))}
+-            </article>
++      {summariesUnavailable ? (
++        <WorkStrategyUnavailable />
++      ) : (
++        <section
++          className={styles.pulse}
++          aria-label="Client strategy portfolio"
++        >
++          <h2>Client strategy portfolio</h2>
++          {[
++            ["Current strategies", currentSummaries?.length],
++            [
++              "Active / in progress",
++              complete ? projection.live.length : undefined,
++            ],
++            ["Next 30 days", complete ? projection.upcoming.length : undefined],
++            ["Open risks", complete ? projection.risks.length : undefined],
++            ["Linked artifacts", complete ? projection.artifacts : undefined],
++          ].map(([label, count]) => (
++            <div key={label}>
++              <strong>{count ?? "—"}</strong>
++              <span>{label}</span>
++            </div>
+           ))}
+-          {summaries.data?.length === 0 && (
+-            <p className="empty">No current strategies for this client.</p>
+-          )}
+         </section>
+-        <aside className="stack">
+-          <section className="card stack">
+-            <h2>Upcoming work</h2>
+-            <small>
+-              Active and in-progress nodes starting in the next 30 days.
+-            </small>
+-            {projection.upcoming.map((node) => (
+-              <div className="stack" key={node.id}>
+-                <strong>{node.title}</strong>
++      )}
++      {error || summariesUnavailable || retryingDetailFailure ? (
++        <WorkStrategyFailure
++          error={error}
++          partial={!summariesUnavailable}
++          retrying={
++            summaries.isFetching || queries.some((query) => query.isFetching)
++          }
++          onRetry={() => {
++            void summaries.refetch();
++            queries.forEach((query) => void query.refetch());
++          }}
++        />
++      ) : (
++        <QueryState
++          pending={
++            summaries.isPending || queries.some((query) => query.isPending)
++          }
++        />
++      )}
++      <WorkspaceDocuments clientId={clientId} destinations={destinations} />
++      {!summariesUnavailable && (
++        <div className={styles.columns}>
++          <section className="stack" aria-label="Strategies">
++            {details.map((strategy) => (
++              <article key={strategy.id} className="card stack">
++                <p className="eyebrow">
++                  {strategy.type}
++                  {strategy.draftedByMeri && " · Drafted with Meri"}
++                </p>
++                <header className="row between">
++                  <h2>{strategy.title}</h2>
++                  {base && (
++                    <a href={strategyLink(strategy.id)}>Open strategy ↗</a>
++                  )}
++                </header>
++                <p className="muted">{strategy.goal ?? "No goal provided."}</p>
+                 <small>
+-                  {node.startsOn.slice(0, 10)} · {node.strategyTitle}
++                  Target {strategy.targetDate?.slice(0, 10) ?? "not set"}
+                 </small>
+-                {base && (
+-                  <a href={strategyLink(node.strategyId, node.id)}>
+-                    Open step ↗
+-                  </a>
+-                )}
+-              </div>
++                <h3>Next strategy nodes</h3>
++                {strategy.nodes
++                  .filter((n) => n.status !== "completed")
++                  .slice(0, 5)
++                  .map((node) => (
++                    <div className="row between" key={node.id}>
++                      <span>{node.title}</span>
++                      <span className="chip">
++                        {node.status.replaceAll("_", " ")}
++                      </span>
++                      <small>{node.startsOn.slice(0, 10)}</small>
++                      {base && (
++                        <a href={strategyLink(strategy.id, node.id)}>
++                          Open step ↗
++                        </a>
++                      )}
++                    </div>
++                  ))}
++              </article>
+             ))}
+-            {complete && projection.upcoming.length === 0 && (
+-              <p className="muted">No dated work in this range.</p>
++            {currentSummaries?.length === 0 && (
++              <p className="empty">No current strategies for this client.</p>
+             )}
+           </section>
+-          <section className="card stack">
+-            <h2>Risks &amp; blockers</h2>
+-            {projection.risks.map((node) => (
+-              <article key={node.id} className={styles.risk}>
+-                <strong>{node.title}</strong>
+-                <p>{node.note}</p>
+-                <small>
+-                  {node.openEnded ? "Ongoing" : node.startsOn.slice(0, 10)}
+-                </small>
+-                {base && (
+-                  <p>
++          <aside className="stack">
++            <section className="card stack">
++              <h2>Upcoming work</h2>
++              <small>
++                Active and in-progress nodes starting in the next 30 days.
++              </small>
++              {projection.upcoming.map((node) => (
++                <div className="stack" key={node.id}>
++                  <strong>{node.title}</strong>
++                  <small>
++                    {node.startsOn.slice(0, 10)} · {node.strategyTitle}
++                  </small>
++                  {base && (
+                     <a href={strategyLink(node.strategyId, node.id)}>
+-                      Open risk ↗
++                      Open step ↗
+                     </a>
+-                  </p>
+-                )}
+-              </article>
+-            ))}
+-            {complete && projection.risks.length === 0 && (
+-              <p className="muted">No open risks.</p>
+-            )}
+-          </section>
+-        </aside>
+-      </div>
++                  )}
++                </div>
++              ))}
++              {complete && projection.upcoming.length === 0 && (
++                <p className="muted">No dated work in this range.</p>
++              )}
++            </section>
++            <section className="card stack">
++              <h2>Risks &amp; blockers</h2>
++              {projection.risks.map((node) => (
++                <article key={node.id} className={styles.risk}>
++                  <strong>{node.title}</strong>
++                  <p>{node.note}</p>
++                  <small>
++                    {node.openEnded ? "Ongoing" : node.startsOn.slice(0, 10)}
++                  </small>
++                  {base && (
++                    <p>
++                      <a href={strategyLink(node.strategyId, node.id)}>
++                        Open risk ↗
++                      </a>
++                    </p>
++                  )}
++                </article>
++              ))}
++              {complete && projection.risks.length === 0 && (
++                <p className="muted">No open risks.</p>
++              )}
++            </section>
++          </aside>
++        </div>
++      )}
+       {!base && (
+         <p className="muted">
+           Configure the existing application destination to open Strategies and
+diff --git a/apps/web/src/features/portfolio/work/WorkspaceDocuments.tsx b/apps/web/src/features/portfolio/work/WorkspaceDocuments.tsx
+index 4af2b0915c99cd1d995157b53229764dd6049ee2..000af174e3198e33c94ed185f8b07ace82b6ee3e 100644
+--- a/apps/web/src/features/portfolio/work/WorkspaceDocuments.tsx
++++ b/apps/web/src/features/portfolio/work/WorkspaceDocuments.tsx
+@@ -1,9 +1,12 @@
+ "use client";
++import { Button } from "@capiro/ui/button";
+ import { QueryState } from "@/shared/portfolio/ui/QueryState";
+ import { useClient, useClients } from "@/features/portfolio/index/public";
+ import type { Destinations } from "@/shared/portfolio/config/config";
+ import { clientDrafts } from "./contracts";
+ import { useWorkspaceDrafts } from "./queries";
++import { WorkspaceDocumentTable } from "./WorkspaceDocumentTable";
++import styles from "./workspace-documents.module.css";
+ export function WorkspaceDocuments({
+   clientId,
+   destinations,
+@@ -14,84 +17,75 @@ export function WorkspaceDocuments({
+   const query = useWorkspaceDrafts();
+   const client = useClient(clientId);
+   const clients = useClients();
+-  const rows =
+-    client.data && clients.data
+-      ? clientDrafts(query.data?.drafts ?? [], client.data, clients.data)
+-      : [];
++  const currentClient =
++    client.isSuccess && !client.error && client.data.id === clientId
++      ? client.data
++      : undefined;
++  const catalog =
++    clients.isSuccess && !clients.error ? clients.data : undefined;
++  const drafts =
++    query.isSuccess && !query.error ? query.data.drafts : undefined;
++  const clientError =
++    client.isSuccess && client.data.id !== clientId
++      ? new Error(
++          "The client response does not match the requested client. Retry the client details.",
++        )
++      : client.error;
++  const complete =
++    currentClient !== undefined &&
++    catalog !== undefined &&
++    drafts !== undefined;
++  const rows = complete ? clientDrafts(drafts, currentClient, catalog) : [];
++  const draftCount = rows.filter((row) => row.status === "draft").length;
+   const ambiguous =
+-    client.data &&
+-    clients.data &&
+-    clients.data.filter((c) => c.name === client.data.name).length > 1;
++    currentClient &&
++    catalog &&
++    catalog.filter((candidate) => candidate.name === currentClient.name)
++      .length > 1;
+   return (
+-    <section className="stack">
+-      <header className="row between">
+-        <h2>Workspace documents</h2>
++    <section className={styles.section} aria-label="Workspace documents">
++      <header className={styles.header}>
++        <div className={styles.heading}>
++          <h2>Workspace documents</h2>
++          {currentClient && (
++            <p>
++              {currentClient.name}
++              {rows.length > 0 &&
++                ` · ${draftCount} ${draftCount === 1 ? "draft" : "drafts"} · ${rows.length - draftCount} completed`}
++            </p>
++          )}
++        </div>
+         {destinations.workspace && (
+-          <a className="button" href={destinations.workspace}>
+-            Open Workspace ↗
+-          </a>
++          <Button
++            asChild
++            variant="ghost"
++            className={`button ghost ${styles.action}`}
++          >
++            <a href={destinations.workspace}>Open Workspace</a>
++          </Button>
+         )}
+       </header>
+       <QueryState
+-        pending={query.isPending || clients.isPending}
+-        error={query.error ?? clients.error}
++        pending={query.isPending || client.isPending || clients.isPending}
++        error={query.error ?? clientError ?? clients.error}
+         retry={() => {
+           void query.refetch();
++          void client.refetch();
+           void clients.refetch();
+         }}
+       />
+-      <p className="muted">
++      {complete && (
++        <WorkspaceDocumentTable
++          rows={rows}
++          destination={destinations.existingApp}
++        />
++      )}
++      <p className={styles.association}>
+         Workspace associates legacy documents by client name. Renamed clients
+         may have missing documents.
+         {ambiguous &&
+           " This name is shared by multiple clients; documents cannot be safely assigned here."}
+       </p>
+-      {query.data && (
+-        <div className="tableWrap">
+-          <table>
+-            <thead>
+-              <tr>
+-                <th>Document</th>
+-                <th>Status</th>
+-                <th>Updated</th>
+-                <th>
+-                  <span className="srOnly">Open</span>
+-                </th>
+-              </tr>
+-            </thead>
+-            <tbody>
+-              {rows.map((draft) => (
+-                <tr key={draft.id}>
+-                  <td>
+-                    <strong>{draft.docTitle}</strong>
+-                    <p className="muted">{draft.product ?? "Document"}</p>
+-                  </td>
+-                  <td>
+-                    <span className="chip">
+-                      {draft.status === "complete" ? "Completed" : "Draft"}
+-                    </span>
+-                  </td>
+-                  <td>{new Date(draft.updatedAt).toLocaleDateString()}</td>
+-                  <td>
+-                    {destinations.existingApp ? (
+-                      <a
+-                        href={`${destinations.existingApp}/workspace/${draft.id}`}
+-                      >
+-                        Open Workspace ↗
+-                      </a>
+-                    ) : (
+-                      <small>Workspace destination unavailable</small>
+-                    )}
+-                  </td>
+-                </tr>
+-              ))}
+-            </tbody>
+-          </table>
+-          {rows.length === 0 && (
+-            <p className="empty">No documents can be matched to this client.</p>
+-          )}
+-        </div>
+-      )}
+     </section>
+   );
+ }
+diff --git a/apps/web/src/features/portfolio/work/contracts.ts b/apps/web/src/features/portfolio/work/contracts.ts
+index 8c510a370d518c7c63a890b652ffe6562687478c..e919c62c76630c0a1a89a6d2efe2cd8bdb169f58 100644
+--- a/apps/web/src/features/portfolio/work/contracts.ts
++++ b/apps/web/src/features/portfolio/work/contracts.ts
+@@ -27,6 +27,15 @@ export const strategyDetailSchema = strategySummarySchema
+     nodes: z.array(strategyNodeSchema),
+     artifacts: z.array(z.object({ id: z.string().uuid() })),
+   });
++export function strategyDetailFor(strategyId: string, clientId: string) {
++  return strategyDetailSchema.refine(
++    (strategy) => strategy.id === strategyId && strategy.clientId === clientId,
++    {
++      message:
++        "The strategy response does not match the requested client and strategy.",
++    },
++  );
++}
+ export const workspaceDraftSchema = z.object({
+   id: z.string().uuid(),
+   docTitle: z.string(),
+@@ -46,9 +55,10 @@ export function clientDrafts(
+   client: { id: string; name: string },
+   clients: { id: string; name: string }[],
+ ) {
+-  const unique =
+-    clients.filter((candidate) => candidate.name === client.name).length === 1;
+-  return unique ? drafts.filter((draft) => draft.client === client.name) : [];
++  const matches = clients.filter((candidate) => candidate.name === client.name);
++  return matches.length === 1 && matches[0]?.id === client.id
++    ? drafts.filter((draft) => draft.client === client.name)
++    : [];
+ }
+ export function workProjection(strategies: StrategyDetail[], today: string) {
+   const date = new Date(`${today}T00:00:00Z`);
+diff --git a/apps/web/src/features/portfolio/work/queries.ts b/apps/web/src/features/portfolio/work/queries.ts
+index 3b88829c13e148c08165f928327a0f34dc58ebcc..cf7d6875e200c25ea49c28d0b32ae461cf9a1f6a 100644
+--- a/apps/web/src/features/portfolio/work/queries.ts
++++ b/apps/web/src/features/portfolio/work/queries.ts
+@@ -4,7 +4,7 @@ import { z } from "zod";
+ import { useApi } from "@/shared/portfolio/api/provider";
+ import {
+   strategySummarySchema,
+-  strategyDetailSchema,
++  strategyDetailFor,
+   workspaceDraftSchema,
+ } from "./contracts";
+ export function useStrategies(clientId: string) {
+@@ -18,19 +18,26 @@ export function useStrategies(clientId: string) {
+         z.array(strategySummarySchema),
+         { signal },
+       );
++      signal.throwIfAborted();
+       return all.filter((strategy) => strategy.clientId === clientId);
+     },
+   });
+ }
+-export function useStrategyDetails(ids: string[]) {
++export function useStrategyDetails(clientId: string, ids: string[]) {
+   const api = useApi();
+   return useQueries({
+     queries: ids.map((id) => ({
+-      queryKey: ["strategy-detail", id],
+-      queryFn: ({ signal }: { signal: AbortSignal }) =>
+-        api.request("strategy", `strategies/${id}`, strategyDetailSchema, {
+-          signal,
+-        }),
++      queryKey: ["strategy-detail", clientId, id],
++      queryFn: async ({ signal }: { signal: AbortSignal }) => {
++        const detail = await api.request(
++          "strategy",
++          `strategies/${encodeURIComponent(id)}`,
++          strategyDetailFor(id, clientId),
++          { signal },
++        );
++        signal.throwIfAborted();
++        return detail;
++      },
+     })),
+   });
+ }

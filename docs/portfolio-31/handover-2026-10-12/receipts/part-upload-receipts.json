@@ -1,0 +1,72 @@
+{
+  "recordedAt": "2026-10-12T02:02:42.445Z",
+  "scope": "Eight exact parts reconstruct unchanged manifest and two oversized packs; immutable Git blob SHA1 verified against local bytes",
+  "count": 8,
+  "bytes": 56024983,
+  "files": [
+    {
+      "path": "docs/portfolio-31/handover-2026-10-12/context-parts/context-00005.tar.gz.part-00001",
+      "localPath": "/workspace/scratch/158b6018a5d3/handover-preparation/context-parts/context-00005.tar.gz.part-00001",
+      "size": 8388608,
+      "sha": "ae0d2ef8f47e1dd32e0824819d61da6ca541ac52",
+      "sha256": "4f76f9bf49a4fdad52cc8ed3d1c852925085027565ad153b69c98f19d98d432e",
+      "uploadedGitBlob": "ae0d2ef8f47e1dd32e0824819d61da6ca541ac52"
+    },
+    {
+      "path": "docs/portfolio-31/handover-2026-10-12/context-parts/context-00005.tar.gz.part-00002",
+      "localPath": "/workspace/scratch/158b6018a5d3/handover-preparation/context-parts/context-00005.tar.gz.part-00002",
+      "size": 8388608,
+      "sha": "ee2afa603aaf193783e613f95e13da76b67bb25e",
+      "sha256": "f72d24077b4836db4a89d3d0b2702e0103146f17a9ff199bc10763504f72ab2d",
+      "uploadedGitBlob": "ee2afa603aaf193783e613f95e13da76b67bb25e"
+    },
+    {
+      "path": "docs/portfolio-31/handover-2026-10-12/context-parts/context-00005.tar.gz.part-00003",
+      "localPath": "/workspace/scratch/158b6018a5d3/handover-preparation/context-parts/context-00005.tar.gz.part-00003",
+      "size": 3624724,
+      "sha": "51a1eb7d824bc79d19c027988159b863d759be49",
+      "sha256": "c429fd53be596f172639dfd96ce3cf109f2eccc5e43d72300623c03845cca0d9",
+      "uploadedGitBlob": "51a1eb7d824bc79d19c027988159b863d759be49"
+    },
+    {
+      "path": "docs/portfolio-31/handover-2026-10-12/context-parts/context-00132.tar.gz.part-00001",
+      "localPath": "/workspace/scratch/158b6018a5d3/handover-preparation/context-parts/context-00132.tar.gz.part-00001",
+      "size": 8388608,
+      "sha": "f354af2ab3f7bcbe4cf09c149fdac6e0c0d74d6f",
+      "sha256": "5eca5ecaf62b75592984bd03eaf63c73218f962d85df223f039bcc0b0462cf98",
+      "uploadedGitBlob": "f354af2ab3f7bcbe4cf09c149fdac6e0c0d74d6f"
+    },
+    {
+      "path": "docs/portfolio-31/handover-2026-10-12/context-parts/context-00132.tar.gz.part-00002",
+      "localPath": "/workspace/scratch/158b6018a5d3/handover-preparation/context-parts/context-00132.tar.gz.part-00002",
+      "size": 8388608,
+      "sha": "43e4a8defbf2c6a9b64d25f47c62818fe4172053",
+      "sha256": "f5d0eb12a334c2bac4f6c0c193788cfa19b24ae6f7bcf9236aafcd9de19371fa",
+      "uploadedGitBlob": "43e4a8defbf2c6a9b64d25f47c62818fe4172053"
+    },
+    {
+      "path": "docs/portfolio-31/handover-2026-10-12/context-parts/context-00132.tar.gz.part-00003",
+      "localPath": "/workspace/scratch/158b6018a5d3/handover-preparation/context-parts/context-00132.tar.gz.part-00003",
+      "size": 3083602,
+      "sha": "775e525e569a676ca612bd908d772684a60fdda7",
+      "sha256": "fca08b61ada9d6642c46c9facc727c639b0c4e4cb4638f9c8d4b59b720d57995",
+      "uploadedGitBlob": "775e525e569a676ca612bd908d772684a60fdda7"
+    },
+    {
+      "path": "docs/portfolio-31/handover-2026-10-12/context-parts/manifest.json.part-00001",
+      "localPath": "/workspace/scratch/158b6018a5d3/handover-preparation/context-parts/manifest.json.part-00001",
+      "size": 8388608,
+      "sha": "6e5e70c16a503a988a0f6b7cd60e86ed0d4b68e8",
+      "sha256": "3b81f42f38d46100802ab2051d375b466c03ee3491b0264c9ec416a7ffaa69fe",
+      "uploadedGitBlob": "6e5e70c16a503a988a0f6b7cd60e86ed0d4b68e8"
+    },
+    {
+      "path": "docs/portfolio-31/handover-2026-10-12/context-parts/manifest.json.part-00002",
+      "localPath": "/workspace/scratch/158b6018a5d3/handover-preparation/context-parts/manifest.json.part-00002",
+      "size": 7373617,
+      "sha": "2a135657d2814a8663fd746960e9fb8caa98a43f",
+      "sha256": "8a5117aaabd97b761a52bef41ba0ed3d798ebe8e8db0bdd5989e79f675aeadcf",
+      "uploadedGitBlob": "2a135657d2814a8663fd746960e9fb8caa98a43f"
+    }
+  ]
+}

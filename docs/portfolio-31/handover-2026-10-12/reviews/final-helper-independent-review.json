@@ -1,0 +1,18 @@
+{
+  "reviewed_at_utc": "2026-10-12T00:14:31.300388+00:00",
+  "reviewer": "/root",
+  "scope": "Independent complete source review of the two final qualification helpers after P4 freeze.",
+  "sha256": {
+    "run-final-checkpoint.py": "d787a36edd2798a1dd0afe0c5647c9255d6f1cb4e1fb42ffcb59a93e68d0520a",
+    "assemble-portable-verification.py": "9603de891fa90d5ff3e94d4c8352de8440edc4031269a2ba65536c6f0428f4c3"
+  },
+  "reviewed_properties": [
+    "Exact admitted root npm commands and committed Git blob/mode/file inventory before and after each gate; fixed HEAD during gates.",
+    "Fresh attempt-specific raw Playwright reports, complete discovery inventory, matching configured runtime, no filters/focused cases/shards/retries/skips/expected failures, and timing within command lifetime.",
+    "Unique attempt paths preserve earlier failures and artifacts; latest failed or incomplete attempt blocks portable assembly.",
+    "Canonical ledger and baseline row order/authority/counts are verified against pinned source, reconciler and artifact-selection hashes.",
+    "Selected artifact bytes are copied by their pinned hashes; source/helpers/ledger and selected attempts are rechecked before portable publication."
+  ],
+  "runtime_qualification": "Pending actual final combined gates and assembly; this is a source review, not a test result.",
+  "historical_deployment_review_sha256": "b597b392c6a0d496bc58a19114d347fbe8af4797c5e9b9f51ea330a66dba8ca3"
+}

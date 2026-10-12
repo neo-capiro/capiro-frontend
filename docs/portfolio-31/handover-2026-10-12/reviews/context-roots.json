@@ -1,0 +1,281 @@
+{
+  "status": "LOCATION_INVENTORY_NOT_A_FINAL_SOURCE_SNAPSHOT",
+  "preparedOn": "2026-10-12",
+  "owner": "/root/portfolio_prospects_files",
+  "scope": "All retained authored and directly reviewed context roots for this lane. Nested entries identify material context explicitly and do not ask the collector to duplicate bytes. Root coordinates complete other-agent inventories.",
+  "entries": [
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio",
+      "workspaceRelative": "capiro-frontend-portfolio",
+      "kind": "directory",
+      "role": "canonical-source",
+      "purpose": "Canonical integrated source, tracked docs, architecture ownership and git history; root owns final source/commit inventory.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/outputs/evidence/portfolio-p4-prospects-files-20261011",
+      "workspaceRelative": "capiro-frontend-portfolio/outputs/evidence/portfolio-p4-prospects-files-20261011",
+      "kind": "directory",
+      "role": "authored-evidence",
+      "purpose": "Original Prospects/Files work and browser history.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-current-reads",
+      "workspaceRelative": "capiro-portfolio-current-reads",
+      "kind": "directory",
+      "role": "frozen-source-context",
+      "purpose": "Frozen CAP/OPP current-read and CAP08/09 registration worktree, reports and exact candidate source.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-current-reads/outputs/evidence/portfolio-p6-current-reads-20261011",
+      "workspaceRelative": "capiro-portfolio-current-reads/outputs/evidence/portfolio-p6-current-reads-20261011",
+      "kind": "directory",
+      "role": "authored-evidence",
+      "purpose": "All CAP/OPP/registration native readbacks, failing/passing cohorts and source-checkpoint archives.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-capability-presentation",
+      "workspaceRelative": "capiro-portfolio-capability-presentation",
+      "kind": "directory",
+      "role": "frozen-source-context",
+      "purpose": "Frozen CAP02/03 editor and optional canonical TokenInput slice.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-capability-presentation/outputs/evidence/portfolio-capability-presentation-20261011",
+      "workspaceRelative": "capiro-portfolio-capability-presentation/outputs/evidence/portfolio-capability-presentation-20261011",
+      "kind": "directory",
+      "role": "authored-evidence",
+      "purpose": "Design variants, source snapshots, independent review and unsummed browser history.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-capability-presentation/outputs/evidence/portfolio-capability-presentation-20261011.tar.gz",
+      "workspaceRelative": "capiro-portfolio-capability-presentation/outputs/evidence/portfolio-capability-presentation-20261011.tar.gz",
+      "kind": "file",
+      "role": "authored-archive",
+      "purpose": "Frozen earlier presentation handoff archive.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-capability-documents",
+      "workspaceRelative": "capiro-portfolio-capability-documents",
+      "kind": "directory",
+      "role": "frozen-source-context",
+      "purpose": "Frozen CAP05/06/07 and canonical Files prerequisite source.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-capability-documents/outputs/evidence/portfolio-capability-documents-20261011",
+      "workspaceRelative": "capiro-portfolio-capability-documents/outputs/evidence/portfolio-capability-documents-20261011",
+      "kind": "directory",
+      "role": "authored-evidence",
+      "purpose": "Exact native/Figma snapshots; upload/download/extraction/reader provenance and selection candidate histories.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-capability-documents/outputs/portfolio-capability-documents-20261011.tar.gz",
+      "workspaceRelative": "capiro-portfolio-capability-documents/outputs/portfolio-capability-documents-20261011.tar.gz",
+      "kind": "file",
+      "role": "authored-archive",
+      "purpose": "Frozen complete Documents handoff archive.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival",
+      "workspaceRelative": "capiro-portfolio-file-arrival",
+      "kind": "directory",
+      "role": "frozen-source-context",
+      "purpose": "Frozen CORE109 route/arrival implementation and tests.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival/outputs/evidence/core-109-file-arrival-20261012",
+      "workspaceRelative": "capiro-portfolio-file-arrival/outputs/evidence/core-109-file-arrival-20261012",
+      "kind": "directory",
+      "role": "authored-evidence",
+      "purpose": "Five pristine failures, final27-case report, captures, immutable source and OPP01 native/design discrepancy.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival/outputs/evidence/core-109-file-arrival-handoff-20261012.zip",
+      "workspaceRelative": "capiro-portfolio-file-arrival/outputs/evidence/core-109-file-arrival-handoff-20261012.zip",
+      "kind": "file",
+      "role": "authored-archive",
+      "purpose": "Frozen exact CORE109 handoff archive.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-file-arrival/outputs/evidence/core-109-alert-portable-proposal-20261012",
+      "workspaceRelative": "capiro-portfolio-file-arrival/outputs/evidence/core-109-alert-portable-proposal-20261012",
+      "kind": "directory",
+      "role": "authored-evidence",
+      "purpose": "This immutable proposal, exact PR4 historical/advance source packets and current context inventory.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/outputs/evidence/portfolio-shared-integration-20261011",
+      "workspaceRelative": "capiro-frontend-portfolio/outputs/evidence/portfolio-shared-integration-20261011",
+      "kind": "directory",
+      "role": "shared-read-and-review-context",
+      "purpose": "Read-only shared integration, deployment, helper and phase reviews; native references and root source/evidence receipts. Preserve all histories; parent owns any later edits.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/outputs/evidence/portfolio-shared-integration-20261011/pr4-shared-contract-review-20261012",
+      "workspaceRelative": "capiro-frontend-portfolio/outputs/evidence/portfolio-shared-integration-20261011/pr4-shared-contract-review-20261012",
+      "kind": "directory",
+      "role": "authored-review-context",
+      "purpose": "Exact historical e141/root85aa sources, full120-file metadata and read-only text merge results.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/outputs/evidence/portfolio-shared-integration-20261011/tracker-alert-contracts-20261012",
+      "workspaceRelative": "capiro-frontend-portfolio/outputs/evidence/portfolio-shared-integration-20261011/tracker-alert-contracts-20261012",
+      "kind": "directory",
+      "role": "read-only-native-context",
+      "purpose": "Eighteen exact pinned capirov2 source readbacks used in independent alert review.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/outputs/evidence/portfolio-shared-integration-20261011/PHASE-GATES-20261012.md",
+      "workspaceRelative": "capiro-frontend-portfolio/outputs/evidence/portfolio-shared-integration-20261011/PHASE-GATES-20261012.md",
+      "kind": "file",
+      "role": "read-only-phase-context",
+      "purpose": "Canonical implementability completeness challenge input.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/docs/portfolio-31",
+      "workspaceRelative": "capiro-frontend-portfolio/docs/portfolio-31",
+      "kind": "directory",
+      "role": "read-only-and-integrated-doc-context",
+      "purpose": "Canonical audit matrix, all continuation reports, architecture reviews and historical handover.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-11",
+      "workspaceRelative": "capiro-frontend-portfolio/docs/portfolio-31/handover-2026-10-11",
+      "kind": "directory",
+      "role": "read-only-handover-context",
+      "purpose": "Initial HANDOVER/PHASED-PLAN/contracts/source mapping and audit authority.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/AGENTS.md",
+      "workspaceRelative": "capiro-frontend-portfolio/AGENTS.md",
+      "kind": "file",
+      "role": "instruction-context",
+      "purpose": "Repository guidance followed.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/apps/web/AGENTS.md",
+      "workspaceRelative": "capiro-frontend-portfolio/apps/web/AGENTS.md",
+      "kind": "file",
+      "role": "instruction-context",
+      "purpose": "Application guidance followed.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/docs/IMPLEMENTATION-STANDARDS.md",
+      "workspaceRelative": "capiro-frontend-portfolio/docs/IMPLEMENTATION-STANDARDS.md",
+      "kind": "file",
+      "role": "instruction-context",
+      "purpose": "Implementation and public runner requirements.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/docs/ARCHITECTURE.md",
+      "workspaceRelative": "capiro-frontend-portfolio/docs/ARCHITECTURE.md",
+      "kind": "file",
+      "role": "instruction-context",
+      "purpose": "Canonical shared architecture constraints.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/docs/SHARED-FRONTEND-PREVIEW-GUIDELINES-2026-10-11.md",
+      "workspaceRelative": "capiro-frontend-portfolio/docs/SHARED-FRONTEND-PREVIEW-GUIDELINES-2026-10-11.md",
+      "kind": "file",
+      "role": "read-only-coordination-context",
+      "purpose": "Shared preview deployment/ownership review input.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/docs/SHARED-INTEGRATION-CONTRACT-2026-10-12.md",
+      "workspaceRelative": "capiro-frontend-portfolio/docs/SHARED-INTEGRATION-CONTRACT-2026-10-12.md",
+      "kind": "file",
+      "role": "read-only-coordination-context",
+      "purpose": "Root proposed cross-product reconciliation interfaces.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012",
+      "workspaceRelative": "capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012",
+      "kind": "directory",
+      "role": "read-only-sibling-review-context",
+      "purpose": "Independently reviewed candidate03/frozen32 source, raw failed/affected history, four actual captures and recorded Figma context.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/handoffs",
+      "workspaceRelative": "capiro-portfolio-alert-channels/outputs/handoffs",
+      "kind": "directory",
+      "role": "read-only-sibling-archive",
+      "purpose": "Immutable alert archive and32source/18native verification receipt.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/watchlist-review-preservation-20261012",
+      "workspaceRelative": "capiro-portfolio-alert-channels/outputs/evidence/watchlist-review-preservation-20261012",
+      "kind": "directory",
+      "role": "read-only-open-finding-context",
+      "purpose": "New OPEN Intel accepted projection/mixed-read and PhoneVerification copy addendum, outside alert archive.",
+      "existsAtInventory": true
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/upload/Capiro-3.1-Portfolio-Audit (1).xlsx",
+      "workspaceRelative": "upload/Capiro-3.1-Portfolio-Audit (1).xlsx",
+      "kind": "file",
+      "role": "user-input-context",
+      "purpose": "User supplied canonical audit workbook; root reconciles it.",
+      "existsAtInventory": true
+    }
+  ],
+  "collectionNotes": [
+    "Preserve tracked source/history through the root git bundle and exact candidate/source snapshots; include ignored evidence, raw failures and reports from the named roots.",
+    "This inventory enumerates locations; root may still be integrating source/docs. The final collector must take its own exact byte inventory after root READY.",
+    "Do not copy dependency installations, compiled caches, browser executables or credentials merely because a worktree root is listed. Existing archived source/evidence and pinned native/Figma bytes are irreplaceable context.",
+    "Earlier portable archives are immutable; include newer separate addenda alongside them. Do not add overlapping browser results into a claimed total."
+  ],
+  "runtimeReproductionContext": {
+    "browserExecutablePreviouslyUsed": "/workspace/scratch/158b6018a5d3/browser-runtime/runtime/chromium",
+    "FONTCONFIG_PATH": "/etc/fonts",
+    "preservation": "Reproducible external runtime; exclude executable/dependency payloads from the source/context archive unless root explicitly needs them."
+  },
+  "externalContext": [
+    {
+      "kind": "native",
+      "repository": "neo-capiro/capirov2",
+      "commit": "4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace",
+      "localCopies": "Pinned exact files are retained inside the listed native and feature evidence roots."
+    },
+    {
+      "kind": "figma",
+      "url": "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-40601",
+      "localCopies": "Saved exact context/screens and created-node receipts inside the listed owned feature evidence roots; historical snapshots retain their original qualification."
+    },
+    {
+      "kind": "skills",
+      "packages": [
+        "c19/figma-design-to-code",
+        "c19/figma-use",
+        "c19/figma-generate-design"
+      ],
+      "preservation": "Skill identifiers and reviewed instructions; no credential or remote session data."
+    }
+  ]
+}

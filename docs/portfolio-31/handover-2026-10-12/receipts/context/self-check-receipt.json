@@ -1,0 +1,17 @@
+{
+  "browserBuildProviderOrNetworkCalls": false,
+  "checks": [
+    "exact source, untracked, ignored evidence, other context, exclusions, dedup and deletion metadata",
+    "every pack/blob/metadata/manifest and separate Git bundle verified",
+    "exact new-target restore, executable mode, no Git internals and deleted file remains absent",
+    "existing target refused without overwrite",
+    "same exact inputs produce deterministic identical gzip/tar pack hashes",
+    "changed compressed bytes refused",
+    "traversal manifest refused before destination creation",
+    "symlink opt-in and escaping-target refusal before creation"
+  ],
+  "evidenceRoot": "/workspace/scratch/158b6018a5d3/handover-preparation/preservation-self-check-5o1wimkd",
+  "passed": 8,
+  "productSourceTouched": false,
+  "scope": "synthetic preservation tool self-check only"
+}

@@ -1,0 +1,174 @@
+{
+  "recordedAt": "2026-10-12T01:21:39.751423+00:00",
+  "lane": "watchlist",
+  "parent": "ff7eabf152bcc62d1e8a481d5165ae6d1ff9b7b2",
+  "commit": "ac66c0610323a4f20bcbe7a36d4a7ed772c11c8c",
+  "tree": "4f751d6fc9488eb6531567687a39c46f77a53fa3",
+  "manifest": "capiro-portfolio-watchlist-current-state/outputs/evidence/watchlist-current-state-20261011/frozen-final/manifest.json",
+  "manifestSha256": "b9027e5949bfdef32fe460f05eddb99f0cd5974630dad594ce477e63a24ae75f",
+  "files": [
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/WatchlistDialog.tsx",
+      "beforeSha256": "74526a891c0e84350537a5bb81fbac4f4bbf7181d5255ff97498a6dd60b1989b",
+      "sha256": "b809b603e2ab24978215568ce850d0b5f4d10354a349ab7234c649a6459be826"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/WatchlistForm.tsx",
+      "beforeSha256": null,
+      "sha256": "6c3eb918223265fffd7aa9abbc2e31f57055f7dbe343983f069f925eb7a51060"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/WatchlistNotice.tsx",
+      "beforeSha256": null,
+      "sha256": "2b2af439919a9314fdab275d511d18242a4b780973d4b5a98205a372b533af4f"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/watchlist-contracts.ts",
+      "beforeSha256": "13a46291c6e6b6466afe79ec546d91ec0b5656c7fb5c8ff5a26ed75da4946cfa",
+      "sha256": "8208a440f9bee968e28c671c383bae9ce81c185f059711a579977bb6a0c186ec"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/watchlist-queries.ts",
+      "beforeSha256": "861172ec16939896946e2744912b850b724f14a9989c597c9686c9c7c4f2fcde",
+      "sha256": "91a55b47e044d01a1ee1509045b5d479bae9ad4cb6221c63b2ae5bc999d34f07"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/watchlist-source.ts",
+      "beforeSha256": null,
+      "sha256": "8d7c832a016764631003f4fc43655d81c788e2d3107c458048d22ad9625a3c23"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/watchlist-writer.ts",
+      "beforeSha256": null,
+      "sha256": "d726c48521f7fb7a9b4b1943f09581a5ddd54a1252db162573a0072427487f76"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/watchlist-session.ts",
+      "beforeSha256": null,
+      "sha256": "88fb7d28822e8fdc5bd5bad8b7261ce36d333ee266a4b8ad04c389f059ff86fe"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/useWatchlistEditor.ts",
+      "beforeSha256": null,
+      "sha256": "8e9c1e6939cd0ef683140ab457c81e00aa973a7a9abc16d31fdd4fe0770eec1c"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/watchlist.module.css",
+      "beforeSha256": null,
+      "sha256": "22f07bd59d334d3b7c35cf0ab6a6057032e4cc551225869b7d7849eed2ed1bd5"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/read-public.ts",
+      "beforeSha256": null,
+      "sha256": "8f100f3edcc44446c309a55318d357aea5b4d6f7ffc84bd5be5dcfb21c400b3d"
+    },
+    {
+      "file": "apps/web/tests/watchlist-current-fixtures.ts",
+      "beforeSha256": null,
+      "sha256": "0041dd5fc517a45a55abb329ff969cd122a4fcfb2d7091dd19fe478e6511ca52"
+    },
+    {
+      "file": "apps/web/tests/watchlist-current-source.test.ts",
+      "beforeSha256": null,
+      "sha256": "dd3a2a256a5e0ed67e452712fe61236c8ba0b6f3a1424975f92b160eb0b318b1"
+    },
+    {
+      "file": "apps/web/tests/watchlist-current-writer.test.ts",
+      "beforeSha256": null,
+      "sha256": "eb43ddee110078de3a33a00553924c6ca277c982fdf734e60234202b14924948"
+    },
+    {
+      "file": "apps/web/tests/browser/watchlist-current-behavior.spec.ts",
+      "beforeSha256": null,
+      "sha256": "d408b9b694a8e81bc14e0389f70d6056af3fae8caa86bd61df7093ae33532a6b"
+    },
+    {
+      "file": "apps/web/tests/browser/watchlist-current-fixtures.ts",
+      "beforeSha256": null,
+      "sha256": "4cadee12fa682447a478013541be82ffa21c06ff811399d8c3301787c8bd9e32"
+    },
+    {
+      "file": "apps/web/tests/browser/watchlist-current-harness.tsx",
+      "beforeSha256": null,
+      "sha256": "ba4a7755354101b34f3c6965dbf96ff87014a939b42dea2b91a80e8b5ca2e63d"
+    },
+    {
+      "file": "apps/web/tests/browser/watchlist-current-visual.spec.ts",
+      "beforeSha256": null,
+      "sha256": "67c8fa9cee205bbbdfa1472ac19aca266eebe41afbbf02aebe7e3a24126a4eac"
+    },
+    {
+      "file": "apps/web/tests/browser/watchlist-current.html",
+      "beforeSha256": null,
+      "sha256": "a1475c8d6bcf1f9de827af8355406036f1b855dba86573c333847b5944c8eab3"
+    },
+    {
+      "file": "apps/web/tests/browser/watchlist-current.spec.ts",
+      "beforeSha256": null,
+      "sha256": "99214d099e34fc708a98d647f52ed10ce2f632a33651d6cef470ec3b87242c29"
+    },
+    {
+      "file": "apps/web/tests/browser/watchlist-preference-entry.spec.ts",
+      "beforeSha256": null,
+      "sha256": "5826eab42e000f5bfe2b4035dbe3505d1caf667995adc2787e27f7c122960da9"
+    },
+    {
+      "file": "docs/portfolio-31/WATCHLIST-CURRENT-STATE-CONTINUATION.md",
+      "beforeSha256": null,
+      "sha256": "437beec06940fae8ad14c6674b4c691180c223ea6a6095e5d9d08133989cc913"
+    },
+    {
+      "file": "docs/portfolio-31/WATCHLIST-CURRENT-STATE-SIZE-REVIEWS-20261012.json",
+      "beforeSha256": null,
+      "sha256": "5833b5df396ace792188fb330bf2fa9722202fb6565088fe52e745a50eb397dc"
+    }
+  ],
+  "cohesionReviews": [
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/WatchlistDialog.tsx",
+      "kind": "function",
+      "symbol": "WatchlistSession",
+      "fingerprint": "14d2609b43aa0b476423c1eb21103f2132158b80207c540df49bff685606d406",
+      "reason": "Composes one shared-targeting dialog, its current-read gate, the controlled form and an explicit read-only discard/reload confirmation. The personal entry only receives the configured backend and current-source disable state. Native transport, receipt projection, actor/client proof and the active request lifetime remain in separate owners; no service mutation or authentication policy is implemented in this container.",
+      "reviewedBy": "Codex portfolio_objectives",
+      "reviewedOn": "2026-10-12"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/WatchlistForm.tsx",
+      "kind": "function",
+      "symbol": "WatchlistForm",
+      "fingerprint": "51ccf5cfe7979475803d5417a8da7085f59d14937a058698ffee38815d422605",
+      "reason": "Presents the existing Issue areas, Intel State coverage, optional profile suggestions and WatchlistTopics fields as one controlled targeting draft. It preserves the partial-rejection explanation and local correction flow, then composes explicit save/reload or unknown-result actions. Topic-specific field operations remain in WatchlistTopics; transport, current authority, cache effects and unknown fencing are excluded from this presentation owner.",
+      "reviewedBy": "Codex portfolio_objectives",
+      "reviewedOn": "2026-10-12"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/watchlist-queries.ts",
+      "kind": "function",
+      "symbol": "useWatchlistView",
+      "fingerprint": "1d9fa53813edfdfaaba836b0c1bc52261495c01af276fafca7a4b6200c2fcda6",
+      "reason": "Combines the exact current client and owner-specific targeting, taxonomy and jurisdiction reads for one Configure source boundary. Reader-key derivation and source validation are in watchlist-source, while canonical Profile actor/client primitives are reused through the narrow public facade and native targeting IO stays in watchlist-writer. The subscriptions and three query lifecycles must share this captured reader so a successful sibling feed cannot accidentally authorize stale targeting.",
+      "reviewedBy": "Codex portfolio_objectives",
+      "reviewedOn": "2026-10-12"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/useWatchlistEditor.ts",
+      "kind": "function",
+      "symbol": "useWatchlistEditor",
+      "fingerprint": "2cc1d14d317e06ce727cc1cbd040a7f94329381b00e2aadde830c5cf2d10f58b",
+      "reason": "Owns one retained targeting draft and its explicit save/reload transaction. Native request projection and receipt parsing, current actor/client/source assertions, and synchronous interruption/uncertainty tracking have separate module owners. The remaining state and cache/UI effect sequence is one coupled editor lifetime: publishing a receipt, advancing the base version and retaining rejected edits must agree before closing this exact view.",
+      "reviewedBy": "Codex portfolio_objectives",
+      "reviewedOn": "2026-10-12"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/useWatchlistEditor.ts",
+      "kind": "function",
+      "symbol": "useWatchlistEditor > execute",
+      "fingerprint": "4914c34f0a94cbff51f4dee37173c2710c0d855e293e85e2e32b30af1b669f99",
+      "reason": "Runs one selected save or read-only reload from a captured reviewed source through the same interruption latch, then checks the exact replacement source revision before each cache or UI effect. The two branches deliberately share lifetime and failure handling; native Core/Intel dispatch and receipt semantics are delegated to watchlist-writer. No unrelated service, global authorization owner or automatic retry flow is mixed into this transaction.",
+      "reviewedBy": "Codex portfolio_objectives",
+      "reviewedOn": "2026-10-12"
+    }
+  ],
+  "qualification": "Verbatim preservation and preimage/hash/diff checks only; lane receipts remain bound to their candidate files. No final combined acceptance."
+}

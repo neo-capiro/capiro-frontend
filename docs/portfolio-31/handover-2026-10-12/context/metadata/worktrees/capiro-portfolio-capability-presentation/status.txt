@@ -1,0 +1,18 @@
+## codex/portfolio-capability-presentation-20261011
+ M apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx
+ M apps/web/src/features/portfolio/capabilities/capabilities.module.css
+ M apps/web/src/shared/portfolio/ui/TokenInput.tsx
+ M apps/web/tests/browser/capability-boundary.spec.ts
+ M apps/web/tests/browser/capability-execution.spec.ts
+ M apps/web/tests/browser/capability-opportunity-visual.spec.ts
+ M apps/web/tests/browser/portfolio.spec.ts
+?? apps/web/src/features/portfolio/capabilities/CapabilityFields.tsx
+?? apps/web/src/features/portfolio/capabilities/CapabilityForm.tsx
+?? apps/web/src/features/portfolio/capabilities/capability-editor.module.css
+?? apps/web/src/shared/portfolio/ui/token-input.module.css
+?? apps/web/tests/browser/capability-presentation-fixtures.ts
+?? apps/web/tests/browser/capability-presentation-visual.spec.ts
+?? apps/web/tests/browser/capability-presentation.spec.ts
+?? apps/web/tests/browser/token-input-layout.spec.ts
+?? docs/portfolio-31/ARCHITECTURE-REVIEW-CAPABILITY-PRESENTATION.json
+?? docs/portfolio-31/CAPABILITY-PRESENTATION-CONTINUATION.md
