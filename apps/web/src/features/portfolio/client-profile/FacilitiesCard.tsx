@@ -4,7 +4,7 @@ import { useIdentity } from "@/shared/portfolio/auth/identity";
 import { useState } from "react";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { useFacilities } from "./queries";
-import { FacilityDialog } from "./FacilityDialog";
+import { FacilitiesManager } from "./FacilitiesManager";
 import { FacilityDetailDialog } from "./FacilityDetailDialog";
 import { FacilityMapDialog } from "./FacilityMapDialog";
 import { FacilityMap } from "./FacilityMap";
@@ -146,7 +146,7 @@ function CurrentFacilitiesCard({
           No facilities yet. Add a location with the plus action.
         </p>
       )}
-      <FacilityDialog
+      <FacilitiesManager
         key={`new-${creating}`}
         clientId={clientId}
         clientName={clientName}
