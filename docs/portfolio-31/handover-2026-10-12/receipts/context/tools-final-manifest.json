@@ -1,0 +1,51 @@
+{
+  "candidate": "preservation-tools-final",
+  "files": [
+    {
+      "path": "collect_context.py",
+      "sha256": "e58a7bb5e903b5efa1fe5d131d2f9044a9e163993b17998f7b526526c863e50c",
+      "size": 24194
+    },
+    {
+      "path": "context_common.py",
+      "sha256": "8633a0f83cc28e54ea65c9bb99300090861fbfe35d0a16efd40d5e15e3d0c800",
+      "size": 10416
+    },
+    {
+      "path": "scan_credentials.py",
+      "sha256": "692f36b9a5195e04fd0ab973cf2f088e540f654fc4762e91e61e789decea421c",
+      "size": 7717
+    },
+    {
+      "path": "verify_context.py",
+      "sha256": "4a28c73ac3020924a0680bd383f85cb0e04e2eb237142806e52c01d4aaab8c23",
+      "size": 824
+    },
+    {
+      "path": "restore_context.py",
+      "sha256": "b1b4259934e150c4c4c7f9097c14da3f460c241e69bc3688770bd203ff581802",
+      "size": 6699
+    },
+    {
+      "path": "finalize_context.py",
+      "sha256": "efc9278cba772088283d5d9ca3aa9072bcac91704a79bef794df460ba5b54ce1",
+      "size": 11138
+    },
+    {
+      "path": "self_check_context.py",
+      "sha256": "f4310d1960ae7b9ebd2b183c1838b5994a5995024fda76e86f0d75952ae00d36",
+      "size": 7483
+    },
+    {
+      "path": "CONTEXT-TOOLS.md",
+      "sha256": "abbcf906830d22a72def1b98369367eb0665f36e58e9659a77a73dec977c37e7",
+      "size": 7076
+    }
+  ],
+  "productSourceChanged": false,
+  "qualification": [
+    "self-check-final-receipt.json",
+    "safe-link-self-check-receipt.json",
+    "manifest-copy-self-check-receipt.json"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "status": "PASS_WITH_REQUIRED_BASE_AND_EXISTING_PRODUCT_HOLDS",
+  "reviewedBy": "/root/portfolio_prospects_files",
+  "reviewedAt": "2026-10-12T01:39:33.212575+00:00",
+  "resolves": "HANDOVER-HISTORY-01 in unchanged direct-artifact-review.json",
+  "priorReviewSha256": "f20f9104960815f0414215fe55c23c7b6659cb835f7f6ddec033fab5c61aa11b",
+  "qualifiedRestorationReceiptSha256": "de4ca7729497303349ec742f6a61c42119b15ea3648df03dca5f2f08cad71f5b",
+  "qualifiedBundle": {
+    "path": "/workspace/scratch/158b6018a5d3/handover-preparation/portfolio-continuation-760dcc6-requires-02c02d9.bundle",
+    "sha256": "591d293dee1b903e31c70e8b659beae928b04d4c1ed87c8e7a6e27416eabc8af",
+    "bytes": 1389324,
+    "exactHeaderPrerequisites": [
+      "02c02d95bdf3949662b9123f425271c6491ffdab"
+    ],
+    "headerRefs": 26,
+    "recoveredBranchRefs": 13
+  },
+  "verifiedReadOnly": [
+    "Qualified receipt hash, all nine recorded step exits and exact prior bundle preservation.",
+    "New bundle header explicitly requires02c; its26 refs equal the recorded list-heads output.",
+    "All13 branch heads in the fresh protocol-created validation repository equal the bundle refs in the recovered namespace.",
+    "Restored continuation is exact760dcc6, tree46417a0, and33 commits after02c.",
+    "Validation repository has explicit02c shallow boundary; recorded fsck --full succeeded with no diagnostics."
+  ],
+  "limitation": "Recovery requires an existing repository containing published base02c and its ancestors or an explicitly qualified shallow boundary. Use a normal full GitHub clone before fetching the prerequisite bundle. Neither bundle is newly represented as self-contained older upstream history. The old all-ref bundle and old verify receipt remain historical.",
+  "productStatus": "Existing source/check/evidence passes from direct review remain valid; no new product test/build/browser or acceptance was performed. Watchlist projection, alert-copy and Core entry assertion follow-ups remain open.",
+  "sourceMutationPerformed": false
+}

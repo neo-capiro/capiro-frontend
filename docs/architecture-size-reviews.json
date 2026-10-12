@@ -1,0 +1,3604 @@
+[
+  {
+    "path": "apps/web/src/features/modules/directory/CommitteeDirectory.tsx",
+    "sha256": "5da4cd0115f4c02dee8276005a2edf92397e8baee5e34eb60fe9ca00c4546e6b",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "CommitteeDirectory.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "CommitteeDirectory",
+        "nonblankLines": 146
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/directory/CommitteeDirectory.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/directory/CongressionalContacts.tsx",
+    "sha256": "0b6c1df6ea8e36914b43ae2c6c75c0e39ec4598acab9925ff73061ef4b41364e",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The directory table still owns only congressional-contact filtering and selection. charAt preserves the original label while satisfying noUncheckedIndexedAccess; transport stays in the existing query adapter.",
+    "functions": [
+      {
+        "name": "CongressionalContacts",
+        "nonblankLines": 220
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/directory/CongressionalContacts.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/directory/MemberProfile.tsx",
+    "sha256": "1443843e3f5afd8abbda597813264c0a959ca0c16768e62a504c2c7a49f413d2",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "MemberProfile.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "MemberProfile",
+        "nonblankLines": 287
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/directory/MemberProfile.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/directory/PersonnelDirectory.tsx",
+    "sha256": "343c0613183460504dbb59489104961197775f699222b2a727013fc4e4c1027a",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "PersonnelDirectory.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "PersonnelDirectory",
+        "nonblankLines": 164
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/directory/PersonnelDirectory.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/directory/StateDirectory.tsx",
+    "sha256": "fab57cd6cf4f5b7b72d30eec6a567f508e3f83bfbedb4a701d7521d66edd6784",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "StateDirectory.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "StateDirectory",
+        "nonblankLines": 205
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/directory/StateDirectory.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/engagement/CampaignSession.tsx",
+    "sha256": "cdb73c9c996d0992e11e640563dd99fd5e0c0092b96bc045ac50b1881f36b583",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "CampaignSession.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "SessionEditor",
+        "nonblankLines": 96
+      },
+      {
+        "name": "useSessionEditor",
+        "nonblankLines": 89
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/engagement/CampaignSession.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/modules/engagement/CampaignSession.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/engagement/CommitmentView.tsx",
+    "sha256": "900260a4799347633313d4703d8a527fc66528175ec9e4b4170a077266362bee",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "CommitmentView.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "CommitmentView",
+        "nonblankLines": 93
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/engagement/CommitmentView.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/engagement/EngagementOverview.tsx",
+    "sha256": "e5ca3912855cc6c056522cfdf03973dd56fcff6ffa8086ae3447a5c66e80dc39",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The overview still aggregates permitted meetings/tasks/report projections. A stable view clock replaces a render-time clock; no service, provider or authorization responsibility moves into the component.",
+    "functions": [
+      {
+        "name": "EngagementOverview",
+        "nonblankLines": 119
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/engagement/EngagementOverview.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+    "sha256": "41c2018ff90f7274dd22260b03d2ed57fad1e19bac3aad9e4e6b3d2b7b9f71b1",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The engagement composer owns one route-selected view. Its client selector now changes the canonical URL, clearing client-bound draft/session hints and remounting the shared request/editor scope. Existing meeting, outreach, report and team surfaces remain separate modules.",
+    "functions": [
+      {
+        "name": "EngagementScreen",
+        "nonblankLines": 118
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/engagement/EngagementScreen.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/engagement/MeetingLibrary.tsx",
+    "sha256": "09df8ca2d02026f72ced2ee0a86fff841cbee9b961fd0e544323dbef579d4267",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The meeting list and selection retain their existing owner. The upcoming queue uses a stable mounted-view clock and apostrophe escaping preserves visible text. Export, attendance and preparation contracts remain in their adapters.",
+    "functions": [
+      {
+        "name": "MeetingLibrary",
+        "nonblankLines": 116
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/engagement/MeetingLibrary.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/engagement/OutreachView.tsx",
+    "sha256": "20bdd7f04a8f1414113b3ec9ded35a6176ac7fdbbf9f193bb8d2dc307f6b0512",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The view selects one outreach session/draft; the adjacent OutreachForm owns editing that record. Guarded state replacement handles changed inputs before rendering without moving dispatch into presentation. Original action/cancellation tests remain required.",
+    "functions": [
+      {
+        "name": "OutreachView",
+        "nonblankLines": 98
+      },
+      {
+        "name": "OutreachForm",
+        "nonblankLines": 88
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/engagement/OutreachView.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/modules/engagement/OutreachView.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/engagement/ReportView.tsx",
+    "sha256": "57e4750d7294bca326bd139c3efcaa66e4ffe971b663daea45d0a4ff9fdaff09",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "ReportView.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "ReportView",
+        "nonblankLines": 88
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/engagement/ReportView.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/DataExplorer.tsx",
+    "sha256": "e9b730d656609e72230bbf0589a16d856bd9260029d451252e113d3784e2d79a",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "DataExplorer.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "DataExplorer",
+        "nonblankLines": 306
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/DataExplorer.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/DefenseBudget.tsx",
+    "sha256": "092ebc15537345cd31d50c7aac2f641387d22fb271d08b12130285103dec6509",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "DefenseBudget.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "DefenseBudget",
+        "nonblankLines": 197
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/DefenseBudget.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/DistrictMap.tsx",
+    "sha256": "60eafa460ed65719f1935a476d974fe4dad977c8c48ef7939228b66b6958398c",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "DistrictMap.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "DistrictMap",
+        "nonblankLines": 136
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/DistrictMap.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/DistrictNexus.tsx",
+    "sha256": "c2d126a9007d3bad71eecabb768f944e10ac2b397c651267fc1b8e9cf9e4c880",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "DistrictNexus.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "DistrictNexus",
+        "nonblankLines": 147
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/DistrictNexus.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/FundingDetail.tsx",
+    "sha256": "b05d8419703b3b7b8ad81b16d63ceaf67c94d570bbbe1e176db27a651f055bab",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "FundingDetail.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "FundingDetail",
+        "nonblankLines": 199
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/FundingDetail.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/FundingOpportunities.tsx",
+    "sha256": "4d067a37e2ecef1ad33208c6d12637257dd29ab5b6017fd91533150cb9552427",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "FundingOpportunities.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "FundingOpportunities",
+        "nonblankLines": 218
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/FundingOpportunities.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/ProgramElementProfile.tsx",
+    "sha256": "44915859a7a6a2a7cc12895f1ddbeb4e945ca29d032c118c2352a0ec9cb2142d",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "ProgramElementProfile.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "ProgramElementProfile",
+        "nonblankLines": 155
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/ProgramElementProfile.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/SaveBillToLegiWatch.tsx",
+    "sha256": "ef85411b31963b8cb15aecb8adf90f50abee93fdcb6f4c2473597d5a84c52827",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "SaveBillToLegiWatch.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "SaveBillToLegiWatch",
+        "nonblankLines": 102
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/SaveBillToLegiWatch.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/LegiWatchScreen.tsx",
+    "sha256": "5e95b9732eedb9a4b74a230d86d635281e6a5a02f5239a57bc1250395e6bc5b7",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "LegiWatchScreen.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "LegiWatchScreen",
+        "nonblankLines": 82
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/LegiWatchScreen.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/committees/CommitteeFollowDialog.tsx",
+    "sha256": "16c7e3d3bcdf3139a9f4eeb758788452d6f6f79e89ba4d0ea4690893b45a2a5a",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The form owns one committee-follow preference transaction. Guarded initialization replaces the effect only when the loaded source changes; typed operations still own the write contract.",
+    "functions": [
+      {
+        "name": "CommitteeFollowDialog",
+        "nonblankLines": 122
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/committees/CommitteeFollowDialog.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/committees/CommitteeRoom.tsx",
+    "sha256": "fa2346dbb1a5cfe18335992d4891194d615dd5f476e4113b32ffcec215cc0aaa",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "This is one committee-room projection composer; the only integration change is equivalent JSX apostrophe escaping.",
+    "functions": [
+      {
+        "name": "CommitteeRoom",
+        "nonblankLines": 181
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/committees/CommitteeRoom.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/committees/CommitteesScreen.tsx",
+    "sha256": "23ac0ceece261d41b41bb161c710a6fc02b758343b3cb6648b62b09b1b24f353",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "CommitteesScreen.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "CommitteesScreen",
+        "nonblankLines": 127
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/committees/CommitteesScreen.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/committees/StateCommitteeRoom.tsx",
+    "sha256": "73d72e8f12ba0488c54c84d0d90c0c19ad24cd2603a8e912786df1ccb3f29433",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "StateCommitteeRoom.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "StateCommitteeRoom",
+        "nonblankLines": 202
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/committees/StateCommitteeRoom.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/BudgetCompare.tsx",
+    "sha256": "0722712e14e502b559b4dd9b358d675e37870576cc9af1461749c63116986500",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "BudgetCompare.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "BudgetCompare",
+        "nonblankLines": 81
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/evidence/BudgetCompare.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/BudgetScreen.tsx",
+    "sha256": "c6d1afc5d5e78c251257f9afb03eefb4f20832a0d165213141917f49cf2917ee",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "BudgetScreen.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "BudgetWorkspace",
+        "nonblankLines": 127
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/evidence/BudgetScreen.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/NewsMonitorEditor.tsx",
+    "sha256": "6a98d2291a7e5057110ddb5faeab1e10360715245eb2beb89a4f5a25368621cc",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "NewsMonitorEditor.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "NewsMonitorEditor",
+        "nonblankLines": 83
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/evidence/NewsMonitorEditor.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/evidence/PersonnelEvidence.tsx",
+    "sha256": "25add04b9dbd3a4f14e1d365c9f7e0671c9ba05f8d6c1c3ce798969e8799dfee",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "PersonnelEvidence.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "PersonnelEvidence",
+        "nonblankLines": 127
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/evidence/PersonnelEvidence.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/ArchiveScreen.tsx",
+    "sha256": "ba5d7e7e54568c92c6beb22dd591e411cc3c0130e5b8c80116b365a6d566da97",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "ArchiveScreen.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "ArchiveScreen",
+        "nonblankLines": 90
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/hearings/ArchiveScreen.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/AttendanceDialog.tsx",
+    "sha256": "feb1fdd4c7693cffec142297fac85395e47c9b631d862d1c18638808dbbce4a7",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "AttendanceDialog.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "AttendanceDialog",
+        "nonblankLines": 209
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/hearings/AttendanceDialog.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/FollowHearingDialog.tsx",
+    "sha256": "024b629ea4b3508eba052d9a15233ba5c4187c29c3e28f6a0e7b6638040bd047",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "This dialog edits one hearing-follow preference. Guarded loaded-record replacement preserves the same selected-client/preference transaction and existing operation boundaries.",
+    "functions": [
+      {
+        "name": "FollowHearingDialog",
+        "nonblankLines": 129
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/hearings/FollowHearingDialog.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/HearingDetailScreen.tsx",
+    "sha256": "ce9d824d6393d0c6afd30e3912b906eccf628d101c39914e99a3912f39a3fc83",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "HearingDetailScreen.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "HearingDetailScreen",
+        "nonblankLines": 263
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/hearings/HearingDetailScreen.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/HearingWorkDialog.tsx",
+    "sha256": "585cad6ff2fb741084b8a698af98aeb8da06d4d741b591d9bca97ca840218721",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "HearingWorkDialog.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "HearingWorkDialog",
+        "nonblankLines": 300
+      },
+      {
+        "name": "run",
+        "nonblankLines": 93
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/hearings/HearingWorkDialog.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/modules/intelligence/legiwatch/hearings/HearingWorkDialog.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/HearingsScreen.tsx",
+    "sha256": "a01fa87aec5bc9bbc594fc279dc481434bd2f0a044490d446d04c91a298f4da6",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "HearingsScreen.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "HearingsScreen",
+        "nonblankLines": 276
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/hearings/HearingsScreen.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/IntelligencePanel.tsx",
+    "sha256": "ffa3b437a70858ca9c944e01ce784bb224cc76d8587336ffd16ff5c2cb31262c",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The panel owns one hearing intelligence query and pagination. Cursor clearing follows the complete hearing/client/relevance tuple before rendering; matching and source qualification remain server-owned.",
+    "functions": [
+      {
+        "name": "IntelligencePanel",
+        "nonblankLines": 98
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/hearings/IntelligencePanel.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/RecordingsScreen.tsx",
+    "sha256": "b72aede12959d7c18aca1d9df159bf74c12c14b0a1ef42dd52e6393272dd89e9",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "RecordingsScreen.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "RecordingsScreen",
+        "nonblankLines": 116
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/hearings/RecordingsScreen.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/TranscriptPanel.tsx",
+    "sha256": "567c3b9c235407be410a918f59d8585c27d863811967bdcab5320c2b53ebf3df",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "TranscriptPanel.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "TranscriptPanel",
+        "nonblankLines": 92
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/hearings/TranscriptPanel.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/imports/ImportReview.tsx",
+    "sha256": "d6b0fd81e53183feceee20fd059f4a3ac61f094d9f7ccc630f5503907cb4c1a1",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "ImportReview.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "ImportReview",
+        "nonblankLines": 183
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/imports/ImportReview.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/imports/ImportUpload.tsx",
+    "sha256": "9afd8f05758cca83dd46f83a12a602166b5cbf4d4973d6089d4134235a5f6515",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "ImportUpload.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "ImportUpload",
+        "nonblankLines": 86
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/imports/ImportUpload.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/imports/KeywordPromotion.tsx",
+    "sha256": "c9e5733d5518b0602923cf79fdd9541c7e82016d1808a73d894068802682c77a",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "KeywordPromotion.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "KeywordPromotion",
+        "nonblankLines": 121
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/imports/KeywordPromotion.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/imports/LegalImportDecision.tsx",
+    "sha256": "20d55fed82d7da3c9ed6356571d8360091933426e8dc88c5507e3f20e4025dd7",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "LegalImportDecision.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "LegalImportDecision",
+        "nonblankLines": 215
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/imports/LegalImportDecision.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/imports/ResearchImports.tsx",
+    "sha256": "cfbeedfe403c7ce9be14448b9d5af248dc6ebbe031bf9d37891d8a0cfef86909",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "ResearchImports.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "StatutePromotion",
+        "nonblankLines": 102
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/imports/ResearchImports.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/legiwatch.module.css",
+    "sha256": "19ed4800ddd596e8a13709448e92809b5a0610a90382e3c639d58107cf63bcc4",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#styles",
+    "rationale": "legiwatch.module.css owns its feature family visual vocabulary and responsive variants. Related selectors stay together; no behavioral or authorization responsibility is present, and no private cross-feature selectors were introduced.",
+    "functions": [],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/legiwatch.module.css: 453 nonblank lines require review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/live/BrowserRoom.tsx",
+    "sha256": "e67b93293a7b7ad66ee0b651a59559a2bfd95f6c1cd18e0e21e0a057e8211464",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "BrowserRoom.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "ConnectedBrowserRoom",
+        "nonblankLines": 305
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/live/BrowserRoom.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/live/RetainedAudioPanel.tsx",
+    "sha256": "af3491d72a5216dacf563d44e5c73861a86551fad9f16d16d4d47bcd0dce2f6c",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "RetainedAudioPanel.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "RetainedAudioPanel",
+        "nonblankLines": 125
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/live/RetainedAudioPanel.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/live/use-browser-capture.ts",
+    "sha256": "8975c6e41cc63d920e06e041840ad578c72d90c1d7e77b6340fd92bc644207b0",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The hook and its nested connect/message handlers own one bounded browser media/socket capture lifetime. The existing generation, ownsCapture, interruption and cleanup fences remain intact. Callback synchronization moves to layout commit and visible state resets on scope replacement; MediaRecorder, stream, socket, recording transport and timer are still released together. No capture, provider or live execution was performed by this review.",
+    "functions": [
+      {
+        "name": "useBrowserCapture",
+        "nonblankLines": 338
+      },
+      {
+        "name": "useBrowserCapture > connect",
+        "nonblankLines": 224
+      },
+      {
+        "name": "useBrowserCapture > connect > <anonymous> #9",
+        "nonblankLines": 112
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/live/use-browser-capture.ts: function over80 nonblank lines requires review",
+      "apps/web/src/features/modules/intelligence/legiwatch/live/use-browser-capture.ts: function over80 nonblank lines requires review",
+      "apps/web/src/features/modules/intelligence/legiwatch/live/use-browser-capture.ts: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/InternalWorkflows.tsx",
+    "sha256": "4938b930a2396b82367fd6538af90baffa75a81a046af0bd98e5fb51f1c6ed6c",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "InternalWorkflows.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "WorkflowScope",
+        "nonblankLines": 113
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/monitoring/InternalWorkflows.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/KeywordDefinitions.tsx",
+    "sha256": "4918b65aa5feded3fca087a0972b14eaf3e5442c880b8c5cfd9936ad9b53d187",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "KeywordDefinitions.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "KeywordPreview",
+        "nonblankLines": 81
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/monitoring/KeywordDefinitions.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/KeywordDelivery.tsx",
+    "sha256": "548c26c2064f3d6db902c1c8c81163f482a8dff90c242858b29b34c1c3698b64",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "KeywordDelivery.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "KeywordDelivery",
+        "nonblankLines": 89
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/monitoring/KeywordDelivery.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/KeywordEditor.tsx",
+    "sha256": "342a1aea46624f39325fcbbca8cb6143ce79a58e26363dae9caad9e7a0d26e5e",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "KeywordEditor.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "KeywordEditor",
+        "nonblankLines": 175
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/monitoring/KeywordEditor.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/KeywordMappings.tsx",
+    "sha256": "614e9eab17ea1070eb0f3b23b3bea25b351bd55c8e6e060e2776978c2fb99087",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "KeywordMappings.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "KeywordMappings",
+        "nonblankLines": 120
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/monitoring/KeywordMappings.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/KeywordScanReview.tsx",
+    "sha256": "e8e10caff10845373c2825862aba60d9684093317ffbe7cc7dcade0b600aea4c",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "One reviewed scan intent remains local to this form, with effects dispatched by the fixed operation registry. Only equivalent JSX apostrophe escaping changes.",
+    "functions": [
+      {
+        "name": "KeywordScanReview",
+        "nonblankLines": 163
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/monitoring/KeywordScanReview.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/RecordRuleEditor.tsx",
+    "sha256": "66b82da9d01a2422cd45c126bae2089db0b2e7185c827d1dacbb89083b1df5e5",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "RecordRuleEditor.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "RecordRuleEditor",
+        "nonblankLines": 96
+      },
+      {
+        "name": "RecordReadiness",
+        "nonblankLines": 87
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/monitoring/RecordRuleEditor.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/modules/intelligence/legiwatch/monitoring/RecordRuleEditor.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/StatuteMonitorEditor.tsx",
+    "sha256": "79175d73d3b5bb50a3b16354aa72cc79e9e0815b4c42d648aed9d7caf1261878",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "StatuteMonitorEditor.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "StatuteMonitorEditor",
+        "nonblankLines": 118
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/monitoring/StatuteMonitorEditor.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/StatuteMonitorReview.tsx",
+    "sha256": "98da0860a7cdb98ba5e8c106ce3a590db545d1659234f00992fc90687e137f55",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "StatuteMonitorReview.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "StatuteMonitorReview",
+        "nonblankLines": 140
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/monitoring/StatuteMonitorReview.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/SubscriptionActivation.tsx",
+    "sha256": "1966e733f7936268d012bca5cb6420653647139b912218fe4f0c069137e28650",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "SubscriptionActivation.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "SubscriptionActivation",
+        "nonblankLines": 106
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/monitoring/SubscriptionActivation.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/SubscriptionEditor.tsx",
+    "sha256": "3ba55abd30d9f8dc547607573356b1a3a651072a5416e624b703326afb8516e5",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "SubscriptionEditor.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "SubscriptionEditor",
+        "nonblankLines": 153
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/monitoring/SubscriptionEditor.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/WorkflowActionView.tsx",
+    "sha256": "5d66f5df4223ebf463600056002a6a5906efa884ba98593360e3d9ae0f38da31",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "WorkflowActionView.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "WorkflowActionView",
+        "nonblankLines": 113
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/monitoring/WorkflowActionView.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/WorkflowEditor.tsx",
+    "sha256": "5e86e1d7484ebb4df8a1ef0c18dbdbb79be41dff5b8d2a7fb644f59d5b6c141a",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "WorkflowEditor.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "WorkflowEditor",
+        "nonblankLines": 162
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/monitoring/WorkflowEditor.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/monitoring/WorkflowPreview.tsx",
+    "sha256": "cc61f8270b5a9f1efb81d4750776177879f75b3c65de069ab60a32689c479ded",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "WorkflowPreview.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "WorkflowPreview",
+        "nonblankLines": 148
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/monitoring/WorkflowPreview.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/more/BriefingCitations.tsx",
+    "sha256": "40210fa26a724213900acd09338f27f2fa664ede39e33aaf57b669fac3cfe128",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "BriefingCitations.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "CitationSource",
+        "nonblankLines": 95
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/more/BriefingCitations.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/more/BriefingComposer.tsx",
+    "sha256": "0767932c785fb9ccfad5ccf83e438cd5e1c0515f37c9479c7c246ff16402993c",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "BriefingComposer.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "BriefingComposer",
+        "nonblankLines": 180
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/more/BriefingComposer.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/more/BriefingReview.tsx",
+    "sha256": "21adb7557ffb9cc52ce92ae22b48e309ad8eb51228d66a0a8cdbd835acbab373",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "BriefingReview.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "BriefingReview",
+        "nonblankLines": 133
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/more/BriefingReview.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/more/BriefingsScreen.tsx",
+    "sha256": "a6a0229ed915bc43c808691d58347cdc6c537a4452fa006824fdca76d825dcce",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "BriefingsScreen.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "BriefingHistory",
+        "nonblankLines": 102
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/more/BriefingsScreen.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/more/DigestScreen.tsx",
+    "sha256": "b5d7ef26aac3168928e5b73406dcbc9873dbb323bd6824f9bd8306becafa9312",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "DigestScreen.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "DigestContent",
+        "nonblankLines": 90
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/more/DigestScreen.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/more/EditorialActivation.tsx",
+    "sha256": "823c9ef9e410e3812c495aab781f323ef553bc090255f9ee0d44669ef85bcd59",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "EditorialActivation.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "EditorialActivation",
+        "nonblankLines": 94
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/more/EditorialActivation.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/more/EditorialEditor.tsx",
+    "sha256": "9741eef1d5d2dca63532286a5dde42a0c3f641cde36384db472eb9f145d3ecbe",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "EditorialEditor.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "EditorialEditor",
+        "nonblankLines": 142
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/more/EditorialEditor.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/more/EditorialSourceFields.tsx",
+    "sha256": "327c566cf3b85d162e9f1a4050501eada3bac2df14257ce46125c2a803d7d990",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "EditorialSourceFields.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "EditorialSourceFields",
+        "nonblankLines": 128
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/more/EditorialSourceFields.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/more/LegiWatchSettings.tsx",
+    "sha256": "c1c8b561d9531a39f0296b124fd54299b5269a86988cb5a01e6ce282a092bc36",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "Display preferences and hearing email preference retain separate loaded projections and writes within this settings view. Guarded synchronization changes timing before render, not authorization or operation contracts.",
+    "functions": [
+      {
+        "name": "LegiWatchSettings",
+        "nonblankLines": 164
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/more/LegiWatchSettings.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/more/TrendsScreen.tsx",
+    "sha256": "72daf6c3b3368a6fcae42628b99fc04d930f775f88fad914a436895394fe3ede",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "TrendsScreen.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "TrendsScreen",
+        "nonblankLines": 122
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/more/TrendsScreen.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/publications/PublicationClaimsEditor.tsx",
+    "sha256": "481284eb74aaf5e433afc53a1895c13d983c3fe26278ba6fd12bb1a3ef4532c1",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "PublicationClaimsEditor.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "PublicationClaimsEditor",
+        "nonblankLines": 88
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/publications/PublicationClaimsEditor.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/publications/PublicationDelivery.tsx",
+    "sha256": "20a10d8ebb627ef3868db7b75e1b21824be8b0ebaf78c4f4e34b9eb06a6580eb",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "PublicationDelivery.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "PublicationDelivery",
+        "nonblankLines": 286
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/publications/PublicationDelivery.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/publications/PublicationReview.tsx",
+    "sha256": "3a89f7ca4278fe0777b09f18c25ddc68e61bbf3b3a9e16a9087cca82a5f631a3",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "PublicationReview.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "PublicationReview",
+        "nonblankLines": 241
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/publications/PublicationReview.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/publications/PublicationWorkspace.tsx",
+    "sha256": "908e959ee4492f374cc887e886db2894b19c5fca42f4afcd1faa4fd4b999c711",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "PublicationWorkspace.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "PublicationWorkspace",
+        "nonblankLines": 347
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/publications/PublicationWorkspace.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/publications/SmsConsentPanel.tsx",
+    "sha256": "316698be29cc979e59f295a9f0ec2fc2c555bbc0d6f1a8129ebde0520ece4a7c",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "SmsConsentPanel.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "SmsConsentPanel",
+        "nonblankLines": 182
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/publications/SmsConsentPanel.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/reports/RecipientPicker.tsx",
+    "sha256": "35bcc2d95810a5582abdcfdeba44b1af0783c2048498a2e41b16cadbb7f66b37",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "RecipientPicker.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "RecipientPicker",
+        "nonblankLines": 135
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/reports/RecipientPicker.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportCompose.tsx",
+    "sha256": "657634c10a87ab10b2c0cc753e1568a69d31413190dcc0a44f5768b98a314312",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "ReportCompose.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "ReportCompose",
+        "nonblankLines": 153
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportCompose.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportEditor.tsx",
+    "sha256": "28bb24e98c4bc19d0f81f8067e0e3b3d4b9253b75a66d2cd4720e08d72ba3682",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "ReportEditor.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "ReportEditor",
+        "nonblankLines": 316
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportEditor.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportRecipients.tsx",
+    "sha256": "0c5b22b0c20092ba2a7ae502b24169ec7a943b932f3da314435a32b5d8b10b14",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "ReportRecipients.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "ContactEditor",
+        "nonblankLines": 96
+      },
+      {
+        "name": "ListEditor",
+        "nonblankLines": 95
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportRecipients.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportRecipients.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportRunView.tsx",
+    "sha256": "b6519ccf12fd734d8f9a0c78be0af107b8f8184abc6a611325f1f9f86dbb6a37",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "ReportRunView.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "ReportRunView",
+        "nonblankLines": 142
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportRunView.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportsScreen.tsx",
+    "sha256": "b9ca44ba224267e2b9e2035f0809e9b535caa912d43e4e9590132f034281f5e5",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "ReportsScreen.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "ReportsScreen",
+        "nonblankLines": 94
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/reports/ReportsScreen.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/research/FloridaLaw.tsx",
+    "sha256": "3c8f66940a0ece80ea9ce54a95fb2d639c90f59899830615c21bb87a054e5473",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "FloridaLaw.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "LegalReferences",
+        "nonblankLines": 118
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/research/FloridaLaw.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/research/LegalDeadlines.tsx",
+    "sha256": "e04603c8688ddc951a365091fd3e20234d96872f68d547618e35b8aa1f2e8b17",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "LegalDeadlines.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "LegalDeadlines",
+        "nonblankLines": 122
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/research/LegalDeadlines.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/research/ResearchDraft.tsx",
+    "sha256": "a4863244eb1fdedaa3768a4163387bdc85d08b6afebab7b1333f1e478575b23b",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "ResearchDraft.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "ResearchDraft",
+        "nonblankLines": 117
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/research/ResearchDraft.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/research/ResearchReportReview.tsx",
+    "sha256": "9b2b1dcf5fa02e2fc4a6f58bdbcbda8728b05b3d5729a06e63592c3548ccbaa1",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "ResearchReportReview.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "ResearchReportReview",
+        "nonblankLines": 83
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/research/ResearchReportReview.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/research/ResearchSearch.tsx",
+    "sha256": "7c4d7b5191244f3436feafb82d16e0fb55c63f46413bc3df02ec5badb5354681",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "ResearchSearch.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "ResearchSearchForm",
+        "nonblankLines": 82
+      },
+      {
+        "name": "ResearchResults",
+        "nonblankLines": 113
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/research/ResearchSearch.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/modules/intelligence/legiwatch/research/ResearchSearch.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/research/ResearchVersions.tsx",
+    "sha256": "c471118b8907573757d8681896b87f52fa1364864efee78990c586480793c292",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "ResearchVersions.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "ResearchVersions",
+        "nonblankLines": 121
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/research/ResearchVersions.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/intelligence/legiwatch/updates/UpdatesScreen.tsx",
+    "sha256": "30cf7efe26b3b156ecdb731b92918f43ba57801a6627f0cd55dfe02d9a22a4d0",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#legiwatch",
+    "rationale": "UpdatesScreen.tsx owns a single LegiWatch interaction or recording lifetime. Related review fields and callback state remain together; schemas, resource transport and backend authority have separate owners.",
+    "functions": [
+      {
+        "name": "UpdatesScreen",
+        "nonblankLines": 131
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/intelligence/legiwatch/updates/UpdatesScreen.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/AdvancedTaskFields.tsx",
+    "sha256": "7deae059fa6eab313299076d510e99a33e37d835eca18fa0e44bbe73927fea82",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "AdvancedTaskFields.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "TaskDefinition",
+        "nonblankLines": 102
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/AdvancedTaskFields.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/BudgetDialog.tsx",
+    "sha256": "57383e3c5291e8d3ebd9180ef49b414a29c27e318714c96fa870d6f61863d39f",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "BudgetDialog.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "useBudgetEditor",
+        "nonblankLines": 92
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/BudgetDialog.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/CapacityRecordDialog.tsx",
+    "sha256": "382e43337af022e1ef2cadad81984dd6dc740368324c8618fa442985ba48c841",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "CapacityRecordDialog.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "useRecord",
+        "nonblankLines": 91
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/CapacityRecordDialog.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/CapacityView.tsx",
+    "sha256": "c177dc48d6430d2e1ae77cdc01f0b50402ba1f857fd62115114e24f0588344d7",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "CapacityView.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "CapacityView",
+        "nonblankLines": 112
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/CapacityView.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/CopyProjectDialog.tsx",
+    "sha256": "bebb0bba8ffa437f9d61551cd8b2896f75f8bb91549182c6967260b61a9861b6",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "CopyProjectDialog.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "CopyProjectDialog",
+        "nonblankLines": 83
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/CopyProjectDialog.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/DashboardEditor.tsx",
+    "sha256": "45468acd8ae9e7eeb750d0c07642a63ad58cd88337c3d65d2022cc3d3b46572a",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "DashboardEditor.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "DashboardEditor",
+        "nonblankLines": 93
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/DashboardEditor.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/FormPreview.tsx",
+    "sha256": "e54989c16dd063c4cf6ce8c2dd39b415635aa54a35cf154e2a9c13e4c19a5527",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "FormPreview.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "FormPreview",
+        "nonblankLines": 105
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/FormPreview.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/FormQuestions.tsx",
+    "sha256": "7f617e7d14f4aabdd3f3f9d34a10fc9d944b77c51ee1fe2432e02ffe39e5b1f7",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "FormQuestions.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "FormQuestions",
+        "nonblankLines": 119
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/FormQuestions.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/PersonalViewDialog.tsx",
+    "sha256": "ac6f1af50c9e05cab2ca836c7536c67aa933d589453cae6383e3f65ed5047f0b",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "PersonalViewDialog.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "PersonalViewForm",
+        "nonblankLines": 87
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/PersonalViewDialog.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/PlannerInbox.tsx",
+    "sha256": "92d6b4d42228840863c519679b8414859e03d08ddfa52d9e30fd4e848f1a3ab8",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "PlannerInbox.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "PlannerInbox",
+        "nonblankLines": 90
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/PlannerInbox.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/ProjectBudget.tsx",
+    "sha256": "4d53203bc735362001026645ae9702277cf2c65d871f5a1c72c1d6db007ee3fc",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "ProjectBudget.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "ProjectBudget",
+        "nonblankLines": 87
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/ProjectBudget.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/ProjectCatalog.tsx",
+    "sha256": "d7c892ec95d0452aa6c12d1fee6665d4391be82b37f0ae0d1320ae9d612d7a9c",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The catalog and its project form keep separate presentation responsibilities in one cohesive project module. Stable project keys repair React identity; JSX text is preserved.",
+    "functions": [
+      {
+        "name": "ProjectCatalog",
+        "nonblankLines": 93
+      },
+      {
+        "name": "ProjectForm",
+        "nonblankLines": 89
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/ProjectCatalog.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/modules/planner/ProjectCatalog.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/PublicForm.tsx",
+    "sha256": "bd18ef0a2a085c5b060f02f1e77d901c2c86df201a9367e3baa2c6d1b38092c9",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The public token form retains its distinct unauthenticated capability contract. A keyed FormRequest owns one token/revision read lifetime, while PublicFormQuestions retains answer, attachment and submission state. Retry and token replacement now explicitly remount both and abort old requests.",
+    "functions": [
+      {
+        "name": "PublicFormQuestions",
+        "nonblankLines": 101
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/PublicForm.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/ResourceEditor.tsx",
+    "sha256": "d68c5f2ee915af38335c716cb3b5e2b663f8a564372b03d9e1471362ae3bab36",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "One resource-edit form remains behind its registered operation. The integration changes only JSX apostrophe escaping.",
+    "functions": [
+      {
+        "name": "ResourceForm",
+        "nonblankLines": 93
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/ResourceEditor.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/ResourceTypeFields.tsx",
+    "sha256": "f935b51513af1535915d2d3dc5449ca63aae07c7e5bb53b6af55657c05a760b1",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "ResourceTypeFields.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "GoalFields",
+        "nonblankLines": 91
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/ResourceTypeFields.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/TaskAttachments.tsx",
+    "sha256": "7796268ddc188370495670dac8b5646d81d67ae7b45bf9c0feaf04f2790c2b6c",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "TaskAttachments.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "TaskAttachments",
+        "nonblankLines": 101
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/TaskAttachments.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/TaskEditor.tsx",
+    "sha256": "d17c8c4e548367517466f5d0fc2ce42f2ad4029e9659461f82390ca0c32c1e1a",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "TaskEditor.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "TaskForm",
+        "nonblankLines": 95
+      },
+      {
+        "name": "TaskScheduleFields",
+        "nonblankLines": 106
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/TaskEditor.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/modules/planner/TaskEditor.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/TaskViews.tsx",
+    "sha256": "36f60ab5694bd29d767cdf895a0aaf8126c01747958c31042a02919ba1d39d72",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "TaskViews.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "TaskList",
+        "nonblankLines": 100
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/TaskViews.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
+    "sha256": "20221fc7fe5eebfdd984866c7d1b892fa76b27e958b1dc50179f9e6afa8b0c9f",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "TaskWorkspace.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "useTaskWorkspace",
+        "nonblankLines": 96
+      },
+      {
+        "name": "TaskFilters",
+        "nonblankLines": 90
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/TaskWorkspace.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/modules/planner/TaskWorkspace.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/TimeDialogs.tsx",
+    "sha256": "dca90f8d31ad25a163edce5b567a9c1ff9121065029d51c4d4a25763fdb30576",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "TimeDialogs.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "AddTimeForm",
+        "nonblankLines": 82
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/TimeDialogs.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/TimeExportDialog.tsx",
+    "sha256": "5ab7ed0026f62896cf44b7bc7e7b4131622a6d32229ff3fe7a158998b213a412",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "TimeExportDialog.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "TimeExportDialog",
+        "nonblankLines": 175
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/TimeExportDialog.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/TimeSettings.tsx",
+    "sha256": "04eb52bad5f290e3af19198bda07ee96db61e7d0c4f8bea33a75f35fcde30a8c",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "TimeSettings.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "SettingsForm",
+        "nonblankLines": 101
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/TimeSettings.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/TimesheetWorkDialog.tsx",
+    "sha256": "79b4429e8e53c4265e25f22d420e86b6231de01ab4887f7388714c96f1b5168c",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "TimesheetWorkDialog.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "TimesheetWorkDialog",
+        "nonblankLines": 111
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/TimesheetWorkDialog.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/resource-data.ts",
+    "sha256": "fdca3f43e7d9d1d5c70c4e418fcb657d9a247bcc8f96633691b566500ba97d8c",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "The bounded Planner resource-kind catalog owns initial editor data. Its kind branches produce declarative defaults only; rendering and persistence are separate. New resource domains require another review.",
+    "functions": [
+      {
+        "name": "initialResourceData",
+        "nonblankLines": 84
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/resource-data.ts: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/planner/use-timesheets.ts",
+    "sha256": "ffc313d5311880aee591808ca2eb219eb99b694a44f91231c80c747960c61f68",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "One timesheet state model owns selected week/person, reads and optimistic review actions; toolbar, tables and dialogs are separate presentation components. Backend version and revision remain execution authority.",
+    "functions": [
+      {
+        "name": "useTimesheets",
+        "nonblankLines": 97
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/planner/use-timesheets.ts: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/research-portfolios/ResearchChanges.tsx",
+    "sha256": "b8f3d5050ab8edf41fa7c4aca8e2984516b59f5ff9f5247ff35f90dd6af83ec9",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "ResearchChanges.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "ResearchChanges",
+        "nonblankLines": 121
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/research-portfolios/ResearchChanges.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/research-portfolios/ResearchMembers.tsx",
+    "sha256": "66dab18bd9f812629049927511b94c6124beacce2ec85aacc310917333bfabb6",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "ResearchMembers.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "ResearchMembers",
+        "nonblankLines": 214
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/research-portfolios/ResearchMembers.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/research-portfolios/ResearchOverview.tsx",
+    "sha256": "452c06c1edf2140b03ae101881377b371905e587a15e2fd9d6fc7895dd9544db",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "ResearchOverview.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "ResearchOverview",
+        "nonblankLines": 111
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/research-portfolios/ResearchOverview.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/research-portfolios/ResearchPortfoliosScreen.tsx",
+    "sha256": "08f01fa0213e284cf5793c808a75a8037621019967ad40b75c38fb0c39fbad7f",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "ResearchPortfoliosScreen.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "ResearchPortfoliosScreen",
+        "nonblankLines": 216
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/research-portfolios/ResearchPortfoliosScreen.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/research-portfolios/ResearchReviews.tsx",
+    "sha256": "ea34294fbf764ac9bf8ce060be503e45ac46ca399a83a4b1994f803eb0eb87cc",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The research review lane retains its typed query and explicit review actions. charAt preserves the lane label without optional indexed access.",
+    "functions": [
+      {
+        "name": "ResearchReviews",
+        "nonblankLines": 135
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/research-portfolios/ResearchReviews.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/research-portfolios/ResearchSettings.tsx",
+    "sha256": "c2dac0054a2da0aadac0095db680a0f9169b6934928511b92128ebcff1ced1e8",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "ResearchSettings.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "ResearchSettings",
+        "nonblankLines": 251
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/research-portfolios/ResearchSettings.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/research-portfolios/ResearchSnapshots.tsx",
+    "sha256": "da74f28ff5da82d5ff8fde357f591eecd59c9be016ee5c43025f1d8c75b3976c",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "ResearchSnapshots.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "ResearchSnapshots",
+        "nonblankLines": 101
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/research-portfolios/ResearchSnapshots.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/research-portfolios/ResearchSubscriptions.tsx",
+    "sha256": "00a437ed3f3afd7765d414c2a35a56f3f8c345b89a90f6f403014354845bd107",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "ResearchSubscriptions.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "ResearchSubscriptions",
+        "nonblankLines": 108
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/research-portfolios/ResearchSubscriptions.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/FirmPhases.tsx",
+    "sha256": "37e76bd6da3c13800c236ed90ca9cefa9b0246ec404b98c9ff4127827f31da33",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "FirmPhases.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "FirmPhases",
+        "nonblankLines": 209
+      },
+      {
+        "name": "callback at line 100",
+        "nonblankLines": 82
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/FirmPhases.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/modules/strategies/FirmPhases.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/StrategiesLibrary.tsx",
+    "sha256": "f6499096b58f9ae6e47f769bb0363f516ec7ff56db19de57e3b74d2cc4803370",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "StrategiesLibrary.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "StrategiesLibrary",
+        "nonblankLines": 251
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/StrategiesLibrary.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/StrategiesScreen.tsx",
+    "sha256": "d5197828c65410e4f710b6129614b3ed78dd33f6bfed43b292108a415907e973",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "StrategiesScreen.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "StrategiesScreen",
+        "nonblankLines": 93
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/StrategiesScreen.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/StrategyCalendar.tsx",
+    "sha256": "9b6d775d23b038a9bf814b162cec6358bfa3888fb6a08471e01fa02687f41982",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "StrategyCalendar.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "StrategyCalendar",
+        "nonblankLines": 158
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/StrategyCalendar.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/StrategyCreate.tsx",
+    "sha256": "c5116c20ee58e8bb4172bf00ea1bbea10b83fd86bb2b63a04aea177863ac47ef",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "StrategyCreate.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "StrategyCreate",
+        "nonblankLines": 194
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/StrategyCreate.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/StrategyExport.tsx",
+    "sha256": "510d06dbdef939ff694d6448ad3c48006d2ddf8242928fa76cb1d99662b9db63",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "StrategyExport.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "StrategyExport",
+        "nonblankLines": 191
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/StrategyExport.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/StrategyHistory.tsx",
+    "sha256": "4527396cfb3e8e63988b0fc8350c743c0cb5d6b1b88576b027057639ad06cca1",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "StrategyHistory.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "StrategyHistory",
+        "nonblankLines": 195
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/StrategyHistory.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/StrategyStep.tsx",
+    "sha256": "b48e3410fe55a2c059de921a0d525d7e951b042158982028f39282a313906ce8",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "StrategyStep.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "StrategyStep",
+        "nonblankLines": 338
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/StrategyStep.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/StrategyTimeline.tsx",
+    "sha256": "5ba8e950b8c17062b521ab41ff9512f66407d6d94b3e72d708d5bafae0e65213",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "StrategyTimeline.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "TimelineView",
+        "nonblankLines": 230
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/StrategyTimeline.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/StrategyTimelineGrid.tsx",
+    "sha256": "32957bb97da331387a62c744b05064cdd7c5a69228e83930f634464750d45a4a",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "StrategyTimelineGrid.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "TimelineGrid",
+        "nonblankLines": 95
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/StrategyTimelineGrid.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/context/ContextDocument.tsx",
+    "sha256": "675560ea97dc4dfc0a0b63b09977298da61ee58c6b4303f38b85a82cb805da95",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "ContextDocument.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "ContextDocument",
+        "nonblankLines": 158
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/context/ContextDocument.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/context/ContextEvidence.tsx",
+    "sha256": "4e0c3bb86f373d1ec5caaa4feb983f234765208d26a4c69370265c854bbb16c7",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "ContextEvidence.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "ConflictDecision",
+        "nonblankLines": 121
+      },
+      {
+        "name": "ContextEvidence",
+        "nonblankLines": 192
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/context/ContextEvidence.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/modules/strategies/context/ContextEvidence.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/context/ContextUpload.tsx",
+    "sha256": "0cb6b307a1765c16d00fd2dadc7289554d2199756fa0bef6a37f66e64e1f8b73",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "ContextUpload.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "ContextUpload",
+        "nonblankLines": 249
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/context/ContextUpload.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/context/StrategyContext.tsx",
+    "sha256": "69fcfdd5ea141d5241fac4a2705880dfb14a9b861c1d72a5726cac9c9f23d0da",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "StrategyContext.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "StrategyContext",
+        "nonblankLines": 181
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/context/StrategyContext.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/context/use-context-import.ts",
+    "sha256": "23f245a3b5f83237911b7562402a935471023af92f764150cf77e1e8e942ddd1",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "One cancellable context-import lifecycle owns bounded files, presigned upload, resolve/analyze and selected-save progress. Rendering lives in ContextUpload; chunk retries replace identical source results and credentials stay outside S3 transfers.",
+    "functions": [
+      {
+        "name": "useContextImport",
+        "nonblankLines": 195
+      },
+      {
+        "name": "readFiles",
+        "nonblankLines": 89
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/context/use-context-import.ts: function over80 nonblank lines requires review",
+      "apps/web/src/features/modules/strategies/context/use-context-import.ts: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/review/ProposalReview.tsx",
+    "sha256": "acc96f9ec2bf53c7c36cb05105d1226ba5a1d157f872648f504eb81f11423b21",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "ProposalReview.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "ReviewProposal",
+        "nonblankLines": 214
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/review/ProposalReview.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/review/StrategyReview.tsx",
+    "sha256": "2e15f475d58379afbbac1f426a26f8338846f817c8f077d41784d441a81501a2",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "StrategyReview.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "StrategyReview",
+        "nonblankLines": 183
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/review/StrategyReview.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/runs/ApprovalReview.tsx",
+    "sha256": "3177e869053f5d1f304fd79b0dd9792a7e7373f216445510eb273c5eb858431e",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "ApprovalReview.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "ApprovalReview",
+        "nonblankLines": 224
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/runs/ApprovalReview.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/runs/RunActions.tsx",
+    "sha256": "a251b58909bbc0c9bde2dcef7549b5aa56f6dee6de53ec14cbeb1b894f211eff",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "RunActions.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "RunActions",
+        "nonblankLines": 136
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/runs/RunActions.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/runs/RunDetail.tsx",
+    "sha256": "e9ef44957066e8ca12a51283904b406b6b2f2f3d3ea26a2c0b31d9ae8f150355",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "This run-detail projection still delegates artifact/data rendering and fixed operations. Next Links replace internal document navigation to retain the shared session boundary; no run execution or inference is added.",
+    "functions": [
+      {
+        "name": "RunDetail",
+        "nonblankLines": 257
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/runs/RunDetail.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/runs/StrategyRuns.tsx",
+    "sha256": "622c2961ce40a841867ba17595dbe790093ac1556c3987645198c8aa822ec71f",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "StrategyRuns.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "StrategyRuns",
+        "nonblankLines": 194
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/strategies/runs/StrategyRuns.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/strategies/strategies.module.css",
+    "sha256": "af2edfa81bec6b6cefd06cf0c4e2a38537f5c26dfb59eb6289e6c60d01af8230",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#styles",
+    "rationale": "strategies.module.css owns its feature family visual vocabulary and responsive variants. Related selectors stay together; no behavioral or authorization responsibility is present, and no private cross-feature selectors were introduced.",
+    "functions": [],
+    "signals": [
+      "apps/web/src/features/modules/strategies/strategies.module.css: 453 nonblank lines require review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+    "sha256": "b8744e9c2cc4e9de44a38bc946455ae98a79eed9bdfcd4065c395f66b8a17e3c",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "WorkspaceDraft.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "DraftEditor",
+        "nonblankLines": 118
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/WorkspaceLibrary.tsx",
+    "sha256": "d37f60c1f4106a5ff456720a1ba0760bb61ec58c79686e0298e1a6645552302d",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "WorkspaceLibrary.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "DocumentsLibrary",
+        "nonblankLines": 176
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/workspace/WorkspaceLibrary.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
+    "sha256": "a5c4f4e0eb715cc33623bc3890facee1c57f7abec026d966f66039b0da9aba9a",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "One selected workspace view and document editor remain composed here. Route/client replacement clears the selected/created record before rendering, while document persistence stays in the existing editor/adapter.",
+    "functions": [
+      {
+        "name": "WorkspaceScreen",
+        "nonblankLines": 146
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/WorkspaceShares.tsx",
+    "sha256": "60f65516d6b93db77b85697d549ae5ea1a054d25bc9e04aabd3cfc63532c4485",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "WorkspaceShares.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "WorkspaceShares",
+        "nonblankLines": 117
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/workspace/WorkspaceShares.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/hillday/HillDayContext.tsx",
+    "sha256": "b1ab11996bee87a93c47b16f0d5c9a2fa7f88ea18fc8e03ea77f7a6f7910302d",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "HillDayContext.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "ContextEditor",
+        "nonblankLines": 150
+      },
+      {
+        "name": "HillDayContext",
+        "nonblankLines": 96
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/workspace/hillday/HillDayContext.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/modules/workspace/hillday/HillDayContext.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/hillday/HillDayEditor.tsx",
+    "sha256": "d5ba539d9bff87954247f832711c6eba39ea7426b5d7f1788f5be8a98c88585c",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "HillDayEditor.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "DocumentCanvas",
+        "nonblankLines": 81
+      },
+      {
+        "name": "DocumentEditor",
+        "nonblankLines": 221
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/workspace/hillday/HillDayEditor.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/modules/workspace/hillday/HillDayEditor.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/hillday/HillDayExport.tsx",
+    "sha256": "069405a66e7c941082d72ef2b81692d95f608e5daebb05510ea3b9eeb0a92f38",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "HillDayExport.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "HillDayExport",
+        "nonblankLines": 111
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/workspace/hillday/HillDayExport.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/hillday/HillDayGeneration.tsx",
+    "sha256": "6b489ba0361c1daa2947d8e3fdd9fa276c38ad698ebafc2e4674692bf8afb82c",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "HillDayGeneration.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "HillDayGeneration",
+        "nonblankLines": 122
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/workspace/hillday/HillDayGeneration.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/hillday/HillDayMeetings.tsx",
+    "sha256": "a8dd3a4dcabf16930ac4edb0ad77fe45d7e283036c407cd138f8be88a1a852ab",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "HillDayMeetings.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "HillDayMeetings",
+        "nonblankLines": 212
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/workspace/hillday/HillDayMeetings.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/hillday/HillDayResolution.tsx",
+    "sha256": "6c387e538c01ef132bfed60d6b8e8ecbfbd45ba4e096792e3caa3ba37b7d6f31",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "HillDayResolution.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "CorrectionDialog",
+        "nonblankLines": 131
+      },
+      {
+        "name": "HillDayResolution",
+        "nonblankLines": 209
+      },
+      {
+        "name": "callback at line 245",
+        "nonblankLines": 111
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/workspace/hillday/HillDayResolution.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/modules/workspace/hillday/HillDayResolution.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/modules/workspace/hillday/HillDayResolution.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/hillday/HillDayWizard.tsx",
+    "sha256": "ec3de03b6ad456ec127e41562c1574e50ed79a11b9847cc1cb674b897a0224c4",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "HillDayWizard.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "HillDayWizard",
+        "nonblankLines": 208
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/workspace/hillday/HillDayWizard.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/newsletter/NewsletterComments.tsx",
+    "sha256": "974f3de7035687206d999d87d70c53e0b3e6a4bed826fb547b4ffaf5b0b9603f",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "NewsletterComments.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "NewsletterComments",
+        "nonblankLines": 122
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/workspace/newsletter/NewsletterComments.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/newsletter/NewsletterTemplates.tsx",
+    "sha256": "14875aa933d83651b8fa89492fb4f9ceaac6e64e3c0ce934bcb44b14adddb58a",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "NewsletterTemplates.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "SelectTemplate",
+        "nonblankLines": 88
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/workspace/newsletter/NewsletterTemplates.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
+    "sha256": "a63ae101fa5bb4d89daf7b04fd5b0178fff7c809fa6b90f37b2c0bba69e8b7b8",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "NewsletterWorkflow.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "NewsletterWorkflow",
+        "nonblankLines": 309
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/newsletter/use-newsletter.ts",
+    "sha256": "65f323839ea27a05cd39c45a7ce2000c9d2decbaa76c3b4bea9af45b665d815a",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "One newsletter edit/undo/save lifecycle owns the acknowledged draft, serialized save chain and dirty state. Template selection and builder rendering have separate owners; partial failure retains the durable draft identity.",
+    "functions": [
+      {
+        "name": "useNewsletter",
+        "nonblankLines": 139
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/workspace/newsletter/use-newsletter.ts: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/templates/TemplateCard.tsx",
+    "sha256": "fe050554deca8f6f015d6d1ee273d77e95fa73e4eda1a1615aa6aaee9dce79f1",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "TemplateCard.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "TemplateCard",
+        "nonblankLines": 86
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/workspace/templates/TemplateCard.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/templates/TemplateDefaults.tsx",
+    "sha256": "c56f4c52fcd6e5a9a47a72b3b9a9f942d741d65d865e10e07c0cdf6b1d99abd5",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "TemplateDefaults.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "SpecDefaults",
+        "nonblankLines": 218
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/workspace/templates/TemplateDefaults.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/templates/TemplateDetails.tsx",
+    "sha256": "4c6fc0eff2104c93566c21877e4810f1804946677e532de7247ece2efbf7e11b",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "TemplateDetails.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "UseTemplate",
+        "nonblankLines": 125
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/workspace/templates/TemplateDetails.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/templates/TemplateSettings.tsx",
+    "sha256": "e241d08fbfe6431dd5644f344b4f40817128788ea5aeac4985e5e4eb6ddf5940",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "TemplateSettings.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "TemplateSettings",
+        "nonblankLines": 116
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/workspace/templates/TemplateSettings.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/templates/TemplateStudio.tsx",
+    "sha256": "199024cf602e9b793570c5dbac6923fc7550803bcc0ffa3f1712d25ed56877f3",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "TemplateStudio.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "TemplateStudio",
+        "nonblankLines": 287
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/workspace/templates/TemplateStudio.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/templates/TemplateVariables.tsx",
+    "sha256": "de33e3c41f7397a9a622c03ee19ba7015adeb0b3dd134ef96cd54a436ad499e1",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "TemplateVariables.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "TemplateVariables",
+        "nonblankLines": 198
+      },
+      {
+        "name": "callback at line 54",
+        "nonblankLines": 161
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/workspace/templates/TemplateVariables.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/modules/workspace/templates/TemplateVariables.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/templates/TemplateWizard.tsx",
+    "sha256": "66bc9e8a591da30b32d537bef3609a612101eb50714fbf4158388b40623362fb",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#module-presentation",
+    "rationale": "TemplateWizard.tsx owns its named screen/editor and its local loading, error and selection states; shared primitives and the fixed operation boundary own controls, dispatch and authorization.",
+    "functions": [
+      {
+        "name": "TemplateWizard",
+        "nonblankLines": 248
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/modules/workspace/templates/TemplateWizard.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/modules/workspace/workspace.module.css",
+    "sha256": "335f344cd19574f5077f81e585d9bf4fc2dcae6f7718c62088b417676f9f4b6f",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#styles",
+    "rationale": "workspace.module.css owns its feature family visual vocabulary and responsive variants. Related selectors stay together; no behavioral or authorization responsibility is present, and no private cross-feature selectors were introduced.",
+    "functions": [],
+    "signals": [
+      "apps/web/src/features/modules/workspace/workspace.module.css: 782 nonblank lines require review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/BillingSettings.tsx",
+    "sha256": "40a95a3030a93aba6d5872788f504d8edc952047a705505a485f5846a23c91da",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "BillingSettings.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "BillingSettings",
+        "nonblankLines": 273
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/BillingSettings.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/BrandingSettings.tsx",
+    "sha256": "ae0e42a51514f91f4260cc991b88c5a173735fdb239edd3ab0e321aa1aa8e60f",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "BrandingSettings.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "BrandingForm",
+        "nonblankLines": 123
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/BrandingSettings.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/IntegrationSettings.tsx",
+    "sha256": "1655315b613841fd8e207e8f7973d5afc54fd6d3035159fdbab9682a5ddff9bd",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "IntegrationSettings.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "IntegrationSettings",
+        "nonblankLines": 311
+      },
+      {
+        "name": "callback at line 98",
+        "nonblankLines": 166
+      },
+      {
+        "name": "callback at line 115",
+        "nonblankLines": 91
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/IntegrationSettings.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/settings/IntegrationSettings.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/settings/IntegrationSettings.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/InviteMember.tsx",
+    "sha256": "809cf371285c7a0d7db785d2c474188048f9a9a549d815acc48518c6c70bc9cf",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "InviteMember.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "InviteMember",
+        "nonblankLines": 100
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/InviteMember.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/MemorySettings.tsx",
+    "sha256": "24bfd6fcd0b8435104f788182bcaf7b8c4a2d79a27d33e9b5e3fb88ea188c09f",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "MemorySettings.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "MemorySettings",
+        "nonblankLines": 164
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/MemorySettings.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/MeriPreferences.tsx",
+    "sha256": "bd1f1cd4c0e8fe928cb16861c56f283842d6eca45346557b17f5b84dd6672eee",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "MeriPreferences.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "MeriPreferences",
+        "nonblankLines": 105
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/MeriPreferences.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/ProfileSettings.tsx",
+    "sha256": "75fbb59b820464ee583cf3a1469607f08e53cd2c39e5be41a97de32f3c313b5a",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "ProfileSettings.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "ProfileSettings",
+        "nonblankLines": 186
+      },
+      {
+        "name": "CreateProfile",
+        "nonblankLines": 84
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/ProfileSettings.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/settings/ProfileSettings.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/RegisterAccount.tsx",
+    "sha256": "3119d5dfa8f43e8e9cb4a17c7d5ebda80231682d67abb66aea2f1a4178a52e74",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "RegisterAccount.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "RegisterAccount",
+        "nonblankLines": 82
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/RegisterAccount.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/SignatureSettings.tsx",
+    "sha256": "dbb6a95feaafc25f17a8984ba8c66833a3a568bd3fbfea0f4d091a66f9a5d420",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "SignatureSettings.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "SignatureEditor",
+        "nonblankLines": 140
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/SignatureSettings.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/TeamSettings.tsx",
+    "sha256": "c41ddeb11c53ea2648d73e9a7e739e661a7cc6017ecca3acb5ba6df83058f2b6",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "TeamSettings.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "TeamSettings",
+        "nonblankLines": 295
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/TeamSettings.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/UsageSettings.tsx",
+    "sha256": "f9d338ae4203deec9edb352b227664e7401e2bb885db0563cf383f1989c8ebf4",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "One usage report screen retains its existing summary/credential queries. A stable mounted-view clock makes the requested date range deterministic across renders; changing days still changes the query.",
+    "functions": [
+      {
+        "name": "UsageSettings",
+        "nonblankLines": 211
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/UsageSettings.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/analyst/AliasManager.tsx",
+    "sha256": "4c7c446f83c34c7622282076e14b76315dd683a30585817b1c3da5921eff0353",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "AliasManager.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "AliasManager",
+        "nonblankLines": 223
+      },
+      {
+        "name": "AliasEditor",
+        "nonblankLines": 97
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/analyst/AliasManager.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/settings/analyst/AliasManager.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/analyst/AnalystSettings.tsx",
+    "sha256": "43cfb3d6e9b623d73fd22df4a058474e496c7f6d12fdb0eb2baf9e0541af208b",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "AnalystSettings.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "AnalystSettings",
+        "nonblankLines": 82
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/analyst/AnalystSettings.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/analyst/AuditAndQuarantine.tsx",
+    "sha256": "5ad172bab1ae8bf8b7c2aa072f3ec777ff3e012fe89cf5d988a53476e51f6765",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "AuditAndQuarantine.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "AnalystAuditLog",
+        "nonblankLines": 127
+      },
+      {
+        "name": "QuarantineQueue",
+        "nonblankLines": 204
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/analyst/AuditAndQuarantine.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/settings/analyst/AuditAndQuarantine.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/analyst/MergePrograms.tsx",
+    "sha256": "28e0de8917fa2996149a3da90acb92b0d2de6592d55b2bf5f754c4d73a15d5e6",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "MergePrograms.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "MergePrograms",
+        "nonblankLines": 87
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/analyst/MergePrograms.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/analyst/PersonReviewQueues.tsx",
+    "sha256": "df4ff50be973a5394cdc9c461ac8f7adb7e0662e55841ccb03178334e4438b83",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "PersonReviewQueues.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "PersonCandidateQueue",
+        "nonblankLines": 129
+      },
+      {
+        "name": "PersonnelMergeQueue",
+        "nonblankLines": 147
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/analyst/PersonReviewQueues.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/settings/analyst/PersonReviewQueues.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/analyst/ProgramMatchQueue.tsx",
+    "sha256": "9e3dbee6e736ac99da46a5bd1d675d73992681191cb391408622e8b327532ea2",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "ProgramMatchQueue.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "ProgramMatchQueue",
+        "nonblankLines": 191
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/analyst/ProgramMatchQueue.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/analyst/ReconciliationQueue.tsx",
+    "sha256": "d3c297af2ecac838ce3f5f0c829eb724128ee70f9289d2f4f0082fa946fff1d3",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "ReconciliationQueue.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "ReconciliationQueue",
+        "nonblankLines": 243
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/analyst/ReconciliationQueue.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/hq/AiKeysSettings.tsx",
+    "sha256": "c6571916dfe512442559fe5950d11686320a136231a4f05a9635629121de2021",
+    "reviewer": "Codex shared frontend integration review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/integration-20261012/STRUCTURE-REVIEW.md#changed-modules",
+    "rationale": "The usage report and TenantKeyDrawer retain their existing report and credential-edit interfaces. Only the mounted-view report clock changes. Masked credential records, permission checks and lifecycle tests remain intact; no credential operation is executed by integration.",
+    "functions": [
+      {
+        "name": "AiKeysSettings",
+        "nonblankLines": 95
+      },
+      {
+        "name": "TenantKeyDrawer",
+        "nonblankLines": 264
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/hq/AiKeysSettings.tsx: function over80 nonblank lines requires review",
+      "apps/web/src/features/settings/hq/AiKeysSettings.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/hq/BroadcastDetail.tsx",
+    "sha256": "2240381c1a5c8064e0ab378027954cd5694aec291db69b5e261ce4eca1450d0e",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "BroadcastDetail.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "BroadcastDetail",
+        "nonblankLines": 96
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/hq/BroadcastDetail.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/hq/BroadcastSettings.tsx",
+    "sha256": "6d4a1c0cf7a89897b56731e6637673d8e79a289cdb448a26013c1ac3734eda10",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "BroadcastSettings.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "BroadcastSettings",
+        "nonblankLines": 305
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/hq/BroadcastSettings.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/hq/CustomerSettings.tsx",
+    "sha256": "2025ee6873bcae518c33373ec18875cc4da8cbf4c61c15cda9c7ffea4dcce70a",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "CustomerSettings.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "CustomerSettings",
+        "nonblankLines": 198
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/hq/CustomerSettings.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/hq/TenantDialogs.tsx",
+    "sha256": "8a9fd2caba6922ec6e5407f5b151a4ff966bf58f4ef44d4c0c8e1d7194586045",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "TenantDialogs.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "CreateTenant",
+        "nonblankLines": 99
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/hq/TenantDialogs.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/hq/TenantSettings.tsx",
+    "sha256": "1a31fdefb8c02846321bbb7176881d6d43e057eb3580f10146beae5d97cef68d",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "TenantSettings.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "TenantSettings",
+        "nonblankLines": 206
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/hq/TenantSettings.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/mappings/AttachFederalRecord.tsx",
+    "sha256": "090f33a245200a248ab96ad976890bc366799958a99bfa71c704191dbf8ce0e7",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "AttachFederalRecord.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "AttachFederalRecord",
+        "nonblankLines": 175
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/mappings/AttachFederalRecord.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/mappings/ContractorIdentity.tsx",
+    "sha256": "16effe1b203fe161818e982bd8d49b4baa4ac2b6a592ea81153f9e70dc95ff7c",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "ContractorIdentity.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "ContractorIdentity",
+        "nonblankLines": 275
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/mappings/ContractorIdentity.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/mappings/MappingReview.tsx",
+    "sha256": "e7c44e82fa6513f327bac514e2e2fa734d8e4e9af55af62be37108a6b065f09e",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "MappingReview.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "MappingReview",
+        "nonblankLines": 130
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/mappings/MappingReview.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/mappings/MappingSettings.tsx",
+    "sha256": "c8edc347b73247e7a001403cd6cdb48f133ba0cd32e34b2e288e983f4c445dd1",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "MappingSettings.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "MappingSettings",
+        "nonblankLines": 337
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/mappings/MappingSettings.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/mappings/SourceSearch.tsx",
+    "sha256": "c2f5d696d5df048a889b31ae24bfbb7da9c5d18f06c8a21ac0b82ddd5ef1a9c2",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "SourceSearch.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "SourceSearch",
+        "nonblankLines": 109
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/mappings/SourceSearch.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/features/settings/signature/RichSignatureEditor.tsx",
+    "sha256": "de1e07d420ea0c90ca091c77506a4a6d06d039d214da3771eaf18c6149e0e526",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#settings",
+    "rationale": "RichSignatureEditor.tsx owns one Settings page, queue or dialog; action state uses the shared boundary and all role/tenant enforcement stays in the backend. Related fields remain beside their interaction.",
+    "functions": [
+      {
+        "name": "RichSignatureEditor",
+        "nonblankLines": 216
+      }
+    ],
+    "signals": [
+      "apps/web/src/features/settings/signature/RichSignatureEditor.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/shared/capiro/legiwatch-review.test.ts",
+    "sha256": "4ff486c7feb67fc1fe9aa6b53fc3974be0731707f847926497c62a1bc309f343",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#tests",
+    "rationale": "legiwatch-review.test.ts groups independent observable boundary assertions with synthetic fixtures. The long suite callback is test organization, with no added runtime responsibility or omitted assertions.",
+    "functions": [
+      {
+        "name": "callback at line 22",
+        "nonblankLines": 207
+      }
+    ],
+    "signals": [
+      "apps/web/src/shared/capiro/legiwatch-review.test.ts: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/shared/capiro/operations/intelligence-research-contracts.test.ts",
+    "sha256": "24c30e49bbf2697a12b8046364b7d82e6dcb96b4244ee195af740ca33557ef01",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#tests",
+    "rationale": "intelligence-research-contracts.test.ts groups independent observable boundary assertions with synthetic fixtures. The long suite callback is test organization, with no added runtime responsibility or omitted assertions.",
+    "functions": [
+      {
+        "name": "callback at line 11",
+        "nonblankLines": 148
+      }
+    ],
+    "signals": [
+      "apps/web/src/shared/capiro/operations/intelligence-research-contracts.test.ts: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/shared/capiro/operations/legiwatch-contracts.test.ts",
+    "sha256": "03b40b73a68bdd8ab376bce133ed35f8b8311c63fe8e0b4e08ceee08afb06258",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#tests",
+    "rationale": "legiwatch-contracts.test.ts groups independent observable boundary assertions with synthetic fixtures. The long suite callback is test organization, with no added runtime responsibility or omitted assertions.",
+    "functions": [
+      {
+        "name": "callback at line 5",
+        "nonblankLines": 96
+      }
+    ],
+    "signals": [
+      "apps/web/src/shared/capiro/operations/legiwatch-contracts.test.ts: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/shared/capiro/operations/planner-contracts.test.ts",
+    "sha256": "ecc37913adba62639ef06e301d78f0fa845e92f2d6bdc9d5212168204349f4bb",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#tests",
+    "rationale": "planner-contracts.test.ts groups independent observable boundary assertions with synthetic fixtures. The long suite callback is test organization, with no added runtime responsibility or omitted assertions.",
+    "functions": [
+      {
+        "name": "callback at line 5",
+        "nonblankLines": 107
+      }
+    ],
+    "signals": [
+      "apps/web/src/shared/capiro/operations/planner-contracts.test.ts: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/shared/capiro/operations/settings.ts",
+    "sha256": "4b67eafda33f2dc9c245bf9cb53eb93300899c0a6ff8727616333c9f72d3e2b9",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#contracts",
+    "rationale": "settings.ts is a declarative, pinned domain contract catalog. Validation descriptors share one owner and contain no HTTP dispatch, session handling, persistence or UI lifecycle.",
+    "functions": [],
+    "signals": [
+      "apps/web/src/shared/capiro/operations/settings.ts: 534 nonblank lines require review"
+    ]
+  },
+  {
+    "path": "apps/web/src/shared/capiro/operations/strategies-agents.ts",
+    "sha256": "b7810563690397e620f1b83e97441885f738e2ad77f54a2988fa77f1f166b819",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#contracts",
+    "rationale": "strategies-agents.ts is a declarative, pinned domain contract catalog. Validation descriptors share one owner and contain no HTTP dispatch, session handling, persistence or UI lifecycle.",
+    "functions": [],
+    "signals": [
+      "apps/web/src/shared/capiro/operations/strategies-agents.ts: 427 nonblank lines require review"
+    ]
+  },
+  {
+    "path": "apps/web/src/shared/capiro/operations/workspace-hillday.ts",
+    "sha256": "28a8b16a32a2622167b50ce9e2927a4636129a5e52a0c48220ced523dfc047c6",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#contracts",
+    "rationale": "workspace-hillday.ts is a declarative, pinned domain contract catalog. Validation descriptors share one owner and contain no HTTP dispatch, session handling, persistence or UI lifecycle.",
+    "functions": [],
+    "signals": [
+      "apps/web/src/shared/capiro/operations/workspace-hillday.ts: 404 nonblank lines require review"
+    ]
+  },
+  {
+    "path": "apps/web/src/shared/meetings/MeetingArtifacts.tsx",
+    "sha256": "80a36628587f93caa0b572f12c2f8db4364919b1f72c26c0315a7f6c28ded8df",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#shared-meetings",
+    "rationale": "MeetingArtifacts.tsx is the canonical meeting detail/artifact presentation shared by Engagement and Calendar. Transport, authorization and mail/runtime execution remain outside the component.",
+    "functions": [
+      {
+        "name": "useArtifacts",
+        "nonblankLines": 88
+      }
+    ],
+    "signals": [
+      "apps/web/src/shared/meetings/MeetingArtifacts.tsx: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/src/shared/meetings/MeetingDetail.tsx",
+    "sha256": "64e8b027a336710260cfc9a69a4802c86d39aadc33e52437e97f4d27f7d844ae",
+    "reviewer": "Codex implementation review",
+    "reviewedAt": "2026-10-12",
+    "evidence": "docs/modules-settings/STRUCTURE-REVIEW.md#shared-meetings",
+    "rationale": "MeetingDetail.tsx is the canonical meeting detail/artifact presentation shared by Engagement and Calendar. Transport, authorization and mail/runtime execution remain outside the component.",
+    "functions": [
+      {
+        "name": "MeetingDetail",
+        "nonblankLines": 98
+      }
+    ],
+    "signals": [
+      "apps/web/src/shared/meetings/MeetingDetail.tsx: function over80 nonblank lines requires review"
+    ]
+  }
+]

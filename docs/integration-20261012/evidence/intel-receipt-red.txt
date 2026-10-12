@@ -1,0 +1,274 @@
+
+> @capiro/web@0.1.0 test
+> vitest run --run tests/watchlist-integration-receipt.test.ts
+
+
+ RUN  v4.1.11 /workspace/capiro-integration/apps/web
+
+ ❯ tests/watchlist-integration-receipt.test.ts (5 tests | 5 failed) 51ms
+   × refuses Intel wrong targeting at expected version after one write 36ms
+   × refuses Intel altered issue areas after one write 5ms
+   × refuses Intel lost terms after one write 3ms
+   × refuses Intel fabricated topic rejection after one write 3ms
+   × refuses Intel unrelated term rejection after one write 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/watchlist-integration-receipt.test.ts > refuses Intel wrong targeting at expected version after one write
+AssertionError: promise resolved "{ …(5) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "clientId": "10000000-0000-4000-8000-000000000001",
++   "issueAreas": [
++     "Defense",
++   ],
++   "jurisdictions": [
++     "US",
++   ],
++   "topics": [
++     {
++       "issueArea": "Defense",
++       "label": "Sensors",
++       "position": "oppose",
++       "priority": "high",
++       "terms": [
++         {
++           "termType": "synonym",
++           "value": "Radar",
++         },
++         {
++           "termType": "entity",
++           "value": "Agency",
++         },
++         {
++           "termType": "risk",
++           "value": "Prohibition",
++         },
++       ],
++     },
++   ],
++   "version": 8,
+  }
+
+ ❯ tests/watchlist-integration-receipt.test.ts:14:99
+     12|   const { view, draft } = watchlistFixture();
+     13|   const { api, calls } = watchlistApi(request => request.method === "P…
+     14|   await expect(writeWatchlist(api, view, draft, () => {}, new AbortCon…
+       |                                                                                                   ^
+     15|   expect(calls.filter(call => call.method === "PUT")).toHaveLength(1);
+     16| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/watchlist-integration-receipt.test.ts > refuses Intel altered issue areas after one write
+AssertionError: promise resolved "{ …(5) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "clientId": "10000000-0000-4000-8000-000000000001",
++   "issueAreas": [
++     "Health",
++   ],
++   "jurisdictions": [
++     "VA",
++   ],
++   "topics": [
++     {
++       "issueArea": "Defense",
++       "label": "Sensors",
++       "position": "oppose",
++       "priority": "high",
++       "terms": [
++         {
++           "termType": "synonym",
++           "value": "Radar",
++         },
++         {
++           "termType": "entity",
++           "value": "Agency",
++         },
++         {
++           "termType": "risk",
++           "value": "Prohibition",
++         },
++       ],
++     },
++   ],
++   "version": 8,
+  }
+
+ ❯ tests/watchlist-integration-receipt.test.ts:14:99
+     12|   const { view, draft } = watchlistFixture();
+     13|   const { api, calls } = watchlistApi(request => request.method === "P…
+     14|   await expect(writeWatchlist(api, view, draft, () => {}, new AbortCon…
+       |                                                                                                   ^
+     15|   expect(calls.filter(call => call.method === "PUT")).toHaveLength(1);
+     16| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/watchlist-integration-receipt.test.ts > refuses Intel lost terms after one write
+AssertionError: promise resolved "{ …(5) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "clientId": "10000000-0000-4000-8000-000000000001",
++   "issueAreas": [
++     "Defense",
++   ],
++   "jurisdictions": [
++     "VA",
++   ],
++   "topics": [
++     {
++       "issueArea": "Defense",
++       "label": "Sensors",
++       "position": "oppose",
++       "priority": "high",
++       "terms": [],
++     },
++   ],
++   "version": 8,
+  }
+
+ ❯ tests/watchlist-integration-receipt.test.ts:14:99
+     12|   const { view, draft } = watchlistFixture();
+     13|   const { api, calls } = watchlistApi(request => request.method === "P…
+     14|   await expect(writeWatchlist(api, view, draft, () => {}, new AbortCon…
+       |                                                                                                   ^
+     15|   expect(calls.filter(call => call.method === "PUT")).toHaveLength(1);
+     16| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/watchlist-integration-receipt.test.ts > refuses Intel fabricated topic rejection after one write
+AssertionError: promise resolved "{ …(6) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "clientId": "10000000-0000-4000-8000-000000000001",
++   "issueAreas": [
++     "Defense",
++   ],
++   "jurisdictions": [
++     "VA",
++   ],
++   "rejected": {
++     "terms": [],
++     "topics": [
++       {
++         "label": "Sensors",
++         "reason": "A tag needs a name.",
++       },
++     ],
++   },
++   "topics": [],
++   "version": 8,
+  }
+
+ ❯ tests/watchlist-integration-receipt.test.ts:14:99
+     12|   const { view, draft } = watchlistFixture();
+     13|   const { api, calls } = watchlistApi(request => request.method === "P…
+     14|   await expect(writeWatchlist(api, view, draft, () => {}, new AbortCon…
+       |                                                                                                   ^
+     15|   expect(calls.filter(call => call.method === "PUT")).toHaveLength(1);
+     16| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/watchlist-integration-receipt.test.ts > refuses Intel unrelated term rejection after one write
+AssertionError: promise resolved "{ …(6) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "clientId": "10000000-0000-4000-8000-000000000001",
++   "issueAreas": [
++     "Defense",
++   ],
++   "jurisdictions": [
++     "VA",
++   ],
++   "rejected": {
++     "terms": [
++       {
++         "reason": "Term too short",
++         "topicLabel": "Other",
++         "value": "xx",
++       },
++     ],
++     "topics": [],
++   },
++   "topics": [
++     {
++       "issueArea": "Defense",
++       "label": "Sensors",
++       "position": "oppose",
++       "priority": "high",
++       "terms": [
++         {
++           "termType": "synonym",
++           "value": "Radar",
++         },
++         {
++           "termType": "entity",
++           "value": "Agency",
++         },
++         {
++           "termType": "risk",
++           "value": "Prohibition",
++         },
++       ],
++     },
++   ],
++   "version": 8,
+  }
+
+ ❯ tests/watchlist-integration-receipt.test.ts:14:99
+     12|   const { view, draft } = watchlistFixture();
+     13|   const { api, calls } = watchlistApi(request => request.method === "P…
+     14|   await expect(writeWatchlist(api, view, draft, () => {}, new AbortCon…
+       |                                                                                                   ^
+     15|   expect(calls.filter(call => call.method === "PUT")).toHaveLength(1);
+     16| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed (5)
+   Start at  01:50:35
+   Duration  394ms (transform 109ms, setup 0ms, import 215ms, tests 51ms, environment 0ms)
+
+npm error Lifecycle script `test` failed with error:
+npm error code 1
+npm error path /workspace/capiro-integration/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-integration/apps/web
+npm error command failed
+npm error command sh -c vitest run --run tests/watchlist-integration-receipt.test.ts
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

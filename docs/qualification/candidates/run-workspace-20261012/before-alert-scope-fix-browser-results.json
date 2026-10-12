@@ -1,0 +1,195 @@
+{
+  "origin": "http://127.0.0.1:34876",
+  "previewOnly": true,
+  "groups": [],
+  "pageErrors": [],
+  "externalRequests": [],
+  "requests": [
+    {
+      "path": "/meri/fixture/run-activity",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/wordmark.png",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/mode-meri.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/mode-portfolio.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/18932pv-ebku5.css",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/3c8111r58lhhk.css",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/mode-modules.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/quick-log.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/calendar.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/search.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/updates.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/profile.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/plus.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/10vdv64yk0odn.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/1oizlhl9fdqt_.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/3yblqtx37r6a_.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/03no82x0zivgj.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/turbopack-2c3mg3r-05n1w.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/30g0jo299pr8e.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/1hapxxfk6y3-n.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/122ty20geyjtv.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/0-re41fkrty2f.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/01_slawtlo3d-.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/0knge03tyejx7.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/2nv20vw7-5-jy.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/15tab1gkjfx-x.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/30g8cqk-kopt_.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/2jqhz6703xcdo.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/2vby4mm2vg09b.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/1xeqfj3tybhu4.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/109bq5gj3m3_h.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/0u0_dl0v9_1iu.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/2vy7vc7ts1p6k.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/145tcfy9mfb5c.js",
+      "method": "GET"
+    },
+    {
+      "path": "/_next/static/chunks/3yqp2lutyhz3l.js",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/conversations.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/files.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/runs.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/approvals.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/memory.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/routines.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/data-access.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/chevron.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/send.svg",
+      "method": "GET"
+    },
+    {
+      "path": "/design/home/meri-wordmark.png",
+      "method": "GET"
+    }
+  ],
+  "screenshots": [],
+  "failure": "locator.innerText: Error: strict mode violation: getByRole('alert') resolved to 2 elements:\n    1) <p role=\"alert\" class=\"JPjJNq_error\">The assistant service is temporarily unavailable.</p> aka getByText('The assistant service is')\n    2) <div role=\"alert\" aria-live=\"assertive\" id=\"__next-route-announcer__\"></div> aka locator('[id=\"__next-route-announcer__\"]')\n\nCall log:\n  - waiting for getByRole('alert')\n\n    at /workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/docs/qualification/candidates/run-workspace-20261012/browser-check.mjs:25:74"
+}

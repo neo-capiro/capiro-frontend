@@ -1,0 +1,239 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: capability-presentation-visual.spec.ts >> Figma capability Profile, Documents and create surfaces at desktop-light
+- Location: tests/browser/capability-presentation-visual.spec.ts:42:3
+
+# Error details
+
+```
+Test timeout of 30000ms exceeded.
+```
+
+# Page snapshot
+
+```yaml
+- generic:
+  - generic:
+    - link:
+      - /url: "#main"
+      - text: Skip to content
+    - banner:
+      - link:
+        - /url: /
+        - img
+      - navigation:
+        - link:
+          - /url: /meri
+        - link:
+          - /url: /
+        - link:
+          - /url: /modules
+      - navigation:
+        - link:
+          - /url: /portfolio/10000000-0000-4000-8000-000000000001?log=1
+        - link:
+          - /url: /calendar
+        - link:
+          - /url: /portfolio?search=1
+        - button [disabled]
+        - generic:
+          - button: T
+    - generic:
+      - complementary:
+        - paragraph: Portfolio
+        - navigation:
+          - link:
+            - /url: /portfolio
+            - generic: Overview
+          - link:
+            - /url: /portfolio?type=CLIENT
+            - generic: Clients
+          - link:
+            - /url: /portfolio/prospects
+            - generic: Prospects
+        - separator
+        - paragraph: Test Aerospace
+        - navigation:
+          - link:
+            - /url: /portfolio/10000000-0000-4000-8000-000000000001
+            - generic: Overview
+          - link:
+            - /url: /portfolio/10000000-0000-4000-8000-000000000001/objectives
+            - generic: Objectives
+          - link:
+            - /url: /portfolio/10000000-0000-4000-8000-000000000001/calendar
+            - generic: Calendar
+          - link:
+            - /url: /portfolio/10000000-0000-4000-8000-000000000001/relationships
+            - generic: Relationships
+          - link:
+            - /url: /portfolio/10000000-0000-4000-8000-000000000001/work
+            - generic: Work
+          - link:
+            - /url: /portfolio/10000000-0000-4000-8000-000000000001/capabilities
+            - generic: Capabilities
+          - link:
+            - /url: /portfolio/10000000-0000-4000-8000-000000000001/bills
+            - generic: Bill Tracker
+          - link:
+            - /url: /portfolio/10000000-0000-4000-8000-000000000001/opportunities
+            - generic: Opportunities
+          - link:
+            - /url: /portfolio/10000000-0000-4000-8000-000000000001/files
+            - generic: Files
+        - generic:
+          - link:
+            - /url: /settings
+            - text: Settings
+      - main:
+        - generic:
+          - generic:
+            - navigation:
+              - link:
+                - /url: /portfolio
+              - link:
+                - /url: /portfolio
+                - text: Portfolio
+              - generic: /
+              - link:
+                - /url: /portfolio/10000000-0000-4000-8000-000000000001
+                - text: Test Aerospace
+              - generic: /
+              - button: Capabilities
+            - generic:
+              - button:
+                - generic: Quick add
+              - button:
+                - generic: Meri actions
+              - button:
+                - img
+          - region:
+            - generic: TA
+            - generic:
+              - strong: Test Aerospace
+              - paragraph: Aerospace
+            - generic: active client
+        - generic:
+          - generic:
+            - generic:
+              - heading [level=1]: Capabilities
+              - generic:
+                - button: Add capability
+                - button: Registrations & codes
+            - generic:
+              - generic:
+                - paragraph: Capability areas
+                - generic: 1 areas · 0 fielded
+              - generic:
+                - button:
+                  - generic: ▦
+                  - strong: Counter-UAS interceptors
+                  - paragraph: Synthetic interceptor profile for visual and keyboard checks.
+                  - generic:
+                    - generic: Prototype
+                    - generic: 0604201A, 0605603A
+            - generic:
+              - generic:
+                - generic:
+                  - paragraph: Where capabilities create fit
+                  - heading [level=3]: 1 fit matches
+                - button: Refresh
+              - generic: Computed 10/11/2026, 12:00:00 PM
+              - article:
+                - generic:
+                  - strong: Synthetic fit program
+                  - generic: Fit 90/100
+                - paragraph: Explicit synthetic capability reference
+                - link:
+                  - /url: http://127.0.0.1:5191/existing/program-elements/0604134A
+                  - text: Open target ↗
+            - region:
+              - generic:
+                - generic:
+                  - paragraph: Past performance
+                  - heading [level=2]: Saved submissions
+                  - paragraph: Saved capability submissions and their recorded outcomes.
+                - button: Refresh history
+              - generic:
+                - paragraph: 0 saved submissions shown.
+                - paragraph: No saved submissions in this history feed.
+              - paragraph: Removing a saved submission keeps its capability and documents.
+            - paragraph:
+              - text: "Past advocacy:"
+              - link:
+                - /url: /portfolio/10000000-0000-4000-8000-000000000001/objectives
+                - text: Advocacy history ↗
+  - dialog "New capability" [ref=e2]:
+    - banner [ref=e3]:
+      - heading "New capability" [level=2] [ref=e4]
+      - button "Close" [ref=e5] [cursor=pointer]:
+        - img [ref=e6]
+    - paragraph [ref=e9]: New capability
+    - generic [ref=e10]:
+      - group [ref=e11]:
+        - paragraph [ref=e12]: Name it and save. PE numbers, match keywords, and documents open next, on the saved record.
+        - generic [ref=e13]:
+          - text: Name
+          - textbox "Name" [ref=e14]:
+            - /placeholder: Specific capability name
+        - generic [ref=e15]:
+          - generic [ref=e16]:
+            - text: Type
+            - textbox "Type" [ref=e17]: product
+          - generic [ref=e18]:
+            - text: Sector
+            - textbox "Sector" [ref=e19]
+        - paragraph [ref=e20]: Drives downstream agency and policy matching.
+        - generic [ref=e21]:
+          - generic [ref=e22]: Tags
+          - textbox "Tags" [ref=e24]:
+            - /placeholder: Pick or add tags
+        - group "Technology Readiness Level" [ref=e25]:
+          - generic [ref=e26]:
+            - generic [ref=e27]: Technology Readiness Level
+            - generic [ref=e29]: Not set, optional
+          - generic [ref=e30]:
+            - button "TRL 1" [ref=e31] [cursor=pointer]: "1"
+            - button "TRL 2" [ref=e32] [cursor=pointer]: "2"
+            - button "TRL 3" [ref=e33] [cursor=pointer]: "3"
+            - button "TRL 4" [ref=e34] [cursor=pointer]: "4"
+            - button "TRL 5" [ref=e35] [cursor=pointer]: "5"
+            - button "TRL 6" [ref=e36] [cursor=pointer]: "6"
+            - button "TRL 7" [ref=e37] [cursor=pointer]: "7"
+            - button "TRL 8" [ref=e38] [cursor=pointer]: "8"
+            - button "TRL 9" [ref=e39] [cursor=pointer]: "9"
+        - generic [ref=e40]:
+          - generic [ref=e41]: Description
+          - textbox "Description" [ref=e42]:
+            - /placeholder: Describe this capability…
+        - group [ref=e43]:
+          - generic "Additional details" [active] [ref=e44] [cursor=pointer]
+          - generic [ref=e45]:
+            - generic [ref=e46]:
+              - text: Manufacturing Readiness Level
+              - combobox "Manufacturing Readiness Level" [ref=e47]:
+                - option "Not set" [selected]
+                - option "1"
+                - option "2"
+                - option "3"
+                - option "4"
+                - option "5"
+                - option "6"
+                - option "7"
+                - option "8"
+                - option "9"
+                - option "10"
+            - generic [ref=e48]:
+              - generic [ref=e49]: Notes
+              - textbox "Notes" [ref=e50]:
+                - /placeholder: Internal notes…
+      - contentinfo [ref=e51]:
+        - button "Cancel" [ref=e52] [cursor=pointer]
+        - button "Add capability" [ref=e53] [cursor=pointer]
+```

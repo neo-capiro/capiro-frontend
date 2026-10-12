@@ -1,0 +1,227 @@
+{
+  "applicationSource": "e1bcf60030007edaab610b069c6fb885fc5265dc",
+  "sourceTree": "1e8ca91eb1c22a62c845f7fcfd0c5356cb3c39e9",
+  "result": "FAILED_COMBINED_QUALIFICATION",
+  "sourceChangedDuringRun": false,
+  "portfolioBrowser": {
+    "passed": 880,
+    "failed": 2,
+    "skipped": 0,
+    "flaky": 0,
+    "startTime": "2026-10-12T04:08:43.639Z",
+    "durationMs": 2140977.671
+  },
+  "modulesBrowser": {
+    "passed": 62,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0
+  },
+  "passes": {
+    "repositoryTests": 58,
+    "transportTests": 21,
+    "portfolioUnits": 1011,
+    "modulesContractUnits": 94,
+    "uiProvenanceSSR": 15,
+    "lintErrors": 0,
+    "lintWarnings": 76,
+    "architectureBoundaryErrors": 0,
+    "architectureBlockingErrors": 0
+  },
+  "otherPassed": [
+    "clean install",
+    "public package hashes",
+    "workspace types",
+    "formatting",
+    "unified Next production build",
+    "actual standalone-server routes/navigation/style smoke",
+    "actual-server Meri fixtures at 1440/390 widths; eight states, citations, disabled controls, keyboard, zero API calls/page errors/overflow"
+  ],
+  "browserFailures": [
+    {
+      "test": "standard",
+      "location": "shared-dialog-layout.spec.ts:200",
+      "assertion": "Outside click at (4,4) on reopened desktop dialog leaves one dialog instead of zero. Geometry, focus, Escape and Close passed.",
+      "status": "Open; traces preserved; next candidate must diagnose without dropping original assertions."
+    },
+    {
+      "test": "compact contact drawer",
+      "location": "shared-dialog-layout.spec.ts:200",
+      "assertion": "Outside click at (4,4) on reopened desktop dialog leaves one dialog instead of zero. Geometry, focus, Escape and Close passed.",
+      "status": "Open; traces preserved; next candidate must diagnose without dropping original assertions."
+    }
+  ],
+  "additionalFailedRegression": "Production Meri prerender serializes shared publishableKey as undefined; runtime environment initialization can diverge by entry route. See ../runtime-config-red/.",
+  "blocked": [
+    "Local image recipe build on prior pin: official Alpine package-index HTTPS CONNECT403 through configured proxy; no bypass."
+  ],
+  "unrun": [
+    "current-pin container image/build/runtime smoke/scan",
+    "AWS build/push/deploy",
+    "live Clerk/tenant/role/client matrices",
+    "native backend/provider/database acceptance",
+    "paid model/billing actions",
+    "all 337 Portfolio native acceptance rows"
+  ],
+  "independentReview": "Parent reports narrow e1bcf60 review PASS, plus archive byte verification. This does not override full browser failures or new runtime initialization finding.",
+  "artifactHashMeaning": "sha256 and bytes identify committed artifact bytes; capture fields preserve pre-normalization console bytes.",
+  "artifacts": [
+    {
+      "path": "actual-server.txt",
+      "sha256": "21c889355b32eac597d1f948834e97d06bf87314d2c71726359ad80d1c2bf7d9",
+      "bytes": 3877
+    },
+    {
+      "path": "checkpoint.json",
+      "sha256": "93b9d8c1506139c786ff08f2ece700b9615d4453a0f83719ae4176c0df500f29",
+      "bytes": 2184
+    },
+    {
+      "path": "clean-install.txt",
+      "sha256": "472709c34dd6302df557c435dce2e6e58e0bd121efa12f51833119a54724114c",
+      "bytes": 164
+    },
+    {
+      "path": "combined-check.txt",
+      "sha256": "30350a78be18d820b9dcbb7501d7991c512c991d83c97d6d3f011207c958d9ae",
+      "bytes": 731841
+    },
+    {
+      "path": "execution-checkpoint.json",
+      "sha256": "2f265d85adc1f2d99ba688ab7e14cdfb6d12163165ccae88523a446e7477df9f",
+      "bytes": 2215
+    },
+    {
+      "path": "execution.json",
+      "sha256": "8b036f72f1d1fdbfd41025553da056ad9d530b35d3eaf76ee4e7f98d451615cf",
+      "bytes": 2577
+    },
+    {
+      "path": "failures/shared-dialog-layout-compa-cd76a-verlay-and-focus-on-desktop/dialog-layout.png",
+      "sha256": "977903615455d2212b018d2df08a0e80105b4e01efed5909b5f6cd265fd5ff16",
+      "bytes": 112711
+    },
+    {
+      "path": "failures/shared-dialog-layout-compa-cd76a-verlay-and-focus-on-desktop/error-context.md",
+      "sha256": "ef9bd570d4d4c3427a884f69e5bbfc659dc56411c2cc0bd2e7ae1dd6a3001235",
+      "bytes": 10874
+    },
+    {
+      "path": "failures/shared-dialog-layout-compa-cd76a-verlay-and-focus-on-desktop/test-failed-1.png",
+      "sha256": "db9f503764f31660756e978837dad8559a02493e0481d7cc8e1d99eb12abb001",
+      "bytes": 111651
+    },
+    {
+      "path": "failures/shared-dialog-layout-compa-cd76a-verlay-and-focus-on-desktop/trace.zip",
+      "sha256": "5bd2e3b19d9c1d6a35e403f5ed0d618102a39254af8ae82b8ac2ebff810205bc",
+      "bytes": 691111
+    },
+    {
+      "path": "failures/shared-dialog-layout-stand-afafd-verlay-and-focus-on-desktop/dialog-layout.png",
+      "sha256": "7c7f3838a773fca190d5c20c0bdbc771db7836256c734d4ea1f7203546e07b75",
+      "bytes": 128618
+    },
+    {
+      "path": "failures/shared-dialog-layout-stand-afafd-verlay-and-focus-on-desktop/error-context.md",
+      "sha256": "2a913244bac240bd7df6dc7a5339b8a2d6ffea564dc1efa876d9200224c8e30e",
+      "bytes": 11975
+    },
+    {
+      "path": "failures/shared-dialog-layout-stand-afafd-verlay-and-focus-on-desktop/test-failed-1.png",
+      "sha256": "424fe3414cc9ca26ffecc418f414afeb81d16d001244772998a5c46bface6014",
+      "bytes": 127440
+    },
+    {
+      "path": "failures/shared-dialog-layout-stand-afafd-verlay-and-focus-on-desktop/trace.zip",
+      "sha256": "2fe19b455d3ee915a1bf2deccc00d100f74dfa89364401218517e47ba5307dca",
+      "bytes": 704617
+    },
+    {
+      "path": "integration-meri-desktop.png",
+      "sha256": "05fdf49c6fd96ae70df774085428f61ce75572e9311314319492dc68ad2f1489",
+      "bytes": 86155
+    },
+    {
+      "path": "integration-modules-mobile-collapsed.png",
+      "sha256": "7c5c8bddf6066c034396914d61731a6a252a0bb6ecf597a29e0269d7c59d77c7",
+      "bytes": 58291
+    },
+    {
+      "path": "integration-modules-mobile.png",
+      "sha256": "0d9b21fd138bc14690af19814a7e89c0e04221882dafe44d0ffcd1cb30c5377c",
+      "bytes": 53878
+    },
+    {
+      "path": "meri-actual-server.json",
+      "sha256": "2a583b95b3b2da080ac5e7f69dab33e01a65fe7fc7dcb82341b4b67bdef9f59a",
+      "bytes": 592
+    },
+    {
+      "path": "meri-actual-server.txt",
+      "sha256": "10affc61b3d89f42580c21e57f9bdda9627f01103c8ef7792128a51e91ff60bc",
+      "bytes": 147
+    },
+    {
+      "path": "meri-cited-answer-1440.png",
+      "sha256": "9f536c53fbe232f2bf0b8b33ff7407f6b479c39bbf2eb4810512bd009656057e",
+      "bytes": 152191
+    },
+    {
+      "path": "meri-cited-answer-390.png",
+      "sha256": "6dd1c651325227eef36038c19c64e70d5cb4311330e6a1e113356f8d8832a5de",
+      "bytes": 109408
+    },
+    {
+      "path": "meri-run-activity-1440.png",
+      "sha256": "1e38fe9c11217f2704fba27a323fa9d0d5959ab4629df84ee17a9c9f77cba035",
+      "bytes": 125944
+    },
+    {
+      "path": "meri-run-activity-390.png",
+      "sha256": "325eec76c79a75c8c2f177ba3027de89b860c7850e78c6fbf55cb96649e7a227",
+      "bytes": 94222
+    },
+    {
+      "path": "meri-server-audit.mjs",
+      "sha256": "7a9f70dd4c68031c108a4b5620fe5a9b567a8f6360e78f2dc0c392889f5db3cb",
+      "bytes": 3891
+    },
+    {
+      "path": "modules-browser.json",
+      "sha256": "0d7ca525c73427d1344f013034acdc336e53fb681be6b3d3988ff0e11aa8f1c5",
+      "bytes": 69276
+    },
+    {
+      "path": "modules-browser.txt",
+      "sha256": "79d3a8bf9416cb4b16b80a88c5268db721f955c644edfc71ebb7264b0913816f",
+      "bytes": 9395
+    },
+    {
+      "path": "portfolio-browser.json",
+      "sha256": "c0fad3c62da7271e119b654c5e39c8c2bdb310a06c68d323bdd7be191f3505f3",
+      "bytes": 980480
+    },
+    {
+      "path": "portfolio-browser.txt",
+      "sha256": "b15888807447cc0b7cfc83c05eb553d8c2a23455ac74cc4e2ad720bb26080bbd",
+      "bytes": 134906
+    },
+    {
+      "path": "production-build.txt",
+      "sha256": "1390f0e2b69177a7b33b226f36a42935841f2763e111f76fd033dbf144a239cd",
+      "bytes": 2297,
+      "captureSha256": "f3a25bef369f3f3777444e305b6b11a7bd274364e8baf9e5e73fa5415854bfc0",
+      "captureBytes": 2300
+    },
+    {
+      "path": "ui-provenance-ssr.txt",
+      "sha256": "ee63f6fe368ab8b072e472187ede3d7b43f7038ad86622b7d6da74b4ec286a59",
+      "bytes": 3330
+    },
+    {
+      "path": "ui-ssr-receipt.json",
+      "sha256": "6161aa9b923b831afc737357abe1c6095d2413887f7d2c309e252f6676e8e836",
+      "bytes": 984849
+    }
+  ]
+}

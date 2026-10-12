@@ -1,0 +1,248 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> capiro-frontend@0.1.0 check
+> npm run check:packages && npm run typecheck && npm test && npm run architecture && npm run test:transport
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> capiro-frontend@0.1.0 check:packages
+> node scripts/public-packages.mjs
+
+{
+  "schema": "capiro-public-package-inputs/1",
+  "records": [
+    {
+      "file": "capiro-meri-contracts-0.1.0.tgz",
+      "bytes": 48823,
+      "sha256": "2f15ade9458cbffe960b7cc36c6fb77cb54cc2a0eca4bc7c0f918b77cfacd4ee",
+      "sourceCommit": "0dc9ce423947fc7814d7f8ad8de2f633c187c6d8"
+    },
+    {
+      "file": "capiro-meri-ui-stream-0.1.0.tgz",
+      "bytes": 2280,
+      "sha256": "7ce24acd465dca4c5e90c1c98dba383318aab024dbce5170fa1f1daf3bce83ab",
+      "sourceCommit": "12289a434be6f589bbff9c741367b8cfb77f2616"
+    }
+  ]
+}
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> capiro-frontend@0.1.0 typecheck
+> npm run typecheck --workspaces --if-present
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @capiro/portfolio-web@0.1.0 typecheck
+> tsc --noEmit
+
+
+> @capiro/web@0.1.0 typecheck
+> tsc --noEmit
+
+
+> @capiro/meri-client@0.1.0 typecheck
+> tsc -p tsconfig.json --noEmit
+
+
+> @capiro/qualification-elements@0.0.0 typecheck
+> tsc -p tsconfig.json
+
+
+> @capiro/ui@0.0.0 typecheck
+> tsc -p tsconfig.json
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> capiro-frontend@0.1.0 test
+> node --test scripts/*.test.mjs apps/web/test/*.test.mjs
+
+✔ all nineteen exact design assets are local, nonempty, hash-bound and retain intrinsic SVG dimensions (5.345467ms)
+✔ the new Meri wordmark is separately provenanced, local and uses its exact alpha-mask bytes (0.564702ms)
+✔ Routines adopts the separately exported exact SVG and preserves its intrinsic dimensions (0.566294ms)
+✔ no application source retains temporary Figma asset URLs or screenshot implementation imagery (0.378027ms)
+✔ all22 cited-answer Figma assets retain their exact local bytes and intrinsic geometry (12.122835ms)
+✔ cited-answer source and styling use local assets without screenshot implementation imagery (0.441861ms)
+✔ all eight canonical run states display explicit labels without inferred completion (21.614042ms)
+✔ fixture events all validate with the public browser contract; unknown scenarios fail (8.581496ms)
+✔ selected run and attempt isolate colliding message and tool request IDs (1.561161ms)
+✔ message fragments concatenate in accepted order; sparse references stay exact (4.619078ms)
+✔ unmatched completion never invents a tool name, arguments or business success (5.686681ms)
+✔ canonical safe error rendering never exposes raw text or prototype-looking codes (0.758498ms)
+✔ canonical projection owns replay and sequence repair before presentation (1.487131ms)
+✔ fixture canonical admission rejects cross-view and immutable-event conflicts (0.608777ms)
+✔ presentation does not mutate accepted events or include unsupported metadata (3.090875ms)
+✔ six local suggestions produce distinct editable draft text without executable authority (2.28013ms)
+✔ discovers real route composition and accepts directed local imports (12.103231ms)
+✔ run workspace admits only its three approved additional public seams (6.194518ms)
+✔ rejects cycles, feature-private crossing, private package and external repository paths (0.978983ms)
+✔ rejects computed loading and undeclared server endpoints (1.500041ms)
+✔ size and function thresholds require explicit review instead of silent exceptions (12.602086ms)
+✔ browser client resolves emitted JS imports and refuses server or Node contract entries (1.020925ms)
+✔ resolved relative imports cannot cross application and package ownership in either direction (1.989782ms)
+✔ same-owner relative edges and explicitly approved public package imports stay valid (0.640524ms)
+✔ package binding detects byte corruption independently of filename/version (2.175586ms)
+✔ untrusted artifact paths and malformed bindings fail before file reads (0.277078ms)
+✔ file, commit and hash reject coercible nonstrings before any artifact read (0.488941ms)
+✔ all record shapes are validated before reads, including a malformed later binding (0.417626ms)
+✔ validated primitive snapshots survive reader mutation of a later input record (1.01136ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 461.14722
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> capiro-frontend@0.1.0 architecture
+> node scripts/architecture.mjs
+
+{
+  "errors": [],
+  "signals": [],
+  "routes": [
+    "apps/web/src/app/layout.tsx",
+    "apps/web/src/app/meri/fixture/cited-answer/page.tsx",
+    "apps/web/src/app/meri/fixture/run-activity/page.tsx",
+    "apps/web/src/app/meri/page.tsx",
+    "apps/web/src/app/page.tsx"
+  ],
+  "graph": {
+    "apps/web/src/app/layout.tsx": [
+      "apps/web/src/app/globals.css"
+    ],
+    "apps/web/src/app/meri/fixture/cited-answer/page.tsx": [
+      "apps/web/src/shared/shell/ProductShell.tsx",
+      "apps/web/src/features/meri/MeriCitedAnswer.tsx"
+    ],
+    "apps/web/src/app/meri/fixture/run-activity/page.tsx": [
+      "apps/web/src/shared/shell/ProductShell.tsx",
+      "apps/web/src/features/meri/fixtures/RunActivityFixture.tsx"
+    ],
+    "apps/web/src/app/meri/page.tsx": [
+      "apps/web/src/shared/shell/ProductShell.tsx",
+      "apps/web/src/features/meri/MeriHome.tsx"
+    ],
+    "apps/web/src/app/page.tsx": [
+      "apps/web/src/features/meri/MeriFixtureEntry.tsx"
+    ],
+    "apps/web/src/features/meri/MeriCitedAnswer.tsx": [
+      "apps/web/src/shared/shell/DesignIcon.tsx",
+      "apps/web/src/features/meri/MeriComposer.tsx",
+      "apps/web/src/features/meri/cited-answer.module.css"
+    ],
+    "apps/web/src/features/meri/MeriComposer.tsx": [
+      "apps/web/src/shared/shell/DesignIcon.tsx",
+      "apps/web/src/features/meri/home.module.css"
+    ],
+    "apps/web/src/features/meri/MeriFixtureEntry.tsx": [
+      "apps/web/src/features/meri/fixture.module.css"
+    ],
+    "apps/web/src/features/meri/MeriHome.tsx": [
+      "apps/web/src/shared/shell/DesignIcon.tsx",
+      "apps/web/src/features/meri/MeriComposer.tsx",
+      "apps/web/src/features/meri/MeriSuggestions.tsx",
+      "apps/web/src/features/meri/suggestions.mjs",
+      "apps/web/src/features/meri/home.module.css"
+    ],
+    "apps/web/src/features/meri/MeriSuggestions.tsx": [
+      "apps/web/src/shared/shell/DesignIcon.tsx",
+      "apps/web/src/features/meri/suggestions.mjs",
+      "apps/web/src/features/meri/home.module.css"
+    ],
+    "apps/web/src/features/meri/fixtures/RunActivityFixture.tsx": [
+      "apps/web/src/features/meri/workspace/MeriRunWorkspace.tsx",
+      "apps/web/src/features/meri/workspace/workspace-view.ts",
+      "apps/web/src/features/meri/fixtures/run-activity-events.ts",
+      "apps/web/src/features/meri/workspace/workspace.module.css"
+    ],
+    "apps/web/src/features/meri/fixtures/run-activity-events.ts": [],
+    "apps/web/src/features/meri/suggestions.d.mts": [],
+    "apps/web/src/features/meri/suggestions.mjs": [],
+    "apps/web/src/features/meri/workspace/ConversationTranscript.tsx": [
+      "apps/web/src/features/meri/workspace/workspace-view.ts",
+      "apps/web/src/features/meri/workspace/workspace.module.css"
+    ],
+    "apps/web/src/features/meri/workspace/MeriRunWorkspace.tsx": [
+      "apps/web/src/features/meri/MeriComposer.tsx",
+      "apps/web/src/features/meri/workspace/ConversationTranscript.tsx",
+      "apps/web/src/features/meri/workspace/RunActivityPanel.tsx",
+      "apps/web/src/features/meri/workspace/workspace-view.ts",
+      "apps/web/src/features/meri/workspace/workspace.module.css"
+    ],
+    "apps/web/src/features/meri/workspace/RunActivityPanel.tsx": [
+      "apps/web/src/features/meri/workspace/workspace-view.ts",
+      "apps/web/src/features/meri/workspace/workspace-view.ts",
+      "apps/web/src/features/meri/workspace/workspace.module.css"
+    ],
+    "apps/web/src/features/meri/workspace/workspace-view.ts": [],
+    "apps/web/src/shared/shell/DesignIcon.tsx": [],
+    "apps/web/src/shared/shell/Header.tsx": [
+      "apps/web/src/shared/shell/DesignIcon.tsx",
+      "apps/web/src/shared/shell/shell.module.css"
+    ],
+    "apps/web/src/shared/shell/ProductShell.tsx": [
+      "apps/web/src/shared/shell/Header.tsx",
+      "apps/web/src/shared/shell/Sidebar.tsx",
+      "apps/web/src/shared/shell/shell.module.css"
+    ],
+    "apps/web/src/shared/shell/Sidebar.tsx": [
+      "apps/web/src/shared/shell/DesignIcon.tsx",
+      "apps/web/src/shared/shell/shell.module.css"
+    ],
+    "packages/meri-client/src/client-facade.tsx": [
+      "packages/meri-client/src/guarded-transport.ts",
+      "packages/meri-client/src/guarded-transport.ts",
+      "packages/meri-client/src/projection.ts"
+    ],
+    "packages/meri-client/src/guarded-transport.ts": [
+      "packages/meri-client/src/types.ts",
+      "packages/meri-client/src/projection.ts",
+      "packages/meri-client/src/projection.ts"
+    ],
+    "packages/meri-client/src/projection.ts": [
+      "packages/meri-client/src/types.ts"
+    ],
+    "packages/meri-client/src/types.ts": []
+  }
+}
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> capiro-frontend@0.1.0 test:transport
+> npm test --workspace @capiro/qualification-transport
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @capiro/qualification-transport@0.0.0 test
+> node --test qualification.test.mjs
+
+✔ all ten frozen variants compose through the real factory + external Chat and project exactly once in order (45.418152ms)
+✔ split SSE / UTF-8 byte boundaries do not corrupt frames (real factory path) (28.911616ms)
+✔ duplicate replay of the same eventId and payload is idempotent (3.846119ms)
+✔ immutable eventId conflict aborts the subscription and preserves the last contiguous cursor (5.51027ms)
+✔ duplicate sequence bound to a different eventId aborts the subscription (4.213739ms)
+✔ a gap pauses the cursor and is repaired by the missing event (real factory path) (4.626968ms)
+✔ multiple runs and attempts share one conversation-wide sequence (real factory path) (4.741999ms)
+✔ malformed custom data is rejected on the guard boundary before onData/admission (1.972747ms)
+✔ the dataPartSchemas runtime/type key mismatch is reproduced at this exact pin (3.138465ms)
+✔ unexpected native reasoning/tool/text frames are rejected (real factory path) (3.523112ms)
+✔ run.error is rendered by approved code or generic text, never the raw message (0.284079ms)
+✔ HTTP 204 reconnect via chat.resumeStream uses the authorized conversation URL and cursor header (0.455642ms)
+✔ incremental reconnect via chat.resumeStream requests the last accepted sequence and appends (4.924798ms)
+✔ stop/dispose on a held-open pending stream admit nothing, issue no durable cancel, and leave run status unchanged (6.781394ms)
+✔ projection snapshots inputs: mutating raw/nested input cannot rewrite accepted history (0.621075ms)
+✔ projection snapshots committed inputs and nested payloads; factory path is immune to later mutation (3.608017ms)
+✔ a completed stream outcome does not mark the run complete without an authoritative run.status (0.193325ms)
+✔ prototype-looking run error codes use only the generic safe string (0.139706ms)
+✔ mutating factory view input cannot change send or reconnect conversation identity (15.393746ms)
+✔ missing endpoint fails before subscription allocation or fetch (0.343497ms)
+✔ public browser validator guards the actual composed SDK stream and rejects nested extras (25.565946ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 664.147363

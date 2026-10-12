@@ -1,0 +1,246 @@
+{
+  "recordedAt": "2026-10-12T01:21:39.799532+00:00",
+  "lane": "alert-channels",
+  "parent": "ac66c0610323a4f20bcbe7a36d4a7ed772c11c8c",
+  "commit": "760dcc6c1179312c7f4b762e64cf3af1aad60c3e",
+  "tree": "46417a01484727747b0a2d81b3b4f278285cb709",
+  "manifest": "capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/frozen-manifest.json",
+  "manifestSha256": "c1162e5fc5f9f8fa759017480530e941d0ed32f0a63b37a72cf1a75f82fc67fc",
+  "files": [
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/AlertPreferencesDialog.tsx",
+      "beforeSha256": "0eacbc09c0db1fb15708eebe3e35b8e64e24d8f1d89ffa1e5b7b12ea8611fb6f",
+      "sha256": "5317212fcb6bf6e430c124f2c331cd273331ccb3bc6f9c2a4f0e437f62706fc7"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/AlertCriteria.tsx",
+      "beforeSha256": "ca078e9c0a7f977eef5d47bb7707fd823969caaf66c8a038c1bcf347f300fb7c",
+      "sha256": "d376907b31e85039f3aabd0966151f2a9155c6e3f9784fde8e528746558d806c"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/AlertDelivery.tsx",
+      "beforeSha256": "c5528ef81451752679e1e053a9c697645a26dfd4c6de31a88cd57c6348e82b98",
+      "sha256": "7208217c0dd47397370f4e03a7b0d15951afe685594d57bb2168294db61c1aac"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/PhoneVerification.tsx",
+      "beforeSha256": null,
+      "sha256": "1960100b8ca5187a8b5c1b60658f725906a2541e409e6da19b7c09cf99284285"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/PreferenceForm.tsx",
+      "beforeSha256": "f37e1c58f549c40c1cbb7f0d37b7e946f01b3f5d6a13698259670e4e21480cf1",
+      "sha256": "05aa4f94c7d5ac6256e2955cdee723a403d615e0f5da8bfeb5fd9f5f3b21422f"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/TestAlert.tsx",
+      "beforeSha256": null,
+      "sha256": "0c052d644d666ba5c36656d2555d9caf3708cca58e08000e3505eb3116475247"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/access.ts",
+      "beforeSha256": "bc393d35a0c10a5ce06e02954836b158aab43f77644c7c1bf6315fdfe51999f5",
+      "sha256": "5a3e0a60264c9834bda729115ae91e50b032fce8636f8faf76cf1d802bb210db"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/channel-attempts.ts",
+      "beforeSha256": null,
+      "sha256": "c27fb153489f7688594fcabb816229000858b51dd90f71df4795aa169fab15d5"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/channel-contracts.ts",
+      "beforeSha256": null,
+      "sha256": "9c18b9593b7c750acac457e589f565705a13bd611e4fcc20856eef65e205ee54"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/channel-scope.ts",
+      "beforeSha256": null,
+      "sha256": "b7d1d0bab453a4f6d0d773beb733349f167c1f84a2bd03c6a9921e6240cfee01"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/contracts.ts",
+      "beforeSha256": "0e97ea9e63fb09bf0b3f36e91e44c46a8e4c03f269b8183911d4e32a88a3f112",
+      "sha256": "2f63aab75af1bfd9cf0af64ab32eed457ee86d90b99012de543d9244b538ea5e"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/core-contracts.ts",
+      "beforeSha256": null,
+      "sha256": "65f41c1286c617e1aab7787cadc2462cd78152604ae4ed73cb62ecba91556523"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/personal-access.ts",
+      "beforeSha256": null,
+      "sha256": "5862016df23480b36608847bb920bf70285c17479eea93dd19cc64f6dcfcba80"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/personal-contracts.ts",
+      "beforeSha256": null,
+      "sha256": "f3dd07593cf8afa30f383552176576d46ab381078e9ce4d462da3e5c0333ed11"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/personal-queries.ts",
+      "beforeSha256": null,
+      "sha256": "c63636e1dbeb3eb9a2973021f636c1b6c902a9fd3969fb6099aaf35854ca00a6"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/preference-write-lifetime.ts",
+      "beforeSha256": null,
+      "sha256": "49fb715b8d35f0578e76173373767d66b3ae42aa1d3a39ae95ab15cfe4101cd1"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/preferences.module.css",
+      "beforeSha256": "2d3533cefb089bd87918fa28344c9ff17560970636ad221a1403f421acb10daf",
+      "sha256": "927ff827a10e910180fa2c150d7b8baef0496adc77b2cab8c1b0715f53d713fa"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/usePhoneVerification.ts",
+      "beforeSha256": null,
+      "sha256": "3c41848c87dfeb20f43b861cc28e2ccc4bdf7c7565da91c8c2fcaaa2ab018d7f"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/usePreferenceEditor.ts",
+      "beforeSha256": "3dc377331038b916508fc5d0172822d97d124d1a27922b1b80b773e55e8f5fa2",
+      "sha256": "0b053e7f92b17dd6c99d6d7a44847b7500d2cc1f2c3ba4067aef79146e6d4bd0"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/useTestAlert.ts",
+      "beforeSha256": null,
+      "sha256": "2ee978654d1252bbc92e216dfa9428c50de14b5dbbc501d6bdbd4cc93a623c42"
+    },
+    {
+      "file": "apps/web/tests/alert-channel-contracts.test.ts",
+      "beforeSha256": null,
+      "sha256": "5014c41645797ed7db4868584d919a859383a14d058b7ee8abd723c7af020fa0"
+    },
+    {
+      "file": "apps/web/tests/alert-channel-fixtures.ts",
+      "beforeSha256": null,
+      "sha256": "6be04eab46c041f808c5001374698e8bce332497270a373b629c1bf43257f396"
+    },
+    {
+      "file": "apps/web/tests/browser/alert-channel-helpers.ts",
+      "beforeSha256": null,
+      "sha256": "8478fd356e6e3bfb1a1416c3b4b98d9d7843b48bb18bfb9182eedab9c01348aa"
+    },
+    {
+      "file": "apps/web/tests/browser/alert-channel-lifetime.spec.ts",
+      "beforeSha256": null,
+      "sha256": "74ffc165084d806d34096fd481444f156fe88b5ee7b2d678fea654fdf429c1d5"
+    },
+    {
+      "file": "apps/web/tests/browser/alert-channel-visual.spec.ts",
+      "beforeSha256": null,
+      "sha256": "7d17e20193f780721713a01f879facb573bc818c266867a4ad7db6ca5c5048b2"
+    },
+    {
+      "file": "apps/web/tests/browser/alert-channels-harness.tsx",
+      "beforeSha256": null,
+      "sha256": "998af075389dfac337011831e33183117775ceb14759442eb386e53c6b0fe9f8"
+    },
+    {
+      "file": "apps/web/tests/browser/alert-channels.html",
+      "beforeSha256": null,
+      "sha256": "192debc3df87c07e87253d3856213db2148e75c18c738a8c73d5e72afbaf2f1b"
+    },
+    {
+      "file": "apps/web/tests/browser/alert-channels.spec.ts",
+      "beforeSha256": null,
+      "sha256": "638c3b0826765ea3fb6379f7c5bc501d0ed5a2c1ac10dac88c4d3aba0681a185"
+    },
+    {
+      "file": "apps/web/tests/browser/tracker-boundary-harness.tsx",
+      "beforeSha256": "9ce2686d296f358007e6da4e4eb8c53593c957a74299fb2ee8b6690822594d51",
+      "sha256": "eec684e4a5fbd3ea5738d99dfc9c68709d28818ec4c4bdab746cdc57e5d416d3"
+    },
+    {
+      "file": "apps/web/tests/browser/tracker-alert-preferences.spec.ts",
+      "beforeSha256": "00e04aced3ebee35fed7ff6ea33fb376e3ce8162d8acbee707117da57b47da73",
+      "sha256": "07478a8796d5a72f3c59a83b1f2d3605e4fc4bfa05a0e98b4a65381297b4b3b7"
+    },
+    {
+      "file": "docs/portfolio-31/P6-ALERT-CHANNELS-20261012.md",
+      "beforeSha256": null,
+      "sha256": "0b75b1d452bbf6ef43d8199ed255b5a7abe73824f670c34f829f7c8bf04a3b9d"
+    },
+    {
+      "file": "docs/portfolio-31/ARCHITECTURE-REVIEW-ALERT-CHANNELS-20261012.md",
+      "beforeSha256": null,
+      "sha256": "c680adcf28b8f0a110ea173b6733e78d5bac871a0d5028e3450ea849fcc37316"
+    }
+  ],
+  "cohesionReviews": [
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/AlertDelivery.tsx",
+      "kind": "function",
+      "symbol": "AlertDelivery",
+      "fingerprint": "6e27b4d61f6c1c9ed415fce7c3234ce05ae466620bd92cb5cd32f7392edefeac",
+      "reason": "Owns the paired email/SMS preference fields only. Core field length/optional-string input and Intel strict email input stay presentation props; native serialization, authority, verification actions, and effects remain in separate owners.",
+      "reviewedOn": "2026-10-12",
+      "reviewedBy": "portfolio_calendar_relationships"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/PhoneVerification.tsx",
+      "kind": "function",
+      "symbol": "PhoneVerification",
+      "fingerprint": "837805fab28d6fb757d965bfbcc63cefc7adfc9ee6371364cb69dcffd25624d9",
+      "reason": "Owns OTP-control presentation for one phone workflow: request acknowledgement, code entry, explicit confirmation/opt-in, refusal, and unknown-result review. It dispatches hook commands but contains no API, cache, recipient, or receipt-validation implementation.",
+      "reviewedOn": "2026-10-12",
+      "reviewedBy": "portfolio_calendar_relationships"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/PreferenceForm.tsx",
+      "kind": "function",
+      "symbol": "PreferenceForm",
+      "fingerprint": "fe2cbf38239119259ac05eaf059435b109c3309d40f20f182a4c428aaeda5ff7",
+      "reason": "Owns composition and interaction gating of one personal preference form: criteria/delivery/quiet fields, separate phone/test sections, footer, and explicit discard/reload disclosure. Native adapters and save/action lifetimes are delegated; its only local UI state is the reload disclosure.",
+      "reviewedOn": "2026-10-12",
+      "reviewedBy": "portfolio_calendar_relationships"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/TestAlert.tsx",
+      "kind": "function",
+      "symbol": "TestAlert",
+      "fingerprint": "caec69bf1c256df893fc13775878c5333a1c8a719968c9d1eb43c8226150611a",
+      "reason": "Owns the saved-channel test controls and native-result wording. It presents selected supported channels, availability, uncertainty review, and per-channel outcomes; it does not choose native routes, execute provider requests, or infer delivery.",
+      "reviewedOn": "2026-10-12",
+      "reviewedBy": "portfolio_calendar_relationships"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/channel-scope.ts",
+      "kind": "function",
+      "symbol": "useChannelScope",
+      "fingerprint": "8e0abef9cd178a81d4ec7370632bdf5a323d5dd6e1ea5c472f395b64f0af7135",
+      "reason": "Owns only the current alert-action view lifetime: capture of existing actor/client/preferences/draft inputs, synchronous interruption subscription, post-await assertion, and disposal. It deliberately owns no request body, provider dispatch, response interpretation, retry, or presentation state.",
+      "reviewedOn": "2026-10-12",
+      "reviewedBy": "portfolio_calendar_relationships"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/usePhoneVerification.ts",
+      "kind": "function",
+      "symbol": "usePhoneVerification",
+      "fingerprint": "a1f8d8de7e033d105c997b64f920cad4fe92f476d020a15a82efecdaffe24d6b",
+      "reason": "Owns one native OTP workflow, whose start and confirm operations share the captured saved phone and challenge state. Exact start/confirm receipts, the required saved-preference readback after confirmation, and in-browser unknown-attempt recovery form one responsibility; test alerts and preference replacement writes remain separate hooks.",
+      "reviewedOn": "2026-10-12",
+      "reviewedBy": "portfolio_calendar_relationships"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/usePreferenceEditor.ts",
+      "kind": "function",
+      "symbol": "usePreferenceEditor",
+      "fingerprint": "037fe858ea4f4dae8cdbae8a5eeb90967af5e021e0344b51da8ffc50707cfa76",
+      "reason": "Owns the full personal preference draft and replacement-save/reload lifetime. Owner-specific serialization/receipt rules and synchronous captured-input subscription are separate modules; retaining baseline/draft/status and replacing them only after a current accepted receipt is cohesive form state.",
+      "reviewedOn": "2026-10-12",
+      "reviewedBy": "portfolio_calendar_relationships"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/useTestAlert.ts",
+      "kind": "function",
+      "symbol": "useTestAlert",
+      "fingerprint": "62bb6b8f0c16c335ab36650289beffc19fa779fbb38e5800071fd06e77876e93",
+      "reason": "Owns a single deliberate test of current saved channels and its local outcome/uncertainty state. It retains no scheduling, OTP, or preference-saving behavior; domain receipt validation, common current-input lifetime, and result presentation are separately owned.",
+      "reviewedOn": "2026-10-12",
+      "reviewedBy": "portfolio_calendar_relationships"
+    }
+  ],
+  "qualification": "Verbatim preservation and preimage/hash/diff checks only; lane receipts remain bound to their candidate files. No final combined acceptance."
+}

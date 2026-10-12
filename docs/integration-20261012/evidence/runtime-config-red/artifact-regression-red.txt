@@ -1,0 +1,41 @@
+{
+  "source": "e1bcf60030007edaab610b069c6fb885fc5265dc",
+  "scope": "Production artifact regression only; no credentials, provider request or live auth acceptance.",
+  "staticSharedAuthRoutes": [
+    "/meri",
+    "/meri/fixture/cited-answer",
+    "/meri/fixture/run-activity",
+    "/settings"
+  ],
+  "serializedMeriBoundary": "publishableKey\\\":\\\"$undefined\\\",\\\"children\\\":[\\\"$\\\",\\\"$Ld\\\""
+}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Shared auth entry routes must resolve deployment configuration per request.
++ actual - expected
+
++ [
++   '/meri',
++   '/meri/fixture/cited-answer',
++   '/meri/fixture/run-activity',
++   '/settings'
++ ]
+- []
+
+    at file:///tmp/capiro-runtime-config-baseline.mjs:10:8 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [
+    '/meri',
+    '/meri/fixture/cited-answer',
+    '/meri/fixture/run-activity',
+    '/settings'
+  ],
+  expected: [],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

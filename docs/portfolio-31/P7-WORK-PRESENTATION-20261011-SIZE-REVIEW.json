@@ -1,0 +1,12 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/work/WorkPage.tsx",
+    "kind": "function",
+    "symbol": "WorkPage",
+    "nonblank": 192,
+    "fingerprint": "f9d036784b3d8e71e6cce18cb6c62ee47b2593038d77847ae0310c5777c27417",
+    "reason": "WorkPage composes one current-client, read-only Strategy view: successful summaries select the exact detail observers, completeness selects aggregate counts, and the same verified details feed the cards, upcoming work, risks and canonical links. Native validation/projection remain in contracts.ts and query keys/cancellation in queries.ts. WorkStrategyState owns the error/unavailable presentation and derives initial-error retry feedback from current observer status, without adding stored error, cache, editor or mutation state. WorkspaceDocuments separately owns the three-read legacy document association gate and now delegates its responsive table rendering to WorkspaceDocumentTable. The remaining WorkPage body is the composition of those coupled projections; another extraction solely for its line count would not separate an unrelated responsibility.",
+    "reviewedBy": "portfolio_objectives",
+    "reviewedOn": "2026-10-11"
+  }
+]

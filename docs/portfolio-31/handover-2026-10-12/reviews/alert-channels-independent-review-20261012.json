@@ -1,0 +1,202 @@
+{
+  "reviewedOn": "2026-10-12",
+  "reviewer": "portfolio_prospects_files",
+  "result": "No new blocking source finding in the bounded independent review.",
+  "scope": {
+    "productInputsRead": 21,
+    "candidateInputsHashVerified": 31,
+    "frozenDispositionsHashVerified": 32,
+    "nativeBlobsHashVerified": 18,
+    "exactAstFindingsVerified": 8,
+    "codeOrFigmaWrites": false,
+    "testsBuildBrowserProviderAwsExecuted": false
+  },
+  "candidate": {
+    "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/candidate-03-manifest.json",
+    "sha256": "1036a688d3b19796d6c5e9b7951762ee487c7d31f4472db10076e7ed4eecf2ac"
+  },
+  "frozen": {
+    "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/frozen-manifest.json",
+    "sha256": "c1162e5fc5f9f8fa759017480530e941d0ed32f0a63b37a72cf1a75f82fc67fc"
+  },
+  "nativeManifest": {
+    "path": "/workspace/scratch/158b6018a5d3/capiro-frontend-portfolio/outputs/evidence/portfolio-shared-integration-20261011/tracker-alert-contracts-20261012/native-manifest.json",
+    "sha256": "5f2fd7ca0cd0afbf6f15aa7fc75485da9700472f644fbe3ebf13b7b452b80917"
+  },
+  "nativeCommit": "4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace",
+  "assessedResponsibilities": [
+    "Explicit configured Core/Intel dispatch with no fallback; Core database actor and Intel actual Clerk subject stay distinct.",
+    "Owner/client-keyed dialog and canonical current client read prevent defaults from authorizing client actions. Failed current reads hide retained editable fields and disable effects.",
+    "Exact complete native preference projections, owner receipts where actually present, successful-data-update revisions and synchronous interruption handling fence late writes/cache success.",
+    "Phone verification binds current saved normalized phone, exact native start/confirm shapes, then a current saved-preference read with verified/enabled/same-phone checks before success.",
+    "Channel attempts serialize pending actions and retain browser unknown state across close. Explicit review does not dispatch; abort after dispatch is not native cancellation.",
+    "Selected email/SMS tests use saved destinations, require an exact nonduplicated requested result set, and distinguish provider acceptance from delivery. No in_app notification is invented."
+  ],
+  "reviews": [
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/AlertDelivery.tsx",
+      "kind": "function",
+      "symbol": "AlertDelivery",
+      "fingerprint": "6e27b4d61f6c1c9ed415fce7c3234ce05ae466620bd92cb5cd32f7392edefeac",
+      "reason": "Owns the paired email/SMS preference fields only. Core field length/optional-string input and Intel strict email input stay presentation props; native serialization, authority, verification actions, and effects remain in separate owners.",
+      "reviewedOn": "2026-10-12",
+      "reviewedBy": "portfolio_calendar_relationships",
+      "independentReason": "Paired email/SMS saved-draft field presentation. The owner-specific input limit and optional email validation are small explicit presentation parameters; serialization, native normalization and channel effects remain delegated.",
+      "independentlyReviewedBy": "portfolio_prospects_files",
+      "independentlyReviewedOn": "2026-10-12"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/PhoneVerification.tsx",
+      "kind": "function",
+      "symbol": "PhoneVerification",
+      "fingerprint": "837805fab28d6fb757d965bfbcc63cefc7adfc9ee6371364cb69dcffd25624d9",
+      "reason": "Owns OTP-control presentation for one phone workflow: request acknowledgement, code entry, explicit confirmation/opt-in, refusal, and unknown-result review. It dispatches hook commands but contains no API, cache, recipient, or receipt-validation implementation.",
+      "reviewedOn": "2026-10-12",
+      "reviewedBy": "portfolio_calendar_relationships",
+      "independentReason": "One OTP interaction presentation, including start acknowledgement, exact code entry, explicit opt-in wording, pending/unknown review and saved confirmation. It does not own transport, cache or receipt validation.",
+      "independentlyReviewedBy": "portfolio_prospects_files",
+      "independentlyReviewedOn": "2026-10-12"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/PreferenceForm.tsx",
+      "kind": "function",
+      "symbol": "PreferenceForm",
+      "fingerprint": "fe2cbf38239119259ac05eaf059435b109c3309d40f20f182a4c428aaeda5ff7",
+      "reason": "Owns composition and interaction gating of one personal preference form: criteria/delivery/quiet fields, separate phone/test sections, footer, and explicit discard/reload disclosure. Native adapters and save/action lifetimes are delegated; its only local UI state is the reload disclosure.",
+      "reviewedOn": "2026-10-12",
+      "reviewedBy": "portfolio_calendar_relationships",
+      "independentReason": "One form compositor owns interaction gating and the discard/reload disclosure. Criteria, delivery, verification, test outcomes and write lifetimes are delegated to focused owners; no independent workflow or API body is embedded.",
+      "independentlyReviewedBy": "portfolio_prospects_files",
+      "independentlyReviewedOn": "2026-10-12"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/TestAlert.tsx",
+      "kind": "function",
+      "symbol": "TestAlert",
+      "fingerprint": "caec69bf1c256df893fc13775878c5333a1c8a719968c9d1eb43c8226150611a",
+      "reason": "Owns the saved-channel test controls and native-result wording. It presents selected supported channels, availability, uncertainty review, and per-channel outcomes; it does not choose native routes, execute provider requests, or infer delivery.",
+      "reviewedOn": "2026-10-12",
+      "reviewedBy": "portfolio_calendar_relationships",
+      "independentReason": "One selected-channel test panel owns accessible choices and exact outcome/uncertainty wording. It neither selects recipients from drafts nor dispatches API requests or infers delivery.",
+      "independentlyReviewedBy": "portfolio_prospects_files",
+      "independentlyReviewedOn": "2026-10-12"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/channel-scope.ts",
+      "kind": "function",
+      "symbol": "useChannelScope",
+      "fingerprint": "8e0abef9cd178a81d4ec7370632bdf5a323d5dd6e1ea5c472f395b64f0af7135",
+      "reason": "Owns only the current alert-action view lifetime: capture of existing actor/client/preferences/draft inputs, synchronous interruption subscription, post-await assertion, and disposal. It deliberately owns no request body, provider dispatch, response interpretation, retry, or presentation state.",
+      "reviewedOn": "2026-10-12",
+      "reviewedBy": "portfolio_calendar_relationships",
+      "independentReason": "One current-view operation boundary captures existing actor/client/preference revision and draft state, synchronously latches source interruption, and asserts/disposes that operation after awaits. It has no provider/body/receipt logic.",
+      "independentlyReviewedBy": "portfolio_prospects_files",
+      "independentlyReviewedOn": "2026-10-12"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/usePhoneVerification.ts",
+      "kind": "function",
+      "symbol": "usePhoneVerification",
+      "fingerprint": "a1f8d8de7e033d105c997b64f920cad4fe92f476d020a15a82efecdaffe24d6b",
+      "reason": "Owns one native OTP workflow, whose start and confirm operations share the captured saved phone and challenge state. Exact start/confirm receipts, the required saved-preference readback after confirmation, and in-browser unknown-attempt recovery form one responsibility; test alerts and preference replacement writes remain separate hooks.",
+      "reviewedOn": "2026-10-12",
+      "reviewedBy": "portfolio_calendar_relationships",
+      "independentReason": "Start and confirm are the two stages of a single saved-phone challenge. Exact receipts, normalized phone binding, fresh saved-preference readback and uncertainty retention are cohesive; scheduling, preference replacement and test sending stay elsewhere.",
+      "independentlyReviewedBy": "portfolio_prospects_files",
+      "independentlyReviewedOn": "2026-10-12"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/usePreferenceEditor.ts",
+      "kind": "function",
+      "symbol": "usePreferenceEditor",
+      "fingerprint": "037fe858ea4f4dae8cdbae8a5eeb90967af5e021e0344b51da8ffc50707cfa76",
+      "reason": "Owns the full personal preference draft and replacement-save/reload lifetime. Owner-specific serialization/receipt rules and synchronous captured-input subscription are separate modules; retaining baseline/draft/status and replacing them only after a current accepted receipt is cohesive form state.",
+      "reviewedOn": "2026-10-12",
+      "reviewedBy": "portfolio_calendar_relationships",
+      "independentReason": "One complete personal-preference draft owns baseline/draft/status and deliberate replacement-save/reload. Native adapters and synchronous source watching are delegated. Current accepted receipts alone replace the draft; late context effects are fenced.",
+      "independentlyReviewedBy": "portfolio_prospects_files",
+      "independentlyReviewedOn": "2026-10-12"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/useTestAlert.ts",
+      "kind": "function",
+      "symbol": "useTestAlert",
+      "fingerprint": "62bb6b8f0c16c335ab36650289beffc19fa779fbb38e5800071fd06e77876e93",
+      "reason": "Owns a single deliberate test of current saved channels and its local outcome/uncertainty state. It retains no scheduling, OTP, or preference-saving behavior; domain receipt validation, common current-input lifetime, and result presentation are separately owned.",
+      "reviewedOn": "2026-10-12",
+      "reviewedBy": "portfolio_calendar_relationships",
+      "independentReason": "One deliberate test of current saved destinations owns selected channels and its local result/unknown state. Shared current-view guards, receipt schemas and rendering are delegated; it has no OTP or preference-saving responsibility.",
+      "independentlyReviewedBy": "portfolio_prospects_files",
+      "independentlyReviewedOn": "2026-10-12"
+    }
+  ],
+  "retainedRawReports": [
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/baseline-browser-results/browser-results.json",
+      "sha256": "4f15111d1e6cd8857ce76c7b745efc91e359d10a14edb3c4ba25055c43f1cb14",
+      "stats": {
+        "startTime": "2026-10-12T00:34:47.435Z",
+        "duration": 48606.267,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 6,
+        "flaky": 0
+      },
+      "topLevelErrors": 0
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/fixed-02-browser-results/browser-results.json",
+      "sha256": "e9ee96524c39b31678c344126ae86f4dfcb5bc2de10e4ab65a7bf6663a99a8a0",
+      "stats": {
+        "startTime": "2026-10-12T00:40:56.515Z",
+        "duration": 228342.00699999998,
+        "expected": 72,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "topLevelErrors": 0
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/fixed-03-affected-browser-results/browser-results.json",
+      "sha256": "c74f47d8eecfdbe3fe93b6a521feb5a056994a3582a8cdd0fabdcde210392bc0",
+      "stats": {
+        "startTime": "2026-10-12T00:46:18.846Z",
+        "duration": 33222.598000000005,
+        "expected": 11,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "topLevelErrors": 0
+    }
+  ],
+  "historyInterpretation": "Six preserved baseline failures; candidate02 72/74, followed by the exact fixture-only affected 11/11. Do not sum overlaps or claim one all-pass 74-case final run.",
+  "candidate03Delta": "Only the two synthetic channel route matcher prefixes were qualified from **/core/intelligence and **/intelligence to full **/api/backend/<owner> paths. No product or semantic assertion change.",
+  "viewedImages": [
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/fixed-02-browser-results/alert-channel-visual-deskt-ae329-d-remain-keyboard-reachable/alert-channels-desktop-light.png",
+      "sha256": "9a4dbf08519155f42c18b8478a2c3ddf0f3806ea8641f9dc8f64e1ce61a35a4f"
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/fixed-02-browser-results/alert-channel-visual-phone-bae83-d-remain-keyboard-reachable/alert-channels-phone-dark.png",
+      "sha256": "a02adc06af6d9f383b96e6e795adbf272d44892d191f4dc7c626d5bb7e6b0b40"
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/figma-desktop-context.png",
+      "sha256": "30856f614c1a20b62ab6b5d751a1fa93ae70facbd69319cee9e279ba185dbb24"
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/capiro-portfolio-alert-channels/outputs/evidence/alert-channels-20261012/figma-phone-context.png",
+      "sha256": "a1bfa4154e2a305cee2b95d95a4b26e3a14d2be73a0931894ba52a8e70b4ad02"
+    }
+  ],
+  "visualAssessment": "Retained desktop-light and phone-dark browser forms are readable and fit their reported widths, with wrapped controls and visible focus. Composition was compared to saved Figma desktop/phone contexts at 1028:188273 and 1028:188442. These contexts precede the documented opt-in-copy/wrapper correction; no fresh final Figma render was claimed.",
+  "limits": [
+    "Core native PUT trusts submitted smsPhoneVerified and Core OTP lookup lacks client/purpose binding. Safe frontend projection does not establish server security or consent enforcement.",
+    "Intel owner flag, authenticated tenant/role/client enforcement and provider behavior require their native qualification; no live calls were made.",
+    "Native preference writes are versionless. Local source revisions are not cross-device CAS, and browser unknown-attempt records are not durable service operations.",
+    "P2 final Configure caller and the combined root source/build/production/browser gates remain integration work.",
+    "No audit row was closed and no signed-in acceptance or actual delivery was claimed."
+  ]
+}

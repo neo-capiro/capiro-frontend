@@ -1,0 +1,62 @@
+{
+  "base": "85e96b968a3e984407886b2e06536b20810eccef",
+  "baseTrackedBlobs": 912,
+  "unchangedBaseBlobs": 905,
+  "changedBaseBlobs": [
+    {
+      "path": "apps/web/src/features/meri/MeriComposer.tsx",
+      "baseGitBlob": "66b8099a73abdfac5a7f032e7c1a4f172d70dab4",
+      "currentGitBlob": "970885161c66b7621ecf3078fa2c3e86af6b897c"
+    },
+    {
+      "path": "apps/web/src/features/meri/MeriFixtureEntry.tsx",
+      "baseGitBlob": "c600ad6c90bcca7d2927dfe9a7b53e9d3b48589a",
+      "currentGitBlob": "d777ead9ca501e92abf7edbb93061d3be0cb5480"
+    },
+    {
+      "path": "apps/web/src/features/meri/fixture.module.css",
+      "baseGitBlob": "7ecc83ea21ba897b47610e12c73438b9d704df2c",
+      "currentGitBlob": "3bb4def075165df851ec978d5547f9df7ae2069b"
+    },
+    {
+      "path": "apps/web/src/shared/shell/DesignIcon.tsx",
+      "baseGitBlob": "053dc1cd533b3dcb7da26c04732c948f77a8738d",
+      "currentGitBlob": "d7e7cc39c6b49cccb3cea1ca2c840165b82b43f2"
+    },
+    {
+      "path": "apps/web/src/shared/shell/Header.tsx",
+      "baseGitBlob": "164a4637a78009f211084619d786435888e81403",
+      "currentGitBlob": "8407458f185531ecd3e827aabfdd9a293747fb80"
+    },
+    {
+      "path": "apps/web/src/shared/shell/ProductShell.tsx",
+      "baseGitBlob": "e87dbd84f3c07a689435f6b4ed85404a17794a08",
+      "currentGitBlob": "57899935b8aca9f4792fab3b7b821372fe3cb1a6"
+    },
+    {
+      "path": "apps/web/src/shared/shell/Sidebar.tsx",
+      "baseGitBlob": "996e340224cb4e7d289db7d451ff60ad798af261",
+      "currentGitBlob": "c696aa311417330bb896738d9d30096195f2f4fe"
+    }
+  ],
+  "exactPr1Blobs": 33,
+  "adjustedPr1Blobs": [
+    {
+      "path": "apps/web/src/features/meri/cited-answer.module.css",
+      "originalPr1GitBlob": "153712157022f7ae95b5f78c080984a5b24dd770",
+      "currentGitBlob": "ba045713b27fa3b130e72c65c8d361c3c5485a53"
+    },
+    {
+      "path": "apps/web/src/shared/shell/Sidebar.tsx",
+      "originalPr1GitBlob": "c9d45151578cf73961d82bde8656cec6a1c42680",
+      "currentGitBlob": "c696aa311417330bb896738d9d30096195f2f4fe"
+    }
+  ],
+  "allHomeOutsideApprovedShellOverlapPreserved": true,
+  "allPortfolioBlobsPreserved": true,
+  "packageAndLockBlobsPreserved": true,
+  "intentionalAdjustments": {
+    "Sidebar.tsx": "Preserve Home Routines plus shared cited asset and routing behavior",
+    "cited-answer.module.css": "Match current Figma white1px outlined follow-up buttons; removes native gray/outset defaults"
+  }
+}

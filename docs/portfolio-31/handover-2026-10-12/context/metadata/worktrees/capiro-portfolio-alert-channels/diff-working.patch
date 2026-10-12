@@ -1,0 +1,828 @@
+diff --git a/apps/web/src/features/portfolio/bill-tracker/AlertPreferencesDialog.tsx b/apps/web/src/features/portfolio/bill-tracker/AlertPreferencesDialog.tsx
+index 8c8fb3dd341d3268adf166602ffad23ee62dd340..5ea9c943e1292ad3ad3878e1f96a6a1b175d5ba3 100644
+--- a/apps/web/src/features/portfolio/bill-tracker/AlertPreferencesDialog.tsx
++++ b/apps/web/src/features/portfolio/bill-tracker/AlertPreferencesDialog.tsx
+@@ -3,20 +3,24 @@ import { useState } from "react";
+ import { Dialog } from "@/shared/portfolio/ui/Dialog";
+ import { QueryState } from "@/shared/portfolio/ui/QueryState";
+ import { useIdentity } from "@/shared/portfolio/auth/identity";
++import type { TrackerBackend } from "@/shared/portfolio/config/config";
++import { useProfileClient } from "@/features/portfolio/client-profile/read-public";
+ import {
+-  alertActorKey,
+-  useAlertActor,
+-  type AlertActor,
+-} from "./alert-preferences/access";
+-import { useAlertPreferences } from "./alert-preferences/queries";
++  preferenceActorKey,
++  usePreferenceActor,
++  type PreferenceActor,
++} from "./alert-preferences/personal-access";
++import { usePersonalPreferences } from "./alert-preferences/personal-queries";
+ import { PreferenceForm } from "./alert-preferences/PreferenceForm";
+ import styles from "./alert-preferences/preferences.module.css";
+ 
+ export function AlertPreferencesEntry({
+   clientId,
+   disabled,
++  backend,
+ }: {
+   clientId: string;
++  backend: TrackerBackend;
+   disabled?: boolean;
+ }) {
+   const [open, setOpen] = useState(false);
+@@ -34,6 +38,7 @@ export function AlertPreferencesEntry({
+       {open && (
+         <AlertPreferencesDialog
+           clientId={clientId}
++          backend={backend}
+           onClose={() => setOpen(false)}
+         />
+       )}
+@@ -44,12 +49,14 @@ export function AlertPreferencesEntry({
+ export function AlertPreferencesDialog({
+   clientId,
+   onClose,
++  backend,
+ }: {
+   clientId: string;
++  backend: TrackerBackend;
+   onClose: () => void;
+ }) {
+   const identity = useIdentity();
+-  const actor = useAlertActor();
++  const owner = usePreferenceActor(backend);
+   return (
+     <Dialog
+       open
+@@ -60,10 +67,10 @@ export function AlertPreferencesDialog({
+         if (!open) onClose();
+       }}
+     >
+-      {actor ? (
++      {owner ? (
+         <PreferenceSession
+-          key={`${clientId}:${alertActorKey(actor)}`}
+-          actor={actor}
++          key={`${clientId}:${preferenceActorKey(owner)}`}
++          owner={owner}
+           clientId={clientId}
+           onClose={onClose}
+         />
+@@ -94,29 +101,56 @@ export function AlertPreferencesDialog({
+   );
+ }
+ function PreferenceSession({
+-  actor,
++  owner,
+   clientId,
+   onClose,
+ }: {
+-  actor: AlertActor;
++  owner: PreferenceActor;
+   clientId: string;
+   onClose: () => void;
+ }) {
+-  const source = useAlertPreferences(clientId, actor);
++  const client = useProfileClient(clientId);
++  const clientCurrent = Boolean(client.data && client.source);
++  const source = usePersonalPreferences(clientId, owner, clientCurrent);
+   return source.data ? (
+-    <PreferenceForm
+-      initial={source.data}
+-      source={source}
+-      actor={actor}
+-      clientId={clientId}
+-      onClose={onClose}
+-    />
++    <>
++      {!clientCurrent && (
++        <div className={styles.body}>
++          <QueryState
++            pending={client.isFetching}
++            error={client.error}
++            retry={() => void client.refetch()}
++          />
++          <p role="status">
++            The current client is unavailable. Reload the client before changing
++            bill alerts.
++          </p>
++          <button
++            type="button"
++            className="button"
++            onClick={() => void client.refetch()}
++          >
++            Reload client
++          </button>
++        </div>
++      )}
++      <PreferenceForm
++        initial={source.data}
++        source={source}
++        owner={owner}
++        clientCurrent={clientCurrent}
++        clientId={clientId}
++        onClose={onClose}
++      />
++    </>
+   ) : (
+     <div className={styles.body}>
+       <QueryState
+-        pending={source.isPending}
+-        error={source.error}
+-        retry={() => void source.refetch()}
++        pending={client.isPending || (clientCurrent && source.isPending)}
++        error={client.error ?? source.error}
++        retry={() => {
++          void (clientCurrent ? source.refetch() : client.refetch());
++        }}
+       />
+     </div>
+   );
+diff --git a/apps/web/src/features/portfolio/bill-tracker/WatchlistDialog.tsx b/apps/web/src/features/portfolio/bill-tracker/WatchlistDialog.tsx
+index 519232460820f24ad4deb8425e0f1ff7bf8454d0..925a75c119e1c1cff842dc8b71f970c8c001fe52 100644
+--- a/apps/web/src/features/portfolio/bill-tracker/WatchlistDialog.tsx
++++ b/apps/web/src/features/portfolio/bill-tracker/WatchlistDialog.tsx
+@@ -41,7 +41,7 @@ export function WatchlistDialog({
+       }}
+     >
+       {backend === "intelligence" && (
+-        <AlertPreferencesEntry clientId={clientId} disabled={saving} />
++        <AlertPreferencesEntry clientId={clientId} backend={backend} disabled={saving} />
+       )}
+       <QueryState
+         pending={source.isPending || taxonomy.isPending}
+diff --git a/apps/web/src/features/portfolio/bill-tracker/alert-preferences/AlertCriteria.tsx b/apps/web/src/features/portfolio/bill-tracker/alert-preferences/AlertCriteria.tsx
+index 84b8488240bab1431965b381b3a667381ee8647d..2deffcfc66a71923bd2f0c38355b24f58856a082 100644
+--- a/apps/web/src/features/portfolio/bill-tracker/alert-preferences/AlertCriteria.tsx
++++ b/apps/web/src/features/portfolio/bill-tracker/alert-preferences/AlertCriteria.tsx
+@@ -6,7 +6,11 @@ export type PreferenceFieldsProps = {
+   draft: AlertDraft;
+   onChange: (patch: Partial<AlertDraft>) => void;
+ };
+-export function AlertCriteria({ draft, onChange }: PreferenceFieldsProps) {
++export function AlertCriteria({
++  draft,
++  onChange,
++  showJurisdictions = true,
++}: PreferenceFieldsProps & { showJurisdictions?: boolean }) {
+   return (
+     <section className={styles.criteria}>
+       <fieldset className={styles.triggers}>
+@@ -46,20 +50,22 @@ export function AlertCriteria({ draft, onChange }: PreferenceFieldsProps) {
+             <option value="high">High</option>
+           </SelectField>
+         </div>
+-        <label className={styles.field}>
+-          <span>Jurisdictions</span>
+-          <input
+-            value={draft.jurisdictionsText}
+-            autoComplete="off"
+-            aria-describedby="alert-jurisdiction-help"
+-            onChange={(event) =>
+-              onChange({ jurisdictionsText: event.target.value })
+-            }
+-          />
+-          <small id="alert-jurisdiction-help">
+-            Leave blank to include all jurisdictions.
+-          </small>
+-        </label>
++        {showJurisdictions && (
++          <label className={styles.field}>
++            <span>Jurisdictions</span>
++            <input
++              value={draft.jurisdictionsText}
++              autoComplete="off"
++              aria-describedby="alert-jurisdiction-help"
++              onChange={(event) =>
++                onChange({ jurisdictionsText: event.target.value })
++              }
++            />
++            <small id="alert-jurisdiction-help">
++              Leave blank to include all jurisdictions.
++            </small>
++          </label>
++        )}
+       </div>
+     </section>
+   );
+diff --git a/apps/web/src/features/portfolio/bill-tracker/alert-preferences/AlertDelivery.tsx b/apps/web/src/features/portfolio/bill-tracker/alert-preferences/AlertDelivery.tsx
+index bbbd21a01a6da6ff409830365e8df914702fa9ed..c20e5394624a829ca6c7f8ea66e5a7171d84dc28 100644
+--- a/apps/web/src/features/portfolio/bill-tracker/alert-preferences/AlertDelivery.tsx
++++ b/apps/web/src/features/portfolio/bill-tracker/alert-preferences/AlertDelivery.tsx
+@@ -1,9 +1,6 @@
+ import { SelectField } from "@/shared/portfolio/ui/SelectField";
+-import {
+-  hasVerifiedDraftPhone,
+-  type AlertPreferences,
+-  type AlertDraft,
+-} from "./contracts";
++import { hasVerifiedDraftPhone, type AlertDraft } from "./contracts";
++import type { PersonalPreferences } from "./personal-contracts";
+ import type { PreferenceFieldsProps } from "./AlertCriteria";
+ import styles from "./preferences.module.css";
+ 
+@@ -11,7 +8,13 @@ export function AlertDelivery({
+   draft,
+   record,
+   onChange,
+-}: PreferenceFieldsProps & { record: AlertPreferences }) {
++  phoneLimit = 32,
++  strictEmail = true,
++}: PreferenceFieldsProps & {
++  record: PersonalPreferences;
++  phoneLimit?: number;
++  strictEmail?: boolean;
++}) {
+   return (
+     <div className={styles.delivery}>
+       <section className={styles.channel} aria-label="Email delivery">
+@@ -28,11 +31,12 @@ export function AlertDelivery({
+         <label className={styles.field}>
+           <span>Email address</span>
+           <input
+-            type="email"
++            type={strictEmail ? "email" : "text"}
++            inputMode="email"
+             maxLength={320}
+             autoComplete="email"
+             value={draft.emailAddress ?? ""}
+-            required={draft.emailEnabled}
++            required={strictEmail && draft.emailEnabled}
+             onChange={(event) =>
+               onChange({ emailAddress: event.target.value || null })
+             }
+@@ -67,7 +71,7 @@ export function AlertDelivery({
+           <span>Phone number</span>
+           <input
+             type="tel"
+-            maxLength={32}
++            maxLength={phoneLimit}
+             autoComplete="tel"
+             placeholder="Add phone number"
+             aria-describedby="alert-phone-verification"
+diff --git a/apps/web/src/features/portfolio/bill-tracker/alert-preferences/PreferenceForm.tsx b/apps/web/src/features/portfolio/bill-tracker/alert-preferences/PreferenceForm.tsx
+index 7f19e08098f3c84f860a6bfa1791eefbb55aa5ef..16ca4df6db2f6277b2d47083c99d595c82ceff9c 100644
+--- a/apps/web/src/features/portfolio/bill-tracker/alert-preferences/PreferenceForm.tsx
++++ b/apps/web/src/features/portfolio/bill-tracker/alert-preferences/PreferenceForm.tsx
+@@ -4,27 +4,49 @@ import { QueryState } from "@/shared/portfolio/ui/QueryState";
+ import { AlertCriteria } from "./AlertCriteria";
+ import { AlertDelivery, AlertQuietHours } from "./AlertDelivery";
+ import { usePreferenceEditor } from "./usePreferenceEditor";
+-import type { AlertActor } from "./access";
+-import type { AlertPreferences } from "./contracts";
+-import type { AlertPreferencesSource } from "./queries";
++import type { PreferenceActor } from "./personal-access";
++import type { PersonalPreferences } from "./personal-contracts";
++import type { PersonalPreferencesSource } from "./personal-queries";
++import { usePhoneVerification } from "./usePhoneVerification";
++import { useTestAlert } from "./useTestAlert";
++import { PhoneVerification } from "./PhoneVerification";
++import { TestAlert } from "./TestAlert";
+ import styles from "./preferences.module.css";
+ 
+ export function PreferenceForm(props: {
+-  initial: AlertPreferences;
+-  source: AlertPreferencesSource;
+-  actor: AlertActor;
++  initial: PersonalPreferences;
++  source: PersonalPreferencesSource;
++  owner: PreferenceActor;
+   clientId: string;
++  clientCurrent: boolean;
+   onClose: () => void;
+ }) {
+   const editor = usePreferenceEditor(props);
+   const [confirmReload, setConfirmReload] = useState(false);
+   const { status } = editor;
++  const savedCurrent =
++    editor.current &&
++    props.source.current &&
++    !editor.dirty &&
++    !editor.busy &&
++    !editor.needsReload &&
++    !status.expired;
++  const view = {
++    owner: props.owner,
++    clientId: props.clientId,
++    baseline: editor.baseline,
++    available: savedCurrent,
++    draftKey: JSON.stringify(editor.draft),
++  };
++  const verification = usePhoneVerification(view, editor.acceptChannelReceipt);
++  const test = useTestAlert(view);
++  const channelBusy = verification.busy || test.busy;
+   return (
+     <form
+       className={styles.form}
+       onSubmit={(event) => {
+         event.preventDefault();
+-        void editor.save();
++        if (!channelBusy) void editor.save();
+       }}
+     >
+       <div className={styles.body}>
+@@ -35,15 +57,24 @@ export function PreferenceForm(props: {
+         ) : (
+           <>
+             {editor.current ? (
+-              <fieldset className={styles.fields} disabled={editor.busy}>
++              <fieldset
++                className={styles.fields}
++                disabled={editor.busy || channelBusy}
++              >
+                 <legend className="srOnly">
+                   Personal bill alert preferences
+                 </legend>
+-                <AlertCriteria draft={editor.draft} onChange={editor.edit} />
++                <AlertCriteria
++                  draft={editor.draft}
++                  onChange={editor.edit}
++                  showJurisdictions={props.owner.backend === "intelligence"}
++                />
+                 <AlertDelivery
+                   draft={editor.draft}
+                   record={editor.baseline}
+                   onChange={editor.edit}
++                  phoneLimit={props.owner.backend === "core" ? 20 : 32}
++                  strictEmail={props.owner.backend === "intelligence"}
+                 />
+                 <AlertQuietHours draft={editor.draft} onChange={editor.edit} />
+               </fieldset>
+@@ -53,6 +84,21 @@ export function PreferenceForm(props: {
+                 error={props.source.error}
+               />
+             )}
++            <fieldset
++              className={styles.fields}
++              disabled={editor.busy || test.busy}
++            >
++              <PhoneVerification
++                action={verification}
++                savedCurrent={savedCurrent}
++              />
++            </fieldset>
++            <fieldset
++              className={styles.fields}
++              disabled={editor.busy || verification.busy}
++            >
++              <TestAlert action={test} savedCurrent={savedCurrent} />
++            </fieldset>
+             {editor.current && <QueryState error={status.error} />}
+             {status.phase === "saved" && (
+               <p role="status">Preferences saved.</p>
+@@ -75,12 +121,15 @@ export function PreferenceForm(props: {
+                 until you reload.
+               </p>
+             )}
+-            {(editor.dirty || editor.needsReload || !editor.current) &&
++            {(editor.dirty ||
++              editor.needsReload ||
++              !editor.current ||
++              !props.source.current) &&
+               !confirmReload && (
+                 <button
+                   className="button"
+                   type="button"
+-                  disabled={editor.busy}
++                  disabled={editor.busy || channelBusy}
+                   onClick={() => setConfirmReload(true)}
+                 >
+                   Reload saved preferences
+@@ -96,7 +145,7 @@ export function PreferenceForm(props: {
+                   <button
+                     className="button"
+                     type="button"
+-                    disabled={editor.busy}
++                    disabled={editor.busy || channelBusy}
+                     onClick={() => {
+                       void editor.reload().then(() => setConfirmReload(false));
+                     }}
+@@ -108,7 +157,7 @@ export function PreferenceForm(props: {
+                   <button
+                     className="button ghost"
+                     type="button"
+-                    disabled={editor.busy}
++                    disabled={editor.busy || channelBusy}
+                     onClick={() => setConfirmReload(false)}
+                   >
+                     Keep local edits
+@@ -126,7 +175,7 @@ export function PreferenceForm(props: {
+         <button
+           className="button primary"
+           type="submit"
+-          disabled={!editor.canSave}
++          disabled={!editor.canSave || channelBusy}
+         >
+           {status.phase === "saving" ? "Saving…" : "Save preferences"}
+         </button>
+diff --git a/apps/web/src/features/portfolio/bill-tracker/alert-preferences/access.ts b/apps/web/src/features/portfolio/bill-tracker/alert-preferences/access.ts
+index 57e5dc84c0da6c7b3eb293539c20460a62874715..17bc1f32959d49fa294a4a91db2caefa3ea4724c 100644
+--- a/apps/web/src/features/portfolio/bill-tracker/alert-preferences/access.ts
++++ b/apps/web/src/features/portfolio/bill-tracker/alert-preferences/access.ts
+@@ -1,6 +1,10 @@
+ "use client";
+ import { useMemo, useSyncExternalStore } from "react";
+-import { useQueryClient, type QueryClient } from "@tanstack/react-query";
++import {
++  useQueryClient,
++  notifyManager,
++  type QueryClient,
++} from "@tanstack/react-query";
+ import { ApiError } from "@/shared/portfolio/api/http";
+ import {
+   currentClientWriter,
+@@ -32,9 +36,11 @@ export function useAlertActor() {
+   const cache = useQueryClient();
+   const token = useSyncExternalStore(
+     (notify) =>
+-      cache.getQueryCache().subscribe((event) => {
+-        if (event.query.queryKey[0] === "identity") notify();
+-      }),
++      cache.getQueryCache().subscribe(
++        notifyManager.batchCalls((event) => {
++          if (event.query.queryKey[0] === "identity") notify();
++        }),
++      ),
+     () => {
+       const actor = currentAlertActor(cache);
+       return actor ? alertActorKey(actor) : "";
+diff --git a/apps/web/src/features/portfolio/bill-tracker/alert-preferences/contracts.ts b/apps/web/src/features/portfolio/bill-tracker/alert-preferences/contracts.ts
+index 3dc36ec98c77efcf038d2e306fdc2bf519118977..afd3810ca8204cb025f55771ee028c34bcd16e3d 100644
+--- a/apps/web/src/features/portfolio/bill-tracker/alert-preferences/contracts.ts
++++ b/apps/web/src/features/portfolio/bill-tracker/alert-preferences/contracts.ts
+@@ -65,7 +65,9 @@ const alertPrefsSchema = z.object({
+ });
+ export type AlertPreferences = z.infer<typeof alertPrefsSchema>;
+ export type AlertPrefsBody = z.infer<typeof alertPrefsBodySchema>;
+-export type AlertDraft = Omit<AlertPrefsBody, "jurisdictions"> & {
++export type AlertDraft = Omit<AlertPrefsBody, "jurisdictions" | "triggers"> & {
++  // Core accepts native string keys beyond Intel's allowlist; retain them.
++  triggers: string[];
+   jurisdictionsText: string;
+ };
+ export type AlertOwner = {
+@@ -118,7 +120,7 @@ export function preferenceSignature(record: AlertPreferences) {
+   return JSON.stringify([preferenceValues(record), record.smsPhoneVerified]);
+ }
+ export function hasVerifiedDraftPhone(
+-  record: AlertPreferences,
++  record: Pick<AlertPreferences, "smsPhone" | "smsPhoneVerified">,
+   draft: AlertDraft,
+ ) {
+   return Boolean(
+@@ -127,3 +129,19 @@ export function hasVerifiedDraftPhone(
+     record.smsPhone === draft.smsPhone,
+   );
+ }
++
++/** Intel's published normalizer is deliberately stricter than Core's legacy one. */
++export function intelSavedPhoneValue(raw: string | null) {
++  if (!raw) return null;
++  const value = raw.trim();
++  if (!/^\+?[\d\s().-]+$/.test(value)) return null;
++  const digits = value.replace(/\D/g, "");
++  const phone = value.startsWith("+")
++    ? `+${digits}`
++    : digits.length === 10
++      ? `+1${digits}`
++      : digits.length === 11 && digits.startsWith("1")
++        ? `+${digits}`
++        : null;
++  return phone && /^\+[1-9]\d{9,14}$/.test(phone) ? phone : null;
++}
+diff --git a/apps/web/src/features/portfolio/bill-tracker/alert-preferences/preferences.module.css b/apps/web/src/features/portfolio/bill-tracker/alert-preferences/preferences.module.css
+index eb9858e9ee99d4a55d2974b5fdec6e5544e745e9..59cccef1004f72e94a19a92eb3eb257147d5932c 100644
+--- a/apps/web/src/features/portfolio/bill-tracker/alert-preferences/preferences.module.css
++++ b/apps/web/src/features/portfolio/bill-tracker/alert-preferences/preferences.module.css
+@@ -188,6 +188,35 @@
+   display: grid;
+   gap: 12px;
+ }
++.channelAction {
++  display: grid;
++  gap: 12px;
++  min-width: 0;
++  padding-top: 20px;
++  border-top: 1px solid var(--border);
++}
++.channelAction h3 {
++  font-size: 14px;
++  font-weight: 600;
++  line-height: 1.35;
++}
++.actionButtons,
++.testChoices {
++  display: flex;
++  flex-wrap: wrap;
++  align-items: center;
++  gap: 12px;
++}
++.testChoices {
++  border: 0;
++  margin: 0;
++  padding: 0;
++}
++.testResults {
++  padding-left: 20px;
++  margin: 0;
++  font-size: 13px;
++}
+ @media (max-width: 600px) {
+   .dialog > header {
+     padding-inline: 20px;
+diff --git a/apps/web/src/features/portfolio/bill-tracker/alert-preferences/usePreferenceEditor.ts b/apps/web/src/features/portfolio/bill-tracker/alert-preferences/usePreferenceEditor.ts
+index 9ce2e65b5399693fc3780697ac1493a6ad576885..b8517e60b961f9cdec728a56ff5d92cfd39f7d4c 100644
+--- a/apps/web/src/features/portfolio/bill-tracker/alert-preferences/usePreferenceEditor.ts
++++ b/apps/web/src/features/portfolio/bill-tracker/alert-preferences/usePreferenceEditor.ts
+@@ -1,24 +1,31 @@
+ "use client";
+ import { useLayoutEffect, useRef, useState } from "react";
+-import { useQueryClient } from "@tanstack/react-query";
++import { useQueryClient, notifyManager } from "@tanstack/react-query";
+ import { z } from "zod";
+ import { useApi } from "@/shared/portfolio/api/provider";
+ import { ambiguousClientWrite } from "@/shared/portfolio/auth/client-writer";
+-import { assertAlertActor, type AlertActor } from "./access";
++import { assertPreferenceActor, type PreferenceActor } from "./personal-access";
++import { type AlertDraft } from "./contracts";
+ import {
+-  alertPreferencesSchema,
+-  preferenceBody,
+-  preferenceDraft,
+-  preferenceSignature,
+-  type AlertDraft,
+-  type AlertPreferences,
+-} from "./contracts";
++  personalPreferencesKey,
++  capturePreferenceReview,
++  assertPreferenceReview,
++  assertPreferenceClient,
++  type PersonalPreferencesSource,
++} from "./personal-queries";
+ import {
+-  alertPreferencesKey,
+-  alertPreferencesPath,
+-  assertPreferenceSource,
+-  type AlertPreferencesSource,
+-} from "./queries";
++  personalBody,
++  personalDraft,
++  personalSignature,
++  personalPreferencesPath,
++  personalPreferencesSchema,
++  assertSavedPreferences,
++  type PersonalPreferences,
++} from "./personal-contracts";
++import {
++  watchPreferenceInputs,
++  type PreferenceInputAttempt,
++} from "./preference-write-lifetime";
+ 
+ type EditorStatus = {
+   phase: "idle" | "saving" | "saved" | "unconfirmed" | "refused" | "reloading";
+@@ -51,58 +58,71 @@ function editorError(error: unknown) {
+ export function usePreferenceEditor({
+   initial,
+   source,
+-  actor,
++  owner,
+   clientId,
++  clientCurrent,
+ }: {
+-  initial: AlertPreferences;
+-  source: AlertPreferencesSource;
+-  actor: AlertActor;
++  initial: PersonalPreferences;
++  source: PersonalPreferencesSource;
++  owner: PreferenceActor;
+   clientId: string;
++  clientCurrent: boolean;
+ }) {
+   const api = useApi();
+   const cache = useQueryClient();
+   const [baseline, setBaseline] = useState(initial);
+-  const [draft, setDraft] = useState(() => preferenceDraft(initial));
++  const [draft, setDraft] = useState(() => personalDraft(initial, owner));
+   const [status, setStatus] = useState<EditorStatus>(idle);
+   const lifetime = useRef({ active: false });
+   const pending = useRef<AbortController | null>(null);
+-  const key = alertPreferencesKey(clientId, actor);
++  const inputs = useRef<PreferenceInputAttempt | null>(null);
++  const key = personalPreferencesKey(clientId, owner);
+ 
+   useLayoutEffect(() => {
+     const scope = { active: true };
+     lifetime.current = scope;
+-    const unsubscribe = cache.getQueryCache().subscribe((event) => {
+-      if (event.query.queryKey[0] !== "identity" || !scope.active) return;
+-      try {
+-        assertAlertActor(cache, actor);
+-      } catch {
+-        scope.active = false;
+-        pending.current?.abort();
+-        pending.current = null;
+-        setStatus({ ...idle, expired: true });
+-      }
+-    });
++    const expire = notifyManager.batchCalls(() =>
++      setStatus({ ...idle, expired: true }),
++    );
++    const unsubscribe = watchPreferenceInputs(
++      cache,
++      clientId,
++      owner,
++      () => inputs.current,
++      () => {
++        if (scope.active) {
++          scope.active = false;
++          pending.current?.abort();
++          pending.current = null;
++          inputs.current = null;
++          expire();
++        }
++      },
++    );
+     return () => {
+       scope.active = false;
+       pending.current?.abort();
+       pending.current = null;
++      inputs.current = null;
+       unsubscribe();
+     };
+-  }, [cache, actor]);
++  }, [cache, owner, clientId]);
+ 
+-  const current = source.isSuccess && !source.error;
++  const current = clientCurrent && source.isSuccess && !source.error;
+   const changed = Boolean(
+     source.data &&
+-    preferenceSignature(source.data) !== preferenceSignature(baseline),
++    personalSignature(source.data, owner) !==
++      personalSignature(baseline, owner),
+   );
+   const dirty =
+-    JSON.stringify(draft) !== JSON.stringify(preferenceDraft(baseline));
++    JSON.stringify(draft) !== JSON.stringify(personalDraft(baseline, owner));
+   const busy = status.phase === "saving" || status.phase === "reloading";
+   const needsReload =
+     status.phase === "unconfirmed" || status.phase === "refused" || changed;
+   const canSave =
+     current &&
+     !source.isFetching &&
++    source.current &&
+     !busy &&
+     !needsReload &&
+     !status.expired &&
+@@ -114,9 +134,9 @@ export function usePreferenceEditor({
+     if (status.phase !== "unconfirmed" && status.phase !== "refused")
+       setStatus(idle);
+   }
+-  function accept(record: AlertPreferences) {
++  function accept(record: PersonalPreferences) {
+     setBaseline(record);
+-    setDraft(preferenceDraft(record));
++    setDraft(personalDraft(record, owner));
+   }
+   function assertCurrent(
+     scope: { active: boolean },
+@@ -132,7 +152,8 @@ export function usePreferenceEditor({
+         "This preference editor is no longer current.",
+         "AbortError",
+       );
+-    assertAlertActor(cache, actor);
++    assertPreferenceActor(cache, owner);
++    assertPreferenceClient(cache, clientId, owner);
+   }
+ 
+   async function save() {
+@@ -144,29 +165,31 @@ export function usePreferenceEditor({
+     let received = false;
+     try {
+       assertCurrent(scope, controller);
+-      const body = preferenceBody(draft);
+-      const revision = assertPreferenceSource(cache, clientId, actor, baseline);
++      const review = capturePreferenceReview(cache, clientId, owner, baseline);
++      inputs.current = {
++        controller,
++        parent: review.parent,
++        review,
++        ownInvalidation: true,
++      };
++      const body = personalBody(draft, baseline, owner);
+       // Reopening after a lost response must read the server again. No PUT retry.
+       void cache.invalidateQueries({ queryKey: key, refetchType: "none" });
++      inputs.current.ownInvalidation = false;
++      assertCurrent(scope, controller);
+       setStatus({ ...idle, phase: "saving" });
+       dispatched = true;
+       const receipt = await api.request(
+-        "intelligence",
+-        alertPreferencesPath(clientId),
+-        alertPreferencesSchema({ ...actor, clientId }),
++        owner.backend,
++        personalPreferencesPath(clientId, owner),
++        personalPreferencesSchema(clientId, owner),
+         { method: "PUT", body, signal: controller.signal },
+       );
+       received = true;
+       assertCurrent(scope, controller);
+-      const read = cache.getQueryState(key);
+-      if (
+-        read?.dataUpdateCount !== revision ||
+-        read.error ||
+-        read.fetchStatus !== "idle"
+-      )
+-        throw new Error(
+-          "Saved preferences changed while this request was pending. Reload to verify the current settings.",
+-        );
++      assertPreferenceReview(cache, clientId, owner, review, true);
++      assertSavedPreferences(receipt, draft, baseline, owner);
++      inputs.current = null;
+       cache.setQueryData(key, receipt);
+       accept(receipt);
+       setStatus({ ...idle, phase: "saved" });
+@@ -181,6 +204,7 @@ export function usePreferenceEditor({
+         });
+       }
+     } finally {
++      if (inputs.current?.controller === controller) inputs.current = null;
+       if (pending.current === controller) pending.current = null;
+     }
+   }
+@@ -193,19 +217,25 @@ export function usePreferenceEditor({
+     setStatus({ ...status, phase: "reloading", error: null });
+     try {
+       assertCurrent(scope, controller);
++      inputs.current = {
++        controller,
++        parent: assertPreferenceClient(cache, clientId, owner),
++        ownInvalidation: false,
++      };
+       const result = await source.refetch();
+       assertCurrent(scope, controller);
+       if (!result.isSuccess || result.error)
+         throw (
+           result.error ?? new Error("Saved preferences could not be reloaded.")
+         );
+-      assertPreferenceSource(cache, clientId, actor, result.data);
++      capturePreferenceReview(cache, clientId, owner, result.data);
+       accept(result.data);
+       setStatus(idle);
+     } catch (error) {
+       if (scope.active && pending.current === controller)
+         setStatus({ ...status, error: editorError(error) });
+     } finally {
++      if (inputs.current?.controller === controller) inputs.current = null;
+       if (pending.current === controller) pending.current = null;
+     }
+   }
+@@ -222,5 +252,6 @@ export function usePreferenceEditor({
+     edit,
+     save,
+     reload,
++    acceptChannelReceipt: accept,
+   };
+ }
+diff --git a/apps/web/tests/browser/tracker-alert-preferences.spec.ts b/apps/web/tests/browser/tracker-alert-preferences.spec.ts
+index d2e91b666bd10de41bd2fd8cb907eb4b94a507cf..9c06a27f08642dd28c7ec19c0dab8730dd54439b 100644
+--- a/apps/web/tests/browser/tracker-alert-preferences.spec.ts
++++ b/apps/web/tests/browser/tracker-alert-preferences.spec.ts
+@@ -7,6 +7,7 @@ import {
+   trackerPreferences,
+ } from "../tracker-preference-fixtures";
+ import { preferenceValues } from "../../src/features/portfolio/bill-tracker/alert-preferences/contracts";
++import { alertClient } from "../alert-channel-fixtures";
+ 
+ const routePattern = "**/intelligence/tracker/watchlists/*/alert-prefs";
+ const dialogFor = (page: Page) =>
+@@ -14,6 +15,16 @@ const dialogFor = (page: Page) =>
+ async function install(page: Page) {
+   const unexpected = await installFixtures(page);
+   await page.route("**/core/me", (route) => json(route, trackerIdentity));
++  // The current client preflight now consumes the same two explicit synthetic
++  // clients already used by the preserved client-lifetime assertion below.
++  await page.route(
++    /\/core\/clients\/10000000-0000-4000-8000-00000000000[12]$/,
++    (route) =>
++      json(route, {
++        ...alertClient,
++        id: new URL(route.request().url()).pathname.split("/").at(-1),
++      }),
++  );
+   return unexpected;
+ }
+ async function event(page: Page, name: string, detail?: unknown) {
+diff --git a/apps/web/tests/browser/tracker-boundary-harness.tsx b/apps/web/tests/browser/tracker-boundary-harness.tsx
+index 1383f0b842b05d9c1081339e25a107b6fb09c1a4..b1241fa6a04dd594c5a51b6e3a7818c816020109 100644
+--- a/apps/web/tests/browser/tracker-boundary-harness.tsx
++++ b/apps/web/tests/browser/tracker-boundary-harness.tsx
+@@ -62,6 +62,7 @@ function TrackerBoundaryHarness() {
+         ) : (
+           <AlertPreferencesDialog
+             clientId={clientId}
++            backend={backend}
+             onClose={() => setShown(false)}
+           />
+         )

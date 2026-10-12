@@ -1,0 +1,9 @@
+.wordmark {
+  object-fit: contain;
+}
+
+@media (prefers-color-scheme: dark) {
+  .wordmark {
+    filter: invert(1);
+  }
+}

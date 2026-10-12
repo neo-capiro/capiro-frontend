@@ -1,0 +1,175 @@
+.toolbar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 24px 0;
+}
+.select {
+  background: #fff;
+  border: 1px solid #e7e5e4;
+  border-radius: 8px;
+  min-height: 36px;
+  padding: 6px 10px;
+  font: inherit;
+  max-width: 220px;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  min-height: 180px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #e7e5e4;
+  border-radius: 12px;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+}
+.card:hover {
+  border-color: #a8a29e;
+}
+.card header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+.card h2 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+}
+.card p {
+  font-size: 13px;
+  color: #78716c;
+  line-height: 1.5;
+}
+.card dl {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 24px 0 0;
+}
+.card dt {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #78716c;
+}
+.card dd {
+  margin: 3px 0 0;
+  font-size: 13px;
+}
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 24px 0;
+}
+.metric {
+  padding: 20px;
+  border: 1px solid #e7e5e4;
+  border-radius: 10px;
+  background: #fff;
+}
+.metric > span {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #78716c;
+}
+.metric strong {
+  display: block;
+  font-size: 22px;
+  margin: 6px 0;
+}
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.stack {
+  display: grid;
+  gap: 20px;
+}
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px 20px;
+  border-top: 1px solid #e7e5e4;
+  font-size: 13px;
+}
+.muted {
+  font-size: 12px;
+  color: #78716c;
+}
+.content {
+  padding: 20px;
+  line-height: 1.65;
+  font-size: 14px;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px 20px;
+}
+.fit {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 45%;
+}
+.fit progress {
+  width: 160px;
+  height: 9px;
+  accent-color: #171717;
+}
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+.form {
+  display: grid;
+  gap: 18px;
+}
+.link {
+  border: 0;
+  background: transparent;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  color: inherit;
+}
+.link:hover {
+  text-decoration: underline;
+}
+@media (max-width: 1000px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .split {
+    grid-template-columns: 1fr;
+  }
+  .metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+  .fit progress {
+    width: 100px;
+  }
+}

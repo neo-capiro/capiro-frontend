@@ -1,0 +1,22 @@
+{
+  "source": "9fa5e2cb68bc2b15f2dddc5dd2a846756a5b6c9e",
+  "classification": "asynchronous fixture-observation race; full run remains failed",
+  "events": [
+    {
+      "event": "prep POST",
+      "monotonicTime": 1069486.06,
+      "status": -1
+    },
+    {
+      "event": "prep POST",
+      "monotonicTime": 1071851.831,
+      "status": 202
+    },
+    {
+      "event": "immediate request-array assertion failed: expected2 received1",
+      "monotonicTime": 1071853.871
+    }
+  ],
+  "snapshot": "Preparing your briefing dialog and queued saved-job state appear after failure.",
+  "nextCorrection": "After the frozen run completes, await the exact second POST observation before asserting exactly two identical bodies; retain job cancellation and all assertions. No retry or weakened count."
+}

@@ -1,0 +1,63 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> capiro-frontend@0.1.0 check
+> npm run check:packages && npm run typecheck && npm test && npm run architecture && npm run test:transport
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> capiro-frontend@0.1.0 check:packages
+> node scripts/public-packages.mjs
+
+{
+  "schema": "capiro-public-package-inputs/1",
+  "records": [
+    {
+      "file": "capiro-meri-contracts-0.1.0.tgz",
+      "bytes": 48823,
+      "sha256": "2f15ade9458cbffe960b7cc36c6fb77cb54cc2a0eca4bc7c0f918b77cfacd4ee",
+      "sourceCommit": "0dc9ce423947fc7814d7f8ad8de2f633c187c6d8"
+    },
+    {
+      "file": "capiro-meri-ui-stream-0.1.0.tgz",
+      "bytes": 2280,
+      "sha256": "7ce24acd465dca4c5e90c1c98dba383318aab024dbce5170fa1f1daf3bce83ab",
+      "sourceCommit": "12289a434be6f589bbff9c741367b8cfb77f2616"
+    }
+  ]
+}
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> capiro-frontend@0.1.0 typecheck
+> npm run typecheck --workspaces --if-present
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @capiro/portfolio-web@0.1.0 typecheck
+> tsc --noEmit
+
+
+> @capiro/web@0.1.0 typecheck
+> tsc --noEmit
+
+src/features/meri/fixtures/run-activity-events.ts(8,10): error TS2352: Conversion of type '{ contractVersion: "0.1.0"; eventId: string; sequence: number; createdAt: string; binding: { runId: string; attemptId: string; workerId: string; writerFence: number; tenantId: "tenant-sample"; actorId: "actor-sample"; conversationId: "10000000-0000-4000-8000-000000000001"; }; scopes: [...]; type: T; data: { ...; } |...' to type 'Extract<{ contractVersion: "0.1.0"; eventId: string; binding: RunBinding; sequence: number; createdAt: string; scopes: [Scope, ...Scope[]]; type: "run.status"; data: { state: "queued" | ... 6 more ... | "cancelled"; reasonCode: string | null; }; }, { ...; }> | ... 8 more ... | Extract<...>' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Type '{ contractVersion: "0.1.0"; eventId: string; sequence: number; createdAt: string; binding: { runId: string; attemptId: string; workerId: string; writerFence: number; tenantId: "tenant-sample"; actorId: "actor-sample"; conversationId: "10000000-0000-4000-8000-000000000001"; }; scopes: [...]; type: T; data: { ...; } |...' is not comparable to type 'Extract<{ contractVersion: "0.1.0"; eventId: string; binding: RunBinding; sequence: number; createdAt: string; scopes: [Scope, ...Scope[]]; type: "run.error"; data: { code: string; retryable: boolean; message: string; }; }, { ...; }>'.
+npm error Lifecycle script `typecheck` failed with error:
+npm error code 2
+npm error path /workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web
+npm error command failed
+npm error command sh -c tsc --noEmit
+
+
+> @capiro/meri-client@0.1.0 typecheck
+> tsc -p tsconfig.json --noEmit
+
+
+> @capiro/qualification-elements@0.0.0 typecheck
+> tsc -p tsconfig.json
+
+
+> @capiro/ui@0.0.0 typecheck
+> tsc -p tsconfig.json
+

@@ -1,0 +1,140 @@
+{
+  "sourceCommit": "0068c58613f1e2d5ed13e68f9a9d18c8b9a7ef88",
+  "acceptance": "SOURCE_PRESERVATION_ONLY",
+  "freshFigmaBlob": "67c231c07d5036c19aa9cbcde7d7f5b1888ebe33",
+  "freshFigmaMatchesAuthor": true,
+  "files": [
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review/.gitattributes",
+      "bytes": 12,
+      "sha256": "89dddfc52a6d1b734a50dacfb9ba5ae46fbdd74c9e619fef3567a0301950b9f1"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review/author-evidence-verification.json",
+      "bytes": 228,
+      "sha256": "a061d04705cd3e4b29d6896c67af8a458b5502c7b8fbdf7613e2a5c6f275057f"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review/browser-check.mjs",
+      "bytes": 10872,
+      "sha256": "c83b309585c79413dffd218ef331c0859ba4a555230cb84ab0887049fcc271ce"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review/checks.json",
+      "bytes": 940,
+      "sha256": "fc3ab9e999388c7fbca3856e245d6c381201fc5ca86f690863da2c3e5d02c215"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review/initial-owner.py",
+      "bytes": 4319,
+      "sha256": "8d3fef027398c5bd59f46886b183f003df37650b198be9b28646e04acf4c11de"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review/server-owner.json",
+      "bytes": 284,
+      "sha256": "536a4a0daa464b0a948c621e75363725a252d6d2172f4ae7304cc3d8626bc8ed"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review/server.stderr.bin",
+      "bytes": 826,
+      "sha256": "cedc335a8a6b67c3064a6dc1bbd6cbea2a1a680f06966a5ca5684edfa70e3213"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review/server.stdout.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review/view-and-architecture.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review/view-and-architecture.stdout.bin",
+      "bytes": 1737,
+      "sha256": "20f795fcbd566d0f3c34bd4a040b490dc1fb97f5e2d4a9f6dce86343c2f3ced2"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review-corrected/.gitattributes",
+      "bytes": 12,
+      "sha256": "89dddfc52a6d1b734a50dacfb9ba5ae46fbdd74c9e619fef3567a0301950b9f1"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review-corrected/actual-browser-seven-groups.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review-corrected/actual-browser-seven-groups.stdout.bin",
+      "bytes": 765,
+      "sha256": "b2e7921beff30fdebc4c481c07be0f5d3520bbc0e85e740989b5cc1aa2874569"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review-corrected/author-evidence-verification.json",
+      "bytes": 228,
+      "sha256": "a061d04705cd3e4b29d6896c67af8a458b5502c7b8fbdf7613e2a5c6f275057f"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review-corrected/browser-check.mjs",
+      "bytes": 10872,
+      "sha256": "c83b309585c79413dffd218ef331c0859ba4a555230cb84ab0887049fcc271ce"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review-corrected/browser-results.json",
+      "bytes": 8473,
+      "sha256": "f90c48a51c2e1c05a4d415c9a6131b943419cf5fd50a9d3e00b86e871edb4785"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review-corrected/checks.json",
+      "bytes": 1897,
+      "sha256": "31d3c34ff5a2cac11460573add5c68a9cbf1bd1182d076d1cc25575587698d8e"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review-corrected/final-owner.py",
+      "bytes": 4320,
+      "sha256": "7a076f5b9f81e5fba5bcc7eb42a05a3ebae9dbfed187d10c994a324e16182779"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review-corrected/geometry.json",
+      "bytes": 344,
+      "sha256": "9008f7fcfa02762a6344fa23b5d907b38f4780ab1e7f42b262a7e1770c55ed03"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review-corrected/server-owner.json",
+      "bytes": 286,
+      "sha256": "2704e8f0145c4c0a0b652b2903bd3021e989fa0d9bbf20a366540e250afba585"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review-corrected/server.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review-corrected/server.stdout.bin",
+      "bytes": 156,
+      "sha256": "4cf3c7f54823617c1436e39a8a155a98d9056cd94e6b9c331afa335a0e052993"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review-corrected/view-and-architecture.stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review-corrected/view-and-architecture.stdout.bin",
+      "bytes": 1739,
+      "sha256": "7e10044384869a109ee37eb31ce37e5afcdf6517d9d5ea44c9b3f335c23ed808"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review-corrected/workspace-desktop.png",
+      "bytes": 156571,
+      "sha256": "ae29323dab1595101269cfbd6376dbba4a76fc593c856696ee30e4ed103f0ecd"
+    },
+    {
+      "path": "docs/qualification/candidates/run-workspace-20261012/primary-review-corrected/workspace-mobile.png",
+      "bytes": 114548,
+      "sha256": "caefa364b54c42f1fd73c34cf605f4c60aae06b8a3c4cee4f9713205d3169da4"
+    }
+  ],
+  "runtimeAdmitted": false,
+  "deploymentSandboxQualified": false
+}

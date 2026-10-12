@@ -1,0 +1,38 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/bill-tracker/BillTrackerPage.tsx",
+    "kind": "function",
+    "symbol": "ConfiguredTracker",
+    "fingerprint": "2625de2deb09bc4f7e3b78ec8f7ee17a8943f7abdcf7cd853d8e29852ae1275b",
+    "reason": "Reviewed the complete page composition. It owns URL view/search and the current selected bill ID, then delegates native reads, current-data projection, tables, drawers, and configuration forms to their existing owners. Resolving selection from the successful scoped read closes the stale-record gap without adding persistence or provider behavior. The remaining length is the single page layout and conditional composition.",
+    "reviewedOn": "2026-10-11",
+    "reviewedBy": "portfolio_calendar_relationships"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/AlertDelivery.tsx",
+    "kind": "function",
+    "symbol": "AlertDelivery",
+    "fingerprint": "d9c79cd8e5709b0d9f363091ac5e60039da69c8e1975efb196920d5c31756342",
+    "reason": "Reviewed the complete delivery-preference section. It is controlled presentation for the fixed native email and SMS fields, their different allowed cadence values, and a caption derived from the server verification receipt. It owns no API request, write authority, phone normalization, provider dispatch, or verification workflow. Keeping the two related channel sections together makes their deliberately different native options explicit.",
+    "reviewedOn": "2026-10-11",
+    "reviewedBy": "portfolio_calendar_relationships"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/PreferenceForm.tsx",
+    "kind": "function",
+    "symbol": "PreferenceForm",
+    "fingerprint": "44d37d7cf0a520b342967e627cb3bc1dc1267f2c094f1294138f5ba31424de33",
+    "reason": "Reviewed the complete personal-preference form. It composes criteria, delivery, quiet-hours fields, and the statuses/actions of one editor; its only local state is the visible confirmation before discarding input during reload. Boundary validation, actor/source ownership, receipt handling, and request lifetime are delegated to the dedicated controller. The status presentation and footer remain cohesive with this form.",
+    "reviewedOn": "2026-10-11",
+    "reviewedBy": "portfolio_calendar_relationships"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/usePreferenceEditor.ts",
+    "kind": "function",
+    "symbol": "usePreferenceEditor",
+    "fingerprint": "02d53cc30dfd614fbadb40ff10f1afcdc50e0be4494c67e3709334b68e20395f",
+    "reason": "Reviewed every nested action and effect in the complete controller. It owns one full-replacement draft and confirmed baseline through edit, save, refusal, uncertain receipt, explicit reload, and editor-lifetime transitions. All transitions need the same captured actor, source revision, pending request, and lifetime guard, so they have one cohesive state owner. Schemas, identity checks, query ownership, and UI are delegated. It contains no delivery, provider, phone verification, or unrelated domain workflow.",
+    "reviewedOn": "2026-10-11",
+    "reviewedBy": "portfolio_calendar_relationships"
+  }
+]

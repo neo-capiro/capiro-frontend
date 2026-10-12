@@ -1,0 +1,47 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
+    "kind": "function",
+    "symbol": "CapabilitiesPage",
+    "fingerprint": "c7035e84e57e961a34a27d44c8ba60c225add3eaafa1c5c03c969993ba8eaee1",
+    "reason": "CapabilitiesPage owns one current capability-list snapshot, its counts/cards, URL selection and editor mounting. Keeping the successful-read gate beside all four consumers prevents error-state cards or editors from receiving retained cache data. Fit and registration surfaces remain delegated. Registration is now mounted only while open and keyed by the current client, so its edit lifetime and draft cannot cross a close or client change. Requests and write authority remain in query/mutation modules. Retain this composition; extract card presentation only if its fields grow independently.",
+    "reviewedBy": "Codex /root/portfolio_prospects_files",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx",
+    "kind": "function",
+    "symbol": "CapabilityEditor",
+    "fingerprint": "34321d0a906ce186a782e6a691c97066fd26dea60917b269220d1fa3130dc354",
+    "reason": "CapabilityEditor owns the fields, local TRL/token draft values, disabled form state and remove confirmation for one selected capability. Transport, exact-ID validation, actor checks, cancellation and cache updates belong to writer.ts, execution.ts and mutations.ts. The nested confirmation intentionally shares the one operation owner and selected record; another mutation hook would reintroduce overlapping save/remove operations. EntityDocuments is consumed through Files public ownership. The existing formGrid and an owned 12px gap express the Figma two-field Type/Sector row without a shared utility fork. Retain the bounded editor markup.",
+    "reviewedBy": "Codex /root/portfolio_prospects_files",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/opportunities/OpportunitiesPage.tsx",
+    "kind": "function",
+    "symbol": "OpportunitiesPage",
+    "fingerprint": "12dfb4ff2ef77669dc76d5372982b7e9f8f1faa202ba9d79010c2821e7880985",
+    "reason": "OpportunitiesPage composes two independently authoritative feeds, URL search/paging and the explicitly page-scoped summary. The current-read decisions belong alongside the summary and feed-level navigation so failed refreshes cannot leave derived counts or links active. Detailed match and PE evidence rendering is already delegated to OpportunityResults and RelevantPrograms; no transport or new workflow aggregation is introduced. Retain the two-feed page composition.",
+    "reviewedBy": "Codex /root/portfolio_prospects_files",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "kind": "function",
+    "reviewedBy": "Codex /root/portfolio_prospects_files",
+    "reviewedOn": "2026-10-11",
+    "file": "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
+    "symbol": "Registrations",
+    "fingerprint": "42374f1b871e6808c2d9cf2866687e3d91bce3eca49cca42cc09600983eff7b8",
+    "reason": "Registrations owns the read/edit presentation for one registration dialog: the successful exact-client read, eight readonly code rows, five-field draft, legacy certification inputs, current-write controls and read/save failures. The draft key tracks only registration fields so changed codes reset stale uncontrolled inputs while unrelated profile notes preserve a local draft. Native PUT validation and exact receipt checking are in registration-writer.ts; captured actor/lifetime and cache sequencing are in execution.ts and registration-mutations.ts. The 208-line body is primarily the existing field/readonly markup and its mutually exclusive modes, not another transport or profile-update owner. Retain this cohesive dialog; extract an edit panel if its fields or independent reuse grow."
+  },
+  {
+    "kind": "function",
+    "reviewedBy": "Codex /root/portfolio_prospects_files",
+    "reviewedOn": "2026-10-11",
+    "file": "apps/web/src/features/portfolio/capabilities/execution.ts",
+    "symbol": "useCapabilityExecution",
+    "fingerprint": "13fe851dc06739702fcefe4d0d221a041e4ac5b93886cea1c01c0f9279e3e504",
+    "reason": "useCapabilityExecution owns one captured client-view execution lifetime shared by actual capability-save/remove, fit-refresh and registration callers. Identity subscription, the AbortController, one in-flight operation ref and the run guard must agree about the same actor/context/cleanup; separating those internals would obscure cancellation ordering. Shared currentClientWriter/assertClientWriter remains the authority preflight owner, with only the native registration administrator requirement added here. Query readiness, payload/receipt schemas and cache effects remain in their domain writers/mutations. All subscriptions and controllers are disposed; an older finally cannot clear a newer controller. Retain this 87-line lifetime hook; no generic workflow framework is introduced."
+  }
+]

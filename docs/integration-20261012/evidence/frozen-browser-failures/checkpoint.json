@@ -1,0 +1,96 @@
+{
+  "source": "5840b50ea3a94e766666254600f1c16d26d3860a",
+  "runComplete": true,
+  "stats": {
+    "startTime": "2026-10-12T02:22:25.017Z",
+    "duration": 2198580.0990000004,
+    "expected": 869,
+    "skipped": 0,
+    "unexpected": 12,
+    "flaky": 0
+  },
+  "failures": [
+    {
+      "case": "capability-documents-visua-a1117-atus-variants-at-phone-dark",
+      "errors": [
+        "Error: expect(locator).toBeFocused() failed\n\nLocator: getByRole('dialog', { name: 'Capability: Test sensor', exact: true }).getByRole('region', { name: 'Documents', exact: true }).getByRole('button', { name: 'Synthetic datasheet.txt', exact: true })\nExpected: focused\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeFocused\" with timeout 5000ms\n  - waiting for getByRole('dialog', { name: 'Capability: Test sensor', exact: true }).getByRole('region', { name: 'Documents', exact: true }).getByRole('button', { name: 'Synthetic datasheet.txt', exact: true })\n"
+      ],
+      "trace": "docs/integration-20261012/evidence/frozen-browser-failures/capability-documents-visua-a1117-atus-variants-at-phone-dark/trace.zip"
+    },
+    {
+      "case": "capability-execution-late--64346--close-after-client-changes",
+      "errors": [
+        "Error: expect(received).toEqual(expected) // deep equality\n\n- Expected  - 1\n+ Received  + 3\n\n- Array []\n+ Array [\n+   \"GET core/clients/10000000-0000-4000-8000-000000000002/submission-history\",\n+ ]"
+      ],
+      "trace": "docs/integration-20261012/evidence/frozen-browser-failures/capability-execution-late--64346--close-after-client-changes/trace.zip"
+    },
+    {
+      "case": "capability-execution-late--bca55--close-after-client-changes",
+      "errors": [
+        "Error: expect(received).toEqual(expected) // deep equality\n\n- Expected  - 1\n+ Received  + 3\n\n- Array []\n+ Array [\n+   \"GET core/clients/10000000-0000-4000-8000-000000000002/submission-history\",\n+ ]"
+      ],
+      "trace": "docs/integration-20261012/evidence/frozen-browser-failures/capability-execution-late--bca55--close-after-client-changes/trace.zip"
+    },
+    {
+      "case": "capability-fit-boundary-la-7c29f-ublish-after-client-changes",
+      "errors": [
+        "Error: expect(received).toEqual(expected) // deep equality\n\n- Expected  - 1\n+ Received  + 3\n\n- Array []\n+ Array [\n+   \"GET core/clients/10000000-0000-4000-8000-000000000002/submission-history\",\n+ ]"
+      ],
+      "trace": "docs/integration-20261012/evidence/frozen-browser-failures/capability-fit-boundary-la-7c29f-ublish-after-client-changes/trace.zip"
+    },
+    {
+      "case": "capability-presentation-vi-41878-e-surfaces-at-desktop-light",
+      "errors": [],
+      "trace": "docs/integration-20261012/evidence/frozen-browser-failures/capability-presentation-vi-41878-e-surfaces-at-desktop-light/trace.zip"
+    },
+    {
+      "case": "capability-registration-ex-24490-ld-view-effects-after-actor",
+      "errors": [
+        "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: 1\nReceived: 3"
+      ],
+      "trace": "docs/integration-20261012/evidence/frozen-browser-failures/capability-registration-ex-24490-ld-view-effects-after-actor/trace.zip"
+    },
+    {
+      "case": "capability-registration-ex-34298-ew-effects-after-invalidate",
+      "errors": [
+        "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: 1\nReceived: 2"
+      ],
+      "trace": "docs/integration-20261012/evidence/frozen-browser-failures/capability-registration-ex-34298-ew-effects-after-invalidate/trace.zip"
+    },
+    {
+      "case": "capability-registration-ex-72f07-d-view-effects-after-client",
+      "errors": [
+        "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: 1\nReceived: 2"
+      ],
+      "trace": "docs/integration-20261012/evidence/frozen-browser-failures/capability-registration-ex-72f07-d-view-effects-after-client/trace.zip"
+    },
+    {
+      "case": "capability-registration-ex-89d39-effects-after-standard-role",
+      "errors": [
+        "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: 1\nReceived: 3"
+      ],
+      "trace": "docs/integration-20261012/evidence/frozen-browser-failures/capability-registration-ex-89d39-effects-after-standard-role/trace.zip"
+    },
+    {
+      "case": "portfolio-index-wordmark-o-75dd7-olio-stays-in-its-workspace",
+      "errors": [
+        "Error: expect(locator).toHaveAttribute(expected) failed\n\nLocator: getByRole('link', { name: 'Capiro dashboard' })\nExpected: \"http://127.0.0.1:5191/existing/\"\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toHaveAttribute\" with timeout 5000ms\n  - waiting for getByRole('link', { name: 'Capiro dashboard' })\n"
+      ],
+      "trace": "docs/integration-20261012/evidence/frozen-browser-failures/portfolio-index-wordmark-o-75dd7-olio-stays-in-its-workspace/trace.zip"
+    },
+    {
+      "case": "registrant-intake-selectio-c5227--selected-through-filtering",
+      "errors": [
+        "Error: locator.check: Test timeout of 30000ms exceeded.\nCall log:\n  - waiting for getByRole('checkbox', { name: 'Select Synthetic Client 45', exact: true })\n    - locator resolved to <input type=\"checkbox\" aria-label=\"Select Synthetic Client 45\"/>\n  - attempting click action\n    - waiting for element to be visible, enabled and stable\n    - element is visible, enabled and stable\n    - scrolling into view if needed\n"
+      ],
+      "trace": "docs/integration-20261012/evidence/frozen-browser-failures/registrant-intake-selectio-c5227--selected-through-filtering/trace.zip"
+    },
+    {
+      "case": "tracker-alert-preferences--b69cd-ersonal-preference-contract",
+      "errors": [
+        "Error: expect(locator).toHaveCount(expected) failed\n\nLocator:  getByRole('button', { name: 'My alert preferences' })\nExpected: 0\nReceived: 1\nTimeout:  5000ms\n\nCall log:\n  - Expect \"toHaveCount\" with timeout 5000ms\n  - waiting for getByRole('button', { name: 'My alert preferences' })\n    14 \u00d7 locator resolved to 1 element\n       - unexpected value \"1\"\n"
+      ],
+      "trace": "docs/integration-20261012/evidence/frozen-browser-failures/tracker-alert-preferences--b69cd-ersonal-preference-contract/trace.zip"
+    }
+  ]
+}

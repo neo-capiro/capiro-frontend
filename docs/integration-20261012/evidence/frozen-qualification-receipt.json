@@ -1,0 +1,108 @@
+{
+  "applicationSource": "5840b50ea3a94e766666254600f1c16d26d3860a",
+  "sourceTree": "256bdbdeac97257e5b14d7ff97e44951b6ca7fc5",
+  "result": "FAILED_COMBINED_QUALIFICATION",
+  "portfolioBrowser": {
+    "passed": 869,
+    "failed": 12,
+    "skipped": 0,
+    "flaky": 0,
+    "durationMs": 2198580.099
+  },
+  "modulesBrowser": {
+    "passed": 62,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0
+  },
+  "passes": {
+    "repositoryTests": 56,
+    "transportTests": 21,
+    "portfolioUnits": 1007,
+    "modulesContractUnits": 94,
+    "uiProvenanceSSR": 15,
+    "lintErrors": 0,
+    "lintWarnings": 76,
+    "architectureBoundaryErrors": 0,
+    "architectureBlockingErrors": 0
+  },
+  "otherPassed": [
+    "clean install",
+    "public package hashes",
+    "workspace types",
+    "formatting",
+    "unified Next production build",
+    "actual standalone-server routes/navigation/style smoke",
+    "representative Figma/mobile/keyboard review with stated limits"
+  ],
+  "unrun": [
+    "container build and smoke",
+    "image vulnerability scan",
+    "AWS build/push/deploy",
+    "live Clerk/tenant/role/client matrices",
+    "native backend/provider/database acceptance",
+    "paid runtime/billing actions",
+    "all337 Portfolio native acceptance rows"
+  ],
+  "artifacts": [
+    {
+      "path": "clean-install.txt",
+      "sha256": "fbcc57141a0a6c30eaf5fa4a85072786d6d247857c30669ea9a11efa85014f2f",
+      "bytes": 164
+    },
+    {
+      "path": "combined-check.txt",
+      "sha256": "8dacac771ac04570a95d06a92cd1fcf849db431fb424723ae0f999a67012021e",
+      "bytes": 730847
+    },
+    {
+      "path": "production-build.txt",
+      "sha256": "1d3c5718f97bab44bc1ab0f3b0370ccd3b1ed7ddb4f39d4b4ce08a37934a2a4f",
+      "bytes": 2299,
+      "captureSha256": "c90df43b937ae1f728f0aa37d2677bd30eea70eac857f0e08336e4f8c88ecf83",
+      "captureBytes": 2302,
+      "normalization": "Git text normalization converted three CRLF progress lines to LF; captured byte hash retained."
+    },
+    {
+      "path": "actual-server.txt",
+      "sha256": "21c889355b32eac597d1f948834e97d06bf87314d2c71726359ad80d1c2bf7d9",
+      "bytes": 3877
+    },
+    {
+      "path": "modules-browser.txt",
+      "sha256": "e4afda46b374e5bc0f7395419311b3d34c2298ef87b8217ec37f47c4a6a24f4d",
+      "bytes": 9082
+    },
+    {
+      "path": "modules-browser.json",
+      "sha256": "c69da5c02589dddf36bde34fb4e78d2a2aa9195e76df6783076356090ca21af4",
+      "bytes": 69286
+    },
+    {
+      "path": "ui-provenance-ssr.txt",
+      "sha256": "dea78bc6557588624ef24badbe0741ff1eaf5f634706ff5c819b3edc8b27817b",
+      "bytes": 3093
+    },
+    {
+      "path": "ui-ssr-build.txt",
+      "sha256": "d22d13ef844b24507eb34dda2d4dd934bce261cd5b917897789e51c622340995",
+      "bytes": 212
+    },
+    {
+      "path": "meri-actual-server.json",
+      "sha256": "3cb2c90cc88a84a0ff47c4771c0eaf4aad95033e2900d72a5775622350e2a520",
+      "bytes": 592
+    },
+    {
+      "path": "portfolio-browser-frozen.txt",
+      "sha256": "45d9d636a7719fd7cc39c4135038f22bf7d19a4b1ebfca7f745d59ed88554f61",
+      "bytes": 159371
+    },
+    {
+      "path": "portfolio-browser-frozen.json",
+      "sha256": "b399b91ef9b832fc0608a72ef950eb08634fea9374b84786d21e3727e91ad7a5",
+      "bytes": 1010940
+    }
+  ],
+  "artifactHashMeaning": "sha256 and bytes describe committed artifact bytes; capture fields preserve original console bytes when Git normalized line endings."
+}

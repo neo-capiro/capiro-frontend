@@ -1,0 +1,190 @@
+{
+  "status": "BOUNDED_SOURCE_REVIEW_PASS_FINAL_PACKAGE_QUALIFICATION_PENDING",
+  "reviewedBy": "/root/portfolio_prospects_files",
+  "reviewedAt": "2026-10-12T01:45:13.308723+00:00",
+  "scope": "Independent read-only collector, verifier, restorer and bounded ignored-context finalizer source review. No collector, product tests/build/browser, live provider or remote writes run by this reviewer.",
+  "reviewedFiles": [
+    {
+      "path": "/workspace/scratch/158b6018a5d3/handover-preparation/collect_context.py",
+      "bytes": 24194,
+      "sha256": "e58a7bb5e903b5efa1fe5d131d2f9044a9e163993b17998f7b526526c863e50c"
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/handover-preparation/context_common.py",
+      "bytes": 10416,
+      "sha256": "8633a0f83cc28e54ea65c9bb99300090861fbfe35d0a16efd40d5e15e3d0c800"
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/handover-preparation/scan_credentials.py",
+      "bytes": 7717,
+      "sha256": "692f36b9a5195e04fd0ab973cf2f088e540f654fc4762e91e61e789decea421c"
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/handover-preparation/verify_context.py",
+      "bytes": 824,
+      "sha256": "4a28c73ac3020924a0680bd383f85cb0e04e2eb237142806e52c01d4aaab8c23"
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/handover-preparation/restore_context.py",
+      "bytes": 6699,
+      "sha256": "b1b4259934e150c4c4c7f9097c14da3f460c241e69bc3688770bd203ff581802"
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/handover-preparation/finalize_context.py",
+      "bytes": 11138,
+      "sha256": "efc9278cba772088283d5d9ca3aa9072bcac91704a79bef794df460ba5b54ce1"
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/handover-preparation/CONTEXT-TOOLS.md",
+      "bytes": 7076,
+      "sha256": "abbcf906830d22a72def1b98369367eb0665f36e58e9659a77a73dec977c37e7"
+    }
+  ],
+  "initialCandidate": {
+    "path": "/workspace/scratch/158b6018a5d3/handover-preparation/tools-candidate-01.json",
+    "sha256": "4ba274530a92190d64cec67c7f2ef3ca833eb0b8fe4fe0cce90e55a08328d1f3",
+    "qualification": "Historical initial candidate; exact current file hashes above include the reviewed follow-ups."
+  },
+  "responsibilitiesReviewed": [
+    {
+      "owner": "collect_context.py",
+      "assessment": "Discovers all registered in-workspace Git worktrees; captures tracked/untracked current files, outputs and every additional ignored file/root except explicit runtime/build/auth/handover exclusions. Missing tracked paths, binary diffs, index and exact working metadata are retained. Source capture uses exact bytes, modes and filesystem identities, with source/selection/Git stability checks. Excluded untracked handover status changes do not weaken HEAD/index/diff or selected-byte checks."
+    },
+    {
+      "owner": "context_common.py / verify_context.py",
+      "assessment": "Manifest canonical JSON and an optional trusted external hash bind metadata and compressed packs; exact named regular blob member inventory, uncompressed hashes/sizes, gzip integrity and recorded counts are verified. Unsafe paths, duplicate keys, file/parent collisions, private Git paths, arbitrary archive member destinations and missing/unreferenced blobs are refused."
+    },
+    {
+      "owner": "restore_context.py",
+      "assessment": "An explicit new absolute target is required. The full package is verified before creation; regular files are created exclusively and rehashed, source modes are recorded and only ordinary rwx bits restored. Symlinks require opt-in, are validated for lexical containment and chained/self references, and are written last. Metadata and final manifest/checksum copies are bound to verified bytes; partial failures retain diagnosis without overwriting existing user files."
+    },
+    {
+      "owner": "scan_credentials.py",
+      "assessment": "Scans each distinct source payload plus ordinary nested ZIP/gzip/tar contents, records format/context candidates without printing matched values, and records encrypted/unreadable/budget coverage limits. It does not silently redact or publish and does not claim guaranteed absence of credentials; final disposition belongs to root."
+    },
+    {
+      "owner": "finalize_context.py",
+      "assessment": "The initial WIP manifest is retained byte-exact as gzip metadata; existing packs are hash-checked and remain unchanged. Additional ignored context is captured under a second explicit stability boundary, new packs append with exclusive creation, and the primary history reference is replaced with the separately qualified base-dependent bundle while preserving its historical predecessor. Final complete package verification remains required."
+    }
+  ],
+  "resolvedFindings": [
+    {
+      "id": "CONTEXT-RESTORE-01",
+      "finding": "Final copied manifest/checksum could change after initial verification without being rebound before the restoration receipt.",
+      "resolution": "Current restore_context.py compares manifest bytes to captured receipt.manifestSha256 and compares checksum bytes to that exact anchor before writing the checked bytes.",
+      "regressionReceipt": "/workspace/scratch/158b6018a5d3/handover-preparation/manifest-copy-self-check-receipt.json",
+      "regressionReceiptSha256": "c5154dac505f4c79de4a3073efe7b517ff733c506430f98cab7d9c0caf31a646"
+    },
+    {
+      "id": "CONTEXT-COVERAGE-01",
+      "foundBy": "root/P3",
+      "finding": "Initial output-only ignored selection omitted existing apps/web/work and test-results context.",
+      "resolution": "Current select_files includes all ignored roots/files except explicit exclusions; finalizer preserves initial history and adds the discovered union. This source review does not call the original31432-path capture final."
+    },
+    {
+      "id": "HANDOVER-HISTORY-01",
+      "resolutionReview": "/workspace/scratch/158b6018a5d3/handover-preparation/direct-artifact-history-resolution.json",
+      "sha256": "0a3cde2743f510e222aa9678c2580cf72a1b3a5700fef3a9792976bbd0998124",
+      "qualification": "Qualified primary bundle requires published base02c; original all-ref bundle remains historical, not self-contained older ancestry."
+    }
+  ],
+  "blockingSourceFindings": [],
+  "reviewedQualificationReceipts": [
+    {
+      "path": "/workspace/scratch/158b6018a5d3/handover-preparation/manifest-copy-self-check-receipt.json",
+      "sha256": "c5154dac505f4c79de4a3073efe7b517ff733c506430f98cab7d9c0caf31a646",
+      "contents": {
+        "browserBuildProviderOrNetworkCalls": false,
+        "check": "Manifest changed after complete verification is refused before publishing a restoration receipt",
+        "passed": 1,
+        "productSourceTouched": false,
+        "scope": "synthetic preservation-tool review regression only"
+      }
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/handover-preparation/safe-link-self-check-receipt.json",
+      "sha256": "e2fdf32b18096e43b7b493172196f5925693f654a22cdf40e620e7610fd99c2c",
+      "contents": {
+        "browserBuildProviderOrNetworkCalls": false,
+        "checks": [
+          "chained symlink target refused",
+          "self-referential symlink target refused",
+          "direct contained parent-relative target accepted"
+        ],
+        "passed": 3,
+        "productSourceTouched": false,
+        "scope": "supplementary preservation-restorer self-check only",
+        "sourceFiles": [
+          "restore_context.py"
+        ]
+      }
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/handover-preparation/self-check-final-receipt.json",
+      "sha256": "ac27062d06b39205a583c4194e2bdf230f9b99002abab4868ceae2bbed023e8c",
+      "contents": {
+        "browserBuildProviderOrNetworkCalls": false,
+        "checks": [
+          "exact source, untracked, ignored evidence, other context, exclusions, dedup and deletion metadata",
+          "every pack/blob/metadata/manifest and separate Git bundle verified",
+          "exact new-target restore, executable mode, no Git internals and deleted file remains absent",
+          "existing target refused without overwrite",
+          "same exact inputs produce deterministic identical gzip/tar pack hashes",
+          "changed compressed bytes refused",
+          "traversal manifest refused before destination creation",
+          "symlink opt-in and escaping-target refusal before creation"
+        ],
+        "evidenceRoot": "/workspace/scratch/158b6018a5d3/handover-preparation/preservation-self-check-9r4tohdv",
+        "passed": 8,
+        "productSourceTouched": false,
+        "scope": "synthetic preservation tool self-check only"
+      }
+    },
+    {
+      "path": "/workspace/scratch/158b6018a5d3/handover-preparation/self-check-receipt.json",
+      "sha256": "8f4c11a8c6f747c783c2358e0ab8c9fec07815bbc1d1d3605f2aa6cf85ad39c1",
+      "contents": {
+        "browserBuildProviderOrNetworkCalls": false,
+        "checks": [
+          "exact source, untracked, ignored evidence, other context, exclusions, dedup and deletion metadata",
+          "every pack/blob/metadata/manifest and separate Git bundle verified",
+          "exact new-target restore, executable mode, no Git internals and deleted file remains absent",
+          "existing target refused without overwrite",
+          "same exact inputs produce deterministic identical gzip/tar pack hashes",
+          "changed compressed bytes refused",
+          "traversal manifest refused before destination creation",
+          "symlink opt-in and escaping-target refusal before creation"
+        ],
+        "evidenceRoot": "/workspace/scratch/158b6018a5d3/handover-preparation/preservation-self-check-5o1wimkd",
+        "passed": 8,
+        "productSourceTouched": false,
+        "scope": "synthetic preservation tool self-check only"
+      }
+    }
+  ],
+  "observedPackageState": {
+    "manifestSha256Observed": "c23fb2a329d4a6c314ef41bec572603049e2601168579b86d2dd94bba4aa2575",
+    "unionCapturePresent": true,
+    "summaryObserved": {
+      "compressedPackBytes": 330942983,
+      "files": 35264,
+      "missingTrackedPaths": 1,
+      "originalBytes": 1834280585,
+      "packCount": 166,
+      "symlinks": 0,
+      "targetUncompressedPackBytes": 8388608,
+      "uniqueBlobs": 9729,
+      "uniqueBytes": 1319568537,
+      "worktrees": 14
+    },
+    "qualification": "Observed metadata only; no independent complete package verification run by this reviewer."
+  },
+  "remainingQualification": [
+    "Root/P3 must finish the union package and run the complete verifier against its final outside manifest digest and the exact qualified history bundle.",
+    "Root must review all recorded credential candidates/limits and preserve the disposition; this source review is not a credentials-clearance claim.",
+    "Publish the final exact scripts, final digest, raw finalization/verification receipts, earlier failed cleanup history, and direct-artifact review plus its separate history resolution.",
+    "The actual handover/publication commit and source/tree links remain root responsibilities.",
+    "No final application build/production/full-browser/signed-in/native acceptance is implied by preservation-tool qualification."
+  ],
+  "mutationScope": "This new ignored review record only; all reviewed source and historical evidence left unchanged."
+}

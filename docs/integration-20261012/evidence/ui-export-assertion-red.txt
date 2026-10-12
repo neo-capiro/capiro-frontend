@@ -1,0 +1,118 @@
+
+> capiro-frontend@0.1.0 check:elements
+> npm run pins:check --workspace @capiro/qualification-elements && npm run check --workspace @capiro/qualification-elements
+
+
+> @capiro/qualification-elements@0.0.0 pins:check
+> node generate-pins.mjs --check
+
+{"check":true,"bytes":10724}
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+
+> @capiro/qualification-elements@0.0.0 check
+> npm run typecheck && npm test
+
+
+> @capiro/qualification-elements@0.0.0 typecheck
+> tsc -p tsconfig.json
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+
+> @capiro/qualification-elements@0.0.0 test
+> node --test qualification.test.mjs
+
+✔ SSR harness caches its first success or failure without launching again (2.525523ms)
+✔ SSR harness diagnostics retain only bounded phase counts and no raw payloads (30.344697ms)
+✔ all adopted value exports remain present in the frozen static inventory (561.394354ms)
+✔ elapsed deadline refuses a starved timer and real guards refuse restricted operations (601.764238ms)
+✔ real receipt rejects wrong identity, missing or changed source and changed output before execution (2275.59929ms)
+✔ immutable vendor blob identities and one exact owner adaptation (27.640934ms)
+✖ actual import graph is a closed seventeen-file display source; no runtime AI orchestration (156.050896ms)
+✔ allocated package closure and every non-self artifact hash match actual files (87.153081ms)
+✔ strict compiler checks remain enabled for every actual adopted source (0.621371ms)
+✔ exact dependency lock uses registry integrities and actual installed package versions (181.839342ms)
+✔ license/notice inventory checks actual package files and retains complete Apache terms (242.759741ms)
+✔ real Conversation, Message and PromptInput server-render deterministically without network/DOM/provider/native calls (5963.456043ms)
+ℹ {"elapsedMs":4119.5820779999995,"loadedModules":8,"buildInputs":2807,"deniedAttempts":0}
+✔ hostile HTML, URLs, Markdown and diagram syntax remain escaped plain text in all display slots (0.385213ms)
+✔ fixture enables no Markdown, attachment, screenshot, speech, model or durable command control (200.746772ms)
+✔ CSS records real Tailwind4/Streamdown sources while leaving browser styling unqualified (0.374156ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 14
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12441.877838
+
+✖ failing tests:
+
+test at qualification.test.mjs:240:3
+✖ actual import graph is a closed seventeen-file display source; no runtime AI orchestration (156.050896ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+      './button': './src/shadcn/button.tsx',
+      './conversation': './src/ai-elements/conversation.tsx',
+  +   './dialog': './src/shadcn/dialog.tsx',
+  +   './dropdown-menu': './src/shadcn/dropdown-menu.tsx',
+  +   './input': './src/shadcn/input.tsx',
+      './message': './src/ai-elements/message.tsx',
+      './prompt-input': './src/ai-elements/prompt-input.tsx',
+  +   './select': './src/shadcn/select.tsx',
+  +   './textarea': './src/shadcn/textarea.tsx'
+    }
+  
+      at TestContext.<anonymous> (file:///workspace/capiro-integration/packages/qualification-elements/qualification.test.mjs:245:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { './button': './src/shadcn/button.tsx', './dialog': './src/shadcn/dialog.tsx', './input': './src/shadcn/input.tsx', './textarea': './src/shadcn/textarea.tsx', './select': './src/shadcn/select.tsx', './dropdown-menu': './src/shadcn/dropdown-menu.tsx', './conversation': './src/ai-elements/conversation.tsx', './message': './src/ai-elements/message.tsx', './prompt-input': './src/ai-elements/prompt-input.tsx' },
+    expected: { './button': './src/shadcn/button.tsx', './conversation': './src/ai-elements/conversation.tsx', './message': './src/ai-elements/message.tsx', './prompt-input': './src/ai-elements/prompt-input.tsx' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+npm error Lifecycle script `test` failed with error:
+npm error code 1
+npm error path /workspace/capiro-integration/packages/qualification-elements
+npm error workspace @capiro/qualification-elements@0.0.0
+npm error location /workspace/capiro-integration/packages/qualification-elements
+npm error command failed
+npm error command sh -c node --test qualification.test.mjs
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm error Lifecycle script `check` failed with error:
+npm error code 1
+npm error path /workspace/capiro-integration/packages/qualification-elements
+npm error workspace @capiro/qualification-elements@0.0.0
+npm error location /workspace/capiro-integration/packages/qualification-elements
+npm error command failed
+npm error command sh -c npm run typecheck && npm test
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

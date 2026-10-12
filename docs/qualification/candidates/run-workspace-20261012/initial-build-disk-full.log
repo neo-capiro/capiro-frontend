@@ -1,0 +1,42 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> capiro-frontend@0.1.0 build
+> npm run build --workspace @capiro/meri-client && npm run build --workspace @capiro/web
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @capiro/meri-client@0.1.0 build
+> tsc -p tsconfig.json
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @capiro/web@0.1.0 build
+> next build
+
+▲ Next.js 16.4.0 (Turbopack)
+✓ Running next.config.ts took 78ms
+⚠ No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache
+
+  Creating an optimized production build ...
+Error: ENOSPC: no space left on device, write
+    at ignore-listed frames {
+  errno: -28,
+  syscall: 'write',
+  code: 'ENOSPC'
+}
+
+> Build error occurred
+[Error: Failed to open database
+
+Caused by:
+    0: Creating and initializing persistence directory failed
+    1: failed to create directory `/workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web/.next/cache/turbopack/v16.4.0-e273d5b2`: No space left on device (os error 28)] {
+  code: 'GenericFailure'
+}
+npm error Lifecycle script `build` failed with error:
+npm error code 1
+npm error path /workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/scratch/853fba62b1f1/capiro-frontend-run-workspace-20261012/apps/web
+npm error command failed
+npm error command sh -c next build

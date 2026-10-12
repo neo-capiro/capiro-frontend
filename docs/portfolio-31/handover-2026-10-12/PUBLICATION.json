@@ -1,0 +1,544 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-12T02:19:47.473Z",
+  "purpose": "Verified publication of the complete Portfolio source, handover and recoverable context. This receipt is added in a later commit so it can bind the preceding handover commit without a recursive self-hash.",
+  "repository": "neo-capiro/capiro-frontend",
+  "branch": "codex/portfolio-continuation-20261011",
+  "pullRequest": "https://github.com/neo-capiro/capiro-frontend/pull/6",
+  "productSource": {
+    "localCommit": "760dcc6c1179312c7f4b762e64cf3af1aad60c3e",
+    "publishedEquivalentCommit": "abaeab37b36d60b3e5185755e1b2c9169d7c92f3",
+    "exactTree": "46417a01484727747b0a2d81b3b4f278285cb709",
+    "base": "02c02d95bdf3949662b9123f425271c6491ffdab",
+    "localContinuationCommits": 33,
+    "unchangedSourceFilesVerified": 1184
+  },
+  "handover": {
+    "localCommit": "9cd880c382fa3e2dc6d8c64ff640f08b948cc373",
+    "publishedCommit": "8bbed4793704f2ecb7f93a70f99d101b86519052",
+    "exactLocalAndRemoteTree": "533f107548deb237170dddf89ee43354b211faf0",
+    "filesBeforeThisReceipt": 478,
+    "stagedBytesVerified": true,
+    "localWorktreeCleanAtContentCommit": true,
+    "sourceAndHandoverHistoryAreDifferentButTreesMatch": true
+  },
+  "context": {
+    "originalManifestSha256": "c23fb2a329d4a6c314ef41bec572603049e2601168579b86d2dd94bba4aa2575",
+    "originalFilePaths": 35264,
+    "worktrees": 14,
+    "uniqueByteBlobs": 9729,
+    "metadataFiles": 202,
+    "originalPacks": 166,
+    "compressedPackBytes": 330942983,
+    "originalPackageFiles": 370,
+    "ordinaryFilesDelivered": 367,
+    "originalsSplit": 3,
+    "transportParts": 8,
+    "transportBytes": 56024983,
+    "reconstructionAndFullVerificationPassed": true,
+    "credentialFindingDisposition": "receipts/credential-scan-disposition.json"
+  },
+  "history": {
+    "primary": "history/portfolio-continuation-760dcc6-requires-02c02d9.bundle",
+    "bytes": 1389324,
+    "sha256": "591d293dee1b903e31c70e8b659beae928b04d4c1ed87c8e7a6e27416eabc8af",
+    "requiresPublishedBase": "02c02d95bdf3949662b9123f425271c6491ffdab",
+    "qualifiedFreshRestorationReceipt": "history/qualified-history-restoration.json",
+    "originalAllRefsAttempt": "history/portfolio-local-history-through-760dcc6.bundle",
+    "originalAllRefsQualification": "Historical shallow-source attempt; do not claim an independently self-contained upstream restore.",
+    "localHandoverCommitObjectBase64": "dHJlZSA1MzNmMTA3NTQ4ZGViMjM3MTcwZGRkZjg5ZWU0MzM1NGIyMTFmYWYwCnBhcmVudCA3NjBkY2M2YzExNzkzMTJjN2Y0Yjc2MmU2NGNmM2FmMWFhZDYwYzNlCmF1dGhvciBDb2RleCA8Y29kZXhAb3BlbmFpLmNvbT4gMTc5MTc3MTI3MCAtMDQwMApjb21taXR0ZXIgQ29kZXggPGNvZGV4QG9wZW5haS5jb20+IDE3OTE3NzEyNzAgLTA0MDAKClByZXNlcnZlIGNvbXBsZXRlIFBvcnRmb2xpbyBoYW5kb3ZlciBhbmQgcmVjb3ZlcmFibGUgc2Vzc2lvbiBjb250ZXh0Cg==",
+    "localHandoverObjectUse": "Optional exact local documentation-commit recovery: after importing the primary source-history bundle, the published handover clone supplies this commit's identical tree. Base64-decode these original commit bytes and use git hash-object -t commit -w --stdin; expect local commit 9cd880c382fa3e2dc6d8c64ff640f08b948cc373. This does not change a ref."
+  },
+  "deliveryFiles": {
+    "HANDOVER.md": {
+      "bytes": 83865,
+      "sha256": "818f8c7a056f52f31e56024a5510d19c1c240155e9b98cb67f69a2573e0494e9"
+    },
+    "README.md": {
+      "bytes": 6226,
+      "sha256": "dd56a70834c7b341b30fbccaa228fc82e0b350bd74458efdd0152355396be65c"
+    },
+    "REFERENCE-INDEX.md": {
+      "bytes": 36587,
+      "sha256": "d55cd62c8f84a20a9608c3f073ef4cdc4524c4d9b23f58fae488b8c10940769c"
+    },
+    "DELIVERY-INVENTORY.json": {
+      "bytes": 133395,
+      "sha256": "2a7c8b4b4a61739dae3baf6bd81572295dc2d4f6597b631ec621f7c78d62d74a"
+    },
+    "CONTEXT-DELIVERY.md": {
+      "bytes": 4830,
+      "sha256": "8a274a3e9e5af625f3395cd4693494cd4da2e3dbd501a1409cd42f7104ce3fc6"
+    },
+    "context-delivery.json": {
+      "bytes": 2116,
+      "sha256": "2e64be7670e860809a63781e17e683f1d1a10ad5857a23b5bce305e7c3e09ed5"
+    },
+    "VERIFICATION-SUMMARY.json": {
+      "bytes": 1093,
+      "sha256": "213119442ab3d9a6580ba8b1abfbf51e46d566dfbd61e0743ddf2e660176fd19"
+    },
+    "receipts/context-delivery-qualification.json": {
+      "bytes": 7620,
+      "sha256": "afb7cbd1faeb69c23dcab189879d1d9c9704084d42b9a48e60157eb9c5efd0a3"
+    },
+    "receipts/context/context-verification-result.json": {
+      "bytes": 253,
+      "sha256": "17bbb656a1d8ff08d1907dade487d98e9754f4a2f199900a3a27c1d305819047"
+    },
+    "reviews/context-delivery-independent-review.json": {
+      "bytes": 10446,
+      "sha256": "7fa2343df505540af1ed5db6281ae2bc6519ad5a1eaaa593827de3b8879a4fd3"
+    },
+    "reviews/final-handover-document-review.json": {
+      "bytes": 6746,
+      "sha256": "aa71a2a4a2634f62b16cbfc5a3be9a1baa645dcaae010ccabc760d7d9eb946fc"
+    }
+  },
+  "inventory": {
+    "scope": "Every direct handover file except the two explicitly named self/publication receipts; original context file paths and byte blobs are separately pinned by the immutable materialized context manifest.",
+    "sourceCommit": "760dcc6c1179312c7f4b762e64cf3af1aad60c3e",
+    "publishedEquivalentSourceCommit": "abaeab37b36d60b3e5185755e1b2c9169d7c92f3",
+    "sourceTree": "46417a01484727747b0a2d81b3b4f278285cb709",
+    "unchangedSourceFilesVerified": 1184,
+    "contextManifestSha256": "c23fb2a329d4a6c314ef41bec572603049e2601168579b86d2dd94bba4aa2575",
+    "contextDeliverySha256": "2e64be7670e860809a63781e17e683f1d1a10ad5857a23b5bce305e7c3e09ed5",
+    "exclusions": [
+      "DELIVERY-INVENTORY.json",
+      "PUBLICATION.json"
+    ],
+    "exclusionReason": "An inventory cannot include its own final hash; the later publication receipt records this inventory hash and the exact containing Git tree.",
+    "fileCount": 477,
+    "totalBytes": 360325228
+  },
+  "immutableBlobPublication": {
+    "files": 177,
+    "bytes": 354651069,
+    "allGitBlobHashesMatch": true,
+    "receipts": [
+      "receipts/small-pack-upload-receipts.json",
+      "receipts/part-upload-receipts.json",
+      "receipts/extra-binary-upload-receipts.json"
+    ]
+  },
+  "treePublication": {
+    "exactMatch": true,
+    "batches": [
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 0,
+        "entries": 11,
+        "referencedBytes": 16618695,
+        "baseTree": "46417a01484727747b0a2d81b3b4f278285cb709",
+        "tree": "30e99de924b9a8a24a6c3520435d43054eae10a2"
+      },
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 1,
+        "entries": 8,
+        "referencedBytes": 14810267,
+        "baseTree": "30e99de924b9a8a24a6c3520435d43054eae10a2",
+        "tree": "c4a4fc7bcc0dafdc2823da994a9a43c306995a0f"
+      },
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 2,
+        "entries": 9,
+        "referencedBytes": 16075335,
+        "baseTree": "c4a4fc7bcc0dafdc2823da994a9a43c306995a0f",
+        "tree": "39a2b57a514609efffe0b5bd51ca59fc9fe44d7b"
+      },
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 3,
+        "entries": 8,
+        "referencedBytes": 14725665,
+        "baseTree": "39a2b57a514609efffe0b5bd51ca59fc9fe44d7b",
+        "tree": "16ec9741b256be1fcd501ee8e01daa7c2e89afa5"
+      },
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 4,
+        "entries": 9,
+        "referencedBytes": 15584153,
+        "baseTree": "16ec9741b256be1fcd501ee8e01daa7c2e89afa5",
+        "tree": "c7b22c49d68cea0b8e1d011912e9e0dae36a8e1f"
+      },
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 5,
+        "entries": 8,
+        "referencedBytes": 15566646,
+        "baseTree": "c7b22c49d68cea0b8e1d011912e9e0dae36a8e1f",
+        "tree": "3a285b7108738c4d523bef838574d878f89728a2"
+      },
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 6,
+        "entries": 9,
+        "referencedBytes": 15529081,
+        "baseTree": "3a285b7108738c4d523bef838574d878f89728a2",
+        "tree": "688faa8090b7b9cbb1ea0c1474ade8462d0491c2"
+      },
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 7,
+        "entries": 7,
+        "referencedBytes": 15267377,
+        "baseTree": "688faa8090b7b9cbb1ea0c1474ade8462d0491c2",
+        "tree": "a77620ec120e33448063308564423361e843c946"
+      },
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 8,
+        "entries": 9,
+        "referencedBytes": 13065418,
+        "baseTree": "a77620ec120e33448063308564423361e843c946",
+        "tree": "0101f3be448493e1a21322f657f9dbc73ca6e009"
+      },
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 9,
+        "entries": 9,
+        "referencedBytes": 16332524,
+        "baseTree": "0101f3be448493e1a21322f657f9dbc73ca6e009",
+        "tree": "cca011d8bc3dc4376291b08d36dd37ae27624583"
+      },
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 10,
+        "entries": 9,
+        "referencedBytes": 15565605,
+        "baseTree": "cca011d8bc3dc4376291b08d36dd37ae27624583",
+        "tree": "600cb104c550e0b37cd4883b970855ab64d0c9d7"
+      },
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 11,
+        "entries": 10,
+        "referencedBytes": 15963709,
+        "baseTree": "600cb104c550e0b37cd4883b970855ab64d0c9d7",
+        "tree": "7995ecc77ffa799f717888aba8fc7b1410f84134"
+      },
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 12,
+        "entries": 7,
+        "referencedBytes": 16080428,
+        "baseTree": "7995ecc77ffa799f717888aba8fc7b1410f84134",
+        "tree": "03834fe1d72eaf469f8f4617e8885854d0968e3c"
+      },
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 13,
+        "entries": 9,
+        "referencedBytes": 16510092,
+        "baseTree": "03834fe1d72eaf469f8f4617e8885854d0968e3c",
+        "tree": "329ccea88c3216167b03812a4a645a0d784b08f7"
+      },
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 14,
+        "entries": 9,
+        "referencedBytes": 14984984,
+        "baseTree": "329ccea88c3216167b03812a4a645a0d784b08f7",
+        "tree": "63443f467902710dd75de4d183a80c2bbc804bfa"
+      },
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 15,
+        "entries": 8,
+        "referencedBytes": 15195643,
+        "baseTree": "63443f467902710dd75de4d183a80c2bbc804bfa",
+        "tree": "54c9d353daa83c2ddf5b70b687011863b537e4ea"
+      },
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 16,
+        "entries": 9,
+        "referencedBytes": 16551835,
+        "baseTree": "54c9d353daa83c2ddf5b70b687011863b537e4ea",
+        "tree": "c6ef263d832256a207997123b9869bf6ee59c810"
+      },
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 17,
+        "entries": 9,
+        "referencedBytes": 15680280,
+        "baseTree": "c6ef263d832256a207997123b9869bf6ee59c810",
+        "tree": "a405998eb3e921626be56085a37c37b66a288a5d"
+      },
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 18,
+        "entries": 7,
+        "referencedBytes": 10572488,
+        "baseTree": "a405998eb3e921626be56085a37c37b66a288a5d",
+        "tree": "e95e5304b294859ec2be0061f8d91c6017ef0315"
+      },
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 19,
+        "entries": 2,
+        "referencedBytes": 16777216,
+        "baseTree": "e95e5304b294859ec2be0061f8d91c6017ef0315",
+        "tree": "3e43b6de54e0f4e38192eda949472117fd819848"
+      },
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 20,
+        "entries": 2,
+        "referencedBytes": 12013332,
+        "baseTree": "3e43b6de54e0f4e38192eda949472117fd819848",
+        "tree": "8d4666bc0798704cea09d42da026a7ff2e740dec"
+      },
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 21,
+        "entries": 2,
+        "referencedBytes": 11472210,
+        "baseTree": "8d4666bc0798704cea09d42da026a7ff2e740dec",
+        "tree": "a6e68fa052f14b3673114ae7400cc497a5e2523b"
+      },
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 22,
+        "entries": 2,
+        "referencedBytes": 15762225,
+        "baseTree": "a6e68fa052f14b3673114ae7400cc497a5e2523b",
+        "tree": "5a7173c54dc8d3829a4491ea777ba8dabc5d1fe7"
+      },
+      {
+        "kind": "verified-immutable-blobs",
+        "index": 23,
+        "entries": 5,
+        "referencedBytes": 7945861,
+        "baseTree": "5a7173c54dc8d3829a4491ea777ba8dabc5d1fe7",
+        "tree": "7cb54abb867217d054d450f8f0fdd9aaad2e1fe8"
+      },
+      {
+        "kind": "exact-UTF8-content",
+        "index": 0,
+        "entries": 8,
+        "requestPayloadBytes": 298233,
+        "payloadSha256": "e819faa7123f1de44fb73266aa261b2cc22560b308de34b1b06085fea187da93",
+        "baseTree": "7cb54abb867217d054d450f8f0fdd9aaad2e1fe8",
+        "tree": "29bba0d92c308ffb4fe2d1fd43fee9b051866e4b"
+      },
+      {
+        "kind": "exact-UTF8-content",
+        "index": 1,
+        "entries": 29,
+        "requestPayloadBytes": 449975,
+        "payloadSha256": "93dafabe5ce370f514d2651041475777b859f8321b033a0dccdbbed763c66034",
+        "baseTree": "29bba0d92c308ffb4fe2d1fd43fee9b051866e4b",
+        "tree": "40e70b74711e9aa7354f29fd3209b817a2706550"
+      },
+      {
+        "kind": "exact-UTF8-content",
+        "index": 2,
+        "entries": 36,
+        "requestPayloadBytes": 419456,
+        "payloadSha256": "a10652faf7ebc7b97b089077713e1f0fffcd60f36821aec6cf75effe97f5bc43",
+        "baseTree": "40e70b74711e9aa7354f29fd3209b817a2706550",
+        "tree": "05383abba4e9fa46ae774670e739f1eb60ea1e47"
+      },
+      {
+        "kind": "exact-UTF8-content",
+        "index": 3,
+        "entries": 16,
+        "requestPayloadBytes": 392658,
+        "payloadSha256": "0dbe81002652c03206fcb91af4f42aeb78a1a17cf4beca1a3ba9880a3471a7a8",
+        "baseTree": "05383abba4e9fa46ae774670e739f1eb60ea1e47",
+        "tree": "aa37c8ffbb1fd78fdd7902920e81731842964636"
+      },
+      {
+        "kind": "exact-UTF8-content",
+        "index": 4,
+        "entries": 20,
+        "requestPayloadBytes": 365202,
+        "payloadSha256": "f2cf45ea682e1349a4eb31fcfe64b618a46c540efc85c274719d4ddf82cd8d03",
+        "baseTree": "aa37c8ffbb1fd78fdd7902920e81731842964636",
+        "tree": "561e776749faf8c3b5a32af80e601145b83f5298"
+      },
+      {
+        "kind": "exact-UTF8-content",
+        "index": 5,
+        "entries": 16,
+        "requestPayloadBytes": 405353,
+        "payloadSha256": "0de81f125df3ede1f85e98c5db5fb650a3b0165db2846f0a9591d94d50e81ba7",
+        "baseTree": "561e776749faf8c3b5a32af80e601145b83f5298",
+        "tree": "b20071c8d509f8c9613bc56b6ef036e99ecb537e"
+      },
+      {
+        "kind": "exact-UTF8-content",
+        "index": 6,
+        "entries": 24,
+        "requestPayloadBytes": 437089,
+        "payloadSha256": "e4bd4a631145739043c0f94cc76c572c08d3de508d1999870fdc6b5feb514bfc",
+        "baseTree": "b20071c8d509f8c9613bc56b6ef036e99ecb537e",
+        "tree": "c24541ccef0257748f989545a6f88ae8591ddc7b"
+      },
+      {
+        "kind": "exact-UTF8-content",
+        "index": 7,
+        "entries": 20,
+        "requestPayloadBytes": 411077,
+        "payloadSha256": "aaa27b373a1fcd3dcc710ca5989442aeacd273ae7a4cdcb372331094075d7884",
+        "baseTree": "c24541ccef0257748f989545a6f88ae8591ddc7b",
+        "tree": "5f17109337861692fe092bf385b4e00e1691e737"
+      },
+      {
+        "kind": "exact-UTF8-content",
+        "index": 8,
+        "entries": 22,
+        "requestPayloadBytes": 432902,
+        "payloadSha256": "500156b61a8f2874073367c1ef24100357ac9efcbcc46e89315f6849897eca72",
+        "baseTree": "5f17109337861692fe092bf385b4e00e1691e737",
+        "tree": "6d2d6a52f80dfb6d30790c00f801cc1ef246cec6"
+      },
+      {
+        "kind": "exact-UTF8-content",
+        "index": 9,
+        "entries": 18,
+        "requestPayloadBytes": 424976,
+        "payloadSha256": "1c722df8ffe343ae9301c2ad0026fe039fa190dd92258af19a996e6db0a26b0e",
+        "baseTree": "6d2d6a52f80dfb6d30790c00f801cc1ef246cec6",
+        "tree": "8ca2eed97a236c2a65337c88778b1f05554fa0bf"
+      },
+      {
+        "kind": "exact-UTF8-content",
+        "index": 10,
+        "entries": 29,
+        "requestPayloadBytes": 335812,
+        "payloadSha256": "5729b851fa489a86677180558839e7f9c4d63935bcf7d9dc8cb686b2219ec8f2",
+        "baseTree": "8ca2eed97a236c2a65337c88778b1f05554fa0bf",
+        "tree": "7e3dd186002075fdcc0b5781c39a8c2988e9ef63"
+      },
+      {
+        "kind": "exact-UTF8-content",
+        "index": 11,
+        "entries": 25,
+        "requestPayloadBytes": 438221,
+        "payloadSha256": "2aa46afed8b4c8168d63d175f1295983579bf54a5a6b5724ebd65e1a01f80881",
+        "baseTree": "7e3dd186002075fdcc0b5781c39a8c2988e9ef63",
+        "tree": "eeafc8f4076f69c55901da58b51d3439be585940"
+      },
+      {
+        "kind": "exact-UTF8-content",
+        "index": 12,
+        "entries": 34,
+        "requestPayloadBytes": 345894,
+        "payloadSha256": "1fbac03ad8faa49a47061c9af96102df55707ae6d43cb21b2294674ff59bf25d",
+        "baseTree": "eeafc8f4076f69c55901da58b51d3439be585940",
+        "tree": "b3e613c1bbad2bae42eeb1fb11604bd34c0fd1aa"
+      },
+      {
+        "kind": "exact-UTF8-content",
+        "index": 13,
+        "entries": 2,
+        "requestPayloadBytes": 363311,
+        "payloadSha256": "2e002df9d4775df144a2f6107432f94e766c3fa8fbcee909bf606dba28594979",
+        "baseTree": "b3e613c1bbad2bae42eeb1fb11604bd34c0fd1aa",
+        "tree": "63776a588da06dfe44641fc88c9199cbbde03aee"
+      },
+      {
+        "kind": "exact-UTF8-content",
+        "index": 14,
+        "entries": 1,
+        "requestPayloadBytes": 338922,
+        "payloadSha256": "a2002d3f64789178e046b5ff28650361fe885907d2ddea282c53e13f6ffcffaa",
+        "baseTree": "63776a588da06dfe44641fc88c9199cbbde03aee",
+        "tree": "f6d5e31dacd3c95236be19a5e6dc8c17294dcf0c"
+      },
+      {
+        "kind": "exact-UTF8-content",
+        "index": 15,
+        "entries": 1,
+        "requestPayloadBytes": 338923,
+        "payloadSha256": "2cfc5c0a0789aecc820d6db2a5b1cf02c8a477e0f2b27d7dc0d04e4d9a9e4bff",
+        "baseTree": "f6d5e31dacd3c95236be19a5e6dc8c17294dcf0c",
+        "tree": "533f107548deb237170dddf89ee43354b211faf0"
+      }
+    ],
+    "validUTF8NulDelimitedFilesPreserved": 94,
+    "recovery": "The existing GitHub connector completed publication without a new login. Blob content was bounded to 8 MiB, with exact originals split only for transport. One tree request containing 177 blob references returned a 422 timeout. Sequential trees with at most 12 referenced entries and 16 MiB of referenced bytes succeeded; at most 50 UTF-8 entries and 450,000 bytes per content batch then completed the exact local tree."
+  },
+  "readback": {
+    "commit": {
+      "sha": "8bbed4793704f2ecb7f93a70f99d101b86519052",
+      "node_id": "C_kwDOVD8qFdoAKDhiYmVkNDc5MzcwNGYyZWNiN2Y5M2E3MGY5OWQxMDFiODY1MTkwNTI",
+      "url": "https://api.github.com/repos/neo-capiro/capiro-frontend/git/commits/8bbed4793704f2ecb7f93a70f99d101b86519052",
+      "html_url": "https://github.com/neo-capiro/capiro-frontend/commit/8bbed4793704f2ecb7f93a70f99d101b86519052",
+      "author": {
+        "name": "CapiroHQ",
+        "email": "neo@capiro.ai",
+        "date": "2026-10-12T02:17:46Z"
+      },
+      "committer": {
+        "name": "CapiroHQ",
+        "email": "neo@capiro.ai",
+        "date": "2026-10-12T02:17:46Z"
+      },
+      "tree": {
+        "sha": "533f107548deb237170dddf89ee43354b211faf0",
+        "url": "https://api.github.com/repos/neo-capiro/capiro-frontend/git/trees/533f107548deb237170dddf89ee43354b211faf0"
+      },
+      "message": "Preserve complete Portfolio handover and recoverable session context",
+      "parents": [
+        {
+          "sha": "abaeab37b36d60b3e5185755e1b2c9169d7c92f3",
+          "url": "https://api.github.com/repos/neo-capiro/capiro-frontend/git/commits/abaeab37b36d60b3e5185755e1b2c9169d7c92f3",
+          "html_url": "https://github.com/neo-capiro/capiro-frontend/commit/abaeab37b36d60b3e5185755e1b2c9169d7c92f3"
+        }
+      ],
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "ref": {
+      "ref": "refs/heads/codex/portfolio-continuation-20261011",
+      "node_id": "REF_kwDOVD8qFdoAMHJlZnMvaGVhZHMvY29kZXgvcG9ydGZvbGlvLWNvbnRpbnVhdGlvbi0yMDI2MTAxMQ",
+      "url": "https://api.github.com/repos/neo-capiro/capiro-frontend/git/refs/heads/codex/portfolio-continuation-20261011",
+      "object": {
+        "sha": "8bbed4793704f2ecb7f93a70f99d101b86519052",
+        "type": "commit",
+        "url": "https://api.github.com/repos/neo-capiro/capiro-frontend/git/commits/8bbed4793704f2ecb7f93a70f99d101b86519052"
+      }
+    }
+  },
+  "verification": {
+    "sourceCheck": "VERIFICATION-SUMMARY.json",
+    "portfolioUnitCases": 998,
+    "foundationCases": 32,
+    "transportCases": 21,
+    "unrunAtFinalSource": [
+      "full build",
+      "actual standalone production/browser run",
+      "full browser regression",
+      "signed-in hosted acceptance"
+    ],
+    "acceptedAuditRows": 0,
+    "openInScopeRows": 337
+  },
+  "coordination": {
+    "commonShellOwner": "Portfolio/root proposed only; pending reconciliation",
+    "meriPullRequest": 4,
+    "meriHeadLastRead": "3cc30ff3182e8050d563516607866cf07efe2aef",
+    "meriPr1": "Preserved in PR4; do not integrate separately",
+    "modulesSettings": "Incoming exact handoff still required",
+    "sharedApplication": "One apps/web build, desired Portfolio /, Meri /meri, Modules /modules plus Settings; current route/auth/client mismatches remain documented."
+  },
+  "holds": [
+    "No merge",
+    "No deployment or AWS resource action",
+    "No new credential flow",
+    "No live customer/provider send, payment or backend mutation",
+    "Common integration ownership remains proposed"
+  ],
+  "finalReceiptCommit": "The containing GitHub commit is the receipt-only follow-up to handover.publishedCommit. Its own SHA is intentionally not embedded in its contents; verify the current PR/branch head and read this receipt at a pinned commit."
+}

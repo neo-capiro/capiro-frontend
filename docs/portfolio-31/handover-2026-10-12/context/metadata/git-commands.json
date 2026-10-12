@@ -1,0 +1,71 @@
+{
+  "branch.txt": [
+    "symbolic-ref",
+    "--quiet",
+    "HEAD"
+  ],
+  "diff-head.patch": [
+    "diff",
+    "HEAD",
+    "--no-ext-diff",
+    "--no-textconv",
+    "--binary",
+    "--full-index",
+    "--no-color"
+  ],
+  "diff-staged.patch": [
+    "diff",
+    "--cached",
+    "--no-ext-diff",
+    "--no-textconv",
+    "--binary",
+    "--full-index",
+    "--no-color"
+  ],
+  "diff-working.patch": [
+    "diff",
+    "--no-ext-diff",
+    "--no-textconv",
+    "--binary",
+    "--full-index",
+    "--no-color"
+  ],
+  "head.txt": [
+    "rev-parse",
+    "HEAD"
+  ],
+  "index-stage.z": [
+    "ls-files",
+    "--stage",
+    "-z"
+  ],
+  "status-porcelain-v2.z": [
+    "status",
+    "--porcelain=v2",
+    "-z",
+    "--untracked-files=all"
+  ],
+  "status.txt": [
+    "status",
+    "--short",
+    "--branch",
+    "--untracked-files=all"
+  ],
+  "tracked-paths.z": [
+    "ls-files",
+    "--cached",
+    "-z"
+  ],
+  "untracked-nonignored-paths.z": [
+    "ls-files",
+    "--others",
+    "--exclude-standard",
+    "-z"
+  ],
+  "worktree-list.z": [
+    "worktree",
+    "list",
+    "--porcelain",
+    "-z"
+  ]
+}

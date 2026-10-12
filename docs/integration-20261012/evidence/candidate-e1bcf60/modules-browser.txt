@@ -1,0 +1,89 @@
+
+> capiro-frontend@0.1.0 test:browser:modules
+> npm run test:browser:modules --workspace @capiro/web
+
+
+> @capiro/web@0.1.0 test:browser:modules
+> playwright test --config test/browser/playwright.config.ts
+
+[WebServer] (node:119501) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 62 tests using 1 worker
+
+(node:119528) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 test/browser/calendar.spec.ts:24:1 › month and week retain client scope and query end-exclusive Eastern ranges (1.7s)
+  ✓   2 test/browser/calendar.spec.ts:79:1 › client agenda is meetings-only and the meeting opens the shared prep/notes/debrief workflow (1.2s)
+  ✓   3 test/browser/integration.spec.ts:37:1 › shared product navigation and history preserve verified client hints and scoped styles (2.3s)
+  ✓   4 test/browser/integration.spec.ts:120:1 › client replacement interrupts a write and organization replacement clears drafts and revalidates (1.2s)
+  ✓   5 test/browser/integration.spec.ts:169:1 › Core expiry clears the application, does not replay and cannot be escaped by changing client (1.0s)
+  ✓   6 test/browser/legiwatch.spec.ts:21:3 › LegiWatch News evidence renders a real connected view (1.1s)
+  ✓   7 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Florida Budget renders a real connected view (982ms)
+  ✓   8 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Research evidence renders a real connected view (963ms)
+  ✓   9 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Monitoring renders a real connected view (1.0s)
+  ✓  10 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Client briefings renders a real connected view (1.0s)
+  ✓  11 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Reports renders a real connected view (993ms)
+  ✓  12 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Trends renders a real connected view (1.0s)
+  ✓  13 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Legacy digest renders a real connected view (995ms)
+  ✓  14 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Import review renders a real connected view (981ms)
+  ✓  15 test/browser/legiwatch.spec.ts:21:3 › LegiWatch Research import review renders a real connected view (1.1s)
+  ✓  16 test/browser/legiwatch.spec.ts:21:3 › LegiWatch LegiWatch settings renders a real connected view (1.0s)
+  ✓  17 test/browser/legiwatch.spec.ts:48:1 › research continues past an empty matched page using the retained-source cursor (1.1s)
+  ✓  18 test/browser/legiwatch.spec.ts:96:1 › workflow changes invalidate a reviewed preview and enqueue only its exact current hash (1.3s)
+  ✓  19 test/browser/legiwatch.spec.ts:169:1 › monitoring tabs and keyword drawer support keyboard dismissal on mobile without overflow (1.2s)
+  ✓  20 test/browser/modules.spec.ts:16:3 › Engagement Manager primary route renders through the canonical session/API boundary (993ms)
+  ✓  21 test/browser/modules.spec.ts:16:3 › Planner primary route renders through the canonical session/API boundary (982ms)
+  ✓  22 test/browser/modules.spec.ts:16:3 › Master calendar primary route renders through the canonical session/API boundary (1.1s)
+  ✓  23 test/browser/modules.spec.ts:16:3 › Workspace primary route renders through the canonical session/API boundary (1.0s)
+  ✓  24 test/browser/modules.spec.ts:16:3 › Strategies primary route renders through the canonical session/API boundary (1.0s)
+  ✓  25 test/browser/modules.spec.ts:16:3 › Directory primary route renders through the canonical session/API boundary (940ms)
+  ✓  26 test/browser/modules.spec.ts:16:3 › Intelligence Center primary route renders through the canonical session/API boundary (1.0s)
+  ✓  27 test/browser/modules.spec.ts:16:3 › Research Portfolios primary route renders through the canonical session/API boundary (991ms)
+  ✓  28 test/browser/planner-engagement.spec.ts:112:1 › Planner modes use the same permitted task data and exact board assets (1.3s)
+  ✓  29 test/browser/planner-engagement.spec.ts:163:1 › Planner failed writes retain drafts and a successful save uses only reviewed fields (1.2s)
+  ✓  30 test/browser/planner-engagement.spec.ts:218:1 › Engagement library opens shared notes, approval is a separate real operation and tabs work at phone width (1.3s)
+  ✓  31 test/browser/planner-engagement.spec.ts:279:1 › A template session deep link keeps the server state version and sends no mail (1.1s)
+  ✓  32 test/browser/public-forms.spec.ts:5:1 › public form submits only displayed answers and shows the returned receipt without sign-in (1.0s)
+  ✓  33 test/browser/public-forms.spec.ts:52:1 › revoked public capability renders an unavailable state without a submission action (915ms)
+  ✓  34 test/browser/session.spec.ts:7:1 › missing configuration renders setup without issuing service requests (954ms)
+  ✓  35 test/browser/session.spec.ts:20:1 › org/session change clears prior records and sign-out removes all protected content (919ms)
+  ✓  36 test/browser/session.spec.ts:53:1 › 401 removes protected content and asks for sign-in without replaying a request (828ms)
+  ✓  37 test/browser/session.spec.ts:69:1 › development StrictMode remount establishes a valid request scope before child reads (896ms)
+  ✓  38 test/browser/settings-scenes.spec.ts:33:3 › Settings personal renders compatible responses without runtime failures (1.1s)
+  ✓  39 test/browser/settings-scenes.spec.ts:33:3 › Settings contact-info renders compatible responses without runtime failures (1.0s)
+  ✓  40 test/browser/settings-scenes.spec.ts:33:3 › Settings branding renders compatible responses without runtime failures (1.0s)
+  ✓  41 test/browser/settings-scenes.spec.ts:33:3 › Settings team renders compatible responses without runtime failures (1.0s)
+  ✓  42 test/browser/settings-scenes.spec.ts:33:3 › Settings integrations renders compatible responses without runtime failures (1.0s)
+  ✓  43 test/browser/settings-scenes.spec.ts:33:3 › Settings memory renders compatible responses without runtime failures (1.1s)
+  ✓  44 test/browser/settings-scenes.spec.ts:33:3 › Settings meri-preferences renders compatible responses without runtime failures (1.1s)
+  ✓  45 test/browser/settings-scenes.spec.ts:33:3 › Settings billing renders compatible responses without runtime failures (1.0s)
+  ✓  46 test/browser/settings-scenes.spec.ts:33:3 › Settings ai-usage renders compatible responses without runtime failures (1.0s)
+  ✓  47 test/browser/settings-scenes.spec.ts:33:3 › Settings profiles renders compatible responses without runtime failures (993ms)
+  ✓  48 test/browser/settings-scenes.spec.ts:33:3 › Settings intelligence-mappings renders compatible responses without runtime failures (1.0s)
+  ✓  49 test/browser/settings-scenes.spec.ts:33:3 › Settings hq-tenants renders compatible responses without runtime failures (1.0s)
+  ✓  50 test/browser/settings-scenes.spec.ts:33:3 › Settings hq-customers renders compatible responses without runtime failures (1.1s)
+  ✓  51 test/browser/settings-scenes.spec.ts:33:3 › Settings hq-ai-keys renders compatible responses without runtime failures (1.0s)
+  ✓  52 test/browser/settings-scenes.spec.ts:33:3 › Settings hq-broadcasts renders compatible responses without runtime failures (1.0s)
+  ✓  53 test/browser/settings-scenes.spec.ts:33:3 › Settings hq-personnel renders compatible responses without runtime failures (1.1s)
+  ✓  54 test/browser/settings-scenes.spec.ts:33:3 › Settings hq-reconciliation renders compatible responses without runtime failures (1.0s)
+  ✓  55 test/browser/settings-scenes.spec.ts:33:3 › Settings hq-matches renders compatible responses without runtime failures (1.0s)
+  ✓  56 test/browser/settings-scenes.spec.ts:33:3 › Settings hq-analyst renders compatible responses without runtime failures (1.0s)
+  ✓  57 test/browser/settings-scenes.spec.ts:59:1 › All analyst queues and Meri preference screens are reachable with explicit unavailable contracts (2.4s)
+  ✓  58 test/browser/settings-scenes.spec.ts:95:1 › Settings dialogs trap focus and Escape closes an unsent invitation (1.1s)
+  ✓  59 test/browser/settings.spec.ts:8:1 › Personal saves the title only after a validated response and keeps signature uploads separate (1.1s)
+  ✓  60 test/browser/settings.spec.ts:46:1 › Team does not fetch private records for a standard user (892ms)
+  ✓  61 test/browser/settings.spec.ts:64:1 › Team prevents self-removal and failed invitations remain editable without success feedback (1.2s)
+  ✓  62 test/browser/settings.spec.ts:118:1 › Mobile Personal fits the viewport and Settings sections remain keyboard accessible (1.0s)
+
+  62 passed (1.2m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

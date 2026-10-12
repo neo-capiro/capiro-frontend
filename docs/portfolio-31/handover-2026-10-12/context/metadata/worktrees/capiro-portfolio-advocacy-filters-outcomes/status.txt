@@ -1,0 +1,33 @@
+## codex/portfolio-advocacy-filters-outcomes-20261011
+ M apps/web/src/features/portfolio/advocacy/AdvocacyHistory.tsx
+ M apps/web/src/features/portfolio/advocacy/advocacy.module.css
+ M apps/web/src/features/portfolio/advocacy/contracts.ts
+ M apps/web/src/features/portfolio/advocacy/queries.ts
+ M apps/web/tests/browser/fixtures.ts
+?? apps/web/src/features/portfolio/advocacy/AdvocacyBrowser.tsx
+?? apps/web/src/features/portfolio/advocacy/AdvocacyFilters.tsx
+?? apps/web/src/features/portfolio/advocacy/AdvocacyReadState.tsx
+?? apps/web/src/features/portfolio/advocacy/AdvocacyTimeline.tsx
+?? apps/web/src/features/portfolio/advocacy/EditMatterDialog.tsx
+?? apps/web/src/features/portfolio/advocacy/MatterEditFields.tsx
+?? apps/web/src/features/portfolio/advocacy/assets/file-text.svg
+?? apps/web/src/features/portfolio/advocacy/assets/landmark.svg
+?? apps/web/src/features/portfolio/advocacy/assets/mail.svg
+?? apps/web/src/features/portfolio/advocacy/assets/users.svg
+?? apps/web/src/features/portfolio/advocacy/history-model.ts
+?? apps/web/src/features/portfolio/advocacy/history.module.css
+?? apps/web/src/features/portfolio/advocacy/matter-edit-attempt.ts
+?? apps/web/src/features/portfolio/advocacy/matter-edit-request.ts
+?? apps/web/src/features/portfolio/advocacy/matter-edit-scope.ts
+?? apps/web/src/features/portfolio/advocacy/matter-edit.module.css
+?? apps/web/src/features/portfolio/advocacy/matter-edit.ts
+?? apps/web/src/features/portfolio/advocacy/read-state.ts
+?? apps/web/src/features/portfolio/advocacy/useMatterEdit.ts
+?? apps/web/tests/advocacy-history-edit.test.ts
+?? apps/web/tests/advocacy-history-fixtures.ts
+?? apps/web/tests/browser/advocacy-history-edit.spec.ts
+?? apps/web/tests/browser/advocacy-history-fixtures.ts
+?? apps/web/tests/browser/advocacy-history-harness.tsx
+?? apps/web/tests/browser/advocacy-history.html
+?? apps/web/tests/browser/advocacy-timeline-dark.spec.ts
+?? docs/portfolio-31/ADVOCACY-FILTERS-OUTCOMES-CONTINUATION.md

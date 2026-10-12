@@ -1,0 +1,18 @@
+{
+  "schema_version": 2,
+  "source_head": "760dcc6c1179312c7f4b762e64cf3af1aad60c3e",
+  "gate": "check",
+  "attempt_id": "check-20261012T012155924364Z-f3e9fc9c",
+  "command": [
+    "npm",
+    "run",
+    "check"
+  ],
+  "started_utc": "2026-10-12T01:21:55.924364+00:00",
+  "runner_sha256": "d787a36edd2798a1dd0afe0c5647c9255d6f1cb4e1fb42ffcb59a93e68d0520a",
+  "command_exit_code": null,
+  "exit_code": 1,
+  "source_changed_during_check": [],
+  "admission_errors": [],
+  "log": "outputs/evidence/portfolio-shared-integration-20261011/final-760dcc6/attempts/check-20261012T012155924364Z-f3e9fc9c/gate.log"
+}
