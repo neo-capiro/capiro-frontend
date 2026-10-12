@@ -20,6 +20,7 @@ import { NewsletterComments } from "./NewsletterComments";
 import { NewsletterPaper } from "./NewsletterPaper";
 import { SelectTemplate } from "./NewsletterTemplates";
 import { useNewsletter } from "./use-newsletter";
+import { NewsletterStaging } from "./NewsletterStaging";
 
 function BuilderTools({
   body,
@@ -150,7 +151,7 @@ export function NewsletterWorkflow({
             {step === "template"
               ? "Select a starting point. Customize every section in the builder."
               : step === "stage"
-                ? "Save this revision before preparing the outreach draft."
+                ? "Select a saved revision and an existing Outreach session."
                 : "Newsletter builder"}
           </p>
         </div>
@@ -343,11 +344,14 @@ export function NewsletterWorkflow({
                 </Panel>
                 <Panel title="Delivery">Outreach</Panel>
               </div>
-              <p>
-                This revision can be reviewed in Workspace. The
-                newsletter-to-Outreach staging contract is not yet exposed by
-                the existing services.
-              </p>
+              {draft ? (
+                <NewsletterStaging draftId={draft.id} saved={saved} />
+              ) : (
+                <p>
+                  Save the newsletter before selecting a saved revision for
+                  Outreach.
+                </p>
+              )}
               <div className={styles.actions} style={{ marginTop: 20 }}>
                 <ActionButton onClick={() => setStep("builder")}>
                   Back to editor
@@ -361,9 +365,6 @@ export function NewsletterWorkflow({
                     Save newsletter
                   </ActionButton>
                 )}
-                <UnavailableAction reason="A verified newsletter revision staging endpoint is required.">
-                  Stage & open Outreach
-                </UnavailableAction>
               </div>
             </Panel>
           )}

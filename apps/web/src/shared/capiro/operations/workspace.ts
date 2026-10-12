@@ -4,6 +4,7 @@ import { workspaceDocumentOperations } from "./workspace-documents";
 import { workspaceExportOperations } from "./workspace-exports";
 import { workspaceHillDayOperations } from "./workspace-hillday";
 import { workspaceProspectOperations } from "./workspace-prospects";
+import { newsletterStagingOperations } from "./workspace-newsletter-staging";
 export const workspaceOperations = {
   ...workspaceHillDayOperations,
   ...outreachTemplateOperations,
@@ -11,4 +12,5 @@ export const workspaceOperations = {
   ...workspaceExportOperations,
   ...workspaceCommentOperations,
   ...workspaceProspectOperations,
+  ...newsletterStagingOperations,
 } as const;
