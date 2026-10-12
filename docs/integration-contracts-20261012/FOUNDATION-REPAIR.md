@@ -63,3 +63,11 @@ now clones the request URL, preserving its origin/query and changing only the
 pathname. Actual-server and image smoke assertions accept equivalent relative or
 absolute locations only at the exact same origin/path; 307 and security checks
 remain mandatory. The failing server log is retained at foundation-4d6021a.
+
+The final 94d9c0b production build and full actual-server gate PASSED. Shared
+entries have no static prerender cache; /settings and its client query hint return
+307 to the exact same-origin personal settings destination with the retained
+headers. Route/configuration refusals, desktop/mobile light/dark style checks,
+all-mode navigation and back/forward passed with zero page errors. Combined
+repository checks passed on immediate predecessor 4d6021a; the final redirect
+delta is typechecked by the fresh build. No full new browser qualification yet.

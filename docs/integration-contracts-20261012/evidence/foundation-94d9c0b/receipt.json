@@ -1,0 +1,48 @@
+{
+  "source": "94d9c0b20709d99ebf0c86b201359f99230ce3da",
+  "tree": "cd2f57137ed60716bc5f8161aa3d04914b85a6ee",
+  "passed": [
+    "production build",
+    "production artifact runtime config",
+    "actual standalone-server routes/headers/query hint/navigation/history/styles",
+    "shipping CLI 2 cases"
+  ],
+  "quickLogScope": {
+    "startTime": "2026-10-12T05:10:06.057Z",
+    "duration": 23770.659000000003,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "combinedRepositoryChecks": "PASS on immediate predecessor 4d6021a; final redirect delta typechecked by fresh build",
+  "fullCombinedQualification": "NOT RUN on this new candidate",
+  "nativePortfolioRowsAccepted": 0,
+  "artifacts": [
+    {
+      "path": "actual-server.txt",
+      "bytes": 4187,
+      "sha256": "e5949712afc846e9a494651d9d1f30ccf8e1e45a806a50f5181e88438739eae1"
+    },
+    {
+      "path": "build.txt",
+      "bytes": 2230,
+      "sha256": "63db5c3c2b8ca4ee4b4091b4206da6c1ae0be24b7cb547a2706373d820fb3cd9"
+    },
+    {
+      "path": "quick-log-scope.json",
+      "bytes": 8727,
+      "sha256": "747b8cf05b6f830d641ed6439a69ee7f3b2d70d4c4e1046a309209eaee194373"
+    },
+    {
+      "path": "quick-log-scope.txt",
+      "bytes": 2037,
+      "sha256": "05b73fc3bf3166125c56363e08fce8e23e9ddb15eea5a59722e51c148a1e8677"
+    },
+    {
+      "path": "shipping-cli.txt",
+      "bytes": 317,
+      "sha256": "8d2d8cd32c46436b1a4fa7845fd10416e291f494006b3c01462b7feb92e82439"
+    }
+  ]
+}

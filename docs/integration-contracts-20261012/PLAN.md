@@ -46,3 +46,15 @@ production build, actual server, UI provenance and both browser suites on one
 exact final source. Review desktop/mobile/keyboard behavior and retain native
 holds. All 337 Portfolio rows remain unaccepted. Publish a new draft candidate;
 no merge, deploy, image push, AWS build, paid workload or provider send.
+
+## Added reviewed prospect resource scope
+
+Parent supplied capirov2 PR2400 head 6c26ac2dad3756a61b6733329dea7ce3c9138ece,
+reviewed runtime 9c2765224fc38d111df0fe184ca50229c6128373, stacked on exact sender
+PR2393. CONTRACT, DEPENDENCIES, INTEGRATION and COMMITMENT-SCOPE-CLEANUP were read.
+Consume only canonical prospect Files and manual Workspace operations, retaining
+immutable origin, stable request IDs, exact metadata/digest receipts and current
+conversion-aware resource ACLs. Sharing, sending, generation, unrelated client KB
+imports and rich objective associations remain unavailable. Both service migrations
+and native RLS/live gates are unrun; no deployment or backend source copy is implied.
+Backend confirms no abandoned commitment party-semantics scaffolding existed.
