@@ -10,6 +10,10 @@ type Receipt = Watchlist & { version: number };
 const labelKey = (value: string) => value.trim().toLowerCase();
 const termKey = (term: Topic["terms"][number]) =>
   JSON.stringify([term.termType, term.value.trim().toLowerCase()]);
+// Intel validates exact trimmed input before deduplicating accepted terms.
+// A rejection of lowercase "ai" must not remove the valid acronym "AI".
+const rejectedTermKey = (label: string, term: Topic["terms"][number]) =>
+  JSON.stringify([label, term.termType, term.value.trim()]);
 const same = (left: unknown, right: unknown) =>
   JSON.stringify(left) === JSON.stringify(right);
 
@@ -37,7 +41,7 @@ function explainedTerms(submitted: Submitted, record: Receipt) {
       ? entry.reason === "Term cannot be empty."
       : entry.reason === "Term too short" ||
         entry.reason.startsWith(`"${value}" is too short to match safely.`);
-    const key = JSON.stringify([entry.topicLabel, termKey(term)]);
+    const key = rejectedTermKey(entry.topicLabel, term);
     const count = (counts.get(key) ?? 0) + 1;
     const submittedCount = topic!.terms.filter(
       (candidate) =>
@@ -104,7 +108,7 @@ function acceptedTopics(
       for (const term of topic.terms) {
         if (!term.value) continue;
         const normalized = { ...term, value: term.value.trim() };
-        const rejectedKey = JSON.stringify([label, termKey(normalized)]);
+        const rejectedKey = rejectedTermKey(label, normalized);
         if (!rejectedTerms.has(rejectedKey) && !terms.has(termKey(normalized)))
           terms.set(termKey(normalized), normalized);
       }

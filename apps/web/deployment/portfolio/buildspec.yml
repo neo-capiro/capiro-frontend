@@ -9,7 +9,7 @@ phases:
       - set -euo pipefail
       - node --version
       - npm --version
-      - npm ci --no-audit --no-fund
+      - npm ci --ignore-scripts --no-audit --no-fund
       - npm exec --workspace @capiro/web -- playwright install --with-deps chromium
   build:
     commands:
@@ -18,7 +18,9 @@ phases:
       - test "$(cat source-commit.txt)" = "$EXPECTED_SHA"
       - test "$CODEBUILD_SOURCE_VERSION" = "$EXPECTED_S3_VERSION"
       - npm run check
-      - npm run test:browser
+      - node apps/web/deployment/portfolio/qualify-elements.mjs "$(mktemp -d)/elements"
+      - npm run test:browser -- --workers=3
+      - npm run test:browser:modules
       - npm run build
       - npm run test:production
       - docker build --pull --platform linux/amd64 -f apps/web/Dockerfile -t "$REPOSITORY_URI:$EXPECTED_SHA" .

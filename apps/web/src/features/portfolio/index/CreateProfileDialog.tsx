@@ -26,7 +26,6 @@ export function CreateProfileDialog(props: CreateProfileDialogProps) {
 function ProfileChoiceSession({
   open,
   onOpenChange,
-  destinations,
 }: CreateProfileDialogProps) {
   const router = useRouter();
   const identity = useIdentity();
@@ -95,10 +94,7 @@ function ProfileChoiceSession({
       <div className={styles.choiceGroup}>
         <p className="eyebrow">New client</p>
         {permitted && <ProfileCapacityStatus capacity={capacity} />}
-        <BillingSummaryPanel
-          enabled={open}
-          existingApp={destinations.existingApp}
-        />
+        <BillingSummaryPanel enabled={open} />
         <button
           className={styles.profileChoice}
           disabled={!permitted || !capacity.allowed}

@@ -42,6 +42,9 @@ for (const screen of [
   test(`Figma capability Profile, Documents and create surfaces at ${screen.name}`, async ({
     page,
   }, info) => {
+    // Six full-page captures plus all editor transitions can exceed 30 seconds
+    // on a shared CPU. Keep every assertion with a bounded 90-second case budget.
+    test.slow();
     const unexpected = await installCapabilityPresentation(page);
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));

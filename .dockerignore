@@ -17,3 +17,6 @@ test-results
 **/work
 **/*.tsbuildinfo
 .git
+**/.qa
+# Review documents and session archives stay in Git, outside image build context.
+docs

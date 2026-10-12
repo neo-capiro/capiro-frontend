@@ -571,7 +571,7 @@ for (const transition of [
   });
 }
 
-test("Core Configure does not expose or request the Intel personal-preference contract", async ({
+test("unavailable Core Configure keeps preferences visible and disabled without requesting Intel", async ({
   page,
 }) => {
   const unexpected = await install(page);
@@ -593,9 +593,9 @@ test("Core Configure does not expose or request the Intel personal-preference co
   });
   await page.goto("/tracker-boundary.html?mode=board&backend=core");
   await page.getByRole("button", { name: "Configure", exact: true }).click();
-  await expect(
-    page.getByRole("button", { name: "My alert preferences" }),
-  ).toHaveCount(0);
+  const entry = page.getByRole("button", { name: "My alert preferences" });
+  await expect(entry).toBeVisible();
+  await expect(entry).toBeDisabled();
   expect(prefCalls).toBe(0);
   expect(unexpected).toEqual([]);
 });

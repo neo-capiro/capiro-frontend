@@ -63,3 +63,23 @@ Core authorized-client projection required by the application boundary. The old
 Intel partial-rejection fixture now actually submits the rejected term and its
 type; accepting an unrelated rejection was the defect being closed. Original
 assertions otherwise remain, with new shared-lifetime/browser negative controls.
+
+## Reviewed correction after the frozen full suite
+
+`BillingSummaryPanel` remains one optional financial read projection: the existing
+hook owns current-actor eligibility and request lifecycle; the component owns the
+disclosure and its supplied values. Replacing the legacy anchor with `ScopedLink`
+does not move authorization, pricing, payments or a second editor into this owner.
+`ProfileChoiceSession` still owns one Add profile choice and the transition into
+the existing intake form. Removing its now-unused sibling URL argument from the
+billing summary does not add a responsibility. Their previously inherited size
+signals are now explicitly reviewed against these exact changed function hashes;
+the other inherited signals remain visible and unaccepted.
+
+The dialog wrapper retains the adopted Radix focus, portal, modal and primitive
+owners. Its small Escape guard handles the reproduced passive-listener transition
+between nested dialogs, checking the current top dialog and handling one native
+event once. It does not create a parallel modal/focus implementation. The original
+focus restoration test failed in the full run and one of five focused repeats;
+ten unchanged repetitions pass with the guard. Full-suite verification remains
+required. Billing and Intel independent negative controls remain separate files.

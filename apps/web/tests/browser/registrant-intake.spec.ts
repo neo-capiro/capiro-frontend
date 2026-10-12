@@ -659,6 +659,8 @@ test("foreign successful-looking receipt is refused and stays unconfirmed", asyn
 test("selection stops at100 and remains selected through filtering", async ({
   page,
 }) => {
+  // Exercise all 100 real checkbox interactions without a 30-second CPU race.
+  test.slow();
   const state = await setup(page, {
     candidates: Array.from({ length: 101 }, (_, index) =>
       candidate(index + 1, `Synthetic Client ${index + 1}`),

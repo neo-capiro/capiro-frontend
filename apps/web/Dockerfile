@@ -7,11 +7,11 @@ WORKDIR /app
 
 FROM base AS build
 COPY . .
-RUN npm ci --no-audit --no-fund
+RUN npm ci --ignore-scripts --no-audit --no-fund
 RUN npm run build
 
 FROM base AS runtime
-ENV NODE_ENV=production PORT=5188 HOSTNAME=0.0.0.0 CAPIRO_DEFAULT_PRODUCT=portfolio
+ENV NODE_ENV=production PORT=5188 HOSTNAME=0.0.0.0
 COPY --from=build --chown=node:node /app/apps/web/.next/standalone ./
 COPY --from=build --chown=node:node /app/apps/web/public ./apps/web/public
 COPY --from=build --chown=node:node /app/apps/web/.next/static ./apps/web/.next/static

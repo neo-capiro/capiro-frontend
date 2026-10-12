@@ -1328,5 +1328,23 @@
     "reason": "This component remains a shared Portfolio chrome composer. HeaderFrame and WorkspaceSwitcher own common structure/navigation; PortfolioNavigation owns the sidebar. Canonical home/settings links replace sibling-host assumptions, without changing feature transport or session ownership.",
     "reviewedBy": "Codex shared frontend integration review",
     "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/billing/BillingSummaryPanel.tsx",
+    "kind": "function",
+    "symbol": "BillingSummaryPanel",
+    "fingerprint": "6da73ca8a9d359a014160cd7038d228816e3aafcd372c4f9b8f6bf574be36458",
+    "reason": "One optional current-actor billing summary disclosure; useBillingSummary retains authorization/read lifecycle, while ScopedLink replaces only the legacy management destination. No pricing, payment or service ownership moves into presentation. See docs/integration-20261012/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/CreateProfileDialog.tsx",
+    "kind": "function",
+    "symbol": "ProfileChoiceSession",
+    "fingerprint": "f74a873373b60ce98d607820d05e23f1aa70d9f0be82ed1c51b75e3295043339",
+    "reason": "One Add profile choice and transition into the canonical intake form. Removing the billing summary sibling-host argument introduces no new responsibility or financial mutation. Existing capacity/intake/summary owners remain separate. See docs/integration-20261012/STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
   }
 ]

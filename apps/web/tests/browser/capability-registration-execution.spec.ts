@@ -74,6 +74,14 @@ for (const change of ["actor", "standard-role", "invalidate", "client"])
       ).toBeVisible();
       await expect(dialog.locator("form")).toHaveCount(0);
     }
+    // The saved-submissions panel also owns a current-client read. Actor/role
+    // replacement legitimately revalidates that separate projection. The held
+    // registration write must already be aborted before its receipt is released.
+    await expect(
+      page.getByLabel("Synthetic pending capability writes"),
+    ).toHaveText("0");
+    const expectedReads = ["actor", "standard-role"].includes(change) ? 3 : 2;
+    await expect.poll(() => reads).toBe(expectedReads);
     held.release();
     await held.settled;
     await expect(
@@ -86,7 +94,7 @@ for (const change of ["actor", "standard-role", "invalidate", "client"])
       await expect(dialog.getByLabel("UEI", { exact: true })).toHaveValue(
         "EEEEFFFF9012",
       );
-    expect(reads).toBe(1);
+    expect(reads).toBe(expectedReads);
     expect(held.calls()).toBe(1);
     expect(unexpected).toEqual([]);
   });

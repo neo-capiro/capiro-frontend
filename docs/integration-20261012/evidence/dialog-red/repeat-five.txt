@@ -1,0 +1,78 @@
+
+> @capiro/web@0.1.0 test:browser
+> playwright test capability-documents-visual.spec.ts --grep phone-dark --repeat-each=5 --workers=1
+
+[WebServer] (node:68567) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:68588) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/browser/capability-documents-visual.spec.ts:54:3 › capability document rows and authored status variants at phone-dark (3.9s)
+(node:68719) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 tests/browser/capability-documents-visual.spec.ts:54:3 › capability document rows and authored status variants at phone-dark (3.7s)
+(node:68866) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 tests/browser/capability-documents-visual.spec.ts:54:3 › capability document rows and authored status variants at phone-dark (3.7s)
+(node:69001) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  4 tests/browser/capability-documents-visual.spec.ts:54:3 › capability document rows and authored status variants at phone-dark (3.9s)
+(node:69133) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  5 tests/browser/capability-documents-visual.spec.ts:54:3 › capability document rows and authored status variants at phone-dark (6.9s)
+
+
+  1) tests/browser/capability-documents-visual.spec.ts:54:3 › capability document rows and authored status variants at phone-dark 
+
+    Error: expect(locator).toBeFocused() failed
+
+    Locator: getByRole('dialog', { name: 'Capability: Test sensor', exact: true }).getByRole('region', { name: 'Documents', exact: true }).getByRole('button', { name: 'Synthetic datasheet.txt', exact: true })
+    Expected: focused
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeFocused" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Capability: Test sensor', exact: true }).getByRole('region', { name: 'Documents', exact: true }).getByRole('button', { name: 'Synthetic datasheet.txt', exact: true })
+
+
+      161 |     await page.keyboard.press("Escape");
+      162 |     await expect(preview).toHaveCount(0);
+    > 163 |     await expect(name).toBeFocused();
+          |                        ^
+      164 |
+      165 |     phase = "error";
+      166 |     await changeDocumentView(page, "files");
+        at /workspace/capiro-integration/apps/web/tests/browser/capability-documents-visual.spec.ts:163:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/capability-documents-visua-a1117-atus-variants-at-phone-dark-repeat4/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/capability-documents-visua-a1117-atus-variants-at-phone-dark-repeat4/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/capability-documents-visua-a1117-atus-variants-at-phone-dark-repeat4/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/capability-documents-visua-a1117-atus-variants-at-phone-dark-repeat4/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/browser/capability-documents-visual.spec.ts:54:3 › capability document rows and authored status variants at phone-dark 
+  4 passed (26.1s)
+npm error Lifecycle script `test:browser` failed with error:
+npm error code 1
+npm error path /workspace/capiro-integration/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-integration/apps/web
+npm error command failed
+npm error command sh -c playwright test capability-documents-visual.spec.ts --grep phone-dark --repeat-each=5 --workers=1
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

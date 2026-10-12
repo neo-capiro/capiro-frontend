@@ -41,6 +41,13 @@ export async function installCapabilityBoundary(page: Page) {
   await page.route(`**/core/clients/${secondClientId}/capabilities`, (route) =>
     json(route, [{ ...capability, name: "Second client capability" }]),
   );
+  // The retained saved-submissions panel reads the replacement client's own
+  // history. Only this exact read is supplied; other requests remain failures.
+  await page.route(
+    `**/core/clients/${secondClientId}/submission-history`,
+    (route) =>
+      route.request().method() === "GET" ? json(route, []) : route.fallback(),
+  );
   await page.route(
     `**/core/clients/${secondClientId}/capability-fit`,
     (route) => json(route, { ...fit, matches: [] }),

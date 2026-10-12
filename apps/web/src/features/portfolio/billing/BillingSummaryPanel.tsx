@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { ScopedLink } from "@/shared/shell/ScopedLink";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { useBillingSummary } from "./useBillingSummary";
 import styles from "./billing-summary.module.css";
@@ -20,13 +21,7 @@ const statuses = {
   comped: "Complimentary",
 } as const;
 
-export function BillingSummaryPanel({
-  enabled = true,
-  existingApp,
-}: {
-  enabled?: boolean;
-  existingApp?: string;
-}) {
+export function BillingSummaryPanel({ enabled = true }: { enabled?: boolean }) {
   const [expanded, setExpanded] = useState(false);
   const { query, visible, ready } = useBillingSummary(enabled, expanded);
   if (!visible) return null;
@@ -136,13 +131,10 @@ export function BillingSummaryPanel({
           </p>
         </>
       )}
-      {expanded && existingApp && (
-        <a
-          className={styles.manageLink}
-          href={`${existingApp}/settings/billing`}
-        >
+      {expanded && (
+        <ScopedLink className={styles.manageLink} href="/settings/billing">
           Manage billing
-        </a>
+        </ScopedLink>
       )}
     </details>
   );

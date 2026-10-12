@@ -37,19 +37,30 @@ async function indexFixtures(page: Page) {
   return unexpected;
 }
 
-test("wordmark opens the configured Dashboard while Portfolio stays in its workspace", async ({
+test("wordmark and workspace modes stay in the canonical shared application", async ({
   page,
 }) => {
   const unexpected = await indexFixtures(page);
   await page.goto("/portfolio");
-  await expect(
-    page.getByRole("link", { name: "Capiro dashboard" }),
-  ).toHaveAttribute("href", "http://127.0.0.1:5191/existing/");
+  await expect(page.getByRole("link", { name: "Capiro home" })).toHaveAttribute(
+    "href",
+    "/",
+  );
   await expect(
     page.getByRole("navigation", { name: "Workspace" }).getByRole("link", {
       name: "Portfolio",
     }),
-  ).toHaveAttribute("href", "/portfolio");
+  ).toHaveAttribute("href", "/");
+  await expect(
+    page
+      .getByRole("navigation", { name: "Workspace" })
+      .getByRole("link", { name: "Meri", exact: true }),
+  ).toHaveAttribute("href", "/meri");
+  await expect(
+    page
+      .getByRole("navigation", { name: "Workspace" })
+      .getByRole("link", { name: "Modules", exact: true }),
+  ).toHaveAttribute("href", "/modules");
   expect(unexpected).toEqual([]);
 });
 

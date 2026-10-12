@@ -1,6 +1,8 @@
-# Isolated Portfolio preview deployment
+# Unified Capiro preview image
 
-This directory owns the isolated Portfolio frontend preview. Its templates do
+This directory owns the one shared Capiro frontend preview image. Read the current
+[reviewed build contract](../../../../docs/integration-20261012/SHIPPING-CONTRACT.md)
+and exact-source qualification receipt before shipping. Its templates do
 not alter the existing `capiro-dev` cluster, shared Capiro ALB/listener,
 `os.capiro.ai`, or backend services. The source continuation requires an
 owner-visible AWS step before shipping an image or creating resources.
@@ -20,10 +22,12 @@ The build context is the **repository root**, with a single active workspace
 lock. Run local preparation from that root:
 
 ```sh
-npm ci --no-audit --no-fund
+npm ci --ignore-scripts --no-audit --no-fund
 npm run check
 npm exec --workspace @capiro/web -- playwright install --with-deps chromium
-npm run test:browser
+node apps/web/deployment/portfolio/qualify-elements.mjs "$(mktemp -d)/elements"
+npm run test:browser -- --workers=3
+npm run test:browser:modules
 npm run build
 npm run test:production
 docker build --pull --platform linux/amd64 -f apps/web/Dockerfile -t portfolio-preview:review .
@@ -33,9 +37,8 @@ bash apps/web/deployment/portfolio/smoke.sh portfolio-preview:review
 The pinned Node 24 Alpine image and zlib package retain the previously reviewed
 runtime choice. Run a fresh image scan; previous findings do not establish a new
 digest's status. Standalone output includes `apps/web/server.js`, public assets
-and static chunks. The container starts as UID 1000 on port 5188 and sets
-`CAPIRO_DEFAULT_PRODUCT=portfolio`. `/healthz` is process health. The smoke check
-covers the Portfolio home redirect, unconfigured setup/sign-in pages and fail-closed backend proxy; it
+and static chunks. The container starts as UID 1000 on port 5188 and serves Portfolio directly at `/`. `/healthz` is process health. The smoke check
+covers the canonical root and all mode/Settings/calendar/sign-in routes, headers and both fail-closed API boundaries; it
 does not establish signed-in service access.
 Each HTTP probe has a two-second connection deadline and a five-second overall
 deadline, including each attempt in the bounded readiness loop. A stalled
@@ -44,7 +47,7 @@ container response therefore cannot leave the smoke waiting indefinitely.
 `npm run test:production` first assembles public assets and static chunks beside
 the built Next standalone server, then checks that server on loopback port 5188.
 It verifies route status and security headers, fail-closed unconfigured routing,
-the isolated Portfolio home redirect, and real Next navigation from the existing
+the canonical Portfolio root, and real Next navigation from the existing
 Meri entry to Portfolio and back in desktop/phone and light/dark modes. The
 navigation checks retain the same document, verify that Portfolio styling is
 removed on return, and capture the setup wordmark after its image loads. They
@@ -94,7 +97,7 @@ ingress address or cached AWS reads are available or current.
 4. The buildspec is now
    `apps/web/deployment/portfolio/buildspec.yml`. Use this as an explicit build
    override for the existing project, or review a project-template update. The
-   build verifies source SHA and S3 version, runs the root checks/browser/build
+   build verifies source SHA and S3 version, runs the root checks, both browser suites, fresh UI provenance/SSR, build
    and standalone production navigation check,
    builds and smokes the Linux image, then pushes the SHA tag and reads back its
    digest. The bounded build role can read its source, write logs and push/read

@@ -6,9 +6,33 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@capiro/ui/dialog";
-import type { ComponentProps, ReactNode } from "react";
+import { useRef, type ComponentProps, type ReactNode } from "react";
 import { X } from "lucide-react";
 import styles from "./dialog.module.css";
+const guardedEscape = new WeakSet<KeyboardEvent>();
+const handledEscape = new WeakSet<KeyboardEvent>();
+// Radix installs/removes its highest-layer listener in passive effects. During
+// nested portal mount, a parent's old listener can observe the child's Escape.
+// Keep Radix focus/portal ownership and guard only that transition's dismissal.
+function dismissTopDialog(
+  event: KeyboardEvent,
+  content: HTMLDivElement | null,
+  onOpenChange: (open: boolean) => void,
+) {
+  if (event.key !== "Escape" || !content || handledEscape.has(event)) return;
+  const dialogs = content.ownerDocument.querySelectorAll(
+    '[role="dialog"][data-state="open"]',
+  );
+  if (dialogs.item(dialogs.length - 1) !== content) {
+    event.preventDefault();
+    guardedEscape.add(event);
+    return;
+  }
+  if (event.defaultPrevented && !guardedEscape.has(event)) return;
+  event.preventDefault();
+  handledEscape.add(event);
+  onOpenChange(false);
+}
 export function Dialog({
   open,
   onOpenChange,
@@ -32,13 +56,27 @@ export function Dialog({
   onCloseAutoFocus?: ComponentProps<typeof DialogContent>["onCloseAutoFocus"];
   onOpenAutoFocus?: ComponentProps<typeof DialogContent>["onOpenAutoFocus"];
 }) {
+  const content = useRef<HTMLDivElement>(null);
   return (
     <DialogRoot open={open} onOpenChange={onOpenChange}>
       <DialogContent
+        ref={content}
         aria-modal="true"
         showCloseButton={false}
         onCloseAutoFocus={onCloseAutoFocus}
         onOpenAutoFocus={onOpenAutoFocus}
+        onEscapeKeyDown={(event) =>
+          dismissTopDialog(event, content.current, onOpenChange)
+        }
+        onKeyDown={(event) => {
+          // Covers an immediately focused child before its passive listener is
+          // attached. A nested popup/dialog keeps its own keyboard handling.
+          if (
+            event.target instanceof Element &&
+            event.target.closest('[role="dialog"]') === content.current
+          )
+            dismissTopDialog(event.nativeEvent, content.current, onOpenChange);
+        }}
         className={`${styles.content} ${drawer ? styles.drawer : ""} ${wide ? styles.wide : ""} ${className}`}
       >
         <header className="row between">
