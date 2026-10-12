@@ -1,0 +1,9 @@
+{
+  "case": "local-unicode-path-extra-override",
+  "accepted": true,
+  "error": null,
+  "unzipExit": 1,
+  "unzipTest": "Archive:  /tmp/capiro-successor-archive-review/synthetic-zips/local-unicode-path-extra.zip\nREADME.md:  mismatching \"local\" filename (../unindexed-unicode.txt),\n         continuing with \"central\" filename version\n    testing: README.md                OK\n    testing: apps/web/src/synthetic.ts   OK\n    testing: run.sh                   OK\n    testing: source-commit.txt        OK\nAt least one warning-error was detected in /tmp/capiro-successor-archive-review/synthetic-zips/local-unicode-path-extra.zip.\n",
+  "unzipStderr": "",
+  "extracted": false
+}
