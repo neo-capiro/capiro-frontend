@@ -33,3 +33,11 @@ Required foundation checks: exact package pins/lock, safe imports, public export
 Review first-party files over400 nonblank lines, functions over80 nonblank lines and cycles, alongside the human's semantic responsibility triggers. These are proportional review signals, not design proof or fragmentation quotas. Classify generated catalogs, upstream vendor files and evidence separately. Keep a single owner per lockfile/shared interface and return bounded reviewable commits from dedicated worktrees.
 
 The architecture guard scans imports and function bodies through the TypeScript AST. It enforces package exports, route thinness, Portfolio public interfaces, shared-foundation direction, cycles and restricted browser patterns. A fingerprinted transfer baseline identifies unchanged inherited size findings as **unreviewed**, not approved. New or changed findings require an exact, function-specific responsibility review; all findings remain visible. Reviews and the transfer baseline are data owned by `scripts/architecture`, separate from the scanner and policy code.
+
+
+
+## Modules and Settings allocation — 12 October 2026
+
+The owner has now allocated Modules and Settings under `apps/web/src/features/modules` and `features/settings`. Their shared application boundary lives in `shared/capiro`; reusable controls and meetings live in `shared/module-ui` and `shared/meetings`. The Meri runtime and the separate Portfolio application remain independently owned. See [implementation](modules-settings/IMPLEMENTATION.md), [design review](modules-settings/STRUCTURE-REVIEW.md) and [verification](modules-settings/VERIFICATION.md). The earlier disconnected-destination description above records the foundation phase and is superseded for these allocated surfaces.
+
+Size signals remain visible. Exact source-hash review records in `docs/architecture-size-reviews.json` satisfy a completed design review, with no blanket path/JSX exemption. A changed file or new signal requires review again. Boundary errors and cycles always fail; they cannot be waived by a size record.

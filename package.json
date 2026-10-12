@@ -20,10 +20,11 @@
     "check:packages": "node scripts/public-packages.mjs",
     "test:transport": "npm test --workspace @capiro/qualification-transport",
     "check:elements": "npm run pins:check --workspace @capiro/qualification-elements && npm run check --workspace @capiro/qualification-elements",
-    "check": "npm run check:packages && npm run typecheck && npm test && npm run architecture && npm run test:transport && npm run lint --workspace @capiro/web && npm run format:check --workspace @capiro/web && npm run test:portfolio",
+    "check": "npm run check:packages && npm run typecheck && npm test && npm run architecture && npm run test:transport && npm run lint --workspace @capiro/web && npm run format:check --workspace @capiro/web && npm run test:portfolio && npm run test:capiro --workspace @capiro/web",
     "test:portfolio": "npm test --workspace @capiro/web",
     "test:browser": "npm run test:browser --workspace @capiro/web --",
-    "test:production": "node apps/web/tests/production/run-standalone.mjs"
+    "test:production": "node apps/web/tests/production/run-standalone.mjs",
+    "test:browser:modules": "npm run test:browser:modules --workspace @capiro/web"
   },
   "devDependencies": {
     "@types/node": "24.0.0",
@@ -33,5 +34,6 @@
   },
   "overrides": {
     "uuid": "14.0.2"
-  }
+  },
+  "packageManager": "npm@11.9.0"
 }

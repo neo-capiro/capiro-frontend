@@ -42,33 +42,14 @@ export function Shell({
           </button>
         }
         brand={
-          destinations.existingApp ? (
-            <a
-              className={styles.brand}
-              href={`${destinations.existingApp}/`}
-              aria-label="Capiro dashboard"
-            >
-              <img
-                src={asset("imgCapiroWordmark.png")}
-                alt="Capiro"
-                width={77}
-                height={26}
-              />
-            </a>
-          ) : (
-            <Link
-              className={styles.brand}
-              href="/portfolio"
-              aria-label="Portfolio home"
-            >
-              <img
-                src={asset("imgCapiroWordmark.png")}
-                alt="Capiro"
-                width={77}
-                height={26}
-              />
-            </Link>
-          )
+          <Link className={styles.brand} href="/" aria-label="Capiro Home">
+            <img
+              src={asset("imgCapiroWordmark.png")}
+              alt="Capiro"
+              width={77}
+              height={26}
+            />
+          </Link>
         }
         modes={<WorkspaceSwitcher destinations={destinations} />}
         actions={
@@ -121,17 +102,10 @@ export function Shell({
             onNavigate={() => setMobileOpen(false)}
           />
           <div className={styles.bottom}>
-            {destinations.existingApp ? (
-              <a href={`${destinations.existingApp}/settings`}>
-                <img src="/design/471-93465-imgIcon10.svg" alt="" />
-                Settings
-              </a>
-            ) : (
-              <span className="row muted">
-                <img src="/design/471-93465-imgIcon10.svg" alt="" />
-                <span>Settings unavailable</span>
-              </span>
-            )}
+            <Link href="/settings">
+              <img src="/design/471-93465-imgIcon10.svg" alt="" />
+              Settings
+            </Link>
           </div>
         </aside>
         <main id="main" className={styles.main}>

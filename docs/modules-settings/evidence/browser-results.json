@@ -1,0 +1,662 @@
+{
+  "scope": "Synthetic local bundled browser harness; no live backend acceptance",
+  "stats": {
+    "startTime": "2026-10-12T00:42:54.800Z",
+    "duration": 78394.879,
+    "expected": 59,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "cases": [
+    {
+      "title": "month and week retain client scope and query end-exclusive Eastern ranges",
+      "file": "calendar.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 2102
+        }
+      ]
+    },
+    {
+      "title": "client agenda is meetings-only and the meeting opens the shared prep/notes/debrief workflow",
+      "file": "calendar.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1313
+        }
+      ]
+    },
+    {
+      "title": "LegiWatch News evidence renders a real connected view",
+      "file": "legiwatch.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1284
+        }
+      ]
+    },
+    {
+      "title": "LegiWatch Florida Budget renders a real connected view",
+      "file": "legiwatch.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1079
+        }
+      ]
+    },
+    {
+      "title": "LegiWatch Research evidence renders a real connected view",
+      "file": "legiwatch.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1147
+        }
+      ]
+    },
+    {
+      "title": "LegiWatch Monitoring renders a real connected view",
+      "file": "legiwatch.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1054
+        }
+      ]
+    },
+    {
+      "title": "LegiWatch Client briefings renders a real connected view",
+      "file": "legiwatch.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1253
+        }
+      ]
+    },
+    {
+      "title": "LegiWatch Reports renders a real connected view",
+      "file": "legiwatch.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1086
+        }
+      ]
+    },
+    {
+      "title": "LegiWatch Trends renders a real connected view",
+      "file": "legiwatch.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1145
+        }
+      ]
+    },
+    {
+      "title": "LegiWatch Legacy digest renders a real connected view",
+      "file": "legiwatch.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1000
+        }
+      ]
+    },
+    {
+      "title": "LegiWatch Import review renders a real connected view",
+      "file": "legiwatch.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1101
+        }
+      ]
+    },
+    {
+      "title": "LegiWatch Research import review renders a real connected view",
+      "file": "legiwatch.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1176
+        }
+      ]
+    },
+    {
+      "title": "LegiWatch LegiWatch settings renders a real connected view",
+      "file": "legiwatch.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1034
+        }
+      ]
+    },
+    {
+      "title": "research continues past an empty matched page using the retained-source cursor",
+      "file": "legiwatch.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1496
+        }
+      ]
+    },
+    {
+      "title": "workflow changes invalidate a reviewed preview and enqueue only its exact current hash",
+      "file": "legiwatch.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1350
+        }
+      ]
+    },
+    {
+      "title": "monitoring tabs and keyword drawer support keyboard dismissal on mobile without overflow",
+      "file": "legiwatch.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1459
+        }
+      ]
+    },
+    {
+      "title": "Engagement Manager primary route renders through the canonical session/API boundary",
+      "file": "modules.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1339
+        }
+      ]
+    },
+    {
+      "title": "Planner primary route renders through the canonical session/API boundary",
+      "file": "modules.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1231
+        }
+      ]
+    },
+    {
+      "title": "Master calendar primary route renders through the canonical session/API boundary",
+      "file": "modules.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1435
+        }
+      ]
+    },
+    {
+      "title": "Workspace primary route renders through the canonical session/API boundary",
+      "file": "modules.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1142
+        }
+      ]
+    },
+    {
+      "title": "Strategies primary route renders through the canonical session/API boundary",
+      "file": "modules.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1186
+        }
+      ]
+    },
+    {
+      "title": "Directory primary route renders through the canonical session/API boundary",
+      "file": "modules.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1085
+        }
+      ]
+    },
+    {
+      "title": "Intelligence Center primary route renders through the canonical session/API boundary",
+      "file": "modules.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1249
+        }
+      ]
+    },
+    {
+      "title": "Research Portfolios primary route renders through the canonical session/API boundary",
+      "file": "modules.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1042
+        }
+      ]
+    },
+    {
+      "title": "Planner modes use the same permitted task data and exact board assets",
+      "file": "planner-engagement.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1815
+        }
+      ]
+    },
+    {
+      "title": "Planner failed writes retain drafts and a successful save uses only reviewed fields",
+      "file": "planner-engagement.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1357
+        }
+      ]
+    },
+    {
+      "title": "Engagement library opens shared notes, approval is a separate real operation and tabs work at phone width",
+      "file": "planner-engagement.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1439
+        }
+      ]
+    },
+    {
+      "title": "A template session deep link keeps the server state version and sends no mail",
+      "file": "planner-engagement.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1221
+        }
+      ]
+    },
+    {
+      "title": "public form submits only displayed answers and shows the returned receipt without sign-in",
+      "file": "public-forms.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 986
+        }
+      ]
+    },
+    {
+      "title": "revoked public capability renders an unavailable state without a submission action",
+      "file": "public-forms.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 944
+        }
+      ]
+    },
+    {
+      "title": "missing configuration renders setup without issuing service requests",
+      "file": "session.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1050
+        }
+      ]
+    },
+    {
+      "title": "org/session change clears prior records and sign-out removes all protected content",
+      "file": "session.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1044
+        }
+      ]
+    },
+    {
+      "title": "401 removes protected content and asks for sign-in without replaying a request",
+      "file": "session.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1116
+        }
+      ]
+    },
+    {
+      "title": "development StrictMode remount establishes a valid request scope before child reads",
+      "file": "session.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 940
+        }
+      ]
+    },
+    {
+      "title": "Settings personal renders compatible responses without runtime failures",
+      "file": "settings-scenes.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1352
+        }
+      ]
+    },
+    {
+      "title": "Settings contact-info renders compatible responses without runtime failures",
+      "file": "settings-scenes.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1084
+        }
+      ]
+    },
+    {
+      "title": "Settings branding renders compatible responses without runtime failures",
+      "file": "settings-scenes.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1215
+        }
+      ]
+    },
+    {
+      "title": "Settings team renders compatible responses without runtime failures",
+      "file": "settings-scenes.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1057
+        }
+      ]
+    },
+    {
+      "title": "Settings integrations renders compatible responses without runtime failures",
+      "file": "settings-scenes.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1114
+        }
+      ]
+    },
+    {
+      "title": "Settings memory renders compatible responses without runtime failures",
+      "file": "settings-scenes.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1149
+        }
+      ]
+    },
+    {
+      "title": "Settings meri-preferences renders compatible responses without runtime failures",
+      "file": "settings-scenes.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1162
+        }
+      ]
+    },
+    {
+      "title": "Settings billing renders compatible responses without runtime failures",
+      "file": "settings-scenes.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1203
+        }
+      ]
+    },
+    {
+      "title": "Settings ai-usage renders compatible responses without runtime failures",
+      "file": "settings-scenes.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1173
+        }
+      ]
+    },
+    {
+      "title": "Settings profiles renders compatible responses without runtime failures",
+      "file": "settings-scenes.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1216
+        }
+      ]
+    },
+    {
+      "title": "Settings intelligence-mappings renders compatible responses without runtime failures",
+      "file": "settings-scenes.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1233
+        }
+      ]
+    },
+    {
+      "title": "Settings hq-tenants renders compatible responses without runtime failures",
+      "file": "settings-scenes.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1265
+        }
+      ]
+    },
+    {
+      "title": "Settings hq-customers renders compatible responses without runtime failures",
+      "file": "settings-scenes.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 949
+        }
+      ]
+    },
+    {
+      "title": "Settings hq-ai-keys renders compatible responses without runtime failures",
+      "file": "settings-scenes.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1353
+        }
+      ]
+    },
+    {
+      "title": "Settings hq-broadcasts renders compatible responses without runtime failures",
+      "file": "settings-scenes.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1403
+        }
+      ]
+    },
+    {
+      "title": "Settings hq-personnel renders compatible responses without runtime failures",
+      "file": "settings-scenes.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1227
+        }
+      ]
+    },
+    {
+      "title": "Settings hq-reconciliation renders compatible responses without runtime failures",
+      "file": "settings-scenes.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1274
+        }
+      ]
+    },
+    {
+      "title": "Settings hq-matches renders compatible responses without runtime failures",
+      "file": "settings-scenes.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1323
+        }
+      ]
+    },
+    {
+      "title": "Settings hq-analyst renders compatible responses without runtime failures",
+      "file": "settings-scenes.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1305
+        }
+      ]
+    },
+    {
+      "title": "All analyst queues and Meri preference screens are reachable with explicit unavailable contracts",
+      "file": "settings-scenes.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 3533
+        }
+      ]
+    },
+    {
+      "title": "Settings dialogs trap focus and Escape closes an unsent invitation",
+      "file": "settings-scenes.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1433
+        }
+      ]
+    },
+    {
+      "title": "Personal saves the title only after a validated response and keeps signature uploads separate",
+      "file": "settings.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1519
+        }
+      ]
+    },
+    {
+      "title": "Team does not fetch private records for a standard user",
+      "file": "settings.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 887
+        }
+      ]
+    },
+    {
+      "title": "Team prevents self-removal and failed invitations remain editable without success feedback",
+      "file": "settings.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1306
+        }
+      ]
+    },
+    {
+      "title": "Mobile Personal fits the viewport and Settings sections remain keyboard accessible",
+      "file": "settings.spec.ts",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "durationMs": 1127
+        }
+      ]
+    }
+  ]
+}

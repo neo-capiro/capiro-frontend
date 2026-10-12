@@ -20,12 +20,19 @@ export interface ApiClient {
 export function createApiClient(
   fetcher: typeof fetch = fetch,
   onSessionExpired?: () => void,
+  scopeSignal?: () => AbortSignal,
 ): ApiClient {
   return {
     async request(service, path, schema, options = {}) {
+      const scope = scopeSignal?.();
+      const signal =
+        scope && options.signal
+          ? AbortSignal.any([scope, options.signal])
+          : (scope ?? options.signal);
+      signal?.throwIfAborted();
       const response = await fetcher(`/api/backend/${service}/${path}`, {
         method: options.method ?? "GET",
-        signal: options.signal,
+        signal,
         credentials: "same-origin",
         headers:
           options.body === undefined
@@ -39,6 +46,7 @@ export function createApiClient(
         response.status === 204
           ? null
           : await response.json().catch(() => null);
+      signal?.throwIfAborted();
       if (!response.ok) {
         if (response.status === 401) onSessionExpired?.();
         const detail = z

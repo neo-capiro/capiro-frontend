@@ -1,34 +1,35 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
-import Link from "next/link";
+import { ModeLink } from "@/shared/shell/ModeLink";
+import type { ProductMode } from "@/shared/session/client-route";
 import { DropdownMenu } from "radix-ui";
 import type { Destinations } from "../config/config";
 import styles from "./shell.module.css";
 const asset = (name: string) => `/design/411-41421-${name}`;
 export function WorkspaceSwitcher({
-  destinations,
+  destinations: _destinations,
 }: {
   destinations: Destinations;
 }) {
   const entries = [
-    { label: "Meri", href: destinations.meri, icon: "imgIcon.svg" },
-    { label: "Portfolio", href: "/portfolio", icon: "imgIcon1.svg" },
-    { label: "Modules", href: destinations.modules, icon: "imgIcon2.svg" },
+    { label: "Meri", href: "/meri", icon: "imgIcon.svg" },
+    { label: "Portfolio", href: "/", icon: "imgIcon1.svg" },
+    { label: "Modules", href: "/modules", icon: "imgIcon2.svg" },
   ];
   return (
     <>
       <nav className={styles.modes} aria-label="Workspace">
         {entries.map(({ label, href, icon }) =>
           href ? (
-            <Link
+            <ModeLink
               key={label}
-              href={href}
+              mode={label.toLowerCase() as ProductMode}
               aria-label={label}
               title={label}
               aria-current={label === "Portfolio" ? "page" : undefined}
             >
               <img src={asset(icon)} alt="" />
-            </Link>
+            </ModeLink>
           ) : (
             <button
               key={label}
@@ -62,13 +63,13 @@ export function WorkspaceSwitcher({
                   asChild={Boolean(href)}
                 >
                   {href ? (
-                    <Link
-                      href={href}
+                    <ModeLink
+                      mode={label.toLowerCase() as ProductMode}
                       aria-current={label === "Portfolio" ? "page" : undefined}
                     >
                       <img src={asset(icon)} alt="" />
                       {label}
-                    </Link>
+                    </ModeLink>
                   ) : (
                     <span>
                       <img src={asset(icon)} alt="" />

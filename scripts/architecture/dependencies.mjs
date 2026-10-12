@@ -9,12 +9,16 @@ const publicEntry = name => /\/(?:public|[^/]+-public)\.ts$/.test(name);
 
 export const publicExports = new Set([
   '@capiro/ui/button', '@capiro/ui/dialog', '@capiro/ui/prompt-input',
+  '@capiro/ui/input', '@capiro/ui/textarea', '@capiro/ui/select', '@capiro/ui/dropdown-menu',
   '@capiro/ui/conversation', '@capiro/ui/message', '@capiro/meri-client/projection',
   '@capiro/meri-contracts', '@capiro/meri-contracts/browser',
   '@capiro/meri-contracts/metadata', '@capiro/meri-ui-stream/protocol',
 ]);
 
 export const serverAdapters = new Map([
+  [`${appSource}app/api/capiro/[operation]/route.ts`, new Set([
+    '@clerk/nextjs/server', `${appSource}shared/capiro/config.ts`, `${appSource}shared/capiro/gateway.ts`, `${appSource}shared/capiro/registry.ts`,
+  ])],
   [`${appSource}app/api/backend/[service]/[...path]/route.ts`, new Set([
     '@clerk/nextjs/server', `${appSource}shared/portfolio/config/config.ts`, `${appSource}shared/portfolio/api/proxy.ts`,
   ])],
@@ -44,7 +48,6 @@ function edgeViolation(from, to) {
 
 export function inspectDependencies(file, module, files, approvedExports = publicExports) {
   const errors = [], edges = [];
-  if (/\/features\/(modules|settings)\//.test(file)) errors.push(`${file}: future feature implementation not allocated`);
   const isRoute = /\/app\/(?:.*\/)?route\.[jt]sx?$/.test(file);
   if (isRoute && !serverAdapters.has(file)) errors.push(`${file}: backend route handler is not allocated`);
   if (serverAdapters.has(file) && module.nonblank > 80) errors.push(`${file}: server adapter must stay thin (at most 80 nonblank lines)`);

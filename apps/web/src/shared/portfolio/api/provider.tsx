@@ -1,5 +1,12 @@
 "use client";
-import { createContext, useContext, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ApiError, createApiClient, type ApiClient } from "./http";
 import Link from "next/link";
@@ -7,10 +14,13 @@ const ApiContext = createContext<ApiClient | null>(null);
 export function DataProvider({
   children,
   api,
+  onSessionExpired,
 }: {
   children: ReactNode;
   api?: ApiClient;
+  onSessionExpired?: () => void;
 }) {
+  const scope = useRef(new AbortController());
   const [client] = useState(
     () =>
       new QueryClient({
@@ -28,8 +38,26 @@ export function DataProvider({
   );
   const [expired, setExpired] = useState(false);
   const [defaultApi] = useState(() =>
-    createApiClient(fetch, () => setExpired(true)),
+    createApiClient(
+      fetch,
+      () => {
+        scope.current.abort();
+        client.clear();
+        setExpired(true);
+        onSessionExpired?.();
+      },
+      () => scope.current.signal,
+    ),
   );
+  useLayoutEffect(() => {
+    if (scope.current.signal.aborted) scope.current = new AbortController();
+    const current = scope.current;
+    return () => {
+      current.abort();
+      void client.cancelQueries();
+      client.clear();
+    };
+  }, [client]);
   if (expired)
     return (
       <main className="centered">

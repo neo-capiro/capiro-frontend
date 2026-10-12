@@ -18,7 +18,7 @@ test('run workspace admits only its three approved additional public seams', () 
 test('rejects cycles, feature-private crossing, private package and external repository paths', () => {
   const files = new Map([['apps/web/src/features/meri/A.ts', "import '../modules/B'; import '@capiro/ui/vendor/button'; import 'meri-greenfield/apps/private';"], ['apps/web/src/features/modules/B.ts', "import '../meri/A';"]]);
   const errors = inspectSources(files).errors.join('\n');
-  for (const finding of ['private cross-feature', 'Import cycle', 'non-public package', 'restricted runtime/repository', 'future feature implementation']) assert.ok(errors.includes(finding), finding);
+  for (const finding of ['private cross-feature', 'Import cycle', 'non-public package', 'restricted runtime/repository']) assert.ok(errors.includes(finding), finding);
 });
 test('rejects computed loading and undeclared server endpoints', () => {
   const errors = inspectSources(new Map([['apps/web/src/app/api/fake/route.ts', 'export async function GET(){return import(process.env.MODULE);}']])).errors;
@@ -30,9 +30,23 @@ test('an unallocated backend route cannot bypass the guard by changing source ex
     assert.ok(errors.some(value => value.includes('backend route')), extension);
   }
 });
+test('allocated Modules and Settings may use shared adapters and the narrow Capiro gateway', () => {
+  const files = new Map([
+    ['apps/web/src/features/modules/Directory.tsx', "import '../../shared/capiro/client';"],
+    ['apps/web/src/features/settings/Profile.tsx', "import '../../shared/capiro/client';"],
+    ['apps/web/src/shared/capiro/client.ts', 'export const client = 1;'],
+    ['apps/web/src/shared/capiro/gateway.ts', 'export const gateway = 1;'],
+    ['apps/web/src/app/api/capiro/[operation]/route.ts', "import '../../../../shared/capiro/gateway';"],
+  ]);
+  assert.deepEqual(inspectSources(files).errors, []);
+});
 test('size and function thresholds require explicit review instead of silent exceptions', () => {
   const source = `export function oversized(){\n${'void 0;\n'.repeat(401)}}`;
   assert.equal(inspectSources(new Map([['apps/web/src/features/meri/large.ts', source]])).signals.length, 2);
+});
+test('authored stylesheets retain the same file-size review threshold', () => {
+  const result = inspectSources(new Map([['apps/web/src/features/modules/view.module.css', '.view {}\n'.repeat(401)]]));
+  assert.deepEqual(result.signals, ['apps/web/src/features/modules/view.module.css: 401 nonblank lines require review']);
 });
 
 test('browser client resolves emitted JS imports and refuses server or Node contract entries', () => {
@@ -67,11 +81,11 @@ test('same-owner relative edges and explicitly approved public package imports s
   assert.deepEqual(result.graph['packages/meri-client/src/transport.ts'], ['packages/meri-client/src/projection.ts']);
 });
 
-test('Portfolio is allocated while Modules and Settings remain unavailable', () => {
+test('all assigned product features are allocated', () => {
   const portfolio = inspectSources(new Map([['apps/web/src/features/portfolio/objectives/public.ts', 'export const fixture = 1;']]));
   assert.deepEqual(portfolio.errors, []);
   for (const feature of ['modules', 'settings']) {
-    assert.ok(inspectSources(new Map([[`apps/web/src/features/${feature}/public.ts`, 'export const fixture = 1;']])).errors.some(error => error.includes('future feature implementation')));
+    assert.deepEqual(inspectSources(new Map([[`apps/web/src/features/${feature}/public.ts`, 'export const fixture = 1;']])).errors, []);
   }
 });
 

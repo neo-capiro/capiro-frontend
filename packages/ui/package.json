@@ -11,6 +11,10 @@
   "exports": {
     "./button": "./src/shadcn/button.tsx",
     "./dialog": "./src/shadcn/dialog.tsx",
+    "./input": "./src/shadcn/input.tsx",
+    "./textarea": "./src/shadcn/textarea.tsx",
+    "./select": "./src/shadcn/select.tsx",
+    "./dropdown-menu": "./src/shadcn/dropdown-menu.tsx",
     "./conversation": "./src/ai-elements/conversation.tsx",
     "./message": "./src/ai-elements/message.tsx",
     "./prompt-input": "./src/ai-elements/prompt-input.tsx"

@@ -58,7 +58,7 @@ export function scanModule(file, source) {
     }
     ts.forEachChild(node, child => visit(child, scope));
   }
-  visit(ast);
+  if (!file.endsWith(".css")) visit(ast);
   return { imports, anyLines, remoteOriginLines, sizeFindings, nonblank: count };
 }
 
