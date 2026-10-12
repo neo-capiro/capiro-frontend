@@ -619,10 +619,10 @@
     "file": "apps/web/src/features/portfolio/prospects/ProspectDetail.tsx",
     "kind": "function",
     "symbol": "ProspectDetail",
-    "fingerprint": "a6aad16495520cb935cb1d81ef942b9f75e96534ea9e54e205a47688083d694b",
-    "reason": "ProspectDetail owns one overview composition and the open/closed state of its existing editors. Detail reads, exact-ID writes, stage derivation, note/history operations, contacts, brief, templates and linking remain delegated to feature modules; the container does not authorize, persist or convert prospects. Keeping the current-record gate around all cards and dialogs prevents an invalid identity response from becoming a displayed or actionable company.",
-    "reviewedBy": "Codex portfolio_prospects_files",
-    "reviewedOn": "2026-10-11"
+    "fingerprint": "cbbe1c4d1e35e6b3b3aadf7610f646b0b27a31eb79f067c3eb6202afa784bdf7",
+    "reason": "Existing prospect detail composes its independently owned overview, brief, contacts, proposals and conversion areas. The addition mounts the canonical Portfolio Files public component only under current prospect access and links the exact immutable prospect UUID to Modules Workspace; it adds no document editor, attachment transport or cross-feature import. Existing field editing remains with its original domain hooks.",
+    "reviewedBy": "Codex shared frontend integration owner (source review)",
+    "reviewedOn": "2026-10-12"
   },
   {
     "file": "apps/web/src/features/portfolio/prospects/ProspectEditor.tsx",
@@ -1380,6 +1380,69 @@
     "symbol": "useFollowUpCommand > run",
     "fingerprint": "76833d93d277e5be300bc1de93233085d75bdb0592008c9616455922e668cc75",
     "reason": "This 99-line transition captures the exact current pending command, serializes one explicit operation, clears stale success presentation, delegates to the guarded Core create/read/resume functions, and records only validated results. Recovery reuses the original body/key; resume requires a fresh read version. The operation token coordinates cancellation and cache publication across dialog closure. Keeping these dependent state transitions together makes the no-replay and no-stale-success ordering reviewable; it does not select unrelated providers or workflows.",
+    "reviewedBy": "Codex shared frontend integration owner (source review)",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+    "kind": "function",
+    "symbol": "DraftEditor",
+    "fingerprint": "395dd97c2f15beeaaeef322bf1b33d572cd129c6ceda1f4732f207fd52518444",
+    "reason": "The canonical editor retains one title/section draft and its existing manual history dialog. Prospect validation and save uncertainty are delegated to manual-draft/useProspectDraftSave; export has a separate component. The added presentation shows immutable origin and current saved content beside retained local edits. It does not own prospect creation, shares, generation, server authority or a second document editor. Existing non-prospect save behavior remains in its original branch.",
+    "reviewedBy": "Codex shared frontend integration owner (source review)",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
+    "kind": "function",
+    "symbol": "WorkspaceScreen",
+    "fingerprint": "deee3d7a09db876ddbcb2a280bbaa1c34c1fa5c866e741c48b24c330fa82e11c",
+    "reason": "This existing Workspace view dispatcher gains one validated prospect query branch and delegates list/create and the canonical editor. Invalid prospect IDs fail closed and URL navigation owns prospect/draft selection. Existing library/workflows/share routes retain their owners; there is no feature import across Portfolio/Modules or duplicate editor.",
+    "reviewedBy": "Codex shared frontend integration owner (source review)",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/prospects/ProspectDraftCreate.tsx",
+    "kind": "function",
+    "symbol": "ProspectDraftCreate",
+    "fingerprint": "9f566d1e02daeeae8d67435de7137cf7d890c444cc5f67a5e805fc1b8493ae73",
+    "reason": "One explicit manual-create intent owns the entered title, retained exact request UUID/body and response identity check. Fixed operations and shared session lifetime own transport/authority; the parent owns navigation. Recovery deliberately resubmits only the original seed and key. The form does not manage existing drafts, versions or exports.",
+    "reviewedBy": "Codex shared frontend integration owner (source review)",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/prospects/ProspectWorkspace.tsx",
+    "kind": "function",
+    "symbol": "ProspectWorkspace",
+    "fingerprint": "d6ace208a52280bb342ccbccf5c5b5a53d2c0d8269a48a19c6e5eea5d875f3a4",
+    "reason": "One current prospect-filtered document list pairs current tenant projection with immutable draft origins, loading/refusal states and explicit refresh. Creation is a child component and opening uses parent navigation. Unsupported distribution and generation remain disabled. This is list composition rather than another document workflow engine.",
+    "reviewedBy": "Codex shared frontend integration owner (source review)",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/prospects/useProspectDraftSave.ts",
+    "kind": "function",
+    "symbol": "useProspectDraftSave",
+    "fingerprint": "06b74616b10205116cca8efbe63e6d03560cb8b99b31b62a071068970113f369",
+    "reason": "A single manual-save attempt retains exact edited title/sections and unknown outcome across view closure. The hook sequences current-origin/version observation, supported PATCH and separate version receipt, then requires read-back after uncertainty. Pure receipt checks are separate; the canonical fixed gateway owns dispatch/session cancellation. Keeping the coupled attempt, baseline and explicit read recovery together avoids mismatched partial save state. Backend CAS/atomic version writes are not invented.",
+    "reviewedBy": "Codex shared frontend integration owner (source review)",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/ProspectFiles.tsx",
+    "kind": "function",
+    "symbol": "ProspectFileSession",
+    "fingerprint": "b6607219d1ed834aee5da884a9fd4e3f254bfaedae8a44a3b8ca6d7f18af6a5e",
+    "reason": "This Files composition owns one selected upload and one file-delete confirmation. Scoped read/delete adapters and the upload lifetime/durable-intent orchestration are separate modules. The function presents current readiness, capability links, explicit recovery and existing dialog states; it does not own storage protocol, content extraction, Workspace editing or authorization. The named file-row presentation could be extracted when reused, without moving the coupled current-list/delete fence.",
+    "reviewedBy": "Codex shared frontend integration owner (source review)",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/prospect-upload.ts",
+    "kind": "function",
+    "symbol": "uploadProspectFile",
+    "fingerprint": "aaac70852048a0bfd34aa37950c725c0419d1f114655861669e1e0cc7ce6b739",
+    "reason": "One upload protocol binds exact prospect/actor metadata and byte digest to the original intent, submits its untouched presigned fields at most once, and validates the original confirmation. Preparation/hash and list/delete are separate. The stage branches share one retained attempt and cancellation guard; splitting phases into unrelated hooks would risk replacement keys or duplicate bytes after uncertain storage. This is one bounded transport orchestration, not a new service or retry framework.",
     "reviewedBy": "Codex shared frontend integration owner (source review)",
     "reviewedOn": "2026-10-12"
   }

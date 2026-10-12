@@ -34,8 +34,10 @@ and commitment-specific date UI. Ordinary activity kinds and generic follow-up
 remain. Trace references and remove any feature-only dead code instead of hiding
 it. The base QuickLog and its input schema already contain only note, call, email,
 decision and request; there is no excluded feature implementation to archive in
-runtime. Separate disabled Directory member-note controls and meeting-preparation
-content are not dependencies of this omitted Quick log feature.
+runtime. Independent review also found an abandoned disabled Commitment choice in
+Global Quick log → Member; correction eabc8bf removes it. There is no disabled-UI
+exception. Supported Directory Note behavior and existing meeting-preparation
+content remain independently active.
 
 ## Verification
 

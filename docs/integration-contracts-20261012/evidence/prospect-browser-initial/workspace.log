@@ -1,0 +1,70 @@
+
+> @capiro/web@0.1.0 test:browser:modules
+> playwright test --config test/browser/playwright.config.ts prospect-workspace.spec.ts
+
+[WebServer] (node:189195) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 8 tests using 1 worker
+
+(node:189222) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 test/browser/prospect-workspace.spec.ts:41:1 › prospect creation recovers its original seed and key after a lost receipt (1.3s)
+  ✓  2 test/browser/prospect-workspace.spec.ts:74:1 › manual content, version history and exports use only reviewed draft operations (1.3s)
+  ✓  3 test/browser/prospect-workspace.spec.ts:122:1 › an uncertain save retains edits across navigation and requires read-back before explicit save (1.3s)
+  ✓  4 test/browser/prospect-workspace.spec.ts:150:3 › a wrong prospectId never exposes the document or writes (943ms)
+  ✓  5 test/browser/prospect-workspace.spec.ts:150:3 › a wrong tenantId never exposes the document or writes (837ms)
+  ✓  6 test/browser/prospect-workspace.spec.ts:164:1 › prospect Newsletter origin cannot open its sending workflow (945ms)
+  ✘  7 test/browser/prospect-workspace.spec.ts:178:1 › a changed document blocks PATCH and shows the saved content for deliberate review (30.1s)
+(node:189561) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  8 test/browser/prospect-workspace.spec.ts:210:1 › mobile prospect manual editor preserves keyboard fields and stays in the viewport (1.1s)
+
+
+  1) test/browser/prospect-workspace.spec.ts:178:1 › a changed document blocks PATCH and shows the saved content for deliberate review 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByText('Current saved content', { exact: true })
+
+
+      202 |   expect(writes).toEqual([]);
+      203 |   await page.getByRole("button", { name: "Read current document" }).click();
+    > 204 |   await page.getByText("Current saved content", { exact: true }).click();
+          |                                                                  ^
+      205 |   await expect(
+      206 |     page.getByText("Another editor's text", { exact: true }),
+      207 |   ).toBeVisible();
+        at /workspace/capiro-contracts/apps/web/test/browser/prospect-workspace.spec.ts:204:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/prospect-workspace-a-chang-43c85-ntent-for-deliberate-review/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/prospect-workspace-a-chang-43c85-ntent-for-deliberate-review/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/prospect-workspace-a-chang-43c85-ntent-for-deliberate-review/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/prospect-workspace-a-chang-43c85-ntent-for-deliberate-review/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    test/browser/prospect-workspace.spec.ts:178:1 › a changed document blocks PATCH and shows the saved content for deliberate review 
+  7 passed (41.2s)
+npm error Lifecycle script `test:browser:modules` failed with error:
+npm error code 1
+npm error path /workspace/capiro-contracts/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-contracts/apps/web
+npm error command failed
+npm error command sh -c playwright test --config test/browser/playwright.config.ts prospect-workspace.spec.ts
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
