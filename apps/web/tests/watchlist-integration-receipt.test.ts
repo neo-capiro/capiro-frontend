@@ -7,6 +7,57 @@ import {
   nativeIntelWatchlist,
 } from "./watchlist-current-fixtures";
 
+it.each([true, false])(
+  "separates rejected lowercase agency ai from accepted uppercase AI (retained=%s)",
+  async (retained) => {
+    const { view, draft } = watchlistFixture();
+    draft.topics[0]!.terms.push(
+      { termType: "agency", value: "ai" },
+      { termType: "agency", value: "AI" },
+    );
+    const rejected = {
+      topics: [],
+      terms: [
+        {
+          topicLabel: "Sensors",
+          termType: "agency",
+          value: "ai",
+          reason: "Term too short",
+        },
+      ],
+    };
+    const { api, calls } = watchlistApi((request) =>
+      request.method === "PUT"
+        ? {
+            ...nativeIntelWatchlist,
+            version: 8,
+            topics: [
+              {
+                ...nativeIntelWatchlist.topics[0]!,
+                terms: [
+                  ...nativeIntelWatchlist.topics[0]!.terms,
+                  ...(retained ? [{ termType: "agency", value: "AI" }] : []),
+                ],
+              },
+            ],
+            rejected,
+          }
+        : watchlistClient,
+    );
+    const result = writeWatchlist(
+      api,
+      view,
+      draft,
+      () => {},
+      new AbortController().signal,
+      () => {},
+    );
+    if (retained) expect((await result).rejected).toEqual(rejected);
+    else await expect(result).rejects.toMatchObject({ status: 502 });
+    expect(calls.filter((call) => call.method === "PUT")).toHaveLength(1);
+  },
+);
+
 it.each([
   ["wrong targeting at expected version", { jurisdictions: ["US"] }],
   ["altered issue areas", { issueAreas: ["Health"] }],

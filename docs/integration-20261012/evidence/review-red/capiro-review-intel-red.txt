@@ -1,0 +1,107 @@
+
+> @capiro/web@0.1.0 test
+> vitest run tests/watchlist-integration-receipt.test.ts
+
+
+ RUN  v4.1.11 /workspace/capiro-integration/apps/web
+
+ ❯ tests/watchlist-integration-receipt.test.ts (11 tests | 2 failed) 119ms
+   × separates rejected lowercase agency ai from accepted uppercase AI (retained=true) 40ms
+   × separates rejected lowercase agency ai from accepted uppercase AI (retained=false) 12ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/watchlist-integration-receipt.test.ts > separates rejected lowercase agency ai from accepted uppercase AI (retained=true)
+ApiError: The service returned an unexpected response. Please retry or contact support.
+ ❯ Object.request src/shared/portfolio/api/http.ts:67:15
+     65|       const parsed = schema.safeParse(data);
+     66|       if (!parsed.success)
+     67|         throw new ApiError(
+       |               ^
+     68|           502,
+     69|           "The service returned an unexpected response. Please retry o…
+ ❯ writeWatchlist src/features/portfolio/bill-tracker/watchlist-writer.ts:112:18
+ ❯ tests/watchlist-integration-receipt.test.ts:32:27
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/watchlist-integration-receipt.test.ts > separates rejected lowercase agency ai from accepted uppercase AI (retained=false)
+AssertionError: promise resolved "{ …(6) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "clientId": "10000000-0000-4000-8000-000000000001",
++   "issueAreas": [
++     "Defense",
++   ],
++   "jurisdictions": [
++     "VA",
++   ],
++   "rejected": {
++     "terms": [
++       {
++         "reason": "Term too short",
++         "termType": "agency",
++         "topicLabel": "Sensors",
++         "value": "ai",
++       },
++     ],
++     "topics": [],
++   },
++   "topics": [
++     {
++       "issueArea": "Defense",
++       "label": "Sensors",
++       "position": "oppose",
++       "priority": "high",
++       "terms": [
++         {
++           "termType": "synonym",
++           "value": "Radar",
++         },
++         {
++           "termType": "entity",
++           "value": "Agency",
++         },
++         {
++           "termType": "risk",
++           "value": "Prohibition",
++         },
++       ],
++     },
++   ],
++   "version": 8,
+  }
+
+ ❯ tests/watchlist-integration-receipt.test.ts:33:30
+     31|     const result = writeWatchlist(api, view, draft, () => {}, new Abor…
+     32|     if (retained) expect((await result).rejected).toEqual(rejected);
+     33|     else await expect(result).rejects.toMatchObject({ status: 502 });
+       |                              ^
+     34|     expect(calls.filter((call) => call.method === "PUT")).toHaveLength…
+     35|   },
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 9 passed (11)
+   Start at  03:00:51
+   Duration  690ms (transform 230ms, setup 0ms, import 417ms, tests 119ms, environment 0ms)
+
+npm error Lifecycle script `test` failed with error:
+npm error code 1
+npm error path /workspace/capiro-integration/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-integration/apps/web
+npm error command failed
+npm error command sh -c vitest run tests/watchlist-integration-receipt.test.ts
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

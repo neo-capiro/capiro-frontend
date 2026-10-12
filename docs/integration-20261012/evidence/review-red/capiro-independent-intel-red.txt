@@ -1,0 +1,101 @@
+
+ RUN  v4.1.11 /workspace/capiro-integration/apps/web
+
+ ❯ tests/review-intel-partial.test.ts (2 tests | 2 failed) 50ms
+   × partial receipt retains AI=true 40ms
+   × partial receipt retains AI=false 6ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/review-intel-partial.test.ts > partial receipt retains AI=true
+AssertionError: promise rejected "ApiError: The service returned an unexpec… { status: … }" instead of resolving
+ ❯ tests/review-intel-partial.test.ts:37:37
+     35|     new AbortController().signal, () => {},
+     36|   );
+     37|   if (retainAI) await expect(result).resolves.toMatchObject({ version:…
+       |                                     ^
+     38|   else await expect(result).rejects.toMatchObject({ status: 502 });
+     39| });
+
+Caused by: ApiError: The service returned an unexpected response. Please retry or contact support.
+ ❯ Object.request src/shared/portfolio/api/http.ts:67:15
+ ❯ writeWatchlist src/features/portfolio/bill-tracker/watchlist-writer.ts:112:18
+ ❯ tests/review-intel-partial.test.ts:37:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { status: 502 }
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/review-intel-partial.test.ts > partial receipt retains AI=false
+AssertionError: promise resolved "{ …(6) }" instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   "message": "rejected promise",
++ {
++   "clientId": "10000000-0000-4000-8000-000000000001",
++   "issueAreas": [
++     "Defense",
++   ],
++   "jurisdictions": [
++     "VA",
++   ],
++   "rejected": {
++     "terms": [
++       {
++         "reason": "\"ai\" is too short to match safely.",
++         "termType": "agency",
++         "topicLabel": "Sensors",
++         "value": "ai",
++       },
++     ],
++     "topics": [],
++   },
++   "topics": [
++     {
++       "issueArea": "Defense",
++       "label": "Sensors",
++       "position": "oppose",
++       "priority": "high",
++       "terms": [
++         {
++           "termType": "synonym",
++           "value": "Radar",
++         },
++         {
++           "termType": "entity",
++           "value": "Agency",
++         },
++         {
++           "termType": "risk",
++           "value": "Prohibition",
++         },
++       ],
++     },
++   ],
++   "version": 8,
+  }
+
+ ❯ tests/review-intel-partial.test.ts:38:28
+     36|   );
+     37|   if (retainAI) await expect(result).resolves.toMatchObject({ version:…
+     38|   else await expect(result).rejects.toMatchObject({ status: 502 });
+       |                            ^
+     39| });
+     40|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  03:02:27
+   Duration  517ms (transform 194ms, setup 0ms, import 327ms, tests 50ms, environment 0ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

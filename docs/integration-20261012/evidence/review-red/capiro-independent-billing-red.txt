@@ -1,0 +1,66 @@
+
+> @capiro/web@0.1.0 test:browser
+> playwright test review-billing-route.spec.ts --workers=1
+
+[WebServer] (node:68174) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:68194) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/browser/review-billing-route.spec.ts:4:1 › Manage billing uses canonical local Settings (7.9s)
+
+
+  1) tests/browser/review-billing-route.spec.ts:4:1 › Manage billing uses canonical local Settings ─
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  getByRole('dialog', { name: 'Add profile', exact: true }).getByRole('group', { name: 'Current plan and usage' }).getByRole('link', { name: 'Manage billing' })
+    Expected: "/settings/billing"
+    Received: "http://127.0.0.1:5191/existing/settings/billing"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Add profile', exact: true }).getByRole('group', { name: 'Current plan and usage' }).getByRole('link', { name: 'Manage billing' })
+        14 × locator resolved to <a class="_manageLink_14nkp_74" href="http://127.0.0.1:5191/existing/settings/billing">Manage billing</a>
+           - unexpected value "http://127.0.0.1:5191/existing/settings/billing"
+
+
+      23 |   await expect(panel.getByText("12 active profiles")).toBeVisible();
+      24 |   await expect(panel.getByRole("link", { name: "Manage billing" }))
+    > 25 |     .toHaveAttribute("href", "/settings/billing");
+         |      ^
+      26 | });
+      27 |
+        at /workspace/capiro-integration/apps/web/tests/browser/review-billing-route.spec.ts:25:6
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/portfolio-browser/review-billing-route-Manag-77497-es-canonical-local-Settings/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/portfolio-browser/review-billing-route-Manag-77497-es-canonical-local-Settings/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/portfolio-browser/review-billing-route-Manag-77497-es-canonical-local-Settings/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/portfolio-browser/review-billing-route-Manag-77497-es-canonical-local-Settings/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/browser/review-billing-route.spec.ts:4:1 › Manage billing uses canonical local Settings ──
+npm error Lifecycle script `test:browser` failed with error:
+npm error code 1
+npm error path /workspace/capiro-integration/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-integration/apps/web
+npm error command failed
+npm error command sh -c playwright test review-billing-route.spec.ts --workers=1
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

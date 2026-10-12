@@ -50,7 +50,7 @@ test("actual Add profile keeps creation reachable around an optional billing dis
   await expect(panel.getByText("$217.00", { exact: false })).toBeVisible();
   await expect(
     panel.getByRole("link", { name: "Manage billing" }),
-  ).toHaveAttribute("href", "http://127.0.0.1:5191/existing/settings/billing");
+  ).toHaveAttribute("href", "/settings/billing");
   expect(reads).toBe(1);
   await dialog.screenshot({
     path: info.outputPath("billing-chooser-desktop.png"),

@@ -56,6 +56,9 @@ test("eligible billing admin sees real supplied rows with responsive light/dark 
   await open(page);
   await expand(page);
   const region = panel(page);
+  await expect(
+    region.getByRole("link", { name: "Manage billing" }),
+  ).toHaveAttribute("href", "/settings/billing");
   await expect(region.getByText("$217.00", { exact: false })).toBeVisible();
   await expect(region.getByText("12 active profiles")).toBeVisible();
   await expect(region.getByText("$11.25", { exact: true })).toBeVisible();
