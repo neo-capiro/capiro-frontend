@@ -1,11 +1,11 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { DropdownMenu } from "radix-ui";
 import { clientViews } from "@/shared/portfolio/shell/client-views";
 import { type Client, initials } from "@/features/portfolio/index/public";
+import { ClientViewSwitcher } from "./ClientViewSwitcher";
 import { ClientProfileActions } from "./ClientProfileActions";
 import { ClientMeriActions } from "./ClientMeriActions";
 import styles from "./client-header.module.css";
@@ -16,21 +16,6 @@ export function ClientHeader({ client }: { client: Client }) {
   const view =
     clientViews.find((item) => path === `${base}${item.suffix}`) ??
     clientViews[0];
-  const [switching, setSwitching] = useState(false);
-  useEffect(() => {
-    function onKey(event: KeyboardEvent) {
-      if (
-        (event.metaKey || event.ctrlKey) &&
-        event.key.toLowerCase() === "j" &&
-        !event.altKey
-      ) {
-        event.preventDefault();
-        setSwitching((value) => !value);
-      }
-    }
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, []);
   return (
     <div className={styles.frame}>
       <header className={styles.header}>
@@ -46,31 +31,12 @@ export function ClientHeader({ client }: { client: Client }) {
             {client.name}
           </Link>
           <span aria-hidden="true">/</span>
-          <DropdownMenu.Root open={switching} onOpenChange={setSwitching}>
-            <DropdownMenu.Trigger
-              className={styles.view}
-              aria-label={`Switch client view: ${view.label}`}
-              aria-keyshortcuts="Meta+J Control+J"
-            >
-              <img src={asset("imgIconLayoutGrid")} alt="" />
-              {view.label}
-              <img src={asset("imgIconChevronDown")} alt="" />
-            </DropdownMenu.Trigger>
-            <DropdownMenu.Portal>
-              <DropdownMenu.Content className={styles.menu} align="start">
-                {clientViews.map((item) => (
-                  <DropdownMenu.Item key={item.suffix} asChild>
-                    <Link
-                      href={`${base}${item.suffix}`}
-                      aria-current={item === view ? "page" : undefined}
-                    >
-                      {item.label}
-                    </Link>
-                  </DropdownMenu.Item>
-                ))}
-              </DropdownMenu.Content>
-            </DropdownMenu.Portal>
-          </DropdownMenu.Root>
+          <ClientViewSwitcher
+            key={client.id}
+            base={base}
+            name={client.name}
+            view={view}
+          />
         </nav>
         <div className={styles.actions}>
           <DropdownMenu.Root>

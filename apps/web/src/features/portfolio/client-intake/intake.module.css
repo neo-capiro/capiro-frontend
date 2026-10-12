@@ -124,6 +124,15 @@
 .choices input {
   flex: 0 0 auto;
 }
+.business label[data-full-row="true"] {
+  grid-column: 1 / -1;
+}
+.certifications > div {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+.tracks > div {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
 .choiceTrigger {
   width: 100%;
   display: flex;

@@ -75,6 +75,7 @@ export function RegistrationStep({ values, set, errors }: StepProps) {
       />
       <ChoiceList
         label="Federal set-aside certifications"
+        layout="certifications"
         options={certifications.map((code) => [code, code])}
         value={values.setAsideCertifications}
         onChange={(v) => set("setAsideCertifications", v)}

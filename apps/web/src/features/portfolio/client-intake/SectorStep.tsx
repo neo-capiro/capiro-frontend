@@ -42,6 +42,7 @@ export function SectorStep({ values, set, errors }: StepProps) {
       </small>
       <ChoiceList
         label="Active submission tracks"
+        layout="tracks"
         options={tracks}
         value={values.submissionTracks}
         onChange={(v) => set("submissionTracks", v)}

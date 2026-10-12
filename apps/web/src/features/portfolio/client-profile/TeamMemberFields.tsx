@@ -1,5 +1,6 @@
 "use client";
 import { memberName } from "@/features/portfolio/index/public";
+import styles from "./team.module.css";
 import type { Member } from "@/features/portfolio/index/contracts-public";
 
 export function TeamMemberFields({
@@ -22,7 +23,7 @@ export function TeamMemberFields({
   const selectedAvailable = members.some((member) => member.id === selectedId);
   return (
     <form
-      className="stack"
+      className={styles.add}
       onSubmit={(event) => {
         event.preventDefault();
         if (!disabled && selectedAvailable) onAdd();
@@ -60,7 +61,10 @@ export function TeamMemberFields({
           disabled={disabled}
         />
       </label>
-      <button className="button" disabled={disabled || !selectedAvailable}>
+      <button
+        className="button primary"
+        disabled={disabled || !selectedAvailable}
+      >
         Add member
       </button>
     </form>
