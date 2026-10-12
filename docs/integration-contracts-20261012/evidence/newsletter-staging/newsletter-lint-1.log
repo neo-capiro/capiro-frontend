@@ -1,0 +1,160 @@
+
+> @capiro/web@0.1.0 lint
+> eslint src tests
+
+
+/workspace/capiro-contracts/apps/web/src/features/modules/calendar/CalendarControls.tsx
+   45:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+   69:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  111:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  121:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  210:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/capiro-contracts/apps/web/src/features/modules/calendar/useAgendaSources.ts
+  45:6  warning  React Hook useEffect has a missing dependency: 'range'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+/workspace/capiro-contracts/apps/web/src/features/modules/directory/CongressionalContacts.tsx
+  153:31  warning  Expected an assignment or function call and instead saw an expression  @typescript-eslint/no-unused-expressions
+
+/workspace/capiro-contracts/apps/web/src/features/modules/engagement/CampaignSession.tsx
+  89:5  warning  'goal' is assigned a value but never used          @typescript-eslint/no-unused-vars
+  90:5  warning  'setGoal' is assigned a value but never used       @typescript-eslint/no-unused-vars
+  91:5  warning  'objective' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  92:5  warning  'setObjective' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  93:5  warning  'topic' is assigned a value but never used         @typescript-eslint/no-unused-vars
+  94:5  warning  'setTopic' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  95:5  warning  'why' is assigned a value but never used           @typescript-eslint/no-unused-vars
+  96:5  warning  'setWhy' is assigned a value but never used        @typescript-eslint/no-unused-vars
+
+/workspace/capiro-contracts/apps/web/src/features/modules/engagement/OutreachView.tsx
+  307:10  warning  'useOutreachRecords' is defined but only used as a type  @typescript-eslint/no-unused-vars
+
+/workspace/capiro-contracts/apps/web/src/features/modules/intelligence/DistrictMap.tsx
+   49:9   warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+   54:9   warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+   59:9   warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  117:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  133:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  139:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  142:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/capiro-contracts/apps/web/src/features/modules/intelligence/legiwatch/use-legiwatch-route.ts
+  13:7  warning  Expected an assignment or function call and instead saw an expression  @typescript-eslint/no-unused-expressions
+
+/workspace/capiro-contracts/apps/web/src/features/modules/planner/AllocationDialog.tsx
+  36:5  warning  'start' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  37:5  warning  'setStart' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  38:5  warning  'end' is assigned a value but never used       @typescript-eslint/no-unused-vars
+  39:5  warning  'setEnd' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  40:5  warning  'unit' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  41:5  warning  'setUnit' is assigned a value but never used   @typescript-eslint/no-unused-vars
+  42:5  warning  'value' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  43:5  warning  'setValue' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/workspace/capiro-contracts/apps/web/src/features/modules/planner/CapacityRecordDialog.tsx
+  49:5  warning  'selectedPeople' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  50:5  warning  'setPeople' is assigned a value but never used         @typescript-eslint/no-unused-vars
+  51:5  warning  'selectedProjects' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  52:5  warning  'setProjects' is assigned a value but never used       @typescript-eslint/no-unused-vars
+  53:5  warning  'teamId' is assigned a value but never used            @typescript-eslint/no-unused-vars
+  54:5  warning  'setTeamId' is assigned a value but never used         @typescript-eslint/no-unused-vars
+  55:5  warning  'title' is assigned a value but never used             @typescript-eslint/no-unused-vars
+  56:5  warning  'setTitle' is assigned a value but never used          @typescript-eslint/no-unused-vars
+  57:5  warning  'hours' is assigned a value but never used             @typescript-eslint/no-unused-vars
+  58:5  warning  'setHours' is assigned a value but never used          @typescript-eslint/no-unused-vars
+  64:5  warning  'toggle' is assigned a value but never used            @typescript-eslint/no-unused-vars
+
+/workspace/capiro-contracts/apps/web/src/features/modules/planner/CapacityView.tsx
+  26:5  warning  'setPlanId' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  35:5  warning  'rows' is assigned a value but never used       @typescript-eslint/no-unused-vars
+
+/workspace/capiro-contracts/apps/web/src/features/modules/planner/FormAnswers.tsx
+  55:42  warning  'index' is defined but never used  @typescript-eslint/no-unused-vars
+
+/workspace/capiro-contracts/apps/web/src/features/modules/planner/TaskViews.tsx
+  66:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  88:19  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/capiro-contracts/apps/web/src/features/modules/workspace/WorkspaceLibrary.tsx
+  34:15  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  52:15  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/capiro-contracts/apps/web/src/features/modules/workspace/WorkspaceScreen.tsx
+  98:11  warning  Do not use `window.location.assign()` to navigate to internal Next.js pages. Use `redirect()` in the render phase, or `useRouter().push()` in Client Components' event handlers instead. See: https://nextjs.org/docs/messages/no-location-assign-relative-destination  @next/next/no-location-assign-relative-destination
+
+/workspace/capiro-contracts/apps/web/src/features/modules/workspace/hillday/HillDayWizard.tsx
+  239:19  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/capiro-contracts/apps/web/src/features/modules/workspace/newsletter/NewsletterPaper.tsx
+  33:7  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/capiro-contracts/apps/web/src/features/portfolio/calendar/public-event/PublicEventDetail.tsx
+   63:9   warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  162:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/capiro-contracts/apps/web/src/features/portfolio/prospects/ProspectDetail.tsx
+  81:19  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/capiro-contracts/apps/web/src/features/portfolio/prospects/ProspectHistory.tsx
+  71:21  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/capiro-contracts/apps/web/src/features/portfolio/prospects/ProspectPipeline.tsx
+  50:23  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/capiro-contracts/apps/web/src/features/portfolio/prospects/ProspectStageProgress.tsx
+  23:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/capiro-contracts/apps/web/src/features/portfolio/relationships/committee/CommitteePickerPanel.tsx
+   88:9   warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  127:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  194:19  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/capiro-contracts/apps/web/src/features/settings/BrandingSettings.tsx
+  105:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/capiro-contracts/apps/web/src/features/settings/SettingsNavigation.tsx
+  29:9  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/capiro-contracts/apps/web/src/features/settings/components.tsx
+  170:7  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  195:9  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  206:9  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/capiro-contracts/apps/web/src/features/settings/styles.ts
+  3:1  warning  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
+
+/workspace/capiro-contracts/apps/web/src/shared/capiro/operations/settings-admin/analyst-audit.ts
+  12:7  warning  'source' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/workspace/capiro-contracts/apps/web/src/shared/capiro/operations/settings-admin/analyst-personnel.ts
+  11:7  warning  'source' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/workspace/capiro-contracts/apps/web/src/shared/capiro/operations/settings-admin/analyst-reconciliation.ts
+  5:7  warning  'source' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/workspace/capiro-contracts/apps/web/src/shared/portfolio/shell/WorkspaceSwitcher.tsx
+  10:17  warning  '_destinations' is defined but never used  @typescript-eslint/no-unused-vars
+
+/workspace/capiro-contracts/apps/web/src/shared/shell/DesignIcon.tsx
+  10:5  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/capiro-contracts/apps/web/src/shared/shell/Header.tsx
+  28:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/capiro-contracts/apps/web/src/shared/shell/ModuleAsset.tsx
+  46:7  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/capiro-contracts/apps/web/src/shared/shell/ModuleHeader.tsx
+  20:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/capiro-contracts/apps/web/tests/newsletter-staging-fixtures.ts
+  91:21  warning  '_snapshot' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  91:49  warning  '_content' is assigned a value but never used   @typescript-eslint/no-unused-vars
+
+✖ 78 problems (0 errors, 78 warnings)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
