@@ -1,0 +1,139 @@
+{
+  "assessmentCheckout": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+  "shippingSource": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "shippingTree": "46cebca97ccfc1facc1c1a939beb6f4d7730685b",
+  "appsTreeVerifiedEqual": "5e3ece11c1ca8901af700063c21e1b7e5de1debc",
+  "assignedCount": 40,
+  "actualFigmaFile": "Zc2dEN5aLU47dVdsewDmiJ",
+  "readOnlyApplicationReview": true,
+  "findings": [
+    {
+      "id": "PROS-F01",
+      "severity": "P1",
+      "classification": "CONFIRMED_FRONTEND_STATE_DEFECT",
+      "title": "Fresh prospect-list denial leaves cached cards and pipeline usable",
+      "rows": [
+        "PROS-001",
+        "PROS-002"
+      ],
+      "figmaFrames": [
+        "411:44335",
+        "411:44124"
+      ],
+      "source": [
+        {
+          "path": "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx",
+          "line": 112
+        },
+        {
+          "path": "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx",
+          "line": 123
+        },
+        {
+          "path": "apps/web/src/features/portfolio/prospects/ProspectsIndex.tsx",
+          "line": 190
+        }
+      ],
+      "reproduction": [
+        "Load the prospect index with one authorized synthetic prospect.",
+        "Open the prospect, expire the 30-second query freshness interval, and make the list endpoint return 403.",
+        "Return using the Prospects breadcrumb. The current 403 alert appears, but the prior name, geography, stage and next action remain rendered.",
+        "The Pipeline button remains enabled and opens those cached records despite the denied current list read."
+      ],
+      "observed": "QueryState displays the fresh permission denial while the list/count/pipeline branches use query.data without checking query.error or successful current access.",
+      "expected": "A denied list read must withhold the stale records and dependent pipeline actions until access is successfully re-established.",
+      "deploymentImpact": "Fix before enabling the authenticated Prospects list. This is a frontend revocation-display failure involving previously delivered data; no server authorization bypass, cross-tenant fetch or successful unauthorized mutation was demonstrated.",
+      "evidence": [
+        "review.spec.ts:43",
+        "browser-results.json",
+        "browser-artifacts/review-prospect-list-retai-c05da-ter-a-current-access-denial/denied-prospect-list.png",
+        "browser-artifacts/review-prospect-list-retai-c05da-ter-a-current-access-denial/denied-prospect-pipeline.png"
+      ],
+      "figmaEvidenceMeaning": "Actual411:44335 confirms the pipeline is a view of prospect records. The denial requirement is grounded in repository authorization/failure standards; the design does not itself specify403 behavior."
+    },
+    {
+      "id": "PROS-F02",
+      "severity": "P1",
+      "classification": "CONFIRMED_FRONTEND_DATA_LOSS",
+      "title": "Typing during a prospect document save is silently lost on success",
+      "rows": [
+        "PROS-024"
+      ],
+      "figmaFrames": [
+        "411:65258",
+        "411:65367"
+      ],
+      "source": [
+        {
+          "path": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+          "line": 150
+        },
+        {
+          "path": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+          "line": 161
+        },
+        {
+          "path": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+          "line": 241
+        },
+        {
+          "path": "apps/web/src/features/modules/workspace/prospects/useProspectDraftSave.ts",
+          "line": 153
+        }
+      ],
+      "reproduction": [
+        "Open a manual document in the prospect-scoped Workspace.",
+        "Enter First submitted text and click Save draft; hold the synthetic PATCH response.",
+        "The Body field remains editable, so enter Later typed text that must survive.",
+        "Release the valid PATCH and snapshot responses. The field resets to First submitted text; the later edit is neither submitted nor retained."
+      ],
+      "observed": "The text controls accept edits while the request is pending. Clearing retained state changes the DraftEditor key and reloads it from saved content, discarding newer local input.",
+      "expected": "Freeze the fields during the save or retain post-submit edits as unsaved changes across the successful save/reload.",
+      "deploymentImpact": "Fix before enabling prospect manual document editing: normal typing during a slow successful save silently loses user work. This is independent of native transaction/CAS limitations and reproduces with valid successful service receipts.",
+      "evidence": [
+        "workspace-review.spec.ts:5",
+        "workspace-results.json",
+        "workspace-artifacts/workspace-review-prospect--082e8-ntly-discards-it-on-success/typing-during-pending-save.png",
+        "workspace-artifacts/workspace-review-prospect--082e8-ntly-discards-it-on-success/later-edits-lost-after-save.png"
+      ],
+      "figmaEvidenceMeaning": "Actual document frames establish an editable document workflow. The defect affects the currently implemented manual editor, regardless of the separately missing rich-formatting controls."
+    },
+    {
+      "id": "PROS-F03",
+      "severity": "P2",
+      "classification": "CONFIRMED_FRONTEND_PRODUCT_GAP",
+      "title": "Prospect Files cannot search the loaded file list",
+      "rows": [
+        "PROS-019"
+      ],
+      "figmaFrames": [
+        "411:65071"
+      ],
+      "source": [
+        {
+          "path": "apps/web/src/features/portfolio/files/ProspectFiles.tsx",
+          "line": 164
+        },
+        {
+          "path": "apps/web/src/features/portfolio/files/ProspectFiles.tsx",
+          "line": 166
+        }
+      ],
+      "reproduction": [
+        "Open a prospect with a current scoped attachment list containing a ready synthetic file.",
+        "Inspect the Files region: Preview and Download are present, but neither a searchbox nor a search-labelled textbox exists.",
+        "Compare actual Figma 411:65071, which provides Search files above the file table."
+      ],
+      "observed": "The component directly maps all returned files into an unfiltered list and supplies no search state or control.",
+      "expected": "Provide the search interaction for available prospect files without widening the authorized source.",
+      "deploymentImpact": "Blocks the search facet of PROS-019 and full Files design acceptance. It does not block the already implemented upload/readiness/open facets or establish a native storage failure.",
+      "evidence": [
+        "review.spec.ts:27",
+        "browser-results-locator-correction.json",
+        "browser-artifacts-locator-correction/review-Figma-files-search--9fd2d--file-records-are-available/prospect-files-current.png",
+        "figma-411-65071-context.txt",
+        "figma-411-65071.png"
+      ]
+    }
+  ]
+}

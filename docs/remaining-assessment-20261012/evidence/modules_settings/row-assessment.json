@@ -1,0 +1,389 @@
+{
+  "assessmentDate": "2026-10-12",
+  "evidenceHead": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+  "frozenApplicationCommit": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "frozenApplicationTree": "46cebca97ccfc1facc1c1a939beb6f4d7730685b",
+  "mode": "READ_ONLY_SOURCE_AND_SYNTHETIC_BROWSER_ASSESSMENT",
+  "nativeStatus": "NOT_RUN_NATIVE",
+  "sourceEdits": false,
+  "providerCalls": false,
+  "note": "Passing repro cases assert the observed defect; they are not acceptance tests.",
+  "rows": [
+    {
+      "audit_id": "MCAL-001",
+      "criterion": "Read Master meetings across clients / meetings for selected client and date range",
+      "canonicalRoute": "/calendar",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "assessment": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+      "observation": "Source wires permitted meetings and selected client/date range. Current bounded canonical scope test passes; service authorization/native source completeness unrun.",
+      "sourceLocations": [
+        "apps/web/src/features/portfolio/calendar/feeds.ts:20",
+        "apps/web/src/features/portfolio/calendar/CalendarPage.tsx:53"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47345",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-63168",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64632",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64763",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148155",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147591",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147875",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148562"
+      ],
+      "newCanonicalEvidence": [
+        "canonical-results.json"
+      ],
+      "inheritedEvidence": "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-results.json",
+      "relatedModulesVariantFindings": [],
+      "native": "NOT_RUN_NATIVE",
+      "visual": "NOT_ACCEPTED_AGAINST_ALL_TARGETS",
+      "nextStep": "Verify native meeting ownership, client authorization and date-range boundaries for Master and one selected client; compare populated meeting displays across the listed Month, Week and Agenda targets."
+    },
+    {
+      "audit_id": "MCAL-002",
+      "criterion": "Populate the Master / client scope selector",
+      "canonicalRoute": "/calendar",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "assessment": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+      "observation": "Canonical selector consumes current client list and unavailable placeholder; source and exact-source prior boundary cases preserve revocation. Modules variant has MS02.",
+      "sourceLocations": [
+        "apps/web/src/features/portfolio/calendar/CalendarPage.tsx:155"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=795-148369",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=795-148392",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=795-148415"
+      ],
+      "newCanonicalEvidence": [
+        "canonical-results.json"
+      ],
+      "inheritedEvidence": "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-results.json",
+      "relatedModulesVariantFindings": [
+        "MS02"
+      ],
+      "native": "NOT_RUN_NATIVE",
+      "visual": "NOT_ACCEPTED_AGAINST_ALL_TARGETS",
+      "nextStep": "Verify native current-client list and revoked-client exclusion; compare the three authored selector states. Keep MS02 on /modules/calendar separate from the canonical selector."
+    },
+    {
+      "audit_id": "MCAL-003",
+      "criterion": "Select Master view, Anduril or NACD while retaining Month / Week / Agenda",
+      "canonicalRoute": "/calendar",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "assessment": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+      "observation": "Current canonical browser check retains verified client, date and timezone while switching Week to Agenda. Modules variant has MS02.",
+      "sourceLocations": [
+        "apps/web/src/features/portfolio/calendar/CalendarPage.tsx:53"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47345",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-63168",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64632",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64763",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148155",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147591",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147875",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148562",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=795-148369",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=795-148392",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=795-148415"
+      ],
+      "newCanonicalEvidence": [
+        "canonical-results.json"
+      ],
+      "inheritedEvidence": "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-results.json",
+      "relatedModulesVariantFindings": [
+        "MS02"
+      ],
+      "native": "NOT_RUN_NATIVE",
+      "visual": "NOT_ACCEPTED_AGAINST_ALL_TARGETS",
+      "nextStep": "Complete the Master-to-client and client-to-client scope matrix across Month, Week and Agenda, retaining date and timezone; verify the selected client remains authorized after refresh."
+    },
+    {
+      "audit_id": "MCAL-004",
+      "criterion": "Switch Month / Week / Agenda, previous/next, Today and date picker",
+      "canonicalRoute": "/calendar",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "assessment": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+      "observation": "Canonical source implements Month/Week/Agenda, previous/next, Today and valid date picker; current check covers Week-to-Agenda only. Other controls supported by exact-source existing cases, not freshly re-executed.",
+      "sourceLocations": [
+        "apps/web/src/features/portfolio/calendar/CalendarPage.tsx:173"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47345",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-63168",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64632",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64763",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148155",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147591",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147875",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148562"
+      ],
+      "newCanonicalEvidence": [
+        "canonical-results.json"
+      ],
+      "inheritedEvidence": "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-results.json",
+      "relatedModulesVariantFindings": [],
+      "native": "NOT_RUN_NATIVE",
+      "visual": "NOT_ACCEPTED_AGAINST_ALL_TARGETS",
+      "nextStep": "Complete targeted Today, previous/next and date-picker visual checks across Month, Week and Agenda, including month/year boundaries. Reuse existing exact-source behavior evidence; do not repeat the completed compact-header repair."
+    },
+    {
+      "audit_id": "MCAL-005",
+      "criterion": "Render a week time grid for Master and client meetings",
+      "canonicalRoute": "/calendar",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "assessment": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+      "observation": "Week renderer uses CalendarGrid and timezone-bound event data. Detailed week geometry for every target was not newly assessed.",
+      "sourceLocations": [
+        "apps/web/src/features/portfolio/calendar/CalendarGrid.tsx:1"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-63168",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64763",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147875"
+      ],
+      "newCanonicalEvidence": [],
+      "inheritedEvidence": "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-results.json",
+      "relatedModulesVariantFindings": [],
+      "native": "NOT_RUN_NATIVE",
+      "visual": "NOT_ACCEPTED_AGAINST_ALL_TARGETS",
+      "nextStep": "Compare populated Week geometry, overlapping meetings, time labels and timezone-bound placement against frames 411:63168, 411:64763 and 787:147875; verify one native scoped week feed."
+    },
+    {
+      "audit_id": "MCAL-006",
+      "criterion": "Open a meeting and show attendees, location, join link and preparation summary",
+      "canonicalRoute": "/calendar",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "assessment": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+      "observation": "Canonical Portfolio MeetingDetail renders joinLink, attendees, location and preparation. Modules variant omits join link and diverges visually (MS06). Native detail permission/provenance unrun.",
+      "sourceLocations": [
+        "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx:97",
+        "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx:115"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47345",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-63168",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64632",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64763",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148155",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147591",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147875",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148562"
+      ],
+      "newCanonicalEvidence": [],
+      "inheritedEvidence": "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-results.json",
+      "relatedModulesVariantFindings": [
+        "MS06"
+      ],
+      "native": "NOT_RUN_NATIVE",
+      "visual": "NOT_ACCEPTED_AGAINST_ALL_TARGETS",
+      "nextStep": "Verify authorized native meeting detail and preparation provenance; compare persistent date/attendee/location context across detail tabs using CR-06. The Modules-only omitted join link remains MS06."
+    },
+    {
+      "audit_id": "MCAL-007",
+      "criterion": "Create a manual meeting from the calendar",
+      "canonicalRoute": "/calendar",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "assessment": "CONFIRMED_SHARED_MUTATION_RECEIPT_GAP",
+      "observation": "Manual creation is composed with clientScopeAvailable, but shared useSaveMeeting accepts a schema-valid foreign meeting/client receipt (CR-04). Fresh peer browser proof covers edit; create shares the unchecked schema and expected-client validation is unrun. No blanket source or native creation acceptance.",
+      "sourceLocations": [
+        "apps/web/src/features/portfolio/calendar/CalendarPage.tsx:327",
+        "apps/web/src/features/portfolio/calendar/MeetingForm.tsx:1",
+        "apps/web/src/features/portfolio/calendar/mutations.ts:17"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47345",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-63168",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64632",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64763",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148155",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147591",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147875",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148562"
+      ],
+      "newCanonicalEvidence": [
+        "../calendar_relationships/review.spec.ts",
+        "../calendar_relationships/browser-results.json",
+        "../calendar_relationships/meeting-clear-location-failed.png",
+        "secondary-review.json"
+      ],
+      "inheritedEvidence": "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-results.json",
+      "relatedModulesVariantFindings": [],
+      "native": "NOT_RUN_NATIVE",
+      "visual": "NOT_ACCEPTED_AGAINST_ALL_TARGETS",
+      "nextStep": "Repair and prove expected meeting/client receipt validation in shared useSaveMeeting (CR-04); add create-specific expected-client mismatch evidence, then verify manual creation persistence and interrupted-response handling with an authorized native fixture. New CR-04 browser proof covers edit only.",
+      "relatedCanonicalFindings": [
+        "CR-04"
+      ]
+    },
+    {
+      "audit_id": "MCAL-008",
+      "criterion": "Show public hearing events in mixed Master Agenda",
+      "canonicalRoute": "/calendar",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "assessment": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+      "observation": "Public hearing feed independently queries official inclusive calendar days, canonical dedupe identity and bounded pagination; exact-source existing public-event cases remain evidence. No new live hearing call.",
+      "sourceLocations": [
+        "apps/web/src/features/portfolio/calendar/feeds.ts:55"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798"
+      ],
+      "newCanonicalEvidence": [],
+      "inheritedEvidence": "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-results.json",
+      "relatedModulesVariantFindings": [],
+      "native": "NOT_RUN_NATIVE",
+      "visual": "NOT_ACCEPTED_AGAINST_ALL_TARGETS",
+      "nextStep": "Verify official hearing range/provenance and bounded-pagination completeness on the native read contract; compare mixed hearing rows and their partial-coverage state with frame 460:90798."
+    },
+    {
+      "audit_id": "MCAL-009",
+      "criterion": "Show Planner tasks and their scheduled / due dates in Master Agenda",
+      "canonicalRoute": "/calendar",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "assessment": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+      "observation": "Current canonical browser evidence confirms distinct start and due occurrences remain visible after meeting403. Modules variant drops start and has broken task drilldown (MS03/MS05).",
+      "sourceLocations": [
+        "apps/web/src/features/portfolio/calendar/planner-feed.ts:13"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798"
+      ],
+      "newCanonicalEvidence": [
+        "canonical-results.json"
+      ],
+      "inheritedEvidence": "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-results.json",
+      "relatedModulesVariantFindings": [
+        "MS03",
+        "MS05"
+      ],
+      "native": "NOT_RUN_NATIVE",
+      "visual": "NOT_ACCEPTED_AGAINST_ALL_TARGETS",
+      "nextStep": "Verify native Planner start/due occurrence dates, scope and task drilldown; compare the mixed Agenda task presentation with frame 460:90798. Canonical meeting-403/start-and-due behavior already passed; MS03/MS05 belong to /modules/calendar."
+    },
+    {
+      "audit_id": "MCAL-010",
+      "criterion": "Show regulatory comment and SAM / SBIR opportunity deadlines",
+      "canonicalRoute": "/calendar",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "assessment": "PARTIAL_SOURCE_COVERAGE",
+      "observation": "Full criterion incomplete: canonical feed only Federal Register next30days/max50, no SAM/SBIR feed in global owner. Existing explicit limited coverage is truthful. Modules funding feed does not close global row.",
+      "sourceLocations": [
+        "apps/web/src/features/portfolio/calendar/feeds.ts:147",
+        "apps/web/src/features/portfolio/calendar/queries.ts:52"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798"
+      ],
+      "newCanonicalEvidence": [],
+      "inheritedEvidence": "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-results.json",
+      "relatedModulesVariantFindings": [],
+      "native": "NOT_RUN_NATIVE",
+      "visual": "NOT_ACCEPTED_AGAINST_ALL_TARGETS",
+      "nextStep": "Add or explicitly narrow the missing canonical SAM/SBIR opportunity-deadline facet, retaining truthful Federal Register 30-day/50-item coverage; verify source provenance, selected range and incomplete-result presentation before full-row acceptance.",
+      "classification": "partial-source-coverage"
+    },
+    {
+      "audit_id": "MCAL-012",
+      "criterion": "Show Government effective dates and estimated markup / floor-vote windows",
+      "canonicalRoute": "/calendar",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "assessment": "PARTIAL_WITH_CONTRACT_DEPENDENCY",
+      "observation": "Publisher effective dates implemented with provenance, excluded-page traversal, date-only semantics and incomplete coverage. Forecast windows remain legitimate unavailable MS-D03; no full-row acceptance.",
+      "sourceLocations": [
+        "apps/web/src/features/portfolio/calendar/effective-feed.ts:1"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798"
+      ],
+      "newCanonicalEvidence": [],
+      "inheritedEvidence": "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-results.json",
+      "relatedModulesVariantFindings": [],
+      "native": "NOT_RUN_NATIVE",
+      "visual": "NOT_ACCEPTED_AGAINST_ALL_TARGETS",
+      "nextStep": "Verify native publisher effective-date provenance and partial-coverage display; retain an explicit unavailable forecast state until a reviewed markup/floor-vote window contract exists. Do not invent forecast dates or mark the combined row complete.",
+      "classification": "partial-with-contract-dependency"
+    },
+    {
+      "audit_id": "MCAL-013",
+      "criterion": "Compose the mixed Master Agenda without widening source permissions",
+      "canonicalRoute": "/calendar",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "assessment": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+      "observation": "Current canonical browser evidence confirms successful Planner rows survive independent meeting403; no widened source request. Modules counterpart fails independence MS04. Actual backend ACL/RLS unrun.",
+      "sourceLocations": [
+        "apps/web/src/features/portfolio/calendar/CalendarPage.tsx:79",
+        "apps/web/src/features/portfolio/calendar/queries.ts:39"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798"
+      ],
+      "newCanonicalEvidence": [
+        "canonical-results.json"
+      ],
+      "inheritedEvidence": "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-results.json",
+      "relatedModulesVariantFindings": [
+        "MS04"
+      ],
+      "native": "NOT_RUN_NATIVE",
+      "visual": "NOT_ACCEPTED_AGAINST_ALL_TARGETS",
+      "nextStep": "Verify native authorization and independent denial/failure for each composed feed without widened requests; compare mixed-source partial-error presentation. Canonical Planner survival after meeting403 passed; Modules MS04 remains separately open."
+    },
+    {
+      "audit_id": "MCAL-014",
+      "criterion": "Filter Agenda source chips, search displayed events and clear filters",
+      "canonicalRoute": "/calendar",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "assessment": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+      "observation": "Source toggles source chips, searches title of displayed items, clears filters; exact-source prior Planner case exercised toggle/clear. Every authored filter/search state not newly assessed.",
+      "sourceLocations": [
+        "apps/web/src/features/portfolio/calendar/CalendarPage.tsx:229"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798"
+      ],
+      "newCanonicalEvidence": [],
+      "inheritedEvidence": "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-results.json",
+      "relatedModulesVariantFindings": [],
+      "native": "NOT_RUN_NATIVE",
+      "visual": "NOT_ACCEPTED_AGAINST_ALL_TARGETS",
+      "nextStep": "Compare source-chip active/inactive, search, no-results and Clear filters states against frame 460:90798; verify each displayed-source toggle preserves current client/date scope. This does not close separate missing client-meeting lifecycle filters CR-05."
+    },
+    {
+      "audit_id": "MCAL-015",
+      "criterion": "Open global Master Calendar from the top navigation",
+      "canonicalRoute": "/calendar",
+      "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+      "assessment": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+      "observation": "Shared ModuleHeader Master calendar link points to canonical /calendar via ScopedLink; Portfolio global nav similarly points /calendar. Modules left nav separately opens /modules/calendar.",
+      "sourceLocations": [
+        "apps/web/src/shared/shell/ModuleHeader.tsx:71"
+      ],
+      "figmaTargets": [
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47345",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-63168",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64632",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64763",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148155",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147591",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147875",
+        "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148562"
+      ],
+      "newCanonicalEvidence": [],
+      "inheritedEvidence": "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-results.json",
+      "relatedModulesVariantFindings": [],
+      "native": "NOT_RUN_NATIVE",
+      "visual": "NOT_ACCEPTED_AGAINST_ALL_TARGETS",
+      "nextStep": "Verify top-navigation entry to /calendar retains only validated client context from both Modules and Portfolio shells; compare the authored global entry and responsive navigation states, keeping the separate /modules/calendar left-nav destination explicit."
+    }
+  ],
+  "count": 14,
+  "excluded": "MCAL-011 is not one of the14 active Global Master Calendar rows."
+}

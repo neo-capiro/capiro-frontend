@@ -1,0 +1,233 @@
+{
+  "review": "Portfolio core/intake bounded independent acceptance assessment",
+  "date": "2026-10-12",
+  "assessmentHead": "3562618f73d7a1f9d620d7b7b28c9e8c2c1ac83d",
+  "frozenApplicationSource": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "recordedApplicationSourceTree": "46cebca97ccfc1facc1c1a939beb6f4d7730685b",
+  "sourceVerification": "git diff 4a1614886fd98bb42d529f1ef59b3d01d7ff9173 HEAD -- apps packages scripts package.json package-lock.json returned no differences. No application source edited.",
+  "coverage": {
+    "assigned": 59,
+    "inScope": 57,
+    "excluded": 2,
+    "classificationCounts": {
+      "IMPLEMENTED_BOUNDED_SOURCE_REVIEW": 24,
+      "LEGITIMATELY_UNAVAILABLE_CONTRACT_DEPENDENCY": 19,
+      "EXCLUDED_AS_PREVIOUSLY_RECORDED": 2,
+      "IMPLEMENTED_WITH_CONFIRMED_VISUAL_GAP": 1,
+      "CONFIRMED_SOURCE_FEATURE_GAP": 2,
+      "IMPLEMENTED_WITH_BACKEND_DEPENDENCY": 9,
+      "BACKEND_SEMANTIC_RISK_REQUIRES_OWNER_REVIEW": 1,
+      "IMPLEMENTED_HOSTED_FLOW_NATIVE_UNASSESSED": 1
+    }
+  },
+  "boundedExecution": {
+    "browserObservations": 2,
+    "representativeCaptureCases": 2,
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0,
+    "workers": 1,
+    "server": "http://127.0.0.1:5191",
+    "note": "Passing tests assert observations including missing features; they are not native or full-row acceptance. No whole suite rerun."
+  },
+  "constraints": "Read-only application review; only owned tmp directory written; no native/provider/paid-model/AWS/commit/push actions.",
+  "confirmedFindings": [
+    {
+      "id": "CI-01",
+      "severity": "P2",
+      "classification": "CONFIRMED_SOURCE_FEATURE_GAP",
+      "rowIds": [
+        "CORE-013"
+      ],
+      "frameIds": [
+        "411:47010",
+        "411:47482",
+        "411:47030"
+      ],
+      "title": "Saved client detail fields have no on-screen read-only profile surface",
+      "source": [
+        "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx:75",
+        "apps/web/src/features/portfolio/client-profile/ClientProfileActions.tsx:23",
+        "apps/web/src/features/portfolio/client-intake/form.ts:95"
+      ],
+      "observation": "Overview renders name, raw profileStatus, raw sectorTag, website and description, but no saved location/contact/government details. The Government info summary/dialog in the design is absent. A standard_user can read the client record but Edit client profile is disabled, so this user cannot inspect these fields on screen; JSON export is a separate possible workaround. The same fixture also shows HOMELAND_SECURITY and ACTIVE instead of display labels.",
+      "reproduction": [
+        "Serve the unchanged Portfolio fixture at 5191.",
+        "Run review.spec.ts second case: provide standard_user and a client containing Costa Mesa, contact name/email/phone, CAGE and UEI.",
+        "Open client Overview and More actions. All six saved values and Government info are absent; Edit is disabled."
+      ],
+      "evidence": [
+        "review.spec.ts:26",
+        "browser-results.json",
+        "browser-artifacts/review-observe-saved-profi-e80c6--to-standard-user-read-path/profile-standard-user.png",
+        "figma-411-47010.png",
+        "figma-411-47482.png",
+        "figma-411-47030.json"
+      ],
+      "deploymentImpact": "Incomplete CORE-013 feature/design acceptance. No crash, authority bypass or destructive effect was observed; this does not independently establish an infrastructure rollout blocker.",
+      "confidence": "confirmed by source and synthetic browser"
+    },
+    {
+      "id": "CI-02",
+      "severity": "P2",
+      "classification": "CONFIRMED_SOURCE_FEATURE_GAP",
+      "rowIds": [
+        "CORE-121"
+      ],
+      "frameIds": [
+        "411:47736"
+      ],
+      "title": "Client view switcher omits search and the specified per-view keyboard shortcuts",
+      "source": [
+        "apps/web/src/features/portfolio/client-profile/ClientHeader.tsx:20",
+        "apps/web/src/features/portfolio/client-profile/ClientHeader.tsx:60",
+        "apps/web/src/shared/portfolio/shell/client-views.ts:2"
+      ],
+      "observation": "Figma specifies Jump to a view search, decorated rows and G O/G J/G C etc. The source renders nine bare links and only binds Ctrl/Meta+J to toggle the menu. No search input or G-sequence handling exists. Ordinary menu-click navigation works. Missing routes such as standalone Timeline/Outreach are not asserted as new required endpoints here.",
+      "reproduction": [
+        "Open a client Overview.",
+        "Press Ctrl+J: menu opens with nine menuitems and zero textboxes.",
+        "Press Escape, then G then C: route stays on Overview. Selecting Calendar by click navigates correctly."
+      ],
+      "evidence": [
+        "review.spec.ts:4",
+        "browser-results.json",
+        "browser-artifacts/review-observe-view-switch-27fbf-uts-against-Figma-411-47736/view-switcher.png",
+        "figma-411-47736.json",
+        "figma-411-47736.png"
+      ],
+      "deploymentImpact": "Blocks full CORE-121 interaction/design parity; no backend dependency prevents local search or shortcuts to existing views. Not a demonstrated infrastructure rollout blocker.",
+      "confidence": "confirmed by source and synthetic browser"
+    },
+    {
+      "id": "CI-03",
+      "severity": "P3",
+      "classification": "CONFIRMED_VISUAL_GAP",
+      "rowIds": [
+        "CORE-028",
+        "CORE-030",
+        "CORE-031",
+        "CORE-032"
+      ],
+      "frameIds": [
+        "411:51801"
+      ],
+      "title": "Account team retains a generic stacked form instead of the designed roster",
+      "source": [
+        "apps/web/src/features/portfolio/client-profile/TeamDialog.tsx:31",
+        "apps/web/src/features/portfolio/client-profile/TeamDialog.tsx:72",
+        "apps/web/src/features/portfolio/client-profile/TeamMemberFields.tsx:30"
+      ],
+      "observation": "The design shows Account team plus client name, avatar/email roster details, row separators and side-by-side member/role controls. Current exact-source screenshot shows a generic Account team heading, name/role-only roster and full-width stacked member/role/add controls. The renderer omits the available email field. Manage owners is an intentional extra entry and the completed Owners repair is not reopened.",
+      "reproduction": [
+        "Inspect exact-source team-1440.png or open Account team on a client with a current roster.",
+        "Compare the roster and add-member form with Figma411:51801."
+      ],
+      "evidence": [
+        "docs/visual-closeout-20261012/evidence/candidate-4a16148/portfolio-browser-artifacts/profile-dialog-layout-curr-9b4ca-ss-component-render-updates/team-1440.png",
+        "figma-411-51801.json",
+        "figma-411-51801.png"
+      ],
+      "deploymentImpact": "Lower-priority presentation parity; no team-write regression or unsafe behavior claimed.",
+      "confidence": "confirmed source plus exact-source archived render"
+    },
+    {
+      "id": "CI-04",
+      "severity": "P3",
+      "classification": "CONFIRMED_VISUAL_GAP",
+      "rowIds": [
+        "CORE-012",
+        "CORE-014"
+      ],
+      "frameIds": [
+        "517:121532",
+        "517:121876",
+        "517:122239"
+      ],
+      "title": "Intake choice groups use one three-column grid for distinct designed layouts",
+      "source": [
+        "apps/web/src/features/portfolio/client-intake/intake.module.css:109",
+        "apps/web/src/features/portfolio/client-intake/RegistrationStep.tsx:76",
+        "apps/web/src/features/portfolio/client-intake/SectorStep.tsx:43"
+      ],
+      "observation": "The common ChoiceList grid forces three columns. At 1440px the six certification options wrap into 3x2 instead of the design single row; submission tracks become 3x2 instead of the design 2x3; Foreign-owned does not span the business-classification row. These supplemental editor frames are the references documented by INTAKE-CHECKPOINT, distinct from the read-only Government info frame linked by the ledger.",
+      "reproduction": [
+        "Open Add profile > Manual entry at 1440x1040.",
+        "Visit Company Info, Government Registration, Sector & Tracks without saving.",
+        "Compare group geometry against supplemental editor frames."
+      ],
+      "evidence": [
+        "captures.spec.ts:4",
+        "capture-results.json",
+        "capture-artifacts/captures-capture-Add-profi-d768f-intake-steps-without-saving/intake-step-1.png",
+        "capture-artifacts/captures-capture-Add-profi-d768f-intake-steps-without-saving/intake-step-2.png",
+        "capture-artifacts/captures-capture-Add-profi-d768f-intake-steps-without-saving/intake-step-3.png",
+        "figma-517-121532.png",
+        "figma-517-121876.png",
+        "figma-517-122239.png",
+        "docs/portfolio-31/INTAKE-CHECKPOINT.md:31"
+      ],
+      "deploymentImpact": "Lower-priority desktop form parity. Fields, step changes and cancel work in the bounded probe; no value or persistence regression claimed.",
+      "confidence": "confirmed source and fresh synthetic render"
+    }
+  ],
+  "deploymentConclusion": "No independently confirmed P0/P1 or infrastructure deployment blocker in this bounded slice. Two P2 feature gaps and two P3 visual gaps prevent full design/feature acceptance for their rows. CORE-077 Checkout semantics need current backend/Settings owner resolution before payment activation is treated as accepted. This is not native acceptance.",
+  "coordinationRisks": [
+    {
+      "rowIds": [
+        "CORE-077",
+        "CORE-078"
+      ],
+      "classification": "UNRESOLVED_BACKEND_SEMANTIC_RISK",
+      "source": [
+        "apps/web/src/features/settings/BillingSettings.tsx:86",
+        "apps/web/src/shared/capiro/operations/settings.ts:363"
+      ],
+      "evidence": [
+        "docs/portfolio-31/BILLING-FLOW-REVALIDATION.md:18"
+      ],
+      "detail": "Portfolio inline purchase remains unavailable. Current Settings now exposes Add profiles -> absolute-quantity Onboard Checkout even for existing plans; historical revalidation says this creates a new subscription. This seam is escalated to root/Settings reviewer, not confirmed as a live provider defect by this read-only slice."
+    }
+  ],
+  "contractDependencyGroups": {
+    "analyticsAndCoverage": [
+      "CORE-003",
+      "CORE-004",
+      "CORE-007",
+      "CORE-008",
+      "CORE-009",
+      "CORE-087",
+      "CORE-088",
+      "CORE-089",
+      "CORE-090"
+    ],
+    "purchaseAndRequests": [
+      "CORE-074",
+      "CORE-076",
+      "CORE-077",
+      "CORE-079",
+      "CORE-080",
+      "CORE-081",
+      "CORE-082",
+      "CORE-083",
+      "CORE-084",
+      "CORE-085"
+    ],
+    "researchAndHandoff": [
+      "CORE-097",
+      "CORE-122",
+      "CORE-127"
+    ],
+    "atomicPersistenceAndRegistration": [
+      "CORE-014",
+      "CORE-021",
+      "CORE-023",
+      "CORE-024",
+      "CORE-098",
+      "CORE-099"
+    ],
+    "sourceAuthorization": [
+      "CORE-025"
+    ]
+  }
+}

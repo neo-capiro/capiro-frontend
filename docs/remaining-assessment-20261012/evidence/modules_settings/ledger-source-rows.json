@@ -1,0 +1,1223 @@
+[
+  {
+    "audit_id": "MCAL-001",
+    "area": "Global Master calendar",
+    "criterion": "Read Master meetings across clients / meetings for selected client and date range",
+    "scope": "IN_SCOPE",
+    "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+    "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+    "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+    "canonicalFrontendPaths": [
+      "apps/web/src/features/portfolio/calendar/"
+    ],
+    "figmaTargets": [
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47345",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-63168",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64632",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64763",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148155",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147591",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147875",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148562"
+    ],
+    "boundedInteractionFacets": [],
+    "relatedExecutedCaseIds": [
+      "db5307d516056a04896a-9855cc58afb90785b738",
+      "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+      "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+      "1de639fdc719e2321283-be08d9b57421c24286a4"
+    ],
+    "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+    "visualObservationIds": [
+      "V10"
+    ],
+    "visualStatus": "SCOPED_COMPARISON_RECORDED",
+    "native": {
+      "status": "NOT_RUN_NATIVE",
+      "criteria": "Establish native signed-in behavior for: Read Master meetings across clients / meetings for selected client and date range",
+      "verifiedHistoricalInterfaces": [
+        {
+          "method": "GET",
+          "route": "/api/engagement/meetings"
+        }
+      ],
+      "requiredEvidence": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#MCAL-001",
+      "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+    },
+    "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for MCAL-001."
+  },
+  {
+    "audit_id": "MCAL-002",
+    "area": "Global Master calendar",
+    "criterion": "Populate the Master / client scope selector",
+    "scope": "IN_SCOPE",
+    "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+    "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+    "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+    "canonicalFrontendPaths": [
+      "apps/web/src/features/portfolio/calendar/"
+    ],
+    "figmaTargets": [
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=795-148369",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=795-148392",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=795-148415"
+    ],
+    "boundedInteractionFacets": [],
+    "relatedExecutedCaseIds": [
+      "db5307d516056a04896a-9855cc58afb90785b738",
+      "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+      "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+      "1de639fdc719e2321283-be08d9b57421c24286a4"
+    ],
+    "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+    "visualObservationIds": [
+      "V10"
+    ],
+    "visualStatus": "SCOPED_COMPARISON_RECORDED",
+    "native": {
+      "status": "NOT_RUN_NATIVE",
+      "criteria": "Establish native signed-in behavior for: Populate the Master / client scope selector",
+      "verifiedHistoricalInterfaces": [
+        {
+          "method": "GET",
+          "route": "/api/clients"
+        }
+      ],
+      "requiredEvidence": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#MCAL-002",
+      "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+    },
+    "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for MCAL-002."
+  },
+  {
+    "audit_id": "MCAL-003",
+    "area": "Global Master calendar",
+    "criterion": "Select Master view, Anduril or NACD while retaining Month / Week / Agenda",
+    "scope": "IN_SCOPE",
+    "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+    "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+    "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+    "canonicalFrontendPaths": [
+      "apps/web/src/features/portfolio/calendar/"
+    ],
+    "figmaTargets": [
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47345",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-63168",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64632",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64763",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148155",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147591",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147875",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148562",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=795-148369",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=795-148392",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=795-148415"
+    ],
+    "boundedInteractionFacets": [],
+    "relatedExecutedCaseIds": [
+      "db5307d516056a04896a-9855cc58afb90785b738",
+      "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+      "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+      "1de639fdc719e2321283-be08d9b57421c24286a4"
+    ],
+    "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+    "visualObservationIds": [
+      "V10"
+    ],
+    "visualStatus": "SCOPED_COMPARISON_RECORDED",
+    "native": {
+      "status": "NOT_RUN_NATIVE",
+      "criteria": "Establish native signed-in behavior for: Select Master view, Anduril or NACD while retaining Month / Week / Agenda",
+      "verifiedHistoricalInterfaces": [],
+      "requiredEvidence": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#MCAL-003",
+      "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+    },
+    "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for MCAL-003."
+  },
+  {
+    "audit_id": "MCAL-004",
+    "area": "Global Master calendar",
+    "criterion": "Switch Month / Week / Agenda, previous/next, Today and date picker",
+    "scope": "IN_SCOPE",
+    "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+    "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+    "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+    "canonicalFrontendPaths": [
+      "apps/web/src/features/portfolio/calendar/"
+    ],
+    "figmaTargets": [
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47345",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-63168",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64632",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64763",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148155",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147591",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147875",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148562"
+    ],
+    "boundedInteractionFacets": [],
+    "relatedExecutedCaseIds": [
+      "db5307d516056a04896a-9855cc58afb90785b738",
+      "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+      "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+      "1de639fdc719e2321283-be08d9b57421c24286a4"
+    ],
+    "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+    "visualObservationIds": [
+      "V10"
+    ],
+    "visualStatus": "SCOPED_COMPARISON_RECORDED",
+    "native": {
+      "status": "NOT_RUN_NATIVE",
+      "criteria": "Establish native signed-in behavior for: Switch Month / Week / Agenda, previous/next, Today and date picker",
+      "verifiedHistoricalInterfaces": [],
+      "requiredEvidence": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#MCAL-004",
+      "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+    },
+    "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for MCAL-004."
+  },
+  {
+    "audit_id": "MCAL-005",
+    "area": "Global Master calendar",
+    "criterion": "Render a week time grid for Master and client meetings",
+    "scope": "IN_SCOPE",
+    "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+    "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+    "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+    "canonicalFrontendPaths": [
+      "apps/web/src/features/portfolio/calendar/"
+    ],
+    "figmaTargets": [
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-63168",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64763",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147875"
+    ],
+    "boundedInteractionFacets": [],
+    "relatedExecutedCaseIds": [
+      "db5307d516056a04896a-9855cc58afb90785b738",
+      "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+      "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+      "1de639fdc719e2321283-be08d9b57421c24286a4"
+    ],
+    "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+    "visualObservationIds": [
+      "V10"
+    ],
+    "visualStatus": "SCOPED_COMPARISON_RECORDED",
+    "native": {
+      "status": "NOT_RUN_NATIVE",
+      "criteria": "Establish native signed-in behavior for: Render a week time grid for Master and client meetings",
+      "verifiedHistoricalInterfaces": [
+        {
+          "method": "GET",
+          "route": "/api/engagement/meetings"
+        }
+      ],
+      "requiredEvidence": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#MCAL-005",
+      "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+    },
+    "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for MCAL-005."
+  },
+  {
+    "audit_id": "MCAL-006",
+    "area": "Global Master calendar",
+    "criterion": "Open a meeting and show attendees, location, join link and preparation summary",
+    "scope": "IN_SCOPE",
+    "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+    "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+    "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+    "canonicalFrontendPaths": [
+      "apps/web/src/features/portfolio/calendar/"
+    ],
+    "figmaTargets": [
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47345",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-63168",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64632",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64763",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148155",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147591",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147875",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148562"
+    ],
+    "boundedInteractionFacets": [],
+    "relatedExecutedCaseIds": [
+      "db5307d516056a04896a-9855cc58afb90785b738",
+      "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+      "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+      "1de639fdc719e2321283-be08d9b57421c24286a4"
+    ],
+    "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+    "visualObservationIds": [],
+    "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+    "native": {
+      "status": "NOT_RUN_NATIVE",
+      "criteria": "Establish native signed-in behavior for: Open a meeting and show attendees, location, join link and preparation summary",
+      "verifiedHistoricalInterfaces": [
+        {
+          "method": "GET",
+          "route": "/api/engagement/meetings/:id"
+        }
+      ],
+      "requiredEvidence": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#MCAL-006",
+      "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+    },
+    "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for MCAL-006."
+  },
+  {
+    "audit_id": "MCAL-007",
+    "area": "Global Master calendar",
+    "criterion": "Create a manual meeting from the calendar",
+    "scope": "IN_SCOPE",
+    "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+    "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+    "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+    "canonicalFrontendPaths": [
+      "apps/web/src/features/portfolio/calendar/"
+    ],
+    "figmaTargets": [
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47345",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-63168",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64632",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64763",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148155",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147591",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147875",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148562"
+    ],
+    "boundedInteractionFacets": [],
+    "relatedExecutedCaseIds": [
+      "db5307d516056a04896a-9855cc58afb90785b738",
+      "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+      "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+      "1de639fdc719e2321283-be08d9b57421c24286a4"
+    ],
+    "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+    "visualObservationIds": [],
+    "visualStatus": "NOT_ASSESSED_AGAINST_EVERY_TARGET_FRAME",
+    "native": {
+      "status": "NOT_RUN_NATIVE",
+      "criteria": "Establish native signed-in behavior for: Create a manual meeting from the calendar",
+      "verifiedHistoricalInterfaces": [
+        {
+          "method": "POST",
+          "route": "/api/engagement/meetings"
+        }
+      ],
+      "requiredEvidence": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records.",
+        "Authorized native persistence, concurrency/receipt behavior and interrupted-write recovery for this exact operation; provider/payment/generation effects require separate permitted acceptance."
+      ],
+      "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#MCAL-007",
+      "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+    },
+    "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for MCAL-007."
+  },
+  {
+    "audit_id": "MCAL-008",
+    "area": "Global Master calendar",
+    "criterion": "Show public hearing events in mixed Master Agenda",
+    "scope": "IN_SCOPE",
+    "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+    "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+    "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+    "canonicalFrontendPaths": [
+      "apps/web/src/features/portfolio/calendar/"
+    ],
+    "figmaTargets": [
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798"
+    ],
+    "boundedInteractionFacets": [
+      {
+        "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+        "claim": "Mixed Master Agenda keeps independent source permissions and failures, explicit scheduled/due occurrences and source filters. Publisher effective civil dates retain provenance and incomplete-coverage warnings; no publication-date fallback is allowed.",
+        "caseIds": [
+          "cb8fd1c7d71bf8fdcbf1-30bc7767bb92d36a04fb",
+          "cb8fd1c7d71bf8fdcbf1-ee56acfddfde29650890",
+          "cb8fd1c7d71bf8fdcbf1-339244feeb6270ac4185",
+          "cb8fd1c7d71bf8fdcbf1-b35434ef6ffded7bfd22",
+          "cb8fd1c7d71bf8fdcbf1-94918c8c7701380e662b",
+          "cb8fd1c7d71bf8fdcbf1-8dddc4ab6000e0d44eb1",
+          "cb8fd1c7d71bf8fdcbf1-5c3c0ffc2f8c41c8f44c",
+          "cb8fd1c7d71bf8fdcbf1-dca3544942bd0d41baf6",
+          "cb8fd1c7d71bf8fdcbf1-bc59657acd7ce94fb470",
+          "efc0cd4c0c27ca6acf1d-a769786459f6e99dfbd5",
+          "efc0cd4c0c27ca6acf1d-e83d51953d8939040f55",
+          "75750b97f266fe2ab697-196abffce6882ca0f9b7",
+          "75750b97f266fe2ab697-552e1803f89e9d64938b",
+          "75750b97f266fe2ab697-ec6a2d7c6e748df663b5",
+          "342b688e3b2f30b1cf7b-b2523fe0d2088110ddd4",
+          "342b688e3b2f30b1cf7b-f04979bbb55792acb100",
+          "342b688e3b2f30b1cf7b-c8668e7da94f6d00cf76",
+          "342b688e3b2f30b1cf7b-6520fca08adbbd13ded3",
+          "342b688e3b2f30b1cf7b-221d660c78e427d141d8",
+          "342b688e3b2f30b1cf7b-b1d588f51414db8b1b48",
+          "342b688e3b2f30b1cf7b-8af3b8ff1a131e21d55e",
+          "342b688e3b2f30b1cf7b-aca346be96003afad65c",
+          "342b688e3b2f30b1cf7b-5fc9837d02f073dd773d",
+          "342b688e3b2f30b1cf7b-4e894520bbd087b698e3",
+          "342b688e3b2f30b1cf7b-21f395a65d4a9a226cae",
+          "342b688e3b2f30b1cf7b-85b668035f7c886516ea",
+          "342b688e3b2f30b1cf7b-e5469a8e86ca47e333f4",
+          "342b688e3b2f30b1cf7b-f62d4e419b528d3e63a5",
+          "342b688e3b2f30b1cf7b-4466c723b2cc3faa94dc",
+          "342b688e3b2f30b1cf7b-1c540c12750360f0a47d",
+          "342b688e3b2f30b1cf7b-a0640fe7bd057c863538",
+          "342b688e3b2f30b1cf7b-bc5eb4c8678d23d1a532",
+          "342b688e3b2f30b1cf7b-84e46ea2db7389da250a",
+          "342b688e3b2f30b1cf7b-1b7a581d8374452626b3",
+          "75750b97f266fe2ab697-99a1815ac71f11fcb4a4",
+          "75750b97f266fe2ab697-2a8de38227d2829a8ff3"
+        ],
+        "remaining": "Native feed migrations/role privileges, complete source coverage and actual current evidence remain unrun. Estimated markup/floor-vote windows are unavailable; metadata is not complete legal-date coverage."
+      }
+    ],
+    "relatedExecutedCaseIds": [
+      "cb8fd1c7d71bf8fdcbf1-30bc7767bb92d36a04fb",
+      "cb8fd1c7d71bf8fdcbf1-ee56acfddfde29650890",
+      "cb8fd1c7d71bf8fdcbf1-339244feeb6270ac4185",
+      "cb8fd1c7d71bf8fdcbf1-b35434ef6ffded7bfd22",
+      "cb8fd1c7d71bf8fdcbf1-94918c8c7701380e662b",
+      "cb8fd1c7d71bf8fdcbf1-8dddc4ab6000e0d44eb1",
+      "cb8fd1c7d71bf8fdcbf1-5c3c0ffc2f8c41c8f44c",
+      "cb8fd1c7d71bf8fdcbf1-dca3544942bd0d41baf6",
+      "cb8fd1c7d71bf8fdcbf1-bc59657acd7ce94fb470",
+      "efc0cd4c0c27ca6acf1d-a769786459f6e99dfbd5",
+      "efc0cd4c0c27ca6acf1d-e83d51953d8939040f55",
+      "75750b97f266fe2ab697-196abffce6882ca0f9b7",
+      "75750b97f266fe2ab697-552e1803f89e9d64938b",
+      "75750b97f266fe2ab697-ec6a2d7c6e748df663b5",
+      "342b688e3b2f30b1cf7b-b2523fe0d2088110ddd4",
+      "342b688e3b2f30b1cf7b-f04979bbb55792acb100",
+      "342b688e3b2f30b1cf7b-c8668e7da94f6d00cf76",
+      "342b688e3b2f30b1cf7b-6520fca08adbbd13ded3",
+      "342b688e3b2f30b1cf7b-221d660c78e427d141d8",
+      "342b688e3b2f30b1cf7b-b1d588f51414db8b1b48",
+      "342b688e3b2f30b1cf7b-8af3b8ff1a131e21d55e",
+      "342b688e3b2f30b1cf7b-aca346be96003afad65c",
+      "342b688e3b2f30b1cf7b-5fc9837d02f073dd773d",
+      "342b688e3b2f30b1cf7b-4e894520bbd087b698e3",
+      "342b688e3b2f30b1cf7b-21f395a65d4a9a226cae",
+      "342b688e3b2f30b1cf7b-85b668035f7c886516ea",
+      "342b688e3b2f30b1cf7b-e5469a8e86ca47e333f4",
+      "342b688e3b2f30b1cf7b-f62d4e419b528d3e63a5",
+      "342b688e3b2f30b1cf7b-4466c723b2cc3faa94dc",
+      "342b688e3b2f30b1cf7b-1c540c12750360f0a47d",
+      "342b688e3b2f30b1cf7b-a0640fe7bd057c863538",
+      "342b688e3b2f30b1cf7b-bc5eb4c8678d23d1a532",
+      "342b688e3b2f30b1cf7b-84e46ea2db7389da250a",
+      "342b688e3b2f30b1cf7b-1b7a581d8374452626b3",
+      "75750b97f266fe2ab697-99a1815ac71f11fcb4a4",
+      "75750b97f266fe2ab697-2a8de38227d2829a8ff3",
+      "db5307d516056a04896a-9855cc58afb90785b738",
+      "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+      "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+      "1de639fdc719e2321283-be08d9b57421c24286a4"
+    ],
+    "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+    "visualObservationIds": [
+      "V10"
+    ],
+    "visualStatus": "SCOPED_COMPARISON_RECORDED",
+    "native": {
+      "status": "NOT_RUN_NATIVE",
+      "criteria": "Establish native signed-in behavior for: Show public hearing events in mixed Master Agenda",
+      "verifiedHistoricalInterfaces": [
+        {
+          "method": "GET",
+          "route": "/api/legiwatch/live-hearings/calendar"
+        },
+        {
+          "method": "POST",
+          "route": "/api/legiwatch/live-hearings/calendar/query"
+        }
+      ],
+      "requiredEvidence": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#MCAL-008",
+      "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+    },
+    "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for MCAL-008."
+  },
+  {
+    "audit_id": "MCAL-009",
+    "area": "Global Master calendar",
+    "criterion": "Show Planner tasks and their scheduled / due dates in Master Agenda",
+    "scope": "IN_SCOPE",
+    "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+    "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+    "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+    "canonicalFrontendPaths": [
+      "apps/web/src/features/portfolio/calendar/"
+    ],
+    "figmaTargets": [
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798"
+    ],
+    "boundedInteractionFacets": [
+      {
+        "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+        "claim": "Mixed Master Agenda keeps independent source permissions and failures, explicit scheduled/due occurrences and source filters. Publisher effective civil dates retain provenance and incomplete-coverage warnings; no publication-date fallback is allowed.",
+        "caseIds": [
+          "cb8fd1c7d71bf8fdcbf1-30bc7767bb92d36a04fb",
+          "cb8fd1c7d71bf8fdcbf1-ee56acfddfde29650890",
+          "cb8fd1c7d71bf8fdcbf1-339244feeb6270ac4185",
+          "cb8fd1c7d71bf8fdcbf1-b35434ef6ffded7bfd22",
+          "cb8fd1c7d71bf8fdcbf1-94918c8c7701380e662b",
+          "cb8fd1c7d71bf8fdcbf1-8dddc4ab6000e0d44eb1",
+          "cb8fd1c7d71bf8fdcbf1-5c3c0ffc2f8c41c8f44c",
+          "cb8fd1c7d71bf8fdcbf1-dca3544942bd0d41baf6",
+          "cb8fd1c7d71bf8fdcbf1-bc59657acd7ce94fb470",
+          "efc0cd4c0c27ca6acf1d-a769786459f6e99dfbd5",
+          "efc0cd4c0c27ca6acf1d-e83d51953d8939040f55",
+          "75750b97f266fe2ab697-196abffce6882ca0f9b7",
+          "75750b97f266fe2ab697-552e1803f89e9d64938b",
+          "75750b97f266fe2ab697-ec6a2d7c6e748df663b5",
+          "342b688e3b2f30b1cf7b-b2523fe0d2088110ddd4",
+          "342b688e3b2f30b1cf7b-f04979bbb55792acb100",
+          "342b688e3b2f30b1cf7b-c8668e7da94f6d00cf76",
+          "342b688e3b2f30b1cf7b-6520fca08adbbd13ded3",
+          "342b688e3b2f30b1cf7b-221d660c78e427d141d8",
+          "342b688e3b2f30b1cf7b-b1d588f51414db8b1b48",
+          "342b688e3b2f30b1cf7b-8af3b8ff1a131e21d55e",
+          "342b688e3b2f30b1cf7b-aca346be96003afad65c",
+          "342b688e3b2f30b1cf7b-5fc9837d02f073dd773d",
+          "342b688e3b2f30b1cf7b-4e894520bbd087b698e3",
+          "342b688e3b2f30b1cf7b-21f395a65d4a9a226cae",
+          "342b688e3b2f30b1cf7b-85b668035f7c886516ea",
+          "342b688e3b2f30b1cf7b-e5469a8e86ca47e333f4",
+          "342b688e3b2f30b1cf7b-f62d4e419b528d3e63a5",
+          "342b688e3b2f30b1cf7b-4466c723b2cc3faa94dc",
+          "342b688e3b2f30b1cf7b-1c540c12750360f0a47d",
+          "342b688e3b2f30b1cf7b-a0640fe7bd057c863538",
+          "342b688e3b2f30b1cf7b-bc5eb4c8678d23d1a532",
+          "342b688e3b2f30b1cf7b-84e46ea2db7389da250a",
+          "342b688e3b2f30b1cf7b-1b7a581d8374452626b3",
+          "75750b97f266fe2ab697-99a1815ac71f11fcb4a4",
+          "75750b97f266fe2ab697-2a8de38227d2829a8ff3"
+        ],
+        "remaining": "Native feed migrations/role privileges, complete source coverage and actual current evidence remain unrun. Estimated markup/floor-vote windows are unavailable; metadata is not complete legal-date coverage."
+      }
+    ],
+    "relatedExecutedCaseIds": [
+      "cb8fd1c7d71bf8fdcbf1-30bc7767bb92d36a04fb",
+      "cb8fd1c7d71bf8fdcbf1-ee56acfddfde29650890",
+      "cb8fd1c7d71bf8fdcbf1-339244feeb6270ac4185",
+      "cb8fd1c7d71bf8fdcbf1-b35434ef6ffded7bfd22",
+      "cb8fd1c7d71bf8fdcbf1-94918c8c7701380e662b",
+      "cb8fd1c7d71bf8fdcbf1-8dddc4ab6000e0d44eb1",
+      "cb8fd1c7d71bf8fdcbf1-5c3c0ffc2f8c41c8f44c",
+      "cb8fd1c7d71bf8fdcbf1-dca3544942bd0d41baf6",
+      "cb8fd1c7d71bf8fdcbf1-bc59657acd7ce94fb470",
+      "efc0cd4c0c27ca6acf1d-a769786459f6e99dfbd5",
+      "efc0cd4c0c27ca6acf1d-e83d51953d8939040f55",
+      "75750b97f266fe2ab697-196abffce6882ca0f9b7",
+      "75750b97f266fe2ab697-552e1803f89e9d64938b",
+      "75750b97f266fe2ab697-ec6a2d7c6e748df663b5",
+      "342b688e3b2f30b1cf7b-b2523fe0d2088110ddd4",
+      "342b688e3b2f30b1cf7b-f04979bbb55792acb100",
+      "342b688e3b2f30b1cf7b-c8668e7da94f6d00cf76",
+      "342b688e3b2f30b1cf7b-6520fca08adbbd13ded3",
+      "342b688e3b2f30b1cf7b-221d660c78e427d141d8",
+      "342b688e3b2f30b1cf7b-b1d588f51414db8b1b48",
+      "342b688e3b2f30b1cf7b-8af3b8ff1a131e21d55e",
+      "342b688e3b2f30b1cf7b-aca346be96003afad65c",
+      "342b688e3b2f30b1cf7b-5fc9837d02f073dd773d",
+      "342b688e3b2f30b1cf7b-4e894520bbd087b698e3",
+      "342b688e3b2f30b1cf7b-21f395a65d4a9a226cae",
+      "342b688e3b2f30b1cf7b-85b668035f7c886516ea",
+      "342b688e3b2f30b1cf7b-e5469a8e86ca47e333f4",
+      "342b688e3b2f30b1cf7b-f62d4e419b528d3e63a5",
+      "342b688e3b2f30b1cf7b-4466c723b2cc3faa94dc",
+      "342b688e3b2f30b1cf7b-1c540c12750360f0a47d",
+      "342b688e3b2f30b1cf7b-a0640fe7bd057c863538",
+      "342b688e3b2f30b1cf7b-bc5eb4c8678d23d1a532",
+      "342b688e3b2f30b1cf7b-84e46ea2db7389da250a",
+      "342b688e3b2f30b1cf7b-1b7a581d8374452626b3",
+      "75750b97f266fe2ab697-99a1815ac71f11fcb4a4",
+      "75750b97f266fe2ab697-2a8de38227d2829a8ff3",
+      "db5307d516056a04896a-9855cc58afb90785b738",
+      "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+      "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+      "1de639fdc719e2321283-be08d9b57421c24286a4"
+    ],
+    "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+    "visualObservationIds": [
+      "V10"
+    ],
+    "visualStatus": "SCOPED_COMPARISON_RECORDED",
+    "native": {
+      "status": "NOT_RUN_NATIVE",
+      "criteria": "Establish native signed-in behavior for: Show Planner tasks and their scheduled / due dates in Master Agenda",
+      "verifiedHistoricalInterfaces": [
+        {
+          "method": "GET",
+          "route": "/strategy-api/planner/tasks"
+        }
+      ],
+      "requiredEvidence": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#MCAL-009",
+      "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+    },
+    "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for MCAL-009."
+  },
+  {
+    "audit_id": "MCAL-010",
+    "area": "Global Master calendar",
+    "criterion": "Show regulatory comment and SAM / SBIR opportunity deadlines",
+    "scope": "IN_SCOPE",
+    "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+    "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+    "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+    "canonicalFrontendPaths": [
+      "apps/web/src/features/portfolio/calendar/"
+    ],
+    "figmaTargets": [
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798"
+    ],
+    "boundedInteractionFacets": [
+      {
+        "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+        "claim": "Mixed Master Agenda keeps independent source permissions and failures, explicit scheduled/due occurrences and source filters. Publisher effective civil dates retain provenance and incomplete-coverage warnings; no publication-date fallback is allowed.",
+        "caseIds": [
+          "cb8fd1c7d71bf8fdcbf1-30bc7767bb92d36a04fb",
+          "cb8fd1c7d71bf8fdcbf1-ee56acfddfde29650890",
+          "cb8fd1c7d71bf8fdcbf1-339244feeb6270ac4185",
+          "cb8fd1c7d71bf8fdcbf1-b35434ef6ffded7bfd22",
+          "cb8fd1c7d71bf8fdcbf1-94918c8c7701380e662b",
+          "cb8fd1c7d71bf8fdcbf1-8dddc4ab6000e0d44eb1",
+          "cb8fd1c7d71bf8fdcbf1-5c3c0ffc2f8c41c8f44c",
+          "cb8fd1c7d71bf8fdcbf1-dca3544942bd0d41baf6",
+          "cb8fd1c7d71bf8fdcbf1-bc59657acd7ce94fb470",
+          "efc0cd4c0c27ca6acf1d-a769786459f6e99dfbd5",
+          "efc0cd4c0c27ca6acf1d-e83d51953d8939040f55",
+          "75750b97f266fe2ab697-196abffce6882ca0f9b7",
+          "75750b97f266fe2ab697-552e1803f89e9d64938b",
+          "75750b97f266fe2ab697-ec6a2d7c6e748df663b5",
+          "342b688e3b2f30b1cf7b-b2523fe0d2088110ddd4",
+          "342b688e3b2f30b1cf7b-f04979bbb55792acb100",
+          "342b688e3b2f30b1cf7b-c8668e7da94f6d00cf76",
+          "342b688e3b2f30b1cf7b-6520fca08adbbd13ded3",
+          "342b688e3b2f30b1cf7b-221d660c78e427d141d8",
+          "342b688e3b2f30b1cf7b-b1d588f51414db8b1b48",
+          "342b688e3b2f30b1cf7b-8af3b8ff1a131e21d55e",
+          "342b688e3b2f30b1cf7b-aca346be96003afad65c",
+          "342b688e3b2f30b1cf7b-5fc9837d02f073dd773d",
+          "342b688e3b2f30b1cf7b-4e894520bbd087b698e3",
+          "342b688e3b2f30b1cf7b-21f395a65d4a9a226cae",
+          "342b688e3b2f30b1cf7b-85b668035f7c886516ea",
+          "342b688e3b2f30b1cf7b-e5469a8e86ca47e333f4",
+          "342b688e3b2f30b1cf7b-f62d4e419b528d3e63a5",
+          "342b688e3b2f30b1cf7b-4466c723b2cc3faa94dc",
+          "342b688e3b2f30b1cf7b-1c540c12750360f0a47d",
+          "342b688e3b2f30b1cf7b-a0640fe7bd057c863538",
+          "342b688e3b2f30b1cf7b-bc5eb4c8678d23d1a532",
+          "342b688e3b2f30b1cf7b-84e46ea2db7389da250a",
+          "342b688e3b2f30b1cf7b-1b7a581d8374452626b3",
+          "75750b97f266fe2ab697-99a1815ac71f11fcb4a4",
+          "75750b97f266fe2ab697-2a8de38227d2829a8ff3"
+        ],
+        "remaining": "Native feed migrations/role privileges, complete source coverage and actual current evidence remain unrun. Estimated markup/floor-vote windows are unavailable; metadata is not complete legal-date coverage."
+      }
+    ],
+    "relatedExecutedCaseIds": [
+      "cb8fd1c7d71bf8fdcbf1-30bc7767bb92d36a04fb",
+      "cb8fd1c7d71bf8fdcbf1-ee56acfddfde29650890",
+      "cb8fd1c7d71bf8fdcbf1-339244feeb6270ac4185",
+      "cb8fd1c7d71bf8fdcbf1-b35434ef6ffded7bfd22",
+      "cb8fd1c7d71bf8fdcbf1-94918c8c7701380e662b",
+      "cb8fd1c7d71bf8fdcbf1-8dddc4ab6000e0d44eb1",
+      "cb8fd1c7d71bf8fdcbf1-5c3c0ffc2f8c41c8f44c",
+      "cb8fd1c7d71bf8fdcbf1-dca3544942bd0d41baf6",
+      "cb8fd1c7d71bf8fdcbf1-bc59657acd7ce94fb470",
+      "efc0cd4c0c27ca6acf1d-a769786459f6e99dfbd5",
+      "efc0cd4c0c27ca6acf1d-e83d51953d8939040f55",
+      "75750b97f266fe2ab697-196abffce6882ca0f9b7",
+      "75750b97f266fe2ab697-552e1803f89e9d64938b",
+      "75750b97f266fe2ab697-ec6a2d7c6e748df663b5",
+      "342b688e3b2f30b1cf7b-b2523fe0d2088110ddd4",
+      "342b688e3b2f30b1cf7b-f04979bbb55792acb100",
+      "342b688e3b2f30b1cf7b-c8668e7da94f6d00cf76",
+      "342b688e3b2f30b1cf7b-6520fca08adbbd13ded3",
+      "342b688e3b2f30b1cf7b-221d660c78e427d141d8",
+      "342b688e3b2f30b1cf7b-b1d588f51414db8b1b48",
+      "342b688e3b2f30b1cf7b-8af3b8ff1a131e21d55e",
+      "342b688e3b2f30b1cf7b-aca346be96003afad65c",
+      "342b688e3b2f30b1cf7b-5fc9837d02f073dd773d",
+      "342b688e3b2f30b1cf7b-4e894520bbd087b698e3",
+      "342b688e3b2f30b1cf7b-21f395a65d4a9a226cae",
+      "342b688e3b2f30b1cf7b-85b668035f7c886516ea",
+      "342b688e3b2f30b1cf7b-e5469a8e86ca47e333f4",
+      "342b688e3b2f30b1cf7b-f62d4e419b528d3e63a5",
+      "342b688e3b2f30b1cf7b-4466c723b2cc3faa94dc",
+      "342b688e3b2f30b1cf7b-1c540c12750360f0a47d",
+      "342b688e3b2f30b1cf7b-a0640fe7bd057c863538",
+      "342b688e3b2f30b1cf7b-bc5eb4c8678d23d1a532",
+      "342b688e3b2f30b1cf7b-84e46ea2db7389da250a",
+      "342b688e3b2f30b1cf7b-1b7a581d8374452626b3",
+      "75750b97f266fe2ab697-99a1815ac71f11fcb4a4",
+      "75750b97f266fe2ab697-2a8de38227d2829a8ff3",
+      "db5307d516056a04896a-9855cc58afb90785b738",
+      "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+      "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+      "1de639fdc719e2321283-be08d9b57421c24286a4"
+    ],
+    "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+    "visualObservationIds": [
+      "V10"
+    ],
+    "visualStatus": "SCOPED_COMPARISON_RECORDED",
+    "native": {
+      "status": "NOT_RUN_NATIVE",
+      "criteria": "Establish native signed-in behavior for: Show regulatory comment and SAM / SBIR opportunity deadlines",
+      "verifiedHistoricalInterfaces": [
+        {
+          "method": "GET",
+          "route": "/api/federal-register/upcoming-deadlines"
+        },
+        {
+          "method": "GET",
+          "route": "/api/intelligence/opportunities/v2/search"
+        }
+      ],
+      "requiredEvidence": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#MCAL-010",
+      "historicalBlockerSnapshot": "Regulatory source exposes at most 50 upcoming records/30 days. Full date-range/deadline source contract needed. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+    },
+    "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for MCAL-010."
+  },
+  {
+    "audit_id": "MCAL-012",
+    "area": "Global Master calendar",
+    "criterion": "Show Government effective dates and estimated markup / floor-vote windows",
+    "scope": "IN_SCOPE",
+    "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+    "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+    "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+    "canonicalFrontendPaths": [],
+    "figmaTargets": [
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798"
+    ],
+    "boundedInteractionFacets": [
+      {
+        "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+        "claim": "Mixed Master Agenda keeps independent source permissions and failures, explicit scheduled/due occurrences and source filters. Publisher effective civil dates retain provenance and incomplete-coverage warnings; no publication-date fallback is allowed.",
+        "caseIds": [
+          "cb8fd1c7d71bf8fdcbf1-30bc7767bb92d36a04fb",
+          "cb8fd1c7d71bf8fdcbf1-ee56acfddfde29650890",
+          "cb8fd1c7d71bf8fdcbf1-339244feeb6270ac4185",
+          "cb8fd1c7d71bf8fdcbf1-b35434ef6ffded7bfd22",
+          "cb8fd1c7d71bf8fdcbf1-94918c8c7701380e662b",
+          "cb8fd1c7d71bf8fdcbf1-8dddc4ab6000e0d44eb1",
+          "cb8fd1c7d71bf8fdcbf1-5c3c0ffc2f8c41c8f44c",
+          "cb8fd1c7d71bf8fdcbf1-dca3544942bd0d41baf6",
+          "cb8fd1c7d71bf8fdcbf1-bc59657acd7ce94fb470",
+          "efc0cd4c0c27ca6acf1d-a769786459f6e99dfbd5",
+          "efc0cd4c0c27ca6acf1d-e83d51953d8939040f55",
+          "75750b97f266fe2ab697-196abffce6882ca0f9b7",
+          "75750b97f266fe2ab697-552e1803f89e9d64938b",
+          "75750b97f266fe2ab697-ec6a2d7c6e748df663b5",
+          "342b688e3b2f30b1cf7b-b2523fe0d2088110ddd4",
+          "342b688e3b2f30b1cf7b-f04979bbb55792acb100",
+          "342b688e3b2f30b1cf7b-c8668e7da94f6d00cf76",
+          "342b688e3b2f30b1cf7b-6520fca08adbbd13ded3",
+          "342b688e3b2f30b1cf7b-221d660c78e427d141d8",
+          "342b688e3b2f30b1cf7b-b1d588f51414db8b1b48",
+          "342b688e3b2f30b1cf7b-8af3b8ff1a131e21d55e",
+          "342b688e3b2f30b1cf7b-aca346be96003afad65c",
+          "342b688e3b2f30b1cf7b-5fc9837d02f073dd773d",
+          "342b688e3b2f30b1cf7b-4e894520bbd087b698e3",
+          "342b688e3b2f30b1cf7b-21f395a65d4a9a226cae",
+          "342b688e3b2f30b1cf7b-85b668035f7c886516ea",
+          "342b688e3b2f30b1cf7b-e5469a8e86ca47e333f4",
+          "342b688e3b2f30b1cf7b-f62d4e419b528d3e63a5",
+          "342b688e3b2f30b1cf7b-4466c723b2cc3faa94dc",
+          "342b688e3b2f30b1cf7b-1c540c12750360f0a47d",
+          "342b688e3b2f30b1cf7b-a0640fe7bd057c863538",
+          "342b688e3b2f30b1cf7b-bc5eb4c8678d23d1a532",
+          "342b688e3b2f30b1cf7b-84e46ea2db7389da250a",
+          "342b688e3b2f30b1cf7b-1b7a581d8374452626b3",
+          "75750b97f266fe2ab697-99a1815ac71f11fcb4a4",
+          "75750b97f266fe2ab697-2a8de38227d2829a8ff3"
+        ],
+        "remaining": "Native feed migrations/role privileges, complete source coverage and actual current evidence remain unrun. Estimated markup/floor-vote windows are unavailable; metadata is not complete legal-date coverage."
+      }
+    ],
+    "relatedExecutedCaseIds": [
+      "cb8fd1c7d71bf8fdcbf1-30bc7767bb92d36a04fb",
+      "cb8fd1c7d71bf8fdcbf1-ee56acfddfde29650890",
+      "cb8fd1c7d71bf8fdcbf1-339244feeb6270ac4185",
+      "cb8fd1c7d71bf8fdcbf1-b35434ef6ffded7bfd22",
+      "cb8fd1c7d71bf8fdcbf1-94918c8c7701380e662b",
+      "cb8fd1c7d71bf8fdcbf1-8dddc4ab6000e0d44eb1",
+      "cb8fd1c7d71bf8fdcbf1-5c3c0ffc2f8c41c8f44c",
+      "cb8fd1c7d71bf8fdcbf1-dca3544942bd0d41baf6",
+      "cb8fd1c7d71bf8fdcbf1-bc59657acd7ce94fb470",
+      "efc0cd4c0c27ca6acf1d-a769786459f6e99dfbd5",
+      "efc0cd4c0c27ca6acf1d-e83d51953d8939040f55",
+      "75750b97f266fe2ab697-196abffce6882ca0f9b7",
+      "75750b97f266fe2ab697-552e1803f89e9d64938b",
+      "75750b97f266fe2ab697-ec6a2d7c6e748df663b5",
+      "342b688e3b2f30b1cf7b-b2523fe0d2088110ddd4",
+      "342b688e3b2f30b1cf7b-f04979bbb55792acb100",
+      "342b688e3b2f30b1cf7b-c8668e7da94f6d00cf76",
+      "342b688e3b2f30b1cf7b-6520fca08adbbd13ded3",
+      "342b688e3b2f30b1cf7b-221d660c78e427d141d8",
+      "342b688e3b2f30b1cf7b-b1d588f51414db8b1b48",
+      "342b688e3b2f30b1cf7b-8af3b8ff1a131e21d55e",
+      "342b688e3b2f30b1cf7b-aca346be96003afad65c",
+      "342b688e3b2f30b1cf7b-5fc9837d02f073dd773d",
+      "342b688e3b2f30b1cf7b-4e894520bbd087b698e3",
+      "342b688e3b2f30b1cf7b-21f395a65d4a9a226cae",
+      "342b688e3b2f30b1cf7b-85b668035f7c886516ea",
+      "342b688e3b2f30b1cf7b-e5469a8e86ca47e333f4",
+      "342b688e3b2f30b1cf7b-f62d4e419b528d3e63a5",
+      "342b688e3b2f30b1cf7b-4466c723b2cc3faa94dc",
+      "342b688e3b2f30b1cf7b-1c540c12750360f0a47d",
+      "342b688e3b2f30b1cf7b-a0640fe7bd057c863538",
+      "342b688e3b2f30b1cf7b-bc5eb4c8678d23d1a532",
+      "342b688e3b2f30b1cf7b-84e46ea2db7389da250a",
+      "342b688e3b2f30b1cf7b-1b7a581d8374452626b3",
+      "75750b97f266fe2ab697-99a1815ac71f11fcb4a4",
+      "75750b97f266fe2ab697-2a8de38227d2829a8ff3"
+    ],
+    "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+    "visualObservationIds": [
+      "V10"
+    ],
+    "visualStatus": "SCOPED_COMPARISON_RECORDED",
+    "native": {
+      "status": "NOT_RUN_NATIVE",
+      "criteria": "Establish native signed-in behavior for: Show Government effective dates and estimated markup / floor-vote windows",
+      "verifiedHistoricalInterfaces": [],
+      "requiredEvidence": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#MCAL-012",
+      "historicalBlockerSnapshot": "Government owner must provide actual effective dates vs estimated windows, source/confidence/time semantics. Independent UI work continues. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+    },
+    "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for MCAL-012."
+  },
+  {
+    "audit_id": "MCAL-013",
+    "area": "Global Master calendar",
+    "criterion": "Compose the mixed Master Agenda without widening source permissions",
+    "scope": "IN_SCOPE",
+    "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+    "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+    "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+    "canonicalFrontendPaths": [
+      "apps/web/src/features/portfolio/calendar/"
+    ],
+    "figmaTargets": [
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798"
+    ],
+    "boundedInteractionFacets": [
+      {
+        "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+        "claim": "Mixed Master Agenda keeps independent source permissions and failures, explicit scheduled/due occurrences and source filters. Publisher effective civil dates retain provenance and incomplete-coverage warnings; no publication-date fallback is allowed.",
+        "caseIds": [
+          "cb8fd1c7d71bf8fdcbf1-30bc7767bb92d36a04fb",
+          "cb8fd1c7d71bf8fdcbf1-ee56acfddfde29650890",
+          "cb8fd1c7d71bf8fdcbf1-339244feeb6270ac4185",
+          "cb8fd1c7d71bf8fdcbf1-b35434ef6ffded7bfd22",
+          "cb8fd1c7d71bf8fdcbf1-94918c8c7701380e662b",
+          "cb8fd1c7d71bf8fdcbf1-8dddc4ab6000e0d44eb1",
+          "cb8fd1c7d71bf8fdcbf1-5c3c0ffc2f8c41c8f44c",
+          "cb8fd1c7d71bf8fdcbf1-dca3544942bd0d41baf6",
+          "cb8fd1c7d71bf8fdcbf1-bc59657acd7ce94fb470",
+          "efc0cd4c0c27ca6acf1d-a769786459f6e99dfbd5",
+          "efc0cd4c0c27ca6acf1d-e83d51953d8939040f55",
+          "75750b97f266fe2ab697-196abffce6882ca0f9b7",
+          "75750b97f266fe2ab697-552e1803f89e9d64938b",
+          "75750b97f266fe2ab697-ec6a2d7c6e748df663b5",
+          "342b688e3b2f30b1cf7b-b2523fe0d2088110ddd4",
+          "342b688e3b2f30b1cf7b-f04979bbb55792acb100",
+          "342b688e3b2f30b1cf7b-c8668e7da94f6d00cf76",
+          "342b688e3b2f30b1cf7b-6520fca08adbbd13ded3",
+          "342b688e3b2f30b1cf7b-221d660c78e427d141d8",
+          "342b688e3b2f30b1cf7b-b1d588f51414db8b1b48",
+          "342b688e3b2f30b1cf7b-8af3b8ff1a131e21d55e",
+          "342b688e3b2f30b1cf7b-aca346be96003afad65c",
+          "342b688e3b2f30b1cf7b-5fc9837d02f073dd773d",
+          "342b688e3b2f30b1cf7b-4e894520bbd087b698e3",
+          "342b688e3b2f30b1cf7b-21f395a65d4a9a226cae",
+          "342b688e3b2f30b1cf7b-85b668035f7c886516ea",
+          "342b688e3b2f30b1cf7b-e5469a8e86ca47e333f4",
+          "342b688e3b2f30b1cf7b-f62d4e419b528d3e63a5",
+          "342b688e3b2f30b1cf7b-4466c723b2cc3faa94dc",
+          "342b688e3b2f30b1cf7b-1c540c12750360f0a47d",
+          "342b688e3b2f30b1cf7b-a0640fe7bd057c863538",
+          "342b688e3b2f30b1cf7b-bc5eb4c8678d23d1a532",
+          "342b688e3b2f30b1cf7b-84e46ea2db7389da250a",
+          "342b688e3b2f30b1cf7b-1b7a581d8374452626b3",
+          "75750b97f266fe2ab697-99a1815ac71f11fcb4a4",
+          "75750b97f266fe2ab697-2a8de38227d2829a8ff3"
+        ],
+        "remaining": "Native feed migrations/role privileges, complete source coverage and actual current evidence remain unrun. Estimated markup/floor-vote windows are unavailable; metadata is not complete legal-date coverage."
+      }
+    ],
+    "relatedExecutedCaseIds": [
+      "cb8fd1c7d71bf8fdcbf1-30bc7767bb92d36a04fb",
+      "cb8fd1c7d71bf8fdcbf1-ee56acfddfde29650890",
+      "cb8fd1c7d71bf8fdcbf1-339244feeb6270ac4185",
+      "cb8fd1c7d71bf8fdcbf1-b35434ef6ffded7bfd22",
+      "cb8fd1c7d71bf8fdcbf1-94918c8c7701380e662b",
+      "cb8fd1c7d71bf8fdcbf1-8dddc4ab6000e0d44eb1",
+      "cb8fd1c7d71bf8fdcbf1-5c3c0ffc2f8c41c8f44c",
+      "cb8fd1c7d71bf8fdcbf1-dca3544942bd0d41baf6",
+      "cb8fd1c7d71bf8fdcbf1-bc59657acd7ce94fb470",
+      "efc0cd4c0c27ca6acf1d-a769786459f6e99dfbd5",
+      "efc0cd4c0c27ca6acf1d-e83d51953d8939040f55",
+      "75750b97f266fe2ab697-196abffce6882ca0f9b7",
+      "75750b97f266fe2ab697-552e1803f89e9d64938b",
+      "75750b97f266fe2ab697-ec6a2d7c6e748df663b5",
+      "342b688e3b2f30b1cf7b-b2523fe0d2088110ddd4",
+      "342b688e3b2f30b1cf7b-f04979bbb55792acb100",
+      "342b688e3b2f30b1cf7b-c8668e7da94f6d00cf76",
+      "342b688e3b2f30b1cf7b-6520fca08adbbd13ded3",
+      "342b688e3b2f30b1cf7b-221d660c78e427d141d8",
+      "342b688e3b2f30b1cf7b-b1d588f51414db8b1b48",
+      "342b688e3b2f30b1cf7b-8af3b8ff1a131e21d55e",
+      "342b688e3b2f30b1cf7b-aca346be96003afad65c",
+      "342b688e3b2f30b1cf7b-5fc9837d02f073dd773d",
+      "342b688e3b2f30b1cf7b-4e894520bbd087b698e3",
+      "342b688e3b2f30b1cf7b-21f395a65d4a9a226cae",
+      "342b688e3b2f30b1cf7b-85b668035f7c886516ea",
+      "342b688e3b2f30b1cf7b-e5469a8e86ca47e333f4",
+      "342b688e3b2f30b1cf7b-f62d4e419b528d3e63a5",
+      "342b688e3b2f30b1cf7b-4466c723b2cc3faa94dc",
+      "342b688e3b2f30b1cf7b-1c540c12750360f0a47d",
+      "342b688e3b2f30b1cf7b-a0640fe7bd057c863538",
+      "342b688e3b2f30b1cf7b-bc5eb4c8678d23d1a532",
+      "342b688e3b2f30b1cf7b-84e46ea2db7389da250a",
+      "342b688e3b2f30b1cf7b-1b7a581d8374452626b3",
+      "75750b97f266fe2ab697-99a1815ac71f11fcb4a4",
+      "75750b97f266fe2ab697-2a8de38227d2829a8ff3",
+      "db5307d516056a04896a-9855cc58afb90785b738",
+      "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+      "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+      "1de639fdc719e2321283-be08d9b57421c24286a4"
+    ],
+    "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+    "visualObservationIds": [
+      "V10"
+    ],
+    "visualStatus": "SCOPED_COMPARISON_RECORDED",
+    "native": {
+      "status": "NOT_RUN_NATIVE",
+      "criteria": "Establish native signed-in behavior for: Compose the mixed Master Agenda without widening source permissions",
+      "verifiedHistoricalInterfaces": [
+        {
+          "method": "GET",
+          "route": "/api/engagement/meetings"
+        },
+        {
+          "method": "GET",
+          "route": "/api/legiwatch/live-hearings/calendar"
+        },
+        {
+          "method": "GET",
+          "route": "/strategy-api/planner/tasks"
+        },
+        {
+          "method": "GET",
+          "route": "/api/federal-register/upcoming-deadlines"
+        },
+        {
+          "method": "GET",
+          "route": "/api/intelligence/opportunities/v2/search"
+        }
+      ],
+      "requiredEvidence": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#MCAL-013",
+      "historicalBlockerSnapshot": "Accessible meeting/hearing/Planner/regulatory feeds composed separately. Government and full deadline coverage remain unavailable. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+    },
+    "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for MCAL-013."
+  },
+  {
+    "audit_id": "MCAL-014",
+    "area": "Global Master calendar",
+    "criterion": "Filter Agenda source chips, search displayed events and clear filters",
+    "scope": "IN_SCOPE",
+    "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+    "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+    "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+    "canonicalFrontendPaths": [
+      "apps/web/src/features/portfolio/calendar/"
+    ],
+    "figmaTargets": [
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798"
+    ],
+    "boundedInteractionFacets": [
+      {
+        "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+        "claim": "Mixed Master Agenda keeps independent source permissions and failures, explicit scheduled/due occurrences and source filters. Publisher effective civil dates retain provenance and incomplete-coverage warnings; no publication-date fallback is allowed.",
+        "caseIds": [
+          "cb8fd1c7d71bf8fdcbf1-30bc7767bb92d36a04fb",
+          "cb8fd1c7d71bf8fdcbf1-ee56acfddfde29650890",
+          "cb8fd1c7d71bf8fdcbf1-339244feeb6270ac4185",
+          "cb8fd1c7d71bf8fdcbf1-b35434ef6ffded7bfd22",
+          "cb8fd1c7d71bf8fdcbf1-94918c8c7701380e662b",
+          "cb8fd1c7d71bf8fdcbf1-8dddc4ab6000e0d44eb1",
+          "cb8fd1c7d71bf8fdcbf1-5c3c0ffc2f8c41c8f44c",
+          "cb8fd1c7d71bf8fdcbf1-dca3544942bd0d41baf6",
+          "cb8fd1c7d71bf8fdcbf1-bc59657acd7ce94fb470",
+          "efc0cd4c0c27ca6acf1d-a769786459f6e99dfbd5",
+          "efc0cd4c0c27ca6acf1d-e83d51953d8939040f55",
+          "75750b97f266fe2ab697-196abffce6882ca0f9b7",
+          "75750b97f266fe2ab697-552e1803f89e9d64938b",
+          "75750b97f266fe2ab697-ec6a2d7c6e748df663b5",
+          "342b688e3b2f30b1cf7b-b2523fe0d2088110ddd4",
+          "342b688e3b2f30b1cf7b-f04979bbb55792acb100",
+          "342b688e3b2f30b1cf7b-c8668e7da94f6d00cf76",
+          "342b688e3b2f30b1cf7b-6520fca08adbbd13ded3",
+          "342b688e3b2f30b1cf7b-221d660c78e427d141d8",
+          "342b688e3b2f30b1cf7b-b1d588f51414db8b1b48",
+          "342b688e3b2f30b1cf7b-8af3b8ff1a131e21d55e",
+          "342b688e3b2f30b1cf7b-aca346be96003afad65c",
+          "342b688e3b2f30b1cf7b-5fc9837d02f073dd773d",
+          "342b688e3b2f30b1cf7b-4e894520bbd087b698e3",
+          "342b688e3b2f30b1cf7b-21f395a65d4a9a226cae",
+          "342b688e3b2f30b1cf7b-85b668035f7c886516ea",
+          "342b688e3b2f30b1cf7b-e5469a8e86ca47e333f4",
+          "342b688e3b2f30b1cf7b-f62d4e419b528d3e63a5",
+          "342b688e3b2f30b1cf7b-4466c723b2cc3faa94dc",
+          "342b688e3b2f30b1cf7b-1c540c12750360f0a47d",
+          "342b688e3b2f30b1cf7b-a0640fe7bd057c863538",
+          "342b688e3b2f30b1cf7b-bc5eb4c8678d23d1a532",
+          "342b688e3b2f30b1cf7b-84e46ea2db7389da250a",
+          "342b688e3b2f30b1cf7b-1b7a581d8374452626b3",
+          "75750b97f266fe2ab697-99a1815ac71f11fcb4a4",
+          "75750b97f266fe2ab697-2a8de38227d2829a8ff3"
+        ],
+        "remaining": "Native feed migrations/role privileges, complete source coverage and actual current evidence remain unrun. Estimated markup/floor-vote windows are unavailable; metadata is not complete legal-date coverage."
+      }
+    ],
+    "relatedExecutedCaseIds": [
+      "cb8fd1c7d71bf8fdcbf1-30bc7767bb92d36a04fb",
+      "cb8fd1c7d71bf8fdcbf1-ee56acfddfde29650890",
+      "cb8fd1c7d71bf8fdcbf1-339244feeb6270ac4185",
+      "cb8fd1c7d71bf8fdcbf1-b35434ef6ffded7bfd22",
+      "cb8fd1c7d71bf8fdcbf1-94918c8c7701380e662b",
+      "cb8fd1c7d71bf8fdcbf1-8dddc4ab6000e0d44eb1",
+      "cb8fd1c7d71bf8fdcbf1-5c3c0ffc2f8c41c8f44c",
+      "cb8fd1c7d71bf8fdcbf1-dca3544942bd0d41baf6",
+      "cb8fd1c7d71bf8fdcbf1-bc59657acd7ce94fb470",
+      "efc0cd4c0c27ca6acf1d-a769786459f6e99dfbd5",
+      "efc0cd4c0c27ca6acf1d-e83d51953d8939040f55",
+      "75750b97f266fe2ab697-196abffce6882ca0f9b7",
+      "75750b97f266fe2ab697-552e1803f89e9d64938b",
+      "75750b97f266fe2ab697-ec6a2d7c6e748df663b5",
+      "342b688e3b2f30b1cf7b-b2523fe0d2088110ddd4",
+      "342b688e3b2f30b1cf7b-f04979bbb55792acb100",
+      "342b688e3b2f30b1cf7b-c8668e7da94f6d00cf76",
+      "342b688e3b2f30b1cf7b-6520fca08adbbd13ded3",
+      "342b688e3b2f30b1cf7b-221d660c78e427d141d8",
+      "342b688e3b2f30b1cf7b-b1d588f51414db8b1b48",
+      "342b688e3b2f30b1cf7b-8af3b8ff1a131e21d55e",
+      "342b688e3b2f30b1cf7b-aca346be96003afad65c",
+      "342b688e3b2f30b1cf7b-5fc9837d02f073dd773d",
+      "342b688e3b2f30b1cf7b-4e894520bbd087b698e3",
+      "342b688e3b2f30b1cf7b-21f395a65d4a9a226cae",
+      "342b688e3b2f30b1cf7b-85b668035f7c886516ea",
+      "342b688e3b2f30b1cf7b-e5469a8e86ca47e333f4",
+      "342b688e3b2f30b1cf7b-f62d4e419b528d3e63a5",
+      "342b688e3b2f30b1cf7b-4466c723b2cc3faa94dc",
+      "342b688e3b2f30b1cf7b-1c540c12750360f0a47d",
+      "342b688e3b2f30b1cf7b-a0640fe7bd057c863538",
+      "342b688e3b2f30b1cf7b-bc5eb4c8678d23d1a532",
+      "342b688e3b2f30b1cf7b-84e46ea2db7389da250a",
+      "342b688e3b2f30b1cf7b-1b7a581d8374452626b3",
+      "75750b97f266fe2ab697-99a1815ac71f11fcb4a4",
+      "75750b97f266fe2ab697-2a8de38227d2829a8ff3",
+      "db5307d516056a04896a-9855cc58afb90785b738",
+      "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+      "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+      "1de639fdc719e2321283-be08d9b57421c24286a4"
+    ],
+    "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+    "visualObservationIds": [
+      "V10"
+    ],
+    "visualStatus": "SCOPED_COMPARISON_RECORDED",
+    "native": {
+      "status": "NOT_RUN_NATIVE",
+      "criteria": "Establish native signed-in behavior for: Filter Agenda source chips, search displayed events and clear filters",
+      "verifiedHistoricalInterfaces": [],
+      "requiredEvidence": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#MCAL-014",
+      "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+    },
+    "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for MCAL-014."
+  },
+  {
+    "audit_id": "MCAL-015",
+    "area": "Global Master calendar",
+    "criterion": "Open global Master Calendar from the top navigation",
+    "scope": "IN_SCOPE",
+    "historicalDisposition": "OPEN_FINAL_ACCEPTANCE",
+    "fullRowAcceptance": "OPEN_FINAL_ACCEPTANCE",
+    "currentSource": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+    "canonicalFrontendPaths": [
+      "apps/web/src/features/portfolio/calendar/"
+    ],
+    "figmaTargets": [
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-47345",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-63168",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=460-90798",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64632",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=411-64763",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148155",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147591",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-147875",
+      "https://www.figma.com/design/Zc2dEN5aLU47dVdsewDmiJ/Capiro-3.0-UI-Redesign?node-id=787-148562"
+    ],
+    "boundedInteractionFacets": [
+      {
+        "status": "PASS_BOUNDED_SYNTHETIC_ASSERTIONS",
+        "claim": "Mixed Master Agenda keeps independent source permissions and failures, explicit scheduled/due occurrences and source filters. Publisher effective civil dates retain provenance and incomplete-coverage warnings; no publication-date fallback is allowed.",
+        "caseIds": [
+          "cb8fd1c7d71bf8fdcbf1-30bc7767bb92d36a04fb",
+          "cb8fd1c7d71bf8fdcbf1-ee56acfddfde29650890",
+          "cb8fd1c7d71bf8fdcbf1-339244feeb6270ac4185",
+          "cb8fd1c7d71bf8fdcbf1-b35434ef6ffded7bfd22",
+          "cb8fd1c7d71bf8fdcbf1-94918c8c7701380e662b",
+          "cb8fd1c7d71bf8fdcbf1-8dddc4ab6000e0d44eb1",
+          "cb8fd1c7d71bf8fdcbf1-5c3c0ffc2f8c41c8f44c",
+          "cb8fd1c7d71bf8fdcbf1-dca3544942bd0d41baf6",
+          "cb8fd1c7d71bf8fdcbf1-bc59657acd7ce94fb470",
+          "efc0cd4c0c27ca6acf1d-a769786459f6e99dfbd5",
+          "efc0cd4c0c27ca6acf1d-e83d51953d8939040f55",
+          "75750b97f266fe2ab697-196abffce6882ca0f9b7",
+          "75750b97f266fe2ab697-552e1803f89e9d64938b",
+          "75750b97f266fe2ab697-ec6a2d7c6e748df663b5",
+          "342b688e3b2f30b1cf7b-b2523fe0d2088110ddd4",
+          "342b688e3b2f30b1cf7b-f04979bbb55792acb100",
+          "342b688e3b2f30b1cf7b-c8668e7da94f6d00cf76",
+          "342b688e3b2f30b1cf7b-6520fca08adbbd13ded3",
+          "342b688e3b2f30b1cf7b-221d660c78e427d141d8",
+          "342b688e3b2f30b1cf7b-b1d588f51414db8b1b48",
+          "342b688e3b2f30b1cf7b-8af3b8ff1a131e21d55e",
+          "342b688e3b2f30b1cf7b-aca346be96003afad65c",
+          "342b688e3b2f30b1cf7b-5fc9837d02f073dd773d",
+          "342b688e3b2f30b1cf7b-4e894520bbd087b698e3",
+          "342b688e3b2f30b1cf7b-21f395a65d4a9a226cae",
+          "342b688e3b2f30b1cf7b-85b668035f7c886516ea",
+          "342b688e3b2f30b1cf7b-e5469a8e86ca47e333f4",
+          "342b688e3b2f30b1cf7b-f62d4e419b528d3e63a5",
+          "342b688e3b2f30b1cf7b-4466c723b2cc3faa94dc",
+          "342b688e3b2f30b1cf7b-1c540c12750360f0a47d",
+          "342b688e3b2f30b1cf7b-a0640fe7bd057c863538",
+          "342b688e3b2f30b1cf7b-bc5eb4c8678d23d1a532",
+          "342b688e3b2f30b1cf7b-84e46ea2db7389da250a",
+          "342b688e3b2f30b1cf7b-1b7a581d8374452626b3",
+          "75750b97f266fe2ab697-99a1815ac71f11fcb4a4",
+          "75750b97f266fe2ab697-2a8de38227d2829a8ff3"
+        ],
+        "remaining": "Native feed migrations/role privileges, complete source coverage and actual current evidence remain unrun. Estimated markup/floor-vote windows are unavailable; metadata is not complete legal-date coverage."
+      }
+    ],
+    "relatedExecutedCaseIds": [
+      "cb8fd1c7d71bf8fdcbf1-30bc7767bb92d36a04fb",
+      "cb8fd1c7d71bf8fdcbf1-ee56acfddfde29650890",
+      "cb8fd1c7d71bf8fdcbf1-339244feeb6270ac4185",
+      "cb8fd1c7d71bf8fdcbf1-b35434ef6ffded7bfd22",
+      "cb8fd1c7d71bf8fdcbf1-94918c8c7701380e662b",
+      "cb8fd1c7d71bf8fdcbf1-8dddc4ab6000e0d44eb1",
+      "cb8fd1c7d71bf8fdcbf1-5c3c0ffc2f8c41c8f44c",
+      "cb8fd1c7d71bf8fdcbf1-dca3544942bd0d41baf6",
+      "cb8fd1c7d71bf8fdcbf1-bc59657acd7ce94fb470",
+      "efc0cd4c0c27ca6acf1d-a769786459f6e99dfbd5",
+      "efc0cd4c0c27ca6acf1d-e83d51953d8939040f55",
+      "75750b97f266fe2ab697-196abffce6882ca0f9b7",
+      "75750b97f266fe2ab697-552e1803f89e9d64938b",
+      "75750b97f266fe2ab697-ec6a2d7c6e748df663b5",
+      "342b688e3b2f30b1cf7b-b2523fe0d2088110ddd4",
+      "342b688e3b2f30b1cf7b-f04979bbb55792acb100",
+      "342b688e3b2f30b1cf7b-c8668e7da94f6d00cf76",
+      "342b688e3b2f30b1cf7b-6520fca08adbbd13ded3",
+      "342b688e3b2f30b1cf7b-221d660c78e427d141d8",
+      "342b688e3b2f30b1cf7b-b1d588f51414db8b1b48",
+      "342b688e3b2f30b1cf7b-8af3b8ff1a131e21d55e",
+      "342b688e3b2f30b1cf7b-aca346be96003afad65c",
+      "342b688e3b2f30b1cf7b-5fc9837d02f073dd773d",
+      "342b688e3b2f30b1cf7b-4e894520bbd087b698e3",
+      "342b688e3b2f30b1cf7b-21f395a65d4a9a226cae",
+      "342b688e3b2f30b1cf7b-85b668035f7c886516ea",
+      "342b688e3b2f30b1cf7b-e5469a8e86ca47e333f4",
+      "342b688e3b2f30b1cf7b-f62d4e419b528d3e63a5",
+      "342b688e3b2f30b1cf7b-4466c723b2cc3faa94dc",
+      "342b688e3b2f30b1cf7b-1c540c12750360f0a47d",
+      "342b688e3b2f30b1cf7b-a0640fe7bd057c863538",
+      "342b688e3b2f30b1cf7b-bc5eb4c8678d23d1a532",
+      "342b688e3b2f30b1cf7b-84e46ea2db7389da250a",
+      "342b688e3b2f30b1cf7b-1b7a581d8374452626b3",
+      "75750b97f266fe2ab697-99a1815ac71f11fcb4a4",
+      "75750b97f266fe2ab697-2a8de38227d2829a8ff3",
+      "db5307d516056a04896a-9855cc58afb90785b738",
+      "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+      "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+      "1de639fdc719e2321283-be08d9b57421c24286a4"
+    ],
+    "relatedEvidenceMeaning": "Case links preserve traceability, not proof of every phrase in this row. Only explicitly described bounded facets are assessed. Historical blocker text is retained as provenance and may be superseded by the bounded current facet.",
+    "visualObservationIds": [
+      "V10"
+    ],
+    "visualStatus": "SCOPED_COMPARISON_RECORDED",
+    "native": {
+      "status": "NOT_RUN_NATIVE",
+      "criteria": "Establish native signed-in behavior for: Open global Master Calendar from the top navigation",
+      "verifiedHistoricalInterfaces": [],
+      "requiredEvidence": [
+        "Current user, org and exact resource authorization on the native owner; denial/revocation and replacement scope.",
+        "Real owner response semantics and source completeness for this row; synthetic fixture values are not accepted records."
+      ],
+      "historicalBlockerReference": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json#MCAL-015",
+      "historicalBlockerSnapshot": "Implemented local interaction/adapter; remaining audit details and live behavior require acceptance. Signed-in isolated browser acceptance remains open; see matching Clerk/backend environment dependency."
+    },
+    "nextAcceptanceStep": "Review the linked bounded findings, complete each remaining native/visual criterion, and record row-specific acceptance for MCAL-015."
+  }
+]

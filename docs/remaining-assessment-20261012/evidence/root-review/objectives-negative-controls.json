@@ -1,0 +1,124 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-acceptance-assessment/node_modules/@playwright/test/cli.js",
+      "test",
+      "-c",
+      "/tmp/capiro-remaining-assessment-20261012/objectives_work_intel/review.playwright.ts",
+      "--grep",
+      "denied stale",
+      "--reporter=json",
+      "--output=/tmp/capiro-remaining-assessment-20261012/root-review/objectives-artifacts"
+    ],
+    "configFile": "/tmp/capiro-remaining-assessment-20261012/objectives_work_intel/review.playwright.ts",
+    "rootDir": "/tmp/capiro-remaining-assessment-20261012/objectives_work_intel",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-remaining-assessment-20261012/root-review/objectives-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-remaining-assessment-20261012/objectives_work_intel",
+        "testIgnore": [],
+        "testMatch": [
+          "review.spec.ts"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "review.spec.ts",
+      "file": "review.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "objective current list after denied stale remount",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3942,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T14:25:45.145Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "objective-denied-state",
+                      "contentType": "application/json",
+                      "body": "eyJyZWFkcyI6MiwiYm9keSI6IlNraXAgdG8gY29udGVudFxuVFxuXG5QT1JURk9MSU9cblxuT3ZlcnZpZXdcbkNsaWVudHNcblByb3NwZWN0c1xuXG5URVNUIEFFUk9TUEFDRVxuXG5PdmVydmlld1xuT2JqZWN0aXZlc1xuQ2FsZW5kYXJcblJlbGF0aW9uc2hpcHNcbldvcmtcbkNhcGFiaWxpdGllc1xuQmlsbCBUcmFja2VyXG5PcHBvcnR1bml0aWVzXG5GaWxlc1xuU2V0dGluZ3NcblBvcnRmb2xpb1xuL1xuVGVzdCBBZXJvc3BhY2Vcbi9cbk9iamVjdGl2ZXNcblF1aWNrIGFkZFxuTWVyaSBhY3Rpb25zXG5UQVxuVGVzdCBBZXJvc3BhY2VcblxuQWVyb3NwYWNlXG5cbmFjdGl2ZSBjbGllbnRcblxuT1VUQ09NRVMgQU5EIElOU1RJVFVUSU9OQUwgTUVNT1JZXG5cbk9iamVjdGl2ZXNcbk5ldyBvYmplY3RpdmVcbkFkdm9jYWN5IGhpc3Rvcnlcbk5ldyBtYXR0ZXJcblxuQWR2b2NhY3kgcmVjb3JkcyBhbmQgbGlua2VkIGV2ZW50cyBmb3IgdGhpcyBjbGllbnQuXG5cblRpbWVsaW5lXG5NYXR0ZXJzXG5TZWFyY2ggYWR2b2NhY3kgaGlzdG9yeVxuTWF0dGVyIHN0YXR1c1xuQWxsIHN0YXR1c2VzXG5wbGFubmluZ1xuYWN0aXZlXG5tb25pdG9yaW5nXG5vdXRjb21lIG9ic2VydmVkXG5zdWNjZXNzZnVsXG5wYXJ0aWFsbHkgc3VjY2Vzc2Z1bFxudW5zdWNjZXNzZnVsXG53aXRoZHJhd25cbmFyY2hpdmVkXG5cbjAgbG9hZGVkIGV2ZW50cyDCtyBMYXRlc3QgNTAwIGF0IG1vc3Q7IG9sZGVyIGhpc3RvcnkgbWF5IGJlIG91dHNpZGUgdGhpcyB2aWV3LlxuXG5ObyBtYXRjaGluZyBldmVudHMgaW4gdGhlIGxvYWRlZCBoaXN0b3J5LlxuXG5VbmFzc2lnbmVkIHJlY29yZHNcbkN1cnJlbnQgb2JqZWN0aXZlc1xuQWxsIHN0YXR1c2VzXG5EcmFmdFxuSW4gcmV2aWV3XG5SZWFkeVxuXG5Zb3UgZG8gbm90IGhhdmUgcGVybWlzc2lvbiBmb3IgdGhpcyBvcGVyYXRpb24uXG5cblJldHJ5XG5EcmFmdFxuVGVzdCBvdXRjb21lXG5cblRlc3QgcHJvYmxlbVxuXG5NSU5JTVVNIFdJTiBUZXN0IG1pbmltdW0gd2luXG5cblVuYXNzaWduZWRcbjQvNCByZXF1aXJlZCBmaWVsZHNcbk9wZW4gb2JqZWN0aXZlXG5FZGl0IG9iamVjdGl2ZVxuXG5EZWZpbmUgdGhlIG91dGNvbWUgYW5kIHRoZSBnb3Zlcm5tZW50IGFjdGlvbiB0aGF0IHdvdWxkIG1ha2UgYSBtZWFuaW5nZnVsIHdpbi5cblxuRHJhZnRcbkZvdXIgcmVxdWlyZWQgZmllbGRzIGJlZm9yZSByZXZpZXcgb3IgcmVhZHkuXG5PYmplY3RpdmUgZGV0YWlsc1xuT3V0Y29tZVxuV2hhdCBzaG91bGQgYmUgZGlmZmVyZW50P1xuR292ZXJubWVudCBwcm9ibGVtXG5XaGF0IG11c3QgZ292ZXJubWVudCBzb2x2ZT9cbkFzayB0eXBlXG5DaG9vc2UgYW4gYXNrIHR5cGVcbkZ1bmRpbmdcblBvbGljeSBvciBhdXRob3JpdHlcbkJvdGhcblByb3RlY3QgZXhpc3RpbmcgZnVuZGluZ1xuTm90IHN1cmUsIGxldCBNZXJpIHByb3Bvc2Vcbk1pbmltdW0gd2luXG5XaGF0IGlzIHRoZSBzbWFsbGVzdCByZXN1bHQgdGhhdCBtYXR0ZXJzP1xuTGltaXRzXG5PcHRpb25hbCBib3VuZGFyaWVzIGFuZCBjb25zdHJhaW50c1xuUmVhZGluZXNzXG5pXG5cbjQgb2YgNCByZXF1aXJlZCBmaWVsZHMgY29tcGxldGUuIFJlYWR5IGZvciByZXZpZXcgb3IgY29uZmlybWF0aW9uLlxuXG7inJNcbk91dGNvbWVcbkRvbmVcbuKck1xuR292ZXJubWVudCBwcm9ibGVtXG5Eb25lXG7inJNcblR5cGUgb2YgYXNrXG5Eb25lXG7inJNcbk1pbmltdW0gd2luXG5Eb25lXG5TYXZlIGRyYWZ0XG5SZXF1ZXN0IHJldmlld1xuQ29uZmlybSByZWFkeVxuRXhpc3RpbmcgT3V0cmVhY2ggc2Vzc2lvblxuXG5PcGVuIGEgY3VycmVudGx5IGF1dGhvcml6ZWQgc2Vzc2lvbiBmb3Igc2F2ZWQgT2JqZWN0aXZlIHZlcnNpb24gMS4gVGhpcyBkb2VzIG5vdCBjcmVhdGUgYSBzZXNzaW9uIG9yIHNhdmUgYW4gYXNzb2NpYXRpb24uXG5cbkNob29zZSBleGlzdGluZyBPdXRyZWFjaCBzZXNzaW9uXG5DcmVhdGlvbiBhbmQgZHVyYWJsZSBhc3NvY2lhdGlvbnMgcmVtYWluIHVuYXZhaWxhYmxlLlxuRXhpc3RpbmcgU3RyYXRlZ3ksIHRhc2sgb3Igc2F2ZWQgZG9jdW1lbnRcbkNob29zZSBleGlzdGluZyByZXNvdXJjZXNcbk9ubHkgZXhpc3RpbmcgYXV0aG9yaXplZCByZXNvdXJjZXMgY2FuIGJlIG9wZW5lZC4gQ3JlYXRpb24gYW5kIGR1cmFibGUgYXNzb2NpYXRpb25zIHJlbWFpbiB1bmF2YWlsYWJsZS4ifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "12f883ce49bb8436c3d7-67922d33410c58e5d23b",
+          "file": "review.spec.ts",
+          "line": 35,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T14:25:44.629Z",
+    "duration": 4807.942,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

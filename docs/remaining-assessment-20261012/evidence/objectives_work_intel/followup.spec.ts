@@ -1,0 +1,41 @@
+import {test,expect} from '/workspace/capiro-acceptance-assessment/node_modules/@playwright/test/index.mjs';
+import {installFixtures,json,clientId,capability} from '/workspace/capiro-acceptance-assessment/apps/web/tests/browser/fixtures';
+import {installCapabilityPresentation} from '/workspace/capiro-acceptance-assessment/apps/web/tests/browser/capability-presentation-fixtures';
+import {installRegistrationBoundary} from '/workspace/capiro-acceptance-assessment/apps/web/tests/browser/capability-registration-fixtures';
+import {installAdvocacyHistory} from '/workspace/capiro-acceptance-assessment/apps/web/tests/browser/advocacy-history-fixtures';
+import {advocacyMatter} from '/workspace/capiro-acceptance-assessment/apps/web/tests/advocacy-history-fixtures';
+test('mobile capability list remains tall desktop cards and registrations lack divided rows',async({page},info)=>{
+ await installCapabilityPresentation(page);
+ await page.route(`**/core/clients/${clientId}/capabilities`,route=>json(route,[1,2,3,4].map((n)=>({...capability,id:`40000000-0000-4000-8000-00000000000${n}`,name:`Synthetic capability ${n}`}))));
+ await page.setViewportSize({width:390,height:844});await page.goto(`/portfolio/${clientId}/capabilities`);
+ const card=page.getByRole('button',{name:/Synthetic capability 1/});await expect(card).toBeVisible();
+ const bounds=await card.boundingBox();expect(bounds!.height).toBeGreaterThan(150);
+ await page.screenshot({path:info.outputPath('capabilities-mobile-list.png'),fullPage:true});
+ await info.attach('capability-mobile-geometry',{body:JSON.stringify(bounds),contentType:'application/json'});
+ await installRegistrationBoundary(page);await page.setViewportSize({width:1440,height:1040});await page.goto(`/portfolio/${clientId}/capabilities`);
+ await page.getByRole('button',{name:'Registrations & codes',exact:true}).click();const dialog=page.getByRole('dialog',{name:'Registrations & codes',exact:true});
+ await expect(dialog.getByText('AAAABBBB1234',{exact:true})).toBeVisible();
+ const rows=await dialog.locator('dl > div').evaluateAll(els=>els.map(el=>({height:el.getBoundingClientRect().height,padding:getComputedStyle(el).padding,borderBottom:getComputedStyle(el).borderBottomWidth})));
+ expect(rows[0].borderBottom).toBe('0px');expect(rows[0].height).toBeLessThan(25);
+ await info.attach('registration-row-geometry',{body:JSON.stringify({dialog:await dialog.boundingBox(),rows}),contentType:'application/json'});
+ await page.screenshot({path:info.outputPath('registrations-composed.png'),fullPage:true});
+});
+test('remaining matter details render actual linked records',async({page},info)=>{
+ await installAdvocacyHistory(page);await page.goto(`/portfolio/${clientId}/objectives?matter=${advocacyMatter.id}`);
+ const dialog=page.getByRole('dialog',{name:advocacyMatter.title,exact:true});await expect(dialog).toBeVisible();
+ await page.screenshot({path:info.outputPath('matter-details.png'),fullPage:true});
+ await info.attach('matter-detail-text',{body:await dialog.innerText(),contentType:'text/plain'});
+});
+test('remaining bill board search and latest update surfaces',async({page},info)=>{
+ await installFixtures(page);
+ const bill={billId:'hr-4455-119',displayNum:'H.R. 4455',title:'Synthetic National Defense Act',stage:'committee',passageProbability:.62,matchedTags:['counter-uas'],changeChip:{label:'Material change',tone:'notable'},terminalRisk:false,unread:false,hearingCount:0,lastHearingSessionId:null,canonicalStatus:'Referred to committee',latestActionText:'Synthetic committee referral',latestActionDate:'2026-09-29',trackedAt:'2026-08-03T12:00:00Z',note:'Synthetic note'};
+ await page.route(`**/intelligence/clients/${clientId}/tracker/board?**`,route=>json(route,{columns:[{id:'committee',label:'Committee',cards:[bill]}],total:1,nextCursor:null,hasMore:false,withheld:0}));
+ await page.route(`**/intelligence/clients/${clientId}/bills/${bill.billId}/hearings`,route=>json(route,{count:0,hearings:[]}));
+ await page.route('**/legiwatch/bills/corpus-metadata',route=>json(route,{jurisdictions:[{key:'US',count:1},{key:'TX',count:1}]}));
+ await page.route(`**/intelligence/clients/${clientId}/tracker/bill-search?**`,route=>json(route,[{billId:bill.billId,displayNum:bill.displayNum,title:bill.title,stage:'committee',probability:.62,jurisdiction:'US'}]));
+ await page.goto(`/portfolio/${clientId}/bills?view=board`);await expect(page.getByRole('button',{name:/H.R. 4455 62% estimate/})).toBeVisible();
+ await page.screenshot({path:info.outputPath('bill-board.png'),fullPage:true});
+ await page.getByRole('button',{name:/H.R. 4455 62% estimate/}).click();await page.screenshot({path:info.outputPath('bill-latest-update.png'),fullPage:true});await page.keyboard.press('Escape');
+ await page.getByRole('button',{name:'Track bill',exact:true}).click();await page.getByLabel('Bill number or title').fill('H.R.');await page.getByRole('button',{name:'Search',exact:true}).click();
+ await expect(page.getByRole('radio',{name:/H.R. 4455/})).toBeVisible();await page.screenshot({path:info.outputPath('bill-search.png'),fullPage:true});
+});

@@ -1,0 +1,36 @@
+import {test,expect} from '@playwright/test';
+import {onlyLocalRequests,operationFixtures} from '/workspace/capiro-acceptance-assessment/apps/web/test/browser/fixtures';
+import {moduleRouteFixtures} from '/workspace/capiro-acceptance-assessment/apps/web/test/browser/module-route-fixtures';
+import {draft,prospectId,otherId} from '/workspace/capiro-acceptance-assessment/apps/web/tests/prospect-resources-fixtures';
+test('prospect manual draft allows later typing during save and silently discards it on success',async({page},info)=>{
+ await onlyLocalRequests(page);
+ const version={id:otherId,draftId:draft.id,label:'Manual save',authorId:'test-user',authorKind:'human',createdAt:'2026-10-12T12:01:00Z'};
+ let current=structuredClone(draft);
+ let release!:()=>void;
+ const gate=new Promise<void>(resolve=>release=resolve);
+ const writes:unknown[]=[];
+ await operationFixtures(page,{...moduleRouteFixtures,'workspace.prospect.drafts':{drafts:[]},'workspace.draft':draft,'workspace.draft.versions':[version]});
+ await page.route('**/api/capiro/workspace.draft?*',route=>route.fulfill({json:current}));
+ await page.route('**/api/capiro/workspace.draft.update',async route=>{
+  const {body}=route.request().postDataJSON();writes.push(body);
+  await gate;
+  current={...current,docTitle:body.docTitle,config:body.config,updatedAt:'2026-10-12T12:01:00Z'};
+  await route.fulfill({json:current});
+ });
+ await page.route('**/api/capiro/workspace.draft.snapshot',route=>route.fulfill({json:version}));
+ await page.goto(`/modules/workspace?prospectId=${prospectId}&draftId=${draft.id}`);
+ const body=page.getByLabel('Body content');
+ await body.fill('First submitted text');
+ await page.getByRole('button',{name:'Save draft',exact:true}).click();
+ await expect.poll(()=>writes.length).toBe(1);
+ await expect(body).toBeEditable();
+ await body.fill('Later typed text that must survive');
+ await page.screenshot({path:info.outputPath('typing-during-pending-save.png')});
+ release();
+ await expect(page.getByRole('button',{name:'Save draft',exact:true})).toBeEnabled();
+ await expect(body).toHaveValue('First submitted text');
+ await page.screenshot({path:info.outputPath('later-edits-lost-after-save.png')});
+ expect(writes).toHaveLength(1);
+ await page.setViewportSize({width:390,height:844});
+ await page.screenshot({path:info.outputPath('manual-editor-390.png')});
+});

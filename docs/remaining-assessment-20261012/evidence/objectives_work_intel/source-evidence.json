@@ -1,0 +1,356 @@
+{
+  "sourceCommit": "4a1614886fd98bb42d529f1ef59b3d01d7ff9173",
+  "sourceTree": "46cebca97ccfc1facc1c1a939beb6f4d7730685b",
+  "files": [
+    {
+      "path": "apps/web/src/features/portfolio/advocacy/AdvocacyBrowser.tsx",
+      "sha256": "550cded9457503319dd42dcbd74d2f58b85627fa7365c9070a92a03a69d83841",
+      "gitBlob": "d2b83125d438dcadd6cb928aab856f974b460b9d",
+      "frozenSourceBlob": "d2b83125d438dcadd6cb928aab856f974b460b9d",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/advocacy/AdvocacyTimeline.tsx",
+      "sha256": "e36c7a7835188c233c8097fd654c99aa6e63e9c32c7d3de6845500661e2efb87",
+      "gitBlob": "80d8af3a4211c5f5d3cbf65e90cd36fdce72bac1",
+      "frozenSourceBlob": "80d8af3a4211c5f5d3cbf65e90cd36fdce72bac1",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/advocacy/CorrectionDialog.tsx",
+      "sha256": "aed821a2c4ea8406683c71c4d4153fbedf09960605ea34fa73382206880e0d5d",
+      "gitBlob": "16f72997534b76b56da200db9e276d34d28e8e0b",
+      "frozenSourceBlob": "16f72997534b76b56da200db9e276d34d28e8e0b",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/advocacy/EditMatterDialog.tsx",
+      "sha256": "b23fc25566cc8cc5c5cf110351e4bb200198850780fa4065db6df3e9868da74e",
+      "gitBlob": "86076740524a0a4ad7e1034b37e78a832f5077c3",
+      "frozenSourceBlob": "86076740524a0a4ad7e1034b37e78a832f5077c3",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/advocacy/MatterDetail.tsx",
+      "sha256": "67a1705cc1e127b0d3b0f2eb5c285f0217f43ca41a2ad7177fba1ae20f52b299",
+      "gitBlob": "c1bcc7c4d0a6edcce2e4ac1107c41907556fb959",
+      "frozenSourceBlob": "c1bcc7c4d0a6edcce2e4ac1107c41907556fb959",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/advocacy/MatterEditor.tsx",
+      "sha256": "4923827109f433296703408459646f13776cf947f40793285af5a62543400c85",
+      "gitBlob": "79cdeff77cefcd062b521aadff6150a1b4fa469f",
+      "frozenSourceBlob": "79cdeff77cefcd062b521aadff6150a1b4fa469f",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/advocacy/RecordCard.tsx",
+      "sha256": "939a60fb942cb3d45ba1af2d316a38cb74e85aaf363bf1ee34ddad407758e500",
+      "gitBlob": "0741f6faf4c430b21a11aca35ec4c2b13cb9a6c0",
+      "frozenSourceBlob": "0741f6faf4c430b21a11aca35ec4c2b13cb9a6c0",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/advocacy/contracts.ts",
+      "sha256": "8cc147b6c719ddf7e56a23bbc1e84eac2dc5451cc244eaf9c9e0384a70c93dd5",
+      "gitBlob": "87f52b63242228b5a9883c75224b4d3db508b271",
+      "frozenSourceBlob": "87f52b63242228b5a9883c75224b4d3db508b271",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/advocacy/correction.ts",
+      "sha256": "9414961279d05f701df5ba60d60cdab38fb8ff9bca87a49a626a59348d3317a4",
+      "gitBlob": "d24b729a48f9efd6df1c6700600ca0d036a86d35",
+      "frozenSourceBlob": "d24b729a48f9efd6df1c6700600ca0d036a86d35",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/advocacy/history-model.ts",
+      "sha256": "eaff78382dcd61557d65c34f0d00cc61ed66df8ca5141e7e0b8e5a495bff7224",
+      "gitBlob": "b9f180ee01d8e0ea82058a954e25ac2710e7fc89",
+      "frozenSourceBlob": "b9f180ee01d8e0ea82058a954e25ac2710e7fc89",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/AlertPreferencesDialog.tsx",
+      "sha256": "5317212fcb6bf6e430c124f2c331cd273331ccb3bc6f9c2a4f0e437f62706fc7",
+      "gitBlob": "5ea9c943e1292ad3ad3878e1f96a6a1b175d5ba3",
+      "frozenSourceBlob": "5ea9c943e1292ad3ad3878e1f96a6a1b175d5ba3",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/BillDrawer.tsx",
+      "sha256": "b167054f7cfaf7a034edfdb9bdcc21f687631c8f3560b1d98a8656ee31006d22",
+      "gitBlob": "49f08fe17e1db99444248d7f580d8dc78e24e16c",
+      "frozenSourceBlob": "49f08fe17e1db99444248d7f580d8dc78e24e16c",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/BillHearings.tsx",
+      "sha256": "3815302ab3cc75486dee7bf34d3d8638236ef74393920c38aec26f0a8220adaa",
+      "gitBlob": "3ac1abbe03ffcae15144a9bce4852c044ca7f501",
+      "frozenSourceBlob": "3ac1abbe03ffcae15144a9bce4852c044ca7f501",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/BillResults.tsx",
+      "sha256": "9f1aa845a705962be859794f76fde1ca767beb538305a94b0316dfa8962203c4",
+      "gitBlob": "c99b099fcde38c52020b7361d533bea44896b956",
+      "frozenSourceBlob": "c99b099fcde38c52020b7361d533bea44896b956",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/BillTrackerPage.tsx",
+      "sha256": "f05666b22480a0ebfacadd304332982429816affcc576a4df74eab89b2641897",
+      "gitBlob": "4afb06f9da0551a1d940f97be7842c752fec6def",
+      "frozenSourceBlob": "4afb06f9da0551a1d940f97be7842c752fec6def",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/TrackBillDialog.tsx",
+      "sha256": "d7f9f5e01296986bc266c6c4821b4b7561ccea0db5ea8e87c664ed4efa662935",
+      "gitBlob": "4683844ab1a035ef6952ea95907c9f20088e7b1a",
+      "frozenSourceBlob": "4683844ab1a035ef6952ea95907c9f20088e7b1a",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/WatchlistDialog.tsx",
+      "sha256": "b809b603e2ab24978215568ce850d0b5f4d10354a349ab7234c649a6459be826",
+      "gitBlob": "937085220a7e1f1659d21c3ceabbdabee8d7ee82",
+      "frozenSourceBlob": "937085220a7e1f1659d21c3ceabbdabee8d7ee82",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/api.ts",
+      "sha256": "4d99ab96bd14c833932bf58a4e701df5d8b581ed5d2714d677d755407e51e2ec",
+      "gitBlob": "b06caf617be9ead9ddbc38ae21698f8f17a76fc1",
+      "frozenSourceBlob": "b06caf617be9ead9ddbc38ae21698f8f17a76fc1",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/current-data.ts",
+      "sha256": "ef4756b671bad754b15ecfbb4dde7d111691db22318836c2b434d50683702475",
+      "gitBlob": "addcf2e237dc415db6540ac5bde03339213bd5e2",
+      "frozenSourceBlob": "addcf2e237dc415db6540ac5bde03339213bd5e2",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/hearings.ts",
+      "sha256": "053733dca2dfad06d015341113efe053d21831481f9de1d04d2877491db6d073",
+      "gitBlob": "0b0579ec4bccf6efec6b19a8cac2783ecf67690b",
+      "frozenSourceBlob": "0b0579ec4bccf6efec6b19a8cac2783ecf67690b",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
+      "sha256": "5c60bc71f4c4c30f565687a6d1de88f5a02d04bde4839b3d6a871943c14efe19",
+      "gitBlob": "3544baf1fe219f38d9e26c376e25686a9f548dff",
+      "frozenSourceBlob": "3544baf1fe219f38d9e26c376e25686a9f548dff",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx",
+      "sha256": "aa94f4613726140f25b9977666fde8a97af221ae0ec57cc2691decac881c7ad2",
+      "gitBlob": "d3f53c54006e1a45c9d8af8afea8abc8e9508eb2",
+      "frozenSourceBlob": "d3f53c54006e1a45c9d8af8afea8abc8e9508eb2",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/CapabilityFit.tsx",
+      "sha256": "1bd9e6f698d789cc26a29a6fba7547419c78dbb096ce03f1b6253892cb7c9ac2",
+      "gitBlob": "8b90b4d3ee1e97bd577b08e04db816794ed3440e",
+      "frozenSourceBlob": "8b90b4d3ee1e97bd577b08e04db816794ed3440e",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/CapabilityForm.tsx",
+      "sha256": "def7df57f8fabe22109634cd369f8e2eccf2bd23d0c700c8cfed39e0bb2c0e9f",
+      "gitBlob": "e315764ddc711de839812771265e1e2ee277193f",
+      "frozenSourceBlob": "e315764ddc711de839812771265e1e2ee277193f",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
+      "sha256": "3f09b43e9912ab78a7a249ad4cf13505ef6491d2437d3c5e6db016f0ff9bb1a4",
+      "gitBlob": "6acf7295804f65d74854957be39893037a332ebe",
+      "frozenSourceBlob": "6acf7295804f65d74854957be39893037a332ebe",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/capabilities.module.css",
+      "sha256": "46b534cad0b23ac17a20f8c18b67ca127cca925b778ba797ae2a3e9b88844e90",
+      "gitBlob": "dcbfabc051265e9711a85ae835ec1e2a0944c02b",
+      "frozenSourceBlob": "dcbfabc051265e9711a85ae835ec1e2a0944c02b",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/contracts.ts",
+      "sha256": "a2109a5d7c1a526d1eecc9cb554e01af84bb84a7f4e5681f7218f2885ab6ed99",
+      "gitBlob": "e36f71cbeecb8fa771429887def78eee9635443e",
+      "frozenSourceBlob": "e36f71cbeecb8fa771429887def78eee9635443e",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/mutations.ts",
+      "sha256": "cc3411ddcb3ad4e2da02b2e0dbe01120a124ad1b11b6d03e12418013d2479ccb",
+      "gitBlob": "ac00024b0daf0685a887324dfc761652d9a686ed",
+      "frozenSourceBlob": "ac00024b0daf0685a887324dfc761652d9a686ed",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/registration-writer.ts",
+      "sha256": "2841c9689d86141bf7a1305b894b8b0c2e45980bcc6ddb2ad98ee7149feb036f",
+      "gitBlob": "53b0ed2d6eed58a0b5f9b3786f6ca5b90267c973",
+      "frozenSourceBlob": "53b0ed2d6eed58a0b5f9b3786f6ca5b90267c973",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/EntityDocuments.tsx",
+      "sha256": "cc925948dfc5d538f3d27d3cacf4799d10e233a9743d3e29822399ac879520ef",
+      "gitBlob": "4cd4bcac4642de838eec130791f500988b6ed4c6",
+      "frozenSourceBlob": "4cd4bcac4642de838eec130791f500988b6ed4c6",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/UploadDialog.tsx",
+      "sha256": "a537b6190672a6f038df074ccc9e5e364efeb9fff23bb6b2463555204b1ec238",
+      "gitBlob": "245fdeaca03bd092757511c685f00cd659c77674",
+      "frozenSourceBlob": "245fdeaca03bd092757511c685f00cd659c77674",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/NewObjectivePage.tsx",
+      "sha256": "1dd545b2bdac2396b74ea75be40ed02b4df340e21845830a8c4f8df6857f1bf6",
+      "gitBlob": "e4281aa12d78f5edc0f2f84f09eed10c1cc5cc57",
+      "frozenSourceBlob": "e4281aa12d78f5edc0f2f84f09eed10c1cc5cc57",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/ObjectiveEditor.tsx",
+      "sha256": "d4ba72b5593664fe59762c989d96badc9d2f590f122587d766eddee86def0a7c",
+      "gitBlob": "5b6e252d9af58028b4df69f174409274a26aa30a",
+      "frozenSourceBlob": "5b6e252d9af58028b4df69f174409274a26aa30a",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/ObjectiveEditorControls.tsx",
+      "sha256": "202f7057b472a043bd6228f58b7bd6410fd4e2e4c473d0bac0ac5a7f54e150fd",
+      "gitBlob": "2ec4f38e7d9ff62ea557272af92d3bd30ad3ff00",
+      "frozenSourceBlob": "2ec4f38e7d9ff62ea557272af92d3bd30ad3ff00",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/ObjectiveFields.tsx",
+      "sha256": "aa92f4a26b38dd50ee940b8b639bbac7c8a525a8f03ea35ad462b4cbf9946c8c",
+      "gitBlob": "3afa47a49a629c104aabbd5d5a7023c0b5ee9848",
+      "frozenSourceBlob": "3afa47a49a629c104aabbd5d5a7023c0b5ee9848",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/ObjectiveReadiness.tsx",
+      "sha256": "9f98e7671ef08d0200dc6df5128fa0587b12ec37b8a2bfc770d9c1c26872cc6e",
+      "gitBlob": "2df541ca1fdbe21b4be11d577d14f9b04c132444",
+      "frozenSourceBlob": "2df541ca1fdbe21b4be11d577d14f9b04c132444",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/ObjectiveSummary.tsx",
+      "sha256": "4c91cccb075bf89322a14947b1bb21a97f997b5b2dba2a3dc16744a86ff51dca",
+      "gitBlob": "a866e78f8ec71d2fa7c1a502c4384c257a21de8e",
+      "frozenSourceBlob": "a866e78f8ec71d2fa7c1a502c4384c257a21de8e",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/ObjectiveWorkDestinations.tsx",
+      "sha256": "f67e06088f541adb3f9b6efd175caffeb1a2cd061b5f1c3c572e2449202514c2",
+      "gitBlob": "97953aa087049ac216465c55858ce6bb19aa2984",
+      "frozenSourceBlob": "97953aa087049ac216465c55858ce6bb19aa2984",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx",
+      "sha256": "9475905eab80c15706770b72379921e30cc54b24484f729e95e70530f9d36219",
+      "gitBlob": "f7682759eda4bf3b495ce015cef75e2c843c5e29",
+      "frozenSourceBlob": "f7682759eda4bf3b495ce015cef75e2c843c5e29",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/contracts.ts",
+      "sha256": "340c34b174f70d1598bab76660a3f5814986f901e1db20ff1e6bdb58eb4d51b0",
+      "gitBlob": "f90e4386960b33becd93dbe0e20dd1a873d66628",
+      "frozenSourceBlob": "f90e4386960b33becd93dbe0e20dd1a873d66628",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/global-create/GlobalObjectiveClientPicker.tsx",
+      "sha256": "28d2d3bba0822afe758104acc5acb335979efebb65a2fd4664b77a434efc5dd4",
+      "gitBlob": "a299647a4cf9665787f027d41873e30e6bcc01ad",
+      "frozenSourceBlob": "a299647a4cf9665787f027d41873e30e6bcc01ad",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/objective-work-sources.ts",
+      "sha256": "1cc6f11d55b69e912d1f9bef89f7ac25c07f82c1eeb46ce7e2c8cdcca1ccc72a",
+      "gitBlob": "dbc9b09cbefb8a27988a94a13833359e78607dea",
+      "frozenSourceBlob": "dbc9b09cbefb8a27988a94a13833359e78607dea",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/useObjectiveEditorSession.ts",
+      "sha256": "cb1bbb7c4ca5f49ef637a4d164cefd38ab9fd71f98e52d158dd3e389fd5118a2",
+      "gitBlob": "1ee007ba2c41379d5c0120c750779e11f1383937",
+      "frozenSourceBlob": "1ee007ba2c41379d5c0120c750779e11f1383937",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/opportunities/OpportunitiesPage.tsx",
+      "sha256": "2ea45ddbf61ffc2dd109e084872fb654d888ec4e9fa40609777a58d599ff8c37",
+      "gitBlob": "10be0d3157d03d3c0cfb43bf53a0549f3718c498",
+      "frozenSourceBlob": "10be0d3157d03d3c0cfb43bf53a0549f3718c498",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/opportunities/OpportunityResults.tsx",
+      "sha256": "19c2bdfcb2f38d49a2fc1971fb2b28967068b9a1e2e153eb95848bb4fa92dcb0",
+      "gitBlob": "181f9c0237ce7aab131c592d2646b66d38fffaba",
+      "frozenSourceBlob": "181f9c0237ce7aab131c592d2646b66d38fffaba",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/opportunities/RelevantPrograms.tsx",
+      "sha256": "7f60f2926cae19aeb59bd70c808d43a06bf55691134cfcab831d590a56baf41c",
+      "gitBlob": "5c4bd61b535c0ba7607455c716b1634b6f692227",
+      "frozenSourceBlob": "5c4bd61b535c0ba7607455c716b1634b6f692227",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/opportunities/presentation.ts",
+      "sha256": "feb843dc01d72bf1ea699054abdaef896aee00a199144d012af6ffe50d455fbb",
+      "gitBlob": "38d1bace9735db9247675b3631275ed32bfc6800",
+      "frozenSourceBlob": "38d1bace9735db9247675b3631275ed32bfc6800",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/WorkPage.tsx",
+      "sha256": "f0a03589cab4b3e0e7e3d2b6430fce613d4b5b8e892a40072a959ed72740821d",
+      "gitBlob": "d1ae1c2d576fb90de5fb608a9f254aaa442249ee",
+      "frozenSourceBlob": "d1ae1c2d576fb90de5fb608a9f254aaa442249ee",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/WorkspaceDocumentTable.tsx",
+      "sha256": "9f0ad4c7cb51316cc73a3e429fde8ca990a4355165b53f8ddc62a17ca0b25416",
+      "gitBlob": "89ef022d65feaf46865ce2c92f93b68159688c48",
+      "frozenSourceBlob": "89ef022d65feaf46865ce2c92f93b68159688c48",
+      "matchesFrozenSource": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/contracts.ts",
+      "sha256": "5eb722f7191b5754d71326f82d117b09d82ddd4623d1ecfc31a36e12cbb7763e",
+      "gitBlob": "a866c6fcc5e12c0f739b0bf0b5558053f189c3aa",
+      "frozenSourceBlob": "a866c6fcc5e12c0f739b0bf0b5558053f189c3aa",
+      "matchesFrozenSource": true
+    }
+  ]
+}
