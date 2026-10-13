@@ -1,0 +1,29 @@
+{
+  "base": "1da8a551b00bba0f98e87954ef0a87566db236e6",
+  "newOrChanged": [
+    {
+      "file": "apps/web/src/features/portfolio/client-profile/ActivityFeed.tsx",
+      "kind": "function",
+      "symbol": "ActivityRow",
+      "line": 53,
+      "nonblank": 107,
+      "fingerprint": "60ab6bc6ec200d556a68d95c839e274477cb00ea352ea41631400793c6700b8e",
+      "classification": "new or changed responsibility review required",
+      "decision": "proposed cohesive responsibility; independent root review required",
+      "reason": "ActivityRow presents one timeline item, its metadata and its native source links. The added branch reuses the existing link style and supplied identity; it introduces no transport, mutation, session or state owner. Splitting this ten-line branch would not isolate a distinct responsibility."
+    },
+    {
+      "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
+      "kind": "function",
+      "symbol": "OutreachView",
+      "line": 21,
+      "nonblank": 130,
+      "fingerprint": "d4a51773336e6947c29eaca2905bb1ff228ed40296463614b52bbd40b9d42368",
+      "classification": "new or changed responsibility review required",
+      "decision": "proposed cohesive responsibility; independent root review required",
+      "reason": "OutreachView composes the existing exact-record read, admission, selection and destination. The new client predicate extends its existing record-ID admission before every editor/rich destination; no DTO, transport, persistence or send responsibility is added. OutreachForm remains byte-unchanged."
+    }
+  ],
+  "noOwnedModuleAbove400": true,
+  "inheritedFunction": "OutreachForm: 88 nonblank; unchanged fingerprint d7e8f202c52c16b8bdf793e1e563d1e4ace0c1d63a6cd48b5338b21f5310a8aa; no new approval requested."
+}

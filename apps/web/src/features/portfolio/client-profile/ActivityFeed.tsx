@@ -156,6 +156,16 @@ function ActivityRow({
               Open file ↗
             </Link>
           )}
+          {item.sourceType === "outreach" &&
+            z.uuid().safeParse(item.sourceId).success &&
+            z.uuid().safeParse(clientId).success && (
+              <Link
+                className="muted"
+                href={`/modules/engagement?clientId=${clientId}&draft=${item.sourceId}`}
+              >
+                Open outreach ↗
+              </Link>
+            )}
         </div>
       </div>
     </li>
