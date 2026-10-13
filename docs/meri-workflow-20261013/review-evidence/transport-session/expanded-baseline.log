@@ -1,0 +1,241 @@
+
+ RUN  v4.1.11 /workspace/capiro-meri-workflow-20261013/apps/web
+
+ × tests/meri-action-session.test.ts > Meri session native owner grammar > accepts lowercase native UUID syntax without imposing RFC variant bits 9ms
+   → [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "uuid",
+    "pattern": "/^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$/",
+    "path": [
+      "context",
+      "conversationId"
+    ],
+    "message": "Invalid UUID"
+  },
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "uuid",
+    "pattern": "/^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$/",
+    "path": [
+      "context",
+      "runId"
+    ],
+    "message": "Invalid UUID"
+  }
+]
+ × tests/meri-action-session.test.ts > Meri session native owner grammar > refuses uppercase owner context ID conversationId 3ms
+   → expected [Function] to throw an error
+ × tests/meri-action-session.test.ts > Meri session native owner grammar > refuses uppercase owner context ID runId 1ms
+   → expected [Function] to throw an error
+ × tests/meri-action-session.test.ts > Meri session native owner grammar > refuses uppercase owner context ID selectedClientId 1ms
+   → expected [Function] to throw an error
+ × tests/meri-action-session.test.ts > Meri session native owner grammar > bounds native identity field tenantId at256 characters 1ms
+   → expected [Function] to throw an error
+ × tests/meri-action-session.test.ts > Meri session native owner grammar > bounds native identity field actorId at256 characters 1ms
+   → expected [Function] to throw an error
+ × tests/meri-action-session.test.ts > Meri session native owner grammar > refuses a negative clock even for an otherwise future bounded expiry 1ms
+   → expected [Function] to throw an error
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > returns detached frozen exact fields without inventing run authority 1ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > accepts future expiry at inclusive TTL boundary 1 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > accepts future expiry at inclusive TTL boundary 300000 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses expired or excessive TTL -1 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses expired or excessive TTL 0 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses expired or excessive TTL 300001 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses invalid supplied clock NaN 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses invalid supplied clock Infinity 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses invalid supplied clock 0.5 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses invalid supplied clock 9007199254740992 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses noncanonical expiry null 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses noncanonical expiry soon 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses noncanonical expiry 0 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses noncanonical expiry -1 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses noncanonical expiry 1791867600000.5 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses noncanonical expiry 9007199254740992 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses noncanonical action credential 0 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses noncanonical action credential 1 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses noncanonical action credential 2 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses noncanonical action credential 3 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses noncanonical action credential 4 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > accepts the exact URL-safe opaque alphabet 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses missing receipt field credential 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses missing receipt field expiresAtMs 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses missing receipt field context 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses missing and empty context field tenantId 1ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses missing and empty context field actorId 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses missing and empty context field conversationId 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses missing and empty context field runId 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses missing and empty context field selectedClientId 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses malformed context UUID conversationId 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses malformed context UUID runId 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses malformed context UUID selectedClientId 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses extra authority field binding at either level 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses extra authority field attemptId at either level 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses extra authority field workerId at either level 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses extra authority field writerFence at either level 2ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses extra authority field approved at either level 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses extra authority field policyRevision at either level 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > never turns malformed JSON or the separate error contract into a session 0 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > never turns malformed JSON or the separate error contract into a session 1 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > never turns malformed JSON or the separate error contract into a session 2 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > never turns malformed JSON or the separate error contract into a session 3 0ms
+ × tests/meri-action-transport.test.ts > Meri rejected response stream disposal > cancels an acquired response body for pre-aborted without awaiting cancel 39ms
+   → expected "vi.fn()" to be called once, but got 0 times
+ × tests/meri-action-transport.test.ts > Meri rejected response stream disposal > cancels an acquired response body for wrong-media without awaiting cancel 1ms
+   → expected "vi.fn()" to be called once, but got 0 times
+ × tests/meri-action-transport.test.ts > Meri rejected response stream disposal > cancels an acquired response body for oversized-header without awaiting cancel 1ms
+   → expected "vi.fn()" to be called once, but got 0 times
+ × tests/meri-action-transport.test.ts > Meri rejected response stream disposal > releases a late response body from fetch that ignored the expired deadline 5ms
+   → expected "vi.fn()" to be called once, but got 0 times
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > accepts exactly the byte limit across a split multibyte character 4ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > refuses streamed limit+1 even when Content-Length understates bytes 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > rejects declared size 5 before acquiring a body reader 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > rejects declared size -1 before acquiring a body reader 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > rejects declared size 1.5 before acquiring a body reader 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > rejects declared size NaN before acquiring a body reader 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > rejects declared size 4,4 before acquiring a body reader 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > rejects declared size 999999999999999999999999 before acquiring a body reader 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > refuses media type text/html before body read 0ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > refuses media type application/jsonp before body read 0ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > refuses media type text/plain before body read 0ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > accepts JSON charset parameters but refuses missing bodies 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > fatally rejects malformed or unfinished UTF-8 0 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > fatally rejects malformed or unfinished UTF-8 1 0ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > aborts a parked read without waiting for a hanging underlying cancel 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > overflow rejection does not wait for hanging cancellation 0ms
+ ✓ tests/meri-action-transport.test.ts > Meri observation deadline and cancellation > rejects before invocation for an already-aborted owner 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri observation deadline and cancellation > bounds ignored cancellation and late processing beyond response headers 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri observation deadline and cancellation > clears its deadline after success without aborting borrowed input 0ms
+ ✓ tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > uses only fixed POST query with exact request and no ambient routing 2ms
+ ✓ tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > uses only fixed POST draft with exact request and no ambient routing 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > uses only fixed POST prepare with exact request and no ambient routing 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > uses only fixed POST execute with exact request and no ambient routing 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > refuses forged route ../session before dispatch 0ms
+ ✓ tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > refuses forged route execute?approve=true before dispatch 0ms
+ ✓ tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > refuses forged route https://example.test before dispatch 0ms
+ ✓ tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > refuses forged route approve before dispatch 0ms
+ ✓ tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > runs the actual public receiver and refuses malformed JSON without retry 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > returns a deeply frozen accepted response through the real receiver 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > settles ignored-fetch cancellation from caller once without retry 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > settles ignored-fetch cancellation from lifetime once without retry 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > times out a parked body even if cancellation never completes 1ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 11 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/meri-action-session.test.ts > Meri session native owner grammar > accepts lowercase native UUID syntax without imposing RFC variant bits
+ZodError: [
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "uuid",
+    "pattern": "/^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$/",
+    "path": [
+      "context",
+      "conversationId"
+    ],
+    "message": "Invalid UUID"
+  },
+  {
+    "origin": "string",
+    "code": "invalid_format",
+    "format": "uuid",
+    "pattern": "/^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$/",
+    "path": [
+      "context",
+      "runId"
+    ],
+    "message": "Invalid UUID"
+  }
+]
+ ❯ receiveSessionReceipt src/shared/meri-actions/session-receipt.ts:25:25
+     23|   now: number,
+     24| ): ActionSessionReceipt {
+     25|   const value = receipt.parse(JSON.parse(text));
+       |                         ^
+     26|   if (
+     27|     !Number.isSafeInteger(now) ||
+ ❯ tests/meri-action-session.test.ts:23:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { _zod: { def: [ { origin: 'string', code: 'invalid_format', format: 'uuid', pattern: '/^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$/', path: [ 'context', 'conversationId' ], message: 'Invalid UUID' }, { origin: 'string', code: 'invalid_format', format: 'uuid', pattern: '/^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$/', path: [ 'context', 'runId' ], message: 'Invalid UUID' } ], constr: 'Function<ZodError>', traits: { constructor: 'Function<Set>', has: 'Function<has>', add: 'Function<add>', delete: 'Function<delete>', difference: 'Function<difference>', clear: 'Function<clear>', entries: 'Function<entries>', forEach: 'Function<forEach>', intersection: 'Function<intersection>', isSubsetOf: 'Function<isSubsetOf>', isSupersetOf: 'Function<isSupersetOf>', isDisjointFrom: 'Function<isDisjointFrom>', size: 2, symmetricDifference: 'Function<symmetricDifference>', union: 'Function<union>', values: 'Function<values>', keys: 'Function<values>' }, message: '[\n  {\n    "origin": "string",\n    "code": "invalid_format",\n    "format": "uuid",\n    "pattern": "/^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$/",\n    "path": [\n      "context",\n      "conversationId"\n    ],\n    "message": "Invalid UUID"\n  },\n  {\n    "origin": "string",\n    "code": "invalid_format",\n    "format": "uuid",\n    "pattern": "/^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$/",\n    "path": [\n      "context",\n      "runId"\n    ],\n    "message": "Invalid UUID"\n  }\n]' }, issues: [ { origin: 'string', code: 'invalid_format', format: 'uuid', pattern: '/^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$/', path: [ 'context', 'conversationId' ], message: 'Invalid UUID' }, { origin: 'string', code: 'invalid_format', format: 'uuid', pattern: '/^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$/', path: [ 'context', 'runId' ], message: 'Invalid UUID' } ], format: 'Function<anonymous>', flatten: 'Function<anonymous>', addIssue: 'Function<anonymous>', addIssues: 'Function<anonymous>', isEmpty: false }
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/11]⎯
+
+ FAIL  tests/meri-action-session.test.ts > Meri session native owner grammar > refuses uppercase owner context ID conversationId
+ FAIL  tests/meri-action-session.test.ts > Meri session native owner grammar > refuses uppercase owner context ID runId
+ FAIL  tests/meri-action-session.test.ts > Meri session native owner grammar > refuses uppercase owner context ID selectedClientId
+AssertionError: expected [Function] to throw an error
+ ❯ tests/meri-action-session.test.ts:32:71
+     30|         [field]: "ABCDEF00-0000-4000-8000-000000000009",
+     31|       });
+     32|       expect(() => receiveSessionReceipt(JSON.stringify(value), now)).…
+       |                                                                       ^
+     33|     },
+     34|   );
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/11]⎯
+
+ FAIL  tests/meri-action-session.test.ts > Meri session native owner grammar > bounds native identity field tenantId at256 characters
+ FAIL  tests/meri-action-session.test.ts > Meri session native owner grammar > bounds native identity field actorId at256 characters
+AssertionError: expected [Function] to throw an error
+ ❯ tests/meri-action-session.test.ts:42:71
+     40|       expect(receiveSessionReceipt(JSON.stringify(value), now)).toEqua…
+     41|       Object.assign(value.context, { [field]: "é".repeat(257) });
+     42|       expect(() => receiveSessionReceipt(JSON.stringify(value), now)).…
+       |                                                                       ^
+     43|     },
+     44|   );
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/11]⎯
+
+ FAIL  tests/meri-action-session.test.ts > Meri session native owner grammar > refuses a negative clock even for an otherwise future bounded expiry
+AssertionError: expected [Function] to throw an error
+ ❯ tests/meri-action-session.test.ts:47:68
+     45|   it("refuses a negative clock even for an otherwise future bounded ex…
+     46|     const value = { ...receipt(), expiresAtMs: 1 };
+     47|     expect(() => receiveSessionReceipt(JSON.stringify(value), -1)).toT…
+       |                                                                    ^
+     48|   });
+     49| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/11]⎯
+
+ FAIL  tests/meri-action-transport.test.ts > Meri rejected response stream disposal > cancels an acquired response body for pre-aborted without awaiting cancel
+ FAIL  tests/meri-action-transport.test.ts > Meri rejected response stream disposal > cancels an acquired response body for wrong-media without awaiting cancel
+ FAIL  tests/meri-action-transport.test.ts > Meri rejected response stream disposal > cancels an acquired response body for oversized-header without awaiting cancel
+AssertionError: expected "vi.fn()" to be called once, but got 0 times
+ ❯ tests/meri-action-transport.test.ts:49:22
+     47|         boundedJsonText(response, controller.signal, 16),
+     48|       ).rejects.toThrow();
+     49|       expect(cancel).toHaveBeenCalledOnce();
+       |                      ^
+     50|       expect(body.locked).toBe(false);
+     51|     },
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/11]⎯
+
+ FAIL  tests/meri-action-transport.test.ts > Meri rejected response stream disposal > releases a late response body from fetch that ignored the expired deadline
+AssertionError: expected "vi.fn()" to be called once, but got 0 times
+ ❯ tests/meri-action-transport.test.ts:78:20
+     76|     );
+     77|     await vi.advanceTimersByTimeAsync(0);
+     78|     expect(cancel).toHaveBeenCalledOnce();
+       |                    ^
+     79|     expect(body.locked).toBe(false);
+     80|     expect(fetcher).toHaveBeenCalledOnce();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/11]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  11 failed | 75 passed (86)
+   Start at  05:22:32
+   Duration  292ms (transform 54ms, setup 0ms, import 184ms, tests 106ms, environment 0ms)
+
+JSON report written to /tmp/capiro-meri-transport-session-tests-20261013/expanded-baseline-results.json
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
