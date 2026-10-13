@@ -6,6 +6,8 @@ async function dayFixture(page: Page) {
   const unexpected = await installFixtures(page);
   const reads: URL[] = [];
   const writes: string[] = [];
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
   const meeting = {
     ...voiceMeeting,
     subject: "Synthetic selected-day meeting",
@@ -35,7 +37,7 @@ async function dayFixture(page: Page) {
     if (url.pathname.endsWith("/notetaker")) return json(route, null);
     return json(route, { message: "Unhandled synthetic meeting route" }, 404);
   });
-  return { reads, writes, unexpected, meeting };
+  return { reads, writes, unexpected, meeting, errors };
 }
 
 for (const width of [1440, 390]) {
@@ -104,13 +106,17 @@ for (const width of [1440, 390]) {
     });
     expect(fixture.writes).toEqual([]);
     expect(fixture.unexpected).toEqual([]);
+    expect(fixture.errors).toEqual([]);
   });
 }
 
 test("Day date picker and Today follow the selected timezone and keep Master scope", async ({
   page,
 }) => {
-  await page.clock.setFixedTime(new Date("2026-11-01T00:30:00Z"));
+  // Temporal.Now reads Date.now. Preserve native Intl descriptors for its polyfill.
+  await page.addInitScript((epoch) => {
+    Date.now = () => epoch;
+  }, Date.parse("2026-11-01T00:30:00Z"));
   const fixture = await dayFixture(page);
   await page.goto(
     "/calendar?date=2028-02-29&zone=America%2FLos_Angeles&view=day",
@@ -141,6 +147,8 @@ test("Day date picker and Today follow the selected timezone and keep Master sco
   );
   expect(fixture.writes).toEqual([]);
   expect(fixture.unexpected).toEqual([]);
+  await expect(page.locator(".sx__week-grid__hour-text").first()).toBeVisible();
+  expect(fixture.errors).toEqual([]);
 });
 
 test("Day meeting entry preserves the current calendar route without dispatching a write", async ({
@@ -164,4 +172,5 @@ test("Day meeting entry preserves the current calendar route without dispatching
   await expect(page.getByRole("dialog")).toBeVisible();
   expect(fixture.writes).toEqual([]);
   expect(fixture.unexpected).toEqual([]);
+  expect(fixture.errors).toEqual([]);
 });
