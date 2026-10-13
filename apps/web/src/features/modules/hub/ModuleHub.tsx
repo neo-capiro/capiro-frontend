@@ -146,14 +146,20 @@ export function ModuleHub() {
 
 function ModuleHubInformation() {
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
+  const [open, setOpen] = useState(false);
   return (
     <div className={styles.infoAnchor} ref={setContainer}>
-      <Tooltip>
+      <Tooltip open={open} onOpenChange={setOpen}>
         <TooltipTrigger asChild>
           <button
             type="button"
             className={styles.info}
             aria-label="About Modules"
+            onClick={(event) => {
+              // Keep activation available when the adopted trigger would close.
+              event.preventDefault();
+              setOpen(true);
+            }}
           >
             <span aria-hidden="true">i</span>
           </button>

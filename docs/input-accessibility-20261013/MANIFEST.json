@@ -1,0 +1,1409 @@
+{
+  "source": "7745bd4fce68421a3523a398d37e36a67b1aaf94",
+  "files": [
+    {
+      "path": "evidence/CACHE-CLEANUP-RECEIPT.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/CACHE-CLEANUP-RECEIPT.json",
+      "bytes": 357,
+      "sha256": "c88926f85e7eb563a6e68aeda71baabbe52139e2938a746e03f10813b7712af6"
+    },
+    {
+      "path": "evidence/CACHE-INVENTORY.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/CACHE-INVENTORY.json",
+      "bytes": 180232,
+      "sha256": "88a7c91a555f8704d6c0f77199a4688724ed84042e155420f3539c7920e37cb5"
+    },
+    {
+      "path": "evidence/PARENT-PR.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/PARENT-PR.json",
+      "bytes": 361,
+      "sha256": "71df3ace38536d69f264fd801ef5eae68822edfe256936f5fd2a3ec29bcf8f93"
+    },
+    {
+      "path": "evidence/PORTS-AFTER.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/PORTS-AFTER.json",
+      "bytes": 130,
+      "sha256": "ba7d6931b772ed385cb4533c46f73928275e3529aa4c3d5e8266dda10b6d7c7e"
+    },
+    {
+      "path": "evidence/PR-BODY.md",
+      "source": "/workspace/capiro-touch-accessibility-20261013/PR-BODY.md",
+      "bytes": 2441,
+      "sha256": "25ffeef66d565172879b17fc148212c46226541ae54b13f63f0e2e3cf33ba5cb"
+    },
+    {
+      "path": "evidence/PRESERVATION-AFTER.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/PRESERVATION-AFTER.json",
+      "bytes": 891,
+      "sha256": "f8320ea8584d84fdd54e942de94d89aac1b724a54d048ca44ccfe8bccfd9b6f9"
+    },
+    {
+      "path": "evidence/PRESERVATION-BEFORE.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/PRESERVATION-BEFORE.json",
+      "bytes": 640,
+      "sha256": "0b90614ad20e21910a264ed44b6bce429625a45bc9e6a49c4d5c86f9c14b8b23"
+    },
+    {
+      "path": "evidence/REMOTE-HEADS.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/REMOTE-HEADS.json",
+      "bytes": 665,
+      "sha256": "3b923b32e6f4ca4d0f96801fb53e8289e8a0b63a7b79654a3c65e0a1e5057582"
+    },
+    {
+      "path": "evidence/baseline-corrected-run.py",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-corrected-run.py",
+      "bytes": 2527,
+      "sha256": "bc9082bb457e85acba2d39aeeb12e7403842ad6e4089262f22431334e253db41"
+    },
+    {
+      "path": "evidence/baseline-corrected/artifacts/.last-run.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-corrected/artifacts/.last-run.json",
+      "bytes": 292,
+      "sha256": "b68ff28ced16ac2229da4b9f7e8be52015129795d10b556cce069b75d52cfa51"
+    },
+    {
+      "path": "evidence/baseline-corrected/artifacts/modules-information-activa-6d821--dismisses-after-activation/error-context.md",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-corrected/artifacts/modules-information-activa-6d821--dismisses-after-activation/error-context.md",
+      "bytes": 13346,
+      "sha256": "9aecd499d6e58197f472999adf2c4be0f791c6da9e01dc6bc780e324c0fa79d6"
+    },
+    {
+      "path": "evidence/baseline-corrected/artifacts/modules-information-activa-6d821--dismisses-after-activation/test-failed-1.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-corrected/artifacts/modules-information-activa-6d821--dismisses-after-activation/test-failed-1.png",
+      "bytes": 145162,
+      "sha256": "ad43c652e180017663509aa62a04f8a5fd82c834155e4f6d6b01efda07179cb4"
+    },
+    {
+      "path": "evidence/baseline-corrected/artifacts/modules-information-activa-6d821--dismisses-after-activation/trace.zip",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-corrected/artifacts/modules-information-activa-6d821--dismisses-after-activation/trace.zip",
+      "bytes": 1007875,
+      "sha256": "36665d2cefa111238cdcbd8bb69918ca714d819bab4623b0c4745624f0d9bc08"
+    },
+    {
+      "path": "evidence/baseline-corrected/artifacts/modules-information-activa-a08d8--and-outside-dismissal-work/error-context.md",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-corrected/artifacts/modules-information-activa-a08d8--and-outside-dismissal-work/error-context.md",
+      "bytes": 13354,
+      "sha256": "972b5ac50da0fdab29c41f0c47deb946de85664020783c7fce197f52daa8e799"
+    },
+    {
+      "path": "evidence/baseline-corrected/artifacts/modules-information-activa-a08d8--and-outside-dismissal-work/test-failed-1.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-corrected/artifacts/modules-information-activa-a08d8--and-outside-dismissal-work/test-failed-1.png",
+      "bytes": 145162,
+      "sha256": "ad43c652e180017663509aa62a04f8a5fd82c834155e4f6d6b01efda07179cb4"
+    },
+    {
+      "path": "evidence/baseline-corrected/artifacts/modules-information-activa-a08d8--and-outside-dismissal-work/trace.zip",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-corrected/artifacts/modules-information-activa-a08d8--and-outside-dismissal-work/trace.zip",
+      "bytes": 419407,
+      "sha256": "5eae7e33b8d81f9546c979ee6e2e895a4f969ff52b77899c10cbd9aa209e8754"
+    },
+    {
+      "path": "evidence/baseline-corrected/artifacts/modules-information-activa-bd2d4-ation-outside-tap-dismisses/error-context.md",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-corrected/artifacts/modules-information-activa-bd2d4-ation-outside-tap-dismisses/error-context.md",
+      "bytes": 12713,
+      "sha256": "f2b0cd4b596fda44154aa2a0ff59eafbc79112f2d20380acdb8ce1d6bb9ba400"
+    },
+    {
+      "path": "evidence/baseline-corrected/artifacts/modules-information-activa-bd2d4-ation-outside-tap-dismisses/test-failed-1.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-corrected/artifacts/modules-information-activa-bd2d4-ation-outside-tap-dismisses/test-failed-1.png",
+      "bytes": 58297,
+      "sha256": "46bceaf67830ddce0ae8741510dec38edc4cba77e0842e8a3f01787d6c989966"
+    },
+    {
+      "path": "evidence/baseline-corrected/artifacts/modules-information-activa-bd2d4-ation-outside-tap-dismisses/trace.zip",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-corrected/artifacts/modules-information-activa-bd2d4-ation-outside-tap-dismisses/trace.zip",
+      "bytes": 698928,
+      "sha256": "1b2851e99ea20f932b7697e33b4cd692b0f93c8edcddf2f49d01f42b57e7cf83"
+    },
+    {
+      "path": "evidence/baseline-corrected/artifacts/modules-information-activa-c9673-h-Escape-and-blur-dismissal/error-context.md",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-corrected/artifacts/modules-information-activa-c9673-h-Escape-and-blur-dismissal/error-context.md",
+      "bytes": 13352,
+      "sha256": "8144d7d5d2fa4495c7bcaed92fa98b57e3f7cd70c1f5086fa29f600fd733bfc5"
+    },
+    {
+      "path": "evidence/baseline-corrected/artifacts/modules-information-activa-c9673-h-Escape-and-blur-dismissal/test-failed-1.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-corrected/artifacts/modules-information-activa-c9673-h-Escape-and-blur-dismissal/test-failed-1.png",
+      "bytes": 141970,
+      "sha256": "8943743097df82baea1a891069295aaf75abecfb9877b301ef6bc0cdc391c655"
+    },
+    {
+      "path": "evidence/baseline-corrected/artifacts/modules-information-activa-c9673-h-Escape-and-blur-dismissal/trace.zip",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-corrected/artifacts/modules-information-activa-c9673-h-Escape-and-blur-dismissal/trace.zip",
+      "bytes": 1786025,
+      "sha256": "bb78784f3fa7ef933ba09d7b93c413deef2eb369915b102e8ba1ed9990cb8d75"
+    },
+    {
+      "path": "evidence/baseline-corrected/artifacts/modules-information-activa-cb7ad-ation-outside-tap-dismisses/error-context.md",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-corrected/artifacts/modules-information-activa-cb7ad-ation-outside-tap-dismisses/error-context.md",
+      "bytes": 12713,
+      "sha256": "4a23124413439c210ee12afb9643123e84abb78b41cade11e85a414edd76b0b8"
+    },
+    {
+      "path": "evidence/baseline-corrected/artifacts/modules-information-activa-cb7ad-ation-outside-tap-dismisses/test-failed-1.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-corrected/artifacts/modules-information-activa-cb7ad-ation-outside-tap-dismisses/test-failed-1.png",
+      "bytes": 52139,
+      "sha256": "e0f4c9df1a8253ee01ea2e02b1f411cec1b73f19cebda0ffdeb88a56b5d20002"
+    },
+    {
+      "path": "evidence/baseline-corrected/artifacts/modules-information-activa-cb7ad-ation-outside-tap-dismisses/trace.zip",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-corrected/artifacts/modules-information-activa-cb7ad-ation-outside-tap-dismisses/trace.zip",
+      "bytes": 707024,
+      "sha256": "4232892fc9edb6d1a22190f6a47b1dbbced61bfc150f5fa2f3c8ededb32eb5f0"
+    },
+    {
+      "path": "evidence/baseline-corrected/browser.log",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-corrected/browser.log",
+      "bytes": 16325,
+      "sha256": "9dad24690aaead1597d849d1ac278918e8995b5c927e2f98afa8970fc0bd1f4e"
+    },
+    {
+      "path": "evidence/baseline-corrected/playwright.config.mjs",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-corrected/playwright.config.mjs",
+      "bytes": 872,
+      "sha256": "cf02c5392c00a3ac76285fb46a90dbe98f30478327dc26b20bb1635fc4400145"
+    },
+    {
+      "path": "evidence/baseline-corrected/preserved-bundle-before.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-corrected/preserved-bundle-before.json",
+      "bytes": 42907,
+      "sha256": "07925e1b9e08412155612d15424f415a72edd5710a57ab5cb9a1192d79678621"
+    },
+    {
+      "path": "evidence/baseline-corrected/receipt.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-corrected/receipt.json",
+      "bytes": 245,
+      "sha256": "1057f8b6500362cf1d109049ceb12f44f7e50b465a6561cfb3c4ce236b83be4f"
+    },
+    {
+      "path": "evidence/baseline-corrected/results.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-corrected/results.json",
+      "bytes": 649940,
+      "sha256": "bf029fa1010986bab09ab0e1042cd89c364e94fee904693ef02c382f56227055"
+    },
+    {
+      "path": "evidence/baseline-corrected/server.mjs",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-corrected/server.mjs",
+      "bytes": 375,
+      "sha256": "ac0cadeedff50198c6ec3534e38d9ef7efc6261a0edfdf7522571b7710268916"
+    },
+    {
+      "path": "evidence/baseline-run.py",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline-run.py",
+      "bytes": 2517,
+      "sha256": "7ceed645a6f7854563376c10e0c3e6a9c5e91980a95935b3c890f3bff71e2a1d"
+    },
+    {
+      "path": "evidence/baseline/artifacts/.last-run.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline/artifacts/.last-run.json",
+      "bytes": 292,
+      "sha256": "b68ff28ced16ac2229da4b9f7e8be52015129795d10b556cce069b75d52cfa51"
+    },
+    {
+      "path": "evidence/baseline/artifacts/modules-information-activa-6d821--dismisses-after-activation/error-context.md",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline/artifacts/modules-information-activa-6d821--dismisses-after-activation/error-context.md",
+      "bytes": 5807,
+      "sha256": "91b2deeaab28dd024b35e937d6b21e9ebc75777b23769ea9f3d005c402f50dab"
+    },
+    {
+      "path": "evidence/baseline/artifacts/modules-information-activa-6d821--dismisses-after-activation/test-failed-1.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline/artifacts/modules-information-activa-6d821--dismisses-after-activation/test-failed-1.png",
+      "bytes": 155136,
+      "sha256": "3e31fdf6580717dbd9948a40fc839b7924fdfd880a98de2db6d1b0ebab0812bc"
+    },
+    {
+      "path": "evidence/baseline/artifacts/modules-information-activa-6d821--dismisses-after-activation/trace.zip",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline/artifacts/modules-information-activa-6d821--dismisses-after-activation/trace.zip",
+      "bytes": 610334,
+      "sha256": "9516235647948200c8903f2b8578427897774a7bad671f96ab3776a560c7834f"
+    },
+    {
+      "path": "evidence/baseline/artifacts/modules-information-activa-a08d8--and-outside-dismissal-work/error-context.md",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline/artifacts/modules-information-activa-a08d8--and-outside-dismissal-work/error-context.md",
+      "bytes": 13354,
+      "sha256": "972b5ac50da0fdab29c41f0c47deb946de85664020783c7fce197f52daa8e799"
+    },
+    {
+      "path": "evidence/baseline/artifacts/modules-information-activa-a08d8--and-outside-dismissal-work/test-failed-1.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline/artifacts/modules-information-activa-a08d8--and-outside-dismissal-work/test-failed-1.png",
+      "bytes": 145162,
+      "sha256": "ad43c652e180017663509aa62a04f8a5fd82c834155e4f6d6b01efda07179cb4"
+    },
+    {
+      "path": "evidence/baseline/artifacts/modules-information-activa-a08d8--and-outside-dismissal-work/trace.zip",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline/artifacts/modules-information-activa-a08d8--and-outside-dismissal-work/trace.zip",
+      "bytes": 419387,
+      "sha256": "ea31a563228704df3c33f8c7b822c659a8636d40723a5149650a7ea69d542d93"
+    },
+    {
+      "path": "evidence/baseline/artifacts/modules-information-activa-bd2d4-ation-outside-tap-dismisses/error-context.md",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline/artifacts/modules-information-activa-bd2d4-ation-outside-tap-dismisses/error-context.md",
+      "bytes": 12713,
+      "sha256": "f2b0cd4b596fda44154aa2a0ff59eafbc79112f2d20380acdb8ce1d6bb9ba400"
+    },
+    {
+      "path": "evidence/baseline/artifacts/modules-information-activa-bd2d4-ation-outside-tap-dismisses/test-failed-1.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline/artifacts/modules-information-activa-bd2d4-ation-outside-tap-dismisses/test-failed-1.png",
+      "bytes": 58297,
+      "sha256": "46bceaf67830ddce0ae8741510dec38edc4cba77e0842e8a3f01787d6c989966"
+    },
+    {
+      "path": "evidence/baseline/artifacts/modules-information-activa-bd2d4-ation-outside-tap-dismisses/trace.zip",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline/artifacts/modules-information-activa-bd2d4-ation-outside-tap-dismisses/trace.zip",
+      "bytes": 739391,
+      "sha256": "93941b93b446e348f0dc0f643c168e07b70e5a54c44f0f9f1c7c879a20ba8c52"
+    },
+    {
+      "path": "evidence/baseline/artifacts/modules-information-activa-c9673-h-Escape-and-blur-dismissal/error-context.md",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline/artifacts/modules-information-activa-c9673-h-Escape-and-blur-dismissal/error-context.md",
+      "bytes": 13352,
+      "sha256": "8144d7d5d2fa4495c7bcaed92fa98b57e3f7cd70c1f5086fa29f600fd733bfc5"
+    },
+    {
+      "path": "evidence/baseline/artifacts/modules-information-activa-c9673-h-Escape-and-blur-dismissal/test-failed-1.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline/artifacts/modules-information-activa-c9673-h-Escape-and-blur-dismissal/test-failed-1.png",
+      "bytes": 141970,
+      "sha256": "8943743097df82baea1a891069295aaf75abecfb9877b301ef6bc0cdc391c655"
+    },
+    {
+      "path": "evidence/baseline/artifacts/modules-information-activa-c9673-h-Escape-and-blur-dismissal/trace.zip",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline/artifacts/modules-information-activa-c9673-h-Escape-and-blur-dismissal/trace.zip",
+      "bytes": 1796153,
+      "sha256": "aa784250e62f45e2c2c15bd4118096251394c9310325927585d83a9a6081680e"
+    },
+    {
+      "path": "evidence/baseline/artifacts/modules-information-activa-cb7ad-ation-outside-tap-dismisses/error-context.md",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline/artifacts/modules-information-activa-cb7ad-ation-outside-tap-dismisses/error-context.md",
+      "bytes": 12713,
+      "sha256": "4a23124413439c210ee12afb9643123e84abb78b41cade11e85a414edd76b0b8"
+    },
+    {
+      "path": "evidence/baseline/artifacts/modules-information-activa-cb7ad-ation-outside-tap-dismisses/test-failed-1.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline/artifacts/modules-information-activa-cb7ad-ation-outside-tap-dismisses/test-failed-1.png",
+      "bytes": 52139,
+      "sha256": "e0f4c9df1a8253ee01ea2e02b1f411cec1b73f19cebda0ffdeb88a56b5d20002"
+    },
+    {
+      "path": "evidence/baseline/artifacts/modules-information-activa-cb7ad-ation-outside-tap-dismisses/trace.zip",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline/artifacts/modules-information-activa-cb7ad-ation-outside-tap-dismisses/trace.zip",
+      "bytes": 694242,
+      "sha256": "7dcedacbf3bff8b8ffa0aae7fddd7113a0c308ddf1c5d0accdced8fc7fd47fc0"
+    },
+    {
+      "path": "evidence/baseline/browser.log",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline/browser.log",
+      "bytes": 16348,
+      "sha256": "596bb6752296eeb2a91b422af8f9cc03cf719fb67a084b7fa9946de113b60e43"
+    },
+    {
+      "path": "evidence/baseline/modules-information-activation.spec.ts",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline/modules-information-activation.spec.ts",
+      "bytes": 5548,
+      "sha256": "faa52edb612d2d2657851928676ad0e04462b2320190543e5869c8f9da879537"
+    },
+    {
+      "path": "evidence/baseline/playwright.config.mjs",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline/playwright.config.mjs",
+      "bytes": 842,
+      "sha256": "797f7ecb6ce63c1affbc611c73f4131eb35903b5679e8737adc605ab81691b93"
+    },
+    {
+      "path": "evidence/baseline/preserved-bundle-before.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline/preserved-bundle-before.json",
+      "bytes": 42907,
+      "sha256": "07925e1b9e08412155612d15424f415a72edd5710a57ab5cb9a1192d79678621"
+    },
+    {
+      "path": "evidence/baseline/receipt.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline/receipt.json",
+      "bytes": 246,
+      "sha256": "136e7ecdb2e13a30d0c09d766c1b0e08a24741f657a70d68160558e6988df9d7"
+    },
+    {
+      "path": "evidence/baseline/results.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline/results.json",
+      "bytes": 443114,
+      "sha256": "55ddfcb75eb6101dd77dd06e2432629c38accfaa61f9ae7d3a6ac66a5f236b00"
+    },
+    {
+      "path": "evidence/baseline/server.mjs",
+      "source": "/workspace/capiro-touch-accessibility-20261013/baseline/server.mjs",
+      "bytes": 375,
+      "sha256": "ac0cadeedff50198c6ec3534e38d9ef7efc6261a0edfdf7522571b7710268916"
+    },
+    {
+      "path": "evidence/clean-vite-cache.py",
+      "source": "/workspace/capiro-touch-accessibility-20261013/clean-vite-cache.py",
+      "bytes": 3101,
+      "sha256": "1d24ed53146abd0b65bb91c6c31c3f051db780e148a2c1ed84b2908ef00a5caa"
+    },
+    {
+      "path": "evidence/final/FROZEN-SOURCE.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/FROZEN-SOURCE.json",
+      "bytes": 397,
+      "sha256": "cd873be4e862762f855dee9a3933f847b5b8b3911cba2434a7c2a6590d90e79c"
+    },
+    {
+      "path": "evidence/final/architecture-exit.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/architecture-exit.json",
+      "bytes": 851,
+      "sha256": "83c02cd998a3427d92ab1998c1b78da4c1a5b257d64cc16fb074597950b05671"
+    },
+    {
+      "path": "evidence/final/architecture-running.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/architecture-running.json",
+      "bytes": 382,
+      "sha256": "079b5cab25ef5a1986004bca3b88892a27994ef802aef256a8e8ea6213682802"
+    },
+    {
+      "path": "evidence/final/architecture.log",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/architecture.log",
+      "bytes": 911571,
+      "sha256": "304ad70ef0e5f6a3e160c76681d306832adbad5b8c8303f3dc6a35228b79db50"
+    },
+    {
+      "path": "evidence/final/artifacts/.last-run.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/artifacts/.last-run.json",
+      "bytes": 96,
+      "sha256": "d389ab5d3a6a1928dad9fda6c2b7261942aaf2dcf31f29997c82788f2d989a6b"
+    },
+    {
+      "path": "evidence/final/artifacts/modules-home-design-Figma--15444-ithout-changing-the-heading/information-focus.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/artifacts/modules-home-design-Figma--15444-ithout-changing-the-heading/information-focus.png",
+      "bytes": 64936,
+      "sha256": "1cba0af841c1456b7e8e8a18ec4a1527681b363044f274ba595db2deb1d4d629"
+    },
+    {
+      "path": "evidence/final/artifacts/modules-home-design-Figma--1bb73-ithout-changing-the-heading/information-focus.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/artifacts/modules-home-design-Figma--1bb73-ithout-changing-the-heading/information-focus.png",
+      "bytes": 57752,
+      "sha256": "f0e79629a46054057bc402f7eee97ee19d1d5ec6d1eb75f8e763c5cdc50b381a"
+    },
+    {
+      "path": "evidence/final/artifacts/modules-home-design-Figma--216c7-ithout-changing-the-heading/information-focus.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/artifacts/modules-home-design-Figma--216c7-ithout-changing-the-heading/information-focus.png",
+      "bytes": 64936,
+      "sha256": "1cba0af841c1456b7e8e8a18ec4a1527681b363044f274ba595db2deb1d4d629"
+    },
+    {
+      "path": "evidence/final/artifacts/modules-home-design-Figma--95065-ithout-changing-the-heading/error-context.md",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/artifacts/modules-home-design-Figma--95065-ithout-changing-the-heading/error-context.md",
+      "bytes": 13069,
+      "sha256": "0d2ebff1356f5a4ab1d2b4a3cf90acbbd2db8415f2ceb55673e4626f996139e8"
+    },
+    {
+      "path": "evidence/final/artifacts/modules-home-design-Figma--95065-ithout-changing-the-heading/test-failed-1.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/artifacts/modules-home-design-Figma--95065-ithout-changing-the-heading/test-failed-1.png",
+      "bytes": 141969,
+      "sha256": "5a07bdffd8757ec2d7515aff5e6c115ede7b116d2f042922d031482ee970c456"
+    },
+    {
+      "path": "evidence/final/artifacts/modules-home-design-Figma--95065-ithout-changing-the-heading/trace.zip",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/artifacts/modules-home-design-Figma--95065-ithout-changing-the-heading/trace.zip",
+      "bytes": 1479624,
+      "sha256": "f862774339cec59335dfb71fabe95dcffb552c378d2ac67bac8119c12362b44b"
+    },
+    {
+      "path": "evidence/final/artifacts/modules-home-design-Figma--b821a-ithout-changing-the-heading/information-focus.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/artifacts/modules-home-design-Figma--b821a-ithout-changing-the-heading/information-focus.png",
+      "bytes": 151941,
+      "sha256": "892a4b22033bd3b998db8ee5b8c35b522e32f3c4dab10689e30d8880613467c3"
+    },
+    {
+      "path": "evidence/final/browser-exit.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/browser-exit.json",
+      "bytes": 891,
+      "sha256": "8f27bd1fd8aa495c5447d53631df257b7ddf3d53346b40b4df6b1e649cf52eb3"
+    },
+    {
+      "path": "evidence/final/browser-running.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/browser-running.json",
+      "bytes": 429,
+      "sha256": "96d9f07a11aecf403ffc064784a940461229da8a3512ec9b33db52a60b3994b0"
+    },
+    {
+      "path": "evidence/final/browser.log",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/browser.log",
+      "bytes": 8940,
+      "sha256": "20fa0b94ec9756214913d02f6c07e266f645f0ccd540772c7d3dda4127b85192"
+    },
+    {
+      "path": "evidence/final/checks.py",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/checks.py",
+      "bytes": 607,
+      "sha256": "d3da75d52e77ccf9eb703a7ae853adfb17258d0ca64b14f1a446ad0d6a54e228"
+    },
+    {
+      "path": "evidence/final/format-exit.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/format-exit.json",
+      "bytes": 999,
+      "sha256": "a819e3646fe64676474d44f81186f83af06e33c0037c6e6761087c4a106459af"
+    },
+    {
+      "path": "evidence/final/format-running.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/format-running.json",
+      "bytes": 536,
+      "sha256": "b25c258878ff13e9fc97c6cf507d4ae83d1ffebbf17e6fd33b49b43b258379cd"
+    },
+    {
+      "path": "evidence/final/format.log",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/format.log",
+      "bytes": 66,
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "path": "evidence/final/lint-exit.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/lint-exit.json",
+      "bytes": 882,
+      "sha256": "b368461317a461cd31ceee10a0a29e0d9d3be8a5d634a206556fce72289e0b9e"
+    },
+    {
+      "path": "evidence/final/lint-running.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/lint-running.json",
+      "bytes": 421,
+      "sha256": "269a3ea7c2016df6bb1d37cd5817d007a98860417146ac71f66b5e0b27c5c441"
+    },
+    {
+      "path": "evidence/final/lint.log",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/lint.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/final/lint.mjs",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/lint.mjs",
+      "bytes": 366,
+      "sha256": "c8e54d293a8f69207969572b74f01789caf1336518882f481650ba5fccb8711d"
+    },
+    {
+      "path": "evidence/final/playwright.config.mjs",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/playwright.config.mjs",
+      "bytes": 909,
+      "sha256": "ebf4f53dbbd1a9f21fbbbe0515585378ae25d7299202aa8b96b21e1dee90abd8"
+    },
+    {
+      "path": "evidence/final/public-packages-exit.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/public-packages-exit.json",
+      "bytes": 857,
+      "sha256": "56aecaf2a0d1d0c03602cad6cf66d5c6caf6558717926d0ad32f94dbdfe2fe7a"
+    },
+    {
+      "path": "evidence/final/public-packages-running.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/public-packages-running.json",
+      "bytes": 384,
+      "sha256": "a81aab66b2701371699299f05cb9ee941dd157bb6d6487d490d5d3f675e1320d"
+    },
+    {
+      "path": "evidence/final/public-packages.log",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/public-packages.log",
+      "bytes": 2007,
+      "sha256": "6f3b01f08979a75f0ad0bab69de6cae8e573232ceedf91947f9f0fff22fd94d0"
+    },
+    {
+      "path": "evidence/final/results.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/results.json",
+      "bytes": 9049603,
+      "sha256": "0b2ed7f3f65193f3d57c6269cbc17a9cf093b1a2353ffcf91a42d395f1314d90"
+    },
+    {
+      "path": "evidence/final/root-tests-exit.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/root-tests-exit.json",
+      "bytes": 830,
+      "sha256": "9a3941c5488be4867152a68decc63ff725db71deb25e8bb139d268864ee0d5f4"
+    },
+    {
+      "path": "evidence/final/root-tests-running.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/root-tests-running.json",
+      "bytes": 363,
+      "sha256": "cbc770de23f165b830b55a634fa0051792675b92f547dc5626bcc2eb830bb01f"
+    },
+    {
+      "path": "evidence/final/root-tests.log",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/root-tests.log",
+      "bytes": 10958,
+      "sha256": "64a5135568db4cdb26975c556b20f68ca6811017ea7736446ce750ee49f8b105"
+    },
+    {
+      "path": "evidence/final/run-browser.py",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/run-browser.py",
+      "bytes": 261,
+      "sha256": "f22595e9ded6ae8a978df4d9cc0482ab7acfce71d16b4b68782f59807e42d026"
+    },
+    {
+      "path": "evidence/final/run-gate.py",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/run-gate.py",
+      "bytes": 1796,
+      "sha256": "08c7dcd2ba659029dd2f10e8888c2227b25c97e20e77b30c5bb69f81103684b2"
+    },
+    {
+      "path": "evidence/final/runtime.py",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/runtime.py",
+      "bytes": 2957,
+      "sha256": "2ad713aa8220a6afb01e59d93de53a61601304e6cffcd19ddcf42991e2feafac"
+    },
+    {
+      "path": "evidence/final/shared-server.mjs",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/shared-server.mjs",
+      "bytes": 2019,
+      "sha256": "62b554b19767db61a2c4b6659a421cd02af8a38a5f2d338d72db69146cabab10"
+    },
+    {
+      "path": "evidence/final/test-results/integration-meri-desktop.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/test-results/integration-meri-desktop.png",
+      "bytes": 78022,
+      "sha256": "d28073914d05f03754a6136efe0b1d72d9fee359862b69b76174fdd17f63965c"
+    },
+    {
+      "path": "evidence/final/test-results/integration-modules-mobile-collapsed.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/test-results/integration-modules-mobile-collapsed.png",
+      "bytes": 58627,
+      "sha256": "1a447d5383e740e89ca04e5497592c756af428454607efaffb84592ff873efb7"
+    },
+    {
+      "path": "evidence/final/test-results/integration-modules-mobile.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/test-results/integration-modules-mobile.png",
+      "bytes": 53748,
+      "sha256": "cb1cea9e9b92b4332cb1be5acebe3fde985a5f943f051197817d29166a2a6d42"
+    },
+    {
+      "path": "evidence/final/test-results/module-calendar.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/test-results/module-calendar.png",
+      "bytes": 70992,
+      "sha256": "1f6701d07b71df1982e00c753e24a769ed6c5ef4c9bdcd47a3ee1f4d025a140c"
+    },
+    {
+      "path": "evidence/final/test-results/module-directory.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/test-results/module-directory.png",
+      "bytes": 75866,
+      "sha256": "bf635aaa40d475d8bc4b139f42cba6cfe0b08ac85ee4e7c659d456c51b2da93d"
+    },
+    {
+      "path": "evidence/final/test-results/module-engagement.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/test-results/module-engagement.png",
+      "bytes": 98899,
+      "sha256": "33b1f6eef592b9dafeb012779762714457a6aaab019ee86ea9e04698fe7bf4d2"
+    },
+    {
+      "path": "evidence/final/test-results/module-intelligence.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/test-results/module-intelligence.png",
+      "bytes": 86116,
+      "sha256": "d6bc70a39835077c27a8d55b79c42b5942602054fdd27a1b19fa17226e7e733b"
+    },
+    {
+      "path": "evidence/final/test-results/module-planner.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/test-results/module-planner.png",
+      "bytes": 83090,
+      "sha256": "c113c763e27e8c6631cd0db69c852db183f24995aff8a40d5fac258ad1199699"
+    },
+    {
+      "path": "evidence/final/test-results/module-research-portfolios.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/test-results/module-research-portfolios.png",
+      "bytes": 54784,
+      "sha256": "183f4b4ee59f5f26d12e0c1feb360b22696bd6ecfbe158a6eebd559b53793754"
+    },
+    {
+      "path": "evidence/final/test-results/module-strategies.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/test-results/module-strategies.png",
+      "bytes": 89976,
+      "sha256": "6a389256e2faa7b6426a8ea4c5200092f0c19a43160d885045ab27ccf80bcd50"
+    },
+    {
+      "path": "evidence/final/test-results/module-workspace.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/test-results/module-workspace.png",
+      "bytes": 93952,
+      "sha256": "21717fd397b95d9d8909d8f7b81245de190a2a16d1ca237defa4ac11919340e8"
+    },
+    {
+      "path": "evidence/final/typecheck-exit.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/typecheck-exit.json",
+      "bytes": 844,
+      "sha256": "db8f12d66935a375b1367f0f756430a371e055c40fe03f297d91c6cc0adddbe2"
+    },
+    {
+      "path": "evidence/final/typecheck-running.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/typecheck-running.json",
+      "bytes": 379,
+      "sha256": "f7a60deb48fb9c370d405a4d6e7ba195775c6aabb8041ab526e57ccfb075e25a"
+    },
+    {
+      "path": "evidence/final/typecheck.log",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/typecheck.log",
+      "bytes": 821,
+      "sha256": "6228e3943abc3adfb727f99ecac170adccd07f2450eb2eed3f140d0e3b7ae16c"
+    },
+    {
+      "path": "evidence/focus-diagnosis/artifacts/.last-run.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/focus-diagnosis/artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "evidence/focus-diagnosis/artifacts/focus-Figma-Modules-inform-9ffef-ithout-changing-the-heading-repeat1/information-focus.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/focus-diagnosis/artifacts/focus-Figma-Modules-inform-9ffef-ithout-changing-the-heading-repeat1/information-focus.png",
+      "bytes": 151941,
+      "sha256": "892a4b22033bd3b998db8ee5b8c35b522e32f3c4dab10689e30d8880613467c3"
+    },
+    {
+      "path": "evidence/focus-diagnosis/artifacts/focus-Figma-Modules-inform-9ffef-ithout-changing-the-heading-repeat1/trace.zip",
+      "source": "/workspace/capiro-touch-accessibility-20261013/focus-diagnosis/artifacts/focus-Figma-Modules-inform-9ffef-ithout-changing-the-heading-repeat1/trace.zip",
+      "bytes": 2077163,
+      "sha256": "2f7c5ae0bc90e8f180f543666cfc0ec8589c2cc0b199f99079c766ea62a200a9"
+    },
+    {
+      "path": "evidence/focus-diagnosis/artifacts/focus-Figma-Modules-inform-9ffef-ithout-changing-the-heading-repeat2/information-focus.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/focus-diagnosis/artifacts/focus-Figma-Modules-inform-9ffef-ithout-changing-the-heading-repeat2/information-focus.png",
+      "bytes": 151941,
+      "sha256": "892a4b22033bd3b998db8ee5b8c35b522e32f3c4dab10689e30d8880613467c3"
+    },
+    {
+      "path": "evidence/focus-diagnosis/artifacts/focus-Figma-Modules-inform-9ffef-ithout-changing-the-heading-repeat2/trace.zip",
+      "source": "/workspace/capiro-touch-accessibility-20261013/focus-diagnosis/artifacts/focus-Figma-Modules-inform-9ffef-ithout-changing-the-heading-repeat2/trace.zip",
+      "bytes": 2028086,
+      "sha256": "9ea141c555438ee5a84e7dd727cd775d5fc759f91f669afef5e89bf564f82d12"
+    },
+    {
+      "path": "evidence/focus-diagnosis/artifacts/focus-Figma-Modules-inform-9ffef-ithout-changing-the-heading/information-focus.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/focus-diagnosis/artifacts/focus-Figma-Modules-inform-9ffef-ithout-changing-the-heading/information-focus.png",
+      "bytes": 151941,
+      "sha256": "892a4b22033bd3b998db8ee5b8c35b522e32f3c4dab10689e30d8880613467c3"
+    },
+    {
+      "path": "evidence/focus-diagnosis/artifacts/focus-Figma-Modules-inform-9ffef-ithout-changing-the-heading/trace.zip",
+      "source": "/workspace/capiro-touch-accessibility-20261013/focus-diagnosis/artifacts/focus-Figma-Modules-inform-9ffef-ithout-changing-the-heading/trace.zip",
+      "bytes": 2095779,
+      "sha256": "e86ed0f669f915a36dab6b779db446a33e4ed37853a3a40f8e4ffaf5aa67531e"
+    },
+    {
+      "path": "evidence/focus-diagnosis/browser.log",
+      "source": "/workspace/capiro-touch-accessibility-20261013/focus-diagnosis/browser.log",
+      "bytes": 1194,
+      "sha256": "0a917ab2568eb83fc2b49f74efe5e12a4179ae449412c79f03147e940b5e0ccc"
+    },
+    {
+      "path": "evidence/focus-diagnosis/focus.spec.ts",
+      "source": "/workspace/capiro-touch-accessibility-20261013/focus-diagnosis/focus.spec.ts",
+      "bytes": 5891,
+      "sha256": "6994b1ab52853bb395b79578847c8962a366995aadeac3749e8bb926de948a05"
+    },
+    {
+      "path": "evidence/focus-diagnosis/playwright.config.mjs",
+      "source": "/workspace/capiro-touch-accessibility-20261013/focus-diagnosis/playwright.config.mjs",
+      "bytes": 852,
+      "sha256": "ac5293a82ab94a69773662a8bc1bce4e15aa6054f977fbbeaa4815ba729dfd18"
+    },
+    {
+      "path": "evidence/focus-diagnosis/results.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/focus-diagnosis/results.json",
+      "bytes": 2522836,
+      "sha256": "4ced93241592831ba2d6055bee0fb770a034f08313e4f7feb68aae674a812f08"
+    },
+    {
+      "path": "evidence/focus-diagnosis/server.mjs",
+      "source": "/workspace/capiro-touch-accessibility-20261013/focus-diagnosis/server.mjs",
+      "bytes": 371,
+      "sha256": "180a7aff7348f77e1d328eb0f423cf9e3f7daf80dc3419224f09a3055a322eac"
+    },
+    {
+      "path": "evidence/make-focus-probe.py",
+      "source": "/workspace/capiro-touch-accessibility-20261013/make-focus-probe.py",
+      "bytes": 2385,
+      "sha256": "bb65f21905088460cceead546eb71a3ffe25431e674f322bfc279976fe4312b7"
+    },
+    {
+      "path": "evidence/package-evidence.py",
+      "source": "/workspace/capiro-touch-accessibility-20261013/package-evidence.py",
+      "bytes": 4305,
+      "sha256": "a50706f2adf3c264585e112b3a91968d7226b1081b9f0c3bc539cad9d8a5de72"
+    },
+    {
+      "path": "evidence/qualified/BROWSER-SUMMARY.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/BROWSER-SUMMARY.json",
+      "bytes": 9466,
+      "sha256": "1dc004f69f1f23390b9a4126f1928f0068c3bca4ef413e13c8b2cae4a9f2c450"
+    },
+    {
+      "path": "evidence/qualified/BUILD-DESTINATION.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/BUILD-DESTINATION.json",
+      "bytes": 310,
+      "sha256": "381a6e44053e7dba721a2c695d1d061803a4d101ede11180afa76276ed9570dd"
+    },
+    {
+      "path": "evidence/qualified/FROZEN-SOURCE.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/FROZEN-SOURCE.json",
+      "bytes": 683,
+      "sha256": "ba21c14fa2108efa53f1be31fafa531e458e67e9c739b73cf2e564763c4b858f"
+    },
+    {
+      "path": "evidence/qualified/HARNESS-AFTER.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/HARNESS-AFTER.json",
+      "bytes": 129,
+      "sha256": "cb36e606556f5798adee8ca1e41e2f79845fbc19ca138ac30e6f736b5a82b3f6"
+    },
+    {
+      "path": "evidence/qualified/HARNESS-BEFORE.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/HARNESS-BEFORE.json",
+      "bytes": 42907,
+      "sha256": "9b0219e1fb8c9efe181d0ab6b5458661fdab43b7f1950124a7d644586116cb99"
+    },
+    {
+      "path": "evidence/qualified/PREVIOUS-BUILD-INVENTORY.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/PREVIOUS-BUILD-INVENTORY.json",
+      "bytes": 909062,
+      "sha256": "89d7bdf37d3e602c5ce22461e68d20385355f503ffcfcaeb868a32a478ba16f4"
+    },
+    {
+      "path": "evidence/qualified/STANDALONE-DEPENDENCY-ISOLATION.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/STANDALONE-DEPENDENCY-ISOLATION.json",
+      "bytes": 1246,
+      "sha256": "ad2f9d08f8ff3b791509949930bc1750507966c62bd17037bd0a8826abe3b88b"
+    },
+    {
+      "path": "evidence/qualified/architecture-exit.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/architecture-exit.json",
+      "bytes": 851,
+      "sha256": "348a213bad71f16b0bdb8a1a0b79ec298c0c2bc703abe5946553fc38bdcde16d"
+    },
+    {
+      "path": "evidence/qualified/architecture-running.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/architecture-running.json",
+      "bytes": 382,
+      "sha256": "60ba1a7364060b3b10f24e9bfd90585aa1761a18fe5f0993050cb8df4703cd06"
+    },
+    {
+      "path": "evidence/qualified/architecture.log",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/architecture.log",
+      "bytes": 911571,
+      "sha256": "304ad70ef0e5f6a3e160c76681d306832adbad5b8c8303f3dc6a35228b79db50"
+    },
+    {
+      "path": "evidence/qualified/artifacts/.last-run.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "evidence/qualified/artifacts/modules-home-design-Figma--15444-ithout-changing-the-heading/information-focus.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/artifacts/modules-home-design-Figma--15444-ithout-changing-the-heading/information-focus.png",
+      "bytes": 64931,
+      "sha256": "d3bc6ebc50c133b72b7edb897006b43c72ecf9c3f063fc11e2ff59e3c1a6136b"
+    },
+    {
+      "path": "evidence/qualified/artifacts/modules-home-design-Figma--1bb73-ithout-changing-the-heading/information-focus.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/artifacts/modules-home-design-Figma--1bb73-ithout-changing-the-heading/information-focus.png",
+      "bytes": 57752,
+      "sha256": "f0e79629a46054057bc402f7eee97ee19d1d5ec6d1eb75f8e763c5cdc50b381a"
+    },
+    {
+      "path": "evidence/qualified/artifacts/modules-home-design-Figma--216c7-ithout-changing-the-heading/information-focus.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/artifacts/modules-home-design-Figma--216c7-ithout-changing-the-heading/information-focus.png",
+      "bytes": 64936,
+      "sha256": "1cba0af841c1456b7e8e8a18ec4a1527681b363044f274ba595db2deb1d4d629"
+    },
+    {
+      "path": "evidence/qualified/artifacts/modules-home-design-Figma--95065-ithout-changing-the-heading/information-focus.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/artifacts/modules-home-design-Figma--95065-ithout-changing-the-heading/information-focus.png",
+      "bytes": 151941,
+      "sha256": "892a4b22033bd3b998db8ee5b8c35b522e32f3c4dab10689e30d8880613467c3"
+    },
+    {
+      "path": "evidence/qualified/artifacts/modules-home-design-Figma--b821a-ithout-changing-the-heading/information-focus.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/artifacts/modules-home-design-Figma--b821a-ithout-changing-the-heading/information-focus.png",
+      "bytes": 151941,
+      "sha256": "892a4b22033bd3b998db8ee5b8c35b522e32f3c4dab10689e30d8880613467c3"
+    },
+    {
+      "path": "evidence/qualified/browser-exit.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/browser-exit.json",
+      "bytes": 896,
+      "sha256": "a5b9a90e90aa81ae055d052c480400621bde102294b0e5114c6fe009999e27e8"
+    },
+    {
+      "path": "evidence/qualified/browser-running.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/browser-running.json",
+      "bytes": 433,
+      "sha256": "436866b417ac0a2a9540402b219bb23e06c85b1a26f1824a23271e3cda19e6b3"
+    },
+    {
+      "path": "evidence/qualified/browser.log",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/browser.log",
+      "bytes": 5990,
+      "sha256": "0661b53e8bd19edf79fcc231a933e98b43075e14872aae72950a1ee97eff8a24"
+    },
+    {
+      "path": "evidence/qualified/build-exit.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/build-exit.json",
+      "bytes": 1450,
+      "sha256": "85779f02c49a0617d752b7fa99a38ce0b83187003375300d98f071f95ed2a0f5"
+    },
+    {
+      "path": "evidence/qualified/build-running.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/build-running.json",
+      "bytes": 989,
+      "sha256": "4a5a9b43bf0ee4d6c76cac02131c845c858a0d835544b6512d155196abff9248"
+    },
+    {
+      "path": "evidence/qualified/build.log",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/build.log",
+      "bytes": 2683,
+      "sha256": "ab48ed711799c20cb13953820f5ab1ac45d6db84158a445a8f1d3b725a104978"
+    },
+    {
+      "path": "evidence/qualified/checks.py",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/checks.py",
+      "bytes": 652,
+      "sha256": "e00eefdec543b8a0dc8f8841b2f3ef2047bb1b7fecde29172e6761a5b9857719"
+    },
+    {
+      "path": "evidence/qualified/format-exit.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/format-exit.json",
+      "bytes": 1049,
+      "sha256": "69ecfe2ebd7b6250616ff2014160fe7eb010d802412b2de8c4222af55789da47"
+    },
+    {
+      "path": "evidence/qualified/format-running.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/format-running.json",
+      "bytes": 586,
+      "sha256": "1f2d5cecbfad3bd977376cc73e3577a55131487d9cbae564e1608232be6bc4e2"
+    },
+    {
+      "path": "evidence/qualified/format.log",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/format.log",
+      "bytes": 66,
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "path": "evidence/qualified/lint-exit.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/lint-exit.json",
+      "bytes": 886,
+      "sha256": "cb9e024558d0fc796523b18fa5fddea921be3e0e8af0e4922df3edd5b9dc9436"
+    },
+    {
+      "path": "evidence/qualified/lint-running.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/lint-running.json",
+      "bytes": 425,
+      "sha256": "a9356d0e572e858907852c2f6ce1f1ce41ebdfbe56fa452f21b5f5dcab192878"
+    },
+    {
+      "path": "evidence/qualified/lint.log",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/lint.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/qualified/lint.mjs",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/lint.mjs",
+      "bytes": 402,
+      "sha256": "e3782efca60ab6eac959cf6c4e17f97d30c1ed3294a94695c694e050a8bb94de"
+    },
+    {
+      "path": "evidence/qualified/playwright.config.mjs",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/playwright.config.mjs",
+      "bytes": 921,
+      "sha256": "937fa584b99138d8e8c98ed3f006a37594a0a835f6c9997fb858481b684c7602"
+    },
+    {
+      "path": "evidence/qualified/production-exit.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/production-exit.json",
+      "bytes": 1158,
+      "sha256": "c1b3fcffbbc0119865e7d05a38bc6eb8d87f9f52f5310e76e1ae60b116ec13fa"
+    },
+    {
+      "path": "evidence/qualified/production-running.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/production-running.json",
+      "bytes": 691,
+      "sha256": "fa1d5169dc55b35ea33546273eb6a69a17758e809dbecdb219b8c56213fb8e5f"
+    },
+    {
+      "path": "evidence/qualified/production.log",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/production.log",
+      "bytes": 8329,
+      "sha256": "db6eb54e7684f7c112c18175cd03e2828eff6882b7a9f6b74715cf785e4596d6"
+    },
+    {
+      "path": "evidence/qualified/production/preview-root-smoke.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/production/preview-root-smoke.json",
+      "bytes": 101,
+      "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e"
+    },
+    {
+      "path": "evidence/qualified/production/production-meri-1440-dark.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/production/production-meri-1440-dark.png",
+      "bytes": 176961,
+      "sha256": "9fcdec3a21c0df3ffae4d22dbdc6ac7d75a65d822408b3c79a2dae9ffe2cc779"
+    },
+    {
+      "path": "evidence/qualified/production/production-meri-1440-light.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/production/production-meri-1440-light.png",
+      "bytes": 96849,
+      "sha256": "a5d3d1a28cfba46972df77eb6b003ead813d04284dcaea1bff21b74ed02850d7"
+    },
+    {
+      "path": "evidence/qualified/production/production-meri-390-dark.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/production/production-meri-390-dark.png",
+      "bytes": 99410,
+      "sha256": "215f96ba674e81ccc60442b932116821036da3343006816f93e4808a180ef91b"
+    },
+    {
+      "path": "evidence/qualified/production/production-meri-390-light.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/production/production-meri-390-light.png",
+      "bytes": 66047,
+      "sha256": "70b09359e12d056ef33cc4834f5d4f2110cf1ef0fe22cac67fa80d71d3ea00f3"
+    },
+    {
+      "path": "evidence/qualified/production/production-meri-error-1440-dark.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/production/production-meri-error-1440-dark.png",
+      "bytes": 214506,
+      "sha256": "85be5f9d8462e9ecceb23dd8d52f92acd24cada842ff3ea7549ddd9b9755737e"
+    },
+    {
+      "path": "evidence/qualified/production/production-meri-error-1440-light.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/production/production-meri-error-1440-light.png",
+      "bytes": 128298,
+      "sha256": "1586b1a0636c92d34d9a9619bce176533521e867018bb796a30523ef36562e20"
+    },
+    {
+      "path": "evidence/qualified/production/production-meri-error-390-dark.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/production/production-meri-error-390-dark.png",
+      "bytes": 142583,
+      "sha256": "7bc9915e0ac60a73b50f37793c6b6d2ab92d92c79cb6483b615b798b5c475ab7"
+    },
+    {
+      "path": "evidence/qualified/production/production-meri-error-390-light.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/production/production-meri-error-390-light.png",
+      "bytes": 98541,
+      "sha256": "eb8b1a3934258c0f608428e34ca1a8e631979eba2ddb530f1937da776791e28e"
+    },
+    {
+      "path": "evidence/qualified/production/production-meri-files-1440-dark.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/production/production-meri-files-1440-dark.png",
+      "bytes": 119711,
+      "sha256": "ea36fa9d2cdd7edeb597eb9d91e069afef14faf087c22ab8f0572a568bd88759"
+    },
+    {
+      "path": "evidence/qualified/production/production-meri-files-1440-light.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/production/production-meri-files-1440-light.png",
+      "bytes": 55142,
+      "sha256": "3e48b089082225aac6d4dd934f2a7fdfd517c19879689ad074b6083f3c2ce361"
+    },
+    {
+      "path": "evidence/qualified/production/production-meri-files-390-dark.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/production/production-meri-files-390-dark.png",
+      "bytes": 43458,
+      "sha256": "c14f64a07cc5cf8d91de4da7fd4a8e89de5c14f15684bde114725bb18e5b209e"
+    },
+    {
+      "path": "evidence/qualified/production/production-meri-files-390-light.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/production/production-meri-files-390-light.png",
+      "bytes": 22875,
+      "sha256": "b4f20026935a2fe0abb8935fe4874b99b688bce9f172d77e20c625f35f10d50f"
+    },
+    {
+      "path": "evidence/qualified/production/production-portfolio-1440-dark.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/production/production-portfolio-1440-dark.png",
+      "bytes": 29101,
+      "sha256": "39049b79761b8a2d4c6c6ef06178b6777f97556ad618f7f762fe0b741e316dfa"
+    },
+    {
+      "path": "evidence/qualified/production/production-portfolio-1440-light.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/production/production-portfolio-1440-light.png",
+      "bytes": 29213,
+      "sha256": "adb252c0670b1797a9515d1ea50002c30fd73566891ced4cb9634a26a102be8e"
+    },
+    {
+      "path": "evidence/qualified/production/production-portfolio-390-dark.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/production/production-portfolio-390-dark.png",
+      "bytes": 21836,
+      "sha256": "532b06a716f405c135b7b3ee84008b5b208415588a1aa934725894561f53e318"
+    },
+    {
+      "path": "evidence/qualified/production/production-portfolio-390-light.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/production/production-portfolio-390-light.png",
+      "bytes": 22077,
+      "sha256": "083c3ac5298d3cafd0c8b24b7678ac36e86a628352a17fbcabd454717b1ccf37"
+    },
+    {
+      "path": "evidence/qualified/production/production-smoke.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/production/production-smoke.json",
+      "bytes": 7698,
+      "sha256": "537d89f5f7abf8bd71fa9fdcffc76203150d5516f66ae6be0a5dcc951eabe234"
+    },
+    {
+      "path": "evidence/qualified/production/standalone-default.log",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/production/standalone-default.log",
+      "bytes": 149,
+      "sha256": "8a1b9ba1da0793edd3b6640d638f2fb0e7e0bdc3009732dea31225fac481bc3e"
+    },
+    {
+      "path": "evidence/qualified/production/standalone-portfolio.log",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/production/standalone-portfolio.log",
+      "bytes": 147,
+      "sha256": "1fb0278dec1db2aef66d951b30910680cc3d3de170f07bdab0c84a200e1bc4f3"
+    },
+    {
+      "path": "evidence/qualified/public-packages-exit.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/public-packages-exit.json",
+      "bytes": 856,
+      "sha256": "a276e94ea91502786817149c26fef1715303d14f7221bc088b805e7f37e70cc7"
+    },
+    {
+      "path": "evidence/qualified/public-packages-running.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/public-packages-running.json",
+      "bytes": 384,
+      "sha256": "40e782544cb5a2d2bf4fc9796ab1fc6984cfc2385ce59a0b40948ca78f4da328"
+    },
+    {
+      "path": "evidence/qualified/public-packages.log",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/public-packages.log",
+      "bytes": 2007,
+      "sha256": "6f3b01f08979a75f0ad0bab69de6cae8e573232ceedf91947f9f0fff22fd94d0"
+    },
+    {
+      "path": "evidence/qualified/results.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/results.json",
+      "bytes": 9676906,
+      "sha256": "aba454fddb327763ea614917d418ed35518faa014a53abb26b53faa9f59c1d2f"
+    },
+    {
+      "path": "evidence/qualified/root-tests-exit.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/root-tests-exit.json",
+      "bytes": 830,
+      "sha256": "d2fdebbbf3bec4cf679aadb8e24984afb0204547e78c25b21668aea8a09ada91"
+    },
+    {
+      "path": "evidence/qualified/root-tests-running.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/root-tests-running.json",
+      "bytes": 363,
+      "sha256": "ef331d0c41f2624a6be82099adefc3fa4043299751915e2798242ecceed2b7c9"
+    },
+    {
+      "path": "evidence/qualified/root-tests.log",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/root-tests.log",
+      "bytes": 10956,
+      "sha256": "a4e3b321944fc158483ab17a2224bebed0abe5776bb3c69f5240db2648d6680d"
+    },
+    {
+      "path": "evidence/qualified/run-browser.py",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/run-browser.py",
+      "bytes": 261,
+      "sha256": "f22595e9ded6ae8a978df4d9cc0482ab7acfce71d16b4b68782f59807e42d026"
+    },
+    {
+      "path": "evidence/qualified/run-gate.py",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/run-gate.py",
+      "bytes": 1796,
+      "sha256": "08c7dcd2ba659029dd2f10e8888c2227b25c97e20e77b30c5bb69f81103684b2"
+    },
+    {
+      "path": "evidence/qualified/runtime.py",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/runtime.py",
+      "bytes": 2957,
+      "sha256": "2ad713aa8220a6afb01e59d93de53a61601304e6cffcd19ddcf42991e2feafac"
+    },
+    {
+      "path": "evidence/qualified/shared-server.mjs",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/shared-server.mjs",
+      "bytes": 371,
+      "sha256": "180a7aff7348f77e1d328eb0f423cf9e3f7daf80dc3419224f09a3055a322eac"
+    },
+    {
+      "path": "evidence/qualified/test-results/integration-meri-desktop.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/test-results/integration-meri-desktop.png",
+      "bytes": 78025,
+      "sha256": "1e04c46b98163cacfc3221c387d3895ea6828092fed8c8671a40bf8e8054817a"
+    },
+    {
+      "path": "evidence/qualified/test-results/integration-modules-mobile-collapsed.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/test-results/integration-modules-mobile-collapsed.png",
+      "bytes": 58627,
+      "sha256": "1a447d5383e740e89ca04e5497592c756af428454607efaffb84592ff873efb7"
+    },
+    {
+      "path": "evidence/qualified/test-results/integration-modules-mobile.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/test-results/integration-modules-mobile.png",
+      "bytes": 53748,
+      "sha256": "cb1cea9e9b92b4332cb1be5acebe3fde985a5f943f051197817d29166a2a6d42"
+    },
+    {
+      "path": "evidence/qualified/test-results/module-calendar.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/test-results/module-calendar.png",
+      "bytes": 70992,
+      "sha256": "1f6701d07b71df1982e00c753e24a769ed6c5ef4c9bdcd47a3ee1f4d025a140c"
+    },
+    {
+      "path": "evidence/qualified/test-results/module-directory.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/test-results/module-directory.png",
+      "bytes": 75866,
+      "sha256": "bf635aaa40d475d8bc4b139f42cba6cfe0b08ac85ee4e7c659d456c51b2da93d"
+    },
+    {
+      "path": "evidence/qualified/test-results/module-engagement.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/test-results/module-engagement.png",
+      "bytes": 98899,
+      "sha256": "33b1f6eef592b9dafeb012779762714457a6aaab019ee86ea9e04698fe7bf4d2"
+    },
+    {
+      "path": "evidence/qualified/test-results/module-intelligence.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/test-results/module-intelligence.png",
+      "bytes": 86116,
+      "sha256": "d6bc70a39835077c27a8d55b79c42b5942602054fdd27a1b19fa17226e7e733b"
+    },
+    {
+      "path": "evidence/qualified/test-results/module-planner.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/test-results/module-planner.png",
+      "bytes": 83090,
+      "sha256": "c113c763e27e8c6631cd0db69c852db183f24995aff8a40d5fac258ad1199699"
+    },
+    {
+      "path": "evidence/qualified/test-results/module-research-portfolios.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/test-results/module-research-portfolios.png",
+      "bytes": 54784,
+      "sha256": "183f4b4ee59f5f26d12e0c1feb360b22696bd6ecfbe158a6eebd559b53793754"
+    },
+    {
+      "path": "evidence/qualified/test-results/module-strategies.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/test-results/module-strategies.png",
+      "bytes": 89976,
+      "sha256": "6a389256e2faa7b6426a8ea4c5200092f0c19a43160d885045ab27ccf80bcd50"
+    },
+    {
+      "path": "evidence/qualified/test-results/module-workspace.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/test-results/module-workspace.png",
+      "bytes": 93952,
+      "sha256": "21717fd397b95d9d8909d8f7b81245de190a2a16d1ca237defa4ac11919340e8"
+    },
+    {
+      "path": "evidence/qualified/typecheck-exit.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/typecheck-exit.json",
+      "bytes": 845,
+      "sha256": "5c75b0c779238645dbbe1a173a24a640188084fe8ac3cbe2c8d8e407f26a2e30"
+    },
+    {
+      "path": "evidence/qualified/typecheck-running.json",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/typecheck-running.json",
+      "bytes": 379,
+      "sha256": "aac35be7c6609e8ed16a47fc4cc77bfecce093666361b06eeae4ee33b7e323eb"
+    },
+    {
+      "path": "evidence/qualified/typecheck.log",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/typecheck.log",
+      "bytes": 821,
+      "sha256": "6228e3943abc3adfb727f99ecac170adccd07f2450eb2eed3f140d0e3b7ae16c"
+    },
+    {
+      "path": "evidence/qualified/visual-inspection/desktop-mouse.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/visual-inspection/desktop-mouse.png",
+      "bytes": 155136,
+      "sha256": "3e31fdf6580717dbd9948a40fc839b7924fdfd880a98de2db6d1b0ebab0812bc"
+    },
+    {
+      "path": "evidence/qualified/visual-inspection/touch-320.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/visual-inspection/touch-320.png",
+      "bytes": 56652,
+      "sha256": "519a55bcf2022fc2636ce73e53ef75f359907d7135ff0c78c94466c1284bb5d4"
+    },
+    {
+      "path": "evidence/qualified/visual-inspection/touch-390.png",
+      "source": "/workspace/capiro-touch-accessibility-20261013/qualified/visual-inspection/touch-390.png",
+      "bytes": 63851,
+      "sha256": "f29ac2804dbe37b0c426a4fdb73b3c57d5e0e92c5ac1038e4ccf3a6da0ae2279"
+    },
+    {
+      "path": "evidence/summarize-browser.py",
+      "source": "/workspace/capiro-touch-accessibility-20261013/summarize-browser.py",
+      "bytes": 1631,
+      "sha256": "2e66ebc75545bca8952cdba2ec2a7156e4f7cb090fc9501962c7640134201454"
+    },
+    {
+      "path": "evidence/verify-preservation.py",
+      "source": "/workspace/capiro-touch-accessibility-20261013/verify-preservation.py",
+      "bytes": 2116,
+      "sha256": "e412289c0462250901c8d106c5ee55ef82a35efebb97a0a7258bfdfc06a51208"
+    },
+    {
+      "path": "review/A2CF-SOURCE-PRESERVATION.json",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/A2CF-SOURCE-PRESERVATION.json",
+      "bytes": 1766,
+      "sha256": "4eff496b6ccfb08591adc9b87189ab2837aad22500d2ee555149a2014556670b"
+    },
+    {
+      "path": "review/DIAGNOSTIC-ORDERING.json",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/DIAGNOSTIC-ORDERING.json",
+      "bytes": 25745,
+      "sha256": "af9d06e89ef07b047e2704aac21f2c2560fac888f7f9fcf0df4f1c9a6308a8d1"
+    },
+    {
+      "path": "review/FINAL-ATTACHMENTS.json",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/FINAL-ATTACHMENTS.json",
+      "bytes": 12346,
+      "sha256": "8af3b7db8a3c19126856bb286e3fbd37ab3361757584924b5e8c04d60f613fee"
+    },
+    {
+      "path": "review/FINAL-AXE.json",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/FINAL-AXE.json",
+      "bytes": 51596,
+      "sha256": "27099b40b02b92d24169a88f9b75828c179f8361a1f3042f4e8b3a9b351bb33f"
+    },
+    {
+      "path": "review/FINAL-BROWSER-CASES.json",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/FINAL-BROWSER-CASES.json",
+      "bytes": 13341,
+      "sha256": "0a863744862f3688c46b5fac0731ac1e33486f211556c24001b081dd12b23f72"
+    },
+    {
+      "path": "review/FINAL-BROWSER-RECONCILIATION.json",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/FINAL-BROWSER-RECONCILIATION.json",
+      "bytes": 1236,
+      "sha256": "38a3de0dd1b6fc9457018019f993d9ac70c368fbd42ba63f9f9d4250ade4fcab"
+    },
+    {
+      "path": "review/FINAL-GATES.json",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/FINAL-GATES.json",
+      "bytes": 3948,
+      "sha256": "696592a6f515a8d46b15199d557f0442efe5b43264a70b8a3bd6a19d135d0044"
+    },
+    {
+      "path": "review/FINAL-REVIEW.json",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/FINAL-REVIEW.json",
+      "bytes": 1344,
+      "sha256": "8496b0ee87783d6c3efc6b681b95c29f0b9137726be0d24eb509a8de2c8a3c7b"
+    },
+    {
+      "path": "review/FINAL-SOURCE-REVIEW.json",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/FINAL-SOURCE-REVIEW.json",
+      "bytes": 2287,
+      "sha256": "08e838e4e30ab55d41dd385c4d5124c88f37b7cd801e360a87baaa7599529fa2"
+    },
+    {
+      "path": "review/HARNESS-PRESERVATION.json",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/HARNESS-PRESERVATION.json",
+      "bytes": 707,
+      "sha256": "68d67026eaaea0c2be64e0412eae6d1a633920e9b632e85efda9a0e941eed0ee"
+    },
+    {
+      "path": "review/INPUT-HASHES.json",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/INPUT-HASHES.json",
+      "bytes": 12893,
+      "sha256": "9e9673e584ce7648136885619324b62c55ad48ba7f25f27f06e7af3d72aa0515"
+    },
+    {
+      "path": "review/MANIFEST.json",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/MANIFEST.json",
+      "bytes": 4971,
+      "sha256": "ae6176732cfd9dd2fca038ddba14d1cc2f5466ff8b78d2df67c8f6ef8bc4decc"
+    },
+    {
+      "path": "review/PACKAGING-REVIEW.json",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/PACKAGING-REVIEW.json",
+      "bytes": 2459,
+      "sha256": "4cedfedc9a6d55aca3a21ef4c07909b7381446bc7a3174b3c3bc73fe6873c9b6"
+    },
+    {
+      "path": "review/PLAN-REVIEW.json",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/PLAN-REVIEW.json",
+      "bytes": 3616,
+      "sha256": "e653215163b6d6462f025df3bb4ea17544308e02809951d359175dea81c0d5ac"
+    },
+    {
+      "path": "review/PRODUCTION-REVIEW.json",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/PRODUCTION-REVIEW.json",
+      "bytes": 2221,
+      "sha256": "35f9094181739974876e39fc6a37ca43005bbf19028c8b9e18812d85bca46ac6"
+    },
+    {
+      "path": "review/REPORT.md",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/REPORT.md",
+      "bytes": 6410,
+      "sha256": "2d8473170c97b0c562becbfccc3fc226ea4e498a645ab02c7c97066860e2d42a"
+    },
+    {
+      "path": "review/SELECTED-SCREENSHOTS.json",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/SELECTED-SCREENSHOTS.json",
+      "bytes": 787,
+      "sha256": "24f4eacc4542f176f168eed35321c92d7d907f0b6e8c57a8e2e2ea068a77a184"
+    },
+    {
+      "path": "review/TRUSTED-TOUCH-INPUTS.json",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/TRUSTED-TOUCH-INPUTS.json",
+      "bytes": 331,
+      "sha256": "4a485fc3db4f8b4f71b7689f447337e1103c9573035418405b2456fb2ef79900"
+    },
+    {
+      "path": "review/VISUAL-DISPOSITION.json",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/VISUAL-DISPOSITION.json",
+      "bytes": 3121,
+      "sha256": "ea8fe01978711c8f3d409b1bf2e6cb8ef14167526537d5f24bafd6bfa7c004b9"
+    },
+    {
+      "path": "review/a2cf-checkpoint/CASE-RECONCILIATION.json",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/a2cf-checkpoint/CASE-RECONCILIATION.json",
+      "bytes": 31143,
+      "sha256": "6989e78f7f91d0630e96a5401d5123e469fe2a609116975135c59c210b274602"
+    },
+    {
+      "path": "review/a2cf-checkpoint/MANIFEST.json",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/a2cf-checkpoint/MANIFEST.json",
+      "bytes": 832,
+      "sha256": "d49cd880d608c10e98de64e85b9a62f30bbab64da42462ba551f2e5b2a396cce"
+    },
+    {
+      "path": "review/a2cf-checkpoint/RAW-BINDINGS.json",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/a2cf-checkpoint/RAW-BINDINGS.json",
+      "bytes": 1786,
+      "sha256": "3f28a07721c60f15c25b906094e22aaed3672cc341fe15b729f9d0ce4d5276a7"
+    },
+    {
+      "path": "review/a2cf-checkpoint/REVIEW.json",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/a2cf-checkpoint/REVIEW.json",
+      "bytes": 1489,
+      "sha256": "b24dfe3aeb70c5fe740250d4bdf945fd74f8f83d8151feea56448cc5b2aa9dd2"
+    },
+    {
+      "path": "review/a2cf-checkpoint/TRACE-EXCERPTS.json",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/a2cf-checkpoint/TRACE-EXCERPTS.json",
+      "bytes": 16635,
+      "sha256": "e7f2f395027544c6a2a6c11de2c7c5559009a96fed170bd728f6f9a114021ef1"
+    },
+    {
+      "path": "review/desktop-repeated.png",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/desktop-repeated.png",
+      "bytes": 155136,
+      "sha256": "3e31fdf6580717dbd9948a40fc839b7924fdfd880a98de2db6d1b0ebab0812bc"
+    },
+    {
+      "path": "review/final-audit.py",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/final-audit.py",
+      "bytes": 14070,
+      "sha256": "bc23805202223ef42554d26d07bc8c177f24b97660a6170418b9a4ef1773fc84"
+    },
+    {
+      "path": "review/touch320-repeated.png",
+      "source": "/workspace/capiro-input-accessibility-review-20261013/touch320-repeated.png",
+      "bytes": 56635,
+      "sha256": "d23e724578913cce09764c0e933c2169f88a42303714f30b2896eb5a6b598562"
+    }
+  ],
+  "symlinksNotFollowed": [
+    {
+      "path": "evidence/qualified/preserved-build-outer-node-modules/shiki-43d062b67f27bbdc",
+      "target": "../../../../node_modules/shiki"
+    }
+  ],
+  "excluded": [
+    {
+      "path": "evidence/tmp",
+      "source": "/workspace/capiro-touch-accessibility-20261013/tmp",
+      "reason": "Generated compiled output or temporary browser data; original retained."
+    },
+    {
+      "path": "evidence/generated",
+      "source": "/workspace/capiro-touch-accessibility-20261013/generated",
+      "reason": "Generated compiled output or temporary browser data; original retained."
+    },
+    {
+      "path": "evidence/final/modules-harness",
+      "source": "/workspace/capiro-touch-accessibility-20261013/final/modules-harness",
+      "reason": "Generated compiled output or temporary browser data; original retained."
+    }
+  ],
+  "scope": "Original raw baseline/checkpoint/qualified reports, traces, screenshots, source/storage receipts and independent review. Compiled builds, caches, temporary browser data and dependency aliases are excluded and retained locally. Symlinks are recorded only, never followed or reconstructed."
+}
