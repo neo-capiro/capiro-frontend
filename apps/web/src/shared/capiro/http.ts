@@ -7,12 +7,22 @@ import type {
   OperationResponse,
 } from "./contracts";
 import { validateUploadFiles, type CapiroUploadFile } from "./multipart";
+import {
+  workspaceBriefConflictCode,
+  type WorkspaceBriefConflictCode,
+} from "./workspace-brief-copy-errors";
 
 export class CapiroApiError extends Error {
   readonly status: number;
-  constructor(status: number, message: string) {
+  readonly code?: WorkspaceBriefConflictCode;
+  constructor(
+    status: number,
+    message: string,
+    code?: WorkspaceBriefConflictCode,
+  ) {
     super(message);
     this.status = status;
+    this.code = code;
     this.name = "CapiroApiError";
   }
 }
@@ -120,6 +130,7 @@ async function responsePayload(
       response.status === 401 && options.credentials !== "omit"
         ? "Your session expired. Sign in again."
         : (readableError(payload) ?? "The request could not be completed."),
+      workspaceBriefConflictCode(operation, response.status, payload),
     );
   }
   const parsed = operation.response.safeParse(payload);

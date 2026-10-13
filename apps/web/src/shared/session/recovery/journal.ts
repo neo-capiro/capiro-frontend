@@ -139,28 +139,75 @@ export function updateRecovery<Data>(
     decode(verified, contract);
   });
 }
-export function acknowledgeRecovery(
+function retireRecovery(
   scope: string,
   requestId: string,
+  disposition:
+    | { state: "acknowledged" }
+    | { state: "refused"; code: "WORKSPACE_BRIEF_STATE_CONFLICT" },
   assert: () => void,
 ) {
   return locked(scope, assert, async () => {
     const existing = await current(scope);
     if (existing?.state !== "pending" || existing.requestId !== requestId)
       throw new RecoveryStorageError();
-    // Only explicit acknowledgement of a validated completed receipt retires an
-    // intent. Retain the non-sensitive fence; erase the encrypted draft payload.
+    // Retain the non-sensitive fence; erase the encrypted draft payload.
+    // A known refusal is distinct from an acknowledged completed receipt.
     await writeJournalRecord(
       scope,
       await encryptJournal({
         version: 1,
         scope,
         requestId,
-        state: "acknowledged",
+        ...disposition,
       }),
     );
     const verified = await current(scope);
-    if (verified?.state !== "acknowledged" || verified.requestId !== requestId)
+    if (
+      verified?.state !== disposition.state ||
+      verified.requestId !== requestId
+    )
       throw new RecoveryStorageError();
   });
+}
+
+/** Only explicit acknowledgement of a validated completed receipt. */
+export function acknowledgeRecovery(
+  scope: string,
+  requestId: string,
+  assert: () => void,
+) {
+  return retireRecovery(scope, requestId, { state: "acknowledged" }, assert);
+}
+
+/** Caller must verify this exact command's no-write refusal and fresh reads,
+ * under the same execution lock used for all attempts. Unknown outcomes remain pending. */
+export function retireRefusedRecovery(
+  scope: string,
+  requestId: string,
+  code: "WORKSPACE_BRIEF_STATE_CONFLICT",
+  assert: () => void,
+) {
+  if (code !== "WORKSPACE_BRIEF_STATE_CONFLICT")
+    return Promise.reject(new RecoveryStorageError());
+  return retireRecovery(scope, requestId, { state: "refused", code }, assert);
+}
+
+/** Serialize dispatch/reconciliation across tabs without nesting the storage lock.
+ * Callers re-read the journal after acquiring this lock before sending anything. */
+export async function withRecoveryCommandLock<T>(
+  scope: string,
+  assert: () => void,
+  action: () => Promise<T>,
+): Promise<T> {
+  if (!navigator.locks) throw new RecoveryStorageError();
+  return navigator.locks.request(
+    "capiro-command-execution-v1:" + scope,
+    async () => {
+      assert();
+      const result = await action();
+      assert();
+      return result;
+    },
+  );
 }

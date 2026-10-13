@@ -17,6 +17,15 @@ const envelope = z.discriminatedUnion("state", [
       state: z.literal("acknowledged"),
     })
     .strict(),
+  z
+    .object({
+      version: z.literal(1),
+      scope: z.string(),
+      requestId: z.uuid(),
+      state: z.literal("refused"),
+      code: z.literal("WORKSPACE_BRIEF_STATE_CONFLICT"),
+    })
+    .strict(),
 ]);
 export type JournalEnvelope = z.infer<typeof envelope>;
 const recordSchema = z

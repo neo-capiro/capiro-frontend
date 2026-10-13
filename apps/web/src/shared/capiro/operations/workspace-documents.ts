@@ -1,6 +1,8 @@
 import { z } from "zod";
 import { defineOperation } from "../contracts";
 import { emptyWorkspaceRequest, workspaceId } from "./workspace-schemas";
+import { briefCopyBodySchema } from "./workspace-brief-copy-body";
+import { briefCopySourceSchema } from "./workspace-brief-copy-schemas";
 
 const source =
   "capirov2@4be13b0 apps/workspace/src/drafts/{drafts.service,dto/draft.dto}.ts; documents/{documents.service,dto/document.dto}.ts; versions/versions.service.ts; delivery/share-link.service.ts";
@@ -41,28 +43,43 @@ const sectionBlock = z
     content: z.string().optional(),
   })
   .strict();
-const persistedDocumentBody = z.object({
-  blocks: z
-    .array(
-      z.object({
-        id: z.string(),
-        type: z.enum(["section", "photo", "table", "logo"]),
-        title: z.string().optional(),
-        content: z.string().optional(),
-      }),
-    )
-    .optional(),
-  newsletter: newsletterBody.optional(),
-});
-export const draftDocument = z.object({
+const persistedDocumentBody = z
+  .object({
+    blocks: z
+      .array(
+        z
+          .object({
+            id: z.string(),
+            type: z.enum(["section", "photo", "table", "logo"]),
+            title: z.string().optional(),
+            content: z.string().optional(),
+          })
+          .passthrough(),
+      )
+      .optional(),
+    newsletter: newsletterBody.optional(),
+  })
+  .passthrough();
+const documentIdentity = z.object({
   id: workspaceId,
   draftId: workspaceId,
   name: z.string(),
   ordinal: z.number(),
-  body: persistedDocumentBody,
   createdAt: z.string(),
   updatedAt: z.string(),
 });
+// A malformed association never falls through to the ordinary document path.
+// Bound bodies may use any rich JSON fields, including ordinary reserved names.
+export const draftDocument = z.union([
+  documentIdentity.extend({
+    sourceBriefVersion: briefCopySourceSchema,
+    body: briefCopyBodySchema,
+  }),
+  documentIdentity.extend({
+    sourceBriefVersion: z.null().optional(),
+    body: persistedDocumentBody,
+  }),
+]);
 export const workspaceDraft = z.object({
   id: workspaceId,
   prospectId: workspaceId.nullable().optional(),

@@ -20,19 +20,10 @@ import {
 import { publicPlannerFormOperations } from "./operations/planner-public-forms";
 import { publicOnboardOperations } from "./operations/onboard-public";
 
+import { jsonError, serviceErrorResponse } from "./gateway-errors";
+
 const requestLimit = 2_000_000;
 const responseLimit = 8_000_000;
-const jsonError = (status: number, message: string) =>
-  Response.json(
-    { message },
-    {
-      status,
-      headers: {
-        "Cache-Control": "no-store",
-        "Referrer-Policy": "no-referrer",
-      },
-    },
-  );
 
 function browserHandoff(
   payload: unknown,
@@ -67,26 +58,8 @@ async function serviceResponse(
   signal: AbortSignal,
   publicCapability: boolean,
 ): Promise<Response> {
-  if (!response.ok) {
-    await response.body?.cancel().catch(() => undefined);
-    const message =
-      response.status === 401
-        ? publicCapability
-          ? "This public link is unavailable or has expired."
-          : "Your session expired. Sign in again."
-        : response.status === 403
-          ? "You do not have access to this operation."
-          : response.status === 404
-            ? "The requested record was not found."
-            : response.status === 409
-              ? "The record changed. Reload it before trying again."
-              : response.status === 429
-                ? "The service is busy. Please retry shortly."
-                : response.status >= 500
-                  ? "The service is unavailable. Please retry."
-                  : "The operation was rejected.";
-    return jsonError(response.status, message);
-  }
+  if (!response.ok)
+    return serviceErrorResponse(response, operation, signal, publicCapability);
   if (operation.responseMode === "binary" && operation.binary) {
     const download = await readBinaryResponse(
       response,
