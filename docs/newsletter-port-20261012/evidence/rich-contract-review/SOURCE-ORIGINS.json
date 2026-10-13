@@ -1,0 +1,94 @@
+{
+  "observedAt": "2026-10-12T23:50:24.731Z",
+  "producerPRs": [
+    {
+      "url": "https://github.com/neo-capiro/capirov2/pull/2427",
+      "number": 2427,
+      "state": "open",
+      "draft": true,
+      "head": "codex/shared-newsletter-browser-distribution-20261012",
+      "head_sha": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "base": "codex/cleanup-workspace-parser-local-acceptance-20261012",
+      "base_sha": "d587441261fd356ee5144a8fc29cb2f771d062b8",
+      "updated_at": "2026-10-12T22:32:07Z"
+    },
+    {
+      "url": "https://github.com/neo-capiro/capirov2/pull/2424",
+      "number": 2424,
+      "state": "open",
+      "draft": true,
+      "head": "codex/cleanup-newsletter-two-contract-reviewed-source-preservation-20261012",
+      "head_sha": "5470c6df029c9553dd49e531229c3c91b26275ef",
+      "base": "codex/cleanup-meri-reviewed-runtime-conversion-20261012",
+      "base_sha": "bcad60272fa300383f117f3a08a554e9e070e85b",
+      "updated_at": "2026-10-12T20:38:10Z"
+    }
+  ],
+  "sources": [
+    {
+      "path": "apps/api/src/engagement/newsletter-outreach.service.ts",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "gitBlob": "0ea45aed85acb24431e0f806462af59f3e1c6b5c"
+    },
+    {
+      "path": "apps/api/src/engagement/newsletter-outreach.controller.ts",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "gitBlob": "038cbd5db39bb9ce6235ec85c586542310b1f506"
+    },
+    {
+      "path": "apps/workspace/src/newsletters/newsletter.service.ts",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "gitBlob": "95be4d637e3cfbeaaaea6455f80aefdb21db9923"
+    },
+    {
+      "path": "apps/workspace/src/newsletters/newsletter.controller.ts",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "gitBlob": "7ec9136ff6f6d2e8d26934d8c2037e3482dc3725"
+    },
+    {
+      "path": "docs/contracts/newsletter-outreach-response-routing.md",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "gitBlob": "b06f6d6f2a95ba880ffcd673c4f587b7fffc3575"
+    },
+    {
+      "path": "apps/api/src/engagement/engagement.service.ts",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "gitBlob": "6eb8259f7eb77f64c6ab41d403480ac1ea3f1e82"
+    },
+    {
+      "path": "apps/api/src/engagement/outreach-send-intent.service.ts",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "gitBlob": "16bf05ad4d52d1385d9285fa9812c32e2f788585"
+    },
+    {
+      "path": "apps/api/src/engagement/outreach-draft.service.ts",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "gitBlob": "62bbf8e75ac0314c0d65d5e7a316a3897a83a743"
+    },
+    {
+      "path": "apps/workspace/src/auth/tenant.guard.ts",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "gitBlob": "9cc84c9aa0a317c507f1af63e89b4c44deb53706"
+    },
+    {
+      "path": "apps/workspace/src/auth/tenant-context.ts",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "gitBlob": "24f1986d78af374a0d7c947dd183fff4a07cf5bd"
+    },
+    {
+      "path": "apps/api/src/engagement/newsletter-source-access.ts",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "gitBlob": "65d908f0b0b5cd50058012f9e8f72d153cfa8c34"
+    },
+    {
+      "path": "apps/api/src/engagement/engagement-access.helpers.ts",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "gitBlob": "c0a8cbd27b8a87ff02f8dd36577dcce2d6537992"
+    },
+    {
+      "path": "apps/workspace/src/newsletters/newsletter-validation.ts",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "gitBlob": "e70ed0b7ca98167d6c2915280d6959cb9f16d851"
+    }
+  ]
+}

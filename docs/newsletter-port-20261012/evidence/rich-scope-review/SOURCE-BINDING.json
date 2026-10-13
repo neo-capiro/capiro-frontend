@@ -1,0 +1,203 @@
+{
+  "head": "8ef07b197eb3d41685aaba897a6ef208d43f2277",
+  "applicationSourceTree": "57fad76b58a59f8d3c2f35155201e7524d713539",
+  "currentSources": [
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/NewsletterComments.tsx",
+      "bytes": 4148,
+      "sha256": "974f3de7035687206d999d87d70c53e0b3e6a4bed826fb547b4ffaf5b0b9603f",
+      "gitBlob": "608f1a55511561518a56f4110ba205d77445f521",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/NewsletterPaper.tsx",
+      "bytes": 5923,
+      "sha256": "1bf4da484557a0c7b456253117649e713bac427d38456bb3a3ac4468d161f832",
+      "gitBlob": "64966261567c476e074aa6739bdd1b14a733b5d3",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/NewsletterStaging.tsx",
+      "bytes": 9876,
+      "sha256": "944e7f10c04a7cbb54e98c176cdf3a2a2a32072f01fed30465e99cc8622070b9",
+      "gitBlob": "70696c996e9d685769a2f9d716905bf8dbeae364",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/NewsletterTemplates.tsx",
+      "bytes": 3461,
+      "sha256": "14875aa933d83651b8fa89492fb4f9ceaac6e64e3c0ce934bcb44b14adddb58a",
+      "gitBlob": "ffd88a8676d2aa79dd90da30b03cf8812ae12e53",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/NewsletterWorkflow.tsx",
+      "bytes": 12423,
+      "sha256": "f9c680abf19ca5f86e780cc4e75791a09dee7163db0b192eed222b7cb88ab9cd",
+      "gitBlob": "b8d63fac537d0790b4497ebca8399fa26a9423b1",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/newsletter-model.ts",
+      "bytes": 2792,
+      "sha256": "7ee13751320b12793a9491db349538ce0dab48058bd4411abe869375175a94f6",
+      "gitBlob": "3d73e79a64fb7dc733c06b0059bd7936e89d15b7",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/staging-model.ts",
+      "bytes": 4229,
+      "sha256": "e28e44e049810a413a67292b47e87b4d23bb2ea3e7c41c9bd6fcb26c00761bc5",
+      "gitBlob": "e7ebe775f8dd30bdd4208e572141102451dc4063",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/use-newsletter.ts",
+      "bytes": 4508,
+      "sha256": "65f323839ea27a05cd39c45a7ce2000c9d2decbaa76c3b4bea9af45b665d815a",
+      "gitBlob": "700d2c64156050e953780c2cf13a4fd110f269b9",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/useNewsletterStaging.ts",
+      "bytes": 4927,
+      "sha256": "355b6d8f0f2cd206dc39047570293d415e11dde4ab4b24194856e763c09fd126",
+      "gitBlob": "bc396b66ad466d7899c81a7771a5d244007ed263",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
+      "bytes": 6688,
+      "sha256": "16d114b4a12a42dc318445bfe78224100ef400f44ca18d7f4ed67060ea88f83d",
+      "gitBlob": "ab3dd88d1be55114a835db12432c825ce7d8397c",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+      "bytes": 9582,
+      "sha256": "78facf8f6c85d1a7e98b7d884db86a5c79281918484f3a0125a706fc2e5be207",
+      "gitBlob": "31b76b4a39d011f34a18a2a5e5ae3e33ff10d549",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+      "bytes": 5382,
+      "sha256": "268d2ca2dd156e33f7adbd671dadd804cf3a61861969609d10f45e86825c0f22",
+      "gitBlob": "ba0a9fdece6e55c6472b65ff7a7e671b323655cf",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/OutreachView.tsx",
+      "bytes": 10244,
+      "sha256": "20bdd7f04a8f1414113b3ec9ded35a6176ac7fdbbf9f193bb8d2dc307f6b0512",
+      "gitBlob": "bb26827d46f02122a74f008e9ef639eb83829e21",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/engagement.ts",
+      "bytes": 10920,
+      "sha256": "c76d84157ccbb5b7e4debc46a710f76e4f9922ee9811ec2beab1202d0e924457",
+      "gitBlob": "ba4ca2106c5ec683bde2535fe109569e1db2ccad",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/workspace-documents.ts",
+      "bytes": 7293,
+      "sha256": "b7617e3437c0c2445c668ef8d1a290d1e7e9754ba23f1b9c589b85821586889a",
+      "gitBlob": "60a29024960cf0fb06feec8a3b1760e4b1f6cfd7",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/workspace-newsletter-staging.ts",
+      "bytes": 2652,
+      "sha256": "d9f8ed98e47a0859057752536ff9ebea7c7b70657cd055aa3b6878dd2c614258",
+      "gitBlob": "bd638b051efa9b5addebb874a58cf0fe53f237ec",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/queries.ts",
+      "bytes": 4679,
+      "sha256": "451a8381928451c2ab27357ccf0634e3008f313bbfa6a14cc6107ed585b95143",
+      "gitBlob": "33abb6c00d2b60b083f601f11ce88a3e47b47a4d",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/http.ts",
+      "bytes": 6228,
+      "sha256": "c0be971d8a191f4a3fb9f24073d5e271c515b922c754a0554ad7ae509b6de386",
+      "gitBlob": "437b2ef35a9507f05c210af613abdc0e6ccc5e88",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/session/ApplicationBoundary.tsx",
+      "bytes": 3005,
+      "sha256": "171e6a02aec0cabe461c195059483c585feecebdbf1b9d66c777007d59ced10f",
+      "gitBlob": "c7737917fa348d273ee2bdcb22455096062bd9eb",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/session/client-route.ts",
+      "bytes": 1296,
+      "sha256": "01ee7c1c6c92ab8702ca4ee3660dc176595fce3f577596057a44a19a443143c8",
+      "gitBlob": "75f7438e29d38f52415a2f6d6fd2cfacc1f88fc0",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/session/recovery/useRetainedIntent.ts",
+      "bytes": 2891,
+      "sha256": "09699ba0660ddd859186c1bceedcebc002df0cca149fa825558c95e7b0fdaae6",
+      "gitBlob": "abca3c471b3b62f4044adb39e3e99f5c6ec76cbc",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/module-ui/Modal.tsx",
+      "bytes": 1871,
+      "sha256": "315601e9245b560f4228478d3b44cab41a84325b5b672e2d85423d0ee1b54aa6",
+      "gitBlob": "140a716228085c59905f046262c289299263d690",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/module-ui/layout.tsx",
+      "bytes": 2286,
+      "sha256": "78cbd614d0e1ae7c5649e2d481ea57a931b01ba366acbdff0de3418a9bb1fd09",
+      "gitBlob": "d7e9abcf87d993303fe5ca42226f705b07f29dcd",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/tests/newsletter-staging.test.ts",
+      "bytes": 3814,
+      "sha256": "e891be1a8444c5c08c4d19b677c4a366d5c0c20cac146906bf762b0f421100df",
+      "gitBlob": "1b037cdc75b43885306e0a390580fbfb86da718e",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/test/browser/newsletter-staging.spec.ts",
+      "bytes": 11993,
+      "sha256": "8a8c35892f2374b3b5c555a274f75abb11de63771878d6c8961064870c4d142e",
+      "gitBlob": "f688b7503be7e59e62345e8177efe7519234d891",
+      "matchesPinnedCommit": true
+    },
+    {
+      "path": "apps/web/test/browser/prospect-workspace.spec.ts",
+      "bytes": 16006,
+      "sha256": "a454060901bd660003afeb3eaa702e3b717b06fd80405391f3adeda52adbc756",
+      "gitBlob": "336af557d08be617dcc1471dd0865ac6cf43e089",
+      "matchesPinnedCommit": true
+    }
+  ],
+  "worktreeStatus": "?? packages/qualification-newsletter/node_modules\n",
+  "reviewerMutatedSource": false,
+  "unrun": [
+    "browser",
+    "server",
+    "build",
+    "typecheck",
+    "install",
+    "native",
+    "provider",
+    "model",
+    "Figma",
+    "full accessibility"
+  ],
+  "PR15Touched": false
+}

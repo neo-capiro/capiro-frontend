@@ -1,0 +1,35 @@
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import {scanModule} from '/workspace/capiro-newsletter-port/scripts/architecture/scan.mjs';
+const repo='/workspace/capiro-newsletter-port/';
+const out='/tmp/capiro-newsletter-rich-slice-review/';
+const doc='docs/newsletter-port-20261012/evidence/rich-slice-review/STRUCTURE-REVIEW.md';
+const reasons={
+OrdinaryEngagementScreen:'Owns the ordinary Engagement screen: tab/scope selection, existing client/meeting reads and composition of separately owned child workflows. The new outer EngagementScreen separates rich route discrimination before these queries mount; this function contains no rich document retrieval, persistence, renderer or dispatch implementation. The keyed Outreach child disposes selection on destination replacement. The 130-line body is predominantly existing tab composition; splitting it solely for size would obscure the single screen lifetime.',
+OutreachView:'Owns one Outreach browse/selection lifetime, including linked record loading/error and ID checks, campaign-session selection, and selection of the existing ordinary form. Rich candidates are classified before the form mounts and leave through a local selection reset or canonical deep-link return. It delegates record IO to useCapiroQuery, campaign editing to CampaignSession, generic saving to OutreachForm and rich unavailable presentation to NewsletterDestination. The guards and view choices constrain the same selected record; they introduce no rich read or send transaction.',
+OutreachForm:'Owns the existing single ordinary outreach create/update form: local title/subject/body inputs, pending/error presentation and one explicit submit callback. This function is byte-identical to HEAD; only its containing file acquired rich route classification. The response projection remains in the operation registry and rich candidates cannot reach this form. Its 88-line body is cohesive form rendering plus its existing submit handler. This structural review does not retrospectively qualify legacy mutation cancellation, read authority or provider delivery.',
+WorkspaceScreen:'Owns Workspace route and local view selection, then composes the established workflow children. Rich entry is a small validated route branch before prospect/draft branches; local rich draft editing/rendering lives wholly in rich-newsletter children. Existing saved-version, prospect, template and Hill Day IO stays with those canonical owners. Conflicting rich/draft/prospect references are rejected, a client-keyed rich child resets local state, and close navigation preserves a valid client hint. The large function remains a screen selector; adding revisioned persistence or native staging here would cross this accepted boundary.',
+RichBlockControls:'Owns presentation and local updates for one selected typed block. Heading/paragraph HTML uses the adopted RichText component, button/logo labels use plain text matching the canonical renderer, and image/link/style fields update the same block through a parent callback. It delegates rich editing and document lookup/history to other owners, performs no network or persistence, and exposes no generic renderer/schema. The finite kind-specific JSX concerns one selected-block projection. Unsupported advanced controls remain explicit, so extraction merely to meet 80 lines is not warranted.',
+RichNewsletterEditor:'Owns the lifetime of one local newsletter draft, its bounded immutable past/present/future history, current block selection, preview modes and explicit discard confirmation. Factory/clone transforms, block structure, controls, Tiptap and sanitized rendering are delegated to focused local modules or qualified public exports. The stable selected-block key and RichText external-content synchronization keep history changes from destroying keyboard focus. All state here belongs to one local editing transaction; saving/staging remain disabled and no backend authority, CAS persistence or delivery lifecycle is mixed in.'
+};
+const paths=[
+'apps/web/src/features/modules/engagement/EngagementScreen.tsx',
+'apps/web/src/features/modules/engagement/OutreachView.tsx',
+'apps/web/src/features/modules/workspace/WorkspaceScreen.tsx',
+'apps/web/src/features/modules/workspace/rich-newsletter/RichBlockControls.tsx',
+'apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx'
+];
+const findings=[],files=[];
+for (const path of paths){
+ const source=fs.readFileSync(repo+path,'utf8');const scan=scanModule(path,source);findings.push(...scan.sizeFindings);
+ files.push({path,sha256:createHash('sha256').update(source).digest('hex'),nonblank:scan.nonblank,functions:scan.sizeFindings.filter(f=>f.kind==='function').map(f=>({name:f.symbol,nonblankLines:f.nonblank,fingerprint:f.fingerprint}))});
+}
+const records=findings.map(f=>({file:f.file,kind:f.kind,symbol:f.symbol,fingerprint:f.fingerprint,reason:reasons[f.symbol]+` See ${doc}#${f.symbol.toLowerCase()}.`,reviewedBy:'Codex independent modules_settings_review',reviewedOn:'2026-10-13'}));
+if(findings.length!==6 || records.some(r=>!reasons[r.symbol])) throw Error('Unexpected signal set; inspect before accepting');
+fs.writeFileSync(out+'READY-SIZE-RECORDS.json',JSON.stringify(records,null,2)+'\n');
+fs.writeFileSync(out+'EXACT-SIZE-EVIDENCE.json',JSON.stringify({method:'Canonical scanModule parses source only; no app execution or build. Six function triggers, zero file triggers in these five files.',sourceStatus:'uncommitted final-candidate; refresh if any source changes',findings,files},null,2)+'\n');
+let md='# Rich newsletter slice structure review\n\nIndependent source-only review by Codex modules_settings_review, 13 October 2026. Records bind exact function fingerprints in READY-SIZE-RECORDS.json; containing-file SHA-256 and nonblank counts are in EXACT-SIZE-EVIDENCE.json. Root owns registry integration. Proposed publication path: `'+doc+'`. Acceptance is limited to responsibility/structure and does not accept the original 43 runtime facets, native operations or full design.\n\n';
+for (const f of findings) md+=`## ${f.symbol}\n\n${f.file}:${f.line}; ${f.nonblank} nonblank body lines; fingerprint \`${f.fingerprint}\`.\n\n${reasons[f.symbol]}\n\n`;
+md+='## Adjacent owners and constraints\n\nThe changed shared/capiro/operations/engagement.ts file only adds a response-metadata projection imported from newsletter-routing.ts. It contains 395 nonblank lines and no function over 80 lines at review; there is no seventh trigger to waive. Rich route parsing, local clone/edit helpers, Tiptap adaptation and preview isolation have separate cohesive owners. New thin Next entry composes the existing shell and Engagement screen. No shared shell, transport, authorization boundary, vendor tarball, canonical renderer or old saved-version writer was edited. Browser fixtures preserve old assertion owners and do not establish native admission.\n';
+fs.writeFileSync(out+'STRUCTURE-REVIEW.md',md);
+console.log(JSON.stringify(findings.map(({symbol,nonblank,fingerprint})=>({symbol,nonblank,fingerprint})),null,2));

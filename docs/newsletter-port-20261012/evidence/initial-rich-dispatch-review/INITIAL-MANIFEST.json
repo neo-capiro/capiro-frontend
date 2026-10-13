@@ -1,0 +1,73 @@
+{
+  "sealedAtUTC": "2026-10-12T23:54:18.579399+00:00",
+  "files": [
+    {
+      "path": "INITIAL-FINDINGS.json",
+      "bytes": 3085,
+      "sha256": "5eeea29d3656c3120ddb0d89bd42957473da7fe9198f324e8e523081306678f6"
+    },
+    {
+      "path": "INITIAL-REVIEW.md",
+      "bytes": 3535,
+      "sha256": "7540db2a0e310e92f3f8685d1cc1f4917e112d18742324779275f6cb42a83c3e"
+    },
+    {
+      "path": "INITIAL-SIZE-REVIEW.json",
+      "bytes": 2986,
+      "sha256": "29e3d423fe968bfb0e7831e1254938c8a60611a2e54d7acd79e24f72c8509320"
+    },
+    {
+      "path": "INITIAL-SOURCE-BINDING.json",
+      "bytes": 2096,
+      "sha256": "f1bc57907303cccf3d6528bb5d412db88ea9c975a8a5d725b390db00f0fb53a5"
+    },
+    {
+      "path": "initial-source/apps/web/src/app/engagement/outreach/page.tsx",
+      "bytes": 411,
+      "sha256": "045f081f8751bcf45a4ad737de30d3b9c616b30e054425694799facbbdcc35e4"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+      "bytes": 5925,
+      "sha256": "5fd7837cdfa80ef0207d8e45dde870a442f3ff798b8266a95989ac27dc20e0e5"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/modules/engagement/NewsletterDestination.tsx",
+      "bytes": 1446,
+      "sha256": "ba03aeb178620b4b79e2a41328300f04e4516203b89d61cecb08e27287c08726"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/modules/engagement/OutreachView.tsx",
+      "bytes": 11053,
+      "sha256": "5c9ba25e7e0041391af642b93abd2b7b30b2e1ee092f9f092bc2d0ea02d611bb"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/modules/engagement/newsletter-route.test.ts",
+      "bytes": 1896,
+      "sha256": "3f50d27c9893de488a9538f699ddbc36a60cf6f4f20525bc7c87b024b449127b"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/modules/engagement/newsletter-route.ts",
+      "bytes": 1666,
+      "sha256": "1516f39fe9aa3f936429f18cd57fc30d8084754b458d4d5e72ca3deac287f717"
+    },
+    {
+      "path": "initial-source/apps/web/src/shared/capiro/newsletter-routing.test.ts",
+      "bytes": 1956,
+      "sha256": "53b14d2f350e19a16130f02f5883deb1cb6acc13ee834b19eb7e20efaf54f74e"
+    },
+    {
+      "path": "initial-source/apps/web/src/shared/capiro/operations/engagement.ts",
+      "bytes": 11049,
+      "sha256": "a91e80b1300cd3fdebb1598ae3d31d01ba82fd858c595544fffadcfc7a5026a8"
+    },
+    {
+      "path": "initial-source/apps/web/src/shared/capiro/operations/newsletter-routing.ts",
+      "bytes": 567,
+      "sha256": "8e6fff50996b8af6e7c6c261bef64d816f36a861696125009adccf591a240c91"
+    }
+  ],
+  "readOnly": true,
+  "disposition": "CORRECTION_REQUIRED_NR D-01",
+  "nativeExecuted": false
+}

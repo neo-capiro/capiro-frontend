@@ -1,0 +1,61 @@
+{
+  "candidate": "Uncommitted snapshot in initial-source; exact hashes INITIAL-SOURCE-BINDING.json",
+  "findings": [
+    {
+      "id": "NRD-01",
+      "severity": "P2",
+      "status": "OPEN_INITIAL_SOURCE",
+      "title": "Back to Outreach can leave a list-selected rich candidate selected",
+      "source": [
+        {
+          "path": "apps/web/src/features/modules/engagement/OutreachView.tsx",
+          "line": 80
+        },
+        {
+          "path": "apps/web/src/features/modules/engagement/NewsletterDestination.tsx",
+          "line": 40
+        },
+        {
+          "path": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+          "line": 149
+        }
+      ],
+      "sourceRepro": [
+        "Open /modules/engagement?view=outreach with no client hint.",
+        "Select a rich candidate from Outreach records. setSelected retains the object and returns NewsletterDestination without changing the URL.",
+        "Click Back to Outreach. It links to the identical URL. Ordinary route key and OutreachView key remain identical, leaving selected unchanged."
+      ],
+      "impact": "User cannot return to ordinary list using the provided same-URL navigation; no rich write/read or provider effect is established.",
+      "proposedCorrection": "Either route rich selections using the canonical newsletter record URL (then Back removes the rich parameter), or provide a callback that clears list selection. Preserve clientId in return navigation.",
+      "requiredRegression": "Select a rich candidate from the ordinary list, use Back, then successfully open/edit an ordinary record; assert no generic write for rich selection and retained client scope.",
+      "runtimeReproducedByReviewer": false
+    },
+    {
+      "id": "NRD-02",
+      "severity": "P3",
+      "status": "OPEN_INITIAL_SOURCE",
+      "title": "Unavailable return link drops selected client context",
+      "source": [
+        {
+          "path": "apps/web/src/features/modules/engagement/NewsletterDestination.tsx",
+          "line": 22
+        },
+        {
+          "path": "apps/web/src/features/modules/engagement/NewsletterDestination.tsx",
+          "line": 40
+        }
+      ],
+      "sourceRepro": [
+        "Visit a rich/invalid route with clientId.",
+        "Back always links to /modules/engagement?view=outreach without clientId."
+      ],
+      "impact": "Returns to All permitted clients rather than the selected client; no access grant or private data read is established.",
+      "proposedCorrection": "Use the canonical verified/hint context policy and scopedHref or a pure return-route helper; do not introduce a new client authority owner."
+    }
+  ],
+  "nonBlockingNotes": [
+    "Direct-route destination copy describes saved content despite no receipt read. Prefer conditional wording; UUID hint does not establish record existence.",
+    "Duplicate conflicting view parameters use the first value; add explicit handling/characterization. Duplicate newsletter/stage IDs and mixed identity parameters already fail closed."
+  ],
+  "sourceEditsByReviewer": false
+}
