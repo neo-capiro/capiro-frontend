@@ -1,5 +1,11 @@
 # Newsletter frontend preservation and port
 
+## Current continuation — 13 October 2026
+
+PR16 now includes a local rich editor built on the qualified public package and a receiving guard that keeps rich Outreach records out of the plain-text writer. See [current qualification and remaining dependency](RICH-SLICE-QUALIFICATION.md), [implementation ownership](RICH-IMPLEMENTATION-PLAN.md) and `RICH-SLICE-EVIDENCE-MANIFEST.json`. The final affected browser suite passes39 cases; full revisioned persistence/dispatch remains blocked on producer-owned receiving parsers. Production build failed at ENOSPC after compilation/typechecking; no new deployment qualification is claimed. PR15's frozen candidate is unchanged. All43 rich facets and337 native Portfolio rows remain unaccepted.
+
+## Historical asset/package slices
+
 This separate branch preserves the original 179 newsletter public assets at their existing `/newsletter/*` paths. All 486,014 decoded bytes match the original C/W Git blobs, byte lengths and pinned SHA-256 inventory. The 172 PNGs, five SVGs and two attribution/license files are unchanged. This is the first bounded slice of the rich newsletter port; it does not establish rich editor, delivery, native backend or deployed-origin acceptance.
 
 The branch starts at frontend `adbc84b2251fe6b06cb7f75030026fba5b4ff498`. PR15 qualification and its later corrections remain on `integration/capiro-remaining-20261012`. Slice1 changed no application source or manifests. Slice2 adds only the governed package, qualification workspace, exact two-export allowlist and root manifest/lock/check discovery; `apps/web/src` and the shared shell/session/client/operation boundary remain unchanged. The current generic newsletter builder and exact saved-version OutreachV3 flow retain their original source.

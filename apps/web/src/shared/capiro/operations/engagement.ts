@@ -3,6 +3,7 @@ import { defineOperation } from "../contracts";
 import { engagementArtifactOperations } from "./engagement-artifacts";
 import { engagementSessionOperations } from "./engagement-sessions";
 import { objectiveDestinationOperations } from "./engagement-objective-destination";
+import { newsletterRoutingMetadata } from "./newsletter-routing";
 const source =
   "capirov2@4be13b0 apps/api/src/engagement/engagement.controller.ts and engagement.service.ts";
 const id = z.uuid();
@@ -120,6 +121,7 @@ export const outreachRecord = z
     subject: z.string().nullable(),
     body: z.string().nullable(),
     client: client.optional(),
+    metadata: newsletterRoutingMetadata.nullable().optional(),
     createdAt: z.string().optional(),
     recipients: z
       .array(
