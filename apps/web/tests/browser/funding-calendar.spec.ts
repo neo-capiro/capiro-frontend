@@ -69,8 +69,8 @@ test("Master Agenda composes distinct funding deadlines with source precision an
   expect(reads).toHaveLength(3);
   expect(Object.fromEntries(reads[0]!.searchParams)).toEqual({
     mode: "all",
-    source: "sam_gov,sbir_sttr",
-    lifecycle: "active,closed",
+    source: "grants_gov,sam_gov,dibbs,sbir_sttr,ca_portal",
+    lifecycle: "active,forecast,closed,post_award",
     deadlineWindow: "any",
     deadlineFrom: "2026-10-01T00:00:00Z",
     deadlineTo: "2026-11-01T04:00:00Z",
@@ -184,5 +184,53 @@ test("a failed current funding read hides retained deadlines and requires succes
   await page.getByRole("button", { name: "Retry", exact: true }).click();
   await expect(page.getByRole("heading", { name: record.title })).toBeVisible();
   expect(searches).toBe(3);
+  expect(unexpected).toEqual([]);
+});
+
+test("Master Agenda shows all five native deadline rails and discloses the agency forecast gap", async ({
+  page,
+}) => {
+  const unexpected = await installCalendar(page);
+  const sources = [
+    ["grants_gov", "Grants.gov"],
+    ["sam_gov", "SAM.gov"],
+    ["dibbs", "DIBBS"],
+    ["sbir_sttr", "SBIR/STTR"],
+    ["ca_portal", "California Grants Portal"],
+  ] as const;
+  const records = sources.map(([source]) => fundingRecord("same-key", source));
+  await page.route(fundingRoute, (route) => {
+    expect(route.request().method()).toBe("GET");
+    const url = new URL(route.request().url());
+    return json(
+      route,
+      url.pathname.endsWith("/search")
+        ? fundingPage(records)
+        : fundingDetail(
+            records.find((record) =>
+              url.pathname.endsWith(
+                `/${record.source}/${record.sourceRecordId}`,
+              ),
+            )!,
+          ),
+    );
+  });
+  await page.goto(path);
+  for (const [source, label] of sources) {
+    const record = records.find((candidate) => candidate.source === source)!;
+    const row = page
+      .getByRole("article")
+      .filter({ has: page.getByRole("heading", { name: record.title }) });
+    await expect(row).toContainText("Date only · time not supplied");
+    await expect(row).toContainText(
+      `${label} response deadline · source date only · ${record.sourceFacts.provenance}`,
+    );
+  }
+  await expect(
+    page.getByText(
+      "Agency forecasts are not included: the native source does not publish response deadlines. Anticipated award dates are not response deadlines.",
+      { exact: true },
+    ),
+  ).toBeVisible();
   expect(unexpected).toEqual([]);
 });

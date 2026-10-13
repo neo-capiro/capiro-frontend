@@ -1,12 +1,25 @@
 import { Temporal } from "temporal-polyfill";
 import type { z } from "zod";
-import { fundingDetailRecord } from "@/shared/capiro/operations/intelligence-funding";
+import {
+  fundingDetailRecord,
+  fundingSource,
+} from "@/shared/capiro/operations/intelligence-funding";
 import type { CalendarItem } from "./contracts";
 import { instantDay, validDay } from "./range";
 
-export const fundingCalendarSources = ["sam_gov", "sbir_sttr"] as const;
-export const fundingSourceLabel = (source: string) =>
-  source === "sam_gov" ? "SAM.gov" : "SBIR/STTR";
+export const fundingCalendarSources = fundingSource.options.filter(
+  (source) => source !== "agency_forecast",
+);
+const sourceLabels = {
+  grants_gov: "Grants.gov",
+  sam_gov: "SAM.gov",
+  agency_forecast: "Agency forecasts",
+  dibbs: "DIBBS",
+  sbir_sttr: "SBIR/STTR",
+  ca_portal: "California Grants Portal",
+} satisfies Record<z.infer<typeof fundingSource>, string>;
+export const fundingSourceLabel = (source: z.infer<typeof fundingSource>) =>
+  sourceLabels[source];
 
 // Native search compares inclusive normalized instants. Enclose both source
 // date-only days and the displayed zone; projection applies the exact range.
