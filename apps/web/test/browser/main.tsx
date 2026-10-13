@@ -1,5 +1,6 @@
 import { OnboardHost } from "../../src/app/_onboard/OnboardHost";
 import type { OnboardRoute } from "../../src/features/onboard/OnboardPage";
+import { MeriFilesHost } from "../../src/app/meri/files/MeriFilesHost";
 import { MeriActionHost } from "../../src/app/meri/actions/MeriActionHost";
 import { IntegrationProbe } from "./IntegrationProbe";
 import { OnboardBoundaryProbe } from "./OnboardBoundaryProbe";
@@ -64,6 +65,21 @@ function RoutedApp() {
       />
     );
   }
+  if (path === "/meri/files")
+    return (
+      <ProductShell documentWorkflow>
+        <RequireSession>
+          <MeriFilesHost
+            enabled={search.get("documents-disabled") !== "1"}
+            operation={
+              search.get("document-operation") === "create_excel"
+                ? "create_excel"
+                : "create_word"
+            }
+          />
+        </RequireSession>
+      </ProductShell>
+    );
   if (path === "/meri/actions")
     return (
       <ProductShell actionWorkflow>

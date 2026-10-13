@@ -2,6 +2,10 @@ import assert from "node:assert/strict";
 import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { chromium } from "@playwright/test";
+import {
+  verifyDocumentHttp,
+  verifyDocumentNavigation,
+} from "./verify-documents.mjs";
 
 const origin = "http://127.0.0.1:5188";
 const output = process.argv[2];
@@ -14,6 +18,7 @@ for (const [path, status, text] of [
   ["/healthz", 200, '"status":"ok"'],
   ["/portfolio", 200, "Portfolio setup required"],
   ["/calendar", 200, "Portfolio setup required"],
+  ["/meri/files", 200, "Connection setup required"],
   ["/sign-in", 200, "Sign-in setup required"],
   ["/api/backend/core/clients", 503, ""],
   ["/", 200, "Portfolio setup required"],
@@ -39,6 +44,8 @@ for (const [path, status, text] of [
   assert.equal(response.headers.get("x-powered-by"), null, path);
   results.push({ path, status, headers: "passed" });
 }
+
+results.push(...(await verifyDocumentHttp(origin)));
 
 const browser = await chromium.launch({
   executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
@@ -158,6 +165,15 @@ try {
         clientNavigation: true,
         headerNavigation: true,
       });
+      results.push(
+        await verifyDocumentNavigation(
+          page,
+          origin,
+          output,
+          viewport,
+          colorScheme,
+        ),
+      );
     }
     await page.setViewportSize({ width: 1440, height: 1040 });
     await page.getByRole("link", { name: "Modules", exact: true }).click();

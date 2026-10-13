@@ -9,8 +9,8 @@ import { DesignIcon } from "./DesignIcon";
 import styles from "./shell.module.css";
 
 const destinations = [
-  { label: "Conversations", icon: "conversations", current: true },
-  { label: "Files", icon: "files" },
+  { label: "Conversations", icon: "conversations", href: "/meri" },
+  { label: "Files", icon: "files", href: "/meri/files" },
   { label: "Runs", icon: "runs" },
   { label: "Approvals · 2", icon: "approvals" },
   { label: "Memory", icon: "memory" },
@@ -43,6 +43,10 @@ export function Sidebar({
         ),
       );
   };
+  const isCurrent = (href?: string) =>
+    href === "/meri"
+      ? pathname === "/meri" || pathname.startsWith("/meri/fixture/")
+      : href === pathname;
   return (
     <aside className={styles.sidebar} aria-label="Meri navigation">
       <Button type="button" className={styles.newConversation} onClick={reset}>
@@ -66,17 +70,15 @@ export function Sidebar({
             key={item.label}
             type="button"
             variant="ghost"
-            className={`${styles.navButton} ${item.current && pathname !== "/meri/actions" ? styles.currentDestination : ""}`}
-            aria-current={
-              item.current && pathname !== "/meri/actions" ? "page" : undefined
-            }
-            disabled={!item.current}
+            className={`${styles.navButton} ${isCurrent(item.href) ? styles.currentDestination : ""}`}
+            aria-current={isCurrent(item.href) ? "page" : undefined}
+            disabled={!item.href}
             onClick={
-              item.current
+              item.href
                 ? () =>
                     router.push(
-                      productHref(
-                        "meri",
+                      scopedHref(
+                        item.href,
                         selected.state === "authorized-client"
                           ? selected.client.id
                           : undefined,
@@ -85,10 +87,12 @@ export function Sidebar({
                 : undefined
             }
             title={
-              item.current
-                ? assetSet === "home"
-                  ? "Current local Home"
-                  : "Current local conversation view"
+              item.href
+                ? item.label === "Files"
+                  ? "Open document files"
+                  : assetSet === "home"
+                    ? "Open local Home"
+                    : "Open local conversation view"
                 : "Unavailable: disconnected synthetic fixture"
             }
           >

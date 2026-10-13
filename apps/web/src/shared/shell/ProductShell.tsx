@@ -9,11 +9,13 @@ export function ProductShell({
   designTarget = "442:81437",
   assetSet = "home",
   actionWorkflow = false,
+  documentWorkflow = false,
 }: {
   children: React.ReactNode;
   designTarget?: string;
   assetSet?: "home" | "cited-answer";
   actionWorkflow?: boolean;
+  documentWorkflow?: boolean;
 }) {
   return (
     <>
@@ -23,7 +25,7 @@ export function ProductShell({
         <div className={styles.workspace}>
           <Sidebar assetSet={assetSet} />
           <main id="main-content" className={styles.main}>
-            {actionWorkflow ? (
+            {actionWorkflow || documentWorkflow ? (
               children
             ) : (
               <SelectedClientGate>{children}</SelectedClientGate>
@@ -33,12 +35,14 @@ export function ProductShell({
       </div>
       <footer className={styles.fixtureNotice}>
         <div role="note">
-          {actionWorkflow ? (
+          {actionWorkflow || documentWorkflow ? (
             <>
               <strong>
                 Conversation and workspace samples remain disconnected.
               </strong>{" "}
-              Recommendation actions require a verified action connection.
+              {documentWorkflow
+                ? "Document files require a verified document connection. Generated files remain drafts; native Office rendering is unverified."
+                : "Recommendation actions require a verified action connection."}
             </>
           ) : (
             <>

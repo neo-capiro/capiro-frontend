@@ -1,4 +1,5 @@
 import { auth } from "@clerk/nextjs/server";
+import { readOpaqueSessionConfig } from "../../../../shared/meri-actions/connection-config";
 import { readActionConfig } from "../../../../shared/meri-actions/config";
 import { proxyActionRequest } from "../../../../shared/meri-actions/proxy";
 
@@ -10,7 +11,9 @@ export async function POST(
   return proxyActionRequest(
     request,
     operation,
-    readActionConfig(process.env),
+    operation === "session"
+      ? readOpaqueSessionConfig(process.env)
+      : readActionConfig(process.env),
     async () => {
       const session = await auth();
       return session.userId ? session.getToken({ template: "capiro" }) : null;
