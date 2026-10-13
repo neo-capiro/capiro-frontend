@@ -1,0 +1,4438 @@
+{
+  "verifiedUTC": "2026-10-13T09:30:47.461851+00:00",
+  "archives": [
+    {
+      "path": "objects.zip",
+      "bytes": 17009705,
+      "sha256": "f00bdda0256d017ec59f70a9aa7e6e1597d8f017d9d6786cbffa03be8764a725",
+      "uniqueMembers": 277,
+      "zipCRCVerified": true
+    },
+    {
+      "path": "late-objects.zip",
+      "bytes": 1540516,
+      "sha256": "a27c04802dd71b54c7fcf14660a9f783072df717bd2e401dafb6e781bcfcf78d",
+      "uniqueMembers": 67,
+      "zipCRCVerified": true
+    }
+  ],
+  "originalRecords": 441,
+  "originalBytes": 37760382,
+  "uniqueSha256Objects": 345,
+  "allOriginalBytesEqual": true,
+  "symlinks": 0,
+  "directFiles": 174,
+  "directFilesAllExact": true,
+  "ownerManifestsRevalidated": 13,
+  "records": [
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/MANIFEST.json",
+      "sha256": "8fe14244d450234294a56c168d20787d0c2fd1d5dde2f3f5f462cdfe9637dfeb",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/8fe14244d450234294a56c168d20787d0c2fd1d5dde2f3f5f462cdfe9637dfeb"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/REPORT.md",
+      "sha256": "cb00aa7aff19c0a039247d56fcf897095d03a156a269ac758a2aa0bf3818e213",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/cb00aa7aff19c0a039247d56fcf897095d03a156a269ac758a2aa0bf3818e213"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/SIZE-SIGNALS.json",
+      "sha256": "eb4b8f4b83c47e2ef21a4e0d8ff75365d520d77420dfd1fd6c528454573ae769",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/eb4b8f4b83c47e2ef21a4e0d8ff75365d520d77420dfd1fd6c528454573ae769"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/SOURCE-BINDING.json",
+      "sha256": "6d3e305b13613d16e9765bf67f84780b67a0579734b311ebbb130aa2d45cc7a2",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/6d3e305b13613d16e9765bf67f84780b67a0579734b311ebbb130aa2d45cc7a2"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/STRUCTURE-REVIEW-PROPOSAL.json",
+      "sha256": "ea9434e53671e2c32fea12b61807c0df0e69f37213331647a67260d705de9ba8",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/ea9434e53671e2c32fea12b61807c0df0e69f37213331647a67260d705de9ba8"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/VERIFICATION.json",
+      "sha256": "5a84f6d936ea62ea41b5ad4e5085e1d44c6a5cba43b956e91bfb0f93bd1079c8",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/5a84f6d936ea62ea41b5ad4e5085e1d44c6a5cba43b956e91bfb0f93bd1079c8"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/capture.mjs",
+      "sha256": "bff1fbaf4c76721a19aefe853450085c640ec096914ed2d130dba776f58fb2b2",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/bff1fbaf4c76721a19aefe853450085c640ec096914ed2d130dba776f58fb2b2"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/corrected-results.json",
+      "sha256": "b25208c2b776ff675dbc5f876f467397bf962f6b0b022bf43089d651a32ba4c0",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/b25208c2b776ff675dbc5f876f467397bf962f6b0b022bf43089d651a32ba4c0"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/corrected.log",
+      "sha256": "dbe1a3fb9a8af91f999d9ba534a6f455f08ea2cabe5722ba3ed1315a851d7531",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/dbe1a3fb9a8af91f999d9ba534a6f455f08ea2cabe5722ba3ed1315a851d7531"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/correlation-red-results.json",
+      "sha256": "c7d27090b973ce8aee44892b0f8b65277f3fd34556a2cfa36d13b49e315392ae",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/c7d27090b973ce8aee44892b0f8b65277f3fd34556a2cfa36d13b49e315392ae"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/correlation-red.log",
+      "sha256": "151f2dd97d0dabe4ab616953271b7bb8488ffce24a891298737736fd46e3d48f",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/151f2dd97d0dabe4ab616953271b7bb8488ffce24a891298737736fd46e3d48f"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/expanded-results.json",
+      "sha256": "e690228fae555d0d6221b40ced5595620dbe6e68994fc3ca28596a1917540c62",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/e690228fae555d0d6221b40ced5595620dbe6e68994fc3ca28596a1917540c62"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/expanded.log",
+      "sha256": "c0c8a42a6080c77f7616fb7bbec18c1cdcc71e9fba1d14f4f259909918ca13e5",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/c0c8a42a6080c77f7616fb7bbec18c1cdcc71e9fba1d14f4f259909918ca13e5"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/final-format.log",
+      "sha256": "cfef7dcab8be8473c1dcadc0bbeb58fda6b74c95ef1efac0f1794c64e3851456",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/cfef7dcab8be8473c1dcadc0bbeb58fda6b74c95ef1efac0f1794c64e3851456"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/final-results.json",
+      "sha256": "6c4f7fd261433d5030e28510f8b879aad3ded5179ee4df19774abe0ced349906",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/6c4f7fd261433d5030e28510f8b879aad3ded5179ee4df19774abe0ced349906"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/final.log",
+      "sha256": "ad5d3d42368576d7cdd4f9558bcf26936a9577ec6b0b38dc3c0dde98866b8ed9",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/ad5d3d42368576d7cdd4f9558bcf26936a9577ec6b0b38dc3c0dde98866b8ed9"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/first-behavior-results.json",
+      "sha256": "48553a904c7e01c1280d8d80304573abc755f7ee0aaa45198e9a1bc35fb8daf9",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/48553a904c7e01c1280d8d80304573abc755f7ee0aaa45198e9a1bc35fb8daf9"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/first-behavior.log",
+      "sha256": "039fdea9808c2619154c351469e85febeec52efbad666882b35bc2343ff336ff",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/039fdea9808c2619154c351469e85febeec52efbad666882b35bc2343ff336ff"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/first.log",
+      "sha256": "02b505aa413c795c93409fcd4dc2d21245cd7ab204cf7c7be0533e62d5cd7017",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/02b505aa413c795c93409fcd4dc2d21245cd7ab204cf7c7be0533e62d5cd7017"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/fixture-format.log",
+      "sha256": "68b72cece053c34e52021f591d1af12d63b1d051fd82d009c7efdd6cfb8ac589",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/68b72cece053c34e52021f591d1af12d63b1d051fd82d009c7efdd6cfb8ac589"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/format.log",
+      "sha256": "1ee961b52cf631e77872dbd47448bfed7dcc2a4cbdce9d1e2e927c8d4fd51cee",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/1ee961b52cf631e77872dbd47448bfed7dcc2a4cbdce9d1e2e927c8d4fd51cee"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/lint.log",
+      "sha256": "687ab4d2ac1844c10c752a9b15433d590fcffd335b371b6ef75ab88ba1ca95af",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/687ab4d2ac1844c10c752a9b15433d590fcffd335b371b6ef75ab88ba1ca95af"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/receiver-fixture-correction-valid-results.json",
+      "sha256": "42bd71ceb06b6da982efdfe6931b11ec9ef04be781089e6e04aca57882d56242",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/42bd71ceb06b6da982efdfe6931b11ec9ef04be781089e6e04aca57882d56242"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/receiver-fixture-correction-valid.log",
+      "sha256": "c117ce1ae4d8d1300b7e1102ec63c3a6a87b20d6d024f6d1398f32267cc1dd58",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/c117ce1ae4d8d1300b7e1102ec63c3a6a87b20d6d024f6d1398f32267cc1dd58"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/receiver-fixture-correction.log",
+      "sha256": "09174c6d2fedf0ac9e5335fc14500e004aca4435f0d291cdd50fe11cda1f3b2a",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/09174c6d2fedf0ac9e5335fc14500e004aca4435f0d291cdd50fe11cda1f3b2a"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/sealed-exit.txt",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/sealed-lint-exit.txt",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/sealed-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/sealed-results.json",
+      "sha256": "46cfdd2cdb6f2af50901d1bfeba2c58f7555b09576fbb3bcdaa1bd3346f91b93",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/46cfdd2cdb6f2af50901d1bfeba2c58f7555b09576fbb3bcdaa1bd3346f91b93"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/sealed.log",
+      "sha256": "51c8294954445477d6da8c86c0030fccf3bee8c7e3e940247658ee049b1e1bd8",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/51c8294954445477d6da8c86c0030fccf3bee8c7e3e940247658ee049b1e1bd8"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/settlement-red-results.json",
+      "sha256": "c307b7dc60d8c03dcb373b8b04eabcf4f00792b8d2090a3d13c3be2ee5c57d87",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/c307b7dc60d8c03dcb373b8b04eabcf4f00792b8d2090a3d13c3be2ee5c57d87"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/settlement-red.log",
+      "sha256": "0c4f77b0f0d16a65a213f5e77d3d7b79517a790af66390561efa67e27c1b1749",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/0c4f77b0f0d16a65a213f5e77d3d7b79517a790af66390561efa67e27c1b1749"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/vitest.config.mts",
+      "sha256": "f155734a74b0b5a34b2f0047386cbf2501f570b35c9fc764cd3832d88742e624",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/f155734a74b0b5a34b2f0047386cbf2501f570b35c9fc764cd3832d88742e624"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/final-source/docs/meri-files-20261013/ADAPTER-PLAN.md",
+      "sha256": "d9b9f9f37797d87179f32a622dd13fa7cf441931707251e69df02353a25b28d7",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/d9b9f9f37797d87179f32a622dd13fa7cf441931707251e69df02353a25b28d7"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/final-source/apps/web/tests/meri-document-adapter.test.ts",
+      "sha256": "8250e9e743847bc1a293dbad8614149a69e2f60d027013c37f2885e7f349389d",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/8250e9e743847bc1a293dbad8614149a69e2f60d027013c37f2885e7f349389d"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/final-source/apps/web/tests/meri-document-fixtures.ts",
+      "sha256": "2f911bba3ac2cc75dcd69781d294aa59fa4deb5fd5979e2296330b6fae7f588e",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/2f911bba3ac2cc75dcd69781d294aa59fa4deb5fd5979e2296330b6fae7f588e"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/final-source/apps/web/tests/meri-document-journal.test.ts",
+      "sha256": "5bb5c0ad03029a45659e655d08a672a0e25af0efd179696757efe68d23ee53dc",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/5bb5c0ad03029a45659e655d08a672a0e25af0efd179696757efe68d23ee53dc"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/final-source/apps/web/tests/meri-document-public-fixtures.ts",
+      "sha256": "9c58d14adfcc8907bd12a5ee02723c20a4b1e0812f7899fee9b4a18ea4bf54fc",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/9c58d14adfcc8907bd12a5ee02723c20a4b1e0812f7899fee9b4a18ea4bf54fc"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/final-source/apps/web/tests/meri-document-transport.test.ts",
+      "sha256": "e4adbc4eda9102e0ad8c0b0d3634f81fc333b206b3353627d2c1dce1b41c9ceb",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/e4adbc4eda9102e0ad8c0b0d3634f81fc333b206b3353627d2c1dce1b41c9ceb"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/final-source/apps/web/src/shared/meri-documents/attempt-journal.ts",
+      "sha256": "b2a3817413c9b3be2490e95f78131a7a544e07b524c599262d65ef74036ba358",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/b2a3817413c9b3be2490e95f78131a7a544e07b524c599262d65ef74036ba358"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/final-source/apps/web/src/shared/meri-documents/query-journal.ts",
+      "sha256": "cbdbabf2e1830cfc893c068194422342f1c4977063bcf9dec488b0b4803cec6b",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/cbdbabf2e1830cfc893c068194422342f1c4977063bcf9dec488b0b4803cec6b"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/final-source/apps/web/src/shared/meri-documents/workflow-adapter.ts",
+      "sha256": "2eea62309cee79d278d407bce81170eb6c5b4f831f7a8de8cf4f6b3acf9f29fe",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/2eea62309cee79d278d407bce81170eb6c5b4f831f7a8de8cf4f6b3acf9f29fe"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/final-source/apps/web/src/shared/meri-documents/workflow-port.ts",
+      "sha256": "698fb81b2a4c1dbec87048cc3f5517bc1e2da129a450d37aeadc6e354e2fe820",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/698fb81b2a4c1dbec87048cc3f5517bc1e2da129a450d37aeadc6e354e2fe820"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/final-source/apps/web/src/shared/meri-documents/workflow-transport.ts",
+      "sha256": "a718ca794821afdbcd9727a826ec2288771757fed95134fc45adbb5e339bab0c",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/a718ca794821afdbcd9727a826ec2288771757fed95134fc45adbb5e339bab0c"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-settlement-source/attempt-journal.ts",
+      "sha256": "b2a3817413c9b3be2490e95f78131a7a544e07b524c599262d65ef74036ba358",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/b2a3817413c9b3be2490e95f78131a7a544e07b524c599262d65ef74036ba358"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-settlement-source/config.ts",
+      "sha256": "4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-settlement-source/meri-document-adapter.test.ts",
+      "sha256": "58c2094ec83483d512349cde6fb7c80602c8db916c0f97c46f5767bffde53638",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/58c2094ec83483d512349cde6fb7c80602c8db916c0f97c46f5767bffde53638"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-settlement-source/meri-document-bounds.test.ts",
+      "sha256": "66b22aa50f2002fc12b8b01b3b0ef50e2a9118de92e89b2c8b7bfdc6d11a4af7",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/66b22aa50f2002fc12b8b01b3b0ef50e2a9118de92e89b2c8b7bfdc6d11a4af7"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-settlement-source/meri-document-fixtures.ts",
+      "sha256": "63b24825924c061b7a87ea68d2d47d9d32475ca0e2f07c2991b9d017a21fea7a",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/63b24825924c061b7a87ea68d2d47d9d32475ca0e2f07c2991b9d017a21fea7a"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-settlement-source/meri-document-journal.test.ts",
+      "sha256": "f6e22d3e87bf3c19afb933ae314a2ee3d531df6befcb341ccfc17795c811d2d3",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/f6e22d3e87bf3c19afb933ae314a2ee3d531df6befcb341ccfc17795c811d2d3"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-settlement-source/meri-document-proxy.test.ts",
+      "sha256": "fa6516ad551ef96e5f304306e782e3cb656887e38beb2cf20b33c2d285579ce0",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/fa6516ad551ef96e5f304306e782e3cb656887e38beb2cf20b33c2d285579ce0"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-settlement-source/meri-document-transport.test.ts",
+      "sha256": "7cd46433490a569cdd0fb323c0f990ee41831686367d70794ae8e0299391321c",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/7cd46433490a569cdd0fb323c0f990ee41831686367d70794ae8e0299391321c"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-settlement-source/proxy.ts",
+      "sha256": "bcedf60bace147654cc34a785ba5a156367c6094e1f10dd945336f09065e7977",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/bcedf60bace147654cc34a785ba5a156367c6094e1f10dd945336f09065e7977"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-settlement-source/query-journal.ts",
+      "sha256": "cbdbabf2e1830cfc893c068194422342f1c4977063bcf9dec488b0b4803cec6b",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/cbdbabf2e1830cfc893c068194422342f1c4977063bcf9dec488b0b4803cec6b"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-settlement-source/workflow-adapter.ts",
+      "sha256": "2d816fda55fe59af75f73f12068b725e195d1cb15637a82b57ac269b05c5fafa",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/2d816fda55fe59af75f73f12068b725e195d1cb15637a82b57ac269b05c5fafa"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-settlement-source/workflow-port.ts",
+      "sha256": "698fb81b2a4c1dbec87048cc3f5517bc1e2da129a450d37aeadc6e354e2fe820",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/698fb81b2a4c1dbec87048cc3f5517bc1e2da129a450d37aeadc6e354e2fe820"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-settlement-source/workflow-transport.ts",
+      "sha256": "a718ca794821afdbcd9727a826ec2288771757fed95134fc45adbb5e339bab0c",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/a718ca794821afdbcd9727a826ec2288771757fed95134fc45adbb5e339bab0c"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-correlation-source/attempt-journal.ts",
+      "sha256": "b2fea43d38f8f03ca444a5521795bc91c8f6764725115a88d2464b7cfcb416e6",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/b2fea43d38f8f03ca444a5521795bc91c8f6764725115a88d2464b7cfcb416e6"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-correlation-source/config.ts",
+      "sha256": "4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-correlation-source/meri-document-adapter.test.ts",
+      "sha256": "c1d067157c05ef6f2329a6ca6842b02a787a60f4779c30dc20692e4036c6d861",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/c1d067157c05ef6f2329a6ca6842b02a787a60f4779c30dc20692e4036c6d861"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-correlation-source/meri-document-bounds.test.ts",
+      "sha256": "66b22aa50f2002fc12b8b01b3b0ef50e2a9118de92e89b2c8b7bfdc6d11a4af7",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/66b22aa50f2002fc12b8b01b3b0ef50e2a9118de92e89b2c8b7bfdc6d11a4af7"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-correlation-source/meri-document-fixtures.ts",
+      "sha256": "fbc1a5d32b97c5ff4ef38d87beaa3efad2982786e5bb15fef3d7fa2696d52911",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/fbc1a5d32b97c5ff4ef38d87beaa3efad2982786e5bb15fef3d7fa2696d52911"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-correlation-source/meri-document-journal.test.ts",
+      "sha256": "1f8c39d985ed95b0d6a655f795c93457d4cc6e0a37fbeadc30321ea4ab8af0d8",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/1f8c39d985ed95b0d6a655f795c93457d4cc6e0a37fbeadc30321ea4ab8af0d8"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-correlation-source/meri-document-proxy.test.ts",
+      "sha256": "fa6516ad551ef96e5f304306e782e3cb656887e38beb2cf20b33c2d285579ce0",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/fa6516ad551ef96e5f304306e782e3cb656887e38beb2cf20b33c2d285579ce0"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-correlation-source/meri-document-transport.test.ts",
+      "sha256": "d291c0f880985828a2fa377481fcba7965f5422d5e0ff931aa4707204f8ca1d9",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/d291c0f880985828a2fa377481fcba7965f5422d5e0ff931aa4707204f8ca1d9"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-correlation-source/proxy.ts",
+      "sha256": "bcedf60bace147654cc34a785ba5a156367c6094e1f10dd945336f09065e7977",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/bcedf60bace147654cc34a785ba5a156367c6094e1f10dd945336f09065e7977"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-correlation-source/query-journal.ts",
+      "sha256": "3cd1a24c0582a2319af128012f065c6064ebf56aa33953e3888509ae52e79112",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/3cd1a24c0582a2319af128012f065c6064ebf56aa33953e3888509ae52e79112"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-correlation-source/workflow-adapter.ts",
+      "sha256": "ccd18d29188c948d17572894e2f5569e39d354d98a527f4b9ad679c97bda8f07",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/ccd18d29188c948d17572894e2f5569e39d354d98a527f4b9ad679c97bda8f07"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-correlation-source/workflow-port.ts",
+      "sha256": "93f6bfe5e0c4d6c21584eb37a19bd890679a30fd481b2dfe7b6dd8cf221e92d0",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/93f6bfe5e0c4d6c21584eb37a19bd890679a30fd481b2dfe7b6dd8cf221e92d0"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/pre-correlation-source/workflow-transport.ts",
+      "sha256": "0b57d64e03958772ee3cc4c5ee369acdf4b34c86978e5aa48ad4e1b58fa33720",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/0b57d64e03958772ee3cc4c5ee369acdf4b34c86978e5aa48ad4e1b58fa33720"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/initial-source/attempt-journal.ts",
+      "sha256": "b2fea43d38f8f03ca444a5521795bc91c8f6764725115a88d2464b7cfcb416e6",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/b2fea43d38f8f03ca444a5521795bc91c8f6764725115a88d2464b7cfcb416e6"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/initial-source/config.ts",
+      "sha256": "4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/initial-source/document-fixtures.ts",
+      "sha256": "6945d341e3bd72da1ad390dd07e14dbf6d47a153c1a2309a6d8f5f402f63c522",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/6945d341e3bd72da1ad390dd07e14dbf6d47a153c1a2309a6d8f5f402f63c522"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/initial-source/proxy.ts",
+      "sha256": "bcedf60bace147654cc34a785ba5a156367c6094e1f10dd945336f09065e7977",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/bcedf60bace147654cc34a785ba5a156367c6094e1f10dd945336f09065e7977"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/initial-source/query-journal.ts",
+      "sha256": "3cd1a24c0582a2319af128012f065c6064ebf56aa33953e3888509ae52e79112",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/3cd1a24c0582a2319af128012f065c6064ebf56aa33953e3888509ae52e79112"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/initial-source/workflow-adapter.test.ts",
+      "sha256": "9e0f0e348f27a1d7a3b37ffbc30a57142c43a068dfb83de7bb4b632fda432496",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/9e0f0e348f27a1d7a3b37ffbc30a57142c43a068dfb83de7bb4b632fda432496"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/initial-source/workflow-adapter.ts",
+      "sha256": "ccd18d29188c948d17572894e2f5569e39d354d98a527f4b9ad679c97bda8f07",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/ccd18d29188c948d17572894e2f5569e39d354d98a527f4b9ad679c97bda8f07"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/initial-source/workflow-port.ts",
+      "sha256": "93f6bfe5e0c4d6c21584eb37a19bd890679a30fd481b2dfe7b6dd8cf221e92d0",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/93f6bfe5e0c4d6c21584eb37a19bd890679a30fd481b2dfe7b6dd8cf221e92d0"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/initial-source/workflow-transport.ts",
+      "sha256": "0b57d64e03958772ee3cc4c5ee369acdf4b34c86978e5aa48ad4e1b58fa33720",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/0b57d64e03958772ee3cc4c5ee369acdf4b34c86978e5aa48ad4e1b58fa33720"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-adapter-20261013/vite-cache/vitest/da39a3ee5e6b4b0d3255bfef95601890afd80709/results.json",
+      "sha256": "5fb4a250693b331a030bae2b4ae69dc6fe65f2a4d2ff687fc288ea9c78d78b12",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/5fb4a250693b331a030bae2b4ae69dc6fe65f2a4d2ff687fc288ea9c78d78b12"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/FINAL-RECEIPT.json",
+      "sha256": "973255fb86405584ffff1c3b296fa5ba3706782dca3d359add4f53c7ed665186",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/973255fb86405584ffff1c3b296fa5ba3706782dca3d359add4f53c7ed665186"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/MANIFEST.json",
+      "sha256": "7b7b2f92956bf7a392978f7979c38adb7b0078a271049cfa0e273e88594dd0c3",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/7b7b2f92956bf7a392978f7979c38adb7b0078a271049cfa0e273e88594dd0c3"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/REPORT.md",
+      "sha256": "699259d1dc58f5d28ed2b19edd91fcc505e08afba558db85b8bc0851a154d458",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/699259d1dc58f5d28ed2b19edd91fcc505e08afba558db85b8bc0851a154d458"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/SOURCE-PINS.json",
+      "sha256": "69b081ed08c26ceb7633ce9e7165651118214c2334552143de52303a16df5cde",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/69b081ed08c26ceb7633ce9e7165651118214c2334552143de52303a16df5cde"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/STRUCTURE-PROPOSAL.json",
+      "sha256": "6693222f94d865a659bc57f0c7bb8fbbc6b6a27122e71aa5f3ef8c324aa70ef7",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/6693222f94d865a659bc57f0c7bb8fbbc6b6a27122e71aa5f3ef8c324aa70ef7"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/before-meri-files-workbook.test.ts",
+      "sha256": "424df4ecd094ee87f518fac03f56c03da08ddf38fb62984c1eb50f9ceb1a7b87",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/424df4ecd094ee87f518fac03f56c03da08ddf38fb62984c1eb50f9ceb1a7b87"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/before-workbook-draft.ts",
+      "sha256": "cbc2e3828ed6538c44a3c560d261ced5ce2efcaab93278239da12a8496f716d3",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/cbc2e3828ed6538c44a3c560d261ced5ce2efcaab93278239da12a8496f716d3"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/check-exits.json",
+      "sha256": "5f88c73ac1b496445c8611e15bdf4a2b36d067880a9971c9594a93eacfd13c34",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/5f88c73ac1b496445c8611e15bdf4a2b36d067880a9971c9594a93eacfd13c34"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/format-check.log",
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/format-final.log",
+      "sha256": "abfe3ac52272359beb3ae49fc284932e18dea6d6e973ce37f7c46bc4d6b33740",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/abfe3ac52272359beb3ae49fc284932e18dea6d6e973ce37f7c46bc4d6b33740"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/format-green.log",
+      "sha256": "ec49fc4e7cbe711edd8917ed576cf1f8a9b012b08d6b9dffd87152ebab51e9bf",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/ec49fc4e7cbe711edd8917ed576cf1f8a9b012b08d6b9dffd87152ebab51e9bf"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/format-stable.log",
+      "sha256": "b4f81685ae7e7e1e27c1529a5918c9f9251c64630d033672673802eb8beb3042",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/b4f81685ae7e7e1e27c1529a5918c9f9251c64630d033672673802eb8beb3042"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/format-workbook-red-admission.log",
+      "sha256": "e47aa5dfd7c6ac21b51a3699949a4e56e57e7efc6a8371bc01a571b345d45a2b",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/e47aa5dfd7c6ac21b51a3699949a4e56e57e7efc6a8371bc01a571b345d45a2b"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/format-workbook-red.log",
+      "sha256": "0b730a93e598641cf826a1b8a850a65575f395e24f2689ecfe5d48aad237de5b",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/0b730a93e598641cf826a1b8a850a65575f395e24f2689ecfe5d48aad237de5b"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/format.log",
+      "sha256": "73d19800776abe6eff654d46845c04abaa7b8a48a812d040067a69e9aa6b79f6",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/73d19800776abe6eff654d46845c04abaa7b8a48a812d040067a69e9aa6b79f6"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/lint-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/pure-final.log",
+      "sha256": "b8ed3ff6c791867095ea006bdc75ae797604d9fc4d5f94e19e2038a519933b57",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/b8ed3ff6c791867095ea006bdc75ae797604d9fc4d5f94e19e2038a519933b57"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/pure-formula-discovery.log",
+      "sha256": "5573af1b78cc6191c4a7b5c724afebedada0af72ea46c3996dd9233c81476250",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/5573af1b78cc6191c4a7b5c724afebedada0af72ea46c3996dd9233c81476250"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/pure-green.log",
+      "sha256": "dda193f628ae1ccb60f698271e01893211e28b90687418e02f99ce099f5a4c9e",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/dda193f628ae1ccb60f698271e01893211e28b90687418e02f99ce099f5a4c9e"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/pure-initial.log",
+      "sha256": "19e956ce3be9d325b247cf0852b1137dcf910fef645a3cb8c12801d62318dbf5",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/19e956ce3be9d325b247cf0852b1137dcf910fef645a3cb8c12801d62318dbf5"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/pure-results-final.json",
+      "sha256": "3dc44caa1524ca46a810a53dbcc9a84cd674950b8e12b99d30f8932fa4721e41",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/3dc44caa1524ca46a810a53dbcc9a84cd674950b8e12b99d30f8932fa4721e41"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/pure-results-formula-discovery.json",
+      "sha256": "5a8ac04d6c898970c7fa796fa98e229e33bd96f29ec69d2b18ceae186114ce26",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/5a8ac04d6c898970c7fa796fa98e229e33bd96f29ec69d2b18ceae186114ce26"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/pure-results-green.json",
+      "sha256": "8b5f230a4fd33d97661d525f539e1a534b1787695b98570148e755d7c4646477",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/8b5f230a4fd33d97661d525f539e1a534b1787695b98570148e755d7c4646477"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/pure-results-initial.json",
+      "sha256": "f52557ce6a67cae0ce97894636d1c91587be0281aa635223f003dc9410627c48",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/f52557ce6a67cae0ce97894636d1c91587be0281aa635223f003dc9410627c48"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/pure-results.json",
+      "sha256": "5a8ac04d6c898970c7fa796fa98e229e33bd96f29ec69d2b18ceae186114ce26",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/5a8ac04d6c898970c7fa796fa98e229e33bd96f29ec69d2b18ceae186114ce26"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/pure.log",
+      "sha256": "5573af1b78cc6191c4a7b5c724afebedada0af72ea46c3996dd9233c81476250",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/5573af1b78cc6191c4a7b5c724afebedada0af72ea46c3996dd9233c81476250"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/scan-owned.mjs",
+      "sha256": "d9d7fcbc9e3071e9bbcab693de8e7f6fc3313b8854ac4c19b91bd37a4ae03895",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/d9d7fcbc9e3071e9bbcab693de8e7f6fc3313b8854ac4c19b91bd37a4ae03895"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/workbook-example-admission-red.json",
+      "sha256": "416c32687337c8d05708b2426bb80a700043d9d218ee6cb0d8b3988ae3ec438a",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/416c32687337c8d05708b2426bb80a700043d9d218ee6cb0d8b3988ae3ec438a"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/workbook-example-admission-red.log",
+      "sha256": "5ee9be38c0e05e73e7d4084af1c73cba07b5c95ce5e1bffbdbe0ce09fe2bb671",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/5ee9be38c0e05e73e7d4084af1c73cba07b5c95ce5e1bffbdbe0ce09fe2bb671"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/workbook-example-red-finalspec.json",
+      "sha256": "0a3c8d38394e5d45e20e7eb3962c47725d31099ad3a9a5abd5acf359cf1cc5bc",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/0a3c8d38394e5d45e20e7eb3962c47725d31099ad3a9a5abd5acf359cf1cc5bc"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/workbook-example-red-finalspec.log",
+      "sha256": "3df151406e7f907ac90b90ce0c266e2a2131c8342944eb5170adfd86aa3ba1ca",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/3df151406e7f907ac90b90ce0c266e2a2131c8342944eb5170adfd86aa3ba1ca"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/workbook-example-red-source.json",
+      "sha256": "f5030b7df7a36ec0c2aae23eafaafd1db44377be99df7ca44bcde3f13143b5da",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/f5030b7df7a36ec0c2aae23eafaafd1db44377be99df7ca44bcde3f13143b5da"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/workbook-example-red.json",
+      "sha256": "40075d41baae33f00af629aa0512028d8828bb0f8ba5f1687a4d2b41b5652b1c",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/40075d41baae33f00af629aa0512028d8828bb0f8ba5f1687a4d2b41b5652b1c"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-ui-evidence-20261013/workbook-example-red.log",
+      "sha256": "51061ed10162b4590fac945ffeeaa5f98fa9574518a71b739d1c7ca82988146e",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/51061ed10162b4590fac945ffeeaa5f98fa9574518a71b739d1c7ca82988146e"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/SHA256-INDEX.json",
+      "sha256": "167036efd90644857ca522e418099e107304f7cf9b46bddcb16bba551cb5dba2",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/167036efd90644857ca522e418099e107304f7cf9b46bddcb16bba551cb5dba2"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/STRUCTURE-REVIEW-PROPOSAL.json",
+      "sha256": "00abd67a6cf4b9be808fa0c5f01cb8989770245b867f3328b156d004da328ca7",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/00abd67a6cf4b9be808fa0c5f01cb8989770245b867f3328b156d004da328ca7"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/baseline-exit.txt",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/baseline-results.json",
+      "sha256": "a3c805a028b155cd59c6e47a6c68d6230e29d5b433767ce9c47c8a2ca5515c1b",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/a3c805a028b155cd59c6e47a6c68d6230e29d5b433767ce9c47c8a2ca5515c1b"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/baseline-source.json",
+      "sha256": "0b5bc921effec59d1ef48383a1a1f77a57f294d2832dafb9f0634b920551750a",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/0b5bc921effec59d1ef48383a1a1f77a57f294d2832dafb9f0634b920551750a"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/baseline.log",
+      "sha256": "a1f1e5a7a93cc43c5d4eaf8ec9124cfe100335e77c4fa3600f2ce8527d3b599f",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/a1f1e5a7a93cc43c5d4eaf8ec9124cfe100335e77c4fa3600f2ce8527d3b599f"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/corrected-fixtures-exit.txt",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/corrected-fixtures-results.json",
+      "sha256": "f88355008eae2c35da8c666f5176905377e7e5403bd3600ba4096c440f16f292",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/f88355008eae2c35da8c666f5176905377e7e5403bd3600ba4096c440f16f292"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/corrected-fixtures.log",
+      "sha256": "e14f88f16051745e080d9478ed53b64817a3c9bc517dc86c84a9cf06205066c3",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/e14f88f16051745e080d9478ed53b64817a3c9bc517dc86c84a9cf06205066c3"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/final-exit.txt",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/final-results.json",
+      "sha256": "db17325896a7d8c55df7d74dd5841aea22f25c382fadfe7da63c59debc134da6",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/db17325896a7d8c55df7d74dd5841aea22f25c382fadfe7da63c59debc134da6"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/final-source.json",
+      "sha256": "77f83dc9251a48e861ec6692eaac77505a4d6759381c96e2a1feded12b3074dc",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/77f83dc9251a48e861ec6692eaac77505a4d6759381c96e2a1feded12b3074dc"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/final.log",
+      "sha256": "a8de7b2209250cbccb0e1b4c157e3b53da5f4b5e879da8b5f4a00543996c383f",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/a8de7b2209250cbccb0e1b4c157e3b53da5f4b5e879da8b5f4a00543996c383f"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/lint-exit.txt",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/report.md",
+      "sha256": "940203942779ea7103dbcbb1815c39f19149aae02515eefec6ae4b4284fee301",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/940203942779ea7103dbcbb1815c39f19149aae02515eefec6ae4b4284fee301"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/structure-scan.json",
+      "sha256": "89e395ef5b41d5680892b8ef9edc057292557678dd4b05fb1572851fdb819399",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/89e395ef5b41d5680892b8ef9edc057292557678dd4b05fb1572851fdb819399"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/final-source/apps/web/src/app/api/documents/[operation]/route.ts",
+      "sha256": "0a08619a89eb91c0fc5a8667c068ae96071d92361f17b1e90511301ea47a12b1",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/0a08619a89eb91c0fc5a8667c068ae96071d92361f17b1e90511301ea47a12b1"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/final-source/apps/web/src/app/api/action-followthrough/[operation]/route.ts",
+      "sha256": "fffcfe1b625df8a4a82551eb90e681196a7d223157eb4fa63c4c7f34ac9c7e69",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/fffcfe1b625df8a4a82551eb90e681196a7d223157eb4fa63c4c7f34ac9c7e69"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/final-source/apps/web/src/shared/meri-actions/bounded-json.ts",
+      "sha256": "c513a0e31c6398592c4e79e27d6bf65efed0559c505dba7a52f3926d5788aeac",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/c513a0e31c6398592c4e79e27d6bf65efed0559c505dba7a52f3926d5788aeac"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/final-source/apps/web/src/shared/meri-actions/connection-config.ts",
+      "sha256": "8e953e9a1e485efd515668ced86d0708d6c39df0ea3d2e45a7ae8f6a6209b216",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/8e953e9a1e485efd515668ced86d0708d6c39df0ea3d2e45a7ae8f6a6209b216"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/final-source/apps/web/src/shared/meri-documents/config.ts",
+      "sha256": "4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/final-source/apps/web/src/shared/meri-documents/proxy.ts",
+      "sha256": "bcedf60bace147654cc34a785ba5a156367c6094e1f10dd945336f09065e7977",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/bcedf60bace147654cc34a785ba5a156367c6094e1f10dd945336f09065e7977"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/final-source/apps/web/tests/meri-document-bounds.test.ts",
+      "sha256": "66b22aa50f2002fc12b8b01b3b0ef50e2a9118de92e89b2c8b7bfdc6d11a4af7",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/66b22aa50f2002fc12b8b01b3b0ef50e2a9118de92e89b2c8b7bfdc6d11a4af7"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/final-source/apps/web/tests/meri-document-proxy.test.ts",
+      "sha256": "d5e70bea39a95c394425109a78e870a8e42ab37fc249e9615cde1bed1cff3a96",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/d5e70bea39a95c394425109a78e870a8e42ab37fc249e9615cde1bed1cff3a96"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/baseline-source/apps/web/src/app/api/documents/[operation]/route.ts",
+      "sha256": "0a08619a89eb91c0fc5a8667c068ae96071d92361f17b1e90511301ea47a12b1",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/0a08619a89eb91c0fc5a8667c068ae96071d92361f17b1e90511301ea47a12b1"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/baseline-source/apps/web/src/app/api/action-followthrough/[operation]/route.ts",
+      "sha256": "fffcfe1b625df8a4a82551eb90e681196a7d223157eb4fa63c4c7f34ac9c7e69",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/fffcfe1b625df8a4a82551eb90e681196a7d223157eb4fa63c4c7f34ac9c7e69"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/baseline-source/apps/web/src/shared/meri-actions/bounded-json.ts",
+      "sha256": "c513a0e31c6398592c4e79e27d6bf65efed0559c505dba7a52f3926d5788aeac",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/c513a0e31c6398592c4e79e27d6bf65efed0559c505dba7a52f3926d5788aeac"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/baseline-source/apps/web/src/shared/meri-actions/connection-config.ts",
+      "sha256": "8e953e9a1e485efd515668ced86d0708d6c39df0ea3d2e45a7ae8f6a6209b216",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/8e953e9a1e485efd515668ced86d0708d6c39df0ea3d2e45a7ae8f6a6209b216"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/baseline-source/apps/web/src/shared/meri-documents/config.ts",
+      "sha256": "4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/baseline-source/apps/web/src/shared/meri-documents/proxy.ts",
+      "sha256": "bcedf60bace147654cc34a785ba5a156367c6094e1f10dd945336f09065e7977",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/bcedf60bace147654cc34a785ba5a156367c6094e1f10dd945336f09065e7977"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/baseline-source/apps/web/tests/meri-document-bounds.test.ts",
+      "sha256": "48c362a946d0f4a655faadfb240ff39d3bff856383f505547ed2d61b5a51247e",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/48c362a946d0f4a655faadfb240ff39d3bff856383f505547ed2d61b5a51247e"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-proxy-tests-20261013/baseline-source/apps/web/tests/meri-document-proxy.test.ts",
+      "sha256": "8280e1f783f439c55cca7dbc69d1625d8acc9ccdd8ee77b5e8867f875e919c2c",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/8280e1f783f439c55cca7dbc69d1625d8acc9ccdd8ee77b5e8867f875e919c2c"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/ADDENDUM.md",
+      "sha256": "fd147f79087274ce3ed82401e2f8f0c25869ed2ca30f83bfb91406fa5563af5e",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/fd147f79087274ce3ed82401e2f8f0c25869ed2ca30f83bfb91406fa5563af5e"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/AXE-SUMMARY.json",
+      "sha256": "7b516d7af091a57c69cd51daf29f4a326de48dd7ac68cb9be565bac58e019985",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/7b516d7af091a57c69cd51daf29f4a326de48dd7ac68cb9be565bac58e019985"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/CAPTURES.json",
+      "sha256": "8fba0e227abb0907fb5dba8208106e143ee4cbe62559e8bf9ef11c785a41a4da",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/8fba0e227abb0907fb5dba8208106e143ee4cbe62559e8bf9ef11c785a41a4da"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/LEASE-RELEASE.json",
+      "sha256": "5810d8537cccb9492594bece95b2c0abb01d9cc13e2389303c44234e87311269",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/5810d8537cccb9492594bece95b2c0abb01d9cc13e2389303c44234e87311269"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/REPORT.md",
+      "sha256": "149f95e1e7b58aebd78646017a4ac89cd4284a839f0f72430bc6f13cb1669791",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/149f95e1e7b58aebd78646017a4ac89cd4284a839f0f72430bc6f13cb1669791"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/RUN-SUMMARIES.json",
+      "sha256": "ff01ac3002e66c3faf97d84c742c167547304abf4177042c908961a44fddc489",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/ff01ac3002e66c3faf97d84c742c167547304abf4177042c908961a44fddc489"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/SHA256-INDEX.json",
+      "sha256": "8ad29898e311e324ecc9d262094f84d9d9fe593717a56cdc52264b40f668b4b4",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/8ad29898e311e324ecc9d262094f84d9d9fe593717a56cdc52264b40f668b4b4"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/STRUCTURE-REVIEW-PROPOSAL.json",
+      "sha256": "e109260025c38ffaa59fdd6f4c947ba04b7edb80b75802ef2979511d98cb60c3",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/e109260025c38ffaa59fdd6f4c947ba04b7edb80b75802ef2979511d98cb60c3"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/TEST-MATRIX.json",
+      "sha256": "90c829cc0c14094885f487653d7532e31e6e65cf6fc577c070e65c06f5fe5c27",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/90c829cc0c14094885f487653d7532e31e6e65cf6fc577c070e65c06f5fe5c27"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/axe-1.json",
+      "sha256": "477104ea39df1f09b97de3ef3c50f67f0627537991a6cdc8a65c6fd228bea99f",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/477104ea39df1f09b97de3ef3c50f67f0627537991a6cdc8a65c6fd228bea99f"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/axe-2.json",
+      "sha256": "8bd78aedf83fa4e04bf665318daf98712acbce27d778ed3828e6df974a49dc50",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/8bd78aedf83fa4e04bf665318daf98712acbce27d778ed3828e6df974a49dc50"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/axe-3.json",
+      "sha256": "1fcd4579d70f29b3e11ab86da2911f98be14c1cc7f030a5b0f0bbc8b0bc8d940",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/1fcd4579d70f29b3e11ab86da2911f98be14c1cc7f030a5b0f0bbc8b0bc8d940"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/axe-4.json",
+      "sha256": "15fb969e040172d61eb454a73127fa5b13893fa0a2d81f6c69d350f27c33ef8c",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/15fb969e040172d61eb454a73127fa5b13893fa0a2d81f6c69d350f27c33ef8c"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/axe-5.json",
+      "sha256": "f02a424b05794d4f63e25cfb7aa347b7733b21e158ef1fbc647607e1d7722a63",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/f02a424b05794d4f63e25cfb7aa347b7733b21e158ef1fbc647607e1d7722a63"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/axe-6.json",
+      "sha256": "a49042e33ec37a8e3625540687e6aabcf91838ded3ebcb5051106877a4e67282",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/a49042e33ec37a8e3625540687e6aabcf91838ded3ebcb5051106877a4e67282"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/browser-lint-exit.txt",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/browser-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-exit.txt",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-results.json",
+      "sha256": "5e07faf850c75fcf8ab4be29316bdf67abdd1da1fc729514bbc1c42cea6ee9d4",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/5e07faf850c75fcf8ab4be29316bdf67abdd1da1fc729514bbc1c42cea6ee9d4"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate.config.ts",
+      "sha256": "9f708714c17f8c5923c138a5fc0c35256b54965418482db1c1abcbc5bc3296f2",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/9f708714c17f8c5923c138a5fc0c35256b54965418482db1c1abcbc5bc3296f2"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate.log",
+      "sha256": "0e1fd63532d10298880c1f6750f938b6e3131e695ec6f3759a67a7792cb727e1",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/0e1fd63532d10298880c1f6750f938b6e3131e695ec6f3759a67a7792cb727e1"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-exit.txt",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-results.json",
+      "sha256": "c68a33a4bdad3dfb402c16c6ea2a009a82c5eddeca25680856b5ea45cc014dc0",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/c68a33a4bdad3dfb402c16c6ea2a009a82c5eddeca25680856b5ea45cc014dc0"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-tests.json",
+      "sha256": "f775c3bdbddc5e3bf01776b3ff521497a4575a2cfed2b04e39da1b5bd767fad7",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/f775c3bdbddc5e3bf01776b3ff521497a4575a2cfed2b04e39da1b5bd767fad7"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected.config.ts",
+      "sha256": "ba4c7ac85c2878b785fe131963d46f13b8ff7183c10fbb8307127b83d6f99a49",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/ba4c7ac85c2878b785fe131963d46f13b8ff7183c10fbb8307127b83d6f99a49"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected.log",
+      "sha256": "8f73fc05dcfbf40d545f21f9827089e69cfda0c85ea9ac44cf9b577854e9b0da",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/8f73fc05dcfbf40d545f21f9827089e69cfda0c85ea9ac44cf9b577854e9b0da"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source.json",
+      "sha256": "ac87abf439cce1a3517987dbf65626053415a1641b3b9c694f89c470ac572c06",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/ac87abf439cce1a3517987dbf65626053415a1641b3b9c694f89c470ac572c06"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-exit.txt",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source.json",
+      "sha256": "655c0e1822b359b273cb751bedb746d9f19552ffdc5e7fc1110d9d23221c3124",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/655c0e1822b359b273cb751bedb746d9f19552ffdc5e7fc1110d9d23221c3124"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial.log",
+      "sha256": "53a3429702bd9efc444a152446c839e86d925f1411be7cb24f384b5f46446839",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/53a3429702bd9efc444a152446c839e86d925f1411be7cb24f384b5f46446839"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/package.json",
+      "sha256": "1239d4d885dcad42201a27ed9324f8f0f760b78700d8db9ced39a511cffe7eae",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/1239d4d885dcad42201a27ed9324f8f0f760b78700d8db9ced39a511cffe7eae"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/playwright.config.ts",
+      "sha256": "85cb6cec83b5a04d1572225f55a691e56a62108a73e8b8d5b35ec4d57c6df098",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/85cb6cec83b5a04d1572225f55a691e56a62108a73e8b8d5b35ec4d57c6df098"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/structure-scan.json",
+      "sha256": "7ecd4c1c1bd96c1d607631ce02f1349e6d39310f4b14b55c996f9a3ae270cf18",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/7ecd4c1c1bd96c1d607631ce02f1349e6d39310f4b14b55c996f9a3ae270cf18"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/test/browser/main.tsx",
+      "sha256": "ed54cc451fecf88e78eb9ad4f55443f77855247eef71fe32538a5a15f83e7750",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/ed54cc451fecf88e78eb9ad4f55443f77855247eef71fe32538a5a15f83e7750"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/test/browser/meri-files-fixtures.ts",
+      "sha256": "91aa4e5bac3195dbf53403fc2c7e8181e620e19c85d8df5a328d6257b9e665cd",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/91aa4e5bac3195dbf53403fc2c7e8181e620e19c85d8df5a328d6257b9e665cd"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/test/browser/meri-files-lifetime.spec.ts",
+      "sha256": "ecb27adda5de75496fa501a0d81cdd349c97b410b95dd4e38b6b149da46a4c49",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/ecb27adda5de75496fa501a0d81cdd349c97b410b95dd4e38b6b149da46a4c49"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/test/browser/meri-files-navigation.spec.ts",
+      "sha256": "38d7537a6e4965b12aece17af898bed7cdf294669bea8c21cff921d6ddf7c68c",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/38d7537a6e4965b12aece17af898bed7cdf294669bea8c21cff921d6ddf7c68c"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/test/browser/meri-files-workflow.spec.ts",
+      "sha256": "2824198e0880ed08ee6a4bf7d2519649579d83e30c2171a2e84551c107de68b6",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/2824198e0880ed08ee6a4bf7d2519649579d83e30c2171a2e84551c107de68b6"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/tests/meri-document-public-fixtures.ts",
+      "sha256": "9c58d14adfcc8907bd12a5ee02723c20a4b1e0812f7899fee9b4a18ea4bf54fc",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/9c58d14adfcc8907bd12a5ee02723c20a4b1e0812f7899fee9b4a18ea4bf54fc"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/src/app/meri/files/MeriFilesHost.tsx",
+      "sha256": "67096ee7b4ebbe50fdfbce16daa7a0852dede0a823836ae77e68def0bd422326",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/67096ee7b4ebbe50fdfbce16daa7a0852dede0a823836ae77e68def0bd422326"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/src/app/meri/files/page.tsx",
+      "sha256": "bcb4a1cb1374c001d9bc0d6bf78a2cbde4ec5eef593928215be1a41a0cf8ca41",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/bcb4a1cb1374c001d9bc0d6bf78a2cbde4ec5eef593928215be1a41a0cf8ca41"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/src/shared/meri-actions/opaque-session-controller.ts",
+      "sha256": "cf627a3a025a625d20e96932f1a6a801382757adbec49cfd0ab63016e6625f97",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/cf627a3a025a625d20e96932f1a6a801382757adbec49cfd0ab63016e6625f97"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/src/shared/shell/MeriMobileNavigation.tsx",
+      "sha256": "78373981b0f97955467b841477fe3586567efa070de0e209d41f4be9ff05f337",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/78373981b0f97955467b841477fe3586567efa070de0e209d41f4be9ff05f337"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/src/shared/meri-documents/attempt-journal.ts",
+      "sha256": "b2a3817413c9b3be2490e95f78131a7a544e07b524c599262d65ef74036ba358",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/b2a3817413c9b3be2490e95f78131a7a544e07b524c599262d65ef74036ba358"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/src/shared/meri-documents/config.ts",
+      "sha256": "4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/src/shared/meri-documents/proxy.ts",
+      "sha256": "bcedf60bace147654cc34a785ba5a156367c6094e1f10dd945336f09065e7977",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/bcedf60bace147654cc34a785ba5a156367c6094e1f10dd945336f09065e7977"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/src/shared/meri-documents/query-journal.ts",
+      "sha256": "cbdbabf2e1830cfc893c068194422342f1c4977063bcf9dec488b0b4803cec6b",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/cbdbabf2e1830cfc893c068194422342f1c4977063bcf9dec488b0b4803cec6b"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/src/shared/meri-documents/workflow-adapter.ts",
+      "sha256": "2eea62309cee79d278d407bce81170eb6c5b4f831f7a8de8cf4f6b3acf9f29fe",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/2eea62309cee79d278d407bce81170eb6c5b4f831f7a8de8cf4f6b3acf9f29fe"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/src/shared/meri-documents/workflow-port.ts",
+      "sha256": "698fb81b2a4c1dbec87048cc3f5517bc1e2da129a450d37aeadc6e354e2fe820",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/698fb81b2a4c1dbec87048cc3f5517bc1e2da129a450d37aeadc6e354e2fe820"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/src/shared/meri-documents/workflow-transport.ts",
+      "sha256": "a718ca794821afdbcd9727a826ec2288771757fed95134fc45adbb5e339bab0c",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/a718ca794821afdbcd9727a826ec2288771757fed95134fc45adbb5e339bab0c"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/src/features/meri/files/DocumentEditor.tsx",
+      "sha256": "8772b6f68e1bbfca8ac01647e2b6e34b7dd4f473b5cf9f96c3cc9bc5e05402ae",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/8772b6f68e1bbfca8ac01647e2b6e34b7dd4f473b5cf9f96c3cc9bc5e05402ae"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/src/features/meri/files/DocumentInspectionSummary.tsx",
+      "sha256": "44ad8ff19298fb5b97879d12b3f708aa65864922581b80ac570ffbecd1f47197",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/44ad8ff19298fb5b97879d12b3f708aa65864922581b80ac570ffbecd1f47197"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/src/features/meri/files/DocumentNotice.tsx",
+      "sha256": "4ffcb28c1b7c28ff0bac1e9b0b7e560c2c7e2bc7186b5b13146e0737a61896ac",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/4ffcb28c1b7c28ff0bac1e9b0b7e560c2c7e2bc7186b5b13146e0737a61896ac"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/src/features/meri/files/DocumentVersionPanel.tsx",
+      "sha256": "23c2280948c77b925b39fa513960a5a941e964d43488de1a2b8882a437825442",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/23c2280948c77b925b39fa513960a5a941e964d43488de1a2b8882a437825442"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/src/features/meri/files/MeriFilesWorkflow.tsx",
+      "sha256": "778fdc31378679cac971731fd1042fb9b636098a3802c8a063c00a7440a4abfa",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/778fdc31378679cac971731fd1042fb9b636098a3802c8a063c00a7440a4abfa"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/src/features/meri/files/WorkbookEditor.tsx",
+      "sha256": "2b5277a4ba0556e438cff6fd0a7e2fdc5be3a1406069b5009d197895c212ef8e",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/2b5277a4ba0556e438cff6fd0a7e2fdc5be3a1406069b5009d197895c212ef8e"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/src/features/meri/files/document-draft.ts",
+      "sha256": "257fbdf2f792a52408fc4751bcb254da90b14d1a1b1b92f6821a55637e5acd47",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/257fbdf2f792a52408fc4751bcb254da90b14d1a1b1b92f6821a55637e5acd47"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/src/features/meri/files/document-workflow-state.ts",
+      "sha256": "e49084c0d7a783e77a76cc973c7d8c2233df7c5498543215f01ce312424a5e7d",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/e49084c0d7a783e77a76cc973c7d8c2233df7c5498543215f01ce312424a5e7d"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/src/features/meri/files/download-url.ts",
+      "sha256": "05df49aaafb0debd346d33c9e08090ae97d053b8b6bdd09d8aaf6fe1d27f0098",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/05df49aaafb0debd346d33c9e08090ae97d053b8b6bdd09d8aaf6fe1d27f0098"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/src/features/meri/files/files.module.css",
+      "sha256": "2fc94c57659849b5469f70f4ee5581adeddf818599362645cf2a419275bb5580",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/2fc94c57659849b5469f70f4ee5581adeddf818599362645cf2a419275bb5580"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/initial-source/apps/web/src/features/meri/files/workbook-draft.ts",
+      "sha256": "0bea244c0facd74e472dea49b8fa0552516c9b10fa2cef56ac7160670c8cb645",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/0bea244c0facd74e472dea49b8fa0552516c9b10fa2cef56ac7160670c8cb645"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/.last-run.json",
+      "sha256": "34818b6ef6e7fd2fc600c3a8fb35b51bccc52d76ca052d2741eca492c4656682",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/34818b6ef6e7fd2fc600c3a8fb35b51bccc52d76ca052d2741eca492c4656682"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-navigation-File-768b9-d-zero-automatic-operations/files-keyboard-390.png",
+      "sha256": "aee9a860243d22827a5314d7e5f51de2dec068eea987d81181937336bd54ed11",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/aee9a860243d22827a5314d7e5f51de2dec068eea987d81181937336bd54ed11"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-lifetime-Files--8b5af-rsion-after-current-success/error-context.md",
+      "sha256": "24b7449895580ad1ef651e45b135c1752ff95cb4b943bfc5a4ebcbfbb6988ea4",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/24b7449895580ad1ef651e45b135c1752ff95cb4b943bfc5a4ebcbfbb6988ea4"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-lifetime-Files--8b5af-rsion-after-current-success/test-failed-1.png",
+      "sha256": "8a62a651072b050ed1e3def28114878ccb0ee7a62df4ab83d98b883906a2a431",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/8a62a651072b050ed1e3def28114878ccb0ee7a62df4ab83d98b883906a2a431"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-lifetime-Files--8b5af-rsion-after-current-success/trace.zip",
+      "sha256": "d5390ebca8df5fb0342d41330f03044e80ab5b3566246449f3fd7abf0716d0f7",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/d5390ebca8df5fb0342d41330f03044e80ab5b3566246449f3fd7abf0716d0f7"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-lifetime-Files--68678-bort-an-already-held-create/error-context.md",
+      "sha256": "e5800f90d1747c42eb84bde517515a78acc2aa3f72d8f5f1db86c85ff78a8fd1",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/e5800f90d1747c42eb84bde517515a78acc2aa3f72d8f5f1db86c85ff78a8fd1"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-lifetime-Files--68678-bort-an-already-held-create/test-failed-1.png",
+      "sha256": "0c5da3f59fa7b6f41d7f7b2fb491df14f833996218297f53a3e04df177e87e18",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/0c5da3f59fa7b6f41d7f7b2fb491df14f833996218297f53a3e04df177e87e18"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-lifetime-Files--68678-bort-an-already-held-create/trace.zip",
+      "sha256": "cb95f094d0a803762bee6302051ad167a5475f70589f1935a854d33cfc506035",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/cb95f094d0a803762bee6302051ad167a5475f70589f1935a854d33cfc506035"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-workflow-Files--19af1--with-native-limits-visible/docx-390-editor.png",
+      "sha256": "b3e688e552874630a4310adb9464ff5db931426b91033bf56bf200e92a73ee47",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/b3e688e552874630a4310adb9464ff5db931426b91033bf56bf200e92a73ee47"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-workflow-Files--19af1--with-native-limits-visible/error-context.md",
+      "sha256": "8b4196273944f3a0710f9fc8a9a6fbaf02692e536916de9c456d28d6dcdc5802",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/8b4196273944f3a0710f9fc8a9a6fbaf02692e536916de9c456d28d6dcdc5802"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-workflow-Files--19af1--with-native-limits-visible/test-failed-1.png",
+      "sha256": "7ff746186c37dde455689e6f1392493ae97c0ee86e3a8a3c32580a2176a62b28",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/7ff746186c37dde455689e6f1392493ae97c0ee86e3a8a3c32580a2176a62b28"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-workflow-Files--19af1--with-native-limits-visible/trace.zip",
+      "sha256": "e7c82c4b8f5309f5436199bf1f53fcf5badba9abc888fa5f808d85007d84818d",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/e7c82c4b8f5309f5436199bf1f53fcf5badba9abc888fa5f808d85007d84818d"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-workflow-Files--0fa25--with-native-limits-visible/docx-1440-editor.png",
+      "sha256": "0e0cc32a09d2ef6c77e5bb05f7561e0ca96492543e578d2419620f49bafbc4c7",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/0e0cc32a09d2ef6c77e5bb05f7561e0ca96492543e578d2419620f49bafbc4c7"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-workflow-Files--0fa25--with-native-limits-visible/error-context.md",
+      "sha256": "8cff14a134ffbecb5e5f6d63bf7941736f1fab4e9f8c3265eba62a810f6c9765",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/8cff14a134ffbecb5e5f6d63bf7941736f1fab4e9f8c3265eba62a810f6c9765"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-workflow-Files--0fa25--with-native-limits-visible/test-failed-1.png",
+      "sha256": "7c0606468e01b01431f3d02364d31449fea053d4b6fe46013ab48893275c1b44",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/7c0606468e01b01431f3d02364d31449fea053d4b6fe46013ab48893275c1b44"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-workflow-Files--0fa25--with-native-limits-visible/trace.zip",
+      "sha256": "22c073efe185fca0b2126c640f0ab01827bf57234d6b72833527cbca14b8785d",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/22c073efe185fca0b2126c640f0ab01827bf57234d6b72833527cbca14b8785d"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-workflow-Files--4108e--with-native-limits-visible/error-context.md",
+      "sha256": "2bc0afe4a7c5535ab94c4e3d655de28b35529b252d3a3a8631a75de7c03e2aaa",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/2bc0afe4a7c5535ab94c4e3d655de28b35529b252d3a3a8631a75de7c03e2aaa"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-workflow-Files--4108e--with-native-limits-visible/test-failed-1.png",
+      "sha256": "80fcfc7fbc1adb5513808b9d659284071989f594091d8664a7c3c54a9534d88f",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/80fcfc7fbc1adb5513808b9d659284071989f594091d8664a7c3c54a9534d88f"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-workflow-Files--4108e--with-native-limits-visible/trace.zip",
+      "sha256": "f317dfe3102bacefb7294cf82cc87c2b106a260e712d9ca3628e58a54f39d371",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/f317dfe3102bacefb7294cf82cc87c2b106a260e712d9ca3628e58a54f39d371"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-workflow-Files--c3df1-thful-unavailable-rendering/files-unavailable-390.png",
+      "sha256": "6644b6333c9093282f9ec7f7b46149584dda9021114e6d2ef75f5b71f28279a6",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/6644b6333c9093282f9ec7f7b46149584dda9021114e6d2ef75f5b71f28279a6"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-navigation-File-f6d60-d-zero-automatic-operations/error-context.md",
+      "sha256": "0553b202e9da8f03719a7458a4f9f1d5ee35ae85651bb80efffbce39cfdd9195",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/0553b202e9da8f03719a7458a4f9f1d5ee35ae85651bb80efffbce39cfdd9195"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-navigation-File-f6d60-d-zero-automatic-operations/test-failed-1.png",
+      "sha256": "6fd2b507bf1b1eccab95c9d5f1527307adb0f0a86af3abbd74167f1fe9306d63",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/6fd2b507bf1b1eccab95c9d5f1527307adb0f0a86af3abbd74167f1fe9306d63"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-navigation-File-f6d60-d-zero-automatic-operations/trace.zip",
+      "sha256": "8c67d76bbfd22e677f2699f182846b6a9a21a15459972a1d5a64d2525dad934b",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/8c67d76bbfd22e677f2699f182846b6a9a21a15459972a1d5a64d2525dad934b"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-workflow-Files--f563a-thful-unavailable-rendering/files-unavailable-1440.png",
+      "sha256": "f2aca6a0b87a0a65a1407b79aca54bb023d6153645e842aa95ed6e4fdbd88379",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/f2aca6a0b87a0a65a1407b79aca54bb023d6153645e842aa95ed6e4fdbd88379"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-lifetime-Files--d84c4-nload-URL-without-reconnect/error-context.md",
+      "sha256": "29b9814f3646164d59ece34f59f0a41677966d6620b9326978dc61a5181b1036",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/29b9814f3646164d59ece34f59f0a41677966d6620b9326978dc61a5181b1036"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-lifetime-Files--d84c4-nload-URL-without-reconnect/test-failed-1.png",
+      "sha256": "60997d68ca65776d95b1356c4afa060668affa4ea2a4eb240d6535ba60207b6a",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/60997d68ca65776d95b1356c4afa060668affa4ea2a4eb240d6535ba60207b6a"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-lifetime-Files--d84c4-nload-URL-without-reconnect/trace.zip",
+      "sha256": "83f1eceded4580c41e6da29bc61564bd6b2b1a5c72beb6599545b870a54dade1",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/83f1eceded4580c41e6da29bc61564bd6b2b1a5c72beb6599545b870a54dade1"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-navigation-File-62463--Back-Forward-and-reconnect/error-context.md",
+      "sha256": "d9d7d608d4a692db620d47f8d86f09ac99cb767c8de29b6b31b09eb018b2ad06",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/d9d7d608d4a692db620d47f8d86f09ac99cb767c8de29b6b31b09eb018b2ad06"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-navigation-File-62463--Back-Forward-and-reconnect/test-failed-1.png",
+      "sha256": "197b7a196ba0b5f8f944f93c66f6b1d764cc94750c7d9d66981b236f6c4c7f18",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/197b7a196ba0b5f8f944f93c66f6b1d764cc94750c7d9d66981b236f6c4c7f18"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-navigation-File-62463--Back-Forward-and-reconnect/trace.zip",
+      "sha256": "43c7c2fc89f91c8ec6fb172f764c6638af47b62064307e0d36d17777f29c8de9",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/43c7c2fc89f91c8ec6fb172f764c6638af47b62064307e0d36d17777f29c8de9"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-workflow-Files--9d124--with-native-limits-visible/error-context.md",
+      "sha256": "cecebe8a1d721a15542cb63dbe5b41951b863b604eb5b83b4cedbe02986836d7",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/cecebe8a1d721a15542cb63dbe5b41951b863b604eb5b83b4cedbe02986836d7"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-workflow-Files--9d124--with-native-limits-visible/test-failed-1.png",
+      "sha256": "94d86a013faf6953ce9eed5a6556e8d668e749237dedcd331eddfa25e81fd5cb",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/94d86a013faf6953ce9eed5a6556e8d668e749237dedcd331eddfa25e81fd5cb"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-workflow-Files--9d124--with-native-limits-visible/trace.zip",
+      "sha256": "96a3c135d535b9976271356d8383ed66f2d641edb3a8d0b89d0b59b212a628f1",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/96a3c135d535b9976271356d8383ed66f2d641edb3a8d0b89d0b59b212a628f1"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-navigation-File-34122--Back-Forward-and-reconnect/error-context.md",
+      "sha256": "f215680be900b1915855b63ec7de61865eccf763fbc7c445bdeba712bd000dd3",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/f215680be900b1915855b63ec7de61865eccf763fbc7c445bdeba712bd000dd3"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-navigation-File-34122--Back-Forward-and-reconnect/test-failed-1.png",
+      "sha256": "abf7d963c1c31cf1b56e69f0040b95c932f37cd919cec4b8087f2026424bf6e2",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/abf7d963c1c31cf1b56e69f0040b95c932f37cd919cec4b8087f2026424bf6e2"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/candidate-artifacts/meri-files-navigation-File-34122--Back-Forward-and-reconnect/trace.zip",
+      "sha256": "6fc7435aec576715b8a8860489c3b2d7e654e3e707ea01962e6e943d3437fbe9",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/6fc7435aec576715b8a8860489c3b2d7e654e3e707ea01962e6e943d3437fbe9"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/test/browser/main.tsx",
+      "sha256": "ed54cc451fecf88e78eb9ad4f55443f77855247eef71fe32538a5a15f83e7750",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/ed54cc451fecf88e78eb9ad4f55443f77855247eef71fe32538a5a15f83e7750"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/test/browser/meri-files-fixtures.ts",
+      "sha256": "8050d0f2ab2119b8c5ddb32093f672af192a7215c830cd385b2988ead3d3f749",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/8050d0f2ab2119b8c5ddb32093f672af192a7215c830cd385b2988ead3d3f749"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/test/browser/meri-files-lifetime.spec.ts",
+      "sha256": "a17c004e87d9d331d97e1b72e32b9dfd7545ae98b4a8734db0db168c47387a31",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/a17c004e87d9d331d97e1b72e32b9dfd7545ae98b4a8734db0db168c47387a31"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/test/browser/meri-files-navigation.spec.ts",
+      "sha256": "cead47d9f5bed2190211aa8a85dc96234d1e0de5fa7e2b55a5ea9c83336de604",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/cead47d9f5bed2190211aa8a85dc96234d1e0de5fa7e2b55a5ea9c83336de604"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/test/browser/meri-files-workflow.spec.ts",
+      "sha256": "492bea8efb6eabcaf72248e59e2c4e881caed8ca1131830c435c06a9239cb688",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/492bea8efb6eabcaf72248e59e2c4e881caed8ca1131830c435c06a9239cb688"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/tests/meri-document-public-fixtures.ts",
+      "sha256": "9c58d14adfcc8907bd12a5ee02723c20a4b1e0812f7899fee9b4a18ea4bf54fc",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/9c58d14adfcc8907bd12a5ee02723c20a4b1e0812f7899fee9b4a18ea4bf54fc"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/src/app/meri/files/MeriFilesHost.tsx",
+      "sha256": "67096ee7b4ebbe50fdfbce16daa7a0852dede0a823836ae77e68def0bd422326",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/67096ee7b4ebbe50fdfbce16daa7a0852dede0a823836ae77e68def0bd422326"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/src/app/meri/files/page.tsx",
+      "sha256": "bcb4a1cb1374c001d9bc0d6bf78a2cbde4ec5eef593928215be1a41a0cf8ca41",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/bcb4a1cb1374c001d9bc0d6bf78a2cbde4ec5eef593928215be1a41a0cf8ca41"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/src/shared/meri-actions/opaque-session-controller.ts",
+      "sha256": "cf627a3a025a625d20e96932f1a6a801382757adbec49cfd0ab63016e6625f97",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/cf627a3a025a625d20e96932f1a6a801382757adbec49cfd0ab63016e6625f97"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/src/shared/shell/MeriMobileNavigation.tsx",
+      "sha256": "78373981b0f97955467b841477fe3586567efa070de0e209d41f4be9ff05f337",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/78373981b0f97955467b841477fe3586567efa070de0e209d41f4be9ff05f337"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/src/shared/meri-documents/attempt-journal.ts",
+      "sha256": "b2a3817413c9b3be2490e95f78131a7a544e07b524c599262d65ef74036ba358",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/b2a3817413c9b3be2490e95f78131a7a544e07b524c599262d65ef74036ba358"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/src/shared/meri-documents/config.ts",
+      "sha256": "4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/src/shared/meri-documents/proxy.ts",
+      "sha256": "bcedf60bace147654cc34a785ba5a156367c6094e1f10dd945336f09065e7977",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/bcedf60bace147654cc34a785ba5a156367c6094e1f10dd945336f09065e7977"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/src/shared/meri-documents/query-journal.ts",
+      "sha256": "cbdbabf2e1830cfc893c068194422342f1c4977063bcf9dec488b0b4803cec6b",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/cbdbabf2e1830cfc893c068194422342f1c4977063bcf9dec488b0b4803cec6b"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/src/shared/meri-documents/workflow-adapter.ts",
+      "sha256": "2eea62309cee79d278d407bce81170eb6c5b4f831f7a8de8cf4f6b3acf9f29fe",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/2eea62309cee79d278d407bce81170eb6c5b4f831f7a8de8cf4f6b3acf9f29fe"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/src/shared/meri-documents/workflow-port.ts",
+      "sha256": "698fb81b2a4c1dbec87048cc3f5517bc1e2da129a450d37aeadc6e354e2fe820",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/698fb81b2a4c1dbec87048cc3f5517bc1e2da129a450d37aeadc6e354e2fe820"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/src/shared/meri-documents/workflow-transport.ts",
+      "sha256": "a718ca794821afdbcd9727a826ec2288771757fed95134fc45adbb5e339bab0c",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/a718ca794821afdbcd9727a826ec2288771757fed95134fc45adbb5e339bab0c"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/src/features/meri/files/DocumentEditor.tsx",
+      "sha256": "8772b6f68e1bbfca8ac01647e2b6e34b7dd4f473b5cf9f96c3cc9bc5e05402ae",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/8772b6f68e1bbfca8ac01647e2b6e34b7dd4f473b5cf9f96c3cc9bc5e05402ae"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/src/features/meri/files/DocumentInspectionSummary.tsx",
+      "sha256": "44ad8ff19298fb5b97879d12b3f708aa65864922581b80ac570ffbecd1f47197",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/44ad8ff19298fb5b97879d12b3f708aa65864922581b80ac570ffbecd1f47197"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/src/features/meri/files/DocumentNotice.tsx",
+      "sha256": "4ffcb28c1b7c28ff0bac1e9b0b7e560c2c7e2bc7186b5b13146e0737a61896ac",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/4ffcb28c1b7c28ff0bac1e9b0b7e560c2c7e2bc7186b5b13146e0737a61896ac"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/src/features/meri/files/DocumentVersionPanel.tsx",
+      "sha256": "23c2280948c77b925b39fa513960a5a941e964d43488de1a2b8882a437825442",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/23c2280948c77b925b39fa513960a5a941e964d43488de1a2b8882a437825442"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/src/features/meri/files/MeriFilesWorkflow.tsx",
+      "sha256": "778fdc31378679cac971731fd1042fb9b636098a3802c8a063c00a7440a4abfa",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/778fdc31378679cac971731fd1042fb9b636098a3802c8a063c00a7440a4abfa"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/src/features/meri/files/WorkbookEditor.tsx",
+      "sha256": "2b5277a4ba0556e438cff6fd0a7e2fdc5be3a1406069b5009d197895c212ef8e",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/2b5277a4ba0556e438cff6fd0a7e2fdc5be3a1406069b5009d197895c212ef8e"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/src/features/meri/files/document-draft.ts",
+      "sha256": "257fbdf2f792a52408fc4751bcb254da90b14d1a1b1b92f6821a55637e5acd47",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/257fbdf2f792a52408fc4751bcb254da90b14d1a1b1b92f6821a55637e5acd47"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/src/features/meri/files/document-workflow-state.ts",
+      "sha256": "e49084c0d7a783e77a76cc973c7d8c2233df7c5498543215f01ce312424a5e7d",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/e49084c0d7a783e77a76cc973c7d8c2233df7c5498543215f01ce312424a5e7d"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/src/features/meri/files/download-url.ts",
+      "sha256": "05df49aaafb0debd346d33c9e08090ae97d053b8b6bdd09d8aaf6fe1d27f0098",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/05df49aaafb0debd346d33c9e08090ae97d053b8b6bdd09d8aaf6fe1d27f0098"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/src/features/meri/files/files.module.css",
+      "sha256": "2fc94c57659849b5469f70f4ee5581adeddf818599362645cf2a419275bb5580",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/2fc94c57659849b5469f70f4ee5581adeddf818599362645cf2a419275bb5580"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/final-source/apps/web/src/features/meri/files/workbook-draft.ts",
+      "sha256": "0bea244c0facd74e472dea49b8fa0552516c9b10fa2cef56ac7160670c8cb645",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/0bea244c0facd74e472dea49b8fa0552516c9b10fa2cef56ac7160670c8cb645"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-navigation-File-768b9-d-zero-automatic-operations/files-keyboard-390.png",
+      "sha256": "aee9a860243d22827a5314d7e5f51de2dec068eea987d81181937336bd54ed11",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/aee9a860243d22827a5314d7e5f51de2dec068eea987d81181937336bd54ed11"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-workflow-Files--19af1--with-native-limits-visible/docx-390-editor.png",
+      "sha256": "b3e688e552874630a4310adb9464ff5db931426b91033bf56bf200e92a73ee47",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/b3e688e552874630a4310adb9464ff5db931426b91033bf56bf200e92a73ee47"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-workflow-Files--19af1--with-native-limits-visible/docx-390-native-pending.png",
+      "sha256": "814f36d2e4120d8f272a1baa70c1a99ff211327f2dcec9595acb6716cd81cfee",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/814f36d2e4120d8f272a1baa70c1a99ff211327f2dcec9595acb6716cd81cfee"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-workflow-Files--19af1--with-native-limits-visible/docx-390-revision.png",
+      "sha256": "cae4ef7f3afbd6fa6da6e19fc0e1da0516917f029cd79cb56f2ab30ba7347f97",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/cae4ef7f3afbd6fa6da6e19fc0e1da0516917f029cd79cb56f2ab30ba7347f97"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-workflow-Files--19af1--with-native-limits-visible/synthetic-receiver-bytes.docx",
+      "sha256": "95a5a3b9cf4ddcc7a93e4a0d4c6de680257932fbf5994ad15daa64142aaae3a0",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/95a5a3b9cf4ddcc7a93e4a0d4c6de680257932fbf5994ad15daa64142aaae3a0"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-workflow-Files--0fa25--with-native-limits-visible/docx-1440-editor.png",
+      "sha256": "0e0cc32a09d2ef6c77e5bb05f7561e0ca96492543e578d2419620f49bafbc4c7",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/0e0cc32a09d2ef6c77e5bb05f7561e0ca96492543e578d2419620f49bafbc4c7"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-workflow-Files--0fa25--with-native-limits-visible/docx-1440-native-pending.png",
+      "sha256": "6492af32a359f977799713576d2c98f253e8e84d098763749e72e9c24eb8f1eb",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/6492af32a359f977799713576d2c98f253e8e84d098763749e72e9c24eb8f1eb"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-workflow-Files--0fa25--with-native-limits-visible/docx-1440-revision.png",
+      "sha256": "9c66ae65c666ba34a0a431ee3df3952efa6015b0c0b53c585c4fe455f3395064",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/9c66ae65c666ba34a0a431ee3df3952efa6015b0c0b53c585c4fe455f3395064"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-workflow-Files--0fa25--with-native-limits-visible/synthetic-receiver-bytes.docx",
+      "sha256": "95a5a3b9cf4ddcc7a93e4a0d4c6de680257932fbf5994ad15daa64142aaae3a0",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/95a5a3b9cf4ddcc7a93e4a0d4c6de680257932fbf5994ad15daa64142aaae3a0"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-workflow-Files--4108e--with-native-limits-visible/synthetic-receiver-bytes.xlsx",
+      "sha256": "95a5a3b9cf4ddcc7a93e4a0d4c6de680257932fbf5994ad15daa64142aaae3a0",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/95a5a3b9cf4ddcc7a93e4a0d4c6de680257932fbf5994ad15daa64142aaae3a0"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-workflow-Files--4108e--with-native-limits-visible/xlsx-390-editor.png",
+      "sha256": "80e77cd44f04e7bea9f635271bc1e4526ff6c7fa1f321d7af8e906b8b1da46a7",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/80e77cd44f04e7bea9f635271bc1e4526ff6c7fa1f321d7af8e906b8b1da46a7"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-workflow-Files--4108e--with-native-limits-visible/xlsx-390-native-pending.png",
+      "sha256": "4a53157b0582e44e8c5aef425f3ab0360577be929c3b7f651d155045f1ae1b54",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/4a53157b0582e44e8c5aef425f3ab0360577be929c3b7f651d155045f1ae1b54"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-workflow-Files--4108e--with-native-limits-visible/xlsx-390-revision.png",
+      "sha256": "59a012fd2bb3cefb30a86f40bae69cda7485d091e41f04a513460247ea0e8bf0",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/59a012fd2bb3cefb30a86f40bae69cda7485d091e41f04a513460247ea0e8bf0"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-workflow-Files--c3df1-thful-unavailable-rendering/files-unavailable-390.png",
+      "sha256": "6644b6333c9093282f9ec7f7b46149584dda9021114e6d2ef75f5b71f28279a6",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/6644b6333c9093282f9ec7f7b46149584dda9021114e6d2ef75f5b71f28279a6"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-navigation-File-f6d60-d-zero-automatic-operations/files-keyboard-1440.png",
+      "sha256": "cc5f7b1ae4b051bd4219d5cc36bdd4c53f89c70f35194fd9a4adbc2cb0dab0fc",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/cc5f7b1ae4b051bd4219d5cc36bdd4c53f89c70f35194fd9a4adbc2cb0dab0fc"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-workflow-Files--f563a-thful-unavailable-rendering/files-unavailable-1440.png",
+      "sha256": "f2aca6a0b87a0a65a1407b79aca54bb023d6153645e842aa95ed6e4fdbd88379",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/f2aca6a0b87a0a65a1407b79aca54bb023d6153645e842aa95ed6e4fdbd88379"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-workflow-Files--9d124--with-native-limits-visible/synthetic-receiver-bytes.xlsx",
+      "sha256": "95a5a3b9cf4ddcc7a93e4a0d4c6de680257932fbf5994ad15daa64142aaae3a0",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/95a5a3b9cf4ddcc7a93e4a0d4c6de680257932fbf5994ad15daa64142aaae3a0"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-workflow-Files--9d124--with-native-limits-visible/xlsx-1440-editor.png",
+      "sha256": "4cd4904db3b3ec3a7100b8a19df451a9b903311fa165d99e5f1ee14113864d03",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/4cd4904db3b3ec3a7100b8a19df451a9b903311fa165d99e5f1ee14113864d03"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-workflow-Files--9d124--with-native-limits-visible/xlsx-1440-native-pending.png",
+      "sha256": "5bb390206f5ec4f6342ecdff30230427b09d6766cd28f54a433523887b56b0d2",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/5bb390206f5ec4f6342ecdff30230427b09d6766cd28f54a433523887b56b0d2"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-artifacts/meri-files-workflow-Files--9d124--with-native-limits-visible/xlsx-1440-revision.png",
+      "sha256": "90091be9759021838edeca28ef01511c21d49b36c9e145aac432ea8eaab5e84e",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/90091be9759021838edeca28ef01511c21d49b36c9e145aac432ea8eaab5e84e"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-tests/meri-files-fixtures.ts",
+      "sha256": "8050d0f2ab2119b8c5ddb32093f672af192a7215c830cd385b2988ead3d3f749",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/8050d0f2ab2119b8c5ddb32093f672af192a7215c830cd385b2988ead3d3f749"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-tests/meri-files-lifetime.spec.ts",
+      "sha256": "a17c004e87d9d331d97e1b72e32b9dfd7545ae98b4a8734db0db168c47387a31",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/a17c004e87d9d331d97e1b72e32b9dfd7545ae98b4a8734db0db168c47387a31"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-tests/meri-files-navigation.spec.ts",
+      "sha256": "cead47d9f5bed2190211aa8a85dc96234d1e0de5fa7e2b55a5ea9c83336de604",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/cead47d9f5bed2190211aa8a85dc96234d1e0de5fa7e2b55a5ea9c83336de604"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-browser-evidence-20261013/corrected-tests/meri-files-workflow.spec.ts",
+      "sha256": "492bea8efb6eabcaf72248e59e2c4e881caed8ca1131830c435c06a9239cb688",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/492bea8efb6eabcaf72248e59e2c4e881caed8ca1131830c435c06a9239cb688"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-root-integration-review-20261013/ASSERTION-PRESERVATION.json",
+      "sha256": "ca15b609cd11f36968536e972198d6c0d85e2d68f8c9f9bda2d4425bc324a4d4",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/ca15b609cd11f36968536e972198d6c0d85e2d68f8c9f9bda2d4425bc324a4d4"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-root-integration-review-20261013/FINAL-SOURCE-CHECK.json",
+      "sha256": "ce4997fe125f2ff8be6d52cc69822fbd9fed1177719c9519135e1f63eb6190af",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/ce4997fe125f2ff8be6d52cc69822fbd9fed1177719c9519135e1f63eb6190af"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-root-integration-review-20261013/FINDINGS.json",
+      "sha256": "1baeae4ebc14591e42234cf44e922c065c1dd3355f17a43b07b9819a7db867d7",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/1baeae4ebc14591e42234cf44e922c065c1dd3355f17a43b07b9819a7db867d7"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-root-integration-review-20261013/INTERIM.md",
+      "sha256": "e56dd90103e44ee6657a61a2c2b98a5994e9a135ba736a5ea6e2c2855a9de0b8",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/e56dd90103e44ee6657a61a2c2b98a5994e9a135ba736a5ea6e2c2855a9de0b8"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-root-integration-review-20261013/MANIFEST.json",
+      "sha256": "69a75a8aef1650b4d90ef6a28e6641fc5e82e067fa3c322ba95d71727e04d641",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/69a75a8aef1650b4d90ef6a28e6641fc5e82e067fa3c322ba95d71727e04d641"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-root-integration-review-20261013/OWNER-RECEIPTS.json",
+      "sha256": "bb638cec694e831673378fe6642cef606c6f24419abd2699482cdc1d04d8677c",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/bb638cec694e831673378fe6642cef606c6f24419abd2699482cdc1d04d8677c"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-root-integration-review-20261013/REGISTRY-RECORDS.json",
+      "sha256": "12423c3d6f1a18a7de0eb40f38abfed84c2e2225d0b6b1207eaf039c688ac581",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/12423c3d6f1a18a7de0eb40f38abfed84c2e2225d0b6b1207eaf039c688ac581"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-root-integration-review-20261013/REPORT.md",
+      "sha256": "b7aec4d2ba54188f496611c19f537f9e511dbf3e23f3120343b5c875021a1529",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/b7aec4d2ba54188f496611c19f537f9e511dbf3e23f3120343b5c875021a1529"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-root-integration-review-20261013/SOURCE-PINS.json",
+      "sha256": "c017f25f32daa08d0f9f5d95fbe8fff0348ff6e275eed0bb92c74b3878297096",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/c017f25f32daa08d0f9f5d95fbe8fff0348ff6e275eed0bb92c74b3878297096"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-root-integration-review-20261013/SOURCE-REVIEW-RECORDS.json",
+      "sha256": "e063f5526e1205d02a3041a20e5a2fbb040b11b398cc3c954d7c472270c389e9",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/e063f5526e1205d02a3041a20e5a2fbb040b11b398cc3c954d7c472270c389e9"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-root-integration-review-20261013/TEST-STRUCTURE-REVIEW.json",
+      "sha256": "941aa31c36d1bb6857936e8d0d0be0f7450b6d3e00ee59d8d2e6615016980b6a",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/941aa31c36d1bb6857936e8d0d0be0f7450b6d3e00ee59d8d2e6615016980b6a"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-root-integration-review-20261013/checkpoint-source.json",
+      "sha256": "fa2e35567da2cb42e2c6b6979a0f02782132fcd996f2f6c71317c891f3500c50",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/fa2e35567da2cb42e2c6b6979a0f02782132fcd996f2f6c71317c891f3500c50"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-root-integration-review-20261013/public-package-verification.json",
+      "sha256": "4d754c0d8bed0dd5bfd2366f2ce25bfef67d7cf6fad0b22205f96ca61eae7b4f",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/4d754c0d8bed0dd5bfd2366f2ce25bfef67d7cf6fad0b22205f96ca61eae7b4f"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-root-integration-review-20261013/tracked-diff.patch",
+      "sha256": "db1491bb016bdd360b1fb8fe12fefdf75660721c3dcf2cb4ce1ec60ec3a509c2",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/db1491bb016bdd360b1fb8fe12fefdf75660721c3dcf2cb4ce1ec60ec3a509c2"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-standalone-review-20261013/MANIFEST.json",
+      "sha256": "aef0e55dc167bd0b0a462aa23726debe9e4d2e47d54e33fc729e331793455673",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/aef0e55dc167bd0b0a462aa23726debe9e4d2e47d54e33fc729e331793455673"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-standalone-review-20261013/REPORT.md",
+      "sha256": "b6aaef1ef0ad90ef9524320fd95d7572fd93fc88ce1771522b69bbd13b548e11",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/b6aaef1ef0ad90ef9524320fd95d7572fd93fc88ce1771522b69bbd13b548e11"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-standalone-review-20261013/SOURCE-AND-AST.json",
+      "sha256": "9c32f2d5a3b0849e05b26b2de18edc9d16d1894562f89380dc42e50fba3f604f",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/9c32f2d5a3b0849e05b26b2de18edc9d16d1894562f89380dc42e50fba3f604f"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-standalone-review-20261013/run-standalone.mjs.source.txt",
+      "sha256": "4abd010336b73d1358724bb8c1eef26267cd4b77b82e509afeca28125842dbef",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/4abd010336b73d1358724bb8c1eef26267cd4b77b82e509afeca28125842dbef"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-standalone-review-20261013/tracked-diff.patch",
+      "sha256": "d01acc5b6fc8f10852eeacd97e04f8ecf4d7addfa7561f8c6f7a893c67ea3940",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/d01acc5b6fc8f10852eeacd97e04f8ecf4d7addfa7561f8c6f7a893c67ea3940"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-standalone-review-20261013/verify-documents.mjs.source.txt",
+      "sha256": "873eb842ee558bf6904642242166bc8a9765f304a64f8c3ab5f54c312ee83acd",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/873eb842ee558bf6904642242166bc8a9765f304a64f8c3ab5f54c312ee83acd"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-standalone-review-20261013/verify-standalone.mjs.source.txt",
+      "sha256": "7494d541b60c8619134783ade79a9ba1bc0646f22bbbe1ff346be1dbb055fda1",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/7494d541b60c8619134783ade79a9ba1bc0646f22bbbe1ff346be1dbb055fda1"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/ERROR-STATUS-MAP.json",
+      "sha256": "8bf4f4cd8a8d52ae60491f99057dce563302f3186351d8233825101d7669e16a",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/8bf4f4cd8a8d52ae60491f99057dce563302f3186351d8233825101d7669e16a"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/GITHUB-INPUTS.json",
+      "sha256": "043b71021b7c21729ea65f10b10aa5244c60a4903c9ebea6f377a65e7597bfd9",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/043b71021b7c21729ea65f10b10aa5244c60a4903c9ebea6f377a65e7597bfd9"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/GITHUB-PUBLIC-SOURCES.json",
+      "sha256": "4b589c41686caa42571fe1f8990668b234d5b2272d7c8880c74abad885adb4ab",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/4b589c41686caa42571fe1f8990668b234d5b2272d7c8880c74abad885adb4ab"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/INPUT-VERIFICATION.json",
+      "sha256": "1e8ad181fcc5ccd0df01990892c680a53422574f669ff907e70ba58a493f16ed",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/1e8ad181fcc5ccd0df01990892c680a53422574f669ff907e70ba58a493f16ed"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/MANIFEST.json",
+      "sha256": "96341e8ce989a2945a238337248e73ba025c3643c5b8a41dfab9d8ae4b41dfb5",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/96341e8ce989a2945a238337248e73ba025c3643c5b8a41dfab9d8ae4b41dfb5"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/PREVIOUS-EXPORT-COMPARISON.json",
+      "sha256": "4ba7203e3ed7009b22cef888eb03f68665f124492cc77f4bf5f21d6850c6a11a",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/4ba7203e3ed7009b22cef888eb03f68665f124492cc77f4bf5f21d6850c6a11a"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/PUBLIC-SOURCE-VERIFICATION.json",
+      "sha256": "3b907c60a36274cadd63daacf18934a392b14e2ec23138e9a94206d9907b90b9",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/3b907c60a36274cadd63daacf18934a392b14e2ec23138e9a94206d9907b90b9"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/REVIEW.md",
+      "sha256": "dda077ed32d7be5d69a244e955a1231ce60278da268e0663a352808dcf39dc3e",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/dda077ed32d7be5d69a244e955a1231ce60278da268e0663a352808dcf39dc3e"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/VERDICT.json",
+      "sha256": "3c9b37fad8be2a0b5482d63058ef57a8c56da0ce83384bfbc73870233e61b4b6",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/3c9b37fad8be2a0b5482d63058ef57a8c56da0ce83384bfbc73870233e61b4b6"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/published/packages/contracts/dist/document-application.metadata.json",
+      "sha256": "49def325d3792f56c99de484efb4193092a3c54dc82df0f4559ed462e9f4288f",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/49def325d3792f56c99de484efb4193092a3c54dc82df0f4559ed462e9f4288f"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/published/packages/contracts/document-application/boundary.mjs",
+      "sha256": "6a82c49b1db426d2435d751eaf754731658ac1d448750e1a8f060fdada869982",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/6a82c49b1db426d2435d751eaf754731658ac1d448750e1a8f060fdada869982"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/published/packages/contracts/document-application/download.mjs",
+      "sha256": "fd74698f6d0245381ca504300dabe1cfba2b7ed4ed6bc2054d805aaeadf02246",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/fd74698f6d0245381ca504300dabe1cfba2b7ed4ed6bc2054d805aaeadf02246"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/published/packages/contracts/document-application/receive.mjs",
+      "sha256": "95f3c2ced717a5e607d3cf1b083a6bc5a8041aa584a221ac2f99fa8c3d35f42e",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/95f3c2ced717a5e607d3cf1b083a6bc5a8041aa584a221ac2f99fa8c3d35f42e"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/published/docs/coordination/reports/CODEX-DOCUMENT-CONTRACT-INTEGRATION-20261013.md",
+      "sha256": "69c05ea49f1d3c50f80dae65623e8aa0123eadd119454de9fa1306bf65b150ea",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/69c05ea49f1d3c50f80dae65623e8aa0123eadd119454de9fa1306bf65b150ea"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/published/apps/control/document-application/README.md",
+      "sha256": "bc81faaca0a40c1771e4806f063291e915bceadea4a59e133297bde686bb22ef",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/bc81faaca0a40c1771e4806f063291e915bceadea4a59e133297bde686bb22ef"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/extracted/package/README.md",
+      "sha256": "0f47258a29bf03d64666f2f6a464ef97827470b83ebb2fc8fd1c7aaf499f10e2",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/0f47258a29bf03d64666f2f6a464ef97827470b83ebb2fc8fd1c7aaf499f10e2"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/extracted/package/THIRD-PARTY-NOTICES.md",
+      "sha256": "5c7b0def28c37c7a1855ecc25c6cf3ea61e79dad7c5a1601ad69fc9d7dd361dd",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/5c7b0def28c37c7a1855ecc25c6cf3ea61e79dad7c5a1601ad69fc9d7dd361dd"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/extracted/package/meri.schema.json",
+      "sha256": "e3de878198bbd557843ac440e48664ad5175eecd99f7ec932021ffc465bf8c5b",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/e3de878198bbd557843ac440e48664ad5175eecd99f7ec932021ffc465bf8c5b"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/extracted/package/package.json",
+      "sha256": "2343a75956f9c3f9c51ebbfd62f8c6abf6be537fae088b4208081cf4ddfb9189",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/2343a75956f9c3f9c51ebbfd62f8c6abf6be537fae088b4208081cf4ddfb9189"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/extracted/package/validate.mjs",
+      "sha256": "c2449fd55300b31bdc1e829b5d918a531f1c4b2c675085a5b4707726ddd36d10",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/c2449fd55300b31bdc1e829b5d918a531f1c4b2c675085a5b4707726ddd36d10"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/extracted/package/dist/action-application.d.ts",
+      "sha256": "007880126ba782888b0a8411e3c90acd64d1cc0eb530ecb0cb41ff590bd6d762",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/007880126ba782888b0a8411e3c90acd64d1cc0eb530ecb0cb41ff590bd6d762"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/extracted/package/dist/action-application.metadata.json",
+      "sha256": "9909cec1f8008a69415d5cca842230eb27e1bb70f419563be3da0da0b9514355",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/9909cec1f8008a69415d5cca842230eb27e1bb70f419563be3da0da0b9514355"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/extracted/package/dist/action-application.mjs",
+      "sha256": "9e824b7f814561ec46aa63b0c31057a8292515a9f0186707bc838fed98eb3534",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/9e824b7f814561ec46aa63b0c31057a8292515a9f0186707bc838fed98eb3534"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/extracted/package/dist/action-application.schema.json",
+      "sha256": "a44e403281e8404462be8d06ddbb369e175b61e6501e16c8007646d9e74a803c",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/a44e403281e8404462be8d06ddbb369e175b61e6501e16c8007646d9e74a803c"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/extracted/package/dist/browser.d.ts",
+      "sha256": "638d76071540b340cc8bd7efd728e3847cb22456dc8ec45d8733497792a0ba30",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/638d76071540b340cc8bd7efd728e3847cb22456dc8ec45d8733497792a0ba30"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/extracted/package/dist/browser.mjs",
+      "sha256": "3682cd96d10c1cc53f4e4a91845c6da514eda9d524ce8342b89e09ffcc19ae83",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/3682cd96d10c1cc53f4e4a91845c6da514eda9d524ce8342b89e09ffcc19ae83"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/extracted/package/dist/contracts.d.ts",
+      "sha256": "e0366e2f5a668e9e14f09e90c175dce53cbec176125aa98a58c878b44fd74fbd",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/e0366e2f5a668e9e14f09e90c175dce53cbec176125aa98a58c878b44fd74fbd"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/extracted/package/dist/document-application.d.ts",
+      "sha256": "1ce1f8f0f8967cbb705732bd9fd0396149cb4266fa0aec26d225d2f7e2a01d31",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/1ce1f8f0f8967cbb705732bd9fd0396149cb4266fa0aec26d225d2f7e2a01d31"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/extracted/package/dist/document-application.metadata.json",
+      "sha256": "49def325d3792f56c99de484efb4193092a3c54dc82df0f4559ed462e9f4288f",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/49def325d3792f56c99de484efb4193092a3c54dc82df0f4559ed462e9f4288f"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/extracted/package/dist/document-application.mjs",
+      "sha256": "4979699706346dc7fe3661ee1fafdc975e041e38a1f59873ea0b4f1795f9efde",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/4979699706346dc7fe3661ee1fafdc975e041e38a1f59873ea0b4f1795f9efde"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/extracted/package/dist/document-application.schema.json",
+      "sha256": "712348c7758e7c99c77f2e50d35397038a651a5a312bb9439bdda5bbd44f5c51",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/712348c7758e7c99c77f2e50d35397038a651a5a312bb9439bdda5bbd44f5c51"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/extracted/package/dist/index.d.ts",
+      "sha256": "b1d45e99574c3834d70354fd973298b5a9b4e76befc11d6e2996c51c70266642",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/b1d45e99574c3834d70354fd973298b5a9b4e76befc11d6e2996c51c70266642"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/extracted/package/dist/metadata.d.ts",
+      "sha256": "63e058d979f30b9807ed9a7c5df2760c06a180bd903ff13daa9c96bfcba78087",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/63e058d979f30b9807ed9a7c5df2760c06a180bd903ff13daa9c96bfcba78087"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/extracted/package/dist/metadata.mjs",
+      "sha256": "63a4733b40a9671dbca69419d12cae894adca42a9f2ced83cd729ce239e1ef94",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/63a4733b40a9671dbca69419d12cae894adca42a9f2ced83cd729ce239e1ef94"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/input/README.md",
+      "sha256": "0f47258a29bf03d64666f2f6a464ef97827470b83ebb2fc8fd1c7aaf499f10e2",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/0f47258a29bf03d64666f2f6a464ef97827470b83ebb2fc8fd1c7aaf499f10e2"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/input/capiro-meri-contracts-0.1.2.tgz",
+      "sha256": "8a3f6c95935c368da5c01d87c599c5d13b9b62a21bc6924e7ad0b723bd5e91fa",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "vendor",
+        "reference": "VENDOR-REFERENCE.json"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-document-public-contract-20261013/input/package.json",
+      "sha256": "2343a75956f9c3f9c51ebbfd62f8c6abf6be537fae088b4208081cf4ddfb9189",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/2343a75956f9c3f9c51ebbfd62f8c6abf6be537fae088b4208081cf4ddfb9189"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-pr56-operation-review-20261013/MANIFEST.json",
+      "sha256": "82ee41f71628de1832d8ae88a0f8df94c5656cac3fec8450d8df9f0df4875be4",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/82ee41f71628de1832d8ae88a0f8df94c5656cac3fec8450d8df9f0df4875be4"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-pr56-operation-review-20261013/REVIEW.md",
+      "sha256": "3571c4388fe31799ec929f3420d4a2758a864cafa9d3ab433ac74bf4cc8f07c4",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/3571c4388fe31799ec929f3420d4a2758a864cafa9d3ab433ac74bf4cc8f07c4"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-pr56-operation-review-20261013/VERIFICATION.json",
+      "sha256": "22fa7b17e67ec2c7d6ba42a9982a2848f832940ffe7d7e9fe7ab9ec35e357ac2",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/22fa7b17e67ec2c7d6ba42a9982a2848f832940ffe7d7e9fe7ab9ec35e357ac2"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-pr56-operation-review-20261013/application-readme-diff.patch",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-pr56-operation-review-20261013/applicationReadme.md",
+      "sha256": "bc81faaca0a40c1771e4806f063291e915bceadea4a59e133297bde686bb22ef",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/bc81faaca0a40c1771e4806f063291e915bceadea4a59e133297bde686bb22ef"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-pr56-operation-review-20261013/github-applicationReadme.json",
+      "sha256": "d55eb142cb3535d2ddc122b8b92619fc048573019163e9025826e5301ae50fd1",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/d55eb142cb3535d2ddc122b8b92619fc048573019163e9025826e5301ae50fd1"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-pr56-operation-review-20261013/github-comparison.json",
+      "sha256": "b4dd9e59a78fcb11f7fb6358f84079da0f26f9bd6e66f7b97c8f522c41c16f95",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/b4dd9e59a78fcb11f7fb6358f84079da0f26f9bd6e66f7b97c8f522c41c16f95"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-pr56-operation-review-20261013/github-publicManifest.json",
+      "sha256": "020b4cb162b8c4efa4fb6b1ac3f283c29a507ae0884a7d705d37ad3da23252b6",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/020b4cb162b8c4efa4fb6b1ac3f283c29a507ae0884a7d705d37ad3da23252b6"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-pr56-operation-review-20261013/github-publicReadme.json",
+      "sha256": "e68673888deb896bf3979703cbb0054c9de48aee0ec9c1d4651bdda6d495b402",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/e68673888deb896bf3979703cbb0054c9de48aee0ec9c1d4651bdda6d495b402"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-pr56-operation-review-20261013/publicManifest.json",
+      "sha256": "2343a75956f9c3f9c51ebbfd62f8c6abf6be537fae088b4208081cf4ddfb9189",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/2343a75956f9c3f9c51ebbfd62f8c6abf6be537fae088b4208081cf4ddfb9189"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-pr56-operation-review-20261013/publicReadme.md",
+      "sha256": "0f47258a29bf03d64666f2f6a464ef97827470b83ebb2fc8fd1c7aaf499f10e2",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/0f47258a29bf03d64666f2f6a464ef97827470b83ebb2fc8fd1c7aaf499f10e2"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/ITERATIONS.md",
+      "sha256": "acfb5ab33de87e33fdddc45594bfa784710d433f4106d49684184349d202e34c",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/acfb5ab33de87e33fdddc45594bfa784710d433f4106d49684184349d202e34c"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/MANIFEST.json",
+      "sha256": "d4f89ee7be69a1b12a5a5d94bfb2d9b0017b956da46c7da91673298530e3c6fc",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/d4f89ee7be69a1b12a5a5d94bfb2d9b0017b956da46c7da91673298530e3c6fc"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/ROOT-DEVELOPMENT-REPORT.md",
+      "sha256": "6e8674d358d9ea6e1ebe14483a5268538560d5502cc6d47af56c94546411a09c",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/6e8674d358d9ea6e1ebe14483a5268538560d5502cc6d47af56c94546411a09c"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/action-lifecycle.json",
+      "sha256": "af1220a3e907a991eec142355bdae43e048a537552c94f1575b53c52e6a07e4b",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/af1220a3e907a991eec142355bdae43e048a537552c94f1575b53c52e6a07e4b"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/action-lifecycle.log",
+      "sha256": "64182fa867dba45053f9be0b3c1148c72a036b39bdd3a59242177ac416da2beb",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/64182fa867dba45053f9be0b3c1148c72a036b39bdd3a59242177ac416da2beb"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/architecture-current.json",
+      "sha256": "7e049a3ea95ae3ae19053357364bb885eeb01c1c74606c75328b6efec6693646",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/7e049a3ea95ae3ae19053357364bb885eeb01c1c74606c75328b6efec6693646"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/architecture-final-before-browser-registry.json",
+      "sha256": "8288260a6efbb504de0da7ced7640cdc0e178c38e09cd4f67ef76dbe04374cd3",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/8288260a6efbb504de0da7ced7640cdc0e178c38e09cd4f67ef76dbe04374cd3"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/architecture-final.json",
+      "sha256": "8288260a6efbb504de0da7ced7640cdc0e178c38e09cd4f67ef76dbe04374cd3",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/8288260a6efbb504de0da7ced7640cdc0e178c38e09cd4f67ef76dbe04374cd3"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/architecture-hydrated-v2.json",
+      "sha256": "bad9e78555baa58c68576e2c5fde0f01d873144a5ae3142860717da2a45b0f3f",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/bad9e78555baa58c68576e2c5fde0f01d873144a5ae3142860717da2a45b0f3f"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/architecture-hydrated.json",
+      "sha256": "7e049a3ea95ae3ae19053357364bb885eeb01c1c74606c75328b6efec6693646",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/7e049a3ea95ae3ae19053357364bb885eeb01c1c74606c75328b6efec6693646"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/architecture-progress.log",
+      "sha256": "2a61c290a878ae4e13acdddf6e2ad44f7b6a8e8058cab7ab6a35fb041c34cba4",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/2a61c290a878ae4e13acdddf6e2ad44f7b6a8e8058cab7ab6a35fb041c34cba4"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/architecture-reviewed-v2.json",
+      "sha256": "8288260a6efbb504de0da7ced7640cdc0e178c38e09cd4f67ef76dbe04374cd3",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/8288260a6efbb504de0da7ced7640cdc0e178c38e09cd4f67ef76dbe04374cd3"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/architecture-reviewed.json",
+      "sha256": "bf44f7ccbf06895122a6f8f18d01a7b12dbaa1a7125566699dd84a1384d12857",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/bf44f7ccbf06895122a6f8f18d01a7b12dbaa1a7125566699dd84a1384d12857"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/architecture-routes.log",
+      "sha256": "0b13d80f37d3601392d0c0daedaf1d66d889cc045d8077fe738a62ec71e98484",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/0b13d80f37d3601392d0c0daedaf1d66d889cc045d8077fe738a62ec71e98484"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/development-source-current.json",
+      "sha256": "9b91f09700e50cb28485288e492b24588132c6bef50c67393f22482e2941d3a1",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/9b91f09700e50cb28485288e492b24588132c6bef50c67393f22482e2941d3a1"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/format-final-development.log",
+      "sha256": "f86e15128a29fa1161d0d608257c360045d993746eff56a3f0a031d96ee087e4",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/f86e15128a29fa1161d0d608257c360045d993746eff56a3f0a031d96ee087e4"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/public-packages.json",
+      "sha256": "bb25fd38117fc258f1a7aeaf62417583c13c6b676204e7289829f0351ac4b3c2",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/bb25fd38117fc258f1a7aeaf62417583c13c6b676204e7289829f0351ac4b3c2"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/remote-heads-before-integration.json",
+      "sha256": "13cfe7a427287d029b564129a7aafa0f617d2761dc875640bed6faafb9f04ad9",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/13cfe7a427287d029b564129a7aafa0f617d2761dc875640bed6faafb9f04ad9"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/remote-heads-before-integration.txt",
+      "sha256": "048ca94b74cf9761b740946520cb16ac4d1567a4f0f53fb969ba23f87ff869a6",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/048ca94b74cf9761b740946520cb16ac4d1567a4f0f53fb969ba23f87ff869a6"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/root-final-source-pins.json",
+      "sha256": "9d3e4c45177f61ce3bb045b15ea3e0a343baaef0221559cde9dd03e5beffe279",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/9d3e4c45177f61ce3bb045b15ea3e0a343baaef0221559cde9dd03e5beffe279"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/root-format.log",
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/typecheck-progress.log",
+      "sha256": "645fe133d5bb6d973962aefd1ed0b84689cca7a13c3b01fff96784cd7ceed240",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/645fe133d5bb6d973962aefd1ed0b84689cca7a13c3b01fff96784cd7ceed240"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/typecheck-stable-receipt.json",
+      "sha256": "9ff45651c82f51e1c63db8bbd1c7090ebb61b88270b3764a7fe5b015f0d19ecb",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/9ff45651c82f51e1c63db8bbd1c7090ebb61b88270b3764a7fe5b015f0d19ecb"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-development-20261013/typecheck-stable.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-20261013/6a2e4ace-reports-before-move.json",
+      "sha256": "3c80545487a06f150146e14bc2214eeb38e9498c1355503f97ce184b7f88b1bd",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/3c80545487a06f150146e14bc2214eeb38e9498c1355503f97ce184b7f88b1bd"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-20261013/6a2e4ace-reports-copy-verification.json",
+      "sha256": "f51bcf44374c2f4385be85ab6bc9188c5723b59e77df21e4d93412a2249e1254",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/f51bcf44374c2f4385be85ab6bc9188c5723b59e77df21e4d93412a2249e1254"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-20261013/6a2e4ace-reports-move.json",
+      "sha256": "0a2b59aeadec35d42f07b553c154a18a2e1da6724aa7f3aad127c853aceaf4aa",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/0a2b59aeadec35d42f07b553c154a18a2e1da6724aa7f3aad127c853aceaf4aa"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-20261013/93b3617f-reports-before-move.json",
+      "sha256": "223fc5ba27c683d7542bab7a3be3ab15a65cd0613337f3191c8bf9e5d793801e",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/223fc5ba27c683d7542bab7a3be3ab15a65cd0613337f3191c8bf9e5d793801e"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-20261013/93b3617f-reports-copy-verification.json",
+      "sha256": "bbb756f62fd393a9d1af9826bc63c1606aa564d226c13f0441084d1e1e1dfe30",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/bbb756f62fd393a9d1af9826bc63c1606aa564d226c13f0441084d1e1e1dfe30"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-20261013/93b3617f-reports-move.json",
+      "sha256": "f75d9b824fbc264dfa25df9924f167f71aa1fe139c5d92d1358714269164ca65",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/f75d9b824fbc264dfa25df9924f167f71aa1fe139c5d92d1358714269164ca65"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-20261013/MANIFEST.json",
+      "sha256": "8b204f762256b1529f78951f46e7e154495b4cbbe21a0fdfb235452b104a1a99",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/8b204f762256b1529f78951f46e7e154495b4cbbe21a0fdfb235452b104a1a99"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-20261013/RAW83-PRESERVATION.json",
+      "sha256": "72aceab63ad02a5720c6652db71c61619f2adfbf3f9786407fe14f0a5ca07aeb",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/72aceab63ad02a5720c6652db71c61619f2adfbf3f9786407fe14f0a5ca07aeb"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-20261013/README.md",
+      "sha256": "872042da77ae57bcbd3008ca3e0a57e2e7c2705b19610c22e7397fd7397c6e63",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/872042da77ae57bcbd3008ca3e0a57e2e7c2705b19610c22e7397fd7397c6e63"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-20261013/SOURCE-AND-RUNTIME-BINDING.json",
+      "sha256": "803f7c5f6c34faef59fc70cf76746da016766b22c139706b4fb42a07f5548b5d",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/803f7c5f6c34faef59fc70cf76746da016766b22c139706b4fb42a07f5548b5d"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-20261013/help.txt",
+      "sha256": "14ef00edcce52ed18bb5486051fca54c4b53bb02aab0658fcbe6d8a1752604a5",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/14ef00edcce52ed18bb5486051fca54c4b53bb02aab0658fcbe6d8a1752604a5"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-20261013/next-83-archive-verification.json",
+      "sha256": "f5558ce07e4b82a110d73d2bfde96bb479db8837ddccb9bbbb89c9a839ac01a0",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/f5558ce07e4b82a110d73d2bfde96bb479db8837ddccb9bbbb89c9a839ac01a0"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-20261013/next-83-before-archive.json",
+      "sha256": "e17903e816d6b55f742f7b39af127e5dd2e24539bddf7359a146e9d533fab8eb",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/e17903e816d6b55f742f7b39af127e5dd2e24539bddf7359a146e9d533fab8eb"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-20261013/next-83-runtime-retirement.json",
+      "sha256": "f553de1f015785a21d8730b0bd7bfa9f225ce80685825003bdd80759ba65ce4a",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/f553de1f015785a21d8730b0bd7bfa9f225ce80685825003bdd80759ba65ce4a"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-20261013/publication-83-before-retirement.json",
+      "sha256": "412888cdb750231920c0ec8c2ed5edc4973e0a34cc7c34980b656692d0517df7",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/412888cdb750231920c0ec8c2ed5edc4973e0a34cc7c34980b656692d0517df7"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-20261013/publication-83-retirement.json",
+      "sha256": "af424cd1a568830bc78c1e4d722f2852c1784edd90b3cb1c639d30a720c4efc7",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/af424cd1a568830bc78c1e4d722f2852c1784edd90b3cb1c639d30a720c4efc7"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-20261013/publication.log",
+      "sha256": "8ddea5c6b9a4ed7462966b62f302dc8015cdd6aecbbc7722d366a15c690c6e0b",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/8ddea5c6b9a4ed7462966b62f302dc8015cdd6aecbbc7722d366a15c690c6e0b"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-20261013/recover-owned-storage.py",
+      "sha256": "a97dbf87b7c8d9a8f0bf47595e4de806fe3faf09f762cef096caf653eb4a6323",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/a97dbf87b7c8d9a8f0bf47595e4de806fe3faf09f762cef096caf653eb4a6323"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-20261013/reports6a.log",
+      "sha256": "f670d193fba5557efa8810761d15a8d2bfdd2a8e3152e79a1e44e3693d5b42ad",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/f670d193fba5557efa8810761d15a8d2bfdd2a8e3152e79a1e44e3693d5b42ad"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-20261013/reports93.log",
+      "sha256": "5c5e5e85b0ed2841d6a6d1c7a3363f48a4db8f1cea941695f3fb75b50f7783d9",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/5c5e5e85b0ed2841d6a6d1c7a3363f48a4db8f1cea941695f3fb75b50f7783d9"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-final-storage-20261013/runtime.log",
+      "sha256": "9badf34a390b03320592a9263e9d83f3ef75dd8e7de74b9f32f7e88998344c71",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/9badf34a390b03320592a9263e9d83f3ef75dd8e7de74b9f32f7e88998344c71"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-browser-independent-review-20261013/AXE-AND-VISUAL.json",
+      "sha256": "5ccb32c7edd4ac27aaed7837b79fe7d297f86516aa58e978ee9adf197521b06b",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/5ccb32c7edd4ac27aaed7837b79fe7d297f86516aa58e978ee9adf197521b06b"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-browser-independent-review-20261013/DOWNLOAD-BYTE-AUDIT.json",
+      "sha256": "e2de5327988216683c2a3daadf2752ac05dbe57b6e47d89ef76e5087f35791f6",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/e2de5327988216683c2a3daadf2752ac05dbe57b6e47d89ef76e5087f35791f6"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-browser-independent-review-20261013/INDEX-VERIFICATION.json",
+      "sha256": "37de90550ceb457a8187acf16873bb761b8361f79643bc544f383b77ab7098ca",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/37de90550ceb457a8187acf16873bb761b8361f79643bc544f383b77ab7098ca"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-browser-independent-review-20261013/MANIFEST.json",
+      "sha256": "00dfb7c6a6d0c5b06a1797a9fb600fa3adf7fc5dc49aff775e7e85c1b2a3860e",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/00dfb7c6a6d0c5b06a1797a9fb600fa3adf7fc5dc49aff775e7e85c1b2a3860e"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-browser-independent-review-20261013/REGISTRY-RECORDS.json",
+      "sha256": "f9183662b20ccae020c53a8549a2ada899081355e7433b7424f99d7e738db766",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/f9183662b20ccae020c53a8549a2ada899081355e7433b7424f99d7e738db766"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-browser-independent-review-20261013/REPORT.md",
+      "sha256": "7bcb4c84091ec2e8987bf4459c96dd36a9997af10088ba5f136599697e925c6f",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/7bcb4c84091ec2e8987bf4459c96dd36a9997af10088ba5f136599697e925c6f"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-browser-independent-review-20261013/RUN-AUDIT.json",
+      "sha256": "65e430b251070f77cef7896d6f4cc817427c48bc41a819f5679aebbb1ddb20a3",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/65e430b251070f77cef7896d6f4cc817427c48bc41a819f5679aebbb1ddb20a3"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-browser-independent-review-20261013/SIZE-REVIEW.json",
+      "sha256": "51e01cb79cedb36467ba261b120b3a8949d021ed9ca01101d3f0a2839e1a0a91",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/51e01cb79cedb36467ba261b120b3a8949d021ed9ca01101d3f0a2839e1a0a91"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-browser-independent-review-20261013/SOURCE-BINDINGS.json",
+      "sha256": "a658fdf2aec0fa2d46ee492bbbf167c15d48adc3dce3ff102536fc374ca0486b",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/a658fdf2aec0fa2d46ee492bbbf167c15d48adc3dce3ff102536fc374ca0486b"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-browser-independent-review-20261013/SOURCE-REVIEW-RECORDS.json",
+      "sha256": "2aea5d1bf1558596c831bd0e927dab42f585034870ab69327021959b4894736c",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/2aea5d1bf1558596c831bd0e927dab42f585034870ab69327021959b4894736c"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-browser-independent-review-20261013/TEST-CORRECTIONS.patch",
+      "sha256": "7697fcb8705730d7bfa38447c3fbcf556630860604bfe16ffa3a3fcc9f85a3ad",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/7697fcb8705730d7bfa38447c3fbcf556630860604bfe16ffa3a3fcc9f85a3ad"
+      }
+    },
+    {
+      "originalPath": "/workspace/capiro-meri-files-20261013/docs/meri-files-20261013/RENDER-REVIEW.md",
+      "sha256": "33717cf318b09f294844c687b3af8ee868e6d87187ade512c7b3c7a1c0772ea5",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/33717cf318b09f294844c687b3af8ee868e6d87187ade512c7b3c7a1c0772ea5"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-browser-independent-addendum-20261013/MANIFEST.json",
+      "sha256": "53fab7117b9cbf765db5f02477a273c20fa918d39f6040242418e8d166cc84c0",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/53fab7117b9cbf765db5f02477a273c20fa918d39f6040242418e8d166cc84c0"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-browser-independent-addendum-20261013/OWNER-ADDENDUM.md",
+      "sha256": "fd147f79087274ce3ed82401e2f8f0c25869ed2ca30f83bfb91406fa5563af5e",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "objects.zip",
+        "member": "sha256/fd147f79087274ce3ed82401e2f8f0c25869ed2ca30f83bfb91406fa5563af5e"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-browser-independent-addendum-20261013/REPORT.md",
+      "sha256": "1d2bb4a328cee0416a674cfe2c77664bbab428b5d725b06a74316e6bb1144b3d",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/1d2bb4a328cee0416a674cfe2c77664bbab428b5d725b06a74316e6bb1144b3d"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-browser-independent-addendum-20261013/ROOT-RENDER-REVIEW.md",
+      "sha256": "33717cf318b09f294844c687b3af8ee868e6d87187ade512c7b3c7a1c0772ea5",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/33717cf318b09f294844c687b3af8ee868e6d87187ade512c7b3c7a1c0772ea5"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-preservation-review-20261013/ACTION-EXTRACTION-AST.json",
+      "sha256": "94325939a3c84e9d1925abe4103d024d36a422f88d075e3c8e276775a82c0c08",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/94325939a3c84e9d1925abe4103d024d36a422f88d075e3c8e276775a82c0c08"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-preservation-review-20261013/ACTION-SOURCE-PRESERVATION.json",
+      "sha256": "1779591c53213ae1e3a6449e6808cbb9fc8ec7bf2ba4f65f5e074cee681428f2",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/1779591c53213ae1e3a6449e6808cbb9fc8ec7bf2ba4f65f5e074cee681428f2"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-preservation-review-20261013/IMPORT-AUDIT.json",
+      "sha256": "339b4ab5a5af8e74498f6b0c1ba20fc67efd60b0a27788727e122cef889572ea",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/339b4ab5a5af8e74498f6b0c1ba20fc67efd60b0a27788727e122cef889572ea"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-preservation-review-20261013/MANIFEST.json",
+      "sha256": "c5d354d15113a360f227e258bad9c0050d1d06c4610f20aeb03c0e3924fde7e9",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/c5d354d15113a360f227e258bad9c0050d1d06c4610f20aeb03c0e3924fde7e9"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-preservation-review-20261013/OBSERVED-ACTION-RECEIPT.json",
+      "sha256": "458e07eccb87e5d18c3a2433f6474f4385d84d930e04ecdbcbf61cc64f612e5b",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/458e07eccb87e5d18c3a2433f6474f4385d84d930e04ecdbcbf61cc64f612e5b"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-preservation-review-20261013/PACKAGE-LOCK-AUDIT.json",
+      "sha256": "71f92487d49af30125b34cc293a2e099419c031b9992d7014b5d723212970039",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/71f92487d49af30125b34cc293a2e099419c031b9992d7014b5d723212970039"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-preservation-review-20261013/REPORT.md",
+      "sha256": "539aaf8efb7cef60af4c359f0aa0a85e024c03fd68f1c6e8841b38b3db4bf1ee",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/539aaf8efb7cef60af4c359f0aa0a85e024c03fd68f1c6e8841b38b3db4bf1ee"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-preservation-review-20261013/SOURCE-BINDING.json",
+      "sha256": "609384b905413cbb645cf1e7fd3267a7ef3c75acd02c6dae341b80056f598200",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/609384b905413cbb645cf1e7fd3267a7ef3c75acd02c6dae341b80056f598200"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-preservation-review-20261013/SOURCE-STABILITY.json",
+      "sha256": "5e2a3d422dc488f3d53e72b2932bd4afaf22278bdfe9e46298416cc68e0629aa",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/5e2a3d422dc488f3d53e72b2932bd4afaf22278bdfe9e46298416cc68e0629aa"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-preservation-review-20261013/TEST-PRESERVATION.json",
+      "sha256": "1e8c5490a4bb0d38aadec5d2a30d14ef92221298cf15e1f5fefd8e39a35bb97d",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/1e8c5490a4bb0d38aadec5d2a30d14ef92221298cf15e1f5fefd8e39a35bb97d"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-preservation-review-20261013/ast-audit.mjs",
+      "sha256": "9f58728564fac4d30123166a973bcbdde092d8cb5874dcad3953ec3144a22a15",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/9f58728564fac4d30123166a973bcbdde092d8cb5874dcad3953ec3144a22a15"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-preservation-review-20261013/audit.py",
+      "sha256": "b1f8c77ae045afe1656a5703d943fcb40d3de869aa58cdb5c0f1b61ef6258408",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/b1f8c77ae045afe1656a5703d943fcb40d3de869aa58cdb5c0f1b61ef6258408"
+      }
+    },
+    {
+      "originalPath": "/tmp/capiro-meri-files-preservation-review-20261013/tracked-diff.patch",
+      "sha256": "d5140a0f44934fbec6d7c92830e949a9f98445557da3aaed5713c030d9f52dbf",
+      "bytesEqualAfterReopen": true,
+      "storage": {
+        "kind": "archive",
+        "archive": "late-objects.zip",
+        "member": "sha256/d5140a0f44934fbec6d7c92830e949a9f98445557da3aaed5713c030d9f52dbf"
+      }
+    }
+  ]
+}

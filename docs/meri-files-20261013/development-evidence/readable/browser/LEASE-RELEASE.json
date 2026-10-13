@@ -1,0 +1,43 @@
+{
+  "at": "2026-10-13T09:04:57.961647+00:00",
+  "port": 5197,
+  "connect_ex": 111,
+  "ownedServerProcesses": [
+    {
+      "run": "candidate",
+      "pid": 1405028,
+      "status": [
+        "Name:\tMainThread",
+        "State:\tZ (zombie)",
+        "Tgid:\t1405028",
+        "Ngid:\t0",
+        "Pid:\t1405028",
+        "PPid:\t1",
+        "TracerPid:\t0"
+      ],
+      "cmdline": "",
+      "pidExists": true,
+      "running": false,
+      "exitedZombie": true
+    },
+    {
+      "run": "corrected",
+      "pid": 1407560,
+      "status": [
+        "Name:\tMainThread",
+        "State:\tZ (zombie)",
+        "Tgid:\t1407560",
+        "Ngid:\t0",
+        "Pid:\t1407560",
+        "PPid:\t1",
+        "TracerPid:\t0"
+      ],
+      "cmdline": "",
+      "pidExists": true,
+      "running": false,
+      "exitedZombie": true
+    }
+  ],
+  "ownedBrowserTempRoot": "/workspace/capiro-meri-files-browser-tmp-20261013",
+  "note": "Canonical Playwright webServer teardown exited both owned server processes; PID1 has not reaped the zombie records. No listener remains. No unrelated process was signalled."
+}

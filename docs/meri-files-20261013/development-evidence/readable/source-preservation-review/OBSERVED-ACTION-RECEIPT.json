@@ -1,0 +1,39 @@
+{
+  "path": "/tmp/capiro-meri-files-development-20261013/action-lifecycle.json",
+  "sha256": "af1220a3e907a991eec142355bdae43e048a537552c94f1575b53c52e6a07e4b",
+  "counts": {
+    "numTotalTests": 191,
+    "numPassedTests": 191,
+    "numFailedTests": 0,
+    "numPendingTests": 0,
+    "success": true
+  },
+  "files": [
+    {
+      "path": "/tmp/capiro-meri-files-execution-20261013/apps/web/tests/meri-action-bootstrap.test.ts",
+      "cases": 38,
+      "allPassed": true
+    },
+    {
+      "path": "/tmp/capiro-meri-files-execution-20261013/apps/web/tests/meri-action-host.test.ts",
+      "cases": 19,
+      "allPassed": true
+    },
+    {
+      "path": "/tmp/capiro-meri-files-execution-20261013/apps/web/tests/meri-action-proxy.test.ts",
+      "cases": 48,
+      "allPassed": true
+    },
+    {
+      "path": "/tmp/capiro-meri-files-execution-20261013/apps/web/tests/meri-action-session.test.ts",
+      "cases": 50,
+      "allPassed": true
+    },
+    {
+      "path": "/tmp/capiro-meri-files-execution-20261013/apps/web/tests/meri-action-transport.test.ts",
+      "cases": 36,
+      "allPassed": true
+    }
+  ],
+  "boundary": "Read-only inspection of an existing owner development run, not execution by this reviewer or immutable final qualification."
+}

@@ -1,0 +1,26 @@
+{
+  "at": "2026-10-13T09:02:16.730942+00:00",
+  "changes": [
+    "Exact textbox accessible-name locators for populated textareas; preserved expected values.",
+    "Write-blocked reconnect helper explicitly asserts disabled title rather than requiring editable.",
+    "Desktop Files uses existing button; mobile uses existing link and href. No production changes."
+  ],
+  "files": [
+    {
+      "path": "apps/web/test/browser/meri-files-navigation.spec.ts",
+      "sha256": "cead47d9f5bed2190211aa8a85dc96234d1e0de5fa7e2b55a5ea9c83336de604"
+    },
+    {
+      "path": "apps/web/test/browser/meri-files-lifetime.spec.ts",
+      "sha256": "a17c004e87d9d331d97e1b72e32b9dfd7545ae98b4a8734db0db168c47387a31"
+    },
+    {
+      "path": "apps/web/test/browser/meri-files-workflow.spec.ts",
+      "sha256": "492bea8efb6eabcaf72248e59e2c4e881caed8ca1131830c435c06a9239cb688"
+    },
+    {
+      "path": "apps/web/test/browser/meri-files-fixtures.ts",
+      "sha256": "8050d0f2ab2119b8c5ddb32093f672af192a7215c830cd385b2988ead3d3f749"
+    }
+  ]
+}

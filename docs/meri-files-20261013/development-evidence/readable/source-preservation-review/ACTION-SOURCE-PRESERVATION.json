@@ -1,0 +1,131 @@
+{
+  "base": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+  "records": [
+    {
+      "path": "apps/web/src/shared/meri-actions/attempt-journal.ts",
+      "mode": "100644",
+      "baseGitBlob": "769bd1fa9c62bba4949351cee17f9ab487d028f2",
+      "baseSha256": "3fd7884d856b5d7f27b9bcf6c5a405c9cf4703bd1f67f71ea756c561f94509a6",
+      "currentSha256": "3fd7884d856b5d7f27b9bcf6c5a405c9cf4703bd1f67f71ea756c561f94509a6",
+      "bytes": 391,
+      "unchanged": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/bounded-json.ts",
+      "mode": "100644",
+      "baseGitBlob": "b31700ea80257eb86428e9dd7b76fec425d5c026",
+      "baseSha256": "d8f46bc08078d4a4858e7eca5a3f0fab34065275f8268948e30babb869afe145",
+      "currentSha256": "c513a0e31c6398592c4e79e27d6bf65efed0559c505dba7a52f3926d5788aeac",
+      "bytes": 2614,
+      "unchanged": false
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/config.ts",
+      "mode": "100644",
+      "baseGitBlob": "52f64ae5dedcfa61f472b5ad20ddf728dc4888f3",
+      "baseSha256": "8b90d94ad5bc20ba25e5252dabc85561392cbf3c1f0d1be7ecc781bf8a78f471",
+      "currentSha256": "7a51c219ef4fb471427c8c97c34ffba2008dd9bd7e19ff00da66dc954bf69202",
+      "bytes": 474,
+      "unchanged": false
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/correlation.ts",
+      "mode": "100644",
+      "baseGitBlob": "34cb3d70d64e9eebbc2de8b20939c95b268cbd05",
+      "baseSha256": "4185a15f731a88beff8b73e5d65629e66908f921dcb5bff4a8657e761ffa3e7f",
+      "currentSha256": "4185a15f731a88beff8b73e5d65629e66908f921dcb5bff4a8657e761ffa3e7f",
+      "bytes": 4131,
+      "unchanged": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/disposition.ts",
+      "mode": "100644",
+      "baseGitBlob": "903adb73d3053a8e2050c14f62fb8f66eacb5161",
+      "baseSha256": "a093b4dc26cc3641b9268f3727b6f764ad0f8ff4a21dedede8716176c7e7ff7f",
+      "currentSha256": "a093b4dc26cc3641b9268f3727b6f764ad0f8ff4a21dedede8716176c7e7ff7f",
+      "bytes": 1103,
+      "unchanged": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/host-controller.ts",
+      "mode": "100644",
+      "baseGitBlob": "7f38b002cf68609ad03b0525d330967b37bb9e6b",
+      "baseSha256": "031c98f9dfdba27ecd42512cee985dc05461dda5ea64d8d7738468f8df354eb3",
+      "currentSha256": "b6e69753261683bbe2a69b54a11722b9d09ef23ae37901f71465bd889e5dddc6",
+      "bytes": 3597,
+      "unchanged": false
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/projection.ts",
+      "mode": "100644",
+      "baseGitBlob": "0e1e51966697296ffb6b6389afea5afae940c7ba",
+      "baseSha256": "a8c3108adfb8613522970d45bab434dabd632c4271ebf3e4bf96fb2d757d3a62",
+      "currentSha256": "a8c3108adfb8613522970d45bab434dabd632c4271ebf3e4bf96fb2d757d3a62",
+      "bytes": 2294,
+      "unchanged": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/proxy.ts",
+      "mode": "100644",
+      "baseGitBlob": "1ea802e91677008dfe76221e3acf122e7a628d3b",
+      "baseSha256": "6046d58306b2c5694f618a2331dda4ea26baae64e12ecc6b94b6feec1973fcb4",
+      "currentSha256": "6046d58306b2c5694f618a2331dda4ea26baae64e12ecc6b94b6feec1973fcb4",
+      "bytes": 2843,
+      "unchanged": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/query-journal.ts",
+      "mode": "100644",
+      "baseGitBlob": "94a1b5da56677e3ea13a517f3107ab81b9a29b06",
+      "baseSha256": "8249df4b758ef20b7bc83776555eea5639c8f1a15cd6a13d4ea40b5fe62be171",
+      "currentSha256": "8249df4b758ef20b7bc83776555eea5639c8f1a15cd6a13d4ea40b5fe62be171",
+      "bytes": 1241,
+      "unchanged": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/session-bootstrap.ts",
+      "mode": "100644",
+      "baseGitBlob": "4f17e9817795c6e93ee57278319d34002170938e",
+      "baseSha256": "f3e1b503b067294867655ac52572f8b82ebfc0cd478eb5169e6f3ad219af0028",
+      "currentSha256": "f3e1b503b067294867655ac52572f8b82ebfc0cd478eb5169e6f3ad219af0028",
+      "bytes": 1640,
+      "unchanged": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/session-receipt.ts",
+      "mode": "100644",
+      "baseGitBlob": "1e46db51a7fc761ece4a59aeb7cdc48607ad4094",
+      "baseSha256": "46d7ddd12325d7bc305583397aba249cfc4ec8022e278eed2e3933672af10b76",
+      "currentSha256": "46d7ddd12325d7bc305583397aba249cfc4ec8022e278eed2e3933672af10b76",
+      "bytes": 1355,
+      "unchanged": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/workflow-adapter.ts",
+      "mode": "100644",
+      "baseGitBlob": "cce2ed568724c0f8f90ed14b167e1987d3519dd9",
+      "baseSha256": "1d35e9a68d713bd1088d4141aaead81d0d5d0a5ceb8371736feed5f568abe458",
+      "currentSha256": "1d35e9a68d713bd1088d4141aaead81d0d5d0a5ceb8371736feed5f568abe458",
+      "bytes": 8265,
+      "unchanged": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/workflow-port.ts",
+      "mode": "100644",
+      "baseGitBlob": "fe6f6b931ad415030006879c78b9f43dc44243a2",
+      "baseSha256": "f5afc882738b4cb1684fa3969513a277646bd097dbe025a119a1c35263b3c1bc",
+      "currentSha256": "f5afc882738b4cb1684fa3969513a277646bd097dbe025a119a1c35263b3c1bc",
+      "bytes": 2124,
+      "unchanged": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/workflow-transport.ts",
+      "mode": "100644",
+      "baseGitBlob": "45a88a29c8e6f334a133a3917dfbee0b84ce0b09",
+      "baseSha256": "b32635261243e59f8605aafa84092e728ed083c58d33a9d6923e702cd25e2e3b",
+      "currentSha256": "b32635261243e59f8605aafa84092e728ed083c58d33a9d6923e702cd25e2e3b",
+      "bytes": 2038,
+      "unchanged": true
+    }
+  ]
+}

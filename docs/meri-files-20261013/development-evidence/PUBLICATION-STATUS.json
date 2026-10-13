@@ -1,0 +1,40 @@
+{
+  "sealedUTC": "2026-10-13T09:30:47.464297+00:00",
+  "status": "SEALED_VERIFIED_DEVELOPMENT_EVIDENCE_NOT_FROZEN_QUALIFICATION",
+  "baseSource": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+  "allInputsReleased": true,
+  "originalRootsAndSingleFileGroups": 14,
+  "originalRecords": 441,
+  "originalBytes": 37760382,
+  "archiveMembers": 344,
+  "archives": [
+    {
+      "path": "objects.zip",
+      "bytes": 17009705,
+      "sha256": "f00bdda0256d017ec59f70a9aa7e6e1597d8f017d9d6786cbffa03be8764a725",
+      "uniqueMembers": 277,
+      "zipCRCVerified": true
+    },
+    {
+      "path": "late-objects.zip",
+      "bytes": 1540516,
+      "sha256": "a27c04802dd71b54c7fcf14660a9f783072df717bd2e401dafb6e781bcfcf78d",
+      "uniqueMembers": 67,
+      "zipCRCVerified": true
+    }
+  ],
+  "directFiles": 174,
+  "vendorGitBlob": "3b1b1e6345539632b8a4be80de44b0ab548369af",
+  "vendorStaged": true,
+  "sourceCommitBinding": "Same publication commit to be created by root; no claim of qualification on it",
+  "allOriginalBytesReopenedEqual": true,
+  "ownerManifestsRevalidated": 13,
+  "noSourceOrRuntimeMutation": true,
+  "limits": [
+    "Development receipts are not clean/frozen integrated gates",
+    "17passed/10harnessfail browser attempt and corrected27passed retained",
+    "Owner assertion wording correction retained separately",
+    "18byte synthetic payloads are not Office documents",
+    "Native337/fullFigma/AT/Office rendering/recalculation/image/deploy remain unqualified"
+  ]
+}

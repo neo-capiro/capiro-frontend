@@ -1,0 +1,475 @@
+{
+  "classification": "Author responsibility proposals; independent/root acceptance pending",
+  "scans": [
+    {
+      "file": "apps/web/src/features/meri/files/DocumentEditor.tsx",
+      "imports": [
+        {
+          "specifier": "react",
+          "line": 1,
+          "kind": "named",
+          "names": [
+            "useId"
+          ]
+        },
+        {
+          "specifier": "@capiro/ui/button",
+          "line": 2,
+          "kind": "named",
+          "names": [
+            "Button"
+          ]
+        },
+        {
+          "specifier": "@capiro/ui/input",
+          "line": 3,
+          "kind": "named",
+          "names": [
+            "Input"
+          ]
+        },
+        {
+          "specifier": "@capiro/ui/textarea",
+          "line": 4,
+          "kind": "named",
+          "names": [
+            "Textarea"
+          ]
+        },
+        {
+          "specifier": "./document-draft",
+          "line": 5,
+          "kind": "other",
+          "names": [
+            "DocumentDraft"
+          ]
+        },
+        {
+          "specifier": "./document-draft",
+          "line": 6,
+          "kind": "named",
+          "names": [
+            "draftProblem"
+          ]
+        },
+        {
+          "specifier": "./files.module.css",
+          "line": 7,
+          "kind": "other",
+          "names": []
+        }
+      ],
+      "directives": [],
+      "anyLines": [],
+      "remoteOriginLines": [],
+      "sizeFindings": [
+        {
+          "file": "apps/web/src/features/meri/files/DocumentEditor.tsx",
+          "kind": "function",
+          "symbol": "DocumentEditor",
+          "line": 9,
+          "nonblank": 112,
+          "fingerprint": "9c3fcd3e8b4b1e5247388e7388354e7ece00083b2eabc6d12f1d9869741e6529"
+        }
+      ],
+      "nonblank": 139
+    },
+    {
+      "file": "apps/web/src/features/meri/files/DocumentInspectionSummary.tsx",
+      "imports": [
+        {
+          "specifier": "../../../shared/meri-documents/workflow-port",
+          "line": 1,
+          "kind": "other",
+          "names": [
+            "DocumentInspection"
+          ]
+        },
+        {
+          "specifier": "./files.module.css",
+          "line": 2,
+          "kind": "other",
+          "names": []
+        }
+      ],
+      "directives": [],
+      "anyLines": [],
+      "remoteOriginLines": [],
+      "sizeFindings": [],
+      "nonblank": 44
+    },
+    {
+      "file": "apps/web/src/features/meri/files/DocumentNotice.tsx",
+      "imports": [
+        {
+          "specifier": "./document-workflow-state",
+          "line": 1,
+          "kind": "other",
+          "names": [
+            "DocumentFilesState"
+          ]
+        },
+        {
+          "specifier": "../../../shared/meri-documents/workflow-port",
+          "line": 2,
+          "kind": "other",
+          "names": [
+            "DocumentProblem"
+          ]
+        },
+        {
+          "specifier": "./files.module.css",
+          "line": 3,
+          "kind": "other",
+          "names": []
+        }
+      ],
+      "directives": [],
+      "anyLines": [],
+      "remoteOriginLines": [],
+      "sizeFindings": [],
+      "nonblank": 58
+    },
+    {
+      "file": "apps/web/src/features/meri/files/DocumentVersionPanel.tsx",
+      "imports": [
+        {
+          "specifier": "react",
+          "line": 1,
+          "kind": "named",
+          "names": [
+            "useId"
+          ]
+        },
+        {
+          "specifier": "@capiro/ui/button",
+          "line": 2,
+          "kind": "named",
+          "names": [
+            "Button"
+          ]
+        },
+        {
+          "specifier": "@capiro/ui/input",
+          "line": 3,
+          "kind": "named",
+          "names": [
+            "Input"
+          ]
+        },
+        {
+          "specifier": "./document-workflow-state",
+          "line": 4,
+          "kind": "other",
+          "names": [
+            "DocumentFilesState"
+          ]
+        },
+        {
+          "specifier": "./DocumentInspectionSummary",
+          "line": 5,
+          "kind": "named",
+          "names": [
+            "DocumentInspectionSummary"
+          ]
+        },
+        {
+          "specifier": "./files.module.css",
+          "line": 6,
+          "kind": "other",
+          "names": []
+        }
+      ],
+      "directives": [],
+      "anyLines": [],
+      "remoteOriginLines": [],
+      "sizeFindings": [
+        {
+          "file": "apps/web/src/features/meri/files/DocumentVersionPanel.tsx",
+          "kind": "function",
+          "symbol": "DocumentVersionPanel",
+          "line": 8,
+          "nonblank": 146,
+          "fingerprint": "f396fcb588479ea6c4e81d2a0bd088910b2346657b6bc8e4b19f2cc77a43dd31"
+        }
+      ],
+      "nonblank": 168
+    },
+    {
+      "file": "apps/web/src/features/meri/files/MeriFilesWorkflow.tsx",
+      "imports": [
+        {
+          "specifier": "react",
+          "line": 3,
+          "kind": "named",
+          "names": [
+            "useLayoutEffect",
+            "useMemo",
+            "useSyncExternalStore"
+          ]
+        },
+        {
+          "specifier": "../../../shared/meri-documents/workflow-port",
+          "line": 4,
+          "kind": "other",
+          "names": [
+            "DocumentWorkflowPort"
+          ]
+        },
+        {
+          "specifier": "./document-workflow-state",
+          "line": 5,
+          "kind": "named",
+          "names": [
+            "DocumentFilesController",
+            "DocumentOperation"
+          ]
+        },
+        {
+          "specifier": "./DocumentEditor",
+          "line": 9,
+          "kind": "named",
+          "names": [
+            "DocumentEditor"
+          ]
+        },
+        {
+          "specifier": "./WorkbookEditor",
+          "line": 10,
+          "kind": "named",
+          "names": [
+            "WorkbookEditor"
+          ]
+        },
+        {
+          "specifier": "./DocumentVersionPanel",
+          "line": 11,
+          "kind": "named",
+          "names": [
+            "DocumentVersionPanel"
+          ]
+        },
+        {
+          "specifier": "./DocumentNotice",
+          "line": 12,
+          "kind": "named",
+          "names": [
+            "DocumentNotice"
+          ]
+        },
+        {
+          "specifier": "./files.module.css",
+          "line": 13,
+          "kind": "other",
+          "names": []
+        }
+      ],
+      "directives": [
+        "use client"
+      ],
+      "anyLines": [],
+      "remoteOriginLines": [],
+      "sizeFindings": [],
+      "nonblank": 121
+    },
+    {
+      "file": "apps/web/src/features/meri/files/WorkbookEditor.tsx",
+      "imports": [
+        {
+          "specifier": "react",
+          "line": 1,
+          "kind": "named",
+          "names": [
+            "useId"
+          ]
+        },
+        {
+          "specifier": "@capiro/ui/button",
+          "line": 2,
+          "kind": "named",
+          "names": [
+            "Button"
+          ]
+        },
+        {
+          "specifier": "@capiro/ui/input",
+          "line": 3,
+          "kind": "named",
+          "names": [
+            "Input"
+          ]
+        },
+        {
+          "specifier": "@capiro/ui/textarea",
+          "line": 4,
+          "kind": "named",
+          "names": [
+            "Textarea"
+          ]
+        },
+        {
+          "specifier": "./workbook-draft",
+          "line": 5,
+          "kind": "named",
+          "names": [
+            "workbookExample",
+            "workbookProblem",
+            "WorkbookDraft"
+          ]
+        },
+        {
+          "specifier": "./files.module.css",
+          "line": 10,
+          "kind": "other",
+          "names": []
+        }
+      ],
+      "directives": [],
+      "anyLines": [],
+      "remoteOriginLines": [],
+      "sizeFindings": [
+        {
+          "file": "apps/web/src/features/meri/files/WorkbookEditor.tsx",
+          "kind": "function",
+          "symbol": "WorkbookEditor",
+          "line": 12,
+          "nonblank": 111,
+          "fingerprint": "30039d399185cfb28c3a6cbda741d69cb7bee43929cc82e0a251234dfaa40b69"
+        }
+      ],
+      "nonblank": 139
+    },
+    {
+      "file": "apps/web/src/features/meri/files/document-draft.ts",
+      "imports": [
+        {
+          "specifier": "@capiro/meri-contracts/document-application",
+          "line": 1,
+          "kind": "other",
+          "names": [
+            "DocumentContentRequest"
+          ]
+        }
+      ],
+      "directives": [],
+      "anyLines": [],
+      "remoteOriginLines": [],
+      "sizeFindings": [],
+      "nonblank": 49
+    },
+    {
+      "file": "apps/web/src/features/meri/files/document-workflow-state.ts",
+      "imports": [
+        {
+          "specifier": "@capiro/meri-contracts/document-application",
+          "line": 1,
+          "kind": "other",
+          "names": [
+            "DocumentContentRequest"
+          ]
+        },
+        {
+          "specifier": "../../../shared/meri-documents/workflow-port",
+          "line": 2,
+          "kind": "other",
+          "names": [
+            "DocumentProblem",
+            "DocumentReply",
+            "DocumentVersionView",
+            "DocumentWorkflowPort"
+          ]
+        },
+        {
+          "specifier": "./document-draft",
+          "line": 8,
+          "kind": "named",
+          "names": [
+            "documentContent",
+            "emptyDocumentDraft",
+            "DocumentDraft"
+          ]
+        },
+        {
+          "specifier": "./workbook-draft",
+          "line": 13,
+          "kind": "named",
+          "names": [
+            "emptyWorkbookDraft",
+            "workbookContent",
+            "WorkbookDraft"
+          ]
+        },
+        {
+          "specifier": "./download-url",
+          "line": 18,
+          "kind": "named",
+          "names": [
+            "DocumentDownloadUrl"
+          ]
+        }
+      ],
+      "directives": [],
+      "anyLines": [],
+      "remoteOriginLines": [],
+      "sizeFindings": [],
+      "nonblank": 336
+    },
+    {
+      "file": "apps/web/src/features/meri/files/download-url.ts",
+      "imports": [],
+      "directives": [],
+      "anyLines": [],
+      "remoteOriginLines": [],
+      "sizeFindings": [],
+      "nonblank": 26
+    },
+    {
+      "file": "apps/web/src/features/meri/files/files.module.css",
+      "imports": [],
+      "directives": [],
+      "anyLines": [],
+      "remoteOriginLines": [],
+      "sizeFindings": [],
+      "nonblank": 187
+    },
+    {
+      "file": "apps/web/src/features/meri/files/workbook-draft.ts",
+      "imports": [],
+      "directives": [],
+      "anyLines": [],
+      "remoteOriginLines": [],
+      "sizeFindings": [],
+      "nonblank": 39
+    }
+  ],
+  "findings": [
+    {
+      "file": "apps/web/src/features/meri/files/DocumentEditor.tsx",
+      "kind": "function",
+      "symbol": "DocumentEditor",
+      "line": 9,
+      "nonblank": 112,
+      "fingerprint": "9c3fcd3e8b4b1e5247388e7388354e7ece00083b2eabc6d12f1d9869741e6529",
+      "rationale": "One Word text form: title, DOCX/TXT choice, complete replacement acknowledgement and explicit submit. No transport, receipt validation, model operation or authority state. Retains labels and field guidance in the same owner."
+    },
+    {
+      "file": "apps/web/src/features/meri/files/DocumentVersionPanel.tsx",
+      "kind": "function",
+      "symbol": "DocumentVersionPanel",
+      "line": 8,
+      "nonblank": 146,
+      "fingerprint": "f396fcb588479ea6c4e81d2a0bd088910b2346657b6bc8e4b19f2cc77a43dd31",
+      "rationale": "One selected immutable-version presentation: supplied-ID inspection, view-local receipt selection, version metadata, structural inspection child and explicit version-bound actions/download. No request execution, URL allocation or schema owner."
+    },
+    {
+      "file": "apps/web/src/features/meri/files/WorkbookEditor.tsx",
+      "kind": "function",
+      "symbol": "WorkbookEditor",
+      "line": 12,
+      "nonblank": 111,
+      "fingerprint": "30039d399185cfb28c3a6cbda741d69cb7bee43929cc82e0a251234dfaa40b69",
+      "rationale": "One Excel typed-JSON form: title, complete sheet/cell input, example/help, replacement acknowledgement and explicit submit. Public receiver owns schema admission; the form does not choose operation family."
+    }
+  ],
+  "syntaxDiagnostics": []
+}

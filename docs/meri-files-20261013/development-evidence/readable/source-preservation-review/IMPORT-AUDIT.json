@@ -1,0 +1,531 @@
+{
+  "scope": "Changed/new production TS/TSX import declarations; runtime emission still requires final build scan.",
+  "imports": [
+    {
+      "path": "apps/web/src/app/api/action-followthrough/[operation]/route.ts",
+      "module": "@clerk/nextjs/server",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/app/api/action-followthrough/[operation]/route.ts",
+      "module": "../../../../shared/meri-actions/connection-config",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/app/api/action-followthrough/[operation]/route.ts",
+      "module": "../../../../shared/meri-actions/config",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/app/api/action-followthrough/[operation]/route.ts",
+      "module": "../../../../shared/meri-actions/proxy",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/app/api/documents/[operation]/route.ts",
+      "module": "@clerk/nextjs/server",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/app/api/documents/[operation]/route.ts",
+      "module": "../../../../shared/meri-documents/config",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/app/api/documents/[operation]/route.ts",
+      "module": "../../../../shared/meri-documents/proxy",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/app/meri/files/MeriFilesHost.tsx",
+      "module": "react",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/app/meri/files/MeriFilesHost.tsx",
+      "module": "@tanstack/react-query",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/app/meri/files/MeriFilesHost.tsx",
+      "module": "@capiro/ui/button",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/app/meri/files/MeriFilesHost.tsx",
+      "module": "../../../features/meri/files/MeriFilesWorkflow",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/app/meri/files/MeriFilesHost.tsx",
+      "module": "../../../shared/session/SelectedClient",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/app/meri/files/MeriFilesHost.tsx",
+      "module": "../../../shared/meri-actions/opaque-session-controller",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/app/meri/files/MeriFilesHost.tsx",
+      "module": "../../../shared/meri-documents/workflow-adapter",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/app/meri/files/MeriFilesHost.tsx",
+      "module": "../../../shared/meri-documents/workflow-transport",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/app/meri/files/MeriFilesHost.tsx",
+      "module": "../../../shared/meri-documents/query-journal",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/app/meri/files/page.tsx",
+      "module": "../../../shared/shell/ProductShell",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/app/meri/files/page.tsx",
+      "module": "../../../shared/session/SessionContext",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/app/meri/files/page.tsx",
+      "module": "../../../shared/meri-documents/config",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/app/meri/files/page.tsx",
+      "module": "./MeriFilesHost",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentEditor.tsx",
+      "module": "react",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentEditor.tsx",
+      "module": "@capiro/ui/button",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentEditor.tsx",
+      "module": "@capiro/ui/input",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentEditor.tsx",
+      "module": "@capiro/ui/textarea",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentEditor.tsx",
+      "module": "./document-draft",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentEditor.tsx",
+      "module": "./document-draft",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentEditor.tsx",
+      "module": "./files.module.css",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentInspectionSummary.tsx",
+      "module": "../../../shared/meri-documents/workflow-port",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentInspectionSummary.tsx",
+      "module": "./files.module.css",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentNotice.tsx",
+      "module": "./document-workflow-state",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentNotice.tsx",
+      "module": "../../../shared/meri-documents/workflow-port",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentNotice.tsx",
+      "module": "./files.module.css",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentVersionPanel.tsx",
+      "module": "react",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentVersionPanel.tsx",
+      "module": "@capiro/ui/button",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentVersionPanel.tsx",
+      "module": "@capiro/ui/input",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentVersionPanel.tsx",
+      "module": "./document-workflow-state",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentVersionPanel.tsx",
+      "module": "./DocumentInspectionSummary",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentVersionPanel.tsx",
+      "module": "./files.module.css",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/MeriFilesWorkflow.tsx",
+      "module": "react",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/MeriFilesWorkflow.tsx",
+      "module": "../../../shared/meri-documents/workflow-port",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/features/meri/files/MeriFilesWorkflow.tsx",
+      "module": "./document-workflow-state",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/MeriFilesWorkflow.tsx",
+      "module": "./DocumentEditor",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/MeriFilesWorkflow.tsx",
+      "module": "./WorkbookEditor",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/MeriFilesWorkflow.tsx",
+      "module": "./DocumentVersionPanel",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/MeriFilesWorkflow.tsx",
+      "module": "./DocumentNotice",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/MeriFilesWorkflow.tsx",
+      "module": "./files.module.css",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/WorkbookEditor.tsx",
+      "module": "react",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/WorkbookEditor.tsx",
+      "module": "@capiro/ui/button",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/WorkbookEditor.tsx",
+      "module": "@capiro/ui/input",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/WorkbookEditor.tsx",
+      "module": "@capiro/ui/textarea",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/WorkbookEditor.tsx",
+      "module": "./workbook-draft",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/WorkbookEditor.tsx",
+      "module": "./files.module.css",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/document-draft.ts",
+      "module": "@capiro/meri-contracts/document-application",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/features/meri/files/document-workflow-state.ts",
+      "module": "@capiro/meri-contracts/document-application",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/features/meri/files/document-workflow-state.ts",
+      "module": "../../../shared/meri-documents/workflow-port",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/features/meri/files/document-workflow-state.ts",
+      "module": "./document-draft",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/document-workflow-state.ts",
+      "module": "./workbook-draft",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/features/meri/files/document-workflow-state.ts",
+      "module": "./download-url",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/config.ts",
+      "module": "./connection-config",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/connection-config.ts",
+      "module": "../portfolio/config/config",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/host-controller.ts",
+      "module": "./attempt-journal",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/host-controller.ts",
+      "module": "./session-receipt",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/host-controller.ts",
+      "module": "./session-bootstrap",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/host-controller.ts",
+      "module": "./opaque-session-controller",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/host-controller.ts",
+      "module": "./workflow-transport",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/host-controller.ts",
+      "module": "./workflow-adapter",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/opaque-session-controller.ts",
+      "module": "./session-receipt",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/opaque-session-controller.ts",
+      "module": "./session-bootstrap",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/opaque-session-controller.ts",
+      "module": "./session-bootstrap",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/config.ts",
+      "module": "../meri-actions/connection-config",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/proxy.ts",
+      "module": "@capiro/meri-contracts/document-application",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/proxy.ts",
+      "module": "@capiro/meri-contracts/document-application",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/proxy.ts",
+      "module": "../meri-actions/bounded-json",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/proxy.ts",
+      "module": "./config",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/query-journal.ts",
+      "module": "@tanstack/react-query",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/query-journal.ts",
+      "module": "../meri-actions/session-receipt",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/query-journal.ts",
+      "module": "./attempt-journal",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/workflow-adapter.ts",
+      "module": "@capiro/meri-contracts/document-application",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/workflow-adapter.ts",
+      "module": "../meri-actions/session-receipt",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/workflow-adapter.ts",
+      "module": "./attempt-journal",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/workflow-adapter.ts",
+      "module": "./workflow-transport",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/workflow-adapter.ts",
+      "module": "./workflow-port",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/workflow-port.ts",
+      "module": "@capiro/meri-contracts/document-application",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/workflow-port.ts",
+      "module": "./attempt-journal",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/workflow-port.ts",
+      "module": "./attempt-journal",
+      "typeOnly": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/workflow-transport.ts",
+      "module": "@capiro/meri-contracts/document-application",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/workflow-transport.ts",
+      "module": "../meri-actions/bounded-json",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/shell/MeriMobileNavigation.tsx",
+      "module": "next/link",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/shell/MeriMobileNavigation.tsx",
+      "module": "next/navigation",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/shell/MeriMobileNavigation.tsx",
+      "module": "@capiro/ui/button",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/shell/MeriMobileNavigation.tsx",
+      "module": "../session/SelectedClient",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/shell/MeriMobileNavigation.tsx",
+      "module": "../session/client-route",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/shell/MeriMobileNavigation.tsx",
+      "module": "./shell.module.css",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/shell/ProductShell.tsx",
+      "module": "../session/SelectedClient",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/shell/ProductShell.tsx",
+      "module": "./Header",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/shell/ProductShell.tsx",
+      "module": "./Sidebar",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/shell/ProductShell.tsx",
+      "module": "./MeriMobileNavigation",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/shell/ProductShell.tsx",
+      "module": "./shell.module.css",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/shell/Sidebar.tsx",
+      "module": "next/link",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/shell/Sidebar.tsx",
+      "module": "../session/SelectedClient",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/shell/Sidebar.tsx",
+      "module": "../session/client-route",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/shell/Sidebar.tsx",
+      "module": "@capiro/ui/button",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/shell/Sidebar.tsx",
+      "module": "next/navigation",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/shell/Sidebar.tsx",
+      "module": "./DesignIcon",
+      "typeOnly": false
+    },
+    {
+      "path": "apps/web/src/shared/shell/Sidebar.tsx",
+      "module": "./shell.module.css",
+      "typeOnly": false
+    }
+  ],
+  "privateHits": []
+}

@@ -1,0 +1,1839 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Action completed."
+    }
+  ],
+  "structuredContent": {
+    "repository_full_name": "neo-capiro/meri-greenfield",
+    "base": "70516e5c9681917ce493bbc50e3023494f2e1209",
+    "head": "25e0d29d6f0b6c3de284d13e86bc5f1aa0c00d21",
+    "status": "ahead",
+    "ahead_by": 45,
+    "behind_by": 0,
+    "total_commits": 45,
+    "too_large": null,
+    "base_commit": {
+      "sha": "70516e5c9681917ce493bbc50e3023494f2e1209",
+      "url": "https://api.github.com/repos/neo-capiro/meri-greenfield/commits/70516e5c9681917ce493bbc50e3023494f2e1209",
+      "html_url": "https://github.com/neo-capiro/meri-greenfield/commit/70516e5c9681917ce493bbc50e3023494f2e1209"
+    },
+    "merge_base_commit": {
+      "sha": "70516e5c9681917ce493bbc50e3023494f2e1209",
+      "url": "https://api.github.com/repos/neo-capiro/meri-greenfield/commits/70516e5c9681917ce493bbc50e3023494f2e1209",
+      "html_url": "https://github.com/neo-capiro/meri-greenfield/commit/70516e5c9681917ce493bbc50e3023494f2e1209"
+    },
+    "files": [
+      {
+        "filename": "apps/artifacts/office-transform.mjs",
+        "status": "modified",
+        "additions": 14,
+        "deletions": 0,
+        "changes": 14,
+        "previous_filename": null
+      },
+      {
+        "filename": "apps/artifacts/python/office.py",
+        "status": "modified",
+        "additions": 26,
+        "deletions": 0,
+        "changes": 26,
+        "previous_filename": null
+      },
+      {
+        "filename": "apps/artifacts/test/office-columns.test.mjs",
+        "status": "added",
+        "additions": 48,
+        "deletions": 0,
+        "changes": 48,
+        "previous_filename": null
+      },
+      {
+        "filename": "apps/artifacts/test/office-recalc-independent.test.mjs",
+        "status": "added",
+        "additions": 93,
+        "deletions": 0,
+        "changes": 93,
+        "previous_filename": null
+      },
+      {
+        "filename": "apps/artifacts/test/office-recalc.test.mjs",
+        "status": "added",
+        "additions": 55,
+        "deletions": 0,
+        "changes": 55,
+        "previous_filename": null
+      },
+      {
+        "filename": "apps/artifacts/test/workbook-columns-independent.test.mjs",
+        "status": "added",
+        "additions": 74,
+        "deletions": 0,
+        "changes": 74,
+        "previous_filename": null
+      },
+      {
+        "filename": "apps/control/document-application/local/workbook/README.md",
+        "status": "added",
+        "additions": 15,
+        "deletions": 0,
+        "changes": 15,
+        "previous_filename": null
+      },
+      {
+        "filename": "apps/control/document-application/local/workbook/flow.mjs",
+        "status": "added",
+        "additions": 72,
+        "deletions": 0,
+        "changes": 72,
+        "previous_filename": null
+      },
+      {
+        "filename": "apps/control/document-application/local/workbook/inspect_pdf.py",
+        "status": "added",
+        "additions": 45,
+        "deletions": 0,
+        "changes": 45,
+        "previous_filename": null
+      },
+      {
+        "filename": "apps/control/document-application/local/workbook/inspect_xlsx.py",
+        "status": "added",
+        "additions": 52,
+        "deletions": 0,
+        "changes": 52,
+        "previous_filename": null
+      },
+      {
+        "filename": "apps/control/document-application/local/workbook/inspection.mjs",
+        "status": "added",
+        "additions": 62,
+        "deletions": 0,
+        "changes": 62,
+        "previous_filename": null
+      },
+      {
+        "filename": "apps/control/document-application/local/workbook/local.test.mjs",
+        "status": "added",
+        "additions": 25,
+        "deletions": 0,
+        "changes": 25,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/coordination/reports/CODEX-WORKBOOK-DRAFTING-INTEGRATION-20261013.md",
+        "status": "added",
+        "additions": 17,
+        "deletions": 0,
+        "changes": 17,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/coordination/reports/CODEX-WORKBOOK-FLOW-REVIEW-20261013.md",
+        "status": "added",
+        "additions": 20,
+        "deletions": 0,
+        "changes": 20,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/coordination/tasks/CODEX-WORKBOOK-DRAFTING-20261013.md",
+        "status": "modified",
+        "additions": 4,
+        "deletions": 0,
+        "changes": 4,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/.gitattributes",
+        "status": "added",
+        "additions": 2,
+        "deletions": 0,
+        "changes": 2,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/REPORT.md",
+        "status": "added",
+        "additions": 13,
+        "deletions": 0,
+        "changes": 13,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/audit.json",
+        "status": "added",
+        "additions": 45,
+        "deletions": 0,
+        "changes": 45,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/audit.py",
+        "status": "added",
+        "additions": 24,
+        "deletions": 0,
+        "changes": 24,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/author-packet-audit.json",
+        "status": "added",
+        "additions": 8,
+        "deletions": 0,
+        "changes": 8,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/baseline-created-pdf.json",
+        "status": "added",
+        "additions": 233,
+        "deletions": 0,
+        "changes": 233,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/baseline-created.pdf",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/baseline-created.png",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/baseline-created.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/baseline-processes-FtotHf.json",
+        "status": "added",
+        "additions": 22,
+        "deletions": 0,
+        "changes": 22,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/baseline-processes-aGxj2E.json",
+        "status": "added",
+        "additions": 42,
+        "deletions": 0,
+        "changes": 42,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/baseline-processes-ifPDmh.json",
+        "status": "added",
+        "additions": 22,
+        "deletions": 0,
+        "changes": 22,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/baseline-processes-vTZUDP.json",
+        "status": "added",
+        "additions": 22,
+        "deletions": 0,
+        "changes": 22,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/baseline-retained-original-pdf.json",
+        "status": "added",
+        "additions": 233,
+        "deletions": 0,
+        "changes": 233,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/baseline-retained-original.pdf",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/baseline-retained-original.png",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/baseline.json",
+        "status": "added",
+        "additions": 34,
+        "deletions": 0,
+        "changes": 34,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/baseline.stderr.bin",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/baseline.stdout.bin",
+        "status": "added",
+        "additions": 66,
+        "deletions": 0,
+        "changes": 66,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/capture-reaped.py",
+        "status": "added",
+        "additions": 73,
+        "deletions": 0,
+        "changes": 73,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/criteria.md",
+        "status": "added",
+        "additions": 5,
+        "deletions": 0,
+        "changes": 5,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/final-created-pdf.json",
+        "status": "added",
+        "additions": 243,
+        "deletions": 0,
+        "changes": 243,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/final-created.pdf",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/final-created.png",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/final-created.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/final-processes-KGKPsM.json",
+        "status": "added",
+        "additions": 42,
+        "deletions": 0,
+        "changes": 42,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/final-processes-KOHPpF.json",
+        "status": "added",
+        "additions": 22,
+        "deletions": 0,
+        "changes": 22,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/final-processes-hlnUqN.json",
+        "status": "added",
+        "additions": 42,
+        "deletions": 0,
+        "changes": 42,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/final-processes-wRnvMl.json",
+        "status": "added",
+        "additions": 102,
+        "deletions": 0,
+        "changes": 102,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/final-retained-original-pdf.json",
+        "status": "added",
+        "additions": 233,
+        "deletions": 0,
+        "changes": 233,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/final-retained-original.pdf",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/final-retained-original.png",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/final-revised-pdf.json",
+        "status": "added",
+        "additions": 263,
+        "deletions": 0,
+        "changes": 263,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/final-revised-recalculated.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/final-revised.pdf",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/final-revised.png",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/final-revised.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/final.json",
+        "status": "added",
+        "additions": 34,
+        "deletions": 0,
+        "changes": 34,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/final.stderr.bin",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/final.stdout.bin",
+        "status": "added",
+        "additions": 12,
+        "deletions": 0,
+        "changes": 12,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/manifest.json",
+        "status": "added",
+        "additions": 221,
+        "deletions": 0,
+        "changes": 221,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/original-recalculated.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/columns-review/width-units.md",
+        "status": "added",
+        "additions": 1,
+        "deletions": 0,
+        "changes": 1,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/flow-review/audit.json",
+        "status": "added",
+        "additions": 588,
+        "deletions": 0,
+        "changes": 588,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/flow-review/audit.py",
+        "status": "added",
+        "additions": 73,
+        "deletions": 0,
+        "changes": 73,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/flow-review/capture.py",
+        "status": "added",
+        "additions": 73,
+        "deletions": 0,
+        "changes": 73,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/flow-review/criteria.json",
+        "status": "added",
+        "additions": 18,
+        "deletions": 0,
+        "changes": 18,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/flow-review/flow-independent.test.mjs",
+        "status": "added",
+        "additions": 34,
+        "deletions": 0,
+        "changes": 34,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/flow-review/manifest.json",
+        "status": "added",
+        "additions": 66,
+        "deletions": 0,
+        "changes": 66,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/flow-review/prerequisite-references.json",
+        "status": "added",
+        "additions": 16,
+        "deletions": 0,
+        "changes": 16,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/flow-review/source-checks.json",
+        "status": "added",
+        "additions": 37,
+        "deletions": 0,
+        "changes": 37,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/flow-review/source-checks.stderr.bin",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/flow-review/source-checks.stdout.bin",
+        "status": "added",
+        "additions": 19,
+        "deletions": 0,
+        "changes": 19,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/flow-review/verification.json",
+        "status": "added",
+        "additions": 203,
+        "deletions": 0,
+        "changes": 203,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/flow-review/verify.py",
+        "status": "added",
+        "additions": 17,
+        "deletions": 0,
+        "changes": 17,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/audit.json",
+        "status": "added",
+        "additions": 47,
+        "deletions": 0,
+        "changes": 47,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/audit.py",
+        "status": "added",
+        "additions": 49,
+        "deletions": 0,
+        "changes": 49,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/capture-reaped.py",
+        "status": "added",
+        "additions": 73,
+        "deletions": 0,
+        "changes": 73,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/cleanup.json",
+        "status": "added",
+        "additions": 7,
+        "deletions": 0,
+        "changes": 7,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/initial-artifacts/original.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/initial-workbook.json",
+        "status": "added",
+        "additions": 40,
+        "deletions": 0,
+        "changes": 40,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/initial-workbook.stderr.bin",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/initial-workbook.stdout.bin",
+        "status": "added",
+        "additions": 1,
+        "deletions": 0,
+        "changes": 1,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/manifest.json",
+        "status": "added",
+        "additions": 188,
+        "deletions": 0,
+        "changes": 188,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/readable-artifacts/original-preview-1.png",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/readable-artifacts/original-preview-2.png",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/readable-artifacts/original-preview.pdf",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/readable-artifacts/original-recalculated.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/readable-artifacts/original-recalculation.json",
+        "status": "added",
+        "additions": 208,
+        "deletions": 0,
+        "changes": 208,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/readable-artifacts/original-visual.json",
+        "status": "added",
+        "additions": 110,
+        "deletions": 0,
+        "changes": 110,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/readable-artifacts/original.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/readable-artifacts/revision-preview-1.png",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/readable-artifacts/revision-preview-2.png",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/readable-artifacts/revision-preview.pdf",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/readable-artifacts/revision-recalculated.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/readable-artifacts/revision-recalculation.json",
+        "status": "added",
+        "additions": 208,
+        "deletions": 0,
+        "changes": 208,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/readable-artifacts/revision-visual.json",
+        "status": "added",
+        "additions": 110,
+        "deletions": 0,
+        "changes": 110,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/readable-artifacts/revision.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/readable-workbook.json",
+        "status": "added",
+        "additions": 40,
+        "deletions": 0,
+        "changes": 40,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/readable-workbook.stderr.bin",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/readable-workbook.stdout.bin",
+        "status": "added",
+        "additions": 1,
+        "deletions": 0,
+        "changes": 1,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/recalculated-artifacts/original-recalculated.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/recalculated-artifacts/original-recalculation.json",
+        "status": "added",
+        "additions": 208,
+        "deletions": 0,
+        "changes": 208,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/recalculated-artifacts/original.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/recalculated-workbook.json",
+        "status": "added",
+        "additions": 40,
+        "deletions": 0,
+        "changes": 40,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/recalculated-workbook.stderr.bin",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/recalculated-workbook.stdout.bin",
+        "status": "added",
+        "additions": 1,
+        "deletions": 0,
+        "changes": 1,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/source-blobs.json",
+        "status": "added",
+        "additions": 59,
+        "deletions": 0,
+        "changes": 59,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/workbook-cli.json",
+        "status": "added",
+        "additions": 35,
+        "deletions": 0,
+        "changes": 35,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/workbook-cli.stderr.bin",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/integration/workbook-cli.stdout.bin",
+        "status": "added",
+        "additions": 12,
+        "deletions": 0,
+        "changes": 12,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/README.md",
+        "status": "added",
+        "additions": 7,
+        "deletions": 0,
+        "changes": 7,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/REPORT.md",
+        "status": "added",
+        "additions": 32,
+        "deletions": 0,
+        "changes": 32,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/audit.json",
+        "status": "added",
+        "additions": 77,
+        "deletions": 0,
+        "changes": 77,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/before-artifacts/independent-input.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/before-artifacts/independent-inspection.json",
+        "status": "added",
+        "additions": 361,
+        "deletions": 0,
+        "changes": 361,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/before-artifacts/independent-output.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/before-artifacts/independent-processes.json",
+        "status": "added",
+        "additions": 82,
+        "deletions": 0,
+        "changes": 82,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/before-artifacts/original-input.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/before-artifacts/original-inspection.json",
+        "status": "added",
+        "additions": 349,
+        "deletions": 0,
+        "changes": 349,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/before-artifacts/original-output.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/before-artifacts/original-processes.json",
+        "status": "added",
+        "additions": 62,
+        "deletions": 0,
+        "changes": 62,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/before.json",
+        "status": "added",
+        "additions": 34,
+        "deletions": 0,
+        "changes": 34,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/before.stderr.bin",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/before.stdout.bin",
+        "status": "added",
+        "additions": 47,
+        "deletions": 0,
+        "changes": 47,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/capture-reaped.py",
+        "status": "added",
+        "additions": 73,
+        "deletions": 0,
+        "changes": 73,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/cleanup.json",
+        "status": "added",
+        "additions": 144,
+        "deletions": 0,
+        "changes": 144,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-after.json",
+        "status": "added",
+        "additions": 34,
+        "deletions": 0,
+        "changes": 34,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-after.stderr.bin",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-after.stdout.bin",
+        "status": "added",
+        "additions": 11,
+        "deletions": 0,
+        "changes": 11,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-after/bounds-creation.json",
+        "status": "added",
+        "additions": 59,
+        "deletions": 0,
+        "changes": 59,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-after/bounds-processes.json",
+        "status": "added",
+        "additions": 85,
+        "deletions": 0,
+        "changes": 85,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-after/bounds-revision.json",
+        "status": "added",
+        "additions": 59,
+        "deletions": 0,
+        "changes": 59,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-after/create-generated.json",
+        "status": "added",
+        "additions": 147,
+        "deletions": 0,
+        "changes": 147,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-after/create-generated.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-after/create-output.pdf",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-after/create-page-1.png",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-after/create-page-2.png",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-after/create-processes.json",
+        "status": "added",
+        "additions": 125,
+        "deletions": 0,
+        "changes": 125,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-after/create-recalculated.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-after/create-visual.json",
+        "status": "added",
+        "additions": 162,
+        "deletions": 0,
+        "changes": 162,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-after/revise-generated.json",
+        "status": "added",
+        "additions": 147,
+        "deletions": 0,
+        "changes": 147,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-after/revise-generated.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-after/revise-output.pdf",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-after/revise-page-1.png",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-after/revise-page-2.png",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-after/revise-processes.json",
+        "status": "added",
+        "additions": 145,
+        "deletions": 0,
+        "changes": 145,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-after/revise-recalculated.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-after/revise-visual.json",
+        "status": "added",
+        "additions": 162,
+        "deletions": 0,
+        "changes": 162,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-audit.json",
+        "status": "added",
+        "additions": 166,
+        "deletions": 0,
+        "changes": 166,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-before.json",
+        "status": "added",
+        "additions": 34,
+        "deletions": 0,
+        "changes": 34,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-before.stderr.bin",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-before.stdout.bin",
+        "status": "added",
+        "additions": 82,
+        "deletions": 0,
+        "changes": 82,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-before/bounds-creation.json",
+        "status": "added",
+        "additions": 43,
+        "deletions": 0,
+        "changes": 43,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-before/bounds-processes.json",
+        "status": "added",
+        "additions": 85,
+        "deletions": 0,
+        "changes": 85,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-before/bounds-revision.json",
+        "status": "added",
+        "additions": 43,
+        "deletions": 0,
+        "changes": 43,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-before/create-generated.json",
+        "status": "added",
+        "additions": 120,
+        "deletions": 0,
+        "changes": 120,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-before/create-generated.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-before/create-output.pdf",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-before/create-page-1.png",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-before/create-page-2.png",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-before/create-processes.json",
+        "status": "added",
+        "additions": 125,
+        "deletions": 0,
+        "changes": 125,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-before/create-recalculated.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-before/create-visual.json",
+        "status": "added",
+        "additions": 135,
+        "deletions": 0,
+        "changes": 135,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-before/revise-generated.json",
+        "status": "added",
+        "additions": 120,
+        "deletions": 0,
+        "changes": 120,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-before/revise-generated.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-before/revise-output.pdf",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-before/revise-page-1.png",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-before/revise-page-2.png",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-before/revise-processes.json",
+        "status": "added",
+        "additions": 145,
+        "deletions": 0,
+        "changes": 145,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-before/revise-recalculated.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-before/revise-visual.json",
+        "status": "added",
+        "additions": 135,
+        "deletions": 0,
+        "changes": 135,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-manifest.json",
+        "status": "added",
+        "additions": 270,
+        "deletions": 0,
+        "changes": 270,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-original-regression.json",
+        "status": "added",
+        "additions": 34,
+        "deletions": 0,
+        "changes": 34,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-original-regression.stderr.bin",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-original-regression.stdout.bin",
+        "status": "added",
+        "additions": 42,
+        "deletions": 0,
+        "changes": 42,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-outline.md",
+        "status": "added",
+        "additions": 9,
+        "deletions": 0,
+        "changes": 9,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-report.md",
+        "status": "added",
+        "additions": 19,
+        "deletions": 0,
+        "changes": 19,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/columns-tooling-note.json",
+        "status": "added",
+        "additions": 5,
+        "deletions": 0,
+        "changes": 5,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/final-artifacts/cancel-processes.json",
+        "status": "added",
+        "additions": 1,
+        "deletions": 0,
+        "changes": 1,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/final-artifacts/failure-processes.json",
+        "status": "added",
+        "additions": 22,
+        "deletions": 0,
+        "changes": 22,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/final-artifacts/independent-input.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/final-artifacts/independent-inspection.json",
+        "status": "added",
+        "additions": 361,
+        "deletions": 0,
+        "changes": 361,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/final-artifacts/independent-output.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/final-artifacts/independent-processes.json",
+        "status": "added",
+        "additions": 82,
+        "deletions": 0,
+        "changes": 82,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/final-artifacts/original-input.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/final-artifacts/original-inspection.json",
+        "status": "added",
+        "additions": 349,
+        "deletions": 0,
+        "changes": 349,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/final-artifacts/original-output.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/final-artifacts/original-processes.json",
+        "status": "added",
+        "additions": 62,
+        "deletions": 0,
+        "changes": 62,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/final-artifacts/profile-docx-processes.json",
+        "status": "added",
+        "additions": 22,
+        "deletions": 0,
+        "changes": 22,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/final-artifacts/profile-xlsx-processes.json",
+        "status": "added",
+        "additions": 22,
+        "deletions": 0,
+        "changes": 22,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/final.json",
+        "status": "added",
+        "additions": 34,
+        "deletions": 0,
+        "changes": 34,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/final.stderr.bin",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/final.stdout.bin",
+        "status": "added",
+        "additions": 15,
+        "deletions": 0,
+        "changes": 15,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/manifest.json",
+        "status": "added",
+        "additions": 237,
+        "deletions": 0,
+        "changes": 237,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/original.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/repaired-artifacts/independent-input.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/repaired-artifacts/independent-inspection.json",
+        "status": "added",
+        "additions": 361,
+        "deletions": 0,
+        "changes": 361,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/repaired-artifacts/independent-output.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/repaired-artifacts/independent-processes.json",
+        "status": "added",
+        "additions": 82,
+        "deletions": 0,
+        "changes": 82,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/repaired-artifacts/original-input.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/repaired-artifacts/original-inspection.json",
+        "status": "added",
+        "additions": 349,
+        "deletions": 0,
+        "changes": 349,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/repaired-artifacts/original-output.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/repaired-artifacts/original-processes.json",
+        "status": "added",
+        "additions": 62,
+        "deletions": 0,
+        "changes": 62,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/repaired.json",
+        "status": "added",
+        "additions": 34,
+        "deletions": 0,
+        "changes": 34,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/repaired.stderr.bin",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/repaired.stdout.bin",
+        "status": "added",
+        "additions": 11,
+        "deletions": 0,
+        "changes": 11,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-author/upstream.json",
+        "status": "added",
+        "additions": 14,
+        "deletions": 0,
+        "changes": 14,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-review/.gitattributes",
+        "status": "added",
+        "additions": 2,
+        "deletions": 0,
+        "changes": 2,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-review/REPORT.md",
+        "status": "added",
+        "additions": 11,
+        "deletions": 0,
+        "changes": 11,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-review/audit.json",
+        "status": "added",
+        "additions": 54,
+        "deletions": 0,
+        "changes": 54,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-review/audit.py",
+        "status": "added",
+        "additions": 29,
+        "deletions": 0,
+        "changes": 29,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-review/baseline-original.json",
+        "status": "added",
+        "additions": 29,
+        "deletions": 0,
+        "changes": 29,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-review/baseline-original.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-review/baseline-styled.json",
+        "status": "added",
+        "additions": 29,
+        "deletions": 0,
+        "changes": 29,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-review/baseline-styled.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-review/baseline.json",
+        "status": "added",
+        "additions": 34,
+        "deletions": 0,
+        "changes": 34,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-review/baseline.stderr.bin",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-review/baseline.stdout.bin",
+        "status": "added",
+        "additions": 50,
+        "deletions": 0,
+        "changes": 50,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-review/capture-reaped.py",
+        "status": "added",
+        "additions": 73,
+        "deletions": 0,
+        "changes": 73,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-review/criteria.md",
+        "status": "added",
+        "additions": 5,
+        "deletions": 0,
+        "changes": 5,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-review/final-original.json",
+        "status": "added",
+        "additions": 29,
+        "deletions": 0,
+        "changes": 29,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-review/final-original.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-review/final-styled.json",
+        "status": "added",
+        "additions": 29,
+        "deletions": 0,
+        "changes": 29,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-review/final-styled.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-review/final.json",
+        "status": "added",
+        "additions": 34,
+        "deletions": 0,
+        "changes": 34,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-review/final.stderr.bin",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-review/final.stdout.bin",
+        "status": "added",
+        "additions": 15,
+        "deletions": 0,
+        "changes": 15,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-review/manifest.json",
+        "status": "added",
+        "additions": 117,
+        "deletions": 0,
+        "changes": 117,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/qualification/candidates/workbook-drafting-20261013/office-review/original.xlsx",
+        "status": "added",
+        "additions": 0,
+        "deletions": 0,
+        "changes": 0,
+        "previous_filename": null
+      },
+      {
+        "filename": "scripts/local-workbook/run.mjs",
+        "status": "added",
+        "additions": 60,
+        "deletions": 0,
+        "changes": 60,
+        "previous_filename": null
+      }
+    ]
+  },
+  "isError": false
+}
