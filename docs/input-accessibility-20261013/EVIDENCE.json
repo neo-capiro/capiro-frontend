@@ -1,0 +1,31 @@
+{
+  "source": "7745bd4fce68421a3523a398d37e36a67b1aaf94",
+  "archiveBytes": 29800111,
+  "archiveSha256": "7d525228ea19a8c175b8302cf1cd8170e40feead408b81e9ee34c5737ad507c8",
+  "manifestSha256": "cd3f870299053c0f661e29b6c6e0b230698dd4b9b2f52f92fbd131924f9884c8",
+  "files": 230,
+  "uncompressedBytes": 48550064,
+  "membersReadBack": true,
+  "originalBytesUnchanged": true,
+  "symlinksRecorded": 1,
+  "excluded": 3,
+  "parts": [
+    {
+      "file": "evidence.tar.gz.part-000",
+      "bytes": 12582912,
+      "sha256": "64996140f72bbb36eab5511bfd2d688dac8ec56276ebcec5795df0d9d41617e2"
+    },
+    {
+      "file": "evidence.tar.gz.part-001",
+      "bytes": 12582912,
+      "sha256": "3ee10e5194d2314640facc76fa24f6d08bcc50418b904e147f168749058b073a"
+    },
+    {
+      "file": "evidence.tar.gz.part-002",
+      "bytes": 4634287,
+      "sha256": "358cbb2c73c1e00416aa7fa151c776e62da3a2cedf6de5bfe1e62ba96e20c1d2"
+    }
+  ],
+  "partsReadbackMatchesArchive": true,
+  "fileModesRestored": false
+}
