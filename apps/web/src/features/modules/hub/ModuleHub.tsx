@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useId } from "react";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@capiro/ui/tooltip";
+import { useState } from "react";
+import { Tooltip as TooltipPrimitive } from "radix-ui";
+import { Tooltip, TooltipTrigger } from "@capiro/ui/tooltip";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import { PageHeader } from "../../../shared/module-ui";
@@ -144,31 +145,35 @@ export function ModuleHub() {
 }
 
 function ModuleHubInformation() {
-  const descriptionId = useId();
+  const [container, setContainer] = useState<HTMLSpanElement | null>(null);
   return (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <button
-          type="button"
-          className={styles.info}
-          aria-label="About Modules"
-        >
-          <span aria-hidden="true">i</span>
-        </button>
-      </TooltipTrigger>
-      <TooltipContent
-        side="bottom"
-        className={styles.infoContent}
-        aria-labelledby={descriptionId}
-      >
-        <aside aria-label="About Modules">
-          <p id={descriptionId}>
-            Every client and every activity, across the whole firm. Choose a
-            client profile to show just that client’s work.
-          </p>
-        </aside>
-      </TooltipContent>
-    </Tooltip>
+    <span className={styles.infoAnchor} ref={setContainer}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <button
+            type="button"
+            className={styles.info}
+            aria-label="About Modules"
+          >
+            <span aria-hidden="true">i</span>
+          </button>
+        </TooltipTrigger>
+        {container && (
+          <TooltipPrimitive.Portal container={container}>
+            <TooltipPrimitive.Content
+              side="bottom"
+              sideOffset={4}
+              className={styles.infoContent}
+              data-slot="tooltip-content"
+            >
+              Every client and every activity, across the whole firm. Choose a
+              client profile to show just that client’s work.
+              <TooltipPrimitive.Arrow />
+            </TooltipPrimitive.Content>
+          </TooltipPrimitive.Portal>
+        )}
+      </Tooltip>
+    </span>
   );
 }
 

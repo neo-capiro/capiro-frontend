@@ -87,12 +87,11 @@ for (const [width, colorScheme] of [
     await expect(help).toHaveAccessibleDescription(
       "Every client and every activity, across the whole firm. Choose a client profile to show just that client’s work.",
     );
-    await expect(
-      tooltip.getByRole("complementary", {
-        name: "About Modules",
-        exact: true,
-      }),
-    ).toBeVisible();
+    await expect(help).toHaveAttribute(
+      "aria-describedby",
+      (await tooltip.getAttribute("id"))!,
+    );
+    await expect(page.getByRole("main").getByRole("tooltip")).toHaveCount(1);
     const visibleContent = page.locator('[data-slot="tooltip-content"]');
     const bounds = await visibleContent.boundingBox();
     expect(bounds!.x).toBeGreaterThanOrEqual(0);

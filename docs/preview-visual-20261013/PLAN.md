@@ -55,11 +55,15 @@ type, style and architecture controls after correction.
 
 
 The first Tooltip opening review found missing effective utility styles and an
-open-portal landmark finding. Preserve both red baselines. Feature-owned CSS
-now supplies an opaque inverse surface, padding, radius, shadow, stacking and
-arrow fill without changing the adopted component. The supplemental explanation
-is a named complementary aside inside the existing tooltip; its generated ID,
-trigger description, Escape and focus semantics remain intact. Five viewport/
-theme controls assert the actual surface and accessible relation as well as
-full-default axe, retaining all incompletes. This does not certify screen-reader
-speech or native touch behavior.
+open-portal landmark finding. Preserve those red baselines and the subsequent
+named-aside/description attempts. The final composition uses canonical Tooltip
+and TooltipTrigger with the adopted Radix Portal/Content/Arrow public API,
+because the vendor wrapper does not expose Portal.container. A feature-owned
+24px span inside the existing main receives the portal; content mounts only
+after that container exists. The native role, ID and trigger description remain
+unchanged; no extra landmark, ARIA naming override or rule suppression remains.
+Feature-owned CSS supplies the opaque inverse surface, padding, radius, shadow,
+stacking and arrow fill without changing adopted component bytes. Five viewport/
+theme controls assert actual surface, full description, native ID relationship,
+main containment and full-default axe, retaining incompletes. This does not
+certify screen-reader speech or native touch behavior.
