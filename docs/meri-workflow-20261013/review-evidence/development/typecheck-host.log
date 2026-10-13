@@ -1,0 +1,23 @@
+
+> @capiro/web@0.1.0 typecheck
+> tsc --noEmit
+
+tests/meri-action-proxy.test.ts(174,26): error TS2345: Argument of type '{ body: string; headers?: undefined; } | { body: string; headers: { "Content-Type": string; "Content-Length"?: undefined; }; } | { body: string; headers: { "Content-Length": string; "Content-Type"?: undefined; }; }' is not assignable to parameter of type 'RequestInit | undefined'.
+  Type '{ body: string; headers: { "Content-Type": string; "Content-Length"?: undefined; }; }' is not assignable to type 'RequestInit'.
+    Types of property 'headers' are incompatible.
+      Type '{ "Content-Type": string; "Content-Length"?: undefined; }' is not assignable to type 'HeadersInit | undefined'.
+        Type '{ "Content-Type": string; "Content-Length"?: undefined; }' is not assignable to type 'Record<string, string>'.
+          Property '"Content-Length"' is incompatible with index signature.
+            Type 'undefined' is not assignable to type 'string'.
+npm error Lifecycle script `typecheck` failed with error:
+npm error code 2
+npm error path /workspace/capiro-meri-workflow-20261013/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /workspace/capiro-meri-workflow-20261013/apps/web
+npm error command failed
+npm error command sh -c tsc --noEmit
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

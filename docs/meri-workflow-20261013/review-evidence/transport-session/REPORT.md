@@ -1,0 +1,13 @@
+# Meri bounded transport and session tests
+
+PASS: all86 authored isolated Vitest cases pass against the hash-bound corrected shared source. The final replay exited0 with identical source hashes before/after. Only the two assigned test files were authored; shared source fixes belong to root. Tests use real ReadableStream, fake timers, intercepted fetch, the exact public action receiver and synthetic receipt data. No native bootstrap/backend/provider/model/server/browser/build execution occurred.
+
+Initial75-case run preserved71pass/4fail: forged routes dispatched before validation. Root fixed the runtime allowlist. Expanded86-case run preserved75pass/11fail:7 exact native receipt grammar mismatches and4 stream disposal leaks. Root corrected these; unchanged86 assertions then pass. Both failing logs/results/receipts and source snapshots remain intact.
+
+Coverage includes exact streamed byte limit and limit+1, misleading/malformed Content-Length before acquiring a reader, JSON media/body refusal, split multibyte UTF-8 and fatal malformed/final-incomplete sequences, cancellation/overflow without awaiting a hanging cancel, pre-abort/header rejection disposal, parked body deadline and late response cleanup after ignored fetch cancellation. Fixed paths, captured request body, exact bearer/credentials/cache/redirect policy, real receiving, no retry, caller/lifetime abort and total receiving deadline are checked.
+
+Session controls check exact minimal fields, opaque credential grammar, detached/frozen context, strict unknown-field refusal, lowercase native hex UUID grammar without extra RFC variant/version restrictions, bounded256-character native actor/tenant identifiers, safe nonnegative clock, future expiry and five-minute issuance ceiling. Raw4096-byte HTTP session response ownership remains with the bootstrap transport, not duplicated as a whitespace parser restriction here. No receipt grants browser authority.
+
+Formatting passes and owned ESLint passes. An initial ESLint call from repository root failed only because the app config was not discovered; its log is retained separately from the successful app-cwd check. Three exact describe-suite size findings and author responsibility rationale are in STRUCTURE-REVIEW-PROPOSAL.json for root independent review. Canonical source discovery does not make these test responsibilities exempt.
+
+The two sealed test files are final for this task. The newly assigned host-controller/QueryClient tests will use a separate file and evidence directory. Full clean-install, integration/browser/native and deployment qualification remain outside this isolated test result.

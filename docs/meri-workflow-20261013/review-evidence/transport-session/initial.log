@@ -1,0 +1,457 @@
+
+ RUN  v4.1.11 /workspace/capiro-meri-workflow-20261013/apps/web
+
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > returns detached frozen exact fields without inventing run authority 5ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > accepts future expiry at inclusive TTL boundary 1 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > accepts future expiry at inclusive TTL boundary 300000 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses expired or excessive TTL -1 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses expired or excessive TTL 0 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses expired or excessive TTL 300001 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses invalid supplied clock NaN 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses invalid supplied clock Infinity 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses invalid supplied clock 0.5 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses invalid supplied clock 9007199254740992 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses noncanonical expiry null 1ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses noncanonical expiry soon 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses noncanonical expiry 0 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses noncanonical expiry -1 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses noncanonical expiry 1791867600000.5 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses noncanonical expiry 9007199254740992 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses noncanonical action credential 0 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses noncanonical action credential 1 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses noncanonical action credential 2 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses noncanonical action credential 3 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses noncanonical action credential 4 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > accepts the exact URL-safe opaque alphabet 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses missing receipt field credential 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses missing receipt field expiresAtMs 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses missing receipt field context 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses missing and empty context field tenantId 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses missing and empty context field actorId 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses missing and empty context field conversationId 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses missing and empty context field runId 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses missing and empty context field selectedClientId 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses malformed context UUID conversationId 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses malformed context UUID runId 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses malformed context UUID selectedClientId 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses extra authority field binding at either level 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses extra authority field attemptId at either level 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses extra authority field workerId at either level 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses extra authority field writerFence at either level 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses extra authority field approved at either level 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > refuses extra authority field policyRevision at either level 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > never turns malformed JSON or the separate error contract into a session 0 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > never turns malformed JSON or the separate error contract into a session 1 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > never turns malformed JSON or the separate error contract into a session 2 0ms
+ ✓ tests/meri-action-session.test.ts > Meri minimal server-selected session receipt > never turns malformed JSON or the separate error contract into a session 3 0ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > accepts exactly the byte limit across a split multibyte character 30ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > refuses streamed limit+1 even when Content-Length understates bytes 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > rejects declared size 5 before acquiring a body reader 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > rejects declared size -1 before acquiring a body reader 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > rejects declared size 1.5 before acquiring a body reader 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > rejects declared size NaN before acquiring a body reader 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > rejects declared size 4,4 before acquiring a body reader 0ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > rejects declared size 999999999999999999999999 before acquiring a body reader 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > refuses media type text/html before body read 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > refuses media type application/jsonp before body read 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > refuses media type text/plain before body read 0ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > accepts JSON charset parameters but refuses missing bodies 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > fatally rejects malformed or unfinished UTF-8 0 0ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > fatally rejects malformed or unfinished UTF-8 1 0ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > aborts a parked read without waiting for a hanging underlying cancel 3ms
+ ✓ tests/meri-action-transport.test.ts > Meri streamed UTF-8 receiving bound > overflow rejection does not wait for hanging cancellation 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri observation deadline and cancellation > rejects before invocation for an already-aborted owner 2ms
+ ✓ tests/meri-action-transport.test.ts > Meri observation deadline and cancellation > bounds ignored cancellation and late processing beyond response headers 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri observation deadline and cancellation > clears its deadline after success without aborting borrowed input 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > uses only fixed POST query with exact request and no ambient routing 2ms
+ ✓ tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > uses only fixed POST draft with exact request and no ambient routing 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > uses only fixed POST prepare with exact request and no ambient routing 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > uses only fixed POST execute with exact request and no ambient routing 1ms
+ × tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > refuses forged route ../session before dispatch 3ms
+   → expected "vi.fn()" to not be called at all, but actually been called 1 times
+
+Received:
+
+  1st vi.fn() call:
+
+    Array [
+      "/api/action-followthrough/../session",
+      Object {
+        "body": "{}",
+        "cache": "no-store",
+        "credentials": "same-origin",
+        "headers": Object {
+          "Authorization": "Bearer action_session_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "Content-Type": "application/json",
+        },
+        "method": "POST",
+        "redirect": "error",
+        "signal": AbortSignal {
+          Symbol(kEvents): Map {},
+          Symbol(events.maxEventTargetListeners): 0,
+          Symbol(events.maxEventTargetListenersWarned): false,
+          Symbol(kHandlers): undefined,
+          Symbol(kAborted): false,
+          Symbol(kReason): undefined,
+          Symbol(kComposite): true,
+          Symbol(kSourceSignals): Set {
+            SafeWeakRef {},
+            SafeWeakRef {},
+            SafeWeakRef {},
+          },
+          Symbol(kResultSignalWeakRef): SafeWeakRef {},
+          Symbol(kFollowing): true,
+        },
+      },
+    ]
+
+
+Number of calls: 1
+
+ × tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > refuses forged route execute?approve=true before dispatch 1ms
+   → expected "vi.fn()" to not be called at all, but actually been called 1 times
+
+Received:
+
+  1st vi.fn() call:
+
+    Array [
+      "/api/action-followthrough/execute?approve=true",
+      Object {
+        "body": "{}",
+        "cache": "no-store",
+        "credentials": "same-origin",
+        "headers": Object {
+          "Authorization": "Bearer action_session_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "Content-Type": "application/json",
+        },
+        "method": "POST",
+        "redirect": "error",
+        "signal": AbortSignal {
+          Symbol(kEvents): Map {},
+          Symbol(events.maxEventTargetListeners): 0,
+          Symbol(events.maxEventTargetListenersWarned): false,
+          Symbol(kHandlers): undefined,
+          Symbol(kAborted): false,
+          Symbol(kReason): undefined,
+          Symbol(kComposite): true,
+          Symbol(kSourceSignals): Set {
+            SafeWeakRef {},
+            SafeWeakRef {},
+            SafeWeakRef {},
+          },
+          Symbol(kResultSignalWeakRef): SafeWeakRef {},
+          Symbol(kFollowing): true,
+        },
+      },
+    ]
+
+
+Number of calls: 1
+
+ × tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > refuses forged route https://example.test before dispatch 1ms
+   → expected "vi.fn()" to not be called at all, but actually been called 1 times
+
+Received:
+
+  1st vi.fn() call:
+
+    Array [
+      "/api/action-followthrough/https://example.test",
+      Object {
+        "body": "{}",
+        "cache": "no-store",
+        "credentials": "same-origin",
+        "headers": Object {
+          "Authorization": "Bearer action_session_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "Content-Type": "application/json",
+        },
+        "method": "POST",
+        "redirect": "error",
+        "signal": AbortSignal {
+          Symbol(kEvents): Map {},
+          Symbol(events.maxEventTargetListeners): 0,
+          Symbol(events.maxEventTargetListenersWarned): false,
+          Symbol(kHandlers): undefined,
+          Symbol(kAborted): false,
+          Symbol(kReason): undefined,
+          Symbol(kComposite): true,
+          Symbol(kSourceSignals): Set {
+            SafeWeakRef {},
+            SafeWeakRef {},
+            SafeWeakRef {},
+          },
+          Symbol(kResultSignalWeakRef): SafeWeakRef {},
+          Symbol(kFollowing): true,
+        },
+      },
+    ]
+
+
+Number of calls: 1
+
+ × tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > refuses forged route approve before dispatch 1ms
+   → expected "vi.fn()" to not be called at all, but actually been called 1 times
+
+Received:
+
+  1st vi.fn() call:
+
+    Array [
+      "/api/action-followthrough/approve",
+      Object {
+        "body": "{}",
+        "cache": "no-store",
+        "credentials": "same-origin",
+        "headers": Object {
+          "Authorization": "Bearer action_session_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "Content-Type": "application/json",
+        },
+        "method": "POST",
+        "redirect": "error",
+        "signal": AbortSignal {
+          Symbol(kEvents): Map {},
+          Symbol(events.maxEventTargetListeners): 0,
+          Symbol(events.maxEventTargetListenersWarned): false,
+          Symbol(kHandlers): undefined,
+          Symbol(kAborted): false,
+          Symbol(kReason): undefined,
+          Symbol(kComposite): true,
+          Symbol(kSourceSignals): Set {
+            SafeWeakRef {},
+            SafeWeakRef {},
+            SafeWeakRef {},
+          },
+          Symbol(kResultSignalWeakRef): SafeWeakRef {},
+          Symbol(kFollowing): true,
+        },
+      },
+    ]
+
+
+Number of calls: 1
+
+ ✓ tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > runs the actual public receiver and refuses malformed JSON without retry 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > returns a deeply frozen accepted response through the real receiver 2ms
+ ✓ tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > settles ignored-fetch cancellation from caller once without retry 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > settles ignored-fetch cancellation from lifetime once without retry 1ms
+ ✓ tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > times out a parked body even if cancellation never completes 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > refuses forged route ../session before dispatch
+AssertionError: expected "vi.fn()" to not be called at all, but actually been called 1 times
+
+Received:
+
+  1st vi.fn() call:
+
+    Array [
+      "/api/action-followthrough/../session",
+      Object {
+        "body": "{}",
+        "cache": "no-store",
+        "credentials": "same-origin",
+        "headers": Object {
+          "Authorization": "Bearer action_session_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "Content-Type": "application/json",
+        },
+        "method": "POST",
+        "redirect": "error",
+        "signal": AbortSignal {
+          Symbol(kEvents): Map {},
+          Symbol(events.maxEventTargetListeners): 0,
+          Symbol(events.maxEventTargetListenersWarned): false,
+          Symbol(kHandlers): undefined,
+          Symbol(kAborted): false,
+          Symbol(kReason): undefined,
+          Symbol(kComposite): true,
+          Symbol(kSourceSignals): Set {
+            SafeWeakRef {},
+            SafeWeakRef {},
+            SafeWeakRef {},
+          },
+          Symbol(kResultSignalWeakRef): SafeWeakRef {},
+          Symbol(kFollowing): true,
+        },
+      },
+    ]
+
+
+Number of calls: 1
+
+ ❯ tests/meri-action-transport.test.ts:242:25
+    240|       ),
+    241|     ).rejects.toThrow();
+    242|     expect(fetcher).not.toHaveBeenCalled();
+       |                         ^
+    243|   });
+    244|   it("runs the actual public receiver and refuses malformed JSON witho…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > refuses forged route execute?approve=true before dispatch
+AssertionError: expected "vi.fn()" to not be called at all, but actually been called 1 times
+
+Received:
+
+  1st vi.fn() call:
+
+    Array [
+      "/api/action-followthrough/execute?approve=true",
+      Object {
+        "body": "{}",
+        "cache": "no-store",
+        "credentials": "same-origin",
+        "headers": Object {
+          "Authorization": "Bearer action_session_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "Content-Type": "application/json",
+        },
+        "method": "POST",
+        "redirect": "error",
+        "signal": AbortSignal {
+          Symbol(kEvents): Map {},
+          Symbol(events.maxEventTargetListeners): 0,
+          Symbol(events.maxEventTargetListenersWarned): false,
+          Symbol(kHandlers): undefined,
+          Symbol(kAborted): false,
+          Symbol(kReason): undefined,
+          Symbol(kComposite): true,
+          Symbol(kSourceSignals): Set {
+            SafeWeakRef {},
+            SafeWeakRef {},
+            SafeWeakRef {},
+          },
+          Symbol(kResultSignalWeakRef): SafeWeakRef {},
+          Symbol(kFollowing): true,
+        },
+      },
+    ]
+
+
+Number of calls: 1
+
+ ❯ tests/meri-action-transport.test.ts:242:25
+    240|       ),
+    241|     ).rejects.toThrow();
+    242|     expect(fetcher).not.toHaveBeenCalled();
+       |                         ^
+    243|   });
+    244|   it("runs the actual public receiver and refuses malformed JSON witho…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > refuses forged route https://example.test before dispatch
+AssertionError: expected "vi.fn()" to not be called at all, but actually been called 1 times
+
+Received:
+
+  1st vi.fn() call:
+
+    Array [
+      "/api/action-followthrough/https://example.test",
+      Object {
+        "body": "{}",
+        "cache": "no-store",
+        "credentials": "same-origin",
+        "headers": Object {
+          "Authorization": "Bearer action_session_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "Content-Type": "application/json",
+        },
+        "method": "POST",
+        "redirect": "error",
+        "signal": AbortSignal {
+          Symbol(kEvents): Map {},
+          Symbol(events.maxEventTargetListeners): 0,
+          Symbol(events.maxEventTargetListenersWarned): false,
+          Symbol(kHandlers): undefined,
+          Symbol(kAborted): false,
+          Symbol(kReason): undefined,
+          Symbol(kComposite): true,
+          Symbol(kSourceSignals): Set {
+            SafeWeakRef {},
+            SafeWeakRef {},
+            SafeWeakRef {},
+          },
+          Symbol(kResultSignalWeakRef): SafeWeakRef {},
+          Symbol(kFollowing): true,
+        },
+      },
+    ]
+
+
+Number of calls: 1
+
+ ❯ tests/meri-action-transport.test.ts:242:25
+    240|       ),
+    241|     ).rejects.toThrow();
+    242|     expect(fetcher).not.toHaveBeenCalled();
+       |                         ^
+    243|   });
+    244|   it("runs the actual public receiver and refuses malformed JSON witho…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/meri-action-transport.test.ts > Meri fixed authenticated action transport > refuses forged route approve before dispatch
+AssertionError: expected "vi.fn()" to not be called at all, but actually been called 1 times
+
+Received:
+
+  1st vi.fn() call:
+
+    Array [
+      "/api/action-followthrough/approve",
+      Object {
+        "body": "{}",
+        "cache": "no-store",
+        "credentials": "same-origin",
+        "headers": Object {
+          "Authorization": "Bearer action_session_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "Content-Type": "application/json",
+        },
+        "method": "POST",
+        "redirect": "error",
+        "signal": AbortSignal {
+          Symbol(kEvents): Map {},
+          Symbol(events.maxEventTargetListeners): 0,
+          Symbol(events.maxEventTargetListenersWarned): false,
+          Symbol(kHandlers): undefined,
+          Symbol(kAborted): false,
+          Symbol(kReason): undefined,
+          Symbol(kComposite): true,
+          Symbol(kSourceSignals): Set {
+            SafeWeakRef {},
+            SafeWeakRef {},
+            SafeWeakRef {},
+          },
+          Symbol(kResultSignalWeakRef): SafeWeakRef {},
+          Symbol(kFollowing): true,
+        },
+      },
+    ]
+
+
+Number of calls: 1
+
+ ❯ tests/meri-action-transport.test.ts:242:25
+    240|       ),
+    241|     ).rejects.toThrow();
+    242|     expect(fetcher).not.toHaveBeenCalled();
+       |                         ^
+    243|   });
+    244|   it("runs the actual public receiver and refuses malformed JSON witho…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  4 failed | 71 passed (75)
+   Start at  05:21:09
+   Duration  266ms (transform 82ms, setup 0ms, import 172ms, tests 83ms, environment 0ms)
+
+JSON report written to /tmp/capiro-meri-transport-session-tests-20261013/initial-results.json
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

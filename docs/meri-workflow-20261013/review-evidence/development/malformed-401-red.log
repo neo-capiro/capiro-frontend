@@ -1,0 +1,43 @@
+
+ RUN  v4.1.11 /workspace/capiro-meri-workflow-20261013/apps/web
+
+ ❯ tests/meri-action-lifetime.test.ts (14 tests | 2 failed) 102ms
+     × clears local access on a malformed 401 application/json without inventing a dispatch outcome 6ms
+     × clears local access on a malformed 401 text/html without inventing a dispatch outcome 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/meri-action-lifetime.test.ts > unadmitted unauthorized responses > clears local access on a malformed 401 application/json without inventing a dispatch outcome
+ FAIL  tests/meri-action-lifetime.test.ts > unadmitted unauthorized responses > clears local access on a malformed 401 text/html without inventing a dispatch outcome
+AssertionError: expected { ok: false, problem: 'unknown' } to deeply equal { ok: false, problem: 'access-lost' }
+
+- Expected
++ Received
+
+  {
+    "ok": false,
+-   "problem": "access-lost",
++   "problem": "unknown",
+  }
+
+ ❯ tests/meri-action-lifetime.test.ts:183:65
+    181|           }),
+    182|       );
+    183|       expect(await h.port.execute(proposal.handle, h.signal())).toEqua…
+       |                                                                 ^
+    184|         ok: false,
+    185|         problem: "access-lost",
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 12 passed (14)
+   Start at  05:31:03
+   Duration  347ms (transform 63ms, setup 0ms, import 134ms, tests 102ms, environment 0ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

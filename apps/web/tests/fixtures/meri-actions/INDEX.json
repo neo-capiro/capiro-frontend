@@ -1,0 +1,402 @@
+[
+  {
+    "name": "query",
+    "file": "fixtures/query.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "draft",
+    "file": "fixtures/draft.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "prepare",
+    "file": "fixtures/prepare.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "execute-approval-pending",
+    "file": "fixtures/execute-approval-pending.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "execute-observed",
+    "file": "fixtures/execute-observed.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "execute-replay",
+    "file": "fixtures/execute-replay.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "prepare-unknown",
+    "file": "fixtures/prepare-unknown.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "prepare-stored_not_released",
+    "file": "fixtures/prepare-stored_not_released.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "execute-indeterminate",
+    "file": "fixtures/execute-indeterminate.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "query-interleaved-sequence",
+    "file": "fixtures/query-interleaved-sequence.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "prepare-recovered-worker",
+    "file": "fixtures/prepare-recovered-worker.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "execute-recovered-worker",
+    "file": "fixtures/execute-recovered-worker.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "draft-canonical-date",
+    "file": "fixtures/draft-canonical-date.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "prepare-canonical-date",
+    "file": "fixtures/prepare-canonical-date.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "execute-canonical-date",
+    "file": "fixtures/execute-canonical-date.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "error-unauthenticated",
+    "file": "fixtures/error-unauthenticated.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "error-access_denied",
+    "file": "fixtures/error-access_denied.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "error-deadline",
+    "file": "fixtures/error-deadline.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "error-cancelled",
+    "file": "fixtures/error-cancelled.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "error-command_outcome_unknown",
+    "file": "fixtures/error-command_outcome_unknown.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "prepare-result_not_released",
+    "file": "fixtures/prepare-result_not_released.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "prepare-not_stored",
+    "file": "fixtures/prepare-not_stored.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "prepare-read_unavailable",
+    "file": "fixtures/prepare-read_unavailable.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "approval-refused-but-unknown",
+    "file": "fixtures/approval-refused-but-unknown.json",
+    "expected": "receiver_accept",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "query-forged-result-hash",
+    "file": "fixtures/query-forged-result-hash.json",
+    "expected": "receiver_reject",
+    "accepted": false,
+    "errorCode": "ACTION_RESPONSE_CORRELATION",
+    "pass": true
+  },
+  {
+    "name": "query-forged-event-handle",
+    "file": "fixtures/query-forged-event-handle.json",
+    "expected": "receiver_reject",
+    "accepted": false,
+    "errorCode": "ACTION_RESPONSE_CORRELATION",
+    "pass": true
+  },
+  {
+    "name": "query-forged-event-lineage",
+    "file": "fixtures/query-forged-event-lineage.json",
+    "expected": "receiver_reject",
+    "accepted": false,
+    "errorCode": "ACTION_RESPONSE_CORRELATION",
+    "pass": true
+  },
+  {
+    "name": "query-recommendation-accepted",
+    "file": "fixtures/query-recommendation-accepted.json",
+    "expected": "receiver_reject",
+    "accepted": false,
+    "errorCode": "ACTION_RESPONSE_SHAPE",
+    "pass": true
+  },
+  {
+    "name": "draft-forged-task-hash",
+    "file": "fixtures/draft-forged-task-hash.json",
+    "expected": "receiver_reject",
+    "accepted": false,
+    "errorCode": "ACTION_RESPONSE_CORRELATION",
+    "pass": true
+  },
+  {
+    "name": "draft-forged-recommendation",
+    "file": "fixtures/draft-forged-recommendation.json",
+    "expected": "receiver_reject",
+    "accepted": false,
+    "errorCode": "ACTION_RESPONSE_CORRELATION",
+    "pass": true
+  },
+  {
+    "name": "draft-forged-action-lineage",
+    "file": "fixtures/draft-forged-action-lineage.json",
+    "expected": "receiver_reject",
+    "accepted": false,
+    "errorCode": "ACTION_RESPONSE_CORRELATION",
+    "pass": true
+  },
+  {
+    "name": "draft-raw-html-date",
+    "file": "fixtures/draft-raw-html-date.json",
+    "expected": "receiver_reject",
+    "accepted": false,
+    "errorCode": "ACTION_RESPONSE_SHAPE",
+    "pass": true
+  },
+  {
+    "name": "prepare-forged-command-hash",
+    "file": "fixtures/prepare-forged-command-hash.json",
+    "expected": "receiver_reject",
+    "accepted": false,
+    "errorCode": "ACTION_RESPONSE_CORRELATION",
+    "pass": true
+  },
+  {
+    "name": "prepare-forged-reviewed-task",
+    "file": "fixtures/prepare-forged-reviewed-task.json",
+    "expected": "receiver_reject",
+    "accepted": false,
+    "errorCode": "ACTION_RESPONSE_CORRELATION",
+    "pass": true
+  },
+  {
+    "name": "prepare-forged-stable-lineage",
+    "file": "fixtures/prepare-forged-stable-lineage.json",
+    "expected": "receiver_reject",
+    "accepted": false,
+    "errorCode": "ACTION_RESPONSE_CORRELATION",
+    "pass": true
+  },
+  {
+    "name": "prepare-claims-approved",
+    "file": "fixtures/prepare-claims-approved.json",
+    "expected": "receiver_reject",
+    "accepted": false,
+    "errorCode": "ACTION_RESPONSE_SHAPE",
+    "pass": true
+  },
+  {
+    "name": "execute-forged-tenant-scope",
+    "file": "fixtures/execute-forged-tenant-scope.json",
+    "expected": "receiver_reject",
+    "accepted": false,
+    "errorCode": "ACTION_RESPONSE_CORRELATION",
+    "pass": true
+  },
+  {
+    "name": "execute-failed-as-observed",
+    "file": "fixtures/execute-failed-as-observed.json",
+    "expected": "receiver_reject",
+    "accepted": false,
+    "errorCode": "ACTION_RESPONSE_CORRELATION",
+    "pass": true
+  },
+  {
+    "name": "execute-error-with-success-status",
+    "file": "fixtures/execute-error-with-success-status.json",
+    "expected": "receiver_reject",
+    "accepted": false,
+    "errorCode": "ACTION_RESPONSE_SHAPE",
+    "pass": true
+  },
+  {
+    "name": "execute-refusal-wrong-status",
+    "file": "fixtures/execute-refusal-wrong-status.json",
+    "expected": "receiver_reject",
+    "accepted": false,
+    "errorCode": "ACTION_RESPONSE_STATUS",
+    "pass": true
+  },
+  {
+    "name": "draft-foreign-query-handle",
+    "file": "fixtures/draft-foreign-query-handle.json",
+    "expected": "receiver_accept_adapter_must_reject",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "prepare-foreign-supporting-draft",
+    "file": "fixtures/prepare-foreign-supporting-draft.json",
+    "expected": "receiver_accept_adapter_must_reject",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "prepare-coherent-task-substitution",
+    "file": "fixtures/prepare-coherent-task-substitution.json",
+    "expected": "receiver_accept_adapter_must_reject",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "execute-foreign-command",
+    "file": "fixtures/execute-foreign-command.json",
+    "expected": "receiver_accept_adapter_must_reject",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "execute-foreign-command-hash",
+    "file": "fixtures/execute-foreign-command-hash.json",
+    "expected": "receiver_accept_adapter_must_reject",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "execute-foreign-idempotency",
+    "file": "fixtures/execute-foreign-idempotency.json",
+    "expected": "receiver_accept_adapter_must_reject",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "execute-foreign-actor",
+    "file": "fixtures/execute-foreign-actor.json",
+    "expected": "receiver_accept_adapter_must_reject",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "execute-foreign-task-title",
+    "file": "fixtures/execute-foreign-task-title.json",
+    "expected": "receiver_accept_adapter_must_reject",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "execute-foreign-task-client",
+    "file": "fixtures/execute-foreign-task-client.json",
+    "expected": "receiver_accept_adapter_must_reject",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  },
+  {
+    "name": "execute-foreign-task-date",
+    "file": "fixtures/execute-foreign-task-date.json",
+    "expected": "receiver_accept_adapter_must_reject",
+    "accepted": true,
+    "errorCode": null,
+    "pass": true
+  }
+]

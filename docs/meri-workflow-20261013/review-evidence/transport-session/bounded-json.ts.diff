@@ -1,0 +1,70 @@
+--- initial/bounded-json.ts
++++ final/bounded-json.ts
+@@ -4,29 +4,30 @@
+   signal: AbortSignal,
+   limit: number,
+ ): Promise<string> {
+-  signal.throwIfAborted();
+-  if (
+-    !/^application\/json(?:\s*;|$)/i.test(
+-      response.headers.get("content-type") ?? "",
++  let reader: ReadableStreamDefaultReader<Uint8Array> | undefined;
++  const abort = () => {
++    void reader?.cancel().catch(() => undefined);
++  };
++  try {
++    signal.throwIfAborted();
++    if (
++      !/^application\/json(?:\s*;|$)/i.test(
++        response.headers.get("content-type") ?? "",
++      )
+     )
+-  )
+-    throw new Error("Unexpected response format");
+-  const declared = response.headers.get("content-length");
+-  if (
+-    declared !== null &&
+-    (!/^\d+$/.test(declared) || Number(declared) > limit)
+-  )
+-    throw new Error("Response exceeds the receiving limit");
+-  if (!response.body) throw new Error("Response body is unavailable");
+-  const reader = response.body.getReader();
+-  const decoder = new TextDecoder("utf-8", { fatal: true });
+-  let bytes = 0;
+-  const parts: string[] = [];
+-  const abort = () => {
+-    void reader.cancel().catch(() => undefined);
+-  };
+-  signal.addEventListener("abort", abort, { once: true });
+-  try {
++      throw new Error("Unexpected response format");
++    const declared = response.headers.get("content-length");
++    if (
++      declared !== null &&
++      (!/^\d+$/.test(declared) || Number(declared) > limit)
++    )
++      throw new Error("Response exceeds the receiving limit");
++    if (!response.body) throw new Error("Response body is unavailable");
++    reader = response.body.getReader();
++    const decoder = new TextDecoder("utf-8", { fatal: true });
++    let bytes = 0;
++    const parts: string[] = [];
++    signal.addEventListener("abort", abort, { once: true });
+     while (true) {
+       signal.throwIfAborted();
+       const chunk = await reader.read();
+@@ -41,8 +42,12 @@
+     return parts.join("");
+   } finally {
+     signal.removeEventListener("abort", abort);
+-    void reader.cancel().catch(() => undefined);
+-    reader.releaseLock();
++    if (reader) {
++      void reader.cancel().catch(() => undefined);
++      reader.releaseLock();
++    } else {
++      void response.body?.cancel().catch(() => undefined);
++    }
+   }
+ }
+ 

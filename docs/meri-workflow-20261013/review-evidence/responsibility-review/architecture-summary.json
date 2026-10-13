@@ -1,0 +1,23 @@
+{
+  "errors": [],
+  "sizeSummary": {
+    "total": 428,
+    "reviewed": 403,
+    "inheritedUnreviewed": 24,
+    "blocking": 1
+  },
+  "blockingFindings": [
+    {
+      "file": "apps/web/src/shared/shell/Sidebar.tsx",
+      "kind": "function",
+      "symbol": "Sidebar",
+      "line": 26,
+      "nonblank": 99,
+      "fingerprint": "07b3217907d1552b5289198105d10278b137ccff73bde7e64bf5e6ee4a678cc8",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true
+    }
+  ],
+  "sourceBase": "d4be41e60516e576c74afa304b50ed67da15cb93"
+}

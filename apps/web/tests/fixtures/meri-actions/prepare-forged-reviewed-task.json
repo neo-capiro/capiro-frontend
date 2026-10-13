@@ -1,0 +1,123 @@
+{
+  "name": "prepare-forged-reviewed-task",
+  "route": "prepare",
+  "httpStatus": 200,
+  "response": {
+    "status": "approval_required",
+    "draft": {
+      "status": "draft",
+      "source": {
+        "resultReference": "63ea6c68-bfbf-4d3d-ab22-08ea727b962a",
+        "resultSha256": "7b225228e4f42dae73f9f995de0be7d83bb3255b052be2ed862ac0b5b9a08480",
+        "actionId": "abcdef00-0000-4000-8000-000000000101",
+        "lookupId": "1ea7fef1-2cea-43f4-8829-fbb54465762a",
+        "actionSha256": "b2e53a17138d2f689c32064a1f6f5548047443b5e335fcbc3945dad05c3744b6",
+        "originalBinding": {
+          "tenantId": "tenant",
+          "actorId": "actor",
+          "conversationId": "00000000-0000-4000-8000-000000000001",
+          "runId": "00000000-0000-4000-8000-000000000002",
+          "attemptId": "00000000-0000-4000-8000-000000000003",
+          "workerId": "00000000-0000-4000-8000-000000000004",
+          "writerFence": 1
+        },
+        "clientId": "abcdef00-0000-4000-8000-000000000009"
+      },
+      "recommendation": {
+        "id": "abcdef00-0000-4000-8000-000000000101",
+        "districtKey": null,
+        "clientId": "abcdef00-0000-4000-8000-000000000009",
+        "clientName": "Client",
+        "peCode": null,
+        "programId": null,
+        "deltaId": null,
+        "actionType": "protect_funding",
+        "issueTitle": "Issue",
+        "whatChanged": "Changed",
+        "whyItMatters": "Matters",
+        "recommendedAction": "Recommend",
+        "targetAudience": [],
+        "suggestedArtifactType": null,
+        "deadline": null,
+        "deadlineSource": null,
+        "ownerUserId": null,
+        "priority": 1,
+        "confidence": {},
+        "uncertainty": null,
+        "evidence": [],
+        "status": "new",
+        "dismissalReason": null,
+        "outcome": null,
+        "createdAt": "2026-10-12T00:00:00.000Z",
+        "updatedAt": "2026-10-12T00:00:00.000Z",
+        "title": "Issue",
+        "body": "Recommend",
+        "recordKind": "action_recommendation",
+        "recommendation": true,
+        "acceptedAsTask": false,
+        "nativeCompletion": {
+          "completed": false,
+          "evidence": null,
+          "establishesDeliveryOrAcceptance": false,
+          "note": "Recommendation only"
+        },
+        "sourceProof": {
+          "version": 1,
+          "owner": "action_recommendation",
+          "sourceRecordId": "abcdef00-0000-4000-8000-000000000101",
+          "currentClientId": "abcdef00-0000-4000-8000-000000000009",
+          "sourceVersion": "2026-10-12T00:00:00.000Z",
+          "contentSha256": "fdea539ca1e4351e6271ab617867c40c5d9a65e59ce6dc9a5f1806f1cf81a5ea",
+          "linkedSources": []
+        }
+      },
+      "task": {
+        "title": "Review the synthetic recommendation",
+        "clientId": "abcdef00-0000-4000-8000-000000000009",
+        "dueDate": null
+      },
+      "draftSha256": "60d8a8608ab37c28bc729a29e108378ea63697e89ca8ff9a46ad655f22caf866"
+    },
+    "proposal": {
+      "proposalId": "df4793a5-4312-4b00-a6d5-7f639be0c40a",
+      "command": {
+        "contractVersion": "0.1.0",
+        "commandId": "eb1dd361-81bb-464e-b72f-6a23c53cdda5",
+        "binding": {
+          "tenantId": "tenant",
+          "actorId": "actor",
+          "conversationId": "00000000-0000-4000-8000-000000000001",
+          "runId": "00000000-0000-4000-8000-000000000002",
+          "attemptId": "00000000-0000-4000-8000-000000000003",
+          "workerId": "00000000-0000-4000-8000-000000000004",
+          "writerFence": 1
+        },
+        "action": "task.create",
+        "arguments": {
+          "title": "Forged",
+          "clientId": "abcdef00-0000-4000-8000-000000000009",
+          "dueDate": null
+        },
+        "attachments": [],
+        "scopes": [
+          {
+            "tenantId": "tenant",
+            "kind": "tenant",
+            "resourceId": "tenant",
+            "policyRevision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "idempotencyKey": "17fb193c-a6dd-4aa5-8d34-a66ad11b842d"
+      },
+      "commandSha256": "40f24b4acc3769417216995e702abe4acff33c2c03874569ffbcb52e2ea619a3",
+      "createdAt": "2026-10-12T20:00:00.129Z",
+      "expiresAt": "2026-10-12T20:00:10.000Z",
+      "requiredApprover": {
+        "tenantId": "tenant",
+        "actorId": "reviewer"
+      }
+    }
+  },
+  "expected": "receiver_reject",
+  "note": "Command cannot substitute reviewed draft task despite valid hash."
+}

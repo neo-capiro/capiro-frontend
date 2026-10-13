@@ -1,0 +1,171 @@
+[WebServer] (node:1234915) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 18 tests using 1 worker
+
+(node:1234952) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   1 test/browser/meri-action-host-lifetime.spec.ts:23:5 › Meri held query 200 cannot publish after user replacement (30.1s)
+(node:1235132) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   2 test/browser/meri-action-host-lifetime.spec.ts:23:5 › Meri held query 401 cannot publish after user replacement (30.1s)
+(node:1235311) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   3 test/browser/meri-action-host-lifetime.spec.ts:23:5 › Meri held query 200 cannot publish after session replacement (30.1s)
+(node:1235476) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   4 test/browser/meri-action-host-lifetime.spec.ts:23:5 › Meri held query 401 cannot publish after session replacement (10.8s)
+
+
+  1) test/browser/meri-action-host-lifetime.spec.ts:23:5 › Meri held query 200 cannot publish after user replacement 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: /^Select recommendation:/ })
+
+
+       at meri-action-host-fixtures.ts:199
+
+      197 |     page.getByRole("region", { name: "Returned recommendations" }),
+      198 |   ).toBeVisible();
+    > 199 |   await page.getByRole("button", { name: /^Select recommendation:/ }).click();
+          |                                                                       ^
+      200 |   await expect(page.getByLabel("Task title", { exact: true })).toHaveValue(
+      201 |     "Issue",
+      202 |   );
+        at selectAction (/workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-fixtures.ts:199:71)
+        at /workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-lifetime.spec.ts:57:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/meri-action-host-lifetime--d0b39-lish-after-user-replacement/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/meri-action-host-lifetime--d0b39-lish-after-user-replacement/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/meri-action-host-lifetime--d0b39-lish-after-user-replacement/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/meri-action-host-lifetime--d0b39-lish-after-user-replacement/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) test/browser/meri-action-host-lifetime.spec.ts:23:5 › Meri held query 401 cannot publish after user replacement 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: /^Select recommendation:/ })
+
+
+       at meri-action-host-fixtures.ts:199
+
+      197 |     page.getByRole("region", { name: "Returned recommendations" }),
+      198 |   ).toBeVisible();
+    > 199 |   await page.getByRole("button", { name: /^Select recommendation:/ }).click();
+          |                                                                       ^
+      200 |   await expect(page.getByLabel("Task title", { exact: true })).toHaveValue(
+      201 |     "Issue",
+      202 |   );
+        at selectAction (/workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-fixtures.ts:199:71)
+        at /workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-lifetime.spec.ts:57:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/meri-action-host-lifetime--15a27-lish-after-user-replacement/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/meri-action-host-lifetime--15a27-lish-after-user-replacement/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/meri-action-host-lifetime--15a27-lish-after-user-replacement/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/meri-action-host-lifetime--15a27-lish-after-user-replacement/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) test/browser/meri-action-host-lifetime.spec.ts:23:5 › Meri held query 200 cannot publish after session replacement 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: /^Select recommendation:/ })
+
+
+       at meri-action-host-fixtures.ts:199
+
+      197 |     page.getByRole("region", { name: "Returned recommendations" }),
+      198 |   ).toBeVisible();
+    > 199 |   await page.getByRole("button", { name: /^Select recommendation:/ }).click();
+          |                                                                       ^
+      200 |   await expect(page.getByLabel("Task title", { exact: true })).toHaveValue(
+      201 |     "Issue",
+      202 |   );
+        at selectAction (/workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-fixtures.ts:199:71)
+        at /workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-lifetime.spec.ts:57:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/meri-action-host-lifetime--e1f41-h-after-session-replacement/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/meri-action-host-lifetime--e1f41-h-after-session-replacement/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/meri-action-host-lifetime--e1f41-h-after-session-replacement/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/meri-action-host-lifetime--e1f41-h-after-session-replacement/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) test/browser/meri-action-host-lifetime.spec.ts:23:5 › Meri held query 401 cannot publish after session replacement 
+
+    Test was interrupted.
+
+    Error: locator.click: Test ended.
+    Call log:
+      - waiting for getByRole('button', { name: /^Select recommendation:/ })
+
+
+       at meri-action-host-fixtures.ts:199
+
+      197 |     page.getByRole("region", { name: "Returned recommendations" }),
+      198 |   ).toBeVisible();
+    > 199 |   await page.getByRole("button", { name: /^Select recommendation:/ }).click();
+          |                                                                       ^
+      200 |   await expect(page.getByLabel("Task title", { exact: true })).toHaveValue(
+      201 |     "Issue",
+      202 |   );
+        at selectAction (/workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-fixtures.ts:199:71)
+        at /workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-lifetime.spec.ts:57:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/modules-browser/meri-action-host-lifetime--f055f-h-after-session-replacement/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/modules-browser/meri-action-host-lifetime--f055f-h-after-session-replacement/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/modules-browser/meri-action-host-lifetime--f055f-h-after-session-replacement/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/modules-browser/meri-action-host-lifetime--f055f-h-after-session-replacement/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    test/browser/meri-action-host-lifetime.spec.ts:23:5 › Meri held query 200 cannot publish after user replacement 
+    test/browser/meri-action-host-lifetime.spec.ts:23:5 › Meri held query 401 cannot publish after user replacement 
+    test/browser/meri-action-host-lifetime.spec.ts:23:5 › Meri held query 200 cannot publish after session replacement 
+  1 interrupted
+    test/browser/meri-action-host-lifetime.spec.ts:23:5 › Meri held query 401 cannot publish after session replacement 
+  14 did not run
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

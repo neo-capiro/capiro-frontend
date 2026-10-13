@@ -1,0 +1,13 @@
+{
+  "name": "prepare-not_stored",
+  "route": "prepare",
+  "httpStatus": 502,
+  "response": {
+    "error": {
+      "code": "REQUEST_FAILED",
+      "outcome": "NOT_STORED"
+    }
+  },
+  "expected": "receiver_accept",
+  "note": "Keep exact disposition; no rollback, absence or retry inference."
+}

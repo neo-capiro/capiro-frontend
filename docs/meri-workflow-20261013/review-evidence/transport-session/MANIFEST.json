@@ -1,0 +1,157 @@
+{
+  "sealedUTC": "2026-10-13T05:27:43.617281+00:00",
+  "files": [
+    {
+      "path": "REPORT.md",
+      "bytes": 2640,
+      "sha256": "1405787ec4084cf96b7dcb8e4f7c6b93c4203fecc390b2e0d17d79a907905403"
+    },
+    {
+      "path": "STRUCTURE-REVIEW-PROPOSAL.json",
+      "bytes": 2070,
+      "sha256": "1da5e14b3a550cdaba9d401951d838ee5710adef40e9d77be1461b7caa90f0fd"
+    },
+    {
+      "path": "baseline-source/bounded-json.ts",
+      "bytes": 2414,
+      "sha256": "a2e7c6d6fbd145346f4535149997fa26898acd0a5b6a829ffda013bfda0f059b"
+    },
+    {
+      "path": "baseline-source/session-receipt.ts",
+      "bytes": 1127,
+      "sha256": "cfa1ae8c3a51aba7b92890eb2613b9a21b0a6ebb9802e49b967e2e61f2dfe7f0"
+    },
+    {
+      "path": "baseline-source/workflow-transport.ts",
+      "bytes": 1283,
+      "sha256": "52ac2a99c8c6b83c15016ec6c2995f126e5d1bd042d732ae4d2ab6c4987e7429"
+    },
+    {
+      "path": "bounded-json.ts.diff",
+      "bytes": 2289,
+      "sha256": "4b85a51d384d095be0827f628b67cb3549b81af781f4a7f4bd09b1302b1ba685"
+    },
+    {
+      "path": "expanded-baseline-receipt.json",
+      "bytes": 2209,
+      "sha256": "fa45599dd63461d95505bc2416ce46bf1bb26815db252ccf9e38393521eca62e"
+    },
+    {
+      "path": "expanded-baseline-results.json",
+      "bytes": 39322,
+      "sha256": "599ad6600036613c19374be90317b3330a5a981d4286ea98157645722cbbe5a2"
+    },
+    {
+      "path": "expanded-baseline-source/bounded-json.ts",
+      "bytes": 2414,
+      "sha256": "a2e7c6d6fbd145346f4535149997fa26898acd0a5b6a829ffda013bfda0f059b"
+    },
+    {
+      "path": "expanded-baseline-source/meri-action-session.test.ts",
+      "bytes": 6270,
+      "sha256": "75a28f2bc5c77bf9040a59b9716f7abd3a1dd0d8a7b0ea3e4148dac91270f323"
+    },
+    {
+      "path": "expanded-baseline-source/meri-action-transport.test.ts",
+      "bytes": 13175,
+      "sha256": "95a6ca38ec21f9b1a851b5efbfb9b33fc65c9bb1e3da70a3f2d9f584ab3641d5"
+    },
+    {
+      "path": "expanded-baseline-source/session-receipt.ts",
+      "bytes": 1127,
+      "sha256": "cfa1ae8c3a51aba7b92890eb2613b9a21b0a6ebb9802e49b967e2e61f2dfe7f0"
+    },
+    {
+      "path": "expanded-baseline-source/workflow-transport.ts",
+      "bytes": 1397,
+      "sha256": "2acc8f6290e87a0e8c1f7cfe3d6ae0876d7b28883d9f1971de5f2a55bd32ce95"
+    },
+    {
+      "path": "expanded-baseline.log",
+      "bytes": 22190,
+      "sha256": "a6a2cab34a768edacc207fcdc5b5c388541d742a282d19d952910803c1e1962c"
+    },
+    {
+      "path": "final-receipt.json",
+      "bytes": 1720,
+      "sha256": "fa67d5b9aa0c4d5da406e9de4e1ac55e384b94cc7db914ab363b21847bbb84e1"
+    },
+    {
+      "path": "final-results.json",
+      "bytes": 29034,
+      "sha256": "40983842b3f373a98b57fd0218fb5a0bc08f387d01649fe9046ab90c35bf77f7"
+    },
+    {
+      "path": "final-source/bounded-json.ts",
+      "bytes": 2614,
+      "sha256": "d8f46bc08078d4a4858e7eca5a3f0fab34065275f8268948e30babb869afe145"
+    },
+    {
+      "path": "final-source/meri-action-session.test.ts",
+      "bytes": 6270,
+      "sha256": "75a28f2bc5c77bf9040a59b9716f7abd3a1dd0d8a7b0ea3e4148dac91270f323"
+    },
+    {
+      "path": "final-source/meri-action-transport.test.ts",
+      "bytes": 13175,
+      "sha256": "95a6ca38ec21f9b1a851b5efbfb9b33fc65c9bb1e3da70a3f2d9f584ab3641d5"
+    },
+    {
+      "path": "final-source/session-receipt.ts",
+      "bytes": 1355,
+      "sha256": "46d7ddd12325d7bc305583397aba249cfc4ec8022e278eed2e3933672af10b76"
+    },
+    {
+      "path": "final-source/workflow-transport.ts",
+      "bytes": 1582,
+      "sha256": "9ea646f2fad49a59c75718d1df31ebba6b72f8ada3a168095cd5c41b082101ba"
+    },
+    {
+      "path": "final.log",
+      "bytes": 12917,
+      "sha256": "6a4b64fcee299b09786c5dc36626b3a06505fd12916820ab4f860a2bd46b69a4"
+    },
+    {
+      "path": "initial-receipt.json",
+      "bytes": 1112,
+      "sha256": "60f4c42209caca514fcfd6b369fd635b13bc6fd4d55350390d3587855d3ad1b6"
+    },
+    {
+      "path": "initial-results.json",
+      "bytes": 32622,
+      "sha256": "da8cf0825120189ed46b2013a7d078acde0ec9452413153c02e54b4d0e6bff0a"
+    },
+    {
+      "path": "initial.log",
+      "bytes": 22488,
+      "sha256": "3349a066bb1204af381b8554c93b8edba86d911f3dfbba65ac728f959ce885d2"
+    },
+    {
+      "path": "owned-eslint-app-cwd.log",
+      "bytes": 208,
+      "sha256": "76162e465989f3f070a9de8db711fbf358e53b74d09ce1bbdb57c727e4c4a16d"
+    },
+    {
+      "path": "owned-eslint.log",
+      "bytes": 710,
+      "sha256": "98b91116e0fbbbe60acbe970b4b23a361ec6cc6be97b426ab1cea872c82ddde2"
+    },
+    {
+      "path": "session-receipt.ts.diff",
+      "bytes": 1327,
+      "sha256": "4cbc94714ff93a11345c3efd747ec2f35c24e15852ea420855ea86e8406a1a1a"
+    },
+    {
+      "path": "test-source-scan.json",
+      "bytes": 1936,
+      "sha256": "03c4e90167900f45948c01208f7f9e232326544582fbe76afe8241680bd1340f"
+    },
+    {
+      "path": "workflow-transport.ts.diff",
+      "bytes": 1007,
+      "sha256": "6535b04b17762e54ce7b1062e7595bf18fcb8df5a3f13f768cd3f8ae67428a0d"
+    }
+  ],
+  "fileCount": 30,
+  "totalBytes": 230004
+}

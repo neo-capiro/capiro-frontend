@@ -1,0 +1,63 @@
+[
+  {
+    "file": "apps/web/test/browser/meri-action-host-fixtures.ts",
+    "beforeSha256": "eb66feeb23d9844913fa412050548ad6803f6fb33de053483508a70ad7ca7fb4",
+    "afterSha256": "2e3461d3ba91b717d6300dce35dc82ec8f34b848fc266192d1d28ca640e413e7",
+    "syntax": [],
+    "imports": [
+      {
+        "specifier": "node:fs",
+        "line": 1
+      },
+      {
+        "specifier": "@playwright/test",
+        "line": 2
+      },
+      {
+        "specifier": "./fixtures",
+        "line": 3
+      },
+      {
+        "specifier": "./next-modules-fixtures",
+        "line": 4
+      }
+    ],
+    "anyLines": [],
+    "remoteOriginLines": [],
+    "sizeFindings": [
+      {
+        "file": "apps/web/test/browser/meri-action-host-fixtures.ts",
+        "kind": "function",
+        "symbol": "actionHostFixture",
+        "line": 72,
+        "nonblank": 109,
+        "fingerprint": "7d28494cb3df0ad4073181f1aaf304d9a34844cf7c91a09872c4cafb1dae3c1b"
+      }
+    ],
+    "nonblank": 239,
+    "onlySelectorAstChanged": true,
+    "comparison": "AST node kinds, identifiers, literal values and child order; SourceFile text/positions excluded; before contains only the one specified regex replacement"
+  },
+  {
+    "file": "apps/web/test/browser/meri-action-host-workflow.spec.ts",
+    "beforeSha256": "1045f25a60333640afa081942e82edcbc3c8aaf975e41cbc271ce32bbfd8b9cb",
+    "afterSha256": "5f8314c371b2b0bc88406a11d3be203d863ec6610fced75ed02c9e02005a279f",
+    "syntax": [],
+    "imports": [
+      {
+        "specifier": "@playwright/test",
+        "line": 1
+      },
+      {
+        "specifier": "./meri-action-host-fixtures",
+        "line": 2
+      }
+    ],
+    "anyLines": [],
+    "remoteOriginLines": [],
+    "sizeFindings": [],
+    "nonblank": 241,
+    "onlySelectorAstChanged": true,
+    "comparison": "AST node kinds, identifiers, literal values and child order; SourceFile text/positions excluded; before contains only the one specified regex replacement"
+  }
+]

@@ -1621,5 +1621,149 @@
     "reason": "The 320-line function still composes one current collection/action lifetime. New FileToolbar and FolderCards isolate provenance/folder presentation, while existing upload/access/move/delete/preview owners retain requests, receipt admission, unknown recovery and current reader/actor/client guards. Reader-scoped filters do not become native ACLs; no new transport/provider orchestration was added. A further arbitrary JSX split is not required for this bounded change.",
     "reviewedBy": "Codex shared frontend integration review with independent modules_settings_review",
     "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/shared/shell/Sidebar.tsx",
+    "kind": "function",
+    "symbol": "Sidebar",
+    "fingerprint": "22cf76c814093443ce018ecda746a0134ad7effb60adcff0d7513c8c52a9c074",
+    "reason": "Sidebar is one bounded navigation presentation component: adopted controls for scoped Conversations/action destinations, current-page semantics, labelled disconnected items and local New conversation reset. The new action link and scoped Conversations handler extend that same navigation responsibility; they neither invoke action APIs nor establish client/run/approval authority. Destination data and shared URL helpers already have canonical owners. At112 nonblank function lines, splitting the JSX solely for length would obscure the relationship between active-route state and links without removing an independent reason to change.",
+    "reviewedBy": "calendar_relationships_review (independent responsibility review)",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-action-transport.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #3",
+    "fingerprint": "d32ed4825ac4ec996bbd53eed1e20afcd4e2c955e83b79708c89ccc80af3d67a",
+    "reason": "One byte-stream contract suite: Content-Length preflight, measured-byte overflow, split UTF-8, fatal decoding, format/body refusal and cancellation ownership are tested via observable real ReadableStream behavior. No application or unrelated subsystems are mocked.",
+    "reviewedBy": "calendar_relationships_review (independent responsibility review)",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-action-transport.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #5",
+    "fingerprint": "4d0eb5078e7c3b1b5e1fbe056f1157b34f5121ef823c0ac0b8c738d072f9fd14",
+    "reason": "One fixed transport contract suite: literal action URLs and exact request capture, bearer/credentials/cache/redirect policy, real public receiving, no retry and caller/lifetime/deadline disposal. Intercepted fetch is the sole effect boundary; assertions do not mirror production correlation logic.",
+    "reviewedBy": "calendar_relationships_review (independent responsibility review)",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-action-session.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #2",
+    "fingerprint": "b8ac4e07f4a79b20459e0939db7675599fc01fff4fa5dc40652a4432ebc8b899",
+    "reason": "One canonical minimal receipt suite: detached frozen output, strict allowed/missing fields, opaque credential grammar and exact expiry/clock boundaries. It exercises validation outcomes, not network/bootstrap authority, and deliberately preserves native actor namespace without Clerk inference.",
+    "reviewedBy": "calendar_relationships_review (independent responsibility review)",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-action-proxy.test.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "9ce12481d47b2d9e8d6c76b2321e1cff30ed63167273bf91494238468924f89c",
+    "reason": "One cohesive five-route server proxy contract fixture: configuration/admission, native versus opaque credential forwarding, bounded response handling and request disposal. Tiny request/deferred helpers are shared by these cases. Splitting would duplicate one transport fixture; no unrelated feature/provider mock or production algorithm is reproduced.",
+    "reviewedBy": "calendar_relationships_review (independent responsibility review)",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-action-proxy.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #2",
+    "fingerprint": "b9af5b36f5f757188b08bf5d8545fb92e2c79e963026f03e97c6ffe432954652",
+    "reason": "Describe declaration group for off-default configuration and literal POST/path/origin/encoding admission. Independent examples require no-auth/no-fetch refusals.",
+    "reviewedBy": "calendar_relationships_review (independent responsibility review)",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-action-proxy.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #3",
+    "fingerprint": "a7c580f4e30ba47547daad81f30ec27ef4fbc4361c1b2dec74623bc900d246f0",
+    "reason": "Describe declaration group for bearer separation, header isolation, preserved outcomes, malformed/oversized bodies and response release, all on the same proxy boundary.",
+    "reviewedBy": "calendar_relationships_review (independent responsibility review)",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-action-proxy.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #4",
+    "fingerprint": "fdfb1367fc9055cca78fb45c9e405981812fd6dbdb71fdc2dc46b4451cda5ae2",
+    "reason": "Describe declaration group for request lifetime: pre-abort, parked token, dispatched cancellation and stalled body deadline. Deterministic deferred barriers and fake time; no sleeps/retries.",
+    "reviewedBy": "calendar_relationships_review (independent responsibility review)",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-action-bootstrap.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #2",
+    "fingerprint": "eb3d9373979c7046c089b6ce501e64b5dd01528853b56e19dda6196f78fde8a3",
+    "reason": "Describe declaration group for same-origin bootstrap intent, optional strict hints, immutable server receipt and captured client/conversation/run correlation. Fixtures describe the published minimal receipt, not a second validator.",
+    "reviewedBy": "calendar_relationships_review (independent responsibility review)",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-action-bootstrap.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #3",
+    "fingerprint": "7629ac2f7de3ccefce7ecbc8521a9c0138c8a7730e42852530ddac16fb114d92",
+    "reason": "Describe declaration group for receipt grammar/expiry, separate non200 session errors, UTF-8 streaming and body limits. Cases assert independent observable admission outcomes.",
+    "reviewedBy": "calendar_relationships_review (independent responsibility review)",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-action-bootstrap.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #4",
+    "fingerprint": "b561f986fec284fc08df17ae2e72825302f53ec6c80a72cab6dc02279b3f3b03",
+    "reason": "Describe declaration group for response cleanup, disposed lifetime, late receipt and fetch/body deadlines; directly observes stream cancellation and dispatch count.",
+    "reviewedBy": "calendar_relationships_review (independent responsibility review)",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-action-host.test.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "d7bafed4534a517be52283da13c04729a6077ead75d93295533a6908e5a40e9e",
+    "reason": "One host-lifetime contract test module shares a small synthetic session/fetch harness and real QueryClient to exercise explicit connect, idle expiry, suspension/revocation and cache-generation ownership. These are the states of one ActionHostController plus its injected journal, not separate feature domains. Splitting at431 nonblank lines would duplicate the same authority/observation fixtures; all executable test cases and helpers remain below80 lines.",
+    "reviewedBy": "calendar_relationships_review (independent responsibility review)",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-action-host.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #2",
+    "fingerprint": "a89696e9273318e726b9417578b7f4a6b3d03b39ab4f3c1fcef03f367b6d9239",
+    "reason": "The describe declaration groups explicit connection-lifetime examples: no automatic connection, exact hints, duplicate prevention, late bootstrap disposal, StrictMode remount, idle expiry and native refusal. Each example independently observes host snapshots, request counts or timers; the group is not an oversized executable handler and contains no policy/provider implementation.",
+    "reviewedBy": "calendar_relationships_review (independent responsibility review)",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-action-host.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #4",
+    "fingerprint": "dd71c65c2a5c8dcb3d38e150e93f2b6e9e8a9c3194d3fa9ef28d36e99f109c79",
+    "reason": "The describe declaration groups the journal boundary of the same host: exact authority-key isolation, uncertain-state remount retention, absence of credentials/wires in cache, and old-generation write exclusion after canonical clearing. It uses the real QueryClient and adapter fixtures; assertions test retained or forbidden effects rather than reimplementing the journal algorithm.",
+    "reviewedBy": "calendar_relationships_review (independent responsibility review)",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/test/browser/meri-action-host-fixtures.ts",
+    "kind": "function",
+    "symbol": "actionHostFixture",
+    "fingerprint": "7d28494cb3df0ad4073181f1aaf304d9a34844cf7c91a09872c4cafb1dae3c1b",
+    "reviewedBy": "calendar_relationships_review (independent responsibility review)",
+    "reviewedOn": "2026-10-13",
+    "reason": "One synthetic HTTP scope for the actual mounted action host: controlled historical clock, remote/unconfigured-request detection, canonical Core/Capiro defaults, action response queue, request/header ledger and exact entered/released/completed request barriers. Queue, ledger and barriers are coupled evidence of dispatch and lifetime behavior; they are not application orchestration, a duplicate receiver, an authorization implementation or unrelated mocks. The109-line function reuses existing operationFixtures/onlyLocalRequests and reads unchanged public fixture JSON. Separating this fixture merely to cross80 lines would make the observed request and its release barrier harder to verify."
+  },
+  {
+    "file": "apps/web/test/browser/meri-action-host-navigation.spec.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "f1193210490b7e9500d09a8bf7733471b7424749155908cbe26194c031204832",
+    "reviewedBy": "calendar_relationships_review (independent responsibility review)",
+    "reviewedOn": "2026-10-13",
+    "reason": "One86-line real-browser scenario callback verifies the same uncertain preparation invariant across ordered Modules navigation, Back, deliberate reconnect, late completion, Forward/Back and a second reconnect. Parameterizing acknowledged-unknown and still-in-flight states preserves that single invariant without reconstructing durable state. URL/private-view assertions and exact query/draft/prepare/execute counts are adjacent to their transitions; fixture helpers own setup and real request completion barriers. Keeping this causal sequence together preserves test meaning better than splitting it into independently reset tests."
   }
 ]

@@ -1,0 +1,145 @@
+{
+  "tenantId": "tenant",
+  "actorId": "actor",
+  "conversationId": "00000000-0000-4000-8000-000000000001",
+  "runId": "00000000-0000-4000-8000-000000000002",
+  "clientId": "abcdef00-0000-4000-8000-000000000009",
+  "originalBinding": {
+    "tenantId": "tenant",
+    "actorId": "actor",
+    "conversationId": "00000000-0000-4000-8000-000000000001",
+    "runId": "00000000-0000-4000-8000-000000000002",
+    "attemptId": "00000000-0000-4000-8000-000000000003",
+    "workerId": "00000000-0000-4000-8000-000000000004",
+    "writerFence": 1
+  },
+  "currentRecoveredBinding": {
+    "tenantId": "tenant",
+    "actorId": "actor",
+    "conversationId": "00000000-0000-4000-8000-000000000001",
+    "runId": "00000000-0000-4000-8000-000000000002",
+    "attemptId": "00000000-0000-4000-8000-000000000990",
+    "workerId": "00000000-0000-4000-8000-000000000991",
+    "writerFence": 2
+  },
+  "syntheticNow": "2026-10-12T20:00:00.150Z",
+  "proposalCreatedAt": "2026-10-12T20:00:00.129Z",
+  "proposalExpiresAt": "2026-10-12T20:00:10.000Z",
+  "selection": {
+    "resultReference": "63ea6c68-bfbf-4d3d-ab22-08ea727b962a",
+    "resultSha256": "7b225228e4f42dae73f9f995de0be7d83bb3255b052be2ed862ac0b5b9a08480",
+    "actionId": "abcdef00-0000-4000-8000-000000000101"
+  },
+  "task": {
+    "title": "Review the synthetic recommendation",
+    "clientId": "abcdef00-0000-4000-8000-000000000009",
+    "dueDate": null
+  },
+  "proposal": {
+    "proposalId": "df4793a5-4312-4b00-a6d5-7f639be0c40a",
+    "command": {
+      "contractVersion": "0.1.0",
+      "commandId": "eb1dd361-81bb-464e-b72f-6a23c53cdda5",
+      "binding": {
+        "tenantId": "tenant",
+        "actorId": "actor",
+        "conversationId": "00000000-0000-4000-8000-000000000001",
+        "runId": "00000000-0000-4000-8000-000000000002",
+        "attemptId": "00000000-0000-4000-8000-000000000003",
+        "workerId": "00000000-0000-4000-8000-000000000004",
+        "writerFence": 1
+      },
+      "action": "task.create",
+      "arguments": {
+        "title": "Review the synthetic recommendation",
+        "clientId": "abcdef00-0000-4000-8000-000000000009",
+        "dueDate": null
+      },
+      "attachments": [],
+      "scopes": [
+        {
+          "tenantId": "tenant",
+          "kind": "tenant",
+          "resourceId": "tenant",
+          "policyRevision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ],
+      "idempotencyKey": "17fb193c-a6dd-4aa5-8d34-a66ad11b842d"
+    },
+    "commandSha256": "2352fb7c9558b59ce7271bc58c38c4208fe19a198a72b9322532fcc87dbf23f8",
+    "createdAt": "2026-10-12T20:00:00.129Z",
+    "expiresAt": "2026-10-12T20:00:10.000Z",
+    "requiredApprover": {
+      "tenantId": "tenant",
+      "actorId": "reviewer"
+    }
+  },
+  "nativeHashes": {
+    "canonicalResultSha256": "7b225228e4f42dae73f9f995de0be7d83bb3255b052be2ed862ac0b5b9a08480",
+    "nativeSourceContentSha256": "fdea539ca1e4351e6271ab617867c40c5d9a65e59ce6dc9a5f1806f1cf81a5ea",
+    "recommendationSha256": "b2e53a17138d2f689c32064a1f6f5548047443b5e335fcbc3945dad05c3744b6",
+    "draftSha256": "60d8a8608ab37c28bc729a29e108378ea63697e89ca8ff9a46ad655f22caf866",
+    "commandSha256": "2352fb7c9558b59ce7271bc58c38c4208fe19a198a72b9322532fcc87dbf23f8",
+    "recoveredCommandSha256": "51e6f408b001bc4a338c2ce39adf75ecf2483a02e2e36bab38eac9ad258e33d2"
+  },
+  "coverage": {
+    "sourcesRequested": [
+      "action_items_complete"
+    ],
+    "sourcesChecked": [
+      "action_items_complete"
+    ],
+    "sourcesUnavailable": [],
+    "enumeration": "unknown",
+    "enumerableTotal": null,
+    "returnedCount": 1,
+    "truncated": false,
+    "historySupport": "unsupported",
+    "limitations": [
+      "Native coverage is a source assertion; no qualified freshness, snapshot or exhaustive absence.",
+      "Receipt lineage does not authenticate native cursor contents or establish current source truth."
+    ]
+  },
+  "sources": [
+    {
+      "sourceId": "action_items_complete",
+      "authority": "derived",
+      "snapshotVersionId": null,
+      "adapterVersion": "0.2.0",
+      "status": "partial",
+      "synchronizedAt": null,
+      "asOf": null,
+      "retrievedAt": "2026-10-12T20:00:00.059Z",
+      "freshness": "unknown"
+    }
+  ],
+  "pageCoverage": {
+    "sourceStatus": "healthy",
+    "sourceReason": null,
+    "complete": true,
+    "partial": false,
+    "paginationComplete": true,
+    "hasMore": false,
+    "nextCursor": null,
+    "totalIsExactForScope": true,
+    "absenceSupported": false,
+    "note": "Structural page assertion only"
+  },
+  "continuation": {
+    "cursor": null,
+    "requiredReads": [],
+    "remainingSources": []
+  },
+  "evidenceReady": false,
+  "negativeAssertion": {
+    "kind": "none"
+  },
+  "notes": [
+    "Synthetic correlations only; no native source truth, approval or task effect established by receiver execution.",
+    "Outer observation argumentsSha256 and inner native-read argumentsSha256 intentionally differ.",
+    "Healthy complete exact-for-scope page and hasMore:false coexist with unknown enumeration/freshness, partial source, unsupported history, absenceSupported:false and evidenceReady:false.",
+    "Keep first-page coverage and continuation visible; do not translate this fixture into all sources complete.",
+    "Forged structural selection/draft/proposal objects and cloned/cross-adapter handles must be rejected by private adapter identity, before transport. No JSON fixture alone proves opaque-handle admission.",
+    "A structurally valid response must still be rejected if current host tenant/actor/conversation/run/client differs or lifetime was replaced/aborted after asynchronous receiving."
+  ]
+}

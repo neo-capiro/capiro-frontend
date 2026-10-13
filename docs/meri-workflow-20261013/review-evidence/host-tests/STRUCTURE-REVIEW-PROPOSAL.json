@@ -1,0 +1,37 @@
+{
+  "scope": "Author rationale only; no size guard, review registry or production edits",
+  "findings": [
+    {
+      "file": "apps/web/tests/meri-action-host.test.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 431,
+      "fingerprint": "d7bafed4534a517be52283da13c04729a6077ead75d93295533a6908e5a40e9e",
+      "reviewedBy": "core_intake_review (test author; root independent review required)",
+      "reason": "One pure host-lifetime suite (19 controls) using the real governed workflow, public synthetic receiving fixtures and real QueryClient. Shared setup owns only synthetic fetch/clock and deterministic cleanup. Three describe groups separate explicit connection, temporary availability/revocation and navigation journal scope. No production services or second authority implementation are introduced; retaining these related ownership controls together makes their shared lifecycle and regression evidence reviewable."
+    },
+    {
+      "file": "apps/web/tests/meri-action-host.test.ts",
+      "kind": "function",
+      "symbol": "<anonymous> #2",
+      "line": 93,
+      "nonblank": 142,
+      "fingerprint": "a89696e9273318e726b9417578b7f4a6b3d03b39ab4f3c1fcef03f367b6d9239",
+      "reviewedBy": "core_intake_review (test author; root independent review required)",
+      "reason": "One explicit connection-lifetime group: construction inactivity, captured hints, mismatched receipt refusal, late bootstrap disposal, StrictMode replay, idle expiry and validated access loss. Each case asserts observable dispatch/snapshot/signal effects; the group has no monolithic production control flow."
+    },
+    {
+      "file": "apps/web/tests/meri-action-host.test.ts",
+      "kind": "function",
+      "symbol": "<anonymous> #4",
+      "line": 317,
+      "nonblank": 119,
+      "fingerprint": "dd71c65c2a5c8dcb3d38e150e93f2b6e9e8a9c3194d3fa9ef28d36e99f109c79",
+      "reviewedBy": "core_intake_review (test author; root independent review required)",
+      "reason": "One QueryClient journal ownership group: canonical-clear generation safety, same-context navigation, replacement-client identity, every context dimension and late-settlement non-repopulation. Cache state is asserted directly without duplicating key construction or journal implementation."
+    }
+  ],
+  "anyLines": [],
+  "remoteOriginLines": []
+}
