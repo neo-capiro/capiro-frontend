@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useId } from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@capiro/ui/tooltip";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
@@ -143,6 +144,7 @@ export function ModuleHub() {
 }
 
 function ModuleHubInformation() {
+  const descriptionId = useId();
   return (
     <Tooltip>
       <TooltipTrigger asChild>
