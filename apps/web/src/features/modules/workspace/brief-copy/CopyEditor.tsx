@@ -28,13 +28,16 @@ export function CopyEditor({
         Independent Workspace copy · Core version {source.versionNumber}. Core
         remains unchanged.
       </p>
-      <p>
-        Prospect {source.prospectId} · Core brief {source.briefId} · original
-        version {source.versionId}
-      </p>
-      <p>
-        Workspace draft {detail.draftId} · tab {detail.document.id}
-      </p>
+      <details>
+        <summary>Source and destination identifiers</summary>
+        <p>
+          Prospect {source.prospectId} · Core brief {source.briefId} · original
+          version {source.versionId}
+        </p>
+        <p>
+          Workspace draft {detail.draftId} · tab {detail.document.id}
+        </p>
+      </details>
       <CopyHistory draftId={detail.draftId} />
       <Field label="Copied tab name" htmlFor="workspace-copy-name">
         <TextInput
@@ -95,9 +98,8 @@ export function CopyEditor({
         </pre>
       </details>
       <p>
-        Edits and history use the atomic copied-tab save. Legacy tab update,
-        removal and whole-draft version restore are unavailable for this bound
-        copy.
+        Saving updates this copy and adds a version to Workspace history. You
+        cannot restore the whole draft while it contains a Core brief copy.
       </p>
     </section>
   );
