@@ -1464,10 +1464,10 @@
     "file": "apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx",
     "kind": "function",
     "symbol": "RichMailEditor",
-    "fingerprint": "5d677184fdfad38853a16f9a178d24c4c93af24c868af676e66d946b58b2e255",
-    "reason": "Owns a single controlled Tiptap editor and its inert body preview. Editor schema, formatting controls, safe paste, selection preservation and externally supplied draft synchronization are one local presentation responsibility. Attach invokes the existing picker through a callback; no upload, provider, state persistence or authority implementation is introduced. External rewrite/guarded-Undo replacements start a new editor history, while local typing and formatting retain native Undo. This prevents the native keyboard history from bypassing guarded Meri Undo lifetime checks.",
-    "reviewedBy": "Codex shared frontend integration review",
-    "reviewedOn": "2026-10-12"
+    "fingerprint": "40af6fabef2fcab149455aa2ef6b3bec6189b8fe19ac363a30cd688adca4bbf3",
+    "reason": "Owns one controlled Tiptap mail editor: supported schema, safe paste, formatting controls and external-rewrite/guarded-Undo synchronization remain one local presentation responsibility. The only new integration delegates public handleKeyPress selection reconciliation to the cohesive 35-line rich-mail-selection helper; that helper reconciles a focused collapsed native text caret only when the current model still has AllSelection, without changing document content, history or event consumption. Existing source-key lifetime, body ownership, authority, transport, attachment and provider responsibilities remain outside. Independently reviewed exact 125-line function against the controlled three-run text-loss baseline and v2 original/delayed/intentional-replacement controls; see docs/shipping-browser-correction-20261013/IMPLEMENTATION.md and the independent correction review packet. The size signal is accepted for this cohesive editor responsibility, not waived.",
+    "reviewedBy": "Codex independent Modules reviewer",
+    "reviewedOn": "2026-10-13"
   },
   {
     "file": "apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts",

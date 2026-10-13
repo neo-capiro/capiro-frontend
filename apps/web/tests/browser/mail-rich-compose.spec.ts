@@ -1,5 +1,6 @@
 import { test, expect, type Page } from "@playwright/test";
 import { sendingMailbox, sendingReceipt } from "./fixtures";
+import { delayMailSelectionObservation } from "./rich-mail-selection-fixture";
 
 async function setup(page: Page) {
   const state = {
@@ -369,26 +370,64 @@ test("toolbar Attach file opens the existing attachment picker with no extra req
   await page.screenshot({ path: test.info().outputPath("desktop-rich.png") });
 });
 
-test("ordinary formatting and typing keep native Undo after a verified rewrite", async ({
-  page,
-}) => {
-  const state = await setup(page);
-  await format(page, "Bold");
-  await page
-    .getByRole("button", { name: "Rewrite with Meri", exact: true })
-    .click();
-  await expect(message(page)).toHaveText("Verified rewrite.");
-  await message(page).press("ControlOrMeta+a");
-  await message(page).press("ControlOrMeta+b");
-  await expect(message(page).locator("strong")).toHaveText("Verified rewrite.");
-  await message(page).press("ControlOrMeta+z");
-  await expect(message(page).locator("strong")).toHaveCount(0);
-  await expect(message(page)).toHaveText("Verified rewrite.");
-  await message(page).press("End");
-  await message(page).pressSequentially(" Added locally.");
-  await expect(message(page)).toHaveText("Verified rewrite. Added locally.");
-  await message(page).press("ControlOrMeta+z");
-  await expect(message(page)).toHaveText("Verified rewrite.");
-  expect(state.rewrites).toHaveLength(1);
-  expect(state.sends).toHaveLength(0);
-});
+for (const delayed of [false, true]) {
+  test(`ordinary formatting and typing keep native Undo after a verified rewrite${delayed ? " with delayed selection observation" : ""}`, async ({
+    page,
+  }) => {
+    if (delayed) await delayMailSelectionObservation(page);
+    const state = await setup(page);
+    await format(page, "Bold");
+    await page
+      .getByRole("button", { name: "Rewrite with Meri", exact: true })
+      .click();
+    await expect(message(page)).toHaveText("Verified rewrite.");
+    await message(page).press("ControlOrMeta+a");
+    await message(page).press("ControlOrMeta+b");
+    await expect(message(page).locator("strong")).toHaveText(
+      "Verified rewrite.",
+    );
+    await message(page).press("ControlOrMeta+z");
+    await expect(message(page).locator("strong")).toHaveCount(0);
+    await expect(message(page)).toHaveText("Verified rewrite.");
+    await message(page).press("End");
+    await message(page).pressSequentially(" Added locally.");
+    await expect(message(page)).toHaveText("Verified rewrite. Added locally.");
+    await message(page).press("ControlOrMeta+z");
+    await expect(message(page)).toHaveText("Verified rewrite.");
+    if (delayed)
+      await expect(page.locator("html")).toHaveAttribute(
+        "data-delayed-mail-selection",
+        "observed",
+      );
+    expect(state.rewrites).toHaveLength(1);
+    expect(state.sends).toHaveLength(0);
+  });
+}
+
+for (const selection of ["all", "partial"] as const) {
+  test(`intentional ${selection} selection still replaces text and supports Undo`, async ({
+    page,
+  }) => {
+    const state = await setup(page);
+    await format(page, "Bold");
+    await page
+      .getByRole("button", { name: "Rewrite with Meri", exact: true })
+      .click();
+    await expect(message(page)).toHaveText("Verified rewrite.");
+    if (selection === "all") await message(page).press("ControlOrMeta+a");
+    else {
+      await message(page).press("End");
+      for (let index = 0; index < 8; index++)
+        await message(page).press("Shift+ArrowLeft");
+    }
+    await message(page).pressSequentially("replacement");
+    await expect(message(page)).toHaveText(
+      selection === "all" ? "replacement" : "Verified replacement",
+    );
+    await message(page).press("ControlOrMeta+z");
+    await expect(message(page)).toHaveText("Verified rewrite.");
+    expect(state.rewrites).toHaveLength(1);
+    expect(state.sends).toHaveLength(0);
+    expect(state.unexpected).toEqual([]);
+  });
+}
