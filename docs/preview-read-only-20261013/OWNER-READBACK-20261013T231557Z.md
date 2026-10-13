@@ -6,7 +6,9 @@ The readback closes the missing **current preview stack parameter references**. 
 
 **Authoritative correction:** Neo states there is no staging environment (`Sentinel_83d07371d09881919f4b876239579762`: “we dont have a staging enviorment”). That correction supersedes historical staging inference. The failed task-family lookup is retained only as history; the staging task/Clerk candidate and staging DescribeSecret request are withdrawn. Do not request or perform more staging reads. Any new isolated environment requires a separate explicit setup and is not a prerequisite for the original production-Clerk read-only path.
 
-## Narrow next read
+## Earlier metadata proposal — held for this code step
+
+The subsequent [definitive backend decision](BACKEND-CONTRACT-RECEIVING.md) makes the qualified preview read contract the next dependency. No further auth setup or historical staging checks are needed for this code step. The unexecuted production metadata proposal below is retained as context, not an active request.
 
 If active backend issuer verification is needed, read the current ECS service pointer for the documented **production Core** target, including active deployments and target-group references. This is not a staging lookup:
 
