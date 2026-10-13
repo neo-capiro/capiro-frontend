@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/tmp/capiro-unified-83f54f5a-final-gate-independent-review-20261013/verify.py", line 115, in <module>
+    assert arch and not arch['errors'] and len(arch['signals'])==475
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

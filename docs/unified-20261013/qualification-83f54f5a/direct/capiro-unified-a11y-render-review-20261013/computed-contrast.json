@@ -1,0 +1,7748 @@
+{
+  "method": "sRGB relative luminance from browser computed RGB; composite each solid/background-gradient endpoint through transparent ancestor backgrounds. Opaque grayscale two-stop gradients make endpoint bounds conservative over their interior. Unsupported group opacity/filter/blend is flagged rather than treated as qualified. Not screenshot antialiasing or every-state WCAG certification.",
+  "captures": [
+    {
+      "capture": "meri-1440-dark",
+      "rows": [
+        {
+          "selector": "._newConversation_sgeic_65",
+          "text": "New conversation",
+          "ariaHidden": null,
+          "fontSize": "14px",
+          "fontWeight": "500",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Draft suggestions\"]",
+          "text": "StartResearchExplore a questionStartCreate a briefTurn evidence into a documentStartAnalyze a fileFind signals in your data",
+          "ariaHidden": null,
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "footer",
+          "text": "Disconnected synthetic fixture. Jordan, Anduril, recent titles, answer, citations and approval counts are samples. No signed-in identity, authorized source data or sending is available. Drafts stay in this page only.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              248.0,
+              231.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 18.697807209310493,
+          "maximumRatio": 18.697807209310493,
+          "unsupported": []
+        },
+        {
+          "selector": "footer [role=\"note\"]",
+          "text": "Disconnected synthetic fixture. Jordan, Anduril, recent titles, answer, citations and approval counts are samples. No signed-in identity, authorized source data or sending is available. Drafts stay in this page only.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              248.0,
+              231.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 18.697807209310493,
+          "maximumRatio": 18.697807209310493,
+          "unsupported": []
+        },
+        {
+          "selector": "nav[aria-label=\"Meri sections\"] a",
+          "text": "Conversations",
+          "ariaHidden": null,
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "nav[aria-label=\"Meri sections\"] a",
+          "text": "Recommendation actions",
+          "ariaHidden": null,
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        }
+      ]
+    },
+    {
+      "capture": "meri-1440-light",
+      "rows": [
+        {
+          "selector": "._newConversation_sgeic_65",
+          "text": "New conversation",
+          "ariaHidden": null,
+          "fontSize": "14px",
+          "fontWeight": "500",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Draft suggestions\"]",
+          "text": "StartResearchExplore a questionStartCreate a briefTurn evidence into a documentStartAnalyze a fileFind signals in your data",
+          "ariaHidden": null,
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "footer",
+          "text": "Disconnected synthetic fixture. Jordan, Anduril, recent titles, answer, citations and approval counts are samples. No signed-in identity, authorized source data or sending is available. Drafts stay in this page only.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              248.0,
+              231.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 18.697807209310493,
+          "maximumRatio": 18.697807209310493,
+          "unsupported": []
+        },
+        {
+          "selector": "footer [role=\"note\"]",
+          "text": "Disconnected synthetic fixture. Jordan, Anduril, recent titles, answer, citations and approval counts are samples. No signed-in identity, authorized source data or sending is available. Drafts stay in this page only.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              248.0,
+              231.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 18.697807209310493,
+          "maximumRatio": 18.697807209310493,
+          "unsupported": []
+        },
+        {
+          "selector": "nav[aria-label=\"Meri sections\"] a",
+          "text": "Conversations",
+          "ariaHidden": null,
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "nav[aria-label=\"Meri sections\"] a",
+          "text": "Recommendation actions",
+          "ariaHidden": null,
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        }
+      ]
+    },
+    {
+      "capture": "meri-320-light",
+      "rows": [
+        {
+          "selector": "[aria-label=\"Draft suggestions\"]",
+          "text": "StartResearchExplore a questionStartCreate a briefTurn evidence into a documentStartAnalyze a fileFind signals in your data",
+          "ariaHidden": null,
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "footer",
+          "text": "Disconnected synthetic fixture. Jordan, Anduril, recent titles, answer, citations and approval counts are samples. No signed-in identity, authorized source data or sending is available. Drafts stay in this page only.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              248.0,
+              231.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 18.697807209310493,
+          "maximumRatio": 18.697807209310493,
+          "unsupported": []
+        },
+        {
+          "selector": "footer [role=\"note\"]",
+          "text": "Disconnected synthetic fixture. Jordan, Anduril, recent titles, answer, citations and approval counts are samples. No signed-in identity, authorized source data or sending is available. Drafts stay in this page only.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              248.0,
+              231.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 18.697807209310493,
+          "maximumRatio": 18.697807209310493,
+          "unsupported": []
+        },
+        {
+          "selector": "nav[aria-label=\"Meri sections\"] a",
+          "text": "Conversations",
+          "ariaHidden": null,
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "nav[aria-label=\"Meri sections\"] a",
+          "text": "Recommendation actions",
+          "ariaHidden": null,
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        }
+      ]
+    },
+    {
+      "capture": "meri-390-dark",
+      "rows": [
+        {
+          "selector": "[aria-label=\"Draft suggestions\"]",
+          "text": "StartResearchExplore a questionStartCreate a briefTurn evidence into a documentStartAnalyze a fileFind signals in your data",
+          "ariaHidden": null,
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "footer",
+          "text": "Disconnected synthetic fixture. Jordan, Anduril, recent titles, answer, citations and approval counts are samples. No signed-in identity, authorized source data or sending is available. Drafts stay in this page only.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              248.0,
+              231.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 18.697807209310493,
+          "maximumRatio": 18.697807209310493,
+          "unsupported": []
+        },
+        {
+          "selector": "footer [role=\"note\"]",
+          "text": "Disconnected synthetic fixture. Jordan, Anduril, recent titles, answer, citations and approval counts are samples. No signed-in identity, authorized source data or sending is available. Drafts stay in this page only.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              248.0,
+              231.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 18.697807209310493,
+          "maximumRatio": 18.697807209310493,
+          "unsupported": []
+        },
+        {
+          "selector": "nav[aria-label=\"Meri sections\"] a",
+          "text": "Conversations",
+          "ariaHidden": null,
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "nav[aria-label=\"Meri sections\"] a",
+          "text": "Recommendation actions",
+          "ariaHidden": null,
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        }
+      ]
+    },
+    {
+      "capture": "meri-390-light",
+      "rows": [
+        {
+          "selector": "[aria-label=\"Draft suggestions\"]",
+          "text": "StartResearchExplore a questionStartCreate a briefTurn evidence into a documentStartAnalyze a fileFind signals in your data",
+          "ariaHidden": null,
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "footer",
+          "text": "Disconnected synthetic fixture. Jordan, Anduril, recent titles, answer, citations and approval counts are samples. No signed-in identity, authorized source data or sending is available. Drafts stay in this page only.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              248.0,
+              231.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 18.697807209310493,
+          "maximumRatio": 18.697807209310493,
+          "unsupported": []
+        },
+        {
+          "selector": "footer [role=\"note\"]",
+          "text": "Disconnected synthetic fixture. Jordan, Anduril, recent titles, answer, citations and approval counts are samples. No signed-in identity, authorized source data or sending is available. Drafts stay in this page only.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              248.0,
+              231.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 18.697807209310493,
+          "maximumRatio": 18.697807209310493,
+          "unsupported": []
+        },
+        {
+          "selector": "nav[aria-label=\"Meri sections\"] a",
+          "text": "Conversations",
+          "ariaHidden": null,
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "nav[aria-label=\"Meri sections\"] a",
+          "text": "Recommendation actions",
+          "ariaHidden": null,
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        }
+      ]
+    },
+    {
+      "capture": "modules-1440-dark",
+      "rows": [
+        {
+          "selector": "span[aria-hidden=\"true\"]",
+          "text": "\u2192",
+          "ariaHidden": "true",
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              245.0,
+              245.0,
+              244.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 4.59341287788919,
+          "maximumRatio": 4.59341287788919,
+          "unsupported": []
+        },
+        {
+          "selector": "._primaryOpen_10khq_192",
+          "text": "Open Engagement",
+          "ariaHidden": null,
+          "fontSize": "14px",
+          "fontWeight": "500",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Modules",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              245.0,
+              245.0,
+              244.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 4.59341287788919,
+          "maximumRatio": 4.59341287788919,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Every client and every activity. Anyone at the firm can browse it, even without a client profile.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              245.0,
+              245.0,
+              244.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 4.59341287788919,
+          "maximumRatio": 4.59341287788919,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "The same data filtered to one client and arranged around their work, so you stay fully inside it.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              245.0,
+              245.0,
+              244.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 4.59341287788919,
+          "maximumRatio": 4.59341287788919,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Meetings, outreach, reports and the meeting library for every client.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Engagement, one client",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Hill Day packets, drafts and proposal templates.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Workspace, one client",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Tasks, projects and deadlines across the firm.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Planner, one client",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Strategy and context libraries, agent review and runs.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Objectives and Strategies",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Legislation, budgets, funding and geography, searchable across everything the platform tracks.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Intelligence and Opportunities, matched to that client",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Members, staff, committees and Department of War officials.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Relationships, the offices that client touches",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Saved collections of companies and topics.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Firm-wide only",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main h1",
+          "text": "Everything in Capiro, across the whole firm",
+          "ariaHidden": null,
+          "fontSize": "24px",
+          "fontWeight": "600",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              245.0,
+              245.0,
+              244.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 18.148101610693207,
+          "maximumRatio": 18.148101610693207,
+          "unsupported": []
+        },
+        {
+          "selector": "aside.test-notice",
+          "text": "Explicit local test fixture \u00b7 synthetic identity and records",
+          "ariaHidden": null,
+          "fontSize": "10px",
+          "fontWeight": "400",
+          "foreground": [
+            68.0,
+            64.0,
+            60.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              248.0,
+              231.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 9.701088230974875,
+          "maximumRatio": 9.701088230974875,
+          "unsupported": []
+        }
+      ]
+    },
+    {
+      "capture": "modules-1440-light",
+      "rows": [
+        {
+          "selector": "span[aria-hidden=\"true\"]",
+          "text": "\u2192",
+          "ariaHidden": "true",
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              245.0,
+              245.0,
+              244.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 4.59341287788919,
+          "maximumRatio": 4.59341287788919,
+          "unsupported": []
+        },
+        {
+          "selector": "._primaryOpen_10khq_192",
+          "text": "Open Engagement",
+          "ariaHidden": null,
+          "fontSize": "14px",
+          "fontWeight": "500",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Modules",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              245.0,
+              245.0,
+              244.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 4.59341287788919,
+          "maximumRatio": 4.59341287788919,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Every client and every activity. Anyone at the firm can browse it, even without a client profile.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              245.0,
+              245.0,
+              244.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 4.59341287788919,
+          "maximumRatio": 4.59341287788919,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "The same data filtered to one client and arranged around their work, so you stay fully inside it.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              245.0,
+              245.0,
+              244.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 4.59341287788919,
+          "maximumRatio": 4.59341287788919,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Meetings, outreach, reports and the meeting library for every client.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Engagement, one client",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Hill Day packets, drafts and proposal templates.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Workspace, one client",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Tasks, projects and deadlines across the firm.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Planner, one client",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Strategy and context libraries, agent review and runs.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Objectives and Strategies",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Legislation, budgets, funding and geography, searchable across everything the platform tracks.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Intelligence and Opportunities, matched to that client",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Members, staff, committees and Department of War officials.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Relationships, the offices that client touches",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Saved collections of companies and topics.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Firm-wide only",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main h1",
+          "text": "Everything in Capiro, across the whole firm",
+          "ariaHidden": null,
+          "fontSize": "24px",
+          "fontWeight": "600",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              245.0,
+              245.0,
+              244.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 18.148101610693207,
+          "maximumRatio": 18.148101610693207,
+          "unsupported": []
+        },
+        {
+          "selector": "aside.test-notice",
+          "text": "Explicit local test fixture \u00b7 synthetic identity and records",
+          "ariaHidden": null,
+          "fontSize": "10px",
+          "fontWeight": "400",
+          "foreground": [
+            68.0,
+            64.0,
+            60.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              248.0,
+              231.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 9.701088230974875,
+          "maximumRatio": 9.701088230974875,
+          "unsupported": []
+        }
+      ]
+    },
+    {
+      "capture": "modules-320-light",
+      "rows": [
+        {
+          "selector": "._primaryOpen_10khq_192",
+          "text": "Open Engagement",
+          "ariaHidden": null,
+          "fontSize": "14px",
+          "fontWeight": "500",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Modules",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              245.0,
+              245.0,
+              244.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 4.59341287788919,
+          "maximumRatio": 4.59341287788919,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Every client and every activity. Anyone at the firm can browse it, even without a client profile.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              245.0,
+              245.0,
+              244.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 4.59341287788919,
+          "maximumRatio": 4.59341287788919,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "The same data filtered to one client and arranged around their work, so you stay fully inside it.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              245.0,
+              245.0,
+              244.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 4.59341287788919,
+          "maximumRatio": 4.59341287788919,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Meetings, outreach, reports and the meeting library for every client.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Engagement, one client",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Hill Day packets, drafts and proposal templates.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Workspace, one client",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Tasks, projects and deadlines across the firm.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Planner, one client",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Strategy and context libraries, agent review and runs.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Objectives and Strategies",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Legislation, budgets, funding and geography, searchable across everything the platform tracks.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Intelligence and Opportunities, matched to that client",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Members, staff, committees and Department of War officials.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Relationships, the offices that client touches",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Saved collections of companies and topics.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Firm-wide only",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main h1",
+          "text": "Everything in Capiro, across the whole firm",
+          "ariaHidden": null,
+          "fontSize": "24px",
+          "fontWeight": "600",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              245.0,
+              245.0,
+              244.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 18.148101610693207,
+          "maximumRatio": 18.148101610693207,
+          "unsupported": []
+        },
+        {
+          "selector": "aside.test-notice",
+          "text": "Explicit local test fixture \u00b7 synthetic identity and records",
+          "ariaHidden": null,
+          "fontSize": "10px",
+          "fontWeight": "400",
+          "foreground": [
+            68.0,
+            64.0,
+            60.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              248.0,
+              231.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 9.701088230974875,
+          "maximumRatio": 9.701088230974875,
+          "unsupported": []
+        }
+      ]
+    },
+    {
+      "capture": "modules-390-dark",
+      "rows": [
+        {
+          "selector": "._primaryOpen_10khq_192",
+          "text": "Open Engagement",
+          "ariaHidden": null,
+          "fontSize": "14px",
+          "fontWeight": "500",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Modules",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              245.0,
+              245.0,
+              244.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 4.59341287788919,
+          "maximumRatio": 4.59341287788919,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Every client and every activity. Anyone at the firm can browse it, even without a client profile.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              245.0,
+              245.0,
+              244.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 4.59341287788919,
+          "maximumRatio": 4.59341287788919,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "The same data filtered to one client and arranged around their work, so you stay fully inside it.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              245.0,
+              245.0,
+              244.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 4.59341287788919,
+          "maximumRatio": 4.59341287788919,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Meetings, outreach, reports and the meeting library for every client.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Engagement, one client",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Hill Day packets, drafts and proposal templates.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Workspace, one client",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Tasks, projects and deadlines across the firm.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Planner, one client",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Strategy and context libraries, agent review and runs.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Objectives and Strategies",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Legislation, budgets, funding and geography, searchable across everything the platform tracks.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Intelligence and Opportunities, matched to that client",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Members, staff, committees and Department of War officials.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Relationships, the offices that client touches",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Saved collections of companies and topics.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Firm-wide only",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main h1",
+          "text": "Everything in Capiro, across the whole firm",
+          "ariaHidden": null,
+          "fontSize": "24px",
+          "fontWeight": "600",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              245.0,
+              245.0,
+              244.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 18.148101610693207,
+          "maximumRatio": 18.148101610693207,
+          "unsupported": []
+        },
+        {
+          "selector": "aside.test-notice",
+          "text": "Explicit local test fixture \u00b7 synthetic identity and records",
+          "ariaHidden": null,
+          "fontSize": "10px",
+          "fontWeight": "400",
+          "foreground": [
+            68.0,
+            64.0,
+            60.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              248.0,
+              231.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 9.701088230974875,
+          "maximumRatio": 9.701088230974875,
+          "unsupported": []
+        }
+      ]
+    },
+    {
+      "capture": "modules-390-light",
+      "rows": [
+        {
+          "selector": "._primaryOpen_10khq_192",
+          "text": "Open Engagement",
+          "ariaHidden": null,
+          "fontSize": "14px",
+          "fontWeight": "500",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Modules",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              245.0,
+              245.0,
+              244.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 4.59341287788919,
+          "maximumRatio": 4.59341287788919,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Every client and every activity. Anyone at the firm can browse it, even without a client profile.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              245.0,
+              245.0,
+              244.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 4.59341287788919,
+          "maximumRatio": 4.59341287788919,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "The same data filtered to one client and arranged around their work, so you stay fully inside it.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              245.0,
+              245.0,
+              244.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 4.59341287788919,
+          "maximumRatio": 4.59341287788919,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Meetings, outreach, reports and the meeting library for every client.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Engagement, one client",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Hill Day packets, drafts and proposal templates.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Workspace, one client",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Tasks, projects and deadlines across the firm.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Planner, one client",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Strategy and context libraries, agent review and runs.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Objectives and Strategies",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Legislation, budgets, funding and geography, searchable across everything the platform tracks.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Intelligence and Opportunities, matched to that client",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Members, staff, committees and Department of War officials.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Relationships, the offices that client touches",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Saved collections of companies and topics.",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 5.011050710200293,
+          "maximumRatio": 5.011050710200293,
+          "unsupported": []
+        },
+        {
+          "selector": "main p",
+          "text": "Firm-wide only",
+          "ariaHidden": null,
+          "fontSize": "13px",
+          "fontWeight": "400",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "main h1",
+          "text": "Everything in Capiro, across the whole firm",
+          "ariaHidden": null,
+          "fontSize": "24px",
+          "fontWeight": "600",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              245.0,
+              245.0,
+              244.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 18.148101610693207,
+          "maximumRatio": 18.148101610693207,
+          "unsupported": []
+        },
+        {
+          "selector": "aside.test-notice",
+          "text": "Explicit local test fixture \u00b7 synthetic identity and records",
+          "ariaHidden": null,
+          "fontSize": "10px",
+          "fontWeight": "400",
+          "foreground": [
+            68.0,
+            64.0,
+            60.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              248.0,
+              231.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 9.701088230974875,
+          "maximumRatio": 9.701088230974875,
+          "unsupported": []
+        }
+      ]
+    },
+    {
+      "capture": "portfolio-1440-dark",
+      "rows": [
+        {
+          "selector": ".monogram",
+          "text": "T",
+          "ariaHidden": null,
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "._headerActions_1tf87_218 > .primary",
+          "text": "Add profile",
+          "ariaHidden": null,
+          "fontSize": "14px",
+          "fontWeight": "500",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "._coverage_1tf87_31 > .eyebrow",
+          "text": "Portfolio pulse",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": ".row > small",
+          "text": "of work linkedto an objective",
+          "ariaHidden": null,
+          "fontSize": "11.6667px",
+          "fontWeight": "400",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "._pulse_1tf87_10 > div:nth-child(2) > strong",
+          "text": "1",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(2) > .eyebrow",
+          "text": "Clients",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(3) > .eyebrow",
+          "text": "Need attention",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(4) > .eyebrow",
+          "text": "Objectives",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(5) > .eyebrow",
+          "text": "Off track",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(6) > .eyebrow",
+          "text": "Strategies",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "._tabs_1tf87_137 > .primary",
+          "text": "All 1",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": ".primary > small",
+          "text": "1",
+          "ariaHidden": null,
+          "fontSize": "10px",
+          "fontWeight": "500",
+          "foreground": [
+            170.0,
+            162.0,
+            156.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.1776761032155605,
+          "maximumRatio": 7.87909794960765,
+          "unsupported": []
+        },
+        {
+          "selector": "._profileLogo_1tf87_101",
+          "text": "TA",
+          "ariaHidden": "true",
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[role=\"img\"][aria-label^=\"Account owner:\"]",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "400",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[role=\"note\"]",
+          "text": "ACTIVE",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            250.0,
+            250.0,
+            249.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              27.0,
+              27.0,
+              27.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 16.491897289230252,
+          "maximumRatio": 16.491897289230252,
+          "unsupported": []
+        },
+        {
+          "selector": "[role=\"note\"]",
+          "text": "0 shown",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            231.0,
+            155.0,
+            155.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              50.0,
+              38.0,
+              38.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.634693975689552,
+          "maximumRatio": 6.634693975689552,
+          "unsupported": []
+        },
+        {
+          "selector": ".chip",
+          "text": "ACTIVE",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            250.0,
+            250.0,
+            249.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              27.0,
+              27.0,
+              27.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 16.491897289230252,
+          "maximumRatio": 16.491897289230252,
+          "unsupported": []
+        },
+        {
+          "selector": "a[aria-label=\"Open Test Aerospace\"]",
+          "text": "Test Aerospace",
+          "ariaHidden": null,
+          "fontSize": "15px",
+          "fontWeight": "600",
+          "foreground": [
+            250.0,
+            250.0,
+            249.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              27.0,
+              27.0,
+              27.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 16.491897289230252,
+          "maximumRatio": 16.491897289230252,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "34px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "1",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Portfolio pulse",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Clients",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Need attention",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Objectives",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Off track",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Strategies",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] small",
+          "text": "of work linkedto an objective",
+          "ariaHidden": null,
+          "fontSize": "11.6667px",
+          "fontWeight": "400",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        }
+      ]
+    },
+    {
+      "capture": "portfolio-1440-light",
+      "rows": [
+        {
+          "selector": ".monogram",
+          "text": "T",
+          "ariaHidden": null,
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "._headerActions_1tf87_218 > .primary",
+          "text": "Add profile",
+          "ariaHidden": null,
+          "fontSize": "14px",
+          "fontWeight": "500",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "._coverage_1tf87_31 > .eyebrow",
+          "text": "Portfolio pulse",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": ".row > small",
+          "text": "of work linkedto an objective",
+          "ariaHidden": null,
+          "fontSize": "11.6667px",
+          "fontWeight": "400",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "._pulse_1tf87_10 > div:nth-child(2) > strong",
+          "text": "1",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(2) > .eyebrow",
+          "text": "Clients",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(3) > .eyebrow",
+          "text": "Need attention",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(4) > .eyebrow",
+          "text": "Objectives",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(5) > .eyebrow",
+          "text": "Off track",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(6) > .eyebrow",
+          "text": "Strategies",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "._tabs_1tf87_137 > .primary",
+          "text": "All 1",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": ".primary > small",
+          "text": "1",
+          "ariaHidden": null,
+          "fontSize": "10px",
+          "fontWeight": "500",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 3.0977356477519926,
+          "maximumRatio": 3.9508970983319927,
+          "unsupported": []
+        },
+        {
+          "selector": "._profileLogo_1tf87_101",
+          "text": "TA",
+          "ariaHidden": "true",
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[role=\"img\"][aria-label^=\"Account owner:\"]",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "400",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[role=\"note\"]",
+          "text": "ACTIVE",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[role=\"note\"]",
+          "text": "0 shown",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            101.0,
+            36.0,
+            36.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              243.0,
+              231.0,
+              229.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 9.487252024598877,
+          "maximumRatio": 9.487252024598877,
+          "unsupported": []
+        },
+        {
+          "selector": ".chip",
+          "text": "ACTIVE",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "a[aria-label=\"Open Test Aerospace\"]",
+          "text": "Test Aerospace",
+          "ariaHidden": null,
+          "fontSize": "15px",
+          "fontWeight": "600",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "34px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "1",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Portfolio pulse",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Clients",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Need attention",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Objectives",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Off track",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Strategies",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] small",
+          "text": "of work linkedto an objective",
+          "ariaHidden": null,
+          "fontSize": "11.6667px",
+          "fontWeight": "400",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        }
+      ]
+    },
+    {
+      "capture": "portfolio-320-light",
+      "rows": [
+        {
+          "selector": ".monogram",
+          "text": "T",
+          "ariaHidden": null,
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "._headerActions_1tf87_218 > .primary",
+          "text": "Add profile",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "._coverage_1tf87_31 > .eyebrow",
+          "text": "Portfolio pulse",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": ".row > small",
+          "text": "of work linkedto an objective",
+          "ariaHidden": null,
+          "fontSize": "11.6667px",
+          "fontWeight": "400",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "._pulse_1tf87_10 > div:nth-child(2) > strong",
+          "text": "1",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(2) > .eyebrow",
+          "text": "Clients",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(3) > .eyebrow",
+          "text": "Need attention",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(4) > .eyebrow",
+          "text": "Objectives",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(5) > .eyebrow",
+          "text": "Off track",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(6) > .eyebrow",
+          "text": "Strategies",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "._tabs_1tf87_137 > .primary",
+          "text": "All 1",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": ".primary > small",
+          "text": "1",
+          "ariaHidden": null,
+          "fontSize": "10px",
+          "fontWeight": "500",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 3.0977356477519926,
+          "maximumRatio": 3.9508970983319927,
+          "unsupported": []
+        },
+        {
+          "selector": "._profileLogo_1tf87_101",
+          "text": "TA",
+          "ariaHidden": "true",
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[role=\"img\"][aria-label^=\"Account owner:\"]",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "400",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[role=\"note\"]",
+          "text": "ACTIVE",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[role=\"note\"]",
+          "text": "0 shown",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            101.0,
+            36.0,
+            36.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              243.0,
+              231.0,
+              229.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 9.487252024598877,
+          "maximumRatio": 9.487252024598877,
+          "unsupported": []
+        },
+        {
+          "selector": ".chip",
+          "text": "ACTIVE",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "a[aria-label=\"Open Test Aerospace\"]",
+          "text": "Test Aerospace",
+          "ariaHidden": null,
+          "fontSize": "15px",
+          "fontWeight": "600",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "34px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "1",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Portfolio pulse",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Clients",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Need attention",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Objectives",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Off track",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Strategies",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] small",
+          "text": "of work linkedto an objective",
+          "ariaHidden": null,
+          "fontSize": "11.6667px",
+          "fontWeight": "400",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        }
+      ]
+    },
+    {
+      "capture": "portfolio-390-dark",
+      "rows": [
+        {
+          "selector": ".monogram",
+          "text": "T",
+          "ariaHidden": null,
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "._headerActions_1tf87_218 > .primary",
+          "text": "Add profile",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "._coverage_1tf87_31 > .eyebrow",
+          "text": "Portfolio pulse",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": ".row > small",
+          "text": "of work linkedto an objective",
+          "ariaHidden": null,
+          "fontSize": "11.6667px",
+          "fontWeight": "400",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "._pulse_1tf87_10 > div:nth-child(2) > strong",
+          "text": "1",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(2) > .eyebrow",
+          "text": "Clients",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(3) > .eyebrow",
+          "text": "Need attention",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(4) > .eyebrow",
+          "text": "Objectives",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(5) > .eyebrow",
+          "text": "Off track",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(6) > .eyebrow",
+          "text": "Strategies",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "._tabs_1tf87_137 > .primary",
+          "text": "All 1",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": ".primary > small",
+          "text": "1",
+          "ariaHidden": null,
+          "fontSize": "10px",
+          "fontWeight": "500",
+          "foreground": [
+            170.0,
+            162.0,
+            156.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.1776761032155605,
+          "maximumRatio": 7.87909794960765,
+          "unsupported": []
+        },
+        {
+          "selector": "._profileLogo_1tf87_101",
+          "text": "TA",
+          "ariaHidden": "true",
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[role=\"img\"][aria-label^=\"Account owner:\"]",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "400",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[role=\"note\"]",
+          "text": "ACTIVE",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            250.0,
+            250.0,
+            249.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              27.0,
+              27.0,
+              27.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 16.491897289230252,
+          "maximumRatio": 16.491897289230252,
+          "unsupported": []
+        },
+        {
+          "selector": "[role=\"note\"]",
+          "text": "0 shown",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            231.0,
+            155.0,
+            155.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              50.0,
+              38.0,
+              38.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.634693975689552,
+          "maximumRatio": 6.634693975689552,
+          "unsupported": []
+        },
+        {
+          "selector": ".chip",
+          "text": "ACTIVE",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            250.0,
+            250.0,
+            249.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              27.0,
+              27.0,
+              27.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 16.491897289230252,
+          "maximumRatio": 16.491897289230252,
+          "unsupported": []
+        },
+        {
+          "selector": "a[aria-label=\"Open Test Aerospace\"]",
+          "text": "Test Aerospace",
+          "ariaHidden": null,
+          "fontSize": "15px",
+          "fontWeight": "600",
+          "foreground": [
+            250.0,
+            250.0,
+            249.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              27.0,
+              27.0,
+              27.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 16.491897289230252,
+          "maximumRatio": 16.491897289230252,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "34px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "1",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Portfolio pulse",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Clients",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Need attention",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Objectives",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Off track",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Strategies",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] small",
+          "text": "of work linkedto an objective",
+          "ariaHidden": null,
+          "fontSize": "11.6667px",
+          "fontWeight": "400",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        }
+      ]
+    },
+    {
+      "capture": "portfolio-390-light",
+      "rows": [
+        {
+          "selector": ".monogram",
+          "text": "T",
+          "ariaHidden": null,
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "._headerActions_1tf87_218 > .primary",
+          "text": "Add profile",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "._coverage_1tf87_31 > .eyebrow",
+          "text": "Portfolio pulse",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": ".row > small",
+          "text": "of work linkedto an objective",
+          "ariaHidden": null,
+          "fontSize": "11.6667px",
+          "fontWeight": "400",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "._pulse_1tf87_10 > div:nth-child(2) > strong",
+          "text": "1",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(2) > .eyebrow",
+          "text": "Clients",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(3) > .eyebrow",
+          "text": "Need attention",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(4) > .eyebrow",
+          "text": "Objectives",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(5) > .eyebrow",
+          "text": "Off track",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "div:nth-child(6) > .eyebrow",
+          "text": "Strategies",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "._tabs_1tf87_137 > .primary",
+          "text": "All 1",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": ".primary > small",
+          "text": "1",
+          "ariaHidden": null,
+          "fontSize": "10px",
+          "fontWeight": "500",
+          "foreground": [
+            117.0,
+            110.0,
+            105.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 3.0977356477519926,
+          "maximumRatio": 3.9508970983319927,
+          "unsupported": []
+        },
+        {
+          "selector": "._profileLogo_1tf87_101",
+          "text": "TA",
+          "ariaHidden": "true",
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[role=\"img\"][aria-label^=\"Account owner:\"]",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "400",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[role=\"note\"]",
+          "text": "ACTIVE",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[role=\"note\"]",
+          "text": "0 shown",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            101.0,
+            36.0,
+            36.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              243.0,
+              231.0,
+              229.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 9.487252024598877,
+          "maximumRatio": 9.487252024598877,
+          "unsupported": []
+        },
+        {
+          "selector": ".chip",
+          "text": "ACTIVE",
+          "ariaHidden": null,
+          "fontSize": "12px",
+          "fontWeight": "500",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "a[aria-label=\"Open Test Aerospace\"]",
+          "text": "Test Aerospace",
+          "ariaHidden": null,
+          "fontSize": "15px",
+          "fontWeight": "600",
+          "foreground": [
+            10.0,
+            10.0,
+            10.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              255.0,
+              255.0,
+              255.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 19.79814571052481,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "34px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "1",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] strong",
+          "text": "\u2014",
+          "ariaHidden": null,
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "foreground": [
+            255.0,
+            255.0,
+            255.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 15.522910417680388,
+          "maximumRatio": 19.79814571052481,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Portfolio pulse",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Clients",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Need attention",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Objectives",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Off track",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] .eyebrow",
+          "text": "Strategies",
+          "ariaHidden": null,
+          "fontSize": "11px",
+          "fontWeight": "500",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        },
+        {
+          "selector": "[aria-label=\"Portfolio pulse\"] small",
+          "text": "of work linkedto an objective",
+          "ariaHidden": null,
+          "fontSize": "11.6667px",
+          "fontWeight": "400",
+          "foreground": [
+            168.0,
+            162.0,
+            158.0,
+            1.0
+          ],
+          "effectiveBackgroundEndpoints": [
+            [
+              36.0,
+              36.0,
+              36.0,
+              1.0
+            ],
+            [
+              10.0,
+              10.0,
+              10.0,
+              1.0
+            ]
+          ],
+          "minimumRatio": 6.155072577340432,
+          "maximumRatio": 7.85026908396286,
+          "unsupported": []
+        }
+      ]
+    }
+  ]
+}

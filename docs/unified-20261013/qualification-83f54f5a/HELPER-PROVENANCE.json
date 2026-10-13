@@ -1,0 +1,9 @@
+{
+  "priorHelper": "/workspace/capiro-unified-publication-93-20261013/archive-evidence.py",
+  "priorSha256": "e45a8c02577a326b0e0e1ad5e5287dcfcce62e7ae0c684cc2c37025a4187b929",
+  "currentSha256": "b3d42add7d5441867c9c1a12ac99b22dce7f6168b32f87b3b0145a0a3d53f340",
+  "changes": [
+    "Fail on missing or symlink source root instead of silent empty traversal.",
+    "Generalize exact esbuild/archive.tgz omission to the83 Elements tool directory; metadata and generated qualification output remain included."
+  ]
+}

@@ -1,0 +1,475 @@
+{
+  "observedUTC": "2026-10-13T08:00:15.285961+00:00",
+  "status": "PASS_SOURCE_PRESERVATION_ONLY_FINAL_QUALIFICATION_NOT_AUDITED",
+  "source": {
+    "head": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+    "rootTree": "760b05a7a7feacee16815da2767cb83dbb600d95",
+    "applicationTree": "67f821a13c8470ceeb5222eb89d43cea58b1a8c8",
+    "srcTree": "72751dc5027d4b4a09356676a206ee5addfb56a9",
+    "status": ""
+  },
+  "base": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+  "evidencePublication": "f8199dc24fb434d51f83353f584b66cbe6264824",
+  "ancestors": {
+    "portfolio": true,
+    "meri_original": true,
+    "modules_original": true,
+    "newsletter": true,
+    "shipping": true,
+    "onboard": true,
+    "meri_actions": true,
+    "frozen93": true,
+    "evidencePublication": true
+  },
+  "originalTestBindings": 807,
+  "uniqueOriginalPaths": 291,
+  "allOriginalBindingsExact": true,
+  "featureTreeComparison": [
+    {
+      "lane": "newsletter",
+      "path": "apps/web/src/features/portfolio",
+      "tree": "4576e6f2ff004ece000df49b1d3e149dae794d98",
+      "identical": true,
+      "originalTree": "4576e6f2ff004ece000df49b1d3e149dae794d98",
+      "finalTree": "3b1c60a061ade2f87a2c23d971cff784cb89afd3",
+      "equalToOriginal": false,
+      "explicitSuccessorDelta": [
+        "M\tapps/web/src/features/portfolio/index/ProfileResults.tsx",
+        "M\tapps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+        "M\tapps/web/src/features/portfolio/index/portfolio.module.css"
+      ]
+    },
+    {
+      "lane": "newsletter",
+      "path": "apps/web/src/features/modules",
+      "tree": "3d4f9e5c559f8fbabe99b13c55183e5dd191699d",
+      "identical": true,
+      "originalTree": "3d4f9e5c559f8fbabe99b13c55183e5dd191699d",
+      "finalTree": "3d4f9e5c559f8fbabe99b13c55183e5dd191699d",
+      "equalToOriginal": true,
+      "explicitSuccessorDelta": []
+    },
+    {
+      "lane": "newsletter",
+      "path": "apps/web/src/features/settings",
+      "tree": "72f140b8839df2939b0024e250f9d5ea331687cc",
+      "identical": true,
+      "originalTree": "72f140b8839df2939b0024e250f9d5ea331687cc",
+      "finalTree": "72f140b8839df2939b0024e250f9d5ea331687cc",
+      "equalToOriginal": true,
+      "explicitSuccessorDelta": []
+    },
+    {
+      "lane": "newsletter",
+      "path": "apps/web/tests/browser",
+      "tree": "d5edcaebb4958448d018b4aad2afcb6ac39412c7",
+      "identical": true,
+      "originalTree": "d5edcaebb4958448d018b4aad2afcb6ac39412c7",
+      "finalTree": "28d092cecffd57c8b2dd34890d0d01b6aa7c593d",
+      "equalToOriginal": false,
+      "explicitSuccessorDelta": [
+        "A\tapps/web/tests/browser/canonical-navigation.spec.ts",
+        "A\tapps/web/tests/browser/portfolio-accessibility-fixtures.ts",
+        "A\tapps/web/tests/browser/portfolio-accessibility-interaction.spec.ts",
+        "A\tapps/web/tests/browser/portfolio-accessibility-semantics.spec.ts",
+        "A\tapps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+        "A\tapps/web/tests/browser/portfolio-home-accessibility.spec.ts"
+      ]
+    },
+    {
+      "lane": "onboard",
+      "path": "apps/web/src/features/onboard",
+      "tree": "b52902d4e1fd0684f54d08347ec5536f4467653b",
+      "identical": true,
+      "originalTree": "b52902d4e1fd0684f54d08347ec5536f4467653b",
+      "finalTree": "b52902d4e1fd0684f54d08347ec5536f4467653b",
+      "equalToOriginal": true,
+      "explicitSuccessorDelta": []
+    },
+    {
+      "lane": "meri_actions",
+      "path": "apps/web/src/features/meri",
+      "tree": "5e8360ac09b7ad478f460f8f1838e5ca129e3f05",
+      "identical": true,
+      "originalTree": "5e8360ac09b7ad478f460f8f1838e5ca129e3f05",
+      "finalTree": "597b2e35882b68073190ed52291f80fc33a4160c",
+      "equalToOriginal": false,
+      "explicitSuccessorDelta": [
+        "M\tapps/web/src/features/meri/MeriSuggestions.tsx"
+      ]
+    },
+    {
+      "lane": "meri_actions",
+      "path": "apps/web/src/shared/meri-actions",
+      "tree": "7a601cadbcbe189a7c231a1911745af0d3933e33",
+      "identical": true,
+      "originalTree": "7a601cadbcbe189a7c231a1911745af0d3933e33",
+      "finalTree": "7a601cadbcbe189a7c231a1911745af0d3933e33",
+      "equalToOriginal": true,
+      "explicitSuccessorDelta": []
+    }
+  ],
+  "productionDeltaPaths": [
+    "apps/web/src/app/globals.css",
+    "apps/web/src/features/meri/MeriSuggestions.tsx",
+    "apps/web/src/features/portfolio/index/ProfileResults.tsx",
+    "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+    "apps/web/src/features/portfolio/index/portfolio.module.css",
+    "apps/web/src/shared/portfolio/shell/PortfolioNavigation.tsx",
+    "apps/web/src/shared/shell/ProductShell.tsx"
+  ],
+  "newTestAndHelperPaths": [
+    "apps/web/test/accessibility-interaction.ts",
+    "apps/web/test/accessibility.ts",
+    "apps/web/test/browser/shared-home-accessibility-interaction.spec.ts",
+    "apps/web/test/browser/shared-home-accessibility.spec.ts",
+    "apps/web/tests/browser/canonical-navigation.spec.ts",
+    "apps/web/tests/browser/portfolio-accessibility-fixtures.ts",
+    "apps/web/tests/browser/portfolio-accessibility-interaction.spec.ts",
+    "apps/web/tests/browser/portfolio-accessibility-semantics.spec.ts",
+    "apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+    "apps/web/tests/browser/portfolio-home-accessibility.spec.ts"
+  ],
+  "allSourceMetadataDelta": [
+    {
+      "status": "M",
+      "path": "apps/web/package.json"
+    },
+    {
+      "status": "M",
+      "path": "apps/web/src/app/globals.css"
+    },
+    {
+      "status": "M",
+      "path": "apps/web/src/features/meri/MeriSuggestions.tsx"
+    },
+    {
+      "status": "M",
+      "path": "apps/web/src/features/portfolio/index/ProfileResults.tsx"
+    },
+    {
+      "status": "M",
+      "path": "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx"
+    },
+    {
+      "status": "M",
+      "path": "apps/web/src/features/portfolio/index/portfolio.module.css"
+    },
+    {
+      "status": "M",
+      "path": "apps/web/src/shared/portfolio/shell/PortfolioNavigation.tsx"
+    },
+    {
+      "status": "M",
+      "path": "apps/web/src/shared/shell/ProductShell.tsx"
+    },
+    {
+      "status": "A",
+      "path": "apps/web/test/accessibility-interaction.ts"
+    },
+    {
+      "status": "A",
+      "path": "apps/web/test/accessibility.ts"
+    },
+    {
+      "status": "M",
+      "path": "apps/web/test/browser/main.tsx"
+    },
+    {
+      "status": "A",
+      "path": "apps/web/test/browser/shared-home-accessibility-interaction.spec.ts"
+    },
+    {
+      "status": "A",
+      "path": "apps/web/test/browser/shared-home-accessibility.spec.ts"
+    },
+    {
+      "status": "A",
+      "path": "apps/web/tests/browser/canonical-navigation.spec.ts"
+    },
+    {
+      "status": "A",
+      "path": "apps/web/tests/browser/portfolio-accessibility-fixtures.ts"
+    },
+    {
+      "status": "A",
+      "path": "apps/web/tests/browser/portfolio-accessibility-interaction.spec.ts"
+    },
+    {
+      "status": "A",
+      "path": "apps/web/tests/browser/portfolio-accessibility-semantics.spec.ts"
+    },
+    {
+      "status": "A",
+      "path": "apps/web/tests/browser/portfolio-active-count-contrast.spec.ts"
+    },
+    {
+      "status": "A",
+      "path": "apps/web/tests/browser/portfolio-home-accessibility.spec.ts"
+    },
+    {
+      "status": "M",
+      "path": "package-lock.json"
+    },
+    {
+      "status": "M",
+      "path": "scripts/architecture/reviewed-size-findings.json"
+    }
+  ],
+  "oldTestsModified": [],
+  "lock": {
+    "entriesBefore": 936,
+    "entriesAfter": 936,
+    "deltaOnly": "packages[apps/web].devDependencies[axe-core]=4.14.0",
+    "allOtherLockEntriesUnchanged": true,
+    "axeExistingRecord": {
+      "version": "4.14.0",
+      "resolved": "https://registry.npmjs.org/axe-core/-/axe-core-4.14.0.tgz",
+      "integrity": "sha512-9WTZxEjsZ7b13TH8JPmbV2z8CHbl80/2hm3XPEG4JgNdQLK81IBRXmSxHfMAOkSqQeRxT/0dwNDz2GOm3zzpcQ==",
+      "dev": true,
+      "license": "MPL-2.0",
+      "engines": {
+        "node": ">=4"
+      }
+    },
+    "finalSha256": "294ba8ab0cd31f804a0d595c9f10a8edb39fdefcab60b84ef422e34cbc68fe38",
+    "appManifestDeltaOnly": "devDependencies[axe-core]=4.14.0",
+    "appSourceAxeImports": []
+  },
+  "publicGraph": {
+    "comparedTrackedPaths": 259,
+    "changed": []
+  },
+  "f819ProductionGraphEqualTo93": true,
+  "f819Published93EvidenceUnchangedInSuccessor": true,
+  "finalSourceReceiptBindings": [
+    {
+      "path": "apps/web/package.json",
+      "sha256": "9a8a5cb7248ac26b07dba927d781d7aeaf2357c0267f56e36f2459377a57db5a",
+      "matchesFinalSourceReceipt": true
+    },
+    {
+      "path": "apps/web/src/app/globals.css",
+      "sha256": "cf95e12386e6addfbc88ba7a70fda6d5eeca475734d8af90f46cf58e10452f8d",
+      "matchesFinalSourceReceipt": true
+    },
+    {
+      "path": "apps/web/src/features/meri/MeriSuggestions.tsx",
+      "sha256": "98408cf322ae10295b4926cf6a293c79ae640aa3ab0bc61d157d1d225bf106f2",
+      "matchesFinalSourceReceipt": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/ProfileResults.tsx",
+      "sha256": "e15d40947e83deb1c1eea3049f1f297fccf0c76a29389c9974062ea7cb39558c",
+      "matchesFinalSourceReceipt": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+      "sha256": "750f54237819b06f08e7cead090e38f960fd844fd6dcccb0d154dbfdf1bbaf09",
+      "matchesFinalSourceReceipt": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/portfolio.module.css",
+      "sha256": "d4d23b4f53c643a1c4da9f5174bec62f8b5fc7cd12faa9f499df1907d7fe16ca",
+      "matchesFinalSourceReceipt": true
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/shell/PortfolioNavigation.tsx",
+      "sha256": "440b01368a37d8eadc06252ac186810ced654a57bd8a7414211a696f8f50d417",
+      "matchesFinalSourceReceipt": true
+    },
+    {
+      "path": "apps/web/src/shared/shell/ProductShell.tsx",
+      "sha256": "fa8d74a0779029b46eb147393370daa2a1ea9103b1f5b65c814b7b058392bb97",
+      "matchesFinalSourceReceipt": true
+    },
+    {
+      "path": "apps/web/test/browser/main.tsx",
+      "sha256": "8e450fb7a59fc6d9b3a2e6ee784e3188ffb8251badc47672fb382f2d2e82029c",
+      "matchesFinalSourceReceipt": true
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "294ba8ab0cd31f804a0d595c9f10a8edb39fdefcab60b84ef422e34cbc68fe38",
+      "matchesFinalSourceReceipt": true
+    },
+    {
+      "path": "scripts/architecture/reviewed-size-findings.json",
+      "sha256": "6da73efa56c10e0cf1deb5dc8e279ecfac9974714b27b0d0dc240b453b33a88b",
+      "matchesFinalSourceReceipt": true
+    },
+    {
+      "path": "apps/web/test/accessibility-interaction.ts",
+      "sha256": "8dd1582dd58afde5da1c98b444c3154bb78ec6ce68a74d49eff671b27635974c",
+      "matchesFinalSourceReceipt": true
+    },
+    {
+      "path": "apps/web/test/accessibility.ts",
+      "sha256": "855c28a24d9dda89e8239babcc14f3ea0dbe921441376b30ccfc93d0a9efa367",
+      "matchesFinalSourceReceipt": true
+    },
+    {
+      "path": "apps/web/test/browser/shared-home-accessibility-interaction.spec.ts",
+      "sha256": "17a29c0b2a3699a0148668894fb5220049116ec0e273800aff6dfe905ea98750",
+      "matchesFinalSourceReceipt": true
+    },
+    {
+      "path": "apps/web/test/browser/shared-home-accessibility.spec.ts",
+      "sha256": "2a3aaea30e7b9a863cdef654e9e6f54eaaf1f0ab4f5d891f9e35dfefb42f3bcf",
+      "matchesFinalSourceReceipt": true
+    },
+    {
+      "path": "apps/web/tests/browser/canonical-navigation.spec.ts",
+      "sha256": "7410470d25693de2880577c98f442b0fcd3cb47f161c78a435ec5049024ea47d",
+      "matchesFinalSourceReceipt": true
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-accessibility-fixtures.ts",
+      "sha256": "602c555fd619e39d8e1d285a4998ec445c09c65eae80f2ee5b17bf5c2ad3efd3",
+      "matchesFinalSourceReceipt": true
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-accessibility-interaction.spec.ts",
+      "sha256": "53f51434d6718d068d260340bc15c4eefbb37672564ed432c4f74fb3f29fede0",
+      "matchesFinalSourceReceipt": true
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-accessibility-semantics.spec.ts",
+      "sha256": "c36dd72c4bcb72cfce4642695579f3ff3bb69f345ca84f7683129b0134cd590c",
+      "matchesFinalSourceReceipt": true
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+      "sha256": "8c0949fe589bc9d70ce908fdc65cc7da4244be243f72bcf4580dda659d311da9",
+      "matchesFinalSourceReceipt": true
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-home-accessibility.spec.ts",
+      "sha256": "7aeb3c4e3141f7cbec9c29715b9a053f5c9c3e9284744b711a0a8722e44ea2a2",
+      "matchesFinalSourceReceipt": true
+    }
+  ],
+  "independentSourceReviewBindings": [
+    {
+      "path": "apps/web/package.json",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/src/app/globals.css",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/src/features/meri/MeriSuggestions.tsx",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/ProfileResults.tsx",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/portfolio.module.css",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/shell/PortfolioNavigation.tsx",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/src/shared/shell/ProductShell.tsx",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/test/accessibility-interaction.ts",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/test/accessibility.ts",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/test/browser/main.tsx",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/test/browser/shared-home-accessibility-interaction.spec.ts",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/test/browser/shared-home-accessibility.spec.ts",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/tests/browser/canonical-navigation.spec.ts",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-accessibility-fixtures.ts",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-accessibility-interaction.spec.ts",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-accessibility-semantics.spec.ts",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+      "matchesReviewed": true
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-home-accessibility.spec.ts",
+      "matchesReviewed": true
+    },
+    {
+      "path": "package-lock.json",
+      "matchesReviewed": true
+    },
+    {
+      "path": "scripts/architecture/reviewed-size-findings.json",
+      "matchesReviewed": true
+    }
+  ],
+  "reviewManifestFilesVerified": 27,
+  "architectureRecordDelta": {
+    "removedExactArchived": [
+      {
+        "file": "apps/web/src/features/portfolio/index/portfolio.module.css",
+        "kind": "file",
+        "symbol": "<module>",
+        "fingerprint": "370b43d4c8e1db0b7afe8e3f6ed0f4910b4ed62f27f563103870c99735aa3e11",
+        "reason": "Retains Portfolio index/card/chooser presentation and responsive rules. The added header owner filter and compact navigation/disclosure styling are scoped to the same index. No global shell tokens, mode navigation, backend state or unrelated domain rules are added. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
+        "reviewedBy": "Codex shared frontend implementation review",
+        "reviewedOn": "2026-10-12"
+      }
+    ],
+    "added": [
+      {
+        "file": "apps/web/src/features/portfolio/index/portfolio.module.css",
+        "kind": "file",
+        "symbol": "<module>",
+        "fingerprint": "f15942ff74b4dea83bf1157fca7bacacd8cd414f1592485f2ae6c95a4fa16a3b",
+        "reason": "Same Portfolio index/card/filter presentation owner. Prior seven-line card target/ellipsis correction plus three lines make only pressed All/Clients count text inherit the existing selected-button foreground. No inactive-count, global-token, dark-token, data, navigation or shared-foundation responsibility is added. Independently reviewed by objectives_work_intel_review; see docs/unified-20261013/corrections/REVIEW.md.",
+        "reviewedBy": "Codex objectives_work_intel_review, independently reviewed and applied by shared integration owner",
+        "reviewedOn": "2026-10-13"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+        "kind": "function",
+        "symbol": "PortfolioAttention",
+        "fingerprint": "76e8ccdf0c111b56476f143a5bb6204a084807b0b19d3e4f81cacaa39fab2d3c",
+        "reason": "Existing attention list/status/retry presentation owner. A note role makes the already-labelled count semantically valid; it adds no query, aggregation, mutation or state responsibility. Independent exact-source review: docs/unified-20261013/corrections/A11Y-STRUCTURE-REVIEW.md.",
+        "reviewedBy": "Codex objectives_work_intel_review, independently reviewed and applied by shared integration owner",
+        "reviewedOn": "2026-10-13"
+      }
+    ],
+    "duplicateOwnerKeys": 0
+  },
+  "fullSuccessorQualification": "PENDING_NOT_AUDITED",
+  "reviewerRuntimeExecution": false
+}

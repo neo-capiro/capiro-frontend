@@ -1,0 +1,235 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-onboard-port-20261013/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/playwright.config.mjs"
+    ],
+    "configFile": "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/playwright.config.mjs",
+    "rootDir": "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum",
+        "testIgnore": [],
+        "testMatch": [
+          "count.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "count.spec.ts",
+      "file": "count.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "light active All count at 1440px has actual rest and hover contrast",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8592,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('link', { name: 'Open Test Aerospace', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'Open Test Aerospace', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('link', { name: 'Open Test Aerospace', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'Open Test Aerospace', exact: true })\u001b[22m\n\n    at /tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/count.spec.ts:15:80",
+                    "location": {
+                      "file": "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/count.spec.ts",
+                      "column": 80,
+                      "line": 15
+                    },
+                    "snippet": "  13 |   await page.emulateMedia({colorScheme:'light',reducedMotion:'reduce'});await page.setViewportSize({width,height:width===1440?1040:844});\n  14 |   await page.goto('http://127.0.0.1:5189/');\n> 15 |   await expect(page.getByRole('link',{name:'Open Test Aerospace',exact:true})).toBeVisible();await page.evaluate(()=>document.fonts.ready);\n     |                                                                                ^\n  16 |   const tab=page.getByRole('navigation',{name:'Profile type',exact:true}).getByRole('button',{name:'All 1',exact:true});await tab.scrollIntoViewIfNeeded();await page.mouse.move(0,0);\n  17 |   const states=[];\n  18 |   for(const state of ['rest','hover']){"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/count.spec.ts",
+                        "column": 80,
+                        "line": 15
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('link', { name: 'Open Test Aerospace', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'Open Test Aerospace', exact: true })\u001b[22m\n\n\n  13 |   await page.emulateMedia({colorScheme:'light',reducedMotion:'reduce'});await page.setViewportSize({width,height:width===1440?1040:844});\n  14 |   await page.goto('http://127.0.0.1:5189/');\n> 15 |   await expect(page.getByRole('link',{name:'Open Test Aerospace',exact:true})).toBeVisible();await page.evaluate(()=>document.fonts.ready);\n     |                                                                                ^\n  16 |   const tab=page.getByRole('navigation',{name:'Profile type',exact:true}).getByRole('button',{name:'All 1',exact:true});await tab.scrollIntoViewIfNeeded();await page.mouse.move(0,0);\n  17 |   const states=[];\n  18 |   for(const state of ['rest','hover']){\n    at /tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/count.spec.ts:15:80"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T07:43:33.351Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/artifacts/count-light-active-All-cou-bc50b-ual-rest-and-hover-contrast/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/artifacts/count-light-active-All-cou-bc50b-ual-rest-and-hover-contrast/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/artifacts/count-light-active-All-cou-bc50b-ual-rest-and-hover-contrast/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/count.spec.ts",
+                    "column": 80,
+                    "line": 15
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "2c39b9d2b96390187b37-3cfb7549ee4fb82177f4",
+          "file": "count.spec.ts",
+          "line": 8,
+          "column": 36
+        },
+        {
+          "title": "light active All count at 390px has actual rest and hover contrast",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7311,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('link', { name: 'Open Test Aerospace', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'Open Test Aerospace', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('link', { name: 'Open Test Aerospace', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'Open Test Aerospace', exact: true })\u001b[22m\n\n    at /tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/count.spec.ts:15:80",
+                    "location": {
+                      "file": "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/count.spec.ts",
+                      "column": 80,
+                      "line": 15
+                    },
+                    "snippet": "  13 |   await page.emulateMedia({colorScheme:'light',reducedMotion:'reduce'});await page.setViewportSize({width,height:width===1440?1040:844});\n  14 |   await page.goto('http://127.0.0.1:5189/');\n> 15 |   await expect(page.getByRole('link',{name:'Open Test Aerospace',exact:true})).toBeVisible();await page.evaluate(()=>document.fonts.ready);\n     |                                                                                ^\n  16 |   const tab=page.getByRole('navigation',{name:'Profile type',exact:true}).getByRole('button',{name:'All 1',exact:true});await tab.scrollIntoViewIfNeeded();await page.mouse.move(0,0);\n  17 |   const states=[];\n  18 |   for(const state of ['rest','hover']){"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/count.spec.ts",
+                        "column": 80,
+                        "line": 15
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('link', { name: 'Open Test Aerospace', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'Open Test Aerospace', exact: true })\u001b[22m\n\n\n  13 |   await page.emulateMedia({colorScheme:'light',reducedMotion:'reduce'});await page.setViewportSize({width,height:width===1440?1040:844});\n  14 |   await page.goto('http://127.0.0.1:5189/');\n> 15 |   await expect(page.getByRole('link',{name:'Open Test Aerospace',exact:true})).toBeVisible();await page.evaluate(()=>document.fonts.ready);\n     |                                                                                ^\n  16 |   const tab=page.getByRole('navigation',{name:'Profile type',exact:true}).getByRole('button',{name:'All 1',exact:true});await tab.scrollIntoViewIfNeeded();await page.mouse.move(0,0);\n  17 |   const states=[];\n  18 |   for(const state of ['rest','hover']){\n    at /tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/count.spec.ts:15:80"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T07:43:42.713Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/artifacts/count-light-active-All-cou-be263-ual-rest-and-hover-contrast/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/artifacts/count-light-active-All-cou-be263-ual-rest-and-hover-contrast/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/artifacts/count-light-active-All-cou-be263-ual-rest-and-hover-contrast/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/count.spec.ts",
+                    "column": 80,
+                    "line": 15
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "2c39b9d2b96390187b37-6ae713e7b67b000e5653",
+          "file": "count.spec.ts",
+          "line": 8,
+          "column": 36
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-13T07:43:32.768Z",
+    "duration": 17617.897,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

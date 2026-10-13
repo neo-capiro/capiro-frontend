@@ -1,0 +1,721 @@
+[
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 1440px",
+    "resultPath": "/tmp/capiro-unified-corrections-20261013/portfolio-axe-nav-results.json",
+    "rawAxeSha256": "824a0519fd8857530fa534bbe303c07e4703c3e79983df74a5d1014888616863",
+    "url": "http://127.0.0.1:5191/",
+    "environment": {
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "windowWidth": 1440,
+      "windowHeight": 1040,
+      "orientationAngle": 0,
+      "orientationType": "landscape-primary"
+    },
+    "violations": 0,
+    "incomplete": [
+      {
+        "rule": "color-contrast",
+        "target": [
+          ".monogram"
+        ],
+        "html": "<button aria-label=\"Test account\" class=\"monogram\" style=\"width: 32px; height: 32px; border-radius: 50%;\">T</button>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "10.5pt (14px)",
+              "fontWeight": "normal",
+              "messageKey": "shortTextContent",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element content is too short to determine if it is actual text content"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          "._headerActions_1tf87_218 > .primary"
+        ],
+        "html": "<button class=\"button primary\">",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "10.5pt (14px)",
+              "fontWeight": "normal",
+              "messageKey": "bgGradient",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element's background color could not be determined due to a background gradient"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          "._coverage_1tf87_31 > .eyebrow"
+        ],
+        "html": "<p class=\"eyebrow\">Portfolio pulse</p>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": "bgGradient",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element's background color could not be determined due to a background gradient"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          ".row > small"
+        ],
+        "html": "<small>of work linked<br>to an objective</small>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "8.8pt (11.6667px)",
+              "fontWeight": "normal",
+              "messageKey": "bgGradient",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element's background color could not be determined due to a background gradient"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          "._pulse_1tf87_10 > div:nth-child(2) > strong"
+        ],
+        "html": "<strong>1</strong>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "16.5pt (22px)",
+              "fontWeight": "normal",
+              "messageKey": "shortTextContent",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element content is too short to determine if it is actual text content"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          "div:nth-child(2) > .eyebrow"
+        ],
+        "html": "<span class=\"eyebrow\">Clients</span>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": "bgGradient",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element's background color could not be determined due to a background gradient"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          "div:nth-child(3) > .eyebrow"
+        ],
+        "html": "<span class=\"eyebrow\">Need attention</span>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": "bgGradient",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element's background color could not be determined due to a background gradient"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          "div:nth-child(4) > .eyebrow"
+        ],
+        "html": "<span class=\"eyebrow\">Objectives</span>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": "bgGradient",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element's background color could not be determined due to a background gradient"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          "div:nth-child(5) > .eyebrow"
+        ],
+        "html": "<span class=\"eyebrow\">Off track</span>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": "bgGradient",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element's background color could not be determined due to a background gradient"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          "div:nth-child(6) > .eyebrow"
+        ],
+        "html": "<span class=\"eyebrow\">Strategies</span>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": "bgGradient",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element's background color could not be determined due to a background gradient"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          "._tabs_1tf87_137 > .primary"
+        ],
+        "html": "<button class=\"button primary\" aria-pressed=\"true\">All <small>1</small></button>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "9.0pt (12px)",
+              "fontWeight": "normal",
+              "messageKey": "bgGradient",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element's background color could not be determined due to a background gradient"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          ".primary > small"
+        ],
+        "html": "<small>1</small>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "7.5pt (10px)",
+              "fontWeight": "normal",
+              "messageKey": "shortTextContent",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element content is too short to determine if it is actual text content"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          "._profileLogo_1tf87_101"
+        ],
+        "html": "<span class=\"_profileLogo_1tf87_101\" aria-hidden=\"true\">TA</span>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "9.0pt (12px)",
+              "fontWeight": "normal",
+              "messageKey": "bgGradient",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element's background color could not be determined due to a background gradient"
+          }
+        ]
+      },
+      {
+        "rule": "label-content-name-mismatch",
+        "target": [
+          ".monogram"
+        ],
+        "html": "<button aria-label=\"Test account\" class=\"monogram\" style=\"width: 32px; height: 32px; border-radius: 50%;\">T</button>",
+        "checks": [
+          {
+            "id": "label-content-name-mismatch",
+            "data": null,
+            "message": "Unable to determine if the visible text is part of the accessible name"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "test": "Portfolio home preserves accessible names, descriptions and default axe checks at 390px",
+    "resultPath": "/tmp/capiro-unified-corrections-20261013/portfolio-axe-nav-results.json",
+    "rawAxeSha256": "dfa155b7b5efe3cd9e7e62ee1e7fdb7829c811d1dd478a5dd5ff619bbd7e15fd",
+    "url": "http://127.0.0.1:5191/",
+    "environment": {
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "windowWidth": 390,
+      "windowHeight": 844,
+      "orientationAngle": 0,
+      "orientationType": "landscape-primary"
+    },
+    "violations": 0,
+    "incomplete": [
+      {
+        "rule": "color-contrast",
+        "target": [
+          ".monogram"
+        ],
+        "html": "<button aria-label=\"Test account\" class=\"monogram\" style=\"width: 32px; height: 32px; border-radius: 50%;\">T</button>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "10.5pt (14px)",
+              "fontWeight": "normal",
+              "messageKey": "shortTextContent",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element content is too short to determine if it is actual text content"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          "._headerActions_1tf87_218 > .primary"
+        ],
+        "html": "<button class=\"button primary\">",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "9.0pt (12px)",
+              "fontWeight": "normal",
+              "messageKey": "bgGradient",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element's background color could not be determined due to a background gradient"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          "._coverage_1tf87_31 > .eyebrow"
+        ],
+        "html": "<p class=\"eyebrow\">Portfolio pulse</p>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": "bgGradient",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element's background color could not be determined due to a background gradient"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          ".row > small"
+        ],
+        "html": "<small>of work linked<br>to an objective</small>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "8.8pt (11.6667px)",
+              "fontWeight": "normal",
+              "messageKey": "bgGradient",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element's background color could not be determined due to a background gradient"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          "._pulse_1tf87_10 > div:nth-child(2) > strong"
+        ],
+        "html": "<strong>1</strong>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "16.5pt (22px)",
+              "fontWeight": "normal",
+              "messageKey": "shortTextContent",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element content is too short to determine if it is actual text content"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          "div:nth-child(2) > .eyebrow"
+        ],
+        "html": "<span class=\"eyebrow\">Clients</span>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": "bgGradient",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element's background color could not be determined due to a background gradient"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          "div:nth-child(3) > .eyebrow"
+        ],
+        "html": "<span class=\"eyebrow\">Need attention</span>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": "bgGradient",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element's background color could not be determined due to a background gradient"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          "div:nth-child(4) > .eyebrow"
+        ],
+        "html": "<span class=\"eyebrow\">Objectives</span>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": "bgGradient",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element's background color could not be determined due to a background gradient"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          "div:nth-child(5) > .eyebrow"
+        ],
+        "html": "<span class=\"eyebrow\">Off track</span>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": "bgGradient",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element's background color could not be determined due to a background gradient"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          "div:nth-child(6) > .eyebrow"
+        ],
+        "html": "<span class=\"eyebrow\">Strategies</span>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": "bgGradient",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element's background color could not be determined due to a background gradient"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          "._tabs_1tf87_137 > .primary"
+        ],
+        "html": "<button class=\"button primary\" aria-pressed=\"true\">All <small>1</small></button>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "9.0pt (12px)",
+              "fontWeight": "normal",
+              "messageKey": "bgGradient",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element's background color could not be determined due to a background gradient"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          ".primary > small"
+        ],
+        "html": "<small>1</small>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "7.5pt (10px)",
+              "fontWeight": "normal",
+              "messageKey": "shortTextContent",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element content is too short to determine if it is actual text content"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          "._profileLogo_1tf87_101"
+        ],
+        "html": "<span class=\"_profileLogo_1tf87_101\" aria-hidden=\"true\">TA</span>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "9.0pt (12px)",
+              "fontWeight": "normal",
+              "messageKey": "bgGradient",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element's background color could not be determined due to a background gradient"
+          }
+        ]
+      },
+      {
+        "rule": "label-content-name-mismatch",
+        "target": [
+          ".monogram"
+        ],
+        "html": "<button aria-label=\"Test account\" class=\"monogram\" style=\"width: 32px; height: 32px; border-radius: 50%;\">T</button>",
+        "checks": [
+          {
+            "id": "label-content-name-mismatch",
+            "data": null,
+            "message": "Unable to determine if the visible text is part of the accessible name"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "test": "meri home retains full default axe checks at 1440px",
+    "resultPath": "/tmp/capiro-unified-corrections-20261013/shared-axe-v2-results.json",
+    "rawAxeSha256": "b68f571c87803c6c611bfd8f9c195644e3ebb1f2940805030519e640fe043d24",
+    "url": "http://127.0.0.1:5197/meri",
+    "environment": {
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "windowWidth": 1440,
+      "windowHeight": 1040,
+      "orientationAngle": 0,
+      "orientationType": "landscape-primary"
+    },
+    "violations": 0,
+    "incomplete": [
+      {
+        "rule": "color-contrast",
+        "target": [
+          "._newConversation_sgeic_65"
+        ],
+        "html": "<button data-slot=\"button\" class=\"inline-flex items-ce...\" type=\"button\">",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "10.5pt (14px)",
+              "fontWeight": "normal",
+              "messageKey": "bgGradient",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element's background color could not be determined due to a background gradient"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "test": "modules home retains full default axe checks at 1440px",
+    "resultPath": "/tmp/capiro-unified-corrections-20261013/shared-axe-v2-results.json",
+    "rawAxeSha256": "7b41c23a5c6332ce7cc8169594d4ad14cea4153950006c371a4552aae4bf706e",
+    "url": "http://127.0.0.1:5197/modules",
+    "environment": {
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "windowWidth": 1440,
+      "windowHeight": 1040,
+      "orientationAngle": 0,
+      "orientationType": "landscape-primary"
+    },
+    "violations": 0,
+    "incomplete": [
+      {
+        "rule": "color-contrast",
+        "target": [
+          "span[aria-hidden=\"true\"]"
+        ],
+        "html": "<span aria-hidden=\"true\">\u2192</span>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "messageKey": "nonBmp"
+            },
+            "message": "Element content contains only non-text characters"
+          }
+        ]
+      },
+      {
+        "rule": "color-contrast",
+        "target": [
+          "._primaryOpen_10khq_192"
+        ],
+        "html": "<a class=\"_open_10khq_179 _primaryOpen_10khq_192\" href=\"/modules/engagement\">Open Engagement</a>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "10.5pt (14px)",
+              "fontWeight": "normal",
+              "messageKey": "bgGradient",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element's background color could not be determined due to a background gradient"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "test": "meri home retains full default axe checks at 390px",
+    "resultPath": "/tmp/capiro-unified-corrections-20261013/shared-axe-v2-results.json",
+    "rawAxeSha256": "cb17de30e300c2afa646989cf7ee8e84e497cef6d39bfc68d2f687c75a667094",
+    "url": "http://127.0.0.1:5197/meri",
+    "environment": {
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "windowWidth": 390,
+      "windowHeight": 844,
+      "orientationAngle": 0,
+      "orientationType": "landscape-primary"
+    },
+    "violations": 0,
+    "incomplete": []
+  },
+  {
+    "test": "modules home retains full default axe checks at 390px",
+    "resultPath": "/tmp/capiro-unified-corrections-20261013/shared-axe-v2-results.json",
+    "rawAxeSha256": "d16538338e54f04d5a7e2f8f5a3f43b05ce8740601219fd01885761fd85a40dc",
+    "url": "http://127.0.0.1:5197/modules",
+    "environment": {
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "windowWidth": 390,
+      "windowHeight": 844,
+      "orientationAngle": 0,
+      "orientationType": "landscape-primary"
+    },
+    "violations": 0,
+    "incomplete": [
+      {
+        "rule": "color-contrast",
+        "target": [
+          "._primaryOpen_10khq_192"
+        ],
+        "html": "<a class=\"_open_10khq_179 _primaryOpen_10khq_192\" href=\"/modules/engagement\">Open Engagement</a>",
+        "checks": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "contrastRatio": 0,
+              "fontSize": "10.5pt (14px)",
+              "fontWeight": "normal",
+              "messageKey": "bgGradient",
+              "expectedContrastRatio": "4.5:1"
+            },
+            "message": "Element's background color could not be determined due to a background gradient"
+          }
+        ]
+      }
+    ]
+  }
+]

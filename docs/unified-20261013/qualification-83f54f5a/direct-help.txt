@@ -1,0 +1,12 @@
+usage: prepare-direct.py [-h] directory
+
+Copy selected byte-exact entrypoints from the verified evidence archive.
+
+positional arguments:
+  directory
+
+options:
+  -h, --help  show this help message and exit
+
+Exit 0: complete; 1: I/O or validation failure; 2: invalid CLI arguments.
+Original evidence is read-only.

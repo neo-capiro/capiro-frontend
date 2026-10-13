@@ -1,0 +1,26 @@
+{
+  "name": "actual-additions",
+  "command": [
+    "env",
+    "TMPDIR=/workspace/capiro-unified-runtime-tmp-20261013",
+    "node",
+    "/tmp/capiro-unified-final-83f54f5a-20261013/verify-additions-v2.mjs"
+  ],
+  "startedUTC": "2026-10-13T07:53:51.773025+00:00",
+  "endedUTC": "2026-10-13T07:53:55.865231+00:00",
+  "durationSeconds": 4.09223718100111,
+  "exitCode": 0,
+  "sourceBefore": {
+    "head": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+    "tree": "760b05a7a7feacee16815da2767cb83dbb600d95",
+    "applicationTree": "67f821a13c8470ceeb5222eb89d43cea58b1a8c8",
+    "sourceDiff": ""
+  },
+  "sourceAfter": {
+    "head": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+    "tree": "760b05a7a7feacee16815da2767cb83dbb600d95",
+    "applicationTree": "67f821a13c8470ceeb5222eb89d43cea58b1a8c8",
+    "sourceDiff": ""
+  },
+  "sourceChanged": false
+}

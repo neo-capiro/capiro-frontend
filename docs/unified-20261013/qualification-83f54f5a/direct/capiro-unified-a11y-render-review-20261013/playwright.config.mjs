@@ -1,0 +1,2 @@
+import {defineConfig} from '/workspace/capiro-onboard-port-20261013/node_modules/@playwright/test/index.mjs';
+export default defineConfig({testDir:'.',testMatch:'render.spec.ts',workers:1,fullyParallel:false,retries:0,timeout:45000,outputDir:'/tmp/capiro-unified-a11y-render-review-20261013/artifacts',reporter:[['list'],['json',{outputFile:'/tmp/capiro-unified-a11y-render-review-20261013/results.json'}]],use:{launchOptions:{executablePath:'/usr/bin/chromium',args:['--no-sandbox','--disable-dev-shm-usage']},trace:'retain-on-failure',screenshot:'only-on-failure'}});

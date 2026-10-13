@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import ts from '/workspace/capiro-onboard-port-20261013/node_modules/typescript/lib/typescript.js';
+const dir='/tmp/capiro-unified-a11y-helper-type-review-20261013';
+const beforePath='/tmp/capiro-unified-a11y-independent-review-20261013/reviewed-tests/accessibility.ts';
+const afterPath='/workspace/capiro-onboard-port-20261013/apps/web/test/accessibility.ts';
+const before=fs.readFileSync(beforePath,'utf8'), after=fs.readFileSync(afterPath,'utf8');
+const hash=s=>crypto.createHash('sha256').update(s).digest('hex');
+const options={compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext,isolatedModules:true,esModuleInterop:true},fileName:'accessibility.ts'};
+const beforeJS=ts.transpileModule(before,options).outputText,afterJS=ts.transpileModule(after,options).outputText;
+fs.writeFileSync(`${dir}/before.ts`,before);fs.writeFileSync(`${dir}/after.ts`,after);
+fs.writeFileSync(`${dir}/emitted.js`,afterJS);
+const evidence={review:'Read-only type-erasure comparison. No tests/browser/application execution.',beforePath,afterPath,beforeSha256:hash(before),afterSha256:hash(after),exactOnlyDelta:before.replace('window as Window','window as unknown as Window')===after,emittedJSIdentical:beforeJS===afterJS,beforeEmittedSha256:hash(beforeJS),afterEmittedSha256:hash(afterJS),typescriptVersion:ts.version};
+fs.writeFileSync(`${dir}/TYPE-ONLY-DELTA.json`,JSON.stringify(evidence,null,2)+'\n');console.log(JSON.stringify(evidence,null,2));

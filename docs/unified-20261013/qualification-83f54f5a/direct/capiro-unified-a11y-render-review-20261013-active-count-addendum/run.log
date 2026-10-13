@@ -1,0 +1,88 @@
+
+Running 2 tests using 1 worker
+
+(node:1336133) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 ../capiro-unified-a11y-render-review-20261013-active-count-addendum/count.spec.ts:8:36 › light active All count at 1440px has actual rest and hover contrast (8.6s)
+(node:1336388) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 ../capiro-unified-a11y-render-review-20261013-active-count-addendum/count.spec.ts:8:36 › light active All count at 390px has actual rest and hover contrast (7.3s)
+
+
+  1) ../capiro-unified-a11y-render-review-20261013-active-count-addendum/count.spec.ts:8:36 › light active All count at 1440px has actual rest and hover contrast 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('link', { name: 'Open Test Aerospace', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('link', { name: 'Open Test Aerospace', exact: true })
+
+
+      13 |   await page.emulateMedia({colorScheme:'light',reducedMotion:'reduce'});await page.setViewportSize({width,height:width===1440?1040:844});
+      14 |   await page.goto('http://127.0.0.1:5189/');
+    > 15 |   await expect(page.getByRole('link',{name:'Open Test Aerospace',exact:true})).toBeVisible();await page.evaluate(()=>document.fonts.ready);
+         |                                                                                ^
+      16 |   const tab=page.getByRole('navigation',{name:'Profile type',exact:true}).getByRole('button',{name:'All 1',exact:true});await tab.scrollIntoViewIfNeeded();await page.mouse.move(0,0);
+      17 |   const states=[];
+      18 |   for(const state of ['rest','hover']){
+        at /tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/count.spec.ts:15:80
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../capiro-unified-a11y-render-review-20261013-active-count-addendum/artifacts/count-light-active-All-cou-bc50b-ual-rest-and-hover-contrast/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../capiro-unified-a11y-render-review-20261013-active-count-addendum/artifacts/count-light-active-All-cou-bc50b-ual-rest-and-hover-contrast/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../capiro-unified-a11y-render-review-20261013-active-count-addendum/artifacts/count-light-active-All-cou-bc50b-ual-rest-and-hover-contrast/trace.zip
+    Usage:
+
+        npx playwright show-trace ../capiro-unified-a11y-render-review-20261013-active-count-addendum/artifacts/count-light-active-All-cou-bc50b-ual-rest-and-hover-contrast/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) ../capiro-unified-a11y-render-review-20261013-active-count-addendum/count.spec.ts:8:36 › light active All count at 390px has actual rest and hover contrast 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('link', { name: 'Open Test Aerospace', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('link', { name: 'Open Test Aerospace', exact: true })
+
+
+      13 |   await page.emulateMedia({colorScheme:'light',reducedMotion:'reduce'});await page.setViewportSize({width,height:width===1440?1040:844});
+      14 |   await page.goto('http://127.0.0.1:5189/');
+    > 15 |   await expect(page.getByRole('link',{name:'Open Test Aerospace',exact:true})).toBeVisible();await page.evaluate(()=>document.fonts.ready);
+         |                                                                                ^
+      16 |   const tab=page.getByRole('navigation',{name:'Profile type',exact:true}).getByRole('button',{name:'All 1',exact:true});await tab.scrollIntoViewIfNeeded();await page.mouse.move(0,0);
+      17 |   const states=[];
+      18 |   for(const state of ['rest','hover']){
+        at /tmp/capiro-unified-a11y-render-review-20261013-active-count-addendum/count.spec.ts:15:80
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../capiro-unified-a11y-render-review-20261013-active-count-addendum/artifacts/count-light-active-All-cou-be263-ual-rest-and-hover-contrast/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../capiro-unified-a11y-render-review-20261013-active-count-addendum/artifacts/count-light-active-All-cou-be263-ual-rest-and-hover-contrast/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../capiro-unified-a11y-render-review-20261013-active-count-addendum/artifacts/count-light-active-All-cou-be263-ual-rest-and-hover-contrast/trace.zip
+    Usage:
+
+        npx playwright show-trace ../capiro-unified-a11y-render-review-20261013-active-count-addendum/artifacts/count-light-active-All-cou-be263-ual-rest-and-hover-contrast/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    ../capiro-unified-a11y-render-review-20261013-active-count-addendum/count.spec.ts:8:36 › light active All count at 1440px has actual rest and hover contrast 
+    ../capiro-unified-a11y-render-review-20261013-active-count-addendum/count.spec.ts:8:36 › light active All count at 390px has actual rest and hover contrast 
