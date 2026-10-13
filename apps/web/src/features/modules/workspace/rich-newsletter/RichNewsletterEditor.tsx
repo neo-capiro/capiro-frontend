@@ -10,42 +10,40 @@ import {
   Field,
   PageHeader,
   TextInput,
-  UnavailableAction,
 } from "../../../../shared/module-ui";
 import {
   addRichBlock,
   editRichBlock,
   editRichConfig,
-  newRichDraft,
   removeRichBlock,
   type RichDraft,
 } from "./draft";
 import { RichBlockControls } from "./RichBlockControls";
 import { RichPreview } from "./RichPreview";
 import { RichStructure } from "./RichStructure";
+import { RichDocumentActions } from "./RichDocumentActions";
+import { useRichDocument } from "./use-rich-document";
 import styles from "./rich-newsletter.module.css";
 
-type History = { past: RichDraft[]; draft: RichDraft; future: RichDraft[] };
 export function RichNewsletterEditor({ onClose }: { onClose: () => void }) {
-  const [history, setHistory] = useState<History>(() => ({
-    past: [],
-    draft: newRichDraft(),
-    future: [],
-  }));
+  const { owner, state: history } = useRichDocument();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [mobile, setMobile] = useState(false);
   const [plainText, setPlainText] = useState(false);
   const [closing, setClosing] = useState(false);
+  const [previousOwner, setPreviousOwner] = useState(owner);
+  if (previousOwner !== owner) {
+    setPreviousOwner(owner);
+    setSelectedId(null);
+    setMobile(false);
+    setPlainText(false);
+    setClosing(false);
+  }
   const draft = history.draft;
   const selected = selectedId
     ? findNewsletterBlock(draft.design, selectedId)
     : null;
-  const commit = (change: (draft: RichDraft) => RichDraft) =>
-    setHistory((current) => ({
-      past: [...current.past.slice(-29), current.draft],
-      draft: change(current.draft),
-      future: [],
-    }));
+  const commit = owner.edit;
   const update = (change: Partial<NewsletterBlock>) =>
     commit((current) => ({
       ...current,
@@ -62,103 +60,86 @@ export function RichNewsletterEditor({ onClose }: { onClose: () => void }) {
     <section className={styles.screen}>
       <PageHeader
         title="Rich newsletter editor preview"
-        description="Local draft only. Saving, collaboration and delivery are unavailable; leaving this view clears your edits."
+        description="Edit locally, then explicitly create or review a saved rich document. Collaboration and delivery remain unavailable; leaving clears local edits, while uncertain write guards remain for this session and client scope."
         actions={
-          <ActionButton onClick={() => setClosing(true)}>
+          <ActionButton
+            disabled={Boolean(history.pending)}
+            onClick={() => setClosing(true)}
+          >
             Close preview
           </ActionButton>
         }
       />
       {closing && (
         <div role="alert" className={styles.notice}>
-          <p>Discard this local draft and leave the preview?</p>
-          <ActionButton onClick={onClose}>Discard and leave</ActionButton>
+          <p>
+            Discard this local draft and leave the preview? An uncertain request
+            may already have committed; leaving does not undo it.
+          </p>
+          <ActionButton disabled={Boolean(history.pending)} onClick={onClose}>
+            Discard and leave
+          </ActionButton>
           <ActionButton onClick={() => setClosing(false)}>
             Keep editing
           </ActionButton>
         </div>
       )}
-      <div className={styles.toolbar}>
-        <ActionButton
-          disabled={!history.past.length}
-          onClick={() =>
-            setHistory((current) =>
-              current.past.length
-                ? {
-                    past: current.past.slice(0, -1),
-                    draft: current.past.at(-1)!,
-                    future: [current.draft, ...current.future],
-                  }
-                : current,
-            )
-          }
-        >
-          Undo
-        </ActionButton>
-        <ActionButton
-          disabled={!history.future.length}
-          onClick={() =>
-            setHistory((current) =>
-              current.future.length
-                ? {
-                    past: [...current.past, current.draft],
-                    draft: current.future[0]!,
-                    future: current.future.slice(1),
-                  }
-                : current,
-            )
-          }
-        >
-          Redo
-        </ActionButton>
-        <ActionButton
-          aria-pressed={mobile}
-          onClick={() => setMobile((value) => !value)}
-        >
-          Mobile preview
-        </ActionButton>
-        <ActionButton
-          aria-pressed={plainText}
-          onClick={() => setPlainText((value) => !value)}
-        >
-          Plain text
-        </ActionButton>
-        <UnavailableAction reason="Saving rich newsletters is not available yet.">
-          Save newsletter
-        </UnavailableAction>
-        <UnavailableAction reason="Save and review a newsletter before staging it.">
-          Stage newsletter
-        </UnavailableAction>
-      </div>
-      <CampaignFields draft={draft} change={commit} />
-      <div className={styles.editor}>
-        <RichStructure
-          design={draft.design}
-          selectedId={selectedId}
-          select={setSelectedId}
-          add={add}
-        />
-        <RichPreview draft={draft} mobile={mobile} plainText={plainText} />
-        {selected ? (
-          <RichBlockControls
-            key={selected.id}
-            block={selected}
-            update={update}
-            remove={() => {
-              commit((current) => ({
-                ...current,
-                design: removeRichBlock(current.design, selected.id),
-              }));
-              setSelectedId(null);
-            }}
+      <RichDocumentActions state={history} owner={owner} />
+      <fieldset
+        disabled={Boolean(history.pending)}
+        inert={Boolean(history.pending)}
+        className={styles.draftEditor}
+      >
+        <div className={styles.toolbar}>
+          <ActionButton disabled={!history.past.length} onClick={owner.undo}>
+            Undo
+          </ActionButton>
+          <ActionButton disabled={!history.future.length} onClick={owner.redo}>
+            Redo
+          </ActionButton>
+          <ActionButton
+            aria-pressed={mobile}
+            onClick={() => setMobile((value) => !value)}
+          >
+            Mobile preview
+          </ActionButton>
+          <ActionButton
+            aria-pressed={plainText}
+            onClick={() => setPlainText((value) => !value)}
+          >
+            Plain text
+          </ActionButton>
+        </div>
+        <CampaignFields draft={draft} change={commit} />
+        <div className={styles.editor}>
+          <RichStructure
+            design={draft.design}
+            selectedId={selectedId}
+            select={setSelectedId}
+            add={add}
           />
-        ) : (
-          <aside className={styles.controls}>
-            <h2>Block settings</h2>
-            <p>Select a block to edit its content and style.</p>
-          </aside>
-        )}
-      </div>
+          <RichPreview draft={draft} mobile={mobile} plainText={plainText} />
+          {selected ? (
+            <RichBlockControls
+              key={`${history.editorRevision}:${selected.id}`}
+              block={selected}
+              update={update}
+              remove={() => {
+                commit((current) => ({
+                  ...current,
+                  design: removeRichBlock(current.design, selected.id),
+                }));
+                setSelectedId(null);
+              }}
+            />
+          ) : (
+            <aside className={styles.controls}>
+              <h2>Block settings</h2>
+              <p>Select a block to edit its content and style.</p>
+            </aside>
+          )}
+        </div>
+      </fieldset>
     </section>
   );
 }

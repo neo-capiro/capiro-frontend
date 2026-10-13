@@ -9,9 +9,26 @@ import { fileURLToPath } from "node:url";
 const usage =
   "Usage: node declarations.mjs [NEW_OUTPUT_DIRECTORY | --help]\nVerify packed declarations in NodeNext and browser Bundler modes. No network or native operations. Exit0 pass/help; exit1 qualification failure; exit2 invalid arguments.";
 
-export function qualifyDeclarations(directory) {
+function checkNegativeDiagnostics(output, receiving) {
+  assert.equal((output.match(/error TS/g) ?? []).length, receiving ? 6 : 3);
+  assert.equal((output.match(/error TS2345/g) ?? []).length, 2);
+  assert.equal((output.match(/error TS2322/g) ?? []).length, receiving ? 3 : 1);
+  assert.match(output, /invented-kind/);
+  assert.match(output, /invented-platform/);
+  assert.match(output, /number.*not assignable to type 'string'/);
+  if (receiving) {
+    assert.equal((output.match(/error TS2353/g) ?? []).length, 1);
+    assert.match(output, /string.*not assignable to type 'number'/);
+    assert.match(output, /'recordId' does not exist in type/);
+  }
+}
+
+function compileConsumer(directory, mode, fixture, negative) {
   const compiler = createRequire(import.meta.url).resolve("typescript/bin/tsc");
-  const common = {
+  const [kind, module, moduleResolution] = mode;
+  const name = `${fixture}-${kind}-${negative ? "negative" : "positive"}`;
+  const filename = path.join(directory, `${name}.json`);
+  const compilerOptions = {
     target: "ES2022",
     strict: true,
     noUncheckedIndexedAccess: true,
@@ -19,66 +36,63 @@ export function qualifyDeclarations(directory) {
     skipLibCheck: false,
     types: [],
     lib: ["ES2022", "DOM"],
+    module,
+    moduleResolution,
   };
+  writeFileSync(
+    filename,
+    JSON.stringify(
+      {
+        compilerOptions,
+        files: [
+          fileURLToPath(
+            new URL(
+              `./fixtures/${fixture}-${negative ? "negative" : "positive"}.ts`,
+              import.meta.url,
+            ),
+          ),
+        ],
+      },
+      null,
+      2,
+    ),
+    { flag: "wx" },
+  );
+  const command = [process.execPath, compiler, "-p", filename];
+  const result = spawnSync(command[0], command.slice(1), {
+    encoding: "utf8",
+    timeout: 120000,
+  });
+  const output = `${result.stdout ?? ""}${result.stderr ?? ""}`;
+  writeFileSync(path.join(directory, `${name}.log`), output, { flag: "wx" });
+  const record = {
+    name,
+    command,
+    exitCode: result.status,
+    signal: result.signal,
+    spawnError: result.error ? String(result.error) : null,
+    expectedExit: negative ? 2 : 0,
+  };
+  writeFileSync(
+    path.join(directory, `${name}-exit.json`),
+    JSON.stringify(record, null, 2),
+    { flag: "wx" },
+  );
+  assert.equal(result.status, record.expectedExit, `${name}: ${output}`);
+  if (negative) checkNegativeDiagnostics(output, fixture === "receiving");
+  return { ...record, pass: true };
+}
+
+export function qualifyDeclarations(directory) {
   const records = [];
-  for (const [kind, module, moduleResolution] of [
+  for (const mode of [
     ["node", "NodeNext", "NodeNext"],
     ["browser", "ESNext", "Bundler"],
   ]) {
-    for (const negative of [false, true]) {
-      const name = `${kind}-${negative ? "negative" : "positive"}`;
-      const filename = path.join(directory, `${name}.json`);
-      writeFileSync(
-        filename,
-        JSON.stringify(
-          {
-            compilerOptions: { ...common, module, moduleResolution },
-            files: [
-              fileURLToPath(
-                new URL(
-                  `./fixtures/consumer-${negative ? "negative" : "positive"}.ts`,
-                  import.meta.url,
-                ),
-              ),
-            ],
-          },
-          null,
-          2,
-        ),
-        { flag: "wx" },
-      );
-      const command = [process.execPath, compiler, "-p", filename];
-      const result = spawnSync(command[0], command.slice(1), {
-        encoding: "utf8",
-        timeout: 120000,
-      });
-      const output = `${result.stdout ?? ""}${result.stderr ?? ""}`;
-      writeFileSync(path.join(directory, `${name}.log`), output, {
-        flag: "wx",
-      });
-      const record = {
-        name,
-        command,
-        exitCode: result.status,
-        signal: result.signal,
-        spawnError: result.error ? String(result.error) : null,
-        expectedExit: negative ? 2 : 0,
-      };
-      writeFileSync(
-        path.join(directory, `${name}-exit.json`),
-        JSON.stringify(record, null, 2),
-        { flag: "wx" },
-      );
-      assert.equal(result.status, record.expectedExit, `${name}: ${output}`);
-      if (negative) {
-        assert.equal((output.match(/error TS/g) ?? []).length, 3);
-        assert.equal((output.match(/error TS2345/g) ?? []).length, 2);
-        assert.equal((output.match(/error TS2322/g) ?? []).length, 1);
-        assert.match(output, /invented-kind/);
-        assert.match(output, /invented-platform/);
-        assert.match(output, /number.*not assignable to type 'string'/);
+    for (const fixture of ["consumer", "receiving"]) {
+      for (const negative of [false, true]) {
+        records.push(compileConsumer(directory, mode, fixture, negative));
       }
-      records.push({ ...record, pass: true });
     }
   }
   writeFileSync(

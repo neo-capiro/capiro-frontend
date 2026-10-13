@@ -1,0 +1,45 @@
+--- /tmp/capiro-newsletter-lifecycle-browser-20261013/first-source/newsletter-document-navigation.spec.ts	2026-10-13 03:47:11.221279806 +0000
++++ /workspace/capiro-newsletter-port/apps/web/test/browser/newsletter-document-navigation.spec.ts	2026-10-13 03:48:38.408562770 +0000
+@@ -35,6 +35,7 @@
+   await expect(
+     page.getByText("create in progress…", { exact: true }),
+   ).toBeVisible();
++  await expect.poll(() => fixture.calls("create").length).toBe(1);
+   await expect(page.getByLabel("Newsletter name")).toBeDisabled();
+   await expect(button(page, "Close preview")).toBeDisabled();
+   await page.goBack();
+@@ -43,7 +44,8 @@
+   ).toBeVisible();
+   held.release();
+   await held.settled;
+-  await button(page, "Rich newsletter preview").click();
++  await page.goForward();
++  await expect(page).toHaveURL(editorUrl);
+   await expect(page.getByLabel("Newsletter name")).toHaveValue(
+     "Untitled newsletter",
+   );
+@@ -94,13 +96,15 @@
+     await expect(
+       page.getByText("stage in progress…", { exact: true }),
+     ).toBeVisible();
++    await expect.poll(() => fixture.calls("stage").length).toBe(1);
+     await page.goBack();
+     await expect(
+       page.getByRole("heading", { name: "Workspace", exact: true }),
+     ).toBeVisible();
+     held.release();
+     await held.settled;
+-    await button(page, "Rich newsletter preview").click();
++    await page.goForward();
++    await expect(page).toHaveURL(editorUrl);
+     fixture.control.current = {
+       ...fixture.control.current,
+       id: documentId.toUpperCase(),
+@@ -189,6 +193,7 @@
+     await expect(
+       page.getByText("save in progress…", { exact: true }),
+     ).toBeVisible();
++    await expect.poll(() => fixture.calls("save").length).toBe(1);
+     await expect(page.getByLabel("Newsletter name")).toBeDisabled();
+     if (replacement === "client")
+       await navigate(page, `${editorUrl}&clientId=${otherClientId}`);

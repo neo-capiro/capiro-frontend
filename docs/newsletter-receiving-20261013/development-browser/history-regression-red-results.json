@@ -1,0 +1,164 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-newsletter-port/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-newsletter-lifecycle-browser-20261013/history-regression-red.config.mjs",
+      "--grep",
+      "rich saved preview excludes"
+    ],
+    "configFile": "/tmp/capiro-newsletter-lifecycle-browser-20261013/history-regression-red.config.mjs",
+    "rootDir": "/workspace/capiro-newsletter-port/apps/web/test/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-newsletter-lifecycle-browser-20261013/history-regression-red-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-newsletter-port/apps/web/test/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "newsletter-document-lifecycle.spec.ts",
+          "newsletter-document-navigation.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-newsletter-lifecycle-browser-20261013/history-regression-red-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "newsletter-document-lifecycle.spec.ts",
+      "file": "newsletter-document-lifecycle.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "rich saved preview excludes local edits and sanitizes active HTML without remote requests",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1477,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m3\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m3\u001b[39m\n    at /workspace/capiro-newsletter-port/apps/web/test/browser/newsletter-document-lifecycle.spec.ts:245:53",
+                    "location": {
+                      "file": "/workspace/capiro-newsletter-port/apps/web/test/browser/newsletter-document-lifecycle.spec.ts",
+                      "column": 53,
+                      "line": 245
+                    },
+                    "snippet": "  243 |   const historyLength = await page.evaluate(() => history.length);\n  244 |   await adoptDocument(page);\n> 245 |   expect(await page.evaluate(() => history.length)).toBe(historyLength);\n      |                                                     ^\n  246 |   await page\n  247 |     .getByLabel(\"Subject\", { exact: true })\n  248 |     .fill(\"Unsaved private subject\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-newsletter-port/apps/web/test/browser/newsletter-document-lifecycle.spec.ts",
+                        "column": 53,
+                        "line": 245
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m3\u001b[39m\n\n  243 |   const historyLength = await page.evaluate(() => history.length);\n  244 |   await adoptDocument(page);\n> 245 |   expect(await page.evaluate(() => history.length)).toBe(historyLength);\n      |                                                     ^\n  246 |   await page\n  247 |     .getByLabel(\"Subject\", { exact: true })\n  248 |     .fill(\"Unsaved private subject\");\n    at /workspace/capiro-newsletter-port/apps/web/test/browser/newsletter-document-lifecycle.spec.ts:245:53"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T03:49:20.285Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-newsletter-lifecycle-browser-20261013/history-regression-red-artifacts/newsletter-document-lifecy-4d494-TML-without-remote-requests/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-newsletter-lifecycle-browser-20261013/history-regression-red-artifacts/newsletter-document-lifecy-4d494-TML-without-remote-requests/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-newsletter-lifecycle-browser-20261013/history-regression-red-artifacts/newsletter-document-lifecy-4d494-TML-without-remote-requests/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-newsletter-port/apps/web/test/browser/newsletter-document-lifecycle.spec.ts",
+                    "column": 53,
+                    "line": 245
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "83dd986f0cde428e5eb3-cc994a5a9b9d78fe95fa",
+          "file": "newsletter-document-lifecycle.spec.ts",
+          "line": 238,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-13T03:49:19.712Z",
+    "duration": 2422.3540000000003,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

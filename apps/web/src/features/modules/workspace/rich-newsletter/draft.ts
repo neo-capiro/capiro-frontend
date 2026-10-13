@@ -9,7 +9,7 @@ import {
   type NewsletterDesign,
 } from "@capiro/shared/newsletter";
 
-/** Only local drafts constructed by the public factories enter this editor. */
+/** Local starter uses public factories; saved drafts enter through the receiving adapter. */
 export function newRichDraft() {
   const design = createNewsletterLayout(1);
   // The starter's text-only logo should inherit the readable body color.

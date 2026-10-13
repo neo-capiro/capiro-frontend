@@ -10,6 +10,15 @@
   align-items: center;
   gap: 10px;
 }
+.lifecycleActions,
+.draftEditor {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+  display: grid;
+  gap: 16px;
+}
 .fields {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));

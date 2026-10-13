@@ -1,3 +1,4 @@
+import { parseNewsletterRecordDiscriminator } from "@capiro/shared/newsletter";
 import type { OutreachRecord } from "../../../shared/capiro/operations/engagement";
 import { richNewsletterId } from "../../../shared/capiro/operations/newsletter-routing";
 
@@ -36,8 +37,9 @@ export function newsletterDestination(
 }
 
 export function newsletterRecordKind(record: OutreachRecord) {
-  if (!record.metadata?.newsletterStageId) return "ordinary";
-  return record.type === "outbound_campaign" ? "candidate" : "invalid";
+  const parsed = parseNewsletterRecordDiscriminator(record);
+  if (!parsed.ok) return "invalid";
+  return parsed.value.kind === "rich" ? "candidate" : "ordinary";
 }
 
 export function newsletterBackHref(clientId?: string | null) {

@@ -6,6 +6,7 @@ import {
   newsletterPlainText,
 } from "@capiro/shared/newsletter-render";
 import type { RichDraft } from "./draft";
+import type { NewsletterPreview } from "@capiro/shared/newsletter";
 import styles from "./rich-newsletter.module.css";
 
 /** Canonical rendering plus inert display isolation; never a sendable artifact. */
@@ -17,6 +18,12 @@ function previewDocument(draft: RichDraft) {
     sanitizeHtml: (html) =>
       DOMPurify.sanitize(html, { USE_PROFILES: { html: true } }),
   });
+  return sanitizePreviewDocument(rendered);
+}
+
+/** Saved owner HTML is untrusted and uses the same inert display as local HTML. */
+function sanitizePreviewDocument(rendered: string) {
+  if (!DOMPurify.isSupported) return "";
   const sanitized = DOMPurify.sanitize(rendered, {
     WHOLE_DOCUMENT: true,
     FORBID_TAGS: [
@@ -57,6 +64,41 @@ function previewDocument(draft: RichDraft) {
   return `<!doctype html>${preview.documentElement.outerHTML}`;
 }
 
+export function SavedRichPreview({ preview }: { preview: NewsletterPreview }) {
+  const document = useMemo(
+    () => sanitizePreviewDocument(preview.html),
+    [preview],
+  );
+  return (
+    <section className={styles.preview} aria-label="Saved newsletter preview">
+      <h2>Saved-state preview</h2>
+      <p>
+        This explicit request rendered saved owner state, excluding local edits.
+        The response has no document or revision token and does not confirm an
+        exact saved revision. External images and links are disabled.
+      </p>
+      <iframe
+        key={document}
+        title="Saved newsletter preview"
+        sandbox=""
+        referrerPolicy="no-referrer"
+        srcDoc={document}
+      />
+      <details>
+        <summary>Saved plain text</summary>
+        <pre className={styles.plainText}>{preview.plainText}</pre>
+      </details>
+      <ul>
+        {preview.checks.map((check, index) => (
+          <li key={`${check.id}:${index}`}>
+            {check.severity}: {check.label} — {check.detail}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 export function RichPreview({
   draft,
   mobile,
@@ -83,7 +125,10 @@ export function RichPreview({
           {text}
         </pre>
       ) : (
+        // Replace the inert browsing context instead of adding srcdoc history
+        // entries that consume Back before the parent route can dispose a view.
         <iframe
+          key={document}
           title="Rich newsletter preview"
           sandbox=""
           referrerPolicy="no-referrer"

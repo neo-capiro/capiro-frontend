@@ -7,7 +7,14 @@ import { pathToFileURL } from "node:url";
 import * as newsletter from "@capiro/shared/newsletter";
 import * as renderer from "@capiro/shared/newsletter-render";
 import corpus from "./fixtures/renderer-characterizations.cjs";
+import receivingCorpus from "./fixtures/newsletter-receiving-corpus.cjs";
 import { withFixedClock } from "./fixed-clock.mjs";
+import {
+  completeNewsletterNames,
+  originalNewsletterExports,
+  originalNewsletterNames,
+  publicNewsletterNames,
+} from "./public-namespace.mjs";
 
 const expected = JSON.parse(
   readFileSync(
@@ -18,8 +25,63 @@ const require = createRequire(import.meta.url);
 const commonNewsletter = require("@capiro/shared/newsletter");
 const commonRenderer = require("@capiro/shared/newsletter-render");
 const actual = withFixedClock(() =>
-  corpus.characterize(commonNewsletter, commonRenderer),
+  corpus.characterize(
+    originalNewsletterExports(commonNewsletter),
+    commonRenderer,
+  ),
 );
+
+for (const [kind, api] of [
+  ["CommonJS", commonNewsletter],
+  ["ESM", newsletter],
+]) {
+  const result = withFixedClock(() =>
+    receivingCorpus.runNewsletterReceivingCorpus(api),
+  );
+  test(`${kind} runs the complete pinned 130-case receiving corpus`, () => {
+    assert.equal(result.total, 130);
+    assert.equal(result.cases.length, result.total);
+    assert.equal(
+      new Set(result.cases.map((item) => item.name)).size,
+      result.total,
+    );
+  });
+  for (const item of result.cases) {
+    test(`${kind} receiving: ${item.name}`, () =>
+      assert.equal(item.passed, true, item.error));
+  }
+}
+
+test("the reused public receiving corpus and declarations retain published bytes", () => {
+  const bindings = JSON.parse(
+    readFileSync(
+      new URL("./fixtures/RECEIVING-FIXTURE-BINDINGS.json", import.meta.url),
+    ),
+  );
+  for (const entry of [...bindings.entries, ...bindings.originalFixtures]) {
+    const bytes = readFileSync(
+      new URL(`./fixtures/${entry.path}`, import.meta.url),
+    );
+    assert.equal(bytes.length, entry.bytes, entry.path);
+    assert.equal(
+      createHash("sha256").update(bytes).digest("hex"),
+      entry.sha256,
+      entry.path,
+    );
+  }
+});
+
+test("the explicit legacy projection matches the immutable original namespace", () => {
+  assert.deepEqual(originalNewsletterNames, expected[0].value);
+});
+
+test("the complete public namespace has exactly the eleven receiving additions", () => {
+  assert.deepEqual(
+    Object.keys(commonNewsletter).sort(),
+    completeNewsletterNames,
+  );
+  assert.deepEqual(publicNewsletterNames(newsletter), completeNewsletterNames);
+});
 
 test("the complete immutable producer corpus survives packed frontend consumption", () => {
   assert.equal(expected.length, 116);
@@ -57,13 +119,19 @@ test("CommonJS and ESM consumers resolve the same public contract and renderer",
   assert.equal(newsletter.NEWSLETTER_TEMPLATE_ID, "bp_weekly_newsletter");
 });
 
-test("private source, output and undeclared subpath imports remain refused", () => {
+test("private source, output and undeclared subpath imports remain refused", async () => {
   for (const subpath of [
     "src/newsletter.ts",
     "dist/newsletter.js",
     "newsletter-fonts",
+    "newsletter-receiving",
+    "src/newsletter-receiving.ts",
+    "dist/newsletter-receiving.js",
   ]) {
     assert.throws(() => require.resolve(`@capiro/shared/${subpath}`), {
+      code: "ERR_PACKAGE_PATH_NOT_EXPORTED",
+    });
+    await assert.rejects(import(`@capiro/shared/${subpath}`), {
       code: "ERR_PACKAGE_PATH_NOT_EXPORTED",
     });
   }

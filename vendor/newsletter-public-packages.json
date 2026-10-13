@@ -22,7 +22,32 @@
         "newsletter-fonts.catalog",
         "newsletter-social-share"
       ],
-      "status": "qualified-packed-frontend-consumer-only"
+      "status": "preserved-previous-qualified-packed-frontend-input"
+    },
+    {
+      "file": "capiro-shared-0.0.0-38fec5c8.tgz",
+      "repository": "https://github.com/neo-capiro/capirov2",
+      "sourceCommit": "38fec5c83585850ed75a7d3693b3b90d517e70af",
+      "distributionCommit": "9ffab390ef444d7ea0bf4eb0d68224f810245e25",
+      "distributionPath": "docs/shared-newsletter-receiving-packed-distribution-20261013/qualified-38fec5c8/artifact/capiro-shared-0.0.0.tgz",
+      "bytes": 532178,
+      "sha256": "3e435f280fac8fd301eb753e9fc7ead93691cf979fc1641792fedd88e1bfd6d5",
+      "integrity": "sha512-qYNGTMe2gP6BHxDw+daj1SHkNbAFenVY/PnScny1IkHl/PL3cspHSFYa9KAyCeWesjXUOSRTWOKxX07oH6OvQw==",
+      "regularEntryCount": 187,
+      "browserExports": [
+        "@capiro/shared/newsletter",
+        "@capiro/shared/newsletter-render"
+      ],
+      "runtimeClosure": [
+        "newsletter",
+        "newsletter-render",
+        "newsletter-fonts",
+        "newsletter-fonts.catalog",
+        "newsletter-social-share",
+        "newsletter-receiving"
+      ],
+      "status": "candidate-packed-frontend-receiving-consumer"
     }
-  ]
+  ],
+  "activeFile": "capiro-shared-0.0.0-38fec5c8.tgz"
 }

@@ -3,6 +3,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { completeNewsletterNames } from "./public-namespace.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const closure = [
@@ -11,6 +12,7 @@ const closure = [
   "newsletter-fonts",
   "newsletter-fonts.catalog",
   "newsletter-social-share",
+  "newsletter-receiving",
 ];
 const usage =
   "Usage: node browser-check.mjs NEW_OUTPUT_DIRECTORY | --help\nBundle only governed public newsletter imports and evaluate the immutable corpus in Chromium. Set PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH for a system browser. No service/provider calls. Exit0 pass/help; exit1 qualification failure; exit2 invalid arguments.";
@@ -24,7 +26,9 @@ async function bundleConsumer(directory) {
     ...closure.map((name) => path.join(dist, `${name}.js`)),
     path.join(here, "browser-entry.mjs"),
     path.join(here, "fixed-clock.mjs"),
+    path.join(here, "public-namespace.mjs"),
     path.join(here, "fixtures/renderer-characterizations.cjs"),
+    path.join(here, "fixtures/newsletter-receiving-corpus.cjs"),
   ]);
   let graph;
   await build({
@@ -71,7 +75,7 @@ async function bundleConsumer(directory) {
   assert.deepEqual(
     new Set(real),
     allowed,
-    "Bundle only five packed modules and the three consumer fixtures",
+    "Bundle only six packed modules and the declared consumer fixtures",
   );
   return path.join(directory, "bundle/newsletter.js");
 }
@@ -105,10 +109,35 @@ async function evaluateBrowser(bundle, directory) {
     );
     assert.equal(expected.length, 116);
     assert.deepEqual(actual, expected);
+    const publicNames = await page.evaluate(() =>
+      globalThis.CapiroNewsletterQualification.packedNewsletterNames(),
+    );
+    writeFileSync(
+      path.join(directory, "browser-public-namespace.json"),
+      JSON.stringify(publicNames, null, 2),
+      { flag: "wx" },
+    );
+    assert.deepEqual(publicNames, completeNewsletterNames);
+    const receiving = await page.evaluate(() =>
+      globalThis.CapiroNewsletterQualification.qualifyPackedReceiving(),
+    );
+    writeFileSync(
+      path.join(directory, "browser-receiving-results.json"),
+      JSON.stringify(receiving, null, 2),
+      { flag: "wx" },
+    );
+    assert.equal(receiving.total, 130);
+    assert.equal(receiving.cases.length, 130);
+    assert.equal(new Set(receiving.cases.map((item) => item.name)).size, 130);
+    assert.deepEqual(receiving.failed, []);
+    assert.equal(receiving.passed, 130);
     assert.deepEqual(requests, []);
     assert.deepEqual(pageErrors, []);
     const result = {
       passedCharacterizations: actual.length,
+      passedReceivingCases: receiving.passed,
+      publicNames,
+      packedModuleCount: closure.length,
       browserVersion: browser.version(),
       executablePath: executablePath ?? "Playwright-managed Chromium",
       requests,
