@@ -1,4 +1,5 @@
 import { createApiClient } from "../src/shared/portfolio/api/http";
+import type { CommentDeadlineRecord } from "../src/shared/federal-register/comment-deadlines";
 
 export const commentRecord = (
   documentNumber = "2026-12345",
@@ -19,7 +20,7 @@ export const commentRecord = (
   },
 });
 export const commentPage = (
-  data = [commentRecord()],
+  data: CommentDeadlineRecord[] = [commentRecord()],
   dateFrom = "2026-03-01",
   dateTo = "2026-03-31",
   page = 1,
