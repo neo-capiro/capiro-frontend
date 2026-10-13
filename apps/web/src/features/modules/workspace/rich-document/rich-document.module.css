@@ -12,6 +12,9 @@
   padding: 8px;
   border-bottom: 1px solid var(--border);
 }
+.toolbar :is(button, select, summary) {
+  scroll-margin-block: 8px;
+}
 .toolbar > button,
 .toolbar select,
 .menu summary {
