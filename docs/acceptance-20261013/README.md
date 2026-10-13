@@ -1,5 +1,7 @@
 # Portfolio acceptance reconciliation and bounded repair batch
 
+The bounded repair checkpoint completed its combined offline gates at 14:09:26 UTC: **1,266 Portfolio and 350 shared browser cases passed** with exact ID coverage and zero retries, execution skips or flaky results. [Qualification](qualification-ae8da60e/README.md), [independent audit](qualification-ae8da60e/INDEPENDENT-AUDIT.md), and [post-batch delta](POST-BATCH-DELTA.json) preserve exact source/build provenance and all 337 native rows open.
+
 The frozen qualified application at `90ccdd47de7a989e822590d616d69baa15a37d5d`, published under documentation head `5875e240c7b266a0e63903c4d0ed9b30c08d4d9a`, has **337 open native acceptance rows**. This mapping accepts none.
 
 | Primary remaining gap | Rows |
@@ -16,7 +18,7 @@ These are mutually exclusive primary classifications. Each row also records seco
 
 The 213 `unblocked_now` flags identify an executable offline next step, such as a negative-control reproduction or focused evidence review. They do not promise 213 whole-row native acceptances. Live service/identity binding, provider effects and forbidden operations remain separate.
 
-The new worktree `/workspace/capiro-acceptance-batch-20261013` and branch `repair/capiro-acceptance-batch-20261013` start from the published source above. [Batch instructions](BATCH-1-INSTRUCTIONS.md) allocate exclusive feature paths and retain root ownership of shared integration. The original integration worktree and draft PR20 remain frozen while the batch is developed.
+The new worktree `/workspace/capiro-acceptance-batch-20261013` and branch `repair/capiro-acceptance-batch-20261013` start from the published source above. [Batch instructions](BATCH-1-INSTRUCTIONS.md) allocate exclusive feature paths and retain root ownership of shared integration. The original integration checkout is preserved at its prior published head; this successor is published to the same draft PR20 only after its independent combined qualification.
 
 The finite batch covers current-read concealment and action admission in Relationships, Prospects, meeting artifacts and Bill search; folder-access receipts and interrupted-write handling; an Activity uncertainty reproduction; Objective destination sibling keys; authored Meri dark styling; and current rendered assessment of retained axe incompletes. Additive failing baselines precede production fixes. Existing tests and valid contract behavior must survive.
 
@@ -26,7 +28,7 @@ Four broader implementation rows remain outside this batch: CORE-109 Outreach so
 
 The selected Meri light frame is `442:81437`; the authored dark workspace is `448:89992`, both within the requested 3.1 canvas. The latter uses the Meri dark collection `448:90059`, dark content/sidebar gradients, light primary actions and a light shared header. Exact tool-provided reference images and read-only variable inspection are retained under `figma-targets/`. No design file was changed.
 
-Qualification of the new batch is pending. The completed Files qualification remains attached to source 90cc; it cannot qualify later source changes. Root will run the full combined gate only after this batch is stable and reviewed. Main merge, deployment, image shipping, resource/credential/security/database changes, real provider messages, billing and paid model work remain outside authorization.
+The new batch now has its own combined qualification linked above. Historical Files qualification remains attached to source 90cc and is preserved separately; it was not reused to qualify the later product changes. Main merge, deployment, image shipping, resource/credential/security/database changes, real provider messages, billing and paid model work remain outside authorization.
 
 
 ## Bounded implementation and focused verification

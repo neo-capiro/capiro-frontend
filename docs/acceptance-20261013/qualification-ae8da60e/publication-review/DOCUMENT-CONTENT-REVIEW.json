@@ -1,0 +1,141 @@
+{
+  "utc": "2026-10-13T14:17:32.378636+00:00",
+  "nativeRowsAccepted": 0,
+  "nativeRowsOpen": 337,
+  "boundedRowCount": 19,
+  "boundedUnique": 19,
+  "deferredRowCount": 4,
+  "boundedAndDeferredCoverOriginal23ImplementationRows": true,
+  "overlap": [],
+  "changedRowsAllOpen": true,
+  "deferredRowsAllOpen": true,
+  "criteriaPreservedExact": [
+    "CORE-059",
+    "ENG-notes_list",
+    "ENG-debrief_list",
+    "ENG-org_read",
+    "ENG-org_drawer",
+    "ENG-email_history",
+    "ENG-email_thread",
+    "ENG-targets_read",
+    "ENG-target_recommendations",
+    "ENG-targets_member_search",
+    "ENG-targets_staff_search",
+    "ENG-targets_state_search",
+    "ENG-target_committee_staff",
+    "BILL-04",
+    "BILL-06",
+    "OBJ-26",
+    "PROS-017",
+    "PROS-023",
+    "PROS-032"
+  ],
+  "criteriaDifferent": [],
+  "relativeMarkdownLinks": [
+    {
+      "document": "/workspace/capiro-acceptance-batch-20261013/docs/acceptance-20261013/README.md",
+      "target": "qualification-ae8da60e/README.md",
+      "exists": true
+    },
+    {
+      "document": "/workspace/capiro-acceptance-batch-20261013/docs/acceptance-20261013/README.md",
+      "target": "qualification-ae8da60e/INDEPENDENT-AUDIT.md",
+      "exists": true
+    },
+    {
+      "document": "/workspace/capiro-acceptance-batch-20261013/docs/acceptance-20261013/README.md",
+      "target": "POST-BATCH-DELTA.json",
+      "exists": true
+    },
+    {
+      "document": "/workspace/capiro-acceptance-batch-20261013/docs/acceptance-20261013/README.md",
+      "target": "RECONCILED-337.json",
+      "exists": true
+    },
+    {
+      "document": "/workspace/capiro-acceptance-batch-20261013/docs/acceptance-20261013/README.md",
+      "target": "ROOT-MAPPING-VALIDATION.json",
+      "exists": true
+    },
+    {
+      "document": "/workspace/capiro-acceptance-batch-20261013/docs/acceptance-20261013/README.md",
+      "target": "BATCH-1-INSTRUCTIONS.md",
+      "exists": true
+    },
+    {
+      "document": "/workspace/capiro-acceptance-batch-20261013/docs/acceptance-20261013/README.md",
+      "target": "accessibility-review/ASSESSMENT.md",
+      "exists": true
+    },
+    {
+      "document": "/workspace/capiro-acceptance-batch-20261013/docs/acceptance-20261013/README.md",
+      "target": "meri-compatibility/ASSESSMENT.md",
+      "exists": true
+    },
+    {
+      "document": "/workspace/capiro-acceptance-batch-20261013/docs/acceptance-20261013/README.md",
+      "target": "verification/FOCUSED-SUMMARY.json",
+      "exists": true
+    },
+    {
+      "document": "/workspace/capiro-acceptance-batch-20261013/docs/acceptance-20261013/README.md",
+      "target": "source-review/README.md",
+      "exists": true
+    },
+    {
+      "document": "/workspace/capiro-acceptance-batch-20261013/docs/acceptance-20261013/README.md",
+      "target": "meri-compatibility/PR60-ASSESSMENT.md",
+      "exists": true
+    },
+    {
+      "document": "/workspace/capiro-acceptance-batch-20261013/docs/acceptance-20261013/HANDOVER-QUALIFIED-20261013.md",
+      "target": "qualification-ae8da60e/README.md",
+      "exists": true
+    },
+    {
+      "document": "/workspace/capiro-acceptance-batch-20261013/docs/acceptance-20261013/HANDOVER-QUALIFIED-20261013.md",
+      "target": "qualification-ae8da60e/INDEPENDENT-AUDIT.md",
+      "exists": true
+    },
+    {
+      "document": "/workspace/capiro-acceptance-batch-20261013/docs/acceptance-20261013/HANDOVER-QUALIFIED-20261013.md",
+      "target": "POST-BATCH-DELTA.json",
+      "exists": true
+    }
+  ],
+  "newDocsBindings": [
+    {
+      "path": "/workspace/capiro-acceptance-batch-20261013/docs/acceptance-20261013/README.md",
+      "bytes": 7032,
+      "sha256": "dea917300f539006672c6340ae47871f8de47f693c1f1e6e1f421247a8f3b906"
+    },
+    {
+      "path": "/workspace/capiro-acceptance-batch-20261013/docs/acceptance-20261013/HANDOVER-QUALIFIED-20261013.md",
+      "bytes": 3521,
+      "sha256": "e05c8a3047760de9ec0a76ea6038c4a898b58623b658d7ee8cf3b1c49a760de5"
+    },
+    {
+      "path": "/workspace/capiro-acceptance-batch-20261013/docs/acceptance-20261013/qualification-ae8da60e/README.md",
+      "bytes": 9463,
+      "sha256": "4dafd204c118e44ca12f63f1d0d8fa566b6d9d7355a587c7d44ad46f2a160d5f"
+    },
+    {
+      "path": "/workspace/capiro-acceptance-batch-20261013/docs/acceptance-20261013/qualification-ae8da60e/INDEPENDENT-AUDIT.md",
+      "bytes": 4949,
+      "sha256": "05cdc379b1b9ccbf40fdd6529932c0040a9ea520d06f12cd42f768d62136bab4"
+    },
+    {
+      "path": "/workspace/capiro-acceptance-batch-20261013/docs/acceptance-20261013/POST-BATCH-DELTA.json",
+      "bytes": 20486,
+      "sha256": "8cbd12c3d5380fdf41d86935f694d701379ee7ad5580cf1f06a89aa74d73f143"
+    }
+  ],
+  "finalReadUTC": "2026-10-13T14:18:43.331913+00:00",
+  "clarifications": {
+    "auditLocationNote": [
+      "The copied independent audit refers to its JSON files as adjacent. In this publication they are preserved inside `evidence.tar.gz` under `final-gate-review/`. Extract that directory to read exact IDs, receipts and source comparisons; `MANIFEST.json` binds every archived member to its original bytes."
+    ],
+    "remainingNativeCriteriaNote": "The remaining_native_criteria arrays retain verbatim baseline whole-row criteria, including any historical reproduce-first or repair wording. boundedChange and offlineBoundedChangeVerified record the current completed offline subcriteria; the qualification receipt binds their successor evidence. Native/design/dependency portions remain open, and no whole row is accepted.",
+    "status": "Both review clarity suggestions resolved outside the immutable archive."
+  }
+}
