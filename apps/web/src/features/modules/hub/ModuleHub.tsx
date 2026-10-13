@@ -145,9 +145,9 @@ export function ModuleHub() {
 }
 
 function ModuleHubInformation() {
-  const [container, setContainer] = useState<HTMLSpanElement | null>(null);
+  const [container, setContainer] = useState<HTMLDivElement | null>(null);
   return (
-    <span className={styles.infoAnchor} ref={setContainer}>
+    <div className={styles.infoAnchor} ref={setContainer}>
       <Tooltip>
         <TooltipTrigger asChild>
           <button
@@ -173,7 +173,7 @@ function ModuleHubInformation() {
           </TooltipPrimitive.Portal>
         )}
       </Tooltip>
-    </span>
+    </div>
   );
 }
 

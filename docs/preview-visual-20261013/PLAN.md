@@ -59,7 +59,7 @@ open-portal landmark finding. Preserve those red baselines and the subsequent
 named-aside/description attempts. The final composition uses canonical Tooltip
 and TooltipTrigger with the adopted Radix Portal/Content/Arrow public API,
 because the vendor wrapper does not expose Portal.container. A feature-owned
-24px span inside the existing main receives the portal; content mounts only
+24px div inside the existing main receives the portal; content mounts only
 after that container exists. The native role, ID and trigger description remain
 unchanged; no extra landmark, ARIA naming override or rule suppression remains.
 Feature-owned CSS supplies the opaque inverse surface, padding, radius, shadow,
