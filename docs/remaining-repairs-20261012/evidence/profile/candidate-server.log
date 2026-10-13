@@ -1,0 +1,91 @@
+Test-only component server: http://127.0.0.1:5299
+8:07:00 PM [vite] (client) page reload /workspace/capiro-remaining-profile/apps/web/src/features/portfolio/client-profile/FacilitiesManager.tsx
+8:07:00 PM [vite] (client) page reload /workspace/capiro-remaining-profile/apps/web/src/features/portfolio/files/files.module.css
+8:07:28 PM [vite] (client) page reload /workspace/capiro-remaining-profile/apps/web/src/features/portfolio/client-profile/ActivityFeed.tsx
+8:07:28 PM [vite] (client) page reload /workspace/capiro-remaining-profile/apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx
+8:07:28 PM [vite] (client) page reload /workspace/capiro-remaining-profile/apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx
+8:07:29 PM [vite] (client) page reload /workspace/capiro-remaining-profile/apps/web/src/features/portfolio/client-profile/overview.module.css
+8:07:47 PM [vite] (client) page reload /workspace/capiro-remaining-profile/apps/web/src/features/portfolio/client-profile/ActivityFeed.tsx
+8:07:54 PM [vite] (client) Pre-transform error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] [0mAdjacent JSX elements must be wrapped in an enclosing tag.
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m capiro-remaining-profile/apps/web/src/features/portfolio/client-profile/ActivityFeed.tsx:70:7 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m70 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m<[38;5;249md[0m[38;5;249mi[0m[38;5;249mv[0m[38;5;249m [0m[38;5;249mc[0m[38;5;249ml[0m[38;5;249ma[0m[38;5;249ms[0m[38;5;249ms[0m[38;5;249mN[0m[38;5;249ma[0m[38;5;249mm[0m[38;5;249me[0m[38;5;249m=[0m[38;5;249m{[0m[38;5;249ms[0m[38;5;249mt[0m[38;5;249my[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249ms[0m[38;5;249m.[0m[38;5;249ma[0m[38;5;249mc[0m[38;5;249mt[0m[38;5;249mi[0m[38;5;249mv[0m[38;5;249mi[0m[38;5;249mt[0m[38;5;249my[0m[38;5;249mR[0m[38;5;249mo[0m[38;5;249mw[0m[38;5;249m}[0m[38;5;249m>[0m
+ [38;5;240m   │[0m       ┬  
+ [38;5;240m   │[0m       ╰── 
+ [38;5;240m   │[0m 
+ [38;5;240m   │[0m [38;5;115mHelp[0m: Did you want a JSX fragment `<>...</>`?
+[38;5;246m────╯[0m
+
+  Plugin: vite:oxc
+  File: /workspace/capiro-remaining-profile/apps/web/src/features/portfolio/client-profile/ActivityFeed.tsx
+8:07:55 PM [vite] Internal server error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] [0mAdjacent JSX elements must be wrapped in an enclosing tag.
+    [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m capiro-remaining-profile/apps/web/src/features/portfolio/client-profile/ActivityFeed.tsx:70:7 [38;5;246m][0m
+    [38;5;246m│[0m
+ [38;5;246m70 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m<[38;5;249md[0m[38;5;249mi[0m[38;5;249mv[0m[38;5;249m [0m[38;5;249mc[0m[38;5;249ml[0m[38;5;249ma[0m[38;5;249ms[0m[38;5;249ms[0m[38;5;249mN[0m[38;5;249ma[0m[38;5;249mm[0m[38;5;249me[0m[38;5;249m=[0m[38;5;249m{[0m[38;5;249ms[0m[38;5;249mt[0m[38;5;249my[0m[38;5;249ml[0m[38;5;249me[0m[38;5;249ms[0m[38;5;249m.[0m[38;5;249ma[0m[38;5;249mc[0m[38;5;249mt[0m[38;5;249mi[0m[38;5;249mv[0m[38;5;249mi[0m[38;5;249mt[0m[38;5;249my[0m[38;5;249mR[0m[38;5;249mo[0m[38;5;249mw[0m[38;5;249m}[0m[38;5;249m>[0m
+ [38;5;240m   │[0m       ┬  
+ [38;5;240m   │[0m       ╰── 
+ [38;5;240m   │[0m 
+ [38;5;240m   │[0m [38;5;115mHelp[0m: Did you want a JSX fragment `<>...</>`?
+[38;5;246m────╯[0m
+
+  Plugin: vite:oxc
+  File: /workspace/capiro-remaining-profile/apps/web/src/features/portfolio/client-profile/ActivityFeed.tsx
+      at transformWithOxc (file:///workspace/capiro-followup/node_modules/vite/dist/node/chunks/node.js:7581:19)
+      at TransformPluginContext.transform (file:///workspace/capiro-followup/node_modules/vite/dist/node/chunks/node.js:7653:26)
+      at EnvironmentPluginContainer.transform (file:///workspace/capiro-followup/node_modules/vite/dist/node/chunks/node.js:8545:51)
+      at async loadAndTransform (file:///workspace/capiro-followup/node_modules/vite/dist/node/chunks/node.js:20184:26)
+      at async viteTransformMiddleware (file:///workspace/capiro-followup/node_modules/vite/dist/node/chunks/node.js:20404:20)
+8:07:58 PM [vite] (client) page reload /workspace/capiro-remaining-profile/apps/web/src/features/portfolio/client-profile/ActivityFeed.tsx
+8:08:03 PM [vite] (client) page reload /workspace/capiro-remaining-profile/apps/web/src/features/portfolio/client-profile/ActivityFeed.tsx
+8:09:14 PM [vite] (client) [Unhandled error] TypeError: Intl.DateTimeFormat(...).resolvedOptions is not a function
+ > ActivityTimeline ../../src/features/portfolio/client-profile/ActivityTimeline.tsx:26:37
+    24 |    const timeline = useRef<HTMLElement>(null);
+    25 |    const expandedContent = useRef<HTMLDivElement>(null);
+    26 |    const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+       |                                       ^
+    27 |    const [filters, setFilters] = useState({ ...emptyActivityFilters });
+    28 |    const [expanded, setExpanded] = useState(false);
+ > Object.react_stack_bottom_frame ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:28571:19
+ > renderWithHooks ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:8030:21
+ > updateFunctionComponent ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:10569:18
+ > beginWork ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:12205:17
+ > runWithFiberInDEV ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:1045:29
+ > performUnitOfWork ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:19176:21
+ > workLoopSync ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:19004:40
+ > renderRootSync ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:18985:10
+ > performWorkOnRoot ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:18094:34
+
+8:09:14 PM [vite] (client) [console.warn] An error occurred in the <ActivityTimeline> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+8:10:01 PM [vite] (client) [Unhandled error] TypeError: Intl.DateTimeFormat(...).resolvedOptions is not a function
+ > ActivityTimeline ../../src/features/portfolio/client-profile/ActivityTimeline.tsx:26:37
+    24 |    const timeline = useRef<HTMLElement>(null);
+    25 |    const expandedContent = useRef<HTMLDivElement>(null);
+    26 |    const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+       |                                       ^
+    27 |    const [filters, setFilters] = useState({ ...emptyActivityFilters });
+    28 |    const [expanded, setExpanded] = useState(false);
+ > Object.react_stack_bottom_frame ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:28571:19
+ > renderWithHooks ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:8030:21
+ > updateFunctionComponent ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:10569:18
+ > beginWork ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:12205:17
+ > runWithFiberInDEV ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:1045:29
+ > performUnitOfWork ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:19176:21
+ > workLoopSync ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:19004:40
+ > renderRootSync ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:18985:10
+ > performWorkOnRoot ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:18094:34
+
+8:10:01 PM [vite] (client) [console.warn] An error occurred in the <ActivityTimeline> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+8:11:07 PM [vite] (client) page reload /workspace/capiro-remaining-profile/apps/web/src/features/portfolio/client-profile/FacilityFields.tsx
+8:11:07 PM [vite] (client) page reload /workspace/capiro-remaining-profile/apps/web/src/features/portfolio/client-profile/FacilityFields.tsx

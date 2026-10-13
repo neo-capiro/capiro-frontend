@@ -307,3 +307,12 @@ test('transfer canonicalization changes only the exact agreed module paths', () 
   assert.ok(moved.includes("import('@/shared/portfolio/api/http')"));
   assert.ok(moved.includes("const unchanged = '@/features/portfolio/public'"));
 });
+
+test('newsletter browser boundary admits only its two governed public subpaths', () => {
+  const file = 'apps/web/src/features/modules/workspace/Newsletter.ts';
+  const accepted = "import '@capiro/shared/newsletter'; import '@capiro/shared/newsletter-render';";
+  assert.deepEqual(inspectSources(new Map([[file, accepted]])).errors, []);
+  for (const specifier of ['@capiro/shared', '@capiro/shared/money', '@capiro/shared/newsletter-fonts', '@capiro/shared/src/newsletter', '@capiro/shared/dist/newsletter']) {
+    assert.ok(inspectSources(new Map([[file, `import '${specifier}';`]])).errors.some(error => error.includes('non-public package')), specifier);
+  }
+});

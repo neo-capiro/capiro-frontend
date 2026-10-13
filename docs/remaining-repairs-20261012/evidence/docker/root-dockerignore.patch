@@ -1,0 +1,13 @@
+diff --git a/.dockerignore b/.dockerignore
+index 0cad08b..2aa8722 100644
+--- a/.dockerignore
++++ b/.dockerignore
+@@ -14,7 +14,7 @@ playwright-report
+ test-results
+ **/test-results
+ **/playwright-report
+-**/work
++work
+ **/*.tsbuildinfo
+ .git
+ **/.qa

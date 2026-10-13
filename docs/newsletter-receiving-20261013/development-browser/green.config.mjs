@@ -1,0 +1,2 @@
+import base from "/workspace/capiro-newsletter-port/apps/web/test/browser/playwright.config.ts";
+export default {...base, testDir:"/workspace/capiro-newsletter-port/apps/web/test/browser", testMatch:['newsletter-document-lifecycle.spec.ts','newsletter-document-navigation.spec.ts'], workers:1, retries:0, webServer:undefined, outputDir:"/tmp/capiro-newsletter-lifecycle-browser-20261013/green-artifacts", reporter:[['list'],['json',{outputFile:"/tmp/capiro-newsletter-lifecycle-browser-20261013/green-results.json"}]]};

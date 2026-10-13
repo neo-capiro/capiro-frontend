@@ -1,0 +1,480 @@
+{
+  "capturedAtUtc": "2026-10-12T22:59:25.531826+00:00",
+  "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "documents": [
+    {
+      "file": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/HANDOVER.md",
+      "bytes": 7760,
+      "sha256": "3fb8a7098869942a700db72ea2108566d58262af00b904157cf84744cafbd907",
+      "pendingPhrases": []
+    },
+    {
+      "file": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/QUALIFICATION.md",
+      "bytes": 7698,
+      "sha256": "04a0e52b38e704e9d5c7707b9bbd0fb924be365cfc727eb84741b0306adf171c",
+      "pendingPhrases": []
+    }
+  ],
+  "mappingCount": 21,
+  "mappingPending": "Fresh exact-source combined qualification; all337 native rows remain held",
+  "relativeLinks": [
+    {
+      "document": "HANDOVER.md",
+      "title": "QUALIFICATION.md",
+      "link": "QUALIFICATION.md",
+      "destinationExists": true,
+      "mappedProducer": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/QUALIFICATION.md",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "04a0e52b38e704e9d5c7707b9bbd0fb924be365cfc727eb84741b0306adf171c"
+    },
+    {
+      "document": "HANDOVER.md",
+      "title": "row audit",
+      "link": "evidence/final-ledger-review/REPORT.md",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-final-ledger-review/REPORT.md",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "8efcf5ef08ef2debf2346cd9189f2cf2b712e39a9c9b0f647c0dd011cf86f6b0"
+    },
+    {
+      "document": "HANDOVER.md",
+      "title": "final source addendum",
+      "link": "evidence/final-ledger-review/addendum-1585438/REPORT.md",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-final-ledger-review/addendum-1585438/REPORT.md",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "54485552eaa326dcc30465937ecfb6ad51941c6c0fde2facff87489d95d1a263"
+    },
+    {
+      "document": "HANDOVER.md",
+      "title": "Scope gaps",
+      "link": "evidence/final-ledger-review/SCOPE-GAPS.md",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-final-ledger-review/SCOPE-GAPS.md",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "2c4320d619a0872c4943243e64c8490c36be1eddff270e9ed684dec68ab3f90d"
+    },
+    {
+      "document": "HANDOVER.md",
+      "title": "integration map",
+      "link": "evidence/root/integration-map-final-1585438.json",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-root-evidence/integration-map-final-1585438.json",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "51cebed5762657a50541b5a8fc949eeadd4bcea9249060a2dd43670c068539f1"
+    },
+    {
+      "document": "HANDOVER.md",
+      "title": "source receipt",
+      "link": "evidence/root/FROZEN-SOURCE-RECEIPT-1585438.json",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-root-evidence/FROZEN-SOURCE-RECEIPT-1585438.json",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "093ab5ab98b706c0e77902eca5f75dd834aabc2293c103260854ce985c57347f"
+    },
+    {
+      "document": "HANDOVER.md",
+      "title": "STRUCTURE-REVIEW.md",
+      "link": "STRUCTURE-REVIEW.md",
+      "destinationExists": true,
+      "mappedProducer": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/STRUCTURE-REVIEW.md",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "875ede7b2cf40fd38a2684fc52d49e8a4cf608b2ac5579e79553a1beb1c1da8b"
+    },
+    {
+      "document": "HANDOVER.md",
+      "title": "frozen remote-head receipt",
+      "link": "evidence/root/REMOTE-HEADS-FROZEN-1585438.txt",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-root-evidence/REMOTE-HEADS-FROZEN-1585438.txt",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "419cc75cc5807a78cf42564a87ef400683faee150c1f81b0ce186a581e085313"
+    },
+    {
+      "document": "HANDOVER.md",
+      "title": "The coordinated plan",
+      "link": "PLAN.md",
+      "destinationExists": true,
+      "mappedProducer": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/PLAN.md",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "ffe21079b07f7903da8d433b747b916271c0d438fdbf0dac1c2d2333ac33b15a"
+    },
+    {
+      "document": "HANDOVER.md",
+      "title": "archive receipt",
+      "link": "evidence/root/source-archive-1585438/SOURCE-ARCHIVE-RECEIPT.json",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-root-evidence/source-archive-1585438/SOURCE-ARCHIVE-RECEIPT.json",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "6382443255886751cc9bd5acf2b43655af9b1019e8437d0221cd7aa6e9270e57"
+    },
+    {
+      "document": "HANDOVER.md",
+      "title": "reproduction recipe",
+      "link": "evidence/root/source-archive-1585438/REPRODUCTION.md",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-root-evidence/source-archive-1585438/REPRODUCTION.md",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "88a2e00e56ad0e2536ed130ef9b31c250d2c9a51ed939047d8a175271b63de57"
+    },
+    {
+      "document": "HANDOVER.md",
+      "title": "independent archive review",
+      "link": "evidence/profile/source-archive-1585438-review/REPORT.md",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-profile-evidence/source-archive-1585438-review/REPORT.md",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "9dbf1f786696905a2fe5f1c14edbf23ffd900d63287f6c73e825bbf27d36a03b"
+    },
+    {
+      "document": "HANDOVER.md",
+      "title": "EVIDENCE-MANIFEST.json",
+      "link": "EVIDENCE-MANIFEST.json",
+      "destinationExists": false,
+      "mappedProducer": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/EVIDENCE-MANIFEST.json",
+      "producerExists": false,
+      "classification": "KNOWN_PUBLICATION_TARGET",
+      "sha256": null
+    },
+    {
+      "document": "HANDOVER.md",
+      "title": "preservation verification",
+      "link": "PRESERVATION-VERIFICATION.json",
+      "destinationExists": false,
+      "mappedProducer": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/PRESERVATION-VERIFICATION.json",
+      "producerExists": false,
+      "classification": "KNOWN_PUBLICATION_TARGET",
+      "sha256": null
+    },
+    {
+      "document": "HANDOVER.md",
+      "title": "original Figma preservation audit",
+      "link": "design-baseline/README.md",
+      "destinationExists": true,
+      "mappedProducer": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/design-baseline/README.md",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "c064eb9b5ada13b3442e3812c9ee9f305a51cd1a17d3b579690d487c58e45af9"
+    },
+    {
+      "document": "HANDOVER.md",
+      "title": "additive captures",
+      "link": "design-baseline/ADDITIONAL-CAPTURES.md",
+      "destinationExists": true,
+      "mappedProducer": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/design-baseline/ADDITIONAL-CAPTURES.md",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "854ba0caa5045510217b5ae2fb874941e3f8f7cb87124fdc88b709148e55b5e4"
+    },
+    {
+      "document": "HANDOVER.md",
+      "title": "final gate review",
+      "link": "evidence/final-gate-review/addendum-1585438/REPORT.md",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-final-gate-review/addendum-1585438/REPORT.md",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "52e1d721343a52d4e1af366c0e3109bef0f3aa5a2fbee38b1ffeb7ae4c6dd348"
+    },
+    {
+      "document": "HANDOVER.md",
+      "title": "coverage addendum",
+      "link": "evidence/calendar-independent-review/final-1585438-coverage/coverage-and-limits.md",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-calendar-independent-review/final-1585438-coverage/coverage-and-limits.md",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "d3ec93d28aece253933301e6ddd8c0248af738a490c10f924c868dd7afc5c511"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "HANDOVER.md",
+      "link": "HANDOVER.md",
+      "destinationExists": true,
+      "mappedProducer": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/HANDOVER.md",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "3fb8a7098869942a700db72ea2108566d58262af00b904157cf84744cafbd907"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "Install",
+      "link": "evidence/qualification/final-1585438/clean-install-exit.json",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-qualification/final-1585438/clean-install-exit.json",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "1813f0bfc88b3e777f35ac6e5b3fd1f3b05467734931284ae040617bc778558c"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "Results",
+      "link": "evidence/qualification/final-1585438/corrected-regression-results.json",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-qualification/final-1585438/corrected-regression-results.json",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "6c6b144746b68d242ec556d25df2d6776210845ce56a01039defc3c6c65a7147"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "Log",
+      "link": "evidence/qualification/final-1585438/combined-check.log",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-qualification/final-1585438/combined-check.log",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "81a2fb6497a3973649181522b29ceb8c804e67ab5ea5cfc623cd9a53609f405e"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "receipt",
+      "link": "evidence/qualification/final-1585438/combined-check-exit.json",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-qualification/final-1585438/combined-check-exit.json",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "1e1b3c1fe73f399cfb944ab715fea299bc9d4b712e5a76c539cc4b1e39266d7d"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "Log",
+      "link": "evidence/qualification/final-1585438/elements-check.log",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-qualification/final-1585438/elements-check.log",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "383abcefa6f0918b9e3441e1f2966aa5c0d9619abc348873b5851ed8bcc87ec0"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "Build identity",
+      "link": "evidence/qualification/final-1585438/BUILD-IDENTITY.json",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-qualification/final-1585438/BUILD-IDENTITY.json",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "9bab5f88efd0ee22c8ec539a2082e94b64b415ac7a5a416a751a9aa8fe3726e7"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "Smoke",
+      "link": "evidence/qualification/final-1585438/production-artifacts/production-smoke.json",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/production-smoke.json",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "653bf3486ea9ec193195ed3289ac8e44a3729ef58b19a48842c8448c990dd36f"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "receipt",
+      "link": "evidence/qualification/final-1585438/production-server-exit.json",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-qualification/final-1585438/production-server-exit.json",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "afcc2925fa4bc95bdc5a9b7c4f86810e202b9c42fc4c5caf35151d7d9d6d585d"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "Log",
+      "link": "evidence/qualification/final-1585438/docker-context.log",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-qualification/final-1585438/docker-context.log",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "4fa53b9d49d6e82abd32a3c497d5d1d10b0c784f010fd4eb997eeca1493f8a65"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "Results",
+      "link": "evidence/qualification/final-1585438/modules-browser-results.json",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-qualification/final-1585438/modules-browser-results.json",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "a702239c8a547b7811a4a719e060df09448d822d4873daa3b2648e3d5aefff6d"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "receipt",
+      "link": "evidence/qualification/final-1585438/modules-browser-exit.json",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-qualification/final-1585438/modules-browser-exit.json",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "6f074b687aba8936f12639adac955a0b916312604809b29a9f1b3338fe55b9b1"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "Final summary",
+      "link": "evidence/qualification/final-1585438/PORTFOLIO-FINAL-SUMMARY.json",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-qualification/final-1585438/PORTFOLIO-FINAL-SUMMARY.json",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "c36a656d782893c5dc3107afe7ffc7c59ccb84fd1ede8ad5655e712f8e945015"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "results",
+      "link": "evidence/qualification/final-1585438/portfolio-browser-results.json",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-qualification/final-1585438/portfolio-browser-results.json",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "df511e86bf2b7e32102716d7509bff264b1a4fe8b51c48f1867fb3ecb88aa68f"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "receipt",
+      "link": "evidence/qualification/final-1585438/portfolio-browser-exit.json",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-qualification/final-1585438/portfolio-browser-exit.json",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "ea734bd1ec3251a9002ac6ab1ae19094ec6505d4ab0426845e46dc62043a49e4"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "failed build",
+      "link": "evidence/qualification/final-1585438/docker-build.log",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-qualification/final-1585438/docker-build.log",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "efac2a8f7ed6bd0750749a8a725cf27f2c026967582a51a205f59020c8ccedb3"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "unchanged-source receipt",
+      "link": "evidence/qualification/final-1585438/docker-build-exit.json",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-qualification/final-1585438/docker-build-exit.json",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "78c1eb82c96f1a25af2429e74a38dba6493557ddf7220ba614583c2a41155d1d"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "image-absence receipt",
+      "link": "evidence/docker/DOCKER-IMAGE-BLOCKER-1585438.json",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-docker-evidence/DOCKER-IMAGE-BLOCKER-1585438.json",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "5b2b410de96ff1f446193b8df8bbd1428f1ada82b22465c499387956efe5cb43"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "archive-save attempts",
+      "link": "evidence/root/LIBRARY-ARCHIVE-SAVE-BLOCKER.json",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-root-evidence/LIBRARY-ARCHIVE-SAVE-BLOCKER.json",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "8d9067bec972e8d32b12f0a5efcdc3b911cfddc2dec20a060c6e6cf4b2b994ad"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "Checkpoint",
+      "link": "evidence/root/PR15-104495D-FAILED-CHECKPOINT.json",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-root-evidence/PR15-104495D-FAILED-CHECKPOINT.json",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "14e0e9392ed9d5967d6e0f352d022b219df56240d0aa448c86beaaec2c9af08d"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "Final failed summary",
+      "link": "evidence/qualification/final-adbc84b/PORTFOLIO-FINAL-SUMMARY.json",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-qualification/final-adbc84b/PORTFOLIO-FINAL-SUMMARY.json",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "3e8f590b76ac83838183969d67bf23ff431ca1b7d50ec2191e032619fd9303eb"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "Checkpoint",
+      "link": "evidence/root/PR15-D68-MODULES-FAILED-CHECKPOINT.md",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-root-evidence/PR15-D68-MODULES-FAILED-CHECKPOINT.md",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "7cf3edc51f464e897e9b29b0a1b29d466771996ce0ab46c00f43f35b69a6bae2"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "lane audit",
+      "link": "evidence/final-ledger-review/REPORT.md",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-final-ledger-review/REPORT.md",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "8efcf5ef08ef2debf2346cd9189f2cf2b712e39a9c9b0f647c0dd011cf86f6b0"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "independent final gate review",
+      "link": "evidence/final-gate-review/addendum-1585438/REPORT.md",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-final-gate-review/addendum-1585438/REPORT.md",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "52e1d721343a52d4e1af366c0e3109bef0f3aa5a2fbee38b1ffeb7ae4c6dd348"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "title": "coverage addendum",
+      "link": "evidence/calendar-independent-review/final-1585438-coverage/coverage-and-limits.md",
+      "destinationExists": false,
+      "mappedProducer": "/tmp/capiro-remaining-calendar-independent-review/final-1585438-coverage/coverage-and-limits.md",
+      "producerExists": true,
+      "classification": "EXISTING_PRODUCER",
+      "sha256": "d3ec93d28aece253933301e6ddd8c0248af738a490c10f924c868dd7afc5c511"
+    }
+  ],
+  "linkOccurrences": 43,
+  "existingProducerOccurrences": 41,
+  "knownPublicationTargetOccurrences": [
+    {
+      "document": "HANDOVER.md",
+      "title": "EVIDENCE-MANIFEST.json",
+      "link": "EVIDENCE-MANIFEST.json",
+      "destinationExists": false,
+      "mappedProducer": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/EVIDENCE-MANIFEST.json",
+      "producerExists": false,
+      "classification": "KNOWN_PUBLICATION_TARGET",
+      "sha256": null
+    },
+    {
+      "document": "HANDOVER.md",
+      "title": "preservation verification",
+      "link": "PRESERVATION-VERIFICATION.json",
+      "destinationExists": false,
+      "mappedProducer": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/PRESERVATION-VERIFICATION.json",
+      "producerExists": false,
+      "classification": "KNOWN_PUBLICATION_TARGET",
+      "sha256": null
+    }
+  ],
+  "missingProducerOccurrences": [],
+  "finalGateReportSHA256": "52e1d721343a52d4e1af366c0e3109bef0f3aa5a2fbee38b1ffeb7ae4c6dd348",
+  "finalGateManifestSHA256": "517fb274df6cd6a58fdd0ddf20c1d4ba26ccb9066139ca515504110b64316477",
+  "coverageSHA256": "d3ec93d28aece253933301e6ddd8c0248af738a490c10f924c868dd7afc5c511"
+}

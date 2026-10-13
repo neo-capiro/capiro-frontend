@@ -1,0 +1,17 @@
+{
+  "pid": 875187,
+  "command": [
+    "env",
+    "NODE_OPTIONS=--max-old-space-size=4096",
+    "npm",
+    "run",
+    "build"
+  ],
+  "startedUTC": "2026-10-12T22:10:56.820501+00:00",
+  "source": {
+    "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+    "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+    "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+    "sourceDiff": ""
+  }
+}

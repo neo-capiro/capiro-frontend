@@ -9,6 +9,8 @@ import { CommitmentView } from "./CommitmentView";
 import { EngagementOverview } from "./EngagementOverview";
 import { MeetingLibrary } from "./MeetingLibrary";
 import { OutreachView } from "./OutreachView";
+import { NewsletterDestination } from "./NewsletterDestination";
+import { newsletterDestination } from "./newsletter-route";
 import { ObjectiveOutreachDestination } from "./ObjectiveOutreachDestination";
 import { PlanView } from "./PlanView";
 import { ReportView } from "./ReportView";
@@ -28,6 +30,19 @@ const tabs = [
   label,
 }));
 export function EngagementScreen() {
+  const params = useSearchParams();
+  const destination = newsletterDestination(new URLSearchParams(params));
+  return destination.kind === "none" ? (
+    <OrdinaryEngagementScreen />
+  ) : (
+    <NewsletterDestination
+      key={JSON.stringify(destination)}
+      destination={destination}
+    />
+  );
+}
+
+function OrdinaryEngagementScreen() {
   const params = useSearchParams();
   const requestedView = params.get("view");
   const requestedClient = params.get("clientId");
@@ -131,6 +146,7 @@ export function EngagementScreen() {
       )}
       {view === "outreach" && (
         <OutreachView
+          key={JSON.stringify([clientId, draft, session, initialCreate])}
           clientId={clientId}
           initialCreate={initialCreate}
           directoryContext={

@@ -1,0 +1,133 @@
+{
+  "head": "8ef07b197eb3d41685aaba897a6ef208d43f2277",
+  "status": "PROPOSED_NOT_EXECUTED",
+  "cases": [
+    {
+      "id": "R01",
+      "scope": "first-slice",
+      "contract": "Create selected basic layout once, admit matching canonical campaign and navigate to its editor; failures retain chooser and do not invent a document.",
+      "originalAssertionOrSource": "original-NewsletterTemplateChooser.test.tsx:46"
+    },
+    {
+      "id": "R02",
+      "scope": "first-slice",
+      "contract": "Load exact document; malformed, wrong-ID,403/404/503 receipts expose no editable stale design or action. Explicit successful retry restores current source.",
+      "originalAssertionOrSource": "additional current-authority control"
+    },
+    {
+      "id": "R03",
+      "scope": "first-slice",
+      "contract": "PATCH exact current revision/name/config/design; preserve nested columns, unedited supported design/font/source-client fields. Never call generic workspace.document.update/snapshot.",
+      "originalAssertionOrSource": "original-api.ts:33; newsletter.service.ts:268"
+    },
+    {
+      "id": "R04",
+      "scope": "first-slice",
+      "contract": "Edit B while save of A is held; A receipt advances only matching document revision and does not erase B or mark B saved. Next explicit save carries latest B/revision.",
+      "originalAssertionOrSource": "original-NewsletterEditor.tsx:385"
+    },
+    {
+      "id": "R05",
+      "scope": "first-slice",
+      "contract": "409 save retains local input, shows conflict and blocks preview/stage/publication from claiming saved state; deliberate current reload/review needed. No automatic replacement save.",
+      "originalAssertionOrSource": "original-NewsletterEditor.tsx:392/416; newsletter.service.ts:296"
+    },
+    {
+      "id": "R06",
+      "scope": "first-slice",
+      "contract": "Lost save response remains unconfirmed; no automatic new save/stage. Current GET reconciliation is distinct from successful save receipt; retain input and require deliberate resolution.",
+      "originalAssertionOrSource": "additional unknown-outcome control"
+    },
+    {
+      "id": "R07",
+      "scope": "first-slice",
+      "contract": "Pending list/load/save/preview followed by document route, actor/session/org/client replacement or unmount cannot update former/new editor, navigate, or dispatch a later chained request.",
+      "originalAssertionOrSource": "original-NewsletterEditor.test.tsx:388/676; current ApplicationBoundary/queries"
+    },
+    {
+      "id": "R08",
+      "scope": "first-slice",
+      "contract": "Save-before-preview order uses latest acknowledged document; failed save sends zero preview calls. Held preview cannot render after source replacement. HTML iframe remains sandboxed without script/navigation privileges.",
+      "originalAssertionOrSource": "original-NewsletterEditor.test.tsx:1094; original-NewsletterReview.tsx:56"
+    },
+    {
+      "id": "R09",
+      "scope": "first-slice",
+      "contract": "Canonical sanitization removes scripts/event handlers/javascript and unsafe CSS URLs before rich paste/preview; safe text/links and nested structure survive. Retain immutable packed116 renderer corpus.",
+      "originalAssertionOrSource": "original-NewsletterEditor.test.tsx:1186; model.test.ts:6/21"
+    },
+    {
+      "id": "R10",
+      "scope": "first-slice-if-nested-editing",
+      "contract": "Prevent moving a parent into its descendant; cross-section moves retain identity; cloned section/block IDs are distinct; Undo/Redo changes content without inventing server revision.",
+      "originalAssertionOrSource": "original-NewsletterEditor.test.tsx:1166"
+    },
+    {
+      "id": "R11",
+      "scope": "first-slice-dispatch",
+      "contract": "Response projection retains valid newsletterStageId and selecting a rich legacy record dispatches only rich GET/receiver. Ordinary records keep generic editor; malformed discrimination never falls through to generic write.",
+      "originalAssertionOrSource": "original-OutreachView.tsx:1006; current engagement.ts:114"
+    },
+    {
+      "id": "R12",
+      "scope": "receiver-gate",
+      "contract": "Valid newsletterStage uses rich POST/open and then rich record URL; newsletter uses GET only. Reject ambiguous/malformed params and wrong record/stage receipt. Never invoke saved-version V3 staging from a rich UUID.",
+      "originalAssertionOrSource": "original-OutreachView.tsx:433; original-NewsletterOutreach.tsx:166"
+    },
+    {
+      "id": "R13",
+      "scope": "receiver-gate",
+      "contract": "Stage waits for latest saved revision; receipt documentId/revision/stageId/destination match requested authority. Repeat click sends one action. Same document/revision/owner recovery remains exact; never generate a substitute identity.",
+      "originalAssertionOrSource": "original-NewsletterEditor.test.tsx:1155; newsletter.service.ts:664"
+    },
+    {
+      "id": "R14",
+      "scope": "first-slice",
+      "contract": "Preserve known sourceClientIds/template restrictions and canonical field values; changed/denied current client cannot gain access from a URL hint or template selection.",
+      "originalAssertionOrSource": "original-NewsletterTemplateChooser.test.tsx:57; newsletter.service.ts:276"
+    },
+    {
+      "id": "R15",
+      "scope": "first-slice",
+      "contract": "No hosted survey Add action; preserve supported historical display/removal if present, and report unsupported stage truthfully.",
+      "originalAssertionOrSource": "original-NewsletterEditor.test.tsx:117; both C/W histories"
+    },
+    {
+      "id": "R16",
+      "scope": "first-slice",
+      "contract": "Existing saved-version strict body, source/hash/sponsor/session acknowledgement, exact request recovery, storage refusal, malformed receipt and actor replacement controls remain unchanged; prospect-origin Newsletter cannot open sending.",
+      "originalAssertionOrSource": "existing16 unit +9 browser controls; prospect-workspace.spec.ts:168"
+    },
+    {
+      "id": "R17",
+      "scope": "first-slice",
+      "contract": "Desktop/phone keyboard entry, selection, dialog cancel/return focus, visible labels/errors and no horizontal clipping. Assert actual option focus between keyboard Select steps; preserve current shell/history boundaries.",
+      "originalAssertionOrSource": "additional adopted-primitives control"
+    },
+    {
+      "id": "R18",
+      "scope": "deferred-image-tools",
+      "contract": "Captured document/block/source URL receives upload/revision only if still current; selected block may change safely, changed original source/unmount rejects stale result. Reject empty/oversized file before dispatch; preserve alt/link and reset old crop only on accepted Insert/Done.",
+      "originalAssertionOrSource": "original-NewsletterEditor.test.tsx:299/357/388/413/532/599/651/676/948/1004"
+    },
+    {
+      "id": "R19",
+      "scope": "deferred-content-tools",
+      "contract": "Manual alt edits beat late AI output; mismatched video result is ignored; old URL thumbnail is withheld; WebP video thumbnail rejected; capability unavailable sends zero provider/check calls; failed check no success or automatic retry.",
+      "originalAssertionOrSource": "original-NewsletterEditor.test.tsx:184/274/920/1110/1121"
+    },
+    {
+      "id": "R20",
+      "scope": "deferred-review-delivery",
+      "contract": "Review role owner/editor edit-link only; reader/commenter no writer. Invitations/status use refusing fakes. Private prepared recipients/immutable versionIds, exclusions/held versions, exact test/send request keys and status-only recovery preserved; failed status read never submits again.",
+      "originalAssertionOrSource": "original-NewsletterReview.test.tsx:21 four roles; original-NewsletterOutreach.test.tsx:129/155/279/304/319/326"
+    }
+  ],
+  "requirements": [
+    "Meaningful failing baselines on current source for absent behavior.",
+    "Refuse/intercept every collaborator; review GET/account-status GET may be effectful.",
+    "Preserve original expectations, field/receipt equality and native call-count assertions.",
+    "No real provider/model/upload/send/invite/native calls.",
+    "No blanket UI/native acceptance from packed renderer tests."
+  ]
+}

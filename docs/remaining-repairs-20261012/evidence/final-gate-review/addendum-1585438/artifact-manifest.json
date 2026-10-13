@@ -1,0 +1,53 @@
+{
+  "schema": "capiro-independent-final-gate-review-manifest/1",
+  "sealedAtUTC": "2026-10-12T22:57:49.589018+00:00",
+  "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "status": "SEALED_LOCAL_GATES_PASS_IMAGE_BLOCKED_EXPLICIT_ACCEPTANCE_LIMITS",
+  "files": [
+    {
+      "path": "REPORT.md",
+      "bytes": 12137,
+      "sha256": "52e1d721343a52d4e1af366c0e3109bef0f3aa5a2fbee38b1ffeb7ae4c6dd348"
+    },
+    {
+      "path": "finalize-audit.py",
+      "bytes": 14505,
+      "sha256": "e68929fb49b5667703e44d06c7ee679347bfc05681a5b7a4967e3a1c8348fec4"
+    },
+    {
+      "path": "modules-completion-addendum.json",
+      "bytes": 64441,
+      "sha256": "394703f9b3876d057a60a017a852ff508b955cdb8fbf3db632b4ff673d6c9cce"
+    },
+    {
+      "path": "preliminary-audit.py",
+      "bytes": 19058,
+      "sha256": "43ab47ce27f49dd6e11d9bb585b3c9630e25f9ffe8b90e00bf90e7fffb6f8aac"
+    },
+    {
+      "path": "preliminary-inventory.json",
+      "bytes": 757,
+      "sha256": "69b21073a6b88c0384f9f54a89769bfae259d8b266e71491c92562b6a3790bb3"
+    },
+    {
+      "path": "preliminary-report.json",
+      "bytes": 121627,
+      "sha256": "5560a45551fa1ce6f6fce8e4a1e0da76c46813174d820c6e36404828b7ea9f9c"
+    },
+    {
+      "path": "preliminary-report.md",
+      "bytes": 7599,
+      "sha256": "f107a95646b991aeeaac4655f448a0648b776635071cfb864e97287ff7781ed1"
+    },
+    {
+      "path": "report.json",
+      "bytes": 794239,
+      "sha256": "5f27e0f43530e621732cec1b4433e60578cdaaec07c2c271a0adde685eeadf20"
+    }
+  ],
+  "fileCount": 8,
+  "excluded": [
+    "artifact-manifest.json (self)",
+    "artifact-manifest.sha256 (manifest digest)"
+  ]
+}

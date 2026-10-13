@@ -1,0 +1,173 @@
+
+Running 4 tests using 1 worker
+
+
+(node:706344) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/4] apps/web/tests/browser/remaining-intake.spec.ts:30:1 › CI-01 standard reader can inspect saved client details and government fields
+  1) apps/web/tests/browser/remaining-intake.spec.ts:30:1 › CI-01 standard reader can inspect saved client details and government fields 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Client details', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'Client details', exact: true })
+
+
+      40 |   }));
+      41 |   await page.goto(`/portfolio/${clientId}`);
+    > 42 |   await expect(page.getByRole("heading", { name: "Client details", exact: true })).toBeVisible();
+         |                                                                                    ^
+      43 |   await expect(page.getByText(details.primaryContactEmail, { exact: true })).toBeVisible();
+      44 |   await expect(page.getByText("Saved synthetic intake note", { exact: true })).toBeVisible();
+      45 |   await page.getByRole("button", { name: "Government info", exact: true }).click();
+        at /workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts:42:84
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-01-sta-a5904-tails-and-government-fields/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-01-sta-a5904-tails-and-government-fields/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-01-sta-a5904-tails-and-government-fields/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-01-sta-a5904-tails-and-government-fields/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:706479) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[2/4] apps/web/tests/browser/remaining-intake.spec.ts:56:1 › CI-02 view search selects the canonical current-client route
+  2) apps/web/tests/browser/remaining-intake.spec.ts:56:1 › CI-02 view search selects the canonical current-client route 
+
+    Error: expect(locator).toBeFocused() failed
+
+    Locator: getByRole('combobox', { name: 'Jump to a view' })
+    Expected: focused
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeFocused" with timeout 5000ms
+      - waiting for getByRole('combobox', { name: 'Jump to a view' })
+
+
+      59 |   await page.getByRole("button", { name: "Switch client view: Overview" }).click();
+      60 |   const search = page.getByRole("combobox", { name: "Jump to a view" });
+    > 61 |   await expect(search).toBeFocused();
+         |                        ^
+      62 |   await search.fill("files");
+      63 |   await expect(page.getByRole("option")).toHaveCount(1);
+      64 |   await page.screenshot({ path: info.outputPath("view-search.png") });
+        at /workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts:61:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-02-vie-890ae-onical-current-client-route/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-02-vie-890ae-onical-current-client-route/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-02-vie-890ae-onical-current-client-route/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-02-vie-890ae-onical-current-client-route/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:706723) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[3/4] apps/web/tests/browser/remaining-intake.spec.ts:73:1 › CI-03 account roster shows supplied member email and inline addition
+  3) apps/web/tests/browser/remaining-intake.spec.ts:73:1 › CI-03 account roster shows supplied member email and inline addition 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('listitem').filter({ hasText: 'Olivia Owner' }).getByText('owner@example.test')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('listitem').filter({ hasText: 'Olivia Owner' }).getByText('owner@example.test')
+
+
+      75 |   await page.goto("/profile-current-state.html?mode=team");
+      76 |   const row = page.getByRole("listitem").filter({ hasText: "Olivia Owner" });
+    > 77 |   await expect(row.getByText(state.team[0]!.email!, { exact: false })).toBeVisible();
+         |                                                                        ^
+      78 |   const member = await page.getByLabel("Add team member", { exact: true }).boundingBox();
+      79 |   const role = await page.getByLabel("Role", { exact: true }).boundingBox();
+      80 |   expect(member).not.toBeNull(); expect(role).not.toBeNull();
+        at /workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts:77:72
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-03-acc-435b2-r-email-and-inline-addition/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-03-acc-435b2-r-email-and-inline-addition/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-03-acc-435b2-r-email-and-inline-addition/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-03-acc-435b2-r-email-and-inline-addition/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:706882) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[4/4] apps/web/tests/browser/remaining-intake.spec.ts:86:1 › CI-04 choice groups retain their distinct desktop layouts
+  4) apps/web/tests/browser/remaining-intake.spec.ts:86:1 › CI-04 choice groups retain their distinct desktop layouts 
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 819
+    Received:   298
+
+      93 |   const outer = await company.boundingBox();
+      94 |   const foreign = await company.locator("label").filter({ hasText: "Foreign-owned" }).boundingBox();
+    > 95 |   expect(foreign!.width).toBeGreaterThan(outer!.width * 0.9);
+         |                          ^
+      96 |   await page.screenshot({ path: info.outputPath("company-choices.png") });
+      97 |   await dialog.getByRole("button", { name: "2. Government Registration", exact: true }).click();
+      98 |   const certifications = dialog.getByRole("group", { name: "Federal set-aside certifications" }).locator("label");
+        at /workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts:95:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-04-cho-a0b9b-ir-distinct-desktop-layouts/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-04-cho-a0b9b-ir-distinct-desktop-layouts/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-04-cho-a0b9b-ir-distinct-desktop-layouts/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-intake-evidence/red-output/remaining-intake-CI-04-cho-a0b9b-ir-distinct-desktop-layouts/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  4 failed
+    apps/web/tests/browser/remaining-intake.spec.ts:30:1 › CI-01 standard reader can inspect saved client details and government fields 
+    apps/web/tests/browser/remaining-intake.spec.ts:56:1 › CI-02 view search selects the canonical current-client route 
+    apps/web/tests/browser/remaining-intake.spec.ts:73:1 › CI-03 account roster shows supplied member email and inline addition 
+    apps/web/tests/browser/remaining-intake.spec.ts:86:1 › CI-04 choice groups retain their distinct desktop layouts 

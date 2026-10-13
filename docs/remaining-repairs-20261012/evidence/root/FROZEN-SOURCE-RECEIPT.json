@@ -1,0 +1,813 @@
+{
+  "at": "2026-10-12T20:28:59.682490+00:00",
+  "source": "104495d4cdc8251640b922aea431fa0e169fe935",
+  "base": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+  "rootTree": "01e6c338048c507dab0d2f3ba6fafa02912bc003",
+  "applicationTree": "ad282f731750e1984790de2ec266ff9e311581c9",
+  "srcTree": "57fad76b58a59f8d3c2f35155201e7524d713539",
+  "changedSourceRecords": [
+    {
+      "path": "apps/web/public/design/remaining-intake/411-47740.svg",
+      "bytes": 528,
+      "sha256": "0f5b00e496281e87088dab6aaaedae9ddf3ae70aead75a0ba97d9c723d4cebb4",
+      "gitBlob": "64c4b46e25c76ef20be412d32ec76ebd5cf6a8e6"
+    },
+    {
+      "path": "apps/web/public/design/remaining-intake/411-47748.svg",
+      "bytes": 1315,
+      "sha256": "377496c7625e259a5623d2b38e476fc1f2956be17c79603aa3ffde0c257d0fc1",
+      "gitBlob": "bb6e5d2415e277bd38404f28e9ed7a1997df5854"
+    },
+    {
+      "path": "apps/web/public/design/remaining-intake/411-47762.svg",
+      "bytes": 290,
+      "sha256": "f9e8751e0bcf6119a54620ad6c6aa4acf41d792b399fd3146e95d639fba172e1",
+      "gitBlob": "10d380d57725f46f5eea19fd422f0712c6c48d65"
+    },
+    {
+      "path": "apps/web/public/design/remaining-intake/411-47781.svg",
+      "bytes": 576,
+      "sha256": "acfe441af53e0dee05e88e6c3c95c561bec6ba2f37b12755d4ac4482ce3944a4",
+      "gitBlob": "7011b6f010726f41d7d4b145ae5cabd4228811ce"
+    },
+    {
+      "path": "apps/web/public/design/remaining-intake/411-47795.svg",
+      "bytes": 1114,
+      "sha256": "02a95d9232166978f9cb5995dbd5c1bb9d45a60e2fb1f46fa2d8ef4b2182270f",
+      "gitBlob": "bba859696ede031e5481a38c99603cd1da1fe929"
+    },
+    {
+      "path": "apps/web/public/design/remaining-intake/411-47802.svg",
+      "bytes": 743,
+      "sha256": "800228139829df4d14e85ea3dc519c265f543921a4684903f5aea9ee92177c35",
+      "gitBlob": "213cacb0b1c82150078f3a02db40b20fc3bd168f"
+    },
+    {
+      "path": "apps/web/public/design/remaining-intake/411-47809.svg",
+      "bytes": 483,
+      "sha256": "7bccb18350c3b634d7a9f50b4931803d657d4682f773d655243939f08037ee7a",
+      "gitBlob": "337f17d6081117593d749ca7648721674259b728"
+    },
+    {
+      "path": "apps/web/public/design/remaining-intake/411-47820.svg",
+      "bytes": 236,
+      "sha256": "36d7c7c2365b7f36c2b1ea80a6b690b250734881e1f9b6f4a1fe90321e8a0c3b",
+      "gitBlob": "45252d452e16f899e550f23b1aef0c7d3d367858"
+    },
+    {
+      "path": "apps/web/public/design/remaining-intake/411-47828.svg",
+      "bytes": 1744,
+      "sha256": "9f06a3c74a3ac14abe6eeea989c19480ea136d31128137ddc79a83bb33f8d781",
+      "gitBlob": "7a767774b9382bd4cfcc8f659116067eba294ab1"
+    },
+    {
+      "path": "apps/web/public/design/remaining-intake/411-47837.svg",
+      "bytes": 623,
+      "sha256": "281c5a1d5d5e9154cd8ec0aa7d8fd6c09834f2e1edb148f4535864b07c871626",
+      "gitBlob": "3d0081b06f63ba7c4f495b5d01c4eb51e73450ea"
+    },
+    {
+      "path": "apps/web/public/design/remaining-intake/PROVENANCE.json",
+      "bytes": 2700,
+      "sha256": "90fb8536771614d207a4eda588cfe2dfbf7866ed4c98d16ba438d786748cd2e9",
+      "gitBlob": "08abc7f8c403c4399fd12c2e16ab14196ce5bd2d"
+    },
+    {
+      "path": "apps/web/public/design/remaining-profile/file-text.svg",
+      "bytes": 741,
+      "sha256": "44c3171673e553972f34198f8518b3c7eafe7460ae8e64fe0230f86e4490fa27",
+      "gitBlob": "007ea0ce6e3a0b975017df52d307d84600f00da8"
+    },
+    {
+      "path": "apps/web/public/design/remaining-profile/mail.svg",
+      "bytes": 566,
+      "sha256": "6e408546bacc34da3cae57ef4a4545c1328826599bd096a2f076507c8128e3cf",
+      "gitBlob": "0f384fed0fbaa27d3f58729c3711f10c0edf511e"
+    },
+    {
+      "path": "apps/web/public/design/remaining-profile/phone.svg",
+      "bytes": 1436,
+      "sha256": "66df14e84ed694495210acbf113402185859046aabb8882aaeb94a2cdce3dae1",
+      "gitBlob": "fe0610b497383eb9238970ffb17d15352d2f85fe"
+    },
+    {
+      "path": "apps/web/public/design/remaining-profile/provenance.json",
+      "bytes": 2822,
+      "sha256": "bf3b0206e695d72dfd9043f4760ec3ae0f80c72a24d84b5465c5f391b178dbfd",
+      "gitBlob": "42375a83ef12729b27219a03262a5ffedc14d0ef"
+    },
+    {
+      "path": "apps/web/public/design/remaining-profile/sticky-note.svg",
+      "bytes": 593,
+      "sha256": "ea1903caf9804f694b2449b7c6bd449c54385a83738bd682b94ef2fc6044b7a3",
+      "gitBlob": "110564d0ce8ba3721c2124303d6d96869508e76f"
+    },
+    {
+      "path": "apps/web/public/design/remaining-profile/users.svg",
+      "bytes": 1092,
+      "sha256": "0b02d58c80d492ce1e15d28b77777d761558f6304a5e486ce0993d8dd3131785",
+      "gitBlob": "71b2662a4c1d9c7628a606d1491d780b4b62655a"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/MeetingLibrary.tsx",
+      "bytes": 10125,
+      "sha256": "9f2ef9d73525ab845d2ac7e83de2958314579a63f061bd36ef72600f6148012e",
+      "gitBlob": "ec8817c54be94c7b4a870eb54b26e60714216ffe"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/MeetingSplitView.tsx",
+      "bytes": 2285,
+      "sha256": "73c1ccf1aef9d9f025e9edf85afd3de4d688d4d14e98b38c00a1083469ecea09",
+      "gitBlob": "cb65f2d698d9933b7e00a394644de412e6193f2c"
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/meeting-split.module.css",
+      "bytes": 1182,
+      "sha256": "ed24f5ba89cbbee6744002c57c73927ad186f50ba09c36ce4dc4dc57bfe36cdd",
+      "gitBlob": "ae31c4b961d669ebd56622028c02dd2c0006a251"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/PlannerClientScope.tsx",
+      "bytes": 2061,
+      "sha256": "76bb8109cc23c39429716423a5b4327439b654335b503a7b7722bc969304f4bd",
+      "gitBlob": "738267621a58653a2d377eb9f80a38d4eeed1b06"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/PlannerScreen.tsx",
+      "bytes": 6917,
+      "sha256": "363d965a5dd033843b7fb1afaba6a5822877869f406cbd04752fb8004651dad5",
+      "gitBlob": "0b1acd7bad2bb95950e3f42e43072eae6074681f"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/PublicForm.tsx",
+      "bytes": 5588,
+      "sha256": "ed102f7fec21c728f1d049b83142223482ed300c97e162461531a110b28f9a5e",
+      "gitBlob": "86655777941833ad60e6dff9db5a05125bc14852"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskViews.tsx",
+      "bytes": 12696,
+      "sha256": "87bef46fbafa2e42329fd9461de0400655b771270d1299cec9da34831228dd71",
+      "gitBlob": "d68b914c2f0648dacfd6d4ed0f19cd3ecc1e4ad8"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
+      "bytes": 11629,
+      "sha256": "0ba080a47173133c48a42f63f406e937586a6a810b9b7f48715deea9c159af23",
+      "gitBlob": "7af8fb77044cc23e548e7fe71ee094df81c31e27"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/planner.module.css",
+      "bytes": 7496,
+      "sha256": "9221305dabbe776b1cf6b484087f47e7be9197029186ff8e1f39fc41f09e8d05",
+      "gitBlob": "493d5da285566f35534d54e393f7a78dfeda6d02"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/public-form.module.css",
+      "bytes": 1275,
+      "sha256": "8abb4e6facf34ca80e92160af79a9f011cd9608d76322fc48a9830ab2ee94fa8",
+      "gitBlob": "07bd94e8a1027d223b79accb577f9ae426f1039b"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/task-client-groups.test.ts",
+      "bytes": 3346,
+      "sha256": "4d72525db782b8443098c0f5fdb6d28b18fd47eac38b0864c685fb5749b2974c",
+      "gitBlob": "b889e35843f846fa516465e1a7686badb8d7002a"
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/task-client-groups.ts",
+      "bytes": 1849,
+      "sha256": "547f438fdf4d07584818eecd36e462cba1f7e82e60019511f33aa4cde87d4c73",
+      "gitBlob": "68d22370bd665d85ce51f5b2a18f9a14d9326dc3"
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/workspace.module.css",
+      "bytes": 13891,
+      "sha256": "48fd2aae2553a13ed60b9cf5936f86f0884b58e16ee051c02b529fdc37e21c3c",
+      "gitBlob": "a60fbeff93c5d109cc82a60819a8a30048c92d3d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
+      "bytes": 13294,
+      "sha256": "e28e6310d7b99394510cec58039f74ceb60adc7ac7910af3369ed2b0fdf17aa6",
+      "gitBlob": "541dc22bb99105eb1440df5b181ef4e0558dfd91"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/MeetingAgenda.tsx",
+      "bytes": 2571,
+      "sha256": "24b58b634b151a8f0ed5a14837838b3a63c0a5f7590482725720a06e6cf4491d",
+      "gitBlob": "469d6247b291502fad7acc688cd9cb8443503171"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
+      "bytes": 5179,
+      "sha256": "c2fcee319ca80cada332c9e8fe0aa09277b876aef4b29a7e8a6c82cdb4ea983c",
+      "gitBlob": "e028f8a00b135cf7d564cfa088a5101d6e0aec80"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/MeetingIdentity.tsx",
+      "bytes": 3060,
+      "sha256": "996db99bb02dccfa7d36a60921bbb6f303f7e65ada7776514e32e92114d5d45f",
+      "gitBlob": "654fa7600d6bf50954b9791e462befe0296ea7f4"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/artifacts/contracts.ts",
+      "bytes": 2876,
+      "sha256": "312827f14dd931bd856589e52bb9ff12af2fcd41f1d30403c77df2606af9d87d",
+      "gitBlob": "1c53bfc9489864b54ee7ef4edf8a04ba2e65ef5b"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/artifacts/metadata.ts",
+      "bytes": 591,
+      "sha256": "c2c6873c83adcaf1606fad800305bac2065b9391642baef2a5030b5a6221945e",
+      "gitBlob": "ee1c05094a758c2dd5700f38fac30acf123c1d6b"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/artifacts/useArtifactMutation.ts",
+      "bytes": 3750,
+      "sha256": "443bdfe2ac7830a73fc07aef22f6c8d1c3118242ece77e7f54dd8e1f34ebd413",
+      "gitBlob": "97cd1e669cd410dbb182b949f799ebb8004315dd"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/calendar.module.css",
+      "bytes": 2935,
+      "sha256": "32a28c1f19eb80288225dae4058f009f1eb6cacb7e347d6d074ddb150e33a703",
+      "gitBlob": "abe206f31a4f300c8d1af59f1029a5ccc1b66aa8"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/contracts.ts",
+      "bytes": 5164,
+      "sha256": "7a20373d12e29ea74dd088e31ef3a2f013c911700772ee13c597d2d489688174",
+      "gitBlob": "8090e90cae163eab745a1321816ecef12ee29c77"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/feeds.ts",
+      "bytes": 4742,
+      "sha256": "e46c6dd4f6f41f3e27cb834498d067f3970caf7cd9d6186148b46b2f69745382",
+      "gitBlob": "cf37b4e908a8d976b9ff8654571f6ea6b01ae1e1"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/library/SharedMeetings.tsx",
+      "bytes": 4828,
+      "sha256": "cc9180c76585f6ab41d31028cdc9cac43231b4e674ba321b2db0babd1f014596",
+      "gitBlob": "594140323b82af98f33db82335ab109a7a87f97e"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/library/public.ts",
+      "bytes": 333,
+      "sha256": "8ddeec3df871810165d40d62d0c5ae0fd31edc2e400fd841ee8d31a47aa32fa7",
+      "gitBlob": "a79e1e9d7ca3e87a2d6e546a838ba6fef78fddb9"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/lifecycle.ts",
+      "bytes": 2571,
+      "sha256": "a3d50316a66389f65f666ce0b11726edc584fd49e2a3ec72d312e403d4ca6491",
+      "gitBlob": "12f264c660ce3a278de71ee435661bdb02ef78aa"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/preparation/schema.ts",
+      "bytes": 3878,
+      "sha256": "b9699bb7e19abc68645d3e650573691b92c698608e76cd1d67f9940c31755d79",
+      "gitBlob": "12786ad379882e579465cf631aad61e8fc1ae478"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/review/contracts.ts",
+      "bytes": 2804,
+      "sha256": "9365a8ce200d7a6a7347a6a45933a58bf589c4b6fdf84ade68e3958b3d965553",
+      "gitBlob": "8f03d6048ee5f58d6c01492f0c51182a9a81152f"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/sharing/MeetingSharing.tsx",
+      "bytes": 6078,
+      "sha256": "ed8ce1105570de9ab5f8cbbdb74689b344908321cca84d6373d330aedb425415",
+      "gitBlob": "5e54c4707ba98b6003d6549513cd76da9b1b5076"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/sharing/api.ts",
+      "bytes": 3006,
+      "sha256": "7e10d160f1b72202393b8921679958faf5c3cf576a363a7c6641ac5b20c6194a",
+      "gitBlob": "2da13d52ffd66de1047bfb65f2b3b785f8471d95"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/sharing/contracts.ts",
+      "bytes": 4039,
+      "sha256": "92f9f70ad1a78632dd267efbb91b72f3f0d714efcd0f21b77b38c6bba91cc290",
+      "gitBlob": "350ee8c9ae2d3b77dfead4d2505f3e311de4c685"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/sharing/fence.ts",
+      "bytes": 489,
+      "sha256": "ac321a98f167846eb06ca869ada1bdc8a3f2a4b62a50bc00b3ec1ddbeb8abc99",
+      "gitBlob": "b5d7a84596e6ed998c3416ad7321f402dca7ce38"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/sharing/sharing.module.css",
+      "bytes": 503,
+      "sha256": "d3f4f2498ab2a1c74fe0382565ce31c1d15b7811cb35ac35e863ed5ff9205a3f",
+      "gitBlob": "054069c54a2165d102071300cb00b6c9bf682c88"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/sharing/targets.ts",
+      "bytes": 2828,
+      "sha256": "5cb7be0f1f33e49917404a47c8b5e9a9716b665a16d7e6bb48d074a26e2d3a8d",
+      "gitBlob": "09ab606b96a63b292eb8fabe7fa17915c4476d09"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/sharing/useSharing.ts",
+      "bytes": 3949,
+      "sha256": "9855c5f60c0ace9aa2509cb6c98371bf9bea52d1dda75c9141da3fdbe0bc823c",
+      "gitBlob": "fe6629ac5013762d7bda41bd3875f13cda77cfc9"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/useMeetingClock.ts",
+      "bytes": 384,
+      "sha256": "6efce8a5ce1e88f2e9ca25378923cf48c78cca3027abd7cb665635700caefbbe",
+      "gitBlob": "e2fe86bf7ca19926ec001dd727b4de05023827b0"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
+      "bytes": 4946,
+      "sha256": "4f2a6d0d08239b93d295090a251df20ed3d9b318f19124501c838231ae9998c5",
+      "gitBlob": "d595e249d98213478861a9ec4b53f6af6fcb26b0"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
+      "bytes": 8445,
+      "sha256": "5245aa0d98a2e82a97b61fc9dd2515447d5a9fa97f2135f0fa255daa592a43b4",
+      "gitBlob": "4a3d41988669a1252d6a68812c6b2e96aa6d2672"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/capabilities.module.css",
+      "bytes": 2719,
+      "sha256": "84e7f0b3c84ae67e150a787427c519cb6dfa47104d3001606b4333efe9c9af05",
+      "gitBlob": "83fbadb8f34a87f5b5f8ee0d814d4b992144febf"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/registrations.module.css",
+      "bytes": 1631,
+      "sha256": "751999781d4e23050d94853c98d2c86470e00523eb10eef26687b69654e88b63",
+      "gitBlob": "43bf69b18e4a623290925ea926b768075b78d9fc"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-intake/CompanyStep.tsx",
+      "bytes": 2075,
+      "sha256": "feae7432c30d196aee4de0f474b162f3bbd77aa3e7f97a240f6391fda7277636",
+      "gitBlob": "0816ed9a392aedde97e9d514db3d3479132d3361"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-intake/Fields.tsx",
+      "bytes": 3852,
+      "sha256": "78954e865c182cf770b33e6192938a24f93af4e55ff76a98c23067e52684d213",
+      "gitBlob": "06c79fbe57b31d0c00c8690fc311463cb6c63be0"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-intake/RegistrationStep.tsx",
+      "bytes": 2745,
+      "sha256": "5ecf134f4d60947e9fd51d6a41c86812a1ebb565f6846291cde6b75e6589755f",
+      "gitBlob": "7714497de37c9470460fd62af577b8a1f584b7da"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-intake/SectorStep.tsx",
+      "bytes": 2646,
+      "sha256": "791b1f5af28eca0253ad50160fb0fe96f94e48e89b79ab905d5bf82b5e57decd",
+      "gitBlob": "ce2814933985678dba8a58d9cb7eae7f88ceaa51"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-intake/intake.module.css",
+      "bytes": 3354,
+      "sha256": "e454948f7bc688ccc6242479b60f9f8f1ecd49249b356f32c3d34a6c4b1acaae",
+      "gitBlob": "18b6ca1d5985359e5de9380b38b52e8ca5ad5ab7"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-intake/public.ts",
+      "bytes": 320,
+      "sha256": "dee8e997ecb53e5efa40d20e0b7369a21f5cf08812bcc7d6ff26937dfd8c5eb0",
+      "gitBlob": "be020993783dbef3dbb24c7b0bd29f85d2e0783c"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ActivityFeed.tsx",
+      "bytes": 4830,
+      "sha256": "109613b7ab6adc563570804d1a83d35e452810fd6ac117c6f79a813e7185acc6",
+      "gitBlob": "61f71b49efd7c0d3baacddb4284c2f35ab99c76b"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx",
+      "bytes": 4481,
+      "sha256": "2cff749fe4fde463166880004fc18c2f5955b0c3292179d59a722d3f51d1d339",
+      "gitBlob": "32a837f096ac8ce649b45a4e069d23ca518044b8"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ClientDetails.tsx",
+      "bytes": 1680,
+      "sha256": "d0386c92dd16767c321ed6c31f4785ab10ea2a2faaa3904f4599adddd01cb2de",
+      "gitBlob": "e9e33a2199c0f4d595fc9e0c248ce5b1d645f89f"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ClientHeader.tsx",
+      "bytes": 3475,
+      "sha256": "8d6c729b029281a97f50b46f67227a8c39ecf767274e87b777771dcc96ae3016",
+      "gitBlob": "e882b70ae17406e2fe0f20de7df485c931c4c15e"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
+      "bytes": 7049,
+      "sha256": "a7d02942fe8bd99367f8b1e59a5e6ab81513a9ba9a84d101d91ffd1f50908165",
+      "gitBlob": "8367795833e3f5c48c4dd6f4b0103e47ad84d2b8"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ClientViewSwitcher.tsx",
+      "bytes": 5011,
+      "sha256": "85457ac89eaec97080ad4d1f7f6b7668761100b4bb2b6847614886d1b9c8894d",
+      "gitBlob": "532b4dc1956d895f9f57f8ecc20f5b3bd3f15e14"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx",
+      "bytes": 5896,
+      "sha256": "64cc056a645a42c851d6b8b65c8a49c24e29ef3e5aecf842eec4db92991a9d2b",
+      "gitBlob": "2aa24f0b39ae5c7d37d1c0865edf3ee95f0d48f3"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilitiesManager.tsx",
+      "bytes": 5330,
+      "sha256": "3cc5cc8c82fe4ef018917e6101be9088d9a77913042492498698a074cd829844",
+      "gitBlob": "a9e4b28eccc8b6500afab6942a9fa21accb747ed"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilityDialog.tsx",
+      "bytes": 1272,
+      "sha256": "eed360cf9d619188f52c999b80ce85ea6aa9999df896b584891b85f7fa490bce",
+      "gitBlob": "50dca63f48138932fefd444739f649a092b77bff"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilityEditor.tsx",
+      "bytes": 2739,
+      "sha256": "c49006d0aa6b04746c6c4b76f7debcd2f3915c1be6cd861cb4124c99964f4307",
+      "gitBlob": "9d671ef1f7c5ca1f534ed686c78c80187e87e1f2"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilityFields.tsx",
+      "bytes": 3252,
+      "sha256": "38f0a479904765e6ddff737f33e48f7ebed4e53ab6470ecfacf4987fdeb03960",
+      "gitBlob": "32002cb991a4ccd75b10c8401183a66f728fc3be"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilityGeocoding.tsx",
+      "bytes": 4881,
+      "sha256": "5419bc8e5d00584177e1ad3e82ccd33d741f0491446eb9f8c4124d8376c135f5",
+      "gitBlob": "1ba5d522c2af02b5023d02c3755920ef9d697ad7"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/GovernmentInfo.tsx",
+      "bytes": 2456,
+      "sha256": "75c3f6df058f8f4e61473a9d5fc691a6421d6731e96f04fa3614ec303735ab65",
+      "gitBlob": "29bb35161742e9db1bf1f6f29042ae96eb2d6d82"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ProfileFacts.tsx",
+      "bytes": 922,
+      "sha256": "7ca8d7f63fa6e8945ae428e2954b67e3bb1dc1e545d5d4dca42f50c3b76c48e3",
+      "gitBlob": "22c0e92a65f87789313507fd402dc88ff05e139b"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/TeamDialog.tsx",
+      "bytes": 4120,
+      "sha256": "25b8c98561c2ef14a31c761f359eb2c9c78c38575fb1365f985ba95a465fcee8",
+      "gitBlob": "ff8ae390d6ba08cdfd09598892601e31c06a47e6"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/TeamMemberFields.tsx",
+      "bytes": 1822,
+      "sha256": "5aa4e1feba524ede7d176e724de7d20d1d6bcd100733d253acbe255426740121",
+      "gitBlob": "34526533975afc54f919366b6da8dd8b864952d0"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/TeamRoster.tsx",
+      "bytes": 1935,
+      "sha256": "8662dcfd720ed62a28a927628a0de34713ed6d2f30b3cd8b5338579783b438a9",
+      "gitBlob": "8fb18f171f3f97d87333599252c06ad62be1a445"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/activity-presentation.ts",
+      "bytes": 1549,
+      "sha256": "a1e6e919f742eda6fba0ea70894fcb2a6b736c29ca6b32861d55df470ed4f7e2",
+      "gitBlob": "7757b748765421f640821cfee13ba48ba6295b7d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/facilities-manager.module.css",
+      "bytes": 2374,
+      "sha256": "6cc54de2087ae2a2275e8ce7cda6ccbbe3fbee51ee98da8e88ecb331113d9413",
+      "gitBlob": "89849881eb9b13d4a7b4bd3d63feccff5a36928e"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/overview.module.css",
+      "bytes": 6327,
+      "sha256": "29ed76e99691c42beb8c835d4df7b350db01b6aae818507a49a94cf65fa75b09",
+      "gitBlob": "3440c8379fd1c6ce852fc3f0a2beef6cde82952f"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/profile-details.module.css",
+      "bytes": 1017,
+      "sha256": "f514d8ba39b7aeb01de3a6af8eef26b919345909420b8d26870ad6d20931c4af",
+      "gitBlob": "3a15b1d8b6b9a0f6752c708c93e6488cf86a1568"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/team.module.css",
+      "bytes": 1870,
+      "sha256": "c72abf1dfcb3f16e245fcbeebdc7ce9a47680552cb32403c90af898dbd7c4054",
+      "gitBlob": "a60fb373fe128527b915b039deb282e8d3d7a4a3"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/useClientViewKeys.ts",
+      "bytes": 2026,
+      "sha256": "1bcd921c2c8536d0e74a8701786ba1cad4acf4f24287fb951b0a49fe5621b0ed",
+      "gitBlob": "db56e8932dd00837fb7671b8c83eab8ff1fafeeb"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/view-switcher.module.css",
+      "bytes": 1829,
+      "sha256": "f0f8fa317338dca5ac5653f5dc924308e35b789d64b692c90cf3a031df73523c",
+      "gitBlob": "12fdb535f68a8b64202a472147045d2911c2ccc3"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/FileToolbar.tsx",
+      "bytes": 1370,
+      "sha256": "f4333e48b3818aca8e74587f5bf732858bc031c9a7c7f014ccdd1307d909d3d7",
+      "gitBlob": "9389df4bb1e15a238f511d2cb1f619b174883a22"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+      "bytes": 11776,
+      "sha256": "18d6f94455f08109e3883c569bc4203a198c5004aaa42bd42add8143adfc95bd",
+      "gitBlob": "9739ef4b7027141c954d10f6b60cef324beb01e7"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/FolderCards.tsx",
+      "bytes": 1805,
+      "sha256": "b4b077ba3e9d65cd8a3f4c47364bd28a9033753e3314ce5907e8bd3eafff2f16",
+      "gitBlob": "96fbad2215550a0c64e7e57fa5caf2851d7729bb"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/files.module.css",
+      "bytes": 5008,
+      "sha256": "649a9dd23d1eb70151f3d015336687616e82c04c5e8709111f3ef2cede6024e2",
+      "gitBlob": "647a6761fb9d729d885d4d4c1bb26e9905ef433e"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+      "bytes": 14376,
+      "sha256": "3e9e68e1e2566376e383dc47ed167bb9af6fcf3a9f4ecef73cdb44a958def093",
+      "gitBlob": "3ee10919b0b929f75fd4f8c336f212d2c7294e55"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email.ts",
+      "bytes": 4144,
+      "sha256": "f8db96b617a3481454c9d7a0ba6ea594c9146684aec8f7237aab1620dee6388a",
+      "gitBlob": "16fbb2b564e78931992b5d72a9561bc8239e7ec4"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/AttachmentFields.tsx",
+      "bytes": 2498,
+      "sha256": "800100747439b187a2b8f4c23635b945aee3fe7d0c423e201442978fccfb27c0",
+      "gitBlob": "8954047e850329181e70cf7764e5a36ee484e4ce"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx",
+      "bytes": 4507,
+      "sha256": "57f0f73b009938109936b085438ec7774fbfc0b5b288db860de4a8bf3834a086",
+      "gitBlob": "ebcaf4b241edb02f17ed52aae7e2b2d34cf14159"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/email.module.css",
+      "bytes": 1602,
+      "sha256": "eb20898dd2c2d4fa287059fddcce7a05f484649f901b1bf1a3a665e0a6ba93ae",
+      "gitBlob": "f94b9f92bdeb375d95abd0b640aa3be7dd9ddaae"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/mail-body-html.ts",
+      "bytes": 398,
+      "sha256": "0dda52ccf4331d07d4096d4bcdf112a69b70fbb294ae662bfcb5575755627336",
+      "gitBlob": "6f110d568c25b44f067a17cfbf79dd649eb100c7"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/mail-body.ts",
+      "bytes": 842,
+      "sha256": "28a5ff7a27a20052b5b6556c380fc05bcb2ab6435f59ca3ca2576237c6893f7b",
+      "gitBlob": "b06fd2fe584a1c680dd5a13fc0d3e4456e72ffdc"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts",
+      "bytes": 5535,
+      "sha256": "f240df12c35ce6b2867b02642e3cefe720a32205d6b82268fa77599727be6c85",
+      "gitBlob": "dad54a296ea9b8471a4599d0a1b6de3f7ca7e5a3"
+    },
+    {
+      "path": "apps/web/src/shared/meetings/MeetingDetail.tsx",
+      "bytes": 3281,
+      "sha256": "095bb21f213f9c0790c5f795c02359d44566779bee1bda4d94a257dbdf8796c8",
+      "gitBlob": "8da0d718f02912c7dc6a1c921b29b53bc6f382c0"
+    },
+    {
+      "path": "apps/web/src/shared/meetings/MeetingDetailHeader.tsx",
+      "bytes": 2324,
+      "sha256": "54c2e5763057523de9988572f3a44284cbefee4dfca90aa065bc9ff614b54af7",
+      "gitBlob": "ab64acd29ec1ceb0df390ca3edb5af53213fef4e"
+    },
+    {
+      "path": "apps/web/src/shared/meetings/MeetingPreparation.tsx",
+      "bytes": 1650,
+      "sha256": "f24d4205970353406377d90ed88d052192da41a91045ae46f53814f5156be305",
+      "gitBlob": "3aeb1b9bbade2489c4db8f6342588824be1e41fb"
+    },
+    {
+      "path": "apps/web/src/shared/meetings/meetings.module.css",
+      "bytes": 2036,
+      "sha256": "6e4c020e84ae5d2347f593bf63b3b0b4374fd56ee7aa60db128821d83f3880d7",
+      "gitBlob": "2279831d413bb2544b43c3d3cf92e518b7f341bb"
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/shell/client-views.ts",
+      "bytes": 1658,
+      "sha256": "9c55087415ff03d172119df9dedeb23709bbf89adbaa959f07a5177a5d7c7d37",
+      "gitBlob": "64c833bc1ddd483d15f0d469a8f22a3524249e71"
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/shell/shell.module.css",
+      "bytes": 3775,
+      "sha256": "5c297a955ba6d181be33a00da36d122340a41b75259cd9cc3d842a320bf2af46",
+      "gitBlob": "ef2b0acadfd4a23944bc4956262d69725edff233"
+    },
+    {
+      "path": "apps/web/test/browser/meeting-detail-current.spec.ts",
+      "bytes": 8999,
+      "sha256": "f95af100b29a951f7019ee548e1783c05d7ad7371cdae4f5d6956302b1fe0f85",
+      "gitBlob": "4bc05e2a391166dcdf96f9b1d41097bd9eb6e5f9"
+    },
+    {
+      "path": "apps/web/test/browser/remaining-modules.spec.ts",
+      "bytes": 16593,
+      "sha256": "c86ad251ee3eb115e5e6edeb0309192aebd9b3fd38fc6f85fdf19e89deaea78f",
+      "gitBlob": "5cc23fe05fa96c3393a993f8e1327f02a384689f"
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-lifecycle.spec.ts",
+      "bytes": 8967,
+      "sha256": "f74d8b284991958fe4bed9fa2952e4a7d52f230e88f4102ce993f15741d199e8",
+      "gitBlob": "fa7fec4c49b876ec58f0538ca0b4ade391d00fd0"
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-sharing-harness.tsx",
+      "bytes": 1741,
+      "sha256": "c677b8570f1fcd4b121fad6047962ed570717ed76dbadb418cda12e06a86df38",
+      "gitBlob": "6ac0e047281f48aff634e1011c2959e4a8e75c8c"
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-sharing.html",
+      "bytes": 300,
+      "sha256": "3d8d847dca8e2fa5903d480f051756899678a9e324dc091d4a91f8ae8d604357",
+      "gitBlob": "3d77e660aa8d624f2268aede850a348a46c85215"
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-sharing.spec.ts",
+      "bytes": 16606,
+      "sha256": "0ee7273f96b8c01cf9af22739d436ab207dcd3dd21f9d69dd8871bd2809f7cae",
+      "gitBlob": "ba1abf468b0a649620cfb5566c303c1e5fae9919"
+    },
+    {
+      "path": "apps/web/tests/browser/capability-list-registration-layout.spec.ts",
+      "bytes": 11321,
+      "sha256": "c8973d36bb4b7332d7a7b0e99dd4083e07e004a9448502be5be3b78d8a292902",
+      "gitBlob": "71c0f862d5b4737e362d0b9998b6483c49573230"
+    },
+    {
+      "path": "apps/web/tests/browser/client-header.spec.ts",
+      "bytes": 1656,
+      "sha256": "34fd645d4a91ef81f42a6f7179517c407fa3ce792a4271ffc196aad676ce89d2",
+      "gitBlob": "82c9d022c00516b1a79c4621fc74ec068af78da1"
+    },
+    {
+      "path": "apps/web/tests/browser/email-compose.spec.ts",
+      "bytes": 22661,
+      "sha256": "c61e2e708f1a7a079570478891cd17982586f9bf262d8e979931a7976ccd90c0",
+      "gitBlob": "9ef2551a7cacadde78316c2e5289f96f23296817"
+    },
+    {
+      "path": "apps/web/tests/browser/facility-manager-review.spec.ts",
+      "bytes": 2478,
+      "sha256": "2d7cbf390c733f925929f9f0d1215b25be51007eaac414438d4dcbe2b5566f35",
+      "gitBlob": "4a886cbfb18ec522717d39f89f47b501a8d33afb"
+    },
+    {
+      "path": "apps/web/tests/browser/files-view-contrast.spec.ts",
+      "bytes": 1573,
+      "sha256": "0c94758166f46a9c5f493f2a8e5927fcc2252475ab43aceee7b2bcdce6594a1b",
+      "gitBlob": "6e9ee98fc0bd87091b8460ce87d6b0a3d57d798c"
+    },
+    {
+      "path": "apps/web/tests/browser/mail-local-draft.spec.ts",
+      "bytes": 17223,
+      "sha256": "74036b122536e2c3e1ff67497cbccd2e2825d2f165d2ac62acbd81b374797575",
+      "gitBlob": "1fcb0c0075db40bdc1079ca0309e662af084e31c"
+    },
+    {
+      "path": "apps/web/tests/browser/mail-message-assertions.ts",
+      "bytes": 556,
+      "sha256": "8f60ca0460b3b62a2fd0d7be35debe6806799455171c94bf8ead7be42236dd59",
+      "gitBlob": "ee7444499efe4cb61ef687cf1fe1fa2f5c72289e"
+    },
+    {
+      "path": "apps/web/tests/browser/mail-rewrite.spec.ts",
+      "bytes": 9139,
+      "sha256": "bd52995e9deefa7342dc463d5a573c157ef499a156a5145735764036e3e9e84d",
+      "gitBlob": "a7a52dc095460d499e04aa6278c5a83c4e18a2bc"
+    },
+    {
+      "path": "apps/web/tests/browser/mail-rich-compose.spec.ts",
+      "bytes": 14236,
+      "sha256": "1b7ca2ca4c029b83e533e073dd5b1ca45b2c76fc8d265973ea2d0d254f884a90",
+      "gitBlob": "a6d93141b222474d880005a8bbbc4506b23f4fd6"
+    },
+    {
+      "path": "apps/web/tests/browser/profile-current-state.spec.ts",
+      "bytes": 10763,
+      "sha256": "26ef8d88a3ed49bf6e8c1a7b36944f0dfcc981771009517aae9c21430ac8612e",
+      "gitBlob": "9a072ec4c9371735903d524a2c86614592b4da72"
+    },
+    {
+      "path": "apps/web/tests/browser/profile-presentation.spec.ts",
+      "bytes": 12186,
+      "sha256": "80db7a4c935fd13cea0cd5d6b4a82e5c6ae202b5a5a01e445248ac723a69819d",
+      "gitBlob": "b007f6f559307ca475373ac7f956c5d41973f0ba"
+    },
+    {
+      "path": "apps/web/tests/browser/profile-write-lifetime.spec.ts",
+      "bytes": 13448,
+      "sha256": "70bb8a5a331f7fc9b22c4e408e9e8d5da139d47f74aadd80910ca927999b9a54",
+      "gitBlob": "d521c4f967b3caef5030a91d299db3e5204b5b28"
+    },
+    {
+      "path": "apps/web/tests/browser/remaining-intake.spec.ts",
+      "bytes": 13355,
+      "sha256": "4cdf6399b49c98856892c31584c738876284f25ae7c0672ee138e25f55a51a46",
+      "gitBlob": "64b7c2f37df8b8bde98f7665b017ab166584e1ef"
+    },
+    {
+      "path": "apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+      "bytes": 5837,
+      "sha256": "db9f60de3c2a286333f234be540a9bece083067ceceb139427a0be2af34ad7ab",
+      "gitBlob": "a18a9016b22d5292cdd3eef7fb51ac4fac52e12d"
+    },
+    {
+      "path": "apps/web/tests/calendar-lifecycle-contract.test.ts",
+      "bytes": 3979,
+      "sha256": "a3ce8a8534e8158190a293a2a537547aa212dfb3cec03380bcaa25bc4f51c726",
+      "gitBlob": "a6a9d620468f6e00dbd2cfb5cd2fca98f6286b9b"
+    },
+    {
+      "path": "apps/web/tests/calendar-sharing-fixtures.ts",
+      "bytes": 2900,
+      "sha256": "788b079ddda8273f485e359d5e112e32474ad4172facb2e474be1f221bbdc05f",
+      "gitBlob": "2cac4561f7b2332ef51b8d2a3cb75e2567609242"
+    },
+    {
+      "path": "apps/web/tests/calendar-sharing.test.ts",
+      "bytes": 6985,
+      "sha256": "5d837055a6c3644987422fddfee54b1b3762f4b108b9c064cd699a67e3718a30",
+      "gitBlob": "d5b3a4c6e2e8a14b296875ee4ab3056cb1bf0049"
+    },
+    {
+      "path": "apps/web/tests/client-view-navigation.test.ts",
+      "bytes": 797,
+      "sha256": "7c2284b0d0690398e7b0356337f14a393527ebcdec054d10e37dc3bbd824adc7",
+      "gitBlob": "9becfe20e25d64ea37977e842bf0273b1dd39b5b"
+    },
+    {
+      "path": "apps/web/tests/mail-body.test.ts",
+      "bytes": 1167,
+      "sha256": "2a3ae445ff07fabc6c4e804cb8ea917227719c35defe581b98753ffad11c0e18",
+      "gitBlob": "01240c23f5d3c50dd2b63b9558f1165ac22e2ca4"
+    },
+    {
+      "path": "apps/web/tests/profile-presentation.test.ts",
+      "bytes": 2137,
+      "sha256": "5e09463343c1b016826bbb3ccffae64169a7131a85375f48ad4e0bc3248ba125",
+      "gitBlob": "892feaf3dcd58f6bdc41e956760f78f730ee1a0e"
+    },
+    {
+      "path": "docs/architecture-size-reviews.json",
+      "bytes": 185259,
+      "sha256": "932593b75860623c0d237d24ef982f90ec109cf9ae2b9bda95e469581d751723",
+      "gitBlob": "6a15b638b2407bb782a3a975410c9b241271f249"
+    },
+    {
+      "path": "scripts/architecture/reviewed-size-findings.json",
+      "bytes": 127546,
+      "sha256": "c73b29429b861706b21bc30c6d745357aab11e144b9c35ab98d200b95229b155",
+      "gitBlob": "ebec5e92f2f08a1feae271edb98ef7786e35cd9f"
+    }
+  ],
+  "count": 133,
+  "nativeRowsAccepted": 0,
+  "nativeRowsHeld": 337,
+  "excludedHistoricalRows": 8,
+  "sourceDiff": ""
+}

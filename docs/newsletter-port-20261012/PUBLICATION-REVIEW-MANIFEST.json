@@ -1,0 +1,54 @@
+{
+  "acceptedSource": "31287a00e472925d85fd7499fd525682581b8143",
+  "records": [
+    {
+      "path": "publication-review/MANIFEST.json",
+      "bytes": 1626,
+      "sha256": "772ce13be386618b8b721da4557eabf07766aafe24c7368fc77201201951a0b8"
+    },
+    {
+      "path": "publication-review/REDACTION-VERIFICATION.json",
+      "bytes": 29900,
+      "sha256": "6926f06db361d9629a2c90b450c5318ec84816f56299990b98c715cadb6c6a0f"
+    },
+    {
+      "path": "publication-review/STAGED-SOURCE-BINDING.json",
+      "bytes": 149017,
+      "sha256": "8c206fbf1e4961ccf2dbd836c0667a83c626a68db268794475eac1d4f156b23e"
+    },
+    {
+      "path": "publication-review/WHITESPACE-CHECK.json",
+      "bytes": 1110,
+      "sha256": "02748cba643dfa9332eb4775d52932db11b61e1c2ca0a179623f66e2d3fe36e0"
+    },
+    {
+      "path": "publication-review/report.md",
+      "bytes": 2630,
+      "sha256": "55b942d81093083a453cc053acf789b4d7c51c100b1e768b53d743e0b08fe469"
+    },
+    {
+      "path": "publication-review/staged-diff-check.log",
+      "bytes": 510,
+      "sha256": "6a8b1052fceb8152795930e0eab74a5cfaf5d82a2deeda62fbf6a67d2f603438"
+    },
+    {
+      "path": "committed-binding/COMMITTED-BINDING.json",
+      "bytes": 105685,
+      "sha256": "bf0ac41ae1cb3decddfb77746fe2cbf537d058f0b12dd00be5b957036f647516"
+    },
+    {
+      "path": "committed-binding/MANIFEST.json",
+      "bytes": 714,
+      "sha256": "df7dc056a455de83124c7ec268ca5ab4713950dab2ab4d89a0b5102fe2cc6dff"
+    },
+    {
+      "path": "committed-binding/report.md",
+      "bytes": 1468,
+      "sha256": "b1fa854214a4f37a8f0a08a88366abb69457501e87e6e81df269d0732acd4a60"
+    }
+  ],
+  "notes": [
+    "Exact reviewer packets retained. Initial root copy wrapper stopped at its unnecessary absent-log assertion because the reviewer already included the same whitespace log; byte comparison confirms equality and nothing was overwritten.",
+    "No source/asset/scope-audit bytes change in this evidence commit."
+  ]
+}

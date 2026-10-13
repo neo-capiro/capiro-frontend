@@ -1,0 +1,58 @@
+export default function EmailRichTextEditor() {
+  return (
+    <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col items-start overflow-clip relative rounded-[var(--radius-md,8px)] size-full" data-node-id="435:82309" data-name="Email rich text editor">
+      <div className="content-stretch flex gap-[var(--theme(spacing.1),4px)] items-start overflow-clip p-[var(--theme(spacing.3),12px)] relative shrink-0 w-full" data-node-id="435:82310" data-name="Formatting toolbar">
+        <div className="content-stretch flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[32px]" data-node-id="435:82311" data-name="Format bold">
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="I435:82311;12:385">
+            B
+          </p>
+        </div>
+        <div className="content-stretch flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[32px]" data-node-id="435:82312" data-name="Format italic">
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="I435:82312;12:385">
+            I
+          </p>
+        </div>
+        <div className="content-stretch flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[32px]" data-node-id="435:82313" data-name="Format underline">
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="I435:82313;12:385">
+            U
+          </p>
+        </div>
+        <div className="content-stretch flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[50px]" data-node-id="435:82314" data-name="Format list">
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] whitespace-nowrap" data-node-id="I435:82314;12:385">
+            List
+          </p>
+        </div>
+        <a className="content-stretch cursor-pointer flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0 w-[106px]" data-node-id="435:82315" data-name="Attach a file">
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I435:82315;12:385">
+            Attach file
+          </p>
+        </a>
+      </div>
+      <div className="content-stretch flex flex-col gap-[var(--theme(spacing.4),16px)] h-[180px] items-start overflow-clip p-[var(--theme(spacing.4),16px)] relative shrink-0 w-full" data-node-id="435:82316" data-name="Message body">
+        <div className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[0] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.07px] w-full whitespace-pre-wrap" data-node-id="435:82317">
+          <p className="leading-[1.45] mb-0">Hi,</p>
+          <p className="leading-[1.45] mb-0">​</p>
+          <p className="leading-[1.45] mb-0">Could we review the revised FY27 funding summary next week? I can share the briefing materials in advance.</p>
+          <p className="leading-[1.45] mb-0">​</p>
+          <p className="leading-[1.45]">Best,</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+These styles are contained in the design: v2/Button: Font(family: "Geist", style: Medium, size: 14, weight: 500, lineHeight: 1.2000000476837158, letterSpacing: -0.5), v2/Body: Font(family: "Geist", style: Regular, size: 14, weight: 400, lineHeight: 1.4500000476837158, letterSpacing: -0.5).
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## v2/Button
+**Node ID:** 12:388
+
+shadcn/ui <Button> (new-york v4). h-9 px-3.5 rounded-\[10px\] text-sm font-medium. Primary | Outline (shadow-xs) | Ghost. Chevron = <Select> trigger look.
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.

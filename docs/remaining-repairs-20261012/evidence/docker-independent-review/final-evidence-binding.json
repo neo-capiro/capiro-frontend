@@ -1,0 +1,50 @@
+{
+  "recordedAt": "2026-10-12T20:55:36.220015+00:00",
+  "verdict": "ACCEPTED_NO_REMAINING_BLOCKER_IN_REVIEW_SCOPE",
+  "scriptSHA256": "404e52d329f094b44928a0d8148501cec937ec6929c0c3fb52799a25fc6c1a35",
+  "receipts": [
+    {
+      "source": "/tmp/capiro-remaining-docker-evidence/context-final-script-baseline/report.json",
+      "snapshot": "context-final-script-baseline-report.json",
+      "sha256": "b8125973a69cc7377eb08731fb7774a5a4d1bf79c3abb048ec0f36267c726cf4",
+      "scriptSHA256": "404e52d329f094b44928a0d8148501cec937ec6929c0c3fb52799a25fc6c1a35",
+      "ignoreSHA256": "432b70d7b19f3a7a55ecefc38d706d95d53fe253c82dd5dc7538d918dadd3c34",
+      "buildExitCode": 0,
+      "checks": 33,
+      "passed": 21,
+      "failed": [
+        "apps/web/src/app/(portfolio)/(product)/portfolio/[clientId]/work/page.tsx",
+        "apps/web/src/features/portfolio/work/WorkPage.tsx",
+        "apps/web/src/features/portfolio/work/WorkStrategyState.tsx",
+        "apps/web/src/features/portfolio/work/WorkspaceDocumentTable.tsx",
+        "apps/web/src/features/portfolio/work/WorkspaceDocuments.tsx",
+        "apps/web/src/features/portfolio/work/contracts.ts",
+        "apps/web/src/features/portfolio/work/owners.ts",
+        "apps/web/src/features/portfolio/work/public.ts",
+        "apps/web/src/features/portfolio/work/queries.ts",
+        "apps/web/src/features/portfolio/work/work-strategy-state.module.css",
+        "apps/web/src/features/portfolio/work/work.module.css",
+        "apps/web/src/features/portfolio/work/workspace-documents.module.css"
+      ],
+      "retainedExportsMatchAllRecordedHashes": true
+    },
+    {
+      "source": "/tmp/capiro-remaining-docker-evidence/context-final-script-corrected/report.json",
+      "snapshot": "context-final-script-corrected-report.json",
+      "sha256": "6ac0cb81772243c71a1f1083781433054198bf67c05d46bb774374ec6e9671f1",
+      "scriptSHA256": "404e52d329f094b44928a0d8148501cec937ec6929c0c3fb52799a25fc6c1a35",
+      "ignoreSHA256": "0e4ca55ceb868d95b904348b39f3bd86ac55bf26d73cc922ccaea25af9e0b53a",
+      "buildExitCode": 0,
+      "checks": 33,
+      "passed": 33,
+      "failed": [],
+      "retainedExportsMatchAllRecordedHashes": true
+    }
+  ],
+  "cliLog": {
+    "source": "/tmp/capiro-remaining-docker-evidence/cli-final-script-tests.log",
+    "snapshot": "cli-final-script-tests.log",
+    "sha256": "bc9230ef035efbff6c28d3e780ebe321e546f06858ad2461608e2bbd44205e89"
+  },
+  "reviewerRanDockerOrCLI": false
+}

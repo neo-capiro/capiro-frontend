@@ -16,6 +16,7 @@ import styles from "./workspace.module.css";
 import { WorkspaceDraft } from "./WorkspaceDraft";
 import { WorkspaceShares } from "./WorkspaceShares";
 import { ProspectWorkspace } from "./prospects/ProspectWorkspace";
+import { RichNewsletterEditor } from "./rich-newsletter/RichNewsletterEditor";
 
 type View =
   | "documents"
@@ -23,7 +24,8 @@ type View =
   | "shares"
   | "templates"
   | "hillday"
-  | "newsletter";
+  | "newsletter"
+  | "rich-newsletter";
 const tabs: { id: View; label: string }[] = [
   { id: "documents", label: "Documents" },
   { id: "workflows", label: "Workflows" },
@@ -39,6 +41,7 @@ export function WorkspaceScreen() {
     initialView === "hillday" ||
     initialView === "templates" ||
     initialView === "newsletter" ||
+    initialView === "rich-newsletter" ||
     initialView === "workflows" ||
     initialView === "shares"
       ? initialView
@@ -64,6 +67,29 @@ export function WorkspaceScreen() {
     setCreatedId(undefined);
     setView("documents");
   };
+  if (requestedView === "rich-newsletter") {
+    if (
+      searchParams.has("draftId") ||
+      searchParams.has("prospectId") ||
+      searchParams.getAll("view").length !== 1
+    )
+      return (
+        <section role="alert">
+          <h1>Newsletter unavailable</h1>
+          <p>This link contains conflicting document references.</p>
+        </section>
+      );
+    return (
+      <RichNewsletterEditor
+        key={clientId ?? "unassigned"}
+        onClose={() =>
+          router.push(
+            `/modules/workspace${clientId ? `?clientId=${encodeURIComponent(clientId)}` : ""}`,
+          )
+        }
+      />
+    );
+  }
   if (searchParams.has("prospectId") && !prospect.success)
     return (
       <section role="alert">
@@ -125,6 +151,15 @@ export function WorkspaceScreen() {
           <h1>Workspace</h1>
         </div>
         <div className={styles.actions}>
+          <ActionButton
+            onClick={() =>
+              router.push(
+                `/modules/workspace?view=rich-newsletter${clientId ? `&clientId=${encodeURIComponent(clientId)}` : ""}`,
+              )
+            }
+          >
+            Rich newsletter preview
+          </ActionButton>
           <ActionButton onClick={() => setView("templates")}>
             Template Studio
           </ActionButton>

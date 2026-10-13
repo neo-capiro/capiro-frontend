@@ -1,0 +1,18 @@
+function debriefMetadataSelect() {
+  return {
+    id: true,
+    meetingId: true,
+    clientId: true,
+    authorUserId: true,
+    author: { select: { id: true, email: true, firstName: true, lastName: true } },
+    confidential: true,
+    accessLevel: true,
+    status: true,
+    keyVersion: true,
+    // Phase 2 §d — sharing only; approval already lives in `status` above.
+    sharedAt: true,
+    sharedByUserId: true,
+    createdAt: true,
+    updatedAt: true,
+  };
+}

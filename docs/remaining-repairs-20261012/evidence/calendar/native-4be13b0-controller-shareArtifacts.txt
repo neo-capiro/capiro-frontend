@@ -1,0 +1,8 @@
+@Post('meetings/:id/artifacts/share')
+  shareArtifacts(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') meetingId: string,
+    @Body() body: ShareArtifactsDto,
+  ) {
+    return this.service.shareArtifacts(ctx, meetingId, body.artifacts);
+  }

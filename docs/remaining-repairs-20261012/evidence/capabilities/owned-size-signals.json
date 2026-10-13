@@ -1,0 +1,151 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
+    "imports": [
+      {
+        "specifier": "next/navigation",
+        "line": 2
+      },
+      {
+        "specifier": "react",
+        "line": 3
+      },
+      {
+        "specifier": "next/link",
+        "line": 4
+      },
+      {
+        "specifier": "@/shared/portfolio/config/config",
+        "line": 5
+      },
+      {
+        "specifier": "@/shared/portfolio/ui/QueryState",
+        "line": 6
+      },
+      {
+        "specifier": "@/features/portfolio/client-profile/past-performance/public",
+        "line": 7
+      },
+      {
+        "specifier": "./queries",
+        "line": 8
+      },
+      {
+        "specifier": "./contracts",
+        "line": 9
+      },
+      {
+        "specifier": "./CapabilityEditor",
+        "line": 10
+      },
+      {
+        "specifier": "./CapabilityFit",
+        "line": 11
+      },
+      {
+        "specifier": "./Registrations",
+        "line": 12
+      },
+      {
+        "specifier": "./capabilities.module.css",
+        "line": 13
+      }
+    ],
+    "anyLines": [],
+    "remoteOriginLines": [],
+    "sizeFindings": [
+      {
+        "file": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
+        "kind": "function",
+        "symbol": "CapabilitiesPage",
+        "line": 14,
+        "nonblank": 122,
+        "fingerprint": "f637c27f71b03629f672fe313f55353bd71023c6732d40f7b35fd28dc5e05f56"
+      }
+    ],
+    "nonblank": 141
+  },
+  {
+    "file": "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
+    "imports": [
+      {
+        "specifier": "react",
+        "line": 2
+      },
+      {
+        "specifier": "@/features/portfolio/index/public",
+        "line": 3
+      },
+      {
+        "specifier": "@/shared/portfolio/auth/identity",
+        "line": 4
+      },
+      {
+        "specifier": "@/shared/portfolio/api/http",
+        "line": 5
+      },
+      {
+        "specifier": "@/shared/portfolio/ui/Dialog",
+        "line": 6
+      },
+      {
+        "specifier": "@/shared/portfolio/ui/QueryState",
+        "line": 7
+      },
+      {
+        "specifier": "./registration-mutations",
+        "line": 8
+      },
+      {
+        "specifier": "@/features/portfolio/client-intake/public",
+        "line": 9
+      },
+      {
+        "specifier": "./capabilities.module.css",
+        "line": 10
+      },
+      {
+        "specifier": "./registrations.module.css",
+        "line": 11
+      }
+    ],
+    "anyLines": [],
+    "remoteOriginLines": [],
+    "sizeFindings": [
+      {
+        "file": "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
+        "kind": "function",
+        "symbol": "Registrations",
+        "line": 20,
+        "nonblank": 214,
+        "fingerprint": "d36d58ddb6eb1d1aa322e018072b563bff95fea938c9bb02aa989036053e66e8"
+      }
+    ],
+    "nonblank": 241
+  },
+  {
+    "file": "apps/web/tests/browser/capability-list-registration-layout.spec.ts",
+    "imports": [
+      {
+        "specifier": "@playwright/test",
+        "line": 1
+      },
+      {
+        "specifier": "./fixtures",
+        "line": 2
+      },
+      {
+        "specifier": "./capability-boundary-fixtures",
+        "line": 3
+      },
+      {
+        "specifier": "./capability-registration-fixtures",
+        "line": 4
+      }
+    ],
+    "anyLines": [],
+    "remoteOriginLines": [],
+    "sizeFindings": [],
+    "nonblank": 226
+  }
+]

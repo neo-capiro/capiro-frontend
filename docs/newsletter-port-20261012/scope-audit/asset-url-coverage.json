@@ -1,0 +1,106 @@
+{
+  "source": "5470c6df029c9553dd49e531229c3c91b26275ef",
+  "platforms": [
+    "bluesky",
+    "discord",
+    "email",
+    "facebook",
+    "forward",
+    "instagram",
+    "instapaper",
+    "linkedin",
+    "patreon",
+    "pinterest",
+    "reddit",
+    "snapchat",
+    "spotify",
+    "telegram",
+    "threads",
+    "tiktok",
+    "twitch",
+    "twitter",
+    "website",
+    "whatsapp",
+    "youtube"
+  ],
+  "styles": [
+    "color",
+    "dark",
+    "light",
+    "gray",
+    "color-white",
+    "dark-white",
+    "light-black",
+    "gray-black"
+  ],
+  "dynamicSocialUrlCount": 168,
+  "missingSourceAssets": [],
+  "fixedPngUrls": [
+    "/newsletter/capitol.png",
+    "/newsletter/policy-desk.png",
+    "/newsletter/newsroom.png",
+    "/newsletter/social-update.png"
+  ],
+  "rendererUrlSites": [
+    {
+      "path": "packages/shared/src/newsletter-render.ts",
+      "line": 170,
+      "kind": "StringLiteral",
+      "source": "'/newsletter/$1.png'"
+    },
+    {
+      "path": "packages/shared/src/newsletter-render.ts",
+      "line": 268,
+      "kind": "StringLiteral",
+      "source": "'/newsletter/'"
+    },
+    {
+      "path": "packages/shared/src/newsletter-render.ts",
+      "line": 287,
+      "kind": "StringLiteral",
+      "source": "'/newsletter/'"
+    },
+    {
+      "path": "packages/shared/src/newsletter-render.ts",
+      "line": 375,
+      "kind": "TemplateExpression",
+      "source": "`<div style=\"${css};text-align:${style.align || 'center'}\">${items\n          .map((item, index) => {\n            const platform = share\n              ? item.platform || 'website'\n              : newsletterSocialPlatform(item as NewsletterBlock['items'][number]);\n            const iconUrl = `${options.publicUrl?.replace(/\\/$/, '') || ''}/newsletter/social-${platform}-${settings.iconStyle}.png`;\n            const target = block.openNewTab ? ' target=\"_blank\" rel=\"noopener noreferrer\"' : '';\n            const icon =\n              settings.display !== 'text'\n                ? `<img class=\"nl-social-icon\" src=\"${newsletterEscape(iconUrl)}\" alt=\"${settings.display === 'icon' ? newsletterEscape(item.label || platform) : ''}\" width=\"${size}\" height=\"${size}\" style=\"display:inline-block;vertical-align:middle;width:${size}px;height:${size}px;border:0\">`\n                : '';\n            const label =\n              settings.display !== 'icon'\n                ? `<span class=\"nl-social-label\" style=\"padding-left:${icon ? 8 : 0}px;vertical-align:middle\">${text(item.label || platform)}</span>`\n                : '';\n            const last = index === items.length - 1;\n            const tag = share && !item.url ? 'span' : 'a';\n            const destination =\n              tag === 'a' ? ` href=\"${link(item.url)}\"${target}` : ' aria-disabled=\"true\"';\n            return `<table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" class=\"nl-social-item${last ? ' nl-social-last' : ''}\" style=\"${socialItemLayout(last ? { ...settings.desktop, spacing: 0 } : settings.desktop, style.align || 'center')}\"><tr><td style=\"padding:0;vertical-align:middle\"><${tag}${destination} style=\"${newsletterStyleCss(socialTextStyle(style))};color:${style.color || design.styles.link.color};text-decoration:none\">${icon}${label}</${tag}></td></tr></table>`;\n          })\n          .join('')}</div>`"
+    },
+    {
+      "path": "packages/shared/src/newsletter-render.ts",
+      "line": 380,
+      "kind": "TemplateExpression",
+      "source": "`${options.publicUrl?.replace(/\\/$/, '') || ''}/newsletter/social-${platform}-${settings.iconStyle}.png`"
+    },
+    {
+      "path": "packages/shared/src/newsletter.ts",
+      "line": 979,
+      "kind": "StringLiteral",
+      "source": "'/newsletter/capitol.png'"
+    },
+    {
+      "path": "packages/shared/src/newsletter.ts",
+      "line": 1012,
+      "kind": "StringLiteral",
+      "source": "'/newsletter/policy-desk.png'"
+    },
+    {
+      "path": "packages/shared/src/newsletter.ts",
+      "line": 1020,
+      "kind": "StringLiteral",
+      "source": "'/newsletter/newsroom.png'"
+    },
+    {
+      "path": "packages/shared/src/newsletter.ts",
+      "line": 1042,
+      "kind": "StringLiteral",
+      "source": "'/newsletter/social-update.png'"
+    }
+  ],
+  "additionalTemplateChooserSite": {
+    "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterTemplateChooser.tsx",
+    "line": 97,
+    "url": "/newsletter/template-preview.svg"
+  },
+  "deployedOriginOrBytesVerified": false
+}

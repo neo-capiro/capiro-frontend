@@ -1,0 +1,50 @@
+{
+  "createdAt": "2026-10-12T22:01:16.237658+00:00",
+  "sourceHead": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+  "inputs": [
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-d68c2dc/modules-browser-artifacts/remaining-modules-MS08-sco-10d0d-ard-operable-at-phone-width/trace.zip",
+      "bytes": 542339,
+      "sha256": "340367c691640536ea9e4507e2098dd4c1570b4aae6e26b9827f8e9de0901ed2"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-d68c2dc/modules-browser-artifacts/remaining-modules-MS08-sco-10d0d-ard-operable-at-phone-width/error-context.md",
+      "bytes": 10018,
+      "sha256": "29713f1b436bc61bd8c625378674d99e00e462706054b049e79dc1e28a2bd912"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-d68c2dc/modules-browser-artifacts/remaining-modules-MS08-sco-10d0d-ard-operable-at-phone-width/test-failed-1.png",
+      "bytes": 59639,
+      "sha256": "aa8a8e63789935cd4d086fac1c78a0aa9b52d332735a588e7ed53e94961ee992"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-d68c2dc/modules-browser.log",
+      "bytes": 34860,
+      "sha256": "103993542d52b9d677cf55ee88832202427e280465d71e7dd408c4eeed7ecca3"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "/tmp/capiro-remaining-modules-evidence/keyboard-d68-diagnosis/SOURCE-AND-PROPOSAL.json",
+      "bytes": 3445,
+      "sha256": "3b7e85efbaaa524537e61afc5ae67b67f5ccd7541fc7c7d7259576134db2adbd"
+    },
+    {
+      "path": "/tmp/capiro-remaining-modules-evidence/keyboard-d68-diagnosis/TRACE-CHRONOLOGY.json",
+      "bytes": 50852,
+      "sha256": "6e2be68a45521df7e022dd9f82494a42659823805b1104a9f24dfd34d3c9f3d1"
+    },
+    {
+      "path": "/tmp/capiro-remaining-modules-evidence/keyboard-d68-diagnosis/remaining-modules.before.spec.ts",
+      "bytes": 16593,
+      "sha256": "c86ad251ee3eb115e5e6edeb0309192aebd9b3fd38fc6f85fdf19e89deaea78f"
+    },
+    {
+      "path": "/tmp/capiro-remaining-modules-evidence/keyboard-d68-diagnosis/report.md",
+      "bytes": 2241,
+      "sha256": "3c0f907026a5ff2d8bfbc7406ed99ed00514c0c64471d06cb6245abd182258ae"
+    }
+  ],
+  "runtimeChecksRun": false,
+  "sourceEdits": false
+}

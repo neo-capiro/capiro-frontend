@@ -1,0 +1,125 @@
+{
+  "checkedAt": "2026-10-12T21:18:41.303233+00:00",
+  "reads": [
+    {
+      "repo": "/workspace/capirov2",
+      "ref": "1e99f0921b207318c6d2abf03927b5c4daa5768b",
+      "command": [
+        "git",
+        "-C",
+        "/workspace/capirov2",
+        "cat-file",
+        "-t",
+        "1e99f0921b207318c6d2abf03927b5c4daa5768b"
+      ],
+      "exitCode": 128,
+      "stdout": "",
+      "stderr": "fatal: git cat-file: could not get object info\n"
+    },
+    {
+      "repo": "/workspace/capirov2",
+      "ref": "193703e34f2bedbb69d87d6a8ee303f65ab8dbda",
+      "command": [
+        "git",
+        "-C",
+        "/workspace/capirov2",
+        "cat-file",
+        "-t",
+        "193703e34f2bedbb69d87d6a8ee303f65ab8dbda"
+      ],
+      "exitCode": 128,
+      "stdout": "",
+      "stderr": "fatal: git cat-file: could not get object info\n"
+    },
+    {
+      "repo": "/workspace/capirov2",
+      "ref": "5470c6df029c9553dd49e531229c3c91b26275ef",
+      "command": [
+        "git",
+        "-C",
+        "/workspace/capirov2",
+        "cat-file",
+        "-t",
+        "5470c6df029c9553dd49e531229c3c91b26275ef"
+      ],
+      "exitCode": 128,
+      "stdout": "",
+      "stderr": "fatal: git cat-file: could not get object info\n"
+    },
+    {
+      "repo": "/workspace/capirov2",
+      "ref": "a247f7a02a9b94d95e9ee5a516b396202aea994b",
+      "command": [
+        "git",
+        "-C",
+        "/workspace/capirov2",
+        "cat-file",
+        "-t",
+        "a247f7a02a9b94d95e9ee5a516b396202aea994b"
+      ],
+      "exitCode": 128,
+      "stdout": "",
+      "stderr": "fatal: git cat-file: could not get object info\n"
+    },
+    {
+      "repo": "/workspace/capiro-remaining",
+      "ref": "1e99f0921b207318c6d2abf03927b5c4daa5768b",
+      "command": [
+        "git",
+        "-C",
+        "/workspace/capiro-remaining",
+        "cat-file",
+        "-t",
+        "1e99f0921b207318c6d2abf03927b5c4daa5768b"
+      ],
+      "exitCode": 128,
+      "stdout": "",
+      "stderr": "fatal: git cat-file: could not get object info\n"
+    },
+    {
+      "repo": "/workspace/capiro-remaining",
+      "ref": "193703e34f2bedbb69d87d6a8ee303f65ab8dbda",
+      "command": [
+        "git",
+        "-C",
+        "/workspace/capiro-remaining",
+        "cat-file",
+        "-t",
+        "193703e34f2bedbb69d87d6a8ee303f65ab8dbda"
+      ],
+      "exitCode": 128,
+      "stdout": "",
+      "stderr": "fatal: git cat-file: could not get object info\n"
+    },
+    {
+      "repo": "/workspace/capiro-remaining",
+      "ref": "5470c6df029c9553dd49e531229c3c91b26275ef",
+      "command": [
+        "git",
+        "-C",
+        "/workspace/capiro-remaining",
+        "cat-file",
+        "-t",
+        "5470c6df029c9553dd49e531229c3c91b26275ef"
+      ],
+      "exitCode": 128,
+      "stdout": "",
+      "stderr": "fatal: git cat-file: could not get object info\n"
+    },
+    {
+      "repo": "/workspace/capiro-remaining",
+      "ref": "a247f7a02a9b94d95e9ee5a516b396202aea994b",
+      "command": [
+        "git",
+        "-C",
+        "/workspace/capiro-remaining",
+        "cat-file",
+        "-t",
+        "a247f7a02a9b94d95e9ee5a516b396202aea994b"
+      ],
+      "exitCode": 128,
+      "stdout": "",
+      "stderr": "fatal: git cat-file: could not get object info\n"
+    }
+  ]
+}

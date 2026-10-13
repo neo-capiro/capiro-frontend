@@ -1,0 +1,290 @@
+{
+  "scope": "Actual local Linux Docker/BuildKit context matching; scratch COPY only, no application or provider execution",
+  "sourceCommit": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+  "scriptSha256": "404e52d329f094b44928a0d8148501cec937ec6929c0c3fb52799a25fc6c1a35",
+  "ignoreSha256": "0e4ca55ceb868d95b904348b39f3bd86ac55bf26d73cc922ccaea25af9e0b53a",
+  "startedUTC": "2026-10-12T21:52:21.943Z",
+  "endedUTC": "2026-10-12T21:52:22.082Z",
+  "command": [
+    "docker",
+    "buildx",
+    "build",
+    "--no-cache",
+    "--progress=plain",
+    "--output",
+    "type=local,dest=/tmp/capiro-remaining-docker-evidence/context-frozen-d68c2dc/output",
+    "-f",
+    "-",
+    "/tmp/capiro-remaining-docker-evidence/context-frozen-d68c2dc/fixture"
+  ],
+  "buildExitCode": 0,
+  "signal": null,
+  "errorCode": null,
+  "requiredApplicationFiles": 12,
+  "checks": [
+    {
+      "path": "apps/web/src/app/(portfolio)/(product)/portfolio/[clientId]/work/page.tsx",
+      "expectedIncluded": true,
+      "present": true,
+      "expectedSha256": "763779d187f13455ff81c52f93ab750d66fce40cd97b0a243faeab2ce9eed832",
+      "actualSha256": "763779d187f13455ff81c52f93ab750d66fce40cd97b0a243faeab2ce9eed832",
+      "passed": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/WorkPage.tsx",
+      "expectedIncluded": true,
+      "present": true,
+      "expectedSha256": "1d8227ee17b550628a8143ff03a38a0f4c4f7a07e7718550971e20803b4c1d98",
+      "actualSha256": "1d8227ee17b550628a8143ff03a38a0f4c4f7a07e7718550971e20803b4c1d98",
+      "passed": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/WorkStrategyState.tsx",
+      "expectedIncluded": true,
+      "present": true,
+      "expectedSha256": "65acd494e10469bee99726751cf7a27296817b0e9e85b0e5b15d3f2e0264d432",
+      "actualSha256": "65acd494e10469bee99726751cf7a27296817b0e9e85b0e5b15d3f2e0264d432",
+      "passed": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/WorkspaceDocumentTable.tsx",
+      "expectedIncluded": true,
+      "present": true,
+      "expectedSha256": "3126d44fed228715b96f5b3d287b40e5259215d9f4bebe22b993fbb2fa758ca9",
+      "actualSha256": "3126d44fed228715b96f5b3d287b40e5259215d9f4bebe22b993fbb2fa758ca9",
+      "passed": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/WorkspaceDocuments.tsx",
+      "expectedIncluded": true,
+      "present": true,
+      "expectedSha256": "b9b6f1f6e2ea8fd7fc876d59c68a7d66e0cdad3e2e0e726e86c12a9c99e30547",
+      "actualSha256": "b9b6f1f6e2ea8fd7fc876d59c68a7d66e0cdad3e2e0e726e86c12a9c99e30547",
+      "passed": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/contracts.ts",
+      "expectedIncluded": true,
+      "present": true,
+      "expectedSha256": "5eb722f7191b5754d71326f82d117b09d82ddd4623d1ecfc31a36e12cbb7763e",
+      "actualSha256": "5eb722f7191b5754d71326f82d117b09d82ddd4623d1ecfc31a36e12cbb7763e",
+      "passed": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/owners.ts",
+      "expectedIncluded": true,
+      "present": true,
+      "expectedSha256": "3ff8a47e259f48087ed7a6689f2189005a7575af7086f4f1efab157f4eba518a",
+      "actualSha256": "3ff8a47e259f48087ed7a6689f2189005a7575af7086f4f1efab157f4eba518a",
+      "passed": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/public.ts",
+      "expectedIncluded": true,
+      "present": true,
+      "expectedSha256": "f9a0e84247e8019f1be9e6820eaa690fcf0d8e7c6bbe46b380bc45b71c86f3ca",
+      "actualSha256": "f9a0e84247e8019f1be9e6820eaa690fcf0d8e7c6bbe46b380bc45b71c86f3ca",
+      "passed": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/queries.ts",
+      "expectedIncluded": true,
+      "present": true,
+      "expectedSha256": "52a28a23abf766c92864999cdaffd67c81a026d07ccb315966e69eb81317da68",
+      "actualSha256": "52a28a23abf766c92864999cdaffd67c81a026d07ccb315966e69eb81317da68",
+      "passed": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/work-strategy-state.module.css",
+      "expectedIncluded": true,
+      "present": true,
+      "expectedSha256": "390b8fef27a6c50bd0f86055b3411735de9b1de9895a13b6f4cb61ea69648263",
+      "actualSha256": "390b8fef27a6c50bd0f86055b3411735de9b1de9895a13b6f4cb61ea69648263",
+      "passed": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/work.module.css",
+      "expectedIncluded": true,
+      "present": true,
+      "expectedSha256": "15f6cb5d9c9f98f5575afc8b0770a747e26ff5b0595895acc186ce6b144b1dec",
+      "actualSha256": "15f6cb5d9c9f98f5575afc8b0770a747e26ff5b0595895acc186ce6b144b1dec",
+      "passed": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/workspace-documents.module.css",
+      "expectedIncluded": true,
+      "present": true,
+      "expectedSha256": "db436d6def1acc07f1fdf1bb07abeb1fefc1610af1e224cb53d9caec0efdb41a",
+      "actualSha256": "db436d6def1acc07f1fdf1bb07abeb1fefc1610af1e224cb53d9caec0efdb41a",
+      "passed": true
+    },
+    {
+      "path": "work/context-canary.txt",
+      "expectedIncluded": false,
+      "present": false,
+      "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+      "actualSha256": null,
+      "passed": true
+    },
+    {
+      "path": "node_modules/context-canary.js",
+      "expectedIncluded": false,
+      "present": false,
+      "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+      "actualSha256": null,
+      "passed": true
+    },
+    {
+      "path": "apps/web/node_modules/context-canary.js",
+      "expectedIncluded": false,
+      "present": false,
+      "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+      "actualSha256": null,
+      "passed": true
+    },
+    {
+      "path": ".next/context-canary.txt",
+      "expectedIncluded": false,
+      "present": false,
+      "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+      "actualSha256": null,
+      "passed": true
+    },
+    {
+      "path": "apps/web/.next/context-canary.txt",
+      "expectedIncluded": false,
+      "present": false,
+      "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+      "actualSha256": null,
+      "passed": true
+    },
+    {
+      "path": ".env",
+      "expectedIncluded": false,
+      "present": false,
+      "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+      "actualSha256": null,
+      "passed": true
+    },
+    {
+      "path": ".env.local",
+      "expectedIncluded": false,
+      "present": false,
+      "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+      "actualSha256": null,
+      "passed": true
+    },
+    {
+      "path": "apps/web/.env",
+      "expectedIncluded": false,
+      "present": false,
+      "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+      "actualSha256": null,
+      "passed": true
+    },
+    {
+      "path": "apps/web/.env.local",
+      "expectedIncluded": false,
+      "present": false,
+      "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+      "actualSha256": null,
+      "passed": true
+    },
+    {
+      "path": ".env.example",
+      "expectedIncluded": true,
+      "present": true,
+      "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+      "actualSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+      "passed": true
+    },
+    {
+      "path": "apps/web/.env.example",
+      "expectedIncluded": true,
+      "present": true,
+      "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+      "actualSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+      "passed": true
+    },
+    {
+      "path": "outputs/context-canary.txt",
+      "expectedIncluded": false,
+      "present": false,
+      "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+      "actualSha256": null,
+      "passed": true
+    },
+    {
+      "path": "evidence/context-canary.txt",
+      "expectedIncluded": false,
+      "present": false,
+      "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+      "actualSha256": null,
+      "passed": true
+    },
+    {
+      "path": "docs/context-canary.md",
+      "expectedIncluded": false,
+      "present": false,
+      "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+      "actualSha256": null,
+      "passed": true
+    },
+    {
+      "path": "test-results/context-canary.json",
+      "expectedIncluded": false,
+      "present": false,
+      "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+      "actualSha256": null,
+      "passed": true
+    },
+    {
+      "path": "apps/web/test-results/context-canary.json",
+      "expectedIncluded": false,
+      "present": false,
+      "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+      "actualSha256": null,
+      "passed": true
+    },
+    {
+      "path": "playwright-report/context-canary.html",
+      "expectedIncluded": false,
+      "present": false,
+      "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+      "actualSha256": null,
+      "passed": true
+    },
+    {
+      "path": "apps/web/playwright-report/context-canary.html",
+      "expectedIncluded": false,
+      "present": false,
+      "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+      "actualSha256": null,
+      "passed": true
+    },
+    {
+      "path": ".git/context-canary",
+      "expectedIncluded": false,
+      "present": false,
+      "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+      "actualSha256": null,
+      "passed": true
+    },
+    {
+      "path": "apps/web/.qa/context-canary",
+      "expectedIncluded": false,
+      "present": false,
+      "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+      "actualSha256": null,
+      "passed": true
+    },
+    {
+      "path": "apps/web/context-canary.tsbuildinfo",
+      "expectedIncluded": false,
+      "present": false,
+      "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+      "actualSha256": null,
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+
+Running 5 tests using 1 worker
+
+(node:726168) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/browser/capability-list-registration-layout.spec.ts:25:3 › phone capability rows retain native content and keyboard selection in light (8.3s)
+  ✓  2 tests/browser/capability-list-registration-layout.spec.ts:25:3 › phone capability rows retain native content and keyboard selection in dark (5.4s)
+  ✘  3 tests/browser/capability-list-registration-layout.spec.ts:106:1 › compact rows wrap long supplied content and desktop retains descriptive cards (4.8s)
+(node:726692) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  4 tests/browser/capability-list-registration-layout.spec.ts:148:1 › registration summary uses aligned divided rows and the Figma dialog width (4.1s)
+  ✓  5 tests/browser/capability-list-registration-layout.spec.ts:189:1 › registration rows wrap long values and preserve missing-value and EIN review states on phone (4.2s)
+
+
+  1) tests/browser/capability-list-registration-layout.spec.ts:106:1 › compact rows wrap long supplied content and desktop retains descriptive cards 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      130 |       () => document.documentElement.scrollWidth <= innerWidth,
+      131 |     ),
+    > 132 |   ).toBe(true);
+          |     ^
+      133 |   await page.screenshot({
+      134 |     path: info.outputPath("compact-long-320.png"),
+      135 |     fullPage: true,
+        at /workspace/capiro-remaining-capabilities/apps/web/tests/browser/capability-list-registration-layout.spec.ts:132:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-capabilities-evidence/browser-new/artifacts/capability-list-registrati-b96ee-p-retains-descriptive-cards/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-remaining-capabilities-evidence/browser-new/artifacts/capability-list-registrati-b96ee-p-retains-descriptive-cards/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-capabilities-evidence/browser-new/artifacts/capability-list-registrati-b96ee-p-retains-descriptive-cards/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-remaining-capabilities-evidence/browser-new/artifacts/capability-list-registrati-b96ee-p-retains-descriptive-cards/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/browser/capability-list-registration-layout.spec.ts:106:1 › compact rows wrap long supplied content and desktop retains descriptive cards 
+  4 passed (30.5s)

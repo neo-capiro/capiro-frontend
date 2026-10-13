@@ -1,0 +1,8 @@
+@Post('meetings/:id/artifacts/unshare')
+  unshareArtifacts(
+    @CurrentTenant() ctx: TenantContext,
+    @Param('id') meetingId: string,
+    @Body() body: ShareArtifactsDto,
+  ) {
+    return this.service.unshareArtifacts(ctx, meetingId, body.artifacts);
+  }

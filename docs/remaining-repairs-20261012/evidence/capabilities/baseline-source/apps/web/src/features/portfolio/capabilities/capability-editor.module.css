@@ -1,0 +1,282 @@
+.dialog {
+  top: min(60px, 6dvh);
+  transform: translate(-50%, 0);
+  width: min(620px, calc(100vw - 32px));
+  max-height: calc(100dvh - min(60px, 6dvh) - 24px);
+  padding: 0;
+  gap: 0;
+  border-radius: 14px;
+  box-shadow:
+    0 16px 40px -12px #0c0a092e,
+    0 2px 6px #0c0a090d;
+}
+.dialog.saved {
+  width: min(720px, calc(100vw - 32px));
+}
+.dialog > header {
+  padding: 22px 28px 14px;
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+}
+.dialog > header h2 {
+  min-width: 0;
+  font-size: 14px;
+  line-height: 1.35;
+  letter-spacing: -0.07px;
+  overflow-wrap: anywhere;
+}
+.dialog > header button {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  min-height: 24px;
+  padding: 2px;
+  color: var(--muted-foreground);
+}
+.tabs,
+.tabPanel,
+.form {
+  min-width: 0;
+}
+.tabList {
+  display: flex;
+  margin: 18px 28px 0;
+  gap: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.tab {
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  padding: 8px 0;
+  background: transparent;
+  color: var(--muted-foreground);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.tab[data-state="active"] {
+  border-bottom-color: var(--foreground);
+  color: var(--foreground);
+}
+.tabPanel[data-state="inactive"] {
+  display: none;
+}
+.fields {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin: 0;
+  padding: 18px 28px;
+  border: 0;
+  gap: 16px;
+}
+.fields label {
+  color: var(--muted-foreground);
+  font-weight: 400;
+}
+.fields input,
+.fields textarea,
+.fields select {
+  min-width: 0;
+  color: var(--foreground);
+  font-size: 13px;
+}
+.fields input[name],
+.fields textarea,
+.fields select {
+  border-color: var(--border-strong);
+  border-radius: 8px;
+}
+.fields textarea {
+  min-height: 80px;
+}
+.saved .fields textarea {
+  min-height: 70px;
+}
+.typeSector:global(.formGrid) {
+  gap: 12px;
+}
+.typeSector > label {
+  min-width: 0;
+}
+.caption {
+  color: var(--muted-foreground);
+  font-size: 12px;
+  line-height: 1.4;
+}
+.badges {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.typeBadge,
+.sectorBadge {
+  max-width: 100%;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--muted);
+  font-size: 12px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+.typeBadge {
+  background: var(--accent);
+  text-transform: capitalize;
+}
+.remove {
+  margin-left: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--danger);
+  font-size: 13px;
+}
+.readiness {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+.readinessHeading,
+.readinessStatus {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 13px;
+}
+.readinessHeading {
+  justify-content: space-between;
+  color: var(--muted-foreground);
+}
+.readinessStatus {
+  color: var(--foreground);
+}
+.levels {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 40px));
+  gap: 6px;
+}
+.level:global(.button) {
+  width: 100%;
+  height: 30px;
+  min-height: 30px;
+  padding: 0;
+  border-color: var(--border-strong);
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 400;
+}
+.clear {
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--muted-foreground);
+  font-size: 12px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.details {
+  min-width: 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.details > summary {
+  width: fit-content;
+  max-width: 100%;
+  cursor: pointer;
+  font-size: 13px;
+}
+.details > summary:focus-visible {
+  border-radius: 3px;
+  outline: 2px solid var(--foreground);
+  outline-offset: 3px;
+}
+.detailFields {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 12px;
+  padding-top: 12px;
+}
+.saveError:empty {
+  display: none;
+}
+.saveError > :global(.status) {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--destructive-subtle);
+  color: var(--destructive-text);
+  font-size: 13px;
+  text-align: left;
+}
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 16px 28px;
+  border-top: 1px solid var(--border);
+  background: var(--muted);
+}
+.footer button {
+  white-space: nowrap;
+}
+.documents {
+  display: grid;
+  min-width: 0;
+  gap: 16px;
+  padding: 18px 28px;
+}
+@media (max-width: 680px) {
+  .dialog {
+    top: 16px;
+    max-height: calc(100dvh - 32px);
+  }
+  .dialog > header {
+    padding: 16px 20px 12px;
+  }
+  .tabList {
+    margin: 16px 20px 0;
+  }
+  .fields,
+  .documents {
+    padding: 16px 20px;
+  }
+  .footer {
+    padding: 16px 20px;
+  }
+  .level:global(.button) {
+    min-height: 36px;
+    height: 36px;
+  }
+}
+
+.choiceField {
+  position: relative;
+  display: block;
+}
+.choiceField input {
+  width: 100%;
+}
+.editableChoice input {
+  padding-right: 30px;
+}
+.editableChoice > span {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 10px;
+}
+.editableChoice input::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}

@@ -1,0 +1,48 @@
+{
+  "currentCompatibilityPin": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+  "localCheckoutReadInitially": "4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace",
+  "serviceFileSHA256": "78770fac56ac51c3af48674d07ea6b735490785dd73684265e54e861958cd3f9",
+  "reviewedSharingFunctionComparisons": [
+    {
+      "symbol": "async shareArtifacts(",
+      "oldStartLine": 1809,
+      "currentStartLine": 1844,
+      "bytesIdentical": true,
+      "sha256": "b485964d12352355dea87c3981930e34b982b0f697b8872ce2dec212ca5ba1ba"
+    },
+    {
+      "symbol": "async unshareArtifacts(",
+      "oldStartLine": 1878,
+      "currentStartLine": 1913,
+      "bytesIdentical": true,
+      "sha256": "11843f403d0585af4b9c3d36befcb3bf613a466fe2e63ac576634dae73831821"
+    },
+    {
+      "symbol": "private async loadArtifactShareState(",
+      "oldStartLine": 1920,
+      "currentStartLine": 1955,
+      "bytesIdentical": true,
+      "sha256": "d1feeea98d192cdb01b60ecceedf7c2d261f207a6a2d6eddf5b011ec84f157c9"
+    },
+    {
+      "symbol": "async listSharedMeetingsForClient(",
+      "oldStartLine": 2324,
+      "currentStartLine": 2359,
+      "bytesIdentical": true,
+      "sha256": "f5bba8859988ada9bc0e81be81e36646f829a79f845caa2d9c4b31271c9add90"
+    }
+  ],
+  "otherCurrentFiles": [
+    {
+      "path": "apps/api/src/engagement/engagement.controller.ts",
+      "snapshot": "native-current-engagement.controller.ts",
+      "sha256": "9e4cb0008290eb3afaac654dc0f15909f16c88e4db28149971f6790737dccdae"
+    },
+    {
+      "path": "apps/api/src/engagement/engagement-access.helpers.ts",
+      "snapshot": "native-current-engagement-access.helpers.ts",
+      "sha256": "a7d28dcb3db441049d7f93a89b54cc21b097af3757a66f2934b0e5a2a560d0bf"
+    }
+  ],
+  "nativeCalls": false
+}

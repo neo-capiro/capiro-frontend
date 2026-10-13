@@ -1,0 +1,12 @@
+{
+  "name": "workspace-typecheck",
+  "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+  "command": [
+    "/workspace/capiro-remaining/node_modules/.bin/tsc",
+    "-p",
+    "packages/qualification-newsletter/tsconfig.json"
+  ],
+  "exitCode": 0,
+  "start": "2026-10-12T23:23:40.509590+00:00",
+  "end": "2026-10-12T23:23:41.288068+00:00"
+}

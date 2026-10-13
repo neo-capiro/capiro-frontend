@@ -1,0 +1,98 @@
+{
+  "time": "2026-10-12T21:01:25.205412+00:00",
+  "gateStatus": [
+    {
+      "gate": "clean-install",
+      "status": "passed",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/clean-install-exit.json",
+        "bytes": 776,
+        "sha256": "59e58884588c5a7c3f8eb73ec43e93e0ffa4b200a2462f843d7ad076896dc7e3"
+      }
+    },
+    {
+      "gate": "combined-check",
+      "status": "passed",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/combined-check-exit.json",
+        "bytes": 777,
+        "sha256": "7745426cb31bff20b76720cb58de2158d30f90b16809e2cfc6c0d7875c0cfcbe"
+      }
+    },
+    {
+      "gate": "elements-prepare",
+      "status": "passed",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/elements-prepare-exit.json",
+        "bytes": 855,
+        "sha256": "d99a2e0e5fe643ef2ba4b7fce719445c56b8569fea69c5c227047e7467baf8ec"
+      }
+    },
+    {
+      "gate": "elements-check-new-capture",
+      "status": "passed",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/elements-check-new-capture-exit.json",
+        "bytes": 1071,
+        "sha256": "50421c30b6f51f91ea58d15a2bf2dc031ce4eebc408fb6c948573e9c9045cb80"
+      }
+    },
+    {
+      "gate": "production-build",
+      "status": "passed",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/production-build-exit.json",
+        "bytes": 778,
+        "sha256": "4f7cfbb9eefbc3b00b8fa0ebd25e5ee302c24212d24fb50d8cd509bff49bf6d6"
+      }
+    },
+    {
+      "gate": "actual-production-server",
+      "status": "pending",
+      "receipt": null
+    },
+    {
+      "gate": "modules-browser",
+      "status": "pending",
+      "receipt": null
+    },
+    {
+      "gate": "portfolio-browser",
+      "status": "pending",
+      "receipt": null
+    },
+    {
+      "gate": "docker-context",
+      "status": "passed",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-context-exit.json",
+        "bytes": 898,
+        "sha256": "12696c1bdfc0f865c41f5ef5321852da1abbf36292ae1aca69ec931644ee39ea"
+      }
+    },
+    {
+      "gate": "docker-build",
+      "status": "failed",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-build-exit.json",
+        "bytes": 901,
+        "sha256": "e13b1a039b199630aded9397a8b95f798269cbcb0bf0ff9207a21a1034765e6a"
+      }
+    },
+    {
+      "gate": "docker-smoke",
+      "status": "pending",
+      "receipt": null
+    }
+  ],
+  "browserSuites": {
+    "modules": {
+      "status": "pending",
+      "noPassClaim": true
+    },
+    "portfolio": {
+      "status": "pending",
+      "noPassClaim": true
+    }
+  }
+}

@@ -1,0 +1,14 @@
+function meetingInclude() {
+  return {
+    client: clientSummarySelect(),
+    attendees: { include: { contact: true }, orderBy: { createdAt: 'asc' as const } },
+    attachments: { orderBy: { createdAt: 'desc' as const } },
+    notes: { select: noteMetadataSelect(), orderBy: { createdAt: 'desc' as const } },
+    debriefs: { select: debriefMetadataSelect(), orderBy: { createdAt: 'desc' as const } },
+    preps: { orderBy: { createdAt: 'desc' as const }, take: 1 },
+    tasks: {
+      where: { status: { not: EngagementTaskStatus.canceled } },
+      orderBy: [{ dueDate: 'asc' as const }, { createdAt: 'desc' as const }],
+    },
+  };
+}

@@ -1,0 +1,6 @@
+tests/browser/capability-list-registration-layout.spec.ts(43,23): error TS2532: Object is possibly 'undefined'.
+tests/browser/capability-list-registration-layout.spec.ts(93,28): error TS2532: Object is possibly 'undefined'.
+tests/browser/capability-list-registration-layout.spec.ts(98,7): error TS2532: Object is possibly 'undefined'.
+tests/browser/capability-list-registration-layout.spec.ts(139,36): error TS2339: Property 'description' does not exist on type '{ name: string; peNumbers: string[]; } | { name: string; peNumbers: string[]; trl: number; peNumber: null; id: string; description: string; type: string; sector: string; tags: never[]; issueCodes: never[]; mrl: null; keywords: never[]; notes: null; } | { ...; }'.
+  Property 'description' does not exist on type '{ name: string; peNumbers: string[]; }'.
+tests/browser/capability-list-registration-layout.spec.ts(175,29): error TS2532: Object is possibly 'undefined'.

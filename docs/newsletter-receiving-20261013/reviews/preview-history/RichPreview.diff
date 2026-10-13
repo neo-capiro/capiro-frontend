@@ -1,0 +1,21 @@
+--- preserved-before/RichPreview.tsx
++++ reviewed/RichPreview.tsx
+@@ -78,6 +78,7 @@
+         exact saved revision. External images and links are disabled.
+       </p>
+       <iframe
++        key={document}
+         title="Saved newsletter preview"
+         sandbox=""
+         referrerPolicy="no-referrer"
+@@ -124,7 +125,10 @@
+           {text}
+         </pre>
+       ) : (
++        // Replace the inert browsing context instead of adding srcdoc history
++        // entries that consume Back before the parent route can dispose a view.
+         <iframe
++          key={document}
+           title="Rich newsletter preview"
+           sandbox=""
+           referrerPolicy="no-referrer"

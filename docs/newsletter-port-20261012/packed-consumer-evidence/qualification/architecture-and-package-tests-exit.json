@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-12T23:15:49.387529+00:00",
+  "command": [
+    "node",
+    "--test",
+    "scripts/architecture.test.mjs",
+    "scripts/public-packages.test.mjs"
+  ],
+  "exitCode": 0
+}

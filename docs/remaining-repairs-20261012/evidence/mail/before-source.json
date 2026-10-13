@@ -1,0 +1,13 @@
+{
+  "head": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+  "productionDiff": "",
+  "specSHA256": "d0ee690651e1cc0ae40a679a613ca87c7ece7d0997ec8b802ff3acdf0c44a1c4",
+  "redCases": [
+    "rich Bold",
+    "verified rewrite uses",
+    "keyboard formatting"
+  ],
+  "serverSession": 37578,
+  "port": 5299,
+  "relocation": "External server imports Vite via installed absolute package path and sets app root explicitly; only port5191\u21925299 changes server behavior. External Playwright webServer undefined, one worker, zero retries, /usr/bin/chromium."
+}

@@ -1,0 +1,20 @@
+{
+  "repository": "/workspace/capirov2",
+  "head": "4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace",
+  "sourceOnly": true,
+  "renderer": "apps/api/src/engagement/outreach-email-renderer.ts:24-59",
+  "sendCallsite": "apps/api/src/engagement/engagement.service.ts:9162-9163",
+  "supportedSubset": [
+    "p",
+    "br",
+    "strong",
+    "b",
+    "em",
+    "i",
+    "u",
+    "ul",
+    "li"
+  ],
+  "signatures": "body sanitized before backend appends saved signature; frontend appendSignature semantics unchanged",
+  "nativeExecution": "NOT_RUN"
+}

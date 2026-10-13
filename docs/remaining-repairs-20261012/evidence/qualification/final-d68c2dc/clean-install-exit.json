@@ -1,0 +1,27 @@
+{
+  "name": "clean-install",
+  "command": [
+    "npm",
+    "ci",
+    "--ignore-scripts",
+    "--cache",
+    "/tmp/capiro-p1-npm-cache"
+  ],
+  "startedUTC": "2026-10-12T21:49:06.794264+00:00",
+  "endedUTC": "2026-10-12T21:49:18.608224+00:00",
+  "durationSeconds": 11.813987777000875,
+  "exitCode": 0,
+  "sourceBefore": {
+    "head": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+    "tree": "fd436a652182d40e3f8c0bbfb74c16a46eb8d5f9",
+    "applicationTree": "9f0698bd6d9cfefb7648fd899ee22f4e3b541617",
+    "sourceDiff": ""
+  },
+  "sourceAfter": {
+    "head": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+    "tree": "fd436a652182d40e3f8c0bbfb74c16a46eb8d5f9",
+    "applicationTree": "9f0698bd6d9cfefb7648fd899ee22f4e3b541617",
+    "sourceDiff": ""
+  },
+  "sourceChanged": false
+}

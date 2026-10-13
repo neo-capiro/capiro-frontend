@@ -1,0 +1,27 @@
+
+Running 20 tests using 1 worker
+
+(node:786206) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 apps/web/tests/browser/attendance.spec.ts:140:1 › Owned meeting dispatch requires both confirmations and preserves future scheduling without claiming attendance (4.3s)
+  ✓   2 apps/web/tests/browser/attendance.spec.ts:185:1 › Server validation retains the join URL and confirmations for explicit correction (2.9s)
+  ✓   3 apps/web/tests/browser/attendance.spec.ts:215:1 › A foreign success receipt is uncertain and cannot be resent automatically or from the same form (2.4s)
+  ✓   4 apps/web/tests/browser/attendance.spec.ts:248:1 › Explicit removal handles a still-dispatching error and then accepts the actual removed receipt (2.5s)
+  ✓   5 apps/web/tests/browser/attendance.spec.ts:296:1 › Client preference saves consent once, preserves Off/stopping, and retries only DELETE (2.5s)
+  ✓   6 apps/web/tests/browser/attendance.spec.ts:323:1 › A concurrent preference change requires refresh and preserves the unsaved affirmations (2.4s)
+  ✓   7 apps/web/tests/browser/attendance.spec.ts:344:1 › Runtime disabled keeps real session status visible and forbids external actions (2.1s)
+  ✓   8 apps/web/tests/browser/attendance.spec.ts:367:1 › Read-only role does not fetch private attendance or expose dispatch controls (2.1s)
+  ✓   9 apps/web/tests/browser/attendance.spec.ts:397:1 › Meeting privacy errors and session expiry never expose a successful-looking attendance control (2.1s)
+  ✓  10 apps/web/tests/browser/attendance.spec.ts:424:1 › Unmounting during held dispatch preflight prevents the later POST (2.3s)
+  ✓  11 apps/web/tests/browser/attendance.spec.ts:461:1 › Leaving the client during held preference preflight prevents the later enable POST (2.6s)
+  ✓  12 apps/web/tests/browser/attendance.spec.ts:503:1 › Mobile dark Send Meri dialog fits the viewport and retains accessible consent and actions (2.7s)
+  ✓  13 apps/web/tests/browser/calendar-lifecycle.spec.ts:102:1 › client agenda filters native lifecycle status without requests or approval inference (1.4s)
+  ✓  14 apps/web/tests/browser/calendar-lifecycle.spec.ts:148:1 › omitted debrief metadata is unavailable rather than a missing debrief (1.3s)
+  ✓  15 apps/web/tests/browser/calendar-lifecycle.spec.ts:183:3 › upcoming opens Preparation and retains identity across all meeting tabs (1.6s)
+  ✓  16 apps/web/tests/browser/calendar-lifecycle.spec.ts:183:3 › live opens Notes and retains identity across all meeting tabs (1.6s)
+  ✓  17 apps/web/tests/browser/calendar-lifecycle.spec.ts:183:3 › completed opens Debriefs and retains identity across all meeting tabs (1.6s)
+  ✓  18 apps/web/tests/browser/calendar-lifecycle.spec.ts:183:3 › cancelled opens Information and retains identity across all meeting tabs (1.6s)
+  ✓  19 apps/web/tests/browser/calendar-lifecycle.spec.ts:207:1 › held and failed refresh hide stale lifecycle rows until an explicit successful retry (2.5s)
+  ✓  20 apps/web/tests/browser/calendar-lifecycle.spec.ts:246:1 › meeting identity and material columns fit mobile and desktop without losing controls (1.5s)
+
+  20 passed (45.3s)

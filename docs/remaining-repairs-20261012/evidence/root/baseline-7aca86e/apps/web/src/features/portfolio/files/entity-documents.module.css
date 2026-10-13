@@ -1,0 +1,119 @@
+.documents {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.documents .upload:global(.button) {
+  min-height: 30px;
+  padding: 5px 10px;
+  border-color: var(--border-strong);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
+}
+.caption,
+.disclosure {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 12px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+.list {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.document {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.icon {
+  flex-shrink: 0;
+  color: var(--muted-foreground);
+}
+.name,
+.download {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--foreground);
+  font: inherit;
+  cursor: pointer;
+}
+.name {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.download {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  margin: -6px -6px -6px 0;
+  border-radius: 6px;
+}
+.download:hover:not(:disabled) {
+  background: var(--muted);
+}
+.download:disabled {
+  color: var(--muted-foreground);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.name:focus-visible,
+.download:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+.state {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--muted-foreground);
+  background: var(--card);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.state p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.state :global(.status) {
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+}
+.skeleton {
+  display: block;
+  width: 65.625%;
+  height: 20px;
+  border-radius: 8px;
+  background: var(--muted);
+}
+.skeleton:last-child {
+  width: 87.5%;
+}

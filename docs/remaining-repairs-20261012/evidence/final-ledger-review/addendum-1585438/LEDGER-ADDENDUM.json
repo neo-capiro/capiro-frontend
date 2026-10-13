@@ -1,0 +1,99 @@
+{
+  "createdUTC": "2026-10-12T22:11:40.258532+00:00",
+  "kind": "READ_ONLY_SOURCE_LEDGER_ADDENDUM",
+  "verdict": "PASS_BOUNDED_SOURCE_LEDGER_ADDENDUM",
+  "finalSource": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "checkpointPreserved": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+  "identity": {
+    "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+    "rootTree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+    "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+    "srcTree": "fa4ca7b5ca126f7bcdc1cf816584fa0303d61704"
+  },
+  "sourceRecordCount": 140,
+  "mappingCount": 21,
+  "mappingAdditions": [
+    {
+      "owner": "modules_settings_review",
+      "source": "fb093821c6691d3ff45c0cd51ac1edca12364c9b",
+      "integration": "fafa9040a8c239085725eb22a28eba18aa34d8a0",
+      "scope": "Test-only observable keyboard focus handoffs; all original statements/keys/assertions preserved",
+      "patchIdentical": true,
+      "stablePatchId": "0c09dd1b3714df2db9470a1b142b34dbafb1fa3c",
+      "ancestor": true
+    },
+    {
+      "owner": "root",
+      "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "integration": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "scope": "Exact test structure and failure/correction review; no runtime or architecture policy changes",
+      "patchIdentical": true,
+      "stablePatchId": "29681fb83e0fa560d56d2f3ee4b38cd6952896ce",
+      "ancestor": true
+    }
+  ],
+  "supplementalRootReviewBinding": {
+    "path": "docs/architecture-size-reviews.json",
+    "commit": "334bbbf14a5d9e8ae476f519bbae6561acd96fbf",
+    "note": "Existing root review outside the 21 owner mappings; bytes unchanged from adbc and d68"
+  },
+  "runtimeTreeUnchanged": true,
+  "ledgerInvariants": {
+    "findings": 18,
+    "inScopeRows": 337,
+    "excludedRows": 8,
+    "allInScopeOpenFinalAcceptance": true,
+    "mappedUniqueRows": 34,
+    "newlyAcceptedRows": 0,
+    "originalFindingAndRowObjectsUnchanged": true
+  },
+  "assertionPreservation": {
+    "originalStatements": 20,
+    "finalStatements": 30,
+    "allOriginalStatementsPreservedInOrder": true,
+    "originalFileAssertions": 66,
+    "finalFileAssertions": 76,
+    "allOriginalAssertionsPreservedInOrder": true,
+    "allBytesOutsideTargetStatementUnchanged": true,
+    "testNamesUnchanged": 10,
+    "changedTestFiles": 28,
+    "sizeSignals": 14
+  },
+  "d68ModulesCheckpoint": {
+    "statistics": {
+      "startTime": "2026-10-12T21:53:39.814Z",
+      "duration": 275720.92000000004,
+      "expected": 207,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "exitCode": 1,
+    "sourceChanged": false,
+    "retryResults": 0,
+    "failures": [
+      {
+        "file": "remaining-modules.spec.ts",
+        "title": "MS08 scope and grouping controls remain keyboard operable at phone width",
+        "status": "unexpected"
+      }
+    ]
+  },
+  "d68FullPortfolio": "NOT_RUN; no full Portfolio producer or result files exist in that checkpoint",
+  "ownerFocusedReplay": {
+    "stats": {
+      "startTime": "2026-10-12T22:05:05.604Z",
+      "duration": 2533.41,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "retries": 0,
+    "specMatchesFinalCommit": true,
+    "scope": "Unchanged d68 application with final committed spec, not full successor qualification"
+  },
+  "currentCombinedQualification": "NOT_CLAIMED_RUNNING_ROOT_OWNED",
+  "newScopeGapsIdentified": [],
+  "repositoryFilesWrittenByReviewer": false
+}

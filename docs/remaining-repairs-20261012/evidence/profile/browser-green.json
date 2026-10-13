@@ -1,0 +1,605 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-remaining-profile/node_modules/.bin/playwright",
+      "test",
+      "--config=/tmp/capiro-remaining-profile-evidence/playwright.config.ts",
+      "--list",
+      "--grep",
+      "activity|[Ff]ile|[Ff]acilit|profile dialogs"
+    ],
+    "configFile": "/tmp/capiro-remaining-profile-evidence/playwright.config.ts",
+    "rootDir": "/tmp/capiro-remaining-profile-evidence",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-remaining-profile-evidence/browser-green",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-remaining-profile-evidence",
+        "testIgnore": [],
+        "testMatch": [
+          "preservation.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-remaining-profile-evidence/browser-green.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "preservation.spec.ts",
+      "file": "preservation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "readonly identity cannot open activity mutations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-5cd46e97dc48442df511",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts",
+          "line": 131,
+          "column": 5
+        },
+        {
+          "title": "session expiry at preflight dispatches no activity write",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-1b3e42877e5375f752b1",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts",
+          "line": 279,
+          "column": 5
+        },
+        {
+          "title": "profile notes conceal a failed saved-client read and prevent replacement",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-3332383ef4efa62862e1",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "profile notes reject another client's receipt and require review before retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-45655db906ba0e9fbe4b",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts",
+          "line": 34,
+          "column": 5
+        },
+        {
+          "title": "profile notes retain a refused draft without reporting it saved",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-f5f5eef52af41b4702d6",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts",
+          "line": 56,
+          "column": 5
+        },
+        {
+          "title": "failed facilities refresh conceals saved locations and closes their detail",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-bfb232f3732d77300275",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts",
+          "line": 188,
+          "column": 5
+        },
+        {
+          "title": "a removed facility selection does not reopen when that ID returns",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-a56805b8ba36d9d67858",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts",
+          "line": 213,
+          "column": 5
+        },
+        {
+          "title": "unknown facility creation stays fenced after closing and reopening",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-7efe9eea84e754bc6b0c",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts",
+          "line": 235,
+          "column": 5
+        },
+        {
+          "title": "identity invalidation disables facility creation despite a cached role",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-78ca74b6d39d9368695b",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts",
+          "line": 262,
+          "column": 5
+        },
+        {
+          "title": "closing a pending facility create keeps the unknown fence when its view reopens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-eb04a5787d79bea42c54",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts",
+          "line": 206,
+          "column": 5
+        },
+        {
+          "title": "a similar current facility cannot be claimed as an unknown creation receipt",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-fdd7d4621f0ca53af515",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts",
+          "line": 248,
+          "column": 5
+        },
+        {
+          "title": "a changed saved facility cannot be overwritten by an older open draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-ac31e75db29a615152dd",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts",
+          "line": 286,
+          "column": 5
+        },
+        {
+          "title": "a late facility result cannot escape its original actor's unknown fence",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-15f6bf1e21e0759ae502",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts",
+          "line": 321,
+          "column": 5
+        },
+        {
+          "title": "a facility action refuses another tenant's otherwise matching receipt",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-c19d3510a4888476e85f",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts",
+          "line": 45,
+          "column": 5
+        },
+        {
+          "title": "a definite facility action refusal remains a deliberate retry without claiming success",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-bac265cffcd8432ca9dc",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts",
+          "line": 64,
+          "column": 5
+        },
+        {
+          "title": "an uncertain facility action needs a current GET review before a new explicit request",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-0d7bd3e08e4559f56978",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts",
+          "line": 84,
+          "column": 5
+        },
+        {
+          "title": "a refreshed facility source aborts obsolete action effects and retains the new address",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-aba646fc708f6f526c22",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts",
+          "line": 169,
+          "column": 5
+        },
+        {
+          "title": "a failed current review cannot erase an uncertain facility action",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-e51b037df25e5d089122",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts",
+          "line": 207,
+          "column": 5
+        },
+        {
+          "title": "current profile dialogs fit 1440px and avoid cross-component render updates",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-431787bad81245ee7a54",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-dialog-layout.spec.ts",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "current profile dialogs fit 390px and avoid cross-component render updates",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-1dde7330909d6de5a08d",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-dialog-layout.spec.ts",
+          "line": 8,
+          "column": 7
+        },
+        {
+          "title": "an absent current file is unavailable, not a deletion confirmation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-cda86ba9471f1510de3a",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 86,
+          "column": 5
+        },
+        {
+          "title": "pending current deletion stays fenced until a later explicit review reports a recoverable file",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-9af352bff7d58abbf101",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 134,
+          "column": 5
+        },
+        {
+          "title": "a failed explicit current read 403 revokes all cached file actions until successful recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-b8204d340e772ecbd447",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 193,
+          "column": 7
+        },
+        {
+          "title": "a failed explicit current read 503 revokes all cached file actions until successful recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-a200e5ff7368a99cf9c0",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 193,
+          "column": 7
+        },
+        {
+          "title": "a superseded current read returning 200 cannot replace or poison newer client files",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-9f3d8ddae92229037e2b",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 340,
+          "column": 7
+        },
+        {
+          "title": "a superseded current read returning 403 cannot replace or poison newer client files",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "916db4927fed39d072d2-7ebfb11853b9751b2b40",
+          "file": "../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 340,
+          "column": 7
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T19:47:47.761Z",
+    "duration": 151.64599999999996,
+    "expected": 0,
+    "skipped": 26,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "recordedUTC": "2026-10-13T01:27:32.413929+00:00",
+  "shippingSource": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "branch": "repair/capiro-shipping-browser-20261013",
+  "worktree": "/workspace/capiro-shipping-browser-20261013",
+  "node": "v24.19.0",
+  "npm": "11.9.0",
+  "localBrowser": "Chromium 154.0.8037.57 built on Debian GNU/Linux 13 (trixie)",
+  "pinnedBrowser": {
+    "revision": "1228",
+    "version": "149.0.7827.55"
+  },
+  "installFailure": {
+    "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/capiro-shipping-browser-cache node node_modules/playwright/cli.js install --only-shell chromium",
+    "exitCode": 1,
+    "response": "403 Domain forbidden",
+    "officialURL": "https://cdn.playwright.dev/builds/cft/149.0.7827.55/linux64/chrome-headless-shell-linux64.zip",
+    "fallbackHead": "CHROMIUM-PUBLIC-DOWNLOAD-HEAD.json"
+  },
+  "dependencyMode": "Read-only borrowed root/app dependency graph from frozen capiro-remaining; diagnostic replay, not a clean install qualification. Untracked node_modules symlinks are not source changes.",
+  "shippingBuild": "69bdc818-0b1d-4570-98fa-91a00d21b280",
+  "shippingS3Version": "TI9jxVgFs.NUM7oErSyUtL4nufBA1AQH",
+  "shippingResult": "User reports1116 passed/2 failed; exact AWS traces pending; no fourth build approved",
+  "restrictions": "No AWS/image/push/scan/deploy/provider/security/database action"
+}

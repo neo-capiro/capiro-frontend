@@ -1,0 +1,48 @@
+{
+  "sourceCommit": "24641d784f36dbb1d8ca558ed41ad4c6e22bf9ab",
+  "checkedAt": "2026-10-12T20:03:43.455731+00:00",
+  "sourcePacket": "ms06-browser-source.json",
+  "before": {
+    "source": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+    "controls": 2,
+    "failedAsIntended": 2,
+    "reasons": [
+      "Current detail has no Join meeting link",
+      "Meeting selection uses modal rather than persistent list/detail region"
+    ],
+    "evidence": "red-browser-results.json"
+  },
+  "after": {
+    "passed": 21,
+    "failed": 0,
+    "skipped": 0,
+    "retries": 0,
+    "newControls": 15,
+    "preservedControls": 6,
+    "evidence": "green-browser-results.json"
+  },
+  "visualReview": {
+    "reference": "docs/remaining-repairs-20261012/design-baseline/fresh-captures/root/figma-411-94827.png",
+    "desktop": "remaining-ms06-desktop.png",
+    "phone": "remaining-ms06-phone.png",
+    "observed": "Persistent selectable meeting list plus inline Prep detail; 280px desktop list, stacked phone content in bounds, heading focus and Escape return. Existing modal/Notes callers preserved. Honest missing preparations and unavailable generation action retained.",
+    "limits": "Bounded MS06 supplied-link/split-view repair, related Modules variant of MCAL-006 only. Full criterion, native authorization/persistence/provider behavior, all337 native rows, and full-screen visual acceptance remain unqualified."
+  },
+  "independentSourceReview": "../capiro-remaining-capabilities-evidence/ms06-independent-review",
+  "rootStatic": "typecheck and corrected cwd lint/format passed; source responsibility reviews in architecture records; combined exact-source gate pending",
+  "release": "green-server-closed.json",
+  "originalRowFacets": [
+    {
+      "auditId": "MCAL-006",
+      "criterion": "Open a meeting and show attendees, location, join link and preparation summary",
+      "scope": "IN_SCOPE",
+      "relationship": "related_modules_variant_only",
+      "originalClassificationUnchanged": "BOUNDED_SOURCE_AND_EVIDENCE_REVIEW",
+      "originalNativeStatusUnchanged": "NOT_RUN_BY_THIS_ASSESSMENT",
+      "originalFullRowAcceptanceUnchanged": "OPEN_FINAL_ACCEPTANCE",
+      "originalVisualStatusUnchanged": "NOT_ACCEPTED_AGAINST_ALL_TARGETS",
+      "originalDetailedEvidence": "evidence/modules_settings/row-assessment.json",
+      "originalRowJsonPointer": "/rows/336"
+    }
+  ]
+}

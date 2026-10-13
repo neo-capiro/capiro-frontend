@@ -1,0 +1,2745 @@
+{
+  "schema": "capiro-independent-preliminary-gate-review/1",
+  "capturedAtUTC": "2026-10-12T22:16:59.360507+00:00",
+  "reviewer": "prospects_review",
+  "status": "PRELIMINARY_FULL_BROWSER_RESULTS_AWAITED_NO_FINAL_VERDICT",
+  "method": "Read-only source, Git, raw results and byte hashing. No runtime, browser, suite, build, typecheck, Docker, provider/native execution or source/index mutation.",
+  "source": {
+    "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+    "rootTree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+    "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+    "runtimeSourceTree": "fa4ca7b5ca126f7bcdc1cf816584fa0303d61704",
+    "buildId": "5gHD80mUbuwxCPBarQvGL",
+    "at": "2026-10-12T22:11:04.299871+00:00",
+    "scope": "Standalone host build after clean npm install; existing framework cache permitted."
+  },
+  "sourceCleanAtInspection": true,
+  "runtimeSourceUnchangedFromD68": true,
+  "deltaFromD68": [
+    "apps/web/test/browser/remaining-modules.spec.ts",
+    "docs/remaining-repairs-20261012/STRUCTURE-REVIEW.md"
+  ],
+  "completedGates": [
+    {
+      "name": "clean-install",
+      "status": "passed",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-1585438/clean-install-exit.json",
+        "bytes": 776,
+        "sha256": "1813f0bfc88b3e777f35ac6e5b3fd1f3b05467734931284ae040617bc778558c"
+      },
+      "raw": {
+        "name": "clean-install",
+        "command": [
+          "npm",
+          "ci",
+          "--ignore-scripts",
+          "--cache",
+          "/tmp/capiro-p1-npm-cache"
+        ],
+        "startedUTC": "2026-10-12T22:08:02.754039+00:00",
+        "endedUTC": "2026-10-12T22:08:14.584632+00:00",
+        "durationSeconds": 11.830628206997062,
+        "exitCode": 0,
+        "sourceBefore": {
+          "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+          "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+          "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+          "sourceDiff": ""
+        },
+        "sourceAfter": {
+          "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+          "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+          "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+          "sourceDiff": ""
+        },
+        "sourceChanged": false
+      },
+      "log": {
+        "path": "/tmp/capiro-remaining-qualification/final-1585438/clean-install.log",
+        "bytes": 164,
+        "sha256": "472709c34dd6302df557c435dce2e6e58e0bd121efa12f51833119a54724114c"
+      }
+    },
+    {
+      "name": "corrected-regressions",
+      "status": "passed",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-1585438/corrected-regressions-exit.json",
+        "bytes": 1061,
+        "sha256": "f40e660d0598fcceeab77af5694234ca069def7c21d28ac621e6bb8710e7aa40"
+      },
+      "raw": {
+        "name": "corrected-regressions",
+        "command": [
+          "env",
+          "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+          "npm",
+          "run",
+          "test:browser",
+          "--",
+          "current-projection.spec.ts",
+          "portfolio.spec.ts",
+          "relationships.spec.ts",
+          "--workers=1",
+          "--timeout=60000",
+          "--retries=0",
+          "--output=/tmp/capiro-remaining-qualification/final-1585438/corrected-regression-artifacts"
+        ],
+        "startedUTC": "2026-10-12T22:08:14.631599+00:00",
+        "endedUTC": "2026-10-12T22:09:29.500315+00:00",
+        "durationSeconds": 74.86874473901116,
+        "exitCode": 0,
+        "sourceBefore": {
+          "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+          "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+          "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+          "sourceDiff": ""
+        },
+        "sourceAfter": {
+          "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+          "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+          "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+          "sourceDiff": ""
+        },
+        "sourceChanged": false
+      },
+      "log": {
+        "path": "/tmp/capiro-remaining-qualification/final-1585438/corrected-regressions.log",
+        "bytes": 4782,
+        "sha256": "0a0ea9070aaa9a9036bbd670035e14ca43ca16a81e34154972ca2f4105bb7875"
+      }
+    },
+    {
+      "name": "combined-check",
+      "status": "passed",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-1585438/combined-check-exit.json",
+        "bytes": 776,
+        "sha256": "1e1b3c1fe73f399cfb944ab715fea299bc9d4b712e5a76c539cc4b1e39266d7d"
+      },
+      "raw": {
+        "name": "combined-check",
+        "command": [
+          "env",
+          "NODE_OPTIONS=--max-old-space-size=4096",
+          "npm",
+          "run",
+          "check"
+        ],
+        "startedUTC": "2026-10-12T22:09:29.549456+00:00",
+        "endedUTC": "2026-10-12T22:10:49.841065+00:00",
+        "durationSeconds": 80.29163943699677,
+        "exitCode": 0,
+        "sourceBefore": {
+          "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+          "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+          "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+          "sourceDiff": ""
+        },
+        "sourceAfter": {
+          "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+          "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+          "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+          "sourceDiff": ""
+        },
+        "sourceChanged": false
+      },
+      "log": {
+        "path": "/tmp/capiro-remaining-qualification/final-1585438/combined-check.log",
+        "bytes": 815381,
+        "sha256": "81a2fb6497a3973649181522b29ceb8c804e67ab5ea5cfc623cd9a53609f405e"
+      }
+    },
+    {
+      "name": "elements-prepare",
+      "status": "passed",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-1585438/elements-prepare-exit.json",
+        "bytes": 855,
+        "sha256": "7e47177ec8dc7502a1ee296d437d37888f14101ff612ae6304b82f5bdbe11194"
+      },
+      "raw": {
+        "name": "elements-prepare",
+        "command": [
+          "node",
+          "packages/qualification-elements/ssr-build.mjs",
+          "/tmp/capiro-elements-tool",
+          "/tmp/capiro-remaining-qualification/final-1585438/elements-ssr"
+        ],
+        "startedUTC": "2026-10-12T22:10:49.890196+00:00",
+        "endedUTC": "2026-10-12T22:10:51.572453+00:00",
+        "durationSeconds": 1.6823136500024702,
+        "exitCode": 0,
+        "sourceBefore": {
+          "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+          "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+          "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+          "sourceDiff": ""
+        },
+        "sourceAfter": {
+          "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+          "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+          "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+          "sourceDiff": ""
+        },
+        "sourceChanged": false
+      },
+      "log": {
+        "path": "/tmp/capiro-remaining-qualification/final-1585438/elements-prepare.log",
+        "bytes": 244,
+        "sha256": "7522902b09cb99931f1909748eaa79cc62627cb75f140f70408f66ae40c6e722"
+      }
+    },
+    {
+      "name": "elements-check",
+      "status": "passed",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-1585438/elements-check-exit.json",
+        "bytes": 1060,
+        "sha256": "664440a7ec07e20652fa0b223fe90442b4d72322c17abe40e334b8456efc82a2"
+      },
+      "raw": {
+        "name": "elements-check",
+        "command": [
+          "env",
+          "MERI_ELEMENTS_SSR_RECEIPT=/tmp/capiro-remaining-qualification/final-1585438/elements-ssr/receipt.json",
+          "MERI_ELEMENTS_SSR_RECEIPT_SHA256=61d2832517221e8aacfcc7ab8adcbd8cd5e719bacafa4d175c282887fc9107fd",
+          "MERI_ELEMENTS_SSR_CAPTURE_ROOT=/tmp/capiro-remaining-qualification/final-1585438/elements-captures",
+          "npm",
+          "run",
+          "check:elements"
+        ],
+        "startedUTC": "2026-10-12T22:10:51.616403+00:00",
+        "endedUTC": "2026-10-12T22:10:56.779683+00:00",
+        "durationSeconds": 5.1633292690094095,
+        "exitCode": 0,
+        "sourceBefore": {
+          "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+          "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+          "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+          "sourceDiff": ""
+        },
+        "sourceAfter": {
+          "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+          "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+          "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+          "sourceDiff": ""
+        },
+        "sourceChanged": false
+      },
+      "log": {
+        "path": "/tmp/capiro-remaining-qualification/final-1585438/elements-check.log",
+        "bytes": 3092,
+        "sha256": "383abcefa6f0918b9e3441e1f2966aa5c0d9619abc348873b5851ed8bcc87ec0"
+      }
+    },
+    {
+      "name": "production-build",
+      "status": "passed",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-1585438/production-build-exit.json",
+        "bytes": 778,
+        "sha256": "c2770fc52e329bc8c38f0d8f4eb3bf695f45b99f7f8b4dbfb3a36608ab136cbb"
+      },
+      "raw": {
+        "name": "production-build",
+        "command": [
+          "env",
+          "NODE_OPTIONS=--max-old-space-size=4096",
+          "npm",
+          "run",
+          "build"
+        ],
+        "startedUTC": "2026-10-12T22:10:56.820501+00:00",
+        "endedUTC": "2026-10-12T22:11:04.288773+00:00",
+        "durationSeconds": 7.468298726991634,
+        "exitCode": 0,
+        "sourceBefore": {
+          "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+          "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+          "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+          "sourceDiff": ""
+        },
+        "sourceAfter": {
+          "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+          "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+          "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+          "sourceDiff": ""
+        },
+        "sourceChanged": false
+      },
+      "log": {
+        "path": "/tmp/capiro-remaining-qualification/final-1585438/production-build.log",
+        "bytes": 2232,
+        "sha256": "b4d3b9940c1255771317f21613d619d605a6c78738f604562849de4cb0841999"
+      }
+    },
+    {
+      "name": "production-server",
+      "status": "passed",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-1585438/production-server-exit.json",
+        "bytes": 893,
+        "sha256": "afcc2925fa4bc95bdc5a9b7c4f86810e202b9c42fc4c5caf35151d7d9d6d585d"
+      },
+      "raw": {
+        "name": "production-server",
+        "command": [
+          "env",
+          "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+          "npm",
+          "run",
+          "test:production",
+          "--",
+          "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts"
+        ],
+        "startedUTC": "2026-10-12T22:11:04.335821+00:00",
+        "endedUTC": "2026-10-12T22:11:10.663298+00:00",
+        "durationSeconds": 6.3275024269969435,
+        "exitCode": 0,
+        "sourceBefore": {
+          "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+          "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+          "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+          "sourceDiff": ""
+        },
+        "sourceAfter": {
+          "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+          "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+          "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+          "sourceDiff": ""
+        },
+        "sourceChanged": false
+      },
+      "log": {
+        "path": "/tmp/capiro-remaining-qualification/final-1585438/production-server.log",
+        "bytes": 4258,
+        "sha256": "30123cc0fb4fd5935f8a619f2c46afdc52f8264bae803af7da5eab1a2580dddb"
+      }
+    },
+    {
+      "name": "docker-context",
+      "status": "passed",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-1585438/docker-context-exit.json",
+        "bytes": 898,
+        "sha256": "6c5ff22e2552ed4d96bf67c370ad2aa963e269cda185407648313888200158de"
+      },
+      "raw": {
+        "name": "docker-context",
+        "command": [
+          "env",
+          "DOCKER_CONFIG=/tmp/capiro-docker-config-20261012",
+          "npm",
+          "run",
+          "test:docker-context",
+          "--",
+          "--artifacts",
+          "/tmp/capiro-remaining-docker-evidence/context-frozen-1585438"
+        ],
+        "startedUTC": "2026-10-12T22:11:10.705689+00:00",
+        "endedUTC": "2026-10-12T22:11:11.086902+00:00",
+        "durationSeconds": 0.3812400640017586,
+        "exitCode": 0,
+        "sourceBefore": {
+          "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+          "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+          "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+          "sourceDiff": ""
+        },
+        "sourceAfter": {
+          "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+          "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+          "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+          "sourceDiff": ""
+        },
+        "sourceChanged": false
+      },
+      "log": {
+        "path": "/tmp/capiro-remaining-qualification/final-1585438/docker-context.log",
+        "bytes": 500,
+        "sha256": "4fa53b9d49d6e82abd32a3c497d5d1d10b0c784f010fd4eb997eeca1493f8a65"
+      }
+    },
+    {
+      "name": "docker-build",
+      "status": "failed_before_application_compile",
+      "receipt": {
+        "path": "/tmp/capiro-remaining-qualification/final-1585438/docker-build-exit.json",
+        "bytes": 900,
+        "sha256": "78c1eb82c96f1a25af2429e74a38dba6493557ddf7220ba614583c2a41155d1d"
+      },
+      "raw": {
+        "name": "docker-build",
+        "command": [
+          "env",
+          "DOCKER_CONFIG=/tmp/capiro-docker-config-20261012",
+          "docker",
+          "build",
+          "--progress=plain",
+          "-f",
+          "apps/web/Dockerfile",
+          "--tag",
+          "capiro-remaining:1585438-20261012",
+          "."
+        ],
+        "startedUTC": "2026-10-12T22:11:28.208765+00:00",
+        "endedUTC": "2026-10-12T22:11:38.701343+00:00",
+        "durationSeconds": 10.49261612999544,
+        "exitCode": 1,
+        "sourceBefore": {
+          "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+          "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+          "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+          "sourceDiff": ""
+        },
+        "sourceAfter": {
+          "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+          "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+          "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+          "sourceDiff": ""
+        },
+        "sourceChanged": false
+      },
+      "log": {
+        "path": "/tmp/capiro-remaining-qualification/final-1585438/docker-build.log",
+        "bytes": 2637,
+        "sha256": "efac2a8f7ed6bd0750749a8a725cf27f2c026967582a51a205f59020c8ccedb3"
+      }
+    }
+  ],
+  "combined": {
+    "parts": {
+      "rootNode": 59,
+      "transportNode": 21,
+      "portfolioVitest": 1275,
+      "sharedCapiroVitest": 117
+    },
+    "total": 1472,
+    "vitestFileCounts": [
+      89,
+      21
+    ],
+    "checkScript": "npm run check:packages && npm run typecheck && npm test && npm run architecture && npm run test:transport && npm run lint --workspace @capiro/web && npm run format:check --workspace @capiro/web && npm run test:portfolio && npm run test:capiro --workspace @capiro/web"
+  },
+  "architecture": {
+    "errors": [],
+    "summary": {
+      "total": 427,
+      "reviewed": 403,
+      "inheritedUnreviewed": 24,
+      "blocking": 0
+    },
+    "inheritedUnreviewed": [
+      {
+        "file": "apps/web/src/features/portfolio/advocacy/CorrectionDialog.tsx",
+        "kind": "function",
+        "symbol": "CorrectionDialog",
+        "line": 33,
+        "nonblank": 200,
+        "fingerprint": "d7ba4f7e27fae48927d2d9db608314e7e3eae9d894bb344d5372055004d919f6",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/advocacy/MatterEditor.tsx",
+        "kind": "function",
+        "symbol": "MatterEditor",
+        "line": 8,
+        "nonblank": 99,
+        "fingerprint": "77035a3fa8656eec765dc55919a184d8cdc6ca82771bb69a02d1d84292c4ca9c",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/advocacy/RecordCard.tsx",
+        "kind": "function",
+        "symbol": "RecordCard",
+        "line": 5,
+        "nonblank": 91,
+        "fingerprint": "10d82cfc146ce90be00ee248a64aaa3e979e11f4aaf1e3d9df900707fa556a35",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/advocacy/RecordDialog.tsx",
+        "kind": "function",
+        "symbol": "RecordDialog",
+        "line": 7,
+        "nonblank": 85,
+        "fingerprint": "4a706fc41aa4c7093bb575fe6de38f384451c179f6cc90e7c62aed04e80b0d93",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/advocacy/useCorrection.ts",
+        "kind": "function",
+        "symbol": "useCorrection",
+        "line": 14,
+        "nonblank": 112,
+        "fingerprint": "881a2819371f90224633e801844b6fb061dd28d123b7bbf88416df31cb2d2744",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/bill-tracker/BillDrawer.tsx",
+        "kind": "function",
+        "symbol": "BillDrawer",
+        "line": 14,
+        "nonblank": 140,
+        "fingerprint": "312f8f6d9f0b2d2dd07a5943d2af52908b4973068c324f1a6a0f37b34ebeef86",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/bill-tracker/BillResults.tsx",
+        "kind": "function",
+        "symbol": "BillResults",
+        "line": 3,
+        "nonblank": 91,
+        "fingerprint": "addb69617b6fcde2f1451f5b77bb1db2443f54b07ec4e76a383d904450933d97",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/bill-tracker/TrackBillDialog.tsx",
+        "kind": "function",
+        "symbol": "TrackBillDialog",
+        "line": 7,
+        "nonblank": 111,
+        "fingerprint": "f4668f1562cf58ffc1b9789cc5a6edb789287a707e3b65572cb3dd702f9c397d",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/bill-tracker/WatchlistTopics.tsx",
+        "kind": "function",
+        "symbol": "WatchlistTopics",
+        "line": 4,
+        "nonblank": 200,
+        "fingerprint": "42e521234b538b7e3f9d0989facb7c1aa38899170080a0b8fac74fa7c6475202",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/bill-tracker/WatchlistTopics.tsx",
+        "kind": "function",
+        "symbol": "WatchlistTopics > <anonymous> #3",
+        "line": 55,
+        "nonblank": 157,
+        "fingerprint": "e8349bfe750afb4e6ec69f8b847ab26f89f59d5acdbd5771fffdc58734159bc5",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/calendar/library/MeetingTranscriptUpload.tsx",
+        "kind": "function",
+        "symbol": "TranscriptForm",
+        "line": 43,
+        "nonblank": 221,
+        "fingerprint": "114d292338289d67990f83710edf6f8cfcaf39fdb15ccf7a0fac3dbd66084429",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/calendar/preparation/MeetingPreparation.tsx",
+        "kind": "file",
+        "symbol": "<module>",
+        "line": 1,
+        "nonblank": 404,
+        "fingerprint": "a95f6b72e9f6255ac0d775e788c73fa8bf33e3e40f8ad9f190019414ace61c73",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/calendar/preparation/MeetingPreparation.tsx",
+        "kind": "function",
+        "symbol": "ScopedPreparation",
+        "line": 51,
+        "nonblank": 343,
+        "fingerprint": "89889996f50fe6bbccbc1cfa293ad63d231f89bb97e23b74080eb12d077811f6",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/client-profile/enrichment/useReviewAction.ts",
+        "kind": "function",
+        "symbol": "useReviewAction",
+        "line": 15,
+        "nonblank": 115,
+        "fingerprint": "8d85165524674480e8823c7ee7d44f4343edc4032d48d3c95d3f17ad881c463a",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/index/GlobalQuickLog.tsx",
+        "kind": "function",
+        "symbol": "QuickLogSession",
+        "line": 12,
+        "nonblank": 82,
+        "fingerprint": "f6656ca52aef614b4f11c16e9ed0525cafc6290975039580b071f179eaa2a786",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+        "kind": "function",
+        "symbol": "PortfolioAttention",
+        "line": 9,
+        "nonblank": 87,
+        "fingerprint": "6d09bae3b89a88c0247db5ab2912723db581643f4b91ff6c180a4281a29392ec",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/index/layout/usePortfolioLayout.ts",
+        "kind": "function",
+        "symbol": "usePortfolioLayout",
+        "line": 20,
+        "nonblank": 245,
+        "fingerprint": "8934298b9b287d89eeef09aa0522321f70d7b970ebba328a50dd81f56757782f",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/index/layout/usePortfolioLayout.ts",
+        "kind": "function",
+        "symbol": "usePortfolioLayout > save",
+        "line": 106,
+        "nonblank": 87,
+        "fingerprint": "49325a39f6558e8044921f50097807dc962acfa958d6c63ae8bc13246b737fe9",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/intake/csv/CsvImportDialog.tsx",
+        "kind": "function",
+        "symbol": "CsvImportDialog",
+        "line": 32,
+        "nonblank": 268,
+        "fingerprint": "ad548c84e93d1efb573557045251f11dd1412e55507e36163b96f284d22c96df",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/intake/registrant/CandidateReview.tsx",
+        "kind": "function",
+        "symbol": "CandidateReview",
+        "line": 17,
+        "nonblank": 101,
+        "fingerprint": "768edc5eb36cb76f1c5041b563df8a32a5941ebd6506645cc85df3111191dde1",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/intake/registrant/FirmSearch.tsx",
+        "kind": "function",
+        "symbol": "FirmSearch",
+        "line": 7,
+        "nonblank": 82,
+        "fingerprint": "b6a5e7572edcfd00b8e3e891fe352d39fd4ed41017d4272fa53e7aabb9f4a73c",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/intake/registrant/RegistrantImportDialog.tsx",
+        "kind": "function",
+        "symbol": "RegistrantSession",
+        "line": 33,
+        "nonblank": 244,
+        "fingerprint": "d53051fc3fa88023a02bc3b42dbc1dee2390ad2ff06e5c449339fd1147a3ac43",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      },
+      {
+        "file": "apps/web/src/features/portfolio/objectives/global-create/GlobalObjectiveClientPicker.tsx",
+        "kind": "function",
+        "symbol": "PickerSession",
+        "line": 74,
+        "nonblank": 174,
+        "fingerprint": "358beb9d3610b78d161984b88dda7ae9cbfb1d907eca2105ca613dc718fc0208",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      },
+      {
+        "file": "apps/web/src/shared/portfolio/api/proxy.ts",
+        "kind": "function",
+        "symbol": "proxyRequest",
+        "line": 29,
+        "nonblank": 125,
+        "fingerprint": "23598007dfb1bbac665eaeac131baa716409c3e9da0a2fb8e245521dd32749c5",
+        "provenance": "inherited-unchanged",
+        "reviewStatus": "unreviewed",
+        "blocking": false,
+        "transferCommit": "02c02d95bdf3949662b9123f425271c6491ffdab"
+      }
+    ],
+    "identicalInheritedRecordsToAllThreePriorCheckpoints": true
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 76,
+    "diagnosticLines": [
+      "55:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "79:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "121:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "131:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "217:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "45:6  warning  React Hook useEffect has a missing dependency: 'range'. Either include it or remove the dependency array  react-hooks/exhaustive-deps",
+      "153:31  warning  Expected an assignment or function call and instead saw an expression  @typescript-eslint/no-unused-expressions",
+      "89:5  warning  'goal' is assigned a value but never used          @typescript-eslint/no-unused-vars",
+      "90:5  warning  'setGoal' is assigned a value but never used       @typescript-eslint/no-unused-vars",
+      "91:5  warning  'objective' is assigned a value but never used     @typescript-eslint/no-unused-vars",
+      "92:5  warning  'setObjective' is assigned a value but never used  @typescript-eslint/no-unused-vars",
+      "93:5  warning  'topic' is assigned a value but never used         @typescript-eslint/no-unused-vars",
+      "94:5  warning  'setTopic' is assigned a value but never used      @typescript-eslint/no-unused-vars",
+      "95:5  warning  'why' is assigned a value but never used           @typescript-eslint/no-unused-vars",
+      "96:5  warning  'setWhy' is assigned a value but never used        @typescript-eslint/no-unused-vars",
+      "307:10  warning  'useOutreachRecords' is defined but only used as a type  @typescript-eslint/no-unused-vars",
+      "49:9   warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "54:9   warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "59:9   warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "117:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "133:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "139:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "142:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "13:7  warning  Expected an assignment or function call and instead saw an expression  @typescript-eslint/no-unused-expressions",
+      "36:5  warning  'start' is assigned a value but never used     @typescript-eslint/no-unused-vars",
+      "37:5  warning  'setStart' is assigned a value but never used  @typescript-eslint/no-unused-vars",
+      "38:5  warning  'end' is assigned a value but never used       @typescript-eslint/no-unused-vars",
+      "39:5  warning  'setEnd' is assigned a value but never used    @typescript-eslint/no-unused-vars",
+      "40:5  warning  'unit' is assigned a value but never used      @typescript-eslint/no-unused-vars",
+      "41:5  warning  'setUnit' is assigned a value but never used   @typescript-eslint/no-unused-vars",
+      "42:5  warning  'value' is assigned a value but never used     @typescript-eslint/no-unused-vars",
+      "43:5  warning  'setValue' is assigned a value but never used  @typescript-eslint/no-unused-vars",
+      "49:5  warning  'selectedPeople' is assigned a value but never used    @typescript-eslint/no-unused-vars",
+      "50:5  warning  'setPeople' is assigned a value but never used         @typescript-eslint/no-unused-vars",
+      "51:5  warning  'selectedProjects' is assigned a value but never used  @typescript-eslint/no-unused-vars",
+      "52:5  warning  'setProjects' is assigned a value but never used       @typescript-eslint/no-unused-vars",
+      "53:5  warning  'teamId' is assigned a value but never used            @typescript-eslint/no-unused-vars",
+      "54:5  warning  'setTeamId' is assigned a value but never used         @typescript-eslint/no-unused-vars",
+      "55:5  warning  'title' is assigned a value but never used             @typescript-eslint/no-unused-vars",
+      "56:5  warning  'setTitle' is assigned a value but never used          @typescript-eslint/no-unused-vars",
+      "57:5  warning  'hours' is assigned a value but never used             @typescript-eslint/no-unused-vars",
+      "58:5  warning  'setHours' is assigned a value but never used          @typescript-eslint/no-unused-vars",
+      "64:5  warning  'toggle' is assigned a value but never used            @typescript-eslint/no-unused-vars",
+      "26:5  warning  'setPlanId' is assigned a value but never used  @typescript-eslint/no-unused-vars",
+      "35:5  warning  'rows' is assigned a value but never used       @typescript-eslint/no-unused-vars",
+      "55:42  warning  'index' is defined but never used  @typescript-eslint/no-unused-vars",
+      "101:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "123:19  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "34:15  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "52:15  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "98:11  warning  Do not use `window.location.assign()` to navigate to internal Next.js pages. Use `redirect()` in the render phase, or `useRouter().push()` in Client Components' event handlers instead. See: https://nextjs.org/docs/messages/no-location-assign-relative-destination  @next/next/no-location-assign-relative-destination",
+      "239:19  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "33:7  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "63:9   warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "162:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "81:19  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "71:21  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "50:23  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "23:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "88:9   warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "127:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "194:19  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "105:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "29:9  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "170:7  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "195:9  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "206:9  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "3:1  warning  Assign object to a variable before exporting as module default  import/no-anonymous-default-export",
+      "12:7  warning  'source' is assigned a value but never used  @typescript-eslint/no-unused-vars",
+      "11:7  warning  'source' is assigned a value but never used  @typescript-eslint/no-unused-vars",
+      "5:7  warning  'source' is assigned a value but never used  @typescript-eslint/no-unused-vars",
+      "10:17  warning  '_destinations' is defined but never used  @typescript-eslint/no-unused-vars",
+      "10:5  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "28:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "46:7  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element",
+      "20:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element"
+    ],
+    "entireDiagnosticRegionIdenticalToAllThreePriorCheckpoints": true
+  },
+  "correctedBrowser": {
+    "stats": {
+      "startTime": "2026-10-12T22:08:15.521Z",
+      "duration": 73928.27500000001,
+      "expected": 23,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "workers": 1,
+    "retries": 0,
+    "records": [
+      {
+        "file": "current-projection.spec.ts",
+        "line": 23,
+        "title": "failed client refresh 403 hides retained totals, choices and cards until recovery",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "retry": 0
+          }
+        ]
+      },
+      {
+        "file": "current-projection.spec.ts",
+        "line": 103,
+        "title": "failed activity refresh 403 hides retained history, kinds, limit and overview count",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "retry": 0
+          }
+        ]
+      },
+      {
+        "file": "current-projection.spec.ts",
+        "line": 23,
+        "title": "failed client refresh 503 hides retained totals, choices and cards until recovery",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "retry": 0
+          }
+        ]
+      },
+      {
+        "file": "current-projection.spec.ts",
+        "line": 103,
+        "title": "failed activity refresh 503 hides retained history, kinds, limit and overview count",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "retry": 0
+          }
+        ]
+      },
+      {
+        "file": "current-projection.spec.ts",
+        "line": 204,
+        "title": "failed current client read removes its retained name from the frame and recovers",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "retry": 0
+          }
+        ]
+      },
+      {
+        "file": "portfolio.spec.ts",
+        "line": 12,
+        "title": "four-field readiness persists once, transitions, and refreshes the list",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "retry": 0
+          }
+        ]
+      },
+      {
+        "file": "portfolio.spec.ts",
+        "line": 60,
+        "title": "facility creation uses the selected client's endpoint and refreshes the map list",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "retry": 0
+          }
+        ]
+      },
+      {
+        "file": "portfolio.spec.ts",
+        "line": 110,
+        "title": "mail is reviewed and a provider error remains visible without automatic retry",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "retry": 0
+          }
+        ]
+      },
+      {
+        "file": "portfolio.spec.ts",
+        "line": 144,
+        "title": "capability edits invalidate the list and retain unrelated registration codes",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "retry": 0
+          }
+        ]
+      },
+      {
+        "file": "portfolio.spec.ts",
+        "line": 183,
+        "title": "navigation, permissions, session expiry and mobile layout use real feature components",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "retry": 0
+          }
+        ]
+      },
+      {
+        "file": "relationships.spec.ts",
+        "line": 16,
+        "title": "contact deep link, search empty state and keyboard close retain organization scope",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "retry": 0
+          }
+        ]
+      },
+      {
+        "file": "relationships.spec.ts",
+        "line": 37,
+        "title": "create retains a rejected draft, refuses duplicate pending submits and refreshes the roster after verified save",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "retry": 0
+          }
+        ]
+      },
+      {
+        "file": "relationships.spec.ts",
+        "line": 121,
+        "title": "edit rejects a foreign receipt without closing or losing inputs, then saves only through the scoped core route",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "retry": 0
+          }
+        ]
+      },
+      {
+        "file": "relationships.spec.ts",
+        "line": 162,
+        "title": "dirty drawer confirms discard, preserves edits when cancelled and restores keyboard focus",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "retry": 0
+          }
+        ]
+      },
+      {
+        "file": "relationships.spec.ts",
+        "line": 189,
+        "title": "remove requires confirmation and a deleted:true receipt; failure retains the contact",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "retry": 0
+          }
+        ]
+      },
+      {
+        "file": "relationships.spec.ts",
+        "line": 225,
+        "title": "unknown create completion retains draft and prevents a blind duplicate creation",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "retry": 0
+          }
+        ]
+      },
+      {
+        "file": "relationships.spec.ts",
+        "line": 253,
+        "title": "read-only identity cannot save, remove or change hierarchy",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "retry": 0
+          }
+        ]
+      },
+      {
+        "file": "relationships.spec.ts",
+        "line": 279,
+        "title": "wrong-client roster fails closed and an expired session uses the shared sign-in recovery",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "retry": 0
+          }
+        ]
+      },
+      {
+        "file": "relationships.spec.ts",
+        "line": 307,
+        "title": "desktop and mobile drawer keep actions visible while content scrolls in light and dark themes",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "retry": 0
+          }
+        ]
+      },
+      {
+        "file": "relationships.spec.ts",
+        "line": 351,
+        "title": "identity pending and stale-data refresh failures both refuse contact writes",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "retry": 0
+          }
+        ]
+      },
+      {
+        "file": "relationships.spec.ts",
+        "line": 396,
+        "title": "hierarchy saves stay separate from contact details and fence competing controls while pending",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "retry": 0
+          }
+        ]
+      },
+      {
+        "file": "relationships.spec.ts",
+        "line": 454,
+        "title": "person-linked QuickLog retains its failed note and existing email provider refusal remains visible",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "retry": 0
+          }
+        ]
+      },
+      {
+        "file": "relationships.spec.ts",
+        "line": 520,
+        "title": "existing client-filtered email history opens the permitted full thread from the contact drawer",
+        "status": "expected",
+        "attempts": [
+          {
+            "status": "passed",
+            "retry": 0
+          }
+        ]
+      }
+    ],
+    "scope": "23 synthetic Portfolio cases overlap the intended full1118; no double count or full-suite substitution."
+  },
+  "elements": {
+    "tests": 15,
+    "scope": "Offline SSR fixture; not browser/product/G1 admission",
+    "receipt": {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/elements-ssr/receipt.json",
+      "bytes": 984950,
+      "sha256": "61d2832517221e8aacfcc7ab8adcbd8cd5e719bacafa4d175c282887fc9107fd"
+    },
+    "independentBindings": [
+      {
+        "kind": "sources",
+        "checked": 48,
+        "mismatches": []
+      },
+      {
+        "kind": "outputs",
+        "checked": 3,
+        "mismatches": []
+      }
+    ],
+    "captureStreamsVerified": true,
+    "limit": "Dependency closure is covered by passed qualification; this reviewer separately hashed only the48 source,3 output and captured stream records."
+  },
+  "publicPackages": {
+    "artifacts": [
+      {
+        "file": "capiro-meri-contracts-0.1.0.tgz",
+        "repository": "https://github.com/neo-capiro/meri-greenfield",
+        "sourceCommit": "0dc9ce423947fc7814d7f8ad8de2f633c187c6d8",
+        "bytes": 48823,
+        "sha256": "2f15ade9458cbffe960b7cc36c6fb77cb54cc2a0eca4bc7c0f918b77cfacd4ee",
+        "regularEntryCount": 11,
+        "status": "accepted-offline-migration",
+        "independentReviewCommit": "3a8803b483b2053693696d41f3d67b5dd2dcb137",
+        "ownerAcceptanceCommit": "591786601b6bc47ee8553292119e84121ad50a30"
+      },
+      {
+        "file": "capiro-meri-ui-stream-0.1.0.tgz",
+        "repository": "https://github.com/neo-capiro/meri-greenfield",
+        "sourceCommit": "12289a434be6f589bbff9c741367b8cfb77f2616",
+        "bytes": 2280,
+        "sha256": "7ce24acd465dca4c5e90c1c98dba383318aab024dbce5170fa1f1daf3bce83ab",
+        "regularEntryCount": 6,
+        "status": "accepted-offline-migration",
+        "independentReviewCommit": "46aa93ea29c0ebb186bbd53a2b06e85aed0ff379",
+        "ownerAcceptance": "docs/coordination/CODEX-FRONTEND-MIGRATION-ACCEPTANCE.md"
+      }
+    ],
+    "independentByteHashesVerified": true,
+    "scope": "Governed public Meri contracts/writer inputs and offline21 transport controls; no backend/model run admission."
+  },
+  "production": {
+    "buildId": "5gHD80mUbuwxCPBarQvGL",
+    "httpChecks": 11,
+    "themeViewportRenders": 4,
+    "desktopHistoryChecks": 2,
+    "raw": {
+      "scope": "Actual Next standalone server without credentials, fixture identity or service interception. Live sign-in not exercised.",
+      "browserVersion": "154.0.8037.57",
+      "results": [
+        {
+          "path": "/healthz",
+          "status": 200,
+          "headers": "passed"
+        },
+        {
+          "path": "/portfolio",
+          "status": 200,
+          "headers": "passed"
+        },
+        {
+          "path": "/calendar",
+          "status": 200,
+          "headers": "passed"
+        },
+        {
+          "path": "/sign-in",
+          "status": 200,
+          "headers": "passed"
+        },
+        {
+          "path": "/api/backend/core/clients",
+          "status": 503,
+          "headers": "passed"
+        },
+        {
+          "path": "/",
+          "status": 200,
+          "headers": "passed"
+        },
+        {
+          "path": "/modules",
+          "status": 200,
+          "headers": "passed"
+        },
+        {
+          "path": "/settings",
+          "status": 307,
+          "headers": "passed"
+        },
+        {
+          "path": "/settings?clientId=10000000-0000-4000-8000-000000000001",
+          "status": 307,
+          "headers": "passed"
+        },
+        {
+          "path": "/settings/personal",
+          "status": 200,
+          "headers": "passed"
+        },
+        {
+          "path": "/api/capiro/me.read",
+          "status": 503,
+          "headers": "passed"
+        },
+        {
+          "colorScheme": "light",
+          "viewport": {
+            "width": 1440,
+            "height": 1040
+          },
+          "portfolio": {
+            "background": "rgb(245, 245, 244)",
+            "color": "rgb(10, 10, 10)",
+            "fontSize": "14px",
+            "markerCount": 1,
+            "fits": true,
+            "sameDocument": true
+          },
+          "wordmark": {
+            "width": 77,
+            "height": 26,
+            "filter": "none"
+          },
+          "stylesRestoredOnReturn": true,
+          "clientNavigation": true,
+          "headerNavigation": true
+        },
+        {
+          "colorScheme": "light",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "portfolio": {
+            "background": "rgb(245, 245, 244)",
+            "color": "rgb(10, 10, 10)",
+            "fontSize": "14px",
+            "markerCount": 1,
+            "fits": true,
+            "sameDocument": true
+          },
+          "wordmark": {
+            "width": 77,
+            "height": 26,
+            "filter": "none"
+          },
+          "stylesRestoredOnReturn": true,
+          "clientNavigation": true,
+          "headerNavigation": true
+        },
+        {
+          "crossMode": "Meri/Portfolio/Modules/Settings",
+          "history": "back/forward",
+          "sameDocument": true
+        },
+        {
+          "colorScheme": "dark",
+          "viewport": {
+            "width": 1440,
+            "height": 1040
+          },
+          "portfolio": {
+            "background": "rgb(18, 18, 18)",
+            "color": "rgb(250, 250, 249)",
+            "fontSize": "14px",
+            "markerCount": 1,
+            "fits": true,
+            "sameDocument": true
+          },
+          "wordmark": {
+            "width": 77,
+            "height": 26,
+            "filter": "invert(1)"
+          },
+          "stylesRestoredOnReturn": true,
+          "clientNavigation": true,
+          "headerNavigation": true
+        },
+        {
+          "colorScheme": "dark",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "portfolio": {
+            "background": "rgb(18, 18, 18)",
+            "color": "rgb(250, 250, 249)",
+            "fontSize": "14px",
+            "markerCount": 1,
+            "fits": true,
+            "sameDocument": true
+          },
+          "wordmark": {
+            "width": 77,
+            "height": 26,
+            "filter": "invert(1)"
+          },
+          "stylesRestoredOnReturn": true,
+          "clientNavigation": true,
+          "headerNavigation": true
+        },
+        {
+          "crossMode": "Meri/Portfolio/Modules/Settings",
+          "history": "back/forward",
+          "sameDocument": true
+        }
+      ],
+      "pageErrors": []
+    },
+    "screenshotsIdenticalToD68": [
+      {
+        "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/production-portfolio-1440-dark.png",
+        "bytes": 29101,
+        "sha256": "39049b79761b8a2d4c6c6ef06178b6777f97556ad618f7f762fe0b741e316dfa"
+      },
+      {
+        "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/production-portfolio-1440-light.png",
+        "bytes": 29213,
+        "sha256": "adb252c0670b1797a9515d1ea50002c30fd73566891ced4cb9634a26a102be8e"
+      },
+      {
+        "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/production-portfolio-390-dark.png",
+        "bytes": 21836,
+        "sha256": "532b06a716f405c135b7b3ee84008b5b208415588a1aa934725894561f53e318"
+      },
+      {
+        "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/production-portfolio-390-light.png",
+        "bytes": 22077,
+        "sha256": "083c3ac5298d3cafd0c8b24b7678ac36e86a628352a17fbcabd454717b1ccf37"
+      }
+    ],
+    "visualReviewReference": "/tmp/capiro-remaining-modules-evidence/production-1585438-review/report.md",
+    "limit": "Actual unauthenticated host shell and fail-closed routes. History is desktop-only; phone controls are header entry/return. clientNavigation means client-side routing, not selected-client authority. Earlier visual inspection is reused through equal hashes; this reviewer did not newly open screenshots."
+  },
+  "docker": {
+    "contextChecks": 33,
+    "requiredApplicationFiles": 12,
+    "contextOutputHashesVerified": true,
+    "context": {
+      "scope": "Actual local Linux Docker/BuildKit context matching; scratch COPY only, no application or provider execution",
+      "sourceCommit": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "scriptSha256": "404e52d329f094b44928a0d8148501cec937ec6929c0c3fb52799a25fc6c1a35",
+      "ignoreSha256": "0e4ca55ceb868d95b904348b39f3bd86ac55bf26d73cc922ccaea25af9e0b53a",
+      "startedUTC": "2026-10-12T22:11:10.931Z",
+      "endedUTC": "2026-10-12T22:11:11.060Z",
+      "command": [
+        "docker",
+        "buildx",
+        "build",
+        "--no-cache",
+        "--progress=plain",
+        "--output",
+        "type=local,dest=/tmp/capiro-remaining-docker-evidence/context-frozen-1585438/output",
+        "-f",
+        "-",
+        "/tmp/capiro-remaining-docker-evidence/context-frozen-1585438/fixture"
+      ],
+      "buildExitCode": 0,
+      "signal": null,
+      "errorCode": null,
+      "requiredApplicationFiles": 12,
+      "checks": [
+        {
+          "path": "apps/web/src/app/(portfolio)/(product)/portfolio/[clientId]/work/page.tsx",
+          "expectedIncluded": true,
+          "present": true,
+          "expectedSha256": "763779d187f13455ff81c52f93ab750d66fce40cd97b0a243faeab2ce9eed832",
+          "actualSha256": "763779d187f13455ff81c52f93ab750d66fce40cd97b0a243faeab2ce9eed832",
+          "passed": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/work/WorkPage.tsx",
+          "expectedIncluded": true,
+          "present": true,
+          "expectedSha256": "1d8227ee17b550628a8143ff03a38a0f4c4f7a07e7718550971e20803b4c1d98",
+          "actualSha256": "1d8227ee17b550628a8143ff03a38a0f4c4f7a07e7718550971e20803b4c1d98",
+          "passed": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/work/WorkStrategyState.tsx",
+          "expectedIncluded": true,
+          "present": true,
+          "expectedSha256": "65acd494e10469bee99726751cf7a27296817b0e9e85b0e5b15d3f2e0264d432",
+          "actualSha256": "65acd494e10469bee99726751cf7a27296817b0e9e85b0e5b15d3f2e0264d432",
+          "passed": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/work/WorkspaceDocumentTable.tsx",
+          "expectedIncluded": true,
+          "present": true,
+          "expectedSha256": "3126d44fed228715b96f5b3d287b40e5259215d9f4bebe22b993fbb2fa758ca9",
+          "actualSha256": "3126d44fed228715b96f5b3d287b40e5259215d9f4bebe22b993fbb2fa758ca9",
+          "passed": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/work/WorkspaceDocuments.tsx",
+          "expectedIncluded": true,
+          "present": true,
+          "expectedSha256": "b9b6f1f6e2ea8fd7fc876d59c68a7d66e0cdad3e2e0e726e86c12a9c99e30547",
+          "actualSha256": "b9b6f1f6e2ea8fd7fc876d59c68a7d66e0cdad3e2e0e726e86c12a9c99e30547",
+          "passed": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/work/contracts.ts",
+          "expectedIncluded": true,
+          "present": true,
+          "expectedSha256": "5eb722f7191b5754d71326f82d117b09d82ddd4623d1ecfc31a36e12cbb7763e",
+          "actualSha256": "5eb722f7191b5754d71326f82d117b09d82ddd4623d1ecfc31a36e12cbb7763e",
+          "passed": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/work/owners.ts",
+          "expectedIncluded": true,
+          "present": true,
+          "expectedSha256": "3ff8a47e259f48087ed7a6689f2189005a7575af7086f4f1efab157f4eba518a",
+          "actualSha256": "3ff8a47e259f48087ed7a6689f2189005a7575af7086f4f1efab157f4eba518a",
+          "passed": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/work/public.ts",
+          "expectedIncluded": true,
+          "present": true,
+          "expectedSha256": "f9a0e84247e8019f1be9e6820eaa690fcf0d8e7c6bbe46b380bc45b71c86f3ca",
+          "actualSha256": "f9a0e84247e8019f1be9e6820eaa690fcf0d8e7c6bbe46b380bc45b71c86f3ca",
+          "passed": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/work/queries.ts",
+          "expectedIncluded": true,
+          "present": true,
+          "expectedSha256": "52a28a23abf766c92864999cdaffd67c81a026d07ccb315966e69eb81317da68",
+          "actualSha256": "52a28a23abf766c92864999cdaffd67c81a026d07ccb315966e69eb81317da68",
+          "passed": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/work/work-strategy-state.module.css",
+          "expectedIncluded": true,
+          "present": true,
+          "expectedSha256": "390b8fef27a6c50bd0f86055b3411735de9b1de9895a13b6f4cb61ea69648263",
+          "actualSha256": "390b8fef27a6c50bd0f86055b3411735de9b1de9895a13b6f4cb61ea69648263",
+          "passed": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/work/work.module.css",
+          "expectedIncluded": true,
+          "present": true,
+          "expectedSha256": "15f6cb5d9c9f98f5575afc8b0770a747e26ff5b0595895acc186ce6b144b1dec",
+          "actualSha256": "15f6cb5d9c9f98f5575afc8b0770a747e26ff5b0595895acc186ce6b144b1dec",
+          "passed": true
+        },
+        {
+          "path": "apps/web/src/features/portfolio/work/workspace-documents.module.css",
+          "expectedIncluded": true,
+          "present": true,
+          "expectedSha256": "db436d6def1acc07f1fdf1bb07abeb1fefc1610af1e224cb53d9caec0efdb41a",
+          "actualSha256": "db436d6def1acc07f1fdf1bb07abeb1fefc1610af1e224cb53d9caec0efdb41a",
+          "passed": true
+        },
+        {
+          "path": "work/context-canary.txt",
+          "expectedIncluded": false,
+          "present": false,
+          "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+          "actualSha256": null,
+          "passed": true
+        },
+        {
+          "path": "node_modules/context-canary.js",
+          "expectedIncluded": false,
+          "present": false,
+          "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+          "actualSha256": null,
+          "passed": true
+        },
+        {
+          "path": "apps/web/node_modules/context-canary.js",
+          "expectedIncluded": false,
+          "present": false,
+          "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+          "actualSha256": null,
+          "passed": true
+        },
+        {
+          "path": ".next/context-canary.txt",
+          "expectedIncluded": false,
+          "present": false,
+          "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+          "actualSha256": null,
+          "passed": true
+        },
+        {
+          "path": "apps/web/.next/context-canary.txt",
+          "expectedIncluded": false,
+          "present": false,
+          "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+          "actualSha256": null,
+          "passed": true
+        },
+        {
+          "path": ".env",
+          "expectedIncluded": false,
+          "present": false,
+          "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+          "actualSha256": null,
+          "passed": true
+        },
+        {
+          "path": ".env.local",
+          "expectedIncluded": false,
+          "present": false,
+          "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+          "actualSha256": null,
+          "passed": true
+        },
+        {
+          "path": "apps/web/.env",
+          "expectedIncluded": false,
+          "present": false,
+          "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+          "actualSha256": null,
+          "passed": true
+        },
+        {
+          "path": "apps/web/.env.local",
+          "expectedIncluded": false,
+          "present": false,
+          "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+          "actualSha256": null,
+          "passed": true
+        },
+        {
+          "path": ".env.example",
+          "expectedIncluded": true,
+          "present": true,
+          "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+          "actualSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+          "passed": true
+        },
+        {
+          "path": "apps/web/.env.example",
+          "expectedIncluded": true,
+          "present": true,
+          "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+          "actualSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+          "passed": true
+        },
+        {
+          "path": "outputs/context-canary.txt",
+          "expectedIncluded": false,
+          "present": false,
+          "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+          "actualSha256": null,
+          "passed": true
+        },
+        {
+          "path": "evidence/context-canary.txt",
+          "expectedIncluded": false,
+          "present": false,
+          "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+          "actualSha256": null,
+          "passed": true
+        },
+        {
+          "path": "docs/context-canary.md",
+          "expectedIncluded": false,
+          "present": false,
+          "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+          "actualSha256": null,
+          "passed": true
+        },
+        {
+          "path": "test-results/context-canary.json",
+          "expectedIncluded": false,
+          "present": false,
+          "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+          "actualSha256": null,
+          "passed": true
+        },
+        {
+          "path": "apps/web/test-results/context-canary.json",
+          "expectedIncluded": false,
+          "present": false,
+          "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+          "actualSha256": null,
+          "passed": true
+        },
+        {
+          "path": "playwright-report/context-canary.html",
+          "expectedIncluded": false,
+          "present": false,
+          "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+          "actualSha256": null,
+          "passed": true
+        },
+        {
+          "path": "apps/web/playwright-report/context-canary.html",
+          "expectedIncluded": false,
+          "present": false,
+          "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+          "actualSha256": null,
+          "passed": true
+        },
+        {
+          "path": ".git/context-canary",
+          "expectedIncluded": false,
+          "present": false,
+          "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+          "actualSha256": null,
+          "passed": true
+        },
+        {
+          "path": "apps/web/.qa/context-canary",
+          "expectedIncluded": false,
+          "present": false,
+          "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+          "actualSha256": null,
+          "passed": true
+        },
+        {
+          "path": "apps/web/context-canary.tsbuildinfo",
+          "expectedIncluded": false,
+          "present": false,
+          "expectedSha256": "afe8b212ef5245b89616411d67c80ad9442324a263f044b850c4d24d1eb51dc9",
+          "actualSha256": null,
+          "passed": true
+        }
+      ]
+    },
+    "image": {
+      "source": {
+        "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+        "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+        "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+        "sourceDiff": ""
+      },
+      "atUTC": "2026-10-12T22:11:52.516851+00:00",
+      "actualImageGate": "FAILED_ENVIRONMENT",
+      "exitCode": 1,
+      "attempt": {
+        "name": "docker-build",
+        "command": [
+          "env",
+          "DOCKER_CONFIG=/tmp/capiro-docker-config-20261012",
+          "docker",
+          "build",
+          "--progress=plain",
+          "-f",
+          "apps/web/Dockerfile",
+          "--tag",
+          "capiro-remaining:1585438-20261012",
+          "."
+        ],
+        "startedUTC": "2026-10-12T22:11:28.208765+00:00",
+        "endedUTC": "2026-10-12T22:11:38.701343+00:00",
+        "durationSeconds": 10.49261612999544,
+        "exitCode": 1,
+        "sourceBefore": {
+          "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+          "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+          "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+          "sourceDiff": ""
+        },
+        "sourceAfter": {
+          "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+          "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+          "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+          "sourceDiff": ""
+        },
+        "sourceChanged": false
+      },
+      "logSHA256": "efac2a8f7ed6bd0750749a8a725cf27f2c026967582a51a205f59020c8ccedb3",
+      "cause": "Alpine 3.23 APKINDEX fetches fail DNS before application compilation. Subsequent package-selection errors do not establish invalid pins.",
+      "imageReference": "capiro-remaining:1585438-20261012",
+      "imageExists": false,
+      "imageInspectExitCode": 1,
+      "containerSmoke": "NOT_RUN_NO_IMAGE",
+      "imageScan": "NOT_RUN_NO_IMAGE",
+      "contextGate": "Separate 33/33 scratch-COPY context regression passed on same source",
+      "securityAndDockerfilePinsChanged": false,
+      "awsShippingAttempt": false,
+      "earlierAttempts": "Three adbc84b attempts and one d68c2dc attempt remain preserved with bounded diagnostics."
+    },
+    "imageAbsenceLog": {
+      "path": "/tmp/capiro-remaining-docker-evidence/IMAGE-ABSENCE-1585438.log",
+      "bytes": 80,
+      "sha256": "7b518cd7523ff6c962c2d6a8f04902d64a94c23b983cc27e4cd11e770abe2cab"
+    },
+    "attemptHistory": "Three failed adbc attempts plus one failed d68 and one failed1585438; none establishes an application image.",
+    "limit": "Actual scratch COPY success does not qualify application image, container smoke, image scan or deployment."
+  },
+  "sourceReviews": {
+    "sourceMapRecordsIndependentlyRehashed": 140,
+    "ownerMappingsReportedByIndependentLedgerReview": 21,
+    "keyboardSourceHashVerified": true,
+    "sourceAndAssertionReviews": [
+      "/tmp/capiro-remaining-final-ledger-review/addendum-1585438/REPORT.md",
+      "/tmp/capiro-remaining-final-ledger-review/addendum-1585438/SOURCE-LEDGER-VERIFICATION.json",
+      "/tmp/capiro-remaining-final-ledger-review/addendum-1585438/PARSED-ASSERTION-VERIFICATION.json",
+      "/tmp/capiro-remaining-final-ledger-review/addendum-1585438/MANIFEST.json",
+      "/tmp/capiro-remaining-capabilities-evidence/modules-keyboard-adapter-review/review.json",
+      "/tmp/capiro-remaining-capabilities-evidence/modules-keyboard-adapter-review/REPORT.md",
+      "/tmp/capiro-remaining-capabilities-evidence/modules-keyboard-adapter-review/SHA256-MANIFEST.json",
+      "/tmp/capiro-remaining-modules-evidence/production-1585438-review/report.md",
+      "/tmp/capiro-remaining-modules-evidence/production-1585438-review/SOURCE-AND-GATE-BINDING.json",
+      "/tmp/capiro-remaining-modules-evidence/production-1585438-review/VISUAL-REUSE.json"
+    ],
+    "acceptedReviewScope": "Bounded source preservation/cohesion only:66 original assertions retained,10 added,6 keypresses retained. Does not substitute for current full-suite results."
+  },
+  "pending": {
+    "modulesBrowser": "Active at assignment; wait for root final result notification before audit.",
+    "portfolioBrowser": "Follows Modules; wait for root final result notification before audit.",
+    "finalVerdict": "NOT_SEALED"
+  },
+  "checkpoints": [
+    {
+      "source": "104495d4cdc8251640b922aea431fa0e169fe935",
+      "status": "FAILED_INTERRUPTED_CHECKPOINT",
+      "portfolio": {
+        "passed": 163,
+        "failed": 7,
+        "interrupted": 3,
+        "unrun": 945,
+        "exitCode": 130
+      }
+    },
+    {
+      "source": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+      "status": "FAILED_COMPLETED_CHECKPOINT",
+      "portfolio": {
+        "passed": 1115,
+        "failed": 3,
+        "exitCode": 1
+      }
+    },
+    {
+      "source": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+      "status": "FAILED_COMPLETED_MODULES_CHECKPOINT",
+      "modules": {
+        "passed": 207,
+        "failed": 1,
+        "exitCode": 1
+      },
+      "portfolio": "NOT_RUN"
+    },
+    {
+      "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "status": "CURRENT_PRELIMINARY_QUALIFICATION",
+      "modules": "ACTIVE_AT_ASSIGNMENT_FINAL_RESULTS_AWAITED",
+      "portfolio": "FOLLOWS_MODULES_FINAL_RESULTS_AWAITED"
+    }
+  ],
+  "coverage": [
+    {
+      "id": "cross_mode_history",
+      "coverage": "Actual Next same-document Meri/Portfolio/Modules/Settings navigation and back/forward in light and dark. Synthetic application-boundary navigation additionally preserves verified client hints, scope draft and style marker; Calendar history preserves view/date/client scope.",
+      "testFiles": [
+        "apps/web/test/browser/integration.spec.ts",
+        "apps/web/test/browser/next-modules-scope.spec.ts",
+        "apps/web/test/browser/next-modules-view-persistence.spec.ts",
+        "apps/web/test/browser/calendar-visual-closeout.spec.ts"
+      ],
+      "sourceReferences": [
+        {
+          "path": "apps/web/tests/production/verify-standalone.mjs",
+          "find": "sameDocument"
+        },
+        {
+          "path": "apps/web/test/browser/integration.spec.ts",
+          "line": 37
+        },
+        {
+          "path": "apps/web/test/browser/next-modules-view-persistence.spec.ts",
+          "find": "goBack"
+        }
+      ],
+      "limitations": [
+        "Next smoke has no credentials and sees setup screens for protected features. Authenticated data transitions are Vite harness tests with test-only Clerk/navigation aliases; live production auth navigation is unrun."
+      ],
+      "currentCompletedBrowserMatches": [],
+      "status": "preliminary_full_modules_and_portfolio_results_awaited"
+    },
+    {
+      "id": "signout_expiry",
+      "coverage": "Synthetic sign-out removes protected content; Core401 expires above selected-client replacement with no request replay. Feature401 coverage additionally checks drafts and current records disappear.",
+      "testFiles": [
+        "apps/web/test/browser/session.spec.ts",
+        "apps/web/test/browser/integration.spec.ts",
+        "apps/web/test/browser/objective-work-destinations.spec.ts",
+        "apps/web/test/browser/prospect-workspace.spec.ts",
+        "apps/web/tests/browser/portfolio.spec.ts",
+        "apps/web/tests/browser/activity-command-recovery.spec.ts"
+      ],
+      "sourceReferences": [
+        {
+          "path": "apps/web/src/shared/session/ApplicationBoundary.tsx",
+          "find": "function SessionData"
+        },
+        {
+          "path": "apps/web/test/browser/session.spec.ts",
+          "line": 20
+        },
+        {
+          "path": "apps/web/test/browser/session.spec.ts",
+          "line": 53
+        },
+        {
+          "path": "apps/web/test/browser/integration.spec.ts",
+          "line": 169
+        }
+      ],
+      "limitations": [
+        "Custom test:session events and mocked401 establish browser lifetime behavior, not live Clerk logout/token expiry/revocation. Actual Next smoke only verifies unconfigured fail-closed presentation."
+      ],
+      "currentCompletedBrowserMatches": [
+        {
+          "file": "portfolio.spec.ts",
+          "line": 12,
+          "title": "four-field readiness persists once, transitions, and refreshes the list",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0
+            }
+          ]
+        },
+        {
+          "file": "portfolio.spec.ts",
+          "line": 60,
+          "title": "facility creation uses the selected client's endpoint and refreshes the map list",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0
+            }
+          ]
+        },
+        {
+          "file": "portfolio.spec.ts",
+          "line": 110,
+          "title": "mail is reviewed and a provider error remains visible without automatic retry",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0
+            }
+          ]
+        },
+        {
+          "file": "portfolio.spec.ts",
+          "line": 144,
+          "title": "capability edits invalidate the list and retain unrelated registration codes",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0
+            }
+          ]
+        },
+        {
+          "file": "portfolio.spec.ts",
+          "line": 183,
+          "title": "navigation, permissions, session expiry and mobile layout use real feature components",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0
+            }
+          ]
+        }
+      ],
+      "status": "preliminary_full_modules_and_portfolio_results_awaited"
+    },
+    {
+      "id": "tenant_client_replacement",
+      "coverage": "Shared user/session/organization key replaces scopes; client-keyed provider removes cache/editors while preserving expiry. Held old-client responses do not populate replacement; tenant changes clear drafts and force new current reads.",
+      "testFiles": [
+        "apps/web/test/browser/integration.spec.ts",
+        "apps/web/test/browser/next-modules-scope.spec.ts",
+        "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+        "apps/web/test/browser/meeting-detail-current.spec.ts",
+        "apps/web/test/browser/remaining-modules.spec.ts",
+        "apps/web/tests/browser/prospect-current-read.spec.ts",
+        "apps/web/tests/browser/profile-write-lifetime.spec.ts"
+      ],
+      "sourceReferences": [
+        {
+          "path": "apps/web/src/shared/session/ApplicationBoundary.tsx",
+          "find": "key={clientId"
+        },
+        {
+          "path": "apps/web/test/browser/integration.spec.ts",
+          "line": 120
+        },
+        {
+          "path": "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+          "line": 196
+        }
+      ],
+      "limitations": [
+        "Selected client URL/state is a hint and local protection, not backend authorization. Native cross-tenant denial and fresh server authorization need separate native acceptance."
+      ],
+      "currentCompletedBrowserMatches": [],
+      "status": "preliminary_full_modules_and_portfolio_results_awaited"
+    },
+    {
+      "id": "interrupted_writes",
+      "coverage": "Held PATCH and snapshot success/failure/lost response freeze draft fields and preserve submitted text; navigation retains uncertain intent; read-back does not silently replay. Reload recovery retains original request keys/bytes, and replacement actors cannot restore former journals. File deletion uncertainty requires current read and a new explicit confirmation.",
+      "testFiles": [
+        "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+        "apps/web/test/browser/prospect-draft-restart-acceptance.spec.ts",
+        "apps/web/test/browser/prospect-workspace.spec.ts",
+        "apps/web/test/browser/newsletter-staging.spec.ts",
+        "apps/web/test/browser/billing-flow.spec.ts",
+        "apps/web/tests/browser/prospect-upload-restart-acceptance.spec.ts",
+        "apps/web/tests/browser/files-delete-recovery.spec.ts",
+        "apps/web/tests/browser/activity-command.spec.ts",
+        "apps/web/tests/browser/activity-command-restart.spec.ts",
+        "apps/web/tests/browser/activity-command-storage.spec.ts",
+        "apps/web/tests/browser/profile-write-lifetime.spec.ts",
+        "apps/web/tests/browser/calendar-sharing.spec.ts",
+        "apps/web/tests/browser/mail-rich-compose.spec.ts"
+      ],
+      "sourceReferences": [
+        {
+          "path": "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+          "line": 111
+        },
+        {
+          "path": "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+          "line": 166
+        },
+        {
+          "path": "apps/web/tests/browser/prospect-upload-restart-acceptance.spec.ts",
+          "line": 5
+        },
+        {
+          "path": "apps/web/tests/browser/files-delete-recovery.spec.ts",
+          "line": 21
+        }
+      ],
+      "limitations": [
+        "All writes, upload storage, provider-shaped endpoints and receipts here are intercepted synthetic fixtures. No native CAS, persistence, S3 durability, paid model, mail delivery or hosted billing acceptance. Coverage is per tested flow; it is not proof of every possible interruption."
+      ],
+      "currentCompletedBrowserMatches": [],
+      "status": "preliminary_full_modules_and_portfolio_results_awaited"
+    },
+    {
+      "id": "desktop_mobile_accessibility",
+      "coverage": "Source assertions cover selected fixture desktop/mobile, keyboard/focus and control containment. Fresh full-suite outcomes are pending review. Actual host has four theme/viewport numeric renders and two desktop-only history flows; no complete Figma or accessibility acceptance.",
+      "testFiles": [
+        "apps/web/test/browser/integration.spec.ts",
+        "apps/web/test/browser/calendar-visual-closeout.spec.ts",
+        "apps/web/test/browser/settings.spec.ts",
+        "apps/web/test/browser/settings-scenes.spec.ts",
+        "apps/web/test/browser/remaining-modules.spec.ts",
+        "apps/web/test/browser/meeting-detail-current.spec.ts",
+        "apps/web/tests/browser/visual.spec.ts",
+        "apps/web/tests/browser/visual-closeout.spec.ts",
+        "apps/web/tests/browser/dialog-disabled-focus.spec.ts",
+        "apps/web/tests/browser/shared-dialog-layout.spec.ts",
+        "apps/web/tests/browser/mail-rich-compose.spec.ts",
+        "apps/web/tests/browser/portfolio-layout-integration.spec.ts"
+      ],
+      "sourceReferences": [
+        {
+          "path": "apps/web/tests/browser/visual.spec.ts",
+          "line": 22
+        },
+        {
+          "path": "apps/web/tests/browser/dialog-disabled-focus.spec.ts",
+          "line": 24
+        },
+        {
+          "path": "apps/web/test/browser/calendar-visual-closeout.spec.ts",
+          "line": 6
+        },
+        {
+          "path": "apps/web/test/browser/settings-scenes.spec.ts",
+          "line": 95
+        }
+      ],
+      "limitations": [
+        "Keyboard/semantic/geometry assertions do not establish comprehensive WCAG, screen-reader, contrast, zoom, touch or cross-browser/device certification. Screenshots alone are not Figma pixel comparison. Actual Next screenshot scope is setup presentation."
+      ],
+      "currentCompletedBrowserMatches": [],
+      "status": "preliminary_full_modules_and_portfolio_results_awaited"
+    },
+    {
+      "id": "public_packages_transport",
+      "coverage": "Byte-bound vendor artifacts, AST public-boundary/cycle/server-entry checks and safe-import tests pass. Real createMeriChat, external Chat and public stream writer are composed in21 offline controls for ordered replay, immutable projection, resume cursor, typed admissions, detach and stream/run distinction.15 Elements controls qualify adopted closed display import graph and restricted deterministic SSR.",
+      "testFiles": [],
+      "sourceReferences": [
+        {
+          "path": "scripts/public-packages.mjs",
+          "line": 9
+        },
+        {
+          "path": "scripts/public-packages.test.mjs",
+          "line": 8
+        },
+        {
+          "path": "scripts/architecture.test.mjs",
+          "line": 10
+        },
+        {
+          "path": "scripts/architecture.test.mjs",
+          "line": 52
+        },
+        {
+          "path": "scripts/architecture.test.mjs",
+          "line": 122
+        },
+        {
+          "path": "packages/qualification-transport/qualification.test.mjs",
+          "line": 1
+        },
+        {
+          "path": "packages/meri-client/src/client-facade.tsx",
+          "line": 26
+        },
+        {
+          "path": "packages/qualification-elements/qualification.test.mjs",
+          "line": 1
+        }
+      ],
+      "limitations": [
+        "Transport injects mock fetch and throws on global network. UI transport is not backend run authority; local detach does not cancel a durable run; stream end does not prove run completion. Elements fixture is offline SSR, not browser styling, G1 product admission or model orchestration."
+      ],
+      "currentCompletedBrowserMatches": [],
+      "status": "preliminary_full_modules_and_portfolio_results_awaited"
+    },
+    {
+      "id": "figma",
+      "coverage": "Frozen local source and asset tests bind selected original Figma exports, tokens and screenshots. Preserved per-node contexts and lane-specific visual reviews support bounded implemented facets; exact full-file visual acceptance remains open.",
+      "testFiles": [],
+      "sourceReferences": [
+        {
+          "path": "docs/remaining-repairs-20261012/design-baseline/README.md",
+          "line": 3
+        },
+        {
+          "path": "docs/remaining-repairs-20261012/design-baseline/README.md",
+          "line": 31
+        },
+        {
+          "path": "apps/web/test/assets.test.mjs",
+          "line": 6
+        },
+        {
+          "path": "apps/web/test/cited-answer-assets.test.mjs",
+          "line": 6
+        }
+      ],
+      "limitations": [
+        "Original preserved design evidence only; full composer target 435:82802 is 1x1 and parent 435:82147 clipped. No complete immutable Figma revision, full visual parity or native acceptance is established by these gates. No live design tools were used for this review."
+      ],
+      "currentCompletedBrowserMatches": [],
+      "status": "preliminary_full_modules_and_portfolio_results_awaited"
+    }
+  ],
+  "limits": {
+    "native": "No live authentication/tenant authorization, CAS/persistence/DDL/deployment, S3/provider/billing/model acceptance. No native row is newly closed.",
+    "meri": "9 run-workspace Node cases within59,21 offline transport controls, assets/shared-mode/host-shell checks. Portfolio1118 and Modules208 are not full Meri interaction qualification.",
+    "figma": "Original preserved evidence only; composer435:82802 remains1x1 and parent435:82147 clipped. No complete Figma parity/file-wide revision acceptance.",
+    "accessibility": "Bounded semantics, geometry and keyboard/focus controls; no comprehensive WCAG/screen-reader/contrast/zoom/touch/cross-browser certification.",
+    "library": "Prior exact Library references were readable, but local materialization failed through proxy403; original-byte custody and authoritative content version were not established. The adbc source ZIP save failed at tools/list network discovery before upload creation. No Library upload/save of this1585438 source is evidenced.",
+    "image": "Current image absent after APKINDEX DNS failure. Container smoke and scan NOT_RUN_NO_IMAGE. No shipping/deployment claim.",
+    "reviewBoundary": "No PR16 newsletter asset/port evidence is included in this PR15 gate audit."
+  },
+  "libraryReceipts": [
+    {
+      "record": {
+        "path": "/tmp/capiro-remaining-root-evidence/LIBRARY-ARCHIVE-SAVE-BLOCKER.json",
+        "bytes": 725,
+        "sha256": "8d9067bec972e8d32b12f0a5efcdc3b911cfddc2dec20a060c6e6cf4b2b994ad"
+      },
+      "raw": {
+        "status": "NOT_SAVED",
+        "sourceCommit": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+        "files": [
+          "/tmp/capiro-source-adbc84b/source-adbc84b.zip",
+          "/tmp/capiro-source-adbc84b/SOURCE-ARCHIVE-RECEIPT.json"
+        ],
+        "failure": "library upload failed: hosted apps tools/list request failed: network",
+        "attempts": [
+          "LIBRARY-SOURCE-UPLOAD-RESULT.json",
+          "LIBRARY-SOURCE-UPLOAD-STDERR.log",
+          "LIBRARY-SOURCE-UPLOAD-NETWORK-RESULT.json",
+          "LIBRARY-SOURCE-UPLOAD-NETWORK-STDERR.log"
+        ],
+        "writeOutcome": "Both attempts failed during tool discovery, before preparing any upload; no Library ID/version created. Additional network access did not resolve this.",
+        "archiveStillPresentAndGitPublished": true
+      }
+    },
+    {
+      "record": {
+        "path": "/tmp/capiro-remaining-docker-evidence/LIBRARY-MATERIALIZATION-BLOCKER.json",
+        "bytes": 1351,
+        "sha256": "d7dd6e51a05718956cf51c23802d5db97194cd80e557a293d2a07c8faa7d70ec"
+      },
+      "raw": {
+        "checkedUTC": "2026-10-12T21:03:28.354688+00:00",
+        "currentHelperSHA256": "5e1557817be17db06e2375f8c34ed83e948d520242e5ee4cb50a30c7a4c83378",
+        "readStatus": "All3 exact Library references read completely through authorized connector; read response preserved",
+        "materializationStatus": "FAILED; no original local files exist, no original-byte custody claim",
+        "observedFailure": "URLError / OSError: Tunnel connection failed: 403 Forbidden",
+        "approvalReview": "No auto-review rejection; network/proxy failure persisted through prior approved execution retry",
+        "scope": "The implementation fix and actual Docker context regression were independently established from mounted Git source; shipping attachments are references, not locally verified original-byte evidence",
+        "attempts": [
+          {
+            "index": 0,
+            "log": "library-materialize-final-0.log",
+            "sha256": "c1d9495c91c35d40fe735ca8b1d0078ec4924cca73266c90d1e0b2e288f730ce",
+            "exitCode": 1
+          },
+          {
+            "index": 1,
+            "log": "library-materialize-final-1.log",
+            "sha256": "c1d9495c91c35d40fe735ca8b1d0078ec4924cca73266c90d1e0b2e288f730ce",
+            "exitCode": 1
+          },
+          {
+            "index": 2,
+            "log": "library-materialize-final-2.log",
+            "sha256": "c1d9495c91c35d40fe735ca8b1d0078ec4924cca73266c90d1e0b2e288f730ce",
+            "exitCode": 1
+          }
+        ]
+      }
+    },
+    {
+      "record": {
+        "path": "/tmp/capiro-remaining-docker-evidence/LIBRARY-METADATA-NOTE.json",
+        "bytes": 402,
+        "sha256": "1c2b0b53d637a8db8811bafc59ae020d36c554e9dd524771888d9caeda91d685"
+      },
+      "raw": {
+        "note": "LIBRARY-REFERENCES.json field version preserves the transfer response current_version_number (0). The content-read responses supplied no non-null version_id; no authoritative content version was inferred. Original file_id and library_file_id pairs are pinned as returned.",
+        "originalByteCustody": "Not established; all local materialization attempts failed before a file was written."
+      }
+    }
+  ],
+  "sourceRecords": [
+    {
+      "relativePath": ".dockerignore",
+      "path": "/workspace/capiro-remaining/.dockerignore",
+      "bytes": 311,
+      "sha256": "0e4ca55ceb868d95b904348b39f3bd86ac55bf26d73cc922ccaea25af9e0b53a"
+    },
+    {
+      "relativePath": "AGENTS.md",
+      "path": "/workspace/capiro-remaining/AGENTS.md",
+      "bytes": 2319,
+      "sha256": "3889dd45c593695fbdbb3c3935eb06b0ee48c38c17d9ba3fcce0c606e5cf4389"
+    },
+    {
+      "relativePath": "apps/web/Dockerfile",
+      "path": "/workspace/capiro-remaining/apps/web/Dockerfile",
+      "bytes": 855,
+      "sha256": "03225dcc94257dfd919f3b889f0886d4981156890897fee579e50d644959cbe1"
+    },
+    {
+      "relativePath": "apps/web/package.json",
+      "path": "/workspace/capiro-remaining/apps/web/package.json",
+      "bytes": 1815,
+      "sha256": "4086045450c1a8dc98a1a45814c18e39f0b6d63a3e2278378e9378e5715b0b14"
+    },
+    {
+      "relativePath": "apps/web/playwright.config.ts",
+      "path": "/workspace/capiro-remaining/apps/web/playwright.config.ts",
+      "bytes": 1042,
+      "sha256": "a85aa9952c8130f9a999c13e6bbd8aa630a2b8237189e6a79101516a6e908f82"
+    },
+    {
+      "relativePath": "apps/web/src/shared/session/ApplicationBoundary.tsx",
+      "path": "/workspace/capiro-remaining/apps/web/src/shared/session/ApplicationBoundary.tsx",
+      "bytes": 3005,
+      "sha256": "171e6a02aec0cabe461c195059483c585feecebdbf1b9d66c777007d59ced10f"
+    },
+    {
+      "relativePath": "apps/web/test/assets.test.mjs",
+      "path": "/workspace/capiro-remaining/apps/web/test/assets.test.mjs",
+      "bytes": 4905,
+      "sha256": "c9f442dc6710f27c2ca010741d4f913fa77aa34df79e105889c3288f574cd4c2"
+    },
+    {
+      "relativePath": "apps/web/test/browser/billing-flow.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/billing-flow.spec.ts",
+      "bytes": 12634,
+      "sha256": "ecdfd9e46a5d7d2709c5dd12b790292411a3a5bd0517e92f4a676b46d7d761ea"
+    },
+    {
+      "relativePath": "apps/web/test/browser/calendar-visual-closeout.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/calendar-visual-closeout.spec.ts",
+      "bytes": 3565,
+      "sha256": "a6bf2c41c8eeec5f77945e7c2044cc83d23201f4d414ef0897f0b06edd388d04"
+    },
+    {
+      "relativePath": "apps/web/test/browser/fixtures.ts",
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/fixtures.ts",
+      "bytes": 1917,
+      "sha256": "ba90445f2f1cb6fb1786362cd434bd58a2ee8940a5334f1a76b6c5c4c5531467"
+    },
+    {
+      "relativePath": "apps/web/test/browser/integration.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/integration.spec.ts",
+      "bytes": 7147,
+      "sha256": "88c056b836913b4c9f779acaffae2484e4b529d0a7bfa4131d4532c6e7ccd66c"
+    },
+    {
+      "relativePath": "apps/web/test/browser/meeting-detail-current.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/meeting-detail-current.spec.ts",
+      "bytes": 8999,
+      "sha256": "f95af100b29a951f7019ee548e1783c05d7ad7371cdae4f5d6956302b1fe0f85"
+    },
+    {
+      "relativePath": "apps/web/test/browser/newsletter-staging.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/newsletter-staging.spec.ts",
+      "bytes": 11993,
+      "sha256": "8a8c35892f2374b3b5c555a274f75abb11de63771878d6c8961064870c4d142e"
+    },
+    {
+      "relativePath": "apps/web/test/browser/next-modules-scope.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/next-modules-scope.spec.ts",
+      "bytes": 6262,
+      "sha256": "985874de5010438de1043077cc14926deed4c7b6ac0514165e357f452c00cad4"
+    },
+    {
+      "relativePath": "apps/web/test/browser/next-modules-view-persistence.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/next-modules-view-persistence.spec.ts",
+      "bytes": 2932,
+      "sha256": "2f06aa344057208e45c7be5cba95aaf1d60abf260a3b15e7e5c224ac0ef66ee0"
+    },
+    {
+      "relativePath": "apps/web/test/browser/objective-work-destinations.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/objective-work-destinations.spec.ts",
+      "bytes": 10868,
+      "sha256": "bee9fde73f85e76d91c5727e5249c949685c5d0034f956eac5a3d68990fb0289"
+    },
+    {
+      "relativePath": "apps/web/test/browser/playwright.config.ts",
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/playwright.config.ts",
+      "bytes": 1004,
+      "sha256": "3d5e9a3e3e40fe0f93f98ad209d3df8a0311f2a88cc5bd312316bb118d4d6c28"
+    },
+    {
+      "relativePath": "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+      "bytes": 9341,
+      "sha256": "e9a32d5e6b794976d349cd16aee2fba5edc2e62949422cfb76e6cdb921ff5978"
+    },
+    {
+      "relativePath": "apps/web/test/browser/prospect-draft-restart-acceptance.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/prospect-draft-restart-acceptance.spec.ts",
+      "bytes": 2795,
+      "sha256": "11337abe4dbbc495b6579fd9935d4f6d417edb8586a15ab7b87b66068b47551d"
+    },
+    {
+      "relativePath": "apps/web/test/browser/prospect-workspace.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/prospect-workspace.spec.ts",
+      "bytes": 16006,
+      "sha256": "a454060901bd660003afeb3eaa702e3b717b06fd80405391f3adeda52adbc756"
+    },
+    {
+      "relativePath": "apps/web/test/browser/remaining-modules.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/remaining-modules.spec.ts",
+      "bytes": 17554,
+      "sha256": "ff19d419f382abb100089e5bc03619f85d499a044ac995fe4b988e7aac78d994"
+    },
+    {
+      "relativePath": "apps/web/test/browser/server.mjs",
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/server.mjs",
+      "bytes": 1712,
+      "sha256": "7fe3264d45a5c753aa699eb34209590ba211fe79da7a911c8e4858331f2f8605"
+    },
+    {
+      "relativePath": "apps/web/test/browser/session.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/session.spec.ts",
+      "bytes": 2595,
+      "sha256": "371bd65b8e7ef753c722edb1d1c5f07de12d82291e587d8f7061fd59f58bb817"
+    },
+    {
+      "relativePath": "apps/web/test/browser/settings-scenes.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/settings-scenes.spec.ts",
+      "bytes": 3847,
+      "sha256": "5d34745e0a497181b8935e3489bbabb0b233d7b6cb6c02d81494c09e35e3cb11"
+    },
+    {
+      "relativePath": "apps/web/test/browser/settings.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/test/browser/settings.spec.ts",
+      "bytes": 4472,
+      "sha256": "a0407f3d7f5a75067552335381c23692110af8b5e7cbe158b11a5cef65a616d1"
+    },
+    {
+      "relativePath": "apps/web/test/cited-answer-assets.test.mjs",
+      "path": "/workspace/capiro-remaining/apps/web/test/cited-answer-assets.test.mjs",
+      "bytes": 2528,
+      "sha256": "c3b26f8cc82776e7a8766a44cc0c583c17a94e204596e887fb44d5705ab8030b"
+    },
+    {
+      "relativePath": "apps/web/test/run-workspace.test.mjs",
+      "path": "/workspace/capiro-remaining/apps/web/test/run-workspace.test.mjs",
+      "bytes": 7594,
+      "sha256": "02c102575159a310b814dc33c48f319e2a3ce70fa151802a3af1d3ed27f8aa5e"
+    },
+    {
+      "relativePath": "apps/web/tests/browser/activity-command-recovery.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/activity-command-recovery.spec.ts",
+      "bytes": 6186,
+      "sha256": "10f8837d6e44c11c8642017750257ec73ff3f1cbda70270b070abad8a5eaf533"
+    },
+    {
+      "relativePath": "apps/web/tests/browser/activity-command-restart.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/activity-command-restart.spec.ts",
+      "bytes": 3076,
+      "sha256": "a2be29f498a7e6b0e21e300442797a26bdfa8ca8bea31210b431d807c52f9791"
+    },
+    {
+      "relativePath": "apps/web/tests/browser/activity-command-storage.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/activity-command-storage.spec.ts",
+      "bytes": 4661,
+      "sha256": "b4335bdb78f5382eada29cb18e44852775fd0fe4a787ebeb064d6397406b2f78"
+    },
+    {
+      "relativePath": "apps/web/tests/browser/activity-command.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/activity-command.spec.ts",
+      "bytes": 9866,
+      "sha256": "eb336075c93f6002112b38896cfbfe515ca36966878fc05111cffeb1651287ff"
+    },
+    {
+      "relativePath": "apps/web/tests/browser/calendar-sharing.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/calendar-sharing.spec.ts",
+      "bytes": 16606,
+      "sha256": "0ee7273f96b8c01cf9af22739d436ab207dcd3dd21f9d69dd8871bd2809f7cae"
+    },
+    {
+      "relativePath": "apps/web/tests/browser/dialog-disabled-focus.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/dialog-disabled-focus.spec.ts",
+      "bytes": 2467,
+      "sha256": "392b460ccc2c70f18f577897cfa31e9b575fa2f5b4c758901931880b1f728355"
+    },
+    {
+      "relativePath": "apps/web/tests/browser/files-delete-recovery.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/files-delete-recovery.spec.ts",
+      "bytes": 14019,
+      "sha256": "31bd8876d7edb4ed73a4412a629b2b6a63197a54fae43552f17865e5aec3f7a4"
+    },
+    {
+      "relativePath": "apps/web/tests/browser/fixtures.ts",
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/fixtures.ts",
+      "bytes": 11227,
+      "sha256": "926ad03e9ceba9e906127736ceab6f243bcc0f3f85c426b2c5d7d96fe9c10368"
+    },
+    {
+      "relativePath": "apps/web/tests/browser/mail-rich-compose.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/mail-rich-compose.spec.ts",
+      "bytes": 14236,
+      "sha256": "1b7ca2ca4c029b83e533e073dd5b1ca45b2c76fc8d265973ea2d0d254f884a90"
+    },
+    {
+      "relativePath": "apps/web/tests/browser/portfolio-layout-integration.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/portfolio-layout-integration.spec.ts",
+      "bytes": 6128,
+      "sha256": "3f021e5d35710def2b27c2c809ca4337376c98e98102224d20316003f86a0a9e"
+    },
+    {
+      "relativePath": "apps/web/tests/browser/portfolio.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/portfolio.spec.ts",
+      "bytes": 8561,
+      "sha256": "ea288c75629bc8156dde4ef25eada45fb7968141938355a793d46e943fb8c66b"
+    },
+    {
+      "relativePath": "apps/web/tests/browser/profile-write-lifetime.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/profile-write-lifetime.spec.ts",
+      "bytes": 13448,
+      "sha256": "70bb8a5a331f7fc9b22c4e408e9e8d5da139d47f74aadd80910ca927999b9a54"
+    },
+    {
+      "relativePath": "apps/web/tests/browser/prospect-current-read.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/prospect-current-read.spec.ts",
+      "bytes": 11055,
+      "sha256": "84eb51196c433cf32261a4a9202b4df2d73d073c4d04218f92b215e1c174096f"
+    },
+    {
+      "relativePath": "apps/web/tests/browser/prospect-upload-restart-acceptance.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/prospect-upload-restart-acceptance.spec.ts",
+      "bytes": 3817,
+      "sha256": "a3b4a62a6adee256e17bb63569650eb8435cf6f4090483370c41238eb45c0f9c"
+    },
+    {
+      "relativePath": "apps/web/tests/browser/server.mjs",
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/server.mjs",
+      "bytes": 1976,
+      "sha256": "eedc3911d74e8159d105b2bea55c07ac935b05c90f71292b0138a00c6efae420"
+    },
+    {
+      "relativePath": "apps/web/tests/browser/shared-dialog-layout.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/shared-dialog-layout.spec.ts",
+      "bytes": 6753,
+      "sha256": "1908dcd7446c40aceabf63a8b0f7eb85313334ab84ffd49ec6d6327cfa370de7"
+    },
+    {
+      "relativePath": "apps/web/tests/browser/visual-closeout.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/visual-closeout.spec.ts",
+      "bytes": 9787,
+      "sha256": "4f5648ba1039600934a08143b55fa3a9b9fb77e076e90e82194a6222c93cde6f"
+    },
+    {
+      "relativePath": "apps/web/tests/browser/visual.spec.ts",
+      "path": "/workspace/capiro-remaining/apps/web/tests/browser/visual.spec.ts",
+      "bytes": 4481,
+      "sha256": "f7358b0e00219df4bdf085308d3c860466ada3f3e26fa933fdb42551b506ce14"
+    },
+    {
+      "relativePath": "apps/web/tests/production/run-standalone.mjs",
+      "path": "/workspace/capiro-remaining/apps/web/tests/production/run-standalone.mjs",
+      "bytes": 5491,
+      "sha256": "c4c271a1738ca2425afd3eefe1540864af3f6a11cd465e8d25de2a7cd1fc2e21"
+    },
+    {
+      "relativePath": "apps/web/tests/production/verify-standalone.mjs",
+      "path": "/workspace/capiro-remaining/apps/web/tests/production/verify-standalone.mjs",
+      "bytes": 7388,
+      "sha256": "2b06e07abd048aa2d7de43be5ea89fe3115d9ef6bd2993cc7b0f1a60e7846dd8"
+    },
+    {
+      "relativePath": "docs/ARCHITECTURE.md",
+      "path": "/workspace/capiro-remaining/docs/ARCHITECTURE.md",
+      "bytes": 9096,
+      "sha256": "63f00bf6913309476d70152cdd04761ccb69bb6059bd1d2f7d698bbcab517ee7"
+    },
+    {
+      "relativePath": "docs/IMPLEMENTATION-STANDARDS.md",
+      "path": "/workspace/capiro-remaining/docs/IMPLEMENTATION-STANDARDS.md",
+      "bytes": 11082,
+      "sha256": "d4f10f964ee207187abacd967649a1cfc9bdd468072dc01f859268f08b719959"
+    },
+    {
+      "relativePath": "docs/remaining-repairs-20261012/STRUCTURE-REVIEW.md",
+      "path": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/STRUCTURE-REVIEW.md",
+      "bytes": 19132,
+      "sha256": "875ede7b2cf40fd38a2684fc52d49e8a4cf608b2ac5579e79553a1beb1c1da8b"
+    },
+    {
+      "relativePath": "docs/remaining-repairs-20261012/design-baseline/README.md",
+      "path": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/design-baseline/README.md",
+      "bytes": 7728,
+      "sha256": "c064eb9b5ada13b3442e3812c9ee9f305a51cd1a17d3b579690d487c58e45af9"
+    },
+    {
+      "relativePath": "package-lock.json",
+      "path": "/workspace/capiro-remaining/package-lock.json",
+      "bytes": 510436,
+      "sha256": "93b3dd0484180ade603daf74a32f75fc16a9bf0bda1694966a6e68100e2a6802"
+    },
+    {
+      "relativePath": "package.json",
+      "path": "/workspace/capiro-remaining/package.json",
+      "bytes": 1762,
+      "sha256": "616c749f95524f28cf1d07e5f99dbb106442ef7c7f7a27a686ccb8e1ef754b49"
+    },
+    {
+      "relativePath": "packages/meri-client/src/client-facade.tsx",
+      "path": "/workspace/capiro-remaining/packages/meri-client/src/client-facade.tsx",
+      "bytes": 1682,
+      "sha256": "7c2854745cc55c578bf9530c551ea45a0ee050de3c8ac814c61afa89043b1c8f"
+    },
+    {
+      "relativePath": "packages/qualification-elements/qualification.test.mjs",
+      "path": "/workspace/capiro-remaining/packages/qualification-elements/qualification.test.mjs",
+      "bytes": 26855,
+      "sha256": "eb37e5b64d6be644c0c0255d9723f0985f61ad43e49db1bbbe94dc87c51362b6"
+    },
+    {
+      "relativePath": "packages/qualification-transport/qualification.test.mjs",
+      "path": "/workspace/capiro-remaining/packages/qualification-transport/qualification.test.mjs",
+      "bytes": 24494,
+      "sha256": "74531c453feb5696f1941e681d3e357025b42d76fe8744cf767e5417f5702fd4"
+    },
+    {
+      "relativePath": "scripts/architecture.test.mjs",
+      "path": "/workspace/capiro-remaining/scripts/architecture.test.mjs",
+      "bytes": 21948,
+      "sha256": "cafcf2f4a996030425413f181bf145c0371a3bb8a90650a2eb4a02294f5183cd"
+    },
+    {
+      "relativePath": "scripts/architecture/reviewed-size-findings.json",
+      "path": "/workspace/capiro-remaining/scripts/architecture/reviewed-size-findings.json",
+      "bytes": 127782,
+      "sha256": "fb9b7041f6888530d2fb2ec0f4290f832046173621ea83cbab308c62e291ab6d"
+    },
+    {
+      "relativePath": "scripts/docker-context-regression.mjs",
+      "path": "/workspace/capiro-remaining/scripts/docker-context-regression.mjs",
+      "bytes": 6362,
+      "sha256": "404e52d329f094b44928a0d8148501cec937ec6929c0c3fb52799a25fc6c1a35"
+    },
+    {
+      "relativePath": "scripts/public-packages.mjs",
+      "path": "/workspace/capiro-remaining/scripts/public-packages.mjs",
+      "bytes": 2799,
+      "sha256": "6647b05a9d51b38b456fa27d4c68a6c3460e263b59f02814713cbeb2d5e2dffa"
+    },
+    {
+      "relativePath": "scripts/public-packages.test.mjs",
+      "path": "/workspace/capiro-remaining/scripts/public-packages.test.mjs",
+      "bytes": 3342,
+      "sha256": "c8196fccd6569f47c86453b9e0578186c66eacd65a597ac737bdf3a85a0d2f8f"
+    },
+    {
+      "relativePath": "vendor/meri-public-packages.json",
+      "path": "/workspace/capiro-remaining/vendor/meri-public-packages.json",
+      "bytes": 1140,
+      "sha256": "560004de77422e78345463d5faeeaa87784e1ad8f495f082e22d7d21e9a34141"
+    }
+  ],
+  "evidenceRecords": [
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/BUILD-IDENTITY.json",
+      "bytes": 428,
+      "sha256": "9bab5f88efd0ee22c8ec539a2082e94b64b415ac7a5a416a751a9aa8fe3726e7"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/corrected-regression-results.json",
+      "bytes": 27435,
+      "sha256": "6c6b144746b68d242ec556d25df2d6776210845ce56a01039defc3c6c65a7147"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/elements-ssr/receipt.json",
+      "bytes": 984950,
+      "sha256": "61d2832517221e8aacfcc7ab8adcbd8cd5e719bacafa4d175c282887fc9107fd"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/elements-captures/process.json",
+      "bytes": 2440,
+      "sha256": "44999191fd6763d62763dfd152fb2ac15cbd6a93415fbdeb6dc66081efeb0c85"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/production-smoke.json",
+      "bytes": 3624,
+      "sha256": "653bf3486ea9ec193195ed3289ac8e44a3729ef58b19a48842c8448c990dd36f"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/preview-root-smoke.json",
+      "bytes": 101,
+      "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e"
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-frozen-1585438/report.json",
+      "bytes": 10476,
+      "sha256": "9862439b2bbc57170cdc8c9a8afbe8aad3eb7d60bb894d19f4a25690c18c2711"
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/DOCKER-IMAGE-BLOCKER-1585438.json",
+      "bytes": 2003,
+      "sha256": "5b2b410de96ff1f446193b8df8bbd1428f1ada82b22465c499387956efe5cb43"
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/IMAGE-ABSENCE-1585438.log",
+      "bytes": 80,
+      "sha256": "7b518cd7523ff6c962c2d6a8f04902d64a94c23b983cc27e4cd11e770abe2cab"
+    },
+    {
+      "path": "/tmp/capiro-remaining-root-evidence/LIBRARY-ARCHIVE-SAVE-BLOCKER.json",
+      "bytes": 725,
+      "sha256": "8d9067bec972e8d32b12f0a5efcdc3b911cfddc2dec20a060c6e6cf4b2b994ad"
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/LIBRARY-MATERIALIZATION-BLOCKER.json",
+      "bytes": 1351,
+      "sha256": "d7dd6e51a05718956cf51c23802d5db97194cd80e557a293d2a07c8faa7d70ec"
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/LIBRARY-METADATA-NOTE.json",
+      "bytes": 402,
+      "sha256": "1c2b0b53d637a8db8811bafc59ae020d36c554e9dd524771888d9caeda91d685"
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-1585438/REPORT.md",
+      "bytes": 5562,
+      "sha256": "54485552eaa326dcc30465937ecfb6ad51941c6c0fde2facff87489d95d1a263"
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-1585438/SOURCE-LEDGER-VERIFICATION.json",
+      "bytes": 91535,
+      "sha256": "41978e201770d418d474f17da2e2315dc7acbf57ed35cc562ca9ad792e0356c6"
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-1585438/PARSED-ASSERTION-VERIFICATION.json",
+      "bytes": 2957,
+      "sha256": "7272eab79830ba76a0bf84355603520b5873161c77fc7571d3cbee669bfb9203"
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-1585438/MANIFEST.json",
+      "bytes": 2260,
+      "sha256": "be6d627e3cfd260782dc45dd3e3badf3677754d52bc5f24b4d8d70a1f574e4aa"
+    },
+    {
+      "path": "/tmp/capiro-remaining-capabilities-evidence/modules-keyboard-adapter-review/review.json",
+      "bytes": 4089,
+      "sha256": "e652023a3d5e52427dbda16faaa09792b8b50b6aec5657b269cb007803691e23"
+    },
+    {
+      "path": "/tmp/capiro-remaining-capabilities-evidence/modules-keyboard-adapter-review/REPORT.md",
+      "bytes": 3933,
+      "sha256": "25c79bd859fc1ec888962edebe20a512b056805a3f7fc5d647690d8a78d29771"
+    },
+    {
+      "path": "/tmp/capiro-remaining-capabilities-evidence/modules-keyboard-adapter-review/SHA256-MANIFEST.json",
+      "bytes": 5395,
+      "sha256": "fa47ecd77080dd46ad46ad9a5b5cbced3b89dbe78f4611da6bdd67de74f8ed9f"
+    },
+    {
+      "path": "/tmp/capiro-remaining-modules-evidence/production-1585438-review/report.md",
+      "bytes": 2624,
+      "sha256": "867276fa7caff73b52dfcb90b2de9adaf1ce043e43ad91515d98cbb66465e992"
+    },
+    {
+      "path": "/tmp/capiro-remaining-modules-evidence/production-1585438-review/SOURCE-AND-GATE-BINDING.json",
+      "bytes": 9408,
+      "sha256": "ca25b802e447475895bffad0028689342915da4dd56960a7bf5b3a84578baeb0"
+    },
+    {
+      "path": "/tmp/capiro-remaining-modules-evidence/production-1585438-review/VISUAL-REUSE.json",
+      "bytes": 6311,
+      "sha256": "d86f4832ee2012905a7eb2e05b448eddbf3eb093dbfe96da152fd6a2b0929a4d"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/clean-install-exit.json",
+      "bytes": 776,
+      "sha256": "1813f0bfc88b3e777f35ac6e5b3fd1f3b05467734931284ae040617bc778558c"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/clean-install.log",
+      "bytes": 164,
+      "sha256": "472709c34dd6302df557c435dce2e6e58e0bd121efa12f51833119a54724114c"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/corrected-regressions-exit.json",
+      "bytes": 1061,
+      "sha256": "f40e660d0598fcceeab77af5694234ca069def7c21d28ac621e6bb8710e7aa40"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/corrected-regressions.log",
+      "bytes": 4782,
+      "sha256": "0a0ea9070aaa9a9036bbd670035e14ca43ca16a81e34154972ca2f4105bb7875"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/combined-check-exit.json",
+      "bytes": 776,
+      "sha256": "1e1b3c1fe73f399cfb944ab715fea299bc9d4b712e5a76c539cc4b1e39266d7d"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/combined-check.log",
+      "bytes": 815381,
+      "sha256": "81a2fb6497a3973649181522b29ceb8c804e67ab5ea5cfc623cd9a53609f405e"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/elements-prepare-exit.json",
+      "bytes": 855,
+      "sha256": "7e47177ec8dc7502a1ee296d437d37888f14101ff612ae6304b82f5bdbe11194"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/elements-prepare.log",
+      "bytes": 244,
+      "sha256": "7522902b09cb99931f1909748eaa79cc62627cb75f140f70408f66ae40c6e722"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/elements-check-exit.json",
+      "bytes": 1060,
+      "sha256": "664440a7ec07e20652fa0b223fe90442b4d72322c17abe40e334b8456efc82a2"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/elements-check.log",
+      "bytes": 3092,
+      "sha256": "383abcefa6f0918b9e3441e1f2966aa5c0d9619abc348873b5851ed8bcc87ec0"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-build-exit.json",
+      "bytes": 778,
+      "sha256": "c2770fc52e329bc8c38f0d8f4eb3bf695f45b99f7f8b4dbfb3a36608ab136cbb"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-build.log",
+      "bytes": 2232,
+      "sha256": "b4d3b9940c1255771317f21613d619d605a6c78738f604562849de4cb0841999"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-server-exit.json",
+      "bytes": 893,
+      "sha256": "afcc2925fa4bc95bdc5a9b7c4f86810e202b9c42fc4c5caf35151d7d9d6d585d"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-server.log",
+      "bytes": 4258,
+      "sha256": "30123cc0fb4fd5935f8a619f2c46afdc52f8264bae803af7da5eab1a2580dddb"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/docker-context-exit.json",
+      "bytes": 898,
+      "sha256": "6c5ff22e2552ed4d96bf67c370ad2aa963e269cda185407648313888200158de"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/docker-context.log",
+      "bytes": 500,
+      "sha256": "4fa53b9d49d6e82abd32a3c497d5d1d10b0c784f010fd4eb997eeca1493f8a65"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/docker-build-exit.json",
+      "bytes": 900,
+      "sha256": "78c1eb82c96f1a25af2429e74a38dba6493557ddf7220ba614583c2a41155d1d"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/docker-build.log",
+      "bytes": 2637,
+      "sha256": "efac2a8f7ed6bd0750749a8a725cf27f2c026967582a51a205f59020c8ccedb3"
+    }
+  ],
+  "priorD68PacketManifestVerifiedUnchanged": {
+    "path": "/tmp/capiro-remaining-final-gate-review/addendum-d68c2dc/artifact-manifest.json",
+    "bytes": 790,
+    "sha256": "321527b0412dfb06f81166179ebbf4b1dd887248770dc631254e890ae85c828e"
+  },
+  "findings": [],
+  "remaining": [
+    "Full exact-source Modules and Portfolio outcomes await root notification.",
+    "Actual image build/absence blocker remains.",
+    "Explicit native/Meri/Figma/accessibility/Library limits remain."
+  ]
+}

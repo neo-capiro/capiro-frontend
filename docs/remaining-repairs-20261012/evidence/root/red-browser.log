@@ -1,0 +1,88 @@
+
+Running 2 tests using 1 worker
+
+(node:745601) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 apps/web/test/browser/meeting-detail-current.spec.ts:44:1 › MS06 baseline: current supplied link appears with safe external-link attributes (6.3s)
+(node:745740) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 apps/web/test/browser/meeting-detail-current.spec.ts:56:1 › MS06 baseline: meetings retain selectable list beside current detail with Prep entry (6.3s)
+
+
+  1) apps/web/test/browser/meeting-detail-current.spec.ts:44:1 › MS06 baseline: current supplied link appears with safe external-link attributes 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator: getByRole('link', { name: 'Join meeting', exact: true })
+    Expected: "https://meet.example.test/alpha?code=synthetic"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for getByRole('link', { name: 'Join meeting', exact: true })
+
+
+      48 |   await openFirst(page);
+      49 |   const join = page.getByRole("link", { name: "Join meeting", exact: true });
+    > 50 |   await expect(join).toHaveAttribute("href", meeting.joinLink);
+         |                      ^
+      51 |   await expect(join).toHaveAttribute("target", "_blank");
+      52 |   await expect(join).toHaveAttribute("rel", "noopener noreferrer");
+      53 |   await expect(join).toHaveAttribute("referrerpolicy", "no-referrer");
+        at /workspace/capiro-remaining/apps/web/test/browser/meeting-detail-current.spec.ts:50:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-root-evidence/red-browser-artifacts/meeting-detail-current-MS0-703f7-fe-external-link-attributes/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-root-evidence/red-browser-artifacts/meeting-detail-current-MS0-703f7-fe-external-link-attributes/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-root-evidence/red-browser-artifacts/meeting-detail-current-MS0-703f7-fe-external-link-attributes/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-root-evidence/red-browser-artifacts/meeting-detail-current-MS0-703f7-fe-external-link-attributes/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) apps/web/test/browser/meeting-detail-current.spec.ts:56:1 › MS06 baseline: meetings retain selectable list beside current detail with Prep entry 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('region', { name: 'Selected meeting', exact: true }).getByRole('heading', { name: 'Synthetic briefing alpha' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('region', { name: 'Selected meeting', exact: true }).getByRole('heading', { name: 'Synthetic briefing alpha' })
+
+
+      66 |   await expect(
+      67 |     detail.getByRole("heading", { name: meeting.subject }),
+    > 68 |   ).toBeVisible();
+         |     ^
+      69 |   await expect(page.getByRole("dialog")).toHaveCount(0);
+      70 |   await expect(
+      71 |     detail.getByRole("tab", { name: "Prep", exact: true }),
+        at /workspace/capiro-remaining/apps/web/test/browser/meeting-detail-current.spec.ts:68:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-root-evidence/red-browser-artifacts/meeting-detail-current-MS0-f8f94-rent-detail-with-Prep-entry/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-root-evidence/red-browser-artifacts/meeting-detail-current-MS0-f8f94-rent-detail-with-Prep-entry/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-root-evidence/red-browser-artifacts/meeting-detail-current-MS0-f8f94-rent-detail-with-Prep-entry/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-root-evidence/red-browser-artifacts/meeting-detail-current-MS0-f8f94-rent-detail-with-Prep-entry/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    apps/web/test/browser/meeting-detail-current.spec.ts:44:1 › MS06 baseline: current supplied link appears with safe external-link attributes 
+    apps/web/test/browser/meeting-detail-current.spec.ts:56:1 › MS06 baseline: meetings retain selectable list beside current detail with Prep entry 

@@ -1,0 +1,161 @@
+{
+  "at": "2026-10-13T03:03:38.710575+00:00",
+  "sourceHead": "7c87678730538958ace9762f824dc3e588bf445b",
+  "state": "Uncommitted feature candidate; exact reviewed files preserved",
+  "allSourceBindingsMatch": true,
+  "unchangedCanonicalAndOriginalTests": true,
+  "files": [
+    {
+      "file": "apps/web/src/features/modules/workspace/rich-newsletter/README.md",
+      "bytes": 2713,
+      "sha256": "3614c0781cffd8d31e0f16589e378f0694f4ebfa199d5ca5de4b9a57d1ba1f34",
+      "group": "owned",
+      "observedSha256": "3614c0781cffd8d31e0f16589e378f0694f4ebfa199d5ca5de4b9a57d1ba1f34",
+      "matched": true
+    },
+    {
+      "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.ts",
+      "bytes": 11461,
+      "sha256": "8f5097b4bb3296667ec7e0190e1ac90261f51990c50835df50b04f6e6bb73b67",
+      "group": "owned",
+      "observedSha256": "8f5097b4bb3296667ec7e0190e1ac90261f51990c50835df50b04f6e6bb73b67",
+      "matched": true
+    },
+    {
+      "file": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
+      "bytes": 23464,
+      "sha256": "4d9bbf10922565b27cfd1b07e4b07bc27130a6e464df6ef59d42a0bf766fe8e4",
+      "group": "owned",
+      "observedSha256": "4d9bbf10922565b27cfd1b07e4b07bc27130a6e464df6ef59d42a0bf766fe8e4",
+      "matched": true
+    },
+    {
+      "file": "apps/web/src/features/modules/workspace/rich-newsletter/write-journal.ts",
+      "bytes": 4675,
+      "sha256": "d131eb1e7bdb44c5053be257d6b3e3c2e749b16f9d2312502069045eef109a57",
+      "group": "owned",
+      "observedSha256": "d131eb1e7bdb44c5053be257d6b3e3c2e749b16f9d2312502069045eef109a57",
+      "matched": true
+    },
+    {
+      "file": "apps/web/src/features/modules/workspace/rich-newsletter/use-rich-document.ts",
+      "bytes": 1001,
+      "sha256": "15fc89fd33342dc91eed524b7dd37fe0ec4c17085a9b4607e7abcfd63aae5d60",
+      "group": "owned",
+      "observedSha256": "15fc89fd33342dc91eed524b7dd37fe0ec4c17085a9b4607e7abcfd63aae5d60",
+      "matched": true
+    },
+    {
+      "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichDocumentActions.tsx",
+      "bytes": 6930,
+      "sha256": "9afb178f9cf6ddf90f33d059803a716dc2192a099e16c9439fd52c15faeedada",
+      "group": "owned",
+      "observedSha256": "9afb178f9cf6ddf90f33d059803a716dc2192a099e16c9439fd52c15faeedada",
+      "matched": true
+    },
+    {
+      "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
+      "bytes": 6203,
+      "sha256": "7ee5e694f88e58ec9a041f1d82a8052dcf35cee496697cd68857c459fec7e32b",
+      "group": "owned",
+      "observedSha256": "7ee5e694f88e58ec9a041f1d82a8052dcf35cee496697cd68857c459fec7e32b",
+      "matched": true
+    },
+    {
+      "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichPreview.tsx",
+      "bytes": 4263,
+      "sha256": "e869fe2a804e593afb00eec4b32c472848f90f88ef3f88486ddc88309f901a8b",
+      "group": "owned",
+      "observedSha256": "e869fe2a804e593afb00eec4b32c472848f90f88ef3f88486ddc88309f901a8b",
+      "matched": true
+    },
+    {
+      "file": "apps/web/src/features/modules/workspace/rich-newsletter/rich-newsletter.module.css",
+      "bytes": 2277,
+      "sha256": "c6724bbc0b7153941b3d5f3ccb8d857205d0ed156885c7e63d52e30da2454b47",
+      "group": "owned",
+      "observedSha256": "c6724bbc0b7153941b3d5f3ccb8d857205d0ed156885c7e63d52e30da2454b47",
+      "matched": true
+    },
+    {
+      "file": "apps/web/src/features/modules/workspace/rich-newsletter/draft.ts",
+      "bytes": 2166,
+      "sha256": "826918f665336a9b73151b3657b1bba8a8c8bfbc7bb41a65bc87a051b8ab34ca",
+      "group": "owned",
+      "observedSha256": "826918f665336a9b73151b3657b1bba8a8c8bfbc7bb41a65bc87a051b8ab34ca",
+      "matched": true
+    },
+    {
+      "file": "apps/web/src/shared/portfolio/api/provider.tsx",
+      "bytes": 2049,
+      "sha256": "727318986e7f6ac9a1e644573a87a894c1db3d6fa4f9eb9d4806c37d2857d81a",
+      "unchangedFromHead": true,
+      "group": "canonicalAndPreserved",
+      "observedSha256": "727318986e7f6ac9a1e644573a87a894c1db3d6fa4f9eb9d4806c37d2857d81a",
+      "matched": true
+    },
+    {
+      "file": "apps/web/src/shared/session/ApplicationBoundary.tsx",
+      "bytes": 3005,
+      "sha256": "171e6a02aec0cabe461c195059483c585feecebdbf1b9d66c777007d59ced10f",
+      "unchangedFromHead": true,
+      "group": "canonicalAndPreserved",
+      "observedSha256": "171e6a02aec0cabe461c195059483c585feecebdbf1b9d66c777007d59ced10f",
+      "matched": true
+    },
+    {
+      "file": "apps/web/src/shared/capiro/CapiroBoundary.tsx",
+      "bytes": 2686,
+      "sha256": "e00ffb9b2f4ed6cb033f655754b28b10a63bf989fa5c4a8ad20c36e3dd7b8cf4",
+      "unchangedFromHead": true,
+      "group": "canonicalAndPreserved",
+      "observedSha256": "e00ffb9b2f4ed6cb033f655754b28b10a63bf989fa5c4a8ad20c36e3dd7b8cf4",
+      "matched": true
+    },
+    {
+      "file": "apps/web/src/features/modules/workspace/rich-newsletter/draft.test.ts",
+      "bytes": 2847,
+      "sha256": "102e47f125212ddb43b23bd9bd418ab1f116fecad26740765f1ae61091230468",
+      "unchangedFromHead": true,
+      "group": "canonicalAndPreserved",
+      "observedSha256": "102e47f125212ddb43b23bd9bd418ab1f116fecad26740765f1ae61091230468",
+      "matched": true
+    },
+    {
+      "file": "apps/web/test/browser/newsletter-rich.spec.ts",
+      "bytes": 9766,
+      "sha256": "33ec7ad0ac0d18b6b5a9cc2b3826d0bbe1809f15d738a6801f94c3fc7fdabd90",
+      "unchangedFromHead": true,
+      "group": "canonicalAndPreserved",
+      "observedSha256": "33ec7ad0ac0d18b6b5a9cc2b3826d0bbe1809f15d738a6801f94c3fc7fdabd90",
+      "matched": true
+    },
+    {
+      "file": "apps/web/src/shared/capiro/rich-newsletter.ts",
+      "bytes": 3887,
+      "sha256": "c25183acddcd61f8b3b0f19b70f7a422738d14c45c234e5d4d6ec6860bfbd3c6",
+      "group": "sharedDependencies",
+      "observedSha256": "c25183acddcd61f8b3b0f19b70f7a422738d14c45c234e5d4d6ec6860bfbd3c6",
+      "matched": true
+    },
+    {
+      "file": "apps/web/src/shared/capiro/operations/rich-newsletter.ts",
+      "bytes": 4619,
+      "sha256": "d28cbba88c631f6d53d901b1277bc566e60d10f17b2bb819894d8d2886c95d77",
+      "group": "sharedDependencies",
+      "observedSha256": "d28cbba88c631f6d53d901b1277bc566e60d10f17b2bb819894d8d2886c95d77",
+      "matched": true
+    }
+  ],
+  "testsRunByReviewer": false,
+  "authorReported": {
+    "focusedTests": 37,
+    "lifecycleTests": 34,
+    "preservedDraftTests": 3,
+    "workers": 1,
+    "failed": 0,
+    "skipped": 0
+  },
+  "nativeCalls": false,
+  "sourceEdits": false
+}

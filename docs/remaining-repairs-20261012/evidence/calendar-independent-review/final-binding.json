@@ -1,0 +1,227 @@
+{
+  "recordedAt": "2026-10-12T20:09:23.976795+00:00",
+  "verdict": "PASS_BOUNDED_SOURCE_REVIEW_NO_REMAINING_BLOCKER_FOUND",
+  "sourceCommit": "16fb50f9578cca86189b2e303f0918ddebc60413",
+  "sourceTree": "2af9545acb53781e8fa48944230a6278f982a940",
+  "base": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+  "changedFileCount": 30,
+  "changedFiles": [
+    {
+      "path": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
+      "bytes": 13294,
+      "sha256": "e28e6310d7b99394510cec58039f74ceb60adc7ac7910af3369ed2b0fdf17aa6"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/MeetingAgenda.tsx",
+      "bytes": 2571,
+      "sha256": "24b58b634b151a8f0ed5a14837838b3a63c0a5f7590482725720a06e6cf4491d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx",
+      "bytes": 5179,
+      "sha256": "c2fcee319ca80cada332c9e8fe0aa09277b876aef4b29a7e8a6c82cdb4ea983c"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/MeetingIdentity.tsx",
+      "bytes": 3060,
+      "sha256": "996db99bb02dccfa7d36a60921bbb6f303f7e65ada7776514e32e92114d5d45f"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/artifacts/contracts.ts",
+      "bytes": 2876,
+      "sha256": "312827f14dd931bd856589e52bb9ff12af2fcd41f1d30403c77df2606af9d87d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/artifacts/metadata.ts",
+      "bytes": 591,
+      "sha256": "c2c6873c83adcaf1606fad800305bac2065b9391642baef2a5030b5a6221945e"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/artifacts/useArtifactMutation.ts",
+      "bytes": 3750,
+      "sha256": "443bdfe2ac7830a73fc07aef22f6c8d1c3118242ece77e7f54dd8e1f34ebd413"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/calendar.module.css",
+      "bytes": 2935,
+      "sha256": "32a28c1f19eb80288225dae4058f009f1eb6cacb7e347d6d074ddb150e33a703"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/contracts.ts",
+      "bytes": 5164,
+      "sha256": "7a20373d12e29ea74dd088e31ef3a2f013c911700772ee13c597d2d489688174"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/feeds.ts",
+      "bytes": 4742,
+      "sha256": "e46c6dd4f6f41f3e27cb834498d067f3970caf7cd9d6186148b46b2f69745382"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/library/SharedMeetings.tsx",
+      "bytes": 4828,
+      "sha256": "cc9180c76585f6ab41d31028cdc9cac43231b4e674ba321b2db0babd1f014596"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/library/public.ts",
+      "bytes": 333,
+      "sha256": "8ddeec3df871810165d40d62d0c5ae0fd31edc2e400fd841ee8d31a47aa32fa7"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/lifecycle.ts",
+      "bytes": 2571,
+      "sha256": "a3d50316a66389f65f666ce0b11726edc584fd49e2a3ec72d312e403d4ca6491"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/preparation/schema.ts",
+      "bytes": 3878,
+      "sha256": "b9699bb7e19abc68645d3e650573691b92c698608e76cd1d67f9940c31755d79"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/review/contracts.ts",
+      "bytes": 2804,
+      "sha256": "9365a8ce200d7a6a7347a6a45933a58bf589c4b6fdf84ade68e3958b3d965553"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/sharing/MeetingSharing.tsx",
+      "bytes": 6078,
+      "sha256": "ed8ce1105570de9ab5f8cbbdb74689b344908321cca84d6373d330aedb425415"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/sharing/api.ts",
+      "bytes": 3006,
+      "sha256": "7e10d160f1b72202393b8921679958faf5c3cf576a363a7c6641ac5b20c6194a"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/sharing/contracts.ts",
+      "bytes": 4039,
+      "sha256": "92f9f70ad1a78632dd267efbb91b72f3f0d714efcd0f21b77b38c6bba91cc290"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/sharing/fence.ts",
+      "bytes": 489,
+      "sha256": "ac321a98f167846eb06ca869ada1bdc8a3f2a4b62a50bc00b3ec1ddbeb8abc99"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/sharing/sharing.module.css",
+      "bytes": 503,
+      "sha256": "d3f4f2498ab2a1c74fe0382565ce31c1d15b7811cb35ac35e863ed5ff9205a3f"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/sharing/targets.ts",
+      "bytes": 2828,
+      "sha256": "5cb7be0f1f33e49917404a47c8b5e9a9716b665a16d7e6bb48d074a26e2d3a8d"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/sharing/useSharing.ts",
+      "bytes": 3949,
+      "sha256": "9855c5f60c0ace9aa2509cb6c98371bf9bea52d1dda75c9141da3fdbe0bc823c"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/calendar/useMeetingClock.ts",
+      "bytes": 384,
+      "sha256": "6efce8a5ce1e88f2e9ca25378923cf48c78cca3027abd7cb665635700caefbbe"
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-lifecycle.spec.ts",
+      "bytes": 8967,
+      "sha256": "f74d8b284991958fe4bed9fa2952e4a7d52f230e88f4102ce993f15741d199e8"
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-sharing-harness.tsx",
+      "bytes": 1328,
+      "sha256": "7d51d8344009553e698a5fde447c62bfeb582c5e9d60116e0b6544208a94ec10"
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-sharing.html",
+      "bytes": 300,
+      "sha256": "3d8d847dca8e2fa5903d480f051756899678a9e324dc091d4a91f8ae8d604357"
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-sharing.spec.ts",
+      "bytes": 15006,
+      "sha256": "23a2427feb083c1dbcb1474f5376a8902f57290025991dc43f011043924aedee"
+    },
+    {
+      "path": "apps/web/tests/calendar-lifecycle-contract.test.ts",
+      "bytes": 3979,
+      "sha256": "a3ce8a8534e8158190a293a2a537547aa212dfb3cec03380bcaa25bc4f51c726"
+    },
+    {
+      "path": "apps/web/tests/calendar-sharing-fixtures.ts",
+      "bytes": 2900,
+      "sha256": "788b079ddda8273f485e359d5e112e32474ad4172facb2e474be1f221bbdc05f"
+    },
+    {
+      "path": "apps/web/tests/calendar-sharing.test.ts",
+      "bytes": 6985,
+      "sha256": "5d837055a6c3644987422fddfee54b1b3762f4b108b9c064cd699a67e3718a30"
+    }
+  ],
+  "changedExistingTestFiles": [],
+  "deltaFromReviewedDraft": [
+    {
+      "path": "apps/web/tests/browser/calendar-lifecycle.spec.ts",
+      "reviewedSHA256": "0426edda472b41d46f958d8ba2ca39d03f3b5906a004a1e98a6c052035f31a1f",
+      "finalSHA256": "f74d8b284991958fe4bed9fa2952e4a7d52f230e88f4102ce993f15741d199e8"
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-sharing.spec.ts",
+      "reviewedSHA256": "d70aa859d8b7865c09f59f04cd9e05f97f49d31bdc1884f9c2aed75a12d220e5",
+      "finalSHA256": "23a2427feb083c1dbcb1474f5376a8902f57290025991dc43f011043924aedee"
+    }
+  ],
+  "productionDeltaFromReviewedDraft": [],
+  "exactArchitectureSignals": [
+    {
+      "file": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
+      "kind": "file",
+      "symbol": "<module>",
+      "nonblank": 410,
+      "fingerprint": "1471eb1124a29fe24ebf21e91fad0d83cb4f1596cac88f9635dce47fad461a5e",
+      "sha256": "e28e6310d7b99394510cec58039f74ceb60adc7ac7910af3369ed2b0fdf17aa6"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
+      "kind": "function",
+      "symbol": "CalendarPage",
+      "nonblank": 375,
+      "fingerprint": "f5e9238597077884681433f79e422929b1d82e7d06dae40549d5e3bc9e641549",
+      "sha256": "e28e6310d7b99394510cec58039f74ceb60adc7ac7910af3369ed2b0fdf17aa6"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/artifacts/useArtifactMutation.ts",
+      "kind": "function",
+      "symbol": "useArtifactMutation",
+      "nonblank": 88,
+      "fingerprint": "9073247d9809144bbb9ead2a98d24e1272748ae53edffb0b19163b63357caa97",
+      "sha256": "443bdfe2ac7830a73fc07aef22f6c8d1c3118242ece77e7f54dd8e1f34ebd413"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/library/SharedMeetings.tsx",
+      "kind": "function",
+      "symbol": "SharedMeetings",
+      "nonblank": 127,
+      "fingerprint": "1366759cf36d89e80e3aad049b05ee7d80fad61210a8d0ca3d8c9c2d98e593d0",
+      "sha256": "cc9180c76585f6ab41d31028cdc9cac43231b4e674ba321b2db0babd1f014596"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/sharing/MeetingSharing.tsx",
+      "kind": "function",
+      "symbol": "MeetingSharing",
+      "nonblank": 163,
+      "fingerprint": "727cc3956153caa435c9011566317d7a6016e5549990240f930348ade5090cdf",
+      "sha256": "ed8ce1105570de9ab5f8cbbdb74689b344908321cca84d6373d330aedb425415"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/calendar/sharing/useSharing.ts",
+      "kind": "function",
+      "symbol": "useSharing",
+      "nonblank": 118,
+      "fingerprint": "4ef7b2fa293d7022f77528c118ea9ad2278e5559050b10e3903625ad89b52b03",
+      "sha256": "9855c5f60c0ace9aa2509cb6c98371bf9bea52d1dda75c9141da3fdbe0bc823c"
+    }
+  ],
+  "ownerEvidence": "62/64 full focused attempt plus corrected2/2 replay; all43 original controls passed;98/98 final units; final app tsc/lint/format passed. No single64/64 final replay claimed.",
+  "nativeAcceptance": false,
+  "reviewerExecutedTestsOrBrowsers": false
+}

@@ -1,0 +1,10 @@
+{
+  "extends": "/workspace/capiro-remaining-capabilities/apps/web/tsconfig.json",
+  "compilerOptions": {
+    "incremental": false
+  },
+  "include": [
+    "/workspace/capiro-remaining-capabilities/apps/web/tests/browser/capability-list-registration-layout.spec.ts"
+  ],
+  "exclude": []
+}

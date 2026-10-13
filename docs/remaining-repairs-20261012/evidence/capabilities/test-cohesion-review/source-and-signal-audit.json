@@ -1,0 +1,313 @@
+{
+  "createdAtUtc": "2026-10-12T20:11:52.606Z",
+  "base": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+  "pin": "4dbbe4b5558f93bbf27ee7263d77a5b838a7d074",
+  "record": "/tmp/capiro-remaining-root-evidence/changed-test-size-findings-partial.json",
+  "signals": [
+    {
+      "file": "apps/web/test/browser/remaining-modules.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 486,
+      "fingerprint": "33e115194230d772767d40ce9ef9e855370ea36a7ee90ba0feba0563f6947f89",
+      "sha256": "c86ad251ee3eb115e5e6edeb0309192aebd9b3fd38fc6f85fdf19e89deaea78f",
+      "actual": {
+        "file": "apps/web/test/browser/remaining-modules.spec.ts",
+        "kind": "file",
+        "symbol": "<module>",
+        "line": 1,
+        "nonblank": 486,
+        "fingerprint": "33e115194230d772767d40ce9ef9e855370ea36a7ee90ba0feba0563f6947f89"
+      },
+      "sourceMatchesRecord": true,
+      "signalMatchesRecord": true,
+      "workingMatchesCommit": true,
+      "baselineSignal": null,
+      "classification": "new"
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-sharing.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 422,
+      "fingerprint": "c3ffd4fbca4d35c3529916792ee8bae7f8095f993a3bfb87829973256476c93f",
+      "sha256": "23a2427feb083c1dbcb1474f5376a8902f57290025991dc43f011043924aedee",
+      "actual": {
+        "file": "apps/web/tests/browser/calendar-sharing.spec.ts",
+        "kind": "file",
+        "symbol": "<module>",
+        "line": 1,
+        "nonblank": 422,
+        "fingerprint": "c3ffd4fbca4d35c3529916792ee8bae7f8095f993a3bfb87829973256476c93f"
+      },
+      "sourceMatchesRecord": true,
+      "signalMatchesRecord": true,
+      "workingMatchesCommit": true,
+      "baselineSignal": null,
+      "classification": "new"
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-sharing.spec.ts",
+      "kind": "function",
+      "symbol": "setup",
+      "line": 17,
+      "nonblank": 81,
+      "fingerprint": "fad2e4d85b892511b6f812be3847d67b27affde5c1d7f51f10ecfed57f128125",
+      "sha256": "23a2427feb083c1dbcb1474f5376a8902f57290025991dc43f011043924aedee",
+      "actual": {
+        "file": "apps/web/tests/browser/calendar-sharing.spec.ts",
+        "kind": "function",
+        "symbol": "setup",
+        "line": 17,
+        "nonblank": 81,
+        "fingerprint": "fad2e4d85b892511b6f812be3847d67b27affde5c1d7f51f10ecfed57f128125"
+      },
+      "sourceMatchesRecord": true,
+      "signalMatchesRecord": true,
+      "workingMatchesCommit": true,
+      "baselineSignal": null,
+      "classification": "new"
+    },
+    {
+      "file": "apps/web/tests/browser/email-compose.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 653,
+      "fingerprint": "9586be4f68794516b7826531fcc57d1c83abf9920e2d87137c507ca049143139",
+      "sha256": "c61e2e708f1a7a079570478891cd17982586f9bf262d8e979931a7976ccd90c0",
+      "actual": {
+        "file": "apps/web/tests/browser/email-compose.spec.ts",
+        "kind": "file",
+        "symbol": "<module>",
+        "line": 1,
+        "nonblank": 653,
+        "fingerprint": "9586be4f68794516b7826531fcc57d1c83abf9920e2d87137c507ca049143139"
+      },
+      "sourceMatchesRecord": true,
+      "signalMatchesRecord": true,
+      "workingMatchesCommit": true,
+      "baselineSignal": {
+        "file": "apps/web/tests/browser/email-compose.spec.ts",
+        "kind": "file",
+        "symbol": "<module>",
+        "line": 1,
+        "nonblank": 668,
+        "fingerprint": "a4f0704898b428f6c0ceb6457b09f50843f41565b817f32775312ece71dff348"
+      },
+      "classification": "changed"
+    },
+    {
+      "file": "apps/web/tests/browser/email-compose.spec.ts",
+      "kind": "function",
+      "symbol": "setup",
+      "line": 41,
+      "nonblank": 119,
+      "fingerprint": "486aa09e731ad40a8b5b850b7e2a07fa02ee17f98914c8f7c90efc64a7988c4b",
+      "sha256": "c61e2e708f1a7a079570478891cd17982586f9bf262d8e979931a7976ccd90c0",
+      "actual": {
+        "file": "apps/web/tests/browser/email-compose.spec.ts",
+        "kind": "function",
+        "symbol": "setup",
+        "line": 41,
+        "nonblank": 119,
+        "fingerprint": "486aa09e731ad40a8b5b850b7e2a07fa02ee17f98914c8f7c90efc64a7988c4b"
+      },
+      "sourceMatchesRecord": true,
+      "signalMatchesRecord": true,
+      "workingMatchesCommit": true,
+      "baselineSignal": {
+        "file": "apps/web/tests/browser/email-compose.spec.ts",
+        "kind": "function",
+        "symbol": "setup",
+        "line": 40,
+        "nonblank": 119,
+        "fingerprint": "486aa09e731ad40a8b5b850b7e2a07fa02ee17f98914c8f7c90efc64a7988c4b"
+      },
+      "classification": "inherited-unchanged"
+    },
+    {
+      "file": "apps/web/tests/browser/email-compose.spec.ts",
+      "kind": "function",
+      "symbol": "setup > <anonymous>",
+      "line": 64,
+      "nonblank": 90,
+      "fingerprint": "422ede19b0edb762a92ff41f98b8fd81e377588a9f7a05cb88e541ccbdf137f4",
+      "sha256": "c61e2e708f1a7a079570478891cd17982586f9bf262d8e979931a7976ccd90c0",
+      "actual": {
+        "file": "apps/web/tests/browser/email-compose.spec.ts",
+        "kind": "function",
+        "symbol": "setup > <anonymous>",
+        "line": 64,
+        "nonblank": 90,
+        "fingerprint": "422ede19b0edb762a92ff41f98b8fd81e377588a9f7a05cb88e541ccbdf137f4"
+      },
+      "sourceMatchesRecord": true,
+      "signalMatchesRecord": true,
+      "workingMatchesCommit": true,
+      "baselineSignal": {
+        "file": "apps/web/tests/browser/email-compose.spec.ts",
+        "kind": "function",
+        "symbol": "setup > <anonymous>",
+        "line": 63,
+        "nonblank": 90,
+        "fingerprint": "422ede19b0edb762a92ff41f98b8fd81e377588a9f7a05cb88e541ccbdf137f4"
+      },
+      "classification": "inherited-unchanged"
+    },
+    {
+      "file": "apps/web/tests/browser/mail-local-draft.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 467,
+      "fingerprint": "59c7d93e59a1ee79058d223d6af28e3332d38be3593e026cb32ad070b0fea27c",
+      "sha256": "74036b122536e2c3e1ff67497cbccd2e2825d2f165d2ac62acbd81b374797575",
+      "actual": {
+        "file": "apps/web/tests/browser/mail-local-draft.spec.ts",
+        "kind": "file",
+        "symbol": "<module>",
+        "line": 1,
+        "nonblank": 467,
+        "fingerprint": "59c7d93e59a1ee79058d223d6af28e3332d38be3593e026cb32ad070b0fea27c"
+      },
+      "sourceMatchesRecord": true,
+      "signalMatchesRecord": true,
+      "workingMatchesCommit": true,
+      "baselineSignal": {
+        "file": "apps/web/tests/browser/mail-local-draft.spec.ts",
+        "kind": "file",
+        "symbol": "<module>",
+        "line": 1,
+        "nonblank": 480,
+        "fingerprint": "e154fde5250caaf90e0e38079da114c5c0e68183168cc98f5898fd2ff35e835f"
+      },
+      "classification": "changed"
+    },
+    {
+      "file": "apps/web/tests/browser/mail-local-draft.spec.ts",
+      "kind": "function",
+      "symbol": "setup",
+      "line": 8,
+      "nonblank": 90,
+      "fingerprint": "9711fdca346a34b0dfa82fae5065a31f429924616c649beaace06c1191d0282c",
+      "sha256": "74036b122536e2c3e1ff67497cbccd2e2825d2f165d2ac62acbd81b374797575",
+      "actual": {
+        "file": "apps/web/tests/browser/mail-local-draft.spec.ts",
+        "kind": "function",
+        "symbol": "setup",
+        "line": 8,
+        "nonblank": 90,
+        "fingerprint": "9711fdca346a34b0dfa82fae5065a31f429924616c649beaace06c1191d0282c"
+      },
+      "sourceMatchesRecord": true,
+      "signalMatchesRecord": true,
+      "workingMatchesCommit": true,
+      "baselineSignal": {
+        "file": "apps/web/tests/browser/mail-local-draft.spec.ts",
+        "kind": "function",
+        "symbol": "setup",
+        "line": 7,
+        "nonblank": 90,
+        "fingerprint": "9711fdca346a34b0dfa82fae5065a31f429924616c649beaace06c1191d0282c"
+      },
+      "classification": "inherited-unchanged"
+    },
+    {
+      "file": "apps/web/tests/browser/mail-rich-compose.spec.ts",
+      "kind": "function",
+      "symbol": "setup",
+      "line": 4,
+      "nonblank": 82,
+      "fingerprint": "e45e93bf32a8236faf446bec98b8fcdeb34bb1e53f131a916e71b130dd2d5e25",
+      "sha256": "1b7ca2ca4c029b83e533e073dd5b1ca45b2c76fc8d265973ea2d0d254f884a90",
+      "actual": {
+        "file": "apps/web/tests/browser/mail-rich-compose.spec.ts",
+        "kind": "function",
+        "symbol": "setup",
+        "line": 4,
+        "nonblank": 82,
+        "fingerprint": "e45e93bf32a8236faf446bec98b8fcdeb34bb1e53f131a916e71b130dd2d5e25"
+      },
+      "sourceMatchesRecord": true,
+      "signalMatchesRecord": true,
+      "workingMatchesCommit": true,
+      "baselineSignal": null,
+      "classification": "new"
+    },
+    {
+      "file": "apps/web/tests/calendar-sharing.test.ts",
+      "kind": "function",
+      "symbol": "<anonymous>",
+      "line": 24,
+      "nonblank": 109,
+      "fingerprint": "4bf56d635643c7e5cdb8d93dcdcbf9b24485a05ff077674e6da194dd28e7a88a",
+      "sha256": "5d837055a6c3644987422fddfee54b1b3762f4b108b9c064cd699a67e3718a30",
+      "actual": {
+        "file": "apps/web/tests/calendar-sharing.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous>",
+        "line": 24,
+        "nonblank": 109,
+        "fingerprint": "4bf56d635643c7e5cdb8d93dcdcbf9b24485a05ff077674e6da194dd28e7a88a"
+      },
+      "sourceMatchesRecord": true,
+      "signalMatchesRecord": true,
+      "workingMatchesCommit": true,
+      "baselineSignal": null,
+      "classification": "new"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "apps/web/test/browser/remaining-modules.spec.ts",
+      "sha256": "c86ad251ee3eb115e5e6edeb0309192aebd9b3fd38fc6f85fdf19e89deaea78f"
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-sharing.spec.ts",
+      "sha256": "23a2427feb083c1dbcb1474f5376a8902f57290025991dc43f011043924aedee"
+    },
+    {
+      "path": "apps/web/tests/browser/email-compose.spec.ts",
+      "sha256": "c61e2e708f1a7a079570478891cd17982586f9bf262d8e979931a7976ccd90c0"
+    },
+    {
+      "path": "apps/web/tests/browser/mail-local-draft.spec.ts",
+      "sha256": "74036b122536e2c3e1ff67497cbccd2e2825d2f165d2ac62acbd81b374797575"
+    },
+    {
+      "path": "apps/web/tests/browser/mail-rich-compose.spec.ts",
+      "sha256": "1b7ca2ca4c029b83e533e073dd5b1ca45b2c76fc8d265973ea2d0d254f884a90"
+    },
+    {
+      "path": "apps/web/tests/calendar-sharing.test.ts",
+      "sha256": "5d837055a6c3644987422fddfee54b1b3762f4b108b9c064cd699a67e3718a30"
+    },
+    {
+      "path": "apps/web/test/browser/next-modules-fixtures.ts",
+      "sha256": "36b1f5775ccb35fdb8cb8c276c59e32506d0e988005535c126d23c2f0b05a1ab"
+    },
+    {
+      "path": "apps/web/test/browser/fixtures.ts",
+      "sha256": "ba90445f2f1cb6fb1786362cd434bd58a2ee8940a5334f1a76b6c5c4c5531467"
+    },
+    {
+      "path": "apps/web/test/browser/main.tsx",
+      "sha256": "93255483d7bdea3cd6610aed3cc2438cb59d1f782e5294a4645a3e97dbe4c7d0"
+    },
+    {
+      "path": "apps/web/tests/calendar-sharing-fixtures.ts",
+      "sha256": "788b079ddda8273f485e359d5e112e32474ad4172facb2e474be1f221bbdc05f"
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-sharing-harness.tsx",
+      "sha256": "7d51d8344009553e698a5fde447c62bfeb582c5e9d60116e0b6544208a94ec10"
+    },
+    {
+      "path": "apps/web/tests/browser/email-compose-harness.tsx",
+      "sha256": "c0886f597795b26b05db122b6f27a08ca2335029d7a385cd23550e0f9a613f57"
+    }
+  ]
+}

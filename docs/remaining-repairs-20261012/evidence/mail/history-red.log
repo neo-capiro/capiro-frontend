@@ -1,0 +1,49 @@
+
+Running 1 test using 1 worker
+
+(node:729173) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 apps/web/tests/browser/mail-rich-compose.spec.ts:294:1 › identity invalidation revokes rich Undo without provider effects (8.5s)
+
+
+  1) apps/web/tests/browser/mail-rich-compose.spec.ts:294:1 › identity invalidation revokes rich Undo without provider effects 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  getByRole('textbox', { name: 'Message', exact: true })
+    Expected: "Verified rewrite."
+    Received: "Original rich draft."
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" with timeout 5000ms
+      - waiting for getByRole('textbox', { name: 'Message', exact: true })
+        14 × locator resolved to <div tabindex="0" role="textbox" translate="no" aria-required="true" aria-multiline="true" contenteditable="true" aria-labelledby="_r_3_" class="tiptap ProseMirror _messageBody_1de57_68 ProseMirror-focused">…</div>
+           - unexpected value "Original rich draft."
+
+
+      313 |   await expect(message(page)).toHaveText("Verified rewrite.");
+      314 |   await message(page).press("ControlOrMeta+z");
+    > 315 |   await expect(message(page)).toHaveText("Verified rewrite.");
+          |                               ^
+      316 |   expect(state.sends).toHaveLength(0);
+      317 | });
+      318 |
+        at /workspace/capiro-remaining-mail/apps/web/tests/browser/mail-rich-compose.spec.ts:315:31
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-mail-evidence/history-red-artifacts/mail-rich-compose-identity-c8ed2-do-without-provider-effects/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-mail-evidence/history-red-artifacts/mail-rich-compose-identity-c8ed2-do-without-provider-effects/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-mail-evidence/history-red-artifacts/mail-rich-compose-identity-c8ed2-do-without-provider-effects/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-mail-evidence/history-red-artifacts/mail-rich-compose-identity-c8ed2-do-without-provider-effects/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    apps/web/tests/browser/mail-rich-compose.spec.ts:294:1 › identity invalidation revokes rich Undo without provider effects 

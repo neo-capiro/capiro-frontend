@@ -1,0 +1,47 @@
+
+Running 1 test using 1 worker
+
+(node:870054) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 apps/web/test/browser/remaining-modules.spec.ts:277:1 › MS08 scope and grouping controls remain keyboard operable at phone width (6.5s)
+
+
+  1) apps/web/test/browser/remaining-modules.spec.ts:277:1 › MS08 scope and grouping controls remain keyboard operable at phone width 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator: getByRole('combobox', { name: 'Planner client scope' })
+    Expected: "true"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for getByRole('combobox', { name: 'Planner client scope' })
+
+
+      286 |   await expect(scope).toBeFocused();
+      287 |   await page.keyboard.press("Enter");
+    > 288 |   await expect(scope).toHaveAttribute("aria-expanded", "true");
+          |                       ^
+      289 |   await expect(page.getByRole("listbox")).toBeVisible();
+      290 |   await expect(
+      291 |     page.getByRole("option", { name: "Scope · All clients", exact: true }),
+        at /workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:288:23
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-modules-evidence/keyboard-d68-correction/browser-green/remaining-modules-MS08-sco-10d0d-ard-operable-at-phone-width/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-modules-evidence/keyboard-d68-correction/browser-green/remaining-modules-MS08-sco-10d0d-ard-operable-at-phone-width/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-modules-evidence/keyboard-d68-correction/browser-green/remaining-modules-MS08-sco-10d0d-ard-operable-at-phone-width/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-modules-evidence/keyboard-d68-correction/browser-green/remaining-modules-MS08-sco-10d0d-ard-operable-at-phone-width/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    apps/web/test/browser/remaining-modules.spec.ts:277:1 › MS08 scope and grouping controls remain keyboard operable at phone width 

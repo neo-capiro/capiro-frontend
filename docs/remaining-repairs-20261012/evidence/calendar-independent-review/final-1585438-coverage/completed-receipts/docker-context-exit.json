@@ -1,0 +1,30 @@
+{
+  "name": "docker-context",
+  "command": [
+    "env",
+    "DOCKER_CONFIG=/tmp/capiro-docker-config-20261012",
+    "npm",
+    "run",
+    "test:docker-context",
+    "--",
+    "--artifacts",
+    "/tmp/capiro-remaining-docker-evidence/context-frozen-1585438"
+  ],
+  "startedUTC": "2026-10-12T22:11:10.705689+00:00",
+  "endedUTC": "2026-10-12T22:11:11.086902+00:00",
+  "durationSeconds": 0.3812400640017586,
+  "exitCode": 0,
+  "sourceBefore": {
+    "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+    "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+    "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+    "sourceDiff": ""
+  },
+  "sourceAfter": {
+    "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+    "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+    "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+    "sourceDiff": ""
+  },
+  "sourceChanged": false
+}

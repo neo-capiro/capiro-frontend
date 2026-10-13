@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-12T21:27:04.503950+00:00",
+  "ownerBase": "ecf34dfac16e36b22df1a1da9b6e86b785699dbb",
+  "frozenQualificationSource": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+  "file": "apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx",
+  "line": 74,
+  "beforeSha256": "2cff749fe4fde463166880004fc18c2f5955b0c3292179d59a722d3f51d1d339",
+  "afterSha256": "e3968866a9f7527a59b54693d8bd8bd114ba682ae6a2c187ef5bd3dfd56328ab",
+  "changedCharacters": 1,
+  "change": {
+    "before": "L",
+    "after": "l",
+    "characterOffset": 2565
+  },
+  "testsUnedited": {
+    "apps/web/tests/browser/current-projection.spec.ts": {
+      "ownerSha256": "a8d1321f1c0453b8c166ac2425ce157fe288b8e248eed6d7122ca126afa84a55",
+      "qualificationSha256": "a8d1321f1c0453b8c166ac2425ce157fe288b8e248eed6d7122ca126afa84a55"
+    }
+  },
+  "runtimeTestsBuildTypecheckRun": false,
+  "browserLease": "not granted",
+  "beforeFunctionFingerprint": "626e4b4fbd75bf396ce2b4a9a86d457a90d6d0b0981555d3b50af86b970fb1c8",
+  "afterFunctionFingerprint": "e38624c07720d44683be7da80f6f5608be5ae6f5c2cf5d1b04b707614167bd43",
+  "correctionCommit": "4ed4b56aaa1660e7f7abdccd94208c17aa38f21b",
+  "committedDiff": "commit 4ed4b56aaa1660e7f7abdccd94208c17aa38f21b\nAuthor:     NEO MARTINEZ <neo@capiro.ai>\nAuthorDate: Mon Oct 12 21:27:42 2026 +0000\nCommit:     NEO MARTINEZ <neo@capiro.ai>\nCommitDate: Mon Oct 12 21:27:42 2026 +0000\n\n    Preserve lowercase activity history limit copy\n\n apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)\n"
+}

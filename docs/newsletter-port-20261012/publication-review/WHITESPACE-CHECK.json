@@ -1,0 +1,17 @@
+{
+  "producer": "root",
+  "check": "git diff --cached --check",
+  "exitCodeReportedByRoot": 2,
+  "reviewerExecutedCheck": false,
+  "result": "Five new blank line at EOF warnings in documentation/evidence only; not a clean diff-check pass.",
+  "warnings": [
+    "docs/newsletter-port-20261012/HANDOVER.md:28: new blank line at EOF.",
+    "docs/newsletter-port-20261012/asset-preservation/extract-assets.py:33: new blank line at EOF.",
+    "docs/newsletter-port-20261012/scope-audit/evidence/dedicated-frontend-identity-comparison.json:3849: new blank line at EOF.",
+    "docs/newsletter-port-20261012/scope-audit/evidence/schema-assets-lock-receipt.json:3578: new blank line at EOF.",
+    "docs/newsletter-port-20261012/scope-audit/evidence/source-dependency-receipt.json:7204: new blank line at EOF."
+  ],
+  "disposition": "Preserve captured helper and immutable audit bytes; no normalization performed. No asset/source whitespace change.",
+  "sourceLog": "/tmp/capiro-newsletter-assets-20261012/staged-diff-check.log",
+  "sourceLogSHA256": "6a8b1052fceb8152795930e0eab74a5cfaf5d82a2deeda62fbf6a67d2f603438"
+}

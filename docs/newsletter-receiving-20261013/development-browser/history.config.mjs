@@ -1,0 +1,2 @@
+import base from "/workspace/capiro-newsletter-port/apps/web/test/browser/playwright.config.ts";
+export default {...base, testDir:"/tmp/capiro-newsletter-lifecycle-browser-20261013", testMatch:['history-diagnostic.spec.ts'], workers:1, retries:0, webServer:undefined, outputDir:"/tmp/capiro-newsletter-lifecycle-browser-20261013/history-artifacts", reporter:[['list'],['json',{outputFile:"/tmp/capiro-newsletter-lifecycle-browser-20261013/history-results.json"}]]};

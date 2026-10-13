@@ -1,0 +1,121 @@
+{
+  "method": "Canonical scanModule parses source only; no app execution or build. Six function triggers, zero file triggers in these five files.",
+  "sourceStatus": "uncommitted final-candidate; refresh if any source changes",
+  "findings": [
+    {
+      "file": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+      "kind": "function",
+      "symbol": "OrdinaryEngagementScreen",
+      "line": 45,
+      "nonblank": 130,
+      "fingerprint": "72b4d083f4c0d90ce2ac0660d518fc63cc8f20037f995dcef98d8751b30d27d0"
+    },
+    {
+      "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
+      "kind": "function",
+      "symbol": "OutreachView",
+      "line": 21,
+      "nonblank": 125,
+      "fingerprint": "b86cd8cb940cc4e119e7723a8b55f82a82f6d175b26b428fe9324175f2223756"
+    },
+    {
+      "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
+      "kind": "function",
+      "symbol": "OutreachForm",
+      "line": 158,
+      "nonblank": 88,
+      "fingerprint": "d7e8f202c52c16b8bdf793e1e563d1e4ace0c1d63a6cd48b5338b21f5310a8aa"
+    },
+    {
+      "file": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
+      "kind": "function",
+      "symbol": "WorkspaceScreen",
+      "line": 35,
+      "nonblank": 207,
+      "fingerprint": "849d2840007f21da937f4b3f2c09a993d9444e3ff834a574467e10814d0d9160"
+    },
+    {
+      "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichBlockControls.tsx",
+      "kind": "function",
+      "symbol": "RichBlockControls",
+      "line": 15,
+      "nonblank": 100,
+      "fingerprint": "3cf80059dcb046d4af8f762b121a5512294ed2811c8643abdbe45adfe245cf79"
+    },
+    {
+      "file": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
+      "kind": "function",
+      "symbol": "RichNewsletterEditor",
+      "line": 29,
+      "nonblank": 136,
+      "fingerprint": "fad466d74b21eeea140d8bc5b52297cf3719e49a622e936fd6cb0fa0212bc9e7"
+    }
+  ],
+  "files": [
+    {
+      "path": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+      "sha256": "5fd7837cdfa80ef0207d8e45dde870a442f3ff798b8266a95989ac27dc20e0e5",
+      "nonblank": 173,
+      "functions": [
+        {
+          "name": "OrdinaryEngagementScreen",
+          "nonblankLines": 130,
+          "fingerprint": "72b4d083f4c0d90ce2ac0660d518fc63cc8f20037f995dcef98d8751b30d27d0"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/OutreachView.tsx",
+      "sha256": "e2795611b5783cdf5e7f616f6fa7201d914a664bb88703f23e86bf90427fbe73",
+      "nonblank": 391,
+      "functions": [
+        {
+          "name": "OutreachView",
+          "nonblankLines": 125,
+          "fingerprint": "b86cd8cb940cc4e119e7723a8b55f82a82f6d175b26b428fe9324175f2223756"
+        },
+        {
+          "name": "OutreachForm",
+          "nonblankLines": 88,
+          "fingerprint": "d7e8f202c52c16b8bdf793e1e563d1e4ace0c1d63a6cd48b5338b21f5310a8aa"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
+      "sha256": "7ec9d3ae32de4a11446190d4ee99b43b830ec44590983d155e49a78309ddf3a5",
+      "nonblank": 238,
+      "functions": [
+        {
+          "name": "WorkspaceScreen",
+          "nonblankLines": 207,
+          "fingerprint": "849d2840007f21da937f4b3f2c09a993d9444e3ff834a574467e10814d0d9160"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/rich-newsletter/RichBlockControls.tsx",
+      "sha256": "c252f1201084ddc3a3bbfdb19e49ae850adf7f020daa286bd7c9bb78a3418f95",
+      "nonblank": 121,
+      "functions": [
+        {
+          "name": "RichBlockControls",
+          "nonblankLines": 100,
+          "fingerprint": "3cf80059dcb046d4af8f762b121a5512294ed2811c8643abdbe45adfe245cf79"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/rich-newsletter/RichNewsletterEditor.tsx",
+      "sha256": "4cce004224a7cc56e313bd03eda347e97dd28920ce7b4a4a789f59e373b505d0",
+      "nonblank": 216,
+      "functions": [
+        {
+          "name": "RichNewsletterEditor",
+          "nonblankLines": 136,
+          "fingerprint": "fad466d74b21eeea140d8bc5b52297cf3719e49a622e936fd6cb0fa0212bc9e7"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,237 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-remaining/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config=/tmp/capiro-remaining-root-evidence/playwright.config.mjs",
+      "meeting-detail-current.spec.ts",
+      "--grep",
+      "MS06 baseline"
+    ],
+    "configFile": "/tmp/capiro-remaining-root-evidence/playwright.config.mjs",
+    "rootDir": "/workspace/capiro-remaining/apps/web/test/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-remaining-root-evidence/red-browser-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-remaining/apps/web/test/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-remaining-root-evidence/red-browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "meeting-detail-current.spec.ts",
+      "file": "meeting-detail-current.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "MS06 baseline: current supplied link appears with safe external-link attributes",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6303,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('link', { name: 'Join meeting', exact: true })\nExpected: \u001b[32m\"https://meet.example.test/alpha?code=synthetic\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'Join meeting', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('link', { name: 'Join meeting', exact: true })\nExpected: \u001b[32m\"https://meet.example.test/alpha?code=synthetic\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'Join meeting', exact: true })\u001b[22m\n\n    at /workspace/capiro-remaining/apps/web/test/browser/meeting-detail-current.spec.ts:50:22",
+                    "location": {
+                      "file": "/workspace/capiro-remaining/apps/web/test/browser/meeting-detail-current.spec.ts",
+                      "column": 22,
+                      "line": 50
+                    },
+                    "snippet": "  48 |   await openFirst(page);\n  49 |   const join = page.getByRole(\"link\", { name: \"Join meeting\", exact: true });\n> 50 |   await expect(join).toHaveAttribute(\"href\", meeting.joinLink);\n     |                      ^\n  51 |   await expect(join).toHaveAttribute(\"target\", \"_blank\");\n  52 |   await expect(join).toHaveAttribute(\"rel\", \"noopener noreferrer\");\n  53 |   await expect(join).toHaveAttribute(\"referrerpolicy\", \"no-referrer\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining/apps/web/test/browser/meeting-detail-current.spec.ts",
+                        "column": 22,
+                        "line": 50
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('link', { name: 'Join meeting', exact: true })\nExpected: \u001b[32m\"https://meet.example.test/alpha?code=synthetic\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'Join meeting', exact: true })\u001b[22m\n\n\n  48 |   await openFirst(page);\n  49 |   const join = page.getByRole(\"link\", { name: \"Join meeting\", exact: true });\n> 50 |   await expect(join).toHaveAttribute(\"href\", meeting.joinLink);\n     |                      ^\n  51 |   await expect(join).toHaveAttribute(\"target\", \"_blank\");\n  52 |   await expect(join).toHaveAttribute(\"rel\", \"noopener noreferrer\");\n  53 |   await expect(join).toHaveAttribute(\"referrerpolicy\", \"no-referrer\");\n    at /workspace/capiro-remaining/apps/web/test/browser/meeting-detail-current.spec.ts:50:22"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:00:25.109Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-root-evidence/red-browser-artifacts/meeting-detail-current-MS0-703f7-fe-external-link-attributes/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-root-evidence/red-browser-artifacts/meeting-detail-current-MS0-703f7-fe-external-link-attributes/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-root-evidence/red-browser-artifacts/meeting-detail-current-MS0-703f7-fe-external-link-attributes/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining/apps/web/test/browser/meeting-detail-current.spec.ts",
+                    "column": 22,
+                    "line": 50
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8480014ebeae5db125ca-04933dc4d4a0ad2a1c85",
+          "file": "meeting-detail-current.spec.ts",
+          "line": 44,
+          "column": 1
+        },
+        {
+          "title": "MS06 baseline: meetings retain selectable list beside current detail with Prep entry",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6322,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Selected meeting', exact: true }).getByRole('heading', { name: 'Synthetic briefing alpha' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Selected meeting', exact: true }).getByRole('heading', { name: 'Synthetic briefing alpha' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Selected meeting', exact: true }).getByRole('heading', { name: 'Synthetic briefing alpha' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Selected meeting', exact: true }).getByRole('heading', { name: 'Synthetic briefing alpha' })\u001b[22m\n\n    at /workspace/capiro-remaining/apps/web/test/browser/meeting-detail-current.spec.ts:68:5",
+                    "location": {
+                      "file": "/workspace/capiro-remaining/apps/web/test/browser/meeting-detail-current.spec.ts",
+                      "column": 5,
+                      "line": 68
+                    },
+                    "snippet": "  66 |   await expect(\n  67 |     detail.getByRole(\"heading\", { name: meeting.subject }),\n> 68 |   ).toBeVisible();\n     |     ^\n  69 |   await expect(page.getByRole(\"dialog\")).toHaveCount(0);\n  70 |   await expect(\n  71 |     detail.getByRole(\"tab\", { name: \"Prep\", exact: true }),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-remaining/apps/web/test/browser/meeting-detail-current.spec.ts",
+                        "column": 5,
+                        "line": 68
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('region', { name: 'Selected meeting', exact: true }).getByRole('heading', { name: 'Synthetic briefing alpha' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: 'Selected meeting', exact: true }).getByRole('heading', { name: 'Synthetic briefing alpha' })\u001b[22m\n\n\n  66 |   await expect(\n  67 |     detail.getByRole(\"heading\", { name: meeting.subject }),\n> 68 |   ).toBeVisible();\n     |     ^\n  69 |   await expect(page.getByRole(\"dialog\")).toHaveCount(0);\n  70 |   await expect(\n  71 |     detail.getByRole(\"tab\", { name: \"Prep\", exact: true }),\n    at /workspace/capiro-remaining/apps/web/test/browser/meeting-detail-current.spec.ts:68:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T20:00:32.223Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-remaining-root-evidence/red-browser-artifacts/meeting-detail-current-MS0-f8f94-rent-detail-with-Prep-entry/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-remaining-root-evidence/red-browser-artifacts/meeting-detail-current-MS0-f8f94-rent-detail-with-Prep-entry/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-remaining-root-evidence/red-browser-artifacts/meeting-detail-current-MS0-f8f94-rent-detail-with-Prep-entry/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-remaining/apps/web/test/browser/meeting-detail-current.spec.ts",
+                    "column": 5,
+                    "line": 68
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8480014ebeae5db125ca-8dd833895b1c1cad7a29",
+          "file": "meeting-detail-current.spec.ts",
+          "line": 56,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T20:00:24.578Z",
+    "duration": 14325.431,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "at": "2026-10-12T22:12:04.025115+00:00",
+  "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "verdict": "PASS_BOUNDED_SOURCE_LEDGER_ADDENDUM",
+  "files": [
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-1585438/EVIDENCE-REFERENCES.json",
+      "bytes": 4558,
+      "sha256": "1ed1c6f098fcf684eefb241857be87857ebadccbe9e96e31c1d24edd6a2df5c1"
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-1585438/LEDGER-ADDENDUM.json",
+      "bytes": 3468,
+      "sha256": "b24ad7844203a370e97a757889483f4cb4100eaa5031c73c2ce2471504fb5588"
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-1585438/PARSED-ASSERTION-VERIFICATION.json",
+      "bytes": 2957,
+      "sha256": "7272eab79830ba76a0bf84355603520b5873161c77fc7571d3cbee669bfb9203"
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-1585438/PRE-FREEZE-COUNT-CORRECTION.json",
+      "bytes": 429,
+      "sha256": "2915a15ed73303b8f19aae28d1559f36e78be30c16dbafce6a21677a31259344"
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-1585438/REPORT.md",
+      "bytes": 5562,
+      "sha256": "54485552eaa326dcc30465937ecfb6ad51941c6c0fde2facff87489d95d1a263"
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-1585438/SOURCE-LEDGER-VERIFICATION.json",
+      "bytes": 91535,
+      "sha256": "41978e201770d418d474f17da2e2315dc7acbf57ed35cc562ca9ad792e0356c6"
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-1585438/audit.py",
+      "bytes": 7436,
+      "sha256": "f7cd0d0fddfeeaa924b1c18a6a252973053dc8db836a9b83c673e8c7ae96f607"
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-1585438/parse-review-initial-top-level-only.mjs.txt",
+      "bytes": 4879,
+      "sha256": "d6a23a1f5d1328c9e257a3ff49b845a5faa97e203aa88da6e3565c2c05c1b8f9"
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-1585438/parse-review.mjs",
+      "bytes": 4867,
+      "sha256": "8d88d42b280d8799df1d8604b39287fd5385739a7d825c820efeb4b6c908aa27"
+    }
+  ],
+  "count": 9,
+  "bytes": 125691,
+  "selfExcluded": true,
+  "currentCombinedQualification": "NOT_CLAIMED_RUNNING_ROOT_OWNED"
+}

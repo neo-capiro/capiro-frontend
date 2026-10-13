@@ -1,0 +1,24 @@
+{
+  "name": "final-served-assets",
+  "command": [
+    "node",
+    "/tmp/capiro-newsletter-final-c8aa693e-20261013/verify-assets.mjs"
+  ],
+  "startedUTC": "2026-10-13T04:49:04.955525+00:00",
+  "endedUTC": "2026-10-13T04:49:05.770339+00:00",
+  "durationSeconds": 0.8148444849939551,
+  "exitCode": 0,
+  "sourceBefore": {
+    "head": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+    "tree": "9d11bfbd7121887bc06f5cb793e8a4c4e6e682b4",
+    "applicationTree": "79ae91f7a119e98b7ba612ceed2a4ca661944888",
+    "sourceDiff": ""
+  },
+  "sourceAfter": {
+    "head": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+    "tree": "9d11bfbd7121887bc06f5cb793e8a4c4e6e682b4",
+    "applicationTree": "79ae91f7a119e98b7ba612ceed2a4ca661944888",
+    "sourceDiff": ""
+  },
+  "sourceChanged": false
+}

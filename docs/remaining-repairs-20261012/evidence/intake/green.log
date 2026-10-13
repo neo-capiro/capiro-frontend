@@ -1,0 +1,165 @@
+
+Running 4 tests using 1 worker
+
+
+(node:710208) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/4] apps/web/tests/browser/remaining-intake.spec.ts:30:1 › CI-01 standard reader can inspect saved client details and government fields
+  1) apps/web/tests/browser/remaining-intake.spec.ts:30:1 › CI-01 standard reader can inspect saved client details and government fields 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Client details', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'Client details', exact: true })
+
+
+      58 |   await expect(
+      59 |     page.getByRole("heading", { name: "Client details", exact: true }),
+    > 60 |   ).toBeVisible();
+         |     ^
+      61 |   await expect(
+      62 |     page.getByText(details.primaryContactEmail, { exact: true }),
+      63 |   ).toBeVisible();
+        at /workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts:60:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-intake-evidence/green-output/remaining-intake-CI-01-sta-a5904-tails-and-government-fields/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-intake-evidence/green-output/remaining-intake-CI-01-sta-a5904-tails-and-government-fields/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-intake-evidence/green-output/remaining-intake-CI-01-sta-a5904-tails-and-government-fields/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-intake-evidence/green-output/remaining-intake-CI-01-sta-a5904-tails-and-government-fields/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:710430) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[2/4] apps/web/tests/browser/remaining-intake.spec.ts:97:1 › CI-02 view search selects the canonical current-client route
+  2) apps/web/tests/browser/remaining-intake.spec.ts:97:1 › CI-02 view search selects the canonical current-client route 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Switch client view: Overview' })
+
+
+      102 |   await page
+      103 |     .getByRole("button", { name: "Switch client view: Overview" })
+    > 104 |     .click();
+          |      ^
+      105 |   const search = page.getByRole("combobox", { name: "Jump to a view" });
+      106 |   await expect(search).toBeFocused();
+      107 |   await search.fill("files");
+        at /workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts:104:6
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-intake-evidence/green-output/remaining-intake-CI-02-vie-890ae-onical-current-client-route/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-intake-evidence/green-output/remaining-intake-CI-02-vie-890ae-onical-current-client-route/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-intake-evidence/green-output/remaining-intake-CI-02-vie-890ae-onical-current-client-route/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-intake-evidence/green-output/remaining-intake-CI-02-vie-890ae-onical-current-client-route/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:710915) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[3/4] apps/web/tests/browser/remaining-intake.spec.ts:118:1 › CI-03 account roster shows supplied member email and inline addition
+  3) apps/web/tests/browser/remaining-intake.spec.ts:118:1 › CI-03 account roster shows supplied member email and inline addition 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.boundingBox: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByLabel('Add team member', { exact: true })
+
+
+      127 |   const member = await page
+      128 |     .getByLabel("Add team member", { exact: true })
+    > 129 |     .boundingBox();
+          |      ^
+      130 |   const role = await page.getByLabel("Role", { exact: true }).boundingBox();
+      131 |   expect(member).not.toBeNull();
+      132 |   expect(role).not.toBeNull();
+        at /workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts:129:6
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-intake-evidence/green-output/remaining-intake-CI-03-acc-435b2-r-email-and-inline-addition/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-intake-evidence/green-output/remaining-intake-CI-03-acc-435b2-r-email-and-inline-addition/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-intake-evidence/green-output/remaining-intake-CI-03-acc-435b2-r-email-and-inline-addition/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-intake-evidence/green-output/remaining-intake-CI-03-acc-435b2-r-email-and-inline-addition/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:711215) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[4/4] apps/web/tests/browser/remaining-intake.spec.ts:139:1 › CI-04 choice groups retain their distinct desktop layouts
+  4) apps/web/tests/browser/remaining-intake.spec.ts:139:1 › CI-04 choice groups retain their distinct desktop layouts 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Add profile', exact: true }).first()
+
+
+      145 |     .getByRole("button", { name: "Add profile", exact: true })
+      146 |     .first()
+    > 147 |     .click();
+          |      ^
+      148 |   await page.getByRole("button", { name: /Manual entry/ }).click();
+      149 |   const dialog = page.getByRole("dialog", { name: "Add profile", exact: true });
+      150 |   const company = dialog.getByRole("group", {
+        at /workspace/capiro-remaining-intake/apps/web/tests/browser/remaining-intake.spec.ts:147:6
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-intake-evidence/green-output/remaining-intake-CI-04-cho-a0b9b-ir-distinct-desktop-layouts/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../tmp/capiro-remaining-intake-evidence/green-output/remaining-intake-CI-04-cho-a0b9b-ir-distinct-desktop-layouts/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../tmp/capiro-remaining-intake-evidence/green-output/remaining-intake-CI-04-cho-a0b9b-ir-distinct-desktop-layouts/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../tmp/capiro-remaining-intake-evidence/green-output/remaining-intake-CI-04-cho-a0b9b-ir-distinct-desktop-layouts/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  4 failed
+    apps/web/tests/browser/remaining-intake.spec.ts:30:1 › CI-01 standard reader can inspect saved client details and government fields 
+    apps/web/tests/browser/remaining-intake.spec.ts:97:1 › CI-02 view search selects the canonical current-client route 
+    apps/web/tests/browser/remaining-intake.spec.ts:118:1 › CI-03 account roster shows supplied member email and inline addition 
+    apps/web/tests/browser/remaining-intake.spec.ts:139:1 › CI-04 choice groups retain their distinct desktop layouts 

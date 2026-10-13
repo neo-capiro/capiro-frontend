@@ -33,7 +33,8 @@ function main(argv) {
   if (argv.length === 1 && argv[0] === '--help') { console.log(usage); return; }
   if (argv.length) throw Error(usage);
   const vendor = fileURLToPath(new URL('../vendor/', import.meta.url));
-  const manifests = ['meri-public-packages.json', 'onboard-public-packages.json'].map(name => JSON.parse(readFileSync(path.join(vendor, name), 'utf8')));
+  const manifests = ['meri-public-packages.json', 'newsletter-public-packages.json', 'onboard-public-packages.json']
+    .map(name => JSON.parse(readFileSync(path.join(vendor, name), 'utf8')));
   const records = manifests.flatMap(manifest => verifyPackageInputs(manifest, name => readFileSync(path.join(vendor, name))));
   console.log(JSON.stringify({ schema: 'capiro-public-package-inputs/1', records }, null, 2));
 }

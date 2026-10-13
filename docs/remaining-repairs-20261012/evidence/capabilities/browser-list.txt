@@ -1,0 +1,49 @@
+Listing tests:
+  capability-boundary.spec.ts:10:1 › capability refresh failure removes cached cards, counts and the open editor
+  capability-boundary.spec.ts:46:1 › fit read failure removes cached targets and computed count
+  capability-boundary.spec.ts:71:1 › editing rejects a receipt for another capability without closing the draft
+  capability-boundary.spec.ts:99:1 › late fit refresh cannot update the cache after the view unmounts
+  capability-list-registration-layout.spec.ts:25:3 › phone capability rows retain native content and keyboard selection in light
+  capability-list-registration-layout.spec.ts:25:3 › phone capability rows retain native content and keyboard selection in dark
+  capability-list-registration-layout.spec.ts:106:1 › compact rows wrap long supplied content and desktop retains descriptive cards
+  capability-list-registration-layout.spec.ts:148:1 › registration summary uses aligned divided rows and the Figma dialog width
+  capability-list-registration-layout.spec.ts:189:1 › registration rows wrap long values and preserve missing-value and EIN review states on phone
+  capability-presentation-visual.spec.ts:42:3 › Figma capability Profile, Documents and create surfaces at desktop-light
+  capability-presentation-visual.spec.ts:42:3 › Figma capability Profile, Documents and create surfaces at phone-light
+  capability-presentation-visual.spec.ts:42:3 › Figma capability Profile, Documents and create surfaces at phone-dark
+  capability-presentation.spec.ts:11:1 › saved Profile keeps the exact native payload and draft across Documents and closed Details
+  capability-presentation.spec.ts:110:1 › create retains optional MRL and Notes and exposes saved-only fields after its one native create
+  capability-presentation.spec.ts:195:1 › tab and disclosure keyboard navigation excludes inactive Profile controls and restores opener focus
+  capability-presentation.spec.ts:263:1 › saving an invalid Name inside collapsed Details reveals and focuses the field without writing
+  capability-presentation.spec.ts:295:1 › a save refusal preserves the mounted Profile draft and the explicit retry action
+  capability-presentation.spec.ts:331:1 › pending save remains one operation while switching capability tabs
+  capability-presentation.spec.ts:373:1 › Documents tab keeps the existing source-scoped upload and file-read boundary
+  capability-registration-boundary.spec.ts:10:1 › registration client refresh failure removes the retained editor and values
+  capability-registration-boundary.spec.ts:33:1 › registration identity invalidation disables the cached administrator editor
+  capability-registration-boundary.spec.ts:45:1 › registration save rejects a receipt for another client and retains the draft
+  capability-registration-boundary.spec.ts:69:1 › late registration save cannot invalidate its original cache after unmount
+  capability-registration-concurrency.spec.ts:11:3 › registration receipt cannot publish after a denied client read during its PUT
+  capability-registration-concurrency.spec.ts:11:3 › registration receipt cannot publish after a replaced client read during its PUT
+  capability-registration-concurrency.spec.ts:11:3 › registration receipt cannot publish after a pending client read during its PUT
+  capability-registration-concurrency.spec.ts:84:1 › registration save does not dismiss a failed confirmation read as successful current data
+  capability-registration-execution.spec.ts:16:3 › registration write rechecks the native administrator gate after standard-role
+  capability-registration-execution.spec.ts:16:3 › registration write rechecks the native administrator gate after role
+  capability-registration-execution.spec.ts:16:3 › registration write rechecks the native administrator gate after invalidate
+  capability-registration-execution.spec.ts:16:3 › registration write rechecks the native administrator gate after refetch-identity
+  capability-registration-execution.spec.ts:48:3 › late registration receipt has no old-view effects after actor
+  capability-registration-execution.spec.ts:48:3 › late registration receipt has no old-view effects after standard-role
+  capability-registration-execution.spec.ts:48:3 › late registration receipt has no old-view effects after invalidate
+  capability-registration-execution.spec.ts:48:3 › late registration receipt has no old-view effects after client
+  capability-registration-execution.spec.ts:102:1 › registration save freezes one draft, preserves legacy codes and refreshes exact current values
+  capability-registration-execution.spec.ts:165:3 › registration HTTP 403 write failure preserves the draft and never retries itself
+  capability-registration-execution.spec.ts:165:3 › registration HTTP 503 write failure preserves the draft and never retries itself
+  capability-registration-reads.spec.ts:12:5 › registration read view recovers from a cached HTTP 403 failure
+  capability-registration-reads.spec.ts:12:5 › registration read view recovers from a cached HTTP 503 failure
+  capability-registration-reads.spec.ts:12:5 › registration editor recovers from a cached HTTP 403 failure
+  capability-registration-reads.spec.ts:12:5 › registration editor recovers from a cached HTTP 503 failure
+  capability-registration-reads.spec.ts:51:1 › registration read rejects a successful response for another native client
+  capability-registration-reads.spec.ts:72:1 › a changed registration snapshot replaces stale inputs while unrelated notes preserve the local draft
+  capability-registration-reads.spec.ts:104:1 › closing registrations discards its edit lifetime and reopens from the current client
+  capability-registration-visual.spec.ts:19:3 › registration current-read and edit states render at desktop-light
+  capability-registration-visual.spec.ts:19:3 › registration current-read and edit states render at phone-dark
+Total: 47 tests in 9 files

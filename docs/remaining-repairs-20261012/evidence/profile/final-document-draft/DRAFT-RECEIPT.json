@@ -1,0 +1,228 @@
+{
+  "at": "2026-10-12T22:20:28.509211+00:00",
+  "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "intendedDestination": "docs/remaining-repairs-20261012",
+  "status": "DRAFT_FOR_ROOT_REVIEW",
+  "portfolioBrowser": "PENDING_NOT_INFERRED",
+  "runtimeTestsBuildTypecheckOrRepositoryEdits": false,
+  "files": [
+    {
+      "path": "HANDOVER.md",
+      "bytes": 6305,
+      "words": 731,
+      "sha256": "6757ba2e2624af416d09af55b8270ee1ca3cdf9ff0aecf1f68fdb275e3ee6121"
+    },
+    {
+      "path": "QUALIFICATION.md",
+      "bytes": 6692,
+      "words": 745,
+      "sha256": "f7411fffad21603075c68b78e62268e2e4792ed2e1a8f2facfb5e119b65fb8f0"
+    }
+  ],
+  "relativeLinks": [
+    {
+      "document": "HANDOVER.md",
+      "relativeLink": "QUALIFICATION.md",
+      "localSource": "/tmp/capiro-remaining-profile-evidence/final-document-draft/QUALIFICATION.md",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "HANDOVER.md",
+      "relativeLink": "evidence/final-ledger-review/REPORT.md",
+      "localSource": "/tmp/capiro-remaining-final-ledger-review/REPORT.md",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "HANDOVER.md",
+      "relativeLink": "evidence/final-ledger-review/SCOPE-GAPS.md",
+      "localSource": "/tmp/capiro-remaining-final-ledger-review/SCOPE-GAPS.md",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "HANDOVER.md",
+      "relativeLink": "evidence/root/integration-map-final-1585438.json",
+      "localSource": "/tmp/capiro-remaining-root-evidence/integration-map-final-1585438.json",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "HANDOVER.md",
+      "relativeLink": "evidence/root/FROZEN-SOURCE-RECEIPT-1585438.json",
+      "localSource": "/tmp/capiro-remaining-root-evidence/FROZEN-SOURCE-RECEIPT-1585438.json",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "HANDOVER.md",
+      "relativeLink": "STRUCTURE-REVIEW.md",
+      "localSource": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/STRUCTURE-REVIEW.md",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "HANDOVER.md",
+      "relativeLink": "evidence/root/REMOTE-HEADS-FROZEN-1585438.txt",
+      "localSource": "/tmp/capiro-remaining-root-evidence/REMOTE-HEADS-FROZEN-1585438.txt",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "HANDOVER.md",
+      "relativeLink": "PLAN.md",
+      "localSource": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/PLAN.md",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "HANDOVER.md",
+      "relativeLink": "evidence/root/source-archive-1585438/SOURCE-ARCHIVE-RECEIPT.json",
+      "localSource": "/tmp/capiro-remaining-root-evidence/source-archive-1585438/SOURCE-ARCHIVE-RECEIPT.json",
+      "status": "explicit pending root-created receipt"
+    },
+    {
+      "document": "HANDOVER.md",
+      "relativeLink": "EVIDENCE-MANIFEST.json",
+      "localSource": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/EVIDENCE-MANIFEST.json",
+      "status": "explicit pending root-created receipt"
+    },
+    {
+      "document": "HANDOVER.md",
+      "relativeLink": "PRESERVATION-VERIFICATION.json",
+      "localSource": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/PRESERVATION-VERIFICATION.json",
+      "status": "explicit pending root-created receipt"
+    },
+    {
+      "document": "HANDOVER.md",
+      "relativeLink": "design-baseline/README.md",
+      "localSource": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/design-baseline/README.md",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "HANDOVER.md",
+      "relativeLink": "design-baseline/ADDITIONAL-CAPTURES.md",
+      "localSource": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/design-baseline/ADDITIONAL-CAPTURES.md",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "relativeLink": "HANDOVER.md",
+      "localSource": "/tmp/capiro-remaining-profile-evidence/final-document-draft/HANDOVER.md",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "relativeLink": "evidence/qualification/final-1585438/clean-install-exit.json",
+      "localSource": "/tmp/capiro-remaining-qualification/final-1585438/clean-install-exit.json",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "relativeLink": "evidence/qualification/final-1585438/corrected-regression-results.json",
+      "localSource": "/tmp/capiro-remaining-qualification/final-1585438/corrected-regression-results.json",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "relativeLink": "evidence/qualification/final-1585438/combined-check.log",
+      "localSource": "/tmp/capiro-remaining-qualification/final-1585438/combined-check.log",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "relativeLink": "evidence/qualification/final-1585438/combined-check-exit.json",
+      "localSource": "/tmp/capiro-remaining-qualification/final-1585438/combined-check-exit.json",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "relativeLink": "evidence/qualification/final-1585438/elements-check.log",
+      "localSource": "/tmp/capiro-remaining-qualification/final-1585438/elements-check.log",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "relativeLink": "evidence/qualification/final-1585438/BUILD-IDENTITY.json",
+      "localSource": "/tmp/capiro-remaining-qualification/final-1585438/BUILD-IDENTITY.json",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "relativeLink": "evidence/qualification/final-1585438/production-artifacts/production-smoke.json",
+      "localSource": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/production-smoke.json",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "relativeLink": "evidence/qualification/final-1585438/production-server-exit.json",
+      "localSource": "/tmp/capiro-remaining-qualification/final-1585438/production-server-exit.json",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "relativeLink": "evidence/qualification/final-1585438/docker-context.log",
+      "localSource": "/tmp/capiro-remaining-qualification/final-1585438/docker-context.log",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "relativeLink": "evidence/qualification/final-1585438/modules-browser-results.json",
+      "localSource": "/tmp/capiro-remaining-qualification/final-1585438/modules-browser-results.json",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "relativeLink": "evidence/qualification/final-1585438/modules-browser-exit.json",
+      "localSource": "/tmp/capiro-remaining-qualification/final-1585438/modules-browser-exit.json",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "relativeLink": "evidence/qualification/final-1585438/portfolio-browser-running.json",
+      "localSource": "/tmp/capiro-remaining-qualification/final-1585438/portfolio-browser-running.json",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "relativeLink": "evidence/qualification/final-1585438/docker-build.log",
+      "localSource": "/tmp/capiro-remaining-qualification/final-1585438/docker-build.log",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "relativeLink": "evidence/qualification/final-1585438/docker-build-exit.json",
+      "localSource": "/tmp/capiro-remaining-qualification/final-1585438/docker-build-exit.json",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "relativeLink": "evidence/root/LIBRARY-ARCHIVE-SAVE-BLOCKER.json",
+      "localSource": "/tmp/capiro-remaining-root-evidence/LIBRARY-ARCHIVE-SAVE-BLOCKER.json",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "relativeLink": "evidence/root/PR15-104495D-FAILED-CHECKPOINT.json",
+      "localSource": "/tmp/capiro-remaining-root-evidence/PR15-104495D-FAILED-CHECKPOINT.json",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "relativeLink": "evidence/qualification/final-adbc84b/PORTFOLIO-FINAL-SUMMARY.json",
+      "localSource": "/tmp/capiro-remaining-qualification/final-adbc84b/PORTFOLIO-FINAL-SUMMARY.json",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "relativeLink": "evidence/root/PR15-D68-MODULES-FAILED-CHECKPOINT.md",
+      "localSource": "/tmp/capiro-remaining-root-evidence/PR15-D68-MODULES-FAILED-CHECKPOINT.md",
+      "status": "verified local source for planned relative destination"
+    },
+    {
+      "document": "QUALIFICATION.md",
+      "relativeLink": "evidence/final-ledger-review/REPORT.md",
+      "localSource": "/tmp/capiro-remaining-final-ledger-review/REPORT.md",
+      "status": "verified local source for planned relative destination"
+    }
+  ],
+  "publicationMappingSource": "/tmp/capiro-remaining-qualification/preserve-evidence.py",
+  "notes": [
+    "Source archive, evidence totals and final Portfolio result remain placeholders.",
+    "All existing source links verified against local files selected by root publication mapping; three receipt links are explicitly pending.",
+    "Original failure artifacts were only read, never changed."
+  ]
+}

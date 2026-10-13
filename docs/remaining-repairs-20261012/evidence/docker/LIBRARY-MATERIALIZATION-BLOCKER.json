@@ -1,0 +1,29 @@
+{
+  "checkedUTC": "2026-10-12T21:03:28.354688+00:00",
+  "currentHelperSHA256": "5e1557817be17db06e2375f8c34ed83e948d520242e5ee4cb50a30c7a4c83378",
+  "readStatus": "All3 exact Library references read completely through authorized connector; read response preserved",
+  "materializationStatus": "FAILED; no original local files exist, no original-byte custody claim",
+  "observedFailure": "URLError / OSError: Tunnel connection failed: 403 Forbidden",
+  "approvalReview": "No auto-review rejection; network/proxy failure persisted through prior approved execution retry",
+  "scope": "The implementation fix and actual Docker context regression were independently established from mounted Git source; shipping attachments are references, not locally verified original-byte evidence",
+  "attempts": [
+    {
+      "index": 0,
+      "log": "library-materialize-final-0.log",
+      "sha256": "c1d9495c91c35d40fe735ca8b1d0078ec4924cca73266c90d1e0b2e288f730ce",
+      "exitCode": 1
+    },
+    {
+      "index": 1,
+      "log": "library-materialize-final-1.log",
+      "sha256": "c1d9495c91c35d40fe735ca8b1d0078ec4924cca73266c90d1e0b2e288f730ce",
+      "exitCode": 1
+    },
+    {
+      "index": 2,
+      "log": "library-materialize-final-2.log",
+      "sha256": "c1d9495c91c35d40fe735ca8b1d0078ec4924cca73266c90d1e0b2e288f730ce",
+      "exitCode": 1
+    }
+  ]
+}

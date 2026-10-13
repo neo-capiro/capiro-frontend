@@ -1,0 +1,30 @@
+private async recomputeMeetingVisibility(
+    tx: Prisma.TransactionClient,
+    ctx: TenantContext,
+    meetingId: string,
+  ): Promise<void> {
+    const [prep, note, debrief, attachment] = await Promise.all([
+      tx.meetingPrep.findFirst({
+        where: { meetingId, tenantId: ctx.tenantId, sharedAt: { not: null } },
+        select: { id: true },
+      }),
+      tx.meetingNote.findFirst({
+        where: { meetingId, tenantId: ctx.tenantId, sharedAt: { not: null } },
+        select: { id: true },
+      }),
+      tx.meetingDebrief.findFirst({
+        where: { meetingId, tenantId: ctx.tenantId, sharedAt: { not: null } },
+        select: { id: true },
+      }),
+      tx.engagementAttachment.findFirst({
+        where: { meetingId, tenantId: ctx.tenantId, sharedAt: { not: null } },
+        select: { id: true },
+      }),
+    ]);
+    if (!prep && !note && !debrief && !attachment) {
+      await tx.meeting.update({
+        where: { id: meetingId },
+        data: { visibility: MeetingVisibility.private, sharedAt: null, sharedByUserId: null },
+      });
+    }
+  }

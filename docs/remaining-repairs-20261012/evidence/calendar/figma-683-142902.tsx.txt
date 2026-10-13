@@ -1,0 +1,38 @@
+export default function MeetingDialogUnshare() {
+  return (
+    <div className="bg-[var(--card,white)] border border-[var(--border,#e7e5e4)] border-solid content-stretch flex flex-col gap-[var(--theme(spacing.4),16px)] items-start overflow-clip p-[var(--theme(spacing.6),24px)] relative rounded-[var(--radius-2xl,16px)] size-full" data-node-id="683:142902" data-name="Meeting dialog · unshare">
+      <div className="content-stretch flex gap-[var(--theme(spacing.2),8px)] items-center overflow-clip relative shrink-0 w-full" data-node-id="683:142903" data-name="Dialog heading">
+        <p className="[word-break:break-word] flex-[1_0_0] font-['Geist:Medium'] font-medium leading-[1.3] min-w-px relative text-[20px] text-[color:var(--foreground,#0a0a0a)] tracking-[-0.3px]" data-node-id="683:142904">
+          Unshare artifacts?
+        </p>
+        <button className="content-stretch cursor-pointer flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="683:142905" data-name="Dialog · Close">
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I683:142905;12:385">
+            ×
+          </p>
+        </button>
+      </div>
+      <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] w-full" data-node-id="683:142912">
+        Remove the selected shared artifacts from Anduril’s Documents and your firm’s Meeting Library.
+      </p>
+      <div className="content-stretch flex flex-col gap-[var(--theme(spacing.3),12px)] items-start overflow-clip relative shrink-0 w-full" data-node-id="683:142913" data-name="Dialog body">
+        <p className="[word-break:break-word] font-['Geist:Regular'] font-normal leading-[1.45] relative shrink-0 text-[13px] text-[color:var(--muted-foreground,#78716c)] tracking-[-0.039px] w-full" data-node-id="683:142922">
+          The meeting artifacts are retained privately. You can explicitly share them again.
+        </p>
+      </div>
+      <div className="content-stretch cursor-pointer flex gap-[var(--theme(spacing.2),8px)] items-center overflow-clip relative shrink-0 w-full" data-node-id="683:142914" data-name="Dialog footer">
+        <button className="bg-[var(--card,white)] border border-[var(--input,#e7e5e4)] border-solid content-stretch drop-shadow-[0px_1px_1px_rgba(12,10,9,0.05)] flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="683:142915" data-name="Dialog · Cancel">
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--foreground,#0a0a0a)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I683:142915;12:379">
+            Cancel
+          </p>
+        </button>
+        <button className="content-stretch drop-shadow-[0px_1px_1px_rgba(12,10,9,0.14)] flex gap-[8px] h-[36px] items-center px-[14px] relative rounded-[var(--radius-lg,10px)] shrink-0" data-node-id="683:142923" data-name="Submit · Unshare all">
+          <div aria-hidden className="absolute inset-0 pointer-events-none rounded-[var(--radius-lg,10px)]" style={{ backgroundImage: "linear-gradient(167.74020391015245deg, rgb(36, 36, 36) 0%, rgb(10, 10, 10) 100%)" }} />
+          <p className="[word-break:break-word] font-['Geist:Medium'] font-medium leading-[1.2] relative shrink-0 text-[14px] text-[color:var(--primary-foreground,white)] text-left tracking-[-0.07px] whitespace-nowrap" data-node-id="I683:142923;12:373">
+            Unshare all
+          </p>
+          <div className="absolute inset-0 pointer-events-none rounded-[inherit] shadow-[inset_0px_1px_0px_0px_rgba(255,255,255,0.14)]" />
+        </button>
+      </div>
+    </div>
+  );
+}

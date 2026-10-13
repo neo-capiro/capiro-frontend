@@ -1,0 +1,63 @@
+{
+  "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "recordedUTC": "2026-10-12T22:15:43.437365+00:00",
+  "versions": [
+    {
+      "command": [
+        "node",
+        "--version"
+      ],
+      "exitCode": 0,
+      "output": "v24.19.0"
+    },
+    {
+      "command": [
+        "npm",
+        "--version"
+      ],
+      "exitCode": 0,
+      "output": "11.9.0"
+    },
+    {
+      "command": [
+        "git",
+        "--version"
+      ],
+      "exitCode": 0,
+      "output": "git version 2.52.0"
+    },
+    {
+      "command": [
+        "/usr/bin/chromium",
+        "--version"
+      ],
+      "exitCode": 0,
+      "output": "Chromium 154.0.8037.57 built on Debian GNU/Linux 13 (trixie)"
+    },
+    {
+      "command": [
+        "python3",
+        "--version"
+      ],
+      "exitCode": 0,
+      "output": "Python 3.12.14"
+    },
+    {
+      "command": [
+        "uname",
+        "-sm"
+      ],
+      "exitCode": 0,
+      "output": "Linux x86_64"
+    }
+  ],
+  "installedPackages": {
+    "@playwright/test": "1.61.1",
+    "next": "16.4.0",
+    "react": "19.3.0",
+    "radix-ui": "1.7.0",
+    "@radix-ui/react-select": "2.3.8",
+    "typescript": "5.9.3"
+  },
+  "scope": "Read-only installed-tool versions during frozen qualification; no dependency changes."
+}

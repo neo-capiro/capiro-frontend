@@ -1,0 +1,106 @@
+{
+  "base": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+  "head": "5291c717e77c8b3ffdc995a4e20080c4964483fd",
+  "files": [
+    {
+      "path": "apps/web/public/design/remaining-profile/file-text.svg",
+      "sha256": "44c3171673e553972f34198f8518b3c7eafe7460ae8e64fe0230f86e4490fa27"
+    },
+    {
+      "path": "apps/web/public/design/remaining-profile/mail.svg",
+      "sha256": "6e408546bacc34da3cae57ef4a4545c1328826599bd096a2f076507c8128e3cf"
+    },
+    {
+      "path": "apps/web/public/design/remaining-profile/phone.svg",
+      "sha256": "66df14e84ed694495210acbf113402185859046aabb8882aaeb94a2cdce3dae1"
+    },
+    {
+      "path": "apps/web/public/design/remaining-profile/provenance.json",
+      "sha256": "bf3b0206e695d72dfd9043f4760ec3ae0f80c72a24d84b5465c5f391b178dbfd"
+    },
+    {
+      "path": "apps/web/public/design/remaining-profile/sticky-note.svg",
+      "sha256": "ea1903caf9804f694b2449b7c6bd449c54385a83738bd682b94ef2fc6044b7a3"
+    },
+    {
+      "path": "apps/web/public/design/remaining-profile/users.svg",
+      "sha256": "0b02d58c80d492ce1e15d28b77777d761558f6304a5e486ce0993d8dd3131785"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ActivityFeed.tsx",
+      "sha256": "324adfb77bc9ac00e0d48f8f9d9024702371a44910b12473e71a390ae9d30927"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx",
+      "sha256": "eead1f4ddbe3d8fc1499b9fe41b1d4f6b8f60ead77564d87ca167b85aabdc2ad"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx",
+      "sha256": "64cc056a645a42c851d6b8b65c8a49c24e29ef3e5aecf842eec4db92991a9d2b"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilitiesManager.tsx",
+      "sha256": "87ec2c278a6cfdf4d02539f0b92d5b79c15075b4391393c86b72bce2567ea0de"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilityDialog.tsx",
+      "sha256": "eed360cf9d619188f52c999b80ce85ea6aa9999df896b584891b85f7fa490bce"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilityEditor.tsx",
+      "sha256": "c49006d0aa6b04746c6c4b76f7debcd2f3915c1be6cd861cb4124c99964f4307"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilityFields.tsx",
+      "sha256": "4939af04cd69cac9ce712237f75a49bfd2f4125e1e63b0e20b7641de088045da"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilityGeocoding.tsx",
+      "sha256": "5419bc8e5d00584177e1ad3e82ccd33d741f0491446eb9f8c4124d8376c135f5"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/activity-presentation.ts",
+      "sha256": "a1e6e919f742eda6fba0ea70894fcb2a6b736c29ca6b32861d55df470ed4f7e2"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/facilities-manager.module.css",
+      "sha256": "5694ba3e692b77664303dd2dcc454d16304b9b7699e11cb86e8635378adb1c5c"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/overview.module.css",
+      "sha256": "8d8b6973d614be0101faee73ce7c17af18a7a1ca0656f1c492a2396a1f8b0893"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/FileToolbar.tsx",
+      "sha256": "f4333e48b3818aca8e74587f5bf732858bc031c9a7c7f014ccdd1307d909d3d7"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+      "sha256": "18d6f94455f08109e3883c569bc4203a198c5004aaa42bd42add8143adfc95bd"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/FolderCards.tsx",
+      "sha256": "b4b077ba3e9d65cd8a3f4c47364bd28a9033753e3314ce5907e8bd3eafff2f16"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/files.module.css",
+      "sha256": "a9e1717356e4fa92edc918f53cf38e5da90c89f25beb2bb2ad7ae97b7c495063"
+    },
+    {
+      "path": "apps/web/tests/browser/profile-current-state.spec.ts",
+      "sha256": "26ef8d88a3ed49bf6e8c1a7b36944f0dfcc981771009517aae9c21430ac8612e"
+    },
+    {
+      "path": "apps/web/tests/browser/profile-presentation.spec.ts",
+      "sha256": "90c9577c6cdecd8c0bdc16868b3edcbd02dd888d68b9d156bec39854ae49e1f1"
+    },
+    {
+      "path": "apps/web/tests/browser/profile-write-lifetime.spec.ts",
+      "sha256": "70bb8a5a331f7fc9b22c4e408e9e8d5da139d47f74aadd80910ca927999b9a54"
+    },
+    {
+      "path": "apps/web/tests/profile-presentation.test.ts",
+      "sha256": "5e09463343c1b016826bbb3ccffae64169a7131a85375f48ad4e0bc3248ba125"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+
+ RUN  v4.1.11 /workspace/capiro-remaining-mail
+
+No test files found, exiting with code 1
+
+filter: apps/web/tests/mail-body.test.ts
+include: tests/**/*.test.ts
+exclude:  **/node_modules/**, **/.git/**
+

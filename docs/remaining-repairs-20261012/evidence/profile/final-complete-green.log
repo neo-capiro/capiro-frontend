@@ -1,0 +1,23 @@
+
+Running 16 tests using 1 worker
+
+(node:764219) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 apps/web/tests/browser/profile-presentation.spec.ts:92:7 › facilities manager shows saved cards and inline editable fields at 1440px (3.5s)
+  ✓   2 apps/web/tests/browser/profile-presentation.spec.ts:144:7 › timeline groups dates and expands the existing filtered feed at 1440px (3.1s)
+  ✓   3 apps/web/tests/browser/profile-presentation.spec.ts:232:7 › Files source chips and folder cards retain native provenance at 1440px (2.7s)
+  ✓   4 apps/web/tests/browser/profile-presentation.spec.ts:92:7 › facilities manager shows saved cards and inline editable fields at 360px (2.6s)
+  ✓   5 apps/web/tests/browser/profile-presentation.spec.ts:144:7 › timeline groups dates and expands the existing filtered feed at 360px (2.8s)
+  ✓   6 apps/web/tests/browser/profile-presentation.spec.ts:232:7 › Files source chips and folder cards retain native provenance at 360px (2.5s)
+  ✓   7 apps/web/tests/browser/profile-presentation.spec.ts:291:5 › facilities manager saves inline edits through the existing receipt contract (2.6s)
+  ✓   8 apps/web/tests/browser/profile-presentation.spec.ts:323:5 › facilities manager preserves the unknown create fence across close and reopen (2.8s)
+  ✓   9 apps/web/tests/browser/facility-manager-review.spec.ts:10:7 › inline facility recovery adopts the reviewed record after remote update (1.6s)
+  ✓  10 apps/web/tests/browser/facility-manager-review.spec.ts:10:7 › inline facility recovery adopts the reviewed record after uncertain applied edit (1.6s)
+  ✓  11 apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:26:7 › uncertain activity stays fenced through expand and return (2.8s)
+  ✓  12 apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:26:7 › uncertain activity stays fenced through native pinned regrouping (2.6s)
+  ✓  13 apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:87:5 › pending activity stays fenced while its response is held across expand and return (2.5s)
+  ✓  14 apps/web/tests/browser/timeline-presentation-lifetime.spec.ts:138:5 › expanded Log activity reuses the existing Quick log uncertain creation owner (2.8s)
+  ✓  15 apps/web/tests/browser/files-view-contrast.spec.ts:5:7 › selected Files view keeps readable text while hovered at 1440px (2.3s)
+  ✓  16 apps/web/tests/browser/files-view-contrast.spec.ts:5:7 › selected Files view keeps readable text while hovered at 360px (2.2s)
+
+  16 passed (43.6s)

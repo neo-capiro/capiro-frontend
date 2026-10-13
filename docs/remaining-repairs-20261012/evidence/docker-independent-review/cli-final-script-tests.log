@@ -1,0 +1,11 @@
+✔ shipping SSR entry is import-safe and refuses invalid/reused output before download (248.85671ms)
+✔ container smoke documents exits and rejects invalid input before Docker allocation (11.659444ms)
+✔ Docker context regression is import-safe and refuses invalid or reused outputs before allocation (469.257514ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 786.993136

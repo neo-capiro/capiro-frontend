@@ -1,0 +1,35 @@
+✖ newsletter browser boundary admits only its two governed public subpaths (6.361818ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 277.116116
+
+✖ failing tests:
+
+test at scripts/architecture.test.mjs:312:1
+✖ newsletter browser boundary admits only its two governed public subpaths (6.361818ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + [
+  +   'apps/web/src/features/modules/workspace/Newsletter.ts: non-public package import @capiro/shared/newsletter',
+  +   'apps/web/src/features/modules/workspace/Newsletter.ts: non-public package import @capiro/shared/newsletter-render'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///workspace/capiro-newsletter-port/scripts/architecture.test.mjs:315:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 'apps/web/src/features/modules/workspace/Newsletter.ts: non-public package import @capiro/shared/newsletter', 'apps/web/src/features/modules/workspace/Newsletter.ts: non-public package import @capiro/shared/newsletter-render' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
