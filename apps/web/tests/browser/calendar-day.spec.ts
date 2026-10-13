@@ -147,7 +147,11 @@ test("Day date picker and Today follow the selected timezone and keep Master sco
   );
   expect(fixture.writes).toEqual([]);
   expect(fixture.unexpected).toEqual([]);
-  await expect(page.locator(".sx__week-grid__hour-text").first()).toBeVisible();
+  await expect(
+    page
+      .locator('[data-view="day"] .sx__week-grid__hour-text')
+      .filter({ hasText: /^1 AM$/ }),
+  ).toBeVisible();
   expect(fixture.errors).toEqual([]);
 });
 
