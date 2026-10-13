@@ -5,7 +5,6 @@ import { queryString } from "@/shared/portfolio/api/http";
 import {
   hearingPageSchema,
   taskPageSchema,
-  deadlineSchema,
   meetingSchema,
   type CalendarFeed,
   type CalendarItem,
@@ -126,41 +125,8 @@ export async function fetchPlanner(
       : [],
   };
 }
-export async function fetchUpcomingDeadlines(
-  api: ApiClient,
-  startDay: string,
-  endDay: string,
-  signal?: AbortSignal,
-): Promise<CalendarFeed> {
-  const rows = await api.request(
-    "core",
-    "federal-register/upcoming-deadlines",
-    z.array(deadlineSchema),
-    { signal },
-  );
-  return {
-    items: rows
-      .filter(
-        (row) =>
-          row.commentEndDate &&
-          row.commentEndDate.slice(0, 10) >= startDay &&
-          row.commentEndDate.slice(0, 10) < endDay,
-      )
-      .map((row) => ({
-        key: `deadline:${row.documentNumber}`,
-        kind: "deadline",
-        sourceId: row.documentNumber,
-        title: row.title,
-        day: row.commentEndDate!.slice(0, 10),
-        timeZone: "America/New_York",
-        href: row.htmlUrl ?? undefined,
-        provenance: "Federal Register public comment deadline; date only",
-      })),
-    limitations: [
-      "Deadline source currently returns at most 50 upcoming records within the next 30 days. It cannot establish a complete historical or extended calendar.",
-    ],
-  };
-}
+// Preserve the internal reader API while replacing its fixed upcoming window.
+export { fetchCommentDeadlines as fetchUpcomingDeadlines } from "./comment-feed";
 export function deduplicate(items: CalendarItem[]) {
   return [...new Map(items.map((item) => [item.key, item])).values()];
 }

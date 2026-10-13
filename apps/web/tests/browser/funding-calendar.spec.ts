@@ -6,23 +6,33 @@ import {
   fundingRecord,
 } from "../funding-calendar-fixtures";
 import { installFixtures, json } from "./fixtures";
+import { commentPage, commentRecord } from "../comment-calendar-fixtures";
 
 const path =
   "/calendar-boundary.html?view=agenda&date=2026-10-15&zone=America/New_York";
 const fundingRoute = "**/core/intelligence/opportunities/v2/**";
 const regulatory = {
-  id: "synthetic-regulatory",
-  documentNumber: "2026-synthetic",
+  ...commentRecord("2026-12346", "2026-10-14"),
   title: "Synthetic regulatory comment deadline",
-  commentEndDate: "2026-10-14",
-  effectiveDate: null,
   htmlUrl: null,
 };
 
 async function installCalendar(page: Page) {
   const unexpected = await installFixtures(page);
-  await page.route("**/core/federal-register/upcoming-deadlines", (route) =>
-    json(route, [regulatory]),
+  await page.route(
+    "**/core/federal-register/comment-deadline-calendar?**",
+    (route) => {
+      const query = new URL(route.request().url()).searchParams;
+      return json(
+        route,
+        commentPage(
+          [regulatory],
+          query.get("dateFrom")!,
+          query.get("dateTo")!,
+          Number(query.get("page")),
+        ),
+      );
+    },
   );
   return unexpected;
 }
@@ -65,7 +75,9 @@ test("Master Agenda composes distinct funding deadlines with source precision an
   await expect(
     page.getByRole("heading", { name: regulatory.title }),
   ).toBeVisible();
-  await expect(page.getByText(/30.*50|50.*30/)).toBeVisible();
+  await expect(
+    page.getByText(/Regulatory comment deadlines:.*coverage is incomplete/),
+  ).toBeVisible();
   expect(reads).toHaveLength(3);
   expect(Object.fromEntries(reads[0]!.searchParams)).toEqual({
     mode: "all",
