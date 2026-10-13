@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { defineOperation } from "../contracts";
 import { effectiveDateOperations } from "./calendar-effective-dates";
+import { commentDeadlineOperations } from "./calendar-comment-deadlines";
 
 export const commentDeadline = z.object({
   id: z.string(),
@@ -12,6 +13,7 @@ export const commentDeadline = z.object({
 });
 export const calendarOperations = {
   ...effectiveDateOperations,
+  ...commentDeadlineOperations,
   "calendar.commentDeadlines": defineOperation({
     service: "core",
     method: "GET",
