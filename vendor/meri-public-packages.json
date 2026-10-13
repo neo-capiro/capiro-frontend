@@ -45,6 +45,17 @@
       "status": "verified-source-pending-consumer-qualification",
       "purpose": "Document application receiving exports; preserves the original0.1.0 UIEvent and0.1.1 action artifacts",
       "independentReviewManifestSha256": "96341e8ce989a2945a238337248e73ba025c3643c5b8a41dfab9d8ae4b41dfb5"
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.3.tgz",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "93845774d352fc9a0ad12cc7bc8bd3d4612a322c",
+      "sourceTree": "3bd7fcd0b87f81ee331b9c3cd1fa53916730b872",
+      "bytes": 358366,
+      "sha256": "dc1a4c09b0e5f1f6b09f9df1ce2846b24b24abe401c84a8f448c3e58d585ad1b",
+      "regularEntryCount": 23,
+      "status": "verified-source-pending-consumer-qualification",
+      "purpose": "Public conversation JSON/event receiver and branded observed cursors; seventeen previous runtime/schema/type/notice members preserved byte-exact."
     }
   ]
 }

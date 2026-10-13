@@ -56,6 +56,10 @@ export interface MeriGuardedTransportOptions {
   onEvent?: (event: UIEvent) => void;
   /** Observability hook for rejected chunks (does not swallow the rejection). */
   onRejected?: (error: UiTransportGuardError, chunk: UIMessageChunk) => void;
+  /** Optional current-lifetime guard, captured separately for each subscription. */
+  beginGuard?: () => (chunk: UIMessageChunk) => void;
+  /** Optional public-mode diagnostic boundary; legacy errors remain unchanged. */
+  errorBoundary?: (error: unknown) => Error;
 }
 
 /**
@@ -107,18 +111,48 @@ export function guardUiChunk(
 }
 
 interface GuardContext {
+  beforeChunk?: ((chunk: UIMessageChunk) => void) | undefined;
   validateEvent: UIEventValidator;
   onEvent: ((event: UIEvent) => void) | undefined;
   onRejected: ((error: UiTransportGuardError, chunk: UIMessageChunk) => void) | undefined;
+  errorBoundary: ((error: unknown) => Error) | undefined;
+}
+
+/** Preserve backpressure/cancellation while keeping unadmitted parser details private. */
+function boundedDiagnostics<T>(source: ReadableStream<T>, translate: (error: unknown) => Error): ReadableStream<T> {
+  const reader = source.getReader();
+  let ended = false;
+  return new ReadableStream<T>({
+    async pull(controller) {
+      if (ended) return;
+      try {
+        const next = await reader.read();
+        if (ended) return;
+        if (next.done) { ended = true; reader.releaseLock(); controller.close(); }
+        else controller.enqueue(next.value);
+      } catch (error) {
+        if (ended) return;
+        ended = true;
+        await reader.cancel().catch(() => {}); reader.releaseLock();
+        controller.error(translate(error));
+      }
+    },
+    async cancel(reason) {
+      if (ended) return;
+      ended = true;
+      try { await reader.cancel(reason); } finally { reader.releaseLock(); }
+    },
+  });
 }
 
 function guardStream(
   source: ReadableStream<UIMessageChunk>,
   context: GuardContext,
 ): ReadableStream<UIMessageChunk> {
-  return source.pipeThrough(
+  const guarded = source.pipeThrough(
     new TransformStream<UIMessageChunk, UIMessageChunk>({
       transform(chunk, controller) {
+        context.beforeChunk?.(chunk);
         let event: UIEvent | null;
         try {
           event = guardUiChunk(chunk, context.validateEvent);
@@ -127,10 +161,12 @@ function guardStream(
           throw error;
         }
         if (event) context.onEvent?.(event);
+        context.beforeChunk?.(chunk);
         controller.enqueue(chunk);
       },
     }),
   );
+  return context.errorBoundary ? boundedDiagnostics(guarded, context.errorBoundary) : guarded;
 }
 
 export class MeriGuardedTransport implements ChatTransport<MeriUIMessage> {
@@ -140,28 +176,37 @@ export class MeriGuardedTransport implements ChatTransport<MeriUIMessage> {
   private readonly inner: ChatTransport<MeriUIMessage>;
   private readonly context: GuardContext;
   private closed = false;
+  private readonly beginGuard: MeriGuardedTransportOptions['beginGuard'];
 
   constructor(options: MeriGuardedTransportOptions) {
     this.inner = options.inner;
+    this.beginGuard = options.beginGuard;
     this.context = {
       validateEvent: options.validateEvent,
       onEvent: options.onEvent,
       onRejected: options.onRejected,
+      errorBoundary: options.errorBoundary,
     };
   }
 
   async sendMessages(
     options: Parameters<ChatTransport<MeriUIMessage>['sendMessages']>[0],
   ): Promise<ReadableStream<UIMessageChunk>> {
-    const stream = await this.inner.sendMessages(options);
-    return guardStream(stream, this.context);
+    try {
+      const beforeChunk = this.beginGuard?.();
+      const stream = await this.inner.sendMessages(options);
+      return guardStream(stream, { ...this.context, beforeChunk });
+    } catch (error) { throw this.context.errorBoundary?.(error) ?? error; }
   }
 
   async reconnectToStream(
     options: Parameters<ChatTransport<MeriUIMessage>['reconnectToStream']>[0],
   ): Promise<ReadableStream<UIMessageChunk> | null> {
-    const stream = await this.inner.reconnectToStream(options);
-    return stream ? guardStream(stream, this.context) : null;
+    try {
+      const beforeChunk = this.beginGuard?.();
+      const stream = await this.inner.reconnectToStream(options);
+      return stream ? guardStream(stream, { ...this.context, beforeChunk }) : null;
+    } catch (error) { throw this.context.errorBoundary?.(error) ?? error; }
   }
 
   /**

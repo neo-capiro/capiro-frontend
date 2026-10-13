@@ -18,6 +18,10 @@ export interface MeriGuardedTransportOptions {
     onEvent?: (event: UIEvent) => void;
     /** Observability hook for rejected chunks (does not swallow the rejection). */
     onRejected?: (error: UiTransportGuardError, chunk: UIMessageChunk) => void;
+    /** Optional current-lifetime guard, captured separately for each subscription. */
+    beginGuard?: () => (chunk: UIMessageChunk) => void;
+    /** Optional public-mode diagnostic boundary; legacy errors remain unchanged. */
+    errorBoundary?: (error: unknown) => Error;
 }
 /**
  * Validates a single decoded UI chunk. Returns the validated event for a custom
@@ -31,6 +35,7 @@ export declare class MeriGuardedTransport implements ChatTransport<MeriUIMessage
     private readonly inner;
     private readonly context;
     private closed;
+    private readonly beginGuard;
     constructor(options: MeriGuardedTransportOptions);
     sendMessages(options: Parameters<ChatTransport<MeriUIMessage>['sendMessages']>[0]): Promise<ReadableStream<UIMessageChunk>>;
     reconnectToStream(options: Parameters<ChatTransport<MeriUIMessage>['reconnectToStream']>[0]): Promise<ReadableStream<UIMessageChunk> | null>;
