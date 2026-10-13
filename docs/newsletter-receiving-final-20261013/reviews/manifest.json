@@ -1,0 +1,27 @@
+{
+  "sealedUTC": "2026-10-13T04:51:08.753642+00:00",
+  "source": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+  "decision": "PASS_WITH_EXPLICIT_LOCAL_SCOPE_LIMITS",
+  "files": [
+    {
+      "path": "final-evidence-review.json",
+      "bytes": 30101,
+      "sha256": "13b921516ed26b1aaec652dca443a0987c652d4f36de5590cad1735cf28ebe0a"
+    },
+    {
+      "path": "review-draft.md",
+      "bytes": 3234,
+      "sha256": "40f8b5c2b54c9c4d935a0bf3eca17c03665e51765a7ef89895a84dd0667c2697"
+    },
+    {
+      "path": "review-in-progress.json",
+      "bytes": 19247,
+      "sha256": "90dea3b247cfa5eca960df6efc752782e0f0a1180f3892a9d435fa36ef4e3c65"
+    },
+    {
+      "path": "review.md",
+      "bytes": 4487,
+      "sha256": "ab34e0a3a3e6fcbf60f07660738523b60fd8db0ffaa24c840680d7709657d8dc"
+    }
+  ]
+}

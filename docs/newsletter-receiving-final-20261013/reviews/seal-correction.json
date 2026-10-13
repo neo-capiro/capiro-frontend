@@ -1,0 +1,6 @@
+{
+  "scope": "Reviewer metadata seal correction only, not a product test or gate failure",
+  "firstAttempt": "Read-only audit incorrectly required whole-worktree status empty while root was adding authorized docs/newsletter-receiving-final-20261013; assertion stopped before visual-disposition.json was written. The following tool step prematurely created an incomplete eight-file manifest. It is retained byte-for-byte as manifest-final-attempt1.json.",
+  "correction": "Verified exact frozen HEAD and clean application/package/script/vendor/config scope plus no untracked application files; retained current documentation-only status explicitly. Wrote completed visual-disposition.json and sealed corrected full manifest. No product or historical evidence edits.",
+  "statusObserved": "?? docs/newsletter-receiving-final-20261013/\n"
+}
