@@ -1,4 +1,5 @@
 import { auth } from "@clerk/nextjs/server";
+import { previewBackendRejection } from "../../../../shared/preview/backend-policy.server";
 import { readCapiroConfig } from "../../../../shared/capiro/config";
 import {
   handleCapiroRequest,
@@ -9,6 +10,8 @@ import { capiroOperations } from "../../../../shared/capiro/registry";
 
 type Context = { params: Promise<{ operation: string }> };
 async function handle(request: Request, context: Context) {
+  const held = previewBackendRejection(process.env);
+  if (held) return held;
   const { operation } = await context.params;
   if (operation.startsWith("public-form."))
     return handlePublicPlannerFormRequest(
