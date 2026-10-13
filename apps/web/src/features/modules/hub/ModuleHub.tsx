@@ -156,10 +156,16 @@ function ModuleHubInformation() {
           <span aria-hidden="true">i</span>
         </button>
       </TooltipTrigger>
-      <TooltipContent side="bottom" className={styles.infoContent}>
+      <TooltipContent
+        side="bottom"
+        className={styles.infoContent}
+        aria-labelledby={descriptionId}
+      >
         <aside aria-label="About Modules">
-          Every client and every activity, across the whole firm. Choose a
-          client profile to show just that client’s work.
+          <p id={descriptionId}>
+            Every client and every activity, across the whole firm. Choose a
+            client profile to show just that client’s work.
+          </p>
         </aside>
       </TooltipContent>
     </Tooltip>
