@@ -1,0 +1,88 @@
+{
+  "name": "execute-observed",
+  "route": "execute",
+  "httpStatus": 200,
+  "response": {
+    "status": "observed",
+    "outcome": {
+      "receipt": {
+        "receiptId": "75670084-6eae-4cc2-8ee8-33d7df0a2774",
+        "commandId": "eb1dd361-81bb-464e-b72f-6a23c53cdda5",
+        "commandSha256": "2352fb7c9558b59ce7271bc58c38c4208fe19a198a72b9322532fcc87dbf23f8",
+        "idempotencyKey": "17fb193c-a6dd-4aa5-8d34-a66ad11b842d",
+        "binding": {
+          "tenantId": "tenant",
+          "actorId": "actor",
+          "conversationId": "00000000-0000-4000-8000-000000000001",
+          "runId": "00000000-0000-4000-8000-000000000002",
+          "attemptId": "00000000-0000-4000-8000-000000000003",
+          "workerId": "00000000-0000-4000-8000-000000000004",
+          "writerFence": 1
+        },
+        "outcome": "succeeded",
+        "sourceTransactionId": null,
+        "completedAt": "2026-10-12T20:00:00.171Z",
+        "scopes": [
+          {
+            "tenantId": "tenant",
+            "kind": "tenant",
+            "resourceId": "tenant",
+            "policyRevision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "authorizationDecisionId": "00000000-0000-4000-8000-000000000010"
+      },
+      "result": {
+        "id": "00000000-0000-4000-8000-000000000030",
+        "title": "Review the synthetic recommendation",
+        "status": "todo",
+        "dueDate": null,
+        "clientId": "abcdef00-0000-4000-8000-000000000009",
+        "createdAt": "2026-10-12T20:00:00.167Z"
+      }
+    }
+  },
+  "expected": "receiver_accept",
+  "note": "Unmodified published synthetic wire response and request; native hashes preserved.",
+  "request": {
+    "proposal": {
+      "proposalId": "df4793a5-4312-4b00-a6d5-7f639be0c40a",
+      "command": {
+        "contractVersion": "0.1.0",
+        "commandId": "eb1dd361-81bb-464e-b72f-6a23c53cdda5",
+        "binding": {
+          "tenantId": "tenant",
+          "actorId": "actor",
+          "conversationId": "00000000-0000-4000-8000-000000000001",
+          "runId": "00000000-0000-4000-8000-000000000002",
+          "attemptId": "00000000-0000-4000-8000-000000000003",
+          "workerId": "00000000-0000-4000-8000-000000000004",
+          "writerFence": 1
+        },
+        "action": "task.create",
+        "arguments": {
+          "title": "Review the synthetic recommendation",
+          "clientId": "abcdef00-0000-4000-8000-000000000009",
+          "dueDate": null
+        },
+        "attachments": [],
+        "scopes": [
+          {
+            "tenantId": "tenant",
+            "kind": "tenant",
+            "resourceId": "tenant",
+            "policyRevision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "idempotencyKey": "17fb193c-a6dd-4aa5-8d34-a66ad11b842d"
+      },
+      "commandSha256": "2352fb7c9558b59ce7271bc58c38c4208fe19a198a72b9322532fcc87dbf23f8",
+      "createdAt": "2026-10-12T20:00:00.129Z",
+      "expiresAt": "2026-10-12T20:00:10.000Z",
+      "requiredApprover": {
+        "tenantId": "tenant",
+        "actorId": "reviewer"
+      }
+    }
+  }
+}

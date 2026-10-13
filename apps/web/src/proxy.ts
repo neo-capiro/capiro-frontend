@@ -33,5 +33,6 @@ export const config = {
     "/settings/:path*",
     "/sign-in/:path*",
     "/api/capiro/:path*",
+    "/api/action-followthrough/:path*",
   ],
 };

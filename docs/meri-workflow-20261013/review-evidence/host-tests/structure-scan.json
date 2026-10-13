@@ -1,0 +1,53 @@
+{
+  "imports": [
+    {
+      "specifier": "@tanstack/react-query",
+      "line": 1
+    },
+    {
+      "specifier": "vitest",
+      "line": 2
+    },
+    {
+      "specifier": "../src/shared/meri-actions/host-controller",
+      "line": 3
+    },
+    {
+      "specifier": "../src/shared/meri-actions/query-journal",
+      "line": 4
+    },
+    {
+      "specifier": "./meri-action-fixtures",
+      "line": 5
+    }
+  ],
+  "anyLines": [],
+  "remoteOriginLines": [],
+  "sizeFindings": [
+    {
+      "file": "apps/web/tests/meri-action-host.test.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 431,
+      "fingerprint": "d7bafed4534a517be52283da13c04729a6077ead75d93295533a6908e5a40e9e"
+    },
+    {
+      "file": "apps/web/tests/meri-action-host.test.ts",
+      "kind": "function",
+      "symbol": "<anonymous> #2",
+      "line": 93,
+      "nonblank": 142,
+      "fingerprint": "a89696e9273318e726b9417578b7f4a6b3d03b39ab4f3c1fcef03f367b6d9239"
+    },
+    {
+      "file": "apps/web/tests/meri-action-host.test.ts",
+      "kind": "function",
+      "symbol": "<anonymous> #4",
+      "line": 317,
+      "nonblank": 119,
+      "fingerprint": "dd71c65c2a5c8dcb3d38e150e93f2b6e9e8a9c3194d3fa9ef28d36e99f109c79"
+    }
+  ],
+  "nonblank": 431
+}

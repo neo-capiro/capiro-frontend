@@ -1,0 +1,19 @@
+{
+  "eslint": {
+    "command": "npm exec -- eslint tests/meri-action-host.test.ts",
+    "cwd": "/workspace/capiro-meri-workflow-20261013/apps/web",
+    "exitCode": 0,
+    "log": "eslint.log"
+  },
+  "format": {
+    "command": "npm exec -- prettier --write tests/meri-action-host.test.ts",
+    "exitCode": 0,
+    "result": "unchanged"
+  },
+  "diffCheck": {
+    "command": "git diff --check -- apps/web/tests/meri-action-host.test.ts",
+    "exitCode": 0,
+    "limitation": "File currently untracked; ESLint and Prettier inspect actual owned bytes."
+  },
+  "sourceOnlyScanner": "Parsed the owned test file with canonical scripts/architecture/scan.mjs; no full architecture gate or application imports."
+}

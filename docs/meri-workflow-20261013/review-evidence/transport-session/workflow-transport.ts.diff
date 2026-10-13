@@ -1,0 +1,29 @@
+--- initial/workflow-transport.ts
++++ final/workflow-transport.ts
+@@ -16,7 +16,17 @@
+   lifetime: AbortSignal,
+   fetcher: typeof fetch = fetch,
+ ): ActionTransport {
++  let currentCredential = lifetime.aborted ? "" : credential;
++  lifetime.addEventListener(
++    "abort",
++    () => {
++      currentCredential = "";
++    },
++    { once: true },
++  );
+   return async (route, body, caller) => {
++    if (!["query", "draft", "prepare", "execute"].includes(route))
++      throw new Error("Unknown action route");
+     const capturedBody = JSON.stringify(body);
+     return withActionDeadline([caller, lifetime], async (signal) => {
+       const response = await fetcher(`/api/action-followthrough/${route}`, {
+@@ -24,7 +34,7 @@
+         body: capturedBody,
+         headers: {
+           "Content-Type": "application/json",
+-          Authorization: `Bearer ${credential}`,
++          Authorization: `Bearer ${currentCredential}`,
+         },
+         credentials: "same-origin",
+         cache: "no-store",

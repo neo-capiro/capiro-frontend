@@ -1,0 +1,660 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-meri-workflow-20261013/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "test/browser/playwright.config.ts",
+      "meri-action-host.*spec.ts"
+    ],
+    "configFile": "/workspace/capiro-meri-workflow-20261013/apps/web/test/browser/playwright.config.ts",
+    "rootDir": "/workspace/capiro-meri-workflow-20261013/apps/web/test/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/capiro-meri-workflow-20261013/apps/web/test-results/modules-browser",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/capiro-meri-workflow-20261013/apps/web/test/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/modules-browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" \"/workspace/capiro-meri-workflow-20261013/apps/web/test/browser/server.mjs\"",
+      "url": "http://127.0.0.1:5197",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "meri-action-host-lifetime.spec.ts",
+      "file": "meri-action-host-lifetime.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Meri held query 200 cannot publish after user replacement",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30144,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-fixtures.ts",
+                        "column": 71,
+                        "line": 199
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /^Select recommendation:/ })\u001b[22m\n\n\n   at meri-action-host-fixtures.ts:199\n\n  197 |     page.getByRole(\"region\", { name: \"Returned recommendations\" }),\n  198 |   ).toBeVisible();\n> 199 |   await page.getByRole(\"button\", { name: /^Select recommendation:/ }).click();\n      |                                                                       ^\n  200 |   await expect(page.getByLabel(\"Task title\", { exact: true })).toHaveValue(\n  201 |     \"Issue\",\n  202 |   );\n    at selectAction (/workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-fixtures.ts:199:71)\n    at /workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-lifetime.spec.ts:57:7"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T05:37:08.556Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-meri-workflow-20261013/apps/web/test-results/modules-browser/meri-action-host-lifetime--d0b39-lish-after-user-replacement/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-meri-workflow-20261013/apps/web/test-results/modules-browser/meri-action-host-lifetime--d0b39-lish-after-user-replacement/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-meri-workflow-20261013/apps/web/test-results/modules-browser/meri-action-host-lifetime--d0b39-lish-after-user-replacement/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "65982b691e07ab8267c9-02ef152609c44cb713d5",
+          "file": "meri-action-host-lifetime.spec.ts",
+          "line": 23,
+          "column": 5
+        },
+        {
+          "title": "Meri held query 401 cannot publish after user replacement",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30138,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-fixtures.ts",
+                        "column": 71,
+                        "line": 199
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /^Select recommendation:/ })\u001b[22m\n\n\n   at meri-action-host-fixtures.ts:199\n\n  197 |     page.getByRole(\"region\", { name: \"Returned recommendations\" }),\n  198 |   ).toBeVisible();\n> 199 |   await page.getByRole(\"button\", { name: /^Select recommendation:/ }).click();\n      |                                                                       ^\n  200 |   await expect(page.getByLabel(\"Task title\", { exact: true })).toHaveValue(\n  201 |     \"Issue\",\n  202 |   );\n    at selectAction (/workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-fixtures.ts:199:71)\n    at /workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-lifetime.spec.ts:57:7"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T05:37:39.472Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-meri-workflow-20261013/apps/web/test-results/modules-browser/meri-action-host-lifetime--15a27-lish-after-user-replacement/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-meri-workflow-20261013/apps/web/test-results/modules-browser/meri-action-host-lifetime--15a27-lish-after-user-replacement/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-meri-workflow-20261013/apps/web/test-results/modules-browser/meri-action-host-lifetime--15a27-lish-after-user-replacement/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "65982b691e07ab8267c9-93b6fda84c65a0ddd295",
+          "file": "meri-action-host-lifetime.spec.ts",
+          "line": 23,
+          "column": 5
+        },
+        {
+          "title": "Meri held query 200 cannot publish after session replacement",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30130,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-fixtures.ts",
+                        "column": 71,
+                        "line": 199
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /^Select recommendation:/ })\u001b[22m\n\n\n   at meri-action-host-fixtures.ts:199\n\n  197 |     page.getByRole(\"region\", { name: \"Returned recommendations\" }),\n  198 |   ).toBeVisible();\n> 199 |   await page.getByRole(\"button\", { name: /^Select recommendation:/ }).click();\n      |                                                                       ^\n  200 |   await expect(page.getByLabel(\"Task title\", { exact: true })).toHaveValue(\n  201 |     \"Issue\",\n  202 |   );\n    at selectAction (/workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-fixtures.ts:199:71)\n    at /workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-lifetime.spec.ts:57:7"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T05:38:10.359Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-meri-workflow-20261013/apps/web/test-results/modules-browser/meri-action-host-lifetime--e1f41-h-after-session-replacement/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-meri-workflow-20261013/apps/web/test-results/modules-browser/meri-action-host-lifetime--e1f41-h-after-session-replacement/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-meri-workflow-20261013/apps/web/test-results/modules-browser/meri-action-host-lifetime--e1f41-h-after-session-replacement/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "65982b691e07ab8267c9-f35dfa1e1a868204b657",
+          "file": "meri-action-host-lifetime.spec.ts",
+          "line": 23,
+          "column": 5
+        },
+        {
+          "title": "Meri held query 401 cannot publish after session replacement",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "interrupted",
+                  "duration": 10795,
+                  "error": {
+                    "message": "Error: locator.click: Test ended.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /^Select recommendation:/ })\u001b[22m\n",
+                    "stack": "Error: locator.click: Test ended.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /^Select recommendation:/ })\u001b[22m\n\n    at selectAction (/workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-fixtures.ts:199:71)\n    at /workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-lifetime.spec.ts:57:7",
+                    "location": {
+                      "file": "/workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-fixtures.ts",
+                      "column": 71,
+                      "line": 199
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39mmeri-action-host-fixtures.ts:199\n\n  197 |     page.getByRole(\"region\", { name: \"Returned recommendations\" }),\n  198 |   ).toBeVisible();\n> 199 |   await page.getByRole(\"button\", { name: /^Select recommendation:/ }).click();\n      |                                                                       ^\n  200 |   await expect(page.getByLabel(\"Task title\", { exact: true })).toHaveValue(\n  201 |     \"Issue\",\n  202 |   );"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-fixtures.ts",
+                        "column": 71,
+                        "line": 199
+                      },
+                      "message": "Error: locator.click: Test ended.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /^Select recommendation:/ })\u001b[22m\n\n\n   at meri-action-host-fixtures.ts:199\n\n  197 |     page.getByRole(\"region\", { name: \"Returned recommendations\" }),\n  198 |   ).toBeVisible();\n> 199 |   await page.getByRole(\"button\", { name: /^Select recommendation:/ }).click();\n      |                                                                       ^\n  200 |   await expect(page.getByLabel(\"Task title\", { exact: true })).toHaveValue(\n  201 |     \"Issue\",\n  202 |   );\n    at selectAction (/workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-fixtures.ts:199:71)\n    at /workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-lifetime.spec.ts:57:7"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T05:38:41.199Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-meri-workflow-20261013/apps/web/test-results/modules-browser/meri-action-host-lifetime--f055f-h-after-session-replacement/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-meri-workflow-20261013/apps/web/test-results/modules-browser/meri-action-host-lifetime--f055f-h-after-session-replacement/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-meri-workflow-20261013/apps/web/test-results/modules-browser/meri-action-host-lifetime--f055f-h-after-session-replacement/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/capiro-meri-workflow-20261013/apps/web/test/browser/meri-action-host-fixtures.ts",
+                    "column": 71,
+                    "line": 199
+                  }
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "65982b691e07ab8267c9-c370434e421d5bede062",
+          "file": "meri-action-host-lifetime.spec.ts",
+          "line": 23,
+          "column": 5
+        },
+        {
+          "title": "Meri held query 200 cannot publish after organization replacement",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "65982b691e07ab8267c9-b92adb780e07dad4e120",
+          "file": "meri-action-host-lifetime.spec.ts",
+          "line": 23,
+          "column": 5
+        },
+        {
+          "title": "Meri held query 401 cannot publish after organization replacement",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "65982b691e07ab8267c9-3f3d7d9d3cbdb2506b3c",
+          "file": "meri-action-host-lifetime.spec.ts",
+          "line": 23,
+          "column": 5
+        },
+        {
+          "title": "Meri held execution 200 cannot restore the former client's proposal or expire its replacement",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "65982b691e07ab8267c9-85f19e5db5e056c4ff15",
+          "file": "meri-action-host-lifetime.spec.ts",
+          "line": 72,
+          "column": 3
+        },
+        {
+          "title": "Meri held execution 401 cannot restore the former client's proposal or expire its replacement",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "65982b691e07ab8267c9-a6be88002660849267fa",
+          "file": "meri-action-host-lifetime.spec.ts",
+          "line": 72,
+          "column": 3
+        },
+        {
+          "title": "a current action401 removes private workflow state without an automatic reconnect",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "65982b691e07ab8267c9-a71ba93830851740574d",
+          "file": "meri-action-host-lifetime.spec.ts",
+          "line": 126,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "meri-action-host-navigation.spec.ts",
+      "file": "meri-action-host-navigation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Meri unknown preparation stays fenced across cross-mode Back/Forward and reconnect",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "6b58fee7b296003c00fb-5e20cca92a2cde1f769b",
+          "file": "meri-action-host-navigation.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "Meri in-flight preparation stays fenced across cross-mode Back/Forward and reconnect",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "6b58fee7b296003c00fb-e305832b4d2a8756a0dd",
+          "file": "meri-action-host-navigation.spec.ts",
+          "line": 16,
+          "column": 3
+        },
+        {
+          "title": "same-client verification refetch hides actions while retaining the private draft for a current success",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "6b58fee7b296003c00fb-32c24092b1a6010afee0",
+          "file": "meri-action-host-navigation.spec.ts",
+          "line": 106,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "meri-action-host-workflow.spec.ts",
+      "file": "meri-action-host-workflow.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Meri actual host bootstraps only explicitly and keeps action requests behind the received context",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1b125eae841052866627-bc10d3ff55b1aa81f16d",
+          "file": "meri-action-host-workflow.spec.ts",
+          "line": 16,
+          "column": 1
+        },
+        {
+          "title": "Meri unavailable connection exposes no automatic action dispatch",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1b125eae841052866627-d1fa2787934699eed298",
+          "file": "meri-action-host-workflow.spec.ts",
+          "line": 51,
+          "column": 1
+        },
+        {
+          "title": "Meri exact proposal requires separate approval and rechecks the identical observed command",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1b125eae841052866627-714d0c63aaf34c71606c",
+          "file": "meri-action-host-workflow.spec.ts",
+          "line": 66,
+          "column": 1
+        },
+        {
+          "title": "Meri dated draft controls are keyboard operable and fit 1440px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1b125eae841052866627-4bf00e97117fafc65f85",
+          "file": "meri-action-host-workflow.spec.ts",
+          "line": 144,
+          "column": 3
+        },
+        {
+          "title": "Meri dated draft controls are keyboard operable and fit 375px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1b125eae841052866627-c5d3ffad05b6f75c40be",
+          "file": "meri-action-host-workflow.spec.ts",
+          "line": 144,
+          "column": 3
+        },
+        {
+          "title": "Meri admitted context expiry clears an idle private draft without another request",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1b125eae841052866627-7a35cb7c00b318fd6e02",
+          "file": "meri-action-host-workflow.spec.ts",
+          "line": 222,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-13T05:37:06.069Z",
+    "duration": 106369.11899999999,
+    "expected": 0,
+    "skipped": 15,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "execute-error-with-success-status",
+  "route": "execute",
+  "httpStatus": 200,
+  "response": {
+    "error": {
+      "code": "COMMAND_APPROVAL_REFUSED",
+      "outcome": "NOT_DISPATCHED"
+    }
+  },
+  "expected": "receiver_reject",
+  "note": "HTTP200 cannot reclassify a canonical refusal."
+}

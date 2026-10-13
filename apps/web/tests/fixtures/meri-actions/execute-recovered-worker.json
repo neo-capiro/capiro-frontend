@@ -1,0 +1,47 @@
+{
+  "name": "execute-recovered-worker",
+  "route": "execute",
+  "httpStatus": 200,
+  "response": {
+    "status": "observed",
+    "outcome": {
+      "receipt": {
+        "receiptId": "75670084-6eae-4cc2-8ee8-33d7df0a2774",
+        "commandId": "eb1dd361-81bb-464e-b72f-6a23c53cdda5",
+        "commandSha256": "51e6f408b001bc4a338c2ce39adf75ecf2483a02e2e36bab38eac9ad258e33d2",
+        "idempotencyKey": "17fb193c-a6dd-4aa5-8d34-a66ad11b842d",
+        "binding": {
+          "tenantId": "tenant",
+          "actorId": "actor",
+          "conversationId": "00000000-0000-4000-8000-000000000001",
+          "runId": "00000000-0000-4000-8000-000000000002",
+          "attemptId": "00000000-0000-4000-8000-000000000990",
+          "workerId": "00000000-0000-4000-8000-000000000991",
+          "writerFence": 2
+        },
+        "outcome": "succeeded",
+        "sourceTransactionId": null,
+        "completedAt": "2026-10-12T20:00:00.171Z",
+        "scopes": [
+          {
+            "tenantId": "tenant",
+            "kind": "tenant",
+            "resourceId": "tenant",
+            "policyRevision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "authorizationDecisionId": "00000000-0000-4000-8000-000000000010"
+      },
+      "result": {
+        "id": "00000000-0000-4000-8000-000000000030",
+        "title": "Review the synthetic recommendation",
+        "status": "todo",
+        "dueDate": null,
+        "clientId": "abcdef00-0000-4000-8000-000000000009",
+        "createdAt": "2026-10-12T20:00:00.167Z"
+      }
+    }
+  },
+  "expected": "receiver_accept",
+  "note": "Match retained recovered proposal/command and reviewed task; do not require the original draft worker. Synthetic receiver acceptance, not an executed native effect."
+}

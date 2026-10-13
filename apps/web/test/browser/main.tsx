@@ -1,3 +1,4 @@
+import { MeriActionHost } from "../../src/app/meri/actions/MeriActionHost";
 import { IntegrationProbe } from "./IntegrationProbe";
 import { RequireSession } from "../../src/shared/session/SessionContext";
 import { PortfolioIndex } from "../../src/features/portfolio/index/PortfolioIndex";
@@ -18,7 +19,7 @@ import { SettingsScreen } from "../../src/features/settings";
 import { ModuleScreen } from "../../src/features/modules/ModuleScreen";
 import { ModuleHub } from "../../src/features/modules/hub/ModuleHub";
 import type { ModuleSlug } from "../../src/shared/shell/module-catalog";
-import { usePathname } from "./navigation";
+import { usePathname, useSearchParams } from "./navigation";
 import "../../src/app/globals.css";
 import "./font.css";
 
@@ -39,6 +40,15 @@ function SessionProbe() {
 }
 function RoutedApp() {
   const path = usePathname();
+  const search = useSearchParams();
+  if (path === "/meri/actions")
+    return (
+      <ProductShell actionWorkflow>
+        <RequireSession>
+          <MeriActionHost enabled={search.get("actions-disabled") !== "1"} />
+        </RequireSession>
+      </ProductShell>
+    );
   if (path.startsWith("/forms/"))
     return (
       <>

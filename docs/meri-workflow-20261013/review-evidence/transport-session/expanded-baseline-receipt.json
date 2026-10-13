@@ -1,0 +1,56 @@
+{
+  "command": "npm exec -- vitest run tests/meri-action-transport.test.ts tests/meri-action-session.test.ts --reporter=verbose --reporter=json --outputFile=<named-results>",
+  "cwd": "/workspace/capiro-meri-workflow-20261013/apps/web",
+  "exitCode": 1,
+  "numTotalTests": 86,
+  "numPassedTests": 75,
+  "numFailedTests": 11,
+  "failures": [
+    {
+      "name": "Meri session native owner grammar accepts lowercase native UUID syntax without imposing RFC variant bits",
+      "status": "failed"
+    },
+    {
+      "name": "Meri session native owner grammar refuses uppercase owner context ID conversationId",
+      "status": "failed"
+    },
+    {
+      "name": "Meri session native owner grammar refuses uppercase owner context ID runId",
+      "status": "failed"
+    },
+    {
+      "name": "Meri session native owner grammar refuses uppercase owner context ID selectedClientId",
+      "status": "failed"
+    },
+    {
+      "name": "Meri session native owner grammar bounds native identity field tenantId at256 characters",
+      "status": "failed"
+    },
+    {
+      "name": "Meri session native owner grammar bounds native identity field actorId at256 characters",
+      "status": "failed"
+    },
+    {
+      "name": "Meri session native owner grammar refuses a negative clock even for an otherwise future bounded expiry",
+      "status": "failed"
+    },
+    {
+      "name": "Meri rejected response stream disposal cancels an acquired response body for pre-aborted without awaiting cancel",
+      "status": "failed"
+    },
+    {
+      "name": "Meri rejected response stream disposal cancels an acquired response body for wrong-media without awaiting cancel",
+      "status": "failed"
+    },
+    {
+      "name": "Meri rejected response stream disposal cancels an acquired response body for oversized-header without awaiting cancel",
+      "status": "failed"
+    },
+    {
+      "name": "Meri rejected response stream disposal releases a late response body from fetch that ignored the expired deadline",
+      "status": "failed"
+    }
+  ],
+  "logSha256": "a6a2cab34a768edacc207fcdc5b5c388541d742a282d19d952910803c1e1962c",
+  "resultsSha256": "599ad6600036613c19374be90317b3330a5a981d4286ea98157645722cbbe5a2"
+}

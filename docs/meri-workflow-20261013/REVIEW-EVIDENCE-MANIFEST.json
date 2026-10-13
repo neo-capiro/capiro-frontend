@@ -1,0 +1,1788 @@
+{
+  "copiedUTC": "2026-10-13T05:53:44.613100+00:00",
+  "scope": "Independent/development evidence. Does not claim final combined qualification.",
+  "files": [
+    {
+      "path": "review-evidence/adapter-review/corrected-source/apps/web/src/app/meri/actions/MeriActionHost.tsx",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/corrected-source/apps/web/src/app/meri/actions/MeriActionHost.tsx",
+      "bytes": 3873,
+      "sha256": "47eb6dab030eefcd0cb8b17627d1f10c6f0a2673964a9d060050687e9bee1f21"
+    },
+    {
+      "path": "review-evidence/adapter-review/corrected-source/apps/web/src/features/meri/actions/action-workflow-port.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/corrected-source/apps/web/src/features/meri/actions/action-workflow-port.ts",
+      "bytes": 65,
+      "sha256": "68cad757a4df2e2ef5210707519e1a1d8869d81e004b7401e33a4c97f2599f6a"
+    },
+    {
+      "path": "review-evidence/adapter-review/corrected-source/apps/web/src/shared/meri-actions/attempt-journal.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/corrected-source/apps/web/src/shared/meri-actions/attempt-journal.ts",
+      "bytes": 391,
+      "sha256": "3fd7884d856b5d7f27b9bcf6c5a405c9cf4703bd1f67f71ea756c561f94509a6"
+    },
+    {
+      "path": "review-evidence/adapter-review/corrected-source/apps/web/src/shared/meri-actions/bounded-json.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/corrected-source/apps/web/src/shared/meri-actions/bounded-json.ts",
+      "bytes": 2614,
+      "sha256": "d8f46bc08078d4a4858e7eca5a3f0fab34065275f8268948e30babb869afe145"
+    },
+    {
+      "path": "review-evidence/adapter-review/corrected-source/apps/web/src/shared/meri-actions/config.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/corrected-source/apps/web/src/shared/meri-actions/config.ts",
+      "bytes": 474,
+      "sha256": "8b90d94ad5bc20ba25e5252dabc85561392cbf3c1f0d1be7ecc781bf8a78f471"
+    },
+    {
+      "path": "review-evidence/adapter-review/corrected-source/apps/web/src/shared/meri-actions/correlation.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/corrected-source/apps/web/src/shared/meri-actions/correlation.ts",
+      "bytes": 4131,
+      "sha256": "4185a15f731a88beff8b73e5d65629e66908f921dcb5bff4a8657e761ffa3e7f"
+    },
+    {
+      "path": "review-evidence/adapter-review/corrected-source/apps/web/src/shared/meri-actions/disposition.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/corrected-source/apps/web/src/shared/meri-actions/disposition.ts",
+      "bytes": 1103,
+      "sha256": "a093b4dc26cc3641b9268f3727b6f764ad0f8ff4a21dedede8716176c7e7ff7f"
+    },
+    {
+      "path": "review-evidence/adapter-review/corrected-source/apps/web/src/shared/meri-actions/host-controller.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/corrected-source/apps/web/src/shared/meri-actions/host-controller.ts",
+      "bytes": 3597,
+      "sha256": "031c98f9dfdba27ecd42512cee985dc05461dda5ea64d8d7738468f8df354eb3"
+    },
+    {
+      "path": "review-evidence/adapter-review/corrected-source/apps/web/src/shared/meri-actions/projection.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/corrected-source/apps/web/src/shared/meri-actions/projection.ts",
+      "bytes": 2294,
+      "sha256": "a8c3108adfb8613522970d45bab434dabd632c4271ebf3e4bf96fb2d757d3a62"
+    },
+    {
+      "path": "review-evidence/adapter-review/corrected-source/apps/web/src/shared/meri-actions/proxy.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/corrected-source/apps/web/src/shared/meri-actions/proxy.ts",
+      "bytes": 2843,
+      "sha256": "6046d58306b2c5694f618a2331dda4ea26baae64e12ecc6b94b6feec1973fcb4"
+    },
+    {
+      "path": "review-evidence/adapter-review/corrected-source/apps/web/src/shared/meri-actions/query-journal.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/corrected-source/apps/web/src/shared/meri-actions/query-journal.ts",
+      "bytes": 1241,
+      "sha256": "8249df4b758ef20b7bc83776555eea5639c8f1a15cd6a13d4ea40b5fe62be171"
+    },
+    {
+      "path": "review-evidence/adapter-review/corrected-source/apps/web/src/shared/meri-actions/session-bootstrap.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/corrected-source/apps/web/src/shared/meri-actions/session-bootstrap.ts",
+      "bytes": 1640,
+      "sha256": "f3e1b503b067294867655ac52572f8b82ebfc0cd478eb5169e6f3ad219af0028"
+    },
+    {
+      "path": "review-evidence/adapter-review/corrected-source/apps/web/src/shared/meri-actions/session-receipt.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/corrected-source/apps/web/src/shared/meri-actions/session-receipt.ts",
+      "bytes": 1355,
+      "sha256": "46d7ddd12325d7bc305583397aba249cfc4ec8022e278eed2e3933672af10b76"
+    },
+    {
+      "path": "review-evidence/adapter-review/corrected-source/apps/web/src/shared/meri-actions/workflow-adapter.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/corrected-source/apps/web/src/shared/meri-actions/workflow-adapter.ts",
+      "bytes": 8265,
+      "sha256": "1d35e9a68d713bd1088d4141aaead81d0d5d0a5ceb8371736feed5f568abe458"
+    },
+    {
+      "path": "review-evidence/adapter-review/corrected-source/apps/web/src/shared/meri-actions/workflow-port.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/corrected-source/apps/web/src/shared/meri-actions/workflow-port.ts",
+      "bytes": 2124,
+      "sha256": "f5afc882738b4cb1684fa3969513a277646bd097dbe025a119a1c35263b3c1bc"
+    },
+    {
+      "path": "review-evidence/adapter-review/corrected-source/apps/web/src/shared/meri-actions/workflow-transport.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/corrected-source/apps/web/src/shared/meri-actions/workflow-transport.ts",
+      "bytes": 2038,
+      "sha256": "b32635261243e59f8605aafa84092e728ed083c58d33a9d6923e702cd25e2e3b"
+    },
+    {
+      "path": "review-evidence/adapter-review/corrected-source/apps/web/src/shared/shell/ProductShell.tsx",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/corrected-source/apps/web/src/shared/shell/ProductShell.tsx",
+      "bytes": 1572,
+      "sha256": "5e48a151acc4fae1ebc679729659295f8b6fe29eafd2197826c4660367193a83"
+    },
+    {
+      "path": "review-evidence/adapter-review/corrected-source-binding.json",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/corrected-source-binding.json",
+      "bytes": 5706,
+      "sha256": "b322d3d7a7a09fa7471bb899bb53147c1353b43060e7e8031f9418d35b436968"
+    },
+    {
+      "path": "review-evidence/adapter-review/correction-addendum.md",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/correction-addendum.md",
+      "bytes": 5048,
+      "sha256": "de3fa9ea555c9a1b5241eaa904e4d459dcdba715fee530939f811f9d4803315e"
+    },
+    {
+      "path": "review-evidence/adapter-review/findings.json",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/findings.json",
+      "bytes": 1688,
+      "sha256": "fadb6caf76c6dcb6dd31ab3e8cf29dceac6b50483e6db3cb2693082442ec57b8"
+    },
+    {
+      "path": "review-evidence/adapter-review/host-initial-binding.json",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/host-initial-binding.json",
+      "bytes": 1296,
+      "sha256": "18dff6eaeefe44334a381c32fddd5224f7d9fa15790e28fe0bd438e539d40133"
+    },
+    {
+      "path": "review-evidence/adapter-review/host-initial-source/apps/web/src/app/meri/actions/MeriActionHost.tsx",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/host-initial-source/apps/web/src/app/meri/actions/MeriActionHost.tsx",
+      "bytes": 3667,
+      "sha256": "5fdbd0c7f8e6643d7b252c933fbc89b5b1126f5af73e59dbc69a1685d7275ad2"
+    },
+    {
+      "path": "review-evidence/adapter-review/host-initial-source/apps/web/src/shared/meri-actions/host-controller.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/host-initial-source/apps/web/src/shared/meri-actions/host-controller.ts",
+      "bytes": 3597,
+      "sha256": "031c98f9dfdba27ecd42512cee985dc05461dda5ea64d8d7738468f8df354eb3"
+    },
+    {
+      "path": "review-evidence/adapter-review/host-initial-source/apps/web/src/shared/meri-actions/query-journal.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/host-initial-source/apps/web/src/shared/meri-actions/query-journal.ts",
+      "bytes": 859,
+      "sha256": "a9927fdb965ba185fa1c6d36d5c85bd21ba6c19133e7a19460b8eb26f3cdee3b"
+    },
+    {
+      "path": "review-evidence/adapter-review/host-initial-source/apps/web/src/shared/portfolio/api/provider.tsx",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/host-initial-source/apps/web/src/shared/portfolio/api/provider.tsx",
+      "bytes": 2049,
+      "sha256": "727318986e7f6ac9a1e644573a87a894c1db3d6fa4f9eb9d4806c37d2857d81a"
+    },
+    {
+      "path": "review-evidence/adapter-review/host-initial-source/apps/web/src/shared/session/ApplicationBoundary.tsx",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/host-initial-source/apps/web/src/shared/session/ApplicationBoundary.tsx",
+      "bytes": 3005,
+      "sha256": "171e6a02aec0cabe461c195059483c585feecebdbf1b9d66c777007d59ced10f"
+    },
+    {
+      "path": "review-evidence/adapter-review/host-initial-source/apps/web/src/shared/session/SelectedClient.tsx",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/host-initial-source/apps/web/src/shared/session/SelectedClient.tsx",
+      "bytes": 2237,
+      "sha256": "9f08ff7be144494042a2147e84adb815d9e7a4e92e90b0bf5277cc44caab1a34"
+    },
+    {
+      "path": "review-evidence/adapter-review/host-original-owner-binding.json",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/host-original-owner-binding.json",
+      "bytes": 292,
+      "sha256": "f57170f998b0b02b8aa3ca31acca8ead6b0b92a30c14645e9a845000c6f0a0b7"
+    },
+    {
+      "path": "review-evidence/adapter-review/host-review.md",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/host-review.md",
+      "bytes": 3300,
+      "sha256": "f769b6cc22f744fecf1dce4a3944c21e7cca6f0c4ccdc02e17e5f4241f88c41f"
+    },
+    {
+      "path": "review-evidence/adapter-review/initial-source/apps/web/src/shared/meri-actions/attempt-journal.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/initial-source/apps/web/src/shared/meri-actions/attempt-journal.ts",
+      "bytes": 391,
+      "sha256": "3fd7884d856b5d7f27b9bcf6c5a405c9cf4703bd1f67f71ea756c561f94509a6"
+    },
+    {
+      "path": "review-evidence/adapter-review/initial-source/apps/web/src/shared/meri-actions/bounded-json.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/initial-source/apps/web/src/shared/meri-actions/bounded-json.ts",
+      "bytes": 2414,
+      "sha256": "a2e7c6d6fbd145346f4535149997fa26898acd0a5b6a829ffda013bfda0f059b"
+    },
+    {
+      "path": "review-evidence/adapter-review/initial-source/apps/web/src/shared/meri-actions/config.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/initial-source/apps/web/src/shared/meri-actions/config.ts",
+      "bytes": 474,
+      "sha256": "8b90d94ad5bc20ba25e5252dabc85561392cbf3c1f0d1be7ecc781bf8a78f471"
+    },
+    {
+      "path": "review-evidence/adapter-review/initial-source/apps/web/src/shared/meri-actions/correlation.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/initial-source/apps/web/src/shared/meri-actions/correlation.ts",
+      "bytes": 3719,
+      "sha256": "2e23bdac5ac94aac57bedb74e7338106c1be110bdf88d93cc4d95333f81edef8"
+    },
+    {
+      "path": "review-evidence/adapter-review/initial-source/apps/web/src/shared/meri-actions/disposition.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/initial-source/apps/web/src/shared/meri-actions/disposition.ts",
+      "bytes": 1103,
+      "sha256": "a093b4dc26cc3641b9268f3727b6f764ad0f8ff4a21dedede8716176c7e7ff7f"
+    },
+    {
+      "path": "review-evidence/adapter-review/initial-source/apps/web/src/shared/meri-actions/projection.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/initial-source/apps/web/src/shared/meri-actions/projection.ts",
+      "bytes": 2294,
+      "sha256": "a8c3108adfb8613522970d45bab434dabd632c4271ebf3e4bf96fb2d757d3a62"
+    },
+    {
+      "path": "review-evidence/adapter-review/initial-source/apps/web/src/shared/meri-actions/proxy.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/initial-source/apps/web/src/shared/meri-actions/proxy.ts",
+      "bytes": 2782,
+      "sha256": "6e74aad143652d21ce8fbbf24d9dc58a55fc443f95198e6dc28931228dd52d51"
+    },
+    {
+      "path": "review-evidence/adapter-review/initial-source/apps/web/src/shared/meri-actions/session-bootstrap.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/initial-source/apps/web/src/shared/meri-actions/session-bootstrap.ts",
+      "bytes": 1622,
+      "sha256": "8e7de1e15410f6d2a5978f2b183718a47e3e442c70844f50f803ae70ef8c75f8"
+    },
+    {
+      "path": "review-evidence/adapter-review/initial-source/apps/web/src/shared/meri-actions/session-receipt.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/initial-source/apps/web/src/shared/meri-actions/session-receipt.ts",
+      "bytes": 1127,
+      "sha256": "cfa1ae8c3a51aba7b92890eb2613b9a21b0a6ebb9802e49b967e2e61f2dfe7f0"
+    },
+    {
+      "path": "review-evidence/adapter-review/initial-source/apps/web/src/shared/meri-actions/workflow-adapter.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/initial-source/apps/web/src/shared/meri-actions/workflow-adapter.ts",
+      "bytes": 7663,
+      "sha256": "b9b3429566e36446672238dd17f408c10cebe838d1107601a7c06c6dfcd74cdc"
+    },
+    {
+      "path": "review-evidence/adapter-review/initial-source/apps/web/src/shared/meri-actions/workflow-port.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/initial-source/apps/web/src/shared/meri-actions/workflow-port.ts",
+      "bytes": 2124,
+      "sha256": "f5afc882738b4cb1684fa3969513a277646bd097dbe025a119a1c35263b3c1bc"
+    },
+    {
+      "path": "review-evidence/adapter-review/initial-source/apps/web/src/shared/meri-actions/workflow-transport.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/initial-source/apps/web/src/shared/meri-actions/workflow-transport.ts",
+      "bytes": 1397,
+      "sha256": "2acc8f6290e87a0e8c1f7cfe3d6ae0876d7b28883d9f1971de5f2a55bd32ce95"
+    },
+    {
+      "path": "review-evidence/adapter-review/initial-source/apps/web/tests/meri-action-adapter.test.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/initial-source/apps/web/tests/meri-action-adapter.test.ts",
+      "bytes": 4103,
+      "sha256": "856c3eb83198389a34af0e809e061cfe6a3d972d4f539670d5c204acd617d898"
+    },
+    {
+      "path": "review-evidence/adapter-review/initial-source/apps/web/tests/meri-action-correlation.test.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/initial-source/apps/web/tests/meri-action-correlation.test.ts",
+      "bytes": 4030,
+      "sha256": "30de9bd80f0a4b6c40a4c645461fc2c769721b663241ab407503cc255ebd9401"
+    },
+    {
+      "path": "review-evidence/adapter-review/initial-source/apps/web/tests/meri-action-fixtures.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/initial-source/apps/web/tests/meri-action-fixtures.ts",
+      "bytes": 3696,
+      "sha256": "299c822b95bc51273bb8cd29516b758726103d043b96e52f20c46a390bd3f3a7"
+    },
+    {
+      "path": "review-evidence/adapter-review/initial-source/apps/web/tests/meri-action-lifetime.test.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/initial-source/apps/web/tests/meri-action-lifetime.test.ts",
+      "bytes": 5674,
+      "sha256": "3fa9fbe7ecf870fb092eeaad0807f08cb39f57a391ea8436e6237ee299df6675"
+    },
+    {
+      "path": "review-evidence/adapter-review/initial-source/apps/web/tests/meri-action-session.test.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/initial-source/apps/web/tests/meri-action-session.test.ts",
+      "bytes": 4775,
+      "sha256": "3b031acec32d4002eb2be63d00f2d9166e836e02fa966026e891f8e7125b4d03"
+    },
+    {
+      "path": "review-evidence/adapter-review/initial-source/apps/web/tests/meri-action-transport.test.ts",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/initial-source/apps/web/tests/meri-action-transport.test.ts",
+      "bytes": 11242,
+      "sha256": "b3b04d188599cf40aa674019f570d241c339dbab512dfb1a432296ec50732b0d"
+    },
+    {
+      "path": "review-evidence/adapter-review/initial-source-binding.json",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/initial-source-binding.json",
+      "bytes": 4725,
+      "sha256": "82f7ae80263ba146896c4d7937146c3a1b6f65c1aa9a9d8d61de2eaf1cbcda19"
+    },
+    {
+      "path": "review-evidence/adapter-review/manifest.json",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/manifest.json",
+      "bytes": 11736,
+      "sha256": "7e9f03da191d93b304fa0546899f3465ca5d82bc6393eb4ce85f23a311ee96f5"
+    },
+    {
+      "path": "review-evidence/adapter-review/native-query-delivery.json",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/native-query-delivery.json",
+      "bytes": 4733,
+      "sha256": "5076d32ce5a6179aa835a5ffdf1d2f37cfaab735f785c718720e6c9b3a319423"
+    },
+    {
+      "path": "review-evidence/adapter-review/native-source-excerpts.json",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/native-source-excerpts.json",
+      "bytes": 33575,
+      "sha256": "d4de8335d4a19e0878793e2dfeba84fd19111a8e022cfb7cb0e31519bad9421f"
+    },
+    {
+      "path": "review-evidence/adapter-review/other-owner-evidence-bindings.json",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/other-owner-evidence-bindings.json",
+      "bytes": 1397,
+      "sha256": "b28834f6e85a81d3ae920150f245ddf9239a2ea7f1783f4367f74b24ae17c5e8"
+    },
+    {
+      "path": "review-evidence/adapter-review/probe-query-intent.mjs",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/probe-query-intent.mjs",
+      "bytes": 4207,
+      "sha256": "8e1456f4334b07c4716c2d6258c4a7a550a1aeee78bd745d35e31027a2ae9433"
+    },
+    {
+      "path": "review-evidence/adapter-review/query-foreign-intent-limit.json",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/query-foreign-intent-limit.json",
+      "bytes": 10089,
+      "sha256": "9ac1bc9b5b6e543961881e4821fd22cd62df52621ea4cca6d038b0907ec7ef6f"
+    },
+    {
+      "path": "review-evidence/adapter-review/query-foreign-intent-page.json",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/query-foreign-intent-page.json",
+      "bytes": 10089,
+      "sha256": "425a1071e31058703ef56637c80bdac396450c0571e39f16efa8a67f6d1f1b6e"
+    },
+    {
+      "path": "review-evidence/adapter-review/query-intent-after-results.json",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/query-intent-after-results.json",
+      "bytes": 1721,
+      "sha256": "16f003a9b43e0dfb25f7a8675c761a988de2b2ed0f961ea40e1cb40e4f232b91"
+    },
+    {
+      "path": "review-evidence/adapter-review/query-intent-after.log",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/query-intent-after.log",
+      "bytes": 1721,
+      "sha256": "16f003a9b43e0dfb25f7a8675c761a988de2b2ed0f961ea40e1cb40e4f232b91"
+    },
+    {
+      "path": "review-evidence/adapter-review/query-intent-before-results.json",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/query-intent-before-results.json",
+      "bytes": 1744,
+      "sha256": "1fd8f0fd7aeea351407307776b8c18284a77c3a1fc3ebc54bfaf32368e12d594"
+    },
+    {
+      "path": "review-evidence/adapter-review/query-intent-before.log",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/query-intent-before.log",
+      "bytes": 1744,
+      "sha256": "1fd8f0fd7aeea351407307776b8c18284a77c3a1fc3ebc54bfaf32368e12d594"
+    },
+    {
+      "path": "review-evidence/adapter-review/query-intent-loader-attempt1.log",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/query-intent-loader-attempt1.log",
+      "bytes": 434,
+      "sha256": "cefb486c8905650cbd3808b5b132096eb2a07341caa1c6f6c2cc569b7380a830"
+    },
+    {
+      "path": "review-evidence/adapter-review/query-intent-shape-attempt2.log",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/query-intent-shape-attempt2.log",
+      "bytes": 674,
+      "sha256": "4e7c888e4e2067acb59cb8a84638519ee54fb81098a5a6380dad77499f55cc9b"
+    },
+    {
+      "path": "review-evidence/adapter-review/rejected-query-page-shape-attempt2.json",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/rejected-query-page-shape-attempt2.json",
+      "bytes": 10086,
+      "sha256": "9b817c91a90cd6ae192f78bc57f67fac874adf4b6b60272cc4c562e4b0e55f44"
+    },
+    {
+      "path": "review-evidence/adapter-review/review.md",
+      "source": "/tmp/capiro-meri-adapter-independent-review-20261013/review.md",
+      "bytes": 8748,
+      "sha256": "ae163002c846dbc0fe36c5e051c6352f81723f63aacdc8b84197c58e6b0d012a"
+    },
+    {
+      "path": "review-evidence/transport-session/MANIFEST.json",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/MANIFEST.json",
+      "bytes": 5028,
+      "sha256": "784873d7c2c92269f97b992df8584ead0f4176c066a83ffc2745e39d2c2b77e6"
+    },
+    {
+      "path": "review-evidence/transport-session/REPORT.md",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/REPORT.md",
+      "bytes": 2640,
+      "sha256": "1405787ec4084cf96b7dcb8e4f7c6b93c4203fecc390b2e0d17d79a907905403"
+    },
+    {
+      "path": "review-evidence/transport-session/STRUCTURE-REVIEW-PROPOSAL.json",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/STRUCTURE-REVIEW-PROPOSAL.json",
+      "bytes": 2070,
+      "sha256": "1da5e14b3a550cdaba9d401951d838ee5710adef40e9d77be1461b7caa90f0fd"
+    },
+    {
+      "path": "review-evidence/transport-session/baseline-source/bounded-json.ts",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/baseline-source/bounded-json.ts",
+      "bytes": 2414,
+      "sha256": "a2e7c6d6fbd145346f4535149997fa26898acd0a5b6a829ffda013bfda0f059b"
+    },
+    {
+      "path": "review-evidence/transport-session/baseline-source/session-receipt.ts",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/baseline-source/session-receipt.ts",
+      "bytes": 1127,
+      "sha256": "cfa1ae8c3a51aba7b92890eb2613b9a21b0a6ebb9802e49b967e2e61f2dfe7f0"
+    },
+    {
+      "path": "review-evidence/transport-session/baseline-source/workflow-transport.ts",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/baseline-source/workflow-transport.ts",
+      "bytes": 1283,
+      "sha256": "52ac2a99c8c6b83c15016ec6c2995f126e5d1bd042d732ae4d2ab6c4987e7429"
+    },
+    {
+      "path": "review-evidence/transport-session/bounded-json.ts.diff",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/bounded-json.ts.diff",
+      "bytes": 2289,
+      "sha256": "4b85a51d384d095be0827f628b67cb3549b81af781f4a7f4bd09b1302b1ba685"
+    },
+    {
+      "path": "review-evidence/transport-session/expanded-baseline-receipt.json",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/expanded-baseline-receipt.json",
+      "bytes": 2209,
+      "sha256": "fa45599dd63461d95505bc2416ce46bf1bb26815db252ccf9e38393521eca62e"
+    },
+    {
+      "path": "review-evidence/transport-session/expanded-baseline-results.json",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/expanded-baseline-results.json",
+      "bytes": 39322,
+      "sha256": "599ad6600036613c19374be90317b3330a5a981d4286ea98157645722cbbe5a2"
+    },
+    {
+      "path": "review-evidence/transport-session/expanded-baseline-source/bounded-json.ts",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/expanded-baseline-source/bounded-json.ts",
+      "bytes": 2414,
+      "sha256": "a2e7c6d6fbd145346f4535149997fa26898acd0a5b6a829ffda013bfda0f059b"
+    },
+    {
+      "path": "review-evidence/transport-session/expanded-baseline-source/meri-action-session.test.ts",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/expanded-baseline-source/meri-action-session.test.ts",
+      "bytes": 6270,
+      "sha256": "75a28f2bc5c77bf9040a59b9716f7abd3a1dd0d8a7b0ea3e4148dac91270f323"
+    },
+    {
+      "path": "review-evidence/transport-session/expanded-baseline-source/meri-action-transport.test.ts",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/expanded-baseline-source/meri-action-transport.test.ts",
+      "bytes": 13175,
+      "sha256": "95a6ca38ec21f9b1a851b5efbfb9b33fc65c9bb1e3da70a3f2d9f584ab3641d5"
+    },
+    {
+      "path": "review-evidence/transport-session/expanded-baseline-source/session-receipt.ts",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/expanded-baseline-source/session-receipt.ts",
+      "bytes": 1127,
+      "sha256": "cfa1ae8c3a51aba7b92890eb2613b9a21b0a6ebb9802e49b967e2e61f2dfe7f0"
+    },
+    {
+      "path": "review-evidence/transport-session/expanded-baseline-source/workflow-transport.ts",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/expanded-baseline-source/workflow-transport.ts",
+      "bytes": 1397,
+      "sha256": "2acc8f6290e87a0e8c1f7cfe3d6ae0876d7b28883d9f1971de5f2a55bd32ce95"
+    },
+    {
+      "path": "review-evidence/transport-session/expanded-baseline.log",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/expanded-baseline.log",
+      "bytes": 22190,
+      "sha256": "a6a2cab34a768edacc207fcdc5b5c388541d742a282d19d952910803c1e1962c"
+    },
+    {
+      "path": "review-evidence/transport-session/final-receipt.json",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/final-receipt.json",
+      "bytes": 1720,
+      "sha256": "fa67d5b9aa0c4d5da406e9de4e1ac55e384b94cc7db914ab363b21847bbb84e1"
+    },
+    {
+      "path": "review-evidence/transport-session/final-results.json",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/final-results.json",
+      "bytes": 29034,
+      "sha256": "40983842b3f373a98b57fd0218fb5a0bc08f387d01649fe9046ab90c35bf77f7"
+    },
+    {
+      "path": "review-evidence/transport-session/final-source/bounded-json.ts",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/final-source/bounded-json.ts",
+      "bytes": 2614,
+      "sha256": "d8f46bc08078d4a4858e7eca5a3f0fab34065275f8268948e30babb869afe145"
+    },
+    {
+      "path": "review-evidence/transport-session/final-source/meri-action-session.test.ts",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/final-source/meri-action-session.test.ts",
+      "bytes": 6270,
+      "sha256": "75a28f2bc5c77bf9040a59b9716f7abd3a1dd0d8a7b0ea3e4148dac91270f323"
+    },
+    {
+      "path": "review-evidence/transport-session/final-source/meri-action-transport.test.ts",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/final-source/meri-action-transport.test.ts",
+      "bytes": 13175,
+      "sha256": "95a6ca38ec21f9b1a851b5efbfb9b33fc65c9bb1e3da70a3f2d9f584ab3641d5"
+    },
+    {
+      "path": "review-evidence/transport-session/final-source/session-receipt.ts",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/final-source/session-receipt.ts",
+      "bytes": 1355,
+      "sha256": "46d7ddd12325d7bc305583397aba249cfc4ec8022e278eed2e3933672af10b76"
+    },
+    {
+      "path": "review-evidence/transport-session/final-source/workflow-transport.ts",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/final-source/workflow-transport.ts",
+      "bytes": 1582,
+      "sha256": "9ea646f2fad49a59c75718d1df31ebba6b72f8ada3a168095cd5c41b082101ba"
+    },
+    {
+      "path": "review-evidence/transport-session/final.log",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/final.log",
+      "bytes": 12917,
+      "sha256": "6a4b64fcee299b09786c5dc36626b3a06505fd12916820ab4f860a2bd46b69a4"
+    },
+    {
+      "path": "review-evidence/transport-session/initial-receipt.json",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/initial-receipt.json",
+      "bytes": 1112,
+      "sha256": "60f4c42209caca514fcfd6b369fd635b13bc6fd4d55350390d3587855d3ad1b6"
+    },
+    {
+      "path": "review-evidence/transport-session/initial-results.json",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/initial-results.json",
+      "bytes": 32622,
+      "sha256": "da8cf0825120189ed46b2013a7d078acde0ec9452413153c02e54b4d0e6bff0a"
+    },
+    {
+      "path": "review-evidence/transport-session/initial.log",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/initial.log",
+      "bytes": 22488,
+      "sha256": "3349a066bb1204af381b8554c93b8edba86d911f3dfbba65ac728f959ce885d2"
+    },
+    {
+      "path": "review-evidence/transport-session/owned-eslint-app-cwd.log",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/owned-eslint-app-cwd.log",
+      "bytes": 208,
+      "sha256": "76162e465989f3f070a9de8db711fbf358e53b74d09ce1bbdb57c727e4c4a16d"
+    },
+    {
+      "path": "review-evidence/transport-session/owned-eslint.log",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/owned-eslint.log",
+      "bytes": 710,
+      "sha256": "98b91116e0fbbbe60acbe970b4b23a361ec6cc6be97b426ab1cea872c82ddde2"
+    },
+    {
+      "path": "review-evidence/transport-session/session-receipt.ts.diff",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/session-receipt.ts.diff",
+      "bytes": 1327,
+      "sha256": "4cbc94714ff93a11345c3efd747ec2f35c24e15852ea420855ea86e8406a1a1a"
+    },
+    {
+      "path": "review-evidence/transport-session/test-source-scan.json",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/test-source-scan.json",
+      "bytes": 1936,
+      "sha256": "03c4e90167900f45948c01208f7f9e232326544582fbe76afe8241680bd1340f"
+    },
+    {
+      "path": "review-evidence/transport-session/workflow-transport.ts.diff",
+      "source": "/tmp/capiro-meri-transport-session-tests-20261013/workflow-transport.ts.diff",
+      "bytes": 1007,
+      "sha256": "6535b04b17762e54ce7b1062e7595bf18fcb8df5a3f13f768cd3f8ae67428a0d"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/MANIFEST.json",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/MANIFEST.json",
+      "bytes": 11907,
+      "sha256": "e98a93babddc6d8e031bf5626ca0bf1c5653404c817c952f53ede7d8ac9d29d5"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/REPORT.md",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/REPORT.md",
+      "bytes": 3134,
+      "sha256": "2b49f80dce573e04a7049a0713ffa4d54ab64edf382e4bb8e107389802779c75"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/STRUCTURE-REVIEW.json",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/STRUCTURE-REVIEW.json",
+      "bytes": 4116,
+      "sha256": "732612e81b0e1533e562ed56f5b1b82548a37bfc927ec9b0a444560f404b4572"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/before-receipt.json",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/before-receipt.json",
+      "bytes": 5709,
+      "sha256": "d103eed8cbaef38da749ceb28e6fe8e8e8c722c35ce270206863c6faa8e6828e"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/before-results.json",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/before-results.json",
+      "bytes": 43690,
+      "sha256": "6ea8a8724bc3b079fdef25f152a10fdf6c3e97849fcee18b78053713f7469869"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/before-source/attempt-journal.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/before-source/attempt-journal.ts",
+      "bytes": 391,
+      "sha256": "3fd7884d856b5d7f27b9bcf6c5a405c9cf4703bd1f67f71ea756c561f94509a6"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/before-source/bounded-json.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/before-source/bounded-json.ts",
+      "bytes": 2614,
+      "sha256": "d8f46bc08078d4a4858e7eca5a3f0fab34065275f8268948e30babb869afe145"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/before-source/config.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/before-source/config.ts",
+      "bytes": 474,
+      "sha256": "8b90d94ad5bc20ba25e5252dabc85561392cbf3c1f0d1be7ecc781bf8a78f471"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/before-source/correlation.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/before-source/correlation.ts",
+      "bytes": 3719,
+      "sha256": "2e23bdac5ac94aac57bedb74e7338106c1be110bdf88d93cc4d95333f81edef8"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/before-source/disposition.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/before-source/disposition.ts",
+      "bytes": 1103,
+      "sha256": "a093b4dc26cc3641b9268f3727b6f764ad0f8ff4a21dedede8716176c7e7ff7f"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/before-source/host-controller.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/before-source/host-controller.ts",
+      "bytes": 3324,
+      "sha256": "9f4676b5d8910fd6c91aa4eff5977f00a7ba4eb8855314d46247909f3b283da0"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/before-source/meri-action-bootstrap.test.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/before-source/meri-action-bootstrap.test.ts",
+      "bytes": 10864,
+      "sha256": "33a818690e243612f8a5a1c1353b0bd0c3ad87609a6a5acba54b0c22d4010a30"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/before-source/meri-action-proxy.test.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/before-source/meri-action-proxy.test.ts",
+      "bytes": 12314,
+      "sha256": "bb7bd2340deba916f760c8a5f66ce8d29ea54652a96c908ffb19129cd53d5b06"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/before-source/projection.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/before-source/projection.ts",
+      "bytes": 2294,
+      "sha256": "a8c3108adfb8613522970d45bab434dabd632c4271ebf3e4bf96fb2d757d3a62"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/before-source/proxy.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/before-source/proxy.ts",
+      "bytes": 2782,
+      "sha256": "6e74aad143652d21ce8fbbf24d9dc58a55fc443f95198e6dc28931228dd52d51"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/before-source/query-journal.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/before-source/query-journal.ts",
+      "bytes": 859,
+      "sha256": "a9927fdb965ba185fa1c6d36d5c85bd21ba6c19133e7a19460b8eb26f3cdee3b"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/before-source/session-bootstrap.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/before-source/session-bootstrap.ts",
+      "bytes": 1640,
+      "sha256": "f3e1b503b067294867655ac52572f8b82ebfc0cd478eb5169e6f3ad219af0028"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/before-source/session-receipt.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/before-source/session-receipt.ts",
+      "bytes": 1355,
+      "sha256": "46d7ddd12325d7bc305583397aba249cfc4ec8022e278eed2e3933672af10b76"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/before-source/workflow-adapter.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/before-source/workflow-adapter.ts",
+      "bytes": 7880,
+      "sha256": "43f81fc541793d92cc5945621f6cfecd9715c24eb18b130a3a7660f3a4e6a9be"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/before-source/workflow-port.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/before-source/workflow-port.ts",
+      "bytes": 2124,
+      "sha256": "f5afc882738b4cb1684fa3969513a277646bd097dbe025a119a1c35263b3c1bc"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/before-source/workflow-transport.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/before-source/workflow-transport.ts",
+      "bytes": 1582,
+      "sha256": "9ea646f2fad49a59c75718d1df31ebba6b72f8ada3a168095cd5c41b082101ba"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/before.log",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/before.log",
+      "bytes": 300,
+      "sha256": "0b8f3ec2e4c8e287c9d682bf2e7ce3f6ae18714b463b0e89aacdd76c1e43724a"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/bounded-json.ts-root-correction.patch",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/bounded-json.ts-root-correction.patch",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/concurrent-root-changes.json",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/concurrent-root-changes.json",
+      "bytes": 1136,
+      "sha256": "58c7526be29a0d709a081b4239642871f3bfe38918c87412e752f8252e383bb4"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/coverage.json",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/coverage.json",
+      "bytes": 900,
+      "sha256": "89eacc53ab3edb14f14b0536c9ca33e262a27b50d3bbee6d8c90a3211bbac34f"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/final-receipt.json",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/final-receipt.json",
+      "bytes": 6060,
+      "sha256": "cb2c3d630839f495f90fed9e0693d4b7234d1ac0e2610e443f282d9a08fd34ea"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/final-results.json",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/final-results.json",
+      "bytes": 53131,
+      "sha256": "000d4351d47603c085ca10b5d0d91aef22327c376df2446c0042bb604d071dc9"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/final-source/attempt-journal.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/final-source/attempt-journal.ts",
+      "bytes": 391,
+      "sha256": "3fd7884d856b5d7f27b9bcf6c5a405c9cf4703bd1f67f71ea756c561f94509a6"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/final-source/bounded-json.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/final-source/bounded-json.ts",
+      "bytes": 2614,
+      "sha256": "d8f46bc08078d4a4858e7eca5a3f0fab34065275f8268948e30babb869afe145"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/final-source/config.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/final-source/config.ts",
+      "bytes": 474,
+      "sha256": "8b90d94ad5bc20ba25e5252dabc85561392cbf3c1f0d1be7ecc781bf8a78f471"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/final-source/correlation.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/final-source/correlation.ts",
+      "bytes": 4131,
+      "sha256": "4185a15f731a88beff8b73e5d65629e66908f921dcb5bff4a8657e761ffa3e7f"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/final-source/disposition.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/final-source/disposition.ts",
+      "bytes": 1103,
+      "sha256": "a093b4dc26cc3641b9268f3727b6f764ad0f8ff4a21dedede8716176c7e7ff7f"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/final-source/host-controller.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/final-source/host-controller.ts",
+      "bytes": 3324,
+      "sha256": "9f4676b5d8910fd6c91aa4eff5977f00a7ba4eb8855314d46247909f3b283da0"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/final-source/meri-action-bootstrap.test.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/final-source/meri-action-bootstrap.test.ts",
+      "bytes": 11326,
+      "sha256": "0a5f237c77d3ad841dc7ad02e12d5e80ce8ef2115b327286526768f282a843d4"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/final-source/meri-action-proxy.test.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/final-source/meri-action-proxy.test.ts",
+      "bytes": 13164,
+      "sha256": "07254bbdfa5125be25e1e07f889416a7c3b4bc960e7bbc5e3ca75bc6cf68d1e1"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/final-source/projection.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/final-source/projection.ts",
+      "bytes": 2294,
+      "sha256": "a8c3108adfb8613522970d45bab434dabd632c4271ebf3e4bf96fb2d757d3a62"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/final-source/proxy.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/final-source/proxy.ts",
+      "bytes": 2843,
+      "sha256": "6046d58306b2c5694f618a2331dda4ea26baae64e12ecc6b94b6feec1973fcb4"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/final-source/query-journal.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/final-source/query-journal.ts",
+      "bytes": 859,
+      "sha256": "a9927fdb965ba185fa1c6d36d5c85bd21ba6c19133e7a19460b8eb26f3cdee3b"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/final-source/route.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/final-source/route.ts",
+      "bytes": 589,
+      "sha256": "a6f35fcd97672184101b6d77a609e6470c8f73da620a6ca1e8ecc39024154d26"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/final-source/session-bootstrap.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/final-source/session-bootstrap.ts",
+      "bytes": 1640,
+      "sha256": "f3e1b503b067294867655ac52572f8b82ebfc0cd478eb5169e6f3ad219af0028"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/final-source/session-receipt.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/final-source/session-receipt.ts",
+      "bytes": 1355,
+      "sha256": "46d7ddd12325d7bc305583397aba249cfc4ec8022e278eed2e3933672af10b76"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/final-source/workflow-adapter.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/final-source/workflow-adapter.ts",
+      "bytes": 7866,
+      "sha256": "af7b2d3240a164c50e19c1b702653e4d52bc0aa2ce50e24b558ed453eeb6290c"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/final-source/workflow-port.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/final-source/workflow-port.ts",
+      "bytes": 2124,
+      "sha256": "f5afc882738b4cb1684fa3969513a277646bd097dbe025a119a1c35263b3c1bc"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/final-source/workflow-transport.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/final-source/workflow-transport.ts",
+      "bytes": 1582,
+      "sha256": "9ea646f2fad49a59c75718d1df31ebba6b72f8ada3a168095cd5c41b082101ba"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/final-test-structure.json",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/final-test-structure.json",
+      "bytes": 2988,
+      "sha256": "8d3adb6b4235833bc42183eec41c80e3a121c19149832fc35a1bd137eaaf5bbd"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/final.log",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/final.log",
+      "bytes": 299,
+      "sha256": "569b45dd7df544eeec846783818994104c9740c7e4ec25d08e62279fcafe1ef6"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/findings.json",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/findings.json",
+      "bytes": 912,
+      "sha256": "a1678fa48ccd45ee39b8e8df4172934cf31054e42331a33cd6000e0c5599c5ae"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/format.log",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/format.log",
+      "bytes": 66,
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/initial-lint-observation.json",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/initial-lint-observation.json",
+      "bytes": 1322,
+      "sha256": "c1b58f5056d2711c24e69d5f68f18dced753775df88a3bb199826af75e570e2b"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/lint.log",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/lint.log",
+      "bytes": 208,
+      "sha256": "76162e465989f3f070a9de8db711fbf358e53b74d09ce1bbdb57c727e4c4a16d"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/proxy.ts-root-correction.patch",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/proxy.ts-root-correction.patch",
+      "bytes": 340,
+      "sha256": "7e8f5dfc4e0cc6624b758d864e29d1184d118e50a1c05c52fd2df0ac0785e994"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/resource-baseline-receipt.json",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/resource-baseline-receipt.json",
+      "bytes": 5720,
+      "sha256": "897903a8a8562357c427419c8b95bc86494ae690229658dbcf1b5ccd8e3582c0"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/resource-baseline-results.json",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/resource-baseline-results.json",
+      "bytes": 53097,
+      "sha256": "813b19558a08b3c3dd361624df106f59b081e0780f49f90151ef6826a4291181"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/resource-baseline-source/attempt-journal.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/resource-baseline-source/attempt-journal.ts",
+      "bytes": 391,
+      "sha256": "3fd7884d856b5d7f27b9bcf6c5a405c9cf4703bd1f67f71ea756c561f94509a6"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/resource-baseline-source/bounded-json.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/resource-baseline-source/bounded-json.ts",
+      "bytes": 2614,
+      "sha256": "d8f46bc08078d4a4858e7eca5a3f0fab34065275f8268948e30babb869afe145"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/resource-baseline-source/config.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/resource-baseline-source/config.ts",
+      "bytes": 474,
+      "sha256": "8b90d94ad5bc20ba25e5252dabc85561392cbf3c1f0d1be7ecc781bf8a78f471"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/resource-baseline-source/correlation.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/resource-baseline-source/correlation.ts",
+      "bytes": 4131,
+      "sha256": "4185a15f731a88beff8b73e5d65629e66908f921dcb5bff4a8657e761ffa3e7f"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/resource-baseline-source/disposition.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/resource-baseline-source/disposition.ts",
+      "bytes": 1103,
+      "sha256": "a093b4dc26cc3641b9268f3727b6f764ad0f8ff4a21dedede8716176c7e7ff7f"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/resource-baseline-source/host-controller.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/resource-baseline-source/host-controller.ts",
+      "bytes": 3324,
+      "sha256": "9f4676b5d8910fd6c91aa4eff5977f00a7ba4eb8855314d46247909f3b283da0"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/resource-baseline-source/meri-action-bootstrap.test.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/resource-baseline-source/meri-action-bootstrap.test.ts",
+      "bytes": 11471,
+      "sha256": "c042aa98b53c2f6ff65722f8098870c408f9f21a025afce02d40448c97b008ca"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/resource-baseline-source/meri-action-proxy.test.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/resource-baseline-source/meri-action-proxy.test.ts",
+      "bytes": 13194,
+      "sha256": "a2d9b9bfb17f5a59973af6d90cc599a8795abe295a0e2257442a2389fd2fc8be"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/resource-baseline-source/projection.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/resource-baseline-source/projection.ts",
+      "bytes": 2294,
+      "sha256": "a8c3108adfb8613522970d45bab434dabd632c4271ebf3e4bf96fb2d757d3a62"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/resource-baseline-source/proxy.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/resource-baseline-source/proxy.ts",
+      "bytes": 2843,
+      "sha256": "6046d58306b2c5694f618a2331dda4ea26baae64e12ecc6b94b6feec1973fcb4"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/resource-baseline-source/query-journal.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/resource-baseline-source/query-journal.ts",
+      "bytes": 859,
+      "sha256": "a9927fdb965ba185fa1c6d36d5c85bd21ba6c19133e7a19460b8eb26f3cdee3b"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/resource-baseline-source/session-bootstrap.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/resource-baseline-source/session-bootstrap.ts",
+      "bytes": 1640,
+      "sha256": "f3e1b503b067294867655ac52572f8b82ebfc0cd478eb5169e6f3ad219af0028"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/resource-baseline-source/session-receipt.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/resource-baseline-source/session-receipt.ts",
+      "bytes": 1355,
+      "sha256": "46d7ddd12325d7bc305583397aba249cfc4ec8022e278eed2e3933672af10b76"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/resource-baseline-source/workflow-adapter.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/resource-baseline-source/workflow-adapter.ts",
+      "bytes": 7866,
+      "sha256": "af7b2d3240a164c50e19c1b702653e4d52bc0aa2ce50e24b558ed453eeb6290c"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/resource-baseline-source/workflow-port.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/resource-baseline-source/workflow-port.ts",
+      "bytes": 2124,
+      "sha256": "f5afc882738b4cb1684fa3969513a277646bd097dbe025a119a1c35263b3c1bc"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/resource-baseline-source/workflow-transport.ts",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/resource-baseline-source/workflow-transport.ts",
+      "bytes": 1582,
+      "sha256": "9ea646f2fad49a59c75718d1df31ebba6b72f8ada3a168095cd5c41b082101ba"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/resource-baseline.log",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/resource-baseline.log",
+      "bytes": 311,
+      "sha256": "33a635070473330469cf027d7d1c4510eae816a6794a21180044de0ffb609290"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/root-typecheck-observation.log",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/root-typecheck-observation.log",
+      "bytes": 1495,
+      "sha256": "4ef4c7251ab7057c4476875e0aa58e5c3b1820d47392d84a824e19151522b579"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/seal.py",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/seal.py",
+      "bytes": 9036,
+      "sha256": "561c738fbde4582b7fb281c82f88789ade8dc778fdbb0f3f98af6bc2c46d39c5"
+    },
+    {
+      "path": "review-evidence/proxy-bootstrap/test-structure.json",
+      "source": "/tmp/capiro-meri-proxy-bootstrap-review-20261013/test-structure.json",
+      "bytes": 2988,
+      "sha256": "5511145631c98155d00cc1d1c34f44b02ed1ce5e9a017ba727d76cfca5332636"
+    },
+    {
+      "path": "review-evidence/host-tests/MANIFEST.json",
+      "source": "/tmp/capiro-meri-host-tests-20261013/MANIFEST.json",
+      "bytes": 6915,
+      "sha256": "ee33916029208dd369ac25719ecbe8b42399d31d5de9dc35645c400d31e04102"
+    },
+    {
+      "path": "review-evidence/host-tests/REPORT.md",
+      "source": "/tmp/capiro-meri-host-tests-20261013/REPORT.md",
+      "bytes": 3286,
+      "sha256": "0577c7a8bb052875a2248f84c52f2721fc57a1e7a3a85a4188562f116745e557"
+    },
+    {
+      "path": "review-evidence/host-tests/RUN-INDEX.json",
+      "source": "/tmp/capiro-meri-host-tests-20261013/RUN-INDEX.json",
+      "bytes": 893,
+      "sha256": "849c8fb003db282e0bd65966db9d488fae4deddfc639a598b3c5527c8d7ebea0"
+    },
+    {
+      "path": "review-evidence/host-tests/SOURCE-BINDING.json",
+      "source": "/tmp/capiro-meri-host-tests-20261013/SOURCE-BINDING.json",
+      "bytes": 4100,
+      "sha256": "435bb8d87df057ae09329f85ab60b58fe3cbf38e010babbdba3aea7a2fddbdae"
+    },
+    {
+      "path": "review-evidence/host-tests/STRUCTURE-REVIEW-PROPOSAL.json",
+      "source": "/tmp/capiro-meri-host-tests-20261013/STRUCTURE-REVIEW-PROPOSAL.json",
+      "bytes": 2361,
+      "sha256": "61134c95a8502441161e43c831b71b1c9d21ea22f86ae5642f98b505478c2702"
+    },
+    {
+      "path": "review-evidence/host-tests/baseline-source/host-controller.ts",
+      "source": "/tmp/capiro-meri-host-tests-20261013/baseline-source/host-controller.ts",
+      "bytes": 3324,
+      "sha256": "9f4676b5d8910fd6c91aa4eff5977f00a7ba4eb8855314d46247909f3b283da0"
+    },
+    {
+      "path": "review-evidence/host-tests/baseline-source/query-journal.ts",
+      "source": "/tmp/capiro-meri-host-tests-20261013/baseline-source/query-journal.ts",
+      "bytes": 859,
+      "sha256": "a9927fdb965ba185fa1c6d36d5c85bd21ba6c19133e7a19460b8eb26f3cdee3b"
+    },
+    {
+      "path": "review-evidence/host-tests/baseline-source/workflow-adapter.ts",
+      "source": "/tmp/capiro-meri-host-tests-20261013/baseline-source/workflow-adapter.ts",
+      "bytes": 7866,
+      "sha256": "af7b2d3240a164c50e19c1b702653e4d52bc0aa2ce50e24b558ed453eeb6290c"
+    },
+    {
+      "path": "review-evidence/host-tests/checks.json",
+      "source": "/tmp/capiro-meri-host-tests-20261013/checks.json",
+      "bytes": 701,
+      "sha256": "dc54f666989eaf7198abf835de02cba7d9740c058549720872056627a24bd710"
+    },
+    {
+      "path": "review-evidence/host-tests/eslint.log",
+      "source": "/tmp/capiro-meri-host-tests-20261013/eslint.log",
+      "bytes": 208,
+      "sha256": "76162e465989f3f070a9de8db711fbf358e53b74d09ce1bbdb57c727e4c4a16d"
+    },
+    {
+      "path": "review-evidence/host-tests/final-receipt.json",
+      "source": "/tmp/capiro-meri-host-tests-20261013/final-receipt.json",
+      "bytes": 5222,
+      "sha256": "93663baa13a61509e49824dbea04fc26929c2dc9e972808d07511cc9ddbcabf0"
+    },
+    {
+      "path": "review-evidence/host-tests/final-results.json",
+      "source": "/tmp/capiro-meri-host-tests-20261013/final-results.json",
+      "bytes": 7786,
+      "sha256": "8daebdb534b5be73c6d01efeca546a39829e4a620302a23dcfcc1227e081dd01"
+    },
+    {
+      "path": "review-evidence/host-tests/final-source/apps/web/src/shared/meri-actions/attempt-journal.ts",
+      "source": "/tmp/capiro-meri-host-tests-20261013/final-source/apps/web/src/shared/meri-actions/attempt-journal.ts",
+      "bytes": 391,
+      "sha256": "3fd7884d856b5d7f27b9bcf6c5a405c9cf4703bd1f67f71ea756c561f94509a6"
+    },
+    {
+      "path": "review-evidence/host-tests/final-source/apps/web/src/shared/meri-actions/bounded-json.ts",
+      "source": "/tmp/capiro-meri-host-tests-20261013/final-source/apps/web/src/shared/meri-actions/bounded-json.ts",
+      "bytes": 2614,
+      "sha256": "d8f46bc08078d4a4858e7eca5a3f0fab34065275f8268948e30babb869afe145"
+    },
+    {
+      "path": "review-evidence/host-tests/final-source/apps/web/src/shared/meri-actions/config.ts",
+      "source": "/tmp/capiro-meri-host-tests-20261013/final-source/apps/web/src/shared/meri-actions/config.ts",
+      "bytes": 474,
+      "sha256": "8b90d94ad5bc20ba25e5252dabc85561392cbf3c1f0d1be7ecc781bf8a78f471"
+    },
+    {
+      "path": "review-evidence/host-tests/final-source/apps/web/src/shared/meri-actions/correlation.ts",
+      "source": "/tmp/capiro-meri-host-tests-20261013/final-source/apps/web/src/shared/meri-actions/correlation.ts",
+      "bytes": 4131,
+      "sha256": "4185a15f731a88beff8b73e5d65629e66908f921dcb5bff4a8657e761ffa3e7f"
+    },
+    {
+      "path": "review-evidence/host-tests/final-source/apps/web/src/shared/meri-actions/disposition.ts",
+      "source": "/tmp/capiro-meri-host-tests-20261013/final-source/apps/web/src/shared/meri-actions/disposition.ts",
+      "bytes": 1103,
+      "sha256": "a093b4dc26cc3641b9268f3727b6f764ad0f8ff4a21dedede8716176c7e7ff7f"
+    },
+    {
+      "path": "review-evidence/host-tests/final-source/apps/web/src/shared/meri-actions/host-controller.ts",
+      "source": "/tmp/capiro-meri-host-tests-20261013/final-source/apps/web/src/shared/meri-actions/host-controller.ts",
+      "bytes": 3597,
+      "sha256": "031c98f9dfdba27ecd42512cee985dc05461dda5ea64d8d7738468f8df354eb3"
+    },
+    {
+      "path": "review-evidence/host-tests/final-source/apps/web/src/shared/meri-actions/projection.ts",
+      "source": "/tmp/capiro-meri-host-tests-20261013/final-source/apps/web/src/shared/meri-actions/projection.ts",
+      "bytes": 2294,
+      "sha256": "a8c3108adfb8613522970d45bab434dabd632c4271ebf3e4bf96fb2d757d3a62"
+    },
+    {
+      "path": "review-evidence/host-tests/final-source/apps/web/src/shared/meri-actions/proxy.ts",
+      "source": "/tmp/capiro-meri-host-tests-20261013/final-source/apps/web/src/shared/meri-actions/proxy.ts",
+      "bytes": 2843,
+      "sha256": "6046d58306b2c5694f618a2331dda4ea26baae64e12ecc6b94b6feec1973fcb4"
+    },
+    {
+      "path": "review-evidence/host-tests/final-source/apps/web/src/shared/meri-actions/query-journal.ts",
+      "source": "/tmp/capiro-meri-host-tests-20261013/final-source/apps/web/src/shared/meri-actions/query-journal.ts",
+      "bytes": 1241,
+      "sha256": "8249df4b758ef20b7bc83776555eea5639c8f1a15cd6a13d4ea40b5fe62be171"
+    },
+    {
+      "path": "review-evidence/host-tests/final-source/apps/web/src/shared/meri-actions/session-bootstrap.ts",
+      "source": "/tmp/capiro-meri-host-tests-20261013/final-source/apps/web/src/shared/meri-actions/session-bootstrap.ts",
+      "bytes": 1640,
+      "sha256": "f3e1b503b067294867655ac52572f8b82ebfc0cd478eb5169e6f3ad219af0028"
+    },
+    {
+      "path": "review-evidence/host-tests/final-source/apps/web/src/shared/meri-actions/session-receipt.ts",
+      "source": "/tmp/capiro-meri-host-tests-20261013/final-source/apps/web/src/shared/meri-actions/session-receipt.ts",
+      "bytes": 1355,
+      "sha256": "46d7ddd12325d7bc305583397aba249cfc4ec8022e278eed2e3933672af10b76"
+    },
+    {
+      "path": "review-evidence/host-tests/final-source/apps/web/src/shared/meri-actions/workflow-adapter.ts",
+      "source": "/tmp/capiro-meri-host-tests-20261013/final-source/apps/web/src/shared/meri-actions/workflow-adapter.ts",
+      "bytes": 8265,
+      "sha256": "1d35e9a68d713bd1088d4141aaead81d0d5d0a5ceb8371736feed5f568abe458"
+    },
+    {
+      "path": "review-evidence/host-tests/final-source/apps/web/src/shared/meri-actions/workflow-port.ts",
+      "source": "/tmp/capiro-meri-host-tests-20261013/final-source/apps/web/src/shared/meri-actions/workflow-port.ts",
+      "bytes": 2124,
+      "sha256": "f5afc882738b4cb1684fa3969513a277646bd097dbe025a119a1c35263b3c1bc"
+    },
+    {
+      "path": "review-evidence/host-tests/final-source/apps/web/src/shared/meri-actions/workflow-transport.ts",
+      "source": "/tmp/capiro-meri-host-tests-20261013/final-source/apps/web/src/shared/meri-actions/workflow-transport.ts",
+      "bytes": 2038,
+      "sha256": "b32635261243e59f8605aafa84092e728ed083c58d33a9d6923e702cd25e2e3b"
+    },
+    {
+      "path": "review-evidence/host-tests/final-source/apps/web/tests/meri-action-fixtures.ts",
+      "source": "/tmp/capiro-meri-host-tests-20261013/final-source/apps/web/tests/meri-action-fixtures.ts",
+      "bytes": 3696,
+      "sha256": "299c822b95bc51273bb8cd29516b758726103d043b96e52f20c46a390bd3f3a7"
+    },
+    {
+      "path": "review-evidence/host-tests/final-source/apps/web/tests/meri-action-host.test.ts",
+      "source": "/tmp/capiro-meri-host-tests-20261013/final-source/apps/web/tests/meri-action-host.test.ts",
+      "bytes": 15218,
+      "sha256": "e1939e567697a279330f1c1f2568af0ab4fa25d4a2f05019b2082723014fe068"
+    },
+    {
+      "path": "review-evidence/host-tests/final-source/apps/web/tests/meri-action-session.test.ts",
+      "source": "/tmp/capiro-meri-host-tests-20261013/final-source/apps/web/tests/meri-action-session.test.ts",
+      "bytes": 6270,
+      "sha256": "75a28f2bc5c77bf9040a59b9716f7abd3a1dd0d8a7b0ea3e4148dac91270f323"
+    },
+    {
+      "path": "review-evidence/host-tests/final-source/apps/web/tests/meri-action-transport.test.ts",
+      "source": "/tmp/capiro-meri-host-tests-20261013/final-source/apps/web/tests/meri-action-transport.test.ts",
+      "bytes": 13175,
+      "sha256": "95a6ca38ec21f9b1a851b5efbfb9b33fc65c9bb1e3da70a3f2d9f584ab3641d5"
+    },
+    {
+      "path": "review-evidence/host-tests/final-source/apps/web/vitest.config.ts",
+      "source": "/tmp/capiro-meri-host-tests-20261013/final-source/apps/web/vitest.config.ts",
+      "bytes": 269,
+      "sha256": "e56235e455ce9260d5f5052591ae125ef9de02b611b969bd0f8b35551077062f"
+    },
+    {
+      "path": "review-evidence/host-tests/final.log",
+      "source": "/tmp/capiro-meri-host-tests-20261013/final.log",
+      "bytes": 3630,
+      "sha256": "99575ae5ea84eb8340a55c12e3c3b20df0bb4bd52a1f98d351e1d1e3c9c3cec1"
+    },
+    {
+      "path": "review-evidence/host-tests/generation-baseline-results.json",
+      "source": "/tmp/capiro-meri-host-tests-20261013/generation-baseline-results.json",
+      "bytes": 6579,
+      "sha256": "2c513874feff188f0b78b5e225da868192fab0a29481e196c42899a619177104"
+    },
+    {
+      "path": "review-evidence/host-tests/generation-baseline.log",
+      "source": "/tmp/capiro-meri-host-tests-20261013/generation-baseline.log",
+      "bytes": 3111,
+      "sha256": "c8218dc0de10d88d09252ce17000174a33111fc4490117181521f3a46b2fb95a"
+    },
+    {
+      "path": "review-evidence/host-tests/host-controller.ts.diff",
+      "source": "/tmp/capiro-meri-host-tests-20261013/host-controller.ts.diff",
+      "bytes": 1121,
+      "sha256": "6ef8a7528a5d0939a44ac4ea6dbd9732956c22b246f7addabe83eed444295d9e"
+    },
+    {
+      "path": "review-evidence/host-tests/initial-results.json",
+      "source": "/tmp/capiro-meri-host-tests-20261013/initial-results.json",
+      "bytes": 6502,
+      "sha256": "eec23ddf2c2446856f829e74f01b52830637c3457237195c52d8260e4c0cf481"
+    },
+    {
+      "path": "review-evidence/host-tests/initial.log",
+      "source": "/tmp/capiro-meri-host-tests-20261013/initial.log",
+      "bytes": 5343,
+      "sha256": "34fed5f135071e9cd56eaaac087a255ca4020e5f70f1232a9440dae603193ff7"
+    },
+    {
+      "path": "review-evidence/host-tests/query-journal.ts.diff",
+      "source": "/tmp/capiro-meri-host-tests-20261013/query-journal.ts.diff",
+      "bytes": 922,
+      "sha256": "73c229ca61283a8478e0a3ee3b062b8f80081f8a0b97ab31dbb0ee8095ea39bc"
+    },
+    {
+      "path": "review-evidence/host-tests/structure-scan.json",
+      "source": "/tmp/capiro-meri-host-tests-20261013/structure-scan.json",
+      "bytes": 1268,
+      "sha256": "b250cdb0f4e49ddc16b6bfd8a6a43e5e1be8c645b27a7526780274c1f2b5bd1e"
+    },
+    {
+      "path": "review-evidence/host-tests/workflow-adapter.ts.diff",
+      "source": "/tmp/capiro-meri-host-tests-20261013/workflow-adapter.ts.diff",
+      "bytes": 1901,
+      "sha256": "fb52177debac54e1b0e94b24270a572252e656c90cd8a2b407aad0fd191ad76e"
+    },
+    {
+      "path": "review-evidence/responsibility-review/architecture-exit.json",
+      "source": "/tmp/capiro-meri-responsibility-review-20261013/architecture-exit.json",
+      "bytes": 66,
+      "sha256": "319b6ba54aec13735f49c8d868eda601687e3ced727bdb4dbd925a4a9d8c2a27"
+    },
+    {
+      "path": "review-evidence/responsibility-review/architecture-final-exit.json",
+      "source": "/tmp/capiro-meri-responsibility-review-20261013/architecture-final-exit.json",
+      "bytes": 137,
+      "sha256": "ed22a91df74d7cdad93639b44aea1ae33470722d6e9c63e163f8f42d7e556bb0"
+    },
+    {
+      "path": "review-evidence/responsibility-review/architecture-final.log",
+      "source": "/tmp/capiro-meri-responsibility-review-20261013/architecture-final.log",
+      "bytes": 789099,
+      "sha256": "d1af0b221243ba47fd7af67299ef72c4e5c591fa085a908b7d62c014bb650453"
+    },
+    {
+      "path": "review-evidence/responsibility-review/architecture-summary.json",
+      "source": "/tmp/capiro-meri-responsibility-review-20261013/architecture-summary.json",
+      "bytes": 555,
+      "sha256": "e288f8eddc5062c0d430ebd381287e253f8cb460b48a90fc636faa4b5a4cdb49"
+    },
+    {
+      "path": "review-evidence/responsibility-review/architecture.log",
+      "source": "/tmp/capiro-meri-responsibility-review-20261013/architecture.log",
+      "bytes": 789097,
+      "sha256": "a37e673d62e2bb0ec931fe63b6b13c55e02f1e2424632e315a09864b0719d53f"
+    },
+    {
+      "path": "review-evidence/responsibility-review/host-author-proposal-verification.json",
+      "source": "/tmp/capiro-meri-responsibility-review-20261013/host-author-proposal-verification.json",
+      "bytes": 324,
+      "sha256": "7a1a205a81a23a002ff34b36f11fc2a9f0639296840c728f6d2e88c858d7ae47"
+    },
+    {
+      "path": "review-evidence/responsibility-review/host-test-registry-proposals.json",
+      "source": "/tmp/capiro-meri-responsibility-review-20261013/host-test-registry-proposals.json",
+      "bytes": 2619,
+      "sha256": "17878708e674209d369ab271cbf40fe86b760e786e0bf09a381b8764fefcd615"
+    },
+    {
+      "path": "review-evidence/responsibility-review/manifest.json",
+      "source": "/tmp/capiro-meri-responsibility-review-20261013/manifest.json",
+      "bytes": 2631,
+      "sha256": "8b5d31537ba851a33b4e95f9c6d3b5176effba637ac8ca9992ea0640ac48b025"
+    },
+    {
+      "path": "review-evidence/responsibility-review/production-registry-proposals.json",
+      "source": "/tmp/capiro-meri-responsibility-review-20261013/production-registry-proposals.json",
+      "bytes": 1098,
+      "sha256": "bc4c504715de66ee1142337bb0a15ff1c0fe2438f00012c919e2b082fcade661"
+    },
+    {
+      "path": "review-evidence/responsibility-review/registry-proposals.json",
+      "source": "/tmp/capiro-meri-responsibility-review-20261013/registry-proposals.json",
+      "bytes": 11711,
+      "sha256": "96e54078ebd447148940ebcf1bfb84498a051e6e1b8c929c98e67b1f2858c726"
+    },
+    {
+      "path": "review-evidence/responsibility-review/review.md",
+      "source": "/tmp/capiro-meri-responsibility-review-20261013/review.md",
+      "bytes": 6534,
+      "sha256": "042cea1ec122e2584bfe5fd85b4d530ab649164040eb94fea92cbdad2fcf1e57"
+    },
+    {
+      "path": "review-evidence/responsibility-review/source-binding.json",
+      "source": "/tmp/capiro-meri-responsibility-review-20261013/source-binding.json",
+      "bytes": 6166,
+      "sha256": "dc1ed2106f2e2a35a1db4f6dc1fbaf07643e1ea9fdf755d7993d44d27cee2ce0"
+    },
+    {
+      "path": "review-evidence/responsibility-review/test-author-proposal-verification.json",
+      "source": "/tmp/capiro-meri-responsibility-review-20261013/test-author-proposal-verification.json",
+      "bytes": 4317,
+      "sha256": "8d1fe9cba9936af08c120802b97c66cb60ceeee6e4ebfaac566e24ec6da56464"
+    },
+    {
+      "path": "review-evidence/responsibility-review/test-author-registry-proposals.json",
+      "source": "/tmp/capiro-meri-responsibility-review-20261013/test-author-registry-proposals.json",
+      "bytes": 8000,
+      "sha256": "10bcafb7d8041b502f05272c86bef4f402342d861e7d50c96ce36ef31b8502ed"
+    },
+    {
+      "path": "review-evidence/responsibility-review/test-declaration-review.json",
+      "source": "/tmp/capiro-meri-responsibility-review-20261013/test-declaration-review.json",
+      "bytes": 5601,
+      "sha256": "c139a3c3f707d298249abd3d4d21a74f01d701ac5258b9a2992925edcfdb3dd6"
+    },
+    {
+      "path": "review-evidence/responsibility-review/test-module-scan.json",
+      "source": "/tmp/capiro-meri-responsibility-review-20261013/test-module-scan.json",
+      "bytes": 5556,
+      "sha256": "5ed045ef0401ed974e31d0e39ef14080369772d54a88a887d0f3ed2087d6a48b"
+    },
+    {
+      "path": "review-evidence/host-browser/FINAL-SOURCE-REVIEW.json",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/FINAL-SOURCE-REVIEW.json",
+      "bytes": 3319,
+      "sha256": "4f3a47c78b617f33707e8b4942cb37c5c20423df9fce7f5d429619ff0b5e3abd"
+    },
+    {
+      "path": "review-evidence/host-browser/MANIFEST.json",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/MANIFEST.json",
+      "bytes": 5338,
+      "sha256": "c1b36b3897ef5493f343b9cfea28a37d87ed38fedd6a1d7285dc302e772d44b6"
+    },
+    {
+      "path": "review-evidence/host-browser/PRESERVATION-FINAL.json",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/PRESERVATION-FINAL.json",
+      "bytes": 13077,
+      "sha256": "9b9c227e406d0ce45d4b8e463d8426034d644ce1c18ca03562fbf74afed4b9a8"
+    },
+    {
+      "path": "review-evidence/host-browser/REPORT.md",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/REPORT.md",
+      "bytes": 3304,
+      "sha256": "592bd3fa1d5c036533116fb83229d39154dd6eddbdff48bbcd76e968c7e3a8c6"
+    },
+    {
+      "path": "review-evidence/host-browser/RUNTIME-RECEIPT.json",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/RUNTIME-RECEIPT.json",
+      "bytes": 937,
+      "sha256": "c1f1a01c73d134e53d8e6181096be42fa4dfd5eb9b49842c7634c32cb3a3a9df"
+    },
+    {
+      "path": "review-evidence/host-browser/SOURCE-CHANGE.json",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/SOURCE-CHANGE.json",
+      "bytes": 1950,
+      "sha256": "c3f0f50ce47e2345130d572e7981957dfc2fe279714f46e4347c0827ef69a88b"
+    },
+    {
+      "path": "review-evidence/host-browser/STRUCTURE-REVIEW.json",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/STRUCTURE-REVIEW.json",
+      "bytes": 2432,
+      "sha256": "f67a79af9e246d40a0899e13551487efb3721c3a3b5eb249211b302a851e7419"
+    },
+    {
+      "path": "review-evidence/host-browser/format-check.log",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/format-check.log",
+      "bytes": 66,
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "path": "review-evidence/host-browser/initial-results.json",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/initial-results.json",
+      "bytes": 27240,
+      "sha256": "908749501a62293ce053dcf5e93c18ee10af54bf7dc2714c8365d8cef4e3e081"
+    },
+    {
+      "path": "review-evidence/host-browser/initial.log",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/initial.log",
+      "bytes": 12218,
+      "sha256": "c386d777d4f4b8609ece9691fb2e5e3ac9afedc37965389b736d9f543e66fb55"
+    },
+    {
+      "path": "review-evidence/host-browser/locator-correction-results.json",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/locator-correction-results.json",
+      "bytes": 22116,
+      "sha256": "bfb262149537eb1c7aab6f9302bf91b7b501dbc880df5015296a263d1d1bde83"
+    },
+    {
+      "path": "review-evidence/host-browser/locator-correction.log",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/locator-correction.log",
+      "bytes": 3317,
+      "sha256": "9b40ba8fbeda3e1962ad4dbe7cacb04a9b0e84ea4f113e7f1d8d2f69c9cbe642"
+    },
+    {
+      "path": "review-evidence/host-browser/meri-action-host-fixtures.ts.before",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/meri-action-host-fixtures.ts.before",
+      "bytes": 7489,
+      "sha256": "eb66feeb23d9844913fa412050548ad6803f6fb33de053483508a70ad7ca7fb4"
+    },
+    {
+      "path": "review-evidence/host-browser/meri-action-host-fixtures.ts.patch",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/meri-action-host-fixtures.ts.patch",
+      "bytes": 471,
+      "sha256": "0b1648c4eb94c0f4dd5d86ed4b3d335c7ad67bf6a1658733ee54918aaf0daf80"
+    },
+    {
+      "path": "review-evidence/host-browser/meri-action-host-lifetime--15a27-lish-after-user-replacement/error-context.md",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/meri-action-host-lifetime--15a27-lish-after-user-replacement/error-context.md",
+      "bytes": 12101,
+      "sha256": "7604ee6c3bc24b52c67662e53e8092dc05c31e6ce50cc6d68fe7aafac4e296c6"
+    },
+    {
+      "path": "review-evidence/host-browser/meri-action-host-lifetime--15a27-lish-after-user-replacement/test-failed-1.png",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/meri-action-host-lifetime--15a27-lish-after-user-replacement/test-failed-1.png",
+      "bytes": 146549,
+      "sha256": "81f9d14ef02c4295c31783fb73f6c4f6e15d32c873ebfeec01743f8333cd6f8b"
+    },
+    {
+      "path": "review-evidence/host-browser/meri-action-host-lifetime--15a27-lish-after-user-replacement/trace.zip",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/meri-action-host-lifetime--15a27-lish-after-user-replacement/trace.zip",
+      "bytes": 651421,
+      "sha256": "d0acc96df60ef62daacf6839cc1976d291a099329816bffd2459a49c48a824e3"
+    },
+    {
+      "path": "review-evidence/host-browser/meri-action-host-lifetime--d0b39-lish-after-user-replacement/error-context.md",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/meri-action-host-lifetime--d0b39-lish-after-user-replacement/error-context.md",
+      "bytes": 12101,
+      "sha256": "d8f4f6e98993e7ddece1fe99254666ca2067c95ad1ba9893a2612742f8430a81"
+    },
+    {
+      "path": "review-evidence/host-browser/meri-action-host-lifetime--d0b39-lish-after-user-replacement/test-failed-1.png",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/meri-action-host-lifetime--d0b39-lish-after-user-replacement/test-failed-1.png",
+      "bytes": 146549,
+      "sha256": "81f9d14ef02c4295c31783fb73f6c4f6e15d32c873ebfeec01743f8333cd6f8b"
+    },
+    {
+      "path": "review-evidence/host-browser/meri-action-host-lifetime--d0b39-lish-after-user-replacement/trace.zip",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/meri-action-host-lifetime--d0b39-lish-after-user-replacement/trace.zip",
+      "bytes": 608210,
+      "sha256": "e19790ecb85e271d020079cd2471d0f3bc424ff18d2cd8cd1996eda7660ef410"
+    },
+    {
+      "path": "review-evidence/host-browser/meri-action-host-lifetime--e1f41-h-after-session-replacement/error-context.md",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/meri-action-host-lifetime--e1f41-h-after-session-replacement/error-context.md",
+      "bytes": 12104,
+      "sha256": "9c03ce42ce1ae7947ddab8ebf1f5c04a1cdeb408a29d44eba71346dc8fa69dea"
+    },
+    {
+      "path": "review-evidence/host-browser/meri-action-host-lifetime--e1f41-h-after-session-replacement/test-failed-1.png",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/meri-action-host-lifetime--e1f41-h-after-session-replacement/test-failed-1.png",
+      "bytes": 146549,
+      "sha256": "81f9d14ef02c4295c31783fb73f6c4f6e15d32c873ebfeec01743f8333cd6f8b"
+    },
+    {
+      "path": "review-evidence/host-browser/meri-action-host-lifetime--e1f41-h-after-session-replacement/trace.zip",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/meri-action-host-lifetime--e1f41-h-after-session-replacement/trace.zip",
+      "bytes": 586597,
+      "sha256": "8241ca485bb871aff18fc293ced3dfda04decc4f16e64cd706c06aa6be403062"
+    },
+    {
+      "path": "review-evidence/host-browser/meri-action-host-lifetime--f055f-h-after-session-replacement/error-context.md",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/meri-action-host-lifetime--f055f-h-after-session-replacement/error-context.md",
+      "bytes": 6121,
+      "sha256": "c2750acd66753f37f089ae66c5d0e33e63dbb92ac84f9bacbefeabcf46736595"
+    },
+    {
+      "path": "review-evidence/host-browser/meri-action-host-lifetime--f055f-h-after-session-replacement/test-failed-1.png",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/meri-action-host-lifetime--f055f-h-after-session-replacement/test-failed-1.png",
+      "bytes": 146549,
+      "sha256": "81f9d14ef02c4295c31783fb73f6c4f6e15d32c873ebfeec01743f8333cd6f8b"
+    },
+    {
+      "path": "review-evidence/host-browser/meri-action-host-lifetime--f055f-h-after-session-replacement/trace.zip",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/meri-action-host-lifetime--f055f-h-after-session-replacement/trace.zip",
+      "bytes": 648754,
+      "sha256": "5574d1f83fc5f9dfe37c4c3afa96163e066e85aebd196cb3f36a2ad65d9a3548"
+    },
+    {
+      "path": "review-evidence/host-browser/meri-action-host-workflow.spec.ts.before",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/meri-action-host-workflow.spec.ts.before",
+      "bytes": 8849,
+      "sha256": "1045f25a60333640afa081942e82edcbc3c8aaf975e41cbc271ce32bbfd8b9cb"
+    },
+    {
+      "path": "review-evidence/host-browser/meri-action-host-workflow.spec.ts.patch",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/meri-action-host-workflow.spec.ts.patch",
+      "bytes": 376,
+      "sha256": "eb48ec88a30231ffc4eb16f2b0c520ad196667374736aa66bfecdcdad8d93ec2"
+    },
+    {
+      "path": "review-evidence/host-browser/meri-actions-1440.png",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/meri-actions-1440.png",
+      "bytes": 194814,
+      "sha256": "c6f35c808c7e4d693eb1dd073b47a9b7e865064721ff953ade372376cd9effd3"
+    },
+    {
+      "path": "review-evidence/host-browser/meri-actions-375.png",
+      "source": "/tmp/capiro-meri-action-host-locator-correction-20261013/meri-actions-375.png",
+      "bytes": 147764,
+      "sha256": "b97f1c450f857e8f7ecca4fc149df97793565f17ca01c7cc6da547cc23d4945d"
+    },
+    {
+      "path": "review-evidence/native-contract-review/frontend-observed-source.json",
+      "source": "/tmp/capiro-meri-pr47-source-review-20261013/frontend-observed-source.json",
+      "bytes": 2569,
+      "sha256": "3f38b23cec3e6454ff4cfd6d0a74791d2f7a152a3d1985a5159e477c9ee31621"
+    },
+    {
+      "path": "review-evidence/native-contract-review/integration-plan.md",
+      "source": "/tmp/capiro-meri-pr47-source-review-20261013/integration-plan.md",
+      "bytes": 10636,
+      "sha256": "00182f1624845f25b675d24252e11be28169373c8499552ee613282ae0b3222f"
+    },
+    {
+      "path": "review-evidence/native-contract-review/manifest.json",
+      "source": "/tmp/capiro-meri-pr47-source-review-20261013/manifest.json",
+      "bytes": 903,
+      "sha256": "20d88b25d449cfb3f3bc96aa850c26e07f70df1fb197478d55aa90342b71cd4d"
+    },
+    {
+      "path": "review-evidence/native-contract-review/retained-qualification.json",
+      "source": "/tmp/capiro-meri-pr47-source-review-20261013/retained-qualification.json",
+      "bytes": 6591,
+      "sha256": "3e95cbdfc15e11843ed40313a3b15f7f33bedfec5d60d321b0bb65dc1344c063"
+    },
+    {
+      "path": "review-evidence/native-contract-review/source-pins.json",
+      "source": "/tmp/capiro-meri-pr47-source-review-20261013/source-pins.json",
+      "bytes": 12447,
+      "sha256": "9b1a83f488236338728d66ce5f1f181b58a4f247c6a3c06787f5634830dbd6a2"
+    },
+    {
+      "path": "review-evidence/development/all-action-development.log",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/all-action-development.log",
+      "bytes": 446,
+      "sha256": "4b590b569d8b3ebd408272c4cb8f5395b802d3f51aab9571f2bfb3f0b68f8c75"
+    },
+    {
+      "path": "review-evidence/development/approver-binding-green-exit.json",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/approver-binding-green-exit.json",
+      "bytes": 122,
+      "sha256": "ae05ef737b10fb2901b73cd15ceed013b7b0c1271c80e08fd7ce3e491e10030c"
+    },
+    {
+      "path": "review-evidence/development/approver-binding-green.log",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/approver-binding-green.log",
+      "bytes": 549,
+      "sha256": "8e98f8e3b323b4cc0e10c26de1c253cdf13a50b30ea1fca1f1ecb8847094a313"
+    },
+    {
+      "path": "review-evidence/development/architecture-development.json",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/architecture-development.json",
+      "bytes": 695355,
+      "sha256": "9c84f1f5fc435046be76b81e916d8b3f2b2dfda334ca2dee72e95044d2335bf3"
+    },
+    {
+      "path": "review-evidence/development/architecture-tests.log",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/architecture-tests.log",
+      "bytes": 3279,
+      "sha256": "4c6c0e70114017b381e92dd60ff3b133e6b6ee015ec9ff7ed0e3a763826aba86"
+    },
+    {
+      "path": "review-evidence/development/before-client-refresh-MeriActionHost.tsx",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/before-client-refresh-MeriActionHost.tsx",
+      "bytes": 2869,
+      "sha256": "3846cfcf3c40e5ab055e129f4bb3b5d5f36beee27b6c7756cfe3ce9adba8e0dd"
+    },
+    {
+      "path": "review-evidence/development/before-client-refresh-ProductShell.tsx",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/before-client-refresh-ProductShell.tsx",
+      "bytes": 1482,
+      "sha256": "66bbae33ceb46ffb24e410e2c2bf4187534adf92face9781d49921982101430b"
+    },
+    {
+      "path": "review-evidence/development/before-client-refresh-host-controller.ts",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/before-client-refresh-host-controller.ts",
+      "bytes": 3324,
+      "sha256": "9f4676b5d8910fd6c91aa4eff5977f00a7ba4eb8855314d46247909f3b283da0"
+    },
+    {
+      "path": "review-evidence/development/bounds-journal-green.log",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/bounds-journal-green.log",
+      "bytes": 446,
+      "sha256": "d2cac0c035cfaa1ca1d525310878965cb6a97a2620d3943acd55475bea9ae259"
+    },
+    {
+      "path": "review-evidence/development/correlation-before-approver-fix.ts",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/correlation-before-approver-fix.ts",
+      "bytes": 3786,
+      "sha256": "2d7ff931ff77eb8f9ecbd2a5709765503921760ef1fefdf8ee2054b06fe301ef"
+    },
+    {
+      "path": "review-evidence/development/correlation-lifetime-first.log",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/correlation-lifetime-first.log",
+      "bytes": 363,
+      "sha256": "420fb039c70f5fcda4a1c612a687a74972c0908189fadbe5dc1b8d174b728190"
+    },
+    {
+      "path": "review-evidence/development/correlation-lifetime-second.log",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/correlation-lifetime-second.log",
+      "bytes": 444,
+      "sha256": "fd21285ce529e95efa3cda269965a5a26e4f9ddd2adc2e058beebab9040da5a7"
+    },
+    {
+      "path": "review-evidence/development/feature-controller.log",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/feature-controller.log",
+      "bytes": 2821,
+      "sha256": "069c50f80e41d6403e65a43a1005382f32d2f962438f7224d9debd1c750afc9d"
+    },
+    {
+      "path": "review-evidence/development/final-architecture-source.log",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/final-architecture-source.log",
+      "bytes": 789909,
+      "sha256": "983da4775ddae1d7a819ce79d9b936df51d0e12868b07f40adb6769d96226c09"
+    },
+    {
+      "path": "review-evidence/development/final-format-source.log",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/final-format-source.log",
+      "bytes": 1364,
+      "sha256": "475ef9fb10f237856902d916db4d954a8f94f11149611214caa6b36cc2844ac3"
+    },
+    {
+      "path": "review-evidence/development/final-pure-source.log",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/final-pure-source.log",
+      "bytes": 238,
+      "sha256": "a778b297652c17e0b574bc66b679ae90a074406c43953ec8c26421f6db722e13"
+    },
+    {
+      "path": "review-evidence/development/first-adapter-baseline-exit.json",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/first-adapter-baseline-exit.json",
+      "bytes": 250,
+      "sha256": "48802a6aa197286650089d0be4ca1e22e28cd586ce60e702664b4b0255d69ed2"
+    },
+    {
+      "path": "review-evidence/development/first-adapter-baseline.log",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/first-adapter-baseline.log",
+      "bytes": 2624,
+      "sha256": "84ff351ee90d097d7660bfa5ed4ec5e2010f7c7a4e5dc348a711bdbfa23f5710"
+    },
+    {
+      "path": "review-evidence/development/intent-proxy-bootstrap-green.log",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/intent-proxy-bootstrap-green.log",
+      "bytes": 446,
+      "sha256": "ea80725fa393f040b02740986a1af039a2d13037b31dd9815e4c61f0beb1d679"
+    },
+    {
+      "path": "review-evidence/development/lifetime-before-query-journal.ts",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/lifetime-before-query-journal.ts",
+      "bytes": 5823,
+      "sha256": "52efb4acec73209421f4cec7295794d55c3cd9a942dd828d4d87ff17de855041"
+    },
+    {
+      "path": "review-evidence/development/lint-development.log",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/lint-development.log",
+      "bytes": 208,
+      "sha256": "76162e465989f3f070a9de8db711fbf358e53b74d09ce1bbdb57c727e4c4a16d"
+    },
+    {
+      "path": "review-evidence/development/malformed-401-red.log",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/malformed-401-red.log",
+      "bytes": 1742,
+      "sha256": "be622e99c9e707cdc9d3c6b718be9e46dda4c0e9fd736d0c458ffd0e266c1e96"
+    },
+    {
+      "path": "review-evidence/development/query-intent-red.log",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/query-intent-red.log",
+      "bytes": 3208,
+      "sha256": "910c69522aa6d909e6b509b8d1cc12e6d8994fd5ef0ce360cd367ba4b451968d"
+    },
+    {
+      "path": "review-evidence/development/query-journal-green.log",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/query-journal-green.log",
+      "bytes": 444,
+      "sha256": "250e4334cee2d507fca1f3d89ed6dd7862ab9fa9d17bd3616b1ce41f2a4e652d"
+    },
+    {
+      "path": "review-evidence/development/query-journal-red-v2.log",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/query-journal-red-v2.log",
+      "bytes": 1513,
+      "sha256": "21bd8d21d6bf412a18838b2391c4ea20f8b2308381e7d1c28b8cd6e3989ca609"
+    },
+    {
+      "path": "review-evidence/development/query-journal-red.log",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/query-journal-red.log",
+      "bytes": 443,
+      "sha256": "eade74c77fe5d85c6d6edc2a8af1048b86fa3dbdd77497edf1bce54e45cb9ad0"
+    },
+    {
+      "path": "review-evidence/development/sparse-review-hydration.json",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/sparse-review-hydration.json",
+      "bytes": 1241,
+      "sha256": "947de711dc1d55d268a6ef876aa97b4697c77d96ed82b89bd8f04ae78d7f3887"
+    },
+    {
+      "path": "review-evidence/development/typecheck-final-browser-source.log",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/typecheck-final-browser-source.log",
+      "bytes": 255,
+      "sha256": "a8386620a241fc3fc10374b84593ecf62455007071d45d984927d69156436d01"
+    },
+    {
+      "path": "review-evidence/development/typecheck-first.log",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/typecheck-first.log",
+      "bytes": 255,
+      "sha256": "a8386620a241fc3fc10374b84593ecf62455007071d45d984927d69156436d01"
+    },
+    {
+      "path": "review-evidence/development/typecheck-host-v2.log",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/typecheck-host-v2.log",
+      "bytes": 255,
+      "sha256": "a8386620a241fc3fc10374b84593ecf62455007071d45d984927d69156436d01"
+    },
+    {
+      "path": "review-evidence/development/typecheck-host.log",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/typecheck-host.log",
+      "bytes": 1495,
+      "sha256": "4ef4c7251ab7057c4476875e0aa58e5c3b1820d47392d84a824e19151522b579"
+    },
+    {
+      "path": "review-evidence/development/workflow-adapter-before-query-journal.ts",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/workflow-adapter-before-query-journal.ts",
+      "bytes": 7782,
+      "sha256": "feaaf49c2f84b6bbf9d0976840cbc36cd5332e3342a88ae85494e0ebd400df66"
+    },
+    {
+      "path": "review-evidence/browser-responsibility/input-verification.json",
+      "source": "/tmp/capiro-meri-browser-responsibility-review-20261013/input-verification.json",
+      "bytes": 1392,
+      "sha256": "f8bb3b191fa1a6cbca945caca61b39e08274a4da335ab9621ea76633e1165836"
+    },
+    {
+      "path": "review-evidence/browser-responsibility/manifest.json",
+      "source": "/tmp/capiro-meri-browser-responsibility-review-20261013/manifest.json",
+      "bytes": 979,
+      "sha256": "ad68224d0cce9983698e4bdce410b7ae041bffcce48ce31f2ba6718caa9bcc95"
+    },
+    {
+      "path": "review-evidence/browser-responsibility/registry-proposals.json",
+      "source": "/tmp/capiro-meri-browser-responsibility-review-20261013/registry-proposals.json",
+      "bytes": 2454,
+      "sha256": "bec08458f43f9958b239b91070aaf8617ffb43443f62f342b52818f29ee745e5"
+    },
+    {
+      "path": "review-evidence/browser-responsibility/review.md",
+      "source": "/tmp/capiro-meri-browser-responsibility-review-20261013/review.md",
+      "bytes": 2891,
+      "sha256": "5feacf0029138fc75d56a86d7126f5fe319dc444f3bb99c6fb9867d5ce06af16"
+    },
+    {
+      "path": "review-evidence/browser-responsibility/runtime-evidence-inspection.json",
+      "source": "/tmp/capiro-meri-browser-responsibility-review-20261013/runtime-evidence-inspection.json",
+      "bytes": 899,
+      "sha256": "33caaefe89250ecbeafdfc1bcfec5d1577310de6f2f9c7702bfdc841d6e5821c"
+    },
+    {
+      "path": "review-evidence/browser-responsibility/source-scan.json",
+      "source": "/tmp/capiro-meri-browser-responsibility-review-20261013/source-scan.json",
+      "bytes": 1643,
+      "sha256": "a6f4992d1e9333a34090edff31c187dd8cfa4ae3f9c32011e152858da5163be6"
+    },
+    {
+      "path": "review-evidence/development/final-format-source-v2.log",
+      "source": "/tmp/capiro-meri-action-adapter-development-20261013/final-format-source-v2.log",
+      "bytes": 361,
+      "sha256": "f86e15128a29fa1161d0d608257c360045d993746eff56a3f0a031d96ee087e4"
+    }
+  ]
+}

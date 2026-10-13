@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSelectedClient } from "../session/SelectedClient";
-import { productHref } from "../session/client-route";
+import { productHref, scopedHref } from "../session/client-route";
 import { Button } from "@capiro/ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { DesignIcon } from "./DesignIcon";
@@ -66,9 +66,24 @@ export function Sidebar({
             key={item.label}
             type="button"
             variant="ghost"
-            className={`${styles.navButton} ${item.current ? styles.currentDestination : ""}`}
-            aria-current={item.current ? "page" : undefined}
+            className={`${styles.navButton} ${item.current && pathname !== "/meri/actions" ? styles.currentDestination : ""}`}
+            aria-current={
+              item.current && pathname !== "/meri/actions" ? "page" : undefined
+            }
             disabled={!item.current}
+            onClick={
+              item.current
+                ? () =>
+                    router.push(
+                      productHref(
+                        "meri",
+                        selected.state === "authorized-client"
+                          ? selected.client.id
+                          : undefined,
+                      ),
+                    )
+                : undefined
+            }
             title={
               item.current
                 ? assetSet === "home"
@@ -81,6 +96,23 @@ export function Sidebar({
             {item.label}
           </Button>
         ))}
+        <Button
+          asChild
+          variant="ghost"
+          className={`${styles.navButton} ${pathname === "/meri/actions" ? styles.currentDestination : ""}`}
+        >
+          <Link
+            href={scopedHref(
+              "/meri/actions",
+              selected.state === "authorized-client"
+                ? selected.client.id
+                : undefined,
+            )}
+            aria-current={pathname === "/meri/actions" ? "page" : undefined}
+          >
+            Recommendation actions
+          </Link>
+        </Button>
       </nav>
       <section className={styles.recents} aria-labelledby="recent-label">
         <h2 id="recent-label">Recent</h2>

@@ -1,0 +1,65 @@
+{
+  "capturedAt": "2026-10-13T04:39:52.499897+00:00",
+  "root": "/workspace/capiro-meri-workflow-20261013",
+  "baseHead": "d4be41e60516e576c74afa304b50ed67da15cb93",
+  "binding": "Observed worktree bytes; feature port and test are uncommitted owner work, not claimed as this HEAD blobs",
+  "files": [
+    {
+      "path": "apps/web/src/app/meri/page.tsx",
+      "sha256": "ab74706b13bf11ad1ad849e69160b0eec4317d8294bfea1945e0162755d15d69",
+      "bytes": 235,
+      "worktreeGitBlob": "959dce7cebcf923b67dacd664c7802627be9a615",
+      "tracked": true
+    },
+    {
+      "path": "apps/web/src/features/meri/actions/action-workflow-port.ts",
+      "sha256": "096ce01abc55d053583f23c64dc8db85baec6ad2b61c9c72da913714099f9f3e",
+      "bytes": 2123,
+      "worktreeGitBlob": "6995550d4d211bab1d75c7394bb1520663ffddfe",
+      "tracked": false
+    },
+    {
+      "path": "apps/web/src/features/meri/actions/action-workflow-state.ts",
+      "sha256": "0fd4ed003290038d919472cc11a1736e3dab94e3047c9c761bdcf7a3bcb267e4",
+      "bytes": 6273,
+      "worktreeGitBlob": "796f254a27e3f558178a40a1506a0331b7e93ef9",
+      "tracked": false
+    },
+    {
+      "path": "apps/web/src/features/meri/actions/MeriActionWorkflow.tsx",
+      "sha256": "ce71172d1d43e74c6f6f0c8987bc7802c91b9e0b5d2edc7c2c49dbde08e7191e",
+      "bytes": 3851,
+      "worktreeGitBlob": "6e59fadd2efcb719174557bd66d4270ef1221289",
+      "tracked": false
+    },
+    {
+      "path": "apps/web/src/shared/session/ApplicationBoundary.tsx",
+      "sha256": "171e6a02aec0cabe461c195059483c585feecebdbf1b9d66c777007d59ced10f",
+      "bytes": 3005,
+      "worktreeGitBlob": "c7737917fa348d273ee2bdcb22455096062bd9eb",
+      "tracked": true
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/api/proxy.ts",
+      "sha256": "c061ab974c61f645f84f2829a461a2568769145a4976a4931be60748a8d47df8",
+      "bytes": 5788,
+      "worktreeGitBlob": "8441dda134bc5f5b70f40157cca952c9365d7e6b",
+      "tracked": true
+    },
+    {
+      "path": "apps/web/test/action-workflow.test.mjs",
+      "sha256": "2ac99fb489d485c742d92b6b8eeb887bf41d51aa9d2bc18bbbbb4b4a34c53742",
+      "bytes": 13444,
+      "worktreeGitBlob": "20962a97814a9e9d28c050630fee88d7249d8a90",
+      "tracked": false
+    },
+    {
+      "path": "docs/meri-workflow-20261013/PLAN.md",
+      "sha256": "a52c2f75d4af5517d6694bbe577390312467d558cabed4070da970526659918e",
+      "bytes": 6184,
+      "worktreeGitBlob": "505fc1f347d2e0342e33a189d4104ebf37681702",
+      "tracked": false
+    }
+  ],
+  "scope": "static reads only; preserved source unchanged by reviewer"
+}

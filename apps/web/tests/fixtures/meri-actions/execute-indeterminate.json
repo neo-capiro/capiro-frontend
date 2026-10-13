@@ -1,0 +1,11 @@
+{
+  "name": "execute-indeterminate",
+  "route": "execute",
+  "httpStatus": 200,
+  "response": {
+    "status": "indeterminate",
+    "outcome": null
+  },
+  "expected": "receiver_accept",
+  "note": "Public receiver test; unknown durable outcome, no replay inference."
+}

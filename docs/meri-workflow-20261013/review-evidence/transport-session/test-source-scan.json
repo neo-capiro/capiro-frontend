@@ -1,0 +1,74 @@
+[
+  {
+    "file": "apps/web/tests/meri-action-transport.test.ts",
+    "sha256": "95a6ca38ec21f9b1a851b5efbfb9b33fc65c9bb1e3da70a3f2d9f584ab3641d5",
+    "imports": [
+      {
+        "specifier": "vitest",
+        "line": 1
+      },
+      {
+        "specifier": "@capiro/meri-contracts/action-application",
+        "line": 2
+      },
+      {
+        "specifier": "../src/shared/meri-actions/bounded-json",
+        "line": 3
+      },
+      {
+        "specifier": "../src/shared/meri-actions/workflow-transport",
+        "line": 7
+      }
+    ],
+    "anyLines": [],
+    "remoteOriginLines": [
+      285
+    ],
+    "sizeFindings": [
+      {
+        "file": "apps/web/tests/meri-action-transport.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #3",
+        "line": 85,
+        "nonblank": 105,
+        "fingerprint": "d32ed4825ac4ec996bbd53eed1e20afcd4e2c955e83b79708c89ccc80af3d67a"
+      },
+      {
+        "file": "apps/web/tests/meri-action-transport.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #5",
+        "line": 241,
+        "nonblank": 134,
+        "fingerprint": "4d0eb5078e7c3b1b5e1fbe056f1157b34f5121ef823c0ac0b8c738d072f9fd14"
+      }
+    ],
+    "nonblank": 369
+  },
+  {
+    "file": "apps/web/tests/meri-action-session.test.ts",
+    "sha256": "75a28f2bc5c77bf9040a59b9716f7abd3a1dd0d8a7b0ea3e4148dac91270f323",
+    "imports": [
+      {
+        "specifier": "vitest",
+        "line": 1
+      },
+      {
+        "specifier": "../src/shared/meri-actions/session-receipt",
+        "line": 2
+      }
+    ],
+    "anyLines": [],
+    "remoteOriginLines": [],
+    "sizeFindings": [
+      {
+        "file": "apps/web/tests/meri-action-session.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #2",
+        "line": 51,
+        "nonblank": 124,
+        "fingerprint": "b8ac4e07f4a79b20459e0939db7675599fc01fff4fa5dc40652a4432ebc8b899"
+      }
+    ],
+    "nonblank": 171
+  }
+]

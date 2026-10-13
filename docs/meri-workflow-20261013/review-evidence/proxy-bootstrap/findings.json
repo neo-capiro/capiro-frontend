@@ -1,0 +1,18 @@
+[
+  {
+    "id": "MERI-PROXY-01",
+    "status": "corrected by root; regression retained",
+    "severity": "P2 protocol admission",
+    "file": "apps/web/src/shared/meri-actions/proxy.ts",
+    "beforeSHA256": "6e74aad143652d21ce8fbbf24d9dc58a55fc443f95198e6dc28931228dd52d51",
+    "afterSHA256": "6046d58306b2c5694f618a2331dda4ea26baae64e12ecc6b94b6feec1973fcb4",
+    "reproduction": "Request /api/action-followthrough/%71uery with decoded route argument query and otherwise valid origin/JSON/action bearer/native session. Old proxy forwards canonical query and returns200. Expected literal-path refusal400 before native-token/fetch calls.",
+    "evidence": [
+      "before-results.json",
+      "before-receipt.json",
+      "proxy.ts-root-correction.patch",
+      "final-results.json"
+    ],
+    "correction": "Root added request URL pathname equality before credentials. This reviewer authored only tests."
+  }
+]

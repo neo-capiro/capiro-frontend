@@ -1,0 +1,13 @@
+{
+  "name": "error-deadline",
+  "route": "execute",
+  "httpStatus": 408,
+  "response": {
+    "error": {
+      "code": "DEADLINE",
+      "outcome": "NOT_DISPATCHED"
+    }
+  },
+  "expected": "receiver_accept",
+  "note": "Exact published public-test code/status. Local abort and durable cancellation remain distinct."
+}
