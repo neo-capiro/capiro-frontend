@@ -3,7 +3,15 @@
   "sourceMessage": "Sentinel_db7986c3cd588191802765d396dafbf7",
   "provenance": "Owner terminal readback relayed by the coordinator; not independently re-executed in this frontend session",
   "stackName": "Capiro-Portfolio-Preview-Service",
-  "confirmedScope": "Current preview CloudFormation parameter references only",
+  "confirmedScope": "Current preview CloudFormation parameter references, identified by Neo as the existing production Clerk references; payloads and current auth suitability were not read",
+  "ownerCorrection": {
+    "sourceMessage": "Sentinel_83d07371d09881919f4b876239579762",
+    "statement": "we dont have a staging enviorment",
+    "authoritativeEnvironment": "No staging environment",
+    "historicalStagingCandidate": "Withdrawn; no further staging lookup or DescribeSecret request",
+    "intendedPath": "Original restricted preview using confirmed production Clerk references",
+    "isolatedEnvironment": "Separate explicit setup, not an existing environment or prerequisite"
+  },
   "parameters": {
     "ClerkKmsKeyArn": "arn:aws:kms:us-east-1:967807252336:key/f47b4c53-b9c0-4d91-ad57-4d882f87767e",
     "ClerkPublishableKeySecretArn": "arn:aws:secretsmanager:us-east-1:967807252336:secret:/capiro/dev/clerk/publishable-key-rAfesC",
@@ -13,7 +21,7 @@
     "operation": "ecs describe-task-definition",
     "taskDefinition": "capiro-staging-api",
     "error": "ClientException: Unable to describe task definition",
-    "meaning": "This family lookup did not describe the historical staging task; it does not establish that staging resources are absent"
+    "meaning": "Retained historical failed lookup only. Neo's later correction establishes that there is no staging environment; this is not a candidate for further investigation"
   },
   "notEstablished": [
     "Secret contents or matching Clerk instance/environment",
