@@ -1,0 +1,28 @@
+{
+  "reportedAtUTC": "2026-10-13T23:15:57Z",
+  "sourceMessage": "Sentinel_db7986c3cd588191802765d396dafbf7",
+  "provenance": "Owner terminal readback relayed by the coordinator; not independently re-executed in this frontend session",
+  "stackName": "Capiro-Portfolio-Preview-Service",
+  "confirmedScope": "Current preview CloudFormation parameter references only",
+  "parameters": {
+    "ClerkKmsKeyArn": "arn:aws:kms:us-east-1:967807252336:key/f47b4c53-b9c0-4d91-ad57-4d882f87767e",
+    "ClerkPublishableKeySecretArn": "arn:aws:secretsmanager:us-east-1:967807252336:secret:/capiro/dev/clerk/publishable-key-rAfesC",
+    "ClerkSecretKeySecretArn": "arn:aws:secretsmanager:us-east-1:967807252336:secret:/capiro/dev/clerk/secret-key-FT67tM"
+  },
+  "failedLookup": {
+    "operation": "ecs describe-task-definition",
+    "taskDefinition": "capiro-staging-api",
+    "error": "ClientException: Unable to describe task definition",
+    "meaning": "This family lookup did not describe the historical staging task; it does not establish that staging resources are absent"
+  },
+  "notEstablished": [
+    "Secret contents or matching Clerk instance/environment",
+    "Actual secret encryption metadata or decryptability",
+    "Running preview task uses these stack parameter references",
+    "Active Core task definition, issuer/audience or routing",
+    "Internal tenant/actor membership or backend read-side-effect containment"
+  ],
+  "commandsRepeated": false,
+  "backendReadRoutesAdmitted": 0,
+  "deploymentOrAccessChanged": false
+}
