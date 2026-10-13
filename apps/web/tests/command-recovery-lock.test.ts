@@ -20,10 +20,10 @@ import {
   id,
   locks,
   scope,
-  usePlatform,
+  installPlatform,
 } from "./command-recovery-platform";
 
-usePlatform();
+installPlatform();
 
 it("rereads under the execution lock, so a queued tab cannot redispatch a retired refusal", async () => {
   await reserveRecovery(scope, id, data, contract, current);

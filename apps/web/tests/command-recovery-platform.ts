@@ -69,7 +69,7 @@ export const contract = {
 export const current = () => undefined;
 export const envelope = () => decryptJournal(scope, db.records.get(scope));
 
-export function usePlatform() {
+export function installPlatform() {
   beforeEach(() => {
     db.records.clear();
     db.writes = [];

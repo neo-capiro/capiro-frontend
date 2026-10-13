@@ -19,10 +19,10 @@ import {
   local,
   nextId,
   scope,
-  usePlatform,
+  installPlatform,
 } from "./command-recovery-platform";
 
-usePlatform();
+installPlatform();
 
 it("retires only the exact pending request, erases its payload, and retains a refusal fence", async () => {
   await reserveRecovery(scope, id, data, contract, current);

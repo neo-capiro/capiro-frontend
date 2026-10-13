@@ -14,10 +14,10 @@ import {
   db,
   id,
   scope,
-  usePlatform,
+  installPlatform,
 } from "./command-recovery-platform";
 
-usePlatform();
+installPlatform();
 
 it("preserves pending payload when lifetime is revoked during the retirement read", async () => {
   await reserveRecovery(scope, id, data, contract, current);
