@@ -1,0 +1,58 @@
+--- /tmp/capiro-onboard-host-browser-correction-20261013/onboard-host-funnel.before.spec.ts	2026-10-13 05:17:55.154020087 +0000
++++ apps/web/test/browser/onboard-host-funnel.spec.ts	2026-10-13 05:25:48.365924779 +0000
+@@ -80,7 +80,7 @@
+   expectHostIsolated(fixture);
+ });
+ 
+-test("a later explicit native B read prevents a held A status read from restoring old state", async ({
++test("current status reads serialize without clearing an unknown write before explicit native B adoption", async ({
+   page,
+ }) => {
+   const fixture = await hostFixture(page);
+@@ -99,15 +99,34 @@
+     page.getByRole("button", { name: "Continue", exact: true }),
+   ).toBeDisabled();
+   const oldRead = fixture.hold("onboard.funnel.session", {
+-    json: nativeSession("synthetic-native-A", {
+-      state: "plan_selected",
+-      plan: "paid",
+-    }),
++    json: nativeSession("synthetic-native-A"),
+   });
+   await page
+     .getByRole("button", { name: "Check current status", exact: true })
+     .click();
+   await oldRead.entered;
++  // Canonical current reads freeze the whole funnel, including reconciliation.
++  // A second concurrent click is intentionally unavailable to a browser user.
++  await expect(
++    page.getByRole("button", { name: "Check current status", exact: true }),
++  ).toBeDisabled();
++  await expect(
++    page.getByRole("button", { name: "Continue", exact: true }),
++  ).toBeDisabled();
++  expect(fixture.calls("onboard.funnel.session")).toHaveLength(2);
++  expect(fixture.writes()).toHaveLength(1);
++  await oldRead.release();
++  await expect(page.getByRole("status")).toContainText(
++    "Submission outcome unknown",
++  );
++  await expect(
++    page.getByRole("button", { name: "Check current status", exact: true }),
++  ).toBeEnabled();
++  await expect(
++    page.getByRole("button", { name: "Continue", exact: true }),
++  ).toBeDisabled();
++  expect(fixture.calls("onboard.funnel.session")).toHaveLength(2);
++  expect(fixture.writes()).toHaveLength(1);
+   fixture.reply("onboard.funnel.session", {
+     json: nativeSession("synthetic-native-B", { plan: "trial" }),
+   });
+@@ -119,7 +138,6 @@
+     "true",
+   );
+   await expect(page.getByRole("status")).toHaveCount(0);
+-  await oldRead.release();
+   await expect(page).toHaveURL(/\/plan$/);
+   await expect(page.getByRole("button", { name: trialName })).toHaveAttribute(
+     "aria-pressed",

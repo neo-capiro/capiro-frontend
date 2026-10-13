@@ -1,0 +1,112 @@
+{
+  "atUTC": "2026-10-13T05:14:17.835790+00:00",
+  "status": "Initial reviewed bytes; correction work is concurrent and not yet accepted",
+  "findings": [
+    {
+      "id": "OBFI-01",
+      "priority": "P2",
+      "title": "Open setup overlays retain obsolete current eligibility",
+      "files": [
+        {
+          "path": "pages/setup/SetupWorkspace.tsx",
+          "lines": "57\u201360, 230\u2013260",
+          "snapshot": "initial-source/apps/web/src/features/onboard/pages/setup/SetupWorkspace.tsx",
+          "sha256": "e9c2615cc0c596c3f79e882b3d4da8a03190327d71afbfaeeb2dcd5311d471cf"
+        },
+        {
+          "path": "pages/setup/ClientImportTask.tsx",
+          "lines": "14\u201316",
+          "snapshot": "initial-source/apps/web/src/features/onboard/pages/setup/ClientImportTask.tsx",
+          "sha256": "8a951c3ebbf21760d7c1b81cff1e4cc3f58275d57e8af754917ab1759e561043"
+        },
+        {
+          "path": "lib/use-onboard-attempt.ts",
+          "lines": "14\u201327",
+          "snapshot": "initial-source/apps/web/src/features/onboard/lib/use-onboard-attempt.ts",
+          "sha256": "af5e011d76bc1ab8f9d0f079b269988ca9fce77a11810fce30df57958f8ed536"
+        }
+      ],
+      "evidenceKind": "Confirmed source/control-flow trace; author corrective red/green requested, no independent mounted run",
+      "reproduction": [
+        "Open import while current importMode=self, then publish a successful current managed-mode setup state. Existing overlay remains rendered and controller remains live.",
+        "Open invitations with resolved IT/import tasks, then publish a successful current read that revokes one prerequisite. Existing overlay and held sequence can continue."
+      ],
+      "impact": "Violates explicit managed-import and prerequisite UI rules; not proof of backend authorization bypass or durable duplicate effect.",
+      "requiredControls": "Successful current eligibility revocation hides/disposes editor and fences held import/invite continuation before another chunk/recipient. Preserve confirmed/unknown receipts and require a fresh deliberate reopening if eligibility later returns."
+    },
+    {
+      "id": "OBFI-02",
+      "priority": "P2",
+      "title": "Legal acknowledgements authorize replacement documents",
+      "files": [
+        {
+          "path": "pages/funnel/LegalPage.tsx",
+          "lines": "133\u2013145, 157\u2013162, 187\u2013199",
+          "snapshot": "initial-source/apps/web/src/features/onboard/pages/funnel/LegalPage.tsx",
+          "sha256": "c28e4b13115f132e7958577ac1ef1aaf69b4c1385336fe38cf60b76a72c0d303"
+        }
+      ],
+      "evidenceKind": "Independent pure captured-source function/element probe; same-doc positive1pass, replacement negative1fail",
+      "receipt": "LEGAL-BINDING-PROBE.json",
+      "impact": "Previously checked A documents remain checked while submit sends current B versions, without renewed consent. No real legal acceptance sent.",
+      "requiredControls": "Bind review to native session, plan and displayed document identity; reset acknowledgements on replacement/error; retain unknown journal; held older acceptance must not produce newer success."
+    },
+    {
+      "id": "OBFI-03",
+      "priority": "P2",
+      "title": "Failed deliberate funnel read leaves cached session actionable",
+      "files": [
+        {
+          "path": "lib/funnel.ts",
+          "lines": "59\u201367",
+          "snapshot": "initial-source/apps/web/src/features/onboard/lib/funnel.ts",
+          "sha256": "87dffe73c7a5e93fc86af4dc8733a37224b68405c3cc927edd28c3bebd8473c6"
+        },
+        {
+          "path": "lib/funnel-lifetime.ts",
+          "lines": "13\u201315",
+          "snapshot": "initial-source/apps/web/src/features/onboard/lib/funnel-lifetime.ts",
+          "sha256": "d4aee604fc739b3f297fcc03828b39105ccd3a0b6cc87fd2404f914c72429ea2"
+        },
+        {
+          "path": "pages/funnel/RegisterPage.tsx",
+          "lines": "96\u2013105",
+          "snapshot": "initial-source/apps/web/src/features/onboard/pages/funnel/RegisterPage.tsx",
+          "sha256": "4da52eafff8519028bf25e1cb37785b8e7a283f3804fcf21251bdf182ed2a4d2"
+        },
+        {
+          "path": "pages/funnel/VerifyPage.tsx",
+          "lines": "94\u2013110",
+          "snapshot": "initial-source/apps/web/src/features/onboard/pages/funnel/VerifyPage.tsx",
+          "sha256": "3e9d495bbf3d16ade7450ca6be905025144396510d43754808eddaa4f49e6119"
+        }
+      ],
+      "evidenceKind": "Independent pure actual QueryClient and captured functions;403 and503 both fail expected authority revocation",
+      "receipt": "FUNNEL-READ-AUTHORITY-PROBE.json",
+      "impact": "Canonical session remains success and a different action can dispatch after the newer current read fails. Particular unknown-write journal alone does not protect other actions.",
+      "requiredControls": "Canonical read/error lifecycle, current-authority gate, new successful read recovery, old failure after newer success and cancelled/superseded original read rejection. Distinguish GET404 absence from403/503 and native registration POST receipts."
+    },
+    {
+      "id": "OBFI-04",
+      "priority": "P2",
+      "title": "Direct public done-route navigation claims verified IT connection",
+      "files": [
+        {
+          "path": "pages/it/ItDonePage.tsx",
+          "lines": "53\u201358",
+          "snapshot": "initial-source/apps/web/src/features/onboard/pages/it/ItDonePage.tsx",
+          "sha256": "81c0b83f9d3855f932f69b749d22f1fa0780b18d8ed09bbd82f92a46e5359681"
+        },
+        {
+          "path": "OnboardPage.tsx",
+          "lines": "37\u201339",
+          "snapshot": "initial-source/apps/web/src/features/onboard/OnboardPage.tsx",
+          "sha256": "f1a5eb1b39ee1e6539ee6ab924ade5170ade1c9cb9b268f15495f9dfa3394621"
+        }
+      ],
+      "evidenceKind": "Confirmed source trace: route renders verified card without token/current receipt",
+      "impact": "False-success presentation from a URL alone; no backend authorization bypass claim.",
+      "requiredControls": "Standalone return route uses truthful unverified/handoff copy; current token GET granted/verified retains verified card; no invented receipt or automatic provider action."
+    }
+  ]
+}

@@ -11,6 +11,9 @@ import { settingsAdminOperations } from "./operations/settings-admin";
 import { strategiesOperations } from "./operations/strategies";
 import { workspaceOperations } from "./operations/workspace";
 import { capiroOperations } from "./registry";
+import { onboardFunnelOperations } from "./operations/onboard-funnel";
+import { onboardSetupOperations } from "./operations/onboard-setup";
+import { onboardCoreOperations } from "./operations/onboard-core";
 
 it("imports the complete reviewed allowlist safely and exposes no silently overwritten operation", () => {
   const groups = [
@@ -25,6 +28,9 @@ it("imports the complete reviewed allowlist safely and exposes no silently overw
     settingsAdminOperations,
     intelligenceOperations,
     researchPortfolioOperations,
+    onboardFunnelOperations,
+    onboardSetupOperations,
+    onboardCoreOperations,
   ];
   const declared = groups.flatMap((group) => Object.keys(group));
   expect(new Set(declared).size).toBe(declared.length);

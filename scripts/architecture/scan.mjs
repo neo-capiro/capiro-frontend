@@ -40,7 +40,15 @@ export function scanModule(file, source) {
   function visit(node, ancestors = []) {
     const line = ast.getLineAndCharacterOfPosition(node.getStart(ast)).line + 1;
     const specifier = importSpecifier(node);
-    if (specifier) imports.push({ specifier: ts.isStringLiteralLike(specifier) ? specifier.text : null, line });
+    if (specifier) {
+      const clause = ts.isImportDeclaration(node) ? node.importClause : undefined;
+      const named = clause?.namedBindings && ts.isNamedImports(clause.namedBindings) && !clause.name;
+      imports.push({
+        specifier: ts.isStringLiteralLike(specifier) ? specifier.text : null, line,
+        kind: ts.isImportDeclaration(node) ? (!clause ? 'side-effect' : named && !clause.isTypeOnly ? 'named' : 'other') : 'other',
+        names: named ? clause.namedBindings.elements.map(element => (element.propertyName ?? element.name).text) : [],
+      });
+    }
     if (node.kind === ts.SyntaxKind.AnyKeyword) anyLines.push(line);
     if (ts.isStringLiteralLike(node) && remoteOrigin(node.text)) remoteOriginLines.push(line);
     // A literal template authority is just as fixed as a quoted URL. A bare
@@ -59,7 +67,8 @@ export function scanModule(file, source) {
     ts.forEachChild(node, child => visit(child, scope));
   }
   if (!file.endsWith(".css")) visit(ast);
-  return { imports, anyLines, remoteOriginLines, sizeFindings, nonblank: count };
+  const directives = ast.statements.filter(node => ts.isExpressionStatement(node) && ts.isStringLiteral(node.expression)).map(node => node.expression.text);
+  return { imports, directives, anyLines, remoteOriginLines, sizeFindings, nonblank: count };
 }
 
 export function sizeMessage(finding) {

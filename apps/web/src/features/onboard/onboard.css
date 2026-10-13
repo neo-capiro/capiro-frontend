@@ -1,0 +1,152 @@
+/* ============================================================
+   Capiro Onboarding — global styles.
+   Tokens are a 1:1 extraction from the onboarding prototype
+   (Capiro design system). Do not tweak values here — fidelity
+   to the prototype is a hard requirement; change the prototype
+   first, then re-extract.
+   ============================================================ */
+
+/* ── Vendored webfonts (latin-subset variable woff2, self-hosted — no
+      runtime fonts.googleapis.com dependency; mirrors apps/web) ── */
+
+@font-face {
+  font-family: "Onboard Hanken Grotesk";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/onboard/fonts/hanken-grotesk-latin.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Onboard Newsreader";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("/onboard/fonts/newsreader-latin.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Onboard JetBrains Mono";
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url("/onboard/fonts/jetbrains-mono-latin.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+
+/* ── Color tokens ── */
+.onboard-surface {
+  /* Surfaces */
+  --bg-canvas: #f4f2ec;
+  --bg-surface: #ffffff;
+  --bg-surface-2: #fbf9f4;
+  --bg-sunken: #efece4;
+  --bg-dark: #0c1a38;
+  --bg-dark-2: #15264a;
+
+  /* Borders & dividers */
+  --border-1: #e6e1d6;
+  --border-2: #d8d2c4;
+  --border-strong: #c8c1b0;
+  --border-dark: rgba(255, 255, 255, 0.08);
+
+  /* Text (on light) */
+  --ink-1: #15161a;
+  --ink-2: #4f525a;
+  --ink-3: #8a8780;
+  --ink-4: #b5b0a4;
+
+  /* Text (on navy) */
+  --ink-on-dark: #f5f2eb;
+  --ink-on-dark-2: rgba(245, 242, 235, 0.66);
+  --ink-on-dark-3: rgba(245, 242, 235, 0.42);
+
+  /* Brand accent */
+  --accent: #2a57ce;
+  --accent-ink: #1a3f9f;
+  --accent-soft: #dee6f8;
+  --accent-glow: rgba(42, 87, 206, 0.18);
+
+  /* Severity / semantic */
+  --critical: #b5301b;
+  --critical-soft: #f6ddd6;
+  --notable: #a26913;
+  --notable-soft: #f4e5c3;
+  --info: #2c5bd4;
+  --info-soft: #dce4f8;
+  --success: #2e6b43;
+  --success-soft: #ddebde;
+  --positive: #3a7a4d;
+
+  /* Typography */
+  --font-sans: "Onboard Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono:
+    "Onboard JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-serif:
+    "Onboard Newsreader", "Iowan Old Style", "Charter", Georgia, serif;
+
+  /* Radii */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-pill: 999px;
+
+  /* Elevation */
+  --shadow-1: 0 1px 2px rgba(16, 18, 24, 0.04), 0 1px 0 rgba(16, 18, 24, 0.03);
+  --shadow-2:
+    0 2px 4px rgba(16, 18, 24, 0.04), 0 8px 24px rgba(16, 18, 24, 0.06);
+}
+
+.onboard-surface,
+.onboard-surface * {
+  box-sizing: border-box;
+}
+
+.onboard-surface {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.onboard-surface {
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  color: var(--ink-1);
+  background: var(--bg-canvas);
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.onboard-surface button,
+.onboard-surface input,
+.onboard-surface textarea,
+.onboard-surface select {
+  font-family: var(--font-sans);
+}
+
+@keyframes ob-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.onboard-surface [role="button"]:focus-visible,
+.onboard-surface [role="checkbox"]:focus-visible,
+.onboard-surface span:has(> input[type="checkbox"]:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}

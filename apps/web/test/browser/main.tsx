@@ -1,4 +1,8 @@
+import { OnboardHost } from "../../src/app/_onboard/OnboardHost";
+import type { OnboardRoute } from "../../src/features/onboard/OnboardPage";
 import { IntegrationProbe } from "./IntegrationProbe";
+import { OnboardBoundaryProbe } from "./OnboardBoundaryProbe";
+import { isOnboardPath } from "../../src/shared/session/onboard-route";
 import { RequireSession } from "../../src/shared/session/SessionContext";
 import { PortfolioIndex } from "../../src/features/portfolio/index/PortfolioIndex";
 import { ClientFrame } from "../../src/features/portfolio/client-profile/ClientFrame";
@@ -18,7 +22,7 @@ import { SettingsScreen } from "../../src/features/settings";
 import { ModuleScreen } from "../../src/features/modules/ModuleScreen";
 import { ModuleHub } from "../../src/features/modules/hub/ModuleHub";
 import type { ModuleSlug } from "../../src/shared/shell/module-catalog";
-import { usePathname } from "./navigation";
+import { usePathname, useSearchParams } from "./navigation";
 import "../../src/app/globals.css";
 import "./font.css";
 
@@ -39,6 +43,26 @@ function SessionProbe() {
 }
 function RoutedApp() {
   const path = usePathname();
+  const search = useSearchParams();
+  if (isOnboardPath(path) && search.get("onboard-boundary") === "1")
+    return <OnboardBoundaryProbe />;
+  if (isOnboardPath(path)) {
+    const route =
+      path.startsWith("/it/") && !["/it/done", "/it/error"].includes(path)
+        ? "/it/:token"
+        : (path as OnboardRoute);
+    return (
+      <OnboardHost
+        route={route}
+        publishableKey="pk_test_YQ=="
+        serviceConfigured={search.get("service-unconfigured") !== "1"}
+        pricingCopy={{
+          lock: "Synthetic fixture price lock.",
+          change: "Synthetic fixture price change.",
+        }}
+      />
+    );
+  }
   if (path.startsWith("/forms/"))
     return (
       <>

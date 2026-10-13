@@ -18,6 +18,7 @@ import {
   type CapiroUploadFile,
 } from "./multipart";
 import { publicPlannerFormOperations } from "./operations/planner-public-forms";
+import { publicOnboardOperations } from "./operations/onboard-public";
 
 const requestLimit = 2_000_000;
 const responseLimit = 8_000_000;
@@ -64,12 +65,15 @@ async function serviceResponse(
   input: OperationInput,
   base: string,
   signal: AbortSignal,
+  publicCapability: boolean,
 ): Promise<Response> {
   if (!response.ok) {
     await response.body?.cancel().catch(() => undefined);
     const message =
       response.status === 401
-        ? "Your session expired. Sign in again."
+        ? publicCapability
+          ? "This public link is unavailable or has expired."
+          : "Your session expired. Sign in again."
         : response.status === 403
           ? "You do not have access to this operation."
           : response.status === 404
@@ -167,6 +171,7 @@ async function dispatch(
         },
         body,
         cache: "no-store",
+        credentials: "omit",
         redirect: "error",
         signal,
       }).then((response) => {
@@ -179,7 +184,14 @@ async function dispatch(
       await response.body?.cancel().catch(() => undefined);
       throw new Error();
     }
-    return await serviceResponse(response, operation, input, base, signal);
+    return await serviceResponse(
+      response,
+      operation,
+      input,
+      base,
+      signal,
+      token === null,
+    );
   } catch {
     return signal.aborted
       ? jsonError(
@@ -193,18 +205,16 @@ async function dispatch(
 }
 
 /** Backend-issued revocable form capability only; no identity, cookies or bearer is forwarded. */
-export async function handlePublicPlannerFormRequest(
+async function handlePublicOperationRequest(
   request: Request,
   key: string,
+  registry: OperationRegistry,
   config: CapiroConfig,
   fetcher: typeof fetch = fetch,
 ): Promise<Response> {
-  if (!Object.hasOwn(publicPlannerFormOperations, key))
+  if (!Object.hasOwn(registry, key))
     return jsonError(404, "Form operation not found.");
-  const operation =
-    publicPlannerFormOperations[
-      key as keyof typeof publicPlannerFormOperations
-    ];
+  const operation = registry[key]!;
   if (request.method !== operation.method)
     return jsonError(405, "Method not allowed.");
   if (
@@ -212,7 +222,7 @@ export async function handlePublicPlannerFormRequest(
     request.headers.get("origin") !== new URL(request.url).origin
   )
     return jsonError(403, "Request origin is not allowed.");
-  const base = config.services.strategy;
+  const base = config.services[operation.service];
   if (!base) return jsonError(503, "This form service is not configured.");
   const signal = AbortSignal.any([request.signal, AbortSignal.timeout(30000)]);
   try {
@@ -243,13 +253,46 @@ export async function handlePublicPlannerFormRequest(
   }
 }
 
+/** The two public surfaces remain separate reviewed capability allowlists. */
+export function handlePublicPlannerFormRequest(
+  request: Request,
+  key: string,
+  config: CapiroConfig,
+  fetcher: typeof fetch = fetch,
+) {
+  return handlePublicOperationRequest(
+    request,
+    key,
+    publicPlannerFormOperations,
+    config,
+    fetcher,
+  );
+}
+
+export function handlePublicOnboardRequest(
+  request: Request,
+  key: string,
+  config: CapiroConfig,
+  fetcher: typeof fetch = fetch,
+) {
+  return handlePublicOperationRequest(
+    request,
+    key,
+    publicOnboardOperations,
+    config,
+    fetcher,
+  );
+}
+
 /** Trusted token callback supplies the existing Clerk claims; this gateway adds no scope claims. */
 export async function handleCapiroRequest(
   request: Request,
   key: string,
   registry: OperationRegistry,
   config: CapiroConfig,
-  getToken: () => Promise<string | null>,
+  getToken: (
+    authentication?: OperationDefinition["authentication"],
+  ) => Promise<string | null>,
   fetcher: typeof fetch = fetch,
 ): Promise<Response> {
   if (!Object.hasOwn(registry, key))
@@ -300,7 +343,7 @@ export async function handleCapiroRequest(
   }
   let token: string | null;
   try {
-    token = await abortable(getToken(), signal);
+    token = await abortable(getToken(operation.authentication), signal);
   } catch {
     if (signal.aborted)
       return jsonError(

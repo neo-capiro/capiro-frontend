@@ -9,6 +9,9 @@ import { responseHeaders } from "./shared/response-headers";
 
 const clerk = clerkMiddleware();
 export default function proxy(request: NextRequest, event: NextFetchEvent) {
+  // This namespace has its own closed public capability allowlist in the route.
+  if (request.nextUrl.pathname.startsWith("/api/capiro/public-onboard."))
+    return NextResponse.next();
   if (request.nextUrl.pathname === "/settings") {
     const destination = request.nextUrl.clone();
     destination.pathname = "/settings/personal";
@@ -32,6 +35,17 @@ export const config = {
     "/modules/:path*",
     "/settings/:path*",
     "/sign-in/:path*",
+    "/register",
+    "/verify",
+    "/plan",
+    "/legal",
+    "/billing",
+    "/admins",
+    "/clients",
+    "/org",
+    "/confirm",
+    "/accept-invite",
+    "/setup",
     "/api/capiro/:path*",
   ],
 };

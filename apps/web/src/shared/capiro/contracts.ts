@@ -49,6 +49,8 @@ export type OperationDefinition<
   request: Request;
   response: Response;
   source: string;
+  /** Server-owned choice for the existing purchaser/setup Clerk contract. */
+  authentication?: "clerk-session";
   queryArrays?: "repeat" | "comma";
   timeoutMs?: number;
   requestLimitBytes?: number;
@@ -73,6 +75,14 @@ export function defineOperation<
 >(
   definition: OperationDefinition<Request, Response>,
 ): OperationDefinition<Request, Response> {
+  if (
+    definition.authentication === "clerk-session" &&
+    (definition.service !== "onboard" ||
+      !/^\/(?:funnel|setup)\//.test(definition.path))
+  )
+    throw new Error(
+      "Default Clerk session tokens are restricted to reviewed onboarding operations.",
+    );
   if (
     !/^\/(?:[A-Za-z0-9_-]+|:[A-Za-z][A-Za-z0-9_]*)(?:\/(?:[A-Za-z0-9_-]+|:[A-Za-z][A-Za-z0-9_]*))*$/.test(
       definition.path,

@@ -10,6 +10,9 @@ import { settingsOperations } from "./operations/settings";
 import { settingsAdminOperations } from "./operations/settings-admin";
 import { strategiesOperations } from "./operations/strategies";
 import { workspaceOperations } from "./operations/workspace";
+import { onboardFunnelOperations } from "./operations/onboard-funnel";
+import { onboardSetupOperations } from "./operations/onboard-setup";
+import { onboardCoreOperations } from "./operations/onboard-core";
 
 // Reviewed feature groups are composed here. This registry is the gateway allowlist.
 export const capiroOperations = {
@@ -24,4 +27,7 @@ export const capiroOperations = {
   ...settingsAdminOperations,
   ...intelligenceOperations,
   ...researchPortfolioOperations,
+  ...onboardFunnelOperations,
+  ...onboardSetupOperations,
+  ...onboardCoreOperations,
 } as const satisfies OperationRegistry;

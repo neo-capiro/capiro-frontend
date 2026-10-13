@@ -1,0 +1,49 @@
+{
+  "passed": 124,
+  "failed": 0,
+  "pending": 0,
+  "success": true,
+  "lintErrors": 0,
+  "lintWarnings": 0,
+  "syntaxErrors": 0,
+  "featureSignals": 31,
+  "originalTestsByteUnchanged": true,
+  "redControls": [
+    {
+      "path": "setup-eligibility-followup/final-spec-red-results.json",
+      "passed": 2,
+      "failed": 12,
+      "success": false
+    },
+    {
+      "path": "current-funnel-read-followup/final-spec-original-red-results.json",
+      "passed": 3,
+      "failed": 12,
+      "success": false
+    },
+    {
+      "path": "current-funnel-read-followup/signal-red-results.json",
+      "passed": 11,
+      "failed": 2,
+      "success": false
+    },
+    {
+      "path": "current-funnel-read-followup/same-options-red-results.json",
+      "passed": 13,
+      "failed": 2,
+      "success": false
+    },
+    {
+      "path": "it-return-followup/red-results.json",
+      "passed": 1,
+      "failed": 1,
+      "success": false
+    },
+    {
+      "path": "it-current-invite-followup/red-results.json",
+      "passed": 1,
+      "failed": 6,
+      "success": false
+    }
+  ]
+}

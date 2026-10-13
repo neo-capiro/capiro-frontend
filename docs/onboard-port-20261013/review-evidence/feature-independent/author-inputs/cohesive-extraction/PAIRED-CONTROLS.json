@@ -1,0 +1,97 @@
+{
+  "recordedAt": "2026-10-13T04:46:31.446Z",
+  "method": "Pure Vitest controls only, one worker. Baselines use preserved helper/exact legacy submit handler/prior unscoped owner adapters. No browser, SDK, provider or native effect executed. Baseline filter explicitly leaves8 unrelated Stripe cases pending; current green runs every case without filtering.",
+  "testsUnchangedAcrossAllRuns": true,
+  "tests": [
+    {
+      "path": "apps/web/tests/onboard-attempt-journal.test.ts",
+      "sha256": "82ffaf0ab658c5046a0e0ec34fbb0852f7abbf29a5112b56ad8d24dc3b20a574"
+    },
+    {
+      "path": "apps/web/tests/onboard-funnel-lifetime.test.ts",
+      "sha256": "e290570a3636875207cd200edb43db6c92d4f03e90f78452ba4439cdeb8b53ac"
+    },
+    {
+      "path": "apps/web/tests/onboard-import-recovery.test.ts",
+      "sha256": "ca6d927037677e5a8aaabeefb0da54b1791c6a59076dd73e19243fecaacc7d80"
+    },
+    {
+      "path": "apps/web/tests/onboard-input-refusal.test.ts",
+      "sha256": "20bb93688019473c4dfac37af005af67d1ad467297fb1e01510369a4f4b62f49"
+    },
+    {
+      "path": "apps/web/tests/onboard-invitation-recovery.test.ts",
+      "sha256": "281e482e0f2aa2817318350960173d6224a71a2a9af441613098f29de397e1e0"
+    },
+    {
+      "path": "apps/web/tests/onboard-lifecycle.test.ts",
+      "sha256": "02cf10267053075c4e16a6af7fff3a803b1d7f55e09a64ddb6c903d594c30610"
+    },
+    {
+      "path": "apps/web/tests/onboard-registration-draft.test.ts",
+      "sha256": "3f4038f26afe663519ab47278d37f76b76cb6f78c5d83dd3da035150e2056ead"
+    },
+    {
+      "path": "apps/web/tests/onboard-stripe-confirmation.test.ts",
+      "sha256": "673277f01a75b85a75eeddc3a50590d338e874742244e90fbf2bd05aec4aacda"
+    }
+  ],
+  "runs": [
+    {
+      "name": "import-red",
+      "config": "/tmp/capiro-onboard-port-evidence-20261013/behavior-corrections/import-red-final.config.mts",
+      "configSha256": "e55efe1392a2a24ee237264a07b7c8a385f3b8bc2b5f5257f92d366c63b0e23e",
+      "startedAt": "2026-10-13T04:46:26.891Z",
+      "endedAt": "2026-10-13T04:46:27.641Z",
+      "exit": 1,
+      "expectedExit": 1,
+      "resultSha256": "e762c7240427096db3e665f4af4a04594826c6fe6e7374d0460e86c30f3ee0a4",
+      "total": 2,
+      "passed": 0,
+      "failed": 2,
+      "pendingFiltered": 0
+    },
+    {
+      "name": "stripe-handler-red",
+      "config": "/tmp/capiro-onboard-port-evidence-20261013/stripe-restoration/legacy-red.config.mts",
+      "configSha256": "5108dfb0b274d2608c2274a15981c1d39558a7264cc68d5ccada4d50d19816cf",
+      "startedAt": "2026-10-13T04:46:27.641Z",
+      "endedAt": "2026-10-13T04:46:28.281Z",
+      "exit": 1,
+      "expectedExit": 1,
+      "resultSha256": "bfbd865971fc08a6dc88ee6d9efd3d7607a3d0f2544f27b7e659adf8c7f176d5",
+      "total": 11,
+      "passed": 0,
+      "failed": 3,
+      "pendingFiltered": 8
+    },
+    {
+      "name": "native-session-red",
+      "config": "/tmp/capiro-onboard-port-evidence-20261013/native-session-correction/before.config.mts",
+      "configSha256": "e894a2f9dca3eddd665ed70ebcfdf2117c10699ea1b886337aae71c592812970",
+      "startedAt": "2026-10-13T04:46:28.281Z",
+      "endedAt": "2026-10-13T04:46:29.049Z",
+      "exit": 1,
+      "expectedExit": 1,
+      "resultSha256": "379aa4a249ff8971d294123304a46a7aa668fb59b13f8f4472304b2847eb183c",
+      "total": 5,
+      "passed": 1,
+      "failed": 4,
+      "pendingFiltered": 0
+    },
+    {
+      "name": "current-pure-green",
+      "config": "/tmp/capiro-onboard-port-evidence-20261013/vitest.config.mts",
+      "configSha256": "b6bc2c55099d2cf3a20988ee1cb3d78ba944f9519a8e12e6d411637ad988cac2",
+      "startedAt": "2026-10-13T04:46:29.049Z",
+      "endedAt": "2026-10-13T04:46:31.446Z",
+      "exit": 0,
+      "expectedExit": 0,
+      "resultSha256": "111d0e5e193224a8f3c96b158301e82614bbc2a35b19250be0476f1aeeb206db",
+      "total": 72,
+      "passed": 72,
+      "failed": 0,
+      "pendingFiltered": 0
+    }
+  ]
+}

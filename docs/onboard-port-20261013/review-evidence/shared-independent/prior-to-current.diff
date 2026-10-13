@@ -1,0 +1,47 @@
+--- prior/apps/web/src/app/_onboard/OnboardEntry.tsx
++++ current/apps/web/src/app/_onboard/OnboardEntry.tsx
+@@ -1,4 +1,5 @@
+ import { readCapiroConfig } from "../../shared/capiro/config";
++import { onboardPricingCopy } from "../../shared/capiro/onboard-pricing.server";
+ import type { OnboardRoute } from "../../features/onboard/OnboardPage";
+ import { OnboardHost } from "./OnboardHost";
+ 
+@@ -9,6 +10,7 @@
+       route={route}
+       publishableKey={config.publishableKey}
+       serviceConfigured={Boolean(config.services.onboard)}
++      pricingCopy={onboardPricingCopy}
+     />
+   );
+ }
+--- prior/apps/web/src/app/_onboard/OnboardHost.tsx
++++ current/apps/web/src/app/_onboard/OnboardHost.tsx
+@@ -6,6 +6,7 @@
+   type OnboardRoute,
+ } from "../../features/onboard/OnboardPage";
+ import { OnboardSurface } from "../../features/onboard/OnboardSurface";
++import type { OnboardPresentationConfig } from "../../features/onboard/useConfig";
+ import { OnboardApiProvider } from "../../shared/capiro/onboard-api";
+ import { usePublicOnboard } from "../../shared/capiro/CapiroBoundary";
+ import { SessionContext } from "../../shared/session/SessionContext";
+@@ -20,10 +21,12 @@
+   route,
+   publishableKey,
+   serviceConfigured,
++  pricingCopy,
+ }: {
+   route: OnboardRoute;
+   publishableKey?: string;
+   serviceConfigured: boolean;
++  pricingCopy: OnboardPresentationConfig["pricingCopy"];
+ }) {
+   const api = usePublicOnboard();
+   const session = useContext(SessionContext);
+@@ -82,6 +85,7 @@
+           ...config.data,
+           appBaseUrl: origin,
+           onboardingBaseUrl: origin,
++          pricingCopy,
+         }}
+       >
+         <OnboardPage route={route} />
