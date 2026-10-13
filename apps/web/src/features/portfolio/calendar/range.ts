@@ -9,7 +9,7 @@ export const zones = [
   "UTC",
 ] as const;
 export type CalendarZone = (typeof zones)[number];
-export type CalendarView = "month" | "week" | "agenda";
+export type CalendarView = "month" | "week" | "day" | "agenda";
 export function calendarRange(
   date: string,
   view: CalendarView,
@@ -17,19 +17,23 @@ export function calendarRange(
 ) {
   const anchor = Temporal.PlainDate.from(date);
   const first =
-    view === "week"
-      ? anchor.subtract({ days: anchor.dayOfWeek % 7 })
-      : anchor.with({ day: 1 });
+    view === "day"
+      ? anchor
+      : view === "week"
+        ? anchor.subtract({ days: anchor.dayOfWeek % 7 })
+        : anchor.with({ day: 1 });
   const start =
     view === "month" ? first.subtract({ days: first.dayOfWeek % 7 }) : first;
   const end =
-    view === "week"
-      ? start.add({ days: 7 })
-      : view === "month"
-        ? first
-            .add({ months: 1 })
-            .add({ days: (7 - (first.add({ months: 1 }).dayOfWeek % 7)) % 7 })
-        : first.add({ months: 1 });
+    view === "day"
+      ? start.add({ days: 1 })
+      : view === "week"
+        ? start.add({ days: 7 })
+        : view === "month"
+          ? first
+              .add({ months: 1 })
+              .add({ days: (7 - (first.add({ months: 1 }).dayOfWeek % 7)) % 7 })
+          : first.add({ months: 1 });
   return {
     startDay: start.toString(),
     endDay: end.toString(),
@@ -39,7 +43,13 @@ export function calendarRange(
 }
 export function moveDate(date: string, view: CalendarView, direction: number) {
   return Temporal.PlainDate.from(date)
-    .add(view === "week" ? { days: 7 * direction } : { months: direction })
+    .add(
+      view === "day"
+        ? { days: direction }
+        : view === "week"
+          ? { days: 7 * direction }
+          : { months: direction },
+    )
     .toString();
 }
 export function dateTimeInstant(date: string, time: string, zone: string) {
