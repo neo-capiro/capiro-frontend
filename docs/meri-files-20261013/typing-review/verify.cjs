@@ -1,0 +1,48 @@
+const fs = require('node:fs');
+const crypto = require('node:crypto');
+const cp = require('node:child_process');
+const ts = require('/workspace/capiro-onboard-port-20261013/node_modules/typescript');
+const root = '/workspace/capiro-onboard-port-20261013';
+const out = '/tmp/capiro-meri-files-typing-review-20261013';
+const path = 'apps/web/test/browser/meri-files-lifetime.spec.ts';
+const hash = value => crypto.createHash('sha256').update(value).digest('hex');
+const old = cp.execFileSync('git', ['show', `6150e49ce69e8d73609ed974d6f3be796b152bdd:${path}`], {cwd: root, encoding: 'utf8'});
+const current = fs.readFileSync(`${root}/${path}`, 'utf8');
+if (hash(old) !== 'a17c004e87d9d331d97e1b72e32b9dfd7545ae98b4a8734db0db168c47387a31') throw Error('Unexpected historical test bytes');
+const options = {target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext, removeComments: true};
+const before = ts.transpileModule(old, {compilerOptions: options}).outputText;
+const after = ts.transpileModule(current, {compilerOptions: options}).outputText;
+const parse = (name, source) => ts.createSourceFile(name, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.JS);
+const previous = parse('before.mjs', before), next = parse('after.mjs', after);
+const printer = ts.createPrinter({removeComments: true, newLine: ts.NewLineKind.LineFeed});
+const definitions = next.statements.filter(s => ts.isVariableStatement(s) && s.declarationList.declarations.some(d => ts.isIdentifier(d.name) && d.name.text === 'identities'));
+if (definitions.length !== 1 || definitions[0].declarationList.declarations.length !== 1) throw Error('Unexpected identity declaration');
+const initializer = definitions[0].declarationList.declarations[0].initializer;
+if (!ts.isArrayLiteralExpression(initializer)) throw Error('Identity array is not a literal');
+const originalLoop = previous.statements.find(ts.isForOfStatement);
+const updatedLoop = next.statements.find(ts.isForOfStatement);
+if (!originalLoop || !updatedLoop || !ts.isIdentifier(updatedLoop.expression) || updatedLoop.expression.text !== 'identities') throw Error('Unexpected for-of shape');
+const declarationIndex = next.statements.indexOf(definitions[0]);
+if (next.statements[declarationIndex + 1] !== updatedLoop) throw Error('Identity evaluation moved across another statement');
+const print = (node, source) => printer.printNode(ts.EmitHint.Unspecified, node, source);
+const arrayEqual = print(originalLoop.expression, previous) === print(initializer, next);
+let identityUses = 0;
+function visit(node) {if(ts.isIdentifier(node) && node.text==='identities') identityUses++; ts.forEachChild(node, visit);}
+visit(next);
+if (identityUses !== 2) throw Error('Additional identity binding use');
+const normalizedStatements = next.statements.filter(s => s !== definitions[0]).map(s => s === updatedLoop ? ts.factory.updateForOfStatement(s, s.awaitModifier, s.initializer, initializer, s.statement) : s);
+const normalized = printer.printFile(ts.factory.updateSourceFile(next, normalizedStatements));
+const previousPrinted = printer.printFile(previous);
+const equal = previousPrinted === normalized;
+function calls(source) {
+ const result = [];
+ const walk = node => {if(ts.isCallExpression(node)) result.push(print(node,source));ts.forEachChild(node,walk);}; walk(source);return result;
+}
+const beforeCalls=calls(previous), afterCalls=calls(next);
+const callsEqual=JSON.stringify(beforeCalls)===JSON.stringify(afterCalls);
+if (!arrayEqual || !equal || !callsEqual) throw Error('Runtime/test semantics changed beyond literal hoist');
+fs.writeFileSync(`${out}/before.ts`, old);fs.writeFileSync(`${out}/after.ts`,current);
+fs.writeFileSync(`${out}/before-emitted.mjs`, before);fs.writeFileSync(`${out}/after-emitted.mjs`,after);
+fs.writeFileSync(`${out}/normalized-after.mjs`,normalized);
+const result={status:'PASS',at:new Date().toISOString(),typescript:ts.version,head:cp.execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim(),path,beforeSha256:hash(old),afterSha256:hash(current),beforeEmittedSha256:hash(before),afterEmittedSha256:hash(after),exactEmittedBytesEqual:before===after,explanation:'Emitted JS differs only by immediate local array binding followed by the same for-of. Inlining that literal and removing its sole declaration yields identical printed JS.',identityArrayValuesOrderEqual:arrayEqual,identityIdentifierUses:identityUses,initializerImmediatelyPrecedesLoop:true,normalizedEmittedProgramEqual:equal,normalizedProgramSha256:hash(normalized),allCallExpressionsEqual:callsEqual,callExpressionCount:beforeCalls.length,scope:'Static transpile/AST review only; no app execution, browser, build, install or independent full typecheck.'};
+fs.writeFileSync(`${out}/RESULT.json`, JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result,null,2));
