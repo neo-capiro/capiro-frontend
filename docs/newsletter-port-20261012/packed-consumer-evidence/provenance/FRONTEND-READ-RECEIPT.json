@@ -1,0 +1,70 @@
+{
+  "at": "2026-10-12T23:07:54.780011+00:00",
+  "head": "b680b65e14134be736942b29d715e49c2c6a8b19",
+  "files": [
+    {
+      "path": "apps/web/src/shared/capiro/operations/engagement.ts",
+      "bytes": 10920,
+      "sha256": "c76d84157ccbb5b7e4debc46a710f76e4f9922ee9811ec2beab1202d0e924457",
+      "matchesPR16Pin": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/workspace-newsletter-staging.ts",
+      "bytes": 2652,
+      "sha256": "d9f8ed98e47a0859057752536ff9ebea7c7b70657cd055aa3b6878dd2c614258",
+      "matchesPR16Pin": true
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/staging-model.ts",
+      "bytes": 4229,
+      "sha256": "e28e44e049810a413a67292b47e87b4d23bb2ea3e7c41c9bd6fcb26c00761bc5",
+      "matchesPR16Pin": true
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/newsletter/useNewsletterStaging.ts",
+      "bytes": 4927,
+      "sha256": "355b6d8f0f2cd206dc39047570293d415e11dde4ab4b24194856e763c09fd126",
+      "matchesPR16Pin": true
+    },
+    {
+      "path": "docs/newsletter-port-20261012/HANDOVER.md",
+      "bytes": 4649,
+      "sha256": "02e04e44bc9ec8a14c4d72b6a740dbd6bf38ac9b27761ff1a6deca3c2f3b8ded",
+      "matchesPR16Pin": true
+    }
+  ],
+  "originalSharedModuleComparison": [
+    {
+      "module": "newsletter.ts",
+      "preservedFrontendPath": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter.ts",
+      "sha256": "f586855ffb43f7b4a014b0e27c8ae6be342fb843cb656a58b520b0ac1706c796",
+      "byteIdenticalToPackedSource": true
+    },
+    {
+      "module": "newsletter-render.ts",
+      "preservedFrontendPath": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter-render.ts",
+      "sha256": "b143df93036c87dbce9dc49a0e01f1f4bd3a7b6cf562b64608940bdea97c3f3c",
+      "byteIdenticalToPackedSource": true
+    },
+    {
+      "module": "newsletter-fonts.ts",
+      "preservedFrontendPath": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter-fonts.ts",
+      "sha256": "56db91870105d8268ad8f1699ad04a3c60062f45b4738ae8b4c892f3e58d4825",
+      "byteIdenticalToPackedSource": true
+    },
+    {
+      "module": "newsletter-fonts.catalog.ts",
+      "preservedFrontendPath": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter-fonts.catalog.ts",
+      "sha256": "7360c71bdfaedf091171ff704bdd1e38c68605614dda06c30dbf7958a0dedf1f",
+      "byteIdenticalToPackedSource": true
+    },
+    {
+      "module": "newsletter-social-share.ts",
+      "preservedFrontendPath": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter-social-share.ts",
+      "sha256": "ddaeebbda2901158ccd809a2ec2c7e7515d213af043bef9524e1f707cb3e57a0",
+      "byteIdenticalToPackedSource": true
+    }
+  ],
+  "edits": false,
+  "dispatchOrPackageExecution": false
+}

@@ -1,0 +1,15 @@
+/tmp/capiro-newsletter-package-verification/inspect-closure-attempt1.cjs:61
+if (JSON.stringify(actual) !== JSON.stringify(expected) || external.length || dynamic.length || globals.length || declarations.length !== 36) throw new Error(JSON.stringify({actual, external, dynamic, globals}));
+                                                                                                                                              ^
+
+Error: {"actual":["dist/newsletter-fonts.catalog.js","dist/newsletter-fonts.js","dist/newsletter-render.js","dist/newsletter-social-share.js","dist/newsletter.js"],"external":[],"dynamic":[],"globals":[{"file":"dist/newsletter-render.js","identifier":"global","line":399},{"file":"dist/newsletter-render.js","identifier":"global","line":412}]}
+    at Object.<anonymous> (/tmp/capiro-newsletter-package-verification/inspect-closure-attempt1.cjs:61:149)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v24.19.0

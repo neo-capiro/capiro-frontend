@@ -1,0 +1,37 @@
+{
+  "sealedAt": "2026-10-12T21:38:35.508310+00:00",
+  "frontendBase": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+  "candidateCommit": null,
+  "stagedIndexSHA256": "c370e95815c4d63e982df14a4fcc2b982e3890b6f163e5b5b3ff0e669c9ade59",
+  "publicationManifestSHA256": "a5fce96a79c555cfbdb96be03467904b6c1885635561f20cc3e3b96fbcc4d797",
+  "originalAssetReviewManifestSHA256": "f02157e043679edf0c8bff38b2fcc5b24a0503799102c43b905c26a795ea33e1",
+  "outputs": [
+    {
+      "path": "/tmp/capiro-newsletter-assets-publication-review-20261012/REDACTION-VERIFICATION.json",
+      "bytes": 29900,
+      "sha256": "6926f06db361d9629a2c90b450c5318ec84816f56299990b98c715cadb6c6a0f"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-publication-review-20261012/STAGED-SOURCE-BINDING.json",
+      "bytes": 149017,
+      "sha256": "8c206fbf1e4961ccf2dbd836c0667a83c626a68db268794475eac1d4f156b23e"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-publication-review-20261012/WHITESPACE-CHECK.json",
+      "bytes": 1110,
+      "sha256": "02748cba643dfa9332eb4775d52932db11b61e1c2ca0a179623f66e2d3fe36e0"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-publication-review-20261012/report.md",
+      "bytes": 2630,
+      "sha256": "55b942d81093083a453cc053acf789b4d7c51c100b1e768b53d743e0b08fe469"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-publication-review-20261012/staged-diff-check.log",
+      "bytes": 510,
+      "sha256": "6a8b1052fceb8152795930e0eab74a5cfaf5d82a2deeda62fbf6a67d2f603438"
+    }
+  ],
+  "readOnly": true,
+  "findingDisposition": "NEWSLETTER-DOC-01_RESOLVED_FOR_EXACT_STAGED_BYTES"
+}

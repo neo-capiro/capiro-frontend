@@ -13,6 +13,7 @@ export const publicExports = new Set([
   '@capiro/ui/conversation', '@capiro/ui/message', '@capiro/meri-client/projection',
   '@capiro/meri-contracts', '@capiro/meri-contracts/browser',
   '@capiro/meri-contracts/metadata', '@capiro/meri-ui-stream/protocol',
+  '@capiro/shared/newsletter', '@capiro/shared/newsletter-render',
 ]);
 
 export const serverAdapters = new Map([

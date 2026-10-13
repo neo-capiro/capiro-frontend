@@ -1,0 +1,81 @@
+{
+  "at": "2026-10-12T23:28:47.914897+00:00",
+  "verdict": "PASS_COMMITTED_PACKED_EVIDENCE_WITH_PRESERVED_WHITESPACE_WARNINGS",
+  "qualifiedSource": "4910400220140a0ff957b3336943a7438a52f7c0",
+  "evidenceCommit": "674de8518026e63f11e350a9784a77745d806efe",
+  "parentIsExactQualifiedSource": true,
+  "sourceRootTree": "1cece7b0e39ea6a823c46277db58afe2810a77ee",
+  "evidenceRootTree": "c0e939df97da4026a3369119f49b012617fa72df",
+  "unchangedTrees": {
+    "apps": "b0283add8e7f3063157f3ec01bc3da9674ebc842",
+    "apps/web": "aa089a6eff3921ab659cdc24154a9f6d5a5ecdb6",
+    "apps/web/src": "57fad76b58a59f8d3c2f35155201e7524d713539",
+    "packages": "7835334f3f1f2f1e7bfc6f5b11721d58c001e939",
+    "scripts": "1a76937ee9a43066519bb58f35728dd8f90bc196",
+    "vendor": "b494e407f2cc81707cc84cbd3442a10f13a2afc8"
+  },
+  "allOtherTrackedPathsAndModesUnchanged": true,
+  "manifestSHA256": "f9503aca9e494f49f4d42440841d8492814a5606bb73209aca5cdc8d36cf309e",
+  "manifestRecords": 417,
+  "manifestBytes": 8324271,
+  "exactCommittedProofSet": true,
+  "exactThreeOriginalRootRegularFileSet": true,
+  "allCommittedOriginalLocalBytesAndOriginalExecutableModesMatch": true,
+  "changedPaths": 421,
+  "changedControls": [
+    "docs/newsletter-port-20261012/HANDOVER.md",
+    "docs/newsletter-port-20261012/PACKED-CONSUMER.md",
+    "docs/newsletter-port-20261012/PACKED-EVIDENCE-MANIFEST.json",
+    "docs/newsletter-port-20261012/PACKED-QUALIFICATION.md"
+  ],
+  "borrowedDependencyLink": {
+    "path": "packages/qualification-newsletter/node_modules",
+    "isLocalSymlink": true,
+    "target": "/tmp/capiro-newsletter-consumer-install/node_modules",
+    "committed": false,
+    "staged": false
+  },
+  "whitespace": {
+    "sourceCommitExit": 0,
+    "evidenceCommitExit": 2,
+    "warningCount": 18,
+    "allWarningsInsidePreservedManifestEvidence": true,
+    "warningLocations": [
+      "docs/newsletter-port-20261012/packed-consumer-evidence/independent-review/source-snapshot/docs/newsletter-port-20261012/HANDOVER.md:28: new blank line at EOF.",
+      "docs/newsletter-port-20261012/packed-consumer-evidence/independent-review/source.diff:6: trailing whitespace.",
+      "docs/newsletter-port-20261012/packed-consumer-evidence/independent-review/source.diff:8: trailing whitespace.",
+      "docs/newsletter-port-20261012/packed-consumer-evidence/independent-review/source.diff:11: trailing whitespace.",
+      "docs/newsletter-port-20261012/packed-consumer-evidence/independent-review/source.diff:13: trailing whitespace.",
+      "docs/newsletter-port-20261012/packed-consumer-evidence/independent-review/source.diff:15: trailing whitespace.",
+      "docs/newsletter-port-20261012/packed-consumer-evidence/independent-review/source.diff:17: trailing whitespace.",
+      "docs/newsletter-port-20261012/packed-consumer-evidence/independent-review/source.diff:20: trailing whitespace.",
+      "docs/newsletter-port-20261012/packed-consumer-evidence/independent-review/source.diff:22: trailing whitespace.",
+      "docs/newsletter-port-20261012/packed-consumer-evidence/independent-review/source.diff:117: trailing whitespace.",
+      "docs/newsletter-port-20261012/packed-consumer-evidence/independent-review/source.diff:134: trailing whitespace.",
+      "docs/newsletter-port-20261012/packed-consumer-evidence/independent-review/source.diff:142: trailing whitespace.",
+      "docs/newsletter-port-20261012/packed-consumer-evidence/qualification/architecture-new-export-baseline.log:17: trailing whitespace.",
+      "docs/newsletter-port-20261012/packed-consumer-evidence/qualification/architecture-new-export-baseline.log:23: trailing whitespace.",
+      "docs/newsletter-port-20261012/packed-consumer-evidence/qualification/packed-node-initial.log:141: trailing whitespace.",
+      "docs/newsletter-port-20261012/packed-consumer-evidence/qualification/packed-node-initial.log:163: trailing whitespace.",
+      "docs/newsletter-port-20261012/packed-consumer-evidence/qualification/packed-node-initial.log:230: trailing whitespace.",
+      "docs/newsletter-port-20261012/packed-consumer-evidence/qualification/packed-node-initial.log:241: trailing whitespace."
+    ],
+    "rawProofRewritten": false
+  },
+  "indexEvidenceMatchesReviewedCommit": true,
+  "observedHead": "674de8518026e63f11e350a9784a77745d806efe",
+  "observedTrackedChanges": [
+    "docs/newsletter-port-20261012/PACKED-QUALIFICATION.md"
+  ],
+  "observedStagedChanges": [],
+  "observedStatus": " M docs/newsletter-port-20261012/PACKED-QUALIFICATION.md\n?? docs/newsletter-port-20261012/packed-publication-verification/\n?? packages/qualification-newsletter/node_modules\n",
+  "laterDocumentationFollowup": "Not covered unless separately bound; review pins exact 674de851 evidence commit",
+  "notRun": [
+    "install",
+    "browser",
+    "application runtime",
+    "native/provider/cloud calls"
+  ],
+  "writes": "Only /tmp/capiro-newsletter-committed-verification; PR15 and frozen proof untouched",
+  "remainingReviewBlockers": []
+}

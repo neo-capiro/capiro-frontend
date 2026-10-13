@@ -1,0 +1,18 @@
+{
+  "id": "NEWSLETTER-DOC-01",
+  "severity": "publication blocker for copied evidence; no defect in static assets",
+  "status": "REQUIRED_SANITIZATION_BEFORE_PUBLICATION",
+  "scope": "Copied documentation only; original sealed local audit remains unchanged.",
+  "observed": "Five copied GitHub directory API receipts contain raw download_url query token values. No values are included in this review.",
+  "affectedPaths": [
+    "docs/newsletter-port-20261012/scope-audit/evidence/newsletterPlanEvidenceDirectory.json",
+    "docs/newsletter-port-20261012/scope-audit/evidence/newsletterAssetDirectoryC.json",
+    "docs/newsletter-port-20261012/scope-audit/evidence/newsletterRuntimeDirectoryW.json",
+    "docs/newsletter-port-20261012/scope-audit/evidence/newsletterPlanDirectory.json",
+    "docs/newsletter-port-20261012/scope-audit/evidence/newsletterAssetDirectoryW.json"
+  ],
+  "requiredAction": "Redact only ephemeral download URL token query values in copied publication evidence; preserve original local audit, record original-to-sanitized paths/hashes and source-index caveat, then verify the staged publication contains no remaining actual token values.",
+  "rootDisposition": "Root explicitly agreed to this correction and requested independent staged review after completion.",
+  "staticAssetDisposition": "All 179 assets remain byte-exact and accepted for bounded preservation.",
+  "reviewerSourceEdits": false
+}

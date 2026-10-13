@@ -1,0 +1,37 @@
+{
+  "frontend": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+  "requiredPackage": {
+    "name": "@capiro/shared",
+    "version": "0.0.0",
+    "private": true,
+    "subpaths": [
+      "./newsletter",
+      "./newsletter-render"
+    ],
+    "runtimeExternalImports": [],
+    "internalClosure": [
+      "newsletter.ts",
+      "newsletter-render.ts",
+      "newsletter-fonts.ts",
+      "newsletter-fonts.catalog.ts",
+      "newsletter-social-share.ts"
+    ],
+    "output": "CommonJS ES2022 with declarations; source tsconfig includes whole shared src, not a demonstrated narrow pack"
+  },
+  "artifactConclusion": "No packed newsletter artifact or pack/consumer/provenance receipt identified in the exact handoff, plan receipts, PR2424 changed paths or dedicated frontend vendor inputs inspected. This is not a global registry/release nonexistence assertion.",
+  "existingArtifactPattern": [
+    "vendor/README.md",
+    "vendor/meri-public-packages.json",
+    "scripts/public-packages.mjs",
+    "scripts/public-packages.test.mjs"
+  ],
+  "sourceIndex": {
+    "path": "packages/shared/src/index.ts",
+    "ref": "5470c6df029c9553dd49e531229c3c91b26275ef",
+    "sha": "39ed5db53cf9599b72f9ddf1885568441b873217",
+    "newsletterReExportCount": 0
+  },
+  "nativeCalls": 0,
+  "builds": 0,
+  "installs": 0
+}

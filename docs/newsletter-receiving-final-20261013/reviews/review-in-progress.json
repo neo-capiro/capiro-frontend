@@ -1,0 +1,502 @@
+{
+  "recordedUTC": "2026-10-13T04:47:42.676451+00:00",
+  "status": "REVIEW_IN_PROGRESS_WAITING_ROOT_FINAL_GATES",
+  "source": {
+    "head": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+    "rootTree": "9d11bfbd7121887bc06f5cb793e8a4c4e6e682b4",
+    "applicationTree": "79ae91f7a119e98b7ba612ceed2a4ca661944888",
+    "status": "",
+    "frozenTreeFileSha256": "b53ad5309e77dc23cb9ec63a1dfa42b4496972c03876fd03f73ed3daf0aec610",
+    "actualGitTreeSha256": "b53ad5309e77dc23cb9ec63a1dfa42b4496972c03876fd03f73ed3daf0aec610",
+    "frozenGitTreeExact": true,
+    "lockSha256": "5deb9fbd2767fcc116235953a2d0ca762702908186edc098a791cd400ab52cd4"
+  },
+  "completedGates": [
+    {
+      "gate": "final-build",
+      "receipt": "/tmp/capiro-newsletter-final-c8aa693e-20261013/final-build-exit.json",
+      "receiptSha256": "9f0c23bb42fad46ad64853418057af614a8f63cbf5567aa1ad41bbdd74f12c9e",
+      "log": "/tmp/capiro-newsletter-final-c8aa693e-20261013/final-build.log",
+      "logSha256": "3f494074942979c02e3741c09a8342cf870ec7cb945ab88aeeec3679938ba83b",
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+        "tree": "9d11bfbd7121887bc06f5cb793e8a4c4e6e682b4",
+        "applicationTree": "79ae91f7a119e98b7ba612ceed2a4ca661944888",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+        "tree": "9d11bfbd7121887bc06f5cb793e8a4c4e6e682b4",
+        "applicationTree": "79ae91f7a119e98b7ba612ceed2a4ca661944888",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false,
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "startedUTC": "2026-10-13T04:46:14.973426+00:00",
+      "endedUTC": "2026-10-13T04:47:10.524609+00:00"
+    },
+    {
+      "gate": "final-check",
+      "receipt": "/tmp/capiro-newsletter-final-c8aa693e-20261013/final-check-exit.json",
+      "receiptSha256": "06ec7bcaef6501f29bd72e42a913ab44fc8df9c74d8b81a6e276da20a3cc3a3e",
+      "log": "/tmp/capiro-newsletter-final-c8aa693e-20261013/final-check.log",
+      "logSha256": "5ac607b4411490b0932ebacbd8c2b9d8e0b40ac73e6e36423b718781f18411f9",
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+        "tree": "9d11bfbd7121887bc06f5cb793e8a4c4e6e682b4",
+        "applicationTree": "79ae91f7a119e98b7ba612ceed2a4ca661944888",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+        "tree": "9d11bfbd7121887bc06f5cb793e8a4c4e6e682b4",
+        "applicationTree": "79ae91f7a119e98b7ba612ceed2a4ca661944888",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false,
+      "command": [
+        "npm",
+        "run",
+        "check"
+      ],
+      "startedUTC": "2026-10-13T03:58:22.650049+00:00",
+      "endedUTC": "2026-10-13T04:00:13.903276+00:00"
+    },
+    {
+      "gate": "final-clean-install",
+      "receipt": "/tmp/capiro-newsletter-final-c8aa693e-20261013/final-clean-install-exit.json",
+      "receiptSha256": "b3c3631cc29a8c479865f87d497fa6b7cebf76288a1d36468f58d49695bd155b",
+      "log": "/tmp/capiro-newsletter-final-c8aa693e-20261013/final-clean-install.log",
+      "logSha256": "505e47cc7525dceecd697a4dd904ae2d3ad9897b38c8aabaf87bfa1ccd8ce0bb",
+      "exitCode": 254,
+      "sourceBefore": {
+        "head": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+        "tree": "9d11bfbd7121887bc06f5cb793e8a4c4e6e682b4",
+        "applicationTree": "79ae91f7a119e98b7ba612ceed2a4ca661944888",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+        "tree": "9d11bfbd7121887bc06f5cb793e8a4c4e6e682b4",
+        "applicationTree": "79ae91f7a119e98b7ba612ceed2a4ca661944888",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false,
+      "command": [
+        "npm",
+        "ci",
+        "--ignore-scripts"
+      ],
+      "startedUTC": "2026-10-13T03:56:38.813488+00:00",
+      "endedUTC": "2026-10-13T03:56:54.386376+00:00"
+    },
+    {
+      "gate": "final-clean-install-v2",
+      "receipt": "/tmp/capiro-newsletter-final-c8aa693e-20261013/final-clean-install-v2-exit.json",
+      "receiptSha256": "1bef4128f2cb4b847143bbe8aff203b91fefda3514a22ed3495f738bd4fe7f09",
+      "log": "/tmp/capiro-newsletter-final-c8aa693e-20261013/final-clean-install-v2.log",
+      "logSha256": "e5d339b31274b9c49570f7a328b6a51d7e5491a0d16a2374376680d64b433270",
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+        "tree": "9d11bfbd7121887bc06f5cb793e8a4c4e6e682b4",
+        "applicationTree": "79ae91f7a119e98b7ba612ceed2a4ca661944888",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+        "tree": "9d11bfbd7121887bc06f5cb793e8a4c4e6e682b4",
+        "applicationTree": "79ae91f7a119e98b7ba612ceed2a4ca661944888",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false,
+      "command": [
+        "env",
+        "npm_config_cache=/tmp/capiro-newsletter-receiving-npm-cache",
+        "npm",
+        "ci",
+        "--ignore-scripts"
+      ],
+      "startedUTC": "2026-10-13T03:57:55.253069+00:00",
+      "endedUTC": "2026-10-13T03:58:10.134347+00:00"
+    },
+    {
+      "gate": "final-elements",
+      "receipt": "/tmp/capiro-newsletter-final-c8aa693e-20261013/final-elements-exit.json",
+      "receiptSha256": "7b181ff139337a43415337bb5f58b58837081b1c247563138f79d6487e4af444",
+      "log": "/tmp/capiro-newsletter-final-c8aa693e-20261013/final-elements.log",
+      "logSha256": "94145512d80493f474a920e86624e0915dd0aa7458f997665b8a90a3588d59fe",
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+        "tree": "9d11bfbd7121887bc06f5cb793e8a4c4e6e682b4",
+        "applicationTree": "79ae91f7a119e98b7ba612ceed2a4ca661944888",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+        "tree": "9d11bfbd7121887bc06f5cb793e8a4c4e6e682b4",
+        "applicationTree": "79ae91f7a119e98b7ba612ceed2a4ca661944888",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false,
+      "command": [
+        "node",
+        "apps/web/deployment/portfolio/qualify-elements.mjs",
+        "/tmp/capiro-newsletter-final-c8aa693e-20261013/elements-work"
+      ],
+      "startedUTC": "2026-10-13T04:01:27.756115+00:00",
+      "endedUTC": "2026-10-13T04:01:34.871716+00:00"
+    },
+    {
+      "gate": "final-modules-browser",
+      "receipt": "/tmp/capiro-newsletter-final-c8aa693e-20261013/final-modules-browser-exit.json",
+      "receiptSha256": "9f678bea725fdd0db0e25efe3ad1aff2fb508b64d763ae0ce42aa740d4cf0a69",
+      "log": "/tmp/capiro-newsletter-final-c8aa693e-20261013/final-modules-browser.log",
+      "logSha256": "db935590a0be744002a9b0e4be65687c8093b3b56df2b7cf7ee9eafbf08e25d1",
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+        "tree": "9d11bfbd7121887bc06f5cb793e8a4c4e6e682b4",
+        "applicationTree": "79ae91f7a119e98b7ba612ceed2a4ca661944888",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+        "tree": "9d11bfbd7121887bc06f5cb793e8a4c4e6e682b4",
+        "applicationTree": "79ae91f7a119e98b7ba612ceed2a4ca661944888",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false,
+      "command": [
+        "npm",
+        "run",
+        "test:browser:modules",
+        "--workspace",
+        "@capiro/web",
+        "--",
+        "--output=/tmp/capiro-newsletter-final-c8aa693e-20261013/final-modules-browser-artifacts"
+      ],
+      "startedUTC": "2026-10-13T04:40:35.047525+00:00",
+      "endedUTC": "2026-10-13T04:45:40.663312+00:00"
+    },
+    {
+      "gate": "final-portfolio-browser",
+      "receipt": "/tmp/capiro-newsletter-final-c8aa693e-20261013/final-portfolio-browser-exit.json",
+      "receiptSha256": "efd5897b4b249bfdd86ff52d4ec975203a6bdeef9666787c83f52d05eba9f9c3",
+      "log": "/tmp/capiro-newsletter-final-c8aa693e-20261013/final-portfolio-browser.log",
+      "logSha256": "6b6d994033e59d3652939dc36ec936cbf406ec9df98cc13ffbaa2b3fee9304a7",
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+        "tree": "9d11bfbd7121887bc06f5cb793e8a4c4e6e682b4",
+        "applicationTree": "79ae91f7a119e98b7ba612ceed2a4ca661944888",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+        "tree": "9d11bfbd7121887bc06f5cb793e8a4c4e6e682b4",
+        "applicationTree": "79ae91f7a119e98b7ba612ceed2a4ca661944888",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false,
+      "command": [
+        "env",
+        "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+        "PLAYWRIGHT_JSON_OUTPUT_FILE=/tmp/capiro-newsletter-final-c8aa693e-20261013/final-portfolio-browser-results.json",
+        "npm",
+        "run",
+        "test:browser",
+        "--",
+        "--workers=3",
+        "--output=/tmp/capiro-newsletter-final-c8aa693e-20261013/final-portfolio-browser-artifacts"
+      ],
+      "startedUTC": "2026-10-13T04:03:41.423584+00:00",
+      "endedUTC": "2026-10-13T04:40:14.298317+00:00"
+    },
+    {
+      "gate": "final-public-newsletter-browser",
+      "receipt": "/tmp/capiro-newsletter-final-c8aa693e-20261013/final-public-newsletter-browser-exit.json",
+      "receiptSha256": "de40d40e538866ba0242032295d6280bde679855da2eccdbb9a01c669bcc649d",
+      "log": "/tmp/capiro-newsletter-final-c8aa693e-20261013/final-public-newsletter-browser.log",
+      "logSha256": "fe0595bad831384eb2dba9fbc4704af90ca6fe5ea0d5bb0b31ca49d9009b6f15",
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+        "tree": "9d11bfbd7121887bc06f5cb793e8a4c4e6e682b4",
+        "applicationTree": "79ae91f7a119e98b7ba612ceed2a4ca661944888",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+        "tree": "9d11bfbd7121887bc06f5cb793e8a4c4e6e682b4",
+        "applicationTree": "79ae91f7a119e98b7ba612ceed2a4ca661944888",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false,
+      "command": [
+        "node",
+        "packages/qualification-newsletter/browser-check.mjs",
+        "/tmp/capiro-newsletter-final-c8aa693e-20261013/public-newsletter-browser"
+      ],
+      "startedUTC": "2026-10-13T04:01:34.925916+00:00",
+      "endedUTC": "2026-10-13T04:01:36.238394+00:00"
+    }
+  ],
+  "browserAudit": [
+    {
+      "name": "final-portfolio-browser",
+      "path": "/tmp/capiro-newsletter-final-c8aa693e-20261013/final-portfolio-browser-results.json",
+      "sha256": "3bb350af1499635cb3408ebc794a1be2a0d4ee80c895fa42042e8652ba5260b3",
+      "stats": {
+        "startTime": "2026-10-13T04:03:42.151Z",
+        "duration": 2192041.3649999998,
+        "expected": 1122,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "tests": 1122,
+      "specFiles": 136,
+      "attempts": 1122,
+      "testStatus": {
+        "expected": 1122
+      },
+      "expectedStatus": {
+        "passed": 1122
+      },
+      "attemptStatus": {
+        "passed": 1122
+      },
+      "retries": {
+        "0": 1122
+      },
+      "topLevelErrors": [],
+      "settings": {
+        "argv": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+          "/workspace/capiro-newsletter-port/node_modules/.bin/playwright",
+          "test",
+          "--workers=3",
+          "--output=/tmp/capiro-newsletter-final-c8aa693e-20261013/final-portfolio-browser-artifacts"
+        ],
+        "configFile": "/workspace/capiro-newsletter-port/apps/web/playwright.config.ts",
+        "workers": 3,
+        "fullyParallel": false,
+        "forbidOnly": false,
+        "failOnFlakyTests": false,
+        "grep": {},
+        "grepInvert": null,
+        "shard": null,
+        "projects": [
+          {
+            "outputDir": "/tmp/capiro-newsletter-final-c8aa693e-20261013/final-portfolio-browser-artifacts",
+            "repeatEach": 1,
+            "retries": 0,
+            "metadata": {
+              "actualWorkers": 3
+            },
+            "id": "",
+            "name": "",
+            "testDir": "/workspace/capiro-newsletter-port/apps/web/tests/browser",
+            "testIgnore": [],
+            "testMatch": [
+              "**/*.spec.ts"
+            ],
+            "timeout": 30000
+          }
+        ],
+        "webServer": {
+          "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" tests/browser/server.mjs",
+          "url": "http://127.0.0.1:5191",
+          "reuseExistingServer": false
+        }
+      }
+    },
+    {
+      "name": "final-modules-browser",
+      "path": "/tmp/capiro-newsletter-final-c8aa693e-20261013/final-modules-browser-results.json",
+      "sha256": "4fe0f5c5c2c63932cae6a69f005dbeeac0f048dabb62e6746112a323ac1a640b",
+      "stats": {
+        "startTime": "2026-10-13T04:40:35.725Z",
+        "duration": 304895.75299999997,
+        "expected": 234,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "tests": 234,
+      "specFiles": 30,
+      "attempts": 234,
+      "testStatus": {
+        "expected": 234
+      },
+      "expectedStatus": {
+        "passed": 234
+      },
+      "attemptStatus": {
+        "passed": 234
+      },
+      "retries": {
+        "0": 234
+      },
+      "topLevelErrors": [],
+      "settings": {
+        "argv": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+          "/workspace/capiro-newsletter-port/node_modules/.bin/playwright",
+          "test",
+          "--config",
+          "test/browser/playwright.config.ts",
+          "--output=/tmp/capiro-newsletter-final-c8aa693e-20261013/final-modules-browser-artifacts"
+        ],
+        "configFile": "/workspace/capiro-newsletter-port/apps/web/test/browser/playwright.config.ts",
+        "workers": 1,
+        "fullyParallel": false,
+        "forbidOnly": false,
+        "failOnFlakyTests": false,
+        "grep": {},
+        "grepInvert": null,
+        "shard": null,
+        "projects": [
+          {
+            "outputDir": "/tmp/capiro-newsletter-final-c8aa693e-20261013/final-modules-browser-artifacts",
+            "repeatEach": 1,
+            "retries": 0,
+            "metadata": {
+              "actualWorkers": 1
+            },
+            "id": "",
+            "name": "",
+            "testDir": "/workspace/capiro-newsletter-port/apps/web/test/browser",
+            "testIgnore": [],
+            "testMatch": [
+              "**/*.spec.ts"
+            ],
+            "timeout": 30000
+          }
+        ],
+        "webServer": {
+          "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" \"/workspace/capiro-newsletter-port/apps/web/test/browser/server.mjs\"",
+          "url": "http://127.0.0.1:5197",
+          "reuseExistingServer": false
+        }
+      }
+    }
+  ],
+  "environment": {
+    "atUTC": "2026-10-13T04:40:01.962011+00:00",
+    "node": "v24.19.0",
+    "npm": "11.9.0",
+    "chromium": "Chromium 154.0.8037.57 built on Debian GNU/Linux 13 (trixie)",
+    "kernel": "Linux ba11bbb25e43 6.18.44 #1 SMP Sat Sep 26 20:02:31 UTC 2026 x86_64 GNU/Linux",
+    "libc": "ldd (Debian GLIBC 2.41-12+deb13u4) 2.41",
+    "timezone": "UTC",
+    "head": "c8aa693e884de86001d2fc04fbb60d48db09341c",
+    "tree": "9d11bfbd7121887bc06f5cb793e8a4c4e6e682b4",
+    "appTree": "79ae91f7a119e98b7ba612ceed2a4ca661944888",
+    "lockSha256": "5deb9fbd2767fcc116235953a2d0ca762702908186edc098a791cd400ab52cd4",
+    "playwright": "1.61.1",
+    "status": "",
+    "qualificationNote": "System Chromium154 due pinned Playwright browser CDN403; no pinned-browser equivalence or native musl/image qualification claimed."
+  },
+  "pinnedChromium": [
+    {
+      "name": "chromium",
+      "revision": "1228",
+      "installByDefault": true,
+      "browserVersion": "149.0.7827.55",
+      "title": "Chrome for Testing"
+    },
+    {
+      "name": "chromium-headless-shell",
+      "revision": "1228",
+      "installByDefault": true,
+      "browserVersion": "149.0.7827.55",
+      "title": "Chrome Headless Shell"
+    }
+  ],
+  "publicPackageBrowser": {
+    "passedCharacterizations": 116,
+    "passedReceivingCases": 130,
+    "publicNames": [
+      "NEWSLETTER_BLOCK_KINDS",
+      "NEWSLETTER_BLOCK_LABELS",
+      "NEWSLETTER_COLUMN_RATIOS",
+      "NEWSLETTER_FONT_CATALOG",
+      "NEWSLETTER_RECEIVE_LIMITS",
+      "NEWSLETTER_SOCIAL_ICON_STYLES",
+      "NEWSLETTER_SOCIAL_PLATFORMS",
+      "NEWSLETTER_SOCIAL_SHARE_PLATFORMS",
+      "NEWSLETTER_SURVEY_SECTION_TYPES",
+      "NEWSLETTER_SYSTEM_FONTS",
+      "NEWSLETTER_TEMPLATE_ID",
+      "applyNewsletterBrandKit",
+      "cloneNewsletterBlocks",
+      "createNewsletterBlock",
+      "createNewsletterLayout",
+      "createNewsletterSection",
+      "createNewsletterSurveyQuestion",
+      "defaultNewsletterBrandKit",
+      "defaultNewsletterConfig",
+      "defaultNewsletterSocialSettings",
+      "defaultNewsletterSocialShare",
+      "defaultNewsletterStyles",
+      "defaultNewsletterSurveyDefinition",
+      "findNewsletterBlock",
+      "governmentAffairsNewsletter",
+      "newsletterBlockVisible",
+      "newsletterBrandButtonStyle",
+      "newsletterCatalogFont",
+      "newsletterCatalogStyle",
+      "newsletterCustomVideoThumbnail",
+      "newsletterDesignFontRequests",
+      "newsletterDesignFonts",
+      "newsletterId",
+      "newsletterSocialPlatform",
+      "newsletterSocialSettings",
+      "newsletterSourceClients",
+      "newsletterVideoSource",
+      "newsletterWebFontUrls",
+      "parseNewsletterCampaign",
+      "parseNewsletterChecks",
+      "parseNewsletterDocumentList",
+      "parseNewsletterHtmlCheck",
+      "parseNewsletterOutreachRecord",
+      "parseNewsletterOutreachStage",
+      "parseNewsletterPreview",
+      "parseNewsletterRecordDiscriminator",
+      "parseNewsletterReservedMetadata",
+      "parseNewsletterStageReceipt",
+      "visitNewsletterBlocks"
+    ],
+    "packedModuleCount": 6,
+    "browserVersion": "154.0.8037.57",
+    "executablePath": "/usr/bin/chromium",
+    "requests": [],
+    "pageErrors": [],
+    "scope": "Actual Chromium execution of packed pure public imports; no full editor, backend, visual or native acceptance"
+  },
+  "historicalCdn403": {
+    "path": "/tmp/capiro-shipping-browser-correction-20261013/CHROMIUM-PUBLIC-DOWNLOAD-HEAD.json",
+    "sha256": "588f562645c38f80aef20d151db92a9c3b99191d000d3179f1421e36c0f70f64",
+    "receipt": {
+      "url": "https://storage.googleapis.com/chrome-for-testing-public/149.0.7827.55/linux64/chrome-headless-shell-linux64.zip",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "atUTC": "2026-10-13T01:21:54.389222+00:00"
+    },
+    "scope": "Earlier exact public download HEAD attempt, not rerun at c8aa"
+  },
+  "pending": [
+    "production build completion",
+    "actual production server/headers/context gates",
+    "179 actual served asset byte verification",
+    "root final completion authorization"
+  ]
+}

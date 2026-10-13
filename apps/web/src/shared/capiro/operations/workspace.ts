@@ -6,7 +6,9 @@ import { workspaceHillDayOperations } from "./workspace-hillday";
 import { workspaceProspectOperations } from "./workspace-prospects";
 import { newsletterStagingOperations } from "./workspace-newsletter-staging";
 import { workspaceObjectiveOperations } from "./objective-work-destinations";
+import { richNewsletterOperations } from "./rich-newsletter";
 export const workspaceOperations = {
+  ...richNewsletterOperations,
   ...workspaceObjectiveOperations,
   ...workspaceHillDayOperations,
   ...outreachTemplateOperations,

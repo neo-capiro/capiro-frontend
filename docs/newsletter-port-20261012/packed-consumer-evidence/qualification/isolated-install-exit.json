@@ -1,0 +1,14 @@
+{
+  "command": [
+    "npm",
+    "install",
+    "--ignore-scripts",
+    "--offline",
+    "--no-audit",
+    "--no-fund",
+    "--no-update-notifier",
+    "--cache=/tmp/capiro-p1-npm-cache"
+  ],
+  "cwd": "/tmp/capiro-newsletter-consumer-install",
+  "exitCode": 0
+}

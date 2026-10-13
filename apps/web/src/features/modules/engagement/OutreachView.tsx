@@ -15,6 +15,8 @@ import {
   UnavailableAction,
 } from "../../../shared/module-ui";
 import { CampaignSession } from "./CampaignSession";
+import { NewsletterDestination } from "./NewsletterDestination";
+import { newsletterRecordKind } from "./newsletter-route";
 import styles from "./engagement.module.css";
 export function OutreachView({
   clientId,
@@ -60,6 +62,33 @@ export function OutreachView({
         record.title.toLowerCase().includes(search.toLowerCase()) &&
         (!type || record.type === type),
     ) ?? [];
+  if (draft.error || draft.loading)
+    return (
+      <StatusPanel
+        loading={draft.loading}
+        error={draft.error}
+        onRetry={draft.reload}
+      />
+    );
+  if (initialDraft && draft.data && draft.data.id !== initialDraft)
+    return (
+      <StatusPanel error="The returned outreach does not match this link." />
+    );
+  if (
+    selected &&
+    typeof selected === "object" &&
+    newsletterRecordKind(selected) !== "ordinary"
+  )
+    return (
+      <NewsletterDestination
+        onBack={initialDraft ? undefined : () => setSelected(null)}
+        destination={
+          newsletterRecordKind(selected) === "candidate"
+            ? { kind: "record", id: selected.id }
+            : { kind: "invalid" }
+        }
+      />
+    );
   if (session)
     return (
       <CampaignSession sessionId={session} onBack={() => setSession(null)} />

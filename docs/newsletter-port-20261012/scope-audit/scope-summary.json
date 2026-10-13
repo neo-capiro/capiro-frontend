@@ -1,0 +1,33 @@
+{
+  "createdAt": "2026-10-12T21:22:03.112503+00:00",
+  "frontend": {
+    "head": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+    "tree": "6c68390b07a62f22d017fdfe690fc8001a55123d",
+    "files": 9191,
+    "clean": true
+  },
+  "backend": {
+    "reviewedHead": "5470c6df029c9553dd49e531229c3c91b26275ef",
+    "frozenApplicationSource": "a247f7a02a9b94d95e9ee5a516b396202aea994b",
+    "originalC": "1e99f0921b207318c6d2abf03927b5c4daa5768b",
+    "originalW": "193703e34f2bedbb69d87d6a8ee303f65ab8dbda"
+  },
+  "inventory": {
+    "family": 262,
+    "runtime": 43,
+    "assets": 179,
+    "assetBytes": 486014,
+    "tests": 37,
+    "styles": 2,
+    "generator": 1,
+    "samePathAtAdbc": 0,
+    "sameBlobAtAdbc": 0,
+    "runtimeCBytesAndWBlobVerified": 43,
+    "assetCAndWDirectoryIdentityVerified": 179
+  },
+  "method": "Git/source/connector read-only comparison; no browser, build, typecheck, native route, provider, package, source edit or subagent execution",
+  "conclusion": "Real rich document/editor/review/assets/destination support is absent beyond generic overlaps; existing saved-version V3 flow remains independent and protected.",
+  "firstSlice": "179 byte-exact public assets with existing paths and provenance, on a new branch/worktree stacked on frozen adbc; package artifact is not required for this static slice.",
+  "richUiPrerequisite": "Owner-coordinated immutable consumable artifact for existing @capiro/shared 0.0.0 newsletter and newsletter-render exports, preserving five-module closure and source provenance. No second DTO/render owner.",
+  "qualificationLimit": "Source audit only. No rich UI or native/backend/deployment acceptance. Prior final-gate packets preserved."
+}

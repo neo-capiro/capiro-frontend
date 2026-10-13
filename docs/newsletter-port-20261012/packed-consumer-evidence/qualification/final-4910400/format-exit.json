@@ -1,0 +1,22 @@
+{
+  "name": "format",
+  "source": "4910400220140a0ff957b3336943a7438a52f7c0",
+  "command": [
+    "/workspace/capiro-remaining/node_modules/.bin/prettier",
+    "--check",
+    "packages/qualification-newsletter/fixed-clock.mjs",
+    "packages/qualification-newsletter/browser-entry.mjs",
+    "packages/qualification-newsletter/browser-check.mjs",
+    "packages/qualification-newsletter/qualification.test.mjs",
+    "packages/qualification-newsletter/declarations.mjs",
+    "packages/qualification-newsletter/package.json",
+    "packages/qualification-newsletter/tsconfig.json",
+    "scripts/newsletter-cli.test.mjs",
+    "package.json",
+    "package-lock.json",
+    "vendor/newsletter-public-packages.json"
+  ],
+  "exitCode": 0,
+  "start": "2026-10-12T23:23:42.676186+00:00",
+  "end": "2026-10-12T23:23:42.931527+00:00"
+}

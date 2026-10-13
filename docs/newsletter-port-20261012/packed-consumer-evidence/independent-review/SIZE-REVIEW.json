@@ -1,0 +1,11 @@
+{
+  "file": "packages/qualification-newsletter/fixtures/renderer-characterizations.cjs",
+  "kind": "function",
+  "symbol": "characterize",
+  "line": 2,
+  "nonblank": 95,
+  "fingerprint": "91a2a65b65a0314b42debf1e647c84f759e5f3c95314af549d188de82ccb3f94",
+  "fileSHA256": "ceb63415819751398431a4277c75949dac7a1ca2fac7d25b55aa31c4d46a66ba",
+  "decision": "ACCEPT_RETAIN_IMMUTABLE_PRODUCER_CHARACTERIZATION",
+  "rationale": "One frozen ordered characterization corpus over canonical public APIs. Shared synthetic setup and captured callback order belong to this fixture. All original bytes, 116 independent expected results and Git/source bindings are preserved. Splitting would change the imported producer fixture and reduce provenance clarity without separating a production responsibility. This is not an exemption for authored runtime code."
+}

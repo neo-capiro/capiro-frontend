@@ -1,0 +1,522 @@
+{
+  "verifiedAt": "2026-10-12T23:12:36.880801+00:00",
+  "status": "PASS_IMMUTABLE_FIXTURE_CONTENT_AND_PREPARATION_ONLY",
+  "repository": "neo-capiro/capirov2",
+  "commit": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+  "repositoryEvidencePrefix": "docs/shared-newsletter-packed-distribution-20261012/evidence/",
+  "evidenceTree": "5be29b56305184fcfa72117c7c2bde0b96b7e2fe",
+  "files": [
+    {
+      "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/renderer-characterizations.cjs",
+      "localPath": "consumer-corpus/renderer-characterizations.cjs",
+      "gitBlob": "338d81d47474a27df95b83cc08d263655c320b0a",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "bytes": 8823,
+      "sha256": "ceb63415819751398431a4277c75949dac7a1ca2fac7d25b55aa31c4d46a66ba",
+      "gitMode": "100644"
+    },
+    {
+      "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/original-C-renderer-golden.json",
+      "localPath": "consumer-corpus/original-C-renderer-golden.json",
+      "gitBlob": "90f04f24b95c2bcd676a5db33ea717a819bdb84c",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "bytes": 54405,
+      "sha256": "b56b5d3526230e9011aaa82f258c7327816a60a78ddc020714c81e9c7d98b32f",
+      "gitMode": "100644"
+    },
+    {
+      "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/packed-renderer-results.json",
+      "localPath": "consumer-corpus/packed-renderer-results.json",
+      "gitBlob": "90f04f24b95c2bcd676a5db33ea717a819bdb84c",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "bytes": 54405,
+      "sha256": "b56b5d3526230e9011aaa82f258c7327816a60a78ddc020714c81e9c7d98b32f",
+      "gitMode": "100644"
+    },
+    {
+      "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/browser-renderer-results.json",
+      "localPath": "consumer-corpus/browser-renderer-results.json",
+      "gitBlob": "90f04f24b95c2bcd676a5db33ea717a819bdb84c",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "bytes": 54405,
+      "sha256": "b56b5d3526230e9011aaa82f258c7327816a60a78ddc020714c81e9c7d98b32f",
+      "gitMode": "100644"
+    },
+    {
+      "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/qualify-packed-consumer.mjs",
+      "localPath": "consumer-corpus/qualify-packed-consumer.mjs",
+      "gitBlob": "ca85ca766be3826bd794f589dcc3d9b842182f7d",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "bytes": 16868,
+      "sha256": "fe88480d48bc93f36db8ef0dcd25ce3e6904430cba9c1cd050d168f4aa92f824",
+      "gitMode": "100644"
+    },
+    {
+      "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/consumer-positive.ts",
+      "localPath": "consumer-corpus/consumer-positive.ts",
+      "gitBlob": "ec08ad04413d3093f0296eb17b19742af7518b64",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "bytes": 1503,
+      "sha256": "67539f5f8c8805273737ff8a8f15b5e4b9b7c513b201af176dafabd9158b2021",
+      "gitMode": "100644"
+    },
+    {
+      "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/consumer-negative.ts",
+      "localPath": "consumer-corpus/consumer-negative.ts",
+      "gitBlob": "47bff7f621411c980c0802e6097ae85dd2b24fdb",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "bytes": 410,
+      "sha256": "77dff4d542cea9386399c8ecd680f99c50b253643c5cf3b167cc2b6554d8461c",
+      "gitMode": "100644"
+    },
+    {
+      "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/packed-types-node-positive.command.json",
+      "localPath": "consumer-corpus/packed-types-node-positive.command.json",
+      "gitBlob": "e385e8605e1e4c8011c0f943f13230cd68c2c1d0",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "bytes": 266,
+      "sha256": "efbb5eda1793a7092e326b46414bc5b85c982dd61dd958d21296242cac9ea103",
+      "gitMode": "100644"
+    },
+    {
+      "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/packed-types-node-negative.command.json",
+      "localPath": "consumer-corpus/packed-types-node-negative.command.json",
+      "gitBlob": "5f285be9bad98e4d369230db3366c64abc1d300c",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "bytes": 275,
+      "sha256": "a60c6cdfb5ae3aeff223eddaf3ae2729c7ee695c920f63ade6443969e23af583",
+      "gitMode": "100644"
+    },
+    {
+      "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/packed-types-browser-positive.command.json",
+      "localPath": "consumer-corpus/packed-types-browser-positive.command.json",
+      "gitBlob": "d6ac96168e0421008e8bf5f03261b3e7517e56be",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "bytes": 269,
+      "sha256": "e0202527941ee9e59464ff431d8471fcc8cb49ab73fbb19271afbfafbcdbecf1",
+      "gitMode": "100644"
+    },
+    {
+      "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/packed-types-browser-negative.command.json",
+      "localPath": "consumer-corpus/packed-types-browser-negative.command.json",
+      "gitBlob": "c46d85cafec8bed3619ba3b70d22cba31c35595e",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "bytes": 278,
+      "sha256": "fea07c2420ab91c6ddf597a9b2ff8fae4b83d7fbc4b4a6c72f0a9371b9982e4c",
+      "gitMode": "100644"
+    },
+    {
+      "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/packed-types-node-negative.log",
+      "localPath": "consumer-corpus/packed-types-node-negative.log",
+      "gitBlob": "0633455e53720028ab712a0ef5dd1a3f20758c0e",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "bytes": 589,
+      "sha256": "960eaf4a0f529eb27f884c6bd773e57dd2015e8e487f68568fc568bb7d7b37bb",
+      "gitMode": "100644"
+    },
+    {
+      "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/packed-types-browser-negative.log",
+      "localPath": "consumer-corpus/packed-types-browser-negative.log",
+      "gitBlob": "0633455e53720028ab712a0ef5dd1a3f20758c0e",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "bytes": 589,
+      "sha256": "960eaf4a0f529eb27f884c6bd773e57dd2015e8e487f68568fc568bb7d7b37bb",
+      "gitMode": "100644"
+    },
+    {
+      "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/packed-esm-imports.command.json",
+      "localPath": "consumer-corpus/packed-esm-imports.command.json",
+      "gitBlob": "b643daca18d78572209283220d0dabc26dddf252",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "bytes": 191,
+      "sha256": "060052ac4e9c334bc58f0e31ec0f14ed7adb8ee4f0156dbab621928e1ff5d728",
+      "gitMode": "100644"
+    },
+    {
+      "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/packed-esm-imports.log",
+      "localPath": "consumer-corpus/packed-esm-imports.log",
+      "gitBlob": "05e50f0e3528dbaa2e67c4337c37e292094e2c51",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "bytes": 68,
+      "sha256": "3a8fce20fb3f56a91278db2e5b8cd4297d99f95663d8a88b8a2bd00f7f841a8d",
+      "gitMode": "100644"
+    },
+    {
+      "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/browser-metafile.json",
+      "localPath": "consumer-corpus/browser-metafile.json",
+      "gitBlob": "36cf979890c81dfc00167c0aba15dbbe2371f2b1",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "bytes": 3919,
+      "sha256": "44225ba4c4d18f07c98d3c8e8905dcba5c41f65eb1e9706ccdd61b229afbbdcc",
+      "gitMode": "100644"
+    },
+    {
+      "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/static-five-module-closure.json",
+      "localPath": "consumer-corpus/static-five-module-closure.json",
+      "gitBlob": "fb7cbd58d56735266c20edcb1f57b29190b54aaa",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "bytes": 2671,
+      "sha256": "60d9fded5ff63103b77e53dbab9ed8aa5aac9e565b672a142204342cc7895406",
+      "gitMode": "100644"
+    },
+    {
+      "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/consumer-qualification.stdout.json",
+      "localPath": "consumer-corpus/consumer-qualification.stdout.json",
+      "gitBlob": "8092629cee8552025885e84eeb4d431cb23ce8c9",
+      "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+      "bytes": 249,
+      "sha256": "00a88f4644a6342f0cd094641ef7b5d0ba816a5aff24a7fbf23a1c25c9a05a4d",
+      "gitMode": "100644"
+    }
+  ],
+  "characterizationCases": 116,
+  "caseNamesUnique": true,
+  "originalPackedBrowserExpectedFilesByteEqual": true,
+  "goldenGitBlob": "90f04f24b95c2bcd676a5db33ea717a819bdb84c",
+  "goldenSHA256": "b56b5d3526230e9011aaa82f258c7327816a60a78ddc020714c81e9c7d98b32f",
+  "goldenBytes": 54405,
+  "caseNames": [
+    "public runtime names/newsletter",
+    "public runtime names/renderer",
+    "existing default configuration",
+    "existing default brand kit",
+    "node ids remain document-local lazy time/random",
+    "safe link/https://example.test/a?x=1&y=2",
+    "safe image/https://example.test/a?x=1&y=2",
+    "safe link/https://u:p@example.test/",
+    "safe image/https://u:p@example.test/",
+    "safe link/javascript:alert(1)",
+    "safe image/javascript:alert(1)",
+    "safe link//newsletter/capitol.svg",
+    "safe image//newsletter/capitol.svg",
+    "safe link/#anchor",
+    "safe image/#anchor",
+    "safe link/*|ARCHIVE|*",
+    "safe image/*|ARCHIVE|*",
+    "safe link/mailto:ada@example.test",
+    "safe image/mailto:ada@example.test",
+    "safe link/tel:+15555550100",
+    "safe image/tel:+15555550100",
+    "safe link///example.test/a",
+    "safe image///example.test/a",
+    "safe link/data:image/png;base64,YQ==",
+    "safe image/data:image/png;base64,YQ==",
+    "safe link/https://",
+    "safe image/https://",
+    "safe link/",
+    "safe image/",
+    "escaping special characters",
+    "merge tags disabled retain legacy tags",
+    "merge tags live preserve unknown tags",
+    "style clamping and fixed catalog",
+    "font catalog known and unknown",
+    "bundled legacy SVG remapping",
+    "custom fonts retain filter and CSS escaping",
+    "visibility operator/is",
+    "visibility operator/is-not",
+    "visibility operator/contains",
+    "visibility operator/does-not-contain",
+    "visibility operator/is-empty",
+    "visibility operator/is-not-empty",
+    "visibility without recipient denies",
+    "visibility authorized recipient",
+    "editor shows conditional block",
+    "block kind/image",
+    "block kind/heading",
+    "block kind/paragraph",
+    "block kind/button",
+    "block kind/divider",
+    "block kind/spacer",
+    "block kind/video",
+    "block kind/social",
+    "block kind/logo",
+    "block kind/survey",
+    "block kind/code",
+    "block kind/apps",
+    "block kind/product",
+    "block kind/product-rec",
+    "block kind/footer",
+    "block kind/columns",
+    "rich fallback escapes HTML",
+    "explicit sanitizer remains caller policy",
+    "image sizing crop asset and rewrite callback",
+    "saved survey no callback disabled",
+    "saved survey authorized caller callback",
+    "legacy survey callbacks preserved",
+    "callback arguments and order",
+    "social target/https://example.test/public?a=1",
+    "social url/facebook/https://example.test/public?a=1",
+    "social url/linkedin/https://example.test/public?a=1",
+    "social url/pinterest/https://example.test/public?a=1",
+    "social url/twitter/https://example.test/public?a=1",
+    "social url/instapaper/https://example.test/public?a=1",
+    "social url/forward/https://example.test/public?a=1",
+    "social target/https://example.test/engagement/newsletter-public/token",
+    "social url/facebook/https://example.test/engagement/newsletter-public/token",
+    "social url/linkedin/https://example.test/engagement/newsletter-public/token",
+    "social url/pinterest/https://example.test/engagement/newsletter-public/token",
+    "social url/twitter/https://example.test/engagement/newsletter-public/token",
+    "social url/instapaper/https://example.test/engagement/newsletter-public/token",
+    "social url/forward/https://example.test/engagement/newsletter-public/token",
+    "social target/https://example.test/engagement/%6eewsletter-public/token",
+    "social url/facebook/https://example.test/engagement/%6eewsletter-public/token",
+    "social url/linkedin/https://example.test/engagement/%6eewsletter-public/token",
+    "social url/pinterest/https://example.test/engagement/%6eewsletter-public/token",
+    "social url/twitter/https://example.test/engagement/%6eewsletter-public/token",
+    "social url/instapaper/https://example.test/engagement/%6eewsletter-public/token",
+    "social url/forward/https://example.test/engagement/%6eewsletter-public/token",
+    "social target/https://u:p@example.test/",
+    "social url/facebook/https://u:p@example.test/",
+    "social url/linkedin/https://u:p@example.test/",
+    "social url/pinterest/https://u:p@example.test/",
+    "social url/twitter/https://u:p@example.test/",
+    "social url/instapaper/https://u:p@example.test/",
+    "social url/forward/https://u:p@example.test/",
+    "social target/*|ARCHIVE|*",
+    "social url/facebook/*|ARCHIVE|*",
+    "social url/linkedin/*|ARCHIVE|*",
+    "social url/pinterest/*|ARCHIVE|*",
+    "social url/twitter/*|ARCHIVE|*",
+    "social url/instapaper/*|ARCHIVE|*",
+    "social url/forward/*|ARCHIVE|*",
+    "social target/javascript:bad",
+    "social url/facebook/javascript:bad",
+    "social url/linkedin/javascript:bad",
+    "social url/pinterest/javascript:bad",
+    "social url/twitter/javascript:bad",
+    "social url/instapaper/javascript:bad",
+    "social url/forward/javascript:bad",
+    "share block and mobile styles",
+    "full rich document rendering",
+    "full plain text rendering",
+    "government affairs original template",
+    "column layout original template",
+    "code layout original template"
+  ],
+  "fixedDate": "2026-10-12T12:00:00.000Z",
+  "fixedMathRandom": 0.125,
+  "compilerNegativeExpected": {
+    "perMode": 3,
+    "TS2345": 2,
+    "TS2322": 1
+  },
+  "prepared": [
+    {
+      "localPath": "prepared-consumer/renderer-characterizations.cjs",
+      "bytes": 8823,
+      "sha256": "ceb63415819751398431a4277c75949dac7a1ca2fac7d25b55aa31c4d46a66ba",
+      "kind": "exact Git-bound original copy",
+      "basis": {
+        "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/renderer-characterizations.cjs",
+        "localPath": "consumer-corpus/renderer-characterizations.cjs",
+        "gitBlob": "338d81d47474a27df95b83cc08d263655c320b0a",
+        "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+        "bytes": 8823,
+        "sha256": "ceb63415819751398431a4277c75949dac7a1ca2fac7d25b55aa31c4d46a66ba",
+        "gitMode": "100644"
+      }
+    },
+    {
+      "localPath": "prepared-consumer/original-C-renderer-golden.json",
+      "bytes": 54405,
+      "sha256": "b56b5d3526230e9011aaa82f258c7327816a60a78ddc020714c81e9c7d98b32f",
+      "kind": "exact Git-bound original copy",
+      "basis": {
+        "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/original-C-renderer-golden.json",
+        "localPath": "consumer-corpus/original-C-renderer-golden.json",
+        "gitBlob": "90f04f24b95c2bcd676a5db33ea717a819bdb84c",
+        "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+        "bytes": 54405,
+        "sha256": "b56b5d3526230e9011aaa82f258c7327816a60a78ddc020714c81e9c7d98b32f",
+        "gitMode": "100644"
+      }
+    },
+    {
+      "localPath": "prepared-consumer/consumer-positive.ts",
+      "bytes": 1503,
+      "sha256": "67539f5f8c8805273737ff8a8f15b5e4b9b7c513b201af176dafabd9158b2021",
+      "kind": "exact Git-bound original copy",
+      "basis": {
+        "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/consumer-positive.ts",
+        "localPath": "consumer-corpus/consumer-positive.ts",
+        "gitBlob": "ec08ad04413d3093f0296eb17b19742af7518b64",
+        "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+        "bytes": 1503,
+        "sha256": "67539f5f8c8805273737ff8a8f15b5e4b9b7c513b201af176dafabd9158b2021",
+        "gitMode": "100644"
+      }
+    },
+    {
+      "localPath": "prepared-consumer/consumer-negative.ts",
+      "bytes": 410,
+      "sha256": "77dff4d542cea9386399c8ecd680f99c50b253643c5cf3b167cc2b6554d8461c",
+      "kind": "exact Git-bound original copy",
+      "basis": {
+        "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/consumer-negative.ts",
+        "localPath": "consumer-corpus/consumer-negative.ts",
+        "gitBlob": "47bff7f621411c980c0802e6097ae85dd2b24fdb",
+        "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+        "bytes": 410,
+        "sha256": "77dff4d542cea9386399c8ecd680f99c50b253643c5cf3b167cc2b6554d8461c",
+        "gitMode": "100644"
+      }
+    },
+    {
+      "localPath": "prepared-consumer/tsconfig-node.json",
+      "bytes": 330,
+      "sha256": "20e1adb4a3711fa7977441a2459b47ec2fac4f3c87ba3106b0bf717f82ec1046",
+      "kind": "mechanical generated-value reconstruction; no standalone original Git blob",
+      "basis": {
+        "source": {
+          "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/qualify-packed-consumer.mjs",
+          "localPath": "consumer-corpus/qualify-packed-consumer.mjs",
+          "gitBlob": "ca85ca766be3826bd794f589dcc3d9b842182f7d",
+          "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+          "bytes": 16868,
+          "sha256": "fe88480d48bc93f36db8ef0dcd25ce3e6904430cba9c1cd050d168f4aa92f824",
+          "gitMode": "100644"
+        },
+        "lines": "92-105",
+        "recipe": "JSON.stringify(config, null, 2), no trailing newline"
+      }
+    },
+    {
+      "localPath": "prepared-consumer/tsconfig-node-negative.json",
+      "bytes": 330,
+      "sha256": "fcde867ce080963cff07647c9cf6512b552657a498265b17f94a216695172251",
+      "kind": "mechanical generated-value reconstruction; no standalone original Git blob",
+      "basis": {
+        "source": {
+          "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/qualify-packed-consumer.mjs",
+          "localPath": "consumer-corpus/qualify-packed-consumer.mjs",
+          "gitBlob": "ca85ca766be3826bd794f589dcc3d9b842182f7d",
+          "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+          "bytes": 16868,
+          "sha256": "fe88480d48bc93f36db8ef0dcd25ce3e6904430cba9c1cd050d168f4aa92f824",
+          "gitMode": "100644"
+        },
+        "lines": "92-105",
+        "recipe": "JSON.stringify(config, null, 2), no trailing newline"
+      }
+    },
+    {
+      "localPath": "prepared-consumer/tsconfig-browser.json",
+      "bytes": 327,
+      "sha256": "cbf1a65d321798ac252c4d692770401692ee1e96e61835e522260a3c9fedfc77",
+      "kind": "mechanical generated-value reconstruction; no standalone original Git blob",
+      "basis": {
+        "source": {
+          "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/qualify-packed-consumer.mjs",
+          "localPath": "consumer-corpus/qualify-packed-consumer.mjs",
+          "gitBlob": "ca85ca766be3826bd794f589dcc3d9b842182f7d",
+          "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+          "bytes": 16868,
+          "sha256": "fe88480d48bc93f36db8ef0dcd25ce3e6904430cba9c1cd050d168f4aa92f824",
+          "gitMode": "100644"
+        },
+        "lines": "92-105",
+        "recipe": "JSON.stringify(config, null, 2), no trailing newline"
+      }
+    },
+    {
+      "localPath": "prepared-consumer/tsconfig-browser-negative.json",
+      "bytes": 327,
+      "sha256": "925fa9bec308efe8274c48073c62b78a625b3c607b7aac43f727bee867b431e3",
+      "kind": "mechanical generated-value reconstruction; no standalone original Git blob",
+      "basis": {
+        "source": {
+          "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/qualify-packed-consumer.mjs",
+          "localPath": "consumer-corpus/qualify-packed-consumer.mjs",
+          "gitBlob": "ca85ca766be3826bd794f589dcc3d9b842182f7d",
+          "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+          "bytes": 16868,
+          "sha256": "fe88480d48bc93f36db8ef0dcd25ce3e6904430cba9c1cd050d168f4aa92f824",
+          "gitMode": "100644"
+        },
+        "lines": "92-105",
+        "recipe": "JSON.stringify(config, null, 2), no trailing newline"
+      }
+    },
+    {
+      "localPath": "prepared-consumer/consumer.mjs",
+      "bytes": 544,
+      "sha256": "bdc836867468d8480ac6f3559fba755eeef94ce3650dd0060a6150ebd18fe5ca",
+      "kind": "exact generated string literal value; no standalone original Git blob",
+      "basis": {
+        "source": {
+          "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/qualify-packed-consumer.mjs",
+          "localPath": "consumer-corpus/qualify-packed-consumer.mjs",
+          "gitBlob": "ca85ca766be3826bd794f589dcc3d9b842182f7d",
+          "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+          "bytes": 16868,
+          "sha256": "fe88480d48bc93f36db8ef0dcd25ce3e6904430cba9c1cd050d168f4aa92f824",
+          "gitMode": "100644"
+        },
+        "lines": "80-88"
+      }
+    },
+    {
+      "localPath": "prepared-consumer/browser-entry.mjs",
+      "bytes": 221,
+      "sha256": "0f8efa3e9c36fea411e5209dcebf7db569f3bb3842ccbb956603b13391d3c3cd",
+      "kind": "exact generated string literal value; no standalone original Git blob",
+      "basis": {
+        "source": {
+          "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/qualify-packed-consumer.mjs",
+          "localPath": "consumer-corpus/qualify-packed-consumer.mjs",
+          "gitBlob": "ca85ca766be3826bd794f589dcc3d9b842182f7d",
+          "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+          "bytes": 16868,
+          "sha256": "fe88480d48bc93f36db8ef0dcd25ce3e6904430cba9c1cd050d168f4aa92f824",
+          "gitMode": "100644"
+        },
+        "lines": "174"
+      }
+    },
+    {
+      "localPath": "prepared-consumer/fixed-sandbox-excerpt.txt",
+      "bytes": 387,
+      "sha256": "b3d8a089dbfe8bfbc2dbdce57ac3602e2e3cb6177e30f2329bdf06a04a0f3a62",
+      "kind": "verbatim source excerpt; documentation only",
+      "basis": {
+        "source": {
+          "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/qualify-packed-consumer.mjs",
+          "localPath": "consumer-corpus/qualify-packed-consumer.mjs",
+          "gitBlob": "ca85ca766be3826bd794f589dcc3d9b842182f7d",
+          "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+          "bytes": 16868,
+          "sha256": "fe88480d48bc93f36db8ef0dcd25ce3e6904430cba9c1cd050d168f4aa92f824",
+          "gitMode": "100644"
+        },
+        "lines": "126-132",
+        "requires": "node:vm context from original runner; not a standalone runner"
+      }
+    },
+    {
+      "localPath": "prepared-consumer/browser-build-options-excerpt.txt",
+      "bytes": 292,
+      "sha256": "720f41ba43950feebcd4cb5016472a72255c5c03776ced6ff783bb98f559e538",
+      "kind": "verbatim source excerpt; documentation only",
+      "basis": {
+        "source": {
+          "path": "docs/shared-newsletter-packed-distribution-20261012/evidence/qualify-packed-consumer.mjs",
+          "localPath": "consumer-corpus/qualify-packed-consumer.mjs",
+          "gitBlob": "ca85ca766be3826bd794f589dcc3d9b842182f7d",
+          "ref": "62d057b4a17b2c038920f10b93e83e51e46239bc",
+          "bytes": 16868,
+          "sha256": "fe88480d48bc93f36db8ef0dcd25ce3e6904430cba9c1cd050d168f4aa92f824",
+          "gitMode": "100644"
+        },
+        "lines": "175-177"
+      }
+    }
+  ],
+  "packageOrCorpusExecuted": false,
+  "compilerBundlerBrowserInstallExecuted": false,
+  "limits": [
+    "Saved historical results are immutable expected evidence, not new frontend execution.",
+    "Original producer runner is retained for reference, never executed or adapted in place.",
+    "Generated configs and entries are explicitly derived; only four fixture copies have standalone source Git blobs.",
+    "Consumer workspace/dependency manifest/lockfile integration and qualification remain root-owned."
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "reviews": [
+    {
+      "file": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+      "kind": "function",
+      "symbol": "OrdinaryEngagementScreen",
+      "line": 45,
+      "nonblank": 130,
+      "fingerprint": "72b4d083f4c0d90ce2ac0660d518fc63cc8f20037f995dcef98d8751b30d27d0",
+      "rationale": "One existing Engagement route/view composer owns query-derived section selection, current client scope control, meeting-create dialog and delegation to separate domain views. The new outer EngagementScreen admits rich-route unavailable presentation before this composer mounts, so the ordinary client/meeting readers remain outside rich-route handling. The added Outreach key disposes route-bound draft/session local state. No rich DTO, authorization, delivery writer or transport orchestration enters this function. Retain this cohesive composer; its size signal requires exact review, not mechanical splitting.",
+      "sourceSha256": "5fd7837cdfa80ef0207d8e45dde870a442f3ff798b8266a95989ac27dc20e0e5"
+    },
+    {
+      "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
+      "kind": "function",
+      "symbol": "OutreachView",
+      "line": 21,
+      "nonblank": 124,
+      "fingerprint": "dc11042dd4db556f1e4c7078c79a12d1011faf892c60847abcdde90a266c0533",
+      "rationale": "This existing legacy Outreach list/session selector owns current generic read state and local selection; the new branch prevents a decoded rich candidate or wrong-type marker from entering the plaintext writer, and linked-draft loading/error/ID checks gate presentation. Newsletter parsing remains a pure separate helper and the unavailable receiver has no transport. Cohesion is appropriate for the bounded receiving guard, but initial Back navigation defect requires correction and a fresh exact hash before source acceptance.",
+      "sourceSha256": "5c9ba25e7e0041391af642b93abd2b7b30b2e1ee092f9f092bc2d0ea02d611bb"
+    },
+    {
+      "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
+      "kind": "function",
+      "symbol": "OutreachForm",
+      "line": 157,
+      "nonblank": 88,
+      "fingerprint": "d7e8f202c52c16b8bdf793e1e563d1e4ace0c1d63a6cd48b5338b21f5310a8aa",
+      "rationale": "Existing plaintext single-record form still owns title/subject/body, generic create/update dispatch and error/busy presentation. Its function syntax is unchanged by this patch; rich records are diverted before it mounts. No rich editing/delivery contract is added. Preserve the existing ordinary-edit assertions; changed enclosing file hash requires renewed whole-file review but not a claim that this function changed.",
+      "sourceSha256": "5c9ba25e7e0041391af642b93abd2b7b30b2e1ee092f9f092bc2d0ea02d611bb"
+    }
+  ],
+  "architectureGateRun": false,
+  "reviewer": "Codex independent Modules/Settings reviewer",
+  "disposition": "Responsibility review only; Back navigation defect remains. Rebind after correction.",
+  "registryEdited": false
+}

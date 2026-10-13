@@ -1,0 +1,76 @@
+{
+  "schema": "capiro-independent-boundary-review/1",
+  "at": "2026-10-13T02:28:38.725862+00:00",
+  "disposition": "STATIC_SOURCE_PASS_AFTER_CORRECTIONS_TESTS_PENDING",
+  "review": "REVIEW.md",
+  "sourceBinding": "REVIEWED-SOURCE.json",
+  "fileCount": 13,
+  "bytes": 58982,
+  "files": [
+    {
+      "path": "INITIAL-SOURCE.json",
+      "bytes": 994,
+      "sha256": "7ade203510bb2e4d03bf9b1413d490916d45454b6960142b0026fd53967d5d88"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 8224,
+      "sha256": "dbdba3faf89b0b7b57db0c385052076cd803e6ccdf8bb7e0b2a4d3bd40c83333"
+    },
+    {
+      "path": "REVIEWED-SOURCE.json",
+      "bytes": 1321,
+      "sha256": "c4d3fad0e809c05d74a26891fcc5a64d47bb9bef5ca2d25c021def80b61b03e0"
+    },
+    {
+      "path": "initial/apps/web/src/shared/capiro/operations/rich-newsletter.ts",
+      "bytes": 4276,
+      "sha256": "1f8a2d95f8ab0396dadfef03db2755d3d2cfb8630675dfabf1b48287bd65e58a"
+    },
+    {
+      "path": "initial/apps/web/src/shared/capiro/operations/workspace.ts",
+      "bytes": 969,
+      "sha256": "98efbd7add19d3a8e2dd83cc9006e57d0c79aeb99e76d5fb11b7f448c40fa45b"
+    },
+    {
+      "path": "initial/apps/web/src/shared/capiro/rich-newsletter.test.ts",
+      "bytes": 9149,
+      "sha256": "f01774f3a412dd164d1bb8a8188fd4d6ecc6638c6e675b5fcf95d863aee611e0"
+    },
+    {
+      "path": "initial/apps/web/src/shared/capiro/rich-newsletter.ts",
+      "bytes": 3526,
+      "sha256": "a29702df3c718d4e2e56a6bbfbd3fbab49af8bcb4457387ece7f01e95357bf56"
+    },
+    {
+      "path": "published-operation-source.fetch.json",
+      "bytes": 4564,
+      "sha256": "eebf56902be9cb1396fc2b781b72e12af229212b0592d23c9a38b5006e152cf0"
+    },
+    {
+      "path": "published-operation-source.md",
+      "bytes": 4240,
+      "sha256": "96c31783ff85140253643412857bc36cd58b661031a19681e34d6383bba01866"
+    },
+    {
+      "path": "reviewed/apps/web/src/shared/capiro/operations/rich-newsletter.ts",
+      "bytes": 4619,
+      "sha256": "d28cbba88c631f6d53d901b1277bc566e60d10f17b2bb819894d8d2886c95d77"
+    },
+    {
+      "path": "reviewed/apps/web/src/shared/capiro/operations/workspace.ts",
+      "bytes": 969,
+      "sha256": "98efbd7add19d3a8e2dd83cc9006e57d0c79aeb99e76d5fb11b7f448c40fa45b"
+    },
+    {
+      "path": "reviewed/apps/web/src/shared/capiro/rich-newsletter.test.ts",
+      "bytes": 12244,
+      "sha256": "e42be0734d1ab2911fb0dbd6d68e403846714bcd6371c5fbdf59ab05b19cf8d2"
+    },
+    {
+      "path": "reviewed/apps/web/src/shared/capiro/rich-newsletter.ts",
+      "bytes": 3887,
+      "sha256": "c25183acddcd61f8b3b0f19b70f7a422738d14c45c234e5d4d6ec6860bfbd3c6"
+    }
+  ]
+}

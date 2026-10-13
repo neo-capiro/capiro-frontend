@@ -1,0 +1,587 @@
+{
+  "originalTestFamilyCount": 37,
+  "originalReadCases": [
+    {
+      "path": "apps/web/src/pages/engagement/outreach/NewsletterOutreach.test.tsx",
+      "gitBlob": "37404cc426ab83a5ce4c3c002cbf1e772003b5c4",
+      "literalCases": [
+        {
+          "line": 129,
+          "name": "selects destinations, previews the staged content and sends only immutable version IDs"
+        },
+        {
+          "line": 155,
+          "name": "uses the included recipient label after exclusions and prevents sending held versions"
+        },
+        {
+          "line": 169,
+          "name": "expands group destinations into private individual copies and deduplicates across directories"
+        },
+        {
+          "line": 195,
+          "name": "retains group member client identities and combines list copies without mixing duplicate identities"
+        },
+        {
+          "line": 279,
+          "name": "shows the confirmed test recipient and refreshes its status without submitting another email"
+        },
+        {
+          "line": 304,
+          "name": "reuses the test request key after an ambiguous submission failure"
+        },
+        {
+          "line": 319,
+          "name": "restores the existing test and exclusions when reopening an Outreach draft"
+        },
+        {
+          "line": 326,
+          "name": "keeps a failed status lookup separate from sending another test"
+        }
+      ],
+      "parameterizedCasesNeedExpansion": false,
+      "status": "source read; not executed in this audit"
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterEditor.test.tsx",
+      "gitBlob": "902bbe86edd13a659b8cb231fd27425e1b36b33d",
+      "literalCases": [
+        {
+          "line": 117,
+          "name": "omits hosted surveys from new blocks and lets an existing survey be removed before staging"
+        },
+        {
+          "line": 140,
+          "name": "removes a video URL from the canvas while retaining its thumbnail, alt text and linked design"
+        },
+        {
+          "line": 184,
+          "name": "applies live canvas URL edits and withholds a thumbnail for the old URL after a newer source is chosen"
+        },
+        {
+          "line": 239,
+          "name": "uses Video Design/Visibility, applies a captured automatic thumbnail and saves it with the latest draft"
+        },
+        {
+          "line": 274,
+          "name": "does not apply a mismatched video result and rejects WebP custom video thumbnails"
+        },
+        {
+          "line": 299,
+          "name": "uploads into the captured image, resets its previous crop and preserves current alt/link settings when another block is selected"
+        },
+        {
+          "line": 357,
+          "name": "does not overwrite an image changed while its upload was pending"
+        },
+        {
+          "line": 388,
+          "name": "ignores an upload that finishes after leaving the editor and opening another session"
+        },
+        {
+          "line": 413,
+          "name": "rejects empty and oversized uploads before contacting Workspace and allows a deliberate retry"
+        },
+        {
+          "line": 437,
+          "name": "launches Photopea from the replacement menu and cancelling keeps the original newsletter"
+        },
+        {
+          "line": 453,
+          "name": "saves only the reviewed rich-text link, refreshes the preview and retains the review count when returning to email information"
+        },
+        {
+          "line": 497,
+          "name": "retries a failed reviewed-link save with the same local edit and does not report it saved early"
+        },
+        {
+          "line": 532,
+          "name": "saves Photopea output to the captured image even if another block is selected while saving"
+        },
+        {
+          "line": 599,
+          "name": "applies inline crop only after Done, preserves image settings, and restores the original with document Undo"
+        },
+        {
+          "line": 651,
+          "name": "cancels inline crop with Escape and leaves the draft and image library untouched"
+        },
+        {
+          "line": 676,
+          "name": "protects the crop target while saving and ignores its response after unmount"
+        },
+        {
+          "line": 712,
+          "name": "dismisses Actions and Save as a template without discarding an active crop"
+        },
+        {
+          "line": 762,
+          "name": "retains the crop when Change template is dismissed and clears its old target when a template is applied"
+        },
+        {
+          "line": 799,
+          "name": "saves scale changes from the image slider, renders the saved width and remembers scale across size modes"
+        },
+        {
+          "line": 839,
+          "name": "opens and dismisses alt-text help without changing the draft or losing keyboard focus"
+        },
+        {
+          "line": 859,
+          "name": "routes canvas image actions into the current image workflows and focuses its link destination"
+        },
+        {
+          "line": 890,
+          "name": "generates editable image alt text and saves it without changing the image or link"
+        },
+        {
+          "line": 920,
+          "name": "keeps a manual alt-text edit made while OpenAI is still responding"
+        },
+        {
+          "line": 948,
+          "name": "applies an older image version only after Insert, retaining the image link and alt text"
+        },
+        {
+          "line": 1004,
+          "name": "applies a library selection only after Insert and clears the previous crop while retaining alt and link settings"
+        },
+        {
+          "line": 1057,
+          "name": "uses the primary button for inserted blocks and saves its custom font references with the draft"
+        },
+        {
+          "line": 1094,
+          "name": "saves the latest draft before checking its HTML and keeps test delivery in Outreach"
+        },
+        {
+          "line": 1110,
+          "name": "requires a sandbox connection before running a compatibility check"
+        },
+        {
+          "line": 1121,
+          "name": "shows a failed check without a success report or automatic retry"
+        },
+        {
+          "line": 1132,
+          "name": "saves edited templates to Workspace after saving the latest draft"
+        },
+        {
+          "line": 1155,
+          "name": "stages the newly saved revision and leaves recipient selection to Outreach"
+        },
+        {
+          "line": 1166,
+          "name": "prevents a parent from being dropped into its own descendant and supports cross-section moves"
+        },
+        {
+          "line": 1186,
+          "name": "removes executable paste markup before putting it on the canvas"
+        },
+        {
+          "line": 1193,
+          "name": "adds a real Apps Link Preview, saves the selected app before import and autosaves the resulting card"
+        }
+      ],
+      "parameterizedCasesNeedExpansion": false,
+      "status": "source read; not executed in this audit"
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterReview.test.tsx",
+      "gitBlob": "d16d3c34b3bec65f1cf61db5091ada6675747515",
+      "literalCases": [],
+      "parameterizedCasesNeedExpansion": true,
+      "status": "source read; not executed in this audit"
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/model.test.ts",
+      "gitBlob": "baae1b8448579229b3077cf37c641c7575007f6b",
+      "literalCases": [
+        {
+          "line": 6,
+          "name": "includes inline rich-text links and recipient footer links"
+        },
+        {
+          "line": 21,
+          "name": "flags missing anchors, unsupported merge links, and unsafe destinations"
+        }
+      ],
+      "parameterizedCasesNeedExpansion": false,
+      "status": "source read; not executed in this audit"
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterBundledImage.test.ts",
+      "gitBlob": "c0bc6c0ffdccbfb2397c53e0380259fd65ecb18d",
+      "literalCases": [
+        {
+          "line": 28,
+          "name": "normalizes only known local legacy sample URLs, retaining remote and owned asset URLs"
+        },
+        {
+          "line": 38,
+          "name": "loads the same PNG dimensions used by the template preview for editing"
+        },
+        {
+          "line": 45,
+          "name": "prepares that same PNG as the original revision and OpenAI input"
+        }
+      ],
+      "parameterizedCasesNeedExpansion": false,
+      "status": "source read; not executed in this audit"
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterTemplateChooser.test.tsx",
+      "gitBlob": "09c38baa503844148be9e3d6808a599e2ca75196",
+      "literalCases": [
+        {
+          "line": 46,
+          "name": "creates the selected basic layout and navigates to its Workspace editor"
+        },
+        {
+          "line": 57,
+          "name": "previews saved branding and applies the saved design with its client restrictions"
+        },
+        {
+          "line": 70,
+          "name": "renames and moves a saved template and refreshes the library"
+        }
+      ],
+      "parameterizedCasesNeedExpansion": false,
+      "status": "source read; not executed in this audit"
+    }
+  ],
+  "differentEditorTestHistories": {
+    "C": "902bbe86edd13a659b8cb231fd27425e1b36b33d",
+    "W": "a315b682643e13eb12fd9a384f87c8d16b3f0cc4",
+    "difference": "Survey button query regex versus exact name; both source snapshots retained"
+  },
+  "protectedExisting": [
+    {
+      "path": "apps/web/tests/newsletter-staging.test.ts",
+      "cases": 16,
+      "caseCounting": "4 literal cases + 6 caller field cases + 6 sponsor cases",
+      "coverage": "strict routes/body, plaintext limits, sponsor binding, exact/replayed receipts"
+    },
+    {
+      "path": "apps/web/test/browser/newsletter-staging.spec.ts",
+      "cases": 9,
+      "coverage": "saved revision/session binding, lost response, storage and actor replacement, current source/state refusal, malformed receipt, mobile keyboard",
+      "observedEvidence": "/tmp/capiro-remaining-qualification/final-adbc84b/modules-browser.log; existing completed parent run, no audit rerun"
+    },
+    {
+      "path": "apps/web/test/browser/prospect-workspace.spec.ts",
+      "line": 168,
+      "coverage": "prospect-origin newsletter cannot open sending; preserve original origin constraints"
+    }
+  ],
+  "newPortControlsRequired": [
+    "rich revision conflict and pending-save source lifetime",
+    "stage UUID rejected by saved-version boundary and exact revision stage receipt",
+    "failed current reads conceal rich editor/review/actions until success",
+    "actor/session/tenant/client/route replacement and delayed results",
+    "public render sanitization, safe links and capability isolation",
+    "asset bytes/MIME/relative origin and allowed social matrix",
+    "image captured-target/source revision/late result controls",
+    "rich prepare/send/test immutable IDs and unknown-no-repost recovery",
+    "review/invitation role/expiry/status and no implicit retry of effects",
+    "cross-mode/back-forward and mobile keyboard/accessibility"
+  ],
+  "nativeExecuted": false,
+  "originalTestPaths": [
+    {
+      "path": "apps/web/src/pages/engagement/outreach/NewsletterOutreach.test.tsx",
+      "C": "37404cc426ab83a5ce4c3c002cbf1e772003b5c4",
+      "W": "37404cc426ab83a5ce4c3c002cbf1e772003b5c4",
+      "CEqualsW": true,
+      "sha256": "3729a76170729e832883e0e294276a54bb510d355ef924e51d0853444d7bd5d2",
+      "bytes": 12430
+    },
+    {
+      "path": "apps/web/src/pages/engagement/outreach/v2/StepRecipientsSelect.newsletter.test.tsx",
+      "C": "dc1e2789beaf057c657a45b90d1a5666297da4af",
+      "W": "dc1e2789beaf057c657a45b90d1a5666297da4af",
+      "CEqualsW": true,
+      "sha256": "643239970ff7b09c3611ee77b4c7d5955b3d28ee1469ce6ca65a5391891655f4",
+      "bytes": 2990
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterAdvancedImageEditor.test.tsx",
+      "C": "89340ab39484753fd7643a68a6daa00ba5c15e2a",
+      "W": "89340ab39484753fd7643a68a6daa00ba5c15e2a",
+      "CEqualsW": true,
+      "sha256": "be28a3ba89b2ca0de97b22e83078315d15d89d1f471a7770925160b2faa1b39a",
+      "bytes": 7221
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterApps.test.tsx",
+      "C": "941e52aac81f0abe768fcddabe49c009b6a29eda",
+      "W": "941e52aac81f0abe768fcddabe49c009b6a29eda",
+      "CEqualsW": true,
+      "sha256": "7db8a97ba024219d880c8e85a2ae0f6d32d1a64c08893905129a6dd237ff59ce",
+      "bytes": 8045
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterAssetDetails.test.tsx",
+      "C": "ecd92a42ebe434d4f3477fa470e6247d73e1cd23",
+      "W": "ecd92a42ebe434d4f3477fa470e6247d73e1cd23",
+      "CEqualsW": true,
+      "sha256": "225be598cb98ba7c3319f4d68f90d8b81d502d24204c2ca82096c039de4da1f4",
+      "bytes": 5113
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterBrandKit.test.tsx",
+      "C": "2d4168f986075878f3ddef8b2f013669f94902de",
+      "W": "2d4168f986075878f3ddef8b2f013669f94902de",
+      "CEqualsW": true,
+      "sha256": "1e56bc0154b240fdb1dd2b57010011e7d69bd1e9ae7ce6d3bc73eb1d6d6f094a",
+      "bytes": 5914
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterBundledImage.test.ts",
+      "C": "c0bc6c0ffdccbfb2397c53e0380259fd65ecb18d",
+      "W": "c0bc6c0ffdccbfb2397c53e0380259fd65ecb18d",
+      "CEqualsW": true,
+      "sha256": "0c66c83456018b43b1896f0a8db13f67f9f6e0cb38de586481db3294686f0e3a",
+      "bytes": 2285
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterComments.test.tsx",
+      "C": "8acf2aecdb7d72a7800f7702e56f807977e8c7d5",
+      "W": "8acf2aecdb7d72a7800f7702e56f807977e8c7d5",
+      "CEqualsW": true,
+      "sha256": "5475471aca7b3de9f9ee49d8f2f1ecf9a81c9175f9c9afdd37a29cefb9f534a4",
+      "bytes": 25318
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterContentStudio.test.tsx",
+      "C": "214dbac91e0ace21b4e1164ff0d713df8ed58198",
+      "W": "214dbac91e0ace21b4e1164ff0d713df8ed58198",
+      "CEqualsW": true,
+      "sha256": "c5734da5e1876eb89001e26dc23d477342b489a31fbcdddcde2d9099e6a9d16d",
+      "bytes": 28698
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterEditor.test.tsx",
+      "C": "902bbe86edd13a659b8cb231fd27425e1b36b33d",
+      "W": "a315b682643e13eb12fd9a384f87c8d16b3f0cc4",
+      "CEqualsW": false,
+      "sha256": "82f9617bae59807020e04b84ced4d0e44b4cf5b67dc8b01d067e37448e8a331d",
+      "bytes": 59700
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterFontPicker.test.tsx",
+      "C": "d2b91899ec0769440288e710efc4ccdd1c39ca1e",
+      "W": "d2b91899ec0769440288e710efc4ccdd1c39ca1e",
+      "CEqualsW": true,
+      "sha256": "f88b313cb83f734976e792021d6c9f68754169a2e12ae95b40bd29af3f478564",
+      "bytes": 2212
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterImageAi.test.tsx",
+      "C": "5402ed313f2c2ac1b86cdee36327a2c8634edffd",
+      "W": "5402ed313f2c2ac1b86cdee36327a2c8634edffd",
+      "CEqualsW": true,
+      "sha256": "b6b369bbf86e7f942bfbd6d8b2b4f0c1ec26dcfb7da3a7f0647f372b0955a2de",
+      "bytes": 5352
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterImageAltText.test.tsx",
+      "C": "5bec8b06af01a5ceede766dedd0b622142642d53",
+      "W": "5bec8b06af01a5ceede766dedd0b622142642d53",
+      "CEqualsW": true,
+      "sha256": "2747b22e96e6e49d059638750613a930e766b1ca0f5896ba5270ad423e799e2b",
+      "bytes": 4353
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterImageCropOverlay.test.tsx",
+      "C": "4f1ad9062e6942a4c86db982abe04cc2923abdc0",
+      "W": "4f1ad9062e6942a4c86db982abe04cc2923abdc0",
+      "CEqualsW": true,
+      "sha256": "0c16ef140345912a64a8ae3fb5081f2a01a0ec537251b12297793ccb19b361a1",
+      "bytes": 3434
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterImageEditor.test.tsx",
+      "C": "56a0b628d49fe8440cc2e63873f51393d6a32fbd",
+      "W": "56a0b628d49fe8440cc2e63873f51393d6a32fbd",
+      "CEqualsW": true,
+      "sha256": "d09745faf165d42f46db326ba3f7b413f1f1b2c18fa5fce2c235abac20a9bb72",
+      "bytes": 10865
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterImageFocusOverlay.test.tsx",
+      "C": "eed1326a78ed51f34a705f53949f426fd7f117ab",
+      "W": "eed1326a78ed51f34a705f53949f426fd7f117ab",
+      "CEqualsW": true,
+      "sha256": "665b674ecb188fc532603488bb6ed73b9e535b921ef2cadd8082c71f95c5c5ca",
+      "bytes": 3238
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterImageReplaceMenu.test.tsx",
+      "C": "8bf3b7aed68daef203d92a9f8f6f0897e23b2521",
+      "W": "8bf3b7aed68daef203d92a9f8f6f0897e23b2521",
+      "CEqualsW": true,
+      "sha256": "53db38a98400c0ad42758b06448133c4febe568fd9ed1213f133125c3a0ea14f",
+      "bytes": 2770
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterImageTextOverlay.test.tsx",
+      "C": "1f4c0012d5356e08955b170719e65fc1730cee97",
+      "W": "1f4c0012d5356e08955b170719e65fc1730cee97",
+      "CEqualsW": true,
+      "sha256": "2870ba029cb2156fe790eba3e73bec5820d0c8bd097c0abe475b3f4d5170b36f",
+      "bytes": 4863
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterLinkChecker.test.tsx",
+      "C": "5cf1782179f08c921a85deab06ee02f1b961acdd",
+      "W": "5cf1782179f08c921a85deab06ee02f1b961acdd",
+      "CEqualsW": true,
+      "sha256": "8884f5f9f84cafca4c827b50605e3481644e509a2ea359fab1403935066eb974",
+      "bytes": 6466
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterQuickCrop.test.tsx",
+      "C": "f5cc988bf5bbcb21682e6d9c74cf0f41d88a54ef",
+      "W": "f5cc988bf5bbcb21682e6d9c74cf0f41d88a54ef",
+      "CEqualsW": true,
+      "sha256": "e38c45b0eafcdbd97956920ed49143db7b2824d8df8d62953349e8f976aedbdd",
+      "bytes": 13684
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterReview.test.tsx",
+      "C": "d16d3c34b3bec65f1cf61db5091ada6675747515",
+      "W": "d16d3c34b3bec65f1cf61db5091ada6675747515",
+      "CEqualsW": true,
+      "sha256": "10c333cf5103f1cfa1133ee045022532704e3a1b029a581e2e2e4f7e3a15d567",
+      "bytes": 1496
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterSocialControls.test.tsx",
+      "C": "cfa0459015491a8c2cf35f126afd9159e263ad38",
+      "W": "cfa0459015491a8c2cf35f126afd9159e263ad38",
+      "CEqualsW": true,
+      "sha256": "9ae50d08b7795ff43f0ee3279eb0b83f7a49344771138d19f6d38d65901b6973",
+      "bytes": 12261
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterStockImages.test.tsx",
+      "C": "0d40de68af097c8828a9cf439574e8e9a011a4df",
+      "W": "0d40de68af097c8828a9cf439574e8e9a011a4df",
+      "CEqualsW": true,
+      "sha256": "46f939eee14cf7a4caedf85c03878960624dac5300e75a1262b94b17a97c3f6c",
+      "bytes": 8215
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterSurvey.test.tsx",
+      "C": "862e2bb784dc9d5a77decd218c273e56a1f54938",
+      "W": "862e2bb784dc9d5a77decd218c273e56a1f54938",
+      "CEqualsW": true,
+      "sha256": "f54561412271b0eb6884706dcfb5bac2eeddf0ef464b8ba8ee95e86461f8c071",
+      "bytes": 22327
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterSurveyMedia.test.tsx",
+      "C": "c32f9c2683ae764489873bce2884b55b1f5505df",
+      "W": "c32f9c2683ae764489873bce2884b55b1f5505df",
+      "CEqualsW": true,
+      "sha256": "e2fa1c94a56f3783aee2519b99343deaa3e7c3d3978aa4051012918ba24939a9",
+      "bytes": 7793
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterSurveyPreview.test.tsx",
+      "C": "9a4621100d2eebca6e526c716d34a29ec3904197",
+      "W": "9a4621100d2eebca6e526c716d34a29ec3904197",
+      "CEqualsW": true,
+      "sha256": "f1482319871adfe4e539c9a72e6a2c6cb7eaeef7f848a5815dcf26493e2401e0",
+      "bytes": 5721
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterTemplateChooser.test.tsx",
+      "C": "09c38baa503844148be9e3d6808a599e2ca75196",
+      "W": "09c38baa503844148be9e3d6808a599e2ca75196",
+      "CEqualsW": true,
+      "sha256": "2d9b1fa7de85b29be6c162dee20fe48de0b45ab508abeaa14a046b09237a3dff",
+      "bytes": 3823
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterVideoDesign.test.tsx",
+      "C": "d50a7047c8f4509bc9663486f735541292c460b0",
+      "W": "d50a7047c8f4509bc9663486f735541292c460b0",
+      "CEqualsW": true,
+      "sha256": "6568bd1968be1a0729985eedfa151ca0863b57ad1cc17f379613c68f9b7c7389",
+      "bytes": 8765
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/NewsletterVideoUrlControl.test.tsx",
+      "C": "13154fcd07dae76c17ecf5ae0cb3ee264c60e250",
+      "W": "13154fcd07dae76c17ecf5ae0cb3ee264c60e250",
+      "CEqualsW": true,
+      "sha256": "1c2944975ed1422310b9750803db8149f17650439a75e7749613db90ac84cf7a",
+      "bytes": 4550
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/api.account-invitations.test.ts",
+      "C": "b3292f60559840a5c3b919a75400847f9876eb93",
+      "W": "b3292f60559840a5c3b919a75400847f9876eb93",
+      "CEqualsW": true,
+      "sha256": "f2db42327262512c3f3f6bf21f41dff7b837364ac310f88086321174a48b12f5",
+      "bytes": 965
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/api.image-revisions.test.ts",
+      "C": "e0ac145801e3791889d82db8c9f0ceb18fe7a420",
+      "W": "e0ac145801e3791889d82db8c9f0ceb18fe7a420",
+      "CEqualsW": true,
+      "sha256": "f1887edb8b22770f422892c0ec9dbd42addc0a7869b13038e1990a2bbf104897",
+      "bytes": 2190
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/image-editor-crop.test.ts",
+      "C": "598fed54612d09de1f106017608bd89a84b2bac7",
+      "W": "598fed54612d09de1f106017608bd89a84b2bac7",
+      "CEqualsW": true,
+      "sha256": "1a8c37016730db915097c702099aa9ec4c84879b123e534674ba1cf6c66787c2",
+      "bytes": 4982
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/image-editor-fonts.test.ts",
+      "C": "98970c0432b6aa5acda95595efe036f9f545bbb2",
+      "W": "98970c0432b6aa5acda95595efe036f9f545bbb2",
+      "CEqualsW": true,
+      "sha256": "e185f89a38c289fcd9cc34a50bdd427c1898359d1aa1fb4c6cada64a713978b5",
+      "bytes": 2532
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/image-editor-text.test.ts",
+      "C": "86f55fd40d4cb575442b7c936c411c0525ddf399",
+      "W": "86f55fd40d4cb575442b7c936c411c0525ddf399",
+      "CEqualsW": true,
+      "sha256": "47e350a604541b1cf566059e0d561c913dc5552100544bafccc594c2386f9186",
+      "bytes": 1833
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/image-editor.test.ts",
+      "C": "1e6590381215c941dcf3ace8ffbbd1782c1a5dee",
+      "W": "1e6590381215c941dcf3ace8ffbbd1782c1a5dee",
+      "CEqualsW": true,
+      "sha256": "1b3cf78ea32e9a9bd988da9ab941f3ef3218b4ed5632014992fab89861fcbe56",
+      "bytes": 1204
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/model.test.ts",
+      "C": "baae1b8448579229b3077cf37c641c7575007f6b",
+      "W": "baae1b8448579229b3077cf37c641c7575007f6b",
+      "CEqualsW": true,
+      "sha256": "6e84912628849e061d2a85aa96dfed121ce6ca5fe43dac352e7f30af9cae04b5",
+      "bytes": 1381
+    },
+    {
+      "path": "apps/web/src/vnext/pages/workspace/newsletters/newsletter-links.test.ts",
+      "C": "1e22876dde2d38a93f6bdaf55261a67a02d2929e",
+      "W": "1e22876dde2d38a93f6bdaf55261a67a02d2929e",
+      "CEqualsW": true,
+      "sha256": "d086d3532483fea0e2c9d30858619a8a7716df0f38fa0fc74217ad0cc4763964",
+      "bytes": 6305
+    }
+  ]
+}

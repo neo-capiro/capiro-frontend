@@ -1,0 +1,321 @@
+{
+  "sha": "57166408367b1395c70e5872809501268b04e7d1",
+  "url": "https://api.github.com/repos/neo-capiro/capirov2/git/trees/57166408367b1395c70e5872809501268b04e7d1",
+  "tree": [
+    {
+      "path": ".cache",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "cff03b0af884625b9c12861f3c258e27d8ec388a",
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/trees/cff03b0af884625b9c12861f3c258e27d8ec388a"
+    },
+    {
+      "path": ".dockerignore",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ed20b648bdc2849a9d83d255138c90b4b467349f",
+      "size": 95,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/ed20b648bdc2849a9d83d255138c90b4b467349f"
+    },
+    {
+      "path": ".env.example",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3b48a2463e6f012d0d242b4bfa2f8db8d8f9217e",
+      "size": 6775,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/3b48a2463e6f012d0d242b4bfa2f8db8d8f9217e"
+    },
+    {
+      "path": ".gitattributes",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d3ce067e7eeefe063893c65ff17bfef55c176787",
+      "size": 730,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/d3ce067e7eeefe063893c65ff17bfef55c176787"
+    },
+    {
+      "path": ".github",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4068f646a400bfc376f7e89b1e6420f8eb3fcd67",
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/trees/4068f646a400bfc376f7e89b1e6420f8eb3fcd67"
+    },
+    {
+      "path": ".gitignore",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9dbc23f9c5d4dc878b71360d86ed12a0d997ce57",
+      "size": 2100,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/9dbc23f9c5d4dc878b71360d86ed12a0d997ce57"
+    },
+    {
+      "path": ".prettierignore",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "eae81f380ce76c419c2ffba4e9886771a0fffd13",
+      "size": 8,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/eae81f380ce76c419c2ffba4e9886771a0fffd13"
+    },
+    {
+      "path": ".prettierrc.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1d9d0f612787a34fe92330294d4ff7e3045c5608",
+      "size": 133,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/1d9d0f612787a34fe92330294d4ff7e3045c5608"
+    },
+    {
+      "path": ".session5-live",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "dd81eeb4d78fc7a778bafb8ca1beae45682c3022",
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/trees/dd81eeb4d78fc7a778bafb8ca1beae45682c3022"
+    },
+    {
+      "path": "ADVOCACY_HISTORY_CPF_CDS_GATE_REPORT.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1423bb1328f3b441821fe0e44099ef9276175363",
+      "size": 8285,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/1423bb1328f3b441821fe0e44099ef9276175363"
+    },
+    {
+      "path": "CLIO_USER_GUIDE.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3219268b81a0429f747d869565b1566e2f0cfacc",
+      "size": 9950,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/3219268b81a0429f747d869565b1566e2f0cfacc"
+    },
+    {
+      "path": "GAPS.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "96738e3a6f3e8c3cba06122c067c536da696832c",
+      "size": 23670,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/96738e3a6f3e8c3cba06122c067c536da696832c"
+    },
+    {
+      "path": "OVERNIGHT_BLOCKERS.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e078f08de5cfc08249e57b32910b1c65464ae44f",
+      "size": 834,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/e078f08de5cfc08249e57b32910b1c65464ae44f"
+    },
+    {
+      "path": "OVERNIGHT_FINDINGS.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c395e862d809f171a02edd7214cb26619fc27d48",
+      "size": 5053,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/c395e862d809f171a02edd7214cb26619fc27d48"
+    },
+    {
+      "path": "OVERNIGHT_LOG.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "72bea7cc277971d53c9e9a5963debec5389cfdf6",
+      "size": 15117,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/72bea7cc277971d53c9e9a5963debec5389cfdf6"
+    },
+    {
+      "path": "PE_WATCH_INGESTION_HANDOFF.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f66db1ebceb73dc1be465b7c1c08f6ab2e8ef5cd",
+      "size": 3020,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/f66db1ebceb73dc1be465b7c1c08f6ab2e8ef5cd"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c7df0da99211a6f0cc1b533c7ad1c22c69a9a00a",
+      "size": 101,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/c7df0da99211a6f0cc1b533c7ad1c22c69a9a00a"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6c9edc37e5e4630e93e63b17fc9022ca12794cfc",
+      "size": 3804,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/6c9edc37e5e4630e93e63b17fc9022ca12794cfc"
+    },
+    {
+      "path": "apps",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "2b26a2b943b14dfafab29a1675d61875e2772301",
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/trees/2b26a2b943b14dfafab29a1675d61875e2772301"
+    },
+    {
+      "path": "capiro-auth.cer",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "78b9fa5f9ac6b3d294bc736bf358801afc2dcdc6",
+      "size": 778,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/78b9fa5f9ac6b3d294bc736bf358801afc2dcdc6"
+    },
+    {
+      "path": "ci-uuid-replay-report.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d5ddb97d5eec0b73eb483c7de28a3aaee1395b0c",
+      "size": 3176,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/d5ddb97d5eec0b73eb483c7de28a3aaee1395b0c"
+    },
+    {
+      "path": "docker-compose.yml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "92cc75755914d47a23618fe3b29c494c9b8edd30",
+      "size": 777,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/92cc75755914d47a23618fe3b29c494c9b8edd30"
+    },
+    {
+      "path": "docker",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "47cf495947ed2ecdfa57182e4209236e7f37bf4b",
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/trees/47cf495947ed2ecdfa57182e4209236e7f37bf4b"
+    },
+    {
+      "path": "docs",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "323234a1084d2e7c1034b28733d6a9cd1f483476",
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/trees/323234a1084d2e7c1034b28733d6a9cd1f483476"
+    },
+    {
+      "path": "durable-ui-backend-integration-report.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "56bf4bf747e2deeae3596c34ca6cdd8f8c8c94c5",
+      "size": 6961,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/56bf4bf747e2deeae3596c34ca6cdd8f8c8c94c5"
+    },
+    {
+      "path": "evals",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "39b027300f0393109b03d9c5ae7f620b270f158b",
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/trees/39b027300f0393109b03d9c5ae7f620b270f158b"
+    },
+    {
+      "path": "evidence",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9484dfa76ad346c894a55e0bb731fee3272076c0",
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/trees/9484dfa76ad346c894a55e0bb731fee3272076c0"
+    },
+    {
+      "path": "infra",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e53ce9e1241bca0b7981a4b7b8dc9c5c80ce718e",
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/trees/e53ce9e1241bca0b7981a4b7b8dc9c5c80ce718e"
+    },
+    {
+      "path": "marketing",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "18d3f4b1fdf6d4b95f16ef32ae05037d3b35e788",
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/trees/18d3f4b1fdf6d4b95f16ef32ae05037d3b35e788"
+    },
+    {
+      "path": "memory-postgres-report.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4a465ebf511719b59c76480df6f0f66efa850468",
+      "size": 6422,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/4a465ebf511719b59c76480df6f0f66efa850468"
+    },
+    {
+      "path": "outputs",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "67af9183a2d4fe15b3dd3891f3a1d8aff06679a4",
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/trees/67af9183a2d4fe15b3dd3891f3a1d8aff06679a4"
+    },
+    {
+      "path": "package.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "564a9b83c0e92a0aa27998565cf6c3e1543aa160",
+      "size": 13793,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/564a9b83c0e92a0aa27998565cf6c3e1543aa160"
+    },
+    {
+      "path": "packages",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1e5d611c5135b0684671e50bdef1627adbf58a5e",
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/trees/1e5d611c5135b0684671e50bdef1627adbf58a5e"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "08d78e3dbca937f82ada2eb344b961477e9dfc58",
+      "size": 728135,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/08d78e3dbca937f82ada2eb344b961477e9dfc58"
+    },
+    {
+      "path": "pnpm-workspace.yaml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a04e37e5fb1774c83b3d8007b60f69cf44d769d5",
+      "size": 54,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/a04e37e5fb1774c83b3d8007b60f69cf44d769d5"
+    },
+    {
+      "path": "provider-finalization-report.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a92b367eeb54166aea12c768a3390578b5eb49c8",
+      "size": 9753,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/a92b367eeb54166aea12c768a3390578b5eb49c8"
+    },
+    {
+      "path": "scheduler-boundaries-report.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "63f54c36cb69d55aa7e469f02e33584677bf4848",
+      "size": 5570,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/63f54c36cb69d55aa7e469f02e33584677bf4848"
+    },
+    {
+      "path": "scripts",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9133b515a14013ce06e0b79e18131c3d3a0be668",
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/trees/9133b515a14013ce06e0b79e18131c3d3a0be668"
+    },
+    {
+      "path": "tests",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "0a6d6e68440d9e9e761e8518e54a408a897de31d",
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/trees/0a6d6e68440d9e9e761e8518e54a408a897de31d"
+    },
+    {
+      "path": "tsconfig.base.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c88275ccf4b1b0c62627076781ce0022af22f259",
+      "size": 471,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/c88275ccf4b1b0c62627076781ce0022af22f259"
+    },
+    {
+      "path": "turbo.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d27fafa866b273697a299ab4a9c03b9b18ae56bf",
+      "size": 406,
+      "url": "https://api.github.com/repos/neo-capiro/capirov2/git/blobs/d27fafa866b273697a299ab4a9c03b9b18ae56bf"
+    }
+  ],
+  "truncated": false
+}

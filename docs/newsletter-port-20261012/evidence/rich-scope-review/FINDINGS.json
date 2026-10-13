@@ -1,0 +1,122 @@
+{
+  "head": "8ef07b197eb3d41685aaba897a6ef208d43f2277",
+  "findings": [
+    {
+      "id": "NRF-01",
+      "priority": "P1 integration prerequisite",
+      "classification": "confirmed source projection/dispatch gap",
+      "title": "Rich record discriminator is discarded before the generic legacy editor",
+      "source": [
+        {
+          "path": "apps/web/src/shared/capiro/operations/engagement.ts",
+          "line": 114
+        },
+        {
+          "path": "apps/web/src/features/modules/engagement/OutreachView.tsx",
+          "line": 49
+        },
+        {
+          "path": "apps/web/src/features/modules/engagement/OutreachView.tsx",
+          "line": 99
+        },
+        {
+          "path": "apps/web/src/features/modules/engagement/OutreachView.tsx",
+          "line": 154
+        }
+      ],
+      "original": [
+        {
+          "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-OutreachView.tsx",
+          "line": 1006
+        }
+      ],
+      "reproBySource": "A valid Outreach list/detail response containing metadata.newsletterStageId is decoded by a z.object(...).strip() without metadata. Selection then enters the same OutreachForm and generic engagement.outreach.update writer as an ordinary record.",
+      "impact": "Frontend cannot discriminate the contract-supported rich record; generic editing is offered. No live record or actual persistence loss has been observed.",
+      "action": "Root-owned response projection must retain only the contract-backed rich discriminator; route it to a dedicated rich receiver before generic editing. Malformed/unsupported discrimination must not silently downgrade to generic editing; ordinary records retain current behavior."
+    },
+    {
+      "id": "NRF-02",
+      "priority": "P1 before exposing rich stage",
+      "classification": "confirmed missing route/contract owner",
+      "title": "Rich stage and record URLs have no receiving flow",
+      "source": [
+        {
+          "path": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+          "line": 34
+        },
+        {
+          "path": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+          "line": 49
+        },
+        {
+          "path": "apps/web/src/features/modules/engagement/EngagementScreen.tsx",
+          "line": 67
+        }
+      ],
+      "original": [
+        {
+          "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-OutreachView.tsx",
+          "line": 433
+        },
+        {
+          "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterOutreach.tsx",
+          "line": 148
+        },
+        {
+          "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-NewsletterOutreach.tsx",
+          "line": 166
+        },
+        {
+          "path": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter.service.ts",
+          "line": 699
+        }
+      ],
+      "reproBySource": "Current Engagement consumes draft/session/create only. Original stage receipt points to /engagement/outreach?newsletterStage=UUID; original receiver POSTs stages/:id/open then replaces the URL with newsletter=recordId.",
+      "impact": "A stage receipt cannot truthfully complete the user handoff until compatible thin routes and a Modules Engagement owner exist. A stage UUID cannot be substituted for V3 session/version identity.",
+      "action": "Bound exact document/revision/stage receipt, validate canonical destination rather than following an arbitrary route string, and adapt original inbound URLs into current shell/owner. Explicitly resolve conflicting stage/record/session/draft parameters; scope change must discard former rich selection. Keep stage unavailable until receiver is ready."
+    },
+    {
+      "id": "NRF-03",
+      "priority": "P1 authoring slice prerequisite",
+      "classification": "confirmed model/operation gap",
+      "title": "Generic Workspace snapshot authoring is not revisioned rich document editing",
+      "source": [
+        {
+          "path": "apps/web/src/shared/capiro/operations/workspace-documents.ts",
+          "line": 9
+        },
+        {
+          "path": "apps/web/src/features/modules/workspace/newsletter/use-newsletter.ts",
+          "line": 40
+        },
+        {
+          "path": "apps/web/src/features/modules/workspace/newsletter/use-newsletter.ts",
+          "line": 103
+        },
+        {
+          "path": "apps/web/src/features/modules/workspace/newsletter/NewsletterPaper.tsx",
+          "line": 41
+        }
+      ],
+      "original": [
+        {
+          "path": "docs/newsletter-port-20261012/scope-audit/backend-source/original-api.ts",
+          "line": 28
+        },
+        {
+          "path": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter.ts",
+          "line": 678
+        },
+        {
+          "path": "docs/newsletter-port-20261012/scope-audit/backend-source/newsletter.service.ts",
+          "line": 268
+        }
+      ],
+      "reproBySource": "Current strict NewsletterBody has nine flat text/href blocks. Save creates/updates a generic draft/document and snapshots it; original rich save persists name/config/design at an observed integer revision.",
+      "impact": "Flattening a rich design into NewsletterBody would lose contract fields; existing local presets/Undo/Redo are not rich parity.",
+      "action": "Use governed public types/renderer in a cohesive rich authoring owner within Modules Workspace. Keep generic flow and saved-version stage unchanged. Canonical operation decoder needs explicit wire validation coordinated by root, without a second maintained campaign model."
+    }
+  ],
+  "noObservedLiveDataLoss": true,
+  "noCurrentSourceChange": true
+}

@@ -4,6 +4,8 @@ export default defineConfig({
   outputDir: "./test-results/portfolio-browser",
   testMatch: "**/*.spec.ts",
   fullyParallel: false,
+  timeout: 30_000,
+  retries: 0,
   workers: 1,
   reporter: [
     ["list"],

@@ -1,0 +1,259 @@
+{
+  "reviewedAt": "2026-10-12T21:33:19.866272+00:00",
+  "frontendBase": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+  "sourceC": "1e99f0921b207318c6d2abf03927b5c4daa5768b",
+  "comparisonW": "193703e34f2bedbb69d87d6a8ee303f65ab8dbda",
+  "candidateCommit": null,
+  "inputs": [
+    {
+      "path": "/tmp/capiro-newsletter-port-scope-20261012/asset-extraction-manifest.json",
+      "bytes": 239733,
+      "sha256": "1cc360175bc8768ea8a8c0684954842a028b48a35ed67aff929f36193d05e091"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-port-scope-20261012/asset-url-coverage.json",
+      "bytes": 4484,
+      "sha256": "ea52baddea0f6a492d28ab3e85149d0c88850b1a0fc9bbe8a05a400be1060d0e"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-port-scope-20261012/evidence/newsletterAssetDirectoryC.json",
+      "bytes": 245454,
+      "sha256": "c670bc8e393ccf5f1c3892b1ceab075ebe26948e9cae5c7840bcbae01a36f086"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-port-scope-20261012/evidence/newsletterAssetDirectoryW.json",
+      "bytes": 245454,
+      "sha256": "7bc9ef42fc3cb49572c967b417516dabe56f2d883db266667f3a883a279dcf2e"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-port-scope-20261012/source-pins.json",
+      "bytes": 52243,
+      "sha256": "62b8dd937855837f0b82222e70ea94decc7be36feeffc86a51abf7349d4f62c0"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-port-scope-20261012/package-boundary.json",
+      "bytes": 1292,
+      "sha256": "e61aeb2b9569f8294828d8128058cad1d0c525394e0483036a9521481b317795"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/ASSET-BYTE-VERIFICATION.json",
+      "bytes": 56360,
+      "sha256": "169e5a0294676f031cdea71634e9481f64105286610d2f682da91c231af79324"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-000.json",
+      "bytes": 164234,
+      "sha256": "6eff7e052f74036fa9c38654391c8f13584baaa82c49c469a883d6b1a6d4968a"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-006.json",
+      "bytes": 17954,
+      "sha256": "1df788a33e106868351fe7493d0dc462ae5dca2f224ccab00117edec3d751ab0"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-012.json",
+      "bytes": 18000,
+      "sha256": "dfa5c017789d57240710d488329ce6066d1abe56c195eb9d8da8fd6a72250464"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-018.json",
+      "bytes": 16614,
+      "sha256": "15fe46e5dec561f10de52ee9a787d25cf1a25cd5b451aa7f1e9854386cdd1ecc"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-024.json",
+      "bytes": 13840,
+      "sha256": "7d678fa79efef644dbdd6742b75a30b85a78751f2440aa726f10020d5741bdec"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-030.json",
+      "bytes": 11691,
+      "sha256": "eef9c0833a25f5b6cdfc5f6fedff663ff4eb30fbdf34a7cc4e57a407f9e00740"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-036.json",
+      "bytes": 13399,
+      "sha256": "522dc6bfefb92ab05df81a8049d9864cf408e68c507b0a07e735abbad5a5f00c"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-042.json",
+      "bytes": 20457,
+      "sha256": "63eb0f7470c81ed3e31b59c04698f3fc9fe6a46692d5ea5fe30ef4e718ac5f22"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-048.json",
+      "bytes": 21802,
+      "sha256": "3880f786210d90821a2340ecc7b17de8b3ab6108a18c84dae212719033cb23f7"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-054.json",
+      "bytes": 12326,
+      "sha256": "f290017203e7c10894939d933d6ac3f84627edb3e571b6cc2ed64fa501f52675"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-060.json",
+      "bytes": 9993,
+      "sha256": "f1a104fc49203105542e36e96e02bb43c9c8bfb36e187c4999949100e9d9435e"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-066.json",
+      "bytes": 12315,
+      "sha256": "7e500e31e1308f931aa44dc9a2020a3879ee2fe4dd5f2ef410eecab1b5e06be8"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-072.json",
+      "bytes": 14836,
+      "sha256": "f69b54d5663a4a82e2ecf020e6eaaa60730bdc8fc676d08979e3a8b0877a5c0c"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-078.json",
+      "bytes": 17894,
+      "sha256": "e308f0516825e90163d5c92546a73a55083a63bcddb62aec96d71c43328f0a0b"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-084.json",
+      "bytes": 18604,
+      "sha256": "4b1e62433b7d37871b7a37a7a0ece7a70ff68c6fbfcfedd66cfb5b31c87fce4d"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-090.json",
+      "bytes": 18554,
+      "sha256": "9f4ec593fbda0ea5688f6b657af448b9850f87da723c2747139dc35499da71ba"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-096.json",
+      "bytes": 20976,
+      "sha256": "7d222ffb73172152fb56b9755661db24670826bb88375104b8b1b96bcef669cf"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-102.json",
+      "bytes": 21026,
+      "sha256": "2dd8effb6e9e90ac13e416903ea889c8d0b0fa9e3c16e143c83e5b12fad33549"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-108.json",
+      "bytes": 19806,
+      "sha256": "f4176f878692f2ad1bb8052a4097fe002476b07fd0b3aad2c57f950dee755af9"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-114.json",
+      "bytes": 17910,
+      "sha256": "b1b705987a20918514ec26df91d71e479f33e0e8e6566ee361ca1509636ed43b"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-120.json",
+      "bytes": 22404,
+      "sha256": "33747b991c9e59c00e1f15238cb4d26e79d0b9b7eeb6f3b13ea668c1d411eb9b"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-126.json",
+      "bytes": 17324,
+      "sha256": "0d762fbf416263f61aa7320bad77d92ba8dcd2ddf3ad067e6a5ba44375cee858"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-132.json",
+      "bytes": 14488,
+      "sha256": "e7b3e9e540e53be37527742b5abbdd31972815490ed1c4887f5353136cb4276e"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-138.json",
+      "bytes": 13281,
+      "sha256": "4eb2b1f68af2f27fbeaa21a63f8b751e4c85fa3015e6035edb1454d2c57dc752"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-144.json",
+      "bytes": 18034,
+      "sha256": "540c4b554f4c6d50bc02d484533653b2b289479e7b8bd7469ac6b133a71c3e81"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-150.json",
+      "bytes": 70876,
+      "sha256": "5967a2f66a41a4757d5838e4dac4fe4ff97d20076f41ab0b5ef9dfd4c54f8dcc"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-156.json",
+      "bytes": 20360,
+      "sha256": "28a1577354e1d1c6b806001e367fec15d2ed763cb39db09164673fca0aa04fd4"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-162.json",
+      "bytes": 22186,
+      "sha256": "3674cb17394c5c23dd810185346c2ba1d22ec23b78cbdea72fbac331b2877333"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-168.json",
+      "bytes": 15796,
+      "sha256": "20afc203f3cd4105b76730bb15fadbeee9023572d38f274c2babb3637d1a20c1"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-20261012/batch-174.json",
+      "bytes": 11811,
+      "sha256": "fd98ee8d992bb8690ddc185c4cc85dd617940f2e53b40c504da3eda1a886aa30"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-port-scope-20261012/backend-source/newsletter.ts",
+      "bytes": 36470,
+      "sha256": "f586855ffb43f7b4a014b0e27c8ae6be342fb843cb656a58b520b0ac1706c796"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-port-scope-20261012/backend-source/newsletter-render.ts",
+      "bytes": 30096,
+      "sha256": "b143df93036c87dbce9dc49a0e01f1f4bd3a7b6cf562b64608940bdea97c3f3c"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-port-scope-20261012/backend-source/original-NewsletterTemplateChooser.tsx",
+      "bytes": 10547,
+      "sha256": "d50a86e7a51a38868a8736064a7e13740fb078238c1b8ed11f21698365001ac7"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-port-scope-20261012/backend-source/original-model.ts",
+      "bytes": 9774,
+      "sha256": "e329c449060797f276265b7990f4f8eb1b59914a6c2c8bc00b4027fb9e605586"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-port-scope-20261012/backend-source/social-icons-license.txt",
+      "bytes": 7427,
+      "sha256": "20c6f40715a567c97b80f6944beb8bb325835cab47ea7dcab89ee3b8e077eced"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-port-scope-20261012/backend-source/social-icons-attribution.txt",
+      "bytes": 508,
+      "sha256": "3aadf1580c4a90dfac6895616a13241759ad253615091782edcd07b444f924a0"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "/tmp/capiro-newsletter-assets-review-20261012/ASSET-VERIFICATION.json",
+      "bytes": 160827,
+      "sha256": "3883973266bcdb63fbacb2e82860372b310c08477d0a9dce22b0f0da106501e2"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-review-20261012/DOCUMENTATION-OBSERVATION.json",
+      "bytes": 1424,
+      "sha256": "46b827b315c4f9739095d3c3286716c3592341032dcf67257f1b3790931ee805"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-review-20261012/SCOPE-AND-LICENSE.json",
+      "bytes": 13116,
+      "sha256": "da7dd1abada6df5f500bef937ade8278bd341a8a3d9e2eb71ba162a817396db5"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-review-20261012/URL-COVERAGE.json",
+      "bytes": 12708,
+      "sha256": "d0b86a3b621b2f0595d68efb5e3f38accdb265ef5e2cb985d088f3ee9a81d729"
+    },
+    {
+      "path": "/tmp/capiro-newsletter-assets-review-20261012/report.md",
+      "bytes": 3725,
+      "sha256": "a99d52d9e994c64a7f1bc2ac7f4a959ad675dadd61b7246017549cf77f4bbbe3"
+    }
+  ],
+  "rawSourceUrlsNotRepublished": "Only path/hash/length/blob data retained; source directory response URLs are not copied.",
+  "sealedAt": "2026-10-12T21:34:43.212625+00:00",
+  "status": "SEALED_INITIAL_REVIEW_STATIC_ASSETS_ACCEPTED_DOCUMENTATION_SANITIZATION_REQUIRED",
+  "documentationHandoverSnapshot": {
+    "path": "/workspace/capiro-newsletter-port/docs/newsletter-port-20261012/HANDOVER.md",
+    "bytes": 4184,
+    "sha256": "ce43ad5f88fb71c65b7280a5479fe475179c1adecf58013923a740136bef1322"
+  }
+}
