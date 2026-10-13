@@ -1,0 +1,4523 @@
+{
+  "status": "COMPLETED_SHARD2_ONLY_OVERALL_PORTFOLIO_PENDING",
+  "cases": [
+    {
+      "id": "022c2b3ea9f3dcfb2ea8-81bf2b41266a97ef0a1b",
+      "file": "capability-documents-visual.spec.ts",
+      "title": "capability document rows and authored status variants at desktop-light",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "022c2b3ea9f3dcfb2ea8-44e334a754b46ebe22ea",
+      "file": "capability-documents-visual.spec.ts",
+      "title": "capability document rows and authored status variants at desktop-dark",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "022c2b3ea9f3dcfb2ea8-0686712b5afe9cdeca88",
+      "file": "capability-documents-visual.spec.ts",
+      "title": "capability document rows and authored status variants at phone-light",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "022c2b3ea9f3dcfb2ea8-651fc22c4ca8ef826450",
+      "file": "capability-documents-visual.spec.ts",
+      "title": "capability document rows and authored status variants at phone-dark",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "022c2b3ea9f3dcfb2ea8-2e9857549369619eff59",
+      "file": "capability-documents-visual.spec.ts",
+      "title": "the authored loading skeleton announces one status while document access is pending",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "71372634395f2334920c-fd8c2fa2286140e6d194",
+      "file": "capability-execution.spec.ts",
+      "title": "capability writes are disabled after identity role",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "71372634395f2334920c-2418341b25c50625abb3",
+      "file": "capability-execution.spec.ts",
+      "title": "capability writes are disabled after identity invalidate",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "71372634395f2334920c-adf6276c05c84b689b66",
+      "file": "capability-execution.spec.ts",
+      "title": "capability writes are disabled after identity refetch-identity",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "71372634395f2334920c-43fe57008e96e5deaef8",
+      "file": "capability-execution.spec.ts",
+      "title": "late capability save cannot refresh or close after actor changes",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "71372634395f2334920c-c50305e3097655cf3710",
+      "file": "capability-execution.spec.ts",
+      "title": "late capability save cannot refresh or close after client changes",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "71372634395f2334920c-c042e1733230eeac53f5",
+      "file": "capability-execution.spec.ts",
+      "title": "late capability save cannot refresh or close after unmount changes",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "71372634395f2334920c-e94f0af8e826119522f0",
+      "file": "capability-execution.spec.ts",
+      "title": "late capability remove cannot refresh or close after actor changes",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "71372634395f2334920c-74867e39ce4c89862459",
+      "file": "capability-execution.spec.ts",
+      "title": "late capability remove cannot refresh or close after client changes",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "71372634395f2334920c-62264065f40ba954d4d0",
+      "file": "capability-execution.spec.ts",
+      "title": "late capability remove cannot refresh or close after unmount changes",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "71372634395f2334920c-d53a20a554212b482957",
+      "file": "capability-execution.spec.ts",
+      "title": "capability save keeps a single immutable draft in flight then refreshes and closes",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "71372634395f2334920c-26127b36901a80215b29",
+      "file": "capability-execution.spec.ts",
+      "title": "capability remove confirms one existing record then refreshes the empty list",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "71372634395f2334920c-d9eda38e7cd8f56c2803",
+      "file": "capability-execution.spec.ts",
+      "title": "capability create uses the existing client collection and closes after the refreshed read",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "abc72b9a98ff296079f9-9d2fd5481136bc9a3615",
+      "file": "capability-fit-boundary.spec.ts",
+      "title": "late fit computation does not publish after actor changes",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "abc72b9a98ff296079f9-6cbcad96fad8b69e52da",
+      "file": "capability-fit-boundary.spec.ts",
+      "title": "late fit computation does not publish after client changes",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "abc72b9a98ff296079f9-1f2f87557d158a825879",
+      "file": "capability-fit-boundary.spec.ts",
+      "title": "late fit computation does not publish after role changes",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "abc72b9a98ff296079f9-4d007d90231cf0dbfce6",
+      "file": "capability-fit-boundary.spec.ts",
+      "title": "late fit computation does not publish after invalidate changes",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "abc72b9a98ff296079f9-99f52e2bd68eb3241266",
+      "file": "capability-fit-boundary.spec.ts",
+      "title": "late fit computation cannot overwrite a newer successful read",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "abc72b9a98ff296079f9-8a9183483b8e9f246d9c",
+      "file": "capability-fit-boundary.spec.ts",
+      "title": "compute failure keeps an independently successful fit read available",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "abc72b9a98ff296079f9-9254bb8886d53b0afb57",
+      "file": "capability-fit-boundary.spec.ts",
+      "title": "successful fit computation publishes the validated receipt",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "1e9e682405e1667a030d-a568f66c5fbc8181ba06",
+      "file": "capability-list-registration-layout.spec.ts",
+      "title": "phone capability rows retain native content and keyboard selection in light",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "1e9e682405e1667a030d-78e3b2f8d359619531ca",
+      "file": "capability-list-registration-layout.spec.ts",
+      "title": "phone capability rows retain native content and keyboard selection in dark",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "1e9e682405e1667a030d-8a5dd23952957b17e536",
+      "file": "capability-list-registration-layout.spec.ts",
+      "title": "compact rows wrap long supplied content and desktop retains descriptive cards",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "1e9e682405e1667a030d-3a8b73aa43fce8fd7637",
+      "file": "capability-list-registration-layout.spec.ts",
+      "title": "registration summary uses aligned divided rows and the Figma dialog width",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "1e9e682405e1667a030d-8952707170edfea490b5",
+      "file": "capability-list-registration-layout.spec.ts",
+      "title": "the complete capability page fits the 320px viewport including its shared header",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "1e9e682405e1667a030d-dc9bbf2fcc6045f777c2",
+      "file": "capability-list-registration-layout.spec.ts",
+      "title": "registration rows wrap long values and preserve missing-value and EIN review states on phone",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "80ebf5de5b047322dc46-7bca14ae4a2f53c4bbb9",
+      "file": "capability-opportunity-visual.spec.ts",
+      "title": "capability and opportunity guarded states render at desktop-light",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "80ebf5de5b047322dc46-f6de17f7f5415a3d28bc",
+      "file": "capability-opportunity-visual.spec.ts",
+      "title": "capability and opportunity guarded states render at phone-dark",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "adc3254f0aa778bb9311-1b8cd8f1873b07558c8f",
+      "file": "capability-presentation-visual.spec.ts",
+      "title": "Figma capability Profile, Documents and create surfaces at desktop-light",
+      "timeout": 90000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "adc3254f0aa778bb9311-a521d2dde5dfd7947f47",
+      "file": "capability-presentation-visual.spec.ts",
+      "title": "Figma capability Profile, Documents and create surfaces at phone-light",
+      "timeout": 90000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "adc3254f0aa778bb9311-2cc2e67f67633aa0c225",
+      "file": "capability-presentation-visual.spec.ts",
+      "title": "Figma capability Profile, Documents and create surfaces at phone-dark",
+      "timeout": 90000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "8a51c8c339d17fc25348-24575dd2246d63062b61",
+      "file": "capability-presentation.spec.ts",
+      "title": "saved Profile keeps the exact native payload and draft across Documents and closed Details",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "8a51c8c339d17fc25348-a5d72b5898cdd2337eb2",
+      "file": "capability-presentation.spec.ts",
+      "title": "create retains optional MRL and Notes and exposes saved-only fields after its one native create",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "8a51c8c339d17fc25348-d1fde825317b062bcd14",
+      "file": "capability-presentation.spec.ts",
+      "title": "tab and disclosure keyboard navigation excludes inactive Profile controls and restores opener focus",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "8a51c8c339d17fc25348-84d71a07f032a8b08800",
+      "file": "capability-presentation.spec.ts",
+      "title": "saving an invalid Name inside collapsed Details reveals and focuses the field without writing",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "8a51c8c339d17fc25348-9da6a4f7c8a0f51fc3d4",
+      "file": "capability-presentation.spec.ts",
+      "title": "a save refusal preserves the mounted Profile draft and the explicit retry action",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "8a51c8c339d17fc25348-398d8c6ab0d26877a740",
+      "file": "capability-presentation.spec.ts",
+      "title": "pending save remains one operation while switching capability tabs",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "8a51c8c339d17fc25348-4909b77a2c8e01f3f9e4",
+      "file": "capability-presentation.spec.ts",
+      "title": "Documents tab keeps the existing source-scoped upload and file-read boundary",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "60a16d794d016ad312ff-f37503c5c80fb7259563",
+      "file": "capability-registration-boundary.spec.ts",
+      "title": "registration client refresh failure removes the retained editor and values",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "60a16d794d016ad312ff-e2888d3210e34e1ce9d6",
+      "file": "capability-registration-boundary.spec.ts",
+      "title": "registration identity invalidation disables the cached administrator editor",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "60a16d794d016ad312ff-88d474599a98aabd734a",
+      "file": "capability-registration-boundary.spec.ts",
+      "title": "registration save rejects a receipt for another client and retains the draft",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "60a16d794d016ad312ff-d9b3fbcf2d2beb2fcda7",
+      "file": "capability-registration-boundary.spec.ts",
+      "title": "late registration save cannot invalidate its original cache after unmount",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "b5c224dc6aa70106f576-7ef6f46caedb1b5d5f11",
+      "file": "capability-registration-concurrency.spec.ts",
+      "title": "registration receipt cannot publish after a denied client read during its PUT",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "b5c224dc6aa70106f576-0e4716122bec42e7c440",
+      "file": "capability-registration-concurrency.spec.ts",
+      "title": "registration receipt cannot publish after a replaced client read during its PUT",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "b5c224dc6aa70106f576-0be816adc9fdf81dea54",
+      "file": "capability-registration-concurrency.spec.ts",
+      "title": "registration receipt cannot publish after a pending client read during its PUT",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "b5c224dc6aa70106f576-4c6cab3f8d76d58f8bfd",
+      "file": "capability-registration-concurrency.spec.ts",
+      "title": "registration save does not dismiss a failed confirmation read as successful current data",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "664bd212cb67513c1f58-80e1eb470a47377d750a",
+      "file": "capability-registration-execution.spec.ts",
+      "title": "registration write rechecks the native administrator gate after standard-role",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "664bd212cb67513c1f58-ed7434ae49dc6b7c8159",
+      "file": "capability-registration-execution.spec.ts",
+      "title": "registration write rechecks the native administrator gate after role",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "664bd212cb67513c1f58-312abd406f498f415650",
+      "file": "capability-registration-execution.spec.ts",
+      "title": "registration write rechecks the native administrator gate after invalidate",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "664bd212cb67513c1f58-08f18052d9c1358484fc",
+      "file": "capability-registration-execution.spec.ts",
+      "title": "registration write rechecks the native administrator gate after refetch-identity",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "664bd212cb67513c1f58-82d58cc2e0a8c76d3d47",
+      "file": "capability-registration-execution.spec.ts",
+      "title": "late registration receipt has no old-view effects after actor",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "664bd212cb67513c1f58-61d1f1740c20e64b4309",
+      "file": "capability-registration-execution.spec.ts",
+      "title": "late registration receipt has no old-view effects after standard-role",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "664bd212cb67513c1f58-6899930530ec64ba8653",
+      "file": "capability-registration-execution.spec.ts",
+      "title": "late registration receipt has no old-view effects after invalidate",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "664bd212cb67513c1f58-cf237361c447117d74c5",
+      "file": "capability-registration-execution.spec.ts",
+      "title": "late registration receipt has no old-view effects after client",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "664bd212cb67513c1f58-4bee1d6432af08c6826f",
+      "file": "capability-registration-execution.spec.ts",
+      "title": "registration save freezes one draft, preserves legacy codes and refreshes exact current values",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "664bd212cb67513c1f58-20ba7e73a2277c755314",
+      "file": "capability-registration-execution.spec.ts",
+      "title": "registration HTTP 403 write failure preserves the draft and never retries itself",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "664bd212cb67513c1f58-d4700065dc79f1b3f747",
+      "file": "capability-registration-execution.spec.ts",
+      "title": "registration HTTP 503 write failure preserves the draft and never retries itself",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "8c5fa4131a6f2b32ff56-a7db67359c4e67170bd5",
+      "file": "capability-registration-reads.spec.ts",
+      "title": "registration read view recovers from a cached HTTP 403 failure",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "8c5fa4131a6f2b32ff56-70bf279e1de4f6f828dd",
+      "file": "capability-registration-reads.spec.ts",
+      "title": "registration read view recovers from a cached HTTP 503 failure",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "8c5fa4131a6f2b32ff56-2bda9b89146b45763a76",
+      "file": "capability-registration-reads.spec.ts",
+      "title": "registration editor recovers from a cached HTTP 403 failure",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "8c5fa4131a6f2b32ff56-7250cc4c7908478791e7",
+      "file": "capability-registration-reads.spec.ts",
+      "title": "registration editor recovers from a cached HTTP 503 failure",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "8c5fa4131a6f2b32ff56-5fe990231dd516892f92",
+      "file": "capability-registration-reads.spec.ts",
+      "title": "registration read rejects a successful response for another native client",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "8c5fa4131a6f2b32ff56-d0cffb0e8727ad088ae4",
+      "file": "capability-registration-reads.spec.ts",
+      "title": "a changed registration snapshot replaces stale inputs while unrelated notes preserve the local draft",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "8c5fa4131a6f2b32ff56-079934cd9f13ec4b08fd",
+      "file": "capability-registration-reads.spec.ts",
+      "title": "closing registrations discards its edit lifetime and reopens from the current client",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "7944b73c16e7eb791e7d-47a6e5b56a9d08c351c8",
+      "file": "capability-registration-visual.spec.ts",
+      "title": "registration current-read and edit states render at desktop-light",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "7944b73c16e7eb791e7d-d7bc1a0b6d4cb0ef56c4",
+      "file": "capability-registration-visual.spec.ts",
+      "title": "registration current-read and edit states render at phone-dark",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "3e0c0f59216f234573c7-c26650db93bd585fe2ed",
+      "file": "client-enrichment.spec.ts",
+      "title": "saved run current/proposed, sources, selection and explicit partial apply",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "3e0c0f59216f234573c7-2e96309aba037dc05d40",
+      "file": "client-enrichment.spec.ts",
+      "title": "ignore with reason then restore uses persisted acknowledgments",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "3e0c0f59216f234573c7-48583061c31a2d739d96",
+      "file": "client-enrichment.spec.ts",
+      "title": "matter assignment explicitly applies immediately with exact receipt",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "3e0c0f59216f234573c7-45af158d0c5c62c43c68",
+      "file": "client-enrichment.spec.ts",
+      "title": "wrong matter receipt cannot show assignment success",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "3e0c0f59216f234573c7-722532afc3159a0a91fb",
+      "file": "client-enrichment.spec.ts",
+      "title": "lost apply response freezes repeat writes even after closing/reopening",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "3e0c0f59216f234573c7-7f9743a71c35ef440794",
+      "file": "client-enrichment.spec.ts",
+      "title": "changed finding preflight preserves review and prevents POST",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "3e0c0f59216f234573c7-849b531c9dc7c9a07495",
+      "file": "client-enrichment.spec.ts",
+      "title": "closing during preflight aborts before POST",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "3e0c0f59216f234573c7-8a750fed5340203e51aa",
+      "file": "client-enrichment.spec.ts",
+      "title": "standard user can read but cannot apply or ignore",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "3e0c0f59216f234573c7-3c9d5c194862536e9c4b",
+      "file": "client-enrichment.spec.ts",
+      "title": "running review polls and cancellation is explicit and scoped",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "3e0c0f59216f234573c7-33fc25c94014b94ad29e",
+      "file": "client-enrichment.spec.ts",
+      "title": "empty/setup blocks unsafe new research and task retry",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "3e0c0f59216f234573c7-6d9540536fbb5073f6da",
+      "file": "client-enrichment.spec.ts",
+      "title": "wrong-client response hides review; unavailable read can retry",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "3e0c0f59216f234573c7-fcdae7e668b7670d2266",
+      "file": "client-enrichment.spec.ts",
+      "title": "drawer follows desktop geometry and mobile dark layout",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "3e0c0f59216f234573c7-c948fa10a085c79852da",
+      "file": "client-enrichment.spec.ts",
+      "title": "canonical upload is explicit, validates empty files and never starts research",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "3e0c0f59216f234573c7-15af7714a185b5519ce6",
+      "file": "client-enrichment.spec.ts",
+      "title": "unmount during upload ticket blocks storage and confirmation",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "2f0f34d215be3f6a6e01-523788ba166b84e51234",
+      "file": "client-header.spec.ts",
+      "title": "client header supports keyboard navigation and scoped quick-add deep links",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "e28574262bb3cbea781c-97a38956cc807854313f",
+      "file": "client-intake.spec.ts",
+      "title": "production Add profile chooser opens retained LDA intake, returns and restores focus",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "e28574262bb3cbea781c-237fc282fe26be767dad",
+      "file": "client-intake.spec.ts",
+      "title": "three intake steps validate, preserve input, send canonical fields and explicit intake data",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "e28574262bb3cbea781c-c4ad5a9e198162dd471d",
+      "file": "client-intake.spec.ts",
+      "title": "create failure keeps all entered fields and never shows success",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "e28574262bb3cbea781c-dd222f466cc51d342455",
+      "file": "client-intake.spec.ts",
+      "title": "logo confirmation failure retries without duplicate profile creation or storage upload",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "e28574262bb3cbea781c-98da596738fa2ec55895",
+      "file": "client-intake.spec.ts",
+      "title": "client header edit merges fresh remote siblings, preserves unchanged fields and returns focus",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "e28574262bb3cbea781c-90d53ea0b7b3c9912f6b",
+      "file": "client-intake.spec.ts",
+      "title": "rejected client edit remains open with entered data and unchanged profile",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "e28574262bb3cbea781c-3609a6ad268466936828",
+      "file": "client-intake.spec.ts",
+      "title": "standard member cannot edit but can confirm archive; rejected receipt never navigates",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "c1c9504e8594b7a5e70e-aa109d037704a4f84f0f",
+      "file": "committee-picker.spec.ts",
+      "title": "committee branches navigate without selecting; Done commits one exact parent or child",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "c1c9504e8594b7a5e70e-95c7ed2623abe458e337",
+      "file": "committee-picker.spec.ts",
+      "title": "search carries the full parent path and Escape discards an uncommitted change",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "c1c9504e8594b7a5e70e-86f1260d58f075b6810b",
+      "file": "committee-picker.spec.ts",
+      "title": "committee picker supports keyboard branch navigation and staged selection",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "c1c9504e8594b7a5e70e-12bf7eb19ffbf4876fa5",
+      "file": "committee-picker.spec.ts",
+      "title": "committee picker keeps exact static icon sizes and readable layout on a phone in light mode",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "c1c9504e8594b7a5e70e-10186bae08b15b6033bb",
+      "file": "committee-picker.spec.ts",
+      "title": "committee picker keeps exact static icon sizes and readable layout on a phone in dark mode",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "a1d2b429debdc1fbb394-0da06c73803d7b26742f",
+      "file": "current-projection.spec.ts",
+      "title": "failed client refresh 403 hides retained totals, choices and cards until recovery",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "a1d2b429debdc1fbb394-2d71b4e176e03894b2e3",
+      "file": "current-projection.spec.ts",
+      "title": "failed activity refresh 403 hides retained history, kinds, limit and overview count",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "a1d2b429debdc1fbb394-a24796677fed654d2e27",
+      "file": "current-projection.spec.ts",
+      "title": "failed client refresh 503 hides retained totals, choices and cards until recovery",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "a1d2b429debdc1fbb394-8ef2392adb59c9e16516",
+      "file": "current-projection.spec.ts",
+      "title": "failed activity refresh 503 hides retained history, kinds, limit and overview count",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "a1d2b429debdc1fbb394-32701e5d9dcf546c3a5d",
+      "file": "current-projection.spec.ts",
+      "title": "failed current client read removes its retained name from the frame and recovers",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "389feea07d60b95b08cf-7a84ceaf955a1b73cfe6",
+      "file": "dialog-disabled-focus.spec.ts",
+      "title": "disabled button keeps pending and unknown dialog focus at 360px",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "389feea07d60b95b08cf-d1d039d2c108c60334dd",
+      "file": "dialog-disabled-focus.spec.ts",
+      "title": "disabled field keeps pending and unknown dialog focus at 360px",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "389feea07d60b95b08cf-ef0647b05d32b92fdfae",
+      "file": "dialog-disabled-focus.spec.ts",
+      "title": "disabled button keeps pending and unknown dialog focus at 1440px",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "389feea07d60b95b08cf-7fcc16eee77d30be0d36",
+      "file": "dialog-disabled-focus.spec.ts",
+      "title": "disabled field keeps pending and unknown dialog focus at 1440px",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "75750b97f266fe2ab697-196abffce6882ca0f9b7",
+      "file": "effective-dates.spec.ts",
+      "title": "master Agenda reads publisher effective dates across excluded pages without shifting civil dates",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "75750b97f266fe2ab697-552e1803f89e9d64938b",
+      "file": "effective-dates.spec.ts",
+      "title": "client Agenda and master Month never fetch the public effective-date feed",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "75750b97f266fe2ab697-ec6a2d7c6e748df663b5",
+      "file": "effective-dates.spec.ts",
+      "title": "stale effective evidence stays unavailable without publication-date fallback",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "0516bb8922d8cfb77caf-710b995c1aaabac838f7",
+      "file": "email-compose.spec.ts",
+      "title": "explicit mailbox B is shown in review and confirmed by its exact sender receipt",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "0516bb8922d8cfb77caf-67d27f6837a6e06b20e1",
+      "file": "email-compose.spec.ts",
+      "title": "a removed reviewed mailbox is not replaced by another mailbox",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "0516bb8922d8cfb77caf-14298fd82f3ef35fe958",
+      "file": "email-compose.spec.ts",
+      "title": "an unavailable mailbox contract leaves the draft review disabled",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "0516bb8922d8cfb77caf-20d68a83359404648140",
+      "file": "email-compose.spec.ts",
+      "title": "overlay clicks respect context gestures and dismiss only the top email review",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "0516bb8922d8cfb77caf-d501ca6e53ea1145d55b",
+      "file": "email-compose.spec.ts",
+      "title": "invalidated successful idle identity refuses mail dispatch and retains draft",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "0516bb8922d8cfb77caf-23c31fc739202e1aea5c",
+      "file": "email-compose.spec.ts",
+      "title": "invalidated successful idle identity refuses upload prepare dispatch",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "0516bb8922d8cfb77caf-f93bc54fb1ad6ed0e23c",
+      "file": "email-compose.spec.ts",
+      "title": "contact picker and CC/BCC survive explicit review and send exact receipt",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "0516bb8922d8cfb77caf-9f969783773d55d8df32",
+      "file": "email-compose.spec.ts",
+      "title": "invalid/duplicate copied recipient retains draft and never sends",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "0516bb8922d8cfb77caf-9e5137bee310c150e0ee",
+      "file": "email-compose.spec.ts",
+      "title": "upload confirmation and scan readiness stay separate before send",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "0516bb8922d8cfb77caf-a446c4e22d5705afa18b",
+      "file": "email-compose.spec.ts",
+      "title": "confirmation retry reuses storage attempt without another byte upload",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "0516bb8922d8cfb77caf-5affb5731a781a3fd3a6",
+      "file": "email-compose.spec.ts",
+      "title": "oversize file refuses before prepare and draft removal never deletes Files",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "0516bb8922d8cfb77caf-b224e964624f9fefb497",
+      "file": "email-compose.spec.ts",
+      "title": "uncertain or malformed receipt freezes send attempt (503)",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "0516bb8922d8cfb77caf-020b3f88640734b7769c",
+      "file": "email-compose.spec.ts",
+      "title": "uncertain or malformed receipt freezes send attempt (200)",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "0516bb8922d8cfb77caf-3d2e186c14d87e2388e6",
+      "file": "email-compose.spec.ts",
+      "title": "actor change while prepare awaits causes zero storage/confirm/send",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "0516bb8922d8cfb77caf-76db19e729e650cd01e4",
+      "file": "email-compose.spec.ts",
+      "title": "unmounted actor lifetime refuses delayed upload dispatch",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "0516bb8922d8cfb77caf-4bfa45d0ff9ecd5cb93f",
+      "file": "email-compose.spec.ts",
+      "title": "reply to foreign-client thread refuses before mail send",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "0516bb8922d8cfb77caf-80e9e3976a84ea5dcfba",
+      "file": "email-compose.spec.ts",
+      "title": "read-only role cannot upload or send",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "0516bb8922d8cfb77caf-f17bf1ae64bd39c67226",
+      "file": "email-compose.spec.ts",
+      "title": "mobile dark attachment strip fits, keyboard enters picker and removes recipient",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "0516bb8922d8cfb77caf-d4a76f9e7378f52bd9cc",
+      "file": "email-compose.spec.ts",
+      "title": "prepared seed requires canonical availability and an explicit selected recipient",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "0516bb8922d8cfb77caf-a410d4974f80df4ea27b",
+      "file": "email-compose.spec.ts",
+      "title": "actor change during send attachment preflight causes zero mail POST",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "2c0a81ab98983adc347f-3a66d570fd22893811c4",
+      "file": "facility-action-lifetime.spec.ts",
+      "title": "a facility action refuses another tenant's otherwise matching receipt",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "2c0a81ab98983adc347f-3f18a28f0d569e8cf40a",
+      "file": "facility-action-lifetime.spec.ts",
+      "title": "a definite facility action refusal remains a deliberate retry without claiming success",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "2c0a81ab98983adc347f-08f678173fb2c4ce6332",
+      "file": "facility-action-lifetime.spec.ts",
+      "title": "an uncertain facility action needs a current GET review before a new explicit request",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "2c0a81ab98983adc347f-822a82ee0cc84058b74e",
+      "file": "facility-action-lifetime.spec.ts",
+      "title": "closing a pending geocode view retains uncertainty without replay when reopened",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "2c0a81ab98983adc347f-02003ef8e6f7a3065dba",
+      "file": "facility-action-lifetime.spec.ts",
+      "title": "a refreshed facility source aborts obsolete action effects and retains the new address",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "2c0a81ab98983adc347f-8352cc07379f97d5c5ca",
+      "file": "facility-action-lifetime.spec.ts",
+      "title": "a failed current review cannot erase an uncertain facility action",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "2c0a81ab98983adc347f-bd73d4705c6764e22746",
+      "file": "facility-action-lifetime.spec.ts",
+      "title": "a late geocode receipt cannot clear the initiating actor's unknown fence",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "2c0a81ab98983adc347f-c5ea09231d2c986159e2",
+      "file": "facility-action-lifetime.spec.ts",
+      "title": "a late candidate conflict cannot refresh a newer reviewed snapshot",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "b17d956f7f01c897655e-1e1e2fc4cbe3b92b33d9",
+      "file": "facility-manager-review.spec.ts",
+      "title": "inline facility recovery adopts the reviewed record after remote update",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "b17d956f7f01c897655e-6fffab91488fbea3ce7f",
+      "file": "facility-manager-review.spec.ts",
+      "title": "inline facility recovery adopts the reviewed record after uncertain applied edit",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "48a199f824187b1f977e-3efed38168164812f788",
+      "file": "facility-map.spec.ts",
+      "title": "real coordinate pins, keyboard district selection, pan/zoom and source-backed details",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "48a199f824187b1f977e-86aab4eac1e848f402f6",
+      "file": "facility-map.spec.ts",
+      "title": "candidate index, district resolution, queued retry and failure messages stay client-bound",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "48a199f824187b1f977e-424ecf0fac0e6e5b7246",
+      "file": "facility-map.spec.ts",
+      "title": "reviewed candidate selection refuses a service without a snapshot revision",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "48a199f824187b1f977e-6990b872f29b37310397",
+      "file": "facility-map.spec.ts",
+      "title": "a candidate conflict reloads the displayed snapshot and never falls back to the unchecked route",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "48a199f824187b1f977e-2f7bb26fcc4d86e4a11d",
+      "file": "facility-map.spec.ts",
+      "title": "removal requires confirmation and does not close after a rejected delete",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "48a199f824187b1f977e-3a83cf24693dc0dd7195",
+      "file": "facility-map.spec.ts",
+      "title": "a response for another client fails closed without rendering that location",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "48a199f824187b1f977e-87a8d20d87ba032e606e",
+      "file": "facility-map.spec.ts",
+      "title": "resolved representative target reports failed saves, validates receipt and avoids duplicate adds",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "1295fb02c0de8bcff82d-bab6fa431ab24d18667a",
+      "file": "files-boundary.spec.ts",
+      "title": "a wrong-client file response fails before exposing its name or signed URLs",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "1295fb02c0de8bcff82d-df962f40814c9be225f9",
+      "file": "files-boundary.spec.ts",
+      "title": "an open file preview follows the current removed list state",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "1295fb02c0de8bcff82d-74520aa33297fb4a23dc",
+      "file": "files-boundary.spec.ts",
+      "title": "an open file preview follows the current denied list state",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "1295fb02c0de8bcff82d-9140e5c7e6c1c39c5e90",
+      "file": "files-boundary.spec.ts",
+      "title": "an open file preview follows the current quarantined list state",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "1295fb02c0de8bcff82d-9c953585e98d476b3429",
+      "file": "files-boundary.spec.ts",
+      "title": "a mismatched folder-save receipt keeps the edit open and does not claim success",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f7e9df72a8ea60c2b47b-781fec78e67946054cb8",
+      "file": "files-delete-recovery.spec.ts",
+      "title": "unknown deletion survives close/reopen until deliberate current review and a new confirmation",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f7e9df72a8ea60c2b47b-1dcfd935afcff4970e8a",
+      "file": "files-delete-recovery.spec.ts",
+      "title": "an absent current file is unavailable, not a deletion confirmation",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f7e9df72a8ea60c2b47b-35f4154dfadd164dd3cd",
+      "file": "files-delete-recovery.spec.ts",
+      "title": "pending current deletion stays fenced until a later explicit review reports a recoverable file",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f7e9df72a8ea60c2b47b-81eb17688d8dfdaa4e6f",
+      "file": "files-delete-recovery.spec.ts",
+      "title": "a definite deletion refusal does not impose an unknown fence",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f7e9df72a8ea60c2b47b-a5a17a2dccbb69dd7d7d",
+      "file": "files-delete-recovery.spec.ts",
+      "title": "a failed explicit current read 403 revokes all cached file actions until successful recovery",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f7e9df72a8ea60c2b47b-fcfabe8b6587eca55df2",
+      "file": "files-delete-recovery.spec.ts",
+      "title": "a failed explicit current read 503 revokes all cached file actions until successful recovery",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f7e9df72a8ea60c2b47b-ee0637f7d77229d3bf5a",
+      "file": "files-delete-recovery.spec.ts",
+      "title": "a late deletion receipt after actor replacement cannot publish completion into the new view",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f7e9df72a8ea60c2b47b-489d2415a1ca3492f717",
+      "file": "files-delete-recovery.spec.ts",
+      "title": "a late deletion receipt after client replacement cannot publish completion into the new view",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f7e9df72a8ea60c2b47b-bba7f1ec00713cfad22b",
+      "file": "files-delete-recovery.spec.ts",
+      "title": "a late deletion receipt after unmount replacement cannot publish completion into the new view",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f7e9df72a8ea60c2b47b-a94082a881f9fc577a92",
+      "file": "files-delete-recovery.spec.ts",
+      "title": "a current read completing after actor replacement cannot release the old fence or leak its state",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f7e9df72a8ea60c2b47b-927493dc778f6311fda8",
+      "file": "files-delete-recovery.spec.ts",
+      "title": "a superseded current read returning 200 cannot replace or poison newer client files",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f7e9df72a8ea60c2b47b-e626d1cc6e55cd83ba20",
+      "file": "files-delete-recovery.spec.ts",
+      "title": "a superseded current read returning 403 cannot replace or poison newer client files",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "bf3678af30faab3f9883-e9e180137125e19683eb",
+      "file": "files-metadata-receipts.spec.ts",
+      "title": "conflicting ACL receipt retains the draft and freezes repeat save until current GET review",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "bf3678af30faab3f9883-bc220f69dd3dd77bcee5",
+      "file": "files-metadata-receipts.spec.ts",
+      "title": "a matching reordered restricted viewer set completes the save",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "bf3678af30faab3f9883-c973f1f1993d92b518cb",
+      "file": "files-metadata-receipts.spec.ts",
+      "title": "a definite access rejection retains an editable draft",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "bf3678af30faab3f9883-3a11e251baf797830894",
+      "file": "files-metadata-receipts.spec.ts",
+      "title": "a matching PATCH completing after actor replacement cannot close or update the replacement view",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "bf3678af30faab3f9883-81b00cc46f53315892b4",
+      "file": "files-metadata-receipts.spec.ts",
+      "title": "a matching PATCH completing after client replacement cannot close or update the replacement view",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "bf3678af30faab3f9883-eabe6f15603bd9d604bc",
+      "file": "files-metadata-receipts.spec.ts",
+      "title": "a matching PATCH completing after unmount replacement cannot close or update the replacement view",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "bf3678af30faab3f9883-d361dacde56dfd2c4927",
+      "file": "files-metadata-receipts.spec.ts",
+      "title": "a review completing after actor replacement cannot clear the original unknown save",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "bf3678af30faab3f9883-4f72cb4805cfeb183531",
+      "file": "files-metadata-receipts.spec.ts",
+      "title": "an unknown draft can recover even when the reopened access query fails",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "bf3678af30faab3f9883-5ba68d7c62795873a4b3",
+      "file": "files-metadata-receipts.spec.ts",
+      "title": "reopening access as another reader requests that reader's current ACL",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "bf3678af30faab3f9883-384126e500ffa686a8e2",
+      "file": "files-metadata-receipts.spec.ts",
+      "title": "a contradictory folder receipt keeps the requested folder and needs current review",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "bf3678af30faab3f9883-1f013c45e3b38a231806",
+      "file": "files-metadata-receipts.spec.ts",
+      "title": "unknown ACL save survives close/reopen and a failed review does not thaw it",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "d893bc11f77e2ecfba3c-a472473803a319c94959",
+      "file": "files-reader-selection.spec.ts",
+      "title": "Files clears checked rows and the prior preview selection when the reader changes",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "d893bc11f77e2ecfba3c-5aef3033b1b1cb6bb99c",
+      "file": "files-reader-selection.spec.ts",
+      "title": "Files clears checked rows and the prior delete selection when the reader changes",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "d893bc11f77e2ecfba3c-ade38a06322659d18ba4",
+      "file": "files-reader-selection.spec.ts",
+      "title": "Files clears checked rows and the prior file-access selection when the reader changes",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "d893bc11f77e2ecfba3c-d7fe1812f2f2f4c4ea59",
+      "file": "files-reader-selection.spec.ts",
+      "title": "Files clears checked rows and the prior folder-access selection when the reader changes",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "d893bc11f77e2ecfba3c-930f64c5f4df46669c4f",
+      "file": "files-reader-selection.spec.ts",
+      "title": "Files clears checked rows and the prior upload selection when the reader changes",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "8f6590af2317f2e6ae8b-34a6c7d0c68fce04903f",
+      "file": "files-view-contrast.spec.ts",
+      "title": "selected Files view keeps readable text while hovered at 1440px",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "8f6590af2317f2e6ae8b-1be616978d67d59f8ca5",
+      "file": "files-view-contrast.spec.ts",
+      "title": "selected Files view keeps readable text while hovered at 360px",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "1de639fdc719e2321283-c7296dcae0e2c3ef1796",
+      "file": "files.spec.ts",
+      "title": "Files keeps quarantined bytes unavailable and persists folder moves",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "1de639fdc719e2321283-be08d9b57421c24286a4",
+      "file": "files.spec.ts",
+      "title": "Master calendar retains selected client, date and zone when switching views",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f9617168d537df98e2eb-b840fdec98f0cd028fab",
+      "file": "global-objective.spec.ts",
+      "title": "visible Portfolio entry opens the guarded picker without losing filters and fits on phone",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f9617168d537df98e2eb-506168acd8cce6b91543",
+      "file": "global-objective.spec.ts",
+      "title": "keyboard search chooses the real client and opens the existing empty four-field editor",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f9617168d537df98e2eb-7b34beecc546f551ffb0",
+      "file": "global-objective.spec.ts",
+      "title": "Cancel and Escape are local and reopening discards previous selection",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f9617168d537df98e2eb-417508bdbd36c78a6c0c",
+      "file": "global-objective.spec.ts",
+      "title": "loading catalog cannot continue and an empty result is explicit",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f9617168d537df98e2eb-3c2a3b0768d6c81971aa",
+      "file": "global-objective.spec.ts",
+      "title": "failed catalog has explicit retry and search has an empty state",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f9617168d537df98e2eb-f31d04698b2d6cd55b4a",
+      "file": "global-objective.spec.ts",
+      "title": "portal role never requests the client catalog or offers continuation",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f9617168d537df98e2eb-f825ea6d0cd8140ac278",
+      "file": "global-objective.spec.ts",
+      "title": "malformed catalog cannot masquerade as a selectable client",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f9617168d537df98e2eb-183a77750466d1370d4e",
+      "file": "global-objective.spec.ts",
+      "title": "objective-authority-invalidate immediately refuses a previously valid selection",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f9617168d537df98e2eb-222de90f5aad541814b7",
+      "file": "global-objective.spec.ts",
+      "title": "objective-role-change immediately refuses a previously valid selection",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f9617168d537df98e2eb-9cadb759433283f1be84",
+      "file": "global-objective.spec.ts",
+      "title": "objective-catalog-invalidate immediately refuses a previously valid selection",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f9617168d537df98e2eb-fc8f87de9b33d82728db",
+      "file": "global-objective.spec.ts",
+      "title": "actor change cannot publish late rows or retain the prior actor's selection",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f9617168d537df98e2eb-dddc0888421b43ca7746",
+      "file": "global-objective.spec.ts",
+      "title": "held catalog refresh blocks navigation and removes a vanished selected client",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f9617168d537df98e2eb-81f7534d46bd8b093b98",
+      "file": "global-objective.spec.ts",
+      "title": "unmount during a held read cannot navigate or reopen the picker",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f9617168d537df98e2eb-9b41fc6db99ab1eae5e5",
+      "file": "global-objective.spec.ts",
+      "title": "session expiry refuses the catalog rather than showing cached success",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f9617168d537df98e2eb-d4352d920e6ec1672263",
+      "file": "global-objective.spec.ts",
+      "title": "mobile dark dialog keeps real options and actions within the viewport",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "f9617168d537df98e2eb-5681ed7aff3e9f8aa081",
+      "file": "global-objective.spec.ts",
+      "title": "actual Portfolio deep link preserves filters on close and continues through the canonical editor",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "d96cf099044049c92308-8d1224e139977a5bfc4c",
+      "file": "government.spec.ts",
+      "title": "directory feeds fail independently, paginate, and retain a failed add for explicit retry",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "d96cf099044049c92308-236e13f85271118bf734",
+      "file": "government.spec.ts",
+      "title": "committee selection fetches every taxonomy page and preserves current/former staff",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "d96cf099044049c92308-dfc0b8689910d487942b",
+      "file": "government.spec.ts",
+      "title": "state target details preserve encoded identity; tier clearing, reviewed mail and failed removal retain state",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "9f18c4c5fa62b65436af-798d15f18b1cf33a2b9e",
+      "file": "integration-defect-baselines.spec.ts",
+      "title": "Core client 404 keeps preferences visible and disabled with zero Intel calls",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "9f18c4c5fa62b65436af-154e24a5ca8711891ff1",
+      "file": "integration-defect-baselines.spec.ts",
+      "title": "requested phone-code copy matches Figma 1028:188442 without delivery claims",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "459a5f7316afb3b08c00-b7161f7807ac724ec308",
+      "file": "linked-file-arrival.spec.ts",
+      "title": "the genuine activity link selects its exact current attachment without an external action",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "459a5f7316afb3b08c00-b67ce70e2d9a6a226908",
+      "file": "linked-file-arrival.spec.ts",
+      "title": "a direct arrival preserves preview keyboard and geometry at 1440px",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "459a5f7316afb3b08c00-1328c92fe8fed501ad45",
+      "file": "linked-file-arrival.spec.ts",
+      "title": "a direct arrival preserves preview keyboard and geometry at 390px",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "459a5f7316afb3b08c00-a814249fb42634dd02ef",
+      "file": "linked-file-arrival.spec.ts",
+      "title": "a missing exact target reports current-list unavailability without choosing another file or replaying",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "459a5f7316afb3b08c00-ba6acefe1d77b1d386ec",
+      "file": "linked-file-arrival.spec.ts",
+      "title": "a pending exact arrival waits for the authorized current list",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "459a5f7316afb3b08c00-87250227e3f5de685a9c",
+      "file": "linked-file-arrival.spec.ts",
+      "title": "a new arrival waits for an in-flight refresh instead of opening a retained cached record",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "459a5f7316afb3b08c00-333ef5a72403256cddb0",
+      "file": "linked-file-arrival.spec.ts",
+      "title": "an ambiguous or nonmatching file parameter never selects a different attachment: empty",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "459a5f7316afb3b08c00-3c652ee00e8d74ef8890",
+      "file": "linked-file-arrival.spec.ts",
+      "title": "an ambiguous or nonmatching file parameter never selects a different attachment: 60000000-0000-4000-8000-000000000001&file=60000000-0000-4000-8000-000000000002",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "459a5f7316afb3b08c00-0e59f8e56c0bab475474",
+      "file": "linked-file-arrival.spec.ts",
+      "title": "an ambiguous or nonmatching file parameter never selects a different attachment: https%3A%2F%2Ffiles.example.test%2Funtrusted",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "459a5f7316afb3b08c00-b9c704323e6e536339c3",
+      "file": "linked-file-arrival.spec.ts",
+      "title": "a held arrival cannot transfer to a changed actor and reopen for its replacement",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "459a5f7316afb3b08c00-83e146b5921be04220a7",
+      "file": "linked-file-arrival.spec.ts",
+      "title": "a held arrival cannot transfer to a changed tenant and reopen for its replacement",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "459a5f7316afb3b08c00-79ad7602489ea0035234",
+      "file": "linked-file-arrival.spec.ts",
+      "title": "a held arrival cannot transfer to a changed client and reopen for its replacement",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "459a5f7316afb3b08c00-774d35a334020f862927",
+      "file": "linked-file-arrival.spec.ts",
+      "title": "a held arrival cannot transfer to a changed revoke and reopen for its replacement",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "459a5f7316afb3b08c00-3107db2c1fca90dd3253",
+      "file": "linked-file-arrival.spec.ts",
+      "title": "a displayed arrival closes on reader replacement and stays closed when same-ID data returns",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "459a5f7316afb3b08c00-106f4db3afa2347e6f2d",
+      "file": "linked-file-arrival.spec.ts",
+      "title": "failed refresh consumes the arrival while preserving the canonical error and manual retry",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "459a5f7316afb3b08c00-767f99a274ed09eb1e28",
+      "file": "linked-file-arrival.spec.ts",
+      "title": "an open arrival follows current native readiness without replay or automatic extraction",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "86b0d5c245559dd96541-014ff9aba21090965d44",
+      "file": "mail-local-draft.spec.ts",
+      "title": "saved signature display preserves append=true without copying HTML into the body",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "86b0d5c245559dd96541-4c2f584ee95ca8361c33",
+      "file": "mail-local-draft.spec.ts",
+      "title": "saved signature display preserves append=false without copying HTML into the body",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "86b0d5c245559dd96541-140a1a3ee1e053fd8883",
+      "file": "mail-local-draft.spec.ts",
+      "title": "saved signature preview blocks active markup and automatic remote content",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "86b0d5c245559dd96541-9900fe42991b6ac4ed43",
+      "file": "mail-local-draft.spec.ts",
+      "title": "empty signature null has no misleading preview",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "86b0d5c245559dd96541-598ca1c2766f316da973",
+      "file": "mail-local-draft.spec.ts",
+      "title": "empty signature  has no misleading preview",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "86b0d5c245559dd96541-894d668f2298936223a6",
+      "file": "mail-local-draft.spec.ts",
+      "title": "signature read failure remains distinct from empty and can be retried deliberately",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "86b0d5c245559dd96541-5ab204ddd355c2c35705",
+      "file": "mail-local-draft.spec.ts",
+      "title": "local Undo restores exactly the body preceding the latest verified rewrite with no extra requests",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "86b0d5c245559dd96541-d96a7707937c682dfedd",
+      "file": "mail-local-draft.spec.ts",
+      "title": "manual edits retire Undo and the next rewrite snapshots the new local draft",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "86b0d5c245559dd96541-833dd723fbc484840301",
+      "file": "mail-local-draft.spec.ts",
+      "title": "repeated rewrites retain one latest snapshot and Undo is unavailable while another rewrite awaits",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "86b0d5c245559dd96541-81277f00b7c0a592d199",
+      "file": "mail-local-draft.spec.ts",
+      "title": "unverified subsequent rewrite retains the prior valid Undo",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "86b0d5c245559dd96541-5a7654c2bbf7c426444a",
+      "file": "mail-local-draft.spec.ts",
+      "title": "failed subsequent rewrite retains the prior valid Undo",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "86b0d5c245559dd96541-27ab0555c598f84bc77c",
+      "file": "mail-local-draft.spec.ts",
+      "title": "recipients replacement retires an earlier Undo snapshot",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "86b0d5c245559dd96541-0e5f401c3059e33e9b78",
+      "file": "mail-local-draft.spec.ts",
+      "title": "client replacement retires an earlier Undo snapshot",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "86b0d5c245559dd96541-c8d85f2623700e6ffa11",
+      "file": "mail-local-draft.spec.ts",
+      "title": "actor replacement retires an earlier Undo snapshot",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "86b0d5c245559dd96541-1299e52de8242d20910a",
+      "file": "mail-local-draft.spec.ts",
+      "title": "invalidated replacement retires an earlier Undo snapshot",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "86b0d5c245559dd96541-6e2cd7eef3f91b5285f9",
+      "file": "mail-local-draft.spec.ts",
+      "title": "close replacement retires an earlier Undo snapshot",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "86b0d5c245559dd96541-8ef6584a12c467323d2c",
+      "file": "mail-local-draft.spec.ts",
+      "title": "append selection is local to the message and controls review inclusion",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "86b0d5c245559dd96541-40333d2aa0e54c681e86",
+      "file": "mail-local-draft.spec.ts",
+      "title": "saved signature and Undo remain usable in desktop and mobile dark review",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "86b0d5c245559dd96541-8a2ccac4af9571b6a663",
+      "file": "mail-local-draft.spec.ts",
+      "title": "cached signature 403 refetch cannot supply a current review preview",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "86b0d5c245559dd96541-0db8926b9ff8d7aefd82",
+      "file": "mail-local-draft.spec.ts",
+      "title": "cached signature 503 refetch cannot supply a current review preview",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "86b0d5c245559dd96541-0bd221a9df311f57b1c8",
+      "file": "mail-local-draft.spec.ts",
+      "title": "cached signature loading refetch cannot supply a current review preview",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "3638386017fbb4f687d8-1fc6a1129fcc2057d36b",
+      "file": "mail-rewrite.spec.ts",
+      "title": "a current verified rewrite preserves the native payload and plain-text review",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "3638386017fbb4f687d8-fccea5f12bc7ea9945d8",
+      "file": "mail-rewrite.spec.ts",
+      "title": "an unverified rewrite preserves the original draft",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "3638386017fbb4f687d8-b7ece4f92f7042f06e15",
+      "file": "mail-rewrite.spec.ts",
+      "title": "editing a pending draft discards the old result without clearing a newer attempt",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "3638386017fbb4f687d8-8967154d9f102a5225f7",
+      "file": "mail-rewrite.spec.ts",
+      "title": "editing back to the original text still invalidates its earlier rewrite",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "3638386017fbb4f687d8-27a589eeb940be178b12",
+      "file": "mail-rewrite.spec.ts",
+      "title": "closing and reopening the composer cannot accept an earlier response",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "3638386017fbb4f687d8-25073c04b0f0e1bb9cd5",
+      "file": "mail-rewrite.spec.ts",
+      "title": "changing and restoring recipients discards the old source without leaving pending status",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "3638386017fbb4f687d8-a64350fa07f7037e8f08",
+      "file": "mail-rewrite.spec.ts",
+      "title": "invalidated mailbox identity discards an in-flight rewrite",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "3638386017fbb4f687d8-976bc825b764be72bc39",
+      "file": "mail-rewrite.spec.ts",
+      "title": "actor mailbox identity discards an in-flight rewrite",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "3638386017fbb4f687d8-bbf793f4b362ca50c958",
+      "file": "mail-rewrite.spec.ts",
+      "title": "invalidated idle authority refuses rewrite before dispatch",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "23d8565415e63e119d0c-0a8874ba915f8cc5e03d",
+      "file": "mail-rich-compose.spec.ts",
+      "title": "rich Bold survives review and explicit send without signature duplication",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "23d8565415e63e119d0c-e28fb60e7423a222db7b",
+      "file": "mail-rich-compose.spec.ts",
+      "title": "rich Italic survives review and explicit send without signature duplication",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "23d8565415e63e119d0c-0492f228b2a986a48398",
+      "file": "mail-rich-compose.spec.ts",
+      "title": "rich Underline survives review and explicit send without signature duplication",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "23d8565415e63e119d0c-7b1f9234066d7bb76edd",
+      "file": "mail-rich-compose.spec.ts",
+      "title": "rich List survives review and explicit send without signature duplication",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "23d8565415e63e119d0c-40000f39807ad22e74cc",
+      "file": "mail-rich-compose.spec.ts",
+      "title": "verified rewrite uses text and Undo restores the complete formatted draft",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "23d8565415e63e119d0c-899fe4406e10b3ad2737",
+      "file": "mail-rich-compose.spec.ts",
+      "title": "formatting-only edit revokes a held rewrite without replacing current formatting",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "23d8565415e63e119d0c-a93f72529d8e27195b45",
+      "file": "mail-rich-compose.spec.ts",
+      "title": "unverified rewrite preserves rich content",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "23d8565415e63e119d0c-dff035b8c4ace9388e6f",
+      "file": "mail-rich-compose.spec.ts",
+      "title": "unavailable rewrite preserves rich content",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "23d8565415e63e119d0c-4ab6096ce2170b6565d1",
+      "file": "mail-rich-compose.spec.ts",
+      "title": "paste keeps supported formatting while removing active markup and remote content",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "23d8565415e63e119d0c-498f728d091b7b16c05e",
+      "file": "mail-rich-compose.spec.ts",
+      "title": "empty and oversized rich bodies cannot be reviewed, and typed text is retained",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "23d8565415e63e119d0c-89fa0e1fae3f9fed8d24",
+      "file": "mail-rich-compose.spec.ts",
+      "title": "keyboard formatting and mobile toolbar remain reachable",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "23d8565415e63e119d0c-ba2ee0398b8a36692d52",
+      "file": "mail-rich-compose.spec.ts",
+      "title": "identity invalidation revokes rich Undo without provider effects",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "23d8565415e63e119d0c-ea76992044eae2717db1",
+      "file": "mail-rich-compose.spec.ts",
+      "title": "source replacement retires editor history and rich Meri Undo",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "23d8565415e63e119d0c-e582470ca4ab9364df37",
+      "file": "mail-rich-compose.spec.ts",
+      "title": "toolbar Attach file opens the existing attachment picker with no extra request",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "23d8565415e63e119d0c-145403d03e2f2a52e412",
+      "file": "mail-rich-compose.spec.ts",
+      "title": "ordinary formatting and typing keep native Undo after a verified rewrite",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "23d8565415e63e119d0c-ef719a61dfe29119d6eb",
+      "file": "mail-rich-compose.spec.ts",
+      "title": "ordinary formatting and typing keep native Undo after a verified rewrite with delayed selection observation",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "23d8565415e63e119d0c-ed30e2dd1fe8136c474e",
+      "file": "mail-rich-compose.spec.ts",
+      "title": "intentional all selection still replaces text and supports Undo",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "23d8565415e63e119d0c-91fa89d8b3a60063d3bc",
+      "file": "mail-rich-compose.spec.ts",
+      "title": "intentional partial selection still replaces text and supports Undo",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "d0c3eeca5ea83e774d9e-f936e604f86cc221e12d",
+      "file": "manual-debrief.spec.ts",
+      "title": "manual debrief reviews written context, generates only on submit and saves separately",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "d0c3eeca5ea83e774d9e-39c738057734a30b5a98",
+      "file": "manual-debrief.spec.ts",
+      "title": "manual generation failure preserves source without automatic generation or save",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "d0c3eeca5ea83e774d9e-e0185c0d95c1d181cdfe",
+      "file": "manual-debrief.spec.ts",
+      "title": "leaving the meeting during manual generation refuses a late draft",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "d0c3eeca5ea83e774d9e-a176901ad980f70d6239",
+      "file": "manual-debrief.spec.ts",
+      "title": "manual source respects runtime denial and mobile dark reference geometry",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "5b11feeca80e7f5552de-48b1b9873e7034833875",
+      "file": "meeting-documents-calendar.spec.ts",
+      "title": "Calendar preparation toolbar opens current saved PDF preview",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "5b11feeca80e7f5552de-36872ad9a9c3abb14d64",
+      "file": "meeting-documents-calendar.spec.ts",
+      "title": "Calendar explicit PDF preparation opens existing composer with unverified seed then canonical availability",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "5b11feeca80e7f5552de-bb6bc7f011db533b71ea",
+      "file": "meeting-documents-calendar.spec.ts",
+      "title": "Calendar saved debrief Export PDF opens current persisted body",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "5b11feeca80e7f5552de-6aef6abbd0f5d4ac922c",
+      "file": "meeting-documents-calendar.spec.ts",
+      "title": "Calendar reopens the already prepared PDF after composer cancellation without another POST",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "dea63ebc0f4be7772e72-d84fced9b53d0dd96632",
+      "file": "meeting-documents.spec.ts",
+      "title": "preparation preview prints persisted rich Unicode content and safe source links",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "dea63ebc0f4be7772e72-4890ca4e75f4590a2fad",
+      "file": "meeting-documents.spec.ts",
+      "title": "popup refusal keeps preview and saved content available",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "dea63ebc0f4be7772e72-4d80f0b33977afc16e57",
+      "file": "meeting-documents.spec.ts",
+      "title": "debrief preview preserves saved body and light reference geometry",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "dea63ebc0f4be7772e72-6de48e42761ad34d4e66",
+      "file": "meeting-documents.spec.ts",
+      "title": "mobile dark preparation fits viewport and loads Geist",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "dea63ebc0f4be7772e72-a2d98cfc69f4d5cf00fb",
+      "file": "meeting-documents.spec.ts",
+      "title": "restricted debrief never renders or prints private content",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "dea63ebc0f4be7772e72-df1232eaa707045ec595",
+      "file": "meeting-documents.spec.ts",
+      "title": "governed preparation refuses ordinary export",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "dea63ebc0f4be7772e72-689c602a52eae01a7c57",
+      "file": "meeting-documents.spec.ts",
+      "title": "server-incompatible rich preparation offers truthful fidelity refusal and zero writes",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "dea63ebc0f4be7772e72-4b8dcc454f05e7895c00",
+      "file": "meeting-documents.spec.ts",
+      "title": "explicit prepare stores one verified receipt without sending",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "dea63ebc0f4be7772e72-400ab4d2695a3371bd34",
+      "file": "meeting-documents.spec.ts",
+      "title": "unknown completion freezes original attempt without retry",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "dea63ebc0f4be7772e72-eebc29844600a990a69f",
+      "file": "meeting-documents.spec.ts",
+      "title": "invalidated identity/capability cached success refuses POST",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "dea63ebc0f4be7772e72-5668420fa00b1ab781a0",
+      "file": "meeting-documents.spec.ts",
+      "title": "unmount during preflight refuses delayed storage dispatch",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "dea63ebc0f4be7772e72-f2fb6d71ccc99f75ec13",
+      "file": "meeting-documents.spec.ts",
+      "title": "print serializer strips executable attributes/resources and preserves Unicode",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "dea63ebc0f4be7772e72-94db6f2f9f0ced0842dd",
+      "file": "meeting-documents.spec.ts",
+      "title": "runtime-disabled environment refuses attachment creation",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "dea63ebc0f4be7772e72-60cd06ed8cf1da54a967",
+      "file": "meeting-documents.spec.ts",
+      "title": "invalidated identity success refuses local print and attachment dispatch",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "dea63ebc0f4be7772e72-0caa7983fbaa119543e2",
+      "file": "meeting-documents.spec.ts",
+      "title": "changed initiating actor during preflight refuses POST and hides old content",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "dea63ebc0f4be7772e72-ee10e600c8635cc96dd1",
+      "file": "meeting-documents.spec.ts",
+      "title": "wrong client response refuses content and export",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "dea63ebc0f4be7772e72-f40bdd2809f24d8f2b81",
+      "file": "meeting-documents.spec.ts",
+      "title": "canonical saved access refusal retains explicit retry without exporting stale content",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "dea63ebc0f4be7772e72-d451cd3b8bebca8e5932",
+      "file": "meeting-documents.spec.ts",
+      "title": "keyboard closes preview and mobile close stays in its heading row",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "dea63ebc0f4be7772e72-16afbac66e2e6ccbeb5d",
+      "file": "meeting-documents.spec.ts",
+      "title": "actor-scoped saved cache never reveals previous actor content while new read waits",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "dea63ebc0f4be7772e72-97e950593a11486cd8a4",
+      "file": "meeting-documents.spec.ts",
+      "title": "controlled close/reopen preserves unknown PDF attempt without a second POST",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "dea63ebc0f4be7772e72-0a145ecf9a171d9802d3",
+      "file": "meeting-documents.spec.ts",
+      "title": "controlled close during preflight revokes delayed POST even after reopen",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "id": "dea63ebc0f4be7772e72-dd1135015f6fa52c7eb7",
+      "file": "meeting-documents.spec.ts",
+      "title": "controlled close after dispatch withholds receipt and preserves uncertainty on reopen",
+      "timeout": 30000,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "errors": []
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "startTime": "2026-10-13T10:02:40.115Z",
+    "duration": 660862.2609999999,
+    "expected": 298,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "sourceReceipt": {
+    "name": "portfolio-shard-2",
+    "command": [
+      "env",
+      "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+      "PLAYWRIGHT_JSON_OUTPUT_FILE=/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-2-results.json",
+      "TMPDIR=/workspace/capiro-unified-runtime-tmp-20261013",
+      "npm",
+      "run",
+      "test:browser",
+      "--",
+      "--workers=2",
+      "--shard=2/4",
+      "--output=/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-2-artifacts"
+    ],
+    "startedUTC": "2026-10-13T10:02:39.250349+00:00",
+    "endedUTC": "2026-10-13T10:13:41.032702+00:00",
+    "durationSeconds": 661.7823967959994,
+    "exitCode": 0,
+    "sourceBefore": {
+      "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+      "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+      "sourceDiff": ""
+    },
+    "sourceAfter": {
+      "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+      "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+      "sourceDiff": ""
+    },
+    "sourceChanged": false
+  },
+  "sameDiscoveryIds": true,
+  "disjointFromShard1": true,
+  "completedShardsUniquePassingCases": 583,
+  "timeoutDistribution": {
+    "30000": 295,
+    "90000": 3
+  }
+}

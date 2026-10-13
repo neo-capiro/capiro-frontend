@@ -1,0 +1,15 @@
+{
+  "utc": "2026-10-13T10:34:46.242243+00:00",
+  "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+  "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+  "status": "",
+  "lockSha256": "6acaf74b4fb676b59731245e04a6c2d54865fb71727b6f6d5f99b4cfa5e1fed7",
+  "completion": {
+    "source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "completedUTC": "2026-10-13T10:34:07.209254+00:00",
+    "scope": "Offline combined gates; not native, full design, AT, musl image or deployment acceptance.",
+    "harnessRecovery": "Original served-newsletter-assets failed before server/HTTP due omitted sparse metadata; exact committed input restored and separate actual asset run retained."
+  },
+  "scope": "Offline gates complete; no native activation, native acceptance, build image, deployment or337rowacceptance."
+}

@@ -1,0 +1,63 @@
+{
+  "utc": "2026-10-13T10:22:20.644815+00:00",
+  "root": "/workspace/capiro-unified-elements-files-corrected-20261013",
+  "sameUserProcessesInspected": 41,
+  "matches": [
+    {
+      "pid": 1465695,
+      "comm": "codex",
+      "surfaces": [
+        "commandline"
+      ]
+    },
+    {
+      "pid": 1465696,
+      "comm": "bash",
+      "surfaces": [
+        "commandline"
+      ]
+    }
+  ],
+  "permissionDeniedPids": [
+    1,
+    2,
+    3,
+    479,
+    1418357,
+    1418359,
+    1418360,
+    1418361,
+    1431289,
+    1456482,
+    1456508,
+    1456520,
+    1456521,
+    1456533,
+    1456534,
+    1456546,
+    1456547,
+    1456566,
+    1456567,
+    1456586,
+    1456604,
+    1456618,
+    1456619,
+    1456643,
+    1456645,
+    1456646,
+    1456651,
+    1456692,
+    1456696,
+    1456703,
+    1456737,
+    1465620,
+    1465629,
+    1465631,
+    1465657,
+    1465666,
+    1465668,
+    1465691,
+    1465694
+  ],
+  "scope": "Read-only same-user commandline/maps/cwd/exe/fd path check; unrelated live Portfolio consumers are neither stopped nor altered."
+}

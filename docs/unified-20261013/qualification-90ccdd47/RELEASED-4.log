@@ -1,0 +1,22 @@
+{
+  "utc": "2026-10-13T10:35:31.935685+00:00",
+  "status": "RELEASED_INPUT_WAVE_VERIFIED_NOT_FINAL_PUBLICATION_SEAL",
+  "records": 129,
+  "originalBytes": 8395336,
+  "archive": {
+    "path": "released-4-objects.zip",
+    "bytes": 7155100,
+    "sha256": "217bc586a7b1c93f58eee65e2cc4f521aa1d4ceaaf8013f835ad28591d91a4cb",
+    "uniqueMembers": 126
+  },
+  "directFiles": 21,
+  "ownerManifests": [
+    {
+      "path": "/workspace/capiro-final-storage-files-elements-20261013/MANIFEST.json",
+      "sha256": "f4ee7a62323e3ed084d13f50dc2ed3a922cf3bed22ace7d6fa7a66504018187a",
+      "membersVerified": 15
+    }
+  ],
+  "allOriginalBytesReopenedEqual": true,
+  "scope": "Root released all completed90cc runtime outputs after session39111 exited0. Final independent gate audit remains pending; no final publication seal until its inclusion. CONTINUATION.md is historical active context superseded by ALL-GATES-COMPLETE."
+}

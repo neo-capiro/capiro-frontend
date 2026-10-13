@@ -1,0 +1,6 @@
+{
+  "classification": "Reviewer marker probe was overbroad; literal Clerk SDK environment name is present, no credential value was asserted or observed. Meri-only absence assertion remains strict.",
+  "scriptSha256": "1f6b2ef3368e08e1613ec82b405d571cf4af077f0b2f91d0bc0a7e3a8001a3e1",
+  "result": "AssertionError on CLERK_SECRET_KEY literal in static/chunks/32x_5wd72cjw1.js",
+  "note": "Not an application test or runtime gate; source and emitted artifacts unchanged."
+}

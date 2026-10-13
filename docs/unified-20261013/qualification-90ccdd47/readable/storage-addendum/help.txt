@@ -1,0 +1,13 @@
+usage: recover-historical-storage.py [-h] {publication,elements83}
+
+Verify and retire only the assigned inactive publication/Elements copies.
+
+positional arguments:
+  {publication,elements83}
+
+options:
+  -h, --help            show this help message and exit
+
+Exit0: completed; exit1: validation/capacity/I/O failure with no unverified
+original retirement; exit2: invalid CLI arguments. No current runtime,
+dependencies, source, Git or gate mutations.

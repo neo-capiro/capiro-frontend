@@ -1,0 +1,370 @@
+{
+  "observedUTC": "2026-10-13T09:49:17.592839+00:00",
+  "finalAcceptance": false,
+  "canonical": {
+    "root": {
+      "tests": 97,
+      "suites": 0,
+      "pass": 97,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "transport": {
+      "tests": 21,
+      "suites": 0,
+      "pass": 21,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "newsletter": {
+      "tests": 385,
+      "suites": 0,
+      "pass": 385,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "newsletterDeclarations": 8,
+    "web": {
+      "files": 120,
+      "passed": 1826
+    },
+    "capiro": {
+      "files": 29,
+      "passed": 288
+    },
+    "architecture": {
+      "total": 479,
+      "reviewed": 456,
+      "inheritedUnreviewed": 23,
+      "blocking": 0
+    },
+    "architectureErrors": [],
+    "eslint": {
+      "errors": 0,
+      "warnings": 76
+    },
+    "format": "passed"
+  },
+  "elementsPassed": 15,
+  "publicBrowser": {
+    "rendererCharacterizations": 116,
+    "exactFrozenGoldenMatch": true,
+    "receivingCases": 130,
+    "uniqueReceivingNames": 130,
+    "failed": [],
+    "pageErrors": [],
+    "requests": []
+  },
+  "production": {
+    "successfulBuildLogCount": 1,
+    "runtime": {
+      "scope": "Actual Next standalone server without credentials, fixture identity or service interception. Live sign-in not exercised.",
+      "browserVersion": "154.0.8037.57",
+      "results": [
+        {
+          "path": "/healthz",
+          "status": 200,
+          "headers": "passed"
+        },
+        {
+          "path": "/portfolio",
+          "status": 200,
+          "headers": "passed"
+        },
+        {
+          "path": "/calendar",
+          "status": 200,
+          "headers": "passed"
+        },
+        {
+          "path": "/meri/files",
+          "status": 200,
+          "headers": "passed"
+        },
+        {
+          "path": "/sign-in",
+          "status": 200,
+          "headers": "passed"
+        },
+        {
+          "path": "/api/backend/core/clients",
+          "status": 503,
+          "headers": "passed"
+        },
+        {
+          "path": "/",
+          "status": 200,
+          "headers": "passed"
+        },
+        {
+          "path": "/modules",
+          "status": 200,
+          "headers": "passed"
+        },
+        {
+          "path": "/settings",
+          "status": 307,
+          "headers": "passed"
+        },
+        {
+          "path": "/settings?clientId=10000000-0000-4000-8000-000000000001",
+          "status": 307,
+          "headers": "passed"
+        },
+        {
+          "path": "/settings/personal",
+          "status": 200,
+          "headers": "passed"
+        },
+        {
+          "path": "/api/capiro/me.read",
+          "status": 503,
+          "headers": "passed"
+        },
+        {
+          "path": "/api/documents/create",
+          "status": 503,
+          "configured": false
+        },
+        {
+          "path": "/api/documents/revise",
+          "status": 503,
+          "configured": false
+        },
+        {
+          "path": "/api/documents/inspect",
+          "status": 503,
+          "configured": false
+        },
+        {
+          "path": "/api/documents/download",
+          "status": 503,
+          "configured": false
+        },
+        {
+          "colorScheme": "light",
+          "viewport": {
+            "width": 1440,
+            "height": 1040
+          },
+          "portfolio": {
+            "background": "rgb(245, 245, 244)",
+            "color": "rgb(10, 10, 10)",
+            "fontSize": "14px",
+            "markerCount": 1,
+            "fits": true,
+            "sameDocument": true
+          },
+          "wordmark": {
+            "width": 77,
+            "height": 26,
+            "filter": "none"
+          },
+          "stylesRestoredOnReturn": true,
+          "clientNavigation": true,
+          "headerNavigation": true
+        },
+        {
+          "documentFiles": "actual unconfigured host",
+          "viewport": {
+            "width": 1440,
+            "height": 1040
+          },
+          "colorScheme": "light",
+          "navigation": "Meri/Files/back/forward/Conversations",
+          "sameDocument": true,
+          "nativeOperations": "unavailable"
+        },
+        {
+          "colorScheme": "light",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "portfolio": {
+            "background": "rgb(245, 245, 244)",
+            "color": "rgb(10, 10, 10)",
+            "fontSize": "14px",
+            "markerCount": 1,
+            "fits": true,
+            "sameDocument": true
+          },
+          "wordmark": {
+            "width": 77,
+            "height": 26,
+            "filter": "none"
+          },
+          "stylesRestoredOnReturn": true,
+          "clientNavigation": true,
+          "headerNavigation": true
+        },
+        {
+          "documentFiles": "actual unconfigured host",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "colorScheme": "light",
+          "navigation": "Meri/Files/back/forward/Conversations",
+          "sameDocument": true,
+          "nativeOperations": "unavailable"
+        },
+        {
+          "crossMode": "Meri/Portfolio/Modules/Settings",
+          "history": "back/forward",
+          "sameDocument": true
+        },
+        {
+          "colorScheme": "dark",
+          "viewport": {
+            "width": 1440,
+            "height": 1040
+          },
+          "portfolio": {
+            "background": "rgb(18, 18, 18)",
+            "color": "rgb(250, 250, 249)",
+            "fontSize": "14px",
+            "markerCount": 1,
+            "fits": true,
+            "sameDocument": true
+          },
+          "wordmark": {
+            "width": 77,
+            "height": 26,
+            "filter": "invert(1)"
+          },
+          "stylesRestoredOnReturn": true,
+          "clientNavigation": true,
+          "headerNavigation": true
+        },
+        {
+          "documentFiles": "actual unconfigured host",
+          "viewport": {
+            "width": 1440,
+            "height": 1040
+          },
+          "colorScheme": "dark",
+          "navigation": "Meri/Files/back/forward/Conversations",
+          "sameDocument": true,
+          "nativeOperations": "unavailable"
+        },
+        {
+          "colorScheme": "dark",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "portfolio": {
+            "background": "rgb(18, 18, 18)",
+            "color": "rgb(250, 250, 249)",
+            "fontSize": "14px",
+            "markerCount": 1,
+            "fits": true,
+            "sameDocument": true
+          },
+          "wordmark": {
+            "width": 77,
+            "height": 26,
+            "filter": "invert(1)"
+          },
+          "stylesRestoredOnReturn": true,
+          "clientNavigation": true,
+          "headerNavigation": true
+        },
+        {
+          "documentFiles": "actual unconfigured host",
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "colorScheme": "dark",
+          "navigation": "Meri/Files/back/forward/Conversations",
+          "sameDocument": true,
+          "nativeOperations": "unavailable"
+        },
+        {
+          "crossMode": "Meri/Portfolio/Modules/Settings",
+          "history": "back/forward",
+          "sameDocument": true
+        }
+      ],
+      "pageErrors": []
+    },
+    "preview": {
+      "defaultProduct": "portfolio",
+      "rootStatus": 200,
+      "location": "/",
+      "followedSetup": true
+    }
+  },
+  "interruption": {
+    "gate": "served-newsletter-assets",
+    "exit": 1,
+    "classification": "Missing local canonical expectation file before standalone server launch; materialization/harness failure, no asset HTTP assertion executed",
+    "failurePreserved": true,
+    "laterGates": "not started at observation"
+  },
+  "bindings": [
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/check.log",
+      "bytes": 954267,
+      "sha256": "0b8ede961c555ddb8ff3286a41551f4c1d814ba09bd7e40fdcb5a9188c2443db"
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/elements.log",
+      "bytes": 3352,
+      "sha256": "0af6290b70d708e5f856817410aa500316335e970bdc9af6e53a26ae00ee79b6"
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/build.log",
+      "bytes": 2610,
+      "sha256": "74f7aa82e9247ccd2b935d7ded9650d4dd5f7ec6a780b22b7a16be443bba5d73"
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/production/production-smoke.json",
+      "bytes": 5298,
+      "sha256": "da8f4592ea41108c6bfb3341b1e51f7a79f4eed10d055b9270f6a09ea9c939da"
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/production/preview-root-smoke.json",
+      "bytes": 101,
+      "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e"
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/public-newsletter-browser/browser-results.json",
+      "bytes": 1961,
+      "sha256": "5b2155c6ff3a8d2a3788f609be2141f148b7901e6dec60d886e00c37b9503f46"
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/public-newsletter-browser/browser-renderer-results.json",
+      "bytes": 54404,
+      "sha256": "57fbce61b8c59e915c4aaaa3f976bf1ed2dc41bbfff17215feca1306bbb5f103"
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/public-newsletter-browser/browser-receiving-results.json",
+      "bytes": 13043,
+      "sha256": "5f7b54dddb62cd00923717d5a904fe5c20b379c921600bae917d4b9ad2890263"
+    },
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/packages/qualification-newsletter/fixtures/original-C-renderer-golden.json",
+      "bytes": 54405,
+      "sha256": "b56b5d3526230e9011aaa82f258c7327816a60a78ddc020714c81e9c7d98b32f"
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/served-newsletter-assets.log",
+      "bytes": 682,
+      "sha256": "595d42bdf734b3abcd4cb0f1b91c568c5c93adb517a736ffa5ff32e030e1ca58"
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/served-newsletter-assets-exit.json",
+      "bytes": 783,
+      "sha256": "303227e2266a72666e5237d17d1b06cc29b60dbdd76b11878e93e8e7e66bdb81"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "name": "build",
+  "command": [
+    "env",
+    "NEXT_TELEMETRY_DISABLED=1",
+    "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=",
+    "CLERK_SECRET_KEY=",
+    "TRACKER_BACKEND=",
+    "CORE_API_BASE_URL=",
+    "STRATEGY_API_BASE_URL=",
+    "WORKSPACE_API_BASE_URL=",
+    "INTELLIGENCE_API_BASE_URL=",
+    "ONBOARD_API_BASE_URL=",
+    "MERI_API_BASE_URL=",
+    "MERI_ACTION_WORKFLOW_ENABLED=",
+    "MERI_DOCUMENT_WORKFLOW_ENABLED=",
+    "MERI_DOCUMENT_OPERATION=",
+    "npm",
+    "run",
+    "build"
+  ],
+  "startedUTC": "2026-10-13T09:45:03.963693+00:00",
+  "endedUTC": "2026-10-13T09:46:01.807423+00:00",
+  "durationSeconds": 57.84376217301178,
+  "exitCode": 0,
+  "sourceBefore": {
+    "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+    "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+    "sourceDiff": ""
+  },
+  "sourceAfter": {
+    "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+    "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+    "sourceDiff": ""
+  },
+  "sourceChanged": false
+}

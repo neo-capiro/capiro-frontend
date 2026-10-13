@@ -1,0 +1,33 @@
+{
+  "name": "portfolio-shard-4",
+  "command": [
+    "env",
+    "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+    "PLAYWRIGHT_JSON_OUTPUT_FILE=/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-4-results.json",
+    "TMPDIR=/workspace/capiro-unified-runtime-tmp-20261013",
+    "npm",
+    "run",
+    "test:browser",
+    "--",
+    "--workers=2",
+    "--shard=4/4",
+    "--output=/workspace/capiro-unified-runtime-tmp-20261013/files-corrected-portfolio-shard-4-artifacts"
+  ],
+  "startedUTC": "2026-10-13T10:24:41.871428+00:00",
+  "endedUTC": "2026-10-13T10:34:07.188948+00:00",
+  "durationSeconds": 565.3175540990051,
+  "exitCode": 0,
+  "sourceBefore": {
+    "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+    "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+    "sourceDiff": ""
+  },
+  "sourceAfter": {
+    "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+    "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+    "sourceDiff": ""
+  },
+  "sourceChanged": false
+}

@@ -1,0 +1,69 @@
+{
+  "observedUTC": "2026-10-13T09:50:10.137811+00:00",
+  "status": "accepted bounded harness recovery; final gates still pending",
+  "originalFailurePreserved": true,
+  "source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "restoredInputEqualsExactGitBlob": true,
+  "input": {
+    "utc": "2026-10-13T09:48:12.446566+00:00",
+    "source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "file": "docs/newsletter-port-20261012/asset-preservation/ASSET-BYTE-VERIFICATION.json",
+    "bytes": 56360,
+    "sha256": "169e5a0294676f031cdea71634e9481f64105286610d2f682da91c231af79324",
+    "gitBlob": "de1385b1f078f4307b381d0e6c925c15d6653eee",
+    "scope": "Hydrate exact already-committed reference manifest into sparse worktree. No source, assertion, expected bytes, runtime build or native configuration change. Original served-newsletter-assets preflight failed before server/HTTP and remains failed."
+  },
+  "resumedGateCommandsExact": true,
+  "originalQualifierUnchanged": true,
+  "assets": {
+    "count": 179,
+    "uniquePaths": 179,
+    "bytes": 486014,
+    "allStatus200AndExpectedSizeHash": true,
+    "platform": "linux",
+    "architecture": "x64",
+    "glibc": "2.41"
+  },
+  "bindings": [
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/SPARSE-INPUT-RESTORATION.json",
+      "bytes": 611,
+      "sha256": "82646a440f1e4e4499eae8300b0a1363292f673c0a742844a052bb07184b9d14"
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/continue-after-sparse-input.py",
+      "bytes": 1869,
+      "sha256": "35a0c5dbb9002fdf5ba4e4eaa8f67c4ef269815c8ce7d2fec7771f1db525fc5b"
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/served-newsletter-assets-exit.json",
+      "bytes": 783,
+      "sha256": "303227e2266a72666e5237d17d1b06cc29b60dbdd76b11878e93e8e7e66bdb81"
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/served-newsletter-assets.log",
+      "bytes": 682,
+      "sha256": "595d42bdf734b3abcd4cb0f1b91c568c5c93adb517a736ffa5ff32e030e1ca58"
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/served-newsletter-assets-restored-input-exit.json",
+      "bytes": 798,
+      "sha256": "ee291e137237c4d6d14ab568b9388e5a4d646da383e14af6355111121e4295c2"
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/served-newsletter-assets-restored-input.log",
+      "bytes": 91,
+      "sha256": "2777bbb9b07ca4e82699254218e97e91a35cfddec924392fca90c6d2bc779bb7"
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/actual-served-assets/asset-results.json",
+      "bytes": 48855,
+      "sha256": "7e82efee1a69f5ddfa6ff76cf5f899e082ab554e2538a4f6549389ad3d61e955"
+    },
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/docs/newsletter-port-20261012/asset-preservation/ASSET-BYTE-VERIFICATION.json",
+      "bytes": 56360,
+      "sha256": "169e5a0294676f031cdea71634e9481f64105286610d2f682da91c231af79324"
+    }
+  ]
+}

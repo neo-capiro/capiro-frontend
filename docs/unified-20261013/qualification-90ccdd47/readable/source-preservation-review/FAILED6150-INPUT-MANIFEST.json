@@ -1,0 +1,85 @@
+{
+  "scope": "Preserved failed checkpoint; files are read as input and not rewritten.",
+  "records": [
+    {
+      "path": "/tmp/capiro-unified-6150e49c-preservation-review-20261013/ALL-807-ORIGINAL-BINDINGS.json",
+      "bytes": 270961,
+      "sha256": "cd452e5afec480dd3907278443b27b3a1df1ed95baaa6d1e7b1ff1f13facf1e7"
+    },
+    {
+      "path": "/tmp/capiro-unified-6150e49c-preservation-review-20261013/BASE83-TEST-PRESERVATION.json",
+      "bytes": 123280,
+      "sha256": "af2327f35c4b4e3c57e74461b7f1c5a062d721acdc1551ed05e3c093d215bf26"
+    },
+    {
+      "path": "/tmp/capiro-unified-6150e49c-preservation-review-20261013/CHECKPOINT-RECEIPTS.json",
+      "bytes": 1472,
+      "sha256": "f09557403c642b318ef89a6a68411ba513340429923bcb7e9107fa6043751fe0"
+    },
+    {
+      "path": "/tmp/capiro-unified-6150e49c-preservation-review-20261013/COMMITTED-SOURCE-DELTA.json",
+      "bytes": 13816,
+      "sha256": "7fdfc6f0880dd999c1d497022fc7caaed3cbcf3959efbb7cf774eacdeb8a8107"
+    },
+    {
+      "path": "/tmp/capiro-unified-6150e49c-preservation-review-20261013/FILES-INTEGRATION-SOURCE-EQUALITY.json",
+      "bytes": 168,
+      "sha256": "3ab2dce18d5ff45891ef4b5309f7f1376c4826f1951b704c7315b92d959423c4"
+    },
+    {
+      "path": "/tmp/capiro-unified-6150e49c-preservation-review-20261013/FILES-REVIEWED-SOURCE-COMPARISON.json",
+      "bytes": 22729,
+      "sha256": "9d7c35612f00beb0341d386109917a85d1882c29979582f2e48e49e516f31a91"
+    },
+    {
+      "path": "/tmp/capiro-unified-6150e49c-preservation-review-20261013/PRIOR-EVIDENCE-PRESERVATION.json",
+      "bytes": 97,
+      "sha256": "c3cca22f56016c1e6a78eda63f2668c050df3c31d93040080321cbe272c0ed8c"
+    },
+    {
+      "path": "/tmp/capiro-unified-6150e49c-preservation-review-20261013/PUBLIC-PACKAGE-LOCK.json",
+      "bytes": 5059,
+      "sha256": "e7cfbf823141edf1468be109ef9ce1cd56964cb8d883cfdf05c37b206f1a0adc"
+    },
+    {
+      "path": "/tmp/capiro-unified-6150e49c-preservation-review-20261013/READ-BINDINGS.json",
+      "bytes": 1568,
+      "sha256": "f925fa3e6d8c76f8cdf9bc902ef59cd7e84118038b15b5e89efe4070ce1d454c"
+    },
+    {
+      "path": "/tmp/capiro-unified-6150e49c-preservation-review-20261013/REPORT.md",
+      "bytes": 2870,
+      "sha256": "9c6c32ceeeaec47055988ca010ca9ee9658d90b4de1aa8c70e2303a4f7017b5c"
+    },
+    {
+      "path": "/tmp/capiro-unified-6150e49c-preservation-review-20261013/SOURCE-VERIFICATION.json",
+      "bytes": 1903,
+      "sha256": "d9094913415e5856bacd3794a164fd8e0fdd3d1be96e4e0566fd54daaf334e76"
+    },
+    {
+      "path": "/tmp/capiro-unified-6150e49c-preservation-review-20261013/checkpoint-FROZEN-SOURCE.json",
+      "bytes": 702,
+      "sha256": "b2f0e133129317f7ddcbbbb600774b49b5940633ef6bd2b88ded50c1f85a2f22"
+    },
+    {
+      "path": "/tmp/capiro-unified-6150e49c-preservation-review-20261013/checkpoint-INTEGRATION-RESOLUTION.json",
+      "bytes": 456,
+      "sha256": "e61dd2e55f3a326efb47726cfeb6395e182236863a60b5405d675aabb3df07f7"
+    },
+    {
+      "path": "/tmp/capiro-unified-6150e49c-preservation-review-20261013/checkpoint-check-exit.json",
+      "bytes": 711,
+      "sha256": "b38b935f5cf8bdfa5666d138fd9296a32ee626f09059278ff69750c00553c143"
+    },
+    {
+      "path": "/tmp/capiro-unified-6150e49c-preservation-review-20261013/checkpoint-check.log",
+      "bytes": 4091,
+      "sha256": "eaf8912d460b5ce6455ade04dad31dabfbd4354716d53da9ceea03df186858c2"
+    },
+    {
+      "path": "/tmp/capiro-unified-6150e49c-preservation-review-20261013/checkpoint-clean-install-exit.json",
+      "bytes": 806,
+      "sha256": "fea97ba31349fd3a3a8691b31a0891ae9f3b3882449469b0c133d7974924a9c3"
+    }
+  ]
+}

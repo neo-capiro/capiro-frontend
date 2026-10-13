@@ -1,0 +1,36 @@
+{
+  "preparedUTC": "2026-10-13T10:01:31.649638+00:00",
+  "status": "PREPARED_COMPLETED_EVIDENCE_ONLY_NOT_FINAL_SEAL_OR_ACCEPTANCE",
+  "source": {
+    "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "tree": "2bd75625dfa0b1a8aa894a48a68f34550a6f5037",
+    "applicationTree": "002c31576d9038d4d7f6438db9db3ae9cf00171c"
+  },
+  "originalRecords": 143,
+  "originalBytes": 14148282,
+  "archive": {
+    "path": "completed-objects.zip",
+    "bytes": 6517930,
+    "sha256": "e2b2f5671f55e10ee0301d700ad4dec873a632f189cd0b3ee57a823b9f26faab",
+    "members": 133
+  },
+  "directFiles": 45,
+  "directBytes": 230968,
+  "completedSourceBoundReceipts": 11,
+  "modulesPassed": 324,
+  "modulesRetries": 0,
+  "modulesSkipped": 0,
+  "modulesFlaky": 0,
+  "portfolioDiscoveryOnly": 1139,
+  "portfolioExecution": "PENDING; no active shard/progress/log/result file read or hashed",
+  "assetInitialPreflight": "FAILED exit1 before HTTP; retained",
+  "assetRestoredInput": "179PASS using exact already-committed metadata; separate exit0 retained",
+  "prior6150Check": "FAILED TS2345/exit2 before build; whole immutable21-file attempt retained",
+  "pendingInputs": [
+    "Root release of completed Portfolio shards/progress/results/artifacts",
+    "Final independent gate review",
+    "Static and emitted-boundary review packets"
+  ],
+  "existingDevelopmentPacket": "Not copied; already published separately",
+  "reviewerRuntimeExecution": false
+}

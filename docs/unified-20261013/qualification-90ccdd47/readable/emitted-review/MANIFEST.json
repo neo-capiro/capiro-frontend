@@ -1,0 +1,133 @@
+{
+  "source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "atUTC": "2026-10-13T10:00:09.621371+00:00",
+  "records": [
+    {
+      "path": "ADDITIONAL-READ-BINDINGS.json",
+      "bytes": 974,
+      "sha256": "a84c10c4b2ea8b706d61071afa3a4620e087519191f000162eef7088a25b651f"
+    },
+    {
+      "path": "CLERK-SDK-LITERAL-PROVENANCE.json",
+      "bytes": 1536,
+      "sha256": "f00690263d1734f6931edbd9efafc94b7e48079642cf471f2ef7e94180b4a980"
+    },
+    {
+      "path": "CLIENT-SERVER-BOUNDARY.json",
+      "bytes": 110555,
+      "sha256": "12f72274a6f421882cb56e67ec2631bab3767c965aa4b198f677e0f09db176bc"
+    },
+    {
+      "path": "FINAL-REVIEW-RECEIPT.json",
+      "bytes": 629,
+      "sha256": "115c5bfcd8d9189bcea37d37d9b8f9e2d26dc010dc5892d94133d5dbbdbf0b1f"
+    },
+    {
+      "path": "INITIAL-MARKER-PROBE.json",
+      "bytes": 472,
+      "sha256": "3b0b5ee42dc83dfe46d4b348d89a1e5b5a531d983b996c2e0bfc65a5d3de01f2"
+    },
+    {
+      "path": "MAPPED-FIRST-PARTY-SOURCE.json",
+      "bytes": 12980,
+      "sha256": "36718fc930df741a644bd83f03ac7bdda1a96f7e4e605b2714fc6d643708d32c"
+    },
+    {
+      "path": "PUBLIC-PACKAGE-EMISSION.json",
+      "bytes": 6565,
+      "sha256": "396f5d04a55e088b3132c6544f74712decacebadc887e3ab426abe6585e46946"
+    },
+    {
+      "path": "RAW-RECEIPT-BINDINGS.json",
+      "bytes": 2240,
+      "sha256": "60d7dd9b379d8845c2d119cdeb64f274754ebf4095f88933a1998f84ebbe8099"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 5473,
+      "sha256": "cfe1650f4a90009602c2b58307b57d98c9f00d5f651f1c3ab9a6ebf252ab9d84"
+    },
+    {
+      "path": "SERVED-ASSET-COMPARISON.json",
+      "bytes": 42324,
+      "sha256": "a2885da5cbfcf92505c1ba59b85f239520411c53bb51d8b936538253bfa99cbf"
+    },
+    {
+      "path": "SOURCE-BUILD-BINDING.json",
+      "bytes": 544,
+      "sha256": "d8534744c11993c18d95ebc27d385fcb78cc62e46c4cb87bc67a8332d7819f04"
+    },
+    {
+      "path": "STANDALONE-TRACES.json",
+      "bytes": 98516,
+      "sha256": "b07913b06c3db528f89ceb944121e6f12849352fbd9546151178985be33df44b"
+    },
+    {
+      "path": "audit-initial-marker-probe.py",
+      "bytes": 9103,
+      "sha256": "1f6b2ef3368e08e1613ec82b405d571cf4af077f0b2f91d0bc0a7e3a8001a3e1"
+    },
+    {
+      "path": "audit.py",
+      "bytes": 9361,
+      "sha256": "a3cb7df86454141123489a62d5bf7af9f3558010ed16dfcbe6c178aff39998fc"
+    },
+    {
+      "path": "observed/FROZEN-SOURCE.json",
+      "bytes": 923,
+      "sha256": "81486c52f7ef83d714b7007804ad1998eab54ee592fbeaef4b9d07f07cacdc83"
+    },
+    {
+      "path": "observed/actual-served-assets__asset-results.json",
+      "bytes": 48855,
+      "sha256": "7e82efee1a69f5ddfa6ff76cf5f899e082ab554e2538a4f6549389ad3d61e955"
+    },
+    {
+      "path": "observed/build-exit.json",
+      "bytes": 1129,
+      "sha256": "0eececc6f8f937fc6b76533bf29af5b06a00ddd1696cd4a521544897bce4acbc"
+    },
+    {
+      "path": "observed/check-exit.json",
+      "bytes": 711,
+      "sha256": "8a0a4416f7f3d8a56325bdfb8024a5356a0a131a43dca140b75349cdab67dccf"
+    },
+    {
+      "path": "observed/clean-install-exit.json",
+      "bytes": 816,
+      "sha256": "59ebb4a7bc966cd7b31ecd8831148029a64fdd06e5db5892d393a514d8de3922"
+    },
+    {
+      "path": "observed/production-exit.json",
+      "bytes": 1003,
+      "sha256": "dddb8c989c9a4496aa29bb0dd867930ef989404ececccb27416237fb6c10938e"
+    },
+    {
+      "path": "observed/production__preview-root-smoke.json",
+      "bytes": 101,
+      "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e"
+    },
+    {
+      "path": "observed/production__production-smoke.json",
+      "bytes": 5298,
+      "sha256": "da8f4592ea41108c6bfb3341b1e51f7a79f4eed10d055b9270f6a09ea9c939da"
+    },
+    {
+      "path": "observed/served-newsletter-assets-exit.json",
+      "bytes": 783,
+      "sha256": "303227e2266a72666e5237d17d1b06cc29b60dbdd76b11878e93e8e7e66bdb81"
+    },
+    {
+      "path": "observed/served-newsletter-assets-restored-input-exit.json",
+      "bytes": 798,
+      "sha256": "ee291e137237c4d6d14ab568b9388e5a4d646da383e14af6355111121e4295c2"
+    },
+    {
+      "path": "observed/served-newsletter-assets.log",
+      "bytes": 682,
+      "sha256": "595d42bdf734b3abcd4cb0f1b91c568c5c93adb517a736ffa5ff32e030e1ca58"
+    }
+  ],
+  "recordCount": 25,
+  "bytes": 362371
+}

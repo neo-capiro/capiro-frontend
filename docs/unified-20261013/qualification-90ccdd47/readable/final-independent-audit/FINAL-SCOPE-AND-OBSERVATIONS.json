@@ -1,0 +1,298 @@
+{
+  "source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "actualAdditions": {
+    "httpCount": 23,
+    "statusCounts": {
+      "200": 15,
+      "503": 5,
+      "404": 1,
+      "400": 2
+    },
+    "assets": 6,
+    "assetBytes": 458104,
+    "browser": [
+      {
+        "width": 1440,
+        "meriNavigationAndHistory": true,
+        "onboardPublicSetup": true
+      },
+      {
+        "width": 375,
+        "meriNavigationAndHistory": true,
+        "onboardPublicSetup": true
+      }
+    ],
+    "pageErrors": [],
+    "remoteRequests": [],
+    "localOrigin": "http://localhost:5188",
+    "127Limitation": "Next canonicalizes loopback127 to localhost;127 Origin is intentionally rejected by foreign-origin400 control, not accepted as same origin. Deployed-host behavior unqualified."
+  },
+  "objectiveWarning": {
+    "source": "apps/web/src/features/portfolio/objectives/ObjectiveEditor.tsx",
+    "lines": [
+      67,
+      77
+    ],
+    "provenance": [
+      {
+        "commit": "c330cebbd021eb984b4bf64ae13dbb991ae6b1c0",
+        "blob": "2bce78db1986a82d00e6edb0e5d3270725ef4a40",
+        "sha256": "abdc6feb2d70d478fd93d7f9cfb15b30ec618f6ac9917c73945164eba06d954b",
+        "outreachPresent": false,
+        "workDestinationsPresent": false,
+        "sameKeyExpressionCount": 0
+      },
+      {
+        "commit": "1bf75bb09dab2d0d8b9cc28957d124ed20431050",
+        "blob": "624473f9c708e30089e1ca39e5d2dc4e8b14e3a4",
+        "sha256": "54acf3bdbd4273ff89eab08844872b60ccf557c0e57420c1f14f06270007ec78",
+        "outreachPresent": true,
+        "workDestinationsPresent": false,
+        "sameKeyExpressionCount": 1
+      },
+      {
+        "commit": "2d50edd8f3c5ea232db8e1338566f0667db4b4bd",
+        "blob": "5b6e252d9af58028b4df69f174409274a26aa30a",
+        "sha256": "d4ba72b5593664fe59762c989d96badc9d2f590f122587d766eddee86def0a7c",
+        "outreachPresent": true,
+        "workDestinationsPresent": true,
+        "sameKeyExpressionCount": 2
+      },
+      {
+        "commit": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+        "blob": "5b6e252d9af58028b4df69f174409274a26aa30a",
+        "sha256": "d4ba72b5593664fe59762c989d96badc9d2f590f122587d766eddee86def0a7c",
+        "outreachPresent": true,
+        "workDestinationsPresent": true,
+        "sameKeyExpressionCount": 2
+      },
+      {
+        "commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+        "blob": "5b6e252d9af58028b4df69f174409274a26aa30a",
+        "sha256": "d4ba72b5593664fe59762c989d96badc9d2f590f122587d766eddee86def0a7c",
+        "outreachPresent": true,
+        "workDestinationsPresent": true,
+        "sameKeyExpressionCount": 2
+      }
+    ],
+    "classification": "Open inherited pre-Files integration defect/risk; not present in originalc330Portfolio input; no clean-console claim",
+    "observedConsoleErrorLines": 22,
+    "shard3": 17,
+    "shard4": 5,
+    "risk": "Duplicate sibling identity can cause React reconciliation duplication or omission; these passing scenarios do not prove absence of that risk."
+  },
+  "inputAncestors": [
+    {
+      "input": "portfolio",
+      "sha": "c330cebbd021eb984b4bf64ae13dbb991ae6b1c0",
+      "ancestorOfFrozenSource": true
+    },
+    {
+      "input": "meri",
+      "sha": "3cc30ff3182e8050d563516607866cf07efe2aef",
+      "ancestorOfFrozenSource": true
+    },
+    {
+      "input": "modules",
+      "sha": "50155cbbf0e4df1eecba22cbfc9b2c35bff87e0a",
+      "ancestorOfFrozenSource": true
+    },
+    {
+      "input": "newsletter",
+      "sha": "46ebdd448ef55e88c7a4083fb4586322757a14f8",
+      "ancestorOfFrozenSource": true
+    },
+    {
+      "input": "shipping_source_fixes",
+      "sha": "6dacdaca3507bf75a472f5860ac72fc483377248",
+      "ancestorOfFrozenSource": true
+    },
+    {
+      "input": "onboard",
+      "sha": "a2ae5919fdb70523e67c49adbcc559cbae2b37e7",
+      "ancestorOfFrozenSource": true
+    },
+    {
+      "input": "meri_actions",
+      "sha": "fc6f8eef67353d166895146f8d83189a5cf0a05c",
+      "ancestorOfFrozenSource": true
+    },
+    {
+      "input": "main",
+      "sha": "02c02d95bdf3949662b9123f425271c6491ffdab",
+      "ancestorOfFrozenSource": true
+    },
+    {
+      "input": "integration",
+      "sha": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+      "ancestorOfFrozenSource": true
+    }
+  ],
+  "axeSummary": [
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "title": "Files docx 1440px creates revises inspects and verifies synthetic bytes with native limits visible",
+      "violations": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ]
+    },
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "title": "Files docx 390px creates revises inspects and verifies synthetic bytes with native limits visible",
+      "violations": 0,
+      "incompleteRules": []
+    },
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "title": "Files xlsx 1440px creates revises inspects and verifies synthetic bytes with native limits visible",
+      "violations": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ]
+    },
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "title": "Files xlsx 390px creates revises inspects and verifies synthetic bytes with native limits visible",
+      "violations": 0,
+      "incompleteRules": []
+    },
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "title": "Files disabled 1440px makes no session/document calls and retains truthful unavailable rendering",
+      "violations": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ]
+    },
+    {
+      "file": "meri-files-workflow.spec.ts",
+      "title": "Files disabled 390px makes no session/document calls and retains truthful unavailable rendering",
+      "violations": 0,
+      "incompleteRules": []
+    },
+    {
+      "file": "shared-home-accessibility.spec.ts",
+      "title": "meri home retains full default axe checks at 1440px",
+      "violations": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ]
+    },
+    {
+      "file": "shared-home-accessibility.spec.ts",
+      "title": "modules home retains full default axe checks at 1440px",
+      "violations": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "nodes": 2
+        }
+      ]
+    },
+    {
+      "file": "shared-home-accessibility.spec.ts",
+      "title": "meri home retains full default axe checks at 390px",
+      "violations": 0,
+      "incompleteRules": []
+    },
+    {
+      "file": "shared-home-accessibility.spec.ts",
+      "title": "modules home retains full default axe checks at 390px",
+      "violations": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ]
+    },
+    {
+      "file": "portfolio-home-accessibility.spec.ts",
+      "title": "Portfolio home preserves accessible names, descriptions and default axe checks at 1440px",
+      "violations": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "nodes": 13
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "nodes": 1
+        }
+      ]
+    },
+    {
+      "file": "portfolio-home-accessibility.spec.ts",
+      "title": "Portfolio home preserves accessible names, descriptions and default axe checks at 390px",
+      "violations": 0,
+      "incompleteRules": [
+        {
+          "id": "color-contrast",
+          "nodes": 13
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "nodes": 1
+        }
+      ]
+    }
+  ],
+  "actualRender": {
+    "inspected": [
+      {
+        "path": "/workspace/capiro-unified-files-corrected-20261013/production/production-meri-files-1440-dark.png",
+        "sha256": "4da887995f880d1b8f1f5a3a9e5eb4de6043995c8580e09b5490d0fdffda99f7"
+      },
+      {
+        "path": "/workspace/capiro-unified-files-corrected-20261013/production/production-meri-files-390-light.png",
+        "sha256": "94fb62fe646da005137daac06ffdb5bbc49d061d45c0c915ba7161643c569864"
+      }
+    ],
+    "observation": "Actual unconfigured Files shows Connection setup required and no connect/create; phone copy wraps. Meri shell stays light under dark preference. Does not qualify configured dark Files parity or Figma."
+  },
+  "bindings": [
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/actual-additions-v2/results.json",
+      "bytes": 5178,
+      "sha256": "d4267a9648fdd0cc216c52ec6a1672bcdaea50fdff4ea55a23c0574eeb06c43a"
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/INHERITED-CONSOLE-OBSERVATION.json",
+      "bytes": 990,
+      "sha256": "a0533914076f37da2c0f9832297c6b33228e5de67b4eb582078cec904328ffba"
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/ROOT-ACTUAL-RENDER-REVIEW.json",
+      "bytes": 1192,
+      "sha256": "1f11deb83f45864627ea93f198119ba207b261a3ec5d29a2deaa776ae0a79146"
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/INPUT-HEAD-REFRESH.json",
+      "bytes": 3710,
+      "sha256": "dcca2b67ea5cf612c38010ad6a0d71aa014db1cd5567c63e62cd6edc993de1ad"
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/FINAL-SOURCE-CONFIRMATION.json",
+      "bytes": 872,
+      "sha256": "c74c5aee5b63de031f16aa6432f54474b420b389b912d7667941a325d58f8d8d"
+    },
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/apps/web/src/features/portfolio/objectives/ObjectiveEditor.tsx",
+      "bytes": 2667,
+      "sha256": "d4ba72b5593664fe59762c989d96badc9d2f590f122587d766eddee86def0a7c"
+    }
+  ]
+}

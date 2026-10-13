@@ -1,0 +1,15 @@
+{
+  "observedUTC": "2026-10-13T10:18:25.501506+00:00",
+  "source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "observation": "Portfolio shard3 logs React duplicate sibling-key warnings for objective id:version. ObjectiveOutreach and ObjectiveWorkDestinations siblings use identical keys. Passing browser assertions do not establish a warning-free console.",
+  "path": "apps/web/src/features/portfolio/objectives/ObjectiveEditor.tsx",
+  "lines": [
+    67,
+    77
+  ],
+  "sourceBlob": "5b6e252d9af58028b4df69f174409274a26aa30a",
+  "priorQualifiedSource": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+  "priorQualifiedBlob": "5b6e252d9af58028b4df69f174409274a26aa30a",
+  "introduction": "Pre-Files integration commits1bf75bb0 and2d50edd8. These additions are absent from c330Portfolio input.",
+  "limitation": "Inherited pre-Files integration sibling reconciliation warning remains open. No source change or rerun made during frozen qualification. Full native/UI acceptance remains open."
+}

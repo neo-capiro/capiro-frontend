@@ -1,0 +1,4698 @@
+{
+  "base": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+  "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "originalCount": 306,
+  "colocatedCount": 29,
+  "records": [
+    {
+      "path": "apps/web/test/action-workflow.test.mjs",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "20962a97814a9e9d28c050630fee88d7249d8a90"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "20962a97814a9e9d28c050630fee88d7249d8a90"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/assets.test.mjs",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6eaceb7d26d0f6379931775ab1090069db735e25"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6eaceb7d26d0f6379931775ab1090069db735e25"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/billing-flow.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "7d14d83300e0af70f194e496e5e554fb4b6974eb"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "7d14d83300e0af70f194e496e5e554fb4b6974eb"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/calendar-visual-closeout.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c4f6aca0569cdb9b9db19c7e1307c4b87d4c4af7"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c4f6aca0569cdb9b9db19c7e1307c4b87d4c4af7"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/calendar.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "aabbaf04f723acd67460ab661edc3e590390f442"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "aabbaf04f723acd67460ab661edc3e590390f442"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/effective-dates.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "37d4a1d5a44aadef63d1e38b14c5397b26107f18"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "37d4a1d5a44aadef63d1e38b14c5397b26107f18"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/integration.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "f9d93e4d92d41c4a604508cc2694c2d1e8405efc"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "f9d93e4d92d41c4a604508cc2694c2d1e8405efc"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/legiwatch.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "5fb8b5bea2346fa92d48d31ee58bbff2405cb83a"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "5fb8b5bea2346fa92d48d31ee58bbff2405cb83a"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/meeting-detail-current.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "4bc05e2a391166dcdf96f9b1d41097bd9eb6e5f9"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "4bc05e2a391166dcdf96f9b1d41097bd9eb6e5f9"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/meri-action-host-lifetime.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "82636f5f71f6bd3e33b69e5615ee26a60e1c1e32"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "82636f5f71f6bd3e33b69e5615ee26a60e1c1e32"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/meri-action-host-mobile-navigation.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ea73d34662c27b4cf7592d381bdc0c679c6f6bbb"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ea73d34662c27b4cf7592d381bdc0c679c6f6bbb"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/meri-action-host-navigation.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b52ead1e64b280370f925ceaf51bdf52fecb841c"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b52ead1e64b280370f925ceaf51bdf52fecb841c"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/meri-action-host-workflow.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "799a2750f2295e92ed3f39f94f46e5887eaa2307"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "799a2750f2295e92ed3f39f94f46e5887eaa2307"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/modules.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "27576b8a57b8e0153eb48cb7d5f49e61e857e675"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "27576b8a57b8e0153eb48cb7d5f49e61e857e675"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/newsletter-document-lifecycle.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "890c49b318c98901e48696f46b819a306f00ae31"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "890c49b318c98901e48696f46b819a306f00ae31"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/newsletter-document-navigation.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c17352e8dbf90dd30cc84fab92496cdc5ffe355f"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c17352e8dbf90dd30cc84fab92496cdc5ffe355f"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/newsletter-rich-history.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "fe4ffff950231191e909627bca290a81ae3f88ff"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "fe4ffff950231191e909627bca290a81ae3f88ff"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/newsletter-rich.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b2e8146df11b85355d0952e9eec2bec733aa4b05"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b2e8146df11b85355d0952e9eec2bec733aa4b05"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/newsletter-staging.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "f688b7503be7e59e62345e8177efe7519234d891"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "f688b7503be7e59e62345e8177efe7519234d891"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/next-modules-baseline.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "86f8efe637555f4683b6f6c8ce40b9980be1b428"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "86f8efe637555f4683b6f6c8ce40b9980be1b428"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/next-modules-scope.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b0ba487222e47bf617e139d2b68faac6596dc8fc"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b0ba487222e47bf617e139d2b68faac6596dc8fc"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/next-modules-task-links.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "2ac4ba68b80eaa27ec663b7a194e19dc07ba359d"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "2ac4ba68b80eaa27ec663b7a194e19dc07ba359d"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/next-modules-view-persistence.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "2b1923b72d501d2987309b341d60f00b6391e2c5"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "2b1923b72d501d2987309b341d60f00b6391e2c5"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/objective-destination.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "86b4017d89a50b55db3a95e994023070ec6c1811"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "86b4017d89a50b55db3a95e994023070ec6c1811"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/objective-navigation.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0ffd6544653271af42c76edf720a46036e619d6c"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0ffd6544653271af42c76edf720a46036e619d6c"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/objective-work-destinations.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "2f763a0b15dc3ec9c1ac66da42511f6269ba2894"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "2f763a0b15dc3ec9c1ac66da42511f6269ba2894"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/objective-work-navigation.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "dfa2c892fa3916a876f18429f7ce0b908443d63f"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "dfa2c892fa3916a876f18429f7ce0b908443d63f"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/onboard-boundary.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b86498956bed70a97a9d6063413a105a510cc0cd"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b86498956bed70a97a9d6063413a105a510cc0cd"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/onboard-host-config.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "faedea0d9083bb57d756b5fb9e1b6db4a6e88abc"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "faedea0d9083bb57d756b5fb9e1b6db4a6e88abc"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/onboard-host-funnel.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "28878805fee32463066f21cebadd70a73189d2b2"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "28878805fee32463066f21cebadd70a73189d2b2"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/onboard-host-public.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "72e1131a4e74bf3277fda69967579fcef93fbc36"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "72e1131a4e74bf3277fda69967579fcef93fbc36"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/planner-engagement.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "36e86379f8cee86045534a04668505728a3772d2"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "36e86379f8cee86045534a04668505728a3772d2"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/prospect-draft-pending-edit.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "5275cb5e85cdf577db7a8cc25706b02921116f3e"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "5275cb5e85cdf577db7a8cc25706b02921116f3e"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/prospect-draft-restart-acceptance.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "7be2c87a8517c27f7fee9afdbfd83cce7cbdce60"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "7be2c87a8517c27f7fee9afdbfd83cce7cbdce60"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/prospect-workspace.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "336af557d08be617dcc1471dd0865ac6cf43e089"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "336af557d08be617dcc1471dd0865ac6cf43e089"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/public-forms.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "61cf977e0eb3df5d56baa7e09dc3b7116de66557"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "61cf977e0eb3df5d56baa7e09dc3b7116de66557"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/remaining-modules.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "700a39a8a0169f633abb1e0e22b3d25c96187e84"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "700a39a8a0169f633abb1e0e22b3d25c96187e84"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/session.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "999926fc11354f4f7ca7d0b53833ff02cea6746a"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "999926fc11354f4f7ca7d0b53833ff02cea6746a"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/settings-scenes.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b68e37cb9f5aef3a4c17e184151d97fcba593338"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b68e37cb9f5aef3a4c17e184151d97fcba593338"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/settings.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9325b9da26cbbe0ba4566a69f6bc51283d8b6eb4"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9325b9da26cbbe0ba4566a69f6bc51283d8b6eb4"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/shared-home-accessibility-interaction.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "f8be9bc8384d054049d59c756a7cb9791cd01050"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "f8be9bc8384d054049d59c756a7cb9791cd01050"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/browser/shared-home-accessibility.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "28363447f36534055901cfd762d75e38f0875c3a"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "28363447f36534055901cfd762d75e38f0875c3a"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/cited-answer-assets.test.mjs",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "65839f162d2f385fa1762bbd1154e2fe61315452"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "65839f162d2f385fa1762bbd1154e2fe61315452"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/module-assets.test.mjs",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "1ce931f42229a52bf02e9f75e30f3ef77d8e6562"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "1ce931f42229a52bf02e9f75e30f3ef77d8e6562"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/run-workspace.test.mjs",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "2cc000c27f7d81281d72d9d711409d0bf981ce02"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "2cc000c27f7d81281d72d9d711409d0bf981ce02"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/settings-access.test.mjs",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "dcb535501e94b90a426f3d158fc91991997b57de"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "dcb535501e94b90a426f3d158fc91991997b57de"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/test/suggestions.test.mjs",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "18d9f07dfdaeb70e9321477f619ce106d3bc279e"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "18d9f07dfdaeb70e9321477f619ce106d3bc279e"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/activity-change.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9e8ab2570cdb985b31437c2a25250aa040c9b48f"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9e8ab2570cdb985b31437c2a25250aa040c9b48f"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/activity-command.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "accf90881668add8af96311063dcc329dcd93afa"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "accf90881668add8af96311063dcc329dcd93afa"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/activity.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8210e616eddda0c8a7f494467d6602992fff2c13"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8210e616eddda0c8a7f494467d6602992fff2c13"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/advocacy-corrections.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "74413875763a8fcbfbc38160dbe1d27ef4ec8878"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "74413875763a8fcbfbc38160dbe1d27ef4ec8878"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/advocacy-history-edit.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "797842708d9211a958930396cddbd3ffc44ded07"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "797842708d9211a958930396cddbd3ffc44ded07"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/alert-channel-contracts.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c69c9cf7ed0c64d4c778a23756e72329afb903f7"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c69c9cf7ed0c64d4c778a23756e72329afb903f7"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/attendance.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d4c247850cb63bd6ddcb8f4c022471fe0031bf57"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d4c247850cb63bd6ddcb8f4c022471fe0031bf57"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/bill-hearings.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "1e269f66c045c7f2f102af5e1309edfcf41051de"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "1e269f66c045c7f2f102af5e1309edfcf41051de"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/bill-tracker.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "158facdff2b097cf0d1c89eb791e4416a209d96e"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "158facdff2b097cf0d1c89eb791e4416a209d96e"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/billing-proxy.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "03e775c53fb6421c2a11099be680067b87c9f621"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "03e775c53fb6421c2a11099be680067b87c9f621"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/billing-summary.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "24b7c0b6e78278fe24b87975a66a45fee5a66d82"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "24b7c0b6e78278fe24b87975a66a45fee5a66d82"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/activity-actions.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "eb08522240c591d11cbf7bcbc1c458c9b0d712c5"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "eb08522240c591d11cbf7bcbc1c458c9b0d712c5"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/activity-command-recovery.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "06ed17c9406029336c2a28e085a0c858b29af4ba"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "06ed17c9406029336c2a28e085a0c858b29af4ba"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/activity-command-reopen.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "4e7ceb9932eabae80468ad9de1b6941941e0d359"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "4e7ceb9932eabae80468ad9de1b6941941e0d359"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/activity-command-restart.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0a0688e491030de02ed44a398115ee58f0528d50"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0a0688e491030de02ed44a398115ee58f0528d50"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/activity-command-storage.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "1f4e0206ffc0b9dd55b2226ee6d748ff4eff8c67"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "1f4e0206ffc0b9dd55b2226ee6d748ff4eff8c67"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/activity-command.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "cdf0b57d8e7dde254b4fb90013152dddf9c45e47"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "cdf0b57d8e7dde254b4fb90013152dddf9c45e47"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/activity-pin.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "cf93bc73956a881af1fc12ed1416d5c85138bc42"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "cf93bc73956a881af1fc12ed1416d5c85138bc42"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/activity.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "68a078965e8ff5ee840cf186a412393efdd998f2"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "68a078965e8ff5ee840cf186a412393efdd998f2"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/advocacy-corrections.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "097348ef19b82271b79f4a006eded37cdd7fc486"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "097348ef19b82271b79f4a006eded37cdd7fc486"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/advocacy-history-edit.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8736ae32d062352c32bb7751572aee81a1492b52"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8736ae32d062352c32bb7751572aee81a1492b52"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/advocacy-timeline-dark.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "45ce8b76a0da48fbd3ba5f321aeb13711c975436"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "45ce8b76a0da48fbd3ba5f321aeb13711c975436"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/alert-channel-lifetime.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8ba8941121ba1db5636ecf263838d3fb63dce3a7"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8ba8941121ba1db5636ecf263838d3fb63dce3a7"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/alert-channel-visual.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "aa42d40e99ab01fc2801ad6e6e500611cb53c5f2"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "aa42d40e99ab01fc2801ad6e6e500611cb53c5f2"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/alert-channels.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e129932f8b6c0004e448450f7bcb5c824819fd5a"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e129932f8b6c0004e448450f7bcb5c824819fd5a"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/attendance.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "dc2f996f6c7b587574b9c1ed5ed543e9521b99e0"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "dc2f996f6c7b587574b9c1ed5ed543e9521b99e0"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/bill-hearings.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d04d25e93db30ae131bdada5d4e9bbb70d21c11e"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d04d25e93db30ae131bdada5d4e9bbb70d21c11e"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/billing-summary-integration.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e72f2ff4a42c854f7f0e0f5474317b820e200ef7"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e72f2ff4a42c854f7f0e0f5474317b820e200ef7"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/billing-summary.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "87fe71a5db0b54cdea08702b7c492e11c974ddee"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "87fe71a5db0b54cdea08702b7c492e11c974ddee"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/bills.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ecb226d6b4b2455dc48b973226d801f31775d2a3"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ecb226d6b4b2455dc48b973226d801f31775d2a3"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-artifact-receipts.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b6ca81e03233a0c0a019652b3ef2a87be7eca0d1"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b6ca81e03233a0c0a019652b3ef2a87be7eca0d1"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-boundary.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "18ff7ecd07a96e811a55474a7ded43f7df2dbb2b"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "18ff7ecd07a96e811a55474a7ded43f7df2dbb2b"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-client-clear.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "55b0a6fdd105f5933aad80bd48d425a4a7ad78aa"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "55b0a6fdd105f5933aad80bd48d425a4a7ad78aa"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-lifecycle.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "fa7fec4c49b876ec58f0538ca0b4ade391d00fd0"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "fa7fec4c49b876ec58f0538ca0b4ade391d00fd0"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-meeting-receipts.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ec4c1d7bfc2ea2cd2e8afb98cf1aa766f76aac13"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ec4c1d7bfc2ea2cd2e8afb98cf1aa766f76aac13"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-planner.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0793e14a9ca178c912b869ac2bd20b8674c81a3f"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0793e14a9ca178c912b869ac2bd20b8674c81a3f"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-preparation.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c7098f74155b4cf87ddf810aee244c9ecbb9b3ed"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c7098f74155b4cf87ddf810aee244c9ecbb9b3ed"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-sharing.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ba1abf468b0a649620cfb5566c303c1e5fae9919"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ba1abf468b0a649620cfb5566c303c1e5fae9919"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-sync-integration.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ebae7c5e72d3c17f7c7e8eb1e2e120ae201b4950"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ebae7c5e72d3c17f7c7e8eb1e2e120ae201b4950"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/calendar-sync.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "dd22523ce08f16c88e3d9e147882a35e9524b242"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "dd22523ce08f16c88e3d9e147882a35e9524b242"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/canonical-navigation.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9fb8f857f5f2d416f92880612b5cea2a81f11a49"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9fb8f857f5f2d416f92880612b5cea2a81f11a49"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/capability-boundary.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "4eb812f145897934c94078b847d1f9e9a4ddd0d6"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "4eb812f145897934c94078b847d1f9e9a4ddd0d6"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/capability-documents-download.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e3df0347e0ca99fbc1f93bcb55957859bd31e5f1"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e3df0347e0ca99fbc1f93bcb55957859bd31e5f1"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/capability-documents-execution.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "89e906d4e96a1619809d85799ed7ce7c2531c973"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "89e906d4e96a1619809d85799ed7ce7c2531c973"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/capability-documents-readers.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "396bca52733b0a83e24bfe2bbaf6d9404cabbfbc"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "396bca52733b0a83e24bfe2bbaf6d9404cabbfbc"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/capability-documents-upload.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9298f664c62c91955bfed20153a5b171ef92b6a9"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9298f664c62c91955bfed20153a5b171ef92b6a9"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/capability-documents-visual.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "381b86355366e893004e31154f956e9b83366043"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "381b86355366e893004e31154f956e9b83366043"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/capability-execution.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ef4ccb5277c6dbb8d117f0ba3dc52c1adca97116"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ef4ccb5277c6dbb8d117f0ba3dc52c1adca97116"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/capability-fit-boundary.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "22bd8aa6cff3e47bcd050d034c1ff22fd5dc882c"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "22bd8aa6cff3e47bcd050d034c1ff22fd5dc882c"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/capability-list-registration-layout.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "71c0f862d5b4737e362d0b9998b6483c49573230"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "71c0f862d5b4737e362d0b9998b6483c49573230"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/capability-opportunity-visual.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "66341390fa3362f57336ea96c3b8f7561af7ba6a"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "66341390fa3362f57336ea96c3b8f7561af7ba6a"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/capability-presentation-visual.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a61f258ffece31ec8f0bee355eda997305defdd4"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a61f258ffece31ec8f0bee355eda997305defdd4"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/capability-presentation.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "88f712b7aef15c539dde5f04e4833bffa6058a6b"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "88f712b7aef15c539dde5f04e4833bffa6058a6b"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/capability-registration-boundary.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9952075925acda03fd769c0d152e163b65d299b7"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9952075925acda03fd769c0d152e163b65d299b7"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/capability-registration-concurrency.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ff164403cb5339fdfc979a1d4818e227ba8f80c0"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ff164403cb5339fdfc979a1d4818e227ba8f80c0"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/capability-registration-execution.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "32c6b19e4362515f67a42167dfd16a51ebca57d5"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "32c6b19e4362515f67a42167dfd16a51ebca57d5"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/capability-registration-reads.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6743bf2fdbba85deeb9e9a1862068ff4ba8f3466"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6743bf2fdbba85deeb9e9a1862068ff4ba8f3466"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/capability-registration-visual.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e064f5934de738f8b1e63516b9884392b54419f3"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e064f5934de738f8b1e63516b9884392b54419f3"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/client-enrichment.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "42690b6e6a8489c413bd94fba7499549188cc6a7"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "42690b6e6a8489c413bd94fba7499549188cc6a7"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/client-header.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "82c9d022c00516b1a79c4621fc74ec068af78da1"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "82c9d022c00516b1a79c4621fc74ec068af78da1"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/client-intake.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d1fa1d1ef09a0ddf013d540bd2fd231d4bdf81d5"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d1fa1d1ef09a0ddf013d540bd2fd231d4bdf81d5"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/committee-picker.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d5698a4a1a277b45447240b6c50ba69a1e5b2a88"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d5698a4a1a277b45447240b6c50ba69a1e5b2a88"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/current-projection.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b82e477698baab53f1af61da9ed90cb9aa2c5a02"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b82e477698baab53f1af61da9ed90cb9aa2c5a02"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/dialog-disabled-focus.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a8e7d85c56a5da79d87e6a0dc50e475edb2a82fc"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a8e7d85c56a5da79d87e6a0dc50e475edb2a82fc"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/effective-dates.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ba13d9843cb6915c229a23786fabe9adcf68281f"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ba13d9843cb6915c229a23786fabe9adcf68281f"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/email-compose.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9ef2551a7cacadde78316c2e5289f96f23296817"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9ef2551a7cacadde78316c2e5289f96f23296817"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/facility-action-lifetime.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "317ab4fa3b0ba7f58a62a168dd7a81f2a098b93b"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "317ab4fa3b0ba7f58a62a168dd7a81f2a098b93b"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/facility-manager-review.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "4a886cbfb18ec522717d39f89f47b501a8d33afb"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "4a886cbfb18ec522717d39f89f47b501a8d33afb"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/facility-map.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "aa806c7b4f3f83e0fbc082b939cbbe2c1371ff72"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "aa806c7b4f3f83e0fbc082b939cbbe2c1371ff72"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/files-boundary.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "33d2886444aacd5671977c18e96afd47f57d8d8c"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "33d2886444aacd5671977c18e96afd47f57d8d8c"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/files-delete-recovery.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0d38971eaea2da4ee72aadc839a9177cfe928c02"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0d38971eaea2da4ee72aadc839a9177cfe928c02"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/files-metadata-receipts.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "77d6638a7572150a0d90283b471155c85da94153"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "77d6638a7572150a0d90283b471155c85da94153"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/files-reader-selection.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8adf2621c017e042d3b775dfe3a7c0a813fa92da"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8adf2621c017e042d3b775dfe3a7c0a813fa92da"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/files-view-contrast.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6e9ee98fc0bd87091b8460ce87d6b0a3d57d798c"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6e9ee98fc0bd87091b8460ce87d6b0a3d57d798c"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/files.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "2030a6bbe186a0b18884ae8b933ad9d3d74af5b8"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "2030a6bbe186a0b18884ae8b933ad9d3d74af5b8"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/global-objective.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "be537fca7e8f472c8d4cdf11c0286a675650d90b"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "be537fca7e8f472c8d4cdf11c0286a675650d90b"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/government.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "945dc2bc440fb661912e3327392fca89cf0bac1a"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "945dc2bc440fb661912e3327392fca89cf0bac1a"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/integration-defect-baselines.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "355c5f44aebf705e48fc6f7febb4d562264c272e"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "355c5f44aebf705e48fc6f7febb4d562264c272e"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/linked-file-arrival.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b305d3399f5a77c08b56d6a3410fa48b00bfb34b"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b305d3399f5a77c08b56d6a3410fa48b00bfb34b"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/mail-local-draft.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "1fcb0c0075db40bdc1079ca0309e662af084e31c"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "1fcb0c0075db40bdc1079ca0309e662af084e31c"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/mail-rewrite.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a7a52dc095460d499e04aa6278c5a83c4e18a2bc"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a7a52dc095460d499e04aa6278c5a83c4e18a2bc"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/mail-rich-compose.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b01997ffa13b25e52a73a45cb3e53ec9528edf30"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b01997ffa13b25e52a73a45cb3e53ec9528edf30"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/manual-debrief.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "162475c6416f014e9cd3244f914e5710fd83856e"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "162475c6416f014e9cd3244f914e5710fd83856e"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/meeting-documents-calendar.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "97237efade5e79c36d565dec66a1c8fc92ce0db4"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "97237efade5e79c36d565dec66a1c8fc92ce0db4"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/meeting-documents.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "95685d8911e219a929b723831577fb0519ae0bfa"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "95685d8911e219a929b723831577fb0519ae0bfa"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/meeting-library.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "dd169df0b31f83c065c03f4599978b310d733c50"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "dd169df0b31f83c065c03f4599978b310d733c50"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/meeting-preparation.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "4e46c1785dad39df903622997463801118ae38c9"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "4e46c1785dad39df903622997463801118ae38c9"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/meeting-review.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d71fb9107769b89f5460b323730767046c3f3d79"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d71fb9107769b89f5460b323730767046c3f3d79"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/meeting-voice.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0bff8817d262db681349e534e5c01f5820e56e81"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0bff8817d262db681349e534e5c01f5820e56e81"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/member-notes.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "4884a9689cf0ee0b99be3954e64d8fa2ce528308"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "4884a9689cf0ee0b99be3954e64d8fa2ce528308"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/objective-current-read.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ce1cb0284f8f0fc92a63754738521439c865880a"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ce1cb0284f8f0fc92a63754738521439c865880a"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/objective-intake.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0b1999deff1b832f85d97d252d3d2168e6261071"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0b1999deff1b832f85d97d252d3d2168e6261071"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/objective-readiness.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "bdf51c899c45d21c5e4cdda7c4920014c78bd914"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "bdf51c899c45d21c5e4cdda7c4920014c78bd914"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/objective-receipts.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9be2be5f05f12419a4de3614290242d9fabec817"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9be2be5f05f12419a4de3614290242d9fabec817"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/opportunities.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e3d67084d088687e4e4b08331f5f7860ea4ea3dc"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e3d67084d088687e4e4b08331f5f7860ea4ea3dc"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/opportunity-boundary.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c57c572e011db95413f9fc586f89cd79120b2855"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c57c572e011db95413f9fc586f89cd79120b2855"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/ordered-owners.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "be5069e31606eb2ab6d05a258bdc2753f1700aa5"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "be5069e31606eb2ab6d05a258bdc2753f1700aa5"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/overview-removal.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a648239eb8750b28ae55f40a89af3a9f291e0179"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a648239eb8750b28ae55f40a89af3a9f291e0179"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-accessibility-interaction.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0291e1abbd9304a54038714d163d9fb275d3d110"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0291e1abbd9304a54038714d163d9fb275d3d110"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-accessibility-semantics.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "07e19917383568a2c82996dc877c5353c3986a8e"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "07e19917383568a2c82996dc877c5353c3986a8e"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0e73c9c08f427faaa6994221dd48273e7823504c"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0e73c9c08f427faaa6994221dd48273e7823504c"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-attention.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "afcaf33fb514e5f0689a75a144a9ca77eb130219"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "afcaf33fb514e5f0689a75a144a9ca77eb130219"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-home-accessibility.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "aaae598d5de1f03ebab60aac2f1caa4d53edce73"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "aaae598d5de1f03ebab60aac2f1caa4d53edce73"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-index.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "4d8307a6922cce7adbb28475661094f2dc4acd18"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "4d8307a6922cce7adbb28475661094f2dc4acd18"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-layout-integration.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "1f2cf8f1845b84a678797e72188eedd5aec60c8d"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "1f2cf8f1845b84a678797e72188eedd5aec60c8d"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-layout.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0343734bb05ab99df839b3ffd1eadffdb63901ee"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0343734bb05ab99df839b3ffd1eadffdb63901ee"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "fc4bfb4095f7834389cfaa6407fb72e03ef3b16c"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "fc4bfb4095f7834389cfaa6407fb72e03ef3b16c"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/profile-capacity.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "909e9301aa61a13b78089c1a26df5ab80f01fdbc"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "909e9301aa61a13b78089c1a26df5ab80f01fdbc"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/profile-current-state.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9a072ec4c9371735903d524a2c86614592b4da72"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9a072ec4c9371735903d524a2c86614592b4da72"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/profile-dialog-layout.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "5cd99ab178b425667b46a649a5b37853c2af5ab4"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "5cd99ab178b425667b46a649a5b37853c2af5ab4"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/profile-identity-layout.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e7b01b257c865a3d9cf24ee79640e151bee0b56d"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e7b01b257c865a3d9cf24ee79640e151bee0b56d"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/profile-presentation.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b007f6f559307ca475373ac7f956c5d41973f0ba"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b007f6f559307ca475373ac7f956c5d41973f0ba"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/profile-tools-integration.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "cee4a2e7a3e3254d06f7b1f10cdeb898f354be7f"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "cee4a2e7a3e3254d06f7b1f10cdeb898f354be7f"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/profile-tools.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8881778080c986f48333033612a522e6d0caeb55"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8881778080c986f48333033612a522e6d0caeb55"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/profile-write-lifetime.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d521c4f967b3caef5030a91d299db3e5204b5b28"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d521c4f967b3caef5030a91d299db3e5204b5b28"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/prospect-brief.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e743e8cc8ff9f924abbdf34d709e048308d12bc4"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e743e8cc8ff9f924abbdf34d709e048308d12bc4"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/prospect-contacts.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ea414569764c5484b8873c43dc6067a874500b85"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ea414569764c5484b8873c43dc6067a874500b85"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/prospect-conversion.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d436b4ed31f90c5fb65f2cb172446a7113b532be"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d436b4ed31f90c5fb65f2cb172446a7113b532be"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/prospect-current-read.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6f4f8eadce25439a9e71d3b9a06eb51ea1059c5c"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6f4f8eadce25439a9e71d3b9a06eb51ea1059c5c"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/prospect-files-local-search.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b2452a06984963324675fc1b027eb8617e7fb489"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b2452a06984963324675fc1b027eb8617e7fb489"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/prospect-files.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "4eaffa699ad0f085dbb17e3aa78a8f6923040fee"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "4eaffa699ad0f085dbb17e3aa78a8f6923040fee"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/prospect-overview.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6ec05eb1919ba964a32d62ff02fa6adfc48870f4"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6ec05eb1919ba964a32d62ff02fa6adfc48870f4"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/prospect-proposals.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "3fdeae4750539a3d6156831aacc0e302c245f1c4"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "3fdeae4750539a3d6156831aacc0e302c245f1c4"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/prospect-upload-restart-acceptance.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e3b247b5455dec58888c5d4aebbb27a5a3b89d58"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e3b247b5455dec58888c5d4aebbb27a5a3b89d58"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/prospects.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c26e3cad2ab73ae81dcac5770041a8b572e5869c"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c26e3cad2ab73ae81dcac5770041a8b572e5869c"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/public-event.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6b304bb362891513c590f904dbeb9bde5909ef78"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6b304bb362891513c590f904dbeb9bde5909ef78"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/quick-log-meeting.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c66d045c9f280adecd0f32ae4831f03321086cb6"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c66d045c9f280adecd0f32ae4831f03321086cb6"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/registrant-intake.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a5d7678339e84c5c009483e4ee190ad9596c9562"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a5d7678339e84c5c009483e4ee190ad9596c9562"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/relationships.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e97534c3f9bef254b20e60c149c64dfae87691bd"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e97534c3f9bef254b20e60c149c64dfae87691bd"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/remaining-intake.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "64b7c2f37df8b8bde98f7665b017ab166584e1ef"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "64b7c2f37df8b8bde98f7665b017ab166584e1ef"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/review-billing-route.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ce365971e065eadbbd92716a284b166129e3b3f9"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ce365971e065eadbbd92716a284b166129e3b3f9"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/saved-submissions-current.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "3f676c8560cae646e3bab15a0081947276f32f25"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "3f676c8560cae646e3bab15a0081947276f32f25"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/saved-submissions-lifetime.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8468d8a662215d7d3a724a031b50fc43dee6f289"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8468d8a662215d7d3a724a031b50fc43dee6f289"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/saved-submissions-visual.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "da6862376fa35064360eaf05e3b8a7a7bf0b1f95"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "da6862376fa35064360eaf05e3b8a7a7bf0b1f95"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/shared-dialog-layout.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "09b283182c53b8715dc7ae3e2f2fe3a117d3b2b8"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "09b283182c53b8715dc7ae3e2f2fe3a117d3b2b8"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/thread-mail.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9328e7af87572f9045346148c7fac3de2abb58c0"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9328e7af87572f9045346148c7fac3de2abb58c0"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a18a9016b22d5292cdd3eef7fb51ac4fac52e12d"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a18a9016b22d5292cdd3eef7fb51ac4fac52e12d"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/token-input-layout.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "13393431c79cb7d6ab58c1513db69d7200ac175f"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "13393431c79cb7d6ab58c1513db69d7200ac175f"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/tracker-alert-preferences.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6dc295771d76c325ad20fa27a852b6cbd839ac43"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6dc295771d76c325ad20fa27a852b6cbd839ac43"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/tracker-current-data.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8e4851442ce3faa6bf21a22e31e1255addf5d461"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8e4851442ce3faa6bf21a22e31e1255addf5d461"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/visual-closeout.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ade587a2fbd2a600dafdc2039fb71c239a240e9b"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ade587a2fbd2a600dafdc2039fb71c239a240e9b"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/visual.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "68f982cbcd42bfb75a08a579d0f228aa4a0ba30c"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "68f982cbcd42bfb75a08a579d0f228aa4a0ba30c"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/voice-integration.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "bc1d393b5086fa0f8a9681743daa3b8ce5d9f63d"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "bc1d393b5086fa0f8a9681743daa3b8ce5d9f63d"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/watchlist-current-behavior.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c21ac168adb94e0adc2406573ab956f6743a2239"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c21ac168adb94e0adc2406573ab956f6743a2239"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/watchlist-current-visual.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6fb4d4fbe3fe44f7be52fd94b1de97cc01f3480b"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6fb4d4fbe3fe44f7be52fd94b1de97cc01f3480b"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/watchlist-current.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8f0e786ee852b8c22bc315ad229c35baa7a1aba2"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8f0e786ee852b8c22bc315ad229c35baa7a1aba2"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/watchlist-preference-entry.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e0bd23eb9cb44a8f4051f308d32ecf5cfc7a84ba"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e0bd23eb9cb44a8f4051f308d32ecf5cfc7a84ba"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/watchlist.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0acb095d16654bf98a470675fc06664237e931d0"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0acb095d16654bf98a470675fc06664237e931d0"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/work-boundary.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "75e53203806c22e0584c0b4186dc18db1b09cafe"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "75e53203806c22e0584c0b4186dc18db1b09cafe"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/work-documents.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d9e4ce325b4497054a6d35e51311c47baf332bd1"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d9e4ce325b4497054a6d35e51311c47baf332bd1"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/work-owners.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b253d750dba139d00ab4b86b1344a2975a7561fa"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b253d750dba139d00ab4b86b1344a2975a7561fa"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/browser/work-presentation.spec.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "975872353c2f24d839184102ec932413d8f58efa"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "975872353c2f24d839184102ec932413d8f58efa"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/calendar-artifact-receipts.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "5c6d1065cff43efb6e732f273ade6a27a756425e"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "5c6d1065cff43efb6e732f273ade6a27a756425e"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/calendar-lifecycle-contract.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a6a9d620468f6e00dbd2cfb5cd2fca98f6286b9b"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a6a9d620468f6e00dbd2cfb5cd2fca98f6286b9b"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/calendar-native-lifecycle.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ed31ff5b2e8bcac1ab86609ea5c122d36b70a7e0"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ed31ff5b2e8bcac1ab86609ea5c122d36b70a7e0"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/calendar-sharing.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d5b3a4c6e2e8a14b296875ee4ab3056cb1bf0049"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d5b3a4c6e2e8a14b296875ee4ab3056cb1bf0049"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/calendar-sync.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b0c6a3d4d33d939d696ab5bf01993b0ce1b1ac81"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b0c6a3d4d33d939d696ab5bf01993b0ce1b1ac81"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/calendar.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "af9a661810eda57dd59e7470ba778c4076d9f3c3"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "af9a661810eda57dd59e7470ba778c4076d9f3c3"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/capability-writer.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "7fabff897a8d8da22bc75ad826e9d15f29b6eb1e"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "7fabff897a8d8da22bc75ad826e9d15f29b6eb1e"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/client-enrichment.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "100b1412a6ce777ab30f18b384ec5e4b9060db0b"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "100b1412a6ce777ab30f18b384ec5e4b9060db0b"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/client-intake.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "28103821a8342c56719b2a8464ff25675e4a0196"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "28103821a8342c56719b2a8464ff25675e4a0196"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/client-view-navigation.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9becfe20e25d64ea37977e842bf0273b1dd39b5b"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9becfe20e25d64ea37977e842bf0273b1dd39b5b"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/command-journal.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "64c1aae1d4b6a42868adb49860f582560d5d3ef7"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "64c1aae1d4b6a42868adb49860f582560d5d3ef7"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/committee-catalog.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "988b9b8d7bd50708e52662ffb2d05a27b1f1c49c"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "988b9b8d7bd50708e52662ffb2d05a27b1f1c49c"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/domain-behavior.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "946b80dc30fd84b18ae14eaedf4e53c7d0f56fb9"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "946b80dc30fd84b18ae14eaedf4e53c7d0f56fb9"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/effective-dates.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "13be8157a2e6e462ad29df284cf7423ee5d651b4"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "13be8157a2e6e462ad29df284cf7423ee5d651b4"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/email-compose.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "79e89c3628f1ce6b786eb9142a567f9ec73a0621"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "79e89c3628f1ce6b786eb9142a567f9ec73a0621"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/facility-action-writer.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "33da569829baf5dc65ed579d901d980e5256c87e"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "33da569829baf5dc65ed579d901d980e5256c87e"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/facility-map.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "3ee6cf99ad2eaa694c9594e171244f6ee8fd7da0"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "3ee6cf99ad2eaa694c9594e171244f6ee8fd7da0"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/file-navigation.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0daf90c26c511be3ef29d043c68e32c4a4e74bc4"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0daf90c26c511be3ef29d043c68e32c4a4e74bc4"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/file-upload-receipts.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "48276d81630ee237894c46e5ccb417dcfa4954b1"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "48276d81630ee237894c46e5ccb417dcfa4954b1"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/files-boundary.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d1983cd7bdeca70beb718b0c7e29ff00a389ba94"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d1983cd7bdeca70beb718b0c7e29ff00a389ba94"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/files-delete-recovery.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e2ca1b724a7f39784197057b0e34bfce5c191581"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e2ca1b724a7f39784197057b0e34bfce5c191581"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/files-metadata-actions.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "3e13da93859696936c2c8e07277554d1c8a25ef3"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "3e13da93859696936c2c8e07277554d1c8a25ef3"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/files-metadata-receipts.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "3d504e8407a9fc8f6cb021abfaf32d1c1897cd5e"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "3d504e8407a9fc8f6cb021abfaf32d1c1897cd5e"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/files.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "eea58f7564a6e814bde0f4b48a1895d4b9439dd3"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "eea58f7564a6e814bde0f4b48a1895d4b9439dd3"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/foundations.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "5f88fae1220d0ed2e12fff955d94047493cc8223"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "5f88fae1220d0ed2e12fff955d94047493cc8223"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/global-objective.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "68ef099d0859806da9b81fa409ddc293e92791bd"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "68ef099d0859806da9b81fa409ddc293e92791bd"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/mail-body.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "01240c23f5d3c50dd2b63b9558f1165ac22e2ca4"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "01240c23f5d3c50dd2b63b9558f1165ac22e2ca4"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/mail-rewrite.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "da59e4bc9a1e77959a25c7bb7e375d524e4b80ed"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "da59e4bc9a1e77959a25c7bb7e375d524e4b80ed"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/mailbox-selection.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "04854165ce37cccef70af0ef58d51f16f2257c8e"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "04854165ce37cccef70af0ef58d51f16f2257c8e"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/meeting-debrief.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "244ad0c8fcf0a19505bb4fba544bfefeb5c9cf80"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "244ad0c8fcf0a19505bb4fba544bfefeb5c9cf80"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/meeting-documents.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0b42bed750f713e00ad60c9a1f307a7073354d61"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0b42bed750f713e00ad60c9a1f307a7073354d61"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/meeting-library.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "eb0603d28acb133304b7dda31fa05eb48f12bdaa"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "eb0603d28acb133304b7dda31fa05eb48f12bdaa"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/meeting-preparation.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ac9e47a1ac4cbf57ade71615399ad82390a72b9f"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ac9e47a1ac4cbf57ade71615399ad82390a72b9f"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/meeting-review.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d64ae8a664e0280df0a05179a569fa0ba0d47990"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d64ae8a664e0280df0a05179a569fa0ba0d47990"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/meeting-upload.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9aea5b47be02cd4e26e7765e663ce4b4c375759a"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9aea5b47be02cd4e26e7765e663ce4b4c375759a"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/meeting-voice-source.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "5a48ab93d272374e6430f460ad42594456c7b799"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "5a48ab93d272374e6430f460ad42594456c7b799"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/member-notes.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "874d7be28a8b073cddecbad95cd50ae0325c3508"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "874d7be28a8b073cddecbad95cd50ae0325c3508"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/meri-action-adapter.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8a23e31ab99bdf9ab8fa6f19831a2a5939e447be"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8a23e31ab99bdf9ab8fa6f19831a2a5939e447be"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/meri-action-bootstrap.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "115064c99f87818aa302831afdbb855c37cbbeec"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "115064c99f87818aa302831afdbb855c37cbbeec"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/meri-action-correlation.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "1022438d2568f8af6d90ed05074029cac11222ae"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "1022438d2568f8af6d90ed05074029cac11222ae"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/meri-action-host.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "7da50aed491102453ba9d0721c358b9a266a6414"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "7da50aed491102453ba9d0721c358b9a266a6414"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/meri-action-lifetime.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "34d390fbf25c94bdcc5b4fd02fdf51de18dae50b"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "34d390fbf25c94bdcc5b4fd02fdf51de18dae50b"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/meri-action-proxy.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "f26d69bcab3ba25843dd61441454cd3e578ab25a"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "f26d69bcab3ba25843dd61441454cd3e578ab25a"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/meri-action-session.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0f6f8360f7d7566f6d5f9e750e28f6302851d4c8"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0f6f8360f7d7566f6d5f9e750e28f6302851d4c8"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/meri-action-transport.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ac4fbd70bd8e1fac549ecab1f36571f20c71d7cd"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ac4fbd70bd8e1fac549ecab1f36571f20c71d7cd"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/newsletter-staging.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "1b037cdc75b43885306e0a390580fbfb86da718e"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "1b037cdc75b43885306e0a390580fbfb86da718e"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/objective-destination.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "7c2278f04fecc126878eb2a785f8014c1e052b2b"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "7c2278f04fecc126878eb2a785f8014c1e052b2b"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/objective-readiness.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9b4f8ca7a285cf893bd75206d5108cfc4fdb0780"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9b4f8ca7a285cf893bd75206d5108cfc4fdb0780"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/objective-receipts.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d49a73faf98aec31e98bbd3f9d189222f07a2ee9"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d49a73faf98aec31e98bbd3f9d189222f07a2ee9"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/objective-work-destinations.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "1737a2f00489826b34f07f5273c1476c66b1aed7"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "1737a2f00489826b34f07f5273c1476c66b1aed7"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/onboard-attempt-journal.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "846498a08db6e250197e366f258efbe18496d9ac"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "846498a08db6e250197e366f258efbe18496d9ac"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/onboard-funnel-current-read.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b40899bbdd90abe18e1f04aafa36fdb6a351ccc5"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b40899bbdd90abe18e1f04aafa36fdb6a351ccc5"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/onboard-funnel-lifetime.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6f7f6a9d00b4d4ac13721bd252142e27c6a20016"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6f7f6a9d00b4d4ac13721bd252142e27c6a20016"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/onboard-import-recovery.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "7e05e8b0dac8019231dee6ed92dd47348a3ee823"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "7e05e8b0dac8019231dee6ed92dd47348a3ee823"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/onboard-input-refusal.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "837aa4fe81beb8023f21e68fc11e6ab8b5d88d21"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "837aa4fe81beb8023f21e68fc11e6ab8b5d88d21"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/onboard-invitation-recovery.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "97163f45d2a3e4682e90b90696498d789aaa9815"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "97163f45d2a3e4682e90b90696498d789aaa9815"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/onboard-it-current-invite.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9c45a02cbfc471b3d3615bd68d2f9aca4f08c5ad"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9c45a02cbfc471b3d3615bd68d2f9aca4f08c5ad"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/onboard-it-return.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6aada5d8071095bee680e6448fda3aaad67ee9b7"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6aada5d8071095bee680e6448fda3aaad67ee9b7"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/onboard-legal-review.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "de80010f60e1c1604612dd05a078781a18c06c2f"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "de80010f60e1c1604612dd05a078781a18c06c2f"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/onboard-lifecycle.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c018f8976a1eac1120c7f22ece3ceb70c2bbcb86"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c018f8976a1eac1120c7f22ece3ceb70c2bbcb86"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/onboard-registration-draft.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "bb54ea9584a6af5c92059f07758141a9c7181fe9"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "bb54ea9584a6af5c92059f07758141a9c7181fe9"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/onboard-setup-eligibility.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "879ed9977d998693b2819fd896496efffbbdf570"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "879ed9977d998693b2819fd896496efffbbdf570"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/onboard-stripe-confirmation.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "1852ece6a3d370c5ac2574e48337cebb72c7e614"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "1852ece6a3d370c5ac2574e48337cebb72c7e614"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/opportunities.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "fdd7917b5165dec206db59ed4abf0f468da66f77"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "fdd7917b5165dec206db59ed4abf0f468da66f77"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/ordered-owners.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "aa5a76af6b0a893cb022b3d28c5f27c991be5050"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "aa5a76af6b0a893cb022b3d28c5f27c991be5050"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/overview-removal.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "2d6254c8632bec84b27001ce9fec3e7d799b92f9"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "2d6254c8632bec84b27001ce9fec3e7d799b92f9"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/portfolio-attention.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "48b06290e0aa9abf06bb6d1dda32e85ffedeabc5"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "48b06290e0aa9abf06bb6d1dda32e85ffedeabc5"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/portfolio-index.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e8eb6fe6062e043b19ee9f399c4ea48eedd97218"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e8eb6fe6062e043b19ee9f399c4ea48eedd97218"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/portfolio-layout.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "7fe41eb0b1139e574720440e132dc5a80acd5d87"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "7fe41eb0b1139e574720440e132dc5a80acd5d87"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/portfolio.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "5df3b83013b491cf417ce2c348a71f61798f5248"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "5df3b83013b491cf417ce2c348a71f61798f5248"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/profile-capacity.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "81cb735966490302eedb768cad6f051926354479"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "81cb735966490302eedb768cad6f051926354479"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/profile-current-state.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "aee321ed452bce1a535fcfb2120a8a0ec2aec4f3"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "aee321ed452bce1a535fcfb2120a8a0ec2aec4f3"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/profile-presentation.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "892feaf3dcd58f6bdc41e956760f78f730ee1a0e"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "892feaf3dcd58f6bdc41e956760f78f730ee1a0e"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/profile-tools.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "2179b948f57258724a84fdb7ea3a452f96abc20b"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "2179b948f57258724a84fdb7ea3a452f96abc20b"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/prospect-brief.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "1ff75ae01f84f1b1eec5123cb79618b0f78ad9f1"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "1ff75ae01f84f1b1eec5123cb79618b0f78ad9f1"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/prospect-contacts.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "afbd380da419e256ef52fea47fc27bd917ee7b95"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "afbd380da419e256ef52fea47fc27bd917ee7b95"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/prospect-conversion.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "188f5da36c9a70827a94504801b60d9a7186fc57"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "188f5da36c9a70827a94504801b60d9a7186fc57"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/prospect-files.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "da185b9399087722493b2da9dedef62146325571"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "da185b9399087722493b2da9dedef62146325571"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/prospect-overview.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "5abf8928e2c12865a949aaeb8d38ebca993fb525"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "5abf8928e2c12865a949aaeb8d38ebca993fb525"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/prospect-proposal-contract.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9f1294f6ca46a093ed1b86bb49a5b2563dccdc5b"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9f1294f6ca46a093ed1b86bb49a5b2563dccdc5b"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/prospect-proposals.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a24e62ffa7dbe45e566dd9210d8f925187eaac26"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a24e62ffa7dbe45e566dd9210d8f925187eaac26"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/prospect-workspace.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "f9c4388f25a3ce3843d16501d573ef2b220501cc"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "f9c4388f25a3ce3843d16501d573ef2b220501cc"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/public-event.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "2d8fab4106934e195170c27fb59a422bbda24728"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "2d8fab4106934e195170c27fb59a422bbda24728"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/registrant-intake.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "cd2849305fc6fad7a5a3c3ae80ba5fc27bca5b3d"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "cd2849305fc6fad7a5a3c3ae80ba5fc27bca5b3d"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/registrant-proxy.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "7ea781dae3aabd14f0a17b8231cc4cb0e779aac2"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "7ea781dae3aabd14f0a17b8231cc4cb0e779aac2"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/registration-writer.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "7ec936c27f5b71fc1072ccea0fc068bf3fab7ef6"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "7ec936c27f5b71fc1072ccea0fc068bf3fab7ef6"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/relationships.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a15700ab1dc27ce103d6199e44136db71dd74509"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a15700ab1dc27ce103d6199e44136db71dd74509"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/review-intel-partial.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0bc47a26cd345c0491ca20db308bdf41a86d2f2b"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0bc47a26cd345c0491ca20db308bdf41a86d2f2b"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/rich-mail-selection.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8d710bb2a9317211dff9a9b91cebeb5ef1e72231"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8d710bb2a9317211dff9a9b91cebeb5ef1e72231"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/saved-submissions-current.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a8ca67ab874e6455a20bda7ff28844e08db696c7"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a8ca67ab874e6455a20bda7ff28844e08db696c7"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/thread-mail.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6b6ed0e172384aafe42fd1dba5ab1a5649ae8ea8"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6b6ed0e172384aafe42fd1dba5ab1a5649ae8ea8"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/tracker-alert-preferences.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0d5eaf9573f433616b67725fe50c0cc27e575806"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0d5eaf9573f433616b67725fe50c0cc27e575806"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/tracker-current-data.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "82b76323619d12e9bc0681ae2449e267af308569"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "82b76323619d12e9bc0681ae2449e267af308569"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/watchlist-current-source.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "621b982198cc7d5a0b240e52bd2785db0f11ea6a"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "621b982198cc7d5a0b240e52bd2785db0f11ea6a"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/watchlist-current-writer.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "60eff5d2165ed72d653d1cbe83c0fe54e37f592b"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "60eff5d2165ed72d653d1cbe83c0fe54e37f592b"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/watchlist-integration-receipt.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "7159c7169b9b69b05fbfe14062cb01b23f89aeab"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "7159c7169b9b69b05fbfe14062cb01b23f89aeab"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/watchlist.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "3ce0a82e43ccb2a52cd0013584e92c3e1d1a52ca"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "3ce0a82e43ccb2a52cd0013584e92c3e1d1a52ca"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/work-associations.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "686cfdfc06c0372ed00c9987b30715882cc99282"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "686cfdfc06c0372ed00c9987b30715882cc99282"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/work-contracts.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "2fd5838bd2d51159f09d8f9ee6222859e0354273"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "2fd5838bd2d51159f09d8f9ee6222859e0354273"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/tests/work-owner-presentation.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a2b8067bb9f93a778d611fce2119b37b784f15ae"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a2b8067bb9f93a778d611fce2119b37b784f15ae"
+      },
+      "exact": true
+    },
+    {
+      "path": "scripts/architecture-meri-actions.test.mjs",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "3118faa5a8700e0b2247e2929e325d529afe26ad"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "3118faa5a8700e0b2247e2929e325d529afe26ad"
+      },
+      "exact": true
+    },
+    {
+      "path": "scripts/architecture-onboard.test.mjs",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "2158eea8a326b463a46680b506e8c9249b58da3e"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "2158eea8a326b463a46680b506e8c9249b58da3e"
+      },
+      "exact": true
+    },
+    {
+      "path": "scripts/architecture-reviews.test.mjs",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c46e3be1c18a9e3934c3d6adb23e09c6a2891860"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c46e3be1c18a9e3934c3d6adb23e09c6a2891860"
+      },
+      "exact": true
+    },
+    {
+      "path": "scripts/architecture.test.mjs",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0047a5bdefc6bfd4040896a390f7d92960e047a4"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0047a5bdefc6bfd4040896a390f7d92960e047a4"
+      },
+      "exact": true
+    },
+    {
+      "path": "scripts/deployment-cli.test.mjs",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "65288cb7ffc09c655e45b387349c55c491277ae6"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "65288cb7ffc09c655e45b387349c55c491277ae6"
+      },
+      "exact": true
+    },
+    {
+      "path": "scripts/newsletter-cli.test.mjs",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e04a9303bd21e6c6053b5d83d72742b5b9c7745c"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e04a9303bd21e6c6053b5d83d72742b5b9c7745c"
+      },
+      "exact": true
+    },
+    {
+      "path": "scripts/public-packages.test.mjs",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ed06ff65625884b2e529407c88a3217e17906451"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ed06ff65625884b2e529407c88a3217e17906451"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/features/modules/calendar/agenda-loader.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8c8ec091c63c43d4201104d652be12db018f7f5b"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8c8ec091c63c43d4201104d652be12db018f7f5b"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/features/modules/calendar/planner-occurrences.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8a419bfc03cfd5ab68b3b8ac5887872aaccf1127"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "8a419bfc03cfd5ab68b3b8ac5887872aaccf1127"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/features/modules/calendar/range.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "5f481eea56e0b48a70de04572daed602f9f6429c"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "5f481eea56e0b48a70de04572daed602f9f6429c"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/features/modules/calendar/selection.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "508637728e70f8b1ed3df75eea7bf8e4e1d7c6a3"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "508637728e70f8b1ed3df75eea7bf8e4e1d7c6a3"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/features/modules/engagement/newsletter-route.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d25dd2a37e657036f1647a87c4d0e82126286a97"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "d25dd2a37e657036f1647a87c4d0e82126286a97"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/hearings/calendar-dates.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0a2a0eeedba98b6f214992d1000065c9ca3a8ac4"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "0a2a0eeedba98b6f214992d1000065c9ca3a8ac4"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/features/modules/intelligence/legiwatch/live/HearingRecordingTransport.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b0aa780c7eccf7669fad8109a50e0dc042703ac7"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b0aa780c7eccf7669fad8109a50e0dc042703ac7"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/form-model.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "22a8768f79c35ad38969c707662e546408dac30e"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "22a8768f79c35ad38969c707662e546408dac30e"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/task-client-groups.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b889e35843f846fa516465e1a7686badb8d7002a"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "b889e35843f846fa516465e1a7686badb8d7002a"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/features/modules/planner/task-presentation.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a2c3fad8198491b653365915165fa8464e414cad"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "a2c3fad8198491b653365915165fa8464e414cad"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/rich-newsletter/document-controller.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "2e9412c8101313e19f46634c0a1e2b021ecfc172"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "2e9412c8101313e19f46634c0a1e2b021ecfc172"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/features/modules/workspace/rich-newsletter/draft.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "91f00e46a69b86b07697001acf8fdfd90324995f"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "91f00e46a69b86b07697001acf8fdfd90324995f"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/config.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "4e97bc8fef5f544cb3e6dd1f79d8ecbf26290adc"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "4e97bc8fef5f544cb3e6dd1f79d8ecbf26290adc"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/gateway.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e589472e6508d22c611dea275ebe77d18ca1e7a6"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "e589472e6508d22c611dea275ebe77d18ca1e7a6"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/http.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "f381bea0fc445592317d898586f116332c24234c"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "f381bea0fc445592317d898586f116332c24234c"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/legiwatch-review.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6ed3b660fbea83eb98ce55e0944a90acb3737f89"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6ed3b660fbea83eb98ce55e0944a90acb3737f89"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/lifecycle.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9ff69d77cbc4cc3e142119659ee70c523dfb5c0d"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9ff69d77cbc4cc3e142119659ee70c523dfb5c0d"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/newsletter-routing.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9d9a11d5c11319d86d6fb465b02206ec0147a09e"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "9d9a11d5c11319d86d6fb465b02206ec0147a09e"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/onboard-adapters.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ddb0c3105a937bbf8ffdb967d6ba107536659c1a"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "ddb0c3105a937bbf8ffdb967d6ba107536659c1a"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/onboard-gateway.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c8e8169945de1816c31c625dbdfa02179406c6bb"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c8e8169945de1816c31c625dbdfa02179406c6bb"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/intelligence-research-contracts.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "dcf5fed5a6a8b2bade1eae11491014492018c099"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "dcf5fed5a6a8b2bade1eae11491014492018c099"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-contracts.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "52f36da8f778c88f5319fd818e19ac093c0ddea2"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "52f36da8f778c88f5319fd818e19ac093c0ddea2"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/onboard-contracts.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c91c547565aea5ce5f8eee72939f6383f237cb10"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c91c547565aea5ce5f8eee72939f6383f237cb10"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/planner-contracts.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "09d4e76196036593d7ec7f4628f3f7182a5c3251"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "09d4e76196036593d7ec7f4628f3f7182a5c3251"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/settings-admin.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6cfe9b2c7338420419180c7fe750a1df1a32c569"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "6cfe9b2c7338420419180c7fe750a1df1a32c569"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/public-forms.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "fa7863a08035f919b230c540212a94d8413db575"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "fa7863a08035f919b230c540212a94d8413db575"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/registry.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "70372a53e70af779647d70c60f605160b811bf21"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "70372a53e70af779647d70c60f605160b811bf21"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/rich-newsletter.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c4205a6dcca0d851b502eabe5b3dc917c2b9ce77"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "c4205a6dcca0d851b502eabe5b3dc917c2b9ce77"
+      },
+      "exact": true
+    },
+    {
+      "path": "apps/web/src/shared/capiro/transfers.test.ts",
+      "base": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "5247d69bf107c69d4e2c92c12555c6e6b6a03587"
+      },
+      "final": {
+        "mode": "100644",
+        "kind": "blob",
+        "blob": "5247d69bf107c69d4e2c92c12555c6e6b6a03587"
+      },
+      "exact": true
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "matches": [],
+  "denied": [],
+  "inspected": 36,
+  "excludedAncestorPids": [
+    479,
+    1467081,
+    1467084
+  ],
+  "scope": "Authorized read-only out-of-sandbox same-user commandline/maps/cwd/exe/fd scan; returned no matches or denied process surfaces. Exact tool-returned results transcribed.",
+  "rootConfirmation": "Root confirms sole runtime is Portfolio shard3 Vite and has no Elements imports/consumer; no other Elements lease.",
+  "recordedUTC": "2026-10-13T10:25:00.410215+00:00"
+}
