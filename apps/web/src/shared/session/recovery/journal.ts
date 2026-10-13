@@ -153,15 +153,14 @@ function retireRecovery(
       throw new RecoveryStorageError();
     // Retain the non-sensitive fence; erase the encrypted draft payload.
     // A known refusal is distinct from an acknowledged completed receipt.
-    await writeJournalRecord(
+    const retired = await encryptJournal({
+      version: 1,
       scope,
-      await encryptJournal({
-        version: 1,
-        scope,
-        requestId,
-        ...disposition,
-      }),
-    );
+      requestId,
+      ...disposition,
+    });
+    assert();
+    await writeJournalRecord(scope, retired);
     const verified = await current(scope);
     if (
       verified?.state !== disposition.state ||
