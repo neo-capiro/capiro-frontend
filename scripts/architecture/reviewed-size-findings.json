@@ -1137,15 +1137,6 @@
     "reviewedOn": "2026-10-12"
   },
   {
-    "file": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
-    "kind": "function",
-    "symbol": "WorkspaceScreen",
-    "fingerprint": "deee3d7a09db876ddbcb2a280bbaa1c34c1fa5c866e741c48b24c330fa82e11c",
-    "reason": "This existing Workspace view dispatcher gains one validated prospect query branch and delegates list/create and the canonical editor. Invalid prospect IDs fail closed and URL navigation owns prospect/draft selection. Existing library/workflows/share routes retain their owners; there is no feature import across Portfolio/Modules or duplicate editor.",
-    "reviewedBy": "Codex shared frontend integration owner (source review)",
-    "reviewedOn": "2026-10-12"
-  },
-  {
     "file": "apps/web/src/features/portfolio/client-profile/QuickLog.tsx",
     "kind": "function",
     "symbol": "QuickLog",
