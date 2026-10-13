@@ -47,9 +47,11 @@ export function CalendarPage({
   const view: CalendarView =
     params.get("view") === "week"
       ? "week"
-      : params.get("view") === "agenda"
-        ? "agenda"
-        : "month";
+      : params.get("view") === "day"
+        ? "day"
+        : params.get("view") === "agenda"
+          ? "agenda"
+          : "month";
   const scope = clientId ?? params.get("clientId") ?? undefined;
   const meetingScopeAvailable =
     Boolean(clientId) ||
@@ -224,6 +226,7 @@ export function CalendarPage({
         >
           <option value="month">Month</option>
           <option value="week">Week</option>
+          <option value="day">Day</option>
           <option value="agenda">Agenda</option>
         </select>
         <select
@@ -347,6 +350,12 @@ export function CalendarPage({
         explicit client sharing. It does not grant access to teammates&apos;
         private calendars.
       </p>
+      {view === "day" && (
+        <p className={styles.scopeNote}>
+          Shows meetings that start on this day in {zone}. Meetings that started
+          on an earlier day are not included.
+        </p>
+      )}
       {view === "agenda" ? (
         (items.length > 0 ||
           activeFeeds.every(

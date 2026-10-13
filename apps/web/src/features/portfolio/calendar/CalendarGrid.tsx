@@ -3,7 +3,11 @@ import "temporal-polyfill/global";
 import { useEffect } from "react";
 import { Temporal } from "temporal-polyfill";
 import { ScheduleXCalendar, useNextCalendarApp } from "@schedule-x/react";
-import { createViewMonthGrid, createViewWeek } from "@schedule-x/calendar";
+import {
+  createViewDay,
+  createViewMonthGrid,
+  createViewWeek,
+} from "@schedule-x/calendar";
 import "@schedule-x/theme-default/dist/index.css";
 import type { CalendarItem } from "./contracts";
 import type { CalendarView, CalendarZone } from "./range";
@@ -24,13 +28,17 @@ export function CalendarGrid({
   onMeeting: (id: string) => void;
 }) {
   const calendar = useNextCalendarApp({
-    views: [createViewMonthGrid(), createViewWeek()],
-    defaultView: view === "week" ? "week" : "month-grid",
+    views: [createViewMonthGrid(), createViewWeek(), createViewDay()],
+    defaultView:
+      view === "day" ? "day" : view === "week" ? "week" : "month-grid",
     selectedDate: Temporal.PlainDate.from(date),
     timezone: zone,
     firstDayOfWeek: 7,
     isResponsive: false,
-    dayBoundaries: { start: "06:00", end: "22:00" },
+    dayBoundaries:
+      view === "day"
+        ? { start: "00:00", end: "24:00" }
+        : { start: "06:00", end: "22:00" },
     weekOptions: { gridHeight: 900 },
     callbacks: {
       onEventClick: (event) =>
@@ -59,7 +67,7 @@ export function CalendarGrid({
     return () => media.removeEventListener("change", update);
   }, [calendar]);
   return (
-    <div className={styles.grid}>
+    <div className={styles.grid} data-view={view}>
       <ScheduleXCalendar calendarApp={calendar} />
     </div>
   );
