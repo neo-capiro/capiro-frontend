@@ -7,6 +7,41 @@ not alter the existing `capiro-dev` cluster, shared Capiro ALB/listener,
 `os.capiro.ai`, or backend services. The source continuation requires an
 owner-visible AWS step before shipping an image or creating resources.
 
+## Isolated configuration successor
+
+The source-only preview profile now follows backend
+[PR2483 at 0f1e663d](https://github.com/neo-capiro/capirov2/pull/2483).
+Core `/api`, Workspace `/workspace-api` and Intelligence `/intel-api` target
+`https://portfolio-preview.app.capiro.ai`. Their backend services remain held
+at zero capacity. Strategy, Onboard and Meri are explicitly unconfigured, with
+Meri workflow flags false. These targets are not evidence of live availability.
+
+`preview-config.mjs` reads one explicit local JSON file containing exactly
+`clerkIssuer`, `clerkApplicationId`, `clerkPublishableKeyArn`, `clerkSecretArn`
+and `clerkKeyArn`. Supply only owner-verified public metadata from the designated
+preview Test Clerk application. No live bindings are supplied by this repository.
+Do not put credential values in this file.
+
+```sh
+node apps/web/deployment/portfolio/preview-config.mjs --help
+node apps/web/deployment/portfolio/preview-config.mjs --bindings /absolute/path/to/verified-public-metadata.json
+```
+
+The command prints a local configuration proposal with all nine configuration
+parameters explicit. `--parameters FILE` additionally validates a candidate
+JSON parameter array against those exact values. It rejects missing values,
+duplicates, overrides and `UsePreviousValue`; it never merges ambient environment
+values or reads AWS/secret contents. Output is not a complete apply request.
+Image, certificate and ingress review remain with the shipping owner.
+
+The service template constrains the same preview parameters and disables the
+unavailable services. Existing IAM, network and secret-reference wiring remains
+unchanged. A namespace-valid reference cannot prove its secret payload contains
+the matching `pk_test`/`sk_test` keys or belongs to the declared application and
+issuer. Those checks, backend/auth/data isolation and all activation remain held.
+Do not retain a previous production-bound parameter or restore a production URL
+to make the preview work. Authentication implementation is unchanged.
+
 The [11 October handover](../../../../docs/portfolio-31/handover-2026-10-11/HANDOVER.md)
 records `Capiro-Portfolio-Preview-Service` as deployed, with one healthy task at
 revision 2. The admitted image was
@@ -103,8 +138,9 @@ ingress address or cached AWS reads are available or current.
    digest. The bounded build role can read its source, write logs and push/read
    this ECR repository; it does not update ECS or DNS.
 5. Read back the exact ECR digest and a completed scan. Review the preview-only
-   service change set with that immutable digest, preserving existing secret
-   references, service origins, narrow ingress and all unrelated parameters.
+   service change set with that immutable digest and the explicit configuration
+   proposal above. Independently verify the dedicated Test Clerk references and
+   preview backend bindings; preserve narrow ingress and unrelated parameters.
    `TrackerBackend=intelligence` is the owner's confirmed preview choice. Do not
    deploy by mutable tag or silently change existing service configuration.
 6. Execute only the reviewed preview update. Verify stack completion, ECS steady

@@ -1,0 +1,7 @@
+# Packaging helper — bounded read-only review
+
+PASS for the declared closed-root evidence publication. The helper was inspected, not executed. It packages eight explicit roots into a fresh output directory outside those inputs, does not follow symlinks, uses exclusive archive creation, reads every included payload back, then rehashes every original. Inputs are never edited or deleted. Caches and compiled outputs are deliberately excluded; this is not an executable environment backup.
+
+The advisory current inventory has unique member paths and only regular included files. The two preserved dangling Shiki links are recorded as links without following them. Excluded Figma base64 files decode exactly to the retained PNG bytes; the three raw contexts match the provenance hashes and have URL-redacted publication copies. No matching temporary Figma asset URL was found in included textual evidence. Raw test failures and successful reports are included; excluded originals remain local. Final inventory must wait for all producer/review packets to close, as planned.
+
+Two narrow verification limits are explicit: tar.add carries file modes, but the helper does not list/assert them; archive member set comparison is not duplicate-sensitive, although its controlled writer has unique input paths and emits each once. Neither is an observed payload loss or current blocker. A final committed/archive audit may compare modes and member multiplicity independently. No source/native/runtime acceptance or archive completion is inferred before the helper's actual receipt.

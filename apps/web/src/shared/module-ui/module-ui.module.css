@@ -11,6 +11,11 @@
   font-weight: 600;
   letter-spacing: -0.24px;
 }
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
 .eyebrow {
   color: var(--muted-foreground);
   font-size: 11px;

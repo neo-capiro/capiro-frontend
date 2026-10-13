@@ -1,6 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
+import { Tooltip as TooltipPrimitive } from "radix-ui";
+import { Tooltip, TooltipTrigger } from "@capiro/ui/tooltip";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import { PageHeader } from "../../../shared/module-ui";
@@ -30,7 +33,7 @@ function ModuleCard({
           <span
             className={`${styles.cardIcon} ${styles[module.tone ?? "steel"]}`}
           >
-            <ModuleAsset name={module.cardIcon ?? module.icon} size={18} />
+            <ModuleAsset name={module.cardIcon ?? module.icon} />
           </span>
           <h2>
             {module.slug === "research-portfolios"
@@ -91,6 +94,7 @@ export function ModuleHub() {
       <PageHeader
         title="Everything in Capiro, across the whole firm"
         eyebrow="Modules"
+        titleAccessory={<ModuleHubInformation />}
         actions={
           <label className={styles.scope}>
             Scope
@@ -136,6 +140,39 @@ export function ModuleHub() {
         clientId={clientId}
         landscape
       />
+    </div>
+  );
+}
+
+function ModuleHubInformation() {
+  const [container, setContainer] = useState<HTMLDivElement | null>(null);
+  return (
+    <div className={styles.infoAnchor} ref={setContainer}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <button
+            type="button"
+            className={styles.info}
+            aria-label="About Modules"
+          >
+            <span aria-hidden="true">i</span>
+          </button>
+        </TooltipTrigger>
+        {container && (
+          <TooltipPrimitive.Portal container={container}>
+            <TooltipPrimitive.Content
+              side="bottom"
+              sideOffset={4}
+              className={styles.infoContent}
+              data-slot="tooltip-content"
+            >
+              Every client and every activity, across the whole firm. Choose a
+              client profile to show just that client’s work.
+              <TooltipPrimitive.Arrow />
+            </TooltipPrimitive.Content>
+          </TooltipPrimitive.Portal>
+        )}
+      </Tooltip>
     </div>
   );
 }

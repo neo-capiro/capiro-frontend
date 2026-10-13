@@ -18,7 +18,7 @@ function approvedPricingImport(file, module, entry) {
 }
 
 export const publicExports = new Set([
-  '@capiro/ui/button', '@capiro/ui/dialog', '@capiro/ui/prompt-input',
+  '@capiro/ui/button', '@capiro/ui/dialog', '@capiro/ui/tooltip', '@capiro/ui/prompt-input',
   '@capiro/ui/input', '@capiro/ui/textarea', '@capiro/ui/select', '@capiro/ui/dropdown-menu',
   '@capiro/ui/conversation', '@capiro/ui/message', '@capiro/meri-client/projection',
   '@capiro/meri-contracts', '@capiro/meri-contracts/browser',

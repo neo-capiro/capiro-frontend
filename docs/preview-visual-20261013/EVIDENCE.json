@@ -1,0 +1,47 @@
+{
+  "archiveSha256": "911426f23796d62da3b1803dfd3ae16c2ef64185324dfe6d586afb638c106d94",
+  "archiveBytes": 140033841,
+  "manifestSha256": "8df8496cf4e8ed2c530dee40ee39f6204610c69dc044bba71259cfbf7da6a29d",
+  "files": 1040,
+  "uncompressedBytes": 187860555,
+  "membersReadBack": true,
+  "originalBytesUnchanged": true,
+  "excluded": 14,
+  "symlinksRecorded": 2,
+  "source": "e63de78f394209de3fbd045a13cc06e1f8c5a8c3",
+  "parts": [
+    {
+      "file": "evidence.tar.gz.part-000",
+      "bytes": 25165824,
+      "sha256": "516aafc683909bb040842ddde6a0f0482530bb832ce01c664f3a3fd6ecdb39a1"
+    },
+    {
+      "file": "evidence.tar.gz.part-001",
+      "bytes": 25165824,
+      "sha256": "cadf750e62157a4aeda67ca78645841ffcb9fb53c63f9ad02776869d815adcf3"
+    },
+    {
+      "file": "evidence.tar.gz.part-002",
+      "bytes": 25165824,
+      "sha256": "d324c6b3e0a2d461d0b65a35c33a6b483a19997e4df67acdbd24b7eb8d416668"
+    },
+    {
+      "file": "evidence.tar.gz.part-003",
+      "bytes": 25165824,
+      "sha256": "f0db11289477f9ef8808148cf672e8ba8595154ab1f751f71a37cd76193ba4b2"
+    },
+    {
+      "file": "evidence.tar.gz.part-004",
+      "bytes": 25165824,
+      "sha256": "9e3c267075250d29c6909c372d37368f2fe43b5e1930cb9dd5ca35f4733e5a35"
+    },
+    {
+      "file": "evidence.tar.gz.part-005",
+      "bytes": 14204721,
+      "sha256": "f7b80aee39f4b6e00572065005c737e230b935371eb963c3597a0b8b7e643c0d"
+    }
+  ],
+  "partsReadbackMatchesArchive": true,
+  "packagingReviewManifest": "45921f28d34645a205ab88d0eed675efc368a9c6725b3a45eb8a520e72869de4",
+  "reviewScope": "Archive bytes/member set and original hashes verified; file-mode restoration and executable environment completeness are not claimed."
+}
