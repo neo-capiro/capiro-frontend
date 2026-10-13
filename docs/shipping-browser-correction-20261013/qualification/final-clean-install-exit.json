@@ -1,0 +1,27 @@
+{
+  "name": "final-clean-install",
+  "command": [
+    "env",
+    "npm_config_cache=/tmp/capiro-shipping-npm-cache",
+    "npm",
+    "ci",
+    "--ignore-scripts"
+  ],
+  "startedUTC": "2026-10-13T01:45:33.656909+00:00",
+  "endedUTC": "2026-10-13T01:45:49.314791+00:00",
+  "durationSeconds": 15.65797865499917,
+  "exitCode": 0,
+  "sourceBefore": {
+    "head": "d4be41e60516e576c74afa304b50ed67da15cb93",
+    "tree": "401cadde371b91606e3346243aaca6b6225aafcb",
+    "applicationTree": "6ae2118b797f478f5a63788841a9777d67c8001e",
+    "sourceDiff": ""
+  },
+  "sourceAfter": {
+    "head": "d4be41e60516e576c74afa304b50ed67da15cb93",
+    "tree": "401cadde371b91606e3346243aaca6b6225aafcb",
+    "applicationTree": "6ae2118b797f478f5a63788841a9777d67c8001e",
+    "sourceDiff": ""
+  },
+  "sourceChanged": false
+}

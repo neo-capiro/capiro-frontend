@@ -1,0 +1,33 @@
+{
+  "reviewedUTC": "2026-10-13T02:43:04.756783+00:00",
+  "source": "d4be41e60516e576c74afa304b50ed67da15cb93",
+  "run": "First complete run:1121 passed,1 unrelated ENOSPC failure; affected screenshot-producing cases passed",
+  "observations": [
+    "Mobile rich editor controls and selection remain readable within the dialog viewport; screenshot is scrolled and does not establish full-dialog accessibility.",
+    "Desktop rich toolbar, recipient, subject and editor remain aligned and readable; screenshot captures existing scrollable layout.",
+    "Profile overview shows focus tags above ownership controls, readable source fields, shared navigation and canonical two-column layout."
+  ],
+  "limits": [
+    "Bounded visual inspection only; no new current Figma comparison completed.",
+    "Figma get_design_context called with supplied fileKey Zc2dEN5aLU47dVdsewDmiJ and node411:40601 returned nothing selected, debug UUID144f79f2-d63a-4e1b-8b0a-bf8485248afc.",
+    "Follow-up get_screenshot for same explicit node did not return; waiting script terminated.",
+    "Existing synthetic geometry/keyboard tests remain source-bound evidence; this does not accept all337 native rows, full accessibility or Figma conformance."
+  ],
+  "files": [
+    {
+      "path": "final-portfolio-browser-artifacts/mail-rich-compose-keyboard-8fe9b-le-toolbar-remain-reachable/mobile-rich.png",
+      "bytes": 33238,
+      "sha256": "d3e7e3f25de1117539dc20420f2f1e2f6e6ad4e6e31cb7f734694f5d82df404d"
+    },
+    {
+      "path": "final-portfolio-browser-artifacts/mail-rich-compose-toolbar--72582-icker-with-no-extra-request/desktop-rich.png",
+      "bytes": 73027,
+      "sha256": "c975fbe384002a07c44237d9be2d91ceca00c0364b3065f5ba39f1ec2646ad0e"
+    },
+    {
+      "path": "final-portfolio-browser-artifacts/profile-tools-integration--655bc-ates-the-real-profile-cache/overview-focus-desktop.png",
+      "bytes": 183580,
+      "sha256": "dd6ef8706afe5980b63779963a450a6e9de04aa694c9105c2ec52ea9fc202453"
+    }
+  ]
+}

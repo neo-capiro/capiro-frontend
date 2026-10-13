@@ -1,0 +1,668 @@
+{
+  "capturedAtUTC": "2026-10-13T03:20:41.362244+00:00",
+  "reviewStatus": "accepted completed local gate receipts within stated scope; no new blocker found",
+  "reviewerActions": "Read-only parsing/hash/source comparison and actual image inspection. No test/browser/server/build/install/native/AWS execution. Writes only this new review packet.",
+  "source": {
+    "head": "d4be41e60516e576c74afa304b50ed67da15cb93",
+    "tree": "401cadde371b91606e3346243aaca6b6225aafcb",
+    "applicationTree": "6ae2118b797f478f5a63788841a9777d67c8001e",
+    "sourceTree": "02ad682840eec3b2d8091b37de9b8c45a984e542",
+    "sourceDiff": "",
+    "status": " M docs/shipping-browser-correction-20261013/IMPLEMENTATION.md\n?? docs/shipping-browser-correction-20261013/FROZEN-GIT-TREE.txt\n?? docs/shipping-browser-correction-20261013/FROZEN-SOURCE-MANIFEST.json\n?? docs/shipping-browser-correction-20261013/QUALIFICATION.md\n?? docs/shipping-browser-correction-20261013/qualification/\n?? docs/shipping-browser-correction-20261013/qualify-frozen-source.sh\n?? docs/shipping-browser-correction-20261013/reviews/AWS-FAILURE-EVIDENCE.json\n?? docs/shipping-browser-correction-20261013/reviews/REVIEW-RECEIPT.json\n"
+  },
+  "gates": [
+    {
+      "name": "final-modules-browser",
+      "startedUTC": "2026-10-13T03:10:29.054594+00:00",
+      "endedUTC": "2026-10-13T03:14:54.589894+00:00",
+      "durationSeconds": 265.5353290519997,
+      "exitCode": 0,
+      "matchesCurrentFrozenSource": true,
+      "command": [
+        "env",
+        "TZ=UTC",
+        "CAPIRO_QA_CHROMIUM_EXECUTABLE=/usr/bin/chromium",
+        "PLAYWRIGHT_JSON_OUTPUT_FILE=/tmp/capiro-shipping-browser-correction-20261013/final-modules-browser-results.json",
+        "npm",
+        "run",
+        "test:browser:modules"
+      ]
+    },
+    {
+      "name": "final-production-build",
+      "startedUTC": "2026-10-13T03:15:06.875570+00:00",
+      "endedUTC": "2026-10-13T03:15:57.358721+00:00",
+      "durationSeconds": 50.48317716199381,
+      "exitCode": 0,
+      "matchesCurrentFrozenSource": true,
+      "command": [
+        "env",
+        "TZ=UTC",
+        "NEXT_TELEMETRY_DISABLED=1",
+        "npm",
+        "run",
+        "build"
+      ]
+    },
+    {
+      "name": "final-production-server",
+      "startedUTC": "2026-10-13T03:16:40.093087+00:00",
+      "endedUTC": "2026-10-13T03:16:46.523816+00:00",
+      "durationSeconds": 6.4307528890058165,
+      "exitCode": 0,
+      "matchesCurrentFrozenSource": true,
+      "command": [
+        "env",
+        "TZ=UTC",
+        "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+        "npm",
+        "run",
+        "test:production",
+        "--",
+        "/tmp/capiro-shipping-browser-correction-20261013/final-production"
+      ]
+    },
+    {
+      "name": "final-portfolio-browser-v2",
+      "startedUTC": "2026-10-13T02:32:37.192828+00:00",
+      "endedUTC": "2026-10-13T03:10:03.144150+00:00",
+      "durationSeconds": 2245.9513463389885,
+      "exitCode": 0,
+      "matchesCurrentFrozenSource": true,
+      "command": [
+        "env",
+        "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+        "PLAYWRIGHT_JSON_OUTPUT_FILE=/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-v2-results.json",
+        "npm",
+        "run",
+        "test:browser",
+        "--",
+        "--workers=3",
+        "--output=/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-v2-artifacts"
+      ]
+    }
+  ],
+  "modules": {
+    "file": "final-modules-browser-results.json",
+    "stats": {
+      "startTime": "2026-10-13T03:10:30.018Z",
+      "duration": 264531.312,
+      "expected": 208,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "globalErrors": [],
+    "testEntries": 208,
+    "resultCount": 208,
+    "outcomes": {
+      "expected": 208
+    },
+    "resultStatuses": {
+      "passed": 208
+    },
+    "retryDistribution": {
+      "0": 208
+    },
+    "perTestTimeoutsMs": {
+      "30000": 208
+    },
+    "workers": 1,
+    "actualWorkers": 1,
+    "projectDefaults": [
+      {
+        "timeout": 30000,
+        "retries": 0,
+        "outputDir": "/workspace/capiro-shipping-browser-20261013/apps/web/test-results/modules-browser"
+      }
+    ],
+    "slowCases": []
+  },
+  "portfolioRerun": {
+    "file": "final-portfolio-browser-v2-results.json",
+    "stats": {
+      "startTime": "2026-10-13T02:32:38.033Z",
+      "duration": 2245044.202,
+      "expected": 1122,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "globalErrors": [],
+    "testEntries": 1122,
+    "resultCount": 1122,
+    "outcomes": {
+      "expected": 1122
+    },
+    "resultStatuses": {
+      "passed": 1122
+    },
+    "retryDistribution": {
+      "0": 1122
+    },
+    "perTestTimeoutsMs": {
+      "30000": 1118,
+      "90000": 4
+    },
+    "workers": 3,
+    "actualWorkers": 3,
+    "projectDefaults": [
+      {
+        "timeout": 30000,
+        "retries": 0,
+        "outputDir": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-v2-artifacts"
+      }
+    ],
+    "slowCases": [
+      {
+        "file": "capability-presentation-visual.spec.ts",
+        "title": "Figma capability Profile, Documents and create surfaces at desktop-light",
+        "timeoutMs": 90000,
+        "annotations": [
+          {
+            "type": "slow",
+            "location": {
+              "file": "/workspace/capiro-shipping-browser-20261013/apps/web/tests/browser/capability-presentation-visual.spec.ts",
+              "line": 47,
+              "column": 10
+            }
+          }
+        ]
+      },
+      {
+        "file": "capability-presentation-visual.spec.ts",
+        "title": "Figma capability Profile, Documents and create surfaces at phone-light",
+        "timeoutMs": 90000,
+        "annotations": [
+          {
+            "type": "slow",
+            "location": {
+              "file": "/workspace/capiro-shipping-browser-20261013/apps/web/tests/browser/capability-presentation-visual.spec.ts",
+              "line": 47,
+              "column": 10
+            }
+          }
+        ]
+      },
+      {
+        "file": "capability-presentation-visual.spec.ts",
+        "title": "Figma capability Profile, Documents and create surfaces at phone-dark",
+        "timeoutMs": 90000,
+        "annotations": [
+          {
+            "type": "slow",
+            "location": {
+              "file": "/workspace/capiro-shipping-browser-20261013/apps/web/tests/browser/capability-presentation-visual.spec.ts",
+              "line": 47,
+              "column": 10
+            }
+          }
+        ]
+      },
+      {
+        "file": "registrant-intake.spec.ts",
+        "title": "selection stops at100 and remains selected through filtering",
+        "timeoutMs": 90000,
+        "annotations": [
+          {
+            "type": "slow",
+            "location": {
+              "file": "/workspace/capiro-shipping-browser-20261013/apps/web/tests/browser/registrant-intake.spec.ts",
+              "line": 663,
+              "column": 8
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "portfolioFirstRunPreserved": {
+    "file": "final-portfolio-browser-results.json",
+    "stats": {
+      "startTime": "2026-10-13T01:50:59.322Z",
+      "duration": 2249447.227,
+      "expected": 1121,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "globalErrors": [],
+    "testEntries": 1122,
+    "resultCount": 1122,
+    "outcomes": {
+      "expected": 1121,
+      "unexpected": 1
+    },
+    "resultStatuses": {
+      "passed": 1121,
+      "failed": 1
+    },
+    "retryDistribution": {
+      "0": 1122
+    },
+    "perTestTimeoutsMs": {
+      "30000": 1118,
+      "90000": 4
+    },
+    "workers": 3,
+    "actualWorkers": 3,
+    "projectDefaults": [
+      {
+        "timeout": 30000,
+        "retries": 0,
+        "outputDir": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-artifacts"
+      }
+    ],
+    "slowCases": [
+      {
+        "file": "capability-presentation-visual.spec.ts",
+        "title": "Figma capability Profile, Documents and create surfaces at desktop-light",
+        "timeoutMs": 90000,
+        "annotations": [
+          {
+            "type": "slow",
+            "location": {
+              "file": "/workspace/capiro-shipping-browser-20261013/apps/web/tests/browser/capability-presentation-visual.spec.ts",
+              "line": 47,
+              "column": 10
+            }
+          }
+        ]
+      },
+      {
+        "file": "capability-presentation-visual.spec.ts",
+        "title": "Figma capability Profile, Documents and create surfaces at phone-light",
+        "timeoutMs": 90000,
+        "annotations": [
+          {
+            "type": "slow",
+            "location": {
+              "file": "/workspace/capiro-shipping-browser-20261013/apps/web/tests/browser/capability-presentation-visual.spec.ts",
+              "line": 47,
+              "column": 10
+            }
+          }
+        ]
+      },
+      {
+        "file": "capability-presentation-visual.spec.ts",
+        "title": "Figma capability Profile, Documents and create surfaces at phone-dark",
+        "timeoutMs": 90000,
+        "annotations": [
+          {
+            "type": "slow",
+            "location": {
+              "file": "/workspace/capiro-shipping-browser-20261013/apps/web/tests/browser/capability-presentation-visual.spec.ts",
+              "line": 47,
+              "column": 10
+            }
+          }
+        ]
+      },
+      {
+        "file": "registrant-intake.spec.ts",
+        "title": "selection stops at100 and remains selected through filtering",
+        "timeoutMs": 90000,
+        "annotations": [
+          {
+            "type": "slow",
+            "location": {
+              "file": "/workspace/capiro-shipping-browser-20261013/apps/web/tests/browser/registrant-intake.spec.ts",
+              "line": 663,
+              "column": 8
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "portfolioRerunPreservation": {
+    "testSetTimeoutsAnnotationsIdenticalToFirstRun": true,
+    "count": 1122,
+    "sha256": "6850df54973034da42f7d37139bec4464a0b1aa9160c1becfe340d493561199c"
+  },
+  "production": {
+    "scope": "Actual Next standalone server without credentials, fixture identity or service interception. Live sign-in not exercised.",
+    "observedBrowserVersion": "154.0.8037.57",
+    "httpResponses": [
+      {
+        "path": "/healthz",
+        "status": 200,
+        "headers": "passed"
+      },
+      {
+        "path": "/portfolio",
+        "status": 200,
+        "headers": "passed"
+      },
+      {
+        "path": "/calendar",
+        "status": 200,
+        "headers": "passed"
+      },
+      {
+        "path": "/sign-in",
+        "status": 200,
+        "headers": "passed"
+      },
+      {
+        "path": "/api/backend/core/clients",
+        "status": 503,
+        "headers": "passed"
+      },
+      {
+        "path": "/",
+        "status": 200,
+        "headers": "passed"
+      },
+      {
+        "path": "/modules",
+        "status": 200,
+        "headers": "passed"
+      },
+      {
+        "path": "/settings",
+        "status": 307,
+        "headers": "passed"
+      },
+      {
+        "path": "/settings?clientId=10000000-0000-4000-8000-000000000001",
+        "status": 307,
+        "headers": "passed"
+      },
+      {
+        "path": "/settings/personal",
+        "status": 200,
+        "headers": "passed"
+      },
+      {
+        "path": "/api/capiro/me.read",
+        "status": 503,
+        "headers": "passed"
+      }
+    ],
+    "viewportThemeRenders": [
+      {
+        "colorScheme": "light",
+        "viewport": {
+          "width": 1440,
+          "height": 1040
+        },
+        "portfolio": {
+          "background": "rgb(245, 245, 244)",
+          "color": "rgb(10, 10, 10)",
+          "fontSize": "14px",
+          "markerCount": 1,
+          "fits": true,
+          "sameDocument": true
+        },
+        "wordmark": {
+          "width": 77,
+          "height": 26,
+          "filter": "none"
+        },
+        "stylesRestoredOnReturn": true,
+        "clientNavigation": true,
+        "headerNavigation": true
+      },
+      {
+        "colorScheme": "light",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "portfolio": {
+          "background": "rgb(245, 245, 244)",
+          "color": "rgb(10, 10, 10)",
+          "fontSize": "14px",
+          "markerCount": 1,
+          "fits": true,
+          "sameDocument": true
+        },
+        "wordmark": {
+          "width": 77,
+          "height": 26,
+          "filter": "none"
+        },
+        "stylesRestoredOnReturn": true,
+        "clientNavigation": true,
+        "headerNavigation": true
+      },
+      {
+        "colorScheme": "dark",
+        "viewport": {
+          "width": 1440,
+          "height": 1040
+        },
+        "portfolio": {
+          "background": "rgb(18, 18, 18)",
+          "color": "rgb(250, 250, 249)",
+          "fontSize": "14px",
+          "markerCount": 1,
+          "fits": true,
+          "sameDocument": true
+        },
+        "wordmark": {
+          "width": 77,
+          "height": 26,
+          "filter": "invert(1)"
+        },
+        "stylesRestoredOnReturn": true,
+        "clientNavigation": true,
+        "headerNavigation": true
+      },
+      {
+        "colorScheme": "dark",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "portfolio": {
+          "background": "rgb(18, 18, 18)",
+          "color": "rgb(250, 250, 249)",
+          "fontSize": "14px",
+          "markerCount": 1,
+          "fits": true,
+          "sameDocument": true
+        },
+        "wordmark": {
+          "width": 77,
+          "height": 26,
+          "filter": "invert(1)"
+        },
+        "stylesRestoredOnReturn": true,
+        "clientNavigation": true,
+        "headerNavigation": true
+      }
+    ],
+    "desktopHistoryChecks": [
+      {
+        "crossMode": "Meri/Portfolio/Modules/Settings",
+        "history": "back/forward",
+        "sameDocument": true
+      },
+      {
+        "crossMode": "Meri/Portfolio/Modules/Settings",
+        "history": "back/forward",
+        "sameDocument": true
+      }
+    ],
+    "pageErrors": [],
+    "previewRoot": {
+      "defaultProduct": "portfolio",
+      "rootStatus": 200,
+      "location": "/",
+      "followedSetup": true
+    }
+  },
+  "rawEvidenceBindings": [
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-modules-browser-exit.json",
+      "bytes": 940,
+      "sha256": "e4cdef72eb8f9153b3019cdef117f46b2b7dd90e614dac91d11b82cb5945bc22"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-production-build-exit.json",
+      "bytes": 785,
+      "sha256": "237e3a30cf2afcc8744dfd642e4e13858c9eba092494c5ca84d4a79f6e5dcb6c"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-production-server-exit.json",
+      "bytes": 908,
+      "sha256": "5e1f3818559bb4967bc64ae68ca782215b6a06e55c83ba0d53f2adb3bb9e7d83"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-v2-exit.json",
+      "bytes": 1066,
+      "sha256": "2f73c1a923451b24af94463403c95c3ce85bd851b2c54aae12f932d57d64fd39"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-production-build.log",
+      "bytes": 2233,
+      "sha256": "c9185f5987e5eefa1684240118d7f5a58645189a8764f9538f68fd23ff7d2149"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-production-server.log",
+      "bytes": 4253,
+      "sha256": "342cfad9425c0402855d1ea0ea0487fdd1c2cb542715aae130b683409287dfd7"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-modules-browser.log",
+      "bytes": 30977,
+      "sha256": "778a200407ba70c841d1a5d7c4ae9f0687a37f399d6941ae8b63be2ad093cf14"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-production/preview-root-smoke.json",
+      "bytes": 101,
+      "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-production/production-portfolio-1440-dark.png",
+      "bytes": 29101,
+      "sha256": "39049b79761b8a2d4c6c6ef06178b6777f97556ad618f7f762fe0b741e316dfa"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-production/production-portfolio-1440-light.png",
+      "bytes": 29213,
+      "sha256": "adb252c0670b1797a9515d1ea50002c30fd73566891ced4cb9634a26a102be8e"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-production/production-portfolio-390-dark.png",
+      "bytes": 21836,
+      "sha256": "532b06a716f405c135b7b3ee84008b5b208415588a1aa934725894561f53e318"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-production/production-portfolio-390-light.png",
+      "bytes": 22077,
+      "sha256": "083c3ac5298d3cafd0c8b24b7678ac36e86a628352a17fbcabd454717b1ccf37"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-production/production-smoke.json",
+      "bytes": 3624,
+      "sha256": "653bf3486ea9ec193195ed3289ac8e44a3729ef58b19a48842c8448c990dd36f"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-production/standalone-default.log",
+      "bytes": 147,
+      "sha256": "1fb0278dec1db2aef66d951b30910680cc3d3de170f07bdab0c84a200e1bc4f3"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-production/standalone-portfolio.log",
+      "bytes": 147,
+      "sha256": "1fb0278dec1db2aef66d951b30910680cc3d3de170f07bdab0c84a200e1bc4f3"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-modules-browser-results.json",
+      "bytes": 229064,
+      "sha256": "8a8a23211d284a381779a49ef75ec5b73378ad615263c151411c02b3763f5749"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-v2-results.json",
+      "bytes": 1234836,
+      "sha256": "6c40be4f1399a3a24177ead118c267a8fd48ceeb932604b35e4f62b26b106a8c"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-v2.log",
+      "bytes": 173053,
+      "sha256": "a73c92dbf43cdd8a250ce399498dbdff471e62b2cc6ac300a9e623e6bdd84ba5"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-results.json",
+      "bytes": 1237270,
+      "sha256": "f45c2c962cc9f54743133ac2be9843c39cfec7a2a7deb6524d9d608fe9995b13"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-exit.json",
+      "bytes": 1057,
+      "sha256": "b1486ceb8cf887ee7fbf1946607010af285eb66bd193793042f576adcd06c911"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-controlled-selection-exit.json",
+      "bytes": 1039,
+      "sha256": "48aef5fb2ae7c01667e85e1a7faf06e6c7baf46e64f4814a8d37edeb8b85cdf7"
+    },
+    {
+      "path": "/tmp/capiro-shipping-browser-correction-20261013/final-controlled-selection-v2-exit.json",
+      "bytes": 1045,
+      "sha256": "bbc953b5a6d90672b3283297db4c493501113ccbfa214d53cc076515c4aa7735"
+    }
+  ],
+  "reviewedSourceBindings": [
+    {
+      "path": "/workspace/capiro-shipping-browser-20261013/apps/web/tests/production/verify-standalone.mjs",
+      "bytes": 7388,
+      "sha256": "2b06e07abd048aa2d7de43be5ea89fe3115d9ef6bd2993cc7b0f1a60e7846dd8"
+    },
+    {
+      "path": "/workspace/capiro-shipping-browser-20261013/apps/web/tests/production/run-standalone.mjs",
+      "bytes": 5491,
+      "sha256": "c4c271a1738ca2425afd3eefe1540864af3f6a11cd465e8d25de2a7cd1fc2e21"
+    },
+    {
+      "path": "/workspace/capiro-shipping-browser-20261013/apps/web/playwright.config.ts",
+      "bytes": 1075,
+      "sha256": "4911da2a070d1b9e05f3ef4721c191a70b634c93111315f8d94c8aab9bfc916f"
+    },
+    {
+      "path": "/workspace/capiro-shipping-browser-20261013/apps/web/test/browser/playwright.config.ts",
+      "bytes": 1004,
+      "sha256": "3d5e9a3e3e40fe0f93f98ad209d3df8a0311f2a88cc5bd312316bb118d4d6c28"
+    },
+    {
+      "path": "/workspace/capiro-shipping-browser-20261013/docs/shipping-browser-correction-20261013/IMPLEMENTATION.md",
+      "bytes": 5479,
+      "sha256": "0dceb4daba4d6cc7355526809973d4d40053f91e2fa1cb71070be0cfec54e9ea"
+    },
+    {
+      "path": "/workspace/capiro-shipping-browser-20261013/docs/shipping-browser-correction-20261013/qualify-frozen-source.sh",
+      "bytes": 4555,
+      "sha256": "d2439c4e3c3a8ed4e84698993a83e5a4bd82ea7698c98900ae8679982182acac"
+    },
+    {
+      "path": "/workspace/capiro-shipping-browser-20261013/docs/shipping-browser-correction-20261013/FROZEN-SOURCE-MANIFEST.json",
+      "bytes": 2140,
+      "sha256": "4798b1df374f43a7a04201771eb95be834a0413a684262888f280a541d944cff"
+    }
+  ],
+  "imageInspection": {
+    "reviewed": 4,
+    "viewports": [
+      [
+        1440,
+        1040
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "observations": "All four images visibly show the actual unconfigured Portfolio setup page, with readable wordmark, heading, explanatory text and requirements. Mobile wrapping fits the viewport; no visible horizontal clipping or overlap. No authenticated product data appears.",
+    "limits": "Static images do not establish keyboard/screen-reader behavior, full design fidelity or native workflow acceptance."
+  },
+  "browserLimits": "Modules/Portfolio receipts configure /usr/bin/chromium. Production browser.version explicitly observes154.0.8037.57. AWS installed149.0.7827.55; actual AWS launched version unrecorded. No pinned149 qualification claim.",
+  "docCorrections": "IMPLEMENTATION now explicitly says AWS Playwright1.61.1 is lock-pinned without captured runtime-version receipt. Static accepted recipe remains d2439c4, unexecuted."
+}

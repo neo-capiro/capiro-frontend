@@ -1,0 +1,79 @@
+{
+  "recordedUTC": "2026-10-13T02:29:30.005653+00:00",
+  "head": "d4be41e60516e576c74afa304b50ed67da15cb93",
+  "tree": "401cadde371b91606e3346243aaca6b6225aafcb",
+  "applicationTree": "6ae2118b797f478f5a63788841a9777d67c8001e",
+  "sourceTree": "02ad682840eec3b2d8091b37de9b8c45a984e542",
+  "status": "",
+  "base": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "changedFiles": [
+    {
+      "path": "apps/web/playwright.config.ts",
+      "bytes": 1075,
+      "sha256": "4911da2a070d1b9e05f3ef4721c191a70b634c93111315f8d94c8aab9bfc916f"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx",
+      "bytes": 4621,
+      "sha256": "ad04d1b4d8e3b8f7506d9cf92faf44b4f690f91a0d70d180499a4c7d14471f78"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/rich-mail-selection.ts",
+      "bytes": 1060,
+      "sha256": "d55cfceb23397af13397fc71b68db8f35473d591a72552dc78b7a76f1a836f35"
+    },
+    {
+      "path": "apps/web/tests/browser/mail-rich-compose.spec.ts",
+      "bytes": 15736,
+      "sha256": "951ebd3832e87e4acee814ef1660b758f76d83443d6b01a57a3d4b24daa43674"
+    },
+    {
+      "path": "apps/web/tests/browser/profile-identity-layout.spec.ts",
+      "bytes": 2375,
+      "sha256": "970638f7f61e13a9ea1ab097f041c06dc4928bcb7d12dc64edcd9419b3c40edf"
+    },
+    {
+      "path": "apps/web/tests/browser/profile-tools-integration.spec.ts",
+      "bytes": 4864,
+      "sha256": "894315f902f99caa97552a9308898e9752e2e3c3a02a765e3525e82263cc4a2a"
+    },
+    {
+      "path": "apps/web/tests/browser/rich-mail-selection-fixture.ts",
+      "bytes": 1060,
+      "sha256": "158956215e9eae6239f9e7cca19a32fee2377585ee413e6b6c51b344112dbc1b"
+    },
+    {
+      "path": "apps/web/tests/rich-mail-selection.test.ts",
+      "bytes": 3768,
+      "sha256": "0a615db1795fee95268d4196d04cbdd518f084c07c5bc5e2ce0d930f155149af"
+    },
+    {
+      "path": "docs/shipping-browser-correction-20261013/IMPLEMENTATION.md",
+      "bytes": 5154,
+      "sha256": "6c41f680ef444f4fbd10457a20b3b00785cc1cee0fc9e620434b72d8d33d0a53"
+    },
+    {
+      "path": "docs/shipping-browser-correction-20261013/reviews/mail-READY-RUNTIME-SIZE-RECORDS.json",
+      "bytes": 1316,
+      "sha256": "afd17fcc22a2dd841a6ba5b87b0b0710f16c9287fd9e06aecbff68a1fd53aea3"
+    },
+    {
+      "path": "docs/shipping-browser-correction-20261013/reviews/mail-TEST-SIZE-REVIEW.json",
+      "bytes": 1837,
+      "sha256": "5395ce5b17259f13d2af0d673924c436d637eaffe9dce4a47f078eb9ee536f4f"
+    },
+    {
+      "path": "docs/shipping-browser-correction-20261013/reviews/profile-REVIEW.md",
+      "bytes": 4897,
+      "sha256": "9231c0a4f3a7482c74b03903b5753375223577d18099d7d64a7f78adb33ea877"
+    },
+    {
+      "path": "scripts/architecture/reviewed-size-findings.json",
+      "bytes": 128166,
+      "sha256": "163ea6862bbb96cd83bba20324006ed1ae20e2be812c4ac7acfb3ac5d8419c83"
+    }
+  ],
+  "existingProfileTestExactlyThreeLineReadinessAddition": true,
+  "profileProductDiffFromFrozenBase": "",
+  "reviewerSourceWrites": false
+}

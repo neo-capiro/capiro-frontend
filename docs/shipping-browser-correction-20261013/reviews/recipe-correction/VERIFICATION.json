@@ -1,0 +1,92 @@
+{
+  "capturedAtUTC": "2026-10-13T03:15:10.954072+00:00",
+  "reviewStatus": "accepted static recipe correction; no remaining source-review blocker",
+  "recipe": {
+    "bytes": 4555,
+    "sha256": "d2439c4e3c3a8ed4e84698993a83e5a4bd82ea7698c98900ae8679982182acac",
+    "executedByReviewer": false,
+    "executedByProducer": false,
+    "syntaxCheck": "producer-reported passed; not independently executed"
+  },
+  "sourceBindings": {
+    "source": "d4be41e60516e576c74afa304b50ed67da15cb93",
+    "rootTree": "401cadde371b91606e3346243aaca6b6225aafcb",
+    "applicationTree": "6ae2118b797f478f5a63788841a9777d67c8001e"
+  },
+  "treeManifestMatchesExactGit": true,
+  "manifestDeltaOnlyRecipeHash": true,
+  "criticalInputs": [
+    {
+      "path": "package.json",
+      "frozenAndLiveAndManifestMatch": true
+    },
+    {
+      "path": "package-lock.json",
+      "frozenAndLiveAndManifestMatch": true
+    },
+    {
+      "path": "apps/web/package.json",
+      "frozenAndLiveAndManifestMatch": true
+    },
+    {
+      "path": "apps/web/Dockerfile",
+      "frozenAndLiveAndManifestMatch": true
+    },
+    {
+      "path": "apps/web/deployment/portfolio/buildspec.yml",
+      "frozenAndLiveAndManifestMatch": true
+    },
+    {
+      "path": "apps/web/playwright.config.ts",
+      "frozenAndLiveAndManifestMatch": true
+    },
+    {
+      "path": "apps/web/test/browser/playwright.config.ts",
+      "frozenAndLiveAndManifestMatch": true
+    }
+  ],
+  "dispositions": [
+    {
+      "id": "RECIPE-01",
+      "status": "resolved",
+      "lines": [
+        21,
+        25,
+        61,
+        64
+      ],
+      "reason": "All three configured executable variables use the same explicit override or are cleared together. Actual launched browser.version is labeled distinctly from configured default full Chromium path."
+    },
+    {
+      "id": "RECIPE-02",
+      "status": "resolved",
+      "lines": [
+        74
+      ],
+      "reason": "Direct web workspace Modules command now forwards external --output, retaining canonical single worker and default timeout/retry configuration."
+    },
+    {
+      "id": "RECIPE-03",
+      "status": "resolved",
+      "lines": [
+        11,
+        19
+      ],
+      "reason": "Requires cwd be checkout root. Resolves parent via realpath, rejects equal/descendant destination including symlink parents before installation. Missing parent fails closed."
+    },
+    {
+      "id": "RECIPE-04",
+      "status": "resolved",
+      "lines": [
+        77,
+        81
+      ],
+      "reason": "Tracked-change guard retained and expected commit/root/app checked again before final source receipt/completion."
+    }
+  ],
+  "initialPacket": "/tmp/capiro-pr17-recipe-review-20261013",
+  "initialPacketManifestSha256": "4d06a2c2922b8892f9fb4bad835b365cf50729dfb4c14459e8664d4de981ecfd",
+  "priorPacketsModified": false,
+  "runtimeQualification": "not reviewed or inferred in this addendum",
+  "remainingDocumentationNote": "Implementation AWS Playwright1.61.1 provenance should say lock-pinned, not independently captured runtime. Parent acknowledges correction during closure."
+}
