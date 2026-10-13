@@ -1,6 +1,5 @@
-import type { z } from "zod";
 import type { EffectiveDateRecord } from "../../../shared/federal-register/effective-dates";
-import type { commentDeadline } from "../../../shared/capiro/operations/calendar";
+import type { CommentDeadlineRecord } from "../../../shared/federal-register/comment-deadlines";
 import type { EngagementMeeting } from "../../../shared/capiro/operations/engagement";
 import type { FundingRecord } from "../../../shared/capiro/operations/intelligence-funding";
 import type { CalendarHearing } from "../../../shared/capiro/operations/legiwatch-calendar-schemas";
@@ -85,15 +84,15 @@ export function plannerItems(tasks: PlannerTask[]): AgendaItem[] {
 }
 
 export function commentDeadlineItems(
-  records: z.infer<typeof commentDeadline>[],
+  records: CommentDeadlineRecord[],
 ): AgendaItem[] {
   return records.map((record) => ({
     key: `federal-register:${record.documentNumber}`,
     source: "Deadlines",
     title: record.title,
-    date: record.commentEndDate.slice(0, 10),
-    time: "Comments close",
-    context: `Federal Register · ${record.documentNumber}`,
+    date: record.date,
+    time: "Comments close · date only",
+    context: `Federal Register · ${record.documentNumber} · Cached comments_close_on; raw publisher value unverified`,
     href: record.htmlUrl ?? undefined,
   }));
 }

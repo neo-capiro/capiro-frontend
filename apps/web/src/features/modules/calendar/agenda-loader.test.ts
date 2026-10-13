@@ -1,4 +1,8 @@
 import { expect, it } from "vitest";
+import {
+  commentPage,
+  commentRecord,
+} from "../../../../tests/comment-calendar-fixtures";
 import { createCapiroApi } from "../../../shared/capiro/http";
 import { capiroOperations } from "../../../shared/capiro/registry";
 import { loadAgendaSources, loadFunding, loadPlanner } from "./agenda-loader";
@@ -89,24 +93,33 @@ it("keeps permitted successful source rows when another source fails and filters
   const api = fixtureApi((key) => {
     switch (key) {
       case "planner.tasks":
-        return Response.json({ items: [task], nextCursor: null });
+        return Response.json({
+          items: [
+            task,
+            {
+              ...task,
+              id: "51000000-0000-4000-8000-000000000002",
+              name: "Outside selected range",
+              dueOn: "2026-12-01",
+            },
+          ],
+          nextCursor: null,
+        });
       case "legiwatch.calendar":
         return Response.json({ rows: [], total: 0, page: 1, pageSize: 200 });
-      case "calendar.commentDeadlines":
-        return Response.json([
-          {
-            id: "one",
-            documentNumber: "2026-TEST-1",
-            title: "Synthetic comment deadline",
-            commentEndDate: "2026-10-09T00:00:00Z",
-          },
-          {
-            id: "two",
-            documentNumber: "2026-TEST-2",
-            title: "Outside selected range",
-            commentEndDate: "2026-12-01T00:00:00Z",
-          },
-        ]);
+      case "calendar.commentDeadlineCalendar":
+        return Response.json(
+          commentPage(
+            [
+              {
+                ...commentRecord("2026-TEST-1", "2026-10-09"),
+                title: "Synthetic comment deadline",
+              },
+            ],
+            range.firstDay,
+            range.lastDay,
+          ),
+        );
       default:
         return Response.json(
           { message: "Synthetic unavailable funding source" },
@@ -129,7 +142,9 @@ it("keeps permitted successful source rows when another source fails and filters
     ),
   ).toBe(true);
   expect(
-    result.warnings.some((warning) => warning.includes("next 30 days")),
+    result.warnings.some((warning) =>
+      warning.includes("coverage is incomplete"),
+    ),
   ).toBe(true);
 });
 

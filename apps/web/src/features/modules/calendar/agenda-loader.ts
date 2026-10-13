@@ -1,5 +1,6 @@
 import type { CapiroApi } from "../../../shared/capiro/http";
 import { loadEffectiveDatePages } from "../../../shared/federal-register/effective-dates";
+import { loadCommentDeadlinePages } from "../../../shared/federal-register/comment-deadlines";
 import type { CalendarHearing } from "../../../shared/capiro/operations/legiwatch-calendar-schemas";
 import type { PlannerTask } from "../../../shared/capiro/operations/planner-schemas";
 import type { capiroOperations } from "../../../shared/capiro/registry";
@@ -78,14 +79,19 @@ export async function loadHearings(
 }
 export async function loadCommentDeadlines(
   api: SourceApi,
+  range: CalendarRange,
   signal: AbortSignal,
 ): Promise<SourceResult> {
+  const result = await loadCommentDeadlinePages(
+    (query) =>
+      api.request("calendar.commentDeadlineCalendar", { query }, { signal }),
+    range.firstDay,
+    range.lastDay,
+    signal,
+  );
   return {
-    items: commentDeadlineItems(
-      await api.request("calendar.commentDeadlines", {}, { signal: signal }),
-    ),
-    warning:
-      "Federal Register comment deadlines cover the next 30 days and up to 50 records. They are not effective dates.",
+    items: commentDeadlineItems(result.records),
+    warning: `${result.warnings.join(" ")} Comment deadlines are not effective dates.`,
   };
 }
 export async function loadFunding(
@@ -166,7 +172,7 @@ export async function loadAgendaSources(
     { name: "Hearings", load: () => loadHearings(api, range, signal) },
     {
       name: "Federal Register deadlines",
-      load: () => loadCommentDeadlines(api, signal),
+      load: () => loadCommentDeadlines(api, range, signal),
     },
     { name: "Funding deadlines", load: () => loadFunding(api, range, signal) },
   ];
