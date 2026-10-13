@@ -1,4 +1,6 @@
-import { expect, test } from "@playwright/test";
+import { test } from "./runtime-observed-test";
+import { installFixedDate } from "./fixed-date";
+import { expect } from "@playwright/test";
 import { operationFixtures, onlyLocalRequests, testIdentity } from "./fixtures";
 const taskId = "51000000-0000-4000-8000-000000000001";
 const clientId = "30000000-0000-4000-8000-000000000001";
@@ -107,7 +109,7 @@ const session = {
 };
 test.beforeEach(async ({ page }) => {
   await onlyLocalRequests(page);
-  await page.clock.setFixedTime(new Date("2026-10-08T16:00:00Z"));
+  await installFixedDate(page, Date.parse("2026-10-08T16:00:00Z"));
 });
 test("Planner modes use the same permitted task data and exact board assets", async ({
   page,

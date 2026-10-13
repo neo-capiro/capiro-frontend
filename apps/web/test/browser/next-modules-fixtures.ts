@@ -1,3 +1,4 @@
+import { installFixedDate } from "./fixed-date";
 import type { Page } from "@playwright/test";
 import { onlyLocalRequests, operationFixtures, testIdentity } from "./fixtures";
 import { commentPage } from "../../tests/comment-calendar-fixtures";
@@ -79,7 +80,7 @@ export async function setup(
   overrides: Parameters<typeof operationFixtures>[1] = {},
 ) {
   await onlyLocalRequests(page);
-  await page.clock.setFixedTime(new Date("2026-10-08T16:00:00Z"));
+  await installFixedDate(page, Date.parse("2026-10-08T16:00:00Z"));
   await operationFixtures(page, {
     "me.read": testIdentity,
     "clients.list": [client, otherClient],

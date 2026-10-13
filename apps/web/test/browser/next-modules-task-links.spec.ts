@@ -1,4 +1,5 @@
-import { expect, test, type Route } from "@playwright/test";
+import { test } from "./runtime-observed-test";
+import { expect, type Route } from "@playwright/test";
 import {
   bootstrap,
   clientId,

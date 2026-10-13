@@ -1,4 +1,6 @@
-import { test, expect } from "@playwright/test";
+import { test } from "./runtime-observed-test";
+import { installFixedDate } from "./fixed-date";
+import { expect } from "@playwright/test";
 import { onlyLocalRequests, operationFixtures, testIdentity } from "./fixtures";
 
 const clientId = "30000000-0000-4000-8000-000000000001";
@@ -30,7 +32,13 @@ test.beforeEach(async ({ page }) => {
       },
     }),
   );
-  await page.clock.setFixedTime(new Date("2026-10-08T16:00:00Z"));
+  await installFixedDate(page, Date.parse("2026-10-08T16:00:00Z"));
+});
+test.afterEach(async ({ runtimeObservation }) => {
+  expect(
+    runtimeObservation.consoleErrors,
+    "No Calendar console errors",
+  ).toEqual([]);
 });
 test("month and week retain client scope and query end-exclusive Eastern ranges", async ({
   page,
@@ -126,4 +134,62 @@ test("client agenda is meetings-only and the meeting opens the shared prep/notes
   await expect(
     page.getByRole("tab", { name: "Debrief", exact: true }),
   ).toBeVisible();
+});
+
+test("fixed Date retains native formatting and advancing browser timers", async ({
+  page,
+}) => {
+  await operationFixtures(page, {
+    "me.read": testIdentity,
+    "clients.list": [],
+    "engagement.meetings": [],
+  });
+  await page.goto("/modules/calendar");
+  await expect(
+    page.getByRole("heading", { name: "Master calendar" }),
+  ).toBeVisible();
+  const result = await page.evaluate(async () => {
+    const before = performance.now();
+    await new Promise<void>((resolve) => setTimeout(resolve, 20));
+    await new Promise<number>((resolve) => requestAnimationFrame(resolve));
+    class DerivedDate extends Date {}
+    const explicit = new Date("2001-02-03T04:05:06Z");
+    return {
+      now: Date.now(),
+      constructed: new Date().getTime(),
+      called: Date(),
+      expectedCall: new Date(1791475200000).toString(),
+      explicit: explicit.toISOString(),
+      zero: new Date(0).getTime(),
+      invalid: Number.isNaN(new Date(undefined as unknown as number).getTime()),
+      parse: Date.parse("2001-02-03T04:05:06Z"),
+      utc: Date.UTC(2001, 1, 3, 4, 5, 6),
+      inherited: new DerivedDate().getTime(),
+      instance: new DerivedDate() instanceof Date,
+      stableNow: Date.now === Date.now,
+      formatted: new Intl.DateTimeFormat("en-US", {
+        timeZone: "UTC",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      }).format(explicit),
+      timeAdvanced: performance.now() > before,
+    };
+  });
+  expect(result).toEqual({
+    now: 1791475200000,
+    constructed: 1791475200000,
+    called: result.expectedCall,
+    expectedCall: result.expectedCall,
+    explicit: "2001-02-03T04:05:06.000Z",
+    zero: 0,
+    invalid: true,
+    parse: 981173106000,
+    utc: 981173106000,
+    inherited: 1791475200000,
+    instance: true,
+    stableNow: true,
+    formatted: "02/03/2001",
+    timeAdvanced: true,
+  });
 });

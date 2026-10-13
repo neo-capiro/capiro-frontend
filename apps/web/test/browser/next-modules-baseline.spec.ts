@@ -1,4 +1,5 @@
-import { expect, test } from "@playwright/test";
+import { test } from "./runtime-observed-test";
+import { expect } from "@playwright/test";
 import { clientId, nextTask, setup, taskId } from "./next-modules-fixtures";
 
 test("MS02 verified Calendar entry dispatches only the selected client scope", async ({
