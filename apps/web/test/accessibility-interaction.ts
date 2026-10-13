@@ -32,6 +32,11 @@ export async function tabTo(page: Page, target: Locator) {
   await expect(target).toBeVisible();
   for (let step = 0; step < 64; step += 1) {
     await page.keyboard.press("Tab");
+    // Finish focus-induced scrolling before advancing to another control.
+    await page.evaluate(
+      () =>
+        new Promise<void>((resolve) => requestAnimationFrame(() => resolve())),
+    );
     if (await target.evaluate((element) => element === document.activeElement))
       return;
   }
