@@ -1,0 +1,24 @@
+[
+  {
+    "file": "apps/web/tests/browser/mail-rich-compose.spec.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "line": 1,
+    "nonblank": 420,
+    "fingerprint": "02030a4b1e566f58ca25cd2a403a0d9b93940fb0c7e41e3479130fddb5153587",
+    "responsibility": "One synthetic rich-mail browser contract: original formatting, rewrite validation/cancellation/authority, paste sanitation, body limits, keyboard/mobile, attachment picker and local native history assertions share the same intercepted composer setup. New variants specifically prove that delayed native selection observation preserves the existing full draft and Undo while intentional all/partial selection still replaces text. All preceding test bytes and all 17 original history-scenario statements survive. The 35-line delay fixture owns only adverse browser event ordering. Keeping the 420-line file together makes the preserved contract visible; no unrelated product workflow was added.",
+    "reviewedBy": "Codex independent Modules reviewer",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/browser/mail-rich-compose.spec.ts",
+    "kind": "function",
+    "symbol": "setup",
+    "line": 5,
+    "nonblank": 82,
+    "fingerprint": "e45e93bf32a8236faf446bec98b8fcdeb34bb1e53f131a916e71b130dd2d5e25",
+    "responsibility": "The unchanged 82-line setup owns one synthetic composer boundary: local-origin restriction, identity/signature/mailbox/people reads, controlled verified/unverified/held rewrite replies, send recording, and opening/filling the composer. It makes unexpected native routes fail visibly and prevents provider traffic. Its AST fingerprint is unchanged from the frozen baseline; the new whole-file signal does not mean this function grew.",
+    "reviewedBy": "Codex independent Modules reviewer",
+    "reviewedOn": "2026-10-13"
+  }
+]

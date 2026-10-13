@@ -17,6 +17,9 @@ test("Overview composes saved focus tags and updates the real profile cache", as
   await expect(page.getByLabel("Client focus tags")).toContainText(
     "Saved focus",
   );
+  await expect(
+    page.getByRole("button", { name: "+ Add focus tag", exact: true }),
+  ).toBeEnabled();
   const focus = await page.getByLabel("Client focus tags").boundingBox();
   const owner = await page
     .getByRole("button", { name: "Account team" })
