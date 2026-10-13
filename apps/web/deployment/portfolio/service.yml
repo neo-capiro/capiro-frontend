@@ -15,32 +15,40 @@ Parameters:
     AllowedPattern: "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}/32$"
   ClerkPublishableKeySecretArn:
     Type: String
-    Description: Secrets Manager ARN with the matching production Clerk publishable key
+    Description: Designated preview Test Clerk publishable-key reference; payload verification is held
+    AllowedPattern: "^arn:aws:secretsmanager:us-east-1:967807252336:secret:/capiro/preview/clerk/publishable-key-[A-Za-z0-9]{6}$"
   ClerkSecretKeySecretArn:
     Type: String
-    Description: Secrets Manager ARN with the matching production Clerk secret key
+    Description: Matching preview Test Clerk secret-key reference; payload verification is held
+    AllowedPattern: "^arn:aws:secretsmanager:us-east-1:967807252336:secret:/capiro/preview/clerk/secret-key-[A-Za-z0-9]{6}$"
   ClerkKmsKeyArn:
     Type: String
     Description: KMS key ARN protecting the two designated Clerk secrets
+    AllowedPattern: "^arn:aws:kms:us-east-1:967807252336:key/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
   TrackerBackend:
     Type: String
-    AllowedValues: [core, intelligence]
+    AllowedValues: ["intelligence"]
     Description: Explicit owner of Bill Tracker requests
   CoreApiBaseUrl:
     Type: String
-    Default: https://os.capiro.ai/api
+    Default: https://portfolio-preview.app.capiro.ai/api
+    AllowedValues: ["https://portfolio-preview.app.capiro.ai/api"]
   StrategyApiBaseUrl:
     Type: String
-    Default: https://os.capiro.ai/strategy-api
+    Default: ""
+    AllowedValues: [""]
   WorkspaceApiBaseUrl:
     Type: String
-    Default: https://os.capiro.ai/workspace-api
+    Default: https://portfolio-preview.app.capiro.ai/workspace-api
+    AllowedValues: ["https://portfolio-preview.app.capiro.ai/workspace-api"]
   IntelligenceApiBaseUrl:
     Type: String
-    Default: https://os.capiro.ai/intel-api
+    Default: https://portfolio-preview.app.capiro.ai/intel-api
+    AllowedValues: ["https://portfolio-preview.app.capiro.ai/intel-api"]
   ExistingAppUrl:
     Type: String
-    Default: https://os.capiro.ai
+    Default: https://portfolio-preview.app.capiro.ai
+    AllowedValues: ["https://portfolio-preview.app.capiro.ai"]
 
 Resources:
   PreviewVpc:
@@ -273,6 +281,16 @@ Resources:
               Value: !Ref ExistingAppUrl
             - Name: TRACKER_BACKEND
               Value: !Ref TrackerBackend
+            - Name: ONBOARD_API_BASE_URL
+              Value: ""
+            - Name: MERI_API_BASE_URL
+              Value: ""
+            - Name: MERI_ACTION_WORKFLOW_ENABLED
+              Value: "false"
+            - Name: MERI_DOCUMENT_WORKFLOW_ENABLED
+              Value: "false"
+            - Name: MERI_DOCUMENT_OPERATION
+              Value: ""
   PreviewService:
     Type: AWS::ECS::Service
     DependsOn: PreviewListener

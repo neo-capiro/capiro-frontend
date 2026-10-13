@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@capiro/ui/tooltip";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCapiroQuery } from "../../../shared/capiro/queries";
 import { PageHeader } from "../../../shared/module-ui";
@@ -30,7 +31,7 @@ function ModuleCard({
           <span
             className={`${styles.cardIcon} ${styles[module.tone ?? "steel"]}`}
           >
-            <ModuleAsset name={module.cardIcon ?? module.icon} size={18} />
+            <ModuleAsset name={module.cardIcon ?? module.icon} />
           </span>
           <h2>
             {module.slug === "research-portfolios"
@@ -91,6 +92,7 @@ export function ModuleHub() {
       <PageHeader
         title="Everything in Capiro, across the whole firm"
         eyebrow="Modules"
+        titleAccessory={<ModuleHubInformation />}
         actions={
           <label className={styles.scope}>
             Scope
@@ -137,6 +139,28 @@ export function ModuleHub() {
         landscape
       />
     </div>
+  );
+}
+
+function ModuleHubInformation() {
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <button
+          type="button"
+          className={styles.info}
+          aria-label="About Modules"
+        >
+          <span aria-hidden="true">i</span>
+        </button>
+      </TooltipTrigger>
+      <TooltipContent side="bottom" className={styles.infoContent}>
+        <aside aria-label="About Modules">
+          Every client and every activity, across the whole firm. Choose a
+          client profile to show just that client’s work.
+        </aside>
+      </TooltipContent>
+    </Tooltip>
   );
 }
 

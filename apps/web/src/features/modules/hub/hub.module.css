@@ -82,8 +82,49 @@
 }
 .landscapeGrid {
   display: grid;
-  grid-template-columns: 2.6fr 1fr 1fr;
+  /* Figma 411:93913: 646px / 229px / 229px at the 1144px content width. */
+  grid-template-columns: minmax(0, 646fr) repeat(2, minmax(0, 229fr));
   gap: 20px;
+}
+.info {
+  display: inline-flex;
+  flex: 0 0 24px;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted-foreground);
+}
+.info > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--border-strong, #d6d3d1);
+  border-radius: 999px;
+  background: var(--muted);
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 400;
+}
+.infoContent {
+  z-index: 110;
+  max-width: min(280px, calc(100vw - 32px));
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: var(--foreground);
+  color: var(--background);
+  font-size: 12px;
+  line-height: 1.5;
+  box-shadow: 0 4px 20px #0002;
+}
+.infoContent svg {
+  fill: var(--foreground);
 }
 .card {
   display: flex;
