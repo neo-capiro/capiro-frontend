@@ -55,6 +55,7 @@ test("an empty Government page remains explicitly incomplete and forecasts unava
   await page.clock.setFixedTime(new Date("2026-10-08T16:00:00Z"));
   await operationFixtures(page, {
     ...moduleRouteFixtures,
+    "calendar.commentDeadlineCalendar": emptyCommentCalendar,
     "calendar.effectiveDates": (input) => {
       const q = (
         input as { query: { dateFrom: string; dateTo: string; page: number } }
