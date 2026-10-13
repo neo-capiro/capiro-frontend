@@ -44,11 +44,9 @@ for (const width of [360, 1440]) {
       });
     });
     await page.goto(path);
-    const row = page
-      .getByRole("article")
-      .filter({
-        has: page.getByRole("heading", { name: commentRecord().title }),
-      });
+    const row = page.getByRole("article").filter({
+      has: page.getByRole("heading", { name: commentRecord().title }),
+    });
     await expect(row).toBeVisible();
     await expect(row).toContainText("Date only · time not supplied");
     await expect(row).toContainText(
