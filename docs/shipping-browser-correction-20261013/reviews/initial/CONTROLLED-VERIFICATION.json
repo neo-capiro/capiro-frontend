@@ -1,0 +1,166 @@
+{
+  "harnesses": [
+    {
+      "name": "selection-delay",
+      "stats": {
+        "startTime": "2026-10-13T01:31:57.590Z",
+        "duration": 32858.275,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      },
+      "errors": [],
+      "workers": 1,
+      "projects": [
+        {
+          "timeout": 30000,
+          "retries": 0,
+          "repeatEach": 3
+        }
+      ],
+      "tests": [
+        {
+          "title": "ordinary formatting and typing keep native Undo after a verified rewrite",
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "failed",
+              "retry": 0,
+              "errors": [
+                "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('textbox', { name: 'Message', exact: true })\nExpected: \u001b[32m\"\u001b[7mVerified rewrite.\u001b[27m Added locally.\"\u001b[39m\nReceived: \u001b[31m\" Added locally.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Message', exact: true })\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <div tabindex=\"0\" role=\"textbox\" translate=\"no\" aria-required=\"true\" aria-multiline=\"true\" contenteditable=\"true\" aria-labelledby=\"_r_3_\" class=\"tiptap ProseMirror _messageBody_1de57_68 ProseMirror-focused\">\u2026</div>\u001b[22m\n\u001b[2m       - unexpected value \" Added locally.\"\u001b[22m\n\n\n  388 |   await message(page).press(\"End\");\n  389 |   await message(page).pressSequentially(\" Added locally.\");\n> 390 |   await expect(message(page)).toHaveText(\"Verified rewrite. Added locally.\");\n      |                               ^\n  391 |   await message(page).press(\"ControlOrMeta+z\");\n  392 |   await expect(message(page)).toHaveText(\"Verified rewrite.\");\n  393 |   expect(state.rewrites).toHaveLength(1);\n    at /tmp/capiro-shipping-browser-correction-20261013/selection-delay/specs/mail-rich-compose.spec.ts:390:31"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "ordinary formatting and typing keep native Undo after a verified rewrite",
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "failed",
+              "retry": 0,
+              "errors": [
+                "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('textbox', { name: 'Message', exact: true })\nExpected: \u001b[32m\"\u001b[7mVerified rewrite.\u001b[27m Added locally.\"\u001b[39m\nReceived: \u001b[31m\" Added locally.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Message', exact: true })\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <div tabindex=\"0\" role=\"textbox\" translate=\"no\" aria-required=\"true\" aria-multiline=\"true\" contenteditable=\"true\" aria-labelledby=\"_r_3_\" class=\"tiptap ProseMirror _messageBody_1de57_68 ProseMirror-focused\">\u2026</div>\u001b[22m\n\u001b[2m       - unexpected value \" Added locally.\"\u001b[22m\n\n\n  388 |   await message(page).press(\"End\");\n  389 |   await message(page).pressSequentially(\" Added locally.\");\n> 390 |   await expect(message(page)).toHaveText(\"Verified rewrite. Added locally.\");\n      |                               ^\n  391 |   await message(page).press(\"ControlOrMeta+z\");\n  392 |   await expect(message(page)).toHaveText(\"Verified rewrite.\");\n  393 |   expect(state.rewrites).toHaveLength(1);\n    at /tmp/capiro-shipping-browser-correction-20261013/selection-delay/specs/mail-rich-compose.spec.ts:390:31"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "ordinary formatting and typing keep native Undo after a verified rewrite",
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "failed",
+              "retry": 0,
+              "errors": [
+                "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('textbox', { name: 'Message', exact: true })\nExpected: \u001b[32m\"\u001b[7mVerified rewrite.\u001b[27m Added locally.\"\u001b[39m\nReceived: \u001b[31m\" Added locally.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Message', exact: true })\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <div tabindex=\"0\" role=\"textbox\" translate=\"no\" aria-required=\"true\" aria-multiline=\"true\" contenteditable=\"true\" aria-labelledby=\"_r_3_\" class=\"tiptap ProseMirror _messageBody_1de57_68 ProseMirror-focused\">\u2026</div>\u001b[22m\n\u001b[2m       - unexpected value \" Added locally.\"\u001b[22m\n\n\n  388 |   await message(page).press(\"End\");\n  389 |   await message(page).pressSequentially(\" Added locally.\");\n> 390 |   await expect(message(page)).toHaveText(\"Verified rewrite. Added locally.\");\n      |                               ^\n  391 |   await message(page).press(\"ControlOrMeta+z\");\n  392 |   await expect(message(page)).toHaveText(\"Verified rewrite.\");\n  393 |   expect(state.rewrites).toHaveLength(1);\n    at /tmp/capiro-shipping-browser-correction-20261013/selection-delay/specs/mail-rich-compose.spec.ts:390:31"
+              ]
+            }
+          ]
+        }
+      ],
+      "resolutionLink": "/workspace/capiro-remaining/node_modules"
+    },
+    {
+      "name": "selection-delay-green",
+      "stats": {
+        "startTime": "2026-10-13T01:49:25.352Z",
+        "duration": 706.863,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": [
+        {
+          "message": "Error: Cannot find module '@playwright/test'\nRequire stack:\n- /tmp/capiro-shipping-browser-correction-20261013/selection-delay-green/diagnostics.ts\n- /tmp/capiro-shipping-browser-correction-20261013/selection-delay-green/specs/mail-rich-compose.spec.ts\n- /workspace/capiro-shipping-browser-20261013/node_modules/playwright/lib/common/index.js\n- /workspace/capiro-shipping-browser-20261013/node_modules/playwright/lib/program.js\n- /workspace/capiro-shipping-browser-20261013/node_modules/@playwright/test/cli.js",
+          "stack": "Error: Cannot find module '@playwright/test'\nRequire stack:\n- /tmp/capiro-shipping-browser-correction-20261013/selection-delay-green/diagnostics.ts\n- /tmp/capiro-shipping-browser-correction-20261013/selection-delay-green/specs/mail-rich-compose.spec.ts\n- /workspace/capiro-shipping-browser-20261013/node_modules/playwright/lib/common/index.js\n- /workspace/capiro-shipping-browser-20261013/node_modules/playwright/lib/program.js\n- /workspace/capiro-shipping-browser-20261013/node_modules/@playwright/test/cli.js\n    at Object.<anonymous> (/tmp/capiro-shipping-browser-correction-20261013/selection-delay-green/diagnostics.ts:1:1)\n    at Object.<anonymous> (/tmp/capiro-shipping-browser-correction-20261013/selection-delay-green/specs/mail-rich-compose.spec.ts:1:1)",
+          "location": {
+            "file": "/tmp/capiro-shipping-browser-correction-20261013/selection-delay-green/diagnostics.ts",
+            "column": 1,
+            "line": 1
+          },
+          "snippet": "\u001b[90m   at \u001b[39m../diagnostics.ts:1\n\n> 1 | import { test } from \"@playwright/test\";\n    | ^\n  2 |\n  3 | test.beforeEach(async ({ page }) => {\n  4 |   const session = await page.context().newCDPSession(page);"
+        },
+        {
+          "message": "Error: No tests found",
+          "stack": "Error: No tests found"
+        }
+      ],
+      "workers": 3,
+      "projects": [
+        {
+          "timeout": 30000,
+          "retries": 0,
+          "repeatEach": 1
+        }
+      ],
+      "tests": [],
+      "resolutionLink": null
+    },
+    {
+      "name": "selection-delay-green-v2",
+      "stats": {
+        "startTime": "2026-10-13T01:50:32.013Z",
+        "duration": 17644.029,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": [],
+      "workers": 3,
+      "projects": [
+        {
+          "timeout": 30000,
+          "retries": 0,
+          "repeatEach": 3
+        }
+      ],
+      "tests": [
+        {
+          "title": "ordinary formatting and typing keep native Undo after a verified rewrite",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "ordinary formatting and typing keep native Undo after a verified rewrite",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "ordinary formatting and typing keep native Undo after a verified rewrite",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "errors": []
+            }
+          ]
+        }
+      ],
+      "resolutionLink": "/workspace/capiro-shipping-browser-20261013/node_modules"
+    }
+  ],
+  "assertionSpecByteIdentical": true,
+  "diagnosticsByteIdentical": true,
+  "v1Classification": "Import-resolution setup failure; zero behavioral cases ran. This is not a product red.",
+  "v2Resolution": "External harness node_modules symlink targets clean-installed candidate worktree; no harness assertion change.",
+  "controlledCausalLimit": "Delayed observer ordering proves source text loss under the controlled ordering; exact AWS interleaving is unproven.",
+  "workerDifference": "Baseline one worker; final V2 three workers; both 30s and zero retries.",
+  "externalInstrumentation": "Reads editor state and wraps view update for diagnostics, withholds selectionchange delivery; not an uninstrumented AWS reproduction."
+}

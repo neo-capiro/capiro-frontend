@@ -1,0 +1,33 @@
+{
+  "sealedAtUTC": "2026-10-13T03:15:11.523166+00:00",
+  "files": [
+    {
+      "path": "FROZEN-SOURCE-MANIFEST.reviewed.json",
+      "bytes": 2140,
+      "sha256": "4798b1df374f43a7a04201771eb95be834a0413a684262888f280a541d944cff"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 2945,
+      "sha256": "72e2eccc7e04fa8af157a9779f0410a755101a190b3d35098326554741ef12dd"
+    },
+    {
+      "path": "VERIFICATION.json",
+      "bytes": 3083,
+      "sha256": "082e3a1594333e4c9df84481b4b4aa3ae4232587cc8c000a580d79211ff619de"
+    },
+    {
+      "path": "qualify-frozen-source.reviewed.sh",
+      "bytes": 4555,
+      "sha256": "d2439c4e3c3a8ed4e84698993a83e5a4bd82ea7698c98900ae8679982182acac"
+    },
+    {
+      "path": "recipe.diff",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "fileCount": 5,
+  "totalBytes": 12723,
+  "excludes": "manifest self hash; no previous packet mutation"
+}

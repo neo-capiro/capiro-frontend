@@ -1,0 +1,100 @@
+{
+  "reviewedAt": "2026-10-13T01:42:47.525935+00:00",
+  "base": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "checkoutHead": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "newTest": {
+    "path": "apps/web/tests/browser/profile-identity-layout.spec.ts",
+    "bytes": 2375,
+    "sha256": "970638f7f61e13a9ea1ab097f041c06dc4928bcb7d12dc64edcd9419b3c40edf"
+  },
+  "existingTest": {
+    "path": "apps/web/tests/browser/profile-tools-integration.spec.ts",
+    "bytes": 4864,
+    "sha256": "894315f902f99caa97552a9308898e9752e2e3c3a02a765e3525e82263cc4a2a",
+    "onlyExactThreeLineReadinessAddition": true,
+    "allOriginalOtherBytesRetained": true
+  },
+  "profileProductDiffFromFrozen": "",
+  "awsReport": {
+    "path": "/tmp/capiro-shipping-browser-correction-20261013/AWS-FAILURE-EVIDENCE.json",
+    "bytes": 18324,
+    "sha256": "21f89c46e5af85b5f249602481c3fe35731d91b02080c01f75cedf23d13f06c7",
+    "sourceBindingsCheckedAgainstFrozenGit": [
+      {
+        "path": "apps/web/tests/browser/mail-rich-compose.spec.ts",
+        "bytes": 14236,
+        "sha256": "1b7ca2ca4c029b83e533e073dd5b1ca45b2c76fc8d265973ea2d0d254f884a90",
+        "matchesFrozenSource": true
+      },
+      {
+        "path": "apps/web/tests/browser/profile-tools-integration.spec.ts",
+        "bytes": 4757,
+        "sha256": "a74ea49507fcc5c9a266fddb4ff721e361d9493af4078fd98efb0728314e45e0",
+        "matchesFrozenSource": true
+      },
+      {
+        "path": "apps/web/playwright.config.ts",
+        "bytes": 1042,
+        "sha256": "a85aa9952c8130f9a999c13e6bbd8aa630a2b8237189e6a79101516a6e908f82",
+        "matchesFrozenSource": true
+      },
+      {
+        "path": "apps/web/package.json",
+        "bytes": 1815,
+        "sha256": "4086045450c1a8dc98a1a45814c18e39f0b6d63a3e2278378e9378e5715b0b14",
+        "matchesFrozenSource": true
+      },
+      {
+        "path": "package.json",
+        "bytes": 1762,
+        "sha256": "616c749f95524f28cf1d07e5f99dbb106442ef7c7f7a27a686ccb8e1ef754b49",
+        "matchesFrozenSource": true
+      },
+      {
+        "path": "package-lock.json",
+        "bytes": 510436,
+        "sha256": "93b3dd0484180ade603daf74a32f75fc16a9bf0bda1694966a6e68100e2a6802",
+        "matchesFrozenSource": true
+      },
+      {
+        "path": "apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx",
+        "bytes": 4507,
+        "sha256": "57f0f73b009938109936b085438ec7774fbfc0b5b288db860de4a8bf3834a086",
+        "matchesFrozenSource": true
+      },
+      {
+        "path": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+        "bytes": 14376,
+        "sha256": "3e9e68e1e2566376e383dc47ed167bb9af6fcf3a9f4ecef73cdb44a958def093",
+        "matchesFrozenSource": true
+      },
+      {
+        "path": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
+        "bytes": 7049,
+        "sha256": "a7d02942fe8bd99367f8b1e59a5e6ab81513a9ba9a84d101d91ffd1f50908165",
+        "matchesFrozenSource": true
+      },
+      {
+        "path": "apps/web/src/features/portfolio/client-profile/tags/FocusTags.tsx",
+        "bytes": 5909,
+        "sha256": "c51b9f4be51ce0eb456a677f49b47517f44c8e0a36a3c80b98a792c537f4b4a5",
+        "matchesFrozenSource": true
+      },
+      {
+        "path": "apps/web/tests/browser/profile-tools-fixtures.ts",
+        "bytes": 3493,
+        "sha256": "aa1f112079b5dc5d6791325ddab655db00487a83f742a01acafd312d7ce67798",
+        "matchesFrozenSource": true
+      },
+      {
+        "path": "apps/web/tests/browser/server.mjs",
+        "bytes": 1976,
+        "sha256": "eedc3911d74e8159d105b2bea55c07ac935b05c90f71292b0138a00c6efae420",
+        "matchesFrozenSource": true
+      }
+    ],
+    "collection": "Supplied shipping-owner report; reviewer did not call AWS"
+  },
+  "reviewRuntime": false,
+  "outOfScope": "Other lane RichMailEditor product correction and root v2 browser run"
+}

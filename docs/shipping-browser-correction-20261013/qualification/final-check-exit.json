@@ -1,0 +1,25 @@
+{
+  "name": "final-check",
+  "command": [
+    "npm",
+    "run",
+    "check"
+  ],
+  "startedUTC": "2026-10-13T01:46:58.449197+00:00",
+  "endedUTC": "2026-10-13T01:48:42.114680+00:00",
+  "durationSeconds": 103.66550775099313,
+  "exitCode": 0,
+  "sourceBefore": {
+    "head": "d4be41e60516e576c74afa304b50ed67da15cb93",
+    "tree": "401cadde371b91606e3346243aaca6b6225aafcb",
+    "applicationTree": "6ae2118b797f478f5a63788841a9777d67c8001e",
+    "sourceDiff": ""
+  },
+  "sourceAfter": {
+    "head": "d4be41e60516e576c74afa304b50ed67da15cb93",
+    "tree": "401cadde371b91606e3346243aaca6b6225aafcb",
+    "applicationTree": "6ae2118b797f478f5a63788841a9777d67c8001e",
+    "sourceDiff": ""
+  },
+  "sourceChanged": false
+}

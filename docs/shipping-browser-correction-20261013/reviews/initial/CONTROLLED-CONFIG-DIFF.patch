@@ -1,0 +1,6 @@
+--- V1 config
++++ V2 config
+@@ -1,2 +1,2 @@
+ import base from "/workspace/capiro-shipping-browser-20261013/apps/web/playwright.config";
+-export default {...base,testDir:"./specs",outputDir:"./artifacts",reporter:[["list"],["json",{outputFile:"/tmp/capiro-shipping-browser-correction-20261013/selection-delay-green/results.json"}]],webServer:{...base.webServer,cwd:"/workspace/capiro-shipping-browser-20261013/apps/web"}};
++export default {...base,testDir:"./specs",outputDir:"./artifacts",reporter:[["list"],["json",{outputFile:"/tmp/capiro-shipping-browser-correction-20261013/selection-delay-green-v2/results.json"}]],webServer:{...base.webServer,cwd:"/workspace/capiro-shipping-browser-20261013/apps/web"}};

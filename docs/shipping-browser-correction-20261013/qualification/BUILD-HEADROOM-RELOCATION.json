@@ -1,0 +1,22 @@
+{
+  "UTC": "2026-10-13T03:11:53.648985+00:00",
+  "action": "Relocate existing previously verified generated archives; no new archive created. Original aliases remain valid.",
+  "records": [
+    {
+      "preservedAlias": "/workspace/capiro-shipping-preserved-generated-20261013/inactive-integration-dependencies.tar.gz",
+      "newLocation": "/tmp/capiro-shipping-restaged-generated-20261013/inactive-integration-dependencies.tar.gz",
+      "bytes": 270372695,
+      "sha256": "49e6dc2049818a8d5933183f90eefd960dd8f79b6ae7314d73454f9a915bdab4",
+      "verified": true
+    },
+    {
+      "preservedAlias": "/workspace/capiro-shipping-preserved-generated-20261013/inactive-contract-dependencies.tar.gz",
+      "newLocation": "/tmp/capiro-shipping-restaged-generated-20261013/inactive-contract-dependencies.tar.gz",
+      "bytes": 270381255,
+      "sha256": "da87710b6d0e2fd3a02fec5cc54fc89fabb1ccf6fec813b50815330b20344283",
+      "verified": true
+    }
+  ],
+  "tmpFree": 1964687360,
+  "workspaceFree": 1159843840
+}

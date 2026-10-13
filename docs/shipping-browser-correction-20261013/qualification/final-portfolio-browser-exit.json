@@ -1,0 +1,31 @@
+{
+  "name": "final-portfolio-browser",
+  "command": [
+    "env",
+    "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+    "PLAYWRIGHT_JSON_OUTPUT_FILE=/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-results.json",
+    "npm",
+    "run",
+    "test:browser",
+    "--",
+    "--workers=3",
+    "--output=/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-artifacts"
+  ],
+  "startedUTC": "2026-10-13T01:50:58.429495+00:00",
+  "endedUTC": "2026-10-13T02:28:28.853603+00:00",
+  "durationSeconds": 2250.4241377760045,
+  "exitCode": 1,
+  "sourceBefore": {
+    "head": "d4be41e60516e576c74afa304b50ed67da15cb93",
+    "tree": "401cadde371b91606e3346243aaca6b6225aafcb",
+    "applicationTree": "6ae2118b797f478f5a63788841a9777d67c8001e",
+    "sourceDiff": ""
+  },
+  "sourceAfter": {
+    "head": "d4be41e60516e576c74afa304b50ed67da15cb93",
+    "tree": "401cadde371b91606e3346243aaca6b6225aafcb",
+    "applicationTree": "6ae2118b797f478f5a63788841a9777d67c8001e",
+    "sourceDiff": ""
+  },
+  "sourceChanged": false
+}

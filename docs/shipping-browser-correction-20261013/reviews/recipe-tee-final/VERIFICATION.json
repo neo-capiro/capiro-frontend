@@ -1,0 +1,389 @@
+{
+  "capturedAtUTC": "2026-10-13T03:25:29.501389+00:00",
+  "reviewStatus": "accepted bounded static tee change and evidence-publication consistency",
+  "recipeSha256": "f781dc51b05e91509d2251b87bb935aad8ac2922ef473fadb88b4d494819f5bd",
+  "recipeManifestHashMatches": true,
+  "fullRecipeExecuted": false,
+  "reviewerExecution": "No helper/recipe/gate/browser/server/build/install/native/AWS execution; only read/hash/compare and new packet writes",
+  "producerHelperExecution": {
+    "scope": "Only extracted gate helper with synthetic echo/exit commands; complete qualification recipe NOT_RUN. No package/browser/build/network/AWS action.",
+    "recipeSha256": "f781dc51b05e91509d2251b87bb935aad8ac2922ef473fadb88b4d494819f5bd",
+    "controls": [
+      {
+        "case": "success",
+        "shellExit": 0,
+        "recordedGateExit": 0,
+        "commandExit": 0,
+        "logExit": 0,
+        "stdout": "controlled-ok",
+        "status": "PASS",
+        "rawExitFilesMatchReceipt": true,
+        "logPresent": true
+      },
+      {
+        "case": "command-failure",
+        "shellExit": 1,
+        "recordedGateExit": 7,
+        "commandExit": 7,
+        "logExit": 0,
+        "stdout": "controlled-failure",
+        "status": "PASS",
+        "rawExitFilesMatchReceipt": true,
+        "logPresent": true
+      },
+      {
+        "case": "log-failure",
+        "shellExit": 1,
+        "recordedGateExit": 74,
+        "commandExit": 0,
+        "logExit": 1,
+        "stdout": "controlled-log",
+        "status": "PASS",
+        "rawExitFilesMatchReceipt": true,
+        "logPresent": false
+      }
+    ],
+    "independentLimit": "Inspected author receipt and retained raw status/log files; no independent rerun. Static PIPESTATUS inspection supports reported behavior."
+  },
+  "staticReasoning": [
+    "set+e permits collection of both pipeline statuses even when pipefail makes the pipeline fail",
+    "PIPESTATUS array is copied immediately after the pipeline and before another command can overwrite it",
+    "command-exit and log-exit retain separate values; command failure stays nonzero and logging failure chooses gate74",
+    "set-e restored before receipt writes/final guard; nonzero final guard prevents subsequent qualification-complete",
+    "tee writes command output to local log and existing inherited stdout; no S3/IAM/resource configuration or upload introduced"
+  ],
+  "publishedCopies": {
+    "count": 40,
+    "bytes": 5017908,
+    "checks": [
+      {
+        "path": "FINAL-ENVIRONMENT.json",
+        "bytes": 839,
+        "sha256": "c5b1306bc27f6af28019e3b24a86ccee81ae5019822ca1899cc24ff6cdf9f89a",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/FINAL-ENVIRONMENT.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "CURRENT-CHECKPOINT.json",
+        "bytes": 2579,
+        "sha256": "9d140f8cbf5852f8473e32be50c29cc36a69bb3a74dd3a6540ca6480f61181ac",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/CURRENT-CHECKPOINT.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "BOUNDED-VISUAL-REVIEW.json",
+        "bytes": 1999,
+        "sha256": "a7d9ef6e92cea06365b9349254b9de7fd5c6c5637fc8141460d4038f129a4b8f",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/BOUNDED-VISUAL-REVIEW.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "DOC-01-EVIDENCE-REPAIR.json",
+        "bytes": 306,
+        "sha256": "57e132b1086ce21354fd6610f31b36e8632234c6d9b9f6e56af829539f75d38a",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/DOC-01-EVIDENCE-REPAIR.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "RERUN-STORAGE-PREFLIGHT.json",
+        "bytes": 315,
+        "sha256": "ccaeeac675a57e92565deb8cf4290231537ccdabd81cb96672be07910291560a",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/RERUN-STORAGE-PREFLIGHT.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "BUILD-HEADROOM-RELOCATION.json",
+        "bytes": 1013,
+        "sha256": "b9f79f33e1129584192839f29d059bf53ea2a668ce7f775dfa1d6524529aa153",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/BUILD-HEADROOM-RELOCATION.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-clean-install.log",
+        "bytes": 372,
+        "sha256": "cd390c9cdd5b41dc8e5e090a1144261951ccab82ab546cdc8a946571cd3d70fc",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-clean-install.log",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-clean-install-exit.json",
+        "bytes": 800,
+        "sha256": "3c933199153000f11bf664ee812383c5e8c0f6d15b776511656137123bbc9974",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-clean-install-exit.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-check.log",
+        "bytes": 816508,
+        "sha256": "562808246edc73ada4b08dd32ba8f977063bf312df4803cbfd0666e6bd8248e9",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-check.log",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-check-exit.json",
+        "bytes": 717,
+        "sha256": "b2a519e6ff854e25ad8ad27b52849c2b3fec9167794c50f56875d07f8fe1f73b",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-check-exit.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-elements.log",
+        "bytes": 3360,
+        "sha256": "dfad5eec7d3f778a43c77ac3b4fbda494d066c6b25a6484866f5a4e248681a5f",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-elements.log",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-elements-exit.json",
+        "bytes": 829,
+        "sha256": "35b3d4a01f787ea12e2f4efcc840c77fbbdf5549ae706e3cd4197b097265f6d4",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-elements-exit.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-controlled-selection.log",
+        "bytes": 1176,
+        "sha256": "7d82862d1a392b559b218d3d6e49ec4ff085e5c13bf49dadf60db2ded8b32248",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-controlled-selection.log",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-controlled-selection-exit.json",
+        "bytes": 1039,
+        "sha256": "48aef5fb2ae7c01667e85e1a7faf06e6c7baf46e64f4814a8d37edeb8b85cdf7",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-controlled-selection-exit.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-controlled-selection-v2.log",
+        "bytes": 1375,
+        "sha256": "d7f7bd38237f9683282d2f444246fb1b7ce06b4c502ec811a48f349c33184187",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-controlled-selection-v2.log",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-controlled-selection-v2-exit.json",
+        "bytes": 1045,
+        "sha256": "bbc953b5a6d90672b3283297db4c493501113ccbfa214d53cc076515c4aa7735",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-controlled-selection-v2-exit.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-portfolio-browser.log",
+        "bytes": 174655,
+        "sha256": "587b41cdf1bc07a4368fb55fdc5c4cac8d5696b36f8e0efe1e7884e4f0a724e5",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser.log",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-portfolio-browser-exit.json",
+        "bytes": 1057,
+        "sha256": "b1486ceb8cf887ee7fbf1946607010af285eb66bd193793042f576adcd06c911",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-exit.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-portfolio-browser-v2.log",
+        "bytes": 173053,
+        "sha256": "a73c92dbf43cdd8a250ce399498dbdff471e62b2cc6ac300a9e623e6bdd84ba5",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-v2.log",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-portfolio-browser-v2-exit.json",
+        "bytes": 1066,
+        "sha256": "2f73c1a923451b24af94463403c95c3ce85bd851b2c54aae12f932d57d64fd39",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-v2-exit.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-modules-browser.log",
+        "bytes": 30977,
+        "sha256": "778a200407ba70c841d1a5d7c4ae9f0687a37f399d6941ae8b63be2ad093cf14",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-modules-browser.log",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-modules-browser-exit.json",
+        "bytes": 940,
+        "sha256": "e4cdef72eb8f9153b3019cdef117f46b2b7dd90e614dac91d11b82cb5945bc22",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-modules-browser-exit.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-production-build.log",
+        "bytes": 2233,
+        "sha256": "c9185f5987e5eefa1684240118d7f5a58645189a8764f9538f68fd23ff7d2149",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-production-build.log",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-production-build-exit.json",
+        "bytes": 785,
+        "sha256": "237e3a30cf2afcc8744dfd642e4e13858c9eba092494c5ca84d4a79f6e5dcb6c",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-production-build-exit.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-production-server.log",
+        "bytes": 4253,
+        "sha256": "342cfad9425c0402855d1ea0ea0487fdd1c2cb542715aae130b683409287dfd7",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-production-server.log",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-production-server-exit.json",
+        "bytes": 908,
+        "sha256": "5e1f3818559bb4967bc64ae68ca782215b6a06e55c83ba0d53f2adb3bb9e7d83",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-production-server-exit.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-portfolio-browser-results.json",
+        "bytes": 1237270,
+        "sha256": "f45c2c962cc9f54743133ac2be9843c39cfec7a2a7deb6524d9d608fe9995b13",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-results.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-portfolio-browser-v2-results.json",
+        "bytes": 1234836,
+        "sha256": "6c40be4f1399a3a24177ead118c267a8fd48ceeb932604b35e4f62b26b106a8c",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-portfolio-browser-v2-results.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-modules-browser-results.json",
+        "bytes": 229064,
+        "sha256": "8a8a23211d284a381779a49ef75ec5b73378ad615263c151411c02b3763f5749",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-modules-browser-results.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-elements-work/qualification.json",
+        "bytes": 275,
+        "sha256": "97f9e9095078244d7503c860a76fc27dbe19d12a25409fa7b5e2a0b743ea5c09",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-elements-work/qualification.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-elements-work/ssr/receipt.json",
+        "bytes": 985118,
+        "sha256": "27ca20bcbbef65ae7b904eb5592327b0489ab012abb820c21e1b335e5c0b98bf",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-elements-work/ssr/receipt.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-production/standalone-portfolio.log",
+        "bytes": 147,
+        "sha256": "1fb0278dec1db2aef66d951b30910680cc3d3de170f07bdab0c84a200e1bc4f3",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-production/standalone-portfolio.log",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-production/preview-root-smoke.json",
+        "bytes": 101,
+        "sha256": "2cbffc578fb3980995b7afb5ecb559782747a2f379a7533b7063e94990e9297e",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-production/preview-root-smoke.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-production/standalone-default.log",
+        "bytes": 147,
+        "sha256": "1fb0278dec1db2aef66d951b30910680cc3d3de170f07bdab0c84a200e1bc4f3",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-production/standalone-default.log",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-production/production-smoke.json",
+        "bytes": 3624,
+        "sha256": "653bf3486ea9ec193195ed3289ac8e44a3729ef58b19a48842c8448c990dd36f",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-production/production-smoke.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-production/production-portfolio-390-dark.png",
+        "bytes": 21836,
+        "sha256": "532b06a716f405c135b7b3ee84008b5b208415588a1aa934725894561f53e318",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-production/production-portfolio-390-dark.png",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-production/production-portfolio-1440-dark.png",
+        "bytes": 29101,
+        "sha256": "39049b79761b8a2d4c6c6ef06178b6777f97556ad618f7f762fe0b741e316dfa",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-production/production-portfolio-1440-dark.png",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-production/production-portfolio-390-light.png",
+        "bytes": 22077,
+        "sha256": "083c3ac5298d3cafd0c8b24b7678ac36e86a628352a17fbcabd454717b1ccf37",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-production/production-portfolio-390-light.png",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "final-production/production-portfolio-1440-light.png",
+        "bytes": 29213,
+        "sha256": "adb252c0670b1797a9515d1ea50002c30fd73566891ced4cb9634a26a102be8e",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/final-production/production-portfolio-1440-light.png",
+        "manifestMatches": true,
+        "originalMatches": true
+      },
+      {
+        "path": "recipe-helper-controls.json",
+        "bytes": 900,
+        "sha256": "c1c87ed8119359f71b92b37fbfb6abccd54088f63a20aee903531258971e9ab6",
+        "originalPath": "/tmp/capiro-shipping-browser-correction-20261013/recipe-helper-controls/RECEIPT.json",
+        "manifestMatches": true,
+        "originalMatches": true
+      }
+    ]
+  },
+  "qualificationDoc": "Counts, distinct failed attempts, default30s plus4 inherited90s Portfolio cases,20830s Modules cases, browser installed-versus-launched limits and all337 native rows held are consistent with reviewed receipts. No new gate inferred from recipe syntax/static review.",
+  "sourceHeadAtReview": "d4be41e60516e576c74afa304b50ed67da15cb93",
+  "priorPackets": "Initial recipe, corrected d243 recipe and final gates/image review remain sealed; this addendum supersedes only current recipe byte pin.",
+  "assemblyHistory": {
+    "incompleteAttempt": "/tmp/capiro-pr17-recipe-tee-review-20261013",
+    "reason": "Publication manifest gained flattened recipe-helper-controls.json while assembly assumed all raw paths identical. Read check stopped at missing raw flat name; no source/product/gate failure. Incomplete attempt preserved and is not the final review.",
+    "correction": "Explicit flattened receipt mapping to recipe-helper-controls/RECEIPT.json; all40 copies independently verified in this fresh packet."
+  }
+}
