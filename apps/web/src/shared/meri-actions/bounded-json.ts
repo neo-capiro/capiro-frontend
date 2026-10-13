@@ -1,21 +1,15 @@
-/** Bounds the streamed, decoded body before a governed receiver parses it. */
-export async function boundedJsonText(
+/** Bounds raw network bytes before a governed receiver parses or verifies them. */
+export async function boundedResponseBytes(
   response: Response,
   signal: AbortSignal,
   limit: number,
-): Promise<string> {
+): Promise<Uint8Array<ArrayBuffer>> {
   let reader: ReadableStreamDefaultReader<Uint8Array> | undefined;
   const abort = () => {
     void reader?.cancel().catch(() => undefined);
   };
   try {
     signal.throwIfAborted();
-    if (
-      !/^application\/json(?:\s*;|$)/i.test(
-        response.headers.get("content-type") ?? "",
-      )
-    )
-      throw new Error("Unexpected response format");
     const declared = response.headers.get("content-length");
     if (
       declared !== null &&
@@ -24,9 +18,8 @@ export async function boundedJsonText(
       throw new Error("Response exceeds the receiving limit");
     if (!response.body) throw new Error("Response body is unavailable");
     reader = response.body.getReader();
-    const decoder = new TextDecoder("utf-8", { fatal: true });
     let bytes = 0;
-    const parts: string[] = [];
+    const parts: Uint8Array[] = [];
     signal.addEventListener("abort", abort, { once: true });
     while (true) {
       signal.throwIfAborted();
@@ -36,10 +29,15 @@ export async function boundedJsonText(
       bytes += chunk.value.byteLength;
       if (bytes > limit)
         throw new Error("Response exceeds the receiving limit");
-      parts.push(decoder.decode(chunk.value, { stream: true }));
+      parts.push(chunk.value.slice());
     }
-    parts.push(decoder.decode());
-    return parts.join("");
+    const result = new Uint8Array(bytes);
+    let offset = 0;
+    for (const part of parts) {
+      result.set(part, offset);
+      offset += part.byteLength;
+    }
+    return result;
   } finally {
     signal.removeEventListener("abort", abort);
     if (reader) {
@@ -49,6 +47,33 @@ export async function boundedJsonText(
       void response.body?.cancel().catch(() => undefined);
     }
   }
+}
+
+export async function boundedJsonBytes(
+  response: Response,
+  signal: AbortSignal,
+  limit: number,
+): Promise<Uint8Array<ArrayBuffer>> {
+  if (
+    !/^application\/json(?:\s*;|$)/i.test(
+      response.headers.get("content-type") ?? "",
+    )
+  ) {
+    void response.body?.cancel().catch(() => undefined);
+    throw new Error("Unexpected response format");
+  }
+  return boundedResponseBytes(response, signal, limit);
+}
+
+/** Existing recommendation bootstrap/response text interface. */
+export async function boundedJsonText(
+  response: Response,
+  signal: AbortSignal,
+  limit: number,
+): Promise<string> {
+  return new TextDecoder("utf-8", { fatal: true }).decode(
+    await boundedJsonBytes(response, signal, limit),
+  );
 }
 
 /** The deadline includes receiving/hash validation, not just response headers. */

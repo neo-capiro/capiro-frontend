@@ -1,0 +1,13 @@
+usage: recover-owned-storage.py [-h] {publication,runtime,reports93,reports6a}
+
+Preserve and retire only the explicitly assigned inactive storage copies.
+
+positional arguments:
+  {publication,runtime,reports93,reports6a}
+
+options:
+  -h, --help            show this help message and exit
+
+Exit0: verified recovery complete; exit1: validation/capacity/I/O failure (no
+unverified original retirement); exit2: invalid arguments. Only pinned paths
+are eligible; no source, dependency, Git or browser mutation.

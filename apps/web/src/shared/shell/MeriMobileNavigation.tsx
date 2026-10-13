@@ -14,14 +14,24 @@ export function MeriMobileNavigation() {
   const clientId =
     selected.state === "authorized-client" ? selected.client.id : undefined;
   const actions = pathname === "/meri/actions";
+  const files = pathname === "/meri/files";
+  const conversations = !actions && !files;
   return (
     <nav className={styles.mobileNavigation} aria-label="Meri sections">
-      <Button asChild variant={actions ? "ghost" : "secondary"}>
+      <Button asChild variant={conversations ? "secondary" : "ghost"}>
         <Link
           href={productHref("meri", clientId)}
-          aria-current={actions ? undefined : "page"}
+          aria-current={conversations ? "page" : undefined}
         >
           Conversations
+        </Link>
+      </Button>
+      <Button asChild variant={files ? "secondary" : "ghost"}>
+        <Link
+          href={scopedHref("/meri/files", clientId)}
+          aria-current={files ? "page" : undefined}
+        >
+          Files
         </Link>
       </Button>
       <Button asChild variant={actions ? "secondary" : "ghost"}>

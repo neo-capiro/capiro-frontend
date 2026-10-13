@@ -1,0 +1,14 @@
+{
+  "sourceReviews": [],
+  "fingerprintReviews": [
+    {
+      "file": "apps/web/src/shared/shell/Sidebar.tsx",
+      "kind": "function",
+      "symbol": "Sidebar",
+      "fingerprint": "22cf76c814093443ce018ecda746a0134ad7effb60adcff0d7513c8c52a9c074",
+      "reason": "Sidebar is one bounded navigation presentation component: adopted controls for scoped Conversations/action destinations, current-page semantics, labelled disconnected items and local New conversation reset. The new action link and scoped Conversations handler extend that same navigation responsibility; they neither invoke action APIs nor establish client/run/approval authority. Destination data and shared URL helpers already have canonical owners. At112 nonblank function lines, splitting the JSX solely for length would obscure the relationship between active-route state and links without removing an independent reason to change.",
+      "reviewedBy": "calendar_relationships_review (independent responsibility review)",
+      "reviewedOn": "2026-10-13"
+    }
+  ]
+}

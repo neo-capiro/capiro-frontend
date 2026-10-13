@@ -1,0 +1,53 @@
+[
+  {
+    "path": "apps/web/test/browser/meri-files-fixtures.ts",
+    "sha256": "8050d0f2ab2119b8c5ddb32093f672af192a7215c830cd385b2988ead3d3f749",
+    "reviewer": "Codex independent Meri Files browser review",
+    "reviewedAt": "2026-10-13",
+    "evidence": "docs/meri-files-20261013/BROWSER-INDEPENDENT-REVIEW.md",
+    "rationale": "One document HTTP fixture combines public request admission, finite synthetic replies, request/effect audit, held-request completion and observation-only Blob URL instrumentation. It reuses the existing session/client boundary and shared public fixtures; it does not simulate the production journal/receiver algorithm or grant native authority. The held request observes actual finished/aborted completion before assertions. Keeping one fixture owner makes all intercepted operations and effects reviewable.",
+    "functions": [
+      {
+        "name": "filesFixture",
+        "nonblankLines": 96
+      }
+    ],
+    "signals": [
+      "apps/web/test/browser/meri-files-fixtures.ts: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/test/browser/meri-files-workflow.spec.ts",
+    "sha256": "492bea8efb6eabcaf72248e59e2c4e881caed8ca1131830c435c06a9239cb688",
+    "reviewer": "Codex independent Meri Files browser review",
+    "reviewedAt": "2026-10-13",
+    "evidence": "docs/meri-files-20261013/BROWSER-INDEPENDENT-REVIEW.md",
+    "rationale": "One parameterized observable document lifecycle follows explicit connect/create/inspect/verified-download/acknowledged-revision and resource disposal at two widths for each family. Effect counts, immutable base, download bytes and native-limit captions remain adjacent to the actions that establish them. Existing helpers handle setup/input; splitting the causal scenario merely to reduce108 lines would scatter shared state and acceptance checks. Synthetic bytes are explicitly not Office-generation evidence.",
+    "functions": [
+      {
+        "name": "<anonymous>",
+        "nonblankLines": 108
+      }
+    ],
+    "signals": [
+      "apps/web/test/browser/meri-files-workflow.spec.ts: function over80 nonblank lines requires review"
+    ]
+  },
+  {
+    "path": "apps/web/test/browser/meri-files-navigation.spec.ts",
+    "sha256": "cead47d9f5bed2190211aa8a85dc96234d1e0de5fa7e2b55a5ea9c83336de604",
+    "reviewer": "Codex independent Meri Files browser review",
+    "reviewedAt": "2026-10-13",
+    "evidence": "docs/meri-files-20261013/BROWSER-INDEPENDENT-REVIEW.md",
+    "rationale": "One uncertain-delivery lifecycle follows the same pending/unknown write through Modules navigation, history, explicit reconnect, and successful inspection. The callback owns the held request and exact call counts, proving the fence survives all transitions and reads cannot settle it. No unrelated subsystem implementation, automatic retry, sleeps or hidden authority stub is embedded.",
+    "functions": [
+      {
+        "name": "<anonymous>",
+        "nonblankLines": 85
+      }
+    ],
+    "signals": [
+      "apps/web/test/browser/meri-files-navigation.spec.ts: function over80 nonblank lines requires review"
+    ]
+  }
+]

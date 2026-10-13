@@ -1,0 +1,18 @@
+{
+  "verifiedUTC": "2026-10-13T09:31:59.011029+00:00",
+  "status": "COMMITTED_VENDOR_BINDING_VERIFIED_NO_RUNTIME_QUALIFICATION",
+  "sourceCommit": "4e5aaaabf250d0394522875995028da8ac79dce8",
+  "sourceTree": "1ba6b0173f5acd3aaae59f7fc0dd2f9ef7245979",
+  "applicationTree": "5d8d35f1781593382b6cde092bc542bceb698cb6",
+  "sourceStatusAtRead": "?? docs/meri-files-20261013/development-evidence/\n",
+  "vendorPath": "vendor/capiro-meri-contracts-0.1.2.tgz",
+  "gitEntry": "100644 blob 3b1b1e6345539632b8a4be80de44b0ab548369af\tvendor/capiro-meri-contracts-0.1.2.tgz",
+  "gitBlob": "3b1b1e6345539632b8a4be80de44b0ab548369af",
+  "bytes": 228048,
+  "sha256": "8a3f6c95935c368da5c01d87c599c5d13b9b62a21bc6924e7ad0b723bd5e91fa",
+  "committedBytesEqualOriginalAndVendor": true,
+  "primaryPacket": "/workspace/capiro-meri-files-publication-20261013",
+  "primaryManifestSha256": "b7c246082cee9d4ece3a97f1abf6dda964f1b76e3639a9180e68a40561654e6a",
+  "all198PrimaryMembersStillExact": true,
+  "scope": "Completes the primary sealed packet's pending commit metadata. Development execution is not retroactively qualified on this commit. No runtime/source edits."
+}

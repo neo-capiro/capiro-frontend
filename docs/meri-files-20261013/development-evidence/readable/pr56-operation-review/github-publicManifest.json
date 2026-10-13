@@ -1,0 +1,23 @@
+{
+  "request": {
+    "repository_full_name": "neo-capiro/meri-greenfield",
+    "path": "packages/contracts/package.json",
+    "ref": "25e0d29d6f0b6c3de284d13e86bc5f1aa0c00d21"
+  },
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "{\n  \"name\": \"@capiro/meri-contracts\",\n  \"version\": \"0.1.2\",\n  \"private\": true,\n  \"license\": \"UNLICENSED\",\n  \"type\": \"module\",\n  \"description\": \"Public distribution of frozen Meri wire shapes; validation grants no authorization\",\n  \"files\": [\n    \"meri.schema.json\",\n    \"validate.mjs\",\n    \"dist\",\n    \"README.md\",\n    \"THIRD-PARTY-NOTICES.md\"\n  ],\n  \"exports\": {\n    \".\": {\n      \"types\": \"./dist/index.d.ts\",\n      \"default\": \"./dist/browser.mjs\"\n    },\n    \"./browser\": {\n      \"types\": \"./dist/browser.d.ts\",\n      \"default\": \"./dist/browser.mjs\"\n    },\n    \"./node\": \"./validate.mjs\",\n    \"./metadata\": {\n      \"types\": \"./dist/metadata.d.ts\",\n      \"default\": \"./dist/metadata.mjs\"\n    },\n    \"./schema\": \"./meri.schema.json\",\n    \"./action-application\": {\n      \"types\": \"./dist/action-application.d.ts\",\n      \"default\": \"./dist/action-application.mjs\"\n    },\n    \"./action-application/schema\": \"./dist/action-application.schema.json\",\n    \"./document-application\": {\n      \"types\": \"./dist/document-application.d.ts\",\n      \"default\": \"./dist/document-application.mjs\"\n    },\n    \"./document-application/schema\": \"./dist/document-application.schema.json\"\n  },\n  \"scripts\": {\n    \"build\": \"node generate.mjs && node generate-actions.mjs && node generate-documents.mjs\",\n    \"check:generated\": \"node generate.mjs --check && node generate-actions.mjs --check && node generate-documents.mjs --check\",\n    \"typecheck\": \"tsc --noEmit --strict --skipLibCheck --target ES2022 --module NodeNext --moduleResolution NodeNext test/public-types.ts test/action-application-public-types.ts test/document-application-public-types.ts\",\n    \"test:public\": \"node --test test/public-package.test.mjs test/action-application-public.test.mjs test/document-application-public.test.mjs\",\n    \"check\": \"npm run check:generated && npm run typecheck && npm run test:public\"\n  },\n  \"dependencies\": {\n    \"ajv\": \"8.20.0\",\n    \"ajv-formats\": \"3.0.1\",\n    \"canonicalize\": \"5.1.0\"\n  },\n  \"devDependencies\": {\n    \"esbuild\": \"0.28.2\",\n    \"json-schema-to-typescript\": \"16.0.0\",\n    \"typescript\": \"5.9.3\"\n  },\n  \"engines\": {\n    \"node\": \">=24 <25\"\n  }\n}\n",
+      "encoding": "utf-8",
+      "sha": "f53cfa9fdbc943da29becd5b206dc3d024ad0767",
+      "display_url": "https://github.com/neo-capiro/meri-greenfield/blob/25e0d29d6f0b6c3de284d13e86bc5f1aa0c00d21/packages/contracts/package.json",
+      "display_title": "package.json"
+    },
+    "isError": false
+  }
+}

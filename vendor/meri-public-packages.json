@@ -34,6 +34,17 @@
       "status": "verified-source-pending-consumer-qualification",
       "purpose": "Governed action-application receiver, separate from frozen0.1.0 UIEvent consumer dependency",
       "independentReviewManifestSha256": "c348e7c8997f301f27a161c8b6d3bd7c519da5201b5104d5b25433f03c5c2c6e"
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.2.tgz",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "70516e5c9681917ce493bbc50e3023494f2e1209",
+      "bytes": 228048,
+      "sha256": "8a3f6c95935c368da5c01d87c599c5d13b9b62a21bc6924e7ad0b723bd5e91fa",
+      "regularEntryCount": 19,
+      "status": "verified-source-pending-consumer-qualification",
+      "purpose": "Document application receiving exports; preserves the original0.1.0 UIEvent and0.1.1 action artifacts",
+      "independentReviewManifestSha256": "96341e8ce989a2945a238337248e73ba025c3643c5b8a41dfab9d8ae4b41dfb5"
     }
   ]
 }

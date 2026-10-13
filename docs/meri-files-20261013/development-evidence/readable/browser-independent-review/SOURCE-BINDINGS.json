@@ -1,0 +1,259 @@
+{
+  "base": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+  "sourceRoot": "/workspace/capiro-meri-files-20261013",
+  "checkedAt": "2026-10-13T09:18:38.916045+00:00",
+  "files": [
+    {
+      "path": "apps/web/src/features/meri/files/DocumentInspectionSummary.tsx",
+      "sha256": "44ad8ff19298fb5b97879d12b3f708aa65864922581b80ac570ffbecd1f47197",
+      "bytes": 1485,
+      "sameAsInitial": true,
+      "initialSha256": "44ad8ff19298fb5b97879d12b3f708aa65864922581b80ac570ffbecd1f47197",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/src/features/meri/files/MeriFilesWorkflow.tsx",
+      "sha256": "778fdc31378679cac971731fd1042fb9b636098a3802c8a063c00a7440a4abfa",
+      "bytes": 3870,
+      "sameAsInitial": true,
+      "initialSha256": "778fdc31378679cac971731fd1042fb9b636098a3802c8a063c00a7440a4abfa",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentVersionPanel.tsx",
+      "sha256": "23c2280948c77b925b39fa513960a5a941e964d43488de1a2b8882a437825442",
+      "bytes": 5461,
+      "sameAsInitial": true,
+      "initialSha256": "23c2280948c77b925b39fa513960a5a941e964d43488de1a2b8882a437825442",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentNotice.tsx",
+      "sha256": "4ffcb28c1b7c28ff0bac1e9b0b7e560c2c7e2bc7186b5b13146e0737a61896ac",
+      "bytes": 2495,
+      "sameAsInitial": true,
+      "initialSha256": "4ffcb28c1b7c28ff0bac1e9b0b7e560c2c7e2bc7186b5b13146e0737a61896ac",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/src/features/meri/files/document-workflow-state.ts",
+      "sha256": "e49084c0d7a783e77a76cc973c7d8c2233df7c5498543215f01ce312424a5e7d",
+      "bytes": 9558,
+      "sameAsInitial": true,
+      "initialSha256": "e49084c0d7a783e77a76cc973c7d8c2233df7c5498543215f01ce312424a5e7d",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/src/features/meri/files/WorkbookEditor.tsx",
+      "sha256": "2b5277a4ba0556e438cff6fd0a7e2fdc5be3a1406069b5009d197895c212ef8e",
+      "bytes": 4481,
+      "sameAsInitial": true,
+      "initialSha256": "2b5277a4ba0556e438cff6fd0a7e2fdc5be3a1406069b5009d197895c212ef8e",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/src/features/meri/files/workbook-draft.ts",
+      "sha256": "0bea244c0facd74e472dea49b8fa0552516c9b10fa2cef56ac7160670c8cb645",
+      "bytes": 1333,
+      "sameAsInitial": true,
+      "initialSha256": "0bea244c0facd74e472dea49b8fa0552516c9b10fa2cef56ac7160670c8cb645",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/src/features/meri/files/files.module.css",
+      "sha256": "2fc94c57659849b5469f70f4ee5581adeddf818599362645cf2a419275bb5580",
+      "bytes": 3094,
+      "sameAsInitial": true,
+      "initialSha256": "2fc94c57659849b5469f70f4ee5581adeddf818599362645cf2a419275bb5580",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/src/features/meri/files/DocumentEditor.tsx",
+      "sha256": "8772b6f68e1bbfca8ac01647e2b6e34b7dd4f473b5cf9f96c3cc9bc5e05402ae",
+      "bytes": 4717,
+      "sameAsInitial": true,
+      "initialSha256": "8772b6f68e1bbfca8ac01647e2b6e34b7dd4f473b5cf9f96c3cc9bc5e05402ae",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/src/features/meri/files/document-draft.ts",
+      "sha256": "257fbdf2f792a52408fc4751bcb254da90b14d1a1b1b92f6821a55637e5acd47",
+      "bytes": 1828,
+      "sameAsInitial": true,
+      "initialSha256": "257fbdf2f792a52408fc4751bcb254da90b14d1a1b1b92f6821a55637e5acd47",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/src/features/meri/files/download-url.ts",
+      "sha256": "05df49aaafb0debd346d33c9e08090ae97d053b8b6bdd09d8aaf6fe1d27f0098",
+      "bytes": 723,
+      "sameAsInitial": true,
+      "initialSha256": "05df49aaafb0debd346d33c9e08090ae97d053b8b6bdd09d8aaf6fe1d27f0098",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/workflow-adapter.ts",
+      "sha256": "2eea62309cee79d278d407bce81170eb6c5b4f831f7a8de8cf4f6b3acf9f29fe",
+      "bytes": 13082,
+      "sameAsInitial": true,
+      "initialSha256": "2eea62309cee79d278d407bce81170eb6c5b4f831f7a8de8cf4f6b3acf9f29fe",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/proxy.ts",
+      "sha256": "bcedf60bace147654cc34a785ba5a156367c6094e1f10dd945336f09065e7977",
+      "bytes": 3816,
+      "sameAsInitial": true,
+      "initialSha256": "bcedf60bace147654cc34a785ba5a156367c6094e1f10dd945336f09065e7977",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/config.ts",
+      "sha256": "4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395",
+      "bytes": 413,
+      "sameAsInitial": true,
+      "initialSha256": "4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/workflow-transport.ts",
+      "sha256": "a718ca794821afdbcd9727a826ec2288771757fed95134fc45adbb5e339bab0c",
+      "bytes": 3885,
+      "sameAsInitial": true,
+      "initialSha256": "a718ca794821afdbcd9727a826ec2288771757fed95134fc45adbb5e339bab0c",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/query-journal.ts",
+      "sha256": "cbdbabf2e1830cfc893c068194422342f1c4977063bcf9dec488b0b4803cec6b",
+      "bytes": 1456,
+      "sameAsInitial": true,
+      "initialSha256": "cbdbabf2e1830cfc893c068194422342f1c4977063bcf9dec488b0b4803cec6b",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/attempt-journal.ts",
+      "sha256": "b2a3817413c9b3be2490e95f78131a7a544e07b524c599262d65ef74036ba358",
+      "bytes": 652,
+      "sameAsInitial": true,
+      "initialSha256": "b2a3817413c9b3be2490e95f78131a7a544e07b524c599262d65ef74036ba358",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-documents/workflow-port.ts",
+      "sha256": "698fb81b2a4c1dbec87048cc3f5517bc1e2da129a450d37aeadc6e354e2fe820",
+      "bytes": 1694,
+      "sameAsInitial": true,
+      "initialSha256": "698fb81b2a4c1dbec87048cc3f5517bc1e2da129a450d37aeadc6e354e2fe820",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/src/app/meri/files/MeriFilesHost.tsx",
+      "sha256": "67096ee7b4ebbe50fdfbce16daa7a0852dede0a823836ae77e68def0bd422326",
+      "bytes": 4520,
+      "sameAsInitial": true,
+      "initialSha256": "67096ee7b4ebbe50fdfbce16daa7a0852dede0a823836ae77e68def0bd422326",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/src/app/meri/files/page.tsx",
+      "sha256": "bcb4a1cb1374c001d9bc0d6bf78a2cbde4ec5eef593928215be1a41a0cf8ca41",
+      "bytes": 604,
+      "sameAsInitial": true,
+      "initialSha256": "bcb4a1cb1374c001d9bc0d6bf78a2cbde4ec5eef593928215be1a41a0cf8ca41",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/opaque-session-controller.ts",
+      "sha256": "cf627a3a025a625d20e96932f1a6a801382757adbec49cfd0ab63016e6625f97",
+      "bytes": 3389,
+      "sameAsInitial": true,
+      "initialSha256": "cf627a3a025a625d20e96932f1a6a801382757adbec49cfd0ab63016e6625f97",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/src/shared/shell/MeriMobileNavigation.tsx",
+      "sha256": "78373981b0f97955467b841477fe3586567efa070de0e209d41f4be9ff05f337",
+      "bytes": 1600,
+      "sameAsInitial": true,
+      "initialSha256": "78373981b0f97955467b841477fe3586567efa070de0e209d41f4be9ff05f337",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/test/browser/main.tsx",
+      "sha256": "ed54cc451fecf88e78eb9ad4f55443f77855247eef71fe32538a5a15f83e7750",
+      "bytes": 6350,
+      "sameAsInitial": true,
+      "initialSha256": "ed54cc451fecf88e78eb9ad4f55443f77855247eef71fe32538a5a15f83e7750",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/tests/meri-document-public-fixtures.ts",
+      "sha256": "9c58d14adfcc8907bd12a5ee02723c20a4b1e0812f7899fee9b4a18ea4bf54fc",
+      "bytes": 4782,
+      "sameAsInitial": true,
+      "initialSha256": "9c58d14adfcc8907bd12a5ee02723c20a4b1e0812f7899fee9b4a18ea4bf54fc",
+      "independentlySameAsInitial": true,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/test/browser/meri-files-navigation.spec.ts",
+      "sha256": "cead47d9f5bed2190211aa8a85dc96234d1e0de5fa7e2b55a5ea9c83336de604",
+      "bytes": 5425,
+      "sameAsInitial": false,
+      "initialSha256": "38d7537a6e4965b12aece17af898bed7cdf294669bea8c21cff921d6ddf7c68c",
+      "independentlySameAsInitial": false,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/test/browser/meri-files-lifetime.spec.ts",
+      "sha256": "a17c004e87d9d331d97e1b72e32b9dfd7545ae98b4a8734db0db168c47387a31",
+      "bytes": 10654,
+      "sameAsInitial": false,
+      "initialSha256": "ecb27adda5de75496fa501a0d81cdd349c97b410b95dd4e38b6b149da46a4c49",
+      "independentlySameAsInitial": false,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/test/browser/meri-files-workflow.spec.ts",
+      "sha256": "492bea8efb6eabcaf72248e59e2c4e881caed8ca1131830c435c06a9239cb688",
+      "bytes": 7887,
+      "sameAsInitial": false,
+      "initialSha256": "2824198e0880ed08ee6a4bf7d2519649579d83e30c2171a2e84551c107de68b6",
+      "independentlySameAsInitial": false,
+      "matchesCurrentSource": true
+    },
+    {
+      "path": "apps/web/test/browser/meri-files-fixtures.ts",
+      "sha256": "8050d0f2ab2119b8c5ddb32093f672af192a7215c830cd385b2988ead3d3f749",
+      "bytes": 8131,
+      "sameAsInitial": false,
+      "initialSha256": "91aa4e5bac3195dbf53403fc2c7e8181e620e19c85d8df5a328d6257b9e665cd",
+      "independentlySameAsInitial": false,
+      "matchesCurrentSource": true
+    }
+  ]
+}

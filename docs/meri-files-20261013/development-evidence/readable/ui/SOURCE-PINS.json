@@ -1,0 +1,90 @@
+{
+  "baseline": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+  "sourceRoot": "/workspace/capiro-meri-files-20261013",
+  "files": [
+    {
+      "file": "apps/web/src/features/meri/files/DocumentEditor.tsx",
+      "bytes": 4717,
+      "sha256": "8772b6f68e1bbfca8ac01647e2b6e34b7dd4f473b5cf9f96c3cc9bc5e05402ae"
+    },
+    {
+      "file": "apps/web/src/features/meri/files/DocumentInspectionSummary.tsx",
+      "bytes": 1485,
+      "sha256": "44ad8ff19298fb5b97879d12b3f708aa65864922581b80ac570ffbecd1f47197"
+    },
+    {
+      "file": "apps/web/src/features/meri/files/DocumentNotice.tsx",
+      "bytes": 2495,
+      "sha256": "4ffcb28c1b7c28ff0bac1e9b0b7e560c2c7e2bc7186b5b13146e0737a61896ac"
+    },
+    {
+      "file": "apps/web/src/features/meri/files/DocumentVersionPanel.tsx",
+      "bytes": 5461,
+      "sha256": "23c2280948c77b925b39fa513960a5a941e964d43488de1a2b8882a437825442"
+    },
+    {
+      "file": "apps/web/src/features/meri/files/MeriFilesWorkflow.tsx",
+      "bytes": 3870,
+      "sha256": "778fdc31378679cac971731fd1042fb9b636098a3802c8a063c00a7440a4abfa"
+    },
+    {
+      "file": "apps/web/src/features/meri/files/WorkbookEditor.tsx",
+      "bytes": 4481,
+      "sha256": "2b5277a4ba0556e438cff6fd0a7e2fdc5be3a1406069b5009d197895c212ef8e"
+    },
+    {
+      "file": "apps/web/src/features/meri/files/document-draft.ts",
+      "bytes": 1828,
+      "sha256": "257fbdf2f792a52408fc4751bcb254da90b14d1a1b1b92f6821a55637e5acd47"
+    },
+    {
+      "file": "apps/web/src/features/meri/files/document-workflow-state.ts",
+      "bytes": 9558,
+      "sha256": "e49084c0d7a783e77a76cc973c7d8c2233df7c5498543215f01ce312424a5e7d"
+    },
+    {
+      "file": "apps/web/src/features/meri/files/download-url.ts",
+      "bytes": 723,
+      "sha256": "05df49aaafb0debd346d33c9e08090ae97d053b8b6bdd09d8aaf6fe1d27f0098"
+    },
+    {
+      "file": "apps/web/src/features/meri/files/files.module.css",
+      "bytes": 3094,
+      "sha256": "2fc94c57659849b5469f70f4ee5581adeddf818599362645cf2a419275bb5580"
+    },
+    {
+      "file": "apps/web/src/features/meri/files/workbook-draft.ts",
+      "bytes": 1333,
+      "sha256": "0bea244c0facd74e472dea49b8fa0552516c9b10fa2cef56ac7160670c8cb645"
+    },
+    {
+      "file": "apps/web/tests/meri-files-draft.test.ts",
+      "bytes": 3098,
+      "sha256": "0fc3cadfd2f11a773ce62206a514b21c38d9f36097eb4acc128b74901cd64922"
+    },
+    {
+      "file": "apps/web/tests/meri-files-workbook.test.ts",
+      "bytes": 3356,
+      "sha256": "424df4ecd094ee87f518fac03f56c03da08ddf38fb62984c1eb50f9ceb1a7b87"
+    },
+    {
+      "file": "apps/web/tests/meri-files-download.test.ts",
+      "bytes": 2012,
+      "sha256": "bd26e455f95bf2481d13d3d5b35bc24ad43be69c4a7ad8bac7ff9c20fa6059ca"
+    },
+    {
+      "file": "apps/web/tests/meri-files-state.test.ts",
+      "bytes": 14789,
+      "sha256": "330d9ee2d41e9d6b5792263728faa198a6d8c2325e71dfa5441ddd570c985487"
+    },
+    {
+      "file": "docs/meri-files-20261013/UI-PLAN.md",
+      "bytes": 5906,
+      "sha256": "bd381c4f68a20d5308398fbd212531bcfec72290dea2867b39a8c31fabfc2a89"
+    }
+  ],
+  "publicReceiver": {
+    "file": "apps/web/node_modules/@capiro/meri-contracts/dist/document-application.mjs",
+    "sha256": "4979699706346dc7fe3661ee1fafdc975e041e38a1f59873ea0b4f1795f9efde"
+  }
+}

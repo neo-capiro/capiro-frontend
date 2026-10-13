@@ -2073,15 +2073,6 @@
     "reviewedOn": "2026-10-13"
   },
   {
-    "file": "apps/web/src/shared/shell/Sidebar.tsx",
-    "kind": "function",
-    "symbol": "Sidebar",
-    "fingerprint": "22cf76c814093443ce018ecda746a0134ad7effb60adcff0d7513c8c52a9c074",
-    "reason": "Sidebar is one bounded navigation presentation component: adopted controls for scoped Conversations/action destinations, current-page semantics, labelled disconnected items and local New conversation reset. The new action link and scoped Conversations handler extend that same navigation responsibility; they neither invoke action APIs nor establish client/run/approval authority. Destination data and shared URL helpers already have canonical owners. At112 nonblank function lines, splitting the JSX solely for length would obscure the relationship between active-route state and links without removing an independent reason to change.",
-    "reviewedBy": "calendar_relationships_review (independent responsibility review)",
-    "reviewedOn": "2026-10-13"
-  },
-  {
     "file": "apps/web/tests/meri-action-transport.test.ts",
     "kind": "function",
     "symbol": "<anonymous> #3",
@@ -2232,6 +2223,186 @@
     "fingerprint": "76e8ccdf0c111b56476f143a5bb6204a084807b0b19d3e4f81cacaa39fab2d3c",
     "reason": "Existing attention list/status/retry presentation owner. A note role makes the already-labelled count semantically valid; it adds no query, aggregation, mutation or state responsibility. Independent exact-source review: docs/unified-20261013/corrections/A11Y-STRUCTURE-REVIEW.md.",
     "reviewedBy": "Codex objectives_work_intel_review, independently reviewed and applied by shared integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/shared/shell/Sidebar.tsx",
+    "kind": "function",
+    "symbol": "Sidebar",
+    "fingerprint": "af7dddbeafb9ac899294288a3b05085e95324278d92ad109ebb832d537d00df8",
+    "reason": "The existing Meri navigation owns destinations, active-state presentation and client-scoped links. This change enables the existing Files destination and corrects current-route selection; other unavailable destinations stay disabled. It introduces no document state, transport or authority logic. A separate Files-specific navigation owner would duplicate this shell responsibility.",
+    "reviewedBy": "Codex independent Meri Files integration review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/meri/files/DocumentEditor.tsx",
+    "kind": "function",
+    "symbol": "DocumentEditor",
+    "fingerprint": "9c3fcd3e8b4b1e5247388e7388354e7ece00083b2eabc6d12f1d9869741e6529",
+    "reason": "One Word input and full-replacement confirmation form owns its field labels, format choice, guidance and explicit submit. Draft mapping and request execution live in separate cohesive owners. Keeping its conditional form/acknowledgement together preserves visible context; there is no transport or authority logic to extract.",
+    "reviewedBy": "Codex independent Meri Files integration review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/meri/files/DocumentVersionPanel.tsx",
+    "kind": "function",
+    "symbol": "DocumentVersionPanel",
+    "fingerprint": "f396fcb588479ea6c4e81d2a0bd088910b2346657b6bc8e4b19f2cc77a43dd31",
+    "reason": "One selected immutable-version panel owns supplied-ID inspection, bounded view-local version selection, metadata and explicit version-bound controls. Structural inspection rendering is already separate, while the controller owns requests and Blob URL allocation. The JSX remains a cohesive presentation of one selected receipt; splitting to reduce line count would scatter its state-dependent controls.",
+    "reviewedBy": "Codex independent Meri Files integration review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/meri/files/WorkbookEditor.tsx",
+    "kind": "function",
+    "symbol": "WorkbookEditor",
+    "fingerprint": "30039d399185cfb28c3a6cbda741d69cb7bee43929cc82e0a251234dfaa40b69",
+    "reason": "One typed-workbook input form owns title, complete sheet JSON, example/help, replacement acknowledgement and explicit submit. It neither selects a different operation family nor validates the backend schema; local syntax guidance and public request admission remain separate. The contextual form stays together without duplicated state.",
+    "reviewedBy": "Codex independent Meri Files integration review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/shared/meri-documents/workflow-adapter.ts",
+    "kind": "function",
+    "symbol": "write",
+    "fingerprint": "88c0936120dc53e0d3947280754efbb93502e00f67ccdf930dd24bfab7372d0d",
+    "reason": "One reserved-write lifecycle claims the shared journal synchronously, fingerprints admitted immutable intent, dispatches once, correlates the returned receipt and settles conservatively. Post-hash/pre-dispatch/post-settlement ownership checks remain adjacent to the transitions they protect. HTTP receiving and cache-generation ownership are separate. Extracting steps merely to drop below80 would obscure reentrant cancellation and attempt fencing.",
+    "reviewedBy": "Codex independent Meri Files integration review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/test/browser/main.tsx",
+    "kind": "function",
+    "symbol": "RoutedApp",
+    "fingerprint": "1a1f4c8c9f3cde9da5da22c5bb1b5d52326eba7ab0963bf52f8412d4a8a8684a",
+    "reason": "Existing canonical fixture route dispatcher. The additive Files branch composes actual ProductShell/RequireSession/MeriFilesHost and explicit fixture-only operation/disable controls. All older branches remain byte-preserved; no production family or authority comes from these fixture query parameters.",
+    "reviewedBy": "Codex independent Meri Files integration review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-document-adapter.test.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "3596be051b535332d316cd5fd8ba6a7b2aa220f61b94536e335613a5243fcf50",
+    "reason": "One DocumentWorkflow port suite with three explicit groups: admitted receiving/projection, scope/immutable identity, and uncertain attempt lifetime. Public request/response admission is real; synthetic fixture construction is separate. Cases observe network calls, exact payloads, cache state and exposed results rather than reproducing the adapter algorithm.",
+    "reviewedBy": "Codex independent Meri Files integration review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-document-adapter.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "e31ed75169ca6df49e0ee2b2a1ab24f1dc633c13f6b4dcfc40004a3daddf1d8c",
+    "reason": "Declarative group of independent receiving/immutable-view cases: three formats, synchronous capture, full replacement parent, malformed input, family mismatch, handles and historical producer receipt. This is a collection of cases, not one oversized execution algorithm.",
+    "reviewedBy": "Codex independent Meri Files integration review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-document-adapter.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #2",
+    "fingerprint": "14f8dd5d0579bdc68efc2719e28d3b85fa64beaea956b1cd8ed98fd953e65b6e",
+    "reason": "Declarative scope and immutable identity cases. Foreign context/artifact cases first prove public wire admission, then require the independent adapter boundary to withhold them. Covers missing/extra client scope, known version substitution and operation-family reads without forging native authority.",
+    "reviewedBy": "Codex independent Meri Files integration review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-document-adapter.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #3",
+    "fingerprint": "3a59f8ae600d8668aae0bdca2e45df18dedb51e183fcdb3f6c8a33fb50dacf68",
+    "reason": "Declarative uncertain-attempt/lifetime cases: interrupted revisions, unparseable denial, cross-host synchronous fencing, reordered repeat intent, explicit reads after unknown, finite dispositions, pause/dispose/expiry/cache clearing and revocation. Held responses provide observable causal barriers; no backend generation algorithm is reimplemented.",
+    "reviewedBy": "Codex independent Meri Files integration review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-document-journal.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "a61f7c43ca47dd1c2fef235dd46a87be623b53b11bf09776b77c93d938389540",
+    "reason": "Declarative canonical-cache ownership tests: same-context sharing, field-wise isolation, generation replacement, reentrant clear/dispose before/after dispatch, and nonsecret state. Real QueryClient behavior exposed the structural-sharing and settlement defects; the fixture does not mirror production admission logic.",
+    "reviewedBy": "Codex independent Meri Files integration review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-document-proxy.test.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "e303064b43cbf50990132b82199cb09812667d417f2b784ce4ac91ed8be186ff",
+    "reason": "One fixed server document-proxy boundary shares origin/config/auth/request fixtures. Parameterized admission, family, opaque-only forwarding, binary header/byte preservation and bounded late-body cancellation are independently named cases. Actual route composition tests protect document-only session/action flag separation. Raw byte-reader behavior is already in a separate cohesive test file; no individual callback exceeds80.",
+    "reviewedBy": "Codex independent Meri Files integration review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-document-transport.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #2",
+    "fingerprint": "f8fd3e019e058c4648674518725b33942ba4db58443103412ea09de2f84e0746",
+    "reason": "Declarative fixed JSON transport and cleanup group sharing real Response streams. Exact route/bearer/credentials/redirect assertions sit alongside media, size, UTF8, pre-abort and late/stalled-body cancellation controls. Public receiving remains the actual implementation under test.",
+    "reviewedBy": "Codex independent Meri Files integration review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-document-transport.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #3",
+    "fingerprint": "970f8468b1e1415d0d148b8fb5c2c1c2a0f9c5591bad4f5ad1b87f678b7da118",
+    "reason": "Declarative binary-admission group with actual public receiver brands and Response bytes. Version/request mismatch, clone rejection, exact bytes, header/hash/count errors, aborted stream cleanup and finite JSON errors are one download boundary, not simulated Office validation.",
+    "reviewedBy": "Codex independent Meri Files integration review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-files-state.test.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "726c984365b78b91cebd8cd0ff7e9ddabc46f2a95c52b2da19e5d3664c6dd3f0",
+    "reason": "One presentation controller suite covers captured form input, explicit replacement acknowledgement, selected version changes, uncertain write UI, local Blob URL disposal and server-selected Excel presentation. Its abstract port doubles are deliberately presentation-only; actual public receiving and authority checks are tested separately.",
+    "reviewedBy": "Codex independent Meri Files integration review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-files-state.test.ts",
+    "kind": "function",
+    "symbol": "fixture",
+    "fingerprint": "d85408bbc5487815dffdc19a214317e515ac1dbb39455a002ff32531166e36e9",
+    "reason": "Small abstract DocumentWorkflowPort test double records exact calls, controllable held outcomes and attempt snapshots, plus an observable Blob URL allocator. It models supplied port outcomes without duplicating wire validation/tenant authority/native generation. A dispose trap enforces that the view never owns the borrowed port.",
+    "reviewedBy": "Codex independent Meri Files integration review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/meri-files-state.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "9f55ccb7c60f166c365654179366c0256884f6d01e769247e050caf1cfa73e31",
+    "reason": "Declarative local-operation lifetime group: no implicit requests, pending-input capture, explicit complete replacement, renewed acknowledgement, unknown fences, deliberate corrected input, held disposal and supplied-ID inspect. These independent observable UI-state contracts remain readable with the shared presentation fixture.",
+    "reviewedBy": "Codex independent Meri Files integration review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/test/browser/meri-files-fixtures.ts",
+    "kind": "function",
+    "symbol": "filesFixture",
+    "fingerprint": "c553ce58544088d3207f3a12ec11c127349f0b17c191f8ec55c48e6fcf7b5395",
+    "reason": "One document HTTP fixture combines public request admission, finite synthetic replies, request/effect audit, held-request completion and observation-only Blob URL instrumentation. It reuses the existing session/client boundary and shared public fixtures; it does not simulate the production journal/receiver algorithm or grant native authority. The held request observes actual finished/aborted completion before assertions. Keeping one fixture owner makes all intercepted operations and effects reviewable.",
+    "reviewedBy": "Codex independent Meri Files browser review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/test/browser/meri-files-workflow.spec.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "225ff7109c6fd3eb2e52d698230396f0a94c65aa2e74334cf1a1da3f6432cf95",
+    "reason": "One parameterized observable document lifecycle follows explicit connect/create/inspect/verified-download/acknowledged-revision and resource disposal at two widths for each family. Effect counts, immutable base, download bytes and native-limit captions remain adjacent to the actions that establish them. Existing helpers handle setup/input; splitting the causal scenario merely to reduce108 lines would scatter shared state and acceptance checks. Synthetic bytes are explicitly not Office-generation evidence.",
+    "reviewedBy": "Codex independent Meri Files browser review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/test/browser/meri-files-navigation.spec.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "f9299e646d79d349074f36ba77490d3db60e95b1569e0c7be981de47b5545d45",
+    "reason": "One uncertain-delivery lifecycle follows the same pending/unknown write through Modules navigation, history, explicit reconnect, and successful inspection. The callback owns the held request and exact call counts, proving the fence survives all transitions and reads cannot settle it. No unrelated subsystem implementation, automatic retry, sleeps or hidden authority stub is embedded.",
+    "reviewedBy": "Codex independent Meri Files browser review",
     "reviewedOn": "2026-10-13"
   }
 ]

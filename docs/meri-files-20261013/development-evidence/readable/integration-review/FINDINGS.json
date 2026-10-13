@@ -1,0 +1,12 @@
+[
+  {
+    "id": "MF-REVIEW-01",
+    "severity": "P2",
+    "status": "corrected in reviewed source; browser confirmation pending",
+    "file": "apps/web/src/app/meri/files/MeriFilesHost.tsx",
+    "reason": "Non-authorized availability branch before ready unmounted local editor during same-client revalidation, discarding draft/selection and aborting pending observation.",
+    "evidence": "INTERIM.md and REPORT.md; static source observation only, no runtime failing-before claim",
+    "correction": "Ready workflow remains mounted under hidden verification guard; unavailable still revokes in layout and changed client/operation keys replace host.",
+    "correctedSourceSha256": "67096ee7b4ebbe50fdfbce16daa7a0852dede0a823836ae77e68def0bd422326"
+  }
+]

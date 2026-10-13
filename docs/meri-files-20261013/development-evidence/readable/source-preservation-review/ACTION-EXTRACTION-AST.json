@@ -1,0 +1,63 @@
+{
+  "base": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+  "records": [
+    {
+      "name": "getSnapshot",
+      "beforeSha256": "db4085b3bfeacc56f27ad361a2600b5193135e90abf067f6362ab7a0f98acc03",
+      "afterSha256": "db4085b3bfeacc56f27ad361a2600b5193135e90abf067f6362ab7a0f98acc03",
+      "runtimeEquivalent": true,
+      "normalization": "Only generic Snapshot<P> annotation removed; function bodies unchanged"
+    },
+    {
+      "name": "subscribe",
+      "beforeSha256": "51085846ea0a5857ddcf07d698721b2c19636562b65e70ced54a136c2b4f1aea",
+      "afterSha256": "51085846ea0a5857ddcf07d698721b2c19636562b65e70ced54a136c2b4f1aea",
+      "runtimeEquivalent": true,
+      "normalization": "Only generic Snapshot<P> annotation removed; function bodies unchanged"
+    },
+    {
+      "name": "publish",
+      "beforeSha256": "b8a7a445186ad2f1e981b5a08285c5777a44884afcfb867e9d1661c5564465ed",
+      "afterSha256": "4b87f81b30442b136cfdd4345b229b3847e28ff3bee3ddf730c38902465cfe87",
+      "runtimeEquivalent": true,
+      "normalization": "Only generic Snapshot<P> annotation removed; function bodies unchanged"
+    },
+    {
+      "name": "clear",
+      "beforeSha256": "7261d6476ed4629adb0d4effc14172356cf055292ee2f88e4daebef1e3ca5f21",
+      "afterSha256": "7261d6476ed4629adb0d4effc14172356cf055292ee2f88e4daebef1e3ca5f21",
+      "runtimeEquivalent": true,
+      "normalization": "Only generic Snapshot<P> annotation removed; function bodies unchanged"
+    },
+    {
+      "name": "attach",
+      "beforeSha256": "532a609c2b523fe1812258a9be73f35ef274e2279ee21cf34597d49b59c02f39",
+      "afterSha256": "532a609c2b523fe1812258a9be73f35ef274e2279ee21cf34597d49b59c02f39",
+      "runtimeEquivalent": true,
+      "normalization": "Only generic Snapshot<P> annotation removed; function bodies unchanged"
+    },
+    {
+      "name": "setClientAvailable",
+      "beforeSha256": "37596f2810d0b40d4e6f37a6746fcacf46abe3552434d5ffbb445f57909b2831",
+      "afterSha256": "37596f2810d0b40d4e6f37a6746fcacf46abe3552434d5ffbb445f57909b2831",
+      "runtimeEquivalent": true,
+      "normalization": "Only generic Snapshot<P> annotation removed; function bodies unchanged"
+    },
+    {
+      "name": "revoke",
+      "beforeSha256": "a660aff1c88da36b1ac98e74e18111d83acec9d48104c70332bed5a7e9df4065",
+      "afterSha256": "a660aff1c88da36b1ac98e74e18111d83acec9d48104c70332bed5a7e9df4065",
+      "runtimeEquivalent": true,
+      "normalization": "Only generic Snapshot<P> annotation removed; function bodies unchanged"
+    },
+    {
+      "name": "connect",
+      "beforeNormalizedSha256": "fed72d0358796b588cc66230a2137f1c1e2ebe722432cf75e622281028b0d663",
+      "afterNormalizedSha256": "fed72d0358796b588cc66230a2137f1c1e2ebe722432cf75e622281028b0d663",
+      "runtimeEquivalent": true,
+      "normalization": "Replace only const port initializer with <PORT_FACTORY>; all activation, pre/post bootstrap lifetime, expiry and publication code unchanged"
+    }
+  ],
+  "allEquivalent": true,
+  "wrapper": "ActionHostController constructs the same GovernedActionWorkflow with unchanged session, actionTransport(credential,signal,fetcher), journal(session.context), onAccessLost, clientAvailable-only isCurrent and clock. No action operation or action receiver changes."
+}

@@ -1,0 +1,847 @@
+{
+  "launcherFailure": "initial.log: import.meta parsed as CJS before test collection; initial-exit.txt=1. External ESM metadata correction only.",
+  "runs": [
+    {
+      "name": "candidate",
+      "reportSha256": "5e07faf850c75fcf8ab4be29316bdf67abdd1da1fc729514bbc1c42cea6ee9d4",
+      "exit": "1",
+      "stats": {
+        "startTime": "2026-10-13T08:56:30.113Z",
+        "duration": 246008.99300000002,
+        "expected": 17,
+        "skipped": 0,
+        "unexpected": 10,
+        "flaky": 0
+      },
+      "globalErrors": [],
+      "cases": [
+        {
+          "title": "Files late create 200 cannot publish or revoke the replacement user",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1655,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files late create 401 cannot publish or revoke the replacement user",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1586,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files late create 200 cannot publish or revoke the replacement session",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1591,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files late create 401 cannot publish or revoke the replacement session",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1453,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files late create 200 cannot publish or revoke the replacement organization",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1503,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files late create 401 cannot publish or revoke the replacement organization",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1543,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files held create cannot restore details after selected-client replacement",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1430,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files expiry removes an idle draft, known version and owned download URL without reconnect",
+          "expectedStatus": "passed",
+          "status": "unexpected",
+          "attempts": [
+            {
+              "status": "timedOut",
+              "retry": 0,
+              "duration": 30165,
+              "errors": [
+                {
+                  "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                },
+                {
+                  "location": {
+                    "file": "/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+                    "column": 6,
+                    "line": 116
+                  },
+                  "message": "Error: locator.fill: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Document text', { exact: true })\u001b[22m\n\n\n  114 |   await page\n  115 |     .getByLabel(\"Document text\", { exact: true })\n> 116 |     .fill(\"Unsubmitted private text\");\n      |      ^\n  117 |   const before = fixture.requests.length;\n  118 |   await page.clock.fastForward(60_001);\n  119 |   await expect(\n    at /tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts:116:6"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Files current 401 refusal clears known versions and download resources",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1573,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files current 403 refusal clears known versions and download resources",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1437,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files same-client held verification retains typed draft and known version after current success",
+          "expectedStatus": "passed",
+          "status": "unexpected",
+          "attempts": [
+            {
+              "status": "timedOut",
+              "retry": 0,
+              "duration": 30152,
+              "errors": [
+                {
+                  "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                },
+                {
+                  "location": {
+                    "file": "/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+                    "column": 6,
+                    "line": 185
+                  },
+                  "message": "Error: locator.fill: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Document text', { exact: true })\u001b[22m\n\n\n  183 |   await page\n  184 |     .getByLabel(\"Document text\", { exact: true })\n> 185 |     .fill(\"Retained same-client private draft\");\n      |      ^\n  186 |   const before = fixture.requests.length;\n  187 |   const held = fixture.host.hold(\"client\", { json: actionClient });\n  188 |   await page.clock.setSystemTime(new Date(actionClock + 31_000));\n    at /tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts:185:6"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Files authorized same-client verification does not abort an already held create",
+          "expectedStatus": "passed",
+          "status": "unexpected",
+          "attempts": [
+            {
+              "status": "failed",
+              "retry": 0,
+              "duration": 6474,
+              "errors": [
+                {
+                  "location": {
+                    "file": "/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts",
+                    "column": 5,
+                    "line": 235
+                  },
+                  "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByLabel('Document text', { exact: true })\nExpected: disabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document text', { exact: true })\u001b[22m\n\n\n  233 |   await expect(\n  234 |     page.getByLabel(\"Document text\", { exact: true }),\n> 235 |   ).toBeDisabled();\n      |     ^\n  236 |   expect(await write.release()).toBe(\"finished\");\n  237 |   await expect(\n  238 |     page.getByRole(\"heading\", { name: \"Synthetic.docx\", exact: true }),\n    at /tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-lifetime.spec.ts:235:5"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Files a denied same-client refresh destroys retained private state without new document requests",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1421,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files sign-out removes draft and verified download without a background operation",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1374,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files unknown write remains fenced through cross-mode Back/Forward and reconnect",
+          "expectedStatus": "passed",
+          "status": "unexpected",
+          "attempts": [
+            {
+              "status": "failed",
+              "retry": 0,
+              "duration": 6626,
+              "errors": [
+                {
+                  "location": {
+                    "file": "/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts",
+                    "column": 5,
+                    "line": 202
+                  },
+                  "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEditable\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Document title', { exact: true })\nExpected: editable\nReceived: disabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeEditable\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document title', { exact: true })\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <input disabled value=\"\" required=\"\" maxlength=\"200\" data-slot=\"input\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacit\u2026/>\u001b[22m\n\u001b[2m       - unexpected value \"disabled\"\u001b[22m\n\n\n   at ../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:202\n\n  200 |       exact: true,\n  201 |     }),\n> 202 |   ).toBeEditable();\n      |     ^\n  203 | }\n  204 | export async function fillDocument(page: Page, format: Format = \"docx\") {\n  205 |   await page\n    at connectFiles (/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:202:5)\n    at /tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-navigation.spec.ts:55:5"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Files in-flight write remains fenced through cross-mode Back/Forward and reconnect",
+          "expectedStatus": "passed",
+          "status": "unexpected",
+          "attempts": [
+            {
+              "status": "failed",
+              "retry": 0,
+              "duration": 6765,
+              "errors": [
+                {
+                  "location": {
+                    "file": "/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts",
+                    "column": 5,
+                    "line": 202
+                  },
+                  "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeEditable\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByLabel('Document title', { exact: true })\nExpected: editable\nReceived: disabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeEditable\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByLabel('Document title', { exact: true })\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <input disabled value=\"\" required=\"\" maxlength=\"200\" data-slot=\"input\" class=\"file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacit\u2026/>\u001b[22m\n\u001b[2m       - unexpected value \"disabled\"\u001b[22m\n\n\n   at ../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:202\n\n  200 |       exact: true,\n  201 |     }),\n> 202 |   ).toBeEditable();\n      |     ^\n  203 | }\n  204 | export async function fillDocument(page: Page, format: Format = \"docx\") {\n  205 |   await page\n    at connectFiles (/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:202:5)\n    at /tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-navigation.spec.ts:55:5"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Files 1440px is keyboard reachable with scoped history and zero automatic operations",
+          "expectedStatus": "passed",
+          "status": "unexpected",
+          "attempts": [
+            {
+              "status": "failed",
+              "retry": 0,
+              "duration": 6483,
+              "errors": [
+                {
+                  "location": {
+                    "file": "/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-navigation.spec.ts",
+                    "column": 25,
+                    "line": 115
+                  },
+                  "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: 'Files', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'Files', exact: true })\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to 0 elements\u001b[22m\n\u001b[2m       - unexpected value \"0\"\u001b[22m\n\n\n  113 |     ).toBeVisible();\n  114 |     const files = page.getByRole(\"link\", { name: \"Files\", exact: true });\n> 115 |     await expect(files).toHaveCount(1);\n      |                         ^\n  116 |     await expect(files).toHaveAttribute(\"href\", filesUrl());\n  117 |     await tabTo(page, files);\n  118 |     await expectFocusEvidence(files, testInfo);\n    at /tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-navigation.spec.ts:115:25"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Files 390px is keyboard reachable with scoped history and zero automatic operations",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 2250,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files docx 1440px creates revises inspects and verifies synthetic bytes with native limits visible",
+          "expectedStatus": "passed",
+          "status": "unexpected",
+          "attempts": [
+            {
+              "status": "timedOut",
+              "retry": 0,
+              "duration": 30177,
+              "errors": [
+                {
+                  "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                },
+                {
+                  "location": {
+                    "file": "/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts",
+                    "column": 6,
+                    "line": 215
+                  },
+                  "message": "Error: locator.fill: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Document text', { exact: true })\u001b[22m\n\n\n   at ../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:215\n\n  213 |       { exact: true },\n  214 |     )\n> 215 |     .fill(\n      |      ^\n  216 |       format === \"docx\"\n  217 |         ? \"Synthetic document\"\n  218 |         : '[{\"name\":\"Data\",\"rows\":[[{\"value\":\"Synthetic\"},{\"formula\":\"=1+1\"}]]}]',\n    at fillDocument (/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:215:6)\n    at createDocument (/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:222:3)\n    at /tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts:37:7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Files docx 390px creates revises inspects and verifies synthetic bytes with native limits visible",
+          "expectedStatus": "passed",
+          "status": "unexpected",
+          "attempts": [
+            {
+              "status": "timedOut",
+              "retry": 0,
+              "duration": 30151,
+              "errors": [
+                {
+                  "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                },
+                {
+                  "location": {
+                    "file": "/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts",
+                    "column": 6,
+                    "line": 215
+                  },
+                  "message": "Error: locator.fill: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Document text', { exact: true })\u001b[22m\n\n\n   at ../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:215\n\n  213 |       { exact: true },\n  214 |     )\n> 215 |     .fill(\n      |      ^\n  216 |       format === \"docx\"\n  217 |         ? \"Synthetic document\"\n  218 |         : '[{\"name\":\"Data\",\"rows\":[[{\"value\":\"Synthetic\"},{\"formula\":\"=1+1\"}]]}]',\n    at fillDocument (/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:215:6)\n    at createDocument (/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:222:3)\n    at /tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts:37:7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Files xlsx 1440px creates revises inspects and verifies synthetic bytes with native limits visible",
+          "expectedStatus": "passed",
+          "status": "unexpected",
+          "attempts": [
+            {
+              "status": "timedOut",
+              "retry": 0,
+              "duration": 30310,
+              "errors": [
+                {
+                  "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                },
+                {
+                  "location": {
+                    "file": "/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts",
+                    "column": 6,
+                    "line": 215
+                  },
+                  "message": "Error: locator.fill: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Complete sheets (JSON)', { exact: true })\u001b[22m\n\n\n   at ../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:215\n\n  213 |       { exact: true },\n  214 |     )\n> 215 |     .fill(\n      |      ^\n  216 |       format === \"docx\"\n  217 |         ? \"Synthetic document\"\n  218 |         : '[{\"name\":\"Data\",\"rows\":[[{\"value\":\"Synthetic\"},{\"formula\":\"=1+1\"}]]}]',\n    at fillDocument (/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:215:6)\n    at /tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts:31:7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Files xlsx 390px creates revises inspects and verifies synthetic bytes with native limits visible",
+          "expectedStatus": "passed",
+          "status": "unexpected",
+          "attempts": [
+            {
+              "status": "timedOut",
+              "retry": 0,
+              "duration": 30203,
+              "errors": [
+                {
+                  "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                },
+                {
+                  "location": {
+                    "file": "/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts",
+                    "column": 6,
+                    "line": 215
+                  },
+                  "message": "Error: locator.fill: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Complete sheets (JSON)', { exact: true })\u001b[22m\n\n\n   at ../../../../../../tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:215\n\n  213 |       { exact: true },\n  214 |     )\n> 215 |     .fill(\n      |      ^\n  216 |       format === \"docx\"\n  217 |         ? \"Synthetic document\"\n  218 |         : '[{\"name\":\"Data\",\"rows\":[[{\"value\":\"Synthetic\"},{\"formula\":\"=1+1\"}]]}]',\n    at fillDocument (/tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-fixtures.ts:215:6)\n    at /tmp/capiro-meri-files-execution-20261013/apps/web/test/browser/meri-files-workflow.spec.ts:31:7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Files disabled 1440px makes no session/document calls and retains truthful unavailable rendering",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 2030,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files disabled 390px makes no session/document calls and retains truthful unavailable rendering",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1886,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files repeated create intent is refused locally without a second delivery",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1402,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files incorrect download hash hides known version actions and releases no object URL",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1412,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files requires a selected client without bootstrapping from browser hints",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1084,
+              "errors": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "corrected",
+      "reportSha256": "c68a33a4bdad3dfb402c16c6ea2a009a82c5eddeca25680856b5ea45cc014dc0",
+      "exit": "0",
+      "stats": {
+        "startTime": "2026-10-13T09:02:17.217Z",
+        "duration": 51098.231,
+        "expected": 27,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "globalErrors": [],
+      "cases": [
+        {
+          "title": "Files late create 200 cannot publish or revoke the replacement user",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1712,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files late create 401 cannot publish or revoke the replacement user",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1650,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files late create 200 cannot publish or revoke the replacement session",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1689,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files late create 401 cannot publish or revoke the replacement session",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1660,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files late create 200 cannot publish or revoke the replacement organization",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1576,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files late create 401 cannot publish or revoke the replacement organization",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1645,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files held create cannot restore details after selected-client replacement",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1408,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files expiry removes an idle draft, known version and owned download URL without reconnect",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1430,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files current 401 refusal clears known versions and download resources",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1371,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files current 403 refusal clears known versions and download resources",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1412,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files same-client held verification retains typed draft and known version after current success",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1457,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files authorized same-client verification does not abort an already held create",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1339,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files a denied same-client refresh destroys retained private state without new document requests",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1349,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files sign-out removes draft and verified download without a background operation",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1395,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files unknown write remains fenced through cross-mode Back/Forward and reconnect",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1797,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files in-flight write remains fenced through cross-mode Back/Forward and reconnect",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1793,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files 1440px is keyboard reachable with scoped history and zero automatic operations",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1972,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files 390px is keyboard reachable with scoped history and zero automatic operations",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1790,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files docx 1440px creates revises inspects and verifies synthetic bytes with native limits visible",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 2951,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files docx 390px creates revises inspects and verifies synthetic bytes with native limits visible",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 2674,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files xlsx 1440px creates revises inspects and verifies synthetic bytes with native limits visible",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 2970,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files xlsx 390px creates revises inspects and verifies synthetic bytes with native limits visible",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 2803,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files disabled 1440px makes no session/document calls and retains truthful unavailable rendering",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1988,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files disabled 390px makes no session/document calls and retains truthful unavailable rendering",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1905,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files repeated create intent is refused locally without a second delivery",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1440,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files incorrect download hash hides known version actions and releases no object URL",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1456,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "title": "Files requires a selected client without bootstrapping from browser hints",
+          "expectedStatus": "passed",
+          "status": "expected",
+          "attempts": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "duration": 1211,
+              "errors": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

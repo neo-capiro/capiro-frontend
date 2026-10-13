@@ -1,0 +1,104 @@
+{
+  "base": "83f54f5ac0107822833adbbfef2b453e0240bc56",
+  "capturedAt": "2026-10-13T09:03:14.553Z",
+  "classification": "Static read only; all new standalone checks UNRUN",
+  "records": [
+    {
+      "file": "apps/web/tests/production/run-standalone.mjs",
+      "sha256": "4abd010336b73d1358724bb8c1eef26267cd4b77b82e509afeca28125842dbef",
+      "nonblank": 182,
+      "sizeFindings": [],
+      "originalAssertions": [
+        "assert.equal(code, 0, \"Actual Next browser/runtime checks\")",
+        "assert.equal(response.status, 200)",
+        "assert.equal(response.headers.get(\"location\"), null)",
+        "assert.equal(redirected.status, 200)",
+        "assert.ok((await redirected.text()).includes(\"Portfolio setup required\"))"
+      ],
+      "currentAssertions": [
+        "assert.equal(code, 0, \"Actual Next browser/runtime checks\")",
+        "assert.equal(response.status, 200)",
+        "assert.equal(response.headers.get(\"location\"), null)",
+        "assert.equal(redirected.status, 200)",
+        "assert.ok((await redirected.text()).includes(\"Portfolio setup required\"))"
+      ],
+      "originalAssertionsOrderedSubsequence": true,
+      "newFile": false
+    },
+    {
+      "file": "apps/web/tests/production/verify-standalone.mjs",
+      "sha256": "7494d541b60c8619134783ade79a9ba1bc0646f22bbbe1ff346be1dbb055fda1",
+      "nonblank": 213,
+      "sizeFindings": [],
+      "originalAssertions": [
+        "assert.ok(\n  output,\n  \"Output directory must be supplied by the standalone runner.\",\n)",
+        "assert.equal(response.status, status, path)",
+        "assert.equal(\n      new URL(response.headers.get(\"location\"), origin).href,\n      `${origin}/settings/personal${new URL(origin + path).search}`,\n    )",
+        "assert.ok((await response.text()).includes(text), path)",
+        "assert.equal(response.headers.get(\"x-content-type-options\"), \"nosniff\", path)",
+        "assert.equal(response.headers.get(\"x-frame-options\"), \"DENY\", path)",
+        "assert.equal(response.headers.get(\"x-powered-by\"), null, path)",
+        "assert.equal(before.markerCount, 0)",
+        "assert.equal(await portfolioLink.getAttribute(\"href\"), \"/\")",
+        "assert.equal(portfolio.markerCount, 1)",
+        "assert.equal(portfolio.fontSize, \"14px\")",
+        "assert.equal(\n        portfolio.background,\n        colorScheme === \"dark\" ? \"rgb(18, 18, 18)\" : \"rgb(245, 245, 244)\",\n      )",
+        "assert.ok(portfolio.fits)",
+        "assert.ok(portfolio.sameDocument)",
+        "assert.equal(wordmark.width, 77)",
+        "assert.equal(wordmark.height, 26)",
+        "assert.equal(\n        wordmark.filter,\n        colorScheme === \"dark\" ? \"invert(1)\" : \"none\",\n      )",
+        "assert.deepEqual(returned, before)",
+        "assert.equal(\n        await page.evaluate(() => window.portfolioRuntimeProbe),\n        \"same-document\",\n      )",
+        "assert.equal(await page.locator(\"[data-portfolio-root]\").count(), 0)",
+        "assert.equal(\n      await page.evaluate(() => window.portfolioRuntimeProbe),\n      \"same-document\",\n    )",
+        "assert.deepEqual(pageErrors, [])"
+      ],
+      "currentAssertions": [
+        "assert.ok(\n  output,\n  \"Output directory must be supplied by the standalone runner.\",\n)",
+        "assert.equal(response.status, status, path)",
+        "assert.equal(\n      new URL(response.headers.get(\"location\"), origin).href,\n      `${origin}/settings/personal${new URL(origin + path).search}`,\n    )",
+        "assert.ok((await response.text()).includes(text), path)",
+        "assert.equal(response.headers.get(\"x-content-type-options\"), \"nosniff\", path)",
+        "assert.equal(response.headers.get(\"x-frame-options\"), \"DENY\", path)",
+        "assert.equal(response.headers.get(\"x-powered-by\"), null, path)",
+        "assert.equal(before.markerCount, 0)",
+        "assert.equal(await portfolioLink.getAttribute(\"href\"), \"/\")",
+        "assert.equal(portfolio.markerCount, 1)",
+        "assert.equal(portfolio.fontSize, \"14px\")",
+        "assert.equal(\n        portfolio.background,\n        colorScheme === \"dark\" ? \"rgb(18, 18, 18)\" : \"rgb(245, 245, 244)\",\n      )",
+        "assert.ok(portfolio.fits)",
+        "assert.ok(portfolio.sameDocument)",
+        "assert.equal(wordmark.width, 77)",
+        "assert.equal(wordmark.height, 26)",
+        "assert.equal(\n        wordmark.filter,\n        colorScheme === \"dark\" ? \"invert(1)\" : \"none\",\n      )",
+        "assert.deepEqual(returned, before)",
+        "assert.equal(\n        await page.evaluate(() => window.portfolioRuntimeProbe),\n        \"same-document\",\n      )",
+        "assert.equal(await page.locator(\"[data-portfolio-root]\").count(), 0)",
+        "assert.equal(\n      await page.evaluate(() => window.portfolioRuntimeProbe),\n      \"same-document\",\n    )",
+        "assert.deepEqual(pageErrors, [])"
+      ],
+      "originalAssertionsOrderedSubsequence": true,
+      "newFile": false
+    },
+    {
+      "file": "apps/web/tests/production/verify-documents.mjs",
+      "sha256": "873eb842ee558bf6904642242166bc8a9765f304a64f8c3ab5f54c312ee83acd",
+      "nonblank": 87,
+      "sizeFindings": [],
+      "originalAssertions": [],
+      "currentAssertions": [
+        "assert.equal(response.status, 503, path)",
+        "assert.deepEqual(await response.json(), {\n      error: { code: \"FRONTEND_DOCUMENT_UNAVAILABLE\" },\n    })",
+        "assert.equal(response.headers.get(\"cache-control\"), \"no-store\")",
+        "assert.equal(response.headers.get(\"x-content-type-options\"), \"nosniff\")",
+        "assert.equal(\n    await page\n      .getByRole(\"button\", { name: \"Connect document service\", exact: true })\n      .count(),\n    0,\n  )",
+        "assert.ok(\n    await page.evaluate(\n      () => document.documentElement.scrollWidth <= innerWidth,\n    ),\n  )",
+        "assert.equal(await page.locator(\"[data-portfolio-root]\").count(), 0)",
+        "assert.equal(\n    await page.evaluate(() => window.portfolioRuntimeProbe),\n    \"same-document\",\n  )"
+      ],
+      "originalAssertionsOrderedSubsequence": true,
+      "newFile": true
+    }
+  ]
+}

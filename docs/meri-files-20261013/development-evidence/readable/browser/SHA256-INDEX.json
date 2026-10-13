@@ -1,0 +1,745 @@
+{
+  "sealedAt": "2026-10-13T09:08:28.613100+00:00",
+  "files": [
+    {
+      "path": "AXE-SUMMARY.json",
+      "sha256": "7b516d7af091a57c69cd51daf29f4a326de48dd7ac68cb9be565bac58e019985",
+      "bytes": 1568
+    },
+    {
+      "path": "CAPTURES.json",
+      "sha256": "8fba0e227abb0907fb5dba8208106e143ee4cbe62559e8bf9ef11c785a41a4da",
+      "bytes": 3696
+    },
+    {
+      "path": "LEASE-RELEASE.json",
+      "sha256": "5810d8537cccb9492594bece95b2c0abb01d9cc13e2389303c44234e87311269",
+      "bytes": 1099
+    },
+    {
+      "path": "REPORT.md",
+      "sha256": "149f95e1e7b58aebd78646017a4ac89cd4284a839f0f72430bc6f13cb1669791",
+      "bytes": 6256
+    },
+    {
+      "path": "RUN-SUMMARIES.json",
+      "sha256": "ff01ac3002e66c3faf97d84c742c167547304abf4177042c908961a44fddc489",
+      "bytes": 839
+    },
+    {
+      "path": "STRUCTURE-REVIEW-PROPOSAL.json",
+      "sha256": "e109260025c38ffaa59fdd6f4c947ba04b7edb80b75802ef2979511d98cb60c3",
+      "bytes": 4320
+    },
+    {
+      "path": "TEST-MATRIX.json",
+      "sha256": "90c829cc0c14094885f487653d7532e31e6e65cf6fc577c070e65c06f5fe5c27",
+      "bytes": 8778
+    },
+    {
+      "path": "axe-1.json",
+      "sha256": "477104ea39df1f09b97de3ef3c50f67f0627537991a6cdc8a65c6fd228bea99f",
+      "bytes": 352631
+    },
+    {
+      "path": "axe-2.json",
+      "sha256": "8bd78aedf83fa4e04bf665318daf98712acbce27d778ed3828e6df974a49dc50",
+      "bytes": 310867
+    },
+    {
+      "path": "axe-3.json",
+      "sha256": "1fcd4579d70f29b3e11ab86da2911f98be14c1cc7f030a5b0f0bbc8b0bc8d940",
+      "bytes": 350614
+    },
+    {
+      "path": "axe-4.json",
+      "sha256": "15fb969e040172d61eb454a73127fa5b13893fa0a2d81f6c69d350f27c33ef8c",
+      "bytes": 308850
+    },
+    {
+      "path": "axe-5.json",
+      "sha256": "f02a424b05794d4f63e25cfb7aa347b7733b21e158ef1fbc647607e1d7722a63",
+      "bytes": 217561
+    },
+    {
+      "path": "axe-6.json",
+      "sha256": "a49042e33ec37a8e3625540687e6aabcf91838ded3ebcb5051106877a4e67282",
+      "bytes": 176671
+    },
+    {
+      "path": "browser-lint-exit.txt",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    {
+      "path": "browser-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "candidate-artifacts/.last-run.json",
+      "sha256": "34818b6ef6e7fd2fc600c3a8fb35b51bccc52d76ca052d2741eca492c4656682",
+      "bytes": 537
+    },
+    {
+      "path": "candidate-artifacts/meri-files-lifetime-Files--68678-bort-an-already-held-create/error-context.md",
+      "sha256": "e5800f90d1747c42eb84bde517515a78acc2aa3f72d8f5f1db86c85ff78a8fd1",
+      "bytes": 11302
+    },
+    {
+      "path": "candidate-artifacts/meri-files-lifetime-Files--68678-bort-an-already-held-create/test-failed-1.png",
+      "sha256": "0c5da3f59fa7b6f41d7f7b2fb491df14f833996218297f53a3e04df177e87e18",
+      "bytes": 94804
+    },
+    {
+      "path": "candidate-artifacts/meri-files-lifetime-Files--68678-bort-an-already-held-create/trace.zip",
+      "sha256": "cb95f094d0a803762bee6302051ad167a5475f70589f1935a854d33cfc506035",
+      "bytes": 559471
+    },
+    {
+      "path": "candidate-artifacts/meri-files-lifetime-Files--8b5af-rsion-after-current-success/error-context.md",
+      "sha256": "24b7449895580ad1ef651e45b135c1752ff95cb4b943bfc5a4ebcbfbb6988ea4",
+      "bytes": 16989
+    },
+    {
+      "path": "candidate-artifacts/meri-files-lifetime-Files--8b5af-rsion-after-current-success/test-failed-1.png",
+      "sha256": "8a62a651072b050ed1e3def28114878ccb0ee7a62df4ab83d98b883906a2a431",
+      "bytes": 139305
+    },
+    {
+      "path": "candidate-artifacts/meri-files-lifetime-Files--8b5af-rsion-after-current-success/trace.zip",
+      "sha256": "d5390ebca8df5fb0342d41330f03044e80ab5b3566246449f3fd7abf0716d0f7",
+      "bytes": 661877
+    },
+    {
+      "path": "candidate-artifacts/meri-files-lifetime-Files--d84c4-nload-URL-without-reconnect/error-context.md",
+      "sha256": "29b9814f3646164d59ece34f59f0a41677966d6620b9326978dc61a5181b1036",
+      "bytes": 17445
+    },
+    {
+      "path": "candidate-artifacts/meri-files-lifetime-Files--d84c4-nload-URL-without-reconnect/test-failed-1.png",
+      "sha256": "60997d68ca65776d95b1356c4afa060668affa4ea2a4eb240d6535ba60207b6a",
+      "bytes": 134250
+    },
+    {
+      "path": "candidate-artifacts/meri-files-lifetime-Files--d84c4-nload-URL-without-reconnect/trace.zip",
+      "sha256": "83f1eceded4580c41e6da29bc61564bd6b2b1a5c72beb6599545b870a54dade1",
+      "bytes": 754285
+    },
+    {
+      "path": "candidate-artifacts/meri-files-navigation-File-34122--Back-Forward-and-reconnect/error-context.md",
+      "sha256": "f215680be900b1915855b63ec7de61865eccf763fbc7c445bdeba712bd000dd3",
+      "bytes": 7595
+    },
+    {
+      "path": "candidate-artifacts/meri-files-navigation-File-34122--Back-Forward-and-reconnect/test-failed-1.png",
+      "sha256": "abf7d963c1c31cf1b56e69f0040b95c932f37cd919cec4b8087f2026424bf6e2",
+      "bytes": 118088
+    },
+    {
+      "path": "candidate-artifacts/meri-files-navigation-File-34122--Back-Forward-and-reconnect/trace.zip",
+      "sha256": "6fc7435aec576715b8a8860489c3b2d7e654e3e707ea01962e6e943d3437fbe9",
+      "bytes": 886147
+    },
+    {
+      "path": "candidate-artifacts/meri-files-navigation-File-62463--Back-Forward-and-reconnect/error-context.md",
+      "sha256": "d9d7d608d4a692db620d47f8d86f09ac99cb767c8de29b6b31b09eb018b2ad06",
+      "bytes": 7597
+    },
+    {
+      "path": "candidate-artifacts/meri-files-navigation-File-62463--Back-Forward-and-reconnect/test-failed-1.png",
+      "sha256": "197b7a196ba0b5f8f944f93c66f6b1d764cc94750c7d9d66981b236f6c4c7f18",
+      "bytes": 118336
+    },
+    {
+      "path": "candidate-artifacts/meri-files-navigation-File-62463--Back-Forward-and-reconnect/trace.zip",
+      "sha256": "43c7c2fc89f91c8ec6fb172f764c6638af47b62064307e0d36d17777f29c8de9",
+      "bytes": 793347
+    },
+    {
+      "path": "candidate-artifacts/meri-files-navigation-File-768b9-d-zero-automatic-operations/files-keyboard-390.png",
+      "sha256": "aee9a860243d22827a5314d7e5f51de2dec068eea987d81181937336bd54ed11",
+      "bytes": 73803
+    },
+    {
+      "path": "candidate-artifacts/meri-files-navigation-File-f6d60-d-zero-automatic-operations/error-context.md",
+      "sha256": "0553b202e9da8f03719a7458a4f9f1d5ee35ae85651bb80efffbce39cfdd9195",
+      "bytes": 13378
+    },
+    {
+      "path": "candidate-artifacts/meri-files-navigation-File-f6d60-d-zero-automatic-operations/test-failed-1.png",
+      "sha256": "6fd2b507bf1b1eccab95c9d5f1527307adb0f0a86af3abbd74167f1fe9306d63",
+      "bytes": 83524
+    },
+    {
+      "path": "candidate-artifacts/meri-files-navigation-File-f6d60-d-zero-automatic-operations/trace.zip",
+      "sha256": "8c67d76bbfd22e677f2699f182846b6a9a21a15459972a1d5a64d2525dad934b",
+      "bytes": 414445
+    },
+    {
+      "path": "candidate-artifacts/meri-files-workflow-Files--0fa25--with-native-limits-visible/docx-1440-editor.png",
+      "sha256": "0e0cc32a09d2ef6c77e5bb05f7561e0ca96492543e578d2419620f49bafbc4c7",
+      "bytes": 106743
+    },
+    {
+      "path": "candidate-artifacts/meri-files-workflow-Files--0fa25--with-native-limits-visible/error-context.md",
+      "sha256": "8cff14a134ffbecb5e5f6d63bf7941736f1fab4e9f8c3265eba62a810f6c9765",
+      "bytes": 11649
+    },
+    {
+      "path": "candidate-artifacts/meri-files-workflow-Files--0fa25--with-native-limits-visible/test-failed-1.png",
+      "sha256": "7c0606468e01b01431f3d02364d31449fea053d4b6fe46013ab48893275c1b44",
+      "bytes": 96168
+    },
+    {
+      "path": "candidate-artifacts/meri-files-workflow-Files--0fa25--with-native-limits-visible/trace.zip",
+      "sha256": "22c073efe185fca0b2126c640f0ab01827bf57234d6b72833527cbca14b8785d",
+      "bytes": 2318630
+    },
+    {
+      "path": "candidate-artifacts/meri-files-workflow-Files--19af1--with-native-limits-visible/docx-390-editor.png",
+      "sha256": "b3e688e552874630a4310adb9464ff5db931426b91033bf56bf200e92a73ee47",
+      "bytes": 74286
+    },
+    {
+      "path": "candidate-artifacts/meri-files-workflow-Files--19af1--with-native-limits-visible/error-context.md",
+      "sha256": "8b4196273944f3a0710f9fc8a9a6fbaf02692e536916de9c456d28d6dcdc5802",
+      "bytes": 10226
+    },
+    {
+      "path": "candidate-artifacts/meri-files-workflow-Files--19af1--with-native-limits-visible/test-failed-1.png",
+      "sha256": "7ff746186c37dde455689e6f1392493ae97c0ee86e3a8a3c32580a2176a62b28",
+      "bytes": 38740
+    },
+    {
+      "path": "candidate-artifacts/meri-files-workflow-Files--19af1--with-native-limits-visible/trace.zip",
+      "sha256": "e7c82c4b8f5309f5436199bf1f53fcf5badba9abc888fa5f808d85007d84818d",
+      "bytes": 1507684
+    },
+    {
+      "path": "candidate-artifacts/meri-files-workflow-Files--4108e--with-native-limits-visible/error-context.md",
+      "sha256": "2bc0afe4a7c5535ab94c4e3d655de28b35529b252d3a3a8631a75de7c03e2aaa",
+      "bytes": 10985
+    },
+    {
+      "path": "candidate-artifacts/meri-files-workflow-Files--4108e--with-native-limits-visible/test-failed-1.png",
+      "sha256": "80fcfc7fbc1adb5513808b9d659284071989f594091d8664a7c3c54a9534d88f",
+      "bytes": 49281
+    },
+    {
+      "path": "candidate-artifacts/meri-files-workflow-Files--4108e--with-native-limits-visible/trace.zip",
+      "sha256": "f317dfe3102bacefb7294cf82cc87c2b106a260e712d9ca3628e58a54f39d371",
+      "bytes": 1788601
+    },
+    {
+      "path": "candidate-artifacts/meri-files-workflow-Files--9d124--with-native-limits-visible/error-context.md",
+      "sha256": "cecebe8a1d721a15542cb63dbe5b41951b863b604eb5b83b4cedbe02986836d7",
+      "bytes": 12420
+    },
+    {
+      "path": "candidate-artifacts/meri-files-workflow-Files--9d124--with-native-limits-visible/test-failed-1.png",
+      "sha256": "94d86a013faf6953ce9eed5a6556e8d668e749237dedcd331eddfa25e81fd5cb",
+      "bytes": 132026
+    },
+    {
+      "path": "candidate-artifacts/meri-files-workflow-Files--9d124--with-native-limits-visible/trace.zip",
+      "sha256": "96a3c135d535b9976271356d8383ed66f2d641edb3a8d0b89d0b59b212a628f1",
+      "bytes": 3041302
+    },
+    {
+      "path": "candidate-artifacts/meri-files-workflow-Files--c3df1-thful-unavailable-rendering/files-unavailable-390.png",
+      "sha256": "6644b6333c9093282f9ec7f7b46149584dda9021114e6d2ef75f5b71f28279a6",
+      "bytes": 49097
+    },
+    {
+      "path": "candidate-artifacts/meri-files-workflow-Files--f563a-thful-unavailable-rendering/files-unavailable-1440.png",
+      "sha256": "f2aca6a0b87a0a65a1407b79aca54bb023d6153645e842aa95ed6e4fdbd88379",
+      "bytes": 80621
+    },
+    {
+      "path": "candidate-exit.txt",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "bytes": 2
+    },
+    {
+      "path": "candidate-results.json",
+      "sha256": "5e07faf850c75fcf8ab4be29316bdf67abdd1da1fc729514bbc1c42cea6ee9d4",
+      "bytes": 738792
+    },
+    {
+      "path": "candidate.config.ts",
+      "sha256": "9f708714c17f8c5923c138a5fc0c35256b54965418482db1c1abcbc5bc3296f2",
+      "bytes": 603
+    },
+    {
+      "path": "candidate.log",
+      "sha256": "0e1fd63532d10298880c1f6750f938b6e3131e695ec6f3759a67a7792cb727e1",
+      "bytes": 35767
+    },
+    {
+      "path": "corrected-artifacts/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "bytes": 45
+    },
+    {
+      "path": "corrected-artifacts/meri-files-navigation-File-768b9-d-zero-automatic-operations/files-keyboard-390.png",
+      "sha256": "aee9a860243d22827a5314d7e5f51de2dec068eea987d81181937336bd54ed11",
+      "bytes": 73803
+    },
+    {
+      "path": "corrected-artifacts/meri-files-navigation-File-f6d60-d-zero-automatic-operations/files-keyboard-1440.png",
+      "sha256": "cc5f7b1ae4b051bd4219d5cc36bdd4c53f89c70f35194fd9a4adbc2cb0dab0fc",
+      "bytes": 106145
+    },
+    {
+      "path": "corrected-artifacts/meri-files-workflow-Files--0fa25--with-native-limits-visible/docx-1440-editor.png",
+      "sha256": "0e0cc32a09d2ef6c77e5bb05f7561e0ca96492543e578d2419620f49bafbc4c7",
+      "bytes": 106743
+    },
+    {
+      "path": "corrected-artifacts/meri-files-workflow-Files--0fa25--with-native-limits-visible/docx-1440-native-pending.png",
+      "sha256": "6492af32a359f977799713576d2c98f253e8e84d098763749e72e9c24eb8f1eb",
+      "bytes": 157780
+    },
+    {
+      "path": "corrected-artifacts/meri-files-workflow-Files--0fa25--with-native-limits-visible/docx-1440-revision.png",
+      "sha256": "9c66ae65c666ba34a0a431ee3df3952efa6015b0c0b53c585c4fe455f3395064",
+      "bytes": 184486
+    },
+    {
+      "path": "corrected-artifacts/meri-files-workflow-Files--0fa25--with-native-limits-visible/synthetic-receiver-bytes.docx",
+      "sha256": "95a5a3b9cf4ddcc7a93e4a0d4c6de680257932fbf5994ad15daa64142aaae3a0",
+      "bytes": 18
+    },
+    {
+      "path": "corrected-artifacts/meri-files-workflow-Files--19af1--with-native-limits-visible/docx-390-editor.png",
+      "sha256": "b3e688e552874630a4310adb9464ff5db931426b91033bf56bf200e92a73ee47",
+      "bytes": 74286
+    },
+    {
+      "path": "corrected-artifacts/meri-files-workflow-Files--19af1--with-native-limits-visible/docx-390-native-pending.png",
+      "sha256": "814f36d2e4120d8f272a1baa70c1a99ff211327f2dcec9595acb6716cd81cfee",
+      "bytes": 126822
+    },
+    {
+      "path": "corrected-artifacts/meri-files-workflow-Files--19af1--with-native-limits-visible/docx-390-revision.png",
+      "sha256": "cae4ef7f3afbd6fa6da6e19fc0e1da0516917f029cd79cb56f2ab30ba7347f97",
+      "bytes": 151010
+    },
+    {
+      "path": "corrected-artifacts/meri-files-workflow-Files--19af1--with-native-limits-visible/synthetic-receiver-bytes.docx",
+      "sha256": "95a5a3b9cf4ddcc7a93e4a0d4c6de680257932fbf5994ad15daa64142aaae3a0",
+      "bytes": 18
+    },
+    {
+      "path": "corrected-artifacts/meri-files-workflow-Files--4108e--with-native-limits-visible/synthetic-receiver-bytes.xlsx",
+      "sha256": "95a5a3b9cf4ddcc7a93e4a0d4c6de680257932fbf5994ad15daa64142aaae3a0",
+      "bytes": 18
+    },
+    {
+      "path": "corrected-artifacts/meri-files-workflow-Files--4108e--with-native-limits-visible/xlsx-390-editor.png",
+      "sha256": "80e77cd44f04e7bea9f635271bc1e4526ff6c7fa1f321d7af8e906b8b1da46a7",
+      "bytes": 98804
+    },
+    {
+      "path": "corrected-artifacts/meri-files-workflow-Files--4108e--with-native-limits-visible/xlsx-390-native-pending.png",
+      "sha256": "4a53157b0582e44e8c5aef425f3ab0360577be929c3b7f651d155045f1ae1b54",
+      "bytes": 164172
+    },
+    {
+      "path": "corrected-artifacts/meri-files-workflow-Files--4108e--with-native-limits-visible/xlsx-390-revision.png",
+      "sha256": "59a012fd2bb3cefb30a86f40bae69cda7485d091e41f04a513460247ea0e8bf0",
+      "bytes": 183593
+    },
+    {
+      "path": "corrected-artifacts/meri-files-workflow-Files--9d124--with-native-limits-visible/synthetic-receiver-bytes.xlsx",
+      "sha256": "95a5a3b9cf4ddcc7a93e4a0d4c6de680257932fbf5994ad15daa64142aaae3a0",
+      "bytes": 18
+    },
+    {
+      "path": "corrected-artifacts/meri-files-workflow-Files--9d124--with-native-limits-visible/xlsx-1440-editor.png",
+      "sha256": "4cd4904db3b3ec3a7100b8a19df451a9b903311fa165d99e5f1ee14113864d03",
+      "bytes": 134921
+    },
+    {
+      "path": "corrected-artifacts/meri-files-workflow-Files--9d124--with-native-limits-visible/xlsx-1440-native-pending.png",
+      "sha256": "5bb390206f5ec4f6342ecdff30230427b09d6766cd28f54a433523887b56b0d2",
+      "bytes": 199365
+    },
+    {
+      "path": "corrected-artifacts/meri-files-workflow-Files--9d124--with-native-limits-visible/xlsx-1440-revision.png",
+      "sha256": "90091be9759021838edeca28ef01511c21d49b36c9e145aac432ea8eaab5e84e",
+      "bytes": 220375
+    },
+    {
+      "path": "corrected-artifacts/meri-files-workflow-Files--c3df1-thful-unavailable-rendering/files-unavailable-390.png",
+      "sha256": "6644b6333c9093282f9ec7f7b46149584dda9021114e6d2ef75f5b71f28279a6",
+      "bytes": 49097
+    },
+    {
+      "path": "corrected-artifacts/meri-files-workflow-Files--f563a-thful-unavailable-rendering/files-unavailable-1440.png",
+      "sha256": "f2aca6a0b87a0a65a1407b79aca54bb023d6153645e842aa95ed6e4fdbd88379",
+      "bytes": 80621
+    },
+    {
+      "path": "corrected-exit.txt",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    {
+      "path": "corrected-results.json",
+      "sha256": "c68a33a4bdad3dfb402c16c6ea2a009a82c5eddeca25680856b5ea45cc014dc0",
+      "bytes": 2699190
+    },
+    {
+      "path": "corrected-tests/meri-files-fixtures.ts",
+      "sha256": "8050d0f2ab2119b8c5ddb32093f672af192a7215c830cd385b2988ead3d3f749",
+      "bytes": 8131
+    },
+    {
+      "path": "corrected-tests/meri-files-lifetime.spec.ts",
+      "sha256": "a17c004e87d9d331d97e1b72e32b9dfd7545ae98b4a8734db0db168c47387a31",
+      "bytes": 10654
+    },
+    {
+      "path": "corrected-tests/meri-files-navigation.spec.ts",
+      "sha256": "cead47d9f5bed2190211aa8a85dc96234d1e0de5fa7e2b55a5ea9c83336de604",
+      "bytes": 5425
+    },
+    {
+      "path": "corrected-tests/meri-files-workflow.spec.ts",
+      "sha256": "492bea8efb6eabcaf72248e59e2c4e881caed8ca1131830c435c06a9239cb688",
+      "bytes": 7887
+    },
+    {
+      "path": "corrected-tests.json",
+      "sha256": "f775c3bdbddc5e3bf01776b3ff521497a4575a2cfed2b04e39da1b5bd767fad7",
+      "bytes": 1036
+    },
+    {
+      "path": "corrected.config.ts",
+      "sha256": "ba4c7ac85c2878b785fe131963d46f13b8ff7183c10fbb8307127b83d6f99a49",
+      "bytes": 603
+    },
+    {
+      "path": "corrected.log",
+      "sha256": "8f73fc05dcfbf40d545f21f9827089e69cfda0c85ea9ac44cf9b577854e9b0da",
+      "bytes": 4488
+    },
+    {
+      "path": "final-source/apps/web/src/app/meri/files/MeriFilesHost.tsx",
+      "sha256": "67096ee7b4ebbe50fdfbce16daa7a0852dede0a823836ae77e68def0bd422326",
+      "bytes": 4520
+    },
+    {
+      "path": "final-source/apps/web/src/app/meri/files/page.tsx",
+      "sha256": "bcb4a1cb1374c001d9bc0d6bf78a2cbde4ec5eef593928215be1a41a0cf8ca41",
+      "bytes": 604
+    },
+    {
+      "path": "final-source/apps/web/src/features/meri/files/DocumentEditor.tsx",
+      "sha256": "8772b6f68e1bbfca8ac01647e2b6e34b7dd4f473b5cf9f96c3cc9bc5e05402ae",
+      "bytes": 4717
+    },
+    {
+      "path": "final-source/apps/web/src/features/meri/files/DocumentInspectionSummary.tsx",
+      "sha256": "44ad8ff19298fb5b97879d12b3f708aa65864922581b80ac570ffbecd1f47197",
+      "bytes": 1485
+    },
+    {
+      "path": "final-source/apps/web/src/features/meri/files/DocumentNotice.tsx",
+      "sha256": "4ffcb28c1b7c28ff0bac1e9b0b7e560c2c7e2bc7186b5b13146e0737a61896ac",
+      "bytes": 2495
+    },
+    {
+      "path": "final-source/apps/web/src/features/meri/files/DocumentVersionPanel.tsx",
+      "sha256": "23c2280948c77b925b39fa513960a5a941e964d43488de1a2b8882a437825442",
+      "bytes": 5461
+    },
+    {
+      "path": "final-source/apps/web/src/features/meri/files/MeriFilesWorkflow.tsx",
+      "sha256": "778fdc31378679cac971731fd1042fb9b636098a3802c8a063c00a7440a4abfa",
+      "bytes": 3870
+    },
+    {
+      "path": "final-source/apps/web/src/features/meri/files/WorkbookEditor.tsx",
+      "sha256": "2b5277a4ba0556e438cff6fd0a7e2fdc5be3a1406069b5009d197895c212ef8e",
+      "bytes": 4481
+    },
+    {
+      "path": "final-source/apps/web/src/features/meri/files/document-draft.ts",
+      "sha256": "257fbdf2f792a52408fc4751bcb254da90b14d1a1b1b92f6821a55637e5acd47",
+      "bytes": 1828
+    },
+    {
+      "path": "final-source/apps/web/src/features/meri/files/document-workflow-state.ts",
+      "sha256": "e49084c0d7a783e77a76cc973c7d8c2233df7c5498543215f01ce312424a5e7d",
+      "bytes": 9558
+    },
+    {
+      "path": "final-source/apps/web/src/features/meri/files/download-url.ts",
+      "sha256": "05df49aaafb0debd346d33c9e08090ae97d053b8b6bdd09d8aaf6fe1d27f0098",
+      "bytes": 723
+    },
+    {
+      "path": "final-source/apps/web/src/features/meri/files/files.module.css",
+      "sha256": "2fc94c57659849b5469f70f4ee5581adeddf818599362645cf2a419275bb5580",
+      "bytes": 3094
+    },
+    {
+      "path": "final-source/apps/web/src/features/meri/files/workbook-draft.ts",
+      "sha256": "0bea244c0facd74e472dea49b8fa0552516c9b10fa2cef56ac7160670c8cb645",
+      "bytes": 1333
+    },
+    {
+      "path": "final-source/apps/web/src/shared/meri-actions/opaque-session-controller.ts",
+      "sha256": "cf627a3a025a625d20e96932f1a6a801382757adbec49cfd0ab63016e6625f97",
+      "bytes": 3389
+    },
+    {
+      "path": "final-source/apps/web/src/shared/meri-documents/attempt-journal.ts",
+      "sha256": "b2a3817413c9b3be2490e95f78131a7a544e07b524c599262d65ef74036ba358",
+      "bytes": 652
+    },
+    {
+      "path": "final-source/apps/web/src/shared/meri-documents/config.ts",
+      "sha256": "4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395",
+      "bytes": 413
+    },
+    {
+      "path": "final-source/apps/web/src/shared/meri-documents/proxy.ts",
+      "sha256": "bcedf60bace147654cc34a785ba5a156367c6094e1f10dd945336f09065e7977",
+      "bytes": 3816
+    },
+    {
+      "path": "final-source/apps/web/src/shared/meri-documents/query-journal.ts",
+      "sha256": "cbdbabf2e1830cfc893c068194422342f1c4977063bcf9dec488b0b4803cec6b",
+      "bytes": 1456
+    },
+    {
+      "path": "final-source/apps/web/src/shared/meri-documents/workflow-adapter.ts",
+      "sha256": "2eea62309cee79d278d407bce81170eb6c5b4f831f7a8de8cf4f6b3acf9f29fe",
+      "bytes": 13082
+    },
+    {
+      "path": "final-source/apps/web/src/shared/meri-documents/workflow-port.ts",
+      "sha256": "698fb81b2a4c1dbec87048cc3f5517bc1e2da129a450d37aeadc6e354e2fe820",
+      "bytes": 1694
+    },
+    {
+      "path": "final-source/apps/web/src/shared/meri-documents/workflow-transport.ts",
+      "sha256": "a718ca794821afdbcd9727a826ec2288771757fed95134fc45adbb5e339bab0c",
+      "bytes": 3885
+    },
+    {
+      "path": "final-source/apps/web/src/shared/shell/MeriMobileNavigation.tsx",
+      "sha256": "78373981b0f97955467b841477fe3586567efa070de0e209d41f4be9ff05f337",
+      "bytes": 1600
+    },
+    {
+      "path": "final-source/apps/web/test/browser/main.tsx",
+      "sha256": "ed54cc451fecf88e78eb9ad4f55443f77855247eef71fe32538a5a15f83e7750",
+      "bytes": 6350
+    },
+    {
+      "path": "final-source/apps/web/test/browser/meri-files-fixtures.ts",
+      "sha256": "8050d0f2ab2119b8c5ddb32093f672af192a7215c830cd385b2988ead3d3f749",
+      "bytes": 8131
+    },
+    {
+      "path": "final-source/apps/web/test/browser/meri-files-lifetime.spec.ts",
+      "sha256": "a17c004e87d9d331d97e1b72e32b9dfd7545ae98b4a8734db0db168c47387a31",
+      "bytes": 10654
+    },
+    {
+      "path": "final-source/apps/web/test/browser/meri-files-navigation.spec.ts",
+      "sha256": "cead47d9f5bed2190211aa8a85dc96234d1e0de5fa7e2b55a5ea9c83336de604",
+      "bytes": 5425
+    },
+    {
+      "path": "final-source/apps/web/test/browser/meri-files-workflow.spec.ts",
+      "sha256": "492bea8efb6eabcaf72248e59e2c4e881caed8ca1131830c435c06a9239cb688",
+      "bytes": 7887
+    },
+    {
+      "path": "final-source/apps/web/tests/meri-document-public-fixtures.ts",
+      "sha256": "9c58d14adfcc8907bd12a5ee02723c20a4b1e0812f7899fee9b4a18ea4bf54fc",
+      "bytes": 4782
+    },
+    {
+      "path": "final-source.json",
+      "sha256": "ac87abf439cce1a3517987dbf65626053415a1641b3b9c694f89c470ac572c06",
+      "bytes": 6145
+    },
+    {
+      "path": "initial-exit.txt",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "bytes": 2
+    },
+    {
+      "path": "initial-source/apps/web/src/app/meri/files/MeriFilesHost.tsx",
+      "sha256": "67096ee7b4ebbe50fdfbce16daa7a0852dede0a823836ae77e68def0bd422326",
+      "bytes": 4520
+    },
+    {
+      "path": "initial-source/apps/web/src/app/meri/files/page.tsx",
+      "sha256": "bcb4a1cb1374c001d9bc0d6bf78a2cbde4ec5eef593928215be1a41a0cf8ca41",
+      "bytes": 604
+    },
+    {
+      "path": "initial-source/apps/web/src/features/meri/files/DocumentEditor.tsx",
+      "sha256": "8772b6f68e1bbfca8ac01647e2b6e34b7dd4f473b5cf9f96c3cc9bc5e05402ae",
+      "bytes": 4717
+    },
+    {
+      "path": "initial-source/apps/web/src/features/meri/files/DocumentInspectionSummary.tsx",
+      "sha256": "44ad8ff19298fb5b97879d12b3f708aa65864922581b80ac570ffbecd1f47197",
+      "bytes": 1485
+    },
+    {
+      "path": "initial-source/apps/web/src/features/meri/files/DocumentNotice.tsx",
+      "sha256": "4ffcb28c1b7c28ff0bac1e9b0b7e560c2c7e2bc7186b5b13146e0737a61896ac",
+      "bytes": 2495
+    },
+    {
+      "path": "initial-source/apps/web/src/features/meri/files/DocumentVersionPanel.tsx",
+      "sha256": "23c2280948c77b925b39fa513960a5a941e964d43488de1a2b8882a437825442",
+      "bytes": 5461
+    },
+    {
+      "path": "initial-source/apps/web/src/features/meri/files/MeriFilesWorkflow.tsx",
+      "sha256": "778fdc31378679cac971731fd1042fb9b636098a3802c8a063c00a7440a4abfa",
+      "bytes": 3870
+    },
+    {
+      "path": "initial-source/apps/web/src/features/meri/files/WorkbookEditor.tsx",
+      "sha256": "2b5277a4ba0556e438cff6fd0a7e2fdc5be3a1406069b5009d197895c212ef8e",
+      "bytes": 4481
+    },
+    {
+      "path": "initial-source/apps/web/src/features/meri/files/document-draft.ts",
+      "sha256": "257fbdf2f792a52408fc4751bcb254da90b14d1a1b1b92f6821a55637e5acd47",
+      "bytes": 1828
+    },
+    {
+      "path": "initial-source/apps/web/src/features/meri/files/document-workflow-state.ts",
+      "sha256": "e49084c0d7a783e77a76cc973c7d8c2233df7c5498543215f01ce312424a5e7d",
+      "bytes": 9558
+    },
+    {
+      "path": "initial-source/apps/web/src/features/meri/files/download-url.ts",
+      "sha256": "05df49aaafb0debd346d33c9e08090ae97d053b8b6bdd09d8aaf6fe1d27f0098",
+      "bytes": 723
+    },
+    {
+      "path": "initial-source/apps/web/src/features/meri/files/files.module.css",
+      "sha256": "2fc94c57659849b5469f70f4ee5581adeddf818599362645cf2a419275bb5580",
+      "bytes": 3094
+    },
+    {
+      "path": "initial-source/apps/web/src/features/meri/files/workbook-draft.ts",
+      "sha256": "0bea244c0facd74e472dea49b8fa0552516c9b10fa2cef56ac7160670c8cb645",
+      "bytes": 1333
+    },
+    {
+      "path": "initial-source/apps/web/src/shared/meri-actions/opaque-session-controller.ts",
+      "sha256": "cf627a3a025a625d20e96932f1a6a801382757adbec49cfd0ab63016e6625f97",
+      "bytes": 3389
+    },
+    {
+      "path": "initial-source/apps/web/src/shared/meri-documents/attempt-journal.ts",
+      "sha256": "b2a3817413c9b3be2490e95f78131a7a544e07b524c599262d65ef74036ba358",
+      "bytes": 652
+    },
+    {
+      "path": "initial-source/apps/web/src/shared/meri-documents/config.ts",
+      "sha256": "4be45a48835545519bb05e45482e592bd16565d23a3a866c5e85cc4653f79395",
+      "bytes": 413
+    },
+    {
+      "path": "initial-source/apps/web/src/shared/meri-documents/proxy.ts",
+      "sha256": "bcedf60bace147654cc34a785ba5a156367c6094e1f10dd945336f09065e7977",
+      "bytes": 3816
+    },
+    {
+      "path": "initial-source/apps/web/src/shared/meri-documents/query-journal.ts",
+      "sha256": "cbdbabf2e1830cfc893c068194422342f1c4977063bcf9dec488b0b4803cec6b",
+      "bytes": 1456
+    },
+    {
+      "path": "initial-source/apps/web/src/shared/meri-documents/workflow-adapter.ts",
+      "sha256": "2eea62309cee79d278d407bce81170eb6c5b4f831f7a8de8cf4f6b3acf9f29fe",
+      "bytes": 13082
+    },
+    {
+      "path": "initial-source/apps/web/src/shared/meri-documents/workflow-port.ts",
+      "sha256": "698fb81b2a4c1dbec87048cc3f5517bc1e2da129a450d37aeadc6e354e2fe820",
+      "bytes": 1694
+    },
+    {
+      "path": "initial-source/apps/web/src/shared/meri-documents/workflow-transport.ts",
+      "sha256": "a718ca794821afdbcd9727a826ec2288771757fed95134fc45adbb5e339bab0c",
+      "bytes": 3885
+    },
+    {
+      "path": "initial-source/apps/web/src/shared/shell/MeriMobileNavigation.tsx",
+      "sha256": "78373981b0f97955467b841477fe3586567efa070de0e209d41f4be9ff05f337",
+      "bytes": 1600
+    },
+    {
+      "path": "initial-source/apps/web/test/browser/main.tsx",
+      "sha256": "ed54cc451fecf88e78eb9ad4f55443f77855247eef71fe32538a5a15f83e7750",
+      "bytes": 6350
+    },
+    {
+      "path": "initial-source/apps/web/test/browser/meri-files-fixtures.ts",
+      "sha256": "91aa4e5bac3195dbf53403fc2c7e8181e620e19c85d8df5a328d6257b9e665cd",
+      "bytes": 7972
+    },
+    {
+      "path": "initial-source/apps/web/test/browser/meri-files-lifetime.spec.ts",
+      "sha256": "ecb27adda5de75496fa501a0d81cdd349c97b410b95dd4e38b6b149da46a4c49",
+      "bytes": 10492
+    },
+    {
+      "path": "initial-source/apps/web/test/browser/meri-files-navigation.spec.ts",
+      "sha256": "38d7537a6e4965b12aece17af898bed7cdf294669bea8c21cff921d6ddf7c68c",
+      "bytes": 5334
+    },
+    {
+      "path": "initial-source/apps/web/test/browser/meri-files-workflow.spec.ts",
+      "sha256": "2824198e0880ed08ee6a4bf7d2519649579d83e30c2171a2e84551c107de68b6",
+      "bytes": 7820
+    },
+    {
+      "path": "initial-source/apps/web/tests/meri-document-public-fixtures.ts",
+      "sha256": "9c58d14adfcc8907bd12a5ee02723c20a4b1e0812f7899fee9b4a18ea4bf54fc",
+      "bytes": 4782
+    },
+    {
+      "path": "initial-source.json",
+      "sha256": "655c0e1822b359b273cb751bedb746d9f19552ffdc5e7fc1110d9d23221c3124",
+      "bytes": 5361
+    },
+    {
+      "path": "initial.log",
+      "sha256": "53a3429702bd9efc444a152446c839e86d925f1411be7cb24f384b5f46446839",
+      "bytes": 2485
+    },
+    {
+      "path": "package.json",
+      "sha256": "1239d4d885dcad42201a27ed9324f8f0f760b78700d8db9ced39a511cffe7eae",
+      "bytes": 18
+    },
+    {
+      "path": "playwright.config.ts",
+      "sha256": "85cb6cec83b5a04d1572225f55a691e56a62108a73e8b8d5b35ec4d57c6df098",
+      "bytes": 599
+    },
+    {
+      "path": "structure-scan.json",
+      "sha256": "7ecd4c1c1bd96c1d607631ce02f1349e6d39310f4b14b55c996f9a3ae270cf18",
+      "bytes": 1638
+    }
+  ]
+}

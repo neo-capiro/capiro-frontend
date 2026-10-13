@@ -1,0 +1,187 @@
+.files {
+  min-width: 0;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: var(--foreground);
+}
+.heading h1 {
+  font-size: 26px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+.heading p {
+  margin-top: 6px;
+}
+.muted {
+  color: var(--muted-foreground);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 20px;
+}
+.panel,
+.notice {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.panel h2,
+.notice h2 {
+  font-size: 17px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+.panel h3 {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+.panel p,
+.notice p,
+.identifier,
+.details dd {
+  overflow-wrap: anywhere;
+}
+.notice {
+  background: var(--muted);
+}
+.form,
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  min-width: 0;
+  min-height: 40px;
+  padding: 9px 10px;
+  border: 1px solid var(--input);
+  border-radius: 8px;
+  background: var(--background);
+  color: var(--foreground);
+  font: inherit;
+  line-height: 1.5;
+}
+.field textarea {
+  resize: vertical;
+  min-height: 220px;
+  font-weight: 400;
+}
+.field :disabled {
+  opacity: 0.65;
+}
+.button,
+.download {
+  height: auto;
+  min-height: 40px;
+  max-width: 100%;
+  padding: 8px 14px;
+  border: 1px solid var(--input);
+  border-radius: 10px;
+  white-space: normal;
+  font-size: 14px;
+  font-weight: 500;
+  align-self: flex-start;
+}
+.download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--foreground);
+  background: var(--card);
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.confirmation {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.confirmation input {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0;
+}
+.details {
+  display: grid;
+  grid-template-columns: minmax(80px, 0.6fr) minmax(0, 1fr);
+  gap: 8px 12px;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.details dt {
+  color: var(--muted-foreground);
+}
+.details dd {
+  margin: 0;
+}
+.identifier {
+  font-size: 13px;
+  line-height: 1.5;
+}
+.files :is(button, a, input, select, textarea):focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 3px;
+}
+@media (max-width: 1000px) {
+  .columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 680px) {
+  .files {
+    padding: 24px 16px;
+  }
+  .heading h1 {
+    font-size: 23px;
+  }
+  .panel,
+  .notice {
+    padding: 16px;
+  }
+  .details {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+  .details dd {
+    margin-bottom: 8px;
+  }
+}
+.example {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  line-height: 1.5;
+}
