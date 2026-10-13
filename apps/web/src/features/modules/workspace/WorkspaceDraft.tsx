@@ -23,6 +23,10 @@ import { useProspectDraftSave } from "./prospects/useProspectDraftSave";
 import type { ProspectWriter } from "./prospects/recovery-authority";
 import { ProspectDraftExport } from "./prospects/ProspectDraftExport";
 import { NewsletterWorkflow } from "./newsletter/NewsletterWorkflow";
+import { DocumentPreview } from "./rich-document/DocumentPreview";
+import { SectionEditor } from "./rich-document/SectionEditor";
+import { SectionPreview } from "./rich-document/SectionPreview";
+import { sectionSizeError } from "./rich-document/content";
 import styles from "./workspace.module.css";
 
 function DraftEditor({
@@ -48,7 +52,14 @@ function DraftEditor({
     { params: { draftId: draft.id } },
     { enabled: history },
   );
+  const invalidSection = Object.values(sections).some((content) =>
+    sectionSizeError(content),
+  );
+  const pending = Boolean(
+    prospectSave?.pending || update.pending || snapshot.pending,
+  );
   async function save() {
+    if (pending || invalidSection) return;
     if (draft.prospectId) {
       await prospectSave?.save({ title, sections, names });
       return;
@@ -79,6 +90,9 @@ function DraftEditor({
         </div>
         <div className={styles.actions}>
           <ActionButton onClick={() => setHistory(true)}>History</ActionButton>
+          {draft.prospectId && (
+            <DocumentPreview title={title} names={names} sections={sections} />
+          )}
           <ActionButton
             primary
             disabled={
@@ -86,6 +100,7 @@ function DraftEditor({
               snapshot.pending ||
               prospectSave?.pending ||
               Boolean(prospectSave?.retained?.uncertain) ||
+              invalidSection ||
               !title.trim()
             }
             onClick={save}
@@ -109,7 +124,7 @@ function DraftEditor({
               ).map(([name, content]) => (
                 <section key={name}>
                   <h3>{name}</h3>
-                  <p style={{ whiteSpace: "pre-wrap" }}>{content}</p>
+                  <SectionPreview value={content} />
                 </section>
               ))}
             </details>
@@ -152,24 +167,34 @@ function DraftEditor({
           id="workspace-document-title"
           value={title}
           maxLength={500}
-          disabled={prospectSave?.pending}
+          disabled={pending}
           onChange={(event) => setTitle(event.target.value)}
         />
       </Field>
       {names.length ? (
         names.map((name) => (
           <Panel key={name} title={name}>
-            <TextArea
-              aria-label={`${name} content`}
-              value={sections[name] ?? ""}
-              disabled={prospectSave?.pending}
-              onChange={(event) =>
-                setSections((previous) => ({
-                  ...previous,
-                  [name]: event.target.value,
-                }))
-              }
-            />
+            {draft.prospectId ? (
+              <SectionEditor
+                name={name}
+                value={sections[name] ?? ""}
+                disabled={pending}
+                onChange={(content) =>
+                  setSections((previous) => ({ ...previous, [name]: content }))
+                }
+              />
+            ) : (
+              <TextArea
+                aria-label={`${name} content`}
+                value={sections[name] ?? ""}
+                onChange={(event) =>
+                  setSections((previous) => ({
+                    ...previous,
+                    [name]: event.target.value,
+                  }))
+                }
+              />
+            )}
           </Panel>
         ))
       ) : (
