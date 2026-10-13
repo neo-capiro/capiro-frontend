@@ -70,7 +70,12 @@ export function OutreachView({
         onRetry={draft.reload}
       />
     );
-  if (initialDraft && draft.data && draft.data.id !== initialDraft)
+  if (
+    initialDraft &&
+    draft.data &&
+    (draft.data.id !== initialDraft ||
+      (clientId !== "" && draft.data.client?.id !== clientId))
+  )
     return (
       <StatusPanel error="The returned outreach does not match this link." />
     );
