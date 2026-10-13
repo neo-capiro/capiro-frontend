@@ -1,0 +1,32 @@
+{
+  "source": "/tmp/capiro-shipping-restaged-generated-20261013/inactive-integration-dependencies.tar.gz",
+  "destination": "/workspace/capiro-generated-preserved-20261013/inactive-integration-dependencies.tar.gz",
+  "compressedSHA256": "49e6dc2049818a8d5933183f90eefd960dd8f79b6ae7314d73454f9a915bdab4",
+  "before": {
+    "device": 33,
+    "inode": 544986,
+    "bytes": 270372695,
+    "mode": 384,
+    "mtimeNs": 1791861112481798851,
+    "uid": 1000,
+    "gid": 1000
+  },
+  "aliasLinks": {
+    "/tmp/capiro-shipping-browser-correction-20261013/inactive-integration-dependencies.tar.gz": "/workspace/capiro-shipping-preserved-generated-20261013/inactive-integration-dependencies.tar.gz",
+    "/workspace/capiro-shipping-preserved-generated-20261013/inactive-integration-dependencies.tar.gz": "/tmp/capiro-shipping-restaged-generated-20261013/inactive-integration-dependencies.tar.gz"
+  },
+  "activityBefore": {
+    "UTC": "2026-10-13T20:46:19.824443+00:00",
+    "matchingArchiveDescriptors": [],
+    "denied": [
+      {
+        "pid": 201,
+        "name": "dockerd"
+      },
+      {
+        "pid": 253,
+        "name": "containerd"
+      }
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "currentDestination": {
+    "device": 27,
+    "inode": 1052961,
+    "bytes": 270372695,
+    "mode": 384,
+    "mtimeNs": 1791861112481798851,
+    "uid": 1000,
+    "gid": 1000
+  },
+  "compressedSHA256": "49e6dc2049818a8d5933183f90eefd960dd8f79b6ae7314d73454f9a915bdab4",
+  "originalNowAlias": "/tmp/capiro-shipping-restaged-generated-20261013/inactive-integration-dependencies.tar.gz",
+  "oldAliasTargetsUnchanged": {
+    "/tmp/capiro-shipping-browser-correction-20261013/inactive-integration-dependencies.tar.gz": "/workspace/capiro-shipping-preserved-generated-20261013/inactive-integration-dependencies.tar.gz",
+    "/workspace/capiro-shipping-preserved-generated-20261013/inactive-integration-dependencies.tar.gz": "/tmp/capiro-shipping-restaged-generated-20261013/inactive-integration-dependencies.tar.gz"
+  },
+  "packageVerifiedUTC": "2026-10-13T20:45:51.656019+00:00",
+  "relocationCompletedUTC": "2026-10-13T20:46:20.629902+00:00",
+  "separatelyPublishedReceipts": true,
+  "priorMemberReadback": "Not repeated; original archive compressed bytes independently rehashed",
+  "producerAdmissionLimits": [
+    {
+      "pid": 201,
+      "name": "dockerd"
+    },
+    {
+      "pid": 253,
+      "name": "containerd"
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "status": "PASS",
+  "parts": {
+    "archiveBytes": 151131241,
+    "archiveSHA256": "3a44a2dc684ae5ec496fde85839b4f3dde5da5a2098edddf8e414d49242d0ea9",
+    "parts": [
+      {
+        "file": "evidence.tar.gz.part-00",
+        "bytes": 25165824,
+        "sha256": "b75af137c99c3f2cc8c0bd50a19b1270233d167874ef92c9a285b85675bf7e39"
+      },
+      {
+        "file": "evidence.tar.gz.part-01",
+        "bytes": 25165824,
+        "sha256": "141ecfd45e52952910d466e3e96ebec0a7e9cb8081f556c4c50e680b3baba7e7"
+      },
+      {
+        "file": "evidence.tar.gz.part-02",
+        "bytes": 25165824,
+        "sha256": "7329f6bf3949be5796697682dd8fb0f61636a81226761337954f73d6bfdbce56"
+      },
+      {
+        "file": "evidence.tar.gz.part-03",
+        "bytes": 25165824,
+        "sha256": "948989effea9a8ed0cba907d2f6c454e4ae10153b2e6f532f0b126c43817f2d1"
+      },
+      {
+        "file": "evidence.tar.gz.part-04",
+        "bytes": 25165824,
+        "sha256": "b9658e06caa84e7c45f9f26310b436229b448867da86926a3732181dcda0531f"
+      },
+      {
+        "file": "evidence.tar.gz.part-05",
+        "bytes": 25165824,
+        "sha256": "04a7c2cd43d8935c5b48b90c0f5738181f2d0501cacf7952cca38820c0c23ef9"
+      },
+      {
+        "file": "evidence.tar.gz.part-06",
+        "bytes": 136297,
+        "sha256": "b52c1cc8f67a90f0ea2bbef9cd14ac89f8308b914477be423bda29e08399a074"
+      }
+    ]
+  },
+  "joinedHash": "3a44a2dc684ae5ec496fde85839b4f3dde5da5a2098edddf8e414d49242d0ea9",
+  "copies": [
+    {
+      "path": "EVIDENCE-MANIFEST.json",
+      "original": "/workspace/capiro-final-publication-draft-20261013/EVIDENCE-MANIFEST.json",
+      "sha256": "e0d9156bbc46d99a8bc19559402498b14be29603330486cb0338ddacf6babab4",
+      "bytes": 1684868
+    },
+    {
+      "path": "PACKAGE-RECEIPT.json",
+      "original": "/workspace/capiro-final-publication-draft-20261013/PACKAGE-RECEIPT.json",
+      "sha256": "76606e15546d58f72af57565a667a40227b36ae3a3553779fcda29eb3a6ffeea",
+      "bytes": 656
+    },
+    {
+      "path": "EVIDENCE-ROOTS.json",
+      "original": "/workspace/capiro-final-publication-draft-20261013/EVIDENCE-ROOTS-DRAFT.json",
+      "sha256": "c9bbf686f0d845d9b854a57cfca17a5f2a18dbb6d6549787e1d03db46f1f77ef",
+      "bytes": 3924
+    },
+    {
+      "path": "package-evidence.py",
+      "original": "/workspace/capiro-final-publication-draft-20261013/package-evidence.py",
+      "sha256": "18a027f99a5eec0cae480923c5e370ff4d400a5beae49e9db82d659eec2e660d",
+      "bytes": 4685
+    },
+    {
+      "path": "QUALIFIED-SOURCE.json",
+      "original": "/workspace/capiro-unified-calendar-final-gate-20261013/FROZEN-SOURCE.json",
+      "sha256": "f8b734150e4411edbe186e9fd4ea6c4b6ce343c5c8ac7d9a8af994bdf986c4d8",
+      "bytes": 298
+    },
+    {
+      "path": "shared-aggregate.json",
+      "original": "/workspace/capiro-unified-calendar-final-gate-20261013/shared-aggregate.json",
+      "sha256": "6e92e84a71d8ca79b8e1fb1b984d7be5e7a9c18738b68407dfd94c1fc30c08a9",
+      "bytes": 23750
+    },
+    {
+      "path": "portfolio-aggregate.json",
+      "original": "/workspace/capiro-unified-calendar-final-gate-20261013/portfolio-aggregate.json",
+      "sha256": "8b634cd98664ffed37dd35b12e1cab9d5b5053fc3e5939172aec7bdce5e4e066",
+      "bytes": 70361
+    },
+    {
+      "path": "FINAL-INPUT-REFRESH.json",
+      "original": "/workspace/capiro-unified-calendar-final-gate-20261013/FINAL-INPUT-REFRESH.json",
+      "sha256": "c4a2113954357e31d1e1e94be7765891cb63766dd00c527fc5464b92b99e5232",
+      "bytes": 726
+    },
+    {
+      "path": "REMOTE-PR-REFRESH.json",
+      "original": "/workspace/capiro-unified-calendar-final-gate-20261013/REMOTE-PR-REFRESH.json",
+      "sha256": "8e5ddc512f1aa1426c1a58ee09df02e10432d0b189725c1012a6e3cca0581488",
+      "bytes": 1500
+    },
+    {
+      "path": "RUNTIME-REVIEW.md",
+      "original": "/workspace/capiro-unified-calendar-final-gate-20261013/runtime-review/REPORT.md",
+      "sha256": "9330d3e4bd94992058e457885d0f7269e59a0576492d396feb1b035e1306f2a0",
+      "bytes": 3980
+    },
+    {
+      "path": "BROWSER-REVIEW.md",
+      "original": "/workspace/capiro-unified-calendar-final-gate-20261013/final-browser-review/REPORT.md",
+      "sha256": "b0dbfacaf35e3e84ab527317dc169b83f47c834b2366bd1bf76645258ca3033b",
+      "bytes": 3509
+    },
+    {
+      "path": "post-package-relocation/BEFORE.json",
+      "original": "/workspace/capiro-unified-calendar-final-gate-20261013/publication-archive-relocation/BEFORE.json",
+      "sha256": "68c9049567ec5aaa4e147ebffb47df5de6edaa924b5eab83e613b7a2eaa5fe11",
+      "bytes": 1152
+    },
+    {
+      "path": "post-package-relocation/COPY-VERIFIED.json",
+      "original": "/workspace/capiro-unified-calendar-final-gate-20261013/publication-archive-relocation/COPY-VERIFIED.json",
+      "sha256": "5865ad6c9fc79c60929bda869ff8d44b794600609959b9a92fe5be2a14cfe52e",
+      "bytes": 559
+    },
+    {
+      "path": "post-package-relocation/COMPLETED.json",
+      "original": "/workspace/capiro-unified-calendar-final-gate-20261013/publication-archive-relocation/COMPLETED.json",
+      "sha256": "9b0e94fb57aea8f4f8c09ad52635443a0c7a00c1ef8aba83fd793b00b0c350f8",
+      "bytes": 299
+    },
+    {
+      "path": "post-package-relocation/execution.log",
+      "original": "/workspace/capiro-final-publication-draft-20261013/publication-archive-relocation.log",
+      "sha256": "d89d3c28586010d98ad19618826092f2f91f6c99c36e385327af40dd8ac39ce8",
+      "bytes": 283
+    }
+  ]
+}

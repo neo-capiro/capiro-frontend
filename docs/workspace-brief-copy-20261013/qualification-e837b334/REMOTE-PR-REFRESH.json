@@ -1,0 +1,42 @@
+{
+  "observedUTC": "2026-10-13 20:20:19 UTC",
+  "policy": "Read-only metadata observation. Mergeability is not qualification; backend native controls remain owner-reported separately.",
+  "pullRequests": [
+    {
+      "number": 2472,
+      "url": "https://github.com/neo-capiro/capirov2/pull/2472",
+      "head": "codex/prospect-brief-workspace-copy-20261013",
+      "headSHA": "e0446e3f865899b03d654657db903cea54dfaf0a",
+      "base": "codex/frontend-product-contracts-20261013",
+      "baseSHA": "46aa2164c299151225c6cdb9f3cc565fee347657",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "updatedAt": "2026-10-13T16:33:22Z"
+    },
+    {
+      "number": 63,
+      "url": "https://github.com/neo-capiro/meri-greenfield/pull/63",
+      "head": "codex/durable-skills-20261013",
+      "headSHA": "693372018f3aaaf01a5be11e5df9f797926888f8",
+      "base": "codex/workflow-batch-20261013",
+      "baseSHA": "6307e1b6661dab1b6b82ecda8659bf70bc0113ab",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "updatedAt": "2026-10-13T17:15:21Z"
+    },
+    {
+      "number": 20,
+      "url": "https://github.com/neo-capiro/capiro-frontend/pull/20",
+      "head": "integration/capiro-unified-20261013",
+      "headSHA": "e837b3341e7c31dd8b349438c7d9c5086fa4eb0e",
+      "base": "main",
+      "baseSHA": "02c02d95bdf3949662b9123f425271c6491ffdab",
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "updatedAt": "2026-10-13T19:48:17Z"
+    }
+  ]
+}

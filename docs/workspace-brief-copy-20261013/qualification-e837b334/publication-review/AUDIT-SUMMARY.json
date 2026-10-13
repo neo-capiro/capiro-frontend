@@ -1,0 +1,28 @@
+{
+  "status": "PASS_BOUNDED_FINAL_PUBLICATION_AUDIT",
+  "source": "e837b3341e7c31dd8b349438c7d9c5086fa4eb0e",
+  "archiveSHA256": "3a44a2dc684ae5ec496fde85839b4f3dde5da5a2098edddf8e414d49242d0ea9",
+  "archiveBytes": 151131241,
+  "regularEvidenceFiles": 2887,
+  "embeddedManifestMembers": 1,
+  "selectedRoots": 55,
+  "metadataOnlySymlinks": 5,
+  "publicationParts": 7,
+  "allArchiveMembersRehashedAndMetadataVerified": true,
+  "existingArchivedEvidenceChanged": false,
+  "postPackageRelocationReceiptAdditions": 3,
+  "relocatedArchiveRehashed": true,
+  "currentIndexedFilesVerified": 26,
+  "sharedPassed": 399,
+  "portfolioPassed": 1278,
+  "sourceBoundReceiptsVerified": 22,
+  "materialFindings": [],
+  "remainingPublicationStep": "Copy this sealed report, explicitly stage any ignored copied logs, repeat final Git index file-set/blob verification, then source-bound commit check. No future commit certified.",
+  "notPerformed": [
+    "Test/browser/build/install/native rerun",
+    "Archive extraction/repacking/relocation",
+    "Source/index mutation",
+    "New visual/manual Figma or accessibility qualification"
+  ],
+  "acceptanceLimits": "All337 native rows open; no shipping/deployment acceptance; external generated archives and metadata-only links are explicit."
+}
