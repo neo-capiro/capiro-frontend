@@ -1,0 +1,18 @@
+
+> @capiro/web@0.1.0 test
+> vitest run tests/meri-action-adapter.test.ts tests/meri-action-workflow.test.ts
+
+
+ RUN  v4.1.11 /workspace/capiro-meri-workflow-20261013/apps/web
+
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  05:06:34
+   Duration  311ms (transform 59ms, setup 0ms, import 129ms, tests 75ms, environment 0ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

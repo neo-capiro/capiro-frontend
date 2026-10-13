@@ -1,0 +1,34 @@
+✔ query, selection and edited review prepare an immutable pending proposal without execution (2.828472ms)
+✔ an edit invalidates a reviewed draft and preparation cannot use its former handle (1.49983ms)
+✔ held draft locks the exact submitted edits and synchronous duplicate requests (0.374056ms)
+✔ execution refusal stays pending; later deliberate execution and replay use the identical handle (0.740121ms)
+✔ held execution admits only one click until its response settles (0.439385ms)
+✔ a newer unknown execution retires the former approval refusal and fences repetition (0.583473ms)
+✔ a newer result-withheld execution retires the former approval refusal and fences repetition (0.507698ms)
+✔ a newer stored-withheld execution retires the former approval refusal and fences repetition (0.205401ms)
+✔ a newer indeterminate execution retires the former approval refusal and fences repetition (0.353816ms)
+✔ a newer thrown execution retires the former approval refusal and fences repetition (0.35668ms)
+✔ unknown does not schedule or admit a repeat and never claims successful execution (0.247625ms)
+✔ result-withheld does not schedule or admit a repeat and never claims successful execution (0.113602ms)
+✔ stored-withheld does not schedule or admit a repeat and never claims successful execution (0.133572ms)
+✔ not-stored does not schedule or admit a repeat and never claims successful execution (0.124038ms)
+✔ read-unavailable does not schedule or admit a repeat and never claims successful execution (0.127403ms)
+✔ invalid-response does not schedule or admit a repeat and never claims successful execution (0.077508ms)
+✔ not-dispatched does not schedule or admit a repeat and never claims successful execution (0.132761ms)
+✔ acknowledged indeterminate result and thrown transport error both withhold success and further requests (0.407396ms)
+✔ lost current authority removes all former recommendations, editable inputs and proposal details (0.181715ms)
+✔ a denied current reread removes prior recommendation cards instead of treating their cache as current (0.153212ms)
+✔ actor lifetime disposal aborts local observation and rejects a late former proposal (0.287906ms)
+✔ tenant lifetime disposal aborts local observation and rejects a late former proposal (0.266543ms)
+✔ session lifetime disposal aborts local observation and rejects a late former proposal (0.09255ms)
+✔ client lifetime disposal aborts local observation and rejects a late former proposal (0.075204ms)
+✔ reattachment never resurrects a request from before disposal (0.143307ms)
+✔ failed observed receipt is displayed as failure, never converted into task creation success (0.131389ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 141.208988

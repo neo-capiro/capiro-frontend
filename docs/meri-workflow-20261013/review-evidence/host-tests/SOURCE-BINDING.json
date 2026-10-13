@@ -1,0 +1,113 @@
+{
+  "capturedAt": "2026-10-13T05:37:08.040189+00:00",
+  "repository": "/workspace/capiro-meri-workflow-20261013",
+  "files": [
+    {
+      "path": "apps/web/src/shared/meri-actions/attempt-journal.ts",
+      "sha256": "3fd7884d856b5d7f27b9bcf6c5a405c9cf4703bd1f67f71ea756c561f94509a6",
+      "bytes": 391
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/bounded-json.ts",
+      "sha256": "d8f46bc08078d4a4858e7eca5a3f0fab34065275f8268948e30babb869afe145",
+      "bytes": 2614
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/config.ts",
+      "sha256": "8b90d94ad5bc20ba25e5252dabc85561392cbf3c1f0d1be7ecc781bf8a78f471",
+      "bytes": 474
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/correlation.ts",
+      "sha256": "4185a15f731a88beff8b73e5d65629e66908f921dcb5bff4a8657e761ffa3e7f",
+      "bytes": 4131
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/disposition.ts",
+      "sha256": "a093b4dc26cc3641b9268f3727b6f764ad0f8ff4a21dedede8716176c7e7ff7f",
+      "bytes": 1103
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/host-controller.ts",
+      "sha256": "031c98f9dfdba27ecd42512cee985dc05461dda5ea64d8d7738468f8df354eb3",
+      "bytes": 3597
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/projection.ts",
+      "sha256": "a8c3108adfb8613522970d45bab434dabd632c4271ebf3e4bf96fb2d757d3a62",
+      "bytes": 2294
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/proxy.ts",
+      "sha256": "6046d58306b2c5694f618a2331dda4ea26baae64e12ecc6b94b6feec1973fcb4",
+      "bytes": 2843
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/query-journal.ts",
+      "sha256": "8249df4b758ef20b7bc83776555eea5639c8f1a15cd6a13d4ea40b5fe62be171",
+      "bytes": 1241
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/session-bootstrap.ts",
+      "sha256": "f3e1b503b067294867655ac52572f8b82ebfc0cd478eb5169e6f3ad219af0028",
+      "bytes": 1640
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/session-receipt.ts",
+      "sha256": "46d7ddd12325d7bc305583397aba249cfc4ec8022e278eed2e3933672af10b76",
+      "bytes": 1355
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/workflow-adapter.ts",
+      "sha256": "1d35e9a68d713bd1088d4141aaead81d0d5d0a5ceb8371736feed5f568abe458",
+      "bytes": 8265
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/workflow-port.ts",
+      "sha256": "f5afc882738b4cb1684fa3969513a277646bd097dbe025a119a1c35263b3c1bc",
+      "bytes": 2124
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/workflow-transport.ts",
+      "sha256": "b32635261243e59f8605aafa84092e728ed083c58d33a9d6923e702cd25e2e3b",
+      "bytes": 2038
+    },
+    {
+      "path": "apps/web/tests/meri-action-host.test.ts",
+      "sha256": "e1939e567697a279330f1c1f2568af0ab4fa25d4a2f05019b2082723014fe068",
+      "bytes": 15218
+    },
+    {
+      "path": "apps/web/tests/meri-action-fixtures.ts",
+      "sha256": "299c822b95bc51273bb8cd29516b758726103d043b96e52f20c46a390bd3f3a7",
+      "bytes": 3696
+    },
+    {
+      "path": "apps/web/tests/meri-action-transport.test.ts",
+      "sha256": "95a6ca38ec21f9b1a851b5efbfb9b33fc65c9bb1e3da70a3f2d9f584ab3641d5",
+      "bytes": 13175
+    },
+    {
+      "path": "apps/web/tests/meri-action-session.test.ts",
+      "sha256": "75a28f2bc5c77bf9040a59b9716f7abd3a1dd0d8a7b0ea3e4148dac91270f323",
+      "bytes": 6270
+    },
+    {
+      "path": "apps/web/vitest.config.ts",
+      "sha256": "e56235e455ce9260d5f5052591ae125ef9de02b611b969bd0f8b35551077062f",
+      "bytes": 269
+    }
+  ],
+  "priorTestPacketManifestSHA256": "784873d7c2c92269f97b992df8584ead0f4176c066a83ffc2745e39d2c2b77e6",
+  "priorSealedTests": {
+    "apps/web/tests/meri-action-transport.test.ts": {
+      "sha256": "95a6ca38ec21f9b1a851b5efbfb9b33fc65c9bb1e3da70a3f2d9f584ab3641d5",
+      "sealedPacketHashMatched": true
+    },
+    "apps/web/tests/meri-action-session.test.ts": {
+      "sha256": "75a28f2bc5c77bf9040a59b9716f7abd3a1dd0d8a7b0ea3e4148dac91270f323",
+      "sealedPacketHashMatched": true
+    }
+  },
+  "finalExecutionSourceChanged": false
+}

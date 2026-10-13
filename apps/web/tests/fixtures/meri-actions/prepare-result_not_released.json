@@ -1,0 +1,13 @@
+{
+  "name": "prepare-result_not_released",
+  "route": "prepare",
+  "httpStatus": 502,
+  "response": {
+    "error": {
+      "code": "REQUEST_FAILED",
+      "outcome": "RESULT_NOT_RELEASED"
+    }
+  },
+  "expected": "receiver_accept",
+  "note": "Keep exact disposition; no rollback, absence or retry inference."
+}

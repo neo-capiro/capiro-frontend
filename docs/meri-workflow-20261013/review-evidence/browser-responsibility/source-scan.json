@@ -1,0 +1,66 @@
+[
+  {
+    "file": "apps/web/test/browser/meri-action-host-fixtures.ts",
+    "sourceSha256": "2e3461d3ba91b717d6300dce35dc82ec8f34b848fc266192d1d28ca640e413e7",
+    "bytes": 7502,
+    "nonblank": 239,
+    "findings": [
+      {
+        "file": "apps/web/test/browser/meri-action-host-fixtures.ts",
+        "kind": "function",
+        "symbol": "actionHostFixture",
+        "line": 72,
+        "nonblank": 109,
+        "fingerprint": "7d28494cb3df0ad4073181f1aaf304d9a34844cf7c91a09872c4cafb1dae3c1b"
+      }
+    ],
+    "imports": [
+      {
+        "specifier": "node:fs",
+        "line": 1
+      },
+      {
+        "specifier": "@playwright/test",
+        "line": 2
+      },
+      {
+        "specifier": "./fixtures",
+        "line": 3
+      },
+      {
+        "specifier": "./next-modules-fixtures",
+        "line": 4
+      }
+    ],
+    "anyLines": [],
+    "remoteOriginLines": []
+  },
+  {
+    "file": "apps/web/test/browser/meri-action-host-navigation.spec.ts",
+    "sourceSha256": "05a06a5d4f6202aa6d54c5786398717080999def5e95f943a77e17e58ed81dc1",
+    "bytes": 5220,
+    "nonblank": 143,
+    "findings": [
+      {
+        "file": "apps/web/test/browser/meri-action-host-navigation.spec.ts",
+        "kind": "function",
+        "symbol": "<anonymous>",
+        "line": 16,
+        "nonblank": 86,
+        "fingerprint": "f1193210490b7e9500d09a8bf7733471b7424749155908cbe26194c031204832"
+      }
+    ],
+    "imports": [
+      {
+        "specifier": "@playwright/test",
+        "line": 1
+      },
+      {
+        "specifier": "./meri-action-host-fixtures",
+        "line": 2
+      }
+    ],
+    "anyLines": [],
+    "remoteOriginLines": []
+  }
+]

@@ -1,0 +1,35 @@
+{
+  "scope": "Two assigned test files only; author rationale for independent root review",
+  "findings": [
+    {
+      "file": "apps/web/tests/meri-action-transport.test.ts",
+      "kind": "function",
+      "symbol": "<anonymous> #3",
+      "line": 85,
+      "nonblank": 105,
+      "fingerprint": "d32ed4825ac4ec996bbd53eed1e20afcd4e2c955e83b79708c89ccc80af3d67a",
+      "reviewedBy": "core_intake_review (test author; independent review pending)",
+      "reason": "One byte-stream contract suite: Content-Length preflight, measured-byte overflow, split UTF-8, fatal decoding, format/body refusal and cancellation ownership are tested via observable real ReadableStream behavior. No application or unrelated subsystems are mocked."
+    },
+    {
+      "file": "apps/web/tests/meri-action-transport.test.ts",
+      "kind": "function",
+      "symbol": "<anonymous> #5",
+      "line": 241,
+      "nonblank": 134,
+      "fingerprint": "4d0eb5078e7c3b1b5e1fbe056f1157b34f5121ef823c0ac0b8c738d072f9fd14",
+      "reviewedBy": "core_intake_review (test author; independent review pending)",
+      "reason": "One fixed transport contract suite: literal action URLs and exact request capture, bearer/credentials/cache/redirect policy, real public receiving, no retry and caller/lifetime/deadline disposal. Intercepted fetch is the sole effect boundary; assertions do not mirror production correlation logic."
+    },
+    {
+      "file": "apps/web/tests/meri-action-session.test.ts",
+      "kind": "function",
+      "symbol": "<anonymous> #2",
+      "line": 51,
+      "nonblank": 124,
+      "fingerprint": "b8ac4e07f4a79b20459e0939db7675599fc01fff4fa5dc40652a4432ebc8b899",
+      "reviewedBy": "core_intake_review (test author; independent review pending)",
+      "reason": "One canonical minimal receipt suite: detached frozen output, strict allowed/missing fields, opaque credential grammar and exact expiry/clock boundaries. It exercises validation outcomes, not network/bootstrap authority, and deliberately preserves native actor namespace without Clerk inference."
+    }
+  ]
+}

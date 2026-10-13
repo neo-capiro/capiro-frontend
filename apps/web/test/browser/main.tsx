@@ -1,5 +1,6 @@
 import { OnboardHost } from "../../src/app/_onboard/OnboardHost";
 import type { OnboardRoute } from "../../src/features/onboard/OnboardPage";
+import { MeriActionHost } from "../../src/app/meri/actions/MeriActionHost";
 import { IntegrationProbe } from "./IntegrationProbe";
 import { OnboardBoundaryProbe } from "./OnboardBoundaryProbe";
 import { isOnboardPath } from "../../src/shared/session/onboard-route";
@@ -63,6 +64,14 @@ function RoutedApp() {
       />
     );
   }
+  if (path === "/meri/actions")
+    return (
+      <ProductShell actionWorkflow>
+        <RequireSession>
+          <MeriActionHost enabled={search.get("actions-disabled") !== "1"} />
+        </RequireSession>
+      </ProductShell>
+    );
   if (path.startsWith("/forms/"))
     return (
       <>

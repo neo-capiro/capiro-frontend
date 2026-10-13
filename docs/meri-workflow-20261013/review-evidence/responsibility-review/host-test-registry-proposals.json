@@ -1,0 +1,38 @@
+[
+  {
+    "file": "apps/web/tests/meri-action-host.test.ts",
+    "kind": "file",
+    "symbol": "<module>",
+    "line": 1,
+    "nonblank": 431,
+    "fingerprint": "d7bafed4534a517be52283da13c04729a6077ead75d93295533a6908e5a40e9e",
+    "sourceSha256": "e1939e567697a279330f1c1f2568af0ab4fa25d4a2f05019b2082723014fe068",
+    "reviewedBy": "calendar_relationships_review (independent responsibility review)",
+    "reviewedOn": "2026-10-13",
+    "reason": "One host-lifetime contract test module shares a small synthetic session/fetch harness and real QueryClient to exercise explicit connect, idle expiry, suspension/revocation and cache-generation ownership. These are the states of one ActionHostController plus its injected journal, not separate feature domains. Splitting at431 nonblank lines would duplicate the same authority/observation fixtures; all executable test cases and helpers remain below80 lines."
+  },
+  {
+    "file": "apps/web/tests/meri-action-host.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #2",
+    "line": 93,
+    "nonblank": 142,
+    "fingerprint": "a89696e9273318e726b9417578b7f4a6b3d03b39ab4f3c1fcef03f367b6d9239",
+    "sourceSha256": "e1939e567697a279330f1c1f2568af0ab4fa25d4a2f05019b2082723014fe068",
+    "reviewedBy": "calendar_relationships_review (independent responsibility review)",
+    "reviewedOn": "2026-10-13",
+    "reason": "The describe declaration groups explicit connection-lifetime examples: no automatic connection, exact hints, duplicate prevention, late bootstrap disposal, StrictMode remount, idle expiry and native refusal. Each example independently observes host snapshots, request counts or timers; the group is not an oversized executable handler and contains no policy/provider implementation."
+  },
+  {
+    "file": "apps/web/tests/meri-action-host.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #4",
+    "line": 317,
+    "nonblank": 119,
+    "fingerprint": "dd71c65c2a5c8dcb3d38e150e93f2b6e9e8a9c3194d3fa9ef28d36e99f109c79",
+    "sourceSha256": "e1939e567697a279330f1c1f2568af0ab4fa25d4a2f05019b2082723014fe068",
+    "reviewedBy": "calendar_relationships_review (independent responsibility review)",
+    "reviewedOn": "2026-10-13",
+    "reason": "The describe declaration groups the journal boundary of the same host: exact authority-key isolation, uncertain-state remount retention, absence of credentials/wires in cache, and old-generation write exclusion after canonical clearing. It uses the real QueryClient and adapter fixtures; assertions test retained or forbidden effects rather than reimplementing the journal algorithm."
+  }
+]

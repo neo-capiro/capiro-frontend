@@ -1,0 +1,36 @@
+{
+  "inputs": [
+    {
+      "path": "/tmp/capiro-meri-action-host-locator-correction-20261013/STRUCTURE-REVIEW.json",
+      "bytes": 2432,
+      "sha256": "f67a79af9e246d40a0899e13551487efb3721c3a3b5eb249211b302a851e7419"
+    },
+    {
+      "path": "/tmp/capiro-meri-action-host-locator-correction-20261013/FINAL-SOURCE-REVIEW.json",
+      "bytes": 3319,
+      "sha256": "4f3a47c78b617f33707e8b4942cb37c5c20423df9fce7f5d429619ff0b5e3abd"
+    },
+    {
+      "path": "/tmp/capiro-meri-action-host-locator-correction-20261013/REPORT.md",
+      "bytes": 3304,
+      "sha256": "592bd3fa1d5c036533116fb83229d39154dd6eddbdff48bbcd76e968c7e3a8c6"
+    }
+  ],
+  "checks": [
+    {
+      "file": "apps/web/test/browser/meri-action-host-fixtures.ts",
+      "sourceSha256": "2e3461d3ba91b717d6300dce35dc82ec8f34b848fc266192d1d28ca640e413e7",
+      "fingerprint": "7d28494cb3df0ad4073181f1aaf304d9a34844cf7c91a09872c4cafb1dae3c1b",
+      "nonblank": 109,
+      "sourceAndASTExactlyMatchAuthorPacket": true
+    },
+    {
+      "file": "apps/web/test/browser/meri-action-host-navigation.spec.ts",
+      "sourceSha256": "05a06a5d4f6202aa6d54c5786398717080999def5e95f943a77e17e58ed81dc1",
+      "fingerprint": "f1193210490b7e9500d09a8bf7733471b7424749155908cbe26194c031204832",
+      "nonblank": 86,
+      "sourceAndASTExactlyMatchAuthorPacket": true
+    }
+  ],
+  "runtimeExecutedByIndependentReviewer": false
+}

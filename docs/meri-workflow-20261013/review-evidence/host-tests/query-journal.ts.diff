@@ -1,0 +1,23 @@
+--- baseline-source/query-journal.ts
++++ final-source/apps/web/src/shared/meri-actions/query-journal.ts
+@@ -18,10 +18,18 @@
+     context.selectedClientId,
+   ];
+   client.setQueryDefaults(key, { gcTime: Infinity });
++  client.setQueryData<ActionAttempt>(key, (previous) => previous ?? idle);
++  const cache = client.getQueryCache();
++  const owned = cache.find({ queryKey: key, exact: true });
++  const current = () =>
++    owned !== undefined && cache.find({ queryKey: key, exact: true }) === owned;
+   return {
+-    read: () => client.getQueryData<ActionAttempt>(key) ?? idle,
++    read: () =>
++      current()
++        ? (client.getQueryData<ActionAttempt>(key) ?? idle)
++        : { status: "unresolved", problem: "access-lost" },
+     write: (attempt) => {
+-      client.setQueryData(key, Object.freeze({ ...attempt }));
++      if (current()) client.setQueryData(key, Object.freeze({ ...attempt }));
+     },
+   };
+ }

@@ -22,11 +22,15 @@ export const publicExports = new Set([
   '@capiro/ui/input', '@capiro/ui/textarea', '@capiro/ui/select', '@capiro/ui/dropdown-menu',
   '@capiro/ui/conversation', '@capiro/ui/message', '@capiro/meri-client/projection',
   '@capiro/meri-contracts', '@capiro/meri-contracts/browser',
+  '@capiro/meri-contracts/action-application',
   '@capiro/meri-contracts/metadata', '@capiro/meri-ui-stream/protocol',
   '@capiro/shared/newsletter', '@capiro/shared/newsletter-render',
 ]);
 
 export const serverAdapters = new Map([
+  [`${appSource}app/api/action-followthrough/[operation]/route.ts`, new Set([
+    '@clerk/nextjs/server', `${appSource}shared/meri-actions/config.ts`, `${appSource}shared/meri-actions/proxy.ts`,
+  ])],
   [`${appSource}app/api/capiro/[operation]/route.ts`, new Set([
     '@clerk/nextjs/server', `${appSource}shared/capiro/config.ts`, `${appSource}shared/capiro/gateway.ts`, `${appSource}shared/capiro/registry.ts`,
   ])],

@@ -2,3 +2,6 @@
 *.png binary
 *.jpg binary
 *.woff2 binary
+
+# Preserve raw review logs, receipts and patches.
+docs/meri-workflow-20261013/review-evidence/** -text -whitespace

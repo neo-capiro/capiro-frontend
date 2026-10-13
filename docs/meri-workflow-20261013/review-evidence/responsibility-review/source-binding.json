@@ -1,0 +1,176 @@
+{
+  "reviewedAt": "2026-10-13T05:41:54.814004+00:00",
+  "baseCommit": "d4be41e60516e576c74afa304b50ed67da15cb93",
+  "state": "Active-authoring candidate, exact current inspected bytes; no frozen shipping claim",
+  "changedProductionSources": [
+    {
+      "file": "apps/web/src/app/api/action-followthrough/[operation]/route.ts",
+      "sha256": "a6f35fcd97672184101b6d77a609e6470c8f73da620a6ca1e8ecc39024154d26",
+      "bytes": 589
+    },
+    {
+      "file": "apps/web/src/app/meri/actions/MeriActionHost.tsx",
+      "sha256": "47eb6dab030eefcd0cb8b17627d1f10c6f0a2673964a9d060050687e9bee1f21",
+      "bytes": 3873
+    },
+    {
+      "file": "apps/web/src/app/meri/actions/page.tsx",
+      "sha256": "b3da4c9cf8633b3e3044a19fb20e747a1af3f4ee1f4fd80722f64cb4beb3191c",
+      "bytes": 502
+    },
+    {
+      "file": "apps/web/src/features/meri/actions/MeriActionWorkflow.tsx",
+      "sha256": "ce71172d1d43e74c6f6f0c8987bc7802c91b9e0b5d2edc7c2c49dbde08e7191e",
+      "bytes": 3851
+    },
+    {
+      "file": "apps/web/src/features/meri/actions/ProposalPanel.tsx",
+      "sha256": "ea51c88a19018e117b85fcccb052034db08e3f8a39482d0bebaaaf23a34fcd20",
+      "bytes": 2897
+    },
+    {
+      "file": "apps/web/src/features/meri/actions/RecommendationList.tsx",
+      "sha256": "7f9c2be4d30e327ba98415d839a879808157447bdab5139522945c86d7ba8b55",
+      "bytes": 1978
+    },
+    {
+      "file": "apps/web/src/features/meri/actions/TaskDraftPanel.tsx",
+      "sha256": "f38f997a7418b5285337a60c57d781895493d0c3e8f9ea854eab0d8bc091dec5",
+      "bytes": 2414
+    },
+    {
+      "file": "apps/web/src/features/meri/actions/action-workflow-port.ts",
+      "sha256": "68cad757a4df2e2ef5210707519e1a1d8869d81e004b7401e33a4c97f2599f6a",
+      "bytes": 65
+    },
+    {
+      "file": "apps/web/src/features/meri/actions/action-workflow-state.ts",
+      "sha256": "0fd4ed003290038d919472cc11a1736e3dab94e3047c9c761bdcf7a3bcb267e4",
+      "bytes": 6273
+    },
+    {
+      "file": "apps/web/src/features/meri/actions/workflow-problems.ts",
+      "sha256": "6c9c27003d7461210b78f978070126794f304f668a5e18695d45720a0ca44b1c",
+      "bytes": 2004
+    },
+    {
+      "file": "apps/web/src/features/meri/actions/workflow.module.css",
+      "sha256": "f4a68e2aebbcd541c83eea43cf2b6a8b8dd3c5b868afa1300f23213dbf229eee",
+      "bytes": 2690
+    },
+    {
+      "file": "apps/web/src/proxy.ts",
+      "sha256": "0557a71dfe8cbd317f2ff0167f3e4aa553b2ecb46a72d526b7e0644cfd512660",
+      "bytes": 1112
+    },
+    {
+      "file": "apps/web/src/shared/meri-actions/attempt-journal.ts",
+      "sha256": "3fd7884d856b5d7f27b9bcf6c5a405c9cf4703bd1f67f71ea756c561f94509a6",
+      "bytes": 391
+    },
+    {
+      "file": "apps/web/src/shared/meri-actions/bounded-json.ts",
+      "sha256": "d8f46bc08078d4a4858e7eca5a3f0fab34065275f8268948e30babb869afe145",
+      "bytes": 2614
+    },
+    {
+      "file": "apps/web/src/shared/meri-actions/config.ts",
+      "sha256": "8b90d94ad5bc20ba25e5252dabc85561392cbf3c1f0d1be7ecc781bf8a78f471",
+      "bytes": 474
+    },
+    {
+      "file": "apps/web/src/shared/meri-actions/correlation.ts",
+      "sha256": "4185a15f731a88beff8b73e5d65629e66908f921dcb5bff4a8657e761ffa3e7f",
+      "bytes": 4131
+    },
+    {
+      "file": "apps/web/src/shared/meri-actions/disposition.ts",
+      "sha256": "a093b4dc26cc3641b9268f3727b6f764ad0f8ff4a21dedede8716176c7e7ff7f",
+      "bytes": 1103
+    },
+    {
+      "file": "apps/web/src/shared/meri-actions/host-controller.ts",
+      "sha256": "031c98f9dfdba27ecd42512cee985dc05461dda5ea64d8d7738468f8df354eb3",
+      "bytes": 3597
+    },
+    {
+      "file": "apps/web/src/shared/meri-actions/projection.ts",
+      "sha256": "a8c3108adfb8613522970d45bab434dabd632c4271ebf3e4bf96fb2d757d3a62",
+      "bytes": 2294
+    },
+    {
+      "file": "apps/web/src/shared/meri-actions/proxy.ts",
+      "sha256": "6046d58306b2c5694f618a2331dda4ea26baae64e12ecc6b94b6feec1973fcb4",
+      "bytes": 2843
+    },
+    {
+      "file": "apps/web/src/shared/meri-actions/query-journal.ts",
+      "sha256": "8249df4b758ef20b7bc83776555eea5639c8f1a15cd6a13d4ea40b5fe62be171",
+      "bytes": 1241
+    },
+    {
+      "file": "apps/web/src/shared/meri-actions/session-bootstrap.ts",
+      "sha256": "f3e1b503b067294867655ac52572f8b82ebfc0cd478eb5169e6f3ad219af0028",
+      "bytes": 1640
+    },
+    {
+      "file": "apps/web/src/shared/meri-actions/session-receipt.ts",
+      "sha256": "46d7ddd12325d7bc305583397aba249cfc4ec8022e278eed2e3933672af10b76",
+      "bytes": 1355
+    },
+    {
+      "file": "apps/web/src/shared/meri-actions/workflow-adapter.ts",
+      "sha256": "1d35e9a68d713bd1088d4141aaead81d0d5d0a5ceb8371736feed5f568abe458",
+      "bytes": 8265
+    },
+    {
+      "file": "apps/web/src/shared/meri-actions/workflow-port.ts",
+      "sha256": "f5afc882738b4cb1684fa3969513a277646bd097dbe025a119a1c35263b3c1bc",
+      "bytes": 2124
+    },
+    {
+      "file": "apps/web/src/shared/meri-actions/workflow-transport.ts",
+      "sha256": "b32635261243e59f8605aafa84092e728ed083c58d33a9d6923e702cd25e2e3b",
+      "bytes": 2038
+    },
+    {
+      "file": "apps/web/src/shared/shell/ProductShell.tsx",
+      "sha256": "5e48a151acc4fae1ebc679729659295f8b6fe29eafd2197826c4660367193a83",
+      "bytes": 1572
+    },
+    {
+      "file": "apps/web/src/shared/shell/Sidebar.tsx",
+      "sha256": "cd1584326cabd10d95f86b11ba2421f0eef5465285d75cb82ceb17c12279dd80",
+      "bytes": 4521
+    }
+  ],
+  "canonicalScan": {
+    "errors": [],
+    "sizeSummary": {
+      "total": 428,
+      "reviewed": 403,
+      "inheritedUnreviewed": 24,
+      "blocking": 1
+    },
+    "blockingFindings": [
+      {
+        "file": "apps/web/src/shared/shell/Sidebar.tsx",
+        "kind": "function",
+        "symbol": "Sidebar",
+        "line": 26,
+        "nonblank": 112,
+        "fingerprint": "22cf76c814093443ce018ecda746a0134ad7effb60adcff0d7513c8c52a9c074",
+        "provenance": "new",
+        "reviewStatus": "unreviewed",
+        "blocking": true
+      }
+    ]
+  },
+  "acceptedProposals": {
+    "production": 1,
+    "testAuthor": 10,
+    "hostTestAuthor": 3,
+    "total": 14
+  },
+  "excluded": "Browser fixture/spec files remain in progress; no structure acceptance for them"
+}

@@ -22,6 +22,18 @@
       "status": "accepted-offline-migration",
       "independentReviewCommit": "46aa93ea29c0ebb186bbd53a2b06e85aed0ff379",
       "ownerAcceptance": "docs/coordination/CODEX-FRONTEND-MIGRATION-ACCEPTANCE.md"
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.1.tgz",
+      "repository": "https://github.com/neo-capiro/meri-greenfield",
+      "sourceCommit": "83d1d8b2ae4604ca259be17461ae71ca60f5fb6e",
+      "artifactPublicationCommit": "08ba900965f54d4f0cd3776a9bb2158877e76dfd",
+      "bytes": 175627,
+      "sha256": "0ca8d0552a2960157ebdf7b8cecf6cacdcda48ef91c475060a54f15192535651",
+      "regularEntryCount": 15,
+      "status": "verified-source-pending-consumer-qualification",
+      "purpose": "Governed action-application receiver, separate from frozen0.1.0 UIEvent consumer dependency",
+      "independentReviewManifestSha256": "c348e7c8997f301f27a161c8b6d3bd7c519da5201b5104d5b25433f03c5c2c6e"
     }
   ]
 }

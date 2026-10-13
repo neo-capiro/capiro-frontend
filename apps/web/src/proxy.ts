@@ -47,5 +47,6 @@ export const config = {
     "/accept-invite",
     "/setup",
     "/api/capiro/:path*",
+    "/api/action-followthrough/:path*",
   ],
 };

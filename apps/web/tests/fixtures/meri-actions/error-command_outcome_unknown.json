@@ -1,0 +1,13 @@
+{
+  "name": "error-command_outcome_unknown",
+  "route": "execute",
+  "httpStatus": 502,
+  "response": {
+    "error": {
+      "code": "COMMAND_OUTCOME_UNKNOWN",
+      "outcome": "UNKNOWN"
+    }
+  },
+  "expected": "receiver_accept",
+  "note": "Exact published public-test code/status. Local abort and durable cancellation remain distinct."
+}

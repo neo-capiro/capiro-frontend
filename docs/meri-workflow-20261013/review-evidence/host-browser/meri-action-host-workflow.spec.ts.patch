@@ -1,0 +1,11 @@
+--- meri-action-host-workflow.spec.ts.before
++++ meri-action-host-workflow.spec.ts
+@@ -164,7 +164,7 @@
+     await find.focus();
+     await page.keyboard.press("Enter");
+     const select = page.getByRole("button", {
+-      name: /^Select recommendation:/,
++      name: /^Select recommendation\s*:/,
+     });
+     await expect(select).toBeVisible();
+     await select.focus();

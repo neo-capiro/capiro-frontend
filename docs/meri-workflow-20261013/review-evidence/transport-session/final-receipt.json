@@ -1,0 +1,32 @@
+{
+  "startedUTC": "2026-10-13T05:27:02.458987+00:00",
+  "endedUTC": "2026-10-13T05:27:03.280703+00:00",
+  "command": [
+    "npm",
+    "exec",
+    "--",
+    "vitest",
+    "run",
+    "tests/meri-action-transport.test.ts",
+    "tests/meri-action-session.test.ts",
+    "--reporter=verbose",
+    "--reporter=json",
+    "--outputFile=/tmp/capiro-meri-transport-session-tests-20261013/final-results.json"
+  ],
+  "exitCode": 0,
+  "before": {
+    "apps/web/tests/meri-action-transport.test.ts": "95a6ca38ec21f9b1a851b5efbfb9b33fc65c9bb1e3da70a3f2d9f584ab3641d5",
+    "apps/web/tests/meri-action-session.test.ts": "75a28f2bc5c77bf9040a59b9716f7abd3a1dd0d8a7b0ea3e4148dac91270f323",
+    "apps/web/src/shared/meri-actions/bounded-json.ts": "d8f46bc08078d4a4858e7eca5a3f0fab34065275f8268948e30babb869afe145",
+    "apps/web/src/shared/meri-actions/workflow-transport.ts": "9ea646f2fad49a59c75718d1df31ebba6b72f8ada3a168095cd5c41b082101ba",
+    "apps/web/src/shared/meri-actions/session-receipt.ts": "46d7ddd12325d7bc305583397aba249cfc4ec8022e278eed2e3933672af10b76"
+  },
+  "after": {
+    "apps/web/tests/meri-action-transport.test.ts": "95a6ca38ec21f9b1a851b5efbfb9b33fc65c9bb1e3da70a3f2d9f584ab3641d5",
+    "apps/web/tests/meri-action-session.test.ts": "75a28f2bc5c77bf9040a59b9716f7abd3a1dd0d8a7b0ea3e4148dac91270f323",
+    "apps/web/src/shared/meri-actions/bounded-json.ts": "d8f46bc08078d4a4858e7eca5a3f0fab34065275f8268948e30babb869afe145",
+    "apps/web/src/shared/meri-actions/workflow-transport.ts": "9ea646f2fad49a59c75718d1df31ebba6b72f8ada3a168095cd5c41b082101ba",
+    "apps/web/src/shared/meri-actions/session-receipt.ts": "46d7ddd12325d7bc305583397aba249cfc4ec8022e278eed2e3933672af10b76"
+  },
+  "sourceChanged": false
+}

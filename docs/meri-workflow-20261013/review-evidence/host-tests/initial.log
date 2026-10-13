@@ -1,0 +1,101 @@
+
+ RUN  v4.1.11 /workspace/capiro-meri-workflow-20261013/apps/web
+
+ ✓ tests/meri-action-host.test.ts > Meri explicit host connection lifetime > constructs, subscribes and attaches without a bootstrap request 3ms
+ ✓ tests/meri-action-host.test.ts > Meri explicit host connection lifetime > captures explicit hints, dispatches bootstrap once and exposes only ready context 29ms
+ ✓ tests/meri-action-host.test.ts > Meri explicit host connection lifetime > fails closed for a receipt contradicting the captured client hint 1ms
+ ✓ tests/meri-action-host.test.ts > Meri explicit host connection lifetime > detaches a held bootstrap, discards late receipt and permits deliberate reattachment 1ms
+ ✓ tests/meri-action-host.test.ts > Meri explicit host connection lifetime > supports StrictMode attach/detach/attach without implicit connection or old-port reuse 2ms
+ ✓ tests/meri-action-host.test.ts > Meri explicit host connection lifetime > expires an idle ready connection and clears the port without another action 3ms
+ ✓ tests/meri-action-host.test.ts > Meri explicit host connection lifetime > clears a ready view after an actual validated action access refusal 2ms
+ ✓ tests/meri-action-host.test.ts > Meri scoped cache journal versus private host state > retains unresolved attempts across a new host in the same context without caching credentials or drafts 25ms
+ ✓ tests/meri-action-host.test.ts > Meri scoped cache journal versus private host state > uses a different QueryClient for a replaced identity even when server context fields match 2ms
+ ✓ tests/meri-action-host.test.ts > Meri scoped cache journal versus private host state > keeps journal metadata isolated by tenantId 0ms
+ ✓ tests/meri-action-host.test.ts > Meri scoped cache journal versus private host state > keeps journal metadata isolated by actorId 0ms
+ ✓ tests/meri-action-host.test.ts > Meri scoped cache journal versus private host state > keeps journal metadata isolated by conversationId 0ms
+ ✓ tests/meri-action-host.test.ts > Meri scoped cache journal versus private host state > keeps journal metadata isolated by runId 0ms
+ ✓ tests/meri-action-host.test.ts > Meri scoped cache journal versus private host state > keeps journal metadata isolated by selectedClientId 0ms
+ × tests/meri-action-host.test.ts > Meri scoped cache journal versus private host state > does not repopulate a canonically cleared cache when an old dispatched write settles after detachment 12ms
+   → expected [ Query{ options: { …(6) }, …(5) } ] to deeply equal []
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/meri-action-host.test.ts > Meri scoped cache journal versus private host state > does not repopulate a canonically cleared cache when an old dispatched write settles after detachment
+AssertionError: expected [ Query{ options: { …(6) }, …(5) } ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   Query {
++     "gcTime": Infinity,
++     "observers": [],
++     "options": {
++       "_defaulted": true,
++       "gcTime": Infinity,
++       "queryHash": "[\"meri\",\"action-attempt\",\"tenant\",\"actor\",\"00000000-0000-4000-8000-000000000001\",\"00000000-0000-4000-8000-000000000002\",\"abcdef00-0000-4000-8000-000000000009\"]",
++       "queryKey": [
++         "meri",
++         "action-attempt",
++         "tenant",
++         "actor",
++         "00000000-0000-4000-8000-000000000001",
++         "00000000-0000-4000-8000-000000000002",
++         "abcdef00-0000-4000-8000-000000000009",
++       ],
++       "refetchOnReconnect": true,
++       "throwOnError": false,
++     },
++     "queryHash": "[\"meri\",\"action-attempt\",\"tenant\",\"actor\",\"00000000-0000-4000-8000-000000000001\",\"00000000-0000-4000-8000-000000000002\",\"abcdef00-0000-4000-8000-000000000009\"]",
++     "queryKey": [
++       "meri",
++       "action-attempt",
++       "tenant",
++       "actor",
++       "00000000-0000-4000-8000-000000000001",
++       "00000000-0000-4000-8000-000000000002",
++       "abcdef00-0000-4000-8000-000000000009",
++     ],
++     "state": {
++       "data": {
++         "problem": "unknown",
++         "status": "unresolved",
++       },
++       "dataUpdateCount": 1,
++       "dataUpdatedAt": 1791869413722,
++       "error": null,
++       "errorUpdateCount": 0,
++       "errorUpdatedAt": 0,
++       "fetchFailureCount": 0,
++       "fetchFailureReason": null,
++       "fetchMeta": null,
++       "fetchStatus": "idle",
++       "isInvalidated": false,
++       "status": "success",
++     },
++   },
++ ]
+
+ ❯ tests/meri-action-host.test.ts:340:47
+    338|     await Promise.resolve();
+    339|     await Promise.resolve();
+    340|     expect(h.client.getQueryCache().getAll()).toEqual([]);
+       |                                               ^
+    341|   });
+    342| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 14 passed (15)
+   Start at  05:30:13
+   Duration  378ms (transform 76ms, setup 0ms, import 176ms, tests 83ms, environment 0ms)
+
+JSON report written to /tmp/capiro-meri-host-tests-20261013/initial-results.json
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

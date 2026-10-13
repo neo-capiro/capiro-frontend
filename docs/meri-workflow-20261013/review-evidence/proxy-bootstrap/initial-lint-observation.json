@@ -1,0 +1,10 @@
+{
+  "status": "fulfilled",
+  "value": {
+    "chunk_id": "1f3c53",
+    "wall_time_seconds": 1.639846717,
+    "exit_code": 0,
+    "original_token_count": 281,
+    "output": "\n/workspace/capiro-meri-workflow-20261013/apps/web/tests/meri-action-bootstrap.test.ts\n   32:14  warning  '_url' is defined but never used   @typescript-eslint/no-unused-vars\n   32:39  warning  '_init' is defined but never used  @typescript-eslint/no-unused-vars\n   60:14  warning  '_url' is defined but never used   @typescript-eslint/no-unused-vars\n   60:39  warning  '_init' is defined but never used  @typescript-eslint/no-unused-vars\n  106:14  warning  '_url' is defined but never used   @typescript-eslint/no-unused-vars\n  106:39  warning  '_init' is defined but never used  @typescript-eslint/no-unused-vars\n\n/workspace/capiro-meri-workflow-20261013/apps/web/tests/meri-action-proxy.test.ts\n  141:16  warning  '_url' is defined but never used   @typescript-eslint/no-unused-vars\n  141:41  warning  '_init' is defined but never used  @typescript-eslint/no-unused-vars\n\n✖ 8 problems (0 errors, 8 warnings)\n\nnpm notice\nnpm notice New major version of npm available! 11.9.0 -> 12.2.0\nnpm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0\nnpm notice To update run: npm install -g npm@12.2.0\nnpm notice\n"
+  }
+}

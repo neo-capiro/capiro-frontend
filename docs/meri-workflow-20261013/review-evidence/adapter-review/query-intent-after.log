@@ -1,0 +1,51 @@
+{
+  "scope": "PUBLIC_RECEIVER_AND_PURE_CORRELATION_ONLY",
+  "node": "v24.19.0",
+  "observedAt": "2026-10-13T05:27:36.616Z",
+  "expected": "green",
+  "source": {
+    "correlationPath": "/workspace/capiro-meri-workflow-20261013/apps/web/src/shared/meri-actions/correlation.ts",
+    "correlationSha256": "4185a15f731a88beff8b73e5d65629e66908f921dcb5bff4a8657e761ffa3e7f",
+    "receiverPath": "/workspace/capiro-meri-workflow-20261013/apps/web/node_modules/@capiro/meri-contracts/dist/action-application.mjs",
+    "receiverSha256": "9e824b7f814561ec46aa63b0c31057a8292515a9f0186707bc838fed98eb3534",
+    "seedSha256": "b6dffd40ec9f9fda72cb4319ea0eafc9ec1a2a8448bf5808a6c5ba12421c1e6b"
+  },
+  "controls": [
+    {
+      "name": "original-first-page",
+      "receiverAccepted": true,
+      "correlationAccepted": true
+    },
+    {
+      "name": "query-foreign-intent-limit",
+      "receiverAccepted": true,
+      "correlationAccepted": false,
+      "requiredCorrelationAccepted": false,
+      "scope": {
+        "actionItemId": null,
+        "status": null,
+        "sort": "deadline",
+        "page": 1,
+        "limit": 50,
+        "cursorApplied": false
+      },
+      "fixtureSha256": "9ac1bc9b5b6e543961881e4821fd22cd62df52621ea4cca6d038b0907ec7ef6f"
+    },
+    {
+      "name": "query-foreign-intent-page",
+      "receiverAccepted": true,
+      "correlationAccepted": false,
+      "requiredCorrelationAccepted": false,
+      "scope": {
+        "actionItemId": null,
+        "status": null,
+        "sort": "deadline",
+        "page": 2,
+        "limit": 20,
+        "cursorApplied": true
+      },
+      "fixtureSha256": "425a1071e31058703ef56637c80bdac396450c0571e39f16efa8a67f6d1f1b6e"
+    }
+  ],
+  "defectsObserved": 0
+}

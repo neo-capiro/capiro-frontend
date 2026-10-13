@@ -1,0 +1,9 @@
+
+ RUN  v4.1.11 /workspace/capiro-meri-workflow-20261013/apps/web/src/shared/capiro
+
+No test files found, exiting with code 1
+
+filter: apps/web/tests/meri-action-adapter.test.ts, apps/web/tests/meri-action-correlation.test.ts, apps/web/tests/meri-action-lifetime.test.ts
+include: **/*.test.ts, ../../features/**/*.test.ts
+exclude:  **/node_modules/**, **/.git/**
+

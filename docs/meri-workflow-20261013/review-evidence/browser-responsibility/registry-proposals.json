@@ -1,0 +1,30 @@
+{
+  "accepted": [
+    {
+      "file": "apps/web/test/browser/meri-action-host-fixtures.ts",
+      "kind": "function",
+      "symbol": "actionHostFixture",
+      "line": 72,
+      "nonblank": 109,
+      "fingerprint": "7d28494cb3df0ad4073181f1aaf304d9a34844cf7c91a09872c4cafb1dae3c1b",
+      "sourceSha256": "2e3461d3ba91b717d6300dce35dc82ec8f34b848fc266192d1d28ca640e413e7",
+      "reviewedBy": "calendar_relationships_review (independent responsibility review)",
+      "reviewedOn": "2026-10-13",
+      "reason": "One synthetic HTTP scope for the actual mounted action host: controlled historical clock, remote/unconfigured-request detection, canonical Core/Capiro defaults, action response queue, request/header ledger and exact entered/released/completed request barriers. Queue, ledger and barriers are coupled evidence of dispatch and lifetime behavior; they are not application orchestration, a duplicate receiver, an authorization implementation or unrelated mocks. The109-line function reuses existing operationFixtures/onlyLocalRequests and reads unchanged public fixture JSON. Separating this fixture merely to cross80 lines would make the observed request and its release barrier harder to verify."
+    },
+    {
+      "file": "apps/web/test/browser/meri-action-host-navigation.spec.ts",
+      "kind": "function",
+      "symbol": "<anonymous>",
+      "line": 16,
+      "nonblank": 86,
+      "fingerprint": "f1193210490b7e9500d09a8bf7733471b7424749155908cbe26194c031204832",
+      "sourceSha256": "05a06a5d4f6202aa6d54c5786398717080999def5e95f943a77e17e58ed81dc1",
+      "reviewedBy": "calendar_relationships_review (independent responsibility review)",
+      "reviewedOn": "2026-10-13",
+      "reason": "One86-line real-browser scenario callback verifies the same uncertain preparation invariant across ordered Modules navigation, Back, deliberate reconnect, late completion, Forward/Back and a second reconnect. Parameterizing acknowledged-unknown and still-in-flight states preserves that single invariant without reconstructing durable state. URL/private-view assertions and exact query/draft/prepare/execute counts are adjacent to their transitions; fixture helpers own setup and real request completion barriers. Keeping this causal sequence together preserves test meaning better than splitting it into independently reset tests."
+    }
+  ],
+  "rejected": [],
+  "scope": "Only two requested browser size findings; no registry mutation"
+}
