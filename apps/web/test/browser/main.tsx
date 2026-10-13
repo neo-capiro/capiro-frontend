@@ -10,6 +10,7 @@ import { PortfolioIndex } from "../../src/features/portfolio/index/PortfolioInde
 import { ClientFrame } from "../../src/features/portfolio/client-profile/ClientFrame";
 import { ObjectivesPage } from "../../src/features/portfolio/objectives/ObjectivesPage";
 import { ClientOverview } from "../../src/features/portfolio/client-profile/ClientOverview";
+import { CalendarPage } from "../../src/features/portfolio/calendar/CalendarPage";
 import { ProductShell } from "../../src/shared/shell/ProductShell";
 import { MeriHome } from "../../src/features/meri/MeriHome";
 import "../../src/shared/portfolio/styles.css";
@@ -102,6 +103,14 @@ function RoutedApp() {
       <ProductShell>
         <MeriHome />
       </ProductShell>
+    );
+  if (path === "/calendar")
+    return (
+      <div data-portfolio-root>
+        <RequireSession>
+          <CalendarPage destinations={{}} />
+        </RequireSession>
+      </div>
     );
   if (path === "/" || path === "/portfolio" || path.startsWith("/portfolio/")) {
     const id = path.split("/")[2];

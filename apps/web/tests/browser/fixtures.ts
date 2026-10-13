@@ -1,4 +1,6 @@
 import { effectivePage } from "../effective-date-fixtures";
+import { fundingPage } from "../funding-calendar-fixtures";
+import { fundingCalendarSources } from "../../src/features/portfolio/calendar/funding-deadline";
 import type { Page, Route } from "@playwright/test";
 import type { Prospect } from "../../src/features/portfolio/prospects/contracts";
 export const clientId = "10000000-0000-4000-8000-000000000001";
@@ -202,6 +204,19 @@ export async function installFixtures(page: Page) {
       unexpected.push(`${method} ${path}`);
       return json(route, { message: "Unexpected test mutation" }, 500);
     }
+    if (
+      path === "core/intelligence/opportunities/v2/search" &&
+      url.searchParams.get("mode") === "all" &&
+      url.searchParams.get("source") === fundingCalendarSources.join(",") &&
+      url.searchParams.get("pageSize") === "25" &&
+      url.searchParams.get("sort") === "deadline" &&
+      url.searchParams.has("deadlineFrom") &&
+      url.searchParams.has("deadlineTo")
+    )
+      return json(
+        route,
+        fundingPage([], { page: Number(url.searchParams.get("page") ?? 1) }),
+      );
     const responses: Record<string, unknown> = {
       "core/engagement/mail/mailboxes": [sendingMailbox],
       "core/billing/state": {

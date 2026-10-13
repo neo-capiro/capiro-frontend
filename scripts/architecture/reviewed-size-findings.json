@@ -1474,24 +1474,6 @@
     "reviewedOn": "2026-10-12"
   },
   {
-    "file": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
-    "kind": "file",
-    "symbol": "<module>",
-    "fingerprint": "1471eb1124a29fe24ebf21e91fad0d83cb4f1596cac88f9635dce47fad461a5e",
-    "reason": "Calendar scope, view, lifecycle filter and detail/library navigation remain one existing page coordinator. Canonical metadata, lifecycle decisions, table rendering, shared-feed read and sharing mutations are separate leaf owners. No transport/authority logic is added to the page.",
-    "reviewedBy": "Codex shared frontend integration review with independent core_intake_review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
-    "kind": "function",
-    "symbol": "CalendarPage",
-    "fingerprint": "f5e9238597077884681433f79e422929b1d82e7d06dae40549d5e3bc9e641549",
-    "reason": "Calendar scope, view, lifecycle filter and detail/library navigation remain one existing page coordinator. Canonical metadata, lifecycle decisions, table rendering, shared-feed read and sharing mutations are separate leaf owners. No transport/authority logic is added to the page.",
-    "reviewedBy": "Codex shared frontend integration review with independent core_intake_review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
     "file": "apps/web/src/features/portfolio/calendar/artifacts/useArtifactMutation.ts",
     "kind": "function",
     "symbol": "useArtifactMutation",
@@ -1525,15 +1507,6 @@
     "fingerprint": "4ef7b2fa293d7022f77528c118ea9ad2278e5559050b10e3903625ad89b52b03",
     "reason": "One actor/tenant/meeting/client-bound read and mutation lifetime owns the synchronous fence, cleanup, existing artifact coordination and invalidations. Native request/receipt validation lives in api/contracts, not UI.",
     "reviewedBy": "Codex shared frontend integration review with independent core_intake_review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
-    "file": "apps/web/src/features/portfolio/client-profile/ActivityFeed.tsx",
-    "kind": "function",
-    "symbol": "ActivityRow",
-    "fingerprint": "f199a7b9b70b087960c39c8c4947c4a23422aaee736a03fef2c38087e1e93517",
-    "reason": "One native activity record projection owns title/body/kind/time/due/settled/pinned and existing source links. It selects canonical ActivityActions/TimelineMailThread only in the retained default feed. Expanded mode adds no writer/draft owner; the flat keyed parent preserves row mutation identity across group changes. Its markup remains cohesive.",
-    "reviewedBy": "Codex shared frontend integration review with independent modules_settings_review",
     "reviewedOn": "2026-10-12"
   },
   {
@@ -1920,15 +1893,6 @@
     "symbol": "OrdinaryEngagementScreen",
     "fingerprint": "72b4d083f4c0d90ce2ac0660d518fc63cc8f20037f995dcef98d8751b30d27d0",
     "reason": "Owns the ordinary Engagement screen: tab/scope selection, existing client/meeting reads and composition of separately owned child workflows. The new outer EngagementScreen separates rich route discrimination before these queries mount; this function contains no rich document retrieval, persistence, renderer or dispatch implementation. The keyed Outreach child disposes selection on destination replacement. The 130-line body is predominantly existing tab composition; splitting it solely for size would obscure the single screen lifetime. See docs/newsletter-port-20261012/evidence/rich-slice-review/STRUCTURE-REVIEW.md#ordinaryengagementscreen.",
-    "reviewedBy": "Codex independent modules_settings_review",
-    "reviewedOn": "2026-10-13"
-  },
-  {
-    "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
-    "kind": "function",
-    "symbol": "OutreachView",
-    "fingerprint": "b86cd8cb940cc4e119e7723a8b55f82a82f6d175b26b428fe9324175f2223756",
-    "reason": "Owns one Outreach browse/selection lifetime, including linked record loading/error and ID checks, campaign-session selection, and selection of the existing ordinary form. Rich candidates are classified before the form mounts and leave through a local selection reset or canonical deep-link return. It delegates record IO to useCapiroQuery, campaign editing to CampaignSession, generic saving to OutreachForm and rich unavailable presentation to NewsletterDestination. The guards and view choices constrain the same selected record; they introduce no rich read or send transaction. See docs/newsletter-port-20261012/evidence/rich-slice-review/STRUCTURE-REVIEW.md#outreachview.",
     "reviewedBy": "Codex independent modules_settings_review",
     "reviewedOn": "2026-10-13"
   },
@@ -2434,6 +2398,87 @@
     "fingerprint": "2d05d679c5bdf68f750bed591bc232577d7af63c00a0d0c98b12db469be2cb58",
     "reason": "One target-write hook\u2019s reservation, current-list admission, native request/receipt and callback lifetime. Add/tier/remove operate on the same client/member target resource and share the pending-member and obsolete-view rules. The small explicit union preserves materially different HTTP/receipt shapes; current identity only namespaces frontend state and does not claim server authorization. 89 body lines remain cohesive. Splitting the three short wire branches from their shared admission/settlement merely to cross80 would obscure ordering. Unknown target receipt reconciliation was not invented; it remains an explicit limit.",
     "reviewedBy": "Codex independent prospects_review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "ed1c164b08094d27871db5be8abe839d83928a06f94fdf477edd9c950272957e",
+    "reason": "Canonical CalendarPage URL-state/scoped-feed/view composition. Day adds only view selection and an accurate starts-on-day disclosure; civil bounds and adopted calendar rendering stay with their existing owners. No new domain/lifecycle owner.",
+    "reviewedBy": "Codex objectives_work_intel_review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/CalendarPage.tsx",
+    "kind": "function",
+    "symbol": "CalendarPage",
+    "fingerprint": "cc59e594a785856e5345ded2bc683e582ea0c7dee31e977a0b95009d6cb19472",
+    "reason": "Canonical CalendarPage URL-state/scoped-feed/view composition. Day adds only view selection and an accurate starts-on-day disclosure; civil bounds and adopted calendar rendering stay with their existing owners. No new domain/lifecycle owner.",
+    "reviewedBy": "Codex objectives_work_intel_review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/tests/calendar-day.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "5815eb978b8a4cc21b004382a59d6940e72ad8909a9cd8155c05f8c8932a22d3",
+    "reason": "One Day navigation contract suite covers civil/DST bounds, previous/next dates and the existing meeting request window. Table-driven cases share the same responsibility; no unrelated UI/provider/mock orchestration.",
+    "reviewedBy": "Codex objectives_work_intel_review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/ActivityFeed.tsx",
+    "kind": "function",
+    "symbol": "ActivityRow",
+    "fingerprint": "60ab6bc6ec200d556a68d95c839e274477cb00ea352ea41631400793c6700b8e",
+    "reason": "ActivityRow presents one timeline item, its metadata and its native source links. The added branch reuses the existing link style and supplied identity; it introduces no transport, mutation, session or state owner. Splitting this ten-line branch would not isolate a distinct responsibility.",
+    "reviewedBy": "Codex calendar_relationships_review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/modules/engagement/OutreachView.tsx",
+    "kind": "function",
+    "symbol": "OutreachView",
+    "fingerprint": "d4a51773336e6947c29eaca2905bb1ff228ed40296463614b52bbd40b9d42368",
+    "reason": "OutreachView composes the existing exact-record read, admission, selection and destination. The new client predicate extends its existing record-ID admission before every editor/rich destination; no DTO, transport, persistence or send responsibility is added. OutreachForm remains byte-unchanged.",
+    "reviewedBy": "Codex calendar_relationships_review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/WorkspaceDraft.tsx",
+    "kind": "function",
+    "symbol": "DraftEditor",
+    "fingerprint": "5f398d1cf7d10b7aa08e226a438813b00032977e7ccf508bb9ccf251ccb8e42a",
+    "reason": "Existing draft form composes title/section presentation, recovery/readback, history and existing save owner. Rich content and preview are delegated to cohesive feature modules; no persistence, identity or native contract responsibility added. Existing save sequence remains canonical.",
+    "reviewedBy": "Codex calendar_relationships_review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-document/DocumentLink.tsx",
+    "kind": "function",
+    "symbol": "DocumentLink",
+    "fingerprint": "37049b5bb40faecb514771b0a3e9d28b7d40342ba13223e3be85983314595bd4",
+    "reason": "One link dialog owns transient URL input and selection-preserving apply/remove commands. URL admission is delegated to content.ts; no transport, persistence or independent lifecycle authority.",
+    "reviewedBy": "Codex calendar_relationships_review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-document/DocumentToolbar.tsx",
+    "kind": "function",
+    "symbol": "DocumentToolbar",
+    "fingerprint": "c6d8f1e0942f5c67caf45bdc0071396e7c8fc8830c00a604df7d6695e82bc979",
+    "reason": "One explicit editor toolbar projects upstream commands, their active/can states, accessible groups and table/list/insert menus. Formatting command boundaries own local Undo grouping. It contains no document persistence, network, authority or parser logic; splitting menus merely by count would scatter one control projection.",
+    "reviewedBy": "Codex calendar_relationships_review",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/modules/workspace/rich-document/RichDocumentEditor.tsx",
+    "kind": "function",
+    "symbol": "MountedDocumentEditor",
+    "fingerprint": "08198e06f084b74fcb6978e2d3063ab9d3ca7b369aff3b5c090a27a8eb7d26fb",
+    "reason": "One mounted Tiptap lifecycle owns safe initial/pasted projection, explicit unsupported-source review, change delivery, pending editability, external-content history reset and local section preview. Server hydration gate is outside; toolbar, link dialog, schema and sanitizer are separate cohesive owners.",
+    "reviewedBy": "Codex calendar_relationships_review",
     "reviewedOn": "2026-10-13"
   }
 ]

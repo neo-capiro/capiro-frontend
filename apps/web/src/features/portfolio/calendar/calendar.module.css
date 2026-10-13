@@ -18,6 +18,9 @@
   height: 100%;
   min-width: 540px;
 }
+.grid[data-view="day"] :global(.sx-react-calendar-wrapper) {
+  min-width: 0;
+}
 .grid :global(.sx__calendar-header) {
   display: none;
 }

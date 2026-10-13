@@ -46,7 +46,7 @@ export function projectSection(value: string) {
     RETURN_DOM_FRAGMENT: true,
   });
   let requiresReview = DOMPurify.removed.some(
-    (removed) => !removed.element || removed.element.nodeName !== "BODY",
+    (removed) => !("element" in removed) || removed.element.nodeName !== "BODY",
   );
   for (const anchor of fragment.querySelectorAll("a")) {
     const href = workspaceLink(anchor.getAttribute("href") ?? "");
