@@ -1,0 +1,168 @@
+[
+  {
+    "file": "apps/web/tests/meri-action-adapter.test.ts",
+    "findings": []
+  },
+  {
+    "file": "apps/web/tests/meri-action-bootstrap.test.ts",
+    "findings": [
+      {
+        "file": "apps/web/tests/meri-action-bootstrap.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #2",
+        "line": 28,
+        "nonblank": 86,
+        "fingerprint": "eb3d9373979c7046c089b6ce501e64b5dd01528853b56e19dda6196f78fde8a3",
+        "parentKind": "CallExpression",
+        "callee": "describe",
+        "declarationTitle": "\"Meri bootstrap captures hints without inventing authority\""
+      },
+      {
+        "file": "apps/web/tests/meri-action-bootstrap.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #3",
+        "line": 115,
+        "nonblank": 109,
+        "fingerprint": "7629ac2f7de3ccefce7ecbc8521a9c0138c8a7730e42852530ddac16fb114d92",
+        "parentKind": "CallExpression",
+        "callee": "describe",
+        "declarationTitle": "\"Meri bootstrap admits only the bounded canonical receipt\""
+      },
+      {
+        "file": "apps/web/tests/meri-action-bootstrap.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #4",
+        "line": 225,
+        "nonblank": 99,
+        "fingerprint": "b561f986fec284fc08df17ae2e72825302f53ec6c80a72cab6dc02279b3f3b03",
+        "parentKind": "CallExpression",
+        "callee": "describe",
+        "declarationTitle": "\"Meri bootstrap cancellation and deadline\""
+      }
+    ]
+  },
+  {
+    "file": "apps/web/tests/meri-action-correlation.test.ts",
+    "findings": []
+  },
+  {
+    "file": "apps/web/tests/meri-action-fixtures.ts",
+    "findings": []
+  },
+  {
+    "file": "apps/web/tests/meri-action-host.test.ts",
+    "findings": [
+      {
+        "file": "apps/web/tests/meri-action-host.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #2",
+        "line": 93,
+        "nonblank": 142,
+        "fingerprint": "a89696e9273318e726b9417578b7f4a6b3d03b39ab4f3c1fcef03f367b6d9239",
+        "parentKind": "CallExpression",
+        "callee": "describe",
+        "declarationTitle": "\"Meri explicit host connection lifetime\""
+      },
+      {
+        "file": "apps/web/tests/meri-action-host.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #4",
+        "line": 317,
+        "nonblank": 119,
+        "fingerprint": "dd71c65c2a5c8dcb3d38e150e93f2b6e9e8a9c3194d3fa9ef28d36e99f109c79",
+        "parentKind": "CallExpression",
+        "callee": "describe",
+        "declarationTitle": "\"Meri scoped cache journal versus private host state\""
+      }
+    ]
+  },
+  {
+    "file": "apps/web/tests/meri-action-lifetime.test.ts",
+    "findings": []
+  },
+  {
+    "file": "apps/web/tests/meri-action-proxy.test.ts",
+    "findings": [
+      {
+        "file": "apps/web/tests/meri-action-proxy.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #2",
+        "line": 42,
+        "nonblank": 90,
+        "fingerprint": "b9af5b36f5f757188b08bf5d8545fb92e2c79e963026f03e97c6ffe432954652",
+        "parentKind": "CallExpression",
+        "callee": "describe",
+        "declarationTitle": "\"Meri action configuration and exact admission\""
+      },
+      {
+        "file": "apps/web/tests/meri-action-proxy.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #3",
+        "line": 133,
+        "nonblank": 185,
+        "fingerprint": "a7c580f4e30ba47547daad81f30ec27ef4fbc4361c1b2dec74623bc900d246f0",
+        "parentKind": "CallExpression",
+        "callee": "describe",
+        "declarationTitle": "\"Meri proxy credentials, response dispositions and bounded bodies\""
+      },
+      {
+        "file": "apps/web/tests/meri-action-proxy.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #4",
+        "line": 319,
+        "nonblank": 89,
+        "fingerprint": "fdfb1367fc9055cca78fb45c9e405981812fd6dbdb71fdc2dc46b4451cda5ae2",
+        "parentKind": "CallExpression",
+        "callee": "describe",
+        "declarationTitle": "\"Meri proxy request lifetime\""
+      }
+    ]
+  },
+  {
+    "file": "apps/web/tests/meri-action-session.test.ts",
+    "findings": [
+      {
+        "file": "apps/web/tests/meri-action-session.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #2",
+        "line": 51,
+        "nonblank": 124,
+        "fingerprint": "b8ac4e07f4a79b20459e0939db7675599fc01fff4fa5dc40652a4432ebc8b899",
+        "parentKind": "CallExpression",
+        "callee": "describe",
+        "declarationTitle": "\"Meri minimal server-selected session receipt\""
+      }
+    ]
+  },
+  {
+    "file": "apps/web/tests/meri-action-transport.test.ts",
+    "findings": [
+      {
+        "file": "apps/web/tests/meri-action-transport.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #3",
+        "line": 85,
+        "nonblank": 105,
+        "fingerprint": "d32ed4825ac4ec996bbd53eed1e20afcd4e2c955e83b79708c89ccc80af3d67a",
+        "parentKind": "CallExpression",
+        "callee": "describe",
+        "declarationTitle": "\"Meri streamed UTF-8 receiving bound\""
+      },
+      {
+        "file": "apps/web/tests/meri-action-transport.test.ts",
+        "kind": "function",
+        "symbol": "<anonymous> #5",
+        "line": 241,
+        "nonblank": 134,
+        "fingerprint": "4d0eb5078e7c3b1b5e1fbe056f1157b34f5121ef823c0ac0b8c738d072f9fd14",
+        "parentKind": "CallExpression",
+        "callee": "describe",
+        "declarationTitle": "\"Meri fixed authenticated action transport\""
+      }
+    ]
+  },
+  {
+    "file": "apps/web/test/action-workflow.test.mjs",
+    "findings": []
+  }
+]

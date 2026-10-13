@@ -1,0 +1,55 @@
+--- initial/apps/web/src/shared/session/ApplicationBoundary.tsx
++++ corrected/apps/web/src/shared/session/ApplicationBoundary.tsx
+@@ -69,26 +69,22 @@
+   const pathname = usePathname();
+   const search = useSearchParams();
+   const clientId = routeClientId(pathname, search);
+-  if (!isLoaded)
+-    if (isOnboardPath(pathname))
+-      return (
+-        <PublicSessionData key="loading-onboard" state="loading">
+-          {children}
+-        </PublicSessionData>
+-      );
++  if (!isLoaded && isOnboardPath(pathname))
++    return (
++      <PublicSessionData key="loading-onboard" state="loading">
++        {children}
++      </PublicSessionData>
++    );
+   if (!isLoaded)
+     return (
+       <SessionContext.Provider value="loading">
+         {children}
+       </SessionContext.Provider>
+     );
+-  if (!userId)
+-    if (isOnboardPath(pathname))
+-      return (
+-        <PublicSessionData key="signed-out-onboard">
+-          {children}
+-        </PublicSessionData>
+-      );
++  if (!userId && isOnboardPath(pathname))
++    return (
++      <PublicSessionData key="signed-out-onboard">{children}</PublicSessionData>
++    );
+   if (!userId)
+     return (
+       <SessionContext.Provider key="signed-out" value="signed-out">
+@@ -119,11 +115,10 @@
+   // Replacing that capability discards its private cache and pending observation.
+   if (isPublicOnboardPath(pathname))
+     return <PublicSessionData key={pathname}>{children}</PublicSessionData>;
+-  if (!publishableKey)
+-    if (isOnboardPath(pathname))
+-      return (
+-        <PublicSessionData state="unconfigured">{children}</PublicSessionData>
+-      );
++  if (!publishableKey && isOnboardPath(pathname))
++    return (
++      <PublicSessionData state="unconfigured">{children}</PublicSessionData>
++    );
+   if (!publishableKey)
+     return (
+       <SessionContext.Provider value="unconfigured">

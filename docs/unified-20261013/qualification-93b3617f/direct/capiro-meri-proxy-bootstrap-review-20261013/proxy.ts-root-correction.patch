@@ -1,0 +1,10 @@
+--- before/proxy.ts
++++ final/proxy.ts
+@@ -26,6 +26,7 @@
+   if (request.method !== "POST") return unavailable(405);
+   const url = new URL(request.url);
+   if (
++    url.pathname !== `/api/action-followthrough/${route}` ||
+     url.search ||
+     request.headers.get("origin") !== url.origin ||
+     request.headers.has("content-encoding")

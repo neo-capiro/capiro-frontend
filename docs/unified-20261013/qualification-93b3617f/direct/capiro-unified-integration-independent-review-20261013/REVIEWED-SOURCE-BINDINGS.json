@@ -1,0 +1,125 @@
+{
+  "source": "6a2e4aceaaa354a8edd9bf54e4148380ccbb1e32",
+  "records": [
+    {
+      "path": "package.json",
+      "blob": "8ff3a6d21dd28d80b213dbbda3c81b3380298411",
+      "bytes": 2034,
+      "sha256": "f6159deb8588ef341d6ea5f48cb3d68a1534217758c012a813975a2d9570e51d"
+    },
+    {
+      "path": "package-lock.json",
+      "blob": "7b742841df1791204318130acb939a29ddf4cfde",
+      "bytes": 512786,
+      "sha256": "ed73c829a32a24cf3794eae3f61fbebe135af410b66d2a1723254aabbb956574"
+    },
+    {
+      "path": "apps/web/package.json",
+      "blob": "cb490bbe3468f202f382616dbc23f32f7dc3bf71",
+      "bytes": 2050,
+      "sha256": "6de6b086942388fbdad21eca2f12bc1ba9f3a73f8ce9259249c46ffac3903134"
+    },
+    {
+      "path": "packages/meri-client/package.json",
+      "blob": "4398c8c665fa0981fbc3351629ae28b89ddedc5e",
+      "bytes": 1189,
+      "sha256": "e9915b6f417a60256ecccdc3a93a7e7075487bd2bd6cd0e5b6e46d05fc4957e0"
+    },
+    {
+      "path": "packages/qualification-transport/package.json",
+      "blob": "8d538fd01b47442fdec93c02743cee748b2c878e",
+      "bytes": 656,
+      "sha256": "042df808a11741b76bf6f95f1b1d4c79397d1d9f375084891ac9150989c74b89"
+    },
+    {
+      "path": "packages/qualification-newsletter/package.json",
+      "blob": "d5be2e8d2cda727027d93740e71763bdfa69d2ac",
+      "bytes": 657,
+      "sha256": "c4b89cc2a20b1cb6a195aaa8c27f70cb3bc0b97c9a8dfc845f24d853c86c0f11"
+    },
+    {
+      "path": "scripts/public-packages.mjs",
+      "blob": "4f370efe909dd6514a03fb5cb99e3ae40a795da2",
+      "bytes": 2958,
+      "sha256": "0379b346cbb5878351ed31ae816cb8dc173580029a9f5d309d151448b3cad6f5"
+    },
+    {
+      "path": "scripts/architecture/dependencies.mjs",
+      "blob": "f8442497cd605342f99c1a8f2941cd9c7add90fd",
+      "bytes": 6091,
+      "sha256": "dd868c86359ec2a9394ea93d4a3cf07a6d6ad169f0906913401acb1dd186510d"
+    },
+    {
+      "path": "scripts/architecture/scan.mjs",
+      "blob": "f18fed052b3c2a702e88d2f1bbd5cdf705b9f054",
+      "bytes": 4515,
+      "sha256": "7326fb690a8578e2cce8ce3a10b806c17039583c7479e2ec4c4c0b4d76548bc9"
+    },
+    {
+      "path": "scripts/architecture.test.mjs",
+      "blob": "0047a5bdefc6bfd4040896a390f7d92960e047a4",
+      "bytes": 22615,
+      "sha256": "cef6885b5a3c174c62a41657f92b803cdf6b599a8dd0eab6c7d5193a789f2ed5"
+    },
+    {
+      "path": "scripts/architecture-onboard.test.mjs",
+      "blob": "2158eea8a326b463a46680b506e8c9249b58da3e",
+      "bytes": 2316,
+      "sha256": "02ecd7b2953cc01895c88aae3d96fffa708fff37cff5c51d26cae79338d30fb6"
+    },
+    {
+      "path": "scripts/architecture-meri-actions.test.mjs",
+      "blob": "3118faa5a8700e0b2247e2929e325d529afe26ad",
+      "bytes": 2162,
+      "sha256": "9bd092caad006e1bc5f9e92a770514c9845d3a1e9dee82aa1c5b4fd54c2074fd"
+    },
+    {
+      "path": "scripts/architecture/reviewed-size-findings.json",
+      "blob": "b5baeec151deeca7325d11a20403ef6848921e59",
+      "bytes": 174812,
+      "sha256": "77d03bf9a2f31a66e2a9c66d2e558405709bc7f5d892bd3bf8b56d939e506344"
+    },
+    {
+      "path": "apps/web/test/browser/main.tsx",
+      "blob": "74a2d5aa5061e7f3445ff69e7498e2f886a8139e",
+      "bytes": 5767,
+      "sha256": "6e3d15d564a2914d804f09e5120579970898b5a386d6c5187a1f4088f6716460"
+    },
+    {
+      "path": "apps/web/test/browser/server.mjs",
+      "blob": "637ce48de9a24df3bb7636d0ee8dbbc25b7abfc7",
+      "bytes": 1870,
+      "sha256": "267b9712b997b5ed25a8ced02e49bc7303ff8457027466aaa9c11aba35e1e307"
+    },
+    {
+      "path": "apps/web/test/browser/clerk.tsx",
+      "blob": "d87308380adc45b739e4c6f7f1a6db6a9d43681e",
+      "bytes": 2308,
+      "sha256": "51b280b7f57594a3fcb46c76454502a60a919f53815bc3f3bb2a16411fc0ae80"
+    },
+    {
+      "path": "apps/web/test/browser/navigation.tsx",
+      "blob": "5e9f0163e1c86d3c1f3b1879b3d8c5ba29918105",
+      "bytes": 1622,
+      "sha256": "39e427cd9a9158262dd4191a99d8ee3b6332e520b34cf65f97bafc451fdaa10e"
+    },
+    {
+      "path": "apps/web/src/proxy.ts",
+      "blob": "63b2dd41583f9523f421049bd1556f07516be75b",
+      "bytes": 1469,
+      "sha256": "904e5ee690d80902056606222c1fc772486d11b990ba86cd2f6d27ca86baeaec"
+    },
+    {
+      "path": "apps/web/src/shared/session/ApplicationBoundary.tsx",
+      "blob": "e2a61f24fdef5faaf12c9f099e6f88427b1eb607",
+      "bytes": 4336,
+      "sha256": "036d9ec40090252c9d67a0ef552709fec2d6cac1fafb6143db5fb7556b311a1b"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/registry.test.ts",
+      "blob": "70372a53e70af779647d70c60f605160b811bf21",
+      "bytes": 2379,
+      "sha256": "29a06b526f0b6e62a9e64586772c09e3db0f6443a7df4dc82968865820f6b47b"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "atUTC": "2026-10-13T06:09:58.346124+00:00",
+  "status": "SEALED_READ_ONLY_STATIC_REVIEW",
+  "source": "6a2e4aceaaa354a8edd9bf54e4148380ccbb1e32",
+  "fileCount": 20,
+  "bytes": 592377,
+  "files": [
+    {
+      "path": "FINAL-BINDING-CHECK.json",
+      "bytes": 862,
+      "sha256": "8241771a918e3620078121ac0e6d9a3b814d71e675923e13882cb98e9a60cfbe"
+    },
+    {
+      "path": "FINDINGS.json",
+      "bytes": 1124,
+      "sha256": "e9413eb22160dfeab015c65f7288a815b262b30de1b42552d21506eff685d5dc"
+    },
+    {
+      "path": "INPUTS-VERIFICATION.json",
+      "bytes": 34328,
+      "sha256": "6e8ac017e99a80fa90502c1662e02cb8c346158c2f70e67c28ce04c2a65c3bc0"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 5493,
+      "sha256": "74d4e932c49a969c556ce86e699417054e3b63e805a6e75b06ef5ad50460e157"
+    },
+    {
+      "path": "REVIEWED-SOURCE-BINDINGS.json",
+      "bytes": 4608,
+      "sha256": "5c0f492ccc8f6138355fe8345ffb7cdb82494110426ecf642270d81428bdb662"
+    },
+    {
+      "path": "TEST-BINDINGS.json",
+      "bytes": 478141,
+      "sha256": "8f1be7d740905b446698aadff0ab745253ffbd2c87ea523363f5a44c10a26d9e"
+    },
+    {
+      "path": "UNION-VERIFICATION.json",
+      "bytes": 20512,
+      "sha256": "4c30c55b290387ebb247e6a828f20aa20db9824674c689dbe349927c7118dfc0"
+    },
+    {
+      "path": "assertion-union.diff",
+      "bytes": 2358,
+      "sha256": "03d6d7138bbe9fb9490edff587362ee9e547cd94ef06ffc6ca8f2fdccbc413ab"
+    },
+    {
+      "path": "final-binding-harness-attempt.txt",
+      "bytes": 341,
+      "sha256": "b32d6824123b44b5c3bdaf418f6a81b62752a2e82b92fa25ee34c45f1c83b90e"
+    },
+    {
+      "path": "final-registry-retirement.diff",
+      "bytes": 2749,
+      "sha256": "439adbac02589e07a57ceca95ab44959bc6cde451b9bae21715be7b05e296835"
+    },
+    {
+      "path": "meri-union-remerge.diff",
+      "bytes": 5756,
+      "sha256": "591c14f0755c3e4db96f3c4f3b63f732d27fbca0cacd53de2239f753a2d961ec"
+    },
+    {
+      "path": "newsletter-onboard-remerge.diff",
+      "bytes": 2279,
+      "sha256": "5729162d33dd39fad7f92011264ccf88d16727ea6eb13a7b66cd529cc62d57b7"
+    },
+    {
+      "path": "rule-union-vs-meri.diff",
+      "bytes": 9445,
+      "sha256": "f16f49b03464600312cab47200e25a3de905599d602741e400b76f6b416d7d25"
+    },
+    {
+      "path": "rule-union-vs-onboard.diff",
+      "bytes": 2158,
+      "sha256": "41574669480fca877384ceec41f15f9830072f9a82febb437fa77b0c455b40cc"
+    },
+    {
+      "path": "verify-final-bindings.log",
+      "bytes": 862,
+      "sha256": "8241771a918e3620078121ac0e6d9a3b814d71e675923e13882cb98e9a60cfbe"
+    },
+    {
+      "path": "verify-final-bindings.py",
+      "bytes": 4241,
+      "sha256": "4b93602e38d43e342d25635160b30c7714939e6bb54af9f7b8b07c7ed31fb604"
+    },
+    {
+      "path": "verify-inputs.log",
+      "bytes": 4124,
+      "sha256": "64f3b0c69d0ac1896b70fec46761b17b2ad0fd70f0bfe593fcde67600de1a168"
+    },
+    {
+      "path": "verify-inputs.py",
+      "bytes": 3636,
+      "sha256": "5e1ae23677afb4e240d78733c4e9df387e6b21796e5ccb272cc2a1d756d3adae"
+    },
+    {
+      "path": "verify-union.log",
+      "bytes": 2976,
+      "sha256": "b32c4c82e9ad7fd2455bbb6c8c8c10f414b95c83d919e8636bb9d5ebfeb16a4c"
+    },
+    {
+      "path": "verify-union.py",
+      "bytes": 6384,
+      "sha256": "2418784f40f135935bd0168fd6c52cc5573a28da6b2f6773f82d7dbd378855c3"
+    }
+  ]
+}

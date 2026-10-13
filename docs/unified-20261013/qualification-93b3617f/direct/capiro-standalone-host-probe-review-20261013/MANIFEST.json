@@ -1,0 +1,130 @@
+{
+  "sealedAtUTC": "2026-10-13T06:30:03.263922+00:00",
+  "entries": [
+    {
+      "path": "REPORT.md",
+      "bytes": 3346,
+      "sha256": "89c11907865084c5af1a8e4d6d3b711d23215ace3b4b1393295c37c3599af1d1"
+    },
+    {
+      "path": "assertion-preservation.json",
+      "bytes": 5024,
+      "sha256": "8cb4140c0b7bbfedaa7c378c21acb99c23343bb397444ff4d93b86284f339122"
+    },
+    {
+      "path": "evidence/actual-additions/results.json",
+      "bytes": 3080,
+      "sha256": "0a41330749c7c1f4cf656f15502ee6c278831869714883aa3214c4942c3de057"
+    },
+    {
+      "path": "evidence/actual-additions-exit.json",
+      "bytes": 843,
+      "sha256": "b340464997a66a9cac697dfee1e6c4b7239624e70640f9fa32838ff285872a55"
+    },
+    {
+      "path": "evidence/actual-additions-v2/results.json",
+      "bytes": 5178,
+      "sha256": "a7247c26aa741a3bfa0f72e42a22565cbb7427e844fa0351655a436f6b182dc6"
+    },
+    {
+      "path": "evidence/actual-additions-v2/standalone.log",
+      "bytes": 147,
+      "sha256": "1fb0278dec1db2aef66d951b30910680cc3d3de170f07bdab0c84a200e1bc4f3"
+    },
+    {
+      "path": "evidence/actual-additions-v2-exit.json",
+      "bytes": 848,
+      "sha256": "389c547721ee42c69b26c1aaf435e2701bb32734519f3479695c6b47805d8edd"
+    },
+    {
+      "path": "evidence/actual-additions-v2.log",
+      "bytes": 50,
+      "sha256": "382445da77d013e284317b639d09caa5481911c8e990d3c9ef4fb9ff7df8a30d"
+    },
+    {
+      "path": "evidence/actual-additions.log",
+      "bytes": 471,
+      "sha256": "34c4173df87a5a1d9c7c5abb9f87888c3e6e8f52b31d8e4c03e6650563caae62"
+    },
+    {
+      "path": "evidence/origin-diagnostic/results.json",
+      "bytes": 734,
+      "sha256": "2c34c3069448d7e9f2f43813c6f038cfede81a2a0408c5c2cb6f2e7f73662dba"
+    },
+    {
+      "path": "evidence/origin-diagnostic/standalone.log",
+      "bytes": 1707,
+      "sha256": "b26c568dfae62f8bc859d4ed89744f3c5e8a0f3fb97b1659db04b42e093ca758"
+    },
+    {
+      "path": "evidence/origin-diagnostic-v2/results.json",
+      "bytes": 833,
+      "sha256": "4cb334f8f50a126ee8afeed44be880fbd943d8a49f329fb8d00d83a4f4e31139"
+    },
+    {
+      "path": "evidence/origin-diagnostic-v2/standalone.log",
+      "bytes": 1115,
+      "sha256": "5c805f886bbcb6756b95558e879502dd560485c0b0a4acd1a77aee347861fa84"
+    },
+    {
+      "path": "evidence/origin-diagnostic-v2.mjs",
+      "bytes": 3054,
+      "sha256": "126223f672e704f8b811df837dbee6f731f7db18980eb62cf2bc87e379d0ea53"
+    },
+    {
+      "path": "evidence/origin-diagnostic.mjs",
+      "bytes": 3048,
+      "sha256": "f58c6cd02ec8ec2449691be575a27e302bebe3cc168413f1bfd9b7c1dcc43966"
+    },
+    {
+      "path": "evidence/request-origin-probe-v2.mjs",
+      "bytes": 396,
+      "sha256": "308582fe22a8e7f33d244d2fe6191b4ae3e35c0b9002ddcde60d478b635a2656"
+    },
+    {
+      "path": "evidence/request-origin-probe.mjs",
+      "bytes": 374,
+      "sha256": "ed69528fb7147df643bfc555106982d76df9d541e1b8971ce8a1ba61126ace29"
+    },
+    {
+      "path": "evidence/verify-additions-v2.mjs",
+      "bytes": 7153,
+      "sha256": "de5ba2d2e83d761389b4d7cb7d7ee49c0dadb57bd15ee3ea28f0374d432fb2cd"
+    },
+    {
+      "path": "evidence/verify-additions.mjs",
+      "bytes": 6696,
+      "sha256": "d38d231956cc2c8886bb4ee4450870e196293bcee96fcfe5a5b1892772422758"
+    },
+    {
+      "path": "probe-delta.patch",
+      "bytes": 3092,
+      "sha256": "9b799b4b28239e7efb0e5ccaa2fb98d3f1a964b115ec535b3e9cad52ee4342e8"
+    },
+    {
+      "path": "review.json",
+      "bytes": 6588,
+      "sha256": "b6d9e11747a60f185ea8a016952df834286152c7c51b36e1f3ce9676a2ca40e3"
+    },
+    {
+      "path": "source/apps/web/src/shared/meri-actions/proxy.ts",
+      "bytes": 2843,
+      "sha256": "6046d58306b2c5694f618a2331dda4ea26baae64e12ecc6b94b6feec1973fcb4"
+    },
+    {
+      "path": "source/node_modules/next/dist/server/web/next-url.js",
+      "bytes": 7302,
+      "sha256": "701e9cf955c715b68467a5c5af7c42416282e9d0860e901ae08450ee7b1bc950"
+    },
+    {
+      "path": "source/node_modules/next/dist/server/web/spec-extension/request.js",
+      "bytes": 3168,
+      "sha256": "2490a352d271fb39e1fccce06ee6887999dffa7909ccfd5ca0cc8bab8008065b"
+    },
+    {
+      "path": "source/node_modules/next/package.json",
+      "bytes": 3188,
+      "sha256": "440efba874450dc997b2c3bf9efa4c3c4835abbc40d65442e94a7c69f4bad031"
+    }
+  ]
+}

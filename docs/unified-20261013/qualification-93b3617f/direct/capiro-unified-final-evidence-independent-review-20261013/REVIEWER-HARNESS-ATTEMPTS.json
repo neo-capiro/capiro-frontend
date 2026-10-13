@@ -1,0 +1,9 @@
+[
+  {
+    "attempt": 1,
+    "status": "VERIFIER_SETUP_ERROR",
+    "error": "TypeError: int object is not iterable in manifest-entry enumeration",
+    "cause": "Compatibility packet uses numeric files count plus records list, unlike other manifest schemas.",
+    "productOrGateFailure": false
+  }
+]

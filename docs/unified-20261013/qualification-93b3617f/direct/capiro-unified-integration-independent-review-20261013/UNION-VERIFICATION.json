@@ -1,0 +1,633 @@
+{
+  "atUTC": "2026-10-13T06:05:40.628012+00:00",
+  "initial": "e22cd4c29d3d112486622051a4c1ea2424527221",
+  "final": "6a2e4aceaaa354a8edd9bf54e4148380ccbb1e32",
+  "changedPaths": [
+    "docs/unified-20261013/SUPERSEDED-REVIEW.json",
+    "scripts/architecture/reviewed-size-findings.json"
+  ],
+  "rootTree": "482be7b361374bdff7ea7d9c577a2b3238e2a994",
+  "appTree": "135aee939303b7ff142b89326b8bea4ee8485ed2",
+  "srcTree": "123a4305c770cc679cbe1a45d8062e1ca85821ac",
+  "applicationUnchanged": true,
+  "packages": [
+    {
+      "manifest": "meri-public-packages.json",
+      "file": "capiro-meri-contracts-0.1.0.tgz",
+      "sourceCommit": "0dc9ce423947fc7814d7f8ad8de2f633c187c6d8",
+      "bytes": 48823,
+      "sha256": "2f15ade9458cbffe960b7cc36c6fb77cb54cc2a0eca4bc7c0f918b77cfacd4ee",
+      "matchesManifest": true,
+      "entryCount": 11,
+      "matchesDeclaredEntryCount": true,
+      "packageName": "@capiro/meri-contracts",
+      "packageVersion": "0.1.0",
+      "exports": {
+        ".": {
+          "types": "./dist/index.d.ts",
+          "default": "./dist/browser.mjs"
+        },
+        "./browser": {
+          "types": "./dist/browser.d.ts",
+          "default": "./dist/browser.mjs"
+        },
+        "./node": "./validate.mjs",
+        "./metadata": {
+          "types": "./dist/metadata.d.ts",
+          "default": "./dist/metadata.mjs"
+        },
+        "./schema": "./meri.schema.json"
+      },
+      "dependencies": {
+        "ajv": "8.20.0",
+        "ajv-formats": "3.0.1",
+        "canonicalize": "5.1.0"
+      },
+      "peerDependencies": {},
+      "lockBindings": [
+        {
+          "path": "node_modules/@capiro/meri-contracts",
+          "version": "0.1.0",
+          "integrityMatch": true
+        }
+      ]
+    },
+    {
+      "manifest": "meri-public-packages.json",
+      "file": "capiro-meri-ui-stream-0.1.0.tgz",
+      "sourceCommit": "12289a434be6f589bbff9c741367b8cfb77f2616",
+      "bytes": 2280,
+      "sha256": "7ce24acd465dca4c5e90c1c98dba383318aab024dbce5170fa1f1daf3bce83ab",
+      "matchesManifest": true,
+      "entryCount": 6,
+      "matchesDeclaredEntryCount": true,
+      "packageName": "@capiro/meri-ui-stream",
+      "packageVersion": "0.1.0",
+      "exports": {
+        ".": {
+          "types": "./dist/producer.d.ts",
+          "default": "./dist/producer.js"
+        },
+        "./protocol": {
+          "types": "./dist/protocol.d.ts",
+          "default": "./dist/protocol.js"
+        }
+      },
+      "dependencies": {},
+      "peerDependencies": {
+        "@capiro/meri-contracts": "0.1.0",
+        "ai": "7.0.137"
+      },
+      "lockBindings": [
+        {
+          "path": "node_modules/@capiro/meri-ui-stream",
+          "version": "0.1.0",
+          "integrityMatch": true
+        }
+      ]
+    },
+    {
+      "manifest": "meri-public-packages.json",
+      "file": "capiro-meri-contracts-0.1.1.tgz",
+      "sourceCommit": "83d1d8b2ae4604ca259be17461ae71ca60f5fb6e",
+      "bytes": 175627,
+      "sha256": "0ca8d0552a2960157ebdf7b8cecf6cacdcda48ef91c475060a54f15192535651",
+      "matchesManifest": true,
+      "entryCount": 15,
+      "matchesDeclaredEntryCount": true,
+      "packageName": "@capiro/meri-contracts",
+      "packageVersion": "0.1.1",
+      "exports": {
+        ".": {
+          "types": "./dist/index.d.ts",
+          "default": "./dist/browser.mjs"
+        },
+        "./browser": {
+          "types": "./dist/browser.d.ts",
+          "default": "./dist/browser.mjs"
+        },
+        "./node": "./validate.mjs",
+        "./metadata": {
+          "types": "./dist/metadata.d.ts",
+          "default": "./dist/metadata.mjs"
+        },
+        "./schema": "./meri.schema.json",
+        "./action-application": {
+          "types": "./dist/action-application.d.ts",
+          "default": "./dist/action-application.mjs"
+        },
+        "./action-application/schema": "./dist/action-application.schema.json"
+      },
+      "dependencies": {
+        "ajv": "8.20.0",
+        "ajv-formats": "3.0.1",
+        "canonicalize": "5.1.0"
+      },
+      "peerDependencies": {},
+      "lockBindings": [
+        {
+          "path": "apps/web/node_modules/@capiro/meri-contracts",
+          "version": "0.1.1",
+          "integrityMatch": true
+        }
+      ]
+    },
+    {
+      "manifest": "newsletter-public-packages.json",
+      "file": "capiro-shared-0.0.0.tgz",
+      "sourceCommit": "fe50dc1c2de1660a036e338cf81acdcf0f2fb26a",
+      "bytes": 510772,
+      "sha256": "697d826647e88e7f8559da386be7de1ae6408dc61c73877b86c2e17275fd63ab",
+      "matchesManifest": true,
+      "entryCount": 182,
+      "matchesDeclaredEntryCount": true,
+      "packageName": "@capiro/shared",
+      "packageVersion": "0.0.0",
+      "exports": {
+        "./ai-model-policy": {
+          "types": "./dist/ai-model-policy.d.ts",
+          "require": "./dist/ai-model-policy.js",
+          "import": "./dist/ai-model-policy.js",
+          "default": "./dist/ai-model-policy.js"
+        },
+        "./client-registration-integrity": {
+          "types": "./dist/client-registration-integrity.d.ts",
+          "require": "./dist/client-registration-integrity.js",
+          "import": "./dist/client-registration-integrity.js",
+          "default": "./dist/client-registration-integrity.js"
+        },
+        ".": {
+          "types": "./dist/index.d.ts",
+          "require": "./dist/index.js",
+          "import": "./dist/index.js",
+          "default": "./dist/index.js"
+        },
+        "./money": {
+          "types": "./dist/money.d.ts",
+          "require": "./dist/money.js",
+          "import": "./dist/money.js",
+          "default": "./dist/money.js"
+        },
+        "./funding-claim": {
+          "types": "./dist/funding-claim.d.ts",
+          "require": "./dist/funding-claim.js",
+          "import": "./dist/funding-claim.js",
+          "default": "./dist/funding-claim.js"
+        },
+        "./defense-budget-line": {
+          "types": "./dist/defense-budget-line.d.ts",
+          "require": "./dist/defense-budget-line.js",
+          "import": "./dist/defense-budget-line.js",
+          "default": "./dist/defense-budget-line.js"
+        },
+        "./pe-source-coverage": {
+          "types": "./dist/pe-source-coverage.d.ts",
+          "require": "./dist/pe-source-coverage.js",
+          "import": "./dist/pe-source-coverage.js",
+          "default": "./dist/pe-source-coverage.js"
+        },
+        "./meri-skills": {
+          "types": "./dist/meri-skills.d.ts",
+          "require": "./dist/meri-skills.js",
+          "import": "./dist/meri-skills.js",
+          "default": "./dist/meri-skills.js"
+        },
+        "./meri-read-outcome": {
+          "types": "./dist/meri-read-outcome.d.ts",
+          "require": "./dist/meri-read-outcome.js",
+          "import": "./dist/meri-read-outcome.js",
+          "default": "./dist/meri-read-outcome.js"
+        },
+        "./market-title": {
+          "types": "./dist/market-title.d.ts",
+          "require": "./dist/market-title.js",
+          "import": "./dist/market-title.js",
+          "default": "./dist/market-title.js"
+        },
+        "./newsletter": {
+          "types": "./dist/newsletter.d.ts",
+          "require": "./dist/newsletter.js",
+          "import": "./dist/newsletter.js",
+          "default": "./dist/newsletter.js"
+        },
+        "./newsletter-render": {
+          "types": "./dist/newsletter-render.d.ts",
+          "require": "./dist/newsletter-render.js",
+          "import": "./dist/newsletter-render.js",
+          "default": "./dist/newsletter-render.js"
+        }
+      },
+      "dependencies": {},
+      "peerDependencies": {},
+      "lockBindings": []
+    },
+    {
+      "manifest": "newsletter-public-packages.json",
+      "file": "capiro-shared-0.0.0-38fec5c8.tgz",
+      "sourceCommit": "38fec5c83585850ed75a7d3693b3b90d517e70af",
+      "bytes": 532178,
+      "sha256": "3e435f280fac8fd301eb753e9fc7ead93691cf979fc1641792fedd88e1bfd6d5",
+      "matchesManifest": true,
+      "entryCount": 187,
+      "matchesDeclaredEntryCount": true,
+      "packageName": "@capiro/shared",
+      "packageVersion": "0.0.0",
+      "exports": {
+        "./ai-model-policy": {
+          "types": "./dist/ai-model-policy.d.ts",
+          "require": "./dist/ai-model-policy.js",
+          "import": "./dist/ai-model-policy.js",
+          "default": "./dist/ai-model-policy.js"
+        },
+        "./client-registration-integrity": {
+          "types": "./dist/client-registration-integrity.d.ts",
+          "require": "./dist/client-registration-integrity.js",
+          "import": "./dist/client-registration-integrity.js",
+          "default": "./dist/client-registration-integrity.js"
+        },
+        ".": {
+          "types": "./dist/index.d.ts",
+          "require": "./dist/index.js",
+          "import": "./dist/index.js",
+          "default": "./dist/index.js"
+        },
+        "./money": {
+          "types": "./dist/money.d.ts",
+          "require": "./dist/money.js",
+          "import": "./dist/money.js",
+          "default": "./dist/money.js"
+        },
+        "./funding-claim": {
+          "types": "./dist/funding-claim.d.ts",
+          "require": "./dist/funding-claim.js",
+          "import": "./dist/funding-claim.js",
+          "default": "./dist/funding-claim.js"
+        },
+        "./defense-budget-line": {
+          "types": "./dist/defense-budget-line.d.ts",
+          "require": "./dist/defense-budget-line.js",
+          "import": "./dist/defense-budget-line.js",
+          "default": "./dist/defense-budget-line.js"
+        },
+        "./pe-source-coverage": {
+          "types": "./dist/pe-source-coverage.d.ts",
+          "require": "./dist/pe-source-coverage.js",
+          "import": "./dist/pe-source-coverage.js",
+          "default": "./dist/pe-source-coverage.js"
+        },
+        "./meri-skills": {
+          "types": "./dist/meri-skills.d.ts",
+          "require": "./dist/meri-skills.js",
+          "import": "./dist/meri-skills.js",
+          "default": "./dist/meri-skills.js"
+        },
+        "./meri-read-outcome": {
+          "types": "./dist/meri-read-outcome.d.ts",
+          "require": "./dist/meri-read-outcome.js",
+          "import": "./dist/meri-read-outcome.js",
+          "default": "./dist/meri-read-outcome.js"
+        },
+        "./market-title": {
+          "types": "./dist/market-title.d.ts",
+          "require": "./dist/market-title.js",
+          "import": "./dist/market-title.js",
+          "default": "./dist/market-title.js"
+        },
+        "./newsletter": {
+          "types": "./dist/newsletter.d.ts",
+          "require": "./dist/newsletter.js",
+          "import": "./dist/newsletter.js",
+          "default": "./dist/newsletter.js"
+        },
+        "./newsletter-render": {
+          "types": "./dist/newsletter-render.d.ts",
+          "require": "./dist/newsletter-render.js",
+          "import": "./dist/newsletter-render.js",
+          "default": "./dist/newsletter-render.js"
+        }
+      },
+      "dependencies": {},
+      "peerDependencies": {},
+      "lockBindings": [
+        {
+          "path": "node_modules/@capiro/shared",
+          "version": "0.0.0",
+          "integrityMatch": true
+        }
+      ]
+    },
+    {
+      "manifest": "onboard-public-packages.json",
+      "file": "capiro-shared-0.0.0-38fec5c8.tgz",
+      "sourceCommit": "38fec5c83585850ed75a7d3693b3b90d517e70af",
+      "bytes": 532178,
+      "sha256": "3e435f280fac8fd301eb753e9fc7ead93691cf979fc1641792fedd88e1bfd6d5",
+      "matchesManifest": true,
+      "entryCount": 187,
+      "matchesDeclaredEntryCount": true,
+      "packageName": "@capiro/shared",
+      "packageVersion": "0.0.0",
+      "exports": {
+        "./ai-model-policy": {
+          "types": "./dist/ai-model-policy.d.ts",
+          "require": "./dist/ai-model-policy.js",
+          "import": "./dist/ai-model-policy.js",
+          "default": "./dist/ai-model-policy.js"
+        },
+        "./client-registration-integrity": {
+          "types": "./dist/client-registration-integrity.d.ts",
+          "require": "./dist/client-registration-integrity.js",
+          "import": "./dist/client-registration-integrity.js",
+          "default": "./dist/client-registration-integrity.js"
+        },
+        ".": {
+          "types": "./dist/index.d.ts",
+          "require": "./dist/index.js",
+          "import": "./dist/index.js",
+          "default": "./dist/index.js"
+        },
+        "./money": {
+          "types": "./dist/money.d.ts",
+          "require": "./dist/money.js",
+          "import": "./dist/money.js",
+          "default": "./dist/money.js"
+        },
+        "./funding-claim": {
+          "types": "./dist/funding-claim.d.ts",
+          "require": "./dist/funding-claim.js",
+          "import": "./dist/funding-claim.js",
+          "default": "./dist/funding-claim.js"
+        },
+        "./defense-budget-line": {
+          "types": "./dist/defense-budget-line.d.ts",
+          "require": "./dist/defense-budget-line.js",
+          "import": "./dist/defense-budget-line.js",
+          "default": "./dist/defense-budget-line.js"
+        },
+        "./pe-source-coverage": {
+          "types": "./dist/pe-source-coverage.d.ts",
+          "require": "./dist/pe-source-coverage.js",
+          "import": "./dist/pe-source-coverage.js",
+          "default": "./dist/pe-source-coverage.js"
+        },
+        "./meri-skills": {
+          "types": "./dist/meri-skills.d.ts",
+          "require": "./dist/meri-skills.js",
+          "import": "./dist/meri-skills.js",
+          "default": "./dist/meri-skills.js"
+        },
+        "./meri-read-outcome": {
+          "types": "./dist/meri-read-outcome.d.ts",
+          "require": "./dist/meri-read-outcome.js",
+          "import": "./dist/meri-read-outcome.js",
+          "default": "./dist/meri-read-outcome.js"
+        },
+        "./market-title": {
+          "types": "./dist/market-title.d.ts",
+          "require": "./dist/market-title.js",
+          "import": "./dist/market-title.js",
+          "default": "./dist/market-title.js"
+        },
+        "./newsletter": {
+          "types": "./dist/newsletter.d.ts",
+          "require": "./dist/newsletter.js",
+          "import": "./dist/newsletter.js",
+          "default": "./dist/newsletter.js"
+        },
+        "./newsletter-render": {
+          "types": "./dist/newsletter-render.d.ts",
+          "require": "./dist/newsletter-render.js",
+          "import": "./dist/newsletter-render.js",
+          "default": "./dist/newsletter-render.js"
+        }
+      },
+      "dependencies": {},
+      "peerDependencies": {},
+      "lockBindings": [
+        {
+          "path": "node_modules/@capiro/shared",
+          "version": "0.0.0",
+          "integrityMatch": true
+        }
+      ]
+    }
+  ],
+  "allArtifactBindingsMatch": true,
+  "lockNonDevFlagDrift": [],
+  "intentionalDevFlagPromotions": [
+    {
+      "lane": "newsletter",
+      "path": "node_modules/js-tokens",
+      "beforeDev": true,
+      "afterDev": null
+    },
+    {
+      "lane": "newsletter",
+      "path": "node_modules/loose-envify",
+      "beforeDev": true,
+      "afterDev": null
+    },
+    {
+      "lane": "newsletter",
+      "path": "node_modules/object-assign",
+      "beforeDev": true,
+      "afterDev": null
+    },
+    {
+      "lane": "newsletter",
+      "path": "node_modules/prop-types",
+      "beforeDev": true,
+      "afterDev": null
+    },
+    {
+      "lane": "newsletter",
+      "path": "node_modules/react-is",
+      "beforeDev": true,
+      "afterDev": null
+    },
+    {
+      "lane": "shipping",
+      "path": "node_modules/js-tokens",
+      "beforeDev": true,
+      "afterDev": null
+    },
+    {
+      "lane": "shipping",
+      "path": "node_modules/loose-envify",
+      "beforeDev": true,
+      "afterDev": null
+    },
+    {
+      "lane": "shipping",
+      "path": "node_modules/object-assign",
+      "beforeDev": true,
+      "afterDev": null
+    },
+    {
+      "lane": "shipping",
+      "path": "node_modules/prop-types",
+      "beforeDev": true,
+      "afterDev": null
+    },
+    {
+      "lane": "shipping",
+      "path": "node_modules/react-is",
+      "beforeDev": true,
+      "afterDev": null
+    },
+    {
+      "lane": "meri_actions",
+      "path": "node_modules/js-tokens",
+      "beforeDev": true,
+      "afterDev": null
+    },
+    {
+      "lane": "meri_actions",
+      "path": "node_modules/loose-envify",
+      "beforeDev": true,
+      "afterDev": null
+    },
+    {
+      "lane": "meri_actions",
+      "path": "node_modules/object-assign",
+      "beforeDev": true,
+      "afterDev": null
+    },
+    {
+      "lane": "meri_actions",
+      "path": "node_modules/prop-types",
+      "beforeDev": true,
+      "afterDev": null
+    },
+    {
+      "lane": "meri_actions",
+      "path": "node_modules/react-is",
+      "beforeDev": true,
+      "afterDev": null
+    }
+  ],
+  "webDependencyUnionConflicts": [],
+  "webDependencyInputPreservation": [
+    {
+      "lane": "newsletter",
+      "section": "dependencies",
+      "allExact": true
+    },
+    {
+      "lane": "newsletter",
+      "section": "devDependencies",
+      "allExact": true
+    },
+    {
+      "lane": "shipping",
+      "section": "dependencies",
+      "allExact": true
+    },
+    {
+      "lane": "shipping",
+      "section": "devDependencies",
+      "allExact": true
+    },
+    {
+      "lane": "onboard",
+      "section": "dependencies",
+      "allExact": true
+    },
+    {
+      "lane": "onboard",
+      "section": "devDependencies",
+      "allExact": true
+    },
+    {
+      "lane": "meri_actions",
+      "section": "dependencies",
+      "allExact": true
+    },
+    {
+      "lane": "meri_actions",
+      "section": "devDependencies",
+      "allExact": true
+    }
+  ],
+  "extraWebDependencies": [],
+  "reviews": {
+    "beforeCount": 241,
+    "afterCount": 240,
+    "removed": [
+      {
+        "file": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
+        "kind": "function",
+        "symbol": "WorkspaceScreen",
+        "fingerprint": "deee3d7a09db876ddbcb2a280bbaa1c34c1fa5c866e741c48b24c330fa82e11c",
+        "reason": "This existing Workspace view dispatcher gains one validated prospect query branch and delegates list/create and the canonical editor. Invalid prospect IDs fail closed and URL navigation owns prospect/draft selection. Existing library/workflows/share routes retain their owners; there is no feature import across Portfolio/Modules or duplicate editor.",
+        "reviewedBy": "Codex shared frontend integration owner (source review)",
+        "reviewedOn": "2026-10-12"
+      }
+    ],
+    "added": [],
+    "removedExactlyArchived": true,
+    "remainingDuplicateKeys": [],
+    "inputPreservation": {
+      "newsletter": {
+        "records": 189,
+        "missingOrChangedOutsideExactHistoricalRetirement": []
+      },
+      "shipping": {
+        "records": 173,
+        "missingOrChangedOutsideExactHistoricalRetirement": []
+      },
+      "onboard": {
+        "records": 208,
+        "missingOrChangedOutsideExactHistoricalRetirement": []
+      },
+      "meri_actions": {
+        "records": 189,
+        "missingOrChangedOutsideExactHistoricalRetirement": []
+      }
+    }
+  },
+  "additionalTrees": [
+    {
+      "lane": "newsletter",
+      "path": "packages/qualification-newsletter",
+      "sourceTree": "8134dfd7ed9b8cb1764930679e86d41ff65840fe",
+      "finalTree": "8134dfd7ed9b8cb1764930679e86d41ff65840fe",
+      "identical": true
+    },
+    {
+      "lane": "newsletter",
+      "path": "apps/web/public/newsletter-assets",
+      "status": "PATH_ABSENT_DO_NOT_INFER_PRESERVATION"
+    },
+    {
+      "lane": "onboard",
+      "path": "apps/web/public/onboard",
+      "sourceTree": "8b93dd298af10823d0f94bbfb6344e9fd4d30ee6",
+      "finalTree": "8b93dd298af10823d0f94bbfb6344e9fd4d30ee6",
+      "identical": true
+    },
+    {
+      "lane": "meri_actions",
+      "path": "packages/meri-client",
+      "sourceTree": "41e551a710d86cef2deb1b08e79db8cf9f99b7de",
+      "finalTree": "41e551a710d86cef2deb1b08e79db8cf9f99b7de",
+      "identical": true
+    },
+    {
+      "lane": "meri_actions",
+      "path": "packages/qualification-transport",
+      "sourceTree": "bee971dc07c6c391a9190ae58d9b55c39103d999",
+      "finalTree": "bee971dc07c6c391a9190ae58d9b55c39103d999",
+      "identical": true
+    },
+    {
+      "lane": "meri_actions",
+      "path": "packages/qualification-elements",
+      "sourceTree": "93257e608de459508167ea4a1660a3ae0d785fdd",
+      "finalTree": "93257e608de459508167ea4a1660a3ae0d785fdd",
+      "identical": true
+    }
+  ],
+  "workingHead": "6a2e4aceaaa354a8edd9bf54e4148380ccbb1e32",
+  "workingStatus": ""
+}

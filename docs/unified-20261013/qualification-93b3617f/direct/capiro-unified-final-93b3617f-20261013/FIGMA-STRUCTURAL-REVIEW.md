@@ -1,0 +1,18 @@
+# Frozen-source Figma structural comparison
+
+Reviewed runtime `93b3617f5d0599f34da373525a96dfc70eaa85d6`, app tree `46fb1aae65c1cdc640c965254b947a149e982c17`. **Bounded structural comparison only; full visual acceptance remains open.**
+
+The original file is `Zc2dEN5aLU47dVdsewDmiJ`; page `411:40601` is the Capiro 3.1 prototype page, not a screen. Read-only screenshot calls returned native 1440×1040 references for Meri Home `442:81437`, Portfolio overview `411:41421`, and Modules Hub `411:93787`. Reference hashes and acquisition limits are in `figma-references/PROVENANCE.json`. The direct download path returned403; the screenshot tool's inline fallback succeeded. No Figma file, baseline, source, or production configuration was changed. No design-context/code-generation tool was called without its unavailable prerequisite guidance.
+
+Application captures and their per-image provenance are in `/tmp/capiro-unified-figma-capture-plan-20261013/captures/`: exact1440×1040 viewport, light mode, scroll zero, fonts ready and images loaded. `actual-meri-1440x1040-light.png` is the already-built standalone at `/meri`, with the existing explicitly disconnected sample. `fixture-portfolio-1440x1040-light.png` uses the actual Portfolio component harness at canonical `/`, with the unchanged Test Aerospace fixture. `fixture-modules-1440x1040-light.png` uses the actual Modules component harness at `/modules`, synthetic identity, zero client profiles, all-scope Hub. Setup-only actual Portfolio/Modules captures are retained but do not qualify normal-state design.
+
+| Surface | Observed alignment | Differences / disposition |
+| --- | --- | --- |
+| Shared shell | All three modes retain the 64px header region, 232px desktop left navigation, existing icons, Geist typography, white cards and warm-gray surrounding surface. | This is observation at one viewport, not pixel or responsive certification. Current-state semantics must also be checked independently. |
+| Meri Home | Greeting, centered composer, three suggestion cards, supporting actions and original asset family align closely with the reference. | The authorized new Recommendation actions link adds a sidebar row and shifts Recent/Preferences down. Disconnected sample/footer remains explicit; no native conversation/data acceptance. |
+| Portfolio overview | Black pulse strip, primary controls, card-grid area and right Needs attention column are preserved. | Existing one-client fixture, unavailable saved ordering, missing metrics and incomplete-alert warning intentionally differ from Figma's populated sample. The canonical `/` Overview link lacks current-page styling/semantics because its predicate only recognizes `/portfolio`; this is a concrete shared-navigation defect to correct after frozen qualification. No full content match is claimed. |
+| Modules Hub | Four work cards and three landscape cards retain the design hierarchy, icons, descriptions, chips, profile explanations and Open controls. | Unsupported native counts are not invented. Lower landscape-card proportions differ: implementation uses `2.6fr 1fr 1fr`; the reference's Intelligence card is visibly wider. The small title information affordance is absent. These remain visible design differences, not accepted parity. |
+
+The supplied baseline contains no separately established Onboard or Meri action-workflow frame. Parent-side indexing found no standalone Onboard frame by name on3.1/3.4; billing/add-profile frame411:44626 is not treated as equivalent. No automatic switch to3.4 occurs.
+
+The separate axe4.14 audit has actual contrast/semantics findings and incomplete checks. Browser/test counts are not substituted for accessibility or visual acceptance. All337 Portfolio native acceptance rows remain unaccepted.

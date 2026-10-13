@@ -1,0 +1,34 @@
+{
+  "at": "2026-10-13T02:27:47.917431+00:00",
+  "baselineHead": "7c87678730538958ace9762f824dc3e588bf445b",
+  "state": "Uncommitted corrected candidate; source review only; no tests executed",
+  "files": [
+    {
+      "path": "apps/web/src/shared/capiro/operations/rich-newsletter.ts",
+      "bytes": 4619,
+      "sha256": "d28cbba88c631f6d53d901b1277bc566e60d10f17b2bb819894d8d2886c95d77"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/rich-newsletter.ts",
+      "bytes": 3887,
+      "sha256": "c25183acddcd61f8b3b0f19b70f7a422738d14c45c234e5d4d6ec6860bfbd3c6"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/rich-newsletter.test.ts",
+      "bytes": 12244,
+      "sha256": "e42be0734d1ab2911fb0dbd6d68e403846714bcd6371c5fbdf59ab05b19cf8d2"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/workspace.ts",
+      "bytes": 969,
+      "sha256": "98efbd7add19d3a8e2dd83cc9006e57d0c79aeb99e76d5fb11b7f448c40fa45b"
+    }
+  ],
+  "publishedSourceReference": {
+    "publication": "9ffab390ef444d7ea0bf4eb0d68224f810245e25",
+    "path": "docs/shared-newsletter-receiving-packed-distribution-20261013/qualified-38fec5c8/HANDOFF.md",
+    "gitBlob": "4024350ddaae92daea6e3cebfe3255f1cb09666b",
+    "sha256": "96c31783ff85140253643412857bc36cd58b661031a19681e34d6383bba01866",
+    "verified": true
+  }
+}

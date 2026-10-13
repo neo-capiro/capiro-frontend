@@ -1,0 +1,174 @@
+{
+  "before": {
+    "name": "verify-additions.mjs",
+    "sha256": "d38d231956cc2c8886bb4ee4450870e196293bcee96fcfe5a5b1892772422758",
+    "assertions": [
+      {
+        "line": 23,
+        "text": "assert.equal(response.status,200,path)"
+      },
+      {
+        "line": 23,
+        "text": "assert.ok(text.includes(path==='/meri/actions'?'Connection setup required':'Onboarding setup required'),path)"
+      },
+      {
+        "line": 23,
+        "text": "assert.equal(response.headers.get('x-content-type-options'),'nosniff')"
+      },
+      {
+        "line": 24,
+        "text": "assert.equal(response.headers.get('referrer-policy'),'no-referrer')"
+      },
+      {
+        "line": 24,
+        "text": "assert.ok(response.headers.get('cache-control').includes('no-store'))"
+      },
+      {
+        "line": 24,
+        "text": "assert.equal(response.headers.get('x-robots-tag'),'noindex, nofollow')"
+      },
+      {
+        "line": 28,
+        "text": "assert.equal(response.status,operation==='approve'?404:503,path)"
+      },
+      {
+        "line": 28,
+        "text": "assert.equal(response.headers.get('cache-control'),'no-store')"
+      },
+      {
+        "line": 28,
+        "text": "assert.deepEqual(await response.json(),{error:{code:'FRONTEND_ACTION_UNAVAILABLE'}})"
+      },
+      {
+        "line": 30,
+        "text": "assert.equal(response.status,200,path)"
+      },
+      {
+        "line": 30,
+        "text": "assert.deepEqual(served,bytes,path)"
+      },
+      {
+        "line": 31,
+        "text": "assert.equal(results.assets.length,6)"
+      },
+      {
+        "line": 31,
+        "text": "assert.equal(results.assets.reduce((s,x)=>s+x.bytes,0),458104)"
+      },
+      {
+        "line": 35,
+        "text": "assert.equal(await page.getByRole('button',{name:'Connect action service',exact:true}).count(),0)"
+      },
+      {
+        "line": 37,
+        "text": "assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth))"
+      },
+      {
+        "line": 38,
+        "text": "assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth))"
+      },
+      {
+        "line": 40,
+        "text": "assert.deepEqual(results.pageErrors,[])"
+      },
+      {
+        "line": 40,
+        "text": "assert.deepEqual(results.remoteRequests,[])"
+      }
+    ],
+    "parseErrors": 0
+  },
+  "after": {
+    "name": "verify-additions-v2.mjs",
+    "sha256": "de5ba2d2e83d761389b4d7cb7d7ee49c0dadb57bd15ee3ea28f0374d432fb2cd",
+    "assertions": [
+      {
+        "line": 23,
+        "text": "assert.equal(response.status,200,path)"
+      },
+      {
+        "line": 23,
+        "text": "assert.ok(text.includes(path==='/meri/actions'?'Connection setup required':'Onboarding setup required'),path)"
+      },
+      {
+        "line": 23,
+        "text": "assert.equal(response.headers.get('x-content-type-options'),'nosniff')"
+      },
+      {
+        "line": 24,
+        "text": "assert.equal(response.headers.get('referrer-policy'),'no-referrer')"
+      },
+      {
+        "line": 24,
+        "text": "assert.ok(response.headers.get('cache-control').includes('no-store'))"
+      },
+      {
+        "line": 24,
+        "text": "assert.equal(response.headers.get('x-robots-tag'),'noindex, nofollow')"
+      },
+      {
+        "line": 28,
+        "text": "assert.equal(response.status,operation==='approve'?404:503,path)"
+      },
+      {
+        "line": 28,
+        "text": "assert.equal(response.headers.get('cache-control'),'no-store')"
+      },
+      {
+        "line": 28,
+        "text": "assert.deepEqual(await response.json(),{error:{code:'FRONTEND_ACTION_UNAVAILABLE'}})"
+      },
+      {
+        "line": 30,
+        "text": "assert.equal(response.status,400)"
+      },
+      {
+        "line": 31,
+        "text": "assert.equal(response.status,200,path)"
+      },
+      {
+        "line": 31,
+        "text": "assert.deepEqual(served,bytes,path)"
+      },
+      {
+        "line": 32,
+        "text": "assert.equal(results.assets.length,6)"
+      },
+      {
+        "line": 32,
+        "text": "assert.equal(results.assets.reduce((s,x)=>s+x.bytes,0),458104)"
+      },
+      {
+        "line": 36,
+        "text": "assert.equal(await page.getByRole('button',{name:'Connect action service',exact:true}).count(),0)"
+      },
+      {
+        "line": 38,
+        "text": "assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth))"
+      },
+      {
+        "line": 39,
+        "text": "assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth))"
+      },
+      {
+        "line": 41,
+        "text": "assert.deepEqual(results.pageErrors,[])"
+      },
+      {
+        "line": 41,
+        "text": "assert.deepEqual(results.remoteRequests,[])"
+      }
+    ],
+    "parseErrors": 0
+  },
+  "originalAssertionCount": 18,
+  "finalAssertionCount": 19,
+  "missingOriginalAssertions": [],
+  "addedAssertions": [
+    {
+      "line": 30,
+      "text": "assert.equal(response.status,400)"
+    }
+  ],
+  "allOriginalAssertionsExact": true
+}

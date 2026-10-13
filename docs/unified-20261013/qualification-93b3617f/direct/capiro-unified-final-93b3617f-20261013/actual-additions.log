@@ -1,0 +1,19 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: /api/action-followthrough/session
+
+400 !== 503
+
+    at file:///tmp/capiro-unified-final-93b3617f-20261013/verify-additions.mjs:28:228
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 400,
+  expected: 503,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

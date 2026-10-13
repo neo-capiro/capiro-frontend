@@ -1,0 +1,99 @@
+{
+  "checkedUTC": "2026-10-13T06:42:01.795581+00:00",
+  "source": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+  "applicationTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+  "featureTrees": [
+    {
+      "lane": "newsletter",
+      "path": "apps/web/src/features/portfolio",
+      "tree": "4576e6f2ff004ece000df49b1d3e149dae794d98",
+      "identical": true,
+      "finalTree": "4576e6f2ff004ece000df49b1d3e149dae794d98",
+      "finalIdentical": true
+    },
+    {
+      "lane": "newsletter",
+      "path": "apps/web/src/features/modules",
+      "tree": "3d4f9e5c559f8fbabe99b13c55183e5dd191699d",
+      "identical": true,
+      "finalTree": "3d4f9e5c559f8fbabe99b13c55183e5dd191699d",
+      "finalIdentical": true
+    },
+    {
+      "lane": "newsletter",
+      "path": "apps/web/src/features/settings",
+      "tree": "72f140b8839df2939b0024e250f9d5ea331687cc",
+      "identical": true,
+      "finalTree": "72f140b8839df2939b0024e250f9d5ea331687cc",
+      "finalIdentical": true
+    },
+    {
+      "lane": "newsletter",
+      "path": "apps/web/tests/browser",
+      "tree": "d5edcaebb4958448d018b4aad2afcb6ac39412c7",
+      "identical": true,
+      "finalTree": "d5edcaebb4958448d018b4aad2afcb6ac39412c7",
+      "finalIdentical": true
+    },
+    {
+      "lane": "onboard",
+      "path": "apps/web/src/features/onboard",
+      "tree": "b52902d4e1fd0684f54d08347ec5536f4467653b",
+      "identical": true,
+      "finalTree": "b52902d4e1fd0684f54d08347ec5536f4467653b",
+      "finalIdentical": true
+    },
+    {
+      "lane": "meri_actions",
+      "path": "apps/web/src/features/meri",
+      "tree": "5e8360ac09b7ad478f460f8f1838e5ca129e3f05",
+      "identical": true,
+      "finalTree": "5e8360ac09b7ad478f460f8f1838e5ca129e3f05",
+      "finalIdentical": true
+    },
+    {
+      "lane": "meri_actions",
+      "path": "apps/web/src/shared/meri-actions",
+      "tree": "7a601cadbcbe189a7c231a1911745af0d3933e33",
+      "identical": true,
+      "finalTree": "7a601cadbcbe189a7c231a1911745af0d3933e33",
+      "finalIdentical": true
+    }
+  ],
+  "originalTestBindings": 807,
+  "originalTestChanges": [],
+  "lockSha256": "ed73c829a32a24cf3794eae3f61fbebe135af410b66d2a1723254aabbb956574",
+  "independentReviews": [
+    {
+      "path": "/tmp/capiro-unified-integration-independent-review-20261013",
+      "manifestPath": "/tmp/capiro-unified-integration-independent-review-20261013/MANIFEST.json",
+      "manifestSha256": "2c77f5863879c71daeb2519a3b0792ba41c5ba88e116751dff9e38e92b784299",
+      "manifestBytes": 3347
+    },
+    {
+      "path": "/tmp/capiro-unified-meri-composition-review-20261013",
+      "manifestPath": "/tmp/capiro-unified-meri-composition-review-20261013/SHA256-MANIFEST.json",
+      "manifestSha256": "9469ba6a086fcf439e0a844f7a31d6471048daf6293ac430abb8743408786ce8",
+      "manifestBytes": 890
+    },
+    {
+      "path": "/tmp/capiro-meri-mobile-navigation-independent-review-20261013",
+      "manifestPath": "/tmp/capiro-meri-mobile-navigation-independent-review-20261013/SHA256-MANIFEST.json",
+      "manifestSha256": "a70e5dfbac23c80787a458b9eedf7ce58aee51cef130afa4e77d6a203cbb4eb0",
+      "manifestBytes": 530
+    },
+    {
+      "path": "/tmp/capiro-standalone-host-probe-review-20261013",
+      "manifestPath": "/tmp/capiro-standalone-host-probe-review-20261013/MANIFEST.json",
+      "manifestSha256": "00a3b7773a074168646683ffdca19a7ebd70505f975c95a687c1f358adf9f86d",
+      "manifestBytes": 4322
+    },
+    {
+      "path": "/tmp/capiro-meri-pr2449-compatibility-20261013",
+      "manifestPath": "/tmp/capiro-meri-pr2449-compatibility-20261013/MANIFEST.json",
+      "manifestSha256": "4dc597d82b3ca32113f42d40024c7641e8ba2e2a643c9277ac245ff8358cceea",
+      "manifestBytes": 9689
+    }
+  ],
+  "trackedSourceDiff": ""
+}

@@ -1,0 +1,49 @@
+{
+  "sealedUTC": "2026-10-13T07:27:49.980853+00:00",
+  "source": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+  "status": "PASS_FROZEN93_PORTFOLIO1122_ORIGINAL_OUTER120_PRESERVED",
+  "fileCount": 8,
+  "bytes": 572905,
+  "files": [
+    {
+      "path": "ALL-1122-RESULT-BINDINGS.json",
+      "bytes": 452314,
+      "sha256": "6eaeea58ab5dfe1c3dd80ced137ad8cd88712c678cf57f4f5364128900a0fc45"
+    },
+    {
+      "path": "ORIGINAL-OUTER-PROGRESS-SNAPSHOT.json",
+      "bytes": 31647,
+      "sha256": "382b060fb19775a1eef8f5a6a7bed03db7da38178f6244d2461a1f53676e5351"
+    },
+    {
+      "path": "PRODUCER-AGGREGATE-SNAPSHOT.json",
+      "bytes": 61636,
+      "sha256": "cc870661d20d3938e859001a7a5227d0b005423d2f091edce31ed251ea64e5dc"
+    },
+    {
+      "path": "RAW-EVIDENCE-BINDINGS.json",
+      "bytes": 5153,
+      "sha256": "6eba15daf6d67d214e57a14ebf56f4dfe9899ee1da2fe896c3613bf308514c01"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 3105,
+      "sha256": "e182604a96e81f32cd89efe42f761cf61aeb2018d0b91e7b8f5d672ebd2ae13e"
+    },
+    {
+      "path": "VERIFICATION.json",
+      "bytes": 10583,
+      "sha256": "fcec5b78980bee09aac206ab6b0a3944381d77f662b8a014d5f98762cde2e19c"
+    },
+    {
+      "path": "verify.log",
+      "bytes": 2269,
+      "sha256": "6ff81938c122394a21b552eb4d26d2e8b104588e18f4a27829d2f6cb563be270"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 6198,
+      "sha256": "a6772cd27ca31333bbe3f9539c4420b5450a11f2e31f7398e2ecb98467553f02"
+    }
+  ]
+}

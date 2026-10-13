@@ -1,0 +1,93 @@
+{
+  "reviewedUTC": "2026-10-13T07:04:18.255379+00:00",
+  "baselineSource": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+  "baselineAppTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+  "workingTreeStatus": "",
+  "proposalOnly": true,
+  "proposedBytesEqualExactlyThreeReviewedChanges": true,
+  "inputs": [
+    {
+      "path": "/tmp/capiro-unified-navigation-proposal-20261013/SOURCE.json",
+      "sha256": "43a612d69f4bc7af4996ff8fb6175ad61f166bd82cd9e876bff17f78435cd2e1",
+      "bytes": 605
+    },
+    {
+      "path": "/tmp/capiro-unified-navigation-proposal-20261013/navigation.patch",
+      "sha256": "72e36f631f61aa44060466df039aa05aee4d01df2efd898c643503627300e6b9",
+      "bytes": 737
+    },
+    {
+      "path": "/tmp/capiro-unified-navigation-proposal-20261013/PortfolioNavigation.tsx.proposed",
+      "sha256": "440b01368a37d8eadc06252ac186810ced654a57bd8a7414211a696f8f50d417",
+      "bytes": 2345
+    },
+    {
+      "path": "/tmp/capiro-unified-navigation-proposal-20261013/canonical-navigation.spec.ts",
+      "sha256": "7410470d25693de2880577c98f442b0fcd3cb47f161c78a435ec5049024ea47d",
+      "bytes": 1308
+    },
+    {
+      "path": "/tmp/capiro-unified-navigation-proposal-20261013/playwright.red-v2.config.mjs",
+      "sha256": "74b81d94f2e834ed5c5a5f96bb155a938c7345402e685d5d3ffa0d2af62da779",
+      "bytes": 771
+    },
+    {
+      "path": "/tmp/capiro-unified-navigation-proposal-20261013/red-results.json",
+      "sha256": "f7b4047f939fccbf745576096660698e32f80f0930cf50cc173c78aeeebb3999",
+      "bytes": 10611
+    },
+    {
+      "path": "/tmp/capiro-unified-navigation-proposal-20261013/red.log",
+      "sha256": "b8d69131aae5cb2ccddca40eab6c2e7db83b725766d3487f57493f28c6f42a35",
+      "bytes": 5797
+    },
+    {
+      "path": "/tmp/capiro-unified-navigation-proposal-20261013/red-v2-results.json",
+      "sha256": "d5082ed67448c80c2730691faa907f773b3c645e19e0262505f7bf5818f63c83",
+      "bytes": 9650
+    },
+    {
+      "path": "/tmp/capiro-unified-navigation-proposal-20261013/red-v2.log",
+      "sha256": "5c7416306fd0df31576769147c94219feb331009b48982cf47d7fca396341a37",
+      "bytes": 3851
+    }
+  ],
+  "context": [
+    {
+      "path": "apps/web/src/shared/portfolio/shell/PortfolioNavigation.tsx",
+      "sha256": "be3e20687fb4f5a58f8261dee74f74bee7a4e3aa820c5f1dbf760d1929f6df17",
+      "blob": "031781c522fb7efb8ecde920a5baf5464f86706c"
+    },
+    {
+      "path": "apps/web/src/app/page.tsx",
+      "sha256": "ffa499addaf3f92cc58ae5c4c8cd0a1762c8093b7b7dc48e8fcfcf617a93412c",
+      "blob": "6ac452eae078927b210450c01675142bb946ef9e"
+    },
+    {
+      "path": "apps/web/src/app/(portfolio)/(product)/portfolio/page.tsx",
+      "sha256": "08c77a73c11a896134d25e32bedb116ca469f466b8aabc4b5bdea8605eae711e",
+      "blob": "b0943750f29ace49faa4b159f1f0482567bc1078"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/PortfolioIndex.tsx",
+      "sha256": "3c65e7ede3175aae11e619fef76b30435376e1a70e2d8767f07647cfe853a035",
+      "blob": "219063ce9560cf26c5897ff5c5f03ed2781b53c2"
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/shell/shell.module.css",
+      "sha256": "5c297a955ba6d181be33a00da36d122340a41b75259cd9cc3d842a320bf2af46",
+      "blob": "ef2b0acadfd4a23944bc4956262d69725edff233"
+    },
+    {
+      "path": "apps/web/tests/browser/fixtures.ts",
+      "sha256": "926ad03e9ceba9e906127736ceab6f243bcc0f3f85c426b2c5d7d96fe9c10368",
+      "blob": "1f55a258f367fcbf2635c3b08dea3fff327d7ed7"
+    }
+  ],
+  "nonblankLines": {
+    "originalNavigation": 81,
+    "proposedNavigation": 82,
+    "newTwoCaseSpec": 33
+  },
+  "executedApplicationOrTests": false
+}

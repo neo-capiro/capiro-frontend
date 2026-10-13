@@ -1,0 +1,332 @@
+{
+  "capturedUTC": "2026-10-13T06:47:01.288Z",
+  "browserVersion": "154.0.8037.57",
+  "target": {
+    "name": "fixture-modules-1440x1040-light",
+    "origin": "http://127.0.0.1:5197",
+    "path": "/modules",
+    "frame": "411:93787",
+    "fixture": "modules",
+    "classification": "Existing Modules harness with synthetic Clerk identity and intercepted me.read; no selected client, empty permitted client list; not real authorization"
+  },
+  "before": {
+    "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+    "tree": "871dfd1bf868527c605b0c2e78c83179db3baba2",
+    "appTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+    "srcTree": "9824460c1d8240815f506c9bf3b6ee998b6fc000",
+    "trackedDiff": "",
+    "buildId": "alGa7bLzyzdg3BJpx8qe2",
+    "standaloneServerSha256": "4612ed561f5f2f1d336b86307f01896461661c09215508f02ea52fa8b9f44200",
+    "buildExitSha256": "38357a5ab25ef14ca4c97e94f2742cb205e5e1563c593d75ab0bad5e03a0f1bb"
+  },
+  "after": {
+    "head": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+    "tree": "871dfd1bf868527c605b0c2e78c83179db3baba2",
+    "appTree": "46fb1aae65c1cdc640c965254b947a149e982c17",
+    "srcTree": "9824460c1d8240815f506c9bf3b6ee998b6fc000",
+    "trackedDiff": "",
+    "buildId": "alGa7bLzyzdg3BJpx8qe2",
+    "standaloneServerSha256": "4612ed561f5f2f1d336b86307f01896461661c09215508f02ea52fa8b9f44200",
+    "buildExitSha256": "38357a5ab25ef14ca4c97e94f2742cb205e5e1563c593d75ab0bad5e03a0f1bb"
+  },
+  "metrics": {
+    "url": "http://127.0.0.1:5197/modules",
+    "title": "Capiro component test harness",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "dpr": 1,
+    "scroll": {
+      "x": 0,
+      "y": 0
+    },
+    "documentSize": {
+      "width": 1440,
+      "height": 1111
+    },
+    "bodyFont": "TestGeist, Arial, sans-serif",
+    "headings": [
+      {
+        "text": "Everything in Capiro, across the whole firm",
+        "font": "TestGeist, Arial, sans-serif",
+        "size": "24px"
+      },
+      {
+        "text": "Modules · the whole firm",
+        "font": "TestGeist, Arial, sans-serif",
+        "size": "14px"
+      },
+      {
+        "text": "Client profile · just that client",
+        "font": "TestGeist, Arial, sans-serif",
+        "size": "14px"
+      },
+      {
+        "text": "Run the work",
+        "font": "TestGeist, Arial, sans-serif",
+        "size": "11px"
+      },
+      {
+        "text": "Engagement",
+        "font": "TestGeist, Arial, sans-serif",
+        "size": "14px"
+      },
+      {
+        "text": "Workspace",
+        "font": "TestGeist, Arial, sans-serif",
+        "size": "14px"
+      },
+      {
+        "text": "Planner",
+        "font": "TestGeist, Arial, sans-serif",
+        "size": "14px"
+      },
+      {
+        "text": "Strategies",
+        "font": "TestGeist, Arial, sans-serif",
+        "size": "14px"
+      },
+      {
+        "text": "Know the landscape",
+        "font": "TestGeist, Arial, sans-serif",
+        "size": "11px"
+      },
+      {
+        "text": "Intelligence",
+        "font": "TestGeist, Arial, sans-serif",
+        "size": "14px"
+      },
+      {
+        "text": "Directory",
+        "font": "TestGeist, Arial, sans-serif",
+        "size": "14px"
+      },
+      {
+        "text": "Research Portfolios",
+        "font": "TestGeist, Arial, sans-serif",
+        "size": "14px"
+      }
+    ],
+    "fontStatus": "loaded",
+    "fonts": [
+      {
+        "family": "Onboard Hanken Grotesk",
+        "status": "unloaded",
+        "weight": "100 900"
+      },
+      {
+        "family": "Onboard Newsreader",
+        "status": "unloaded",
+        "weight": "200 800"
+      },
+      {
+        "family": "Onboard JetBrains Mono",
+        "status": "unloaded",
+        "weight": "100 800"
+      },
+      {
+        "family": "Newsreader",
+        "status": "unloaded",
+        "weight": "200 800"
+      },
+      {
+        "family": "Newsreader",
+        "status": "unloaded",
+        "weight": "200 800"
+      },
+      {
+        "family": "TestGeist",
+        "status": "loaded",
+        "weight": "100 900"
+      }
+    ],
+    "images": [
+      {
+        "src": "/design/modules/shared/imgCapiroWordmark.png",
+        "complete": true,
+        "naturalWidth": 1920,
+        "naturalHeight": 650
+      },
+      {
+        "src": "/design/modules/shared/imgIcon.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/modules/shared/imgIcon1.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/modules/shared/imgIcon2.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/modules/shared/imgIcon3.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/modules/shared/imgIcon4.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/modules/shared/imgIcon5.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/modules/shared/imgIcon6.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/modules/shared/imgCapiro31ProfilePicture.svg",
+        "complete": true,
+        "naturalWidth": 32,
+        "naturalHeight": 32
+      },
+      {
+        "src": "/design/modules/shared/imgIcon2.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/modules/shared/imgIcon7.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/modules/shared/imgIcon8.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/modules/shared/imgIcon9.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/modules/shared/imgIcon10.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/modules/shared/imgIcon11.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/modules/shared/imgIcon12.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/modules/shared/imgIcon13.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/modules/shared/imgIcon14.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/modules/shared/imgIcon15.svg",
+        "complete": true,
+        "naturalWidth": 16,
+        "naturalHeight": 16
+      },
+      {
+        "src": "/design/modules/shared/imgIconHandshake.svg",
+        "complete": true,
+        "naturalWidth": 18,
+        "naturalHeight": 18
+      },
+      {
+        "src": "/design/modules/shared/imgIconFileText.svg",
+        "complete": true,
+        "naturalWidth": 18,
+        "naturalHeight": 18
+      },
+      {
+        "src": "/design/modules/shared/imgLucideListTodo.svg",
+        "complete": true,
+        "naturalWidth": 24,
+        "naturalHeight": 24
+      },
+      {
+        "src": "/design/modules/shared/imgLucideRoute.svg",
+        "complete": true,
+        "naturalWidth": 24,
+        "naturalHeight": 24
+      },
+      {
+        "src": "/design/modules/shared/imgLucideRadar.svg",
+        "complete": true,
+        "naturalWidth": 24,
+        "naturalHeight": 24
+      },
+      {
+        "src": "/design/modules/shared/imgIconUsers.svg",
+        "complete": true,
+        "naturalWidth": 18,
+        "naturalHeight": 18
+      },
+      {
+        "src": "/design/modules/shared/imgLucideFolders.svg",
+        "complete": true,
+        "naturalWidth": 24,
+        "naturalHeight": 24
+      }
+    ],
+    "designTargets": [
+      "411:93787"
+    ],
+    "visibleNotices": [
+      "Explicit local test fixture · synthetic identity and records"
+    ]
+  },
+  "screenshot": {
+    "path": "/tmp/capiro-unified-figma-capture-plan-20261013/captures/fixture-modules-1440x1040-light.png",
+    "sha256": "e1ec8b0a0b3759f97a6962dc00741d40da5e3f15d5ff6d8e39332ed07ae5122c",
+    "viewportOnly": true,
+    "width": 1440,
+    "height": 1040,
+    "colorScheme": "light",
+    "animations": "disabled",
+    "locale": "en-US",
+    "timezone": "UTC"
+  },
+  "api": [
+    {
+      "method": "GET",
+      "path": "/api/capiro/clients.list?input=%7B%22query%22%3A%7B%22includeArchived%22%3Afalse%7D%7D",
+      "status": 200
+    }
+  ],
+  "remote": [],
+  "blocked": [],
+  "unexpected": [],
+  "errors": [],
+  "limitations": "Supplemental composition capture; no authentication, backend, provider, Figma acceptance or full visual/accessibility gate. Fixture authority is synthetic. Existing notices remain untouched; no CSS/DOM overlay or content replacement."
+}

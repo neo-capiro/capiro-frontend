@@ -1,0 +1,46 @@
+{
+  "sealedUTC": "2026-10-13T07:33:31.061639+00:00",
+  "status": "SEALED_EXTERNAL_PROPOSAL_UNRUN",
+  "files": [
+    {
+      "file": "REPORT.md",
+      "bytes": 6075,
+      "sha256": "92a102c5aaa1586f876c60abab25044c5529fa5abf94a9dd9d0dd8662aabea63"
+    },
+    {
+      "file": "STATIC-INSPECTION.json",
+      "bytes": 7844,
+      "sha256": "2abe601e81940da96325b2693e27be22d9f225fda9679d86183875ec8658880b"
+    },
+    {
+      "file": "candidate/apps/web/test/accessibility-interaction.ts",
+      "bytes": 3293,
+      "sha256": "8dd1582dd58afde5da1c98b444c3154bb78ec6ce68a74d49eff671b27635974c"
+    },
+    {
+      "file": "candidate/apps/web/test/browser/shared-home-accessibility-interaction.spec.ts",
+      "bytes": 4995,
+      "sha256": "17a29c0b2a3699a0148668894fb5220049116ec0e273800aff6dfe905ea98750"
+    },
+    {
+      "file": "candidate/apps/web/tests/browser/portfolio-accessibility-fixtures.ts",
+      "bytes": 1743,
+      "sha256": "602c555fd619e39d8e1d285a4998ec445c09c65eae80f2ee5b17bf5c2ad3efd3"
+    },
+    {
+      "file": "candidate/apps/web/tests/browser/portfolio-accessibility-interaction.spec.ts",
+      "bytes": 5896,
+      "sha256": "53f51434d6718d068d260340bc15c4eefbb37672564ed432c4f74fb3f29fede0"
+    },
+    {
+      "file": "candidate/apps/web/tests/browser/portfolio-accessibility-semantics.spec.ts",
+      "bytes": 2411,
+      "sha256": "c36dd72c4bcb72cfce4642695579f3ff3bb69f345ca84f7683129b0134cd590c"
+    },
+    {
+      "file": "inspect-proposal.mjs",
+      "bytes": 2866,
+      "sha256": "d389ac87c105993dd71f4fb23b4729ab7b1db0acfe27ecd5864aeb3446f7f145"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "path": "/tmp/capiro-unified-navigation-proposal-20261013/red-results.json",
+    "classification": "HARNESS_FAILURE_ONLY",
+    "stats": {
+      "startTime": "2026-10-13T06:56:25.541Z",
+      "duration": 2272.9930000000004,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 2,
+      "flaky": 0
+    },
+    "workers": 1,
+    "retries": [
+      0
+    ],
+    "cases": [
+      {
+        "title": "Portfolio current navigation follows / and its client filter through history",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "failed",
+            "retry": 0,
+            "error": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/\", waiting until \"load\"\u001b[22m\n"
+          }
+        ]
+      },
+      {
+        "title": "Portfolio current navigation follows /portfolio and its client filter through history",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "failed",
+            "retry": 0,
+            "error": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5191/portfolio\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:5191/portfolio\", waiting until \"load\"\u001b[22m\n"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/tmp/capiro-unified-navigation-proposal-20261013/red-v2-results.json",
+    "classification": "VALID_BASELINE_PRODUCT_FAILURE",
+    "stats": {
+      "startTime": "2026-10-13T06:59:28.199Z",
+      "duration": 38798.576,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "workers": 1,
+    "retries": [
+      0
+    ],
+    "cases": [
+      {
+        "title": "Portfolio current navigation follows / and its client filter through history",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "failed",
+            "retry": 0,
+            "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('navigation', { name: 'Portfolio', exact: true }).getByRole('link', { name: 'Portfolio Overview', exact: true })\nExpected: \u001b[32m\"page\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('navigation', { name: 'Portfolio', exact: true }).getByRole('link', { name: 'Portfolio Overview', exact: true })\u001b[22m\n\u001b[2m    13 \u00d7 locator resolved to <a title=\"Overview\" href=\"/portfolio\" aria-label=\"Portfolio Overview\">\u2026</a>\u001b[22m\n\u001b[2m       - unexpected value \"null\"\u001b[22m\n"
+          }
+        ]
+      },
+      {
+        "title": "Portfolio current navigation follows /portfolio and its client filter through history",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "retry": 0,
+            "error": null
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "reviewType": "independent read-only combined-source composition",
+  "status": "ACCEPTED_BOUNDED_SOURCE_REVIEW",
+  "newConcreteMergeConflicts": [],
+  "applicationTree": "135aee939303b7ff142b89326b8bea4ee8485ed2",
+  "source": "6a2e4aceaaa354a8edd9bf54e4148380ccbb1e32",
+  "originalRequestedSource": "e22cd4c29d3d112486622051a4c1ea2424527221",
+  "limits": [
+    {
+      "id": "L1",
+      "type": "inherited_scope_boundary",
+      "summary": "Uncertainty journal ends at canonical QueryClient disposal; unscoped Onboard/public capability navigation and return is not same-cache retention or durable reconciliation."
+    },
+    {
+      "id": "L2",
+      "type": "inherited_scope_boundary",
+      "summary": "Authenticated session expiry state is disposed when the public capability branch replaces the authenticated subtree; return requires fresh current authority checks."
+    }
+  ],
+  "unexecuted": [
+    "all runtime/tests/build/browser/native checks",
+    "unresolved Meri to Onboard/public IT and return interaction"
+  ],
+  "nativeActivationAccepted": false,
+  "repositoryModified": false
+}

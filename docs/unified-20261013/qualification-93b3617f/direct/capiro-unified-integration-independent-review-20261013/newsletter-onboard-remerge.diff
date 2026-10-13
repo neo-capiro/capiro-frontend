@@ -1,0 +1,44 @@
+commit ae0c1f1b72e82deed8c8a6e97c10ef9d3e24c94e
+Merge: a2ae591 46ebdd4
+Author: NEO MARTINEZ <neo@capiro.ai>
+
+    Consolidate qualified Newsletter receiving with Onboard source
+
+diff --git a/apps/web/package.json b/apps/web/package.json
+remerge CONFLICT (content): Merge conflict in apps/web/package.json
+index f45c51d..46bfb83 100644
+--- a/apps/web/package.json
++++ b/apps/web/package.json
+@@ -41,13 +41,9 @@
+     "d3-geo": "3.1.1",
+     "lucide-react": "0.577.0",
+     "radix-ui": "1.7.0",
+-<<<<<<< a2ae591 (Integrate preserved Onboard flows with shared current-session boundaries)
+     "@capiro/shared": "file:../../vendor/capiro-shared-0.0.0-38fec5c8.tgz",
+     "@stripe/react-stripe-js": "3.10.0",
+     "@stripe/stripe-js": "5.10.0"
+-=======
+-    "@capiro/shared": "file:../../vendor/capiro-shared-0.0.0-38fec5c8.tgz"
+->>>>>>> 46ebdd4 (docs: publish frozen newsletter combined qualification)
+   },
+   "devDependencies": {
+     "@playwright/test": "1.61.1",
+diff --git a/scripts/public-packages.mjs b/scripts/public-packages.mjs
+remerge CONFLICT (content): Merge conflict in scripts/public-packages.mjs
+index 986ee26..4f370ef 100644
+--- a/scripts/public-packages.mjs
++++ b/scripts/public-packages.mjs
+@@ -33,12 +33,8 @@ function main(argv) {
+   if (argv.length === 1 && argv[0] === '--help') { console.log(usage); return; }
+   if (argv.length) throw Error(usage);
+   const vendor = fileURLToPath(new URL('../vendor/', import.meta.url));
+-<<<<<<< a2ae591 (Integrate preserved Onboard flows with shared current-session boundaries)
+-  const manifests = ['meri-public-packages.json', 'onboard-public-packages.json'].map(name => JSON.parse(readFileSync(path.join(vendor, name), 'utf8')));
+-=======
+-  const manifests = ['meri-public-packages.json', 'newsletter-public-packages.json']
++  const manifests = ['meri-public-packages.json', 'newsletter-public-packages.json', 'onboard-public-packages.json']
+     .map(name => JSON.parse(readFileSync(path.join(vendor, name), 'utf8')));
+->>>>>>> 46ebdd4 (docs: publish frozen newsletter combined qualification)
+   const records = manifests.flatMap(manifest => verifyPackageInputs(manifest, name => readFileSync(path.join(vendor, name))));
+   console.log(JSON.stringify({ schema: 'capiro-public-package-inputs/1', records }, null, 2));
+ }

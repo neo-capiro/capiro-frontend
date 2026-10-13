@@ -1,0 +1,93 @@
+{
+  "manifestSha256": "3c8b13561df372e758a01a2f58fc8ec8b346b7ecc5ccd6d3899d495b3661841f",
+  "recordsVerified": 17,
+  "exactLocalEvidenceSet": true,
+  "rawSourceGateExecutionByReviewer": false,
+  "files": [
+    {
+      "file": "REPORT.md",
+      "bytes": 6160,
+      "sha256": "7f6c20c4c31207c590fd91df11ce8406fb18ec7d8c04de3cfaf206106140292d"
+    },
+    {
+      "file": "SOURCE-BINDING.json",
+      "bytes": 4123,
+      "sha256": "0acf2f7fbba28d142a4d9652dc874f777d0ae1b04a32f0d044ddaad0160be465"
+    },
+    {
+      "file": "STRUCTURE-REVIEW.json",
+      "bytes": 8999,
+      "sha256": "9fcc80f49feb8de38db0eb8c7985f8e1303c2d4aeca3c5fde84f78a63764d167"
+    },
+    {
+      "file": "before-journal-REPORT.md",
+      "bytes": 4388,
+      "sha256": "317ebe08b1943e046616c3db5447fb5d3b3149030479255018e7b7600dd9df3d"
+    },
+    {
+      "file": "before-journal-STRUCTURE-REVIEW.json",
+      "bytes": 6700,
+      "sha256": "2d4bc20ded99eda8cf11e9bd31bdc19116434f69b4199531007185922abc7e1a"
+    },
+    {
+      "file": "before-journal-source-and-structure.json",
+      "bytes": 7771,
+      "sha256": "035b80902ecb9d7bb62e539f89989a9d10d61296b43eba68077eefe6db2ea791"
+    },
+    {
+      "file": "diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "format-check.log",
+      "bytes": 66,
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "file": "journal-disposal-red.log",
+      "bytes": 2897,
+      "sha256": "03d1d72c571e2163f551eb95d58ed8fef50824a3b8de78f8a323febeb6f05232"
+    },
+    {
+      "file": "journal-final-green.log",
+      "bytes": 247,
+      "sha256": "ab65c8f472f92656ac85c366e42a01dea7348ca58c135685c5114004042ce401"
+    },
+    {
+      "file": "journal-first.log",
+      "bytes": 247,
+      "sha256": "c18b01fe72c3d1282f4d3bebd2c39d497a45944bbc1c7b72ead5bce5618bd66e"
+    },
+    {
+      "file": "journal-scope-order-red.log",
+      "bytes": 2611,
+      "sha256": "9db2bd83d283869ab68257abbc40b9d735b722830134b4c09c31fe0fc2b4f6f6"
+    },
+    {
+      "file": "source-and-structure.json",
+      "bytes": 9273,
+      "sha256": "08b749b4a3856138ccb7797a06e8b1f2b2449270f94fcddf854d1aa574ab7522"
+    },
+    {
+      "file": "stage-identity-red.log",
+      "bytes": 1309,
+      "sha256": "a1a3470b636af4e0df79487f3af094cf77a99547fd5226cbff9896a203015aaa"
+    },
+    {
+      "file": "structure-first.json",
+      "bytes": 3519,
+      "sha256": "2a1318f8a332679c840410723a958e9aa4fed2da4721ec2c29a8121b4795054b"
+    },
+    {
+      "file": "unit-first.log",
+      "bytes": 247,
+      "sha256": "093f2ebe55ce7e23c68bb9808b1adc6affb07f9976ffc9a0a4e7344b7a23cf49"
+    },
+    {
+      "file": "unit-green.log",
+      "bytes": 247,
+      "sha256": "91396a2096d23bd7fd68e12da9659d9b46b4e5fbfb0e89f9df6333868205eb1f"
+    }
+  ]
+}

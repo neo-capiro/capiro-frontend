@@ -1,0 +1,66 @@
+{
+  "head": "6a2e4aceaaa354a8edd9bf54e4148380ccbb1e32",
+  "file": "apps/web/test/browser/meri-action-host-mobile-navigation.spec.ts",
+  "sha256": "037150f3279724439b1d89b7d238840db7f233b51c05703fa57a8bf86c75d056",
+  "bytes": 5018,
+  "testCases": 2,
+  "expectCalls": 32,
+  "syntaxErrors": [],
+  "imports": [
+    {
+      "specifier": "@playwright/test",
+      "line": 1,
+      "kind": "named",
+      "names": [
+        "test",
+        "expect",
+        "Locator",
+        "Page"
+      ]
+    },
+    {
+      "specifier": "./meri-action-host-fixtures",
+      "line": 2,
+      "kind": "named",
+      "names": [
+        "actionHostFixture",
+        "actionClient",
+        "actionUrl",
+        "expectActionIsolation"
+      ]
+    }
+  ],
+  "directives": [],
+  "anyLines": [],
+  "remoteOriginLines": [],
+  "sizeFindings": [],
+  "nonblank": 136,
+  "readBindings": [
+    {
+      "file": "apps/web/test/browser/meri-action-host-fixtures.ts",
+      "sha256": "2e3461d3ba91b717d6300dce35dc82ec8f34b848fc266192d1d28ca640e413e7"
+    },
+    {
+      "file": "apps/web/test/browser/navigation.tsx",
+      "sha256": "39e427cd9a9158262dd4191a99d8ee3b6332e520b34cf65f97bafc451fdaa10e"
+    },
+    {
+      "file": "apps/web/test/browser/main.tsx",
+      "sha256": "6e3d15d564a2914d804f09e5120579970898b5a386d6c5187a1f4088f6716460"
+    },
+    {
+      "file": "apps/web/src/shared/shell/Sidebar.tsx",
+      "sha256": "cd1584326cabd10d95f86b11ba2421f0eef5465285d75cb82ceb17c12279dd80"
+    },
+    {
+      "file": "apps/web/src/shared/shell/ProductShell.tsx",
+      "sha256": "5e48a151acc4fae1ebc679729659295f8b6fe29eafd2197826c4660367193a83"
+    },
+    {
+      "file": "apps/web/src/shared/shell/shell.module.css",
+      "sha256": "af871a73b971b849ae3631474b1122bd87aa8d1612853dfc9eea269e2022b307"
+    }
+  ],
+  "checkoutStatus": "",
+  "runtime": "NOT_RUN; no runtime lease requested or used"
+}

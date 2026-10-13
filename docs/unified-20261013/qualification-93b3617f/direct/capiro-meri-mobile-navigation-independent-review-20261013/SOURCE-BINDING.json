@@ -1,0 +1,125 @@
+{
+  "reviewedUTC": "2026-10-13T06:17:38.738832+00:00",
+  "baseline": "6a2e4aceaaa354a8edd9bf54e4148380ccbb1e32",
+  "observedHEAD": "6a2e4aceaaa354a8edd9bf54e4148380ccbb1e32",
+  "worktree": "/workspace/capiro-onboard-port-20261013",
+  "status": "M  .gitattributes\nA  apps/web/src/shared/shell/MeriMobileNavigation.tsx\nM  apps/web/src/shared/shell/ProductShell.tsx\nM  apps/web/src/shared/shell/shell.module.css\nA  apps/web/test/browser/meri-action-host-mobile-navigation.spec.ts\nA  docs/unified-20261013/MOBILE-NAVIGATION.md\nA  docs/unified-20261013/mobile-navigation/MANIFEST.json\nA  docs/unified-20261013/mobile-navigation/author-proposal/HANDOFF.md\nA  docs/unified-20261013/mobile-navigation/author-proposal/MANIFEST.json\nA  docs/unified-20261013/mobile-navigation/author-proposal/OUTLINE.md\nA  docs/unified-20261013/mobile-navigation/author-proposal/SOURCE-REVIEW.json\nA  docs/unified-20261013/mobile-navigation/author-proposal/meri-action-host-mobile-navigation.spec.ts\nA  docs/unified-20261013/mobile-navigation/root-regression/baseline-source.json\nA  docs/unified-20261013/mobile-navigation/root-regression/green-artifacts/.last-run.json\nA  docs/unified-20261013/mobile-navigation/root-regression/green-results.json\nA  docs/unified-20261013/mobile-navigation/root-regression/green.log\nA  docs/unified-20261013/mobile-navigation/root-regression/red-artifacts/.last-run.json\nA  docs/unified-20261013/mobile-navigation/root-regression/red-artifacts/meri-action-host-mobile-na-e9e2a-ard-without-action-dispatch/error-context.md\nA  docs/unified-20261013/mobile-navigation/root-regression/red-artifacts/meri-action-host-mobile-na-e9e2a-ard-without-action-dispatch/test-failed-1.png\nA  docs/unified-20261013/mobile-navigation/root-regression/red-artifacts/meri-action-host-mobile-na-e9e2a-ard-without-action-dispatch/trace.zip\nA  docs/unified-20261013/mobile-navigation/root-regression/red-results.json\nA  docs/unified-20261013/mobile-navigation/root-regression/red.log",
+  "files": [
+    {
+      "path": "apps/web/src/shared/shell/MeriMobileNavigation.tsx",
+      "sha256": "68379ce566220a205122e197e5c3ae8d211c0ab7f82afe3eeb6bead34e7a92fd",
+      "bytes": 1260,
+      "lines": 37,
+      "nonblankLines": 35,
+      "role": "changed"
+    },
+    {
+      "path": "apps/web/src/shared/shell/ProductShell.tsx",
+      "sha256": "d7942d79955c8cbe1c1929f3d551118eef701c4b1ade6d92cbbd3858bdf3dad3",
+      "bytes": 1668,
+      "lines": 53,
+      "nonblankLines": 52,
+      "role": "changed"
+    },
+    {
+      "path": "apps/web/src/shared/shell/shell.module.css",
+      "sha256": "748440948fc9e9e997060bac6414c17e19ab0914c28dfea9272c9037a02c3171",
+      "bytes": 2897,
+      "lines": 172,
+      "nonblankLines": 172,
+      "role": "changed"
+    },
+    {
+      "path": "apps/web/test/browser/meri-action-host-mobile-navigation.spec.ts",
+      "sha256": "037150f3279724439b1d89b7d238840db7f233b51c05703fa57a8bf86c75d056",
+      "bytes": 5018,
+      "lines": 142,
+      "nonblankLines": 136,
+      "role": "changed"
+    },
+    {
+      "path": "apps/web/src/shared/shell/Sidebar.tsx",
+      "sha256": "cd1584326cabd10d95f86b11ba2421f0eef5465285d75cb82ceb17c12279dd80",
+      "bytes": 4521,
+      "lines": 141,
+      "nonblankLines": 138,
+      "role": "context",
+      "unchangedFromBase": true
+    },
+    {
+      "path": "apps/web/src/shared/session/client-route.ts",
+      "sha256": "01ee7c1c6c92ab8702ca4ee3660dc176595fce3f577596057a44a19a443143c8",
+      "bytes": 1296,
+      "lines": 36,
+      "nonblankLines": 35,
+      "role": "context",
+      "unchangedFromBase": true
+    },
+    {
+      "path": "apps/web/src/shared/session/ApplicationBoundary.tsx",
+      "sha256": "036d9ec40090252c9d67a0ef552709fec2d6cac1fafb6143db5fb7556b311a1b",
+      "bytes": 4336,
+      "lines": 133,
+      "nonblankLines": 130,
+      "role": "context",
+      "unchangedFromBase": true
+    },
+    {
+      "path": "apps/web/src/shared/session/SelectedClient.tsx",
+      "sha256": "9f08ff7be144494042a2147e84adb815d9e7a4e92e90b0bf5277cc44caab1a34",
+      "bytes": 2237,
+      "lines": 63,
+      "nonblankLines": 62,
+      "role": "context",
+      "unchangedFromBase": true
+    },
+    {
+      "path": "apps/web/src/app/meri/actions/page.tsx",
+      "sha256": "b3da4c9cf8633b3e3044a19fb20e747a1af3f4ee1f4fd80722f64cb4beb3191c",
+      "bytes": 502,
+      "lines": 14,
+      "nonblankLines": 13,
+      "role": "context",
+      "unchangedFromBase": true
+    },
+    {
+      "path": "apps/web/src/app/meri/actions/MeriActionHost.tsx",
+      "sha256": "47eb6dab030eefcd0cb8b17627d1f10c6f0a2673964a9d060050687e9bee1f21",
+      "bytes": 3873,
+      "lines": 126,
+      "nonblankLines": 124,
+      "role": "context",
+      "unchangedFromBase": true
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/host-controller.ts",
+      "sha256": "031c98f9dfdba27ecd42512cee985dc05461dda5ea64d8d7738468f8df354eb3",
+      "bytes": 3597,
+      "lines": 118,
+      "nonblankLines": 116,
+      "role": "context",
+      "unchangedFromBase": true
+    },
+    {
+      "path": "apps/web/test/browser/meri-action-host-fixtures.ts",
+      "sha256": "2e3461d3ba91b717d6300dce35dc82ec8f34b848fc266192d1d28ca640e413e7",
+      "bytes": 7502,
+      "lines": 241,
+      "nonblankLines": 239,
+      "role": "context",
+      "unchangedFromBase": true
+    },
+    {
+      "path": "packages/ui/src/shadcn/button.tsx",
+      "sha256": "d3e8f32fdd82232f49a2a4db80828ce70ac01e0cbbb462fafe17e2fb770dabc1",
+      "bytes": 2162,
+      "lines": 60,
+      "nonblankLines": 55,
+      "role": "context",
+      "unchangedFromBase": true
+    }
+  ],
+  "sameSpecBaselineAndCandidate": true,
+  "baselineProductionMatchesGit": true,
+  "runtimeExecutedByReviewer": false
+}

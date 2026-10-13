@@ -1,0 +1,188 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/capiro-onboard-port-20261013/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/tmp/capiro-unified-figma-capture-plan-20261013/modules-capture.config.mjs",
+      "--project=modules-fixture"
+    ],
+    "configFile": "/tmp/capiro-unified-figma-capture-plan-20261013/modules-capture.config.mjs",
+    "rootDir": "/tmp/capiro-unified-figma-capture-plan-20261013",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-unified-figma-capture-plan-20261013/artifacts-modules",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "actual",
+        "name": "actual",
+        "testDir": "/tmp/capiro-unified-figma-capture-plan-20261013",
+        "testIgnore": [],
+        "testMatch": [
+          "capture.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/tmp/capiro-unified-figma-capture-plan-20261013/artifacts-modules",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "portfolio-fixture",
+        "name": "portfolio-fixture",
+        "testDir": "/tmp/capiro-unified-figma-capture-plan-20261013",
+        "testIgnore": [],
+        "testMatch": [
+          "capture.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/tmp/capiro-unified-figma-capture-plan-20261013/artifacts-modules",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "modules-fixture",
+        "name": "modules-fixture",
+        "testDir": "/tmp/capiro-unified-figma-capture-plan-20261013",
+        "testIgnore": [],
+        "testMatch": [
+          "capture.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/capiro-unified-figma-capture-plan-20261013/results-modules.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "capture.spec.ts",
+      "file": "capture.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Modules-host source fixture /meri",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "modules-fixture",
+              "projectName": "modules-fixture",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5980,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:46:49.064Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a0260cabe6bbf638b217-2bcf96dde4ca61ef66c8",
+          "file": "capture.spec.ts",
+          "line": 146,
+          "column": 7
+        },
+        {
+          "title": "Modules-host source fixture /modules",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "modules-fixture",
+              "projectName": "modules-fixture",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5787,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:46:55.673Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a0260cabe6bbf638b217-3ee53a4a6358cae5131f",
+          "file": "capture.spec.ts",
+          "line": 146,
+          "column": 7
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-13T06:46:47.381Z",
+    "duration": 14256.023,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

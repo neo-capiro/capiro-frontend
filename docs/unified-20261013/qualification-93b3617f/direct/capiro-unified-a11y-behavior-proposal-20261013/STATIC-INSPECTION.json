@@ -1,0 +1,265 @@
+{
+  "method": "Formatting and parsing proposal source only; no TypeScript typecheck, application imports, browser or tests.",
+  "rows": [
+    {
+      "file": "apps/web/test/accessibility-interaction.ts",
+      "sha256": "8dd1582dd58afde5da1c98b444c3154bb78ec6ce68a74d49eff671b27635974c",
+      "parseDiagnostics": [],
+      "resolvedRelativeImports": [],
+      "imports": [
+        {
+          "specifier": "@playwright/test",
+          "line": 1,
+          "kind": "named",
+          "names": [
+            "expect",
+            "Locator",
+            "Page",
+            "TestInfo"
+          ]
+        }
+      ],
+      "directives": [],
+      "anyLines": [],
+      "remoteOriginLines": [],
+      "sizeFindings": [],
+      "nonblank": 95
+    },
+    {
+      "file": "apps/web/test/browser/shared-home-accessibility-interaction.spec.ts",
+      "sha256": "17a29c0b2a3699a0148668894fb5220049116ec0e273800aff6dfe905ea98750",
+      "parseDiagnostics": [],
+      "resolvedRelativeImports": [
+        {
+          "specifier": "../accessibility-interaction",
+          "resolvesTo": "/tmp/capiro-unified-a11y-behavior-proposal-20261013/candidate/apps/web/test/accessibility-interaction.ts"
+        },
+        {
+          "specifier": "./meri-action-host-fixtures",
+          "resolvesTo": "/workspace/capiro-onboard-port-20261013/apps/web/test/browser/meri-action-host-fixtures.ts"
+        },
+        {
+          "specifier": "./fixtures",
+          "resolvesTo": "/workspace/capiro-onboard-port-20261013/apps/web/test/browser/fixtures.ts"
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "@playwright/test",
+          "line": 1,
+          "kind": "named",
+          "names": [
+            "test",
+            "expect"
+          ]
+        },
+        {
+          "specifier": "../accessibility-interaction",
+          "line": 2,
+          "kind": "named",
+          "names": [
+            "tabTo",
+            "expectFocusEvidence",
+            "observeHomeIsolation"
+          ]
+        },
+        {
+          "specifier": "./meri-action-host-fixtures",
+          "line": 7,
+          "kind": "named",
+          "names": [
+            "actionHostFixture",
+            "actionClient",
+            "actionUrl",
+            "expectActionIsolation"
+          ]
+        },
+        {
+          "specifier": "./fixtures",
+          "line": 13,
+          "kind": "named",
+          "names": [
+            "operationFixtures",
+            "testIdentity"
+          ]
+        }
+      ],
+      "directives": [],
+      "anyLines": [],
+      "remoteOriginLines": [],
+      "sizeFindings": [],
+      "nonblank": 135
+    },
+    {
+      "file": "apps/web/tests/browser/portfolio-accessibility-fixtures.ts",
+      "sha256": "602c555fd619e39d8e1d285a4998ec445c09c65eae80f2ee5b17bf5c2ad3efd3",
+      "parseDiagnostics": [],
+      "resolvedRelativeImports": [
+        {
+          "specifier": "../../test/accessibility-interaction",
+          "resolvesTo": "/tmp/capiro-unified-a11y-behavior-proposal-20261013/candidate/apps/web/test/accessibility-interaction.ts"
+        },
+        {
+          "specifier": "./fixtures",
+          "resolvesTo": "/workspace/capiro-onboard-port-20261013/apps/web/tests/browser/fixtures.ts"
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "@playwright/test",
+          "line": 1,
+          "kind": "named",
+          "names": [
+            "expect",
+            "Page",
+            "TestInfo"
+          ]
+        },
+        {
+          "specifier": "../../test/accessibility-interaction",
+          "line": 2,
+          "kind": "named",
+          "names": [
+            "observeHomeIsolation"
+          ]
+        },
+        {
+          "specifier": "./fixtures",
+          "line": 3,
+          "kind": "named",
+          "names": [
+            "client",
+            "installFixtures",
+            "json"
+          ]
+        }
+      ],
+      "directives": [],
+      "anyLines": [],
+      "remoteOriginLines": [],
+      "sizeFindings": [],
+      "nonblank": 58
+    },
+    {
+      "file": "apps/web/tests/browser/portfolio-accessibility-interaction.spec.ts",
+      "sha256": "53f51434d6718d068d260340bc15c4eefbb37672564ed432c4f74fb3f29fede0",
+      "parseDiagnostics": [],
+      "resolvedRelativeImports": [
+        {
+          "specifier": "../../test/accessibility-interaction",
+          "resolvesTo": "/tmp/capiro-unified-a11y-behavior-proposal-20261013/candidate/apps/web/test/accessibility-interaction.ts"
+        },
+        {
+          "specifier": "./portfolio-accessibility-fixtures",
+          "resolvesTo": "/tmp/capiro-unified-a11y-behavior-proposal-20261013/candidate/apps/web/tests/browser/portfolio-accessibility-fixtures.ts"
+        },
+        {
+          "specifier": "./portfolio-layout-fixtures",
+          "resolvesTo": "/workspace/capiro-onboard-port-20261013/apps/web/tests/browser/portfolio-layout-fixtures.ts"
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "@playwright/test",
+          "line": 1,
+          "kind": "named",
+          "names": [
+            "test",
+            "expect"
+          ]
+        },
+        {
+          "specifier": "../../test/accessibility-interaction",
+          "line": 2,
+          "kind": "named",
+          "names": [
+            "tabTo",
+            "expectFocusEvidence",
+            "clickObservedPoint",
+            "pointWithLink",
+            "observeHomeIsolation"
+          ]
+        },
+        {
+          "specifier": "./portfolio-accessibility-fixtures",
+          "line": 9,
+          "kind": "named",
+          "names": [
+            "client",
+            "metadataClients",
+            "portfolioAccessibilityFixture"
+          ]
+        },
+        {
+          "specifier": "./portfolio-layout-fixtures",
+          "line": 14,
+          "kind": "named",
+          "names": [
+            "cardIds",
+            "layoutFixtures",
+            "layoutReceipt"
+          ]
+        }
+      ],
+      "directives": [],
+      "anyLines": [],
+      "remoteOriginLines": [],
+      "sizeFindings": [],
+      "nonblank": 161
+    },
+    {
+      "file": "apps/web/tests/browser/portfolio-accessibility-semantics.spec.ts",
+      "sha256": "c36dd72c4bcb72cfce4642695579f3ff3bb69f345ca84f7683129b0134cd590c",
+      "parseDiagnostics": [],
+      "resolvedRelativeImports": [
+        {
+          "specifier": "./portfolio-accessibility-fixtures",
+          "resolvesTo": "/tmp/capiro-unified-a11y-behavior-proposal-20261013/candidate/apps/web/tests/browser/portfolio-accessibility-fixtures.ts"
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "@playwright/test",
+          "line": 1,
+          "kind": "named",
+          "names": [
+            "test",
+            "expect"
+          ]
+        },
+        {
+          "specifier": "./portfolio-accessibility-fixtures",
+          "line": 2,
+          "kind": "named",
+          "names": [
+            "metadataClients",
+            "suppliedOwner",
+            "portfolioAccessibilityFixture"
+          ]
+        }
+      ],
+      "directives": [],
+      "anyLines": [],
+      "remoteOriginLines": [],
+      "sizeFindings": [],
+      "nonblank": 68
+    }
+  ],
+  "exactSixAxeProposalBytesUnchanged": [
+    {
+      "file": "/tmp/capiro-unified-a11y-tests-proposal-20261013/accessibility.ts",
+      "sha256": "041d33331ffe2aacbf9c2ac5bc86fa00e4134342612c9ad5ba311aa3e543dcce",
+      "unchanged": true
+    },
+    {
+      "file": "/tmp/capiro-unified-a11y-tests-proposal-20261013/portfolio-home-accessibility.spec.ts",
+      "sha256": "7aeb3c4e3141f7cbec9c29715b9a053f5c9c3e9284744b711a0a8722e44ea2a2",
+      "unchanged": true
+    },
+    {
+      "file": "/tmp/capiro-unified-a11y-tests-proposal-20261013/shared-home-accessibility.spec.ts",
+      "sha256": "2a3aaea30e7b9a863cdef654e9e6f54eaaf1f0ab4f5d891f9e35dfefb42f3bcf",
+      "unchanged": true
+    }
+  ]
+}

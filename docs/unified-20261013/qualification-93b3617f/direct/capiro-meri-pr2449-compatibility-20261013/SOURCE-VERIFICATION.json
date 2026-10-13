@@ -1,0 +1,314 @@
+{
+  "capturedAt": "2026-10-13T06:32:20.328266+00:00",
+  "backendRef": "60cf2e51129f8358e6afe5fc600ffcdb6de01759",
+  "meriRef": "84c2ca01d0bce025a0003b6e724d675a05f2975a",
+  "frontendRef": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+  "remoteRecords": [
+    {
+      "repo": "neo-capiro/capirov2",
+      "path": "apps/api/src/auth/application-authority.ts",
+      "gitBlob": "4803d6199d83b1dc8b2ca0674fa52f097c2a04c7",
+      "sha256": "80d7913e68d63cfec1c15f9a76ebe0657baeb107f1880725c4ba3db567aa7309",
+      "bytes": 9325,
+      "url": "https://github.com/neo-capiro/capirov2/blob/60cf2e51129f8358e6afe5fc600ffcdb6de01759/apps/api/src/auth/application-authority.ts"
+    },
+    {
+      "repo": "neo-capiro/capirov2",
+      "path": "docs/meri-application-authority-reviewed-publication-20261013/README.md",
+      "gitBlob": "e954329ebfa4d00b360dd99adc197bf06c3682a3",
+      "sha256": "f7b9e0ecc6f100e02be5adf7cb780660f60a46f153fa641c2bf0719790c8142e",
+      "bytes": 2617,
+      "url": "https://github.com/neo-capiro/capirov2/blob/60cf2e51129f8358e6afe5fc600ffcdb6de01759/docs/meri-application-authority-reviewed-publication-20261013/README.md"
+    },
+    {
+      "repo": "neo-capiro/capirov2",
+      "path": "docs/meri-application-authority-reviewed-publication-20261013/SOURCE-BINDINGS.json",
+      "gitBlob": "408bebe3d3ecb9b878a961611a92e251f09d6049",
+      "sha256": "dcfb7f30227e39fb909db6be1f0474040ed5774bb2d6b0dc88b6c5c5498ad5ae",
+      "bytes": 1596,
+      "url": "https://github.com/neo-capiro/capirov2/blob/60cf2e51129f8358e6afe5fc600ffcdb6de01759/docs/meri-application-authority-reviewed-publication-20261013/SOURCE-BINDINGS.json"
+    },
+    {
+      "repo": "neo-capiro/capirov2",
+      "path": "apps/api/src/auth/clerk.service.ts",
+      "gitBlob": "0acf9f955c667df64a8bc4d4b3534b6054abca6c",
+      "sha256": "c49fdba20da5152a5eadb1dca864e6f789c943ad1b1ca560a529edad4f343191",
+      "bytes": 8258,
+      "url": "https://github.com/neo-capiro/capirov2/blob/60cf2e51129f8358e6afe5fc600ffcdb6de01759/apps/api/src/auth/clerk.service.ts"
+    },
+    {
+      "repo": "neo-capiro/capirov2",
+      "path": "apps/api/src/context/context-security-scope.service.ts",
+      "gitBlob": "875b04f94cf5ecb40c22b7a9f2d73ca9cc3ed662",
+      "sha256": "2de05899ac1fd82af13eead5956b8cbe23a237714a4b645839d5a955f7bdab24",
+      "bytes": 7013,
+      "url": "https://github.com/neo-capiro/capirov2/blob/60cf2e51129f8358e6afe5fc600ffcdb6de01759/apps/api/src/context/context-security-scope.service.ts"
+    },
+    {
+      "repo": "neo-capiro/capirov2",
+      "path": "apps/api/src/context/context.module.ts",
+      "gitBlob": "29bf0075a079e5f82c6398c698307fb31f297a81",
+      "sha256": "6c74d843772f14864fc4d563b8fdb625479d84e6b5c553e18e27ef5abc2d66d9",
+      "bytes": 2627,
+      "url": "https://github.com/neo-capiro/capirov2/blob/60cf2e51129f8358e6afe5fc600ffcdb6de01759/apps/api/src/context/context.module.ts"
+    },
+    {
+      "repo": "neo-capiro/capirov2",
+      "path": "apps/api/src/tenant/tenant-context.middleware.ts",
+      "gitBlob": "4fdd892d3cd4cf4ad7cab0912d6eff19c2375c60",
+      "sha256": "250df8d46a94f84239e99f46ce0dec5858cc06082c430ec4551d666491b83c0b",
+      "bytes": 30010,
+      "url": "https://github.com/neo-capiro/capirov2/blob/60cf2e51129f8358e6afe5fc600ffcdb6de01759/apps/api/src/tenant/tenant-context.middleware.ts"
+    },
+    {
+      "repo": "neo-capiro/capirov2",
+      "path": "apps/api/src/meri/meri.controller.ts",
+      "gitBlob": "a1190e911e4b15bfee4d575ceb1514bec5729b30",
+      "sha256": "5b33f8e8f538731f783bb014d9cfd8c8b10fdca9d45b876157ef2cf03c5b0467",
+      "bytes": 45695,
+      "url": "https://github.com/neo-capiro/capirov2/blob/60cf2e51129f8358e6afe5fc600ffcdb6de01759/apps/api/src/meri/meri.controller.ts"
+    },
+    {
+      "repo": "neo-capiro/capirov2",
+      "path": "apps/api/src/meri/meri.service.ts",
+      "gitBlob": "43f88a5be1a33102fe49e8bd928a82cf28b28d4b",
+      "sha256": "71c40abfd50a0fa124946ce5fb589aab875af23242a37f4438af78be4a5f6595",
+      "bytes": 295936,
+      "url": "https://github.com/neo-capiro/capirov2/blob/60cf2e51129f8358e6afe5fc600ffcdb6de01759/apps/api/src/meri/meri.service.ts"
+    },
+    {
+      "repo": "neo-capiro/meri-greenfield",
+      "path": "apps/control/action-host/application-adapters/authority-http.mjs",
+      "gitBlob": "baf528e5c2a7eca61090c6dd83e7650ce92e250e",
+      "sha256": "744a3a648ca293242f4cb1ba43501bb3ffb76733911d14f97e2462457ccbeff4",
+      "bytes": 4673,
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/apps/control/action-host/application-adapters/authority-http.mjs"
+    },
+    {
+      "repo": "neo-capiro/meri-greenfield",
+      "path": "apps/control/action-host/application-adapters/context-adapter.mjs",
+      "gitBlob": "7a06ec8c8f1bb32d87214ca25d350bc4c0b91eec",
+      "sha256": "766dfedd4277ec855d8e92c4e8e33c1fc48c2ca8a5be41249499833b43f88afb",
+      "bytes": 6198,
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/apps/control/action-host/application-adapters/context-adapter.mjs"
+    },
+    {
+      "repo": "neo-capiro/meri-greenfield",
+      "path": "apps/control/action-host/application-adapters/README.md",
+      "gitBlob": "e513c4c185e1342965b6eb8319e1e51865d189c0",
+      "sha256": "bd6a9efd068af110a878508e36c96501036253b5c1b40aaf8037b5ad70adf559",
+      "bytes": 7313,
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/apps/control/action-host/application-adapters/README.md"
+    },
+    {
+      "repo": "neo-capiro/meri-greenfield",
+      "path": "apps/control/action-host/session/owner.mjs",
+      "gitBlob": "9ec0c2970949f1c66eb790aa53c2170a00c8a581",
+      "sha256": "7239a73d05784f492d1d7c68a371ab1ca5c94fada71fc74a20b8c3f372769084",
+      "bytes": 9632,
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/apps/control/action-host/session/owner.mjs"
+    },
+    {
+      "repo": "neo-capiro/meri-greenfield",
+      "path": "apps/control/action-host/session/http.mjs",
+      "gitBlob": "11aaf4cde044c54abf1ecd22d306d8a1dfc5ab04",
+      "sha256": "2403d12bf43147aeea9b6fd040ca1dd662d4f30d3dd19e263187e2bc38b69542",
+      "bytes": 3396,
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/apps/control/action-host/session/http.mjs"
+    },
+    {
+      "repo": "neo-capiro/meri-greenfield",
+      "path": "packages/contracts/action-authority-0.2/validate.mjs",
+      "gitBlob": "391e047b61fac0fab12ae061768e50dbcfc61e6a",
+      "sha256": "40fa36caeedb7ec17bef27119c846feb372bf5e1c6678032d5bcd0ab540ebd79",
+      "bytes": 1880,
+      "url": "https://github.com/neo-capiro/meri-greenfield/blob/84c2ca01d0bce025a0003b6e724d675a05f2975a/packages/contracts/action-authority-0.2/validate.mjs"
+    },
+    {
+      "repo": "neo-capiro/capirov2",
+      "path": "apps/api/src/meri/meri.module.ts",
+      "gitBlob": "8e4ec3ea811f7b2e8895760269e3b297099abea4",
+      "sha256": "0556ee521e5208eac4e1566c8e69847859b8a12c64699ad6ae281233f8673c67",
+      "bytes": 12478,
+      "url": "https://github.com/neo-capiro/capirov2/blob/60cf2e51129f8358e6afe5fc600ffcdb6de01759/apps/api/src/meri/meri.module.ts"
+    },
+    {
+      "repo": "neo-capiro/capirov2",
+      "path": "apps/api/src/tenant/tenant.module.ts",
+      "gitBlob": "d617507143fbbf802fd70fcaebcf5455a6d77bf8",
+      "sha256": "6858db17104b4f12a91c69a766bb6c93fc0d0d5cad8ebaf2f04503c9f4131616",
+      "bytes": 358,
+      "url": "https://github.com/neo-capiro/capirov2/blob/60cf2e51129f8358e6afe5fc600ffcdb6de01759/apps/api/src/tenant/tenant.module.ts"
+    },
+    {
+      "repo": "neo-capiro/capirov2",
+      "path": "apps/api/src/main.ts",
+      "gitBlob": "e8b1a9e47877ba139b1e9c699699c8eadece25c2",
+      "sha256": "58a7473c17e116dfe3c13197f124ed2c5fa1e9bb4ea708aa3092268bb92bbd36",
+      "bytes": 1600,
+      "url": "https://github.com/neo-capiro/capirov2/blob/60cf2e51129f8358e6afe5fc600ffcdb6de01759/apps/api/src/main.ts"
+    },
+    {
+      "repo": "neo-capiro/capirov2",
+      "path": "apps/api/src/auth/roles.guard.ts",
+      "gitBlob": "60fbbc8a1de21962a95af60842d25087f58a612d",
+      "sha256": "18e23d68f96a565b1994131b9affe7e4463e47e4979f22d897c7beaf450e6aa9",
+      "bytes": 2703,
+      "url": "https://github.com/neo-capiro/capirov2/blob/60cf2e51129f8358e6afe5fc600ffcdb6de01759/apps/api/src/auth/roles.guard.ts"
+    },
+    {
+      "repo": "neo-capiro/capirov2",
+      "path": "docs/meri-application-authority-reviewed-publication-20261013/COMPOSITION.json",
+      "gitBlob": "4853e048006200260f4968fe1f0ce8c58209df86",
+      "sha256": "6453e9577b33b36678e974924c302b463708a6e8a4d126163e2f7c425be2c270",
+      "bytes": 1786,
+      "url": "https://github.com/neo-capiro/capirov2/blob/60cf2e51129f8358e6afe5fc600ffcdb6de01759/docs/meri-application-authority-reviewed-publication-20261013/COMPOSITION.json"
+    },
+    {
+      "repo": "neo-capiro/capirov2",
+      "path": "apps/api/src/auth/application-authority.spec.ts",
+      "gitBlob": "cefec1060990ec56e449d45ec70c438966cd2134",
+      "sha256": "b738b2dbc1917255b062af225b08063f5092551c75fceddfff2542ed5bf9338c",
+      "bytes": 28650,
+      "url": "https://github.com/neo-capiro/capirov2/blob/60cf2e51129f8358e6afe5fc600ffcdb6de01759/apps/api/src/auth/application-authority.spec.ts"
+    },
+    {
+      "repo": "neo-capiro/capirov2",
+      "path": "apps/api/src/bootstrap/configure-api-http-app.ts",
+      "gitBlob": "3407e1cc723d0dc117e998e0b8f29436ea0d5551",
+      "sha256": "ec2e02dff274b150d1594783249628927ca0e854916e8577c01b5503b2ba041c",
+      "bytes": 7342,
+      "url": "https://github.com/neo-capiro/capirov2/blob/60cf2e51129f8358e6afe5fc600ffcdb6de01759/apps/api/src/bootstrap/configure-api-http-app.ts"
+    },
+    {
+      "repo": "neo-capiro/capirov2",
+      "path": "apps/api/src/meri/meriv3-runtime.proxy.ts",
+      "gitBlob": "28f02937c824fdbf1f6655f87bd94a52969aa360",
+      "sha256": "34abf99eb804afba2b598d430d4ed4d9806f4bb35b0254b9ccda1b1ef5f956e5",
+      "bytes": 11027,
+      "url": "https://github.com/neo-capiro/capirov2/blob/60cf2e51129f8358e6afe5fc600ffcdb6de01759/apps/api/src/meri/meriv3-runtime.proxy.ts"
+    }
+  ],
+  "backendPublishedEightSourceBindingsVerified": true,
+  "frontendRecords": [
+    {
+      "path": "apps/web/src/shared/meri-actions/attempt-journal.ts",
+      "gitBlob": "769bd1fa9c62bba4949351cee17f9ab487d028f2",
+      "bytes": 391,
+      "sha256": "3fd7884d856b5d7f27b9bcf6c5a405c9cf4703bd1f67f71ea756c561f94509a6"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/bounded-json.ts",
+      "gitBlob": "b31700ea80257eb86428e9dd7b76fec425d5c026",
+      "bytes": 2614,
+      "sha256": "d8f46bc08078d4a4858e7eca5a3f0fab34065275f8268948e30babb869afe145"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/config.ts",
+      "gitBlob": "52f64ae5dedcfa61f472b5ad20ddf728dc4888f3",
+      "bytes": 474,
+      "sha256": "8b90d94ad5bc20ba25e5252dabc85561392cbf3c1f0d1be7ecc781bf8a78f471"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/correlation.ts",
+      "gitBlob": "34cb3d70d64e9eebbc2de8b20939c95b268cbd05",
+      "bytes": 4131,
+      "sha256": "4185a15f731a88beff8b73e5d65629e66908f921dcb5bff4a8657e761ffa3e7f"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/disposition.ts",
+      "gitBlob": "903adb73d3053a8e2050c14f62fb8f66eacb5161",
+      "bytes": 1103,
+      "sha256": "a093b4dc26cc3641b9268f3727b6f764ad0f8ff4a21dedede8716176c7e7ff7f"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/host-controller.ts",
+      "gitBlob": "7f38b002cf68609ad03b0525d330967b37bb9e6b",
+      "bytes": 3597,
+      "sha256": "031c98f9dfdba27ecd42512cee985dc05461dda5ea64d8d7738468f8df354eb3"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/projection.ts",
+      "gitBlob": "0e1e51966697296ffb6b6389afea5afae940c7ba",
+      "bytes": 2294,
+      "sha256": "a8c3108adfb8613522970d45bab434dabd632c4271ebf3e4bf96fb2d757d3a62"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/proxy.ts",
+      "gitBlob": "1ea802e91677008dfe76221e3acf122e7a628d3b",
+      "bytes": 2843,
+      "sha256": "6046d58306b2c5694f618a2331dda4ea26baae64e12ecc6b94b6feec1973fcb4"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/query-journal.ts",
+      "gitBlob": "94a1b5da56677e3ea13a517f3107ab81b9a29b06",
+      "bytes": 1241,
+      "sha256": "8249df4b758ef20b7bc83776555eea5639c8f1a15cd6a13d4ea40b5fe62be171"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/session-bootstrap.ts",
+      "gitBlob": "4f17e9817795c6e93ee57278319d34002170938e",
+      "bytes": 1640,
+      "sha256": "f3e1b503b067294867655ac52572f8b82ebfc0cd478eb5169e6f3ad219af0028"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/session-receipt.ts",
+      "gitBlob": "1e46db51a7fc761ece4a59aeb7cdc48607ad4094",
+      "bytes": 1355,
+      "sha256": "46d7ddd12325d7bc305583397aba249cfc4ec8022e278eed2e3933672af10b76"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/workflow-adapter.ts",
+      "gitBlob": "cce2ed568724c0f8f90ed14b167e1987d3519dd9",
+      "bytes": 8265,
+      "sha256": "1d35e9a68d713bd1088d4141aaead81d0d5d0a5ceb8371736feed5f568abe458"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/workflow-port.ts",
+      "gitBlob": "fe6f6b931ad415030006879c78b9f43dc44243a2",
+      "bytes": 2124,
+      "sha256": "f5afc882738b4cb1684fa3969513a277646bd097dbe025a119a1c35263b3c1bc"
+    },
+    {
+      "path": "apps/web/src/shared/meri-actions/workflow-transport.ts",
+      "gitBlob": "45a88a29c8e6f334a133a3917dfbee0b84ce0b09",
+      "bytes": 2038,
+      "sha256": "b32635261243e59f8605aafa84092e728ed083c58d33a9d6923e702cd25e2e3b"
+    },
+    {
+      "path": "apps/web/src/app/api/action-followthrough/[operation]/route.ts",
+      "gitBlob": "07a204d245df60e88c6a9309d452625b6f216bf1",
+      "bytes": 589,
+      "sha256": "a6f35fcd97672184101b6d77a609e6470c8f73da620a6ca1e8ecc39024154d26"
+    },
+    {
+      "path": "vendor/meri-public-packages.json",
+      "gitBlob": "dad44520b24e752e60d952ce49c022493b0103f4",
+      "bytes": 1840,
+      "sha256": "61f3faca8efc23e0ebe215ea99ff098d68346c28cf02f0d9d9a6a8450a5d54de"
+    },
+    {
+      "path": "apps/web/package.json",
+      "gitBlob": "cb490bbe3468f202f382616dbc23f32f7dc3bf71",
+      "bytes": 2050,
+      "sha256": "6de6b086942388fbdad21eca2f12bc1ba9f3a73f8ce9259249c46ffac3903134"
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/config/config.ts",
+      "gitBlob": "28551f81aa072dc5904f76a8f3287ddb77017a33",
+      "bytes": 3421,
+      "sha256": "e37e67bbf2a8306358d8d5925975392e9dd334c1bc4dc6689047003102004ea0"
+    }
+  ],
+  "frontendAllReadFilesEqualCommit": true,
+  "publicReceiver": {
+    "file": "/workspace/capiro-onboard-port-20261013/vendor/capiro-meri-contracts-0.1.1.tgz",
+    "bytes": 175627,
+    "sha256": "0ca8d0552a2960157ebdf7b8cecf6cacdcda48ef91c475060a54f15192535651",
+    "sourceRef": "83d1d8b2ae4604ca259be17461ae71ca60f5fb6e",
+    "version": "0.1.1",
+    "typesMember": "package/dist/action-application.d.ts"
+  },
+  "gitStatusPorcelain": "",
+  "scope": "Read-only exact source compatibility; no module imports/tests/runtime/network authority calls"
+}

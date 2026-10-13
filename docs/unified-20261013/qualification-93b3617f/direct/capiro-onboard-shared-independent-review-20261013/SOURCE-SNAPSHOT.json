@@ -1,0 +1,283 @@
+{
+  "capturedAtUTC": "2026-10-13T04:19:41.395050+00:00",
+  "head": "d4be41e60516e576c74afa304b50ed67da15cb93",
+  "scope": "Uncommitted changing WIP; per-file hashes bind review, not final accepted candidate",
+  "files": [
+    {
+      "path": "apps/web/src/shared/session/ApplicationBoundary.tsx",
+      "bytes": 4396,
+      "sha256": "5e98506dca794400ef4ab0831346b3cfead6589586c8d14513d24e033436de53"
+    },
+    {
+      "path": "apps/web/src/shared/session/onboard-route.ts",
+      "bytes": 523,
+      "sha256": "b636da7b72f927c800f557552748371c2d52c883e5560a2d4fff42f87b7c6d1e"
+    },
+    {
+      "path": "apps/web/src/shared/session/client-route.ts",
+      "bytes": 1296,
+      "sha256": "01ee7c1c6c92ab8702ca4ee3660dc176595fce3f577596057a44a19a443143c8"
+    },
+    {
+      "path": "apps/web/src/shared/session/request-lifetime.ts",
+      "bytes": 496,
+      "sha256": "77a0c8646b0e97d4a87c5129d6c7842432e7444b47ef0c44b222bf096060bb28"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/CapiroBoundary.tsx",
+      "bytes": 3482,
+      "sha256": "395f9979790f7cd9c4d95f6ecc4fd5db899270ee968c08a596b6e1011bda04a1"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/contracts.ts",
+      "bytes": 4985,
+      "sha256": "78ec4209d45f9e309ba6ba34b992950bf26ddf5f8318a6e0995d08194d500afb"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/gateway.ts",
+      "bytes": 11269,
+      "sha256": "6958576b47300c028c5e8fdda6d294f29299f0e313134f4155522adb56895933"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/gateway-input.ts",
+      "bytes": 3272,
+      "sha256": "4db1f3445d82a19de0633555248c82f0e0075f61dca29a29f8b788b8c56b6c05"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/http.ts",
+      "bytes": 6365,
+      "sha256": "0899d9f0735a77b0b0a76c581776d4a6d7e16915633c36dec332d7c2602ead01"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/registry.ts",
+      "bytes": 1519,
+      "sha256": "5c7eab255d9c0be4ccd71dfa6b8b6a2e33fdff7005bd44d38c1d51488de078ea"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/config.ts",
+      "bytes": 2578,
+      "sha256": "09ce8ba9a869cc0a8efce4540afda473bfad2c5bacd3f9e385131df64880fddb"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/onboard-api.tsx",
+      "bytes": 1631,
+      "sha256": "2feeef75c055ea4baf1e9d07253335292ce6c0d18f427c064025c8f8fa5f6d06"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/onboard-public-api.ts",
+      "bytes": 1101,
+      "sha256": "f5746831b6396265b946da2578ec1b9538b69ed39d0049430c647582eb4676a1"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/onboard-funnel-api.ts",
+      "bytes": 2429,
+      "sha256": "c9bbfda8a8ca963f6c54721aa89dbe92bab9b986956e86140ffaa5e96e55fd34"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/onboard-setup-api.ts",
+      "bytes": 1479,
+      "sha256": "3bb289c5f0e4aa19c53d1cea1f03977657f71e0b283b55d28785953b732f1a9b"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/onboard-core-api.ts",
+      "bytes": 3569,
+      "sha256": "b96b54a17da845f6a7aee3c211b46e0cb772ba3419694e3d6ddc11ad744940a3"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/onboard-navigation.ts",
+      "bytes": 2344,
+      "sha256": "71caeb0687b625577309743c959388ceb238258e52f4e96277b68f67e15a6ab2"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/onboard-adapters.test.ts",
+      "bytes": 12487,
+      "sha256": "e19db870c3467f568d1c4b1d44db35dcf3895541e87b4cb1befb47ab6dcdc187"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/settings-admin/profiles.ts",
+      "bytes": 1354,
+      "sha256": "5575bb864acf0ecbf4c715b2e31cd6061eef6a0bb7ab2a15d6faa2d4599ce95c"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/settings-admin/schemas.ts",
+      "bytes": 6568,
+      "sha256": "fc418bd6bda73668a7ed636f05b7eb9b4fea375ef546ba7a6f2ec13dfd759443"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/settings-schemas.ts",
+      "bytes": 8139,
+      "sha256": "10cb2c9496d6738589ed4b68ade8ff79a2e77c441dc9516aa885d6c88f364bec"
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/api/provider.tsx",
+      "bytes": 2049,
+      "sha256": "727318986e7f6ac9a1e644573a87a894c1db3d6fa4f9eb9d4806c37d2857d81a"
+    },
+    {
+      "path": "apps/web/src/app/_onboard/OnboardHost.tsx",
+      "bytes": 2860,
+      "sha256": "bbbfaed682c73d353875ca45251826881b26b4603f42102fce7478ac5e80b09e"
+    },
+    {
+      "path": "apps/web/src/app/_onboard/OnboardEntry.tsx",
+      "bytes": 462,
+      "sha256": "fed1120b3dc3b78d7c33f4ce3aa7235141b1d27071f217c176a23c6b01a14437"
+    },
+    {
+      "path": "apps/web/src/app/api/capiro/[operation]/route.ts",
+      "bytes": 1313,
+      "sha256": "d515dad0473b6da16edeba60f318f74c41e84867afaccb7c624deca75009cb2d"
+    },
+    {
+      "path": "apps/web/src/proxy.ts",
+      "bytes": 1429,
+      "sha256": "7a556132cd08c76f3247916b5c4756e20a6bb1a633ecbd00bbc4a8a26b297c68"
+    },
+    {
+      "path": "apps/web/next.config.ts",
+      "bytes": 823,
+      "sha256": "6f12074567a383b504a96bd559814c629233feba9b581998b6d3a31fb9a21c83"
+    },
+    {
+      "path": "apps/web/src/features/onboard/pages/setup/ImportOverlay.tsx",
+      "bytes": 29022,
+      "sha256": "005afb73d76056b1c8bc102bea9cad081d9835f9961086baca49db48b27d177b"
+    },
+    {
+      "path": "apps/web/src/features/onboard/lib/attempt-journal.ts",
+      "bytes": 3651,
+      "sha256": "6cb02c62e2bf8cb49e26f61a91ae785c487376e3976c34534f0d5590b86247bd"
+    },
+    {
+      "path": "apps/web/src/features/onboard/lib/use-onboard-attempt.ts",
+      "bytes": 973,
+      "sha256": "536cc29ec4c2ad4912cc77a4ea564ae28c2652a5ddfbb16b21e40a700a32ae25"
+    },
+    {
+      "path": "apps/web/src/features/onboard/lib/funnel.ts",
+      "bytes": 2604,
+      "sha256": "ca23ccb4312c202ab272a808bdc46d1d81ade16598ddd67c1753205eafcacd8e"
+    },
+    {
+      "path": "apps/web/src/features/onboard/pages/funnel/FunnelStepGuard.tsx",
+      "bytes": 2606,
+      "sha256": "52bc0fd848da0116a280b11c585e44dba9feb477340ed8a1b5e1bdb965e4a9c9"
+    },
+    {
+      "path": "apps/web/src/features/onboard/OnboardSurface.tsx",
+      "bytes": 533,
+      "sha256": "3c1d5c2ab802e91b9e434566dca4fbe0315c155391c680fec6c59ac2a71155c1"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/onboard-contracts.test.ts",
+      "bytes": 4737,
+      "sha256": "8730ae4265466196a1d3611ffd5a03d02081207840e929848649a58b0af57914"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/onboard-core-schemas.ts",
+      "bytes": 2367,
+      "sha256": "a47bd594512d4306f074af5e353975d22b33cd584947e85c36a005c18d968154"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/onboard-core.ts",
+      "bytes": 3196,
+      "sha256": "f9fe532b61ca8ff08a5fb09827c79d6747dabc4bcbec2538acfb7000ecba1ba7"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/onboard-funnel-schemas.ts",
+      "bytes": 4186,
+      "sha256": "f182447c2c0f18313c25c02308c8e619b57321a473d368058ad9587168847079"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/onboard-funnel.ts",
+      "bytes": 5337,
+      "sha256": "daae31a6ef71eae2a2b848319094f0dbd2ec6d008156e79404486d904a4ee158"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/onboard-public.ts",
+      "bytes": 1736,
+      "sha256": "bd4fa314aa19a1db87cb6abe919eb676057ebb645134169df4744d62d92fa01f"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/onboard-setup-schemas.ts",
+      "bytes": 2286,
+      "sha256": "b6913b8acb8d67dab4d11b868555d861ed81d976ea30b59db331ecfc126f2af1"
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/onboard-setup.ts",
+      "bytes": 1965,
+      "sha256": "fd1d556f1395c77ce52ca22f9bba2da3cd88f0237129c72ab7427a4edcc9d746"
+    },
+    {
+      "path": "apps/web/src/app/(onboard)/accept-invite/page.tsx",
+      "bytes": 146,
+      "sha256": "14187221803e4156c8487c8392e332b80e5d0780499aa691780c1e982c356f0d"
+    },
+    {
+      "path": "apps/web/src/app/(onboard)/admins/page.tsx",
+      "bytes": 139,
+      "sha256": "dbed3f9ca897413b8a0ed562c4182474365c7eb953e12d0a49469dec2d0cbae4"
+    },
+    {
+      "path": "apps/web/src/app/(onboard)/billing/page.tsx",
+      "bytes": 140,
+      "sha256": "b5fb1347f1e278eac9989f09ca195711f06f88710113e322edbd4b1bd39165c8"
+    },
+    {
+      "path": "apps/web/src/app/(onboard)/clients/page.tsx",
+      "bytes": 140,
+      "sha256": "4c23f2fd4e3ff616cf13a203617cb9b6ee1d5983cfe8f050c96b368b3d5d9215"
+    },
+    {
+      "path": "apps/web/src/app/(onboard)/confirm/page.tsx",
+      "bytes": 140,
+      "sha256": "7abe46ec8944fe70e36b67a1c7d4c1d4f7afc0f1e321f00ef8ec69c8f0beeb45"
+    },
+    {
+      "path": "apps/web/src/app/(onboard)/it/[token]/page.tsx",
+      "bytes": 145,
+      "sha256": "6c9bd52b962342b5214c6e47940be7283855c972829c1e21e7ff9cdbafa82c69"
+    },
+    {
+      "path": "apps/web/src/app/(onboard)/it/done/page.tsx",
+      "bytes": 143,
+      "sha256": "be133c0b668d7e05fafa7bcdd8d523c56dd3a2866581bb066b993af900aa856a"
+    },
+    {
+      "path": "apps/web/src/app/(onboard)/it/error/page.tsx",
+      "bytes": 144,
+      "sha256": "03ddc5ff0a390d01abdf6373e2cfaaf2cef98981f38a302debd12814982b7cd8"
+    },
+    {
+      "path": "apps/web/src/app/(onboard)/legal/page.tsx",
+      "bytes": 138,
+      "sha256": "4690ac13347bebfc47a8a8dd4e3b7c288142cf1bf4d61125de4c91330a6cfd7e"
+    },
+    {
+      "path": "apps/web/src/app/(onboard)/org/page.tsx",
+      "bytes": 136,
+      "sha256": "3c2f6d27609db9cd836c8f5f23fd30c47e13004a3b75fa3ae9a7b82e6f4f8b51"
+    },
+    {
+      "path": "apps/web/src/app/(onboard)/plan/page.tsx",
+      "bytes": 137,
+      "sha256": "1bf2dc321943e08b3eaca8eb9e96e365339a0191cd40c2351939ecb1bf55d075"
+    },
+    {
+      "path": "apps/web/src/app/(onboard)/register/page.tsx",
+      "bytes": 141,
+      "sha256": "8e5f4966c0583dc82d4c2a1041320eec3b7b309c9b95c4d0d7b151cc3cab6021"
+    },
+    {
+      "path": "apps/web/src/app/(onboard)/setup/page.tsx",
+      "bytes": 138,
+      "sha256": "e6ddb5856ef9830dc4995d2bee7fb8fbd7f41c43c84351f39b724a80d43d9024"
+    },
+    {
+      "path": "apps/web/src/app/(onboard)/verify/page.tsx",
+      "bytes": 139,
+      "sha256": "75f23eaa31ee50e3ca345140d6c13613aeccff42fe4161766b5d8aae3763b943"
+    }
+  ],
+  "status": " M apps/web/next.config.ts\n M apps/web/src/app/api/capiro/[operation]/route.ts\n M apps/web/src/proxy.ts\n M apps/web/src/shared/capiro/CapiroBoundary.tsx\n M apps/web/src/shared/capiro/contracts.ts\n M apps/web/src/shared/capiro/gateway.ts\n M apps/web/src/shared/capiro/http.ts\n M apps/web/src/shared/capiro/registry.test.ts\n M apps/web/src/shared/capiro/registry.ts\n M apps/web/src/shared/session/ApplicationBoundary.tsx\n?? apps/web/public/onboard/\n?? apps/web/src/app/(onboard)/\n?? apps/web/src/app/_onboard/\n?? apps/web/src/features/onboard/\n?? apps/web/src/shared/capiro/onboard-adapters.test.ts\n?? apps/web/src/shared/capiro/onboard-api.tsx\n?? apps/web/src/shared/capiro/onboard-contracts.ts\n?? apps/web/src/shared/capiro/onboard-core-api.ts\n?? apps/web/src/shared/capiro/onboard-funnel-api.ts\n?? apps/web/src/shared/capiro/onboard-gateway.test.ts\n?? apps/web/src/shared/capiro/onboard-navigation.ts\n?? apps/web/src/shared/capiro/onboard-public-api.ts\n?? apps/web/src/shared/capiro/onboard-setup-api.ts\n?? apps/web/src/shared/capiro/operations/onboard-contracts.test.ts\n?? apps/web/src/shared/capiro/operations/onboard-core-schemas.ts\n?? apps/web/src/shared/capiro/operations/onboard-core.ts\n?? apps/web/src/shared/capiro/operations/onboard-funnel-schemas.ts\n?? apps/web/src/shared/capiro/operations/onboard-funnel.ts\n?? apps/web/src/shared/capiro/operations/onboard-public.ts\n?? apps/web/src/shared/capiro/operations/onboard-setup-schemas.ts\n?? apps/web/src/shared/capiro/operations/onboard-setup.ts\n?? apps/web/src/shared/session/onboard-route.ts\n?? apps/web/tests/onboard-attempt-journal.test.ts\n?? apps/web/tests/onboard-import-recovery.test.ts\n?? apps/web/tests/onboard-input-refusal.test.ts\n?? apps/web/tests/onboard-invitation-recovery.test.ts\n?? apps/web/tests/onboard-lifecycle.test.ts\n?? apps/web/tests/onboard-registration-draft.test.ts\n?? apps/web/tests/onboard-stripe-confirmation.test.ts\n?? docs/onboard-port-20261013/\n?? node_modules\n"
+}

@@ -1,0 +1,533 @@
+{
+  "scope": "All six exact proposals genuinely failed full unfiltered axe violations[] on frozen93; not setup failures",
+  "postAxePortfolioAssertions": "Unchanged, not reached in this red baseline",
+  "tests": [
+    {
+      "title": "Portfolio home preserves accessible names, descriptions and default axe checks at 1440px",
+      "status": "failed",
+      "retry": 0,
+      "failureAtFullDefaultAxeAssertion": true,
+      "axeVersion": "4.14.0",
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 1440,
+        "windowHeight": 1040,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "raw": "/tmp/capiro-unified-a11y-regression-20261013/raw-axe/portfolio-1.json",
+      "rawSha256": "2f85e11a1df16327191f2777d563b702215cd65209452479ca7631bf1ad064e7",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 2,
+          "targets": [
+            [
+              ".stack > .eyebrow"
+            ],
+            [
+              "._addCard_12xfo_230"
+            ]
+          ]
+        },
+        {
+          "id": "heading-order",
+          "impact": "moderate",
+          "nodes": 1,
+          "targets": [
+            [
+              "._cardIdentity_12xfo_69 > h3"
+            ]
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "nodes": 1,
+          "targets": [
+            [
+              "._cardTop_12xfo_82"
+            ]
+          ]
+        }
+      ],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "impact": "serious",
+          "nodes": 3
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 13
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "nodes": 1
+        }
+      ]
+    },
+    {
+      "title": "Portfolio home preserves accessible names, descriptions and default axe checks at 390px",
+      "status": "failed",
+      "retry": 0,
+      "failureAtFullDefaultAxeAssertion": true,
+      "axeVersion": "4.14.0",
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 390,
+        "windowHeight": 844,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "raw": "/tmp/capiro-unified-a11y-regression-20261013/raw-axe/portfolio-2.json",
+      "rawSha256": "264ed0fffc19122dfaedcfa0c75cef985bc73670d96673f2ffaa73f7bec6199b",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 2,
+          "targets": [
+            [
+              ".stack > .eyebrow"
+            ],
+            [
+              "._addCard_12xfo_230"
+            ]
+          ]
+        },
+        {
+          "id": "heading-order",
+          "impact": "moderate",
+          "nodes": 1,
+          "targets": [
+            [
+              "._cardIdentity_12xfo_69 > h3"
+            ]
+          ]
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "nodes": 1,
+          "targets": [
+            [
+              "._cardTop_12xfo_82"
+            ]
+          ]
+        }
+      ],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "impact": "serious",
+          "nodes": 3
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 13
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "impact": "serious",
+          "nodes": 1
+        }
+      ]
+    },
+    {
+      "title": "meri home retains full default axe checks at 1440px",
+      "status": "failed",
+      "retry": 0,
+      "failureAtFullDefaultAxeAssertion": true,
+      "axeVersion": "4.14.0",
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 1440,
+        "windowHeight": 1040,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "raw": "/tmp/capiro-unified-a11y-regression-20261013/raw-axe/shared-1.json",
+      "rawSha256": "0b76f631fec208477bec1115fd6773036d6da7eaf75bfd41740b81f998f4f047",
+      "violations": [
+        {
+          "id": "aria-allowed-role",
+          "impact": "minor",
+          "nodes": 1,
+          "targets": [
+            [
+              "footer"
+            ]
+          ]
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 3,
+          "targets": [
+            [
+              "#recent-label"
+            ],
+            [
+              "._preferences_sgeic_121 > p"
+            ],
+            [
+              "._status_1b6sq_36"
+            ]
+          ]
+        },
+        {
+          "id": "region",
+          "impact": "moderate",
+          "nodes": 1,
+          "targets": [
+            [
+              "footer"
+            ]
+          ]
+        }
+      ],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "impact": "serious",
+          "nodes": 1
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1
+        }
+      ]
+    },
+    {
+      "title": "modules home retains full default axe checks at 1440px",
+      "status": "failed",
+      "retry": 0,
+      "failureAtFullDefaultAxeAssertion": true,
+      "axeVersion": "4.14.0",
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 1440,
+        "windowHeight": 1040,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "raw": "/tmp/capiro-unified-a11y-regression-20261013/raw-axe/shared-2.json",
+      "rawSha256": "f1612e07ceeff0e2d6f01a54bf9b85dba8a230f5065d9829128876e1b0fd0978",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 31,
+          "targets": [
+            [
+              "._eyebrow_1rqx0_14"
+            ],
+            [
+              "._relationship_10khq_39 > div:nth-child(1) > p"
+            ],
+            [
+              "div:nth-child(3) > p"
+            ],
+            [
+              "#run-work"
+            ],
+            [
+              "._workGrid_10khq_78 > article:nth-child(1) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(1)"
+            ],
+            [
+              "._workGrid_10khq_78 > article:nth-child(1) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(2)"
+            ],
+            [
+              "._workGrid_10khq_78 > article:nth-child(1) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(3)"
+            ],
+            [
+              "._workGrid_10khq_78 > article:nth-child(1) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(4)"
+            ],
+            [
+              "._workGrid_10khq_78 > article:nth-child(2) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(1)"
+            ],
+            [
+              "a[href=\"/modules/workspace?view=drafts\"]"
+            ],
+            [
+              "._workGrid_10khq_78 > article:nth-child(2) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(3)"
+            ],
+            [
+              "a[href=\"/modules/planner?view=list\"]"
+            ],
+            [
+              "a[href=\"/modules/planner?view=board\"]"
+            ],
+            [
+              "a[href=\"/modules/planner?view=calendar\"]"
+            ],
+            [
+              "a[href=\"/modules/planner?view=gantt\"]"
+            ],
+            [
+              "article:nth-child(4) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(1)"
+            ],
+            [
+              "article:nth-child(4) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(2)"
+            ],
+            [
+              "article:nth-child(4) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(3)"
+            ],
+            [
+              "a[href=\"/modules/strategies?view=runs\"]"
+            ],
+            [
+              "#know-landscape"
+            ],
+            [
+              "._wideCard_10khq_204 > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(1)"
+            ],
+            [
+              "._wideCard_10khq_204 > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(2)"
+            ],
+            [
+              "._wideCard_10khq_204 > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(3)"
+            ],
+            [
+              "._wideCard_10khq_204 > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(4)"
+            ],
+            [
+              "._chips_10khq_144 > a:nth-child(5)"
+            ],
+            [
+              "._landscapeGrid_10khq_83 > article:nth-child(2) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(1)"
+            ],
+            [
+              "._landscapeGrid_10khq_83 > article:nth-child(2) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(2)"
+            ],
+            [
+              "._landscapeGrid_10khq_83 > article:nth-child(2) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(3)"
+            ],
+            [
+              "article:nth-child(2) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(4)"
+            ],
+            [
+              "._landscapeGrid_10khq_83 > article:nth-child(3) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(1)"
+            ],
+            [
+              "._landscapeGrid_10khq_83 > article:nth-child(3) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(2)"
+            ]
+          ]
+        },
+        {
+          "id": "region",
+          "impact": "moderate",
+          "nodes": 1,
+          "targets": [
+            [
+              ".test-notice"
+            ]
+          ]
+        }
+      ],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 2
+        }
+      ]
+    },
+    {
+      "title": "meri home retains full default axe checks at 390px",
+      "status": "failed",
+      "retry": 0,
+      "failureAtFullDefaultAxeAssertion": true,
+      "axeVersion": "4.14.0",
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 390,
+        "windowHeight": 844,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "raw": "/tmp/capiro-unified-a11y-regression-20261013/raw-axe/shared-3.json",
+      "rawSha256": "d04c4c8fc5ebc7339ca13cde217eb91f826bccd7060141c8404ad35e7b56f2d5",
+      "violations": [
+        {
+          "id": "aria-allowed-role",
+          "impact": "minor",
+          "nodes": 1,
+          "targets": [
+            [
+              "footer"
+            ]
+          ]
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1,
+          "targets": [
+            [
+              "._status_1b6sq_36"
+            ]
+          ]
+        },
+        {
+          "id": "region",
+          "impact": "moderate",
+          "nodes": 1,
+          "targets": [
+            [
+              "footer"
+            ]
+          ]
+        }
+      ],
+      "incomplete": [
+        {
+          "id": "aria-prohibited-attr",
+          "impact": "serious",
+          "nodes": 1
+        }
+      ]
+    },
+    {
+      "title": "modules home retains full default axe checks at 390px",
+      "status": "failed",
+      "retry": 0,
+      "failureAtFullDefaultAxeAssertion": true,
+      "axeVersion": "4.14.0",
+      "environment": {
+        "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+        "windowWidth": 390,
+        "windowHeight": 844,
+        "orientationAngle": 0,
+        "orientationType": "landscape-primary"
+      },
+      "raw": "/tmp/capiro-unified-a11y-regression-20261013/raw-axe/shared-4.json",
+      "rawSha256": "63c7fd38236f6331990d7d4389ef8903d62377d20c584354d4f223f24cc0c7b2",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 31,
+          "targets": [
+            [
+              "._eyebrow_1rqx0_14"
+            ],
+            [
+              "._relationship_10khq_39 > div:nth-child(1) > p"
+            ],
+            [
+              "div:nth-child(3) > p"
+            ],
+            [
+              "#run-work"
+            ],
+            [
+              "._workGrid_10khq_78 > article:nth-child(1) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(1)"
+            ],
+            [
+              "._workGrid_10khq_78 > article:nth-child(1) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(2)"
+            ],
+            [
+              "._workGrid_10khq_78 > article:nth-child(1) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(3)"
+            ],
+            [
+              "._workGrid_10khq_78 > article:nth-child(1) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(4)"
+            ],
+            [
+              "._workGrid_10khq_78 > article:nth-child(2) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(1)"
+            ],
+            [
+              "a[href=\"/modules/workspace?view=drafts\"]"
+            ],
+            [
+              "._workGrid_10khq_78 > article:nth-child(2) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(3)"
+            ],
+            [
+              "a[href=\"/modules/planner?view=list\"]"
+            ],
+            [
+              "a[href=\"/modules/planner?view=board\"]"
+            ],
+            [
+              "a[href=\"/modules/planner?view=calendar\"]"
+            ],
+            [
+              "a[href=\"/modules/planner?view=gantt\"]"
+            ],
+            [
+              "article:nth-child(4) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(1)"
+            ],
+            [
+              "article:nth-child(4) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(2)"
+            ],
+            [
+              "article:nth-child(4) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(3)"
+            ],
+            [
+              "a[href=\"/modules/strategies?view=runs\"]"
+            ],
+            [
+              "#know-landscape"
+            ],
+            [
+              "._wideCard_10khq_204 > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(1)"
+            ],
+            [
+              "._wideCard_10khq_204 > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(2)"
+            ],
+            [
+              "._wideCard_10khq_204 > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(3)"
+            ],
+            [
+              "._wideCard_10khq_204 > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(4)"
+            ],
+            [
+              "._chips_10khq_144 > a:nth-child(5)"
+            ],
+            [
+              "._landscapeGrid_10khq_83 > article:nth-child(2) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(1)"
+            ],
+            [
+              "._landscapeGrid_10khq_83 > article:nth-child(2) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(2)"
+            ],
+            [
+              "._landscapeGrid_10khq_83 > article:nth-child(2) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(3)"
+            ],
+            [
+              "article:nth-child(2) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(4)"
+            ],
+            [
+              "._landscapeGrid_10khq_83 > article:nth-child(3) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(1)"
+            ],
+            [
+              "._landscapeGrid_10khq_83 > article:nth-child(3) > ._cardTop_10khq_103 > ._chips_10khq_144 > a:nth-child(2)"
+            ]
+          ]
+        },
+        {
+          "id": "region",
+          "impact": "moderate",
+          "nodes": 1,
+          "targets": [
+            [
+              ".test-notice"
+            ]
+          ]
+        }
+      ],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1
+        }
+      ]
+    }
+  ]
+}

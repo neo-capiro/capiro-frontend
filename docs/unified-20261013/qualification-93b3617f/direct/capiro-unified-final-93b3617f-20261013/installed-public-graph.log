@@ -1,0 +1,22 @@
+capiro-frontend@0.1.0 /tmp/capiro-onboard-execution-20261013
+├─┬ @capiro/meri-client@0.1.0 -> ./packages/meri-client
+│ ├── @capiro/meri-contracts@0.1.0
+│ └─┬ @capiro/meri-ui-stream@0.1.0
+│   └── @capiro/meri-contracts@0.1.0 deduped
+├─┬ @capiro/qualification-newsletter@0.0.0 -> ./packages/qualification-newsletter
+│ └── @capiro/shared@0.0.0
+├─┬ @capiro/qualification-transport@0.0.0 -> ./packages/qualification-transport
+│ ├── @capiro/meri-contracts@0.1.0 deduped
+│ └── @capiro/meri-ui-stream@0.1.0 deduped
+└─┬ @capiro/web@0.1.0 -> ./apps/web
+  ├── @capiro/meri-contracts@0.1.1
+  ├── @capiro/shared@0.0.0 deduped
+  ├─┬ @stripe/react-stripe-js@3.10.0
+  │ └── @stripe/stripe-js@5.10.0 deduped
+  └── @stripe/stripe-js@5.10.0
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

@@ -1,0 +1,40 @@
+import fs from 'node:fs';
+import vm from 'node:vm';
+import crypto from 'node:crypto';
+import ts from '/workspace/capiro-onboard-port-20261013/node_modules/typescript/lib/typescript.js';
+const base='/tmp/capiro-onboard-feature-independent-review-20261013';
+const file='apps/web/src/features/onboard/pages/funnel/LegalPage.tsx';
+const source=fs.readFileSync(`${base}/initial-source/${file}`,'utf8');
+const code=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.React,esModuleInterop:true,target:ts.ScriptTarget.ES2022}}).outputText;
+const results=[];
+for(const replacement of [false,true]) {
+ let slots=[],cursor=0,docs=[{docType:'tos',version:'tos-A',html:'Reviewed terms A'},{docType:'sa',version:'sa-A',html:'Reviewed agreement A'}];
+ const calls=[];
+ const React={createElement:(type,props,...children)=>({type,props:{...props,children:children.length===1?children[0]:children}}),useState(initial){const i=cursor++;if(!(i in slots))slots[i]=typeof initial==='function'?initial():initial;return [slots[i],value=>{slots[i]=typeof value==='function'?value(slots[i]):value}];}};
+ const guard={current:()=>true,assertCurrent(){},wait:fn=>fn()};
+ const write={record:undefined,locked:false,blocked:()=>false,guard:()=>guard,run:async(_intent,perform)=>perform(guard)};
+ const api={getLegal:async()=>docs,acceptLegal:async body=>{calls.push(body);return {ok:true}}};
+ const primitives=Object.fromEntries(['Btn','Card','Checkbox','Field','FunnelShell','Icon','ScreenTitle','Spinner','TextInput'].map(n=>[n,n]));
+ const imports={react:React,'../../lib/FunnelLifetime':{useFunnelLifetime:()=>({key:['onboard','funnel','A'],read:fn=>fn()})},'../../lib/use-onboard-attempt':{useOnboardAttempt:()=>write},'../../ui/AttemptStatus':{AttemptStatus:'AttemptStatus',PendingFields:'PendingFields'},'../../lib/funnel-routes':{routeForState:()=>'/billing'},'../../navigation':{useNavigate:()=>()=>{}},'@tanstack/react-query':{useQuery:()=>({isSuccess:true,error:null,data:docs})},'../../ui/primitives':primitives,'../../lib/funnel':{useAdvanceSession:()=>async()=>({state:'legal_accepted'}),useFunnelApi:()=>api,useFunnelSession:()=>({data:{sessionId:'A',plan:'paid',firstName:'Synthetic',lastName:'Purchaser',orgName:'Synthetic firm',email:'synthetic@example.test'}})},'./shared':{ErrorText:'ErrorText',errorMessage:String}};
+ const module={exports:{}};
+ vm.runInNewContext(code,{module,exports:module.exports,require(name){if(!(name in imports))throw Error(`Unexpected import ${name}`);return imports[name];}},{filename:file});
+ const render=()=>{cursor=0;return module.exports.LegalPage()};
+ function nodes(v){if(Array.isArray(v))return v.flatMap(nodes);if(!v||typeof v!=='object')return [];return [v,...nodes(v.props?.children)];}
+ const select=(tree,predicate)=>nodes(tree).find(predicate);
+ let tree=render();
+ for(const n of nodes(tree).filter(n=>typeof n.type==='function'&&n.type.name==='LegalBlock'))n.props.onChange(true);
+ select(tree,n=>n.type==='Field'&&n.props.label==='Title').props.children.props.onChange({target:{value:'Synthetic authorized reviewer'}});
+ select(tree,n=>n.type==='Checkbox').props.onChange(true);
+ tree=render();
+ const before=select(tree,n=>n.type==='Btn'&&String(n.props.children).includes('Sign'));
+ if(replacement)docs=[{docType:'tos',version:'tos-B',html:'Unreviewed terms B'},{docType:'sa',version:'sa-B',html:'Unreviewed agreement B'}];
+ tree=render();
+ const sign=select(tree,n=>n.type==='Btn'&&String(n.props.children).includes('Sign'));
+ await sign.props.onClick();
+ await new Promise(resolve=>setImmediate(resolve));
+ results.push({replacement,beforeEnabled:!before.props.disabled,afterEnabled:!sign.props.disabled,currentAcknowledgements:nodes(tree).filter(n=>typeof n.type==='function'&&n.type.name==='LegalBlock').map(n=>({title:n.props.title,checked:n.props.checked,html:n.props.html})),syntheticApiCalls:calls,expected:replacement?'Re-review required; no acceptLegal call':'Same reviewed documents remain eligible; one call',pass:replacement?sign.props.disabled===true&&calls.length===0:before.props.disabled===false&&calls.length===1});
+}
+const receipt={atUTC:new Date().toISOString(),method:'Pure execution of captured LegalPage function using minimal hook-state/element projection fixtures. No React mount, browser, native request, schema/transport execution or provider. All require imports closed-listed synthetic stubs. Production source is not changed.',source:file,sourceSha256:crypto.createHash('sha256').update(source).digest('hex'),results};
+fs.writeFileSync(`${base}/LEGAL-BINDING-PROBE.json`,JSON.stringify(receipt,null,2)+'\n');
+console.log(JSON.stringify(receipt,null,2));
+process.exitCode=results.every(r=>r.pass)?0:1;

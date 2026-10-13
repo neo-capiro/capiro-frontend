@@ -1,0 +1,26 @@
+{
+  "oldMembers": 182,
+  "newMembers": 187,
+  "added": [
+    "package/dist/newsletter-receiving.d.ts",
+    "package/dist/newsletter-receiving.d.ts.map",
+    "package/dist/newsletter-receiving.js",
+    "package/dist/newsletter-receiving.js.map",
+    "package/src/newsletter-receiving.ts"
+  ],
+  "removed": [],
+  "changed": [
+    "package/dist/newsletter-render.d.ts",
+    "package/dist/newsletter.d.ts",
+    "package/dist/newsletter.d.ts.map",
+    "package/dist/newsletter.js",
+    "package/dist/newsletter.js.map",
+    "package/src/newsletter.ts"
+  ],
+  "packageJsonUnchanged": true,
+  "unchangedOriginalRendererModules": [
+    "newsletter-fonts",
+    "newsletter-fonts.catalog",
+    "newsletter-social-share"
+  ]
+}

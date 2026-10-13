@@ -1,0 +1,24 @@
+{
+  "phase": "shared",
+  "stats": {
+    "startTime": "2026-10-13T07:15:24.464Z",
+    "duration": 38182.086,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  },
+  "workers": 1,
+  "projects": [
+    {
+      "name": "portfolio",
+      "timeout": 30000,
+      "retries": 0
+    },
+    {
+      "name": "shared",
+      "timeout": 30000,
+      "retries": 0
+    }
+  ]
+}

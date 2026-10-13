@@ -1,0 +1,42 @@
+{
+  "status": "CONTRACT_REVIEW_COMPLETE_PUBLIC_RECEIVING_PACKAGE_BLOCKS_ADAPTER",
+  "publishedMeriRef": "a0614e7e16d6f92d0ca6eaa192cea7c5def21ec8",
+  "frontendReviewedRef": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+  "recommendedEntrypoint": {
+    "label": "Files",
+    "route": "/meri/files",
+    "desktopOwner": "apps/web/src/shared/shell/Sidebar.tsx",
+    "mobileOwner": "apps/web/src/shared/shell/MeriMobileNavigation.tsx",
+    "scope": "Typed DOCX create, explicit full-replacement revision, inspect and verified download for actually known versions",
+    "noInventedListAPI": true
+  },
+  "blockers": [
+    {
+      "id": "DOC-CONTRACT-01",
+      "classification": "public-package prerequisite",
+      "finding": "Public0.1.1 and exact PR50 package exports contain no document request/success/error/binary receiver. Existing action receiver supports only query/draft/prepare/execute.",
+      "requiredOwnerAction": "Publish canonical versioned browser receiving/request projection and immutable artifact; preserve existing public consumers."
+    }
+  ],
+  "unresolvedContractDetails": [
+    "canonical nested WordRequest/version/inspection/execution shapes and correlations",
+    "delivery/version ID grammar and allocation/reconciliation ownership",
+    "binary response metadata/hash/filename/MIME and agreed finite limits",
+    "known-version reopening/discovery expectations without a list endpoint"
+  ],
+  "laterImplementationOnly": true,
+  "separateWorktreeRequired": true,
+  "implementationStarted": false,
+  "frontendMutations": false,
+  "privateBackendImplementationCopied": false,
+  "runtimeOrTestsRun": false,
+  "nativeActivationQualified": false,
+  "commitmentsUI": false,
+  "retainedPublisherCounts": {
+    "canonical": 512,
+    "workflow": 21,
+    "independent": 37,
+    "independentlyRerun": false
+  },
+  "qualificationTransferred": false
+}

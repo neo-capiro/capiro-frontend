@@ -1,0 +1,126 @@
+{
+  "artifactManifestRecords": 6,
+  "uniqueArtifacts": 5,
+  "artifactChecks": [
+    {
+      "file": "capiro-meri-contracts-0.1.0.tgz",
+      "bytes": 48823,
+      "sha256": "2f15ade9458cbffe960b7cc36c6fb77cb54cc2a0eca4bc7c0f918b77cfacd4ee",
+      "sourceCommit": "0dc9ce423947fc7814d7f8ad8de2f633c187c6d8",
+      "verifiedBytes": 48823,
+      "verifiedSha256": "2f15ade9458cbffe960b7cc36c6fb77cb54cc2a0eca4bc7c0f918b77cfacd4ee",
+      "matches": true
+    },
+    {
+      "file": "capiro-meri-ui-stream-0.1.0.tgz",
+      "bytes": 2280,
+      "sha256": "7ce24acd465dca4c5e90c1c98dba383318aab024dbce5170fa1f1daf3bce83ab",
+      "sourceCommit": "12289a434be6f589bbff9c741367b8cfb77f2616",
+      "verifiedBytes": 2280,
+      "verifiedSha256": "7ce24acd465dca4c5e90c1c98dba383318aab024dbce5170fa1f1daf3bce83ab",
+      "matches": true
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.1.tgz",
+      "bytes": 175627,
+      "sha256": "0ca8d0552a2960157ebdf7b8cecf6cacdcda48ef91c475060a54f15192535651",
+      "sourceCommit": "83d1d8b2ae4604ca259be17461ae71ca60f5fb6e",
+      "verifiedBytes": 175627,
+      "verifiedSha256": "0ca8d0552a2960157ebdf7b8cecf6cacdcda48ef91c475060a54f15192535651",
+      "matches": true
+    },
+    {
+      "file": "capiro-shared-0.0.0.tgz",
+      "bytes": 510772,
+      "sha256": "697d826647e88e7f8559da386be7de1ae6408dc61c73877b86c2e17275fd63ab",
+      "sourceCommit": "fe50dc1c2de1660a036e338cf81acdcf0f2fb26a",
+      "verifiedBytes": 510772,
+      "verifiedSha256": "697d826647e88e7f8559da386be7de1ae6408dc61c73877b86c2e17275fd63ab",
+      "matches": true
+    },
+    {
+      "file": "capiro-shared-0.0.0-38fec5c8.tgz",
+      "bytes": 532178,
+      "sha256": "3e435f280fac8fd301eb753e9fc7ead93691cf979fc1641792fedd88e1bfd6d5",
+      "sourceCommit": "38fec5c83585850ed75a7d3693b3b90d517e70af",
+      "verifiedBytes": 532178,
+      "verifiedSha256": "3e435f280fac8fd301eb753e9fc7ead93691cf979fc1641792fedd88e1bfd6d5",
+      "matches": true
+    },
+    {
+      "file": "capiro-shared-0.0.0-38fec5c8.tgz",
+      "bytes": 532178,
+      "sha256": "3e435f280fac8fd301eb753e9fc7ead93691cf979fc1641792fedd88e1bfd6d5",
+      "sourceCommit": "38fec5c83585850ed75a7d3693b3b90d517e70af",
+      "verifiedBytes": 532178,
+      "verifiedSha256": "3e435f280fac8fd301eb753e9fc7ead93691cf979fc1641792fedd88e1bfd6d5",
+      "matches": true
+    }
+  ],
+  "appDirectDependencies": {
+    "@capiro/ui": "0.0.0",
+    "@capiro/shared": "file:../../vendor/capiro-shared-0.0.0-38fec5c8.tgz",
+    "@stripe/react-stripe-js": "3.10.0",
+    "@stripe/stripe-js": "5.10.0",
+    "@capiro/meri-contracts": "file:../../vendor/capiro-meri-contracts-0.1.1.tgz"
+  },
+  "lockEntries": {
+    "apps/web/node_modules/@capiro/meri-contracts": {
+      "version": "0.1.1",
+      "resolved": "file:vendor/capiro-meri-contracts-0.1.1.tgz",
+      "integrity": "sha512-DQGUUm88mWTb0w7Me7CqvN9l+XTZwgtHD1VymifcyZHZes4O2ZugmxSMmH5Zwzs8m+3OLQS+/ulq8wKQ0ntxpA==",
+      "license": "UNLICENSED",
+      "dependencies": {
+        "ajv": "8.20.0",
+        "ajv-formats": "3.0.1",
+        "canonicalize": "5.1.0"
+      },
+      "engines": {
+        "node": ">=24 <25"
+      }
+    },
+    "node_modules/@capiro/meri-contracts": {
+      "version": "0.1.0",
+      "resolved": "file:vendor/capiro-meri-contracts-0.1.0.tgz",
+      "integrity": "sha512-gsJpKHbwliWB2jVP1jVoaH+t9RNrIC334+VkU3hYN7MrkCF7INS9YES+prCSD7SfVn7gIsp7eTwM1kCHwfQ3EA==",
+      "license": "UNLICENSED",
+      "dependencies": {
+        "ajv": "8.20.0",
+        "ajv-formats": "3.0.1",
+        "canonicalize": "5.1.0"
+      },
+      "engines": {
+        "node": ">=24 <25"
+      }
+    },
+    "node_modules/@capiro/shared": {
+      "version": "0.0.0",
+      "resolved": "file:vendor/capiro-shared-0.0.0-38fec5c8.tgz",
+      "integrity": "sha512-qYNGTMe2gP6BHxDw+daj1SHkNbAFenVY/PnScny1IkHl/PL3cspHSFYa9KAyCeWesjXUOSRTWOKxX07oH6OvQw=="
+    },
+    "node_modules/@stripe/react-stripe-js": {
+      "version": "3.10.0",
+      "resolved": "https://registry.npmjs.org/@stripe/react-stripe-js/-/react-stripe-js-3.10.0.tgz",
+      "integrity": "sha512-UPqHZwMwDzGSax0ZI7XlxR3tZSpgIiZdk3CiwjbTK978phwR/fFXeAXQcN/h8wTAjR4ZIAzdlI9DbOqJhuJdeg==",
+      "license": "MIT",
+      "dependencies": {
+        "prop-types": "^15.7.2"
+      },
+      "peerDependencies": {
+        "@stripe/stripe-js": ">=1.44.1 <8.0.0",
+        "react": ">=16.8.0 <20.0.0",
+        "react-dom": ">=16.8.0 <20.0.0"
+      }
+    },
+    "node_modules/@stripe/stripe-js": {
+      "version": "5.10.0",
+      "resolved": "https://registry.npmjs.org/@stripe/stripe-js/-/stripe-js-5.10.0.tgz",
+      "integrity": "sha512-PTigkxMdMUP6B5ISS7jMqJAKhgrhZwjprDqR1eATtFfh0OpKVNp110xiH+goeVdrJ29/4LeZJR4FaHHWstsu0A==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=12.16"
+      }
+    }
+  },
+  "boundaryConclusion": "All212 public/receiving/architecture-critical tracked paths are Git-blob identical to accepted6a. Only mobile shell3 source files plus additive browser spec changed in application. No receiving, capability, approval or native-dispatch mutation."
+}

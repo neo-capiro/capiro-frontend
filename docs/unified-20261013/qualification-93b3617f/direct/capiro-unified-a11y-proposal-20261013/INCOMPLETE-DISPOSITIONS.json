@@ -1,0 +1,1357 @@
+[
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/meri-1440x1040.json",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "rule": "aria-prohibited-attr",
+    "target": [
+      "._suggestions_1b6sq_170"
+    ],
+    "html": "<div class=\"_suggestions_1b6sq_170\" aria-label=\"Draft suggestions\">",
+    "checks": [
+      {
+        "id": "aria-prohibited-attr",
+        "data": {
+          "role": null,
+          "nodeName": "div",
+          "messageKey": "noRoleSingular",
+          "prohibited": [
+            "aria-label"
+          ]
+        },
+        "relatedNodes": [],
+        "impact": "serious",
+        "message": "aria-label attribute is not well supported on \"div\" elements with no valid role attribute."
+      }
+    ],
+    "status": "source-supported semantic proposal; rendered/AT verification unrun",
+    "disposition": "Patch 03: valid named group for three suggestion cards; preserve buttons and keyboard order."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/meri-1440x1040.json",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "rule": "color-contrast",
+    "target": [
+      "._newConversation_sgeic_65"
+    ],
+    "html": "<button data-slot=\"button\" class=\"inline-flex items-ce...\" type=\"button\">",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "10.5pt (14px)",
+          "fontWeight": "normal",
+          "messageKey": "bgGradient",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<button data-slot=\"button\" class=\"inline-flex items-ce...\" type=\"button\">",
+            "target": [
+              "._newConversation_sgeic_65"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element's background color could not be determined due to a background gradient"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Retain dark gradient; source endpoint arithmetic supports contrast (white >=15.52, pulse muted >=6.15), but actual computed rendering/compositing needs manual confirmation."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/meri-390x844.json",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rule": "aria-prohibited-attr",
+    "target": [
+      "._suggestions_1b6sq_170"
+    ],
+    "html": "<div class=\"_suggestions_1b6sq_170\" aria-label=\"Draft suggestions\">",
+    "checks": [
+      {
+        "id": "aria-prohibited-attr",
+        "data": {
+          "role": null,
+          "nodeName": "div",
+          "messageKey": "noRoleSingular",
+          "prohibited": [
+            "aria-label"
+          ]
+        },
+        "relatedNodes": [],
+        "impact": "serious",
+        "message": "aria-label attribute is not well supported on \"div\" elements with no valid role attribute."
+      }
+    ],
+    "status": "source-supported semantic proposal; rendered/AT verification unrun",
+    "disposition": "Patch 03: valid named group for three suggestion cards; preserve buttons and keyboard order."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/modules-1440x1040.json",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "rule": "color-contrast",
+    "target": [
+      "span[aria-hidden=\"true\"]"
+    ],
+    "html": "<span aria-hidden=\"true\">\u2192</span>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "messageKey": "nonBmp"
+        },
+        "relatedNodes": [],
+        "impact": "serious",
+        "message": "Element content contains only non-text characters"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Decorative Modules arrow is already aria-hidden. Keep it; verify adjacent link label and visual affordance. Do not count as automated contrast pass."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/modules-1440x1040.json",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "rule": "color-contrast",
+    "target": [
+      "._primaryOpen_10khq_192"
+    ],
+    "html": "<a class=\"_open_10khq_179 _primaryOpen_10khq_192\" href=\"/modules/engagement\">Open Engagement</a>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "10.5pt (14px)",
+          "fontWeight": "normal",
+          "messageKey": "bgGradient",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<a class=\"_open_10khq_179 _primaryOpen_10khq_192\" href=\"/modules/engagement\">Open Engagement</a>",
+            "target": [
+              "._primaryOpen_10khq_192"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element's background color could not be determined due to a background gradient"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Retain dark gradient; source endpoint arithmetic supports contrast (white >=15.52, pulse muted >=6.15), but actual computed rendering/compositing needs manual confirmation."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/modules-390x844.json",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rule": "color-contrast",
+    "target": [
+      "._primaryOpen_10khq_192"
+    ],
+    "html": "<a class=\"_open_10khq_179 _primaryOpen_10khq_192\" href=\"/modules/engagement\">Open Engagement</a>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "10.5pt (14px)",
+          "fontWeight": "normal",
+          "messageKey": "bgGradient",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<a class=\"_open_10khq_179 _primaryOpen_10khq_192\" href=\"/modules/engagement\">Open Engagement</a>",
+            "target": [
+              "._primaryOpen_10khq_192"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element's background color could not be determined due to a background gradient"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Retain dark gradient; source endpoint arithmetic supports contrast (white >=15.52, pulse muted >=6.15), but actual computed rendering/compositing needs manual confirmation."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-1440x1040.json",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "rule": "aria-prohibited-attr",
+    "target": [
+      ".chip"
+    ],
+    "html": "<span class=\"chip\" aria-label=\"Profile status: ACTIVE\">ACTIVE</span>",
+    "checks": [
+      {
+        "id": "aria-prohibited-attr",
+        "data": {
+          "role": null,
+          "nodeName": "span",
+          "messageKey": "noRoleSingular",
+          "prohibited": [
+            "aria-label"
+          ]
+        },
+        "relatedNodes": [],
+        "impact": "serious",
+        "message": "aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+      }
+    ],
+    "status": "source-supported semantic proposal; rendered/AT verification unrun",
+    "disposition": "Patch 03: named note for supplementary status/count annotation; retain exact label and visible text without adding a live region."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-1440x1040.json",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "rule": "aria-prohibited-attr",
+    "target": [
+      "._ownerAvatar_12xfo_120"
+    ],
+    "html": "<span class=\"_ownerAvatar_12xfo_120\" title=\"Owner unavailable\" aria-label=\"Account owner: unavailable\">\u2014</span>",
+    "checks": [
+      {
+        "id": "aria-prohibited-attr",
+        "data": {
+          "role": null,
+          "nodeName": "span",
+          "messageKey": "noRoleSingular",
+          "prohibited": [
+            "aria-label"
+          ]
+        },
+        "relatedNodes": [],
+        "impact": "serious",
+        "message": "aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+      }
+    ],
+    "status": "source-supported semantic proposal; rendered/AT verification unrun",
+    "disposition": "Patch 03: named img role for symbolic owner avatar; preserve full owner text/fallback."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-1440x1040.json",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "rule": "aria-prohibited-attr",
+    "target": [
+      "._count_1umtm_21"
+    ],
+    "html": "<span class=\"_count_1umtm_21\" aria-label=\"0 shown alerts\">0 shown</span>",
+    "checks": [
+      {
+        "id": "aria-prohibited-attr",
+        "data": {
+          "role": null,
+          "nodeName": "span",
+          "messageKey": "noRoleSingular",
+          "prohibited": [
+            "aria-label"
+          ]
+        },
+        "relatedNodes": [],
+        "impact": "serious",
+        "message": "aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+      }
+    ],
+    "status": "source-supported semantic proposal; rendered/AT verification unrun",
+    "disposition": "Patch 03: named note for supplementary status/count annotation; retain exact label and visible text without adding a live region."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-1440x1040.json",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "rule": "color-contrast",
+    "target": [
+      ".monogram"
+    ],
+    "html": "<button aria-label=\"Test account\" class=\"monogram\" style=\"width: 32px; height: 32px; border-radius: 50%;\">T</button>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "10.5pt (14px)",
+          "fontWeight": "normal",
+          "messageKey": "shortTextContent",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<button aria-label=\"Test account\" class=\"monogram\" style=\"width: 32px; height: 32px; border-radius: 50%;\">T</button>",
+            "target": [
+              ".monogram"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element content is too short to determine if it is actual text content"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Inspect short text/counter and computed gradient foreground/background. Meaningful counts stay exposed; symbolic account remains named. No result suppression."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-1440x1040.json",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "rule": "color-contrast",
+    "target": [
+      "._headerActions_12xfo_211 > .primary"
+    ],
+    "html": "<button class=\"button primary\">",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "10.5pt (14px)",
+          "fontWeight": "normal",
+          "messageKey": "bgGradient",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<button class=\"button primary\">",
+            "target": [
+              "._headerActions_12xfo_211 > .primary"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element's background color could not be determined due to a background gradient"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Retain dark gradient; source endpoint arithmetic supports contrast (white >=15.52, pulse muted >=6.15), but actual computed rendering/compositing needs manual confirmation."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-1440x1040.json",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "rule": "color-contrast",
+    "target": [
+      "._coverage_12xfo_31 > .eyebrow"
+    ],
+    "html": "<p class=\"eyebrow\">Portfolio pulse</p>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "8.3pt (11px)",
+          "fontWeight": "normal",
+          "messageKey": "bgGradient",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<section class=\"_pulse_12xfo_10\" aria-label=\"Portfolio pulse\">",
+            "target": [
+              "._pulse_12xfo_10"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element's background color could not be determined due to a background gradient"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Retain dark gradient; source endpoint arithmetic supports contrast (white >=15.52, pulse muted >=6.15), but actual computed rendering/compositing needs manual confirmation."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-1440x1040.json",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "rule": "color-contrast",
+    "target": [
+      ".row > small"
+    ],
+    "html": "<small>of work linked<br>to an objective</small>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "8.8pt (11.6667px)",
+          "fontWeight": "normal",
+          "messageKey": "bgGradient",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<section class=\"_pulse_12xfo_10\" aria-label=\"Portfolio pulse\">",
+            "target": [
+              "._pulse_12xfo_10"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element's background color could not be determined due to a background gradient"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Retain dark gradient; source endpoint arithmetic supports contrast (white >=15.52, pulse muted >=6.15), but actual computed rendering/compositing needs manual confirmation."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-1440x1040.json",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "rule": "color-contrast",
+    "target": [
+      "._pulse_12xfo_10 > div:nth-child(2) > strong"
+    ],
+    "html": "<strong>1</strong>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "16.5pt (22px)",
+          "fontWeight": "normal",
+          "messageKey": "shortTextContent",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<section class=\"_pulse_12xfo_10\" aria-label=\"Portfolio pulse\">",
+            "target": [
+              "._pulse_12xfo_10"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element content is too short to determine if it is actual text content"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Inspect short text/counter and computed gradient foreground/background. Meaningful counts stay exposed; symbolic account remains named. No result suppression."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-1440x1040.json",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "rule": "color-contrast",
+    "target": [
+      "div:nth-child(2) > .eyebrow"
+    ],
+    "html": "<span class=\"eyebrow\">Clients</span>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "8.3pt (11px)",
+          "fontWeight": "normal",
+          "messageKey": "bgGradient",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<section class=\"_pulse_12xfo_10\" aria-label=\"Portfolio pulse\">",
+            "target": [
+              "._pulse_12xfo_10"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element's background color could not be determined due to a background gradient"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Retain dark gradient; source endpoint arithmetic supports contrast (white >=15.52, pulse muted >=6.15), but actual computed rendering/compositing needs manual confirmation."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-1440x1040.json",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "rule": "color-contrast",
+    "target": [
+      "div:nth-child(3) > .eyebrow"
+    ],
+    "html": "<span class=\"eyebrow\">Need attention</span>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "8.3pt (11px)",
+          "fontWeight": "normal",
+          "messageKey": "bgGradient",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<section class=\"_pulse_12xfo_10\" aria-label=\"Portfolio pulse\">",
+            "target": [
+              "._pulse_12xfo_10"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element's background color could not be determined due to a background gradient"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Retain dark gradient; source endpoint arithmetic supports contrast (white >=15.52, pulse muted >=6.15), but actual computed rendering/compositing needs manual confirmation."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-1440x1040.json",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "rule": "color-contrast",
+    "target": [
+      "div:nth-child(4) > .eyebrow"
+    ],
+    "html": "<span class=\"eyebrow\">Objectives</span>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "8.3pt (11px)",
+          "fontWeight": "normal",
+          "messageKey": "bgGradient",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<section class=\"_pulse_12xfo_10\" aria-label=\"Portfolio pulse\">",
+            "target": [
+              "._pulse_12xfo_10"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element's background color could not be determined due to a background gradient"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Retain dark gradient; source endpoint arithmetic supports contrast (white >=15.52, pulse muted >=6.15), but actual computed rendering/compositing needs manual confirmation."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-1440x1040.json",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "rule": "color-contrast",
+    "target": [
+      "div:nth-child(5) > .eyebrow"
+    ],
+    "html": "<span class=\"eyebrow\">Off track</span>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "8.3pt (11px)",
+          "fontWeight": "normal",
+          "messageKey": "bgGradient",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<section class=\"_pulse_12xfo_10\" aria-label=\"Portfolio pulse\">",
+            "target": [
+              "._pulse_12xfo_10"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element's background color could not be determined due to a background gradient"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Retain dark gradient; source endpoint arithmetic supports contrast (white >=15.52, pulse muted >=6.15), but actual computed rendering/compositing needs manual confirmation."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-1440x1040.json",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "rule": "color-contrast",
+    "target": [
+      "div:nth-child(6) > .eyebrow"
+    ],
+    "html": "<span class=\"eyebrow\">Strategies</span>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "8.3pt (11px)",
+          "fontWeight": "normal",
+          "messageKey": "bgGradient",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<section class=\"_pulse_12xfo_10\" aria-label=\"Portfolio pulse\">",
+            "target": [
+              "._pulse_12xfo_10"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element's background color could not be determined due to a background gradient"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Retain dark gradient; source endpoint arithmetic supports contrast (white >=15.52, pulse muted >=6.15), but actual computed rendering/compositing needs manual confirmation."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-1440x1040.json",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "rule": "color-contrast",
+    "target": [
+      "._tabs_12xfo_130 > .primary"
+    ],
+    "html": "<button class=\"button primary\" aria-pressed=\"true\">All <small>1</small></button>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "9.0pt (12px)",
+          "fontWeight": "normal",
+          "messageKey": "bgGradient",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<button class=\"button primary\" aria-pressed=\"true\">All <small>1</small></button>",
+            "target": [
+              "._tabs_12xfo_130 > .primary"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element's background color could not be determined due to a background gradient"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Retain dark gradient; source endpoint arithmetic supports contrast (white >=15.52, pulse muted >=6.15), but actual computed rendering/compositing needs manual confirmation."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-1440x1040.json",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "rule": "color-contrast",
+    "target": [
+      ".primary > small"
+    ],
+    "html": "<small>1</small>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "7.5pt (10px)",
+          "fontWeight": "normal",
+          "messageKey": "shortTextContent",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<button class=\"button primary\" aria-pressed=\"true\">All <small>1</small></button>",
+            "target": [
+              "._tabs_12xfo_130 > .primary"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element content is too short to determine if it is actual text content"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Inspect short text/counter and computed gradient foreground/background. Meaningful counts stay exposed; symbolic account remains named. No result suppression."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-1440x1040.json",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "rule": "color-contrast",
+    "target": [
+      "._profileLogo_12xfo_94"
+    ],
+    "html": "<span class=\"_profileLogo_12xfo_94\">TA</span>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "9.0pt (12px)",
+          "fontWeight": "normal",
+          "messageKey": "bgGradient",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<span class=\"_profileLogo_12xfo_94\">TA</span>",
+            "target": [
+              "._profileLogo_12xfo_94"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element's background color could not be determined due to a background gradient"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Retain dark gradient; source endpoint arithmetic supports contrast (white >=15.52, pulse muted >=6.15), but actual computed rendering/compositing needs manual confirmation."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-1440x1040.json",
+    "viewport": {
+      "width": 1440,
+      "height": 1040
+    },
+    "rule": "label-content-name-mismatch",
+    "target": [
+      ".monogram"
+    ],
+    "html": "<button aria-label=\"Test account\" class=\"monogram\" style=\"width: 32px; height: 32px; border-radius: 50%;\">T</button>",
+    "checks": [
+      {
+        "id": "label-content-name-mismatch",
+        "data": null,
+        "relatedNodes": [],
+        "impact": "serious",
+        "message": "Unable to determine if the visible text is part of the accessible name"
+      }
+    ],
+    "status": "manual review outstanding",
+    "disposition": "Fixture Test account avatar T is a symbolic initial. Preserve exact account name; manually verify symbol/name relationship. No proven literal-label mismatch, no suppression proposed."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-390x844.json",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rule": "aria-prohibited-attr",
+    "target": [
+      ".chip"
+    ],
+    "html": "<span class=\"chip\" aria-label=\"Profile status: ACTIVE\">ACTIVE</span>",
+    "checks": [
+      {
+        "id": "aria-prohibited-attr",
+        "data": {
+          "role": null,
+          "nodeName": "span",
+          "messageKey": "noRoleSingular",
+          "prohibited": [
+            "aria-label"
+          ]
+        },
+        "relatedNodes": [],
+        "impact": "serious",
+        "message": "aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+      }
+    ],
+    "status": "source-supported semantic proposal; rendered/AT verification unrun",
+    "disposition": "Patch 03: named note for supplementary status/count annotation; retain exact label and visible text without adding a live region."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-390x844.json",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rule": "aria-prohibited-attr",
+    "target": [
+      "._ownerAvatar_12xfo_120"
+    ],
+    "html": "<span class=\"_ownerAvatar_12xfo_120\" title=\"Owner unavailable\" aria-label=\"Account owner: unavailable\">\u2014</span>",
+    "checks": [
+      {
+        "id": "aria-prohibited-attr",
+        "data": {
+          "role": null,
+          "nodeName": "span",
+          "messageKey": "noRoleSingular",
+          "prohibited": [
+            "aria-label"
+          ]
+        },
+        "relatedNodes": [],
+        "impact": "serious",
+        "message": "aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+      }
+    ],
+    "status": "source-supported semantic proposal; rendered/AT verification unrun",
+    "disposition": "Patch 03: named img role for symbolic owner avatar; preserve full owner text/fallback."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-390x844.json",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rule": "aria-prohibited-attr",
+    "target": [
+      "._count_1umtm_21"
+    ],
+    "html": "<span class=\"_count_1umtm_21\" aria-label=\"0 shown alerts\">0 shown</span>",
+    "checks": [
+      {
+        "id": "aria-prohibited-attr",
+        "data": {
+          "role": null,
+          "nodeName": "span",
+          "messageKey": "noRoleSingular",
+          "prohibited": [
+            "aria-label"
+          ]
+        },
+        "relatedNodes": [],
+        "impact": "serious",
+        "message": "aria-label attribute is not well supported on \"span\" elements with no valid role attribute."
+      }
+    ],
+    "status": "source-supported semantic proposal; rendered/AT verification unrun",
+    "disposition": "Patch 03: named note for supplementary status/count annotation; retain exact label and visible text without adding a live region."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-390x844.json",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rule": "color-contrast",
+    "target": [
+      ".monogram"
+    ],
+    "html": "<button aria-label=\"Test account\" class=\"monogram\" style=\"width: 32px; height: 32px; border-radius: 50%;\">T</button>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "10.5pt (14px)",
+          "fontWeight": "normal",
+          "messageKey": "shortTextContent",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<button aria-label=\"Test account\" class=\"monogram\" style=\"width: 32px; height: 32px; border-radius: 50%;\">T</button>",
+            "target": [
+              ".monogram"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element content is too short to determine if it is actual text content"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Inspect short text/counter and computed gradient foreground/background. Meaningful counts stay exposed; symbolic account remains named. No result suppression."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-390x844.json",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rule": "color-contrast",
+    "target": [
+      "._headerActions_12xfo_211 > .primary"
+    ],
+    "html": "<button class=\"button primary\">",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "9.0pt (12px)",
+          "fontWeight": "normal",
+          "messageKey": "bgGradient",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<button class=\"button primary\">",
+            "target": [
+              "._headerActions_12xfo_211 > .primary"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element's background color could not be determined due to a background gradient"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Retain dark gradient; source endpoint arithmetic supports contrast (white >=15.52, pulse muted >=6.15), but actual computed rendering/compositing needs manual confirmation."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-390x844.json",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rule": "color-contrast",
+    "target": [
+      "._coverage_12xfo_31 > .eyebrow"
+    ],
+    "html": "<p class=\"eyebrow\">Portfolio pulse</p>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "8.3pt (11px)",
+          "fontWeight": "normal",
+          "messageKey": "bgGradient",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<section class=\"_pulse_12xfo_10\" aria-label=\"Portfolio pulse\">",
+            "target": [
+              "._pulse_12xfo_10"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element's background color could not be determined due to a background gradient"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Retain dark gradient; source endpoint arithmetic supports contrast (white >=15.52, pulse muted >=6.15), but actual computed rendering/compositing needs manual confirmation."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-390x844.json",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rule": "color-contrast",
+    "target": [
+      ".row > small"
+    ],
+    "html": "<small>of work linked<br>to an objective</small>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "8.8pt (11.6667px)",
+          "fontWeight": "normal",
+          "messageKey": "bgGradient",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<section class=\"_pulse_12xfo_10\" aria-label=\"Portfolio pulse\">",
+            "target": [
+              "._pulse_12xfo_10"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element's background color could not be determined due to a background gradient"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Retain dark gradient; source endpoint arithmetic supports contrast (white >=15.52, pulse muted >=6.15), but actual computed rendering/compositing needs manual confirmation."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-390x844.json",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rule": "color-contrast",
+    "target": [
+      "._pulse_12xfo_10 > div:nth-child(2) > strong"
+    ],
+    "html": "<strong>1</strong>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "16.5pt (22px)",
+          "fontWeight": "normal",
+          "messageKey": "shortTextContent",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<section class=\"_pulse_12xfo_10\" aria-label=\"Portfolio pulse\">",
+            "target": [
+              "._pulse_12xfo_10"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element content is too short to determine if it is actual text content"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Inspect short text/counter and computed gradient foreground/background. Meaningful counts stay exposed; symbolic account remains named. No result suppression."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-390x844.json",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rule": "color-contrast",
+    "target": [
+      "div:nth-child(2) > .eyebrow"
+    ],
+    "html": "<span class=\"eyebrow\">Clients</span>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "8.3pt (11px)",
+          "fontWeight": "normal",
+          "messageKey": "bgGradient",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<section class=\"_pulse_12xfo_10\" aria-label=\"Portfolio pulse\">",
+            "target": [
+              "._pulse_12xfo_10"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element's background color could not be determined due to a background gradient"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Retain dark gradient; source endpoint arithmetic supports contrast (white >=15.52, pulse muted >=6.15), but actual computed rendering/compositing needs manual confirmation."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-390x844.json",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rule": "color-contrast",
+    "target": [
+      "div:nth-child(3) > .eyebrow"
+    ],
+    "html": "<span class=\"eyebrow\">Need attention</span>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "8.3pt (11px)",
+          "fontWeight": "normal",
+          "messageKey": "bgGradient",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<section class=\"_pulse_12xfo_10\" aria-label=\"Portfolio pulse\">",
+            "target": [
+              "._pulse_12xfo_10"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element's background color could not be determined due to a background gradient"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Retain dark gradient; source endpoint arithmetic supports contrast (white >=15.52, pulse muted >=6.15), but actual computed rendering/compositing needs manual confirmation."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-390x844.json",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rule": "color-contrast",
+    "target": [
+      "div:nth-child(4) > .eyebrow"
+    ],
+    "html": "<span class=\"eyebrow\">Objectives</span>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "8.3pt (11px)",
+          "fontWeight": "normal",
+          "messageKey": "bgGradient",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<section class=\"_pulse_12xfo_10\" aria-label=\"Portfolio pulse\">",
+            "target": [
+              "._pulse_12xfo_10"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element's background color could not be determined due to a background gradient"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Retain dark gradient; source endpoint arithmetic supports contrast (white >=15.52, pulse muted >=6.15), but actual computed rendering/compositing needs manual confirmation."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-390x844.json",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rule": "color-contrast",
+    "target": [
+      "div:nth-child(5) > .eyebrow"
+    ],
+    "html": "<span class=\"eyebrow\">Off track</span>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "8.3pt (11px)",
+          "fontWeight": "normal",
+          "messageKey": "bgGradient",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<section class=\"_pulse_12xfo_10\" aria-label=\"Portfolio pulse\">",
+            "target": [
+              "._pulse_12xfo_10"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element's background color could not be determined due to a background gradient"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Retain dark gradient; source endpoint arithmetic supports contrast (white >=15.52, pulse muted >=6.15), but actual computed rendering/compositing needs manual confirmation."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-390x844.json",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rule": "color-contrast",
+    "target": [
+      "div:nth-child(6) > .eyebrow"
+    ],
+    "html": "<span class=\"eyebrow\">Strategies</span>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "8.3pt (11px)",
+          "fontWeight": "normal",
+          "messageKey": "bgGradient",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<section class=\"_pulse_12xfo_10\" aria-label=\"Portfolio pulse\">",
+            "target": [
+              "._pulse_12xfo_10"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element's background color could not be determined due to a background gradient"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Retain dark gradient; source endpoint arithmetic supports contrast (white >=15.52, pulse muted >=6.15), but actual computed rendering/compositing needs manual confirmation."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-390x844.json",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rule": "color-contrast",
+    "target": [
+      "._tabs_12xfo_130 > .primary"
+    ],
+    "html": "<button class=\"button primary\" aria-pressed=\"true\">All <small>1</small></button>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "9.0pt (12px)",
+          "fontWeight": "normal",
+          "messageKey": "bgGradient",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<button class=\"button primary\" aria-pressed=\"true\">All <small>1</small></button>",
+            "target": [
+              "._tabs_12xfo_130 > .primary"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element's background color could not be determined due to a background gradient"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Retain dark gradient; source endpoint arithmetic supports contrast (white >=15.52, pulse muted >=6.15), but actual computed rendering/compositing needs manual confirmation."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-390x844.json",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rule": "color-contrast",
+    "target": [
+      ".primary > small"
+    ],
+    "html": "<small>1</small>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "7.5pt (10px)",
+          "fontWeight": "normal",
+          "messageKey": "shortTextContent",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<button class=\"button primary\" aria-pressed=\"true\">All <small>1</small></button>",
+            "target": [
+              "._tabs_12xfo_130 > .primary"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element content is too short to determine if it is actual text content"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Inspect short text/counter and computed gradient foreground/background. Meaningful counts stay exposed; symbolic account remains named. No result suppression."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-390x844.json",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rule": "color-contrast",
+    "target": [
+      "._profileLogo_12xfo_94"
+    ],
+    "html": "<span class=\"_profileLogo_12xfo_94\">TA</span>",
+    "checks": [
+      {
+        "id": "color-contrast",
+        "data": {
+          "contrastRatio": 0,
+          "fontSize": "9.0pt (12px)",
+          "fontWeight": "normal",
+          "messageKey": "bgGradient",
+          "expectedContrastRatio": "4.5:1"
+        },
+        "relatedNodes": [
+          {
+            "html": "<span class=\"_profileLogo_12xfo_94\">TA</span>",
+            "target": [
+              "._profileLogo_12xfo_94"
+            ]
+          }
+        ],
+        "impact": "serious",
+        "message": "Element's background color could not be determined due to a background gradient"
+      }
+    ],
+    "status": "manual contrast review outstanding; source arithmetic only",
+    "disposition": "Retain dark gradient; source endpoint arithmetic supports contrast (white >=15.52, pulse muted >=6.15), but actual computed rendering/compositing needs manual confirmation."
+  },
+  {
+    "audit": "/tmp/capiro-unified-figma-capture-plan-20261013/a11y/portfolio-390x844.json",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "rule": "label-content-name-mismatch",
+    "target": [
+      ".monogram"
+    ],
+    "html": "<button aria-label=\"Test account\" class=\"monogram\" style=\"width: 32px; height: 32px; border-radius: 50%;\">T</button>",
+    "checks": [
+      {
+        "id": "label-content-name-mismatch",
+        "data": null,
+        "relatedNodes": [],
+        "impact": "serious",
+        "message": "Unable to determine if the visible text is part of the accessible name"
+      }
+    ],
+    "status": "manual review outstanding",
+    "disposition": "Fixture Test account avatar T is a symbolic initial. Preserve exact account name; manually verify symbol/name relationship. No proven literal-label mismatch, no suppression proposed."
+  }
+]

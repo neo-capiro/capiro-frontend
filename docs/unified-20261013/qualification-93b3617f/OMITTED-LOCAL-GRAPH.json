@@ -1,0 +1,120 @@
+{
+  "limitation": "This publication preserves evidence, not a runnable dependency installation. Symlink targets are not inventoried recursively or copied.",
+  "links": [
+    {
+      "linkTextSha256": "6f2f26ef496221ea1d187341ce75bd5666c4ae0e1330bc79a72952a2e353ada3",
+      "logicalPath": "capiro-unified-final-93b3617f-20261013/elements-work/ssr/negative-H31Mud/workspace/node_modules",
+      "reason": "Borrowed/symlink path retained locally; not followed or archived.",
+      "source": "/tmp/capiro-unified-final-93b3617f-20261013/elements-work/ssr/negative-H31Mud/workspace/node_modules",
+      "target": "/tmp/capiro-onboard-execution-20261013/node_modules"
+    },
+    {
+      "linkTextSha256": "6f2f26ef496221ea1d187341ce75bd5666c4ae0e1330bc79a72952a2e353ada3",
+      "logicalPath": "capiro-unified-final-6a2e4ace-20261013/elements-work/ssr/negative-hMxn0x/workspace/node_modules",
+      "reason": "Borrowed/symlink path retained locally; not followed or archived.",
+      "source": "/tmp/capiro-unified-final-6a2e4ace-20261013/elements-work/ssr/negative-hMxn0x/workspace/node_modules",
+      "target": "/tmp/capiro-onboard-execution-20261013/node_modules"
+    },
+    {
+      "linkTextSha256": "d5f679ed6c0ee6d6ae42e4fd75b8580a854c1db5985420cbe222d7bcc23a3c09",
+      "logicalPath": "capiro-unified-a11y-regression-20261013/node_modules",
+      "reason": "Borrowed/symlink path retained locally; not followed or archived.",
+      "source": "/tmp/capiro-unified-a11y-regression-20261013/node_modules",
+      "target": "/workspace/capiro-onboard-port-20261013/node_modules"
+    },
+    {
+      "linkTextSha256": "69d76c588ce3298553e59ff18aaec5df741df6f3fdb03d7e58e0d401b9ddaef0",
+      "logicalPath": "capiro-unified-a11y-regression-20261013/apps/web/tests/browser/fixtures.ts",
+      "reason": "Borrowed/symlink path retained locally; not followed or archived.",
+      "source": "/tmp/capiro-unified-a11y-regression-20261013/apps/web/tests/browser/fixtures.ts",
+      "target": "/workspace/capiro-onboard-port-20261013/apps/web/tests/browser/fixtures.ts"
+    },
+    {
+      "linkTextSha256": "3df3127fb65400623e2a737fa6c6dfefde19e5e90297dc72c602841fa455d2b7",
+      "logicalPath": "capiro-unified-a11y-regression-20261013/apps/web/test/browser/fixtures.ts",
+      "reason": "Borrowed/symlink path retained locally; not followed or archived.",
+      "source": "/tmp/capiro-unified-a11y-regression-20261013/apps/web/test/browser/fixtures.ts",
+      "target": "/workspace/capiro-onboard-port-20261013/apps/web/test/browser/fixtures.ts"
+    },
+    {
+      "linkTextSha256": "69d76c588ce3298553e59ff18aaec5df741df6f3fdb03d7e58e0d401b9ddaef0",
+      "logicalPath": "capiro-unified-navigation-proposal-20261013/fixtures.ts",
+      "reason": "Borrowed/symlink path retained locally; not followed or archived.",
+      "source": "/tmp/capiro-unified-navigation-proposal-20261013/fixtures.ts",
+      "target": "/workspace/capiro-onboard-port-20261013/apps/web/tests/browser/fixtures.ts"
+    },
+    {
+      "linkTextSha256": "d5f679ed6c0ee6d6ae42e4fd75b8580a854c1db5985420cbe222d7bcc23a3c09",
+      "logicalPath": "capiro-unified-navigation-proposal-20261013/node_modules",
+      "reason": "Borrowed/symlink path retained locally; not followed or archived.",
+      "source": "/tmp/capiro-unified-navigation-proposal-20261013/node_modules",
+      "target": "/workspace/capiro-onboard-port-20261013/node_modules"
+    }
+  ],
+  "regularFiles": [
+    {
+      "bytes": 5138,
+      "group": "frozen_qualification",
+      "logicalPath": "capiro-unified-final-93b3617f-20261013/__pycache__/run-portfolio-shards.cpython-312.pyc",
+      "reason": "Reproducible local tool/dependency graph or bytecode; original bytes retained locally. Metadata/logs/receipts remain included.",
+      "sha256": "dafea294980c2e6f8d7183d2cdc1ce2dbda29b00e59ece9a8a4c79880c3a1d23",
+      "source": "/tmp/capiro-unified-final-93b3617f-20261013/__pycache__/run-portfolio-shards.cpython-312.pyc"
+    },
+    {
+      "bytes": 4741809,
+      "group": "frozen_qualification",
+      "logicalPath": "capiro-unified-final-93b3617f-20261013/elements-work/tool/linux-x64/archive.tgz",
+      "reason": "Reproducible local tool/dependency graph or bytecode; original bytes retained locally. Metadata/logs/receipts remain included.",
+      "sha256": "9573bb2233aab0f9ea7647d5cca9726113cc1768de61d66b17267f4db84488f6",
+      "source": "/tmp/capiro-unified-final-93b3617f-20261013/elements-work/tool/linux-x64/archive.tgz"
+    },
+    {
+      "bytes": 11427952,
+      "group": "frozen_qualification",
+      "logicalPath": "capiro-unified-final-93b3617f-20261013/elements-work/tool/linux-x64/esbuild",
+      "reason": "Reproducible local tool/dependency graph or bytecode; original bytes retained locally. Metadata/logs/receipts remain included.",
+      "sha256": "e1698a3d5c6c0798fee4fd3b5cc816651f460c63d390a7a26ea4beb0b1884100",
+      "source": "/tmp/capiro-unified-final-93b3617f-20261013/elements-work/tool/linux-x64/esbuild"
+    },
+    {
+      "bytes": 4741809,
+      "group": "prior_unified_attempts",
+      "logicalPath": "capiro-unified-final-6a2e4ace-20261013/elements-work/tool/linux-x64/archive.tgz",
+      "reason": "Reproducible local tool/dependency graph or bytecode; original bytes retained locally. Metadata/logs/receipts remain included.",
+      "sha256": "9573bb2233aab0f9ea7647d5cca9726113cc1768de61d66b17267f4db84488f6",
+      "source": "/tmp/capiro-unified-final-6a2e4ace-20261013/elements-work/tool/linux-x64/archive.tgz"
+    },
+    {
+      "bytes": 11427952,
+      "group": "prior_unified_attempts",
+      "logicalPath": "capiro-unified-final-6a2e4ace-20261013/elements-work/tool/linux-x64/esbuild",
+      "reason": "Reproducible local tool/dependency graph or bytecode; original bytes retained locally. Metadata/logs/receipts remain included.",
+      "sha256": "e1698a3d5c6c0798fee4fd3b5cc816651f460c63d390a7a26ea4beb0b1884100",
+      "source": "/tmp/capiro-unified-final-6a2e4ace-20261013/elements-work/tool/linux-x64/esbuild"
+    },
+    {
+      "bytes": 3188,
+      "group": "independent_reviews",
+      "logicalPath": "capiro-standalone-host-probe-review-20261013/source/node_modules/next/package.json",
+      "reason": "Reproducible local tool/dependency graph or bytecode; original bytes retained locally. Metadata/logs/receipts remain included.",
+      "sha256": "440efba874450dc997b2c3bf9efa4c3c4835abbc40d65442e94a7c69f4bad031",
+      "source": "/tmp/capiro-standalone-host-probe-review-20261013/source/node_modules/next/package.json"
+    },
+    {
+      "bytes": 7302,
+      "group": "independent_reviews",
+      "logicalPath": "capiro-standalone-host-probe-review-20261013/source/node_modules/next/dist/server/web/next-url.js",
+      "reason": "Reproducible local tool/dependency graph or bytecode; original bytes retained locally. Metadata/logs/receipts remain included.",
+      "sha256": "701e9cf955c715b68467a5c5af7c42416282e9d0860e901ae08450ee7b1bc950",
+      "source": "/tmp/capiro-standalone-host-probe-review-20261013/source/node_modules/next/dist/server/web/next-url.js"
+    },
+    {
+      "bytes": 3168,
+      "group": "independent_reviews",
+      "logicalPath": "capiro-standalone-host-probe-review-20261013/source/node_modules/next/dist/server/web/spec-extension/request.js",
+      "reason": "Reproducible local tool/dependency graph or bytecode; original bytes retained locally. Metadata/logs/receipts remain included.",
+      "sha256": "2490a352d271fb39e1fccce06ee6887999dffa7909ccfd5ca0cc8bab8008065b",
+      "source": "/tmp/capiro-standalone-host-probe-review-20261013/source/node_modules/next/dist/server/web/spec-extension/request.js"
+    }
+  ]
+}

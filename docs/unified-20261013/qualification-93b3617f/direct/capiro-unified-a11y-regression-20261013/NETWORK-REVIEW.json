@@ -1,0 +1,123 @@
+{
+  "scope": "Read-only inspection of all six retained Playwright trace network streams",
+  "traces": [
+    {
+      "trace": "/tmp/capiro-unified-a11y-regression-20261013/artifacts-portfolio/tests-browser-portfolio-ho-7cf54-efault-axe-checks-at-1440px-portfolio/trace.zip",
+      "requests": 808,
+      "remote": [],
+      "mutations": [],
+      "apiRequests": [
+        {
+          "origin": "http://127.0.0.1:5191",
+          "path": "/api/backend/core/me",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "origin": "http://127.0.0.1:5191",
+          "path": "/api/backend/core/clients",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "origin": "http://127.0.0.1:5191",
+          "path": "/api/backend/core/client-account-owners",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "origin": "http://127.0.0.1:5191",
+          "path": "/api/backend/core/me/portfolio-layout",
+          "method": "GET",
+          "status": 404
+        },
+        {
+          "origin": "http://127.0.0.1:5191",
+          "path": "/api/backend/core/intelligence/portfolio-alerts",
+          "method": "GET",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "trace": "/tmp/capiro-unified-a11y-regression-20261013/artifacts-portfolio/tests-browser-portfolio-ho-dbe72-default-axe-checks-at-390px-portfolio/trace.zip",
+      "requests": 808,
+      "remote": [],
+      "mutations": [],
+      "apiRequests": [
+        {
+          "origin": "http://127.0.0.1:5191",
+          "path": "/api/backend/core/me",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "origin": "http://127.0.0.1:5191",
+          "path": "/api/backend/core/clients",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "origin": "http://127.0.0.1:5191",
+          "path": "/api/backend/core/client-account-owners",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "origin": "http://127.0.0.1:5191",
+          "path": "/api/backend/core/me/portfolio-layout",
+          "method": "GET",
+          "status": 404
+        },
+        {
+          "origin": "http://127.0.0.1:5191",
+          "path": "/api/backend/core/intelligence/portfolio-alerts",
+          "method": "GET",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "trace": "/tmp/capiro-unified-a11y-regression-20261013/artifacts-shared/test-browser-shared-home-a-0db3e-efault-axe-checks-at-1440px-shared/trace.zip",
+      "requests": 25,
+      "remote": [],
+      "mutations": [],
+      "apiRequests": []
+    },
+    {
+      "trace": "/tmp/capiro-unified-a11y-regression-20261013/artifacts-shared/test-browser-shared-home-a-36008-efault-axe-checks-at-1440px-shared/trace.zip",
+      "requests": 30,
+      "remote": [],
+      "mutations": [],
+      "apiRequests": [
+        {
+          "origin": "http://127.0.0.1:5197",
+          "path": "/api/capiro/clients.list",
+          "method": "GET",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "trace": "/tmp/capiro-unified-a11y-regression-20261013/artifacts-shared/test-browser-shared-home-a-42553-default-axe-checks-at-390px-shared/trace.zip",
+      "requests": 25,
+      "remote": [],
+      "mutations": [],
+      "apiRequests": []
+    },
+    {
+      "trace": "/tmp/capiro-unified-a11y-regression-20261013/artifacts-shared/test-browser-shared-home-a-d48c9-default-axe-checks-at-390px-shared/trace.zip",
+      "requests": 30,
+      "remote": [],
+      "mutations": [],
+      "apiRequests": [
+        {
+          "origin": "http://127.0.0.1:5197",
+          "path": "/api/capiro/clients.list",
+          "method": "GET",
+          "status": 200
+        }
+      ]
+    }
+  ]
+}

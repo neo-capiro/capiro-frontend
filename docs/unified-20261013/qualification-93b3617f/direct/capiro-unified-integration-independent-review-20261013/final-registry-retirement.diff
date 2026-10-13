@@ -1,0 +1,47 @@
+commit 6a2e4aceaaa354a8edd9bf54e4148380ccbb1e32
+Author: NEO MARTINEZ <neo@capiro.ai>
+Date:   Tue Oct 13 06:03:37 2026 +0000
+
+    Resolve superseded Workspace review registry collision
+
+diff --git a/docs/unified-20261013/SUPERSEDED-REVIEW.json b/docs/unified-20261013/SUPERSEDED-REVIEW.json
+new file mode 100644
+index 0000000..42e3dcd
+--- /dev/null
++++ b/docs/unified-20261013/SUPERSEDED-REVIEW.json
+@@ -0,0 +1,15 @@
++{
++  "reason": "Initial e22 architecture gate rejected duplicate explicit WorkspaceScreen keys. Source matches the newer Newsletter fingerprint849d284; retain this superseded prior review as historical evidence, not as a second active approval. No source/guard rule/test assertion changed.",
++  "historicalRecords": [
++    {
++      "file": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
++      "kind": "function",
++      "symbol": "WorkspaceScreen",
++      "fingerprint": "deee3d7a09db876ddbcb2a280bbaa1c34c1fa5c866e741c48b24c330fa82e11c",
++      "reason": "This existing Workspace view dispatcher gains one validated prospect query branch and delegates list/create and the canonical editor. Invalid prospect IDs fail closed and URL navigation owns prospect/draft selection. Existing library/workflows/share routes retain their owners; there is no feature import across Portfolio/Modules or duplicate editor.",
++      "reviewedBy": "Codex shared frontend integration owner (source review)",
++      "reviewedOn": "2026-10-12"
++    }
++  ],
++  "failedGate": "/tmp/capiro-unified-final-e22cd4c2-20261013/check-exit.json"
++}
+diff --git a/scripts/architecture/reviewed-size-findings.json b/scripts/architecture/reviewed-size-findings.json
+index ec55299..b5baeec 100644
+--- a/scripts/architecture/reviewed-size-findings.json
++++ b/scripts/architecture/reviewed-size-findings.json
+@@ -1136,15 +1136,6 @@
+     "reviewedBy": "Codex shared frontend integration review",
+     "reviewedOn": "2026-10-12"
+   },
+-  {
+-    "file": "apps/web/src/features/modules/workspace/WorkspaceScreen.tsx",
+-    "kind": "function",
+-    "symbol": "WorkspaceScreen",
+-    "fingerprint": "deee3d7a09db876ddbcb2a280bbaa1c34c1fa5c866e741c48b24c330fa82e11c",
+-    "reason": "This existing Workspace view dispatcher gains one validated prospect query branch and delegates list/create and the canonical editor. Invalid prospect IDs fail closed and URL navigation owns prospect/draft selection. Existing library/workflows/share routes retain their owners; there is no feature import across Portfolio/Modules or duplicate editor.",
+-    "reviewedBy": "Codex shared frontend integration owner (source review)",
+-    "reviewedOn": "2026-10-12"
+-  },
+   {
+     "file": "apps/web/src/features/portfolio/client-profile/QuickLog.tsx",
+     "kind": "function",

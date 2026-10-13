@@ -1,0 +1,21 @@
+{
+  "verdict": "PASS_SOURCE_COMPATIBILITY_ONLY",
+  "concreteMismatches": [],
+  "closedBlocker": "Missing implementation of the two Capiro application-authority endpoints at exact published source",
+  "backend": "60cf2e51129f8358e6afe5fc600ffcdb6de01759",
+  "frontend": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+  "meriBootstrap": "84c2ca01d0bce025a0003b6e724d675a05f2975a",
+  "publicReceiver": "0.1.1",
+  "sourceEdits": false,
+  "nativeCalls": false,
+  "testsRun": false,
+  "actionsEnabled": false,
+  "qualificationTransferred": false,
+  "unqualified": [
+    "real Clerk token sid and online session checks",
+    "native RLS and current local authority",
+    "deployed HTTP and cross-service clocks",
+    "current admitted Meri run and trusted services",
+    "process-local affinity and end-to-end native activation"
+  ]
+}

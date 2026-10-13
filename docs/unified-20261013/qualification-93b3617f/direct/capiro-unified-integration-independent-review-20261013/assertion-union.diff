@@ -1,0 +1,41 @@
+diff --git a/apps/web/src/shared/capiro/registry.test.ts b/apps/web/src/shared/capiro/registry.test.ts
+index 0f510e7..70372a5 100644
+--- a/apps/web/src/shared/capiro/registry.test.ts
++++ b/apps/web/src/shared/capiro/registry.test.ts
+@@ -11,6 +11,9 @@ import { settingsAdminOperations } from "./operations/settings-admin";
+ import { strategiesOperations } from "./operations/strategies";
+ import { workspaceOperations } from "./operations/workspace";
+ import { capiroOperations } from "./registry";
++import { onboardFunnelOperations } from "./operations/onboard-funnel";
++import { onboardSetupOperations } from "./operations/onboard-setup";
++import { onboardCoreOperations } from "./operations/onboard-core";
+ 
+ it("imports the complete reviewed allowlist safely and exposes no silently overwritten operation", () => {
+   const groups = [
+@@ -25,6 +28,9 @@ it("imports the complete reviewed allowlist safely and exposes no silently overw
+     settingsAdminOperations,
+     intelligenceOperations,
+     researchPortfolioOperations,
++    onboardFunnelOperations,
++    onboardSetupOperations,
++    onboardCoreOperations,
+   ];
+   const declared = groups.flatMap((group) => Object.keys(group));
+   expect(new Set(declared).size).toBe(declared.length);
+diff --git a/scripts/architecture.test.mjs b/scripts/architecture.test.mjs
+index 9a4ee2d..0047a5b 100644
+--- a/scripts/architecture.test.mjs
++++ b/scripts/architecture.test.mjs
+@@ -307,3 +307,12 @@ test('transfer canonicalization changes only the exact agreed module paths', ()
+   assert.ok(moved.includes("import('@/shared/portfolio/api/http')"));
+   assert.ok(moved.includes("const unchanged = '@/features/portfolio/public'"));
+ });
++
++test('newsletter browser boundary admits only its two governed public subpaths', () => {
++  const file = 'apps/web/src/features/modules/workspace/Newsletter.ts';
++  const accepted = "import '@capiro/shared/newsletter'; import '@capiro/shared/newsletter-render';";
++  assert.deepEqual(inspectSources(new Map([[file, accepted]])).errors, []);
++  for (const specifier of ['@capiro/shared', '@capiro/shared/money', '@capiro/shared/newsletter-fonts', '@capiro/shared/src/newsletter', '@capiro/shared/dist/newsletter']) {
++    assert.ok(inspectSources(new Map([[file, `import '${specifier}';`]])).errors.some(error => error.includes('non-public package')), specifier);
++  }
++});

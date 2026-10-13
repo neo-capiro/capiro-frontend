@@ -1,0 +1,468 @@
+{
+  "atUTC": "2026-10-13T05:18:20.515811+00:00",
+  "status": "SEALED_INITIAL_REVIEW",
+  "files": [
+    {
+      "path": "FUNNEL-READ-AUTHORITY-PROBE.json",
+      "bytes": 1720,
+      "sha256": "9e7d1c6c7ba935dc3dce49112451d770f4a67c8f966c2dae5461209325dc6d66"
+    },
+    {
+      "path": "INITIAL-AST-VERIFICATION.json",
+      "bytes": 16270,
+      "sha256": "0181b8eafe45a41f2735ef0bdc2032a2788ecb29351ed296b01ed69ba035b017"
+    },
+    {
+      "path": "INITIAL-FINDINGS.json",
+      "bytes": 6247,
+      "sha256": "2d866565dc1f563785ccd6e444ec4a28e8893400058dd190dde73e1f91bcb92d"
+    },
+    {
+      "path": "INITIAL-RESPONSIBILITY-REVIEW.json",
+      "bytes": 26638,
+      "sha256": "11395b59e3b9aa1303592591d5970491f751b775d16392e08c05651c037a1de2"
+    },
+    {
+      "path": "INITIAL-REVIEW.md",
+      "bytes": 2880,
+      "sha256": "53285b3bbefeaff047fe8d25ad48a1237ac4c11a06462633b30e1f20e41442f8"
+    },
+    {
+      "path": "INITIAL-SOURCE.json",
+      "bytes": 13632,
+      "sha256": "358bd0b8e711ea73ea05c4f21d29f01e98b40625dd0f5181a8d0800181bc2cde"
+    },
+    {
+      "path": "LEGAL-BINDING-PROBE.json",
+      "bytes": 2082,
+      "sha256": "22360cf3a3df23b8352f1dd7db931061d2af3696c3328e4d95a7e394364325f6"
+    },
+    {
+      "path": "PRESERVATION-CHECK.json",
+      "bytes": 3687,
+      "sha256": "d0ea16720e21d358c05ed63dee5e24a0114f841b489cee1b22b62b4d7fb39ed0"
+    },
+    {
+      "path": "author-inputs/cohesive-extraction/AST-MOVE-MAP.json",
+      "bytes": 2869,
+      "sha256": "9368e75a525ad39db122a4a431808357d193d36e9dfa58842c3cbd303ae72942"
+    },
+    {
+      "path": "author-inputs/cohesive-extraction/PAIRED-CONTROLS.json",
+      "bytes": 3894,
+      "sha256": "33101272dfc0ad04889209c547eb5ff7035620d27aa5f2256b3438817941d207"
+    },
+    {
+      "path": "author-inputs/cohesive-extraction/STRUCTURE-REVIEW.json",
+      "bytes": 37089,
+      "sha256": "8c8559a8a81dd0137b0ae09e8c39e8d4a5601b79eb90989e9e2e0bc5454d5eb1"
+    },
+    {
+      "path": "author-inputs/correction-handoff/ASSET-PRESERVATION.json",
+      "bytes": 1418,
+      "sha256": "4b9dc88759a5f9bb041851e94caf1fe0219189f52a9d62995f29100739bcb1dd"
+    },
+    {
+      "path": "author-inputs/correction-handoff/FINDING-DISPOSITION.json",
+      "bytes": 15045,
+      "sha256": "ee2b2ea06e98e39add8883769340972698c3cc47650230a30fbda84685ed793c"
+    },
+    {
+      "path": "author-inputs/correction-handoff/REPORT.md",
+      "bytes": 7590,
+      "sha256": "6efa7848ac5a6c0a20fed6d95711746f7a74fa5e2c2a2acbc7f2fa5cf9a992b1"
+    },
+    {
+      "path": "funnel-read-authority-probe.log",
+      "bytes": 1720,
+      "sha256": "9e7d1c6c7ba935dc3dce49112451d770f4a67c8f966c2dae5461209325dc6d66"
+    },
+    {
+      "path": "funnel-read-authority-probe.mjs",
+      "bytes": 3221,
+      "sha256": "0f932b629411c441c4f44737ea2410dc4a508e5f7e245024a49b208df5554db3"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/OnboardPage.tsx",
+      "bytes": 2491,
+      "sha256": "f1a5eb1b39ee1e6539ee6ab924ade5170ade1c9cb9b268f15495f9dfa3394621"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/OnboardSurface.tsx",
+      "bytes": 505,
+      "sha256": "f1fd5f14c1348f2817bab772bd5a41e9f0e8d71673a1df2c9a99c55882814f2d"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/lib/FunnelLifetime.tsx",
+      "bytes": 1139,
+      "sha256": "93ec7409af5d10cb93b960f3bf0647db21456e404cf74f4b7e4230154815473b"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/lib/attempt-journal.ts",
+      "bytes": 3701,
+      "sha256": "e637b7d6fc90c672babe7e40221a5f2691e592eb7764153db010b66e745415b3"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/lib/capiro-api.ts",
+      "bytes": 1182,
+      "sha256": "3239f3a33f13ee57c2d697c448426fd90354b194437cee6afd8b3a63cf881adb"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/lib/clerk-input-attempt.ts",
+      "bytes": 948,
+      "sha256": "2b7465e44ea67a22287495b81f14a02d0bc9e01f1690327154fa17d10e4bd4b8"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/lib/dates.ts",
+      "bytes": 707,
+      "sha256": "d18d61035adb610f0bbbbf7108260a0465693ed819a1e4f55073016bc5e6bbf3"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/lib/funnel-lifetime.ts",
+      "bytes": 1365,
+      "sha256": "d4aee604fc739b3f297fcc03828b39105ccd3a0b6cc87fd2404f914c72429ea2"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/lib/funnel-routes.ts",
+      "bytes": 961,
+      "sha256": "4126aa44e48f4dfe16cc3216c3d56d9740803783ef2a74e946eccf90af91ef72"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/lib/funnel.ts",
+      "bytes": 2676,
+      "sha256": "87dffe73c7a5e93fc86af4dc8733a37224b68405c3cc927edd28c3bebd8473c6"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/lib/import-client-selection.ts",
+      "bytes": 1605,
+      "sha256": "848c7281690493897dbfa30c679c5ee9c265c3d5ef295c6acf92cfc7f88916d0"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/lib/invite-sequence.ts",
+      "bytes": 1172,
+      "sha256": "f09dc050bcd30f68cd0943e27146260b9a922a602270122220cf5943652dbbd1"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/lib/registration-draft.ts",
+      "bytes": 5431,
+      "sha256": "39dfc4fbf0be8615e49c598f56a3dafe70328c3fd8550dd80a43e3dd0202348c"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/lib/setup.ts",
+      "bytes": 1401,
+      "sha256": "8471b447a361f7c3611500f2bb2e94f80f51732c0a01305ea9a26be8f1216ff3"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/lib/stripe-confirmation.ts",
+      "bytes": 2282,
+      "sha256": "5af49dabbf76f9edf258803fc79fad5fd8a46382fda6b460227275a3f3ee798c"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/lib/use-client-import.ts",
+      "bytes": 2586,
+      "sha256": "369a6c2dfe43df3bf5683230f8df5b89e19bb264327157c311b186a94c3eacfe"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/lib/use-local-record.ts",
+      "bytes": 644,
+      "sha256": "451109ddf3da3d019a1abe12359b49eee0c0a7fbb3b1a687b83201813272c765"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/lib/use-onboard-attempt.ts",
+      "bytes": 1151,
+      "sha256": "af5e011d76bc1ab8f9d0f079b269988ca9fce77a11810fce30df57958f8ed536"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/lib/use-team-invites.ts",
+      "bytes": 724,
+      "sha256": "e15fb1a6866f699b95787b8a69859294a046ae44a7f01460555a91c84d1f1ee9"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/navigation.tsx",
+      "bytes": 872,
+      "sha256": "588cfb033e42fbb997b4591f6fe9c0ff48b4127e20bb8687f91a766976d62fa3"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/onboard.css",
+      "bytes": 4119,
+      "sha256": "89728d1a9a2eaa509f43ba30bd942914cb6ef29940d137b4981af7264dd02d3c"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/funnel/AdminsPage.tsx",
+      "bytes": 13362,
+      "sha256": "31ba277abbfa93f755a91213d114873b1aad7edf18fe915d12bc8b3ad82b57f2"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/funnel/BillingControls.tsx",
+      "bytes": 941,
+      "sha256": "3a2befbf8090a74376cbed9383c1e5ec9d545a74cbe315e237cc86f8c5dc4ec4"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/funnel/BillingPage.tsx",
+      "bytes": 394,
+      "sha256": "cbd24de2c20d71376a672d134f91106fb1c70f1f2f3dd816dcf51c88191f96d0"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/funnel/ClientsPage.tsx",
+      "bytes": 3786,
+      "sha256": "fd63e77302f67ce2b0e886127d663bf129f0adb21c1238f295d696523de7e365"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/funnel/ConfirmPage.tsx",
+      "bytes": 13692,
+      "sha256": "a1f5d7b34beee7243ee5d4c9c83dcff975fffcf88f4fde58eef90d8cbcbc45c4"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/funnel/FunnelStepGuard.tsx",
+      "bytes": 2790,
+      "sha256": "3d54a4dbadaa5a6e184569bc8c9de97022aa1b25083cae866b26a74b47e6eb84"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/funnel/LegalPage.tsx",
+      "bytes": 14793,
+      "sha256": "c28e4b13115f132e7958577ac1ef1aaf69b4c1385336fe38cf60b76a72c0d303"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/funnel/OrgPage.tsx",
+      "bytes": 13244,
+      "sha256": "7877fb7c87bdce451d3b47120cfd4bb54b94601f42611f6edb30157e881b4e85"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/funnel/PaidBilling.tsx",
+      "bytes": 14736,
+      "sha256": "21d4d278bef2031c29ff0af4045607602425a716a73f44a1acd8209b24d316d8"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/funnel/PlanPage.tsx",
+      "bytes": 7052,
+      "sha256": "1f34801e3ed78006d704547e2684db1aba56a6f1d0e97846fac7e59c2cb4ff1b"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/funnel/RegisterPage.tsx",
+      "bytes": 11814,
+      "sha256": "4da52eafff8519028bf25e1cb37785b8e7a283f3804fcf21251bdf182ed2a4d2"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/funnel/StripePayment.tsx",
+      "bytes": 5129,
+      "sha256": "f4765b2eb2b4968f525d38ca481be129d5c6a72991caedd0450a779f9d4a7457"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/funnel/TrialBilling.tsx",
+      "bytes": 11900,
+      "sha256": "a009499fa185ffdb66e597d04e333af355da2330fe0d81d3014166f3c7de4fe8"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/funnel/VerifyPage.tsx",
+      "bytes": 8539,
+      "sha256": "3e9d495bbf3d16ade7450ca6be905025144396510d43754808eddaa4f49e6119"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/funnel/shared.tsx",
+      "bytes": 604,
+      "sha256": "d09549ce01ad85e880c7af1daab67367effbea058e7d3fdd22df481ceec403a7"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/it/ItAdminPage.tsx",
+      "bytes": 12793,
+      "sha256": "45b24041705110835e7e75b4dfc7a1f8cd2dda3d2c791403849f46ef96bb7756"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/it/ItDonePage.tsx",
+      "bytes": 3194,
+      "sha256": "81c0b83f9d3855f932f69b749d22f1fa0780b18d8ed09bbd82f92a46e5359681"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/it/ItErrorPage.tsx",
+      "bytes": 2996,
+      "sha256": "a6c39e0a49d69737113eea49041dcc145e6ed2e7fcadc3b483b6189d64b1883f"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/setup/AcceptInvitePage.tsx",
+      "bytes": 10803,
+      "sha256": "98eecd3a4c007f20e70db8cabfe82ca85543f9c7e1bf608dbaa01e3a2d98077b"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/setup/AiSettingsOverlay.tsx",
+      "bytes": 10004,
+      "sha256": "7e23a4cca5ea963bc24e4161c55ffa6d8545a1b94919d32eeed79b8f42ab3938"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/setup/ClientImportTask.tsx",
+      "bytes": 2997,
+      "sha256": "8a951c3ebbf21760d7c1b81cff1e4cc3f58275d57e8af754917ab1759e561043"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/setup/EmailSetupTask.tsx",
+      "bytes": 4964,
+      "sha256": "95d6ceef5ac7ad5a26071745c11b483c723a003180a04e0c43b020a378f2227f"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/setup/ExtShell.tsx",
+      "bytes": 5378,
+      "sha256": "5d0deb477e295b651bf664fc0fa1bb326e32513250c86c5bd1d7e5bcd84b1161"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/setup/FirmRegistrantSearch.tsx",
+      "bytes": 6375,
+      "sha256": "d3bf1d8145b11c9724a3d2d878bb84c3a13ab861e130c5d18df10a99907e7f89"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/setup/ImportCandidateRow.tsx",
+      "bytes": 3334,
+      "sha256": "32db205f692d2aefe3367d14824e54075946c59967bfd3eeb3e5c2f0cd20917d"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/setup/ImportCandidateSelection.tsx",
+      "bytes": 8096,
+      "sha256": "8a70718651d57b8b5aa97e82b6b8eab4f4fe4302815509b1eb648cb7e6d6b6d1"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/setup/ImportOverlay.tsx",
+      "bytes": 1662,
+      "sha256": "12a1125e5022404905a45a6c04f25e9e02f343e09d40c08ea7f3658d668858eb"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/setup/InvitesOverlay.tsx",
+      "bytes": 10133,
+      "sha256": "ac9fab2935dab65b4b17606cb0f73b7c0bf659f6e6ddcdaa9e6bde7aed58766d"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/setup/ManualClientForm.tsx",
+      "bytes": 5005,
+      "sha256": "10de9a98acba93f8c77d58b8dc572655297783eda0af50f712de83c61efcc6a5"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/setup/SetupDashboardPage.tsx",
+      "bytes": 2604,
+      "sha256": "5575b0cd50154ccf4e7243bc8f59467c57b4007036a8a6f05f26114c057f90c1"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/setup/SetupWorkspace.tsx",
+      "bytes": 8201,
+      "sha256": "e9c2615cc0c596c3f79e882b3d4da8a03190327d71afbfaeeb2dcd5311d471cf"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/setup/WorkspaceMembership.tsx",
+      "bytes": 6066,
+      "sha256": "40727d3ad5243447027f47f71bb926412b35a88e90fc6176e60f6da0d9fe6da4"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/setup/useImportWorkflow.ts",
+      "bytes": 7843,
+      "sha256": "7ac2809b316f83c337e8979b99b1d47f0d89b71876a61cc057ddcdac7ccae6a3"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/pages/setup/useSetupActions.ts",
+      "bytes": 3131,
+      "sha256": "095313f26fbbb2d1e2fd72a3f2f0532c7b2cb7b1ab2e24350b2686649ef80a6c"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/ui/AttemptStatus.tsx",
+      "bytes": 1827,
+      "sha256": "5de8b068a409154f16dd0a8a77fe5e4e53c8d4e2370024d6b6f65e33c1fbdb0e"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/ui/ImportOutcome.tsx",
+      "bytes": 1158,
+      "sha256": "d5e0b3cab4379a46ab4aaab543c5fce0ffc00b7bdaceccecb55d39498ca240b2"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/ui/Modal.tsx",
+      "bytes": 2584,
+      "sha256": "5ec445ea808d939e0876129fbfc7e2e2106ccd69b47a7d7f1f757a36bb92a8ba"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/ui/forms.tsx",
+      "bytes": 5799,
+      "sha256": "eb6b7d1fa91a31e2d7917a92eea55c2f6734c9b6b81ad70217a39156477db13a"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/ui/icons.tsx",
+      "bytes": 4071,
+      "sha256": "afb9ec8e9ad0402e67d8de7ecebe1dad6d168b83b1b30a3468a577a170594dda"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/ui/panels.tsx",
+      "bytes": 5539,
+      "sha256": "6cad0cd0e211e950fb5fc8b915cc2e48d12b721a4e60a0892b86f9efe047cf1f"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/ui/primitives.tsx",
+      "bytes": 200,
+      "sha256": "7790d75f8da19ee74ecf915b4107adeae3f427849d5ec3df969006f9babc8272"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/ui/shell.tsx",
+      "bytes": 5914,
+      "sha256": "8caf54a4b49d745c6d9de03273145be4eabe5cc93ee1baa1b46c768856fa1d1c"
+    },
+    {
+      "path": "initial-source/apps/web/src/features/onboard/useConfig.ts",
+      "bytes": 538,
+      "sha256": "807960da17deaab5d3099fc40abeef2412d511974ea969ebe930bdfdbf42aa9d"
+    },
+    {
+      "path": "initial-source/apps/web/tests/onboard-attempt-journal.test.ts",
+      "bytes": 5113,
+      "sha256": "82ffaf0ab658c5046a0e0ec34fbb0852f7abbf29a5112b56ad8d24dc3b20a574"
+    },
+    {
+      "path": "initial-source/apps/web/tests/onboard-funnel-lifetime.test.ts",
+      "bytes": 4602,
+      "sha256": "e290570a3636875207cd200edb43db6c92d4f03e90f78452ba4439cdeb8b53ac"
+    },
+    {
+      "path": "initial-source/apps/web/tests/onboard-import-recovery.test.ts",
+      "bytes": 1325,
+      "sha256": "ca6d927037677e5a8aaabeefb0da54b1791c6a59076dd73e19243fecaacc7d80"
+    },
+    {
+      "path": "initial-source/apps/web/tests/onboard-input-refusal.test.ts",
+      "bytes": 2364,
+      "sha256": "20bb93688019473c4dfac37af005af67d1ad467297fb1e01510369a4f4b62f49"
+    },
+    {
+      "path": "initial-source/apps/web/tests/onboard-invitation-recovery.test.ts",
+      "bytes": 3570,
+      "sha256": "281e482e0f2aa2817318350960173d6224a71a2a9af441613098f29de397e1e0"
+    },
+    {
+      "path": "initial-source/apps/web/tests/onboard-lifecycle.test.ts",
+      "bytes": 3373,
+      "sha256": "02cf10267053075c4e16a6af7fff3a803b1d7f55e09a64ddb6c903d594c30610"
+    },
+    {
+      "path": "initial-source/apps/web/tests/onboard-registration-draft.test.ts",
+      "bytes": 7104,
+      "sha256": "3f4038f26afe663519ab47278d37f76b76cb6f78c5d83dd3da035150e2056ead"
+    },
+    {
+      "path": "initial-source/apps/web/tests/onboard-stripe-confirmation.test.ts",
+      "bytes": 6757,
+      "sha256": "673277f01a75b85a75eeddc3a50590d338e874742244e90fbf2bd05aec4aacda"
+    },
+    {
+      "path": "legal-review-binding-probe.log",
+      "bytes": 2082,
+      "sha256": "22360cf3a3df23b8352f1dd7db931061d2af3696c3328e4d95a7e394364325f6"
+    },
+    {
+      "path": "legal-review-binding-probe.mjs",
+      "bytes": 4707,
+      "sha256": "ad42c271f6dd843eb832e6ede49bddb1c63aed6e9d24826bba32830b84fae195"
+    },
+    {
+      "path": "preservation-check.log",
+      "bytes": 3687,
+      "sha256": "d0ea16720e21d358c05ed63dee5e24a0114f841b489cee1b22b62b4d7fb39ed0"
+    },
+    {
+      "path": "verify-preservation.mjs",
+      "bytes": 3388,
+      "sha256": "5556a213f698825469182194968d15edd97ff5ee6655da6401a43815c941ef2c"
+    }
+  ],
+  "fileCount": 92,
+  "bytes": 497721
+}

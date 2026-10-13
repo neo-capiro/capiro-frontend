@@ -1,0 +1,21 @@
+{
+  "reviewedAt": "2026-10-13T05:54:24.814270+00:00",
+  "performedBy": "root, not independent reviewer",
+  "receiptPath": "/tmp/capiro-meri-action-host-locator-correction-20261013/RUNTIME-RECEIPT.json",
+  "receiptSha256": "c1f1a01c73d134e53d8e6181096be42fa4dfd5eb9b49842c7634c32cb3a3a9df",
+  "resultsPath": "/tmp/capiro-meri-action-host-locator-correction-20261013/locator-correction-results.json",
+  "resultsSha256": "bfb262149537eb1c7aab6f9302bf91b7b501dbc880df5015296a263d1d1bde83",
+  "stats": {
+    "startTime": "2026-10-13T05:40:43.208Z",
+    "duration": 29054.629,
+    "expected": 18,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "workers": 1,
+  "retries": 0,
+  "timeout": 30000,
+  "runtimeExecutedByIndependentReviewer": false,
+  "limits": "Synthetic public receipts and actual frontend host lifetimes; no live/native/provider/approval effects or frozen full qualification"
+}
