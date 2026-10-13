@@ -17,6 +17,7 @@ import { WorkspaceDraft } from "./WorkspaceDraft";
 import { WorkspaceShares } from "./WorkspaceShares";
 import { ProspectWorkspace } from "./prospects/ProspectWorkspace";
 import { RichNewsletterEditor } from "./rich-newsletter/RichNewsletterEditor";
+import { BriefCopyRoute } from "./brief-copy/BriefCopyRoute";
 
 type View =
   | "documents"
@@ -67,6 +68,8 @@ export function WorkspaceScreen() {
     setCreatedId(undefined);
     setView("documents");
   };
+  if (searchParams.has("briefSource") || searchParams.has("copyDocumentId"))
+    return <BriefCopyRoute />;
   if (requestedView === "rich-newsletter") {
     if (
       searchParams.has("draftId") ||

@@ -28,6 +28,7 @@ import { SectionEditor } from "./rich-document/SectionEditor";
 import { SectionPreview } from "./rich-document/SectionPreview";
 import { sectionSizeError } from "./rich-document/content";
 import styles from "./workspace.module.css";
+import { CopiedTabs } from "./brief-copy/CopiedTabs";
 
 function DraftEditor({
   draft,
@@ -109,6 +110,7 @@ function DraftEditor({
           </ActionButton>
         </div>
       </header>
+      <CopiedTabs draft={draft} />
       {draft.prospectId && prospectSave && (
         <>
           <p>
@@ -199,16 +201,18 @@ function DraftEditor({
         ))
       ) : (
         <Panel title="Document contents">
-          {draft.documents.map((document) => (
-            <article key={document.id}>
-              <h3>{document.name}</h3>
-              {document.body.blocks?.map((block) => (
-                <p key={block.id}>
-                  {block.content ?? block.title ?? block.type}
-                </p>
-              ))}
-            </article>
-          ))}
+          {draft.documents
+            .filter((document) => !document.sourceBriefVersion)
+            .map((document) => (
+              <article key={document.id}>
+                <h3>{document.name}</h3>
+                {document.body.blocks?.map((block) => (
+                  <p key={block.id}>
+                    {block.content ?? block.title ?? block.type}
+                  </p>
+                ))}
+              </article>
+            ))}
         </Panel>
       )}
       <Modal open={history} onOpenChange={setHistory} title="Document history">

@@ -28,8 +28,11 @@ export function useNewsletter({
     existing?.docTitle ?? "Weekly policy newsletter",
   );
   const [body, setBody] = useState<NewsletterBody>(
-    existing?.documents.find((document) => document.body.newsletter)?.body
-      .newsletter ?? createNewsletter("weekly"),
+    existing?.documents.flatMap((document) =>
+      !document.sourceBriefVersion && document.body.newsletter
+        ? [document.body.newsletter]
+        : [],
+    )[0] ?? createNewsletter("weekly"),
   );
   const [draft, setDraft] = useState(existing);
   const [saved, setSaved] = useState(Boolean(existing));
@@ -97,7 +100,10 @@ export function useNewsletter({
         });
         setDraft(record);
       }
-      const document = record.documents[0];
+      const document =
+        record.documents.find(
+          (value) => !value.sourceBriefVersion && value.body.newsletter,
+        ) ?? record.documents.find((value) => !value.sourceBriefVersion);
       if (!document)
         throw new Error("Workspace did not create the primary document.");
       await saveDocument.run({
@@ -127,7 +133,11 @@ export function useNewsletter({
       saving.current = false;
     }
   }
-  const documentId = draft?.documents[0]?.id;
+  const documentId = (
+    draft?.documents.find(
+      (value) => !value.sourceBriefVersion && value.body.newsletter,
+    ) ?? draft?.documents.find((value) => !value.sourceBriefVersion)
+  )?.id;
   return {
     step,
     setStep,

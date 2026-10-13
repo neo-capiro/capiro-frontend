@@ -11,6 +11,7 @@ import { BriefHistory } from "./BriefHistory";
 import { BriefEditor } from "./BriefEditor";
 import { BriefSource } from "./BriefSource";
 import { BriefRefresh } from "./BriefRefresh";
+import { WorkspaceCopyLink } from "./WorkspaceCopyLink";
 import styles from "./brief.module.css";
 
 export function BriefViewer({
@@ -66,7 +67,7 @@ export function BriefViewer({
         if (!open) onClose();
       }}
       title={data.brief?.title ?? "Saved prospect brief"}
-      description="Saved versions and source citations. Workspace filing is unavailable for this brief."
+      description="Saved versions and source citations. Workspace copies retain their original Core version."
       className={styles.viewer}
     >
       <nav className="row" aria-label="Brief views">
@@ -106,6 +107,7 @@ export function BriefViewer({
           </button>
         )}
       </nav>
+      <WorkspaceCopyLink scope={scope} brief={data.brief} version={version} />
       {panel === "history" ? (
         <BriefHistory
           scope={scope}

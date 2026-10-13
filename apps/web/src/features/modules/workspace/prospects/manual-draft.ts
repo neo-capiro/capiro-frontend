@@ -31,6 +31,7 @@ export function manualDraftInput(
   draft: WorkspaceDraftDocument,
 ): ManualDraftInput {
   const blocks = draft.documents
+    .filter((document) => !document.sourceBriefVersion)
     .flatMap((document) => document.body.blocks ?? [])
     .filter((block) => block.type === "section" && block.title);
   const names = draft.config.sections?.length
