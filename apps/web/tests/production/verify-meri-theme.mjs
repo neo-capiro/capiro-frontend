@@ -52,7 +52,7 @@ async function verifyWorkspaceError(page, output, viewport, colorScheme) {
   await page
     .getByLabel("Sample scenario", { exact: true })
     .selectOption("failed");
-  const alert = page.getByRole("alert");
+  const alert = page.getByRole("main").getByRole("alert");
   await alert.waitFor();
   const error = await alert.evaluate((element) => {
     const css = getComputedStyle(element);
