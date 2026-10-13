@@ -2,6 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
 import { fetchEffectiveDates } from "./effective-feed";
+import { fetchFundingDeadlines } from "./funding-feed";
 import {
   fetchMeetings,
   fetchHearings,
@@ -52,7 +53,13 @@ export function useCalendarFeeds(
     queryFn: ({ signal }) =>
       fetchEffectiveDates(api, range.startDay, range.endDay, signal),
   });
-  return { meetings, hearings, planner, deadlines, government };
+  const funding = useQuery({
+    queryKey: ["calendar", "funding", range.startDay, range.endDay, zone],
+    enabled: mixed,
+    queryFn: ({ signal }) =>
+      fetchFundingDeadlines(api, range.startDay, range.endDay, zone, signal),
+  });
+  return { meetings, hearings, planner, deadlines, government, funding };
 }
 export function useMeeting(id: string | null) {
   const api = useApi();
