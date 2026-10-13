@@ -1,0 +1,20 @@
+
+> @capiro/web@0.1.0 test:browser:modules
+> playwright test --config test/browser/playwright.config.ts meri-action-host-mobile-navigation.spec.ts
+
+[WebServer] (node:1327613) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:1327814) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 test/browser/meri-action-host-mobile-navigation.spec.ts:74:1 › 375px Meri navigation preserves the verified client through keyboard and Back/Forward without action dispatch (5.6s)
+  ✓  2 test/browser/meri-action-host-mobile-navigation.spec.ts:103:1 › 1440px Meri retains one visible sidebar destination per route without duplicate mobile links (5.8s)
+
+  2 passed (15.1s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

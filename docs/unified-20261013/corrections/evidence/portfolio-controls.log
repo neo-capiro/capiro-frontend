@@ -1,0 +1,45 @@
+
+> capiro-frontend@0.1.0 test:browser
+> npm run test:browser --workspace @capiro/web -- --workers=3 portfolio.spec.ts portfolio-attention.spec.ts
+
+
+> @capiro/web@0.1.0 test:browser
+> playwright test --workers=3 portfolio.spec.ts portfolio-attention.spec.ts
+
+[WebServer] (node:1327641) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 16 tests using 2 workers
+
+(node:1327665) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1327664) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/browser/portfolio.spec.ts:12:1 › four-field readiness persists once, transitions, and refreshes the list (8.2s)
+  ✓   2 tests/browser/portfolio-attention.spec.ts:66:1 › source alerts preserve server order and provenance, accessible identity and actual profile links (8.7s)
+  ✓   4 tests/browser/portfolio-attention.spec.ts:109:1 › pending feed does not render empty or successful counts (5.4s)
+  ✓   3 tests/browser/portfolio.spec.ts:60:1 › facility creation uses the selected client's endpoint and refreshes the map list (7.1s)
+  ✓   5 tests/browser/portfolio-attention.spec.ts:131:1 › failure requires explicit retry and recovers without a successful empty claim (5.8s)
+  ✓   6 tests/browser/portfolio.spec.ts:110:1 › mail is reviewed and a provider error remains visible without automatic retry (7.0s)
+  ✓   7 tests/browser/portfolio-attention.spec.ts:156:1 › refresh failure suppresses cached source records until retry succeeds (4.7s)
+  ✓   8 tests/browser/portfolio.spec.ts:144:1 › capability edits invalidate the list and retain unrelated registration codes (6.3s)
+  ✓   9 tests/browser/portfolio-attention.spec.ts:177:1 › wrong client receipt is refused rather than linked to a different client (4.2s)
+  ✓  11 tests/browser/portfolio-attention.spec.ts:195:1 › ambiguous HTTP200 empty fallback describes incomplete coverage and allows refresh (4.2s)
+  ✓  12 tests/browser/portfolio-attention.spec.ts:213:1 › portal role fails closed and never requests the restricted feed (3.7s)
+  ✓  10 tests/browser/portfolio.spec.ts:183:1 › navigation, permissions, session expiry and mobile layout use real feature components (12.0s)
+  ✓  13 tests/browser/portfolio-attention.spec.ts:236:1 › identity lookup failure blocks the feed before explicit identity recovery (5.6s)
+  ✓  14 tests/browser/portfolio-attention.spec.ts:266:1 › server authorization refusal overrides the allowed frontend role (2.2s)
+  ✓  15 tests/browser/portfolio-attention.spec.ts:282:1 › expired alert session uses the shared sign-in recovery (2.4s)
+  ✓  16 tests/browser/portfolio-attention.spec.ts:299:1 › mobile dark card remains scrollable, keyboard accessible and within the viewport (2.7s)
+
+  16 passed (51.8s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

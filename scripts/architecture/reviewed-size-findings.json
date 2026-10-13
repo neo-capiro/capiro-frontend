@@ -1407,15 +1407,6 @@
     "reviewedOn": "2026-10-12"
   },
   {
-    "file": "apps/web/src/features/portfolio/index/portfolio.module.css",
-    "kind": "file",
-    "symbol": "<module>",
-    "fingerprint": "370b43d4c8e1db0b7afe8e3f6ed0f4910b4ed62f27f563103870c99735aa3e11",
-    "reason": "Retains Portfolio index/card/chooser presentation and responsive rules. The added header owner filter and compact navigation/disclosure styling are scoped to the same index. No global shell tokens, mode navigation, backend state or unrelated domain rules are added. See docs/visual-closeout-20261012/STRUCTURE-REVIEW.md.",
-    "reviewedBy": "Codex shared frontend implementation review",
-    "reviewedOn": "2026-10-12"
-  },
-  {
     "file": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
     "kind": "function",
     "symbol": "CapabilitiesPage",
@@ -2224,5 +2215,23 @@
     "reviewedBy": "calendar_relationships_review (independent responsibility review)",
     "reviewedOn": "2026-10-13",
     "reason": "One86-line real-browser scenario callback verifies the same uncertain preparation invariant across ordered Modules navigation, Back, deliberate reconnect, late completion, Forward/Back and a second reconnect. Parameterizing acknowledged-unknown and still-in-flight states preserves that single invariant without reconstructing durable state. URL/private-view assertions and exact query/draft/prepare/execute counts are adjacent to their transitions; fixture helpers own setup and real request completion barriers. Keeping this causal sequence together preserves test meaning better than splitting it into independently reset tests."
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/portfolio.module.css",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "f15942ff74b4dea83bf1157fca7bacacd8cd414f1592485f2ae6c95a4fa16a3b",
+    "reason": "Same Portfolio index/card/filter presentation owner. Prior seven-line card target/ellipsis correction plus three lines make only pressed All/Clients count text inherit the existing selected-button foreground. No inactive-count, global-token, dark-token, data, navigation or shared-foundation responsibility is added. Independently reviewed by objectives_work_intel_review; see docs/unified-20261013/corrections/REVIEW.md.",
+    "reviewedBy": "Codex objectives_work_intel_review, independently reviewed and applied by shared integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+    "kind": "function",
+    "symbol": "PortfolioAttention",
+    "fingerprint": "76e8ccdf0c111b56476f143a5bb6204a084807b0b19d3e4f81cacaa39fab2d3c",
+    "reason": "Existing attention list/status/retry presentation owner. A note role makes the already-labelled count semantically valid; it adds no query, aggregation, mutation or state responsibility. Independent exact-source review: docs/unified-20261013/corrections/A11Y-STRUCTURE-REVIEW.md.",
+    "reviewedBy": "Codex objectives_work_intel_review, independently reviewed and applied by shared integration owner",
+    "reviewedOn": "2026-10-13"
   }
 ]

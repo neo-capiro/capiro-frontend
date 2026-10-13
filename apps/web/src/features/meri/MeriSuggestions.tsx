@@ -10,7 +10,11 @@ export function MeriSuggestions({
 }) {
   return (
     <>
-      <div className={styles.suggestions} aria-label="Draft suggestions">
+      <div
+        className={styles.suggestions}
+        role="group"
+        aria-label="Draft suggestions"
+      >
         {suggestions.slice(0, 3).map((item) => (
           <section key={item.id} className={styles.card}>
             <div className={styles.cardTopRow}>

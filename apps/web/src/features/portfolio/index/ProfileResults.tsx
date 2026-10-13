@@ -1,6 +1,7 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
+import { useId } from "react";
 import { ArrowUpRight } from "lucide-react";
 import {
   clientLocation,
@@ -95,31 +96,39 @@ export function ProfileCard({
   const owner = ownership?.accountOwner;
   const location = clientLocation(client);
   const sector = clientSectorLabel(client);
+  const descriptionId = useId();
   return (
     <article className={styles.profileCard}>
-      <Link
-        className={styles.cardTop}
-        href={`/portfolio/${client.id}`}
-        aria-label={`Open ${client.name}`}
-      >
+      <div className={styles.cardTop}>
         <ProfileLogo client={client} />
         <div className={styles.cardIdentity}>
-          <h3>{client.name}</h3>
-          <small>
+          <h2>
+            <Link
+              className={styles.profileLink}
+              href={`/portfolio/${client.id}`}
+              aria-label={`Open ${client.name}`}
+              aria-describedby={descriptionId}
+            >
+              {client.name}
+            </Link>
+          </h2>
+          <small id={descriptionId}>
             {sector ?? "Sector not supplied"}
             {location && ` · ${location}`}
           </small>
         </div>
-      </Link>
+      </div>
       <div className={styles.cardBottom}>
         <span
           className="chip"
+          role="note"
           aria-label={`Profile status: ${client.profileStatus}`}
         >
           {client.profileStatus}
         </span>
         <span
           className={styles.ownerAvatar}
+          role="img"
           title={ownership ? memberName(owner) : "Owner unavailable"}
           aria-label={`Account owner: ${ownership ? memberName(owner) : "unavailable"}`}
         >
@@ -132,7 +141,7 @@ export function ProfileCard({
 function ProfileLogo({ client }: { client: Client }) {
   const src = safeWebsite(client.logoUrl);
   return (
-    <span className={styles.profileLogo}>
+    <span className={styles.profileLogo} aria-hidden="true">
       {src ? (
         <img src={src} alt="" width={40} height={40} />
       ) : (

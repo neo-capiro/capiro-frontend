@@ -1,0 +1,52 @@
+{
+  "files": [
+    {
+      "path": "/tmp/capiro-unified-corrections-20261013/check-v3.log",
+      "bytes": 944982,
+      "sha256": "a6843a3a92449c393182fd9774a4de5a185260009e3f75f1eecf9f3a9284337f"
+    },
+    {
+      "path": "/tmp/capiro-unified-corrections-20261013/architecture-final.log",
+      "bytes": 875948,
+      "sha256": "6ee048a95ea5a1e5ada68601c79f6e2714692d7a4d16eb9785b0b56e5869aae1"
+    },
+    {
+      "path": "/tmp/capiro-unified-corrections-20261013/final-style-format.log",
+      "bytes": 66,
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "path": "/tmp/capiro-unified-corrections-20261013/active-count-initial-spec.ts",
+      "bytes": 2590,
+      "sha256": "017c20307fa4f7b84d4e6db12fda3ca330ed8420d548c3db827c3fb3ac811082"
+    },
+    {
+      "path": "/tmp/capiro-unified-corrections-20261013/active-count-final-spec.ts",
+      "bytes": 3020,
+      "sha256": "8c0949fe589bc9d70ce908fdc65cc7da4244be243f72bcf4580dda659d311da9"
+    },
+    {
+      "path": "/tmp/capiro-unified-corrections-20261013/active-count-red.log",
+      "bytes": 12501,
+      "sha256": "2d4a0ac89ef40a9e03158433329558b1557cbb55b05678c31e600e5475ba00cd"
+    },
+    {
+      "path": "/tmp/capiro-unified-corrections-20261013/active-count-red-v2.log",
+      "bytes": 7048,
+      "sha256": "892abeae43b472791e3e0b9acfcaea36d4902a9ce531c968dcd49003094c3107"
+    },
+    {
+      "path": "/tmp/capiro-unified-corrections-20261013/active-count-green.log",
+      "bytes": 2064,
+      "sha256": "23bad2a3a5ceafc1040a79dd73e90b8581c4d455238fb7bdda81a7964affabef"
+    }
+  ],
+  "architectureErrors": [],
+  "architectureSummary": {
+    "total": 475,
+    "reviewed": 452,
+    "inheritedUnreviewed": 23,
+    "blocking": 0
+  },
+  "qualificationLimit": "Canonical check-v3 precedes final three-line selected-count CSS. Root reports exit 0. Final architecture and formatting passed; full frozen successor qualification still pending."
+}

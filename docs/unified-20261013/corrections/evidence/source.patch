@@ -1,0 +1,279 @@
+diff --git a/apps/web/package.json b/apps/web/package.json
+index cb490bb..bb1d887 100644
+--- a/apps/web/package.json
++++ b/apps/web/package.json
+@@ -57,7 +57,8 @@
+     "eslint": "9.39.2",
+     "eslint-config-next": "16.4.0",
+     "prettier": "3.8.1",
+-    "typescript": "5.9.3"
++    "typescript": "5.9.3",
++    "axe-core": "4.14.0"
+   },
+   "engines": {
+     "node": ">=24 <25"
+diff --git a/apps/web/src/app/globals.css b/apps/web/src/app/globals.css
+index e0f0977..458af24 100644
+--- a/apps/web/src/app/globals.css
++++ b/apps/web/src/app/globals.css
+@@ -3,7 +3,7 @@
+   --card: #fff;
+   --foreground: #0a0a0a;
+   --muted: #f5f5f4;
+-  --muted-foreground: #78716c;
++  --muted-foreground: #756e69;
+   --border: #e7e5e4;
+   --input: #e7e5e4;
+   --radius: 10px;
+diff --git a/apps/web/src/features/meri/MeriSuggestions.tsx b/apps/web/src/features/meri/MeriSuggestions.tsx
+index 895a7ce..3c46362 100644
+--- a/apps/web/src/features/meri/MeriSuggestions.tsx
++++ b/apps/web/src/features/meri/MeriSuggestions.tsx
+@@ -10,7 +10,11 @@ export function MeriSuggestions({
+ }) {
+   return (
+     <>
+-      <div className={styles.suggestions} aria-label="Draft suggestions">
++      <div
++        className={styles.suggestions}
++        role="group"
++        aria-label="Draft suggestions"
++      >
+         {suggestions.slice(0, 3).map((item) => (
+           <section key={item.id} className={styles.card}>
+             <div className={styles.cardTopRow}>
+diff --git a/apps/web/src/features/portfolio/index/ProfileResults.tsx b/apps/web/src/features/portfolio/index/ProfileResults.tsx
+index e416050..57218ac 100644
+--- a/apps/web/src/features/portfolio/index/ProfileResults.tsx
++++ b/apps/web/src/features/portfolio/index/ProfileResults.tsx
+@@ -1,6 +1,7 @@
+ "use client";
+ /* eslint-disable @next/next/no-img-element */
+ import Link from "next/link";
++import { useId } from "react";
+ import { ArrowUpRight } from "lucide-react";
+ import {
+   clientLocation,
+@@ -95,31 +96,39 @@ export function ProfileCard({
+   const owner = ownership?.accountOwner;
+   const location = clientLocation(client);
+   const sector = clientSectorLabel(client);
++  const descriptionId = useId();
+   return (
+     <article className={styles.profileCard}>
+-      <Link
+-        className={styles.cardTop}
+-        href={`/portfolio/${client.id}`}
+-        aria-label={`Open ${client.name}`}
+-      >
++      <div className={styles.cardTop}>
+         <ProfileLogo client={client} />
+         <div className={styles.cardIdentity}>
+-          <h3>{client.name}</h3>
+-          <small>
++          <h2>
++            <Link
++              className={styles.profileLink}
++              href={`/portfolio/${client.id}`}
++              aria-label={`Open ${client.name}`}
++              aria-describedby={descriptionId}
++            >
++              {client.name}
++            </Link>
++          </h2>
++          <small id={descriptionId}>
+             {sector ?? "Sector not supplied"}
+             {location && ` · ${location}`}
+           </small>
+         </div>
+-      </Link>
++      </div>
+       <div className={styles.cardBottom}>
+         <span
+           className="chip"
++          role="note"
+           aria-label={`Profile status: ${client.profileStatus}`}
+         >
+           {client.profileStatus}
+         </span>
+         <span
+           className={styles.ownerAvatar}
++          role="img"
+           title={ownership ? memberName(owner) : "Owner unavailable"}
+           aria-label={`Account owner: ${ownership ? memberName(owner) : "unavailable"}`}
+         >
+@@ -132,7 +141,7 @@ export function ProfileCard({
+ function ProfileLogo({ client }: { client: Client }) {
+   const src = safeWebsite(client.logoUrl);
+   return (
+-    <span className={styles.profileLogo}>
++    <span className={styles.profileLogo} aria-hidden="true">
+       {src ? (
+         <img src={src} alt="" width={40} height={40} />
+       ) : (
+diff --git a/apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx b/apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx
+index 849c00c..7377f1e 100644
+--- a/apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx
++++ b/apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx
+@@ -21,6 +21,7 @@ export function PortfolioAttention({
+         {data && (
+           <span
+             className={styles.count}
++            role="note"
+             aria-label={`${rows.length} shown alerts`}
+           >
+             {rows.length} shown
+diff --git a/apps/web/src/features/portfolio/index/portfolio.module.css b/apps/web/src/features/portfolio/index/portfolio.module.css
+index 51828ae..3989c95 100644
+--- a/apps/web/src/features/portfolio/index/portfolio.module.css
++++ b/apps/web/src/features/portfolio/index/portfolio.module.css
+@@ -69,7 +69,7 @@
+ .cardIdentity {
+   min-width: 0;
+ }
+-.cardIdentity h3 {
++.cardIdentity h2 {
+   font-size: 15px;
+   font-weight: 600;
+   line-height: 1.35;
+@@ -80,11 +80,18 @@
+   line-height: 1.4;
+ }
+ .cardTop {
++  position: relative;
+   display: flex;
+   align-items: center;
+   gap: 12px;
+   min-width: 0;
+ }
++/* Preserve the full card-top pointer target while its metadata stays descriptive. */
++.profileLink::after {
++  content: "";
++  position: absolute;
++  inset: 0;
++}
+ .cardBottom {
+   display: flex;
+   align-items: center;
+@@ -110,7 +117,7 @@
+   height: 40px;
+   object-fit: contain;
+ }
+-.cardIdentity h3,
++.profileLink,
+ .cardIdentity small {
+   display: block;
+   overflow: hidden;
+diff --git a/apps/web/src/shared/portfolio/shell/PortfolioNavigation.tsx b/apps/web/src/shared/portfolio/shell/PortfolioNavigation.tsx
+index 031781c..c9666b0 100644
+--- a/apps/web/src/shared/portfolio/shell/PortfolioNavigation.tsx
++++ b/apps/web/src/shared/portfolio/shell/PortfolioNavigation.tsx
+@@ -16,18 +16,19 @@ export function PortfolioNavigation({
+ }) {
+   const path = usePathname();
+   const type = useSearchParams().get("type");
++  const portfolioIndex = path === "/" || path === "/portfolio";
+   const globalItems = [
+     {
+       label: "Overview",
+       href: "/portfolio",
+       icon: 0,
+-      active: path === "/portfolio" && !type,
++      active: portfolioIndex && !type,
+     },
+     {
+       label: "Clients",
+       href: "/portfolio?type=CLIENT",
+       icon: 1,
+-      active: path === "/portfolio" && type === "CLIENT",
++      active: portfolioIndex && type === "CLIENT",
+     },
+     {
+       label: "Prospects",
+diff --git a/apps/web/src/shared/shell/ProductShell.tsx b/apps/web/src/shared/shell/ProductShell.tsx
+index 4ae56be..94693b9 100644
+--- a/apps/web/src/shared/shell/ProductShell.tsx
++++ b/apps/web/src/shared/shell/ProductShell.tsx
+@@ -31,22 +31,24 @@ export function ProductShell({
+           </main>
+         </div>
+       </div>
+-      <footer className={styles.fixtureNotice} role="note">
+-        {actionWorkflow ? (
+-          <>
+-            <strong>
+-              Conversation and workspace samples remain disconnected.
+-            </strong>{" "}
+-            Recommendation actions require a verified action connection.
+-          </>
+-        ) : (
+-          <>
+-            <strong>Disconnected synthetic fixture.</strong> Jordan, Anduril,
+-            recent titles, answer, citations and approval counts are samples. No
+-            signed-in identity, authorized source data or sending is available.
+-            Drafts stay in this page only.
+-          </>
+-        )}
++      <footer className={styles.fixtureNotice}>
++        <div role="note">
++          {actionWorkflow ? (
++            <>
++              <strong>
++                Conversation and workspace samples remain disconnected.
++              </strong>{" "}
++              Recommendation actions require a verified action connection.
++            </>
++          ) : (
++            <>
++              <strong>Disconnected synthetic fixture.</strong> Jordan, Anduril,
++              recent titles, answer, citations and approval counts are samples. No
++              signed-in identity, authorized source data or sending is available.
++              Drafts stay in this page only.
++            </>
++          )}
++        </div>
+       </footer>
+     </>
+   );
+diff --git a/apps/web/test/browser/main.tsx b/apps/web/test/browser/main.tsx
+index 74a2d5a..a79d200 100644
+--- a/apps/web/test/browser/main.tsx
++++ b/apps/web/test/browser/main.tsx
+@@ -76,9 +76,9 @@ function RoutedApp() {
+     return (
+       <>
+         <PublicForm token={path.split("/")[2] ?? ""} />
+-        <p className="test-notice">
++        <aside className="test-notice" aria-label="Local test fixture">
+           Explicit local test fixture · synthetic form
+-        </p>
++        </aside>
+       </>
+     );
+   if (path === "/meri")
+@@ -143,9 +143,9 @@ function RoutedApp() {
+           </CapiroBoundary>
+         )}
+       </ModuleShell>
+-      <p className="test-notice">
++      <aside className="test-notice" aria-label="Local test fixture">
+         Explicit local test fixture · synthetic identity and records
+-      </p>
++      </aside>
+     </>
+   );
+ }
+diff --git a/package-lock.json b/package-lock.json
+index 7b74284..442c2d4 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -104,7 +104,8 @@
+         "prettier": "3.8.1",
+         "typescript": "5.9.3",
+         "vite": "8.3.4",
+-        "vitest": "4.1.11"
++        "vitest": "4.1.11",
++        "axe-core": "4.14.0"
+       },
+       "engines": {
+         "node": ">=24 <25"

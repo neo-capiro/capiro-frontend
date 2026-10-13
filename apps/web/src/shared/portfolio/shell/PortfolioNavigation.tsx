@@ -16,18 +16,19 @@ export function PortfolioNavigation({
 }) {
   const path = usePathname();
   const type = useSearchParams().get("type");
+  const portfolioIndex = path === "/" || path === "/portfolio";
   const globalItems = [
     {
       label: "Overview",
       href: "/portfolio",
       icon: 0,
-      active: path === "/portfolio" && !type,
+      active: portfolioIndex && !type,
     },
     {
       label: "Clients",
       href: "/portfolio?type=CLIENT",
       icon: 1,
-      active: path === "/portfolio" && type === "CLIENT",
+      active: portfolioIndex && type === "CLIENT",
     },
     {
       label: "Prospects",

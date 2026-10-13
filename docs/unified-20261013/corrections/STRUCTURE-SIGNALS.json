@@ -1,0 +1,94 @@
+{
+  "method": "Read-only repository AST scanner on proposal strings; no application imports or test/runtime gates.",
+  "rows": [
+    {
+      "file": "apps/web/src/app/globals.css",
+      "baseline": [],
+      "candidate": []
+    },
+    {
+      "file": "apps/web/src/shared/shell/ProductShell.tsx",
+      "baseline": [],
+      "candidate": []
+    },
+    {
+      "file": "apps/web/src/features/portfolio/index/ProfileResults.tsx",
+      "baseline": [],
+      "candidate": []
+    },
+    {
+      "file": "apps/web/src/features/portfolio/index/portfolio.module.css",
+      "baseline": [
+        {
+          "file": "apps/web/src/features/portfolio/index/portfolio.module.css",
+          "kind": "file",
+          "symbol": "<module>",
+          "line": 1,
+          "nonblank": 480,
+          "fingerprint": "370b43d4c8e1db0b7afe8e3f6ed0f4910b4ed62f27f563103870c99735aa3e11"
+        }
+      ],
+      "candidate": [
+        {
+          "file": "apps/web/src/features/portfolio/index/portfolio.module.css",
+          "kind": "file",
+          "symbol": "<module>",
+          "line": 1,
+          "nonblank": 487,
+          "fingerprint": "14dcea4159861620644b342695810bd081dfb89e818b5aa32aac5d2d01e56af0"
+        }
+      ]
+    },
+    {
+      "file": "apps/web/test/browser/main.tsx",
+      "baseline": [
+        {
+          "file": "apps/web/test/browser/main.tsx",
+          "kind": "function",
+          "symbol": "RoutedApp",
+          "line": 45,
+          "nonblank": 107,
+          "fingerprint": "2e3569f1e3b5e429ed889a923d81f7ea66010ac9b3e28d7fe180f43cc268f114"
+        }
+      ],
+      "candidate": [
+        {
+          "file": "apps/web/test/browser/main.tsx",
+          "kind": "function",
+          "symbol": "RoutedApp",
+          "line": 45,
+          "nonblank": 107,
+          "fingerprint": "fe1e89f76112717722003d6e3ebf1f7718e9e4deb6dfa91b7332abc99b206458"
+        }
+      ]
+    },
+    {
+      "file": "apps/web/src/features/meri/MeriSuggestions.tsx",
+      "baseline": [],
+      "candidate": []
+    },
+    {
+      "file": "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+      "baseline": [
+        {
+          "file": "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+          "kind": "function",
+          "symbol": "PortfolioAttention",
+          "line": 9,
+          "nonblank": 87,
+          "fingerprint": "6d09bae3b89a88c0247db5ab2912723db581643f4b91ff6c180a4281a29392ec"
+        }
+      ],
+      "candidate": [
+        {
+          "file": "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+          "kind": "function",
+          "symbol": "PortfolioAttention",
+          "line": 9,
+          "nonblank": 88,
+          "fingerprint": "76e8ccdf0c111b56476f143a5bb6204a084807b0b19d3e4f81cacaa39fab2d3c"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+
+> capiro-frontend@0.1.0 check
+> npm run check:packages && npm run typecheck && npm test && npm run architecture && npm run test:transport && npm run lint --workspace @capiro/web && npm run format:check --workspace @capiro/web && npm run test:portfolio && npm run test:capiro --workspace @capiro/web && npm run test:newsletter
+
+
+> capiro-frontend@0.1.0 check:packages
+> node scripts/public-packages.mjs
+
+{
+  "schema": "capiro-public-package-inputs/1",
+  "records": [
+    {
+      "file": "capiro-meri-contracts-0.1.0.tgz",
+      "bytes": 48823,
+      "sha256": "2f15ade9458cbffe960b7cc36c6fb77cb54cc2a0eca4bc7c0f918b77cfacd4ee",
+      "sourceCommit": "0dc9ce423947fc7814d7f8ad8de2f633c187c6d8"
+    },
+    {
+      "file": "capiro-meri-ui-stream-0.1.0.tgz",
+      "bytes": 2280,
+      "sha256": "7ce24acd465dca4c5e90c1c98dba383318aab024dbce5170fa1f1daf3bce83ab",
+      "sourceCommit": "12289a434be6f589bbff9c741367b8cfb77f2616"
+    },
+    {
+      "file": "capiro-meri-contracts-0.1.1.tgz",
+      "bytes": 175627,
+      "sha256": "0ca8d0552a2960157ebdf7b8cecf6cacdcda48ef91c475060a54f15192535651",
+      "sourceCommit": "83d1d8b2ae4604ca259be17461ae71ca60f5fb6e"
+    },
+    {
+      "file": "capiro-shared-0.0.0.tgz",
+      "bytes": 510772,
+      "sha256": "697d826647e88e7f8559da386be7de1ae6408dc61c73877b86c2e17275fd63ab",
+      "sourceCommit": "fe50dc1c2de1660a036e338cf81acdcf0f2fb26a"
+    },
+    {
+      "file": "capiro-shared-0.0.0-38fec5c8.tgz",
+      "bytes": 532178,
+      "sha256": "3e435f280fac8fd301eb753e9fc7ead93691cf979fc1641792fedd88e1bfd6d5",
+      "sourceCommit": "38fec5c83585850ed75a7d3693b3b90d517e70af"
+    },
+    {
+      "file": "capiro-shared-0.0.0-38fec5c8.tgz",
+      "bytes": 532178,
+      "sha256": "3e435f280fac8fd301eb753e9fc7ead93691cf979fc1641792fedd88e1bfd6d5",
+      "sourceCommit": "38fec5c83585850ed75a7d3693b3b90d517e70af"
+    }
+  ]
+}
+
+> capiro-frontend@0.1.0 typecheck
+> npm run typecheck --workspaces --if-present
+
+
+> @capiro/web@0.1.0 typecheck
+> tsc --noEmit
+
+test/accessibility.ts(8,6): error TS2352: Conversion of type 'Window & typeof globalThis' to type 'Window & { axe: typeof axe; }' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Property 'axe' is missing in type 'Window & typeof globalThis' but required in type '{ axe: typeof axe; }'.
+npm error Lifecycle script `typecheck` failed with error:
+npm error code 2
+npm error path /tmp/capiro-onboard-execution-20261013/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /tmp/capiro-onboard-execution-20261013/apps/web
+npm error command failed
+npm error command sh -c tsc --noEmit
+
+
+> @capiro/meri-client@0.1.0 typecheck
+> tsc -p tsconfig.json --noEmit
+
+
+> @capiro/qualification-elements@0.0.0 typecheck
+> tsc -p tsconfig.json
+
+
+> @capiro/qualification-newsletter@0.0.0 typecheck
+> tsc -p tsconfig.json
+
+
+> @capiro/ui@0.0.0 typecheck
+> tsc -p tsconfig.json
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

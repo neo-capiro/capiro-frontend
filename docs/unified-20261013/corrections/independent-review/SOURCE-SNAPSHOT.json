@@ -1,0 +1,211 @@
+{
+  "capturedUTC": "2026-10-13T07:42:49.799111+00:00",
+  "base": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+  "headAtReview": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+  "status": "Uncommitted exact bounded source snapshot; final comprehensive successor qualification pending",
+  "sourceFiles": [
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/apps/web/package.json",
+      "bytes": 2076,
+      "sha256": "9a8a5cb7248ac26b07dba927d781d7aeaf2357c0267f56e36f2459377a57db5a",
+      "repositoryRelativePath": "apps/web/package.json",
+      "mirrorMatches": true
+    },
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/apps/web/src/app/globals.css",
+      "bytes": 1113,
+      "sha256": "cf95e12386e6addfbc88ba7a70fda6d5eeca475734d8af90f46cf58e10452f8d",
+      "repositoryRelativePath": "apps/web/src/app/globals.css",
+      "mirrorMatches": true
+    },
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/apps/web/src/features/meri/MeriSuggestions.tsx",
+      "bytes": 1988,
+      "sha256": "98408cf322ae10295b4926cf6a293c79ae640aa3ab0bc61d157d1d225bf106f2",
+      "repositoryRelativePath": "apps/web/src/features/meri/MeriSuggestions.tsx",
+      "mirrorMatches": true
+    },
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/apps/web/src/features/portfolio/index/ProfileResults.tsx",
+      "bytes": 4234,
+      "sha256": "e15d40947e83deb1c1eea3049f1f297fccf0c76a29389c9974062ea7cb39558c",
+      "repositoryRelativePath": "apps/web/src/features/portfolio/index/ProfileResults.tsx",
+      "mirrorMatches": true
+    },
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+      "bytes": 3478,
+      "sha256": "750f54237819b06f08e7cead090e38f960fd844fd6dcccb0d154dbfdf1bbaf09",
+      "repositoryRelativePath": "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+      "mirrorMatches": true
+    },
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/apps/web/src/features/portfolio/index/portfolio.module.css",
+      "bytes": 8368,
+      "sha256": "d4d23b4f53c643a1c4da9f5174bec62f8b5fc7cd12faa9f499df1907d7fe16ca",
+      "repositoryRelativePath": "apps/web/src/features/portfolio/index/portfolio.module.css",
+      "mirrorMatches": true
+    },
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/apps/web/src/shared/portfolio/shell/PortfolioNavigation.tsx",
+      "bytes": 2345,
+      "sha256": "440b01368a37d8eadc06252ac186810ced654a57bd8a7414211a696f8f50d417",
+      "repositoryRelativePath": "apps/web/src/shared/portfolio/shell/PortfolioNavigation.tsx",
+      "mirrorMatches": true
+    },
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/apps/web/src/shared/shell/ProductShell.tsx",
+      "bytes": 1727,
+      "sha256": "fa8d74a0779029b46eb147393370daa2a1ea9103b1f5b65c814b7b058392bb97",
+      "repositoryRelativePath": "apps/web/src/shared/shell/ProductShell.tsx",
+      "mirrorMatches": true
+    },
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/apps/web/test/accessibility-interaction.ts",
+      "bytes": 3293,
+      "sha256": "8dd1582dd58afde5da1c98b444c3154bb78ec6ce68a74d49eff671b27635974c",
+      "repositoryRelativePath": "apps/web/test/accessibility-interaction.ts",
+      "mirrorMatches": true
+    },
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/apps/web/test/accessibility.ts",
+      "bytes": 708,
+      "sha256": "855c28a24d9dda89e8239babcc14f3ea0dbe921441376b30ccfc93d0a9efa367",
+      "repositoryRelativePath": "apps/web/test/accessibility.ts",
+      "mirrorMatches": true
+    },
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/apps/web/test/browser/main.tsx",
+      "bytes": 5847,
+      "sha256": "8e450fb7a59fc6d9b3a2e6ee784e3188ffb8251badc47672fb382f2d2e82029c",
+      "repositoryRelativePath": "apps/web/test/browser/main.tsx",
+      "mirrorMatches": true
+    },
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/apps/web/test/browser/shared-home-accessibility-interaction.spec.ts",
+      "bytes": 4995,
+      "sha256": "17a29c0b2a3699a0148668894fb5220049116ec0e273800aff6dfe905ea98750",
+      "repositoryRelativePath": "apps/web/test/browser/shared-home-accessibility-interaction.spec.ts",
+      "mirrorMatches": true
+    },
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/apps/web/test/browser/shared-home-accessibility.spec.ts",
+      "bytes": 1006,
+      "sha256": "2a3aaea30e7b9a863cdef654e9e6f54eaaf1f0ab4f5d891f9e35dfefb42f3bcf",
+      "repositoryRelativePath": "apps/web/test/browser/shared-home-accessibility.spec.ts",
+      "mirrorMatches": true
+    },
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/apps/web/tests/browser/canonical-navigation.spec.ts",
+      "bytes": 1308,
+      "sha256": "7410470d25693de2880577c98f442b0fcd3cb47f161c78a435ec5049024ea47d",
+      "repositoryRelativePath": "apps/web/tests/browser/canonical-navigation.spec.ts",
+      "mirrorMatches": true
+    },
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/apps/web/tests/browser/portfolio-accessibility-fixtures.ts",
+      "bytes": 1743,
+      "sha256": "602c555fd619e39d8e1d285a4998ec445c09c65eae80f2ee5b17bf5c2ad3efd3",
+      "repositoryRelativePath": "apps/web/tests/browser/portfolio-accessibility-fixtures.ts",
+      "mirrorMatches": true
+    },
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/apps/web/tests/browser/portfolio-accessibility-interaction.spec.ts",
+      "bytes": 5896,
+      "sha256": "53f51434d6718d068d260340bc15c4eefbb37672564ed432c4f74fb3f29fede0",
+      "repositoryRelativePath": "apps/web/tests/browser/portfolio-accessibility-interaction.spec.ts",
+      "mirrorMatches": true
+    },
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/apps/web/tests/browser/portfolio-accessibility-semantics.spec.ts",
+      "bytes": 2411,
+      "sha256": "c36dd72c4bcb72cfce4642695579f3ff3bb69f345ca84f7683129b0134cd590c",
+      "repositoryRelativePath": "apps/web/tests/browser/portfolio-accessibility-semantics.spec.ts",
+      "mirrorMatches": true
+    },
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+      "bytes": 3020,
+      "sha256": "8c0949fe589bc9d70ce908fdc65cc7da4244be243f72bcf4580dda659d311da9",
+      "repositoryRelativePath": "apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+      "mirrorMatches": true
+    },
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/apps/web/tests/browser/portfolio-home-accessibility.spec.ts",
+      "bytes": 914,
+      "sha256": "7aeb3c4e3141f7cbec9c29715b9a053f5c9c3e9284744b711a0a8722e44ea2a2",
+      "repositoryRelativePath": "apps/web/tests/browser/portfolio-home-accessibility.spec.ts",
+      "mirrorMatches": true
+    },
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/package-lock.json",
+      "bytes": 512816,
+      "sha256": "294ba8ab0cd31f804a0d595c9f10a8edb39fdefcab60b84ef422e34cbc68fe38",
+      "repositoryRelativePath": "package-lock.json",
+      "mirrorMatches": true
+    },
+    {
+      "path": "/workspace/capiro-onboard-port-20261013/scripts/architecture/reviewed-size-findings.json",
+      "bytes": 175658,
+      "sha256": "6da73efa56c10e0cf1deb5dc8e279ecfac9974714b27b0d0dc240b453b33a88b",
+      "repositoryRelativePath": "scripts/architecture/reviewed-size-findings.json",
+      "mirrorMatches": true
+    }
+  ],
+  "productionSrcFiles": [
+    "apps/web/src/app/globals.css",
+    "apps/web/src/features/meri/MeriSuggestions.tsx",
+    "apps/web/src/features/portfolio/index/ProfileResults.tsx",
+    "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+    "apps/web/src/features/portfolio/index/portfolio.module.css",
+    "apps/web/src/shared/portfolio/shell/PortfolioNavigation.tsx",
+    "apps/web/src/shared/shell/ProductShell.tsx"
+  ],
+  "newTestFiles": [
+    "apps/web/test/accessibility-interaction.ts",
+    "apps/web/test/accessibility.ts",
+    "apps/web/test/browser/shared-home-accessibility-interaction.spec.ts",
+    "apps/web/test/browser/shared-home-accessibility.spec.ts",
+    "apps/web/tests/browser/canonical-navigation.spec.ts",
+    "apps/web/tests/browser/portfolio-accessibility-fixtures.ts",
+    "apps/web/tests/browser/portfolio-accessibility-interaction.spec.ts",
+    "apps/web/tests/browser/portfolio-accessibility-semantics.spec.ts",
+    "apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+    "apps/web/tests/browser/portfolio-home-accessibility.spec.ts"
+  ],
+  "lockDiffOnlyWebDirectAxeMetadata": true,
+  "lockedAxePackageUnchanged": true,
+  "lockedAxe": {
+    "version": "4.14.0",
+    "resolved": "https://registry.npmjs.org/axe-core/-/axe-core-4.14.0.tgz",
+    "integrity": "sha512-9WTZxEjsZ7b13TH8JPmbV2z8CHbl80/2hm3XPEG4JgNdQLK81IBRXmSxHfMAOkSqQeRxT/0dwNDz2GOm3zzpcQ==",
+    "dev": true,
+    "license": "MPL-2.0",
+    "engines": {
+      "node": ">=4"
+    }
+  },
+  "existingTestSpecFilesModified": [],
+  "behaviorProposalMatches": [
+    {
+      "file": "apps/web/test/accessibility-interaction.ts",
+      "matches": true
+    },
+    {
+      "file": "apps/web/test/browser/shared-home-accessibility-interaction.spec.ts",
+      "matches": true
+    },
+    {
+      "file": "apps/web/tests/browser/portfolio-accessibility-fixtures.ts",
+      "matches": true
+    },
+    {
+      "file": "apps/web/tests/browser/portfolio-accessibility-interaction.spec.ts",
+      "matches": true
+    },
+    {
+      "file": "apps/web/tests/browser/portfolio-accessibility-semantics.spec.ts",
+      "matches": true
+    }
+  ]
+}

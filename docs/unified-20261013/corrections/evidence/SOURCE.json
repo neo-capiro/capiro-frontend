@@ -1,0 +1,61 @@
+{
+  "base": "93b3617f5d0599f34da373525a96dfc70eaa85d6",
+  "files": [
+    {
+      "path": "apps/web/package.json",
+      "sha256": "9a8a5cb7248ac26b07dba927d781d7aeaf2357c0267f56e36f2459377a57db5a"
+    },
+    {
+      "path": "apps/web/src/app/globals.css",
+      "sha256": "cf95e12386e6addfbc88ba7a70fda6d5eeca475734d8af90f46cf58e10452f8d"
+    },
+    {
+      "path": "apps/web/src/features/meri/MeriSuggestions.tsx",
+      "sha256": "98408cf322ae10295b4926cf6a293c79ae640aa3ab0bc61d157d1d225bf106f2"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/ProfileResults.tsx",
+      "sha256": "e15d40947e83deb1c1eea3049f1f297fccf0c76a29389c9974062ea7cb39558c"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/attention/PortfolioAttention.tsx",
+      "sha256": "750f54237819b06f08e7cead090e38f960fd844fd6dcccb0d154dbfdf1bbaf09"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/index/portfolio.module.css",
+      "sha256": "7f2eaa718ee225f0ccb77f5043c65d0c3fe6ea18dc4b5b7838d102295b3bcb05"
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/shell/PortfolioNavigation.tsx",
+      "sha256": "440b01368a37d8eadc06252ac186810ced654a57bd8a7414211a696f8f50d417"
+    },
+    {
+      "path": "apps/web/src/shared/shell/ProductShell.tsx",
+      "sha256": "65e4754e186893f8956d6bf3e0580f6a8e0b1e5c782ceefc88d282208859b4d1"
+    },
+    {
+      "path": "apps/web/test/browser/main.tsx",
+      "sha256": "8e450fb7a59fc6d9b3a2e6ee784e3188ffb8251badc47672fb382f2d2e82029c"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "294ba8ab0cd31f804a0d595c9f10a8edb39fdefcab60b84ef422e34cbc68fe38"
+    },
+    {
+      "path": "apps/web/test/accessibility.ts",
+      "sha256": "041d33331ffe2aacbf9c2ac5bc86fa00e4134342612c9ad5ba311aa3e543dcce"
+    },
+    {
+      "path": "apps/web/test/browser/shared-home-accessibility.spec.ts",
+      "sha256": "2a3aaea30e7b9a863cdef654e9e6f54eaaf1f0ab4f5d891f9e35dfefb42f3bcf"
+    },
+    {
+      "path": "apps/web/tests/browser/canonical-navigation.spec.ts",
+      "sha256": "7410470d25693de2880577c98f442b0fcd3cb47f161c78a435ec5049024ea47d"
+    },
+    {
+      "path": "apps/web/tests/browser/portfolio-home-accessibility.spec.ts",
+      "sha256": "7aeb3c4e3141f7cbec9c29715b9a053f5c9c3e9284744b711a0a8722e44ea2a2"
+    }
+  ]
+}

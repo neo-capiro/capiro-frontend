@@ -31,22 +31,24 @@ export function ProductShell({
           </main>
         </div>
       </div>
-      <footer className={styles.fixtureNotice} role="note">
-        {actionWorkflow ? (
-          <>
-            <strong>
-              Conversation and workspace samples remain disconnected.
-            </strong>{" "}
-            Recommendation actions require a verified action connection.
-          </>
-        ) : (
-          <>
-            <strong>Disconnected synthetic fixture.</strong> Jordan, Anduril,
-            recent titles, answer, citations and approval counts are samples. No
-            signed-in identity, authorized source data or sending is available.
-            Drafts stay in this page only.
-          </>
-        )}
+      <footer className={styles.fixtureNotice}>
+        <div role="note">
+          {actionWorkflow ? (
+            <>
+              <strong>
+                Conversation and workspace samples remain disconnected.
+              </strong>{" "}
+              Recommendation actions require a verified action connection.
+            </>
+          ) : (
+            <>
+              <strong>Disconnected synthetic fixture.</strong> Jordan, Anduril,
+              recent titles, answer, citations and approval counts are samples.
+              No signed-in identity, authorized source data or sending is
+              available. Drafts stay in this page only.
+            </>
+          )}
+        </div>
       </footer>
     </>
   );

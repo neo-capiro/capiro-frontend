@@ -76,9 +76,9 @@ function RoutedApp() {
     return (
       <>
         <PublicForm token={path.split("/")[2] ?? ""} />
-        <p className="test-notice">
+        <aside className="test-notice" aria-label="Local test fixture">
           Explicit local test fixture · synthetic form
-        </p>
+        </aside>
       </>
     );
   if (path === "/meri")
@@ -143,9 +143,9 @@ function RoutedApp() {
           </CapiroBoundary>
         )}
       </ModuleShell>
-      <p className="test-notice">
+      <aside className="test-notice" aria-label="Local test fixture">
         Explicit local test fixture · synthetic identity and records
-      </p>
+      </aside>
     </>
   );
 }

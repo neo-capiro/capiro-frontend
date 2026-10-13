@@ -1,0 +1,359 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/tmp/capiro-onboard-execution-20261013/node_modules/.bin/playwright",
+      "test",
+      "--workers=1",
+      "portfolio-active-count-contrast.spec.ts"
+    ],
+    "configFile": "/tmp/capiro-onboard-execution-20261013/apps/web/playwright.config.ts",
+    "rootDir": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" tests/browser/server.mjs",
+      "url": "http://127.0.0.1:5191",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "portfolio-active-count-contrast.spec.ts",
+      "file": "portfolio-active-count-contrast.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Portfolio 1440px light active profile counts retain readable contrast",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3611,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m4.5\u001b[39m\nReceived:    \u001b[31m2.484436491271581\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m4.5\u001b[39m\nReceived:    \u001b[31m2.484436491271581\u001b[39m\n    at /tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts:72:42",
+                    "location": {
+                      "file": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+                      "column": 42,
+                      "line": 72
+                    },
+                    "snippet": "  70 |             contentType: \"application/json\",\n  71 |           });\n> 72 |           expect(Math.min(...contrasts)).toBeGreaterThanOrEqual(4.5);\n     |                                          ^\n  73 |         }\n  74 |       }\n  75 |       expect(unexpected).toEqual([]);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+                        "column": 42,
+                        "line": 72
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m4.5\u001b[39m\nReceived:    \u001b[31m2.484436491271581\u001b[39m\n\n  70 |             contentType: \"application/json\",\n  71 |           });\n> 72 |           expect(Math.min(...contrasts)).toBeGreaterThanOrEqual(4.5);\n     |                                          ^\n  73 |         }\n  74 |       }\n  75 |       expect(unexpected).toEqual([]);\n    at /tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts:72:42"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T07:39:23.547Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "active-count-contrast",
+                      "contentType": "application/json",
+                      "body": "eyJ3aWR0aCI6MTQ0MCwiY29sb3JTY2hlbWUiOiJsaWdodCIsInN0YXRlIjoiaG92ZXIiLCJjb2xvcnMiOnsiZm9yZWdyb3VuZCI6InJnYigxMTcsIDExMCwgMTA1KSIsImJhY2tncm91bmQiOiJub25lIiwic29saWRCYWNrZ3JvdW5kIjoicmdiKDUyLCA1MiwgNTIpIiwiY291bnRPcGFjaXR5IjoiMSIsImJ1dHRvbk9wYWNpdHkiOiIxIn0sImNvbnRyYXN0cyI6WzIuNDg0NDM2NDkxMjcxNTgxXX0="
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-3a22b-ts-retain-readable-contrast/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-3a22b-ts-retain-readable-contrast/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-3a22b-ts-retain-readable-contrast/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+                    "column": 42,
+                    "line": 72
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ef08d7941c72b3445418-7de6527536bfed9bbb41",
+          "file": "portfolio-active-count-contrast.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Portfolio 1440px dark active profile counts retain readable contrast",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3366,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T07:39:27.980Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "active-count-contrast",
+                      "contentType": "application/json",
+                      "body": "eyJ3aWR0aCI6MTQ0MCwiY29sb3JTY2hlbWUiOiJkYXJrIiwic3RhdGUiOiJob3ZlciIsImNvbG9ycyI6eyJmb3JlZ3JvdW5kIjoicmdiKDE3MCwgMTYyLCAxNTYpIiwiYmFja2dyb3VuZCI6Im5vbmUiLCJzb2xpZEJhY2tncm91bmQiOiJyZ2IoNTIsIDUyLCA1MikiLCJjb3VudE9wYWNpdHkiOiIxIiwiYnV0dG9uT3BhY2l0eSI6IjEifSwiY29udHJhc3RzIjpbNC45NTQ2MDA5MzY3MjcxNjZdfQ=="
+                    },
+                    {
+                      "name": "active-count-contrast",
+                      "contentType": "application/json",
+                      "body": "eyJ3aWR0aCI6MTQ0MCwiY29sb3JTY2hlbWUiOiJkYXJrIiwic3RhdGUiOiJyZXN0IiwiY29sb3JzIjp7ImZvcmVncm91bmQiOiJyZ2IoMTcwLCAxNjIsIDE1NikiLCJiYWNrZ3JvdW5kIjoibGluZWFyLWdyYWRpZW50KDE3M2RlZywgcmdiKDM2LCAzNiwgMzYpLCByZ2IoMTAsIDEwLCAxMCkpIiwic29saWRCYWNrZ3JvdW5kIjoicmdiYSgwLCAwLCAwLCAwKSIsImNvdW50T3BhY2l0eSI6IjEiLCJidXR0b25PcGFjaXR5IjoiMSJ9LCJjb250cmFzdHMiOls2LjE3NzY3NjEwMzIxNTU2MDUsNy44NzkwOTc5NDk2MDc2NV19"
+                    },
+                    {
+                      "name": "active-count-contrast",
+                      "contentType": "application/json",
+                      "body": "eyJ3aWR0aCI6MTQ0MCwiY29sb3JTY2hlbWUiOiJkYXJrIiwic3RhdGUiOiJob3ZlciIsImNvbG9ycyI6eyJmb3JlZ3JvdW5kIjoicmdiKDE3MCwgMTYyLCAxNTYpIiwiYmFja2dyb3VuZCI6Im5vbmUiLCJzb2xpZEJhY2tncm91bmQiOiJyZ2IoNTIsIDUyLCA1MikiLCJjb3VudE9wYWNpdHkiOiIxIiwiYnV0dG9uT3BhY2l0eSI6IjEifSwiY29udHJhc3RzIjpbNC45NTQ2MDA5MzY3MjcxNjZdfQ=="
+                    },
+                    {
+                      "name": "active-count-contrast",
+                      "contentType": "application/json",
+                      "body": "eyJ3aWR0aCI6MTQ0MCwiY29sb3JTY2hlbWUiOiJkYXJrIiwic3RhdGUiOiJyZXN0IiwiY29sb3JzIjp7ImZvcmVncm91bmQiOiJyZ2IoMTcwLCAxNjIsIDE1NikiLCJiYWNrZ3JvdW5kIjoibGluZWFyLWdyYWRpZW50KDE3M2RlZywgcmdiKDM2LCAzNiwgMzYpLCByZ2IoMTAsIDEwLCAxMCkpIiwic29saWRCYWNrZ3JvdW5kIjoicmdiYSgwLCAwLCAwLCAwKSIsImNvdW50T3BhY2l0eSI6IjEiLCJidXR0b25PcGFjaXR5IjoiMSJ9LCJjb250cmFzdHMiOls2LjE3NzY3NjEwMzIxNTU2MDUsNy44NzkwOTc5NDk2MDc2NV19"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ef08d7941c72b3445418-57d14e744871a5e48236",
+          "file": "portfolio-active-count-contrast.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Portfolio 390px light active profile counts retain readable contrast",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2427,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m4.5\u001b[39m\nReceived:    \u001b[31m2.484436491271581\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m4.5\u001b[39m\nReceived:    \u001b[31m2.484436491271581\u001b[39m\n    at /tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts:72:42",
+                    "location": {
+                      "file": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+                      "column": 42,
+                      "line": 72
+                    },
+                    "snippet": "  70 |             contentType: \"application/json\",\n  71 |           });\n> 72 |           expect(Math.min(...contrasts)).toBeGreaterThanOrEqual(4.5);\n     |                                          ^\n  73 |         }\n  74 |       }\n  75 |       expect(unexpected).toEqual([]);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+                        "column": 42,
+                        "line": 72
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m4.5\u001b[39m\nReceived:    \u001b[31m2.484436491271581\u001b[39m\n\n  70 |             contentType: \"application/json\",\n  71 |           });\n> 72 |           expect(Math.min(...contrasts)).toBeGreaterThanOrEqual(4.5);\n     |                                          ^\n  73 |         }\n  74 |       }\n  75 |       expect(unexpected).toEqual([]);\n    at /tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts:72:42"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T07:39:31.591Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "active-count-contrast",
+                      "contentType": "application/json",
+                      "body": "eyJ3aWR0aCI6MzkwLCJjb2xvclNjaGVtZSI6ImxpZ2h0Iiwic3RhdGUiOiJob3ZlciIsImNvbG9ycyI6eyJmb3JlZ3JvdW5kIjoicmdiKDExNywgMTEwLCAxMDUpIiwiYmFja2dyb3VuZCI6Im5vbmUiLCJzb2xpZEJhY2tncm91bmQiOiJyZ2IoNTIsIDUyLCA1MikiLCJjb3VudE9wYWNpdHkiOiIxIiwiYnV0dG9uT3BhY2l0eSI6IjEifSwiY29udHJhc3RzIjpbMi40ODQ0MzY0OTEyNzE1ODFdfQ=="
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-09753-ts-retain-readable-contrast/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-09753-ts-retain-readable-contrast/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-09753-ts-retain-readable-contrast/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+                    "column": 42,
+                    "line": 72
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ef08d7941c72b3445418-569b0d16c101e808d362",
+          "file": "portfolio-active-count-contrast.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Portfolio 390px dark active profile counts retain readable contrast",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2849,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T07:39:34.554Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "active-count-contrast",
+                      "contentType": "application/json",
+                      "body": "eyJ3aWR0aCI6MzkwLCJjb2xvclNjaGVtZSI6ImRhcmsiLCJzdGF0ZSI6ImhvdmVyIiwiY29sb3JzIjp7ImZvcmVncm91bmQiOiJyZ2IoMTcwLCAxNjIsIDE1NikiLCJiYWNrZ3JvdW5kIjoibm9uZSIsInNvbGlkQmFja2dyb3VuZCI6InJnYig1MiwgNTIsIDUyKSIsImNvdW50T3BhY2l0eSI6IjEiLCJidXR0b25PcGFjaXR5IjoiMSJ9LCJjb250cmFzdHMiOls0Ljk1NDYwMDkzNjcyNzE2Nl19"
+                    },
+                    {
+                      "name": "active-count-contrast",
+                      "contentType": "application/json",
+                      "body": "eyJ3aWR0aCI6MzkwLCJjb2xvclNjaGVtZSI6ImRhcmsiLCJzdGF0ZSI6InJlc3QiLCJjb2xvcnMiOnsiZm9yZWdyb3VuZCI6InJnYigxNzAsIDE2MiwgMTU2KSIsImJhY2tncm91bmQiOiJsaW5lYXItZ3JhZGllbnQoMTczZGVnLCByZ2IoMzYsIDM2LCAzNiksIHJnYigxMCwgMTAsIDEwKSkiLCJzb2xpZEJhY2tncm91bmQiOiJyZ2JhKDAsIDAsIDAsIDApIiwiY291bnRPcGFjaXR5IjoiMSIsImJ1dHRvbk9wYWNpdHkiOiIxIn0sImNvbnRyYXN0cyI6WzYuMTc3Njc2MTAzMjE1NTYwNSw3Ljg3OTA5Nzk0OTYwNzY1XX0="
+                    },
+                    {
+                      "name": "active-count-contrast",
+                      "contentType": "application/json",
+                      "body": "eyJ3aWR0aCI6MzkwLCJjb2xvclNjaGVtZSI6ImRhcmsiLCJzdGF0ZSI6ImhvdmVyIiwiY29sb3JzIjp7ImZvcmVncm91bmQiOiJyZ2IoMTcwLCAxNjIsIDE1NikiLCJiYWNrZ3JvdW5kIjoibm9uZSIsInNvbGlkQmFja2dyb3VuZCI6InJnYig1MiwgNTIsIDUyKSIsImNvdW50T3BhY2l0eSI6IjEiLCJidXR0b25PcGFjaXR5IjoiMSJ9LCJjb250cmFzdHMiOls0Ljk1NDYwMDkzNjcyNzE2Nl19"
+                    },
+                    {
+                      "name": "active-count-contrast",
+                      "contentType": "application/json",
+                      "body": "eyJ3aWR0aCI6MzkwLCJjb2xvclNjaGVtZSI6ImRhcmsiLCJzdGF0ZSI6InJlc3QiLCJjb2xvcnMiOnsiZm9yZWdyb3VuZCI6InJnYigxNzAsIDE2MiwgMTU2KSIsImJhY2tncm91bmQiOiJsaW5lYXItZ3JhZGllbnQoMTczZGVnLCByZ2IoMzYsIDM2LCAzNiksIHJnYigxMCwgMTAsIDEwKSkiLCJzb2xpZEJhY2tncm91bmQiOiJyZ2JhKDAsIDAsIDAsIDApIiwiY291bnRPcGFjaXR5IjoiMSIsImJ1dHRvbk9wYWNpdHkiOiIxIn0sImNvbnRyYXN0cyI6WzYuMTc3Njc2MTAzMjE1NTYwNSw3Ljg3OTA5Nzk0OTYwNzY1XX0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ef08d7941c72b3445418-ee04eda874b8a54bd19c",
+          "file": "portfolio-active-count-contrast.spec.ts",
+          "line": 17,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-13T07:39:22.555Z",
+    "duration": 15199.488000000001,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

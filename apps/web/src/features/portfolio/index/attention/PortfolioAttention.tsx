@@ -21,6 +21,7 @@ export function PortfolioAttention({
         {data && (
           <span
             className={styles.count}
+            role="note"
             aria-label={`${rows.length} shown alerts`}
           >
             {rows.length} shown

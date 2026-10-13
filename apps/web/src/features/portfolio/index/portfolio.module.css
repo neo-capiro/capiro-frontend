@@ -69,7 +69,7 @@
 .cardIdentity {
   min-width: 0;
 }
-.cardIdentity h3 {
+.cardIdentity h2 {
   font-size: 15px;
   font-weight: 600;
   line-height: 1.35;
@@ -80,10 +80,17 @@
   line-height: 1.4;
 }
 .cardTop {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 12px;
   min-width: 0;
+}
+/* Preserve the full card-top pointer target while its metadata stays descriptive. */
+.profileLink::after {
+  content: "";
+  position: absolute;
+  inset: 0;
 }
 .cardBottom {
   display: flex;
@@ -110,7 +117,7 @@
   height: 40px;
   object-fit: contain;
 }
-.cardIdentity h3,
+.profileLink,
 .cardIdentity small {
   display: block;
   overflow: hidden;
@@ -136,6 +143,9 @@
 .tabs a {
   border-radius: 999px;
   font-size: 12px;
+}
+.tabs button[aria-pressed="true"] small {
+  color: inherit;
 }
 .attention {
   min-height: 320px;

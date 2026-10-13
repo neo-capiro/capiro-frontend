@@ -1,0 +1,387 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/tmp/capiro-onboard-execution-20261013/node_modules/.bin/playwright",
+      "test",
+      "--workers=1",
+      "portfolio-active-count-contrast.spec.ts"
+    ],
+    "configFile": "/tmp/capiro-onboard-execution-20261013/apps/web/playwright.config.ts",
+    "rootDir": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" tests/browser/server.mjs",
+      "url": "http://127.0.0.1:5191",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "portfolio-active-count-contrast.spec.ts",
+      "file": "portfolio-active-count-contrast.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Portfolio 1440px light active profile counts retain readable contrast",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3320,
+                  "error": {
+                    "message": "TypeError: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[1mMatcher error\u001b[22m: \u001b[31mreceived\u001b[39m value must have a length property whose value must be a number\n\nReceived has value: \u001b[31mnull\u001b[39m",
+                    "stack": "TypeError: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[1mMatcher error\u001b[22m: \u001b[31mreceived\u001b[39m value must have a length property whose value must be a number\n\nReceived has value: \u001b[31mnull\u001b[39m\n    at /tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts:47:23",
+                    "location": {
+                      "file": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+                      "column": 23,
+                      "line": 47
+                    },
+                    "snippet": "  45 |         expect(colors.buttonOpacity).toBe(\"1\");\n  46 |         const stops = colors.background.match(/rgb\\([^)]+\\)/g);\n> 47 |         expect(stops).toHaveLength(2);\n     |                       ^\n  48 |         const foreground = luminance(colors.foreground);\n  49 |         const contrasts = stops!.map((stop) => {\n  50 |           const background = luminance(stop);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+                        "column": 23,
+                        "line": 47
+                      },
+                      "message": "TypeError: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[1mMatcher error\u001b[22m: \u001b[31mreceived\u001b[39m value must have a length property whose value must be a number\n\nReceived has value: \u001b[31mnull\u001b[39m\n\n  45 |         expect(colors.buttonOpacity).toBe(\"1\");\n  46 |         const stops = colors.background.match(/rgb\\([^)]+\\)/g);\n> 47 |         expect(stops).toHaveLength(2);\n     |                       ^\n  48 |         const foreground = luminance(colors.foreground);\n  49 |         const contrasts = stops!.map((stop) => {\n  50 |           const background = luminance(stop);\n    at /tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts:47:23"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T07:37:26.076Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-3a22b-ts-retain-readable-contrast/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-3a22b-ts-retain-readable-contrast/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-3a22b-ts-retain-readable-contrast/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+                    "column": 23,
+                    "line": 47
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ef08d7941c72b3445418-7de6527536bfed9bbb41",
+          "file": "portfolio-active-count-contrast.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Portfolio 1440px dark active profile counts retain readable contrast",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3097,
+                  "error": {
+                    "message": "TypeError: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[1mMatcher error\u001b[22m: \u001b[31mreceived\u001b[39m value must have a length property whose value must be a number\n\nReceived has value: \u001b[31mnull\u001b[39m",
+                    "stack": "TypeError: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[1mMatcher error\u001b[22m: \u001b[31mreceived\u001b[39m value must have a length property whose value must be a number\n\nReceived has value: \u001b[31mnull\u001b[39m\n    at /tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts:47:23",
+                    "location": {
+                      "file": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+                      "column": 23,
+                      "line": 47
+                    },
+                    "snippet": "  45 |         expect(colors.buttonOpacity).toBe(\"1\");\n  46 |         const stops = colors.background.match(/rgb\\([^)]+\\)/g);\n> 47 |         expect(stops).toHaveLength(2);\n     |                       ^\n  48 |         const foreground = luminance(colors.foreground);\n  49 |         const contrasts = stops!.map((stop) => {\n  50 |           const background = luminance(stop);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+                        "column": 23,
+                        "line": 47
+                      },
+                      "message": "TypeError: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[1mMatcher error\u001b[22m: \u001b[31mreceived\u001b[39m value must have a length property whose value must be a number\n\nReceived has value: \u001b[31mnull\u001b[39m\n\n  45 |         expect(colors.buttonOpacity).toBe(\"1\");\n  46 |         const stops = colors.background.match(/rgb\\([^)]+\\)/g);\n> 47 |         expect(stops).toHaveLength(2);\n     |                       ^\n  48 |         const foreground = luminance(colors.foreground);\n  49 |         const contrasts = stops!.map((stop) => {\n  50 |           const background = luminance(stop);\n    at /tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts:47:23"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T07:37:30.185Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-b3b73-ts-retain-readable-contrast/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-b3b73-ts-retain-readable-contrast/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-b3b73-ts-retain-readable-contrast/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+                    "column": 23,
+                    "line": 47
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ef08d7941c72b3445418-57d14e744871a5e48236",
+          "file": "portfolio-active-count-contrast.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Portfolio 390px light active profile counts retain readable contrast",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2806,
+                  "error": {
+                    "message": "TypeError: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[1mMatcher error\u001b[22m: \u001b[31mreceived\u001b[39m value must have a length property whose value must be a number\n\nReceived has value: \u001b[31mnull\u001b[39m",
+                    "stack": "TypeError: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[1mMatcher error\u001b[22m: \u001b[31mreceived\u001b[39m value must have a length property whose value must be a number\n\nReceived has value: \u001b[31mnull\u001b[39m\n    at /tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts:47:23",
+                    "location": {
+                      "file": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+                      "column": 23,
+                      "line": 47
+                    },
+                    "snippet": "  45 |         expect(colors.buttonOpacity).toBe(\"1\");\n  46 |         const stops = colors.background.match(/rgb\\([^)]+\\)/g);\n> 47 |         expect(stops).toHaveLength(2);\n     |                       ^\n  48 |         const foreground = luminance(colors.foreground);\n  49 |         const contrasts = stops!.map((stop) => {\n  50 |           const background = luminance(stop);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+                        "column": 23,
+                        "line": 47
+                      },
+                      "message": "TypeError: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[1mMatcher error\u001b[22m: \u001b[31mreceived\u001b[39m value must have a length property whose value must be a number\n\nReceived has value: \u001b[31mnull\u001b[39m\n\n  45 |         expect(colors.buttonOpacity).toBe(\"1\");\n  46 |         const stops = colors.background.match(/rgb\\([^)]+\\)/g);\n> 47 |         expect(stops).toHaveLength(2);\n     |                       ^\n  48 |         const foreground = luminance(colors.foreground);\n  49 |         const contrasts = stops!.map((stop) => {\n  50 |           const background = luminance(stop);\n    at /tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts:47:23"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T07:37:34.006Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-09753-ts-retain-readable-contrast/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-09753-ts-retain-readable-contrast/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-09753-ts-retain-readable-contrast/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+                    "column": 23,
+                    "line": 47
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ef08d7941c72b3445418-569b0d16c101e808d362",
+          "file": "portfolio-active-count-contrast.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Portfolio 390px dark active profile counts retain readable contrast",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2893,
+                  "error": {
+                    "message": "TypeError: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[1mMatcher error\u001b[22m: \u001b[31mreceived\u001b[39m value must have a length property whose value must be a number\n\nReceived has value: \u001b[31mnull\u001b[39m",
+                    "stack": "TypeError: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[1mMatcher error\u001b[22m: \u001b[31mreceived\u001b[39m value must have a length property whose value must be a number\n\nReceived has value: \u001b[31mnull\u001b[39m\n    at /tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts:47:23",
+                    "location": {
+                      "file": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+                      "column": 23,
+                      "line": 47
+                    },
+                    "snippet": "  45 |         expect(colors.buttonOpacity).toBe(\"1\");\n  46 |         const stops = colors.background.match(/rgb\\([^)]+\\)/g);\n> 47 |         expect(stops).toHaveLength(2);\n     |                       ^\n  48 |         const foreground = luminance(colors.foreground);\n  49 |         const contrasts = stops!.map((stop) => {\n  50 |           const background = luminance(stop);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+                        "column": 23,
+                        "line": 47
+                      },
+                      "message": "TypeError: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[1mMatcher error\u001b[22m: \u001b[31mreceived\u001b[39m value must have a length property whose value must be a number\n\nReceived has value: \u001b[31mnull\u001b[39m\n\n  45 |         expect(colors.buttonOpacity).toBe(\"1\");\n  46 |         const stops = colors.background.match(/rgb\\([^)]+\\)/g);\n> 47 |         expect(stops).toHaveLength(2);\n     |                       ^\n  48 |         const foreground = luminance(colors.foreground);\n  49 |         const contrasts = stops!.map((stop) => {\n  50 |           const background = luminance(stop);\n    at /tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts:47:23"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T07:37:37.519Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-315f4-ts-retain-readable-contrast/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-315f4-ts-retain-readable-contrast/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/capiro-onboard-execution-20261013/apps/web/test-results/portfolio-browser/portfolio-active-count-con-315f4-ts-retain-readable-contrast/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-onboard-execution-20261013/apps/web/tests/browser/portfolio-active-count-contrast.spec.ts",
+                    "column": 23,
+                    "line": 47
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ef08d7941c72b3445418-ee04eda874b8a54bd19c",
+          "file": "portfolio-active-count-contrast.spec.ts",
+          "line": 17,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-13T07:37:25.113Z",
+    "duration": 15707.02,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}
