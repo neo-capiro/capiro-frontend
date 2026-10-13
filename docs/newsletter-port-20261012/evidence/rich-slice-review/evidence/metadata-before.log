@@ -1,0 +1,103 @@
+
+ RUN  v4.1.11 /workspace/capiro-newsletter-port/apps/web/src/shared/capiro
+
+ ❯ newsletter-routing.test.ts (21 tests | 13 failed) 19ms
+     × preserves reserved routing fields and strips unrelated metadata 10ms
+     × refuses malformed stage marker null 1ms
+     × refuses malformed stage marker "" 1ms
+     × refuses malformed stage marker "wrong" 1ms
+     × refuses malformed stage marker 1 1ms
+     × refuses malformed stage marker "20000000-0000-7000-8000-000000000001" 1ms
+     × refuses malformed stage marker "20000000-0000-4000-0000-000000000001" 0ms
+     × refuses malformed revision 0 0ms
+     × refuses malformed revision -1 0ms
+     × refuses malformed revision 1.5 0ms
+     × refuses malformed revision 9007199254740992 0ms
+     × refuses malformed revision "2" 0ms
+     × refuses malformed revision null 0ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 13 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  newsletter-routing.test.ts > existing rich newsletter response routing > preserves reserved routing fields and strips unrelated metadata
+AssertionError: expected { …(6) } to deeply equal { …(7) }
+
+- Expected
++ Received
+
+  {
+    "body": null,
+    "id": "10000000-0000-4000-8000-000000000001",
+-   "metadata": {
+-     "newsletterRevision": 2,
+-     "newsletterStageId": "20000000-0000-4000-8000-000000000001",
+-   },
+    "status": "draft",
+    "subject": "Policy update",
+    "title": "Synthetic rich newsletter",
+    "type": "outbound_campaign",
+  }
+
+ ❯ newsletter-routing.test.ts:21:7
+     19|         unknown: "drop",
+     20|       }),
+     21|     ).toEqual({
+       |       ^
+     22|       ...record,
+     23|       metadata: { newsletterStageId: stageId, newsletterRevision: 2 },
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/13]⎯
+
+ FAIL  newsletter-routing.test.ts > existing rich newsletter response routing > refuses malformed stage marker null
+ FAIL  newsletter-routing.test.ts > existing rich newsletter response routing > refuses malformed stage marker ""
+ FAIL  newsletter-routing.test.ts > existing rich newsletter response routing > refuses malformed stage marker "wrong"
+ FAIL  newsletter-routing.test.ts > existing rich newsletter response routing > refuses malformed stage marker 1
+ FAIL  newsletter-routing.test.ts > existing rich newsletter response routing > refuses malformed stage marker "20000000-0000-7000-8000-000000000001"
+ FAIL  newsletter-routing.test.ts > existing rich newsletter response routing > refuses malformed stage marker "20000000-0000-4000-0000-000000000001"
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ newsletter-routing.test.ts:30:94
+     28|   });
+     29|   it.each([null, "", "wrong", 1, "20000000-0000-7000-8000-000000000001…
+     30|     expect(outreachRecord.safeParse({ ...record, metadata: { newslette…
+       |                                                                                              ^
+     31|   });
+     32|   it.each([0, -1, 1.5, Number.MAX_SAFE_INTEGER + 1, "2", null])("refus…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/13]⎯
+
+ FAIL  newsletter-routing.test.ts > existing rich newsletter response routing > refuses malformed revision 0
+ FAIL  newsletter-routing.test.ts > existing rich newsletter response routing > refuses malformed revision -1
+ FAIL  newsletter-routing.test.ts > existing rich newsletter response routing > refuses malformed revision 1.5
+ FAIL  newsletter-routing.test.ts > existing rich newsletter response routing > refuses malformed revision 9007199254740992
+ FAIL  newsletter-routing.test.ts > existing rich newsletter response routing > refuses malformed revision "2"
+ FAIL  newsletter-routing.test.ts > existing rich newsletter response routing > refuses malformed revision null
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ newsletter-routing.test.ts:33:95
+     31|   });
+     32|   it.each([0, -1, 1.5, Number.MAX_SAFE_INTEGER + 1, "2", null])("refus…
+     33|     expect(outreachRecord.safeParse({ ...record, metadata: { newslette…
+       |                                                                                               ^
+     34|   });
+     35|   it.each([1, 2, 3, 4, 5])("accepts producer UUID version %i", (versio…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/13]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  13 failed | 8 passed (21)
+   Start at  23:50:28
+   Duration  321ms (transform 62ms, setup 0ms, import 151ms, tests 19ms, environment 0ms)
+
