@@ -1,0 +1,148 @@
+{
+  "reviewedAt": "2026-10-13T21:54:56.382793+00:00",
+  "verdict": "PASS_BOUNDED_READ_ONLY_PACKAGING_REVIEW",
+  "helper": {
+    "path": "/workspace/capiro-preview-visual-batch-20261013/package-evidence.py",
+    "sha256": "f6be50e2b7241de15dc43c85f4cb2d7b730c3b49f8cd6287859aaa02ed010148",
+    "bytes": 3709
+  },
+  "explicitRoots": {
+    "visual": "/workspace/capiro-preview-visual-batch-20261013",
+    "existing-a11y": "/workspace/capiro-preview-a11y-existing-evidence-20261013",
+    "workspace-a11y": "/workspace/capiro-preview-workspace-a11y-20261013",
+    "config-design": "/workspace/capiro-preview-config-design-review-20261013",
+    "config-review": "/workspace/capiro-preview-config-implementation-review-20261013",
+    "modules-initial-review": "/workspace/capiro-preview-modules-review-20261013",
+    "modules-correction-review": "/workspace/capiro-preview-modules-tooltip-correction-review-20261013",
+    "final-gate-review": "/workspace/capiro-preview-final-gate-review-20261013"
+  },
+  "currentIncludedFiles": 1040,
+  "currentIncludedBytes": 187860555,
+  "specialFiles": [],
+  "duplicateMemberPaths": false,
+  "symlinksNotFollowed": [
+    {
+      "path": "visual/finale63/preserved-build-outer-node-modules/shiki-43d062b67f27bbdc",
+      "target": "../../../../node_modules/shiki"
+    },
+    {
+      "path": "visual/final/preserved-build-outer-node-modules/shiki-43d062b67f27bbdc",
+      "target": "../../../../node_modules/shiki"
+    }
+  ],
+  "excludedDirectoriesAndFigmaSources": [
+    {
+      "path": "visual/tmp",
+      "reason": "excluded directory",
+      "linkTarget": null
+    },
+    {
+      "path": "visual/final96/modules-harness",
+      "reason": "excluded directory",
+      "linkTarget": null
+    },
+    {
+      "path": "visual/candidate/modules-harness",
+      "reason": "excluded directory",
+      "linkTarget": null
+    },
+    {
+      "path": "visual/finale63/modules-harness",
+      "reason": "excluded directory",
+      "linkTarget": null
+    },
+    {
+      "path": "visual/tooltip-corrected/modules-harness",
+      "reason": "excluded directory",
+      "linkTarget": null
+    },
+    {
+      "path": "visual/figma/portfolio-context-0.base64",
+      "reason": "exact declared Figma context/base64 exclusion"
+    },
+    {
+      "path": "visual/figma/meri-context.json",
+      "reason": "exact declared Figma context/base64 exclusion"
+    },
+    {
+      "path": "visual/figma/meri-context-0.base64",
+      "reason": "exact declared Figma context/base64 exclusion"
+    },
+    {
+      "path": "visual/figma/modules-context.json",
+      "reason": "exact declared Figma context/base64 exclusion"
+    },
+    {
+      "path": "visual/figma/modules-context-0.base64",
+      "reason": "exact declared Figma context/base64 exclusion"
+    },
+    {
+      "path": "visual/figma/portfolio-context.json",
+      "reason": "exact declared Figma context/base64 exclusion"
+    },
+    {
+      "path": "visual/final/modules-harness",
+      "reason": "excluded directory",
+      "linkTarget": null
+    },
+    {
+      "path": "visual/final/preserved-next-build",
+      "reason": "excluded directory",
+      "linkTarget": null
+    },
+    {
+      "path": "workspace-a11y/tmp",
+      "reason": "excluded directory",
+      "linkTarget": null
+    }
+  ],
+  "temporaryFigmaURLMatchesInIncludedText": [],
+  "figmaEquivalence": [
+    {
+      "path": "/workspace/capiro-preview-visual-batch-20261013/figma/meri-context.json",
+      "sha256": "928121a9b7f23a0efe5b6249bad531220857db196ac056c6eb4d0f2318b5bf78",
+      "bytes": 41032,
+      "publishedEquivalent": "URL-redacted context present"
+    },
+    {
+      "path": "/workspace/capiro-preview-visual-batch-20261013/figma/modules-context.json",
+      "sha256": "6ef5cf13fcc97a19724692b18249b67e9f93aa19a7738f880c5d30ea8b487099",
+      "bytes": 79271,
+      "publishedEquivalent": "URL-redacted context present"
+    },
+    {
+      "path": "/workspace/capiro-preview-visual-batch-20261013/figma/portfolio-context.json",
+      "sha256": "d67ee46b9cb406c6c913a856c92361a42aeea6459c512082bb88d54f26c8e591",
+      "bytes": 127493,
+      "publishedEquivalent": "URL-redacted context present"
+    },
+    {
+      "path": "/workspace/capiro-preview-visual-batch-20261013/figma/meri-context-0.png",
+      "sha256": "cc87941679e05a961dd25cf171c6b704a11e1f43f0a5605f03218e0111a6a192",
+      "bytes": 59320,
+      "publishedEquivalent": "Exact PNG; base64 decode equal"
+    },
+    {
+      "path": "/workspace/capiro-preview-visual-batch-20261013/figma/modules-context-0.png",
+      "sha256": "74a1221e8dff8793a0de31ed4906da2a230e1d2dce51a0e31850dfb662f8ff12",
+      "bytes": 122484,
+      "publishedEquivalent": "Exact PNG; base64 decode equal"
+    },
+    {
+      "path": "/workspace/capiro-preview-visual-batch-20261013/figma/portfolio-context-0.png",
+      "sha256": "b968ece8f8d493ff208b5f1119d1961d34bc93147f615dac528b849774723a98",
+      "bytes": 150719,
+      "publishedEquivalent": "Exact PNG; base64 decode equal"
+    }
+  ],
+  "execution": "Helper was not executed; counts are advisory before other reviews complete",
+  "preservationChecks": "Fresh output directory outside all input roots; exclusive archive creation; exact regular member payload readback and source size/hash recheck; originals never rewritten/deleted",
+  "limitations": [
+    "File modes are carried by tar.add but not currently asserted in helper manifest/readback.",
+    "Exact tar member set is checked by set equality; deliberate duplicate archive members are not independently rejected, though producer has unique records and writes each once.",
+    "Closed producer roots are required for a stable final inventory; root explicitly waits for all review packets."
+  ],
+  "scope": "No current blocker found in bounded closed-root publication; no hostile-filesystem atomicity or full runtime backup claim",
+  "reviewerSourceWrites": false,
+  "reviewerArchiveCreation": false
+}
