@@ -40,72 +40,75 @@ export function DirectoryResults({
         retry={() => void results.refetch()}
       />
       <QueryState error={add.error} />
-      {results.data && (
-        <>
-          {results.data.rows.map((row) => (
-            <article className={styles.result} key={row.id}>
-              <div>
-                <strong>{row.name}</strong>
-                <p className="muted">
-                  {row.title} · {row.meta}
-                </p>
-                {row.current !== undefined && (
-                  <small>
-                    {row.current ? "Current position" : "Former position"}
-                  </small>
+      {results.isSuccess &&
+        !results.isFetching &&
+        !results.error &&
+        results.data && (
+          <>
+            {results.data.rows.map((row) => (
+              <article className={styles.result} key={row.id}>
+                <div>
+                  <strong>{row.name}</strong>
+                  <p className="muted">
+                    {row.title} · {row.meta}
+                  </p>
+                  {row.current !== undefined && (
+                    <small>
+                      {row.current ? "Current position" : "Former position"}
+                    </small>
+                  )}
+                </div>
+                {targets.some((target) => target.memberId === row.id) ? (
+                  <span className="chip">Added</span>
+                ) : (
+                  <button
+                    className="button"
+                    disabled={busy}
+                    onClick={() =>
+                      add.mutate({
+                        kind: "add",
+                        memberId: row.id,
+                        sourceDirectory: row.directory,
+                        source: "manual",
+                      })
+                    }
+                  >
+                    Add <span className="srOnly">{row.name}</span>
+                  </button>
                 )}
-              </div>
-              {targets.some((target) => target.memberId === row.id) ? (
-                <span className="chip">Added</span>
-              ) : (
+              </article>
+            ))}
+            {results.data.rows.length === 0 && (
+              <p className="empty">No matches in this directory.</p>
+            )}
+            <div className="row between">
+              <small>
+                Page {results.data.page} · {results.data.total} records
+              </small>
+              <div className="row">
                 <button
                   className="button"
-                  disabled={busy}
-                  onClick={() =>
-                    add.mutate({
-                      kind: "add",
-                      memberId: row.id,
-                      sourceDirectory: row.directory,
-                      source: "manual",
-                    })
-                  }
+                  disabled={page === 1 || results.isFetching || busy}
+                  onClick={() => setPage((value) => value - 1)}
                 >
-                  Add <span className="srOnly">{row.name}</span>
+                  Previous
                 </button>
-              )}
-            </article>
-          ))}
-          {results.data.rows.length === 0 && (
-            <p className="empty">No matches in this directory.</p>
-          )}
-          <div className="row between">
-            <small>
-              Page {results.data.page} · {results.data.total} records
-            </small>
-            <div className="row">
-              <button
-                className="button"
-                disabled={page === 1 || results.isFetching || busy}
-                onClick={() => setPage((value) => value - 1)}
-              >
-                Previous
-              </button>
-              <button
-                className="button"
-                disabled={
-                  results.isFetching ||
-                  busy ||
-                  results.data.page * results.data.pageSize >=
-                    results.data.total
-                }
-                onClick={() => setPage((value) => value + 1)}
-              >
-                Next
-              </button>
+                <button
+                  className="button"
+                  disabled={
+                    results.isFetching ||
+                    busy ||
+                    results.data.page * results.data.pageSize >=
+                      results.data.total
+                  }
+                  onClick={() => setPage((value) => value + 1)}
+                >
+                  Next
+                </button>
+              </div>
             </div>
-          </div>
-        </>
-      )}
+          </>
+        )}
     </section>
   );
 }

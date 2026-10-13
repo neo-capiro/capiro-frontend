@@ -52,10 +52,53 @@ export type FileMetadataChange =
       viewerMode: "all" | "restricted";
       viewerUserIds: string[];
     };
-const viewerSet = (ids: string[]) =>
+const viewerSet = (ids: readonly string[]) =>
   JSON.stringify(
     [...new Set(ids.map((id) => id.trim()).filter(Boolean))].sort(),
   );
+export type FolderAccessChange = {
+  readonly kind: "folder-access";
+  readonly folder: string | null;
+  readonly viewerMode: "all" | "restricted";
+  readonly viewerUserIds: readonly string[];
+};
+export const normalizedFolder = (folder: string | null) =>
+  folder?.trim() || null;
+export function normalizeFolderAccess(
+  change: FolderAccessChange,
+): FolderAccessChange {
+  return Object.freeze({
+    kind: "folder-access",
+    folder: normalizedFolder(change.folder),
+    viewerMode: change.viewerMode,
+    viewerUserIds: Object.freeze(
+      change.viewerMode === "all"
+        ? []
+        : [
+            ...new Set(
+              change.viewerUserIds.map((id) => id.trim()).filter(Boolean),
+            ),
+          ].sort(),
+    ),
+  });
+}
+// Existing native bulk ACL receipt; the count describes currently visible files only.
+export const folderAccessForChangeSchema = (change: FolderAccessChange) =>
+  z
+    .object({
+      folder: z.string().nullable(),
+      viewerMode: z.enum(["all", "restricted"]),
+      viewerUserIds: z.array(z.string()),
+      updated: z.number().int().nonnegative(),
+    })
+    .refine(
+      (receipt) =>
+        receipt.folder === normalizedFolder(change.folder) &&
+        receipt.viewerMode === change.viewerMode &&
+        viewerSet(receipt.viewerUserIds) ===
+          viewerSet(change.viewerMode === "all" ? [] : change.viewerUserIds),
+      "The folder receipt does not confirm the requested access change",
+    );
 export const fileChangeForIdSchema = (
   id: string,
   change?: FileMetadataChange,

@@ -18,4 +18,5 @@ export async function expectAccessibleHome(page: Page, testInfo: TestInfo) {
       targets: nodes.map((node) => node.target),
     })),
   ).toEqual([]);
+  return result;
 }

@@ -1,0 +1,1167 @@
+{
+  "reviewer": "objectives_work_intel_review",
+  "utc": "2026-10-13T11:10:11.027403+00:00",
+  "mode": "read-only source and immutable existing-evidence reconciliation; no runtime execution",
+  "source": {
+    "worktree": "/workspace/capiro-onboard-port-20261013",
+    "published_head": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+    "qualified_application_source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+    "apps_web_tree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+    "src_tree": "8d3cb77ba96da3656877bc73a2eb51d58af94675",
+    "working_tree_status": ""
+  },
+  "input_bindings": [
+    {
+      "path": "/workspace/capiro-portfolio-acceptance-map-20261013/MAPPING-INSTRUCTIONS.md",
+      "sha256": "478486e51f759f541ac826c3e42f522fbe4975a37c3e869787f64b5748138ba5",
+      "bytes": 3529
+    },
+    {
+      "path": "/workspace/capiro-portfolio-acceptance-map-20261013/MAPPING-SNAPSHOT.json",
+      "sha256": "7fd2cd5b7843d2a74cd16dfdbf304e6b50197cae94e955893519fdae2a4841f7",
+      "bytes": 600
+    },
+    {
+      "path": "/workspace/capiro-portfolio-acceptance-map-20261013/inputs/objectives_work_intel.json",
+      "sha256": "53eb3d0a78da9ab66bf7d922dc72469dede3beb80a1d4d6115396a449d908d02",
+      "bytes": 309877
+    },
+    {
+      "path": "/workspace/capiro-portfolio-acceptance-map-20261013/inputs/PHASED-PLAN.md",
+      "sha256": "9430fb6c01266bcf0778aee6f9a5084502f7f2e0f9f5f16c3e8d6cfc7c59a94e",
+      "bytes": 43148
+    },
+    {
+      "path": "/workspace/capiro-portfolio-acceptance-map-20261013/inputs/figma-screen-index.csv",
+      "sha256": "ffb9be58b8e96e26a849ee0292e1e600e2cdf79a94cdcaa61db92143df59076c",
+      "bytes": 230733
+    },
+    {
+      "path": "/workspace/capiro-portfolio-acceptance-map-20261013/inputs/reconciliation-ledger.json",
+      "sha256": "bfa16aee023824051229c1c3ae7b4dc8369fdaf23fd47fa068b45f54c21871bf",
+      "bytes": 1332566
+    },
+    {
+      "path": "/workspace/capiro-portfolio-acceptance-map-20261013/inputs/implementation-matrix.json",
+      "sha256": "f7aa626b1b9b49d0d2a6e04b88c6043defdaea146124ae7ce5a240e4431612b3",
+      "bytes": 1044295
+    },
+    {
+      "path": "/workspace/capiro-portfolio-acceptance-map-20261013/inputs/phase-audit-map.json",
+      "sha256": "e467390358afe47efe70438335d23fe3aaad7e8d9535627f4a7d11ef05b920c9",
+      "bytes": 336228
+    },
+    {
+      "path": "/workspace/capiro-portfolio-acceptance-map-20261013/inputs/open-337.json",
+      "sha256": "0f1917498c9db0d1de0af17415f1cdc39aab91a48bbb8e032b954052df724956",
+      "bytes": 1274353
+    }
+  ],
+  "assigned_ids": [
+    "OBJ-01",
+    "OBJ-02",
+    "OBJ-03",
+    "OBJ-04",
+    "OBJ-05",
+    "OBJ-06",
+    "OBJ-07",
+    "OBJ-08",
+    "OBJ-09",
+    "OBJ-10",
+    "OBJ-11",
+    "OBJ-12",
+    "WORK-01",
+    "WORK-02",
+    "WORK-03",
+    "WORK-04",
+    "WORK-05",
+    "WORK-06",
+    "WORK-08",
+    "WORK-09",
+    "CAP-01",
+    "CAP-02",
+    "CAP-03",
+    "CAP-04",
+    "CAP-05",
+    "CAP-06",
+    "CAP-07",
+    "CAP-08",
+    "CAP-09",
+    "CAP-10",
+    "CAP-11",
+    "CAP-12",
+    "OPP-01",
+    "OPP-02",
+    "OPP-03",
+    "OPP-04",
+    "OPP-05",
+    "OPP-06",
+    "OPP-07",
+    "OBJ-13",
+    "OBJ-14",
+    "OBJ-15",
+    "OBJ-16",
+    "OBJ-17",
+    "OBJ-18",
+    "OBJ-19",
+    "OBJ-20",
+    "BILL-01",
+    "BILL-02",
+    "BILL-03",
+    "BILL-04",
+    "BILL-05",
+    "BILL-06",
+    "BILL-07",
+    "BILL-08",
+    "BILL-09",
+    "OBJ-21",
+    "OBJ-22",
+    "OBJ-23",
+    "OBJ-24",
+    "OBJ-25",
+    "OBJ-26",
+    "OBJ-27",
+    "CAP-13",
+    "BILL-11",
+    "BILL-12",
+    "BILL-13",
+    "BILL-14",
+    "OBJ-28",
+    "OBJ-29",
+    "OBJ-30",
+    "OBJ-31"
+  ],
+  "assigned_count": 72,
+  "category_counts": {
+    "actual_missing_implementation": 3,
+    "existing_behavior_missing_evidence": 42,
+    "authentic_backend_provider_dependency": 27,
+    "selected_figma31_mismatch": 0
+  },
+  "acceptance_counts": {
+    "OPEN_FINAL_ACCEPTANCE": 72,
+    "accepted": 0
+  },
+  "inspected_production_paths": [
+    {
+      "path": "apps/web/src/features/portfolio/advocacy/AdvocacyHistory.tsx",
+      "git_blob": "09dc35dc3f802baa6f9542592f71b98bc07cc03c",
+      "sha256": "9d20f1e94526d1bb1433f2fe1c28932990acde524c17dcde8632965659c8980c",
+      "line": 22,
+      "symbols": [
+        "export function AdvocacyHistory({ clientId }: { clientId: string }) {",
+        "function ClientAdvocacyHistory({ clientId }: { clientId: string }) {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/advocacy/AdvocacyBrowser.tsx",
+      "git_blob": "d2b83125d438dcadd6cb928aab856f974b460b9d",
+      "sha256": "550cded9457503319dd42dcbd74d2f58b85627fa7365c9070a92a03a69d83841",
+      "line": 11,
+      "symbols": [
+        "function MatterList({",
+        "export function AdvocacyBrowser({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/advocacy/AdvocacyTimeline.tsx",
+      "git_blob": "80d8af3a4211c5f5d3cbf65e90cd36fdce72bac1",
+      "sha256": "e36c7a7835188c233c8097fd654c99aa6e63e9c32c7d3de6845500661e2efb87",
+      "line": 13,
+      "symbols": [
+        "function EventContent({ entry }: { entry: TimelineEntry }) {",
+        "export function AdvocacyTimeline({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/advocacy/queries.ts",
+      "git_blob": "15a1e042f285a8a4ef770de93f5bd56241b133a6",
+      "sha256": "641f874f183ed5d702b231c1426b771ed0cc8c6565c2d20948c09e561aa0ac02",
+      "line": 17,
+      "symbols": [
+        "export const advocacyPath = (clientId: string) =>",
+        "export const matterKey = (clientId: string, id: string | null) =>",
+        "export const timelineKey = (clientId: string) =>",
+        "export async function loadMatters(",
+        "export async function loadMatter(",
+        "export async function loadTimeline(",
+        "export const mattersKey = (clientId: string) =>",
+        "export function useMatters(clientId: string, enabled = true) {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/advocacy/MatterDetail.tsx",
+      "git_blob": "c1bcc7c4d0a6edcce2e4ac1107c41907556fb959",
+      "sha256": "67a1705cc1e127b0d3b0f2eb5c285f0217f43ca41a2ad7177fba1ae20f52b299",
+      "line": 4,
+      "symbols": [
+        "export function MatterDetail({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/advocacy/MatterEditor.tsx",
+      "git_blob": "79cdeff77cefcd062b521aadff6150a1b4fa469f",
+      "sha256": "4923827109f433296703408459646f13776cf947f40793285af5a62543400c85",
+      "line": 8,
+      "symbols": [
+        "export function MatterEditor({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/advocacy/mutations.ts",
+      "git_blob": "d1390720f29d1b3fb89c8a8f8e23d21cc0315997",
+      "sha256": "b27bc75bf99079562498fa7f048b7a930e43a23bc14005fee8ffaaec002a504e",
+      "line": 5,
+      "symbols": [
+        "export function useSaveMatter(",
+        "export function useAddAdvocacyRecord(clientId: string, onSaved: () => void) {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/advocacy/EditMatterDialog.tsx",
+      "git_blob": "86076740524a0a4ad7e1034b37e78a832f5077c3",
+      "sha256": "b23fc25566cc8cc5c5cf110351e4bb200198850780fa4065db6df3e9868da74e",
+      "line": 11,
+      "symbols": [
+        "export function EditMatterDialog({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/advocacy/matter-edit-request.ts",
+      "git_blob": "c2e11f3ffbe7ad45171517b6944fe0a7236f9dbb",
+      "sha256": "90e0b949afb247b19ddd3cc06e8be260344b7d72e0f3067e612614542973dd73",
+      "line": 11,
+      "symbols": [
+        "export async function prepareMatterEdit(",
+        "export async function reloadMatterEdit(",
+        "export async function submitMatterEdit(",
+        "export async function readMatterEditResult("
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/advocacy/correction.ts",
+      "git_blob": "d24b729a48f9efd6df1c6700600ca0d036a86d35",
+      "sha256": "9414961279d05f701df5ba60d60cdab38fb8ff9bca87a49a626a59348d3317a4",
+      "line": 6,
+      "symbols": [
+        "export type Correction =",
+        "function sameSnapshot(expected: MatterDetail, actual: MatterDetail) {",
+        "export async function prepareCorrection(",
+        "export function submitCorrection(",
+        "export async function checkCorrection("
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/advocacy/contracts.ts",
+      "git_blob": "87f52b63242228b5a9883c75224b4d3db508b271",
+      "sha256": "8cc147b6c719ddf7e56a23bbc1e84eac2dc5451cc244eaf9c9e0384a70c93dd5",
+      "line": 2,
+      "symbols": [
+        "export const matterSchema = z.object({",
+        "export type Matter = z.infer<typeof matterSchema>;",
+        "export const recordSchema = z.object({",
+        "export const matterDetailSchema = matterSchema.extend({",
+        "export type AdvocacyRecord = z.infer<typeof recordSchema>;",
+        "export type MatterDetail = z.infer<typeof matterDetailSchema>;",
+        "export const timelineEntrySchema = z.object({",
+        "export type TimelineEntry = z.infer<typeof timelineEntrySchema>;"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/advocacy/RecordCard.tsx",
+      "git_blob": "0741f6faf4c430b21a11aca35ec4c2b13cb9a6c0",
+      "sha256": "939a60fb942cb3d45ba1af2d316a38cb74e85aaf363bf1ee34ddad407758e500",
+      "line": 5,
+      "symbols": [
+        "export function RecordCard({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/advocacy/source.ts",
+      "git_blob": "c4841183c77ebb12d5c7d74efe7129e69a2de1ad",
+      "sha256": "fb8d1a5ee4ca1d85c8d6d93579a46bd39f99771039386fe85dc5e797a06740d1",
+      "line": 3,
+      "symbols": [
+        "export function advocacySourceUrl(record: AdvocacyRecord) {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/contracts.ts",
+      "git_blob": "f90e4386960b33becd93dbe0e20dd1a873d66628",
+      "sha256": "340c34b174f70d1598bab76660a3f5814986f901e1db20ff1e6bdb58eb4d51b0",
+      "line": 3,
+      "symbols": [
+        "export const askTypes = {",
+        "export const objectiveFieldsSchema = z.object({",
+        "export type ObjectiveFields = z.infer<typeof objectiveFieldsSchema>;",
+        "export const readinessFields = [",
+        "export function objectiveReadiness(fields: ObjectiveFields) {",
+        "export const objectiveSchema = objectiveFieldsSchema",
+        "export type Objective = z.infer<typeof objectiveSchema>;",
+        "export const scopedObjectivesSchema = (clientId: string) =>"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/ObjectivesPage.tsx",
+      "git_blob": "aeba6a6ace40731b431afb9105035287dea048a6",
+      "sha256": "12adf15153a9e3e45c8d53690132eda492b20030fd1dad6435e6da4682e84ef8",
+      "line": 18,
+      "symbols": [
+        "export function ObjectivesPage({ clientId }: { clientId: string }) {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/ObjectiveSummary.tsx",
+      "git_blob": "53bf135c596706bc9e7f9a08b84ca1e310f151f2",
+      "sha256": "d0f77b6de37012533762c86439279d792af80f95d0d00832c61a638a3c88dd05",
+      "line": 7,
+      "symbols": [
+        "export function ObjectiveSummary({ clientId }: { clientId: string }) {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/queries.ts",
+      "git_blob": "876fb298e369e18856ae6195f0678e7eadb8a468",
+      "sha256": "5694b571615a294b04b585d98ef75a0c418238572a045304763a7cf888717e75",
+      "line": 5,
+      "symbols": [
+        "export const objectivesKey = (clientId: string) =>",
+        "export function useObjectives(clientId: string) {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/NewObjectivePage.tsx",
+      "git_blob": "e4281aa12d78f5edc0f2f84f09eed10c1cc5cc57",
+      "sha256": "1dd545b2bdac2396b74ea75be40ed02b4df340e21845830a8c4f8df6857f1bf6",
+      "line": 23,
+      "symbols": [
+        "export function NewObjectivePage({ clientId, onClose }: Props) {",
+        "function ObjectiveIntake({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/ObjectiveFields.tsx",
+      "git_blob": "3afa47a49a629c104aabbd5d5a7023c0b5ee9848",
+      "sha256": "aa92f4a26b38dd50ee940b8b639bbac7c8a525a8f03ea35ad462b4cbf9946c8c",
+      "line": 52,
+      "symbols": [
+        "function ObjectiveTextField({",
+        "function ObjectiveAskType({",
+        "export function ObjectiveFields(props: Props) {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/ObjectiveReadiness.tsx",
+      "git_blob": "2df541ca1fdbe21b4be11d577d14f9b04c132444",
+      "sha256": "9f98e7671ef08d0200dc6df5128fa0587b12ec37b8a2bfc770d9c1c26872cc6e",
+      "line": 10,
+      "symbols": [
+        "export function ObjectiveReadiness({ fields }: { fields: ObjectiveFields }) {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/ObjectiveEditor.tsx",
+      "git_blob": "5b6e252d9af58028b4df69f174409274a26aa30a",
+      "sha256": "d4ba72b5593664fe59762c989d96badc9d2f590f122587d766eddee86def0a7c",
+      "line": 15,
+      "symbols": [
+        "export function ObjectiveEditor({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/ObjectiveEditorControls.tsx",
+      "git_blob": "2ec4f38e7d9ff62ea557272af92d3bd30ad3ff00",
+      "sha256": "202f7057b472a043bd6228f58b7bd6410fd4e2e4c473d0bac0ac5a7f54e150fd",
+      "line": 10,
+      "symbols": [
+        "export function ObjectiveEditorFeedback({ session }: Props) {",
+        "export function ObjectiveEditorActions({ session }: Props) {",
+        "export function ObjectiveReadyConfirmation({ session }: Props) {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/writer.ts",
+      "git_blob": "ba940539c3281f19dab0cec0a020ab55792ec0b6",
+      "sha256": "e5589c2914ee9c30c93a9272a0733d07acf728a6bde485768c79fe4410649835",
+      "line": 11,
+      "symbols": [
+        "export type ObjectiveAction = \"save\" | \"request_review\" | \"confirm_ready\";",
+        "export interface SaveObjective {",
+        "export interface ObjectiveExecution {",
+        "function assertClient(record: Objective, clientId: string) {",
+        "function assertReceipt(valid: boolean) {",
+        "export async function saveObjective(",
+        "async function transitionObjective(",
+        "export async function deleteObjective("
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/useObjectiveEditorSession.ts",
+      "git_blob": "1ee007ba2c41379d5c0120c750779e11f1383937",
+      "sha256": "cb1bbb7c4ca5f49ef637a4d164cefd38ab9fd71f98e52d158dd3e389fd5118a2",
+      "line": 13,
+      "symbols": [
+        "export function useObjectiveEditorSession({",
+        "export type ObjectiveEditorSession = ReturnType<"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/global-create/GlobalObjectiveClientPicker.tsx",
+      "git_blob": "a299647a4cf9665787f027d41873e30e6bcc01ad",
+      "sha256": "28d2d3bba0822afe758104acc5acb335979efebb65a2fd4664b77a434efc5dd4",
+      "line": 32,
+      "symbols": [
+        "function useWriterToken(cache: QueryClient) {",
+        "export function GlobalObjectiveClientPicker(props: Props) {",
+        "function PickerSession({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/ObjectiveWorkDestinations.tsx",
+      "git_blob": "97953aa087049ac216465c55858ce6bb19aa2984",
+      "sha256": "f67e06088f541adb3f9b6efd175caffeb1a2cd061b5f1c3c572e2449202514c2",
+      "line": 15,
+      "symbols": [
+        "export function ObjectiveWorkDestinations({",
+        "function ObjectiveWorkPicker({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/objective-work-sources.ts",
+      "git_blob": "dbc9b09cbefb8a27988a94a13833359e78607dea",
+      "sha256": "1cc6f11d55b69e912d1f9bef89f7ac25c07f82c1eeb46ce7e2c8cdcca1ccc72a",
+      "line": 18,
+      "symbols": [
+        "export type ObjectiveWorkKind =",
+        "export const objectiveWorkLabels: Record<ObjectiveWorkKind, string> = {",
+        "export type ObjectiveWorkChoices = {",
+        "export async function loadObjectiveWorkChoices(",
+        "export async function resolveObjectiveWork("
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/useObjectiveWorkDestination.ts",
+      "git_blob": "857e06b173cf1cf8c525ad1a9cfd012f74b4fa16",
+      "sha256": "5c995cfe1ccaeb253c71d6ad06991e275c390c2d6e56fb54a209a505b9586b25",
+      "line": 12,
+      "symbols": [
+        "export function useObjectiveWorkDestination("
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/objectives/ObjectiveOutreach.tsx",
+      "git_blob": "f2c3487396fac6f5fa76a59510bc512338cf3150",
+      "sha256": "95885c2b10f73878de5c9b245377765216e40d559801b8f0a738f1c353ce206d",
+      "line": 15,
+      "symbols": [
+        "export function ObjectiveOutreach({"
+      ]
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/objective-work-destinations.ts",
+      "git_blob": "0435cd5a31c663afc0fc2dcdbe3643e666a4f05c",
+      "sha256": "28d438a1b566822fc2a9cb6c7b4eb764ea60ab86209dcf3db0b85ddb4e717627",
+      "line": 16,
+      "symbols": [
+        "export const objectiveStrategyDestination = z",
+        "export const objectivePlannerDestination = z",
+        "export const objectiveWorkspaceDestination = savedNewsletterRevision",
+        "export function requireObjectiveWorkspace(",
+        "export const strategyObjectiveOperations = {",
+        "export const plannerObjectiveOperations = {",
+        "export const workspaceObjectiveOperations = {"
+      ]
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/objective-destination-binding.ts",
+      "git_blob": "0f0c6b59078d908f63f841e9b249544e273368a7",
+      "sha256": "d318bbf791b86f3b8b30c394deeff0e668e24ca523d29fcb53a5a7a4c06a8f71",
+      "line": 3,
+      "symbols": [
+        "export const objectiveResourceId = z",
+        "export const objectiveDestinationQuery = z",
+        "export type ObjectiveDestinationQuery = z.infer<",
+        "export const objectiveDestinationBinding = objectiveDestinationQuery.extend({",
+        "export function requireObjectiveBinding<",
+        "export function readObjectiveLocation<Id extends string>("
+      ]
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/engagement-objective-destination.ts",
+      "git_blob": "d8b0278d1ac83acc6326d6e4b4419620e9433934",
+      "sha256": "0ac4fb45b29963753ea1bee379ed3a5765e2c9ea15a9a7c7665219a89b186d26",
+      "line": 14,
+      "symbols": [
+        "export const objectiveOutreachDestination = engagementSessionOperations[",
+        "export function requireObjectiveDestination(",
+        "export const objectiveDestinationOperations = {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/WorkPage.tsx",
+      "git_blob": "064ed0544c4af0b8e200b74fbde16b6b071c8fe0",
+      "sha256": "1d8227ee17b550628a8143ff03a38a0f4c4f7a07e7718550971e20803b4c1d98",
+      "line": 16,
+      "symbols": [
+        "export function WorkPage({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/contracts.ts",
+      "git_blob": "a866c6fcc5e12c0f739b0bf0b5558053f189c3aa",
+      "sha256": "5eb722f7191b5754d71326f82d117b09d82ddd4623d1ecfc31a36e12cbb7763e",
+      "line": 2,
+      "symbols": [
+        "export const strategySummarySchema = z.object({",
+        "export const strategyNodeSchema = z.object({",
+        "export const strategyDetailSchema = strategySummarySchema",
+        "export function strategyDetailFor(strategyId: string, clientId: string) {",
+        "export const workspaceDraftSchema = z.object({",
+        "export type StrategyDetail = z.infer<typeof strategyDetailSchema>;",
+        "export type WorkspaceDraft = z.infer<typeof workspaceDraftSchema>;",
+        "export function clientDrafts("
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/queries.ts",
+      "git_blob": "cf7d6875e200c25ea49c28d0b32ae461cf9a1f6a",
+      "sha256": "52a28a23abf766c92864999cdaffd67c81a026d07ccb315966e69eb81317da68",
+      "line": 10,
+      "symbols": [
+        "export function useStrategies(clientId: string) {",
+        "export function useStrategyDetails(clientId: string, ids: string[]) {",
+        "export function useWorkspaceDrafts() {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/owners.ts",
+      "git_blob": "ba90c1c6ac72c2ce6fdbd48abf7adfefd64b3841",
+      "sha256": "3ff8a47e259f48087ed7a6689f2189005a7575af7086f4f1efab157f4eba518a",
+      "line": 4,
+      "symbols": [
+        "export type WorkMembers = OperationResponse<",
+        "export function workOwnerLabel("
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/WorkspaceDocuments.tsx",
+      "git_blob": "41556d336c98854086610f5be250fe9d653dc05d",
+      "sha256": "b9b6f1f6e2ea8fd7fc876d59c68a7d66e0cdad3e2e0e726e86c12a9c99e30547",
+      "line": 11,
+      "symbols": [
+        "export function WorkspaceDocuments({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/work/WorkspaceDocumentTable.tsx",
+      "git_blob": "d1eb7a82f7d9ab99412fcd43050f2b8520b3be2a",
+      "sha256": "3126d44fed228715b96f5b3d287b40e5259215d9f4bebe22b993fbb2fa758ca9",
+      "line": 7,
+      "symbols": [
+        "function DocumentUpdated({ value }: { value: string }) {",
+        "export function WorkspaceDocumentTable({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
+      "git_blob": "d595e249d98213478861a9ec4b53f6af6fcb26b0",
+      "sha256": "4f2a6d0d08239b93d295090a251df20ed3d9b318f19124501c838231ae9998c5",
+      "line": 14,
+      "symbols": [
+        "export function CapabilitiesPage({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/contracts.ts",
+      "git_blob": "e36f71cbeecb8fa771429887def78eee9635443e",
+      "sha256": "a2109a5d7c1a526d1eecc9cb554e01af84bb84a7f4e5681f7218f2885ab6ed99",
+      "line": 2,
+      "symbols": [
+        "export const capabilitySchema = z.object({",
+        "export type Capability = z.infer<typeof capabilitySchema>;",
+        "export const capabilityInputSchema = capabilitySchema",
+        "export type CapabilityInput = z.infer<typeof capabilityInputSchema>;",
+        "export const fitSchema = z.object({",
+        "export const maturity = (trl: number | null) =>",
+        "export function fitLink("
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/queries.ts",
+      "git_blob": "c621a0a8a83e10744b0c490836d40e971133756d",
+      "sha256": "35bcf53bf3afbdbde0c38db690f0cb8e5e41c7ea93df0f75aa2484fa5c80a1ae",
+      "line": 6,
+      "symbols": [
+        "export const capabilitiesKey = (id: string) => [\"capabilities\", id] as const;",
+        "export const fitKey = (id: string) => [\"capability-fit\", id] as const;",
+        "export function useCapabilities(id: string) {",
+        "export function useCapabilityFit(id: string) {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/CapabilityEditor.tsx",
+      "git_blob": "d3f53c54006e1a45c9d8af8afea8abc8e9508eb2",
+      "sha256": "aa94f4613726140f25b9977666fde8a97af221ae0ec57cc2691decac881c7ad2",
+      "line": 12,
+      "symbols": [
+        "export function CapabilityEditor({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/CapabilityForm.tsx",
+      "git_blob": "e315764ddc711de839812771265e1e2ee277193f",
+      "sha256": "def7df57f8fabe22109634cd369f8e2eccf2bd23d0c700c8cfed39e0bb2c0e9f",
+      "line": 14,
+      "symbols": [
+        "export function CapabilityForm({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/CapabilityFields.tsx",
+      "git_blob": "631bb34b579313feba684a2fc547d86534f10a6c",
+      "sha256": "bd5a6f0889830738251e86b5dbac38d690b2a372f7a40ddc88181a73b9c36e0d",
+      "line": 7,
+      "symbols": [
+        "export function CapabilityIdentityFields({",
+        "export function CapabilityDetails({ capability }: { capability?: Capability }) {",
+        "export function CapabilityReadiness({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/writer.ts",
+      "git_blob": "12ab145b672c84fee785d6471936dc386e34056f",
+      "sha256": "57673f64929a04872ea8b6e8be65aa497bf6591c6e3f4e5fe215e0988b3b7bbd",
+      "line": 10,
+      "symbols": [
+        "export type CapabilityExecution = {",
+        "export type CapabilityChange =",
+        "export async function saveCapability(",
+        "export async function removeCapability(",
+        "export async function refreshCapabilityFit("
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
+      "git_blob": "4a3d41988669a1252d6a68812c6b2e96aa6d2672",
+      "sha256": "5245aa0d98a2e82a97b61fc9dd2515447d5a9fa97f2135f0fa255daa592a43b4",
+      "line": 20,
+      "symbols": [
+        "export function Registrations({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/registration-writer.ts",
+      "git_blob": "53b0ed2d6eed58a0b5f9b3786f6ca5b90267c973",
+      "sha256": "2841c9689d86141bf7a1305b894b8b0c2e45980bcc6ddb2ad98ee7149feb036f",
+      "line": 15,
+      "symbols": [
+        "export type RegistrationInput = z.infer<typeof registrationInputSchema>;",
+        "export async function saveRegistrations("
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/CapabilityFit.tsx",
+      "git_blob": "8b90b4d3ee1e97bd577b08e04db816794ed3440e",
+      "sha256": "1bd9e6f698d789cc26a29a6fba7547419c78dbb096ce03f1b6253892cb7c9ac2",
+      "line": 6,
+      "symbols": [
+        "export function CapabilityFit({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/capabilities.module.css",
+      "git_blob": "83fbadb8f34a87f5b5f8ee0d814d4b992144febf",
+      "sha256": "84e7f0b3c84ae67e150a787427c519cb6dfa47104d3001606b4333efe9c9af05",
+      "line": 34,
+      "symbols": [
+        "@media (max-width: 1100px) {",
+        "@media (max-width: 680px) {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/registrations.module.css",
+      "git_blob": "43bf69b18e4a623290925ea926b768075b78d9fc",
+      "sha256": "751999781d4e23050d94853c98d2c86470e00523eb10eef26687b69654e88b63",
+      "line": 34,
+      "symbols": [
+        ".rows {",
+        "@media (prefers-color-scheme: dark) {",
+        "@media (max-width: 680px) {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/EntityDocuments.tsx",
+      "git_blob": "4cd4bcac4642de838eec130791f500988b6ed4c6",
+      "sha256": "cc925948dfc5d538f3d27d3cacf4799d10e233a9743d3e29822399ac879520ef",
+      "line": 12,
+      "symbols": [
+        "export function EntityDocuments({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/upload.ts",
+      "git_blob": "4149e81e64c944fc983520950ec6ffc50484c9e9",
+      "sha256": "38c381a94475cefb8582eb29dc40b6cfbe6d5a6f6e7efc7ad07322d0da7ae883",
+      "line": 11,
+      "symbols": [
+        "export interface UploadAttempt {",
+        "export interface UploadParent {",
+        "export async function uploadFile(",
+        "export async function uploadParentFile("
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/UploadDialog.tsx",
+      "git_blob": "245fdeaca03bd092757511c685f00cd659c77674",
+      "sha256": "a537b6190672a6f038df074ccc9e5e364efeb9fff23bb6b2463555204b1ec238",
+      "line": 24,
+      "symbols": [
+        "export function UploadDialog(props: UploadDialogProps) {",
+        "function UploadFiles({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/files/navigation.ts",
+      "git_blob": "c2bb4dce2ecd736af4e5ac406104eda23b325853",
+      "sha256": "10ae50cba8aea08c8117f4ea78a51be0d0f3dcd5c0b58f2e45c938c8d5b04aa1",
+      "line": 11,
+      "symbols": [
+        "export type FileNavigation = \"download\" | \"preview\";",
+        "export async function currentFileDestination(",
+        "export function useFileNavigation(clientId: string, context: string) {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/opportunities/OpportunitiesPage.tsx",
+      "git_blob": "10be0d3157d03d3c0cfb43bf53a0549f3718c498",
+      "sha256": "2ea45ddbf61ffc2dd109e084872fb654d888ec4e9fa40609777a58d599ff8c37",
+      "line": 15,
+      "symbols": [
+        "export function OpportunitiesPage({",
+        "function PageControls({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/opportunities/OpportunityResults.tsx",
+      "git_blob": "181f9c0237ce7aab131c592d2646b66d38fffaba",
+      "sha256": "19c2bdfcb2f38d49a2fc1971fb2b28967068b9a1e2e153eb95848bb4fa92dcb0",
+      "line": 8,
+      "symbols": [
+        "export function OpportunityResults({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/opportunities/contracts.ts",
+      "git_blob": "bb4fd980e47d2ed35cf6f7099b55b2ad167a65f1",
+      "sha256": "d9fa64b4683b9b243124d9083e301e78967ea5fba53bd65d2007669ec795c7cf",
+      "line": 2,
+      "symbols": [
+        "export const opportunitySources = [",
+        "export const opportunitySchema = z.object({",
+        "export const searchResponseSchema = z.object({",
+        "export function clientSearchSchema(clientId: string, page: number) {",
+        "export const programResponseSchema = z.object({",
+        "export type Opportunity = z.infer<typeof opportunitySchema>;",
+        "export type OpportunitySearch = z.infer<typeof searchResponseSchema>;",
+        "export type ProgramPage = z.infer<typeof programResponseSchema>;"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/opportunities/queries.ts",
+      "git_blob": "ea4a927b1d6cf133700b2497f301339994949e73",
+      "sha256": "4d9a4bfebe3637646a1c61b9998bdff6576f655f598e3a492197d4632ca5548e",
+      "line": 6,
+      "symbols": [
+        "export function useMatchedOpportunities(",
+        "export function useRelevantPrograms(clientId: string, page: number) {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/opportunities/presentation.ts",
+      "git_blob": "38d1bace9735db9247675b3631275ed32bfc6800",
+      "sha256": "feb843dc01d72bf1ea699054abdaef896aee00a199144d012af6ffe50d455fbb",
+      "line": 3,
+      "symbols": [
+        "export function opportunityDate(value: string | null) {",
+        "export function opportunityAmount(",
+        "export function opportunityLink(",
+        "export function pageWorkflowCounts(rows: Opportunity[]) {",
+        "export function boundedPage(value: string | null) {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/opportunities/RelevantPrograms.tsx",
+      "git_blob": "5c4bd61b535c0ba7607455c716b1634b6f692227",
+      "sha256": "7f60f2926cae19aeb59bd70c808d43a06bf55691134cfcab831d590a56baf41c",
+      "line": 3,
+      "symbols": [
+        "export function RelevantPrograms({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/BillTrackerPage.tsx",
+      "git_blob": "4afb06f9da0551a1d940f97be7842c752fec6def",
+      "sha256": "f05666b22480a0ebfacadd304332982429816affcc576a4df74eab89b2641897",
+      "line": 16,
+      "symbols": [
+        "export function BillTrackerPage({",
+        "function ConfiguredTracker({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/BillResults.tsx",
+      "git_blob": "c99b099fcde38c52020b7361d533bea44896b956",
+      "sha256": "9f1aa845a705962be859794f76fde1ca767beb538305a94b0316dfa8962203c4",
+      "line": 3,
+      "symbols": [
+        "export function BillResults({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/contracts.ts",
+      "git_blob": "7416559a63528e87f76fe1e7dc280789d0c92539",
+      "sha256": "2553e57d99f11255c902b6bd53208513c1e1451142ad5c1ce757521a63070c9c",
+      "line": 2,
+      "symbols": [
+        "export const billStageSchema = z.enum([",
+        "export const coreBoardSchema = z.object({",
+        "export const intelBoardSchema = z",
+        "export const billSearchSchema = z.array(",
+        "export const corpusSchema = z.object({",
+        "export type TrackedBill = z.infer<typeof common> & {",
+        "export type BoardPage = {",
+        "export function coreBoard(data: z.infer<typeof coreBoardSchema>): BoardPage {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/queries.ts",
+      "git_blob": "97ed7e117887b0dd6cea5f7eaeebfa857603c97a",
+      "sha256": "16f4b34a9d3de181c21cbf388a225fb6c0e022a4a41d1387f9f6f8a401b34ec3",
+      "line": 15,
+      "symbols": [
+        "export function useBillHearings(",
+        "export const boardKey = (clientId: string, backend: TrackerBackend) =>",
+        "export function useBillBoard(clientId: string, backend: TrackerBackend) {",
+        "export function useBillSearch(",
+        "export function useBillJurisdictions(backend: TrackerBackend) {",
+        "export function useTrackBill("
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/api.ts",
+      "git_blob": "b06caf617be9ead9ddbc38ae21698f8f17a76fc1",
+      "sha256": "4d99ab96bd14c833932bf58a4e701df5d8b581ed5d2714d677d755407e51e2ec",
+      "line": 15,
+      "symbols": [
+        "export const trackerBase = (clientId: string, backend: TrackerBackend) =>",
+        "export async function fetchBoard(",
+        "export function searchBills(",
+        "export async function setTracked(",
+        "export function fetchJurisdictions(api: ApiClient, signal?: AbortSignal) {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/current-data.ts",
+      "git_blob": "addcf2e237dc415db6540ac5bde03339213bd5e2",
+      "sha256": "ef4756b671bad754b15ecfbb4dde7d111691db22318836c2b434d50683702475",
+      "line": 7,
+      "symbols": [
+        "export function trackerReaderKey(cache: QueryClient) {",
+        "export function assertTrackerReader(cache: QueryClient, scope: string) {",
+        "export function currentBoard("
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/TrackBillDialog.tsx",
+      "git_blob": "4683844ab1a035ef6952ea95907c9f20088e7b1a",
+      "sha256": "d7f9f5e01296986bc266c6c4821b4b7561ccea0db5ea8e87c664ed4efa662935",
+      "line": 7,
+      "symbols": [
+        "export function TrackBillDialog({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/BillDrawer.tsx",
+      "git_blob": "49f08fe17e1db99444248d7f580d8dc78e24e16c",
+      "sha256": "b167054f7cfaf7a034edfdb9bdcc21f687631c8f3560b1d98a8656ee31006d22",
+      "line": 14,
+      "symbols": [
+        "export function BillDrawer({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/BillHearings.tsx",
+      "git_blob": "3ac1abbe03ffcae15144a9bce4852c044ca7f501",
+      "sha256": "3815302ab3cc75486dee7bf34d3d8638236ef74393920c38aec26f0a8220adaa",
+      "line": 13,
+      "symbols": [
+        "export function BillHearings({",
+        "function HearingRow({",
+        "function Mention({ mention }: { mention: BillHearing[\"mentions\"][number] }) {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/hearings.ts",
+      "git_blob": "0b0579ec4bccf6efec6b19a8cac2783ecf67690b",
+      "sha256": "053733dca2dfad06d015341113efe053d21831481f9de1d04d2877491db6d073",
+      "line": 19,
+      "symbols": [
+        "export const billHearingsSchema = z",
+        "export type BillHearing = z.infer<",
+        "export function fetchBillHearings(",
+        "export function billDate(value: string | null | undefined): string | undefined {",
+        "export function mentionTime(milliseconds: number): string {",
+        "export function hearingHref(",
+        "export function fullBoardHref("
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/WatchlistDialog.tsx",
+      "git_blob": "937085220a7e1f1659d21c3ceabbdabee8d7ee82",
+      "sha256": "b809b603e2ab24978215568ce850d0b5f4d10354a349ab7234c649a6459be826",
+      "line": 24,
+      "symbols": [
+        "export function WatchlistDialog(props: WatchlistProps) {",
+        "function WatchlistSession({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/watchlist-writer.ts",
+      "git_blob": "e358c6070f945fdbce5ffef08d9f7c6f6b41beb6",
+      "sha256": "02bc816e685da6eca9f7de25ca5e6ff307283bd7b3e07f96652c362b14aca8f4",
+      "line": 20,
+      "symbols": [
+        "export const watchlistPath = (clientId: string, backend: TrackerBackend) =>",
+        "export async function readWatchlist(",
+        "async function verifyClient(",
+        "export async function writeWatchlist(",
+        "export async function reloadWatchlist("
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/watchlist-contracts.ts",
+      "git_blob": "a6e53d6e690439491cbb8f2aef1f081f080e918f",
+      "sha256": "a3bb2bbfb7af103de98375f354c485ea58ba11b77437e2d8a9c5ca87ea99788b",
+      "line": 2,
+      "symbols": [
+        "export const termTypes = [",
+        "export const topicSchema = z.object({",
+        "export type Topic = z.infer<typeof topicSchema>;",
+        "export type TopicDraft = Topic & { key: string; originalLabel?: string };",
+        "export const intelWatchlistSchema = z.object({",
+        "export const coreWatchlistSchema = z.object({",
+        "export type Watchlist = {",
+        "export type WatchlistDraft = {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/watchlist-source.ts",
+      "git_blob": "efea48bacaff63ab46c4da618cd33ba0d7b47bc5",
+      "sha256": "8d7c832a016764631003f4fc43655d81c788e2d3107c458048d22ad9625a3c23",
+      "line": 24,
+      "symbols": [
+        "export type WatchlistReader = { actor: ProfileActor; revision: number };",
+        "export function currentWatchlistReader(",
+        "export const watchlistReaderKey = (reader?: WatchlistReader) =>",
+        "export function assertWatchlistReader(",
+        "export const watchlistKey = (",
+        "export const taxonomyKey = (",
+        "export const jurisdictionsKey = (reader?: WatchlistReader) =>",
+        "export type WatchlistView = {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/AlertPreferencesDialog.tsx",
+      "git_blob": "5ea9c943e1292ad3ad3878e1f96a6a1b175d5ba3",
+      "sha256": "5317212fcb6bf6e430c124f2c331cd273331ccb3bc6f9c2a4f0e437f62706fc7",
+      "line": 17,
+      "symbols": [
+        "export function AlertPreferencesEntry({",
+        "export function AlertPreferencesDialog({",
+        "function PreferenceSession({"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/PreferenceForm.tsx",
+      "git_blob": "16ca4df6db2f6277b2d47083c99d595c82ceff9c",
+      "sha256": "05aa4f94c7d5ac6256e2955cdee723a403d615e0f5da8bfeb5fd9f5f3b21422f",
+      "line": 16,
+      "symbols": [
+        "export function PreferenceForm(props: {"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/personal-contracts.ts",
+      "git_blob": "6e82f7a6f7190812742a9e2d0f2d285bea28f49a",
+      "sha256": "f3dd07593cf8afa30f383552176576d46ab381078e9ce4d462da3e5c0333ed11",
+      "line": 21,
+      "symbols": [
+        "export type PersonalPreferences = CorePreferences | AlertPreferences;",
+        "export const personalPreferencesPath = (",
+        "export function personalPreferencesSchema(",
+        "export function personalDraft(",
+        "export function personalSignature(",
+        "export function personalBody(",
+        "export function assertSavedPreferences("
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/channel-contracts.ts",
+      "git_blob": "14524584186ff9446f2e56237517d9c6b33d1004",
+      "sha256": "9c18b9593b7c750acac457e589f565705a13bd611e4fcc20856eef65e205ee54",
+      "line": 4,
+      "symbols": [
+        "export const phoneRequestSchema = z",
+        "export const phoneConfirmBodySchema = phoneRequestSchema.extend({",
+        "export const phoneRequestReceiptSchema = z.object({",
+        "export type PhoneRequestReceipt = z.infer<typeof phoneRequestReceiptSchema>;",
+        "export const phoneConfirmReceiptSchema = (phone: string) =>",
+        "export const testChannels = [\"email\", \"sms\"] as const;",
+        "export type TestChannel = (typeof testChannels)[number];",
+        "export const testAlertBodySchema = z"
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/usePhoneVerification.ts",
+      "git_blob": "afad8d84e9d95a4611c30630e67389e79e16820a",
+      "sha256": "3c41848c87dfeb20f43b861cc28e2ccc4bdf7c7565da91c8c2fcaaa2ab018d7f",
+      "line": 58,
+      "symbols": [
+        "export function usePhoneVerification("
+      ]
+    },
+    {
+      "path": "apps/web/src/features/portfolio/bill-tracker/alert-preferences/useTestAlert.ts",
+      "git_blob": "993ec479014dc7a2efe07c6c87a9e436e75ef2ad",
+      "sha256": "2ee978654d1252bbc92e216dfa9428c50de14b5dbbc501d6bdbd4cc93a623c42",
+      "line": 44,
+      "symbols": [
+        "export function useTestAlert(view: ChannelView) {"
+      ]
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/config/config.ts",
+      "git_blob": "28551f81aa072dc5904f76a8f3287ddb77017a33",
+      "sha256": "e37e67bbf2a8306358d8d5925975392e9dd334c1bc4dc6689047003102004ea0",
+      "line": 1,
+      "symbols": [
+        "export const serviceKeys = [",
+        "export type Service = (typeof serviceKeys)[number];",
+        "export type TrackerBackend = \"core\" | \"intelligence\";",
+        "export type Destinations = {",
+        "export type RuntimeConfig = {",
+        "function validatedUrl(",
+        "export function readConfig("
+      ]
+    }
+  ],
+  "test_evidence_method": "Read current test declarations/selected assertions and reconciled specific final90cc case records. All selected records have one passed result and expected report status. No tests were executed in this mapping; no assertion of independent full test-source audit.",
+  "final_report_bindings": [
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-1-results.json",
+      "sha256": "643899af29f296d7cb644543c861ee612d5dbd5147096ae11638a2c332e6f71e",
+      "bytes": 316579
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-2-results.json",
+      "sha256": "53060828cff7fea8e0ce92bf8b5807979b3f1cab5dd2a618df58ab13cea1c548",
+      "bytes": 330154
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-3-results.json",
+      "sha256": "8091a2843f3acb3e6ddda175b09ce2a300fca057afb885012aa0ec90e7168ad3",
+      "bytes": 1821581
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/portfolio-shard-4-results.json",
+      "sha256": "a11da549867441da4cbb655f6463eb8234fa6c13d583e88c79676dbfdaa74ecb",
+      "bytes": 314691
+    },
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/modules-browser-results.json",
+      "sha256": "4c4be4783affcdb4e78334e438f5d0d2d5b4a183acb41868b6fe61b9c44f1af1",
+      "bytes": 5339214
+    }
+  ],
+  "outputs": [
+    {
+      "path": "/workspace/capiro-portfolio-acceptance-map-20261013/reviewers/objectives_work_intel/rows.json",
+      "sha256": "76e616bc81a7f5151c8e788343b00e86301811956da93443969ef193e33b69e4",
+      "bytes": 536113
+    },
+    {
+      "path": "/workspace/capiro-portfolio-acceptance-map-20261013/reviewers/objectives_work_intel/summary.md",
+      "sha256": "4700cf63fd018f2e08f522027cc350f3c48b03858e2220016123bf7071729624",
+      "bytes": 5111
+    }
+  ],
+  "source_candidates": [
+    {
+      "id": "OBJ-26-key-lifetime",
+      "scope": [
+        "OBJ-26"
+      ],
+      "kind": "confirmed source/console warning",
+      "detail": "Identical id:version keys on distinct siblings; native or data-loss impact not inferred. New coherent batch only."
+    },
+    {
+      "id": "bill-search-current-read",
+      "scope": [
+        "BILL-04",
+        "BILL-06"
+      ],
+      "kind": "static source gap; runtime reproduction pending",
+      "detail": "results.data and selected-only Track enablement lack current-success/error admission. Preserve baseline negative control before repair."
+    }
+  ],
+  "limits": [
+    "All72rows remain open; no fixture, broad pass total or source-only inspection is native acceptance.",
+    "Latest backend code/deployment was not fetched or activated here; consumed public receiving contracts and pinned owner handoff provenance are used. An unconsumed contract is not proof no newer owner implementation exists.",
+    "No fresh Figma/tool/screenshots were obtained; representative nodes come from original index. Historical repairs and captures do not imply full current Figma acceptance.",
+    "Frozen qualification includes inherited ObjectiveEditor duplicate-key console warnings; no clean-console claim.",
+    "No source/index/branch edits, tests/build/install/browser/server, native/provider/network execution or sealed-packet writes.",
+    "Only rows.json,summary.md,review.json in assigned reviewer directory are authored."
+  ],
+  "validation": {
+    "all_assigned_ids_exactly_once": true,
+    "all_categories_from_four": true,
+    "all_confirmed_mismatch_null": true,
+    "no_native_actions_needed_for_next_step": true,
+    "all_cited_production_bytes_equal_HEAD": true,
+    "unblocked_offline_next_steps": 45,
+    "source_status_after_mapping": ""
+  },
+  "observed_failure_receipts": [
+    {
+      "path": "/workspace/capiro-unified-files-corrected-20261013/INHERITED-CONSOLE-OBSERVATION.json",
+      "sha256": "a0533914076f37da2c0f9832297c6b33228e5de67b4eb582078cec904328ffba",
+      "bytes": 990
+    }
+  ],
+  "native_contract_provenance": [
+    {
+      "current_consumer": "apps/web/src/shared/capiro/operations/objective-work-destinations.ts",
+      "pinned_owner_sources": [
+        "capirov2@0716767e8b6ff323b2516d166b22edb4d2413e57 Strategy/Planner objectiveDestination",
+        "capirov2@c05b85a29a75cbaaa8538fd7f9a97e298a23913e Workspace saved-revision objectiveDestination"
+      ],
+      "meaning": "Existing authorized resource GET observations only; no mutation, generated strategy, durable association or activation authority."
+    },
+    {
+      "current_consumer": "apps/web/src/shared/capiro/operations/engagement-objective-destination.ts",
+      "pinned_owner_sources": [
+        "capirov2@4a784b58a0d41251ae6d7dea75a9b4858abc8665 OutreachSessionService"
+      ],
+      "meaning": "Exact active outreach session/current Objective version resolution; no session creation or authorization inferred from URL."
+    }
+  ],
+  "inspected_handoff_documents": [
+    {
+      "path": "docs/integration-contracts-20261012/OBJECTIVE-WORK-DESTINATIONS.md",
+      "git_blob": "131e9fe93f3ad9aa0a5986673c4c5fee675ebded",
+      "sha256": "38fcf77de964e3e288fe8320899c31b0011deeeb45721fcf9c77121a21228608",
+      "scope": "Historical published owner contract integration, limited GET semantics and explicit native limits; not a fresh backend deployment verification."
+    }
+  ],
+  "sealed_at_utc": "2026-10-13T11:11:35.119923+00:00"
+}

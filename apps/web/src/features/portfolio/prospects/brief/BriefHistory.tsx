@@ -16,6 +16,8 @@ export function BriefHistory({
     queryKey: ["prospect-brief-history", scope.tenantId, scope.prospectId],
     queryFn: ({ signal }) => listVersions(api, scope, signal),
   });
+  const current =
+    history.isSuccess && !history.error ? history.data : undefined;
   return (
     <section className="stack" aria-label="Saved brief versions">
       <h3>Version history</h3>
@@ -24,18 +26,20 @@ export function BriefHistory({
         error={history.error}
         retry={() => void history.refetch()}
       />
-      {history.data?.versions.map((version) => (
+      {current?.versions.map((version) => (
         <button
           key={version.id}
           className="button"
-          onClick={() => onSelect(version)}
+          onClick={() => {
+            if (current) onSelect(version);
+          }}
         >
           Version {version.versionNumber} ·{" "}
           <BriefDate value={version.createdAt} /> · {version.citationCount}{" "}
           citations
         </button>
       ))}
-      {history.data && !history.data.versions.length && (
+      {current && !current.versions.length && (
         <p>No saved versions were returned.</p>
       )}
       <small>

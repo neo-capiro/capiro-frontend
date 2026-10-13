@@ -1,10 +1,16 @@
 "use client";
 import { z } from "zod";
-import { useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
 import { MailSendError, sendReviewedMail, type SendInput } from "./email/send";
 import { useMailAuthority } from "./email/authority";
+import { useIdentity } from "@/shared/portfolio/auth/identity";
+import {
+  beginMailAttempt,
+  mailAttemptKey,
+  settleMailAttempt,
+  useMailAttempt,
+} from "./email/send-attempt";
 const recipientSchema = z.object({
   email: z.string(),
   name: z.string().nullable().optional(),
@@ -69,9 +75,17 @@ export function useMailThread(id: string | null) {
     queryKey: ["mail-thread", id],
     enabled: Boolean(id),
     queryFn: ({ signal }) =>
-      api.request("core", `engagement/mail-threads/${id}`, threadSchema, {
-        signal,
-      }),
+      api.request(
+        "core",
+        `engagement/mail-threads/${id}`,
+        threadSchema.refine(
+          (thread) => thread.id === id,
+          "Requested mail thread mismatch",
+        ),
+        {
+          signal,
+        },
+      ),
   });
 }
 export function useSignature() {
@@ -93,33 +107,32 @@ export type MailContact = {
   title: string | null;
   email: string | null;
 };
-export function useSendMail(clientId?: string) {
+export function useSendMail(clientId: string, entity: string) {
   const api = useApi();
   const cache = useQueryClient();
   const authority = useMailAuthority(clientId);
-  const pending = useRef(false);
-  const uncertain = useRef(false);
-  return useMutation({
+  const identity = useIdentity();
+  const key = mailAttemptKey(
+    identity.data?.tenant?.id ?? "",
+    identity.data?.user.id ?? "",
+    clientId,
+    entity,
+  );
+  const attempt = useMailAttempt(key);
+  const mutation = useMutation({
     retry: false,
     mutationFn: async (body: SendInput) => {
-      if (
-        pending.current ||
-        uncertain.current ||
-        (clientId && body.clientId !== clientId)
-      )
-        throw new MailSendError(
-          "This email attempt is pending, uncertain, or belongs to another client.",
-          uncertain.current,
-        );
-      pending.current = true;
+      if (body.clientId !== clientId)
+        throw new MailSendError("This email belongs to another client.", false);
+      const assert = authority.capture();
+      const token = beginMailAttempt(cache, key, body);
       try {
-        return await sendReviewedMail(api, body, authority.capture());
+        const result = await sendReviewedMail(api, body, assert);
+        settleMailAttempt(cache, key, token);
+        return result;
       } catch (error) {
-        if (error instanceof MailSendError && error.uncertain)
-          uncertain.current = true;
+        settleMailAttempt(cache, key, token, error);
         throw error;
-      } finally {
-        pending.current = false;
       }
     },
     onSuccess: async () => {
@@ -130,4 +143,9 @@ export function useSendMail(clientId?: string) {
       ]);
     },
   });
+  return {
+    ...mutation,
+    isPending: mutation.isPending || attempt?.status === "pending",
+    error: attempt?.error ?? mutation.error,
+  };
 }

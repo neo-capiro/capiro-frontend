@@ -50,6 +50,7 @@ export async function changeMeetingArtifact(
   change: ArtifactChange,
   assertCurrent: () => void,
   signal: AbortSignal,
+  assertReadable?: () => void,
 ) {
   let dispatched = false;
   let knownRefusal = false;
@@ -68,6 +69,9 @@ export async function changeMeetingArtifact(
       { signal },
     );
     assertCurrent();
+    // A parent preflight can finish after the list that admitted this action
+    // failed or changed. Recheck immediately before dispatch, not after a write.
+    assertReadable?.();
     const request = operation(base, kind, change);
     dispatched = true;
     await api

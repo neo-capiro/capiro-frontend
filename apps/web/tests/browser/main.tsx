@@ -1,4 +1,8 @@
 import { createRoot } from "react-dom/client";
+import { AcceptanceActivityAuthorityHarness } from "./acceptance-activity-authority-harness";
+import { AcceptanceBillSearchHarness } from "./acceptance-bill-search-harness";
+import { AcceptanceMeetingArtifactsHarness } from "./acceptance-meeting-artifacts-harness";
+import { AcceptanceRelationshipsProbe } from "./acceptance-relationships-probe";
 import { PortfolioHarnessProviders } from "./portfolio-harness-providers";
 import { Shell } from "@/shared/portfolio/shell/Shell";
 import { ClientFrame } from "@/features/portfolio/client-profile/ClientFrame";
@@ -44,6 +48,12 @@ const destinations = {
 };
 function App() {
   const path = usePathname();
+  if (path === "/__test/acceptance-activity-authority")
+    return <AcceptanceActivityAuthorityHarness />;
+  if (path === "/__test/acceptance-bill-search")
+    return <AcceptanceBillSearchHarness />;
+  if (path === "/__test/acceptance-meeting-artifacts")
+    return <AcceptanceMeetingArtifactsHarness />;
   if (path === "/__test/registrant-intake") return <RegistrantIntakeHarness />;
   if (path === "/__test/email-compose") return <EmailComposeHarness />;
   if (path === "/__test/meeting-documents") return <MeetingDocumentsHarness />;
@@ -119,6 +129,7 @@ function App() {
 }
 createRoot(document.getElementById("root")!).render(
   <PortfolioHarnessProviders>
+    <AcceptanceRelationshipsProbe />
     <App />
   </PortfolioHarnessProviders>,
 );

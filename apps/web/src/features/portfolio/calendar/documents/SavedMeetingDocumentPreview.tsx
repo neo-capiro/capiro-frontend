@@ -38,7 +38,12 @@ export function SavedMeetingDocumentPreview({
     document.kind === "preparation"
       ? `Meeting prep — ${query.data?.meeting.subject ?? meeting.subject}`
       : "Meeting debrief · PDF preview";
-  const saved = query.data?.document;
+  const current =
+    query.isSuccess &&
+    !query.isFetching &&
+    !query.error &&
+    !cache.getQueryState(query.queryKey)?.isInvalidated;
+  const saved = current ? query.data?.document : undefined;
   function print() {
     try {
       authority.capture()();
@@ -76,7 +81,9 @@ export function SavedMeetingDocumentPreview({
       className={styles.dialog}
     >
       <QueryState
-        pending={query.isPending || authority.identity.isPending}
+        pending={
+          query.isPending || query.isFetching || authority.identity.isPending
+        }
         error={query.error ?? authority.identity.error}
         retry={() => void query.refetch()}
       />

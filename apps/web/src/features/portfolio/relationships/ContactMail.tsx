@@ -16,14 +16,44 @@ export function ContactMail({
   const [selected, setSelected] = useState<string | null>(null);
   const [compose, setCompose] = useState<"new" | "reply" | null>(null);
   const thread = useMailThread(selected);
+  const contactKey = JSON.stringify([clientId, person.personId, person.email]);
+  const [readScope, setReadScope] = useState({
+    contactKey,
+    historyError: query.error,
+    threadError: thread.error,
+  });
+  const contactChanged = readScope.contactKey !== contactKey;
+  if (
+    contactChanged ||
+    readScope.historyError !== query.error ||
+    readScope.threadError !== thread.error
+  ) {
+    setReadScope({
+      contactKey,
+      historyError: query.error,
+      threadError: thread.error,
+    });
+    if (contactChanged || query.error) {
+      setSelected(null);
+      setCompose(null);
+    } else if (thread.error && compose === "reply") setCompose(null);
+  }
+  const history =
+    !contactChanged && query.isSuccess && !query.error ? query.data : undefined;
+  const currentThread =
+    history && thread.isSuccess && !thread.error && thread.data.id === selected
+      ? thread.data
+      : undefined;
   return (
     <section className="stack">
       <header className="row between">
         <h3>Message history</h3>
         <button
           className="button"
-          disabled={!person.email}
-          onClick={() => setCompose("new")}
+          disabled={!person.email || !history || query.isFetching}
+          onClick={() => {
+            if (history && !query.isFetching) setCompose("new");
+          }}
         >
           Mail
         </button>
@@ -35,11 +65,14 @@ export function ContactMail({
             error={query.error}
             retry={() => void query.refetch()}
           />
-          {query.data?.map((item) => (
+          {history?.map((item) => (
             <button
               className="button ghost"
               key={item.id}
-              onClick={() => setSelected(item.id)}
+              disabled={query.isFetching}
+              onClick={() => {
+                if (history && !query.isFetching) setSelected(item.id);
+              }}
             >
               <span>
                 <strong>{item.subject}</strong>
@@ -47,7 +80,7 @@ export function ContactMail({
               </span>
             </button>
           ))}
-          {query.data?.length === 0 && (
+          {history?.length === 0 && (
             <p className="muted">No accessible messages for this contact.</p>
           )}
           <small>
@@ -61,11 +94,11 @@ export function ContactMail({
         </p>
       )}
       <Dialog
-        open={Boolean(selected)}
+        open={Boolean(history && selected)}
         onOpenChange={(open) => {
           if (!open) setSelected(null);
         }}
-        title={thread.data?.subject ?? "Mail thread"}
+        title={currentThread?.subject ?? "Mail thread"}
         drawer
       >
         <QueryState
@@ -73,7 +106,7 @@ export function ContactMail({
           error={thread.error}
           retry={() => void thread.refetch()}
         />
-        {thread.data?.messages.map((message) => (
+        {currentThread?.messages.map((message) => (
           <article className="card stack" key={message.id}>
             <strong>
               {message.fromName ?? message.fromEmail ?? "Unknown sender"}
@@ -88,20 +121,26 @@ export function ContactMail({
             </p>
           </article>
         ))}
-        {thread.data && (
-          <button className="button" onClick={() => setCompose("reply")}>
+        {currentThread && (
+          <button
+            className="button"
+            disabled={thread.isFetching || query.isFetching}
+            onClick={() => {
+              if (!thread.isFetching && !query.isFetching) setCompose("reply");
+            }}
+          >
             Reply to {person.name}
           </button>
         )}
       </Dialog>
-      {compose && (
+      {history && compose && (compose === "new" || currentThread) && (
         <MailCompose
           key={`${compose}:${selected}`}
           clientId={clientId}
           person={person}
           thread={
-            compose === "reply" && thread.data
-              ? { id: thread.data.id, subject: thread.data.subject }
+            compose === "reply" && currentThread
+              ? { id: currentThread.id, subject: currentThread.subject }
               : undefined
           }
           onClose={() => setCompose(null)}

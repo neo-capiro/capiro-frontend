@@ -20,6 +20,8 @@ export function BriefRefresh({
       readRefresh(api, prospectId, versionNumber, signal),
     staleTime: 0,
   });
+  const current =
+    proposal.isSuccess && !proposal.error ? proposal.data : undefined;
   return (
     <section className="stack" aria-label="Refresh comparison">
       <h3>Compare current dossier</h3>
@@ -32,14 +34,13 @@ export function BriefRefresh({
         Preview only. Saving a refresh is unavailable until the reviewed text
         and citations can be preserved together.
       </p>
-      {proposal.data && (
+      {current && (
         <>
           <small>
-            Compared against version {proposal.data.baseVersionNumber}. Snapshot
-            generated{" "}
-            <BriefDate value={proposal.data.sourceSnapshot.generatedAt} />.
+            Compared against version {current.baseVersionNumber}. Snapshot
+            generated <BriefDate value={current.sourceSnapshot.generatedAt} />.
           </small>
-          {proposal.data.diff.map((item) => (
+          {current.diff.map((item) => (
             <section className="stack" key={item.section}>
               <h3>
                 {sectionLabels[item.section]} ·{" "}
@@ -55,7 +56,7 @@ export function BriefRefresh({
                   <p>{item.proposedText}</p>
                 </div>
               </div>
-              {proposal.data.proposed[item.section].provenance === "edited" && (
+              {current.proposed[item.section].provenance === "edited" && (
                 <p role="note">
                   Your edited section remains preserved in the proposed result.
                 </p>

@@ -10,22 +10,29 @@ import styles from "./contacts.module.css";
 export function ProspectContacts({ prospectId }: { prospectId: string }) {
   const query = useContacts(prospectId);
   const identity = useIdentity();
-  const [editor, setEditor] = useState<{ contact?: ProspectContact } | null>(
-    null,
-  );
+  const [editor, setEditor] = useState<{
+    prospectId: string;
+    contact?: ProspectContact;
+  } | null>(null);
   const trigger = useRef<HTMLButtonElement | null>(null);
   const section = useRef<HTMLElement>(null);
-  const roleAllowed = ["standard_user", "user_admin", "capiro_admin"].includes(
-    identity.data?.role ?? "",
-  );
-  const editable =
-    roleAllowed &&
-    query.data !== null &&
-    Boolean(query.data) &&
-    !query.data?.readOnly;
+  const current = query.isSuccess && !query.error ? query.data : undefined;
+  const available = current !== undefined && current !== null;
+  const roleAllowed =
+    identity.isSuccess &&
+    !identity.error &&
+    ["standard_user", "user_admin", "capiro_admin"].includes(
+      identity.data?.role ?? "",
+    );
+  const editable = roleAllowed && available && !current.readOnly;
+  const editorAvailable =
+    available &&
+    (!editor?.contact ||
+      current.contacts.some((contact) => contact.id === editor.contact?.id));
   function open(button: HTMLButtonElement, contact?: ProspectContact) {
+    if (!available) return;
     trigger.current = button;
-    setEditor({ contact });
+    setEditor({ prospectId, contact });
   }
   return (
     <section
@@ -50,23 +57,23 @@ export function ProspectContacts({ prospectId }: { prospectId: string }) {
           error={query.error}
           retry={() => void query.refetch()}
         />
-        {query.data === null && (
+        {current === null && (
           <p role="status" className="muted">
             Prospect contacts are unavailable for this account or service. No
             contact changes can be saved.
           </p>
         )}
-        {query.data && !query.data.contacts.length && (
+        {current && !current.contacts.length && (
           <p className="muted">No contacts yet.</p>
         )}
-        {query.data?.readOnly && (
+        {current?.readOnly && (
           <p className="muted">
             Archived or converted prospect · contacts are read-only.
           </p>
         )}
         <QueryState error={identity.error} />
       </div>
-      {query.data?.contacts.map((contact) => (
+      {current?.contacts.map((contact) => (
         <button
           key={contact.id}
           className={styles.contact}
@@ -79,13 +86,16 @@ export function ProspectContacts({ prospectId }: { prospectId: string }) {
           </span>
         </button>
       ))}
-      {editor && (
+      {editor?.prospectId === prospectId && (
         <ContactEditor
           key={`${prospectId}:${editor.contact?.id ?? "new"}`}
           prospectId={prospectId}
           contact={editor.contact}
+          available={editorAvailable}
           readOnly={!editable}
-          onClose={() => setEditor(null)}
+          onClose={() =>
+            setEditor((active) => (active === editor ? null : active))
+          }
           returnFocus={() => {
             const button = trigger.current;
             if (button?.isConnected) button.focus();

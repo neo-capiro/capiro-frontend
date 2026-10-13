@@ -1,0 +1,37 @@
+{
+  "started": "2026-10-13T12:39:11.102431+00:00",
+  "base_application_source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "head": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+  "command": [
+    "../../node_modules/.bin/playwright",
+    "test",
+    "--config",
+    "playwright.config.ts",
+    "tests/browser/acceptance-prospect-brief-current.spec.ts",
+    "tests/browser/acceptance-prospect-client-link.spec.ts",
+    "tests/browser/acceptance-prospect-contacts.spec.ts",
+    "tests/browser/acceptance-prospect-create-intent.spec.ts",
+    "tests/browser/acceptance-prospect-write-preservation.spec.ts",
+    "tests/browser/acceptance-folder-access-recovery.spec.ts",
+    "--workers=2",
+    "--output",
+    "/workspace/capiro-acceptance-batch-evidence-20261013/root/phase-b-corrected-replay/artifacts",
+    "--reporter",
+    "list,json"
+  ],
+  "production_diff_sha256": "3ca9c40069342adce9e16dc176650feb14d7030d9f980b8fdf9829fee6ece147",
+  "production_diff_empty": false,
+  "browser": "/usr/bin/chromium",
+  "node": "v24.19.0",
+  "exit_code": 0,
+  "finished": "2026-10-13T12:40:18.762029+00:00",
+  "source_changed_during_focused_run": false,
+  "stats": {
+    "startTime": "2026-10-13T12:39:11.600Z",
+    "duration": 67142.95,
+    "expected": 21,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

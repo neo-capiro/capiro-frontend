@@ -1,0 +1,74 @@
+{
+  "utc": "2026-10-13T11:19:54.019418+00:00",
+  "source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "published": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+  "lanes": {
+    "core_intake": {
+      "rows": 63,
+      "sha256": "f76c7804b46713cac10202ec54f9a7210e507937cf722f151502036924ab1f14",
+      "categories": {
+        "existing_behavior_missing_evidence": 42,
+        "authentic_backend_provider_dependency": 20,
+        "actual_missing_implementation": 1
+      }
+    },
+    "core_profile": {
+      "rows": 63,
+      "sha256": "8fb40ad1581617612dcecbb725e6200712bdd7a974f36c62acd001b652742633",
+      "categories": {
+        "existing_behavior_missing_evidence": 33,
+        "authentic_backend_provider_dependency": 29,
+        "actual_missing_implementation": 1
+      }
+    },
+    "calendar": {
+      "rows": 66,
+      "sha256": "167de94bfbde7070dfad1f8cde414869855e574b1f3bb60e64dcdab739036ac6",
+      "categories": {
+        "existing_behavior_missing_evidence": 38,
+        "authentic_backend_provider_dependency": 24,
+        "actual_missing_implementation": 4
+      }
+    },
+    "relationships": {
+      "rows": 33,
+      "sha256": "924423c9bab3da18ccfa43de1b861c53424da2c38eee83b4898dee43d0365913",
+      "categories": {
+        "actual_missing_implementation": 10,
+        "existing_behavior_missing_evidence": 14,
+        "authentic_backend_provider_dependency": 9
+      }
+    },
+    "objectives_work_intel": {
+      "rows": 72,
+      "sha256": "76e616bc81a7f5151c8e788343b00e86301811956da93443969ef193e33b69e4",
+      "categories": {
+        "existing_behavior_missing_evidence": 42,
+        "authentic_backend_provider_dependency": 27,
+        "actual_missing_implementation": 3
+      }
+    },
+    "prospects": {
+      "rows": 40,
+      "sha256": "676d5909733aacb783627f95e8cf1d85bc7b2e7ebb1854b1c90d9512c0ccf653",
+      "categories": {
+        "existing_behavior_missing_evidence": 12,
+        "authentic_backend_provider_dependency": 24,
+        "actual_missing_implementation": 4
+      }
+    }
+  },
+  "total": 337,
+  "counts": {
+    "existing_behavior_missing_evidence": 181,
+    "authentic_backend_provider_dependency": 133,
+    "actual_missing_implementation": 23
+  },
+  "accepted": 0,
+  "unblocked_offline_next_steps": 213,
+  "pending_lanes": [],
+  "missing_ids": [],
+  "failures": [],
+  "unique_source_bindings": 392,
+  "scope": "Structural ledger/required-field/current-source byte binding verification only; no new native/browser/design acceptance and no replacement for semantic review."
+}

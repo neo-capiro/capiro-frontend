@@ -1,0 +1,160 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/prospects/brief/BriefEditor.tsx",
+    "kind": "function",
+    "symbol": "BriefEditor",
+    "line": 14,
+    "nonblank": 265,
+    "fingerprint": "e24f1379bd0c1bbff091430ed15d883ecc969efa2f6de925ed9d4c923e76fc3e",
+    "reason": "Owns one local brief draft, frozen save attempt, latest-version review and explicit rebase choice. Transport is in `api`/hooks; section-change and merge rules are in `editing`. Retain the coupled version/retry state. The named conflict-comparison view is a useful next presentation extraction; it must receive the exact base and reviewed versions.",
+    "reviewedBy": "Codex portfolio_prospects_files",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/brief/BriefSource.tsx",
+    "kind": "function",
+    "symbol": "BriefSource",
+    "line": 12,
+    "nonblank": 118,
+    "fingerprint": "7aceee0c6347003b1333f3203b603fbc3a9b928d982d718f0b2900c9f2ea0785",
+    "reason": "Owns inspection of one citation from the displayed immutable version, with an optional current-dossier resolution. It deliberately does not resolve historical indexes against the current dossier. Date rendering and URL checking are separate. Retain the saved/current distinction in one source inspector.",
+    "reviewedBy": "Codex portfolio_prospects_files",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/brief/BriefViewer.tsx",
+    "kind": "function",
+    "symbol": "BriefViewer",
+    "line": 16,
+    "nonblank": 130,
+    "fingerprint": "21be0ccb64af9ab16e54052821e59ee193cabdd0414509f6cd6b622f43a2955a",
+    "reason": "Owns selected version and panel navigation. Document rendering, history, editing, refresh comparison and source inspection are child modules; version retrieval is a bounded API call. Keep the selected immutable version as the common input to the document and source dialogs. Retain.",
+    "reviewedBy": "Codex portfolio_prospects_files",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/contacts/ContactEditor.tsx",
+    "kind": "function",
+    "symbol": "ContactEditor",
+    "line": 11,
+    "nonblank": 271,
+    "fingerprint": "7f6dcd6d07332c407d69eb6add39adb685b4a1eec33d3edc7bd51734758e44ff",
+    "reason": "Owns one contact drawer's controlled input, field focus, explicit latest-version replacement and removal confirmation. Schemas and query/mutation hooks own transport and receipts. Retain expected-version/request-identity state. A `ContactFields` view is a concrete next extraction for field/ARIA changes, while recovery and removal remain in the editor's lifecycle.",
+    "reviewedBy": "Codex portfolio_prospects_files",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/contacts/ProspectContacts.tsx",
+    "kind": "function",
+    "symbol": "ProspectContacts",
+    "line": 10,
+    "nonblank": 89,
+    "fingerprint": "bf31e7e338fa3589bd87ee457040ce79b6fd3ac5910e4d76cc37627fbf63fe65",
+    "reason": "Owns the contact list, service availability/read-only display, selected editor and focus return when a trigger disappears. It delegates editing rather than duplicating contact field state. Retain; the selection and fallback-focus behavior form one widget lifecycle.",
+    "reviewedBy": "Codex portfolio_prospects_files",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/prospects/conversion/ProspectClientLink.tsx",
+    "kind": "function",
+    "symbol": "ClientLinkDialog",
+    "line": 54,
+    "nonblank": 107,
+    "fingerprint": "abf2357ffdcabde0cfa5996d96fe1cd7df96bc82028aed55bea1b81b5c916828",
+    "reason": "Owns selection and explicit confirmation of an existing accessible client. Search, receipt verification and ambiguous link recovery are in hooks/API modules. It does not implement paid conversion or carry-over. Retain the selected client and its reset confirmation together.",
+    "reviewedBy": "Codex portfolio_prospects_files",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/artifacts/useArtifactMutation.ts",
+    "kind": "function",
+    "symbol": "useArtifactMutation",
+    "fingerprint": "9073247d9809144bbb9ead2a98d24e1272748ae53edffb0b19163b63357caa97",
+    "reason": "The existing saved artifact attempt lifecycle now observes the canonical per-meeting sharing fence. The two owners prevent concurrent or uncertain write replay without moving receipt/transport concerns into UI.",
+    "reviewedBy": "Codex shared frontend integration review with independent core_intake_review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/calendar/documents/SavedMeetingDocumentPreview.tsx",
+    "kind": "function",
+    "symbol": "SavedMeetingDocumentPreview",
+    "fingerprint": "6a16b1a5608ececfac00e52b835f33b5a2f3070b651894aa98fa5edf215fe060",
+    "reason": "This component is a read-only saved-document preview with a print action. Its authority, query freshness and exact saved-version checks protect that one action; print formatting lives in a helper. There is no document writer or generation lifecycle here. The preview's local errors and loading states belong to the same saved document.",
+    "reviewedBy": "Codex portfolio_calendar_relationships",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/ContactMail.tsx",
+    "kind": "function",
+    "symbol": "ContactMail",
+    "fingerprint": "27738e7b42341e6f4915102f7c3a6c3e10f52fc7f0c93555b05dfcd137bb1d4b",
+    "reason": "This component presents one contact's recent threads and launches the existing detail/composer surfaces. Queries and sending have separate owners. Its contact-derived source contract differs from the Timeline thread contract, so superficially similar markup is not enough reason to merge them. The current read/navigation role is cohesive.",
+    "reviewedBy": "Codex portfolio_calendar_relationships",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/DirectoryResults.tsx",
+    "kind": "function",
+    "symbol": "DirectoryResults",
+    "fingerprint": "54664ad3162444fd0a4536d174ffd48217886a0021b0998af4e49aebd4a2ba25",
+    "reason": "This is one paged Directory result list with each result's add-target command. Canonical query and mutation hooks own transport and persistence. The84-line body contains related row states, pagination and selection, with no unrelated orchestration.",
+    "reviewedBy": "Codex portfolio_calendar_relationships",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/GovernmentRelationships.tsx",
+    "kind": "function",
+    "symbol": "GovernmentRelationships",
+    "fingerprint": "86a6f8b4d1620e2d255ce484effae1192feea990c4e6efb874a3bb85878267e4",
+    "reason": "This page composes saved-target priority groups and navigation, delegating tables, recommendations and drawers. It contains no independent network writer. Label-based group selection is small and currently bounded; a typed group descriptor becomes useful if those labels or localization change, not a new workflow registry now.",
+    "reviewedBy": "Codex portfolio_calendar_relationships",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "085d41cdae4c7395f952951cfcf24d288456fa9d77daa01f49779c5f40cf0fd3",
+    "reason": "Composes one mail draft and its explicit review/send dialog. The new editor and safe HTML codec own rich-body representation and display; existing recipient, mailbox, signature, attachment, send and authority owners remain canonical. This patch replaces textarea/plain review with the editor and frozen HTML snapshot; no transport or policy moved into the composer. The file404/function369 signal is reviewed explicitly, not waived by splitting markup.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+    "kind": "function",
+    "symbol": "MailCompose",
+    "fingerprint": "0307558bf27a23b765bab9ce4e78ad1149bf88f2896ead69313805a8e241ede0",
+    "reason": "Composes one mail draft and its explicit review/send dialog. The new editor and safe HTML codec own rich-body representation and display; existing recipient, mailbox, signature, attachment, send and authority owners remain canonical. This patch replaces textarea/plain review with the editor and frozen HTML snapshot; no transport or policy moved into the composer. The file404/function369 signal is reviewed explicitly, not waived by splitting markup.",
+    "reviewedBy": "Codex shared frontend integration review",
+    "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/RelationshipsPage.tsx",
+    "kind": "function",
+    "symbol": "OrganizationRelationships",
+    "fingerprint": "be105aad57fbacca6990e7afe7cc05ae07e98de2ca3e17d42a0d0b0fc299d0a3",
+    "reason": "This component composes one client's roster search, chart/list projection and review navigation. Hierarchy inference is in contracts/chart and mutations in ContactDrawer. The review dialog is a view of the same roster, not an additional writer. The181-line body is mostly page projection.",
+    "reviewedBy": "Codex portfolio_calendar_relationships",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/relationships/TargetDrawer.tsx",
+    "kind": "function",
+    "symbol": "TargetDrawer",
+    "fingerprint": "40ac7796dbbf9e732a5da49f665601514edb78536fff887936a03a3f2c160c0f",
+    "reason": "This drawer presents one saved target, tier controls and removal/navigation intent. Contact mail and member notes delegate to their existing components. The target lifecycle is cohesive and no Directory service or provider logic is embedded. Further dialog extraction is justified only if those intents gain an independent lifecycle.",
+    "reviewedBy": "Codex portfolio_calendar_relationships",
+    "reviewedOn": "2026-10-11"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/activity-mutations.ts",
+    "kind": "function",
+    "symbol": "useChangeActivity",
+    "line": 19,
+    "nonblank": 145,
+    "fingerprint": "f55d7f9d31b61ca435bd43bf3ee1c96aa29483c197b8e33ec36b1b537c1157d9",
+    "reason": "Owns one activity mutation's actor-bound lifetime, single-flight guard, ambiguous outcome, explicit latest review and cache refresh. `changeActivity` owns HTTP and receipt checks. Retain this state together so uncertain dispatch cannot be bypassed by a UI redraw or automatic retry. A generic mutation wrapper would conceal domain-specific review semantics.",
+    "reviewedBy": "Codex portfolio_prospects_files",
+    "reviewedOn": "2026-10-11"
+  }
+]

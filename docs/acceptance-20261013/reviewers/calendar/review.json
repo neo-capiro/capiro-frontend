@@ -1,0 +1,634 @@
+{
+  "reviewed_at_utc": "2026-10-13T11:15:43.506451+00:00",
+  "source_commit": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "published_head": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+  "source_application_tree": "8d3cb77ba96da3656877bc73a2eb51d58af94675",
+  "published_application_tree": "8d3cb77ba96da3656877bc73a2eb51d58af94675",
+  "ledger_path": "docs/portfolio-31/handover-2026-10-11/Portfolio-345-Row-Reconciliation-2026-10-11.json",
+  "ledger_sha256": "bfa16aee023824051229c1c3ae7b4dc8369fdaf23fd47fa068b45f54c21871bf",
+  "assignment_sha256": "4f40d5b8af7691c39b776cdb28a92eaa3898163805696c771c6f78ccf0e5dbd6",
+  "phase_criteria_sha256": "9430fb6c01266bcf0778aee6f9a5084502f7f2e0f9f5f16c3e8d6cfc7c59a94e",
+  "assigned_ids": [
+    "ENG-calendar_list",
+    "ENG-meeting_details",
+    "ENG-meeting_library",
+    "ENG-meeting_shared_feed",
+    "ENG-meeting_assign",
+    "ENG-meeting_edit",
+    "ENG-meeting_share_artifacts",
+    "ENG-meeting_unshare_artifacts",
+    "ENG-notes_list",
+    "ENG-notes_add",
+    "ENG-notes_edit",
+    "ENG-notes_approve",
+    "ENG-debrief_list",
+    "ENG-debrief_draft",
+    "ENG-debrief_create",
+    "ENG-debrief_edit",
+    "ENG-debrief_approve",
+    "ENG-attachment_approve",
+    "ENG-prep_generate",
+    "ENG-prep_progress",
+    "ENG-prep_cancel",
+    "ENG-prep_refine",
+    "ENG-prep_monday_read",
+    "ENG-prep_monday_save",
+    "ENG-meri_session",
+    "ENG-meri_dispatch",
+    "ENG-meri_remove",
+    "ENG-upload_prepare",
+    "ENG-upload_confirm",
+    "ENG-upload_extract",
+    "ENG-meeting_create",
+    "ENG-prep_pdf_attachment",
+    "ENG-prep_export",
+    "ENG-debrief_export",
+    "ENG-calendar_navigation",
+    "ENG-calendar_sync_ms_window",
+    "ENG-calendar_sync_ms",
+    "ENG-calendar_sync_google",
+    "ENG-calendar_week",
+    "ENG-prep_sender_select",
+    "ENG-meeting_attendees",
+    "ENG-meeting_join",
+    "ENG-meeting_filters",
+    "ENG-meeting_capabilities",
+    "ENG-prep_sources",
+    "ENG-debrief_voice",
+    "ENG-debrief_source_manual",
+    "ENG-debrief_source_notes",
+    "ENG-public_event_detail",
+    "ENG-public_event_follow_state",
+    "ENG-public_event_capture_state",
+    "ENG-public_event_open",
+    "MCAL-001",
+    "MCAL-002",
+    "MCAL-003",
+    "MCAL-004",
+    "MCAL-005",
+    "MCAL-006",
+    "MCAL-007",
+    "MCAL-008",
+    "MCAL-009",
+    "MCAL-010",
+    "MCAL-012",
+    "MCAL-013",
+    "MCAL-014",
+    "MCAL-015"
+  ],
+  "category_counts": {
+    "existing_behavior_missing_evidence": 38,
+    "authentic_backend_provider_dependency": 24,
+    "actual_missing_implementation": 4,
+    "selected_figma31_mismatch": 0
+  },
+  "open": 66,
+  "accepted_native": 0,
+  "offline_subcriterion_unblocked": 52,
+  "inspected_paths": {
+    "apps/web/src/features/portfolio/calendar/CalendarPage.tsx": {
+      "git_blob": "541dc22bb99105eb1440df5b181ef4e0558dfd91",
+      "sha256": "e28e6310d7b99394510cec58039f74ceb60adc7ac7910af3369ed2b0fdf17aa6"
+    },
+    "apps/web/src/features/portfolio/calendar/queries.ts": {
+      "git_blob": "174016fb3ee7cb8e0166a180ea0cd7d02c6570cf",
+      "sha256": "01e9553c6a4ef2cb11171b6d61bf4d6229ab10c4cb786b39671de443f7df735c"
+    },
+    "apps/web/src/features/portfolio/calendar/feeds.ts": {
+      "git_blob": "cf37b4e908a8d976b9ff8654571f6ea6b01ae1e1",
+      "sha256": "e46c6dd4f6f41f3e27cb834498d067f3970caf7cd9d6186148b46b2f69745382"
+    },
+    "apps/web/tests/browser/calendar-boundary.spec.ts": {
+      "git_blob": "18ff7ecd07a96e811a55474a7ded43f7df2dbb2b",
+      "sha256": "98b51e644314deaa4b5c2b92d14d95c5d0741fb8c11ff4f85c2e75e04017f248"
+    },
+    "apps/web/tests/browser/calendar-lifecycle.spec.ts": {
+      "git_blob": "fa7fec4c49b876ec58f0538ca0b4ade391d00fd0",
+      "sha256": "f74d8b284991958fe4bed9fa2952e4a7d52f230e88f4102ce993f15741d199e8"
+    },
+    "apps/web/src/features/portfolio/calendar/MeetingDetail.tsx": {
+      "git_blob": "e028f8a00b135cf7d564cfa088a5101d6e0aec80",
+      "sha256": "c2fcee319ca80cada332c9e8fe0aa09277b876aef4b29a7e8a6c82cdb4ea983c"
+    },
+    "apps/web/src/features/portfolio/calendar/MeetingIdentity.tsx": {
+      "git_blob": "654fa7600d6bf50954b9791e462befe0296ea7f4",
+      "sha256": "996db99bb02dccfa7d36a60921bbb6f303f7e65ada7776514e32e92114d5d45f"
+    },
+    "apps/web/src/features/portfolio/calendar/lifecycle.ts": {
+      "git_blob": "12f264c660ce3a278de71ee435661bdb02ef78aa",
+      "sha256": "a3d50316a66389f65f666ce0b11726edc584fd49e2a3ec72d312e403d4ca6491"
+    },
+    "apps/web/tests/browser/calendar-sharing.spec.ts": {
+      "git_blob": "ba1abf468b0a649620cfb5566c303c1e5fae9919",
+      "sha256": "0ee7273f96b8c01cf9af22739d436ab207dcd3dd21f9d69dd8871bd2809f7cae"
+    },
+    "apps/web/src/features/portfolio/calendar/library/MeetingLibrary.tsx": {
+      "git_blob": "2acd20091b226c54f970cb394101ac5b78e37ea5",
+      "sha256": "c9ab6e6d412063559f6d492ba2afaa1c427a315ba197d74a1534a32cb62c4a0f"
+    },
+    "apps/web/src/features/portfolio/calendar/library/api.ts": {
+      "git_blob": "8987f4a75f8fa1fb16450798ab346911501fd61e",
+      "sha256": "6992b8eba9211b0e6376f9296867075adb446c5de9628169f216a2cd67cd6d4d"
+    },
+    "apps/web/src/features/portfolio/calendar/library/contracts.ts": {
+      "git_blob": "1ba9eb5d8bb35eb58204d96ca81c3d6de8be2e7f",
+      "sha256": "2a65531cb5207e2d8ade98ca8146a8670e80d0147d2a6db7b6d19e534b8bf882"
+    },
+    "apps/web/src/features/portfolio/calendar/library/hooks.ts": {
+      "git_blob": "91a9409290ab97cbea111898308715ed3a8367ec",
+      "sha256": "3a343e5969d21497e2b2199c87426f01dd7b71d53b1a806c02ca7af65aaafb74"
+    },
+    "apps/web/tests/browser/meeting-library.spec.ts": {
+      "git_blob": "dd169df0b31f83c065c03f4599978b310d733c50",
+      "sha256": "ab51fe5352b9cbe5db0d8ac46d3ac817ad01ca75750748a5cf64c80e183d492e"
+    },
+    "apps/web/src/features/portfolio/calendar/library/SharedMeetings.tsx": {
+      "git_blob": "594140323b82af98f33db82335ab109a7a87f97e",
+      "sha256": "cc9180c76585f6ab41d31028cdc9cac43231b4e674ba321b2db0babd1f014596"
+    },
+    "apps/web/src/features/portfolio/calendar/sharing/contracts.ts": {
+      "git_blob": "350ee8c9ae2d3b77dfead4d2505f3e311de4c685",
+      "sha256": "92f9f70ad1a78632dd267efbb91b72f3f0d714efcd0f21b77b38c6bba91cc290"
+    },
+    "apps/web/src/features/portfolio/calendar/library/MeetingAssignment.tsx": {
+      "git_blob": "2f239d513d4d4e888ccb0d6cc16cae86326b8ed9",
+      "sha256": "c8bc380f3de3b63882e3804e026e162507e5121ba31fbd981a0264b925cbe330"
+    },
+    "apps/web/src/features/portfolio/calendar/MeetingForm.tsx": {
+      "git_blob": "855f5a9e4f525f16d7c20bd778f303495041149a",
+      "sha256": "4e330177ee89a55f5f2995b363eabdbde3ad7bebcc6db688473c7e956242a2dc"
+    },
+    "apps/web/tests/browser/calendar-client-clear.spec.ts": {
+      "git_blob": "55b0a6fdd105f5933aad80bd48d425a4a7ad78aa",
+      "sha256": "0171c3c5cec47c8c723531b4f63e5955c131cc0db772ed56f71d97318216cede"
+    },
+    "apps/web/src/features/portfolio/calendar/meeting-save.ts": {
+      "git_blob": "e4db390faaec22ef23e8eb7b7ca62017b3b8cc4d",
+      "sha256": "2a777f94c992ab6b6947e5306088415b2c61e0de8a9103eb50af9c83ec87a85f"
+    },
+    "apps/web/src/features/portfolio/calendar/mutations.ts": {
+      "git_blob": "50472e82940445f03790ccf792b8d0de821d077b",
+      "sha256": "f60e03a9e739e364a54123486abee3e5eb649cf765e2b5977d847f3782056d4e"
+    },
+    "apps/web/tests/browser/calendar-meeting-receipts.spec.ts": {
+      "git_blob": "ec4c1d7bfc2ea2cd2e8afb98cf1aa766f76aac13",
+      "sha256": "5928dd62a953b87ed33d464e6f4cfb1c1302201b71975bc7fdd2eea0858bb01f"
+    },
+    "apps/web/src/features/portfolio/calendar/sharing/api.ts": {
+      "git_blob": "2da13d52ffd66de1047bfb65f2b3b785f8471d95",
+      "sha256": "7e10d160f1b72202393b8921679958faf5c3cf576a363a7c6641ac5b20c6194a"
+    },
+    "apps/web/src/features/portfolio/calendar/sharing/targets.ts": {
+      "git_blob": "09ab606b96a63b292eb8fabe7fa17915c4476d09",
+      "sha256": "5cb7be0f1f33e49917404a47c8b5e9a9716b665a16d7e6bb48d074a26e2d3a8d"
+    },
+    "apps/web/src/features/portfolio/calendar/sharing/fence.ts": {
+      "git_blob": "b5d7a84596e6ed998c3416ad7321f402dca7ce38",
+      "sha256": "ac321a98f167846eb06ca869ada1bdc8a3f2a4b62a50bc00b3ec1ddbeb8abc99"
+    },
+    "apps/web/src/features/portfolio/calendar/MeetingArtifacts.tsx": {
+      "git_blob": "29fcea23f403fc5ffefd3fd92c1319622ce68af2",
+      "sha256": "314c3d1c5fedb548d77b926aa2664deb4d82b11468b3d39546d8c19719c94809"
+    },
+    "apps/web/src/features/portfolio/calendar/contracts.ts": {
+      "git_blob": "8090e90cae163eab745a1321816ecef12ee29c77",
+      "sha256": "7a20373d12e29ea74dd088e31ef3a2f013c911700772ee13c597d2d489688174"
+    },
+    "apps/web/tests/browser/calendar-artifact-receipts.spec.ts": {
+      "git_blob": "b6ca81e03233a0c0a019652b3ef2a87be7eca0d1",
+      "sha256": "f37b063199dcdea0c1f098a50a1b6ba48e61992c492f05326966c6d890521f06"
+    },
+    "apps/web/tests/browser/meeting-review.spec.ts": {
+      "git_blob": "d71fb9107769b89f5460b323730767046c3f3d79",
+      "sha256": "851510fe08497f7c14f14755c77f590fb82b72169bb1a5bbe1b986b08c53f331"
+    },
+    "apps/web/src/features/portfolio/calendar/artifacts/api.ts": {
+      "git_blob": "32734e35d6057bbf09013fae6a64c7d994b1609e",
+      "sha256": "cee1fe8a5b7c8ace24b7fa5125e3c7c12e0cda7b391e3c6fdd868654556ad3cb"
+    },
+    "apps/web/src/features/portfolio/calendar/artifacts/contracts.ts": {
+      "git_blob": "1c53bfc9489864b54ee7ef4edf8a04ba2e65ef5b",
+      "sha256": "312827f14dd931bd856589e52bb9ff12af2fcd41f1d30403c77df2606af9d87d"
+    },
+    "apps/web/src/features/portfolio/calendar/artifacts/useArtifactMutation.ts": {
+      "git_blob": "97cd1e669cd410dbb182b949f799ebb8004315dd",
+      "sha256": "443bdfe2ac7830a73fc07aef22f6c8d1c3118242ece77e7f54dd8e1f34ebd413"
+    },
+    "apps/web/src/features/portfolio/calendar/debrief/DebriefGeneration.tsx": {
+      "git_blob": "1923e3ff43f0615b87476b343cdfc914da902715",
+      "sha256": "44cd0e5e3cb18669419a5705dc8019817370a3ac67283644a670e6b9e547f05c"
+    },
+    "apps/web/src/features/portfolio/calendar/debrief/api.ts": {
+      "git_blob": "616dc7a19c5db617e7eff7ed16d5345e53292562",
+      "sha256": "e22c29a3c4f5860901dc78dda868718b146578743299d4661e3e92143772bbf5"
+    },
+    "apps/web/src/features/portfolio/calendar/review/api.ts": {
+      "git_blob": "670e834c417e5c9ee649c1c09bc9beddc6fe63e7",
+      "sha256": "7da383ee0c1df9e963d596b8704b2ae53af0e46667315ff6b3d070f26d8c9360"
+    },
+    "apps/web/tests/browser/manual-debrief.spec.ts": {
+      "git_blob": "162475c6416f014e9cd3244f914e5710fd83856e",
+      "sha256": "baa61f651707935b274c9937cb1f45d7b8b893ac8af3db6901147cbb60705c79"
+    },
+    "apps/web/tests/browser/voice-integration.spec.ts": {
+      "git_blob": "bc1d393b5086fa0f8a9681743daa3b8ce5d9f63d",
+      "sha256": "0d52dfd98950b1b5cb00c8e2bf5c54c0cb7a99220efa96d8d1ff5deb8c0b6fd4"
+    },
+    "apps/web/src/features/portfolio/calendar/review/useAttachmentApproval.ts": {
+      "git_blob": "6d7566d14f20d0eea10085f05019860956cecef0",
+      "sha256": "ab1d32e82658f432ab32012cdfd2a8efe209a0d9d8204a3dd5e767dc371fe5e1"
+    },
+    "apps/web/src/features/portfolio/calendar/review/MeetingAttachmentApprovals.tsx": {
+      "git_blob": "dae506061d23799f760fe3df539e88d23e5c7ea5",
+      "sha256": "d2c32ba9d6805f5bf43880041f2235128ed5efcc27c96854e80ee0a790e4da31"
+    },
+    "apps/web/src/features/portfolio/calendar/preparation/MeetingPreparation.tsx": {
+      "git_blob": "a2013ab283e75fcc5f458a160e437aa42273a84b",
+      "sha256": "f7b5703197b25e2af9f2a4f2badd567961e3a91e790b6011d5be700ddf9ffbc8"
+    },
+    "apps/web/src/features/portfolio/calendar/preparation/api.ts": {
+      "git_blob": "d88704ffdf083ac6e0c625693455a28b7ea41cae",
+      "sha256": "35259352dbf411d939e2ddb587afb6282b8265a5ac0b329c8743397c048a7173"
+    },
+    "apps/web/src/features/portfolio/calendar/preparation/hooks.ts": {
+      "git_blob": "0350d5e7c45f3f5ca7a242544b4ee25b226a1e07",
+      "sha256": "0a3c7097cd2a1fb0c9c3b903ac890cecdf316cf6d4b5e8de5923bf883f2db0a1"
+    },
+    "apps/web/tests/browser/meeting-preparation.spec.ts": {
+      "git_blob": "4e46c1785dad39df903622997463801118ae38c9",
+      "sha256": "6f123f0a9c75b391f21e8d50d0d1d5a4acb5a663560da37778b2101cf38adac6"
+    },
+    "apps/web/src/features/portfolio/calendar/preparation/PreparationProgress.tsx": {
+      "git_blob": "621d327c6904eb68826779eea6d4cde99c5683dc",
+      "sha256": "c2e60ed865483d4e3c638e27fab7959237e3a40480f3f81b1de9b3c525633c8d"
+    },
+    "apps/web/src/features/portfolio/calendar/preparation/PreparationEditor.tsx": {
+      "git_blob": "f2fd2567e84a2aaa9b437fbd07a51cb27f3ee855",
+      "sha256": "9efed2684aa971d0d5144caa1b7b8c7ed1f80da2c4d8619425d2b783fa8d760e"
+    },
+    "apps/web/src/features/portfolio/calendar/preparation/editing.ts": {
+      "git_blob": "86339a07737a315eabfaf0cb4e4fad034f3cb63c",
+      "sha256": "7ad87f29b95e27b7f030ac29e8fd22e216517457a5530a64c5f489b959dfc8ec"
+    },
+    "apps/web/src/features/portfolio/calendar/preparation/PreparationSettings.tsx": {
+      "git_blob": "b1a0a5eb35f2232305a6afc6a7dcb5640e0056bc",
+      "sha256": "10fc88f0740cb86db3b181cda97f2843a4c2565f9c9a65c98c8b8895c7440f88"
+    },
+    "apps/web/src/features/portfolio/calendar/attendance/api.ts": {
+      "git_blob": "766b1643693fcdc4871918900dd75c01fe32163f",
+      "sha256": "beb8aff51e89c6412086495af364e56fac676506abfcc6612bed03d71055449a"
+    },
+    "apps/web/src/features/portfolio/calendar/attendance/queries.ts": {
+      "git_blob": "1e98179edae14d419e2897d4a26245d85c2f174e",
+      "sha256": "b5233e53bb5bb0bab65d3f493311b92390e45215827549536652e8e2a4b5d142"
+    },
+    "apps/web/src/features/portfolio/calendar/attendance/MeetingAttendance.tsx": {
+      "git_blob": "18bc7c4976e32a650abf465ab2fd900b14408cb2",
+      "sha256": "c4da236b2956d03f8738ab516122940363cbea3a782a1879ac9cda3d3eea9b57"
+    },
+    "apps/web/tests/browser/attendance.spec.ts": {
+      "git_blob": "dc2f996f6c7b587574b9c1ed5ed543e9521b99e0",
+      "sha256": "6d408c2d7b193388ade7ea18ff1e9dcc75925566a0b23702c0b3bebaebb2425d"
+    },
+    "apps/web/src/features/portfolio/calendar/attendance/SendMeriDialog.tsx": {
+      "git_blob": "3e9fe72858bc2fc3706eec37ca67c9da94c0e92b",
+      "sha256": "a7a947adba2092b904017b0130c304c4142b28fac468ef23096d49d41cb28e7d"
+    },
+    "apps/web/src/features/portfolio/calendar/library/MeetingTranscriptUpload.tsx": {
+      "git_blob": "1ae15390a98ced61404aa3880a1a4e359d9b070f",
+      "sha256": "f082f0b62d43af4e258127e35d1a0119e661f7847baf424958fc62d23649b66e"
+    },
+    "apps/web/src/features/portfolio/files/upload.ts": {
+      "git_blob": "4149e81e64c944fc983520950ec6ffc50484c9e9",
+      "sha256": "38c381a94475cefb8582eb29dc40b6cfbe6d5a6f6e7efc7ad07322d0da7ae883"
+    },
+    "apps/web/tests/browser/meeting-voice.spec.ts": {
+      "git_blob": "0bff8817d262db681349e534e5c01f5820e56e81",
+      "sha256": "7efc984fb732ee131e93c5501049a61088b713e6a346f5bc3baf188122deac82"
+    },
+    "apps/web/src/features/portfolio/calendar/documents/api.ts": {
+      "git_blob": "7740720c0169f89f3fd070f5fc7f14c1ae026827",
+      "sha256": "4953182d30e8be9bc709b797c0b8c4f58c5c920704dfbd15d9f5a32e01aa2006"
+    },
+    "apps/web/src/features/portfolio/calendar/documents/contracts.ts": {
+      "git_blob": "db1a27bfb534d9e5aeec1f4b5753dae512123fca",
+      "sha256": "3295a810f2d38ff530f56150d0617e2348d310e765e19f87c07aebf0862ba496"
+    },
+    "apps/web/src/features/portfolio/calendar/documents/PreparationPdfAttachmentReview.tsx": {
+      "git_blob": "bdc4d90dde3af2adb2d79c51b2145f7447fca737",
+      "sha256": "b0d708d0015a8f57c6002a5134b81be5cef63ba60c30f46c20ede99f3f421e58"
+    },
+    "apps/web/src/features/portfolio/calendar/preparation/PreparationDocumentActions.tsx": {
+      "git_blob": "e81a7022a80b7da38477f9b65b103195fdd3be07",
+      "sha256": "47eb4d64a155534fe011c95b0994f9218a43b671d1fd15131053a785f1f1c35d"
+    },
+    "apps/web/tests/browser/meeting-documents.spec.ts": {
+      "git_blob": "95685d8911e219a929b723831577fb0519ae0bfa",
+      "sha256": "bf101a0fa353ae785b8ce6035acb70ee59ac46b67fc863730870c906bd623d78"
+    },
+    "apps/web/tests/browser/meeting-documents-calendar.spec.ts": {
+      "git_blob": "97237efade5e79c36d565dec66a1c8fc92ce0db4",
+      "sha256": "2ad5faf8dd3099bcad520b8ffac1973fe30ad8cd34e429f6f460b9f379051062"
+    },
+    "apps/web/src/features/portfolio/calendar/documents/useSavedDocument.ts": {
+      "git_blob": "9a64605f5ee6b293e5890757d39bac1cb766b980",
+      "sha256": "2f5e36053d585cb281be667f2f3a38d93ec719cdc564afa9f631c75aceeeeb48"
+    },
+    "apps/web/src/features/portfolio/calendar/documents/SavedMeetingDocumentPreview.tsx": {
+      "git_blob": "487d94613bf1effdc910797c516a1d8389dae651",
+      "sha256": "b0a3baaafc390bcd3cfc7cb06ac15f6cc6c42962a005ea31c3232c7cece98dd5"
+    },
+    "apps/web/src/features/portfolio/calendar/documents/print.ts": {
+      "git_blob": "f353dc17eeee1cef2360f3cedbbf602dbdc41525",
+      "sha256": "a506a588f3cb058f22db000fd982a7e9a27c2c67f5d5ab69d3cd6b3d50fc1194"
+    },
+    "apps/web/src/features/portfolio/calendar/range.ts": {
+      "git_blob": "14d04f01d484136887f48f7836001158a2ddbdca",
+      "sha256": "63855d51fd5d0474f3c7a012b4d9076f442b7dc462211913592d2d1e380e119a"
+    },
+    "apps/web/tests/browser/files.spec.ts": {
+      "git_blob": "2030a6bbe186a0b18884ae8b933ad9d3d74af5b8",
+      "sha256": "8b192320d37c1abeeaa12c71aff379547e93f4cfeabd11055623af600fce3ac8"
+    },
+    "apps/web/src/features/portfolio/calendar/sync/api.ts": {
+      "git_blob": "555f88d4cd12e4675c4e52631f8689b76e128ae6",
+      "sha256": "b84accc74cf679915839bb42e0da9823b9bfb8828bf75462b406fb6ea4cf5c0f"
+    },
+    "apps/web/src/features/portfolio/calendar/sync/useCalendarSync.ts": {
+      "git_blob": "ec963ccbcdafafd5c7c999ac5a13d8d2fb0409e8",
+      "sha256": "9aaadc53e740a02a660c447d1d45d3acd0632f25045c84e27da8e94ae1a900be"
+    },
+    "apps/web/src/features/portfolio/calendar/sync/CalendarSyncDialog.tsx": {
+      "git_blob": "22a0b5116a96b7594ef12ce353d652c6297dc0c9",
+      "sha256": "71b740b23317b1dacfc29f922aa50ecb874657c1371b6f33348f6cb0bc61385b"
+    },
+    "apps/web/tests/browser/calendar-sync.spec.ts": {
+      "git_blob": "dd22523ce08f16c88e3d9e147882a35e9524b242",
+      "sha256": "37ddee6bcfe4ceb662ffb77b6f27afe3ae4748522f962f6f0ce60f78817f7745"
+    },
+    "apps/web/src/features/portfolio/calendar/CalendarGrid.tsx": {
+      "git_blob": "e0331eb4f51aad7e831579f47090b83ebd091d82",
+      "sha256": "582ba7cd2e2b7af511170578b78c509072bde256c1229a61f30163c8824859d0"
+    },
+    "apps/web/tests/browser/calendar-planner.spec.ts": {
+      "git_blob": "0793e14a9ca178c912b869ac2bd20b8674c81a3f",
+      "sha256": "b85bc1e4bc55a07945ce4f4e7f9a35022ed992c9fff9c1e4b6944c136b7655e6"
+    },
+    "apps/web/src/features/portfolio/relationships/MailCompose.tsx": {
+      "git_blob": "3ee10919b0b929f75fd4f8c336f212d2c7294e55",
+      "sha256": "3e9e68e1e2566376e383dc47ed167bb9af6fcf3a9f4ecef73cdb44a958def093"
+    },
+    "apps/web/src/features/portfolio/relationships/email/mailboxes.ts": {
+      "git_blob": "0bcacaa7f98c5c3d2138053a8884196de1987622",
+      "sha256": "631b2e6f00b01fd8a4d5868c9989d3b80e47446e7c5db09d4e80714ecc3659c6"
+    },
+    "apps/web/src/features/portfolio/relationships/email/send.ts": {
+      "git_blob": "acfea1acc11f4a41ea091e2d5e416c43c54daa05",
+      "sha256": "df67ec63ab32167ce6b60f28c4b8902700ae735b534936021ec9dcfe7f881aaa"
+    },
+    "apps/web/tests/browser/email-compose.spec.ts": {
+      "git_blob": "9ef2551a7cacadde78316c2e5289f96f23296817",
+      "sha256": "c61e2e708f1a7a079570478891cd17982586f9bf262d8e979931a7976ccd90c0"
+    },
+    "apps/web/src/shared/portfolio/domain/website.ts": {
+      "git_blob": "d480cb72e9e33a8b30886763faea293bbd0bb920",
+      "sha256": "0b8bf9ce604593547a7e7773cd22d001d9a737253a4713ffdcb663c51e5bb462"
+    },
+    "apps/web/src/features/portfolio/calendar/MeetingAgenda.tsx": {
+      "git_blob": "469d6247b291502fad7acc688cd9cb8443503171",
+      "sha256": "24b58b634b151a8f0ed5a14837838b3a63c0a5f7590482725720a06e6cf4491d"
+    },
+    "apps/web/src/features/portfolio/calendar/useMeetingClock.ts": {
+      "git_blob": "e2fe86bf7ca19926ec001dd727b4de05023827b0",
+      "sha256": "6efce8a5ce1e88f2e9ca25378923cf48c78cca3027abd7cb665635700caefbbe"
+    },
+    "apps/web/src/features/portfolio/calendar/access/queries.ts": {
+      "git_blob": "6271ca83bdb652edb8167599ec453b4fd8ac0085",
+      "sha256": "c18cccb4455f0db9ec543acea4b72b46595cf4962b6db8f62ccae80f32cdb7d9"
+    },
+    "apps/web/src/features/portfolio/calendar/access/contracts.ts": {
+      "git_blob": "d2c63b590e56720b7c8344b24219ffb1a8722bfc",
+      "sha256": "45a2680fb440fbd0b49fd35c1e558de3b8212701dfae2103132d9952bff2d1e7"
+    },
+    "apps/web/src/features/portfolio/calendar/access/useDispatchGuard.ts": {
+      "git_blob": "0825b11de86b95bbc6b2e871ee425bfd07539590",
+      "sha256": "402bf5d0d4d825f3cfcae7b32597ee13d9236ec5ea5eb5b412dd0a616a2d9c71"
+    },
+    "apps/web/src/features/portfolio/calendar/preparation/PreparationContent.tsx": {
+      "git_blob": "47dbb28b1a09f6a4e3fda9073d86cb07d4008015",
+      "sha256": "8f048c5b2591ae2963537bcc575179f287632baf9761e1ce809a5a3561e1a32c"
+    },
+    "apps/web/src/features/portfolio/calendar/preparation/schema.ts": {
+      "git_blob": "12786ad379882e579465cf631aad61e8fc1ae478",
+      "sha256": "b9699bb7e19abc68645d3e650573691b92c698608e76cd1d67f9940c31755d79"
+    },
+    "apps/web/src/features/portfolio/calendar/preparation/email-evidence.ts": {
+      "git_blob": "a134c833b3bd0f107856768a1f5e7a2bc3fe1e7d",
+      "sha256": "72e36ba2bd0bb6aa8730d5453e3afe76daf972e284668800570c0ae9d4dc6fe3"
+    },
+    "apps/web/src/features/portfolio/calendar/debrief/voice/VoiceMemoSource.tsx": {
+      "git_blob": "3d4812df76951582fe1a8a73ab0bc80a397e4c5a",
+      "sha256": "a78bd321fa28f85aac62ce46b8d8131b07e3df7e5dc798344d18b526fd3924e9"
+    },
+    "apps/web/src/features/portfolio/calendar/debrief/voice/source.ts": {
+      "git_blob": "90848a46e0960d2eccc004941576c6987b9bf033",
+      "sha256": "5db13f05bcb17857ac10ab3fade485f76cc639b48ebc11a03b84a478e3cfaff2"
+    },
+    "apps/web/src/features/portfolio/calendar/debrief/voice/useVoiceSource.ts": {
+      "git_blob": "f6fb2dbb477ac7c169a07fb6473a5d9bea9aef1e",
+      "sha256": "2bc0bf562618386709c5106d2ca10545d6ce5d5f9a49d4fa9e8c7cc754025679"
+    },
+    "apps/web/src/features/portfolio/calendar/debrief/ManualDebriefSource.tsx": {
+      "git_blob": "5fa3037662086156dba655d3e374590bde16e16a",
+      "sha256": "c63ebf64e830d8febc1f00ec1ef3e5080ed2fb0b6385a04d0ad9ff4670ee82f4"
+    },
+    "apps/web/src/features/portfolio/calendar/review/useSavedMeetingNotes.ts": {
+      "git_blob": "1f3ff8c9ff21219a23a2c2d70def366da4222dfd",
+      "sha256": "e4ed036333544508ebb56cd217c5c5c36a4bb5c5b1577a5c8e4d6b1b6a871623"
+    },
+    "apps/web/src/features/portfolio/calendar/review/SavedMeetingNotesSource.tsx": {
+      "git_blob": "a2c4143a64ff4684d411360a3e3655f567d8fa8f",
+      "sha256": "b4c5d6eb5fa6275f00764d4a92c529d2c7287cb842ebdb9ac441891f0261c79b"
+    },
+    "apps/web/src/features/portfolio/calendar/public-event/api.ts": {
+      "git_blob": "2850f0538aa5eca08d6417b3cd847dc51330f60f",
+      "sha256": "7a45af06800cd3398a8c83726bd136766d0e7f115ff11038c7a66d7ae53a563d"
+    },
+    "apps/web/src/features/portfolio/calendar/public-event/contracts.ts": {
+      "git_blob": "7ba0eb10e0aec73b655fe25bf5608f5c1e8dcb96",
+      "sha256": "49de43123fd0224bfd5763c7ef52c4978f15cb0eab7deafa21b60dbb7f014bfe"
+    },
+    "apps/web/src/features/portfolio/calendar/public-event/PublicEventDetail.tsx": {
+      "git_blob": "f7c3f55bcd852d6101e1010a2fea1467e5e10dd2",
+      "sha256": "bbfac9596a6a0c8fa2e5b6e5b5c738220d2ba1658cd9af0a02cafed52bfe35f2"
+    },
+    "apps/web/src/features/portfolio/calendar/public-event/usePublicEvent.ts": {
+      "git_blob": "b5ab7d08a2e68b5e48c12e5aa871a28146054a7d",
+      "sha256": "f3c7ef33fbb5feb0f5ca80be658828fd6d9f8bbde85c09ac1707feb0ad621062"
+    },
+    "apps/web/tests/browser/public-event.spec.ts": {
+      "git_blob": "6b304bb362891513c590f904dbeb9bde5909ef78",
+      "sha256": "193ae744b03d8957ce147e73d935bcdb017e89553334d48c372393aff8c37dc2"
+    },
+    "apps/web/src/features/portfolio/calendar/public-event/presentation.ts": {
+      "git_blob": "ca32d3e8b4b4176ab8d0a4041fe927d88a8e6e98",
+      "sha256": "fc86085e8385eb8474fa26f593da87ac9aad40e8f8d1f7f9b3eebfcfcb2b326f"
+    },
+    "apps/web/src/features/portfolio/calendar/planner-feed.ts": {
+      "git_blob": "130dd5b994f01185a9b0c68944c317f80d8af9d0",
+      "sha256": "b0c2c5b9268b9177facbb6c51a8a8b433201fac3a7595f95259610ecfcfd98cb"
+    },
+    "apps/web/src/shared/capiro/operations/calendar.ts": {
+      "git_blob": "7508823aa6323e6a0bf6960c48f32daa29dddd94",
+      "sha256": "f577c3312cf45048325434190473b127428204bed6f453e81c3d95f071890ec2"
+    },
+    "apps/web/src/shared/capiro/operations/intelligence-funding.ts": {
+      "git_blob": "adaa54b57dc32e159171727fd8a08f75b5e1bb6e",
+      "sha256": "f141ae1ed29eafdec74b63092021ac2cf83bb8d8eccd282d7b675f8847183bbb"
+    },
+    "apps/web/tests/browser/effective-dates.spec.ts": {
+      "git_blob": "ba13d9843cb6915c229a23786fabe9adcf68281f",
+      "sha256": "5712bb830768de7831a746bdc8e5b31a480bf32543382e12f2f9b4f9c2c5d54c"
+    },
+    "apps/web/src/features/portfolio/calendar/effective-feed.ts": {
+      "git_blob": "9e15c79341f8a70da3adee43789ae943594effcf",
+      "sha256": "c05279d875a8646ab83fdd711f274eaa59fa163249bc693f5889fbcd90e18dd0"
+    },
+    "apps/web/src/shared/federal-register/effective-dates.ts": {
+      "git_blob": "883de369e99b816166d457d22d1cee2401b9862b",
+      "sha256": "b009dc8484c12f3b310ca20271259b84829cd4003d84024d507227060effab42"
+    },
+    "apps/web/src/shared/capiro/operations/calendar-effective-dates.ts": {
+      "git_blob": "d89dfced1f25cc1417d8901a5cb06ca9adfaef85",
+      "sha256": "8ec01102244660f64239ca96442fb83ed5565d9d6c83dd8357ae14e76be55711"
+    },
+    "apps/web/src/shared/portfolio/shell/Shell.tsx": {
+      "git_blob": "aeb3554f1bc3c8990461443b5f86dace163bc083",
+      "sha256": "8a46e1e666ed8ed8405b1ec0ee2f767a15d5055312ac77aa1dc1462fbe2e37d9"
+    },
+    "apps/web/src/shared/shell/Header.tsx": {
+      "git_blob": "2f75695d001af3d6a6b742c355ee405e54946cce",
+      "sha256": "0a27a2e588a599d366894183bd585450ccbc107f5ec0936fb5519b7e08166c12"
+    },
+    "apps/web/src/shared/shell/ModuleHeader.tsx": {
+      "git_blob": "8d19745fa495db9b1ec65f66937c90f01fc10620",
+      "sha256": "b6bd1fd354ab88304dbf9967fa403940a050c6a421d2abf7bf9161b0fee92268"
+    }
+  },
+  "instructions_read": [
+    "AGENTS.md",
+    "apps/web/AGENTS.md",
+    "docs/IMPLEMENTATION-STANDARDS.md",
+    "docs/ARCHITECTURE.md",
+    "MAPPING-INSTRUCTIONS.md",
+    "inputs/PHASED-PLAN.md"
+  ],
+  "method": "Read-only source/Git blobs, current focused test definitions and preserved native owner excerpts. No runtime/browser/tests/build/install/native/provider/design-tool execution. Only assigned three evidence files written.",
+  "native_owner_evidence": [
+    {
+      "path": "/tmp/capiro-remaining-calendar-independent-review/native-current-engagement.service.ts",
+      "pin": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+      "sha256": "78770fac56ac51c3af48674d07ea6b735490785dd73684265e54e861958cd3f9",
+      "meaning": "Inspected meeting1488/1563, library2181, share1844/unshare1913/sharedfeed2359, notes/debrief6134/6190, atomic approval deficiency8081.",
+      "is_live_deployed_evidence": false
+    },
+    {
+      "path": "/tmp/capiro-remaining-calendar-independent-review/native-current-engagement.controller.ts",
+      "pin": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+      "sha256": "9e4cb0008290eb3afaac654dc0f15909f16c88e4db28149971f6790737dccdae",
+      "meaning": "Artifact methods2049\u20132215; external runtime decorators and optional jobs/mapping2225\u20132310.",
+      "is_live_deployed_evidence": false
+    },
+    {
+      "path": "/tmp/capiro-remaining-calendar-independent-review/native-contract-binding.json",
+      "pin": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+      "sha256": "c52ad25069034bc64d870ffbac35f46f16570cf83fb17e158ae9bbd321cd0d1e",
+      "meaning": "Sharing four function ranges byte-identical to initial4be13b0b; no entire-service equivalence.",
+      "is_live_deployed_evidence": false
+    },
+    {
+      "path": "/tmp/capiro-calendar-correction-independent/backend-contract-review.json",
+      "pin": "243248e726243c44bd4b9d24fd1ed220da18c56a",
+      "sha256": "d43b63674d2fa1b3060f8034a00ffe8ac5cf70b95c568d6acce36bf969b53c22",
+      "meaning": "Native notes draft/debrief generated/edit/approval/null attribution and omitted debrief share stamps; null-versus-omitted client association.",
+      "is_live_deployed_evidence": false
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/calendar-effective-dates.ts",
+      "pin": "762aea0004dba51643ff370e7029de266966b74e",
+      "meaning": "Frontend operation records public docs/effective-date-calendar-20261012/CONTRACT.md and FederalRegisterService.getEffectiveDateCalendar. Not a native HTTP/deployment proof."
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/intelligence-funding.ts",
+      "pin": "4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace",
+      "meaning": "Recorded funding search owner supports source/deadlineFrom/deadlineTo/paging; detail supplies precision/timezone/raw/source. Latest owner compatibility needs confirmation."
+    },
+    {
+      "path": "apps/web/src/shared/capiro/operations/legiwatch-hearings.ts",
+      "pin": "4be13b0b1ed0f2f3fa014040eedbb2fc2c27dace",
+      "meaning": "Canonical detail-v2 includes tenant rails; historical standalone follow/attendance routes are not current Calendar composition."
+    }
+  ],
+  "source_candidates": [
+    {
+      "id": "CAL-MAP-01",
+      "rows": [
+        "ENG-notes_list",
+        "ENG-debrief_list"
+      ],
+      "status": "source-confirmed candidate; browser NOT_RUN",
+      "detail": "Retained list data renders through error/fetch; schema drops available parent IDs. Compare stronger saved-note picker, preserve drafts on concealment."
+    },
+    {
+      "id": "CAL-MAP-02",
+      "rows": [
+        "MCAL-010"
+      ],
+      "status": "missing frontend facet; latest owner contract audit first",
+      "detail": "No SAM/SBIR feed despite canonical funding deadline search/detail. Do not mix this with fixed regulatory completeness dependency."
+    },
+    {
+      "id": "CAL-MAP-03",
+      "rows": [
+        "ENG-calendar_navigation"
+      ],
+      "status": "literal criterion missing; product scope reconciliation first",
+      "detail": "No Day in current view union/config. Master criteria name Month/Week/Agenda; no implicit Day waiver."
+    }
+  ],
+  "limits": [
+    "All66 native rows remain open; no fixture or aggregate pass is a native acceptance.",
+    "Existing test assertions are exact-blob references, not newly executed results.",
+    "No fresh Figma comparison; zero confirmed mismatch means no justified current mismatch claim, not parity accepted.",
+    "Native owner sources are available exact historical pins; latest deployment/activation is not verified.",
+    "Session cache/useRef fences do not establish server idempotency or full-reload recovery.",
+    "Audio file upload does not prove microphone recording; mocked browser print does not prove actual PDF.",
+    "Eight exclusions remain outside337; no legacy whole-meeting share/follow/capture/task behavior revived.",
+    "No source/index/runtime/provider edits or writes; parent owns later coherent batches."
+  ],
+  "historical_evidence_limits": [
+    "Historical CR01\u201306/08\u201309 assessment at4a retained under /workspace/capiro-acceptance-assessment/docs/remaining-assessment-20261012/evidence/calendar_relationships/findings.json; current fixes checked rather than carried as missing.",
+    "Calendar native lifecycle correction evidence /tmp/capiro-calendar-correction-independent is source-derived synthetic verification, not native effects.",
+    "/tmp/capiro-remaining-calendar-independent-review/report.md preserves62/64+2/2 and98unit historical cohort plus3green-only draft retention; the attempted before snapshot was already corrected, before-state NOT_RUN.",
+    "Historical47-meeting/62archive native read reports at old source do not prove current two-user privacy/write/runtime gates."
+  ],
+  "ledger_hash_matches_instruction": true,
+  "validation": {
+    "assigned_count": 66,
+    "output_count": 66,
+    "unique_ids": 66,
+    "exact_id_set": true,
+    "all_open": true,
+    "all_required_keys": true,
+    "runtime_executed": false
+  },
+  "deliverable_hashes": {
+    "rows.json": "167de94bfbde7070dfad1f8cde414869855e574b1f3bb60e64dcdab739036ac6",
+    "summary.md": "6facafec1e5f29ac187e5d3024f9e0fff8ff4e23f5701513aec440c9bd2334a7"
+  },
+  "sealed_at_utc": "2026-10-13T11:17:58.322504+00:00",
+  "ledger_raw_git_bytes_sha256": "c669cd613e9dcab38b93016de5ff6a61ae32155556949b76be0ab639f1551bd8",
+  "ledger_snapshot_serialization": "json.dumps(parsed Git JSON, indent=2, ensure_ascii=True) plus newline",
+  "ledger_snapshot_normalized_sha256": "bfa16aee023824051229c1c3ae7b4dc8369fdaf23fd47fa068b45f54c21871bf",
+  "ledger_binding_note": "Raw published Git JSON uses literal UTF-8 while assigned snapshot escaped non-ASCII; identical parsed ledger, serialization hashes deliberately distinguished."
+}

@@ -4,6 +4,9 @@
 .header {
   border-bottom-width: 2px;
 }
+.designIcon {
+  filter: var(--meri-icon-filter, none);
+}
 .brand {
   width: 196px;
   height: 32px;
@@ -79,14 +82,12 @@
   white-space: nowrap;
 }
 .newConversation {
+  --meri-icon-filter: brightness(0) invert(1);
   color: white;
   background: linear-gradient(173.74deg, #242424, #0a0a0a);
   box-shadow:
     0 1px 2px #0c0a0924,
     inset 0 1px #ffffff24;
-}
-.newConversation img {
-  filter: brightness(0) invert(1);
 }
 .divider {
   height: 1px;
@@ -139,6 +140,40 @@
   background: #fff8e7;
   font-size: 13px;
   line-height: 1.5;
+}
+/* Figma448:89992 / collection448:90059: the shared header remains light. */
+@media (prefers-color-scheme: dark) {
+  .workspace,
+  .mobileNavigation {
+    --background: #0a0a0a;
+    --card: #0a0a0a;
+    --foreground: #f5f5f4;
+    --muted: #242424;
+    --muted-foreground: #afa6a0;
+    --subtle-foreground: #968b83;
+    --border: #242424;
+    --input: #242424;
+    --border-strong: #5b514b;
+    --meri-icon-filter: brightness(0) invert(1);
+    color: var(--foreground);
+    color-scheme: dark;
+    background: linear-gradient(156.236deg, #242424, #0a0a0a);
+  }
+  .sidebar,
+  .mobileNavigation {
+    background: linear-gradient(111.321deg, #242424, #0a0a0a);
+  }
+  .main {
+    background: linear-gradient(153.8deg, #242424, #0a0a0a);
+  }
+  .currentDestination {
+    background: linear-gradient(173.738deg, #242424, #0a0a0a);
+  }
+  .newConversation {
+    --meri-icon-filter: brightness(0);
+    color: #0a0a0a;
+    background: #f5f5f4;
+  }
 }
 @media (max-width: 900px) {
   .brand {

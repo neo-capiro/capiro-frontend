@@ -1,0 +1,127 @@
+[WebServer] (node:1522118) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 2 workers
+
+(node:1522138) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1522137) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 tests/browser/acceptance-activity-authority.spec.ts:25:3 › a dispatched activity write cannot invalidate the replacement actor's feed (6.5s)
+(node:1522416) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/browser/acceptance-prospect-create-intent.spec.ts:113:1 › unknown prospect creation cannot bind edited input to the original request identity (9.1s)
+(node:1522550) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 tests/browser/acceptance-activity-authority.spec.ts:25:3 › a dispatched activity write cannot invalidate the replacement tenant's feed (6.3s)
+(node:1522690) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  4 tests/browser/acceptance-prospect-create-intent.spec.ts:140:1 › definite prospect creation refusal permits correction and an explicit editable retry (7.2s)
+  ✓  5 tests/browser/acceptance-activity-authority.spec.ts:79:1 › same-actor filtering still refreshes a dispatched activity write without replay (4.5s)
+
+
+  1) tests/browser/acceptance-activity-authority.spec.ts:25:3 › a dispatched activity write cannot invalidate the replacement actor's feed 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: 1
+
+      58 |       // actual cache lifetime before asserting absence of a late refresh.
+      59 |       await expectSettled(page);
+    > 60 |       expect((await snapshot(page)).invalidations).toBe(before.invalidations);
+         |                                                    ^
+      61 |       expect(fixture.reads.length).toBe(readsBefore);
+      62 |       await expect(activityAction(page)).toBeEnabled();
+      63 |       await expect(activityReview(page)).toHaveCount(0);
+        at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-activity-authority.spec.ts:60:52
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/followup-before-fix/artifacts/acceptance-activity-author-9ded3-he-replacement-actor-s-feed/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/followup-before-fix/artifacts/acceptance-activity-author-9ded3-he-replacement-actor-s-feed/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/followup-before-fix/artifacts/acceptance-activity-author-9ded3-he-replacement-actor-s-feed/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/followup-before-fix/artifacts/acceptance-activity-author-9ded3-he-replacement-actor-s-feed/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/browser/acceptance-activity-authority.spec.ts:25:3 › a dispatched activity write cannot invalidate the replacement tenant's feed 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: 1
+
+      58 |       // actual cache lifetime before asserting absence of a late refresh.
+      59 |       await expectSettled(page);
+    > 60 |       expect((await snapshot(page)).invalidations).toBe(before.invalidations);
+         |                                                    ^
+      61 |       expect(fixture.reads.length).toBe(readsBefore);
+      62 |       await expect(activityAction(page)).toBeEnabled();
+      63 |       await expect(activityReview(page)).toHaveCount(0);
+        at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-activity-authority.spec.ts:60:52
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/followup-before-fix/artifacts/acceptance-activity-author-a8d2c-e-replacement-tenant-s-feed/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/followup-before-fix/artifacts/acceptance-activity-author-a8d2c-e-replacement-tenant-s-feed/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/followup-before-fix/artifacts/acceptance-activity-author-a8d2c-e-replacement-tenant-s-feed/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/followup-before-fix/artifacts/acceptance-activity-author-a8d2c-e-replacement-tenant-s-feed/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/browser/acceptance-prospect-create-intent.spec.ts:113:1 › unknown prospect creation cannot bind edited input to the original request identity 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Object {
+        "email": null,
+    -   "name": "Synthetic exact creation intent",
+    +   "name": "Changed after an unknown creation",
+        "notes": "Synthetic submitted source note",
+        "phone": null,
+        "requestId": "532522d6-7cd0-4e34-8687-3499a0695555",
+        "title": "Original submitted title",
+      }
+
+      131 |   expect(control.bodies).toHaveLength(2);
+      132 |   expect(control.bodies[1]!.requestId).toBe(control.bodies[0]!.requestId);
+    > 133 |   expect(control.bodies[1]).toEqual(control.bodies[0]);
+          |                             ^
+      134 |   await expect(
+      135 |     control.card.getByRole("button", { name: new RegExp(originalName) }),
+      136 |   ).toBeVisible();
+        at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-prospect-create-intent.spec.ts:133:29
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/followup-before-fix/artifacts/acceptance-prospect-create-49838-e-original-request-identity/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/followup-before-fix/artifacts/acceptance-prospect-create-49838-e-original-request-identity/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/followup-before-fix/artifacts/acceptance-prospect-create-49838-e-original-request-identity/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/followup-before-fix/artifacts/acceptance-prospect-create-49838-e-original-request-identity/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests/browser/acceptance-activity-authority.spec.ts:25:3 › a dispatched activity write cannot invalidate the replacement actor's feed 
+    tests/browser/acceptance-activity-authority.spec.ts:25:3 › a dispatched activity write cannot invalidate the replacement tenant's feed 
+    tests/browser/acceptance-prospect-create-intent.spec.ts:113:1 › unknown prospect creation cannot bind edited input to the original request identity 
+  2 passed (21.8s)

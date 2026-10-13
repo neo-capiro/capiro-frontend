@@ -1,0 +1,32 @@
+{
+  "started": "2026-10-13T12:38:21.581224+00:00",
+  "base_application_source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "head": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "command": [
+    "../../node_modules/.bin/playwright",
+    "test",
+    "--config",
+    "playwright.config.ts",
+    "tests/browser/acceptance-prospect-contacts.spec.ts",
+    "--workers=2",
+    "--output",
+    "/workspace/capiro-acceptance-batch-evidence-20261013/root/prospect-navigation-corrected-baseline/artifacts",
+    "--reporter",
+    "list,json"
+  ],
+  "production_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "production_diff_empty": true,
+  "browser": "/usr/bin/chromium",
+  "node": "v24.19.0",
+  "exit_code": 1,
+  "finished": "2026-10-13T12:38:52.969888+00:00",
+  "source_changed_during_focused_run": false,
+  "stats": {
+    "startTime": "2026-10-13T12:38:22.154Z",
+    "duration": 30795.186999999998,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

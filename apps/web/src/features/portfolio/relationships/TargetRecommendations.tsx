@@ -17,13 +17,17 @@ export function TargetRecommendations({
   const query = useTargetRecommendations(clientId);
   const refresh = useRefreshTargetRecommendations(clientId);
   const add = useTargetMutation(clientId);
+  const records =
+    query.isSuccess && !query.isFetching && !query.error
+      ? query.data
+      : undefined;
   return (
     <section className="card stack" aria-label="Suggested government targets">
       <header className="row between">
         <h2>Suggested by Meri</h2>
         <button
           className="button"
-          disabled={refresh.isPending}
+          disabled={refresh.isPending || !records}
           onClick={() => refresh.mutate()}
         >
           {refresh.isPending ? "Refreshing…" : "Refresh recommendations"}
@@ -33,12 +37,12 @@ export function TargetRecommendations({
         Service scores indicate relative priority within this client.
       </p>
       <QueryState
-        pending={query.isPending}
+        pending={query.isFetching}
         error={query.error}
         retry={() => void query.refetch()}
       />
       <QueryState error={refresh.error ?? add.error} />
-      {query.data?.recommendations.map((row, index) => (
+      {records?.recommendations.map((row, index) => (
         <article className={styles.result} key={row.memberId}>
           <span>{index + 1}</span>
           <div>
@@ -73,13 +77,11 @@ export function TargetRecommendations({
           )}
         </article>
       ))}
-      {query.data?.recommendations.length === 0 && (
+      {records?.recommendations.length === 0 && (
         <p className="empty">No office recommendations are available yet.</p>
       )}
-      {query.data?.computedAt && (
-        <small>
-          Computed {new Date(query.data.computedAt).toLocaleString()}
-        </small>
+      {records?.computedAt && (
+        <small>Computed {new Date(records.computedAt).toLocaleString()}</small>
       )}
     </section>
   );

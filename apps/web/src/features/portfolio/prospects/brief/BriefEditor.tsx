@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useApi } from "@/shared/portfolio/api/provider";
 import { ApiError } from "@/shared/portfolio/api/http";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
@@ -15,11 +15,13 @@ export function BriefEditor({
   scope,
   title,
   version,
+  available = true,
   onClose,
 }: {
   scope: BriefScope;
   title: string;
   version: BriefVersion;
+  available?: boolean;
   onClose: () => void;
 }) {
   const api = useApi();
@@ -43,16 +45,29 @@ export function BriefEditor({
   const accessDenied =
     save.error instanceof ApiError &&
     [401, 403, 404].includes(save.error.status);
+  const availability = useRef(0);
+  if (!available && reviewed) setReviewed(undefined);
+  useLayoutEffect(() => {
+    availability.current++;
+  }, [available]);
+  useEffect(() => {
+    // Keep the original SaveInput and mutation owner while its outcome is
+    // pending/unknown. A failed selected-version read must not erase it.
+    if (!available && !attempt && !save.isPending) onClose();
+  }, [available, attempt, save.isPending, onClose]);
   function close() {
     if (save.isPending || checking) return;
     if (dirty || unknown) setDiscard(true);
     else onClose();
   }
   async function reviewLatest() {
+    if (!available || checking) return;
+    const generation = availability.current;
     setChecking(true);
     setMessage(undefined);
     try {
       const latest = await readBrief(api, scope);
+      if (availability.current !== generation) return;
       if (
         !latest.currentVersion ||
         !latest.brief ||
@@ -63,6 +78,7 @@ export function BriefEditor({
         );
       setReviewed(latest.currentVersion);
     } catch (error) {
+      if (availability.current !== generation) return;
       setMessage(
         error instanceof Error
           ? error.message
@@ -73,7 +89,7 @@ export function BriefEditor({
     }
   }
   function rebase() {
-    if (!reviewed) return;
+    if (!available || !reviewed) return;
     try {
       const sections = mergeDraft(base, reviewed, draft);
       setDraft(draftOf({ ...reviewed, sections }));
@@ -92,6 +108,13 @@ export function BriefEditor({
       );
     }
   }
+  if (!available)
+    return attempt ? (
+      <p role="status">
+        Your brief save is retained. Restore current version access to review
+        its outcome before continuing.
+      </p>
+    ) : null;
   return (
     <Dialog
       open
@@ -106,7 +129,7 @@ export function BriefEditor({
         className="stack"
         onSubmit={(event) => {
           event.preventDefault();
-          if (conflict || unknown || save.isPending) return;
+          if (!available || conflict || unknown || save.isPending) return;
           setMessage(undefined);
           try {
             if (!name.trim() || name.length > 300)
@@ -169,7 +192,8 @@ export function BriefEditor({
               type="button"
               disabled={save.isPending}
               onClick={() => {
-                if (attempt) save.mutate(attempt, { onSuccess: onClose });
+                if (available && attempt && !save.isPending)
+                  save.mutate(attempt, { onSuccess: onClose });
               }}
             >
               Retry same save

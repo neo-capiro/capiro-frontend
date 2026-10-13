@@ -1,0 +1,186 @@
+[WebServer] (node:1510672) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 7 tests using 1 worker
+
+(node:1510691) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/browser/acceptance-bill-search.spec.ts:14:1 › a held current search conceals old results and fences Track until the new response (8.4s)
+(node:1510843) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 tests/browser/acceptance-bill-search.spec.ts:42:3 › a cached search followed by 403 removes selection; held retry cannot resurrect it (8.9s)
+(node:1510979) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 tests/browser/acceptance-bill-search.spec.ts:42:3 › a cached search followed by 503 removes selection; held retry cannot resurrect it (9.4s)
+(node:1511126) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  4 tests/browser/acceptance-bill-search.spec.ts:87:1 › a successful empty reread cannot keep an absent bill selected for tracking (8.1s)
+(node:1511263) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  5 tests/browser/acceptance-bill-search.spec.ts:105:3 › query replacement clears prior selection while its new search is held (3.4s)
+  ✓  6 tests/browser/acceptance-bill-search.spec.ts:105:3 › jurisdiction replacement clears prior selection while its new search is held (2.9s)
+  ✓  7 tests/browser/acceptance-bill-search.spec.ts:139:1 › client replacement cancels a held former-client search and starts with no selection (3.4s)
+
+
+  1) tests/browser/acceptance-bill-search.spec.ts:14:1 › a held current search conceals old results and fences Track until the new response 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      22 |     await refreshBillSearch(page);
+      23 |     await expect.poll(() => state.entered).toBe(2);
+    > 24 |     await expect(billDialog(page).getByRole("radio")).toHaveCount(0);
+         |                                                       ^
+      25 |     await expect(trackButton(page)).toBeDisabled();
+      26 |     expect(state.writes).toEqual([]);
+      27 |   } finally {
+        at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts:24:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-h-60f32-rack-until-the-new-response/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-h-60f32-rack-until-the-new-response/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-h-60f32-rack-until-the-new-response/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-h-60f32-rack-until-the-new-response/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/browser/acceptance-bill-search.spec.ts:42:3 › a cached search followed by 403 removes selection; held retry cannot resurrect it 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      59 |       contentType: "application/json",
+      60 |     });
+    > 61 |     await expect(billDialog(page).getByRole("radio")).toHaveCount(0);
+         |                                                       ^
+      62 |     await expect(trackButton(page)).toBeDisabled();
+      63 |     state.status = 200;
+      64 |     state.rows = [recoveredBill];
+        at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts:61:55
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-c-6519f-d-retry-cannot-resurrect-it/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-c-6519f-d-retry-cannot-resurrect-it/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-c-6519f-d-retry-cannot-resurrect-it/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-c-6519f-d-retry-cannot-resurrect-it/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/browser/acceptance-bill-search.spec.ts:42:3 › a cached search followed by 503 removes selection; held retry cannot resurrect it 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('radio')
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      59 |       contentType: "application/json",
+      60 |     });
+    > 61 |     await expect(billDialog(page).getByRole("radio")).toHaveCount(0);
+         |                                                       ^
+      62 |     await expect(trackButton(page)).toBeDisabled();
+      63 |     state.status = 200;
+      64 |     state.rows = [recoveredBill];
+        at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts:61:55
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-c-0c455-d-retry-cannot-resurrect-it/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-c-0c455-d-retry-cannot-resurrect-it/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-c-0c455-d-retry-cannot-resurrect-it/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-c-0c455-d-retry-cannot-resurrect-it/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/browser/acceptance-bill-search.spec.ts:87:1 › a successful empty reread cannot keep an absent bill selected for tracking 
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator:  getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('button', { name: 'Track selected bill', exact: true })
+    Expected: disabled
+    Received: enabled
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeDisabled" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: 'Track a bill', exact: true }).getByRole('button', { name: 'Track selected bill', exact: true })
+        14 × locator resolved to <button class="button primary">Track selected bill</button>
+           - unexpected value "enabled"
+
+
+       97 |   await expect(billDialog(page).getByText("No matching bills.")).toBeVisible();
+       98 |   await expect(billDialog(page).getByRole("radio")).toHaveCount(0);
+    >  99 |   await expect(trackButton(page)).toBeDisabled();
+          |                                   ^
+      100 |   expect(state.writes).toEqual([]);
+      101 |   expect(unexpected).toEqual([]);
+      102 | });
+        at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-bill-search.spec.ts:99:35
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-s-23c37--bill-selected-for-tracking/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-s-23c37--bill-selected-for-tracking/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-s-23c37--bill-selected-for-tracking/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts/acceptance-bill-search-a-s-23c37--bill-selected-for-tracking/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    tests/browser/acceptance-bill-search.spec.ts:14:1 › a held current search conceals old results and fences Track until the new response 
+    tests/browser/acceptance-bill-search.spec.ts:42:3 › a cached search followed by 403 removes selection; held retry cannot resurrect it 
+    tests/browser/acceptance-bill-search.spec.ts:42:3 › a cached search followed by 503 removes selection; held retry cannot resurrect it 
+    tests/browser/acceptance-bill-search.spec.ts:87:1 › a successful empty reread cannot keep an absent bill selected for tracking 
+  3 passed (49.1s)

@@ -1,0 +1,152 @@
+{
+  "utc": "2026-10-13T11:29:54.948629+00:00",
+  "application_source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "published_head": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+  "files": [
+    {
+      "path": "RECONCILED-337.json",
+      "bytes": 2328243,
+      "sha256": "3849d8a07a4f6c0961d4726683c66946a4842d6f2710736cc22727a1049a85f4"
+    },
+    {
+      "path": "ROOT-MAPPING-VALIDATION.json",
+      "bytes": 2521,
+      "sha256": "bd2387008f2a80c70e7392617a32cd533862fbeac6a669823389954448efe295"
+    },
+    {
+      "path": "ROOT-SOURCE-BINDINGS.json",
+      "bytes": 141083,
+      "sha256": "396250a67b47891b4d15e37ba28d82bf8b8ea731339ac5fae01dba55eb51a404"
+    },
+    {
+      "path": "MAPPING-SNAPSHOT.json",
+      "bytes": 600,
+      "sha256": "7fd2cd5b7843d2a74cd16dfdbf304e6b50197cae94e955893519fdae2a4841f7"
+    },
+    {
+      "path": "MAPPING-INSTRUCTIONS.md",
+      "bytes": 3529,
+      "sha256": "478486e51f759f541ac826c3e42f522fbe4975a37c3e869787f64b5748138ba5"
+    },
+    {
+      "path": "BATCH-1-INSTRUCTIONS.md",
+      "bytes": 4829,
+      "sha256": "db2f64e977e8f1976476a7c57db11d3ad13b273eb02df3a277f0952ea644820e"
+    },
+    {
+      "path": "validate-mapping.py",
+      "bytes": 4415,
+      "sha256": "40753fdb3a251536b1b4460aa372d700ce386627a04643857aa8fd0fb0fdab52"
+    },
+    {
+      "path": "accessibility-review/inventory.json",
+      "bytes": 182409,
+      "sha256": "2ad52b4a671648c2b2a629504602ca94cf4f1c51cfb7a36c4b64b5f97b68894e"
+    },
+    {
+      "path": "accessibility-review/ASSESSMENT.md",
+      "bytes": 10341,
+      "sha256": "7ecd07392a732eabc851c1cd1156d325b7c279584ab8f397b44c1ce85d9ee1d3"
+    },
+    {
+      "path": "meri-compatibility/ASSESSMENT.md",
+      "bytes": 2995,
+      "sha256": "236413deaf2da59e3a2acfd0b75982e2f6eeb9bfe1134f0a83cae93a8c77854f"
+    },
+    {
+      "path": "meri-compatibility/PUBLIC-CONTRACT-COMPARISON.json",
+      "bytes": 13803,
+      "sha256": "c8fe6de5e44e76c96a9d69f7d79c555916f79d3b25c9e37f1a2108e7cc2016ef"
+    },
+    {
+      "path": "figma-targets/theme-inspection.json",
+      "bytes": 12112,
+      "sha256": "75fa3258ebccb8ff4da69afe8150cfd51949426157da0090743acbe7b46bf5c0"
+    },
+    {
+      "path": "figma-targets/442-81437-variables.json",
+      "bytes": 2090,
+      "sha256": "0e8532865d4d9d212fa73ec651f1015287e66c95c406fd9c83d82f7f64166d48"
+    },
+    {
+      "path": "figma-targets/442-81437-context.png",
+      "bytes": 59320,
+      "sha256": "cc87941679e05a961dd25cf171c6b704a11e1f43f0a5605f03218e0111a6a192"
+    },
+    {
+      "path": "figma-targets/448-89992-context.png",
+      "bytes": 281640,
+      "sha256": "962f2a0b05f4283481541801dac71565e48b58ce5819f04dab6ea6306b27ed25"
+    },
+    {
+      "path": "storage/new-batch-worktree.json",
+      "bytes": 751,
+      "sha256": "701a7bea8efe3f7f67ccc948616e6d4b5c5395e6505f06d9a2650131179b7dca"
+    },
+    {
+      "path": "storage/qualified-next-archive.json",
+      "bytes": 746,
+      "sha256": "a808b076e76599631596f4972cb0f9ed5d0c409b5465c8377eb823cb365eda0f"
+    },
+    {
+      "path": "reviewers/core_intake/summary.md",
+      "bytes": 8442,
+      "sha256": "0d67a5b5e3a392fa8898f918aec4a8a77e8ac716dc062f6333eb4db8c71fea27"
+    },
+    {
+      "path": "reviewers/core_intake/review.json",
+      "bytes": 71339,
+      "sha256": "f3f08495c02532b48e246e44fad9de179cae540d214c14277559f0124ad4508b"
+    },
+    {
+      "path": "reviewers/core_profile/summary.md",
+      "bytes": 7159,
+      "sha256": "85f838decd3437fe69d6375c3597c6a257fa7a0251994edbe44cbc4ac8fa36a6"
+    },
+    {
+      "path": "reviewers/core_profile/review.json",
+      "bytes": 47548,
+      "sha256": "f6154abab32b47f47932ba0b282551f160094c73e62e923f3611c281eeec59f1"
+    },
+    {
+      "path": "reviewers/calendar/summary.md",
+      "bytes": 8446,
+      "sha256": "6facafec1e5f29ac187e5d3024f9e0fff8ff4e23f5701513aec440c9bd2334a7"
+    },
+    {
+      "path": "reviewers/calendar/review.json",
+      "bytes": 33200,
+      "sha256": "039a762a7ecd5f785b04636adbab07103f02507f7d35720aefa44da19e2ba2fd"
+    },
+    {
+      "path": "reviewers/relationships/summary.md",
+      "bytes": 5858,
+      "sha256": "332c5f08fed9f2b467c43025bcbd47e611d6df96a5c39659f12903c9fc0ddc05"
+    },
+    {
+      "path": "reviewers/relationships/review.json",
+      "bytes": 48660,
+      "sha256": "d7f81fe884cb7bab37bf223c8e484711a43d98384dccffc433be0ca5fad869c6"
+    },
+    {
+      "path": "reviewers/objectives_work_intel/summary.md",
+      "bytes": 5111,
+      "sha256": "4700cf63fd018f2e08f522027cc350f3c48b03858e2220016123bf7071729624"
+    },
+    {
+      "path": "reviewers/objectives_work_intel/review.json",
+      "bytes": 47218,
+      "sha256": "12780fa7b6fbb1c15a4064fa5a676a79e59dd85d774e928f01b9a6bef4807dcd"
+    },
+    {
+      "path": "reviewers/prospects/summary.md",
+      "bytes": 7661,
+      "sha256": "f2362793bf46a89decefa1f6164954cd2dd9c4a9821071b3f49076dda16ffce2"
+    },
+    {
+      "path": "reviewers/prospects/review.json",
+      "bytes": 50213,
+      "sha256": "3c2680fac546307ac6e19d9d1ce552dd5fdff3fab60d3433a9030709704a35a9"
+    }
+  ]
+}

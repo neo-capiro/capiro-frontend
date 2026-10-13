@@ -1,5 +1,5 @@
 "use client";
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { TextareaField } from "@/shared/portfolio/ui/TextareaField";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
@@ -11,12 +11,14 @@ import styles from "./contacts.module.css";
 export function ContactEditor({
   prospectId,
   contact,
+  available = true,
   readOnly,
   onClose,
   returnFocus,
 }: {
   prospectId: string;
   contact?: ProspectContact;
+  available?: boolean;
   readOnly: boolean;
   onClose: () => void;
   returnFocus: () => void;
@@ -32,9 +34,41 @@ export function ContactEditor({
   const formRef = useRef<HTMLFormElement>(null);
   const review = useLatestContact(prospectId);
   const mutation = useContactMutation(prospectId, onClose);
+  const [retainedCreate, setRetainedCreate] =
+    useState<
+      Extract<NonNullable<typeof mutation.variables>, { kind: "save" }>
+    >();
+  if (
+    !retainedCreate &&
+    mutation.isError &&
+    mutation.variables?.kind === "save" &&
+    !mutation.variables.contact &&
+    (!(mutation.error instanceof ApiError) || mutation.error.status >= 500)
+  ) {
+    // A refused later retry cannot resolve an earlier unknown creation.
+    setRetainedCreate(structuredClone(mutation.variables));
+  }
   const conflict =
     mutation.error instanceof ApiError && mutation.error.status === 409;
   const pending = mutation.isPending || review.isPending;
+  const availability = useRef(0);
+  if ((!available || readOnly) && latest) setLatest(undefined);
+  useLayoutEffect(() => {
+    availability.current++;
+  }, [available, readOnly]);
+  useEffect(() => {
+    // A read failure may conceal an already dispatched write. Keep its owner
+    // and request identity until its outcome can be reviewed; discard only
+    // an editor that has never submitted a mutation.
+    if (!available && mutation.isIdle) onClose();
+  }, [available, mutation.isIdle, onClose]);
+  if (!available)
+    return mutation.isPending || mutation.isError ? (
+      <p role="status">
+        Your contact change is retained. Restore current access to review its
+        outcome before continuing.
+      </p>
+    ) : null;
   return (
     <Dialog
       open
@@ -55,7 +89,12 @@ export function ContactEditor({
         noValidate
         onSubmit={(event) => {
           event.preventDefault();
-          if (readOnly || pending || (conflict && initial)) return;
+          if (!available || readOnly || pending || (conflict && initial))
+            return;
+          if (retainedCreate) {
+            mutation.mutate(retainedCreate);
+            return;
+          }
           const result = contactInput.safeParse(values);
           if (!result.success) {
             setValidation(
@@ -93,7 +132,7 @@ export function ContactEditor({
               required
               aria-required
               maxLength={300}
-              disabled={readOnly || pending}
+              disabled={readOnly || pending || Boolean(retainedCreate)}
               onChange={(event) =>
                 setValues({ ...values, name: event.target.value })
               }
@@ -114,7 +153,7 @@ export function ContactEditor({
               }
               value={values.title}
               maxLength={300}
-              disabled={readOnly || pending}
+              disabled={readOnly || pending || Boolean(retainedCreate)}
               onChange={(event) =>
                 setValues({ ...values, title: event.target.value })
               }
@@ -132,7 +171,7 @@ export function ContactEditor({
                 type="email"
                 value={values.email}
                 maxLength={320}
-                disabled={readOnly || pending}
+                disabled={readOnly || pending || Boolean(retainedCreate)}
                 onChange={(event) =>
                   setValues({ ...values, email: event.target.value })
                 }
@@ -148,7 +187,7 @@ export function ContactEditor({
                 }
                 value={values.phone}
                 maxLength={120}
-                disabled={readOnly || pending}
+                disabled={readOnly || pending || Boolean(retainedCreate)}
                 onChange={(event) =>
                   setValues({ ...values, phone: event.target.value })
                 }
@@ -165,7 +204,7 @@ export function ContactEditor({
             value={values.notes}
             maxLength={4000}
             rows={5}
-            disabled={readOnly || pending}
+            disabled={readOnly || pending || Boolean(retainedCreate)}
             onChange={(event) =>
               setValues({ ...values, notes: event.target.value })
             }
@@ -179,6 +218,12 @@ export function ContactEditor({
             </p>
           )}
           <QueryState error={mutation.error} />
+          {retainedCreate && (
+            <p role="status">
+              This creation may have completed. Its submitted details are
+              locked. Save contact retries the same request.
+            </p>
+          )}
           {conflict && initial && (
             <section className="status stack">
               <p>
@@ -188,10 +233,16 @@ export function ContactEditor({
               <button
                 type="button"
                 className="button"
-                disabled={pending}
+                disabled={pending || readOnly}
                 onClick={() => {
-                  if (initial)
-                    review.mutate(initial.id, { onSuccess: setLatest });
+                  if (!available || readOnly || pending || !initial) return;
+                  const generation = availability.current;
+                  review.mutate(initial.id, {
+                    onSuccess: (latest) => {
+                      if (availability.current === generation)
+                        setLatest(latest);
+                    },
+                  });
                 }}
               >
                 Review latest contact
@@ -215,6 +266,7 @@ export function ContactEditor({
                     type="button"
                     className="button"
                     onClick={() => {
+                      if (!available || readOnly || pending) return;
                       setInitial(latest);
                       setValues(contactValues(latest));
                       setLatest(undefined);
@@ -248,6 +300,7 @@ export function ContactEditor({
                   className="button primary"
                   disabled={pending || readOnly || conflict}
                   onClick={() => {
+                    if (!available || readOnly || pending || conflict) return;
                     if (initial)
                       mutation.mutate({ kind: "remove", contact: initial });
                   }}

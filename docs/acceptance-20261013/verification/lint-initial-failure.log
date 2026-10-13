@@ -1,0 +1,93 @@
+
+/tmp/capiro-acceptance-batch-execution-20261013/apps/web/src/features/portfolio/prospects/brief/BriefEditor.tsx
+  51:21  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/tmp/capiro-acceptance-batch-execution-20261013/apps/web/src/features/portfolio/prospects/brief/BriefEditor.tsx:51:21
+  49 |   useLayoutEffect(() => {
+  50 |     availability.current++;
+> 51 |     if (!available) setReviewed(undefined);
+     |                     ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  52 |   }, [available]);
+  53 |   useEffect(() => {
+  54 |     // Keep the original SaveInput and mutation owner while its outcome is  react-hooks/set-state-in-effect
+
+/tmp/capiro-acceptance-batch-execution-20261013/apps/web/src/features/portfolio/prospects/brief/BriefViewer.tsx
+  62:19  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/tmp/capiro-acceptance-batch-execution-20261013/apps/web/src/features/portfolio/prospects/brief/BriefViewer.tsx:62:19
+  60 |   const editable = current && data.brief?.status === "draft" && !!version;
+  61 |   useEffect(() => {
+> 62 |     if (!version) setSource(undefined);
+     |                   ^^^^^^^^^ Avoid calling setState() directly within an effect
+  63 |   }, [version]);
+  64 |   return (
+  65 |     <Dialog  react-hooks/set-state-in-effect
+
+/tmp/capiro-acceptance-batch-execution-20261013/apps/web/src/features/portfolio/prospects/contacts/ContactEditor.tsx
+  57:33  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/tmp/capiro-acceptance-batch-execution-20261013/apps/web/src/features/portfolio/prospects/contacts/ContactEditor.tsx:57:33
+  55 |   useLayoutEffect(() => {
+  56 |     availability.current++;
+> 57 |     if (!available || readOnly) setLatest(undefined);
+     |                                 ^^^^^^^^^ Avoid calling setState() directly within an effect
+  58 |   }, [available, readOnly]);
+  59 |   useEffect(() => {
+  60 |     // A read failure may conceal an already dispatched write. Keep its owner  react-hooks/set-state-in-effect
+
+/tmp/capiro-acceptance-batch-execution-20261013/apps/web/src/features/portfolio/prospects/conversion/ProspectClientLink.tsx
+  85:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/tmp/capiro-acceptance-batch-execution-20261013/apps/web/src/features/portfolio/prospects/conversion/ProspectClientLink.tsx:85:7
+  83 |   useEffect(() => {
+  84 |     if (selection && !selected) {
+> 85 |       setSelection(null);
+     |       ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  86 |       setConfirmed(false);
+  87 |     }
+  88 |   }, [selection, selected]);  react-hooks/set-state-in-effect
+
+/tmp/capiro-acceptance-batch-execution-20261013/apps/web/src/shared/shell/DesignIcon.tsx
+  12:5  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/acceptance-meeting-artifacts-query.test.ts
+  36:3  error  React Hook "useMeetingNotes" is called in function "queryRows" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use"  react-hooks/rules-of-hooks
+
+/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-data.ts
+  54:11  warning  '_body' is assigned a value but never used        @typescript-eslint/no-unused-vars
+  55:17  warning  '_restricted' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-preview.spec.ts
+  103:16  warning  '_meetingId' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  104:15  warning  '_clientId' is assigned a value but never used   @typescript-eslint/no-unused-vars
+
+/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts
+  131:18  warning  '_meetingId' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  132:17  warning  '_clientId' is assigned a value but never used   @typescript-eslint/no-unused-vars
+
+✖ 12 problems (5 errors, 7 warnings)
+

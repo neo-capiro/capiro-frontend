@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { ApiError, type ApiClient } from "@/shared/portfolio/api/http";
-import { meetingSchema, noteSchema } from "../contracts";
+import { meetingSchema, meetingArtifactListSchema } from "../contracts";
 import {
   assertExportable,
   attachmentCompatibility,
@@ -44,7 +44,7 @@ export async function readSavedDocument(
     const rows = await api.request(
       "core",
       `engagement/meetings/${encodeURIComponent(meeting.id)}/debriefs`,
-      z.array(noteSchema),
+      meetingArtifactListSchema(meeting.id, meeting.client?.id ?? null),
       { signal },
     );
     const debrief = rows.find((item) => item.id === documentId(requested));

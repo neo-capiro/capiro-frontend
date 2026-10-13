@@ -8,8 +8,7 @@ import {
   fetchPlanner,
   fetchUpcomingDeadlines,
 } from "./feeds";
-import { meetingSchema, noteSchema } from "./contracts";
-import { z } from "zod";
+import { meetingSchema, meetingArtifactListSchema } from "./contracts";
 export function useCalendarFeeds(
   range: { from: string; to: string; startDay: string; endDay: string },
   zone: string,
@@ -71,17 +70,30 @@ export function useMeeting(id: string | null) {
       ),
   });
 }
-export function useMeetingNotes(id: string | null, kind: "notes" | "debriefs") {
+export function useMeetingNotes(
+  id: string | null,
+  kind: "notes" | "debriefs",
+  scope?: { tenantId: string; userId: string; clientId: string | null },
+) {
   const api = useApi();
-  return useQuery({
-    queryKey: ["meeting", id, kind],
+  const queryKey = [
+    "meeting",
+    id,
+    kind,
+    scope?.tenantId ?? null,
+    scope?.userId ?? null,
+    scope?.clientId ?? null,
+  ];
+  const query = useQuery({
+    queryKey,
     enabled: Boolean(id),
     queryFn: ({ signal }) =>
       api.request(
         "core",
         `engagement/meetings/${encodeURIComponent(id ?? "")}/${kind}`,
-        z.array(noteSchema),
+        meetingArtifactListSchema(id, scope?.clientId),
         { signal },
       ),
   });
+  return { ...query, queryKey };
 }

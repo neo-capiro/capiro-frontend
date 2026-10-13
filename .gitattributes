@@ -19,3 +19,10 @@ docs/meri-files-20261013/qualification-iterations/** -text -whitespace
 
 # Preserve sealed Files qualification evidence byte-for-byte.
 docs/unified-20261013/qualification-90ccdd47/** -text -whitespace
+
+# Preserve bounded acceptance regression and qualification receipts byte-exact.
+docs/acceptance-20261013/verification/** -text -whitespace
+docs/acceptance-20261013/BATCH-1-INSTRUCTIONS.md -text -whitespace
+docs/acceptance-20261013/figma-targets/442-81437-variables.json -text -whitespace
+docs/acceptance-20261013/figma-targets/theme-inspection.json -text -whitespace
+docs/acceptance-20261013/validate-mapping.py -text -whitespace

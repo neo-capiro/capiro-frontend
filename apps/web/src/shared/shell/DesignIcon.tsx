@@ -1,3 +1,5 @@
+import styles from "./shell.module.css";
+
 /** Exact local Figma assets. SVG intrinsic roots remain unchanged. */
 export function DesignIcon({
   name,
@@ -7,6 +9,11 @@ export function DesignIcon({
   assetSet?: "home" | "cited-answer";
 }) {
   return (
-    <img src={`/design/${assetSet}/${name}.svg`} alt="" aria-hidden="true" />
+    <img
+      className={styles.designIcon}
+      src={`/design/${assetSet}/${name}.svg`}
+      alt=""
+      aria-hidden="true"
+    />
   );
 }

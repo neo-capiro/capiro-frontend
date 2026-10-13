@@ -5,7 +5,7 @@ import { useApi } from "@/shared/portfolio/api/provider";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { readVersion, type BriefScope } from "./api";
-import type { CurrentBrief } from "./contracts";
+import type { BriefVersion, CurrentBrief } from "./contracts";
 import { BriefDocument } from "./BriefDocument";
 import { BriefHistory } from "./BriefHistory";
 import { BriefEditor } from "./BriefEditor";
@@ -30,7 +30,7 @@ export function BriefViewer({
   const [panel, setPanel] = useState<"document" | "history" | "refresh">(
     "document",
   );
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState<BriefVersion>();
   const [source, setSource] = useState<number>();
   const historical = useQuery({
     queryKey: [
@@ -51,9 +51,14 @@ export function BriefViewer({
       );
     },
   });
-  const version = selected ? historical.data : data.currentVersion;
+  const version = selected
+    ? historical.isSuccess && !historical.error
+      ? historical.data
+      : undefined
+    : data.currentVersion;
   const current = !selected || selected.id === data.currentVersion?.id;
   const editable = current && data.brief?.status === "draft" && !!version;
+  if (!version && source !== undefined) setSource(undefined);
   return (
     <Dialog
       open
@@ -88,7 +93,10 @@ export function BriefViewer({
           Compare current dossier
         </button>
         {editable && (
-          <button className="button" onClick={() => setEditing(true)}>
+          <button
+            className="button"
+            onClick={() => setEditing(version ?? undefined)}
+          >
             Edit sections
           </button>
         )}
@@ -131,12 +139,15 @@ export function BriefViewer({
           )}
         </>
       )}
-      {editing && version && editable && (
+      {editing && (
         <BriefEditor
           scope={scope}
           title={data.brief?.title ?? ""}
-          version={version}
-          onClose={() => setEditing(false)}
+          version={editing}
+          available={editable}
+          onClose={() =>
+            setEditing((active) => (active === editing ? undefined : active))
+          }
         />
       )}
       {source !== undefined && version && (

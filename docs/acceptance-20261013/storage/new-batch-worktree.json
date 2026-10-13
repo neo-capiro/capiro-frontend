@@ -1,0 +1,20 @@
+{
+  "utc": "2026-10-13T11:14:39.567385+00:00",
+  "root": "/workspace/capiro-acceptance-batch-20261013",
+  "physical": "/tmp/capiro-acceptance-batch-execution-20261013",
+  "branch": "repair/capiro-acceptance-batch-20261013",
+  "base": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+  "application_tree": "002c31576d9038d4d7f6438db9db3ae9cf00171c",
+  "source_frozen": true,
+  "borrowed_dependencies": [
+    {
+      "path": "/workspace/capiro-acceptance-batch-20261013/node_modules",
+      "target": "/tmp/capiro-onboard-execution-20261013/node_modules"
+    },
+    {
+      "path": "/workspace/capiro-acceptance-batch-20261013/apps/web/node_modules",
+      "target": "/tmp/capiro-onboard-execution-20261013/apps/web/node_modules"
+    }
+  ],
+  "status": ""
+}

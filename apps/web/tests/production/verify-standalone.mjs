@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { chromium } from "@playwright/test";
+import { verifyMeriTheme } from "./verify-meri-theme.mjs";
 import {
   verifyDocumentHttp,
   verifyDocumentNavigation,
@@ -152,6 +153,7 @@ try {
         markerCount: document.querySelectorAll("[data-portfolio-root]").length,
       }));
       assert.deepEqual(returned, before);
+      results.push(await verifyMeriTheme(page, output, viewport, colorScheme));
       assert.equal(
         await page.evaluate(() => window.portfolioRuntimeProbe),
         "same-document",

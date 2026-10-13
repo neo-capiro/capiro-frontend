@@ -1,0 +1,597 @@
+[WebServer] (node:1508064) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 20 tests using 1 worker
+
+(node:1508083) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   1 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:14:3 › notes: held list conceals the saved body and recovers only current records (7.6s)
+(node:1508248) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   2 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:44:5 › notes: failed HTTP403 refresh removes body and stale actions, with deliberate recovery (7.5s)
+(node:1508431) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   3 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:44:5 › notes: failed HTTP503 refresh removes body and stale actions, with deliberate recovery (9.2s)
+(node:1508659) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   4 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:74:3 › notes: an older released read cannot replace a newer failed read (7.4s)
+(node:1508792) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   5 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › notes: rejects meeting list provenance without body or write controls (7.2s)
+(node:1508935) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   6 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › notes: rejects client list provenance without body or write controls (7.2s)
+(node:1509083) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 11:46:17 AM [vite] (client) [console.error] Encountered two children with the same key, `artifact-one`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+  ✘   7 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › notes: rejects duplicate list provenance without body or write controls (7.6s)
+(node:1509227) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   8 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:126:3 › notes: omitted optional parent echoes preserve the original native list projection (2.4s)
+  ✓   9 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:148:5 › notes: exact native client-one parent remains usable (2.5s)
+  ✓  10 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:148:5 › notes: exact native unscoped parent remains usable (2.2s)
+  ✘  11 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:14:3 › debriefs: held list conceals the saved body and recovers only current records (7.4s)
+(node:1509510) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  12 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:44:5 › debriefs: failed HTTP403 refresh removes body and stale actions, with deliberate recovery (7.5s)
+(node:1509659) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  13 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:44:5 › debriefs: failed HTTP503 refresh removes body and stale actions, with deliberate recovery (9.1s)
+(node:1509813) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  14 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:74:3 › debriefs: an older released read cannot replace a newer failed read (7.4s)
+(node:1509952) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  15 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › debriefs: rejects meeting list provenance without body or write controls (7.3s)
+(node:1510117) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  16 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › debriefs: rejects client list provenance without body or write controls (7.5s)
+(node:1510264) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 11:47:23 AM [vite] (client) [console.error] Encountered two children with the same key, `artifact-one`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+  ✘  17 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › debriefs: rejects duplicate list provenance without body or write controls (7.3s)
+(node:1510402) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  18 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:126:3 › debriefs: omitted optional parent echoes preserve the original native list projection (2.6s)
+  ✓  19 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:148:5 › debriefs: exact native client-one parent remains usable (2.4s)
+  ✓  20 tests/browser/acceptance-meeting-artifacts-reads.spec.ts:148:5 › debriefs: exact native unscoped parent remains usable (2.3s)
+
+
+  1) tests/browser/acceptance-meeting-artifacts-reads.spec.ts:14:3 › notes: held list conceals the saved body and recovers only current records 
+
+    Error: expect(locator).toBeHidden() failed
+
+    Locator:  getByText('Synthetic original authorized artifact body', { exact: true })
+    Expected: hidden
+    Received: visible
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeHidden" with timeout 5000ms
+      - waiting for getByText('Synthetic original authorized artifact body', { exact: true })
+        14 × locator resolved to <p>Synthetic original authorized artifact body</p>
+           - unexpected value "visible"
+
+
+      26 |       .poll(async () => (await listState(page))?.fetchStatus)
+      27 |       .toBe("fetching");
+    > 28 |     await expect(page.getByText(originalBody, { exact: true })).toBeHidden();
+         |                                                                 ^
+      29 |     await expect(
+      30 |       page.getByRole("button", { name: "Edit", exact: true }),
+      31 |     ).toBeHidden();
+        at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:28:65
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-96b3f-covers-only-current-records/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-96b3f-covers-only-current-records/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-96b3f-covers-only-current-records/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-96b3f-covers-only-current-records/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/browser/acceptance-meeting-artifacts-reads.spec.ts:44:5 › notes: failed HTTP403 refresh removes body and stale actions, with deliberate recovery 
+
+    Error: expect(locator).toBeHidden() failed
+
+    Locator:  getByText('Synthetic original authorized artifact body', { exact: true })
+    Expected: hidden
+    Received: visible
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeHidden" with timeout 5000ms
+      - waiting for getByText('Synthetic original authorized artifact body', { exact: true })
+        14 × locator resolved to <p>Synthetic original authorized artifact body</p>
+           - unexpected value "visible"
+
+
+      52 |       await listSettled(page, "error");
+      53 |       await expect(page.getByRole("alert")).toBeVisible();
+    > 54 |       await expect(page.getByText(originalBody, { exact: true })).toBeHidden();
+         |                                                                   ^
+      55 |       for (const name of ["Edit", "Approve", "Share", "Unshare", "Export PDF"])
+      56 |         await expect(
+      57 |           page.getByRole("button", { name, exact: true }),
+        at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:54:67
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-b360b-ns-with-deliberate-recovery/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-b360b-ns-with-deliberate-recovery/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-b360b-ns-with-deliberate-recovery/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-b360b-ns-with-deliberate-recovery/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/browser/acceptance-meeting-artifacts-reads.spec.ts:44:5 › notes: failed HTTP503 refresh removes body and stale actions, with deliberate recovery 
+
+    Error: expect(locator).toBeHidden() failed
+
+    Locator:  getByText('Synthetic original authorized artifact body', { exact: true })
+    Expected: hidden
+    Received: visible
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeHidden" with timeout 5000ms
+      - waiting for getByText('Synthetic original authorized artifact body', { exact: true })
+        14 × locator resolved to <p>Synthetic original authorized artifact body</p>
+           - unexpected value "visible"
+
+
+      52 |       await listSettled(page, "error");
+      53 |       await expect(page.getByRole("alert")).toBeVisible();
+    > 54 |       await expect(page.getByText(originalBody, { exact: true })).toBeHidden();
+         |                                                                   ^
+      55 |       for (const name of ["Edit", "Approve", "Share", "Unshare", "Export PDF"])
+      56 |         await expect(
+      57 |           page.getByRole("button", { name, exact: true }),
+        at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:54:67
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-62db8-ns-with-deliberate-recovery/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-62db8-ns-with-deliberate-recovery/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-62db8-ns-with-deliberate-recovery/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-62db8-ns-with-deliberate-recovery/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests/browser/acceptance-meeting-artifacts-reads.spec.ts:74:3 › notes: an older released read cannot replace a newer failed read 
+
+    Error: expect(locator).toBeHidden() failed
+
+    Locator:  getByText('Synthetic original authorized artifact body', { exact: true })
+    Expected: hidden
+    Received: visible
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeHidden" with timeout 5000ms
+      - waiting for getByText('Synthetic original authorized artifact body', { exact: true })
+        14 × locator resolved to <p>Synthetic original authorized artifact body</p>
+           - unexpected value "visible"
+
+
+       95 |     else expect(oldRead.transport).toBe("finished");
+       96 |     await expect.poll(() => listState(page)).toEqual(refused);
+    >  97 |     await expect(page.getByText(originalBody, { exact: true })).toBeHidden();
+          |                                                                 ^
+       98 |     await expect(
+       99 |       page.getByRole("button", { name: "Edit", exact: true }),
+      100 |     ).toBeHidden();
+        at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:97:65
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-9c14a-replace-a-newer-failed-read/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-9c14a-replace-a-newer-failed-read/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-9c14a-replace-a-newer-failed-read/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-9c14a-replace-a-newer-failed-read/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › notes: rejects meeting list provenance without body or write controls 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "error:idle"
+    Received: "success:idle"
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+       at acceptance-meeting-artifacts-fixtures.ts:165
+
+      163 |       return `${state?.status}:${state?.fetchStatus}`;
+      164 |     })
+    > 165 |     .toBe(`${status}:idle`);
+          |      ^
+      166 | }
+      167 |
+        at listSettled (/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts:165:6)
+        at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:116:13
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-8dc98-hout-body-or-write-controls/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-8dc98-hout-body-or-write-controls/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-8dc98-hout-body-or-write-controls/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-8dc98-hout-body-or-write-controls/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › notes: rejects client list provenance without body or write controls 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "error:idle"
+    Received: "success:idle"
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+       at acceptance-meeting-artifacts-fixtures.ts:165
+
+      163 |       return `${state?.status}:${state?.fetchStatus}`;
+      164 |     })
+    > 165 |     .toBe(`${status}:idle`);
+          |      ^
+      166 | }
+      167 |
+        at listSettled (/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts:165:6)
+        at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:116:13
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-bdd2d-hout-body-or-write-controls/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-bdd2d-hout-body-or-write-controls/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-bdd2d-hout-body-or-write-controls/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-bdd2d-hout-body-or-write-controls/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › notes: rejects duplicate list provenance without body or write controls 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "error:idle"
+    Received: "success:idle"
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+       at acceptance-meeting-artifacts-fixtures.ts:165
+
+      163 |       return `${state?.status}:${state?.fetchStatus}`;
+      164 |     })
+    > 165 |     .toBe(`${status}:idle`);
+          |      ^
+      166 | }
+      167 |
+        at listSettled (/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts:165:6)
+        at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:116:13
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-1e0df-hout-body-or-write-controls/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-1e0df-hout-body-or-write-controls/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-1e0df-hout-body-or-write-controls/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-1e0df-hout-body-or-write-controls/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) tests/browser/acceptance-meeting-artifacts-reads.spec.ts:14:3 › debriefs: held list conceals the saved body and recovers only current records 
+
+    Error: expect(locator).toBeHidden() failed
+
+    Locator:  getByText('Synthetic original authorized artifact body', { exact: true })
+    Expected: hidden
+    Received: visible
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeHidden" with timeout 5000ms
+      - waiting for getByText('Synthetic original authorized artifact body', { exact: true })
+        14 × locator resolved to <p>Synthetic original authorized artifact body</p>
+           - unexpected value "visible"
+
+
+      26 |       .poll(async () => (await listState(page))?.fetchStatus)
+      27 |       .toBe("fetching");
+    > 28 |     await expect(page.getByText(originalBody, { exact: true })).toBeHidden();
+         |                                                                 ^
+      29 |     await expect(
+      30 |       page.getByRole("button", { name: "Edit", exact: true }),
+      31 |     ).toBeHidden();
+        at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:28:65
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-fdfe9-covers-only-current-records/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-fdfe9-covers-only-current-records/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-fdfe9-covers-only-current-records/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-fdfe9-covers-only-current-records/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) tests/browser/acceptance-meeting-artifacts-reads.spec.ts:44:5 › debriefs: failed HTTP403 refresh removes body and stale actions, with deliberate recovery 
+
+    Error: expect(locator).toBeHidden() failed
+
+    Locator:  getByText('Synthetic original authorized artifact body', { exact: true })
+    Expected: hidden
+    Received: visible
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeHidden" with timeout 5000ms
+      - waiting for getByText('Synthetic original authorized artifact body', { exact: true })
+        14 × locator resolved to <p>Synthetic original authorized artifact body</p>
+           - unexpected value "visible"
+
+
+      52 |       await listSettled(page, "error");
+      53 |       await expect(page.getByRole("alert")).toBeVisible();
+    > 54 |       await expect(page.getByText(originalBody, { exact: true })).toBeHidden();
+         |                                                                   ^
+      55 |       for (const name of ["Edit", "Approve", "Share", "Unshare", "Export PDF"])
+      56 |         await expect(
+      57 |           page.getByRole("button", { name, exact: true }),
+        at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:54:67
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-3a649-ns-with-deliberate-recovery/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-3a649-ns-with-deliberate-recovery/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-3a649-ns-with-deliberate-recovery/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-3a649-ns-with-deliberate-recovery/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  10) tests/browser/acceptance-meeting-artifacts-reads.spec.ts:44:5 › debriefs: failed HTTP503 refresh removes body and stale actions, with deliberate recovery 
+
+    Error: expect(locator).toBeHidden() failed
+
+    Locator:  getByText('Synthetic original authorized artifact body', { exact: true })
+    Expected: hidden
+    Received: visible
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeHidden" with timeout 5000ms
+      - waiting for getByText('Synthetic original authorized artifact body', { exact: true })
+        14 × locator resolved to <p>Synthetic original authorized artifact body</p>
+           - unexpected value "visible"
+
+
+      52 |       await listSettled(page, "error");
+      53 |       await expect(page.getByRole("alert")).toBeVisible();
+    > 54 |       await expect(page.getByText(originalBody, { exact: true })).toBeHidden();
+         |                                                                   ^
+      55 |       for (const name of ["Edit", "Approve", "Share", "Unshare", "Export PDF"])
+      56 |         await expect(
+      57 |           page.getByRole("button", { name, exact: true }),
+        at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:54:67
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-2d1e2-ns-with-deliberate-recovery/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-2d1e2-ns-with-deliberate-recovery/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-2d1e2-ns-with-deliberate-recovery/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-2d1e2-ns-with-deliberate-recovery/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  11) tests/browser/acceptance-meeting-artifacts-reads.spec.ts:74:3 › debriefs: an older released read cannot replace a newer failed read 
+
+    Error: expect(locator).toBeHidden() failed
+
+    Locator:  getByText('Synthetic original authorized artifact body', { exact: true })
+    Expected: hidden
+    Received: visible
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeHidden" with timeout 5000ms
+      - waiting for getByText('Synthetic original authorized artifact body', { exact: true })
+        14 × locator resolved to <p>Synthetic original authorized artifact body</p>
+           - unexpected value "visible"
+
+
+       95 |     else expect(oldRead.transport).toBe("finished");
+       96 |     await expect.poll(() => listState(page)).toEqual(refused);
+    >  97 |     await expect(page.getByText(originalBody, { exact: true })).toBeHidden();
+          |                                                                 ^
+       98 |     await expect(
+       99 |       page.getByRole("button", { name: "Edit", exact: true }),
+      100 |     ).toBeHidden();
+        at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:97:65
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-f02ed-replace-a-newer-failed-read/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-f02ed-replace-a-newer-failed-read/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-f02ed-replace-a-newer-failed-read/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-f02ed-replace-a-newer-failed-read/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  12) tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › debriefs: rejects meeting list provenance without body or write controls 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "error:idle"
+    Received: "success:idle"
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+       at acceptance-meeting-artifacts-fixtures.ts:165
+
+      163 |       return `${state?.status}:${state?.fetchStatus}`;
+      164 |     })
+    > 165 |     .toBe(`${status}:idle`);
+          |      ^
+      166 | }
+      167 |
+        at listSettled (/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts:165:6)
+        at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:116:13
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-027ed-hout-body-or-write-controls/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-027ed-hout-body-or-write-controls/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-027ed-hout-body-or-write-controls/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-027ed-hout-body-or-write-controls/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  13) tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › debriefs: rejects client list provenance without body or write controls 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "error:idle"
+    Received: "success:idle"
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+       at acceptance-meeting-artifacts-fixtures.ts:165
+
+      163 |       return `${state?.status}:${state?.fetchStatus}`;
+      164 |     })
+    > 165 |     .toBe(`${status}:idle`);
+          |      ^
+      166 | }
+      167 |
+        at listSettled (/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts:165:6)
+        at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:116:13
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-8c93f-hout-body-or-write-controls/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-8c93f-hout-body-or-write-controls/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-8c93f-hout-body-or-write-controls/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-8c93f-hout-body-or-write-controls/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  14) tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › debriefs: rejects duplicate list provenance without body or write controls 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "error:idle"
+    Received: "success:idle"
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+       at acceptance-meeting-artifacts-fixtures.ts:165
+
+      163 |       return `${state?.status}:${state?.fetchStatus}`;
+      164 |     })
+    > 165 |     .toBe(`${status}:idle`);
+          |      ^
+      166 | }
+      167 |
+        at listSettled (/tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-fixtures.ts:165:6)
+        at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/tests/browser/acceptance-meeting-artifacts-reads.spec.ts:116:13
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-5ae30-hout-body-or-write-controls/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-5ae30-hout-body-or-write-controls/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-5ae30-hout-body-or-write-controls/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../workspace/capiro-acceptance-batch-evidence-20261013/root/calendar-corrected-baseline/artifacts/acceptance-meeting-artifac-5ae30-hout-body-or-write-controls/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  14 failed
+    tests/browser/acceptance-meeting-artifacts-reads.spec.ts:14:3 › notes: held list conceals the saved body and recovers only current records 
+    tests/browser/acceptance-meeting-artifacts-reads.spec.ts:44:5 › notes: failed HTTP403 refresh removes body and stale actions, with deliberate recovery 
+    tests/browser/acceptance-meeting-artifacts-reads.spec.ts:44:5 › notes: failed HTTP503 refresh removes body and stale actions, with deliberate recovery 
+    tests/browser/acceptance-meeting-artifacts-reads.spec.ts:74:3 › notes: an older released read cannot replace a newer failed read 
+    tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › notes: rejects meeting list provenance without body or write controls 
+    tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › notes: rejects client list provenance without body or write controls 
+    tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › notes: rejects duplicate list provenance without body or write controls 
+    tests/browser/acceptance-meeting-artifacts-reads.spec.ts:14:3 › debriefs: held list conceals the saved body and recovers only current records 
+    tests/browser/acceptance-meeting-artifacts-reads.spec.ts:44:5 › debriefs: failed HTTP403 refresh removes body and stale actions, with deliberate recovery 
+    tests/browser/acceptance-meeting-artifacts-reads.spec.ts:44:5 › debriefs: failed HTTP503 refresh removes body and stale actions, with deliberate recovery 
+    tests/browser/acceptance-meeting-artifacts-reads.spec.ts:74:3 › debriefs: an older released read cannot replace a newer failed read 
+    tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › debriefs: rejects meeting list provenance without body or write controls 
+    tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › debriefs: rejects client list provenance without body or write controls 
+    tests/browser/acceptance-meeting-artifacts-reads.spec.ts:105:5 › debriefs: rejects duplicate list provenance without body or write controls 
+  6 passed (2.2m)

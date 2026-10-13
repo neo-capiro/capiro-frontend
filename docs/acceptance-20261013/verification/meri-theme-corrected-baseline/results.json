@@ -1,0 +1,389 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/tmp/capiro-acceptance-batch-execution-20261013/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "test/browser/playwright.config.ts",
+      "test/browser/acceptance-meri-theme.spec.ts",
+      "--workers=2",
+      "--output",
+      "/workspace/capiro-acceptance-batch-evidence-20261013/root/meri-theme-corrected-baseline/artifacts",
+      "--reporter",
+      "list,json"
+    ],
+    "configFile": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser/playwright.config.ts",
+    "rootDir": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/capiro-acceptance-batch-evidence-20261013/root/meri-theme-corrected-baseline/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 2,
+    "webServer": {
+      "command": "\"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\" \"/tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser/server.mjs\"",
+      "url": "http://127.0.0.1:5197",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "acceptance-meri-theme.spec.ts",
+      "file": "acceptance-meri-theme.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Meri authored dark workspace keeps the shared header light at 1440px",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1367,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"#\u001b[7mf5f5f4\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"#\u001b[7m0a0a0a\u001b[27m\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"#\u001b[7mf5f5f4\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"#\u001b[7m0a0a0a\u001b[27m\"\u001b[39m\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser/acceptance-meri-theme.spec.ts:40:29",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser/acceptance-meri-theme.spec.ts",
+                      "column": 29,
+                      "line": 40
+                    },
+                    "snippet": "  38 |     const dark = await style(main);\n  39 |     // Authored Meri collection448:90059 and dark frame448:89992.\n> 40 |     expect(dark.foreground).toBe(\"#f5f5f4\");\n     |                             ^\n  41 |     expect(dark.card).toBe(\"#0a0a0a\");\n  42 |     expect(dark.muted).toBe(\"#afa6a0\");\n  43 |     expect(dark.scheme).toBe(\"dark\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser/acceptance-meri-theme.spec.ts",
+                        "column": 29,
+                        "line": 40
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"#\u001b[7mf5f5f4\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"#\u001b[7m0a0a0a\u001b[27m\"\u001b[39m\n\n  38 |     const dark = await style(main);\n  39 |     // Authored Meri collection448:90059 and dark frame448:89992.\n> 40 |     expect(dark.foreground).toBe(\"#f5f5f4\");\n     |                             ^\n  41 |     expect(dark.card).toBe(\"#0a0a0a\");\n  42 |     expect(dark.muted).toBe(\"#afa6a0\");\n  43 |     expect(dark.scheme).toBe(\"dark\");\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser/acceptance-meri-theme.spec.ts:40:29"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:48:44.789Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/meri-theme-corrected-baseline/artifacts/acceptance-meri-theme-Meri-5da63-ared-header-light-at-1440px/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/meri-theme-corrected-baseline/artifacts/acceptance-meri-theme-Meri-5da63-ared-header-light-at-1440px/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/meri-theme-corrected-baseline/artifacts/acceptance-meri-theme-Meri-5da63-ared-header-light-at-1440px/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser/acceptance-meri-theme.spec.ts",
+                    "column": 29,
+                    "line": 40
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f74bf6e1923e13486700-d9c73bd23cc1b7d824fb",
+          "file": "acceptance-meri-theme.spec.ts",
+          "line": 27,
+          "column": 3
+        },
+        {
+          "title": "Meri Files theme follows preference through scoped navigation and history at 1440px",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1440,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"#\u001b[7mf5f5f4\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"#\u001b[7m0a0a0a\u001b[27m\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"#\u001b[7mf5f5f4\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"#\u001b[7m0a0a0a\u001b[27m\"\u001b[39m\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser/acceptance-meri-theme.spec.ts:102:62",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser/acceptance-meri-theme.spec.ts",
+                      "column": 62,
+                      "line": 102
+                    },
+                    "snippet": "  100 |       }),\n  101 |     ).toBeVisible();\n> 102 |     expect((await style(page.getByRole(\"main\"))).foreground).toBe(\"#f5f5f4\");\n      |                                                              ^\n  103 |     await page\n  104 |       .getByRole(\"navigation\", { name: \"Product modes\" })\n  105 |       .getByRole(\"link\", { name: \"Modules\", exact: true })"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser/acceptance-meri-theme.spec.ts",
+                        "column": 62,
+                        "line": 102
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"#\u001b[7mf5f5f4\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"#\u001b[7m0a0a0a\u001b[27m\"\u001b[39m\n\n  100 |       }),\n  101 |     ).toBeVisible();\n> 102 |     expect((await style(page.getByRole(\"main\"))).foreground).toBe(\"#f5f5f4\");\n      |                                                              ^\n  103 |     await page\n  104 |       .getByRole(\"navigation\", { name: \"Product modes\" })\n  105 |       .getByRole(\"link\", { name: \"Modules\", exact: true })\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser/acceptance-meri-theme.spec.ts:102:62"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:48:46.930Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/meri-theme-corrected-baseline/artifacts/acceptance-meri-theme-Meri-62d59-ation-and-history-at-1440px/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/meri-theme-corrected-baseline/artifacts/acceptance-meri-theme-Meri-62d59-ation-and-history-at-1440px/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/meri-theme-corrected-baseline/artifacts/acceptance-meri-theme-Meri-62d59-ation-and-history-at-1440px/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser/acceptance-meri-theme.spec.ts",
+                    "column": 62,
+                    "line": 102
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f74bf6e1923e13486700-a59b47484976c2fd193b",
+          "file": "acceptance-meri-theme.spec.ts",
+          "line": 78,
+          "column": 3
+        },
+        {
+          "title": "Meri authored dark workspace keeps the shared header light at 390px",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1581,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"#\u001b[7mf5f5f4\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"#\u001b[7m0a0a0a\u001b[27m\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"#\u001b[7mf5f5f4\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"#\u001b[7m0a0a0a\u001b[27m\"\u001b[39m\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser/acceptance-meri-theme.spec.ts:40:29",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser/acceptance-meri-theme.spec.ts",
+                      "column": 29,
+                      "line": 40
+                    },
+                    "snippet": "  38 |     const dark = await style(main);\n  39 |     // Authored Meri collection448:90059 and dark frame448:89992.\n> 40 |     expect(dark.foreground).toBe(\"#f5f5f4\");\n     |                             ^\n  41 |     expect(dark.card).toBe(\"#0a0a0a\");\n  42 |     expect(dark.muted).toBe(\"#afa6a0\");\n  43 |     expect(dark.scheme).toBe(\"dark\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser/acceptance-meri-theme.spec.ts",
+                        "column": 29,
+                        "line": 40
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"#\u001b[7mf5f5f4\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"#\u001b[7m0a0a0a\u001b[27m\"\u001b[39m\n\n  38 |     const dark = await style(main);\n  39 |     // Authored Meri collection448:90059 and dark frame448:89992.\n> 40 |     expect(dark.foreground).toBe(\"#f5f5f4\");\n     |                             ^\n  41 |     expect(dark.card).toBe(\"#0a0a0a\");\n  42 |     expect(dark.muted).toBe(\"#afa6a0\");\n  43 |     expect(dark.scheme).toBe(\"dark\");\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser/acceptance-meri-theme.spec.ts:40:29"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:48:49.181Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/meri-theme-corrected-baseline/artifacts/acceptance-meri-theme-Meri-b796b-hared-header-light-at-390px/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/meri-theme-corrected-baseline/artifacts/acceptance-meri-theme-Meri-b796b-hared-header-light-at-390px/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/meri-theme-corrected-baseline/artifacts/acceptance-meri-theme-Meri-b796b-hared-header-light-at-390px/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser/acceptance-meri-theme.spec.ts",
+                    "column": 29,
+                    "line": 40
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f74bf6e1923e13486700-c3d43bc73983c8894e0c",
+          "file": "acceptance-meri-theme.spec.ts",
+          "line": 27,
+          "column": 3
+        },
+        {
+          "title": "Meri Files theme follows preference through scoped navigation and history at 390px",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1703,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"#\u001b[7mf5f5f4\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"#\u001b[7m0a0a0a\u001b[27m\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"#\u001b[7mf5f5f4\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"#\u001b[7m0a0a0a\u001b[27m\"\u001b[39m\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser/acceptance-meri-theme.spec.ts:102:62",
+                    "location": {
+                      "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser/acceptance-meri-theme.spec.ts",
+                      "column": 62,
+                      "line": 102
+                    },
+                    "snippet": "  100 |       }),\n  101 |     ).toBeVisible();\n> 102 |     expect((await style(page.getByRole(\"main\"))).foreground).toBe(\"#f5f5f4\");\n      |                                                              ^\n  103 |     await page\n  104 |       .getByRole(\"navigation\", { name: \"Product modes\" })\n  105 |       .getByRole(\"link\", { name: \"Modules\", exact: true })"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser/acceptance-meri-theme.spec.ts",
+                        "column": 62,
+                        "line": 102
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"#\u001b[7mf5f5f4\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"#\u001b[7m0a0a0a\u001b[27m\"\u001b[39m\n\n  100 |       }),\n  101 |     ).toBeVisible();\n> 102 |     expect((await style(page.getByRole(\"main\"))).foreground).toBe(\"#f5f5f4\");\n      |                                                              ^\n  103 |     await page\n  104 |       .getByRole(\"navigation\", { name: \"Product modes\" })\n  105 |       .getByRole(\"link\", { name: \"Modules\", exact: true })\n    at /tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser/acceptance-meri-theme.spec.ts:102:62"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T11:48:51.569Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/meri-theme-corrected-baseline/artifacts/acceptance-meri-theme-Meri-d5f1b-gation-and-history-at-390px/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/meri-theme-corrected-baseline/artifacts/acceptance-meri-theme-Meri-d5f1b-gation-and-history-at-390px/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/workspace/capiro-acceptance-batch-evidence-20261013/root/meri-theme-corrected-baseline/artifacts/acceptance-meri-theme-Meri-d5f1b-gation-and-history-at-390px/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/capiro-acceptance-batch-execution-20261013/apps/web/test/browser/acceptance-meri-theme.spec.ts",
+                    "column": 62,
+                    "line": 102
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f74bf6e1923e13486700-ac4d047a23f97614d3a9",
+          "file": "acceptance-meri-theme.spec.ts",
+          "line": 78,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-13T11:48:42.318Z",
+    "duration": 11329.826000000001,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

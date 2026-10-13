@@ -1,0 +1,37 @@
+[WebServer] (node:1519156) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 26 tests using 2 workers
+
+(node:1519217) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:1519218) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 test/browser/acceptance-meri-icons.spec.ts:10:3 › Meri exact navigation assets retain visible icon treatment in light (1.8s)
+  ✓   3 test/browser/acceptance-meri-icons.spec.ts:10:3 › Meri exact navigation assets retain visible icon treatment in dark (1.6s)
+  ✓   2 test/browser/acceptance-meri-theme.spec.ts:28:3 › Meri authored dark workspace keeps the shared header light at 1440px (4.4s)
+  ✓   4 test/browser/acceptance-shared-incompletes.spec.ts:21:7 › Shared incomplete contrast home 1440px light (2.1s)
+  ✓   6 test/browser/acceptance-shared-incompletes.spec.ts:21:7 › Shared incomplete contrast docx 1440px light (2.0s)
+  ✓   5 test/browser/acceptance-meri-theme.spec.ts:80:3 › Meri Files theme follows preference through scoped navigation and history at 1440px (3.4s)
+  ✓   7 test/browser/acceptance-shared-incompletes.spec.ts:21:7 › Shared incomplete contrast xlsx 1440px light (2.4s)
+  ✓   8 test/browser/acceptance-meri-theme.spec.ts:28:3 › Meri authored dark workspace keeps the shared header light at 390px (3.8s)
+  ✓   9 test/browser/acceptance-shared-incompletes.spec.ts:21:7 › Shared incomplete contrast unavailable 1440px light (1.8s)
+  ✓  11 test/browser/acceptance-shared-incompletes.spec.ts:21:7 › Shared incomplete contrast modules 1440px light (2.9s)
+  ✓  10 test/browser/acceptance-meri-theme.spec.ts:80:3 › Meri Files theme follows preference through scoped navigation and history at 390px (3.3s)
+  ✓  12 test/browser/acceptance-shared-incompletes.spec.ts:21:7 › Shared incomplete contrast home 1440px dark (1.8s)
+  ✓  13 test/browser/acceptance-shared-incompletes.spec.ts:21:7 › Shared incomplete contrast docx 1440px dark (1.8s)
+  ✓  14 test/browser/acceptance-shared-incompletes.spec.ts:21:7 › Shared incomplete contrast xlsx 1440px dark (2.0s)
+  ✓  15 test/browser/acceptance-shared-incompletes.spec.ts:21:7 › Shared incomplete contrast unavailable 1440px dark (1.6s)
+  ✓  16 test/browser/acceptance-shared-incompletes.spec.ts:21:7 › Shared incomplete contrast modules 1440px dark (2.0s)
+  ✓  17 test/browser/acceptance-shared-incompletes.spec.ts:21:7 › Shared incomplete contrast home 390px light (1.6s)
+  ✓  18 test/browser/acceptance-shared-incompletes.spec.ts:21:7 › Shared incomplete contrast docx 390px light (1.6s)
+  ✓  19 test/browser/acceptance-shared-incompletes.spec.ts:21:7 › Shared incomplete contrast xlsx 390px light (1.6s)
+  ✓  20 test/browser/acceptance-shared-incompletes.spec.ts:21:7 › Shared incomplete contrast unavailable 390px light (1.5s)
+  ✓  21 test/browser/acceptance-shared-incompletes.spec.ts:21:7 › Shared incomplete contrast modules 390px light (1.8s)
+  ✓  22 test/browser/acceptance-shared-incompletes.spec.ts:21:7 › Shared incomplete contrast home 390px dark (1.6s)
+  ✓  23 test/browser/acceptance-shared-incompletes.spec.ts:21:7 › Shared incomplete contrast docx 390px dark (1.7s)
+  ✓  24 test/browser/acceptance-shared-incompletes.spec.ts:21:7 › Shared incomplete contrast xlsx 390px dark (1.7s)
+  ✓  25 test/browser/acceptance-shared-incompletes.spec.ts:21:7 › Shared incomplete contrast unavailable 390px dark (1.5s)
+  ✓  26 test/browser/acceptance-shared-incompletes.spec.ts:21:7 › Shared incomplete contrast modules 390px dark (1.8s)
+
+  26 passed (43.1s)

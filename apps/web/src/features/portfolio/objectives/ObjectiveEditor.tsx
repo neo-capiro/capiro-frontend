@@ -64,7 +64,7 @@ export function ObjectiveEditor({
       </form>
       {open && session.record && (
         <ObjectiveOutreach
-          key={`${session.record.id}:${session.record.version}`}
+          key={`outreach:${session.record.id}:${session.record.version}`}
           objective={session.record}
           disabled={
             session.mutation.isPending ||
@@ -74,7 +74,7 @@ export function ObjectiveEditor({
       )}
       {open && session.record && (
         <ObjectiveWorkDestinations
-          key={`${session.record.id}:${session.record.version}`}
+          key={`work:${session.record.id}:${session.record.version}`}
           objective={session.record}
           disabled={
             session.mutation.isPending ||

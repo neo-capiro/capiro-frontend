@@ -61,7 +61,14 @@ export function MailCompose({
   );
   const [bcc, setBcc] = useState("");
   const [validation, setValidation] = useState("");
-  const send = useSendMail(clientId);
+  const send = useSendMail(
+    clientId,
+    thread
+      ? `thread:${thread.id}`
+      : person.personId
+        ? `person:${person.personId}`
+        : `recipient:${person.email?.trim().toLowerCase() ?? ""}`,
+  );
   const signature = useSignature();
   const authority = useMailAuthority(clientId);
   const mailboxes = useMailboxes(clientId, thread?.id, !sendBlockedReason);

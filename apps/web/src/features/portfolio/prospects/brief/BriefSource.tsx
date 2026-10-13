@@ -32,6 +32,8 @@ export function BriefSource({
       return resolveCitation(api, prospectId, index, citation, signal);
     },
   });
+  const resolved =
+    resolution.isSuccess && !resolution.error ? resolution.data : undefined;
   const saved =
     citation &&
     version.sourceSnapshot.evidence.find(
@@ -113,17 +115,17 @@ export function BriefSource({
                 error={resolution.error}
                 retry={() => void resolution.refetch()}
               />
-              {resolution.data &&
-                (resolution.data.resolvable ? (
+              {resolved &&
+                (resolved.resolvable ? (
                   <section className="stack">
                     <h3>Current dossier</h3>
                     <p>
-                      {resolution.data.currentDossierEvidence?.title ??
+                      {resolved.currentDossierEvidence?.title ??
                         "The citation resolves through the saved snapshot; no current dossier match was returned."}
                     </p>
                   </section>
                 ) : (
-                  <p role="note">{resolution.data.message}</p>
+                  <p role="note">{resolved.message}</p>
                 ))}
             </>
           ) : (

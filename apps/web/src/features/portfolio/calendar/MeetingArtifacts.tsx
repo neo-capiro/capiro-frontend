@@ -3,6 +3,8 @@ import { TextareaField } from "@/shared/portfolio/ui/TextareaField";
 import { useArtifactMutation } from "./artifacts/useArtifactMutation";
 import type { ArtifactActor, ArtifactChange } from "./artifacts/contracts";
 import { canAdminister, useIdentity } from "@/shared/portfolio/auth/identity";
+import { ApiError } from "@/shared/portfolio/api/http";
+import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
@@ -50,9 +52,50 @@ function ArtifactEditor({
   actor: ArtifactActor;
   allowed: boolean;
 }) {
-  const query = useMeetingNotes(meeting.id, kind);
-  const mutation = useArtifactMutation(meeting, kind, actor);
-  const blocked = mutation.isPending || mutation.uncertain || !allowed;
+  const cache = useQueryClient();
+  const query = useMeetingNotes(meeting.id, kind, {
+    ...actor,
+    clientId: meeting.client?.id ?? null,
+  });
+  function readableRows() {
+    const state = cache.getQueryState<z.infer<typeof noteSchema>[]>(
+      query.queryKey,
+    );
+    return state?.status === "success" &&
+      state.fetchStatus === "idle" &&
+      !state.isInvalidated &&
+      !state.error
+      ? state.data
+      : undefined;
+  }
+  function assertReadable(change: ArtifactChange) {
+    const rows = readableRows();
+    const selected = change.id
+      ? rows?.find((row) => row.id === change.id)
+      : undefined;
+    if (
+      !allowed ||
+      !rows ||
+      (change.id && (!selected || selected.restricted)) ||
+      (change.action === "share" &&
+        (!meeting.client ||
+          selected?.status !== "approved" ||
+          selected.confidential)) ||
+      (change.action === "unshare" && !selected?.sharedAt)
+    )
+      throw new ApiError(
+        409,
+        "Refresh the saved artifacts before changing this record.",
+      );
+  }
+  const mutation = useArtifactMutation(meeting, kind, actor, assertReadable);
+  const rows =
+    query.isSuccess && !query.isFetching && !query.error
+      ? readableRows()
+      : undefined;
+  const current = rows !== undefined;
+  const blocked =
+    mutation.isPending || mutation.uncertain || !allowed || !current;
   const [editing, setEditing] = useState<
     | {
         id?: string;
@@ -67,12 +110,33 @@ function ArtifactEditor({
       : undefined,
   );
   const [sharing, setSharing] = useState<string>();
-  const [preview, setPreview] = useState<z.infer<typeof noteSchema>>();
-  const changeArtifact = (change: ArtifactChange) =>
+  const [preview, setPreview] = useState<string>();
+  const previewRecord = rows?.find(
+    (item) => item.id === preview && !item.restricted,
+  );
+  const editingCurrent =
+    current &&
+    (!editing?.id ||
+      rows.some((item) => item.id === editing.id && !item.restricted));
+  const sharingCurrent = rows?.some(
+    (item) =>
+      item.id === sharing &&
+      !item.restricted &&
+      !item.confidential &&
+      item.status === "approved",
+  );
+  const changeArtifact = (change: ArtifactChange) => {
+    if (blocked) return;
+    try {
+      assertReadable(change);
+    } catch {
+      return;
+    }
     mutation.mutate(change, () => {
       setEditing(undefined);
       setSharing(undefined);
     });
+  };
   const singular = kind === "notes" ? "note" : "debrief";
   return (
     <div className="stack">
@@ -83,9 +147,11 @@ function ArtifactEditor({
           disabled={
             mutation.isPending ||
             !allowed ||
+            !current ||
             (mutation.uncertain && mutation.attempt.change?.action !== "save")
           }
           onClick={() => {
+            if (!allowed || mutation.isPending || !readableRows()) return;
             const saved = mutation.attempt.change;
             if (mutation.uncertain) {
               if (saved?.action === "save") setEditing(saved);
@@ -110,11 +176,11 @@ function ArtifactEditor({
         />
       )}
       <QueryState
-        pending={query.isPending}
+        pending={query.isPending || query.isFetching}
         error={query.error}
         retry={() => void query.refetch()}
       />
-      {query.data?.map((item) => (
+      {rows?.map((item) => (
         <article className="card stack" key={item.id}>
           <div className="row between">
             <span className="chip">{item.status ?? "Draft"}</span>
@@ -137,20 +203,34 @@ function ArtifactEditor({
               </p>
               <div className="row">
                 {kind === "debriefs" && (
-                  <button className="button" onClick={() => setPreview(item)}>
+                  <button
+                    className="button"
+                    onClick={() => {
+                      if (
+                        readableRows()?.some(
+                          (row) => row.id === item.id && !row.restricted,
+                        )
+                      )
+                        setPreview(item.id);
+                    }}
+                  >
                     Export PDF
                   </button>
                 )}
                 <button
                   className="button"
                   disabled={blocked}
-                  onClick={() =>
-                    setEditing({
-                      id: item.id,
-                      body: item.body ?? "",
-                      confidential: item.confidential,
-                    })
-                  }
+                  onClick={() => {
+                    const selected = readableRows()?.find(
+                      (row) => row.id === item.id && !row.restricted,
+                    );
+                    if (!blocked && selected)
+                      setEditing({
+                        id: selected.id,
+                        body: selected.body ?? "",
+                        confidential: selected.confidential,
+                      });
+                  }}
                 >
                   Edit
                 </button>
@@ -175,7 +255,19 @@ function ArtifactEditor({
                     <button
                       className="button"
                       disabled={blocked}
-                      onClick={() => setSharing(item.id)}
+                      onClick={() => {
+                        if (
+                          !blocked &&
+                          readableRows()?.some(
+                            (row) =>
+                              row.id === item.id &&
+                              !row.restricted &&
+                              !row.confidential &&
+                              row.status === "approved",
+                          )
+                        )
+                          setSharing(item.id);
+                      }}
                     >
                       Share
                     </button>
@@ -199,11 +291,11 @@ function ArtifactEditor({
           )}
         </article>
       ))}
-      {query.data?.length === 0 && <p className="empty">No {kind} yet.</p>}
-      {preview && (
+      {rows?.length === 0 && <p className="empty">No {kind} yet.</p>}
+      {previewRecord && (
         <SavedMeetingDocumentPreview
           meeting={meeting}
-          document={{ kind: "debrief", debrief: preview }}
+          document={{ kind: "debrief", debrief: previewRecord }}
           onClose={() => setPreview(undefined)}
         />
       )}
@@ -218,7 +310,7 @@ function ArtifactEditor({
         </button>
       )}
       <Dialog
-        open={Boolean(editing)}
+        open={Boolean(editing) && editingCurrent}
         onOpenChange={(open) => {
           if (!open && !mutation.isPending) setEditing(undefined);
         }}
@@ -247,7 +339,12 @@ function ArtifactEditor({
             name="body"
             rows={12}
             required
-            defaultValue={editing?.body}
+            value={editing?.body ?? ""}
+            onChange={(event) => {
+              const body = event.currentTarget.value;
+              if (!blocked)
+                setEditing((draft) => (draft ? { ...draft, body } : draft));
+            }}
             readOnly={blocked}
           />
           <label className="row">
@@ -255,7 +352,14 @@ function ArtifactEditor({
               type="checkbox"
               name="confidential"
               disabled={blocked}
-              defaultChecked={editing?.confidential}
+              checked={editing?.confidential ?? false}
+              onChange={(event) => {
+                const confidential = event.currentTarget.checked;
+                if (!blocked)
+                  setEditing((draft) =>
+                    draft ? { ...draft, confidential } : draft,
+                  );
+              }}
             />
             Confidential
           </label>
@@ -269,7 +373,7 @@ function ArtifactEditor({
         </form>
       </Dialog>
       <Dialog
-        open={Boolean(sharing)}
+        open={Boolean(sharing) && Boolean(sharingCurrent)}
         onOpenChange={(open) => {
           if (!open && !mutation.isPending) setSharing(undefined);
         }}

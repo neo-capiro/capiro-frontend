@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import type { Destinations } from "@/shared/portfolio/config/config";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
@@ -23,15 +23,30 @@ export function GovernmentRelationships({
   const router = useRouter();
   const path = usePathname();
   const [adding, setAdding] = useState<"all" | "committee" | null>(null);
+  const [readError, setReadError] = useState(query.error);
+  if (readError !== query.error) {
+    setReadError(query.error);
+    if (query.error) setAdding(null);
+  }
+  const records = query.isSuccess && !query.error ? query.data : undefined;
   const selected = params.get("target");
-  const target = query.data?.find((row) => row.memberId === selected);
+  const target = records?.find((row) => row.memberId === selected);
   function open(id: string | null) {
+    if (id && (!records || query.isFetching)) return;
     const next = new URLSearchParams(params);
     if (id) next.set("target", id);
     else next.delete("target");
     router.replace(`${path}?${next}`, { scroll: false });
   }
-  const targets = query.data ?? [];
+  const search = params.toString();
+  useEffect(() => {
+    if (!query.error) return;
+    const next = new URLSearchParams(search);
+    if (!next.has("target")) return;
+    next.delete("target");
+    router.replace(`${path}?${next}`, { scroll: false });
+  }, [query.error, search, router, path]);
+  const targets = records ?? [];
   const priority = targets
     .filter((row) => row.tier !== null)
     .sort((a, b) => (a.tier ?? 4) - (b.tier ?? 4))
@@ -60,7 +75,11 @@ export function GovernmentRelationships({
     <div className="page stack">
       <header className="row between">
         <h1>Relationships</h1>
-        <button className="button primary" onClick={() => setAdding("all")}>
+        <button
+          className="button primary"
+          disabled={!records || query.isFetching}
+          onClick={() => setAdding("all")}
+        >
           Add relationship
         </button>
       </header>
@@ -70,7 +89,7 @@ export function GovernmentRelationships({
         error={query.error}
         retry={() => void query.refetch()}
       />
-      {query.data && (
+      {records && (
         <>
           <section className={styles.prioritySection}>
             <header className="row between">
@@ -111,7 +130,7 @@ export function GovernmentRelationships({
           <TargetRecommendations clientId={clientId} targets={targets} />
         </>
       )}
-      {adding && (
+      {records && adding && (
         <AddTargetDialog
           clientId={clientId}
           targets={targets}

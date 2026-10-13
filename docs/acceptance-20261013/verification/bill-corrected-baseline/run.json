@@ -1,0 +1,31 @@
+{
+  "started": "2026-10-13T11:47:41.323897+00:00",
+  "base_application_source": "90ccdd47de7a989e822590d616d69baa15a37d5d",
+  "head": "5875e240c7b266a0e63903c4d0ed9b30c08d4d9a",
+  "command": [
+    "../../node_modules/.bin/playwright",
+    "test",
+    "--config",
+    "playwright.config.ts",
+    "tests/browser/acceptance-bill-search.spec.ts",
+    "--workers=2",
+    "--output",
+    "/workspace/capiro-acceptance-batch-evidence-20261013/root/bill-corrected-baseline/artifacts",
+    "--reporter",
+    "list,json"
+  ],
+  "production_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "production_diff_empty": true,
+  "browser": "/usr/bin/chromium",
+  "node": "v24.19.0",
+  "exit_code": 1,
+  "finished": "2026-10-13T11:48:30.906871+00:00",
+  "stats": {
+    "startTime": "2026-10-13T11:47:41.778Z",
+    "duration": 49107.148,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

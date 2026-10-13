@@ -163,6 +163,9 @@ export interface CalendarFeed {
 }
 export const noteSchema = z.object({
   id: z.string(),
+  // Native serializers emit these echoes; legacy full GET projections omit them.
+  meetingId: z.string().min(1).optional(),
+  clientId: z.string().nullable().optional(),
   body: z.string().nullable(),
   restricted: z.boolean(),
   confidential: z.boolean(),
@@ -171,3 +174,22 @@ export const noteSchema = z.object({
   updatedAt: z.string(),
   sharedAt: z.string().nullable().optional(),
 });
+export function meetingArtifactListSchema(
+  meetingId: string | null,
+  clientId?: string | null,
+) {
+  return z
+    .array(noteSchema)
+    .refine(
+      (rows) =>
+        new Set(rows.map((row) => row.id)).size === rows.length &&
+        rows.every(
+          (row) =>
+            (row.meetingId === undefined || row.meetingId === meetingId) &&
+            (clientId === undefined ||
+              row.clientId === undefined ||
+              row.clientId === clientId),
+        ),
+      "Saved artifacts do not match the requested meeting and client.",
+    );
+}

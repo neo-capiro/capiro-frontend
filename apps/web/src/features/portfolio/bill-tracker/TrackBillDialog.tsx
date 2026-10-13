@@ -4,6 +4,10 @@ import { Dialog } from "@/shared/portfolio/ui/Dialog";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import type { TrackerBackend } from "@/shared/portfolio/config/config";
 import { useBillSearch, useBillJurisdictions, useTrackBill } from "./queries";
+import {
+  matchesBillSearchSelection,
+  type BillSearchSelection,
+} from "./current-data";
 export function TrackBillDialog({
   clientId,
   backend,
@@ -16,10 +20,16 @@ export function TrackBillDialog({
   const [input, setInput] = useState("");
   const [q, setQ] = useState("");
   const [jurisdictions, setJurisdictions] = useState(["US"]);
-  const [selected, setSelected] = useState("");
+  const [selection, setSelection] = useState<BillSearchSelection | null>(null);
   const corpus = useBillJurisdictions(backend);
   const results = useBillSearch(clientId, backend, q, jurisdictions);
   const track = useTrackBill(clientId, backend, onClose);
+  const current = results.current;
+  const selected = matchesBillSearchSelection(current, selection)
+    ? selection
+    : null;
+  // Retire a previous choice permanently; a later recovery requires a new choice.
+  if (selection && !selected) setSelection(null);
   return (
     <Dialog
       open
@@ -33,7 +43,7 @@ export function TrackBillDialog({
         className="row"
         onSubmit={(event) => {
           event.preventDefault();
-          setSelected("");
+          setSelection(null);
           setQ(input.trim());
         }}
       >
@@ -60,7 +70,7 @@ export function TrackBillDialog({
                 type="checkbox"
                 checked={jurisdictions.includes(key)}
                 onChange={(event) => {
-                  setSelected("");
+                  setSelection(null);
                   setJurisdictions((current) =>
                     event.target.checked
                       ? [...current, key]
@@ -82,24 +92,26 @@ export function TrackBillDialog({
         </p>
       )}
       <QueryState
-        pending={Boolean(q) && results.isPending}
+        pending={Boolean(q) && (results.isPending || results.isFetching)}
         error={results.error ?? corpus.error}
         retry={() => {
           void results.refetch();
           if (backend === "intelligence") void corpus.refetch();
         }}
       />
-      {results.data && (
+      {current && (
         <fieldset className="stack">
           <legend>Search results</legend>
-          {results.data.map((bill) => (
+          {current.bills.map((bill) => (
             <label className="row" key={bill.billId}>
               <input
                 type="radio"
                 name="bill"
                 value={bill.billId}
-                checked={selected === bill.billId}
-                onChange={() => setSelected(bill.billId)}
+                checked={selected?.billId === bill.billId}
+                onChange={() =>
+                  setSelection({ billId: bill.billId, source: current.source })
+                }
               />
               <span>
                 <strong className="mono">{bill.displayNum}</strong>{" "}
@@ -109,14 +121,17 @@ export function TrackBillDialog({
               </span>
             </label>
           ))}
-          {!results.data.length && <p className="empty">No matching bills.</p>}
+          {!current.bills.length && <p className="empty">No matching bills.</p>}
         </fieldset>
       )}
       <QueryState error={track.error} />
       <button
         className="button primary"
         disabled={!selected || track.isPending}
-        onClick={() => track.mutate({ billId: selected, track: true })}
+        onClick={() => {
+          if (selected && !track.isPending)
+            track.mutate({ ...selected, track: true });
+        }}
       >
         {track.isPending ? "Tracking…" : "Track selected bill"}
       </button>

@@ -1,6 +1,6 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { QueryState } from "@/shared/portfolio/ui/QueryState";
 import { Dialog } from "@/shared/portfolio/ui/Dialog";
@@ -14,6 +14,7 @@ import { GovernmentRelationships } from "./GovernmentRelationships";
 import { RelationshipTypeNavigation } from "./RelationshipTypeNavigation";
 import { useIdentity } from "@/shared/portfolio/auth/identity";
 import { canManageContacts } from "./contact-api";
+import { useContactCreateAttempt } from "./contact-create-attempt";
 export function RelationshipsPage({
   clientId,
   destinations = {},
@@ -23,33 +24,56 @@ export function RelationshipsPage({
 }) {
   const params = useSearchParams();
   return params.get("kind") === "government" ? (
-    <GovernmentRelationships clientId={clientId} destinations={destinations} />
+    <GovernmentRelationships
+      key={clientId}
+      clientId={clientId}
+      destinations={destinations}
+    />
   ) : (
-    <OrganizationRelationships clientId={clientId} />
+    <OrganizationRelationships key={clientId} clientId={clientId} />
   );
 }
 function OrganizationRelationships({ clientId }: { clientId: string }) {
   const query = usePeople(clientId);
   const identity = useIdentity();
+  const creation = useContactCreateAttempt(clientId);
   const permitted =
     identity.isSuccess &&
     !identity.isFetching &&
     !identity.error &&
     canManageContacts(identity.data?.role);
-  const people = query.data ?? [];
+  const records = query.isSuccess && !query.error ? query.data : undefined;
+  const people = records ?? [];
   const params = useSearchParams();
   const router = useRouter();
   const path = usePathname();
   const [search, setSearch] = useState("");
   const [reviewing, setReviewing] = useState(false);
+  const [readError, setReadError] = useState(query.error);
+  if (readError !== query.error) {
+    setReadError(query.error);
+    if (query.error) {
+      setReviewing(false);
+      setSearch("");
+    }
+  }
   const selected = params.get("person");
   const person = people.find((p) => p.id === selected);
   const open = (id: string | null) => {
+    if (id && (!records || query.isFetching)) return;
     const next = new URLSearchParams(params);
     if (id) next.set("person", id);
     else next.delete("person");
     router.replace(`${path}?${next}`, { scroll: false });
   };
+  const searchParams = params.toString();
+  useEffect(() => {
+    if (!query.error) return;
+    const next = new URLSearchParams(searchParams);
+    if (!next.has("person")) return;
+    next.delete("person");
+    router.replace(`${path}?${next}`, { scroll: false });
+  }, [query.error, searchParams, router, path]);
   const overlaps = new Set(titleOverlaps(people).map((p) => p.id));
   const review = people.filter(
     (p) => p.reviewRequired || overlaps.has(p.id) || !p.hierarchyLevel,
@@ -61,21 +85,35 @@ function OrganizationRelationships({ clientId }: { clientId: string }) {
         <div className="row">
           <button
             className="button"
-            disabled={!permitted || !query.isSuccess}
+            disabled={!permitted || !records || query.isFetching}
             onClick={() => setReviewing(true)}
           >
             Configure hierarchy
           </button>
           <button
             className="button primary"
-            disabled={!permitted || !query.isSuccess || query.isFetching}
-            onClick={() => open("new")}
+            disabled={
+              !permitted ||
+              !records ||
+              query.isFetching ||
+              Boolean(creation.attempt)
+            }
+            onClick={() => {
+              if (!creation.attempt) open("new");
+            }}
           >
             Add contact
           </button>
         </div>
       </header>
       <RelationshipTypeNavigation />
+      {creation.attempt && (
+        <p role="status">
+          {creation.attempt.status === "pending"
+            ? "A contact creation is pending."
+            : "A contact creation may have completed. Review the roster; another create is unavailable in this session. A roster read does not confirm the earlier attempt."}
+        </p>
+      )}
       <QueryState
         error={identity.error}
         retry={() => void identity.refetch()}
@@ -91,7 +129,7 @@ function OrganizationRelationships({ clientId }: { clientId: string }) {
         error={query.error}
         retry={() => void query.refetch()}
       />
-      {query.data && (
+      {records && (
         <section className={styles.container}>
           <div className="toolbar">
             <input
@@ -106,7 +144,7 @@ function OrganizationRelationships({ clientId }: { clientId: string }) {
             </span>
             <button
               className="button"
-              disabled={!permitted}
+              disabled={!permitted || query.isFetching}
               onClick={() => setReviewing(true)}
             >
               Title-based hierarchy
@@ -121,7 +159,7 @@ function OrganizationRelationships({ clientId }: { clientId: string }) {
               </span>
               <button
                 className="button"
-                disabled={!permitted}
+                disabled={!permitted || query.isFetching}
                 onClick={() => setReviewing(true)}
               >
                 Review titles
@@ -175,16 +213,18 @@ function OrganizationRelationships({ clientId }: { clientId: string }) {
           <button onClick={() => open(null)}>Close</button>
         </p>
       )}
-      <ContactDrawer
-        key={`${clientId}:${selected ?? "closed"}`}
-        clientId={clientId}
-        person={person}
-        people={people}
-        open={selected === "new" || Boolean(person)}
-        onClose={() => open(null)}
-      />
+      {records && (
+        <ContactDrawer
+          key={`${clientId}:${selected ?? "closed"}`}
+          clientId={clientId}
+          person={person}
+          people={people}
+          open={selected === "new" || Boolean(person)}
+          onClose={() => open(null)}
+        />
+      )}
       <Dialog
-        open={reviewing}
+        open={Boolean(records) && reviewing}
         onOpenChange={setReviewing}
         title="Review hierarchy"
         description="Automatic placements come from saved titles. Only saved reporting relationships create connecting lines."

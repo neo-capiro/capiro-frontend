@@ -61,10 +61,29 @@ function ClientLinkDialog({
   returnFocus: () => void;
 }) {
   const [search, setSearch] = useState(record.displayName.slice(0, 200));
-  const [selected, setSelected] = useState<ClientChoice | null>(null);
+  const [selection, setSelection] = useState<{
+    term: string;
+    client: ClientChoice;
+  } | null>(null);
   const [confirmed, setConfirmed] = useState(false);
   const query = useLinkClients(search);
   const mutation = useLinkProspect(record.id);
+  const term = search.trim().slice(0, 200);
+  const current =
+    query.isSuccess && !query.error && term ? query.data : undefined;
+  const selected =
+    selection && selection.term === term
+      ? current?.results.find(
+          (client) =>
+            client.id === selection.client.id &&
+            client.name === selection.client.name &&
+            client.canonicalEntityId === selection.client.canonicalEntityId,
+        )
+      : undefined;
+  if (selection && !selected) {
+    setSelection(null);
+    setConfirmed(false);
+  }
   return (
     <Dialog
       open
@@ -92,7 +111,14 @@ function ClientLinkDialog({
             value={search}
             maxLength={200}
             disabled={mutation.isPending}
-            onChange={(event) => setSearch(event.target.value)}
+            onChange={(event) => {
+              const next = event.target.value;
+              if (next.trim().slice(0, 200) !== term) {
+                setSelection(null);
+                setConfirmed(false);
+              }
+              setSearch(next);
+            }}
           />
         </label>
         <QueryState
@@ -101,28 +127,31 @@ function ClientLinkDialog({
           retry={() => void query.refetch()}
         />
         {!search.trim() && <p className="muted">Enter a client name.</p>}
-        {query.data && search.trim() && (
+        {current && (
           <fieldset className={styles.choices} disabled={mutation.isPending}>
             <legend>Matching clients</legend>
-            {query.data.results.length === 0 && (
+            {current.results.length === 0 && (
               <p className="muted">No matching accessible clients.</p>
             )}
-            {query.data.results.map((client) => (
+            {current.results.map((client) => (
               <label key={client.id} className={styles.choice}>
                 <input
                   type="radio"
                   name="existing-client"
                   checked={selected?.id === client.id}
                   onChange={() => {
-                    setSelected(client);
+                    if (!current || mutation.isPending) return;
+                    setSelection({ term, client });
                     setConfirmed(false);
-                    mutation.reset();
+                    // A failed current read revokes presentation, not a
+                    // dispatched mutation's variables/outcome.
+                    if (!mutation.isError) mutation.reset();
                   }}
                 />
                 {client.name}
               </label>
             ))}
-            {query.data.results.length === clientSearchLimit && (
+            {current.results.length === clientSearchLimit && (
               <p className="muted">
                 Showing up to {clientSearchLimit} matches. Refine your search.
               </p>

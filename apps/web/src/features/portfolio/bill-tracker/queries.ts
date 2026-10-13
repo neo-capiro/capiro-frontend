@@ -1,12 +1,20 @@
 "use client";
 import { useSyncExternalStore } from "react";
 import { useIdentity } from "@/shared/portfolio/auth/identity";
-import { assertTrackerReader, trackerReaderKey } from "./current-data";
+import {
+  assertTrackerReader,
+  trackerReaderKey,
+  billSearchKey,
+  currentBillSearch,
+  assertBillSearchSelection,
+  type BillSearchSelection,
+} from "./current-data";
 import {
   useInfiniteQuery,
   useQuery,
   useMutation,
   useQueryClient,
+  hashKey,
 } from "@tanstack/react-query";
 import { useApi } from "@/shared/portfolio/api/provider";
 import type { TrackerBackend } from "@/shared/portfolio/config/config";
@@ -64,12 +72,29 @@ export function useBillSearch(
   jurisdictions: string[],
 ) {
   const api = useApi();
-  return useQuery({
-    queryKey: ["bill-search", backend, clientId, q, jurisdictions],
+  const cache = useQueryClient();
+  const key = billSearchKey(clientId, backend, q, jurisdictions);
+  const query = useQuery({
+    queryKey: key,
     queryFn: ({ signal }) =>
       searchBills(api, clientId, backend, q, jurisdictions, signal),
     enabled: q.trim().length >= 2,
+    staleTime: 0,
+    refetchOnMount: "always",
   });
+  const state = useSyncExternalStore(
+    (notify) =>
+      cache.getQueryCache().subscribe((event) => {
+        if (hashKey(event.query.queryKey) === hashKey(key)) notify();
+      }),
+    () => cache.getQueryState(key),
+    () => undefined,
+  );
+  return {
+    ...query,
+    current:
+      query.isFetchedAfterMount && state ? currentBillSearch(cache, key) : null,
+  };
 }
 export function useBillJurisdictions(backend: TrackerBackend) {
   const api = useApi();
@@ -87,8 +112,15 @@ export function useTrackBill(
   const api = useApi();
   const cache = useQueryClient();
   return useMutation({
-    mutationFn: ({ billId, track }: { billId: string; track: boolean }) =>
-      setTracked(api, clientId, backend, billId, track),
+    mutationFn: (
+      request:
+        | ({ track: true } & BillSearchSelection)
+        | { track: false; billId: string },
+    ) => {
+      if (request.track)
+        assertBillSearchSelection(cache, clientId, backend, request);
+      return setTracked(api, clientId, backend, request.billId, request.track);
+    },
     onSuccess: async () => {
       await cache.invalidateQueries({ queryKey: boardKey(clientId, backend) });
       onSaved();

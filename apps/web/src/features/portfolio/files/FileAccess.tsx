@@ -10,6 +10,7 @@ import { useFileAccess } from "./queries";
 import { useFileChange } from "./mutations";
 import { useFileMetadataChange } from "./useFileMetadataChange";
 import { FileMetadataStatus } from "./FileMetadataStatus";
+import { FolderAccessStatus } from "./FolderAccessStatus";
 import type { Attachment } from "./contracts";
 export function FileAccess({
   clientId,
@@ -24,14 +25,19 @@ export function FileAccess({
 }) {
   const query = useFileAccess(clientId, file?.id);
   const members = useMemberOptions();
-  const change = useFileChange(clientId, onClose);
+  const change = useFileChange(clientId, folder ?? null, onClose);
   const metadata = useFileMetadataChange(clientId, file?.id ?? "", onClose);
   const pending = file ? metadata.isPending : change.isPending;
   const draft = metadata.draft;
-  const initial =
-    draft?.kind === "access"
+  const initial = !file
+    ? change.draft
+    : draft?.kind === "access"
       ? draft
       : (metadata.current ?? (query.error ? undefined : query.data));
+  const viewerLabel = (id: string) => {
+    const member = members.data?.find((item) => item.id === id);
+    return member ? memberName(member) : "Unavailable team member";
+  };
   return (
     <Dialog
       open
@@ -57,7 +63,7 @@ export function FileAccess({
           pending={
             (file
               ? metadata.blocked || Boolean(query.error && !metadata.current)
-              : change.isPending) ||
+              : change.blocked || members.isFetching) ||
             !members.isSuccess ||
             Boolean(members.error)
           }
@@ -83,13 +89,10 @@ export function FileAccess({
         <FileMetadataStatus
           change={metadata}
           kind="access"
-          viewerLabels={metadata.current?.viewerUserIds.map((id) => {
-            const member = members.data?.find((item) => item.id === id);
-            return member ? memberName(member) : "Unavailable team member";
-          })}
+          viewerLabels={metadata.current?.viewerUserIds.map(viewerLabel)}
         />
       ) : (
-        <QueryState error={change.error} />
+        <FolderAccessStatus change={change} viewerLabel={viewerLabel} />
       )}
     </Dialog>
   );
@@ -100,13 +103,16 @@ function AccessForm({
   pending,
   onSave,
 }: {
-  initial?: { viewerMode: "all" | "restricted"; viewerUserIds: string[] };
+  initial?: {
+    viewerMode: "all" | "restricted";
+    viewerUserIds: readonly string[];
+  };
   members: NonNullable<ReturnType<typeof useMemberOptions>["data"]>;
   pending: boolean;
   onSave: (mode: "all" | "restricted", ids: string[]) => void;
 }) {
   const [mode, setMode] = useState(initial?.viewerMode);
-  const [ids, setIds] = useState(initial?.viewerUserIds ?? []);
+  const [ids, setIds] = useState([...(initial?.viewerUserIds ?? [])]);
   return (
     <form
       className="stack"

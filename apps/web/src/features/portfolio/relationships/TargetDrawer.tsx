@@ -28,11 +28,18 @@ export function TargetDrawer({
   const [removing, setRemoving] = useState(false);
   const [selectedEmail, setSelectedEmail] = useState("");
   const details = useTargetContact(target);
-  const save = useTargetMutation(clientId);
-  const remove = useTargetMutation(clientId, onClose);
+  const currentDetails =
+    details.isSuccess && !details.error ? details.data : undefined;
+  const [readError, setReadError] = useState(details.error);
+  if (readError !== details.error) {
+    setReadError(details.error);
+    if (details.error) setSelectedEmail("");
+  }
+  const save = useTargetMutation(clientId, undefined, target.memberId);
+  const remove = useTargetMutation(clientId, onClose, target.memberId);
   const emails = [
     ...new Set(
-      (details.data?.emails ?? []).filter(
+      (currentDetails?.emails ?? []).filter(
         (value) => z.email().safeParse(value).success,
       ),
     ),
@@ -101,7 +108,7 @@ export function TargetDrawer({
         error={details.error}
         retry={() => void details.refetch()}
       />
-      {details.data?.positions.map((position, index) => (
+      {currentDetails?.positions.map((position, index) => (
         <article className="card stack" key={index}>
           <strong>{position.title ?? position.officeName ?? "Office"}</strong>
           <p className="muted">{position.officeName}</p>
@@ -123,7 +130,7 @@ export function TargetDrawer({
           ))}
         </SelectField>
       )}
-      {details.data && (
+      {currentDetails && (
         <ContactMail
           key={email}
           clientId={clientId}
@@ -158,7 +165,11 @@ export function TargetDrawer({
           </section>
         )}
       <div className="formActions">
-        <button className="button" onClick={() => setRemoving(true)}>
+        <button
+          className="button"
+          disabled={save.isPending || remove.isPending}
+          onClick={() => setRemoving(true)}
+        >
           Remove target
         </button>
         {base && (

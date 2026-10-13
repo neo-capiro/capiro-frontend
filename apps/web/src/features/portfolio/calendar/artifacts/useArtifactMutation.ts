@@ -29,6 +29,7 @@ export function useArtifactMutation(
   meeting: ArtifactMeeting,
   kind: ArtifactKind,
   actor: ArtifactActor,
+  assertReadable?: (change: ArtifactChange) => void,
 ) {
   const api = useApi();
   const cache = useQueryClient();
@@ -86,6 +87,7 @@ export function useArtifactMutation(
       change,
       assertCurrent,
       controller.signal,
+      () => assertReadable?.(change),
     ).then(
       () => {
         cache.setQueryData<Attempt>(key, idle);
