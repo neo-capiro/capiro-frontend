@@ -94,6 +94,13 @@ test("Master calendar retains selected client, date and zone when switching view
   await expect(
     page.getByText("Government forecasts unavailable"),
   ).toBeVisible();
-  await expect(page.getByText(/at most 50 upcoming records/)).toBeVisible();
+  const regulatoryCoverage = page.getByRole("status").filter({
+    hasText:
+      /^Regulatory comment deadlines: cached comments_close_on dates only; coverage is incomplete\./,
+  });
+  await expect(regulatoryCoverage).toBeVisible();
+  await expect(regulatoryCoverage).toContainText(
+    "read time, not publisher freshness",
+  );
   expect(unexpected).toEqual([]);
 });
