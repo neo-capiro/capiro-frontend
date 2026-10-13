@@ -1621,5 +1621,320 @@
     "reason": "The 320-line function still composes one current collection/action lifetime. New FileToolbar and FolderCards isolate provenance/folder presentation, while existing upload/access/move/delete/preview owners retain requests, receipt admission, unknown recovery and current reader/actor/client guards. Reader-scoped filters do not become native ACLs; no new transport/provider orchestration was added. A further arbitrary JSX split is not required for this bounded change.",
     "reviewedBy": "Codex shared frontend integration review with independent modules_settings_review",
     "reviewedOn": "2026-10-12"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/onboard-adapters.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "df3410523e877164db7fb8a114061507e35b3ba0a86bbaeef6871ebf3c216232",
+    "reason": "The 216-line describe callback groups independent adapter contracts around one synthetic Capiro transport. It retains native positive controls and rejects mismatched IDs, names, chunk accounting, firm-memory identity, invitation recipient/role, task transition and payment method receipts. Mutable input capture, one-dispatch/no-replay and before-transport refusal assertions distinguish ownership failures. It owns no React, provider, database or native effect; breaking the describe solely to cross the line threshold would fragment a cohesive consumer boundary without reducing authority.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/onboard-adapters.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #2",
+    "fingerprint": "3ae4d00c51c7f5a936bd26db0c11451fba1c08da0211d70eef1ee4d4b62ae335",
+    "reason": "The 104-line describe callback tests the public-capability transport boundary and deliberate redirects: omitted credentials/current401 isolation versus protected expiry, selected-provider consent callback prefix/state validation, and bounded Stripe invoice destinations. Positive opaque-URL preservation accompanies hostile/mismatched inputs. It reuses the HTTP client and adapter rather than duplicating their algorithms, and no redirect/provider call occurs.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/onboard-core-api.ts",
+    "kind": "function",
+    "symbol": "createOnboardCoreApi",
+    "fingerprint": "ee94ca8f78a55cc086db9fe832b3be7c2322b2bd068a3b182bbe57dd89cb4fef",
+    "reason": "The 105-line factory returns small methods over one injected canonical CapiroApi. It owns Onboard request snapshots and correlation of received native IDs/names, import outcome accounting, firm-memory scope and invitation recipient/role. Existing me, Settings client creation and team invitation registry owners remain reused. The factory does not own HTTP implementation, schema catalog, tenant authorization, persistence, retries, UI state or provider work. Each method remains separately comprehensible; extracting each into a tiny module would obscure the common facade without separating an independent lifecycle.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/operations/onboard-contracts.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "fingerprint": "c7f83e4372bae32eadf5833c491240ab9074cb67c56eea974833f9f9b2569a7d",
+    "reason": "The 119-line describe callback is a bounded compatibility matrix for incoming native shapes versus outgoing DTOs: early partial organization state, trimmed stored names, stripped retained JSON, required provider availability, provision/status failure fields, nullable payment secrets/invoice links, prohibited outgoing skipped transition, pending-review memory receipt, consent destinations and default-session operation allocation. Positive and negative assertions prevent both overstrict receiving and invented acceptance.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/lib/attempt-journal.ts",
+    "kind": "function",
+    "symbol": "createOnboardAttempt",
+    "fingerprint": "938a91334419d9134937dedd8c424c8ca24bfbdea2e17d9f0f5d7efbd5249b28",
+    "reason": "A single admission/acknowledgement/reconciliation state machine installs pending before dispatch, distinguishes definite input refusal from unknown, and fences epoch/owner replacement. Shared transport, native authority and durable idempotency remain outside this controller.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/funnel/AdminsPage.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "0ca19eb494de8b0fa25dd5a5a7c4c6d559b4e2845f6b95071e56d4f78df62136",
+    "reason": "One role-designation form with purchaser/self versus invited administrator choice, required super-admin and valid-row checks. Draft fields, guarded setter and markup are cohesive; canonical schemas and auth remain elsewhere.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/funnel/AdminsPage.tsx",
+    "kind": "function",
+    "symbol": "F1Roles",
+    "fingerprint": "4c19a996c660e6aeb783f9d319f303e1ea5e74fb1ee56083e17e5bb676901a0f",
+    "reason": "One role-designation form with purchaser/self versus invited administrator choice, required super-admin and valid-row checks. Draft fields, guarded setter and markup are cohesive; canonical schemas and auth remain elsewhere.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/funnel/ConfirmPage.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "cb8e107ca4e7c249001edfb6a15ec144d554f82529e45887ecaf6312f8006256",
+    "reason": "One explicit provisioning bridge: admission, read-only status polling, timeout presentation and workspace summary. It does not implement provider/queue provisioning or trigger it on mount.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/funnel/ConfirmPage.tsx",
+    "kind": "function",
+    "symbol": "F1Confirm",
+    "fingerprint": "466d00a7797c5139babc75104513bb69b17c7b6e169e5e659b4525b25faab913",
+    "reason": "One explicit provisioning bridge: admission, read-only status polling, timeout presentation and workspace summary. It does not implement provider/queue provisioning or trigger it on mount.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/funnel/LegalReview.tsx",
+    "kind": "function",
+    "symbol": "LegalReview",
+    "fingerprint": "19d3aa029b76de2ed34d9d59421e42274a3edaec748bc625e63b6ff555781cdc",
+    "reason": "One exact-document consent ceremony: acknowledgement fields, guarded acceptance, signed-state rendering and guarded download/continue. Current query admission, identity/generation revocation and document presentation are separate owners. Retaining this form together preserves its consent state; unknown acceptance remains in the canonical journal across editor reset.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/funnel/OrgPage.tsx",
+    "kind": "function",
+    "symbol": "F1Org",
+    "fingerprint": "a0398014705369701626a4167d317b4eaad457ff91c0dd77bff1f075a6f5ebb1",
+    "reason": "One organization/contact profile form; address completeness, field merging and guarded setter belong together. Local logo selection has no fabricated upload operation.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/funnel/PaidBilling.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "72a9a367dc2da3ee2e579c151b8cfc7839b7b8e95b102967a9021c0ee28474c8",
+    "reason": "One paid subscription workflow: quantity/contact/method selection, explicit native preparation and deliberate current status. SDK confirmation, trial flow, transport and invoice policy have separate owners.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/funnel/PaidBilling.tsx",
+    "kind": "function",
+    "symbol": "PaidBilling",
+    "fingerprint": "e9739c7399656ff3fe61dae772787dff77d6ce24d83b51e78ff48b947ca788b8",
+    "reason": "One paid subscription workflow: quantity/contact/method selection, explicit native preparation and deliberate current status. SDK confirmation, trial flow, transport and invoice policy have separate owners.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/funnel/PlanPage.tsx",
+    "kind": "function",
+    "symbol": "PlanForm",
+    "fingerprint": "12d23edefdaa0ca5a64e5373b3dbaaf67d7b956e5f3103e5943bd5ec3a6495f7",
+    "reason": "One plan choice form preserving native payment-committed freeze and current-state continuation. Static explanation and option markup add no separate lifecycle.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/funnel/RegisterPage.tsx",
+    "kind": "function",
+    "symbol": "RegisterPage",
+    "fingerprint": "1fa51b01f72859a84f968c9b4aca1fb811be82d13f0763c266f9d7975f68a188",
+    "reason": "Registration input and explicit Clerk/native handoff remain one workflow. Recovery delegates canonical current-session reader; intentional registration POST receipt publication remains distinct. No native schema, transport, credential owner or automatic write retry enters this form.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/funnel/TrialBilling.tsx",
+    "kind": "function",
+    "symbol": "TrialBilling",
+    "fingerprint": "a8e8f679d64b36ce41351528529a5e5f41d01914e61cac16ca968125091f10a0",
+    "reason": "One trial payment-method preparation/native completion flow; Stripe confirmation has its own owner and client secrets stay in local component/SDK state. Separate paid workflow removes unrelated tier/subscription branching.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/funnel/VerifyPage.tsx",
+    "kind": "function",
+    "symbol": "VerifyPage",
+    "fingerprint": "5989409db9b9861d805a228182b51ffacd8b7d5292fdd0120c2a48858a9d4091",
+    "reason": "One account verification view with explicit code/create/check/recovery actions. Native reads share canonical publication and original-dispatch fencing; local statuses and the existing guarded Clerk handoff remain cohesive. Current-read guard complements root authority rather than creating it.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/it/ItAdminPage.tsx",
+    "kind": "file",
+    "symbol": "<module>",
+    "fingerprint": "95cfc321a931a09152c8c79dd78778b4720733377b8fdb912d7624c8c00a1cd0",
+    "reason": "A token-keyed IT invitation page and its provider-choice presentation are one capability workflow. The exact displayed invitation/provider intent is delegated to a short feature-local guard; transport/token validation and actual provider authorization remain shared/native. The module threshold is caused by one preserved view plus its token selector, not unrelated responsibilities.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/it/ItAdminPage.tsx",
+    "kind": "function",
+    "symbol": "ItInviteView",
+    "fingerprint": "d78b602091262d2a9095e2a52470a482bd090a8152ce6b86671e666c7b73e4cd",
+    "reason": "A token-keyed IT invitation page and its provider-choice presentation are one capability workflow. The exact displayed invitation/provider intent is delegated to a short feature-local guard; transport/token validation and actual provider authorization remain shared/native. The module threshold is caused by one preserved view plus its token selector, not unrelated responsibilities.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/setup/AcceptInvitePage.tsx",
+    "kind": "function",
+    "symbol": "TicketAcceptance",
+    "fingerprint": "945f47af2837d1c8db08aa263636a98ed49b55cc0b97f4f7b305f74aa254ac38",
+    "reason": "One invitation-ticket/password/activation workflow with explicit review, ticket-keyed editor and local unknown fence. Root owns subsequent signed-in authority; mounted activation/route handoff still requires qualification.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/setup/AiSettingsOverlay.tsx",
+    "kind": "function",
+    "symbol": "AiSettingsOverlay",
+    "fingerprint": "e5e49d5af467c57c15b4d103458d4cc5329fb6607cc0a04680259aea21931030",
+    "reason": "One firm-memory proposal editor across the same three section-based file types. Catalog, active read, draft and pending candidate receipt have distinct representations; approval/CAS is not implemented here.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/setup/ClientImportTask.tsx",
+    "kind": "function",
+    "symbol": "ClientImportTask",
+    "fingerprint": "fe668e907bcb3e716e14f7b3bc4d082c0059d00836ea4306765b012ad514f22a",
+    "reason": "Presentational import-progress/managed-mode card consuming current SetupState and a callback; no query, effect or mutation owner.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/setup/EmailSetupTask.tsx",
+    "kind": "function",
+    "symbol": "EmailSetupTask",
+    "fingerprint": "7c2d2f33c09f926492cec043e883e9643813432c7e5dfd2bc6cb4b168fbb2679",
+    "reason": "Presentational email task states and contact/resend controls through a typed subset of the setup action controller; no independent effect admission.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/setup/FirmRegistrantSearch.tsx",
+    "kind": "function",
+    "symbol": "FirmRegistrantSearch",
+    "fingerprint": "07bc9b746f7c18fa47694e9c52aa1067d82773de6d17bc9cff9d669a89d9ebe0",
+    "reason": "Search/manual-path view consuming the persistent import controller. Result selection and empty/error/keyboard presentation remain local; it creates no second reader/writer.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/setup/ImportCandidateRow.tsx",
+    "kind": "function",
+    "symbol": "ImportCandidateRow",
+    "fingerprint": "8732fa98e907dfea5dfa197df34e6a9c24f4268237f6695c2f3f348771fe3c7d",
+    "reason": "A single candidate selection row with spend formatting and checkbox keyboard/disabled presentation; its callback belongs to the parent workflow.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/setup/ImportCandidateSelection.tsx",
+    "kind": "function",
+    "symbol": "ImportCandidateSelection",
+    "fingerprint": "31af3ab4f113c6504ed9361546197ce3b26c9346848f35186c46f159b646ad97",
+    "reason": "A single reviewed candidate-selection panel including retained outcomes, capacity explanation and deliberate billing navigation. Transport/lifecycle remain in the persistent controller.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/setup/InvitesOverlay.tsx",
+    "kind": "function",
+    "symbol": "InvitesOverlay",
+    "fingerprint": "b367313695a2502817e9805d58e443e51963d2718a6c903e867a04e857c015cd",
+    "reason": "One reviewed-recipient editor, per-recipient outcomes and explicit setup completion. Existing batch/journal owner handles dispatch sequencing; current eligibility and setup GET lifecycle are separate owners. Completion recovery no longer creates a success-only authority side channel.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/setup/ManualClientForm.tsx",
+    "kind": "function",
+    "symbol": "ManualClientForm",
+    "fingerprint": "b6137bc2d51668c55024ea21a3f738470d5b47bff54a1dd1c52eebc85028dae6",
+    "reason": "One manual-client form rendering controlled fields/current capacity through the persistent workflow; does not duplicate API, counts or outcome ownership.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/setup/SetupDashboardPage.tsx",
+    "kind": "function",
+    "symbol": "SetupDashboardPage",
+    "fingerprint": "a5d89e2d9215bb31c7bf40ff4db29a6e38e898bce867b5adb151d04ca6cbd13e",
+    "reason": "Current identity, native setup read and membership/legacy admission selector. It composes the separate membership view or task workspace and supplies the canonical current-read callback. The additional line does not add a workflow or backend responsibility.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/setup/SetupWorkspace.tsx",
+    "kind": "function",
+    "symbol": "SetupWorkspace",
+    "fingerprint": "566e564d27dbed7db3a30f2c25fb4bb28d5e2975c366eabf16fb160c20a637e9",
+    "reason": "Composition of current task cards and one explicitly opened overlay. Overlay eligibility/revocation and parent task mutation handlers live in dedicated feature modules; the workspace only exposes deliberate recoveries and selection. Current managed/prerequisite changes revoke the relevant editor.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/setup/WorkspaceMembership.tsx",
+    "kind": "function",
+    "symbol": "WorkspaceMembership",
+    "fingerprint": "4d2de73efa8974d21f0672300055e26ee0fffd9e20981f98873ad1825b3a52ae",
+    "reason": "Explicit current-workspace membership choice and legacy-workspace notice. No automatic guessed organization selection or tenant authority is created.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/setup/useImportWorkflow.ts",
+    "kind": "function",
+    "symbol": "useImportWorkflow",
+    "fingerprint": "4d36183a26e5c51e39aaaf6258db2f0f15c97bb955e8e56cf16bfd846c671661",
+    "reason": "One persistent import controller spanning search, firm selection, candidate import and manual entry. Keeping these states together prevents view extraction from remounting writers; presentational stages are separate.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/pages/setup/useSetupActions.ts",
+    "kind": "function",
+    "symbol": "useSetupActions",
+    "fingerprint": "81ebb0d0a689b20bf8f0dfd60de1f5e72cf9c4e42b4d427655db29805595732c",
+    "reason": "One setup-service event binding for IT invitation and task completion. It preserves native from/to operands, composes current-read/managed-import guards with the existing attempt journal and refresh callback, and contains no transport, provider or role-policy implementation.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/ui/panels.tsx",
+    "kind": "function",
+    "symbol": "OptionCard",
+    "fingerprint": "5e0c9d8f48368475e9fda2d982afe6c9f1d67bbbc91bcfc0c06a41ef98927a29",
+    "reason": "OptionCard is a single style-heavy presentational control with selected/disabled and keyboard semantics, not an effect/controller owner.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
+  },
+  {
+    "file": "apps/web/src/features/onboard/ui/shell.tsx",
+    "kind": "function",
+    "symbol": "StepRail",
+    "fingerprint": "924f005baabf53cb70544d1e183fb57ec75b0a7046e895454769393e2d16e13f",
+    "reason": "One ordered nine-step progress indicator; flex wrapping and max-width retain each progress item, order and label inside the available width. No responsive state or progress authority was introduced. Rendered mobile green remains root-owned, not inferred from static review.",
+    "reviewedBy": "Codex core_profile_review, verified by shared frontend integration owner",
+    "reviewedOn": "2026-10-13"
   }
 ]

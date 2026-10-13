@@ -1,0 +1,141 @@
+{
+  "baseline": false,
+  "method": "Pure execution of exact source function/element projections and keyed editor slots, with real QueryClient and closed synthetic hooks/API. No React mount, browser, network or native request. Current-lifetime asynchronous behavior is separately tested.",
+  "sources": {
+    "/workspace/capiro-onboard-port-20261013/apps/web/src/features/onboard/lib/legal-review-lifetime.ts": "cabd6813f4fce9923db4d66d46b955a34ea28cb327a7a86106bbb523fbf902d9",
+    "/workspace/capiro-onboard-port-20261013/apps/web/src/features/onboard/pages/funnel/LegalDocumentBlock.tsx": "ae9ae98281410d99ac39cfd3fcebcc4d4ddbe4ce2ace08a659afb161995a0f44",
+    "/workspace/capiro-onboard-port-20261013/apps/web/src/features/onboard/pages/funnel/LegalReview.tsx": "3af1e67458d19ba2450de61ddeef608dc763827675df5236a75e0c315b006b03",
+    "/workspace/capiro-onboard-port-20261013/apps/web/src/features/onboard/pages/funnel/LegalPage.tsx": "c22e71a8cbc01dc90fce2cc4fbff7a50b08b8d5d4987a970c2519530c535c74e"
+  },
+  "results": [
+    {
+      "replacement": "none",
+      "beforeEnabled": true,
+      "afterEnabled": true,
+      "currentAcknowledgements": [
+        {
+          "title": "Terms of Service",
+          "checked": true,
+          "html": "Reviewed terms A"
+        },
+        {
+          "title": "Subscription Agreement",
+          "checked": true,
+          "html": "Reviewed agreement A"
+        }
+      ],
+      "authority": true,
+      "syntheticApiCalls": [
+        {
+          "tosVersion": "tos-A",
+          "saVersion": "sa-A",
+          "signerName": "Synthetic Purchaser",
+          "signerTitle": "Synthetic authorized reviewer",
+          "signatureName": "Synthetic Purchaser",
+          "emailCopy": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "replacement": "version",
+      "beforeEnabled": true,
+      "afterEnabled": false,
+      "currentAcknowledgements": [
+        {
+          "title": "Terms of Service",
+          "checked": false,
+          "html": "Reviewed terms A"
+        },
+        {
+          "title": "Subscription Agreement",
+          "checked": false,
+          "html": "Reviewed agreement A"
+        }
+      ],
+      "authority": false,
+      "syntheticApiCalls": [],
+      "pass": true
+    },
+    {
+      "replacement": "html",
+      "beforeEnabled": true,
+      "afterEnabled": false,
+      "currentAcknowledgements": [
+        {
+          "title": "Terms of Service",
+          "checked": false,
+          "html": "Reviewed terms A replacement"
+        },
+        {
+          "title": "Subscription Agreement",
+          "checked": false,
+          "html": "Reviewed agreement A replacement"
+        }
+      ],
+      "authority": false,
+      "syntheticApiCalls": [],
+      "pass": true
+    },
+    {
+      "replacement": "plan",
+      "beforeEnabled": true,
+      "afterEnabled": false,
+      "currentAcknowledgements": [
+        {
+          "title": "Terms of Service",
+          "checked": false,
+          "html": "Reviewed terms A"
+        },
+        {
+          "title": "Subscription Agreement",
+          "checked": false,
+          "html": "Reviewed agreement A"
+        }
+      ],
+      "authority": false,
+      "syntheticApiCalls": [],
+      "pass": true
+    },
+    {
+      "replacement": "error-recovery",
+      "beforeEnabled": true,
+      "afterEnabled": false,
+      "currentAcknowledgements": [
+        {
+          "title": "Terms of Service",
+          "checked": false,
+          "html": "Reviewed terms A"
+        },
+        {
+          "title": "Subscription Agreement",
+          "checked": false,
+          "html": "Reviewed agreement A"
+        }
+      ],
+      "authority": false,
+      "syntheticApiCalls": [],
+      "pass": true
+    },
+    {
+      "replacement": "loading-recovery",
+      "beforeEnabled": true,
+      "afterEnabled": false,
+      "currentAcknowledgements": [
+        {
+          "title": "Terms of Service",
+          "checked": false,
+          "html": "Reviewed terms A"
+        },
+        {
+          "title": "Subscription Agreement",
+          "checked": false,
+          "html": "Reviewed agreement A"
+        }
+      ],
+      "authority": false,
+      "syntheticApiCalls": [],
+      "pass": true
+    }
+  ]
+}

@@ -1,0 +1,478 @@
+{
+  "events": [
+    {
+      "type": "before",
+      "callId": "pw:api@50",
+      "stepId": "pw:api@50",
+      "startTime": 13688.809,
+      "class": "Test",
+      "method": "pw:api",
+      "title": "Click getByRole('button', { name: 'Check current status', exact: true })",
+      "params": {
+        "selector": "internal:role=button[name=\"Check current status\"s]",
+        "strict": "true",
+        "timeout": "0"
+      },
+      "stack": [
+        {
+          "file": "/tmp/capiro-onboard-execution-20261013/apps/web/test/browser/onboard-host-funnel.spec.ts",
+          "line": 109,
+          "column": 6
+        }
+      ]
+    },
+    {
+      "type": "before",
+      "callId": "pw:api@51",
+      "stepId": "pw:api@51",
+      "startTime": 13726.071,
+      "class": "Test",
+      "method": "pw:api",
+      "title": "Click getByRole('button', { name: 'Check current status', exact: true })",
+      "params": {
+        "selector": "internal:role=button[name=\"Check current status\"s]",
+        "strict": "true",
+        "timeout": "0"
+      },
+      "stack": [
+        {
+          "file": "/tmp/capiro-onboard-execution-20261013/apps/web/test/browser/onboard-host-funnel.spec.ts",
+          "line": 116,
+          "column": 6
+        }
+      ]
+    },
+    {
+      "type": "after",
+      "callId": "pw:api@51",
+      "endTime": 42798.713,
+      "annotations": [],
+      "error": {
+        "name": "",
+        "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Check current status', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\">Check current status</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 \u00d7 waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 \u00d7 waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    56 \u00d7 waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+        "stack": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Check current status', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\">Check current status</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 \u00d7 waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 \u00d7 waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    56 \u00d7 waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at /tmp/capiro-onboard-execution-20261013/apps/web/test/browser/onboard-host-funnel.spec.ts:116:6"
+      }
+    },
+    {
+      "type": "before",
+      "callId": "call@544",
+      "startTime": 12793.146,
+      "class": "Frame",
+      "method": "goto",
+      "params": {
+        "url": "/plan",
+        "timeout": 0,
+        "waitUntil": "load"
+      },
+      "stepId": "pw:api@33",
+      "pageId": "page@3fe43d43b624a8c2b870c8ba1ab75efe",
+      "beforeSnapshot": "before@call@544"
+    },
+    {
+      "type": "frame-snapshot",
+      "snapshot": {
+        "callId": "call@577",
+        "snapshotName": "before@call@577",
+        "pageId": "page@3fe43d43b624a8c2b870c8ba1ab75efe",
+        "frameId": "frame@529e96c5a0c94e17f31788acb938b098",
+        "frameUrl": "http://127.0.0.1:5197/plan",
+        "doctype": "html",
+        "html": [
+          "HTML",
+          {
+            "lang": "en"
+          },
+          [
+            [
+              11,
+              12
+            ]
+          ],
+          [
+            [
+              11,
+              13
+            ]
+          ],
+          [
+            "BODY",
+            {},
+            [
+              [
+                11,
+                14
+              ]
+            ],
+            [
+              "DIV",
+              {
+                "id": "root"
+              },
+              [
+                "DIV",
+                {
+                  "class": "onboard-surface"
+                },
+                [
+                  "FIELDSET",
+                  {
+                    "aria-busy": "false",
+                    "style": "border: 0px; padding: 0px; margin: 0px; min-width: 0px;"
+                  },
+                  [
+                    "DIV",
+                    {
+                      "style": "min-height: 100vh; display: flex; flex-direction: column; background: var(--bg-canvas);"
+                    },
+                    [
+                      [
+                        9,
+                        62
+                      ]
+                    ],
+                    [
+                      "DIV",
+                      {
+                        "style": "flex: 1 1 0%; display: flex; flex-direction: column; align-items: center; padding: 44px 40px 64px;"
+                      },
+                      [
+                        "DIV",
+                        {
+                          "style": "width: 100%; max-width: 560px;"
+                        },
+                        [
+                          "DIV",
+                          {
+                            "role": "status",
+                            "style": "margin: 12px 0px; font-size: 12.5px; line-height: 1.5;"
+                          },
+                          [
+                            "B",
+                            {},
+                            "Submission outcome unknown"
+                          ],
+                          [
+                            "P",
+                            {},
+                            [
+                              [
+                                1,
+                                2
+                              ]
+                            ],
+                            [
+                              [
+                                1,
+                                3
+                              ]
+                            ],
+                            [
+                              [
+                                1,
+                                4
+                              ]
+                            ],
+                            "The result was not confirmed. Check current status; do not repeat this submission."
+                          ],
+                          [
+                            "BUTTON",
+                            {
+                              "type": "button",
+                              "style": "font-family: var(--font-sans); font-size: 13.5px; font-weight: 600; letter-spacing: -0.005em; padding: 8px 16px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 7px; border-width: 1px; border-style: solid; border-color: var(--border-1); border-image: none; opacity: 1; transition: background 0.12s; background: rgb(255, 255, 255); color: var(--ink-1);"
+                            },
+                            "Check current status"
+                          ],
+                          [
+                            "P",
+                            {},
+                            "If current records do not resolve this submission, contact",
+                            " ",
+                            [
+                              "A",
+                              {
+                                "href": "mailto:support@capiro.ai"
+                              },
+                              "support@capiro.ai"
+                            ],
+                            " before repeating it."
+                          ]
+                        ],
+                        [
+                          "FIELDSET",
+                          {
+                            "aria-busy": "true",
+                            "style": "border: 0px; padding: 0px; margin: 0px; min-width: 0px;",
+                            "disabled": ""
+                          },
+                          [
+                            [
+                              8,
+                              1
+                            ]
+                          ],
+                          [
+                            [
+                              1,
+                              8
+                            ]
+                          ],
+                          [
+                            [
+                              1,
+                              9
+                            ]
+                          ],
+                          [
+                            "DIV",
+                            {
+                              "style": "font-size: 11.5px; color: var(--critical); line-height: 1.5; margin-top: 10px; text-align: right;"
+                            },
+                            "Synthetic ambiguous dispatch"
+                          ],
+                          [
+                            "DIV",
+                            {
+                              "style": "display: flex; justify-content: flex-end; margin-top: 20px;"
+                            },
+                            [
+                              "BUTTON",
+                              {
+                                "type": "button",
+                                "style": "font-family: var(--font-sans); font-size: 13.5px; font-weight: 600; letter-spacing: -0.005em; padding: 8px 16px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 7px; border-width: 1px; border-style: solid; border-color: var(--accent); border-image: none; opacity: 1; transition: background 0.12s; background: var(--accent); color: rgb(255, 255, 255);"
+                              },
+                              [
+                                [
+                                  9,
+                                  95
+                                ]
+                              ]
+                            ]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              [
+                11,
+                18
+              ]
+            ]
+          ]
+        ],
+        "viewport": {
+          "width": 1440,
+          "height": 1040
+        },
+        "timestamp": 13673.958,
+        "wallTime": 1791868886646,
+        "collectionTime": 2.2999999970197678,
+        "resourceOverrides": [],
+        "isMainFrame": true
+      }
+    },
+    {
+      "type": "before",
+      "callId": "call@581",
+      "startTime": 13688.945,
+      "class": "Frame",
+      "method": "click",
+      "params": {
+        "selector": "internal:role=button[name=\"Check current status\"s]",
+        "strict": true,
+        "timeout": 0
+      },
+      "stepId": "pw:api@50",
+      "pageId": "page@3fe43d43b624a8c2b870c8ba1ab75efe",
+      "beforeSnapshot": "before@call@581"
+    },
+    {
+      "type": "before",
+      "callId": "call@586",
+      "startTime": 13726.184,
+      "class": "Frame",
+      "method": "click",
+      "params": {
+        "selector": "internal:role=button[name=\"Check current status\"s]",
+        "strict": true,
+        "timeout": 0
+      },
+      "stepId": "pw:api@51",
+      "pageId": "page@3fe43d43b624a8c2b870c8ba1ab75efe",
+      "beforeSnapshot": "before@call@586"
+    }
+  ],
+  "sessionNetwork": [
+    {
+      "type": "resource-snapshot",
+      "snapshot": {
+        "pageref": "page@3fe43d43b624a8c2b870c8ba1ab75efe",
+        "startedDateTime": "2026-10-13T05:21:26.442Z",
+        "time": 5.694999999999999,
+        "request": {
+          "method": "GET",
+          "url": "http://127.0.0.1:5197/api/capiro/onboard.funnel.session?input=%7B%7D",
+          "httpVersion": "HTTP/1.1",
+          "cookies": [],
+          "headers": [
+            {
+              "name": "Accept",
+              "value": "*/*"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US"
+            },
+            {
+              "name": "Referer",
+              "value": "http://127.0.0.1:5197/plan"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Not A(Brand\";v=\"99\", \"Chromium\";v=\"154\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"Linux\""
+            }
+          ],
+          "queryString": [
+            {
+              "name": "input",
+              "value": "{}"
+            }
+          ],
+          "headersSize": 350,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/1.1",
+          "cookies": [],
+          "headers": [
+            {
+              "name": "content-type",
+              "value": "application/json"
+            },
+            {
+              "name": "content-length",
+              "value": "372"
+            }
+          ],
+          "content": {
+            "size": 372,
+            "mimeType": "application/json",
+            "compression": 6,
+            "_sha1": "c1118f6982bbebb74a39dc9b26b2a052d4e7bd25.json"
+          },
+          "headersSize": 72,
+          "bodySize": 366,
+          "redirectURL": "",
+          "_transferSize": 438
+        },
+        "cache": {},
+        "timings": {
+          "dns": -1,
+          "connect": -1,
+          "ssl": -1,
+          "send": 0,
+          "wait": 4.233,
+          "receive": 1.462
+        },
+        "_frameref": "frame@529e96c5a0c94e17f31788acb938b098",
+        "_monotonicTime": 13470.818,
+        "_resourceType": "fetch",
+        "_wasFulfilled": true,
+        "_securityDetails": {}
+      }
+    },
+    {
+      "type": "resource-snapshot",
+      "snapshot": {
+        "pageref": "page@3fe43d43b624a8c2b870c8ba1ab75efe",
+        "startedDateTime": "2026-10-13T05:21:26.695Z",
+        "time": -1,
+        "request": {
+          "method": "GET",
+          "url": "http://127.0.0.1:5197/api/capiro/onboard.funnel.session?input=%7B%7D",
+          "httpVersion": "HTTP/1.1",
+          "cookies": [],
+          "headers": [
+            {
+              "name": "Accept",
+              "value": "*/*"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "en-US"
+            },
+            {
+              "name": "Referer",
+              "value": "http://127.0.0.1:5197/plan"
+            },
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+            },
+            {
+              "name": "sec-ch-ua",
+              "value": "\"Not A(Brand\";v=\"99\", \"Chromium\";v=\"154\""
+            },
+            {
+              "name": "sec-ch-ua-mobile",
+              "value": "?0"
+            },
+            {
+              "name": "sec-ch-ua-platform",
+              "value": "\"Linux\""
+            }
+          ],
+          "queryString": [
+            {
+              "name": "input",
+              "value": "{}"
+            }
+          ],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": -1,
+          "statusText": "",
+          "httpVersion": "HTTP/1.1",
+          "cookies": [],
+          "headers": [],
+          "content": {
+            "size": -1,
+            "mimeType": "x-unknown"
+          },
+          "headersSize": -1,
+          "bodySize": -1,
+          "redirectURL": "",
+          "_transferSize": -1
+        },
+        "cache": {},
+        "timings": {
+          "send": -1,
+          "wait": -1,
+          "receive": -1
+        },
+        "_frameref": "frame@529e96c5a0c94e17f31788acb938b098",
+        "_monotonicTime": 13722.604,
+        "_resourceType": "fetch"
+      }
+    }
+  ]
+}

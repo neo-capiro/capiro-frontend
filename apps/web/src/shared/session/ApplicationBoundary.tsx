@@ -8,6 +8,28 @@ import { CapiroDataProvider } from "../capiro/CapiroBoundary";
 import { SessionContext } from "./SessionContext";
 import { SelectedClientProvider } from "./SelectedClient";
 import { routeClientId } from "./client-route";
+import { isOnboardPath, isPublicOnboardPath } from "./onboard-route";
+
+const noSignedInSession = () => {};
+
+/** Reuse the canonical query/request owner for signed-out onboarding too. */
+function PublicSessionData({
+  children,
+  state = "signed-out",
+}: {
+  children: ReactNode;
+  state?: "signed-out" | "loading" | "unconfigured";
+}) {
+  return (
+    <SessionContext.Provider value={state}>
+      <DataProvider>
+        <CapiroDataProvider onSessionExpired={noSignedInSession}>
+          {children}
+        </CapiroDataProvider>
+      </DataProvider>
+    </SessionContext.Provider>
+  );
+}
 
 function SessionData({
   children,
@@ -47,11 +69,21 @@ function CurrentSession({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const search = useSearchParams();
   const clientId = routeClientId(pathname, search);
+  if (!isLoaded && isOnboardPath(pathname))
+    return (
+      <PublicSessionData key="loading-onboard" state="loading">
+        {children}
+      </PublicSessionData>
+    );
   if (!isLoaded)
     return (
       <SessionContext.Provider value="loading">
         {children}
       </SessionContext.Provider>
+    );
+  if (!userId && isOnboardPath(pathname))
+    return (
+      <PublicSessionData key="signed-out-onboard">{children}</PublicSessionData>
     );
   if (!userId)
     return (
@@ -79,6 +111,14 @@ export function ApplicationBoundary({
   const pathname = usePathname();
   // Revocable Planner capability forms have an independent public contract.
   if (pathname.startsWith("/forms/")) return children;
+  // IT tokens, including invalid/expired ones, do not depend on Clerk startup.
+  // Replacing that capability discards its private cache and pending observation.
+  if (isPublicOnboardPath(pathname))
+    return <PublicSessionData key={pathname}>{children}</PublicSessionData>;
+  if (!publishableKey && isOnboardPath(pathname))
+    return (
+      <PublicSessionData state="unconfigured">{children}</PublicSessionData>
+    );
   if (!publishableKey)
     return (
       <SessionContext.Provider value="unconfigured">

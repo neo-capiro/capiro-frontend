@@ -13,6 +13,8 @@ const configuration = {
   resolve: {
     alias: [
       { find: "@", replacement: path.join(app, "src") },
+      { find: "@clerk/nextjs/legacy", replacement: local("clerk-legacy.ts") },
+      { find: "@clerk/nextjs/errors", replacement: local("clerk-errors.ts") },
       { find: "@clerk/nextjs", replacement: local("clerk.tsx") },
       { find: "next/link", replacement: local("navigation.tsx") },
       { find: "next/navigation", replacement: local("navigation.tsx") },

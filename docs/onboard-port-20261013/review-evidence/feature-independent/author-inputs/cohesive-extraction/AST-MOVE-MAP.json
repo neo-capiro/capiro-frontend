@@ -1,0 +1,72 @@
+{
+  "recordedAt": "2026-10-13T04:43:12.943Z",
+  "scope": "AST mapping of moved state/control/JSX only. Raw JSX whitespace can differ under Prettier; isolated TypeScript JSX transpilation compares emitted AST without importing/executing modules or resolving types. Not a build, mounted browser or provider qualification.",
+  "sourceSnapshots": [
+    {
+      "path": "before/BillingPage.tsx",
+      "sha256": "49fd75ca4e6481fa9971baddee87da1eceec4303450ce37c29e2d49b40f1bf1e"
+    },
+    {
+      "path": "before/ImportOverlay.tsx",
+      "sha256": "005afb73d76056b1c8bc102bea9cad081d9835f9961086baca49db48b27d177b"
+    },
+    {
+      "path": "before/SetupDashboardPage.tsx",
+      "sha256": "e7bc636e95d0349d88d84a549b4c4c05b629f105ee14405a30bd40794179e451"
+    }
+  ],
+  "records": [
+    {
+      "responsibility": "TrialBilling",
+      "source": "before/BillingPage.tsx#F1PayTrial",
+      "destination": "pages/funnel/TrialBilling.tsx",
+      "unchangedFunctionBodyAst": true
+    },
+    {
+      "responsibility": "PaidBilling",
+      "source": "before/BillingPage.tsx#F1PayPaid",
+      "destination": "pages/funnel/PaidBilling.tsx",
+      "unchangedFunctionBodyAst": true
+    },
+    {
+      "responsibility": "ManualClientForm",
+      "source": "before/ImportOverlay.tsx",
+      "destination": "pages/setup/ManualClientForm.tsx",
+      "unchangedReturnJsxAst": false,
+      "equivalentCompiledJsxAst": true
+    },
+    {
+      "responsibility": "FirmRegistrantSearch",
+      "source": "before/ImportOverlay.tsx",
+      "destination": "pages/setup/FirmRegistrantSearch.tsx",
+      "unchangedReturnJsxAst": false,
+      "equivalentCompiledJsxAst": true
+    },
+    {
+      "responsibility": "Persistent import controller",
+      "source": "before/ImportOverlay.tsx",
+      "destination": "pages/setup/useImportWorkflow.ts",
+      "unchangedControllerStatementAsts": true,
+      "oldStatements": 37,
+      "newStatements": 37
+    },
+    {
+      "responsibility": "Candidate row",
+      "destination": "pages/setup/ImportCandidateRow.tsx",
+      "unchangedReturnJsxAfterDocumentedPropRenames": false,
+      "equivalentCompiledJsxAfterPropRenames": true,
+      "propRenames": [
+        "importer.locked → locked",
+        "candidates.length → count"
+      ],
+      "preservedOriginalFormatFunction": true
+    }
+  ],
+  "intentionalCorrections": [
+    "Candidate selection adds explicit retained ImportOutcome and AttemptStatus plus pending-field fencing; original row/labels/selection controls retained.",
+    "Setup exposes separate current refresh Promise<void> which throws read errors; IT draft clearing follows successful refresh.",
+    "Capiro-managed import cannot use the explicit customer mark-complete button.",
+    "Membership activation error/journal remains visible for legacy-workspace switching; no automatic selection.",
+    "No test assertion changes."
+  ]
+}

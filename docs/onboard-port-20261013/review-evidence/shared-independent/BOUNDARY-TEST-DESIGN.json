@@ -1,0 +1,43 @@
+{
+  "staticDisposition": "13 meaningful mounted composition controls; execution not performed by reviewer",
+  "cases": [
+    {
+      "cases": 2,
+      "contract": "IT token A\u2192B discards draft and rejects late200/401; only explicit next read targets B; zero writes."
+    },
+    {
+      "cases": 6,
+      "contract": "User/session/org replacement during explicit plan write discards former draft and ignores late200/401 without replay; fresh authenticated legal read succeeds."
+    },
+    {
+      "cases": 2,
+      "contract": "Signed-out\u2192signed-in replaces draft and rejects late public200/401; fresh authenticated read remains usable."
+    },
+    {
+      "cases": 1,
+      "contract": "Current public401 preserves signed-in draft/session and permits subsequent protected read."
+    },
+    {
+      "cases": 1,
+      "contract": "Real browser cookie observation distinguishes public omit from authenticated same-origin reads/write; exactly one explicit plan write."
+    },
+    {
+      "cases": 1,
+      "contract": "Current protected401 expires canonical application, removes draft/receipt and does not repeat requests."
+    }
+  ],
+  "mount": "ApplicationBoundary\u2192RoutedApp test-only branch\u2192OnboardBoundaryProbe. Probe has no replacement key/reset effect; boundary alone owns remount/disposal. It consumes canonical useCapiro/usePublicOnboard, with synthetic Clerk session events and intercepted operation transport.",
+  "fixtureSafeguards": [
+    "All Onboard operations intercepted and synthetic; unconfigured operation returns500.",
+    "External hosts blocked; pageerror/remote observations asserted empty.",
+    "Source uses only relative gateway paths; inherited guard is hostname-only, not proof against every loopback port."
+  ],
+  "interpretationLimits": [
+    "Not executed by reviewer; no rendered pass claim.",
+    "Does not mount OnboardHost/OnboardPage, public config query failure/refetch gate, Stripe, provider consent or native authorization.",
+    "Loading\u2192signed-out/signed-in transitions and client-URL change after protected expiry are not among these13.",
+    "Late200 local output disposal proves remount behavior; lower-level signal rejection remains a separate transport test responsibility.",
+    "No same-identity native funnel-session replacement, feature journal recovery or scope-fence acceptance is inferred.",
+    "Frozen prior feature upgrade-path finding is not re-reviewed while feature owner edits."
+  ]
+}

@@ -1,0 +1,295 @@
+{
+  "legacySource": "7b5a9644d30d22389b23f0e07f923c8925682047",
+  "base": "d4be41e60516e576c74afa304b50ed67da15cb93",
+  "committed": false,
+  "findings": [
+    {
+      "id": "OB-S01",
+      "status": "SOURCE_CORRECTED; PURE_CONTROLS_WHERE_LISTED; MOUNTED_AND_NATIVE_QUALIFICATION_PENDING",
+      "behavior": "Effectful registration, verification checks, provisioning, intent preparation and payment-status checks require explicit intent. Only current status GET polling remains.",
+      "evidence": "attempt-journal / input-refusal pure controls; actual mount/Clerk/provider dispatch controls remain unrun.",
+      "sources": [
+        {
+          "path": "apps/web/src/features/onboard/pages/funnel/RegisterPage.tsx",
+          "sha256": "4da52eafff8519028bf25e1cb37785b8e7a283f3804fcf21251bdf182ed2a4d2"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/funnel/VerifyPage.tsx",
+          "sha256": "3e9d495bbf3d16ade7450ca6be905025144396510d43754808eddaa4f49e6119"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/funnel/ConfirmPage.tsx",
+          "sha256": "a1f5d7b34beee7243ee5d4c9c83dcff975fffcf88f4fde58eef90d8cbcbc45c4"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/funnel/TrialBilling.tsx",
+          "sha256": "a009499fa185ffdb66e597d04e333af355da2330fe0d81d3014166f3c7de4fe8"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/funnel/PaidBilling.tsx",
+          "sha256": "21d4d278bef2031c29ff0af4045607602425a716a73f44a1acd8209b24d316d8"
+        }
+      ]
+    },
+    {
+      "id": "OB-S02",
+      "status": "SOURCE_CORRECTED; PURE_CONTROLS_WHERE_LISTED; MOUNTED_AND_NATIVE_QUALIFICATION_PENDING",
+      "behavior": "Synchronous admission, owner/view epochs, native-session keyed editors/journals/reads, token/ticket views, and explicit membership activation fence known replacement.",
+      "evidence": "Deferred owner/close/cache/native-session controls pass; mounted root user/session/org/client/token/ticket wiring remains browser-unrun.",
+      "sources": [
+        {
+          "path": "apps/web/src/features/onboard/lib/attempt-journal.ts",
+          "sha256": "e637b7d6fc90c672babe7e40221a5f2691e592eb7764153db010b66e745415b3"
+        },
+        {
+          "path": "apps/web/src/features/onboard/lib/use-onboard-attempt.ts",
+          "sha256": "af5e011d76bc1ab8f9d0f079b269988ca9fce77a11810fce30df57958f8ed536"
+        },
+        {
+          "path": "apps/web/src/features/onboard/lib/FunnelLifetime.tsx",
+          "sha256": "93ec7409af5d10cb93b960f3bf0647db21456e404cf74f4b7e4230154815473b"
+        },
+        {
+          "path": "apps/web/src/features/onboard/lib/funnel-lifetime.ts",
+          "sha256": "d4aee604fc739b3f297fcc03828b39105ccd3a0b6cc87fd2404f914c72429ea2"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/it/ItAdminPage.tsx",
+          "sha256": "45b24041705110835e7e75b4dfc7a1f8cd2dda3d2c791403849f46ef96bb7756"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/setup/AcceptInvitePage.tsx",
+          "sha256": "98eecd3a4c007f20e70db8cabfe82ca85543f9c7e1bf608dbaa01e3a2d98077b"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/setup/WorkspaceMembership.tsx",
+          "sha256": "40727d3ad5243447027f47f71bb926412b35a88e90fc6176e60f6da0d9fe6da4"
+        }
+      ]
+    },
+    {
+      "id": "OB-S03",
+      "status": "SOURCE_CORRECTED; PURE_CONTROLS_WHERE_LISTED; MOUNTED_AND_NATIVE_QUALIFICATION_PENDING",
+      "behavior": "Earlier chunk receipts, skipped reasons, unknown IDs and unattempted IDs are retained. Candidate view displays them directly. Unknown import prevents further chunks and billing navigation.",
+      "evidence": "Exact baseline2 failures \u2192 green2 with503/AbortError after first chunk; original10 lifecycle cases preserve100-ID/402 behavior.",
+      "sources": [
+        {
+          "path": "apps/web/src/features/onboard/lib/import-client-selection.ts",
+          "sha256": "848c7281690493897dbfa30c679c5ee9c265c3d5ef295c6acf92cfc7f88916d0"
+        },
+        {
+          "path": "apps/web/src/features/onboard/lib/use-client-import.ts",
+          "sha256": "369a6c2dfe43df3bf5683230f8df5b89e19bb264327157c311b186a94c3eacfe"
+        },
+        {
+          "path": "apps/web/src/features/onboard/ui/ImportOutcome.tsx",
+          "sha256": "d5e0b3cab4379a46ab4aaab543c5fce0ffc00b7bdaceccecb55d39498ca240b2"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/setup/ImportCandidateSelection.tsx",
+          "sha256": "8a70718651d57b8b5aa97e82b6b8eab4f4fe4302815509b1eb648cb7e6d6b6d1"
+        }
+      ]
+    },
+    {
+      "id": "OB-S04",
+      "status": "SOURCE_CORRECTED; PURE_CONTROLS_WHERE_LISTED; MOUNTED_AND_NATIVE_QUALIFICATION_PENDING",
+      "behavior": "Unknown effects remain blocked across ordinary view remount; invited rows stop after the first unacknowledged result. SDK confirmation is sealed before native follow-up.",
+      "evidence": "Journal8 / invitation3 / Stripe11 pure controls pass. No native idempotency or durable replay mechanism is claimed.",
+      "sources": [
+        {
+          "path": "apps/web/src/features/onboard/lib/attempt-journal.ts",
+          "sha256": "e637b7d6fc90c672babe7e40221a5f2691e592eb7764153db010b66e745415b3"
+        },
+        {
+          "path": "apps/web/src/features/onboard/lib/invite-sequence.ts",
+          "sha256": "f09dc050bcd30f68cd0943e27146260b9a922a602270122220cf5943652dbbd1"
+        },
+        {
+          "path": "apps/web/src/features/onboard/lib/use-team-invites.ts",
+          "sha256": "e15fb1a6866f699b95787b8a69859294a046ae44a7f01460555a91c84d1f1ee9"
+        },
+        {
+          "path": "apps/web/src/features/onboard/lib/stripe-confirmation.ts",
+          "sha256": "5af49dabbf76f9edf258803fc79fad5fd8a46382fda6b460227275a3f3ee798c"
+        }
+      ]
+    },
+    {
+      "id": "OB-S05",
+      "status": "SOURCE_CORRECTED; PURE_CONTROLS_WHERE_LISTED; MOUNTED_AND_NATIVE_QUALIFICATION_PENDING",
+      "behavior": "Failed current reads gate actionable content; service errors are distinct from unavailable/expired capabilities. Native-session-scoped legal/status queries cannot expose old A data in B.",
+      "evidence": "Native-session read controls pass; actual retained-cache DOM concealment/retry controls remain unrun.",
+      "sources": [
+        {
+          "path": "apps/web/src/features/onboard/pages/funnel/FunnelStepGuard.tsx",
+          "sha256": "3d54a4dbadaa5a6e184569bc8c9de97022aa1b25083cae866b26a74b47e6eb84"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/funnel/LegalPage.tsx",
+          "sha256": "c28e4b13115f132e7958577ac1ef1aaf69b4c1385336fe38cf60b76a72c0d303"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/funnel/ConfirmPage.tsx",
+          "sha256": "a1f5d7b34beee7243ee5d4c9c83dcff975fffcf88f4fde58eef90d8cbcbc45c4"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/setup/useImportWorkflow.ts",
+          "sha256": "7ac2809b316f83c337e8979b99b1d47f0d89b71876a61cc057ddcdac7ccae6a3"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/it/ItAdminPage.tsx",
+          "sha256": "45b24041705110835e7e75b4dfc7a1f8cd2dda3d2c791403849f46ef96bb7756"
+        }
+      ]
+    },
+    {
+      "id": "OB-S06",
+      "status": "SOURCE_CORRECTED; PURE_CONTROLS_WHERE_LISTED; MOUNTED_AND_NATIVE_QUALIFICATION_PENDING",
+      "behavior": "PendingFields freezes native and preserved custom controls; guarded snapshots precede writes. Manual/IT fields clear after current refresh; unknown import/Stripe inputs remain blocked.",
+      "evidence": "Pure guard/receipt controls pass; field interaction and focus controls require browser qualification.",
+      "sources": [
+        {
+          "path": "apps/web/src/features/onboard/ui/AttemptStatus.tsx",
+          "sha256": "5de8b068a409154f16dd0a8a77fe5e4e53c8d4e2370024d6b6f65e33c1fbdb0e"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/funnel/LegalPage.tsx",
+          "sha256": "c28e4b13115f132e7958577ac1ef1aaf69b4c1385336fe38cf60b76a72c0d303"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/setup/useImportWorkflow.ts",
+          "sha256": "7ac2809b316f83c337e8979b99b1d47f0d89b71876a61cc057ddcdac7ccae6a3"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/setup/useSetupActions.ts",
+          "sha256": "095313f26fbbb2d1e2fd72a3f2f0532c7b2cb7b1ab2e24350b2686649ef80a6c"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/setup/ManualClientForm.tsx",
+          "sha256": "10de9a98acba93f8c77d58b8dc572655297783eda0af50f712de83c61efcc6a5"
+        }
+      ]
+    },
+    {
+      "id": "OB-S07",
+      "status": "SOURCE_CORRECTED; PURE_CONTROLS_WHERE_LISTED; MOUNTED_AND_NATIVE_QUALIFICATION_PENDING",
+      "behavior": "Remaining manual capacity uses cap minus current imported count; manualAdded is display-only and is not subtracted twice.",
+      "evidence": "Source trace reviewed; current-count/manual-add mounted control remains unrun.",
+      "sources": [
+        {
+          "path": "apps/web/src/features/onboard/pages/setup/useImportWorkflow.ts",
+          "sha256": "7ac2809b316f83c337e8979b99b1d47f0d89b71876a61cc057ddcdac7ccae6a3"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/setup/ManualClientForm.tsx",
+          "sha256": "10de9a98acba93f8c77d58b8dc572655297783eda0af50f712de83c61efcc6a5"
+        }
+      ]
+    },
+    {
+      "id": "OB-S08",
+      "status": "SOURCE_CORRECTED; PURE_CONTROLS_WHERE_LISTED; MOUNTED_AND_NATIVE_QUALIFICATION_PENDING",
+      "behavior": "Invoice URLs use the root exact Stripe invoice policy; consent uses root provider/callback validation; signed download is owner-guarded. Cap CTA navigates to existing /settings/billing with no implicit import or subscription.",
+      "evidence": "Shared helper qualification belongs to root. New browser navigation/download controls remain unrun; custom invoice domains unsupported pending configured contract.",
+      "sources": [
+        {
+          "path": "apps/web/src/features/onboard/pages/funnel/PaidBilling.tsx",
+          "sha256": "21d4d278bef2031c29ff0af4045607602425a716a73f44a1acd8209b24d316d8"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/funnel/LegalPage.tsx",
+          "sha256": "c28e4b13115f132e7958577ac1ef1aaf69b4c1385336fe38cf60b76a72c0d303"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/it/ItAdminPage.tsx",
+          "sha256": "45b24041705110835e7e75b4dfc7a1f8cd2dda3d2c791403849f46ef96bb7756"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/setup/ImportCandidateSelection.tsx",
+          "sha256": "8a70718651d57b8b5aa97e82b6b8eab4f4fe4302815509b1eb648cb7e6d6b6d1"
+        }
+      ]
+    },
+    {
+      "id": "OB-S09",
+      "status": "SOURCE_CORRECTED; PURE_CONTROLS_WHERE_LISTED; MOUNTED_AND_NATIVE_QUALIFICATION_PENDING",
+      "behavior": "Setter acknowledgements are followed by current native session reads, without optimistic merge/replacement. Known session replacement invalidates old continuation; no input/version echo is fabricated.",
+      "evidence": "Held minimal {ok:true} after A\u2192B control fails prior owner and passes new lifetime. Backend atomic session/version/CAS remains absent from these request contracts.",
+      "sources": [
+        {
+          "path": "apps/web/src/features/onboard/lib/funnel.ts",
+          "sha256": "87dffe73c7a5e93fc86af4dc8733a37224b68405c3cc927edd28c3bebd8473c6"
+        },
+        {
+          "path": "apps/web/src/features/onboard/lib/funnel-lifetime.ts",
+          "sha256": "d4aee604fc739b3f297fcc03828b39105ccd3a0b6cc87fd2404f914c72429ea2"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/funnel/OrgPage.tsx",
+          "sha256": "7877fb7c87bdce451d3b47120cfd4bb54b94601f42611f6edb30157e881b4e85"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/funnel/AdminsPage.tsx",
+          "sha256": "31ba277abbfa93f755a91213d114873b1aad7edf18fe915d12bc8b3ad82b57f2"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/funnel/ClientsPage.tsx",
+          "sha256": "fd63e77302f67ce2b0e886127d663bf129f0adb21c1238f295d696523de7e365"
+        }
+      ]
+    },
+    {
+      "id": "OB-S10",
+      "status": "SOURCE_CORRECTED; PURE_CONTROLS_WHERE_LISTED; MOUNTED_AND_NATIVE_QUALIFICATION_PENDING",
+      "behavior": "Logo upload is explicitly unavailable; local timeout does not claim an alert; billing summary invents no charge timestamp/delivery/settlement. Invitation receipt is distinguished from delivery.",
+      "evidence": "Source copy/operand review only; real billing/provisioning/delivery remains unrun.",
+      "sources": [
+        {
+          "path": "apps/web/src/features/onboard/pages/funnel/OrgPage.tsx",
+          "sha256": "7877fb7c87bdce451d3b47120cfd4bb54b94601f42611f6edb30157e881b4e85"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/funnel/ConfirmPage.tsx",
+          "sha256": "a1f5d7b34beee7243ee5d4c9c83dcff975fffcf88f4fde58eef90d8cbcbc45c4"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/setup/InvitesOverlay.tsx",
+          "sha256": "ac9fab2935dab65b4b17606cb0f73b7c0bf659f6e6ddcdaa9e6bde7aed58766d"
+        }
+      ]
+    },
+    {
+      "id": "OB-S11",
+      "status": "SOURCE_CORRECTED; PURE_CONTROLS_WHERE_LISTED; MOUNTED_AND_NATIVE_QUALIFICATION_PENDING",
+      "behavior": "Canonical adopted Dialog replaces the handmade focus shell; native checkbox and option/row keyboard-selected-disabled semantics are present with focus styling.",
+      "evidence": "Source implementation only. Desktop/mobile focus/Escape/keyboard/accessibility/Figma visual checks remain unrun.",
+      "sources": [
+        {
+          "path": "apps/web/src/features/onboard/ui/Modal.tsx",
+          "sha256": "5ec445ea808d939e0876129fbfc7e2e2106ccd69b47a7d7f1f757a36bb92a8ba"
+        },
+        {
+          "path": "apps/web/src/features/onboard/ui/forms.tsx",
+          "sha256": "eb6b7d1fa91a31e2d7917a92eea55c2f6734c9b6b81ad70217a39156477db13a"
+        },
+        {
+          "path": "apps/web/src/features/onboard/ui/panels.tsx",
+          "sha256": "6cad0cd0e211e950fb5fc8b915cc2e48d12b721a4e60a0892b86f9efe047cf1f"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/setup/FirmRegistrantSearch.tsx",
+          "sha256": "d3bf1d8145b11c9724a3d2d878bb84c3a13ab861e130c5d18df10a99907e7f89"
+        },
+        {
+          "path": "apps/web/src/features/onboard/pages/setup/ImportCandidateRow.tsx",
+          "sha256": "32db205f692d2aefe3367d14824e54075946c59967bfd3eeb3e5c2f0cd20917d"
+        },
+        {
+          "path": "apps/web/src/features/onboard/onboard.css",
+          "sha256": "89728d1a9a2eaa509f43ba30bd942914cb6ef29940d137b4981af7264dd02d3c"
+        }
+      ]
+    }
+  ]
+}

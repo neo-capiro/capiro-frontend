@@ -1,0 +1,186 @@
+{
+  "baseline": true,
+  "method": "Pure execution of exact source function/element projections and keyed editor slots, with real QueryClient and closed synthetic hooks/API. No React mount, browser, network or native request. Current-lifetime asynchronous behavior is separately tested.",
+  "sources": {
+    "/workspace/capiro-onboard-port-20261013/apps/web/src/features/onboard/lib/legal-review-lifetime.ts": "3bcbc73e4bf4a471a4b3053c451885275c8e3fd568b52aca5cb541e07ca35246",
+    "/workspace/capiro-onboard-port-20261013/apps/web/src/features/onboard/pages/funnel/LegalDocumentBlock.tsx": "ae9ae98281410d99ac39cfd3fcebcc4d4ddbe4ce2ace08a659afb161995a0f44",
+    "/workspace/capiro-onboard-port-20261013/apps/web/src/features/onboard/pages/funnel/LegalReview.tsx": "3af1e67458d19ba2450de61ddeef608dc763827675df5236a75e0c315b006b03",
+    "/tmp/capiro-onboard-port-evidence-20261013/legal-review-followup/before/LegalPage.tsx": "c28e4b13115f132e7958577ac1ef1aaf69b4c1385336fe38cf60b76a72c0d303"
+  },
+  "results": [
+    {
+      "replacement": "none",
+      "beforeEnabled": true,
+      "afterEnabled": true,
+      "currentAcknowledgements": [
+        {
+          "title": "Terms of Service",
+          "checked": true,
+          "html": "Reviewed terms A"
+        },
+        {
+          "title": "Subscription Agreement",
+          "checked": true,
+          "html": "Reviewed agreement A"
+        }
+      ],
+      "authority": true,
+      "syntheticApiCalls": [
+        {
+          "tosVersion": "tos-A",
+          "saVersion": "sa-A",
+          "signerName": "Synthetic Purchaser",
+          "signerTitle": "Synthetic authorized reviewer",
+          "signatureName": "Synthetic Purchaser",
+          "emailCopy": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "replacement": "version",
+      "beforeEnabled": true,
+      "afterEnabled": true,
+      "currentAcknowledgements": [
+        {
+          "title": "Terms of Service",
+          "checked": true,
+          "html": "Reviewed terms A"
+        },
+        {
+          "title": "Subscription Agreement",
+          "checked": true,
+          "html": "Reviewed agreement A"
+        }
+      ],
+      "authority": true,
+      "syntheticApiCalls": [
+        {
+          "tosVersion": "tos-A replacement",
+          "saVersion": "sa-A replacement",
+          "signerName": "Synthetic Purchaser",
+          "signerTitle": "Synthetic authorized reviewer",
+          "signatureName": "Synthetic Purchaser",
+          "emailCopy": true
+        }
+      ],
+      "pass": false
+    },
+    {
+      "replacement": "html",
+      "beforeEnabled": true,
+      "afterEnabled": true,
+      "currentAcknowledgements": [
+        {
+          "title": "Terms of Service",
+          "checked": true,
+          "html": "Reviewed terms A replacement"
+        },
+        {
+          "title": "Subscription Agreement",
+          "checked": true,
+          "html": "Reviewed agreement A replacement"
+        }
+      ],
+      "authority": true,
+      "syntheticApiCalls": [
+        {
+          "tosVersion": "tos-A",
+          "saVersion": "sa-A",
+          "signerName": "Synthetic Purchaser",
+          "signerTitle": "Synthetic authorized reviewer",
+          "signatureName": "Synthetic Purchaser",
+          "emailCopy": true
+        }
+      ],
+      "pass": false
+    },
+    {
+      "replacement": "plan",
+      "beforeEnabled": true,
+      "afterEnabled": true,
+      "currentAcknowledgements": [
+        {
+          "title": "Terms of Service",
+          "checked": true,
+          "html": "Reviewed terms A"
+        },
+        {
+          "title": "Subscription Agreement",
+          "checked": true,
+          "html": "Reviewed agreement A"
+        }
+      ],
+      "authority": true,
+      "syntheticApiCalls": [
+        {
+          "tosVersion": "tos-A",
+          "saVersion": "sa-A",
+          "signerName": "Synthetic Purchaser",
+          "signerTitle": "Synthetic authorized reviewer",
+          "signatureName": "Synthetic Purchaser",
+          "emailCopy": true
+        }
+      ],
+      "pass": false
+    },
+    {
+      "replacement": "error-recovery",
+      "beforeEnabled": true,
+      "afterEnabled": true,
+      "currentAcknowledgements": [
+        {
+          "title": "Terms of Service",
+          "checked": true,
+          "html": "Reviewed terms A"
+        },
+        {
+          "title": "Subscription Agreement",
+          "checked": true,
+          "html": "Reviewed agreement A"
+        }
+      ],
+      "authority": true,
+      "syntheticApiCalls": [
+        {
+          "tosVersion": "tos-A",
+          "saVersion": "sa-A",
+          "signerName": "Synthetic Purchaser",
+          "signerTitle": "Synthetic authorized reviewer",
+          "signatureName": "Synthetic Purchaser",
+          "emailCopy": true
+        }
+      ],
+      "pass": false
+    },
+    {
+      "replacement": "loading-recovery",
+      "beforeEnabled": true,
+      "afterEnabled": true,
+      "currentAcknowledgements": [
+        {
+          "title": "Terms of Service",
+          "checked": true,
+          "html": "Reviewed terms A"
+        },
+        {
+          "title": "Subscription Agreement",
+          "checked": true,
+          "html": "Reviewed agreement A"
+        }
+      ],
+      "authority": true,
+      "syntheticApiCalls": [
+        {
+          "tosVersion": "tos-A",
+          "saVersion": "sa-A",
+          "signerName": "Synthetic Purchaser",
+          "signerTitle": "Synthetic authorized reviewer",
+          "signatureName": "Synthetic Purchaser",
+          "emailCopy": true
+        }
+      ],
+      "pass": false
+    }
+  ]
+}

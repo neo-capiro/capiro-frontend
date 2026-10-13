@@ -1,0 +1,62 @@
+[
+  {
+    "file": "apps/web/src/shared/capiro/onboard-adapters.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "line": 44,
+    "nonblank": 216,
+    "fingerprint": "df3410523e877164db7fb8a114061507e35b3ba0a86bbaeef6871ebf3c216232",
+    "sourceSha256": "e19db870c3467f568d1c4b1d44db35dcf3895541e87b4cb1befb47ab6dcdc187",
+    "disposition": "acceptable exact-byte responsibility; root owns registry insertion",
+    "responsibility": "Onboard native request/receipt correlation test group",
+    "reason": "The 216-line describe callback groups independent adapter contracts around one synthetic Capiro transport. It retains native positive controls and rejects mismatched IDs, names, chunk accounting, firm-memory identity, invitation recipient/role, task transition and payment method receipts. Mutable input capture, one-dispatch/no-replay and before-transport refusal assertions distinguish ownership failures. It owns no React, provider, database or native effect; breaking the describe solely to cross the line threshold would fragment a cohesive consumer boundary without reducing authority.",
+    "limits": "Individual cases stay local; no unrelated subsystem mocks. Scope is client-side receipt correlation, not backend authorization.",
+    "reviewer": "core_profile_review",
+    "reviewedAtUTC": "2026-10-13T04:48:16.680808+00:00"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/onboard-adapters.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous> #2",
+    "line": 261,
+    "nonblank": 104,
+    "fingerprint": "3ae4d00c51c7f5a936bd26db0c11451fba1c08da0211d70eef1ee4d4b62ae335",
+    "sourceSha256": "e19db870c3467f568d1c4b1d44db35dcf3895541e87b4cb1befb47ab6dcdc187",
+    "disposition": "acceptable exact-byte responsibility; root owns registry insertion",
+    "responsibility": "Onboard public transport/external navigation test group",
+    "reason": "The 104-line describe callback tests the public-capability transport boundary and deliberate redirects: omitted credentials/current401 isolation versus protected expiry, selected-provider consent callback prefix/state validation, and bounded Stripe invoice destinations. Positive opaque-URL preservation accompanies hostile/mismatched inputs. It reuses the HTTP client and adapter rather than duplicating their algorithms, and no redirect/provider call occurs.",
+    "limits": "Public transport and destination admission are one consumer boundary. The callback is test grouping, not a runtime multifunction controller.",
+    "reviewer": "core_profile_review",
+    "reviewedAtUTC": "2026-10-13T04:48:16.680819+00:00"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/onboard-core-api.ts",
+    "kind": "function",
+    "symbol": "createOnboardCoreApi",
+    "line": 15,
+    "nonblank": 105,
+    "fingerprint": "ee94ca8f78a55cc086db9fe832b3be7c2322b2bd068a3b182bbe57dd89cb4fef",
+    "sourceSha256": "c7fbf99299408ecc1e0508bf64c56c2eb5eb6938f93ab4e3d854d623e110bbcc",
+    "disposition": "acceptable exact-byte responsibility; root owns registry insertion",
+    "responsibility": "Stateless Core adapter for Onboard consumption",
+    "reason": "The 105-line factory returns small methods over one injected canonical CapiroApi. It owns Onboard request snapshots and correlation of received native IDs/names, import outcome accounting, firm-memory scope and invitation recipient/role. Existing me, Settings client creation and team invitation registry owners remain reused. The factory does not own HTTP implementation, schema catalog, tenant authorization, persistence, retries, UI state or provider work. Each method remains separately comprehensible; extracting each into a tiny module would obscure the common facade without separating an independent lifecycle.",
+    "limits": "Captured submitted name is preserved exactly; UUID/name validation is a narrow Onboard consumer constraint, not a broad Settings schema change. Native binding remains in the prior sealed packet.",
+    "reviewer": "core_profile_review",
+    "reviewedAtUTC": "2026-10-13T04:48:16.680822+00:00"
+  },
+  {
+    "file": "apps/web/src/shared/capiro/operations/onboard-contracts.test.ts",
+    "kind": "function",
+    "symbol": "<anonymous>",
+    "line": 32,
+    "nonblank": 119,
+    "fingerprint": "c7f83e4372bae32eadf5833c491240ab9074cb67c56eea974833f9f9b2569a7d",
+    "sourceSha256": "8730ae4265466196a1d3611ffd5a03d02081207840e929848649a58b0af57914",
+    "disposition": "acceptable exact-byte responsibility; root owns registry insertion",
+    "responsibility": "Native Onboard receiving schema test group",
+    "reason": "The 119-line describe callback is a bounded compatibility matrix for incoming native shapes versus outgoing DTOs: early partial organization state, trimmed stored names, stripped retained JSON, required provider availability, provision/status failure fields, nullable payment secrets/invoice links, prohibited outgoing skipped transition, pending-review memory receipt, consent destinations and default-session operation allocation. Positive and negative assertions prevent both overstrict receiving and invented acceptance.",
+    "limits": "Tests directly exercise canonical schemas/descriptors with synthetic values. No duplicated DTO implementation or application workflow is introduced.",
+    "reviewer": "core_profile_review",
+    "reviewedAtUTC": "2026-10-13T04:48:16.680825+00:00"
+  }
+]

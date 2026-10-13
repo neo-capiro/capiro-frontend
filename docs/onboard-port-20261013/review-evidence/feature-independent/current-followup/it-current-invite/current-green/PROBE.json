@@ -1,0 +1,50 @@
+{
+  "atUTC": "2026-10-13T05:33:09.967Z",
+  "method": "Exact captured ItAdminPage/useOnboardAttempt/attempt-journal function projection with actual QueryClient, synthetic hooks/JSX and API/navigation spy. No React mount/browser/network/native/provider.",
+  "bindings": [
+    {
+      "file": "apps/web/src/features/onboard/lib/attempt-journal.ts",
+      "sha256": "e637b7d6fc90c672babe7e40221a5f2691e592eb7764153db010b66e745415b3"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/it-invite-intent.ts",
+      "sha256": "ce2ac8695999e967caa73d3ca0324c626a26558fab6a64fa3d743011a27b54d0"
+    },
+    {
+      "file": "apps/web/src/features/onboard/lib/use-onboard-attempt.ts",
+      "sha256": "db486436c047b54bb43d71aa22ab118366611553d60230f68421478537dcddc3"
+    },
+    {
+      "file": "apps/web/src/features/onboard/pages/it/ItAdminPage.tsx",
+      "sha256": "d1fe4827735c592eeaf3661f07cc402e1f9084eef273be82861fbf455cf3ec7b"
+    }
+  ],
+  "results": [
+    {
+      "status": null,
+      "dispatches": 1,
+      "canonicalStatus": "success",
+      "navigations": [
+        "https://synthetic.invalid/consent"
+      ],
+      "expectedNavigations": 1,
+      "pass": true
+    },
+    {
+      "status": 403,
+      "dispatches": 1,
+      "canonicalStatus": "error",
+      "navigations": [],
+      "expectedNavigations": 0,
+      "pass": true
+    },
+    {
+      "status": 503,
+      "dispatches": 1,
+      "canonicalStatus": "error",
+      "navigations": [],
+      "expectedNavigations": 0,
+      "pass": true
+    }
+  ]
+}

@@ -3,6 +3,7 @@ import { readCapiroConfig } from "../../../../shared/capiro/config";
 import {
   handleCapiroRequest,
   handlePublicPlannerFormRequest,
+  handlePublicOnboardRequest,
 } from "../../../../shared/capiro/gateway";
 import { capiroOperations } from "../../../../shared/capiro/registry";
 
@@ -15,14 +16,26 @@ async function handle(request: Request, context: Context) {
       operation,
       readCapiroConfig(process.env),
     );
+  if (operation.startsWith("public-onboard."))
+    return handlePublicOnboardRequest(
+      request,
+      operation,
+      readCapiroConfig(process.env),
+    );
   return handleCapiroRequest(
     request,
     operation,
     capiroOperations,
     readCapiroConfig(process.env),
-    async () => {
+    async (authentication) => {
       const session = await auth();
-      return session.userId ? session.getToken({ template: "capiro" }) : null;
+      return session.userId
+        ? session.getToken(
+            authentication === "clerk-session"
+              ? undefined
+              : { template: "capiro" },
+          )
+        : null;
     },
   );
 }

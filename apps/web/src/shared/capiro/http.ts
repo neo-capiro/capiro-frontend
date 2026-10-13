@@ -48,6 +48,7 @@ type ApiOptions = {
   fetcher?: typeof fetch;
   onSessionExpired?: () => void;
   scopeSignal?: () => AbortSignal;
+  credentials?: "same-origin" | "omit";
 };
 type RequestOptions = { signal?: AbortSignal };
 
@@ -112,10 +113,11 @@ async function responsePayload(
         : await response.json().catch(() => null);
   assertCurrent(signals);
   if (!response.ok) {
-    if (response.status === 401) options.onSessionExpired?.();
+    if (response.status === 401 && options.credentials !== "omit")
+      options.onSessionExpired?.();
     throw new CapiroApiError(
       response.status,
-      response.status === 401
+      response.status === 401 && options.credentials !== "omit"
         ? "Your session expired. Sign in again."
         : (readableError(payload) ?? "The request could not be completed."),
     );
@@ -154,7 +156,7 @@ async function perform<
   );
   const response = await (options.fetcher ?? fetch)(endpoint, {
     method: operation.method,
-    credentials: "same-origin",
+    credentials: options.credentials ?? "same-origin",
     cache: "no-store",
     headers:
       isRead || operation.encoding === "multipart"

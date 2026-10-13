@@ -1,0 +1,187 @@
+{
+  "sealedAtUTC": "2026-10-13T04:49:30.431959+00:00",
+  "records": [
+    {
+      "path": "ARCHITECTURE-REVIEW-PROPOSALS.json",
+      "bytes": 5369,
+      "sha256": "7fa598ecc6ae48bf94090b29fb895cda5f4ebe0c55de66c4be04d369b8db4d20"
+    },
+    {
+      "path": "AST-FINGERPRINTS.json",
+      "bytes": 1277,
+      "sha256": "ba9f4ad2bb4c8d9ab280d48bc376398edc9de06267c3b1ca8f94e0fae90a3c20"
+    },
+    {
+      "path": "BOUNDARY-TEST-DESIGN.json",
+      "bytes": 2465,
+      "sha256": "48837570110e772111da9bd25af297789c86feec162627130f5e41181e9fcf59"
+    },
+    {
+      "path": "DEPENDENCY-OBSERVATIONS.json",
+      "bytes": 1917,
+      "sha256": "087f03670d83f2066ab7afb4a00df9c9c0a2dd4009ee559541ce1ba2f6ba9988"
+    },
+    {
+      "path": "FINAL-BINDING-CHECK.json",
+      "bytes": 5443,
+      "sha256": "a0b14864a69e0447276b453cb953ea1eeec188ff35497b1f57baa6cfb0846768"
+    },
+    {
+      "path": "FINDINGS.json",
+      "bytes": 377,
+      "sha256": "fe3373b44b3d4396d058440045288293c9530736857a0d5dd6cab6cbfcd2f6c9"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 5874,
+      "sha256": "a93849f33e2a16e24b0ffec5900fe2cff14fe8790b003b31b6d6cb3c9b32037c"
+    },
+    {
+      "path": "SOURCE-BINDINGS.json",
+      "bytes": 8343,
+      "sha256": "d50fd2fd0b272ad0d7762e23ac2a06815ce1e1899f21e378dba105ba63e28bca"
+    },
+    {
+      "path": "prior-to-current.diff",
+      "bytes": 1673,
+      "sha256": "4aca384063f4f802a52e7a4ac1afcd960aa146d11af273eaa9896b10df6670cc"
+    },
+    {
+      "path": "snapshot/apps/web/package.json",
+      "bytes": 1967,
+      "sha256": "86d75dcd1b8cce15096ee738b5b643d277979ca007e0c280fff3c963ebfcbaf6"
+    },
+    {
+      "path": "snapshot/apps/web/src/app/_onboard/OnboardEntry.tsx",
+      "bytes": 582,
+      "sha256": "a74ff4636df0696090d46b98635eb9282b315dd2648e3783d130b115ff9f3839"
+    },
+    {
+      "path": "snapshot/apps/web/src/app/_onboard/OnboardHost.tsx",
+      "bytes": 3038,
+      "sha256": "2de3e91dde899ba716bf8fa719e2eee4ca240bac0ce80f851d31705781f2a4f6"
+    },
+    {
+      "path": "snapshot/apps/web/src/app/api/capiro/[operation]/route.ts",
+      "bytes": 1313,
+      "sha256": "d515dad0473b6da16edeba60f318f74c41e84867afaccb7c624deca75009cb2d"
+    },
+    {
+      "path": "snapshot/apps/web/src/proxy.ts",
+      "bytes": 1429,
+      "sha256": "7a556132cd08c76f3247916b5c4756e20a6bb1a633ecbd00bbc4a8a26b297c68"
+    },
+    {
+      "path": "snapshot/apps/web/src/shared/capiro/CapiroBoundary.tsx",
+      "bytes": 3482,
+      "sha256": "395f9979790f7cd9c4d95f6ecc4fd5db899270ee968c08a596b6e1011bda04a1"
+    },
+    {
+      "path": "snapshot/apps/web/src/shared/capiro/contracts.ts",
+      "bytes": 4985,
+      "sha256": "78ec4209d45f9e309ba6ba34b992950bf26ddf5f8318a6e0995d08194d500afb"
+    },
+    {
+      "path": "snapshot/apps/web/src/shared/capiro/gateway.ts",
+      "bytes": 11269,
+      "sha256": "6958576b47300c028c5e8fdda6d294f29299f0e313134f4155522adb56895933"
+    },
+    {
+      "path": "snapshot/apps/web/src/shared/capiro/http.ts",
+      "bytes": 6365,
+      "sha256": "0899d9f0735a77b0b0a76c581776d4a6d7e16915633c36dec332d7c2602ead01"
+    },
+    {
+      "path": "snapshot/apps/web/src/shared/capiro/onboard-adapters.test.ts",
+      "bytes": 12487,
+      "sha256": "e19db870c3467f568d1c4b1d44db35dcf3895541e87b4cb1befb47ab6dcdc187"
+    },
+    {
+      "path": "snapshot/apps/web/src/shared/capiro/onboard-core-api.ts",
+      "bytes": 4142,
+      "sha256": "c7fbf99299408ecc1e0508bf64c56c2eb5eb6938f93ab4e3d854d623e110bbcc"
+    },
+    {
+      "path": "snapshot/apps/web/src/shared/capiro/onboard-gateway.test.ts",
+      "bytes": 6692,
+      "sha256": "3b4526a8cf64380708c64202a419d15a23334287b8c31ec6d5fd2eff86a1e755"
+    },
+    {
+      "path": "snapshot/apps/web/src/shared/capiro/onboard-pricing.server.ts",
+      "bytes": 289,
+      "sha256": "a727722479086dcfb41982cfc5e80cb53326a790de72ccfd3c82bf7c46747019"
+    },
+    {
+      "path": "snapshot/apps/web/src/shared/capiro/operations/onboard-contracts.test.ts",
+      "bytes": 4737,
+      "sha256": "8730ae4265466196a1d3611ffd5a03d02081207840e929848649a58b0af57914"
+    },
+    {
+      "path": "snapshot/apps/web/src/shared/session/ApplicationBoundary.tsx",
+      "bytes": 4336,
+      "sha256": "036d9ec40090252c9d67a0ef552709fec2d6cac1fafb6143db5fb7556b311a1b"
+    },
+    {
+      "path": "snapshot/apps/web/src/shared/session/onboard-route.ts",
+      "bytes": 523,
+      "sha256": "b636da7b72f927c800f557552748371c2d52c883e5560a2d4fff42f87b7c6d1e"
+    },
+    {
+      "path": "snapshot/apps/web/test/browser/OnboardBoundaryProbe.tsx",
+      "bytes": 2815,
+      "sha256": "13b7d2e2f4396f4913712015b8885b4848ed5c1b3614fcabe2cc7fb90c3b7664"
+    },
+    {
+      "path": "snapshot/apps/web/test/browser/clerk.tsx",
+      "bytes": 1271,
+      "sha256": "1fc6432fe37e193a97863f6d93ad922cd18ae48e6bb1ee2348f5f897f2403b50"
+    },
+    {
+      "path": "snapshot/apps/web/test/browser/fixtures.ts",
+      "bytes": 1917,
+      "sha256": "ba90445f2f1cb6fb1786362cd434bd58a2ee8940a5334f1a76b6c5c4c5531467"
+    },
+    {
+      "path": "snapshot/apps/web/test/browser/main.tsx",
+      "bytes": 4812,
+      "sha256": "4b24e91bf32fc958fdce6531f4e56f9e9a56d3b74eef9ab079aa883ee53c2992"
+    },
+    {
+      "path": "snapshot/apps/web/test/browser/onboard-boundary-fixtures.ts",
+      "bytes": 4838,
+      "sha256": "1f9db5412c0e8a2cb4e4efe55e74ae15b0393f0d822800ce2fdd66ecc004f195"
+    },
+    {
+      "path": "snapshot/apps/web/test/browser/onboard-boundary.spec.ts",
+      "bytes": 11223,
+      "sha256": "2e1485bc5d9b55d0f34da0c77b03872d318e225d86944a095f18061f992d660a"
+    },
+    {
+      "path": "snapshot/scripts/architecture/dependencies.mjs",
+      "bytes": 5775,
+      "sha256": "f9520642da89f4d33effecedb50803bf7fe36b64694a75b3c876dc4c9c388cee"
+    },
+    {
+      "path": "snapshot/scripts/architecture/scan.mjs",
+      "bytes": 4515,
+      "sha256": "7326fb690a8578e2cce8ce3a10b806c17039583c7479e2ec4c4c0b4d76548bc9"
+    },
+    {
+      "path": "snapshot/scripts/architecture-onboard.test.mjs",
+      "bytes": 2316,
+      "sha256": "02ecd7b2953cc01895c88aae3d96fffa708fff37cff5c51d26cae79338d30fb6"
+    },
+    {
+      "path": "snapshot/scripts/public-packages.mjs",
+      "bytes": 2918,
+      "sha256": "9d75e6d97a5e1f30772024b04cd32f2024b93c9a123902f619b78a1850cfde5f"
+    },
+    {
+      "path": "snapshot/vendor/onboard-public-packages.json",
+      "bytes": 560,
+      "sha256": "cfe6e6ae4e056cf2ad22b0c6bca3b4539b879c23216e5018fc8d9e49d61142b1"
+    }
+  ],
+  "fileCount": 36,
+  "totalBytes": 143334
+}

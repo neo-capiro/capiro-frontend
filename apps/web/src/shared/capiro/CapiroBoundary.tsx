@@ -13,9 +13,14 @@ import { SelectedClientGate } from "../session/SelectedClient";
 import type { CapiroPublicConfig } from "./config";
 import { createCapiroApi, type CapiroApi } from "./http";
 import { capiroOperations } from "./registry";
+import type { OperationRegistry } from "./contracts";
+import { publicOnboardOperations } from "./operations/onboard-public";
 const ApiContext = createContext<CapiroApi<typeof capiroOperations> | null>(
   null,
 );
+const PublicOnboardContext = createContext<CapiroApi<
+  typeof publicOnboardOperations
+> | null>(null);
 export function CapiroDataProvider({
   children,
   onSessionExpired,
@@ -33,10 +38,22 @@ export function CapiroDataProvider({
       scopeSignal: scope.signal,
     }),
   );
+  const [publicOnboard] = useState(() =>
+    createCapiroApi(publicOnboardOperations, {
+      credentials: "omit",
+      scopeSignal: scope.signal,
+    }),
+  );
   useLayoutEffect(() => {
     return scope.mount();
   }, [scope]);
-  return <ApiContext.Provider value={api}>{children}</ApiContext.Provider>;
+  return (
+    <ApiContext.Provider value={api}>
+      <PublicOnboardContext.Provider value={publicOnboard}>
+        {children}
+      </PublicOnboardContext.Provider>
+    </ApiContext.Provider>
+  );
 }
 /** The application owns Clerk and both transport lifetimes; this is a route gate. */
 export function CapiroBoundary({
@@ -63,8 +80,9 @@ export function CapiroBoundary({
   );
 }
 
-export function useCapiro() {
-  const api = useContext(ApiContext);
+function useScopedCapiro<Registry extends OperationRegistry>(
+  api: CapiroApi<Registry> | null,
+) {
   const [lifetime] = useState(createRequestLifetime);
   useLayoutEffect(() => {
     return lifetime.mount();
@@ -75,7 +93,7 @@ export function useCapiro() {
       provided
         ? AbortSignal.any([provided, lifetime.signal()])
         : lifetime.signal();
-    const result: CapiroApi<typeof capiroOperations> = {
+    const result: CapiroApi<Registry> = {
       request: (key, input, options) =>
         api.request(key, input, { signal: signal(options?.signal) }),
       upload: (key, input, files, options) =>
@@ -87,4 +105,13 @@ export function useCapiro() {
   }, [api, lifetime]);
   if (!scoped) throw new Error("A signed-in CapiroBoundary is required.");
   return scoped;
+}
+
+export function useCapiro() {
+  return useScopedCapiro(useContext(ApiContext));
+}
+
+/** Public IT/config uses the same disposable scope, with credentials omitted. */
+export function usePublicOnboard() {
+  return useScopedCapiro(useContext(PublicOnboardContext));
 }

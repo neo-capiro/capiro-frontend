@@ -51,3 +51,12 @@ export default function Link({
     </a>
   );
 }
+
+export function useParams() {
+  const pathname = usePathname();
+  return {
+    token: pathname.startsWith("/it/")
+      ? decodeURIComponent(pathname.split("/")[2] ?? "")
+      : undefined,
+  };
+}

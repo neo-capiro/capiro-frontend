@@ -6,6 +6,16 @@ const owner = name => name.match(/^(?:apps|packages)\/[^/]+(?=\/)/)?.[0];
 const feature = name => name.match(/\/features\/([^/]+)\//)?.[1];
 const portfolioArea = name => name.match(/\/features\/portfolio\/([^/]+)\//)?.[1] ?? '<portfolio>';
 const publicEntry = name => /\/(?:public|[^/]+-public)\.ts$/.test(name);
+const pricingOwner = `${appSource}shared/capiro/onboard-pricing.server.ts`;
+const pricingEntry = `${appSource}app/_onboard/OnboardEntry.tsx`;
+
+function approvedPricingImport(file, module, entry) {
+  return file === pricingOwner && entry.specifier === '@capiro/shared'
+    && entry.kind === 'named' && entry.names.length === 2
+    && ['PRICE_LOCK_COPY', 'PRICE_CHANGE_COPY'].every(name => entry.names.includes(name))
+    && module.imports.some(item => item.specifier === 'server-only' && item.kind === 'side-effect')
+    && !module.directives.includes('use client');
+}
 
 export const publicExports = new Set([
   '@capiro/ui/button', '@capiro/ui/dialog', '@capiro/ui/prompt-input',
@@ -38,6 +48,7 @@ function resolveImport(from, specifier, files) {
 }
 
 function edgeViolation(from, to) {
+  if (to === pricingOwner && from !== pricingEntry) return `${from}: public pricing projection is allocated only to the Onboard server entry`;
   if (!owner(from) || owner(from) !== owner(to)) return `${from}: private cross-owner import ${to}; use an approved public package export`;
   if (from.startsWith(`${appSource}shared/`) && /^apps\/web\/src\/(?:features|app)\//.test(to)) return `${from}: foundations import ${to}`;
   if (feature(from) && to.startsWith(`${appSource}app/`)) return `${from}: feature imports app composition ${to}`;
@@ -51,10 +62,11 @@ export function inspectDependencies(file, module, files, approvedExports = publi
   const isRoute = /\/app\/(?:.*\/)?route\.[jt]sx?$/.test(file);
   if (isRoute && !serverAdapters.has(file)) errors.push(`${file}: backend route handler is not allocated`);
   if (serverAdapters.has(file) && module.nonblank > 80) errors.push(`${file}: server adapter must stay thin (at most 80 nonblank lines)`);
-  for (const { specifier } of module.imports) {
+  for (const entry of module.imports) {
+    const { specifier } = entry;
     if (specifier === null) { errors.push(`${file}: computed import forbidden`); continue; }
     if (/meri-greenfield|capirov2|apps\/api|^https?:|^node:/.test(specifier)) errors.push(`${file}: restricted runtime/repository import ${specifier}`);
-    if (specifier.startsWith('@capiro/') && !approvedExports.has(specifier)) errors.push(`${file}: non-public package import ${specifier}`);
+    if (specifier === '@capiro/shared' ? !approvedPricingImport(file, module, entry) : specifier.startsWith('@capiro/') && !approvedExports.has(specifier)) errors.push(`${file}: non-public package import ${specifier}`);
     const { local, resolved } = resolveImport(file, specifier, files);
     if (serverAdapters.has(file) && !serverAdapters.get(file).has(resolved ?? specifier)) errors.push(`${file}: server adapter dependency is not allocated: ${specifier}`);
     if (!local) continue;
