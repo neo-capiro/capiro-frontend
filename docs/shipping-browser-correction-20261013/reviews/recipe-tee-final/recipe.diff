@@ -1,0 +1,18 @@
+--- reviewed-d2439c4
++++ reviewed-f781dc5
+@@ -36,9 +36,13 @@
+   shift
+   date -u '+%Y-%m-%dT%H:%M:%SZ' > "$result_dir/$gate_name.started"
+   set +e
+-  "$@" > "$result_dir/$gate_name.log" 2>&1
+-  local gate_status=$?
++  "$@" 2>&1 | tee "$result_dir/$gate_name.log"
++  local -a gate_codes=("${PIPESTATUS[@]}")
++  local gate_status="${gate_codes[0]}"
++  if test "${gate_codes[1]}" -ne 0; then gate_status=74; fi
+   set -e
++  printf '%s\n' "${gate_codes[0]}" > "$result_dir/$gate_name.command-exit"
++  printf '%s\n' "${gate_codes[1]}" > "$result_dir/$gate_name.log-exit"
+   printf '%s\n' "$gate_status" > "$result_dir/$gate_name.exit"
+   date -u '+%Y-%m-%dT%H:%M:%SZ' > "$result_dir/$gate_name.ended"
+   test "$gate_status" -eq 0

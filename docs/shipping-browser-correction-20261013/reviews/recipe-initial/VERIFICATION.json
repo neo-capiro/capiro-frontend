@@ -1,0 +1,171 @@
+{
+  "capturedAtUTC": "2026-10-13T03:12:08.130821+00:00",
+  "review": "static only; recipe not executed; no browser/server/build/install/full check started",
+  "sourceCommit": "d4be41e60516e576c74afa304b50ed67da15cb93",
+  "expectedSource": "d4be41e60516e576c74afa304b50ed67da15cb93",
+  "rootTree": "401cadde371b91606e3346243aaca6b6225aafcb",
+  "applicationTree": "6ae2118b797f478f5a63788841a9777d67c8001e",
+  "sourceTree": "02ad682840eec3b2d8091b37de9b8c45a984e542",
+  "treeManifest": {
+    "bytes": 1461207,
+    "sha256": "3543e51118452efafcf64b8c8c75e1067b7d3f520827bc39a728f4a4448ea360",
+    "entries": 9199,
+    "matchesExactGitTree": true
+  },
+  "criticalInputs": [
+    {
+      "path": "package.json",
+      "size": 1762,
+      "sha256": "616c749f95524f28cf1d07e5f99dbb106442ef7c7f7a27a686ccb8e1ef754b49",
+      "gitSha256": "616c749f95524f28cf1d07e5f99dbb106442ef7c7f7a27a686ccb8e1ef754b49",
+      "gitBytes": 1762,
+      "liveMatchesGit": true,
+      "manifestMatchesGit": true
+    },
+    {
+      "path": "package-lock.json",
+      "size": 510436,
+      "sha256": "93b3dd0484180ade603daf74a32f75fc16a9bf0bda1694966a6e68100e2a6802",
+      "gitSha256": "93b3dd0484180ade603daf74a32f75fc16a9bf0bda1694966a6e68100e2a6802",
+      "gitBytes": 510436,
+      "liveMatchesGit": true,
+      "manifestMatchesGit": true
+    },
+    {
+      "path": "apps/web/package.json",
+      "size": 1815,
+      "sha256": "4086045450c1a8dc98a1a45814c18e39f0b6d63a3e2278378e9378e5715b0b14",
+      "gitSha256": "4086045450c1a8dc98a1a45814c18e39f0b6d63a3e2278378e9378e5715b0b14",
+      "gitBytes": 1815,
+      "liveMatchesGit": true,
+      "manifestMatchesGit": true
+    },
+    {
+      "path": "apps/web/Dockerfile",
+      "size": 855,
+      "sha256": "03225dcc94257dfd919f3b889f0886d4981156890897fee579e50d644959cbe1",
+      "gitSha256": "03225dcc94257dfd919f3b889f0886d4981156890897fee579e50d644959cbe1",
+      "gitBytes": 855,
+      "liveMatchesGit": true,
+      "manifestMatchesGit": true
+    },
+    {
+      "path": "apps/web/deployment/portfolio/buildspec.yml",
+      "size": 1380,
+      "sha256": "37d84507c0759001c3376408982d1fa3fa1309731cc2bf618d389abcafae25a6",
+      "gitSha256": "37d84507c0759001c3376408982d1fa3fa1309731cc2bf618d389abcafae25a6",
+      "gitBytes": 1380,
+      "liveMatchesGit": true,
+      "manifestMatchesGit": true
+    },
+    {
+      "path": "apps/web/playwright.config.ts",
+      "size": 1075,
+      "sha256": "4911da2a070d1b9e05f3ef4721c191a70b634c93111315f8d94c8aab9bfc916f",
+      "gitSha256": "4911da2a070d1b9e05f3ef4721c191a70b634c93111315f8d94c8aab9bfc916f",
+      "gitBytes": 1075,
+      "liveMatchesGit": true,
+      "manifestMatchesGit": true
+    },
+    {
+      "path": "apps/web/test/browser/playwright.config.ts",
+      "size": 1004,
+      "sha256": "3d5e9a3e3e40fe0f93f98ad209d3df8a0311f2a88cc5bd312316bb118d4d6c28",
+      "gitSha256": "3d5e9a3e3e40fe0f93f98ad209d3df8a0311f2a88cc5bd312316bb118d4d6c28",
+      "gitBytes": 1004,
+      "liveMatchesGit": true,
+      "manifestMatchesGit": true
+    }
+  ],
+  "reviewedFiles": [
+    {
+      "path": "docs/shipping-browser-correction-20261013/qualify-frozen-source.sh",
+      "bytes": 4555,
+      "sha256": "d2439c4e3c3a8ed4e84698993a83e5a4bd82ea7698c98900ae8679982182acac"
+    },
+    {
+      "path": "docs/shipping-browser-correction-20261013/FROZEN-SOURCE-MANIFEST.json",
+      "bytes": 2140,
+      "sha256": "4798b1df374f43a7a04201771eb95be834a0413a684262888f280a541d944cff"
+    },
+    {
+      "path": "docs/shipping-browser-correction-20261013/IMPLEMENTATION.md",
+      "bytes": 5407,
+      "sha256": "f4d2024be7241e79f10e59c1720c0df98a262d075a4dfd67dea40a77284006cd"
+    },
+    {
+      "path": "docs/shipping-browser-correction-20261013/reviews/profile-REVIEW.md",
+      "bytes": 4897,
+      "sha256": "9231c0a4f3a7482c74b03903b5753375223577d18099d7d64a7f78adb33ea877"
+    },
+    {
+      "path": "docs/shipping-browser-correction-20261013/reviews/REVIEW-RECEIPT.json",
+      "bytes": 3860,
+      "sha256": "77f93ae09ee590412e4b4647e37be12d7cecd376775fc0fca048bcf00e6b52e1"
+    },
+    {
+      "path": "docs/shipping-browser-correction-20261013/reviews/AWS-FAILURE-EVIDENCE.json",
+      "bytes": 18324,
+      "sha256": "21f89c46e5af85b5f249602481c3fe35731d91b02080c01f75cedf23d13f06c7"
+    },
+    {
+      "path": "package.json",
+      "bytes": 1762,
+      "sha256": "616c749f95524f28cf1d07e5f99dbb106442ef7c7f7a27a686ccb8e1ef754b49"
+    },
+    {
+      "path": "apps/web/package.json",
+      "bytes": 1815,
+      "sha256": "4086045450c1a8dc98a1a45814c18e39f0b6d63a3e2278378e9378e5715b0b14"
+    },
+    {
+      "path": "apps/web/playwright.config.ts",
+      "bytes": 1075,
+      "sha256": "4911da2a070d1b9e05f3ef4721c191a70b634c93111315f8d94c8aab9bfc916f"
+    },
+    {
+      "path": "apps/web/test/browser/playwright.config.ts",
+      "bytes": 1004,
+      "sha256": "3d5e9a3e3e40fe0f93f98ad209d3df8a0311f2a88cc5bd312316bb118d4d6c28"
+    },
+    {
+      "path": "apps/web/deployment/portfolio/qualify-elements.mjs",
+      "bytes": 5784,
+      "sha256": "7a933f851f36bd47bca3b8ca371845c6a65ba43335543dda94a7390401c47215"
+    },
+    {
+      "path": "apps/web/tests/production/run-standalone.mjs",
+      "bytes": 5491,
+      "sha256": "c4c271a1738ca2425afd3eefe1540864af3f6a11cd465e8d25de2a7cd1fc2e21"
+    },
+    {
+      "path": "apps/web/tests/production/verify-standalone.mjs",
+      "bytes": 7388,
+      "sha256": "2b06e07abd048aa2d7de43be5ea89fe3115d9ef6bd2993cc7b0f1a60e7846dd8"
+    }
+  ],
+  "doc01": {
+    "status": "resolved",
+    "copies": [
+      {
+        "path": "reviews/REVIEW-RECEIPT.json",
+        "bytes": 3860,
+        "sha256": "77f93ae09ee590412e4b4647e37be12d7cecd376775fc0fca048bcf00e6b52e1",
+        "matchesSealedOriginal": true,
+        "markdownLinkResolves": true
+      },
+      {
+        "path": "reviews/AWS-FAILURE-EVIDENCE.json",
+        "bytes": 18324,
+        "sha256": "21f89c46e5af85b5f249602481c3fe35731d91b02080c01f75cedf23d13f06c7",
+        "matchesSealedOriginal": true,
+        "markdownLinkResolves": true
+      }
+    ]
+  },
+  "recipeHashMatchesManifest": true,
+  "recipeExecuted": false,
+  "recipeSyntaxCheck": "producer-reported passed; not independently rerun",
+  "sourceStatus": " M docs/shipping-browser-correction-20261013/IMPLEMENTATION.md\n?? docs/shipping-browser-correction-20261013/FROZEN-GIT-TREE.txt\n?? docs/shipping-browser-correction-20261013/FROZEN-SOURCE-MANIFEST.json\n?? docs/shipping-browser-correction-20261013/qualify-frozen-source.sh\n?? docs/shipping-browser-correction-20261013/reviews/AWS-FAILURE-EVIDENCE.json\n?? docs/shipping-browser-correction-20261013/reviews/REVIEW-RECEIPT.json\n",
+  "qualificationStatus": "No new gate disposition. First full Portfolio gate remains FAILED 1121/1 due ENOSPC; unchanged-source rerun is separate and pending at this review."
+}

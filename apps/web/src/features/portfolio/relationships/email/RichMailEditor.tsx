@@ -5,6 +5,7 @@ import StarterKit from "@tiptap/starter-kit";
 import { useEffect, useId, useRef } from "react";
 import { type MailBody } from "./mail-body";
 import { safeMailBodyHtml } from "./mail-body-html";
+import { reconcileNativeMailCaret } from "./rich-mail-selection";
 import styles from "./email.module.css";
 
 /** Local composition only; transport, signature and attachment ownership stay outside. */
@@ -49,6 +50,7 @@ export function RichMailEditor({
         class: styles.messageBody ?? "",
       },
       transformPastedHTML: safeMailBodyHtml,
+      handleKeyPress: reconcileNativeMailCaret,
     },
     onUpdate: ({ editor: current }) => {
       const html = current.getHTML();

@@ -1,0 +1,138 @@
+{
+  "sealedAtUTC": "2026-10-13T03:25:29.505451+00:00",
+  "files": [
+    {
+      "path": "REVIEW.md",
+      "bytes": 3361,
+      "sha256": "6f627795946b9db3a07b750a149527d41d4d2c1ad3d6ef44ef6f653854987065"
+    },
+    {
+      "path": "VERIFICATION.json",
+      "bytes": 17634,
+      "sha256": "6d4fa7361e2268f9b3dd528e422f3f2b449f201e05e4deeed21fcadfb391165d"
+    },
+    {
+      "path": "producer-helper-controls/RECEIPT.json",
+      "bytes": 900,
+      "sha256": "c1c87ed8119359f71b92b37fbfb6abccd54088f63a20aee903531258971e9ab6"
+    },
+    {
+      "path": "producer-helper-controls/command-failure/probe.command-exit",
+      "bytes": 2,
+      "sha256": "10159baf262b43a92d95db59dae1f72c645127301661e0a3ce4e38b295a97c58"
+    },
+    {
+      "path": "producer-helper-controls/command-failure/probe.ended",
+      "bytes": 21,
+      "sha256": "2dfd88e238e888717515d934bdcb815920e387b89094cec38305ce4aff9c008c"
+    },
+    {
+      "path": "producer-helper-controls/command-failure/probe.exit",
+      "bytes": 2,
+      "sha256": "10159baf262b43a92d95db59dae1f72c645127301661e0a3ce4e38b295a97c58"
+    },
+    {
+      "path": "producer-helper-controls/command-failure/probe.log",
+      "bytes": 19,
+      "sha256": "455bc2ed6e17c77ac4d865d040dd2f4caa4ab04f964c782749b1cacd26e95f74"
+    },
+    {
+      "path": "producer-helper-controls/command-failure/probe.log-exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "producer-helper-controls/command-failure/probe.started",
+      "bytes": 21,
+      "sha256": "2dfd88e238e888717515d934bdcb815920e387b89094cec38305ce4aff9c008c"
+    },
+    {
+      "path": "producer-helper-controls/log-failure/probe.command-exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "producer-helper-controls/log-failure/probe.ended",
+      "bytes": 21,
+      "sha256": "2dfd88e238e888717515d934bdcb815920e387b89094cec38305ce4aff9c008c"
+    },
+    {
+      "path": "producer-helper-controls/log-failure/probe.exit",
+      "bytes": 3,
+      "sha256": "93a73825c1b761d11bf2b3f4dff760d07888d3fde05dcf55f1da84aa6041a5a8"
+    },
+    {
+      "path": "producer-helper-controls/log-failure/probe.log-exit",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "producer-helper-controls/log-failure/probe.started",
+      "bytes": 21,
+      "sha256": "2dfd88e238e888717515d934bdcb815920e387b89094cec38305ce4aff9c008c"
+    },
+    {
+      "path": "producer-helper-controls/success/probe.command-exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "producer-helper-controls/success/probe.ended",
+      "bytes": 21,
+      "sha256": "2dfd88e238e888717515d934bdcb815920e387b89094cec38305ce4aff9c008c"
+    },
+    {
+      "path": "producer-helper-controls/success/probe.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "producer-helper-controls/success/probe.log",
+      "bytes": 14,
+      "sha256": "759a1e2e3a7de69070fb90f2e306f7bfdde4f45130af50dd799dedf0fe9573fc"
+    },
+    {
+      "path": "producer-helper-controls/success/probe.log-exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "producer-helper-controls/success/probe.started",
+      "bytes": 21,
+      "sha256": "2dfd88e238e888717515d934bdcb815920e387b89094cec38305ce4aff9c008c"
+    },
+    {
+      "path": "recipe.diff",
+      "bytes": 726,
+      "sha256": "1aff22c42b51df65c45ea88444b4598b787f188ebfbafe17fe66c53347c55161"
+    },
+    {
+      "path": "reviewed/FROZEN-SOURCE-MANIFEST.json",
+      "bytes": 2140,
+      "sha256": "9163649863effc47b7991c950c90172473b3b9711b50ab2b1b79eff363215fb3"
+    },
+    {
+      "path": "reviewed/IMPLEMENTATION.md",
+      "bytes": 5479,
+      "sha256": "0dceb4daba4d6cc7355526809973d4d40053f91e2fa1cb71070be0cfec54e9ea"
+    },
+    {
+      "path": "reviewed/QUALIFICATION.md",
+      "bytes": 6435,
+      "sha256": "266d5d595789b36cfd2b92866f89acd23a9094ba8ec3e192a279ca8b3a744669"
+    },
+    {
+      "path": "reviewed/qualification/GATE-MANIFEST.json",
+      "bytes": 6903,
+      "sha256": "c1d7b47e7841de7249d3471208b56926cfdbcb83752f14445fb35055d710353e"
+    },
+    {
+      "path": "reviewed/qualify-frozen-source.sh",
+      "bytes": 4824,
+      "sha256": "f781dc51b05e91509d2251b87bb935aad8ac2922ef473fadb88b4d494819f5bd"
+    }
+  ],
+  "fileCount": 26,
+  "totalBytes": 48580,
+  "scope": "Final recipe logging static addendum; no prior packet overwritten; manifest excludes itself"
+}

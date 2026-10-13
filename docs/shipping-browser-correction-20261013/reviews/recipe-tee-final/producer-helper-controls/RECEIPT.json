@@ -1,0 +1,34 @@
+{
+  "UTC": "2026-10-13T03:21:45.424399+00:00",
+  "recipeSha256": "f781dc51b05e91509d2251b87bb935aad8ac2922ef473fadb88b4d494819f5bd",
+  "scope": "Only extracted gate helper with synthetic echo/exit commands; complete qualification recipe NOT_RUN. No package/browser/build/network/AWS action.",
+  "controls": [
+    {
+      "case": "success",
+      "shellExit": 0,
+      "recordedGateExit": 0,
+      "commandExit": 0,
+      "logExit": 0,
+      "stdout": "controlled-ok",
+      "status": "PASS"
+    },
+    {
+      "case": "command-failure",
+      "shellExit": 1,
+      "recordedGateExit": 7,
+      "commandExit": 7,
+      "logExit": 0,
+      "stdout": "controlled-failure",
+      "status": "PASS"
+    },
+    {
+      "case": "log-failure",
+      "shellExit": 1,
+      "recordedGateExit": 74,
+      "commandExit": 0,
+      "logExit": 1,
+      "stdout": "controlled-log",
+      "status": "PASS"
+    }
+  ]
+}

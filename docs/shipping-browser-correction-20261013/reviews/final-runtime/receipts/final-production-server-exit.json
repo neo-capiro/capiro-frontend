@@ -1,0 +1,30 @@
+{
+  "name": "final-production-server",
+  "command": [
+    "env",
+    "TZ=UTC",
+    "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+    "npm",
+    "run",
+    "test:production",
+    "--",
+    "/tmp/capiro-shipping-browser-correction-20261013/final-production"
+  ],
+  "startedUTC": "2026-10-13T03:16:40.093087+00:00",
+  "endedUTC": "2026-10-13T03:16:46.523816+00:00",
+  "durationSeconds": 6.4307528890058165,
+  "exitCode": 0,
+  "sourceBefore": {
+    "head": "d4be41e60516e576c74afa304b50ed67da15cb93",
+    "tree": "401cadde371b91606e3346243aaca6b6225aafcb",
+    "applicationTree": "6ae2118b797f478f5a63788841a9777d67c8001e",
+    "sourceDiff": ""
+  },
+  "sourceAfter": {
+    "head": "d4be41e60516e576c74afa304b50ed67da15cb93",
+    "tree": "401cadde371b91606e3346243aaca6b6225aafcb",
+    "applicationTree": "6ae2118b797f478f5a63788841a9777d67c8001e",
+    "sourceDiff": ""
+  },
+  "sourceChanged": false
+}

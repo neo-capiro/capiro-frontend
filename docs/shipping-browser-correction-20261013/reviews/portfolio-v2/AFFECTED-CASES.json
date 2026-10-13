@@ -1,0 +1,750 @@
+[
+  {
+    "title": "rich Bold survives review and explicit send without signature duplication",
+    "ok": true,
+    "tags": [],
+    "tests": [
+      {
+        "timeout": 30000,
+        "annotations": [],
+        "expectedStatus": "passed",
+        "projectId": "",
+        "projectName": "",
+        "results": [
+          {
+            "workerIndex": 1,
+            "parallelIndex": 1,
+            "status": "passed",
+            "duration": 8733,
+            "errors": [],
+            "stdout": [],
+            "stderr": [],
+            "retry": 0,
+            "startTime": "2026-10-13T02:48:34.193Z",
+            "annotations": [],
+            "attachments": []
+          }
+        ],
+        "status": "expected"
+      }
+    ],
+    "id": "23d8565415e63e119d0c-0a8874ba915f8cc5e03d",
+    "file": "mail-rich-compose.spec.ts",
+    "line": 105,
+    "column": 3
+  },
+  {
+    "title": "rich Italic survives review and explicit send without signature duplication",
+    "ok": true,
+    "tags": [],
+    "tests": [
+      {
+        "timeout": 30000,
+        "annotations": [],
+        "expectedStatus": "passed",
+        "projectId": "",
+        "projectName": "",
+        "results": [
+          {
+            "workerIndex": 1,
+            "parallelIndex": 1,
+            "status": "passed",
+            "duration": 8615,
+            "errors": [],
+            "stdout": [],
+            "stderr": [],
+            "retry": 0,
+            "startTime": "2026-10-13T02:48:42.953Z",
+            "annotations": [],
+            "attachments": []
+          }
+        ],
+        "status": "expected"
+      }
+    ],
+    "id": "23d8565415e63e119d0c-e28fb60e7423a222db7b",
+    "file": "mail-rich-compose.spec.ts",
+    "line": 105,
+    "column": 3
+  },
+  {
+    "title": "rich Underline survives review and explicit send without signature duplication",
+    "ok": true,
+    "tags": [],
+    "tests": [
+      {
+        "timeout": 30000,
+        "annotations": [],
+        "expectedStatus": "passed",
+        "projectId": "",
+        "projectName": "",
+        "results": [
+          {
+            "workerIndex": 1,
+            "parallelIndex": 1,
+            "status": "passed",
+            "duration": 7620,
+            "errors": [],
+            "stdout": [],
+            "stderr": [],
+            "retry": 0,
+            "startTime": "2026-10-13T02:48:51.598Z",
+            "annotations": [],
+            "attachments": []
+          }
+        ],
+        "status": "expected"
+      }
+    ],
+    "id": "23d8565415e63e119d0c-0492f228b2a986a48398",
+    "file": "mail-rich-compose.spec.ts",
+    "line": 105,
+    "column": 3
+  },
+  {
+    "title": "rich List survives review and explicit send without signature duplication",
+    "ok": true,
+    "tags": [],
+    "tests": [
+      {
+        "timeout": 30000,
+        "annotations": [],
+        "expectedStatus": "passed",
+        "projectId": "",
+        "projectName": "",
+        "results": [
+          {
+            "workerIndex": 1,
+            "parallelIndex": 1,
+            "status": "passed",
+            "duration": 7767,
+            "errors": [],
+            "stdout": [],
+            "stderr": [],
+            "retry": 0,
+            "startTime": "2026-10-13T02:48:59.257Z",
+            "annotations": [],
+            "attachments": []
+          }
+        ],
+        "status": "expected"
+      }
+    ],
+    "id": "23d8565415e63e119d0c-7b1f9234066d7bb76edd",
+    "file": "mail-rich-compose.spec.ts",
+    "line": 105,
+    "column": 3
+  },
+  {
+    "title": "verified rewrite uses text and Undo restores the complete formatted draft",
+    "ok": true,
+    "tags": [],
+    "tests": [
+      {
+        "timeout": 30000,
+        "annotations": [],
+        "expectedStatus": "passed",
+        "projectId": "",
+        "projectName": "",
+        "results": [
+          {
+            "workerIndex": 1,
+            "parallelIndex": 1,
+            "status": "passed",
+            "duration": 7293,
+            "errors": [],
+            "stdout": [],
+            "stderr": [],
+            "retry": 0,
+            "startTime": "2026-10-13T02:49:07.040Z",
+            "annotations": [],
+            "attachments": []
+          }
+        ],
+        "status": "expected"
+      }
+    ],
+    "id": "23d8565415e63e119d0c-40000f39807ad22e74cc",
+    "file": "mail-rich-compose.spec.ts",
+    "line": 131,
+    "column": 1
+  },
+  {
+    "title": "formatting-only edit revokes a held rewrite without replacing current formatting",
+    "ok": true,
+    "tags": [],
+    "tests": [
+      {
+        "timeout": 30000,
+        "annotations": [],
+        "expectedStatus": "passed",
+        "projectId": "",
+        "projectName": "",
+        "results": [
+          {
+            "workerIndex": 1,
+            "parallelIndex": 1,
+            "status": "passed",
+            "duration": 7138,
+            "errors": [],
+            "stdout": [],
+            "stderr": [],
+            "retry": 0,
+            "startTime": "2026-10-13T02:49:14.368Z",
+            "annotations": [],
+            "attachments": []
+          }
+        ],
+        "status": "expected"
+      }
+    ],
+    "id": "23d8565415e63e119d0c-899fe4406e10b3ad2737",
+    "file": "mail-rich-compose.spec.ts",
+    "line": 151,
+    "column": 1
+  },
+  {
+    "title": "unverified rewrite preserves rich content",
+    "ok": true,
+    "tags": [],
+    "tests": [
+      {
+        "timeout": 30000,
+        "annotations": [],
+        "expectedStatus": "passed",
+        "projectId": "",
+        "projectName": "",
+        "results": [
+          {
+            "workerIndex": 1,
+            "parallelIndex": 1,
+            "status": "passed",
+            "duration": 7919,
+            "errors": [],
+            "stdout": [],
+            "stderr": [],
+            "retry": 0,
+            "startTime": "2026-10-13T02:49:21.560Z",
+            "annotations": [],
+            "attachments": []
+          }
+        ],
+        "status": "expected"
+      }
+    ],
+    "id": "23d8565415e63e119d0c-a93f72529d8e27195b45",
+    "file": "mail-rich-compose.spec.ts",
+    "line": 174,
+    "column": 3
+  },
+  {
+    "title": "unavailable rewrite preserves rich content",
+    "ok": true,
+    "tags": [],
+    "tests": [
+      {
+        "timeout": 30000,
+        "annotations": [],
+        "expectedStatus": "passed",
+        "projectId": "",
+        "projectName": "",
+        "results": [
+          {
+            "workerIndex": 1,
+            "parallelIndex": 1,
+            "status": "passed",
+            "duration": 7731,
+            "errors": [],
+            "stdout": [],
+            "stderr": [],
+            "retry": 0,
+            "startTime": "2026-10-13T02:49:29.555Z",
+            "annotations": [],
+            "attachments": []
+          }
+        ],
+        "status": "expected"
+      }
+    ],
+    "id": "23d8565415e63e119d0c-dff035b8c4ace9388e6f",
+    "file": "mail-rich-compose.spec.ts",
+    "line": 174,
+    "column": 3
+  },
+  {
+    "title": "paste keeps supported formatting while removing active markup and remote content",
+    "ok": true,
+    "tags": [],
+    "tests": [
+      {
+        "timeout": 30000,
+        "annotations": [],
+        "expectedStatus": "passed",
+        "projectId": "",
+        "projectName": "",
+        "results": [
+          {
+            "workerIndex": 1,
+            "parallelIndex": 1,
+            "status": "passed",
+            "duration": 7489,
+            "errors": [],
+            "stdout": [],
+            "stderr": [],
+            "retry": 0,
+            "startTime": "2026-10-13T02:49:37.295Z",
+            "annotations": [],
+            "attachments": []
+          }
+        ],
+        "status": "expected"
+      }
+    ],
+    "id": "23d8565415e63e119d0c-4ab6096ce2170b6565d1",
+    "file": "mail-rich-compose.spec.ts",
+    "line": 192,
+    "column": 1
+  },
+  {
+    "title": "empty and oversized rich bodies cannot be reviewed, and typed text is retained",
+    "ok": true,
+    "tags": [],
+    "tests": [
+      {
+        "timeout": 30000,
+        "annotations": [],
+        "expectedStatus": "passed",
+        "projectId": "",
+        "projectName": "",
+        "results": [
+          {
+            "workerIndex": 1,
+            "parallelIndex": 1,
+            "status": "passed",
+            "duration": 8079,
+            "errors": [],
+            "stdout": [],
+            "stderr": [],
+            "retry": 0,
+            "startTime": "2026-10-13T02:49:44.793Z",
+            "annotations": [],
+            "attachments": []
+          }
+        ],
+        "status": "expected"
+      }
+    ],
+    "id": "23d8565415e63e119d0c-498f728d091b7b16c05e",
+    "file": "mail-rich-compose.spec.ts",
+    "line": 243,
+    "column": 1
+  },
+  {
+    "title": "keyboard formatting and mobile toolbar remain reachable",
+    "ok": true,
+    "tags": [],
+    "tests": [
+      {
+        "timeout": 30000,
+        "annotations": [],
+        "expectedStatus": "passed",
+        "projectId": "",
+        "projectName": "",
+        "results": [
+          {
+            "workerIndex": 1,
+            "parallelIndex": 1,
+            "status": "passed",
+            "duration": 8283,
+            "errors": [],
+            "stdout": [],
+            "stderr": [],
+            "retry": 0,
+            "startTime": "2026-10-13T02:49:52.899Z",
+            "annotations": [],
+            "attachments": []
+          }
+        ],
+        "status": "expected"
+      }
+    ],
+    "id": "23d8565415e63e119d0c-89fa0e1fae3f9fed8d24",
+    "file": "mail-rich-compose.spec.ts",
+    "line": 267,
+    "column": 1
+  },
+  {
+    "title": "identity invalidation revokes rich Undo without provider effects",
+    "ok": true,
+    "tags": [],
+    "tests": [
+      {
+        "timeout": 30000,
+        "annotations": [],
+        "expectedStatus": "passed",
+        "projectId": "",
+        "projectName": "",
+        "results": [
+          {
+            "workerIndex": 1,
+            "parallelIndex": 1,
+            "status": "passed",
+            "duration": 8540,
+            "errors": [],
+            "stdout": [],
+            "stderr": [],
+            "retry": 0,
+            "startTime": "2026-10-13T02:50:01.217Z",
+            "annotations": [],
+            "attachments": []
+          }
+        ],
+        "status": "expected"
+      }
+    ],
+    "id": "23d8565415e63e119d0c-ba2ee0398b8a36692d52",
+    "file": "mail-rich-compose.spec.ts",
+    "line": 295,
+    "column": 1
+  },
+  {
+    "title": "source replacement retires editor history and rich Meri Undo",
+    "ok": true,
+    "tags": [],
+    "tests": [
+      {
+        "timeout": 30000,
+        "annotations": [],
+        "expectedStatus": "passed",
+        "projectId": "",
+        "projectName": "",
+        "results": [
+          {
+            "workerIndex": 1,
+            "parallelIndex": 1,
+            "status": "passed",
+            "duration": 7009,
+            "errors": [],
+            "stdout": [],
+            "stderr": [],
+            "retry": 0,
+            "startTime": "2026-10-13T02:50:09.789Z",
+            "annotations": [],
+            "attachments": []
+          }
+        ],
+        "status": "expected"
+      }
+    ],
+    "id": "23d8565415e63e119d0c-ea76992044eae2717db1",
+    "file": "mail-rich-compose.spec.ts",
+    "line": 320,
+    "column": 1
+  },
+  {
+    "title": "toolbar Attach file opens the existing attachment picker with no extra request",
+    "ok": true,
+    "tags": [],
+    "tests": [
+      {
+        "timeout": 30000,
+        "annotations": [],
+        "expectedStatus": "passed",
+        "projectId": "",
+        "projectName": "",
+        "results": [
+          {
+            "workerIndex": 1,
+            "parallelIndex": 1,
+            "status": "passed",
+            "duration": 7142,
+            "errors": [],
+            "stdout": [],
+            "stderr": [],
+            "retry": 0,
+            "startTime": "2026-10-13T02:50:16.824Z",
+            "annotations": [],
+            "attachments": []
+          }
+        ],
+        "status": "expected"
+      }
+    ],
+    "id": "23d8565415e63e119d0c-e582470ca4ab9364df37",
+    "file": "mail-rich-compose.spec.ts",
+    "line": 340,
+    "column": 1
+  },
+  {
+    "title": "ordinary formatting and typing keep native Undo after a verified rewrite",
+    "ok": true,
+    "tags": [],
+    "tests": [
+      {
+        "timeout": 30000,
+        "annotations": [],
+        "expectedStatus": "passed",
+        "projectId": "",
+        "projectName": "",
+        "results": [
+          {
+            "workerIndex": 1,
+            "parallelIndex": 1,
+            "status": "passed",
+            "duration": 8724,
+            "errors": [],
+            "stdout": [],
+            "stderr": [],
+            "retry": 0,
+            "startTime": "2026-10-13T02:50:24.044Z",
+            "annotations": [],
+            "attachments": []
+          }
+        ],
+        "status": "expected"
+      }
+    ],
+    "id": "23d8565415e63e119d0c-145403d03e2f2a52e412",
+    "file": "mail-rich-compose.spec.ts",
+    "line": 374,
+    "column": 3
+  },
+  {
+    "title": "ordinary formatting and typing keep native Undo after a verified rewrite with delayed selection observation",
+    "ok": true,
+    "tags": [],
+    "tests": [
+      {
+        "timeout": 30000,
+        "annotations": [],
+        "expectedStatus": "passed",
+        "projectId": "",
+        "projectName": "",
+        "results": [
+          {
+            "workerIndex": 1,
+            "parallelIndex": 1,
+            "status": "passed",
+            "duration": 7780,
+            "errors": [],
+            "stdout": [],
+            "stderr": [],
+            "retry": 0,
+            "startTime": "2026-10-13T02:50:32.806Z",
+            "annotations": [],
+            "attachments": []
+          }
+        ],
+        "status": "expected"
+      }
+    ],
+    "id": "23d8565415e63e119d0c-ef719a61dfe29119d6eb",
+    "file": "mail-rich-compose.spec.ts",
+    "line": 374,
+    "column": 3
+  },
+  {
+    "title": "intentional all selection still replaces text and supports Undo",
+    "ok": true,
+    "tags": [],
+    "tests": [
+      {
+        "timeout": 30000,
+        "annotations": [],
+        "expectedStatus": "passed",
+        "projectId": "",
+        "projectName": "",
+        "results": [
+          {
+            "workerIndex": 1,
+            "parallelIndex": 1,
+            "status": "passed",
+            "duration": 8962,
+            "errors": [],
+            "stdout": [],
+            "stderr": [],
+            "retry": 0,
+            "startTime": "2026-10-13T02:50:40.639Z",
+            "annotations": [],
+            "attachments": []
+          }
+        ],
+        "status": "expected"
+      }
+    ],
+    "id": "23d8565415e63e119d0c-ed30e2dd1fe8136c474e",
+    "file": "mail-rich-compose.spec.ts",
+    "line": 408,
+    "column": 3
+  },
+  {
+    "title": "intentional partial selection still replaces text and supports Undo",
+    "ok": true,
+    "tags": [],
+    "tests": [
+      {
+        "timeout": 30000,
+        "annotations": [],
+        "expectedStatus": "passed",
+        "projectId": "",
+        "projectName": "",
+        "results": [
+          {
+            "workerIndex": 1,
+            "parallelIndex": 1,
+            "status": "passed",
+            "duration": 9430,
+            "errors": [],
+            "stdout": [],
+            "stderr": [],
+            "retry": 0,
+            "startTime": "2026-10-13T02:50:49.645Z",
+            "annotations": [],
+            "attachments": []
+          }
+        ],
+        "status": "expected"
+      }
+    ],
+    "id": "23d8565415e63e119d0c-91fa89d8b3a60063d3bc",
+    "file": "mail-rich-compose.spec.ts",
+    "line": 408,
+    "column": 3
+  },
+  {
+    "title": "profile identity resolution replaces stale focus ownership and preserves editable layout",
+    "ok": true,
+    "tags": [],
+    "tests": [
+      {
+        "timeout": 30000,
+        "annotations": [],
+        "expectedStatus": "passed",
+        "projectId": "",
+        "projectName": "",
+        "results": [
+          {
+            "workerIndex": 0,
+            "parallelIndex": 0,
+            "status": "passed",
+            "duration": 7848,
+            "errors": [],
+            "stdout": [],
+            "stderr": [],
+            "retry": 0,
+            "startTime": "2026-10-13T02:58:25.720Z",
+            "annotations": [],
+            "attachments": []
+          }
+        ],
+        "status": "expected"
+      }
+    ],
+    "id": "a5925bf7bf97bf677cdf-e5d33736e5bb5d398c06",
+    "file": "profile-identity-layout.spec.ts",
+    "line": 5,
+    "column": 1
+  },
+  {
+    "title": "Overview composes saved focus tags and updates the real profile cache",
+    "ok": true,
+    "tags": [],
+    "tests": [
+      {
+        "timeout": 30000,
+        "annotations": [],
+        "expectedStatus": "passed",
+        "projectId": "",
+        "projectName": "",
+        "results": [
+          {
+            "workerIndex": 2,
+            "parallelIndex": 2,
+            "status": "passed",
+            "duration": 7498,
+            "errors": [],
+            "stdout": [],
+            "stderr": [],
+            "retry": 0,
+            "startTime": "2026-10-13T02:58:34.821Z",
+            "annotations": [],
+            "attachments": []
+          }
+        ],
+        "status": "expected"
+      }
+    ],
+    "id": "b80b6a9854820336c30d-9574c455cece855f492a",
+    "file": "profile-tools-integration.spec.ts",
+    "line": 12,
+    "column": 1
+  },
+  {
+    "title": "profile menu prepares and explicitly downloads exact source JSON, then restores focus",
+    "ok": true,
+    "tags": [],
+    "tests": [
+      {
+        "timeout": 30000,
+        "annotations": [],
+        "expectedStatus": "passed",
+        "projectId": "",
+        "projectName": "",
+        "results": [
+          {
+            "workerIndex": 2,
+            "parallelIndex": 2,
+            "status": "passed",
+            "duration": 8167,
+            "errors": [],
+            "stdout": [],
+            "stderr": [],
+            "retry": 0,
+            "startTime": "2026-10-13T02:58:42.341Z",
+            "annotations": [],
+            "attachments": []
+          }
+        ],
+        "status": "expected"
+      }
+    ],
+    "id": "b80b6a9854820336c30d-24749370b8b35efa080d",
+    "file": "profile-tools-integration.spec.ts",
+    "line": 58,
+    "column": 1
+  },
+  {
+    "title": "mobile dark Overview retains focus editing and the token-based pulse surface",
+    "ok": true,
+    "tags": [],
+    "tests": [
+      {
+        "timeout": 30000,
+        "annotations": [],
+        "expectedStatus": "passed",
+        "projectId": "",
+        "projectName": "",
+        "results": [
+          {
+            "workerIndex": 2,
+            "parallelIndex": 2,
+            "status": "passed",
+            "duration": 6919,
+            "errors": [],
+            "stdout": [],
+            "stderr": [],
+            "retry": 0,
+            "startTime": "2026-10-13T02:58:50.547Z",
+            "annotations": [],
+            "attachments": []
+          }
+        ],
+        "status": "expected"
+      }
+    ],
+    "id": "b80b6a9854820336c30d-6e313f70389622eaab40",
+    "file": "profile-tools-integration.spec.ts",
+    "line": 100,
+    "column": 1
+  }
+]

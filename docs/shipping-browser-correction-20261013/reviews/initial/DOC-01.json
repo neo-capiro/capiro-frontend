@@ -1,0 +1,26 @@
+{
+  "id": "DOC-01",
+  "classification": "Evidence publication link defect; no runtime/source defect",
+  "reviewDocument": "docs/shipping-browser-correction-20261013/reviews/profile-REVIEW.md",
+  "priorMarkdownByteIdentical": true,
+  "links": [
+    {
+      "label": "Full receipt",
+      "target": "docs/shipping-browser-correction-20261013/reviews/REVIEW-RECEIPT.json",
+      "existsAtReviewedCommit": false,
+      "repairInput": "/tmp/capiro-shipping-profile-permanent-review-20261013/REVIEW-RECEIPT.json",
+      "bytes": 3860,
+      "sha256": "77f93ae09ee590412e4b4647e37be12d7cecd376775fc0fca048bcf00e6b52e1"
+    },
+    {
+      "label": "AWS report",
+      "target": "docs/shipping-browser-correction-20261013/reviews/AWS-FAILURE-EVIDENCE.json",
+      "existsAtReviewedCommit": false,
+      "repairInput": "/tmp/capiro-shipping-profile-permanent-review-20261013/AWS-FAILURE-EVIDENCE.json",
+      "bytes": 18324,
+      "sha256": "21f89c46e5af85b5f249602481c3fe35731d91b02080c01f75cedf23d13f06c7"
+    }
+  ],
+  "minimumFix": "Copy both exact original JSON files to the already-linked sibling paths. Preserve review Markdown and sealed originals. Hash-check and manifest the copies; no runtime change or rerun required for this evidence-only correction.",
+  "stateAtReviewedPin": "OPEN"
+}
