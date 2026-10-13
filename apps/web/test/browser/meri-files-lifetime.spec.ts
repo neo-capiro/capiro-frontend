@@ -17,11 +17,14 @@ import {
   replaceActionIdentity,
 } from "./meri-action-host-fixtures";
 
-for (const identity of [
-  { name: "user", detail: { userId: "synthetic-new-user" } },
-  { name: "session", detail: { sessionId: "synthetic-new-session" } },
-  { name: "organization", detail: { orgId: "synthetic-new-org" } },
-] as const) {
+const identities: readonly { name: string; detail: Record<string, string> }[] =
+  [
+    { name: "user", detail: { userId: "synthetic-new-user" } },
+    { name: "session", detail: { sessionId: "synthetic-new-session" } },
+    { name: "organization", detail: { orgId: "synthetic-new-org" } },
+  ];
+
+for (const identity of identities) {
   for (const status of [200, 401]) {
     test(`Files late create ${status} cannot publish or revoke the replacement ${identity.name}`, async ({
       page,
