@@ -19,6 +19,7 @@ import {
 
 const pageSize = 25;
 const maxPages = 2;
+const lifecycles = ["active", "forecast", "closed", "post_award"];
 const supported = (source: string) =>
   fundingCalendarSources.some((value) => value === source);
 const mismatch = () =>
@@ -45,7 +46,7 @@ const pageSchema = (page: number) =>
             row.sourceRecordId.trim() &&
             row.title.trim() &&
             row.clientId === null &&
-            ["active", "closed"].includes(row.lifecycle),
+            lifecycles.includes(row.lifecycle),
         ) &&
         result.freshness.every((row) => supported(row.source)) &&
         new Set(result.freshness.map((row) => row.source)).size ===
@@ -69,7 +70,7 @@ async function fundingCandidates(
     signal?.throwIfAborted();
     const result = await api.request(
       "core",
-      `intelligence/opportunities/v2/search?${queryString({ mode: "all", source: fundingCalendarSources.join(","), lifecycle: "active,closed", deadlineWindow: "any", ...window, sort: "deadline", direction: "asc", page, pageSize })}`,
+      `intelligence/opportunities/v2/search?${queryString({ mode: "all", source: fundingCalendarSources.join(","), lifecycle: lifecycles.join(","), deadlineWindow: "any", ...window, sort: "deadline", direction: "asc", page, pageSize })}`,
       pageSchema(page),
       { signal },
     );
@@ -127,7 +128,9 @@ export async function fetchFundingDeadlines(
   zone: string,
   signal?: AbortSignal,
 ): Promise<CalendarFeed> {
-  const limitations = new Set<string>();
+  const limitations = new Set<string>([
+    "Agency forecasts are not included: the native source does not publish response deadlines. Anticipated award dates are not response deadlines.",
+  ]);
   const records = await fundingCandidates(
     api,
     startDay,

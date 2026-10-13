@@ -11,17 +11,29 @@ export const fundingRecord = (
   title: `Synthetic ${source} opportunity ${id}`,
   agency: "Synthetic agency",
   sourceUrl: null,
-  type: "solicitation",
-  lifecycle: "active",
+  type:
+    source === "agency_forecast"
+      ? "forecast"
+      : ["grants_gov", "ca_portal"].includes(source)
+        ? "grant"
+        : "solicitation",
+  lifecycle: source === "agency_forecast" ? "forecast" : "active",
   postedDate: "2026-09-01T00:00:00Z",
-  deadline: "2026-10-14T00:00:00Z",
+  deadline: source === "agency_forecast" ? null : "2026-10-14T00:00:00Z",
   closeOrArchiveDate: "2026-12-31T00:00:00Z",
   isPursuable: true,
   summary: null,
   value: null,
   valueBasis: "not_stated_by_source",
   sourceFacts: {
-    provenance: source === "sbir_sttr" ? "tango_sbir_topic" : "sam_opportunity",
+    provenance: {
+      grants_gov: "federal_grant",
+      sam_gov: "sam_opportunity",
+      agency_forecast: "tango_procurement_forecast",
+      dibbs: "tango_dibbs_solicitation",
+      sbir_sttr: "tango_sbir_topic",
+      ca_portal: "california_grant_opportunity",
+    }[source],
   },
   relevanceScore: null,
   eligibility: null,
@@ -39,21 +51,27 @@ export const fundingPage = (
   totalIsCapped: false,
   catalogComplete: true,
   counts: {
-    grants: 0,
-    contracts: opportunities.length,
-    active: opportunities.length,
-    closed: 0,
+    grants: opportunities.filter((row) =>
+      ["grants_gov", "ca_portal"].includes(row.source),
+    ).length,
+    contracts: opportunities.filter(
+      (row) => !["grants_gov", "ca_portal"].includes(row.source),
+    ).length,
+    active: opportunities.filter((row) => row.lifecycle === "active").length,
+    closed: opportunities.filter((row) => row.lifecycle === "closed").length,
   },
   emptyReason: opportunities.length ? null : "no_matches",
   generatedAt: "2026-10-13T12:00:00Z",
   mode: "all",
   clientId: null,
-  freshness: ["sam_gov", "sbir_sttr"].map((source) => ({
-    source,
-    state: "current",
-    lastSyncedAt: "2026-10-13T11:00:00Z",
-    recordCount: 100,
-  })),
+  freshness: ["grants_gov", "sam_gov", "dibbs", "sbir_sttr", "ca_portal"].map(
+    (source) => ({
+      source,
+      state: "current",
+      lastSyncedAt: "2026-10-13T11:00:00Z",
+      recordCount: 100,
+    }),
+  ),
   ...overrides,
 });
 

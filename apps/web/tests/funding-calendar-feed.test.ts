@@ -37,11 +37,13 @@ it("reads the approved all-mode sources and exact detail lineage with GET only",
   const result = await load(fixture.api);
   expect(result.items).toHaveLength(2);
   expect(new Set(result.items.map((item) => item.key)).size).toBe(2);
-  expect(result.limitations).toEqual([]);
+  expect(result.limitations).toEqual([
+    "Agency forecasts are not included: the native source does not publish response deadlines. Anticipated award dates are not response deadlines.",
+  ]);
   expect(Object.fromEntries(fixture.requests[0]!.searchParams)).toEqual({
     mode: "all",
-    source: "sam_gov,sbir_sttr",
-    lifecycle: "active,closed",
+    source: "grants_gov,sam_gov,dibbs,sbir_sttr,ca_portal",
+    lifecycle: "active,forecast,closed,post_award",
     deadlineWindow: "any",
     deadlineFrom: "2026-10-01T00:00:00Z",
     deadlineTo: "2026-11-01T04:00:00Z",
@@ -137,7 +139,7 @@ it.each([
   { mode: "matched" },
   { clientId: "client-other" },
   { total: -1 },
-  { opportunities: [fundingRecord("other", "grants_gov")] },
+  { opportunities: [fundingRecord("other", "agency_forecast")] },
   { opportunities: [{ ...fundingRecord(), clientId: "client-other" }] },
 ])(
   "rejects a search receipt outside the captured Calendar request: %j",
