@@ -1,6 +1,7 @@
 import { SelectedClientGate } from "../session/SelectedClient";
 import { Header } from "./Header";
 import { Sidebar } from "./Sidebar";
+import { MeriMobileNavigation } from "./MeriMobileNavigation";
 import styles from "./shell.module.css";
 
 export function ProductShell({
@@ -18,6 +19,7 @@ export function ProductShell({
     <>
       <div className={styles.target} data-design-target={designTarget}>
         <Header assetSet={assetSet} />
+        <MeriMobileNavigation />
         <div className={styles.workspace}>
           <Sidebar assetSet={assetSet} />
           <main id="main-content" className={styles.main}>

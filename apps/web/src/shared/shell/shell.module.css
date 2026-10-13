@@ -48,6 +48,9 @@
   display: flex;
   min-height: 975px;
 }
+.mobileNavigation {
+  display: none;
+}
 .sidebar {
   flex: 0 0 232px;
   width: 232px;
@@ -152,6 +155,13 @@
   }
 }
 @media (max-width: 680px) {
+  .mobileNavigation {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+  }
   .brand {
     width: 77px;
     flex-basis: 77px;

@@ -5,3 +5,7 @@
 
 # Preserve raw review logs, receipts and patches.
 docs/meri-workflow-20261013/review-evidence/** -text -whitespace
+
+# Keep raw unified regression and qualification evidence byte-exact.
+docs/unified-20261013/mobile-navigation/** -text -whitespace
+docs/unified-20261013/evidence/** -text -whitespace

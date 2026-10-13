@@ -1,0 +1,72 @@
+
+> @capiro/web@0.1.0 test:browser:modules
+> playwright test --config test/browser/playwright.config.ts meri-action-host-mobile-navigation.spec.ts --output=/tmp/capiro-meri-mobile-navigation-regression-20261013/red-artifacts
+
+[WebServer] (node:1257345) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:1257372) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 test/browser/meri-action-host-mobile-navigation.spec.ts:74:1 › 375px Meri navigation preserves the verified client through keyboard and Back/Forward without action dispatch (6.2s)
+(node:1257502) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 test/browser/meri-action-host-mobile-navigation.spec.ts:103:1 › 1440px Meri retains one visible sidebar destination per route without duplicate mobile links (1.8s)
+
+
+  1) test/browser/meri-action-host-mobile-navigation.spec.ts:74:1 › 375px Meri navigation preserves the verified client through keyboard and Back/Forward without action dispatch 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('link', { name: 'Conversations', exact: true })
+    Expected: 1
+    Received: 0
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('link', { name: 'Conversations', exact: true })
+        14 × locator resolved to 0 elements
+           - unexpected value "0"
+
+
+      53 |     exact: true,
+      54 |   });
+    > 55 |   await expect(home).toHaveCount(1);
+         |                      ^
+      56 |   await expect(actions).toHaveCount(1);
+      57 |   await expect(home).toBeVisible();
+      58 |   await expect(actions).toBeVisible();
+        at expectMobileRoute (/tmp/capiro-onboard-execution-20261013/apps/web/test/browser/meri-action-host-mobile-navigation.spec.ts:55:22)
+        at /tmp/capiro-onboard-execution-20261013/apps/web/test/browser/meri-action-host-mobile-navigation.spec.ts:80:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../capiro-meri-mobile-navigation-regression-20261013/red-artifacts/meri-action-host-mobile-na-e9e2a-ard-without-action-dispatch/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../capiro-meri-mobile-navigation-regression-20261013/red-artifacts/meri-action-host-mobile-na-e9e2a-ard-without-action-dispatch/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../capiro-meri-mobile-navigation-regression-20261013/red-artifacts/meri-action-host-mobile-na-e9e2a-ard-without-action-dispatch/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../capiro-meri-mobile-navigation-regression-20261013/red-artifacts/meri-action-host-mobile-na-e9e2a-ard-without-action-dispatch/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    test/browser/meri-action-host-mobile-navigation.spec.ts:74:1 › 375px Meri navigation preserves the verified client through keyboard and Back/Forward without action dispatch 
+  1 passed (11.3s)
+npm error Lifecycle script `test:browser:modules` failed with error:
+npm error code 1
+npm error path /tmp/capiro-onboard-execution-20261013/apps/web
+npm error workspace @capiro/web@0.1.0
+npm error location /tmp/capiro-onboard-execution-20261013/apps/web
+npm error command failed
+npm error command sh -c playwright test --config test/browser/playwright.config.ts meri-action-host-mobile-navigation.spec.ts --output=/tmp/capiro-meri-mobile-navigation-regression-20261013/red-artifacts
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
