@@ -1,0 +1,36 @@
+.screen {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.screen > button {
+  justify-self: start;
+}
+.plaintext {
+  white-space: pre-wrap;
+}
+.facts {
+  display: grid;
+  grid-template-columns: minmax(90px, 160px) minmax(0, 1fr);
+  gap: 8px 16px;
+}
+.facts dt {
+  color: var(--muted-foreground);
+}
+.facts dd {
+  margin: 0;
+}
+.records {
+  display: grid;
+  gap: 16px;
+  padding-left: 24px;
+}
+.provenance {
+  font-size: 13px;
+  color: var(--muted-foreground);
+}
+.provenance summary {
+  cursor: pointer;
+  color: var(--foreground);
+}

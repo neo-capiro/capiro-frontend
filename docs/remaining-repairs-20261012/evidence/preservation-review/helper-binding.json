@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-12T21:21:33.159894+00:00",
+  "sourceCommit": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+  "status": "",
+  "helpers": {
+    "preserve-evidence.py": {
+      "sha256": "c4f3f28c40b6b43fe528f1cad11500a4b561d201e7759c9dfa851315f06717f6",
+      "bytes": 4535
+    },
+    "stage-evidence.py": {
+      "sha256": "33a504ba4c8ef71012beb1c3e5cfb08dbc4e90d4fe4225b0a673fe75f2013912",
+      "bytes": 4687
+    }
+  },
+  "producerFolders": {
+    "docker": "/tmp/capiro-remaining-docker-evidence",
+    "docker-independent-review": "/tmp/capiro-remaining-docker-independent-review",
+    "preservation-review": "/tmp/capiro-remaining-preservation-review",
+    "root": "/tmp/capiro-remaining-root-evidence",
+    "intake": "/tmp/capiro-remaining-intake-evidence",
+    "profile": "/tmp/capiro-remaining-profile-evidence",
+    "calendar": "/tmp/capiro-remaining-calendar-evidence",
+    "mail": "/tmp/capiro-remaining-mail-evidence",
+    "capabilities": "/tmp/capiro-remaining-capabilities-evidence",
+    "modules": "/tmp/capiro-remaining-modules-evidence",
+    "calendar-independent-review": "/tmp/capiro-remaining-calendar-independent-review",
+    "coordination": "/tmp/capiro-remaining-coordination",
+    "qualification": "/tmp/capiro-remaining-qualification",
+    "final-source-review-intake": "/tmp/capiro-remaining-final-source-review-intake",
+    "final-ledger-review": "/tmp/capiro-remaining-final-ledger-review",
+    "final-gate-review": "/tmp/capiro-remaining-final-gate-review"
+  },
+  "targetExists": false,
+  "targetSymlinks": []
+}

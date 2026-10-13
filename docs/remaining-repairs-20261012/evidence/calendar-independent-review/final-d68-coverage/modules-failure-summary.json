@@ -1,0 +1,91 @@
+{
+  "source": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+  "report": "/tmp/capiro-remaining-qualification/final-d68c2dc/modules-browser-results.json",
+  "reportSHA256": "e4208e8bfc83f87f41e392ff709e7a2ed1657070ef326203792775ef751f1951",
+  "stats": {
+    "startTime": "2026-10-12T21:53:39.814Z",
+    "duration": 275720.92000000004,
+    "expected": 207,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "failedSpecs": [
+    {
+      "title": "MS08 scope and grouping controls remain keyboard operable at phone width",
+      "ok": false,
+      "tags": [],
+      "tests": [
+        {
+          "timeout": 60000,
+          "annotations": [],
+          "expectedStatus": "passed",
+          "projectId": "",
+          "projectName": "",
+          "results": [
+            {
+              "workerIndex": 0,
+              "parallelIndex": 0,
+              "status": "failed",
+              "duration": 6172,
+              "error": {
+                "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('combobox', { name: 'Group by', exact: true })\nExpected substring: \u001b[32m\"None\"\u001b[39m\nReceived string:    \u001b[31m\"Group by \u00b7 Client\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('combobox', { name: 'Group by', exact: true })\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <button dir=\"ltr\" type=\"button\" role=\"combobox\" data-state=\"closed\" data-size=\"default\" aria-expanded=\"false\" aria-label=\"Group by\" aria-autocomplete=\"none\" data-slot=\"select-trigger\" class=\"border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit it\u2026>\u2026</button>\u001b[22m\n\u001b[2m       - unexpected value \"Group by \u00b7 Client\"\u001b[22m\n",
+                "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('combobox', { name: 'Group by', exact: true })\nExpected substring: \u001b[32m\"None\"\u001b[39m\nReceived string:    \u001b[31m\"Group by \u00b7 Client\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('combobox', { name: 'Group by', exact: true })\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <button dir=\"ltr\" type=\"button\" role=\"combobox\" data-state=\"closed\" data-size=\"default\" aria-expanded=\"false\" aria-label=\"Group by\" aria-autocomplete=\"none\" data-slot=\"select-trigger\" class=\"border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit it\u2026>\u2026</button>\u001b[22m\n\u001b[2m       - unexpected value \"Group by \u00b7 Client\"\u001b[22m\n\n    at /workspace/capiro-remaining/apps/web/test/browser/remaining-modules.spec.ts:301:26",
+                "location": {
+                  "file": "/workspace/capiro-remaining/apps/web/test/browser/remaining-modules.spec.ts",
+                  "column": 26,
+                  "line": 301
+                },
+                "snippet": "  299 |   await page.keyboard.press(\"ArrowDown\");\n  300 |   await page.keyboard.press(\"Enter\");\n> 301 |   await expect(grouping).toContainText(\"None\");\n      |                          ^\n  302 |   await expect(page.getByRole(\"table\")).toHaveCount(1);\n  303 |   await choose(page, \"Group by\", \"Group by \u00b7 Client\");\n  304 |   await page.screenshot({"
+              },
+              "errors": [
+                {
+                  "location": {
+                    "file": "/workspace/capiro-remaining/apps/web/test/browser/remaining-modules.spec.ts",
+                    "column": 26,
+                    "line": 301
+                  },
+                  "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('combobox', { name: 'Group by', exact: true })\nExpected substring: \u001b[32m\"None\"\u001b[39m\nReceived string:    \u001b[31m\"Group by \u00b7 Client\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('combobox', { name: 'Group by', exact: true })\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <button dir=\"ltr\" type=\"button\" role=\"combobox\" data-state=\"closed\" data-size=\"default\" aria-expanded=\"false\" aria-label=\"Group by\" aria-autocomplete=\"none\" data-slot=\"select-trigger\" class=\"border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit it\u2026>\u2026</button>\u001b[22m\n\u001b[2m       - unexpected value \"Group by \u00b7 Client\"\u001b[22m\n\n\n  299 |   await page.keyboard.press(\"ArrowDown\");\n  300 |   await page.keyboard.press(\"Enter\");\n> 301 |   await expect(grouping).toContainText(\"None\");\n      |                          ^\n  302 |   await expect(page.getByRole(\"table\")).toHaveCount(1);\n  303 |   await choose(page, \"Group by\", \"Group by \u00b7 Client\");\n  304 |   await page.screenshot({\n    at /workspace/capiro-remaining/apps/web/test/browser/remaining-modules.spec.ts:301:26"
+                }
+              ],
+              "stdout": [],
+              "stderr": [],
+              "retry": 0,
+              "startTime": "2026-10-12T21:57:34.111Z",
+              "annotations": [],
+              "attachments": [
+                {
+                  "name": "screenshot",
+                  "contentType": "image/png",
+                  "path": "/tmp/capiro-remaining-qualification/final-d68c2dc/modules-browser-artifacts/remaining-modules-MS08-sco-10d0d-ard-operable-at-phone-width/test-failed-1.png"
+                },
+                {
+                  "name": "error-context",
+                  "contentType": "text/markdown",
+                  "path": "/tmp/capiro-remaining-qualification/final-d68c2dc/modules-browser-artifacts/remaining-modules-MS08-sco-10d0d-ard-operable-at-phone-width/error-context.md"
+                },
+                {
+                  "name": "trace",
+                  "contentType": "application/zip",
+                  "path": "/tmp/capiro-remaining-qualification/final-d68c2dc/modules-browser-artifacts/remaining-modules-MS08-sco-10d0d-ard-operable-at-phone-width/trace.zip"
+                }
+              ],
+              "errorLocation": {
+                "file": "/workspace/capiro-remaining/apps/web/test/browser/remaining-modules.spec.ts",
+                "column": 26,
+                "line": 301
+              }
+            }
+          ],
+          "status": "unexpected"
+        }
+      ],
+      "id": "23bf3c282ea554de4104-daae22d660e76922e280",
+      "file": "remaining-modules.spec.ts",
+      "line": 277,
+      "column": 1
+    }
+  ],
+  "portfolioStatus": "NOT_RUN \u2014 root confirmed not started; paused pending Modules diagnosis",
+  "failureCauseClassification": "Not independently diagnosed in this audit"
+}

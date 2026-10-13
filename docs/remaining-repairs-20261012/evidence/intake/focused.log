@@ -1,0 +1,54 @@
+
+Running 46 tests using 1 worker
+
+
+(node:716582) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/46] apps/web/tests/browser/client-header.spec.ts:3:1 › client header supports keyboard navigation and scoped quick-add deep links
+[2/46] apps/web/tests/browser/client-intake.spec.ts:4:1 › production Add profile chooser opens retained LDA intake, returns and restores focus
+[3/46] apps/web/tests/browser/client-intake.spec.ts:60:1 › three intake steps validate, preserve input, send canonical fields and explicit intake data
+[4/46] apps/web/tests/browser/client-intake.spec.ts:155:1 › create failure keeps all entered fields and never shows success
+[5/46] apps/web/tests/browser/client-intake.spec.ts:198:1 › logo confirmation failure retries without duplicate profile creation or storage upload
+[6/46] apps/web/tests/browser/client-intake.spec.ts:258:1 › client header edit merges fresh remote siblings, preserves unchanged fields and returns focus
+[7/46] apps/web/tests/browser/client-intake.spec.ts:332:1 › rejected client edit remains open with entered data and unchanged profile
+[8/46] apps/web/tests/browser/client-intake.spec.ts:379:1 › standard member cannot edit but can confirm archive; rejected receipt never navigates
+[9/46] apps/web/tests/browser/ordered-owners.spec.ts:35:1 › four ranked owners require a deliberate save and preserve exact order
+[10/46] apps/web/tests/browser/ordered-owners.spec.ts:83:1 › clearing Primary preserves later positions and blocks an implicit promotion
+[11/46] apps/web/tests/browser/ordered-owners.spec.ts:110:1 › unavailable historical owners keep their rank and ranked members have no roster Remove
+[12/46] apps/web/tests/browser/ordered-owners.spec.ts:148:1 › 409 requires read-back and a fresh deliberate versioned save, never automatic retry
+[13/46] apps/web/tests/browser/ordered-owners.spec.ts:181:1 › an interrupted PUT remains fenced after reopening and matching read-back sends nothing
+[14/46] apps/web/tests/browser/ordered-owners.spec.ts:220:1 › background read cannot silently rebase a draft, and replacing the actor clears that editor
+[15/46] apps/web/tests/browser/profile-current-state.spec.ts:15:1 › profile notes conceal a failed saved-client read and prevent replacement
+[16/46] apps/web/tests/browser/profile-current-state.spec.ts:34:1 › profile notes reject another client's receipt and require review before retry
+[17/46] apps/web/tests/browser/profile-current-state.spec.ts:56:1 › profile notes retain a refused draft without reporting it saved
+[18/46] apps/web/tests/browser/profile-current-state.spec.ts:72:1 › late notes receipts cannot close a replacement actor's editor
+[19/46] apps/web/tests/browser/profile-current-state.spec.ts:106:1 › failed account-team refresh conceals cached members and disables changes
+[20/46] apps/web/tests/browser/profile-current-state.spec.ts:129:1 › failed member options cannot submit a retained selection
+[21/46] apps/web/tests/browser/profile-current-state.spec.ts:147:1 › team add needs the requested native roster effect
+[22/46] apps/web/tests/browser/profile-current-state.spec.ts:163:1 › owner assignment rejects a different returned owner
+[23/46] apps/web/tests/browser/profile-current-state.spec.ts:188:1 › failed facilities refresh conceals saved locations and closes their detail
+[24/46] apps/web/tests/browser/profile-current-state.spec.ts:213:1 › a removed facility selection does not reopen when that ID returns
+[25/46] apps/web/tests/browser/profile-current-state.spec.ts:235:1 › unknown facility creation stays fenced after closing and reopening
+[26/46] apps/web/tests/browser/profile-current-state.spec.ts:258:1 › identity invalidation disables facility creation despite a cached role
+[27/46] apps/web/tests/browser/profile-dialog-layout.spec.ts:8:3 › current profile dialogs fit 1440px and avoid cross-component render updates
+[28/46] apps/web/tests/browser/profile-dialog-layout.spec.ts:8:3 › current profile dialogs fit 390px and avoid cross-component render updates
+[29/46] apps/web/tests/browser/profile-write-lifetime.spec.ts:23:1 › a matching notes clear uses only the native notes PUT and closes once
+[30/46] apps/web/tests/browser/profile-write-lifetime.spec.ts:47:1 › a refreshed notes source fences a late receipt and retains the local draft for review
+[31/46] apps/web/tests/browser/profile-write-lifetime.spec.ts:91:1 › owner membership role mismatches stay unknown and preserve the role draft
+[32/46] apps/web/tests/browser/profile-write-lifetime.spec.ts:111:1 › an owner's successfully updated membership role remains visible on the single owner row
+[33/46] apps/web/tests/browser/profile-write-lifetime.spec.ts:139:1 › a successfully removed member option leaves the retained choice unavailable
+[34/46] apps/web/tests/browser/profile-write-lifetime.spec.ts:163:1 › late team receipts do not report success or invalidate a replacement client view
+[35/46] apps/web/tests/browser/profile-write-lifetime.spec.ts:206:1 › closing a pending facility create keeps the unknown fence when its view reopens
+[36/46] apps/web/tests/browser/profile-write-lifetime.spec.ts:246:1 › a similar current facility cannot be claimed as an unknown creation receipt
+[37/46] apps/web/tests/browser/profile-write-lifetime.spec.ts:280:1 › a changed saved facility cannot be overwritten by an older open draft
+[38/46] apps/web/tests/browser/profile-write-lifetime.spec.ts:315:1 › a late facility result cannot escape its original actor's unknown fence
+[39/46] apps/web/tests/browser/remaining-intake.spec.ts:30:1 › CI-01 standard reader can inspect saved client details and government fields
+[40/46] apps/web/tests/browser/remaining-intake.spec.ts:97:1 › CI-02 view search selects the canonical current-client route
+[41/46] apps/web/tests/browser/remaining-intake.spec.ts:118:1 › CI-03 account roster shows supplied member email and inline addition
+[42/46] apps/web/tests/browser/remaining-intake.spec.ts:141:1 › CI-04 choice groups retain their distinct desktop layouts
+[43/46] apps/web/tests/browser/remaining-intake.spec.ts:188:1 › CI-02 keyboard search has an empty state, arrow selection and dialog/input boundaries
+[44/46] apps/web/tests/browser/remaining-intake.spec.ts:238:1 › CI-01 unavailable client never exposes saved details or government action
+[45/46] apps/web/tests/browser/remaining-intake.spec.ts:256:1 › CI-01 government read view fits a narrow screen and keeps absent values explicit
+[46/46] apps/web/tests/browser/remaining-intake.spec.ts:292:1 › CI-04 all three choice groups stack without horizontal overflow on mobile
+  46 passed (2.9m)

@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "startedUTC": "2026-10-12T22:40:40.860133+00:00",
+  "endedUTC": "2026-10-12T22:40:53.795455+00:00",
+  "durationSeconds": 12.935346825994202,
+  "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "rootTree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+  "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+  "runtimeSourceTree": "fa4ca7b5ca126f7bcdc1cf816584fa0303d61704",
+  "archive": "/workspace/capiro-source-archives/source-1585438/source-1585438.zip",
+  "archiveBytes": 841126268,
+  "archiveSHA256": "0feb5ef3a18f4dffa872da5f733bb16eede65c8e2d3f25c0d13c136d4985bff1",
+  "ownerReceipt": "/workspace/capiro-source-archives/source-1585438/SOURCE-ARCHIVE-RECEIPT.json",
+  "ownerReceiptSHA256": "6382443255886751cc9bd5acf2b43655af9b1019e8437d0221cd7aa6e9270e57",
+  "zipEntries": 11443,
+  "zipDirectories": 2252,
+  "trackedBlobs": 9191,
+  "verifiedMembers": 9191,
+  "uncompressedBytes": 1292746432,
+  "gitModeCounts": {
+    "100644": 9191
+  },
+  "zipCreatorCounts": {
+    "0": 11443
+  },
+  "method": "Independent git ls-tree and cat-file metadata; streamed ZIP SHA256; each streamed member recomputed SHA1(blob <size>\\0 + content) against the frozen Git tree, SHA256 against owner receipt, and ZIP CRC. Exact path-set and directory-set equality; no extraction.",
+  "archiveAndReceiptUnchanged": true,
+  "extractedFiles": 0,
+  "runtimeServerBuildSourceEdits": false,
+  "qualification": "Separate; Portfolio full browser gate remains pending. This is source archive integrity only.",
+  "failures": []
+}

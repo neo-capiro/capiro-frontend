@@ -1,0 +1,16 @@
+{
+  "source": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+  "reviewer": "root",
+  "timeUTC": "2026-10-12T21:00:56.113504+00:00",
+  "reviewed": [
+    {
+      "path": "production-portfolio-1440-light.png",
+      "sha256": "adb252c0670b1797a9515d1ea50002c30fd73566891ced4cb9634a26a102be8e"
+    },
+    {
+      "path": "production-portfolio-390-dark.png",
+      "sha256": "532b06a716f405c135b7b3ee84008b5b208415588a1aa934725894561f53e318"
+    }
+  ],
+  "finding": "Setup-only Portfolio view is legible, contained and correctly themed at desktop/light and phone/dark. No visible overflow/clipping. Four render controls passed programmatically. This does not establish authenticated product/Figma fidelity or full accessibility."
+}

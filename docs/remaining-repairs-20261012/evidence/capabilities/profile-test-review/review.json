@@ -1,0 +1,447 @@
+{
+  "createdAtUtc": "2026-10-12T20:26:40.862734+00:00",
+  "sourcePin": "104495d4cdc8251640b922aea431fa0e169fe935",
+  "applicationTree": "ad282f731750e1984790de2ec266ff9e311581c9",
+  "sourceTree": "57fad76b58a59f8d3c2f35155201e7524d713539",
+  "baseline": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+  "disposition": "No new blocking cohesion, preservation or authority-masking finding in the bounded Profile/final-test review.",
+  "scanScope": {
+    "changedTestSourceFiles": 25,
+    "extensions": "TS/TSX and other JS/TS source extensions under test/tests/__tests__ directories; unchanged files and the added HTML entry have no new source size signal.",
+    "signals": 11,
+    "new": 6,
+    "changed": 2,
+    "inheritedUnchanged": 3
+  },
+  "allFinalSignals": [
+    {
+      "file": "apps/web/test/browser/remaining-modules.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 486,
+      "fingerprint": "33e115194230d772767d40ce9ef9e855370ea36a7ee90ba0feba0563f6947f89",
+      "sha256": "c86ad251ee3eb115e5e6edeb0309192aebd9b3fd38fc6f85fdf19e89deaea78f",
+      "classification": "new",
+      "disposition": "accepted_cohesive_bounded_cohort",
+      "rationale": "The file is a bounded MS07/08/09 acceptance cohort for three named Modules screens. Planner occupies the majority; Workspace layout and public-form presentation cases remain independent tests with local fixtures and explicit outcomes. It reuses the existing operation fixture and actual ApplicationBoundary rather than making a test framework or duplicating planner grouping/filter algorithms. Each case controls its own state, so one screen does not require mocking another screen's behavior. Current-page counts, client links, read-denial recovery, held old-session reads, viewer-disabled mutation, URL history, mobile keyboard interaction, form error retention and malformed/old-token receipts are observable assertions. No split solely to silence 486 lines is justified by the present cohort.",
+      "priorReview": "../test-cohesion-review/review.json"
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-sharing.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 469,
+      "fingerprint": "062206c3277a4a8e3cde4ddef011c7bca486457f523ff3c5fbfccfdbc8b68b29",
+      "sha256": "0ee7273f96b8c01cf9af22739d436ab207dcd3dd21f9d69dd8871bd2809f7cae",
+      "classification": "new",
+      "disposition": "accepted_cohesion_after_TCR_01_correction",
+      "rationale": "One selected-artifact sharing/feed acceptance owner. The strengthened old-actor preflight case captures the exact request, proves its original attempt was pending, then observes actual request finish or ERR_ABORTED and the same original attempt refused before retained zero-write and dialog assertions. This resolves TCR-01 without sleeps or production changes. The file469 fingerprint and setup81 fingerprint exactly match independently accepted owner3195ff. Setup remains a controllable synthetic endpoint fixture; it is not native permission proof. Calendar identity replacement updates the Portfolio identity cache, not the entire application session.",
+      "priorReview": "../test-cohesion-correction-review/review.json"
+    },
+    {
+      "file": "apps/web/tests/browser/calendar-sharing.spec.ts",
+      "kind": "function",
+      "symbol": "setup",
+      "line": 17,
+      "nonblank": 81,
+      "fingerprint": "fad2e4d85b892511b6f812be3847d67b27affde5c1d7f51f10ecfed57f128125",
+      "sha256": "0ee7273f96b8c01cf9af22739d436ab207dcd3dd21f9d69dd8871bd2809f7cae",
+      "classification": "new",
+      "disposition": "accepted_cohesion_after_TCR_01_correction",
+      "rationale": "One selected-artifact sharing/feed acceptance owner. The strengthened old-actor preflight case captures the exact request, proves its original attempt was pending, then observes actual request finish or ERR_ABORTED and the same original attempt refused before retained zero-write and dialog assertions. This resolves TCR-01 without sleeps or production changes. The file469 fingerprint and setup81 fingerprint exactly match independently accepted owner3195ff. Setup remains a controllable synthetic endpoint fixture; it is not native permission proof. Calendar identity replacement updates the Portfolio identity cache, not the entire application session.",
+      "priorReview": "../test-cohesion-correction-review/review.json"
+    },
+    {
+      "file": "apps/web/tests/browser/email-compose.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 653,
+      "fingerprint": "9586be4f68794516b7826531fcc57d1c83abf9920e2d87137c507ca049143139",
+      "sha256": "c61e2e708f1a7a079570478891cd17982586f9bf262d8e979931a7976ccd90c0",
+      "classification": "changed",
+      "disposition": "accepted_unchanged_responsibility_after_representation_adapter",
+      "rationale": "Existing compose/send/receipt suite remains the same responsibility. The only change is one exact message-value adapter import and eight assertion substitutions retaining identical expected expressions. Prior complete-file AST preservation proves all surrounding cases and assertions survive. The increased file-level fingerprint does not mean new workflow responsibilities.",
+      "priorReview": "../test-cohesion-review/review.json"
+    },
+    {
+      "file": "apps/web/tests/browser/email-compose.spec.ts",
+      "kind": "function",
+      "symbol": "setup",
+      "line": 41,
+      "nonblank": 119,
+      "fingerprint": "486aa09e731ad40a8b5b850b7e2a07fa02ee17f98914c8f7c90efc64a7988c4b",
+      "sha256": "c61e2e708f1a7a079570478891cd17982586f9bf262d8e979931a7976ccd90c0",
+      "classification": "inherited-unchanged",
+      "disposition": "inherited_unchanged_preserve_prior_status",
+      "rationale": "Function fingerprint is byte-equivalent to the baseline signal; only its source position moves with the import. No new fixture behavior or responsibility was introduced. This audit confirms preservation rather than issuing a new blanket approval of inherited fixture code.",
+      "priorReview": "../test-cohesion-review/review.json"
+    },
+    {
+      "file": "apps/web/tests/browser/email-compose.spec.ts",
+      "kind": "function",
+      "symbol": "setup > <anonymous>",
+      "line": 64,
+      "nonblank": 90,
+      "fingerprint": "422ede19b0edb762a92ff41f98b8fd81e377588a9f7a05cb88e541ccbdf137f4",
+      "sha256": "c61e2e708f1a7a079570478891cd17982586f9bf262d8e979931a7976ccd90c0",
+      "classification": "inherited-unchanged",
+      "disposition": "inherited_unchanged_preserve_prior_status",
+      "rationale": "Nested route fixture fingerprint is unchanged from baseline. Existing controlled route/receipt behavior is not enlarged by rich-editor assertion adaptation; retain its prior review status.",
+      "priorReview": "../test-cohesion-review/review.json"
+    },
+    {
+      "file": "apps/web/tests/browser/mail-local-draft.spec.ts",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 467,
+      "fingerprint": "59c7d93e59a1ee79058d223d6af28e3332d38be3593e026cb32ad070b0fea27c",
+      "sha256": "74036b122536e2c3e1ff67497cbccd2e2825d2f165d2ac62acbd81b374797575",
+      "classification": "changed",
+      "disposition": "accepted_unchanged_responsibility_after_representation_adapter",
+      "rationale": "The file continues to exercise local rewrite/draft/Undo lifetimes. One adapter import and seven semantically exact expectation substitutions are the only changes; complete AST comparison confirms all expected strings and surrounding controls survive. No unrelated subsystem is coupled into this owner.",
+      "priorReview": "../test-cohesion-review/review.json"
+    },
+    {
+      "file": "apps/web/tests/browser/mail-local-draft.spec.ts",
+      "kind": "function",
+      "symbol": "setup",
+      "line": 8,
+      "nonblank": 90,
+      "fingerprint": "9711fdca346a34b0dfa82fae5065a31f429924616c649beaace06c1191d0282c",
+      "sha256": "74036b122536e2c3e1ff67497cbccd2e2825d2f165d2ac62acbd81b374797575",
+      "classification": "inherited-unchanged",
+      "disposition": "inherited_unchanged_preserve_prior_status",
+      "rationale": "The fixture function has the same fingerprint as baseline; there is no new algorithm, mock owner or authority shortcut in this signal. Preserve prior review classification.",
+      "priorReview": "../test-cohesion-review/review.json"
+    },
+    {
+      "file": "apps/web/tests/browser/mail-rich-compose.spec.ts",
+      "kind": "function",
+      "symbol": "setup",
+      "line": 4,
+      "nonblank": 82,
+      "fingerprint": "e45e93bf32a8236faf446bec98b8fcdeb34bb1e53f131a916e71b130dd2d5e25",
+      "sha256": "1b7ca2ca4c029b83e533e073dd5b1ca45b2c76fc8d265973ea2d0d254f884a90",
+      "classification": "new",
+      "disposition": "accepted_cohesive_fixture",
+      "rationale": "The 82-line helper owns one rich-compose synthetic environment: current identity, saved signature, mailbox, people, controlled rewrite and send receipt, plus request capture and a held response. These are prerequisites of the real composer, not unrelated domain mocks. It restricts outbound requests to the exact fixture origin and returns 500 for unknown core routes. It supplies literal receipts without computing HTML/editor outcomes; tests independently inspect actual marks, exact pre-rewrite HTML restoration, outgoing rawText/bodyHtml, no signature duplication, unsupported markup, no early send, formatting-only invalidation and native Undo. Identity invalidation is a query-state control and source replacement is a harness prop change; neither alone claims complete application-session replacement.",
+      "priorReview": "../test-cohesion-review/review.json"
+    },
+    {
+      "file": "apps/web/tests/browser/profile-presentation.spec.ts",
+      "kind": "function",
+      "symbol": "<anonymous> #2",
+      "line": 144,
+      "nonblank": 86,
+      "fingerprint": "1c508c602e828888ac134de2a107888123abe08a7a89834a75febe61a48d8897",
+      "sha256": "80db7a4c935fd13cea0cd5d6b4a82e5c6ae202b5a5a01e445248ac723a69819d",
+      "classification": "new",
+      "disposition": "accepted_cohesive_bounded_interaction",
+      "rationale": "The 86-line test callback at line144 owns one ordered timeline presentation flow at desktop and phone widths: supplied Today/Yesterday groups, row height and real icon loading, retained search while expanding, filtered records, absence of unauthorized note actions, focus containment, canonical Quick log handoff/escape, restored profile content and whole-document bounds. Splitting the sequential interaction to silence the count would obscure the open/search/dialog handoff being verified. It asserts visible behavior and fixed expected labels against static activity records, without reproducing grouping, date-label or writer algorithms. Separate four unit cases provide literal DST/year-boundary/native-order/unknown-kind expectations; separate timeline lifetime regressions check uncertain/pending action fences across expansion and pinned regrouping.",
+      "priorReview": null
+    },
+    {
+      "file": "apps/web/tests/calendar-sharing.test.ts",
+      "kind": "function",
+      "symbol": "<anonymous>",
+      "line": 24,
+      "nonblank": 109,
+      "fingerprint": "4bf56d635643c7e5cdb8d93dcdcbf9b24485a05ff077674e6da194dd28e7a88a",
+      "sha256": "5d837055a6c3644987422fddfee54b1b3762f4b108b9c064cd699a67e3718a30",
+      "classification": "new",
+      "disposition": "accepted_cohesive_describe_group",
+      "rationale": "The 109-line anonymous callback is a describe grouping for the sharing contract, not one long production-like operation. It contains independent cases using explicit malformed fixtures and fixed expected reasons. It checks nullable sharer attribution, wrong tenant/client/meeting, missing selected artifact, wrong visibility/approval, partial unshare, duplicate/foreign feed, confidential/institutional/readiness restrictions, stable identity despite signed-link rotation, and standard/admin unshare distinctions. Expectations are not generated by reimplementing the parser. Separate async dispatch tests use a real API client and literal returned receipts; calling sharingTargets to build the selected input is legitimate boundary composition, paired with independently changed current rows and fixed POST-count/uncertainty assertions. The injected guard test is an isolated contract control, complemented by browser-local lifetime evidence; no native permission acceptance is inferred.",
+      "priorReview": "../test-cohesion-review/review.json"
+    }
+  ],
+  "profileFiles": [
+    {
+      "file": "apps/web/tests/browser/facility-manager-review.spec.ts",
+      "sha256": "2d7cbf390c733f925929f9f0d1215b25be51007eaac414438d4dcbe2b5566f35",
+      "nonblank": 64,
+      "signals": 0,
+      "baselineExists": false,
+      "ownerIsProfile": true,
+      "ownerSourcesMatch": true,
+      "workingMatchesCommit": true
+    },
+    {
+      "file": "apps/web/tests/browser/files-view-contrast.spec.ts",
+      "sha256": "0c94758166f46a9c5f493f2a8e5927fcc2252475ab43aceee7b2bcdce6594a1b",
+      "nonblank": 42,
+      "signals": 0,
+      "baselineExists": false,
+      "ownerIsProfile": true,
+      "ownerSourcesMatch": true,
+      "workingMatchesCommit": true
+    },
+    {
+      "file": "apps/web/tests/browser/profile-current-state.spec.ts",
+      "sha256": "26ef8d88a3ed49bf6e8c1a7b36944f0dfcc981771009517aae9c21430ac8612e",
+      "nonblank": 266,
+      "signals": 0,
+      "baselineExists": true,
+      "ownerIsProfile": true,
+      "ownerSourcesMatch": true,
+      "workingMatchesCommit": true
+    },
+    {
+      "file": "apps/web/tests/browser/profile-presentation.spec.ts",
+      "sha256": "80db7a4c935fd13cea0cd5d6b4a82e5c6ae202b5a5a01e445248ac723a69819d",
+      "nonblank": 355,
+      "signals": 1,
+      "baselineExists": false,
+      "ownerIsProfile": true,
+      "ownerSourcesMatch": true,
+      "workingMatchesCommit": true
+    },
+    {
+      "file": "apps/web/tests/browser/profile-write-lifetime.spec.ts",
+      "sha256": "70bb8a5a331f7fc9b22c4e408e9e8d5da139d47f74aadd80910ca927999b9a54",
+      "nonblank": 350,
+      "signals": 0,
+      "baselineExists": true,
+      "ownerIsProfile": true,
+      "ownerSourcesMatch": true,
+      "workingMatchesCommit": true
+    },
+    {
+      "file": "apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+      "sha256": "db9f60de3c2a286333f234be540a9bece083067ceceb139427a0be2af34ad7ab",
+      "nonblank": 173,
+      "signals": 0,
+      "baselineExists": false,
+      "ownerIsProfile": true,
+      "ownerSourcesMatch": true,
+      "workingMatchesCommit": true
+    },
+    {
+      "file": "apps/web/tests/profile-presentation.test.ts",
+      "sha256": "5e09463343c1b016826bbb3ccffae64169a7131a85375f48ad4e0bc3248ba125",
+      "nonblank": 60,
+      "signals": 0,
+      "baselineExists": false,
+      "ownerIsProfile": true,
+      "ownerSourcesMatch": true,
+      "workingMatchesCommit": true
+    }
+  ],
+  "profilePreservation": [
+    {
+      "path": "apps/web/tests/browser/profile-current-state.spec.ts",
+      "entireFileASTEquivalentAfterOnlyApprovedLabelChanges": true,
+      "printedFormattingIdentical": false,
+      "adaptations": [
+        {
+          "line": 243,
+          "role": "dialog",
+          "from": "Add facility",
+          "to": "Facilities: Synthetic profile client"
+        },
+        {
+          "line": 245,
+          "role": "button",
+          "from": "Add facility",
+          "to": "Save facility"
+        },
+        {
+          "line": 249,
+          "role": "dialog",
+          "from": "Add facility",
+          "to": "Facilities: Synthetic profile client"
+        },
+        {
+          "line": 252,
+          "role": "button",
+          "from": "Add facility",
+          "to": "Save facility"
+        },
+        {
+          "line": 264,
+          "role": "dialog",
+          "from": "Add facility",
+          "to": "Facilities: Synthetic profile client"
+        },
+        {
+          "line": 268,
+          "role": "button",
+          "from": "Add facility",
+          "to": "Save facility"
+        }
+      ],
+      "baselineTestTitles": [
+        "\"profile notes conceal a failed saved-client read and prevent replacement\"",
+        "\"profile notes reject another client's receipt and require review before retry\"",
+        "\"profile notes retain a refused draft without reporting it saved\"",
+        "\"late notes receipts cannot close a replacement actor's editor\"",
+        "\"failed account-team refresh conceals cached members and disables changes\"",
+        "\"failed member options cannot submit a retained selection\"",
+        "\"team add needs the requested native roster effect\"",
+        "\"owner assignment rejects a different returned owner\"",
+        "\"failed facilities refresh conceals saved locations and closes their detail\"",
+        "\"a removed facility selection does not reopen when that ID returns\"",
+        "\"unknown facility creation stays fenced after closing and reopening\"",
+        "\"identity invalidation disables facility creation despite a cached role\""
+      ],
+      "finalTestTitles": [
+        "\"profile notes conceal a failed saved-client read and prevent replacement\"",
+        "\"profile notes reject another client's receipt and require review before retry\"",
+        "\"profile notes retain a refused draft without reporting it saved\"",
+        "\"late notes receipts cannot close a replacement actor's editor\"",
+        "\"failed account-team refresh conceals cached members and disables changes\"",
+        "\"failed member options cannot submit a retained selection\"",
+        "\"team add needs the requested native roster effect\"",
+        "\"owner assignment rejects a different returned owner\"",
+        "\"failed facilities refresh conceals saved locations and closes their detail\"",
+        "\"a removed facility selection does not reopen when that ID returns\"",
+        "\"unknown facility creation stays fenced after closing and reopening\"",
+        "\"identity invalidation disables facility creation despite a cached role\""
+      ],
+      "testTitlesIdentical": true
+    },
+    {
+      "path": "apps/web/tests/browser/profile-write-lifetime.spec.ts",
+      "entireFileASTEquivalentAfterOnlyApprovedLabelChanges": true,
+      "printedFormattingIdentical": false,
+      "adaptations": [
+        {
+          "line": 225,
+          "role": "button",
+          "from": "Add facility",
+          "to": "Save facility"
+        },
+        {
+          "line": 225,
+          "role": "dialog",
+          "from": "Add facility",
+          "to": "Facilities: Synthetic profile client"
+        },
+        {
+          "line": 237,
+          "role": "dialog",
+          "from": "Add facility",
+          "to": "Facilities: Synthetic profile client"
+        },
+        {
+          "line": 240,
+          "role": "button",
+          "from": "Add facility",
+          "to": "Save facility"
+        },
+        {
+          "line": 254,
+          "role": "dialog",
+          "from": "Add facility",
+          "to": "Facilities: Synthetic profile client"
+        },
+        {
+          "line": 256,
+          "role": "button",
+          "from": "Add facility",
+          "to": "Save facility"
+        },
+        {
+          "line": 269,
+          "role": "button",
+          "from": "Add facility",
+          "to": "Save facility"
+        },
+        {
+          "line": 274,
+          "role": "dialog",
+          "from": "Add facility",
+          "to": "Facilities: Synthetic profile client"
+        },
+        {
+          "line": 334,
+          "role": "button",
+          "from": "Add facility",
+          "to": "Save facility"
+        },
+        {
+          "line": 334,
+          "role": "dialog",
+          "from": "Add facility",
+          "to": "Facilities: Synthetic profile client"
+        },
+        {
+          "line": 348,
+          "role": "button",
+          "from": "Add facility",
+          "to": "Save facility"
+        },
+        {
+          "line": 348,
+          "role": "dialog",
+          "from": "Add facility",
+          "to": "Facilities: Synthetic profile client"
+        }
+      ],
+      "baselineTestTitles": [
+        "\"a matching notes clear uses only the native notes PUT and closes once\"",
+        "\"a refreshed notes source fences a late receipt and retains the local draft for review\"",
+        "\"owner membership role mismatches stay unknown and preserve the role draft\"",
+        "\"an owner's successfully updated membership role remains visible on the single owner row\"",
+        "\"a successfully removed member option leaves the retained choice unavailable\"",
+        "\"late team receipts do not report success or invalidate a replacement client view\"",
+        "\"closing a pending facility create keeps the unknown fence when its view reopens\"",
+        "\"a similar current facility cannot be claimed as an unknown creation receipt\"",
+        "\"a changed saved facility cannot be overwritten by an older open draft\"",
+        "\"a late facility result cannot escape its original actor's unknown fence\""
+      ],
+      "finalTestTitles": [
+        "\"a matching notes clear uses only the native notes PUT and closes once\"",
+        "\"a refreshed notes source fences a late receipt and retains the local draft for review\"",
+        "\"owner membership role mismatches stay unknown and preserve the role draft\"",
+        "\"an owner's successfully updated membership role remains visible on the single owner row\"",
+        "\"a successfully removed member option leaves the retained choice unavailable\"",
+        "\"late team receipts do not report success or invalidate a replacement client view\"",
+        "\"closing a pending facility create keeps the unknown fence when its view reopens\"",
+        "\"a similar current facility cannot be claimed as an unknown creation receipt\"",
+        "\"a changed saved facility cannot be overwritten by an older open draft\"",
+        "\"a late facility result cannot escape its original actor's unknown fence\""
+      ],
+      "testTitlesIdentical": true
+    }
+  ],
+  "assertionAuditMethod": "Parse complete baseline and final TypeScript files; transform only Add facility dialog names to Facilities: Synthetic profile client and dialog-scoped Add facility button names to Save facility. Compare full AST node kinds, literal/identifier text, declaration flags and child structure, ignoring formatting and trailing commas. All page-level Add facility entry controls remain unchanged. Raw diffs and the audit script are preserved.",
+  "profileBehaviorReview": [
+    {
+      "file": "apps/web/tests/browser/facility-manager-review.spec.ts",
+      "conclusion": "Two recovery outcomes independently supply an authoritative saved note (remote update or lost applied-edit receipt). They require retaining local text and disabled save, explicit review/adoption, adopted authoritative text and re-enabled save, with exact write counts and no unexpected routes. The helper reuses existing current-state fixture ownership rather than creating a second mutation model."
+    },
+    {
+      "file": "apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+      "conclusion": "Four concrete regressions exercise uncertain pin state across expand/return and native pinned regrouping, held pending write across expand/return, and reuse of the canonical uncertain Quick log owner. The held-write test checks disabled action before release and waits for the resulting review-required UI afterward; the uncertain cases wait for a visible retained fence before asserting no duplicate write. URL context preservation is independently asserted. No production pin ordering or mutation algorithm is copied."
+    },
+    {
+      "file": "apps/web/tests/browser/files-view-contrast.spec.ts",
+      "conclusion": "Desktop and phone controls use computed foreground/background colors and the standard contrast calculation with a fixed 4.5 threshold after selected-button hover. This is a rendering oracle, not a production-style mirror. It does not infer all theme/state accessibility from these two cases."
+    },
+    {
+      "file": "apps/web/tests/browser/profile-presentation.spec.ts",
+      "conclusion": "New facility/timeline/file presentation scenarios assert saved row content, control labels, route-based canonical handoff, explicit unsupported folder upload, native source strings, actual icon loading and viewport geometry. Positive facility receipt simulation only supports frontend flow; preserved current-state/lifetime suites retain adversarial receipt and authority behavior rather than counting the positive fake as native acceptance."
+    },
+    {
+      "file": "apps/web/tests/profile-presentation.test.ts",
+      "conclusion": "Literal expected local-date groups cover the DST boundary, original record order despite pinned chronology, year-boundary labels and unknown kinds. These tests call the production presentation helpers but do not calculate expectations using their algorithm."
+    }
+  ],
+  "priorReviewCarryForward": {
+    "mailAndIntake": "../integration-preservation-review/REPORT.md",
+    "cohesion": "../test-cohesion-review/REPORT.md",
+    "calendarCorrection": "../test-cohesion-correction-review/REPORT.md",
+    "note": "Earlier reports and manifests remain unchanged. Frozen test hashes match their reviewed bytes; only the independently accepted Calendar correction updates its previous file fingerprint."
+  },
+  "findings": [],
+  "limits": [
+    "Read-only source/blob/AST inspection only; no tests, browser, server, install, TypeScript build or source/registry writes performed.",
+    "Root clean install temporarily removed its TypeScript dependency; the audit read an existing isolated dependency and a scanner whose exact bytes match frozen root. tooling-binding.json records this adaptation.",
+    "Synthetic current-state fixtures establish local guards and UI contracts only; no live/backend/provider authority or complete-row acceptance is claimed.",
+    "Root owns final combined qualification and publication."
+  ]
+}

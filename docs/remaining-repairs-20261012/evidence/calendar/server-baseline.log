@@ -1,0 +1,179 @@
+Test-only component server: http://127.0.0.1:5191
+7:55:03 PM [vite] (client) dependencies optimized: @schedule-x/calendar, @schedule-x/react, clsx, dompurify, lucide-react, radix-ui, tailwind-merge, temporal-polyfill, temporal-polyfill/global, zod
+7:55:03 PM [vite] (client) optimized dependencies changed. reloading
+7:55:04 PM [vite] (client) [Unhandled error] TypeError: (intermediate value).format is not a function
+ > formatInstant ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/range.ts:62:5
+    60 |      minute: "2-digit",
+    61 |      timeZoneName: "short",
+    62 |    }).format(new Date(value));
+       |       ^
+    63 |  }
+    64 |  
+ > ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/Agenda.tsx:67:22
+ > ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/Agenda.tsx:38:16
+ > Agenda ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/Agenda.tsx:33:19
+ > Object.react_stack_bottom_frame ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:28571:19
+ > renderWithHooks ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:8030:21
+ > updateFunctionComponent ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:10569:18
+ > beginWork ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:12205:17
+
+7:55:04 PM [vite] (client) [console.warn] An error occurred in the <Agenda> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+7:55:11 PM [vite] (client) [Unhandled error] TypeError: (intermediate value).format is not a function
+ > formatInstant ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/range.ts:62:5
+    60 |      minute: "2-digit",
+    61 |      timeZoneName: "short",
+    62 |    }).format(new Date(value));
+       |       ^
+    63 |  }
+    64 |  
+ > MeetingDetail ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/MeetingDetail.tsx:88:17
+ > Object.react_stack_bottom_frame ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:28571:19
+ > renderWithHooks ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:8030:21
+ > updateFunctionComponent ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:10569:18
+ > beginWork ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:12205:17
+ > runWithFiberInDEV ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:1045:29
+ > performUnitOfWork ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:19176:21
+ > workLoopSync ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:19004:40
+ > renderRootSync ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:18985:10
+
+7:55:11 PM [vite] (client) [console.warn] An error occurred in the <MeetingDetail> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+7:55:20 PM [vite] (client) [Unhandled error] TypeError: (intermediate value).format is not a function
+ > formatInstant ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/range.ts:62:5
+    60 |      minute: "2-digit",
+    61 |      timeZoneName: "short",
+    62 |    }).format(new Date(value));
+       |       ^
+    63 |  }
+    64 |  
+ > MeetingDetail ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/MeetingDetail.tsx:88:17
+ > Object.react_stack_bottom_frame ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:28571:19
+ > renderWithHooks ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:8030:21
+ > updateFunctionComponent ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:10569:18
+ > beginWork ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:12205:17
+ > runWithFiberInDEV ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:1045:29
+ > performUnitOfWork ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:19176:21
+ > workLoopSync ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:19004:40
+ > renderRootSync ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:18985:10
+
+7:55:20 PM [vite] (client) [console.warn] An error occurred in the <MeetingDetail> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+7:55:40 PM [vite] (client) [Unhandled error] TypeError: (intermediate value).format is not a function
+ > formatInstant ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/range.ts:62:5
+    60 |      minute: "2-digit",
+    61 |      timeZoneName: "short",
+    62 |    }).format(new Date(value));
+       |       ^
+    63 |  }
+    64 |  
+ > ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/Agenda.tsx:67:22
+ > ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/Agenda.tsx:38:16
+ > Agenda ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/Agenda.tsx:33:19
+ > Object.react_stack_bottom_frame ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:28571:19
+ > renderWithHooks ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:8030:21
+ > updateFunctionComponent ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:10569:18
+ > beginWork ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:12205:17
+
+7:55:40 PM [vite] (client) [console.warn] An error occurred in the <Agenda> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+7:56:11 PM [vite] (client) [Unhandled error] TypeError: (intermediate value).format is not a function
+ > formatInstant ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/range.ts:62:5
+    60 |      minute: "2-digit",
+    61 |      timeZoneName: "short",
+    62 |    }).format(new Date(value));
+       |       ^
+    63 |  }
+    64 |  
+ > ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/Agenda.tsx:67:22
+ > ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/Agenda.tsx:38:16
+ > Agenda ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/Agenda.tsx:33:19
+ > Object.react_stack_bottom_frame ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:28571:19
+ > renderWithHooks ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:8030:21
+ > updateFunctionComponent ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:10569:18
+ > beginWork ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:12205:17
+
+7:56:11 PM [vite] (client) [console.warn] An error occurred in the <Agenda> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+7:56:19 PM [vite] (client) [Unhandled error] TypeError: (intermediate value).format is not a function
+ > formatInstant ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/range.ts:62:5
+    60 |      minute: "2-digit",
+    61 |      timeZoneName: "short",
+    62 |    }).format(new Date(value));
+       |       ^
+    63 |  }
+    64 |  
+ > MeetingDetail ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/MeetingDetail.tsx:88:17
+ > Object.react_stack_bottom_frame ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:28571:19
+ > renderWithHooks ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:8030:21
+ > updateFunctionComponent ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:10569:18
+ > beginWork ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:12205:17
+ > runWithFiberInDEV ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:1045:29
+ > performUnitOfWork ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:19176:21
+ > workLoopSync ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:19004:40
+ > renderRootSync ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:18985:10
+
+7:56:19 PM [vite] (client) [console.warn] An error occurred in the <MeetingDetail> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+7:56:27 PM [vite] (client) [Unhandled error] TypeError: (intermediate value).format is not a function
+ > formatInstant ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/range.ts:62:5
+    60 |      minute: "2-digit",
+    61 |      timeZoneName: "short",
+    62 |    }).format(new Date(value));
+       |       ^
+    63 |  }
+    64 |  
+ > MeetingDetail ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/MeetingDetail.tsx:88:17
+ > Object.react_stack_bottom_frame ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:28571:19
+ > renderWithHooks ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:8030:21
+ > updateFunctionComponent ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:10569:18
+ > beginWork ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:12205:17
+ > runWithFiberInDEV ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:1045:29
+ > performUnitOfWork ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:19176:21
+ > workLoopSync ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:19004:40
+ > renderRootSync ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:18985:10
+
+7:56:27 PM [vite] (client) [console.warn] An error occurred in the <MeetingDetail> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+
+7:56:39 PM [vite] (client) [Unhandled error] TypeError: (intermediate value).format is not a function
+ > formatInstant ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/range.ts:62:5
+    60 |      minute: "2-digit",
+    61 |      timeZoneName: "short",
+    62 |    }).format(new Date(value));
+       |       ^
+    63 |  }
+    64 |  
+ > ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/Agenda.tsx:67:22
+ > ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/Agenda.tsx:38:16
+ > Agenda ../../../../../../tmp/capiro-remaining-calendar-evidence/baseline-7aca86e/apps/web/src/features/portfolio/calendar/Agenda.tsx:33:19
+ > Object.react_stack_bottom_frame ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:28571:19
+ > renderWithHooks ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:8030:21
+ > updateFunctionComponent ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:10569:18
+ > beginWork ../../../../../capiro-followup/node_modules/react-dom/cjs/react-dom-client.development.js:12205:17
+
+7:56:39 PM [vite] (client) [console.warn] An error occurred in the <Agenda> component.
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries.
+

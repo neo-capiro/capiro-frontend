@@ -1,0 +1,17 @@
+{
+  "commit": "ced1d1b428f57a5cd8628ece6222924c0ebcf0f2",
+  "appTree": "497aa93737c1518ebdd01e35bfd1c86c11ea848a",
+  "recordedAt": "2026-10-12T19:55:44.303574+00:00",
+  "inspectedFileCount": 34,
+  "changedSinceInitialSnapshot": [
+    "apps/web/src/features/portfolio/client-profile/ClientViewSwitcher.tsx",
+    "apps/web/src/features/portfolio/client-profile/view-switcher.module.css",
+    "apps/web/tests/browser/remaining-intake.spec.ts"
+  ],
+  "reinspectedFinalSourceHashes": {
+    "apps/web/src/features/portfolio/client-profile/ClientViewSwitcher.tsx": "85457ac89eaec97080ad4d1f7f6b7668761100b4bb2b6847614886d1b9c8894d",
+    "apps/web/src/features/portfolio/client-profile/view-switcher.module.css": "f0f8fa317338dca5ac5653f5dc924308e35b789d64b692c90cf3a031df73523c",
+    "apps/web/tests/browser/remaining-intake.spec.ts": "4cdf6399b49c98856892c31584c738876284f25ae7c0672ee138e25f55a51a46"
+  },
+  "disposition": "Initial unchanged hashes retained; all three later popup correction files independently reinspected at final commit."
+}

@@ -1,0 +1,7 @@
+class ArtifactRefDto {
+  @IsIn(['prep', 'note', 'debrief', 'attachment'])
+  type!: 'prep' | 'note' | 'debrief' | 'attachment';
+
+  @IsUUID()
+  id!: string;
+}

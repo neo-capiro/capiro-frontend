@@ -1,0 +1,46 @@
+
+/workspace/capiro-remaining-calendar/apps/web/src/features/portfolio/calendar/CalendarPage.tsx
+  94:61  error  Error: Cannot call impure function during render
+
+`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+/workspace/capiro-remaining-calendar/apps/web/src/features/portfolio/calendar/CalendarPage.tsx:94:61
+  92 |         Boolean(
+  93 |           item.meeting &&
+> 94 |           matchesMeetingFilter(item.meeting, meetingFilter, Date.now()),
+     |                                                             ^^^^^^^^^^ Cannot call impure function
+  95 |         )) &&
+  96 |       (!search ||
+  97 |         item.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())),  react-hooks/purity
+
+/workspace/capiro-remaining-calendar/apps/web/src/features/portfolio/calendar/MeetingIdentity.tsx
+  22:39  error  Error: Cannot call impure function during render
+
+`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+/workspace/capiro-remaining-calendar/apps/web/src/features/portfolio/calendar/MeetingIdentity.tsx:22:39
+  20 |   onShare: () => void;
+  21 | }) {
+> 22 |   const stage = meetingStage(meeting, Date.now());
+     |                                       ^^^^^^^^^^ Cannot call impure function
+  23 |   const validTime =
+  24 |     Number.isFinite(Date.parse(meeting.startsAt)) &&
+  25 |     Number.isFinite(Date.parse(meeting.endsAt));  react-hooks/purity
+
+/workspace/capiro-remaining-calendar/apps/web/src/features/portfolio/calendar/public-event/PublicEventDetail.tsx
+   63:9   warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  162:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/workspace/capiro-remaining-calendar/apps/web/src/features/portfolio/calendar/sharing/MeetingSharing.tsx
+  55:49  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+/workspace/capiro-remaining-calendar/apps/web/tests/calendar-sharing-fixtures.ts
+  35:15  warning  '_approvedAt' is assigned a value but never used        @typescript-eslint/no-unused-vars
+  36:21  warning  '_approvedByUserId' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/workspace/capiro-remaining-calendar/apps/web/tests/calendar-sharing.test.ts
+  192:43  error  Forbidden extra non-null assertion  @typescript-eslint/no-extra-non-null-assertion
+
+✖ 8 problems (4 errors, 4 warnings)
+  1 error and 0 warnings potentially fixable with the `--fix` option.
+

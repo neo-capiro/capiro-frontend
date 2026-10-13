@@ -1,0 +1,91 @@
+{
+  "capturedAt": "2026-10-12T21:38:45.069Z",
+  "ownerBase": "4ed4b56aaa1660e7f7abdccd94208c17aa38f21b",
+  "frozenQualificationSource": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+  "source": "apps/web/tests/browser/portfolio.spec.ts",
+  "beforeSha256": "7b9a731ac8e5c6f4f46018218230217939348669a9984b6f81abe5e943302066",
+  "afterSha256": "32d5f42b6207ab3d2752e4623ab40e3ea43531f05b5d45feefa9e8a7247bd730",
+  "qualificationTestMatchesBefore": true,
+  "parseDiagnostics": [],
+  "testNamesUnchanged": true,
+  "unchangedTests": [
+    {
+      "name": "four-field readiness persists once, transitions, and refreshes the list",
+      "unchanged": true,
+      "sha256": "1f8773d4bab0f6e06ab6fb7f3fbe8b8217d3acd189aea44939620e32eaf6e085"
+    },
+    {
+      "name": "mail is reviewed and a provider error remains visible without automatic retry",
+      "unchanged": true,
+      "sha256": "587205e2b230d5b7029ae9c87254333dd35762fede196561940b82ab97708e63"
+    },
+    {
+      "name": "capability edits invalidate the list and retain unrelated registration codes",
+      "unchanged": true,
+      "sha256": "980bbcb4f140b6cc9071e764cbe93cc675782e0cef22265deb8020b282d7bea3"
+    },
+    {
+      "name": "navigation, permissions, session expiry and mobile layout use real feature components",
+      "unchanged": true,
+      "sha256": "c56f1d94fd9eec3839182658e7ea2daedd96fd83768731473d86fe5f386e5f99"
+    }
+  ],
+  "facilityRouteAndPayloadHandlerByteIdentical": true,
+  "originalAssertionCount": 31,
+  "currentAssertionCount": 33,
+  "missingOriginalAssertions": [],
+  "addedAssertions": [
+    "expect(dialog.getByLabel(\"Facility name\")).not.toBeVisible()",
+    "expect(\n    dialog.getByRole(\"list\", { name: \"Saved facilities\" }).getByText(\"Test lab\"),\n  ).toBeVisible()"
+  ],
+  "productionSources": [
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx",
+      "sha256": "64cc056a645a42c851d6b8b65c8a49c24e29ef3e5aecf842eec4db92991a9d2b",
+      "matchesFrozenQualification": true,
+      "unchangedFromOwnerBase": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilitiesManager.tsx",
+      "sha256": "3cc5cc8c82fe4ef018917e6101be9088d9a77913042492498698a074cd829844",
+      "matchesFrozenQualification": true,
+      "unchangedFromOwnerBase": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilityEditor.tsx",
+      "sha256": "c49006d0aa6b04746c6c4b76f7debcd2f3915c1be6cd861cb4124c99964f4307",
+      "matchesFrozenQualification": true,
+      "unchangedFromOwnerBase": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/FacilityFields.tsx",
+      "sha256": "38f0a479904765e6ddff737f33e48f7ebed4e53ab6470ecfacf4987fdeb03960",
+      "matchesFrozenQualification": true,
+      "unchangedFromOwnerBase": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/useFacilityWriter.ts",
+      "sha256": "44bcd0fc6cf7f046e819dac37b471f1f989853a7dfe88486212ad30c50d99002",
+      "matchesFrozenQualification": true,
+      "unchangedFromOwnerBase": true
+    },
+    {
+      "path": "apps/web/src/features/portfolio/client-profile/facility-map-model.ts",
+      "sha256": "2a548b2815216d82d89d7fd74bd3f0b2140e5e92717c64bd93f466bf87ab3abb",
+      "matchesFrozenQualification": true,
+      "unchangedFromOwnerBase": true
+    }
+  ],
+  "originalFailure": {
+    "path": "/tmp/capiro-remaining-qualification/final-adbc84b/portfolio-browser-artifacts/portfolio-facility-creatio-0023f--and-refreshes-the-map-list/error-context.md",
+    "sha256": "76f136d7b766cd09c3702eccb4354d84f746f30f539c8907338c8c08708f8c04"
+  },
+  "runtimeTestsBuildTypecheckRun": false,
+  "browserLease": "not granted; root owns integrated replay",
+  "adapterCommit": "83874fb2bbc0769a232d9890beccbe764863a1ef",
+  "adapterParent": "4ed4b56aaa1660e7f7abdccd94208c17aa38f21b",
+  "gitDiffCheckPassed": true,
+  "commitChangesOnly": [
+    "apps/web/tests/browser/portfolio.spec.ts"
+  ]
+}

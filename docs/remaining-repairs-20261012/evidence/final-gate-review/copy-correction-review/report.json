@@ -1,0 +1,192 @@
+{
+  "reviewedAt": "2026-10-12T21:32:14.665688+00:00",
+  "disposition": "Accept exact bounded copy correction for integration; corrected-source runtime/full qualification remains pending.",
+  "sourceCommit": "4ed4b56aaa1660e7f7abdccd94208c17aa38f21b",
+  "sourceParent": "ecf34dfac16e36b22df1a1da9b6e86b785699dbb",
+  "frozenQualificationSource": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+  "sourcePath": "apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx",
+  "sourceLine": 74,
+  "changedPaths": [
+    "apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx"
+  ],
+  "characterChanges": [
+    {
+      "characterOffset": 2565,
+      "before": "L",
+      "after": "l"
+    }
+  ],
+  "candidateParentSourceEqualsFrozenSource": true,
+  "before": {
+    "fingerprint": "626e4b4fbd75bf396ce2b4a9a86d457a90d6d0b0981555d3b50af86b970fb1c8",
+    "bodyNonblankLines": 124,
+    "fileSha256": "2cff749fe4fde463166880004fc18c2f5955b0c3292179d59a722d3f51d1d339",
+    "fileBytes": 4481
+  },
+  "after": {
+    "fingerprint": "e38624c07720d44683be7da80f6f5608be5ae6f5c2cf5d1b04b707614167bd43",
+    "bodyNonblankLines": 124,
+    "fileSha256": "e3968866a9f7527a59b54693d8bd8bd114ba682ae6a2c187ef5bd3dfd56328ab",
+    "fileBytes": 4481
+  },
+  "testPath": "apps/web/tests/browser/current-projection.spec.ts",
+  "testBindings": {
+    "adbc84b2251fe6b06cb7f75030026fba5b4ff498": {
+      "sha256": "a8d1321f1c0453b8c166ac2425ce157fe288b8e248eed6d7122ca126afa84a55",
+      "gitBlob": "b82e477698baab53f1af61da9ed90cb9aa2c5a02"
+    },
+    "4ed4b56aaa1660e7f7abdccd94208c17aa38f21b^": {
+      "sha256": "a8d1321f1c0453b8c166ac2425ce157fe288b8e248eed6d7122ca126afa84a55",
+      "gitBlob": "b82e477698baab53f1af61da9ed90cb9aa2c5a02"
+    },
+    "4ed4b56aaa1660e7f7abdccd94208c17aa38f21b": {
+      "sha256": "a8d1321f1c0453b8c166ac2425ce157fe288b8e248eed6d7122ca126afa84a55",
+      "gitBlob": "b82e477698baab53f1af61da9ed90cb9aa2c5a02"
+    }
+  },
+  "testsAndFixturesChangedByCommit": false,
+  "diagnosis": "The 503 control stops at its case-sensitive positive footer assertion at line152, before failing=true and refresh dispatch. Uppercase Latest does not match /latest 500 items/. No refresh-authority defect is established by this failure.",
+  "preservedMeaningfulAssertions": {
+    "positiveLimit": 152,
+    "negativeLimitAfterRefresh": 160,
+    "otherControls": "Retained-row/kind/count concealment, preserved search, successful Retry recovery and 403/mobile controls remain unedited."
+  },
+  "structureReview": {
+    "symbol": "ActivityTimeline",
+    "kind": "function",
+    "nonblank": 124,
+    "fingerprint": "e38624c07720d44683be7da80f6f5608be5ae6f5c2cf5d1b04b707614167bd43",
+    "accepted": true,
+    "reason": "One current history-view controller owns query admission, local filters/expansion and canonical QuickLog URL handoff. ActivityFeed owns rows; existing mutation/QuickLog owners retain writes and recovery. One letter in existing footer copy adds no responsibility, dependency or branch. No split is justified by this literal-only change.",
+    "registryOwner": "Root; this audit does not update shared architecture records."
+  },
+  "evidence": {
+    "diagnosisFiles": [
+      {
+        "path": "/tmp/capiro-profile-adbc-copy-diagnosis/DIAGNOSIS.md",
+        "bytes": 3022,
+        "sha256": "4676731931e0c218fd0f47bfd9cc14bcceb863112790c22fe0f69097836fe109"
+      },
+      {
+        "path": "/tmp/capiro-profile-adbc-copy-diagnosis/FAILURE-REFERENCE.json",
+        "bytes": 336,
+        "sha256": "ab72a4c54dc594e5376a0812fae4daf927d8a32e7c5746f39f91afa7fa32107c"
+      },
+      {
+        "path": "/tmp/capiro-profile-adbc-copy-diagnosis/SOURCE-CORRECTION-RECEIPT.json",
+        "bytes": 1595,
+        "sha256": "be94459159957b03f2b3da89f7dfd80063d621996e807e2e8e05aca34b90f324"
+      },
+      {
+        "path": "/tmp/capiro-profile-adbc-copy-diagnosis/before-ActivityTimeline.tsx.txt",
+        "bytes": 4481,
+        "sha256": "2cff749fe4fde463166880004fc18c2f5955b0c3292179d59a722d3f51d1d339"
+      }
+    ],
+    "failure": {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/portfolio-browser-artifacts/current-projection-failed--99fb7-ds-limit-and-overview-count/error-context.md",
+      "bytes": 104856,
+      "sha256": "42294472a48267e20d46e38992915811491d373f112092267a683b2d9ea61b15"
+    },
+    "failedSnapshotFooter": [
+      [
+        2673,
+        "- text: 500 activities \u00b7 Latest 500 items available from this history feed"
+      ]
+    ],
+    "scanner": {
+      "path": "/workspace/capiro-remaining/scripts/architecture/scan.mjs",
+      "bytes": 3881,
+      "sha256": "b6c0f4e872640db8c655797e86a177303c3c7eb53223ffbd5c29bc41f5ba937e"
+    },
+    "frozenFigmaText": [
+      {
+        "path": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/design-baseline/fresh-captures/profile/figma-411-48826.json",
+        "sha256": "84ded24e51ef9224d51277dfdb2e793257dd37b525d83f26be8e0c173d9c656a",
+        "bytes": 57179,
+        "node": "411:49040",
+        "text": "Showing the latest 200 of 48 records",
+        "liveFigmaCalled": false
+      },
+      {
+        "path": "/workspace/capiro-remaining/docs/remaining-repairs-20261012/design-baseline/fresh-captures/profile/figma-411-60524.json",
+        "sha256": "f2f76a85a74446c2ed7cc311c1e7c310c1bad3a44f8a65614b55e7376bef692c",
+        "bytes": 231892,
+        "node": "411:60558",
+        "text": "48 records \u00b7 Newest first",
+        "liveFigmaCalled": false
+      }
+    ]
+  },
+  "pending": {
+    "portfolioExitReceiptExists": false,
+    "completionReviewWritten": false,
+    "correctedSourceBrowserRunByReviewer": false,
+    "fullCombinedSuccessorRerunRequired": true
+  },
+  "gateContextAddendum": {
+    "dockerBuildFailures": [
+      {
+        "name": "docker-build",
+        "exitCode": 1,
+        "receipt": {
+          "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-build-exit.json",
+          "bytes": 901,
+          "sha256": "e13b1a039b199630aded9397a8b95f798269cbcb0bf0ff9207a21a1034765e6a"
+        },
+        "log": {
+          "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-build.log",
+          "bytes": 2636,
+          "sha256": "a1463956d168b180aa99e8b5a83eff5578f73def5804cb49c9c94056747aa877"
+        },
+        "failedStep": "base 2/3 apk add; Alpine APKINDEX DNS resolution before application compile",
+        "sourceChanged": false
+      },
+      {
+        "name": "docker-build-existing-host-network",
+        "exitCode": 1,
+        "receipt": {
+          "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-build-existing-host-network-exit.json",
+          "bytes": 1055,
+          "sha256": "8b6164d139a112ca02810bffc617735985d7f29b066b6c3fa22f3a82cf858cc4"
+        },
+        "log": {
+          "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-build-existing-host-network.log",
+          "bytes": 2637,
+          "sha256": "9639468a711b9f41f0a4b8c9be6b0b67af65346449df3586f7e6b5a0ac3984f9"
+        },
+        "failedStep": "base 2/3 apk add; Alpine APKINDEX DNS resolution before application compile",
+        "sourceChanged": false
+      },
+      {
+        "name": "docker-build-inherited-proxy",
+        "exitCode": 1,
+        "receipt": {
+          "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-build-inherited-proxy-exit.json",
+          "bytes": 1159,
+          "sha256": "63ecbb995976e7e62f8863cd1a20dba87ffd0b39aae86b0b6824a770dd4bc004"
+        },
+        "log": {
+          "path": "/tmp/capiro-remaining-qualification/final-adbc84b/docker-build-inherited-proxy.log",
+          "bytes": 2637,
+          "sha256": "b4fb8e7af4b4870f58bfdbe580a764c4d553b2caa16390d91b821ba6e49870f1"
+        },
+        "failedStep": "base 2/3 apk add; Alpine APKINDEX DNS resolution before application compile",
+        "sourceChanged": false
+      }
+    ],
+    "dockerImageOrSmokePassClaimed": false,
+    "boundedNetworkAndProxyProbes": "Parent-reported additional unsuccessful diagnostics; not rerun in this review.",
+    "archiveOldPath": "/tmp/capiro-source-adbc84b",
+    "archiveResolvedPath": "/workspace/capiro-source-archives/source-adbc84b",
+    "archiveRelocationReceipt": {
+      "path": "/workspace/capiro-source-archives/source-adbc84b/SOURCE-ARCHIVE-RECEIPT.json",
+      "bytes": 2990063,
+      "sha256": "0203dbbdd17a0812be3fefd3f6a0c3aa907b322bd3b61ae007c836bf87c277ed"
+    },
+    "archiveSHA256FromReceipt": "5a631ef2f6d7500c947fafa85ed22731214b37bc2f587da29db6f1b272f0784a",
+    "archiveContentsRehashedHere": false,
+    "priorIndependentArchiveVerification": "/tmp/capiro-remaining-final-gate-review/final-adbc84b/archive-verification.json"
+  },
+  "mutationScope": "Only new review artifacts under this additive directory; no source/shared registry edits, runtime gates or native calls."
+}

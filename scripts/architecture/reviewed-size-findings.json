@@ -1572,9 +1572,9 @@
     "file": "apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx",
     "kind": "function",
     "symbol": "ActivityTimeline",
-    "fingerprint": "626e4b4fbd75bf396ce2b4a9a86d457a90d6d0b0981555d3b50af86b970fb1c8",
-    "reason": "One history view controller owns current query admission, filters, expansion and the explicit canonical QuickLog URL handoff. ActivityFeed owns row presentation; existing activity mutations and QuickLog own writes/receipts/unknown recovery. The close-focus one-shot flag is local view coordination with client/unmount cleanup, not a second mutation lifecycle.",
-    "reviewedBy": "Codex shared frontend integration review with independent modules_settings_review",
+    "fingerprint": "e38624c07720d44683be7da80f6f5608be5ae6f5c2cf5d1b04b707614167bd43",
+    "reason": "One history view controller owns current query admission, filters, expansion and the explicit canonical QuickLog URL handoff. ActivityFeed owns row presentation; existing activity mutations and QuickLog own writes/receipts/unknown recovery. The close-focus one-shot flag is local view coordination with client/unmount cleanup, not a second mutation lifecycle. The final one-character lowercase footer correction restores the original copy contract without changing the 124-line function's responsibility, state or refresh logic.",
+    "reviewedBy": "Codex shared frontend integration review with independent modules_settings_review; final copy fingerprint independently reviewed by prospects_review",
     "reviewedOn": "2026-10-12"
   },
   {

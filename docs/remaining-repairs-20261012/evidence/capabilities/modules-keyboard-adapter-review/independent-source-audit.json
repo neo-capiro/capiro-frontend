@@ -1,0 +1,504 @@
+{
+  "capturedAtUtc": "2026-10-12T22:06:42.202Z",
+  "base": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+  "root": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+  "owner": "fb093821c6691d3ff45c0cd51ac1edca12364c9b",
+  "parent": "b5eaadd031580edca79e9d99de2c0ab14d59997c",
+  "file": "apps/web/test/browser/remaining-modules.spec.ts",
+  "beforeSHA256": "c86ad251ee3eb115e5e6edeb0309192aebd9b3fd38fc6f85fdf19e89deaea78f",
+  "afterSHA256": "ff19d419f382abb100089e5bc03619f85d499a044ac995fe4b988e7aac78d994",
+  "parentFileEqualsFrozenRoot": true,
+  "workingFileEqualsCommit": true,
+  "changedPaths": [
+    "apps/web/test/browser/remaining-modules.spec.ts"
+  ],
+  "insertions": 29,
+  "deletions": 0,
+  "parseDiagnostics": [],
+  "testDeclarations": 10,
+  "testNamesUnchanged": true,
+  "allBytesOutsideTargetCallIdentical": true,
+  "unchangedOtherTestCalls": [
+    {
+      "name": "\"MS08 regression: All tasks defaults to named client groups and current-page counts\"",
+      "byteIdentical": true
+    },
+    {
+      "name": "\"MS08 scope picker preserves All tasks, disposes drafts and restores scope through history\"",
+      "byteIdentical": true
+    },
+    {
+      "name": "\"MS08 failed current clients list removes former labels and disables picker until retry\"",
+      "byteIdentical": true
+    },
+    {
+      "name": "\"MS08 failed current task page hides groups and recovers without inventing filters\"",
+      "byteIdentical": true
+    },
+    {
+      "name": "`MS08 independently verified client remains named when picker is ${unavailable ? \"unavailable\" : \"empty\"}`",
+      "byteIdentical": true
+    },
+    {
+      "name": "\"MS08 replacement rejects held former task read and unverified selected client\"",
+      "byteIdentical": true
+    },
+    {
+      "name": "\"MS07 regression: Workspace filters share a compact desktop row and wrap on phones\"",
+      "byteIdentical": true
+    },
+    {
+      "name": "\"MS09 regression: public form uses bounded card hierarchy and keeps input on styled error\"",
+      "byteIdentical": true
+    },
+    {
+      "name": "\"MS09 preserves malformed-receipt and replaced-token controls\"",
+      "byteIdentical": true
+    }
+  ],
+  "originalStatements": {
+    "preserved": true,
+    "beforeCount": 20,
+    "afterCount": 30,
+    "added": [
+      "await expect(scope).toBeFocused();",
+      "await expect(\n    page.getByRole(\"combobox\", {\n      name: \"Planner client scope\",\n      includeHidden: true,\n    }),\n  ).toHaveAttribute(\"aria-expanded\", \"true\");",
+      "await expect(page.getByRole(\"listbox\")).toBeVisible();",
+      "await expect(\n    page.getByRole(\"option\", { name: \"Scope · All clients\", exact: true }),\n  ).toBeFocused();",
+      "await expect(\n    page.getByRole(\"option\", { name: client.name, exact: true }),\n  ).toBeFocused();",
+      "await expect(grouping).toBeFocused();",
+      "await expect(\n    page.getByRole(\"combobox\", {\n      name: \"Group by\",\n      exact: true,\n      includeHidden: true,\n    }),\n  ).toHaveAttribute(\"aria-expanded\", \"true\");",
+      "await expect(page.getByRole(\"listbox\")).toBeVisible();",
+      "await expect(\n    page.getByRole(\"option\", { name: \"Group by · Client\", exact: true }),\n  ).toBeFocused();",
+      "await expect(\n    page.getByRole(\"option\", { name: \"Group by · None\", exact: true }),\n  ).toBeFocused();"
+    ]
+  },
+  "allFileAssertions": {
+    "preserved": true,
+    "beforeCount": 66,
+    "afterCount": 76,
+    "added": [
+      "expect(scope).toBeFocused()",
+      "expect(\n    page.getByRole(\"combobox\", {\n      name: \"Planner client scope\",\n      includeHidden: true,\n    }),\n  ).toHaveAttribute(\"aria-expanded\", \"true\")",
+      "expect(page.getByRole(\"listbox\")).toBeVisible()",
+      "expect(\n    page.getByRole(\"option\", { name: \"Scope · All clients\", exact: true }),\n  ).toBeFocused()",
+      "expect(\n    page.getByRole(\"option\", { name: client.name, exact: true }),\n  ).toBeFocused()",
+      "expect(grouping).toBeFocused()",
+      "expect(\n    page.getByRole(\"combobox\", {\n      name: \"Group by\",\n      exact: true,\n      includeHidden: true,\n    }),\n  ).toHaveAttribute(\"aria-expanded\", \"true\")",
+      "expect(page.getByRole(\"listbox\")).toBeVisible()",
+      "expect(\n    page.getByRole(\"option\", { name: \"Group by · Client\", exact: true }),\n  ).toBeFocused()",
+      "expect(\n    page.getByRole(\"option\", { name: \"Group by · None\", exact: true }),\n  ).toBeFocused()"
+    ]
+  },
+  "keyboard": {
+    "before": [
+      "page.keyboard.press(\"Enter\")",
+      "page.keyboard.press(\"ArrowDown\")",
+      "page.keyboard.press(\"Enter\")",
+      "page.keyboard.press(\"Enter\")",
+      "page.keyboard.press(\"ArrowDown\")",
+      "page.keyboard.press(\"Enter\")"
+    ],
+    "after": [
+      "page.keyboard.press(\"Enter\")",
+      "page.keyboard.press(\"ArrowDown\")",
+      "page.keyboard.press(\"Enter\")",
+      "page.keyboard.press(\"Enter\")",
+      "page.keyboard.press(\"ArrowDown\")",
+      "page.keyboard.press(\"Enter\")"
+    ],
+    "byteIdentical": true
+  },
+  "size": {
+    "before": [
+      {
+        "file": "apps/web/test/browser/remaining-modules.spec.ts",
+        "kind": "file",
+        "symbol": "<module>",
+        "line": 1,
+        "nonblank": 486,
+        "fingerprint": "33e115194230d772767d40ce9ef9e855370ea36a7ee90ba0feba0563f6947f89"
+      }
+    ],
+    "after": [
+      {
+        "file": "apps/web/test/browser/remaining-modules.spec.ts",
+        "kind": "file",
+        "symbol": "<module>",
+        "line": 1,
+        "nonblank": 515,
+        "fingerprint": "c74cdf3448592374784d818b0d4f89512e9a0cfc89e0b13ed9c33afd0a9bd0fd"
+      }
+    ],
+    "callbackBefore": {
+      "nonblank": 30,
+      "fingerprint": "8b7b9f030a94141422bd25bb6ed62f2b30491f8c5534e07200a360424805e31f"
+    },
+    "callbackAfter": {
+      "nonblank": 59,
+      "fingerprint": "e446b32e857bb9fde448c6d412938cac9aa53f9f9fd751eec2450a5fc7644eff"
+    }
+  },
+  "protectedBindings": [
+    {
+      "path": "apps/web/src/features/modules/planner/TaskWorkspace.tsx",
+      "rootSha256": "0ba080a47173133c48a42f63f406e937586a6a810b9b7f48715deea9c159af23",
+      "ownerSha256": "0ba080a47173133c48a42f63f406e937586a6a810b9b7f48715deea9c159af23",
+      "rootEqualsOwner": true,
+      "ownerCommitUnchanged": true
+    },
+    {
+      "path": "apps/web/src/shared/module-ui/SelectInput.tsx",
+      "rootSha256": "efe002de583889133257c0c7971c342a401969eeb474bffbd90784cea8530e9b",
+      "ownerSha256": "efe002de583889133257c0c7971c342a401969eeb474bffbd90784cea8530e9b",
+      "rootEqualsOwner": true,
+      "ownerCommitUnchanged": true
+    },
+    {
+      "path": "packages/ui/src/shadcn/select.tsx",
+      "rootSha256": "23e46864ece159592bc70c18901c3f366b56438457c8715715c391c255107b67",
+      "ownerSha256": "23e46864ece159592bc70c18901c3f366b56438457c8715715c391c255107b67",
+      "rootEqualsOwner": true,
+      "ownerCommitUnchanged": true
+    },
+    {
+      "path": "package-lock.json",
+      "rootSha256": "93b3dd0484180ade603daf74a32f75fc16a9bf0bda1694966a6e68100e2a6802",
+      "ownerSha256": "93b3dd0484180ade603daf74a32f75fc16a9bf0bda1694966a6e68100e2a6802",
+      "rootEqualsOwner": true,
+      "ownerCommitUnchanged": true
+    }
+  ],
+  "composition": {
+    "description": "Read-only prospective d68c2dc test tree with owner fb09382 remaining-modules.spec.ts substituted in memory; no integration performed.",
+    "changedSourceFiles": 28,
+    "changedPathsIncludingNonSource": 29,
+    "signals": 14,
+    "files": [
+      {
+        "file": "apps/web/test/browser/meeting-detail-current.spec.ts",
+        "sha256": "f95af100b29a951f7019ee548e1783c05d7ad7371cdae4f5d6956302b1fe0f85",
+        "nonblank": 277,
+        "sizeSignals": [],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/test/browser/remaining-modules.spec.ts",
+        "sha256": "ff19d419f382abb100089e5bc03619f85d499a044ac995fe4b988e7aac78d994",
+        "nonblank": 515,
+        "sizeSignals": [
+          {
+            "file": "apps/web/test/browser/remaining-modules.spec.ts",
+            "kind": "file",
+            "symbol": "<module>",
+            "line": 1,
+            "nonblank": 515,
+            "fingerprint": "c74cdf3448592374784d818b0d4f89512e9a0cfc89e0b13ed9c33afd0a9bd0fd"
+          }
+        ],
+        "sourceRef": "fb093821c6691d3ff45c0cd51ac1edca12364c9b"
+      },
+      {
+        "file": "apps/web/tests/browser/attendance.spec.ts",
+        "sha256": "6d408c2d7b193388ade7ea18ff1e9dcc75925566a0b23702c0b3bebaebb2425d",
+        "nonblank": 527,
+        "sizeSignals": [
+          {
+            "file": "apps/web/tests/browser/attendance.spec.ts",
+            "kind": "file",
+            "symbol": "<module>",
+            "line": 1,
+            "nonblank": 527,
+            "fingerprint": "104e497cbadddc6276598b633d787a5e0f32e1c5e5ba8242cb8bd4f7dc9084cf"
+          }
+        ],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/browser/calendar-lifecycle.spec.ts",
+        "sha256": "f74d8b284991958fe4bed9fa2952e4a7d52f230e88f4102ce993f15741d199e8",
+        "nonblank": 273,
+        "sizeSignals": [],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/browser/calendar-sharing-harness.tsx",
+        "sha256": "c677b8570f1fcd4b121fad6047962ed570717ed76dbadb418cda12e06a86df38",
+        "nonblank": 54,
+        "sizeSignals": [],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/browser/calendar-sharing.spec.ts",
+        "sha256": "0ee7273f96b8c01cf9af22739d436ab207dcd3dd21f9d69dd8871bd2809f7cae",
+        "nonblank": 469,
+        "sizeSignals": [
+          {
+            "file": "apps/web/tests/browser/calendar-sharing.spec.ts",
+            "kind": "file",
+            "symbol": "<module>",
+            "line": 1,
+            "nonblank": 469,
+            "fingerprint": "062206c3277a4a8e3cde4ddef011c7bca486457f523ff3c5fbfccfdbc8b68b29"
+          },
+          {
+            "file": "apps/web/tests/browser/calendar-sharing.spec.ts",
+            "kind": "function",
+            "symbol": "setup",
+            "line": 17,
+            "nonblank": 81,
+            "fingerprint": "fad2e4d85b892511b6f812be3847d67b27affde5c1d7f51f10ecfed57f128125"
+          }
+        ],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/browser/capability-list-registration-layout.spec.ts",
+        "sha256": "c8973d36bb4b7332d7a7b0e99dd4083e07e004a9448502be5be3b78d8a292902",
+        "nonblank": 293,
+        "sizeSignals": [],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/browser/client-header.spec.ts",
+        "sha256": "34fd645d4a91ef81f42a6f7179517c407fa3ce792a4271ffc196aad676ce89d2",
+        "nonblank": 41,
+        "sizeSignals": [],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/browser/email-compose.spec.ts",
+        "sha256": "c61e2e708f1a7a079570478891cd17982586f9bf262d8e979931a7976ccd90c0",
+        "nonblank": 653,
+        "sizeSignals": [
+          {
+            "file": "apps/web/tests/browser/email-compose.spec.ts",
+            "kind": "file",
+            "symbol": "<module>",
+            "line": 1,
+            "nonblank": 653,
+            "fingerprint": "9586be4f68794516b7826531fcc57d1c83abf9920e2d87137c507ca049143139"
+          },
+          {
+            "file": "apps/web/tests/browser/email-compose.spec.ts",
+            "kind": "function",
+            "symbol": "setup",
+            "line": 41,
+            "nonblank": 119,
+            "fingerprint": "486aa09e731ad40a8b5b850b7e2a07fa02ee17f98914c8f7c90efc64a7988c4b"
+          },
+          {
+            "file": "apps/web/tests/browser/email-compose.spec.ts",
+            "kind": "function",
+            "symbol": "setup > <anonymous>",
+            "line": 64,
+            "nonblank": 90,
+            "fingerprint": "422ede19b0edb762a92ff41f98b8fd81e377588a9f7a05cb88e541ccbdf137f4"
+          }
+        ],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/browser/facility-manager-review.spec.ts",
+        "sha256": "2d7cbf390c733f925929f9f0d1215b25be51007eaac414438d4dcbe2b5566f35",
+        "nonblank": 64,
+        "sizeSignals": [],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/browser/files-view-contrast.spec.ts",
+        "sha256": "0c94758166f46a9c5f493f2a8e5927fcc2252475ab43aceee7b2bcdce6594a1b",
+        "nonblank": 42,
+        "sizeSignals": [],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/browser/mail-local-draft.spec.ts",
+        "sha256": "74036b122536e2c3e1ff67497cbccd2e2825d2f165d2ac62acbd81b374797575",
+        "nonblank": 467,
+        "sizeSignals": [
+          {
+            "file": "apps/web/tests/browser/mail-local-draft.spec.ts",
+            "kind": "file",
+            "symbol": "<module>",
+            "line": 1,
+            "nonblank": 467,
+            "fingerprint": "59c7d93e59a1ee79058d223d6af28e3332d38be3593e026cb32ad070b0fea27c"
+          },
+          {
+            "file": "apps/web/tests/browser/mail-local-draft.spec.ts",
+            "kind": "function",
+            "symbol": "setup",
+            "line": 8,
+            "nonblank": 90,
+            "fingerprint": "9711fdca346a34b0dfa82fae5065a31f429924616c649beaace06c1191d0282c"
+          }
+        ],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/browser/mail-message-assertions.ts",
+        "sha256": "8f60ca0460b3b62a2fd0d7be35debe6806799455171c94bf8ead7be42236dd59",
+        "nonblank": 15,
+        "sizeSignals": [],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/browser/mail-rewrite.spec.ts",
+        "sha256": "bd52995e9deefa7342dc463d5a573c157ef499a156a5145735764036e3e9e84d",
+        "nonblank": 265,
+        "sizeSignals": [],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/browser/mail-rich-compose.spec.ts",
+        "sha256": "1b7ca2ca4c029b83e533e073dd5b1ca45b2c76fc8d265973ea2d0d254f884a90",
+        "nonblank": 382,
+        "sizeSignals": [
+          {
+            "file": "apps/web/tests/browser/mail-rich-compose.spec.ts",
+            "kind": "function",
+            "symbol": "setup",
+            "line": 4,
+            "nonblank": 82,
+            "fingerprint": "e45e93bf32a8236faf446bec98b8fcdeb34bb1e53f131a916e71b130dd2d5e25"
+          }
+        ],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/browser/portfolio.spec.ts",
+        "sha256": "ea288c75629bc8156dde4ef25eada45fb7968141938355a793d46e943fb8c66b",
+        "nonblank": 220,
+        "sizeSignals": [],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/browser/profile-current-state.spec.ts",
+        "sha256": "26ef8d88a3ed49bf6e8c1a7b36944f0dfcc981771009517aae9c21430ac8612e",
+        "nonblank": 266,
+        "sizeSignals": [],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/browser/profile-presentation.spec.ts",
+        "sha256": "80db7a4c935fd13cea0cd5d6b4a82e5c6ae202b5a5a01e445248ac723a69819d",
+        "nonblank": 355,
+        "sizeSignals": [
+          {
+            "file": "apps/web/tests/browser/profile-presentation.spec.ts",
+            "kind": "function",
+            "symbol": "<anonymous> #2",
+            "line": 144,
+            "nonblank": 86,
+            "fingerprint": "1c508c602e828888ac134de2a107888123abe08a7a89834a75febe61a48d8897"
+          }
+        ],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/browser/profile-write-lifetime.spec.ts",
+        "sha256": "70bb8a5a331f7fc9b22c4e408e9e8d5da139d47f74aadd80910ca927999b9a54",
+        "nonblank": 350,
+        "sizeSignals": [],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/browser/relationships.spec.ts",
+        "sha256": "ad299c87f68dee52a5123e2cc215415de3879cc5d65a6c1f252ac1e83a6662ec",
+        "nonblank": 560,
+        "sizeSignals": [
+          {
+            "file": "apps/web/tests/browser/relationships.spec.ts",
+            "kind": "file",
+            "symbol": "<module>",
+            "line": 1,
+            "nonblank": 560,
+            "fingerprint": "e98b8a1b5376c8157fae08bfd731dc878b3afcc9a2314e105bc0820bbeceddb8"
+          },
+          {
+            "file": "apps/web/tests/browser/relationships.spec.ts",
+            "kind": "function",
+            "symbol": "<anonymous> #2",
+            "line": 37,
+            "nonblank": 81,
+            "fingerprint": "c9dffe417d395d9f749bb79d5102a12bbcb0f92ecc4c9cf3a1ff07e6c38713be"
+          }
+        ],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/browser/remaining-intake.spec.ts",
+        "sha256": "4cdf6399b49c98856892c31584c738876284f25ae7c0672ee138e25f55a51a46",
+        "nonblank": 357,
+        "sizeSignals": [],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/browser/timeline-presentation-lifetime.spec.ts",
+        "sha256": "db9f60de3c2a286333f234be540a9bece083067ceceb139427a0be2af34ad7ab",
+        "nonblank": 173,
+        "sizeSignals": [],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/calendar-lifecycle-contract.test.ts",
+        "sha256": "a3ce8a8534e8158190a293a2a537547aa212dfb3cec03380bcaa25bc4f51c726",
+        "nonblank": 115,
+        "sizeSignals": [],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/calendar-sharing-fixtures.ts",
+        "sha256": "788b079ddda8273f485e359d5e112e32474ad4172facb2e474be1f221bbdc05f",
+        "nonblank": 98,
+        "sizeSignals": [],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/calendar-sharing.test.ts",
+        "sha256": "5d837055a6c3644987422fddfee54b1b3762f4b108b9c064cd699a67e3718a30",
+        "nonblank": 193,
+        "sizeSignals": [
+          {
+            "file": "apps/web/tests/calendar-sharing.test.ts",
+            "kind": "function",
+            "symbol": "<anonymous>",
+            "line": 24,
+            "nonblank": 109,
+            "fingerprint": "4bf56d635643c7e5cdb8d93dcdcbf9b24485a05ff077674e6da194dd28e7a88a"
+          }
+        ],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/client-view-navigation.test.ts",
+        "sha256": "7c2284b0d0690398e7b0356337f14a393527ebcdec054d10e37dc3bbd824adc7",
+        "nonblank": 26,
+        "sizeSignals": [],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/mail-body.test.ts",
+        "sha256": "2a3ae445ff07fabc6c4e804cb8ea917227719c35defe581b98753ffad11c0e18",
+        "nonblank": 26,
+        "sizeSignals": [],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      },
+      {
+        "file": "apps/web/tests/profile-presentation.test.ts",
+        "sha256": "5e09463343c1b016826bbb3ccffae64169a7131a85375f48ad4e0bc3248ba125",
+        "nonblank": 60,
+        "sizeSignals": [],
+        "sourceRef": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616"
+      }
+    ]
+  },
+  "tooling": {
+    "parserVersion": "5.9.3",
+    "scannerPath": "/workspace/capiro-remaining-capabilities/scripts/architecture/scan.mjs",
+    "scannerSHA256": "b6c0f4e872640db8c655797e86a177303c3c7eb53223ffbd5c29bc41f5ba937e",
+    "scannerEqualsRoot": true,
+    "execution": "TypeScript AST/source-only scan; no application, test runner or runtime imports."
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "checkedAt": "2026-10-12T22:08:22.619786+00:00",
+  "integratedHead": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "mapping": [
+    {
+      "owner": "objectives_work_intel_review",
+      "source": "e3d1cbb91a31cadff90898fcf2143ff5ce17318e",
+      "integration": "b46a1379ffa37c4e6f8676f286768552294e3060"
+    },
+    {
+      "owner": "prospects_review",
+      "source": "685e55039d5d3945c76085513cde8bc6c33cb55d",
+      "integration": "ceed53a8c49e07c88eef064bc821a2d60a7af71d"
+    },
+    {
+      "owner": "core_intake_review",
+      "source": "ced1d1b428f57a5cd8628ece6222924c0ebcf0f2",
+      "integration": "8daaf2822f282fa1f764cf795a2bdb5668928beb"
+    },
+    {
+      "owner": "modules_settings_review",
+      "source": "b5eaadd031580edca79e9d99de2c0ab14d59997c",
+      "integration": "cfbbe5f51ddfe1aef72e5afdb40dd86cd7e2cc8f"
+    },
+    {
+      "owner": "root",
+      "source": "24641d784f36dbb1d8ca558ed41ad4c6e22bf9ab",
+      "integration": "24641d784f36dbb1d8ca558ed41ad4c6e22bf9ab"
+    },
+    {
+      "owner": "calendar_relationships_review",
+      "source": "16fb50f9578cca86189b2e303f0918ddebc60413",
+      "integration": "a18ce6edcaf9e7158d19835415f77fa551b41b6f"
+    },
+    {
+      "owner": "calendar_relationships_review",
+      "source": "3195ffab57584054a714ff5bd025063fba363929",
+      "integration": "29f61166565f568045286baa49b4386f8836faf7",
+      "scope": "test completion barrier only; production unchanged"
+    },
+    {
+      "owner": "root",
+      "source": "98d18058263289293c8acf82aaeb4534d7e93317",
+      "integration": "98d18058263289293c8acf82aaeb4534d7e93317"
+    },
+    {
+      "owner": "core_profile_review",
+      "source": "12c007a465acfdf81b68b2ffe03f531f1bbf270a",
+      "integration": "76a1c279e99a1fdf6991ee3774f6c53f42327eea"
+    },
+    {
+      "owner": "core_profile_review",
+      "source": "b7ba794b4b0f371a635f66e5d35970873b37b610",
+      "integration": "c3b42e83f8f09789b238e1506d317e28569ce382"
+    },
+    {
+      "owner": "core_profile_review",
+      "source": "5291c717e77c8b3ffdc995a4e20080c4964483fd",
+      "integration": "93d81fef5d934d0d4c11f799b990c19a91e164e7"
+    },
+    {
+      "owner": "core_profile_review",
+      "source": "a5202a066d0a0bd29fd5158b1d8380d4a5736768",
+      "integration": "a939be7f7eef99f3d52ccaf3b32be6a150c9aefe"
+    },
+    {
+      "owner": "core_profile_review",
+      "source": "ecf34dfac16e36b22df1a1da9b6e86b785699dbb",
+      "integration": "d5f8f9071c1348159418c8687834aaa35df61a01"
+    },
+    {
+      "owner": "calendar_relationships_review",
+      "source": "1cbca00a471a722ed249fccb95f761853e96246a",
+      "integration": "3c64057d3a436a728cd35f05b805ce6e7e7e8577",
+      "scope": "test-only upcoming meeting navigation and exact Prep attachment fixture; original assertions retained"
+    },
+    {
+      "owner": "root",
+      "source": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+      "integration": "adbc84b2251fe6b06cb7f75030026fba5b4ff498",
+      "scope": "root-only Docker scratch exclusion and regression CLI; no Dockerfile or runtime changes"
+    },
+    {
+      "owner": "core_profile_review",
+      "source": "4ed4b56aaa1660e7f7abdccd94208c17aa38f21b",
+      "integration": "cdf27c89b3b4dea8c3ccbb80d1505aa2b4646ac3",
+      "scope": "One-character timeline footer correction; current-projection tests unchanged"
+    },
+    {
+      "owner": "core_profile_review",
+      "source": "83874fb2bbc0769a232d9890beccbe764863a1ef",
+      "integration": "61e118f06defdb1defe2ff83173b903e1b2e94ec",
+      "scope": "Facilities manager test navigation adapter; all31 original assertions preserved, two added"
+    },
+    {
+      "owner": "prospects_review",
+      "source": "850da33808dab050d2396a26233d3d3881d2fecf",
+      "integration": "fe6ff41251006efc659ec80e4542b1a795e15ca5",
+      "scope": "Exact Message contenteditable matcher adapter, expected text/other file bytes unchanged"
+    },
+    {
+      "owner": "root",
+      "source": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+      "integration": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+      "scope": "Exact architecture review update and Prettier wrapping of new facility assertion; semantic AST preserved"
+    },
+    {
+      "owner": "modules_settings_review",
+      "source": "fb093821c6691d3ff45c0cd51ac1edca12364c9b",
+      "integration": "fafa9040a8c239085725eb22a28eba18aa34d8a0",
+      "scope": "Test-only observable keyboard focus handoffs; all original statements/keys/assertions preserved"
+    },
+    {
+      "owner": "root",
+      "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "integration": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "scope": "Exact test structure and failure/correction review; no runtime or architecture policy changes"
+    }
+  ],
+  "excludedHistoricalCommit": "24ac231749b9e8dc9b778cf318f3f94e74d168ad",
+  "excludedReason": "Superseded cross-lane callback; timeline will reuse existing URL intent and canonical QuickLog owner",
+  "sourcePins": {
+    "main": "02c02d95bdf3949662b9123f425271c6491ffdab",
+    "portfolio": "c330cebbd021eb984b4bf64ae13dbb991ae6b1c0",
+    "meri": "3cc30ff3182e8050d563516607866cf07efe2aef",
+    "modules": "50155cbbf0e4df1eecba22cbfc9b2c35bff87e0a"
+  },
+  "pending": "Fresh exact-source combined qualification; all337 native rows remain held",
+  "rootTree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+  "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+  "srcTree": "fa4ca7b5ca126f7bcdc1cf816584fa0303d61704",
+  "conflicts": "No cherry-pick conflicts. Shared behavior changes separately reviewed; guard records updated to exact source, no rule or transfer-baseline weakening.",
+  "supplementalRootReviewBinding": {
+    "path": "docs/architecture-size-reviews.json",
+    "commit": "334bbbf14a5d9e8ae476f519bbae6561acd96fbf",
+    "note": "Existing root review outside the 21 owner mappings; bytes unchanged from adbc and d68"
+  }
+}

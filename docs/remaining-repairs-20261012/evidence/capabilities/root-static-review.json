@@ -1,0 +1,25 @@
+{
+  "reviewer": "root",
+  "stage": "independent static review before lane browser qualification",
+  "base": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+  "files": [
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/CapabilitiesPage.tsx",
+      "sha256": "4f2a6d0d08239b93d295090a251df20ed3d9b318f19124501c838231ae9998c5"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/Registrations.tsx",
+      "sha256": "5245aa0d98a2e82a97b61fc9dd2515447d5a9fa97f2135f0fa255daa592a43b4"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/capabilities.module.css",
+      "sha256": "84e7f0b3c84ae67e150a787427c519cb6dfa47104d3001606b4333efe9c9af05"
+    },
+    {
+      "path": "apps/web/src/features/portfolio/capabilities/registrations.module.css",
+      "sha256": "751999781d4e23050d94853c98d2c86470e00523eb10eef26687b69654e88b63"
+    }
+  ],
+  "findings": [],
+  "conclusion": "Cohesive capability/registration presentation only. Existing current-read, draft key, mutation guards, unknown-code retention and modal semantics survive. One data projection reused for both breakpoints. Size reviews justified for existing projection/modal owners; browser geometry, focus, contrast and current-lifetime results still required."
+}

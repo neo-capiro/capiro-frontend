@@ -1,0 +1,51 @@
+{
+  "deliveryCommit": "ced1d1b428f57a5cd8628ece6222924c0ebcf0f2",
+  "scope": "Four findings and eight locally repaired row facets; no full-row or native acceptance",
+  "facets": [
+    {
+      "finding": "CI-01",
+      "priority": "P2",
+      "rows": [
+        "CORE-013"
+      ],
+      "facet": "Saved client and government read surfaces",
+      "localStatus": "source_repaired_focused_checks_passed",
+      "nativeStatus": "unrun_existing_individual_status_unchanged"
+    },
+    {
+      "finding": "CI-02",
+      "priority": "P2",
+      "rows": [
+        "CORE-121"
+      ],
+      "facet": "Existing client destination picker search, shortcuts and presentation",
+      "localStatus": "source_repaired_focused_checks_passed",
+      "nativeStatus": "unrun_existing_individual_status_unchanged"
+    },
+    {
+      "finding": "CI-03",
+      "priority": "P3",
+      "rows": [
+        "CORE-028",
+        "CORE-030",
+        "CORE-031",
+        "CORE-032"
+      ],
+      "facet": "Account team presentation and responsive addition fields",
+      "localStatus": "source_repaired_focused_checks_passed",
+      "nativeStatus": "unrun_existing_individual_status_unchanged"
+    },
+    {
+      "finding": "CI-04",
+      "priority": "P3",
+      "rows": [
+        "CORE-012",
+        "CORE-014"
+      ],
+      "facet": "Intake business/certification/track choice geometry",
+      "localStatus": "source_repaired_focused_checks_passed",
+      "nativeStatus": "unrun_existing_individual_status_unchanged"
+    }
+  ],
+  "original337LedgerModified": false
+}

@@ -1,0 +1,182 @@
+{
+  "at": "2026-10-12T21:20:35.016605+00:00",
+  "folders": {
+    "docker": {
+      "regularFiles": 298,
+      "bytes": 363389,
+      "exists": true
+    },
+    "docker-independent-review": {
+      "regularFiles": 23,
+      "bytes": 110800,
+      "exists": true
+    },
+    "preservation-review": {
+      "regularFiles": 2,
+      "bytes": 9222,
+      "exists": true
+    },
+    "root": {
+      "regularFiles": 1611,
+      "bytes": 54517044,
+      "exists": true
+    },
+    "intake": {
+      "regularFiles": 217,
+      "bytes": 28775577,
+      "exists": true
+    },
+    "profile": {
+      "regularFiles": 527,
+      "bytes": 169986924,
+      "exists": true
+    },
+    "calendar": {
+      "regularFiles": 1404,
+      "bytes": 17819622,
+      "exists": true
+    },
+    "mail": {
+      "regularFiles": 145,
+      "bytes": 11368821,
+      "exists": true
+    },
+    "capabilities": {
+      "regularFiles": 361,
+      "bytes": 36327214,
+      "exists": true
+    },
+    "modules": {
+      "regularFiles": 486,
+      "bytes": 44363164,
+      "exists": true
+    },
+    "calendar-independent-review": {
+      "regularFiles": 30,
+      "bytes": 897561,
+      "exists": true
+    },
+    "coordination": {
+      "regularFiles": 1,
+      "bytes": 6978,
+      "exists": true
+    },
+    "qualification": {
+      "regularFiles": 5788,
+      "bytes": 620164355,
+      "exists": true
+    },
+    "final-source-review-intake": {
+      "regularFiles": 3,
+      "bytes": 46067,
+      "exists": true
+    },
+    "final-ledger-review": {
+      "regularFiles": 16,
+      "bytes": 787675,
+      "exists": true
+    },
+    "final-gate-review": {
+      "regularFiles": 14,
+      "bytes": 4806586,
+      "exists": true
+    }
+  },
+  "links": [
+    {
+      "path": "/tmp/capiro-remaining-capabilities-evidence/node_modules",
+      "target": "/workspace/capiro-remaining-capabilities/node_modules"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/elements-ssr/negative-dUvsES/workspace/node_modules",
+      "target": "/workspace/capiro-remaining/node_modules"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-adbc84b/elements-ssr/negative-OVDdAW/workspace/node_modules",
+      "target": "/workspace/capiro-remaining/node_modules"
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-104495d/elements-ssr/negative-6NSaSH/workspace/node_modules",
+      "target": "/workspace/capiro-remaining/node_modules"
+    }
+  ],
+  "largeFiles": [],
+  "nameCandidates": [
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-frozen-adbc84b/fixture/.env",
+      "bytes": 60
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-frozen-adbc84b/fixture/apps/web/.env",
+      "bytes": 60
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-final-script-corrected/fixture/.env",
+      "bytes": 60
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-final-script-corrected/fixture/apps/web/.env",
+      "bytes": 60
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-final-script-baseline/fixture/.env",
+      "bytes": 60
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-final-script-baseline/fixture/apps/web/.env",
+      "bytes": 60
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-corrected/fixture/.env",
+      "bytes": 60
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-corrected/fixture/apps/web/.env",
+      "bytes": 60
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-baseline-writable-config/fixture/.env",
+      "bytes": 60
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-baseline-writable-config/fixture/apps/web/.env",
+      "bytes": 60
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-baseline/fixture/.env",
+      "bytes": 60
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-baseline/fixture/apps/web/.env",
+      "bytes": 60
+    }
+  ],
+  "nonRegular": [],
+  "encodedPaths": [
+    {
+      "source": "/tmp/capiro-remaining-docker-evidence/context-frozen-adbc84b/fixture/.git/context-canary",
+      "storedRelative": "context-frozen-adbc84b/fixture/__literal_dot_git__/context-canary"
+    },
+    {
+      "source": "/tmp/capiro-remaining-docker-evidence/context-final-script-corrected/fixture/.git/context-canary",
+      "storedRelative": "context-final-script-corrected/fixture/__literal_dot_git__/context-canary"
+    },
+    {
+      "source": "/tmp/capiro-remaining-docker-evidence/context-final-script-baseline/fixture/.git/context-canary",
+      "storedRelative": "context-final-script-baseline/fixture/__literal_dot_git__/context-canary"
+    },
+    {
+      "source": "/tmp/capiro-remaining-docker-evidence/context-corrected/fixture/.git/context-canary",
+      "storedRelative": "context-corrected/fixture/__literal_dot_git__/context-canary"
+    },
+    {
+      "source": "/tmp/capiro-remaining-docker-evidence/context-baseline-writable-config/fixture/.git/context-canary",
+      "storedRelative": "context-baseline-writable-config/fixture/__literal_dot_git__/context-canary"
+    },
+    {
+      "source": "/tmp/capiro-remaining-docker-evidence/context-baseline/fixture/.git/context-canary",
+      "storedRelative": "context-baseline/fixture/__literal_dot_git__/context-canary"
+    }
+  ],
+  "encodingCollisions": []
+}

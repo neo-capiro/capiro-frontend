@@ -1,0 +1,254 @@
+{
+  "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+  "identity": {
+    "source": "1585438295776604f23a5cb5ab592729f7c468ca",
+    "rootTree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+    "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+    "runtimeSourceTree": "fa4ca7b5ca126f7bcdc1cf816584fa0303d61704",
+    "buildId": "5gHD80mUbuwxCPBarQvGL",
+    "at": "2026-10-12T22:11:04.299871+00:00",
+    "scope": "Standalone host build after clean npm install; existing framework cache permitted."
+  },
+  "actualBuildIdBindings": [
+    {
+      "path": "apps/web/.next/BUILD_ID",
+      "buildId": "5gHD80mUbuwxCPBarQvGL",
+      "matchesIdentity": true
+    },
+    {
+      "path": "apps/web/.next/standalone/apps/web/.next/BUILD_ID",
+      "buildId": "5gHD80mUbuwxCPBarQvGL",
+      "matchesIdentity": true
+    }
+  ],
+  "producerGates": {
+    "production-build": {
+      "name": "production-build",
+      "command": [
+        "env",
+        "NODE_OPTIONS=--max-old-space-size=4096",
+        "npm",
+        "run",
+        "build"
+      ],
+      "startedUTC": "2026-10-12T22:10:56.820501+00:00",
+      "endedUTC": "2026-10-12T22:11:04.288773+00:00",
+      "durationSeconds": 7.468298726991634,
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+        "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+        "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+        "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+        "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    },
+    "production-server": {
+      "name": "production-server",
+      "command": [
+        "env",
+        "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+        "npm",
+        "run",
+        "test:production",
+        "--",
+        "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts"
+      ],
+      "startedUTC": "2026-10-12T22:11:04.335821+00:00",
+      "endedUTC": "2026-10-12T22:11:10.663298+00:00",
+      "durationSeconds": 6.3275024269969435,
+      "exitCode": 0,
+      "sourceBefore": {
+        "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+        "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+        "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+        "sourceDiff": ""
+      },
+      "sourceAfter": {
+        "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+        "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+        "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+        "sourceDiff": ""
+      },
+      "sourceChanged": false
+    }
+  },
+  "sourceChecks": [
+    {
+      "path": "apps/web/tests/production/verify-standalone.mjs",
+      "bytes": 7388,
+      "sha256": "2b06e07abd048aa2d7de43be5ea89fe3115d9ef6bd2993cc7b0f1a60e7846dd8",
+      "gitBlob": "440636cbe6fb6d15c490192e35c9340b1af7ea42",
+      "equalsPriorCommittedSource": true,
+      "equalsPriorReviewHash": true,
+      "worktreeMatchesCommit": true
+    },
+    {
+      "path": "apps/web/tests/production/run-standalone.mjs",
+      "bytes": 5491,
+      "sha256": "c4c271a1738ca2425afd3eefe1540864af3f6a11cd465e8d25de2a7cd1fc2e21",
+      "gitBlob": "2eb2f32f05e68c0edb0c56186b10185d544f84ab",
+      "equalsPriorCommittedSource": true,
+      "equalsPriorReviewHash": true,
+      "worktreeMatchesCommit": true
+    },
+    {
+      "path": "apps/web/tests/production/verify-runtime-config.mjs",
+      "bytes": 873,
+      "sha256": "49bf406df89d1fb5c281694c963d98dbf6c6d5804cb3d08adf4100fa92db3f8a",
+      "gitBlob": "049f9127aa33e80ce7374302264c84b65a2c65e3",
+      "equalsPriorCommittedSource": true,
+      "equalsPriorReviewHash": true,
+      "worktreeMatchesCommit": true
+    },
+    {
+      "path": "apps/web/src/app/(portfolio)/(product)/layout.tsx",
+      "bytes": 946,
+      "sha256": "79ae26b1576a5ad750ed54b75c63c71c028ce64d505999ec49fe55b7e6dcfcdc",
+      "gitBlob": "1f7b6f98c27597cdf8a05f34088690ccbe9a0701",
+      "equalsPriorCommittedSource": true,
+      "equalsPriorReviewHash": true,
+      "worktreeMatchesCommit": true
+    },
+    {
+      "path": "apps/web/src/app/(portfolio)/(product)/setup.module.css",
+      "bytes": 119,
+      "sha256": "2a175d892573273e9dee5b0522431c486f478cf6dc29e8b85ec9c9a74baeb317",
+      "gitBlob": "eaa76254c52d87274292bd9caeb388511558c761",
+      "equalsPriorCommittedSource": true,
+      "equalsPriorReviewHash": true,
+      "worktreeMatchesCommit": true
+    },
+    {
+      "path": "apps/web/src/app/(portfolio)/layout.tsx",
+      "bytes": 362,
+      "sha256": "89ce4ffb4b8126c7a036659ea37a561edd5f0f9d25868376b884e8507ddc4254",
+      "gitBlob": "5ffea9411d9249a96a1e5f0137f5196a43badc36",
+      "equalsPriorCommittedSource": true,
+      "equalsPriorReviewHash": true,
+      "worktreeMatchesCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/styles.css",
+      "bytes": 10136,
+      "sha256": "bd34a401be0625c70d09f2be7767205599092f009c5535553aa8ea4ca6ec4061",
+      "gitBlob": "57d900add164013b700b09ca635e411be99d85e3",
+      "equalsPriorCommittedSource": true,
+      "equalsPriorReviewHash": true,
+      "worktreeMatchesCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/config/config.ts",
+      "bytes": 3421,
+      "sha256": "e37e67bbf2a8306358d8d5925975392e9dd334c1bc4dc6689047003102004ea0",
+      "gitBlob": "28551f81aa072dc5904f76a8f3287ddb77017a33",
+      "equalsPriorCommittedSource": true,
+      "equalsPriorReviewHash": true,
+      "worktreeMatchesCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/session/SessionContext.tsx",
+      "bytes": 1097,
+      "sha256": "5869d87594d68f0d0c73f696df6b4923bddd0bca444014e40524c7d48b812015",
+      "gitBlob": "4baf30b9b376c13f28533884f7e87bcda0c9034a",
+      "equalsPriorCommittedSource": true,
+      "equalsPriorReviewHash": true,
+      "worktreeMatchesCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/shell/Header.tsx",
+      "bytes": 2926,
+      "sha256": "0a27a2e588a599d366894183bd585450ccbc107f5ec0936fb5519b7e08166c12",
+      "gitBlob": "2f75695d001af3d6a6b742c355ee405e54946cce",
+      "equalsPriorCommittedSource": true,
+      "equalsPriorReviewHash": true,
+      "worktreeMatchesCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/shell/ModuleHeader.tsx",
+      "bytes": 2554,
+      "sha256": "b6bd1fd354ab88304dbf9967fa403940a050c6a421d2abf7bf9161b0fee92268",
+      "gitBlob": "8d19745fa495db9b1ec65f66937c90f01fc10620",
+      "equalsPriorCommittedSource": true,
+      "equalsPriorReviewHash": true,
+      "worktreeMatchesCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/shell/ProductShell.tsx",
+      "bytes": 1114,
+      "sha256": "6916f93dfd9530f615128ad85d728fb3458a38f14e6ad24f0739c4b252baf672",
+      "gitBlob": "7ec730b68f74c7e943711a0f00b600985b0c709e",
+      "equalsPriorCommittedSource": true,
+      "equalsPriorReviewHash": true,
+      "worktreeMatchesCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/response-headers.ts",
+      "bytes": 268,
+      "sha256": "bf5e64a580cb50ae5f438a2f5e313388c9a0e6d5b95433843bb77237f1aa536f",
+      "gitBlob": "56040db58855369f1030c1164a87acfc6f0429fb",
+      "equalsPriorCommittedSource": true,
+      "equalsPriorReviewHash": true,
+      "worktreeMatchesCommit": true
+    },
+    {
+      "path": "apps/web/src/app/page.tsx",
+      "bytes": 400,
+      "sha256": "ffa499addaf3f92cc58ae5c4c8cd0a1762c8093b7b7dc48e8fcfcf617a93412c",
+      "gitBlob": "6ac452eae078927b210450c01675142bb946ef9e",
+      "equalsPriorCommittedSource": true,
+      "equalsPriorReviewHash": true,
+      "worktreeMatchesCommit": true
+    },
+    {
+      "path": "apps/web/src/app/layout.tsx",
+      "bytes": 1201,
+      "sha256": "47e90e4269dd55a75bf05e91b010ddcdeb86c716d821ee240e3cffc8a204a1fd",
+      "gitBlob": "61114b9da748495a2b77fabd78c02c91e54a6ae9",
+      "equalsPriorCommittedSource": true,
+      "equalsPriorReviewHash": true,
+      "worktreeMatchesCommit": true
+    },
+    {
+      "path": "apps/web/src/app/globals.css",
+      "bytes": 1113,
+      "sha256": "367d86b9cc092ef568865e1c2cafea9e0ca59e195f534619dc58e0fc97253cdd",
+      "gitBlob": "e0f097755fde0984a1cf7bda989b9cd80898b30a",
+      "equalsPriorCommittedSource": true,
+      "equalsPriorReviewHash": true,
+      "worktreeMatchesCommit": true
+    },
+    {
+      "path": "apps/web/src/proxy.ts",
+      "bytes": 1072,
+      "sha256": "2e92393121bcb4a9297007bdddd6b16fb6b53cd8db288b2644f2ca719a469ae3",
+      "gitBlob": "edb45e6c4c74352537eca0e2cb2f937e354e41af",
+      "equalsPriorCommittedSource": true,
+      "equalsPriorReviewHash": true,
+      "worktreeMatchesCommit": true
+    },
+    {
+      "path": "apps/web/next.config.ts",
+      "bytes": 559,
+      "sha256": "b74e94a2d41d0e6587a8607a4fb3dc8800f46bd99d10ef3af43e78928af03e57",
+      "gitBlob": "bab73aa64bb6d3ca2db4c828d1fcface0ebd0aae",
+      "equalsPriorCommittedSource": true,
+      "equalsPriorReviewHash": true,
+      "worktreeMatchesCommit": true
+    }
+  ],
+  "runtimeTreeByteIdentical": true,
+  "changedPathsFromD68": [
+    "apps/web/test/browser/remaining-modules.spec.ts",
+    "docs/remaining-repairs-20261012/STRUCTURE-REVIEW.md"
+  ],
+  "worktreeCleanAtReview": true,
+  "reviewerExecutedRuntime": false,
+  "sourceEditsByReviewer": false
+}

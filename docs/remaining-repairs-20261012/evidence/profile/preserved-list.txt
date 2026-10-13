@@ -1,0 +1,69 @@
+Listing tests:
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity.spec.ts:28:5 › history search, kind, inclusive local dates, invalid range and clear use the existing feed
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity.spec.ts:137:5 › history failure and retry retain entered filters
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts:25:5 › pin/unpin persists only the note field, displays inline state and returns keyboard focus
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts:83:7 › pin refuses wrong client receipt and requires review before retry
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts:83:7 › pin refuses wrong tenant receipt and requires review before retry
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts:83:7 › pin refuses wrong record receipt and requires review before retry
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts:83:7 › pin refuses false pinned result receipt and requires review before retry
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts:131:5 › readonly identity cannot open activity mutations
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts:152:5 › a changed note at preflight stops before PATCH and preserves edit input
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts:205:5 › unmount during held preflight prevents PATCH after the read returns
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts:241:5 › a lost pin response is reconciled by an explicit read without replaying the write
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/activity-pin.spec.ts:279:5 › session expiry at preflight dispatches no activity write
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts:15:5 › profile notes conceal a failed saved-client read and prevent replacement
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts:34:5 › profile notes reject another client's receipt and require review before retry
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts:56:5 › profile notes retain a refused draft without reporting it saved
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts:72:5 › late notes receipts cannot close a replacement actor's editor
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts:106:5 › failed account-team refresh conceals cached members and disables changes
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts:129:5 › failed member options cannot submit a retained selection
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts:147:5 › team add needs the requested native roster effect
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts:163:5 › owner assignment rejects a different returned owner
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts:188:5 › failed facilities refresh conceals saved locations and closes their detail
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts:213:5 › a removed facility selection does not reopen when that ID returns
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts:235:5 › unknown facility creation stays fenced after closing and reopening
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-current-state.spec.ts:262:5 › identity invalidation disables facility creation despite a cached role
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts:23:5 › a matching notes clear uses only the native notes PUT and closes once
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts:47:5 › a refreshed notes source fences a late receipt and retains the local draft for review
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts:91:5 › owner membership role mismatches stay unknown and preserve the role draft
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts:111:5 › an owner's successfully updated membership role remains visible on the single owner row
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts:139:5 › a successfully removed member option leaves the retained choice unavailable
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts:163:5 › late team receipts do not report success or invalidate a replacement client view
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts:206:5 › closing a pending facility create keeps the unknown fence when its view reopens
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts:248:5 › a similar current facility cannot be claimed as an unknown creation receipt
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts:286:5 › a changed saved facility cannot be overwritten by an older open draft
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-write-lifetime.spec.ts:321:5 › a late facility result cannot escape its original actor's unknown fence
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts:45:5 › a facility action refuses another tenant's otherwise matching receipt
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts:64:5 › a definite facility action refusal remains a deliberate retry without claiming success
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts:84:5 › an uncertain facility action needs a current GET review before a new explicit request
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts:139:5 › closing a pending geocode view retains uncertainty without replay when reopened
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts:169:5 › a refreshed facility source aborts obsolete action effects and retains the new address
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts:207:5 › a failed current review cannot erase an uncertain facility action
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts:236:5 › a late geocode receipt cannot clear the initiating actor's unknown fence
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/facility-action-lifetime.spec.ts:269:5 › a late candidate conflict cannot refresh a newer reviewed snapshot
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-dialog-layout.spec.ts:8:7 › current profile dialogs fit 1440px and avoid cross-component render updates
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/profile-dialog-layout.spec.ts:8:7 › current profile dialogs fit 390px and avoid cross-component render updates
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-metadata-receipts.spec.ts:26:5 › conflicting ACL receipt retains the draft and freezes repeat save until current GET review
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-metadata-receipts.spec.ts:80:5 › a matching reordered restricted viewer set completes the save
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-metadata-receipts.spec.ts:135:5 › a definite access rejection retains an editable draft
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-metadata-receipts.spec.ts:165:7 › a matching PATCH completing after actor replacement cannot close or update the replacement view
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-metadata-receipts.spec.ts:165:7 › a matching PATCH completing after client replacement cannot close or update the replacement view
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-metadata-receipts.spec.ts:165:7 › a matching PATCH completing after unmount replacement cannot close or update the replacement view
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-metadata-receipts.spec.ts:214:5 › a review completing after actor replacement cannot clear the original unknown save
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-metadata-receipts.spec.ts:256:5 › an unknown draft can recover even when the reopened access query fails
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-metadata-receipts.spec.ts:307:5 › reopening access as another reader requests that reader's current ACL
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-metadata-receipts.spec.ts:334:5 › a contradictory folder receipt keeps the requested folder and needs current review
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-metadata-receipts.spec.ts:372:5 › unknown ACL save survives close/reopen and a failed review does not thaw it
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts:21:5 › unknown deletion survives close/reopen until deliberate current review and a new confirmation
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts:86:5 › an absent current file is unavailable, not a deletion confirmation
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts:134:5 › pending current deletion stays fenced until a later explicit review reports a recoverable file
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts:170:5 › a definite deletion refusal does not impose an unknown fence
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts:193:7 › a failed explicit current read 403 revokes all cached file actions until successful recovery
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts:193:7 › a failed explicit current read 503 revokes all cached file actions until successful recovery
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts:258:7 › a late deletion receipt after actor replacement cannot publish completion into the new view
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts:258:7 › a late deletion receipt after client replacement cannot publish completion into the new view
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts:258:7 › a late deletion receipt after unmount replacement cannot publish completion into the new view
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts:307:5 › a current read completing after actor replacement cannot release the old fence or leak its state
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts:340:7 › a superseded current read returning 200 cannot replace or poison newer client files
+  ../../workspace/capiro-remaining-profile/apps/web/tests/browser/files-delete-recovery.spec.ts:340:7 › a superseded current read returning 403 cannot replace or poison newer client files
+Total: 67 tests in 8 files

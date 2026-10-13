@@ -1,0 +1,186 @@
+{
+  "head": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+  "rootTree": "fd436a652182d40e3f8c0bbfb74c16a46eb8d5f9",
+  "applicationTree": "9f0698bd6d9cfefb7648fd899ee22f4e3b541617",
+  "runtimeSourceTree": "fa4ca7b5ca126f7bcdc1cf816584fa0303d61704",
+  "worktreeCleanAtReview": true,
+  "producerBuild": {
+    "name": "production-build",
+    "command": [
+      "env",
+      "NODE_OPTIONS=--max-old-space-size=4096",
+      "npm",
+      "run",
+      "build"
+    ],
+    "startedUTC": "2026-10-12T21:52:00.753737+00:00",
+    "endedUTC": "2026-10-12T21:52:15.102093+00:00",
+    "durationSeconds": 14.348386236000806,
+    "exitCode": 0,
+    "sourceBefore": {
+      "head": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+      "tree": "fd436a652182d40e3f8c0bbfb74c16a46eb8d5f9",
+      "applicationTree": "9f0698bd6d9cfefb7648fd899ee22f4e3b541617",
+      "sourceDiff": ""
+    },
+    "sourceAfter": {
+      "head": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+      "tree": "fd436a652182d40e3f8c0bbfb74c16a46eb8d5f9",
+      "applicationTree": "9f0698bd6d9cfefb7648fd899ee22f4e3b541617",
+      "sourceDiff": ""
+    },
+    "sourceChanged": false
+  },
+  "producerStandaloneRun": {
+    "name": "production-server",
+    "command": [
+      "env",
+      "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium",
+      "npm",
+      "run",
+      "test:production",
+      "--",
+      "/tmp/capiro-remaining-qualification/final-d68c2dc/production-artifacts"
+    ],
+    "startedUTC": "2026-10-12T21:52:15.158765+00:00",
+    "endedUTC": "2026-10-12T21:52:21.668580+00:00",
+    "durationSeconds": 6.509848592002527,
+    "exitCode": 0,
+    "sourceBefore": {
+      "head": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+      "tree": "fd436a652182d40e3f8c0bbfb74c16a46eb8d5f9",
+      "applicationTree": "9f0698bd6d9cfefb7648fd899ee22f4e3b541617",
+      "sourceDiff": ""
+    },
+    "sourceAfter": {
+      "head": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+      "tree": "fd436a652182d40e3f8c0bbfb74c16a46eb8d5f9",
+      "applicationTree": "9f0698bd6d9cfefb7648fd899ee22f4e3b541617",
+      "sourceDiff": ""
+    },
+    "sourceChanged": false
+  },
+  "sourceChecks": [
+    {
+      "path": "apps/web/tests/production/verify-standalone.mjs",
+      "sha256": "2b06e07abd048aa2d7de43be5ea89fe3115d9ef6bd2993cc7b0f1a60e7846dd8",
+      "bytes": 7388,
+      "matchesExactCommit": true
+    },
+    {
+      "path": "apps/web/tests/production/run-standalone.mjs",
+      "sha256": "c4c271a1738ca2425afd3eefe1540864af3f6a11cd465e8d25de2a7cd1fc2e21",
+      "bytes": 5491,
+      "matchesExactCommit": true
+    },
+    {
+      "path": "apps/web/tests/production/verify-runtime-config.mjs",
+      "sha256": "49bf406df89d1fb5c281694c963d98dbf6c6d5804cb3d08adf4100fa92db3f8a",
+      "bytes": 873,
+      "matchesExactCommit": true
+    },
+    {
+      "path": "apps/web/src/app/(portfolio)/(product)/layout.tsx",
+      "sha256": "79ae26b1576a5ad750ed54b75c63c71c028ce64d505999ec49fe55b7e6dcfcdc",
+      "bytes": 946,
+      "matchesExactCommit": true
+    },
+    {
+      "path": "apps/web/src/app/(portfolio)/(product)/setup.module.css",
+      "sha256": "2a175d892573273e9dee5b0522431c486f478cf6dc29e8b85ec9c9a74baeb317",
+      "bytes": 119,
+      "matchesExactCommit": true
+    },
+    {
+      "path": "apps/web/src/app/(portfolio)/layout.tsx",
+      "sha256": "89ce4ffb4b8126c7a036659ea37a561edd5f0f9d25868376b884e8507ddc4254",
+      "bytes": 362,
+      "matchesExactCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/styles.css",
+      "sha256": "bd34a401be0625c70d09f2be7767205599092f009c5535553aa8ea4ca6ec4061",
+      "bytes": 10136,
+      "matchesExactCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/portfolio/config/config.ts",
+      "sha256": "e37e67bbf2a8306358d8d5925975392e9dd334c1bc4dc6689047003102004ea0",
+      "bytes": 3421,
+      "matchesExactCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/session/SessionContext.tsx",
+      "sha256": "5869d87594d68f0d0c73f696df6b4923bddd0bca444014e40524c7d48b812015",
+      "bytes": 1097,
+      "matchesExactCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/shell/Header.tsx",
+      "sha256": "0a27a2e588a599d366894183bd585450ccbc107f5ec0936fb5519b7e08166c12",
+      "bytes": 2926,
+      "matchesExactCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/shell/ModuleHeader.tsx",
+      "sha256": "b6bd1fd354ab88304dbf9967fa403940a050c6a421d2abf7bf9161b0fee92268",
+      "bytes": 2554,
+      "matchesExactCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/shell/ProductShell.tsx",
+      "sha256": "6916f93dfd9530f615128ad85d728fb3458a38f14e6ad24f0739c4b252baf672",
+      "bytes": 1114,
+      "matchesExactCommit": true
+    },
+    {
+      "path": "apps/web/src/shared/response-headers.ts",
+      "sha256": "bf5e64a580cb50ae5f438a2f5e313388c9a0e6d5b95433843bb77237f1aa536f",
+      "bytes": 268,
+      "matchesExactCommit": true
+    },
+    {
+      "path": "apps/web/src/app/page.tsx",
+      "sha256": "ffa499addaf3f92cc58ae5c4c8cd0a1762c8093b7b7dc48e8fcfcf617a93412c",
+      "bytes": 400,
+      "matchesExactCommit": true
+    },
+    {
+      "path": "apps/web/src/app/layout.tsx",
+      "sha256": "47e90e4269dd55a75bf05e91b010ddcdeb86c716d821ee240e3cffc8a204a1fd",
+      "bytes": 1201,
+      "matchesExactCommit": true
+    },
+    {
+      "path": "apps/web/src/app/globals.css",
+      "sha256": "367d86b9cc092ef568865e1c2cafea9e0ca59e195f534619dc58e0fc97253cdd",
+      "bytes": 1113,
+      "matchesExactCommit": true
+    },
+    {
+      "path": "apps/web/src/proxy.ts",
+      "sha256": "2e92393121bcb4a9297007bdddd6b16fb6b53cd8db288b2644f2ca719a469ae3",
+      "bytes": 1072,
+      "matchesExactCommit": true
+    },
+    {
+      "path": "apps/web/next.config.ts",
+      "sha256": "b74e94a2d41d0e6587a8607a4fb3dc8800f46bd99d10ef3af43e78928af03e57",
+      "bytes": 559,
+      "matchesExactCommit": true
+    }
+  ],
+  "artifactCount": 8,
+  "unrunByReviewer": [
+    "browser",
+    "server",
+    "build",
+    "typecheck",
+    "runtime",
+    "network",
+    "native",
+    "provider"
+  ],
+  "sourceEditsByReviewer": false,
+  "newsletterPR16Mixed": false
+}

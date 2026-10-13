@@ -283,8 +283,22 @@ test("MS08 scope and grouping controls remain keyboard operable at phone width",
   const scope = page.getByRole("combobox", { name: "Planner client scope" });
   await expect(scope).toBeEnabled();
   await scope.focus();
+  await expect(scope).toBeFocused();
   await page.keyboard.press("Enter");
+  await expect(
+    page.getByRole("combobox", {
+      name: "Planner client scope",
+      includeHidden: true,
+    }),
+  ).toHaveAttribute("aria-expanded", "true");
+  await expect(page.getByRole("listbox")).toBeVisible();
+  await expect(
+    page.getByRole("option", { name: "Scope · All clients", exact: true }),
+  ).toBeFocused();
   await page.keyboard.press("ArrowDown");
+  await expect(
+    page.getByRole("option", { name: client.name, exact: true }),
+  ).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(scope).toContainText(client.name);
   await expect(
@@ -295,8 +309,23 @@ test("MS08 scope and grouping controls remain keyboard operable at phone width",
     exact: true,
   });
   await grouping.focus();
+  await expect(grouping).toBeFocused();
   await page.keyboard.press("Enter");
+  await expect(
+    page.getByRole("combobox", {
+      name: "Group by",
+      exact: true,
+      includeHidden: true,
+    }),
+  ).toHaveAttribute("aria-expanded", "true");
+  await expect(page.getByRole("listbox")).toBeVisible();
+  await expect(
+    page.getByRole("option", { name: "Group by · Client", exact: true }),
+  ).toBeFocused();
   await page.keyboard.press("ArrowDown");
+  await expect(
+    page.getByRole("option", { name: "Group by · None", exact: true }),
+  ).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(grouping).toContainText("None");
   await expect(page.getByRole("table")).toHaveCount(1);

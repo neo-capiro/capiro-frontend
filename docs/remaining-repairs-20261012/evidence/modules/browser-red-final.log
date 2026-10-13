@@ -1,0 +1,124 @@
+
+Running 3 tests using 1 worker
+
+(node:744459) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 ../../workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:63:1 › MS08 regression: All tasks defaults to named client groups and current-page counts (6.1s)
+(node:744720) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 ../../workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:309:1 › MS07 regression: Workspace filters share a compact desktop row and wrap on phones (1.4s)
+(node:744854) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 ../../workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:379:1 › MS09 regression: public form uses bounded card hierarchy and keeps input on styled error (6.1s)
+
+
+  1) ../../workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:63:1 › MS08 regression: All tasks defaults to named client groups and current-page counts 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('region', { name: 'Current Aerospace tasks', exact: true })
+    Expected substring: "2 shown · 2 open"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for getByRole('region', { name: 'Current Aerospace tasks', exact: true })
+
+
+      70 |     exact: true,
+      71 |   });
+    > 72 |   await expect(alpha).toContainText("2 shown · 2 open");
+         |                       ^
+      73 |   await expect(alpha).toContainText("Direct client work");
+      74 |   await expect(alpha).toContainText("Project client work");
+      75 |   await expect(
+        at /workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:72:23
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    browser-red-final/remaining-modules-MS08-reg-4f5e1-ups-and-current-page-counts/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: browser-red-final/remaining-modules-MS08-reg-4f5e1-ups-and-current-page-counts/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    browser-red-final/remaining-modules-MS08-reg-4f5e1-ups-and-current-page-counts/trace.zip
+    Usage:
+
+        npx playwright show-trace browser-red-final/remaining-modules-MS08-reg-4f5e1-ups-and-current-page-counts/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) ../../workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:309:1 › MS07 regression: Workspace filters share a compact desktop row and wrap on phones 
+
+    Error: expect(received).toBeLessThan(expected)
+
+    Expected: < 8
+    Received:   150.59375
+
+      338 |     Math.max(...boxes.map((box) => box!.y)) -
+      339 |       Math.min(...boxes.map((box) => box!.y)),
+    > 340 |   ).toBeLessThan(8);
+          |     ^
+      341 |   expect(boxes.slice(1).every((box) => box!.width <= 190)).toBe(true);
+      342 |   await choose(page, "Filter documents by client", client.name);
+      343 |   await expect(page.getByRole("table")).toContainText(row.name);
+        at /workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:340:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    browser-red-final/remaining-modules-MS07-reg-a476c-ktop-row-and-wrap-on-phones/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: browser-red-final/remaining-modules-MS07-reg-a476c-ktop-row-and-wrap-on-phones/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    browser-red-final/remaining-modules-MS07-reg-a476c-ktop-row-and-wrap-on-phones/trace.zip
+    Usage:
+
+        npx playwright show-trace browser-red-final/remaining-modules-MS07-reg-a476c-ktop-row-and-wrap-on-phones/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) ../../workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:379:1 › MS09 regression: public form uses bounded card hierarchy and keeps input on styled error 
+
+    Error: expect(locator).toHaveCSS(expected) failed
+
+    Locator:  getByRole('heading', { name: 'Request a briefing', exact: true })
+    Expected: "40px"
+    Received: "15px"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCSS" with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'Request a briefing', exact: true })
+        14 × locator resolved to <h2>Request a briefing</h2>
+           - unexpected value "15px"
+
+
+      399 |   await page.goto(`/forms/${token}`);
+      400 |   const title = page.getByRole("heading", { name: form.name, exact: true });
+    > 401 |   await expect(title).toHaveCSS("font-size", "40px");
+          |                       ^
+      402 |   const submit = page.getByRole("button", {
+      403 |     name: "Submit request",
+      404 |     exact: true,
+        at /workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:401:23
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    browser-red-final/remaining-modules-MS09-reg-03ca4-keeps-input-on-styled-error/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: browser-red-final/remaining-modules-MS09-reg-03ca4-keeps-input-on-styled-error/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    browser-red-final/remaining-modules-MS09-reg-03ca4-keeps-input-on-styled-error/trace.zip
+    Usage:
+
+        npx playwright show-trace browser-red-final/remaining-modules-MS09-reg-03ca4-keeps-input-on-styled-error/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    ../../workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:63:1 › MS08 regression: All tasks defaults to named client groups and current-page counts 
+    ../../workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:309:1 › MS07 regression: Workspace filters share a compact desktop row and wrap on phones 
+    ../../workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:379:1 › MS09 regression: public form uses bounded card hierarchy and keeps input on styled error 

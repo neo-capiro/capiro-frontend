@@ -1,0 +1,86 @@
+[
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/ActivityFeed.tsx",
+    "kind": "function",
+    "symbol": "ActivityRow",
+    "line": 53,
+    "nonblank": 97,
+    "fingerprint": "f199a7b9b70b087960c39c8c4947c4a23422aaee736a03fef2c38087e1e93517",
+    "provenance": "new",
+    "reviewStatus": "unreviewed",
+    "blocking": true,
+    "fileSha256": "109613b7ab6adc563570804d1a83d35e452810fd6ac117c6f79a813e7185acc6"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/ActivityTimeline.tsx",
+    "kind": "function",
+    "symbol": "ActivityTimeline",
+    "line": 17,
+    "nonblank": 113,
+    "fingerprint": "b55a424867c841e7c8faf3058475228c54235f77c6390ac7e5e01b5307eb3a9c",
+    "provenance": "changed-since-transfer",
+    "reviewStatus": "changed-since-review",
+    "blocking": true,
+    "fileSha256": "89526425508de7636aa1376b8f298fd120e2afc3f881c8fbe1fcfef2ac224ff6"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/FacilitiesCard.tsx",
+    "kind": "function",
+    "symbol": "CurrentFacilitiesCard",
+    "line": 31,
+    "nonblank": 146,
+    "fingerprint": "57886290e8ec40b32db018ef14077b55c4a23b7e945217d32ccf564827d3ff8c",
+    "provenance": "new",
+    "reviewStatus": "changed-since-review",
+    "blocking": true,
+    "fileSha256": "64cc056a645a42c851d6b8b65c8a49c24e29ef3e5aecf842eec4db92991a9d2b"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/FacilitiesManager.tsx",
+    "kind": "function",
+    "symbol": "CurrentFacilitiesManager",
+    "line": 31,
+    "nonblank": 126,
+    "fingerprint": "08d7bc0f241e37c60771df546df15f54f6eabc62ed5583407ebc843abef53c92",
+    "provenance": "new",
+    "reviewStatus": "unreviewed",
+    "blocking": true,
+    "fileSha256": "3cc5cc8c82fe4ef018917e6101be9088d9a77913042492498698a074cd829844"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/FacilityFields.tsx",
+    "kind": "function",
+    "symbol": "FacilityFields",
+    "line": 10,
+    "nonblank": 100,
+    "fingerprint": "29a51391739b3163a8903b000750ae6ad53b08fc0910bd0ed987ceb92327de6f",
+    "provenance": "new",
+    "reviewStatus": "changed-since-review",
+    "blocking": true,
+    "fileSha256": "38f0a479904765e6ddff737f33e48f7ebed4e53ab6470ecfacf4987fdeb03960"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/client-profile/FacilityGeocoding.tsx",
+    "kind": "function",
+    "symbol": "CurrentFacilityGeocoding",
+    "line": 35,
+    "nonblank": 113,
+    "fingerprint": "fae28b9d6e908889e5a695dc1ee95081dd2b6f82dbfcbf7451b2bfe6eda7acb4",
+    "provenance": "new",
+    "reviewStatus": "changed-since-review",
+    "blocking": true,
+    "fileSha256": "5419bc8e5d00584177e1ad3e82ccd33d741f0491446eb9f8c4124d8376c135f5"
+  },
+  {
+    "file": "apps/web/src/features/portfolio/files/FilesPage.tsx",
+    "kind": "function",
+    "symbol": "FilesPage",
+    "line": 19,
+    "nonblank": 320,
+    "fingerprint": "71b102bced5c6eb98f9187aa4979c27119ab3a26a1078ba7e98a910aa7f382ce",
+    "provenance": "changed-since-transfer",
+    "reviewStatus": "changed-since-review",
+    "blocking": true,
+    "fileSha256": "18d6f94455f08109e3883c569bc4203a198c5004aaa42bd42add8143adfc95bd"
+  }
+]

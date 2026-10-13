@@ -1,0 +1,219 @@
+{
+  "owner-first-focus-red": {
+    "originalTracePath": "/tmp/capiro-remaining-modules-evidence/keyboard-d68-correction/browser-green/remaining-modules-MS08-sco-10d0d-ard-operable-at-phone-width/trace.zip",
+    "traceSHA256": "872062ff8b833fa936f9cddfcb3bebecda669ccf214897e4488412d1c36eb299",
+    "traceBytes": 401107,
+    "stats": {
+      "startTime": "2026-10-12T22:04:19.071Z",
+      "duration": 7399.635,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "config": {
+      "workers": 1,
+      "retries": [
+        0
+      ]
+    },
+    "hiddenRootProof": [
+      {
+        "name": "after@call@76",
+        "timestamp": 2766.72,
+        "rootAttributes": {
+          "id": "root",
+          "data-aria-hidden": "true",
+          "aria-hidden": "true"
+        }
+      },
+      {
+        "name": "before@call@78",
+        "timestamp": 2772.624,
+        "rootAttributes": {
+          "id": "root",
+          "data-aria-hidden": "true",
+          "aria-hidden": "true"
+        }
+      }
+    ],
+    "sourceEntries": [
+      {
+        "entry": "resources/src@5509b413b0394690ce7bd32776416b68e632a06d.txt",
+        "sha256": "d1070645d80d991127d03c0d97266638c5468ab5f0e66c3494f6f5e3a0208e48",
+        "matchesFinalSource": false
+      }
+    ],
+    "checkedAssertionOutcomes": [
+      {
+        "selector": "internal:role=combobox[name=\"Planner client scope\"i]",
+        "expression": "to.be.enabled",
+        "error": null,
+        "result": null
+      },
+      {
+        "selector": "internal:role=combobox[name=\"Planner client scope\"i]",
+        "expression": "to.be.focused",
+        "error": null,
+        "result": null
+      },
+      {
+        "selector": "internal:role=combobox[name=\"Planner client scope\"i]",
+        "expression": "to.have.attribute.value",
+        "error": {
+          "message": "Expect failed",
+          "stack": "ExpectError: Expect failed\n    at _Frame.expect (/workspace/capiro-followup/node_modules/playwright-core/lib/coreBundle.js:23429:17)\n    at _FrameDispatcher.expect (/workspace/capiro-followup/node_modules/playwright-core/lib/coreBundle.js:53562:11)\n    at _ProgressController.run (/workspace/capiro-followup/node_modules/playwright-core/lib/coreBundle.js:11762:27)\n    at _FrameDispatcher._runCommand (/workspace/capiro-followup/node_modules/playwright-core/lib/coreBundle.js:18203:18)\n    at DispatcherConnection.dispatch (/workspace/capiro-followup/node_modules/playwright-core/lib/coreBundle.js:18408:27)",
+          "name": "ExpectError"
+        },
+        "result": null
+      }
+    ]
+  },
+  "owner-final-green": {
+    "originalTracePath": "/tmp/capiro-remaining-modules-evidence/keyboard-d68-correction/browser-focus-corrected/remaining-modules-MS08-sco-10d0d-ard-operable-at-phone-width/trace.zip",
+    "traceSHA256": "63a59e0fece60c5c7512ac78da1ff889524ecf5b14046fb56e37b02253431940",
+    "traceBytes": 604601,
+    "stats": {
+      "startTime": "2026-10-12T22:05:05.604Z",
+      "duration": 2533.41,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "config": {
+      "workers": 1,
+      "retries": [
+        0
+      ]
+    },
+    "hiddenRootProof": [
+      {
+        "name": "after@call@76",
+        "timestamp": 2333.374,
+        "rootAttributes": {
+          "id": "root",
+          "data-aria-hidden": "true",
+          "aria-hidden": "true"
+        }
+      },
+      {
+        "name": "before@call@78",
+        "timestamp": 2338.937,
+        "rootAttributes": {
+          "id": "root",
+          "data-aria-hidden": "true",
+          "aria-hidden": "true"
+        }
+      },
+      {
+        "name": "after@call@78",
+        "timestamp": 2343.222,
+        "rootAttributes": {
+          "id": "root",
+          "data-aria-hidden": "true",
+          "aria-hidden": "true"
+        }
+      }
+    ],
+    "sourceEntries": [
+      {
+        "entry": "resources/src@5509b413b0394690ce7bd32776416b68e632a06d.txt",
+        "sha256": "ff19d419f382abb100089e5bc03619f85d499a044ac995fe4b988e7aac78d994",
+        "matchesFinalSource": true
+      }
+    ],
+    "checkedAssertionOutcomes": [
+      {
+        "selector": "internal:role=combobox[name=\"Planner client scope\"i]",
+        "expression": "to.be.enabled",
+        "error": null,
+        "result": null
+      },
+      {
+        "selector": "internal:role=combobox[name=\"Planner client scope\"i]",
+        "expression": "to.be.focused",
+        "error": null,
+        "result": null
+      },
+      {
+        "selector": "internal:role=combobox[include-hidden=true][name=\"Planner client scope\"i]",
+        "expression": "to.have.attribute.value",
+        "error": null,
+        "result": null
+      },
+      {
+        "selector": "internal:role=listbox",
+        "expression": "to.be.visible",
+        "error": null,
+        "result": null
+      },
+      {
+        "selector": "internal:role=option[name=\"Scope \u00b7 All clients\"s]",
+        "expression": "to.be.focused",
+        "error": null,
+        "result": null
+      },
+      {
+        "selector": "internal:role=option[name=\"Current Aerospace\"s]",
+        "expression": "to.be.focused",
+        "error": null,
+        "result": null
+      },
+      {
+        "selector": "internal:role=combobox[name=\"Planner client scope\"i]",
+        "expression": "to.have.text",
+        "error": null,
+        "result": null
+      },
+      {
+        "selector": "internal:role=button[name=\"Direct client work\"s]",
+        "expression": "to.be.visible",
+        "error": null,
+        "result": null
+      },
+      {
+        "selector": "internal:role=combobox[name=\"Group by\"s]",
+        "expression": "to.be.focused",
+        "error": null,
+        "result": null
+      },
+      {
+        "selector": "internal:role=combobox[include-hidden=true][name=\"Group by\"s]",
+        "expression": "to.have.attribute.value",
+        "error": null,
+        "result": null
+      },
+      {
+        "selector": "internal:role=listbox",
+        "expression": "to.be.visible",
+        "error": null,
+        "result": null
+      },
+      {
+        "selector": "internal:role=option[name=\"Group by \u00b7 Client\"s]",
+        "expression": "to.be.focused",
+        "error": null,
+        "result": null
+      },
+      {
+        "selector": "internal:role=option[name=\"Group by \u00b7 None\"s]",
+        "expression": "to.be.focused",
+        "error": null,
+        "result": null
+      },
+      {
+        "selector": "internal:role=combobox[name=\"Group by\"s]",
+        "expression": "to.have.text",
+        "error": null,
+        "result": null
+      },
+      {
+        "selector": "internal:role=table",
+        "expression": "to.have.count",
+        "error": null,
+        "result": null
+      }
+    ]
+  }
+}

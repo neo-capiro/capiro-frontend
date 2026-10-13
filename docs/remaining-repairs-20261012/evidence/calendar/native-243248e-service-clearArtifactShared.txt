@@ -1,0 +1,15 @@
+private clearArtifactShared(tx: Prisma.TransactionClient, ref: ArtifactRef): Promise<unknown> {
+    const data = { sharedAt: null, sharedByUserId: null };
+    switch (ref.type) {
+      case 'prep':
+        return tx.meetingPrep.update({ where: { id: ref.id }, data });
+      case 'note':
+        return tx.meetingNote.update({ where: { id: ref.id }, data });
+      case 'debrief':
+        return tx.meetingDebrief.update({ where: { id: ref.id }, data });
+      case 'attachment':
+        return tx.engagementAttachment.update({ where: { id: ref.id }, data });
+      default:
+        throw new BadRequestException(`Unknown artifact type: ${(ref as ArtifactRef).type}`);
+    }
+  }

@@ -1,0 +1,8 @@
+{
+  "scanner": "/workspace/capiro-remaining-capabilities/scripts/architecture/scan.mjs",
+  "scannerSHA256": "b6c0f4e872640db8c655797e86a177303c3c7eb53223ffbd5c29bc41f5ba937e",
+  "scannerBytesMatchFrozenRoot": true,
+  "typescriptSource": "/workspace/capiro-followup/node_modules/typescript",
+  "typescriptVersion": "5.9.3",
+  "reason": "Root clean install replaced its dependency directory during audit. Existing isolated borrowed install was read only; no installation or dependency mutation by reviewer."
+}

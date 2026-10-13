@@ -1,0 +1,61 @@
+{
+  "boundaryErrors": [],
+  "signals": [
+    {
+      "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 404,
+      "fingerprint": "085d41cdae4c7395f952951cfcf24d288456fa9d77daa01f49779c5f40cf0fd3",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "sha256": "3e9e68e1e2566376e383dc47ed167bb9af6fcf3a9f4ecef73cdb44a958def093",
+      "responsibilityReview": "Composes one mail draft and its explicit review/send dialog. The new editor and safe HTML codec own rich-body representation and display; existing recipient, mailbox, signature, attachment, send and authority owners remain canonical. This patch replaces textarea/plain review with the editor and frozen HTML snapshot; no transport or policy moved into the composer. The file404/function369 signal is reviewed explicitly, not waived by splitting markup.",
+      "reviewDisposition": "Proposed for root independent exact review; no shared registry changed"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+      "kind": "function",
+      "symbol": "MailCompose",
+      "line": 21,
+      "nonblank": 369,
+      "fingerprint": "0307558bf27a23b765bab9ce4e78ad1149bf88f2896ead69313805a8e241ede0",
+      "provenance": "changed-since-transfer",
+      "reviewStatus": "changed-since-review",
+      "blocking": true,
+      "sha256": "3e9e68e1e2566376e383dc47ed167bb9af6fcf3a9f4ecef73cdb44a958def093",
+      "responsibilityReview": "Composes one mail draft and its explicit review/send dialog. The new editor and safe HTML codec own rich-body representation and display; existing recipient, mailbox, signature, attachment, send and authority owners remain canonical. This patch replaces textarea/plain review with the editor and frozen HTML snapshot; no transport or policy moved into the composer. The file404/function369 signal is reviewed explicitly, not waived by splitting markup.",
+      "reviewDisposition": "Proposed for root independent exact review; no shared registry changed"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx",
+      "kind": "function",
+      "symbol": "RichMailEditor",
+      "line": 11,
+      "nonblank": 124,
+      "fingerprint": "5d677184fdfad38853a16f9a178d24c4c93af24c868af676e66d946b58b2e255",
+      "provenance": "new",
+      "reviewStatus": "unreviewed",
+      "blocking": true,
+      "sha256": "57f0f73b009938109936b085438ec7774fbfc0b5b288db860de4a8bf3834a086",
+      "responsibilityReview": "Owns a single controlled Tiptap editor and its inert body preview. Editor schema, formatting controls, safe paste, selection preservation and externally supplied draft synchronization are one local presentation responsibility. Attach invokes the existing picker through a callback; no upload, provider, state persistence or authority implementation is introduced. External rewrite/guarded-Undo replacements start a new editor history, while local typing and formatting retain native Undo. This prevents the native keyboard history from bypassing guarded Meri Undo lifetime checks.",
+      "reviewDisposition": "Proposed for root independent exact review; no shared registry changed"
+    },
+    {
+      "file": "apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts",
+      "kind": "function",
+      "symbol": "useMailRewrite",
+      "line": 25,
+      "nonblank": 161,
+      "fingerprint": "f6045b9a9e6ec9613609eed24a0d9b4c2e0b918a2f5a7893f549fcfcf10f4fea",
+      "provenance": "new",
+      "reviewStatus": "changed-since-review",
+      "blocking": true,
+      "sha256": "f240df12c35ce6b2867b02642e3cefe720a32205d6b82268fa77599727be6c85",
+      "responsibilityReview": "Owns one in-flight rewrite, verified result and one local Undo under the same draft/source and captured-authority lifetime. Atomic MailBody replaces the old string snapshot so formatting-only edits revoke pending/previous rewrites and Undo restores text plus HTML together. Existing transport, cancellation, source revision and identity checks remain unchanged.",
+      "reviewDisposition": "Proposed for root independent exact review; no shared registry changed"
+    }
+  ]
+}

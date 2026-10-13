@@ -1,0 +1,84 @@
+{
+  "skill": "c19/figma-design-to-code",
+  "captures": [
+    {
+      "finding": "MS07",
+      "fileKey": "Zc2dEN5aLU47dVdsewDmiJ",
+      "nodeId": "411:112533",
+      "versionId": null,
+      "reference": "Original live reference, no writes or new designs",
+      "captureCompletedByUTC": "2026-10-12T19:24:23.028683+00:00",
+      "artifacts": [
+        {
+          "path": "/tmp/capiro-remaining-modules-evidence/figma-workspace-text.json",
+          "sha256": "155cb60823f5b14a4bbe77d96e8efe4d7c951f8cdaf279d47d7ab56983d959d3",
+          "bytes": 73999
+        },
+        {
+          "path": "/tmp/capiro-remaining-modules-evidence/figma-workspace-6.png",
+          "sha256": "e7608095db75e5d0fd2c55ba2f1795a83ed9c7246053d397d7fd1379240bd8fc",
+          "bytes": 88048
+        }
+      ]
+    },
+    {
+      "finding": "MS08",
+      "fileKey": "Zc2dEN5aLU47dVdsewDmiJ",
+      "nodeId": "411:95475",
+      "versionId": null,
+      "reference": "Original live reference, no writes or new designs",
+      "captureCompletedByUTC": "2026-10-12T19:24:24.024716+00:00",
+      "artifacts": [
+        {
+          "path": "/tmp/capiro-remaining-modules-evidence/figma-planner-text.json",
+          "sha256": "8d09861e47c9de7843623f834a9c6feafd027fbcd81a5d13a58cba91fd5b0d4e",
+          "bytes": 80070
+        },
+        {
+          "path": "/tmp/capiro-remaining-modules-evidence/figma-planner-6.png",
+          "sha256": "c73cf124884d4489e52a505d8e32726d59359d5119a8a165d6f409dba4a556ca",
+          "bytes": 91352
+        }
+      ]
+    },
+    {
+      "finding": "MS09",
+      "fileKey": "Zc2dEN5aLU47dVdsewDmiJ",
+      "nodeId": "411:108618",
+      "versionId": null,
+      "reference": "Original live reference, no writes or new designs",
+      "captureCompletedByUTC": "2026-10-12T19:24:24.565596+00:00",
+      "artifacts": [
+        {
+          "path": "/tmp/capiro-remaining-modules-evidence/figma-form-text.json",
+          "sha256": "0fd73ff0d03fa58511b46fc1c38d399c2f4b1cd2df2a04943224549c70d0dbf5",
+          "bytes": 8305
+        },
+        {
+          "path": "/tmp/capiro-remaining-modules-evidence/figma-form-5.png",
+          "sha256": "0732f5b691abbadb1344f3a5b4a32010df424676f85014b83b9375f8138eab0d",
+          "bytes": 27963
+        }
+      ]
+    }
+  ],
+  "preservation": "Current raw snapshots local only; root owns Git publication. Prior original assessment evidence remains committed.",
+  "assets": "No new asset consumed; retain canonical existing icons and Geist. Context contains ephemeral original Figma asset URLs but new changed regions need no new downloaded asset.",
+  "tokens": [
+    "Geist",
+    "--foreground",
+    "--muted-foreground",
+    "--card",
+    "--border",
+    "--muted",
+    "12px card radius",
+    "32px public card padding",
+    "40px/1.1 public title",
+    "18px public form gap",
+    "11px/.66px uppercase eyebrow",
+    "#f3e7e5 error background",
+    "#652424 error text",
+    "compact 34px Workspace trigger"
+  ],
+  "liveDependenciesRemaining": "None for these bounded layout decisions; provider supplies no version id. Full editable Figma backup/export is outside these read-only snapshots."
+}

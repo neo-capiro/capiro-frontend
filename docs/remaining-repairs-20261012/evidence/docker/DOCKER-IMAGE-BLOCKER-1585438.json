@@ -1,0 +1,54 @@
+{
+  "source": {
+    "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+    "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+    "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+    "sourceDiff": ""
+  },
+  "atUTC": "2026-10-12T22:11:52.516851+00:00",
+  "actualImageGate": "FAILED_ENVIRONMENT",
+  "exitCode": 1,
+  "attempt": {
+    "name": "docker-build",
+    "command": [
+      "env",
+      "DOCKER_CONFIG=/tmp/capiro-docker-config-20261012",
+      "docker",
+      "build",
+      "--progress=plain",
+      "-f",
+      "apps/web/Dockerfile",
+      "--tag",
+      "capiro-remaining:1585438-20261012",
+      "."
+    ],
+    "startedUTC": "2026-10-12T22:11:28.208765+00:00",
+    "endedUTC": "2026-10-12T22:11:38.701343+00:00",
+    "durationSeconds": 10.49261612999544,
+    "exitCode": 1,
+    "sourceBefore": {
+      "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+      "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+      "sourceDiff": ""
+    },
+    "sourceAfter": {
+      "head": "1585438295776604f23a5cb5ab592729f7c468ca",
+      "tree": "2c2236b9004b04f309dc0cdd9b360d8c6b97a2bd",
+      "applicationTree": "82cf7118a68c6ac45087a0198e1917fbd001cc6e",
+      "sourceDiff": ""
+    },
+    "sourceChanged": false
+  },
+  "logSHA256": "efac2a8f7ed6bd0750749a8a725cf27f2c026967582a51a205f59020c8ccedb3",
+  "cause": "Alpine 3.23 APKINDEX fetches fail DNS before application compilation. Subsequent package-selection errors do not establish invalid pins.",
+  "imageReference": "capiro-remaining:1585438-20261012",
+  "imageExists": false,
+  "imageInspectExitCode": 1,
+  "containerSmoke": "NOT_RUN_NO_IMAGE",
+  "imageScan": "NOT_RUN_NO_IMAGE",
+  "contextGate": "Separate 33/33 scratch-COPY context regression passed on same source",
+  "securityAndDockerfilePinsChanged": false,
+  "awsShippingAttempt": false,
+  "earlierAttempts": "Three adbc84b attempts and one d68c2dc attempt remain preserved with bounded diagnostics."
+}

@@ -1,0 +1,15 @@
+{
+  "version": "2.3.8",
+  "path": "/workspace/capiro-remaining/node_modules/@radix-ui/react-select/dist/index.mjs",
+  "sha256": "0c9d7b63e95cdc7548e99e250678f7ad4a70854954b52c65f1dfbada69e5e1f9",
+  "arrowFocus": {
+    "startLine": 511,
+    "endLine": 524,
+    "source": "                      if ([\"ArrowUp\", \"ArrowDown\", \"Home\", \"End\"].includes(event.key)) {\n                        const items = getItems().filter((item) => !item.disabled);\n                        let candidateNodes = items.map((item) => item.ref.current);\n                        if ([\"ArrowUp\", \"End\"].includes(event.key)) {\n                          candidateNodes = candidateNodes.slice().reverse();\n                        }\n                        if ([\"ArrowUp\", \"ArrowDown\"].includes(event.key)) {\n                          const currentElement = event.target;\n                          const currentIndex = candidateNodes.indexOf(currentElement);\n                          candidateNodes = candidateNodes.slice(currentIndex + 1);\n                        }\n                        setTimeout(() => focusFirst(candidateNodes));\n                        event.preventDefault();\n                      }"
+  },
+  "focusHighlight": {
+    "startLine": 858,
+    "endLine": 874,
+    "source": "            textValue,\n            children: /* @__PURE__ */ jsx(\n              Primitive.div,\n              {\n                role: \"option\",\n                \"aria-labelledby\": textId,\n                \"data-highlighted\": isFocused ? \"\" : void 0,\n                \"aria-selected\": isSelected && isFocused,\n                \"data-state\": isSelected ? \"checked\" : \"unchecked\",\n                \"aria-disabled\": disabled || void 0,\n                \"data-disabled\": disabled ? \"\" : void 0,\n                tabIndex: disabled ? void 0 : -1,\n                ...itemProps,\n                ref: composedRefs,\n                onFocus: composeEventHandlers(itemProps.onFocus, () => setIsFocused(true)),\n                onBlur: composeEventHandlers(itemProps.onBlur, () => setIsFocused(false)),\n                onClick: composeEventHandlers(itemProps.onClick, () => {"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "name": "modules-browser",
+  "command": [
+    "env",
+    "CAPIRO_QA_CHROMIUM_EXECUTABLE=/usr/bin/chromium",
+    "npm",
+    "run",
+    "test:browser:modules",
+    "--workspace",
+    "@capiro/web",
+    "--",
+    "--workers=1",
+    "--timeout=60000",
+    "--retries=0",
+    "--output=/tmp/capiro-remaining-qualification/final-104495d/modules-artifacts"
+  ],
+  "startedUTC": "2026-10-12T20:29:20.548755+00:00",
+  "endedUTC": "2026-10-12T20:34:05.318540+00:00",
+  "durationSeconds": 284.76981768199767,
+  "exitCode": 0,
+  "sourceBefore": {
+    "head": "104495d4cdc8251640b922aea431fa0e169fe935",
+    "tree": "01e6c338048c507dab0d2f3ba6fafa02912bc003",
+    "applicationTree": "ad282f731750e1984790de2ec266ff9e311581c9",
+    "sourceDiff": ""
+  },
+  "sourceAfter": {
+    "head": "104495d4cdc8251640b922aea431fa0e169fe935",
+    "tree": "01e6c338048c507dab0d2f3ba6fafa02912bc003",
+    "applicationTree": "ad282f731750e1984790de2ec266ff9e311581c9",
+    "sourceDiff": ""
+  },
+  "sourceChanged": false
+}

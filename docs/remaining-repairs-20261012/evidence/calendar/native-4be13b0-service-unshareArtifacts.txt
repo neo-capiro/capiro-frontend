@@ -1,0 +1,40 @@
+async unshareArtifacts(ctx: TenantContext, meetingId: string, refs: ArtifactRef[]) {
+    if (!refs.length) throw new BadRequestException('artifacts must not be empty');
+    return this.prisma.withTenant(ctx.tenantId, async (tx) => {
+      const meeting = await tx.meeting.findFirst({
+        where: { id: meetingId, tenantId: ctx.tenantId },
+        select: { id: true },
+      });
+      if (!meeting) throw new NotFoundException('Meeting not found');
+
+      const loaded = await Promise.all(
+        refs.map(async (ref) => ({
+          ref,
+          artifact: await this.loadArtifactShareState(tx, ctx, meetingId, ref),
+        })),
+      );
+      const missing = loaded.filter((l) => !l.artifact);
+      if (missing.length) {
+        throw new BadRequestException(
+          `Artifact(s) not found on this meeting: ${describeRefs(missing.map((l) => l.ref))}`,
+        );
+      }
+      const unauthorized = loaded.filter((l) => !canUnshareArtifact(ctx, l.artifact!));
+      if (unauthorized.length) {
+        throw new ForbiddenException(
+          `You are not authorized to unshare: ${describeRefs(unauthorized.map((l) => l.ref))}`,
+        );
+      }
+
+      for (const { ref } of loaded) {
+        await this.clearArtifactShared(tx, ref);
+      }
+      await this.recomputeMeetingVisibility(tx, ctx, meetingId);
+
+      const refreshed = await tx.meeting.findFirst({
+        where: { id: meetingId },
+        include: meetingInclude(),
+      });
+      return (await this.decorateMeetings(tx, ctx, [refreshed!]))[0];
+    });
+  }

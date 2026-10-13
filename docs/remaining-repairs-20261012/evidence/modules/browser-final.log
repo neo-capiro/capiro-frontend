@@ -1,0 +1,18 @@
+
+Running 11 tests using 1 worker
+
+(node:741771) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 ../../workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:63:1 › MS08 regression: All tasks defaults to named client groups and current-page counts (2.0s)
+  ✓   2 ../../workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:105:1 › MS08 scope picker preserves All tasks, disposes drafts and restores scope through history (1.8s)
+  ✓   3 ../../workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:148:1 › MS08 failed current clients list removes former labels and disables picker until retry (1.3s)
+  ✓   4 ../../workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:180:1 › MS08 failed current task page hides groups and recovers without inventing filters (1.2s)
+  ✓   5 ../../workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:214:3 › MS08 independently verified client remains named when picker is empty (1.0s)
+  ✓   6 ../../workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:214:3 › MS08 independently verified client remains named when picker is unavailable (1.1s)
+  ✓   7 ../../workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:236:1 › MS08 replacement rejects held former task read and unverified selected client (2.7s)
+  ✓   8 ../../workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:277:1 › MS08 scope and grouping controls remain keyboard operable at phone width (1.4s)
+  ✓   9 ../../workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:309:1 › MS07 regression: Workspace filters share a compact desktop row and wrap on phones (1.3s)
+  ✓  10 ../../workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:379:1 › MS09 regression: public form uses bounded card hierarchy and keeps input on styled error (1.2s)
+  ✓  11 ../../workspace/capiro-remaining-modules/apps/web/test/browser/remaining-modules.spec.ts:438:1 › MS09 preserves malformed-receipt and replaced-token controls (1.0s)
+
+  11 passed (16.9s)

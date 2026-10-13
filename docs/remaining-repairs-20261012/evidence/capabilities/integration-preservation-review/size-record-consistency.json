@@ -1,0 +1,156 @@
+[
+  {
+    "lane": "mail",
+    "integrationCommit": "ceed53a",
+    "sourceSHA256": "3e9e68e1e2566376e383dc47ed167bb9af6fcf3a9f4ecef73cdb44a958def093",
+    "actual": {
+      "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 404,
+      "fingerprint": "085d41cdae4c7395f952951cfcf24d288456fa9d77daa01f49779c5f40cf0fd3"
+    },
+    "record": {
+      "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+      "kind": "file",
+      "symbol": "<module>",
+      "line": 1,
+      "nonblank": 404,
+      "fingerprint": "085d41cdae4c7395f952951cfcf24d288456fa9d77daa01f49779c5f40cf0fd3"
+    },
+    "matches": true
+  },
+  {
+    "lane": "mail",
+    "integrationCommit": "ceed53a",
+    "sourceSHA256": "3e9e68e1e2566376e383dc47ed167bb9af6fcf3a9f4ecef73cdb44a958def093",
+    "actual": {
+      "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+      "kind": "function",
+      "symbol": "MailCompose",
+      "line": 21,
+      "nonblank": 369,
+      "fingerprint": "0307558bf27a23b765bab9ce4e78ad1149bf88f2896ead69313805a8e241ede0"
+    },
+    "record": {
+      "file": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+      "kind": "function",
+      "symbol": "MailCompose",
+      "line": 21,
+      "nonblank": 369,
+      "fingerprint": "0307558bf27a23b765bab9ce4e78ad1149bf88f2896ead69313805a8e241ede0"
+    },
+    "matches": true
+  },
+  {
+    "lane": "mail",
+    "integrationCommit": "ceed53a",
+    "sourceSHA256": "57f0f73b009938109936b085438ec7774fbfc0b5b288db860de4a8bf3834a086",
+    "actual": {
+      "file": "apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx",
+      "kind": "function",
+      "symbol": "RichMailEditor",
+      "line": 11,
+      "nonblank": 124,
+      "fingerprint": "5d677184fdfad38853a16f9a178d24c4c93af24c868af676e66d946b58b2e255"
+    },
+    "record": {
+      "file": "apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx",
+      "kind": "function",
+      "symbol": "RichMailEditor",
+      "line": 11,
+      "nonblank": 124,
+      "fingerprint": "5d677184fdfad38853a16f9a178d24c4c93af24c868af676e66d946b58b2e255"
+    },
+    "matches": true
+  },
+  {
+    "lane": "mail",
+    "integrationCommit": "ceed53a",
+    "sourceSHA256": "f240df12c35ce6b2867b02642e3cefe720a32205d6b82268fa77599727be6c85",
+    "actual": {
+      "file": "apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts",
+      "kind": "function",
+      "symbol": "useMailRewrite",
+      "line": 25,
+      "nonblank": 161,
+      "fingerprint": "f6045b9a9e6ec9613609eed24a0d9b4c2e0b918a2f5a7893f549fcfcf10f4fea"
+    },
+    "record": {
+      "file": "apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts",
+      "kind": "function",
+      "symbol": "useMailRewrite",
+      "line": 25,
+      "nonblank": 161,
+      "fingerprint": "f6045b9a9e6ec9613609eed24a0d9b4c2e0b918a2f5a7893f549fcfcf10f4fea"
+    },
+    "matches": true
+  },
+  {
+    "lane": "intake",
+    "integrationCommit": "8daaf28",
+    "sourceSHA256": "5ecf134f4d60947e9fd51d6a41c86812a1ebb565f6846291cde6b75e6589755f",
+    "actual": {
+      "file": "apps/web/src/features/portfolio/client-intake/RegistrationStep.tsx",
+      "kind": "function",
+      "symbol": "RegistrationStep",
+      "line": 5,
+      "nonblank": 81,
+      "fingerprint": "a511873c1e2ada4defedaac8654c59cc2866f45b5321ea92641f36257f954e12"
+    },
+    "record": {
+      "file": "apps/web/src/features/portfolio/client-intake/RegistrationStep.tsx",
+      "kind": "function",
+      "symbol": "RegistrationStep",
+      "line": 5,
+      "nonblank": 81,
+      "fingerprint": "a511873c1e2ada4defedaac8654c59cc2866f45b5321ea92641f36257f954e12"
+    },
+    "matches": true
+  },
+  {
+    "lane": "intake",
+    "integrationCommit": "8daaf28",
+    "sourceSHA256": "a7d02942fe8bd99367f8b1e59a5e6ab81513a9ba9a84d101d91ffd1f50908165",
+    "actual": {
+      "file": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
+      "kind": "function",
+      "symbol": "ClientOverview",
+      "line": 24,
+      "nonblank": 182,
+      "fingerprint": "2f89761f0e1e6ae9c114dfeee441be65ab6a2c46e911b3462e5ff876497da857"
+    },
+    "record": {
+      "file": "apps/web/src/features/portfolio/client-profile/ClientOverview.tsx",
+      "kind": "function",
+      "symbol": "ClientOverview",
+      "line": 24,
+      "nonblank": 182,
+      "fingerprint": "2f89761f0e1e6ae9c114dfeee441be65ab6a2c46e911b3462e5ff876497da857"
+    },
+    "matches": true
+  },
+  {
+    "lane": "intake",
+    "integrationCommit": "8daaf28",
+    "sourceSHA256": "85457ac89eaec97080ad4d1f7f6b7668761100b4bb2b6847614886d1b9c8894d",
+    "actual": {
+      "file": "apps/web/src/features/portfolio/client-profile/ClientViewSwitcher.tsx",
+      "kind": "function",
+      "symbol": "ClientViewSwitcher",
+      "line": 12,
+      "nonblank": 129,
+      "fingerprint": "04e69dacf0fad530f3c0f798f0686fbc9e8b8d43312b3cace8fc103ad422680e"
+    },
+    "record": {
+      "file": "apps/web/src/features/portfolio/client-profile/ClientViewSwitcher.tsx",
+      "kind": "function",
+      "symbol": "ClientViewSwitcher",
+      "line": 12,
+      "nonblank": 129,
+      "fingerprint": "04e69dacf0fad530f3c0f798f0686fbc9e8b8d43312b3cace8fc103ad422680e"
+    },
+    "matches": true
+  }
+]

@@ -1,0 +1,56 @@
+{
+  "at": "2026-10-12T21:54:53.665954+00:00",
+  "source": "d68c2dc6b80c400b8ce9b07837f7a14cabb5d616",
+  "verdict": "PASS_SOURCE_AND_LEDGER_ADDENDUM",
+  "files": [
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-d68c2dc/EVIDENCE-REFERENCES.json",
+      "bytes": 3822,
+      "sha256": "021e00dd2a979638bfef9f3eea5fcb5f4032d98f513dd36320583881beed6685"
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-d68c2dc/LEDGER-ADDENDUM.json",
+      "bytes": 5929,
+      "sha256": "44aff27dec082f0fc4aad6745fe4b087580b4963513ad2d297aa5bbb73adb192"
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-d68c2dc/PARSED-SOURCE-VERIFICATION.json",
+      "bytes": 5560,
+      "sha256": "5b2a023990232835b7b9401a4b443f4c0daaa9d011f2673b6b19f6ef231e7570"
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-d68c2dc/REPORT.md",
+      "bytes": 5579,
+      "sha256": "2988ba5fe4ad9ecd39f593b5bc16613b9745ca89aba93a3a8337b33efbe19097"
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-d68c2dc/SOURCE-LEDGER-VERIFICATION.json",
+      "bytes": 120286,
+      "sha256": "ba07d78f4ccedea310acfb447ccb271c2601dff503c36d7b7c46675d62ce2e64"
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-d68c2dc/audit-before-review-map-distinction.py.txt",
+      "bytes": 9509,
+      "sha256": "6f5af83adf94ea14b7a4072830c4a76a4a701d0ab9cf8a3c3752ed98123c3452"
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-d68c2dc/audit-initial-bytes-literal-error.py.txt",
+      "bytes": 9529,
+      "sha256": "5d34c7756d074cecb8a31df8f2b3bd794f7d791de880112e34b48c68a6ef61bd"
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-d68c2dc/audit.py",
+      "bytes": 10089,
+      "sha256": "7677b593c577368c5b9f227daa184e054752b519f617ee3255f4bf637b2589b2"
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-d68c2dc/parse-review.mjs",
+      "bytes": 4905,
+      "sha256": "2de54143f43a5e2a12fd62827f3122df15519cfd7e185dca040bd59713f872a2"
+    }
+  ],
+  "count": 9,
+  "bytes": 175208,
+  "selfExcluded": true,
+  "combinedGates": "NOT_CLAIMED_CURRENT_RUN_PENDING"
+}

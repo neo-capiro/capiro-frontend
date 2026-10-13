@@ -1,0 +1,56 @@
+.inline {
+  display: grid;
+  min-width: 0;
+  gap: 6px;
+}
+.inline > label {
+  color: var(--muted-foreground);
+  font-weight: 400;
+}
+.field {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  min-width: 0;
+  min-height: 40px;
+  gap: 6px;
+  padding: 6px 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--card);
+}
+.field input {
+  flex: 1 1 160px;
+  width: 0;
+  min-width: min(160px, 100%);
+  min-height: 24px;
+  border: 0;
+  border-radius: 3px;
+  padding: 3px 4px;
+  font-size: 13px;
+}
+.token {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  max-width: 100%;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+.token > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.remove {
+  flex: none;
+  border: 0;
+  border-radius: 3px;
+  padding: 0 1px;
+  background: transparent;
+  color: var(--muted-foreground);
+  line-height: 1.4;
+}

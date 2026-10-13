@@ -1,0 +1,19 @@
+src/features/portfolio/relationships/email/RichMailEditor.tsx(48,9): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(options: Partial<EditorOptions> & { immediatelyRender?: boolean | undefined; shouldRerenderOnTransaction?: boolean | undefined; } & { immediatelyRender: false; }, deps?: DependencyList | undefined): Editor | null', gave the following error.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+  Overload 2 of 2, '(options: UseEditorOptions, deps?: DependencyList | undefined): Editor', gave the following error.
+    Type 'string | undefined' is not assignable to type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+tests/browser/mail-rich-compose.spec.ts(71,27): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+tests/browser/mail-rich-compose.spec.ts(107,24): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+tests/browser/mail-rich-compose.spec.ts(108,40): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string | Locator'.
+  Type 'undefined' is not assignable to type 'string | Locator'.
+tests/browser/mail-rich-compose.spec.ts(111,73): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string | Locator'.
+  Type 'undefined' is not assignable to type 'string | Locator'.
+tests/browser/mail-rich-compose.spec.ts(118,12): error TS2532: Object is possibly 'undefined'.
+tests/browser/mail-rich-compose.spec.ts(123,12): error TS2532: Object is possibly 'undefined'.
+tests/browser/mail-rich-compose.spec.ts(124,12): error TS2532: Object is possibly 'undefined'.
+tests/browser/mail-rich-compose.spec.ts(139,10): error TS2532: Object is possibly 'undefined'.

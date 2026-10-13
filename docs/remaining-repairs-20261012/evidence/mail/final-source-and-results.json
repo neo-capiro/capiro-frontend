@@ -1,0 +1,168 @@
+{
+  "head": "685e55039d5d3945c76085513cde8bc6c33cb55d",
+  "tree": "849a4714e59ccecb85a44e4d651121f977572de2",
+  "base": "7aca86e7d64cfdb85d09d424a07e6186339fc24c",
+  "source": [
+    {
+      "path": "apps/web/src/features/portfolio/relationships/MailCompose.tsx",
+      "sha256": "3e9e68e1e2566376e383dc47ed167bb9af6fcf3a9f4ecef73cdb44a958def093",
+      "bytes": 14376
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email.ts",
+      "sha256": "f8db96b617a3481454c9d7a0ba6ea594c9146684aec8f7237aab1620dee6388a",
+      "bytes": 4144
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/AttachmentFields.tsx",
+      "sha256": "800100747439b187a2b8f4c23635b945aee3fe7d0c423e201442978fccfb27c0",
+      "bytes": 2498
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/RichMailEditor.tsx",
+      "sha256": "57f0f73b009938109936b085438ec7774fbfc0b5b288db860de4a8bf3834a086",
+      "bytes": 4507
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/email.module.css",
+      "sha256": "eb20898dd2c2d4fa287059fddcce7a05f484649f901b1bf1a3a665e0a6ba93ae",
+      "bytes": 1602
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/mail-body-html.ts",
+      "sha256": "0dda52ccf4331d07d4096d4bcdf112a69b70fbb294ae662bfcb5575755627336",
+      "bytes": 398
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/mail-body.ts",
+      "sha256": "28a5ff7a27a20052b5b6556c380fc05bcb2ab6435f59ca3ca2576237c6893f7b",
+      "bytes": 842
+    },
+    {
+      "path": "apps/web/src/features/portfolio/relationships/email/useMailRewrite.ts",
+      "sha256": "f240df12c35ce6b2867b02642e3cefe720a32205d6b82268fa77599727be6c85",
+      "bytes": 5535
+    },
+    {
+      "path": "apps/web/tests/browser/email-compose.spec.ts",
+      "sha256": "c61e2e708f1a7a079570478891cd17982586f9bf262d8e979931a7976ccd90c0",
+      "bytes": 22661
+    },
+    {
+      "path": "apps/web/tests/browser/mail-local-draft.spec.ts",
+      "sha256": "74036b122536e2c3e1ff67497cbccd2e2825d2f165d2ac62acbd81b374797575",
+      "bytes": 17223
+    },
+    {
+      "path": "apps/web/tests/browser/mail-message-assertions.ts",
+      "sha256": "8f60ca0460b3b62a2fd0d7be35debe6806799455171c94bf8ead7be42236dd59",
+      "bytes": 556
+    },
+    {
+      "path": "apps/web/tests/browser/mail-rewrite.spec.ts",
+      "sha256": "bd52995e9deefa7342dc463d5a573c157ef499a156a5145735764036e3e9e84d",
+      "bytes": 9139
+    },
+    {
+      "path": "apps/web/tests/browser/mail-rich-compose.spec.ts",
+      "sha256": "1b7ca2ca4c029b83e533e073dd5b1ca45b2c76fc8d265973ea2d0d254f884a90",
+      "bytes": 14236
+    },
+    {
+      "path": "apps/web/tests/mail-body.test.ts",
+      "sha256": "2a3ae445ff07fabc6c4e804cb8ea917227719c35defe581b98753ffad11c0e18",
+      "bytes": 1167
+    }
+  ],
+  "browserResults": {
+    "red-results": {
+      "startTime": "2026-10-12T19:30:14.500Z",
+      "duration": 70451.36499999999,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 3,
+      "flaky": 0
+    },
+    "green-results": {
+      "startTime": "2026-10-12T19:32:24.464Z",
+      "duration": 56510.227,
+      "expected": 11,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "affected-results": {
+      "startTime": "2026-10-12T19:34:11.251Z",
+      "duration": 296126.97000000003,
+      "expected": 77,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "extra-before-results": {
+      "startTime": "2026-10-12T19:39:32.923Z",
+      "duration": 17768.783,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 2,
+      "flaky": 0
+    },
+    "final-results": {
+      "startTime": "2026-10-12T19:40:13.330Z",
+      "duration": 295426.86100000003,
+      "expected": 79,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "history-red-results": {
+      "startTime": "2026-10-12T19:47:06.688Z",
+      "duration": 9499.356,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "history-green-results": {
+      "startTime": "2026-10-12T19:47:41.812Z",
+      "duration": 179152.11800000002,
+      "expected": 45,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "final-base-results": {
+      "startTime": "2026-10-12T19:51:14.556Z",
+      "duration": 37313.051,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 3,
+      "flaky": 0
+    }
+  },
+  "unit": {
+    "tests": 72,
+    "files": 6,
+    "result": "passed"
+  },
+  "typecheck": {
+    "result": "passed",
+    "heapMiB": 2048,
+    "log": "typecheck-bounded.log"
+  },
+  "lint": "passed",
+  "format": "passed",
+  "architecture": {
+    "boundaryErrors": 0,
+    "exactReviewSignals": 4,
+    "registryOwner": "root",
+    "independentReview": "accepted"
+  },
+  "port": {
+    "number": 5299,
+    "released": true,
+    "connectCode": 111
+  },
+  "native": "NOT_RUN",
+  "fullBuild": "NOT_RUN; root-owned"
+}

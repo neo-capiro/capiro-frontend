@@ -1,0 +1,4 @@
+@Get('shared-meetings')
+  sharedMeetings(@CurrentTenant() ctx: TenantContext, @Query('clientId') clientId: string) {
+    return this.service.listSharedMeetingsForClient(ctx, clientId);
+  }

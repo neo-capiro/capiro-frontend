@@ -1,0 +1,184 @@
+
+Running 3 tests using 1 worker
+
+(node:743051) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/browser/calendar-sharing.spec.ts:367:3 › same-scope held meeting refresh preserves an open note draft (20.2s)
+(node:743697) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 tests/browser/calendar-sharing.spec.ts:367:3 › same-scope held meeting refresh preserves an open meeting draft (20.2s)
+(node:744178) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 tests/browser/calendar-sharing.spec.ts:367:3 › same-scope held meeting refresh preserves an open selection draft (20.4s)
+
+
+  1) tests/browser/calendar-sharing.spec.ts:367:3 › same-scope held meeting refresh preserves an open note draft 
+
+    Test timeout of 20000ms exceeded.
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Notes', exact: true })
+        - locator resolved to <button class="button " aria-pressed="false">Notes</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <div data-state="open" aria-hidden="true" data-aria-hidden="true" data-slot="dialog-overlay" class="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50"></div> intercepts pointer events
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <div data-state="open" aria-hidden="true" data-aria-hidden="true" data-slot="dialog-overlay" class="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50"></div> intercepts pointer events
+        - retrying click action
+          - waiting 100ms
+        34 × waiting for element to be visible, enabled and stable
+           - element is visible, enabled and stable
+           - scrolling into view if needed
+           - done scrolling
+           - <div data-state="open" aria-hidden="true" data-aria-hidden="true" data-slot="dialog-overlay" class="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50"></div> intercepts pointer events
+         - retrying click action
+           - waiting 500ms
+
+
+      375 |       await page.goto(`${url}&meeting=${sharingMeeting.id}`);
+      376 |       if (draft === "note") {
+    > 377 |         await page.getByRole("button", { name: "Notes", exact: true }).click();
+          |                                                                        ^
+      378 |         await page
+      379 |           .getByRole("button", { name: "Add note", exact: true })
+      380 |           .click();
+        at /workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-sharing.spec.ts:377:72
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-calendar-evidence/draft-before-artifacts/calendar-sharing-same-scop-44e84-reserves-an-open-note-draft/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-remaining-calendar-evidence/draft-before-artifacts/calendar-sharing-same-scop-44e84-reserves-an-open-note-draft/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-calendar-evidence/draft-before-artifacts/calendar-sharing-same-scop-44e84-reserves-an-open-note-draft/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-remaining-calendar-evidence/draft-before-artifacts/calendar-sharing-same-scop-44e84-reserves-an-open-note-draft/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests/browser/calendar-sharing.spec.ts:367:3 › same-scope held meeting refresh preserves an open meeting draft 
+
+    Test timeout of 20000ms exceeded.
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Edit meeting', exact: true })
+        - locator resolved to <button class="button">Edit meeting</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <div data-state="open" aria-hidden="true" data-aria-hidden="true" data-slot="dialog-overlay" class="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50"></div> intercepts pointer events
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <div data-state="open" aria-hidden="true" data-aria-hidden="true" data-slot="dialog-overlay" class="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50"></div> intercepts pointer events
+        - retrying click action
+          - waiting 100ms
+        34 × waiting for element to be visible, enabled and stable
+           - element is visible, enabled and stable
+           - scrolling into view if needed
+           - done scrolling
+           - <div data-state="open" aria-hidden="true" data-aria-hidden="true" data-slot="dialog-overlay" class="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50"></div> intercepts pointer events
+         - retrying click action
+           - waiting 500ms
+
+
+      385 |         await page
+      386 |           .getByRole("button", { name: "Edit meeting", exact: true })
+    > 387 |           .click();
+          |            ^
+      388 |         await page
+      389 |           .getByLabel("Subject", { exact: true })
+      390 |           .fill("Retain this local synthetic meeting draft");
+        at /workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-sharing.spec.ts:387:12
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-calendar-evidence/draft-before-artifacts/calendar-sharing-same-scop-ecc51-erves-an-open-meeting-draft/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-remaining-calendar-evidence/draft-before-artifacts/calendar-sharing-same-scop-ecc51-erves-an-open-meeting-draft/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-calendar-evidence/draft-before-artifacts/calendar-sharing-same-scop-ecc51-erves-an-open-meeting-draft/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-remaining-calendar-evidence/draft-before-artifacts/calendar-sharing-same-scop-ecc51-erves-an-open-meeting-draft/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests/browser/calendar-sharing.spec.ts:367:3 › same-scope held meeting refresh preserves an open selection draft 
+
+    Test timeout of 20000ms exceeded.
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Share artifacts', exact: true })
+        - locator resolved to <button class="button">Share artifacts</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <div data-state="open" aria-hidden="true" data-aria-hidden="true" data-slot="dialog-overlay" class="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50"></div> intercepts pointer events
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <div data-state="open" aria-hidden="true" data-aria-hidden="true" data-slot="dialog-overlay" class="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50"></div> intercepts pointer events
+        - retrying click action
+          - waiting 100ms
+        37 × waiting for element to be visible, enabled and stable
+           - element is visible, enabled and stable
+           - scrolling into view if needed
+           - done scrolling
+           - <div data-state="open" aria-hidden="true" data-aria-hidden="true" data-slot="dialog-overlay" class="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50"></div> intercepts pointer events
+         - retrying click action
+           - waiting 500ms
+
+
+      100 |   await page
+      101 |     .getByRole("button", { name: "Share artifacts", exact: true })
+    > 102 |     .click();
+          |      ^
+      103 |   const dialog = page.getByRole("dialog", {
+      104 |     name: "Share artifacts with your organization?",
+      105 |     exact: true,
+        at openSharing (/workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-sharing.spec.ts:102:6)
+        at /workspace/capiro-remaining-calendar/apps/web/tests/browser/calendar-sharing.spec.ts:372:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-calendar-evidence/draft-before-artifacts/calendar-sharing-same-scop-5a8a0-ves-an-open-selection-draft/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../../../tmp/capiro-remaining-calendar-evidence/draft-before-artifacts/calendar-sharing-same-scop-5a8a0-ves-an-open-selection-draft/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../tmp/capiro-remaining-calendar-evidence/draft-before-artifacts/calendar-sharing-same-scop-5a8a0-ves-an-open-selection-draft/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../tmp/capiro-remaining-calendar-evidence/draft-before-artifacts/calendar-sharing-same-scop-5a8a0-ves-an-open-selection-draft/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests/browser/calendar-sharing.spec.ts:367:3 › same-scope held meeting refresh preserves an open note draft 
+    tests/browser/calendar-sharing.spec.ts:367:3 › same-scope held meeting refresh preserves an open meeting draft 
+    tests/browser/calendar-sharing.spec.ts:367:3 › same-scope held meeting refresh preserves an open selection draft 

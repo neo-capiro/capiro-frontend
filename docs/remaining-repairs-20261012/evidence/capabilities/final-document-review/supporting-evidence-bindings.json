@@ -1,0 +1,97 @@
+{
+  "logCounts": {
+    "rootPass": [
+      "59",
+      "21"
+    ],
+    "vitest": [
+      [
+        "1275",
+        "1275"
+      ],
+      [
+        "117",
+        "117"
+      ]
+    ],
+    "warnings": [
+      "76 problems (0 errors, 76 warnings)"
+    ],
+    "architectureSummary": " \"sizeSummary\": {\n    \"total\": 427,\n    \"reviewed\": 403,\n    \"inheritedUnreviewed\": 24,\n    \"blocking\": 0\n  },\n  \"routes\": [\n    \"apps/web/src/app/(portfolio)/(product)/calend",
+    "host": {
+      "http": 11,
+      "render": 4,
+      "desktopHistory": 2,
+      "pageErrors": []
+    }
+  },
+  "ancestorChecks": {
+    "main": true,
+    "Portfolio": true,
+    "Meri": true,
+    "ModulesSettings": true
+  },
+  "originalBranchHeads": {
+    "main": "02c02d95bdf3949662b9123f425271c6491ffdab",
+    "Portfolio": "c330cebbd021eb984b4bf64ae13dbb991ae6b1c0",
+    "Meri": "3cc30ff3182e8050d563516607866cf07efe2aef",
+    "ModulesSettings": "50155cbbf0e4df1eecba22cbfc9b2c35bff87e0a"
+  },
+  "inputBindings": [
+    {
+      "path": "/tmp/capiro-remaining-calendar-independent-review/final-1585438-coverage/coverage-and-limits.md",
+      "sha256": "d3ec93d28aece253933301e6ddd8c0248af738a490c10f924c868dd7afc5c511",
+      "bytes": 5126
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/REPORT.md",
+      "sha256": "8efcf5ef08ef2debf2346cd9189f2cf2b712e39a9c9b0f647c0dd011cf86f6b0",
+      "bytes": 7871
+    },
+    {
+      "path": "/tmp/capiro-remaining-final-ledger-review/addendum-1585438/REPORT.md",
+      "sha256": "54485552eaa326dcc30465937ecfb6ad51941c6c0fde2facff87489d95d1a263",
+      "bytes": 5562
+    },
+    {
+      "path": "/tmp/capiro-remaining-profile-evidence/source-archive-1585438-review/REPORT.md",
+      "sha256": "9dbf1f786696905a2fe5f1c14edbf23ffd900d63287f6c73e825bbf27d36a03b",
+      "bytes": 2179
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/DOCKER-IMAGE-BLOCKER-1585438.json",
+      "sha256": "5b2b410de96ff1f446193b8df8bbd1428f1ada82b22465c499387956efe5cb43",
+      "bytes": 2003
+    },
+    {
+      "path": "/tmp/capiro-remaining-root-evidence/LIBRARY-ARCHIVE-SAVE-BLOCKER.json",
+      "sha256": "8d9067bec972e8d32b12f0a5efcdc3b911cfddc2dec20a060c6e6cf4b2b994ad",
+      "bytes": 725
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/combined-check.log",
+      "sha256": "81a2fb6497a3973649181522b29ceb8c804e67ab5ea5cfc623cd9a53609f405e",
+      "bytes": 815381
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/production-artifacts/production-smoke.json",
+      "sha256": "653bf3486ea9ec193195ed3289ac8e44a3729ef58b19a48842c8448c990dd36f",
+      "bytes": 3624
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/elements-check.log",
+      "sha256": "383abcefa6f0918b9e3441e1f2966aa5c0d9619abc348873b5851ed8bcc87ec0",
+      "bytes": 3092
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/docker-context.log",
+      "sha256": "4fa53b9d49d6e82abd32a3c497d5d1d10b0c784f010fd4eb997eeca1493f8a65",
+      "bytes": 500
+    },
+    {
+      "path": "/tmp/capiro-remaining-qualification/final-1585438/clean-install.log",
+      "sha256": "472709c34dd6302df557c435dce2e6e58e0bd121efa12f51833119a54724114c",
+      "bytes": 164
+    }
+  ]
+}

@@ -508,7 +508,7 @@ test("person-linked QuickLog retains its failed note and existing email provider
   await confirmation
     .getByRole("button", { name: "Close", exact: true })
     .click();
-  await expect(mail.getByLabel("Message", { exact: true })).toHaveValue(
+  await expect(mail.getByLabel("Message", { exact: true })).toHaveText(
     "Synthetic message",
   );
   await expect(mail.getByText("Email sent.", { exact: true })).toHaveCount(0);

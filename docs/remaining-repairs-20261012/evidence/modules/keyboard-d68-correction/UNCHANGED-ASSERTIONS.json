@@ -1,0 +1,37 @@
+{
+  "file": "apps/web/test/browser/remaining-modules.spec.ts",
+  "beforeSha256": "c86ad251ee3eb115e5e6edeb0309192aebd9b3fd38fc6f85fdf19e89deaea78f",
+  "afterSha256": "ff19d419f382abb100089e5bc03619f85d499a044ac995fe4b988e7aac78d994",
+  "testNamesUnchanged": true,
+  "allOtherBytesUnchanged": true,
+  "allOriginalCaseStatementsPreservedInOrder": true,
+  "originalStatements": 20,
+  "addedStatements": [
+    "await expect(scope).toBeFocused();",
+    "await expect(\n    page.getByRole(\"combobox\", {\n      name: \"Planner client scope\",\n      includeHidden: true,\n    }),\n  ).toHaveAttribute(\"aria-expanded\", \"true\");",
+    "await expect(page.getByRole(\"listbox\")).toBeVisible();",
+    "await expect(\n    page.getByRole(\"option\", { name: \"Scope · All clients\", exact: true }),\n  ).toBeFocused();",
+    "await expect(\n    page.getByRole(\"option\", { name: client.name, exact: true }),\n  ).toBeFocused();",
+    "await expect(grouping).toBeFocused();",
+    "await expect(\n    page.getByRole(\"combobox\", {\n      name: \"Group by\",\n      exact: true,\n      includeHidden: true,\n    }),\n  ).toHaveAttribute(\"aria-expanded\", \"true\");",
+    "await expect(page.getByRole(\"listbox\")).toBeVisible();",
+    "await expect(\n    page.getByRole(\"option\", { name: \"Group by · Client\", exact: true }),\n  ).toBeFocused();",
+    "await expect(\n    page.getByRole(\"option\", { name: \"Group by · None\", exact: true }),\n  ).toBeFocused();"
+  ],
+  "originalKeyboard": [
+    "await page.keyboard.press(\"Enter\");",
+    "await page.keyboard.press(\"ArrowDown\");",
+    "await page.keyboard.press(\"Enter\");",
+    "await page.keyboard.press(\"Enter\");",
+    "await page.keyboard.press(\"ArrowDown\");",
+    "await page.keyboard.press(\"Enter\");"
+  ],
+  "finalKeyboard": [
+    "await page.keyboard.press(\"Enter\");",
+    "await page.keyboard.press(\"ArrowDown\");",
+    "await page.keyboard.press(\"Enter\");",
+    "await page.keyboard.press(\"Enter\");",
+    "await page.keyboard.press(\"ArrowDown\");",
+    "await page.keyboard.press(\"Enter\");"
+  ]
+}

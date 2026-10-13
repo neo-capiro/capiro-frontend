@@ -1,0 +1,57 @@
+{
+  "at": "2026-10-12T21:21:33.159894+00:00",
+  "scope": "Bounded plaintext credential-signature scan and exact synthetic Docker .env canary check; not a complete secret audit or ZIP member/network-content scan. Values are never recorded.",
+  "regularFilesRead": 11700,
+  "binaryFilesSkipped": 5075,
+  "signatureMatches": [],
+  "syntheticEnvChecks": [
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-frozen-adbc84b/fixture/.env",
+      "matchesSyntheticCanary": true
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-frozen-adbc84b/fixture/apps/web/.env",
+      "matchesSyntheticCanary": true
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-final-script-corrected/fixture/.env",
+      "matchesSyntheticCanary": true
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-final-script-corrected/fixture/apps/web/.env",
+      "matchesSyntheticCanary": true
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-final-script-baseline/fixture/.env",
+      "matchesSyntheticCanary": true
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-final-script-baseline/fixture/apps/web/.env",
+      "matchesSyntheticCanary": true
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-corrected/fixture/.env",
+      "matchesSyntheticCanary": true
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-corrected/fixture/apps/web/.env",
+      "matchesSyntheticCanary": true
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-baseline-writable-config/fixture/.env",
+      "matchesSyntheticCanary": true
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-baseline-writable-config/fixture/apps/web/.env",
+      "matchesSyntheticCanary": true
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-baseline/fixture/.env",
+      "matchesSyntheticCanary": true
+    },
+    {
+      "path": "/tmp/capiro-remaining-docker-evidence/context-baseline/fixture/apps/web/.env",
+      "matchesSyntheticCanary": true
+    }
+  ]
+}
