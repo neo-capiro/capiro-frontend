@@ -1,4 +1,5 @@
 import { effectivePage, effectiveRecord } from "../effective-date-fixtures";
+import { commentPage, commentRecord } from "../comment-calendar-fixtures";
 import { expect, test } from "@playwright/test";
 import { client, clientId, installFixtures, json } from "./fixtures";
 import { voiceMeeting } from "./voice-meeting";
@@ -59,17 +60,18 @@ const feeds = [
   },
   {
     name: "Synthetic retained deadline",
-    route: "**/core/federal-register/upcoming-deadlines",
-    body: [
-      {
-        id: "deadline-retained",
-        documentNumber: "2026-retained",
-        title: "Synthetic retained deadline",
-        commentEndDate: "2026-10-14",
-        effectiveDate: null,
-        htmlUrl: "https://example.test/synthetic-deadline",
-      },
-    ],
+    route: "**/core/federal-register/comment-deadline-calendar?**",
+    body: commentPage(
+      [
+        {
+          ...commentRecord("2026-retained", "2026-10-14"),
+          title: "Synthetic retained deadline",
+          htmlUrl: "https://example.test/synthetic-deadline",
+        },
+      ],
+      "2026-10-01",
+      "2026-10-31",
+    ),
   },
 ];
 

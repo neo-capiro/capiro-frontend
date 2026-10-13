@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { onlyLocalRequests, operationFixtures } from "./fixtures";
 import { moduleRouteFixtures } from "./module-route-fixtures";
+import { emptyCommentCalendar } from "./next-modules-fixtures";
 import {
   effectivePage,
   effectiveRecord,
@@ -15,6 +16,7 @@ test("Modules master Government feed preserves date-only provenance and partial 
     ...moduleRouteFixtures,
     "legiwatch.calendar": { rows: [], total: 0, page: 1, pageSize: 200 },
     "calendar.commentDeadlines": [],
+    "calendar.commentDeadlineCalendar": emptyCommentCalendar,
     "calendar.effectiveDates": (input) => {
       const q = (
         input as { query: { dateFrom: string; dateTo: string; page: number } }

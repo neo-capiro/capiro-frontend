@@ -1,5 +1,12 @@
 import type { Page } from "@playwright/test";
 import { onlyLocalRequests, operationFixtures, testIdentity } from "./fixtures";
+import { commentPage } from "../../tests/comment-calendar-fixtures";
+import { commentDeadlineQuery } from "../../src/shared/federal-register/comment-deadlines";
+
+export function emptyCommentCalendar(input: unknown) {
+  const query = commentDeadlineQuery.parse((input as { query: unknown }).query);
+  return commentPage([], query.dateFrom, query.dateTo, query.page ?? 1);
+}
 export const clientId = "30000000-0000-4000-8000-000000000001";
 export const otherClientId = "30000000-0000-4000-8000-000000000002";
 export const taskId = "51000000-0000-4000-8000-000000000001";
@@ -87,6 +94,7 @@ export async function setup(
     "planner.task.attachments": [],
     "legiwatch.calendar": { rows: [], total: 0, page: 1, pageSize: 200 },
     "calendar.commentDeadlines": [],
+    "calendar.commentDeadlineCalendar": emptyCommentCalendar,
     ...overrides,
   });
   await page.route("**/api/backend/core/clients/*", (route) =>

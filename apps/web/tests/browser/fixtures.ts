@@ -1,4 +1,5 @@
 import { effectivePage } from "../effective-date-fixtures";
+import { commentPage } from "../comment-calendar-fixtures";
 import { fundingPage } from "../funding-calendar-fixtures";
 import { fundingCalendarSources } from "../../src/features/portfolio/calendar/funding-deadline";
 import type { Page, Route } from "@playwright/test";
@@ -342,6 +343,18 @@ export async function installFixtures(page: Page) {
         withheld: 0,
       },
     };
+    if (path === "core/federal-register/comment-deadline-calendar") {
+      const query = new URL(route.request().url()).searchParams;
+      return json(
+        route,
+        commentPage(
+          [],
+          query.get("dateFrom")!,
+          query.get("dateTo")!,
+          Number(query.get("page") ?? 1),
+        ),
+      );
+    }
     if (path === "core/federal-register/effective-date-calendar") {
       // A synthetic empty, explicitly incomplete source is independent of the
       // failing source selected by each calendar test. It implies no live data.
